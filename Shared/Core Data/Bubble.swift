@@ -39,17 +39,28 @@ public class Bubble: NSManagedObject {
         }
     }
     
+    ///receivedValue is NOT saved to database
     @Published var receivedValue = 0 {willSet{ self.objectWillChange.send() }}
     
-    func startObservingBackgroundTimer() {
-        NotificationCenter.default.addObserver(forName: .valueUpdated, object: nil, queue: nil) { [weak self] notification in
-            guard let self = self else { return }
-            
-            guard let value = notification.userInfo?[NSNotification.Name.valueUpdated] as? Int else { fatalError() }
-            
-            DispatchQueue.main.async { self.receivedValue = value }
+    func observeBackgroundTimer(_ observe:Observe) {
+        switch observe {
+            case .start:
+                NotificationCenter.default.addObserver(forName: .valueUpdated, object: nil, queue: nil) { [weak self] notification in
+                    guard let self = self else { return }
+                    
+                    guard let value = notification.userInfo?[NSNotification.Name.valueUpdated] as? Int else { fatalError() }
+                    
+                    DispatchQueue.main.async { self.receivedValue = value }
+                }
+            default: NotificationCenter.default.removeObserver(self)
         }
+        
     }
     
-    deinit { NotificationCenter.default.removeObserver(self) }
+    deinit { observeBackgroundTimer(.stop) }
+    
+    enum Observe {
+        case start
+        case stop
+    }
 }
