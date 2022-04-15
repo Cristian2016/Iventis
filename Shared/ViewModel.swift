@@ -56,8 +56,10 @@ class ViewModel: ObservableObject {
     }
     
     func reset(bubble:Bubble) {
+        let backgroundContext = PersistenceController.shared.backgroundContext
         bubble.created = Date()
         bubble.currentClock = bubble.initialClock
+        try? backgroundContext.save()
     }
     
     // MARK: - Testing Only
