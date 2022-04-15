@@ -8,7 +8,26 @@
 import CoreData
 
 struct PersistenceController {
-    static let shared = PersistenceController()
+    init(inMemory: Bool = false) {
+        container = NSPersistentContainer(name: "Model")
+        
+        //one shared database for App Widgets and Siri
+        let sharedDataBaseURL = FileManager.sharedContainerURL.appendingPathComponent("sharedDatabase.sqlite")
+        let description = NSPersistentStoreDescription(url: sharedDataBaseURL)
+        container.persistentStoreDescriptions = [description]
+        
+        if inMemory {
+            container.persistentStoreDescriptions.first!.url = URL(fileURLWithPath: "/dev/null")
+        }
+        container.loadPersistentStores(completionHandler: { (storeDescription, error) in
+            if let error = error as NSError? {
+                fatalError("Unresolved error \(error), \(error.userInfo)")
+            }
+        })
+        container.viewContext.automaticallyMergesChangesFromParent = true
+    }
+    
+    static var shared = PersistenceController()
 
     static var preview: PersistenceController = {
         let result = PersistenceController(inMemory: true)
@@ -28,24 +47,10 @@ struct PersistenceController {
         return result
     }()
 
+    // MARK: -
     let container: NSPersistentContainer
-
-    init(inMemory: Bool = false) {
-        container = NSPersistentContainer(name: "Model")
-        
-        //one shared database for App Widgets and Siri
-        let sharedDataBaseURL = FileManager.sharedContainerURL.appendingPathComponent("sharedDatabase.sqlite")
-        let description = NSPersistentStoreDescription(url: sharedDataBaseURL)
-        container.persistentStoreDescriptions = [description]
-        
-        if inMemory {
-            container.persistentStoreDescriptions.first!.url = URL(fileURLWithPath: "/dev/null")
-        }
-        container.loadPersistentStores(completionHandler: { (storeDescription, error) in
-            if let error = error as NSError? {
-                fatalError("Unresolved error \(error), \(error.userInfo)")
-            }
-        })
-        container.viewContext.automaticallyMergesChangesFromParent = true
-    }
+    
+    lazy var viewContext = container.viewContext
+    
+    lazy var backgroundContext = container.newBackgroundContext()
 }

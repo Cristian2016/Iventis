@@ -33,8 +33,9 @@ struct BubbleList: View {
                         print("delete")
                     }
                     .listRowSeparator(.hidden)
+                    
+                    Text("New Bubble").frame(height: 120)
                 } .listStyle(.plain)
-                Text("New Bubble").frame(height: 120)
             }
             .ignoresSafeArea()
         }
@@ -47,16 +48,9 @@ struct BubbleList: View {
             }
         })
         .navigationBarHidden(true)
-//        .onAppear {
-//            for _ in 0..<3 {
-//                let bubble = Bubble(context: viewContext)
-//                bubble.created = Date()
-//                bubble.initialClock = 0
-//                bubble.state_ = .brandNew
-//            }
-//
-//            try? viewContext.save()
-//        }
+        .onAppear {
+//            viewModel.makeBubbles()
+        }
     }
     
     // MARK: -

@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SwiftUI
 
 extension NSNotification.Name {
     static let valueUpdated = NSNotification.Name("valueUpdated")
@@ -53,4 +54,36 @@ extension FileManager {
         else { fatalError() }
         return url
     }()
+}
+
+extension Color {
+    //row 1
+    static let bubbleMint = Color.red
+    static let bubbleSlateBlue = Color.red
+    static let bubbleSourCherry = Color.red
+    
+    //row 2
+    static let bubbleSilver = Color.red
+    static let bubbleUltramarine = Color.red
+    static let bubbleLemon = Color.red
+    
+    //row 3
+    static let bubbleRed = Color.red
+    static let bubbleSky = Color.red
+    static let bubbleBubbleGum = Color.red
+    
+    //row 4
+    static let bubbleGreen = Color.red
+    static let bubbleCoffee = Color.red
+    static let bubbleMagenta = Color.red
+    
+    //row 5
+    static let bubblePurple = Color.red
+    static let bubbleOrange = Color.red
+    static let bubbleChocolate = Color.red
+    
+    //row 6
+    static let bubbleAqua = Color.red
+    static let bubbleByzantium = Color.red
+    static let bubbleRose = Color.red
 }

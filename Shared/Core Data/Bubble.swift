@@ -44,6 +44,27 @@ public class Bubble: NSManagedObject {
     @Published var fakeClock = Float(0) {willSet{ self.objectWillChange.send() }}
     
     deinit { observeBackgroundTimer(.stop) }
+    
+    enum Kind {
+        case stopwatch
+        case timer(referenceClock:Float)
+    }
+    
+    var kind:Kind {
+        get {
+            switch initialClock {
+                case 0: return .stopwatch
+                default: return .timer(referenceClock: initialClock)
+            }
+        }
+        
+        set {
+            switch newValue {
+                case .stopwatch: self.initialClock = 0
+                case .timer(referenceClock: let initialClock): self.initialClock = initialClock
+            }
+        }
+    }
 }
 
 // MARK: - Observing BackgroundTimer

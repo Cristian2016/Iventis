@@ -25,4 +25,34 @@ class ViewModel: ObservableObject {
             }
         }
     }
+    
+    // MARK: -
+    func createBubble(_ kind:Bubble.Kind) {
+        let backgroundContext = PersistenceController.shared.backgroundContext
+        let newBubble = Bubble(context: backgroundContext)
+        newBubble.created = Date()
+        newBubble.state_ = .brandNew
+        
+        newBubble.kind = kind
+        switch kind {
+            case .timer(referenceClock: let referenceClock):
+                newBubble.initialClock = referenceClock
+            default:
+                newBubble.initialClock = 0
+        }
+    }
+    
+    // MARK: - Testing Only
+    func makeBubbles() {
+        PersistenceController.shared.backgroundContext.perform {
+            for _ in 0..<3 {
+                let newBubble = Bubble(context: PersistenceController.shared.backgroundContext)
+                newBubble.created = Date()
+                newBubble.currentClock = 0
+                newBubble.state_ = .brandNew
+            }
+            
+            try? PersistenceController.shared.backgroundContext.save()
+        }
+    }
 }
