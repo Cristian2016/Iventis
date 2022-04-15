@@ -9,12 +9,10 @@ import Foundation
 import SwiftUI
 
 class BackgroundTimer {
-    deinit {
-        killTimer()
-//        print("background timer deinit")
-    }
+    deinit { killTimer() }
     
-    private let updateFrequency:Double = 1
+    ///event handler called every second
+    private let updateFrequency:Double = 1  /* every second */
     
     private(set) static var value = 0
     

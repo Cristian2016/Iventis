@@ -80,7 +80,7 @@ struct BubbleCell: View {
                     .foregroundColor(.orange)
                     .frame(width: BubbleCell.edge, height: BubbleCell.edge)
                     .padding(padding)
-                Text("\(bubble.receivedValue)")
+                Text("\(bubble.fakeClock)")
                     .font(.system(size: fontSize))
                     .foregroundColor(.white)
             }
