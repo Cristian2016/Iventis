@@ -42,6 +42,16 @@ public class Bubble: NSManagedObject {
     ///receivedValue is NOT saved to database
     @Published var receivedValue = 0 {willSet{ self.objectWillChange.send() }}
     
+    deinit { observeBackgroundTimer(.stop) }
+}
+
+// MARK: - Observing BackgroundTimer
+extension Bubble {
+    enum Observe {
+        case start
+        case stop
+    }
+    
     func observeBackgroundTimer(_ observe:Observe) {
         switch observe {
             case .start:
@@ -55,12 +65,5 @@ public class Bubble: NSManagedObject {
             default: NotificationCenter.default.removeObserver(self)
         }
         
-    }
-    
-    deinit { observeBackgroundTimer(.stop) }
-    
-    enum Observe {
-        case start
-        case stop
     }
 }
