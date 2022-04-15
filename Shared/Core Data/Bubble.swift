@@ -42,6 +42,13 @@ public class Bubble: NSManagedObject {
     @Published var value = 0
     
     func startObservingBackgroundTimer() {
-        
+        NotificationCenter.default.addObserver(forName: .valueUpdated, object: nil, queue: nil) { [weak self] notification in
+            guard let self = self else { return }
+            
+            guard let value = notification.userInfo?[NSNotification.Name.valueUpdated] as? Int else { fatalError() }
+            print("value", value)
+        }
     }
+    
+    deinit { NotificationCenter.default.removeObserver(self) }
 }

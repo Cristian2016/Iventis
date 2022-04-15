@@ -17,4 +17,12 @@ class ViewModel: ObservableObject {
             case .pause: timer.perform(.pause)
         }
     }
+    
+    init() {
+        let request = Bubble.fetchRequest()
+        if let bubbles = try? PersistenceController.shared.container.viewContext.fetch(request) {
+            bubbles.forEach { $0.startObservingBackgroundTimer()
+            }
+        }
+    }
 }
