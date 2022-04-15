@@ -40,12 +40,8 @@ struct BubbleList: View {
         }
         .onChange(of: scenePhase, perform: {
             switch $0 {
-                case .active:
-                    viewModel.timer(.start)
-                    print("active")
-                case .background:
-                    viewModel.timer(.pause)
-                    print("background")
+                case .active: viewModel.timer(.start)
+                case .background: viewModel.timer(.pause)
                 case .inactive: break
                 default: break
             }

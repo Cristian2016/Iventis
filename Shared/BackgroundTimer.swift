@@ -14,6 +14,8 @@ class BackgroundTimer {
 //        print("background timer deinit")
     }
     
+    private let updateFrequency:Double = 1
+    
     private(set) static var value = 0
     
     let queue:DispatchQueue
@@ -23,7 +25,7 @@ class BackgroundTimer {
     
     private lazy var timer: DispatchSourceTimer = {
         let t = DispatchSource.makeTimerSource(queue: queue)
-        t.schedule(deadline: .now(), repeating: 4)
+        t.schedule(deadline: .now(), repeating: updateFrequency)
         t.setEventHandler(handler: eventHandler)
         return t
     }()
@@ -33,7 +35,6 @@ class BackgroundTimer {
         //increases value
         //post again and so on
         
-        print(value)
         let info = [NSNotification.Name.valueUpdated : value]
         NotificationCenter.default.post(name: .valueUpdated, object: nil, userInfo: info)
         value += 1
