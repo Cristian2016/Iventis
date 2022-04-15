@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUI
 
 
 class ViewModel: ObservableObject {
@@ -27,8 +28,10 @@ class ViewModel: ObservableObject {
     }
     
     // MARK: -
-    func createBubble(_ kind:Bubble.Kind) {
+    func createBubble(_ kind:Bubble.Kind, _ color:String) {
         let backgroundContext = PersistenceController.shared.backgroundContext
+        
+        //bubble
         let newBubble = Bubble(context: backgroundContext)
         newBubble.created = Date()
         newBubble.state_ = .brandNew
@@ -40,6 +43,21 @@ class ViewModel: ObservableObject {
             default:
                 newBubble.initialClock = 0
         }
+        
+        newBubble.color = color
+        
+        try? backgroundContext.save()
+    }
+    
+    func delete(bubble:Bubble) {
+        let backgroundContext = PersistenceController.shared.backgroundContext
+        backgroundContext.delete(bubble)
+        try? backgroundContext.save()
+    }
+    
+    func reset(bubble:Bubble) {
+        bubble.created = Date()
+        bubble.currentClock = bubble.initialClock
     }
     
     // MARK: - Testing Only

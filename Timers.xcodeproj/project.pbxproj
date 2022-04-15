@@ -147,8 +147,7 @@
 			children = (
 				1F5F4A942809450A00AF3442 /* Library.swift */,
 				1F5F4A4A28093FAD00AF3442 /* TimersApp.swift */,
-				1F5F4A4D28093FAF00AF3442 /* Assets.xcassets */,
-				1F97B7DC2809B311002FFCA3 /* Colors.swift */,
+				1F97B7E02809B331002FFCA3 /* Assets */,
 				1F5F4A982809456E00AF3442 /* BubbleList.swift */,
 				1F9B6AEF280950D600C0A725 /* ViewModel.swift */,
 				1F5F4A9C280945C700AF3442 /* BubbleCell.swift */,
@@ -205,6 +204,15 @@
 				1F5F4A722809409600AF3442 /* Bubble Properties.swift */,
 			);
 			path = "Core Data";
+			sourceTree = "<group>";
+		};
+		1F97B7E02809B331002FFCA3 /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				1F5F4A4D28093FAF00AF3442 /* Assets.xcassets */,
+				1F97B7DC2809B311002FFCA3 /* Colors.swift */,
+			);
+			path = Assets;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
