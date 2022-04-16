@@ -50,9 +50,9 @@ class ViewModel: ObservableObject {
     }
     
     func delete(bubble:Bubble) {
-        let backgroundContext = PersistenceController.shared.backgroundContext
-        backgroundContext.delete(bubble)
-        try? backgroundContext.save()
+        let context = PersistenceController.shared.viewContext
+        context.delete(bubble)
+        try? context.save()
     }
     
     func reset(bubble:Bubble) {

@@ -9,17 +9,31 @@ import SwiftUI
 import CoreData
 
 struct BubbleList: View {
-    @Environment(\.scenePhase) var scenePhase
+    //1
     @Environment(\.managedObjectContext) private var viewContext
-    @StateObject private var viewModel = ViewModel()
+    @Environment(\.scenePhase) var scenePhase
     
+    // MARK: -
+    @StateObject private var viewModel = ViewModel()
     @FetchRequest(entity: Bubble.entity(), sortDescriptors: [])
     private var bubbles:FetchedResults<Bubble>
     
+    // MARK: -
+    static var formatter:DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.locale = Locale.current
+        //        formatter.locale = Locale(identifier: "us")
+        formatter.dateStyle = .short
+        formatter.timeStyle = .short
+        return formatter
+    }()
+    
+    // MARK: -
     init() {
            UITableView.appearance().showsVerticalScrollIndicator = false
        }
     
+    // MARK: -
     var body: some View {
         GeometryReader { geo in
             VStack {
@@ -29,13 +43,10 @@ struct BubbleList: View {
                         BubbleCell(bubble)
 //                            .environmentObject(viewModel)
                     }
-                    .onDelete { indices in
-                        print("delete")
-                    }
+                    .onDelete { delete($0) }
                     .listRowSeparator(.hidden)
                     
-                    Text("New Bubble").frame(height: 120)
-                } .listStyle(.plain)
+                }.listStyle(.plain)
             }
             .ignoresSafeArea()
         }
@@ -52,18 +63,18 @@ struct BubbleList: View {
 //            viewModel.makeBubbles()
         }
     }
-    
-    // MARK: -
-    static var formatter:DateFormatter = {
-        let formatter = DateFormatter()
-        formatter.locale = Locale.current
-        //        formatter.locale = Locale(identifier: "us")
-        formatter.dateStyle = .short
-        formatter.timeStyle = .short
-        return formatter
-    }()
 }
 
+// MARK: -
+extension BubbleList {
+    private func delete(_ indexSet:IndexSet) {
+        indexSet.forEach {
+            viewModel.delete(bubble: bubbles[$0])
+        }
+    }
+}
+
+// MARK: -
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         BubbleList()
