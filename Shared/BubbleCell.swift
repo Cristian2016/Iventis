@@ -35,7 +35,12 @@ struct BubbleCell: View {
                 hoursComponent
                 minutesComponent
             }
-            .onTapGesture(count:1) { isBubbleDetailPresented = true }
+            .onTapGesture(count: 2, perform: {
+                print("double tap")
+            })
+            .onTapGesture(count: 1) {
+                isBubbleDetailPresented = true
+            }
             
             secondsComponent
                 .onTapGesture {
@@ -90,6 +95,17 @@ struct BubbleCell: View {
                     .foregroundColor(.white)
             }
         }
+    }
+    
+    var tapGesture: some Gesture {
+        TapGesture(count: 2)
+            .onEnded {
+                print("Double tap")
+            }
+            .simultaneously(with: TapGesture(count: 1)
+                                .onEnded {
+                                    print("Single Tap")
+                                })
     }
 }
 
