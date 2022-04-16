@@ -17,6 +17,8 @@ struct BubbleList: View {
     @StateObject private var viewModel = ViewModel()
     @FetchRequest(entity: Bubble.entity(), sortDescriptors: [])
     private var bubbles:FetchedResults<Bubble>
+    @State private var isActive = true
+    @State var isBubbleDetailPresented = false
     
     // MARK: -
     static var formatter:DateFormatter = {
@@ -39,7 +41,7 @@ struct BubbleList: View {
             VStack {
                 Spacer(minLength: geo.safeAreaInsets.top) //distance from status bar
                 List {
-                    ForEach(bubbles) { BubbleCell($0) }
+                    ForEach(bubbles) { BubbleCell($0, $isBubbleDetailPresented) }
                     .onDelete { delete($0) }
                     .listRowSeparator(.hidden)
                 }.listStyle(.plain)
@@ -57,6 +59,9 @@ struct BubbleList: View {
         .onAppear {
 //            viewModel.makeBubbles()
         }
+        .sheet(isPresented: $isBubbleDetailPresented) {
+            BubbleDetail()
+        }
     }
 }
 
@@ -73,5 +78,12 @@ extension BubbleList {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         BubbleList()
+    }
+}
+
+
+struct BubbleDetail:View {
+    var body: some View {
+        Text("Bubble Detail")
     }
 }

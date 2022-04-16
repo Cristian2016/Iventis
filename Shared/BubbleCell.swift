@@ -8,12 +8,13 @@
 import SwiftUI
 
 struct BubbleCell: View {
-//    @EnvironmentObject private var viewModel:ViewModel
-    init(_ bubble:Bubble) {
-        _bubble = StateObject(wrappedValue: bubble)
-    }
+    @StateObject var bubble:Bubble
+    @Binding var isBubbleDetailPresented:Bool
     
-    @StateObject private var bubble:Bubble
+    init(_ bubble:Bubble, _ isBubbleDetailPresented:Binding<Bool>) {
+        _bubble = StateObject(wrappedValue: bubble)
+        _isBubbleDetailPresented = Binding(projectedValue: isBubbleDetailPresented)
+    }
     
     static let dic:[CGFloat:CGFloat] = [ /* 12mini */728:140, /* 8 */667:150,  /* ipdo */568:125,  /* 13 pro max */926:163,  /* 13 pro */844:147,  /* 11 pro max */896:158, 812:140,  /* 8max */736:167]
     private let spacing:CGFloat = -30
@@ -30,8 +31,12 @@ struct BubbleCell: View {
     
     var body: some View {
         ZStack {
-            hoursComponent
-            minutesComponent
+            ZStack {
+                hoursComponent
+                minutesComponent
+            }
+            .onTapGesture(count:1) { isBubbleDetailPresented = true }
+            
             secondsComponent
                 .onTapGesture {
                     //start/pause bubble
@@ -80,7 +85,7 @@ struct BubbleCell: View {
                     .foregroundColor(.orange)
                     .frame(width: BubbleCell.edge, height: BubbleCell.edge)
                     .padding(padding)
-                Text("\(bubble.fakeClock)")
+                Text("\(Int(bubble.fakeClock))")
                     .font(.system(size: fontSize))
                     .foregroundColor(.white)
             }
