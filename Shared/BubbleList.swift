@@ -39,16 +39,11 @@ struct BubbleList: View {
             VStack {
                 Spacer(minLength: geo.safeAreaInsets.top) //distance from status bar
                 List {
-                    ForEach(bubbles) {bubble in
-                        BubbleCell(bubble)
-//                            .environmentObject(viewModel)
-                    }
+                    ForEach(bubbles) { BubbleCell($0) }
                     .onDelete { delete($0) }
                     .listRowSeparator(.hidden)
-                    
                 }.listStyle(.plain)
-            }
-            .ignoresSafeArea()
+            }.ignoresSafeArea()
         }
         .onChange(of: scenePhase, perform: {
             switch $0 {
