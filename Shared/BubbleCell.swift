@@ -20,7 +20,7 @@ struct BubbleCell: View {
     private let spacing:CGFloat = -30
     private let fontSize = Ratio.bubbleToFontSize * UIScreen.size.width * 0.85
     
-    //⚠️  this property determines how many bubbles on screen to fit
+    //⚠️ this property determines how many bubbles on screen to fit
     private static var edge:CGFloat = {
         print(UIScreen.main.bounds.height)
         return dic[UIScreen.main.bounds.height] ?? 140

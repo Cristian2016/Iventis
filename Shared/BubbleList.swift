@@ -19,6 +19,7 @@ struct BubbleList: View {
     private var bubbles:FetchedResults<Bubble>
     @State private var isActive = true
     @State var isBubbleDetailPresented = false
+    @State var isPalettePresented = false
     
     // MARK: -
     static var formatter:DateFormatter = {
@@ -40,6 +41,14 @@ struct BubbleList: View {
         GeometryReader { geo in
             VStack {
                 Spacer(minLength: geo.safeAreaInsets.top) //distance from status bar
+                Text("Palette")
+                    .sheet(isPresented: $isPalettePresented) {
+                        PaletteView()
+                    }
+                    .onTapGesture {
+                        isPalettePresented = true
+                    }
+
                 List {
                     ForEach(bubbles) { BubbleCell($0, $isBubbleDetailPresented) }
                     .onDelete { delete($0) }

@@ -26,10 +26,6 @@ extension UIScreen {
     static let size = UIScreen.main.bounds.size
 }
 
-struct Geometry {
-    
-}
-
 extension NumberFormatter {
     //truncates Float and returns a string
     static func bubblesStyle(_ float:Float, fractionDigits:Int = 0) -> String {

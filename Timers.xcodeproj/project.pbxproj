@@ -49,6 +49,9 @@
 		1F9B6AF0280950D600C0A725 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F9B6AEF280950D600C0A725 /* ViewModel.swift */; };
 		1F9B6AF1280950D600C0A725 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F9B6AEF280950D600C0A725 /* ViewModel.swift */; };
 		1F9B6AF2280950D600C0A725 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F9B6AEF280950D600C0A725 /* ViewModel.swift */; };
+		1F9BE0A9280BE14100F87EFA /* PaletteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F9BE0A8280BE14100F87EFA /* PaletteView.swift */; };
+		1F9BE0AA280BE14100F87EFA /* PaletteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F9BE0A8280BE14100F87EFA /* PaletteView.swift */; };
+		1F9BE0AB280BE14100F87EFA /* PaletteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F9BE0A8280BE14100F87EFA /* PaletteView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -100,6 +103,7 @@
 		1F5F4A9C280945C700AF3442 /* BubbleCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BubbleCell.swift; sourceTree = "<group>"; };
 		1F97B7DC2809B311002FFCA3 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		1F9B6AEF280950D600C0A725 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
+		1F9BE0A8280BE14100F87EFA /* PaletteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PaletteView.swift; path = Shared/PaletteView.swift; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -199,6 +203,7 @@
 			isa = PBXGroup;
 			children = (
 				1F5F4A4C28093FAD00AF3442 /* Persistence.swift */,
+				1F9BE0A8280BE14100F87EFA /* PaletteView.swift */,
 				1F5F4A6D28093FF800AF3442 /* Model.xcdatamodeld */,
 				1F5F4A712809409600AF3442 /* Bubble.swift */,
 				1F5F4A722809409600AF3442 /* Bubble Properties.swift */,
@@ -345,6 +350,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1F9BE0A9280BE14100F87EFA /* PaletteView.swift in Sources */,
 				1F5F4A732809409600AF3442 /* Bubble.swift in Sources */,
 				1F97B7DD2809B311002FFCA3 /* Colors.swift in Sources */,
 				1F100CA72809493400A3A3C2 /* BackgroundTimer.swift in Sources */,
@@ -374,6 +380,7 @@
 				1F5F4A7028093FF800AF3442 /* Model.xcdatamodeld in Sources */,
 				1F5F4A5E28093FAF00AF3442 /* TimersApp.swift in Sources */,
 				1F5F4A762809409600AF3442 /* Bubble Properties.swift in Sources */,
+				1F9BE0AA280BE14100F87EFA /* PaletteView.swift in Sources */,
 				1F5F4A9E280945C700AF3442 /* BubbleCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -382,6 +389,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1F9BE0AB280BE14100F87EFA /* PaletteView.swift in Sources */,
 				1F5F4A88280941AC00AF3442 /* Widgets.intentdefinition in Sources */,
 				1F97B7DF2809B311002FFCA3 /* Colors.swift in Sources */,
 				1F100CA92809493400A3A3C2 /* BackgroundTimer.swift in Sources */,
