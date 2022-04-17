@@ -29,7 +29,7 @@ extension Color {
         //row 3
         static let red = Three(description: "red", hr: Color(#colorLiteral(red: 0.9993676543, green: 0.515832901, blue: 0.4665791392, alpha: 1)), min: Color(#colorLiteral(red: 0.9752207398, green: 0.301009059, blue: 0.2363895774, alpha: 1)), sec: Color(#colorLiteral(red: 0.9948095679, green: 0.04287932068, blue: 0.01928717084, alpha: 1)))
         static let sky = Three(description: "sky", hr: Color(#colorLiteral(red: 0.3429786265, green: 0.8417432904, blue: 0.9890826344, alpha: 1)), min: Color(#colorLiteral(red: 0.09564081579, green: 0.8035189509, blue: 0.9921918511, alpha: 1)), sec: Color(#colorLiteral(red: 0, green: 0.7678601742, blue: 0.9985458255, alpha: 1)))
-        static let bubbleGum = Three(description: "bubbleGum", hr: Color(#colorLiteral(red: 0.9885047078, green: 0.6262013316, blue: 0.9807611108, alpha: 1)), min: Color(#colorLiteral(red: 0.9893129468, green: 0.4895346761, blue: 0.9776270986, alpha: 1)), sec: Color(#colorLiteral(red: 0.9892597795, green: 0.3731681108, blue: 0.9725615382, alpha: 1)))
+        static let bubbleGum = Three(description: "bubbleGum", hr: Color(#colorLiteral(red: 0.939917624, green: 0.5834753513, blue: 0.7518553138, alpha: 1)), min: Color(#colorLiteral(red: 1, green: 0.4408499599, blue: 0.6894205213, alpha: 1)), sec: Color(#colorLiteral(red: 0.996430099, green: 0.3117666543, blue: 0.6224691272, alpha: 1)))
         
         //row 4
         static let green = Three(description: "green", hr: Color(#colorLiteral(red: 0.1198918894, green: 0.8718696237, blue: 0.155010134, alpha: 1)), min: Color(#colorLiteral(red: 0.1077821925, green: 0.7843493819, blue: 0.1306060255, alpha: 1)), sec: Color(#colorLiteral(red: 0.08472224325, green: 0.6849253774, blue: 0.1049573496, alpha: 1)))

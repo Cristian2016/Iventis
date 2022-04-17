@@ -17,37 +17,38 @@ struct PaletteView: View {
             }
 
             HStack(spacing:-20) {
-                circle(.Bubbles.mint.sec)
-                circle(.Bubbles.slateBlue.sec)
-                circle(.Bubbles.sourCherry.sec)
+                circle(Color.Bubbles.mint)
+                circle(Color.Bubbles.slateBlue)
+                circle(Color.Bubbles.sourCherry)
             }
             HStack(spacing:-20) {
-                circle(.Bubbles.silver.sec)
-                circle(.Bubbles.ultramarine.sec)
-                circle(.Bubbles.lemon.sec)
+                circle(Color.Bubbles.silver)
+                circle(Color.Bubbles.ultramarine)
+                circle(Color.Bubbles.lemon)
+            }
+            
+            HStack(spacing:-20) {
+                circle(Color.Bubbles.red)
+                circle(Color.Bubbles.sky)
+                circle(Color.Bubbles.bubbleGum)
             }
             HStack(spacing:-20) {
-                circle(.Bubbles.red.sec)
-                circle(.Bubbles.sky.sec)
-                circle(.Bubbles.bubbleGum.sec)
+                circle(Color.Bubbles.green)
+                circle(Color.Bubbles.coffee)
+                circle(Color.Bubbles.magenta)
             }
             HStack(spacing:-20) {
-                circle(.Bubbles.green.sec)
-                circle(.Bubbles.coffee.sec)
-                circle(.Bubbles.magenta.sec)
-            }
-            HStack(spacing:-20) {
-                circle(.Bubbles.purple.sec)
-                circle(.Bubbles.orange.sec)
-                circle(.Bubbles.chocolate.sec)
+                circle(Color.Bubbles.purple)
+                circle(Color.Bubbles.orange)
+                circle(Color.Bubbles.chocolate)
             }
         }
         .ignoresSafeArea()
         .padding(4)
     }
     
-    func circle(_ color:Color) -> some View {
-        Circle().fill(color)
+    func circle(_ color:Color.Three) -> some View {
+        Circle().fill(color.sec)
             .onTapGesture {
                 let colorDescription = color.description
                 print(colorDescription)
