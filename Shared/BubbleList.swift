@@ -39,22 +39,17 @@ struct BubbleList: View {
     // MARK: -
     var body: some View {
         GeometryReader { geo in
-            VStack {
-                Spacer(minLength: geo.safeAreaInsets.top) //distance from status bar
-                Text("Palette")
-                    .sheet(isPresented: $isPalettePresented) {
-                        PaletteView()
-                    }
-                    .onTapGesture {
-                        isPalettePresented = true
-                    }
-
-                List {
-                    ForEach(bubbles) { BubbleCell($0, $isBubbleDetailPresented) }
-                    .onDelete { delete($0) }
-                    .listRowSeparator(.hidden)
-                }.listStyle(.plain)
-            }.ignoresSafeArea()
+            ZStack {
+                VStack {
+                    Spacer(minLength: geo.safeAreaInsets.top) //distance from status bar
+                    List {
+                        ForEach(bubbles) { BubbleCell($0, $isBubbleDetailPresented) }
+                        .onDelete { delete($0) }
+                        .listRowSeparator(.hidden)
+                    }.listStyle(.plain)
+                }.ignoresSafeArea()
+                ShowPaletteView(isPalettePresented: $isPalettePresented)
+            }
         }
         .onChange(of: scenePhase, perform: {
             switch $0 {
@@ -70,6 +65,9 @@ struct BubbleList: View {
         }
         .sheet(isPresented: $isBubbleDetailPresented) {
             BubbleDetail()
+        }
+        .sheet(isPresented: $isPalettePresented) {
+            PaletteView()
         }
     }
 }
