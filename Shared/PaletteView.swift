@@ -9,42 +9,43 @@ import SwiftUI
 
 struct PaletteView: View {
     var body: some View {
-        VStack {
-            Label {
-                Text("Tap")
-            } icon: {
-                Image(systemName:"circle")
+        ZStack {
+            VStack {
+                HStack(spacing:-20) {
+                    circle(Color.Bubbles.mint)
+                    circle(Color.Bubbles.slateBlue)
+                    circle(Color.Bubbles.sourCherry)
+                }
+                HStack(spacing:-20) {
+                    circle(Color.Bubbles.silver)
+                    circle(Color.Bubbles.ultramarine)
+                    circle(Color.Bubbles.lemon)
+                }
+                
+                HStack(spacing:-20) {
+                    circle(Color.Bubbles.red)
+                    circle(Color.Bubbles.sky)
+                    circle(Color.Bubbles.bubbleGum)
+                }
+                HStack(spacing:-20) {
+                    circle(Color.Bubbles.green)
+                    circle(Color.Bubbles.coffee)
+                    circle(Color.Bubbles.magenta)
+                }
+                HStack(spacing:-20) {
+                    circle(Color.Bubbles.purple)
+                    circle(Color.Bubbles.orange)
+                    circle(Color.Bubbles.chocolate)
+                }
             }
-
-            HStack(spacing:-20) {
-                circle(Color.Bubbles.mint)
-                circle(Color.Bubbles.slateBlue)
-                circle(Color.Bubbles.sourCherry)
-            }
-            HStack(spacing:-20) {
-                circle(Color.Bubbles.silver)
-                circle(Color.Bubbles.ultramarine)
-                circle(Color.Bubbles.lemon)
-            }
+            .ignoresSafeArea()
+            .padding()
+            .padding()
             
-            HStack(spacing:-20) {
-                circle(Color.Bubbles.red)
-                circle(Color.Bubbles.sky)
-                circle(Color.Bubbles.bubbleGum)
-            }
-            HStack(spacing:-20) {
-                circle(Color.Bubbles.green)
-                circle(Color.Bubbles.coffee)
-                circle(Color.Bubbles.magenta)
-            }
-            HStack(spacing:-20) {
-                circle(Color.Bubbles.purple)
-                circle(Color.Bubbles.orange)
-                circle(Color.Bubbles.chocolate)
-            }
+            TapHold()
+                .frame(width: 400, height: 150)
         }
-        .ignoresSafeArea()
-        .padding(4)
+        
     }
     
     func circle(_ color:Color.Three) -> some View {
@@ -60,4 +61,8 @@ struct PaletteView_Previews: PreviewProvider {
     static var previews: some View {
         PaletteView()
     }
+}
+
+extension Image {
+    static let tapHold = Image("taphold")
 }
