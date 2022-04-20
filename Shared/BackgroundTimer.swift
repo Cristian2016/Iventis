@@ -29,13 +29,7 @@ class BackgroundTimer {
     }()
     
     private var eventHandler: (() -> Void)? = {
-        //posts value
-        //increases value
-        //post again and so on
-        
-        let info = [NSNotification.Name.valueUpdated : value]
-        NotificationCenter.default.post(name: .valueUpdated, object: nil, userInfo: info)
-        value += 1
+        NotificationCenter.default.post(name: .valueUpdated, object: nil, userInfo: nil)
     }
     
     enum State {

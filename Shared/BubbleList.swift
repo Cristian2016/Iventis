@@ -44,7 +44,9 @@ struct BubbleList: View {
                 VStack {
                     Spacer(minLength: geo.safeAreaInsets.top) //distance from status bar
                     List {
-                        ForEach(bubbles) { BubbleCell($0, $showDetail) }
+                        ForEach(bubbles) {
+                            BubbleCell($0, $showDetail).environmentObject(viewModel)
+                        }
                         .onDelete { delete($0) }
                         .listRowSeparator(.hidden)
                     }.listStyle(.plain)
@@ -75,7 +77,7 @@ struct BubbleList: View {
 extension BubbleList {
     private func delete(_ indexSet:IndexSet) {
         indexSet.forEach {
-            viewModel.delete(bubble: bubbles[$0])
+            viewModel.delete(bubbles[$0])
         }
     }
 }

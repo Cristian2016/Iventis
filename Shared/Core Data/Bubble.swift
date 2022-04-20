@@ -25,6 +25,7 @@ public class Bubble: NSManagedObject {
                 case 1: return .running
                 case 2: return .paused
                 case 3: return .finished ///timers only
+                                         ///
                 default: return .brandNew
             }
         }
@@ -41,11 +42,12 @@ public class Bubble: NSManagedObject {
     
     // MARK: - Observing BackgroundTimer
     ///receivedValue is NOT saved to database
-    @Published var fakeClock = Float(0) {willSet{ self.objectWillChange.send() }}
+    @Published var fakeClock = Float(0) { willSet { self.objectWillChange.send() }}
+    @Published var components = (hr:0, min:0, sec:0) { willSet { self.objectWillChange.send() }}
     
     deinit { observeBackgroundTimer(.stop) }
     
-    enum Kind {
+    enum Kind:Comparable {
         case stopwatch
         case timer(referenceClock:Float)
     }
@@ -81,11 +83,13 @@ extension Bubble {
                 NotificationCenter.default.addObserver(forName: .valueUpdated, object: nil, queue: nil) { [weak self] notification in
                     guard let self = self, self.state_ == .running else { return }
                     
-                    guard let receivedValue = notification.userInfo?[NSNotification.Name.valueUpdated] as? Int else { fatalError() }
-                    
                     //since closure is executed on background thread, dispatch back to the main thread
                     DispatchQueue.main.async {
-                        self.fakeClock = Float(receivedValue) + self.currentClock
+                        self.components = self.fakeClock.timeComponents()
+                        self.fakeClock += self.currentClock + 1
+                        if self.color == "orange" {
+                            print("orange runs")
+                        }
                     }
                 }
             default: NotificationCenter.default.removeObserver(self)

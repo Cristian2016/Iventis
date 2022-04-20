@@ -19,14 +19,6 @@ class ViewModel: ObservableObject {
         }
     }
     
-    init() {
-        let request = Bubble.fetchRequest()
-        if let bubbles = try? PersistenceController.shared.container.viewContext.fetch(request) {
-            bubbles.forEach { $0.observeBackgroundTimer(.start)
-            }
-        }
-    }
-    
     // MARK: -
     func createBubble(_ kind:Bubble.Kind, _ color:String) {
         let backgroundContext = PersistenceController.shared.backgroundContext
@@ -40,8 +32,7 @@ class ViewModel: ObservableObject {
         switch kind {
             case .timer(referenceClock: let referenceClock):
                 newBubble.initialClock = referenceClock
-            default:
-                newBubble.initialClock = 0
+            default: newBubble.initialClock = 0
         }
         
         newBubble.color = color
@@ -49,13 +40,13 @@ class ViewModel: ObservableObject {
         try? backgroundContext.save()
     }
     
-    func delete(bubble:Bubble) {
+    func delete(_ bubble:Bubble) {
         let viewContext = PersistenceController.shared.viewContext
         viewContext.delete(bubble)
         try? viewContext.save()
     }
     
-    func reset(bubble:Bubble) {
+    func reset(_ bubble:Bubble) {
         let backgroundContext = PersistenceController.shared.backgroundContext
         bubble.created = Date()
         bubble.currentClock = bubble.initialClock
@@ -73,6 +64,23 @@ class ViewModel: ObservableObject {
             }
             
             try? PersistenceController.shared.backgroundContext.save()
+        }
+    }
+    
+    // MARK: -
+    func toggle(_ bubble:Bubble) {
+        if bubble.currentClock <= 0 && bubble.kind != .stopwatch  {
+            print("will not toggle")
+            return
+        }
+        
+        switch bubble.state_ {
+            case .brandNew, .paused:
+                bubble.state_ = .running
+            case .running:
+                bubble.state_ = .paused
+                try? PersistenceController.shared.viewContext.save()
+            case .finished: return
         }
     }
 }

@@ -10,6 +10,7 @@ import SwiftUI
 struct BubbleCell: View {
     @StateObject var bubble:Bubble
     @Binding var showDetail:Bool
+    @EnvironmentObject private var viewModel:ViewModel
     
     private var isRunning:Bool {
         bubble.state_ == .running
@@ -68,8 +69,8 @@ struct BubbleCell: View {
             secondsComponent
                 .foregroundColor(colors.sec)
                 .onTapGesture {
-                    //start/pause bubble
-                    print("tapped")
+                    print("toggle \(bubble.color)")
+                    viewModel.toggle(bubble)
                 }
         }
     }
@@ -110,7 +111,7 @@ struct BubbleCell: View {
                 Circle()
                     .frame(width: BubbleCell.edge, height: BubbleCell.edge)
                     .padding(padding)
-                Text(String(displayedTime.sec))
+                Text(String(bubble.components.sec))
                     .font(.system(size: fontSize))
                     .foregroundColor(.white)
             }
