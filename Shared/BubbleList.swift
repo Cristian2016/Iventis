@@ -18,7 +18,8 @@ struct BubbleList: View {
     @FetchRequest(entity: Bubble.entity(), sortDescriptors: [])
     private var bubbles:FetchedResults<Bubble>
     @State private var isActive = true
-    @State var isBubbleDetailPresented = false
+    
+    @State var showDetail = false
     @State var showPalette = false
     
     // MARK: -
@@ -43,13 +44,15 @@ struct BubbleList: View {
                 VStack {
                     Spacer(minLength: geo.safeAreaInsets.top) //distance from status bar
                     List {
-                        ForEach(bubbles) { BubbleCell($0, $isBubbleDetailPresented) }
+                        ForEach(bubbles) { BubbleCell($0, $showDetail) }
                         .onDelete { delete($0) }
                         .listRowSeparator(.hidden)
                     }.listStyle(.plain)
                 }.ignoresSafeArea()
+                
                 LeftStrip($showPalette) //it's invisible
                 PaletteView($showPalette) //initially hidden
+                BubbleDetail($showDetail) //initially hidden
             }
         }
         .onChange(of: scenePhase, perform: {
@@ -64,9 +67,7 @@ struct BubbleList: View {
         .onAppear {
 //            viewModel.makeBubbles()
         }
-        .sheet(isPresented: $isBubbleDetailPresented) {
-            BubbleDetail()
-        }
+        .onTapGesture { showDetail = true }
     }
 }
 
@@ -83,12 +84,5 @@ extension BubbleList {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         BubbleList()
-    }
-}
-
-
-struct BubbleDetail:View {
-    var body: some View {
-        Text("Bubble Detail")
     }
 }
