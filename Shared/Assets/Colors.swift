@@ -73,3 +73,7 @@ extension Color {
         case rose
     }
 }
+
+extension Color {
+    static let background = Color("background")
+}
