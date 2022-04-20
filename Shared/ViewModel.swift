@@ -69,13 +69,13 @@ class ViewModel: ObservableObject {
     
     // MARK: -
     func toggle(_ bubble:Bubble) {
-        if bubble.currentClock <= 0 && bubble.kind != .stopwatch  {
-            print("will not toggle")
-            return
-        }
+        if bubble.currentClock <= 0 && bubble.kind != .stopwatch  { return }
         
         switch bubble.state_ {
-            case .brandNew, .paused:
+            case .brandNew:
+                bubble.observeBackgroundTimer(.start)
+                bubble.state_ = .running
+            case .paused:
                 bubble.state_ = .running
             case .running:
                 bubble.state_ = .paused

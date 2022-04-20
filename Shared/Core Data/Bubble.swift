@@ -87,9 +87,6 @@ extension Bubble {
                     DispatchQueue.main.async {
                         self.components = self.fakeClock.timeComponents()
                         self.fakeClock += self.currentClock + 1
-                        if self.color == "orange" {
-                            print("orange runs")
-                        }
                     }
                 }
             default: NotificationCenter.default.removeObserver(self)
