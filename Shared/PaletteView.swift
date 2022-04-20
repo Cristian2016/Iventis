@@ -30,9 +30,10 @@ struct PaletteView: View {
     // MARK: - Legoes
     var background: some View {
         Color.background
-            .shadow(radius: 2)
+            .standardShadow()
             .ignoresSafeArea()
     }
+    
     var circles:some View {
         VStack {
             HStack(spacing:-20) {
@@ -87,4 +88,16 @@ struct PaletteView_Previews: PreviewProvider {
 
 extension Image {
     static let tapHold = Image("taphold")
+}
+
+struct ShadowModifier:ViewModifier {
+    func body(content:Content) -> some View {
+        content.shadow(radius: 2)
+    }
+}
+
+extension View {
+    func standardShadow() -> some View {
+        modifier(ShadowModifier())
+    }
 }
