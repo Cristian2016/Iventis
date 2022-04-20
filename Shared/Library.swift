@@ -51,3 +51,23 @@ extension FileManager {
         return url
     }()
 }
+
+extension Float {
+    //converts currentClock to time components to display
+    func timeComponents() -> (hr:Int, min:Int, sec:Int) {
+        rounded(.toNearestOrEven) //discard all decimals
+        let roundedClock = Int(rounded(.toNearestOrEven))
+        
+        //how many full hours
+        let hr = roundedClock/3600
+        //hours remaining
+        let hrRemaining = roundedClock%3600
+        
+        //how many full minutes
+        let min = hrRemaining/60
+        //remaining
+        let sec = hrRemaining%60
+        
+        return (hr, min, sec)
+    }
+}

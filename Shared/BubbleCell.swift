@@ -11,9 +11,26 @@ struct BubbleCell: View {
     @StateObject var bubble:Bubble
     @Binding var showDetail:Bool
     
+    private var isRunning:Bool {
+        bubble.state_ == .running
+    }
+    private var displayedTime:(hr:Int, min:Int, sec:Int) {
+        bubble.currentClock.timeComponents()
+    }
+    
+    private var sec:Int = 0
+    private var min:Int = 0
+    private var hr:Int = 0
+    
     init(_ bubble:Bubble, _ showDetail:Binding<Bool>) {
         _bubble = StateObject(wrappedValue: bubble)
         _showDetail = Binding(projectedValue: showDetail)
+        
+        switch bubble.kind {
+            case .stopwatch: sec = 0
+            case .timer(referenceClock: let referenceClock):
+                break
+        }
     }
     
     static let dic:[CGFloat:CGFloat] = [ /* 12mini */728:140, /* 8 */667:150,  /* ipdo */568:125,  /* 13 pro max */926:163,  /* 13 pro */844:147,  /* 11 pro max */896:158, 812:140,  /* 8max */736:167]
@@ -30,10 +47,16 @@ struct BubbleCell: View {
     private let padding = CGFloat(0)
     
     var body: some View {
+        let colors = bubbleColors(bubble.color)
+        
         ZStack {
             ZStack {
                 hoursComponent
+                    .foregroundColor(colors.hr)
+                    .opacity(bubble.currentClock >= 3600 ? 1 : 0.01)
                 minutesComponent
+                    .foregroundColor(colors.min)
+                    .opacity(bubble.currentClock >= 60 ? 1 : 0.01)
             }
             .onTapGesture(count: 2, perform: {
                 print("double tap")
@@ -43,6 +66,7 @@ struct BubbleCell: View {
             }
             
             secondsComponent
+                .foregroundColor(colors.sec)
                 .onTapGesture {
                     //start/pause bubble
                     print("tapped")
@@ -54,10 +78,9 @@ struct BubbleCell: View {
         HStack {
             ZStack {
                 Circle()
-                    .foregroundColor(.red)
                     .frame(width: BubbleCell.edge, height: BubbleCell.edge)
                     .padding(padding)
-                Text("28")
+                Text(String(displayedTime.hr))
                     .font(.system(size: fontSize))
                     .foregroundColor(.white)
             }
@@ -70,10 +93,9 @@ struct BubbleCell: View {
             Spacer()
             ZStack {
                 Circle()
-                    .foregroundColor(.green)
                     .frame(width: BubbleCell.edge, height: BubbleCell.edge)
                     .padding(padding)
-                Text("12")
+                Text(String(displayedTime.min))
                     .font(.system(size: fontSize))
                     .foregroundColor(.white)
             }
@@ -86,10 +108,9 @@ struct BubbleCell: View {
             Spacer()
             ZStack {
                 Circle()
-                    .foregroundColor(.orange)
                     .frame(width: BubbleCell.edge, height: BubbleCell.edge)
                     .padding(padding)
-                Text("\(Int(bubble.fakeClock))")
+                Text(String(displayedTime.sec))
                     .font(.system(size: fontSize))
                     .foregroundColor(.white)
             }
@@ -105,6 +126,10 @@ struct BubbleCell: View {
                                 .onEnded {
                                     print("Single Tap")
                                 })
+    }
+    
+    private func bubbleColors(_ description:String) -> Color.Three {
+        Color.bubbleThrees.filter { $0.description == description }.first ?? Color.Bubbles.mint
     }
 }
 

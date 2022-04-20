@@ -52,6 +52,7 @@ struct BubbleList: View {
                 
                 LeftStrip($showPalette) //it's invisible
                 PaletteView($showPalette) //initially hidden
+                    .environmentObject(viewModel)
                 BubbleDetail($showDetail) //initially hidden
             }
         }

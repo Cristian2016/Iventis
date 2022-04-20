@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct PaletteView: View {
+    @EnvironmentObject private var viewModel:ViewModel
     @Binding private var showPalette:Bool
     private let xOffset = -UIScreen.main.bounds.width
     
@@ -69,8 +70,8 @@ struct PaletteView: View {
     private func circle(_ color:Color.Three) -> some View {
         Circle().fill(color.sec)
             .onTapGesture {
-                let colorDescription = color.description
-                print(colorDescription)
+                viewModel.createBubble(.stopwatch, color.description)
+                showPalette = false
             }
     }
     

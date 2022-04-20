@@ -76,4 +76,9 @@ extension Color {
 
 extension Color {
     static let background = Color("background")
+    
+    static let bubbleThrees = [
+        Bubbles.mint, Bubbles.slateBlue, Bubbles.sourCherry, Bubbles.silver, Bubbles.ultramarine, Bubbles.lemon, Bubbles.red, Bubbles.sky, Bubbles.bubbleGum,
+        Bubbles.green, Bubbles.coffee, Bubbles.magenta, Bubbles.purple, Bubbles.orange, Bubbles.chocolate, Bubbles.aqua, Bubbles.byzantium, Bubbles.rose
+    ]
 }
