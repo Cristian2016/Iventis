@@ -55,9 +55,9 @@
 		1F9BE0AD280C6AB000F87EFA /* TapHold.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F9BE0AC280C6AB000F87EFA /* TapHold.swift */; };
 		1F9BE0AE280C6AB000F87EFA /* TapHold.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F9BE0AC280C6AB000F87EFA /* TapHold.swift */; };
 		1F9BE0AF280C6AB000F87EFA /* TapHold.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F9BE0AC280C6AB000F87EFA /* TapHold.swift */; };
-		1FE163AE280EE6F40050C6F5 /* RightSwipeStripView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FE163AD280EE6F40050C6F5 /* RightSwipeStripView.swift */; };
-		1FE163AF280EE6F40050C6F5 /* RightSwipeStripView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FE163AD280EE6F40050C6F5 /* RightSwipeStripView.swift */; };
-		1FE163B0280EE6F40050C6F5 /* RightSwipeStripView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FE163AD280EE6F40050C6F5 /* RightSwipeStripView.swift */; };
+		1FE163AE280EE6F40050C6F5 /* RightSwipeStrip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FE163AD280EE6F40050C6F5 /* RightSwipeStrip.swift */; };
+		1FE163AF280EE6F40050C6F5 /* RightSwipeStrip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FE163AD280EE6F40050C6F5 /* RightSwipeStrip.swift */; };
+		1FE163B0280EE6F40050C6F5 /* RightSwipeStrip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FE163AD280EE6F40050C6F5 /* RightSwipeStrip.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -111,7 +111,7 @@
 		1F9B6AEF280950D600C0A725 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		1F9BE0A8280BE14100F87EFA /* PaletteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PaletteView.swift; path = Shared/PaletteView.swift; sourceTree = SOURCE_ROOT; };
 		1F9BE0AC280C6AB000F87EFA /* TapHold.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapHold.swift; sourceTree = "<group>"; };
-		1FE163AD280EE6F40050C6F5 /* RightSwipeStripView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RightSwipeStripView.swift; sourceTree = "<group>"; };
+		1FE163AD280EE6F40050C6F5 /* RightSwipeStrip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RightSwipeStrip.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -161,7 +161,7 @@
 				1F5F4A4A28093FAD00AF3442 /* TimersApp.swift */,
 				1F97B7E02809B331002FFCA3 /* Assets */,
 				1F5F4A982809456E00AF3442 /* BubbleList.swift */,
-				1FE163AD280EE6F40050C6F5 /* RightSwipeStripView.swift */,
+				1FE163AD280EE6F40050C6F5 /* RightSwipeStrip.swift */,
 				1F9B6AEF280950D600C0A725 /* ViewModel.swift */,
 				1F5F4A9C280945C700AF3442 /* BubbleCell.swift */,
 				1F100CA62809493400A3A3C2 /* BackgroundTimer.swift */,
@@ -364,7 +364,7 @@
 				1F5F4A732809409600AF3442 /* Bubble.swift in Sources */,
 				1F97B7DD2809B311002FFCA3 /* Colors.swift in Sources */,
 				1F100CA72809493400A3A3C2 /* BackgroundTimer.swift in Sources */,
-				1FE163AE280EE6F40050C6F5 /* RightSwipeStripView.swift in Sources */,
+				1FE163AE280EE6F40050C6F5 /* RightSwipeStrip.swift in Sources */,
 				1F5F4A6128093FAF00AF3442 /* Persistence.swift in Sources */,
 				1F9B6AF0280950D600C0A725 /* ViewModel.swift in Sources */,
 				1F5F4A992809456E00AF3442 /* BubbleList.swift in Sources */,
@@ -384,7 +384,7 @@
 			files = (
 				1F9BE0AE280C6AB000F87EFA /* TapHold.swift in Sources */,
 				1F9B6AF1280950D600C0A725 /* ViewModel.swift in Sources */,
-				1FE163AF280EE6F40050C6F5 /* RightSwipeStripView.swift in Sources */,
+				1FE163AF280EE6F40050C6F5 /* RightSwipeStrip.swift in Sources */,
 				1F97B7DE2809B311002FFCA3 /* Colors.swift in Sources */,
 				1F5F4A742809409600AF3442 /* Bubble.swift in Sources */,
 				1F5F4A962809450A00AF3442 /* Library.swift in Sources */,
@@ -407,7 +407,7 @@
 				1F5F4A88280941AC00AF3442 /* Widgets.intentdefinition in Sources */,
 				1F97B7DF2809B311002FFCA3 /* Colors.swift in Sources */,
 				1F100CA92809493400A3A3C2 /* BackgroundTimer.swift in Sources */,
-				1FE163B0280EE6F40050C6F5 /* RightSwipeStripView.swift in Sources */,
+				1FE163B0280EE6F40050C6F5 /* RightSwipeStrip.swift in Sources */,
 				1F100CA4280946C500A3A3C2 /* Persistence.swift in Sources */,
 				1F9B6AF2280950D600C0A725 /* ViewModel.swift in Sources */,
 				1F100CA2280946BB00A3A3C2 /* Bubble.swift in Sources */,

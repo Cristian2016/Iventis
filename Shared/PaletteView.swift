@@ -8,8 +8,17 @@
 import SwiftUI
 
 struct PaletteView: View {
+    @Binding var isPalettePresented:Bool
+    let xOffset = -UIScreen.main.bounds.width
+    
     var body: some View {
+        paletteView
+            .offset(x: !isPalettePresented ? xOffset : 0, y: 0)
+    }
+    
+    var paletteView:some View {
         ZStack {
+            Color.blue
             VStack {
                 HStack(spacing:-20) {
                     circle(Color.Bubbles.mint)
@@ -37,15 +46,9 @@ struct PaletteView: View {
                     circle(Color.Bubbles.orange)
                     circle(Color.Bubbles.chocolate)
                 }
-            }
-            .ignoresSafeArea()
-            .padding()
-            .padding()
-            
-            TapHold()
-                .frame(width: 400, height: 150)
+            }.padding()
         }
-        
+        .ignoresSafeArea()
     }
     
     func circle(_ color:Color.Three) -> some View {
@@ -59,7 +62,7 @@ struct PaletteView: View {
 
 struct PaletteView_Previews: PreviewProvider {
     static var previews: some View {
-        PaletteView()
+        PaletteView(isPalettePresented: .constant(true))
     }
 }
 

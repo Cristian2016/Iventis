@@ -19,7 +19,7 @@ struct BubbleList: View {
     private var bubbles:FetchedResults<Bubble>
     @State private var isActive = true
     @State var isBubbleDetailPresented = false
-    @State var isPalettePresented = false
+    @State var showPalette = false
     
     // MARK: -
     static var formatter:DateFormatter = {
@@ -48,7 +48,9 @@ struct BubbleList: View {
                         .listRowSeparator(.hidden)
                     }.listStyle(.plain)
                 }.ignoresSafeArea()
-                RightSwipeStripView(isPalettePresented: $isPalettePresented)
+                RightSwipeStrip($showPalette)
+                
+                PaletteView(isPalettePresented: $showPalette)
             }
         }
         .onChange(of: scenePhase, perform: {
@@ -65,9 +67,6 @@ struct BubbleList: View {
         }
         .sheet(isPresented: $isBubbleDetailPresented) {
             BubbleDetail()
-        }
-        .sheet(isPresented: $isPalettePresented) {
-            PaletteView()
         }
     }
 }
