@@ -8,15 +8,14 @@
 import SwiftUI
 
 struct PaletteView: View {
-    @Binding var isPalettePresented:Bool
-    let xOffset = -UIScreen.main.bounds.width
+    @Binding private var showPalette:Bool
+    private let xOffset = -UIScreen.main.bounds.width
     
     var body: some View {
-        paletteView
-            .offset(x: !isPalettePresented ? xOffset : 0, y: 0)
+        paletteView.offset(x: !showPalette ? xOffset : 0, y: 0)
     }
     
-    var paletteView:some View {
+    private var paletteView:some View {
         ZStack {
             Color.blue
             VStack {
@@ -51,18 +50,23 @@ struct PaletteView: View {
         .ignoresSafeArea()
     }
     
-    func circle(_ color:Color.Three) -> some View {
+    private func circle(_ color:Color.Three) -> some View {
         Circle().fill(color.sec)
             .onTapGesture {
                 let colorDescription = color.description
                 print(colorDescription)
             }
     }
+    
+    // MARK: -
+    init(_ showPalette:Binding<Bool>) {
+        _showPalette = .init(projectedValue: showPalette)
+    }
 }
 
 struct PaletteView_Previews: PreviewProvider {
     static var previews: some View {
-        PaletteView(isPalettePresented: .constant(true))
+        PaletteView(.constant(true))
     }
 }
 

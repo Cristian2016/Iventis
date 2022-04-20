@@ -49,8 +49,7 @@ struct BubbleList: View {
                     }.listStyle(.plain)
                 }.ignoresSafeArea()
                 RightSwipeStrip($showPalette)
-                
-                PaletteView(isPalettePresented: $showPalette)
+                PaletteView($showPalette)
             }
         }
         .onChange(of: scenePhase, perform: {
