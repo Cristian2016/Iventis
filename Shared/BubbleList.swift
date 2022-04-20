@@ -67,7 +67,6 @@ struct BubbleList: View {
         .onAppear {
 //            viewModel.makeBubbles()
         }
-        .onTapGesture { showDetail = true }
     }
 }
 

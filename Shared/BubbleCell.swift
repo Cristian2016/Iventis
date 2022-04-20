@@ -9,11 +9,11 @@ import SwiftUI
 
 struct BubbleCell: View {
     @StateObject var bubble:Bubble
-    @Binding var isBubbleDetailPresented:Bool
+    @Binding var showDetail:Bool
     
-    init(_ bubble:Bubble, _ isBubbleDetailPresented:Binding<Bool>) {
+    init(_ bubble:Bubble, _ showDetail:Binding<Bool>) {
         _bubble = StateObject(wrappedValue: bubble)
-        _isBubbleDetailPresented = Binding(projectedValue: isBubbleDetailPresented)
+        _showDetail = Binding(projectedValue: showDetail)
     }
     
     static let dic:[CGFloat:CGFloat] = [ /* 12mini */728:140, /* 8 */667:150,  /* ipdo */568:125,  /* 13 pro max */926:163,  /* 13 pro */844:147,  /* 11 pro max */896:158, 812:140,  /* 8max */736:167]
@@ -39,7 +39,7 @@ struct BubbleCell: View {
                 print("double tap")
             })
             .onTapGesture(count: 1) {
-                isBubbleDetailPresented = true
+                showDetail = true
             }
             
             secondsComponent
@@ -61,7 +61,6 @@ struct BubbleCell: View {
                     .font(.system(size: fontSize))
                     .foregroundColor(.white)
             }
-            
             Spacer()
         }
     }
