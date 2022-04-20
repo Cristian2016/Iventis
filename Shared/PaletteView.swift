@@ -12,41 +12,46 @@ struct PaletteView: View {
     private let xOffset = -UIScreen.main.bounds.width
     
     var body: some View {
-        paletteView.offset(x: !showPalette ? xOffset : 0, y: 0)
+        HStack {
+            paletteView.offset(x: !showPalette ? xOffset : 0, y: 0)
+            RightStrip($showPalette)
+        }
     }
     
+    // MARK: - 
     private var paletteView:some View {
-        ZStack {
-            Color.blue
-            VStack {
-                HStack(spacing:-20) {
-                    circle(Color.Bubbles.mint)
-                    circle(Color.Bubbles.slateBlue)
-                    circle(Color.Bubbles.sourCherry)
+        GeometryReader { geo in
+            ZStack {
+                Color.blue
+                VStack {
+                    HStack(spacing:-20) {
+                        circle(Color.Bubbles.mint)
+                        circle(Color.Bubbles.slateBlue)
+                        circle(Color.Bubbles.sourCherry)
+                    }
+                    HStack(spacing:-20) {
+                        circle(Color.Bubbles.silver)
+                        circle(Color.Bubbles.ultramarine)
+                        circle(Color.Bubbles.lemon)
+                    }
+                    
+                    HStack(spacing:-20) {
+                        circle(Color.Bubbles.red)
+                        circle(Color.Bubbles.sky)
+                        circle(Color.Bubbles.bubbleGum)
+                    }
+                    HStack(spacing:-20) {
+                        circle(Color.Bubbles.green)
+                        circle(Color.Bubbles.coffee)
+                        circle(Color.Bubbles.magenta)
+                    }
+                    HStack(spacing:-20) {
+                        circle(Color.Bubbles.purple)
+                        circle(Color.Bubbles.orange)
+                        circle(Color.Bubbles.chocolate)
+                    }
                 }
-                HStack(spacing:-20) {
-                    circle(Color.Bubbles.silver)
-                    circle(Color.Bubbles.ultramarine)
-                    circle(Color.Bubbles.lemon)
-                }
-                
-                HStack(spacing:-20) {
-                    circle(Color.Bubbles.red)
-                    circle(Color.Bubbles.sky)
-                    circle(Color.Bubbles.bubbleGum)
-                }
-                HStack(spacing:-20) {
-                    circle(Color.Bubbles.green)
-                    circle(Color.Bubbles.coffee)
-                    circle(Color.Bubbles.magenta)
-                }
-                HStack(spacing:-20) {
-                    circle(Color.Bubbles.purple)
-                    circle(Color.Bubbles.orange)
-                    circle(Color.Bubbles.chocolate)
-                }
-            }.padding()
-        }
+            }}
         .ignoresSafeArea()
     }
     

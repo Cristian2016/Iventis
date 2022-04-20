@@ -8,7 +8,7 @@
 import SwiftUI
 
 ///user swipes right from screen edge and Palette is presented
-struct RightSwipeStrip: View {
+struct LeftStrip: View {
     @Binding var showPalette:Bool
     
     // MARK: -
@@ -34,21 +34,22 @@ struct RightSwipeStrip: View {
 }
 
 ///user swipes left from screen edge and Palette is dismissed
-//struct LeftSwipeStripView: View {
-//    @Binding var isPalettePresented:Bool
-//
-//    var body: some View {
-//        HStack {
-//            Rectangle().fill(Color.clear).frame(width: 20)
-//                .contentShape(Rectangle()) //use if color clear otherwise gesture will not work
-//            Spacer()
-//        }
-//        .ignoresSafeArea()
-//        .gesture(DragGesture(minimumDistance: 0, coordinateSpace: .global)
-//            .onEnded { _ in
-//                withAnimation {
-//                    isPalettePresented = true
-//                }
-//            })
-//    }
-//}
+struct RightStrip: View {
+    @Binding var showPalette:Bool
+    init(_ showPalette:Binding<Bool>) {
+        _showPalette = .init(projectedValue: showPalette)
+    }
+
+    // MARK: -
+    var body: some View {
+        Rectangle().fill(Color.clear).frame(width: 20)
+            .contentShape(Rectangle()) //use if color clear otherwise gesture will not work
+            .ignoresSafeArea()
+            .gesture(DragGesture(minimumDistance: 0, coordinateSpace: .global)
+                .onEnded { _ in
+                    withAnimation {
+                        showPalette = false
+                    }
+                })
+    }
+}

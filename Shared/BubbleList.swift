@@ -48,8 +48,8 @@ struct BubbleList: View {
                         .listRowSeparator(.hidden)
                     }.listStyle(.plain)
                 }.ignoresSafeArea()
-                RightSwipeStrip($showPalette)
-                PaletteView($showPalette)
+                LeftStrip($showPalette) //it's invisible
+                PaletteView($showPalette) //initially hidden
             }
         }
         .onChange(of: scenePhase, perform: {
