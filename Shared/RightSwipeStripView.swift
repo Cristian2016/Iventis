@@ -7,7 +7,8 @@
 
 import SwiftUI
 
-struct ShowPaletteView: View {
+///user swipes right from screen edge and Palette is presented
+struct RightSwipeStripView: View {
     @Binding var isPalettePresented:Bool
     
     var body: some View {
@@ -26,6 +27,6 @@ struct ShowPaletteView: View {
 
 struct InvisibleView_Previews: PreviewProvider {
     static var previews: some View {
-        ShowPaletteView(isPalettePresented: .constant(true))
+        RightSwipeStripView(isPalettePresented: .constant(true))
     }
 }
