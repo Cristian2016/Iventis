@@ -44,6 +44,7 @@ public class Bubble: NSManagedObject {
     ///receivedValue is NOT saved to database
     @Published var fakeClock = Float(0) { willSet { self.objectWillChange.send() }}
     @Published var components = (hr:0, min:0, sec:0) { willSet { self.objectWillChange.send() }}
+    private(set) var isObservingBackgroundTimer = false
     
     deinit { observeBackgroundTimer(.stop) }
     
@@ -78,6 +79,8 @@ extension Bubble {
     
     ///update receivedValue only if bubble is running
     func observeBackgroundTimer(_ observe:Observe) {
+        isObservingBackgroundTimer = true
+        
         switch observe {
             case .start:
                 NotificationCenter.default.addObserver(forName: .valueUpdated, object: nil, queue: nil) { [weak self] notification in

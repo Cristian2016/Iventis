@@ -32,6 +32,7 @@ struct BubbleCell: View {
             case .timer(referenceClock: let referenceClock):
                 break
         }
+        if !bubble.isObservingBackgroundTimer { bubble.observeBackgroundTimer(.start) }
     }
     
     static let dic:[CGFloat:CGFloat] = [ /* 12mini */728:140, /* 8 */667:150,  /* ipdo */568:125,  /* 13 pro max */926:163,  /* 13 pro */844:147,  /* 11 pro max */896:158, 812:140,  /* 8max */736:167]
@@ -54,10 +55,10 @@ struct BubbleCell: View {
             ZStack {
                 hoursComponent
                     .foregroundColor(colors.hr)
-                    .opacity(bubble.fakeClock >= 3600 ? 1 : 0.01)
+                    .opacity(bubble.fakeClock >= 3600 ? 1 : 0.001)
                 minutesComponent
                     .foregroundColor(colors.min)
-                    .opacity(bubble.fakeClock >= 60 ? 1 : 0.01)
+                    .opacity(bubble.fakeClock >= 60 ? 1 : 0.001)
             }
             .onTapGesture(count: 2, perform: {
                 print("double tap")

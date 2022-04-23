@@ -23,6 +23,43 @@ extension Bubble {
     
     @NSManaged public var currentClock: Float
     @NSManaged public var isFavorite: Bool
+    @NSManaged public var rank: Int64
+    
+    @NSManaged public var sessions: NSOrderedSet?
+}
+
+// MARK: Generated accessors for sessions
+extension Bubble {
+
+    @objc(insertObject:inSessionsAtIndex:)
+    @NSManaged public func insertIntoSessions(_ value: Session, at idx: Int)
+
+    @objc(removeObjectFromSessionsAtIndex:)
+    @NSManaged public func removeFromSessions(at idx: Int)
+
+    @objc(insertSessions:atIndexes:)
+    @NSManaged public func insertIntoSessions(_ values: [Session], at indexes: NSIndexSet)
+
+    @objc(removeSessionsAtIndexes:)
+    @NSManaged public func removeFromSessions(at indexes: NSIndexSet)
+
+    @objc(replaceObjectInSessionsAtIndex:withObject:)
+    @NSManaged public func replaceSessions(at idx: Int, with value: Session)
+
+    @objc(replaceSessionsAtIndexes:withSessions:)
+    @NSManaged public func replaceSessions(at indexes: NSIndexSet, with values: [Session])
+
+    @objc(addSessionsObject:)
+    @NSManaged public func addToSessions(_ value: Session)
+
+    @objc(removeSessionsObject:)
+    @NSManaged public func removeFromSessions(_ value: Session)
+
+    @objc(addSessions:)
+    @NSManaged public func addToSessions(_ values: NSOrderedSet)
+
+    @objc(removeSessions:)
+    @NSManaged public func removeFromSessions(_ values: NSOrderedSet)
 
 }
 

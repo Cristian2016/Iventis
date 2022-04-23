@@ -36,6 +36,8 @@ class ViewModel: ObservableObject {
         }
         
         newBubble.color = color
+        newBubble.rank
+        newBubble
         
         try? backgroundContext.save()
     }
@@ -73,7 +75,6 @@ class ViewModel: ObservableObject {
         
         switch bubble.state_ {
             case .brandNew:
-                bubble.observeBackgroundTimer(.start)
                 bubble.state_ = .running
             case .paused:
                 bubble.state_ = .running
