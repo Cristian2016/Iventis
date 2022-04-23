@@ -13,7 +13,7 @@
     <entity name="Pair" representedClassName=".Pair" syncable="YES">
         <attribute name="duration" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="isNoteVisible" optional="YES" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
-        <attribute name="note" optional="YES" attributeType="String"/>
+        <attribute name="note" optional="YES" attributeType="String" defaultValueString=""/>
         <attribute name="pause" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="start" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <relationship name="session" optional="YES" maxCount="1" deletionRule="Cascade" ordered="YES" destinationEntity="Session" inverseName="pairs" inverseEntity="Session"/>

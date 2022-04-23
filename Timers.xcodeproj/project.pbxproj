@@ -239,8 +239,8 @@
 				1F5F4A712809409600AF3442 /* Bubble.swift */,
 				1F5F4A722809409600AF3442 /* Bubble Properties.swift */,
 				1FFC8BA428142F040059EF2E /* Session.swift */,
-				1FFC8BA828142F040059EF2E /* Pair.swift */,
 				1FFC8BA528142F040059EF2E /* Session Properties.swift */,
+				1FFC8BA828142F040059EF2E /* Pair.swift */,
 				1FFC8BA928142F040059EF2E /* Pair Properties.swift */,
 			);
 			path = "Core Data";

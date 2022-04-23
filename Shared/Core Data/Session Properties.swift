@@ -16,9 +16,9 @@ extension Session {
         return NSFetchRequest<Session>(entityName: "Session")
     }
 
-    @NSManaged public var created: Date?
-    @NSManaged public var bubble: Bubble?
-    @NSManaged public var pairs: NSOrderedSet?
+    @NSManaged public var created: Date
+    @NSManaged public var bubble: Bubble
+    @NSManaged public var pairs: NSOrderedSet
 
 }
 
