@@ -90,13 +90,15 @@ class ViewModel: ObservableObject {
                 latestPair?.pause = Date()
                 //compute duration
                 latestPair!.duration = Float(latestPair!.pause!.timeIntervalSince(latestPair!.start))
+                
+                //compute and store currentClock
+                bubble.currentClock += latestPair!.duration
                 try? PersistenceController.shared.viewContext.save()
                 
             case .finished: return
         }
         
-        print(bubble.state, "bubble state")
-        
         try? PersistenceController.shared.viewContext.save()
+//        print(bubble.state, "bubble state")
     }
 }

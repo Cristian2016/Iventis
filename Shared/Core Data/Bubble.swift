@@ -69,13 +69,13 @@ public class Bubble: NSManagedObject {
 
 // MARK: - Observing BackgroundTimer
 extension Bubble {
-    enum Observe {
+    enum ObserveState {
         case start
         case stop
     }
     
     ///update receivedValue only if bubble is running
-    func observeBackgroundTimer(_ observe:Observe) {
+    func observeBackgroundTimer(_ observe:ObserveState) {
         isObservingBackgroundTimer = true
         
         switch observe {
@@ -83,10 +83,15 @@ extension Bubble {
                 NotificationCenter.default.addObserver(forName: .valueUpdated, object: nil, queue: nil) { [weak self] notification in
                     guard let self = self, self.state == .running else { return }
                     
+                    //delta is the elapsed duration between pair.start and signal dates
+                    let Δ = Date().timeIntervalSince(self.currentPair!.start)
+                    let roundedΔ = Float(Δ).rounded(.toNearestOrEven)
+                    
+                    let value = self.currentClock + roundedΔ
+                    
                     //since closure is executed on background thread, dispatch back to the main thread
                     DispatchQueue.main.async {
-                        self.components = self.fakeClock.timeComponents()
-                        self.fakeClock += self.currentClock + 1
+                        self.components = value.timeComponents()
                     }
                 }
             default: NotificationCenter.default.removeObserver(self)
