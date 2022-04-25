@@ -13,9 +13,6 @@ struct BubbleCell: View {
     @EnvironmentObject private var viewModel:ViewModel
     
     private var isRunning:Bool { bubble.state == .running }
-    private var displayedTime:(hr:Int, min:Int, sec:Int) {
-        bubble.currentClock.timeComponents()
-    }
     
     private var sec:Int = 0
     private var min:Int = 0
