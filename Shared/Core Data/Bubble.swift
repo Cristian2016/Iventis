@@ -96,4 +96,11 @@ extension Bubble {
             default: NotificationCenter.default.removeObserver(self)
         }
     }
+    
+    func observeAppLaunch() {
+        NotificationCenter.default.addObserver(forName: .appLaunched, object: nil, queue: nil) { notification in
+            
+            print("app launched")
+        }
+    }
 }

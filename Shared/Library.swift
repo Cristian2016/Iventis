@@ -10,6 +10,7 @@ import SwiftUI
 
 extension NSNotification.Name {
     static let valueUpdated = NSNotification.Name("valueUpdated")
+    static let appLaunched = NSNotification.Name("appLaunched")
 }
 
 struct Ratio {
