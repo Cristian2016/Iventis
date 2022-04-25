@@ -24,7 +24,7 @@ public class Bubble: NSManagedObject {
         } else {
             if sessions_.isEmpty { return .brandNew }
             else {
-                if latestPair!.pause == nil { return .running }
+                if currentPair!.pause == nil { return .running }
                 else { return .paused }
             }
         }
@@ -33,9 +33,9 @@ public class Bubble: NSManagedObject {
     var sessions_:[Session] {
         sessions?.array as? [Session] ?? []
     }
-    var latestSession:Session { sessions_.last! }
+    var currentSession:Session { sessions_.last! }
     
-    var latestPair:Pair? { (latestSession.pairs.array as? [Pair])?.last }
+    var currentPair:Pair? { (currentSession.pairs.array as? [Pair])?.last }
     
     // MARK: - Observing BackgroundTimer
     ///receivedValue is NOT saved to database

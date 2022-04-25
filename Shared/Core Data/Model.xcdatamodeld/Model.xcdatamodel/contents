@@ -25,6 +25,6 @@
     <elements>
         <element name="Bubble" positionX="-1028.380004882812" positionY="1528.89501953125" width="128" height="134"/>
         <element name="Pair" positionX="-832.5816650390625" positionY="1586.590484619141" width="128" height="133"/>
-        <element name="Session" positionX="-826.8931884765625" positionY="1341.822631835938" width="128" height="88"/>
+        <element name="Session" positionX="-826.8931884765625" positionY="1341.822631835938" width="128" height="74"/>
     </elements>
 </model>
