@@ -53,6 +53,8 @@ class ViewModel: ObservableObject {
         //pair.isNoteVisible defaults to true
         newPair.session = newSession
         
+        print(newBubble)
+        
         try? backgroundContext.save()
     }
     
