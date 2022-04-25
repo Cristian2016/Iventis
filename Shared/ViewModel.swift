@@ -96,6 +96,13 @@ class ViewModel: ObservableObject {
                 bubble.state_ = .running
             case .running:
                 bubble.state_ = .paused
+                
+                let latestPair = bubble.latestPair
+                latestPair.pause = Date()
+                //compute duration
+                latestPair.duration = Float(latestPair.pause!.timeIntervalSince(latestPair.pause!))
+                print("pair duration \(latestPair.duration)")
+                
                 try? PersistenceController.shared.viewContext.save()
             case .finished: return
         }

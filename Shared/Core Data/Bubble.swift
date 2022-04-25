@@ -39,6 +39,12 @@ public class Bubble: NSManagedObject {
             }
         }
     }
+    var sessions_:[Session] {
+        sessions?.array as? [Session] ?? []
+    }
+    var latestSession:Session { sessions_.last! }
+    
+    var latestPair:Pair { (latestSession.pairs.array as? [Pair] ?? []).last! }
     
     // MARK: - Observing BackgroundTimer
     ///receivedValue is NOT saved to database
