@@ -40,18 +40,18 @@ class ViewModel: ObservableObject {
         newBubble.color = color
         newBubble.rank = Int64(UserDefaults.assignRank())
         
-        let newSession = Session(context: backgroundContext)
-        newSession.created = now
-        newSession.bubble = newBubble
-        
-        let newPair = Pair(context: backgroundContext)
-        newPair.start = now
+//        let newSession = Session(context: backgroundContext)
+//        newSession.created = now
+//        newSession.bubble = newBubble
+//
+//        let newPair = Pair(context: backgroundContext)
+//        newPair.start = now
         //properties that will not be set here
         //pair.pause
         //pair.duration
         //pair.note defaults to empty string
         //pair.isNoteVisible defaults to true
-        newPair.session = newSession
+//        newPair.session = newSession
         
         print(newBubble)
         
@@ -92,7 +92,7 @@ class ViewModel: ObservableObject {
         switch bubble.state_ {
             case .brandNew, .paused:
                 bubble.state_ = .running
-                let newPair = Pair(context: PersistenceController.shared.backgroundContext)
+                let newPair = Pair(context: PersistenceController.shared.viewContext)
                 newPair.start = Date()
                 bubble.latestSession.addToPairs(newPair)
             case .running:
