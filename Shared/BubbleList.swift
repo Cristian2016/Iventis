@@ -34,23 +34,27 @@ struct BubbleList: View {
     
     // MARK: -
     init() {
-           UITableView.appearance().showsVerticalScrollIndicator = false
-       }
+        UITableView.appearance().showsVerticalScrollIndicator = false
+    }
     
     // MARK: -
     var body: some View {
         GeometryReader { geo in
             ZStack {
-                VStack {
-                    Spacer(minLength: geo.safeAreaInsets.top) //distance from status bar
-                    List {
-                        ForEach(bubbles) {
-                            BubbleCell($0, $showDetail).environmentObject(viewModel)
-                        }
-                        .onDelete { delete($0) }
-                        .listRowSeparator(.hidden)
-                    }.listStyle(.plain)
-                }.ignoresSafeArea()
+                if bubbles.isEmpty {
+                    EmptyBubbleListView()
+                } else {
+                    VStack {
+                        Spacer(minLength: geo.safeAreaInsets.top) //distance from status bar
+                        List {
+                            ForEach(bubbles) {
+                                BubbleCell($0, $showDetail).environmentObject(viewModel)
+                            }
+                            .onDelete { delete($0) }
+                            .listRowSeparator(.hidden)
+                        }.listStyle(.plain)
+                    }.ignoresSafeArea()
+                }
                 
                 LeftStrip($showPalette) //it's invisible
                 PaletteView($showPalette) //initially hidden
@@ -70,7 +74,7 @@ struct BubbleList: View {
         })
         .navigationBarHidden(true)
         .onAppear {
-//            viewModel.makeBubbles()
+            //            viewModel.makeBubbles()
         }
     }
 }

@@ -55,6 +55,9 @@
 		1F9BE0AD280C6AB000F87EFA /* TapHold.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F9BE0AC280C6AB000F87EFA /* TapHold.swift */; };
 		1F9BE0AE280C6AB000F87EFA /* TapHold.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F9BE0AC280C6AB000F87EFA /* TapHold.swift */; };
 		1F9BE0AF280C6AB000F87EFA /* TapHold.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F9BE0AC280C6AB000F87EFA /* TapHold.swift */; };
+		1FCF0C662816F3F600AA1FAA /* EmptyBubbleListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FCF0C652816F3F600AA1FAA /* EmptyBubbleListView.swift */; };
+		1FCF0C672816F3F600AA1FAA /* EmptyBubbleListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FCF0C652816F3F600AA1FAA /* EmptyBubbleListView.swift */; };
+		1FCF0C682816F3F600AA1FAA /* EmptyBubbleListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FCF0C652816F3F600AA1FAA /* EmptyBubbleListView.swift */; };
 		1FE163AE280EE6F40050C6F5 /* LeftStrip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FE163AD280EE6F40050C6F5 /* LeftStrip.swift */; };
 		1FE163AF280EE6F40050C6F5 /* LeftStrip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FE163AD280EE6F40050C6F5 /* LeftStrip.swift */; };
 		1FE163B0280EE6F40050C6F5 /* LeftStrip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FE163AD280EE6F40050C6F5 /* LeftStrip.swift */; };
@@ -126,6 +129,7 @@
 		1F9B6AEF280950D600C0A725 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		1F9BE0A8280BE14100F87EFA /* PaletteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PaletteView.swift; path = Shared/PaletteView.swift; sourceTree = SOURCE_ROOT; };
 		1F9BE0AC280C6AB000F87EFA /* TapHold.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapHold.swift; sourceTree = "<group>"; };
+		1FCF0C652816F3F600AA1FAA /* EmptyBubbleListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyBubbleListView.swift; sourceTree = "<group>"; };
 		1FE163AD280EE6F40050C6F5 /* LeftStrip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftStrip.swift; sourceTree = "<group>"; };
 		1FF0A2FC2810448100B1DB77 /* BubbleDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BubbleDetail.swift; sourceTree = "<group>"; };
 		1FFC8BA428142F040059EF2E /* Session.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
@@ -164,6 +168,7 @@
 		1F5F4A4228093FAC00AF3442 = {
 			isa = PBXGroup;
 			children = (
+				1FCF0C652816F3F600AA1FAA /* EmptyBubbleListView.swift */,
 				1F5F4A92280941D900AF3442 /* Timers (iOS).entitlements */,
 				1F5F4A91280941B700AF3442 /* WidgetsExtension.entitlements */,
 				1F5F4A4728093FAD00AF3442 /* Shared */,
@@ -399,6 +404,7 @@
 				1F9BE0AD280C6AB000F87EFA /* TapHold.swift in Sources */,
 				1F5F4A9D280945C700AF3442 /* BubbleCell.swift in Sources */,
 				1F5F4A5D28093FAF00AF3442 /* TimersApp.swift in Sources */,
+				1FCF0C662816F3F600AA1FAA /* EmptyBubbleListView.swift in Sources */,
 				1FF0A2FD2810448100B1DB77 /* BubbleDetail.swift in Sources */,
 				1FFC8BAA28142F040059EF2E /* Session.swift in Sources */,
 				1F5F4A952809450A00AF3442 /* Library.swift in Sources */,
@@ -418,6 +424,7 @@
 				1FFC8BB728142F040059EF2E /* Pair.swift in Sources */,
 				1F97B7DE2809B311002FFCA3 /* Colors.swift in Sources */,
 				1FFC8BAE28142F040059EF2E /* Session Properties.swift in Sources */,
+				1FCF0C672816F3F600AA1FAA /* EmptyBubbleListView.swift in Sources */,
 				1F5F4A742809409600AF3442 /* Bubble.swift in Sources */,
 				1FF0A2FE2810448100B1DB77 /* BubbleDetail.swift in Sources */,
 				1F5F4A962809450A00AF3442 /* Library.swift in Sources */,
@@ -452,6 +459,7 @@
 				1F9BE0AF280C6AB000F87EFA /* TapHold.swift in Sources */,
 				1F5F4A9F280945C700AF3442 /* BubbleCell.swift in Sources */,
 				1F100CA5280946C900A3A3C2 /* Model.xcdatamodeld in Sources */,
+				1FCF0C682816F3F600AA1FAA /* EmptyBubbleListView.swift in Sources */,
 				1FF0A2FF2810448100B1DB77 /* BubbleDetail.swift in Sources */,
 				1FFC8BAC28142F040059EF2E /* Session.swift in Sources */,
 				1F5F4A9B2809456E00AF3442 /* BubbleList.swift in Sources */,
