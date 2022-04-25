@@ -44,7 +44,10 @@ public class Bubble: NSManagedObject {
     }}
     private(set) var isObservingBackgroundTimer = false
     
-    deinit { observeBackgroundTimer(.stop) }
+    deinit {
+        observeBackgroundTimer(.stop)
+        observeAppLaunch(.stop)
+    }
     
     enum Kind:Comparable {
         case stopwatch
@@ -97,10 +100,19 @@ extension Bubble {
         }
     }
     
-    func observeAppLaunch() {
-        NotificationCenter.default.addObserver(forName: .appLaunched, object: nil, queue: nil) { notification in
-            
-            print("app launched")
+    ///set bubble.timeComponents
+    func observeAppLaunch(_ observe:ObserveState) {
+        switch observe {
+            case .start:
+                NotificationCenter.default.addObserver(forName: .appLaunched, object: nil, queue: nil) { [weak self] notification in
+                    guard let self = self else { return }
+                    //time to set timeComponents to an initial value. forget about (hr:0, min:0, sec:0)
+                    let components = self.currentClock.timeComponents()
+                    DispatchQueue.main.async {
+                        self.timeComponents = components
+                    }
+                }
+            default: NotificationCenter.default.removeObserver(self)
         }
     }
 }

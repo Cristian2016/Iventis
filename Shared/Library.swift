@@ -8,6 +8,10 @@
 import UIKit
 import SwiftUI
 
+func delayExecution(_ delay:DispatchTime, code:@escaping ()->()) {
+    DispatchQueue.main.asyncAfter(deadline: delay, execute: code)
+}
+
 extension NSNotification.Name {
     static let valueUpdated = NSNotification.Name("valueUpdated")
     static let appLaunched = NSNotification.Name("appLaunched")

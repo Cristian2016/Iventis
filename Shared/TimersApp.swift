@@ -17,4 +17,11 @@ struct TimersApp: App {
                 .environment(\.managedObjectContext, viewContext)
         }
     }
+    
+    //detect app launch
+    init() {
+        delayExecution(.now() + 0.01) {
+            NotificationCenter.default.post(name: .appLaunched, object: nil)
+        }
+    }
 }

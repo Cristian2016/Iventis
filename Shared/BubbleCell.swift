@@ -31,6 +31,7 @@ struct BubbleCell: View {
                 break
         }
         if !bubble.isObservingBackgroundTimer { bubble.observeBackgroundTimer(.start) }
+        bubble.observeAppLaunch(.start)
     }
     
     static let dic:[CGFloat:CGFloat] = [ /* 12mini */728:140, /* 8 */667:150,  /* ipdo */568:125,  /* 13 pro max */926:163,  /* 13 pro */844:147,  /* 11 pro max */896:158, 812:140,  /* 8max */736:167]
