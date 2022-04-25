@@ -86,14 +86,13 @@ class ViewModel: ObservableObject {
                 bubble.currentSession.addToPairs(newPair)
                 
             case .running: /* changes to .paused */
-                let latestPair = bubble.currentPair
-                latestPair?.pause = Date()
+                let currentPair = bubble.currentPair
+                currentPair?.pause = Date()
                 //compute duration
-                latestPair!.duration = Float(latestPair!.pause!.timeIntervalSince(latestPair!.start))
+                currentPair!.duration = Float(currentPair!.pause!.timeIntervalSince(currentPair!.start))
                 
                 //compute and store currentClock
-                bubble.currentClock += latestPair!.duration
-                try? PersistenceController.shared.viewContext.save()
+                bubble.currentClock += currentPair!.duration
                 
             case .finished: return
         }

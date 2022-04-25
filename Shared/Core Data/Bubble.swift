@@ -19,9 +19,8 @@ public class Bubble: NSManagedObject {
     }
     
     var state:State {
-        if kind != .stopwatch && currentClock <= 0 {
-            return .finished
-        } else {
+        if kind != .stopwatch && currentClock <= 0 { return .finished }
+        else {
             if sessions_.isEmpty { return .brandNew }
             else {
                 if currentPair!.pause == nil { return .running }
@@ -71,7 +70,7 @@ public class Bubble: NSManagedObject {
     }
 }
 
-// MARK: - Observing BackgroundTimer
+// MARK: - Observers
 extension Bubble {
     enum ObserveState {
         case start
