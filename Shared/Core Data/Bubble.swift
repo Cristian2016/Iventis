@@ -91,7 +91,7 @@ extension Bubble {
                     
                     let value = self.currentClock + Float(Δ)
                     
-                    print(value.timeComponents())
+//                    print(value.timeComponents())
                     
                     //since closure is executed on background thread, dispatch back to the main thread
                     DispatchQueue.main.async { self.timeComponents = value.timeComponents() }

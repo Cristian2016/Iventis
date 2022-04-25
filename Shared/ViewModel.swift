@@ -100,4 +100,8 @@ class ViewModel: ObservableObject {
         try? PersistenceController.shared.viewContext.save()
 //        print(bubble.state, "bubble state")
     }
+    
+    func updateAllCurrentClocks() {
+        
+    }
 }

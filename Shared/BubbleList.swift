@@ -67,9 +67,11 @@ struct BubbleList: View {
                 case .active:
                     NotificationCenter.default.post(name: .appLaunched, object: nil)
                     viewModel.timer(.start)
-                case .background: viewModel.timer(.pause)
+                case .background:
+                    viewModel.timer(.pause)
+                    viewModel.updateAllCurrentClocks()
                 case .inactive: break
-                default: break
+                @unknown default: fatalError()
             }
         })
         .navigationBarHidden(true)

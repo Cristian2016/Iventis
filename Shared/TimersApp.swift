@@ -20,8 +20,6 @@ struct TimersApp: App {
     
     //detect app launch
     init() {
-        delayExecution(.now() + 0.01) {
-            NotificationCenter.default.post(name: .appLaunched, object: nil)
-        }
+        NotificationCenter.default.post(name: .appLaunched, object: nil)
     }
 }
