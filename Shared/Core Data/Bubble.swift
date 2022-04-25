@@ -39,7 +39,6 @@ public class Bubble: NSManagedObject {
     
     // MARK: - Observing BackgroundTimer
     ///receivedValue is NOT saved to database
-    @Published var fakeClock = Float(0) { willSet { self.objectWillChange.send() }}
     @Published var components = (hr:0, min:0, sec:0) { willSet { self.objectWillChange.send() }}
     private(set) var isObservingBackgroundTimer = false
     
@@ -90,9 +89,7 @@ extension Bubble {
                     let value = self.currentClock + roundedΔ
                     
                     //since closure is executed on background thread, dispatch back to the main thread
-                    DispatchQueue.main.async {
-                        self.components = value.timeComponents()
-                    }
+                    DispatchQueue.main.async { self.components = value.timeComponents() }
                 }
             default: NotificationCenter.default.removeObserver(self)
         }

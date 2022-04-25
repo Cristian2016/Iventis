@@ -53,10 +53,10 @@ struct BubbleCell: View {
             ZStack {
                 hoursComponent
                     .foregroundColor(colors.hr)
-                    .opacity(bubble.fakeClock >= 3600 ? 1 : 0.001)
+                    .opacity(bubble.components.hr > 0 ? 1 : 0.001)
                 minutesComponent
                     .foregroundColor(colors.min)
-                    .opacity(bubble.fakeClock >= 60 ? 1 : 0.001)
+                    .opacity(bubble.components.min > 0 ? 1 : 0.001)
             }
             .onTapGesture(count: 2, perform: {
                 print("double tap")
