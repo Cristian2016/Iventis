@@ -71,11 +71,18 @@ class ViewModel: ObservableObject {
         if bubble.currentClock <= 0 && bubble.kind != .stopwatch  { return }
         
         switch bubble.state {
-            case .brandNew, .paused:
-                let newPair = Pair(context: PersistenceController.shared.viewContext)
-                newPair.start = Date()
-                bubble.latestSession.addToPairs(newPair)
-            case .running:
+            case .brandNew: /* changes to .running */
+                //create first session and add first pair to the session
+                let firstSession = Session(context: PersistenceController.shared.viewContext)
+                let firstPair = Pair(context: PersistenceController.shared.viewContext)
+                firstPair.start = Date()
+                bubble.addToSessions(firstSession)
+                firstSession.addToPairs(firstPair)
+                                
+            case .paused:
+                break
+                
+            case .running: /* changes to .paused */
                 let latestPair = bubble.latestPair
                 latestPair?.pause = Date()
                 //compute duration
@@ -83,7 +90,10 @@ class ViewModel: ObservableObject {
                 print("pair duration \(latestPair!.duration)")
                 
                 try? PersistenceController.shared.viewContext.save()
+                
             case .finished: return
         }
+        
+        try? PersistenceController.shared.viewContext.save()
     }
 }
