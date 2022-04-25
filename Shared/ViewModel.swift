@@ -22,38 +22,20 @@ class ViewModel: ObservableObject {
     // MARK: -
     func createBubble(_ kind:Bubble.Kind, _ color:String) {
         let backgroundContext = PersistenceController.shared.backgroundContext
-        
-        let now = Date()
-        
+                
         //bubble
         let newBubble = Bubble(context: backgroundContext)
-        newBubble.created = now
-        newBubble.state_ = .brandNew
+        newBubble.created = Date()
         
         newBubble.kind = kind
         switch kind {
-            case .timer(referenceClock: let referenceClock):
-                newBubble.initialClock = referenceClock
+            case .timer(let initialClock):
+                newBubble.initialClock = initialClock
             default: newBubble.initialClock = 0
         }
         
         newBubble.color = color
         newBubble.rank = Int64(UserDefaults.assignRank())
-        
-//        let newSession = Session(context: backgroundContext)
-//        newSession.created = now
-//        newSession.bubble = newBubble
-//
-//        let newPair = Pair(context: backgroundContext)
-//        newPair.start = now
-        //properties that will not be set here
-        //pair.pause
-        //pair.duration
-        //pair.note defaults to empty string
-        //pair.isNoteVisible defaults to true
-//        newPair.session = newSession
-        
-        print(newBubble)
         
         try? backgroundContext.save()
     }
@@ -78,7 +60,6 @@ class ViewModel: ObservableObject {
                 let newBubble = Bubble(context: PersistenceController.shared.backgroundContext)
                 newBubble.created = Date()
                 newBubble.currentClock = 0
-                newBubble.state_ = .brandNew
             }
             
             try? PersistenceController.shared.backgroundContext.save()
@@ -89,20 +70,17 @@ class ViewModel: ObservableObject {
     func toggle(_ bubble:Bubble) {
         if bubble.currentClock <= 0 && bubble.kind != .stopwatch  { return }
         
-        switch bubble.state_ {
+        switch bubble.state {
             case .brandNew, .paused:
-                bubble.state_ = .running
                 let newPair = Pair(context: PersistenceController.shared.viewContext)
                 newPair.start = Date()
                 bubble.latestSession.addToPairs(newPair)
             case .running:
-                bubble.state_ = .paused
-                
                 let latestPair = bubble.latestPair
-                latestPair.pause = Date()
+                latestPair?.pause = Date()
                 //compute duration
-                latestPair.duration = Float(latestPair.pause!.timeIntervalSince(latestPair.start))
-                print("pair duration \(latestPair.duration)")
+                latestPair!.duration = Float(latestPair!.pause!.timeIntervalSince(latestPair!.start))
+                print("pair duration \(latestPair!.duration)")
                 
                 try? PersistenceController.shared.viewContext.save()
             case .finished: return

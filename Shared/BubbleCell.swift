@@ -12,9 +12,7 @@ struct BubbleCell: View {
     @Binding var showDetail:Bool
     @EnvironmentObject private var viewModel:ViewModel
     
-    private var isRunning:Bool {
-        bubble.state_ == .running
-    }
+    private var isRunning:Bool { bubble.state == .running }
     private var displayedTime:(hr:Int, min:Int, sec:Int) {
         bubble.currentClock.timeComponents()
     }
@@ -29,7 +27,7 @@ struct BubbleCell: View {
         
         switch bubble.kind {
             case .stopwatch: sec = 0
-            case .timer(referenceClock: let referenceClock):
+            case .timer(let initialClock):
                 break
         }
         if !bubble.isObservingBackgroundTimer { bubble.observeBackgroundTimer(.start) }

@@ -47,21 +47,21 @@ public class Bubble: NSManagedObject {
     
     enum Kind:Comparable {
         case stopwatch
-        case timer(referenceClock:Float)
+        case timer(_ initialClock:Float)
     }
     
     var kind:Kind {
         get {
             switch initialClock {
                 case 0: return .stopwatch
-                default: return .timer(referenceClock: initialClock)
+                default: return .timer(initialClock)
             }
         }
         
         set {
             switch newValue {
                 case .stopwatch: self.initialClock = 0
-                case .timer(referenceClock: let initialClock): self.initialClock = initialClock
+                case .timer(let initialClock): self.initialClock = initialClock
             }
         }
     }
