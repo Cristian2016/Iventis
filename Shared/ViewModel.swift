@@ -90,17 +90,18 @@ class ViewModel: ObservableObject {
         if bubble.currentClock <= 0 && bubble.kind != .stopwatch  { return }
         
         switch bubble.state_ {
-            case .brandNew:
+            case .brandNew, .paused:
                 bubble.state_ = .running
-            case .paused:
-                bubble.state_ = .running
+                let newPair = Pair(context: PersistenceController.shared.backgroundContext)
+                newPair.start = Date()
+                bubble.latestSession.addToPairs(newPair)
             case .running:
                 bubble.state_ = .paused
                 
                 let latestPair = bubble.latestPair
                 latestPair.pause = Date()
                 //compute duration
-                latestPair.duration = Float(latestPair.pause!.timeIntervalSince(latestPair.pause!))
+                latestPair.duration = Float(latestPair.pause!.timeIntervalSince(latestPair.start))
                 print("pair duration \(latestPair.duration)")
                 
                 try? PersistenceController.shared.viewContext.save()
