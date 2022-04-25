@@ -18,33 +18,24 @@ public class Bubble: NSManagedObject {
         case finished //3 timers only
     }
     
-    var state_:State {
-        get {
-            switch state {
-                case 0: return .brandNew
-                case 1: return .running
-                case 2: return .paused
-                case 3: return .finished ///timers only
-                                         ///
-                default: return .brandNew
-            }
-        }
-        
-        set {
-            switch newValue {
-                case .brandNew: state = 0
-                case .running: state = 1
-                case .paused: state = 2
-                case .finished: state = 3 //timers only
+    var state:State {
+        if kind != .stopwatch && currentClock <= 0 {
+            return .finished
+        } else {
+            if sessions_.isEmpty { return .brandNew }
+            else {
+                if latestPair!.pause == nil { return .running }
+                else { return .paused }
             }
         }
     }
+    
     var sessions_:[Session] {
         sessions?.array as? [Session] ?? []
     }
     var latestSession:Session { sessions_.last! }
     
-    var latestPair:Pair { (latestSession.pairs.array as? [Pair] ?? []).last! }
+    var latestPair:Pair? { (latestSession.pairs.array as? [Pair])?.last }
     
     // MARK: - Observing BackgroundTimer
     ///receivedValue is NOT saved to database
@@ -90,7 +81,7 @@ extension Bubble {
         switch observe {
             case .start:
                 NotificationCenter.default.addObserver(forName: .valueUpdated, object: nil, queue: nil) { [weak self] notification in
-                    guard let self = self, self.state_ == .running else { return }
+                    guard let self = self, self.state == .running else { return }
                     
                     //since closure is executed on background thread, dispatch back to the main thread
                     DispatchQueue.main.async {

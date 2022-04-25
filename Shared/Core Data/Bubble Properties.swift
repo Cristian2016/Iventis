@@ -17,7 +17,6 @@ extension Bubble {
     }
 
     @NSManaged public var created: Date
-    @NSManaged public var state: Int16
     @NSManaged public var initialClock: Float
     @NSManaged public var color: String
     
