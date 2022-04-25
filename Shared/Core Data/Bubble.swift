@@ -88,9 +88,8 @@ extension Bubble {
                     
                     //delta is the elapsed duration between pair.start and signal dates
                     let Δ = Date().timeIntervalSince(self.currentPair!.start)
-                    let roundedΔ = Float(Δ).rounded(.toNearestOrEven)
                     
-                    let value = self.currentClock + roundedΔ
+                    let value = self.currentClock + Float(Δ)
                     
                     //since closure is executed on background thread, dispatch back to the main thread
                     DispatchQueue.main.async { self.timeComponents = value.timeComponents() }
