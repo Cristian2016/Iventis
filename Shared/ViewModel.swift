@@ -23,9 +23,11 @@ class ViewModel: ObservableObject {
     func createBubble(_ kind:Bubble.Kind, _ color:String) {
         let backgroundContext = PersistenceController.shared.backgroundContext
         
+        let now = Date()
+        
         //bubble
         let newBubble = Bubble(context: backgroundContext)
-        newBubble.created = Date()
+        newBubble.created = now
         newBubble.state_ = .brandNew
         
         newBubble.kind = kind
@@ -36,8 +38,20 @@ class ViewModel: ObservableObject {
         }
         
         newBubble.color = color
-        newBubble.rank
-        newBubble
+        newBubble.rank = Int64(UserDefaults.assignRank())
+        
+        let newSession = Session(context: backgroundContext)
+        newSession.created = now
+        newSession.bubble = newBubble
+        
+        let newPair = Pair(context: backgroundContext)
+        newPair.start = now
+        //properties that will not be set here
+        //pair.pause
+        //pair.duration
+        //pair.note defaults to empty string
+        //pair.isNoteVisible defaults to true
+        newPair.session = newSession
         
         try? backgroundContext.save()
     }

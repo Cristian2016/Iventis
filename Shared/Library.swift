@@ -71,3 +71,22 @@ extension Float {
         return (hr, min, sec)
     }
 }
+
+extension UserDefaults {
+    struct Key {
+        static let rank = "rank"
+    }
+    
+    static let shared = UserDefaults(suiteName: String.appGroupName)!
+    
+    static func assignRank() -> Int {
+        //check if ranks exists
+        let ud = UserDefaults.shared
+        var rank = ud.integer(forKey: UserDefaults.Key.rank)
+        defer {
+            rank += 1
+            ud.set(rank, forKey: UserDefaults.Key.rank)
+        }
+        return rank
+    }
+}

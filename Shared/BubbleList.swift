@@ -15,7 +15,7 @@ struct BubbleList: View {
     
     // MARK: -
     @StateObject private var viewModel = ViewModel()
-    @FetchRequest(entity: Bubble.entity(), sortDescriptors: [])
+    @FetchRequest(entity: Bubble.entity(), sortDescriptors: [NSSortDescriptor(key: "rank", ascending: false)])
     private var bubbles:FetchedResults<Bubble>
     @State private var isActive = true
     
