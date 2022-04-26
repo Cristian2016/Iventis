@@ -24,10 +24,9 @@ struct BubbleCell: View {
         
         switch bubble.kind {
             case .stopwatch: sec = 0
-            case .timer(let initialClock):
-                break
+            default: break
         }
-        if !bubble.isObservingBackgroundTimer { bubble.observeBackgroundTimer(.start) }
+        if !bubble.isObservingBackgroundTimer { bubble.observeBackgroundTimer() }
         bubble.observeAppLaunch(.start)
     }
     

@@ -67,9 +67,9 @@ struct BubbleList: View {
                 case .active:
                     NotificationCenter.default.post(name: .appLaunched, object: nil)
                     viewModel.timer(.start)
+                    //update currentClock for each running bubble
                 case .background:
                     viewModel.timer(.pause)
-                    viewModel.updateAllCurrentClocks()
                 case .inactive: break
                 @unknown default: fatalError()
             }

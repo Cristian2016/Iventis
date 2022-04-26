@@ -13,7 +13,7 @@ func delayExecution(_ delay:DispatchTime, code:@escaping ()->()) {
 }
 
 extension NSNotification.Name {
-    static let valueUpdated = NSNotification.Name("valueUpdated")
+    static let backgroundTimerSignalReceived = NSNotification.Name("backgroundTimerSignalReceived")
     static let appLaunched = NSNotification.Name("appLaunched")
 }
 

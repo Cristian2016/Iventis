@@ -32,6 +32,7 @@ public class Bubble: NSManagedObject {
     var sessions_:[Session] {
         sessions?.array as? [Session] ?? []
     }
+    
     var currentSession:Session { sessions_.last! }
     
     var currentPair:Pair? { (currentSession.pairs.array as? [Pair])?.last }
@@ -41,12 +42,10 @@ public class Bubble: NSManagedObject {
     @Published var timeComponents = (hr:0, min:0, sec:0) { willSet {
         self.objectWillChange.send()
     }}
+    
     private(set) var isObservingBackgroundTimer = false
     
-    deinit {
-        observeBackgroundTimer(.stop)
-        observeAppLaunch(.stop)
-    }
+    deinit { NotificationCenter.default.removeObserver(self) }
     
     enum Kind:Comparable {
         case stopwatch
@@ -78,25 +77,13 @@ extension Bubble {
     }
     
     ///update receivedValue only if bubble is running
-    func observeBackgroundTimer(_ observe:ObserveState) {
+    func observeBackgroundTimer() {
         isObservingBackgroundTimer = true
         
-        switch observe {
-            case .start:
-                NotificationCenter.default.addObserver(forName: .valueUpdated, object: nil, queue: nil) { [weak self] notification in
-                    guard let self = self, self.state == .running else { return }
-                    
-                    //delta is the elapsed duration between pair.start and signal dates
-                    let Δ = Date().timeIntervalSince(self.currentPair!.start)
-                    
-                    let value = self.currentClock + Float(Δ)
-                    
-//                    print(value.timeComponents())
-                    
-                    //since closure is executed on background thread, dispatch back to the main thread
-                    DispatchQueue.main.async { self.timeComponents = value.timeComponents() }
-                }
-            default: NotificationCenter.default.removeObserver(self)
+        NotificationCenter.default.addObserver(forName: .backgroundTimerSignalReceived, object: nil, queue: nil) {
+            
+            [weak self] _ in
+            self?.updateTimeComponents()
         }
     }
     
@@ -106,13 +93,23 @@ extension Bubble {
             case .start:
                 NotificationCenter.default.addObserver(forName: .appLaunched, object: nil, queue: nil) { [weak self] notification in
                     guard let self = self else { return }
+                    
                     //time to set timeComponents to an initial value. forget about (hr:0, min:0, sec:0)
                     let components = self.currentClock.timeComponents()
-                    DispatchQueue.main.async {
-                        self.timeComponents = components
-                    }
+                    DispatchQueue.main.async { self.timeComponents = components }
                 }
             default: NotificationCenter.default.removeObserver(self)
         }
+    }
+    
+    private func updateTimeComponents() {
+        if state != .running { return }
+        
+        //delta is the elapsed duration between pair.start and signal dates
+        let Δ = Date().timeIntervalSince(currentPair!.start)
+        let value = currentClock + Float(Δ)
+                            
+        //since closure is executed on background thread, dispatch back to the main thread
+        DispatchQueue.main.async { self.timeComponents = value.timeComponents() }
     }
 }
