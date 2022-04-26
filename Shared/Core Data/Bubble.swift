@@ -37,8 +37,8 @@ public class Bubble: NSManagedObject {
     
     var currentPair:Pair? { (currentSession.pairs.array as? [Pair])?.last }
     
-    // MARK: - Observing BackgroundTimer
-    ///receivedValue is NOT saved to database
+    // MARK: -
+    ///bubbleCell.body displays timeComponents
     @Published var timeComponents = (hr:0, min:0, sec:0) { willSet {
         self.objectWillChange.send()
     }}
@@ -76,9 +76,8 @@ extension Bubble {
         case stop
     }
     
-    ///update receivedValue only if bubble is running
-    func observeBackgroundTimer() {
-        isObservingBackgroundTimer = true
+    ///observe backgroundtimer signal. update time components only if bubble is running
+    func observeBackgroundTimer() { isObservingBackgroundTimer = true
         
         NotificationCenter.default.addObserver(forName: .backgroundTimerSignalReceived, object: nil, queue: nil) {
             

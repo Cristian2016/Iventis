@@ -14,8 +14,8 @@
             filePath = "Shared/Core Data/Bubble.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "107"
-            endingLineNumber = "107"
+            startingLineNumber = "106"
+            endingLineNumber = "106"
             landmarkName = "updateTimeComponents()"
             landmarkType = "7">
             <Actions>
@@ -33,7 +33,7 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "8BDFF837-4121-4B3C-B503-580ED695B46A"
-            shouldBeEnabled = "No"
+            shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "Yes"
             filePath = "Shared/BubbleCell.swift"
@@ -45,10 +45,9 @@
             landmarkType = "24">
             <Actions>
                <BreakpointActionProxy
-                  ActionExtensionID = "Xcode.BreakpointAction.Log">
+                  ActionExtensionID = "Xcode.BreakpointAction.Sound">
                   <ActionContent
-                     message = "bubblecellbody"
-                     conveyanceType = "0">
+                     soundName = "Basso">
                   </ActionContent>
                </BreakpointActionProxy>
             </Actions>
