@@ -111,4 +111,8 @@ extension Bubble {
         //since closure is executed on background thread, dispatch back to the main thread
         DispatchQueue.main.async { self.timeComponents = value.timeComponents() }
     }
+    
+    func updateCurrentClock(runningOnly:Bool) {
+//        print(#function, timeComponents)
+    }
 }

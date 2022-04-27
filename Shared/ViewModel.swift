@@ -13,6 +13,7 @@ class ViewModel: ObservableObject {
     private let timer = BackgroundTimer(DispatchQueue(label: "BackgroundTimer", attributes: .concurrent))
     
     func timer(_ action:BackgroundTimer.Action) {
+        print(#function, action)
         switch action {
             case .start: timer.perform(.start)
             case .pause: timer.perform(.pause)
@@ -98,5 +99,11 @@ class ViewModel: ObservableObject {
         }
         
         try? PersistenceController.shared.viewContext.save()
+    }
+    
+    func scenePhaseActive(_ bubbles:FetchedResults<Bubble>) {
+        bubbles.forEach {
+            $0.updateCurrentClock(runningOnly: true)
+        }
     }
 }

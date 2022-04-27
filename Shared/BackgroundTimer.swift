@@ -13,9 +13,7 @@ class BackgroundTimer {
     
     ///event handler called every second
     private let updateFrequency:Double = 1  /* every second */
-    
-    private(set) static var value = 0
-    
+        
     let queue:DispatchQueue
     init(_ queue:DispatchQueue) {
         self.queue = queue
@@ -68,10 +66,9 @@ class BackgroundTimer {
     // MARK: - Public
     func perform(_ action:Action) {
         switch action {
-            case .start: resume()
-            case .pause:
-                suspend()
-                BackgroundTimer.value = 0 //reset value always
+            case .start:
+                if state == .suspended { resume() } else { return }
+            case .pause: suspend()
         }
     }
 }
