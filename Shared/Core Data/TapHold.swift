@@ -9,21 +9,11 @@ import SwiftUI
 
 struct TapHold: View {
     var body: some View {
-        VStack {
-            Label {
-                VStack {
-                    Text("Timer")
-                    Text("Tap & Hold")
-                }
-                
-            } icon: {
-                Image.tapHold
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-            }
-        }
-        .font(.largeTitle)
-        .padding()
+        Image.tapHold
+            .resizable()
+            .aspectRatio(contentMode: .fit)
+            .font(.largeTitle)
+            .padding()
     }
 }
 
