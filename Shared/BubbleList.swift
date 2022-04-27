@@ -68,7 +68,7 @@ struct BubbleList: View {
                     NotificationCenter.default.post(name: .appLaunched, object: nil)
                     viewModel.timer(.start)
                     //update timeComponents for each running bubble
-                    viewModel.scenePhaseActive(bubbles)
+                    viewModel.updateCurrentClocks(bubbles)
                 case .background:
                     viewModel.timer(.pause)
                 case .inactive: //show notication center, app switcher

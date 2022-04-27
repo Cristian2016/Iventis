@@ -100,9 +100,9 @@ class ViewModel: ObservableObject {
         try? PersistenceController.shared.viewContext.save()
     }
     
-    func scenePhaseActive(_ bubbles:FetchedResults<Bubble>) {
-        bubbles.forEach {
-            $0.updateCurrentClock(runningOnly: true)
-        }
+    func updateCurrentClocks(_ bubbles:FetchedResults<Bubble>) {
+        //update currentClock only for running bubbles
+//        bubbles.forEach { $0.updateCurrentClock(runningOnly: true) }
+        PersistenceController.shared.save()
     }
 }

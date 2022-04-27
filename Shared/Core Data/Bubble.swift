@@ -113,6 +113,10 @@ extension Bubble {
     }
     
     func updateCurrentClock(runningOnly:Bool) {
-//        print(#function, timeComponents)
+        if runningOnly {
+            guard state == .running else { return }
+            let elapsedSinceStart = Float(Date().timeIntervalSince(currentPair!.start))
+            currentClock += elapsedSinceStart
+        }
     }
 }
