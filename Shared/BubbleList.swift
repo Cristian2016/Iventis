@@ -41,9 +41,8 @@ struct BubbleList: View {
     var body: some View {
         GeometryReader { geo in
             ZStack {
-                if bubbles.isEmpty {
-                    EmptyBubbleListView()
-                } else {
+                if bubbles.isEmpty { EmptyBubbleListView() }
+                else {
                     VStack {
                         Spacer(minLength: geo.safeAreaInsets.top) //distance from status bar
                         List {
@@ -56,7 +55,7 @@ struct BubbleList: View {
                     }.ignoresSafeArea()
                 }
                 
-                LeftStrip($showPalette) //it's invisible
+                LeftStrip($showPalette, isBubbleListEmpty: bubbles.isEmpty) //it's invisible
                 PaletteView($showPalette) //initially hidden
                     .environmentObject(viewModel)
                 BubbleDetail($showDetail) //initially hidden

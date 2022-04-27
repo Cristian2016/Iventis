@@ -10,26 +10,34 @@ import SwiftUI
 struct EmptyBubbleListView: View {
     var body: some View {
         VStack {
+            let width = UIScreen.main.bounds.width
             
-            VStack (alignment:.leading) {
-                Text("Empty Bubble List")
-                    .font(.largeTitle)
+            VStack (alignment:.center) {
+                HStack {
+                    Text("Empty\nBubble List").font(.system(size: width * 0.12, weight: .medium, design: .default))
+                    Spacer()
+                }
+                .offset(x: 20, y: 0)
+                
                 HStack {
                     Image(systemName: "arrow.right.circle.fill")
-                        .font(.system(size: UIScreen.main.bounds.size.width * 0.25))
+                        .font(.system(size: width * 0.25))
                         .foregroundColor(.green)
                     VStack (alignment:.leading) {
                         Text("Swipe right")
-                            .font(.system(size: UIScreen.main.bounds.size.width * 0.07, weight: .medium, design: .monospaced))
+                            .font(.system(size: width * 0.08, weight: .medium, design: .monospaced))
                             .foregroundColor(.green)
-                        Text("from Left Screen Edge")
-                            .foregroundColor(.secondary)
-                        Text("to add a Bubble")
-                            .foregroundColor(.secondary)
+                        VStack (alignment:.leading) {
+                            Text("from Left Screen Edge")
+                            Text("[Yellow Strip]")
+                            Text("to add a Bubble")
+                        }
+                        .foregroundColor(.secondary)
                     }
                    
                 }
             }
+            .padding(10)
         }
     }
 }

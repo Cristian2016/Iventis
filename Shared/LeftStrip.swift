@@ -10,11 +10,12 @@ import SwiftUI
 ///user swipes right from screen edge and Palette is presented
 struct LeftStrip: View {
     @Binding var showPalette:Bool
+    let isBubbleListEmpty:Bool
     
     // MARK: -
     var body: some View {
         HStack {
-            Rectangle().fill(Color.clear).frame(width: 20)
+            Rectangle().fill(isBubbleListEmpty ? Color.yellow : .clear).frame(width: 20)
                 .contentShape(Rectangle()) //use if color clear otherwise gesture will not work
             Spacer()
         }
@@ -28,8 +29,9 @@ struct LeftStrip: View {
     }
     
     // MARK: -
-    init(_ showPalette:Binding<Bool>) {
+    init(_ showPalette:Binding<Bool>, isBubbleListEmpty:Bool) {
         _showPalette = .init(projectedValue: showPalette)
+        self.isBubbleListEmpty = isBubbleListEmpty
     }
 }
 
