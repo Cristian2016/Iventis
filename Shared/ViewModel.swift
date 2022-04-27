@@ -10,9 +10,14 @@ import SwiftUI
 
 
 class ViewModel: ObservableObject {
+    init() {
+        let request = Bubble.fetchRequest()
+        let bubbles = try? PersistenceController.shared.viewContext.fetch(request)
+        bubbles?.forEach { $0.observeAppLaunch(.start) }
+    }
     private let timer = BackgroundTimer(DispatchQueue(label: "BackgroundTimer", attributes: .concurrent))
     
-    func timer(_ action:BackgroundTimer.Action) {
+    func backgroundTimer(_ action:BackgroundTimer.Action) {
         switch action {
             case .start: timer.perform(.start)
             case .pause: timer.perform(.pause)

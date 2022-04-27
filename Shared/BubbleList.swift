@@ -64,12 +64,11 @@ struct BubbleList: View {
         .onChange(of: scenePhase, perform: {
             switch $0 {
                 case .active:
-                    NotificationCenter.default.post(name: .appLaunched, object: nil)
-                    viewModel.timer(.start)
+                    viewModel.backgroundTimer(.start)
                     //update timeComponents for each running bubble
                     viewModel.updateCurrentClocks(bubbles)
                 case .background:
-                    viewModel.timer(.pause)
+                    viewModel.backgroundTimer(.pause)
                 case .inactive: //show notication center, app switcher
                    break
                 @unknown default: fatalError()

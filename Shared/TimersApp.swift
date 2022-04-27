@@ -18,8 +18,6 @@ struct TimersApp: App {
         }
     }
     
-    //detect app launch
-    init() {
-        NotificationCenter.default.post(name: .appLaunched, object: nil)
-    }
+    //detect app launch to set bubble.timeComponents to bubble.currentClock
+    init() { NotificationCenter.default.post(name: .appLaunched, object: nil) }
 }

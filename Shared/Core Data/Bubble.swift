@@ -86,13 +86,13 @@ extension Bubble {
         }
     }
     
-    ///set bubble.timeComponents
+    ///set bubble.timeComponents. called [once] on app launch
     func observeAppLaunch(_ observe:ObserveState) {
         switch observe {
             case .start:
                 NotificationCenter.default.addObserver(forName: .appLaunched, object: nil, queue: nil) { [weak self] notification in
                     guard let self = self else { return }
-                    
+                                        
                     //time to set timeComponents to an initial value. forget about (hr:0, min:0, sec:0)
                     let components = self.currentClock.timeComponents()
                     DispatchQueue.main.async { self.timeComponents = components }
