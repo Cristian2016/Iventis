@@ -11,7 +11,7 @@ struct EmptyBubbleListView: View {
     var body: some View {
         VStack (alignment:.center, spacing: 10) {
             HStack {
-                Text("How to\nCreate New Bubble").font(.title)
+                Text("How to\nCreate Bubbles").font(.title)
                     .multilineTextAlignment(.center)
             }
             VStack (alignment:.leading, spacing: 10) {
@@ -34,11 +34,17 @@ struct EmptyBubbleListView: View {
                             .font(.largeTitle)
                             .foregroundColor(.green)
                         VStack (alignment:.leading) {
-                            Text("Tap")
-                                .font(.title)
-                                .foregroundColor(.green)
-                            Text("for Stopwatch")
-                                .foregroundColor(.secondary)
+                            HStack (alignment:.lastTextBaseline) {
+                                Text("Tap")
+                                    .font(.title)
+                                    .foregroundColor(.green)
+                                Text("any Colored Circle")
+                                    .foregroundColor(.secondary)
+                            }
+                            HStack {
+                                Text("for Stopwatch")
+                                Image(systemName: "stopwatch")
+                            }.foregroundColor(.secondary)
                         }
                     }
                     HStack (alignment:.top) {
@@ -56,8 +62,10 @@ struct EmptyBubbleListView: View {
                             Text("Tap & Hold")
                                 .font(.title)
                                 .foregroundColor(.green)
-                            Text("for Timer")
-                                .foregroundColor(.secondary)
+                            HStack {
+                                Text("for Timer")
+                                Image(systemName: "timer")
+                            }.foregroundColor(.secondary)
                         }
                     }
                 }
