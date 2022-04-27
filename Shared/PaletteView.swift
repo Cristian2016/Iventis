@@ -26,6 +26,12 @@ struct PaletteView: View {
                 background
                 circles
             }}
+        .gesture(DragGesture(minimumDistance: 0, coordinateSpace: .global)
+            .onEnded { _ in
+                withAnimation {
+                    showPalette = false
+                }
+            })
     }
     
     // MARK: - Legoes
