@@ -9,36 +9,63 @@ import SwiftUI
 
 struct EmptyBubbleListView: View {
     var body: some View {
-        VStack {
-            let width = UIScreen.main.bounds.width
-            
-            VStack (alignment:.center) {
-                HStack {
-                    Text("Empty\nBubble List").font(.system(size: width * 0.12, weight: .medium, design: .default))
-                    Spacer()
-                }
-                .offset(x: 20, y: 0)
-                
-                HStack {
+        VStack (alignment:.center, spacing: 10) {
+            HStack {
+                Text("How to\nCreate New Bubble").font(.title)
+                    .multilineTextAlignment(.center)
+            }
+            VStack (alignment:.leading, spacing: 10) {
+                HStack (alignment:.top) {
                     Image(systemName: "arrow.right.circle.fill")
-                        .font(.system(size: width * 0.25))
+                        .font(.largeTitle)
                         .foregroundColor(.green)
                     VStack (alignment:.leading) {
                         Text("Swipe right")
-                            .font(.system(size: width * 0.08, weight: .medium, design: .monospaced))
+                            .font(.title)
+                            .foregroundColor(.green)
+                        Text("on the Yellow Strip")
+                            .foregroundColor(.secondary)
+                    }
+                }
+                
+                VStack (alignment:.leading) {
+                    HStack (alignment:.top) {
+                        Image(systemName: "circle.fill")
+                            .font(.largeTitle)
                             .foregroundColor(.green)
                         VStack (alignment:.leading) {
-                            Text("from Left Screen Edge")
-                            Text("[Yellow Strip]")
-                            Text("to add a Bubble")
+                            Text("Tap")
+                                .font(.title)
+                                .foregroundColor(.green)
+                            Text("for Stopwatch")
+                                .foregroundColor(.secondary)
                         }
-                        .foregroundColor(.secondary)
                     }
-                   
+                    HStack (alignment:.top) {
+                        ZStack {
+                            Image(systemName: "circle.fill")
+                                .font(.largeTitle)
+                                .foregroundColor(.green)
+                            Image(systemName: "clock.fill")
+                                .font(.body)
+                                .foregroundColor(.white)
+                                .offset(x: 0, y: -5)
+                        }
+                        
+                        VStack (alignment:.leading) {
+                            Text("Tap & Hold")
+                                .font(.title)
+                                .foregroundColor(.green)
+                            Text("for Timer")
+                                .foregroundColor(.secondary)
+                        }
+                    }
                 }
+                
             }
-            .padding(10)
+            
         }
+        .padding()
     }
 }
 

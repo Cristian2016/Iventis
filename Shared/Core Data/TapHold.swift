@@ -9,11 +9,16 @@ import SwiftUI
 
 struct TapHold: View {
     var body: some View {
-        Image.tapHold
-            .resizable()
-            .aspectRatio(contentMode: .fit)
-            .font(.largeTitle)
-            .padding()
+        let width = UIScreen.main.bounds.width
+        ZStack {
+            Image(systemName: "circle.fill")
+                .font(.system(size: width * 0.2))
+            Image(systemName: "clock.fill")
+                .font(.system(size: width * 0.05))
+                .foregroundColor(.white)
+                .offset(x: 0, y: -20)
+        }
+        .foregroundColor(.green)
     }
 }
 
