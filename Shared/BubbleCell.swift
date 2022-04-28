@@ -65,7 +65,7 @@ struct BubbleCell: View {
                 .foregroundColor(colors.sec)
                 .onTapGesture { viewModel.toggle(bubble) }
                 .onLongPressGesture {
-                    print("end curent session")
+                    viewModel.endSession(bubble)
                 }
         }
     }

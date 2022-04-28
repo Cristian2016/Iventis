@@ -60,10 +60,14 @@ class ViewModel: ObservableObject {
         try? viewContext.save()
     }
     
+    // FIXME: ⚠️ not complete!
     func endSession(_ bubble:Bubble) {
-        let viewContext = PersistenceController.shared.viewContext
+        if bubble.state == .brandNew { return }
+        bubble.currentClock = bubble.initialClock
+        bubble.timeComponents = bubble.currentClock.timeComponents()
+        bubble.lastSession.isEnded = true
         
-        try? viewContext.save()
+        try? PersistenceController.shared.viewContext.save()
     }
     
     // MARK: - Testing Only
@@ -85,12 +89,13 @@ class ViewModel: ObservableObject {
         
         switch bubble.state {
             case .brandNew: /* changes to .running */
+                print(bubble.state)
                 //create first session and add first pair to the session
-                let firstSession = Session(context: PersistenceController.shared.viewContext)
-                let firstPair = Pair(context: PersistenceController.shared.viewContext)
-                firstPair.start = Date()
-                bubble.addToSessions(firstSession)
-                firstSession.addToPairs(firstPair)
+                let newSession = Session(context: PersistenceController.shared.viewContext)
+                let newPair = Pair(context: PersistenceController.shared.viewContext)
+                newPair.start = Date()
+                bubble.addToSessions(newSession)
+                newSession.addToPairs(newPair)
                                 
             case .paused:  /* changes to running */
                 //create new pair, add it to currentSession

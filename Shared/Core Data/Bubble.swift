@@ -21,7 +21,7 @@ public class Bubble: NSManagedObject {
     var state:State {
         if kind != .stopwatch && currentClock <= 0 { return .finished }
         else {
-            if sessions_.isEmpty { return .brandNew }
+            if sessions_.isEmpty || lastSession.isEnded { return .brandNew }
             else {
                 if lastPair!.pause == nil { return .running }
                 else { return .paused }
