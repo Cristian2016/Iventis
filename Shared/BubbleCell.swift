@@ -61,12 +61,9 @@ struct BubbleCell: View {
             .onTapGesture(count: 1) {
                 showDetail = true
             }
-            ZStack {
-                secondsComponent
-                    .foregroundColor(colors.sec)
-                    .onTapGesture { viewModel.toggle(bubble) }
-                if bubble.state != .running { pauseLine }
-            }
+            secondsComponent
+                .foregroundColor(colors.sec)
+                .onTapGesture { viewModel.toggle(bubble) }
         }
     }
     
@@ -107,6 +104,7 @@ struct BubbleCell: View {
                 Circle()
                     .frame(width: BubbleCell.edge, height: BubbleCell.edge)
                     .padding(padding)
+                    .overlay(pauseLine)
                 Text(String(bubble.timeComponents.sec))
                     .font(.system(size: fontSize))
                     .foregroundColor(.white)
@@ -114,10 +112,16 @@ struct BubbleCell: View {
         }
     }
     
+    @ViewBuilder
     private var pauseLine:some View {
-        Rectangle()
-            .frame(height: 4)
-            .foregroundColor(.orange)
+        if bubble.state != .running {
+            Rectangle()
+                .frame(height: 14)
+                .foregroundColor(.white.opacity(0.4))
+                .padding()
+        } else {
+            EmptyView()
+        }
     }
     
     // MARK: -
