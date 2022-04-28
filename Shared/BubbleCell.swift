@@ -64,6 +64,7 @@ struct BubbleCell: View {
             secondsComponent
                 .foregroundColor(colors.sec)
                 .onTapGesture { viewModel.toggle(bubble) }
+                .onLongPressGesture { viewModel.reset(bubble) }
         }
     }
     

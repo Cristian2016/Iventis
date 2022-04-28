@@ -11,5 +11,7 @@ import CoreData
 
 
 public class Session: NSManagedObject {
-
+    deinit {
+        print("session deinit")
+    }
 }

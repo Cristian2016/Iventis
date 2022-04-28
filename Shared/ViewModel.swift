@@ -52,10 +52,13 @@ class ViewModel: ObservableObject {
     }
     
     func reset(_ bubble:Bubble) {
-        let backgroundContext = PersistenceController.shared.backgroundContext
+        let viewContext = PersistenceController.shared.viewContext
         bubble.created = Date()
         bubble.currentClock = bubble.initialClock
-        try? backgroundContext.save()
+        bubble.sessions?.forEach {
+            viewContext.delete($0 as! Session)
+        }
+        try? viewContext.save()
     }
     
     // MARK: - Testing Only
