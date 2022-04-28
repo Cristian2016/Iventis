@@ -112,7 +112,7 @@ class ViewModel: ObservableObject {
                 //compute and store currentClock
                 bubble.currentClock += currentPair!.duration
                 
-                bubble.hundredths = NumberFormatter.bubbleStyle.string(from: NSNumber(value: bubble.currentClock)) ?? "no"
+                bubble.hundredths = bubble.currentClock.hundredthsFromCurrentClock
                 
             case .finished: return
         }

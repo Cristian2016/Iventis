@@ -132,3 +132,11 @@ extension NumberFormatter {
         return formatter
     }()
 }
+
+extension Float {
+    var hundredthsFromCurrentClock:String {
+        var string = NumberFormatter.bubbleStyle.string(from: NSNumber(value: self))!
+        string.removeFirst()
+        return string
+    }
+}

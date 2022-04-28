@@ -43,7 +43,7 @@ public class Bubble: NSManagedObject {
     @Published var timeComponents = (hr:0, min:0, sec:0) { willSet {
         self.objectWillChange.send()
     }}
-    @Published var hundredths:String = ""
+    @Published var hundredths:String = "00"
     
     private(set) var isObservingBackgroundTimer = false
     
@@ -100,7 +100,10 @@ extension Bubble {
                                                             
                     //time to set timeComponents to an initial value. forget about (hr:0, min:0, sec:0)
                     let components = self.currentClock.timeComponents()
-                    DispatchQueue.main.async { self.timeComponents = components }
+                    DispatchQueue.main.async {
+                        self.timeComponents = components
+                        self.hundredths = self.currentClock.hundredthsFromCurrentClock
+                    }
                 }
             default: NotificationCenter.default.removeObserver(self)
         }

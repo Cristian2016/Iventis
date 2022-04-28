@@ -61,16 +61,19 @@ struct BubbleCell: View {
             .onTapGesture(count: 1) {
                 showDetail = true
             }
-            secondsComponent
-                .foregroundColor(colors.sec)
-                .onTapGesture {
-                    UserFeedback.triggerSingleHaptic(.heavy)
-                    viewModel.toggle(bubble)
-                }
-                .onLongPressGesture {
-                    UserFeedback.triggerDoubleHaptic(.heavy)
-                    viewModel.endSession(bubble)
-                }
+            ZStack (alignment: .trailing) {
+                secondsComponent
+                    .foregroundColor(colors.sec)
+                    .onTapGesture {
+                        UserFeedback.triggerSingleHaptic(.heavy)
+                        viewModel.toggle(bubble)
+                    }
+                    .onLongPressGesture {
+                        UserFeedback.triggerDoubleHaptic(.heavy)
+                        viewModel.endSession(bubble)
+                    }
+                if bubble.state != .running { hundredthsComponent }
+            }
         }
     }
     
@@ -111,21 +114,24 @@ struct BubbleCell: View {
                 Circle()
                     .frame(width: BubbleCell.edge, height: BubbleCell.edge)
                     .padding(padding)
-                    .overlay(pauseLine)
+//                    .overlay(pauseLine)
                 Text(String(bubble.timeComponents.sec))
                     .font(.system(size: fontSize))
                     .foregroundColor(.white)
-                if bubble.state == .paused { hundredthsComponent }
             }
         }
     }
     
     private var hundredthsComponent:some View {
-        Text(bubble.hundredths)
-            .background(Circle().fill(Color.black).padding(-6))
-            .offset(x: 50, y: 50)
-            .foregroundColor(.white)
-            .font(.system(size: 22, weight: .medium, design: .default))
+        VStack {
+            Spacer()
+            Text(bubble.hundredths)
+                .background(Circle().fill(bubbleColors(bubble.color).sec).padding(-8))
+                .foregroundColor(.white)
+                .font(.system(size: 22, weight: .medium, design: .default))
+                .offset(x: -3, y: -6)
+        }
+        
     }
     
     
