@@ -168,7 +168,6 @@
 		1F5F4A4228093FAC00AF3442 = {
 			isa = PBXGroup;
 			children = (
-				1FCF0C652816F3F600AA1FAA /* EmptyBubbleListView.swift */,
 				1F5F4A92280941D900AF3442 /* Timers (iOS).entitlements */,
 				1F5F4A91280941B700AF3442 /* WidgetsExtension.entitlements */,
 				1F5F4A4728093FAD00AF3442 /* Shared */,
@@ -254,6 +253,7 @@
 		1F97B7E02809B331002FFCA3 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				1FCF0C652816F3F600AA1FAA /* EmptyBubbleListView.swift */,
 				1F5F4A4D28093FAF00AF3442 /* Assets.xcassets */,
 				1F97B7DC2809B311002FFCA3 /* Colors.swift */,
 			);

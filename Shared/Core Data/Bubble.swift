@@ -23,7 +23,7 @@ public class Bubble: NSManagedObject {
         else {
             if sessions_.isEmpty { return .brandNew }
             else {
-                if currentPair!.pause == nil { return .running }
+                if lastPair!.pause == nil { return .running }
                 else { return .paused }
             }
         }
@@ -33,9 +33,10 @@ public class Bubble: NSManagedObject {
         sessions?.array as? [Session] ?? []
     }
     
-    var currentSession:Session { sessions_.last! }
+    ///lastSession is not always currentSession
+    var lastSession:Session { sessions_.last! }
     
-    var currentPair:Pair? { (currentSession.pairs.array as? [Pair])?.last }
+    var lastPair:Pair? { (lastSession.pairs.array as? [Pair])?.last }
     
     // MARK: -
     ///bubbleCell.body displays timeComponents
@@ -109,7 +110,7 @@ extension Bubble {
         if state != .running { return }
         
         //delta is the elapsed duration between pair.start and signal dates
-        let Δ = Date().timeIntervalSince(currentPair!.start)
+        let Δ = Date().timeIntervalSince(lastPair!.start)
         let value = currentClock + Float(Δ)
                             
         //since closure is executed on background thread, dispatch back to the main thread
@@ -119,7 +120,7 @@ extension Bubble {
     func updateCurrentClock(runningOnly:Bool) {
         if runningOnly {
             guard state == .running else { return }
-            let elapsedSinceStart = Float(Date().timeIntervalSince(currentPair!.start))
+            let elapsedSinceStart = Float(Date().timeIntervalSince(lastPair!.start))
             currentClock += elapsedSinceStart
         }
     }

@@ -60,6 +60,12 @@ class ViewModel: ObservableObject {
         try? viewContext.save()
     }
     
+    func endSession(_ bubble:Bubble) {
+        let viewContext = PersistenceController.shared.viewContext
+        
+        try? viewContext.save()
+    }
+    
     // MARK: - Testing Only
     func makeBubbles() {
         PersistenceController.shared.backgroundContext.perform {
@@ -90,10 +96,10 @@ class ViewModel: ObservableObject {
                 //create new pair, add it to currentSession
                 let newPair = Pair(context: PersistenceController.shared.viewContext)
                 newPair.start = Date()
-                bubble.currentSession.addToPairs(newPair)
+                bubble.lastSession.addToPairs(newPair)
                 
             case .running: /* changes to .paused */
-                let currentPair = bubble.currentPair
+                let currentPair = bubble.lastPair
                 currentPair?.pause = Date()
                 //compute duration
                 currentPair!.duration = Float(currentPair!.pause!.timeIntervalSince(currentPair!.start))
