@@ -55,9 +55,8 @@ class ViewModel: ObservableObject {
         let viewContext = PersistenceController.shared.viewContext
         bubble.created = Date()
         bubble.currentClock = bubble.initialClock
-        bubble.sessions?.forEach {
-            viewContext.delete($0 as! Session)
-        }
+        bubble.timeComponents = bubble.currentClock.timeComponents()
+        bubble.sessions?.forEach { viewContext.delete($0 as! Session) }
         try? viewContext.save()
     }
     

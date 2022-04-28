@@ -11,5 +11,7 @@ import CoreData
 
 
 public class Pair: NSManagedObject {
-
+    deinit {
+//        print("pair deinit")
+    }
 }

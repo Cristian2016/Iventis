@@ -101,6 +101,10 @@ extension Bubble {
         }
     }
     
+    private func setTimeComponentsToBrandNewState() {
+        
+    }
+    
     private func updateTimeComponents() {
         if state != .running { return }
         
