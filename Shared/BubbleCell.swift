@@ -115,14 +115,17 @@ struct BubbleCell: View {
                 Text(String(bubble.timeComponents.sec))
                     .font(.system(size: fontSize))
                     .foregroundColor(.white)
-                if bubble.state == .paused {
-                    Text(bubble.hundredths)
-                        .offset(x: 0, y: 40)
-                        .foregroundColor(.white)
-                        .font(.system(size: 22, weight: .medium, design: .default))
-                }
+                if bubble.state == .paused { hundredthsComponent }
             }
         }
+    }
+    
+    private var hundredthsComponent:some View {
+        Text(bubble.hundredths)
+            .background(Circle().fill(Color.black).padding(-6))
+            .offset(x: 50, y: 50)
+            .foregroundColor(.white)
+            .font(.system(size: 22, weight: .medium, design: .default))
     }
     
     
