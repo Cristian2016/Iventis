@@ -115,9 +115,16 @@ struct BubbleCell: View {
                 Text(String(bubble.timeComponents.sec))
                     .font(.system(size: fontSize))
                     .foregroundColor(.white)
+                if bubble.state == .paused {
+                    Text(bubble.hundredths)
+                        .offset(x: 0, y: 40)
+                        .foregroundColor(.white)
+                        .font(.system(size: 22, weight: .medium, design: .default))
+                }
             }
         }
     }
+    
     
     @ViewBuilder
     private var pauseLine:some View {

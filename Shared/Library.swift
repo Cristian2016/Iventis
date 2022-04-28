@@ -121,3 +121,14 @@ public struct UserFeedback {
         }
     }
 }
+
+extension NumberFormatter {
+    static let bubbleStyle:NumberFormatter = {
+        let formatter = NumberFormatter()
+        formatter.locale = Locale(identifier: "us_US")
+        formatter.minimumFractionDigits = 2
+        formatter.maximumFractionDigits = 2
+        formatter.maximumIntegerDigits = 0
+        return formatter
+    }()
+}

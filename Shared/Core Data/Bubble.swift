@@ -43,6 +43,7 @@ public class Bubble: NSManagedObject {
     @Published var timeComponents = (hr:0, min:0, sec:0) { willSet {
         self.objectWillChange.send()
     }}
+    @Published var hundredths:String = ""
     
     private(set) var isObservingBackgroundTimer = false
     
