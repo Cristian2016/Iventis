@@ -63,8 +63,12 @@ struct BubbleCell: View {
             }
             secondsComponent
                 .foregroundColor(colors.sec)
-                .onTapGesture { viewModel.toggle(bubble) }
+                .onTapGesture {
+                    UserFeedback.triggerSingleHaptic(.heavy)
+                    viewModel.toggle(bubble)
+                }
                 .onLongPressGesture {
+                    UserFeedback.triggerDoubleHaptic(.heavy)
                     viewModel.endSession(bubble)
                 }
         }

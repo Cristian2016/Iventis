@@ -95,3 +95,29 @@ extension UserDefaults {
         return rank
     }
 }
+
+public struct UserFeedback {
+    public enum Kind {
+        case haptic
+        case sound
+        case visual
+    }
+    
+    public static func triggerSingleHaptic(_ style:UIImpactFeedbackGenerator.FeedbackStyle) {
+        let haptic = UIImpactFeedbackGenerator(style: style)
+        haptic.prepare()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.02) {
+            haptic.impactOccurred()
+        }
+    }
+    
+    public static func triggerDoubleHaptic(_ style:UIImpactFeedbackGenerator.FeedbackStyle) {
+        UserFeedback.triggerSingleHaptic(style)
+        
+        let second = UIImpactFeedbackGenerator(style: .heavy)
+        second.prepare()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.15) {
+            second.impactOccurred()
+        }
+    }
+}
