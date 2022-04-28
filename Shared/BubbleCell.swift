@@ -42,6 +42,7 @@ struct BubbleCell: View {
     ///component padding
     private let padding = CGFloat(0)
     
+    // MARK: -
     var body: some View {
         let colors = bubbleColors(bubble.color)
         
@@ -60,13 +61,16 @@ struct BubbleCell: View {
             .onTapGesture(count: 1) {
                 showDetail = true
             }
-            
-            secondsComponent
-                .foregroundColor(colors.sec)
-                .onTapGesture { viewModel.toggle(bubble) }
+            ZStack {
+                secondsComponent
+                    .foregroundColor(colors.sec)
+                    .onTapGesture { viewModel.toggle(bubble) }
+                if bubble.state != .running { pauseLine }
+            }
         }
     }
     
+    // MARK: -
     private var hoursComponent:some View {
         HStack {
             ZStack {
@@ -110,6 +114,13 @@ struct BubbleCell: View {
         }
     }
     
+    private var pauseLine:some View {
+        Rectangle()
+            .frame(height: 4)
+            .foregroundColor(.orange)
+    }
+    
+    // MARK: -
     var tapGesture: some Gesture {
         TapGesture(count: 2)
             .onEnded {

@@ -9,18 +9,15 @@ import SwiftUI
 
 struct EmptyBubbleListView: View {
     var body: some View {
-        VStack (alignment:.center, spacing: 10) {
+        VStack (alignment:.center, spacing: 20) {
             HStack {
                 Text("How to\nCreate Bubbles").font(.title)
                     .multilineTextAlignment(.center)
             }
-            VStack (alignment:.leading, spacing: 10) {
+            VStack (alignment:.leading, spacing: 15) {
                 swipeRight
-                
-                VStack (alignment:.leading) {
-                    tap
-                    tapHold
-                }
+                tap
+                tapHold
                 
             }
             
@@ -35,7 +32,7 @@ struct EmptyBubbleListView: View {
                 .foregroundColor(.green)
             VStack (alignment:.leading) {
                 Text("Swipe right")
-                    .font(.title)
+                    .font(.system(.title2, design: .monospaced))
                     .foregroundColor(.green)
                 Text("on the Yellow Strip")
                     .foregroundColor(.secondary)
@@ -51,7 +48,7 @@ struct EmptyBubbleListView: View {
             VStack (alignment:.leading) {
                 HStack (alignment:.lastTextBaseline) {
                     Text("Tap")
-                        .font(.title)
+                        .font(.system(.title2, design: .monospaced))
                         .foregroundColor(.green)
                     Text("any Color")
                         .foregroundColor(.secondary)
@@ -78,7 +75,7 @@ struct EmptyBubbleListView: View {
             
             VStack (alignment:.leading) {
                 Text("Tap & Hold")
-                    .font(.title)
+                    .font(.system(.title2, design: .monospaced))
                     .foregroundColor(.green)
                 HStack {
                     Text("for Timer")
