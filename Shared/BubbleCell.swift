@@ -42,25 +42,34 @@ struct BubbleCell: View {
     ///component padding
     private let padding = CGFloat(0)
     
+    private var minOpacity:Double {
+        bubble.timeComponentsString.min > "0" || bubble.timeComponentsString.hr > "0" ? 1 : 0.001
+    }
+    private var hrOpacity:Double { bubble.timeComponentsString.hr > "0" ? 1 : 0.001 }
+    
+    
+    
     // MARK: -
     var body: some View {
         let colors = bubbleColors(bubble.color)
         
         ZStack {
-            ZStack {
                 hoursComponent
-                    .foregroundColor(colors.sec)
-                    .opacity(bubble.timeComponentsString.hr > "0" ? 1 : 0.001)
+                    .foregroundColor(colors.hr)
+                    .opacity(hrOpacity)
+                    .onTapGesture(count: 2, perform: {
+                        print("edit duration")
+                    })
+                    .onTapGesture(count: 1) {
+                        print("add note")
+                    }
                 minutesComponent
                     .foregroundColor(colors.min)
-                    .opacity(bubble.timeComponentsString.min > "0" || bubble.timeComponentsString.hr > "0" ? 1 : 0.001)
-            }
-            .onTapGesture(count: 2, perform: {
-                print("double tap")
-            })
-            .onTapGesture(count: 1) {
-                showDetail = true
-            }
+                    .opacity(minOpacity)
+                    .onTapGesture(count: 1) {
+                        showDetail = true
+                        print("add note")
+                    }
             ZStack (alignment: .trailing) {
                 secondsComponent
                     .foregroundColor(colors.sec)

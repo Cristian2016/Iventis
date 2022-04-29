@@ -40,7 +40,7 @@ struct BubbleList: View {
                 if bubbles.isEmpty { EmptyBubbleListView() }
                 else {
                     VStack {
-                        Spacer(minLength: geo.safeAreaInsets.top) //distance from status bar
+                        Spacer(minLength: geo.safeAreaInsets.top * 0.25) //distance from status bar
                         List {
                             ForEach(bubbles) { section in
                                 Section {
@@ -49,10 +49,12 @@ struct BubbleList: View {
                                             .environmentObject(viewModel)
                                     }
                                 } header: { headerTitle(for: section.id.description) }
-                                
-                            }.listRowSeparator(.hidden)
-                        }.listStyle(.plain)
-                    }.ignoresSafeArea()
+                            }
+                            .listRowSeparator(.hidden)
+                        }
+                        .listStyle(.plain)
+                    }
+                    .ignoresSafeArea()
                 }
                 LeftStrip($showPalette, isBubbleListEmpty: bubbles.isEmpty) //it's invisible
                 PaletteView($showPalette) //initially hidden
