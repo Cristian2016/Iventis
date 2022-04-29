@@ -40,21 +40,17 @@ struct BubbleList: View {
             else {
                 VStack {
                     Spacer(minLength: 20) //distance from status bar
-                    ScrollViewReader { proxy in
-                        List {
-                            ForEach(bubbles) { section in
-                                Section {
-                                    ForEach (section) {
-                                        BubbleCell($0, $showDetailView)
-                                            .environmentObject(viewModel)
-                                    }
-                                } header: { headerTitle(for: section.id.description) }
-                            } //ForEach
-                            .listRowSeparator(.hidden)
-                            
-                        } //List
-                        
-                    } //ScrollViewReader
+                    List {
+                        ForEach(bubbles) { section in
+                            Section {
+                                ForEach (section) {
+                                    BubbleCell($0, $showDetailView)
+                                        .environmentObject(viewModel)
+                                }
+                            } header: { headerTitle(for: section.id.description) }
+                        } //ForEach
+                        .listRowSeparator(.hidden)
+                    } //List
                     .listStyle(.grouped)
                 } //VStack
                 .ignoresSafeArea()

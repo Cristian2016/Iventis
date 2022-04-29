@@ -64,7 +64,9 @@ struct BubbleCell: View {
                 minutesView
                     .foregroundColor(colors.min)
                     .opacity(minOpacity)
-                    .onTapGesture { showDetailView = true }
+                    .onTapGesture {
+                        showDetailView = true
+                    }
                 secondsView
                     .foregroundColor(colors.sec)
                     .onTapGesture {
@@ -198,3 +200,14 @@ struct BubbleCell: View {
 //        BubbleCell(PersistenceController.preview.)
 //    }
 //}
+
+struct CellRank:PreferenceKey {
+    
+    typealias Value = Int
+    
+    static var defaultValue = 0
+    
+    static func reduce(value: inout Int, nextValue: () -> Int) {
+        value = nextValue()
+    }
+}
