@@ -105,7 +105,7 @@ struct ShadowModifier:ViewModifier {
         if isStandard {
             content.shadow(radius: 2)
         } else {
-            content.shadow(color: .black.opacity(0.15), radius: 2)
+            content.shadow(color: .black.opacity(0.18), radius: 2)
         }
     }
 }
