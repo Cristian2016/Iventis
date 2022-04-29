@@ -47,7 +47,13 @@ class ViewModel: ObservableObject {
     
     func delete(_ bubble:Bubble) {
         let viewContext = PersistenceController.shared.viewContext
-        viewContext.delete(bubble)
+        
+        let request = Bubble.fetchRequest()
+        let count = try? viewContext.count(for: request)
+        if count! > 1 {
+            viewContext.delete(bubble)
+        } else { return }
+        
         try? viewContext.save()
     }
     
@@ -72,19 +78,6 @@ class ViewModel: ObservableObject {
         bubble.hundredths = "00"
         
         try? PersistenceController.shared.viewContext.save()
-    }
-    
-    // MARK: - Testing Only
-    func makeBubbles() {
-        PersistenceController.shared.backgroundContext.perform {
-            for _ in 0..<3 {
-                let newBubble = Bubble(context: PersistenceController.shared.backgroundContext)
-                newBubble.created = Date()
-                newBubble.currentClock = 0
-            }
-            
-            try? PersistenceController.shared.backgroundContext.save()
-        }
     }
     
     // MARK: -

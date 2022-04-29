@@ -29,7 +29,7 @@ struct BubbleCell: View {
         if !bubble.isObservingBackgroundTimer { bubble.observeBackgroundTimer() }
     }
     
-    static let dic:[CGFloat:CGFloat] = [ /* 12mini */728:140, /* 8 */667:150,  /* ipdo */568:125,  /* 13 pro max */926:163,  /* 13 pro */844:147,  /* 11 pro max */896:158, 812:140,  /* 8max */736:167]
+    static let dic:[CGFloat:CGFloat] = [ /* 12mini */728:140, /* 8 */667:150,  /* ipdo */568:125,  /* 13 pro max */926:163,  /* 13 pro */844:147,  /* 11 pro max */896:158, 812:135,  /* 8max */736:167]
     private let spacing:CGFloat = -30
     private let fontSize = Ratio.bubbleToFontSize * UIScreen.size.width * 0.85
     
@@ -80,13 +80,13 @@ struct BubbleCell: View {
                 viewModel.togglePin(bubble)
             } label: {
                 Label {
-                    Text("Pin")
+                    Text(bubble.isPinned ? "Unpin" : "Pin")
                 } icon: {
-                    Image(systemName: "pin")
+                    Image(systemName: bubble.isPinned ? "pin.slash.fill" : "pin.fill")
                 }
 
             }
-            .tint(.orange)
+            .tint(bubble.isPinned ? .gray : .pink)
         }
         .swipeActions(edge: .trailing, allowsFullSwipe: true) {
             Button {

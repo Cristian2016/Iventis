@@ -15,22 +15,18 @@ struct BubbleList: View {
     
     // MARK: -
     @StateObject private var viewModel = ViewModel()
-    @FetchRequest(entity: Bubble.entity(), sortDescriptors: [NSSortDescriptor(key: "rank", ascending: false)])
-    private var bubbles:FetchedResults<Bubble>
-    @State private var isActive = true
     
-    @State var showDetail = false
-    @State var showPalette = false
+    @SectionedFetchRequest<Bool, Bubble>(entity: Bubble.entity(),
+                                         sectionIdentifier: \.isPinned,
+                                         sortDescriptors: descriptors,
+                                         predicate: nil,
+                                         animation: .default)
+    private var bubbles: SectionedFetchResults<Bool, Bubble>
     
     // MARK: -
-    static var formatter:DateFormatter = {
-        let formatter = DateFormatter()
-        formatter.locale = Locale.current
-        //        formatter.locale = Locale(identifier: "us")
-        formatter.dateStyle = .short
-        formatter.timeStyle = .short
-        return formatter
-    }()
+    @State private var isActive = true
+    @State var showDetail = false
+    @State var showPalette = false
     
     // MARK: -
     init() {
@@ -46,14 +42,18 @@ struct BubbleList: View {
                     VStack {
                         Spacer(minLength: geo.safeAreaInsets.top) //distance from status bar
                         List {
-                            ForEach(bubbles) {
-                                BubbleCell($0, $showDetail).environmentObject(viewModel)
-                            }
-                            .listRowSeparator(.hidden)
+                            ForEach(bubbles) { section in
+                                Section {
+                                    ForEach (section) {
+                                        BubbleCell($0, $showDetail)
+                                            .environmentObject(viewModel)
+                                    }
+                                } header: { headerTitle(for: section.id.description) }
+                                
+                            }.listRowSeparator(.hidden)
                         }.listStyle(.plain)
                     }.ignoresSafeArea()
                 }
-                
                 LeftStrip($showPalette, isBubbleListEmpty: bubbles.isEmpty) //it's invisible
                 PaletteView($showPalette) //initially hidden
                     .environmentObject(viewModel)
@@ -65,7 +65,7 @@ struct BubbleList: View {
                 case .active:
                     viewModel.backgroundTimer(.start)
                     //update timeComponents for each running bubble
-                    viewModel.updateCurrentClocks(bubbles)
+//                    viewModel.updateCurrentClocks(bubbles)
                 case .background:
                     viewModel.backgroundTimer(.pause)
                 case .inactive: //show notication center, app switcher
@@ -74,10 +74,30 @@ struct BubbleList: View {
             }
         })
         .navigationBarHidden(true)
-        .onAppear {
-            //            viewModel.makeBubbles()
+    }
+    
+    // MARK: -
+    static var formatter:DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.locale = Locale.current
+        //        formatter.locale = Locale(identifier: "us")
+        formatter.dateStyle = .short
+        formatter.timeStyle = .short
+        return formatter
+    }()
+    
+    private func headerTitle(for sectionID:String) -> Text {
+        if sectionID == "false" {
+            return Text("\(Image(systemName: "pin.slash.fill")) Bubbles")
+        } else {
+            return Text("\(Image(systemName: "pin.fill")) Pinned").foregroundColor(.pink)
         }
     }
+    
+    static let descriptors = [
+        NSSortDescriptor(key: "isPinned", ascending: false),
+        NSSortDescriptor(key: "rank", ascending: false)
+    ]
 }
 
 // MARK: -
