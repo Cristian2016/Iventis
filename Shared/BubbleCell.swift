@@ -45,6 +45,7 @@ struct BubbleCell: View {
         bubble.timeComponentsString.min > "0" || bubble.timeComponentsString.hr > "0" ? 1 : 0.001
     }
     private var hrOpacity:Double { bubble.timeComponentsString.hr > "0" ? 1 : 0.001 }
+    
         
     // MARK: -
     var body: some View {

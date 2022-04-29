@@ -8,12 +8,14 @@
 import SwiftUI
 
 struct DetailView:View {
+    @Binding var showDetailView:Bool
+    
     // MARK: -
     var body: some View {
         ZStack {
-            Color.blue
+            Color.blue.onTapGesture { showDetailView = false }
             VStack {
-               
+                
             }
         }
         .ignoresSafeArea()
@@ -22,6 +24,6 @@ struct DetailView:View {
 
 struct BubbleDetail_Previews: PreviewProvider {
     static var previews: some View {
-        DetailView()
+        DetailView(showDetailView: .constant(true))
     }
 }

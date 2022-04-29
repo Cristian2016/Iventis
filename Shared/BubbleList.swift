@@ -60,7 +60,7 @@ struct BubbleList: View {
                 PaletteView($showPalette) //initially hidden
                     .environmentObject(viewModel)
                 if showDetailView {
-                    DetailView()
+                    DetailView(showDetailView: $showDetailView)
                         .scaleEffect(1)
                         .animation(.spring(), value: 1)
                 }
