@@ -49,7 +49,6 @@ struct BubbleList: View {
                             ForEach(bubbles) {
                                 BubbleCell($0, $showDetail).environmentObject(viewModel)
                             }
-                            .onDelete { delete($0) }
                             .listRowSeparator(.hidden)
                         }.listStyle(.plain)
                     }.ignoresSafeArea()
@@ -77,15 +76,6 @@ struct BubbleList: View {
         .navigationBarHidden(true)
         .onAppear {
             //            viewModel.makeBubbles()
-        }
-    }
-}
-
-// MARK: -
-extension BubbleList {
-    private func delete(_ indexSet:IndexSet) {
-        indexSet.forEach {
-            viewModel.delete(bubbles[$0])
         }
     }
 }

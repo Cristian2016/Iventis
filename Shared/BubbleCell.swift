@@ -75,6 +75,32 @@ struct BubbleCell: View {
                 if bubble.state != .running { hundredthsComponent }
             }
         }
+        .swipeActions(edge: .leading, allowsFullSwipe: true) {
+            Button {
+                print("pin")
+            } label: {
+                Label {
+                    Text("Pin")
+                } icon: {
+                    Image(systemName: "pin")
+                }
+
+            }
+            .tint(.orange)
+        }
+        .swipeActions(edge: .trailing, allowsFullSwipe: true) {
+            Button {
+                viewModel.delete(bubble)
+            } label: {
+                Label {
+                    Text("Delete")
+                } icon: {
+                    Image(systemName: "trash")
+                }
+
+            }
+            .tint(.red)
+        }
     }
     
     // MARK: -
