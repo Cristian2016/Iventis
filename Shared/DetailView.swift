@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct BubbleDetail:View {
+struct DetailView:View {
     @Binding var showDetail:Bool
     init(_ showDetail:Binding<Bool>) {
         _showDetail = .init(projectedValue: showDetail)
@@ -32,6 +32,6 @@ struct BubbleDetail:View {
 
 struct BubbleDetail_Previews: PreviewProvider {
     static var previews: some View {
-        BubbleDetail(.constant(false))
+        DetailView(.constant(false))
     }
 }

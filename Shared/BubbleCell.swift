@@ -9,7 +9,7 @@ import SwiftUI
 
 struct BubbleCell: View {
     @StateObject var bubble:Bubble
-    @Binding var showDetail:Bool
+    @Binding var showDetailView:Bool
     @EnvironmentObject private var viewModel:ViewModel
     
     private var isRunning:Bool { bubble.state == .running }
@@ -20,7 +20,7 @@ struct BubbleCell: View {
     
     init(_ bubble:Bubble, _ showDetail:Binding<Bool>) {
         _bubble = StateObject(wrappedValue: bubble)
-        _showDetail = Binding(projectedValue: showDetail)
+        _showDetailView = Binding(projectedValue: showDetail)
         
         switch bubble.kind {
             case .stopwatch: sec = 0
@@ -54,7 +54,7 @@ struct BubbleCell: View {
         let colors = bubbleColors(bubble.color)
         
         ZStack {
-                hoursComponent
+                hoursView
                     .foregroundColor(colors.hr)
                     .opacity(hrOpacity)
                     .onTapGesture(count: 2, perform: {
@@ -63,15 +63,11 @@ struct BubbleCell: View {
                     .onTapGesture(count: 1) {
                         print("add note")
                     }
-                minutesComponent
+                minutesView
                     .foregroundColor(colors.min)
                     .opacity(minOpacity)
-                    .onTapGesture(count: 1) {
-                        showDetail = true
-                        print("add note")
-                    }
-            ZStack (alignment: .trailing) {
-                secondsComponent
+                    .onTapGesture { showDetailView = true }
+                secondsView
                     .foregroundColor(colors.sec)
                     .onTapGesture {
                         UserFeedback.triggerSingleHaptic(.heavy)
@@ -81,8 +77,7 @@ struct BubbleCell: View {
                         UserFeedback.triggerDoubleHaptic(.heavy)
                         viewModel.endSession(bubble)
                     }
-                if bubble.state != .running { hundredthsComponent }
-            }
+                if bubble.state != .running { hundredthsView }
         }
         .swipeActions(edge: .leading, allowsFullSwipe: true) {
             Button {
@@ -113,7 +108,7 @@ struct BubbleCell: View {
     }
     
     // MARK: -
-    private var hoursComponent:some View {
+    private var hoursView:some View {
         HStack {
             ZStack {
                 Circle()
@@ -127,7 +122,7 @@ struct BubbleCell: View {
         }
     }
     
-    private var minutesComponent:some View {
+    private var minutesView:some View {
         HStack {
             Spacer()
             ZStack {
@@ -142,7 +137,7 @@ struct BubbleCell: View {
         }
     }
     
-    private var secondsComponent:some View {
+    private var secondsView:some View {
         HStack {
             Spacer()
             ZStack {
@@ -157,17 +152,30 @@ struct BubbleCell: View {
         }
     }
     
-    private var hundredthsComponent:some View {
+    private var hundredthsView:some View {
         VStack {
             Spacer()
-            Text(bubble.hundredths)
-                .background(Circle().fill(bubbleColors(bubble.color).sec).padding(-12).standardShadow(false))
-                .foregroundColor(.white)
-                .font(.system(size: 22, weight: .semibold, design: .default))
-                .offset(x: -3, y: -12)
+            HStack {
+                Spacer()
+                Text(bubble.hundredths)
+                    .background(hundredthsBackground)
+                    .foregroundColor(.white)
+                    .font(.system(size: 22, weight: .semibold, design: .default))
+            }
         }
+        .padding(7)
     }
     
+    private var hundredthsBackground:some View {
+        ZStack {
+            Circle()
+                .fill(Color.white)
+                .padding(-15)
+            Circle()
+                .fill(bubbleColors(bubble.color).sec)
+                .padding(-12)
+        }
+    }
     
     @ViewBuilder
     private var pauseLine:some View {

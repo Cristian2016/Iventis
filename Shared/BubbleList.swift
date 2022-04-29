@@ -59,7 +59,7 @@ struct BubbleList: View {
                 LeftStrip($showPalette, isBubbleListEmpty: bubbles.isEmpty) //it's invisible
                 PaletteView($showPalette) //initially hidden
                     .environmentObject(viewModel)
-                BubbleDetail($showDetail) //initially hidden
+                DetailView($showDetail) //initially hidden
             }
         }
         .onChange(of: scenePhase, perform: {
