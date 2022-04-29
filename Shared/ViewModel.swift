@@ -93,7 +93,7 @@ class ViewModel: ObservableObject {
         
         switch bubble.state {
             case .brandNew: /* changes to .running */
-                print(bubble.state)
+//                print(bubble.state)
                 //create first session and add first pair to the session
                 let newSession = Session(context: PersistenceController.shared.viewContext)
                 let newPair = Pair(context: PersistenceController.shared.viewContext)
@@ -106,6 +106,9 @@ class ViewModel: ObservableObject {
                 let newPair = Pair(context: PersistenceController.shared.viewContext)
                 newPair.start = Date()
                 bubble.lastSession.addToPairs(newPair)
+                
+                //hide hundreths immediately
+                
                 
             case .running: /* changes to .paused */
                 let currentPair = bubble.lastPair

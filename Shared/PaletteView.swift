@@ -96,13 +96,22 @@ extension Image {
 }
 
 struct ShadowModifier:ViewModifier {
+    let isStandard:Bool
+    init(_ isStandard:Bool = true) {
+        self.isStandard = isStandard
+    }
+    
     func body(content:Content) -> some View {
-        content.shadow(radius: 2)
+        if isStandard {
+            content.shadow(radius: 2)
+        } else {
+            content.shadow(color: .black.opacity(0.15), radius: 2)
+        }
     }
 }
 
 extension View {
-    func standardShadow() -> some View {
-        modifier(ShadowModifier())
+    func standardShadow(_ isStandard:Bool = true) -> some View {
+        modifier(ShadowModifier(isStandard))
     }
 }

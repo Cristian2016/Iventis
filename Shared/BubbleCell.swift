@@ -49,7 +49,7 @@ struct BubbleCell: View {
         ZStack {
             ZStack {
                 hoursComponent
-                    .foregroundColor(colors.hr)
+                    .foregroundColor(colors.sec)
 //                    .opacity(bubble.timeComponents.hr > 0 ? 1 : 0.001)
                 minutesComponent
                     .foregroundColor(colors.min)
@@ -126,12 +126,11 @@ struct BubbleCell: View {
         VStack {
             Spacer()
             Text(bubble.hundredths)
-                .background(Circle().fill(bubbleColors(bubble.color).sec).padding(-8))
+                .background(Circle().fill(bubbleColors(bubble.color).sec).padding(-12).standardShadow(false))
                 .foregroundColor(.white)
-                .font(.system(size: 22, weight: .medium, design: .default))
-                .offset(x: -3, y: -6)
+                .font(.system(size: 22, weight: .semibold, design: .default))
+                .offset(x: -3, y: -10)
         }
-        
     }
     
     
