@@ -88,7 +88,7 @@ struct BubbleList: View {
     
     private func headerTitle(for sectionID:String) -> Text {
         if sectionID == "false" {
-            return Text("\(Image(systemName: "pin.slash.fill")) Bubbles")
+            return Text("Bubbles").foregroundColor(.black)
         } else {
             return Text("\(Image(systemName: "pin.fill")) Pinned").foregroundColor(.pink)
         }
