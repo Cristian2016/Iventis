@@ -140,3 +140,13 @@ extension Float {
         return string
     }
 }
+
+extension DateComponentsFormatter {
+    static let bubbleStyle:DateComponentsFormatter = {
+        let formatter = DateComponentsFormatter()
+        formatter.allowedUnits = [.hour, .minute, .second]
+        formatter.zeroFormattingBehavior = .pad
+//        formatter.collapsesLargestUnit = true
+        return formatter
+    }()
+}

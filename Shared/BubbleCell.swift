@@ -50,10 +50,10 @@ struct BubbleCell: View {
             ZStack {
                 hoursComponent
                     .foregroundColor(colors.hr)
-                    .opacity(bubble.timeComponents.hr > 0 ? 1 : 0.001)
+//                    .opacity(bubble.timeComponents.hr > 0 ? 1 : 0.001)
                 minutesComponent
                     .foregroundColor(colors.min)
-                    .opacity(bubble.timeComponents.min > 0 ? 1 : 0.001)
+//                    .opacity(bubble.timeComponents.sec > 59 ? 1 : 0.001)
             }
             .onTapGesture(count: 2, perform: {
                 print("double tap")
@@ -84,7 +84,7 @@ struct BubbleCell: View {
                 Circle()
                     .frame(width: BubbleCell.edge, height: BubbleCell.edge)
                     .padding(padding)
-                Text(String(bubble.timeComponents.hr))
+                Text(bubble.timeComponentsString.hr)
                     .font(.system(size: fontSize))
                     .foregroundColor(.white)
             }
@@ -99,7 +99,7 @@ struct BubbleCell: View {
                 Circle()
                     .frame(width: BubbleCell.edge, height: BubbleCell.edge)
                     .padding(padding)
-                Text(String(bubble.timeComponents.min))
+                Text(bubble.timeComponentsString.min)
                     .font(.system(size: fontSize))
                     .foregroundColor(.white)
             }
@@ -115,7 +115,7 @@ struct BubbleCell: View {
                     .frame(width: BubbleCell.edge, height: BubbleCell.edge)
                     .padding(padding)
 //                    .overlay(pauseLine)
-                Text(String(bubble.timeComponents.sec))
+                Text(bubble.timeComponentsString.sec)
                     .font(.system(size: fontSize))
                     .foregroundColor(.white)
             }

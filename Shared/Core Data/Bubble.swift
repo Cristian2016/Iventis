@@ -40,7 +40,10 @@ public class Bubble: NSManagedObject {
     
     // MARK: -
     ///bubbleCell.body displays timeComponents
-    @Published var timeComponents = (hr:0, min:0, sec:0) { willSet {
+//    @Published var timeComponents = (hr:0, min:0, sec:0) { willSet {
+//        self.objectWillChange.send()
+//    }} //⚠️
+    @Published var timeComponentsString = (hr:"0", min:"0", sec:"0") { willSet {
         self.objectWillChange.send()
     }}
     @Published var hundredths:String = "00"
@@ -100,8 +103,10 @@ extension Bubble {
                                                             
                     //time to set timeComponents to an initial value. forget about (hr:0, min:0, sec:0)
                     let components = self.currentClock.timeComponents()
+                    let componentsString = self.convertToTimeComponents(self.currentClock)
                     DispatchQueue.main.async {
-                        self.timeComponents = components
+//                        self.timeComponents = components //⚠️
+                        self.timeComponentsString = componentsString
                         self.hundredths = self.currentClock.hundredthsFromCurrentClock
                     }
                 }
@@ -119,9 +124,13 @@ extension Bubble {
         //delta is the elapsed duration between pair.start and signal dates
         let Δ = Date().timeIntervalSince(lastPair!.start)
         let value = currentClock + Float(Δ)
+        let componentsString = convertToTimeComponents(value)
                             
         //since closure is executed on background thread, dispatch back to the main thread
-        DispatchQueue.main.async { self.timeComponents = value.timeComponents() }
+        DispatchQueue.main.async {
+//            self.timeComponents = value.timeComponents() //⚠️
+            self.timeComponentsString = componentsString
+        }
     }
     
     func updateCurrentClock(runningOnly:Bool) {
@@ -130,5 +139,11 @@ extension Bubble {
             let elapsedSinceStart = Float(Date().timeIntervalSince(lastPair!.start))
             currentClock += elapsedSinceStart
         }
+    }
+    
+    func convertToTimeComponents(_ value:Float) -> (hr:String, min:String, sec:String) {
+        let string = DateComponentsFormatter.bubbleStyle.string(from: TimeInterval(value))!
+        let array = string.split(separator: ":")
+        return (String(Int(array[0])!), String(Int(array[1])!), String(Int(array[2])!))
     }
 }
