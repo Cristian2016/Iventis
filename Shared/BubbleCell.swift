@@ -29,7 +29,6 @@ struct BubbleCell: View {
         if !bubble.isObservingBackgroundTimer { bubble.observeBackgroundTimer() }
     }
     
-    static let dic:[CGFloat:CGFloat] = [ /* 12mini */728:140, /* 8 */667:150,  /* ipdo */568:125,  /* 13 pro max */926:163,  /* 13 pro */844:147,  /* 11 pro max */896:158, 812:135,  /* 8max */736:167]
     private let spacing:CGFloat = -30
     private let fontSize = Ratio.bubbleToFontSize * UIScreen.size.width * 0.85
     
@@ -46,9 +45,7 @@ struct BubbleCell: View {
         bubble.timeComponentsString.min > "0" || bubble.timeComponentsString.hr > "0" ? 1 : 0.001
     }
     private var hrOpacity:Double { bubble.timeComponentsString.hr > "0" ? 1 : 0.001 }
-    
-    
-    
+        
     // MARK: -
     var body: some View {
         let colors = bubbleColors(bubble.color)
@@ -156,12 +153,9 @@ struct BubbleCell: View {
     
     private var hundredthsBackground:some View {
         ZStack {
-            Circle()
-                .fill(Color.white)
-                .padding(-15)
-            Circle()
-                .fill(bubbleColors(bubble.color).sec)
-                .padding(-12)
+            Image.pauseSticker
+                .resizable()
+                .frame(width: 50, height: 50)
         }
     }
     
@@ -192,6 +186,8 @@ struct BubbleCell: View {
     private func bubbleColors(_ description:String) -> Color.Three {
         Color.bubbleThrees.filter { $0.description == description }.first ?? Color.Bubbles.mint
     }
+    
+    static let dic:[CGFloat:CGFloat] = [ /* 12mini */728:140, /* 8 */667:150,  /* ipdo */568:125,  /* 13 pro max */926:163,  /* 13 pro */844:147,  /* 11 pro max */896:158, 812:135,  /* 8max */736:167]
 }
 
 //struct BubbleCell1_Previews: PreviewProvider {

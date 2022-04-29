@@ -8,30 +8,20 @@
 import SwiftUI
 
 struct DetailView:View {
-    @Binding var showDetail:Bool
-    init(_ showDetail:Binding<Bool>) {
-        _showDetail = .init(projectedValue: showDetail)
-    }
-    
     // MARK: -
     var body: some View {
         ZStack {
             Color.blue
             VStack {
-                Text("Bubble Detail")
-                Text("Dismiss")
-                    .onTapGesture {
-                        showDetail = false
-                    }
+               
             }
         }
-        .opacity(showDetail ? 1 : 0)
         .ignoresSafeArea()
     }
 }
 
 struct BubbleDetail_Previews: PreviewProvider {
     static var previews: some View {
-        DetailView(.constant(false))
+        DetailView()
     }
 }

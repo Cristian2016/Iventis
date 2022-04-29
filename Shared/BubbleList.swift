@@ -25,7 +25,7 @@ struct BubbleList: View {
     
     // MARK: -
     @State private var isActive = true
-    @State var showDetail = false
+    @State var showDetailView = false
     @State var showPalette = false
     
     // MARK: -
@@ -45,7 +45,7 @@ struct BubbleList: View {
                             ForEach(bubbles) { section in
                                 Section {
                                     ForEach (section) {
-                                        BubbleCell($0, $showDetail)
+                                        BubbleCell($0, $showDetailView)
                                             .environmentObject(viewModel)
                                     }
                                 } header: { headerTitle(for: section.id.description) }
@@ -59,7 +59,11 @@ struct BubbleList: View {
                 LeftStrip($showPalette, isBubbleListEmpty: bubbles.isEmpty) //it's invisible
                 PaletteView($showPalette) //initially hidden
                     .environmentObject(viewModel)
-                DetailView($showDetail) //initially hidden
+                if showDetailView {
+                    DetailView()
+                        .scaleEffect(1)
+                        .animation(.spring(), value: 1)
+                }
             }
         }
         .onChange(of: scenePhase, perform: {

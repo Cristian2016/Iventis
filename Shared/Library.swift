@@ -10,6 +10,7 @@ import SwiftUI
 
 extension Image {
     static let trash = Image(systemName: "trash")
+    static let pauseSticker = Image("pauseSticker")
 }
 
 func delayExecution(_ delay:DispatchTime, code:@escaping ()->()) {
