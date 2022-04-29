@@ -88,7 +88,7 @@ class ViewModel: ObservableObject {
     }
     
     // MARK: -
-    func toggle(_ bubble:Bubble) {
+    func toggleStart(_ bubble:Bubble) {
         if bubble.currentClock <= 0 && bubble.kind != .stopwatch  { return }
         
         switch bubble.state {
@@ -130,6 +130,11 @@ class ViewModel: ObservableObject {
 
         
         try? PersistenceController.shared.viewContext.save()
+    }
+    
+    func togglePin(_ bubble:Bubble) {
+        bubble.isPinned.toggle()
+        PersistenceController.shared.save()
     }
     
     func updateCurrentClocks(_ bubbles:FetchedResults<Bubble>) {

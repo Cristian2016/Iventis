@@ -66,7 +66,7 @@ struct BubbleCell: View {
                     .foregroundColor(colors.sec)
                     .onTapGesture {
                         UserFeedback.triggerSingleHaptic(.heavy)
-                        viewModel.toggle(bubble)
+                        viewModel.toggleStart(bubble)
                     }
                     .onLongPressGesture {
                         UserFeedback.triggerDoubleHaptic(.heavy)
@@ -77,7 +77,7 @@ struct BubbleCell: View {
         }
         .swipeActions(edge: .leading, allowsFullSwipe: true) {
             Button {
-                print("pin")
+                viewModel.togglePin(bubble)
             } label: {
                 Label {
                     Text("Pin")
