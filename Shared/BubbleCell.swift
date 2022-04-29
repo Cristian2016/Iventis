@@ -83,31 +83,19 @@ struct BubbleCell: View {
             Button {
                 viewModel.togglePin(bubble)
             } label: {
-                Label {
-                    Text(bubble.isPinned ? "Unpin" : "Pin")
-                } icon: {
-                    Image(systemName: bubble.isPinned ? "pin.slash.fill" : "pin.fill")
-                }
-
+                Label { Text(bubble.isPinned ? "Unpin" : "Pin") }
+            icon: { Image(systemName: bubble.isPinned ? "pin.slash.fill" : "pin.fill") }
             }
             .tint(bubble.isPinned ? .gray : .pink)
         }
         .swipeActions(edge: .trailing, allowsFullSwipe: true) {
-            Button {
-                viewModel.delete(bubble)
-            } label: {
-                Label {
-                    Text("Delete")
-                } icon: {
-                    Image(systemName: "trash")
-                }
-
-            }
+            Button { viewModel.delete(bubble) }
+            label: { Label { Text("Delete") } icon: { Image.trash } }
             .tint(.red)
         }
     }
     
-    // MARK: -
+    // MARK: - Legoes
     private var hoursView:some View {
         HStack {
             ZStack {

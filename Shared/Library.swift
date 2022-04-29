@@ -8,6 +8,10 @@
 import UIKit
 import SwiftUI
 
+extension Image {
+    static let trash = Image(systemName: "trash")
+}
+
 func delayExecution(_ delay:DispatchTime, code:@escaping ()->()) {
     DispatchQueue.main.asyncAfter(deadline: delay, execute: code)
 }
