@@ -51,15 +51,16 @@ struct BubbleList: View {
                                 } header: { headerTitle(for: section.id.description) }
                             } //ForEach
                             .listRowSeparator(.hidden)
+                            
                         } //List
+                        
                     } //ScrollViewReader
                     .listStyle(.grouped)
                 } //VStack
                 .ignoresSafeArea()
             } //else statement
             LeftStrip($showPalette, isBubbleListEmpty: bubbles.isEmpty) //it's invisible
-            PaletteView($showPalette) //initially hidden
-                .environmentObject(viewModel)
+            PaletteView($showPalette).environmentObject(viewModel)
             if showDetailView {
                 DetailView(showDetailView: $showDetailView)
                     .scaleEffect(1)
@@ -83,7 +84,7 @@ struct BubbleList: View {
     }
     
     // MARK: -
-    static var formatter:DateFormatter = {
+    private static var formatter:DateFormatter = {
         let formatter = DateFormatter()
         formatter.locale = Locale.current
         //        formatter.locale = Locale(identifier: "us")
@@ -104,7 +105,7 @@ struct BubbleList: View {
         }
     }
     
-    static let descriptors = [
+    private static let descriptors = [
         NSSortDescriptor(key: "isPinned", ascending: false),
         NSSortDescriptor(key: "rank", ascending: false)
     ]

@@ -130,7 +130,7 @@ struct BubbleCell: View {
                 Circle()
                     .frame(width: BubbleCell.edge, height: BubbleCell.edge)
                     .padding(padding)
-//                    .overlay(pauseLine)
+                    .overlay(pauseLine)
                 Text(bubble.timeComponentsString.sec)
                     .font(.system(size: fontSize))
                     .foregroundColor(.white)
@@ -144,12 +144,14 @@ struct BubbleCell: View {
             HStack {
                 Spacer()
                 Text(bubble.hundredths)
-                    .background(hundredthsBackground)
+                    .background(Circle()
+                        .foregroundColor(bubbleColors(bubble.color).sec)
+                        .padding(-14))
                     .foregroundColor(.white)
                     .font(.system(size: 22, weight: .semibold, design: .default))
             }
         }
-        .padding(7)
+        .padding(EdgeInsets(top: 0, leading: 0, bottom: 10, trailing: 4))
     }
     
     private var hundredthsBackground:some View {
