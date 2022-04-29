@@ -39,7 +39,7 @@ struct BubbleList: View {
             if bubbles.isEmpty { EmptyBubbleListView() }
             else {
                 VStack {
-                    Spacer(minLength: 10) //distance from status bar
+                    Spacer(minLength: 20) //distance from status bar
                     ScrollViewReader { proxy in
                         List {
                             ForEach(bubbles) { section in
@@ -52,8 +52,10 @@ struct BubbleList: View {
                             } //ForEach
                             .listRowSeparator(.hidden)
                         } //List
-                    }.listStyle(.grouped) //ScrollViewReader
-                }.ignoresSafeArea() //VStack
+                    } //ScrollViewReader
+                    .listStyle(.grouped)
+                } //VStack
+                .ignoresSafeArea()
             } //else statement
             LeftStrip($showPalette, isBubbleListEmpty: bubbles.isEmpty) //it's invisible
             PaletteView($showPalette) //initially hidden
@@ -92,9 +94,13 @@ struct BubbleList: View {
     
     private func headerTitle(for sectionID:String) -> Text {
         if sectionID == "false" {
-            return Text("Bubbles").foregroundColor(.black)
+            return Text("Bubbles")
+                .foregroundColor(.label)
+                .font(.title3)
         } else {
-            return Text("\(Image(systemName: "pin.fill")) Pinned").foregroundColor(.pink)
+            return Text("\(Image(systemName: "pin.fill")) Pinned")
+                .foregroundColor(.orange)
+                .font(.title3)
         }
     }
     

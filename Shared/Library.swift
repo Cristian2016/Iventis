@@ -8,6 +8,10 @@
 import UIKit
 import SwiftUI
 
+extension Color {
+    static let label = Color("label")
+}
+
 extension Image {
     static let trash = Image(systemName: "trash")
     static let pauseSticker = Image("pauseSticker")

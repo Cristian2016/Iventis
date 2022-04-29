@@ -84,7 +84,7 @@ struct BubbleCell: View {
                 Label { Text(bubble.isPinned ? "Unpin" : "Pin") }
             icon: { Image(systemName: bubble.isPinned ? "pin.slash.fill" : "pin.fill") }
             }
-            .tint(bubble.isPinned ? .gray : .pink)
+            .tint(bubble.isPinned ? .gray : .orange)
         }
         .swipeActions(edge: .trailing, allowsFullSwipe: true) {
             Button { viewModel.delete(bubble) }
