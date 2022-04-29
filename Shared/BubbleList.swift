@@ -35,12 +35,12 @@ struct BubbleList: View {
     
     // MARK: -
     var body: some View {
-        GeometryReader { geo in
-            ZStack {
-                if bubbles.isEmpty { EmptyBubbleListView() }
-                else {
-                    VStack {
-                        Spacer(minLength: geo.safeAreaInsets.top * 0.25) //distance from status bar
+        ZStack {
+            if bubbles.isEmpty { EmptyBubbleListView() }
+            else {
+                VStack {
+                    Spacer(minLength: 10) //distance from status bar
+                    ScrollViewReader { proxy in
                         List {
                             ForEach(bubbles) { section in
                                 Section {
@@ -49,21 +49,19 @@ struct BubbleList: View {
                                             .environmentObject(viewModel)
                                     }
                                 } header: { headerTitle(for: section.id.description) }
-                            }
+                            } //ForEach
                             .listRowSeparator(.hidden)
-                        }
-                        .listStyle(.plain)
-                    }
-                    .ignoresSafeArea()
-                }
-                LeftStrip($showPalette, isBubbleListEmpty: bubbles.isEmpty) //it's invisible
-                PaletteView($showPalette) //initially hidden
-                    .environmentObject(viewModel)
-                if showDetailView {
-                    DetailView(showDetailView: $showDetailView)
-                        .scaleEffect(1)
-                        .animation(.spring(), value: 1)
-                }
+                        } //List
+                    }.listStyle(.grouped) //ScrollViewReader
+                }.ignoresSafeArea() //VStack
+            } //else statement
+            LeftStrip($showPalette, isBubbleListEmpty: bubbles.isEmpty) //it's invisible
+            PaletteView($showPalette) //initially hidden
+                .environmentObject(viewModel)
+            if showDetailView {
+                DetailView(showDetailView: $showDetailView)
+                    .scaleEffect(1)
+                    .animation(.spring(), value: 1)
             }
         }
         .onChange(of: scenePhase, perform: {
@@ -71,11 +69,11 @@ struct BubbleList: View {
                 case .active:
                     viewModel.backgroundTimer(.start)
                     //update timeComponents for each running bubble
-//                    viewModel.updateCurrentClocks(bubbles)
+                    //                    viewModel.updateCurrentClocks(bubbles)
                 case .background:
                     viewModel.backgroundTimer(.pause)
                 case .inactive: //show notication center, app switcher
-                   break
+                    break
                 @unknown default: fatalError()
             }
         })
