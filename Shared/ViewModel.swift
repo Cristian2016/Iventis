@@ -115,11 +115,16 @@ class ViewModel: ObservableObject {
                 
                 //compute and store currentClock
                 bubble.currentClock += currentPair!.duration
+//                print(bubble.currentClock, currentPair?.duration)
                 
                 bubble.hundredths = bubble.currentClock.hundredthsFromCurrentClock
+                bubble.timeComponentsString = bubble.convertToTimeComponents(bubble.currentClock)
                 
             case .finished: return
         }
+        
+//        print(bubble.lastSession.pairs.count, " pairs")
+
         
         try? PersistenceController.shared.viewContext.save()
     }

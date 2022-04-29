@@ -141,8 +141,8 @@ extension Bubble {
         }
     }
     
-    func convertToTimeComponents(_ value:Float) -> (hr:String, min:String, sec:String) {
-        let string = DateComponentsFormatter.bubbleStyle.string(from: TimeInterval(value))!
+    func convertToTimeComponents(_ duration:Float) -> (hr:String, min:String, sec:String) {
+        let string = DateComponentsFormatter.bubbleStyle.string(from: TimeInterval(duration))!
         let array = string.split(separator: ":")
         return (String(Int(array[0])!), String(Int(array[1])!), String(Int(array[2])!))
     }
