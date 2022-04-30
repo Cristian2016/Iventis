@@ -63,9 +63,7 @@ struct BubbleCell: View {
                 minutesView
                     .foregroundColor(colors.min)
                     .opacity(minOpacity)
-                    .onTapGesture {
-                        viewModel.setInSpotlight(bubble)
-                    }
+                    .onTapGesture { viewModel.setInSpotlight(bubble) }
                 secondsView
                     .foregroundColor(colors.sec)
                     .onTapGesture {
