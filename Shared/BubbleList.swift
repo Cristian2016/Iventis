@@ -11,7 +11,12 @@ import Combine
 
 struct ContainerView:View {
     @State var predicate:NSPredicate? = nil
-    var body: some View { BubbleList($predicate) }
+    
+    var body: some View {
+        VStack {
+            BubbleList($predicate)
+        }
+    }
 }
 
 struct BubbleList: View {
@@ -49,6 +54,7 @@ struct BubbleList: View {
             else {
                 VStack {
                     Spacer(minLength: 30) //distance from status bar
+                    if predicate != nil { SpotlightAlert() }
                     List {
                         ForEach(fetchRequest) { section in
                             Section {

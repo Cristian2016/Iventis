@@ -21,6 +21,7 @@ extension Color {
 extension Image {
     static let trash = Image(systemName: "trash")
     static let pauseSticker = Image("pauseSticker")
+    static let spotlight = Image("spotlight")
 }
 
 func delayExecution(_ delay:DispatchTime, code:@escaping ()->()) {

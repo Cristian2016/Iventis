@@ -58,6 +58,9 @@
 		1FCF0C662816F3F600AA1FAA /* EmptyBubbleListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FCF0C652816F3F600AA1FAA /* EmptyBubbleListView.swift */; };
 		1FCF0C672816F3F600AA1FAA /* EmptyBubbleListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FCF0C652816F3F600AA1FAA /* EmptyBubbleListView.swift */; };
 		1FCF0C682816F3F600AA1FAA /* EmptyBubbleListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FCF0C652816F3F600AA1FAA /* EmptyBubbleListView.swift */; };
+		1FD21865281D9AB700B43403 /* SpotlightAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD21864281D9AB700B43403 /* SpotlightAlert.swift */; };
+		1FD21866281D9AB700B43403 /* SpotlightAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD21864281D9AB700B43403 /* SpotlightAlert.swift */; };
+		1FD21867281D9AB700B43403 /* SpotlightAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD21864281D9AB700B43403 /* SpotlightAlert.swift */; };
 		1FE163AE280EE6F40050C6F5 /* LeftStrip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FE163AD280EE6F40050C6F5 /* LeftStrip.swift */; };
 		1FE163AF280EE6F40050C6F5 /* LeftStrip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FE163AD280EE6F40050C6F5 /* LeftStrip.swift */; };
 		1FE163B0280EE6F40050C6F5 /* LeftStrip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FE163AD280EE6F40050C6F5 /* LeftStrip.swift */; };
@@ -130,6 +133,7 @@
 		1F9BE0A8280BE14100F87EFA /* PaletteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PaletteView.swift; path = Shared/PaletteView.swift; sourceTree = SOURCE_ROOT; };
 		1F9BE0AC280C6AB000F87EFA /* TapHold.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapHold.swift; sourceTree = "<group>"; };
 		1FCF0C652816F3F600AA1FAA /* EmptyBubbleListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyBubbleListView.swift; sourceTree = "<group>"; };
+		1FD21864281D9AB700B43403 /* SpotlightAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotlightAlert.swift; sourceTree = "<group>"; };
 		1FE163AD280EE6F40050C6F5 /* LeftStrip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftStrip.swift; sourceTree = "<group>"; };
 		1FF0A2FC2810448100B1DB77 /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
 		1FFC8BA428142F040059EF2E /* Session.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
@@ -254,6 +258,7 @@
 			isa = PBXGroup;
 			children = (
 				1F5F4A4D28093FAF00AF3442 /* Assets.xcassets */,
+				1FD21864281D9AB700B43403 /* SpotlightAlert.swift */,
 				1FCF0C652816F3F600AA1FAA /* EmptyBubbleListView.swift */,
 				1F97B7DC2809B311002FFCA3 /* Colors.swift */,
 			);
@@ -391,6 +396,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1FFC8BAD28142F040059EF2E /* Session Properties.swift in Sources */,
+				1FD21865281D9AB700B43403 /* SpotlightAlert.swift in Sources */,
 				1F9BE0A9280BE14100F87EFA /* PaletteView.swift in Sources */,
 				1F5F4A732809409600AF3442 /* Bubble.swift in Sources */,
 				1F97B7DD2809B311002FFCA3 /* Colors.swift in Sources */,
@@ -429,6 +435,7 @@
 				1FF0A2FE2810448100B1DB77 /* DetailView.swift in Sources */,
 				1F5F4A962809450A00AF3442 /* Library.swift in Sources */,
 				1F5F4A9A2809456E00AF3442 /* BubbleList.swift in Sources */,
+				1FD21866281D9AB700B43403 /* SpotlightAlert.swift in Sources */,
 				1F5F4A6228093FAF00AF3442 /* Persistence.swift in Sources */,
 				1F100CA82809493400A3A3C2 /* BackgroundTimer.swift in Sources */,
 				1FFC8BBA28142F040059EF2E /* Pair Properties.swift in Sources */,
@@ -446,6 +453,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1FFC8BAF28142F040059EF2E /* Session Properties.swift in Sources */,
+				1FD21867281D9AB700B43403 /* SpotlightAlert.swift in Sources */,
 				1F9BE0AB280BE14100F87EFA /* PaletteView.swift in Sources */,
 				1F5F4A88280941AC00AF3442 /* Widgets.intentdefinition in Sources */,
 				1F97B7DF2809B311002FFCA3 /* Colors.swift in Sources */,
