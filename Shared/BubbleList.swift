@@ -9,6 +9,11 @@ import SwiftUI
 import CoreData
 import Combine
 
+struct ContainerView:View {
+    @State var predicate:NSPredicate? = nil
+    var body: some View { BubbleList($predicate) }
+}
+
 struct BubbleList: View {
     //1
     @Environment(\.managedObjectContext) private var viewContext
@@ -17,12 +22,9 @@ struct BubbleList: View {
     // MARK: -
     @StateObject private var viewModel = ViewModel()
     
-    @SectionedFetchRequest<Bool, Bubble>(entity: Bubble.entity(),
-                                         sectionIdentifier: \.isPinned,
-                                         sortDescriptors: descriptors,
-                                         predicate: nil,
-                                         animation: .default)
-    private var bubbles: SectionedFetchResults<Bool, Bubble>
+//    private var bubbles: SectionedFetchResults<Bool, Bubble>
+    @SectionedFetchRequest var fetchRequest:SectionedFetchResults<Bool, Bubble>
+    @Binding var predicate:NSPredicate?
     
     // MARK: -
     @State private var isActive = true
@@ -30,39 +32,42 @@ struct BubbleList: View {
     @State var showPalette = false
     
     // MARK: -
-    init() {
+    init(_ predicate:Binding<NSPredicate?>) {
         UITableView.appearance().showsVerticalScrollIndicator = false
+        _fetchRequest = SectionedFetchRequest<Bool, Bubble>(entity: Bubble.entity(),
+                                                        sectionIdentifier: \.isPinned,
+                                                      sortDescriptors: BubbleList.descriptors,
+                                                            predicate: predicate.wrappedValue,
+                                                        animation: .default)
+        _predicate = Binding(projectedValue: predicate)
     }
     
     // MARK: -
     var body: some View {
         ZStack {
-            if bubbles.isEmpty { EmptyBubbleListView() }
+            if fetchRequest.isEmpty { EmptyBubbleListView() }
             else {
                 VStack {
                     Spacer(minLength: 30) //distance from status bar
                     List {
-                        ForEach(bubbles) { section in
+                        ForEach(fetchRequest) { section in
                             Section {
                                 ForEach (section) { bubble in
-                                    BubbleCell(bubble, $showDetailView)
-                                        .opacity(cellOpacity(for: bubble))
+                                    BubbleCell(bubble, $showDetailView, $predicate)
                                         .environmentObject(viewModel)
                                 }
                             } header: { headerTitle(for: section.id.description) }
                         }
                         .listRowSeparator(.hidden)
                     }
-                    .offset(x: 0, y: listOffset())
                     .listStyle(.sidebar)
                 }
                 .ignoresSafeArea()
             }
-            LeftStrip($showPalette, isBubbleListEmpty: bubbles.isEmpty)
+            LeftStrip($showPalette, isBubbleListEmpty: fetchRequest.isEmpty)
             PaletteView($showPalette).environmentObject(viewModel)
             if showDetailView {
-                let yOffset = viewModel.spotlightBubbleData?.height ?? 0
-                DetailView(showDetailView: $showDetailView).offset(x: 0, y: yOffset)
+                DetailView(showDetailView: $showDetailView)
             }
         }
         .onChange(of: scenePhase, perform: {
@@ -92,14 +97,13 @@ struct BubbleList: View {
     }()
     
     private func headerTitle(for sectionID:String) -> Text {
-        let condition = (viewModel.spotlightBubbleData == nil)
         if sectionID == "false" {
             return Text("Bubbles")
-                .foregroundColor(condition ? .label : .clear)
+                .foregroundColor(.label)
                 .font(.title3)
         } else {
             return Text("\(Image(systemName: "pin.fill")) Pinned")
-                .foregroundColor(condition ? .orange : .clear)
+                .foregroundColor(.orange)
                 .font(.title3)
         }
     }
@@ -108,21 +112,11 @@ struct BubbleList: View {
         NSSortDescriptor(key: "isPinned", ascending: false),
         NSSortDescriptor(key: "rank", ascending: false)
     ]
-    
-    private func cellOpacity(for bubble:Bubble) -> Double {
-        guard let data = viewModel.spotlightBubbleData else { return 1 }
-        return (data.id == bubble.objectID.description) ? 1 : 0
-    }
-    
-    private func listOffset() -> CGFloat {
-        guard let data = viewModel.spotlightBubbleData else { return 0 }
-        return -data.yPosition + 40
-    }
 }
 
 // MARK: -
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        BubbleList()
+        BubbleList(.constant(NSPredicate(value: true)))
     }
 }

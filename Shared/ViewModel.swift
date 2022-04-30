@@ -24,9 +24,6 @@ class ViewModel: ObservableObject {
         }
     }
     
-    // MARK: -
-    @Published var spotlightBubbleData:SpotlightBubbleData?
-    
     // MARK: - User Intents
     func createBubble(_ kind:Bubble.Kind, _ color:String) {
         let backgroundContext = PersistenceController.shared.backgroundContext
@@ -53,7 +50,7 @@ class ViewModel: ObservableObject {
         
         let request = Bubble.fetchRequest()
         let count = try? viewContext.count(for: request)
-        let condition = count! > 1 && spotlightBubbleData == nil
+        let condition = count! > 1
         if condition { viewContext.delete(bubble) } else { return }
         
         try? viewContext.save()
@@ -70,7 +67,6 @@ class ViewModel: ObservableObject {
     }
     
     func togglePin(_ bubble:Bubble) {
-        if spotlightBubbleData != nil { return }
         bubble.isPinned.toggle()
         PersistenceController.shared.save()
     }
@@ -131,9 +127,7 @@ class ViewModel: ObservableObject {
         try? PersistenceController.shared.viewContext.save()
     }
     
-    struct SpotlightBubbleData {
-        let yPosition:CGFloat
-        let height:CGFloat
-        let id:String
+    func providePredicate(_ predicate:NSPredicate? = nil) {
+        
     }
 }

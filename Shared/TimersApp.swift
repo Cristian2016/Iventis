@@ -13,7 +13,7 @@ struct TimersApp: App {
     
     var body: some Scene {
         WindowGroup {
-            BubbleList()
+            ContainerView()
                 .environment(\.managedObjectContext, viewContext)
         }
     }

@@ -11,6 +11,7 @@ struct BubbleCell: View {
     @StateObject var bubble:Bubble
     @Binding var showDetailView:Bool
     @EnvironmentObject private var viewModel:ViewModel
+    @Binding var predicate:NSPredicate?
     
     private var isRunning:Bool { bubble.state == .running }
     
@@ -18,9 +19,10 @@ struct BubbleCell: View {
     private var min:Int = 0
     private var hr:Int = 0
     
-    init(_ bubble:Bubble, _ showDetail:Binding<Bool>) {
+    init(_ bubble:Bubble, _ showDetail:Binding<Bool>, _ predicate:Binding<NSPredicate?>) {
         _bubble = StateObject(wrappedValue: bubble)
         _showDetailView = Binding(projectedValue: showDetail)
+        _predicate = Binding(projectedValue: predicate)
         
         switch bubble.kind {
             case .stopwatch: sec = 0
@@ -35,7 +37,7 @@ struct BubbleCell: View {
     //⚠️ this property determines how many bubbles on screen to fit
     private static var edge:CGFloat = {
         print(UIScreen.main.bounds.height)
-        return dic[UIScreen.main.bounds.height] ?? 140
+        return dic[UIScreen.size.height] ?? 140
     }()
     
     ///component padding
@@ -60,23 +62,13 @@ struct BubbleCell: View {
                 .onTapGesture(count: 1) {
                     print("add note")
                 }
-            GeometryReader { geo in
-                minutesView
-                    .foregroundColor(colors.sec)
-                    .opacity(minOpacity)
-                    .onTapGesture {
-                        if viewModel.spotlightBubbleData == nil {
-                            let cellFrame = geo.frame(in: .global)
-                            viewModel.spotlightBubbleData =
-                            ViewModel.SpotlightBubbleData(yPosition: cellFrame.origin.y,
-                                                          height: cellFrame.height,
-                                                          id: bubble.objectID.description)
-                        } else {
-                            viewModel.spotlightBubbleData = nil
-                        }
-                        showDetailView.toggle()
-                    }
-            }
+            minutesView
+                .foregroundColor(colors.sec)
+                .opacity(minOpacity)
+                .onTapGesture {
+                    //%i integer, %f float, %@ object maybe?
+                    predicate = (predicate == nil) ? NSPredicate(format: "rank == %i", bubble.rank) : nil
+                }
             secondsView
                 .foregroundColor(colors.sec)
                 .onTapGesture {
@@ -93,12 +85,10 @@ struct BubbleCell: View {
         .swipeActions(edge: .leading, allowsFullSwipe: true) {
             
             //pin
-            if viewModel.spotlightBubbleData == nil {
-                Button { viewModel.togglePin(bubble) }
-            label: { Label { Text(bubble.isPinned ? "Unpin" : "Pin") }
-                icon: { Image(systemName: bubble.isPinned ? "pin.slash.fill" : "pin.fill") } }
-            .tint(bubble.isPinned ? .gray : .orange)
-            }
+            Button { viewModel.togglePin(bubble) }
+        label: { Label { Text(bubble.isPinned ? "Unpin" : "Pin") }
+            icon: { Image(systemName: bubble.isPinned ? "pin.slash.fill" : "pin.fill") } }
+        .tint(bubble.isPinned ? .gray : .orange)
             
             //calendar
             Button { viewModel.toggleCalendar(bubble) }
@@ -107,13 +97,14 @@ struct BubbleCell: View {
         .tint(bubble.hasCalendar ? .calendarOff : .calendar)
         }
         .swipeActions(edge: .trailing, allowsFullSwipe: true) {
-            
             //delete
-            if viewModel.spotlightBubbleData == nil {
-                Button { viewModel.delete(bubble) }
-            label: { Label { Text("Delete") }
-                icon: { Image.trash } }.tint(.red)
+            Button {
+                viewModel.delete(bubble)
+                //set predicate to nil in case any filtered search is going on
+                predicate = nil
             }
+        label: { Label { Text("Delete") }
+            icon: { Image.trash } }.tint(.red)
             
             //more options
             Button { viewModel.showMoreOptions(bubble) }
