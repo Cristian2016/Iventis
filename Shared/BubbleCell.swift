@@ -74,7 +74,6 @@ struct BubbleCell: View {
                         } else {
                             viewModel.spotlightBubbleData = nil
                         }
-                        
                         showDetailView.toggle()
                     }
             }
@@ -89,6 +88,7 @@ struct BubbleCell: View {
                     viewModel.endSession(bubble)
                 }
             if bubble.state != .running { hundredthsView }
+            if bubble.hasCalendar { calendarView }
         }
         .swipeActions(edge: .leading, allowsFullSwipe: true) {
             
@@ -104,7 +104,7 @@ struct BubbleCell: View {
             Button { viewModel.toggleCalendar(bubble) }
         label: { Label { Text(bubble.hasCalendar ? "Cal OFF" : "Cal ON") }
             icon: { Image(systemName: bubble.hasCalendar ? "calendar" : "calendar") } }
-        .tint(bubble.hasCalendar ? .gray : .calendar)
+        .tint(bubble.hasCalendar ? .calendarOff : .calendar)
         }
         .swipeActions(edge: .trailing, allowsFullSwipe: true) {
             
@@ -182,6 +182,19 @@ struct BubbleCell: View {
         }
 //        .standardShadow(false)
         .padding(EdgeInsets(top: 0, leading: 0, bottom: 6, trailing: 8))
+    }
+    
+    private var calendarView:some View {
+        VStack {
+            HStack {
+                Image(systemName: "calendar")
+                    .font(.largeTitle)
+                    .foregroundColor(.calendar)
+                    .offset(x: -10, y: 0)
+                Spacer()
+            }
+            Spacer()
+        }
     }
     
     @ViewBuilder

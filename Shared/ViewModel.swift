@@ -112,7 +112,8 @@ class ViewModel: ObservableObject {
     }
     
     func toggleCalendar(_ bubble:Bubble) {
-        
+        bubble.hasCalendar.toggle()
+        PersistenceController.shared.save()
     }
     
     func showMoreOptions(_ bubble:Bubble) {
