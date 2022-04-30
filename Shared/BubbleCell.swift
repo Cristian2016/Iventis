@@ -67,6 +67,7 @@ struct BubbleCell: View {
                     .onTapGesture {
                         let yPosition = geo.frame(in: .global).origin.y
                         viewModel.setInSpotlight(bubble, yPosition)
+                        showDetailView.toggle()
                     }
             }
             secondsView

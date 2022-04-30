@@ -50,19 +50,17 @@ struct BubbleList: View {
                                         .environmentObject(viewModel)
                                 }
                             } header: { headerTitle(for: section.id.description) }
-                        } //ForEach
+                        }
                         .listRowSeparator(.hidden)
-                    } //List
+                    }
                     .offset(x: 0, y: listOffset())
                     .listStyle(.sidebar)
-                } //VStack
+                }
                 .ignoresSafeArea()
-            } //else statement
-            LeftStrip($showPalette, isBubbleListEmpty: bubbles.isEmpty) //it's invisible
-            PaletteView($showPalette).environmentObject(viewModel)
-            if showDetailView {
-                DetailView(showDetailView: $showDetailView)
             }
+            LeftStrip($showPalette, isBubbleListEmpty: bubbles.isEmpty)
+            PaletteView($showPalette).environmentObject(viewModel)
+            if showDetailView { DetailView(showDetailView: $showDetailView) }
         }
         .onChange(of: scenePhase, perform: {
             switch $0 {
