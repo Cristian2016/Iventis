@@ -13,7 +13,7 @@ struct DetailView:View {
     // MARK: -
     var body: some View {
         ZStack {
-            Color.detailViewBackground.onTapGesture { showDetailView = false }
+            Color.detailViewBackground
             VStack {
                 Text("Bubble Detail")
             }
