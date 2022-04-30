@@ -25,12 +25,6 @@ class ViewModel: ObservableObject {
     }
     
     // MARK: -
-    func updateCurrentClocks(_ bubbles:FetchedResults<Bubble>) {
-        //update currentClock only for running bubbles
-//        bubbles.forEach { $0.updateCurrentClock(runningOnly: true) }
-        PersistenceController.shared.save()
-    }
-    
     @Published private(set) var bubbleInSpotlightID:String?
     
     // MARK: - User Intents
@@ -68,7 +62,6 @@ class ViewModel: ObservableObject {
         let viewContext = PersistenceController.shared.viewContext
         bubble.created = Date()
         bubble.currentClock = bubble.initialClock
-//        bubble.timeComponents = bubble.currentClock.timeComponents() //⚠️
         bubble.timeComponentsString = bubble.convertToTimeComponents(bubble.initialClock)
         bubble.sessions?.forEach { viewContext.delete($0 as! Session) }
         bubble.hundredths = "00"
@@ -85,7 +78,6 @@ class ViewModel: ObservableObject {
         
         switch bubble.state {
             case .brandNew: /* changes to .running */
-//                print(bubble.state)
                 //create first session and add first pair to the session
                 let newSession = Session(context: PersistenceController.shared.viewContext)
                 let newPair = Pair(context: PersistenceController.shared.viewContext)
@@ -99,9 +91,6 @@ class ViewModel: ObservableObject {
                 newPair.start = Date()
                 bubble.lastSession.addToPairs(newPair)
                 
-                //hide hundreths immediately
-                
-                
             case .running: /* changes to .paused */
                 let currentPair = bubble.lastPair
                 currentPair?.pause = Date()
@@ -110,16 +99,12 @@ class ViewModel: ObservableObject {
                 
                 //compute and store currentClock
                 bubble.currentClock += currentPair!.duration
-//                print(bubble.currentClock, currentPair?.duration)
                 
                 bubble.hundredths = bubble.currentClock.hundredthsFromCurrentClock
                 bubble.timeComponentsString = bubble.convertToTimeComponents(bubble.currentClock)
                 
             case .finished: return
         }
-        
-//        print(bubble.lastSession.pairs.count, " pairs")
-
         
         try? PersistenceController.shared.viewContext.save()
     }
@@ -128,7 +113,6 @@ class ViewModel: ObservableObject {
     func endSession(_ bubble:Bubble) {
         if bubble.state == .brandNew { return }
         bubble.currentClock = bubble.initialClock
-//        bubble.timeComponents = bubble.currentClock.timeComponents() //⚠️
         bubble.timeComponentsString = bubble.convertToTimeComponents(bubble.currentClock)
         bubble.lastSession.isEnded = true
         bubble.hundredths = "00"
@@ -136,7 +120,7 @@ class ViewModel: ObservableObject {
         try? PersistenceController.shared.viewContext.save()
     }
     
-    func setInSpotlight(_ bubble:Bubble) {
+    func setInSpotlight(_ bubble:Bubble, _ position:CGPoint) {
         bubbleInSpotlightID = (bubbleInSpotlightID == nil) ? bubble.objectID.description : nil
     }
 }
