@@ -169,11 +169,10 @@ struct BubbleCell: View {
                     .background(Circle()
                         .foregroundColor(Color("pauseStickerColor"))
                         .padding(-12))
-                    .foregroundColor(.white)
+                    .foregroundColor(Color("pauseStickerFontColor"))
                     .font(.system(size: 24, weight: .semibold, design: .default))
             }
         }
-//        .standardShadow(false)
         .padding(EdgeInsets(top: 0, leading: 0, bottom: 6, trailing: 8))
     }
     
@@ -181,7 +180,7 @@ struct BubbleCell: View {
         VStack {
             HStack {
                 Image(systemName: "calendar")
-                    .font(.largeTitle)
+                    .font(.system(size: 45))
                     .foregroundColor(.calendar)
                     .offset(x: -10, y: 0)
                 Spacer()
