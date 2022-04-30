@@ -49,7 +49,7 @@ struct BubbleCell: View {
     // MARK: -
     var body: some View {
         let colors = bubbleColors(bubble.color)
-        
+       
         ZStack {
                 hoursView
                     .foregroundColor(colors.sec)
@@ -60,10 +60,15 @@ struct BubbleCell: View {
                     .onTapGesture(count: 1) {
                         print("add note")
                     }
+            GeometryReader { geo in
                 minutesView
                     .foregroundColor(colors.sec)
                     .opacity(minOpacity)
-                    .onTapGesture { viewModel.setInSpotlight(bubble) }
+                    .onTapGesture {
+                        viewModel.setInSpotlight(bubble)
+                        print(geo.frame(in: .global))
+                    }
+            }
                 secondsView
                     .foregroundColor(colors.sec)
                     .onTapGesture {
@@ -92,20 +97,17 @@ struct BubbleCell: View {
     
     // MARK: - Legoes
     private var hoursView:some View {
-        GeometryReader { geo in
-            HStack {
-                ZStack {
-                    Circle()
-                        .frame(width: BubbleCell.edge, height: BubbleCell.edge)
-                        .padding(padding)
-                    Text(bubble.timeComponentsString.hr)
-                        .font(.system(size: fontSize))
-                        .foregroundColor(.white)
-                }
-                Spacer()
+        HStack {
+            ZStack {
+                Circle()
+                    .frame(width: BubbleCell.edge, height: BubbleCell.edge)
+                    .padding(padding)
+                Text(bubble.timeComponentsString.hr)
+                    .font(.system(size: fontSize))
+                    .foregroundColor(.white)
             }
+            Spacer()
         }
-        
     }
     
     private var minutesView:some View {

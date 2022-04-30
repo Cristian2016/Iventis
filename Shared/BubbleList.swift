@@ -61,8 +61,6 @@ struct BubbleList: View {
             PaletteView($showPalette).environmentObject(viewModel)
             if showDetailView {
                 DetailView(showDetailView: $showDetailView)
-                    .scaleEffect(1)
-                    .animation(.spring(), value: 1)
             }
         }
         .offset(x: 0, y: listOffset())
