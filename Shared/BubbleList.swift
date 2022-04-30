@@ -64,7 +64,6 @@ struct BubbleList: View {
                 DetailView(showDetailView: $showDetailView)
             }
         }
-        
         .onChange(of: scenePhase, perform: {
             switch $0 {
                 case .active:

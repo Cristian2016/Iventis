@@ -49,17 +49,17 @@ struct BubbleCell: View {
     // MARK: -
     var body: some View {
         let colors = bubbleColors(bubble.color)
-       
+        
         ZStack {
-                hoursView
-                    .foregroundColor(colors.sec)
-                    .opacity(hrOpacity)
-                    .onTapGesture(count: 2, perform: {
-                        print("edit duration")
-                    })
-                    .onTapGesture(count: 1) {
-                        print("add note")
-                    }
+            hoursView
+                .foregroundColor(colors.sec)
+                .opacity(hrOpacity)
+                .onTapGesture(count: 2, perform: {
+                    print("edit duration")
+                })
+                .onTapGesture(count: 1) {
+                    print("add note")
+                }
             GeometryReader { geo in
                 minutesView
                     .foregroundColor(colors.sec)
@@ -69,17 +69,17 @@ struct BubbleCell: View {
                         viewModel.setInSpotlight(bubble, yPosition)
                     }
             }
-                secondsView
-                    .foregroundColor(colors.sec)
-                    .onTapGesture {
-                        UserFeedback.triggerSingleHaptic(.heavy)
-                        viewModel.toggleStart(bubble)
-                    }
-                    .onLongPressGesture {
-                        UserFeedback.triggerDoubleHaptic(.heavy)
-                        viewModel.endSession(bubble)
-                    }
-                if bubble.state != .running { hundredthsView }
+            secondsView
+                .foregroundColor(colors.sec)
+                .onTapGesture {
+                    UserFeedback.triggerSingleHaptic(.heavy)
+                    viewModel.toggleStart(bubble)
+                }
+                .onLongPressGesture {
+                    UserFeedback.triggerDoubleHaptic(.heavy)
+                    viewModel.endSession(bubble)
+                }
+            if bubble.state != .running { hundredthsView }
         }
         .swipeActions(edge: .leading, allowsFullSwipe: true) {
             Button { viewModel.togglePin(bubble) }
