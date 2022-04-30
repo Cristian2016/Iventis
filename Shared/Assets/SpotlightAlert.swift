@@ -8,18 +8,15 @@
 import SwiftUI
 
 struct SpotlightAlert: View {
+    
     var body: some View {
-        VStack {
-//            Text("Bubble Detail")
-//                .font(.title3)
-            Image.spotlight
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-                .frame(height: 80)
-            Text("Tap Minutes to dismiss")
-                .font(.caption)
-                .foregroundColor(.secondary)
+        HStack {
+            Image(systemName: "rays")
+                .font(.title)
+            Text("Spotlight")
+                .font(.title2)
         }
+        .foregroundColor(.secondary)
         .padding()
     }
 }
