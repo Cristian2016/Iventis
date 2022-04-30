@@ -60,7 +60,9 @@ struct BubbleList: View {
             }
             LeftStrip($showPalette, isBubbleListEmpty: bubbles.isEmpty)
             PaletteView($showPalette).environmentObject(viewModel)
-            if showDetailView { DetailView(showDetailView: $showDetailView) }
+            if showDetailView { DetailView(showDetailView: $showDetailView)
+                    .offset(x: 0, y: viewModel.spotlightBubbleData?.height ?? 0)
+            }
         }
         .onChange(of: scenePhase, perform: {
             switch $0 {
@@ -106,13 +108,13 @@ struct BubbleList: View {
     ]
     
     private func cellOpacity(for bubble:Bubble) -> Double {
-        guard let bubbleInSpotlightID = viewModel.bubbleInSpotlight?.id else { return 1 }
-        return (bubbleInSpotlightID == bubble.objectID.description) ? 1 : 0
+        guard let data = viewModel.spotlightBubbleData else { return 1 }
+        return (data.id == bubble.objectID.description) ? 1 : 0
     }
     
     private func listOffset() -> CGFloat {
-        if viewModel.bubbleInSpotlight == nil { return 0 }
-        else { return -viewModel.bubbleInSpotlight!.y + 40 }
+        guard let data = viewModel.spotlightBubbleData else { return 0 }
+        return -data.yPosition + 40
     }
 }
 

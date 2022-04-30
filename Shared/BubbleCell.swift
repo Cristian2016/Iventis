@@ -65,8 +65,16 @@ struct BubbleCell: View {
                     .foregroundColor(colors.sec)
                     .opacity(minOpacity)
                     .onTapGesture {
-                        let yPosition = geo.frame(in: .global).origin.y
-                        viewModel.setInSpotlight(bubble, yPosition)
+                        if viewModel.spotlightBubbleData == nil {
+                            let cellFrame = geo.frame(in: .global)
+                            viewModel.spotlightBubbleData =
+                            ViewModel.SpotlightBubbleData(yPosition: cellFrame.origin.y,
+                                                          height: cellFrame.height,
+                                                          id: bubble.objectID.description)
+                        } else {
+                            viewModel.spotlightBubbleData = nil
+                        }
+                        
                         showDetailView.toggle()
                     }
             }
