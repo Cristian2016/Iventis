@@ -5,7 +5,9 @@
 //  Created by Cristian Lapusan on 13.04.2022.
 //
 
+#if !os(macOS)
 import UIKit
+#endif
 import SwiftUI
 
 extension Color {
