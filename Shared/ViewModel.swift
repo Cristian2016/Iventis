@@ -111,6 +111,14 @@ class ViewModel: ObservableObject {
         try? PersistenceController.shared.viewContext.save()
     }
     
+    func toggleCalendar(_ bubble:Bubble) {
+        
+    }
+    
+    func showMoreOptions(_ bubble:Bubble) {
+        
+    }
+    
     // FIXME: ⚠️ not complete!
     func endSession(_ bubble:Bubble) {
         if bubble.state == .brandNew { return }

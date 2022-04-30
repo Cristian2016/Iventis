@@ -91,16 +91,34 @@ struct BubbleCell: View {
             if bubble.state != .running { hundredthsView }
         }
         .swipeActions(edge: .leading, allowsFullSwipe: true) {
-            Button { viewModel.togglePin(bubble) }
-        label: { Label { Text(bubble.isPinned ? "Unpin" : "Pin") }
-            icon: { Image(systemName: bubble.isPinned ? "pin.slash.fill" : "pin.fill") } }
-        .tint(bubble.isPinned ? .gray : .orange)
+            
+            //pin
+            if viewModel.spotlightBubbleData == nil {
+                Button { viewModel.togglePin(bubble) }
+            label: { Label { Text(bubble.isPinned ? "Unpin" : "Pin") }
+                icon: { Image(systemName: bubble.isPinned ? "pin.slash.fill" : "pin.fill") } }
+            .tint(bubble.isPinned ? .gray : .orange)
+            }
+            
+            //calendar
+            Button { viewModel.toggleCalendar(bubble) }
+        label: { Label { Text(bubble.hasCalendar ? "Cal OFF" : "Cal ON") }
+            icon: { Image(systemName: bubble.hasCalendar ? "calendar" : "calendar") } }
+        .tint(bubble.hasCalendar ? .gray : .calendar)
         }
         .swipeActions(edge: .trailing, allowsFullSwipe: true) {
-            Button { viewModel.delete(bubble) }
-        label: { Label { Text("Delete") }
-            icon: { Image.trash } }
-        .tint(.red)
+            
+            //delete
+            if viewModel.spotlightBubbleData == nil {
+                Button { viewModel.delete(bubble) }
+            label: { Label { Text("Delete") }
+                icon: { Image.trash } }.tint(.red)
+            }
+            
+            //more options
+            Button { viewModel.showMoreOptions(bubble) }
+        label: { Label { Text("More") }
+            icon: { Image(systemName: "ellipsis.circle.fill") } }.tint(.lightGray)
         }
     }
     

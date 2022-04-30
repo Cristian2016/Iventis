@@ -23,6 +23,7 @@ extension Bubble {
     @NSManaged public var currentClock: Float
     @NSManaged public var isPinned: Bool
     @NSManaged public var rank: Int64
+    @NSManaged public var hasCalendar: Bool
     
     @NSManaged public var sessions: NSOrderedSet?
 }

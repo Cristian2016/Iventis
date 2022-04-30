@@ -13,6 +13,8 @@ import SwiftUI
 extension Color {
     static let label = Color("label")
     static let detailViewBackground = Color("detailViewBackground")
+    static let lightGray = Color("lightGray")
+    static let calendar = Color("calendar")
 }
 
 extension Image {
