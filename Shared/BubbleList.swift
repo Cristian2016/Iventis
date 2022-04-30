@@ -53,6 +53,7 @@ struct BubbleList: View {
                         } //ForEach
                         .listRowSeparator(.hidden)
                     } //List
+                    .offset(x: 0, y: listOffset())
                     .listStyle(.sidebar)
                 } //VStack
                 .ignoresSafeArea()
@@ -63,7 +64,7 @@ struct BubbleList: View {
                 DetailView(showDetailView: $showDetailView)
             }
         }
-        .offset(x: 0, y: listOffset())
+        
         .onChange(of: scenePhase, perform: {
             switch $0 {
                 case .active:
@@ -114,9 +115,7 @@ struct BubbleList: View {
     
     private func listOffset() -> CGFloat {
         if viewModel.bubbleInSpotlight == nil { return 0 }
-        else {
-            return -(viewModel.bubbleInSpotlight?.y ?? 0)
-        }
+        else { return -viewModel.bubbleInSpotlight!.y + 40 }
     }
 }
 
