@@ -92,13 +92,14 @@ struct BubbleList: View {
     }()
     
     private func headerTitle(for sectionID:String) -> Text {
+        let condition = (viewModel.spotlightBubbleData == nil)
         if sectionID == "false" {
             return Text("Bubbles")
-                .foregroundColor(.label)
+                .foregroundColor(condition ? .label : .clear)
                 .font(.title3)
         } else {
             return Text("\(Image(systemName: "pin.fill")) Pinned")
-                .foregroundColor(.orange)
+                .foregroundColor(condition ? .orange : .clear)
                 .font(.title3)
         }
     }
