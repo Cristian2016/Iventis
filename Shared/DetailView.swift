@@ -15,7 +15,7 @@ struct DetailView:View {
         ZStack {
             Color.detailViewBackground.onTapGesture { showDetailView = false }
             VStack {
-                
+                Text("Bubble Detail")
             }
         }
         .ignoresSafeArea()

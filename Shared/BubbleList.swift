@@ -60,8 +60,9 @@ struct BubbleList: View {
             }
             LeftStrip($showPalette, isBubbleListEmpty: bubbles.isEmpty)
             PaletteView($showPalette).environmentObject(viewModel)
-            if showDetailView { DetailView(showDetailView: $showDetailView)
-                    .offset(x: 0, y: viewModel.spotlightBubbleData?.height ?? 0)
+            if showDetailView {
+                let yOffset = viewModel.spotlightBubbleData?.height ?? 0
+                DetailView(showDetailView: $showDetailView).offset(x: 0, y: yOffset)
             }
         }
         .onChange(of: scenePhase, perform: {

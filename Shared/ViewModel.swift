@@ -53,7 +53,8 @@ class ViewModel: ObservableObject {
         
         let request = Bubble.fetchRequest()
         let count = try? viewContext.count(for: request)
-        if count! > 1 { viewContext.delete(bubble) } else { return }
+        let condition = count! > 1 && spotlightBubbleData == nil
+        if condition { viewContext.delete(bubble) } else { return }
         
         try? viewContext.save()
     }
@@ -69,6 +70,7 @@ class ViewModel: ObservableObject {
     }
     
     func togglePin(_ bubble:Bubble) {
+        if spotlightBubbleData != nil { return }
         bubble.isPinned.toggle()
         PersistenceController.shared.save()
     }
