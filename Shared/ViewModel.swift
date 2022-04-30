@@ -25,7 +25,7 @@ class ViewModel: ObservableObject {
     }
     
     // MARK: -
-    @Published private(set) var bubbleInSpotlightID:String?
+    @Published private(set) var bubbleInSpotlight:(id:String, y:CGFloat)?
     
     // MARK: - User Intents
     func createBubble(_ kind:Bubble.Kind, _ color:String) {
@@ -120,7 +120,10 @@ class ViewModel: ObservableObject {
         try? PersistenceController.shared.viewContext.save()
     }
     
-    func setInSpotlight(_ bubble:Bubble, _ position:CGPoint) {
-        bubbleInSpotlightID = (bubbleInSpotlightID == nil) ? bubble.objectID.description : nil
+    func setInSpotlight(_ bubble:Bubble, _ yPosition:CGFloat) {
+        if bubbleInSpotlight == nil {
+            bubbleInSpotlight = (bubble.objectID.description, yPosition)
+        }
+        else { bubbleInSpotlight = nil }
     }
 }

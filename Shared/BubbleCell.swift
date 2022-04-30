@@ -65,7 +65,7 @@ struct BubbleCell: View {
                     .foregroundColor(colors.sec)
                     .opacity(minOpacity)
                     .onTapGesture {
-                        viewModel.setInSpotlight(bubble)
+                        viewModel.setInSpotlight(bubble, geo.frame(in: .global).origin.y)
                         print(geo.frame(in: .global))
                     }
             }

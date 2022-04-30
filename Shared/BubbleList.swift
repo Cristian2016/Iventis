@@ -108,13 +108,15 @@ struct BubbleList: View {
     ]
     
     private func cellOpacity(for bubble:Bubble) -> Double {
-        guard let bubbleInSpotlightID = viewModel.bubbleInSpotlightID else { return 1 }
+        guard let bubbleInSpotlightID = viewModel.bubbleInSpotlight?.id else { return 1 }
         return (bubbleInSpotlightID == bubble.objectID.description) ? 1 : 0
     }
     
     private func listOffset() -> CGFloat {
-        if viewModel.bubbleInSpotlightID == nil { return 0 }
-        return -100
+        if viewModel.bubbleInSpotlight == nil { return 0 }
+        else {
+            return -(viewModel.bubbleInSpotlight?.y ?? 0)
+        }
     }
 }
 
