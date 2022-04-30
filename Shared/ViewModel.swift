@@ -31,7 +31,7 @@ class ViewModel: ObservableObject {
         PersistenceController.shared.save()
     }
     
-    @Published private var bubbleInSpotlight:Bubble?
+    @Published private(set) var bubbleInSpotlight:Bubble?
     
     // MARK: - User Intents
     func createBubble(_ kind:Bubble.Kind, _ color:String) {

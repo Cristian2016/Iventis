@@ -109,7 +109,12 @@ struct BubbleList: View {
     ]
     
     private func cellOpacity(for bubble:Bubble) -> Double {
-        return 1
+        guard let bubbleInSpotlight = viewModel.bubbleInSpotlight else { return 1 }
+        if bubbleInSpotlight.objectID == bubble.objectID {
+            return 1
+        } else {
+            return 0
+        }
     }
 }
 
