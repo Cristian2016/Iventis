@@ -45,7 +45,6 @@ struct BubbleCell: View {
         bubble.timeComponentsString.min > "0" || bubble.timeComponentsString.hr > "0" ? 1 : 0.001
     }
     private var hrOpacity:Double { bubble.timeComponentsString.hr > "0" ? 1 : 0.001 }
-    
         
     // MARK: -
     var body: some View {
@@ -65,7 +64,10 @@ struct BubbleCell: View {
                     .foregroundColor(colors.min)
                     .opacity(minOpacity)
                     .onTapGesture {
-                        showDetailView = true
+                        let info = ["id":bubble.id]
+                        NotificationCenter.default.post(name: .bubbleIDNotification, object: nil, userInfo: info)
+//                        showDetailView = true
+                        //communicate the parent view the bubble.id and cell.location
                     }
                 secondsView
                     .foregroundColor(colors.sec)
@@ -150,7 +152,7 @@ struct BubbleCell: View {
                         .foregroundColor(bubbleColors(bubble.color).sec)
                         .padding(-14))
                     .foregroundColor(.white)
-                    .font(.system(size: 22, weight: .semibold, design: .default))
+                    .font(.system(size: 24, weight: .semibold, design: .default))
             }
         }
         .padding(EdgeInsets(top: 0, leading: 0, bottom: 10, trailing: 4))
@@ -200,14 +202,3 @@ struct BubbleCell: View {
 //        BubbleCell(PersistenceController.preview.)
 //    }
 //}
-
-struct CellRank:PreferenceKey {
-    
-    typealias Value = Int
-    
-    static var defaultValue = 0
-    
-    static func reduce(value: inout Int, nextValue: () -> Int) {
-        value = nextValue()
-    }
-}

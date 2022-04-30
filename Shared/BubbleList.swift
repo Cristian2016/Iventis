@@ -7,11 +7,14 @@
 
 import SwiftUI
 import CoreData
+import Combine
 
 struct BubbleList: View {
     //1
     @Environment(\.managedObjectContext) private var viewContext
     @Environment(\.scenePhase) var scenePhase
+    
+    private static var cancellables = Set<AnyCancellable>()
     
     // MARK: -
     @StateObject private var viewModel = ViewModel()
@@ -30,7 +33,16 @@ struct BubbleList: View {
     
     // MARK: -
     init() {
+        observeBubbleIDNotification()
         UITableView.appearance().showsVerticalScrollIndicator = false
+    }
+    
+    private func observeBubbleIDNotification() {
+        NotificationCenter.default.publisher(for: .bubbleIDNotification)
+            .sink { notification in
+                print(notification.userInfo!["id"])
+            }
+            .store(in: &BubbleList.cancellables)
     }
     
     // MARK: -
@@ -93,11 +105,11 @@ struct BubbleList: View {
         if sectionID == "false" {
             return Text("Bubbles")
                 .foregroundColor(.label)
-                .font(.title3)
+                .font(.body)
         } else {
             return Text("\(Image(systemName: "pin.fill")) Pinned")
                 .foregroundColor(.orange)
-                .font(.title3)
+                .font(.body)
         }
     }
     
