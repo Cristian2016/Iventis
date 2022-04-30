@@ -40,7 +40,7 @@ struct BubbleList: View {
             if bubbles.isEmpty { EmptyBubbleListView() }
             else {
                 VStack {
-                    Spacer(minLength: 20) //distance from status bar
+                    Spacer(minLength: 30) //distance from status bar
                     List {
                         ForEach(bubbles) { section in
                             Section {
@@ -53,7 +53,7 @@ struct BubbleList: View {
                         } //ForEach
                         .listRowSeparator(.hidden)
                     } //List
-                    .listStyle(.grouped)
+                    .listStyle(.sidebar)
                 } //VStack
                 .ignoresSafeArea()
             } //else statement
@@ -65,6 +65,7 @@ struct BubbleList: View {
                     .animation(.spring(), value: 1)
             }
         }
+        .offset(x: 0, y: listOffset())
         .onChange(of: scenePhase, perform: {
             switch $0 {
                 case .active:
@@ -95,11 +96,11 @@ struct BubbleList: View {
         if sectionID == "false" {
             return Text("Bubbles")
                 .foregroundColor(.label)
-                .font(.body)
+                .font(.title3)
         } else {
             return Text("\(Image(systemName: "pin.fill")) Pinned")
                 .foregroundColor(.orange)
-                .font(.body)
+                .font(.title3)
         }
     }
     
@@ -111,6 +112,11 @@ struct BubbleList: View {
     private func cellOpacity(for bubble:Bubble) -> Double {
         guard let bubbleInSpotlightID = viewModel.bubbleInSpotlightID else { return 1 }
         return (bubbleInSpotlightID == bubble.objectID.description) ? 1 : 0
+    }
+    
+    private func listOffset() -> CGFloat {
+        if viewModel.bubbleInSpotlightID == nil { return 0 }
+        return -100
     }
 }
 

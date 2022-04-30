@@ -52,7 +52,7 @@ struct BubbleCell: View {
         
         ZStack {
                 hoursView
-                    .foregroundColor(colors.hr)
+                    .foregroundColor(colors.sec)
                     .opacity(hrOpacity)
                     .onTapGesture(count: 2, perform: {
                         print("edit duration")
@@ -61,7 +61,7 @@ struct BubbleCell: View {
                         print("add note")
                     }
                 minutesView
-                    .foregroundColor(colors.min)
+                    .foregroundColor(colors.sec)
                     .opacity(minOpacity)
                     .onTapGesture { viewModel.setInSpotlight(bubble) }
                 secondsView
@@ -92,17 +92,20 @@ struct BubbleCell: View {
     
     // MARK: - Legoes
     private var hoursView:some View {
-        HStack {
-            ZStack {
-                Circle()
-                    .frame(width: BubbleCell.edge, height: BubbleCell.edge)
-                    .padding(padding)
-                Text(bubble.timeComponentsString.hr)
-                    .font(.system(size: fontSize))
-                    .foregroundColor(.white)
+        GeometryReader { geo in
+            HStack {
+                ZStack {
+                    Circle()
+                        .frame(width: BubbleCell.edge, height: BubbleCell.edge)
+                        .padding(padding)
+                    Text(bubble.timeComponentsString.hr)
+                        .font(.system(size: fontSize))
+                        .foregroundColor(.white)
+                }
+                Spacer()
             }
-            Spacer()
         }
+        
     }
     
     private var minutesView:some View {
@@ -127,7 +130,7 @@ struct BubbleCell: View {
                 Circle()
                     .frame(width: BubbleCell.edge, height: BubbleCell.edge)
                     .padding(padding)
-                    .overlay(pauseLine)
+//                    .overlay(pauseLine)
                 Text(bubble.timeComponentsString.sec)
                     .font(.system(size: fontSize))
                     .foregroundColor(.white)
@@ -142,28 +145,21 @@ struct BubbleCell: View {
                 Spacer()
                 Text(bubble.hundredths)
                     .background(Circle()
-                        .foregroundColor(bubbleColors(bubble.color).sec)
-                        .padding(-14))
+                        .foregroundColor(Color("pauseStickerColor"))
+                        .padding(-12))
                     .foregroundColor(.white)
                     .font(.system(size: 24, weight: .semibold, design: .default))
             }
         }
-        .padding(EdgeInsets(top: 0, leading: 0, bottom: 10, trailing: 4))
-    }
-    
-    private var hundredthsBackground:some View {
-        ZStack {
-            Image.pauseSticker
-                .resizable()
-                .frame(width: 50, height: 50)
-        }
+//        .standardShadow(false)
+        .padding(EdgeInsets(top: 0, leading: 0, bottom: 6, trailing: 8))
     }
     
     @ViewBuilder
     private var pauseLine:some View {
         if bubble.state != .running {
             Rectangle()
-                .frame(height: 14)
+                .frame(height: 10)
                 .foregroundColor(.white.opacity(0.4))
                 .padding()
         } else {
@@ -187,7 +183,7 @@ struct BubbleCell: View {
         Color.bubbleThrees.filter { $0.description == description }.first ?? Color.Bubbles.mint
     }
     
-    static let dic:[CGFloat:CGFloat] = [ /* 12mini */728:140, /* 8 */667:150,  /* ipdo */568:125,  /* 13 pro max */926:163,  /* 13 pro */844:147,  /* 11 pro max */896:158, 812:135,  /* 8max */736:167]
+    static let dic:[CGFloat:CGFloat] = [ /* 12mini */728:140, /* 8 */667:150,  /* ipdo */568:125,  /* 13 pro max */926:163,  /* 13 pro */844:147,  /* 11 pro max */896:158, 812:130,  /* 8max */736:167]
 }
 
 //struct BubbleCell1_Previews: PreviewProvider {
