@@ -13,7 +13,7 @@ struct DetailView:View {
     // MARK: -
     var body: some View {
         ZStack {
-            Color.blue.onTapGesture { showDetailView = false }
+            Color.detailViewBackground.onTapGesture { showDetailView = false }
             VStack {
                 
             }

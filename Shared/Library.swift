@@ -10,6 +10,7 @@ import SwiftUI
 
 extension Color {
     static let label = Color("label")
+    static let detailViewBackground = Color("detailViewBackground")
 }
 
 extension Image {
