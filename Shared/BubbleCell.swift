@@ -66,8 +66,10 @@ struct BubbleCell: View {
                 .foregroundColor(colors.sec)
                 .opacity(minOpacity)
                 .onTapGesture {
-                    //%i integer, %f float, %@ object maybe?
-                    predicate = (predicate == nil) ? NSPredicate(format: "rank == %i", bubble.rank) : nil
+                    withAnimation {
+                        //%i integer, %f float, %@ object??
+                        predicate = (predicate == nil) ? NSPredicate(format: "rank == %i", bubble.rank) : nil
+                    }
                 }
             secondsView
                 .foregroundColor(colors.sec)
