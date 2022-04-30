@@ -13,9 +13,7 @@ struct BubbleList: View {
     //1
     @Environment(\.managedObjectContext) private var viewContext
     @Environment(\.scenePhase) var scenePhase
-    
-    private static var cancellables = Set<AnyCancellable>()
-    
+        
     // MARK: -
     @StateObject private var viewModel = ViewModel()
     
@@ -33,16 +31,7 @@ struct BubbleList: View {
     
     // MARK: -
     init() {
-        observeBubbleIDNotification()
         UITableView.appearance().showsVerticalScrollIndicator = false
-    }
-    
-    private func observeBubbleIDNotification() {
-        NotificationCenter.default.publisher(for: .bubbleIDNotification)
-            .sink { notification in
-                print(notification.userInfo!["id"])
-            }
-            .store(in: &BubbleList.cancellables)
     }
     
     // MARK: -
@@ -55,8 +44,9 @@ struct BubbleList: View {
                     List {
                         ForEach(bubbles) { section in
                             Section {
-                                ForEach (section) {
-                                    BubbleCell($0, $showDetailView)
+                                ForEach (section) { bubble in
+                                    BubbleCell(bubble, $showDetailView)
+                                        .opacity(cellOpacity(for: bubble))
                                         .environmentObject(viewModel)
                                 }
                             } header: { headerTitle(for: section.id.description) }
@@ -117,6 +107,10 @@ struct BubbleList: View {
         NSSortDescriptor(key: "isPinned", ascending: false),
         NSSortDescriptor(key: "rank", ascending: false)
     ]
+    
+    private func cellOpacity(for bubble:Bubble) -> Double {
+        return 1
+    }
 }
 
 // MARK: -

@@ -25,6 +25,15 @@ class ViewModel: ObservableObject {
     }
     
     // MARK: -
+    func updateCurrentClocks(_ bubbles:FetchedResults<Bubble>) {
+        //update currentClock only for running bubbles
+//        bubbles.forEach { $0.updateCurrentClock(runningOnly: true) }
+        PersistenceController.shared.save()
+    }
+    
+    @Published private var bubbleInSpotlight:Bubble?
+    
+    // MARK: - User Intents
     func createBubble(_ kind:Bubble.Kind, _ color:String) {
         let backgroundContext = PersistenceController.shared.backgroundContext
                 
@@ -50,9 +59,7 @@ class ViewModel: ObservableObject {
         
         let request = Bubble.fetchRequest()
         let count = try? viewContext.count(for: request)
-        if count! > 1 {
-            viewContext.delete(bubble)
-        } else { return }
+        if count! > 1 { viewContext.delete(bubble) } else { return }
         
         try? viewContext.save()
     }
@@ -68,19 +75,11 @@ class ViewModel: ObservableObject {
         try? viewContext.save()
     }
     
-    // FIXME: ⚠️ not complete!
-    func endSession(_ bubble:Bubble) {
-        if bubble.state == .brandNew { return }
-        bubble.currentClock = bubble.initialClock
-//        bubble.timeComponents = bubble.currentClock.timeComponents() //⚠️
-        bubble.timeComponentsString = bubble.convertToTimeComponents(bubble.currentClock)
-        bubble.lastSession.isEnded = true
-        bubble.hundredths = "00"
-        
-        try? PersistenceController.shared.viewContext.save()
+    func togglePin(_ bubble:Bubble) {
+        bubble.isPinned.toggle()
+        PersistenceController.shared.save()
     }
     
-    // MARK: -
     func toggleStart(_ bubble:Bubble) {
         if bubble.currentClock <= 0 && bubble.kind != .stopwatch  { return }
         
@@ -125,14 +124,19 @@ class ViewModel: ObservableObject {
         try? PersistenceController.shared.viewContext.save()
     }
     
-    func togglePin(_ bubble:Bubble) {
-        bubble.isPinned.toggle()
-        PersistenceController.shared.save()
+    // FIXME: ⚠️ not complete!
+    func endSession(_ bubble:Bubble) {
+        if bubble.state == .brandNew { return }
+        bubble.currentClock = bubble.initialClock
+//        bubble.timeComponents = bubble.currentClock.timeComponents() //⚠️
+        bubble.timeComponentsString = bubble.convertToTimeComponents(bubble.currentClock)
+        bubble.lastSession.isEnded = true
+        bubble.hundredths = "00"
+        
+        try? PersistenceController.shared.viewContext.save()
     }
     
-    func updateCurrentClocks(_ bubbles:FetchedResults<Bubble>) {
-        //update currentClock only for running bubbles
-//        bubbles.forEach { $0.updateCurrentClock(runningOnly: true) }
-        PersistenceController.shared.save()
+    func setInSpotlight(_ bubble:Bubble) {
+        bubbleInSpotlight = (bubbleInSpotlight == nil) ? bubble : nil
     }
 }

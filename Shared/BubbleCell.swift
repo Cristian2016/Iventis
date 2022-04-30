@@ -64,10 +64,7 @@ struct BubbleCell: View {
                     .foregroundColor(colors.min)
                     .opacity(minOpacity)
                     .onTapGesture {
-                        let info = ["id":bubble.id]
-                        NotificationCenter.default.post(name: .bubbleIDNotification, object: nil, userInfo: info)
-//                        showDetailView = true
-                        //communicate the parent view the bubble.id and cell.location
+                        viewModel.setInSpotlight(bubble)
                     }
                 secondsView
                     .foregroundColor(colors.sec)
