@@ -27,21 +27,21 @@ struct DetailView:View {
         VStack {
             ScrollViewReader { proxy in
             ScrollView(.horizontal, showsIndicators: false) {
-                    HStack {
-                        ForEach (sessions) { session in
-                            let duration = sessionDuration(of: session)
-                            
-                            VStack (alignment:.leading) {
-                                Text(sessionRank(of:session))
-                                Text(DateFormatter.bubbleStyleShortDate.string(from: session.created))
-                                HStack {
-                                    Text(duration.hr)
-                                    Text(duration.min)
-                                    Text(duration.sec)
-                                }
+                HStack {
+                    ForEach (sessions) { session in
+                        let duration = sessionDuration(of: session)
+                        
+                        VStack (alignment:.leading) {
+                            Text(sessionRank(of:session))
+                            Text(DateFormatter.bubbleStyleShortDate.string(from: session.created))
+                            HStack {
+                                Text(duration.hr)
+                                Text(duration.min)
+                                Text(duration.sec)
                             }
-                            .padding(15)
-                            .background(RoundedRectangle(cornerRadius: 10)
+                        }
+                        .padding(15)
+                        .background(RoundedRectangle(cornerRadius: 10)
                                 .strokeBorder(bubbleColor(), lineWidth: 4, antialiased: true)
                             )
                         }
