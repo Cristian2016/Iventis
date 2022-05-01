@@ -27,11 +27,11 @@ public class Pair: NSManagedObject {
             case .pause:
                
                 duration = Float(pause.timeIntervalSince(start))
-                print("pause \(duration)")
+//                print("pause \(duration)")
             case .endSession:
                
                 duration = Float(pause.timeIntervalSince(start) - 0.5)
-                print("session ended \(duration)")
+//                print("session ended \(duration)")
         }
     }
 }

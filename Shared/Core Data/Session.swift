@@ -18,8 +18,7 @@ public class Session: NSManagedObject {
     //⚠️ implement on backgroundthread. warning: wait until pair computes its duration and then compite session.totalduration!!!
     func computeTotalDuration() {
         let pairs = pairs.array as! [Pair]
-        guard
-            !pairs.isEmpty,
+        guard !pairs.isEmpty,
         let lastPairDuration = pairs.last?.duration else { fatalError() }
         
         totalDuration += lastPairDuration
