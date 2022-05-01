@@ -29,7 +29,8 @@ struct DetailView:View {
                     HStack {
                         ForEach (sessions) { session in
                             VStack {
-                                Text(DateFormatter().bubbleStyle(session.created))
+                                Text(DateFormatter.bubbleStyleDate.string(from: session.created))
+                                Text(DateFormatter.bubbleStyleTime.string(from: session.created))
                             }
                         }
                     }
