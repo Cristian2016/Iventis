@@ -8,12 +8,12 @@
 import SwiftUI
 
 struct BubbleCell: View {
-    @State private var scale: CGFloat = 1.4
-    
     @StateObject var bubble:Bubble
-    @Binding var showDetailView:Bool
     @EnvironmentObject private var viewModel:ViewModel
+    
     @Binding var predicate:NSPredicate?
+    @State private var scale: CGFloat = 1.4
+    @Binding var showDetail:Bool
     
     private var isRunning:Bool { bubble.state == .running }
     
@@ -23,7 +23,7 @@ struct BubbleCell: View {
     
     init(_ bubble:Bubble, _ showDetail:Binding<Bool>, _ predicate:Binding<NSPredicate?>) {
         _bubble = StateObject(wrappedValue: bubble)
-        _showDetailView = Binding(projectedValue: showDetail)
+        _showDetail = Binding(projectedValue: showDetail)
         _predicate = Binding(projectedValue: predicate)
         
         switch bubble.kind {
@@ -104,7 +104,7 @@ struct BubbleCell: View {
                 viewModel.delete(bubble)
                 //set predicate to nil in case any filtered search is going on
                 predicate = nil
-                showDetailView = false
+                showDetail = false
             }
         label: { Label { Text("Delete") }
             icon: { Image.trash } }.tint(.red)
@@ -226,9 +226,15 @@ struct BubbleCell: View {
     fileprivate func toggleDetailView() {
         UserFeedback.triggerSingleHaptic(.medium)
         let condition = predicate == nil
+        
         //%i integer, %f float, %@ object??
         predicate = condition ? NSPredicate(format: "rank == %i", bubble.rank) : nil
-        showDetailView = condition ? true : false
+        showDetail = condition ? true : false
+        
+        if showDetail {
+            let info = ["rank":bubble.rank]
+            NotificationCenter.default.post(name: .bubbleRank, object: nil, userInfo: info)
+        }
     }
     
     private func bubbleColors(_ description:String) -> Color.Three {

@@ -81,6 +81,7 @@ class ViewModel: ObservableObject {
                 let newPair = Pair(context: PersistenceController.shared.viewContext)
                 newPair.start = Date()
                 bubble.addToSessions(newSession)
+                newSession.created = Date()
                 newSession.addToPairs(newPair)
                                 
             case .paused:  /* changes to running */

@@ -10,7 +10,13 @@ import SwiftUI
 struct DetailView:View {
     @FetchRequest var sessions:FetchedResults<Session>
         
-    init(_ predicate:NSPredicate? = nil) {
+    init(_ rank:Int?) {
+        let predicate:NSPredicate?
+        if let rank = rank {
+            predicate = NSPredicate(format: "bubble.rank == %i", rank)
+        }
+        else { predicate = nil }
+        
         let descriptor = NSSortDescriptor(key: "created", ascending: false)
         _sessions = FetchRequest(entity: Session.entity(), sortDescriptors: [descriptor], predicate: predicate, animation: .easeInOut)
     }
@@ -31,6 +37,7 @@ struct DetailView:View {
             }
             .padding()
         }
+        .offset(x: 0, y: -40)
     }
 }
 
