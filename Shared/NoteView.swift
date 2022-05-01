@@ -15,7 +15,7 @@ struct NoteView: View {
     let aspectRatio:CGFloat = 2.1
     let height = CGFloat(46)
     
-    init(content:String = "", lineWidth:CGFloat = 3, radius:CGFloat = 5) {
+    init(content:String, lineWidth:CGFloat = 3, radius:CGFloat = 0) {
         self.content = content
         self.lineWidth = lineWidth
         self.cornerRadius = radius
@@ -25,7 +25,7 @@ struct NoteView: View {
         ZStack {
             HStack {
                 Spacer()
-                Label { Text("Note") } icon: { }
+                Label { Text(content) } icon: { }
                 Spacer()
             }
             .background(border)
@@ -54,8 +54,8 @@ struct NoteView: View {
 struct Note_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            NoteView()
-            NoteView().preferredColorScheme(.dark)
+            NoteView(content: "Workout")
+            NoteView(content: "Work").preferredColorScheme(.dark)
         }
     }
 }
