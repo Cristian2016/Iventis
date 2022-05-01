@@ -94,7 +94,10 @@ class ViewModel: ObservableObject {
                 let currentPair = bubble.lastPair
                 currentPair?.pause = Date()
                 //compute duration
-                currentPair!.duration = Float(currentPair!.pause!.timeIntervalSince(currentPair!.start))
+//                currentPair!.duration = Float(currentPair!.pause!.timeIntervalSince(currentPair!.start))
+//
+                currentPair?.computeDuration(.pause)
+                bubble.lastSession.computeTotalDuration()
                 
                 //compute and store currentClock
                 bubble.currentClock += currentPair!.duration
@@ -123,7 +126,9 @@ class ViewModel: ObservableObject {
         bubble.currentClock = bubble.initialClock
         bubble.timeComponentsString = bubble.convertToTimeComponents(bubble.currentClock)
         bubble.lastSession.isEnded = true
-        bubble.hundredths = "00"
+        bubble.lastPair?.pause = Date()
+        bubble.lastPair?.computeDuration(.endSession)
+        bubble.lastSession.computeTotalDuration()
         
         try? PersistenceController.shared.viewContext.save()
     }
