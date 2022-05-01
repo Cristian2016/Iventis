@@ -81,6 +81,7 @@ struct BubbleCell: View {
                 }
             if bubble.state != .running { hundredthsView }
             if bubble.hasCalendar { calendarView }
+            if !bubble.isNoteHidden { noteView }
         }
         .swipeActions(edge: .leading, allowsFullSwipe: true) {
             
@@ -179,6 +180,16 @@ struct BubbleCell: View {
         VStack {
             HStack {
                 CalendarView().offset(x: -10, y: -10)
+                Spacer()
+            }
+            Spacer()
+        }
+    }
+    
+    private var noteView:some View {
+        VStack {
+            HStack {
+                NoteView().offset(x: -20, y: -22)
                 Spacer()
             }
             Spacer()

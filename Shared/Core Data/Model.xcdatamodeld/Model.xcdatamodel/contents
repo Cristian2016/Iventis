@@ -6,7 +6,9 @@
         <attribute name="currentClock" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="hasCalendar" optional="YES" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
         <attribute name="initialClock" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="isNoteHidden" optional="YES" attributeType="Boolean" defaultValueString="YES" usesScalarValueType="YES"/>
         <attribute name="isPinned" optional="YES" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
+        <attribute name="note" optional="YES" attributeType="String" defaultValueString=""/>
         <attribute name="rank" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <relationship name="sessions" optional="YES" toMany="YES" deletionRule="Cascade" ordered="YES" destinationEntity="Session" inverseName="bubble" inverseEntity="Session"/>
     </entity>
@@ -25,7 +27,7 @@
         <relationship name="pairs" optional="YES" toMany="YES" deletionRule="Cascade" ordered="YES" destinationEntity="Pair" inverseName="session" inverseEntity="Pair"/>
     </entity>
     <elements>
-        <element name="Bubble" positionX="-1028.380004882812" positionY="1528.89501953125" width="128" height="149"/>
+        <element name="Bubble" positionX="-1028.380004882812" positionY="1528.89501953125" width="128" height="179"/>
         <element name="Pair" positionX="-832.5816650390625" positionY="1586.590484619141" width="128" height="133"/>
         <element name="Session" positionX="-826.8931884765625" positionY="1341.822631835938" width="128" height="89"/>
     </elements>

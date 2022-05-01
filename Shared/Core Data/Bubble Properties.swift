@@ -25,6 +25,9 @@ extension Bubble {
     @NSManaged public var rank: Int64
     @NSManaged public var hasCalendar: Bool
     
+    @NSManaged public var note: String
+    @NSManaged public var isNoteHidden: Bool
+    
     @NSManaged public var sessions: NSOrderedSet?
 }
 
