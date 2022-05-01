@@ -104,6 +104,7 @@ struct BubbleCell: View {
                 viewModel.delete(bubble)
                 //set predicate to nil in case any filtered search is going on
                 predicate = nil
+                showDetailView = false
             }
         label: { Label { Text("Delete") }
             icon: { Image.trash } }.tint(.red)
