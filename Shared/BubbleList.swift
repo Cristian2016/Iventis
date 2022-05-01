@@ -73,7 +73,7 @@ struct BubbleList: View {
             LeftStrip($showPalette, isBubbleListEmpty: fetchRequest.isEmpty)
             PaletteView($showPalette).environmentObject(viewModel)
             if showDetailView {
-                DetailView(showDetailView: $showDetailView)
+                DetailView(showDetailView: $showDetailView, cellHeight: 300)
             }
         }
         .onChange(of: scenePhase, perform: {

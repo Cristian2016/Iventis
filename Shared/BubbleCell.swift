@@ -67,8 +67,10 @@ struct BubbleCell: View {
                 .opacity(minOpacity)
                 .onTapGesture {
                     withAnimation {
+                        let condition = predicate == nil
                         //%i integer, %f float, %@ object??
-                        predicate = (predicate == nil) ? NSPredicate(format: "rank == %i", bubble.rank) : nil
+                        predicate = condition ? NSPredicate(format: "rank == %i", bubble.rank) : nil
+                        showDetailView = condition ? true : false
                     }
                 }
             secondsView

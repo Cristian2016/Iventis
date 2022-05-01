@@ -9,14 +9,16 @@ import SwiftUI
 
 struct DetailView:View {
     @Binding var showDetailView:Bool
+    var cellHeight:CGFloat
     
     // MARK: -
     var body: some View {
         ZStack {
-            Color.detailViewBackground
             VStack {
-                Text("Bubble Detail")
+                Spacer(minLength: 330)
+                Color.background
             }
+            Text("Detail")
         }
         .ignoresSafeArea()
     }
@@ -24,6 +26,6 @@ struct DetailView:View {
 
 struct BubbleDetail_Previews: PreviewProvider {
     static var previews: some View {
-        DetailView(showDetailView: .constant(true))
+        DetailView(showDetailView: .constant(true), cellHeight: 300)
     }
 }
