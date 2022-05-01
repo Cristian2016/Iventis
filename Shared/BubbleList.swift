@@ -33,7 +33,7 @@ struct BubbleList: View {
     
     // MARK: -
     @State private var isActive = true
-    @State var showDetail = false
+    @State var showDetail:(show:Bool, rank:Int?) = (false, nil)
     @State var showPalette = false
     
     // MARK: -
@@ -59,7 +59,7 @@ struct BubbleList: View {
                         ForEach(results) { section in
                             Section {
                                 ForEach (section) {
-                                        BubbleCell($0, $showDetail, $predicate)
+                                    BubbleCell($0, $showDetail, $predicate)
                                             .environmentObject(viewModel)
                                 }
                             } header: { headerTitle(for: section.id.description) }
@@ -71,7 +71,7 @@ struct BubbleList: View {
                 }
                 .ignoresSafeArea()
             }
-            if showDetail { DetailView(bubbleInSpotlightRank)}
+            if showDetail.show { DetailView(showDetail.rank)}
             LeftStrip($showPalette, isBubbleListEmpty: results.isEmpty)
             PaletteView($showPalette).environmentObject(viewModel)
         }
@@ -117,19 +117,6 @@ struct BubbleList: View {
         NSSortDescriptor(key: "isPinned", ascending: false),
         NSSortDescriptor(key: "rank", ascending: false)
     ]
-    
-    //Show Detail
-    @State private var cancellables = Set<AnyCancellable>()
-    @State private var bubbleInSpotlightRank:Int? = nil
-    
-    func observeBubbleRankNotification() {
-        NotificationCenter.default.publisher(for: .bubbleRank)
-            .sink { notification in
-                guard let rank = notification.userInfo?["rank"] as? Int else {fatalError()}
-                bubbleInSpotlightRank = rank
-            }
-            .store(in: &cancellables)
-    }
 }
 
 // MARK: -

@@ -13,7 +13,7 @@ struct BubbleCell: View {
     
     @Binding var predicate:NSPredicate?
     @State private var scale: CGFloat = 1.4
-    @Binding var showDetail:Bool
+    @Binding var showDetail:(show:Bool, rank:Int?)
     
     private var isRunning:Bool { bubble.state == .running }
     
@@ -21,7 +21,7 @@ struct BubbleCell: View {
     private var min:Int = 0
     private var hr:Int = 0
     
-    init(_ bubble:Bubble, _ showDetail:Binding<Bool>, _ predicate:Binding<NSPredicate?>) {
+    init(_ bubble:Bubble, _ showDetail:Binding<(show:Bool, rank:Int?)>, _ predicate:Binding<NSPredicate?>) {
         _bubble = StateObject(wrappedValue: bubble)
         _showDetail = Binding(projectedValue: showDetail)
         _predicate = Binding(projectedValue: predicate)
@@ -104,7 +104,7 @@ struct BubbleCell: View {
                 viewModel.delete(bubble)
                 //set predicate to nil in case any filtered search is going on
                 predicate = nil
-                showDetail = false
+                showDetail.show = false
             }
         label: { Label { Text("Delete") }
             icon: { Image.trash } }.tint(.red)
@@ -229,12 +229,7 @@ struct BubbleCell: View {
         
         //%i integer, %f float, %@ object??
         predicate = condition ? NSPredicate(format: "rank == %i", bubble.rank) : nil
-        showDetail = condition ? true : false
-        
-        if showDetail {
-            let info = ["rank":bubble.rank]
-            NotificationCenter.default.post(name: .bubbleRank, object: nil, userInfo: info)
-        }
+        showDetail = condition ? (true, Int(bubble.rank)) : (false, nil)
     }
     
     private func bubbleColors(_ description:String) -> Color.Three {

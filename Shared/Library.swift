@@ -168,3 +168,18 @@ extension DateComponentsFormatter {
         return formatter
     }()
 }
+
+extension DateFormatter {
+    func  bubbleStyle(_ date:Date) -> String {
+        
+        locale = Locale(identifier: "ro_RO")
+        dateStyle = .full
+        timeStyle = .medium
+        calendar = Calendar(identifier:.gregorian)
+        weekdaySymbols =  ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
+        monthSymbols = ["Jan.", "Feb.", "Mar.", "Apr.", "May", "Jun.", "Jul.", "Aug.", "Sep.", "Oct.", "Nov.", "Dec"]
+        let result = string(from: date)
+        
+        return result
+    }
+}
