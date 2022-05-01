@@ -16,6 +16,7 @@ extension Color {
     static let lightGray = Color("lightGray")
     static let calendar = Color("calendar")
     static let calendarOff = Color("calendarOff")
+    static let background1 = Color("background1")
 }
 
 extension Image {

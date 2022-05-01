@@ -177,10 +177,7 @@ struct BubbleCell: View {
     private var calendarView:some View {
         VStack {
             HStack {
-                Image(systemName: "calendar")
-                    .font(.system(size: 45))
-                    .foregroundColor(.calendar)
-                    .offset(x: -10, y: 0)
+                CalendarView().offset(x: -10, y: -10)
                 Spacer()
             }
             Spacer()

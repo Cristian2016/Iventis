@@ -14,6 +14,9 @@
 		1F100CA72809493400A3A3C2 /* BackgroundTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F100CA62809493400A3A3C2 /* BackgroundTimer.swift */; };
 		1F100CA82809493400A3A3C2 /* BackgroundTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F100CA62809493400A3A3C2 /* BackgroundTimer.swift */; };
 		1F100CA92809493400A3A3C2 /* BackgroundTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F100CA62809493400A3A3C2 /* BackgroundTimer.swift */; };
+		1F42399F281E4A27004BE717 /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F42399E281E4A27004BE717 /* CalendarView.swift */; };
+		1F4239A0281E4A27004BE717 /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F42399E281E4A27004BE717 /* CalendarView.swift */; };
+		1F4239A1281E4A27004BE717 /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F42399E281E4A27004BE717 /* CalendarView.swift */; };
 		1F5F4A5D28093FAF00AF3442 /* TimersApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5F4A4A28093FAD00AF3442 /* TimersApp.swift */; };
 		1F5F4A5E28093FAF00AF3442 /* TimersApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5F4A4A28093FAD00AF3442 /* TimersApp.swift */; };
 		1F5F4A6128093FAF00AF3442 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5F4A4C28093FAD00AF3442 /* Persistence.swift */; };
@@ -107,6 +110,7 @@
 
 /* Begin PBXFileReference section */
 		1F100CA62809493400A3A3C2 /* BackgroundTimer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BackgroundTimer.swift; sourceTree = "<group>"; };
+		1F42399E281E4A27004BE717 /* CalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
 		1F5F4A4A28093FAD00AF3442 /* TimersApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimersApp.swift; sourceTree = "<group>"; };
 		1F5F4A4C28093FAD00AF3442 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		1F5F4A4D28093FAF00AF3442 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -172,6 +176,7 @@
 		1F5F4A4228093FAC00AF3442 = {
 			isa = PBXGroup;
 			children = (
+				1F42399E281E4A27004BE717 /* CalendarView.swift */,
 				1F5F4A92280941D900AF3442 /* Timers (iOS).entitlements */,
 				1F5F4A91280941B700AF3442 /* WidgetsExtension.entitlements */,
 				1F5F4A4728093FAD00AF3442 /* Shared */,
@@ -397,6 +402,7 @@
 			files = (
 				1FFC8BAD28142F040059EF2E /* Session Properties.swift in Sources */,
 				1FD21865281D9AB700B43403 /* SpotlightAlertView.swift in Sources */,
+				1F42399F281E4A27004BE717 /* CalendarView.swift in Sources */,
 				1F9BE0A9280BE14100F87EFA /* PaletteView.swift in Sources */,
 				1F5F4A732809409600AF3442 /* Bubble.swift in Sources */,
 				1F97B7DD2809B311002FFCA3 /* Colors.swift in Sources */,
@@ -430,6 +436,7 @@
 				1FFC8BB728142F040059EF2E /* Pair.swift in Sources */,
 				1F97B7DE2809B311002FFCA3 /* Colors.swift in Sources */,
 				1FFC8BAE28142F040059EF2E /* Session Properties.swift in Sources */,
+				1F4239A0281E4A27004BE717 /* CalendarView.swift in Sources */,
 				1FCF0C672816F3F600AA1FAA /* EmptyBubbleListView.swift in Sources */,
 				1F5F4A742809409600AF3442 /* Bubble.swift in Sources */,
 				1FF0A2FE2810448100B1DB77 /* DetailView.swift in Sources */,
@@ -454,6 +461,7 @@
 			files = (
 				1FFC8BAF28142F040059EF2E /* Session Properties.swift in Sources */,
 				1FD21867281D9AB700B43403 /* SpotlightAlertView.swift in Sources */,
+				1F4239A1281E4A27004BE717 /* CalendarView.swift in Sources */,
 				1F9BE0AB280BE14100F87EFA /* PaletteView.swift in Sources */,
 				1F5F4A88280941AC00AF3442 /* Widgets.intentdefinition in Sources */,
 				1F97B7DF2809B311002FFCA3 /* Colors.swift in Sources */,
