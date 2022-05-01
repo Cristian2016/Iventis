@@ -54,7 +54,7 @@ struct BubbleList: View {
             else {
                 VStack {
                     Spacer(minLength: 30) //distance from status bar
-                    if predicate != nil { SpotlightAlert() }
+                    if predicate != nil { SpotlightAlertView(predicate: $predicate, showDetailView: $showDetailView) }
                     List {
                         ForEach(fetchRequest) { section in
                             Section {

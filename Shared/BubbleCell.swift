@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct BubbleCell: View {
+    @State private var scale: CGFloat = 1.4
+    
     @StateObject var bubble:Bubble
     @Binding var showDetailView:Bool
     @EnvironmentObject private var viewModel:ViewModel
@@ -67,12 +69,14 @@ struct BubbleCell: View {
                 .opacity(minOpacity)
                 .onTapGesture {
                     withAnimation {
+                        UserFeedback.triggerSingleHaptic(.medium)
                         let condition = predicate == nil
                         //%i integer, %f float, %@ object??
                         predicate = condition ? NSPredicate(format: "rank == %i", bubble.rank) : nil
                         showDetailView = condition ? true : false
                     }
                 }
+
             secondsView
                 .foregroundColor(colors.sec)
                 .onTapGesture {

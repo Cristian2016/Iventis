@@ -16,7 +16,7 @@ struct DetailView:View {
         ZStack {
             VStack {
                 Spacer(minLength: 330)
-                Color.background
+                Color.detailViewBackground
             }
             Text("Detail")
         }

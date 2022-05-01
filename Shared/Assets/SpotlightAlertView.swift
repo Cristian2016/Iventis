@@ -7,7 +7,9 @@
 
 import SwiftUI
 
-struct SpotlightAlert: View {
+struct SpotlightAlertView: View {
+    @Binding var predicate:NSPredicate?
+    @Binding var showDetailView:Bool
     
     var body: some View {
         HStack {
@@ -18,11 +20,16 @@ struct SpotlightAlert: View {
         }
         .foregroundColor(.secondary)
         .padding()
+        .onTapGesture { withAnimation {
+            UserFeedback.triggerSingleHaptic(.medium)
+            predicate = nil
+            showDetailView = false
+        } }
     }
 }
 
 struct SpotlightAlert_Previews: PreviewProvider {
     static var previews: some View {
-        SpotlightAlert()
+        SpotlightAlertView(predicate: .constant(nil), showDetailView: .constant(false))
     }
 }
