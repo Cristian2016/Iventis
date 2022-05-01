@@ -31,9 +31,18 @@ struct DetailView:View {
                     ForEach (sessions) { session in
                         let duration = sessionDuration(of: session)
                         
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
                         VStack (alignment:.leading) {
                             Text(sessionRank(of:session))
                             Text(DateFormatter.bubbleStyleShortDate.string(from: session.created))
+
                             HStack {
                                 Text(duration.hr)
                                 Text(duration.min)
