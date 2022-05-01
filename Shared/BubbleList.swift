@@ -28,18 +28,18 @@ struct BubbleList: View {
     @StateObject private var viewModel = ViewModel()
     
 //    private var bubbles: SectionedFetchResults<Bool, Bubble>
-    @SectionedFetchRequest var fetchRequest:SectionedFetchResults<Bool, Bubble>
+    @SectionedFetchRequest var results:SectionedFetchResults<Bool, Bubble>
     @Binding var predicate:NSPredicate?
     
     // MARK: -
     @State private var isActive = true
-    @State var showDetailView = false
+    @State var showDetail = false
     @State var showPalette = false
     
     // MARK: -
     init(_ predicate:Binding<NSPredicate?>) {
         UITableView.appearance().showsVerticalScrollIndicator = false
-        _fetchRequest = SectionedFetchRequest<Bool, Bubble>(entity: Bubble.entity(),
+        _results = SectionedFetchRequest<Bool, Bubble>(entity: Bubble.entity(),
                                                         sectionIdentifier: \.isPinned,
                                                       sortDescriptors: BubbleList.descriptors,
                                                             predicate: predicate.wrappedValue,
@@ -50,16 +50,16 @@ struct BubbleList: View {
     // MARK: -
     var body: some View {
         ZStack {
-            if fetchRequest.isEmpty { EmptyBubbleListView() }
+            if results.isEmpty { EmptyBubbleListView() }
             else {
                 VStack {
                     Spacer(minLength: 30) //distance from status bar
-                    if predicate != nil { SpotlightAlertView($predicate, $showDetailView) }
+                    if predicate != nil { SpotlightAlertView($predicate, $showDetail) }
                     List {
-                        ForEach(fetchRequest) { section in
+                        ForEach(results) { section in
                             Section {
-                                ForEach (section) { bubble in
-                                        BubbleCell(bubble, $showDetailView, $predicate)
+                                ForEach (section) {
+                                        BubbleCell($0, $showDetail, $predicate)
                                             .environmentObject(viewModel)
                                 }
                             } header: { headerTitle(for: section.id.description) }
@@ -71,12 +71,12 @@ struct BubbleList: View {
                 }
                 .ignoresSafeArea()
             }
-            if showDetailView {
-                DetailView($showDetailView)
+            if showDetail {
+                DetailView()
                     .offset(x: 0, y: -40)
                     .environmentObject(viewModel)
             }
-            LeftStrip($showPalette, isBubbleListEmpty: fetchRequest.isEmpty)
+            LeftStrip($showPalette, isBubbleListEmpty: results.isEmpty)
             PaletteView($showPalette).environmentObject(viewModel)
         }
         .onChange(of: scenePhase, perform: {

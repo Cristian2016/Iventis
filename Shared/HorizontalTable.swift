@@ -9,6 +9,7 @@ import SwiftUI
 
 struct HorizontalTable: View {
     
+    
     var body: some View {
         ScrollView(.horizontal, showsIndicators: false) {
             ScrollViewReader { proxy in

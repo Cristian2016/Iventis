@@ -8,27 +8,22 @@
 import SwiftUI
 
 struct DetailView:View {
-    @FetchRequest(entity: Session.entity(), sortDescriptors: [NSSortDescriptor(key: "created", ascending: false)], predicate: nil, animation: Animation.easeInOut)
-    private var sessions:FetchedResults<Session>
-    
-    @Binding var showDetail:Bool
-    
-    init(_ showDetail:Binding<Bool>) {
-        _showDetail = Binding(projectedValue: showDetail)
-    }
-    
-    private func bubble() {
+    @FetchRequest var sessions:FetchedResults<Session>
+        
+    init(_ predicate:NSPredicate? = nil) {
+        let descriptor = NSSortDescriptor(key: "created", ascending: false)
+        _sessions = FetchRequest(entity: Session.entity(), sortDescriptors: [descriptor], predicate: predicate, animation: .easeInOut)
     }
     
     // MARK: -
     var body: some View {
         VStack {
+            ScrollViewReader { proxy in
             ScrollView(.horizontal, showsIndicators: false) {
-                ScrollViewReader { proxy in
                     HStack {
                         ForEach (sessions) { session in
-                            TopCell().onTapGesture {
-                                proxy.scrollTo(2, anchor: .bottom)
+                            VStack {
+                                Text("\(session.created)")
                             }
                         }
                     }
