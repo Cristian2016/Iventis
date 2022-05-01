@@ -28,10 +28,15 @@ struct DetailView:View {
             ScrollView(.horizontal, showsIndicators: false) {
                     HStack {
                         ForEach (sessions) { session in
-                            VStack {
-                                Text(DateFormatter.bubbleStyleDate.string(from: session.created))
+                            VStack (alignment:.leading) {
+                                Text(sessionRank(of:session))
+                                Text(DateFormatter.bubbleStyleShortDate.string(from: session.created))
                                 Text(DateFormatter.bubbleStyleTime.string(from: session.created))
                             }
+                            .padding(15)
+                            .background(RoundedRectangle(cornerRadius: 10)
+                                .strokeBorder(bubbleColor(), lineWidth: 4, antialiased: true)
+                            )
                         }
                     }
                 }
@@ -40,6 +45,18 @@ struct DetailView:View {
         }
         .offset(x: 0, y: -40)
     }
+    
+    // MARK: -
+    private func bubbleColor() -> Color {
+        let description = sessions.last?.bubble.color ?? "mint"
+        return (Color.bubbleThrees.filter { $0.description == description }.first ?? Color.Bubbles.mint).sec
+        
+    }
+    
+    private func sessionRank(of session:Session) -> String {
+        String(sessions.count - Int(sessions.firstIndex(of: session)!))
+    }
+                                
 }
 
 //struct BubbleDetail_Previews: PreviewProvider {

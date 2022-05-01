@@ -25,11 +25,9 @@ public class Pair: NSManagedObject {
         
         switch durationComputed {
             case .pause:
-               
                 duration = Float(pause.timeIntervalSince(start))
 //                print("pause \(duration)")
             case .endSession:
-               
                 duration = Float(pause.timeIntervalSince(start) - 0.5)
 //                print("session ended \(duration)")
         }

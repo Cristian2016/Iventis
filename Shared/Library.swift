@@ -181,6 +181,16 @@ extension DateFormatter {
         return dateFormatter
     }()
     
+    static let bubbleStyleShortDate: DateFormatter = {
+        let dateFormatter = DateFormatter()
+        
+        dateFormatter.locale = Locale(identifier: "us_US")
+        dateFormatter.calendar = Calendar(identifier: .gregorian)
+        dateFormatter.dateFormat = "E d"
+        
+        return dateFormatter
+    }()
+    
     ///Time Bubbles time style: 17:39:25
     static let bubbleStyleTime: DateFormatter = {
         let dateFormatter = DateFormatter()
