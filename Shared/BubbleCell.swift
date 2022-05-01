@@ -93,7 +93,8 @@ struct BubbleCell: View {
             //calendar
             Button { viewModel.toggleCalendar(bubble) }
         label: { Label { Text(bubble.hasCalendar ? "Cal OFF" : "Cal ON") }
-            icon: { Image(systemName: bubble.hasCalendar ? "calendar" : "calendar") } }
+            icon: { Image(systemName: bubble.hasCalendar ? "calendar" : "calendar")
+            } }
         .tint(bubble.hasCalendar ? .calendarOff : .calendar)
         }
         .swipeActions(edge: .trailing, allowsFullSwipe: true) {
@@ -191,9 +192,7 @@ struct BubbleCell: View {
                 .frame(height: 10)
                 .foregroundColor(.white.opacity(0.4))
                 .padding()
-        } else {
-            EmptyView()
-        }
+        } else { EmptyView() }
     }
     
     // MARK: -
