@@ -65,13 +65,14 @@ struct BubbleList: View {
                             } header: { headerTitle(for: section.id.description) }
                         }
                         .listRowSeparator(.hidden)
+                        if showDetail.show { DetailView(showDetail.rank)}
                     }
                     .padding(EdgeInsets(top: 0, leading: -10, bottom: 0, trailing: -10))
                     .listStyle(.sidebar)
                 }
                 .ignoresSafeArea()
             }
-            if showDetail.show { DetailView(showDetail.rank)}
+            
             LeftStrip($showPalette, isBubbleListEmpty: results.isEmpty)
             PaletteView($showPalette).environmentObject(viewModel)
         }

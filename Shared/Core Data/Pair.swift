@@ -20,16 +20,14 @@ public class Pair: NSManagedObject {
         case endSession
     }
     
-    func computeDuration(_ durationComputed:DurationComputed) {
+    func computePairDuration(_ durationComputed:DurationComputed) {
         guard let pause = pause else { fatalError() }
         
         switch durationComputed {
             case .pause:
                 duration = Float(pause.timeIntervalSince(start))
-//                print("pause \(duration)")
             case .endSession:
                 duration = Float(pause.timeIntervalSince(start) - 0.5)
-//                print("session ended \(duration)")
         }
     }
 }

@@ -9,6 +9,7 @@ import SwiftUI
 
 struct DetailView:View {
     @FetchRequest var sessions:FetchedResults<Session>
+    let yOffset = CGFloat(-25)
         
     init(_ rank:Int?) {
         let predicate:NSPredicate?
@@ -28,10 +29,16 @@ struct DetailView:View {
             ScrollView(.horizontal, showsIndicators: false) {
                     HStack {
                         ForEach (sessions) { session in
+                            let duration = sessionDuration(of: session)
+                            
                             VStack (alignment:.leading) {
                                 Text(sessionRank(of:session))
                                 Text(DateFormatter.bubbleStyleShortDate.string(from: session.created))
-                                Text(DateFormatter.bubbleStyleTime.string(from: session.created))
+                                HStack {
+                                    Text(duration.hr)
+                                    Text(duration.min)
+                                    Text(duration.sec)
+                                }
                             }
                             .padding(15)
                             .background(RoundedRectangle(cornerRadius: 10)
@@ -43,7 +50,7 @@ struct DetailView:View {
             }
             .padding()
         }
-        .offset(x: 0, y: -40)
+        .offset(x: 0, y: yOffset)
     }
     
     // MARK: -
@@ -55,6 +62,11 @@ struct DetailView:View {
     
     private func sessionRank(of session:Session) -> String {
         String(sessions.count - Int(sessions.firstIndex(of: session)!))
+    }
+    
+    private func sessionDuration(of session:Session) -> (hr:String, min:String, sec:String) {
+        let value = session.totalDuration.timeComponents()
+        return (String(value.hr), String(value.min), String(value.sec))
     }
                                 
 }

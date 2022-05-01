@@ -16,14 +16,12 @@ public class Session: NSManagedObject {
     }
     
     //⚠️ implement on backgroundthread. warning: wait until pair computes its duration and then compite session.totalduration!!!
-    func computeTotalDuration() {
+    func computeSessionDuration() {
         let pairs = pairs.array as! [Pair]
         guard !pairs.isEmpty,
         let lastPairDuration = pairs.last?.duration else { fatalError() }
         
         totalDuration += lastPairDuration
-//        print("session duration \(totalDuration)")
-        
         //⚠️ no need to save context!
     }
 }
