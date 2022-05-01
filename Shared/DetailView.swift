@@ -8,24 +8,39 @@
 import SwiftUI
 
 struct DetailView:View {
-    @Binding var showDetailView:Bool
-    var cellHeight:CGFloat
+    @FetchRequest(entity: Session.entity(), sortDescriptors: [NSSortDescriptor(key: "created", ascending: false)], predicate: nil, animation: Animation.easeInOut)
+    private var sessions:FetchedResults<Session>
+    
+    @Binding var showDetail:Bool
+    
+    init(_ showDetail:Binding<Bool>) {
+        _showDetail = Binding(projectedValue: showDetail)
+    }
+    
+    private func bubble() {
+    }
     
     // MARK: -
     var body: some View {
-        ZStack {
-            VStack {
-                Spacer(minLength: 330)
-                Color.detailViewBackground
+        VStack {
+            ScrollView(.horizontal, showsIndicators: false) {
+                ScrollViewReader { proxy in
+                    HStack {
+                        ForEach (sessions) { session in
+                            TopCell().onTapGesture {
+                                proxy.scrollTo(2, anchor: .bottom)
+                            }
+                        }
+                    }
+                }
             }
-            Text("Detail")
+            .padding()
         }
-        .ignoresSafeArea()
     }
 }
 
-struct BubbleDetail_Previews: PreviewProvider {
-    static var previews: some View {
-        DetailView(showDetailView: .constant(true), cellHeight: 300)
-    }
-}
+//struct BubbleDetail_Previews: PreviewProvider {
+//    static var previews: some View {
+//        DetailView(showDetailView: .constant(true), bubble: .constant(<#T##value: Binding<Bubble>##Binding<Bubble>#>))
+//    }
+//}

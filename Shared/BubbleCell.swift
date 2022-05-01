@@ -207,7 +207,7 @@ struct BubbleCell: View {
         } else { EmptyView() }
     }
     
-    // MARK: -
+    // MARK: -Bub
     var tapGesture: some Gesture {
         TapGesture(count: 2)
             .onEnded {

@@ -20,6 +20,9 @@
 		1F4239A3281E510D004BE717 /* NoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4239A2281E510D004BE717 /* NoteView.swift */; };
 		1F4239A4281E510D004BE717 /* NoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4239A2281E510D004BE717 /* NoteView.swift */; };
 		1F4239A5281E510D004BE717 /* NoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4239A2281E510D004BE717 /* NoteView.swift */; };
+		1F4239AF281E7A38004BE717 /* HorizontalTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4239AE281E7A38004BE717 /* HorizontalTable.swift */; };
+		1F4239B0281E7A38004BE717 /* HorizontalTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4239AE281E7A38004BE717 /* HorizontalTable.swift */; };
+		1F4239B1281E7A38004BE717 /* HorizontalTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4239AE281E7A38004BE717 /* HorizontalTable.swift */; };
 		1F5F4A5D28093FAF00AF3442 /* TimersApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5F4A4A28093FAD00AF3442 /* TimersApp.swift */; };
 		1F5F4A5E28093FAF00AF3442 /* TimersApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5F4A4A28093FAD00AF3442 /* TimersApp.swift */; };
 		1F5F4A6128093FAF00AF3442 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5F4A4C28093FAD00AF3442 /* Persistence.swift */; };
@@ -115,6 +118,7 @@
 		1F100CA62809493400A3A3C2 /* BackgroundTimer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BackgroundTimer.swift; sourceTree = "<group>"; };
 		1F42399E281E4A27004BE717 /* CalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
 		1F4239A2281E510D004BE717 /* NoteView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoteView.swift; sourceTree = "<group>"; };
+		1F4239AE281E7A38004BE717 /* HorizontalTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalTable.swift; sourceTree = "<group>"; };
 		1F5F4A4A28093FAD00AF3442 /* TimersApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimersApp.swift; sourceTree = "<group>"; };
 		1F5F4A4C28093FAD00AF3442 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		1F5F4A4D28093FAF00AF3442 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -201,6 +205,7 @@
 				1FF0A2FC2810448100B1DB77 /* DetailView.swift */,
 				1FE163AD280EE6F40050C6F5 /* LeftStrip.swift */,
 				1F4239A2281E510D004BE717 /* NoteView.swift */,
+				1F4239AE281E7A38004BE717 /* HorizontalTable.swift */,
 				1F9B6AEF280950D600C0A725 /* ViewModel.swift */,
 				1F5F4A9C280945C700AF3442 /* BubbleCell.swift */,
 				1F100CA62809493400A3A3C2 /* BackgroundTimer.swift */,
@@ -421,6 +426,7 @@
 				1F5F4A6F28093FF800AF3442 /* Model.xcdatamodeld in Sources */,
 				1F9BE0AD280C6AB000F87EFA /* TapHold.swift in Sources */,
 				1F5F4A9D280945C700AF3442 /* BubbleCell.swift in Sources */,
+				1F4239AF281E7A38004BE717 /* HorizontalTable.swift in Sources */,
 				1F5F4A5D28093FAF00AF3442 /* TimersApp.swift in Sources */,
 				1FCF0C662816F3F600AA1FAA /* EmptyBubbleListView.swift in Sources */,
 				1FF0A2FD2810448100B1DB77 /* DetailView.swift in Sources */,
@@ -454,6 +460,7 @@
 				1F100CA82809493400A3A3C2 /* BackgroundTimer.swift in Sources */,
 				1FFC8BBA28142F040059EF2E /* Pair Properties.swift in Sources */,
 				1F5F4A7028093FF800AF3442 /* Model.xcdatamodeld in Sources */,
+				1F4239B0281E7A38004BE717 /* HorizontalTable.swift in Sources */,
 				1F5F4A5E28093FAF00AF3442 /* TimersApp.swift in Sources */,
 				1F5F4A762809409600AF3442 /* Bubble Properties.swift in Sources */,
 				1F9BE0AA280BE14100F87EFA /* PaletteView.swift in Sources */,
@@ -482,6 +489,7 @@
 				1F5F4A83280941AA00AF3442 /* Widgets.swift in Sources */,
 				1F9BE0AF280C6AB000F87EFA /* TapHold.swift in Sources */,
 				1F5F4A9F280945C700AF3442 /* BubbleCell.swift in Sources */,
+				1F4239B1281E7A38004BE717 /* HorizontalTable.swift in Sources */,
 				1F100CA5280946C900A3A3C2 /* Model.xcdatamodeld in Sources */,
 				1FCF0C682816F3F600AA1FAA /* EmptyBubbleListView.swift in Sources */,
 				1FF0A2FF2810448100B1DB77 /* DetailView.swift in Sources */,

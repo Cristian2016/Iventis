@@ -54,13 +54,13 @@ struct BubbleList: View {
             else {
                 VStack {
                     Spacer(minLength: 30) //distance from status bar
-                    if predicate != nil { SpotlightAlertView(predicate: $predicate, showDetailView: $showDetailView) }
+                    if predicate != nil { SpotlightAlertView($predicate, $showDetailView) }
                     List {
                         ForEach(fetchRequest) { section in
                             Section {
                                 ForEach (section) { bubble in
-                                    BubbleCell(bubble, $showDetailView, $predicate)
-                                        .environmentObject(viewModel)
+                                        BubbleCell(bubble, $showDetailView, $predicate)
+                                            .environmentObject(viewModel)
                                 }
                             } header: { headerTitle(for: section.id.description) }
                         }
@@ -71,11 +71,13 @@ struct BubbleList: View {
                 }
                 .ignoresSafeArea()
             }
+            if showDetailView {
+                DetailView($showDetailView)
+                    .offset(x: 0, y: -40)
+                    .environmentObject(viewModel)
+            }
             LeftStrip($showPalette, isBubbleListEmpty: fetchRequest.isEmpty)
             PaletteView($showPalette).environmentObject(viewModel)
-            if showDetailView {
-                DetailView(showDetailView: $showDetailView, cellHeight: 300)
-            }
         }
         .onChange(of: scenePhase, perform: {
             switch $0 {

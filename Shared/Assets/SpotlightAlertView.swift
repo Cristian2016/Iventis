@@ -9,7 +9,12 @@ import SwiftUI
 
 struct SpotlightAlertView: View {
     @Binding var predicate:NSPredicate?
-    @Binding var showDetailView:Bool
+    @Binding var showDetail:Bool
+    
+    init(_ predicate:Binding<NSPredicate?>, _ showDetail:Binding<Bool>) {
+        _predicate = Binding(projectedValue: predicate)
+        _showDetail = Binding(projectedValue: showDetail)
+    }
     
     var body: some View {
         HStack {
@@ -23,13 +28,13 @@ struct SpotlightAlertView: View {
         .onTapGesture { withAnimation {
             UserFeedback.triggerSingleHaptic(.medium)
             predicate = nil
-            showDetailView = false
+            showDetail = false
         } }
     }
 }
 
 struct SpotlightAlert_Previews: PreviewProvider {
     static var previews: some View {
-        SpotlightAlertView(predicate: .constant(nil), showDetailView: .constant(false))
+        SpotlightAlertView(.constant(nil), .constant(false))
     }
 }

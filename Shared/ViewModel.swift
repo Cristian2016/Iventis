@@ -126,8 +126,4 @@ class ViewModel: ObservableObject {
         
         try? PersistenceController.shared.viewContext.save()
     }
-    
-    func providePredicate(_ predicate:NSPredicate? = nil) {
-        
-    }
 }
