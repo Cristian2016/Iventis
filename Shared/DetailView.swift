@@ -43,10 +43,27 @@ struct DetailView:View {
                                             .fontWeight(.medium)
                                             .background(color)
                                             .foregroundColor(.white)
-                                        HStack {
-                                            Text(duration.hr)
-                                            Text(duration.min)
-                                            Text(duration.sec)
+                                        HStack (spacing: 8) {
+                                            if duration.hr != "0" {
+                                                HStack (alignment:.firstTextBaseline ,spacing: 0) {
+                                                    Text(duration.hr).font(.title2)
+                                                    Text("h")
+                                                }
+                                            }
+                                            
+                                            if duration.min != "0" {
+                                                HStack (alignment:.firstTextBaseline ,spacing: 0) {
+                                                    Text(duration.min).font(.title2)
+                                                    Text("m")
+                                                }
+                                            }
+                                            
+                                            if duration.sec != "0" {
+                                                HStack (alignment:.firstTextBaseline ,spacing: 0) {
+                                                    Text(duration.sec).font(.title2)
+                                                    Text("s")
+                                                }
+                                            }
                                         }
                                     }
                                     .padding(EdgeInsets(top: 0, leading: 16, bottom: 0, trailing: 0))
