@@ -49,9 +49,10 @@ struct DetailView:View {
                     }
                 }
             }
-            .padding()
+            .padding(EdgeInsets(top: 35, leading: 17, bottom: 0, trailing: 0))
         }
         .offset(x: 0, y: yOffset)
+        .padding(-20)
     }
     
     // MARK: -
