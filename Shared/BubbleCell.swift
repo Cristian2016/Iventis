@@ -13,7 +13,9 @@ struct BubbleCell: View {
     
     @Binding var predicate:NSPredicate?
     @State private var scale: CGFloat = 1.4
+    
     @Binding var showDetail:(show:Bool, rank:Int?)
+    @Binding var showDeleteAction:(show:Bool, rank:Int?)
     
     private var isRunning:Bool { bubble.state == .running }
     
@@ -21,10 +23,14 @@ struct BubbleCell: View {
     private var min:Int = 0
     private var hr:Int = 0
     
-    init(_ bubble:Bubble, _ showDetail:Binding<(show:Bool, rank:Int?)>, _ predicate:Binding<NSPredicate?>) {
+    init(_ bubble:Bubble,
+         _ showDetail:Binding<(show:Bool, rank:Int?)>,
+         _ predicate:Binding<NSPredicate?>,
+         _ showDeleteAction:Binding<(show:Bool, rank:Int?)>) {
         _bubble = StateObject(wrappedValue: bubble)
         _showDetail = Binding(projectedValue: showDetail)
         _predicate = Binding(projectedValue: predicate)
+        _showDeleteAction = Binding(projectedValue: showDeleteAction)
         
         switch bubble.kind {
             case .stopwatch: sec = 0
@@ -100,12 +106,7 @@ struct BubbleCell: View {
         }
         .swipeActions(edge: .trailing, allowsFullSwipe: true) {
             //delete
-            Button {
-                viewModel.delete(bubble)
-                //set predicate to nil in case any filtered search is going on
-                predicate = nil
-                showDetail.show = false
-            }
+            Button { showDeleteAction = (true, Int(bubble.rank))}
         label: { Label { Text("Delete") }
             icon: { Image.trash } }.tint(.red)
             

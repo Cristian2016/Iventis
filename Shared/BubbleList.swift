@@ -35,6 +35,7 @@ struct BubbleList: View {
     @State private var isActive = true
     @State var showDetail:(show:Bool, rank:Int?) = (false, nil)
     @State var showPalette = false
+    @State var showDeleteAction:(show:Bool, rank:Int?) = (false, nil)
     
     // MARK: -
     init(_ predicate:Binding<NSPredicate?>) {
@@ -59,7 +60,7 @@ struct BubbleList: View {
                         ForEach(results) { section in
                             Section {
                                 ForEach (section) {
-                                    BubbleCell($0, $showDetail, $predicate)
+                                    BubbleCell($0, $showDetail, $predicate, $showDeleteAction)
                                             .environmentObject(viewModel)
                                 }
                             } header: { headerTitle(for: section.id.description) }
@@ -75,6 +76,17 @@ struct BubbleList: View {
             
             LeftStrip($showPalette, isBubbleListEmpty: results.isEmpty)
             PaletteView($showPalette).environmentObject(viewModel)
+            if showDeleteAction.show {
+                DeleteActionView(showDeleteAction: $showDeleteAction)
+                    .onTapGesture {
+                        let bubble = bubble(for: showDeleteAction.rank!)
+                        viewModel.delete(bubble)
+                        //set predicate to nil in case any filtered search is going on
+                        predicate = nil
+                        showDetail.show = false
+                        showDeleteAction = (false, nil)
+                    }
+            }
         }
         .onChange(of: scenePhase, perform: {
             switch $0 {
@@ -118,6 +130,15 @@ struct BubbleList: View {
         NSSortDescriptor(key: "isPinned", ascending: false),
         NSSortDescriptor(key: "rank", ascending: false)
     ]
+    
+    private func bubble(for rank:Int?) -> Bubble {
+        guard let rank = rank else { fatalError() }
+        let request = Bubble.fetchRequest()
+        request.predicate = NSPredicate(format: "rank = %i", rank)
+        let context = PersistenceController.shared.viewContext
+        let bubble = try! context.fetch(request).first
+        return bubble!
+    }
 }
 
 // MARK: -
