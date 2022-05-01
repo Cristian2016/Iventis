@@ -25,26 +25,47 @@ struct DetailView:View {
     // MARK: -
     var body: some View {
         VStack {
+            let color = bubbleColor()
+            
             ScrollViewReader { proxy in
-            ScrollView(.horizontal, showsIndicators: false) {
-                HStack {
-                    ForEach (sessions) { session in
-                        let duration = sessionDuration(of: session)
-                
-                        VStack (alignment:.leading) {
-                            Text(sessionRank(of:session))
-                            Text(DateFormatter.bubbleStyleShortDate.string(from: session.created))
-
-                            HStack {
-                                Text(duration.hr)
-                                Text(duration.min)
-                                Text(duration.sec)
+                ScrollView(.horizontal, showsIndicators: false) {
+                    HStack {
+                        ForEach (sessions) { session in
+                            let duration = sessionDuration(of: session)
+                            ZStack {
+                                RoundedRectangle(cornerRadius: 10)
+                                .strokeBorder(color, lineWidth: 4, antialiased: true)
+                                .frame(width: 150, height: 120)
+                                HStack {
+                                    VStack (alignment:.leading, spacing: 6) {
+                                        Text(DateFormatter.bubbleStyleShortDate.string(from: session.created))
+                                            .font(.title2)
+                                            .fontWeight(.medium)
+                                            .background(color)
+                                            .foregroundColor(.white)
+                                        HStack {
+                                            Text(duration.hr)
+                                            Text(duration.min)
+                                            Text(duration.sec)
+                                        }
+                                    }
+                                    .padding(EdgeInsets(top: 0, leading: 16, bottom: 0, trailing: 0))
+                                    Spacer()
+                                }
+                                
+                                VStack {
+                                    HStack {
+                                        Spacer()
+                                        Text("\(sessionRank(of:session))")
+                                            .foregroundColor(color)
+                                            .font(.title2)
+                                            .padding(EdgeInsets(top: 8, leading: 0, bottom: 0, trailing: 12))
+                                    }
+                                    Spacer()
+                                }
+                                
                             }
-                        }
-                        .padding(15)
-                        .background(RoundedRectangle(cornerRadius: 10)
-                                .strokeBorder(bubbleColor(), lineWidth: 4, antialiased: true)
-                            )
+                            
                         }
                     }
                 }
