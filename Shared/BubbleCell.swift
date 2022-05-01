@@ -67,15 +67,7 @@ struct BubbleCell: View {
             minutesView
                 .foregroundColor(colors.sec)
                 .opacity(minOpacity)
-                .onTapGesture {
-                    withAnimation {
-                        UserFeedback.triggerSingleHaptic(.medium)
-                        let condition = predicate == nil
-                        //%i integer, %f float, %@ object??
-                        predicate = condition ? NSPredicate(format: "rank == %i", bubble.rank) : nil
-                        showDetailView = condition ? true : false
-                    }
-                }
+                .onTapGesture { withAnimation { toggleDetailView() } }
 
             secondsView
                 .foregroundColor(colors.sec)
@@ -219,11 +211,21 @@ struct BubbleCell: View {
                                 })
     }
     
+    static let dic:[CGFloat:CGFloat] = [ /* 12mini */728:140, /* 8 */667:150,  /* ipdo */568:125,  /* 13 pro max */926:163,  /* 13 pro */844:147,  /* 11 pro max */896:158, 812:130,  /* 8max */736:167]
+    
+    // MARK: - Methods
+    ///show/hide DetailView
+    fileprivate func toggleDetailView() {
+        UserFeedback.triggerSingleHaptic(.medium)
+        let condition = predicate == nil
+        //%i integer, %f float, %@ object??
+        predicate = condition ? NSPredicate(format: "rank == %i", bubble.rank) : nil
+        showDetailView = condition ? true : false
+    }
+    
     private func bubbleColors(_ description:String) -> Color.Three {
         Color.bubbleThrees.filter { $0.description == description }.first ?? Color.Bubbles.mint
     }
-    
-    static let dic:[CGFloat:CGFloat] = [ /* 12mini */728:140, /* 8 */667:150,  /* ipdo */568:125,  /* 13 pro max */926:163,  /* 13 pro */844:147,  /* 11 pro max */896:158, 812:130,  /* 8max */736:167]
 }
 
 //struct BubbleCell1_Previews: PreviewProvider {
