@@ -46,7 +46,7 @@ struct DetailView:View {
                     }
                 }
             }
-            .padding(EdgeInsets(top: 35, leading: 17, bottom: 0, trailing: 0))
+            .padding(EdgeInsets(top: 35, leading: 17, bottom: 0, trailing: 20))
             
             ScrollViewReader { proxy in
                 ScrollView(.horizontal, showsIndicators: false) {
