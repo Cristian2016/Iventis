@@ -17,9 +17,9 @@ struct TopCell: View {
     
     var body: some View {
         ZStack {
-            RoundedRectangle(cornerRadius: 10)
-                .strokeBorder(.clear, lineWidth: 0, antialiased: true)
-            .frame(width: 150, height: 120)
+//            RoundedRectangle(cornerRadius: 10)
+//                .strokeBorder(.clear, lineWidth: 0, antialiased: true)
+//                .frame(width: 150, height: 120)
             
             sessionRankView
             Push(.bottomLeft) {
@@ -27,8 +27,10 @@ struct TopCell: View {
                     dateView
                     durationView
                 }
-                .padding(EdgeInsets(top: 0, leading: 13, bottom: 10, trailing: 0))
+                
+                .padding(EdgeInsets(top: 0, leading: 13, bottom: 10, trailing: 6))
             }
+            .frame(height: 150)
             .background( backgroundView )
         }
     }
