@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct SpotlightAlertView: View {
+struct ExitFocusAlertView: View {
     @Binding var predicate:NSPredicate?
     @Binding var showDetail:(show:Bool, rank:Int?)
     
@@ -26,11 +26,12 @@ struct SpotlightAlertView: View {
                 }
             } label: {
                 Label {
-                    Text("Show All").font(.title2)
+                    Text("Exit Focus").font(.title2)
                 } icon: {
-                    Image(systemName: "eye.fill").font(.title)
+                    Image(systemName: "eye.slash.fill").font(.title)
                 }
             }
+            .tint(.orange)
             .buttonStyle(.bordered)
         }
         .padding()

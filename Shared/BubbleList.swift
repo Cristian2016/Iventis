@@ -23,7 +23,7 @@ struct BubbleList: View {
             else {
                 VStack {
                     Spacer(minLength: 30) //distance from status bar
-                    if predicate != nil { SpotlightAlertView($predicate, $showDetail) }
+                    if predicate != nil { ExitFocusAlertView($predicate, $showDetail) }
                     List {
                         ForEach(results) { section in
                             Section {
