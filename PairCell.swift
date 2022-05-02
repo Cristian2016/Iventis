@@ -8,10 +8,11 @@
 import SwiftUI
 
 struct PairCell: View {
-    @ObservedObject var pair:Pair
+    @StateObject var pair:Pair
     
     init(_ pair:Pair) {
-        self.pair = pair
+//        self.pair = pair
+        _pair = StateObject(wrappedValue: pair)
     }
     
     var body: some View {

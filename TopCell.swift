@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct TopCell: View {
-    @ObservedObject var session:Session
+    @StateObject var session:Session
 
     var color:Color
     let sessionCount:Int
@@ -98,7 +98,7 @@ struct TopCell: View {
     
     init(_ session:Session , _ sessionCount:Int, _ sessionRank:String) {
         self.sessionCount = sessionCount
-        self.session = session
+        _session = StateObject(wrappedValue: session)
         
         let description = session.bubble.color
         self.color = (Color.bubbleThrees.filter { $0.description == description }.first ?? Color.Bubbles.mint).sec
