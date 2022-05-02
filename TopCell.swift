@@ -16,20 +16,17 @@ struct TopCell: View {
     let duration: DetailTopView.DurationComponents
     
     var body: some View {
-        if !session.isFault {
-            ZStack {
-                sessionRankView
-                Push(.bottomLeft) {
-                    VStack (alignment:.leading, spacing: 6) {
-                        dateView
-                        if session.bubble?.state == .running { bubbleRunningAlert }
-                        else { durationView }
-                    }
-                    .padding(EdgeInsets(top: 0, leading: 13, bottom: 10, trailing: 6))
+        ZStack {
+            sessionRankView
+            Push(.bottomLeft) {
+                VStack (alignment:.leading, spacing: 6) {
+                    dateView
+                    durationView
                 }
-                .frame(height: 150)
-                .background( backgroundView )
+                .padding(EdgeInsets(top: 0, leading: 13, bottom: 10, trailing: 6))
             }
+            .frame(height: 150)
+            .background( backgroundView )
         }
     }
     
@@ -56,7 +53,6 @@ struct TopCell: View {
     
     private var durationView:some View {
         HStack (spacing: 8) {
-            if session.bubble?.state != .running {
                 //hr
                 if duration.hr != "0" {
                     HStack (alignment:.firstTextBaseline ,spacing: 0) {
@@ -80,9 +76,7 @@ struct TopCell: View {
                         Text("s")
                     }
                 }
-            } else {
-                Text(duration.min).font(.title2).foregroundColor(.clear)
-            }
+            
         }
     }
     
@@ -116,13 +110,13 @@ struct TopCell: View {
         self.duration = TopCell.duration(of: session)
     }
     
-    private var bubbleRunningAlert:some View {
-        Button { } label: { Label { Text("Running").fontWeight(.semibold) } icon: { } }
-    .buttonStyle(.borderedProminent)
-    .foregroundColor(.white)
-    .tint(.green)
-    .font(.caption)
-    }
+//    private var bubbleRunningAlert:some View {
+//        Button { } label: { Label { Text("Running").fontWeight(.semibold) } icon: { } }
+//    .buttonStyle(.borderedProminent)
+//    .foregroundColor(.white)
+//    .tint(.green)
+//    .font(.caption)
+//    }
 }
 
 //struct TopCell_Previews: PreviewProvider {
