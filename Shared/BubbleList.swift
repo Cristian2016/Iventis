@@ -10,44 +10,12 @@ import CoreData
 import Combine
 
 struct ContainerView:View {
-    @State var predicate:NSPredicate? = nil
+    var body: some View { VStack { BubbleList($predicate) } }
     
-    var body: some View {
-        VStack {
-            BubbleList($predicate)
-        }
-    }
+    @State var predicate:NSPredicate? = nil
 }
 
 struct BubbleList: View {
-    //1
-    @Environment(\.managedObjectContext) private var viewContext
-    @Environment(\.scenePhase) var scenePhase
-        
-    // MARK: -
-    @StateObject private var viewModel = ViewModel()
-    
-//    private var bubbles: SectionedFetchResults<Bool, Bubble>
-    @SectionedFetchRequest var results:SectionedFetchResults<Bool, Bubble>
-    @Binding var predicate:NSPredicate?
-    
-    // MARK: -
-    @State private var isActive = true
-    @State var showDetail:(show:Bool, rank:Int?) = (false, nil)
-    @State var showPalette = false
-    @State var showDeleteAction:(show:Bool, rank:Int?) = (false, nil)
-    
-    // MARK: -
-    init(_ predicate:Binding<NSPredicate?>) {
-        UITableView.appearance().showsVerticalScrollIndicator = false
-        _results = SectionedFetchRequest<Bool, Bubble>(entity: Bubble.entity(),
-                                                        sectionIdentifier: \.isPinned,
-                                                      sortDescriptors: BubbleList.descriptors,
-                                                            predicate: predicate.wrappedValue,
-                                                        animation: .default)
-        _predicate = Binding(projectedValue: predicate)
-    }
-    
     // MARK: -
     var body: some View {
         ZStack {
@@ -105,6 +73,34 @@ struct BubbleList: View {
             }
         })
         .navigationBarHidden(true)
+    }
+    
+    //1
+    @Environment(\.managedObjectContext) private var viewContext
+    @Environment(\.scenePhase) var scenePhase
+        
+    // MARK: -
+    @StateObject private var viewModel = ViewModel()
+    
+//    private var bubbles: SectionedFetchResults<Bool, Bubble>
+    @SectionedFetchRequest var results:SectionedFetchResults<Bool, Bubble>
+    @Binding var predicate:NSPredicate?
+    
+    // MARK: -
+    @State private var isActive = true
+    @State var showDetail:(show:Bool, rank:Int?) = (false, nil)
+    @State var showPalette = false
+    @State var showDeleteAction:(show:Bool, rank:Int?) = (false, nil)
+    
+    // MARK: -
+    init(_ predicate:Binding<NSPredicate?>) {
+        UITableView.appearance().showsVerticalScrollIndicator = false
+        _results = SectionedFetchRequest<Bool, Bubble>(entity: Bubble.entity(),
+                                                        sectionIdentifier: \.isPinned,
+                                                      sortDescriptors: BubbleList.descriptors,
+                                                            predicate: predicate.wrappedValue,
+                                                        animation: .default)
+        _predicate = Binding(projectedValue: predicate)
     }
     
     // MARK: -

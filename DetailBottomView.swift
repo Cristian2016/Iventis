@@ -25,7 +25,7 @@ struct DetailBottomView: View {
         ScrollView(.horizontal, showsIndicators: false) {
             HStack {//each session cooresponding to a list
                 ForEach (sessions) { session in
-                    PairsListView(session: session)
+                    BottomCell(session: session)
                         .frame(width: UIScreen.size.width * 0.91, height: 600)
                         .offset(x: 0, y: -40)
                 }

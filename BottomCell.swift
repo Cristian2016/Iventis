@@ -1,5 +1,5 @@
 //
-//  BottomCell.swift
+//  PairsListView.swift
 //  Timers
 //
 //  Created by Cristian Lapusan on 02.05.2022.
@@ -8,22 +8,36 @@
 import SwiftUI
 
 struct BottomCell: View {
-    let session:Session
+    @FetchRequest var pairs:FetchedResults<Pair>
+    
+    init(session:Session) {
+        let descriptor = NSSortDescriptor(key: "start", ascending: false)
+        let predicate = NSPredicate(format: "session = %@", session)
+        _pairs = FetchRequest(entity: Pair.entity(),
+                              sortDescriptors: [descriptor],
+                              predicate: predicate,
+                              animation: .easeInOut)
+    }
     
     var body: some View {
-        ScrollView {
-            ForEach (0..<10) {
-                Text("\($0)")
+        List {
+            ForEach(pairs) { pair in
+                
+                ZStack {
+                    Push(.bottomRight) {
+                        Image(systemName: "\(pairs.count - Int(pairs.firstIndex(of: pair)!)).square.fill")
+                            .foregroundColor(.secondary)
+                    }
+                    PairCell(pair)
+                }.padding(4)
             }
-//            ForEach (session.pairs_) { pair in
-//                Text(DateFormatter.bubbleStyleDate.string(from: pair.start))
-//            }
         }
+        .listStyle(.grouped)
     }
 }
 
-struct BottomCell_Previews: PreviewProvider {
-    static var previews: some View {
-        BottomCell(session: Session())
-    }
-}
+//struct PairsListView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        PairsListView()
+//    }
+//}
