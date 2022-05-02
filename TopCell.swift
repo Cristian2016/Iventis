@@ -16,17 +16,19 @@ struct TopCell: View {
     let duration: DetailTopView.DurationComponents
     
     var body: some View {
-        ZStack {
-            sessionRankView
-            Push(.bottomLeft) {
-                VStack (alignment:.leading, spacing: 6) {
-                    dateView
-                    durationView
+        if !session.isFault {
+            ZStack {
+                sessionRankView
+                Push(.bottomLeft) {
+                    VStack (alignment:.leading, spacing: 6) {
+                        dateView
+                        durationView
+                    }
+                    .padding(EdgeInsets(top: 0, leading: 13, bottom: 10, trailing: 6))
                 }
-                .padding(EdgeInsets(top: 0, leading: 13, bottom: 10, trailing: 6))
+                .frame(height: 150)
+                .background( backgroundView )
             }
-            .frame(height: 150)
-            .background( backgroundView )
         }
     }
     
