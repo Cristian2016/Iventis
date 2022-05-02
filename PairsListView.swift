@@ -23,8 +23,10 @@ struct PairsListView: View {
         List {
             ForEach(pairs) {
                 PairCell($0)
+                    .padding(4)
             }
         }
+        .listStyle(.grouped)
     }
 }
 

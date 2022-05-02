@@ -26,7 +26,7 @@ struct DetailBottomView: View {
             HStack {//each session cooresponding to a list
                 ForEach (sessions) { session in
                     PairsListView(session: session)
-                        .frame(width: UIScreen.size.width, height: 500)
+                        .frame(width: UIScreen.size.width, height: 600)
                         .offset(x: 0, y: -40)
                 }
             }
