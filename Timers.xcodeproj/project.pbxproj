@@ -14,15 +14,18 @@
 		1F100CA72809493400A3A3C2 /* BackgroundTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F100CA62809493400A3A3C2 /* BackgroundTimer.swift */; };
 		1F100CA82809493400A3A3C2 /* BackgroundTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F100CA62809493400A3A3C2 /* BackgroundTimer.swift */; };
 		1F100CA92809493400A3A3C2 /* BackgroundTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F100CA62809493400A3A3C2 /* BackgroundTimer.swift */; };
-		1F42399F281E4A27004BE717 /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F42399E281E4A27004BE717 /* CalendarView.swift */; };
-		1F4239A0281E4A27004BE717 /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F42399E281E4A27004BE717 /* CalendarView.swift */; };
-		1F4239A1281E4A27004BE717 /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F42399E281E4A27004BE717 /* CalendarView.swift */; };
+		1F18B457281FA6130080ADA6 /* PusherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F18B456281FA6130080ADA6 /* PusherView.swift */; };
+		1F18B458281FA6130080ADA6 /* PusherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F18B456281FA6130080ADA6 /* PusherView.swift */; };
+		1F18B459281FA6130080ADA6 /* PusherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F18B456281FA6130080ADA6 /* PusherView.swift */; };
+		1F18B45C281FA9C90080ADA6 /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F18B45B281FA9C90080ADA6 /* CalendarView.swift */; };
+		1F18B45D281FA9C90080ADA6 /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F18B45B281FA9C90080ADA6 /* CalendarView.swift */; };
+		1F18B45E281FA9C90080ADA6 /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F18B45B281FA9C90080ADA6 /* CalendarView.swift */; };
+		1F18B460281FAABF0080ADA6 /* TopCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F18B45F281FAABF0080ADA6 /* TopCell.swift */; };
+		1F18B461281FAABF0080ADA6 /* TopCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F18B45F281FAABF0080ADA6 /* TopCell.swift */; };
+		1F18B462281FAABF0080ADA6 /* TopCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F18B45F281FAABF0080ADA6 /* TopCell.swift */; };
 		1F4239A3281E510D004BE717 /* NoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4239A2281E510D004BE717 /* NoteView.swift */; };
 		1F4239A4281E510D004BE717 /* NoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4239A2281E510D004BE717 /* NoteView.swift */; };
 		1F4239A5281E510D004BE717 /* NoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4239A2281E510D004BE717 /* NoteView.swift */; };
-		1F4239AF281E7A38004BE717 /* HorizontalTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4239AE281E7A38004BE717 /* HorizontalTable.swift */; };
-		1F4239B0281E7A38004BE717 /* HorizontalTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4239AE281E7A38004BE717 /* HorizontalTable.swift */; };
-		1F4239B1281E7A38004BE717 /* HorizontalTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4239AE281E7A38004BE717 /* HorizontalTable.swift */; };
 		1F5F4A5D28093FAF00AF3442 /* TimersApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5F4A4A28093FAD00AF3442 /* TimersApp.swift */; };
 		1F5F4A5E28093FAF00AF3442 /* TimersApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5F4A4A28093FAD00AF3442 /* TimersApp.swift */; };
 		1F5F4A6128093FAF00AF3442 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5F4A4C28093FAD00AF3442 /* Persistence.swift */; };
@@ -119,9 +122,10 @@
 
 /* Begin PBXFileReference section */
 		1F100CA62809493400A3A3C2 /* BackgroundTimer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BackgroundTimer.swift; sourceTree = "<group>"; };
-		1F42399E281E4A27004BE717 /* CalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
+		1F18B456281FA6130080ADA6 /* PusherView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PusherView.swift; sourceTree = "<group>"; };
+		1F18B45B281FA9C90080ADA6 /* CalendarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
+		1F18B45F281FAABF0080ADA6 /* TopCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopCell.swift; sourceTree = "<group>"; };
 		1F4239A2281E510D004BE717 /* NoteView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoteView.swift; sourceTree = "<group>"; };
-		1F4239AE281E7A38004BE717 /* HorizontalTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalTable.swift; sourceTree = "<group>"; };
 		1F5F4A4A28093FAD00AF3442 /* TimersApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimersApp.swift; sourceTree = "<group>"; };
 		1F5F4A4C28093FAD00AF3442 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		1F5F4A4D28093FAF00AF3442 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -185,11 +189,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1F18B45A281FA9740080ADA6 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				1F18B456281FA6130080ADA6 /* PusherView.swift */,
+				1F18B45F281FAABF0080ADA6 /* TopCell.swift */,
+				1F18B45B281FA9C90080ADA6 /* CalendarView.swift */,
+			);
+			name = Helpers;
+			sourceTree = "<group>";
+		};
 		1F5F4A4228093FAC00AF3442 = {
 			isa = PBXGroup;
 			children = (
+				1F18B45A281FA9740080ADA6 /* Helpers */,
 				1FB3DE7B281EE45B003169E1 /* DeleteActionView.swift */,
-				1F42399E281E4A27004BE717 /* CalendarView.swift */,
 				1F5F4A92280941D900AF3442 /* Timers (iOS).entitlements */,
 				1F5F4A91280941B700AF3442 /* WidgetsExtension.entitlements */,
 				1F5F4A4728093FAD00AF3442 /* Shared */,
@@ -210,7 +224,6 @@
 				1FF0A2FC2810448100B1DB77 /* DetailView.swift */,
 				1FE163AD280EE6F40050C6F5 /* LeftStrip.swift */,
 				1F4239A2281E510D004BE717 /* NoteView.swift */,
-				1F4239AE281E7A38004BE717 /* HorizontalTable.swift */,
 				1F9B6AEF280950D600C0A725 /* ViewModel.swift */,
 				1F5F4A9C280945C700AF3442 /* BubbleCell.swift */,
 				1F100CA62809493400A3A3C2 /* BackgroundTimer.swift */,
@@ -415,10 +428,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1F18B457281FA6130080ADA6 /* PusherView.swift in Sources */,
 				1FFC8BAD28142F040059EF2E /* Session Properties.swift in Sources */,
 				1FB3DE7C281EE45B003169E1 /* DeleteActionView.swift in Sources */,
 				1FD21865281D9AB700B43403 /* SpotlightAlertView.swift in Sources */,
-				1F42399F281E4A27004BE717 /* CalendarView.swift in Sources */,
 				1F9BE0A9280BE14100F87EFA /* PaletteView.swift in Sources */,
 				1F5F4A732809409600AF3442 /* Bubble.swift in Sources */,
 				1F97B7DD2809B311002FFCA3 /* Colors.swift in Sources */,
@@ -429,10 +442,11 @@
 				1F5F4A992809456E00AF3442 /* BubbleList.swift in Sources */,
 				1F4239A3281E510D004BE717 /* NoteView.swift in Sources */,
 				1FFC8BB928142F040059EF2E /* Pair Properties.swift in Sources */,
+				1F18B45C281FA9C90080ADA6 /* CalendarView.swift in Sources */,
 				1F5F4A6F28093FF800AF3442 /* Model.xcdatamodeld in Sources */,
 				1F9BE0AD280C6AB000F87EFA /* TapHold.swift in Sources */,
 				1F5F4A9D280945C700AF3442 /* BubbleCell.swift in Sources */,
-				1F4239AF281E7A38004BE717 /* HorizontalTable.swift in Sources */,
+				1F18B460281FAABF0080ADA6 /* TopCell.swift in Sources */,
 				1F5F4A5D28093FAF00AF3442 /* TimersApp.swift in Sources */,
 				1FCF0C662816F3F600AA1FAA /* EmptyBubbleListView.swift in Sources */,
 				1FF0A2FD2810448100B1DB77 /* DetailView.swift in Sources */,
@@ -450,13 +464,15 @@
 			files = (
 				1F9BE0AE280C6AB000F87EFA /* TapHold.swift in Sources */,
 				1F9B6AF1280950D600C0A725 /* ViewModel.swift in Sources */,
+				1F18B461281FAABF0080ADA6 /* TopCell.swift in Sources */,
 				1F4239A4281E510D004BE717 /* NoteView.swift in Sources */,
 				1FE163AF280EE6F40050C6F5 /* LeftStrip.swift in Sources */,
 				1FFC8BB728142F040059EF2E /* Pair.swift in Sources */,
 				1FB3DE7D281EE45B003169E1 /* DeleteActionView.swift in Sources */,
+				1F18B45D281FA9C90080ADA6 /* CalendarView.swift in Sources */,
 				1F97B7DE2809B311002FFCA3 /* Colors.swift in Sources */,
 				1FFC8BAE28142F040059EF2E /* Session Properties.swift in Sources */,
-				1F4239A0281E4A27004BE717 /* CalendarView.swift in Sources */,
+				1F18B458281FA6130080ADA6 /* PusherView.swift in Sources */,
 				1FCF0C672816F3F600AA1FAA /* EmptyBubbleListView.swift in Sources */,
 				1F5F4A742809409600AF3442 /* Bubble.swift in Sources */,
 				1FF0A2FE2810448100B1DB77 /* DetailView.swift in Sources */,
@@ -467,7 +483,6 @@
 				1F100CA82809493400A3A3C2 /* BackgroundTimer.swift in Sources */,
 				1FFC8BBA28142F040059EF2E /* Pair Properties.swift in Sources */,
 				1F5F4A7028093FF800AF3442 /* Model.xcdatamodeld in Sources */,
-				1F4239B0281E7A38004BE717 /* HorizontalTable.swift in Sources */,
 				1F5F4A5E28093FAF00AF3442 /* TimersApp.swift in Sources */,
 				1F5F4A762809409600AF3442 /* Bubble Properties.swift in Sources */,
 				1F9BE0AA280BE14100F87EFA /* PaletteView.swift in Sources */,
@@ -480,10 +495,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1F18B459281FA6130080ADA6 /* PusherView.swift in Sources */,
 				1FFC8BAF28142F040059EF2E /* Session Properties.swift in Sources */,
 				1FB3DE7E281EE45B003169E1 /* DeleteActionView.swift in Sources */,
 				1FD21867281D9AB700B43403 /* SpotlightAlertView.swift in Sources */,
-				1F4239A1281E4A27004BE717 /* CalendarView.swift in Sources */,
 				1F9BE0AB280BE14100F87EFA /* PaletteView.swift in Sources */,
 				1F5F4A88280941AC00AF3442 /* Widgets.intentdefinition in Sources */,
 				1F97B7DF2809B311002FFCA3 /* Colors.swift in Sources */,
@@ -494,10 +509,11 @@
 				1F100CA2280946BB00A3A3C2 /* Bubble.swift in Sources */,
 				1F4239A5281E510D004BE717 /* NoteView.swift in Sources */,
 				1FFC8BBB28142F040059EF2E /* Pair Properties.swift in Sources */,
+				1F18B45E281FA9C90080ADA6 /* CalendarView.swift in Sources */,
 				1F5F4A83280941AA00AF3442 /* Widgets.swift in Sources */,
 				1F9BE0AF280C6AB000F87EFA /* TapHold.swift in Sources */,
 				1F5F4A9F280945C700AF3442 /* BubbleCell.swift in Sources */,
-				1F4239B1281E7A38004BE717 /* HorizontalTable.swift in Sources */,
+				1F18B462281FAABF0080ADA6 /* TopCell.swift in Sources */,
 				1F100CA5280946C900A3A3C2 /* Model.xcdatamodeld in Sources */,
 				1FCF0C682816F3F600AA1FAA /* EmptyBubbleListView.swift in Sources */,
 				1FF0A2FF2810448100B1DB77 /* DetailView.swift in Sources */,

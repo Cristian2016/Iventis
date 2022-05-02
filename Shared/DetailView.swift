@@ -8,6 +8,18 @@
 import SwiftUI
 
 struct DetailView:View {
+    struct DurationComponents {
+        let hr:String
+        let min:String
+        let sec:String
+        
+        init(_ hr:String, _ min:String, _ sec:String) {
+            self.hr = hr
+            self.min = min
+            self.sec = sec
+        }
+    }
+    
     @FetchRequest var sessions:FetchedResults<Session>
     let yOffset = CGFloat(-25)
         
@@ -25,69 +37,27 @@ struct DetailView:View {
     // MARK: -
     var body: some View {
         VStack {
-            let color = bubbleColor()
-            
             ScrollViewReader { proxy in
                 ScrollView(.horizontal, showsIndicators: false) {
                     HStack {
-                        ForEach (sessions) { session in
-                            let duration = sessionDuration(of: session)
-                            ZStack {
-                                RoundedRectangle(cornerRadius: 10)
-                                .strokeBorder(color, lineWidth: 4, antialiased: true)
-                                .frame(width: 150, height: 120)
-                                HStack {
-                                    VStack (alignment:.leading, spacing: 6) {
-                                        Text(DateFormatter.bubbleStyleShortDate.string(from: session.created))
-                                            .font(.title2)
-                                            .fontWeight(.medium)
-                                            .background(color)
-                                            .foregroundColor(.white)
-                                        HStack (spacing: 8) {
-                                            if duration.hr != "0" {
-                                                HStack (alignment:.firstTextBaseline ,spacing: 0) {
-                                                    Text(duration.hr).font(.title2)
-                                                    Text("h")
-                                                }
-                                            }
-                                            
-                                            if duration.min != "0" {
-                                                HStack (alignment:.firstTextBaseline ,spacing: 0) {
-                                                    Text(duration.min).font(.title2)
-                                                    Text("m")
-                                                }
-                                            }
-                                            
-                                            if duration.sec != "0" {
-                                                HStack (alignment:.firstTextBaseline ,spacing: 0) {
-                                                    Text(duration.sec).font(.title2)
-                                                    Text("s")
-                                                }
-                                            }
-                                        }
-                                    }
-                                    .padding(EdgeInsets(top: 0, leading: 16, bottom: 0, trailing: 0))
-                                    Spacer()
-                                }
-                                
-                                VStack {
-                                    HStack {
-                                        Spacer()
-                                        Text("\(sessionRank(of:session))")
-                                            .foregroundColor(color)
-                                            .font(.title2)
-                                            .padding(EdgeInsets(top: 8, leading: 0, bottom: 0, trailing: 12))
-                                    }
-                                    Spacer()
-                                }
-                                
-                            }
-                            
+                        ForEach (sessions) {
+                            TopCell($0, duration(of:$0), sessions.count, sessionRank(of:$0))
                         }
                     }
                 }
             }
             .padding(EdgeInsets(top: 35, leading: 17, bottom: 0, trailing: 0))
+            
+            ScrollViewReader { proxy in
+                ScrollView(.horizontal, showsIndicators: false) {
+                    HStack {
+                        ForEach (sessions) { session in
+                            Rectangle().fill(Color.white)
+                                .frame(width: UIScreen.size.width, height: 100)
+                        }
+                    }
+                }
+            }
         }
         .offset(x: 0, y: yOffset)
         .padding(-20)
@@ -104,15 +74,16 @@ struct DetailView:View {
         String(sessions.count - Int(sessions.firstIndex(of: session)!))
     }
     
-    private func sessionDuration(of session:Session) -> (hr:String, min:String, sec:String) {
+    ///12hr 36min 23sec
+    private func duration(of session:Session) -> DurationComponents {
         let value = session.totalDuration.timeComponents()
-        return (String(value.hr), String(value.min), String(value.sec))
+        return DurationComponents(String(value.hr), String(value.min), String(value.sec))
     }
-                                
 }
 
-//struct BubbleDetail_Previews: PreviewProvider {
-//    static var previews: some View {
-//        DetailView(showDetailView: .constant(true), bubble: .constant(<#T##value: Binding<Bubble>##Binding<Bubble>#>))
-//    }
-//}
+struct BubbleDetail_Previews: PreviewProvider {
+    
+    static var previews: some View {
+        DetailView(10)
+    }
+}
