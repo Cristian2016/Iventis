@@ -36,31 +36,15 @@ struct DetailView:View {
     
     // MARK: -
     var body: some View {
-        VStack {
-            ScrollViewReader { proxy in
-                ScrollView(.horizontal, showsIndicators: false) {
-                    HStack {
-                        ForEach (sessions) {
-                            TopCell($0, sessions.count, sessionRank(of:$0))
-                        }
+        ScrollViewReader { proxy in
+            ScrollView(.horizontal, showsIndicators: false) {
+                HStack {
+                    ForEach (sessions) {
+                        TopCell($0, sessions.count, sessionRank(of:$0))
                     }
                 }
             }
-            .padding(EdgeInsets(top: 35, leading: 17, bottom: 0, trailing: 20))
-            
-            ScrollViewReader { proxy in
-                ScrollView(.horizontal, showsIndicators: false) {
-                    HStack {
-                        ForEach (sessions) { session in
-                            Rectangle().fill(Color.white)
-                                .frame(width: UIScreen.size.width, height: 100)
-                        }
-                    }
-                }
-            }
-        }
-        .offset(x: 0, y: yOffset)
-        .padding(-20)
+        } .offset(x: 0, y: -10)
     }
     
     // MARK: -

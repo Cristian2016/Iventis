@@ -24,4 +24,6 @@ public class Session: NSManagedObject {
         totalDuration += lastPairDuration
         //⚠️ no need to save context!
     }
+    
+    var pairs_:[Pair] { pairs.array as? [Pair] ?? [] }
 }
