@@ -14,9 +14,9 @@
 		1F100CA72809493400A3A3C2 /* BackgroundTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F100CA62809493400A3A3C2 /* BackgroundTimer.swift */; };
 		1F100CA82809493400A3A3C2 /* BackgroundTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F100CA62809493400A3A3C2 /* BackgroundTimer.swift */; };
 		1F100CA92809493400A3A3C2 /* BackgroundTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F100CA62809493400A3A3C2 /* BackgroundTimer.swift */; };
-		1F18B457281FA6130080ADA6 /* PusherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F18B456281FA6130080ADA6 /* PusherView.swift */; };
-		1F18B458281FA6130080ADA6 /* PusherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F18B456281FA6130080ADA6 /* PusherView.swift */; };
-		1F18B459281FA6130080ADA6 /* PusherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F18B456281FA6130080ADA6 /* PusherView.swift */; };
+		1F18B457281FA6130080ADA6 /* PushView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F18B456281FA6130080ADA6 /* PushView.swift */; };
+		1F18B458281FA6130080ADA6 /* PushView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F18B456281FA6130080ADA6 /* PushView.swift */; };
+		1F18B459281FA6130080ADA6 /* PushView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F18B456281FA6130080ADA6 /* PushView.swift */; };
 		1F18B45C281FA9C90080ADA6 /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F18B45B281FA9C90080ADA6 /* CalendarView.swift */; };
 		1F18B45D281FA9C90080ADA6 /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F18B45B281FA9C90080ADA6 /* CalendarView.swift */; };
 		1F18B45E281FA9C90080ADA6 /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F18B45B281FA9C90080ADA6 /* CalendarView.swift */; };
@@ -122,7 +122,7 @@
 
 /* Begin PBXFileReference section */
 		1F100CA62809493400A3A3C2 /* BackgroundTimer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BackgroundTimer.swift; sourceTree = "<group>"; };
-		1F18B456281FA6130080ADA6 /* PusherView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PusherView.swift; sourceTree = "<group>"; };
+		1F18B456281FA6130080ADA6 /* PushView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushView.swift; sourceTree = "<group>"; };
 		1F18B45B281FA9C90080ADA6 /* CalendarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
 		1F18B45F281FAABF0080ADA6 /* TopCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopCell.swift; sourceTree = "<group>"; };
 		1F4239A2281E510D004BE717 /* NoteView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoteView.swift; sourceTree = "<group>"; };
@@ -192,7 +192,7 @@
 		1F18B45A281FA9740080ADA6 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				1F18B456281FA6130080ADA6 /* PusherView.swift */,
+				1F18B456281FA6130080ADA6 /* PushView.swift */,
 				1F18B45F281FAABF0080ADA6 /* TopCell.swift */,
 				1F18B45B281FA9C90080ADA6 /* CalendarView.swift */,
 			);
@@ -428,7 +428,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1F18B457281FA6130080ADA6 /* PusherView.swift in Sources */,
+				1F18B457281FA6130080ADA6 /* PushView.swift in Sources */,
 				1FFC8BAD28142F040059EF2E /* Session Properties.swift in Sources */,
 				1FB3DE7C281EE45B003169E1 /* DeleteActionView.swift in Sources */,
 				1FD21865281D9AB700B43403 /* SpotlightAlertView.swift in Sources */,
@@ -472,7 +472,7 @@
 				1F18B45D281FA9C90080ADA6 /* CalendarView.swift in Sources */,
 				1F97B7DE2809B311002FFCA3 /* Colors.swift in Sources */,
 				1FFC8BAE28142F040059EF2E /* Session Properties.swift in Sources */,
-				1F18B458281FA6130080ADA6 /* PusherView.swift in Sources */,
+				1F18B458281FA6130080ADA6 /* PushView.swift in Sources */,
 				1FCF0C672816F3F600AA1FAA /* EmptyBubbleListView.swift in Sources */,
 				1F5F4A742809409600AF3442 /* Bubble.swift in Sources */,
 				1FF0A2FE2810448100B1DB77 /* DetailView.swift in Sources */,
@@ -495,7 +495,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1F18B459281FA6130080ADA6 /* PusherView.swift in Sources */,
+				1F18B459281FA6130080ADA6 /* PushView.swift in Sources */,
 				1FFC8BAF28142F040059EF2E /* Session Properties.swift in Sources */,
 				1FB3DE7E281EE45B003169E1 /* DeleteActionView.swift in Sources */,
 				1FD21867281D9AB700B43403 /* SpotlightAlertView.swift in Sources */,

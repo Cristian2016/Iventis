@@ -10,8 +10,9 @@ import SwiftUI
 struct Push<Content:View>: View {
     let content:Content
     let position:Position
-    init(_ content:Content, _ position:Position) {
-        self.content = content
+    
+    init(_ position:Position, @ViewBuilder _ content: () -> Content) {
+        self.content = content()
         self.position = position
     }
     
@@ -41,7 +42,7 @@ struct Push<Content:View>: View {
 
 struct PushView_Previews: PreviewProvider {
     static var previews: some View {
-        Push(Text("Baby"), .bottomLeft)
+        Push(.bottomLeft) { Text("ok") }
             .padding()
     }
 }
