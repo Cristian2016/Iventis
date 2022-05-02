@@ -17,7 +17,7 @@ public class Session: NSManagedObject {
     
     //⚠️ implement on backgroundthread. warning: wait until pair computes its duration and then compite session.totalduration!!!
     func computeSessionDuration() {
-        let pairs = pairs.array as! [Pair]
+        let pairs = pairs?.array as! [Pair]
         guard !pairs.isEmpty,
         let lastPairDuration = pairs.last?.duration else { fatalError() }
         
@@ -26,7 +26,7 @@ public class Session: NSManagedObject {
     }
     
     var pairs_:[Pair] {
-        get { pairs.array as? [Pair] ?? [] }
+        get { pairs?.array as? [Pair] ?? [] }
         set {
             pairs = NSOrderedSet(array: newValue)
             print("update pairs")

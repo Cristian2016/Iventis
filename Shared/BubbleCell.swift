@@ -58,7 +58,7 @@ struct BubbleCell: View {
         
     // MARK: -
     var body: some View {
-        let colors = bubbleColors(bubble.color)
+        let colors = bubbleColors(bubble.color ?? "")
         
         ZStack {
             hoursView
@@ -197,7 +197,7 @@ struct BubbleCell: View {
     private var noteView:some View {
         VStack {
             HStack {
-                NoteView(content: bubble.note).offset(x: -20, y: -22)
+                NoteView(content: bubble.note ?? "").offset(x: -20, y: -22)
                 Spacer()
             }
             Spacer()

@@ -42,12 +42,15 @@ struct TopCell: View {
         }
     }
     
+    @ViewBuilder
     private var dateView:some View {
-        Text(DateFormatter.bubbleStyleShortDate.string(from: session.created))
-            .font(.title2)
-            .fontWeight(.medium)
-            .background(color)
-            .foregroundColor(.white)
+        if let sessionCreated = session.created {
+            Text(DateFormatter.bubbleStyleShortDate.string(from: sessionCreated))
+                .font(.title2)
+                .fontWeight(.medium)
+                .background(color)
+                .foregroundColor(.white)
+        } else { EmptyView() }
     }
     
     private var durationView:some View {
@@ -102,7 +105,7 @@ struct TopCell: View {
         self.sessionCount = sessionCount
         _session = StateObject(wrappedValue: session)
         
-        let description = session.bubble.color
+        let description = session.bubble?.color
         self.color = (Color.bubbleThrees.filter { $0.description == description }.first ?? Color.Bubbles.mint).sec
         self.sessionRank = sessionRank
         self.duration = TopCell.duration(of: session)

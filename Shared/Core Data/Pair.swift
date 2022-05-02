@@ -22,12 +22,13 @@ public class Pair: NSManagedObject {
     
     func computePairDuration(_ durationComputed:DurationComputed) {
         guard let pause = pause else { fatalError() }
-        
-        switch durationComputed {
-            case .pause:
-                duration = Float(pause.timeIntervalSince(start))
-            case .endSession:
-                duration = Float(pause.timeIntervalSince(start) - 0.5)
+        if let start = start {
+            switch durationComputed {
+                case .pause:
+                    duration = Float(pause.timeIntervalSince(start))
+                case .endSession:
+                    duration = Float(pause.timeIntervalSince(start) - 0.5)
+            }
         }
     }
 }

@@ -16,19 +16,17 @@ extension Bubble {
         return NSFetchRequest<Bubble>(entityName: "Bubble")
     }
 
-    @NSManaged public var created: Date
-    @NSManaged public var initialClock: Float
-    @NSManaged public var color: String
-    
+    @NSManaged public var color: String?
+    @NSManaged public var created: Date?
     @NSManaged public var currentClock: Float
-    @NSManaged public var isPinned: Bool
-    @NSManaged public var rank: Int64
     @NSManaged public var hasCalendar: Bool
-    
-    @NSManaged public var note: String
+    @NSManaged public var initialClock: Float
     @NSManaged public var isNoteHidden: Bool
-    
+    @NSManaged public var isPinned: Bool
+    @NSManaged public var note: String?
+    @NSManaged public var rank: Int64
     @NSManaged public var sessions: NSOrderedSet?
+
 }
 
 // MARK: Generated accessors for sessions

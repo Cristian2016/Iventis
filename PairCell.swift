@@ -8,27 +8,21 @@
 import SwiftUI
 
 struct PairCell: View {
-    @StateObject var pair:Pair
-    
-    init(_ pair:Pair) {
-//        self.pair = pair
-        _pair = StateObject(wrappedValue: pair)
-    }
+    @ObservedObject var pair:Pair
     
     var body: some View {
-        if !pair.isFault {
             VStack (alignment: .leading) {
                 //start time and date
                 HStack {
-                    Text(DateFormatter.bubbleStyleTime.string(from: pair.start))
+                    Text(DateFormatter.bubbleStyleTime.string(from: pair.start ?? Date()))
                         .font(.monospaced(Font.body)())
-                    Text(DateFormatter.bubbleStyleDate.string(from: pair.start))
+                    Text(DateFormatter.bubbleStyleDate.string(from: pair.start ?? Date()))
                         .foregroundColor(.secondary)
                 }
                 //pause time and date
                 if let pause = pair.pause {
                     let sameDates:Bool = {
-                        DateFormatter.bubbleStyleDate.string(from: pair.start) ==
+                        DateFormatter.bubbleStyleDate.string(from: pair.start ?? Date()) ==
                         DateFormatter.bubbleStyleDate.string(from: pair.pause!)
                     }()
                     
@@ -46,7 +40,6 @@ struct PairCell: View {
                 durationView
             }
             .padding(EdgeInsets(top: 0, leading: 15, bottom: 0, trailing: 0))
-        }
     }
     
     private func showSeconds() -> Bool {

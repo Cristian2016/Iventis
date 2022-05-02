@@ -239,6 +239,7 @@
 			children = (
 				1F5F4A942809450A00AF3442 /* Library.swift */,
 				1F5F4A4A28093FAD00AF3442 /* TimersApp.swift */,
+				1F5F4A93280941FC00AF3442 /* Core Data */,
 				1F97B7E02809B331002FFCA3 /* Assets */,
 				1F5F4A982809456E00AF3442 /* BubbleList.swift */,
 				1FF0A2FC2810448100B1DB77 /* DetailTopView.swift */,
@@ -247,7 +248,6 @@
 				1F9B6AEF280950D600C0A725 /* ViewModel.swift */,
 				1F5F4A9C280945C700AF3442 /* BubbleCell.swift */,
 				1F100CA62809493400A3A3C2 /* BackgroundTimer.swift */,
-				1F5F4A93280941FC00AF3442 /* Core Data */,
 			);
 			path = Shared;
 			sourceTree = "<group>";

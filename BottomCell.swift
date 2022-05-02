@@ -28,7 +28,7 @@ struct BottomCell: View {
                         Image(systemName: "\(pairs.count - Int(pairs.firstIndex(of: pair)!)).square.fill")
                             .foregroundColor(.secondary)
                     }
-                    PairCell(pair)
+                    PairCell(pair: pair)
                 }.padding(4)
             }
         }

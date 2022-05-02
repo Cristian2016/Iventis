@@ -16,12 +16,12 @@ extension Pair {
         return NSFetchRequest<Pair>(entityName: "Pair")
     }
 
-    @NSManaged public var start: Date
-    @NSManaged public var pause: Date?
-    @NSManaged public var isNoteVisible: Bool
-    @NSManaged public var note: String
     @NSManaged public var duration: Float
-    @NSManaged public var session: Session
+    @NSManaged public var isNoteVisible: Bool
+    @NSManaged public var note: String?
+    @NSManaged public var pause: Date?
+    @NSManaged public var start: Date?
+    @NSManaged public var session: Session?
 
 }
 

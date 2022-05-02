@@ -36,7 +36,7 @@ public class Bubble: NSManagedObject {
     ///lastSession is not always currentSession
     var lastSession:Session { sessions_.last! }
     
-    var lastPair:Pair? { (lastSession.pairs.array as? [Pair])?.last }
+    var lastPair:Pair? { (lastSession.pairs?.array as? [Pair])?.last }
     
     // MARK: -
     ///bubbleCell.body displays timeComponents
@@ -120,9 +120,10 @@ extension Bubble {
     
     private func updateTimeComponents() {
         if state != .running { return }
+        guard let lastPairStart = lastPair!.start else { return }
         
         //delta is the elapsed duration between pair.start and signal dates
-        let Δ = Date().timeIntervalSince(lastPair!.start)
+        let Δ = Date().timeIntervalSince(lastPairStart)
         let value = currentClock + Float(Δ)
         let componentsString = convertToTimeComponents(value)
                             
@@ -136,7 +137,8 @@ extension Bubble {
     func updateCurrentClock(runningOnly:Bool) {
         if runningOnly {
             guard state == .running else { return }
-            let elapsedSinceStart = Float(Date().timeIntervalSince(lastPair!.start))
+            
+            let elapsedSinceStart = Float(Date().timeIntervalSince(lastPair?.start ?? Date()))
             currentClock += elapsedSinceStart
         }
     }
