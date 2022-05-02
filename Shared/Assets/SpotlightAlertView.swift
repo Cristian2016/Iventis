@@ -18,18 +18,22 @@ struct SpotlightAlertView: View {
     
     var body: some View {
         HStack {
-            Image(systemName: "rays")
-                .font(.title)
-            Text("Spotlight")
-                .font(.title2)
+            Button {
+                withAnimation {
+                    UserFeedback.triggerSingleHaptic(.medium)
+                    predicate = nil
+                    showDetail.0 = false
+                }
+            } label: {
+                Label {
+                    Text("Show All").font(.title2)
+                } icon: {
+                    Image(systemName: "eye.fill").font(.title)
+                }
+            }
+            .buttonStyle(.bordered)
         }
-        .foregroundColor(.secondary)
         .padding()
-        .onTapGesture { withAnimation {
-            UserFeedback.triggerSingleHaptic(.medium)
-            predicate = nil
-            showDetail.0 = false
-        } }
     }
 }
 

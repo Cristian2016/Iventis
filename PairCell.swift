@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct PairCell: View {
-    @ObservedObject var pair:Pair
+    @StateObject var pair:Pair
     
     var body: some View {
             VStack (alignment: .leading) {
