@@ -28,5 +28,6 @@ class SessionViewModel: ObservableObject {
         
         guard let sessions = try? viewContext.fetch(request) else { return }
         self.sessions = sessions
+        
     }
 }

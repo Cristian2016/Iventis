@@ -29,6 +29,7 @@ public class Session: NSManagedObject {
         get { pairs.array as? [Pair] ?? [] }
         set {
             pairs = NSOrderedSet(array: newValue)
+            print("update pairs")
         }
     }
 }

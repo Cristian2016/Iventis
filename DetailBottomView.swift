@@ -8,20 +8,28 @@
 import SwiftUI
 
 struct DetailBottomView: View {
-    @StateObject private var sessionViewModel:SessionViewModel
+    @FetchRequest var sessions:FetchedResults<Session>
     
-    init(_ sessionRank:Int) {
-        _sessionViewModel = StateObject(wrappedValue: SessionViewModel(sessionRank))
+    init(_ rank:Int?) {
+        let predicate:NSPredicate?
+        if let rank = rank {
+            predicate = NSPredicate(format: "bubble.rank == %i", rank)
+        }
+        else { predicate = nil }
+        
+        let descriptor = NSSortDescriptor(key: "created", ascending: false)
+        _sessions = FetchRequest(entity: Session.entity(), sortDescriptors: [descriptor], predicate: predicate, animation: .easeInOut)
     }
     
     var body: some View {
         ScrollView(.horizontal, showsIndicators: false) {
             HStack {//each session cooresponding to a list
-                ForEach ($sessionViewModel.sessions) { $session in
+                ForEach (sessions) { session in
                     List { //the list of pairs
-                        ForEach ($session.pairs_) { $pair in
-                            Rectangle()
-                                .fill(Color.red)
+                        ForEach (session.pairs_.reversed()) { pair in
+                            ZStack {
+                                PairCell()
+                            }
                         }
                     }
                     .frame(width: 300, height: 200)
