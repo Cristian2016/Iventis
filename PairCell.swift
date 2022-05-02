@@ -16,36 +16,37 @@ struct PairCell: View {
     }
     
     var body: some View {
-        VStack (alignment: .leading) {
-            
-            //start time and date
-            HStack {
-                Text(DateFormatter.bubbleStyleTime.string(from: pair.start))
-                    .font(.monospaced(Font.body)())
-                Text(DateFormatter.bubbleStyleDate.string(from: pair.start))
-                    .foregroundColor(.secondary)
-            }
-            //pause time and date
-            if let pause = pair.pause {
-                let sameDates:Bool = {
-                    DateFormatter.bubbleStyleDate.string(from: pair.start) ==
-                    DateFormatter.bubbleStyleDate.string(from: pair.pause!)
-                }()
-                
+        if !pair.isFault {
+            VStack (alignment: .leading) {
+                //start time and date
                 HStack {
-                    Text(DateFormatter.bubbleStyleTime.string(from: pause))
+                    Text(DateFormatter.bubbleStyleTime.string(from: pair.start))
                         .font(.monospaced(Font.body)())
-                    if !sameDates {
-                        Text(DateFormatter.bubbleStyleDate.string(from: pause))
-                            .foregroundColor(.secondary)
+                    Text(DateFormatter.bubbleStyleDate.string(from: pair.start))
+                        .foregroundColor(.secondary)
+                }
+                //pause time and date
+                if let pause = pair.pause {
+                    let sameDates:Bool = {
+                        DateFormatter.bubbleStyleDate.string(from: pair.start) ==
+                        DateFormatter.bubbleStyleDate.string(from: pair.pause!)
+                    }()
+                    
+                    HStack {
+                        Text(DateFormatter.bubbleStyleTime.string(from: pause))
+                            .font(.monospaced(Font.body)())
+                        if !sameDates {
+                            Text(DateFormatter.bubbleStyleDate.string(from: pause))
+                                .foregroundColor(.secondary)
+                        }
                     }
                 }
+                
+                //duration
+                durationView
             }
-            
-            //duration
-            durationView
+            .padding(EdgeInsets(top: 0, leading: 15, bottom: 0, trailing: 0))
         }
-        .padding(EdgeInsets(top: 0, leading: 15, bottom: 0, trailing: 0))
     }
     
     private func showSeconds() -> Bool {
