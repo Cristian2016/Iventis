@@ -55,17 +55,12 @@ struct TopCell: View {
                 Spacer()
             }
             
-            VStack {
-                HStack {
-                    Spacer()
-                    Text(sessionRank)
-                        .foregroundColor(color)
-                        .font(.title2)
-                        .padding(EdgeInsets(top: 8, leading: 0, bottom: 0, trailing: 12))
-                }
-                Spacer()
+            Push(.topRight) {
+                Text(sessionRank)
+                    .foregroundColor(color)
+                    .font(.title2)
+                    .padding(EdgeInsets(top: 8, leading: 0, bottom: 0, trailing: 12))
             }
-            
         }
     }
     
