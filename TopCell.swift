@@ -42,7 +42,7 @@ struct TopCell: View {
                             }
                         }
                         
-                        if duration.sec != "0" {
+                        if showSeconds() {
                             HStack (alignment:.firstTextBaseline ,spacing: 0) {
                                 Text(duration.sec).font(.title2)
                                 Text("s")
@@ -74,6 +74,12 @@ struct TopCell: View {
     private static func duration(of session:Session) -> DetailView.DurationComponents {
         let value = session.totalDuration.timeComponents()
         return DetailView.DurationComponents(String(value.hr), String(value.min), String(value.sec))
+    }
+    
+    private func showSeconds() -> Bool {
+        let condition = (duration.min != "0" || duration.hr != "0")
+        if duration.sec == "0" { return condition ? false : true }
+        return true
     }
     
     init(_ session:Session , _ sessionCount:Int, _ sessionRank:String) {
