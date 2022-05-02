@@ -70,19 +70,20 @@ struct TopCell: View {
     }
     
     // MARK: -
-    private func sessionDuration(of session:Session) -> (hr:String, min:String, sec:String) {
+    ///12hr 36min 23sec
+    private static func duration(of session:Session) -> DetailView.DurationComponents {
         let value = session.totalDuration.timeComponents()
-        return (String(value.hr), String(value.min), String(value.sec))
+        return DetailView.DurationComponents(String(value.hr), String(value.min), String(value.sec))
     }
     
-    init(_ session:Session, _ duration:DetailView.DurationComponents , _ sessionCount:Int, _ sessionRank:String) {
+    init(_ session:Session , _ sessionCount:Int, _ sessionRank:String) {
         self.sessionCount = sessionCount
         self.session = session
         
         let description = session.bubble.color
         self.color = (Color.bubbleThrees.filter { $0.description == description }.first ?? Color.Bubbles.mint).sec
         self.sessionRank = sessionRank
-        self.duration = duration
+        self.duration = TopCell.duration(of: session)
     }
 }
 

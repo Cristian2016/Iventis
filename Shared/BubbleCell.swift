@@ -85,7 +85,13 @@ struct BubbleCell: View {
                     UserFeedback.triggerDoubleHaptic(.heavy)
                     viewModel.endSession(bubble)
                 }
-            if bubble.state != .running { hundredthsView }
+            if bubble.state != .running {
+                hundredthsView
+                    .onTapGesture {
+                        UserFeedback.triggerSingleHaptic(.heavy)
+                        viewModel.toggleStart(bubble)
+                    }
+            }
             if bubble.hasCalendar { calendarView }
             if !bubble.isNoteHidden { noteView }
         }

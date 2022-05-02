@@ -41,7 +41,7 @@ struct DetailView:View {
                 ScrollView(.horizontal, showsIndicators: false) {
                     HStack {
                         ForEach (sessions) {
-                            TopCell($0, duration(of:$0), sessions.count, sessionRank(of:$0))
+                            TopCell($0, sessions.count, sessionRank(of:$0))
                         }
                     }
                 }
@@ -72,12 +72,6 @@ struct DetailView:View {
     
     private func sessionRank(of session:Session) -> String {
         String(sessions.count - Int(sessions.firstIndex(of: session)!))
-    }
-    
-    ///12hr 36min 23sec
-    private func duration(of session:Session) -> DurationComponents {
-        let value = session.totalDuration.timeComponents()
-        return DurationComponents(String(value.hr), String(value.min), String(value.sec))
     }
 }
 
