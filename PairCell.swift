@@ -43,7 +43,8 @@ struct PairCell: View {
             
             //duration
             HStack {
-                Text(PairCell.duration(of: pair))
+                let duration = PairCell.duration(of: pair)
+                Text("\(duration.hr):\(duration.min):\(duration.sec)")
             }
         }
         .padding(EdgeInsets(top: 0, leading: 15, bottom: 0, trailing: 0))

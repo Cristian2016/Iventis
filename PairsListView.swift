@@ -10,9 +10,9 @@ import SwiftUI
 struct PairsListView: View {
     @FetchRequest var pairs:FetchedResults<Pair>
     
-    init(rank:Int) {
+    init(session:Session) {
         let descriptor = NSSortDescriptor(key: "start", ascending: false)
-        let predicate = NSPredicate(format: "session.bubble.rank = %i", rank)
+        let predicate = NSPredicate(format: "session = %@", session)
         _pairs = FetchRequest(entity: Pair.entity(),
                               sortDescriptors: [descriptor],
                               predicate: predicate,

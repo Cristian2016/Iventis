@@ -25,8 +25,9 @@ struct DetailBottomView: View {
         ScrollView(.horizontal, showsIndicators: false) {
             HStack {//each session cooresponding to a list
                 ForEach (sessions) { session in
-                    PairsListView(rank: Int(session.bubble.rank))
+                    PairsListView(session: session)
                         .frame(width: UIScreen.size.width, height: 500)
+                        .offset(x: 0, y: -40)
                 }
             }
         }
