@@ -25,5 +25,10 @@ public class Session: NSManagedObject {
         //⚠️ no need to save context!
     }
     
-    var pairs_:[Pair] { pairs.array as? [Pair] ?? [] }
+    var pairs_:[Pair] {
+        get { pairs.array as? [Pair] ?? [] }
+        set {
+            pairs = NSOrderedSet(array: newValue)
+        }
+    }
 }

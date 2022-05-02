@@ -67,6 +67,7 @@ struct BubbleList: View {
                         }
                         .listRowSeparator(.hidden)
                         if showDetail.show { DetailTopView(showDetail.rank)}
+                        if showDetail.show { DetailBottomView(showDetail.rank!)}
                     }
                     .padding(EdgeInsets(top: 0, leading: -10, bottom: 0, trailing: -10))
                     .listStyle(.sidebar)
