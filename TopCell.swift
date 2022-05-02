@@ -22,7 +22,8 @@ struct TopCell: View {
                 Push(.bottomLeft) {
                     VStack (alignment:.leading, spacing: 6) {
                         dateView
-                        durationView
+                        if session.bubble?.state == .running { bubbleRunningAlert }
+                        else { durationView }
                     }
                     .padding(EdgeInsets(top: 0, leading: 13, bottom: 10, trailing: 6))
                 }
@@ -55,28 +56,32 @@ struct TopCell: View {
     
     private var durationView:some View {
         HStack (spacing: 8) {
-            //hr
-            if duration.hr != "0" {
-                HStack (alignment:.firstTextBaseline ,spacing: 0) {
-                    Text(duration.hr).font(.title2)
-                    Text("h")
+            if session.bubble?.state != .running {
+                //hr
+                if duration.hr != "0" {
+                    HStack (alignment:.firstTextBaseline ,spacing: 0) {
+                        Text(duration.hr).font(.title2)
+                        Text("h")
+                    }
                 }
-            }
-            
-            //min
-            if duration.min != "0" {
-                HStack (alignment:.firstTextBaseline ,spacing: 0) {
-                    Text(duration.min).font(.title2)
-                    Text("m")
+                
+                //min
+                if duration.min != "0" {
+                    HStack (alignment:.firstTextBaseline ,spacing: 0) {
+                        Text(duration.min).font(.title2)
+                        Text("m")
+                    }
                 }
-            }
-            
-            //sec
-            if showSeconds() {
-                HStack (alignment:.firstTextBaseline ,spacing: 0) {
-                    Text(duration.sec).font(.title2)
-                    Text("s")
+                
+                //sec
+                if showSeconds() {
+                    HStack (alignment:.firstTextBaseline ,spacing: 0) {
+                        Text(duration.sec).font(.title2)
+                        Text("s")
+                    }
                 }
+            } else {
+                Text(duration.min).font(.title2).foregroundColor(.clear)
             }
         }
     }
@@ -109,6 +114,14 @@ struct TopCell: View {
         self.color = (Color.bubbleThrees.filter { $0.description == description }.first ?? Color.Bubbles.mint).sec
         self.sessionRank = sessionRank
         self.duration = TopCell.duration(of: session)
+    }
+    
+    private var bubbleRunningAlert:some View {
+        Button { } label: { Label { Text("Running").fontWeight(.semibold) } icon: { } }
+    .buttonStyle(.borderedProminent)
+    .foregroundColor(.white)
+    .tint(.green)
+    .font(.caption)
     }
 }
 
