@@ -22,44 +22,59 @@ struct TopCell: View {
             .frame(width: 150, height: 120)
             HStack {
                 VStack (alignment:.leading, spacing: 6) {
-                    Text(DateFormatter.bubbleStyleShortDate.string(from: session.created))
-                        .font(.title2)
-                        .fontWeight(.medium)
-                        .background(color)
-                        .foregroundColor(.white)
-                    HStack (spacing: 8) {
-                        if duration.hr != "0" {
-                            HStack (alignment:.firstTextBaseline ,spacing: 0) {
-                                Text(duration.hr).font(.title2)
-                                Text("h")
-                            }
-                        }
-                        
-                        if duration.min != "0" {
-                            HStack (alignment:.firstTextBaseline ,spacing: 0) {
-                                Text(duration.min).font(.title2)
-                                Text("m")
-                            }
-                        }
-                        
-                        if showSeconds() {
-                            HStack (alignment:.firstTextBaseline ,spacing: 0) {
-                                Text(duration.sec).font(.title2)
-                                Text("s")
-                            }
-                        }
-                    }
+                    dateView
+                    durationView
                 }
                 .offset(x: 0, y: 10)
                 .padding(EdgeInsets(top: 0, leading: 16, bottom: 0, trailing: 0))
                 Spacer()
             }
+            sessionRankView
+        }
+    }
+    
+    // MARK: - Legoes
+    private var sessionRankView:some View {
+        Push(.topRight) {
+            Text(sessionRank)
+                .foregroundColor(color)
+                .font(.title2)
+                .padding(EdgeInsets(top: 8, leading: 0, bottom: 0, trailing: 12))
+        }
+    }
+    
+    private var dateView:some View {
+        Text(DateFormatter.bubbleStyleShortDate.string(from: session.created))
+            .font(.title2)
+            .fontWeight(.medium)
+            .background(color)
+            .foregroundColor(.white)
+    }
+    
+    private var durationView:some View {
+        HStack (spacing: 8) {
+            //hr
+            if duration.hr != "0" {
+                HStack (alignment:.firstTextBaseline ,spacing: 0) {
+                    Text(duration.hr).font(.title2)
+                    Text("h")
+                }
+            }
             
-            Push(.topRight) {
-                Text(sessionRank)
-                    .foregroundColor(color)
-                    .font(.title2)
-                    .padding(EdgeInsets(top: 8, leading: 0, bottom: 0, trailing: 12))
+            //min
+            if duration.min != "0" {
+                HStack (alignment:.firstTextBaseline ,spacing: 0) {
+                    Text(duration.min).font(.title2)
+                    Text("m")
+                }
+            }
+            
+            //sec
+            if showSeconds() {
+                HStack (alignment:.firstTextBaseline ,spacing: 0) {
+                    Text(duration.sec).font(.title2)
+                    Text("s")
+                }
             }
         }
     }
