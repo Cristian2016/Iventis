@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct DetailView:View {
+struct DetailTopView:View {
     struct DurationComponents {
         let hr:String
         let min:String
@@ -62,6 +62,6 @@ struct DetailView:View {
 struct BubbleDetail_Previews: PreviewProvider {
     
     static var previews: some View {
-        DetailView(10)
+        DetailTopView(10)
     }
 }

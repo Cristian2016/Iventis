@@ -13,7 +13,7 @@ struct TopCell: View {
     var color:Color
     let sessionCount:Int
     let sessionRank:String
-    let duration: DetailView.DurationComponents
+    let duration: DetailTopView.DurationComponents
     
     var body: some View {
         ZStack {
@@ -90,9 +90,9 @@ struct TopCell: View {
     
     // MARK: -
     ///12hr 36min 23sec
-    private static func duration(of session:Session) -> DetailView.DurationComponents {
+    private static func duration(of session:Session) -> DetailTopView.DurationComponents {
         let value = session.totalDuration.timeComponents()
-        return DetailView.DurationComponents(String(value.hr), String(value.min), String(value.sec))
+        return DetailTopView.DurationComponents(String(value.hr), String(value.min), String(value.sec))
     }
     
     private func showSeconds() -> Bool {
