@@ -66,6 +66,9 @@
 		1F6420062820186D00413E31 /* PairCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F6420052820186D00413E31 /* PairCell.swift */; };
 		1F6420072820186D00413E31 /* PairCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F6420052820186D00413E31 /* PairCell.swift */; };
 		1F6420082820186D00413E31 /* PairCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F6420052820186D00413E31 /* PairCell.swift */; };
+		1F64200A2820204400413E31 /* PairsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F6420092820204400413E31 /* PairsListView.swift */; };
+		1F64200B2820204400413E31 /* PairsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F6420092820204400413E31 /* PairsListView.swift */; };
+		1F64200C2820204400413E31 /* PairsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F6420092820204400413E31 /* PairsListView.swift */; };
 		1F8140DA2809AD45002C8460 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1F5F4A4D28093FAF00AF3442 /* Assets.xcassets */; };
 		1F97B7DD2809B311002FFCA3 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F97B7DC2809B311002FFCA3 /* Colors.swift */; };
 		1F97B7DE2809B311002FFCA3 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F97B7DC2809B311002FFCA3 /* Colors.swift */; };
@@ -163,6 +166,7 @@
 		1F641FFD281FF70100413E31 /* DetailBottomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailBottomView.swift; sourceTree = "<group>"; };
 		1F64200128200D2C00413E31 /* SessionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionViewModel.swift; sourceTree = "<group>"; };
 		1F6420052820186D00413E31 /* PairCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PairCell.swift; sourceTree = "<group>"; };
+		1F6420092820204400413E31 /* PairsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PairsListView.swift; sourceTree = "<group>"; };
 		1F97B7DC2809B311002FFCA3 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		1F9B6AEF280950D600C0A725 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		1F9BE0A8280BE14100F87EFA /* PaletteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PaletteView.swift; path = Shared/PaletteView.swift; sourceTree = SOURCE_ROOT; };
@@ -210,6 +214,7 @@
 			children = (
 				1F18B456281FA6130080ADA6 /* PushView.swift */,
 				1F18B45F281FAABF0080ADA6 /* TopCell.swift */,
+				1F6420092820204400413E31 /* PairsListView.swift */,
 				1F641FF9281FECA800413E31 /* BottomCell.swift */,
 				1F18B45B281FA9C90080ADA6 /* CalendarView.swift */,
 			);
@@ -452,6 +457,7 @@
 				1F64200228200D2C00413E31 /* SessionViewModel.swift in Sources */,
 				1FFC8BAD28142F040059EF2E /* Session Properties.swift in Sources */,
 				1FB3DE7C281EE45B003169E1 /* DeleteActionView.swift in Sources */,
+				1F64200A2820204400413E31 /* PairsListView.swift in Sources */,
 				1FD21865281D9AB700B43403 /* SpotlightAlertView.swift in Sources */,
 				1F641FFA281FECA800413E31 /* BottomCell.swift in Sources */,
 				1F9BE0A9280BE14100F87EFA /* PaletteView.swift in Sources */,
@@ -499,6 +505,7 @@
 				1F97B7DE2809B311002FFCA3 /* Colors.swift in Sources */,
 				1FFC8BAE28142F040059EF2E /* Session Properties.swift in Sources */,
 				1F18B458281FA6130080ADA6 /* PushView.swift in Sources */,
+				1F64200B2820204400413E31 /* PairsListView.swift in Sources */,
 				1FCF0C672816F3F600AA1FAA /* EmptyBubbleListView.swift in Sources */,
 				1F5F4A742809409600AF3442 /* Bubble.swift in Sources */,
 				1FF0A2FE2810448100B1DB77 /* DetailTopView.swift in Sources */,
@@ -527,6 +534,7 @@
 				1F64200428200D2C00413E31 /* SessionViewModel.swift in Sources */,
 				1FFC8BAF28142F040059EF2E /* Session Properties.swift in Sources */,
 				1FB3DE7E281EE45B003169E1 /* DeleteActionView.swift in Sources */,
+				1F64200C2820204400413E31 /* PairsListView.swift in Sources */,
 				1FD21867281D9AB700B43403 /* SpotlightAlertView.swift in Sources */,
 				1F641FFC281FECA800413E31 /* BottomCell.swift in Sources */,
 				1F9BE0AB280BE14100F87EFA /* PaletteView.swift in Sources */,

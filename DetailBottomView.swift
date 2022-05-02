@@ -25,14 +25,8 @@ struct DetailBottomView: View {
         ScrollView(.horizontal, showsIndicators: false) {
             HStack {//each session cooresponding to a list
                 ForEach (sessions) { session in
-                    List { //the list of pairs
-                        ForEach (session.pairs_.reversed()) { pair in
-                            ZStack {
-                                PairCell()
-                            }
-                        }
-                    }
-                    .frame(width: 300, height: 200)
+                    PairsListView(rank: Int(session.bubble.rank))
+                        .frame(width: UIScreen.size.width, height: 500)
                 }
             }
         }
