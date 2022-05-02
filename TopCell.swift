@@ -18,18 +18,18 @@ struct TopCell: View {
     var body: some View {
         ZStack {
             RoundedRectangle(cornerRadius: 10)
-            .strokeBorder(color, lineWidth: 4, antialiased: true)
+                .strokeBorder(.clear, lineWidth: 0, antialiased: true)
             .frame(width: 150, height: 120)
-            HStack {
+            
+            sessionRankView
+            Push(.bottomLeft) {
                 VStack (alignment:.leading, spacing: 6) {
                     dateView
                     durationView
                 }
-                .offset(x: 0, y: 10)
-                .padding(EdgeInsets(top: 0, leading: 16, bottom: 0, trailing: 0))
-                Spacer()
+                .padding(EdgeInsets(top: 0, leading: 13, bottom: 10, trailing: 0))
             }
-            sessionRankView
+            .background( backgroundView )
         }
     }
     
@@ -78,6 +78,13 @@ struct TopCell: View {
             }
         }
     }
+    
+    private var backgroundView:some View {
+        ZStack {
+            RoundedRectangle(cornerRadius: 10)
+                .strokeBorder(color, lineWidth: 4, antialiased: true)
+            RoundedRectangle(cornerRadius: 10).fill(Color.clear)
+        }}
     
     // MARK: -
     ///12hr 36min 23sec
