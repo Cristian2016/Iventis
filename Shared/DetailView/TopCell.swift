@@ -82,6 +82,7 @@ struct TopCell: View {
                         }
                     }
             }
+           
         }
     }
     
@@ -114,13 +115,13 @@ struct TopCell: View {
         self.duration = result
     }
     
-//    private var bubbleRunningAlert:some View {
-//        Button { } label: { Label { Text("Running").fontWeight(.semibold) } icon: { } }
-//    .buttonStyle(.borderedProminent)
-//    .foregroundColor(.white)
-//    .tint(.green)
-//    .font(.caption)
-//    }
+    private var bubbleRunningAlert:some View {
+        Button { } label: { Label { Text("Running").fontWeight(.semibold) } icon: { } }
+    .buttonStyle(.borderedProminent)
+    .foregroundColor(.white)
+    .tint(.green)
+    .font(.caption)
+    }
 }
 
 //struct TopCell_Previews: PreviewProvider {

@@ -11,7 +11,7 @@ struct BottomCell: View {
     @FetchRequest var pairs:FetchedResults<Pair>
     
     ///how far from the trailing edge should the count label be
-    let pairCountTrailingPadding = CGFloat(-8)
+    let pairCountTrailingPadding = CGFloat(-10)
     
     init(session:Session) {
         let descriptor = NSSortDescriptor(key: "start", ascending: false)
@@ -28,10 +28,10 @@ struct BottomCell: View {
                 ZStack {
                     Push(.bottomRight) {
                         Image(systemName: "\(pairs.count - Int(pairs.firstIndex(of: pair)!)).square.fill")
-                            .foregroundColor(.secondary)
+                            .foregroundColor(.lightGray)
                             .font(.system(size: 28))
                     }
-                    .padding(.trailing, pairCountTrailingPadding)
+                    .padding([.trailing], pairCountTrailingPadding)
                     PairCell(pair)
                 }
             }
