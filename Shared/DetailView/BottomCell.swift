@@ -10,6 +10,9 @@ import SwiftUI
 struct BottomCell: View {
     @FetchRequest var pairs:FetchedResults<Pair>
     
+    ///how far from the trailing edge should the count label be
+    let pairCountTrailingPadding = CGFloat(-8)
+    
     init(session:Session) {
         let descriptor = NSSortDescriptor(key: "start", ascending: false)
         let predicate = NSPredicate(format: "session = %@", session)
@@ -28,7 +31,7 @@ struct BottomCell: View {
                             .foregroundColor(.secondary)
                             .font(.system(size: 28))
                     }
-                    .padding(.trailing, -8)
+                    .padding(.trailing, pairCountTrailingPadding)
                     PairCell(pair)
                 }
             }
