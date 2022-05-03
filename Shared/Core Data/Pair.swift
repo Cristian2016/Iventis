@@ -43,9 +43,7 @@ public class Pair: NSManagedObject {
                     case .endSession:
                         duration = Float(pause.timeIntervalSince(start) - 0.5)
                 }
-                DispatchQueue.main.async {
-                    completion(duration)
-                }
+                DispatchQueue.main.async { completion(duration) }
             }
         }
     }

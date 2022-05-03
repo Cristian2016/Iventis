@@ -230,9 +230,9 @@
 			children = (
 				1F5F4A942809450A00AF3442 /* Library.swift */,
 				1F5F4A4A28093FAD00AF3442 /* TimersApp.swift */,
+				1F5F4A982809456E00AF3442 /* BubbleList.swift */,
 				1F5F4A93280941FC00AF3442 /* Core Data */,
 				1F97B7E02809B331002FFCA3 /* Assets */,
-				1F5F4A982809456E00AF3442 /* BubbleList.swift */,
 				1F8E7EDF2820F8560063A659 /* DetailView */,
 				1FE163AD280EE6F40050C6F5 /* LeftStrip.swift */,
 				1F4239A2281E510D004BE717 /* NoteView.swift */,

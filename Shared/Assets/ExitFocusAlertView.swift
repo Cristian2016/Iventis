@@ -17,7 +17,7 @@ struct ExitFocusAlertView: View {
     }
     
     var body: some View {
-        HStack {
+        ZStack {
             Button {
                 withAnimation {
                     UserFeedback.triggerSingleHaptic(.medium)
@@ -34,7 +34,8 @@ struct ExitFocusAlertView: View {
             .tint(.orange)
             .buttonStyle(.bordered)
         }
-        .padding()
+        .background(Color.background1.padding(-200))
+        .padding([.top], 10)
     }
 }
 
