@@ -44,7 +44,7 @@ struct DetailTopView:View {
                     }
                 }
             }
-        } .offset(x: 0, y: -10)
+        }.offset(x: 0, y: -10)
     }
     
     // MARK: -

@@ -9,6 +9,7 @@ import SwiftUI
 
 struct TopCell: View {
     @StateObject var session:Session
+    private let topCellHeight = CGFloat(130)
 
     var color:Color
     let sessionCount:Int
@@ -26,7 +27,7 @@ struct TopCell: View {
                     }
                     .padding(EdgeInsets(top: 0, leading: 13, bottom: 10, trailing: 6))
                 }
-                .frame(height: 150)
+                .frame(height: topCellHeight)
                 .background( backgroundView )
             }
         }
