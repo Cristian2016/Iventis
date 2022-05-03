@@ -86,7 +86,7 @@ struct BubbleCell: View {
                     viewModel.endSession(bubble)
                 }
             if bubble.state != .running {
-                hundredthsView
+                centsView
                     .onTapGesture {
                         UserFeedback.triggerSingleHaptic(.heavy)
                         viewModel.toggleStart(bubble)
@@ -168,12 +168,13 @@ struct BubbleCell: View {
         }
     }
     
-    private var hundredthsView:some View {
+    ///hundredths of a second that is :)
+    private var centsView:some View {
         VStack {
             Spacer()
             HStack {
                 Spacer()
-                Text(bubble.hundredths)
+                Text(bubble.timeComponentsString.cents)
                     .background(Circle()
                         .foregroundColor(Color("pauseStickerColor"))
                         .padding(-12))

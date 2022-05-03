@@ -60,9 +60,8 @@ class ViewModel: ObservableObject {
         let viewContext = PersistenceController.shared.viewContext
         bubble.created = Date()
         bubble.currentClock = bubble.initialClock
-        bubble.timeComponentsString = bubble.convertToTimeComponents(bubble.initialClock)
+        bubble.timeComponentsString = bubble.initialClock.timComponentsAsStrings
         bubble.sessions?.forEach { viewContext.delete($0 as! Session) }
-        bubble.hundredths = "00"
         try? viewContext.save()
     }
     
@@ -106,9 +105,7 @@ class ViewModel: ObservableObject {
                 
                 //compute and store currentClock
                 bubble.currentClock += currentPair!.duration
-                
-                bubble.hundredths = bubble.currentClock.hundredthsFromCurrentClock
-                bubble.timeComponentsString = bubble.convertToTimeComponents(bubble.currentClock)
+                bubble.timeComponentsString = bubble.currentClock.timComponentsAsStrings
                 
             case .finished: return
         }
@@ -129,7 +126,7 @@ class ViewModel: ObservableObject {
     func endSession(_ bubble:Bubble) {
         if bubble.state == .brandNew { return }
         bubble.currentClock = bubble.initialClock
-        bubble.timeComponentsString = bubble.convertToTimeComponents(bubble.currentClock)
+        bubble.timeComponentsString = bubble.currentClock.timComponentsAsStrings
         bubble.lastSession.isEnded = true
         if bubble.lastPair!.pause == nil {
             bubble.lastPair!.pause = Date()
@@ -140,7 +137,7 @@ class ViewModel: ObservableObject {
             bubble.lastSession.computeDuration()
         }
         
-        bubble.hundredths = "00"
+        bubble.timeComponentsString = bubble.initialClock.timComponentsAsStrings
         
         try? PersistenceController.shared.viewContext.save()
     }

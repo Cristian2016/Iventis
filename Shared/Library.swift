@@ -96,7 +96,9 @@ extension Float {
     
     var timComponentsAsStrings:TimeComponentsAsStrings {
         let components = timeComponents
-        return TimeComponentsAsStrings(hr: String(components.hr), min: String(components.min), sec: String(components.sec), cents: String(components.cents))
+        
+        let cents = String(components.cents)
+        return TimeComponentsAsStrings(hr: String(components.hr), min: String(components.min), sec: String(components.sec), cents: cents)
     }
     
     struct TimeComponents {

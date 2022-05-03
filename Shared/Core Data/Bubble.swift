@@ -43,11 +43,13 @@ public class Bubble: NSManagedObject {
 //    @Published var timeComponents = (hr:0, min:0, sec:0) { willSet {
 //        self.objectWillChange.send()
 //    }} //⚠️
-    @Published var timeComponentsString = (hr:"0", min:"0", sec:"0") { willSet {
+    @Published var timeComponentsString
+    = Float.TimeComponentsAsStrings(hr: "0", min: "0", sec: "0", cents: "00")
+    { willSet {
         self.objectWillChange.send()
+        print(timeComponentsString)
     }}
-    @Published var hundredths:String = "00"
-    
+        
     private(set) var isObservingBackgroundTimer = false
     
     deinit {
@@ -101,13 +103,10 @@ extension Bubble {
                 NotificationCenter.default.addObserver(forName: .appLaunched, object: nil, queue: nil) { [weak self] notification in
                     guard let self = self else { return }
                                                             
-                    //time to set timeComponents to an initial value. forget about (hr:0, min:0, sec:0)
-                    let components = self.currentClock.timeComponents
-                    let componentsString = self.convertToTimeComponents(self.currentClock)
+                    let componentsString = self.currentClock.timComponentsAsStrings
                     DispatchQueue.main.async {
 //                        self.timeComponents = components //⚠️
                         self.timeComponentsString = componentsString
-                        self.hundredths = self.currentClock.hundredthsFromCurrentClock
                     }
                 }
             default: NotificationCenter.default.removeObserver(self)
@@ -125,7 +124,7 @@ extension Bubble {
         //delta is the elapsed duration between pair.start and signal dates
         let Δ = Date().timeIntervalSince(lastPairStart)
         let value = currentClock + Float(Δ)
-        let componentsString = convertToTimeComponents(value)
+        let componentsString = value.timComponentsAsStrings
                             
         //since closure is executed on background thread, dispatch back to the main thread
         DispatchQueue.main.async {
@@ -141,11 +140,5 @@ extension Bubble {
             let elapsedSinceStart = Float(Date().timeIntervalSince(lastPair?.start ?? Date()))
             currentClock += elapsedSinceStart
         }
-    }
-    
-    func convertToTimeComponents(_ duration:Float) -> (hr:String, min:String, sec:String) {
-        let string = DateComponentsFormatter.bubbleStyle.string(from: TimeInterval(duration))!
-        let array = string.split(separator: ":")
-        return (String(Int(array[0])!), String(Int(array[1])!), String(Int(array[2])!))
     }
 }
