@@ -11,7 +11,7 @@ struct BottomCell: View {
     @FetchRequest var pairs:FetchedResults<Pair>
     
     ///how far from the trailing edge should the count label be
-    let pairCountTrailingPadding = CGFloat(-10)
+    let pairCountPadding = EdgeInsets(top: 4, leading: 0, bottom: 5, trailing: -6)
     
     init(session:Session) {
         let descriptor = NSSortDescriptor(key: "start", ascending: false)
@@ -26,14 +26,20 @@ struct BottomCell: View {
         List {
             ForEach(pairs) { pair in
                 ZStack {
-                    Push(.topLeft) {
+                    Push(.bottomRight) {
                         Image(systemName: "\(pairs.count - Int(pairs.firstIndex(of: pair)!)).square.fill")
+                            .padding(pairCountPadding)
                             .foregroundColor(.lightGray)
                             .font(.system(size: 28))
                     }
                     PairCell(pair)
                 }
             }
+            .listRowSeparator(.hidden)
+            .listRowBackground(
+                RoundedRectangle(cornerRadius: 1)
+                    .fill(Color("pairCell"))
+                    .padding(2))
             //⚠️ it works but it shpuld be the size of screen.height - something...
             Rectangle()
                 .fill(Color.clear)
