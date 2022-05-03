@@ -98,7 +98,9 @@ class ViewModel: ObservableObject {
 //
                 currentPair?.computeDuration(.pause) {
                     //closure runs on main queue
-                    currentPair?.duration = $0
+                    currentPair?.duration = $0 //Float
+                    currentPair?.durationAsStrings = $1 //Data
+                    
                     bubble.lastSession.computeDuration()
                 }
                 
@@ -131,7 +133,10 @@ class ViewModel: ObservableObject {
         bubble.lastSession.isEnded = true
         if bubble.lastPair!.pause == nil {
             bubble.lastPair!.pause = Date()
-            bubble.lastPair?.computeDuration(.endSession) { bubble.lastPair?.duration = $0 }
+            bubble.lastPair?.computeDuration(.endSession) {
+                bubble.lastPair?.duration = $0
+                bubble.lastPair?.durationAsStrings = $1
+            }
             bubble.lastSession.computeDuration()
         }
         

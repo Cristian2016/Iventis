@@ -102,7 +102,7 @@ extension Bubble {
                     guard let self = self else { return }
                                                             
                     //time to set timeComponents to an initial value. forget about (hr:0, min:0, sec:0)
-                    let components = self.currentClock.timeComponents()
+                    let components = self.currentClock.timeComponents
                     let componentsString = self.convertToTimeComponents(self.currentClock)
                     DispatchQueue.main.async {
 //                        self.timeComponents = components //⚠️

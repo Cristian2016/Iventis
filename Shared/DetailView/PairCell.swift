@@ -80,7 +80,7 @@ struct PairCell: View {
     }
     
     private func duration(of pair:Pair) -> DetailTopView.DurationComponents {
-        let value = pair.duration.timeComponents()
+        let value = pair.duration.timeComponents
         return DetailTopView.DurationComponents(String(value.hr), String(value.min), String(value.sec))
     }
 }

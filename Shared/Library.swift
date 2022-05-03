@@ -77,21 +77,40 @@ extension FileManager {
 
 extension Float {
     //converts currentClock to time components to display
-    func timeComponents() -> (hr:Int, min:Int, sec:Int) {
-        rounded(.toNearestOrEven) //discard all decimals
-        let roundedClock = Int(rounded(.toNearestOrEven))
+    var timeComponents:TimeComponents {
+        let decimalValue = Int(self) //used to compute hr. min, sec
+        let fractionalValue = Int((self - Float(decimalValue))*100)
         
         //how many full hours
-        let hr = roundedClock/3600
+        let hr = decimalValue/3600
         //hours remaining
-        let hrRemaining = roundedClock%3600
+        let hrRemaining = decimalValue%3600
         
         //how many full minutes
         let min = hrRemaining/60
         //remaining
         let sec = hrRemaining%60
         
-        return (hr, min, sec)
+        return TimeComponents(hr: hr, min: min, sec: sec, cents: fractionalValue)
+    }
+    
+    var timComponentsAsStrings:TimeComponentsAsStrings {
+        let components = timeComponents
+        return TimeComponentsAsStrings(hr: String(components.hr), min: String(components.min), sec: String(components.sec), cents: String(components.cents))
+    }
+    
+    struct TimeComponents {
+        let hr:Int
+        let min:Int
+        let sec:Int
+        let cents:Int
+    }
+    
+    struct TimeComponentsAsStrings:Encodable{
+        let hr:String
+        let min:String
+        let sec:String
+        let cents:String
     }
 }
 

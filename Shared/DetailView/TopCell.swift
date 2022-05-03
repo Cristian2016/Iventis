@@ -92,7 +92,7 @@ struct TopCell: View {
     // MARK: -
     ///12hr 36min 23sec
     private static func duration(of session:Session) -> DetailTopView.DurationComponents {
-        let value = session.totalDuration.timeComponents()
+        let value = session.totalDuration.timeComponents
         return DetailTopView.DurationComponents(String(value.hr), String(value.min), String(value.sec))
     }
     
