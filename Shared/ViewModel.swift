@@ -96,10 +96,10 @@ class ViewModel: ObservableObject {
                 //compute duration
 //                currentPair!.duration = Float(currentPair!.pause!.timeIntervalSince(currentPair!.start))
 //
-                currentPair?.pairDuration(.pause) {
+                currentPair?.computeDuration(.pause) {
                     //closure runs on main queue
                     currentPair?.duration = $0
-                    bubble.lastSession.computeSessionDuration()
+                    bubble.lastSession.computeDuration()
                 }
                 
                 //compute and store currentClock
@@ -131,8 +131,8 @@ class ViewModel: ObservableObject {
         bubble.lastSession.isEnded = true
         if bubble.lastPair!.pause == nil {
             bubble.lastPair!.pause = Date()
-            bubble.lastPair?.pairDuration(.endSession) { bubble.lastPair?.duration = $0 }
-            bubble.lastSession.computeSessionDuration()
+            bubble.lastPair?.computeDuration(.endSession) { bubble.lastPair?.duration = $0 }
+            bubble.lastSession.computeDuration()
         }
         
         bubble.hundredths = "00"

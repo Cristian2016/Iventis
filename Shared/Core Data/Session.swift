@@ -16,7 +16,7 @@ public class Session: NSManagedObject {
     }
     
     //⚠️ implement on backgroundthread. warning: wait until pair computes its duration and then compite session.totalduration!!!
-    func computeSessionDuration() {
+    func computeDuration() {
         DispatchQueue.global().async {
             let pairs = self.pairs?.array as! [Pair]
             guard !pairs.isEmpty,
@@ -26,14 +26,6 @@ public class Session: NSManagedObject {
                 self.totalDuration += lastPairDuration
                 PersistenceController.shared.save()
             }
-        }
-    }
-    
-    var pairs_:[Pair] {
-        get { pairs?.array as? [Pair] ?? [] }
-        set {
-            pairs = NSOrderedSet(array: newValue)
-            print("update pairs")
         }
     }
 }

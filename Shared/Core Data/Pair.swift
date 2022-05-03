@@ -32,19 +32,19 @@ public class Pair: NSManagedObject {
 //        }
 //    }
     
-    func pairDuration(_ durationComputed:DurationComputed, completion: @escaping (Float) -> ()) {
+    func computeDuration(_ durationComputed:DurationComputed, completion: @escaping (Float) -> ()) {
         DispatchQueue.global().async {
             guard let pause = self.pause else { fatalError() }
             if let start = self.start {
-                let value:Float
+                let duration:Float
                 switch durationComputed {
                     case .pause:
-                        value = Float(pause.timeIntervalSince(start))
+                        duration = Float(pause.timeIntervalSince(start))
                     case .endSession:
-                        value = Float(pause.timeIntervalSince(start) - 0.5)
+                        duration = Float(pause.timeIntervalSince(start) - 0.5)
                 }
                 DispatchQueue.main.async {
-                    completion(value)
+                    completion(duration)
                 }
             }
         }
