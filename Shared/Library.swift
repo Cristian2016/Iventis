@@ -97,7 +97,7 @@ extension Float {
     var timComponentsAsStrings:TimeComponentsAsStrings {
         let components = timeComponents
         
-        let cents = String(components.cents)
+        let cents = String(format: "%.2d", components.cents)
         return TimeComponentsAsStrings(hr: String(components.hr), min: String(components.min), sec: String(components.sec), cents: cents)
     }
     
