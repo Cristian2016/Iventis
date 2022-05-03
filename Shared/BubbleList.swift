@@ -138,6 +138,10 @@ struct BubbleList: View {
         let bubble = try! context.fetch(request).first
         return bubble!
     }
+    
+//    private func totalBubblesCount() -> Int {
+//        (try? PersistenceController.shared.viewContext.count(for: Bubble.fetchRequest())) ?? 0
+//    }
 }
 
 // MARK: -
@@ -146,3 +150,4 @@ struct ContentView_Previews: PreviewProvider {
         BubbleList(.constant(NSPredicate(value: true)))
     }
 }
+

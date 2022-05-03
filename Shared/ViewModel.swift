@@ -92,20 +92,18 @@ class ViewModel: ObservableObject {
             case .running: /* changes to .paused */
                 let currentPair = bubble.lastPair
                 currentPair?.pause = Date()
-                //compute duration
-//                currentPair!.duration = Float(currentPair!.pause!.timeIntervalSince(currentPair!.start))
-//
+                
                 currentPair?.computeDuration(.pause) {
                     //closure runs on main queue
                     currentPair?.duration = $0 //Float
                     currentPair?.durationAsStrings = $1 //Data
                     
                     bubble.lastSession.computeDuration()
-                }
-                
-                //compute and store currentClock
-                bubble.currentClock += currentPair!.duration
-                bubble.timeComponentsString = bubble.currentClock.timComponentsAsStrings
+                    
+                    //compute and store currentClock
+                    bubble.currentClock += currentPair!.duration
+                    bubble.timeComponentsString = bubble.currentClock.timComponentsAsStrings
+                }               
                 
             case .finished: return
         }

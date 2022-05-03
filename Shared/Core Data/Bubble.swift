@@ -47,7 +47,7 @@ public class Bubble: NSManagedObject {
     = Float.TimeComponentsAsStrings(hr: "0", min: "0", sec: "0", cents: "00")
     { willSet {
         self.objectWillChange.send()
-        print(timeComponentsString)
+//        print(timeComponentsString)
     }}
         
     private(set) var isObservingBackgroundTimer = false
@@ -104,6 +104,8 @@ extension Bubble {
                     guard let self = self else { return }
                                                             
                     let componentsString = self.currentClock.timComponentsAsStrings
+//                    print(self.currentClock)
+//                    print(componentsString, " at launch")
                     DispatchQueue.main.async {
 //                        self.timeComponents = components //⚠️
                         self.timeComponentsString = componentsString
@@ -128,7 +130,6 @@ extension Bubble {
                             
         //since closure is executed on background thread, dispatch back to the main thread
         DispatchQueue.main.async {
-//            self.timeComponents = value.timeComponents() //⚠️
             self.timeComponentsString = componentsString
         }
     }
