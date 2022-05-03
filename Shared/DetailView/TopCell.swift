@@ -76,11 +76,10 @@ struct TopCell: View {
                     //sec
                     if showSeconds() {
                         HStack (alignment:.firstTextBaseline ,spacing: 0) {
-                            Text(duration.sec).font(.title2)
+                            Text(duration.sec + "." + duration.cents).font(.title2)
                             Text("s")
                         }
                     }
-                
             }
         }
     }
@@ -93,12 +92,6 @@ struct TopCell: View {
         }}
     
     // MARK: -
-    ///12hr 36min 23sec
-    private static func duration(of session:Session) -> DetailTopView.DurationComponents {
-        let value = session.totalDuration.timeComponents
-        return DetailTopView.DurationComponents(String(value.hr), String(value.min), String(value.sec))
-    }
-    
     private func showSeconds() -> Bool {
         guard let duration = duration else { return false }
         
