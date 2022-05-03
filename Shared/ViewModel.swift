@@ -132,11 +132,12 @@ class ViewModel: ObservableObject {
             bubble.lastPair?.computeDuration(.endSession) {
                 bubble.lastPair?.duration = $0
                 bubble.lastPair?.durationAsStrings = $1
+                
+                bubble.lastSession.computeDuration()
+                
+                bubble.timeComponentsString = bubble.initialClock.timComponentsAsStrings
             }
-            bubble.lastSession.computeDuration()
         }
-        
-        bubble.timeComponentsString = bubble.initialClock.timComponentsAsStrings
         
         try? PersistenceController.shared.viewContext.save()
     }
