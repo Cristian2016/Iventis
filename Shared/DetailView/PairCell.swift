@@ -75,7 +75,7 @@ struct PairCell: View {
         _pair = StateObject(wrappedValue: pair)
         let decoder = JSONDecoder()
         let result = try? decoder.decode(Float.TimeComponentsAsStrings.self, from: pair.durationAsStrings ?? Data())
-        self.duration = result ?? Float.TimeComponentsAsStrings(hr: "-1", min: "-1", sec: "-1", cents: "-1")
+        self.duration = result ?? Float.TimeComponentsAsStrings(hr: "...", min: "", sec: "", cents: "-1")
         
         let condition = (duration.min != "0" || duration.hr != "0")
         
