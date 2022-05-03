@@ -29,7 +29,7 @@ struct BottomCell: View {
                             .foregroundColor(.secondary)
                             .font(.system(size: 25))
                     }
-                    PairCell(pair: pair)
+                    PairCell(pair)
                 }.padding(4)
             }
         }

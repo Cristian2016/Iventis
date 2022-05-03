@@ -22,6 +22,7 @@ struct DetailTopView:View {
     
     @FetchRequest var sessions:FetchedResults<Session>
     let yOffset = CGFloat(-25)
+    let offSetFromBubbleList = CGFloat(-10) //too low it will cut into the bubble list
         
     init(_ rank:Int?) {
         let predicate:NSPredicate?
@@ -44,7 +45,8 @@ struct DetailTopView:View {
                     }
                 }
             }
-        }.offset(x: 0, y: -10)
+        }
+        .offset(x: 0, y: offSetFromBubbleList)
     }
     
     // MARK: -

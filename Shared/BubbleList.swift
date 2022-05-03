@@ -28,7 +28,10 @@ struct BubbleList: View {
                         ForEach(results) { section in
                             Section {
                                 ForEach (section) {
-                                    BubbleCell($0, $showDetail, $predicate, $showDeleteAction)
+                                    BubbleCell($0,
+                                               $showDetail,
+                                               $predicate,
+                                               $showDeleteAction)
                                             .environmentObject(viewModel)
                                 }
                             } header: { headerTitle(for: section.id.description) }

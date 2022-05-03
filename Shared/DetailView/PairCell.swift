@@ -9,6 +9,8 @@ import SwiftUI
 
 struct PairCell: View {
     @StateObject var pair:Pair
+    let duration:Float.TimeComponentsAsStrings
+    let showSeconds:Bool
     
     var body: some View {
             VStack (alignment: .leading) {
@@ -36,23 +38,13 @@ struct PairCell: View {
                     }
                 }
                 
-                //duration
                 durationView
             }
             .padding(EdgeInsets(top: 0, leading: 15, bottom: 0, trailing: 0))
     }
     
-    private func showSeconds() -> Bool {
-        let duration = duration(of: pair)
-        let condition = (duration.min != "0" || duration.hr != "0")
-        if duration.sec == "0" { return condition ? false : true }
-        return true
-    }
-    
     private var durationView:some View {
         HStack (spacing: 8) {
-            let duration = duration(of: pair)
-            
             //hr
             if duration.hr != "0" {
                 HStack (alignment:.firstTextBaseline ,spacing: 0) {
@@ -70,7 +62,7 @@ struct PairCell: View {
             }
             
             //sec
-            if showSeconds() {
+            if showSeconds {
                 HStack (alignment:.firstTextBaseline ,spacing: 0) {
                     Text(duration.sec).font(.title3)
                     Text("s")
@@ -79,9 +71,16 @@ struct PairCell: View {
         }
     }
     
-    private func duration(of pair:Pair) -> DetailTopView.DurationComponents {
-        let value = pair.duration.timeComponents
-        return DetailTopView.DurationComponents(String(value.hr), String(value.min), String(value.sec))
+    init(_ pair:Pair) {
+        _pair = StateObject(wrappedValue: pair)
+        let decoder = JSONDecoder()
+        let result = try? decoder.decode(Float.TimeComponentsAsStrings.self, from: pair.durationAsStrings ?? Data())
+        self.duration = result ?? Float.TimeComponentsAsStrings(hr: "-1", min: "-1", sec: "-1", cents: "-1")
+        
+        let condition = (duration.min != "0" || duration.hr != "0")
+        
+        if duration.sec == "0" { self.showSeconds = condition ? false : true }
+        else { self.showSeconds = true }
     }
 }
 
