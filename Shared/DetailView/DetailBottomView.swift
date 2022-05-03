@@ -12,10 +12,8 @@ struct DetailBottomView: View {
     
     init(_ rank:Int?) {
         let predicate:NSPredicate?
-        if let rank = rank {
-            predicate = NSPredicate(format: "bubble.rank == %i", rank)
-        }
-        else { predicate = nil }
+        if let rank = rank { predicate = NSPredicate(format: "bubble.rank == %i", rank)
+        } else { predicate = nil }
         
         let descriptor = NSSortDescriptor(key: "created", ascending: false)
         _sessions = FetchRequest(entity: Session.entity(), sortDescriptors: [descriptor], predicate: predicate, animation: .easeInOut)
@@ -26,8 +24,7 @@ struct DetailBottomView: View {
             HStack {//each session cooresponding to a list
                 ForEach (sessions) { session in
                     BottomCell(session: session)
-                        .frame(width: UIScreen.size.width * 0.91, height: 600)
-                        .offset(x: 0, y: -40)
+                        .frame(width: UIScreen.size.width, height: 600)
                 }
             }
         }
@@ -36,6 +33,6 @@ struct DetailBottomView: View {
 
 //struct DetailBottomView_Previews: PreviewProvider {
 //    static var previews: some View {
-//        DetailBottomView(session: .constant(Session()))
+//        DetailBottomView(session: PersistenceController.shared.viewContext.count(for: <#T##NSFetchRequest<NSFetchRequestResult>#>))
 //    }
 //}

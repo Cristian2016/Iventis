@@ -26,17 +26,20 @@ struct BottomCell: View {
         List {
             ForEach(pairs) { pair in
                 ZStack {
-                    Push(.bottomRight) {
+                    Push(.topLeft) {
                         Image(systemName: "\(pairs.count - Int(pairs.firstIndex(of: pair)!)).square.fill")
                             .foregroundColor(.lightGray)
                             .font(.system(size: 28))
                     }
-                    .padding([.trailing], pairCountTrailingPadding)
                     PairCell(pair)
                 }
             }
+            //⚠️ it works but it shpuld be the size of screen.height - something...
+            Rectangle()
+                .fill(Color.clear)
+                .frame(width: 10, height: 300)
         }
-        .listStyle(.grouped)
+        .listStyle(.plain)
     }
 }
 

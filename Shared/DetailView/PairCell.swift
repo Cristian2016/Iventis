@@ -28,8 +28,6 @@ struct PairCell: View {
                         DateFormatter.bubbleStyleDate.string(from: pair.start ?? Date()) ==
                         DateFormatter.bubbleStyleDate.string(from: pair.pause!)
                     }()
-                    
-                    if showPause {
                         HStack {
                             Text(DateFormatter.bubbleStyleTime.string(from: pause))
                                 .font(.monospaced(Font.body)())
@@ -38,12 +36,10 @@ struct PairCell: View {
                                     .foregroundColor(.secondary)
                             }
                         }
-                    }
                 }
                 
                 durationView
             }
-            .padding(EdgeInsets(top: 0, leading: 15, bottom: 0, trailing: 0))
     }
     
     private var durationView:some View {
