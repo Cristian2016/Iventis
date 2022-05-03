@@ -17,12 +17,16 @@ public class Session: NSManagedObject {
     
     //⚠️ implement on backgroundthread. warning: wait until pair computes its duration and then compite session.totalduration!!!
     func computeSessionDuration() {
-        let pairs = pairs?.array as! [Pair]
-        guard !pairs.isEmpty,
-        let lastPairDuration = pairs.last?.duration else { fatalError() }
-        
-        totalDuration += lastPairDuration
-        //⚠️ no need to save context!
+        DispatchQueue.global().async {
+            let pairs = self.pairs?.array as! [Pair]
+            guard !pairs.isEmpty,
+                  let lastPairDuration = pairs.last?.duration else { fatalError() }
+            
+            DispatchQueue.main.async {
+                self.totalDuration += lastPairDuration
+                PersistenceController.shared.save()
+            }
+        }
     }
     
     var pairs_:[Pair] {

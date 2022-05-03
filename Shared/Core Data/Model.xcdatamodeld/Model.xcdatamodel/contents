@@ -14,6 +14,7 @@
     </entity>
     <entity name="Pair" representedClassName=".Pair" syncable="YES">
         <attribute name="duration" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="durationAsStrings" optional="YES" attributeType="Binary"/>
         <attribute name="isNoteVisible" optional="YES" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
         <attribute name="note" optional="YES" attributeType="String" defaultValueString=""/>
         <attribute name="pause" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
@@ -29,7 +30,7 @@
     </entity>
     <elements>
         <element name="Bubble" positionX="-1028.380004882812" positionY="1528.89501953125" width="128" height="179"/>
-        <element name="Pair" positionX="-832.5816650390625" positionY="1586.590484619141" width="128" height="133"/>
+        <element name="Pair" positionX="-832.5816650390625" positionY="1586.590484619141" width="128" height="134"/>
         <element name="Session" positionX="-826.8931884765625" positionY="1341.822631835938" width="128" height="104"/>
     </elements>
 </model>

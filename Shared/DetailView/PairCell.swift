@@ -50,7 +50,6 @@ struct PairCell: View {
     }
     
     private var durationView:some View {
-       
         HStack (spacing: 8) {
             let duration = duration(of: pair)
             
