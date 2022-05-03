@@ -93,6 +93,7 @@ class ViewModel: ObservableObject {
                 let currentPair = bubble.lastPair
                 currentPair?.pause = Date()
                 
+                //⚠️ closure runs on the main queue. whatever you want the user to see put in that closure otherwise it will fail to update!!!!
                 currentPair?.computeDuration(.pause) {
                     //closure runs on main queue
                     currentPair?.duration = $0 //Float
@@ -103,7 +104,7 @@ class ViewModel: ObservableObject {
                     //compute and store currentClock
                     bubble.currentClock += currentPair!.duration
                     bubble.timeComponentsString = bubble.currentClock.timComponentsAsStrings
-                }               
+                }
                 
             case .finished: return
         }
