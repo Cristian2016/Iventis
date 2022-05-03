@@ -25,12 +25,13 @@
         <attribute name="created" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="isEnded" optional="YES" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
         <attribute name="totalDuration" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="totalDurationAsStrings" optional="YES" attributeType="Binary"/>
         <relationship name="bubble" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Bubble" inverseName="sessions" inverseEntity="Bubble"/>
         <relationship name="pairs" optional="YES" toMany="YES" deletionRule="Cascade" ordered="YES" destinationEntity="Pair" inverseName="session" inverseEntity="Pair"/>
     </entity>
     <elements>
         <element name="Bubble" positionX="-1028.380004882812" positionY="1528.89501953125" width="128" height="179"/>
         <element name="Pair" positionX="-832.5816650390625" positionY="1586.590484619141" width="128" height="134"/>
-        <element name="Session" positionX="-826.8931884765625" positionY="1341.822631835938" width="128" height="104"/>
+        <element name="Session" positionX="-826.8931884765625" positionY="1341.822631835938" width="128" height="119"/>
     </elements>
 </model>

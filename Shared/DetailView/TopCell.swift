@@ -13,7 +13,7 @@ struct TopCell: View {
     var color:Color
     let sessionCount:Int
     let sessionRank:String
-    let duration: DetailTopView.DurationComponents
+    let duration: Float.TimeComponentsAsStrings?
     
     var body: some View {
         if !session.isFault {
@@ -53,32 +53,35 @@ struct TopCell: View {
         } else { EmptyView() }
     }
     
+    @ViewBuilder
     private var durationView:some View {
-        HStack (spacing: 8) {
-                //hr
-                if duration.hr != "0" {
-                    HStack (alignment:.firstTextBaseline ,spacing: 0) {
-                        Text(duration.hr).font(.title2)
-                        Text("h")
+        if let duration = duration {
+            HStack (spacing: 8) {
+                    //hr
+                    if duration.hr != "0" {
+                        HStack (alignment:.firstTextBaseline ,spacing: 0) {
+                            Text(duration.hr).font(.title2)
+                            Text("h")
+                        }
                     }
-                }
+                    
+                    //min
+                    if duration.min != "0" {
+                        HStack (alignment:.firstTextBaseline ,spacing: 0) {
+                            Text(duration.min).font(.title2)
+                            Text("m")
+                        }
+                    }
+                    
+                    //sec
+                    if showSeconds() {
+                        HStack (alignment:.firstTextBaseline ,spacing: 0) {
+                            Text(duration.sec).font(.title2)
+                            Text("s")
+                        }
+                    }
                 
-                //min
-                if duration.min != "0" {
-                    HStack (alignment:.firstTextBaseline ,spacing: 0) {
-                        Text(duration.min).font(.title2)
-                        Text("m")
-                    }
-                }
-                
-                //sec
-                if showSeconds() {
-                    HStack (alignment:.firstTextBaseline ,spacing: 0) {
-                        Text(duration.sec).font(.title2)
-                        Text("s")
-                    }
-                }
-            
+            }
         }
     }
     
@@ -97,6 +100,8 @@ struct TopCell: View {
     }
     
     private func showSeconds() -> Bool {
+        guard let duration = duration else { return false }
+        
         let condition = (duration.min != "0" || duration.hr != "0")
         if duration.sec == "0" { return condition ? false : true }
         return true
@@ -109,7 +114,10 @@ struct TopCell: View {
         let description = session.bubble?.color
         self.color = (Color.bubbleThrees.filter { $0.description == description }.first ?? Color.Bubbles.mint).sec
         self.sessionRank = sessionRank
-        self.duration = TopCell.duration(of: session)
+        
+        let decoder = JSONDecoder()
+        let result = try? decoder.decode(Float.TimeComponentsAsStrings.self, from: session.totalDurationAsStrings ?? Data())
+        self.duration = result
     }
     
 //    private var bubbleRunningAlert:some View {

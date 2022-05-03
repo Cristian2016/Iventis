@@ -19,6 +19,8 @@ extension Session {
     @NSManaged public var created: Date?
     @NSManaged public var isEnded: Bool
     @NSManaged public var totalDuration: Float
+    @NSManaged public var totalDurationAsStrings: Data?
+    
     @NSManaged public var bubble: Bubble?
     @NSManaged public var pairs: NSOrderedSet?
 

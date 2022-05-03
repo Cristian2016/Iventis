@@ -106,7 +106,7 @@ extension Float {
         let cents:Int
     }
     
-    struct TimeComponentsAsStrings:Encodable{
+    struct TimeComponentsAsStrings:Encodable, Decodable {
         let hr:String
         let min:String
         let sec:String

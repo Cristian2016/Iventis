@@ -24,6 +24,12 @@ public class Session: NSManagedObject {
             
             DispatchQueue.main.async {
                 self.totalDuration += lastPairDuration
+                
+                let encoder = JSONEncoder()
+                let data = try? encoder.encode(self.totalDuration.timComponentsAsStrings)
+                self.totalDurationAsStrings = data
+                
+                //save all
                 PersistenceController.shared.save()
             }
         }
