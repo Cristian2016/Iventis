@@ -22,15 +22,15 @@ struct BottomCell: View {
     var body: some View {
         List {
             ForEach(pairs) { pair in
-                
                 ZStack {
                     Push(.bottomRight) {
                         Image(systemName: "\(pairs.count - Int(pairs.firstIndex(of: pair)!)).square.fill")
                             .foregroundColor(.secondary)
-                            .font(.system(size: 25))
+                            .font(.system(size: 28))
                     }
+                    .padding(.trailing, -8)
                     PairCell(pair)
-                }.padding(4)
+                }
             }
         }
         .listStyle(.grouped)

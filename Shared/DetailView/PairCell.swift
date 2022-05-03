@@ -9,11 +9,12 @@ import SwiftUI
 
 struct PairCell: View {
     @StateObject var pair:Pair
-    let duration:Float.TimeComponentsAsStrings
-    let showSeconds:Bool
+    let duration:Float.TimeComponentsAsStrings?
     
     var body: some View {
             VStack (alignment: .leading) {
+                let showPause = pair.session?.bubble?.state != .running
+                
                 //start time and date
                 HStack {
                     Text(DateFormatter.bubbleStyleTime.string(from: pair.start ?? Date()))
@@ -28,12 +29,14 @@ struct PairCell: View {
                         DateFormatter.bubbleStyleDate.string(from: pair.pause!)
                     }()
                     
-                    HStack {
-                        Text(DateFormatter.bubbleStyleTime.string(from: pause))
-                            .font(.monospaced(Font.body)())
-                        if !sameDates {
-                            Text(DateFormatter.bubbleStyleDate.string(from: pause))
-                                .foregroundColor(.secondary)
+                    if showPause {
+                        HStack {
+                            Text(DateFormatter.bubbleStyleTime.string(from: pause))
+                                .font(.monospaced(Font.body)())
+                            if !sameDates {
+                                Text(DateFormatter.bubbleStyleDate.string(from: pause))
+                                    .foregroundColor(.secondary)
+                            }
                         }
                     }
                 }
@@ -45,26 +48,26 @@ struct PairCell: View {
     
     private var durationView:some View {
         HStack (spacing: 8) {
-            //hr
-            if duration.hr != "0" {
-                HStack (alignment:.firstTextBaseline ,spacing: 0) {
-                    Text(duration.hr).font(.title3)
-                    Text("h")
+            if let duration = duration {
+                //hr
+                if duration.hr != "0" {
+                    HStack (alignment:.firstTextBaseline ,spacing: 0) {
+                        Text(duration.hr).font(.title3)
+                        Text("h")
+                    }
                 }
-            }
-            
-            //min
-            if duration.min != "0" {
-                HStack (alignment:.firstTextBaseline ,spacing: 0) {
-                    Text(duration.min).font(.title3)
-                    Text("m")
+                
+                //min
+                if duration.min != "0" {
+                    HStack (alignment:.firstTextBaseline ,spacing: 0) {
+                        Text(duration.min).font(.title3)
+                        Text("m")
+                    }
                 }
-            }
-            
-            //sec
-            if showSeconds {
+                
+                //sec
                 HStack (alignment:.firstTextBaseline ,spacing: 0) {
-                    Text(duration.sec).font(.title3)
+                    Text(duration.sec + "." + duration.cents).font(.title3)
                     Text("s")
                 }
             }
@@ -75,12 +78,7 @@ struct PairCell: View {
         _pair = StateObject(wrappedValue: pair)
         let decoder = JSONDecoder()
         let result = try? decoder.decode(Float.TimeComponentsAsStrings.self, from: pair.durationAsStrings ?? Data())
-        self.duration = result ?? Float.TimeComponentsAsStrings(hr: "...", min: "", sec: "", cents: "-1")
-        
-        let condition = (duration.min != "0" || duration.hr != "0")
-        
-        if duration.sec == "0" { self.showSeconds = condition ? false : true }
-        else { self.showSeconds = true }
+        self.duration = result
     }
 }
 
