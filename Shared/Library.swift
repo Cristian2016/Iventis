@@ -23,6 +23,7 @@ extension Image {
     static let trash = Image(systemName: "trash")
     static let pauseSticker = Image("pauseSticker")
     static let spotlight = Image("spotlight")
+    static let eyeSlash = Image(systemName: "eye.slash.fill")
 }
 
 func delayExecution(_ delay:DispatchTime, code:@escaping ()->()) {

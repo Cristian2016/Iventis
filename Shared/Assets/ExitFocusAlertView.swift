@@ -22,13 +22,10 @@ struct ExitFocusAlertView: View {
                 withAnimation {
                     UserFeedback.triggerSingleHaptic(.medium)
                     predicate = nil
-                    showDetail.0 = false
+                    showDetail.show = false
                 }
-            } label: {
-                Label { Text("Exit Focus").font(.title2) }
-            icon: { Image(systemName: "eye.slash.fill").font(.title) }
-            }
-//            .frame(height: 30)
+            } label: { Label { Text("Exit Focus").font(.title2) }
+                icon: { Image.eyeSlash.font(.title) } }
             .tint(.pink)
             .buttonStyle(.bordered)
         }
