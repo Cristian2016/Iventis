@@ -51,15 +51,16 @@ struct BubbleList: View {
             LeftStrip($showPalette, isBubbleListEmpty: results.isEmpty)
             PaletteView($showPalette).environmentObject(viewModel)
             if showDeleteAction.show {
-                DeleteActionView(showDeleteAction: $showDeleteAction)
-                    .onTapGesture {
-                        let bubble = bubble(for: showDeleteAction.rank!)
-                        viewModel.delete(bubble)
-                        //set predicate to nil in case any filtered search is going on
-                        predicate = nil
-                        showDetail.show = false
-                        showDeleteAction = (false, nil)
-                    }
+                DeleteActionView(bubble(for: showDeleteAction.rank!))
+//                DeleteActionView2($showDeleteAction, $predicate, $showDetail)
+//                    .onTapGesture {
+//                        let bubble = bubble(for: showDeleteAction.rank!)
+//                        viewModel.delete(bubble)
+//                        //set predicate to nil in case any filtered search is going on
+//                        predicate = nil
+//                        showDetail.show = false
+//                        showDeleteAction = (false, nil)
+//                    }
             }
         }
         .onChange(of: scenePhase, perform: {

@@ -81,4 +81,8 @@ extension Color {
         Bubbles.mint, Bubbles.slateBlue, Bubbles.sourCherry, Bubbles.silver, Bubbles.ultramarine, Bubbles.lemon, Bubbles.red, Bubbles.sky, Bubbles.bubbleGum,
         Bubbles.green, Bubbles.coffee, Bubbles.magenta, Bubbles.purple, Bubbles.orange, Bubbles.chocolate, Bubbles.aqua, Bubbles.byzantium, Bubbles.rose
     ]
+    
+    static func bubble(for bubbleColorName:String) -> Color {
+        (Color.bubbleThrees.filter { $0.description == bubbleColorName }.first ?? Color.Bubbles.mint).sec
+    }
 }
