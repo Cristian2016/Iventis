@@ -39,9 +39,7 @@ struct BubbleList: View {
                         .listRowSeparator(.hidden)
                         if showDetail.show {
                             DetailTopView(showDetail.rank)
-                                .zIndex(3)
                             DetailBottomView(showDetail.rank)
-                                .zIndex(4)
                         }
                     }
                     .padding(EdgeInsets(top: 0, leading: -10, bottom: 0, trailing: -10))
