@@ -3,7 +3,8 @@
 //  Timers
 //
 //  Created by Cristian Lapusan on 20.04.2022.
-//
+// References:
+// how to detect scroll view stop https://stackoverflow.com/questions/65062590/swiftui-detect-when-scrollview-has-finished-scrolling
 
 import SwiftUI
 
@@ -21,8 +22,9 @@ struct DetailTopView:View {
     }
     
     @FetchRequest var sessions:FetchedResults<Session>
-    let yOffset = CGFloat(-25)
     let offSetFromBubbleList = CGFloat(-10) //too low it will cut into the bubble list
+    //use entire screen width, but leave a little leading space
+    let trailingPadding = EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: -30)
         
     init(_ rank:Int?) {
         let predicate:NSPredicate?
@@ -48,6 +50,8 @@ struct DetailTopView:View {
                             .onTapGesture {
                                 //send rank information
                                 NotificationCenter.default.post(name: .topCellTapped, object: nil, userInfo: ["topCellTapped":Int(cellRank)!])
+                                
+                                //use the same rank info you are sending to scroll self in the center
                                 withAnimation { proxy.scrollTo(cellRank, anchor: .center) }
                             }
                     }
@@ -55,6 +59,7 @@ struct DetailTopView:View {
             }
         }
         .offset(x: 0, y: offSetFromBubbleList)
+        .padding(trailingPadding)
     }
     
     // MARK: -
