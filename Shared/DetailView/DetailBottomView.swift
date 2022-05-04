@@ -23,10 +23,10 @@ struct DetailBottomView: View {
         ScrollViewReader { proxy in
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack {//each session cooresponding to a list
-                    ForEach (sessions) { session in
-                        BottomCell(session: session)
+                    ForEach (sessions) {
+                        BottomCell($0)
                             .frame(width: UIScreen.size.width * 0.9, height: 600)
-                            .id(position(of:session))
+                            .id(position(of:$0))
                     }
                 }
             }

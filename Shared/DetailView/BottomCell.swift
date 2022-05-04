@@ -13,7 +13,7 @@ struct BottomCell: View {
     ///how far from the trailing edge should the count label be
     let pairCountPadding = EdgeInsets(top: 4, leading: 0, bottom: 5, trailing: -6)
     
-    init(session:Session) {
+    init(_ session:Session) {
         let descriptor = NSSortDescriptor(key: "start", ascending: false)
         let predicate = NSPredicate(format: "session = %@", session)
         _pairs = FetchRequest(entity: Pair.entity(),
