@@ -25,14 +25,15 @@ struct ExitFocusAlertView: View {
                     showDetail.0 = false
                 }
             } label: {
-                Label { Text("Exit Focus").font(.title2) }
-            icon: { Image(systemName: "eye.slash.fill").font(.title) }
+                Label { Text("Exit Detail").font(.title3) }
+            icon: { Image(systemName: "eye.slash.fill").font(.title2) }
             }
-            .tint(.orange)
+            .frame(height: 30)
+            .tint(.pink)
             .buttonStyle(.bordered)
         }
         .background(Color.background1.padding(-200))
-        .padding([.top], 10)
+        .padding(EdgeInsets(top: 20, leading: 0, bottom: 4, trailing: 0))
     }
 }
 
