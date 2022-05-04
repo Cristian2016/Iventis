@@ -26,7 +26,7 @@ struct DetailBottomView: View {
                     ForEach (sessions) { session in
                         BottomCell(session: session)
                             .frame(width: UIScreen.size.width * 0.9, height: 600)
-                            .id(sessions.count - sessions.firstIndex(of: session)!)
+                            .id(position(of:session))
                     }
                 }
             }
@@ -35,6 +35,10 @@ struct DetailBottomView: View {
                 withAnimation { proxy.scrollTo(row) }
             }
         }
+    }
+    
+    private func position(of session:Session) -> Int {
+        return sessions.count - sessions.firstIndex(of: session)!
     }
 }
 
