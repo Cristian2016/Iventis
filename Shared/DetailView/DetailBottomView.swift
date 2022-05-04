@@ -22,7 +22,7 @@ struct DetailBottomView: View {
     var body: some View {
         ScrollViewReader { proxy in
             ScrollView(.horizontal, showsIndicators: false) {
-                HStack {//each session cooresponding to a list
+                LazyHStack {//each session cooresponding to a list
                     ForEach (sessions) {
                         BottomCell($0)
                             .frame(width: UIScreen.size.width * 0.9, height: 600)
