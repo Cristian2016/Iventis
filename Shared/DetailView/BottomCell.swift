@@ -37,9 +37,7 @@ struct BottomCell: View {
             }
             .listRowSeparator(.hidden)
             .listRowBackground(
-                RoundedRectangle(cornerRadius: 6)
-                    .fill(Color("pairCell"))
-                    .padding(2))
+                RoundedRectangle(cornerRadius: 6).fill(Color("pairCell")).padding(2))
             //⚠️ it works but it shpuld be the size of screen.height - something...
             Rectangle()
                 .fill(Color.background1)

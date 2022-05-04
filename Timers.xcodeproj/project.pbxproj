@@ -23,6 +23,7 @@
 		1F18B460281FAABF0080ADA6 /* TopCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F18B45F281FAABF0080ADA6 /* TopCell.swift */; };
 		1F18B461281FAABF0080ADA6 /* TopCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F18B45F281FAABF0080ADA6 /* TopCell.swift */; };
 		1F18B462281FAABF0080ADA6 /* TopCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F18B45F281FAABF0080ADA6 /* TopCell.swift */; };
+		1F1AE673282258A000B18803 /* Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1AE672282258A000B18803 /* Test.swift */; };
 		1F4239A3281E510D004BE717 /* NoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4239A2281E510D004BE717 /* NoteView.swift */; };
 		1F4239A4281E510D004BE717 /* NoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4239A2281E510D004BE717 /* NoteView.swift */; };
 		1F4239A5281E510D004BE717 /* NoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4239A2281E510D004BE717 /* NoteView.swift */; };
@@ -134,6 +135,7 @@
 		1F18B456281FA6130080ADA6 /* PushView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushView.swift; sourceTree = "<group>"; };
 		1F18B45B281FA9C90080ADA6 /* CalendarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
 		1F18B45F281FAABF0080ADA6 /* TopCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopCell.swift; sourceTree = "<group>"; };
+		1F1AE672282258A000B18803 /* Test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Test.swift; sourceTree = "<group>"; };
 		1F4239A2281E510D004BE717 /* NoteView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoteView.swift; sourceTree = "<group>"; };
 		1F5F4A4A28093FAD00AF3442 /* TimersApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimersApp.swift; sourceTree = "<group>"; };
 		1F5F4A4C28093FAD00AF3442 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
@@ -213,6 +215,7 @@
 		1F5F4A4228093FAC00AF3442 = {
 			isa = PBXGroup;
 			children = (
+				1F1AE672282258A000B18803 /* Test.swift */,
 				1F18B45A281FA9740080ADA6 /* Helpers */,
 				1FB3DE7B281EE45B003169E1 /* DeleteActionView.swift */,
 				1F5F4A92280941D900AF3442 /* Timers (iOS).entitlements */,
@@ -459,6 +462,7 @@
 				1F9BE0A9280BE14100F87EFA /* PaletteView.swift in Sources */,
 				1F5F4A732809409600AF3442 /* Bubble.swift in Sources */,
 				1F97B7DD2809B311002FFCA3 /* Colors.swift in Sources */,
+				1F1AE673282258A000B18803 /* Test.swift in Sources */,
 				1F100CA72809493400A3A3C2 /* BackgroundTimer.swift in Sources */,
 				1FE163AE280EE6F40050C6F5 /* LeftStrip.swift in Sources */,
 				1F641FFE281FF70100413E31 /* DetailBottomView.swift in Sources */,

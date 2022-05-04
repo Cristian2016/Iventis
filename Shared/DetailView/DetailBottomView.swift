@@ -20,12 +20,19 @@ struct DetailBottomView: View {
     }
     
     var body: some View {
-        ScrollView(.horizontal, showsIndicators: false) {
-            HStack {//each session cooresponding to a list
-                ForEach (sessions) { session in
-                    BottomCell(session: session)
-                        .frame(width: UIScreen.size.width * 0.9, height: 600)
+        ScrollViewReader { proxy in
+            ScrollView(.horizontal, showsIndicators: false) {
+                HStack {//each session cooresponding to a list
+                    ForEach (sessions) { session in
+                        BottomCell(session: session)
+                            .frame(width: UIScreen.size.width * 0.9, height: 600)
+                            .id(sessions.count - sessions.firstIndex(of: session)!)
+                    }
                 }
+            }
+            .onReceive(NotificationCenter.default.publisher(for: .topCellTapped)) { output in
+                let row = output.userInfo!["topCellTapped"] as! Int
+                withAnimation { proxy.scrollTo(row) }
             }
         }
     }

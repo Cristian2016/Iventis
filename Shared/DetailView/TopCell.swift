@@ -10,16 +10,16 @@ import SwiftUI
 struct TopCell: View {
     @StateObject var session:Session
     
+    var color:Color
+    let sessionCount:Int
+    let sessionRank:String
+    let duration: Float.TimeComponentsAsStrings?
+    
     private let topCellHeight = CGFloat(130)
     private let roundedRectRadius = CGFloat(10)
     private let strokeWidth = CGFloat(4)
     private let edgeInset = EdgeInsets(top: 0, leading: 13, bottom: 10, trailing: 6)
     private let dateDurationViewsSpacing = CGFloat(6)
-    
-    var color:Color
-    let sessionCount:Int
-    let sessionRank:String
-    let duration: Float.TimeComponentsAsStrings?
     
     var body: some View {
         if !session.isFault {
@@ -34,9 +34,6 @@ struct TopCell: View {
                 }
                 .frame(height: topCellHeight)
                 .background( backgroundView )
-            }
-            .onTapGesture {
-                print(sessionRank)
             }
         }
     }
@@ -102,6 +99,10 @@ struct TopCell: View {
         }
         //makes sure that views with clear colors can also detect gestures
         .contentShape(Rectangle())
+        .onTapGesture {
+            //send rank information
+            NotificationCenter.default.post(name: .topCellTapped, object: nil, userInfo: ["topCellTapped":Int(sessionRank)!])
+        }
     }
     
     // MARK: -
