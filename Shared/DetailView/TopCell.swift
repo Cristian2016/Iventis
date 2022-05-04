@@ -9,6 +9,7 @@ import SwiftUI
 
 struct TopCell: View {
     @StateObject var session:Session
+    @State var isSelected = false
     
     var color:Color
     let sessionCount:Int
@@ -34,6 +35,10 @@ struct TopCell: View {
                 }
                 .frame(height: topCellHeight)
                 .background( backgroundView )
+            }
+            .onReceive(NotificationCenter.default.publisher(for: .topCellTapped)) { output in
+                let cellRank = output.userInfo!["topCellTapped"] as! Int
+                isSelected = cellRank == Int(sessionRank)!
             }
         }
     }

@@ -21,8 +21,11 @@ struct Push<Content:View>: View {
     enum Position {
         case topLeft
         case topRight
+        case topMiddle
+        
         case bottomLeft
         case bottomRight
+        case bottomMiddle
     }
     
     @ViewBuilder
@@ -36,6 +39,10 @@ struct Push<Content:View>: View {
                 VStack { Spacer(); HStack { Spacer() ;content } }
             case .bottomLeft:
                 VStack {  Spacer(); HStack { content ; Spacer() } }
+            case .topMiddle:
+                VStack { content; Spacer() }
+            case .bottomMiddle:
+                VStack { Spacer(); content }
         }
     }
 }
