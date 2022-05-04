@@ -99,10 +99,6 @@ struct TopCell: View {
         }
         //makes sure that views with clear colors can also detect gestures
         .contentShape(Rectangle())
-        .onTapGesture {
-            //send rank information
-            NotificationCenter.default.post(name: .topCellTapped, object: nil, userInfo: ["topCellTapped":Int(sessionRank)!])
-        }
     }
     
     // MARK: -
