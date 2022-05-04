@@ -37,6 +37,7 @@ extension NSNotification.Name {
     static let topCellTapped = NSNotification.Name("topCellTapped")
     
     static let deleteBubbleRequest = NSNotification.Name("deleteBubbleRequest")
+    static let resetBubbleRequest = NSNotification.Name("resetBubbleRequest")
 }
 
 struct Ratio {

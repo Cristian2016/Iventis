@@ -51,16 +51,14 @@ struct BubbleList: View {
             LeftStrip($showPalette, isBubbleListEmpty: results.isEmpty)
             PaletteView($showPalette).environmentObject(viewModel)
             if showDeleteAction.show {
-                
                 DeleteActionView(viewModel.bubble(for: showDeleteAction.rank!), $showDeleteAction, $predicate)
+                    .environmentObject(viewModel) //pass viewmodel as well
             }
         }
         .onChange(of: scenePhase, perform: {
             switch $0 {
                 case .active:
                     viewModel.backgroundTimer(.start)
-                    //update timeComponents for each running bubble
-                    //                    viewModel.updateCurrentClocks(bubbles)
                 case .background:
                     viewModel.backgroundTimer(.pause)
                 case .inactive: //show notication center, app switcher
@@ -125,10 +123,6 @@ struct BubbleList: View {
         NSSortDescriptor(key: "isPinned", ascending: false),
         NSSortDescriptor(key: "rank", ascending: false)
     ]
-    
-//    private func totalBubblesCount() -> Int {
-//        (try? PersistenceController.shared.viewContext.count(for: Bubble.fetchRequest())) ?? 0
-//    }
 }
 
 // MARK: -

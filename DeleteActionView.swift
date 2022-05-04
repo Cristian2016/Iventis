@@ -12,6 +12,7 @@ struct DeleteActionView: View {
     let bubbleColor:Color
     @Binding var showDeleteAction:(show:Bool,rank:Int?)
     @Binding var predicate:NSPredicate?
+    @EnvironmentObject private var viewModel:ViewModel
     
     init(_ bubble:Bubble?,
          _ showDeleteAction:Binding<(show:Bool, rank:Int?)>,
@@ -53,6 +54,7 @@ struct DeleteActionView: View {
                                     .onTapGesture { deleteBubble() }
                                 RoundedRectangle(cornerRadius: 13)
                                     .overlay { Text("History").foregroundColor(.white) }
+                                    .onTapGesture { viewModel.reset(bubble!) }
                             }
                             .foregroundColor(bubbleColor)
                             .font(.system(size: 30).weight(.medium))
@@ -64,6 +66,7 @@ struct DeleteActionView: View {
         }
     }
     
+    //⚠️ should be handled by the viewModel
     private func deleteBubble() {
         if let bubble = bubble {
             PersistenceController.shared.viewContext.delete(bubble)

@@ -16,6 +16,10 @@ class ViewModel: ObservableObject {
         let bubbles = try? PersistenceController.shared.viewContext.fetch(request)
         bubbles?.forEach { $0.observeAppLaunch(.start) }
     }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
             
     private let timer = BackgroundTimer(DispatchQueue(label: "BackgroundTimer", attributes: .concurrent))
     
@@ -58,6 +62,7 @@ class ViewModel: ObservableObject {
         try? viewContext.save()
     }
     
+    ///delete all sessions and pairs and make it brandNew
     func reset(_ bubble:Bubble) {
         let viewContext = PersistenceController.shared.viewContext
         bubble.created = Date()
