@@ -41,13 +41,14 @@ struct DetailTopView:View {
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack {
                     ForEach (sessions) {
-                        let rank = sessionRank(of:$0)
-                        TopCell($0, sessions.count, rank)
-                            .id(rank)
+                        let cellRank = sessionRank(of:$0)
+                        
+                        TopCell($0, sessions.count, cellRank)
+                            .id(cellRank)
                             .onTapGesture {
                                 //send rank information
-                                NotificationCenter.default.post(name: .topCellTapped, object: nil, userInfo: ["topCellTapped":Int(rank)!])
-                                withAnimation { proxy.scrollTo(rank, anchor: .center) }
+                                NotificationCenter.default.post(name: .topCellTapped, object: nil, userInfo: ["topCellTapped":Int(cellRank)!])
+                                withAnimation { proxy.scrollTo(cellRank, anchor: .center) }
                             }
                     }
                 }
