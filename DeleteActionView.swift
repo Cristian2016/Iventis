@@ -51,10 +51,17 @@ struct DeleteActionView: View {
                             VStack {
                                 RoundedRectangle(cornerRadius: 13)
                                     .overlay { Text("Bubble").foregroundColor(.white) }
-                                    .onTapGesture { deleteBubble() }
+                                    .onTapGesture {
+                                        viewModel.delete(bubble!)
+                                        showDeleteAction.show = false
+                                        predicate = nil
+                                    }
                                 RoundedRectangle(cornerRadius: 13)
                                     .overlay { Text("History").foregroundColor(.white) }
-                                    .onTapGesture { viewModel.reset(bubble!) }
+                                    .onTapGesture {
+                                        viewModel.reset(bubble!)
+                                        showDeleteAction.show = false
+                                    }
                             }
                             .foregroundColor(bubbleColor)
                             .font(.system(size: 30).weight(.medium))
@@ -63,16 +70,6 @@ struct DeleteActionView: View {
                     }
                     .padding()
                 }
-        }
-    }
-    
-    //⚠️ should be handled by the viewModel
-    private func deleteBubble() {
-        if let bubble = bubble {
-            PersistenceController.shared.viewContext.delete(bubble)
-            PersistenceController.shared.save()
-            showDeleteAction.show = false
-            predicate = nil
         }
     }
 }
