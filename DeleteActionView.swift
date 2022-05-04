@@ -52,15 +52,19 @@ struct DeleteActionView: View {
                                 RoundedRectangle(cornerRadius: 13)
                                     .overlay { Text("Bubble").foregroundColor(.white) }
                                     .onTapGesture {
-                                        viewModel.delete(bubble!)
-                                        showDeleteAction.show = false
-                                        predicate = nil
+                                        withAnimation {
+                                            viewModel.delete(bubble!)
+                                            showDeleteAction.show = false
+                                            predicate = nil
+                                        }
                                     }
                                 RoundedRectangle(cornerRadius: 13)
                                     .overlay { Text("History").foregroundColor(.white) }
                                     .onTapGesture {
-                                        viewModel.reset(bubble!)
-                                        showDeleteAction.show = false
+                                        withAnimation {
+                                            viewModel.reset(bubble!)
+                                            showDeleteAction.show = false
+                                        }
                                     }
                             }
                             .foregroundColor(bubbleColor)
