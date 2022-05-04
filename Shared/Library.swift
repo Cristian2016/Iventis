@@ -35,6 +35,8 @@ extension NSNotification.Name {
     static let appLaunched = NSNotification.Name("appLaunched")
     static let bubbleRank =  NSNotification.Name("bubbleIDNotification")
     static let topCellTapped = NSNotification.Name("topCellTapped")
+    
+    static let deleteBubbleRequest = NSNotification.Name("deleteBubbleRequest")
 }
 
 struct Ratio {

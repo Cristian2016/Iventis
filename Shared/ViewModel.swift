@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftUI
+import Combine
 
 
 class ViewModel: ObservableObject {
@@ -15,6 +16,7 @@ class ViewModel: ObservableObject {
         let bubbles = try? PersistenceController.shared.viewContext.fetch(request)
         bubbles?.forEach { $0.observeAppLaunch(.start) }
     }
+            
     private let timer = BackgroundTimer(DispatchQueue(label: "BackgroundTimer", attributes: .concurrent))
     
     func backgroundTimer(_ action:BackgroundTimer.Action) {
@@ -140,5 +142,15 @@ class ViewModel: ObservableObject {
         }
         
         try? PersistenceController.shared.viewContext.save()
+    }
+    
+    // MARK: -
+    func bubble(for rank:Int?) -> Bubble? {
+        guard let rank = rank else { fatalError() }
+        let request = Bubble.fetchRequest()
+        request.predicate = NSPredicate(format: "rank = %i", rank)
+        let context = PersistenceController.shared.viewContext
+        let bubble = try! context.fetch(request).first
+        return bubble
     }
 }

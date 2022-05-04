@@ -210,6 +210,7 @@
 			children = (
 				1F18B456281FA6130080ADA6 /* PushView.swift */,
 				1F18B45B281FA9C90080ADA6 /* CalendarView.swift */,
+				1F61BE042822BAAA00B773F9 /* DeleteActionView.swift */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -217,7 +218,6 @@
 		1F5F4A4228093FAC00AF3442 = {
 			isa = PBXGroup;
 			children = (
-				1F61BE042822BAAA00B773F9 /* DeleteActionView.swift */,
 				1F18B45A281FA9740080ADA6 /* Helpers */,
 				1FB3DE7B281EE45B003169E1 /* DeleteActionView2.swift */,
 				1F5F4A92280941D900AF3442 /* Timers (iOS).entitlements */,

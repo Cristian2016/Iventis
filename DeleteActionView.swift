@@ -8,16 +8,19 @@
 import SwiftUI
 
 struct DeleteActionView: View {
-    //external properties
-    //bubble.rank or something
-    //predicate
-    //bubble.color
     let bubble:Bubble?
     let bubbleColor:Color
+    @Binding var showDeleteAction:(show:Bool,rank:Int?)
+    @Binding var predicate:NSPredicate?
     
-    init(_ bubble:Bubble?) {
-        self.bubble = bubble
+    init(_ bubble:Bubble?,
+         _ showDeleteAction:Binding<(show:Bool, rank:Int?)>,
+         _ predicate:Binding<NSPredicate?>) {
+        
         self.bubbleColor = Color.bubble(for: bubble?.color ?? "mint")
+        _showDeleteAction = Binding(projectedValue: showDeleteAction)
+        self.bubble = bubble
+        _predicate = Binding(projectedValue: predicate)
     }
     
     //internal properties
@@ -26,6 +29,10 @@ struct DeleteActionView: View {
     
     var body: some View {
         ZStack {
+            Color.white.opacity(0.01)
+                .onTapGesture {
+                    showDeleteAction.show = false
+                }
             RoundedRectangle(cornerRadius: 30)
                 .frame(width: width, height: width/ratio)
                 .foregroundColor(Color("deleteActionViewBackground"))
@@ -42,9 +49,8 @@ struct DeleteActionView: View {
                             .foregroundColor(.red)
                             VStack {
                                 RoundedRectangle(cornerRadius: 13)
-                                    .overlay {
-                                        Text("Bubble").foregroundColor(.white)
-                                    }
+                                    .overlay { Text("Bubble").foregroundColor(.white) }
+                                    .onTapGesture { deleteBubble() }
                                 RoundedRectangle(cornerRadius: 13)
                                     .overlay { Text("History").foregroundColor(.white) }
                             }
@@ -57,10 +63,19 @@ struct DeleteActionView: View {
                 }
         }
     }
-}
-
-struct DeleteActionView1_: PreviewProvider {
-    static var previews: some View {
-        DeleteActionView(nil)
+    
+    private func deleteBubble() {
+        if let bubble = bubble {
+            PersistenceController.shared.viewContext.delete(bubble)
+            PersistenceController.shared.save()
+            showDeleteAction.show = false
+            predicate = nil
+        }
     }
 }
+
+//struct DeleteActionView1_: PreviewProvider {
+//    static var previews: some View {
+//        DeleteActionView(nil, nil)
+//    }
+//}

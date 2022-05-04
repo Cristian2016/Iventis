@@ -51,16 +51,8 @@ struct BubbleList: View {
             LeftStrip($showPalette, isBubbleListEmpty: results.isEmpty)
             PaletteView($showPalette).environmentObject(viewModel)
             if showDeleteAction.show {
-                DeleteActionView(bubble(for: showDeleteAction.rank!))
-//                DeleteActionView2($showDeleteAction, $predicate, $showDetail)
-//                    .onTapGesture {
-//                        let bubble = bubble(for: showDeleteAction.rank!)
-//                        viewModel.delete(bubble)
-//                        //set predicate to nil in case any filtered search is going on
-//                        predicate = nil
-//                        showDetail.show = false
-//                        showDeleteAction = (false, nil)
-//                    }
+                
+                DeleteActionView(viewModel.bubble(for: showDeleteAction.rank!), $showDeleteAction, $predicate)
             }
         }
         .onChange(of: scenePhase, perform: {
@@ -133,15 +125,6 @@ struct BubbleList: View {
         NSSortDescriptor(key: "isPinned", ascending: false),
         NSSortDescriptor(key: "rank", ascending: false)
     ]
-    
-    private func bubble(for rank:Int?) -> Bubble {
-        guard let rank = rank else { fatalError() }
-        let request = Bubble.fetchRequest()
-        request.predicate = NSPredicate(format: "rank = %i", rank)
-        let context = PersistenceController.shared.viewContext
-        let bubble = try! context.fetch(request).first
-        return bubble!
-    }
     
 //    private func totalBubblesCount() -> Int {
 //        (try? PersistenceController.shared.viewContext.count(for: Bubble.fetchRequest())) ?? 0
