@@ -9,8 +9,13 @@ import SwiftUI
 
 struct TopCell: View {
     @StateObject var session:Session
+    
     private let topCellHeight = CGFloat(130)
-
+    private let roundedRectRadius = CGFloat(10)
+    private let strokeWidth = CGFloat(4)
+    private let edgeInset = EdgeInsets(top: 0, leading: 13, bottom: 10, trailing: 6)
+    private let dateDurationViewsSpacing = CGFloat(6)
+    
     var color:Color
     let sessionCount:Int
     let sessionRank:String
@@ -21,14 +26,17 @@ struct TopCell: View {
             ZStack {
                 sessionRankView
                 Push(.bottomLeft) {
-                    VStack (alignment:.leading, spacing: 6) {
+                    VStack (alignment:.leading, spacing: dateDurationViewsSpacing) {
                         dateView
                         durationView
                     }
-                    .padding(EdgeInsets(top: 0, leading: 13, bottom: 10, trailing: 6))
+                    .padding(edgeInset)
                 }
                 .frame(height: topCellHeight)
                 .background( backgroundView )
+            }
+            .onTapGesture {
+                print(sessionRank)
             }
         }
     }
@@ -88,10 +96,13 @@ struct TopCell: View {
     
     private var backgroundView:some View {
         ZStack {
-            RoundedRectangle(cornerRadius: 10)
-                .strokeBorder(color, lineWidth: 4, antialiased: true)
-            RoundedRectangle(cornerRadius: 10).fill(Color.clear)
-        }}
+            RoundedRectangle(cornerRadius: roundedRectRadius)
+                .strokeBorder(color, lineWidth: strokeWidth, antialiased: true)
+            RoundedRectangle(cornerRadius: roundedRectRadius).fill(Color.clear)
+        }
+        //makes sure that views with clear colors can also detect gestures
+        .contentShape(Rectangle())
+    }
     
     // MARK: -
     private func showSeconds() -> Bool {
