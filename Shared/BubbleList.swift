@@ -57,7 +57,7 @@ struct BubbleList: View {
         }
         .onPreferenceChange(FrameKey.self) { new in
             if new.frame == .zero { return }
-            self.deleteActionOffset = computeOffset(for: new.frame)
+            self.deleteActionOffset = compute_YOffset(for: new.frame)
         }
         .onChange(of: scenePhase, perform: {
             switch $0 {
@@ -130,8 +130,7 @@ struct BubbleList: View {
         NSSortDescriptor(key: "rank", ascending: false)
     ]
     
-    ///⚠️ rewrite!!!!
-    private func computeOffset(for frame:CGRect) -> CGFloat {
+    private func compute_YOffset(for frame:CGRect) -> CGFloat {
         let cellDeleteActionViewGap = CGFloat(15)
         let cellLow = frame.origin.y + frame.height
         let deleteActionHeight = DeleteActionView.height
@@ -141,17 +140,17 @@ struct BubbleList: View {
         //available space below bubble cell
         let spaceBelowCell = UIScreen.size.height - cellLow
         
-        let deletACtionViewOffsetY:CGFloat
+        let deleteActionView_YOffset:CGFloat
         let putBelow = spaceBelowCell - (cellDeleteActionViewGap + deleteActionHeight) > 0
         let delta = cellLow - deleteActionHigh
         
         if putBelow {
-            deletACtionViewOffsetY = delta + cellDeleteActionViewGap
+            deleteActionView_YOffset = delta + cellDeleteActionViewGap
         } else {//put up
-            deletACtionViewOffsetY = frame.origin.y - (deleteActionLow + cellDeleteActionViewGap) - 10
+            deleteActionView_YOffset = frame.origin.y - (deleteActionLow + cellDeleteActionViewGap) - 10
         }
         
-        return deletACtionViewOffsetY
+        return deleteActionView_YOffset
     }
 }
 
