@@ -48,9 +48,7 @@ struct DetailTopView:View {
                         TopCell($0, sessions.count, cellRank)
                             .id(cellRank)
                             .onTapGesture {
-                                //send rank information
-                                NotificationCenter.default.post(name: .topCellTapped, object: nil, userInfo: ["topCellTapped":Int(cellRank)!])
-                                
+                                postTopCellTappedNotification(for: cellRank)
                                 //use the same rank info you are sending to scroll self in the center
                                 withAnimation { proxy.scrollTo(cellRank, anchor: .center) }
                             }
@@ -60,6 +58,11 @@ struct DetailTopView:View {
         }
         .offset(x: 0, y: offSetFromBubbleList)
         .padding(trailingPadding)
+    }
+    
+    ///send rank information
+    private func postTopCellTappedNotification(for rank:String) {
+        NotificationCenter.default.post(name: .topCellTapped, object: nil, userInfo: ["topCellTapped":Int(rank)!])
     }
     
     // MARK: -
