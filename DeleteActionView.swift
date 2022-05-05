@@ -10,6 +10,7 @@ import SwiftUI
 struct DeleteActionView: View {
     let bubble:Bubble?
     let bubbleColor:Color
+    
     @Binding var showDeleteAction:(show:Bool,rank:Int?)
     @Binding var predicate:NSPredicate?
     @EnvironmentObject private var viewModel:ViewModel
@@ -30,6 +31,7 @@ struct DeleteActionView: View {
     //internal properties
     let ratio = CGFloat(0.8037)
     let width = CGFloat(200)
+    static let height = CGFloat(250)
     
     var body: some View {
         ZStack {
