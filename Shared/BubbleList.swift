@@ -132,6 +132,8 @@ struct BubbleList: View {
     
     ///⚠️ rewrite!!!!
     private func computeOffset(for frame:CGRect) -> CGFloat {
+        let cellDeleteActionViewGap = CGFloat(15)
+        
         let cellLow = frame.origin.y + frame.height
         
         let deleteActionHeight = CGFloat(250)
@@ -141,14 +143,14 @@ struct BubbleList: View {
         let spaceBelowCell = UIScreen.size.height - cellLow
         
         let offsetY:CGFloat
-        let putBelow = spaceBelowCell - deleteActionHeight > 0
+        let putBelow = spaceBelowCell - (cellDeleteActionViewGap + deleteActionHeight) > 0
         let delta = cellLow - deleteActionHigh
         
         if putBelow {
-            offsetY = delta + 15
+            offsetY = delta + cellDeleteActionViewGap
         } else {
             //put up
-            offsetY = frame.origin.y - deleteActionLow - 25
+            offsetY = frame.origin.y - (deleteActionLow + cellDeleteActionViewGap) - 10
         }
         
         return offsetY
