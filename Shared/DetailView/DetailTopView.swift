@@ -60,11 +60,6 @@ struct DetailTopView:View {
         .padding(trailingPadding)
     }
     
-    ///send rank information
-    private func postTopCellTappedNotification(for rank:String) {
-        NotificationCenter.default.post(name: .topCellTapped, object: nil, userInfo: ["topCellTapped":Int(rank)!])
-    }
-    
     // MARK: -
     private func bubbleColor() -> Color {
         let description = sessions.last?.bubble?.color ?? "mint"
@@ -74,6 +69,11 @@ struct DetailTopView:View {
     
     private func sessionRank(of session:Session) -> String {
         String(sessions.count - Int(sessions.firstIndex(of: session)!))
+    }
+    
+    ///send rank information
+    private func postTopCellTappedNotification(for rank:String) {
+        NotificationCenter.default.post(name: .topCellTapped, object: nil, userInfo: ["topCellTapped":Int(rank)!])
     }
 }
 
