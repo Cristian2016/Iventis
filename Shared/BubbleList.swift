@@ -131,29 +131,29 @@ struct BubbleList: View {
     ]
     
     private func compute_YOffset(for frame:CGRect) -> CGFloat {
-        let cellDeleteActionViewGap = CGFloat(15)
+        let cellDeleteViewGap = CGFloat(15)
         
         let cellLow = frame.origin.y + frame.height
         
-        let deleteActionHeight = DeleteActionView.height
-        let deleteActionHigh = (UIScreen.size.height - deleteActionHeight)/2
-        let deleteActionLow = deleteActionHigh + deleteActionHeight
+        let deleteViewHeight = DeleteActionView.height
+        let deleteViewHigh = (UIScreen.size.height - deleteViewHeight)/2
+        let deleteViewLow = deleteViewHigh + deleteViewHeight
         
         //available space below bubble cell
         let spaceBelowCell = UIScreen.size.height - cellLow
         
-        let putBelow = spaceBelowCell - (cellDeleteActionViewGap + deleteActionHeight) > 0
-        let delta = cellLow - deleteActionHigh
+        //put deleteActionView below cell it's the prefered way to go
+        let putBelow = spaceBelowCell - (cellDeleteViewGap + deleteViewHeight) > 0
+        let delta = cellLow - deleteViewHigh
         
-        let deleteActionView_YOffset:CGFloat
+        let deleteView_YOffset:CGFloat
         
-        if putBelow {
-            deleteActionView_YOffset = delta + cellDeleteActionViewGap
-        } else {//put up
-            deleteActionView_YOffset = frame.origin.y - (deleteActionLow + cellDeleteActionViewGap) - 10
+        if putBelow { deleteView_YOffset = delta + cellDeleteViewGap }
+        else {//put up
+            deleteView_YOffset = frame.origin.y - (deleteViewLow + cellDeleteViewGap) - 10
         }
         
-        return deleteActionView_YOffset
+        return deleteView_YOffset
     }
 }
 
