@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct DeleteActionView: View {
+struct DeleteView: View {
     let bubble:Bubble?
     let bubbleColor:Color
     

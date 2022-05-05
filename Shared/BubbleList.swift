@@ -49,15 +49,15 @@ struct BubbleList: View {
             }
             LeftStrip($showPalette, isBubbleListEmpty: results.isEmpty)
             PaletteView($showPalette).environmentObject(viewModel)
-            if deleteActionOffset != nil && showDeleteAction.show {
+            if deleteViewOffset != nil && showDeleteAction.show {
                 let bubble = viewModel.bubble(for: showDeleteAction.rank!)
-                DeleteActionView(bubble, $showDeleteAction, $predicate, deleteActionOffset!)
+                DeleteView(bubble, $showDeleteAction, $predicate, deleteViewOffset!)
                     .environmentObject(viewModel) //pass viewmodel as well
             }
         }
         .onPreferenceChange(FrameKey.self) { new in
             if new.frame == .zero { return }
-            self.deleteActionOffset = compute_YOffset(for: new.frame)
+            self.deleteViewOffset = compute_YOffset(for: new.frame)
         }
         .onChange(of: scenePhase, perform: {
             switch $0 {
@@ -77,7 +77,7 @@ struct BubbleList: View {
     @Environment(\.managedObjectContext) private var viewContext
     @Environment(\.scenePhase) var scenePhase
     
-    @State private var deleteActionOffset:CGFloat? = nil
+    @State private var deleteViewOffset:CGFloat? = nil
         
     // MARK: -
     @StateObject private var viewModel = ViewModel()
@@ -135,7 +135,7 @@ struct BubbleList: View {
         
         let cellLow = frame.origin.y + frame.height
         
-        let deleteViewHeight = DeleteActionView.height
+        let deleteViewHeight = DeleteView.height
         let deleteViewHigh = (UIScreen.size.height - deleteViewHeight)/2
         let deleteViewLow = deleteViewHigh + deleteViewHeight
         

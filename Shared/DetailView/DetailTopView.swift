@@ -24,7 +24,7 @@ struct DetailTopView:View {
     @FetchRequest var sessions:FetchedResults<Session>
     let offSetFromBubbleList = CGFloat(-10) //too low it will cut into the bubble list
     //use entire screen width, but leave a little leading space
-    let trailingPadding = EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: -30)
+    let trailingPadding = EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: -5)
         
     init(_ rank:Int?) {
         let predicate:NSPredicate?
