@@ -42,8 +42,7 @@ struct DetailTopView:View {
         ScrollViewReader { proxy in
             ScrollView(.horizontal, showsIndicators: false) {
                 LazyHStack {
-                    ForEach (sessions) {
-                        let sessionRank = sessionRank(of:$0)
+                    ForEach (sessions) { let sessionRank = sessionRank(of:$0)
                         
                         TopCell($0, sessions.count, sessionRank)
                             .id(sessionRank)

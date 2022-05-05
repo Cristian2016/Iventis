@@ -164,6 +164,8 @@ struct ContentView_Previews: PreviewProvider {
     }
 }
 
+
+///bubbleCell reports its frame so that deleteActionView knows how to position itself
 struct FrameKey:PreferenceKey {
     struct RankFrame:Equatable {
         let rank:Int
