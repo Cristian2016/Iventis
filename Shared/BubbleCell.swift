@@ -31,6 +31,7 @@ struct BubbleCell: View {
         _showDetail = Binding(projectedValue: showDetail)
         _predicate = Binding(projectedValue: predicate)
         _showDeleteAction = Binding(projectedValue: showDeleteAction)
+        self.bubbleColor = Color.bubble(for: bubble.color!)
         
         switch bubble.kind {
             case .stopwatch: sec = 0
@@ -55,27 +56,20 @@ struct BubbleCell: View {
         bubble.timeComponentsString.min > "0" || bubble.timeComponentsString.hr > "0" ? 1 : 0.001
     }
     private var hrOpacity:Double { bubble.timeComponentsString.hr > "0" ? 1 : 0.001 }
+    private let bubbleColor:Color
         
     // MARK: -
     var body: some View {
-        let colors = bubbleColors(bubble.color ?? "")
         ZStack {
             hoursView
-                .foregroundColor(colors.sec)
-                .opacity(hrOpacity)
-                .onTapGesture(count: 2) {
-                    print("edit duration")
-                }
-                .onTapGesture(count: 1) {
-                    print("add note")
-                }
+                
             minutesView
-                .foregroundColor(colors.sec)
+                .foregroundColor(bubbleColor)
                 .opacity(minOpacity)
                 .onTapGesture { withAnimation { toggleDetailView() } }
 
             secondsView
-                .foregroundColor(colors.sec)
+                .foregroundColor(bubbleColor)
                 .onTapGesture {
                     UserFeedback.triggerSingleHaptic(.heavy)
                     viewModel.toggleStart(bubble)
@@ -135,6 +129,10 @@ struct BubbleCell: View {
             }
             Spacer()
         }
+        .foregroundColor(bubbleColor)
+        .opacity(hrOpacity)
+        .onTapGesture(count: 2) { print("edit duration") }
+        .onTapGesture(count: 1) { print("add note") }
     }
     
     private var minutesView:some View {
@@ -247,10 +245,6 @@ struct BubbleCell: View {
         //%i integer, %f float, %@ object??
         predicate = condition ? NSPredicate(format: "rank == %i", bubble.rank) : nil
         showDetail = condition ? (true, Int(bubble.rank)) : (false, nil)
-    }
-    
-    private func bubbleColors(_ description:String) -> Color.Three {
-        Color.bubbleThrees.filter { $0.description == description }.first ?? Color.Bubbles.mint
     }
 }
 
