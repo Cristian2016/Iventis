@@ -62,6 +62,8 @@ struct BubbleCell: View {
     // MARK: -
     var body: some View {
         ZStack {
+            let condition = showDeleteAction.show && bubble.rank == showDeleteAction.rank!
+            if condition { geoReaderView }
             hoursView
                 
             minutesView
@@ -118,21 +120,19 @@ struct BubbleCell: View {
     }
     
     // MARK: - Legoes
+    private var geoReaderView:some View {
+        Circle().fill(Color.clear)
+            .background {
+                GeometryReader {
+                    Color.clear.preference(key: FrameKey.self, value: $0.frame(in: .global))
+                }
+            }
+    }
+    
     private var hoursView:some View {
         HStack {
             ZStack {
-                let showDeleteAction = showDeleteAction.show && showDeleteAction.rank! == bubble.rank
-                if showDeleteAction {
-                    hoursCircle
-                        .background {
-                            GeometryReader {
-                                let key = FrameKey.self
-                                Color.clear
-                                    .preference(key: key, value: $0.frame(in: .global))
-                            }
-                        }
-                }
-                else { hoursCircle }
+                hoursCircle
                 Text(bubble.timeComponentsString.hr)
                     .font(.system(size: fontSize))
                     .foregroundColor(.white)
