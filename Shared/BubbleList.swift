@@ -130,6 +130,7 @@ struct BubbleList: View {
         NSSortDescriptor(key: "rank", ascending: false)
     ]
     
+    ///⚠️ rewrite!!!!
     private func computeOffset(for frame:CGRect) -> CGFloat {
         let cellLow = frame.origin.y + frame.height
         

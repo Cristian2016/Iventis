@@ -34,12 +34,11 @@ struct DeleteActionView: View {
     var body: some View {
         ZStack {
             Color.white.opacity(0.01)
-                .onTapGesture {
-                    showDeleteAction.show = false
-                }
+                .onTapGesture { showDeleteAction.show = false }
             RoundedRectangle(cornerRadius: 30)
                 .frame(width: width, height: width/ratio)
                 .foregroundColor(Color("deleteActionViewBackground"))
+//                .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: 30))
                 .overlay {
                     ZStack {
                         VStack (spacing:6) {
