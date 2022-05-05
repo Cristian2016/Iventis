@@ -62,8 +62,16 @@ struct BubbleCell: View {
     // MARK: -
     var body: some View {
         ZStack {
-            let condition = showDeleteAction.show && bubble.rank == showDeleteAction.rank!
-            if condition { geoReaderView }
+            let condition = condition()
+            if condition {
+                Circle().fill(Color.clear)
+                    .background {
+                        GeometryReader {
+                            let value = FrameKey.RankFrame(rank: Int(bubble.rank), frame: $0.frame(in: .global))
+                            Color.clear.preference(key: FrameKey.self, value: value)
+                        }
+                    }
+            }
             hoursView
                 
             minutesView
@@ -120,15 +128,6 @@ struct BubbleCell: View {
     }
     
     // MARK: - Legoes
-    private var geoReaderView:some View {
-        Circle().fill(Color.clear)
-            .background {
-                GeometryReader {
-                    Color.clear.preference(key: FrameKey.self, value: $0.frame(in: .global))
-                }
-            }
-    }
-    
     private var hoursView:some View {
         HStack {
             ZStack {
@@ -261,6 +260,10 @@ struct BubbleCell: View {
         //%i integer, %f float, %@ object??
         predicate = condition ? NSPredicate(format: "rank == %i", bubble.rank) : nil
         showDetail = condition ? (true, Int(bubble.rank)) : (false, nil)
+    }
+    
+    private func condition() -> Bool {
+        showDeleteAction.show && bubble.rank == showDeleteAction.rank!
     }
 }
 

@@ -55,8 +55,9 @@ struct BubbleList: View {
                     .environmentObject(viewModel) //pass viewmodel as well
             }
         }
-        .onPreferenceChange(FrameKey.self) { print("onPreferenceChange", $0)
-            
+        .onPreferenceChange(FrameKey.self) { new in
+            if new.frame == .zero { return }
+            print(new.frame.origin.y)
         }
         .onChange(of: scenePhase, perform: {
             switch $0 {
@@ -136,10 +137,13 @@ struct ContentView_Previews: PreviewProvider {
 }
 
 struct FrameKey:PreferenceKey {
-    static var defaultValue = CGRect.zero
-    static func reduce(value: inout CGRect, nextValue: () -> CGRect) {
-        let frame = nextValue()
-        let totalHeight = frame.height + frame.origin.y
-        print("totalHeight", totalHeight)
+    struct RankFrame:Equatable {
+        let rank:Int
+        let frame:CGRect
+    }
+    
+    static var defaultValue = RankFrame(rank: -1, frame: .zero)
+    static func reduce(value: inout RankFrame, nextValue: () -> RankFrame) {
+        if value.frame == .zero { value = nextValue() }
     }
 }

@@ -17,7 +17,7 @@ extension Color {
     
     struct Bubbles {
         //row 1
-        static let mint = Three(description: Name.mint.rawValue, hr:Color(#colorLiteral(red: 0, green: 0.999099791, blue: 0.8100017905, alpha: 1)), min: Color(#colorLiteral(red: 0, green: 0.9633229375, blue: 0.7392000556, alpha: 1)), sec: Color(#colorLiteral(red: 0.03296933323, green: 0.907636106, blue: 0.6436124444, alpha: 1)))
+        static let mint = Three(description: Name.mint.rawValue, hr:Color(#colorLiteral(red: 0, green: 0.999099791, blue: 0.8100017905, alpha: 1)), min: Color(#colorLiteral(red: 0, green: 0.9633229375, blue: 0.7392000556, alpha: 1)), sec: Color(#colorLiteral(red: 0, green: 0.838650167, blue: 0.5155212283, alpha: 1)))
         static let slateBlue = Three(description: Name.slateBlue.rawValue, hr: Color(#colorLiteral(red: 0.6250013709, green: 0.643127501, blue: 0.9769508243, alpha: 1)), min: Color(#colorLiteral(red: 0.4915649891, green: 0.5337389708, blue: 0.9743657708, alpha: 1)), sec: Color(#colorLiteral(red: 0.4223788977, green: 0.4790267348, blue: 0.9767156243, alpha: 1)))
         static let sourCherry = Three(description: Name.sourCherry.rawValue, hr: Color(#colorLiteral(red: 0.9564458728, green: 0.06965851039, blue: 0.4674955606, alpha: 1)), min: Color(#colorLiteral(red: 0.8373516798, green: 0.06469952315, blue: 0.41300717, alpha: 1)), sec: Color(#colorLiteral(red: 0.7311170697, green: 0.05191928893, blue: 0.3622907996, alpha: 1)))
         
