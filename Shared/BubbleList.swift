@@ -51,14 +51,10 @@ struct BubbleList: View {
             PaletteView($showPalette).environmentObject(viewModel)
             if showDeleteAction.show {
                 let bubble = viewModel.bubble(for: showDeleteAction.rank!)
-                
                 DeleteActionView(bubble, $showDeleteAction, $predicate)
                     .environmentObject(viewModel) //pass viewmodel as well
             }
         }
-        .onPreferenceChange(FrameKey.self, perform: { value in
-            print(value)
-        })
         .onChange(of: scenePhase, perform: {
             switch $0 {
                 case .active:

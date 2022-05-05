@@ -75,6 +75,9 @@ struct DeleteActionView: View {
                     .padding()
                 }
         }
+        .onPreferenceChange(FrameKey.self, perform: { value in
+            print(value)
+        })
     }
 }
 
