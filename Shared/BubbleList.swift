@@ -50,7 +50,9 @@ struct BubbleList: View {
             LeftStrip($showPalette, isBubbleListEmpty: results.isEmpty)
             PaletteView($showPalette).environmentObject(viewModel)
             if showDeleteAction.show {
-                DeleteActionView(viewModel.bubble(for: showDeleteAction.rank!), $showDeleteAction, $predicate)
+                let bubble = viewModel.bubble(for: showDeleteAction.rank!)
+                
+                DeleteActionView(bubble, $showDeleteAction, $predicate)
                     .environmentObject(viewModel) //pass viewmodel as well
             }
         }
@@ -137,6 +139,7 @@ struct ContentView_Previews: PreviewProvider {
 struct FrameKey:PreferenceKey {
     static var defaultValue = CGRect.zero
     static func reduce(value: inout CGRect, nextValue: () -> CGRect) {
+        print(#function)
         value = nextValue()
     }
 }
