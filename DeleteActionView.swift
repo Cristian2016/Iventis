@@ -7,14 +7,14 @@
 
 import SwiftUI
 
-struct DeleteView: View {
+struct DeleteActionView: View {
     let bubble:Bubble?
     let bubbleColor:Color
     
     @Binding var showDeleteAction:(show:Bool,rank:Int?)
     @Binding var predicate:NSPredicate?
     @EnvironmentObject private var viewModel:ViewModel
-    let deleteActionOffset:CGFloat
+    let deleteActionOffset:CGFloat //I used the preference key approach
     
     init(_ bubble:Bubble?,
          _ showDeleteAction:Binding<(show:Bool, rank:Int?)>,

@@ -51,7 +51,7 @@ struct BubbleList: View {
             PaletteView($showPalette).environmentObject(viewModel)
             if deleteViewOffset != nil && showDeleteAction.show {
                 let bubble = viewModel.bubble(for: showDeleteAction.rank!)
-                DeleteView(bubble, $showDeleteAction, $predicate, deleteViewOffset!)
+                DeleteActionView(bubble, $showDeleteAction, $predicate, deleteViewOffset!)
                     .environmentObject(viewModel) //pass viewmodel as well
             }
         }
@@ -135,7 +135,7 @@ struct BubbleList: View {
         
         let cellLow = frame.origin.y + frame.height
         
-        let deleteViewHeight = DeleteView.height
+        let deleteViewHeight = DeleteActionView.height
         let deleteViewHigh = (UIScreen.size.height - deleteViewHeight)/2
         let deleteViewLow = deleteViewHigh + deleteViewHeight
         
