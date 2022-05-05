@@ -59,7 +59,6 @@ struct BubbleCell: View {
     // MARK: -
     var body: some View {
         let colors = bubbleColors(bubble.color ?? "")
-        
         ZStack {
             hoursView
                 .foregroundColor(colors.sec)
@@ -142,15 +141,25 @@ struct BubbleCell: View {
         HStack {
             Spacer()
             ZStack {
-                Circle()
-                    .frame(width: BubbleCell.edge, height: BubbleCell.edge)
-                    .padding(padding)
+                if showDeleteAction.show {
+                    minutesCircle
+                        
+                } else {
+                    minutesCircle
+                }
+                
                 Text(bubble.timeComponentsString.min)
                     .font(.system(size: fontSize))
                     .foregroundColor(.white)
             }
             Spacer()
         }
+    }
+    
+    private var minutesCircle:some View {
+        Circle()
+            .frame(width: BubbleCell.edge, height: BubbleCell.edge)
+            .padding(padding)
     }
     
     private var secondsView:some View {

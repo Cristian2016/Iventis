@@ -17,7 +17,7 @@ struct DeleteActionView: View {
     init(_ bubble:Bubble?,
          _ showDeleteAction:Binding<(show:Bool, rank:Int?)>,
          _ predicate:Binding<NSPredicate?>) {
-        
+                
         self.bubbleColor = Color.bubble(for: bubble?.color ?? "mint")
         _showDeleteAction = Binding(projectedValue: showDeleteAction)
         self.bubble = bubble

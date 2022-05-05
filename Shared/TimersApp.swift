@@ -15,14 +15,7 @@ struct TimersApp: App {
         WindowGroup {
             ContainerView()
                 .environment(\.managedObjectContext, viewContext)
-//                .onAppear {
-//                    let request = Session.fetchRequest()
-//                    let sessions = try? PersistenceController.shared.viewContext.fetch(request)
-//                    sessions?.forEach({ session in
-//                        PersistenceController.shared.viewContext.delete(session)
-//                    })
-//                    try? PersistenceController.shared.viewContext.save()
-//                }
+                .coordinateSpace(name: "Device")
         }
     }
     
