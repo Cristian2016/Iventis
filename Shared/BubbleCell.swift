@@ -62,8 +62,8 @@ struct BubbleCell: View {
     // MARK: -
     var body: some View {
         ZStack {
-            let condition = condition()
-            if condition {
+            let putTransparentGeometryReaderView = condition()
+            if putTransparentGeometryReaderView {
                 Circle().fill(Color.clear)
                     .background {
                         GeometryReader {
@@ -76,12 +76,12 @@ struct BubbleCell: View {
             minutesView
             secondsView
             if bubble.state != .running {
-                centsView
-                    .onTapGesture {
-                        UserFeedback.triggerSingleHaptic(.heavy)
-                        viewModel.toggleStart(bubble)
-                    }
+                centsView .onTapGesture {
+                    UserFeedback.triggerSingleHaptic(.heavy)
+                    viewModel.toggleStart(bubble)
+                }
             }
+            timeComponents
             if bubble.hasCalendar { calendarView }
             if !bubble.isNoteHidden { noteView }
         }
@@ -113,43 +113,67 @@ struct BubbleCell: View {
         }
     }
     
-    // MARK: - Legoes
-    private var hoursView:some View {
-        HStack {
-            ZStack {
-                hoursCircle
+    private var timeComponents:some View {
+        ZStack {
+            HStack {
                 Text(bubble.timeComponentsString.hr)
                     .font(.system(size: fontSize))
                     .foregroundColor(.white)
+                    .frame(width: BubbleCell.edge, height: BubbleCell.edge)
+                    .padding(padding)
+                    .opacity(hrOpacity)
+                    .onTapGesture(count: 2) { print("edit duration") }
+                    .onTapGesture(count: 1) { print("add note") }
+                Spacer()
             }
+            HStack {
+                Spacer()
+                Text(bubble.timeComponentsString.min)
+                    .font(.system(size: fontSize))
+                    .foregroundColor(.white)
+                    .frame(width: BubbleCell.edge, height: BubbleCell.edge)
+                    .padding(padding)
+                    .opacity(minOpacity)
+                    .onTapGesture { withAnimation { toggleDetailView() } }
+                Spacer()
+            }
+            HStack {
+                Spacer()
+                Text(bubble.timeComponentsString.sec)
+                    .font(.system(size: fontSize))
+                    .foregroundColor(.white)
+                    .frame(width: BubbleCell.edge, height: BubbleCell.edge)
+                    .padding(padding)
+                    .onTapGesture {
+                        UserFeedback.triggerSingleHaptic(.heavy)
+                        viewModel.toggleStart(bubble)
+                    }
+                    .onLongPressGesture {
+                        UserFeedback.triggerDoubleHaptic(.heavy)
+                        viewModel.endSession(bubble)
+                    }
+            }
+        }
+    }
+    
+    // MARK: - Legoes
+    private var hoursView:some View {
+        HStack {
+            hoursCircle
             Spacer()
         }
         .foregroundColor(bubbleColor)
         .opacity(hrOpacity)
-        .onTapGesture(count: 2) { print("edit duration") }
-        .onTapGesture(count: 1) { print("add note") }
     }
     
-    private var minutesView:some View {
+    private var minutesView: some View {
         HStack {
             Spacer()
-            ZStack {
-                if showDeleteAction.show {
-                    minutesCircle
-                        
-                } else {
-                    minutesCircle
-                }
-                
-                Text(bubble.timeComponentsString.min)
-                    .font(.system(size: fontSize))
-                    .foregroundColor(.white)
-            }
+            minutesCircle
             Spacer()
         }
-        .foregroundColor(bubbleColor)
         .opacity(minOpacity)
-        .onTapGesture { withAnimation { toggleDetailView() } }
+        .foregroundColor(bubbleColor)
     }
     
     private var hoursCircle:some View {
@@ -164,28 +188,18 @@ struct BubbleCell: View {
             .padding(padding)
     }
     
+    private var secondsCircle:some View {
+        Circle()
+            .frame(width: BubbleCell.edge, height: BubbleCell.edge)
+            .padding(padding)
+    }
+    
     private var secondsView:some View {
         HStack {
             Spacer()
-            ZStack {
-                Circle()
-                    .frame(width: BubbleCell.edge, height: BubbleCell.edge)
-                    .padding(padding)
-//                    .overlay(pauseLine)
-                Text(bubble.timeComponentsString.sec)
-                    .font(.system(size: fontSize))
-                    .foregroundColor(.white)
-            }
+            secondsCircle
         }
         .foregroundColor(bubbleColor)
-        .onTapGesture {
-            UserFeedback.triggerSingleHaptic(.heavy)
-            viewModel.toggleStart(bubble)
-        }
-        .onLongPressGesture {
-            UserFeedback.triggerDoubleHaptic(.heavy)
-            viewModel.endSession(bubble)
-        }
     }
     
     ///hundredths of a second that is :)
