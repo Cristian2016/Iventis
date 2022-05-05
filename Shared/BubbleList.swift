@@ -57,7 +57,16 @@ struct BubbleList: View {
         }
         .onPreferenceChange(FrameKey.self) { new in
             if new.frame == .zero { return }
-            print(new.frame.origin.y)
+            
+            let height = new.frame.origin.y + new.frame.height
+            let deleteActionHeight = CGFloat(250)
+            let spaceBelowCell = UIScreen.size.height - height
+            
+            if spaceBelowCell > deleteActionHeight {
+                //put below
+            } else {
+                //put up
+            }
         }
         .onChange(of: scenePhase, perform: {
             switch $0 {
