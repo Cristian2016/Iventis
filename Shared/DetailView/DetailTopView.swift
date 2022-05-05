@@ -43,14 +43,14 @@ struct DetailTopView:View {
             ScrollView(.horizontal, showsIndicators: false) {
                 LazyHStack {
                     ForEach (sessions) {
-                        let cellRank = sessionRank(of:$0)
+                        let sessionRank = sessionRank(of:$0)
                         
-                        TopCell($0, sessions.count, cellRank)
-                            .id(cellRank)
+                        TopCell($0, sessions.count, sessionRank)
+                            .id(sessionRank)
                             .onTapGesture {
-                                postTopCellTappedNotification(for: cellRank)
+                                postTopCellTappedNotification(for: sessionRank)
                                 //use the same rank info you are sending to scroll self in the center
-                                withAnimation { proxy.scrollTo(cellRank, anchor: .center) }
+                                withAnimation { proxy.scrollTo(sessionRank, anchor: .center) }
                             }
                     }
                 }
@@ -78,7 +78,6 @@ struct DetailTopView:View {
 }
 
 struct BubbleDetail_Previews: PreviewProvider {
-    
     static var previews: some View {
         DetailTopView(10)
     }
