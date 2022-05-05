@@ -121,13 +121,18 @@ struct BubbleCell: View {
     private var hoursView:some View {
         HStack {
             ZStack {
-                hoursCircle
-                    .background {
-                        GeometryReader { geo in
-                            Color.clear
-                                .preference(key: FrameKey.self, value: geo.frame(in: .global))
+                let condition = showDeleteAction.show && showDeleteAction.rank! == bubble.rank
+                if condition {
+                    hoursCircle
+                        .background {
+                            GeometryReader { geo in
+                                Color.clear
+                                    .preference(key: FrameKey.self, value: geo.frame(in: .global))
+                            }
                         }
-                    }
+                } else {
+                    hoursCircle
+                }
                 Text(bubble.timeComponentsString.hr)
                     .font(.system(size: fontSize))
                     .foregroundColor(.white)
