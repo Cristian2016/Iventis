@@ -13,15 +13,18 @@ struct DeleteActionView: View {
     @Binding var showDeleteAction:(show:Bool,rank:Int?)
     @Binding var predicate:NSPredicate?
     @EnvironmentObject private var viewModel:ViewModel
+    let deleteActionOffset:CGFloat
     
     init(_ bubble:Bubble?,
          _ showDeleteAction:Binding<(show:Bool, rank:Int?)>,
-         _ predicate:Binding<NSPredicate?>) {
+         _ predicate:Binding<NSPredicate?>,
+         _ deleteActionOffset:CGFloat) {
                         
         self.bubbleColor = Color.bubble(for: bubble?.color ?? "mint")
         _showDeleteAction = Binding(projectedValue: showDeleteAction)
         self.bubble = bubble
         _predicate = Binding(projectedValue: predicate)
+        self.deleteActionOffset = deleteActionOffset
     }
     
     //internal properties
@@ -75,6 +78,7 @@ struct DeleteActionView: View {
                     .padding()
                 }
         }
+        .offset(x: 0, y: deleteActionOffset)
     }
 }
 

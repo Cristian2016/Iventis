@@ -49,24 +49,15 @@ struct BubbleList: View {
             }
             LeftStrip($showPalette, isBubbleListEmpty: results.isEmpty)
             PaletteView($showPalette).environmentObject(viewModel)
-            if showDeleteAction.show {
+            if deleteActionOffset != nil && showDeleteAction.show {
                 let bubble = viewModel.bubble(for: showDeleteAction.rank!)
-                DeleteActionView(bubble, $showDeleteAction, $predicate)
+                DeleteActionView(bubble, $showDeleteAction, $predicate, deleteActionOffset!)
                     .environmentObject(viewModel) //pass viewmodel as well
             }
         }
         .onPreferenceChange(FrameKey.self) { new in
             if new.frame == .zero { return }
-            
-            let height = new.frame.origin.y + new.frame.height
-            let deleteActionHeight = CGFloat(250)
-            let spaceBelowCell = UIScreen.size.height - height
-            
-            if spaceBelowCell > deleteActionHeight {
-                //put below
-            } else {
-                //put up
-            }
+            self.deleteActionOffset = computeOffset(for: new.frame)
         }
         .onChange(of: scenePhase, perform: {
             switch $0 {
@@ -85,6 +76,8 @@ struct BubbleList: View {
     //1
     @Environment(\.managedObjectContext) private var viewContext
     @Environment(\.scenePhase) var scenePhase
+    
+    @State private var deleteActionOffset:CGFloat? = nil
         
     // MARK: -
     @StateObject private var viewModel = ViewModel()
@@ -136,6 +129,29 @@ struct BubbleList: View {
         NSSortDescriptor(key: "isPinned", ascending: false),
         NSSortDescriptor(key: "rank", ascending: false)
     ]
+    
+    private func computeOffset(for frame:CGRect) -> CGFloat {
+        let cellLow = frame.origin.y + frame.height
+        
+        let deleteActionHeight = CGFloat(250)
+        let deleteActionHigh = (UIScreen.size.height - deleteActionHeight)/2
+        let deleteActionLow = deleteActionHigh + deleteActionHeight
+        
+        let spaceBelowCell = UIScreen.size.height - cellLow
+        
+        let offsetY:CGFloat
+        let putBelow = spaceBelowCell - deleteActionHeight > 0
+        let delta = cellLow - deleteActionHigh
+        
+        if putBelow {
+            offsetY = delta + 15
+        } else {
+            //put up
+            offsetY = frame.origin.y - deleteActionLow - 25
+        }
+        
+        return offsetY
+    }
 }
 
 // MARK: -
