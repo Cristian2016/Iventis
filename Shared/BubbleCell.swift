@@ -8,8 +8,10 @@
 import SwiftUI
 
 struct BubbleCell: View {
-    @StateObject var bubble:Bubble
     @EnvironmentObject private var viewModel:ViewModel
+    
+    @StateObject var bubble:Bubble
+    private let bubbleColor:Color
     
     @Binding var predicate:NSPredicate?
     @State private var scale: CGFloat = 1.4
@@ -56,7 +58,6 @@ struct BubbleCell: View {
         bubble.timeComponentsString.min > "0" || bubble.timeComponentsString.hr > "0" ? 1 : 0.001
     }
     private var hrOpacity:Double { bubble.timeComponentsString.hr > "0" ? 1 : 0.001 }
-    private let bubbleColor:Color
         
     // MARK: -
     var body: some View {
@@ -120,9 +121,13 @@ struct BubbleCell: View {
     private var hoursView:some View {
         HStack {
             ZStack {
-                Circle()
-                    .frame(width: BubbleCell.edge, height: BubbleCell.edge)
-                    .padding(padding)
+                hoursCircle
+                    .background {
+                        GeometryReader { geo in
+                            Color.clear
+                                .preference(key: FrameKey.self, value: geo.frame(in: .global))
+                        }
+                    }
                 Text(bubble.timeComponentsString.hr)
                     .font(.system(size: fontSize))
                     .foregroundColor(.white)
@@ -152,6 +157,12 @@ struct BubbleCell: View {
             }
             Spacer()
         }
+    }
+    
+    private var hoursCircle:some View {
+        Circle()
+            .frame(width: BubbleCell.edge, height: BubbleCell.edge)
+            .padding(padding)
     }
     
     private var minutesCircle:some View {

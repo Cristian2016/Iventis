@@ -139,7 +139,7 @@ struct ContentView_Previews: PreviewProvider {
 struct FrameKey:PreferenceKey {
     static var defaultValue = CGRect.zero
     static func reduce(value: inout CGRect, nextValue: () -> CGRect) {
-        print(#function)
+        print(value, nextValue())
         value = nextValue()
     }
 }
