@@ -63,9 +63,9 @@ struct BubbleCell: View {
             hoursView
                 .foregroundColor(colors.sec)
                 .opacity(hrOpacity)
-                .onTapGesture(count: 2, perform: {
+                .onTapGesture(count: 2) {
                     print("edit duration")
-                })
+                }
                 .onTapGesture(count: 1) {
                     print("add note")
                 }

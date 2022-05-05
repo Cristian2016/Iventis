@@ -47,7 +47,6 @@ struct BubbleList: View {
                 }
                 .ignoresSafeArea()
             }
-            
             LeftStrip($showPalette, isBubbleListEmpty: results.isEmpty)
             PaletteView($showPalette).environmentObject(viewModel)
             if showDeleteAction.show {
@@ -55,6 +54,9 @@ struct BubbleList: View {
                     .environmentObject(viewModel) //pass viewmodel as well
             }
         }
+        .onPreferenceChange(FrameKey.self, perform: { value in
+            print(value)
+        })
         .onChange(of: scenePhase, perform: {
             switch $0 {
                 case .active:
@@ -132,3 +134,9 @@ struct ContentView_Previews: PreviewProvider {
     }
 }
 
+struct FrameKey:PreferenceKey {
+    static var defaultValue = CGRect.zero
+    static func reduce(value: inout CGRect, nextValue: () -> CGRect) {
+        value = nextValue()
+    }
+}
