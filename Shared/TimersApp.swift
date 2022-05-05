@@ -26,3 +26,9 @@ struct TimersApp: App {
         }
     }
 }
+
+struct ContainerView:View {
+    var body: some View { VStack { BubbleList($predicate) } }
+    
+    @State var predicate:NSPredicate? = nil
+}

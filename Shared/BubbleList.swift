@@ -9,12 +9,6 @@ import SwiftUI
 import CoreData
 import Combine
 
-struct ContainerView:View {
-    var body: some View { VStack { BubbleList($predicate) } }
-    
-    @State var predicate:NSPredicate? = nil
-}
-
 struct BubbleList: View {
     // MARK: -
     var body: some View {
