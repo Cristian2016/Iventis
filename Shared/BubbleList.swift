@@ -10,13 +10,12 @@ import CoreData
 import Combine
 
 struct BubbleList: View {
-    // MARK: -
     var body: some View {
         ZStack {
             if results.isEmpty { EmptyBubbleListView() }
             else {
                 VStack {
-                    Spacer(minLength: 30) //distance from status bar
+                    Spacer(minLength: 34) //distance from status bar
                     if predicate != nil { ExitFocusAlertView($predicate, $showDetail) }
                     List {
                         ForEach(results) { section in
@@ -30,7 +29,6 @@ struct BubbleList: View {
                                 }
                             } header: { headerTitle(for: section.id.description) }
                         }
-                        .listRowSeparator(.hidden)
                         if showDetail.show {
                             DetailTopView(showDetail.rank)
                             DetailBottomView(showDetail.rank)
@@ -67,16 +65,12 @@ struct BubbleList: View {
         .navigationBarHidden(true)
     }
     
+    // MARK: -
     //1
     @Environment(\.managedObjectContext) private var viewContext
     @Environment(\.scenePhase) var scenePhase
-    
     @State private var deleteViewOffset:CGFloat? = nil
-        
-    // MARK: -
     @StateObject private var viewModel = ViewModel()
-    
-//    private var bubbles: SectionedFetchResults<Bool, Bubble>
     @SectionedFetchRequest var results:SectionedFetchResults<Bool, Bubble>
     @Binding var predicate:NSPredicate?
     

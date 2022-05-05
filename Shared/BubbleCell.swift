@@ -73,22 +73,8 @@ struct BubbleCell: View {
                     }
             }
             hoursView
-                
             minutesView
-                .foregroundColor(bubbleColor)
-                .opacity(minOpacity)
-                .onTapGesture { withAnimation { toggleDetailView() } }
-
             secondsView
-                .foregroundColor(bubbleColor)
-                .onTapGesture {
-                    UserFeedback.triggerSingleHaptic(.heavy)
-                    viewModel.toggleStart(bubble)
-                }
-                .onLongPressGesture {
-                    UserFeedback.triggerDoubleHaptic(.heavy)
-                    viewModel.endSession(bubble)
-                }
             if bubble.state != .running {
                 centsView
                     .onTapGesture {
@@ -161,6 +147,9 @@ struct BubbleCell: View {
             }
             Spacer()
         }
+        .foregroundColor(bubbleColor)
+        .opacity(minOpacity)
+        .onTapGesture { withAnimation { toggleDetailView() } }
     }
     
     private var hoursCircle:some View {
@@ -187,6 +176,15 @@ struct BubbleCell: View {
                     .font(.system(size: fontSize))
                     .foregroundColor(.white)
             }
+        }
+        .foregroundColor(bubbleColor)
+        .onTapGesture {
+            UserFeedback.triggerSingleHaptic(.heavy)
+            viewModel.toggleStart(bubble)
+        }
+        .onLongPressGesture {
+            UserFeedback.triggerDoubleHaptic(.heavy)
+            viewModel.endSession(bubble)
         }
     }
     
