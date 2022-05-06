@@ -33,6 +33,11 @@ struct TopCell: View {
                     VStack (alignment:.leading, spacing: dateDurationViewsSpacing) {
                         dateView
                         durationView
+                            .foregroundColor(isSelected ? .white : .label)
+                            .padding(2)
+                            .background {
+                                Rectangle().fill(isSelected ? Color.red :.clear)
+                            }
                     }
                     .padding(edgeInset)
                 }
