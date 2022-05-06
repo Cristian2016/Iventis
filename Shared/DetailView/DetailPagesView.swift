@@ -7,8 +7,9 @@
 
 import SwiftUI
 
-struct DetailBottomView: View {
+struct DetailPagesView: View {
     @FetchRequest var sessions:FetchedResults<Session>
+    @State private var selectedTab = 0
     
     init(_ rank:Int?) {
         let predicate:NSPredicate?
@@ -20,20 +21,15 @@ struct DetailBottomView: View {
     }
     
     var body: some View {
-        ScrollViewReader { proxy in
-            ScrollView(.horizontal, showsIndicators: false) {
-                LazyHStack {//each session cooresponding to a list
-                    ForEach (sessions) {
-                        BottomCell($0)
-                            .frame(width: UIScreen.size.width * 0.9, height: 600)
-                            .id(position(of:$0))
-                    }
-                }
+        TabView (selection: $selectedTab) {
+            ForEach(sessions) {
+                BottomCell($0).tag(position(of:$0))
             }
-            .onReceive(NotificationCenter.default.publisher(for: .topCellTapped)) { output in
-                let row = output.userInfo!["topCellTapped"] as! Int
-                withAnimation { proxy.scrollTo(row) }
-            }
+        }
+        .tabViewStyle(.page(indexDisplayMode: .never))
+        .onReceive(NotificationCenter.default.publisher(for: .topCellTapped)) { output in
+            let row = output.userInfo!["topCellTapped"] as! Int
+            withAnimation { selectedTab = row }
         }
     }
     

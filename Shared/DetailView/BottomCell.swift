@@ -25,24 +25,11 @@ struct BottomCell: View {
     var body: some View {
         List {
             ForEach(pairs) { pair in
-                ZStack {
-                    Push(.bottomRight) {
-                        Image(systemName: "\(pairs.count - Int(pairs.firstIndex(of: pair)!)).square.fill")
-                            .padding(pairCountPadding)
-                            .foregroundColor(.lightGray)
-                            .font(.system(size: 28))
-                    }
                     PairCell(pair)
-                }
             }
             .listRowSeparator(.hidden)
             .listRowBackground(
                 RoundedRectangle(cornerRadius: 6).fill(Color("pairCell")).padding(2))
-            //⚠️ it works but it shpuld be the size of screen.height - something...
-            Rectangle()
-                .fill(Color.background1)
-                .frame(width: UIScreen.size.width, height: 300)
-                .offset(x: -16, y: -10)
         }
         .listStyle(.plain)
     }

@@ -31,7 +31,6 @@ struct BubbleList: View {
                         }
                         if showDetail.show {
                             DetailTopView(showDetail.rank)
-                            DetailBottomView(showDetail.rank)
                         }
                     }
                     .padding(EdgeInsets(top: 0, leading: -10, bottom: 0, trailing: -10))
@@ -45,6 +44,15 @@ struct BubbleList: View {
                 let bubble = viewModel.bubble(for: showDeleteAction.rank!)
                 DeleteActionView(bubble, $showDeleteAction, $predicate, deleteViewOffset!)
                     .environmentObject(viewModel) //pass viewmodel as well
+            }
+            
+            if showDetail.show {
+                VStack {
+                    Spacer()
+                    DetailPagesView(showDetail.rank)
+                        .frame(width: UIScreen.size.width * 0.96, height: 330)
+                }
+                .ignoresSafeArea()
             }
         }
         .onPreferenceChange(FrameKey.self) { new in
