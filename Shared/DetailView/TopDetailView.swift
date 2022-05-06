@@ -52,7 +52,7 @@ struct TopDetailView:View {
                             }
                             .onReceive(NotificationCenter.default.publisher(for: .selectedTab)) {
                                 let tab = String($0.userInfo!["selectedTab"] as! Int - 1)
-                                withAnimation { proxy.scrollTo(tab, anchor: .center) }
+                                withAnimation { proxy.scrollTo(tab, anchor: .leading) }
                             }
                     }
                 }

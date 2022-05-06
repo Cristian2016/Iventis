@@ -17,7 +17,7 @@ struct PairCell: View {
                 //start time and date
                 HStack {
                     Text(DateFormatter.bubbleStyleTime.string(from: pair.start ?? Date()))
-                        .font(.monospaced(Font.body)())
+                        .font(.monospaced(Font.system(size: 22))())
                     Text(DateFormatter.bubbleStyleDate.string(from: pair.start ?? Date()))
                         .foregroundColor(.secondary)
                 }
@@ -29,7 +29,7 @@ struct PairCell: View {
                     }()
                         HStack {
                             Text(DateFormatter.bubbleStyleTime.string(from: pause))
-                                .font(.monospaced(Font.body)())
+                                .font(.monospaced(Font.system(size: 22))())
                             if !sameDates {
                                 Text(DateFormatter.bubbleStyleDate.string(from: pause))
                                     .foregroundColor(.secondary)
@@ -42,29 +42,32 @@ struct PairCell: View {
             .padding(contentFrameGap)
     }
     
+    let durationFont = Font.system(size: 24, weight: .medium, design: .default)
+    let durationComponentsFont = Font.system(size: 20, weight: .medium, design: .default)
+    
     private var durationView:some View {
         HStack (spacing: 8) {
             if let duration = duration {
                 //hr
                 if duration.hr != "0" {
                     HStack (alignment:.firstTextBaseline ,spacing: 0) {
-                        Text(duration.hr).font(.title3)
-                        Text("h")
+                        Text(duration.hr).font(durationFont)
+                        Text("h").font(durationComponentsFont)
                     }
                 }
                 
                 //min
                 if duration.min != "0" {
                     HStack (alignment:.firstTextBaseline ,spacing: 0) {
-                        Text(duration.min).font(.title3)
-                        Text("m")
+                        Text(duration.min).font(durationFont)
+                        Text("m").font(durationComponentsFont)
                     }
                 }
                 
                 //sec
                 HStack (alignment:.firstTextBaseline ,spacing: 0) {
-                    Text(duration.sec + "." + duration.cents).font(.title3)
-                    Text("s")
+                    Text(duration.sec + "." + duration.cents).font(durationFont)
+                    Text("s").font(durationComponentsFont)
                 }
             }
         }

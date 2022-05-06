@@ -22,6 +22,9 @@ struct TopCell: View {
     private let edgeInset = EdgeInsets(top: 0, leading: 13, bottom: 10, trailing: 6)
     private let dateDurationViewsSpacing = CGFloat(6)
     
+    let durationFont = Font.system(size: 24, weight: .medium, design: .default)
+    let durationComponentsFont = Font.system(size: 20, weight: .medium, design: .default)
+    
     var body: some View {
         if !session.isFault {
             ZStack {
@@ -71,24 +74,24 @@ struct TopCell: View {
                     //hr
                     if duration.hr != "0" {
                         HStack (alignment:.firstTextBaseline ,spacing: 0) {
-                            Text(duration.hr).font(.title2)
-                            Text("h")
+                            Text(duration.hr).font(durationFont)
+                            Text("h").font(durationComponentsFont)
                         }
                     }
                     
                     //min
                     if duration.min != "0" {
                         HStack (alignment:.firstTextBaseline ,spacing: 0) {
-                            Text(duration.min).font(.title2)
-                            Text("m")
+                            Text(duration.min).font(durationFont)
+                            Text("m").font(durationComponentsFont)
                         }
                     }
                     
                     //sec
                     if showSeconds() {
                         HStack (alignment:.firstTextBaseline ,spacing: 0) {
-                            Text(duration.sec + "." + duration.cents).font(.title2)
-                            Text("s")
+                            Text(duration.sec + "." + duration.cents).font(durationFont)
+                            Text("s").font(durationComponentsFont)
                         }
                     }
             }
