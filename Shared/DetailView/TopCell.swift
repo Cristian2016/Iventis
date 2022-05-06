@@ -38,16 +38,13 @@ struct TopCell: View {
                     VStack (alignment:.leading, spacing: dateDurationViewsSpacing) {
                         dateView
                         durationView
-                            .foregroundColor(isSelected ? .white : .label)
                             .padding(2)
-                            .background {
-                                Rectangle().fill(isSelected ? Color.red :.clear)
-                            }
                     }
                     .padding(edgeInset)
                 }
                 .frame(height: topCellHeight)
                 .background( backgroundView )
+                if isSelected { selectionIndicator }
             }
             .onReceive(NotificationCenter.default.publisher(for: .topCellTapped)) { output in
                 let cellRank = output.userInfo!["topCellTapped"] as! Int
@@ -57,7 +54,7 @@ struct TopCell: View {
     }
     
     // MARK: - Legoes
-    private var sessionRankView:some View {
+    private var sessionRankView: some View {
         Push(.topRight) {
             Text(sessionRank)
                 .foregroundColor(color)
@@ -67,7 +64,7 @@ struct TopCell: View {
     }
     
     @ViewBuilder
-    private var dateView:some View {
+    private var dateView: some View {
         if let sessionCreated = session.created {
             Text(DateFormatter.bubbleStyleShortDate.string(from: sessionCreated))
                 .font(.title2)
@@ -78,7 +75,7 @@ struct TopCell: View {
     }
     
     @ViewBuilder
-    private var durationView:some View {
+    private var durationView: some View {
         if let duration = duration {
             HStack (spacing: 8) {
                     //hr
@@ -109,7 +106,7 @@ struct TopCell: View {
         }
     }
     
-    private var backgroundView:some View {
+    private var backgroundView: some View {
         ZStack {
             RoundedRectangle(cornerRadius: roundedRectRadius)
                 .strokeBorder(color, lineWidth: strokeWidth, antialiased: true)
@@ -141,12 +138,20 @@ struct TopCell: View {
         self.duration = result
     }
     
-    private var bubbleRunningAlert:some View {
+    private var bubbleRunningAlert: some View {
         Button { } label: { Label { Text("Running").fontWeight(.semibold) } icon: { } }
     .buttonStyle(.borderedProminent)
     .foregroundColor(.white)
     .tint(.green)
     .font(.caption)
+    }
+    
+    private var selectionIndicator: some View {
+        VStack {
+            Rectangle().fill(Color.red).frame(width: 4, height: 30)
+            Spacer()
+            Rectangle().fill(Color.red).frame(width: 4, height: 30)
+        }
     }
 }
 
