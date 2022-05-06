@@ -54,8 +54,8 @@ struct BubbleList: View {
             }
             LeftStrip($showPalette, isBubbleListEmpty: results.isEmpty)
             
-            //on top of everything
-            if showDetail.show {
+            //on top of everything show DetailView (TopDetailView and BottomDetailView
+            if predicate != nil {
                 VStack {
                     Spacer()
                     TopDetailView(showDetail.rank)
