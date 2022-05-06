@@ -30,6 +30,7 @@ struct TopCell: View {
     let durationFont = Font.system(size: 24, weight: .medium, design: .default)
     let durationComponentsFont = Font.system(size: 20, weight: .medium, design: .default)
     
+    // MARK: -
     var body: some View {
         if !session.isFault {
             ZStack {
@@ -37,10 +38,8 @@ struct TopCell: View {
                 Push(.bottomLeft) {
                     VStack (alignment:.leading, spacing: dateDurationViewsSpacing) {
                         dateView
-                        durationView
-                            .padding(2)
-                    }
-                    .padding(edgeInset)
+                        durationView.padding(2)
+                    }.padding(edgeInset)
                 }
                 .frame(height: topCellHeight)
                 .background( backgroundView )
@@ -148,9 +147,8 @@ struct TopCell: View {
     
     private var selectionIndicator: some View {
         VStack {
-            Rectangle().fill(Color.red).frame(width: 4, height: 30)
+            Rectangle().fill(Color.red).frame(width: 4, height: 35)
             Spacer()
-            Rectangle().fill(Color.red).frame(width: 4, height: 30)
         }
     }
 }

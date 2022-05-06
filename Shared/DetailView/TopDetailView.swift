@@ -33,6 +33,7 @@ struct TopDetailView:View {
                         TopCell($0, sessions.count, sessionRank)
                             .id(sessionRank)
                             .onTapGesture {
+                                UserFeedback.triggerSingleHaptic(.medium)
                                 postTopCellTappedNotification(for: sessionRank)
                                 //use the same rank info you are sending to scroll self in the center
                                 withAnimation { proxy.scrollTo(sessionRank, anchor: .center) }
