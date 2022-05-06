@@ -59,7 +59,7 @@ struct BubbleList: View {
                 VStack {
                     Spacer()
                     BottomDetailView(showDetail.rank)
-                        .frame(width: UIScreen.size.width * 0.96, height: 330)
+                        .frame(width: UIScreen.size.width * 0.96, height: 380)
                 }
                 .ignoresSafeArea()
             }
