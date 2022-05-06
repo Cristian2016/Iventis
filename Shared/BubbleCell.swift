@@ -67,8 +67,8 @@ struct BubbleCell: View {
                 Circle().fill(Color.clear)
                     .background {
                         GeometryReader {
-                            let value = FrameKey.RankFrame(rank: Int(bubble.rank), frame: $0.frame(in: .global))
-                            Color.clear.preference(key: FrameKey.self, value: value)
+                            let value = BubbleCellLowKey.RankFrame(rank: Int(bubble.rank), frame: $0.frame(in: .global))
+                            Color.clear.preference(key: BubbleCellLowKey.self, value: value)
                         }
                     }
             }

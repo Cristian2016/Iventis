@@ -9,20 +9,7 @@
 import SwiftUI
 
 struct TopDetailView:View {
-    struct DurationComponents {
-        let hr:String
-        let min:String
-        let sec:String
-        
-        init(_ hr:String, _ min:String, _ sec:String) {
-            self.hr = hr
-            self.min = min
-            self.sec = sec
-        }
-    }
-    
     @FetchRequest var sessions:FetchedResults<Session>
-    let offSetFromBubbleList = CGFloat(0) //too low it will cut into the bubble list
     //use entire screen width, but leave a little leading space
     let trailingPadding = EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: -5)
         
@@ -58,7 +45,6 @@ struct TopDetailView:View {
                 }
             }
         }
-        .offset(x: 0, y: offSetFromBubbleList)
         .padding(trailingPadding)
     }
     
@@ -76,6 +62,18 @@ struct TopDetailView:View {
     ///send rank information
     private func postTopCellTappedNotification(for rank:String) {
         NotificationCenter.default.post(name: .topCellTapped, object: nil, userInfo: ["topCellTapped":Int(rank)!])
+    }
+    
+    struct DurationComponents {
+        let hr:String
+        let min:String
+        let sec:String
+        
+        init(_ hr:String, _ min:String, _ sec:String) {
+            self.hr = hr
+            self.min = min
+            self.sec = sec
+        }
     }
 }
 

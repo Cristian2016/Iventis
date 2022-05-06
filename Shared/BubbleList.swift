@@ -30,7 +30,7 @@ struct BubbleList: View {
                         .ignoresSafeArea()
                     }
                     VStack {
-                        Spacer(minLength: 40) //distance from status bar
+                        Spacer(minLength: showDetail.show ? 50 : 30) //distance from status bar
                         List {
                             ForEach(results) { section in
                                 Section {
@@ -43,7 +43,7 @@ struct BubbleList: View {
                                     }
                                 } header: { headerTitle(for: section.id.description) }
                             }
-                            if showDetail.show { TopDetailView(showDetail.rank) }
+//                            if showDetail.show { TopDetailView(showDetail.rank) }
                         }
                         .padding(EdgeInsets(top: 0, leading: -10, bottom: 0, trailing: -10))
                         .listStyle(.sidebar)
@@ -58,8 +58,10 @@ struct BubbleList: View {
             if showDetail.show {
                 VStack {
                     Spacer()
+                    TopDetailView(showDetail.rank)
+                        .frame(width: UIScreen.size.width * 0.96, height: 140)
                     BottomDetailView(showDetail.rank)
-                        .frame(width: UIScreen.size.width * 0.96, height: 380)
+                        .frame(width: UIScreen.size.width * 0.96, height: 410)
                 }
                 .ignoresSafeArea()
             }
@@ -72,7 +74,7 @@ struct BubbleList: View {
             
             PaletteView($showPalette).environmentObject(viewModel)
         }
-        .onPreferenceChange(FrameKey.self) { new in
+        .onPreferenceChange(BubbleCellLowKey.self) { new in
             if new.frame == .zero { return }
             self.deleteViewOffset = compute_YOffset(for: new.frame)
         }
@@ -179,7 +181,8 @@ struct ContentView_Previews: PreviewProvider {
 
 
 ///bubbleCell reports its frame so that deleteActionView knows how to position itself
-struct FrameKey:PreferenceKey {
+///CellLow is Bubble.(originY + height)
+struct BubbleCellLowKey:PreferenceKey {
     struct RankFrame:Equatable {
         let rank:Int
         let frame:CGRect
