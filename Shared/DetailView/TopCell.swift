@@ -144,7 +144,7 @@ struct TopCell: View {
         self.duration = result
         
         if ["magenta", "red", "bubbleGum", "orange", "sourCherry"].contains(bubbleColorDescription) {
-            self.selectionIndicatorColor = Color.black
+            self.selectionIndicatorColor = .label
         }
     }
     
