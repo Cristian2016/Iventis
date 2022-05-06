@@ -27,7 +27,7 @@ struct BubbleList: View {
                                                $showDeleteAction)
                                             .environmentObject(viewModel)
                                 }
-                            } header: { headerTitle(for: section.id.description) }
+                            } header: { header(for: section) }
                         }
                         if showDetail.show { TopDetailView(showDetail.rank) }
                     }
@@ -37,7 +37,6 @@ struct BubbleList: View {
                 .ignoresSafeArea()
             }
             LeftStrip($showPalette, isBubbleListEmpty: results.isEmpty)
-            PaletteView($showPalette).environmentObject(viewModel)
             
             //on top of everything
             if showDetail.show {
@@ -54,6 +53,8 @@ struct BubbleList: View {
                 DeleteActionView(bubble, $showDeleteAction, $predicate, deleteViewOffset!)
                     .environmentObject(viewModel) //pass viewmodel as well
             }
+            
+            PaletteView($showPalette).environmentObject(viewModel)
         }
         .onPreferenceChange(FrameKey.self) { new in
             if new.frame == .zero { return }
@@ -150,6 +151,15 @@ struct BubbleList: View {
         }
         
         return deleteView_YOffset
+    }
+    
+    @ViewBuilder
+    private func header(for section: SectionedFetchResults<Bool, Bubble>.Element) -> some View {
+        if predicate == nil {
+            headerTitle(for: section.id.description)
+        } else {
+            EmptyView()
+        }
     }
 }
 
