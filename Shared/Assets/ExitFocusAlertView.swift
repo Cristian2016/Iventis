@@ -17,19 +17,16 @@ struct ExitFocusAlertView: View {
     }
     
     var body: some View {
-        ZStack {
-            Button {
-                withAnimation {
-                    UserFeedback.triggerSingleHaptic(.medium)
-                    predicate = nil
-                    showDetail.show = false
-                }
-            } label: { Label { Text("Exit Focus").font(.title2) }
-                icon: { Image.eyeSlash.font(.title) } }
-            .tint(.pink)
-            .buttonStyle(.bordered)
-        }
-        .background(Color.background1.padding(-200))
+        Button {
+            withAnimation {
+                UserFeedback.triggerSingleHaptic(.medium)
+                predicate = nil
+                showDetail.show = false
+            }
+        } label: { Label { Text("Exit Focus").font(.title2) }
+            icon: { Image.eyeSlash.font(.title) } }
+        .tint(.pink)
+        .buttonStyle(.bordered)
         .padding(EdgeInsets(top: 15, leading: 0, bottom: 0, trailing: 0))
     }
 }

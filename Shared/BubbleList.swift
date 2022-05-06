@@ -14,27 +14,43 @@ struct BubbleList: View {
         ZStack {
             if results.isEmpty { EmptyBubbleListView() }
             else {
-                VStack {
-                    Spacer(minLength: 34) //distance from status bar
-                    if predicate != nil { ExitFocusAlertView($predicate, $showDetail) }
-                    List {
-                        ForEach(results) { section in
-                            Section {
-                                ForEach (section) {
-                                    BubbleCell($0,
-                                               $showDetail,
-                                               $predicate,
-                                               $showDeleteAction)
-                                            .environmentObject(viewModel)
-                                }
-                            } header: { header(for: section) }
+                ZStack {
+                    if predicate != nil {
+                        VStack {
+                            ExitFocusAlertView($predicate, $showDetail)
+                                .background(Rectangle()
+                                    .fill(Color.background1)
+                                    .frame(width: UIScreen.size.width)
+                                )
+                                .padding()
+                                .padding(.top, 8)
+                            Spacer()
                         }
-                        if showDetail.show { TopDetailView(showDetail.rank) }
+                        .zIndex(1)
+                        .ignoresSafeArea()
                     }
-                    .padding(EdgeInsets(top: 0, leading: -10, bottom: 0, trailing: -10))
-                    .listStyle(.sidebar)
+                    VStack {
+                        Spacer(minLength: 40) //distance from status bar
+                        List {
+                            ForEach(results) { section in
+                                Section {
+                                    ForEach (section) {
+                                        BubbleCell($0,
+                                                   $showDetail,
+                                                   $predicate,
+                                                   $showDeleteAction)
+                                                .environmentObject(viewModel)
+                                    }
+                                } header: { headerTitle(for: section.id.description) }
+                            }
+                            if showDetail.show { TopDetailView(showDetail.rank) }
+                        }
+                        .padding(EdgeInsets(top: 0, leading: -10, bottom: 0, trailing: -10))
+                        .listStyle(.sidebar)
+                    }
+                    .ignoresSafeArea()
                 }
-                .ignoresSafeArea()
+                
             }
             LeftStrip($showPalette, isBubbleListEmpty: results.isEmpty)
             
@@ -151,15 +167,6 @@ struct BubbleList: View {
         }
         
         return deleteView_YOffset
-    }
-    
-    @ViewBuilder
-    private func header(for section: SectionedFetchResults<Bool, Bubble>.Element) -> some View {
-        if predicate == nil {
-            headerTitle(for: section.id.description)
-        } else {
-            EmptyView()
-        }
     }
 }
 

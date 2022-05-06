@@ -10,6 +10,11 @@ import SwiftUI
 struct TopCell: View {
     @StateObject var session:Session
     @State var isSelected = false
+    @Environment (\.colorScheme) var colorScheme
+    
+    private func color(for color:Color) -> Color {
+        .red
+    }
     
     var color:Color
     let sessionCount:Int
