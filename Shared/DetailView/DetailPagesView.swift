@@ -39,7 +39,7 @@ struct DetailPagesView: View {
     }
     
     private func position(of session:Session) -> Int {
-        return sessions.count - sessions.firstIndex(of: session)! - 1
+        return sessions.count - sessions.firstIndex(of: session)!
     }
 }
 
