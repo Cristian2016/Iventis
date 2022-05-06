@@ -42,8 +42,8 @@ struct PairCell: View {
             .padding(contentFrameGap)
     }
     
-    let durationFont = Font.system(size: 24, weight: .medium, design: .default)
-    let durationComponentsFont = Font.system(size: 20, weight: .medium, design: .default)
+    let durationFont = Font.system(size: 22, weight: .medium, design: .default)
+    let durationComponentsFont = Font.system(size: 19, weight: .medium, design: .default)
     
     private var durationView:some View {
         HStack (spacing: 8) {
