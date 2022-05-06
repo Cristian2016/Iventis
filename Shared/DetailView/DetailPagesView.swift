@@ -7,9 +7,16 @@
 
 import SwiftUI
 
+class SellectedTabWrapper: ObservableObject {
+    @Published var selectedTab = 0 {didSet{
+        let info = ["selectedTab" : selectedTab]
+        NotificationCenter.default.post(name: .selectedTab, object: nil, userInfo: info)
+    }}
+}
+
 struct DetailPagesView: View {
     @FetchRequest var sessions:FetchedResults<Session>
-    @State private var selectedTab = 0
+    @StateObject var tabWrapper = SellectedTabWrapper()
     
     init(_ rank:Int?) {
         let predicate:NSPredicate?
@@ -21,18 +28,18 @@ struct DetailPagesView: View {
     }
     
     var body: some View {
-        TabView (selection: $selectedTab) {
+        TabView (selection: $tabWrapper.selectedTab) {
             ForEach(sessions) { BottomCell($0).tag(position(of:$0)) }
         }
         .tabViewStyle(.page(indexDisplayMode: .never))
         .onReceive(NotificationCenter.default.publisher(for: .topCellTapped)) {
             let row = $0.userInfo!["topCellTapped"] as! Int
-            withAnimation { selectedTab = row }
+            withAnimation { tabWrapper.selectedTab = row }
         }
     }
     
     private func position(of session:Session) -> Int {
-        return sessions.count - sessions.firstIndex(of: session)!
+        return sessions.count - sessions.firstIndex(of: session)! - 1
     }
 }
 

@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-struct DetailTopView:View {
+struct TopDetailView:View {
     struct DurationComponents {
         let hr:String
         let min:String
@@ -43,13 +43,16 @@ struct DetailTopView:View {
             ScrollView(.horizontal, showsIndicators: false) {
                 LazyHStack {
                     ForEach (sessions) { let sessionRank = sessionRank(of:$0)
-                        
                         TopCell($0, sessions.count, sessionRank)
                             .id(sessionRank)
                             .onTapGesture {
                                 postTopCellTappedNotification(for: sessionRank)
                                 //use the same rank info you are sending to scroll self in the center
                                 withAnimation { proxy.scrollTo(sessionRank, anchor: .center) }
+                            }
+                            .onReceive(NotificationCenter.default.publisher(for: .selectedTab)) {
+                                let tab = String($0.userInfo!["selectedTab"] as! Int)
+                                withAnimation { proxy.scrollTo(tab, anchor: .center) }
                             }
                     }
                 }
@@ -78,6 +81,6 @@ struct DetailTopView:View {
 
 struct BubbleDetail_Previews: PreviewProvider {
     static var previews: some View {
-        DetailTopView(10)
+        TopDetailView(10)
     }
 }

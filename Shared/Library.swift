@@ -38,6 +38,7 @@ extension NSNotification.Name {
     
     static let deleteBubbleRequest = NSNotification.Name("deleteBubbleRequest")
     static let resetBubbleRequest = NSNotification.Name("resetBubbleRequest")
+    static let selectedTab = NSNotification.Name("selectedTab")
 }
 
 struct Ratio {
