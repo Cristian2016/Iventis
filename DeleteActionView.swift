@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+///same size on each device
 struct DeleteActionView: View {
     let bubble:Bubble?
     let bubbleColor:Color
@@ -16,30 +17,19 @@ struct DeleteActionView: View {
     @EnvironmentObject private var viewModel:ViewModel
     let deleteActionOffset:CGFloat //I used the preference key approach
     
-    init(_ bubble:Bubble?,
-         _ showDeleteAction:Binding<(show:Bool, rank:Int?)>,
-         _ predicate:Binding<NSPredicate?>,
-         _ deleteActionOffset:CGFloat) {
-                        
-        self.bubbleColor = Color.bubble(for: bubble?.color ?? "mint")
-        _showDeleteAction = Binding(projectedValue: showDeleteAction)
-        self.bubble = bubble
-        _predicate = Binding(projectedValue: predicate)
-        self.deleteActionOffset = deleteActionOffset
-    }
-    
     //internal properties
     let ratio = CGFloat(0.8037)
     let width = CGFloat(200)
     static let height = CGFloat(250)
+    let backgroundColor = Color("deleteActionViewBackground")
     
     var body: some View {
         ZStack {
             Color.white.opacity(0.01)
                 .onTapGesture { showDeleteAction.show = false }
             RoundedRectangle(cornerRadius: 30)
+                .fill(backgroundColor)
                 .frame(width: width, height: width/ratio)
-                .foregroundColor(Color("deleteActionViewBackground"))
 //                .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: 30))
                 .overlay {
                     ZStack {
@@ -80,6 +70,19 @@ struct DeleteActionView: View {
                 }
         }
         .offset(x: 0, y: deleteActionOffset)
+    }
+    
+    // MARK: - Init
+    init(_ bubble:Bubble?,
+         _ showDeleteAction:Binding<(show:Bool, rank:Int?)>,
+         _ predicate:Binding<NSPredicate?>,
+         _ deleteActionOffset:CGFloat) {
+                        
+        self.bubbleColor = Color.bubble(for: bubble?.color ?? "mint")
+        _showDeleteAction = Binding(projectedValue: showDeleteAction)
+        self.bubble = bubble
+        _predicate = Binding(projectedValue: predicate)
+        self.deleteActionOffset = deleteActionOffset
     }
 }
 
