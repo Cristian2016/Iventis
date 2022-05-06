@@ -49,6 +49,11 @@ struct TopCell: View {
                 let cellRank = output.userInfo!["topCellTapped"] as! Int
                 isSelected = cellRank == Int(sessionRank)!
             }
+            .onReceive(NotificationCenter.default.publisher(for: .selectedTab)) { output in
+                let selectedTab = output.userInfo?["selectedTab"] as! Int
+                if sessionRank == String(selectedTab) { isSelected = true }
+                else { isSelected = false }
+            }
         }
     }
     

@@ -8,7 +8,7 @@
 import SwiftUI
 
 class SellectedTabWrapper: ObservableObject {
-    @Published var selectedTab = 0 {didSet{
+    @Published var selectedTab = 0 {didSet {
         let info = ["selectedTab" : selectedTab]
         NotificationCenter.default.post(name: .selectedTab, object: nil, userInfo: info)
     }}
