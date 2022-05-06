@@ -43,7 +43,7 @@ struct BubbleList: View {
             if showDetail.show {
                 VStack {
                     Spacer()
-                    DetailPagesView(showDetail.rank)
+                    BottomDetailView(showDetail.rank)
                         .frame(width: UIScreen.size.width * 0.96, height: 330)
                 }
                 .ignoresSafeArea()

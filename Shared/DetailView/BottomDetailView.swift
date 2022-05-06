@@ -14,7 +14,8 @@ class SellectedTabWrapper: ObservableObject {
     }}
 }
 
-struct DetailPagesView: View {
+///it's a TabView and each tab contains a List of Paircells
+struct BottomDetailView: View {
     @FetchRequest var sessions:FetchedResults<Session>
     @StateObject var tabWrapper = SellectedTabWrapper()
     

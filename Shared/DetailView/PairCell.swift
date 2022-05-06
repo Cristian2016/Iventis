@@ -10,11 +10,10 @@ import SwiftUI
 struct PairCell: View {
     @StateObject var pair:Pair
     let duration:Float.TimeComponentsAsStrings?
+    let contentFrameGap = CGFloat(4) //how much gap between content and its enclosing frame
     
     var body: some View {
             VStack (alignment: .leading) {
-                let showPause = pair.session?.bubble?.state != .running
-                
                 //start time and date
                 HStack {
                     Text(DateFormatter.bubbleStyleTime.string(from: pair.start ?? Date()))
@@ -40,6 +39,7 @@ struct PairCell: View {
                 
                 durationView
             }
+            .padding(contentFrameGap)
     }
     
     private var durationView:some View {
