@@ -29,9 +29,7 @@ struct BubbleList: View {
                                 }
                             } header: { headerTitle(for: section.id.description) }
                         }
-                        if showDetail.show {
-                            DetailTopView(showDetail.rank)
-                        }
+                        if showDetail.show { DetailTopView(showDetail.rank) }
                     }
                     .padding(EdgeInsets(top: 0, leading: -10, bottom: 0, trailing: -10))
                     .listStyle(.sidebar)
@@ -40,12 +38,8 @@ struct BubbleList: View {
             }
             LeftStrip($showPalette, isBubbleListEmpty: results.isEmpty)
             PaletteView($showPalette).environmentObject(viewModel)
-            if deleteViewOffset != nil && showDeleteAction.show {
-                let bubble = viewModel.bubble(for: showDeleteAction.rank!)
-                DeleteActionView(bubble, $showDeleteAction, $predicate, deleteViewOffset!)
-                    .environmentObject(viewModel) //pass viewmodel as well
-            }
             
+            //on top of everything
             if showDetail.show {
                 VStack {
                     Spacer()
@@ -53,6 +47,12 @@ struct BubbleList: View {
                         .frame(width: UIScreen.size.width * 0.96, height: 330)
                 }
                 .ignoresSafeArea()
+            }
+            
+            if deleteViewOffset != nil && showDeleteAction.show {
+                let bubble = viewModel.bubble(for: showDeleteAction.rank!)
+                DeleteActionView(bubble, $showDeleteAction, $predicate, deleteViewOffset!)
+                    .environmentObject(viewModel) //pass viewmodel as well
             }
         }
         .onPreferenceChange(FrameKey.self) { new in
