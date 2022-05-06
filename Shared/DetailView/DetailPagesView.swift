@@ -22,13 +22,11 @@ struct DetailPagesView: View {
     
     var body: some View {
         TabView (selection: $selectedTab) {
-            ForEach(sessions) {
-                BottomCell($0).tag(position(of:$0))
-            }
+            ForEach(sessions) { BottomCell($0).tag(position(of:$0)) }
         }
         .tabViewStyle(.page(indexDisplayMode: .never))
-        .onReceive(NotificationCenter.default.publisher(for: .topCellTapped)) { output in
-            let row = output.userInfo!["topCellTapped"] as! Int
+        .onReceive(NotificationCenter.default.publisher(for: .topCellTapped)) {
+            let row = $0.userInfo!["topCellTapped"] as! Int
             withAnimation { selectedTab = row }
         }
     }
