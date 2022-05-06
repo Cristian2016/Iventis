@@ -17,6 +17,8 @@ struct TopCell: View {
     }
     
     var color:Color
+    //black if bubble is red orange magenta bubblegum
+    private var selectionIndicatorColor = Color.red
     let sessionCount:Int
     let sessionRank:String
     let duration: Float.TimeComponentsAsStrings?
@@ -133,13 +135,17 @@ struct TopCell: View {
         self.sessionCount = sessionCount
         _session = StateObject(wrappedValue: session)
         
-        let description = session.bubble?.color
-        self.color = (Color.bubbleThrees.filter { $0.description == description }.first ?? Color.Bubbles.mint).sec
+        let bubbleColorDescription = session.bubble?.color
+        self.color = (Color.bubbleThrees.filter { $0.description == bubbleColorDescription }.first ?? Color.Bubbles.mint).sec
         self.sessionRank = sessionRank
         
         let decoder = JSONDecoder()
         let result = try? decoder.decode(Float.TimeComponentsAsStrings.self, from: session.totalDurationAsStrings ?? Data())
         self.duration = result
+        
+        if ["magenta", "red", "bubbleGum", "orange", "sourCherry"].contains(bubbleColorDescription) {
+            self.selectionIndicatorColor = Color.black
+        }
     }
     
     private var bubbleRunningAlert: some View {
@@ -152,7 +158,9 @@ struct TopCell: View {
     
     private var selectionIndicator: some View {
         VStack {
-            Rectangle().fill(Color.red).frame(width: 4, height: 35)
+            Rectangle()
+                .fill(selectionIndicatorColor)
+                .frame(width: 4, height: 35)
             Spacer()
         }
     }
