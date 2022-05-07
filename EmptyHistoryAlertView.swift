@@ -31,7 +31,7 @@ struct EmptyHistoryAlertView: View {
             VStack (alignment:.leading) {
                 Text("History Empty")
                     .font(.title)
-                Text("Tap Seconds Button\nto Start")
+                Text("Tap Seconds\nto Start")
                     .foregroundColor(.secondary)
                     .font(.system(.title3, design: .monospaced))
             }
