@@ -23,7 +23,7 @@ struct BubbleList: View {
                                     .frame(width: UIScreen.size.width)
                                 )
                                 .padding()
-                                .padding(.top, 8)
+                                .padding(.top, 9)
                             Spacer()
                         }
                         .zIndex(1)
@@ -43,7 +43,6 @@ struct BubbleList: View {
                                     }
                                 } header: { headerTitle(for: section.id.description) }
                             }
-//                            if showDetail.show { TopDetailView(showDetail.rank) }
                         }
                         .padding(EdgeInsets(top: 0, leading: -10, bottom: 0, trailing: -10))
                         .listStyle(.sidebar)
