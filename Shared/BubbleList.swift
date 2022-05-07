@@ -23,7 +23,7 @@ struct BubbleList: View {
                                     .frame(width: UIScreen.size.width)
                                 )
                                 .padding()
-                                .padding(.top, 9)
+                                .padding(.top, 9) //⚠️ not sure it looks good on all devices
                             Spacer()
                         }
                         .zIndex(1)
