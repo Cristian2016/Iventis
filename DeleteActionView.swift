@@ -22,12 +22,14 @@ struct DeleteActionView: View {
     let width = CGFloat(200)
     static let height = CGFloat(250)
     let backgroundColor = Color("deleteActionViewBackground")
+    let backgroundRadius = CGFloat(30)
+    let buttonRadius = CGFloat(13)
     
     var body: some View {
         ZStack {
             Color.white.opacity(0.01)
                 .onTapGesture { showDeleteAction.show = false }
-            RoundedRectangle(cornerRadius: 30)
+            RoundedRectangle(cornerRadius: backgroundRadius)
                 .fill(backgroundColor)
                 .frame(width: width, height: width/ratio)
 //                .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: 30))
@@ -43,7 +45,7 @@ struct DeleteActionView: View {
                             .font(.system(size: 30).weight(.medium))
                             .foregroundColor(.red)
                             VStack {
-                                RoundedRectangle(cornerRadius: 13)
+                                RoundedRectangle(cornerRadius: buttonRadius)
                                     .overlay { Text("Bubble").foregroundColor(.white) }
                                     .onTapGesture {
                                         withAnimation {
@@ -52,7 +54,7 @@ struct DeleteActionView: View {
                                             predicate = nil
                                         }
                                     }
-                                RoundedRectangle(cornerRadius: 13)
+                                RoundedRectangle(cornerRadius: buttonRadius)
                                     .overlay { Text("History").foregroundColor(.white) }
                                     .onTapGesture {
                                         withAnimation {
