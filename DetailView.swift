@@ -11,6 +11,9 @@ struct DetailView: View {
     @StateObject var tabWrapper = SellectedTabWrapper()
     @FetchRequest var sessions:FetchedResults<Session>
     let rank:Int?
+    let topDetailHeight = CGFloat(140)
+    let bottomDetailHeight = CGFloat(410)
+    let detailWidth = UIScreen.size.width * 0.96
     
     init(_ rank:Int?) {
         let predicate:NSPredicate?
@@ -23,12 +26,17 @@ struct DetailView: View {
     }
     
     var body: some View {
-        VStack {
-            Spacer()
-            TopDetailView(rank)
-                .frame(width: UIScreen.size.width * 0.96, height: 140)
-            BottomDetailView(rank)
-                .frame(width: UIScreen.size.width * 0.96, height: 410)
+        ZStack {
+            if sessions.isEmpty {
+                EmptyHistoryAlertView()
+            }
+            VStack {
+                Spacer()
+                TopDetailView(rank)
+                    .frame(width: detailWidth, height: topDetailHeight)
+                BottomDetailView(rank)
+                    .frame(width: detailWidth, height: bottomDetailHeight)
+            }
         }
         .ignoresSafeArea()
     }

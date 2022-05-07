@@ -55,17 +55,7 @@ struct BubbleList: View {
             LeftStrip($showPalette, isBubbleListEmpty: results.isEmpty)
             
             //on top of everything show DetailView (TopDetailView and BottomDetailView
-            if predicate != nil {
-                //show DetailView (top and bottom views)
-                VStack {
-                    Spacer()
-                    TopDetailView(showDetail.rank)
-                        .frame(width: UIScreen.size.width * 0.96, height: 140)
-                    BottomDetailView(showDetail.rank)
-                        .frame(width: UIScreen.size.width * 0.96, height: 410)
-                }
-                .ignoresSafeArea()
-            }
+            if predicate != nil { DetailView(showDetail.rank) }
             
             if deleteViewOffset != nil && showDeleteAction.show {
                 let bubble = viewModel.bubble(for: showDeleteAction.rank!)

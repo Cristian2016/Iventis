@@ -10,16 +10,30 @@ import SwiftUI
 struct EmptyHistoryAlertView: View {
     var body: some View {
         VStack {
-            Image(systemName: "0.circle.fill")
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-                .foregroundColor(.secondary)
+            ZStack {
+                Image(systemName: "circle")
+                    .font(.system(size: 150, weight: .ultraLight, design: .default))
+                    .aspectRatio(contentMode: .fit)
+                    .foregroundColor(.lightGray)
+                    .overlay {
+                        Push(.bottomRight) {
+                            Image(systemName: "00.circle.fill")
+                                .font(.system(size: 50, weight: .light, design: .default))
+                                .foregroundColor(.secondary)
+                        }
+                        .padding(6)
+                    }
+                Image(systemName: "circle.fill")
+                    .font(.largeTitle)
+                    .foregroundColor(.green)
+            }
+            
             VStack (alignment:.leading) {
                 Text("History Empty")
-                    .font(.largeTitle)
+                    .font(.title)
                 Text("Tap Seconds Button\nto Start")
                     .foregroundColor(.secondary)
-                    .font(.system(.title2, design: .monospaced))
+                    .font(.system(.title3, design: .monospaced))
             }
             
         }
