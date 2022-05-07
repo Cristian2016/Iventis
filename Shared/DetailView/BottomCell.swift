@@ -24,9 +24,7 @@ struct BottomCell: View {
     
     var body: some View {
         List {
-            ForEach(pairs) { pair in
-                    PairCell(pair)
-            }
+            ForEach(pairs) { PairCell($0, pairs.count - pairs.firstIndex(of: $0)!) }
             .listRowSeparator(.hidden)
             .listRowBackground(
                 RoundedRectangle(cornerRadius: 6).fill(Color("pairCell")).padding(2))

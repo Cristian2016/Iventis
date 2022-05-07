@@ -11,6 +11,7 @@ struct PairCell: View {
     @StateObject var pair:Pair
     let duration:Float.TimeComponentsAsStrings?
     let contentFrameGap = CGFloat(4) //how much gap between content and its enclosing frame
+    let pairNumber:Int
     
     var body: some View {
             VStack (alignment: .leading) {
@@ -20,6 +21,9 @@ struct PairCell: View {
                         .font(.monospaced(Font.system(size: 22))())
                     Text(DateFormatter.bubbleStyleDate.string(from: pair.start ?? Date()))
                         .foregroundColor(.secondary)
+                    Image(systemName: "\(pairNumber).circle.fill")
+                        .foregroundColor(.lightGray)
+                        .font(.system(size: 22))
                 }
                 //pause time and date
                 if let pause = pair.pause {
@@ -73,11 +77,12 @@ struct PairCell: View {
         }
     }
     
-    init(_ pair:Pair) {
+    init(_ pair:Pair, _ pairNumber:Int) {
         _pair = StateObject(wrappedValue: pair)
         let decoder = JSONDecoder()
         let result = try? decoder.decode(Float.TimeComponentsAsStrings.self, from: pair.durationAsStrings ?? Data())
         self.duration = result
+        self.pairNumber = pairNumber
     }
 }
 
