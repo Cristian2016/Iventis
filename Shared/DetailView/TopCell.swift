@@ -131,7 +131,10 @@ struct TopCell: View {
         return true
     }
     
-    init(_ session:Session , _ sessionCount:Int, _ sessionRank:String) {
+    init(_ session:Session ,
+         _ sessionCount:Int,
+         _ sessionRank:String) {
+        
         self.sessionCount = sessionCount
         _session = StateObject(wrappedValue: session)
         
@@ -146,6 +149,10 @@ struct TopCell: View {
         if ["magenta", "red", "bubbleGum", "orange", "sourCherry"].contains(bubbleColorDescription) {
             self.selectionIndicatorColor = .label
         }
+        //⚠️ why it doesnt work
+//        if Int(sessionRank)! == sessionCount {
+//            self.isSelected = true
+//        }
     }
     
     private var bubbleRunningAlert: some View {
