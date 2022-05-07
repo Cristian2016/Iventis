@@ -56,6 +56,7 @@ struct BubbleList: View {
             
             //on top of everything show DetailView (TopDetailView and BottomDetailView
             if predicate != nil {
+                //show DetailView (top and bottom views)
                 VStack {
                     Spacer()
                     TopDetailView(showDetail.rank)

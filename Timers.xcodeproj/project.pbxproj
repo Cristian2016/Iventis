@@ -26,6 +26,10 @@
 		1F4239A3281E510D004BE717 /* NoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4239A2281E510D004BE717 /* NoteView.swift */; };
 		1F4239A4281E510D004BE717 /* NoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4239A2281E510D004BE717 /* NoteView.swift */; };
 		1F4239A5281E510D004BE717 /* NoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4239A2281E510D004BE717 /* NoteView.swift */; };
+		1F5A0F6C282641D00075E86B /* EmptyHistoryAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5A0F6B282641D00075E86B /* EmptyHistoryAlertView.swift */; };
+		1F5A0F6D282641D00075E86B /* EmptyHistoryAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5A0F6B282641D00075E86B /* EmptyHistoryAlertView.swift */; };
+		1F5A0F6F282647A80075E86B /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5A0F6E282647A80075E86B /* DetailView.swift */; };
+		1F5A0F70282647A80075E86B /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5A0F6E282647A80075E86B /* DetailView.swift */; };
 		1F5F4A5D28093FAF00AF3442 /* TimersApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5F4A4A28093FAD00AF3442 /* TimersApp.swift */; };
 		1F5F4A5E28093FAF00AF3442 /* TimersApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5F4A4A28093FAD00AF3442 /* TimersApp.swift */; };
 		1F5F4A6128093FAF00AF3442 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5F4A4C28093FAD00AF3442 /* Persistence.swift */; };
@@ -138,6 +142,8 @@
 		1F18B45B281FA9C90080ADA6 /* CalendarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
 		1F18B45F281FAABF0080ADA6 /* TopCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopCell.swift; sourceTree = "<group>"; };
 		1F4239A2281E510D004BE717 /* NoteView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoteView.swift; sourceTree = "<group>"; };
+		1F5A0F6B282641D00075E86B /* EmptyHistoryAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyHistoryAlertView.swift; sourceTree = "<group>"; };
+		1F5A0F6E282647A80075E86B /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
 		1F5F4A4A28093FAD00AF3442 /* TimersApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimersApp.swift; sourceTree = "<group>"; };
 		1F5F4A4C28093FAD00AF3442 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		1F5F4A4D28093FAF00AF3442 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -218,6 +224,8 @@
 		1F5F4A4228093FAC00AF3442 = {
 			isa = PBXGroup;
 			children = (
+				1F5A0F6B282641D00075E86B /* EmptyHistoryAlertView.swift */,
+				1F5A0F6E282647A80075E86B /* DetailView.swift */,
 				1F18B45A281FA9740080ADA6 /* Helpers */,
 				1FB3DE7B281EE45B003169E1 /* DeleteActionView2.swift */,
 				1F5F4A92280941D900AF3442 /* Timers (iOS).entitlements */,
@@ -466,11 +474,13 @@
 				1F5F4A732809409600AF3442 /* Bubble.swift in Sources */,
 				1F97B7DD2809B311002FFCA3 /* Colors.swift in Sources */,
 				1F100CA72809493400A3A3C2 /* BackgroundTimer.swift in Sources */,
+				1F5A0F6C282641D00075E86B /* EmptyHistoryAlertView.swift in Sources */,
 				1FE163AE280EE6F40050C6F5 /* LeftStrip.swift in Sources */,
 				1F641FFE281FF70100413E31 /* BottomDetailView.swift in Sources */,
 				1F5F4A6128093FAF00AF3442 /* Persistence.swift in Sources */,
 				1F9B6AF0280950D600C0A725 /* ViewModel.swift in Sources */,
 				1F5F4A992809456E00AF3442 /* BubbleList.swift in Sources */,
+				1F5A0F6F282647A80075E86B /* DetailView.swift in Sources */,
 				1F4239A3281E510D004BE717 /* NoteView.swift in Sources */,
 				1FFC8BB928142F040059EF2E /* Pair Properties.swift in Sources */,
 				1F18B45C281FA9C90080ADA6 /* CalendarView.swift in Sources */,
@@ -516,8 +526,10 @@
 				1F61BE062822BAAA00B773F9 /* DeleteActionView.swift in Sources */,
 				1F5F4A6228093FAF00AF3442 /* Persistence.swift in Sources */,
 				1F100CA82809493400A3A3C2 /* BackgroundTimer.swift in Sources */,
+				1F5A0F6D282641D00075E86B /* EmptyHistoryAlertView.swift in Sources */,
 				1F641FFF281FF70100413E31 /* BottomDetailView.swift in Sources */,
 				1FFC8BBA28142F040059EF2E /* Pair Properties.swift in Sources */,
+				1F5A0F70282647A80075E86B /* DetailView.swift in Sources */,
 				1F5F4A7028093FF800AF3442 /* Model.xcdatamodeld in Sources */,
 				1F5F4A5E28093FAF00AF3442 /* TimersApp.swift in Sources */,
 				1F5F4A762809409600AF3442 /* Bubble Properties.swift in Sources */,
