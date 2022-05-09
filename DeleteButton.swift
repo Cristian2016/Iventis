@@ -8,14 +8,18 @@
 import SwiftUI
 
 struct DeleteButton: View {
+    let title:String
+    
     var body: some View {
         ZStack {
             Button {
                 
             } label: {
-                Text("OK")
+                Text(title)
+                    .font(.system(size: 30).weight(.medium))
+                    .foregroundColor(.white)
             }
-            .buttonStyle(DeleteButtonStyle(color: .red, title: "Bubble"))
+            .buttonStyle(DeleteButtonStyle(color: .red))
         }
         .padding()
     }
@@ -26,21 +30,18 @@ struct DeleteButtonStyle : ButtonStyle {
     let color:Color
     let ratio = CGFloat(503/238)
     let width = CGFloat(200)
-    let title:String
     
     func makeBody(configuration: Configuration) -> some View {
         ZStack {
             RoundedRectangle(cornerRadius: radius)
                 .fill(color)
                 .frame(width: width, height: width / ratio)
-            Text(title)
-                .font(.system(size: 30).weight(.medium))
         }
     }
 }
 
 struct DeleteButton_Previews: PreviewProvider {
     static var previews: some View {
-        DeleteButton()
+        DeleteButton(title: "History")
     }
 }
