@@ -81,7 +81,7 @@ struct BubbleCell: View {
                     viewModel.toggleStart(bubble)
                 }
             }
-            timeComponents
+            timeComponentsViews
             if bubble.hasCalendar { calendarView }
             if !bubble.isNoteHidden { noteView }
         }
@@ -113,7 +113,7 @@ struct BubbleCell: View {
         }
     }
     
-    private var timeComponents:some View {
+    private var timeComponentsViews:some View {
         ZStack {
             HStack {
                 Text(bubble.timeComponentsString.hr)
@@ -134,7 +134,10 @@ struct BubbleCell: View {
                     .frame(width: BubbleCell.edge, height: BubbleCell.edge)
                     .padding(padding)
                     .opacity(minOpacity)
-                    .onTapGesture { withAnimation { toggleDetailView() } }
+                    .onTapGesture { withAnimation {
+                        toggleDetailView()
+                        //also viewModel.userTogglesDetail called within toggleDetailView()
+                    } }
                 Spacer()
             }
             HStack {
@@ -272,6 +275,10 @@ struct BubbleCell: View {
         //%i integer, %f float, %@ object??
         predicate = condition ? NSPredicate(format: "rank == %i", bubble.rank) : nil
         showDetail = condition ? (true, Int(bubble.rank)) : (false, nil)
+        
+        //ask viewModel
+        let rank = Int(bubble.rank)
+        viewModel.userTogglesDetail(rank, showDetail.show)
     }
     
     private func condition() -> Bool {

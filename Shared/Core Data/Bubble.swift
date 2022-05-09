@@ -39,16 +39,14 @@ public class Bubble: NSManagedObject {
     var lastPair:Pair? { (lastSession.pairs?.array as? [Pair])?.last }
     
     // MARK: -
-    ///bubbleCell.body displays timeComponents
-//    @Published var timeComponents = (hr:0, min:0, sec:0) { willSet {
-//        self.objectWillChange.send()
-//    }} //⚠️
     @Published var timeComponentsString
     = Float.TimeComponentsAsStrings(hr: "0", min: "0", sec: "0", cents: "00")
-    { willSet {
-        self.objectWillChange.send()
-//        print(timeComponentsString)
-    }}
+    { willSet { self.objectWillChange.send() }}
+    
+    ///updates elapsed time inside PairCell
+    @Published var pairRunningCellComponents
+    = Float.TimeComponentsAsStrings(hr: "0", min: "0", sec: "0", cents: "00")
+    { willSet { self.objectWillChange.send() }}
         
     private(set) var isObservingBackgroundTimer = false
     
@@ -77,6 +75,8 @@ public class Bubble: NSManagedObject {
             }
         }
     }
+    
+    var shouldUpdateSmallBubbleCellTimeComponents = false
 }
 
 // MARK: - Observers
@@ -88,11 +88,11 @@ extension Bubble {
     
     ///observe backgroundtimer signal. update time components only if bubble is running
     func observeBackgroundTimer() { isObservingBackgroundTimer = true
-        
-        NotificationCenter.default.addObserver(forName: .backgroundTimerSignalReceived, object: nil, queue: nil) {
+        NotificationCenter.default.addObserver(forName: .timerSignal, object: nil, queue: nil) {
             
             [weak self] _ in
-            self?.updateTimeComponents()
+            self?.updateBubbleCellTimeComponents()
+            self?.updateSmallBubbleCellTimeComponents()
         }
     }
     
@@ -104,22 +104,13 @@ extension Bubble {
                     guard let self = self else { return }
                                                             
                     let componentsString = self.currentClock.timComponentsAsStrings
-//                    print(self.currentClock)
-//                    print(componentsString, " at launch")
-                    DispatchQueue.main.async {
-//                        self.timeComponents = components //⚠️
-                        self.timeComponentsString = componentsString
-                    }
+                    DispatchQueue.main.async { self.timeComponentsString = componentsString }
                 }
             default: NotificationCenter.default.removeObserver(self)
         }
     }
     
-    private func setTimeComponentsToBrandNewState() {
-        
-    }
-    
-    private func updateTimeComponents() {
+    private func updateBubbleCellTimeComponents() {
         if state != .running { return }
         guard let lastPairStart = lastPair!.start else { return }
         
@@ -129,9 +120,19 @@ extension Bubble {
         let componentsString = value.timComponentsAsStrings
                             
         //since closure is executed on background thread, dispatch back to the main thread
-        DispatchQueue.main.async {
-            self.timeComponentsString = componentsString
-        }
+        DispatchQueue.main.async { self.timeComponentsString = componentsString }
+    }
+    
+    private func updateSmallBubbleCellTimeComponents() {
+        if state != .running { return }
+        if !shouldUpdateSmallBubbleCellTimeComponents { return }
+        guard let lastPairStart = lastPair!.start else { return }
+        
+        //delta is the elapsed duration between pair.start and signal dates
+        let Δ = Date().timeIntervalSince(lastPairStart)
+        let componentsString = Float(Δ).timComponentsAsStrings
+        
+        DispatchQueue.main.async { self.pairRunningCellComponents = componentsString }
     }
     
     func updateCurrentClock(runningOnly:Bool) {

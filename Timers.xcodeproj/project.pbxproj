@@ -66,9 +66,9 @@
 		1F61BE052822BAAA00B773F9 /* DeleteActionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F61BE042822BAAA00B773F9 /* DeleteActionView.swift */; };
 		1F61BE062822BAAA00B773F9 /* DeleteActionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F61BE042822BAAA00B773F9 /* DeleteActionView.swift */; };
 		1F61BE072822BAAA00B773F9 /* DeleteActionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F61BE042822BAAA00B773F9 /* DeleteActionView.swift */; };
-		1F62194028293B5100C9B175 /* PairRunningCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F62193F28293B5100C9B175 /* PairRunningCell.swift */; };
-		1F62194128293B5100C9B175 /* PairRunningCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F62193F28293B5100C9B175 /* PairRunningCell.swift */; };
-		1F62194228293B5100C9B175 /* PairRunningCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F62193F28293B5100C9B175 /* PairRunningCell.swift */; };
+		1F62194028293B5100C9B175 /* SmallBubbleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F62193F28293B5100C9B175 /* SmallBubbleCell.swift */; };
+		1F62194128293B5100C9B175 /* SmallBubbleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F62193F28293B5100C9B175 /* SmallBubbleCell.swift */; };
+		1F62194228293B5100C9B175 /* SmallBubbleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F62193F28293B5100C9B175 /* SmallBubbleCell.swift */; };
 		1F641FFE281FF70100413E31 /* BottomDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F641FFD281FF70100413E31 /* BottomDetailView.swift */; };
 		1F641FFF281FF70100413E31 /* BottomDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F641FFD281FF70100413E31 /* BottomDetailView.swift */; };
 		1F642000281FF70100413E31 /* BottomDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F641FFD281FF70100413E31 /* BottomDetailView.swift */; };
@@ -175,7 +175,7 @@
 		1F5F4A982809456E00AF3442 /* BubbleList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BubbleList.swift; sourceTree = "<group>"; };
 		1F5F4A9C280945C700AF3442 /* BubbleCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BubbleCell.swift; sourceTree = "<group>"; };
 		1F61BE042822BAAA00B773F9 /* DeleteActionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteActionView.swift; sourceTree = "<group>"; };
-		1F62193F28293B5100C9B175 /* PairRunningCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PairRunningCell.swift; sourceTree = "<group>"; };
+		1F62193F28293B5100C9B175 /* SmallBubbleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallBubbleCell.swift; sourceTree = "<group>"; };
 		1F641FFD281FF70100413E31 /* BottomDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomDetailView.swift; sourceTree = "<group>"; };
 		1F6420052820186D00413E31 /* PairCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PairCell.swift; sourceTree = "<group>"; };
 		1F6420092820204400413E31 /* BottomCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomCell.swift; sourceTree = "<group>"; };
@@ -234,7 +234,7 @@
 		1F5F4A4228093FAC00AF3442 = {
 			isa = PBXGroup;
 			children = (
-				1F62193F28293B5100C9B175 /* PairRunningCell.swift */,
+				1F62193F28293B5100C9B175 /* SmallBubbleCell.swift */,
 				1F4F03EA2826979D001A9636 /* DeleteButton.swift */,
 				1F5A0F6B282641D00075E86B /* EmptyHistoryAlertView.swift */,
 				1F5A0F6E282647A80075E86B /* DetailView.swift */,
@@ -484,7 +484,7 @@
 				1F61BE052822BAAA00B773F9 /* DeleteActionView.swift in Sources */,
 				1F9BE0A9280BE14100F87EFA /* PaletteView.swift in Sources */,
 				1F5F4A732809409600AF3442 /* Bubble.swift in Sources */,
-				1F62194028293B5100C9B175 /* PairRunningCell.swift in Sources */,
+				1F62194028293B5100C9B175 /* SmallBubbleCell.swift in Sources */,
 				1F97B7DD2809B311002FFCA3 /* Colors.swift in Sources */,
 				1F100CA72809493400A3A3C2 /* BackgroundTimer.swift in Sources */,
 				1F5A0F6C282641D00075E86B /* EmptyHistoryAlertView.swift in Sources */,
@@ -539,7 +539,7 @@
 				1F5F4A9A2809456E00AF3442 /* BubbleList.swift in Sources */,
 				1FD21866281D9AB700B43403 /* ExitFocusAlertView.swift in Sources */,
 				1F61BE062822BAAA00B773F9 /* DeleteActionView.swift in Sources */,
-				1F62194128293B5100C9B175 /* PairRunningCell.swift in Sources */,
+				1F62194128293B5100C9B175 /* SmallBubbleCell.swift in Sources */,
 				1F5F4A6228093FAF00AF3442 /* Persistence.swift in Sources */,
 				1F100CA82809493400A3A3C2 /* BackgroundTimer.swift in Sources */,
 				1F5A0F6D282641D00075E86B /* EmptyHistoryAlertView.swift in Sources */,
@@ -567,7 +567,7 @@
 				1F61BE072822BAAA00B773F9 /* DeleteActionView.swift in Sources */,
 				1F9BE0AB280BE14100F87EFA /* PaletteView.swift in Sources */,
 				1F5F4A88280941AC00AF3442 /* Widgets.intentdefinition in Sources */,
-				1F62194228293B5100C9B175 /* PairRunningCell.swift in Sources */,
+				1F62194228293B5100C9B175 /* SmallBubbleCell.swift in Sources */,
 				1F97B7DF2809B311002FFCA3 /* Colors.swift in Sources */,
 				1F100CA92809493400A3A3C2 /* BackgroundTimer.swift in Sources */,
 				1FE163B0280EE6F40050C6F5 /* LeftStrip.swift in Sources */,

@@ -42,7 +42,8 @@ struct PairCell: View {
                         }
                 }
                 
-                durationView
+                if pair.pause == nil { SmallBubbleCell(bubble: pair.session!.bubble!) }
+                else { durationView }
             }
             .padding(contentFrameGap)
     }

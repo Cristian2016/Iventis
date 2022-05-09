@@ -7,8 +7,13 @@
 
 import SwiftUI
 
-struct PairRunningCell: View {
-    let edge = CGFloat(60)
+///it's the small bubble cell in the PairCell of BottomDetaiulView that only shows up when bubble is running and detailMode is active
+struct SmallBubbleCell: View {
+    
+    @StateObject var bubble:Bubble
+    
+    let edge = CGFloat(100)
+    let ratio = CGFloat(8.25/3)
     
     var body: some View {
         ZStack {
@@ -31,24 +36,28 @@ struct PairRunningCell: View {
             }
         
             //time components
+            //hours
             HStack {
-                Spacer()
-                Text("34")
-                    .modifier(TimeComponents(edge: edge))
-            }
-            HStack {
-                Spacer()
-                Text("56")
+                Text(bubble.pairRunningCellComponents.hr)
                     .modifier(TimeComponents(edge: edge))
                 Spacer()
             }
+            //minutes
             HStack {
-                Text("23")
+                Spacer()
+                Text(bubble.pairRunningCellComponents.min)
                     .modifier(TimeComponents(edge: edge))
                 Spacer()
+            }
+            
+            //seconds
+            HStack {
+                Spacer()
+                Text(bubble.pairRunningCellComponents.sec)
+                    .modifier(TimeComponents(edge: edge))
             }
         }
-        .frame(width: 160)
+        .frame(width: edge * ratio)
         .foregroundColor(.gray)
     }
     
@@ -59,13 +68,13 @@ struct PairRunningCell: View {
             content
                 .frame(width: edge, height: edge)
                 .foregroundColor(.white)
-                .font(.system(size: 20))
+                .font(.system(size: 36))
         }
     }
 }
 
-struct PairRunningCell_Previews: PreviewProvider {
-    static var previews: some View {
-        PairRunningCell()
-    }
-}
+//struct PairRunningCell_Previews: PreviewProvider {
+//    static var previews: some View {
+//        SmallBubbleCell(bubble: <#Bubble#>)
+//    }
+//}

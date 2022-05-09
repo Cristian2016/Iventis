@@ -10,6 +10,7 @@ import SwiftUI
 struct DetailView: View {
     @StateObject var tabWrapper = SellectedTabWrapper()
     @FetchRequest var sessions:FetchedResults<Session>
+    
     let rank:Int?
     let topDetailHeight = CGFloat(140)
     let bottomDetailHeight = CGFloat(410)

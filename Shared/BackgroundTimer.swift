@@ -27,7 +27,7 @@ class BackgroundTimer {
     }()
     
     private var eventHandler: (() -> Void)? = {
-        NotificationCenter.default.post(name: .backgroundTimerSignalReceived, object: nil, userInfo: nil)
+        NotificationCenter.default.post(name: .timerSignal, object: nil, userInfo: nil)
     }
     
     enum State {

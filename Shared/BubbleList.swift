@@ -87,6 +87,7 @@ struct BubbleList: View {
     //1
     @Environment(\.managedObjectContext) private var viewContext
     @Environment(\.scenePhase) var scenePhase
+    
     @State private var deleteViewOffset:CGFloat? = nil
     @StateObject private var viewModel = ViewModel()
     @SectionedFetchRequest var results:SectionedFetchResults<Bool, Bubble>

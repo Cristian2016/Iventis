@@ -31,7 +31,7 @@ func delayExecution(_ delay:DispatchTime, code:@escaping ()->()) {
 }
 
 extension NSNotification.Name {
-    static let backgroundTimerSignalReceived = NSNotification.Name("backgroundTimerSignalReceived")
+    static let timerSignal = NSNotification.Name("backgroundTimerSignalReceived")
     static let appLaunched = NSNotification.Name("appLaunched")
     static let bubbleRank =  NSNotification.Name("bubbleIDNotification")
     static let topCellTapped = NSNotification.Name("topCellTapped")

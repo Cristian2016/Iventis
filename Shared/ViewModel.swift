@@ -17,9 +17,7 @@ class ViewModel: ObservableObject {
         bubbles?.forEach { $0.observeAppLaunch(.start) }
     }
     
-    deinit {
-        NotificationCenter.default.removeObserver(self)
-    }
+    deinit { NotificationCenter.default.removeObserver(self) }
             
     private let timer = BackgroundTimer(DispatchQueue(label: "BackgroundTimer", attributes: .concurrent))
     
@@ -147,6 +145,14 @@ class ViewModel: ObservableObject {
         }
         
         try? PersistenceController.shared.viewContext.save()
+    }
+    
+    func userTogglesDetail(_ rank:Int?, _ show:Bool) {
+        //identify bubble using rank
+        //ask bubble to start/stop updating smallBubbleCellTimeComponents
+        guard
+            let bubble = bubble(for: rank) else { return }
+        bubble.shouldUpdateSmallBubbleCellTimeComponents = show
     }
     
     // MARK: -
