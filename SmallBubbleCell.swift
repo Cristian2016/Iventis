@@ -37,7 +37,7 @@ struct SmallBubbleCell: View {
                 }
             }
             .compositingGroup()
-            .standardShadow(false)
+            .standardShadow(false  )
         
             //time components
             //hours
