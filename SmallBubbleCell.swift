@@ -38,14 +38,14 @@ struct SmallBubbleCell: View {
             //time components
             //hours
             HStack {
-                Text(bubble.pairRunningCellComponents.hr)
+                Text(bubble.smallBubbleCellComponents.hr)
                     .modifier(TimeComponents(edge: edge))
                 Spacer()
             }
             //minutes
             HStack {
                 Spacer()
-                Text(bubble.pairRunningCellComponents.min)
+                Text(bubble.smallBubbleCellComponents.min)
                     .modifier(TimeComponents(edge: edge))
                 Spacer()
             }
@@ -53,7 +53,7 @@ struct SmallBubbleCell: View {
             //seconds
             HStack {
                 Spacer()
-                Text(bubble.pairRunningCellComponents.sec)
+                Text(bubble.smallBubbleCellComponents.sec)
                     .modifier(TimeComponents(edge: edge))
             }
         }

@@ -55,9 +55,9 @@ struct BubbleCell: View {
     private let padding = CGFloat(0)
     
     private var minOpacity:Double {
-        bubble.timeComponentsString.min > "0" || bubble.timeComponentsString.hr > "0" ? 1 : 0.001
+        bubble.bubbleCellComponents.min > "0" || bubble.bubbleCellComponents.hr > "0" ? 1 : 0.001
     }
-    private var hrOpacity:Double { bubble.timeComponentsString.hr > "0" ? 1 : 0.001 }
+    private var hrOpacity:Double { bubble.bubbleCellComponents.hr > "0" ? 1 : 0.001 }
         
     // MARK: -
     var body: some View {
@@ -116,7 +116,7 @@ struct BubbleCell: View {
     private var timeComponentsViews:some View {
         ZStack {
             HStack {
-                Text(bubble.timeComponentsString.hr)
+                Text(bubble.bubbleCellComponents.hr)
                     .font(.system(size: fontSize))
                     .foregroundColor(.white)
                     .frame(width: BubbleCell.edge, height: BubbleCell.edge)
@@ -128,7 +128,7 @@ struct BubbleCell: View {
             }
             HStack {
                 Spacer()
-                Text(bubble.timeComponentsString.min)
+                Text(bubble.bubbleCellComponents.min)
                     .font(.system(size: fontSize))
                     .foregroundColor(.white)
                     .frame(width: BubbleCell.edge, height: BubbleCell.edge)
@@ -142,7 +142,7 @@ struct BubbleCell: View {
             }
             HStack {
                 Spacer()
-                Text(bubble.timeComponentsString.sec)
+                Text(bubble.bubbleCellComponents.sec)
                     .font(.system(size: fontSize))
                     .foregroundColor(.white)
                     .frame(width: BubbleCell.edge, height: BubbleCell.edge)
@@ -211,7 +211,7 @@ struct BubbleCell: View {
             Spacer()
             HStack {
                 Spacer()
-                Text(bubble.timeComponentsString.cents)
+                Text(bubble.bubbleCellComponents.cents)
                     .background(Circle()
                         .foregroundColor(Color("pauseStickerColor"))
                         .padding(-12))

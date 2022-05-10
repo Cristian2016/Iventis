@@ -39,12 +39,13 @@ public class Bubble: NSManagedObject {
     var lastPair:Pair? { (lastSession.pairs?.array as? [Pair])?.last }
     
     // MARK: -
-    @Published var timeComponentsString
+    ///what bubbleCell displays. ex: "12"hr "34"min "59"sec
+    @Published var bubbleCellComponents
     = Float.TimeComponentsAsStrings(hr: "0", min: "0", sec: "0", cents: "00")
     { willSet { self.objectWillChange.send() }}
     
-    ///updates elapsed time inside PairCell
-    @Published var pairRunningCellComponents
+    ///updates elapsed time inside PairCell. what smallBubbleCell displays. ex: "0"hr "12"min "24"sec
+    @Published var smallBubbleCellComponents
     = Float.TimeComponentsAsStrings(hr: "0", min: "0", sec: "0", cents: "00")
     { willSet { self.objectWillChange.send() }}
         
@@ -104,7 +105,7 @@ extension Bubble {
                     guard let self = self else { return }
                                                             
                     let componentsString = self.currentClock.timComponentsAsStrings
-                    DispatchQueue.main.async { self.timeComponentsString = componentsString }
+                    DispatchQueue.main.async { self.bubbleCellComponents = componentsString }
                 }
             default: NotificationCenter.default.removeObserver(self)
         }
@@ -120,7 +121,7 @@ extension Bubble {
         let componentsString = value.timComponentsAsStrings
                             
         //since closure is executed on background thread, dispatch back to the main thread
-        DispatchQueue.main.async { self.timeComponentsString = componentsString }
+        DispatchQueue.main.async { self.bubbleCellComponents = componentsString }
     }
     
     private func updateSmallBubbleCellTimeComponents() {
@@ -132,7 +133,7 @@ extension Bubble {
         let Δ = Date().timeIntervalSince(lastPairStart)
         let componentsString = Float(Δ).timComponentsAsStrings
         
-        DispatchQueue.main.async { self.pairRunningCellComponents = componentsString }
+        DispatchQueue.main.async { self.smallBubbleCellComponents = componentsString }
     }
     
     func updateCurrentClock(runningOnly:Bool) {
