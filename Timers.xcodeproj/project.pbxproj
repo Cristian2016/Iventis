@@ -91,9 +91,6 @@
 		1F9BE0AD280C6AB000F87EFA /* TapHold.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F9BE0AC280C6AB000F87EFA /* TapHold.swift */; };
 		1F9BE0AE280C6AB000F87EFA /* TapHold.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F9BE0AC280C6AB000F87EFA /* TapHold.swift */; };
 		1F9BE0AF280C6AB000F87EFA /* TapHold.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F9BE0AC280C6AB000F87EFA /* TapHold.swift */; };
-		1FB3DE7C281EE45B003169E1 /* DeleteActionView2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB3DE7B281EE45B003169E1 /* DeleteActionView2.swift */; };
-		1FB3DE7D281EE45B003169E1 /* DeleteActionView2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB3DE7B281EE45B003169E1 /* DeleteActionView2.swift */; };
-		1FB3DE7E281EE45B003169E1 /* DeleteActionView2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB3DE7B281EE45B003169E1 /* DeleteActionView2.swift */; };
 		1FCF0C662816F3F600AA1FAA /* EmptyBubbleListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FCF0C652816F3F600AA1FAA /* EmptyBubbleListView.swift */; };
 		1FCF0C672816F3F600AA1FAA /* EmptyBubbleListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FCF0C652816F3F600AA1FAA /* EmptyBubbleListView.swift */; };
 		1FCF0C682816F3F600AA1FAA /* EmptyBubbleListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FCF0C652816F3F600AA1FAA /* EmptyBubbleListView.swift */; };
@@ -183,7 +180,6 @@
 		1F9B6AEF280950D600C0A725 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		1F9BE0A8280BE14100F87EFA /* PaletteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PaletteView.swift; path = Shared/PaletteView.swift; sourceTree = SOURCE_ROOT; };
 		1F9BE0AC280C6AB000F87EFA /* TapHold.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapHold.swift; sourceTree = "<group>"; };
-		1FB3DE7B281EE45B003169E1 /* DeleteActionView2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteActionView2.swift; sourceTree = "<group>"; };
 		1FCF0C652816F3F600AA1FAA /* EmptyBubbleListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyBubbleListView.swift; sourceTree = "<group>"; };
 		1FD21864281D9AB700B43403 /* ExitFocusAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExitFocusAlertView.swift; sourceTree = "<group>"; };
 		1FE163AD280EE6F40050C6F5 /* LeftStrip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftStrip.swift; sourceTree = "<group>"; };
@@ -239,7 +235,6 @@
 				1F5A0F6B282641D00075E86B /* EmptyHistoryAlertView.swift */,
 				1F5A0F6E282647A80075E86B /* DetailView.swift */,
 				1F18B45A281FA9740080ADA6 /* Helpers */,
-				1FB3DE7B281EE45B003169E1 /* DeleteActionView2.swift */,
 				1F5F4A92280941D900AF3442 /* Timers (iOS).entitlements */,
 				1F5F4A91280941B700AF3442 /* WidgetsExtension.entitlements */,
 				1F5F4A4728093FAD00AF3442 /* Shared */,
@@ -478,7 +473,6 @@
 			files = (
 				1F18B457281FA6130080ADA6 /* PushView.swift in Sources */,
 				1FFC8BAD28142F040059EF2E /* Session Properties.swift in Sources */,
-				1FB3DE7C281EE45B003169E1 /* DeleteActionView2.swift in Sources */,
 				1F64200A2820204400413E31 /* BottomCell.swift in Sources */,
 				1FD21865281D9AB700B43403 /* ExitFocusAlertView.swift in Sources */,
 				1F61BE052822BAAA00B773F9 /* DeleteActionView.swift in Sources */,
@@ -525,7 +519,6 @@
 				1F4239A4281E510D004BE717 /* NoteView.swift in Sources */,
 				1FE163AF280EE6F40050C6F5 /* LeftStrip.swift in Sources */,
 				1FFC8BB728142F040059EF2E /* Pair.swift in Sources */,
-				1FB3DE7D281EE45B003169E1 /* DeleteActionView2.swift in Sources */,
 				1F18B45D281FA9C90080ADA6 /* CalendarView.swift in Sources */,
 				1F97B7DE2809B311002FFCA3 /* Colors.swift in Sources */,
 				1FFC8BAE28142F040059EF2E /* Session Properties.swift in Sources */,
@@ -561,7 +554,6 @@
 			files = (
 				1F18B459281FA6130080ADA6 /* PushView.swift in Sources */,
 				1FFC8BAF28142F040059EF2E /* Session Properties.swift in Sources */,
-				1FB3DE7E281EE45B003169E1 /* DeleteActionView2.swift in Sources */,
 				1F64200C2820204400413E31 /* BottomCell.swift in Sources */,
 				1FD21867281D9AB700B43403 /* ExitFocusAlertView.swift in Sources */,
 				1F61BE072822BAAA00B773F9 /* DeleteActionView.swift in Sources */,

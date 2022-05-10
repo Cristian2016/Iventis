@@ -55,7 +55,7 @@ public class Bubble: NSManagedObject {
     
     deinit {
         NotificationCenter.default.removeObserver(self)
-        print("bubble deinit")
+        print("bubble \(color) deinit")
     }
     
     enum Kind:Comparable {
@@ -128,7 +128,7 @@ extension Bubble {
     }
     
     private func updateSmallBubbleCellTimeComponents() {
-        if state != .running, !shouldUpdateSmallBubbleCellTimeComponents { return }
+        if !shouldUpdateSmallBubbleCellTimeComponents, state != .running { return }
         guard let lastPairStart = lastPair?.start else { return }
         
         //delta is the elapsed duration between pair.start and signal dates

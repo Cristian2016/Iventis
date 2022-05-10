@@ -127,11 +127,11 @@ extension UserDefaults {
         static let rank = "rank"
     }
     
-    static let shared = UserDefaults(suiteName: String.appGroupName)!
-    
     static func assignRank() -> Int {
-        //check if ranks exists
-        let ud = UserDefaults.shared
+        //get rank
+        //increase rank by one
+        //save rank
+        let ud = UserDefaults(suiteName: String.appGroupName)!
         var rank = ud.integer(forKey: UserDefaults.Key.rank)
         defer {
             rank += 1

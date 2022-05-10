@@ -10,8 +10,12 @@ import SwiftUI
 struct PairCell: View {
     @StateObject var pair:Pair
     let duration:Float.TimeComponentsAsStrings?
-    let contentFrameGap = CGFloat(4) //how much gap between content and its enclosing frame
     let pairNumber:Int
+    
+    // MARK: - Little Things
+    let contentFrameGap = CGFloat(4) //how much gap between content and its enclosing frame
+    let durationFont = Font.system(size: 22, weight: .medium, design: .default)
+    let durationComponentsFont = Font.system(size: 19, weight: .medium, design: .default)
     
     var body: some View {
         if !pair.isFault {
@@ -29,10 +33,8 @@ struct PairCell: View {
                 }
                 //pause time and date
                 if let pause = pair.pause {
-                    let sameDates:Bool = {
-                        DateFormatter.bubbleStyleDate.string(from: pair.start ?? Date()) ==
-                        DateFormatter.bubbleStyleDate.string(from: pair.pause!)
-                    }()
+                    let sameDates:Bool = pair.start == pair.pause
+                    
                         HStack {
                             Text(DateFormatter.bubbleStyleTime.string(from: pause))
                                 .font(.monospaced(Font.system(size: 22))())
@@ -49,9 +51,6 @@ struct PairCell: View {
             .padding(contentFrameGap)
         }
     }
-    
-    let durationFont = Font.system(size: 22, weight: .medium, design: .default)
-    let durationComponentsFont = Font.system(size: 19, weight: .medium, design: .default)
     
     private var durationView:some View {
         HStack (spacing: 8) {

@@ -29,6 +29,7 @@ class ViewModel: ObservableObject {
     }
     
     // MARK: - User Intents
+    //from PaletteView and...
     func createBubble(_ kind:Bubble.Kind, _ color:String) {
         let backgroundContext = PersistenceController.shared.backgroundContext
                 
@@ -50,7 +51,6 @@ class ViewModel: ObservableObject {
     }
     
     func delete(_ bubble:Bubble) {
-        print(#function)
         let viewContext = PersistenceController.shared.viewContext
         
         let request = Bubble.fetchRequest()
