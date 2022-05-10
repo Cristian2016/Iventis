@@ -12,7 +12,7 @@ struct SmallBubbleCell: View {
     
     @StateObject var bubble:Bubble
     
-    let edge = CGFloat(100)
+    let edge = CGFloat(110)
     let ratio = CGFloat(8.25/3)
     
     var body: some View {
@@ -58,7 +58,7 @@ struct SmallBubbleCell: View {
             }
         }
         .frame(width: edge * ratio)
-        .foregroundColor(.gray)
+        .foregroundColor(Color("smallBubbleCircleColor"))
     }
     
     struct TimeComponents:ViewModifier {
@@ -67,8 +67,8 @@ struct SmallBubbleCell: View {
         func body(content: Content) -> some View {
             content
                 .frame(width: edge, height: edge)
-                .foregroundColor(.white)
-                .font(.system(size: 36))
+                .foregroundColor(.background) //text color
+                .font(.system(size: 36).weight(.medium))
         }
     }
 }
