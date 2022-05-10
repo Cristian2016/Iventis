@@ -106,12 +106,13 @@ extension Bubble {
         NotificationCenter.default.addObserver(forName: .timerSignal, object: nil, queue: nil) {
             
             [weak self] _ in
-            self?.updateBubbleCellTimeComponents()
+            self?.updateBubbleCellComponents()
             self?.updateSmallBubbleCellTimeComponents()
         }
     }
     
-    private func updateBubbleCellTimeComponents() {
+    ///time components: hr min sec
+    private func updateBubbleCellComponents() {
         if state != .running { return }
         guard let lastPairStart = lastPair!.start else { return }
         
