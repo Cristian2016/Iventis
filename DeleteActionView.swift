@@ -36,32 +36,18 @@ struct DeleteActionView: View {
                 .overlay {
                     ZStack {
                         VStack (spacing:6) {
-                            HStack (alignment:.firstTextBaseline, spacing:2) {
-                                Image(systemName: "trash.fill")
-                                Text("Delete")
-                            }
-                            .padding([.top], 0)
-                            .offset(x: -11, y: 0)
-                            .font(.system(size: 30).weight(.medium))
-                            .foregroundColor(.red)
+                            trashView
+                            
                             VStack {
-                                RoundedRectangle(cornerRadius: buttonRadius)
-                                    .overlay { Text("Bubble").foregroundColor(.white) }
-                                    .onTapGesture {
-                                        withAnimation {
-                                            viewModel.delete(bubble!)
-                                            showDeleteAction.show = false
-                                            predicate = nil
-                                        }
-                                    }
-                                RoundedRectangle(cornerRadius: buttonRadius)
-                                    .overlay { Text("History").foregroundColor(.white) }
-                                    .onTapGesture {
-                                        withAnimation {
+                                deleteBubbleView.onTapGesture { withAnimation {
+                                    viewModel.delete(bubble!)
+                                    showDeleteAction.show = false
+                                    predicate = nil
+                                } }
+                                deleteHistoryView.onTapGesture { withAnimation {
                                             viewModel.reset(bubble!)
                                             showDeleteAction.show = false
-                                        }
-                                    }
+                                        } }
                             }
                             .foregroundColor(bubbleColor)
                             .font(.system(size: 30).weight(.medium))
@@ -85,6 +71,36 @@ struct DeleteActionView: View {
         self.bubble = bubble
         _predicate = Binding(projectedValue: predicate)
         self.deleteActionOffset = deleteActionOffset
+    }
+    
+    // MARK: - Legos
+    private var trashView:some View {
+        HStack (alignment:.firstTextBaseline, spacing:2) {
+            Image(systemName: "trash.fill")
+            Text("Delete")
+        }
+        .modifier(TrashModifier())
+    }
+    
+    private var deleteBubbleView:some View {
+        RoundedRectangle(cornerRadius: buttonRadius)
+            .overlay { Text("Bubble").foregroundColor(.white) }
+    }
+    
+    private var deleteHistoryView: some View {
+        RoundedRectangle(cornerRadius: buttonRadius)
+            .overlay { Text("History").foregroundColor(.white) }
+    }
+    
+    // MARK: - Modifiers
+    struct TrashModifier : ViewModifier {
+        func body(content: Content) -> some View {
+            content
+                .padding([.top], 0)
+                .offset(x: -11, y: 0)
+                .font(.system(size: 30).weight(.medium))
+                .foregroundColor(.red)
+        }
     }
 }
 
