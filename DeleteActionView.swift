@@ -40,7 +40,6 @@ struct DeleteActionView: View {
                             
                             VStack {
                                 deleteBubbleView
-                                    .foregroundColor(bubbleColor)
                                     .onTapGesture { withAnimation {
                                         viewModel.delete(bubble!)
                                         showDeleteAction.show = false
@@ -88,6 +87,7 @@ struct DeleteActionView: View {
     
     private var deleteBubbleView:some View {
         RoundedRectangle(cornerRadius: buttonRadius)
+            .foregroundColor(bubbleColor)
             .overlay { Text("Bubble").foregroundColor(.white) }
     }
     
