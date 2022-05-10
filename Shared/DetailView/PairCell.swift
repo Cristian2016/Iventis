@@ -33,12 +33,12 @@ struct PairCell: View {
                 }
                 //pause time and date
                 if let pause = pair.pause {
-                    let sameDates:Bool = pair.start == pair.pause
+                    let startAndPauseOnSameDay = DateFormatter.bubbleStyleShortDate.string(from: pair.start!) == DateFormatter.bubbleStyleShortDate.string(from: pause)
                     
                         HStack {
                             Text(DateFormatter.bubbleStyleTime.string(from: pause))
                                 .font(.monospaced(Font.system(size: 22))())
-                            if !sameDates {
+                            if !startAndPauseOnSameDay {
                                 Text(DateFormatter.bubbleStyleDate.string(from: pause))
                                     .foregroundColor(.secondary)
                             }
