@@ -87,16 +87,6 @@ extension Bubble {
         case stop
     }
     
-    ///observe backgroundtimer signal. update time components only if bubble is running
-    func observeBackgroundTimer() { isObservingBackgroundTimer = true
-        NotificationCenter.default.addObserver(forName: .timerSignal, object: nil, queue: nil) {
-            
-            [weak self] _ in
-            self?.updateBubbleCellTimeComponents()
-            self?.updateSmallBubbleCellTimeComponents()
-        }
-    }
-    
     ///set bubble.timeComponents. called [once] on app launch
     func observeAppLaunch(_ observe:ObserveState) {
         switch observe {
@@ -108,6 +98,16 @@ extension Bubble {
                     DispatchQueue.main.async { self.bubbleCellComponents = componentsString }
                 }
             default: NotificationCenter.default.removeObserver(self)
+        }
+    }
+    
+    ///observe backgroundtimer signal. update time components only if bubble is running
+    func observeBackgroundTimer() { isObservingBackgroundTimer = true
+        NotificationCenter.default.addObserver(forName: .timerSignal, object: nil, queue: nil) {
+            
+            [weak self] _ in
+            self?.updateBubbleCellTimeComponents()
+            self?.updateSmallBubbleCellTimeComponents()
         }
     }
     
@@ -125,8 +125,7 @@ extension Bubble {
     }
     
     private func updateSmallBubbleCellTimeComponents() {
-        if state != .running { return }
-        if !shouldUpdateSmallBubbleCellTimeComponents { return }
+        if state != .running, !shouldUpdateSmallBubbleCellTimeComponents { return }
         guard let lastPairStart = lastPair!.start else { return }
         
         //delta is the elapsed duration between pair.start and signal dates
