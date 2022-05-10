@@ -14,6 +14,7 @@ struct PairCell: View {
     let pairNumber:Int
     
     var body: some View {
+        if !pair.isFault {
             VStack (alignment: .leading) {
                 //start time and date
                 HStack {
@@ -46,6 +47,7 @@ struct PairCell: View {
                 else { durationView }
             }
             .padding(contentFrameGap)
+        }
     }
     
     let durationFont = Font.system(size: 22, weight: .medium, design: .default)
