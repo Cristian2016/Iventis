@@ -21,6 +21,7 @@ struct BubbleList: View {
                                 .background(Rectangle()
                                     .fill(Color.background1)
                                     .frame(width: UIScreen.size.width)
+                                    .padding(.bottom, -5)
                                 )
                                 .padding()
                                 .padding(.top, 9) //⚠️ not sure it looks good on all devices

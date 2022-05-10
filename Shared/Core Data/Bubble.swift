@@ -19,6 +19,8 @@ public class Bubble: NSManagedObject {
     }
     
     var state:State {
+        guard let lastSession = lastSession else { return .brandNew }
+        
         if kind != .stopwatch && currentClock <= 0 { return .finished }
         else {
             if sessions_.isEmpty || lastSession.isEnded { return .brandNew }
@@ -34,9 +36,9 @@ public class Bubble: NSManagedObject {
     }
     
     ///lastSession is not always currentSession
-    var lastSession:Session { sessions_.last! }
+    var lastSession:Session? { sessions_.last }
     
-    var lastPair:Pair? { (lastSession.pairs?.array as? [Pair])?.last }
+    var lastPair:Pair? { (lastSession?.pairs?.array as? [Pair])?.last }
     
     // MARK: -
     ///what bubbleCell displays. ex: "12"hr "34"min "59"sec
@@ -127,7 +129,7 @@ extension Bubble {
     
     private func updateSmallBubbleCellTimeComponents() {
         if state != .running, !shouldUpdateSmallBubbleCellTimeComponents { return }
-        guard let lastPairStart = lastPair!.start else { return }
+        guard let lastPairStart = lastPair?.start else { return }
         
         //delta is the elapsed duration between pair.start and signal dates
         let Δ = Date().timeIntervalSince(lastPairStart)

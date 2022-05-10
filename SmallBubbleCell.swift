@@ -18,22 +18,26 @@ struct SmallBubbleCell: View {
     var body: some View {
         ZStack {
             //background
-            HStack {
-                Spacer()
-                Circle()
-                    .frame(width: edge, height: edge)
+            ZStack {
+                HStack {
+                    Spacer()
+                    Circle()
+                        .frame(width: edge, height: edge)
+                }
+                HStack {
+                    Spacer()
+                    Circle()
+                        .frame(width: edge, height: edge)
+                    Spacer()
+                }
+                HStack {
+                    Circle()
+                        .frame(width: edge, height: edge)
+                    Spacer()
+                }
             }
-            HStack {
-                Spacer()
-                Circle()
-                    .frame(width: edge, height: edge)
-                Spacer()
-            }
-            HStack {
-                Circle()
-                    .frame(width: edge, height: edge)
-                Spacer()
-            }
+            .compositingGroup()
+            .standardShadow(false)
         
             //time components
             //hours
@@ -67,7 +71,7 @@ struct SmallBubbleCell: View {
         func body(content: Content) -> some View {
             content
                 .frame(width: edge, height: edge)
-                .foregroundColor(.background) //text color
+                .foregroundColor(.black) //text color
                 .font(.system(size: 36).weight(.medium))
         }
     }

@@ -50,6 +50,7 @@ class ViewModel: ObservableObject {
     }
     
     func delete(_ bubble:Bubble) {
+        print(#function)
         let viewContext = PersistenceController.shared.viewContext
         
         let request = Bubble.fetchRequest()
@@ -92,7 +93,7 @@ class ViewModel: ObservableObject {
                 //create new pair, add it to currentSession
                 let newPair = Pair(context: PersistenceController.shared.viewContext)
                 newPair.start = Date()
-                bubble.lastSession.addToPairs(newPair)
+                bubble.lastSession?.addToPairs(newPair)
                 
             case .running: /* changes to .paused */
                 let currentPair = bubble.lastPair
@@ -104,7 +105,7 @@ class ViewModel: ObservableObject {
                     currentPair?.duration = $0 //Float
                     currentPair?.durationAsStrings = $1 //Data
                     
-                    bubble.lastSession.computeDuration()
+                    bubble.lastSession?.computeDuration()
                     
                     //compute and store currentClock
                     bubble.currentClock += currentPair!.duration
@@ -131,14 +132,14 @@ class ViewModel: ObservableObject {
         if bubble.state == .brandNew { return }
         bubble.currentClock = bubble.initialClock
         bubble.bubbleCellComponents = bubble.currentClock.timComponentsAsStrings
-        bubble.lastSession.isEnded = true
+        bubble.lastSession?.isEnded = true
         if bubble.lastPair!.pause == nil {
             bubble.lastPair!.pause = Date()
             bubble.lastPair?.computeDuration(.endSession) {
                 bubble.lastPair?.duration = $0
                 bubble.lastPair?.durationAsStrings = $1
                 
-                bubble.lastSession.computeDuration()
+                bubble.lastSession?.computeDuration()
                 
                 bubble.bubbleCellComponents = bubble.initialClock.timComponentsAsStrings
             }
