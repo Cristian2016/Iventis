@@ -26,9 +26,9 @@
 		1F4239A3281E510D004BE717 /* NoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4239A2281E510D004BE717 /* NoteView.swift */; };
 		1F4239A4281E510D004BE717 /* NoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4239A2281E510D004BE717 /* NoteView.swift */; };
 		1F4239A5281E510D004BE717 /* NoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4239A2281E510D004BE717 /* NoteView.swift */; };
-		1F4F03EB2826979D001A9636 /* DeleteButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4F03EA2826979D001A9636 /* DeleteButton.swift */; };
-		1F4F03EC2826979D001A9636 /* DeleteButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4F03EA2826979D001A9636 /* DeleteButton.swift */; };
-		1F4F03ED28269D8D001A9636 /* DeleteButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4F03EA2826979D001A9636 /* DeleteButton.swift */; };
+		1F4326B1282AFB19002B6092 /* ScaleDownButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4326B0282AFB19002B6092 /* ScaleDownButton.swift */; };
+		1F4326B2282AFB19002B6092 /* ScaleDownButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4326B0282AFB19002B6092 /* ScaleDownButton.swift */; };
+		1F4326B3282AFB19002B6092 /* ScaleDownButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4326B0282AFB19002B6092 /* ScaleDownButton.swift */; };
 		1F5A0F6C282641D00075E86B /* EmptyHistoryAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5A0F6B282641D00075E86B /* EmptyHistoryAlertView.swift */; };
 		1F5A0F6D282641D00075E86B /* EmptyHistoryAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5A0F6B282641D00075E86B /* EmptyHistoryAlertView.swift */; };
 		1F5A0F6F282647A80075E86B /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5A0F6E282647A80075E86B /* DetailView.swift */; };
@@ -147,7 +147,7 @@
 		1F18B45B281FA9C90080ADA6 /* CalendarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
 		1F18B45F281FAABF0080ADA6 /* TopCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopCell.swift; sourceTree = "<group>"; };
 		1F4239A2281E510D004BE717 /* NoteView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoteView.swift; sourceTree = "<group>"; };
-		1F4F03EA2826979D001A9636 /* DeleteButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteButton.swift; sourceTree = "<group>"; };
+		1F4326B0282AFB19002B6092 /* ScaleDownButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScaleDownButton.swift; sourceTree = "<group>"; };
 		1F5A0F6B282641D00075E86B /* EmptyHistoryAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyHistoryAlertView.swift; sourceTree = "<group>"; };
 		1F5A0F6E282647A80075E86B /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
 		1F5F4A4A28093FAD00AF3442 /* TimersApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimersApp.swift; sourceTree = "<group>"; };
@@ -231,7 +231,7 @@
 			isa = PBXGroup;
 			children = (
 				1F62193F28293B5100C9B175 /* SmallBubbleCell.swift */,
-				1F4F03EA2826979D001A9636 /* DeleteButton.swift */,
+				1F4326B0282AFB19002B6092 /* ScaleDownButton.swift */,
 				1F5A0F6B282641D00075E86B /* EmptyHistoryAlertView.swift */,
 				1F5A0F6E282647A80075E86B /* DetailView.swift */,
 				1F18B45A281FA9740080ADA6 /* Helpers */,
@@ -495,9 +495,9 @@
 				1F9BE0AD280C6AB000F87EFA /* TapHold.swift in Sources */,
 				1F5F4A9D280945C700AF3442 /* BubbleCell.swift in Sources */,
 				1F18B460281FAABF0080ADA6 /* TopCell.swift in Sources */,
-				1F4F03EB2826979D001A9636 /* DeleteButton.swift in Sources */,
 				1F5F4A5D28093FAF00AF3442 /* TimersApp.swift in Sources */,
 				1FCF0C662816F3F600AA1FAA /* EmptyBubbleListView.swift in Sources */,
+				1F4326B1282AFB19002B6092 /* ScaleDownButton.swift in Sources */,
 				1FF0A2FD2810448100B1DB77 /* TopDetailView.swift in Sources */,
 				1FFC8BAA28142F040059EF2E /* Session.swift in Sources */,
 				1F5F4A952809450A00AF3442 /* Library.swift in Sources */,
@@ -516,6 +516,7 @@
 				1F6420072820186D00413E31 /* PairCell.swift in Sources */,
 				1F9B6AF1280950D600C0A725 /* ViewModel.swift in Sources */,
 				1F18B461281FAABF0080ADA6 /* TopCell.swift in Sources */,
+				1F4326B2282AFB19002B6092 /* ScaleDownButton.swift in Sources */,
 				1F4239A4281E510D004BE717 /* NoteView.swift in Sources */,
 				1FE163AF280EE6F40050C6F5 /* LeftStrip.swift in Sources */,
 				1FFC8BB728142F040059EF2E /* Pair.swift in Sources */,
@@ -525,7 +526,6 @@
 				1F18B458281FA6130080ADA6 /* PushView.swift in Sources */,
 				1F64200B2820204400413E31 /* BottomCell.swift in Sources */,
 				1FCF0C672816F3F600AA1FAA /* EmptyBubbleListView.swift in Sources */,
-				1F4F03EC2826979D001A9636 /* DeleteButton.swift in Sources */,
 				1F5F4A742809409600AF3442 /* Bubble.swift in Sources */,
 				1FF0A2FE2810448100B1DB77 /* TopDetailView.swift in Sources */,
 				1F5F4A962809450A00AF3442 /* Library.swift in Sources */,
@@ -576,9 +576,9 @@
 				1F5F4A9F280945C700AF3442 /* BubbleCell.swift in Sources */,
 				1F18B462281FAABF0080ADA6 /* TopCell.swift in Sources */,
 				1F100CA5280946C900A3A3C2 /* Model.xcdatamodeld in Sources */,
-				1F4F03ED28269D8D001A9636 /* DeleteButton.swift in Sources */,
 				1FCF0C682816F3F600AA1FAA /* EmptyBubbleListView.swift in Sources */,
 				1FF0A2FF2810448100B1DB77 /* TopDetailView.swift in Sources */,
+				1F4326B3282AFB19002B6092 /* ScaleDownButton.swift in Sources */,
 				1F5A0F71282649710075E86B /* DetailView.swift in Sources */,
 				1FFC8BAC28142F040059EF2E /* Session.swift in Sources */,
 				1F5F4A9B2809456E00AF3442 /* BubbleList.swift in Sources */,

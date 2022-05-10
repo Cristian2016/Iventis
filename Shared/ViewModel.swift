@@ -63,6 +63,8 @@ class ViewModel: ObservableObject {
     
     ///delete all sessions and pairs and make it brandNew
     func reset(_ bubble:Bubble) {
+        guard !bubble.sessions_.isEmpty else { return }
+        
         let viewContext = PersistenceController.shared.viewContext
         bubble.created = Date()
         bubble.currentClock = bubble.initialClock

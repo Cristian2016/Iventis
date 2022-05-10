@@ -32,24 +32,28 @@ struct DeleteActionView: View {
             RoundedRectangle(cornerRadius: backgroundRadius)
                 .fill(backgroundColor)
                 .frame(width: width, height: width/ratio)
-//                .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: 30))
+            //                .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: 30))
                 .overlay {
                     ZStack {
                         VStack (spacing:6) {
                             trashView
                             
                             VStack {
-                                deleteBubbleView.onTapGesture { withAnimation {
-                                    viewModel.delete(bubble!)
-                                    showDeleteAction.show = false
-                                    predicate = nil
-                                } }
-                                deleteHistoryView.onTapGesture { withAnimation {
+                                deleteBubbleView
+                                    .foregroundColor(bubbleColor)
+                                    .onTapGesture { withAnimation {
+                                        viewModel.delete(bubble!)
+                                        showDeleteAction.show = false
+                                        predicate = nil
+                                    } }
+                                deleteHistoryView
+                                    .onTapGesture { withAnimation {
+                                        if !bubble!.sessions_.isEmpty {
                                             viewModel.reset(bubble!)
                                             showDeleteAction.show = false
-                                        } }
+                                        }
+                                    } }
                             }
-                            .foregroundColor(bubbleColor)
                             .font(.system(size: 30).weight(.medium))
                             .padding([.bottom], 6)
                         }
@@ -88,8 +92,11 @@ struct DeleteActionView: View {
     }
     
     private var deleteHistoryView: some View {
-        RoundedRectangle(cornerRadius: buttonRadius)
-            .overlay { Text("History").foregroundColor(.white) }
+        let historyAvailable = bubble!.sessions_.isEmpty
+        return RoundedRectangle(cornerRadius: buttonRadius)
+            .foregroundColor(historyAvailable ? bubbleColor.opacity(0.3) : bubbleColor)
+            .overlay { Text("History")
+                .foregroundColor(historyAvailable ? .white.opacity(0.3) :  .white) }
     }
     
     // MARK: - Modifiers
