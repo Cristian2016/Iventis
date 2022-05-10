@@ -71,8 +71,8 @@ struct SmallBubbleCell: View {
         func body(content: Content) -> some View {
             content
                 .frame(width: edge, height: edge)
-                .foregroundColor(.black) //text color
-                .font(.system(size: 36).weight(.medium))
+                .foregroundColor(Color("darkGray")) //text color
+                .font(.system(size: 40).weight(.medium))
         }
     }
 }
