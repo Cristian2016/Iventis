@@ -79,7 +79,10 @@ public class Bubble: NSManagedObject {
         }
     }
     
-    var shouldUpdateSmallBubbleCellTimeComponents = false
+    //shouldUpdateSmallBubbleCellTimeComponents
+    var shouldUpdateSmallBubbleCell = false {didSet{
+        if !shouldUpdateSmallBubbleCell { smallBubbleCellComponents = Float.TimeComponentsAsStrings(hr: "0", min: "0", sec: "0", cents: "0") }
+    }}
 }
 
 // MARK: - Observers
@@ -109,7 +112,7 @@ extension Bubble {
             
             [weak self] _ in
             self?.updateBubbleCellComponents()
-            self?.updateSmallBubbleCellComponents()
+            self?.updateSmallBubbleCell()
         }
     }
     
@@ -126,9 +129,10 @@ extension Bubble {
         //since closure is executed on background thread, dispatch back to the main thread
         DispatchQueue.main.async { self.bubbleCellComponents = componentsString }
     }
-    ///time components: hr min sec
-    private func updateSmallBubbleCellComponents() {
-        if !shouldUpdateSmallBubbleCellTimeComponents, state != .running { return }
+    
+    ///update smallBubbleCell time components: hr min sec
+    private func updateSmallBubbleCell() {
+        if !shouldUpdateSmallBubbleCell, state != .running { return }
         guard let lastPairStart = lastPair?.start else { return }
         
         //delta is the elapsed duration between pair.start and signal dates

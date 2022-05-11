@@ -100,6 +100,7 @@ class ViewModel: ObservableObject {
             case .running: /* changes to .paused */
                 let currentPair = bubble.lastPair
                 currentPair?.pause = Date()
+                bubble.shouldUpdateSmallBubbleCell = false
                 
                 //⚠️ closure runs on the main queue. whatever you want the user to see put in that closure otherwise it will fail to update!!!!
                 currentPair?.computeDuration(.pause) {
@@ -132,6 +133,9 @@ class ViewModel: ObservableObject {
     // FIXME: ⚠️ not complete!
     func endSession(_ bubble:Bubble) {
         if bubble.state == .brandNew { return }
+        
+        bubble.shouldUpdateSmallBubbleCell = false
+        
         bubble.currentClock = bubble.initialClock
         bubble.bubbleCellComponents = bubble.currentClock.timComponentsAsStrings
         bubble.lastSession?.isEnded = true
@@ -155,7 +159,7 @@ class ViewModel: ObservableObject {
         //ask bubble to start/stop updating smallBubbleCellTimeComponents
         guard
             let bubble = bubble(for: rank) else { return }
-        bubble.shouldUpdateSmallBubbleCellTimeComponents = show
+        bubble.shouldUpdateSmallBubbleCell = show
     }
     
     // MARK: -
