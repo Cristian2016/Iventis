@@ -1,0 +1,46 @@
+//
+//  CircleButton.swift
+//  Timers
+//
+//  Created by Cristian Lapusan on 11.05.2022.
+//
+
+import SwiftUI
+
+struct CircleButton: View {
+    var body: some View {
+        Button {
+            
+        } label: {
+            Text("Button")
+        }
+        .buttonStyle(CircleStyle(color:.red, edge:130))
+    }
+}
+
+struct CircleStyle : ButtonStyle {
+    let color:Color
+    let edge:CGFloat
+    
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            .foregroundColor(.white)
+            .font(.system(size: 30).weight(.medium))
+            .background {
+                Circle()
+                    .frame(width: edge, height: edge)
+                    .foregroundColor(color)
+            }
+            .scaleEffect(configuration.isPressed ? 0.8 : 1.0)
+            .opacity(configuration.isPressed ? 0.5 : 1.0)
+            .onTapGesture {
+                UserFeedback.triggerSingleHaptic(.medium)
+            }
+    }
+}
+
+struct CircleButton_Previews: PreviewProvider {
+    static var previews: some View {
+        CircleButton()
+    }
+}
