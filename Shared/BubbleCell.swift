@@ -20,6 +20,7 @@ struct BubbleCell: View {
     @Binding var showDeleteAction:(show:Bool, rank:Int?)
     
     private var isRunning:Bool { bubble.state == .running }
+    @State private var isSecondsTapped = false
     
     private var sec:Int = 0
     private var min:Int = 0
@@ -146,12 +147,13 @@ struct BubbleCell: View {
                     .font(.system(size: fontSize))
                     .foregroundColor(.white)
                     .frame(width: BubbleCell.edge, height: BubbleCell.edge)
-                    .background {
-                        Circle().fill(bubbleColor)
-                            .frame(width: BubbleCell.edge, height: BubbleCell.edge)
-                    }
+                    .background { secondsBackground }
                     .padding(padding)
+                    .scaleEffect(isSecondsTapped ? 0.6 : 1.0)
+                    .animation(.spring(response: 0.3, dampingFraction: 0.4), value: isSecondsTapped)
                     .onTapGesture {
+                        isSecondsTapped = true
+                        delayExecution(.now() + 0.2) { isSecondsTapped = false }
                         UserFeedback.singleHaptic(.heavy)
                         viewModel.toggleStart(bubble)
                     }
@@ -233,6 +235,11 @@ struct BubbleCell: View {
             }
             Spacer()
         }
+    }
+    
+    private var secondsBackground: some View {
+        Circle().fill(bubbleColor)
+            .frame(width: BubbleCell.edge, height: BubbleCell.edge)
     }
     
     @ViewBuilder
