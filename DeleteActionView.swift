@@ -95,7 +95,7 @@ struct DeleteActionView: View {
         let historyAvailable = bubble!.sessions_.isEmpty
         return RoundedRectangle(cornerRadius: buttonRadius)
             .foregroundColor(historyAvailable ? bubbleColor.opacity(0.3) : bubbleColor)
-            .overlay { Text("History")
+            .overlay { Text("History \(bubble!.sessions_.count)")
                 .foregroundColor(historyAvailable ? .white.opacity(0.3) :  .white) }
     }
     

@@ -148,7 +148,7 @@ public struct UserFeedback {
         case visual
     }
     
-    public static func triggerSingleHaptic(_ style:UIImpactFeedbackGenerator.FeedbackStyle) {
+    public static func singleHaptic(_ style:UIImpactFeedbackGenerator.FeedbackStyle) {
         let haptic = UIImpactFeedbackGenerator(style: style)
         haptic.prepare()
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.02) {
@@ -156,8 +156,8 @@ public struct UserFeedback {
         }
     }
     
-    public static func triggerDoubleHaptic(_ style:UIImpactFeedbackGenerator.FeedbackStyle) {
-        UserFeedback.triggerSingleHaptic(style)
+    public static func doubleHaptic(_ style:UIImpactFeedbackGenerator.FeedbackStyle) {
+        UserFeedback.singleHaptic(style)
         
         let second = UIImpactFeedbackGenerator(style: .heavy)
         second.prepare()

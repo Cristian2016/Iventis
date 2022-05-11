@@ -19,7 +19,7 @@ struct ExitFocusAlertView: View {
     var body: some View {
         Button {
             withAnimation {
-                UserFeedback.triggerSingleHaptic(.medium)
+                UserFeedback.singleHaptic(.medium)
                 predicate = nil
                 showDetail.show = false
             }

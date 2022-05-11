@@ -77,7 +77,7 @@ struct BubbleCell: View {
             secondsView
             if bubble.state != .running {
                 centsView .onTapGesture {
-                    UserFeedback.triggerSingleHaptic(.heavy)
+                    UserFeedback.singleHaptic(.heavy)
                     viewModel.toggleStart(bubble)
                 }
             }
@@ -148,11 +148,11 @@ struct BubbleCell: View {
                     .frame(width: BubbleCell.edge, height: BubbleCell.edge)
                     .padding(padding)
                     .onTapGesture {
-                        UserFeedback.triggerSingleHaptic(.heavy)
+                        UserFeedback.singleHaptic(.heavy)
                         viewModel.toggleStart(bubble)
                     }
                     .onLongPressGesture {
-                        UserFeedback.triggerDoubleHaptic(.heavy)
+                        UserFeedback.doubleHaptic(.heavy)
                         viewModel.endSession(bubble)
                     }
             }
@@ -257,7 +257,7 @@ struct BubbleCell: View {
     // MARK: - Methods
     ///show/hide DetailView
     fileprivate func toggleDetailView() {
-        UserFeedback.triggerSingleHaptic(.medium)
+        UserFeedback.singleHaptic(.medium)
         let condition = predicate == nil
         
         //%i integer, %f float, %@ object??
