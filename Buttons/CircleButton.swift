@@ -14,18 +14,19 @@ struct CircleButton: View {
         } label: {
             Text("Button")
         }
-        .buttonStyle(CircleStyle(color:.red, edge:130))
+        .buttonStyle(CircleStyle(color:.red, edge:130, font: .system(size: 23)))
     }
 }
 
 struct CircleStyle : ButtonStyle {
     let color:Color
     let edge:CGFloat
+    let font:Font
     
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
             .foregroundColor(.white)
-            .font(.system(size: 30).weight(.medium))
+            .font(font)
             .background {
                 Circle()
                     .frame(width: edge, height: edge)

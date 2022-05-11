@@ -162,7 +162,7 @@ struct BubbleCell: View {
     // MARK: - Legoes
     private var hoursView:some View {
         HStack {
-            hoursCircle
+            circle
             Spacer()
         }
         .foregroundColor(bubbleColor)
@@ -172,26 +172,14 @@ struct BubbleCell: View {
     private var minutesView: some View {
         HStack {
             Spacer()
-            minutesCircle
+            circle
             Spacer()
         }
         .opacity(minOpacity)
         .foregroundColor(bubbleColor)
     }
     
-    private var hoursCircle:some View {
-        Circle()
-            .frame(width: BubbleCell.edge, height: BubbleCell.edge)
-            .padding(padding)
-    }
-    
-    private var minutesCircle:some View {
-        Circle()
-            .frame(width: BubbleCell.edge, height: BubbleCell.edge)
-            .padding(padding)
-    }
-    
-    private var secondsCircle:some View {
+    private var circle:some View {
         Circle()
             .frame(width: BubbleCell.edge, height: BubbleCell.edge)
             .padding(padding)
@@ -200,7 +188,7 @@ struct BubbleCell: View {
     private var secondsView:some View {
         HStack {
             Spacer()
-            secondsCircle
+            circle
         }
         .foregroundColor(bubbleColor)
     }
