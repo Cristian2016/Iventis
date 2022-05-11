@@ -26,6 +26,10 @@ struct Push<Content:View>: View {
         case bottomLeft
         case bottomRight
         case bottomMiddle
+        
+        case middle
+        case leading
+        case trailing
     }
     
     @ViewBuilder
@@ -43,6 +47,19 @@ struct Push<Content:View>: View {
                 VStack { content; Spacer() }
             case .bottomMiddle:
                 VStack { Spacer(); content }
+                
+            case .middle:
+                HStack {
+                    Spacer(); content; Spacer()
+                }
+            case .leading:
+                HStack {
+                    content; Spacer()
+                }
+            case .trailing:
+                HStack {
+                    Spacer(); content
+                }
         }
     }
 }

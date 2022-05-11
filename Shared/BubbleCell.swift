@@ -8,6 +8,16 @@
 import SwiftUI
 
 struct BubbleCell: View {
+    // MARK: - Modifiers
+    struct TextModifier : ViewModifier {
+        func body(content: Content) -> some View {
+            content
+                .font(.system(size: Ratio.bubbleToFontSize * UIScreen.size.width * 0.85))
+                .foregroundColor(.white)
+                .frame(width: BubbleCell.edge, height: BubbleCell.edge)
+        }
+    }
+    
     @EnvironmentObject private var viewModel:ViewModel
     
     @StateObject var bubble:Bubble
@@ -44,7 +54,6 @@ struct BubbleCell: View {
     }
     
     private let spacing:CGFloat = -30
-    private let fontSize = Ratio.bubbleToFontSize * UIScreen.size.width * 0.85
     
     //⚠️ this property determines how many bubbles on screen to fit
     private static var edge:CGFloat = {
@@ -73,9 +82,6 @@ struct BubbleCell: View {
                         }
                     }
             }
-            hoursView
-            minutesView
-            secondsView_Clear
             if bubble.state != .running {
                 centsView.onTapGesture {
                     UserFeedback.singleHaptic(.heavy)
@@ -116,41 +122,40 @@ struct BubbleCell: View {
     
     private var timeComponentsViews:some View {
         ZStack {
-            HStack {
+            //hours
+            Push(.leading) {
                 Text(bubble.bubbleCellComponents.hr)
-                    .font(.system(size: fontSize))
-                    .foregroundColor(.white)
-                    .frame(width: BubbleCell.edge, height: BubbleCell.edge)
-                    .padding(padding)
+                    .modifier(TextModifier())
+                //background
+                    .background { circleBackground.zIndex(-2) }
                     .opacity(hrOpacity)
+                //gestures
                     .onTapGesture(count: 2) { print("edit duration") }
-                    .onTapGesture(count: 1) { print("add note") }
-                Spacer()
+                    .onTapGesture { print("add note") }
             }
-            HStack {
-                Spacer()
+            //minutes
+            Push(.middle) {
                 Text(bubble.bubbleCellComponents.min)
-                    .font(.system(size: fontSize))
-                    .foregroundColor(.white)
-                    .frame(width: BubbleCell.edge, height: BubbleCell.edge)
-                    .padding(padding)
+                    .modifier(TextModifier())
+                //background
+                    .background { circleBackground.zIndex(-1) }
                     .opacity(minOpacity)
+                //gestures
                     .onTapGesture { withAnimation {
                         toggleDetailView()
                         //also viewModel.userTogglesDetail called within toggleDetailView()
                     } }
-                Spacer()
             }
-            HStack {
-                Spacer()
+            //seconds
+            Push(.trailing) {
                 Text(bubble.bubbleCellComponents.sec)
-                    .font(.system(size: fontSize))
-                    .foregroundColor(.white)
-                    .frame(width: BubbleCell.edge, height: BubbleCell.edge)
-                    .background { secondsBackground }
-                    .padding(padding)
+                    .modifier(TextModifier())
+                //background
+                    .background { circleBackground }
+                //animations
                     .scaleEffect(isSecondsTapped ? 0.6 : 1.0)
                     .animation(.spring(response: 0.3, dampingFraction: 0.4), value: isSecondsTapped)
+                //gestures
                     .onTapGesture {
                         isSecondsTapped = true
                         delayExecution(.now() + 0.2) { isSecondsTapped = false }
@@ -166,39 +171,6 @@ struct BubbleCell: View {
     }
     
     // MARK: - Legoes
-    private var hoursView:some View {
-        HStack {
-            circle
-            Spacer()
-        }
-        .foregroundColor(bubbleColor)
-        .opacity(hrOpacity)
-    }
-    
-    private var minutesView: some View {
-        HStack {
-            Spacer()
-            circle
-            Spacer()
-        }
-        .opacity(minOpacity)
-        .foregroundColor(bubbleColor)
-    }
-    
-    private var circle:some View {
-        Circle()
-            .frame(width: BubbleCell.edge, height: BubbleCell.edge)
-            .padding(padding)
-    }
-    
-    private var secondsView_Clear:some View {
-        HStack {
-            Spacer()
-            circle
-        }
-        .foregroundColor(.clear)
-    }
-    
     ///hundredths of a second that is :)
     private var centsView:some View {
         VStack {
@@ -243,19 +215,10 @@ struct BubbleCell: View {
         }
     }
     
-    private var secondsBackground: some View {
-        Circle().fill(bubbleColor)
+    private var circleBackground: some View {
+        Circle()
+            .fill(bubbleColor)
             .frame(width: BubbleCell.edge, height: BubbleCell.edge)
-    }
-    
-    @ViewBuilder
-    private var pauseLine:some View {
-        if bubble.state != .running {
-            Rectangle()
-                .frame(height: 10)
-                .foregroundColor(.white.opacity(0.4))
-                .padding()
-        } else { EmptyView() }
     }
     
     // MARK: -Bub

@@ -26,41 +26,41 @@ struct DeleteActionView: View {
     let buttonRadius = CGFloat(13)
     
     var body: some View {
-        ZStack {
-            Color.white.opacity(0.01)
-                .onTapGesture { showDeleteAction.show = false }
-            RoundedRectangle(cornerRadius: backgroundRadius)
-                .fill(backgroundColor)
-                .frame(width: width, height: width/ratio)
-            //                .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: 30))
-                .overlay {
-                    ZStack {
-                        VStack (spacing:6) {
-                            trashView
-                            
-                            VStack {
-                                deleteBubbleView
-                                    .onTapGesture { withAnimation {
-                                        viewModel.delete(bubble!)
-                                        showDeleteAction.show = false
-                                        predicate = nil
-                                    } }
-                                deleteHistoryView
-                                    .onTapGesture { withAnimation {
-                                        if !bubble!.sessions_.isEmpty {
-                                            viewModel.reset(bubble!)
+            ZStack {
+                Color.white.opacity(0.01)
+                    .onTapGesture { showDeleteAction.show = false }
+                RoundedRectangle(cornerRadius: backgroundRadius)
+                    .fill(backgroundColor)
+                    .frame(width: width, height: width/ratio)
+                //                .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: 30))
+                    .overlay {
+                        ZStack {
+                            VStack (spacing:6) {
+                                trashView
+                                
+                                VStack {
+                                    deleteBubbleView
+                                        .onTapGesture { withAnimation {
+                                            viewModel.delete(bubble!)
                                             showDeleteAction.show = false
-                                        }
-                                    } }
+                                            predicate = nil
+                                        } }
+                                    deleteHistoryView
+                                        .onTapGesture { withAnimation {
+                                            if !bubble!.sessions_.isEmpty {
+                                                viewModel.reset(bubble!)
+                                                showDeleteAction.show = false
+                                            }
+                                        } }
+                                }
+                                .font(.system(size: 30).weight(.medium))
+                                .padding([.bottom], 6)
                             }
-                            .font(.system(size: 30).weight(.medium))
-                            .padding([.bottom], 6)
                         }
+                        .padding()
                     }
-                    .padding()
-                }
-        }
-        .offset(x: 0, y: deleteActionOffset)
+            }
+            .offset(x: 0, y: deleteActionOffset)
     }
     
     // MARK: - Init
@@ -92,10 +92,10 @@ struct DeleteActionView: View {
     }
     
     private var deleteHistoryView: some View {
-        let historyAvailable = bubble!.sessions_.isEmpty
+        let historyAvailable = bubble?.sessions_.isEmpty ?? false
         return RoundedRectangle(cornerRadius: buttonRadius)
             .foregroundColor(historyAvailable ? bubbleColor.opacity(0.3) : bubbleColor)
-            .overlay { Text("History \(bubble!.sessions_.count)")
+            .overlay { Text("History \(bubble?.sessions_.count ?? 0)")
                 .foregroundColor(historyAvailable ? .white.opacity(0.3) :  .white) }
     }
     
