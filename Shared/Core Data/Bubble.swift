@@ -55,7 +55,7 @@ public class Bubble: NSManagedObject {
     
     deinit {
         NotificationCenter.default.removeObserver(self)
-        print("bubble \(color) deinit")
+//        print("bubble \(color) deinit")
     }
     
     enum Kind:Comparable {
@@ -109,11 +109,11 @@ extension Bubble {
             
             [weak self] _ in
             self?.updateBubbleCellComponents()
-            self?.updateSmallBubbleCellTimeComponents()
+            self?.updateSmallBubbleCellComponents()
         }
     }
     
-    ///time components: hr min sec
+    ///time components: hr min sec hundredths
     private func updateBubbleCellComponents() {
         if state != .running { return }
         guard let lastPairStart = lastPair!.start else { return }
@@ -126,8 +126,8 @@ extension Bubble {
         //since closure is executed on background thread, dispatch back to the main thread
         DispatchQueue.main.async { self.bubbleCellComponents = componentsString }
     }
-    
-    private func updateSmallBubbleCellTimeComponents() {
+    ///time components: hr min sec
+    private func updateSmallBubbleCellComponents() {
         if !shouldUpdateSmallBubbleCellTimeComponents, state != .running { return }
         guard let lastPairStart = lastPair?.start else { return }
         
