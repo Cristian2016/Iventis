@@ -75,7 +75,7 @@ struct BubbleCell: View {
             }
             hoursView
             minutesView
-            secondsView
+            secondsView_Clear
             if bubble.state != .running {
                 centsView.onTapGesture {
                     UserFeedback.singleHaptic(.heavy)
@@ -191,7 +191,7 @@ struct BubbleCell: View {
             .padding(padding)
     }
     
-    private var secondsView:some View {
+    private var secondsView_Clear:some View {
         HStack {
             Spacer()
             circle
@@ -211,6 +211,12 @@ struct BubbleCell: View {
                         .padding(-12))
                     .foregroundColor(Color("pauseStickerFontColor"))
                     .font(.system(size: 24, weight: .semibold, design: .default))
+                //animations:scale, offset and opacity
+                    .scaleEffect(isSecondsTapped && !isRunning ? 2 : 1.0)
+                    .offset(x: isSecondsTapped && !isRunning ? -20 : 0,
+                            y: isSecondsTapped && !isRunning ? -20 : 0)
+                    .opacity(isSecondsTapped && !isRunning ? 0 : 1)
+                    .animation(.spring(response: 0.3, dampingFraction: 0.2), value: isSecondsTapped)
             }
         }
         .padding(EdgeInsets(top: 0, leading: 0, bottom: 6, trailing: 8))
