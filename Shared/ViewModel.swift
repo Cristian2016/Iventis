@@ -79,6 +79,7 @@ class ViewModel: ObservableObject {
     }
     
     func toggleStart(_ bubble:Bubble) {
+        print(#function)
         if bubble.currentClock <= 0 && bubble.kind != .stopwatch  { return }
         
         switch bubble.state {

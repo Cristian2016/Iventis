@@ -3,7 +3,7 @@
 //  BubblesSwiftUI
 //
 //  Created by Cristian Lapusan on 13.04.2022.
-//
+// https://stackoverflow.com/questions/58284994/swiftui-how-to-handle-both-tap-long-press-of-button
 
 import SwiftUI
 

@@ -11,9 +11,7 @@ struct CircleButton: View {
     var body: some View {
         Button {
             
-        } label: {
-            Text("Button")
-        }
+        } label: { Text("Button") }
         .buttonStyle(CircleStyle(color:.red, edge:130, font: .system(size: 23)))
     }
 }
@@ -34,9 +32,6 @@ struct CircleStyle : ButtonStyle {
             }
             .scaleEffect(configuration.isPressed ? 0.8 : 1.0)
             .opacity(configuration.isPressed ? 0.5 : 1.0)
-            .onTapGesture {
-                UserFeedback.triggerSingleHaptic(.medium)
-            }
     }
 }
 
