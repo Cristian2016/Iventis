@@ -24,16 +24,22 @@ struct SmallBubbleCell: View {
                     Circle()
                         .frame(width: edge, height: edge)
                 }
+                
+                if bubble.smallBubbleCellComponents.hr != "0" || bubble.smallBubbleCellComponents.min != "0" {
                 HStack {
                     Spacer()
                     Circle()
                         .frame(width: edge, height: edge)
                     Spacer()
                 }
-                HStack {
-                    Circle()
-                        .frame(width: edge, height: edge)
-                    Spacer()
+                }
+                
+                if bubble.smallBubbleCellComponents.hr != "0" {
+                    HStack {
+                        Circle()
+                            .frame(width: edge, height: edge)
+                        Spacer()
+                    }
                 }
             }
             .compositingGroup()
@@ -41,17 +47,24 @@ struct SmallBubbleCell: View {
         
             //time components
             //hours
-            HStack {
-                Text(bubble.smallBubbleCellComponents.hr)
-                    .modifier(TimeComponents(edge: edge))
-                Spacer()
+            if bubble.smallBubbleCellComponents.hr != "0" {
+                HStack {
+                    Text(bubble.smallBubbleCellComponents.hr)
+                        .modifier(TimeComponents(edge: edge))
+                    Spacer()
+                }
             }
+            
             //minutes
-            HStack {
-                Spacer()
-                Text(bubble.smallBubbleCellComponents.min)
-                    .modifier(TimeComponents(edge: edge))
-                Spacer()
+            if bubble.smallBubbleCellComponents.hr != "0" || bubble.smallBubbleCellComponents.min != "0" {
+                
+                HStack {
+                    Spacer()
+                    Text(bubble.smallBubbleCellComponents.min)
+                        .modifier(TimeComponents(edge: edge))
+                    Spacer()
+                }
+                
             }
             
             //seconds

@@ -3,7 +3,7 @@
 //  Timers
 //
 //  Created by Cristian Lapusan on 04.05.2022.
-//
+// markdown https://swiftuirecipes.com/user/pages/01.blog/markdown-in-swiftui-text/preview.gif
 
 import SwiftUI
 

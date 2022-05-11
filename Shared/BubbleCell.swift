@@ -76,7 +76,7 @@ struct BubbleCell: View {
             minutesView
             secondsView
             if bubble.state != .running {
-                centsView .onTapGesture {
+                centsView.onTapGesture {
                     UserFeedback.singleHaptic(.heavy)
                     viewModel.toggleStart(bubble)
                 }
@@ -146,6 +146,10 @@ struct BubbleCell: View {
                     .font(.system(size: fontSize))
                     .foregroundColor(.white)
                     .frame(width: BubbleCell.edge, height: BubbleCell.edge)
+                    .background {
+                        Circle().fill(bubbleColor)
+                            .frame(width: BubbleCell.edge, height: BubbleCell.edge)
+                    }
                     .padding(padding)
                     .onTapGesture {
                         UserFeedback.singleHaptic(.heavy)
@@ -190,7 +194,7 @@ struct BubbleCell: View {
             Spacer()
             circle
         }
-        .foregroundColor(bubbleColor)
+        .foregroundColor(.clear)
     }
     
     ///hundredths of a second that is :)
@@ -208,6 +212,7 @@ struct BubbleCell: View {
             }
         }
         .padding(EdgeInsets(top: 0, leading: 0, bottom: 6, trailing: 8))
+        .zIndex(1)
     }
     
     private var calendarView:some View {
