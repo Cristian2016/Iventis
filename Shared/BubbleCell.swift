@@ -31,6 +31,7 @@ struct BubbleCell: View {
     
     private var isRunning:Bool { bubble.state == .running }
     @State private var isSecondsTapped = false
+    @State private var isSecondsLongPressed = false
     
     private var sec:Int = 0
     private var min:Int = 0
@@ -159,11 +160,21 @@ struct BubbleCell: View {
                     .onTapGesture {
                         isSecondsTapped = true
                         delayExecution(.now() + 0.1) { isSecondsTapped = false }
+                        
+                        //feedback
                         UserFeedback.singleHaptic(.heavy)
+                        
+                        //user intent model
                         viewModel.toggleStart(bubble)
                     }
                     .onLongPressGesture {
+                        isSecondsLongPressed = true
+                        delayExecution(.now() + 0.1) { isSecondsLongPressed = false }
+                        
+                        //feedback
                         UserFeedback.doubleHaptic(.heavy)
+                        
+                        //user intent model
                         viewModel.endSession(bubble)
                     }
             }
