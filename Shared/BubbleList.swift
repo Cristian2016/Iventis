@@ -10,6 +10,10 @@ import CoreData
 import Combine
 
 struct BubbleList: View {
+    //showing Detail or DeleteAction views
+    @State var showDeleteActionView:(show:Bool, rank:Int?) = (false, nil)
+    @State var showDetailView:(show:Bool, rank:Int?) = (false, nil)
+    
     var body: some View {
         ZStack {
             if results.isEmpty { EmptyBubbleListView() }
@@ -17,7 +21,7 @@ struct BubbleList: View {
                 ZStack {
                     if predicate != nil {
                         VStack {
-                            ExitFocusAlertView($predicate, $showDetail)
+                            ExitFocusAlertView($predicate, $showDetailView)
                                 .background(Rectangle()
                                     .fill(Color.background1)
                                     .frame(width: UIScreen.size.width)
@@ -31,15 +35,15 @@ struct BubbleList: View {
                         .ignoresSafeArea()
                     }
                     VStack {
-                        Spacer(minLength: showDetail.show ? 50 : 30) //distance from status bar
+                        Spacer(minLength: showDetailView.show ? 50 : 30) //distance from status bar
                         List {
                             ForEach(results) { section in
                                 Section {
                                     ForEach (section) {
                                         BubbleCell($0,
-                                                   $showDetail,
+                                                   $showDetailView,
                                                    $predicate,
-                                                   $showDeleteAction)
+                                                   $showDeleteActionView)
                                                 .environmentObject(viewModel)
                                     }
                                 } header: { headerTitle(for: section.id.description) }
@@ -56,17 +60,17 @@ struct BubbleList: View {
             LeftStrip($showPalette, isBubbleListEmpty: results.isEmpty)
             
             //on top of everything show DetailView (TopDetailView and BottomDetailView
-            if predicate != nil { DetailView(showDetail.rank) }
+            if predicate != nil { DetailView(showDetailView.rank) }
             
-            if deleteViewOffset != nil && showDeleteAction.show {
-                let bubble = viewModel.bubble(for: showDeleteAction.rank!)
-                DeleteActionView(bubble, $showDeleteAction, $predicate, deleteViewOffset!)
+            if deleteViewOffset != nil && showDeleteActionView.show {
+                let bubble = viewModel.bubble(for: showDeleteActionView.rank!)
+                DeleteActionView(bubble, $showDeleteActionView, $predicate, deleteViewOffset!)
                     .environmentObject(viewModel) //pass viewmodel as well
             }
             
             PaletteView($showPalette).environmentObject(viewModel)
         }
-        .onPreferenceChange(BubbleCellLowKey.self) { new in
+        .onPreferenceChange(BubbleCellLow_Key.self) { new in
             if new.frame == .zero { return }
             self.deleteViewOffset = compute_YOffset(for: new.frame)
         }
@@ -96,9 +100,7 @@ struct BubbleList: View {
     
     // MARK: -
     @State private var isActive = true
-    @State var showDetail:(show:Bool, rank:Int?) = (false, nil)
     @State var showPalette = false
-    @State var showDeleteAction:(show:Bool, rank:Int?) = (false, nil)
     
     // MARK: -
     init(_ predicate:Binding<NSPredicate?>) {
@@ -175,7 +177,7 @@ struct ContentView_Previews: PreviewProvider {
 
 ///bubbleCell reports its frame so that deleteActionView knows how to position itself
 ///CellLow is Bubble.(originY + height)
-struct BubbleCellLowKey:PreferenceKey {
+struct BubbleCellLow_Key:PreferenceKey {
     struct RankFrame:Equatable {
         let rank:Int
         let frame:CGRect

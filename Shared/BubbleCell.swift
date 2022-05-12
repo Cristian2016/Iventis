@@ -8,15 +8,9 @@
 import SwiftUI
 
 struct BubbleCell: View {
-    // MARK: - Modifiers
-    struct TextModifier : ViewModifier {
-        func body(content: Content) -> some View {
-            content
-                .font(.system(size: Ratio.bubbleToFontSize * UIScreen.size.width * 0.85))
-                .foregroundColor(.white)
-                .frame(width: BubbleCell.edge, height: BubbleCell.edge)
-        }
-    }
+    //showing Detail or DeleteAction views
+    @Binding var showDeleteActionView:(show:Bool, rank:Int?)
+    @Binding var showDetailView:(show:Bool, rank:Int?)
     
     @EnvironmentObject private var viewModel:ViewModel
     
@@ -25,9 +19,6 @@ struct BubbleCell: View {
     
     @Binding var predicate:NSPredicate?
     @State private var scale: CGFloat = 1.4
-    
-    @Binding var showDetail:(show:Bool, rank:Int?)
-    @Binding var showDeleteAction:(show:Bool, rank:Int?)
     
     private var isRunning:Bool { bubble.state == .running }
     @State private var isSecondsTapped = false
@@ -42,9 +33,9 @@ struct BubbleCell: View {
          _ predicate:Binding<NSPredicate?>,
          _ showDeleteAction:Binding<(show:Bool, rank:Int?)>) {
         _bubble = StateObject(wrappedValue: bubble)
-        _showDetail = Binding(projectedValue: showDetail)
+        _showDetailView = Binding(projectedValue: showDetail)
         _predicate = Binding(projectedValue: predicate)
-        _showDeleteAction = Binding(projectedValue: showDeleteAction)
+        _showDeleteActionView = Binding(projectedValue: showDeleteAction)
         self.bubbleColor = Color.bubble(for: bubble.color!)
         
         switch bubble.kind {
@@ -76,13 +67,13 @@ struct BubbleCell: View {
     // MARK: -
     var body: some View {
         ZStack {
-            let putTransparentGeometryReaderView = condition() || showDetail.show
+            let putTransparentGeometryReaderView = condition() || showDetailView.show
             if putTransparentGeometryReaderView {
                 cellLowEmitterView
                     .background {
                         GeometryReader {
-                            let value = BubbleCellLowKey.RankFrame(rank: Int(bubble.rank), frame: $0.frame(in: .global))
-                            Color.clear.preference(key: BubbleCellLowKey.self, value: value)
+                            let value = BubbleCellLow_Key.RankFrame(rank: Int(bubble.rank), frame: $0.frame(in: .global))
+                            Color.clear.preference(key: BubbleCellLow_Key.self, value: value)
                         }
                     }
             }
@@ -113,7 +104,7 @@ struct BubbleCell: View {
         }
         .swipeActions(edge: .trailing, allowsFullSwipe: true) {
             //delete
-            Button { showDeleteAction = (true, Int(bubble.rank))}
+            Button { showDeleteActionView = (true, Int(bubble.rank))}
         label: { Label { Text("Delete") }
             icon: { Image.trash } }.tint(.red)
             
@@ -249,13 +240,8 @@ struct BubbleCell: View {
     // MARK: -Bub
     var tapGesture: some Gesture {
         TapGesture(count: 2)
-            .onEnded {
-                print("Double tap")
-            }
-            .simultaneously(with: TapGesture(count: 1)
-                                .onEnded {
-                                    print("Single Tap")
-                                })
+            .onEnded { print("Double tap") }
+            .simultaneously(with: TapGesture().onEnded { print("Single Tap") })
     }
     
     static let dic:[CGFloat:CGFloat] = [ /* 12mini */728:140, /* 8 */667:150,  /* ipdo */568:125,  /* 13 pro max */926:163,  /* 13 pro */844:147,  /* 11 pro max */896:158, 812:130,  /* 8max */736:167]
@@ -268,15 +254,27 @@ struct BubbleCell: View {
         
         //%i integer, %f float, %@ object??
         predicate = condition ? NSPredicate(format: "rank == %i", bubble.rank) : nil
-        showDetail = condition ? (true, Int(bubble.rank)) : (false, nil)
+        showDetailView = condition ? (true, Int(bubble.rank)) : (false, nil)
         
         //ask viewModel
         let rank = Int(bubble.rank)
-        viewModel.userTogglesDetail(rank, showDetail.show)
+        viewModel.userTogglesDetail(rank, showDetailView.show)
     }
     
     private func condition() -> Bool {
-        showDeleteAction.show && bubble.rank == showDeleteAction.rank!
+        showDeleteActionView.show && bubble.rank == showDeleteActionView.rank!
+    }
+}
+
+// MARK: - Modifiers
+extension BubbleCell {
+    struct TextModifier : ViewModifier {
+        func body(content: Content) -> some View {
+            content
+                .font(.system(size: Ratio.bubbleToFontSize * UIScreen.size.width * 0.85))
+                .foregroundColor(.white)
+                .frame(width: BubbleCell.edge, height: BubbleCell.edge)
+        }
     }
 }
 
