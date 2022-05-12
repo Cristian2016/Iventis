@@ -25,12 +25,8 @@ struct BubbleCell: View {
     
     @Binding var predicate:NSPredicate?
     @State private var scale: CGFloat = 1.4
-    @State private var broadcastCellLow = false
     
-    @Binding var showDetail:(show:Bool, rank:Int?) { willSet {
-        //false is the old value because I use willSet. broacast if false, do not broadcast if showDetail true
-        broadcastCellLow = (showDetail.show == false) ? true : false
-    }}
+    @Binding var showDetail:(show:Bool, rank:Int?)
     @Binding var showDeleteAction:(show:Bool, rank:Int?)
     
     private var isRunning:Bool { bubble.state == .running }
@@ -80,8 +76,8 @@ struct BubbleCell: View {
     // MARK: -
     var body: some View {
         ZStack {
-            let putTransparentGeometryReaderView = condition() || broadcastCellLow
-            if putTransparentGeometryReaderView || broadcastCellLow {
+            let putTransparentGeometryReaderView = condition() || showDetail.show
+            if putTransparentGeometryReaderView {
                 cellLowEmitterView
                     .background {
                         GeometryReader {
