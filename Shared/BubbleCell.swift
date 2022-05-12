@@ -130,6 +130,10 @@ struct BubbleCell: View {
                 //background
                     .background { circleBackground.zIndex(-2) }
                     .opacity(hrOpacity)
+                //animations
+                    .scaleEffect(isSecondsLongPressed ? 0.2 : 1.0)
+                    .offset(x: isSecondsLongPressed ? 20 : 0.0, y: 0)
+                    .animation(.secondsLongPressed.delay(0.2), value: isSecondsLongPressed)
                 //gestures
                     .onTapGesture(count: 2) { print("edit duration") }
                     .onTapGesture { print("add note") }
@@ -141,6 +145,10 @@ struct BubbleCell: View {
                 //background
                     .background { circleBackground.zIndex(-1) }
                     .opacity(minOpacity)
+                //animations
+                    .scaleEffect(isSecondsLongPressed ? 0.2 : 1.0)
+                    .offset(x: isSecondsLongPressed ? 10 : 0.0, y: 0)
+                    .animation(.secondsLongPressed.delay(0.1), value: isSecondsLongPressed)
                 //gestures
                     .onTapGesture { withAnimation {
                         toggleDetailView()
@@ -153,9 +161,12 @@ struct BubbleCell: View {
                     .modifier(TextModifier())
                 //background
                     .background { circleBackground }
-                //animations
+                //animations secondsTapped
                     .scaleEffect(isSecondsTapped ? 0.6 : 1.0)
                     .animation(.secondsTapped, value: isSecondsTapped)
+                //animations seconds long pressed
+                    .scaleEffect(isSecondsLongPressed ? 0.2 : 1.0)
+                    .animation(.secondsLongPressed, value: isSecondsLongPressed)
                 //gestures
                     .onTapGesture {
                         isSecondsTapped = true

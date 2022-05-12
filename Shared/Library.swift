@@ -232,4 +232,5 @@ extension DateFormatter {
 
 extension Animation {
     static let secondsTapped = Animation.spring(response: 0.3, dampingFraction: 0.4)
+    static let secondsLongPressed = Animation.spring(response: 0.2, dampingFraction: 0.6)
 }
