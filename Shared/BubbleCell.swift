@@ -25,8 +25,12 @@ struct BubbleCell: View {
     
     @Binding var predicate:NSPredicate?
     @State private var scale: CGFloat = 1.4
+    @State private var broadcastCellLow = false
     
-    @Binding var showDetail:(show:Bool, rank:Int?)
+    @Binding var showDetail:(show:Bool, rank:Int?) { willSet {
+        //false is the old value because I use willSet. broacast if false, do not broadcast if showDetail true
+        broadcastCellLow = (showDetail.show == false) ? true : false
+    }}
     @Binding var showDeleteAction:(show:Bool, rank:Int?)
     
     private var isRunning:Bool { bubble.state == .running }
@@ -69,13 +73,16 @@ struct BubbleCell: View {
         bubble.bubbleCellComponents.min > "0" || bubble.bubbleCellComponents.hr > "0" ? 1 : 0.001
     }
     private var hrOpacity:Double { bubble.bubbleCellComponents.hr > "0" ? 1 : 0.001 }
+    
+    ///added to bubbleCell only if cellLow value is needed. ex: to know how to position DeleteActionView
+    private var cellLowEmitterView:some View { Circle().fill(Color.clear) }
         
     // MARK: -
     var body: some View {
         ZStack {
-            let putTransparentGeometryReaderView = condition()
-            if putTransparentGeometryReaderView {
-                Circle().fill(Color.clear)
+            let putTransparentGeometryReaderView = condition() || broadcastCellLow
+            if putTransparentGeometryReaderView || broadcastCellLow {
+                cellLowEmitterView
                     .background {
                         GeometryReader {
                             let value = BubbleCellLowKey.RankFrame(rank: Int(bubble.rank), frame: $0.frame(in: .global))

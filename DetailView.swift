@@ -28,9 +28,7 @@ struct DetailView: View {
     
     var body: some View {
         ZStack {
-            if sessions.isEmpty {
-                EmptyHistoryAlertView()
-            }
+            if sessions.isEmpty { EmptyHistoryAlertView() }
             VStack {
                 Spacer()
                 TopDetailView(rank)

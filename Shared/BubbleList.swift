@@ -183,6 +183,9 @@ struct BubbleCellLowKey:PreferenceKey {
     
     static var defaultValue = RankFrame(rank: -1, frame: .zero)
     static func reduce(value: inout RankFrame, nextValue: () -> RankFrame) {
-        if value.frame == .zero { value = nextValue() }
+        if value.frame == .zero {
+            value = nextValue()
+            print("cellLow \(value)")
+        }
     }
 }
