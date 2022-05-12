@@ -180,7 +180,7 @@ struct BubbleCell: View {
                     }
                     .onLongPressGesture {
                         isSecondsLongPressed = true
-                        delayExecution(.now() + 0.1) { isSecondsLongPressed = false }
+                        delayExecution(.now() + 0.25) { isSecondsLongPressed = false }
                         
                         //feedback
                         UserFeedback.doubleHaptic(.heavy)
