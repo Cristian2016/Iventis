@@ -154,7 +154,7 @@ struct BubbleCell: View {
                     .background { circleBackground }
                 //animations
                     .scaleEffect(isSecondsTapped ? 0.6 : 1.0)
-                    .animation(.spring(response: 0.3, dampingFraction: 0.4), value: isSecondsTapped)
+                    .animation(.secondsTapped, value: isSecondsTapped)
                 //gestures
                     .onTapGesture {
                         isSecondsTapped = true
