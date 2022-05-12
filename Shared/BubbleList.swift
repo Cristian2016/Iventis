@@ -11,8 +11,8 @@ import Combine
 
 struct BubbleList: View {
     //showing Detail or DeleteAction views
-    @State var showDeleteActionView:Int? = nil //bubble.rank
-    @State var showDetailView:Int? = nil //bubble.rank
+    @State var showDeleteActionView_BubbleRank:Int? = nil //bubble.rank
+    @State var showDetailView_BubbleRank:Int? = nil //bubble.rank
     
     var body: some View {
         ZStack {
@@ -21,7 +21,7 @@ struct BubbleList: View {
                 ZStack {
                     if predicate != nil {
                         VStack {
-                            ExitFocusAlertView($predicate, $showDetailView)
+                            ExitFocusAlertView($predicate, $showDetailView_BubbleRank)
                                 .background(Rectangle()
                                     .fill(Color.background1)
                                     .frame(width: UIScreen.size.width)
@@ -35,15 +35,15 @@ struct BubbleList: View {
                         .ignoresSafeArea()
                     }
                     VStack {
-                        Spacer(minLength: showDetailView != nil ? 50 : 30) //distance from status bar
+                        Spacer(minLength: showDetailView_BubbleRank != nil ? 50 : 30) //distance from status bar
                         List {
                             ForEach(results) { section in
                                 Section {
                                     ForEach (section) {
                                         BubbleCell($0,
-                                                   $showDetailView,
+                                                   $showDetailView_BubbleRank,
                                                    $predicate,
-                                                   $showDeleteActionView)
+                                                   $showDeleteActionView_BubbleRank)
                                                 .environmentObject(viewModel)
                                     }
                                 } header: { headerTitle(for: section.id.description) }
@@ -60,11 +60,11 @@ struct BubbleList: View {
             LeftStrip($showPalette, isBubbleListEmpty: results.isEmpty)
             
             //on top of everything show DetailView (TopDetailView and BottomDetailView
-            if predicate != nil { DetailView(showDetailView) }
+            if predicate != nil { DetailView(showDetailView_BubbleRank) }
             
-            if deleteViewOffset != nil && showDeleteActionView != nil {
-                let bubble = viewModel.bubble(for: showDeleteActionView!)
-                DeleteActionView(bubble, $showDeleteActionView, $predicate, deleteViewOffset!)
+            if deleteViewOffset != nil && showDeleteActionView_BubbleRank != nil {
+                let bubble = viewModel.bubble(for: showDeleteActionView_BubbleRank!)
+                DeleteActionView(bubble, $showDeleteActionView_BubbleRank, $predicate, deleteViewOffset!)
                     .environmentObject(viewModel) //pass viewmodel as well
             }
             

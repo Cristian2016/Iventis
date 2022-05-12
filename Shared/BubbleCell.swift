@@ -9,8 +9,8 @@ import SwiftUI
 
 struct BubbleCell: View {
     //showing Detail or DeleteAction views
-    @Binding var showDeleteActionView:Int? //bubble.rank
-    @Binding var showDetailView:Int?
+    @Binding var showDeleteActionView_bubbleRank:Int? //bubble.rank
+    @Binding var showDetailView_BubbleRank:Int?
     
     @EnvironmentObject private var viewModel:ViewModel
     
@@ -29,12 +29,12 @@ struct BubbleCell: View {
     private var hr:Int = 0
     
     init(_ bubble:Bubble,
-         _ showDetailView:Binding<Int?>,
+         _ showDetailView_BubbleRank:Binding<Int?>,
          _ predicate:Binding<NSPredicate?>,
-         _ showDeleteActionView:Binding<Int?>) {
+         _ showDeleteActionView_BubbleRank:Binding<Int?>) {
         
-        _showDeleteActionView = Binding(projectedValue: showDeleteActionView)
-        _showDetailView = Binding(projectedValue: showDetailView)
+        _showDeleteActionView_bubbleRank = Binding(projectedValue: showDeleteActionView_BubbleRank)
+        _showDetailView_BubbleRank = Binding(projectedValue: showDetailView_BubbleRank)
         
         _bubble = StateObject(wrappedValue: bubble)
         _predicate = Binding(projectedValue: predicate)
@@ -70,7 +70,7 @@ struct BubbleCell: View {
     // MARK: -
     var body: some View {
         ZStack {
-            let putTransparentGeometryReaderView = condition() || showDetailView != nil
+            let putTransparentGeometryReaderView = condition() || showDetailView_BubbleRank != nil
             if putTransparentGeometryReaderView {
                 cellLowEmitterView
                     .background {
@@ -107,7 +107,7 @@ struct BubbleCell: View {
         }
         .swipeActions(edge: .trailing, allowsFullSwipe: true) {
             //delete
-            Button { showDeleteActionView = Int(bubble.rank)}
+            Button { showDeleteActionView_bubbleRank = Int(bubble.rank)}
         label: { Label { Text("Delete") }
             icon: { Image.trash } }.tint(.red)
             
@@ -257,7 +257,7 @@ struct BubbleCell: View {
         
         //%i integer, %f float, %@ object??
         predicate = condition ? NSPredicate(format: "rank == %i", bubble.rank) : nil
-        showDetailView = condition ? Int(bubble.rank) : nil
+        showDetailView_BubbleRank = condition ? Int(bubble.rank) : nil
         
         //ask viewModel
         let rank = Int(bubble.rank)
@@ -265,7 +265,7 @@ struct BubbleCell: View {
     }
     
     private func condition() -> Bool {
-        guard let showDeleteActionView = showDeleteActionView else { return false }
+        guard let showDeleteActionView = showDeleteActionView_bubbleRank else { return false }
         return bubble.rank == showDeleteActionView
     }
 }

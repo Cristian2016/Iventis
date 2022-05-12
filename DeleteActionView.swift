@@ -12,7 +12,7 @@ struct DeleteActionView: View {
     let bubble:Bubble?
     let bubbleColor:Color
     
-    @Binding var showDeleteActionView:Int? //the rank of the bubble
+    @Binding var showDeleteActionView_BubbleRank:Int? //the rank of the bubble
     @Binding var predicate:NSPredicate?
     @EnvironmentObject private var viewModel:ViewModel
     let deleteActionOffset:CGFloat //I used the preference key approach
@@ -28,7 +28,7 @@ struct DeleteActionView: View {
     var body: some View {
             ZStack {
                 Color.white.opacity(0.01)
-                    .onTapGesture { showDeleteActionView = nil }
+                    .onTapGesture { showDeleteActionView_BubbleRank = nil }
                 RoundedRectangle(cornerRadius: backgroundRadius)
                     .fill(backgroundColor)
                     .frame(width: width, height: width/ratio)
@@ -42,14 +42,14 @@ struct DeleteActionView: View {
                                     deleteBubbleView
                                         .onTapGesture { withAnimation {
                                             viewModel.delete(bubble!)
-                                            showDeleteActionView = nil
+                                            showDeleteActionView_BubbleRank = nil
                                             predicate = nil
                                         } }
                                     deleteHistoryView
                                         .onTapGesture { withAnimation {
                                             if !bubble!.sessions_.isEmpty {
                                                 viewModel.reset(bubble!)
-                                                showDeleteActionView = nil
+                                                showDeleteActionView_BubbleRank = nil
                                             }
                                         } }
                                 }
@@ -65,12 +65,12 @@ struct DeleteActionView: View {
     
     // MARK: - Init
     init(_ bubble:Bubble?,
-         _ showDeleteActionView:Binding<Int?>,
+         _ showDeleteActionView_BubbleRank:Binding<Int?>,
          _ predicate:Binding<NSPredicate?>,
          _ deleteActionOffset:CGFloat) {
                         
         self.bubbleColor = Color.bubble(for: bubble?.color ?? "mint")
-        _showDeleteActionView = Binding(projectedValue: showDeleteActionView)
+        _showDeleteActionView_BubbleRank = Binding(projectedValue: showDeleteActionView_BubbleRank)
         self.bubble = bubble
         _predicate = Binding(projectedValue: predicate)
         self.deleteActionOffset = deleteActionOffset
