@@ -54,7 +54,6 @@ struct BubbleList: View {
                     }
                     .ignoresSafeArea()
                 }
-                
             }
             
             LeftStrip($showPalette, isBubbleListEmpty: results.isEmpty)
@@ -62,17 +61,19 @@ struct BubbleList: View {
             //on top of everything show DetailView (TopDetailView and BottomDetailView
             if predicate != nil { DetailView(showDetailView_BubbleRank) }
             
-            if deleteViewOffset != nil && showDeleteActionView_BubbleRank != nil {
+            if deleteActionViewYOffset != nil && showDeleteActionView_BubbleRank != nil {
                 let bubble = viewModel.bubble(for: showDeleteActionView_BubbleRank!)
-                DeleteActionView(bubble, $showDeleteActionView_BubbleRank, $predicate, deleteViewOffset!)
+                DeleteActionView(bubble, $showDeleteActionView_BubbleRank, $predicate, deleteActionViewYOffset!)
                     .environmentObject(viewModel) //pass viewmodel as well
             }
             
             PaletteView($showPalette).environmentObject(viewModel)
         }
         .onPreferenceChange(BubbleCellLow_Key.self) { new in
-            if new.frame == .zero { return }
-            self.deleteViewOffset = compute_YOffset(for: new.frame)
+            let frame = new.frame
+            if frame == .zero { return }
+            
+            self.deleteActionViewYOffset = compute_YOffset(for: new.frame)
         }
         .onChange(of: scenePhase, perform: {
             switch $0 {
@@ -93,7 +94,7 @@ struct BubbleList: View {
     @Environment(\.managedObjectContext) private var viewContext
     @Environment(\.scenePhase) var scenePhase
     
-    @State private var deleteViewOffset:CGFloat? = nil
+    @State private var deleteActionViewYOffset:CGFloat? = nil
     @StateObject private var viewModel = ViewModel()
     @SectionedFetchRequest var results:SectionedFetchResults<Bool, Bubble>
     @Binding var predicate:NSPredicate?

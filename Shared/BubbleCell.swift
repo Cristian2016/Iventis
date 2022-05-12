@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct BubbleCell: View {
+    ///added to bubbleCell only if cellLow value is needed. ex: to know how to position DeleteActionView
+    private var cellLowEmitterView:some View { Circle().fill(Color.clear) }
     //showing Detail or DeleteAction views
     @Binding var showDeleteActionView_bubbleRank:Int? //bubble.rank
     @Binding var showDetailView_BubbleRank:Int?
@@ -63,14 +65,11 @@ struct BubbleCell: View {
         bubble.bubbleCellComponents.min > "0" || bubble.bubbleCellComponents.hr > "0" ? 1 : 0.001
     }
     private var hrOpacity:Double { bubble.bubbleCellComponents.hr > "0" ? 1 : 0.001 }
-    
-    ///added to bubbleCell only if cellLow value is needed. ex: to know how to position DeleteActionView
-    private var cellLowEmitterView:some View { Circle().fill(Color.clear) }
         
     // MARK: -
     var body: some View {
         ZStack {
-            let putTransparentGeometryReaderView = condition() || showDetailView_BubbleRank != nil
+            let putTransparentGeometryReaderView = showDeleteActionView || showDetailView
             if putTransparentGeometryReaderView {
                 cellLowEmitterView
                     .background {
@@ -253,21 +252,23 @@ struct BubbleCell: View {
     ///show/hide DetailView
     fileprivate func toggleDetailView() {
         UserFeedback.singleHaptic(.medium)
-        let condition = predicate == nil
+        let predicateNotSet = predicate == nil
         
         //%i integer, %f float, %@ object??
-        predicate = condition ? NSPredicate(format: "rank == %i", bubble.rank) : nil
-        showDetailView_BubbleRank = condition ? Int(bubble.rank) : nil
+        predicate = predicateNotSet ? NSPredicate(format: "rank == %i", bubble.rank) : nil
+        showDetailView_BubbleRank = predicateNotSet ? Int(bubble.rank) : nil
         
         //ask viewModel
         let rank = Int(bubble.rank)
         viewModel.userTogglesDetail(rank)
     }
     
-    private func condition() -> Bool {
+    private var showDeleteActionView:Bool {
         guard let showDeleteActionView = showDeleteActionView_bubbleRank else { return false }
         return bubble.rank == showDeleteActionView
     }
+    
+    private var showDetailView:Bool { showDetailView_BubbleRank != nil }
 }
 
 // MARK: - Modifiers
