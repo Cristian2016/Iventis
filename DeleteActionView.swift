@@ -9,10 +9,11 @@ import SwiftUI
 
 ///same size on each device
 struct DeleteActionView: View {
+    @Binding var showDeleteActionView_BubbleRank:Int? //the rank of the bubble
+    
     let bubble:Bubble?
     let bubbleColor:Color
     
-    @Binding var showDeleteActionView_BubbleRank:Int? //the rank of the bubble
     @Binding var predicate:NSPredicate?
     @EnvironmentObject private var viewModel:ViewModel
     let deleteActionOffset:CGFloat //I used the preference key approach
