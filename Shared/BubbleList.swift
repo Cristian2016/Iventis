@@ -11,7 +11,7 @@ import Combine
 
 struct BubbleList: View {
     //showing Detail or DeleteAction views
-    @State var showDeleteActionView:(show:Bool, rank:Int?) = (false, nil)
+    @State var showDeleteActionView:Int? = nil
     @State var showDetailView:(show:Bool, rank:Int?) = (false, nil)
     
     var body: some View {
@@ -62,8 +62,8 @@ struct BubbleList: View {
             //on top of everything show DetailView (TopDetailView and BottomDetailView
             if predicate != nil { DetailView(showDetailView.rank) }
             
-            if deleteViewOffset != nil && showDeleteActionView.show {
-                let bubble = viewModel.bubble(for: showDeleteActionView.rank!)
+            if deleteViewOffset != nil && showDeleteActionView != nil {
+                let bubble = viewModel.bubble(for: showDeleteActionView!)
                 DeleteActionView(bubble, $showDeleteActionView, $predicate, deleteViewOffset!)
                     .environmentObject(viewModel) //pass viewmodel as well
             }

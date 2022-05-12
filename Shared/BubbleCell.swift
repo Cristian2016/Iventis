@@ -9,7 +9,7 @@ import SwiftUI
 
 struct BubbleCell: View {
     //showing Detail or DeleteAction views
-    @Binding var showDeleteActionView:(show:Bool, rank:Int?)
+    @Binding var showDeleteActionView:Int?
     @Binding var showDetailView:(show:Bool, rank:Int?)
     
     @EnvironmentObject private var viewModel:ViewModel
@@ -31,11 +31,12 @@ struct BubbleCell: View {
     init(_ bubble:Bubble,
          _ showDetail:Binding<(show:Bool, rank:Int?)>,
          _ predicate:Binding<NSPredicate?>,
-         _ showDeleteAction:Binding<(show:Bool, rank:Int?)>) {
+         _ showDeleteActionView:Binding<Int?>) {
+        
         _bubble = StateObject(wrappedValue: bubble)
         _showDetailView = Binding(projectedValue: showDetail)
         _predicate = Binding(projectedValue: predicate)
-        _showDeleteActionView = Binding(projectedValue: showDeleteAction)
+        _showDeleteActionView = Binding(projectedValue: showDeleteActionView)
         self.bubbleColor = Color.bubble(for: bubble.color!)
         
         switch bubble.kind {
@@ -104,7 +105,7 @@ struct BubbleCell: View {
         }
         .swipeActions(edge: .trailing, allowsFullSwipe: true) {
             //delete
-            Button { showDeleteActionView = (true, Int(bubble.rank))}
+            Button { showDeleteActionView = Int(bubble.rank)}
         label: { Label { Text("Delete") }
             icon: { Image.trash } }.tint(.red)
             
@@ -262,7 +263,8 @@ struct BubbleCell: View {
     }
     
     private func condition() -> Bool {
-        showDeleteActionView.show && bubble.rank == showDeleteActionView.rank!
+        guard let showDeleteActionView = showDeleteActionView else { return false }
+        return bubble.rank == showDeleteActionView
     }
 }
 
