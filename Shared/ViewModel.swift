@@ -154,12 +154,12 @@ class ViewModel: ObservableObject {
         try? PersistenceController.shared.viewContext.save()
     }
     
-    func userTogglesDetail(_ rank:Int?, _ show:Bool) {
+    func userTogglesDetail(_ rank:Int?) {
         //identify bubble using rank
         //ask bubble to start/stop updating smallBubbleCellTimeComponents
         guard
             let bubble = bubble(for: rank) else { return }
-        bubble.shouldUpdateSmallBubbleCell = show
+        bubble.shouldUpdateSmallBubbleCell = rank != nil
     }
     
     // MARK: -

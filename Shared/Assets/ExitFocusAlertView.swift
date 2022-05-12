@@ -9,11 +9,11 @@ import SwiftUI
 
 struct ExitFocusAlertView: View {
     @Binding var predicate:NSPredicate?
-    @Binding var showDetail:(show:Bool, rank:Int?)
+    @Binding var showDetailView:Int?
     
-    init(_ predicate:Binding<NSPredicate?>, _ showDetail:Binding<(show:Bool, rank:Int?)>) {
+    init(_ predicate:Binding<NSPredicate?>, _ showDetailView:Binding<Int?>) {
         _predicate = Binding(projectedValue: predicate)
-        _showDetail = Binding(projectedValue: showDetail)
+        _showDetailView = Binding(projectedValue: showDetailView)
     }
     
     var body: some View {
@@ -21,7 +21,7 @@ struct ExitFocusAlertView: View {
             withAnimation {
                 UserFeedback.singleHaptic(.medium)
                 predicate = nil
-                showDetail.show = false
+                showDetailView = nil
             }
         } label: { Label { Text("Exit Focus").font(.title2) }
             icon: { Image.eyeSlash.font(.title) } }

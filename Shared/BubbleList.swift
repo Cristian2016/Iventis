@@ -11,8 +11,8 @@ import Combine
 
 struct BubbleList: View {
     //showing Detail or DeleteAction views
-    @State var showDeleteActionView:Int? = nil
-    @State var showDetailView:(show:Bool, rank:Int?) = (false, nil)
+    @State var showDeleteActionView:Int? = nil //bubble.rank
+    @State var showDetailView:Int? = nil //bubble.rank
     
     var body: some View {
         ZStack {
@@ -35,7 +35,7 @@ struct BubbleList: View {
                         .ignoresSafeArea()
                     }
                     VStack {
-                        Spacer(minLength: showDetailView.show ? 50 : 30) //distance from status bar
+                        Spacer(minLength: showDetailView != nil ? 50 : 30) //distance from status bar
                         List {
                             ForEach(results) { section in
                                 Section {
@@ -60,7 +60,7 @@ struct BubbleList: View {
             LeftStrip($showPalette, isBubbleListEmpty: results.isEmpty)
             
             //on top of everything show DetailView (TopDetailView and BottomDetailView
-            if predicate != nil { DetailView(showDetailView.rank) }
+            if predicate != nil { DetailView(showDetailView) }
             
             if deleteViewOffset != nil && showDeleteActionView != nil {
                 let bubble = viewModel.bubble(for: showDeleteActionView!)

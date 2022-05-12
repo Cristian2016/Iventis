@@ -9,8 +9,8 @@ import SwiftUI
 
 struct BubbleCell: View {
     //showing Detail or DeleteAction views
-    @Binding var showDeleteActionView:Int?
-    @Binding var showDetailView:(show:Bool, rank:Int?)
+    @Binding var showDeleteActionView:Int? //bubble.rank
+    @Binding var showDetailView:Int?
     
     @EnvironmentObject private var viewModel:ViewModel
     
@@ -29,14 +29,16 @@ struct BubbleCell: View {
     private var hr:Int = 0
     
     init(_ bubble:Bubble,
-         _ showDetail:Binding<(show:Bool, rank:Int?)>,
+         _ showDetailView:Binding<Int?>,
          _ predicate:Binding<NSPredicate?>,
          _ showDeleteActionView:Binding<Int?>) {
         
-        _bubble = StateObject(wrappedValue: bubble)
-        _showDetailView = Binding(projectedValue: showDetail)
-        _predicate = Binding(projectedValue: predicate)
         _showDeleteActionView = Binding(projectedValue: showDeleteActionView)
+        _showDetailView = Binding(projectedValue: showDetailView)
+        
+        _bubble = StateObject(wrappedValue: bubble)
+        _predicate = Binding(projectedValue: predicate)
+        
         self.bubbleColor = Color.bubble(for: bubble.color!)
         
         switch bubble.kind {
@@ -68,7 +70,7 @@ struct BubbleCell: View {
     // MARK: -
     var body: some View {
         ZStack {
-            let putTransparentGeometryReaderView = condition() || showDetailView.show
+            let putTransparentGeometryReaderView = condition() || showDetailView != nil
             if putTransparentGeometryReaderView {
                 cellLowEmitterView
                     .background {
@@ -255,11 +257,11 @@ struct BubbleCell: View {
         
         //%i integer, %f float, %@ object??
         predicate = condition ? NSPredicate(format: "rank == %i", bubble.rank) : nil
-        showDetailView = condition ? (true, Int(bubble.rank)) : (false, nil)
+        showDetailView = condition ? Int(bubble.rank) : nil
         
         //ask viewModel
         let rank = Int(bubble.rank)
-        viewModel.userTogglesDetail(rank, showDetailView.show)
+        viewModel.userTogglesDetail(rank)
     }
     
     private func condition() -> Bool {
