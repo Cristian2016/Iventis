@@ -122,7 +122,7 @@ struct BubbleCell: View {
     
     private var timeComponentsViews:some View {
         ZStack {
-            //hours
+            //HOURS
             Push(.leading) {
                 Text(bubble.bubbleCellComponents.hr)
                     .modifier(TextModifier())
@@ -133,7 +133,7 @@ struct BubbleCell: View {
                     .onTapGesture(count: 2) { print("edit duration") }
                     .onTapGesture { print("add note") }
             }
-            //minutes
+            //MINUTES
             Push(.middle) {
                 Text(bubble.bubbleCellComponents.min)
                     .modifier(TextModifier())
@@ -146,7 +146,7 @@ struct BubbleCell: View {
                         //also viewModel.userTogglesDetail called within toggleDetailView()
                     } }
             }
-            //seconds
+            //SECONDS
             Push(.trailing) {
                 Text(bubble.bubbleCellComponents.sec)
                     .modifier(TextModifier())
@@ -158,7 +158,7 @@ struct BubbleCell: View {
                 //gestures
                     .onTapGesture {
                         isSecondsTapped = true
-                        delayExecution(.now() + 0.2) { isSecondsTapped = false }
+                        delayExecution(.now() + 0.1) { isSecondsTapped = false }
                         UserFeedback.singleHaptic(.heavy)
                         viewModel.toggleStart(bubble)
                     }

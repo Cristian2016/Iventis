@@ -8,7 +8,7 @@
 import SwiftUI
 
 ///it's the small bubble cell in the PairCell of BottomDetaiulView that only shows up when bubble is running and detailMode is active
-struct SmallBubbleCell: View {
+struct SmallBubbleView: View {
     
     @StateObject var bubble:Bubble
     
