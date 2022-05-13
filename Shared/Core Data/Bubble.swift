@@ -31,9 +31,7 @@ public class Bubble: NSManagedObject {
         }
     }
     
-    var sessions_:[Session] {
-        sessions?.array as? [Session] ?? []
-    }
+    var sessions_:[Session] { sessions?.array as? [Session] ?? [] }
     
     ///lastSession is not always currentSession
     var lastSession:Session? { sessions_.last }
@@ -42,12 +40,12 @@ public class Bubble: NSManagedObject {
     
     // MARK: -
     ///what bubbleCell displays. ex: "12"hr "34"min "59"sec
-    @Published var bubbleCellComponents
+    @Published var bubbleCell_Components
     = Float.TimeComponentsAsStrings(hr: "0", min: "0", sec: "0", cents: "00")
     { willSet { self.objectWillChange.send() }}
     
     ///updates elapsed time inside PairCell. what smallBubbleCell displays. ex: "0"hr "12"min "24"sec
-    @Published var smallBubbleCellComponents
+    @Published var smallBubbleView_Components
     = Float.TimeComponentsAsStrings(hr: "0", min: "0", sec: "0", cents: "00")
     { willSet { self.objectWillChange.send() }}
         
@@ -81,7 +79,7 @@ public class Bubble: NSManagedObject {
     
     //shouldUpdateSmallBubbleCellTimeComponents
     var shouldUpdateSmallBubbleCell = false {didSet{
-        if !shouldUpdateSmallBubbleCell { smallBubbleCellComponents = Float.TimeComponentsAsStrings(hr: "0", min: "0", sec: "0", cents: "0") }
+        if !shouldUpdateSmallBubbleCell { smallBubbleView_Components = Float.TimeComponentsAsStrings(hr: "0", min: "0", sec: "0", cents: "0") }
     }}
 }
 
@@ -100,7 +98,7 @@ extension Bubble {
                     guard let self = self else { return }
                                                             
                     let componentsString = self.currentClock.timComponentsAsStrings
-                    DispatchQueue.main.async { self.bubbleCellComponents = componentsString }
+                    DispatchQueue.main.async { self.bubbleCell_Components = componentsString }
                 }
             default: NotificationCenter.default.removeObserver(self)
         }
@@ -127,7 +125,7 @@ extension Bubble {
         let componentsString = value.timComponentsAsStrings
                             
         //since closure is executed on background thread, dispatch back to the main thread
-        DispatchQueue.main.async { self.bubbleCellComponents = componentsString }
+        DispatchQueue.main.async { self.bubbleCell_Components = componentsString }
     }
     
     ///update smallBubbleCell time components: hr min sec
@@ -139,7 +137,7 @@ extension Bubble {
         let Δ = Date().timeIntervalSince(lastPairStart)
         let componentsString = Float(Δ).timComponentsAsStrings
         
-        DispatchQueue.main.async { self.smallBubbleCellComponents = componentsString }
+        DispatchQueue.main.async { self.smallBubbleView_Components = componentsString }
     }
     
     func updateCurrentClock(runningOnly:Bool) {

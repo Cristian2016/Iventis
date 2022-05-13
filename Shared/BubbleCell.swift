@@ -62,9 +62,9 @@ struct BubbleCell: View {
     private let padding = CGFloat(0)
     
     private var minOpacity:Double {
-        bubble.bubbleCellComponents.min > "0" || bubble.bubbleCellComponents.hr > "0" ? 1 : 0.001
+        bubble.bubbleCell_Components.min > "0" || bubble.bubbleCell_Components.hr > "0" ? 1 : 0.001
     }
-    private var hrOpacity:Double { bubble.bubbleCellComponents.hr > "0" ? 1 : 0.001 }
+    private var hrOpacity:Double { bubble.bubbleCell_Components.hr > "0" ? 1 : 0.001 }
         
     // MARK: -
     var body: some View {
@@ -121,7 +121,7 @@ struct BubbleCell: View {
         ZStack {
             //HOURS
             Push(.leading) {
-                Text(bubble.bubbleCellComponents.hr)
+                Text(bubble.bubbleCell_Components.hr)
                     .modifier(TextModifier())
                 //background
                     .background { circleBackground }
@@ -137,7 +137,7 @@ struct BubbleCell: View {
             .zIndex(1) //make sure hours text is fully visible by being on top of all the other views
             //MINUTES
             Push(.middle) {
-                Text(bubble.bubbleCellComponents.min)
+                Text(bubble.bubbleCell_Components.min)
                     .modifier(TextModifier())
                 //background
                     .background { circleBackground }
@@ -154,7 +154,7 @@ struct BubbleCell: View {
             }
             //SECONDS
             Push(.trailing) {
-                Text(bubble.bubbleCellComponents.sec)
+                Text(bubble.bubbleCell_Components.sec)
                     .modifier(TextModifier())
                 //background
                     .background { circleBackground }
@@ -196,7 +196,7 @@ struct BubbleCell: View {
             Spacer()
             HStack {
                 Spacer()
-                Text(bubble.bubbleCellComponents.cents)
+                Text(bubble.bubbleCell_Components.cents)
                     .background(Circle()
                         .foregroundColor(Color("pauseStickerColor"))
                         .padding(-12))

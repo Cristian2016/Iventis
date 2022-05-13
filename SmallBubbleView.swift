@@ -25,7 +25,7 @@ struct SmallBubbleView: View {
                         .frame(width: edge, height: edge)
                 }
                 
-                if bubble.smallBubbleCellComponents.hr != "0" || bubble.smallBubbleCellComponents.min != "0" {
+                if bubble.smallBubbleView_Components.hr != "0" || bubble.smallBubbleView_Components.min != "0" {
                 HStack {
                     Spacer()
                     Circle()
@@ -34,7 +34,7 @@ struct SmallBubbleView: View {
                 }
                 }
                 
-                if bubble.smallBubbleCellComponents.hr != "0" {
+                if bubble.smallBubbleView_Components.hr != "0" {
                     HStack {
                         Circle()
                             .frame(width: edge, height: edge)
@@ -47,20 +47,20 @@ struct SmallBubbleView: View {
         
             //time components
             //hours
-            if bubble.smallBubbleCellComponents.hr != "0" {
+            if bubble.smallBubbleView_Components.hr != "0" {
                 HStack {
-                    Text(bubble.smallBubbleCellComponents.hr)
+                    Text(bubble.smallBubbleView_Components.hr)
                         .modifier(TimeComponents(edge: edge))
                     Spacer()
                 }
             }
             
             //minutes
-            if bubble.smallBubbleCellComponents.hr != "0" || bubble.smallBubbleCellComponents.min != "0" {
+            if bubble.smallBubbleView_Components.hr != "0" || bubble.smallBubbleView_Components.min != "0" {
                 
                 HStack {
                     Spacer()
-                    Text(bubble.smallBubbleCellComponents.min)
+                    Text(bubble.smallBubbleView_Components.min)
                         .modifier(TimeComponents(edge: edge))
                     Spacer()
                 }
@@ -70,7 +70,7 @@ struct SmallBubbleView: View {
             //seconds
             HStack {
                 Spacer()
-                Text(bubble.smallBubbleCellComponents.sec)
+                Text(bubble.smallBubbleView_Components.sec)
                     .modifier(TimeComponents(edge: edge))
             }
         }
