@@ -264,11 +264,14 @@ struct BubbleCell: View {
     }
     
     private var showDeleteActionView:Bool {
-        guard let showDeleteActionView = showDeleteActionView_bubbleRank else { return false }
-        return bubble.rank == showDeleteActionView
+        guard let actionViewBubbleRank = showDeleteActionView_bubbleRank else { return false }
+        return bubble.rank == actionViewBubbleRank
     }
     
-    private var showDetailView:Bool { showDetailView_BubbleRank != nil }
+    private var showDetailView:Bool {
+        guard let showDetailView_BubbleRank = showDetailView_BubbleRank else { return false }
+        return bubble.rank == showDetailView_BubbleRank
+    }
 }
 
 // MARK: - Modifiers
