@@ -10,6 +10,9 @@ import SwiftUI
 struct ExitFocusAlertView: View {
     @Binding var predicate:NSPredicate?
     @Binding var showDetailView:Int?
+    let fontSize = CGFloat(35)
+    let topPadding = CGFloat(24)
+    static let height = CGFloat(74)
     
     init(_ predicate:Binding<NSPredicate?>, _ showDetailView:Binding<Int?>) {
         _predicate = Binding(projectedValue: predicate)
@@ -24,10 +27,10 @@ struct ExitFocusAlertView: View {
                 showDetailView = nil
             }
         } label: { Label { Text("Exit Focus").font(.title2) }
-            icon: { Image.eyeSlash.font(.title) } }
+            icon: { Image.eyeSlash.font(.system(size: fontSize)) } }
         .tint(.pink)
         .buttonStyle(.bordered)
-        .padding(EdgeInsets(top: 15, leading: 0, bottom: 0, trailing: 0))
+        .padding(EdgeInsets(top: topPadding, leading: 0, bottom: 0, trailing: 0))
     }
 }
 

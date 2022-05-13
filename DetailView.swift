@@ -14,7 +14,8 @@ struct DetailView: View {
     @FetchRequest var sessions:FetchedResults<Session>
     
     let topDetailHeight = CGFloat(140)
-    let bottomDetailHeight = CGFloat(410)
+    //empirically computed
+    let bottomDetailHeight = UIScreen.size.height - (2.5 * BubbleCell.edge +  ExitFocusAlertView.height)
     let detailWidth = UIScreen.size.width * 0.96
     
     init(_ rank:Int?) {

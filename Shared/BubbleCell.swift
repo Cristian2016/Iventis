@@ -53,7 +53,7 @@ struct BubbleCell: View {
     private let spacing:CGFloat = -30
     
     //⚠️ this property determines how many bubbles on screen to fit
-    private static var edge:CGFloat = {
+    static var edge:CGFloat = {
         print(UIScreen.main.bounds.height)
         return dic[UIScreen.size.height] ?? 140
     }()
@@ -124,7 +124,7 @@ struct BubbleCell: View {
                 Text(bubble.bubbleCellComponents.hr)
                     .modifier(TextModifier())
                 //background
-                    .background { circleBackground.zIndex(-2) }
+                    .background { circleBackground }
                     .opacity(hrOpacity)
                 //animations
                     .scaleEffect(isSecondsLongPressed ? 0.2 : 1.0)
@@ -134,12 +134,13 @@ struct BubbleCell: View {
                     .onTapGesture(count: 2) { print("edit duration") }
                     .onTapGesture { print("add note") }
             }
+            .zIndex(1) //make sure hours text is fully visible by being on top of all the other views
             //MINUTES
             Push(.middle) {
                 Text(bubble.bubbleCellComponents.min)
                     .modifier(TextModifier())
                 //background
-                    .background { circleBackground.zIndex(-1) }
+                    .background { circleBackground }
                     .opacity(minOpacity)
                 //animations
                     .scaleEffect(isSecondsLongPressed ? 0.2 : 1.0)
@@ -246,7 +247,7 @@ struct BubbleCell: View {
             .simultaneously(with: TapGesture().onEnded { print("Single Tap") })
     }
     
-    static let dic:[CGFloat:CGFloat] = [ /* 12mini */728:140, /* 8 */667:150,  /* ipdo */568:125,  /* 13 pro max */926:163,  /* 13 pro */844:147,  /* 11 pro max */896:158, 812:130,  /* 8max */736:167]
+    static let dic:[CGFloat:CGFloat] = [ /* 12mini */728:140, /* 8 */667:150,  /* ipdo */568:125,  /* 13 pro max */926:150,  /* 13 pro */844:147,  /* 11 pro max */896:150, 812:130,  /* 8max */736:167]
     
     // MARK: - Methods
     ///show/hide DetailView

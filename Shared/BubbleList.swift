@@ -28,7 +28,6 @@ struct BubbleList: View {
                                     .padding(.bottom, -5)
                                 )
                                 .padding()
-                                .padding(.top, 9) //⚠️ not sure it looks good on all devices
                             Spacer()
                         }
                         .zIndex(1)
@@ -44,6 +43,7 @@ struct BubbleList: View {
                                                    $showDetailView_BubbleRank,
                                                    $predicate,
                                                    $showDeleteActionView_BubbleRank)
+                                        .coordinateSpace(name: "BubbleCell")
                                                 .environmentObject(viewModel)
                                     }
                                 } header: { headerTitle(for: section.id.description) }
