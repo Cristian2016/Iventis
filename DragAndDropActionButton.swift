@@ -18,13 +18,15 @@ struct DragAndDropActionButton: View {
                 UserFeedback.doubleHaptic(.light)
             } label: {
                 Label {
-                    Text(userWantsToDragAndDropBubbles ? "~~Move~~" : "Move")
+                    Text(userWantsToDragAndDropBubbles ? "Cancel" : "Move Bubbles")
                         .font(.system(size: 26))
                 } icon: {
                     Image(systemName: "arrow.up.arrow.down.circle.fill")
                         .font(.system(size: 30))
+                        .foregroundColor(userWantsToDragAndDropBubbles ? .red : .green)
                 }
             }
+            .tint(userWantsToDragAndDropBubbles ? .red : .green)
             .buttonStyle(.bordered)
             Spacer()
         }
