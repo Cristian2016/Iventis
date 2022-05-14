@@ -12,7 +12,6 @@ struct MoveActionButton: View {
     
     let fontSize = CGFloat(35)
     let topPadding = CGFloat(24)
-    static let height = CGFloat(74)
     
     var body: some View { button }
     
