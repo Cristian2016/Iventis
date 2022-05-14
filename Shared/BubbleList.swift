@@ -53,13 +53,14 @@ struct BubbleList: View {
                                 } header: {
                                     headerTitle(for: section.id.description)
                                 }
+                                .accentColor(section.id == true ? .orange : .black)
                             }
                             .onMove { indices, index in
                                 print(indices.first!, index)
                             }
                             
                             if !isFocusModeOn { MoveActionButton() }
-                            Spacer(minLength: 100)
+                            Spacer(minLength: 80)
                         }
                         .padding(EdgeInsets(top: 0, leading: -10, bottom: 0, trailing: -10))
                         .listStyle(.sidebar)

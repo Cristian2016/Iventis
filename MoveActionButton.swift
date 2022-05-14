@@ -14,7 +14,10 @@ struct MoveActionButton: View {
     let topPadding = CGFloat(24)
     static let height = CGFloat(74)
     
-    var body: some View {
+    var body: some View { button }
+    
+    @ViewBuilder
+    private var button:some View {
         HStack {
             Spacer()
             Button {
@@ -27,17 +30,16 @@ struct MoveActionButton: View {
                 } icon: {
                     Image(systemName: "arrow.up.arrow.down.circle.fill")
                         .font(.system(size: fontSize))
-                        .foregroundColor(editMode?.wrappedValue == .active ? .red : .green)
+                        .foregroundColor(editMode?.wrappedValue == .active ? .red : .blue)
                 }
             }
-            .tint(editMode?.wrappedValue == .active ? .red : .green)
+            .tint(editMode?.wrappedValue == .active ? .red : .blue)
             .buttonStyle(.bordered)
             Spacer()
         }
-           
     }
     
-    func toggleEditMode() {
+    private func toggleEditMode() {
         withAnimation {
             if editMode?.wrappedValue != .active {
                 editMode?.wrappedValue = .active
