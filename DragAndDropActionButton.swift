@@ -11,15 +11,24 @@ struct DragAndDropActionButton: View {
     @Binding var userWantsToDragAndDropBubbles:Bool
     
     var body: some View {
-        Button {
-            userWantsToDragAndDropBubbles.toggle()
-        } label: {
-            Label {
-            } icon: {
-                Image(systemName: "arrow.up.arrow.down.circle.fill")
+        HStack {
+            Spacer()
+            Button {
+                userWantsToDragAndDropBubbles.toggle()
+                UserFeedback.doubleHaptic(.light)
+            } label: {
+                Label {
+                    Text(userWantsToDragAndDropBubbles ? "~~Move~~" : "Move")
+                        .font(.system(size: 26))
+                } icon: {
+                    Image(systemName: "arrow.up.arrow.down.circle.fill")
+                        .font(.system(size: 30))
+                }
             }
-            .font(.system(size: 30))
+            .buttonStyle(.bordered)
+            Spacer()
         }
+           
     }
 }
 

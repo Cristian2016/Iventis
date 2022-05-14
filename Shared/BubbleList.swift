@@ -14,6 +14,9 @@ struct BubbleList: View {
     @State var showDeleteActionView_BubbleRank:Int? = nil //bubble.rank
     @State var showDetailView_BubbleRank:Int? = nil //bubble.rank
     
+    //drag and drop
+    @State var userWantsToDragAndDropBubbles = false
+    
     var body: some View {
         ZStack {
             if results.isEmpty { EmptyBubbleListView() }
@@ -33,6 +36,7 @@ struct BubbleList: View {
                         .zIndex(1)
                         .ignoresSafeArea()
                     }
+                    
                     VStack {
                         Spacer(minLength: showDetailView_BubbleRank != nil ? 50 : 30) //distance from status bar
                         List {
@@ -51,6 +55,9 @@ struct BubbleList: View {
                             .onMove { indices, index in
                                 print(indices.first!, index)
                             }
+                            
+                            if predicate == nil { DragAndDropActionButton(userWantsToDragAndDropBubbles: $userWantsToDragAndDropBubbles) }
+                            Spacer(minLength: 100)
                         }
                         .padding(EdgeInsets(top: 0, leading: -10, bottom: 0, trailing: -10))
                         .listStyle(.sidebar)
