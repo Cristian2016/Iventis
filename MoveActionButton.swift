@@ -7,29 +7,30 @@
 
 import SwiftUI
 
-struct DragAndDropActionButton: View {
-    @Binding var userWantsToDragAndDropBubbles:Bool
+struct MoveActionButton: View {
+    @Environment(\.editMode) var editMode
     
     var body: some View {
         HStack {
             Spacer()
             Button {
-                userWantsToDragAndDropBubbles.toggle()
+                if editMode?.wrappedValue != .active {
+                    editMode?.wrappedValue = .active
+                } else {
+                    editMode?.wrappedValue = .inactive
+                }
+                
                 UserFeedback.doubleHaptic(.light)
             } label: {
                 Label {
-                    Text(userWantsToDragAndDropBubbles ? "Cancel Move" : "Move Bubbles")
-                        .font(.system(size: 26))
+                   Text(editMode?.wrappedValue == .active ? "Cancel" : "Reorder")
                 } icon: {
                     Image(systemName: "arrow.up.arrow.down.circle.fill")
                         .font(.system(size: 30))
-                        .foregroundColor(userWantsToDragAndDropBubbles ? .red : .green)
                 }
             }
-            .tint(userWantsToDragAndDropBubbles ? .red : .green)
-            .buttonStyle(.bordered)
-            EditButton()
-                .buttonStyle(.borderedProminent)
+            .tint(editMode?.wrappedValue == .active ? .red : .green)
+            .buttonStyle(.borderedProminent)
             Spacer()
         }
            
@@ -38,6 +39,6 @@ struct DragAndDropActionButton: View {
 
 struct DragAndDropActionButton_Previews: PreviewProvider {
     static var previews: some View {
-        DragAndDropActionButton(userWantsToDragAndDropBubbles: .constant(true))
+        MoveActionButton()
     }
 }

@@ -14,13 +14,15 @@ struct BubbleList: View {
     @State var showDeleteActionView_BubbleRank:Int? = nil //bubble.rank
     @State var showDetailView_BubbleRank:Int? = nil //bubble.rank
     
+    @Environment(\.editMode) var editMode
+    
     var body: some View {
         ZStack {
             if results.isEmpty { EmptyBubbleListView() }
             else {
                 ZStack {
                     if predicate == nil {
-                        Push(.topRight) { EditButton() }
+                        MoveActionButton()
                         .padding(EdgeInsets(top: -10, leading: 0, bottom: 2, trailing: 60))
                         .zIndex(3)
                     }
@@ -60,7 +62,6 @@ struct BubbleList: View {
                                 print(indices.first!, index)
                             }
                             
-//                            if predicate == nil { DragAndDropActionButton(userWantsToDragAndDropBubbles: $userWantsToDragAndDropBubbles) }
                             Spacer(minLength: 100)
                         }
                         .padding(EdgeInsets(top: 0, leading: -10, bottom: 0, trailing: -10))
