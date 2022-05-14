@@ -46,7 +46,8 @@ struct BubbleList: View {
                                         BubbleCell($0,
                                                    $showDetailView_BubbleRank,
                                                    $predicate,
-                                                   $showDeleteActionView_BubbleRank)
+                                                   $showDeleteActionView_BubbleRank,
+                                                   $userWantsToDragAndDropBubbles)
                                         .coordinateSpace(name: "BubbleCell")
                                                 .environmentObject(viewModel)
                                     }
