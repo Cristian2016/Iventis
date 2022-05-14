@@ -14,8 +14,6 @@ struct BubbleCell: View {
     @Binding var showDeleteActionView_bubbleRank:Int? //bubble.rank
     @Binding var showDetailView_BubbleRank:Int?
     
-    @Binding var userWantsToDragAndDropBubbles:Bool
-    
     @EnvironmentObject private var viewModel:ViewModel
     
     @StateObject var bubble:Bubble
@@ -35,11 +33,8 @@ struct BubbleCell: View {
     init(_ bubble:Bubble,
          _ showDetailView_BubbleRank:Binding<Int?>,
          _ predicate:Binding<NSPredicate?>,
-         _ showDeleteActionView_BubbleRank:Binding<Int?>,
-    _ userWantsToDragAndDropBubbles:Binding<Bool>) {
-        
-        _userWantsToDragAndDropBubbles = Binding(projectedValue: userWantsToDragAndDropBubbles)
-        
+         _ showDeleteActionView_BubbleRank:Binding<Int?>) {
+                
         _showDeleteActionView_bubbleRank = Binding(projectedValue: showDeleteActionView_BubbleRank)
         _showDetailView_BubbleRank = Binding(projectedValue: showDetailView_BubbleRank)
         
