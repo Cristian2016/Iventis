@@ -20,21 +20,19 @@ struct MoveActionButton: View {
     private var button:some View {
         HStack {
             Spacer()
-            Button {
-                toggleEditMode()
-                
-            } label: {
-                Label {
-                   Text(editMode?.wrappedValue == .active ? "Cancel" : "Reorder")
-                        .font(.title2)
-                } icon: {
-                    Image(systemName: "arrow.up.arrow.down.circle.fill")
-                        .font(.system(size: fontSize))
-                        .foregroundColor(editMode?.wrappedValue == .active ? .red : .blue)
-                }
+            Button { toggleEditMode() }
+        label: {
+            Label {
+                Text(editMode?.wrappedValue == .active ? "Cancel" : "Reorder")
+                    .font(.title2)
+            } icon: {
+                Image(systemName: "arrow.up.arrow.down.circle.fill")
+                    .font(.system(size: fontSize))
+                    .foregroundColor(editMode?.wrappedValue == .active ? .pink : .blue)
             }
-            .tint(editMode?.wrappedValue == .active ? .red : .blue)
-            .buttonStyle(.bordered)
+        }
+        .tint(editMode?.wrappedValue == .active ? .pink : .blue)
+        .buttonStyle(.bordered)
             Spacer()
         }
     }
