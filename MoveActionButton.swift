@@ -18,15 +18,8 @@ struct MoveActionButton: View {
         HStack {
             Spacer()
             Button {
-                withAnimation {
-                    if editMode?.wrappedValue != .active {
-                        editMode?.wrappedValue = .active
-                    } else {
-                        editMode?.wrappedValue = .inactive
-                    }
-                }
+                toggleEditMode()
                 
-                UserFeedback.doubleHaptic(.light)
             } label: {
                 Label {
                    Text(editMode?.wrappedValue == .active ? "Cancel" : "Reorder")
@@ -42,6 +35,17 @@ struct MoveActionButton: View {
             Spacer()
         }
            
+    }
+    
+    func toggleEditMode() {
+        withAnimation {
+            if editMode?.wrappedValue != .active {
+                editMode?.wrappedValue = .active
+            } else {
+                editMode?.wrappedValue = .inactive
+            }
+        }
+        UserFeedback.doubleHaptic(.light)
     }
 }
 
