@@ -23,6 +23,9 @@
 		1F18B460281FAABF0080ADA6 /* TopCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F18B45F281FAABF0080ADA6 /* TopCell.swift */; };
 		1F18B461281FAABF0080ADA6 /* TopCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F18B45F281FAABF0080ADA6 /* TopCell.swift */; };
 		1F18B462281FAABF0080ADA6 /* TopCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F18B45F281FAABF0080ADA6 /* TopCell.swift */; };
+		1F387CEB2830082000F6B81D /* DragAndDropActionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F387CEA2830082000F6B81D /* DragAndDropActionButton.swift */; };
+		1F387CEC2830082000F6B81D /* DragAndDropActionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F387CEA2830082000F6B81D /* DragAndDropActionButton.swift */; };
+		1F387CED2830082000F6B81D /* DragAndDropActionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F387CEA2830082000F6B81D /* DragAndDropActionButton.swift */; };
 		1F4239A3281E510D004BE717 /* NoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4239A2281E510D004BE717 /* NoteView.swift */; };
 		1F4239A4281E510D004BE717 /* NoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4239A2281E510D004BE717 /* NoteView.swift */; };
 		1F4239A5281E510D004BE717 /* NoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4239A2281E510D004BE717 /* NoteView.swift */; };
@@ -149,6 +152,7 @@
 		1F18B456281FA6130080ADA6 /* PushView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushView.swift; sourceTree = "<group>"; };
 		1F18B45B281FA9C90080ADA6 /* CalendarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
 		1F18B45F281FAABF0080ADA6 /* TopCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopCell.swift; sourceTree = "<group>"; };
+		1F387CEA2830082000F6B81D /* DragAndDropActionButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DragAndDropActionButton.swift; sourceTree = "<group>"; };
 		1F4239A2281E510D004BE717 /* NoteView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoteView.swift; sourceTree = "<group>"; };
 		1F4326B0282AFB19002B6092 /* ScaleDownButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScaleDownButton.swift; sourceTree = "<group>"; };
 		1F4DF99C282B82EF00D54BE8 /* CircleButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleButton.swift; sourceTree = "<group>"; };
@@ -243,6 +247,7 @@
 		1F5F4A4228093FAC00AF3442 = {
 			isa = PBXGroup;
 			children = (
+				1F387CEA2830082000F6B81D /* DragAndDropActionButton.swift */,
 				1F62193F28293B5100C9B175 /* SmallBubbleView.swift */,
 				1F4DF99B282B82D900D54BE8 /* Buttons */,
 				1F5A0F6B282641D00075E86B /* EmptyHistoryAlertView.swift */,
@@ -517,6 +522,7 @@
 				1F5F4A952809450A00AF3442 /* Library.swift in Sources */,
 				1FFC8BB628142F040059EF2E /* Pair.swift in Sources */,
 				1F6420062820186D00413E31 /* PairCell.swift in Sources */,
+				1F387CEB2830082000F6B81D /* DragAndDropActionButton.swift in Sources */,
 				1F5F4A752809409600AF3442 /* Bubble Properties.swift in Sources */,
 				1F5F4A89280941AC00AF3442 /* Widgets.intentdefinition in Sources */,
 			);
@@ -551,6 +557,7 @@
 				1F5F4A6228093FAF00AF3442 /* Persistence.swift in Sources */,
 				1F100CA82809493400A3A3C2 /* BackgroundTimer.swift in Sources */,
 				1F5A0F6D282641D00075E86B /* EmptyHistoryAlertView.swift in Sources */,
+				1F387CEC2830082000F6B81D /* DragAndDropActionButton.swift in Sources */,
 				1F641FFF281FF70100413E31 /* BottomDetailView.swift in Sources */,
 				1FFC8BBA28142F040059EF2E /* Pair Properties.swift in Sources */,
 				1F5A0F70282647A80075E86B /* DetailView.swift in Sources */,
@@ -600,6 +607,7 @@
 				1F5F4A9B2809456E00AF3442 /* BubbleList.swift in Sources */,
 				1FFC8BB828142F040059EF2E /* Pair.swift in Sources */,
 				1F6420082820186D00413E31 /* PairCell.swift in Sources */,
+				1F387CED2830082000F6B81D /* DragAndDropActionButton.swift in Sources */,
 				1F5F4A972809450A00AF3442 /* Library.swift in Sources */,
 				1F100CA3280946C000A3A3C2 /* Bubble Properties.swift in Sources */,
 			);
