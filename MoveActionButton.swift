@@ -33,7 +33,7 @@ struct MoveActionButton: View {
         }
         .tint(editMode?.wrappedValue == .active ? .pink : .blue)
         .buttonStyle(.bordered)
-            Spacer()
+//            Spacer()
         }
     }
     

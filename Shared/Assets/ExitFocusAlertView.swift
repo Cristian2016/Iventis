@@ -10,6 +10,7 @@ import SwiftUI
 struct ExitFocusAlertView: View {
     @Binding var predicate:NSPredicate?
     @Binding var showDetailView:Int?
+    
     let fontSize = CGFloat(35)
     let topPadding = CGFloat(24)
     static let height = CGFloat(74)
