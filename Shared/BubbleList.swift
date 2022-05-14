@@ -15,18 +15,14 @@ struct BubbleList: View {
     @State var showDetailView_BubbleRank:Int? = nil //bubble.rank
     
     @Environment(\.editMode) var editMode
+    private var isFocusModeOn:Bool { predicate != nil }
     
     var body: some View {
         ZStack {
             if results.isEmpty { EmptyBubbleListView() }
             else {
                 ZStack {
-                    if predicate == nil {
-                        MoveActionButton()
-                        .padding(EdgeInsets(top: -10, leading: 0, bottom: 2, trailing: 60))
-                        .zIndex(3)
-                    }
-                    if predicate != nil {
+                    if isFocusModeOn {
                         VStack {
                             ExitFocusAlertView($predicate, $showDetailView_BubbleRank)
                                 .background(Rectangle()
@@ -62,6 +58,7 @@ struct BubbleList: View {
                                 print(indices.first!, index)
                             }
                             
+                            if !isFocusModeOn { MoveActionButton() }
                             Spacer(minLength: 100)
                         }
                         .padding(EdgeInsets(top: 0, leading: -10, bottom: 0, trailing: -10))
