@@ -28,6 +28,8 @@ struct DragAndDropActionButton: View {
             }
             .tint(userWantsToDragAndDropBubbles ? .red : .green)
             .buttonStyle(.bordered)
+            EditButton()
+                .buttonStyle(.borderedProminent)
             Spacer()
         }
            

@@ -14,14 +14,16 @@ struct BubbleList: View {
     @State var showDeleteActionView_BubbleRank:Int? = nil //bubble.rank
     @State var showDetailView_BubbleRank:Int? = nil //bubble.rank
     
-    //drag and drop
-    @State var userWantsToDragAndDropBubbles = false
-    
     var body: some View {
         ZStack {
             if results.isEmpty { EmptyBubbleListView() }
             else {
                 ZStack {
+                    if predicate == nil {
+                        Push(.topRight) { EditButton() }
+                        .padding(EdgeInsets(top: -10, leading: 0, bottom: 2, trailing: 60))
+                        .zIndex(3)
+                    }
                     if predicate != nil {
                         VStack {
                             ExitFocusAlertView($predicate, $showDetailView_BubbleRank)
@@ -50,13 +52,15 @@ struct BubbleList: View {
                                         .coordinateSpace(name: "BubbleCell")
                                                 .environmentObject(viewModel)
                                     }
-                                } header: { headerTitle(for: section.id.description) }
+                                } header: {
+                                    headerTitle(for: section.id.description)
+                                }
                             }
                             .onMove { indices, index in
                                 print(indices.first!, index)
                             }
                             
-                            if predicate == nil { DragAndDropActionButton(userWantsToDragAndDropBubbles: $userWantsToDragAndDropBubbles) }
+//                            if predicate == nil { DragAndDropActionButton(userWantsToDragAndDropBubbles: $userWantsToDragAndDropBubbles) }
                             Spacer(minLength: 100)
                         }
                         .padding(EdgeInsets(top: 0, leading: -10, bottom: 0, trailing: -10))
@@ -134,16 +138,17 @@ struct BubbleList: View {
         return formatter
     }()
     
-    private func headerTitle(for sectionID:String) -> Text {
-        if sectionID == "false" {
-            return Text("Bubbles")
-                .foregroundColor(.label)
-                .font(.title3)
-        } else {
-            return Text("\(Image(systemName: "pin.fill")) Pinned")
-                .foregroundColor(.orange)
-                .font(.title3)
+    @ViewBuilder
+    private func headerTitle(for sectionID:String) -> some View {
+        HStack {
+            //text
+            if sectionID == "false" { Text("Bubbles") .foregroundColor(.label) }
+            else { Text("\(Image(systemName: "pin.fill")) Pinned").foregroundColor(.orange) }
+            
+            //rectangle to allow collapse along the entire width
+            Rectangle().foregroundColor(.white.opacity(0.001))
         }
+        .font(.title3)
     }
     
     private static let descriptors = [
