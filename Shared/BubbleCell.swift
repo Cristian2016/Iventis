@@ -14,6 +14,8 @@ struct BubbleCell: View {
     @Binding var showDeleteActionView_bubbleRank:Int? //bubble.rank
     @Binding var showDetailView_BubbleRank:Int?
     
+    @Environment(\.editMode) var editMode
+    
     @EnvironmentObject private var viewModel:ViewModel
     
     @StateObject var bubble:Bubble
@@ -89,6 +91,7 @@ struct BubbleCell: View {
             if bubble.hasCalendar { calendarView }
             if !bubble.isNoteHidden { noteView }
         }
+        .scaleEffect(editMode?.wrappedValue == .active ? 0.9 : 1.0)
         .swipeActions(edge: .leading, allowsFullSwipe: true) {
             
             //pin
@@ -134,6 +137,7 @@ struct BubbleCell: View {
                     .onTapGesture(count: 2) { print("edit duration") }
                     .onTapGesture { print("add note") }
             }
+            .offset(x: editMode?.wrappedValue == .active ? -70 : 0, y: 0)
             .zIndex(1) //make sure hours text is fully visible by being on top of all the other views
             //MINUTES
             Push(.middle) {
@@ -148,10 +152,12 @@ struct BubbleCell: View {
                     .animation(.secondsLongPressed.delay(0.1), value: isSecondsLongPressed)
                 //gestures
                     .onTapGesture { withAnimation {
+                        editMode?.wrappedValue = .inactive
                         toggleDetailView()
                         //also viewModel.userTogglesDetail called within toggleDetailView()
                     } }
             }
+            .offset(x: editMode?.wrappedValue == .active ? -35 : 0, y: 0)
             //SECONDS
             Push(.trailing) {
                 Text(bubble.bubbleCell_Components.sec)

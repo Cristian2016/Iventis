@@ -50,13 +50,25 @@ struct BubbleList: View {
                                         .coordinateSpace(name: "BubbleCell")
                                                 .environmentObject(viewModel)
                                     }
+                                    
+                                    .onMove { indices, destination in
+                                        print(indices.first!, destination)
+                                       var ranks = section.map { bubble in
+                                            bubble.rank
+                                        }
+                                        print(ranks)
+//                                        let removedElement = ranks.remove(at: indices.first!)
+//                                        ranks.insert(removedElement, at: destination)
+//                                        for (index, rank) in ranks.enumerated() {
+//                                            section[index].rank = rank
+//                                        }
+//                                        PersistenceController.shared.save()
+                                    }
+
                                 } header: {
                                     headerTitle(for: section.id.description)
                                 }
                                 .accentColor(section.id == true ? .orange : .black)
-                            }
-                            .onMove { indices, index in
-                                print(indices.first!, index)
                             }
                             
                             if !isFocusModeOn { MoveActionButton() }
