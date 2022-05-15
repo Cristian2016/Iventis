@@ -23,8 +23,8 @@ struct RearrangeActionButton: View {
 //                Text(editMode?.wrappedValue == .active ? "Cancel" : "Move")
 //                    .font(.title2)
             } icon: {
-                Image(systemName: "arrow.up.arrow.down.circle.fill")
-                    .font(.system(size: fontSize))
+                Image(systemName: "arrow.up.arrow.down.circle")
+                    .font(.system(size: fontSize).weight(.light))
                     .foregroundColor(editMode?.wrappedValue == .active ? .pink : .blue)
             }
         }

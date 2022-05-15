@@ -18,8 +18,8 @@ struct HelpActionButton: View {
 //                Text("Help")
 //                    .font(.title2)
             } icon: {
-                Image(systemName: "questionmark.circle.fill")
-                    .font(.system(size: fontSize))
+                Image(systemName: "questionmark.circle")
+                    .font(.system(size: fontSize).weight(.light))
                     .foregroundColor(.yellow)
             }
         }
