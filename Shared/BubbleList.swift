@@ -53,7 +53,6 @@ struct BubbleList: View {
                                     .onMove { (indices, destinationIndex) in
                                         
                                         let moveAtTheBottom = destinationIndex == section.count
-                                        let moveAtTheTop = destinationIndex == 0
                                         
                                         let sourceRank = section[indices.first!].rank
                                         

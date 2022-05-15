@@ -150,8 +150,7 @@ class ViewModel: ObservableObject {
             if moveBottom { sourceBubble?.rank = 0 }
             else { sourceBubble?.rank = destBubble!.rank + 1 }
         } else {
-            
-            
+            sourceBubble?.rank = destBubble!.rank + 1
         }
         
        let sortedBubbles = bubbles.sorted { $0.rank > $1.rank }
