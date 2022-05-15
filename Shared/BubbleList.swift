@@ -58,7 +58,8 @@ struct BubbleList: View {
                                         let sourceRank = section[indices.first!].rank
                                         
                                         if moveAtTheBottom {
-                                            
+                                            let destRank = section[destinationIndex - 1].rank
+                                            viewModel.reorderRanks(sourceRank, destRank, true)
                                         } else {
                                             let destRank = section[destinationIndex].rank
                                             viewModel.reorderRanks(sourceRank, destRank)

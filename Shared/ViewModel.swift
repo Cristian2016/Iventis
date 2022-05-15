@@ -130,7 +130,7 @@ class ViewModel: ObservableObject {
         
     }
     
-    func reorderRanks(_ sourceRank:Int64, _ destRank:Int64) {
+    func reorderRanks(_ sourceRank:Int64, _ destRank:Int64, _ moveBottom:Bool = false) {
         if sourceRank == destRank { return }
         
         let bubbleMovedDown = sourceRank > destRank
@@ -146,8 +146,12 @@ class ViewModel: ObservableObject {
         if bubbleMovedDown {
             let sourceBubble = bubble(for: Int(sourceRank) * 2 + 1)
             let destBubble = bubble(for: Int(destRank) * 2 + 1)
-            
-            sourceBubble?.rank = destBubble!.rank + 1
+                                    
+            if moveBottom {
+                sourceBubble?.rank = 0
+            } else {
+                sourceBubble?.rank = destBubble!.rank + 1
+            }
             
         } else {
             
