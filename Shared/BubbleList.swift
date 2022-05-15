@@ -77,7 +77,7 @@ struct BubbleList: View {
                                         }
                                     }
                                 } header: { headerTitle(for: section.id.description) }
-                                    .accentColor(section.id == true ? .orange : .black)
+                                    .accentColor(.clear)
                             }
                             Spacer(minLength: 80)
                         }
