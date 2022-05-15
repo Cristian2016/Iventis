@@ -14,6 +14,8 @@ struct BubbleCell: View {
     @Binding var showDeleteActionView_bubbleRank:Int? //bubble.rank
     @Binding var showDetailView_BubbleRank:Int?
     
+    @Binding var predicate:NSPredicate?
+    
     @Environment(\.editMode) var editMode
     
     @EnvironmentObject private var viewModel:ViewModel
@@ -21,7 +23,6 @@ struct BubbleCell: View {
     @StateObject var bubble:Bubble
     private let bubbleColor:Color
     
-    @Binding var predicate:NSPredicate?
     @State private var scale: CGFloat = 1.4
     
     private var isRunning:Bool { bubble.state == .running }
