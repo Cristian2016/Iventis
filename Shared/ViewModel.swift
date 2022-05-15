@@ -143,16 +143,12 @@ class ViewModel: ObservableObject {
         //change ranks temporarily so that you can simply "move" a bubble without removing it. just by assigning a new rank
         bubbles.forEach { $0.rank = 2 * $0.rank + 1 }
         
+        let sourceBubble = bubble(for: Int(sourceRank) * 2 + 1)
+        let destBubble = bubble(for: Int(destRank) * 2 + 1)
+        
         if bubbleMovedDown {
-            let sourceBubble = bubble(for: Int(sourceRank) * 2 + 1)
-            let destBubble = bubble(for: Int(destRank) * 2 + 1)
-                                    
-            if moveBottom {
-                sourceBubble?.rank = 0
-            } else {
-                sourceBubble?.rank = destBubble!.rank + 1
-            }
-            
+            if moveBottom { sourceBubble?.rank = 0 }
+            else { sourceBubble?.rank = destBubble!.rank + 1 }
         } else {
             
             
