@@ -130,6 +130,16 @@ class ViewModel: ObservableObject {
         
     }
     
+    func reorderRanks(_ source:Int64, _ destination:Int64) {
+        let request = Bubble.fetchRequest()
+        request.sortDescriptors = [NSSortDescriptor(key: "rank", ascending: false)]
+       let res = try! PersistenceController.shared.viewContext.fetch(request)
+        let ranks = res.map { bubble in
+            bubble.rank
+        }
+        print(ranks)
+    }
+    
     // FIXME: ⚠️ not complete!
     func endSession(_ bubble:Bubble) {
         if bubble.state == .brandNew { return }
