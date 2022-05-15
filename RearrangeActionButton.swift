@@ -24,7 +24,7 @@ struct RearrangeActionButton: View {
 //                    .font(.title2)
             } icon: {
                 Image(systemName: "arrow.up.arrow.down.circle")
-                    .font(.system(size: fontSize).weight(.light))
+                    .font(.system(size: fontSize).weight(.regular))
                     .foregroundColor(editMode?.wrappedValue == .active ? .pink : .blue)
                     .padding(5)
                     .background {

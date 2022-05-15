@@ -71,7 +71,6 @@ struct BubbleList: View {
                             header: { headerTitle(for: section.id.description) }
                                 .accentColor(.clear) //collapse section indicators invisible
                             }
-
                             Spacer(minLength: 100)
                         }
                         .padding(EdgeInsets(top: 0, leading: -10, bottom: 0, trailing: -10))
@@ -153,11 +152,29 @@ struct BubbleList: View {
     private func headerTitle(for sectionID:String) -> some View {
         HStack {
             //text
-            if sectionID == "false" { Text("Bubbles") .foregroundColor(.label) }
-            else { Text("\(Image(systemName: "pin.fill")) Pinned").foregroundColor(.orange) }
+            if sectionID == "false" {
+                Text("Bubbles")
+                    .foregroundColor(.label)
+                    .fontWeight(.medium)
+            }
+            else { Text("\(Image(systemName: "pin.fill")) Pinned")
+                    .foregroundColor(.orange)
+                    .fontWeight(.medium)
+            }
             
             //rectangle to allow collapse along the entire width
             Rectangle().foregroundColor(.white.opacity(0.001))
+//                .overlay {
+//                    if sectionID == "false" {
+//                        HStack {
+//                            Text("Tap to collapse")
+//                                .font(.system(size: 18).weight(.light))
+//                                .foregroundColor(.lightGray)
+//                                .lineLimit(1)
+//                            Spacer()
+//                        }
+//                    }
+//                }
         }
         .font(.title3)
     }
