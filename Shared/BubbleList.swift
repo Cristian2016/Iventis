@@ -51,15 +51,20 @@ struct BubbleList: View {
                                                 .environmentObject(viewModel)
                                     }
                                     .onMove { indices, destinationIndex in
-                                        let source = section[indices.first!].rank
-                                        
-                                        if destinationIndex > 0 {
-                                            let destination = section[destinationIndex -  1].rank
-                                            viewModel.reorderRanks(source, destination)
-                                        } else {
-                                            let destination = section[destinationIndex].rank
-                                            viewModel.reorderRanks(source, destination)
+                                        let sourceRank = section[indices.first!].rank
+                                        if section.id == false {
+                                            if destinationIndex > 0 {
+                                                let destRank = section[destinationIndex -  1].rank
+                                                viewModel.reorderRanks(sourceRank, destRank)
+                                            } else {
+                                                let destination = section[destinationIndex].rank
+                                                viewModel.reorderRanks(sourceRank, destination)
+                                            }
                                         }
+                                        else {
+                                            print("move not allowed")
+                                        }
+                                        
                                     }
                                 } header: { headerTitle(for: section.id.description) }
                                 .accentColor(section.id == true ? .orange : .black)
