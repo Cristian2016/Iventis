@@ -131,37 +131,32 @@ class ViewModel: ObservableObject {
     }
     
     func reorderRanks(_ sourceRank:Int64, _ destRank:Int64) {
-        let request = Bubble.fetchRequest()
-        request.sortDescriptors = [NSSortDescriptor(key: "rank", ascending: false)]
-        
         let bubbleMovedDown = sourceRank > destRank
         
-        //get bubbles ordered by rank
+        //get bubbles sorted by rank
+        let request = Bubble.fetchRequest()
+        request.sortDescriptors = [NSSortDescriptor(key: "rank", ascending: false)]
         var bubbles = try! PersistenceController.shared.viewContext.fetch(request)
-    
-        let sourceIndex = bubbles.firstIndex(of: bubble(for: Int(sourceRank))!)!
-        let destIndex = bubbles.firstIndex(of: bubble(for: Int(destRank))!)!
         
-        print("source \(sourceIndex), dest \(destIndex)")
+        let removedBubble = bubbles.remove(at: index(of: sourceRank)!)
+        print(removedBubble.color!)
+//        if bubbleMovedDown {
+//            if destIndex < bubbles.count { bubbles.insert(removedBubble, at: destIndex) }
+//            else { bubbles.append(removedBubble) }
+//        } else {
+//            if destIndex >= 0 {
+//                bubbles.insert(removedBubble, at: destIndex)
+//            } else {
+//                bubbles.insert(removedBubble, at: 0)
+//            }
+//        }
+//
+//        //reassign ranks
+//        for (index, _) in bubbles.enumerated() {
+//            bubbles[index].rank = Int64(bubbles.count - 1 - index)
+//        }
         
-        let removedBubble = bubbles.remove(at: sourceIndex)
-        if bubbleMovedDown {
-            if destIndex < bubbles.count { bubbles.insert(removedBubble, at: destIndex) }
-            else { bubbles.append(removedBubble) }
-        } else {
-            if destIndex >= 0 {
-                bubbles.insert(removedBubble, at: destIndex)
-            } else {
-                bubbles.insert(removedBubble, at: 0)
-            }
-        }
-        
-        //reassign ranks
-        for (index, _) in bubbles.enumerated() {
-            bubbles[index].rank = Int64(bubbles.count - 1 - index)
-        }
-        
-        PersistenceController.shared.save()
+//        PersistenceController.shared.save()
     }
     
     // FIXME: ⚠️ not complete!
@@ -204,5 +199,18 @@ class ViewModel: ObservableObject {
         let context = PersistenceController.shared.viewContext
         let bubble = try! context.fetch(request).first
         return bubble
+    }
+    
+    func index(of rank:Int64) -> Int? {
+        let request = Bubble.fetchRequest()
+        request.sortDescriptors = [NSSortDescriptor(key: "rank", ascending: false)]
+        let context = PersistenceController.shared.viewContext
+        let bubbles = try! context.fetch(request)
+        
+        for (index, bubble) in bubbles.enumerated() {
+            if bubble.rank == rank { return index }
+        }
+        
+        return nil
     }
 }

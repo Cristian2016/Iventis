@@ -52,14 +52,9 @@ struct BubbleList: View {
                                     }
                                     .onMove { indices, destinationIndex in
                                         let sourceRank = section[indices.first!].rank
+                                        let destRank = section[destinationIndex].rank
                                         if section.id == false {
-                                            if destinationIndex > 0 {
-                                                let destRank = section[destinationIndex -  1].rank
-                                                viewModel.reorderRanks(sourceRank, destRank)
-                                            } else {
-                                                let destination = section[destinationIndex].rank
-                                                viewModel.reorderRanks(sourceRank, destination)
-                                            }
+                                            viewModel.reorderRanks(sourceRank, destRank)
                                         }
                                     }
                                 } header: { headerTitle(for: section.id.description) }
