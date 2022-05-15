@@ -26,6 +26,11 @@ struct RearrangeActionButton: View {
                 Image(systemName: "arrow.up.arrow.down.circle")
                     .font(.system(size: fontSize).weight(.light))
                     .foregroundColor(editMode?.wrappedValue == .active ? .pink : .blue)
+                    .padding(5)
+                    .background {
+                        RoundedRectangle(cornerRadius: 12)
+                            .fill(Color.background1)
+                    }
             }
         }
         .tint(editMode?.wrappedValue == .active ? .pink : .blue)
