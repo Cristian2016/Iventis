@@ -146,6 +146,9 @@ class ViewModel: ObservableObject {
         if bubbleMovedDown {
             if destIndex < bubbles.count { bubbles.insert(removedBubble, at: destIndex) }
             else { bubbles.append(removedBubble) }
+        } else {
+            print("destIndex", destIndex)
+            bubbles.insert(removedBubble, at: bubbles.count - destIndex)
         }
         
         //reassign ranks
