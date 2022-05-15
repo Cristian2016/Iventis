@@ -20,8 +20,8 @@ struct BubbleList: View {
             else {
                 ZStack {
                     if predicate == nil {
-                        Push(.topRight) { EditButton() }
-                        .padding(EdgeInsets(top: -10, leading: 0, bottom: 2, trailing: 60))
+                        Push(.topRight) { RearrangeActionButton() }
+                        .padding(EdgeInsets(top: -4, leading: 0, bottom: 2, trailing: 20))
                         .zIndex(3)
                     }
                     if predicate != nil {
@@ -40,7 +40,7 @@ struct BubbleList: View {
                     }
                     
                     VStack {
-                        Spacer(minLength: showDetailView_BubbleRank != nil ? 50 : 40) //distance from status bar
+                        Spacer(minLength: showDetailView_BubbleRank != nil ? 50 : 45) //distance from status bar
                         List {
                             ForEach(results) { section in
                                 Section {
