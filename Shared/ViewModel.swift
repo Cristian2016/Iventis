@@ -45,7 +45,7 @@ class ViewModel: ObservableObject {
         }
         
         newBubble.color = color
-        newBubble.rank = Int64(UserDefaults.assignRank())
+        newBubble.rank = Int64(UserDefaults.generateRank())
         
         try? backgroundContext.save()
     }
@@ -158,6 +158,9 @@ class ViewModel: ObservableObject {
         for (index, bubble) in sortedBubbles.enumerated() {
             bubble.rank = Int64(sortedBubbles.count - 1 - index)
         }
+        
+        //reset rank generator
+        UserDefaults.resetRankGenerator(sortedBubbles.count -  1)
         
         PersistenceController.shared.save()
     }

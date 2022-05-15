@@ -127,7 +127,7 @@ extension UserDefaults {
         static let rank = "rank"
     }
     
-    static func assignRank() -> Int {
+    static func generateRank() -> Int {
         //get rank
         //increase rank by one
         //save rank
@@ -138,6 +138,11 @@ extension UserDefaults {
             ud.set(rank, forKey: UserDefaults.Key.rank)
         }
         return rank
+    }
+    
+    static func resetRankGenerator(_ value:Int) {
+        let ud = UserDefaults(suiteName: String.appGroupName)!
+        ud.set(value, forKey: UserDefaults.Key.rank)
     }
 }
 
