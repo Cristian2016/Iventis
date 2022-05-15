@@ -37,8 +37,16 @@ struct BubbleList: View {
                         .ignoresSafeArea()
                     }
                     
+                    if !isFocusModeOn {
+                        Push(.topRight) {
+                            RearrangeActionButton()
+                        }
+                        .padding(EdgeInsets(top: -5, leading: 0, bottom: 0, trailing: 20))
+                        .zIndex(4)
+                    }
+                    
                     VStack {
-                        Spacer(minLength: showDetailView_BubbleRank != nil ? 50 : 30) //distance from status bar
+                        Spacer(minLength: showDetailView_BubbleRank != nil ? 50 : 80) //distance from status bar
                         List {
                             ForEach(results) { section in
                                 Section {
@@ -67,8 +75,6 @@ struct BubbleList: View {
                                 } header: { headerTitle(for: section.id.description) }
                                     .accentColor(section.id == true ? .orange : .black)
                             }
-                            
-                            if !isFocusModeOn { MoveActionButton() }
                             Spacer(minLength: 80)
                         }
                         .padding(EdgeInsets(top: 0, leading: -10, bottom: 0, trailing: -10))

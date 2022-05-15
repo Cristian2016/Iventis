@@ -7,11 +7,10 @@
 
 import SwiftUI
 
-struct MoveActionButton: View {
+struct RearrangeActionButton: View {
     @Environment(\.editMode) var editMode
     
-    let fontSize = CGFloat(35)
-    let topPadding = CGFloat(24)
+    let fontSize = CGFloat(24)
     
     var body: some View { button }
     
@@ -22,7 +21,7 @@ struct MoveActionButton: View {
             Button { toggleEditMode() }
         label: {
             Label {
-                Text(editMode?.wrappedValue == .active ? "Cancel" : "Rearrange")
+                Text(editMode?.wrappedValue == .active ? "Cancel" : "Move")
                     .font(.title2)
             } icon: {
                 Image(systemName: "arrow.up.arrow.down.circle.fill")
@@ -31,8 +30,7 @@ struct MoveActionButton: View {
             }
         }
         .tint(editMode?.wrappedValue == .active ? .pink : .blue)
-        .buttonStyle(.bordered)
-//            Spacer()
+        .buttonStyle(.borderless)
         }
     }
     
@@ -50,6 +48,6 @@ struct MoveActionButton: View {
 
 struct DragAndDropActionButton_Previews: PreviewProvider {
     static var previews: some View {
-        MoveActionButton()
+        RearrangeActionButton()
     }
 }
