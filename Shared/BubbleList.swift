@@ -38,20 +38,17 @@ struct BubbleList: View {
                         .ignoresSafeArea()
                     }
                     
-                    if !isFocusModeOn {
-                        Push(.topRight) {
-                            HStack {
-                                HelpActionButton()
-                                RearrangeActionButton()
-                            }
-                            
-                        }
-                        .padding(EdgeInsets(top: -5, leading: 10, bottom: 0, trailing: 20))
-                        .zIndex(4)
-                    }
-                    
                     VStack {
                         Rectangle().fill(Color.background1)
+                            .overlay(content: {
+                                HStack {
+                                    Spacer()
+                                    HelpActionButton()
+                                    RearrangeActionButton()
+                                }
+                                .offset(x: 0, y: 25)
+                                .padding([.trailing])
+                            })
                             .frame(height: showDetailView_BubbleRank != nil ? 50 : 80)
                        //distance from status bar
                         List {
