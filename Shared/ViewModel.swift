@@ -150,21 +150,11 @@ class ViewModel: ObservableObject {
         ranks.remove(at: sourceIndex)
         print(ranks)
         if bubbleMovedDown {
-            if destIndex < ranks.endIndex {
-                ranks.insert(source, at: destIndex)
-            } else {
-                ranks.append(source)
-            }
+            if destIndex < ranks.count { ranks.insert(source, at: destIndex) }
+            else { ranks.append(source) }
         }
         
-        //change ranks
-        var newRanks = [Int64]()
-        for (index, _) in ranks.enumerated() {
-            newRanks.append(Int64(index))
-        }
-        for (index, bubble) in bubbles.reversed().enumerated() {
-            bubble.rank = Int64(index)
-        }
+        print(ranks)
         
         PersistenceController.shared.save()
     }
