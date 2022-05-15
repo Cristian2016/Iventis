@@ -10,19 +10,18 @@ import SwiftUI
 struct RearrangeActionButton: View {
     @Environment(\.editMode) var editMode
     
-    let fontSize = CGFloat(24)
+    let fontSize = CGFloat(40)
     
     var body: some View { button }
     
     @ViewBuilder
     private var button:some View {
         HStack {
-            Spacer()
             Button { toggleEditMode() }
         label: {
             Label {
-                Text(editMode?.wrappedValue == .active ? "Cancel" : "Move")
-                    .font(.title2)
+//                Text(editMode?.wrappedValue == .active ? "Cancel" : "Move")
+//                    .font(.title2)
             } icon: {
                 Image(systemName: "arrow.up.arrow.down.circle.fill")
                     .font(.system(size: fontSize))

@@ -85,6 +85,9 @@
 		1F64200B2820204400413E31 /* BottomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F6420092820204400413E31 /* BottomCell.swift */; };
 		1F64200C2820204400413E31 /* BottomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F6420092820204400413E31 /* BottomCell.swift */; };
 		1F8140DA2809AD45002C8460 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1F5F4A4D28093FAF00AF3442 /* Assets.xcassets */; };
+		1F82FB982831435A00E7C5AA /* HelpActionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F82FB972831435A00E7C5AA /* HelpActionButton.swift */; };
+		1F82FB992831435A00E7C5AA /* HelpActionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F82FB972831435A00E7C5AA /* HelpActionButton.swift */; };
+		1F82FB9A2831435A00E7C5AA /* HelpActionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F82FB972831435A00E7C5AA /* HelpActionButton.swift */; };
 		1F97B7DD2809B311002FFCA3 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F97B7DC2809B311002FFCA3 /* Colors.swift */; };
 		1F97B7DE2809B311002FFCA3 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F97B7DC2809B311002FFCA3 /* Colors.swift */; };
 		1F97B7DF2809B311002FFCA3 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F97B7DC2809B311002FFCA3 /* Colors.swift */; };
@@ -184,6 +187,7 @@
 		1F641FFD281FF70100413E31 /* BottomDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomDetailView.swift; sourceTree = "<group>"; };
 		1F6420052820186D00413E31 /* PairCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PairCell.swift; sourceTree = "<group>"; };
 		1F6420092820204400413E31 /* BottomCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomCell.swift; sourceTree = "<group>"; };
+		1F82FB972831435A00E7C5AA /* HelpActionButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpActionButton.swift; sourceTree = "<group>"; };
 		1F97B7DC2809B311002FFCA3 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		1F9B6AEF280950D600C0A725 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		1F9BE0A8280BE14100F87EFA /* PaletteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PaletteView.swift; path = Shared/PaletteView.swift; sourceTree = SOURCE_ROOT; };
@@ -248,6 +252,7 @@
 			isa = PBXGroup;
 			children = (
 				1F387CEA2830082000F6B81D /* RearrangeActionButton.swift */,
+				1F82FB972831435A00E7C5AA /* HelpActionButton.swift */,
 				1F62193F28293B5100C9B175 /* SmallBubbleView.swift */,
 				1F4DF99B282B82D900D54BE8 /* Buttons */,
 				1F5A0F6B282641D00075E86B /* EmptyHistoryAlertView.swift */,
@@ -490,6 +495,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1F4DF99D282B82EF00D54BE8 /* CircleButton.swift in Sources */,
+				1F82FB982831435A00E7C5AA /* HelpActionButton.swift in Sources */,
 				1F18B457281FA6130080ADA6 /* PushView.swift in Sources */,
 				1FFC8BAD28142F040059EF2E /* Session Properties.swift in Sources */,
 				1F64200A2820204400413E31 /* BottomCell.swift in Sources */,
@@ -548,6 +554,7 @@
 				1FCF0C672816F3F600AA1FAA /* EmptyBubbleListView.swift in Sources */,
 				1F5F4A742809409600AF3442 /* Bubble.swift in Sources */,
 				1FF0A2FE2810448100B1DB77 /* TopDetailView.swift in Sources */,
+				1F82FB992831435A00E7C5AA /* HelpActionButton.swift in Sources */,
 				1F5F4A962809450A00AF3442 /* Library.swift in Sources */,
 				1F5F4A9A2809456E00AF3442 /* BubbleList.swift in Sources */,
 				1FD21866281D9AB700B43403 /* ExitFocusAlertView.swift in Sources */,
@@ -575,6 +582,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1F4DF99F282B82EF00D54BE8 /* CircleButton.swift in Sources */,
+				1F82FB9A2831435A00E7C5AA /* HelpActionButton.swift in Sources */,
 				1F18B459281FA6130080ADA6 /* PushView.swift in Sources */,
 				1FFC8BAF28142F040059EF2E /* Session Properties.swift in Sources */,
 				1F64200C2820204400413E31 /* BottomCell.swift in Sources */,
