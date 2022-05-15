@@ -52,8 +52,14 @@ struct BubbleList: View {
                                     }
                                     .onMove { indices, destinationIndex in
                                         let source = section[indices.first!].rank
-                                        let destination = section[destinationIndex -  1].rank
-                                        viewModel.reorderRanks(source, destination)
+                                        
+                                        if destinationIndex > 0 {
+                                            let destination = section[destinationIndex -  1].rank
+                                            viewModel.reorderRanks(source, destination)
+                                        } else {
+                                            let destination = section[destinationIndex].rank
+                                            viewModel.reorderRanks(source, destination)
+                                        }
                                     }
                                 } header: { headerTitle(for: section.id.description) }
                                 .accentColor(section.id == true ? .orange : .black)

@@ -142,13 +142,18 @@ class ViewModel: ObservableObject {
         let sourceIndex = bubbles.firstIndex(of: bubble(for: Int(source))!)!
         let destIndex = bubbles.firstIndex(of: bubble(for: Int(destination))!)!
         
+        print("source \(sourceIndex), dest \(destIndex)")
+        
         let removedBubble = bubbles.remove(at: sourceIndex)
         if bubbleMovedDown {
             if destIndex < bubbles.count { bubbles.insert(removedBubble, at: destIndex) }
             else { bubbles.append(removedBubble) }
         } else {
-            print("destIndex", destIndex)
-            bubbles.insert(removedBubble, at: bubbles.count - destIndex)
+            if destIndex >= 0 {
+                bubbles.insert(removedBubble, at: destIndex)
+            } else {
+                bubbles.insert(removedBubble, at: 0)
+            }
         }
         
         //reassign ranks
