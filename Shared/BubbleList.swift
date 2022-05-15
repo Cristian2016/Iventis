@@ -21,7 +21,7 @@ struct BubbleList: View {
                 ZStack {
                     if predicate == nil {
                         Push(.topRight) { RearrangeActionButton() }
-                        .padding(EdgeInsets(top: -4, leading: 0, bottom: 2, trailing: 20))
+                        .padding(EdgeInsets(top: -8, leading: 0, bottom: 2, trailing: 20))
                         .zIndex(3)
                     }
                     if predicate != nil {
