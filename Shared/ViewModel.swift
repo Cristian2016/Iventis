@@ -130,6 +130,7 @@ class ViewModel: ObservableObject {
         
     }
     
+    //⚠️ super hard to get it right
     func reorderRanks(_ sourceRank:Int64, _ destRank:Int64, _ moveBottom:Bool = false) {
         if sourceRank == destRank { return }
         
@@ -160,7 +161,7 @@ class ViewModel: ObservableObject {
         }
         
         //reset rank generator
-        UserDefaults.resetRankGenerator(sortedBubbles.count -  1)
+        UserDefaults.resetRankGenerator(sortedBubbles.count)
         
         PersistenceController.shared.save()
     }

@@ -14,15 +14,17 @@ struct BubbleList: View {
     @State var showDeleteActionView_BubbleRank:Int? = nil //bubble.rank
     @State var showDetailView_BubbleRank:Int? = nil //bubble.rank
     
-    @Environment(\.editMode) var editMode
-    private var isFocusModeOn:Bool { predicate != nil }
-    
     var body: some View {
         ZStack {
             if results.isEmpty { EmptyBubbleListView() }
             else {
                 ZStack {
-                    if isFocusModeOn {
+                    if predicate == nil {
+                        Push(.topRight) { EditButton() }
+                        .padding(EdgeInsets(top: -10, leading: 0, bottom: 2, trailing: 60))
+                        .zIndex(3)
+                    }
+                    if predicate != nil {
                         VStack {
                             ExitFocusAlertView($predicate, $showDetailView_BubbleRank)
                                 .background(Rectangle()
@@ -38,21 +40,7 @@ struct BubbleList: View {
                     }
                     
                     VStack {
-                        ZStack {
-                            Spacer(minLength: showDetailView_BubbleRank != nil ? 50 : 60)
-                            if !isFocusModeOn {
-                                HStack {
-                                    Spacer()
-                                    HelpActionButton()
-                                    RearrangeActionButton()
-                                }
-                                .padding([.trailing])
-                                .offset(x: 0, y: 44)
-                            }
-                        }.zIndex(4)
-                        
-                        
-                       //distance from status bar
+                        Spacer(minLength: showDetailView_BubbleRank != nil ? 50 : 40) //distance from status bar
                         List {
                             ForEach(results) { section in
                                 Section {
@@ -62,7 +50,7 @@ struct BubbleList: View {
                                                    $predicate,
                                                    $showDeleteActionView_BubbleRank)
                                         .coordinateSpace(name: "BubbleCell")
-                                        .environmentObject(viewModel)
+                                                .environmentObject(viewModel)
                                     }
                                     .onMove { (indices, destinationIndex) in
                                         
@@ -78,10 +66,15 @@ struct BubbleList: View {
                                             viewModel.reorderRanks(sourceRank, destRank)
                                         }
                                     }
-                                } header: { headerTitle(for: section.id.description) }
-                                    .accentColor(.clear)
+                                } header: {
+                                    headerTitle(for: section.id.description)
+                                }
+                                .accentColor(.clear)
+                                
                             }
-                            Spacer(minLength: 80)
+                            
+//                            if predicate == nil { DragAndDropActionButton(userWantsToDragAndDropBubbles: $userWantsToDragAndDropBubbles) }
+                            Spacer(minLength: 100)
                         }
                         .padding(EdgeInsets(top: 0, leading: -10, bottom: 0, trailing: -10))
                         .listStyle(.sidebar)
