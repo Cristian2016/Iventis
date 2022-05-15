@@ -133,11 +133,40 @@ class ViewModel: ObservableObject {
     func reorderRanks(_ source:Int64, _ destination:Int64) {
         let request = Bubble.fetchRequest()
         request.sortDescriptors = [NSSortDescriptor(key: "rank", ascending: false)]
-       let res = try! PersistenceController.shared.viewContext.fetch(request)
-        let ranks = res.map { bubble in
-            bubble.rank
-        }
+        
+        let bubbleMovedDown = source > destination
+        
+        //get bubbles ordered by rank
+        let bubbles = try! PersistenceController.shared.viewContext.fetch(request)
+        
+        //get corresponding array of ranks
+        var ranks = bubbles.map { $0.rank }
         print(ranks)
+        
+        let sourceIndex = ranks.firstIndex(of: source)!
+        let destIndex = ranks.firstIndex(of: destination)!
+        //perform changes
+        
+        ranks.remove(at: sourceIndex)
+        print(ranks)
+        if bubbleMovedDown {
+            if destIndex < ranks.endIndex {
+                ranks.insert(source, at: destIndex)
+            } else {
+                ranks.append(source)
+            }
+        }
+        
+        //change ranks
+        var newRanks = [Int64]()
+        for (index, _) in ranks.enumerated() {
+            newRanks.append(Int64(index))
+        }
+        for (index, bubble) in bubbles.reversed().enumerated() {
+            bubble.rank = Int64(index)
+        }
+        
+        PersistenceController.shared.save()
     }
     
     // FIXME: ⚠️ not complete!
