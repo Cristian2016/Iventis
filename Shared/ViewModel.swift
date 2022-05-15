@@ -140,21 +140,25 @@ class ViewModel: ObservableObject {
         let bubbles = try! PersistenceController.shared.viewContext.fetch(request)
         
         //get corresponding array of ranks
-        var ranks = bubbles.map { $0.rank }
-        print(ranks)
+        let bubbleRanks = bubbles.map { $0.rank }
         
-        let sourceIndex = ranks.firstIndex(of: source)!
-        let destIndex = ranks.firstIndex(of: destination)!
+        let sourceIndex = bubbleRanks.firstIndex(of: source)!
+        let destIndex = bubbleRanks.firstIndex(of: destination)!
         //perform changes
         
-        ranks.remove(at: sourceIndex)
-        print(ranks)
+        var changedRanks = bubbleRanks
+        changedRanks.remove(at: sourceIndex)
         if bubbleMovedDown {
-            if destIndex < ranks.count { ranks.insert(source, at: destIndex) }
-            else { ranks.append(source) }
+            if destIndex < changedRanks.count - 1 { changedRanks.insert(source, at: destIndex) }
+            else { changedRanks.append(source) }
         }
         
-        print(ranks)
+        print("changed ranks", changedRanks, "bubble Ranks \(bubbleRanks)")
+        for (index, _) in bubbles.enumerated() {
+            bubbles[index].rank = changedRanks[index]
+        }
+        
+        print("changed ranks", changedRanks, "bubble Ranks \(bubbleRanks)")
         
         PersistenceController.shared.save()
     }
