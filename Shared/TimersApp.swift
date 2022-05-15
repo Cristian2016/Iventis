@@ -16,6 +16,7 @@ struct TimersApp: App {
             ContainerView()
                 .environment(\.managedObjectContext, viewContext)
                 .coordinateSpace(name: "Device")
+            
         }
     }
     
