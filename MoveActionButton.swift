@@ -22,7 +22,7 @@ struct MoveActionButton: View {
             Button { toggleEditMode() }
         label: {
             Label {
-                Text(editMode?.wrappedValue == .active ? "Cancel" : "Reorder")
+                Text(editMode?.wrappedValue == .active ? "Cancel" : "Rearrange")
                     .font(.title2)
             } icon: {
                 Image(systemName: "arrow.up.arrow.down.circle.fill")
