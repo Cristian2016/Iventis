@@ -40,7 +40,8 @@ struct BubbleList: View {
                     }
                     
                     VStack {
-                        Spacer(minLength: showDetailView_BubbleRank != nil ? 50 : 45) //distance from status bar
+                        //distance from status bar
+                        Spacer(minLength: showDetailView_BubbleRank != nil ? 50 : 45)
                         List {
                             ForEach(results) { section in
                                 Section {
@@ -66,14 +67,11 @@ struct BubbleList: View {
                                             viewModel.reorderRanks(sourceRank, destRank)
                                         }
                                     }
-                                } header: {
-                                    headerTitle(for: section.id.description)
                                 }
-                                .accentColor(.clear)
-                                
+                            header: { headerTitle(for: section.id.description) }
+                                .accentColor(.clear) //collapse section indicators invisible
                             }
-                            
-//                            if predicate == nil { DragAndDropActionButton(userWantsToDragAndDropBubbles: $userWantsToDragAndDropBubbles) }
+
                             Spacer(minLength: 100)
                         }
                         .padding(EdgeInsets(top: 0, leading: -10, bottom: 0, trailing: -10))
