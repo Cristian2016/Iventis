@@ -22,7 +22,6 @@ struct BubbleList: View {
             if results.isEmpty { EmptyBubbleListView() }
             else {
                 ZStack {
-                    Color.background1
                     if isFocusModeOn {
                         VStack {
                             ExitFocusAlertView($predicate, $showDetailView_BubbleRank)
@@ -39,17 +38,20 @@ struct BubbleList: View {
                     }
                     
                     VStack {
-                        Rectangle().fill(Color.background1)
-                            .overlay(content: {
+                        ZStack {
+                            Spacer(minLength: showDetailView_BubbleRank != nil ? 50 : 60)
+                            if !isFocusModeOn {
                                 HStack {
                                     Spacer()
                                     HelpActionButton()
                                     RearrangeActionButton()
                                 }
-                                .offset(x: 0, y: 25)
                                 .padding([.trailing])
-                            })
-                            .frame(height: showDetailView_BubbleRank != nil ? 50 : 80)
+                                .offset(x: 0, y: 44)
+                            }
+                        }.zIndex(4)
+                        
+                        
                        //distance from status bar
                         List {
                             ForEach(results) { section in
