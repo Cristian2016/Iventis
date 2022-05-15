@@ -131,32 +131,36 @@ class ViewModel: ObservableObject {
     }
     
     func reorderRanks(_ sourceRank:Int64, _ destRank:Int64) {
+        if sourceRank == destRank { return }
+        
         let bubbleMovedDown = sourceRank > destRank
         
         //get bubbles sorted by rank
         let request = Bubble.fetchRequest()
         request.sortDescriptors = [NSSortDescriptor(key: "rank", ascending: false)]
-        var bubbles = try! PersistenceController.shared.viewContext.fetch(request)
+        let bubbles = try! PersistenceController.shared.viewContext.fetch(request)
         
-        let removedBubble = bubbles.remove(at: index(of: sourceRank)!)
-        print(removedBubble.color!)
-//        if bubbleMovedDown {
-//            if destIndex < bubbles.count { bubbles.insert(removedBubble, at: destIndex) }
-//            else { bubbles.append(removedBubble) }
-//        } else {
-//            if destIndex >= 0 {
-//                bubbles.insert(removedBubble, at: destIndex)
-//            } else {
-//                bubbles.insert(removedBubble, at: 0)
-//            }
-//        }
-//
-//        //reassign ranks
-//        for (index, _) in bubbles.enumerated() {
-//            bubbles[index].rank = Int64(bubbles.count - 1 - index)
-//        }
+        //change ranks temporarily so that you can simply "move" a bubble without removing it. just by assigning a new rank
+        bubbles.forEach { $0.rank = 2 * $0.rank + 1 }
         
-//        PersistenceController.shared.save()
+        if bubbleMovedDown {
+            let sourceBubble = bubble(for: Int(sourceRank) * 2 + 1)
+            let destBubble = bubble(for: Int(destRank) * 2 + 1)
+            
+            sourceBubble?.rank = destBubble!.rank + 1
+            
+        } else {
+            
+            
+        }
+        
+       let sortedBubbles = bubbles.sorted { $0.rank > $1.rank }
+        
+        for (index, bubble) in sortedBubbles.enumerated() {
+            bubble.rank = Int64(sortedBubbles.count - 1 - index)
+        }
+        
+        PersistenceController.shared.save()
     }
     
     // FIXME: ⚠️ not complete!

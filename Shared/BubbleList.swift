@@ -48,17 +48,24 @@ struct BubbleList: View {
                                                    $predicate,
                                                    $showDeleteActionView_BubbleRank)
                                         .coordinateSpace(name: "BubbleCell")
-                                                .environmentObject(viewModel)
+                                        .environmentObject(viewModel)
                                     }
-                                    .onMove { indices, destinationIndex in
+                                    .onMove { (indices, destinationIndex) in
+                                        
+                                        let moveAtTheBottom = destinationIndex == section.count
+                                        let moveAtTheTop = destinationIndex == 0
+                                        
                                         let sourceRank = section[indices.first!].rank
-                                        let destRank = section[destinationIndex].rank
-                                        if section.id == false {
+                                        
+                                        if moveAtTheBottom {
+                                            
+                                        } else {
+                                            let destRank = section[destinationIndex].rank
                                             viewModel.reorderRanks(sourceRank, destRank)
                                         }
                                     }
                                 } header: { headerTitle(for: section.id.description) }
-                                .accentColor(section.id == true ? .orange : .black)
+                                    .accentColor(section.id == true ? .orange : .black)
                             }
                             
                             if !isFocusModeOn { MoveActionButton() }
