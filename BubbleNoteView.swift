@@ -13,6 +13,7 @@ struct BubbleNoteView: View {
     
     @State var searchText:String = ""
     @Binding var showBubbleNoteView:Bool
+    @FocusState var isTyping:Bool
     
     init(_ showBubbleNoteView:Binding<Bool>) {
         _showBubbleNoteView = Binding(projectedValue: showBubbleNoteView)
@@ -23,11 +24,17 @@ struct BubbleNoteView: View {
             Color.white.opacity(0.001)
                 .onTapGesture { showBubbleNoteView = false }
             NavigationView {
-                List (bubbles) { bubble in
-                    Text(bubble.note_)
+                List {
+                    ForEach (bubbles) { bubble in
+                        Text(bubble.note_)
+                    }
                 }
+                .focused($isTyping)
                 .listStyle(.plain)
                 .searchable(text: $searchText, prompt: "Search or Add Note")
+                .onAppear {
+                    isTyping = true
+                }
             }
             .frame(width: 300, height: 500)
         }
