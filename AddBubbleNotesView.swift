@@ -19,24 +19,25 @@ struct AddBubbleNotesView: View {
         _showBubbleNoteView = Binding(projectedValue: showBubbleNoteView)
     }
     
+    private let size = CGSize(width: 250, height: 400)
+    private let cornerRadius = CGFloat(24)
+    
     var body: some View {
         ZStack {
             Color.white.opacity(0.001)
                 .onTapGesture { showBubbleNoteView = false }
-            RoundedRectangle(cornerRadius: 24)
-                .frame(width: 250, height: 400)
+            RoundedRectangle(cornerRadius: cornerRadius)
+                .frame(width: size.width, height: size.height)
                 .foregroundColor(Color("searchFieldBackground"))
                 .standardShadow(false)
                 .overlay {
                     VStack {
-                        Spacer(minLength: 14)
-                        TextField("Search/Add Note", text: $searchString)
-                            .focused($isTyping)
-                            .font(.title2)
-                            .padding()
+                        topSpacer //pushes textfield down a little
+                        textField
                             .onSubmit {
                                 print("searchField \(searchString)")
                             }
+                            .onAppear { isTyping = true }
                         ZStack {
                             List {
                                 ForEach (bubbles) { bubble in
@@ -48,17 +49,27 @@ struct AddBubbleNotesView: View {
                             .listStyle(.plain)
                         }
                     }
-                    .background  {
-                        VStack {
-                            Spacer(minLength: 90)
-                            Color("deleteActionViewBackground")
-                        }
-                    }
-                    .clipShape(RoundedRectangle(cornerRadius: 24))
+                    .background  { backgroundView }
+                    .clipShape(RoundedRectangle(cornerRadius: cornerRadius))
                 }
         }
-        .onAppear { isTyping = true }
     }
+    
+    private var textField: some View {
+        TextField("Search/Add Note", text: $searchString)
+            .focused($isTyping)
+            .font(.title2)
+            .padding()
+    }
+        
+    private var backgroundView :some View {
+        VStack {
+            Spacer(minLength: 90)
+            Color("deleteActionViewBackground")
+        }
+    }
+    
+    private var topSpacer: some View { Spacer(minLength: 14) }
 }
 
 struct BubbleNoteView_Previews: PreviewProvider {
