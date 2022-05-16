@@ -37,14 +37,18 @@ struct BubbleNotesView: View {
                             .onSubmit {
                                 print("searchField \(searchString)")
                             }
-                        List {
-                            ForEach (bubbles) { bubble in
-                                Text(bubble.note_)
+                        ZStack {
+                            List {
+                                ForEach (bubbles) { bubble in
+                                    Text(bubble.note_)
+                                }
+                                .listRowSeparator(.hidden)
+                                .listRowBackground(Color("deleteActionViewBackground"))
                             }
-                            .listRowSeparator(.hidden)
-                            .listRowBackground(Color("deleteActionViewBackground"))
+                            .listStyle(.plain)
+                            Color("deleteActionViewBackground")
+                                .offset(x: 0, y: 80)
                         }
-                        .listStyle(.plain)
                     }
                     .clipShape(RoundedRectangle(cornerRadius: 24))
                 }
