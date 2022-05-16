@@ -107,6 +107,15 @@ extension Float {
         return TimeComponentsAsStrings(hr: String(components.hr), min: String(components.min), sec: String(components.sec), cents: cents)
     }
     
+    var timeComponentsAbreviatedString:String {
+        let hr = self.timComponentsAsStrings.hr != "0" ? timComponentsAsStrings.hr + " hr" : ""
+        let min = self.timComponentsAsStrings.min != "0" ? timComponentsAsStrings.min + " min" : ""
+        let sec = self.timComponentsAsStrings.sec != "0" ? timComponentsAsStrings.sec + " sec" : ""
+//        let cents = self.timComponentsAsStrings.cents != "0" ? timComponentsAsStrings.sec + " sec" : ""
+        
+        return hr + min + sec
+    }
+    
     struct TimeComponents {
         let hr:Int
         let min:Int
@@ -125,6 +134,21 @@ extension Float {
 extension UserDefaults {
     struct Key {
         static let rank = "rank"
+        
+        static let localNotificationsAuthorizationRequestedAlready = "localNotificationsAuthorizationRequestedAlready"
+        static let calendarAuthorizationRequestedAlready = "calendarAuthorizationRequestedAlready"
+        static let ctsCount = "ctsCount"
+        static let defaultCalendarIdentifier = "defaultCalendarIdentifier"
+        
+        static let notificationReceivalMoment = "notificationReceivalMoment"
+        static let infoBannerNotShownAlready = "infoBannerNotShownAlready"
+        
+        static let widgetEnabledTimeBubble = "widgetEnabledTimeBubble"
+        static let isCoreDataShared = "isCoreDataShared"
+        static let shouldExplainingTextBeVisible = "shouldExplainingTextBeVisible"
+        
+        static let firstAppLaunchEver = "firstAppLaunchEver"
+        static let quickStartGuidePresentedAlready = "quickStartGuidePresentedAlready"
     }
     
     static func generateRank() -> Int {

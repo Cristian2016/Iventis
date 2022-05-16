@@ -103,10 +103,9 @@ struct BubbleCell: View {
             
             //calendar
             Button { viewModel.toggleCalendar(bubble) }
-        label: { Label { Text(bubble.hasCalendar ? "Cal OFF" : "Cal ON") }
-            icon: { Image(systemName: bubble.hasCalendar ? "calendar" : "calendar")
-            } }
-        .tint(bubble.hasCalendar ? .calendarOff : .calendar)
+        label: { Label { Text(calendarActionName) }
+            icon: { Image(systemName: calendarActionImageName) } }
+        .tint(calendarActionColor)
         }
         .swipeActions(edge: .trailing, allowsFullSwipe: true) {
             //delete
@@ -121,6 +120,7 @@ struct BubbleCell: View {
         }
     }
     
+    // MARK: -
     private var timeComponentsViews:some View {
         ZStack {
             //HOURS
@@ -299,3 +299,18 @@ extension BubbleCell {
 //        BubbleCell(PersistenceController.preview.)
 //    }
 //}
+
+// MARK: - Little Helpers
+extension BubbleCell {
+    private var calendarActionName:String {
+        bubble.hasCalendar ? "Cal OFF" : "Cal ON"
+    }
+    
+    private var calendarActionImageName:String {
+        bubble.hasCalendar ? "calendar" : "calendar"
+    }
+    
+    private var calendarActionColor:Color {
+        bubble.hasCalendar ? Color.calendarOff : .calendar
+    }
+}

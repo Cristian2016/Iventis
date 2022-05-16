@@ -88,9 +88,3 @@ struct PairCell: View {
         self.pairNumber = pairNumber
     }
 }
-
-//struct PairCell_Previews: PreviewProvider {
-//    static var previews: some View {
-//        PairCell()
-//    }
-//}

@@ -85,4 +85,19 @@ extension Color {
     static func bubble(for bubbleColorName:String) -> Color {
         (Color.bubbleThrees.filter { $0.description == bubbleColorName }.first ?? Color.Bubbles.mint).sec
     }
+    
+    static let emojis = ["lemon":"🟨",
+                              "red":"🟥",
+                              "ultramarine":"🟦",
+                              "green":"🟩",
+                              "orange":"🟧",
+                              "purple":"🟪",
+                              "charcoal":"⬛️",
+                              "silver":"⬜️",
+                              "chocolate":"🟫"]
+    
+    static func emoji(for colorName:String?) -> String {
+        guard let colorName = colorName else { return String() }
+        return emojis[colorName.lowercased()] ?? String()
+    }
 }

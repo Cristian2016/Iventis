@@ -149,3 +149,10 @@ extension Bubble {
         }
     }
 }
+
+extension Bubble {
+    var note_:String {
+        get { note ?? "" }
+        set { note = newValue }
+    }
+}

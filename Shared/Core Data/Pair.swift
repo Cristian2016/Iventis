@@ -28,6 +28,11 @@ public class Pair: NSManagedObject {
         case endSession
     }
     
+    var note_:String {
+        get { note ?? "" }
+        set { note = newValue }
+    }
+    
 //    func computePairDuration(_ durationComputed:DurationComputed) {
 //        guard let pause = pause else { fatalError() }
 //        if let start = start {

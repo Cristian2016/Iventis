@@ -24,6 +24,7 @@ extension Session {
     @NSManaged public var bubble: Bubble?
     @NSManaged public var pairs: NSOrderedSet?
 
+    @NSManaged public var eventID: String?
 }
 
 // MARK: Generated accessors for pairs

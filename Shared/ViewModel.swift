@@ -122,6 +122,10 @@ class ViewModel: ObservableObject {
     }
     
     func toggleCalendar(_ bubble:Bubble) {
+        if UserDefaults.standard.value(forKey: UserDefaults.Key.calendarAuthorizationRequestedAlready) == nil {
+            CalendarManager.shared.requestAuthorizationAndCreateCalendar()
+            UserDefaults.standard.setValue(true, forKey: UserDefaults.Key.calendarAuthorizationRequestedAlready)
+        }
         bubble.hasCalendar.toggle()
         PersistenceController.shared.save()
     }
