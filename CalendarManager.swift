@@ -14,14 +14,7 @@ extension CalendarManager {
     typealias Store = EKEventStore
 }
 
-class CalendarManager: NSObject {
-    // MARK: -
-    private lazy var store = Store() /* read write events */
-    private(set) var defaultCalendarTitle = "Time Bubbles 📥"
-    private let eventNotesSeparator = "Add notes below:\n"
-    private lazy var defaultCalendarID = UserDefaults.standard.value(forKey: UserDefaults.Key.defaultCalendarIdentifier) as? String
-    
-    // MARK: - public
+extension CalendarManager {
     ///if authorization granted, create default calendar to add events to it
     func requestAuthorizationAndCreateCalendar() {
         guard
@@ -33,6 +26,43 @@ class CalendarManager: NSObject {
         }
     }
     
+    ///if user swipes on a bubble to enable calendar and bubble already has activity, all activity will be exported to Calendar App
+    func shouldExportToCalendarAllSessions(of bubble:Bubble) {
+        guard
+            bubble.hasCalendar,
+            !bubble.sessions_.isEmpty else { return }
+        
+        bubble.sessions_.forEach { if $0.isEnded { createNewEvent(for: $0) }}
+    }
+    
+    ///creates a new event when the user ends a session
+    func createNewEvent(for session: Session?) {
+        guard
+            let session = session,
+            session.isLastPairClosed,
+            session.eventID == nil else { return }
+                
+        let pairs = session.pairs_
+        let firstPair = pairs.first!
+        let lastPair = pairs.last!
+        
+        let notes = composeEventNotes(from: pairs)
+        
+        let title = title(for: session)
+        session.eventID = newEvent(eventTitle: title, stickyNote:session.bubble?.note, notes: notes, start: firstPair.start!, end: lastPair.pause!)
+        PersistenceController.shared.save()
+    }
+    
+}
+
+class CalendarManager: NSObject {
+    // MARK: -
+    private lazy var store = Store() /* read write events */
+    private(set) var defaultCalendarTitle = "Time Bubbles 📥"
+    private let eventNotesSeparator = "Add notes below:\n"
+    private lazy var defaultCalendarID = UserDefaults.standard.value(forKey: UserDefaults.Key.defaultCalendarIdentifier) as? String
+    
+    // MARK: - public
     private var doNotCreateCalendar = false
     
     ///⚠️ To avoid duplicates, this function creates a calendar only if there is no other calendar with same or similar name. if it finds an existing calendar, it will set it as the default calendar
@@ -77,14 +107,6 @@ class CalendarManager: NSObject {
         catch { }
     }
     
-    func shouldExportToCalendarAllSessions(of bubble:Bubble) {
-        guard
-            bubble.hasCalendar,
-            !bubble.sessions_.isEmpty else { return }
-        
-        bubble.sessions_.forEach { if $0.isEnded { createNewEvent(for: $0) }}
-    }
-    
     // MARK: - Events
     //could this cause memory cycle?? ⚠️
     private func lastSubeventNote(for session:Session) -> String {
@@ -92,22 +114,6 @@ class CalendarManager: NSObject {
     }
     
     // MARK: - Main
-    func createNewEvent(for session: Session?) {
-        guard
-            let session = session,
-            session.isLastPairClosed,
-            session.eventID == nil else { return }
-                
-        let pairs = session.pairs_
-        let firstPair = pairs.first!
-        let lastPair = pairs.last!
-        
-        let notes = composeEventNotes(from: pairs)
-        
-        let title = title(for: session)
-        session.eventID = newEvent(eventTitle: title, stickyNote:session.bubble?.note, notes: notes, start: firstPair.start!, end: lastPair.pause!)
-        PersistenceController.shared.save()
-    }
     
     func updateExistingEvent(_ kind:EventUpdateKind) {
         switch kind {
