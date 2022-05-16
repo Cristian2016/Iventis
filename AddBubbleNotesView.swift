@@ -26,10 +26,7 @@ struct AddBubbleNotesView: View {
         ZStack {
             Color.white.opacity(0.001)
                 .onTapGesture { showBubbleNoteView = false }
-            RoundedRectangle(cornerRadius: cornerRadius)
-                .frame(width: size.width, height: size.height)
-                .foregroundColor(Color("searchFieldBackground"))
-                .standardShadow(false)
+            darkRoundedRect
                 .overlay {
                     VStack {
                         topSpacer //pushes textfield down a little
@@ -38,21 +35,27 @@ struct AddBubbleNotesView: View {
                                 print("searchField \(searchString)")
                             }
                             .onAppear { isTyping = true }
-                        ZStack {
-                            List {
-                                ForEach (bubbles) { bubble in
-                                    Text(bubble.note_)
-                                }
-                                .listRowSeparator(.hidden)
-                                .listRowBackground(Color("deleteActionViewBackground"))
+                        List {
+                            ForEach (bubbles) { bubble in
+                                Text(bubble.note_)
                             }
-                            .listStyle(.plain)
+                            .listRowSeparator(.hidden)
+                            .listRowBackground(Color("deleteActionViewBackground"))
                         }
+                        .listStyle(.plain)
                     }
                     .background  { backgroundView }
                     .clipShape(RoundedRectangle(cornerRadius: cornerRadius))
                 }
         }
+    }
+    
+    // MARK: - Legoes
+    private var darkRoundedRect: some View {
+        RoundedRectangle(cornerRadius: cornerRadius)
+            .frame(width: size.width, height: size.height)
+            .foregroundColor(Color("searchFieldBackground"))
+            .standardShadow(false)
     }
     
     private var textField: some View {
