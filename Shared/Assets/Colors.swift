@@ -33,7 +33,7 @@ extension Color {
         
         //row 4
         static let green = Three(description: Name.green.rawValue, hr: Color(#colorLiteral(red: 0.1198918894, green: 0.8718696237, blue: 0.155010134, alpha: 1)), min: Color(#colorLiteral(red: 0.1077821925, green: 0.7843493819, blue: 0.1306060255, alpha: 1)), sec: Color(#colorLiteral(red: 0.08472224325, green: 0.6849253774, blue: 0.1049573496, alpha: 1)))
-        static let coffee = Three(description: Name.coffee.rawValue, hr: Color(#colorLiteral(red: 0.4745098948, green: 0.4745098948, blue: 0.4745098948, alpha: 1)), min: Color(#colorLiteral(red: 0.2588235736, green: 0.2588236034, blue: 0.2588235736, alpha: 1)), sec: Color("coffee"))
+        static let charcoal = Three(description: Name.coffee.rawValue, hr: Color(#colorLiteral(red: 0.4745098948, green: 0.4745098948, blue: 0.4745098948, alpha: 1)), min: Color(#colorLiteral(red: 0.2588235736, green: 0.2588236034, blue: 0.2588235736, alpha: 1)), sec: Color("charcoal"))
         static let magenta = Three(description: Name.magenta.rawValue, hr: Color(#colorLiteral(red: 0.9885047078, green: 0.6262013316, blue: 0.9807611108, alpha: 1)), min: Color(#colorLiteral(red: 0.9893129468, green: 0.4895346761, blue: 0.9776270986, alpha: 1)), sec: Color(#colorLiteral(red: 0.9892597795, green: 0.3731681108, blue: 0.9725615382, alpha: 1)))
         
         //row 5
@@ -79,7 +79,7 @@ extension Color {
     
     static let bubbleThrees = [
         Bubbles.mint, Bubbles.slateBlue, Bubbles.sourCherry, Bubbles.silver, Bubbles.ultramarine, Bubbles.lemon, Bubbles.red, Bubbles.sky, Bubbles.bubbleGum,
-        Bubbles.green, Bubbles.coffee, Bubbles.magenta, Bubbles.purple, Bubbles.orange, Bubbles.chocolate, Bubbles.aqua, Bubbles.byzantium, Bubbles.rose
+        Bubbles.green, Bubbles.charcoal, Bubbles.magenta, Bubbles.purple, Bubbles.orange, Bubbles.chocolate, Bubbles.aqua, Bubbles.byzantium, Bubbles.rose
     ]
     
     static func bubble(for bubbleColorName:String) -> Color {

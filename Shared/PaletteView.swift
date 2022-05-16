@@ -59,7 +59,7 @@ struct PaletteView: View {
             }
             HStack(spacing:-20) {
                 circle(Color.Bubbles.green)
-                circle(Color.Bubbles.coffee)
+                circle(Color.Bubbles.charcoal)
                 circle(Color.Bubbles.magenta)
             }
             HStack(spacing:-20) {

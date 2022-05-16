@@ -22,7 +22,7 @@ public class Bubble: NSManagedObject {
                       "sky" : "Sky",
                       "bubbleGum" : "Bubble Gum",
                       "green" : "Green",
-                      "coffee" : "Coffee",
+                      "charcoal" : "Charcoal",
                       "magenta" : "Magenta",
                       "purple" : "Purple",
                       "orange" : "Orange",
