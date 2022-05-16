@@ -14,6 +14,7 @@ extension CalendarManager {
     typealias Store = EKEventStore
 }
 
+// MARK: - essential methods
 extension CalendarManager {
     ///if authorization granted, create default calendar to add events to it
     func requestAuthorizationAndCreateCalendar() {
@@ -55,8 +56,8 @@ extension CalendarManager {
     
 }
 
+// MARK: -
 class CalendarManager: NSObject {
-    // MARK: -
     private lazy var store = Store() /* read write events */
     private(set) var defaultCalendarTitle = "Time Bubbles 📥"
     private let eventNotesSeparator = "Add notes below:\n"
