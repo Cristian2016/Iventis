@@ -13,6 +13,7 @@ struct BubbleList: View {
     //showing Detail or DeleteAction views
     @State var showDeleteActionView_BubbleRank:Int? = nil //bubble.rank
     @State var showDetailView_BubbleRank:Int? = nil //bubble.rank
+    @State var addBubbleNotesView_BubbleRank:Int? = nil //bubble rank
     
     @State var showBubbleNotesView = false
     

@@ -11,6 +11,7 @@ struct AddBubbleNotesView: View {
     @FetchRequest(entity: Bubble.entity(), sortDescriptors: [], predicate: nil, animation: .default)
     private var bubbles:FetchedResults<Bubble>
     
+    
     @State var searchString:String = ""
     @Binding var showBubbleNoteView:Bool
     @FocusState var isTyping:Bool
