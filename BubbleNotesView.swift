@@ -25,13 +25,13 @@ struct BubbleNotesView: View {
                 .onTapGesture { showBubbleNoteView = false }
             RoundedRectangle(cornerRadius: 24)
                 .frame(width: 250, height: 400)
-                .foregroundColor(Color("deleteActionViewBackground"))
+                .foregroundColor(Color("searchFieldBackground"))
+                .standardShadow(false)
                 .overlay {
                     VStack {
                         Spacer(minLength: 14)
-                        TextField("Search or Add Note", text: $searchString)
+                        TextField("Search/Add Note", text: $searchString)
                             .focused($isTyping)
-                            .foregroundColor(.white)
                             .font(.title2)
                             .padding()
                             .onSubmit {
