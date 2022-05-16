@@ -102,7 +102,10 @@ struct BubbleCell: View {
         .tint(bubble.isPinned ? .gray : .orange)
             
             //calendar
-            Button { viewModel.toggleCalendar(bubble) }
+            Button {
+                viewModel.toggleCalendar(bubble)
+                CalendarManager.shared.shouldExportToCalendarAllSessions(of: bubble)
+            }
         label: { Label { Text(calendarActionName) }
             icon: { Image(systemName: calendarActionImageName) } }
         .tint(calendarActionColor)
