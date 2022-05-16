@@ -81,6 +81,27 @@ extension FileManager {
     }()
 }
 
+extension String {
+    ///if user enters "Gym ", it will be corrected to "Gym"
+    mutating func trimWhiteSpaceAtTheEnd() {
+        while last == " " { removeLast() }
+    }
+    mutating func trimWhiteSpaceAtTheBeginning() {
+        while first == " " { removeFirst() }
+    }
+    
+    mutating func removeAllWhiteSpace() {
+        trimWhiteSpaceAtTheBeginning()
+        trimWhiteSpaceAtTheEnd()
+    }
+    
+    ///empty string: ""
+    static let empty = ""
+    
+    static let space = " "
+}
+
+
 extension Float {
     //converts currentClock to time components to display
     var timeComponents:TimeComponents {
@@ -113,8 +134,9 @@ extension Float {
         let min = (components.min > "0") ? components.min + "m" : ""
         let cents = components.cents
         let sec = (components.sec > "0") ? components.sec + "." + cents + "s" : ""
-        
-        return hr + " " + min + " " + sec
+        var result = hr + " " + min + " " + sec
+        result.trimWhiteSpaceAtTheBeginning()
+        return result
     }
     
     struct TimeComponents {
