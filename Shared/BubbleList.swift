@@ -77,7 +77,7 @@ struct BubbleList: View {
                         .listStyle(.sidebar)
                     }
                     .ignoresSafeArea()
-                    if showBubbleNotesView { BubbleNotesView($showBubbleNotesView) }
+                    if showBubbleNotesView { AddBubbleNotesView($showBubbleNotesView) }
                 }
             }
             if !showBubbleNotesView {

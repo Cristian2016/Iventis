@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct BubbleNotesView: View {
+struct AddBubbleNotesView: View {
     @FetchRequest(entity: Bubble.entity(), sortDescriptors: [], predicate: nil, animation: .default)
     private var bubbles:FetchedResults<Bubble>
     
@@ -48,6 +48,12 @@ struct BubbleNotesView: View {
                             .listStyle(.plain)
                         }
                     }
+                    .background  {
+                        VStack {
+                            Spacer(minLength: 90)
+                            Color("deleteActionViewBackground")
+                        }
+                    }
                     .clipShape(RoundedRectangle(cornerRadius: 24))
                 }
         }
@@ -57,6 +63,6 @@ struct BubbleNotesView: View {
 
 struct BubbleNoteView_Previews: PreviewProvider {
     static var previews: some View {
-        BubbleNotesView(.constant(true))
+        AddBubbleNotesView(.constant(true))
     }
 }
