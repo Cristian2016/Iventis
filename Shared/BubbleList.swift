@@ -81,6 +81,7 @@ struct BubbleList: View {
             }
             if addBubbleNotesView_BubbleRank == nil {
                 LeftStrip($showPalette, isBubbleListEmpty: results.isEmpty)
+                    .environmentObject(viewModel)
             }
             
             //on top of everything show DetailView (TopDetailView and BottomDetailView

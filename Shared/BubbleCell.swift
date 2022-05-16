@@ -93,7 +93,14 @@ struct BubbleCell: View {
             }
             timeComponentsViews
             if bubble.hasCalendar { calendarView }
-            if !bubble.isNoteHidden { noteView }
+            if !bubble.isNoteHidden {
+                noteView
+                    .onTapGesture {
+                        print(bubble.note_.isEmpty)
+                        //show AddNotesView again
+                        addBubbleNotesView_BubbleRank = Int(bubble.rank)
+                    }
+            }
         }
         .scaleEffect(editMode?.wrappedValue == .active ? 0.9 : 1.0)
         .swipeActions(edge: .leading, allowsFullSwipe: true) {

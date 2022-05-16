@@ -8,8 +8,11 @@
 import SwiftUI
 
 struct AddBubbleNotesView: View {
+    @EnvironmentObject var viewModel:ViewModel
     @FetchRequest(entity: Bubble.entity(), sortDescriptors: [], predicate: nil, animation: .default)
     private var bubbles:FetchedResults<Bubble>
+    
+    @StateObject var bubble:Bubble
     
     @State var searchString:String = ""
     @Binding var addBubbleNotesView_BubbleRank:Int?
@@ -17,6 +20,12 @@ struct AddBubbleNotesView: View {
     
     init(_ addBubbleNotesView_BubbleRank:Binding<Int?>) {
         _addBubbleNotesView_BubbleRank = Binding(projectedValue: addBubbleNotesView_BubbleRank)
+        let request = Bubble.fetchRequest()
+        request.predicate = NSPredicate(format: "rank == %i", addBubbleNotesView_BubbleRank.wrappedValue!)
+        
+        guard let bubble = try? PersistenceController.shared.viewContext.fetch(request).first else { fatalError("fuck bubble") }
+        print(bubble.color!)
+        _bubble = StateObject(wrappedValue: bubble)
     }
     
     private let size = CGSize(width: 250, height: 400)
@@ -25,14 +34,17 @@ struct AddBubbleNotesView: View {
     var body: some View {
         ZStack {
             Color.white.opacity(0.001)
-                .onTapGesture { addBubbleNotesView_BubbleRank = nil }
+                .onTapGesture {
+                    PersistenceController.shared.save()
+                    addBubbleNotesView_BubbleRank = nil
+                }
             darkRoundedRect
                 .overlay {
                     VStack {
                         topSpacer //pushes textfield down a little
                         textField
                             .onSubmit {
-                                print("searchField \(searchString)")
+                                PersistenceController.shared.save()
                             }
                             .onAppear { isTyping = true }
                         List {
@@ -59,7 +71,7 @@ struct AddBubbleNotesView: View {
     }
     
     private var textField: some View {
-        TextField("Search/Add Note", text: $searchString)
+        TextField("Search/Add Note", text: $bubble.note_)
             .focused($isTyping)
             .font(.title2)
             .padding()
