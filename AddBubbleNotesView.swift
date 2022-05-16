@@ -11,13 +11,12 @@ struct AddBubbleNotesView: View {
     @FetchRequest(entity: Bubble.entity(), sortDescriptors: [], predicate: nil, animation: .default)
     private var bubbles:FetchedResults<Bubble>
     
-    
     @State var searchString:String = ""
-    @Binding var showBubbleNoteView:Bool
+    @Binding var addBubbleNotesView_BubbleRank:Int?
     @FocusState var isTyping:Bool
     
-    init(_ showBubbleNoteView:Binding<Bool>) {
-        _showBubbleNoteView = Binding(projectedValue: showBubbleNoteView)
+    init(_ addBubbleNotesView_BubbleRank:Binding<Int?>) {
+        _addBubbleNotesView_BubbleRank = Binding(projectedValue: addBubbleNotesView_BubbleRank)
     }
     
     private let size = CGSize(width: 250, height: 400)
@@ -26,7 +25,7 @@ struct AddBubbleNotesView: View {
     var body: some View {
         ZStack {
             Color.white.opacity(0.001)
-                .onTapGesture { showBubbleNoteView = false }
+                .onTapGesture { addBubbleNotesView_BubbleRank = nil }
             darkRoundedRect
                 .overlay {
                     VStack {
@@ -78,6 +77,6 @@ struct AddBubbleNotesView: View {
 
 struct BubbleNoteView_Previews: PreviewProvider {
     static var previews: some View {
-        AddBubbleNotesView(.constant(true))
+        AddBubbleNotesView(.constant(65))
     }
 }

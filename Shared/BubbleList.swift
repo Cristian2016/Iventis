@@ -14,15 +14,13 @@ struct BubbleList: View {
     @State var showDeleteActionView_BubbleRank:Int? = nil //bubble.rank
     @State var showDetailView_BubbleRank:Int? = nil //bubble.rank
     @State var addBubbleNotesView_BubbleRank:Int? = nil //bubble rank
-    
-    @State var showBubbleNotesView = false
-    
+        
     var body: some View {
         ZStack {
             if results.isEmpty { EmptyBubbleListView() }
             else {
                 ZStack {
-                    if predicate == nil && !showBubbleNotesView {
+                    if predicate == nil && addBubbleNotesView_BubbleRank == nil {
                         Push(.topRight) { RearrangeActionButton() }
                         .padding(EdgeInsets(top: -8, leading: 0, bottom: 2, trailing: 20))
                         .zIndex(3)
@@ -52,7 +50,7 @@ struct BubbleList: View {
                                         BubbleCell($0,
                                                    $showDetailView_BubbleRank,
                                                    $predicate,
-                                                   $showDeleteActionView_BubbleRank, $showBubbleNotesView)
+                                                   $showDeleteActionView_BubbleRank, $addBubbleNotesView_BubbleRank)
                                         .coordinateSpace(name: "BubbleCell")
                                                 .environmentObject(viewModel)
                                     }
@@ -78,10 +76,10 @@ struct BubbleList: View {
                         .listStyle(.sidebar)
                     }
                     .ignoresSafeArea()
-                    if showBubbleNotesView { AddBubbleNotesView($showBubbleNotesView) }
+                    if addBubbleNotesView_BubbleRank != nil { AddBubbleNotesView($addBubbleNotesView_BubbleRank) }
                 }
             }
-            if !showBubbleNotesView {
+            if addBubbleNotesView_BubbleRank == nil {
                 LeftStrip($showPalette, isBubbleListEmpty: results.isEmpty)
             }
             

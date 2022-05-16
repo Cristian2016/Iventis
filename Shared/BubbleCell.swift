@@ -13,7 +13,7 @@ struct BubbleCell: View {
     //showing Detail or DeleteAction views
     @Binding var showDeleteActionView_bubbleRank:Int? //bubble.rank
     @Binding var showDetailView_BubbleRank:Int?
-    @Binding var showBubbleNoteView:Bool
+    @Binding var addBubbleNotesView_BubbleRank:Int?
     
     @Binding var predicate:NSPredicate?
     
@@ -38,7 +38,7 @@ struct BubbleCell: View {
          _ showDetailView_BubbleRank:Binding<Int?>,
          _ predicate:Binding<NSPredicate?>,
          _ showDeleteActionView_BubbleRank:Binding<Int?>,
-         _ showBubbleNoteView:Binding<Bool>) {
+         _ addBubbleNotesView_BubbleRank:Binding<Int?>) {
                 
         _showDeleteActionView_bubbleRank = Binding(projectedValue: showDeleteActionView_BubbleRank)
         _showDetailView_BubbleRank = Binding(projectedValue: showDetailView_BubbleRank)
@@ -53,7 +53,7 @@ struct BubbleCell: View {
             default: break
         }
         if !bubble.isObservingBackgroundTimer { bubble.observeBackgroundTimer() }
-        _showBubbleNoteView = Binding(projectedValue: showBubbleNoteView)
+        _addBubbleNotesView_BubbleRank = Binding(projectedValue: addBubbleNotesView_BubbleRank)
     }
     
     private let spacing:CGFloat = -30
@@ -143,7 +143,7 @@ struct BubbleCell: View {
                 //gestures
                     .onTapGesture(count: 2) { print("edit duration") }
                     .onTapGesture {
-                        showBubbleNoteView = true
+                        addBubbleNotesView_BubbleRank = Int(bubble.rank)
                     }
             }
             .offset(x: editMode?.wrappedValue == .active ? -70 : 0, y: 0)
