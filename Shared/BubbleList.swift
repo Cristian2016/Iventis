@@ -80,8 +80,10 @@ struct BubbleList: View {
                     if showBubbleNotesView { BubbleNotesView($showBubbleNotesView) }
                 }
             }
+            if !showBubbleNotesView {
+                LeftStrip($showPalette, isBubbleListEmpty: results.isEmpty)
+            }
             
-            LeftStrip($showPalette, isBubbleListEmpty: results.isEmpty)
             
             //on top of everything show DetailView (TopDetailView and BottomDetailView
             if predicate != nil { DetailView(showDetailView_BubbleRank) }
