@@ -22,7 +22,7 @@ struct BubbleList: View {
                 ZStack {
                     if predicate == nil && addBubbleNotesView_BubbleRank == nil {
                         Push(.topRight) { RearrangeActionButton() }
-                        .padding(EdgeInsets(top: -8, leading: 0, bottom: 2, trailing: 20))
+                        .padding(EdgeInsets(top: -8, leading: 0, bottom: 2, trailing: 16))
                         .zIndex(3)
                     }
                     if predicate != nil {
@@ -76,7 +76,6 @@ struct BubbleList: View {
                         .listStyle(.sidebar)
                     }
                     .ignoresSafeArea()
-                    if addBubbleNotesView_BubbleRank != nil { AddBubbleNotesView($addBubbleNotesView_BubbleRank) }
                 }
             }
             if addBubbleNotesView_BubbleRank == nil {
@@ -86,6 +85,9 @@ struct BubbleList: View {
             
             //on top of everything show DetailView (TopDetailView and BottomDetailView
             if predicate != nil { DetailView(showDetailView_BubbleRank) }
+            
+            if addBubbleNotesView_BubbleRank != nil { AddBubbleNotesView($addBubbleNotesView_BubbleRank)
+            }
             
             if deleteActionViewYOffset != nil && showDeleteActionView_BubbleRank != nil {
                 let bubble = viewModel.bubble(for: showDeleteActionView_BubbleRank!)

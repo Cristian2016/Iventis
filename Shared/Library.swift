@@ -108,12 +108,13 @@ extension Float {
     }
     
     var timeComponentsAbreviatedString:String {
-        let hr = self.timComponentsAsStrings.hr != "0" ? timComponentsAsStrings.hr + " hr" : ""
-        let min = self.timComponentsAsStrings.min != "0" ? timComponentsAsStrings.min + " min" : ""
-        let sec = self.timComponentsAsStrings.sec != "0" ? timComponentsAsStrings.sec + " sec" : ""
-//        let cents = self.timComponentsAsStrings.cents != "0" ? timComponentsAsStrings.sec + " sec" : ""
+        let components = self.timComponentsAsStrings
+        let hr = (components.hr > "0") ? components.hr + "h" : ""
+        let min = (components.min > "0") ? components.min + "m" : ""
+        let cents = components.cents
+        let sec = (components.sec > "0") ? components.sec + "." + cents + "s" : ""
         
-        return hr + min + sec
+        return hr + " " + min + " " + sec
     }
     
     struct TimeComponents {

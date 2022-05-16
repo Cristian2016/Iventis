@@ -150,7 +150,13 @@ struct BubbleCell: View {
                 //gestures
                     .onTapGesture(count: 2) { print("edit duration") }
                     .onTapGesture {
-                        addBubbleNotesView_BubbleRank = Int(bubble.rank)
+                        if bubble.note_.isEmpty {
+                            //show addNotesView
+                            addBubbleNotesView_BubbleRank = Int(bubble.rank)
+                        } else {
+                            bubble.isNoteHidden.toggle()
+                            PersistenceController.shared.save()
+                        }
                     }
             }
             .offset(x: editMode?.wrappedValue == .active ? -70 : 0, y: 0)
