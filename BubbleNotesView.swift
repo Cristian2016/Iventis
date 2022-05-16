@@ -28,18 +28,23 @@ struct BubbleNotesView: View {
                 .foregroundColor(Color("deleteActionViewBackground"))
                 .overlay {
                     VStack {
-                        Spacer(minLength: 30)
+                        Spacer(minLength: 14)
                         TextField("Search or Add Note", text: $searchString)
                             .focused($isTyping)
-                            .foregroundColor(Color("deleteActionViewBackground"))
+                            .foregroundColor(.white)
+                            .font(.title2)
+                            .padding()
+                            .onSubmit {
+                                print("searchField \(searchString)")
+                            }
                         List {
                             ForEach (bubbles) { bubble in
                                 Text(bubble.note_)
                             }
                             .listRowSeparator(.hidden)
+                            .listRowBackground(Color("deleteActionViewBackground"))
                         }
                         .listStyle(.plain)
-                        .listRowBackground(Color("deleteActionViewBackground"))
                     }
                     .clipShape(RoundedRectangle(cornerRadius: 24))
                 }
