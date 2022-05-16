@@ -3,4 +3,70 @@
    uuid = "8DF61F9D-6EBD-4A57-B760-A7854607A415"
    type = "1"
    version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "752290B0-0816-4017-A425-466B954038AD"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CalendarManager.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "98"
+            endingLineNumber = "98"
+            landmarkName = "createNewEvent(for:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "5E30ABE3-2FA3-40DC-85EF-E257F537E908"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CalendarManager.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "99"
+            endingLineNumber = "99"
+            landmarkName = "createNewEvent(for:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "5E30ABE3-2FA3-40DC-85EF-E257F537E908 - 8fb9be00bf58ee52"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Timers.CalendarManager.createNewEvent(for: Swift.Optional&lt;Timers.Session&gt;) -&gt; ()"
+                  moduleName = "Timers"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/cristianlapusan/Downloads/Timers/CalendarManager.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "99"
+                  endingLineNumber = "99"
+                  offsetFromSymbolStart = "452">
+               </Location>
+               <Location
+                  uuid = "5E30ABE3-2FA3-40DC-85EF-E257F537E908 - 8fb9be00bf58ee52"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Timers.CalendarManager.createNewEvent(for: Swift.Optional&lt;Timers.Session&gt;) -&gt; ()"
+                  moduleName = "Timers"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/cristianlapusan/Downloads/Timers/CalendarManager.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "99"
+                  endingLineNumber = "99"
+                  offsetFromSymbolStart = "520">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
 </Bucket>

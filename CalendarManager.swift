@@ -96,8 +96,10 @@ class CalendarManager: NSObject {
         guard
             let session = session,
             session.isLastPairClosed,
-            session.eventID == nil else { return }
-        
+            session.eventID == nil else {
+            print("somthing wrong")
+            return }
+                
         let pairs = session.pairs_
         let firstPair = pairs.first!
         let lastPair = pairs.last!

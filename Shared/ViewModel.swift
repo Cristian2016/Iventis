@@ -179,6 +179,7 @@ class ViewModel: ObservableObject {
         bubble.currentClock = bubble.initialClock
         bubble.bubbleCell_Components = bubble.currentClock.timComponentsAsStrings
         bubble.lastSession?.isEnded = true
+        
         if bubble.lastPair!.pause == nil {
             bubble.lastPair!.pause = Date()
             bubble.lastPair?.computeDuration(.endSession) {
@@ -189,6 +190,11 @@ class ViewModel: ObservableObject {
                 
                 bubble.bubbleCell_Components = bubble.initialClock.timComponentsAsStrings
             }
+        }
+        
+        //create calendar event
+        if !bubble.sessions_.isEmpty && bubble.hasCalendar {
+            CalendarManager.shared.createNewEvent(for: bubble.lastSession)
         }
         
         try? PersistenceController.shared.viewContext.save()
