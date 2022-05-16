@@ -14,6 +14,10 @@ struct BubbleNoteView: View {
     @State var searchText:String = ""
     @Binding var showBubbleNoteView:Bool
     
+    init(_ showBubbleNoteView:Binding<Bool>) {
+        _showBubbleNoteView = Binding(projectedValue: showBubbleNoteView)
+    }
+    
     var body: some View {
         ZStack {
             Color.white.opacity(0.001)
@@ -32,6 +36,6 @@ struct BubbleNoteView: View {
 
 struct BubbleNoteView_Previews: PreviewProvider {
     static var previews: some View {
-        BubbleNoteView(showBubbleNoteView: .constant(true))
+        BubbleNoteView(.constant(true))
     }
 }
