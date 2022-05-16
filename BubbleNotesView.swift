@@ -46,8 +46,6 @@ struct BubbleNotesView: View {
                                 .listRowBackground(Color("deleteActionViewBackground"))
                             }
                             .listStyle(.plain)
-                            Color("deleteActionViewBackground")
-                                .offset(x: 0, y: 80)
                         }
                     }
                     .clipShape(RoundedRectangle(cornerRadius: 24))

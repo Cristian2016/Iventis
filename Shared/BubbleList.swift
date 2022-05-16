@@ -84,7 +84,6 @@ struct BubbleList: View {
                 LeftStrip($showPalette, isBubbleListEmpty: results.isEmpty)
             }
             
-            
             //on top of everything show DetailView (TopDetailView and BottomDetailView
             if predicate != nil { DetailView(showDetailView_BubbleRank) }
             
