@@ -80,7 +80,7 @@ struct BubbleList: View {
                     }
                     .ignoresSafeArea()
                     
-                    if showBubbleNoteView { BubbleNoteView($showBubbleNoteView) }
+                    if showBubbleNoteView { BubbleNotesView($showBubbleNoteView) }
                 }
             }
             

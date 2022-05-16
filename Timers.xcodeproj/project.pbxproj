@@ -103,9 +103,9 @@
 		1FA355CB2832186100F73111 /* CalendarManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA355CA2832186100F73111 /* CalendarManager.swift */; };
 		1FA355CC2832186100F73111 /* CalendarManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA355CA2832186100F73111 /* CalendarManager.swift */; };
 		1FA355CD2832186100F73111 /* CalendarManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA355CA2832186100F73111 /* CalendarManager.swift */; };
-		1FA355D028323E5300F73111 /* BubbleNoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA355CF28323E5300F73111 /* BubbleNoteView.swift */; };
-		1FA355D128323E5300F73111 /* BubbleNoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA355CF28323E5300F73111 /* BubbleNoteView.swift */; };
-		1FA355D228323E5300F73111 /* BubbleNoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA355CF28323E5300F73111 /* BubbleNoteView.swift */; };
+		1FA355D028323E5300F73111 /* BubbleNotesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA355CF28323E5300F73111 /* BubbleNotesView.swift */; };
+		1FA355D128323E5300F73111 /* BubbleNotesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA355CF28323E5300F73111 /* BubbleNotesView.swift */; };
+		1FA355D228323E5300F73111 /* BubbleNotesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA355CF28323E5300F73111 /* BubbleNotesView.swift */; };
 		1FCF0C662816F3F600AA1FAA /* EmptyBubbleListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FCF0C652816F3F600AA1FAA /* EmptyBubbleListView.swift */; };
 		1FCF0C672816F3F600AA1FAA /* EmptyBubbleListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FCF0C652816F3F600AA1FAA /* EmptyBubbleListView.swift */; };
 		1FCF0C682816F3F600AA1FAA /* EmptyBubbleListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FCF0C652816F3F600AA1FAA /* EmptyBubbleListView.swift */; };
@@ -200,7 +200,7 @@
 		1F9BE0AC280C6AB000F87EFA /* TapHold.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapHold.swift; sourceTree = "<group>"; };
 		1FA355CA2832186100F73111 /* CalendarManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarManager.swift; sourceTree = "<group>"; };
 		1FA355CE2832238E00F73111 /* Timers--iOS--Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Timers--iOS--Info.plist"; sourceTree = "<group>"; };
-		1FA355CF28323E5300F73111 /* BubbleNoteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BubbleNoteView.swift; sourceTree = "<group>"; };
+		1FA355CF28323E5300F73111 /* BubbleNotesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BubbleNotesView.swift; sourceTree = "<group>"; };
 		1FCF0C652816F3F600AA1FAA /* EmptyBubbleListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyBubbleListView.swift; sourceTree = "<group>"; };
 		1FD21864281D9AB700B43403 /* ExitFocusAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExitFocusAlertView.swift; sourceTree = "<group>"; };
 		1FE163AD280EE6F40050C6F5 /* LeftStrip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftStrip.swift; sourceTree = "<group>"; };
@@ -243,7 +243,7 @@
 			children = (
 				1F18B456281FA6130080ADA6 /* PushView.swift */,
 				1F18B45B281FA9C90080ADA6 /* CalendarView.swift */,
-				1FA355CF28323E5300F73111 /* BubbleNoteView.swift */,
+				1FA355CF28323E5300F73111 /* BubbleNotesView.swift */,
 				1F61BE042822BAAA00B773F9 /* DeleteActionView.swift */,
 			);
 			name = Helpers;
@@ -519,7 +519,7 @@
 				1F97B7DD2809B311002FFCA3 /* Colors.swift in Sources */,
 				1F100CA72809493400A3A3C2 /* BackgroundTimer.swift in Sources */,
 				1F5A0F6C282641D00075E86B /* EmptyHistoryAlertView.swift in Sources */,
-				1FA355D028323E5300F73111 /* BubbleNoteView.swift in Sources */,
+				1FA355D028323E5300F73111 /* BubbleNotesView.swift in Sources */,
 				1FE163AE280EE6F40050C6F5 /* LeftStrip.swift in Sources */,
 				1F641FFE281FF70100413E31 /* BottomDetailView.swift in Sources */,
 				1F5F4A6128093FAF00AF3442 /* Persistence.swift in Sources */,
@@ -556,7 +556,7 @@
 				1F6420072820186D00413E31 /* PairCell.swift in Sources */,
 				1F9B6AF1280950D600C0A725 /* ViewModel.swift in Sources */,
 				1F18B461281FAABF0080ADA6 /* TopCell.swift in Sources */,
-				1FA355D128323E5300F73111 /* BubbleNoteView.swift in Sources */,
+				1FA355D128323E5300F73111 /* BubbleNotesView.swift in Sources */,
 				1F4326B2282AFB19002B6092 /* ScaleDownButton.swift in Sources */,
 				1F4239A4281E510D004BE717 /* NoteView.swift in Sources */,
 				1FE163AF280EE6F40050C6F5 /* LeftStrip.swift in Sources */,
@@ -610,7 +610,7 @@
 				1F97B7DF2809B311002FFCA3 /* Colors.swift in Sources */,
 				1F100CA92809493400A3A3C2 /* BackgroundTimer.swift in Sources */,
 				1FE163B0280EE6F40050C6F5 /* LeftStrip.swift in Sources */,
-				1FA355D228323E5300F73111 /* BubbleNoteView.swift in Sources */,
+				1FA355D228323E5300F73111 /* BubbleNotesView.swift in Sources */,
 				1F642000281FF70100413E31 /* BottomDetailView.swift in Sources */,
 				1F100CA4280946C500A3A3C2 /* Persistence.swift in Sources */,
 				1F9B6AF2280950D600C0A725 /* ViewModel.swift in Sources */,
