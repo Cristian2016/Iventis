@@ -13,6 +13,7 @@ struct BubbleCell: View {
     //showing Detail or DeleteAction views
     @Binding var showDeleteActionView_bubbleRank:Int? //bubble.rank
     @Binding var showDetailView_BubbleRank:Int?
+    @Binding var showBubbleNoteView:Bool
     
     @Binding var predicate:NSPredicate?
     
@@ -36,7 +37,8 @@ struct BubbleCell: View {
     init(_ bubble:Bubble,
          _ showDetailView_BubbleRank:Binding<Int?>,
          _ predicate:Binding<NSPredicate?>,
-         _ showDeleteActionView_BubbleRank:Binding<Int?>) {
+         _ showDeleteActionView_BubbleRank:Binding<Int?>,
+         _ showBubbleNoteView:Binding<Bool>) {
                 
         _showDeleteActionView_bubbleRank = Binding(projectedValue: showDeleteActionView_BubbleRank)
         _showDetailView_BubbleRank = Binding(projectedValue: showDetailView_BubbleRank)
@@ -51,6 +53,7 @@ struct BubbleCell: View {
             default: break
         }
         if !bubble.isObservingBackgroundTimer { bubble.observeBackgroundTimer() }
+        _showBubbleNoteView = Binding(projectedValue: showBubbleNoteView)
     }
     
     private let spacing:CGFloat = -30
@@ -139,7 +142,9 @@ struct BubbleCell: View {
                     .animation(.secondsLongPressed.delay(0.2), value: isSecondsLongPressed)
                 //gestures
                     .onTapGesture(count: 2) { print("edit duration") }
-                    .onTapGesture { print("add note") }
+                    .onTapGesture {
+                        showBubbleNoteView = true
+                    }
             }
             .offset(x: editMode?.wrappedValue == .active ? -70 : 0, y: 0)
             .zIndex(1) //make sure hours text is fully visible by being on top of all the other views

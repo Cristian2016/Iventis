@@ -14,6 +14,8 @@ struct BubbleList: View {
     @State var showDeleteActionView_BubbleRank:Int? = nil //bubble.rank
     @State var showDetailView_BubbleRank:Int? = nil //bubble.rank
     
+    @State var showBubbleNoteView = false
+    
     var body: some View {
         ZStack {
             if results.isEmpty { EmptyBubbleListView() }
@@ -49,7 +51,7 @@ struct BubbleList: View {
                                         BubbleCell($0,
                                                    $showDetailView_BubbleRank,
                                                    $predicate,
-                                                   $showDeleteActionView_BubbleRank)
+                                                   $showDeleteActionView_BubbleRank, $showBubbleNoteView)
                                         .coordinateSpace(name: "BubbleCell")
                                                 .environmentObject(viewModel)
                                     }
@@ -77,6 +79,10 @@ struct BubbleList: View {
                         .listStyle(.sidebar)
                     }
                     .ignoresSafeArea()
+                    
+                    if showBubbleNoteView {
+                        BubbleNoteView(showBubbleNoteView: $showBubbleNoteView)
+                    }
                 }
             }
             
