@@ -11,6 +11,27 @@ import CoreData
 import SwiftUI
 
 public class Bubble: NSManagedObject {
+    
+    let colorNames = ["sourCherry":"Sour Cherry",
+                      "mint" : "Mint",
+                      "slateBlue" : "Slate Blue",
+                      "silver" : "Silver",
+                      "ultramarine" : "Ultramarine",
+                      "lemon" : "Lemon",
+                      "red" : "Red",
+                      "sky" : "Sky",
+                      "bubbleGum" : "Bubble Gum",
+                      "green" : "Green",
+                      "coffee" : "Coffee",
+                      "magenta" : "Magenta",
+                      "purple" : "Purple",
+                      "orange" : "Orange",
+                      "chocolate" : "Chocolate",
+                      "aqua" : "Aqua",
+                      "byzantium" : "Byzantium",
+                      "rose" : "Rose"]
+    var friendlyColorName:String { colorNames[color ?? "no"] ?? (color ?? "no") }
+    
     enum State {
         case brandNew //0
         case running //1

@@ -262,7 +262,7 @@ class CalendarManager: NSObject {
     private func title(for session:Session) -> String {
         guard let bubble = session.bubble else { return "No Title" }
         
-        let stickyNote = bubble.note_.isEmpty ? bubble.color! : bubble.note_
+        let stickyNote = bubble.note_.isEmpty ? bubble.friendlyColorName : bubble.note_
         let colorEmoji = Color.emoji(for: bubble.color ?? "mint")
         
         let symbol:String
@@ -275,7 +275,6 @@ class CalendarManager: NSObject {
         let latestSubeventTitle = " " + session.pairs_.last!.note_
         
         let eventTitle = symbol + stickyNote + latestSubeventTitle + " ・\(subeventsCount)"
-//        print(eventTitle)
         
         return eventTitle
     }

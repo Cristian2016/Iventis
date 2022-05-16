@@ -193,6 +193,7 @@ class ViewModel: ObservableObject {
         }
         
         //create calendar event
+        //if there are sessions and is calendar enabled, create an event
         if !bubble.sessions_.isEmpty && bubble.hasCalendar {
             CalendarManager.shared.createNewEvent(for: bubble.lastSession)
         }
