@@ -14,14 +14,14 @@ struct BubbleList: View {
     @State var showDeleteActionView_BubbleRank:Int? = nil //bubble.rank
     @State var showDetailView_BubbleRank:Int? = nil //bubble.rank
     
-    @State var showBubbleNoteView = false
+    @State var showBubbleNotesView = false
     
     var body: some View {
         ZStack {
             if results.isEmpty { EmptyBubbleListView() }
             else {
                 ZStack {
-                    if predicate == nil {
+                    if predicate == nil && !showBubbleNotesView {
                         Push(.topRight) { RearrangeActionButton() }
                         .padding(EdgeInsets(top: -8, leading: 0, bottom: 2, trailing: 20))
                         .zIndex(3)
@@ -51,21 +51,19 @@ struct BubbleList: View {
                                         BubbleCell($0,
                                                    $showDetailView_BubbleRank,
                                                    $predicate,
-                                                   $showDeleteActionView_BubbleRank, $showBubbleNoteView)
+                                                   $showDeleteActionView_BubbleRank, $showBubbleNotesView)
                                         .coordinateSpace(name: "BubbleCell")
                                                 .environmentObject(viewModel)
                                     }
-                                    .onMove { (indices, destinationIndex) in
-                                        
-                                        let moveAtTheBottom = destinationIndex == section.count
-                                        
-                                        let sourceRank = section[indices.first!].rank
+                                    .onMove {
+                                        let moveAtTheBottom = $1 == section.count
+                                        let sourceRank = section[$0.first!].rank
                                         
                                         if moveAtTheBottom {
-                                            let destRank = section[destinationIndex - 1].rank
+                                            let destRank = section[$1 - 1].rank
                                             viewModel.reorderRanks(sourceRank, destRank, true)
                                         } else {
-                                            let destRank = section[destinationIndex].rank
+                                            let destRank = section[$1].rank
                                             viewModel.reorderRanks(sourceRank, destRank)
                                         }
                                     }
@@ -79,8 +77,7 @@ struct BubbleList: View {
                         .listStyle(.sidebar)
                     }
                     .ignoresSafeArea()
-                    
-                    if showBubbleNoteView { BubbleNotesView($showBubbleNoteView) }
+                    if showBubbleNotesView { BubbleNotesView($showBubbleNotesView) }
                 }
             }
             

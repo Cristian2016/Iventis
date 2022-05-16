@@ -36,19 +36,15 @@ struct BubbleNotesView: View {
                             ForEach (bubbles) { bubble in
                                 Text(bubble.note_)
                             }
+                            .listRowSeparator(.hidden)
                         }
                         .listStyle(.plain)
                         .listRowBackground(Color("deleteActionViewBackground"))
-                        .listRowSeparator(.hidden)
                     }
                     .clipShape(RoundedRectangle(cornerRadius: 24))
                 }
         }
-        .onAppear {
-            delayExecution(.now() + 0.05) {
-                isTyping = true
-            }
-        }
+        .onAppear { isTyping = true }
     }
 }
 
