@@ -3,7 +3,7 @@
 //  Timers
 //
 //  Created by Cristian Lapusan on 16.05.2022.
-//
+//  searchable modifier https://www.youtube.com/watch?v=5soAxQCF29o
 
 import SwiftUI
 

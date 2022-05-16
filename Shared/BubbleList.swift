@@ -71,7 +71,7 @@ struct BubbleList: View {
                                     }
                                 }
                             header: { headerTitle(for: section.id.description) }
-                                .accentColor(.clear) //collapse section indicators invisible
+                                    .accentColor(section.id != false ? .clear : .label) //collapse section indicators invisible
                             }
                             Spacer(minLength: 100)
                         }
