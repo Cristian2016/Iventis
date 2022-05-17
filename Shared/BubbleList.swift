@@ -11,23 +11,23 @@ import Combine
 
 struct BubbleList: View {
     //showing Detail or DeleteAction views
-    @State var showDeleteActionView_BubbleRank:Int? = nil //bubble.rank
-    @State var showDetailView_BubbleRank:Int? = nil //bubble.rank
-    @State var addBubbleNotesView_BubbleRank:Int? = nil //bubble rank
+    @State var deleteView_bRank:Int? = nil //bubble.rank
+    @State var detailView_bRank:Int? = nil //bubble.rank
+    @State var notesView_bRank:Int? = nil //bubble rank
         
     var body: some View {
         ZStack {
             if results.isEmpty { EmptyBubbleListView() }
             else {
                 ZStack {
-                    if predicate == nil && addBubbleNotesView_BubbleRank == nil {
+                    if predicate == nil && notesView_bRank == nil {
                         Push(.topRight) { RearrangeActionButton() }
                         .padding(EdgeInsets(top: -8, leading: 0, bottom: 2, trailing: 16))
                         .zIndex(3)
                     }
                     if predicate != nil {
                         VStack {
-                            ExitFocusAlertView($predicate, $showDetailView_BubbleRank)
+                            ExitFocusAlertView($predicate, $detailView_bRank)
                                 .background(Rectangle()
                                     .fill(Color.background1)
                                     .frame(width: UIScreen.size.width)
@@ -42,15 +42,15 @@ struct BubbleList: View {
                     
                     VStack {
                         //distance from status bar
-                        Spacer(minLength: showDetailView_BubbleRank != nil ? 50 : 45)
+                        Spacer(minLength: detailView_bRank != nil ? 50 : 45)
                         List {
                             ForEach(results) { section in
                                 Section {
                                     ForEach (section) {
                                         BubbleCell($0,
-                                                   $showDetailView_BubbleRank,
+                                                   $detailView_bRank,
                                                    $predicate,
-                                                   $showDeleteActionView_BubbleRank, $addBubbleNotesView_BubbleRank)
+                                                   $deleteView_bRank, $notesView_bRank)
                                         .coordinateSpace(name: "BubbleCell")
                                                 .environmentObject(viewModel)
                                     }
@@ -78,25 +78,25 @@ struct BubbleList: View {
                     .ignoresSafeArea()
                 }
             }
-            if addBubbleNotesView_BubbleRank == nil {
-                LeftStrip($showPalette, isBubbleListEmpty: results.isEmpty)
+            if !notesShowing {
+                LeftStrip($paletteShowing, isListEmpty: results.isEmpty)
                     .environmentObject(viewModel)
             }
             
             //on top of everything show DetailView (TopDetailView and BottomDetailView
-            if predicate != nil { DetailView(showDetailView_BubbleRank) }
+            if predicate != nil { DetailView(detailView_bRank) }
             
-            if addBubbleNotesView_BubbleRank != nil {
-                AddNoteToBubbleView($addBubbleNotesView_BubbleRank)
+            if notesView_bRank != nil {
+                AddNoteToBubbleView($notesView_bRank)
             }
             
-            if deleteActionViewYOffset != nil && showDeleteActionView_BubbleRank != nil {
-                let bubble = viewModel.bubble(for: showDeleteActionView_BubbleRank!)
-                DeleteActionView(bubble, $showDeleteActionView_BubbleRank, $predicate, deleteActionViewYOffset!)
+            if deleteActionViewYOffset != nil && deleteView_bRank != nil {
+                let bubble = viewModel.bubble(for: deleteView_bRank!)
+                DeleteActionView(bubble, $deleteView_bRank, $predicate, deleteActionViewYOffset!)
                     .environmentObject(viewModel) //pass viewmodel as well
             }
             
-            PaletteView($showPalette).environmentObject(viewModel)
+            PaletteView($paletteShowing).environmentObject(viewModel)
         }
         .onPreferenceChange(BubbleCellLow_Key.self) { new in
             let frame = new.frame
@@ -130,7 +130,7 @@ struct BubbleList: View {
     
     // MARK: -
     @State private var isActive = true
-    @State var showPalette = false
+    @State var paletteShowing = false
     
     // MARK: -
     init(_ predicate:Binding<NSPredicate?>) {
@@ -235,5 +235,12 @@ struct BubbleCellLow_Key:PreferenceKey {
     static var defaultValue = RankFrame(rank: -1, frame: .zero)
     static func reduce(value: inout RankFrame, nextValue: () -> RankFrame) {
         if value.frame == .zero { value = nextValue() }
+    }
+}
+
+// MARK: - Little Helpers
+extension BubbleList {
+    fileprivate var notesShowing:Bool {
+        notesView_bRank != nil
     }
 }

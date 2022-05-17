@@ -162,7 +162,7 @@ struct BubbleCell: View {
             }
             .offset(x: editMode?.wrappedValue == .active ? -70 : 0, y: 0)
             .zIndex(1) //make sure hours text is fully visible by being on top of all the other views
-            //MINUTES
+                       //MINUTES
             Push(.middle) {
                 Text(bubble.bubbleCell_Components.min)
                     .modifier(TextModifier())

@@ -9,11 +9,9 @@ import SwiftUI
 
 struct AddNoteToBubbleView: View {
     @EnvironmentObject var viewModel:ViewModel
-    @StateObject var bubble:Bubble
     
     @State var textInput:String = ""
     @Binding var addBubbleNotesView_BubbleRank:Int?
-    @FocusState var isTyping:Bool
     
     init(_ addBubbleNotesView_BubbleRank:Binding<Int?>) {
         print("init")
@@ -22,7 +20,6 @@ struct AddNoteToBubbleView: View {
         request.predicate = NSPredicate(format: "rank == %i", addBubbleNotesView_BubbleRank.wrappedValue!)
         
         guard let bubble = try? PersistenceController.shared.viewContext.fetch(request).first else { fatalError("fuck bubble") }
-        _bubble = StateObject(wrappedValue: bubble)
     }
     
     private let size = CGSize(width: 250, height: 400)
@@ -42,11 +39,9 @@ struct AddNoteToBubbleView: View {
                         topSpacer //pushes textfield down a little
                         textField
                             .onSubmit {
-                                bubble.note = textInput
                                 addBubbleNotesView_BubbleRank = nil
                                 PersistenceController.shared.save()
                             }
-                            .onAppear { isTyping = true }
                         List {
                             ForEach (0..<3) { index in
                                 Text("\(index)")
@@ -72,7 +67,6 @@ struct AddNoteToBubbleView: View {
     
     private var textField: some View {
         TextField("Search/Add Note", text: $textInput)
-            .focused($isTyping)
             .font(.title2)
             .padding()
     }

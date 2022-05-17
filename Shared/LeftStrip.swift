@@ -9,13 +9,13 @@ import SwiftUI
 
 ///user swipes right from screen edge and Palette is presented
 struct LeftStrip: View {
-    @Binding var showPalette:Bool
-    let isBubbleListEmpty:Bool
+    @Binding var paletteShowing:Bool
+    let isListEmpty:Bool
     
     // MARK: -
     var body: some View {
         HStack {
-            Rectangle().fill(isBubbleListEmpty ? Color.yellow : .clear).frame(width: 40)
+            Rectangle().fill(isListEmpty ? Color.yellow : .clear).frame(width: 40)
                 .contentShape(Rectangle()) //use if color clear otherwise gesture will not work
             Spacer()
         }
@@ -23,15 +23,15 @@ struct LeftStrip: View {
         .gesture(DragGesture(minimumDistance: 0, coordinateSpace: .global)
             .onEnded { _ in
                 withAnimation {
-                    showPalette = true
+                    paletteShowing = true
                 }
             })
     }
     
     // MARK: -
-    init(_ showPalette:Binding<Bool>, isBubbleListEmpty:Bool) {
-        _showPalette = .init(projectedValue: showPalette)
-        self.isBubbleListEmpty = isBubbleListEmpty
+    init(_ paletteShowing:Binding<Bool>, isListEmpty:Bool) {
+        _paletteShowing = .init(projectedValue: paletteShowing)
+        self.isListEmpty = isListEmpty
     }
 }
 
