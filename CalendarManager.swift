@@ -281,7 +281,8 @@ class CalendarManager: NSObject {
         let subeventsCount = String(session.pairs_.count)
         let latestSubeventTitle = " " + session.pairs_.last!.note_
         
-        let eventTitle = symbol + stickyNote + latestSubeventTitle + " ・\(subeventsCount)"
+        let count = (subeventsCount != "1") ? "・\(subeventsCount)" : ""
+        let eventTitle = symbol + stickyNote + latestSubeventTitle + count
         
         return eventTitle
     }
