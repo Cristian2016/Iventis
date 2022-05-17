@@ -314,8 +314,9 @@ class CalendarManager: NSObject {
         
         calendars.forEach { cal in
             let calSplits = cal.title.lowercased().split(separator:" ")
+            let foundCommonWord = !Set(noteSplits).intersection(calSplits).isEmpty
             
-            if !Set(noteSplits).intersection(calSplits).isEmpty {
+            if foundCommonWord {
                 print(calSplits, noteSplits)
                 calendar = cal
             } else {
