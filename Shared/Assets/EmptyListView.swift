@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct EmptyBubbleListView: View {
+struct EmptyListView: View {
     var body: some View {
         VStack (alignment:.center, spacing: 20) {
             HStack {
@@ -88,6 +88,6 @@ struct EmptyBubbleListView: View {
 
 struct EmptyBubbleListView_Previews: PreviewProvider {
     static var previews: some View {
-        EmptyBubbleListView()
+        EmptyListView()
     }
 }

@@ -106,9 +106,9 @@
 		1FA355D028323E5300F73111 /* BubbleNotesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA355CF28323E5300F73111 /* BubbleNotesView.swift */; };
 		1FA355D128323E5300F73111 /* BubbleNotesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA355CF28323E5300F73111 /* BubbleNotesView.swift */; };
 		1FA355D228323E5300F73111 /* BubbleNotesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA355CF28323E5300F73111 /* BubbleNotesView.swift */; };
-		1FCF0C662816F3F600AA1FAA /* EmptyBubbleListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FCF0C652816F3F600AA1FAA /* EmptyBubbleListView.swift */; };
-		1FCF0C672816F3F600AA1FAA /* EmptyBubbleListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FCF0C652816F3F600AA1FAA /* EmptyBubbleListView.swift */; };
-		1FCF0C682816F3F600AA1FAA /* EmptyBubbleListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FCF0C652816F3F600AA1FAA /* EmptyBubbleListView.swift */; };
+		1FCF0C662816F3F600AA1FAA /* EmptyListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FCF0C652816F3F600AA1FAA /* EmptyListView.swift */; };
+		1FCF0C672816F3F600AA1FAA /* EmptyListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FCF0C652816F3F600AA1FAA /* EmptyListView.swift */; };
+		1FCF0C682816F3F600AA1FAA /* EmptyListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FCF0C652816F3F600AA1FAA /* EmptyListView.swift */; };
 		1FD21865281D9AB700B43403 /* ExitFocusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD21864281D9AB700B43403 /* ExitFocusView.swift */; };
 		1FD21866281D9AB700B43403 /* ExitFocusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD21864281D9AB700B43403 /* ExitFocusView.swift */; };
 		1FD21867281D9AB700B43403 /* ExitFocusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD21864281D9AB700B43403 /* ExitFocusView.swift */; };
@@ -201,7 +201,7 @@
 		1FA355CA2832186100F73111 /* CalendarManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarManager.swift; sourceTree = "<group>"; };
 		1FA355CE2832238E00F73111 /* Timers--iOS--Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Timers--iOS--Info.plist"; sourceTree = "<group>"; };
 		1FA355CF28323E5300F73111 /* BubbleNotesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BubbleNotesView.swift; sourceTree = "<group>"; };
-		1FCF0C652816F3F600AA1FAA /* EmptyBubbleListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyBubbleListView.swift; sourceTree = "<group>"; };
+		1FCF0C652816F3F600AA1FAA /* EmptyListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyListView.swift; sourceTree = "<group>"; };
 		1FD21864281D9AB700B43403 /* ExitFocusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExitFocusView.swift; sourceTree = "<group>"; };
 		1FE163AD280EE6F40050C6F5 /* LeftStrip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftStrip.swift; sourceTree = "<group>"; };
 		1FF0A2FC2810448100B1DB77 /* TopDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopDetailView.swift; sourceTree = "<group>"; };
@@ -371,7 +371,7 @@
 				1F5F4A4D28093FAF00AF3442 /* Assets.xcassets */,
 				1F97B7DC2809B311002FFCA3 /* Colors.swift */,
 				1FD21864281D9AB700B43403 /* ExitFocusView.swift */,
-				1FCF0C652816F3F600AA1FAA /* EmptyBubbleListView.swift */,
+				1FCF0C652816F3F600AA1FAA /* EmptyListView.swift */,
 			);
 			path = Assets;
 			sourceTree = "<group>";
@@ -535,7 +535,7 @@
 				1F5F4A9D280945C700AF3442 /* BubbleCell.swift in Sources */,
 				1F18B460281FAABF0080ADA6 /* TopCell.swift in Sources */,
 				1F5F4A5D28093FAF00AF3442 /* TimersApp.swift in Sources */,
-				1FCF0C662816F3F600AA1FAA /* EmptyBubbleListView.swift in Sources */,
+				1FCF0C662816F3F600AA1FAA /* EmptyListView.swift in Sources */,
 				1F4326B1282AFB19002B6092 /* ScaleDownButton.swift in Sources */,
 				1FF0A2FD2810448100B1DB77 /* TopDetailView.swift in Sources */,
 				1FFC8BAA28142F040059EF2E /* Session.swift in Sources */,
@@ -566,7 +566,7 @@
 				1FFC8BAE28142F040059EF2E /* Session Properties.swift in Sources */,
 				1F18B458281FA6130080ADA6 /* PushView.swift in Sources */,
 				1F64200B2820204400413E31 /* BottomCell.swift in Sources */,
-				1FCF0C672816F3F600AA1FAA /* EmptyBubbleListView.swift in Sources */,
+				1FCF0C672816F3F600AA1FAA /* EmptyListView.swift in Sources */,
 				1F5F4A742809409600AF3442 /* Bubble.swift in Sources */,
 				1FF0A2FE2810448100B1DB77 /* TopDetailView.swift in Sources */,
 				1F82FB992831435A00E7C5AA /* HelpActionButton.swift in Sources */,
@@ -625,7 +625,7 @@
 				1FA355CD2832186100F73111 /* CalendarManager.swift in Sources */,
 				1F18B462281FAABF0080ADA6 /* TopCell.swift in Sources */,
 				1F100CA5280946C900A3A3C2 /* Model.xcdatamodeld in Sources */,
-				1FCF0C682816F3F600AA1FAA /* EmptyBubbleListView.swift in Sources */,
+				1FCF0C682816F3F600AA1FAA /* EmptyListView.swift in Sources */,
 				1FF0A2FF2810448100B1DB77 /* TopDetailView.swift in Sources */,
 				1F4326B3282AFB19002B6092 /* ScaleDownButton.swift in Sources */,
 				1F5A0F71282649710075E86B /* DetailView.swift in Sources */,

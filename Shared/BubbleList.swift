@@ -30,7 +30,7 @@ struct BubbleList: View {
     // MARK: -
     var body: some View {
         ZStack {
-            if results.isEmpty { EmptyBubbleListView() }
+            if isListEmpty { EmptyListView() }
             else {
                 ZStack {
                     if !isFocusOn && !notesShowing { RearrangeButton() }
@@ -73,7 +73,7 @@ struct BubbleList: View {
                 }
             }
             if !notesShowing {
-                LeftStrip($paletteShowing, isListEmpty: results.isEmpty)
+                LeftStrip($paletteShowing, isListEmpty)
                     .environmentObject(viewModel)
             }
             
@@ -223,4 +223,6 @@ extension BubbleList {
     fileprivate var notesShowing:Bool { notesView_bRank != nil }
     
     fileprivate var isFocusOn:Bool { predicate != nil }
+    
+    fileprivate var isListEmpty:Bool { results.isEmpty }
 }

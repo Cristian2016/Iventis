@@ -29,7 +29,7 @@ struct LeftStrip: View {
     }
     
     // MARK: -
-    init(_ paletteShowing:Binding<Bool>, isListEmpty:Bool) {
+    init(_ paletteShowing:Binding<Bool>, _ isListEmpty:Bool) {
         _paletteShowing = .init(projectedValue: paletteShowing)
         self.isListEmpty = isListEmpty
     }
