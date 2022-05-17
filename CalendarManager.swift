@@ -331,7 +331,6 @@ class CalendarManager: NSObject {
                 }
             }
         }
-        
         return calendar
     }
     
