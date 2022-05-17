@@ -313,9 +313,12 @@ class CalendarManager: NSObject {
         let /* string */ noteSplits = stickyNote.lowercased().split(separator: " ")
         
         calendars.forEach { cal in
-            let calSplits = cal.title.lowercased().split(separator: " ")
+            let calSplits = cal.title.lowercased().split(separator:" ")
             if !Set(noteSplits).intersection(calSplits).isEmpty {
+                print(calSplits, noteSplits)
                 calendar = cal
+            } else {
+                print("missmatch \(calSplits), \(noteSplits)")
             }
         }
         
