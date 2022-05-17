@@ -314,6 +314,7 @@ class CalendarManager: NSObject {
         
         calendars.forEach { cal in
             let calSplits = cal.title.lowercased().split(separator:" ")
+            
             if !Set(noteSplits).intersection(calSplits).isEmpty {
                 print(calSplits, noteSplits)
                 calendar = cal
@@ -322,7 +323,7 @@ class CalendarManager: NSObject {
             }
         }
         
-        //if calendar is stiull nil, check for any common emojis
+        //if calendar still nil, check for any common emojis
         if calendar == nil {
             calendars.forEach { cal in
                 let calEmojis = cal.title.unicodeScalars.filter { $0.properties.isEmoji }
