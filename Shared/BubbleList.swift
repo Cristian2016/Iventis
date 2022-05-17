@@ -80,11 +80,9 @@ struct BubbleList: View {
             //on top of everything show DetailView (TopDetailView and BottomDetailView
             if isFocusOn { DetailView(detailView_bRank) }
             
-            if notesView_bRank != nil {
-                BubbleNotesView($notesView_bRank).zIndex(100)
-            }
+            if notesShowing { BubbleNotesView($notesView_bRank) }
             
-            if deleteViewYOffset != nil && deleteView_bRank != nil {
+            if deleteViewYOffset != nil && deleteViewShowing {
                 let bubble = viewModel.bubble(for: deleteView_bRank!)
                 DeleteActionView(bubble, $deleteView_bRank, $predicate, deleteViewYOffset!)
                     .environmentObject(viewModel) //pass viewmodel as well
@@ -109,7 +107,6 @@ struct BubbleList: View {
                 @unknown default: fatalError()
             }
         }
-        .navigationBarHidden(true)
     }
     
     // MARK: -
@@ -225,4 +222,6 @@ extension BubbleList {
     fileprivate var isFocusOn:Bool { predicate != nil }
     
     fileprivate var isListEmpty:Bool { results.isEmpty }
+    
+    fileprivate var deleteViewShowing:Bool { deleteView_bRank != nil }
 }
