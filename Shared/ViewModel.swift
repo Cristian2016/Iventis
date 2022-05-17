@@ -182,7 +182,7 @@ class ViewModel: ObservableObject {
         if bubble.lastPair!.pause == nil {
             bubble.lastPair!.pause = Date()
             bubble.lastPair?.computeDuration(.endSession) {
-                //⚠️ all further code should be included here
+                //⚠️ all further code should be included here ⚠️
                 //this is UIThread
                 bubble.lastSession?.isEnded = true
                 
@@ -198,6 +198,8 @@ class ViewModel: ObservableObject {
                 if !bubble.sessions_.isEmpty && bubble.hasCalendar {
                     CalendarManager.shared.createNewEvent(for: bubble.lastSession)
                 }
+                
+                try? PersistenceController.shared.viewContext.save()
             }
         }
         //save all changes in the end
