@@ -297,7 +297,7 @@ class CalendarManager: NSObject {
         guard let stickyNote = stickyNote else { return nil }
         
         let calendars = store.calendars(for: .event)
-        let possibleCalendar = getAppropriateCalendar(from: calendars, for: stickyNote)
+        let possibleCalendar = findMatchingCalendar(from: calendars, for: stickyNote)
         
         return possibleCalendar ?? defaultCalendar()
     }
@@ -306,7 +306,7 @@ class CalendarManager: NSObject {
         store.calendars(for: .event).filter({$0.calendarIdentifier == defaultCalendarID}).first
     }
     
-    private func getAppropriateCalendar(from calendars:[EKCalendar], for stickyNote:String) -> EKCalendar? {
+    private func findMatchingCalendar(from calendars:[EKCalendar], for stickyNote:String) -> EKCalendar? {
         var calendar:EKCalendar? = nil
         
         //check first any common word between caledar title and sticky note title
