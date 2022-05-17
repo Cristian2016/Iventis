@@ -33,7 +33,7 @@ struct BubbleList: View {
             if results.isEmpty { EmptyBubbleListView() }
             else {
                 ZStack {
-                    if predicate == nil && notesView_bRank == nil {
+                    if !isFocusOn && !notesShowing {
                         Push(.topRight) { RearrangeActionButton() }
                         .padding(EdgeInsets(top: -8, leading: 0, bottom: 2, trailing: 16))
                         .zIndex(3)
@@ -239,7 +239,7 @@ struct BubbleCellLow_Key:PreferenceKey {
 
 // MARK: - Little Helpers
 extension BubbleList {
-    fileprivate var notesShowing:Bool {
-        notesView_bRank != nil
-    }
+    fileprivate var notesShowing:Bool { notesView_bRank != nil }
+    
+    fileprivate var isFocusOn:Bool { predicate != nil }
 }
