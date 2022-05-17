@@ -309,17 +309,29 @@ class CalendarManager: NSObject {
     private func getAppropriateCalendar(from calendars:[EKCalendar], for stickyNote:String) -> EKCalendar? {
         var calendar:EKCalendar? = nil
         
-        //check if you can split sticky note into more words
-        let  /* string */ noteComponents = stickyNote.lowercased().split(separator: " ")
+        //check first any common word between caledar title and sticky note title
+        let /* string */ noteSplits = stickyNote.lowercased().split(separator: " ")
         
-        let firstMatch = calendars.filter { $0.title.lowercased().contains(stickyNote.lowercased())
-        }.first
-        
-        firstMatch?.title.split(separator: " ").forEach { split in
-            if split.lowercased() == stickyNote.lowercased() {
-                calendar = firstMatch
+        calendars.forEach { cal in
+            let calSplits = cal.title.lowercased().split(separator: " ")
+            if !Set(noteSplits).intersection(calSplits).isEmpty {
+                calendar = cal
             }
         }
+        
+        //if calendar is stiull nil, check for any common emojis
+        if calendar == nil {
+            calendars.forEach { cal in
+                let calEmojis = cal.title.unicodeScalars.filter { $0.properties.isEmoji }
+                if !calEmojis.isEmpty {
+                    let noteEmojis = stickyNote.unicodeScalars.filter { $0.properties.isEmoji }
+                    if !Set(calEmojis).intersection(noteEmojis).isEmpty {
+                        calendar = cal
+                    }
+                }
+            }
+        }
+        
         return calendar
     }
     
