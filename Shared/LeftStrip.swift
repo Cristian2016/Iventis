@@ -44,7 +44,9 @@ struct RightStrip: View {
     
     // MARK: -
     var body: some View {
-        Rectangle().fill(Color.red).frame(width: 20)
+        Rectangle()
+            .fill(Color.clear)
+            .frame(width: 20)
             .contentShape(Rectangle()) //use if color clear otherwise gesture will not work
             .ignoresSafeArea()
             .gesture(DragGesture(minimumDistance: 0, coordinateSpace: .global)
