@@ -301,13 +301,20 @@ class CalendarManager: NSObject {
         
         return possibleCalendar ?? defaultCalendar()
     }
+    
     private func defaultCalendar() -> EKCalendar? {
         store.calendars(for: .event).filter({$0.calendarIdentifier == defaultCalendarID}).first
     }
     
     private func getAppropriateCalendar(from calendars:[EKCalendar], for stickyNote:String) -> EKCalendar? {
         var calendar:EKCalendar? = nil
-        let firstMatch = calendars.filter { $0.title.lowercased().contains(stickyNote.lowercased())}.first
+        
+        //check if you can split sticky note into more words
+        let  /* string */ noteComponents = stickyNote.lowercased().split(separator: " ")
+        
+        let firstMatch = calendars.filter { $0.title.lowercased().contains(stickyNote.lowercased())
+        }.first
+        
         firstMatch?.title.split(separator: " ").forEach { split in
             if split.lowercased() == stickyNote.lowercased() {
                 calendar = firstMatch
