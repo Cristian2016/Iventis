@@ -16,7 +16,6 @@ struct BubbleNotesView: View {
     @Binding var addBubbleNotesView_BubbleRank:Int?
     
     init(_ addBubbleNotesView_BubbleRank:Binding<Int?>) {
-        print("init")
         _addBubbleNotesView_BubbleRank = Binding(projectedValue: addBubbleNotesView_BubbleRank)
         let request = Bubble.fetchRequest()
         request.predicate = NSPredicate(format: "rank == %i", addBubbleNotesView_BubbleRank.wrappedValue!)
