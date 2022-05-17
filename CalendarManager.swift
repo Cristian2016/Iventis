@@ -317,10 +317,10 @@ class CalendarManager: NSObject {
             let foundCommonWord = !Set(noteSplits).intersection(calSplits).isEmpty
             
             if foundCommonWord {
-                print(calSplits, noteSplits)
+//                print(calSplits, noteSplits)
                 calendar = cal
             } else {
-                print("missmatch \(calSplits), \(noteSplits)")
+                print("missmatch")
             }
         }
         

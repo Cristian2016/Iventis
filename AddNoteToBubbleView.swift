@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct AddBubbleNotesView: View {
+struct AddNoteToBubbleView: View {
     @EnvironmentObject var viewModel:ViewModel
     @FetchRequest(entity: Bubble.entity(), sortDescriptors: [], predicate: nil, animation: .default)
     private var bubbles:FetchedResults<Bubble>
@@ -89,6 +89,6 @@ struct AddBubbleNotesView: View {
 
 struct BubbleNoteView_Previews: PreviewProvider {
     static var previews: some View {
-        AddBubbleNotesView(.constant(65))
+        AddNoteToBubbleView(.constant(65))
     }
 }

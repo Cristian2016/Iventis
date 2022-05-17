@@ -86,7 +86,7 @@ struct BubbleList: View {
             //on top of everything show DetailView (TopDetailView and BottomDetailView
             if predicate != nil { DetailView(showDetailView_BubbleRank) }
             
-            if addBubbleNotesView_BubbleRank != nil { AddBubbleNotesView($addBubbleNotesView_BubbleRank)
+            if addBubbleNotesView_BubbleRank != nil { AddNoteToBubbleView($addBubbleNotesView_BubbleRank)
             }
             
             if deleteActionViewYOffset != nil && showDeleteActionView_BubbleRank != nil {
