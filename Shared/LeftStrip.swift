@@ -41,17 +41,16 @@ struct RightStrip: View {
     init(_ showPalette:Binding<Bool>) {
         _showPalette = .init(projectedValue: showPalette)
     }
-
+    
     // MARK: -
     var body: some View {
-        Rectangle().fill(Color.clear).frame(width: 20)
+        Rectangle().fill(Color.red).frame(width: 20)
             .contentShape(Rectangle()) //use if color clear otherwise gesture will not work
             .ignoresSafeArea()
             .gesture(DragGesture(minimumDistance: 0, coordinateSpace: .global)
                 .onEnded { _ in
-                    withAnimation {
-                        showPalette = false
-                    }
-                })
+                    withAnimation { showPalette = false }
+                }
+            )
     }
 }
