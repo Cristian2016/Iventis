@@ -11,6 +11,8 @@ struct BubbleNotesView: View {
     @EnvironmentObject var viewModel:ViewModel
     
     @State var textInput:String = ""
+    @FocusState var keyboardVisible:Bool
+    
     @Binding var addBubbleNotesView_BubbleRank:Int?
     
     init(_ addBubbleNotesView_BubbleRank:Binding<Int?>) {
@@ -55,6 +57,11 @@ struct BubbleNotesView: View {
                     .clipShape(RoundedRectangle(cornerRadius: cornerRadius))
                 }
         }
+        .onAppear { delayExecution(.now() + 0.05) {
+            withAnimation (.easeInOut(duration: 0.0)) {
+                keyboardVisible = true
+            }
+        } }
     }
     
     // MARK: - Legoes
@@ -69,6 +76,7 @@ struct BubbleNotesView: View {
         TextField("Search/Add Note", text: $textInput)
             .font(.title2)
             .padding()
+            .focused($keyboardVisible)
     }
         
     private var backgroundView :some View {
