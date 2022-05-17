@@ -199,7 +199,7 @@ class ViewModel: ObservableObject {
                 }
             }
         }
-        
+        //save all changes in the end
         try? PersistenceController.shared.viewContext.save()
     }
     
