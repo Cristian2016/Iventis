@@ -33,11 +33,7 @@ struct BubbleList: View {
             if results.isEmpty { EmptyBubbleListView() }
             else {
                 ZStack {
-                    if !isFocusOn && !notesShowing {
-                        Push(.topRight) { RearrangeActionButton() }
-                        .padding(EdgeInsets(top: -8, leading: 0, bottom: 2, trailing: 16))
-                        .zIndex(3)
-                    }
+                    if !isFocusOn && !notesShowing { RearrangeActionButton() }
                     if predicate != nil {
                         VStack {
                             ExitFocusAlertView($predicate, $detailView_bRank)
@@ -54,8 +50,6 @@ struct BubbleList: View {
                     }
                     
                     VStack {
-                        //distance from status bar
-                        Spacer(minLength: detailView_bRank != nil ? 50 : 45)
                         List {
                             ForEach(results) { section in
                                 Section {
@@ -88,7 +82,7 @@ struct BubbleList: View {
                         .padding(EdgeInsets(top: 0, leading: -10, bottom: 0, trailing: -10))
                         .listStyle(.sidebar)
                     }
-                    .ignoresSafeArea()
+                    .ignoresSafeArea(edges:.bottom)
                 }
             }
             if !notesShowing {

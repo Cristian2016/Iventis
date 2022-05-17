@@ -12,7 +12,13 @@ struct RearrangeActionButton: View {
     
     let fontSize = CGFloat(40)
     
-    var body: some View { button }
+    var body: some View {
+        Push(.topRight) {
+            button
+        }
+        .padding(EdgeInsets(top: -8, leading: 0, bottom: 2, trailing: 16))
+        .zIndex(3)
+    }
     
     @ViewBuilder
     private var button:some View {
