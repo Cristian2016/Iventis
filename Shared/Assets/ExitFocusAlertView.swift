@@ -21,17 +21,27 @@ struct ExitFocusAlertView: View {
     }
     
     var body: some View {
-        Button {
-            withAnimation {
-                UserFeedback.singleHaptic(.medium)
-                predicate = nil
-                showDetailView = nil
-            }
-        } label: { Label { Text("Exit Focus").font(.title2) }
-            icon: { Image.eyeSlash.font(.system(size: fontSize)) } }
-        .tint(.pink)
-        .buttonStyle(.bordered)
-        .padding(EdgeInsets(top: topPadding, leading: 0, bottom: 0, trailing: 0))
+        VStack {
+            Button {
+                withAnimation {
+                    UserFeedback.singleHaptic(.medium)
+                    predicate = nil
+                    showDetailView = nil
+                }
+            } label: { Label { Text("Exit Focus").font(.title2) }
+                icon: { Image.eyeSlash.font(.system(size: fontSize)) } }
+            .tint(.pink)
+            .buttonStyle(.bordered)
+            .padding(EdgeInsets(top: topPadding, leading: 0, bottom: -5, trailing: 0))
+            .background(Rectangle()
+                .fill(Color.background1)
+                .frame(width: UIScreen.size.width)
+                .padding(.bottom, -5)
+            )
+            .padding()
+            Spacer()
+        }
+        .ignoresSafeArea()
     }
 }
 

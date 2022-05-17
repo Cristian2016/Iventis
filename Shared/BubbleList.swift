@@ -34,19 +34,8 @@ struct BubbleList: View {
             else {
                 ZStack {
                     if !isFocusOn && !notesShowing { RearrangeActionButton() }
-                    if predicate != nil {
-                        VStack {
-                            ExitFocusAlertView($predicate, $detailView_bRank)
-                                .background(Rectangle()
-                                    .fill(Color.background1)
-                                    .frame(width: UIScreen.size.width)
-                                    .padding(.bottom, -5)
-                                )
-                                .padding()
-                            Spacer()
-                        }
-                        .zIndex(1)
-                        .ignoresSafeArea()
+                    if isFocusOn {
+                        ExitFocusAlertView($predicate, $detailView_bRank).zIndex(1)
                     }
                     
                     VStack {
@@ -94,7 +83,7 @@ struct BubbleList: View {
             if predicate != nil { DetailView(detailView_bRank) }
             
             if notesView_bRank != nil {
-                AddNoteToBubbleView($notesView_bRank)
+                BubbleNotesView($notesView_bRank).zIndex(100)
             }
             
             if deleteViewYOffset != nil && deleteView_bRank != nil {
