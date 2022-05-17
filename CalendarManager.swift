@@ -33,14 +33,16 @@ extension CalendarManager {
             bubble.hasCalendar,
             !bubble.sessions_.isEmpty else { return }
         
-        bubble.sessions_.forEach { if $0.isEnded { createNewEvent(for: $0) }}
+        bubble.sessions_.forEach { if $0.isEnded {
+            createNewEvent(for: $0)
+        }}
     }
     
     ///creates a new event when the user ends a session
     func createNewEvent(for session: Session?) {
         guard
             let session = session,
-            session.isLastPairClosed,
+            session.isEnded,
             session.eventID == nil else { return }
                 
         let pairs = session.pairs_

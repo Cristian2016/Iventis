@@ -130,10 +130,10 @@ extension Float {
     
     var timeComponentsAbreviatedString:String {
         let components = self.timComponentsAsStrings
-        let hr = (components.hr > "0") ? components.hr + "h" : ""
-        let min = (components.min > "0") ? components.min + "m" : ""
+        let hr = (components.hr != "0") ? components.hr + "h" : ""
+        let min = (components.min != "0") ? components.min + "m" : ""
         let cents = components.cents
-        let sec = (components.sec > "0") ? components.sec + "." + cents + "s" : ""
+        let sec = (components.sec != "0") ? components.sec + "." + cents + "s" : ""
         var result = hr + " " + min + " " + sec
         result.trimWhiteSpaceAtTheBeginning()
         return result
