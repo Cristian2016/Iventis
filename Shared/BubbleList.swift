@@ -82,9 +82,9 @@ struct BubbleList: View {
             
             if notesShowing { BubbleNotesView($notesView_bRank) }
             
-            if deleteViewYOffset != nil && deleteViewShowing {
+            if deleteViewOffsetComputed && deleteViewShowing {
                 let bubble = viewModel.bubble(for: deleteView_bRank!)
-                DeleteActionView(bubble, $deleteView_bRank, $predicate, deleteViewYOffset!)
+                DeleteView(bubble, $deleteView_bRank, $predicate, deleteViewYOffset!)
                     .environmentObject(viewModel) //pass viewmodel as well
             }
             
@@ -171,7 +171,7 @@ struct BubbleList: View {
         
         let cellLow = frame.origin.y + frame.height
         
-        let deleteViewHeight = DeleteActionView.height
+        let deleteViewHeight = DeleteView.height
         let deleteViewHigh = (UIScreen.size.height - deleteViewHeight)/2
         let deleteViewLow = deleteViewHigh + deleteViewHeight
         
@@ -224,4 +224,8 @@ extension BubbleList {
     fileprivate var isListEmpty:Bool { results.isEmpty }
     
     fileprivate var deleteViewShowing:Bool { deleteView_bRank != nil }
+    
+    var deleteViewOffsetComputed:Bool {
+        deleteViewYOffset != nil
+    }
 }

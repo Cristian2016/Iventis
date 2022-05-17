@@ -69,9 +69,9 @@
 		1F5F4A9D280945C700AF3442 /* BubbleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5F4A9C280945C700AF3442 /* BubbleCell.swift */; };
 		1F5F4A9E280945C700AF3442 /* BubbleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5F4A9C280945C700AF3442 /* BubbleCell.swift */; };
 		1F5F4A9F280945C700AF3442 /* BubbleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5F4A9C280945C700AF3442 /* BubbleCell.swift */; };
-		1F61BE052822BAAA00B773F9 /* DeleteActionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F61BE042822BAAA00B773F9 /* DeleteActionView.swift */; };
-		1F61BE062822BAAA00B773F9 /* DeleteActionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F61BE042822BAAA00B773F9 /* DeleteActionView.swift */; };
-		1F61BE072822BAAA00B773F9 /* DeleteActionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F61BE042822BAAA00B773F9 /* DeleteActionView.swift */; };
+		1F61BE052822BAAA00B773F9 /* DeleteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F61BE042822BAAA00B773F9 /* DeleteView.swift */; };
+		1F61BE062822BAAA00B773F9 /* DeleteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F61BE042822BAAA00B773F9 /* DeleteView.swift */; };
+		1F61BE072822BAAA00B773F9 /* DeleteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F61BE042822BAAA00B773F9 /* DeleteView.swift */; };
 		1F62194028293B5100C9B175 /* SmallBubbleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F62193F28293B5100C9B175 /* SmallBubbleView.swift */; };
 		1F62194128293B5100C9B175 /* SmallBubbleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F62193F28293B5100C9B175 /* SmallBubbleView.swift */; };
 		1F62194228293B5100C9B175 /* SmallBubbleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F62193F28293B5100C9B175 /* SmallBubbleView.swift */; };
@@ -188,7 +188,7 @@
 		1F5F4A942809450A00AF3442 /* Library.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Library.swift; sourceTree = "<group>"; };
 		1F5F4A982809456E00AF3442 /* BubbleList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BubbleList.swift; sourceTree = "<group>"; };
 		1F5F4A9C280945C700AF3442 /* BubbleCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BubbleCell.swift; sourceTree = "<group>"; };
-		1F61BE042822BAAA00B773F9 /* DeleteActionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteActionView.swift; sourceTree = "<group>"; };
+		1F61BE042822BAAA00B773F9 /* DeleteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteView.swift; sourceTree = "<group>"; };
 		1F62193F28293B5100C9B175 /* SmallBubbleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallBubbleView.swift; sourceTree = "<group>"; };
 		1F641FFD281FF70100413E31 /* BottomDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomDetailView.swift; sourceTree = "<group>"; };
 		1F6420052820186D00413E31 /* PairCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PairCell.swift; sourceTree = "<group>"; };
@@ -244,7 +244,7 @@
 				1F18B456281FA6130080ADA6 /* PushView.swift */,
 				1F18B45B281FA9C90080ADA6 /* CalendarView.swift */,
 				1FA355CF28323E5300F73111 /* BubbleNotesView.swift */,
-				1F61BE042822BAAA00B773F9 /* DeleteActionView.swift */,
+				1F61BE042822BAAA00B773F9 /* DeleteView.swift */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -512,7 +512,7 @@
 				1FFC8BAD28142F040059EF2E /* Session Properties.swift in Sources */,
 				1F64200A2820204400413E31 /* BottomCell.swift in Sources */,
 				1FD21865281D9AB700B43403 /* ExitFocusView.swift in Sources */,
-				1F61BE052822BAAA00B773F9 /* DeleteActionView.swift in Sources */,
+				1F61BE052822BAAA00B773F9 /* DeleteView.swift in Sources */,
 				1F9BE0A9280BE14100F87EFA /* PaletteView.swift in Sources */,
 				1F5F4A732809409600AF3442 /* Bubble.swift in Sources */,
 				1F62194028293B5100C9B175 /* SmallBubbleView.swift in Sources */,
@@ -575,7 +575,7 @@
 				1F5F4A9A2809456E00AF3442 /* BubbleList.swift in Sources */,
 				1FD21866281D9AB700B43403 /* ExitFocusView.swift in Sources */,
 				1F4DF99E282B82EF00D54BE8 /* CircleButton.swift in Sources */,
-				1F61BE062822BAAA00B773F9 /* DeleteActionView.swift in Sources */,
+				1F61BE062822BAAA00B773F9 /* DeleteView.swift in Sources */,
 				1F62194128293B5100C9B175 /* SmallBubbleView.swift in Sources */,
 				1F5F4A6228093FAF00AF3442 /* Persistence.swift in Sources */,
 				1F100CA82809493400A3A3C2 /* BackgroundTimer.swift in Sources */,
@@ -603,7 +603,7 @@
 				1FFC8BAF28142F040059EF2E /* Session Properties.swift in Sources */,
 				1F64200C2820204400413E31 /* BottomCell.swift in Sources */,
 				1FD21867281D9AB700B43403 /* ExitFocusView.swift in Sources */,
-				1F61BE072822BAAA00B773F9 /* DeleteActionView.swift in Sources */,
+				1F61BE072822BAAA00B773F9 /* DeleteView.swift in Sources */,
 				1F9BE0AB280BE14100F87EFA /* PaletteView.swift in Sources */,
 				1F5F4A88280941AC00AF3442 /* Widgets.intentdefinition in Sources */,
 				1F62194228293B5100C9B175 /* SmallBubbleView.swift in Sources */,

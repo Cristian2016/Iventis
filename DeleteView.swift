@@ -8,7 +8,7 @@
 import SwiftUI
 
 ///same size on each device
-struct DeleteActionView: View {
+struct DeleteView: View {
     @Binding var showDeleteActionView_BubbleRank:Int? //the rank of the bubble
     
     let bubble:Bubble?
