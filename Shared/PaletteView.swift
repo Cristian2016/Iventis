@@ -15,7 +15,8 @@ struct PaletteView: View {
     var body: some View {
         HStack {
             paletteView.offset(x: !showPalette ? xOffset : 0, y: 0)
-            RightStrip($showPalette)
+            if showPalette { RightStrip($showPalette) }
+            else { Spacer(minLength: 20) }
         }
     }
     
