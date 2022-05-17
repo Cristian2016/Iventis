@@ -183,19 +183,21 @@ class ViewModel: ObservableObject {
         if bubble.lastPair!.pause == nil {
             bubble.lastPair!.pause = Date()
             bubble.lastPair?.computeDuration(.endSession) {
+                //⚠️ all further code should be included here
+                //this is UIThread
                 bubble.lastPair?.duration = $0
                 bubble.lastPair?.durationAsStrings = $1
                 
                 bubble.lastSession?.computeDuration()
                 
                 bubble.bubbleCell_Components = bubble.initialClock.timComponentsAsStrings
+                
+                //create calendar event
+                //if there are sessions and is calendar enabled, create an event
+                if !bubble.sessions_.isEmpty && bubble.hasCalendar {
+                    CalendarManager.shared.createNewEvent(for: bubble.lastSession)
+                }
             }
-        }
-        
-        //create calendar event
-        //if there are sessions and is calendar enabled, create an event
-        if !bubble.sessions_.isEmpty && bubble.hasCalendar {
-            CalendarManager.shared.createNewEvent(for: bubble.lastSession)
         }
         
         try? PersistenceController.shared.viewContext.save()
