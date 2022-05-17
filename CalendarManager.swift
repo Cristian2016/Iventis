@@ -55,7 +55,6 @@ extension CalendarManager {
         session.eventID = newEvent(eventTitle: title, stickyNote:session.bubble?.note, notes: notes, start: firstPair.start!, end: lastPair.pause!)
         PersistenceController.shared.save()
     }
-    
 }
 
 // MARK: -
@@ -234,6 +233,7 @@ class CalendarManager: NSObject {
             
             //duration
             let stringDuration = Float(pair.duration).timeComponentsAbreviatedString
+            print(pair.duration, stringDuration)
             bucket += "Duration " + stringDuration
             
             bucket += "\n" + "\n"
