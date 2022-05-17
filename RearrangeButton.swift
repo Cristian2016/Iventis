@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct RearrangeActionButton: View {
+struct RearrangeButton: View {
     @Environment(\.editMode) var editMode
     
     let fontSize = CGFloat(40)
@@ -58,6 +58,6 @@ struct RearrangeActionButton: View {
 
 struct DragAndDropActionButton_Previews: PreviewProvider {
     static var previews: some View {
-        RearrangeActionButton()
+        RearrangeButton()
     }
 }

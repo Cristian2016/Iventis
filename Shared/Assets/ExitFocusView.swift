@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ExitFocusAlertView: View {
+struct ExitFocusView: View {
     @Binding var predicate:NSPredicate?
     @Binding var showDetailView:Int?
     
