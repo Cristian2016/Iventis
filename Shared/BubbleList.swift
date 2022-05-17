@@ -78,7 +78,7 @@ struct BubbleList: View {
             }
             
             //on top of everything show DetailView (TopDetailView and BottomDetailView
-            if predicate != nil { DetailView(detailView_bRank) }
+            if isFocusOn { DetailView(detailView_bRank) }
             
             if notesView_bRank != nil {
                 BubbleNotesView($notesView_bRank).zIndex(100)
