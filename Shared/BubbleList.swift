@@ -14,7 +14,20 @@ struct BubbleList: View {
     @State var deleteView_bRank:Int? = nil //bubble.rank
     @State var detailView_bRank:Int? = nil //bubble.rank
     @State var notesView_bRank:Int? = nil //bubble rank
-        
+    
+    @State private var deleteViewYOffset:CGFloat? = nil
+    @State private var isActive = true
+    @State var paletteShowing = false
+    
+    @Environment(\.managedObjectContext) private var viewContext
+    @Environment(\.scenePhase) var scenePhase
+    
+    @SectionedFetchRequest var results:SectionedFetchResults<Bool, Bubble>
+    @StateObject private var viewModel = ViewModel()
+    
+    @Binding var predicate:NSPredicate?
+    
+    // MARK: -
     var body: some View {
         ZStack {
             if results.isEmpty { EmptyBubbleListView() }
@@ -90,9 +103,9 @@ struct BubbleList: View {
                 AddNoteToBubbleView($notesView_bRank)
             }
             
-            if deleteActionViewYOffset != nil && deleteView_bRank != nil {
+            if deleteViewYOffset != nil && deleteView_bRank != nil {
                 let bubble = viewModel.bubble(for: deleteView_bRank!)
-                DeleteActionView(bubble, $deleteView_bRank, $predicate, deleteActionViewYOffset!)
+                DeleteActionView(bubble, $deleteView_bRank, $predicate, deleteViewYOffset!)
                     .environmentObject(viewModel) //pass viewmodel as well
             }
             
@@ -102,7 +115,7 @@ struct BubbleList: View {
             let frame = new.frame
             if frame == .zero { return }
             
-            self.deleteActionViewYOffset = compute_YOffset(for: new.frame)
+            self.deleteViewYOffset = compute_YOffset(for: new.frame)
         }
         .onChange(of: scenePhase) {
             switch $0 {
@@ -117,20 +130,6 @@ struct BubbleList: View {
         }
         .navigationBarHidden(true)
     }
-    
-    // MARK: -
-    //1
-    @Environment(\.managedObjectContext) private var viewContext
-    @Environment(\.scenePhase) var scenePhase
-    
-    @State private var deleteActionViewYOffset:CGFloat? = nil
-    @StateObject private var viewModel = ViewModel()
-    @SectionedFetchRequest var results:SectionedFetchResults<Bool, Bubble>
-    @Binding var predicate:NSPredicate?
-    
-    // MARK: -
-    @State private var isActive = true
-    @State var paletteShowing = false
     
     // MARK: -
     init(_ predicate:Binding<NSPredicate?>) {
