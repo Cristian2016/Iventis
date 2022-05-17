@@ -86,7 +86,8 @@ struct BubbleList: View {
             //on top of everything show DetailView (TopDetailView and BottomDetailView
             if predicate != nil { DetailView(showDetailView_BubbleRank) }
             
-            if addBubbleNotesView_BubbleRank != nil { AddNoteToBubbleView($addBubbleNotesView_BubbleRank)
+            if addBubbleNotesView_BubbleRank != nil {
+                AddNoteToBubbleView($addBubbleNotesView_BubbleRank)
             }
             
             if deleteActionViewYOffset != nil && showDeleteActionView_BubbleRank != nil {
@@ -103,7 +104,7 @@ struct BubbleList: View {
             
             self.deleteActionViewYOffset = compute_YOffset(for: new.frame)
         }
-        .onChange(of: scenePhase, perform: {
+        .onChange(of: scenePhase) {
             switch $0 {
                 case .active:
                     viewModel.backgroundTimer(.start)
@@ -113,7 +114,7 @@ struct BubbleList: View {
                     break
                 @unknown default: fatalError()
             }
-        })
+        }
         .navigationBarHidden(true)
     }
     

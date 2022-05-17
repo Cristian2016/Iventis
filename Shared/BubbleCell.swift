@@ -10,10 +10,11 @@ import SwiftUI
 struct BubbleCell: View {
     ///added to bubbleCell only if cellLow value is needed. ex: to know how to position DeleteActionView
     private var cellLowEmitterView:some View { Circle().fill(Color.clear) }
-    //showing Detail or DeleteAction views
-    @Binding var showDeleteActionView_bubbleRank:Int? //bubble.rank
-    @Binding var showDetailView_BubbleRank:Int?
-    @Binding var addBubbleNotesView_BubbleRank:Int?
+    
+    //showing DeleteAction Detail or AddNotes Views
+    @Binding var deleteActionView_bRank:Int? //bubble.rank
+    @Binding var detailView_bRank:Int?
+    @Binding var addNotesView_bRank:Int?
     
     @Binding var predicate:NSPredicate?
     
@@ -38,10 +39,10 @@ struct BubbleCell: View {
          _ showDetailView_BubbleRank:Binding<Int?>,
          _ predicate:Binding<NSPredicate?>,
          _ showDeleteActionView_BubbleRank:Binding<Int?>,
-         _ addBubbleNotesView_BubbleRank:Binding<Int?>) {
+         _ addNotesView_bRank:Binding<Int?>) {
                 
-        _showDeleteActionView_bubbleRank = Binding(projectedValue: showDeleteActionView_BubbleRank)
-        _showDetailView_BubbleRank = Binding(projectedValue: showDetailView_BubbleRank)
+        _deleteActionView_bRank = Binding(projectedValue: showDeleteActionView_BubbleRank)
+        _detailView_bRank = Binding(projectedValue: showDetailView_BubbleRank)
         
         _bubble = StateObject(wrappedValue: bubble)
         _predicate = Binding(projectedValue: predicate)
@@ -53,7 +54,7 @@ struct BubbleCell: View {
             default: break
         }
         if !bubble.isObservingBackgroundTimer { bubble.observeBackgroundTimer() }
-        _addBubbleNotesView_BubbleRank = Binding(projectedValue: addBubbleNotesView_BubbleRank)
+        _addNotesView_bRank = Binding(projectedValue: addNotesView_bRank)
     }
     
     private let spacing:CGFloat = -30
@@ -98,7 +99,7 @@ struct BubbleCell: View {
                     .onTapGesture {
                         print(bubble.note_.isEmpty)
                         //show AddNotesView again
-                        addBubbleNotesView_BubbleRank = Int(bubble.rank)
+                        addNotesView_bRank = Int(bubble.rank)
                     }
             }
         }
@@ -122,7 +123,7 @@ struct BubbleCell: View {
         }
         .swipeActions(edge: .trailing, allowsFullSwipe: true) {
             //delete
-            Button { showDeleteActionView_bubbleRank = Int(bubble.rank)}
+            Button { deleteActionView_bRank = Int(bubble.rank)}
         label: { Label { Text("Delete") }
             icon: { Image.trash } }.tint(.red)
             
@@ -152,7 +153,7 @@ struct BubbleCell: View {
                     .onTapGesture {
                         if bubble.note_.isEmpty {
                             //show addNotesView
-                            addBubbleNotesView_BubbleRank = Int(bubble.rank)
+                            addNotesView_bRank = Int(bubble.rank)
                         } else {
                             bubble.isNoteHidden.toggle()
                             PersistenceController.shared.save()
@@ -173,7 +174,7 @@ struct BubbleCell: View {
                     .offset(x: isSecondsLongPressed ? 10 : 0.0, y: 0)
                     .animation(.secondsLongPressed.delay(0.1), value: isSecondsLongPressed)
                 //gestures
-                    .onTapGesture { withAnimation {
+                    .onTapGesture { withAnimation(.easeInOut(duration: 0.05)) {
                         editMode?.wrappedValue = .inactive
                         toggleDetailView()
                         //also viewModel.userTogglesDetail called within toggleDetailView()
@@ -285,7 +286,7 @@ struct BubbleCell: View {
         
         //%i integer, %f float, %@ object??
         predicate = predicateNotSet ? NSPredicate(format: "rank == %i", bubble.rank) : nil
-        showDetailView_BubbleRank = predicateNotSet ? Int(bubble.rank) : nil
+        detailView_bRank = predicateNotSet ? Int(bubble.rank) : nil
         
         //ask viewModel
         let rank = Int(bubble.rank)
@@ -293,12 +294,12 @@ struct BubbleCell: View {
     }
     
     private var showDeleteActionView:Bool {
-        guard let actionViewBubbleRank = showDeleteActionView_bubbleRank else { return false }
+        guard let actionViewBubbleRank = deleteActionView_bRank else { return false }
         return bubble.rank == actionViewBubbleRank
     }
     
     private var showDetailView:Bool {
-        guard let showDetailView_BubbleRank = showDetailView_BubbleRank else { return false }
+        guard let showDetailView_BubbleRank = detailView_bRank else { return false }
         return bubble.rank == showDetailView_BubbleRank
     }
 }
