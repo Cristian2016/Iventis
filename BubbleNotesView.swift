@@ -12,6 +12,8 @@ struct BubbleNotesView: View {
     @StateObject var bubble:Bubble
     
     private let textInputLimit = 8
+    
+    let initialNote:String
     @State private var textInput = ""
     @FocusState var keyboardVisible:Bool
     
@@ -25,6 +27,7 @@ struct BubbleNotesView: View {
         guard let bubble = try? PersistenceController.shared.viewContext.fetch(request).first else { fatalError("fuck bubble") }
         _bubble = StateObject(wrappedValue: bubble)
         _textInput = State(initialValue: bubble.note_)
+        self.initialNote = bubble.note_
     }
     
     private let size = CGSize(width: 250, height: 400)
@@ -33,12 +36,7 @@ struct BubbleNotesView: View {
     var body: some View {
         ZStack {
             Color.white.opacity(0.001)
-                .onTapGesture {
-                    viewModel.save(textInput, for: bubble)
-                    
-                    PersistenceController.shared.save()
-                    addBubbleNotesView_BubbleRank = nil
-                }
+                .onTapGesture { saveTextInputAndDismiss() }
             darkRoundedRect
                 .overlay {
                     VStack {
@@ -126,6 +124,8 @@ struct BubbleNotesView: View {
     private var topSpacer: some View { Spacer(minLength: 14) }
     
     private func saveTextInputAndDismiss() {
+        if initialNote == textInput { return }
+        
         viewModel.save(textInput, for: bubble)
         UserFeedback.singleHaptic(.heavy)
         
