@@ -39,6 +39,8 @@ extension NSNotification.Name {
     static let deleteBubbleRequest = NSNotification.Name("deleteBubbleRequest")
     static let resetBubbleRequest = NSNotification.Name("resetBubbleRequest")
     static let selectedTab = NSNotification.Name("selectedTab")
+    
+    static let textLimitExceeded = NSNotification.Name("textLimitExceeded")
 }
 
 struct Ratio {

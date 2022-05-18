@@ -7,27 +7,12 @@
 
 import SwiftUI
 
-class TextLimiter: ObservableObject {
-    let limit:Int
-    @Published var value = "" {
-        didSet {
-            if value.count > limit {
-                let text = String(value.prefix(self.limit))
-                self.value = text
-            }
-        }
-    }
-        
-    init(limit:Int) {
-        self.limit = limit
-    }
-}
-
 struct BubbleNotesView: View {
     @EnvironmentObject var viewModel:ViewModel
     @StateObject var bubble:Bubble
     
-    @StateObject var limiter = TextLimiter(limit: 8)
+    private let textInputLimit = 8
+    @State private var textInput = ""
     @FocusState var keyboardVisible:Bool
     
     @Binding var addBubbleNotesView_BubbleRank:Int?
@@ -91,12 +76,15 @@ struct BubbleNotesView: View {
     }
     
     private var textField: some View {
-        TextField("Search/Add Note", text: $limiter.value)
-            .font(.title2)
-            .padding()
-            .focused($keyboardVisible)
+        TextField("Search/Add Note", text: $textInput)
+        .font(.title2)
+        .padding()
+        .focused($keyboardVisible)
+        .onChange(of: self.textInput) {
+            if $0.count > textInputLimit { textInput = String(textInput.prefix(textInputLimit)) }
+        }
     }
-        
+    
     private var backgroundView :some View {
         VStack {
             Spacer(minLength: 90)
