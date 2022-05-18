@@ -33,7 +33,7 @@ struct BubbleNotesView: View {
     var body: some View {
         ZStack {
             Color.white.opacity(0.001)
-                .onTapGesture { saveTextInputAndDismiss() }
+                .onTapGesture { addBubbleNotesView_BubbleRank = nil }
             darkRoundedRect
                 .overlay {
                     VStack {
@@ -42,9 +42,9 @@ struct BubbleNotesView: View {
                             .overlay {
                                 ZStack {
                                     Image(systemName: "plus.app")
-                                        .font(.system(size: 72))
+                                        .font(.system(size: 72).weight(.light))
                                     Text("\(textInputLimit - textInput.count)")
-                                        .font(.system(size: 18).weight(.semibold))
+                                        .font(.system(size: 18).weight(.bold))
                                         .offset(x: 15, y: 15)
                                 }
                                 .foregroundColor(textInput.count > 0 ? .blue : .gray)
