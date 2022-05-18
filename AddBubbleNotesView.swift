@@ -56,16 +56,7 @@ struct AddBubbleNotesView: View {
                                     }
                             )
                             .overlay {
-                                ZStack {
-                                    Image(systemName: "plus.app.fill")
-                                        .font(.system(size: 72).weight(.light))
-                                        .foregroundColor(textFieldString.count > 0 ? .blue : .gray)
-                                    Text("\(textInputLimit - textFieldString.count)")
-                                        .font(.system(size: 18).weight(.bold))
-                                        .foregroundColor(.white)
-                                        .offset(x: 15, y: 15)
-                                }
-                                .offset(x: 74, y: 0)
+                                plusButton
                                 .onTapGesture {
                                     if textFieldString.count > 0 {
                                         saveTextInputAndDismiss()
@@ -137,6 +128,24 @@ struct AddBubbleNotesView: View {
         UserFeedback.singleHaptic(.heavy)
         
         PersistenceController.shared.save()
+    }
+    
+    
+    
+    private var plusButton:some View {
+        Image(systemName: "plus.app.fill")
+            .background(Circle().fill(Color.white).padding())
+            .font(.system(size: 72).weight(.light))
+            .foregroundColor(textFieldString.count > 0 ? .blue : .gray)
+            .overlay { remainingCharactersCounterView }
+            .offset(x: 74, y: 0)
+    }
+    
+    private var remainingCharactersCounterView:some View {
+        Text("\(textInputLimit - textFieldString.count)")
+            .font(.system(size: 18).weight(.bold))
+            .foregroundColor(.white)
+            .offset(x: 15, y: 15)
     }
 }
 
