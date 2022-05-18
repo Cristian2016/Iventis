@@ -34,10 +34,8 @@ struct BubbleNotesView: View {
         ZStack {
             Color.white.opacity(0.001)
                 .onTapGesture {
-                    if textInput.isEmpty {
-                        bubble.note_ = textInput
-                        PersistenceController.shared.save()
-                    }
+                    bubble.note_ = textInput
+                    PersistenceController.shared.save()
                     addBubbleNotesView_BubbleRank = nil
                 }
             darkRoundedRect
