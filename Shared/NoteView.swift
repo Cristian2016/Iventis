@@ -47,7 +47,7 @@ struct NoteView: View {
                 .background(.thinMaterial)
                 .aspectRatio(aspectRatio, contentMode: .fill)
                 .cornerRadius(2)
-                .standardShadow(false)
+                .shadow(color: .black.opacity(0.1), radius: 2, x: 2, y: 2)
         }
     }
 }
