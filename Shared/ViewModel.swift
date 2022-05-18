@@ -246,7 +246,7 @@ class ViewModel: ObservableObject {
 
 extension ViewModel {
     ///all old notes sorted by Date
-    static func allOldBubbleNotes() -> [OldBubbleNote] {
+    func allOldBubbleNotes() -> [OldBubbleNote] {
         let request = OldBubbleNote.fetchRequest()
         request.sortDescriptors = [
             NSSortDescriptor(key: "created", ascending: false)
