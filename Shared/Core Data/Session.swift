@@ -15,7 +15,7 @@ public class Session: NSManagedObject {
 //        print("session deinit")
     }
     
-    //⚠️ implement on backgroundthread. warning: wait until pair computes its duration and then compite session.totalduration!!!
+    //⚠️ implement on backgroundthread. warning: wait until pair computes its duration and then compute session.totalduration!!!
     func computeDuration() {
         DispatchQueue.global().async {
             let pairs = self.pairs?.array as! [Pair]

@@ -201,8 +201,6 @@ class ViewModel: ObservableObject {
             
             try? PersistenceController.shared.viewContext.save()
         }
-        //save all changes in the end
-        try? PersistenceController.shared.viewContext.save()
     }
     
     func userTogglesDetail(_ rank:Int?) {

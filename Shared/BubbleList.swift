@@ -49,7 +49,7 @@ struct BubbleList: View {
                                                 .environmentObject(viewModel)
                                     }
                                     .onMove {
-                                        let moveAtTheBottom = $1 == section.count
+                                        let moveAtTheBottom = ($1 == section.count)
                                         let sourceRank = section[$0.first!].rank
                                         
                                         if moveAtTheBottom {
