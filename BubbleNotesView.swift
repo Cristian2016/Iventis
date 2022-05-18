@@ -39,6 +39,12 @@ struct BubbleNotesView: View {
                     VStack {
                         topSpacer //pushes textfield down a little
                         textField
+                            .overlay {
+                                Text("\(textInputLimit - textInput.count)")
+                                    .font(.system(size: 18).weight(.medium))
+                                    .foregroundColor(.lightGray)
+                                    .offset(x: 60, y: 10)
+                            }
                             .onSubmit {
                                 addBubbleNotesView_BubbleRank = nil
                                 PersistenceController.shared.save()
@@ -72,7 +78,7 @@ struct BubbleNotesView: View {
     }
     
     private var textField: some View {
-        TextField("Search/Add Note", text: $textInput)
+        TextField("\(Image(systemName: "magnifyingglass")) \(Image(systemName: "note.text.badge.plus")) Note", text: $textInput)
         .font(.title2)
         .padding()
         .focused($keyboardVisible)
