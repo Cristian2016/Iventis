@@ -33,11 +33,7 @@ struct BubbleNotesView: View {
     var body: some View {
         ZStack {
             Color.white.opacity(0.001)
-                .onTapGesture {
-//                    bubble.note = textInput
-                    PersistenceController.shared.save()
-                    addBubbleNotesView_BubbleRank = nil
-                }
+                .onTapGesture { saveTextInputAndDismiss() }
             darkRoundedRect
                 .overlay {
                     VStack {
@@ -84,6 +80,7 @@ struct BubbleNotesView: View {
         .onChange(of: self.textInput) {
             if $0.count > textInputLimit { textInput = String(textInput.prefix(textInputLimit)) }
         }
+        .onSubmit { saveTextInputAndDismiss() }
     }
     
     private var backgroundView :some View {
@@ -94,6 +91,13 @@ struct BubbleNotesView: View {
     }
     
     private var topSpacer: some View { Spacer(minLength: 14) }
+    
+    private func saveTextInputAndDismiss() {
+        //save textInput to CoreData and dismiss BubbleNotesView
+        bubble.note = textInput
+        PersistenceController.shared.save()
+        addBubbleNotesView_BubbleRank = nil
+    }
 }
 
 struct BubbleNoteView_Previews: PreviewProvider {
