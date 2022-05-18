@@ -235,4 +235,11 @@ class ViewModel: ObservableObject {
         
         return nil
     }
+    
+    func save(_ textInput:String, for bubble:Bubble) {
+        var note = textInput
+        note.removeWhiteSpaceAtBothEnds()
+        bubble.note = note
+        //do not save CoreData here, it is saved where the function is called
+    }
 }

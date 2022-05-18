@@ -92,7 +92,7 @@ extension String {
         while first == " " { removeFirst() }
     }
     
-    mutating func removeAllWhiteSpace() {
+    mutating func removeWhiteSpaceAtBothEnds() {
         trimWhiteSpaceAtTheBeginning()
         trimWhiteSpaceAtTheEnd()
     }

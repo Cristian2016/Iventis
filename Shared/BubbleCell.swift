@@ -76,14 +76,11 @@ struct BubbleCell: View {
     // MARK: -
     var body: some View {
         ZStack {
-            if !bubble.note_.isEmpty && bubble.isNoteHidden {
-                
-                
-            }
             
             if !bubble.note_.isEmpty {
                 noteView
-                    .zIndex(bubble.isNoteHidden ? 10 : 0)
+                    .zIndex(10)
+                    .scaleEffect(bubble.isNoteHidden ? 1 : 0.6)
                     .onTapGesture {
                         print(bubble.note_.isEmpty)
                         //show AddNotesView again

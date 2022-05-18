@@ -130,11 +130,10 @@ struct BubbleNotesView: View {
     private var topSpacer: some View { Spacer(minLength: 14) }
     
     private func saveTextInputAndDismiss() {
-        //save textInput to CoreData and dismiss BubbleNotesView
-        bubble.note = textInput
-        PersistenceController.shared.save()
-        addBubbleNotesView_BubbleRank = nil
+        viewModel.save(textInput, for: bubble)
+        addBubbleNotesView_BubbleRank = nil //dimiss self
         UserFeedback.singleHaptic(.heavy)
+        PersistenceController.shared.save()
     }
 }
 
