@@ -11,4 +11,13 @@ import CoreData
 
 @objc(OldBubbleNote)
 public class OldBubbleNote: NSManagedObject {
+    
+    ///all old notes sorted by Date
+    static func all() -> [OldBubbleNote] {
+        let request = OldBubbleNote.fetchRequest()
+        request.sortDescriptors = [
+            NSSortDescriptor(key: "created", ascending: false)
+        ]
+      return (try? PersistenceController.shared.viewContext.fetch(request)) ?? []
+    }
 }
