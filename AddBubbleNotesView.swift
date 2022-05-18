@@ -14,7 +14,7 @@ struct AddBubbleNotesView: View {
     private let textInputLimit = 8
     
     let initialNote:String
-    @State private var textInput = ""
+    @State private var textFieldString = ""
     @FocusState var keyboardVisible:Bool
     
     @Binding var addBubbleNotesView_BubbleRank:Int?
@@ -26,7 +26,7 @@ struct AddBubbleNotesView: View {
         
         guard let bubble = try? PersistenceController.shared.viewContext.fetch(request).first else { fatalError("fuck bubble") }
         _bubble = StateObject(wrappedValue: bubble)
-        _textInput = State(initialValue: bubble.note_)
+        _textFieldString = State(initialValue: bubble.note_)
         self.initialNote = bubble.note_
     }
     
@@ -46,15 +46,12 @@ struct AddBubbleNotesView: View {
                         topSpacer //pushes textfield down a little
                         textField
                             .gesture(
-                                DragGesture(minimumDistance: 10, coordinateSpace: .global)
-                                    .onChanged { value in
-                                        if value.translation.width < -20 {
-                                            textInput = ""
-                                        }
+                                DragGesture(minimumDistance: 15, coordinateSpace: .global)
+                                    .onChanged {
+                                        if $0.translation.width < -20 { textFieldString = "" }
                                     }
-                                    .onEnded { value in
-                                        if textInput.isEmpty {
-                                            UserFeedback.doubleHaptic(.rigid)
+                                    .onEnded { _ in
+                                        if textFieldString.isEmpty { UserFeedback.doubleHaptic(.rigid)
                                         }
                                     }
                             )
@@ -62,21 +59,21 @@ struct AddBubbleNotesView: View {
                                 ZStack {
                                     Image(systemName: "plus.app.fill")
                                         .font(.system(size: 72).weight(.light))
-                                        .foregroundColor(textInput.count > 0 ? .blue : .gray)
-                                    Text("\(textInputLimit - textInput.count)")
+                                        .foregroundColor(textFieldString.count > 0 ? .blue : .gray)
+                                    Text("\(textInputLimit - textFieldString.count)")
                                         .font(.system(size: 18).weight(.bold))
                                         .foregroundColor(.white)
                                         .offset(x: 15, y: 15)
                                 }
                                 .offset(x: 74, y: 0)
                                 .onTapGesture {
-                                    if textInput.count > 0 {
+                                    if textFieldString.count > 0 {
                                         saveTextInputAndDismiss()
                                         addBubbleNotesView_BubbleRank = nil //dimiss self
                                     }
                                 }
                                 .onLongPressGesture {
-                                    textInput = ""
+                                    textFieldString = ""
                                     UserFeedback.doubleHaptic(.rigid)
                                 }
                             }
@@ -113,13 +110,13 @@ struct AddBubbleNotesView: View {
     }
     
     private var textField: some View {
-        TextField("Add Note", text: $textInput)
+        TextField("Add Note", text: $textFieldString)
         .font(.title2)
         .padding()
         .focused($keyboardVisible)
         .textInputAutocapitalization(.words)
-        .onChange(of: self.textInput) {
-            if $0.count > textInputLimit { textInput = String(textInput.prefix(textInputLimit)) }
+        .onChange(of: self.textFieldString) {
+            if $0.count > textInputLimit { textFieldString = String(textFieldString.prefix(textInputLimit)) }
         }
         .onSubmit { saveTextInputAndDismiss() }
     }
@@ -134,9 +131,9 @@ struct AddBubbleNotesView: View {
     private var topSpacer: some View { Spacer(minLength: 14) }
     
     private func saveTextInputAndDismiss() {
-        if initialNote == textInput { return }
+        if initialNote == textFieldString { return }
         
-        viewModel.save(textInput, for: bubble)
+        viewModel.save(textFieldString, for: bubble)
         UserFeedback.singleHaptic(.heavy)
         
         PersistenceController.shared.save()
