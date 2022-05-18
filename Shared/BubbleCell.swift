@@ -266,7 +266,7 @@ struct BubbleCell: View {
     private var noteView:some View {
         VStack {
             HStack {
-                NoteView(content: bubble.note ?? "", $bubble.hasCalendar).offset(x: -20, y: -22)
+                BubbleStickyNote(content: bubble.note ?? "", $bubble.hasCalendar).offset(x: -20, y: -22)
                 Spacer()
             }
             Spacer()

@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct NoteView: View {
+struct BubbleStickyNote: View {
     let content:String
     let lineWidth:CGFloat
     let cornerRadius:CGFloat
@@ -68,7 +68,7 @@ struct NoteView: View {
 struct Note_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            NoteView(content: "Workout", .constant(true))
+            BubbleStickyNote(content: "Workout", .constant(true))
         }
     }
 }
