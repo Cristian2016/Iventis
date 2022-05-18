@@ -149,17 +149,6 @@ struct BubbleList: View {
             
             //rectangle to allow collapse along the entire width
             Rectangle().foregroundColor(.white.opacity(0.001))
-//                .overlay {
-//                    if sectionID == "false" {
-//                        HStack {
-//                            Text("Tap to collapse")
-//                                .font(.system(size: 18).weight(.light))
-//                                .foregroundColor(.lightGray)
-//                                .lineLimit(1)
-//                            Spacer()
-//                        }
-//                    }
-//                }
         }
         .font(.title3)
     }
