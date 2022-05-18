@@ -30,7 +30,8 @@ struct PaletteView: View {
         .gesture(DragGesture(minimumDistance: 0, coordinateSpace: .global)
             .onEnded { _ in
                 withAnimation { showPalette = false }
-            })
+            }
+        )
     }
     
     // MARK: - Legoes
