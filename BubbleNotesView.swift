@@ -12,7 +12,8 @@ class TextLimiter: ObservableObject {
     @Published var value = "" {
         didSet {
             if value.count > limit {
-                self.value = "limit"
+                let text = String(value.prefix(self.limit))
+                self.value = text
             }
         }
     }
