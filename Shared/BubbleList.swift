@@ -80,7 +80,10 @@ struct BubbleList: View {
             //on top of everything show DetailView (TopDetailView and BottomDetailView
             if isFocusOn && !notesShowing { DetailView(detailView_bRank) }
             
-            if notesShowing { BubbleNotesView($notesView_bRank) }
+            if notesShowing {
+                BubbleNotesView($notesView_bRank)
+                    .environmentObject(viewModel)
+            }
             
             if deleteViewOffsetComputed && deleteViewShowing {
                 let bubble = viewModel.bubble(for: deleteView_bRank!)
