@@ -246,7 +246,7 @@ struct BubbleCell: View {
     private var calendarView:some View {
         VStack {
             HStack {
-                CalendarView().offset(x: -10, y: -10)
+                CalendarSticker().offset(x: -10, y: -10)
                 Spacer()
             }
             Spacer()
