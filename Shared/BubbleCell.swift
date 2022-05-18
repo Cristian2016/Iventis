@@ -94,14 +94,7 @@ struct BubbleCell: View {
             }
             timeComponentsViews
             if bubble.hasCalendar && (bubble.note_.isEmpty || bubble.isNoteHidden) { calendarView }
-            if !bubble.note_.isEmpty && bubble.isNoteHidden {
-                noteSticker
-                    .onTapGesture {
-                        print(bubble.note_.isEmpty)
-                        //show AddNotesView again
-                        bubbleNotesView_bRank = Int(bubble.rank)
-                    }
-            }
+            if !bubble.note_.isEmpty && bubble.isNoteHidden { noteSticker }
             if !bubble.isNoteHidden && !bubble.note_.isEmpty {
                 noteView
                     .onTapGesture {
