@@ -179,13 +179,15 @@ class ViewModel: ObservableObject {
         bubble.bubbleCell_Components = bubble.initialClock.timeComponentsAsStrings
         
         if bubble.lastPair!.pause == nil { bubble.lastPair!.pause = Date() }
+        
         //compute first lastPair duration
-        bubble.lastPair?.computeDuration(.endSession) { //UIThread 🟢
+        bubble.lastPair?.computeDuration(.endSession) { (duration, data) in
+            //UIThread 🟢
             //⚠️ all further code should be included here ⚠️
             bubble.lastSession?.isEnded = true
             
-            bubble.lastPair?.duration = $0
-            bubble.lastPair?.durationAsStrings = $1
+            bubble.lastPair?.duration = duration
+            bubble.lastPair?.durationAsStrings = data
             
             bubble.lastSession?.computeDuration()
             
