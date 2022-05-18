@@ -13,13 +13,13 @@ struct BubbleStickyNote: View {
     let cornerRadius:CGFloat
     
     let ratio:CGFloat
-    let height = CGFloat(44)
+    let height = CGFloat(42)
     
     @Binding var bubbleHasCalendar:Bool
     
     init(content:String, lineWidth:CGFloat = 3, radius:CGFloat = 0, _ bubbleHasCalendar:Binding<Bool>) {
         self.content = content
-        self.ratio = (content.count < 8) ? CGFloat(2.7) : 2.7
+        self.ratio = (content.count < 8) ? CGFloat(2.8) : 2.8
         self.lineWidth = lineWidth
         self.cornerRadius = radius
         
@@ -39,8 +39,9 @@ struct BubbleStickyNote: View {
             }
             HStack {
                 Spacer()
-                Label { Text(content).foregroundColor(.label)
-                    .font(.system(size: 26)) } icon: { }
+                Label {
+                    Text(content).foregroundColor(.label)
+                    .font(.system(size: 24)) } icon: { }
                 Spacer()
             }
             .background(background)
