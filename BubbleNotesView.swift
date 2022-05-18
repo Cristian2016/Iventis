@@ -9,8 +9,15 @@ import SwiftUI
 
 class TextLimiter: ObservableObject {
     let limit:Int
-    @Published var value = ""
-    
+    @Published var value = "" {
+        didSet {
+            if value.count > limit {
+                self.value = String(value.prefix(limit))
+                
+            }
+        }
+    }
+        
     init(limit:Int) {
         self.limit = limit
     }
