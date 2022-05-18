@@ -10,7 +10,12 @@
         <attribute name="isPinned" optional="YES" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
         <attribute name="note" optional="YES" attributeType="String" defaultValueString=""/>
         <attribute name="rank" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="notesHistory" optional="YES" toMany="YES" deletionRule="Cascade" ordered="YES" destinationEntity="BubbleNotesHistory" inverseName="bubble" inverseEntity="BubbleNotesHistory"/>
         <relationship name="sessions" optional="YES" toMany="YES" deletionRule="Cascade" ordered="YES" destinationEntity="Session" inverseName="bubble" inverseEntity="Session"/>
+    </entity>
+    <entity name="BubbleNotesHistory" representedClassName=".BubbleNotesHistory" syncable="YES">
+        <attribute name="value" optional="YES" attributeType="String"/>
+        <relationship name="bubble" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Bubble" inverseName="notesHistory" inverseEntity="Bubble"/>
     </entity>
     <entity name="Pair" representedClassName=".Pair" syncable="YES">
         <attribute name="duration" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES"/>
@@ -31,8 +36,9 @@
         <relationship name="pairs" optional="YES" toMany="YES" deletionRule="Cascade" ordered="YES" destinationEntity="Pair" inverseName="session" inverseEntity="Pair"/>
     </entity>
     <elements>
-        <element name="Bubble" positionX="-1028.380004882812" positionY="1528.89501953125" width="128" height="179"/>
-        <element name="Pair" positionX="-832.5816650390625" positionY="1586.590484619141" width="128" height="134"/>
+        <element name="Bubble" positionX="-1028.380004882812" positionY="1528.89501953125" width="128" height="208"/>
+        <element name="Pair" positionX="-832.5816650390625" positionY="1586.590484619141" width="128" height="148"/>
         <element name="Session" positionX="-826.8931884765625" positionY="1341.822631835938" width="128" height="134"/>
+        <element name="BubbleNotesHistory" positionX="-1275.206817626953" positionY="1571.657867431641" width="128" height="73"/>
     </elements>
 </model>

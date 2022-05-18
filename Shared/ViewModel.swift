@@ -234,12 +234,16 @@ class ViewModel: ObservableObject {
         return nil
     }
     
+    ///sets a bubbleNote and saves notes to bubble notes history
     func save(_ textInput:String, for bubble:Bubble) {
         var note = textInput
         note.removeWhiteSpaceAtBothEnds()
         
-        print(note.count)
         bubble.note = note
+        
+        
+        
+        
         //do not save CoreData here, it is saved where the function is called
     }
 }
