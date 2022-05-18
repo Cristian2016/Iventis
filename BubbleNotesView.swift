@@ -24,7 +24,7 @@ struct BubbleNotesView: View {
         
         guard let bubble = try? PersistenceController.shared.viewContext.fetch(request).first else { fatalError("fuck bubble") }
         _bubble = StateObject(wrappedValue: bubble)
-        print(#function)
+        _textInput = State(initialValue: bubble.note_)
     }
     
     private let size = CGSize(width: 250, height: 400)
