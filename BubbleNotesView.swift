@@ -33,12 +33,31 @@ struct BubbleNotesView: View {
     var body: some View {
         ZStack {
             Color.white.opacity(0.001)
-                .onTapGesture { addBubbleNotesView_BubbleRank = nil }
+                .onTapGesture {
+                    if textInput.isEmpty {
+                        bubble.note_ = textInput
+                        PersistenceController.shared.save()
+                    }
+                    addBubbleNotesView_BubbleRank = nil
+                }
             darkRoundedRect
                 .overlay {
                     VStack {
                         topSpacer //pushes textfield down a little
                         textField
+                            .gesture(
+                                DragGesture(minimumDistance: 10, coordinateSpace: .global)
+                                    .onChanged { value in
+                                        if value.translation.width < -20 {
+                                            textInput = ""
+                                        }
+                                    }
+                                    .onEnded { value in
+                                        if textInput.isEmpty {
+                                            UserFeedback.singleHaptic(.rigid)
+                                        }
+                                    }
+                            )
                             .overlay {
                                 ZStack {
                                     Image(systemName: "plus.app")
@@ -51,6 +70,10 @@ struct BubbleNotesView: View {
                                 .offset(x: 74, y: 0)
                                 .onTapGesture {
                                     if textInput.count > 0 { saveTextInputAndDismiss() }
+                                }
+                                .onLongPressGesture {
+                                    textInput = ""
+                                    UserFeedback.singleHaptic(.rigid)
                                 }
                             }
                             .onSubmit {
