@@ -21,10 +21,17 @@ struct LeftStrip: View {
         }
         .ignoresSafeArea()
         .gesture(DragGesture(minimumDistance: 0, coordinateSpace: .global)
-            .onEnded { _ in
-                withAnimation(.easeOut(duration: 0.2)) {
-                    paletteShowing = true
+            .onChanged { value in
+                if value.translation.width > 20 {
+                    withAnimation(.easeOut(duration: 0.2)) {
+                        paletteShowing = true
+                    }
                 }
+            }
+            .onEnded { _ in
+//                withAnimation(.easeOut(duration: 0.2)) {
+//                    paletteShowing = true
+//                }
             }
         )
     }
