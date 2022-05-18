@@ -60,11 +60,11 @@ struct BubbleNotesView: View {
                     .clipShape(RoundedRectangle(cornerRadius: cornerRadius))
                 }
         }
-        .onAppear { delayExecution(.now() + 0.05) {
-            withAnimation (.easeInOut(duration: 0.0)) {
-                keyboardVisible = true
+        .onAppear {
+            delayExecution(.now() + 0.05) {
+                withAnimation (.easeInOut(duration: 0.0)) { keyboardVisible = true }
             }
-        } }
+        }
     }
     
     // MARK: - Legoes
@@ -80,6 +80,7 @@ struct BubbleNotesView: View {
         .font(.title2)
         .padding()
         .focused($keyboardVisible)
+        .textInputAutocapitalization(.words)
         .onChange(of: self.textInput) {
             if $0.count > textInputLimit { textInput = String(textInput.prefix(textInputLimit)) }
         }
