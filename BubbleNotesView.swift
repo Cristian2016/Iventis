@@ -49,7 +49,9 @@ struct BubbleNotesView: View {
                                 }
                                 .foregroundColor(textInput.count > 0 ? .blue : .gray)
                                 .offset(x: 74, y: 0)
-                                .onTapGesture { saveTextInputAndDismiss() }
+                                .onTapGesture {
+                                    if textInput.count > 0 { saveTextInputAndDismiss() }
+                                }
                             }
                             .onSubmit {
                                 addBubbleNotesView_BubbleRank = nil
