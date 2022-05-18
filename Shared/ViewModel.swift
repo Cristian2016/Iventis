@@ -180,9 +180,8 @@ class ViewModel: ObservableObject {
         
         if bubble.lastPair!.pause == nil { bubble.lastPair!.pause = Date() }
         //compute first lastPair duration
-        bubble.lastPair?.computeDuration(.endSession) {
+        bubble.lastPair?.computeDuration(.endSession) { //UIThread 🟢
             //⚠️ all further code should be included here ⚠️
-            //this is UIThread
             bubble.lastSession?.isEnded = true
             
             bubble.lastPair?.duration = $0
