@@ -49,7 +49,7 @@ struct RightStrip: View {
     init(_ showPalette:Binding<Bool>) {
         _showPalette = .init(projectedValue: showPalette)
     }
-    
+
     // MARK: -
     var body: some View {
         Rectangle()

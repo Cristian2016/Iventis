@@ -14,10 +14,10 @@ struct PaletteView: View {
     
     var body: some View {
         HStack {
-            paletteView.offset(x: !showPalette ? xOffset : 0, y: 0)
-            if showPalette { RightStrip($showPalette) }
-            else { Spacer(minLength: 20) }
+            paletteView
+            RightStrip($showPalette)
         }
+        .offset(x: !showPalette ? xOffset : 0, y: 0)
     }
     
     // MARK: -
