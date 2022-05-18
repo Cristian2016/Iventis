@@ -94,6 +94,7 @@ struct BubbleCell: View {
             }
             timeComponentsViews
             if bubble.hasCalendar && (bubble.note_.isEmpty || bubble.isNoteHidden) { calendarView }
+            if !bubble.note_.isEmpty && bubble.isNoteHidden { noteSticker }
             if !bubble.isNoteHidden && !bubble.note_.isEmpty {
                 noteView
                     .onTapGesture {
@@ -247,6 +248,16 @@ struct BubbleCell: View {
         VStack {
             HStack {
                 CalendarSticker().offset(x: -10, y: -10)
+                Spacer()
+            }
+            Spacer()
+        }
+    }
+    
+    private var noteSticker: some View {
+        VStack {
+            HStack {
+                NoteSticker()
                 Spacer()
             }
             Spacer()
