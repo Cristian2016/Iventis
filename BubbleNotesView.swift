@@ -40,10 +40,16 @@ struct BubbleNotesView: View {
                         topSpacer //pushes textfield down a little
                         textField
                             .overlay {
-                                Text("\(textInputLimit - textInput.count)")
-                                    .font(.system(size: 18).weight(.medium))
-                                    .foregroundColor(.lightGray)
-                                    .offset(x: 60, y: 10)
+                                ZStack {
+                                    Image(systemName: "plus.app")
+                                        .font(.system(size: 72))
+                                    Text("\(textInputLimit - textInput.count)")
+                                        .font(.system(size: 18).weight(.semibold))
+                                        .offset(x: 15, y: 15)
+                                }
+                                .foregroundColor(textInput.count > 0 ? .blue : .gray)
+                                .offset(x: 74, y: 0)
+                                .onTapGesture { saveTextInputAndDismiss() }
                             }
                             .onSubmit {
                                 addBubbleNotesView_BubbleRank = nil
@@ -78,7 +84,7 @@ struct BubbleNotesView: View {
     }
     
     private var textField: some View {
-        TextField("\(Image(systemName: "magnifyingglass")) \(Image(systemName: "note.text.badge.plus")) Note", text: $textInput)
+        TextField("Add Note", text: $textInput)
         .font(.title2)
         .padding()
         .focused($keyboardVisible)
