@@ -26,7 +26,7 @@ public class Session: NSManagedObject {
                 self.totalDuration += lastPairDuration
                 
                 let encoder = JSONEncoder()
-                let data = try? encoder.encode(self.totalDuration.timComponentsAsStrings)
+                let data = try? encoder.encode(self.totalDuration.timeComponentsAsStrings)
                 self.totalDurationAsStrings = data
                 
                 //save all

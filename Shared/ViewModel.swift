@@ -68,7 +68,7 @@ class ViewModel: ObservableObject {
         let viewContext = PersistenceController.shared.viewContext
         bubble.created = Date()
         bubble.currentClock = bubble.initialClock
-        bubble.bubbleCell_Components = bubble.initialClock.timComponentsAsStrings
+        bubble.bubbleCell_Components = bubble.initialClock.timeComponentsAsStrings
         bubble.sessions?.forEach { viewContext.delete($0 as! Session) }
         try? viewContext.save()
     }
@@ -100,7 +100,7 @@ class ViewModel: ObservableObject {
             case .running: /* changes to .paused */
                 let currentPair = bubble.lastPair
                 currentPair?.pause = Date()
-                bubble.shouldUpdateSmallBubbleCell = false
+                bubble.continueToUpdateSmallBubbleCell = false
                 
                 //⚠️ closure runs on the main queue. whatever you want the user to see put in that closure otherwise it will fail to update!!!!
                 currentPair?.computeDuration(.pause) {
@@ -112,7 +112,7 @@ class ViewModel: ObservableObject {
                     
                     //compute and store currentClock
                     bubble.currentClock += currentPair!.duration
-                    bubble.bubbleCell_Components = bubble.currentClock.timComponentsAsStrings
+                    bubble.bubbleCell_Components = bubble.currentClock.timeComponentsAsStrings
                 }
                 
             case .finished: return
@@ -173,33 +173,32 @@ class ViewModel: ObservableObject {
     func endSession(_ bubble:Bubble) {
         if bubble.state == .brandNew { return }
         
-        bubble.shouldUpdateSmallBubbleCell = false
+        bubble.continueToUpdateSmallBubbleCell = false
         
         bubble.currentClock = bubble.initialClock
-        bubble.bubbleCell_Components = bubble.currentClock.timComponentsAsStrings
+        bubble.bubbleCell_Components = bubble.initialClock.timeComponentsAsStrings
         
-        if bubble.lastPair!.pause == nil {
-            bubble.lastPair!.pause = Date()
-            bubble.lastPair?.computeDuration(.endSession) {
-                //⚠️ all further code should be included here ⚠️
-                //this is UIThread
-                bubble.lastSession?.isEnded = true
-                
-                bubble.lastPair?.duration = $0
-                bubble.lastPair?.durationAsStrings = $1
-                
-                bubble.lastSession?.computeDuration()
-                
-                bubble.bubbleCell_Components = bubble.initialClock.timComponentsAsStrings
-                
-                //create calendar event
-                //if there are sessions and is calendar enabled, create an event
-                if !bubble.sessions_.isEmpty && bubble.hasCalendar {
-                    CalendarManager.shared.createNewEvent(for: bubble.lastSession)
-                }
-                
-                try? PersistenceController.shared.viewContext.save()
+        if bubble.lastPair!.pause == nil { bubble.lastPair!.pause = Date() }
+        //compute first lastPair duration
+        bubble.lastPair?.computeDuration(.endSession) {
+            //⚠️ all further code should be included here ⚠️
+            //this is UIThread
+            bubble.lastSession?.isEnded = true
+            
+            bubble.lastPair?.duration = $0
+            bubble.lastPair?.durationAsStrings = $1
+            
+            bubble.lastSession?.computeDuration()
+            
+            bubble.bubbleCell_Components = bubble.initialClock.timeComponentsAsStrings
+            
+            //create calendar event
+            //if there are sessions and is calendar enabled, create an event
+            if !bubble.sessions_.isEmpty && bubble.hasCalendar {
+                CalendarManager.shared.createNewEvent(for: bubble.lastSession)
             }
+            
+            try? PersistenceController.shared.viewContext.save()
         }
         //save all changes in the end
         try? PersistenceController.shared.viewContext.save()
@@ -210,7 +209,7 @@ class ViewModel: ObservableObject {
         //ask bubble to start/stop updating smallBubbleCellTimeComponents
         guard
             let bubble = bubble(for: rank) else { return }
-        bubble.shouldUpdateSmallBubbleCell = rank != nil
+        bubble.continueToUpdateSmallBubbleCell = rank != nil
     }
     
     // MARK: -

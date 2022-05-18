@@ -60,7 +60,7 @@ public class Pair: NSManagedObject {
                 //convert duration to raw data using JSONEncoder
                 let encoder = JSONEncoder()
                 
-                let componentStrings = duration.timComponentsAsStrings
+                let componentStrings = duration.timeComponentsAsStrings
                 let data = try? encoder.encode(componentStrings)
                 
                 DispatchQueue.main.async {

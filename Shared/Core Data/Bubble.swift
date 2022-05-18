@@ -99,8 +99,8 @@ public class Bubble: NSManagedObject {
     }
     
     //shouldUpdateSmallBubbleCellTimeComponents
-    var shouldUpdateSmallBubbleCell = false {didSet{
-        if !shouldUpdateSmallBubbleCell { smallBubbleView_Components = Float.TimeComponentsAsStrings(hr: "0", min: "0", sec: "0", cents: "0") }
+    var continueToUpdateSmallBubbleCell = false {didSet{
+        if !continueToUpdateSmallBubbleCell { smallBubbleView_Components = Float.TimeComponentsAsStrings(hr: "0", min: "0", sec: "0", cents: "0") }
     }}
 }
 
@@ -118,7 +118,7 @@ extension Bubble {
                 NotificationCenter.default.addObserver(forName: .appLaunched, object: nil, queue: nil) { [weak self] notification in
                     guard let self = self else { return }
                                                             
-                    let componentsString = self.currentClock.timComponentsAsStrings
+                    let componentsString = self.currentClock.timeComponentsAsStrings
                     DispatchQueue.main.async { self.bubbleCell_Components = componentsString }
                 }
             default: NotificationCenter.default.removeObserver(self)
@@ -143,7 +143,7 @@ extension Bubble {
         //delta is the elapsed duration between pair.start and signal dates
         let Δ = Date().timeIntervalSince(lastPairStart)
         let value = currentClock + Float(Δ)
-        let componentsString = value.timComponentsAsStrings
+        let componentsString = value.timeComponentsAsStrings
                             
         //since closure is executed on background thread, dispatch back to the main thread
         DispatchQueue.main.async { self.bubbleCell_Components = componentsString }
@@ -151,12 +151,12 @@ extension Bubble {
     
     ///update smallBubbleCell time components: hr min sec
     private func updateSmallBubbleCell() {
-        if !shouldUpdateSmallBubbleCell, state != .running { return }
+        if !continueToUpdateSmallBubbleCell, state != .running { return }
         guard let lastPairStart = lastPair?.start else { return }
         
         //delta is the elapsed duration between pair.start and signal dates
         let Δ = Date().timeIntervalSince(lastPairStart)
-        let componentsString = Float(Δ).timComponentsAsStrings
+        let componentsString = Float(Δ).timeComponentsAsStrings
         
         DispatchQueue.main.async { self.smallBubbleView_Components = componentsString }
     }

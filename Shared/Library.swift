@@ -135,7 +135,7 @@ extension Float {
         return TimeComponents(hr: hr, min: min, sec: sec, cents: fractionalValue)
     }
     
-    var timComponentsAsStrings:TimeComponentsAsStrings {
+    var timeComponentsAsStrings:TimeComponentsAsStrings {
         let components = timeComponents
         
         let cents = String(format: "%.2d", components.cents)
@@ -143,7 +143,7 @@ extension Float {
     }
     
     var timeComponentsAbreviatedString:String {
-        let components = self.timComponentsAsStrings
+        let components = self.timeComponentsAsStrings
         
         let hr = (components.hr != "0") ? components.hr + "h" : ""
         let min = (components.min != "0") ? components.min + "m" : ""
