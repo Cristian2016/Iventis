@@ -12,8 +12,8 @@ struct NoteView: View {
     let lineWidth:CGFloat
     let cornerRadius:CGFloat
     
-    let aspectRatio:CGFloat = 2.1
-    let height = CGFloat(46)
+    let aspectRatio:CGFloat = 2.33
+    let height = CGFloat(40)
     
     init(content:String, lineWidth:CGFloat = 3, radius:CGFloat = 0) {
         self.content = content
@@ -28,7 +28,6 @@ struct NoteView: View {
                 Label { Text(content) } icon: { }
                 Spacer()
             }
-            .background(border)
             .background(background)
         }
         .frame(width: height * aspectRatio, height: height)
@@ -41,13 +40,6 @@ struct NoteView: View {
             .foregroundColor(.background1)
             .aspectRatio(aspectRatio, contentMode: .fill)
             .shadow(radius: 2)
-    }
-    
-    var border: some View {
-        RoundedRectangle(cornerRadius: cornerRadius)
-            .strokeBorder(lineWidth: lineWidth, antialiased: true)
-            .aspectRatio(aspectRatio, contentMode: .fill)
-            .foregroundColor(.white)
     }
 }
 
