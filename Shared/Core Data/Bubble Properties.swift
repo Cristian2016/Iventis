@@ -26,7 +26,6 @@ extension Bubble {
     @NSManaged public var note: String?
     @NSManaged public var rank: Int64
     @NSManaged public var sessions: NSOrderedSet?
-    @NSManaged public var notesHistory: NSOrderedSet?
 }
 
 // MARK: Generated accessors for sessions
@@ -63,41 +62,6 @@ extension Bubble {
     @NSManaged public func removeFromSessions(_ values: NSOrderedSet)
 
 }
-
-extension Bubble {
-
-    @objc(insertObject:inNotesHistoryAtIndex:)
-    @NSManaged public func insertIntoNotesHistory(_ value: BubbleNotesHistory, at idx: Int)
-
-    @objc(removeObjectFromNotesHistoryAtIndex:)
-    @NSManaged public func removeFromNotesHistory(at idx: Int)
-
-    @objc(insertNotesHistory:atIndexes:)
-    @NSManaged public func insertIntoNotesHistory(_ values: [BubbleNotesHistory], at indexes: NSIndexSet)
-
-    @objc(removeNotesHistoryAtIndexes:)
-    @NSManaged public func removeFromNotesHistory(at indexes: NSIndexSet)
-
-    @objc(replaceObjectInNotesHistoryAtIndex:withObject:)
-    @NSManaged public func replaceNotesHistory(at idx: Int, with value: BubbleNotesHistory)
-
-    @objc(replaceNotesHistoryAtIndexes:withNotesHistory:)
-    @NSManaged public func replaceNotesHistory(at indexes: NSIndexSet, with values: [BubbleNotesHistory])
-
-    @objc(addNotesHistoryObject:)
-    @NSManaged public func addToNotesHistory(_ value: BubbleNotesHistory)
-
-    @objc(removeNotesHistoryObject:)
-    @NSManaged public func removeFromNotesHistory(_ value: BubbleNotesHistory)
-
-    @objc(addNotesHistory:)
-    @NSManaged public func addToNotesHistory(_ values: NSOrderedSet)
-
-    @objc(removeNotesHistory:)
-    @NSManaged public func removeFromNotesHistory(_ values: NSOrderedSet)
-
-}
-
 extension Bubble : Identifiable {
 
 }

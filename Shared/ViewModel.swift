@@ -241,9 +241,5 @@ class ViewModel: ObservableObject {
         
         bubble.note = note
         
-        
-        
-        
-        //do not save CoreData here, it is saved where the function is called
     }
 }
