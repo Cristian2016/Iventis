@@ -76,6 +76,8 @@ struct BubbleCell: View {
     // MARK: -
     var body: some View {
         ZStack {
+            if !bubble.note_.isEmpty && bubble.isNoteHidden { noteSticker }
+            
             let putTransparentGeometryReaderView = showDeleteActionView || showDetailView
             if putTransparentGeometryReaderView {
                 cellLowEmitterView
@@ -94,7 +96,6 @@ struct BubbleCell: View {
             }
             timeComponentsViews
             if bubble.hasCalendar && (bubble.note_.isEmpty || bubble.isNoteHidden) { calendarView }
-            if !bubble.note_.isEmpty && bubble.isNoteHidden { noteSticker }
             if !bubble.isNoteHidden && !bubble.note_.isEmpty {
                 noteView
                     .onTapGesture {
@@ -255,13 +256,8 @@ struct BubbleCell: View {
     }
     
     private var noteSticker: some View {
-        VStack {
-            HStack {
-                NoteSticker()
-                Spacer()
-            }
-            Spacer()
-        }
+        Push(.topLeft) { NoteSticker() }
+            .offset(x: -4, y: -6)
     }
     
     private var noteView:some View {

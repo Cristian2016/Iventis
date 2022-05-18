@@ -13,8 +13,8 @@ struct NoteSticker: View {
     var body: some View {
         ZStack {
             Image(systemName: "note.text")
-                .foregroundColor(.white)
-                .font(.system(size: 30))
+                .foregroundColor(Color(.label))
+                .font(.system(size: 22))
         }
     }
 }
