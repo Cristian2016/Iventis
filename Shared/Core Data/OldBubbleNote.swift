@@ -11,5 +11,6 @@ import CoreData
 
 @objc(OldBubbleNote)
 public class OldBubbleNote: NSManagedObject {
-    
+    //up to 100 old notes are being stored
+    static let limit = 100
 }

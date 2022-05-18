@@ -21,17 +21,10 @@ struct LeftStrip: View {
         }
         .ignoresSafeArea()
         .gesture(DragGesture(minimumDistance: 0, coordinateSpace: .global)
-            .onChanged { value in
-                if value.translation.width > 20 {
-                    withAnimation(.easeOut(duration: 0.2)) {
-                        paletteShowing = true
-                    }
-                }
-            }
             .onEnded { _ in
-//                withAnimation(.easeOut(duration: 0.2)) {
-//                    paletteShowing = true
-//                }
+                withAnimation(.easeOut(duration: 0.2)) {
+                    paletteShowing = true
+                }
             }
         )
     }
@@ -49,7 +42,7 @@ struct RightStrip: View {
     init(_ showPalette:Binding<Bool>) {
         _showPalette = .init(projectedValue: showPalette)
     }
-
+    
     // MARK: -
     var body: some View {
         Rectangle()
