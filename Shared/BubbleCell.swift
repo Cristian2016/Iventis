@@ -76,7 +76,20 @@ struct BubbleCell: View {
     // MARK: -
     var body: some View {
         ZStack {
-            if !bubble.note_.isEmpty && bubble.isNoteHidden { noteSticker }
+            if !bubble.note_.isEmpty && bubble.isNoteHidden {
+                
+                
+            }
+            
+            if !bubble.note_.isEmpty {
+                noteView
+                    .zIndex(bubble.isNoteHidden ? 10 : 0)
+                    .onTapGesture {
+                        print(bubble.note_.isEmpty)
+                        //show AddNotesView again
+                        bubbleNotesView_bRank = Int(bubble.rank)
+                    }
+            }
             
             let putTransparentGeometryReaderView = showDeleteActionView || showDetailView
             if putTransparentGeometryReaderView {
@@ -96,14 +109,6 @@ struct BubbleCell: View {
             }
             timeComponentsViews
             if bubble.hasCalendar && (bubble.note_.isEmpty || bubble.isNoteHidden) { calendarView }
-            if !bubble.isNoteHidden && !bubble.note_.isEmpty {
-                noteView
-                    .onTapGesture {
-                        print(bubble.note_.isEmpty)
-                        //show AddNotesView again
-                        bubbleNotesView_bRank = Int(bubble.rank)
-                    }
-            }
         }
         .scaleEffect(editMode?.wrappedValue == .active ? 0.9 : 1.0)
         .swipeActions(edge: .leading, allowsFullSwipe: true) {
