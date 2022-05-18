@@ -7,10 +7,20 @@
 
 import SwiftUI
 
+class TextLimiter: ObservableObject {
+    let limit:Int
+    @Published var value = ""
+    
+    init(limit:Int) {
+        self.limit = limit
+    }
+}
+
 struct BubbleNotesView: View {
     @EnvironmentObject var viewModel:ViewModel
+    @StateObject var bubble:Bubble
     
-    @State var textInput:String = ""
+    @StateObject var limiter = TextLimiter(limit: 8)
     @FocusState var keyboardVisible:Bool
     
     @Binding var addBubbleNotesView_BubbleRank:Int?
@@ -21,6 +31,8 @@ struct BubbleNotesView: View {
         request.predicate = NSPredicate(format: "rank == %i", addBubbleNotesView_BubbleRank.wrappedValue!)
         
         guard let bubble = try? PersistenceController.shared.viewContext.fetch(request).first else { fatalError("fuck bubble") }
+        _bubble = StateObject(wrappedValue: bubble)
+        print(#function)
     }
     
     private let size = CGSize(width: 250, height: 400)
@@ -72,7 +84,7 @@ struct BubbleNotesView: View {
     }
     
     private var textField: some View {
-        TextField("Search/Add Note", text: $textInput)
+        TextField("Search/Add Note", text: $limiter.value)
             .font(.title2)
             .padding()
             .focused($keyboardVisible)

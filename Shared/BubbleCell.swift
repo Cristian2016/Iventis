@@ -14,7 +14,7 @@ struct BubbleCell: View {
     //showing DeleteAction Detail or AddNotes Views
     @Binding var deleteActionView_bRank:Int? //bubble.rank
     @Binding var detailView_bRank:Int?
-    @Binding var addNotesView_bRank:Int?
+    @Binding var bubbleNotesView_bRank:Int?
     
     @Binding var predicate:NSPredicate?
     
@@ -54,7 +54,7 @@ struct BubbleCell: View {
             default: break
         }
         if !bubble.isObservingBackgroundTimer { bubble.observeBackgroundTimer() }
-        _addNotesView_bRank = Binding(projectedValue: addNotesView_bRank)
+        _bubbleNotesView_bRank = Binding(projectedValue: addNotesView_bRank)
     }
     
     private let spacing:CGFloat = -30
@@ -99,7 +99,7 @@ struct BubbleCell: View {
                     .onTapGesture {
                         print(bubble.note_.isEmpty)
                         //show AddNotesView again
-                        addNotesView_bRank = Int(bubble.rank)
+                        bubbleNotesView_bRank = Int(bubble.rank)
                     }
             }
         }
@@ -153,7 +153,7 @@ struct BubbleCell: View {
                     .onTapGesture {
                         if bubble.note_.isEmpty {
                             //show addNotesView
-                            addNotesView_bRank = Int(bubble.rank)
+                            bubbleNotesView_bRank = Int(bubble.rank)
                         } else {
                             bubble.isNoteHidden.toggle()
                             PersistenceController.shared.save()
