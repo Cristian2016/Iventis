@@ -36,7 +36,10 @@ struct BubbleNotesView: View {
     var body: some View {
         ZStack {
             Color.white.opacity(0.001)
-                .onTapGesture { saveTextInputAndDismiss() }
+                .onTapGesture {
+                    saveTextInputAndDismiss()
+                    addBubbleNotesView_BubbleRank = nil //dimiss self
+                }
             darkRoundedRect
                 .overlay {
                     VStack {
@@ -66,14 +69,20 @@ struct BubbleNotesView: View {
                                 .foregroundColor(textInput.count > 0 ? .blue : .gray)
                                 .offset(x: 74, y: 0)
                                 .onTapGesture {
-                                    if textInput.count > 0 { saveTextInputAndDismiss() }
+                                    if textInput.count > 0 {
+                                        saveTextInputAndDismiss()
+                                        addBubbleNotesView_BubbleRank = nil //dimiss self
+                                    }
                                 }
                                 .onLongPressGesture {
                                     textInput = ""
                                     UserFeedback.doubleHaptic(.rigid)
                                 }
                             }
-                            .onSubmit { saveTextInputAndDismiss() }
+                            .onSubmit {
+                                saveTextInputAndDismiss()
+                                addBubbleNotesView_BubbleRank = nil //dimiss self
+                            }
                         List {
                             ForEach (0..<3) { index in
                                 Text("\(index)")
@@ -129,7 +138,6 @@ struct BubbleNotesView: View {
         viewModel.save(textInput, for: bubble)
         UserFeedback.singleHaptic(.heavy)
         
-        addBubbleNotesView_BubbleRank = nil //dimiss self
         PersistenceController.shared.save()
     }
 }
