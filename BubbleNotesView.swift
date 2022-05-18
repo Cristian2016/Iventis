@@ -60,13 +60,14 @@ struct BubbleNotesView: View {
                             )
                             .overlay {
                                 ZStack {
-                                    Image(systemName: "plus.app")
+                                    Image(systemName: "plus.app.fill")
                                         .font(.system(size: 72).weight(.light))
+                                        .foregroundColor(textInput.count > 0 ? .blue : .gray)
                                     Text("\(textInputLimit - textInput.count)")
                                         .font(.system(size: 18).weight(.bold))
+                                        .foregroundColor(.white)
                                         .offset(x: 15, y: 15)
                                 }
-                                .foregroundColor(textInput.count > 0 ? .blue : .gray)
                                 .offset(x: 74, y: 0)
                                 .onTapGesture {
                                     if textInput.count > 0 {
