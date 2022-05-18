@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct BubbleNotesView: View {
+struct AddBubbleNotesView: View {
     @EnvironmentObject var viewModel:ViewModel
     @StateObject var bubble:Bubble
     
@@ -145,6 +145,6 @@ struct BubbleNotesView: View {
 
 struct BubbleNoteView_Previews: PreviewProvider {
     static var previews: some View {
-        BubbleNotesView(.constant(65))
+        AddBubbleNotesView(.constant(65))
     }
 }
