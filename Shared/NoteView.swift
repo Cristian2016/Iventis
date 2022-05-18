@@ -32,7 +32,7 @@ struct NoteView: View {
                 if bubbleHasCalendar {
                     RoundedRectangle(cornerRadius: 2)
                         .fill(Color.calendar)
-                        .frame(width: 6)
+                        .frame(width: 10)
                 }
                 else { Spacer() }
                 Label { Text(content).foregroundColor(.label)
