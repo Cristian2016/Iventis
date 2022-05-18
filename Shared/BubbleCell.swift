@@ -105,7 +105,7 @@ struct BubbleCell: View {
                 }
             }
             timeComponentsViews
-            if bubble.hasCalendar && (bubble.note_.isEmpty || bubble.isNoteHidden) { calendarView }
+            if bubble.hasCalendar && bubble.note_.isEmpty { calendarView }
         }
         .scaleEffect(editMode?.wrappedValue == .active ? 0.9 : 1.0)
         .swipeActions(edge: .leading, allowsFullSwipe: true) {
@@ -155,12 +155,13 @@ struct BubbleCell: View {
                 //gestures
                     .onTapGesture(count: 2) { print("edit duration") }
                     .onTapGesture {
+                        bubbleNotesView_bRank = Int(bubble.rank)
                         if bubble.note_.isEmpty {
                             //show addNotesView
-                            bubbleNotesView_bRank = Int(bubble.rank)
+                            
                         } else {
-                            bubble.isNoteHidden.toggle()
-                            PersistenceController.shared.save()
+//                            bubble.isNoteHidden.toggle()
+//                            PersistenceController.shared.save()
                         }
                     }
             }
