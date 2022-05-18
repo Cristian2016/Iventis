@@ -26,6 +26,7 @@ struct NoteView: View {
             HStack {
                 Spacer()
                 Label { Text(content)
+                        .foregroundColor(.label)
                     .font(.system(size: 26)) } icon: { }
                 Spacer()
             }
