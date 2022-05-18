@@ -15,19 +15,27 @@ struct NoteView: View {
     let ratio:CGFloat
     let height = CGFloat(44)
     
-    init(content:String, lineWidth:CGFloat = 3, radius:CGFloat = 0) {
+    @Binding var bubbleHasCalendar:Bool
+    
+    init(content:String, lineWidth:CGFloat = 3, radius:CGFloat = 0, _ bubbleHasCalendar:Binding<Bool>) {
         self.content = content
         self.ratio = (content.count < 8) ? CGFloat(2.7) : 2.7
         self.lineWidth = lineWidth
         self.cornerRadius = radius
+        
+        _bubbleHasCalendar = Binding(projectedValue: bubbleHasCalendar)
     }
     
     var body: some View {
         ZStack {
             HStack {
-                Spacer()
-                Label { Text(content)
-                        .foregroundColor(.label)
+                if bubbleHasCalendar {
+                    RoundedRectangle(cornerRadius: 2)
+                        .fill(Color.calendar)
+                        .frame(width: 6)
+                }
+                else { Spacer() }
+                Label { Text(content).foregroundColor(.label)
                     .font(.system(size: 26)) } icon: { }
                 Spacer()
             }
@@ -56,8 +64,7 @@ struct NoteView: View {
 struct Note_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            NoteView(content: "Workout")
-            NoteView(content: "Work").preferredColorScheme(.dark)
+            NoteView(content: "Workout", .constant(true))
         }
     }
 }
