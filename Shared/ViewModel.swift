@@ -164,8 +164,7 @@ class ViewModel: ObservableObject {
             bubble.rank = Int64(sortedBubbles.count - 1 - index)
         }
         
-        //reset rank generator
-        UserDefaults.resetRankGenerator(sortedBubbles.count)
+        UserDefaults.resetRankGenerator(sortedBubbles.count) //reset rank generator
         
         PersistenceController.shared.save()
     }
