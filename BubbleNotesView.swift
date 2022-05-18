@@ -54,7 +54,7 @@ struct BubbleNotesView: View {
                                     }
                                     .onEnded { value in
                                         if textInput.isEmpty {
-                                            UserFeedback.singleHaptic(.rigid)
+                                            UserFeedback.doubleHaptic(.rigid)
                                         }
                                     }
                             )
@@ -69,11 +69,13 @@ struct BubbleNotesView: View {
                                 .foregroundColor(textInput.count > 0 ? .blue : .gray)
                                 .offset(x: 74, y: 0)
                                 .onTapGesture {
-                                    if textInput.count > 0 { saveTextInputAndDismiss() }
+                                    if textInput.count > 0 {
+                                        saveTextInputAndDismiss()
+                                    }
                                 }
                                 .onLongPressGesture {
                                     textInput = ""
-                                    UserFeedback.singleHaptic(.rigid)
+                                    UserFeedback.doubleHaptic(.rigid)
                                 }
                             }
                             .onSubmit {
@@ -134,6 +136,7 @@ struct BubbleNotesView: View {
         bubble.note = textInput
         PersistenceController.shared.save()
         addBubbleNotesView_BubbleRank = nil
+        UserFeedback.singleHaptic(.heavy)
     }
 }
 
