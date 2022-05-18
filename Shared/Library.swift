@@ -101,6 +101,18 @@ extension String {
     static let empty = ""
     
     static let space = " "
+    
+    var containsEmoji:Bool {
+        var result = false
+        
+    loop: for scalar in unicodeScalars {
+        if scalar.properties.isEmoji {
+            result = true
+            break loop
+        }
+    }
+        return result
+    }
 }
 
 
