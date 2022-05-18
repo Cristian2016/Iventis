@@ -28,13 +28,17 @@ struct NoteView: View {
     
     var body: some View {
         ZStack {
-            HStack {
-                if bubbleHasCalendar {
+            if bubbleHasCalendar {
+                HStack {
                     RoundedRectangle(cornerRadius: 2)
                         .fill(Color.calendar)
                         .frame(width: 10)
+                    Spacer()
                 }
-                else { Spacer() }
+                .zIndex(2)
+            }
+            HStack {
+                Spacer()
                 Label { Text(content).foregroundColor(.label)
                     .font(.system(size: 26)) } icon: { }
                 Spacer()
