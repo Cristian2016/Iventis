@@ -12,6 +12,11 @@
         <attribute name="rank" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <relationship name="sessions" optional="YES" toMany="YES" deletionRule="Cascade" ordered="YES" destinationEntity="Session" inverseName="bubble" inverseEntity="Session"/>
     </entity>
+    <entity name="OldBubbleNote" representedClassName="OldBubbleNote" syncable="YES" codeGenerationType="class">
+        <attribute name="bubbleID" optional="YES" attributeType="String"/>
+        <attribute name="content" optional="YES" attributeType="String"/>
+        <attribute name="created" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+    </entity>
     <entity name="Pair" representedClassName=".Pair" syncable="YES">
         <attribute name="duration" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="durationAsStrings" optional="YES" attributeType="Binary"/>
@@ -34,5 +39,6 @@
         <element name="Bubble" positionX="-1028.380004882812" positionY="1528.89501953125" width="128" height="193"/>
         <element name="Pair" positionX="-832.5816650390625" positionY="1586.590484619141" width="128" height="148"/>
         <element name="Session" positionX="-826.8931884765625" positionY="1341.822631835938" width="128" height="134"/>
+        <element name="OldBubbleNote" positionX="-909" positionY="1521" width="128" height="74"/>
     </elements>
 </model>
