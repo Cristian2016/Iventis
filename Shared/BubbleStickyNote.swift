@@ -18,9 +18,7 @@ struct BubbleStickyNote: View {
     
     var body: some View {
         HStack (spacing:0) {
-            Rectangle()
-                .fill(bubble.hasCalendar ? Color.calendar : .clear)
-                .frame(width: bubble.hasCalendar ? 10 : 0, height: stickyHeight)
+            calendarSymbol
             stickyNoteContentView
         }
         .foregroundColor(.label)
@@ -29,13 +27,11 @@ struct BubbleStickyNote: View {
         .shadow(color: .black.opacity(0.1), radius: 2, x: 2, y: 2)
     }
     
-    private var redCalendarSymbol: some View {
-        HStack {
-            RoundedRectangle(cornerRadius: 2)
-                .fill(Color.calendar)
-                .frame(width: 10)
-            Spacer()
-        }
+    // MARK: - Lego
+    private var calendarSymbol: some View {
+        Rectangle()
+            .fill(bubble.hasCalendar ? Color.calendar : .clear)
+            .frame(width: bubble.hasCalendar ? 10 : 0, height: stickyHeight)
     }
     
     private var background: some View {
