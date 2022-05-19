@@ -89,10 +89,10 @@ struct BubbleStickyNote: View {
         Text("Delete")
             .foregroundColor(.white)
             .font(.system(size: 26))
-            .padding()
+            .padding(EdgeInsets(top: 4, leading: 17, bottom: 4, trailing: 17))
             .background(
                 Rectangle()
-                    .fill((offset == .zero) ? .background1 : Color.calendar)
+                    .fill((offset == .zero) ? .background1 : Color.red)
             )
     }
 }
