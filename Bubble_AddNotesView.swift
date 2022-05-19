@@ -75,7 +75,7 @@ struct Bubble_AddNotesView: View {
                         List {
                             ForEach (bubble.history_.reversed()) { history in
                                 Text("\(history.note ?? "No Note")")
-                                    .font(.system(size: 23))
+                                    .font(.system(size: 23).weight(.medium))
                                     .foregroundColor(.white)
                                     .padding(.leading)
                             }
@@ -87,7 +87,7 @@ struct Bubble_AddNotesView: View {
                             .listRowBackground(Color("deleteActionViewBackground"))
                         }
                         .listStyle(.plain)
-                        .environment(\.defaultMinListRowHeight, 10)
+                        .environment(\.defaultMinListRowHeight, 8)
                     }
                     .background  { backgroundView }
                     .clipShape(RoundedRectangle(cornerRadius: cornerRadius))
