@@ -247,7 +247,7 @@ class ViewModel: ObservableObject {
         let historyItem = BubbleHistory(context: context!)
         historyItem.date = Date()
         historyItem.note = note
-        historyItem.bubble = bubble
+        bubble.addToHistory(historyItem)
         //no need to save viewContext since it will be saved elsewhere
     }
 }

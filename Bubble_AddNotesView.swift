@@ -26,7 +26,6 @@ struct Bubble_AddNotesView: View {
         
         guard let bubble = try? PersistenceController.shared.viewContext.fetch(request).first else { fatalError("fuck bubble") }
         _bubble = StateObject(wrappedValue: bubble)
-        _textFieldString = State(initialValue: bubble.note_)
         self.initialNote = bubble.note_
     }
     
@@ -73,8 +72,10 @@ struct Bubble_AddNotesView: View {
                                 addBubbleNotesView_BubbleRank = nil //dimiss self
                             }
                         List {
-                            ForEach (bubble.history_) { history in
+                            ForEach (bubble.history_.reversed()) { history in
                                 Text("\(history.note ?? "No Note")")
+                                    .font(.title3)
+                                    .foregroundColor(.white)
                             }
                             .onDelete { indexSet in
                                 bubble.removeFromHistory(at: NSIndexSet(indexSet: indexSet))
