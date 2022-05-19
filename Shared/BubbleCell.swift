@@ -76,7 +76,6 @@ struct BubbleCell: View {
     // MARK: -
     var body: some View {
         ZStack {
-            
             if !bubble.note_.isEmpty {
                 noteView
                     .zIndex(10)

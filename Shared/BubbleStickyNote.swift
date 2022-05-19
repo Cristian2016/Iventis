@@ -48,8 +48,7 @@ struct BubbleStickyNote: View {
                             } else {
                                 if !noteDeleted {
                                     viewModel.deleteNote(for: bubble)
-                                    noteDeleted = true
-                                    print("deleted")
+                                    noteDeleted = true //block drag gesture.. any other better ideas??
                                 }
                             }
                         }
@@ -68,7 +67,7 @@ struct BubbleStickyNote: View {
             .padding(EdgeInsets(top: 5, leading: 12, bottom: 5, trailing: 12))
             .background(
                 Rectangle()
-                    .fill(!bubble.note_.isEmpty ? Color.red : .green)
+                    .fill(deleteOkViewColor())
             )
             .opacity(0)
     }
@@ -100,6 +99,16 @@ struct BubbleStickyNote: View {
             Text("\(Image(systemName: "text.alignleft"))")
                 .padding(textPadding)
                 .font(.system(size: 20))
+        }
+    }
+    
+    // MARK: -
+    private func deleteOkViewColor() -> Color {
+        print(#function)
+        switch offsetX {
+            case 5..<offsetDeleteTriggerLimit : return .red
+            case offsetDeleteTriggerLimit : return .green
+            default: return .clear
         }
     }
 }
