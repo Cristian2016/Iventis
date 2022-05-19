@@ -86,13 +86,15 @@ struct Bubble_AddNotesView: View {
                                 dismiss()
                             }
                         List {
-                            ForEach (filteredItems) {
-                                Text("\($0.note ?? "No Note")")
+                            ForEach (filteredItems) { item in
+                                Text("\(item.note ?? "No Note")")
                                     .font(.system(size: 25))
                                     .foregroundColor(.white)
                                     .padding(.leading)
                                     .onTapGesture {
-                                        
+                                        bubble.note = item.note
+                                        try? PersistenceController.shared.viewContext.save()
+                                        dismiss()
                                     }
                             }
                             .onDelete {
