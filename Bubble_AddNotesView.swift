@@ -99,9 +99,7 @@ struct Bubble_AddNotesView: View {
                                         dismiss()
                                     }
                             }
-                            .onDelete {
-                                viewModel.delete(filteredItems[$0.first!])
-                            }
+                            .onDelete { viewModel.delete(filteredItems[$0.first!]) }
                             .listRowSeparator(.hidden)
                             .listRowBackground(Color("deleteActionViewBackground"))
                         }
