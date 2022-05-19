@@ -53,9 +53,7 @@ struct BubbleStickyNote: View {
                         }
                     }
                     .onEnded { _ in
-                        withAnimation(.default) {
-                            offset = .zero
-                        }
+                        withAnimation(.spring()) { offset = .zero }
                     }
             )
         }
@@ -89,7 +87,7 @@ struct BubbleStickyNote: View {
         Text("Delete")
             .foregroundColor(.white)
             .font(.system(size: 26))
-            .padding(EdgeInsets(top: 4, leading: 17, bottom: 4, trailing: 17))
+            .padding(EdgeInsets(top: 5, leading: 19, bottom: 5, trailing: 19))
             .background(
                 Rectangle()
                     .fill((offset == .zero) ? .background1 : Color.red)
