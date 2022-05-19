@@ -244,11 +244,17 @@ class ViewModel: ObservableObject {
         
         //add to bubbleHistory
         let context = bubble.managedObjectContext
-        let historyItem = BubbleHistory(context: context!)
+        let historyItem = BubbleSavedNote(context: context!)
         historyItem.date = Date()
         historyItem.note = note
         bubble.addToHistory(historyItem)
         //no need to save viewContext since it will be saved elsewhere
+    }
+    
+    func delete(_ savedNote:BubbleSavedNote) {
+        let context = PersistenceController.shared.viewContext
+        context.delete(savedNote)
+        PersistenceController.shared.save()
     }
 }
 

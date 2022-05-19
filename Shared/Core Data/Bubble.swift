@@ -54,7 +54,7 @@ public class Bubble: NSManagedObject {
     
     var sessions_:[Session] { sessions?.array as? [Session] ?? [] }
     
-    var history_:[BubbleHistory] { history?.array as? [BubbleHistory] ?? [] }
+    var history_:[BubbleSavedNote] { history?.array as? [BubbleSavedNote] ?? [] }
     
     ///lastSession is not always currentSession
     var lastSession:Session? { sessions_.last }

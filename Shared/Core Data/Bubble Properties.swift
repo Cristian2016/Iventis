@@ -72,28 +72,28 @@ extension Bubble {
 extension Bubble {
 
     @objc(insertObject:inHistoryAtIndex:)
-    @NSManaged public func insertIntoHistory(_ value: BubbleHistory, at idx: Int)
+    @NSManaged public func insertIntoHistory(_ value: BubbleSavedNote, at idx: Int)
 
     @objc(removeObjectFromHistoryAtIndex:)
     @NSManaged public func removeFromHistory(at idx: Int)
 
     @objc(insertHistory:atIndexes:)
-    @NSManaged public func insertIntoHistory(_ values: [BubbleHistory], at indexes: NSIndexSet)
+    @NSManaged public func insertIntoHistory(_ values: [BubbleSavedNote], at indexes: NSIndexSet)
 
     @objc(removeHistoryAtIndexes:)
     @NSManaged public func removeFromHistory(at indexes: NSIndexSet)
 
     @objc(replaceObjectInHistoryAtIndex:withObject:)
-    @NSManaged public func replaceHistory(at idx: Int, with value: BubbleHistory)
+    @NSManaged public func replaceHistory(at idx: Int, with value: BubbleSavedNote)
 
     @objc(replaceHistoryAtIndexes:withHistory:)
-    @NSManaged public func replaceHistory(at indexes: NSIndexSet, with values: [BubbleHistory])
+    @NSManaged public func replaceHistory(at indexes: NSIndexSet, with values: [BubbleSavedNote])
 
     @objc(addHistoryObject:)
-    @NSManaged public func addToHistory(_ value: BubbleHistory)
+    @NSManaged public func addToHistory(_ value: BubbleSavedNote)
 
     @objc(removeHistoryObject:)
-    @NSManaged public func removeFromHistory(_ value: BubbleHistory)
+    @NSManaged public func removeFromHistory(_ value: BubbleSavedNote)
 
     @objc(addHistory:)
     @NSManaged public func addToHistory(_ values: NSOrderedSet)

@@ -10,9 +10,9 @@ import SwiftUI
 struct Bubble_AddNotesView: View {
     @StateObject var bubble:Bubble
     @EnvironmentObject var viewModel:ViewModel
-    @FetchRequest private var items:FetchedResults<BubbleHistory>
+    @FetchRequest private var items:FetchedResults<BubbleSavedNote>
     
-    private var filteredItems:[BubbleHistory] {
+    private var filteredItems:[BubbleSavedNote] {
         if textFieldString.isEmpty { return Array(items) }
         let filtered = items.filter { history in
             history.note!.lowercased().contains(textFieldString.lowercased())
@@ -39,7 +39,7 @@ struct Bubble_AddNotesView: View {
         
         let sort = NSSortDescriptor(key: "date", ascending: false)
         let predicate = NSPredicate(format: "bubble = %@", bubble)
-        _items = FetchRequest(entity: BubbleHistory.entity(), sortDescriptors: [sort], predicate: predicate, animation: .default)
+        _items = FetchRequest(entity: BubbleSavedNote.entity(), sortDescriptors: [sort], predicate: predicate, animation: .default)
     }
     
     private let size = CGSize(width: 250, height: 420)
@@ -100,8 +100,7 @@ struct Bubble_AddNotesView: View {
                                     }
                             }
                             .onDelete {
-                                bubble.removeFromHistory(at: $0.first!)
-                                PersistenceController.shared.save()
+                                viewModel.delete(filteredItems[$0.first!])
                             }
                             .listRowSeparator(.hidden)
                             .listRowBackground(Color("deleteActionViewBackground"))

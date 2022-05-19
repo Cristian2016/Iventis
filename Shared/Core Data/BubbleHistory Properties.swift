@@ -10,10 +10,10 @@ import Foundation
 import CoreData
 
 
-extension BubbleHistory {
+extension BubbleSavedNote {
 
-    @nonobjc public class func fetchRequest() -> NSFetchRequest<BubbleHistory> {
-        return NSFetchRequest<BubbleHistory>(entityName: "BubbleHistory")
+    @nonobjc public class func fetchRequest() -> NSFetchRequest<BubbleSavedNote> {
+        return NSFetchRequest<BubbleSavedNote>(entityName: "BubbleHistory")
     }
 
     @NSManaged public var date: Date?
@@ -22,6 +22,6 @@ extension BubbleHistory {
 
 }
 
-extension BubbleHistory : Identifiable {
+extension BubbleSavedNote : Identifiable {
 
 }

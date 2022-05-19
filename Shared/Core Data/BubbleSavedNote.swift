@@ -10,6 +10,6 @@ import Foundation
 import CoreData
 
 
-public class BubbleHistory: NSManagedObject {
+public class BubbleSavedNote: NSManagedObject {
 
 }
