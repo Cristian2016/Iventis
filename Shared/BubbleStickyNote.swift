@@ -24,13 +24,14 @@ struct BubbleStickyNote: View {
             if !bubble.isNoteHidden {
                 Text(bubble.note_)
                     .padding(textPadding)
+                    .font(font)
             } else {
-                Text("\(Image(systemName: "note.text"))")
+                Text("\(Image(systemName: "text.alignleft"))")
                     .padding(textPadding)
+                    .font(.system(size: 20))
             }
         }
         .foregroundColor(.label)
-        .font(font)
         .background(background)
         .cornerRadius(cornerRadius)
         .shadow(color: .black.opacity(0.1), radius: 2, x: 2, y: 2)
