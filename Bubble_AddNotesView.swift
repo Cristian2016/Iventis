@@ -44,6 +44,7 @@ struct Bubble_AddNotesView: View {
                     VStack {
                         topSpacer //pushes textfield down a little
                         textField
+                            .padding(.leading)
                             .gesture(
                                 DragGesture(minimumDistance: 15, coordinateSpace: .global)
                                     .onChanged {
@@ -74,8 +75,9 @@ struct Bubble_AddNotesView: View {
                         List {
                             ForEach (bubble.history_.reversed()) { history in
                                 Text("\(history.note ?? "No Note")")
-                                    .font(.title3)
+                                    .font(.system(size: 23))
                                     .foregroundColor(.white)
+                                    .padding(.leading)
                             }
                             .onDelete { indexSet in
                                 bubble.removeFromHistory(at: NSIndexSet(indexSet: indexSet))
@@ -85,6 +87,7 @@ struct Bubble_AddNotesView: View {
                             .listRowBackground(Color("deleteActionViewBackground"))
                         }
                         .listStyle(.plain)
+                        .environment(\.defaultMinListRowHeight, 10)
                     }
                     .background  { backgroundView }
                     .clipShape(RoundedRectangle(cornerRadius: cornerRadius))
