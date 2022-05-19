@@ -98,6 +98,7 @@ struct Bubble_AddNotesView: View {
                     .clipShape(RoundedRectangle(cornerRadius: cornerRadius))
                 }
         }
+        .ignoresSafeArea(.container, edges: .top)
         .onAppear {
             delayExecution(.now() + 0.05) {
                 withAnimation (.easeInOut(duration: 0.0)) { keyboardVisible = true }
