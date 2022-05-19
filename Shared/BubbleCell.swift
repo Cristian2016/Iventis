@@ -154,13 +154,11 @@ struct BubbleCell: View {
                 //gestures
                     .onTapGesture(count: 2) { print("edit duration") }
                     .onTapGesture {
-                        bubbleNotesView_bRank = Int(bubble.rank)
-                        if bubble.note_.isEmpty {
-                            //show addNotesView
+                        if bubble.isNoteHidden {
                             
-                        } else {
-//                            bubble.isNoteHidden.toggle()
-//                            PersistenceController.shared.save()
+                        }
+                        if bubble.note!.isEmpty {
+                            bubbleNotesView_bRank = Int(bubble.rank)
                         }
                     }
             }
