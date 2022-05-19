@@ -86,11 +86,14 @@ struct Bubble_AddNotesView: View {
                                 addBubbleNotesView_BubbleRank = nil //dimiss self
                             }
                         List {
-                            ForEach (filteredItems) { item in
-                                Text("\(item.note ?? "No Note")")
+                            ForEach (filteredItems) {
+                                Text("\($0.note ?? "No Note")")
                                     .font(.system(size: 25))
                                     .foregroundColor(.white)
                                     .padding(.leading)
+                                    .onTapGesture {
+                                        
+                                    }
                             }
                             .onDelete {
                                 bubble.removeFromHistory(at: $0.first!)
