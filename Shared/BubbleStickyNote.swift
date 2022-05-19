@@ -17,14 +17,27 @@ struct BubbleStickyNote: View {
     private let textPadding = EdgeInsets(top: 4, leading: 6, bottom: 4, trailing: 6)
     
     var body: some View {
-        HStack (spacing:0) {
-            calendarSymbol
-            stickyNoteContentView
+        ZStack (alignment: .leading) {
+            //Delete/OK view
+            Text(!bubble.note_.isEmpty ? "Delete" : "Ok")
+                .font(font)
+                .padding(EdgeInsets(top: 5, leading: 12, bottom: 5, trailing: 12))
+                .background(
+                    Rectangle()
+                        .fill(!bubble.note_.isEmpty ? Color.red : .green)
+                )
+                .opacity(0)
+            
+            //stickyNote
+            HStack (spacing:0) {
+                calendarSymbol
+                stickyNoteContentView
+            }
+            .foregroundColor(.label)
+            .background(background)
+            .cornerRadius(cornerRadius)
+            .shadow(color: .black.opacity(0.1), radius: 2, x: 2, y: 2)
         }
-        .foregroundColor(.label)
-        .background(background)
-        .cornerRadius(cornerRadius)
-        .shadow(color: .black.opacity(0.1), radius: 2, x: 2, y: 2)
     }
     
     // MARK: - Lego
