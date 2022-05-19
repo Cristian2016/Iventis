@@ -16,7 +16,7 @@ struct BubbleStickyNote: View {
     let height = CGFloat(42)
     
     @Binding var bubbleHasCalendar:Bool
-    @State private var offset = CGSize.zero
+    @State private var offsetX = CGFloat(0)
     
     init(content:String, lineWidth:CGFloat = 3, radius:CGFloat = 0, _ bubbleHasCalendar:Binding<Bool>) {
         self.content = content
@@ -41,7 +41,7 @@ struct BubbleStickyNote: View {
                 .background(background)
                 if bubbleHasCalendar { redCalendarSymbol }
             }
-            .offset(self.offset)
+            .offset(x: self.offsetX, y: 0)
             .frame(width: height * ratio, height: height)
             .padding()
             .foregroundColor(.black)
@@ -49,11 +49,11 @@ struct BubbleStickyNote: View {
                 DragGesture()
                     .onChanged {value in
                         withAnimation(.default) {
-                            offset = value.translation
+                            offsetX = value.translation.width
                         }
                     }
                     .onEnded { _ in
-                        withAnimation(.spring()) { offset = .zero }
+                        withAnimation(.spring()) { offsetX = CGFloat(0) }
                     }
             )
         }
@@ -90,7 +90,7 @@ struct BubbleStickyNote: View {
             .padding(EdgeInsets(top: 5, leading: 19, bottom: 5, trailing: 19))
             .background(
                 Rectangle()
-                    .fill((offset == .zero) ? .background1 : Color.red)
+                    .fill((offsetX == 0) ? .background1 : Color.red)
             )
     }
 }
