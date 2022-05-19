@@ -127,16 +127,14 @@ struct Bubble_AddNotesView: View {
     private var topSpacer: some View { Spacer(minLength: 14) }
     
     private func saveTextInputAndDismiss() {
-        if initialNote == textFieldString { return }
+        if initialNote == textFieldString || textFieldString.isEmpty { return }
         
         viewModel.save(textFieldString, for: bubble)
         UserFeedback.singleHaptic(.heavy)
         
         PersistenceController.shared.save()
     }
-    
-    
-    
+        
     private var plusButton:some View {
         Image(systemName: "plus.app.fill")
             .background(Circle().fill(Color.white).padding())
