@@ -16,6 +16,12 @@ struct BubbleStickyNote: View {
     private let cornerRadius = CGFloat(2)
     private let textPadding = EdgeInsets(top: 4, leading: 6, bottom: 4, trailing: 6)
     
+    // MARK: - Drag to delete
+    @State private var offsetX = CGFloat(0)
+    private let offsetDeleteTriggerLimit = CGFloat(140)
+    private var triggerDeleteAction:Bool { offsetX > offsetDeleteTriggerLimit }
+    
+    // MARK: -
     var body: some View {
         ZStack (alignment: .leading) {
             deleteOKView //the red view that turns green
@@ -29,6 +35,20 @@ struct BubbleStickyNote: View {
             .background(background)
             .cornerRadius(cornerRadius)
             .shadow(color: .black.opacity(0.1), radius: 2, x: 2, y: 2)
+            //offset controlled by the user via drag gesture
+            .offset(x: offsetX, y: 0)
+            //drag the view to delete
+            .gesture(
+                DragGesture()
+                    .onChanged { value in
+                        withAnimation {
+                            offsetX = value.translation.width
+                        }
+                    }
+                    .onEnded { _ in
+                        withAnimation (.spring()) { offsetX = 0 }
+                    }
+            )
         }
     }
     
@@ -61,17 +81,6 @@ struct BubbleStickyNote: View {
         }
     }
     
-    private var deleteSymbol: some View {
-        Text(triggerDeleteAction ? "Done" : "Delete")
-            .foregroundColor(.white)
-            .font(.system(size: 26))
-            .padding(EdgeInsets(top: 5, leading: 19, bottom: 5, trailing: 19))
-            .background(
-                Rectangle()
-                    .fill((offsetX == 0) ? .clear : ( triggerDeleteAction ? .green : Color.red))
-            )
-    }
-    
     @ViewBuilder
     private var stickyNoteContentView: some View {
         if !bubble.isNoteHidden {
@@ -84,11 +93,6 @@ struct BubbleStickyNote: View {
                 .font(.system(size: 20))
         }
     }
-    
-    // MARK: -
-    @State private var offsetX = CGFloat(0)
-    private let offsetDeleteTriggerLimit = CGFloat(140)
-    private var triggerDeleteAction:Bool { offsetX > offsetDeleteTriggerLimit }
 }
 
 struct BubbleStickyNote_Previews: PreviewProvider {
