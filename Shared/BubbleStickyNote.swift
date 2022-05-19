@@ -21,7 +21,7 @@ struct BubbleStickyNote: View {
     @Binding var bubbleHasCalendar:Bool
     
     @State private var offsetX = CGFloat(0)
-    private let offsetDeleteTriggerLimit = CGFloat(120)
+    private let offsetDeleteTriggerLimit = CGFloat(140)
     
     private var triggerDeleteAction:Bool { offsetX > offsetDeleteTriggerLimit }
     
