@@ -37,7 +37,7 @@ struct Bubble_AddNotesView: View {
             Color.white.opacity(0.001)
                 .onTapGesture {
                     saveTextInputAndDismiss()
-                    addBubbleNotesView_BubbleRank = nil //dimiss self
+                    addBubbleNotesView_BubbleRank = nil //dismiss self
                 }
             darkRoundedRect
                 .overlay {
