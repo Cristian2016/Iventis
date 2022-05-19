@@ -16,7 +16,9 @@ struct BubbleStickyNote: View {
     let height = CGFloat(42)
     
     @Binding var bubbleHasCalendar:Bool
+    
     @State private var offsetX = CGFloat(0)
+    private let offsetDeleteTriggerLimit = CGFloat(120)
     
     init(content:String, lineWidth:CGFloat = 3, radius:CGFloat = 0, _ bubbleHasCalendar:Binding<Bool>) {
         self.content = content
@@ -47,9 +49,12 @@ struct BubbleStickyNote: View {
             .foregroundColor(.black)
             .gesture(
                 DragGesture()
-                    .onChanged {value in
+                    .onChanged {value in                        
                         withAnimation(.default) {
                             offsetX = value.translation.width
+                            if offsetX > offsetDeleteTriggerLimit {
+                                print("delete sticky!!!")
+                            }
                         }
                     }
                     .onEnded { _ in
