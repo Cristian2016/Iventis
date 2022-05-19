@@ -10,6 +10,7 @@ import SwiftUI
 struct Bubble_AddNotesView: View {
     @StateObject var bubble:Bubble
     @EnvironmentObject var viewModel:ViewModel
+    @FetchRequest private var items:FetchedResults<BubbleHistory>
     
     private let textInputLimit = 8
     
@@ -27,6 +28,10 @@ struct Bubble_AddNotesView: View {
         guard let bubble = try? PersistenceController.shared.viewContext.fetch(request).first else { fatalError("fuck bubble") }
         _bubble = StateObject(wrappedValue: bubble)
         self.initialNote = bubble.note_
+        
+        let sort = NSSortDescriptor(key: "date", ascending: false)
+        let predicate = NSPredicate(format: "bubble = %@", bubble)
+        _items = FetchRequest(entity: BubbleHistory.entity(), sortDescriptors: [sort], predicate: predicate, animation: .default)
     }
     
     private let size = CGSize(width: 250, height: 400)
@@ -73,8 +78,8 @@ struct Bubble_AddNotesView: View {
                                 addBubbleNotesView_BubbleRank = nil //dimiss self
                             }
                         List {
-                            ForEach (bubble.history_.reversed()) { history in
-                                Text("\(history.note ?? "No Note")")
+                            ForEach (items) { item in
+                                Text("\(item.note ?? "No Note")")
                                     .font(.system(size: 23).weight(.medium))
                                     .foregroundColor(.white)
                                     .padding(.leading)
