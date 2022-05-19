@@ -51,11 +51,14 @@ struct BubbleStickyNote: View {
             .foregroundColor(.black)
             .gesture(
                 DragGesture()
-                    .onChanged {value in                        
+                    .onChanged {value in
+                        if triggerDeleteAction { return }
+                        
                         withAnimation(.default) {
                             offsetX = value.translation.width
                             if triggerDeleteAction {
-                                print("delete sticky!!!")
+                                UserFeedback.singleHaptic(.light)
+                                return
                             }
                         }
                     }
@@ -91,13 +94,13 @@ struct BubbleStickyNote: View {
     }
     
     private var deleteSymbol: some View {
-        Text("Delete")
+        Text(triggerDeleteAction ? "Done" : "Delete")
             .foregroundColor(.white)
             .font(.system(size: 26))
             .padding(EdgeInsets(top: 5, leading: 19, bottom: 5, trailing: 19))
             .background(
                 Rectangle()
-                    .fill((offsetX == 0) ? .background1 : Color.red)
+                    .fill((offsetX == 0) ? .background1 : ( triggerDeleteAction ? .green : Color.red))
             )
     }
 }
