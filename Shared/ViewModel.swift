@@ -241,6 +241,7 @@ class ViewModel: ObservableObject {
         
         //set note
         bubble.note = note
+        bubble.isNoteHidden = false
         
         //add to bubbleHistory
         let context = bubble.managedObjectContext
