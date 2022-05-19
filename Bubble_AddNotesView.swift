@@ -20,7 +20,7 @@ struct Bubble_AddNotesView: View {
         return Array(filtered)
     }
     
-    private let textInputLimit = 8
+    private let textInputLimit = 9
     
     let initialNote:String
     @State private var textFieldString = ""
