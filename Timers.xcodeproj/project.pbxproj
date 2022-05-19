@@ -23,6 +23,12 @@
 		1F18B460281FAABF0080ADA6 /* TopCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F18B45F281FAABF0080ADA6 /* TopCell.swift */; };
 		1F18B461281FAABF0080ADA6 /* TopCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F18B45F281FAABF0080ADA6 /* TopCell.swift */; };
 		1F18B462281FAABF0080ADA6 /* TopCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F18B45F281FAABF0080ADA6 /* TopCell.swift */; };
+		1F20807C2836111600FD35D6 /* BubbleHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F2080782836111600FD35D6 /* BubbleHistory.swift */; };
+		1F20807D2836111600FD35D6 /* BubbleHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F2080782836111600FD35D6 /* BubbleHistory.swift */; };
+		1F20807E2836111600FD35D6 /* BubbleHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F2080782836111600FD35D6 /* BubbleHistory.swift */; };
+		1F20807F2836111600FD35D6 /* BubbleHistory Properties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F2080792836111600FD35D6 /* BubbleHistory Properties.swift */; };
+		1F2080802836111600FD35D6 /* BubbleHistory Properties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F2080792836111600FD35D6 /* BubbleHistory Properties.swift */; };
+		1F2080812836111600FD35D6 /* BubbleHistory Properties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F2080792836111600FD35D6 /* BubbleHistory Properties.swift */; };
 		1F3436012834FC4800A018CC /* NoteSticker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F3436002834FC4800A018CC /* NoteSticker.swift */; };
 		1F3436022834FC4800A018CC /* NoteSticker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F3436002834FC4800A018CC /* NoteSticker.swift */; };
 		1F3436032834FC4800A018CC /* NoteSticker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F3436002834FC4800A018CC /* NoteSticker.swift */; };
@@ -115,12 +121,6 @@
 		1FD21865281D9AB700B43403 /* ExitFocusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD21864281D9AB700B43403 /* ExitFocusView.swift */; };
 		1FD21866281D9AB700B43403 /* ExitFocusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD21864281D9AB700B43403 /* ExitFocusView.swift */; };
 		1FD21867281D9AB700B43403 /* ExitFocusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD21864281D9AB700B43403 /* ExitFocusView.swift */; };
-		1FDC5DED2835A0F4003B5E57 /* OldBubbleNote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FDC5DEB2835A0F4003B5E57 /* OldBubbleNote.swift */; };
-		1FDC5DEE2835A0F4003B5E57 /* OldBubbleNote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FDC5DEB2835A0F4003B5E57 /* OldBubbleNote.swift */; };
-		1FDC5DEF2835A0F4003B5E57 /* OldBubbleNote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FDC5DEB2835A0F4003B5E57 /* OldBubbleNote.swift */; };
-		1FDC5DF02835A0F4003B5E57 /* OldBubbleNote Properties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FDC5DEC2835A0F4003B5E57 /* OldBubbleNote Properties.swift */; };
-		1FDC5DF12835A0F4003B5E57 /* OldBubbleNote Properties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FDC5DEC2835A0F4003B5E57 /* OldBubbleNote Properties.swift */; };
-		1FDC5DF22835A0F4003B5E57 /* OldBubbleNote Properties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FDC5DEC2835A0F4003B5E57 /* OldBubbleNote Properties.swift */; };
 		1FE163AE280EE6F40050C6F5 /* LeftStrip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FE163AD280EE6F40050C6F5 /* LeftStrip.swift */; };
 		1FE163AF280EE6F40050C6F5 /* LeftStrip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FE163AD280EE6F40050C6F5 /* LeftStrip.swift */; };
 		1FE163B0280EE6F40050C6F5 /* LeftStrip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FE163AD280EE6F40050C6F5 /* LeftStrip.swift */; };
@@ -170,6 +170,8 @@
 		1F18B456281FA6130080ADA6 /* PushView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushView.swift; sourceTree = "<group>"; };
 		1F18B45B281FA9C90080ADA6 /* CalendarSticker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarSticker.swift; sourceTree = "<group>"; };
 		1F18B45F281FAABF0080ADA6 /* TopCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopCell.swift; sourceTree = "<group>"; };
+		1F2080782836111600FD35D6 /* BubbleHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BubbleHistory.swift; sourceTree = "<group>"; };
+		1F2080792836111600FD35D6 /* BubbleHistory Properties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BubbleHistory Properties.swift"; sourceTree = "<group>"; };
 		1F3436002834FC4800A018CC /* NoteSticker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteSticker.swift; sourceTree = "<group>"; };
 		1F387CEA2830082000F6B81D /* RearrangeButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RearrangeButton.swift; sourceTree = "<group>"; };
 		1F4239A2281E510D004BE717 /* BubbleStickyNote.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BubbleStickyNote.swift; sourceTree = "<group>"; };
@@ -213,8 +215,6 @@
 		1FA355CF28323E5300F73111 /* AddBubbleNotesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddBubbleNotesView.swift; sourceTree = "<group>"; };
 		1FCF0C652816F3F600AA1FAA /* EmptyListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyListView.swift; sourceTree = "<group>"; };
 		1FD21864281D9AB700B43403 /* ExitFocusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExitFocusView.swift; sourceTree = "<group>"; };
-		1FDC5DEB2835A0F4003B5E57 /* OldBubbleNote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OldBubbleNote.swift; sourceTree = "<group>"; };
-		1FDC5DEC2835A0F4003B5E57 /* OldBubbleNote Properties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OldBubbleNote Properties.swift"; sourceTree = "<group>"; };
 		1FE163AD280EE6F40050C6F5 /* LeftStrip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftStrip.swift; sourceTree = "<group>"; };
 		1FF0A2FC2810448100B1DB77 /* TopDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopDetailView.swift; sourceTree = "<group>"; };
 		1FFC8BA428142F040059EF2E /* Session.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
@@ -362,8 +362,8 @@
 				1FFC8BA528142F040059EF2E /* Session Properties.swift */,
 				1FFC8BA828142F040059EF2E /* Pair.swift */,
 				1FFC8BA928142F040059EF2E /* Pair Properties.swift */,
-				1FDC5DEB2835A0F4003B5E57 /* OldBubbleNote.swift */,
-				1FDC5DEC2835A0F4003B5E57 /* OldBubbleNote Properties.swift */,
+				1F2080782836111600FD35D6 /* BubbleHistory.swift */,
+				1F2080792836111600FD35D6 /* BubbleHistory Properties.swift */,
 			);
 			path = "Core Data";
 			sourceTree = "<group>";
@@ -527,6 +527,7 @@
 				1FFC8BAD28142F040059EF2E /* Session Properties.swift in Sources */,
 				1F64200A2820204400413E31 /* BottomCell.swift in Sources */,
 				1FD21865281D9AB700B43403 /* ExitFocusView.swift in Sources */,
+				1F20807C2836111600FD35D6 /* BubbleHistory.swift in Sources */,
 				1F61BE052822BAAA00B773F9 /* DeleteView.swift in Sources */,
 				1F9BE0A9280BE14100F87EFA /* PaletteView.swift in Sources */,
 				1F5F4A732809409600AF3442 /* Bubble.swift in Sources */,
@@ -552,16 +553,15 @@
 				1F18B460281FAABF0080ADA6 /* TopCell.swift in Sources */,
 				1F5F4A5D28093FAF00AF3442 /* TimersApp.swift in Sources */,
 				1FCF0C662816F3F600AA1FAA /* EmptyListView.swift in Sources */,
-				1FDC5DF02835A0F4003B5E57 /* OldBubbleNote Properties.swift in Sources */,
 				1F4326B1282AFB19002B6092 /* ScaleDownButton.swift in Sources */,
 				1FF0A2FD2810448100B1DB77 /* TopDetailView.swift in Sources */,
 				1FFC8BAA28142F040059EF2E /* Session.swift in Sources */,
-				1FDC5DED2835A0F4003B5E57 /* OldBubbleNote.swift in Sources */,
 				1F5F4A952809450A00AF3442 /* Library.swift in Sources */,
 				1FFC8BB628142F040059EF2E /* Pair.swift in Sources */,
 				1F6420062820186D00413E31 /* PairCell.swift in Sources */,
 				1F387CEB2830082000F6B81D /* RearrangeButton.swift in Sources */,
 				1F5F4A752809409600AF3442 /* Bubble Properties.swift in Sources */,
+				1F20807F2836111600FD35D6 /* BubbleHistory Properties.swift in Sources */,
 				1F5F4A89280941AC00AF3442 /* Widgets.intentdefinition in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -573,14 +573,15 @@
 				1F9BE0AE280C6AB000F87EFA /* TapHold.swift in Sources */,
 				1F6420072820186D00413E31 /* PairCell.swift in Sources */,
 				1F9B6AF1280950D600C0A725 /* ViewModel.swift in Sources */,
-				1FDC5DEE2835A0F4003B5E57 /* OldBubbleNote.swift in Sources */,
 				1F18B461281FAABF0080ADA6 /* TopCell.swift in Sources */,
 				1FA355D128323E5300F73111 /* AddBubbleNotesView.swift in Sources */,
+				1F2080802836111600FD35D6 /* BubbleHistory Properties.swift in Sources */,
 				1F4326B2282AFB19002B6092 /* ScaleDownButton.swift in Sources */,
 				1F4239A4281E510D004BE717 /* BubbleStickyNote.swift in Sources */,
 				1FE163AF280EE6F40050C6F5 /* LeftStrip.swift in Sources */,
 				1FFC8BB728142F040059EF2E /* Pair.swift in Sources */,
 				1F18B45D281FA9C90080ADA6 /* CalendarSticker.swift in Sources */,
+				1F20807D2836111600FD35D6 /* BubbleHistory.swift in Sources */,
 				1F97B7DE2809B311002FFCA3 /* Colors.swift in Sources */,
 				1FFC8BAE28142F040059EF2E /* Session Properties.swift in Sources */,
 				1F18B458281FA6130080ADA6 /* PushView.swift in Sources */,
@@ -600,7 +601,6 @@
 				1F100CA82809493400A3A3C2 /* BackgroundTimer.swift in Sources */,
 				1F5A0F6D282641D00075E86B /* EmptyHistoryAlertView.swift in Sources */,
 				1F387CEC2830082000F6B81D /* RearrangeButton.swift in Sources */,
-				1FDC5DF12835A0F4003B5E57 /* OldBubbleNote Properties.swift in Sources */,
 				1F641FFF281FF70100413E31 /* BottomDetailView.swift in Sources */,
 				1FFC8BBA28142F040059EF2E /* Pair Properties.swift in Sources */,
 				1F3436022834FC4800A018CC /* NoteSticker.swift in Sources */,
@@ -624,6 +624,7 @@
 				1FFC8BAF28142F040059EF2E /* Session Properties.swift in Sources */,
 				1F64200C2820204400413E31 /* BottomCell.swift in Sources */,
 				1FD21867281D9AB700B43403 /* ExitFocusView.swift in Sources */,
+				1F20807E2836111600FD35D6 /* BubbleHistory.swift in Sources */,
 				1F61BE072822BAAA00B773F9 /* DeleteView.swift in Sources */,
 				1F9BE0AB280BE14100F87EFA /* PaletteView.swift in Sources */,
 				1F5F4A88280941AC00AF3442 /* Widgets.intentdefinition in Sources */,
@@ -649,16 +650,15 @@
 				1F100CA5280946C900A3A3C2 /* Model.xcdatamodeld in Sources */,
 				1FCF0C682816F3F600AA1FAA /* EmptyListView.swift in Sources */,
 				1FF0A2FF2810448100B1DB77 /* TopDetailView.swift in Sources */,
-				1FDC5DF22835A0F4003B5E57 /* OldBubbleNote Properties.swift in Sources */,
 				1F4326B3282AFB19002B6092 /* ScaleDownButton.swift in Sources */,
 				1F5A0F71282649710075E86B /* DetailView.swift in Sources */,
 				1FFC8BAC28142F040059EF2E /* Session.swift in Sources */,
-				1FDC5DEF2835A0F4003B5E57 /* OldBubbleNote.swift in Sources */,
 				1F5F4A9B2809456E00AF3442 /* BubbleList.swift in Sources */,
 				1FFC8BB828142F040059EF2E /* Pair.swift in Sources */,
 				1F6420082820186D00413E31 /* PairCell.swift in Sources */,
 				1F387CED2830082000F6B81D /* RearrangeButton.swift in Sources */,
 				1F5F4A972809450A00AF3442 /* Library.swift in Sources */,
+				1F2080812836111600FD35D6 /* BubbleHistory Properties.swift in Sources */,
 				1F100CA3280946C000A3A3C2 /* Bubble Properties.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

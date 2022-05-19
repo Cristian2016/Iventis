@@ -239,18 +239,15 @@ class ViewModel: ObservableObject {
         var note = textInput
         note.removeWhiteSpaceAtBothEnds()
         
+        //set note
         bubble.note = note
         
+        
+        //no need to save viewContext since it will be saved elsewhere
     }
 }
 
 extension ViewModel {
     ///all old notes sorted by Date
-    func allOldBubbleNotes() -> [OldBubbleNote] {
-        let request = OldBubbleNote.fetchRequest()
-        request.sortDescriptors = [
-            NSSortDescriptor(key: "created", ascending: false)
-        ]
-      return (try? PersistenceController.shared.viewContext.fetch(request)) ?? []
-    }
+    
 }
