@@ -21,15 +21,7 @@ struct BubbleStickyNote: View {
             Rectangle()
                 .fill(bubble.hasCalendar ? Color.calendar : .clear)
                 .frame(width: bubble.hasCalendar ? 10 : 0, height: stickyHeight)
-            if !bubble.isNoteHidden {
-                Text(bubble.note_)
-                    .padding(textPadding)
-                    .font(font)
-            } else {
-                Text("\(Image(systemName: "text.alignleft"))")
-                    .padding(textPadding)
-                    .font(.system(size: 20))
-            }
+            stickyNoteContentView
         }
         .foregroundColor(.label)
         .background(background)
@@ -37,7 +29,7 @@ struct BubbleStickyNote: View {
         .shadow(color: .black.opacity(0.1), radius: 2, x: 2, y: 2)
     }
     
-    private var redCalendarSymbol:some View {
+    private var redCalendarSymbol: some View {
         HStack {
             RoundedRectangle(cornerRadius: 2)
                 .fill(Color.calendar)
@@ -66,6 +58,19 @@ struct BubbleStickyNote: View {
                 Rectangle()
                     .fill((offsetX == 0) ? .clear : ( triggerDeleteAction ? .green : Color.red))
             )
+    }
+    
+    @ViewBuilder
+    private var stickyNoteContentView: some View {
+        if !bubble.isNoteHidden {
+            Text(bubble.note_)
+                .padding(textPadding)
+                .font(font)
+        } else {
+            Text("\(Image(systemName: "text.alignleft"))")
+                .padding(textPadding)
+                .font(.system(size: 20))
+        }
     }
     
     // MARK: -
