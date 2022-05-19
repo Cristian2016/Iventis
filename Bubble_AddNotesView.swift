@@ -49,7 +49,7 @@ struct Bubble_AddNotesView: View {
         ZStack {
             Color.white.opacity(0.001)
                 .onTapGesture {
-                    saveTextInputAndDismiss()
+                    saveTextInput()
                     addBubbleNotesView_BubbleRank = nil //dismiss self
                 }
             darkRoundedRect
@@ -72,7 +72,7 @@ struct Bubble_AddNotesView: View {
                                 plusButton
                                 .onTapGesture {
                                     if textFieldString.count > 0 {
-                                        saveTextInputAndDismiss()
+                                        saveTextInput()
                                         addBubbleNotesView_BubbleRank = nil //dimiss self
                                     }
                                 }
@@ -82,7 +82,7 @@ struct Bubble_AddNotesView: View {
                                 }
                             }
                             .onSubmit {
-                                saveTextInputAndDismiss()
+                                saveTextInput()
                                 addBubbleNotesView_BubbleRank = nil //dimiss self
                             }
                         List {
@@ -135,7 +135,7 @@ struct Bubble_AddNotesView: View {
         .onChange(of: self.textFieldString) {
             if $0.count > textInputLimit { textFieldString = String(textFieldString.prefix(textInputLimit)) }
         }
-        .onSubmit { saveTextInputAndDismiss() }
+        .onSubmit { saveTextInput() }
     }
     
     private var backgroundView :some View {
@@ -147,7 +147,7 @@ struct Bubble_AddNotesView: View {
     
     private var topSpacer: some View { Spacer(minLength: 10) }
     
-    private func saveTextInputAndDismiss() {
+    private func saveTextInput() {
         if initialNote == textFieldString || textFieldString.isEmpty { return }
         
         viewModel.save(textFieldString, for: bubble)
