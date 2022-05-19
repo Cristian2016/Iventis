@@ -50,7 +50,7 @@ struct Bubble_AddNotesView: View {
             Color.white.opacity(0.001)
                 .onTapGesture {
                     saveTextInput()
-                    addBubbleNotesView_BubbleRank = nil //dismiss self
+                    dismiss()
                 }
             darkRoundedRect
                 .overlay {
@@ -73,7 +73,7 @@ struct Bubble_AddNotesView: View {
                                 .onTapGesture {
                                     if textFieldString.count > 0 {
                                         saveTextInput()
-                                        addBubbleNotesView_BubbleRank = nil //dimiss self
+                                        dismiss()
                                     }
                                 }
                                 .onLongPressGesture {
@@ -83,7 +83,7 @@ struct Bubble_AddNotesView: View {
                             }
                             .onSubmit {
                                 saveTextInput()
-                                addBubbleNotesView_BubbleRank = nil //dimiss self
+                                dismiss()
                             }
                         List {
                             ForEach (filteredItems) {
@@ -170,6 +170,10 @@ struct Bubble_AddNotesView: View {
             .font(.system(size: 18).weight(.bold))
             .foregroundColor(.white)
             .offset(x: 15, y: 15)
+    }
+    
+    private func dismiss() {
+        addBubbleNotesView_BubbleRank = nil //dimiss self
     }
 }
 
