@@ -21,8 +21,13 @@ struct BubbleStickyNote: View {
             Rectangle()
                 .fill(bubble.hasCalendar ? Color.calendar : .clear)
                 .frame(width: bubble.hasCalendar ? 10 : 0, height: stickyHeight)
-            Text(bubble.note_)
-                .padding(textPadding)
+            if !bubble.isNoteHidden {
+                Text(bubble.note_)
+                    .padding(textPadding)
+            } else {
+                Text("\(Image(systemName: "note.text"))")
+                    .padding(textPadding)
+            }
         }
         .foregroundColor(.label)
         .font(font)

@@ -80,7 +80,6 @@ struct BubbleCell: View {
             if !bubble.note_.isEmpty {
                 noteView
                     .zIndex(10)
-                    .scaleEffect(bubble.isNoteHidden ? 1 : 0.6)
                     .onTapGesture {
                         //show AddNotesView again
                         bubbleNotesView_bRank = Int(bubble.rank)
@@ -154,11 +153,11 @@ struct BubbleCell: View {
                 //gestures
                     .onTapGesture(count: 2) { print("edit duration") }
                     .onTapGesture {
-                        if bubble.isNoteHidden {
-                            
-                        }
-                        if bubble.note!.isEmpty {
+                        if bubble.note_.isEmpty {
                             bubbleNotesView_bRank = Int(bubble.rank)
+                        } else {
+                            bubble.isNoteHidden.toggle()
+                            PersistenceController.shared.save()
                         }
                     }
             }
