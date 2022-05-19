@@ -25,8 +25,6 @@ struct BubbleStickyNote: View {
     // MARK: -
     var body: some View {
         ZStack (alignment: .leading) {
-            if offsetX != 0 { deleteOKView }
-            
             //stickyNote
             HStack (spacing:0) {
                 calendarSymbol
@@ -47,10 +45,9 @@ struct BubbleStickyNote: View {
                                 offsetX = value.translation.width
                             } else {
                                 if !noteDeleted {
-                                    delayExecution(.now() + 1) {
-                                        viewModel.deleteNote(for: bubble)
-                                    }
+                                    viewModel.deleteNote(for: bubble)
                                     noteDeleted = true //block drag gesture.. any other better ideas??
+                                    UserFeedback.singleHaptic(.light)
                                 }
                             }
                         }
@@ -63,17 +60,6 @@ struct BubbleStickyNote: View {
     }
     
     // MARK: - Lego
-    private var deleteOKView: some View {
-        Text(!bubble.note_.isEmpty ? "Delete" : "Ok")
-            .foregroundColor(.white)
-            .font(font)
-            .padding(EdgeInsets(top: 5, leading: 12, bottom: 5, trailing: 12))
-            .background(
-                Rectangle()
-                    .fill( !noteDeleted ? Color.red : .green )
-            )
-    }
-    
     private var calendarSymbol: some View {
         Rectangle()
             .fill(bubble.hasCalendar ? Color.calendar : .clear)
