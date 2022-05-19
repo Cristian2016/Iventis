@@ -42,7 +42,12 @@ struct BubbleStickyNote: View {
                 DragGesture()
                     .onChanged { value in
                         withAnimation {
-                            offsetX = value.translation.width
+                            if !triggerDeleteAction {
+                                offsetX = value.translation.width
+                            } else {
+                                viewModel.deleteNote(for: bubble)
+                                print("deleted")
+                            }
                         }
                     }
                     .onEnded { _ in
