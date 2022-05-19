@@ -115,6 +115,9 @@
 		1FA355D028323E5300F73111 /* Bubble_AddNotesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA355CF28323E5300F73111 /* Bubble_AddNotesView.swift */; };
 		1FA355D128323E5300F73111 /* Bubble_AddNotesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA355CF28323E5300F73111 /* Bubble_AddNotesView.swift */; };
 		1FA355D228323E5300F73111 /* Bubble_AddNotesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA355CF28323E5300F73111 /* Bubble_AddNotesView.swift */; };
+		1FA8F87E28367B7A00394B59 /* BStickyNote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA8F87D28367B7A00394B59 /* BStickyNote.swift */; };
+		1FA8F87F28367B7A00394B59 /* BStickyNote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA8F87D28367B7A00394B59 /* BStickyNote.swift */; };
+		1FA8F88028367B7A00394B59 /* BStickyNote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA8F87D28367B7A00394B59 /* BStickyNote.swift */; };
 		1FCF0C662816F3F600AA1FAA /* EmptyListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FCF0C652816F3F600AA1FAA /* EmptyListView.swift */; };
 		1FCF0C672816F3F600AA1FAA /* EmptyListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FCF0C652816F3F600AA1FAA /* EmptyListView.swift */; };
 		1FCF0C682816F3F600AA1FAA /* EmptyListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FCF0C652816F3F600AA1FAA /* EmptyListView.swift */; };
@@ -213,6 +216,7 @@
 		1FA355CA2832186100F73111 /* CalendarManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarManager.swift; sourceTree = "<group>"; };
 		1FA355CE2832238E00F73111 /* Timers--iOS--Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Timers--iOS--Info.plist"; sourceTree = "<group>"; };
 		1FA355CF28323E5300F73111 /* Bubble_AddNotesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bubble_AddNotesView.swift; sourceTree = "<group>"; };
+		1FA8F87D28367B7A00394B59 /* BStickyNote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BStickyNote.swift; sourceTree = "<group>"; };
 		1FCF0C652816F3F600AA1FAA /* EmptyListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyListView.swift; sourceTree = "<group>"; };
 		1FD21864281D9AB700B43403 /* ExitFocusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExitFocusView.swift; sourceTree = "<group>"; };
 		1FE163AD280EE6F40050C6F5 /* LeftStrip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftStrip.swift; sourceTree = "<group>"; };
@@ -305,6 +309,7 @@
 				1FE163AD280EE6F40050C6F5 /* LeftStrip.swift */,
 				1F4239A2281E510D004BE717 /* BubbleStickyNote.swift */,
 				1F9B6AEF280950D600C0A725 /* ViewModel.swift */,
+				1FA8F87D28367B7A00394B59 /* BStickyNote.swift */,
 				1F5F4A9C280945C700AF3442 /* BubbleCell.swift */,
 				1F100CA62809493400A3A3C2 /* BackgroundTimer.swift */,
 			);
@@ -534,6 +539,7 @@
 				1F62194028293B5100C9B175 /* SmallBubbleView.swift in Sources */,
 				1F97B7DD2809B311002FFCA3 /* Colors.swift in Sources */,
 				1F100CA72809493400A3A3C2 /* BackgroundTimer.swift in Sources */,
+				1FA8F87E28367B7A00394B59 /* BStickyNote.swift in Sources */,
 				1F5A0F6C282641D00075E86B /* EmptyHistoryAlertView.swift in Sources */,
 				1FA355D028323E5300F73111 /* Bubble_AddNotesView.swift in Sources */,
 				1FE163AE280EE6F40050C6F5 /* LeftStrip.swift in Sources */,
@@ -583,6 +589,7 @@
 				1F18B45D281FA9C90080ADA6 /* CalendarSticker.swift in Sources */,
 				1F20807D2836111600FD35D6 /* BubbleSavedNote.swift in Sources */,
 				1F97B7DE2809B311002FFCA3 /* Colors.swift in Sources */,
+				1FA8F87F28367B7A00394B59 /* BStickyNote.swift in Sources */,
 				1FFC8BAE28142F040059EF2E /* Session Properties.swift in Sources */,
 				1F18B458281FA6130080ADA6 /* PushView.swift in Sources */,
 				1F64200B2820204400413E31 /* BottomCell.swift in Sources */,
@@ -631,6 +638,7 @@
 				1F62194228293B5100C9B175 /* SmallBubbleView.swift in Sources */,
 				1F97B7DF2809B311002FFCA3 /* Colors.swift in Sources */,
 				1F100CA92809493400A3A3C2 /* BackgroundTimer.swift in Sources */,
+				1FA8F88028367B7A00394B59 /* BStickyNote.swift in Sources */,
 				1FE163B0280EE6F40050C6F5 /* LeftStrip.swift in Sources */,
 				1FA355D228323E5300F73111 /* Bubble_AddNotesView.swift in Sources */,
 				1F642000281FF70100413E31 /* BottomDetailView.swift in Sources */,
