@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct BubbleStickyNote: View {
+    @EnvironmentObject var bubble:Bubble
+    @EnvironmentObject var viewModel:ViewModel
+    
     let content:String
     let lineWidth:CGFloat
     let cornerRadius:CGFloat
@@ -58,7 +61,7 @@ struct BubbleStickyNote: View {
                             offsetX = value.translation.width
                             if triggerDeleteAction {
                                 UserFeedback.singleHaptic(.light)
-                                return
+                                viewModel.deleteNote(for: bubble)
                             }
                         }
                     }

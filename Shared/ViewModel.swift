@@ -256,6 +256,11 @@ class ViewModel: ObservableObject {
         context.delete(savedNote)
         PersistenceController.shared.save()
     }
+    
+    func deleteNote(for bubble:Bubble) {
+        bubble.note = ""
+        PersistenceController.shared.save()
+    }
 }
 
 extension ViewModel {
