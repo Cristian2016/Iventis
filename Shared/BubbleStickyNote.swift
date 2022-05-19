@@ -52,6 +52,11 @@ struct BubbleStickyNote: View {
                             offset = value.translation
                         }
                     }
+                    .onEnded { _ in
+                        withAnimation(.default) {
+                            offset = .zero
+                        }
+                    }
             )
         }
     }
