@@ -18,15 +18,7 @@ struct BubbleStickyNote: View {
     
     var body: some View {
         ZStack (alignment: .leading) {
-            //Delete/OK view
-            Text(!bubble.note_.isEmpty ? "Delete" : "Ok")
-                .font(font)
-                .padding(EdgeInsets(top: 5, leading: 12, bottom: 5, trailing: 12))
-                .background(
-                    Rectangle()
-                        .fill(!bubble.note_.isEmpty ? Color.red : .green)
-                )
-                .opacity(0)
+            deleteOKView //the red view that turns green
             
             //stickyNote
             HStack (spacing:0) {
@@ -41,6 +33,17 @@ struct BubbleStickyNote: View {
     }
     
     // MARK: - Lego
+    private var deleteOKView: some View {
+        Text(!bubble.note_.isEmpty ? "Delete" : "Ok")
+            .font(font)
+            .padding(EdgeInsets(top: 5, leading: 12, bottom: 5, trailing: 12))
+            .background(
+                Rectangle()
+                    .fill(!bubble.note_.isEmpty ? Color.red : .green)
+            )
+            .opacity(0)
+    }
+    
     private var calendarSymbol: some View {
         Rectangle()
             .fill(bubble.hasCalendar ? Color.calendar : .clear)
