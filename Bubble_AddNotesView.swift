@@ -34,7 +34,7 @@ struct Bubble_AddNotesView: View {
         _items = FetchRequest(entity: BubbleHistory.entity(), sortDescriptors: [sort], predicate: predicate, animation: .default)
     }
     
-    private let size = CGSize(width: 250, height: 400)
+    private let size = CGSize(width: 250, height: 420)
     private let cornerRadius = CGFloat(24)
     
     var body: some View {
@@ -99,6 +99,7 @@ struct Bubble_AddNotesView: View {
                 }
         }
         .ignoresSafeArea(.container, edges: .top)
+        .padding(.top, 2)
         .onAppear {
             delayExecution(.now() + 0.05) {
                 withAnimation (.easeInOut(duration: 0.0)) { keyboardVisible = true }
@@ -133,7 +134,7 @@ struct Bubble_AddNotesView: View {
         }
     }
     
-    private var topSpacer: some View { Spacer(minLength: 14) }
+    private var topSpacer: some View { Spacer(minLength: 10) }
     
     private func saveTextInputAndDismiss() {
         if initialNote == textFieldString || textFieldString.isEmpty { return }
