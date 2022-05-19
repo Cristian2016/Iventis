@@ -16,6 +16,7 @@ struct BubbleStickyNote: View {
     let height = CGFloat(42)
     
     @Binding var bubbleHasCalendar:Bool
+    @State private var offset = CGSize.zero
     
     init(content:String, lineWidth:CGFloat = 3, radius:CGFloat = 0, _ bubbleHasCalendar:Binding<Bool>) {
         self.content = content
@@ -28,23 +29,35 @@ struct BubbleStickyNote: View {
     
     var body: some View {
         ZStack {
-            HStack {
-                Spacer()
-                Label {
-                    Text(content).foregroundColor(.label)
-                    .font(.system(size: 24)) } icon: { }
-                Spacer()
+            deleteSymbol
+            ZStack {
+                HStack {
+                    Spacer()
+                    Label {
+                        Text(content).foregroundColor(.label)
+                        .font(.system(size: 24)) } icon: { }
+                    Spacer()
+                }
+                .background(background)
+                if bubbleHasCalendar { redCalendarSymbol }
             }
-            .background(background)
-            
-            if bubbleHasCalendar { redCalendarSymbol }
+            .offset(self.offset)
+            .frame(width: height * ratio, height: height)
+            .padding()
+            .foregroundColor(.black)
+            .gesture(
+                DragGesture()
+                    .onChanged {value in
+                        withAnimation(.default) {
+                            offset = value.translation
+                        }
+                    }
+            )
         }
-        .frame(width: height * ratio, height: height)
-        .padding()
-        .foregroundColor(.black)
     }
     
-    var background: some View {
+    // MARK: -
+    private var background: some View {
         ZStack {
             RoundedRectangle(cornerRadius: cornerRadius)
                 .fill(Color.white)
@@ -58,7 +71,6 @@ struct BubbleStickyNote: View {
         }
     }
     
-    // MARK: -
     private var redCalendarSymbol:some View {
         HStack {
             RoundedRectangle(cornerRadius: 2)
@@ -66,6 +78,14 @@ struct BubbleStickyNote: View {
                 .frame(width: 10)
             Spacer()
         }
+    }
+    
+    private var deleteSymbol: some View {
+        Text("Delete")
+            .foregroundColor(.white)
+            .font(.system(size: 26))
+            .padding()
+            .background(Rectangle().fill(Color.red))
     }
 }
 
