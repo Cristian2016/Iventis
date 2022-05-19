@@ -12,6 +12,14 @@ struct Bubble_AddNotesView: View {
     @EnvironmentObject var viewModel:ViewModel
     @FetchRequest private var items:FetchedResults<BubbleHistory>
     
+    private var filteredItems:[BubbleHistory] {
+        if textFieldString.isEmpty { return Array(items) }
+        let filtered = items.filter { history in
+            history.note!.lowercased().contains(textFieldString.lowercased())
+        }
+        return Array(filtered)
+    }
+    
     private let textInputLimit = 8
     
     let initialNote:String
@@ -78,7 +86,7 @@ struct Bubble_AddNotesView: View {
                                 addBubbleNotesView_BubbleRank = nil //dimiss self
                             }
                         List {
-                            ForEach (items) { item in
+                            ForEach (filteredItems) { item in
                                 Text("\(item.note ?? "No Note")")
                                     .font(.system(size: 25))
                                     .foregroundColor(.white)
