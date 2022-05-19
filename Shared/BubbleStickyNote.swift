@@ -47,6 +47,20 @@ struct BubbleStickyNote: View {
             .frame(width: height * ratio, height: height)
             .padding()
             .foregroundColor(.black)
+            .gesture(
+                DragGesture()
+                    .onChanged {value in                        
+                        withAnimation(.default) {
+                            offsetX = value.translation.width
+                            if offsetX > offsetDeleteTriggerLimit {
+                                print("delete sticky!!!")
+                            }
+                        }
+                    }
+                    .onEnded { _ in
+                        withAnimation(.spring()) { offsetX = CGFloat(0) }
+                    }
+            )
         }
     }
     
