@@ -92,6 +92,7 @@ struct Bubble_AddNotesView: View {
                                     .foregroundColor(.white)
                                     .padding(.leading)
                                     .onTapGesture {
+                                        UserFeedback.singleHaptic(.heavy)
                                         bubble.note = item.note
                                         try? PersistenceController.shared.viewContext.save()
                                         dismiss()
@@ -174,9 +175,7 @@ struct Bubble_AddNotesView: View {
             .offset(x: 15, y: 15)
     }
     
-    private func dismiss() {
-        addBubbleNotesView_BubbleRank = nil //dimiss self
-    }
+    private func dismiss() { addBubbleNotesView_BubbleRank = nil }
 }
 
 struct BubbleNoteView_Previews: PreviewProvider {
