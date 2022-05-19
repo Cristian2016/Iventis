@@ -82,7 +82,6 @@ struct BubbleCell: View {
                     .zIndex(10)
                     .scaleEffect(bubble.isNoteHidden ? 1 : 0.6)
                     .onTapGesture {
-                        print(bubble.note_.isEmpty)
                         //show AddNotesView again
                         bubbleNotesView_bRank = Int(bubble.rank)
                     }
@@ -279,13 +278,7 @@ struct BubbleCell: View {
             .frame(width: BubbleCell.edge, height: BubbleCell.edge)
     }
     
-    // MARK: -Bub
-    var tapGesture: some Gesture {
-        TapGesture(count: 2)
-            .onEnded { print("Double tap") }
-            .simultaneously(with: TapGesture().onEnded { print("Single Tap") })
-    }
-    
+    // MARK:
     static let dic:[CGFloat:CGFloat] = [ /* 12mini */728:140, /* 8 */667:150,  /* ipdo */568:125,  /* 13 pro max */926:150,  /* 13 pro */844:147,  /* 11 pro max */896:150, 812:130,  /* 8max */736:167]
     
     // MARK: - Methods
