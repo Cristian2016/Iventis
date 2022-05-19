@@ -242,7 +242,7 @@ class ViewModel: ObservableObject {
         //set note
         bubble.note = note
         
-        
+        //add to bubbleHistory
         //no need to save viewContext since it will be saved elsewhere
     }
 }
