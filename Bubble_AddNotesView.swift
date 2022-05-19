@@ -92,6 +92,7 @@ struct Bubble_AddNotesView: View {
                                     .foregroundColor(.white)
                                     .padding([.leading, .trailing], 4)
                                     .background( Rectangle().fill(item.note == bubble.note ? Color.black : .clear))
+                                    .padding(.leading)
                                     .onTapGesture {
                                         UserFeedback.singleHaptic(.heavy)
                                         bubble.note = item.note
