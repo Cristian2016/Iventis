@@ -80,12 +80,12 @@ struct Bubble_AddNotesView: View {
                         List {
                             ForEach (items) { item in
                                 Text("\(item.note ?? "No Note")")
-                                    .font(.system(size: 23).weight(.medium))
+                                    .font(.system(size: 25))
                                     .foregroundColor(.white)
                                     .padding(.leading)
                             }
-                            .onDelete { indexSet in
-                                bubble.removeFromHistory(at: NSIndexSet(indexSet: indexSet))
+                            .onDelete {
+                                bubble.removeFromHistory(at: $0.first!)
                                 PersistenceController.shared.save()
                             }
                             .listRowSeparator(.hidden)
