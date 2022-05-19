@@ -28,15 +28,6 @@ struct BubbleStickyNote: View {
     
     var body: some View {
         ZStack {
-            if bubbleHasCalendar {
-                HStack {
-                    RoundedRectangle(cornerRadius: 2)
-                        .fill(Color.calendar)
-                        .frame(width: 10)
-                    Spacer()
-                }
-                .zIndex(2)
-            }
             HStack {
                 Spacer()
                 Label {
@@ -45,6 +36,8 @@ struct BubbleStickyNote: View {
                 Spacer()
             }
             .background(background)
+            
+            if bubbleHasCalendar { redCalendarSymbol }
         }
         .frame(width: height * ratio, height: height)
         .padding()
@@ -62,6 +55,16 @@ struct BubbleStickyNote: View {
                 .aspectRatio(ratio, contentMode: .fill)
                 .cornerRadius(2)
                 .shadow(color: .black.opacity(0.1), radius: 2, x: 2, y: 2)
+        }
+    }
+    
+    // MARK: -
+    private var redCalendarSymbol:some View {
+        HStack {
+            RoundedRectangle(cornerRadius: 2)
+                .fill(Color.calendar)
+                .frame(width: 10)
+            Spacer()
         }
     }
 }
