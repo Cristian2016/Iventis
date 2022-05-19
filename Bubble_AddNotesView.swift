@@ -7,9 +7,9 @@
 
 import SwiftUI
 
-struct AddBubbleNotesView: View {
-    @EnvironmentObject var viewModel:ViewModel
+struct Bubble_AddNotesView: View {
     @StateObject var bubble:Bubble
+    @EnvironmentObject var viewModel:ViewModel
     
     private let textInputLimit = 8
     
@@ -73,8 +73,12 @@ struct AddBubbleNotesView: View {
                                 addBubbleNotesView_BubbleRank = nil //dimiss self
                             }
                         List {
-                            ForEach (0..<3) { index in
-                                Text("\(index)")
+                            ForEach (bubble.history_) { history in
+                                Text("\(history.note ?? "No Note")")
+                            }
+                            .onDelete { indexSet in
+                                bubble.removeFromHistory(at: NSIndexSet(indexSet: indexSet))
+                                PersistenceController.shared.save()
                             }
                             .listRowSeparator(.hidden)
                             .listRowBackground(Color("deleteActionViewBackground"))
@@ -151,6 +155,6 @@ struct AddBubbleNotesView: View {
 
 struct BubbleNoteView_Previews: PreviewProvider {
     static var previews: some View {
-        AddBubbleNotesView(.constant(65))
+        Bubble_AddNotesView(.constant(65))
     }
 }
