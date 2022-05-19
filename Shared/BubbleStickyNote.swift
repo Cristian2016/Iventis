@@ -92,7 +92,7 @@ struct BubbleStickyNote: View {
             .padding()
             .background(
                 Rectangle()
-                    .fill((offset == .zero) ? .white : Color.calendar)
+                    .fill((offset == .zero) ? .background1 : Color.calendar)
             )
     }
 }
