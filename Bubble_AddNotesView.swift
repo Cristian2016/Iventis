@@ -90,7 +90,7 @@ struct Bubble_AddNotesView: View {
                                 Text("\(item.note ?? "No Note")")
                                     .font(.system(size: 25))
                                     .foregroundColor(.white)
-                                    .padding(.leading, 2)
+                                    .padding([.leading, .trailing], 4)
                                     .background( Rectangle().fill(item.note == bubble.note ? Color.black : .clear))
                                     .onTapGesture {
                                         UserFeedback.singleHaptic(.heavy)
