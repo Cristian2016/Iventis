@@ -243,6 +243,11 @@ class ViewModel: ObservableObject {
         bubble.note = note
         
         //add to bubbleHistory
+        let context = bubble.managedObjectContext
+        let historyItem = BubbleHistory(context: context!)
+        historyItem.date = Date()
+        historyItem.note = note
+        historyItem.bubble = bubble
         //no need to save viewContext since it will be saved elsewhere
     }
 }
