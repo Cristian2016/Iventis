@@ -103,7 +103,7 @@ struct BubbleStickyNote: View {
             .padding(EdgeInsets(top: 5, leading: 19, bottom: 5, trailing: 19))
             .background(
                 Rectangle()
-                    .fill((offsetX == 0) ? .background1 : ( triggerDeleteAction ? .green : Color.red))
+                    .fill((offsetX == 0) ? .clear : ( triggerDeleteAction ? .green : Color.red))
             )
     }
 }
