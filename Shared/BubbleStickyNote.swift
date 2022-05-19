@@ -16,6 +16,7 @@ struct BubbleStickyNote: View {
     private let cornerRadius = CGFloat(2)
     private let textPadding = EdgeInsets(top: 4, leading: 6, bottom: 4, trailing: 6)
     
+    @State private var noteDeleted = false
     // MARK: - Drag to delete
     @State private var offsetX = CGFloat(0)
     private let offsetDeleteTriggerLimit = CGFloat(140)
@@ -45,8 +46,11 @@ struct BubbleStickyNote: View {
                             if !triggerDeleteAction {
                                 offsetX = value.translation.width
                             } else {
-                                viewModel.deleteNote(for: bubble)
-                                print("deleted")
+                                if !noteDeleted {
+                                    viewModel.deleteNote(for: bubble)
+                                    noteDeleted = true
+                                    print("deleted")
+                                }
                             }
                         }
                     }
