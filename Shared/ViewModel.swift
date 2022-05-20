@@ -185,9 +185,9 @@ class ViewModel: ObservableObject {
         let bubbleWasStillRunningWhenSessionWasEnded = bubble.lastPair!.pause == nil
         
         if bubbleWasStillRunningWhenSessionWasEnded {
-            bubble.lastPair!.pause = Date()
+            bubble.lastPair!.pause = Date() //close last pair
             
-            //compute first lastPair duration
+            //compute lastPair duration first
             bubble.lastPair?.computeDuration(.endSession) { (duration, data) in
                 //UIThread 🟢
                 //⚠️ all further code should be included here ⚠️
