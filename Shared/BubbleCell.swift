@@ -15,12 +15,12 @@ struct BubbleCell: View {
     @EnvironmentObject private var viewModel:ViewModel
     
     // MARK: -
-    //showing DeleteAction Detail or AddNotes Views
-    @Binding var showDeleteAction_bRank:Int? //show delete action
-    @Binding var showDetail_bRank:Int? //show detail view
-    @Binding var showAddNotes_bRank:Int? //show
-    
     @Binding var predicate:NSPredicate? //detail view
+    
+    //showing DeleteAction Detail or AddNotes Views
+    @Binding var showDetail_bRank:Int? //show detail view
+    @Binding var showDeleteAction_bRank:Int? //show delete action
+    @Binding var showAddNotes_bRank:Int? //show
     
     // MARK: -
     ////added to bubbleCell only if cellLow value is needed. ex: to know how to position DeleteActionView
@@ -31,19 +31,19 @@ struct BubbleCell: View {
     @State private var isSecondsLongPressed = false
     
     init(_ bubble:Bubble,
-         _ showDetail_bRank:Binding<Int?>,
          _ predicate:Binding<NSPredicate?>,
+         _ showDetail_bRank:Binding<Int?>,
          _ showDeleteAction_bRank:Binding<Int?>,
          _ showAddNotes_bRank:Binding<Int?>) {
                 
-        _showDeleteAction_bRank = Binding(projectedValue: showDeleteAction_bRank)
         _showDetail_bRank = Binding(projectedValue: showDetail_bRank)
+        _showDeleteAction_bRank = Binding(projectedValue: showDeleteAction_bRank)
+        _showAddNotes_bRank = Binding(projectedValue: showAddNotes_bRank)
         
         _bubble = StateObject(wrappedValue: bubble)
         _predicate = Binding(projectedValue: predicate)
                 
         if !bubble.isObservingBackgroundTimer { bubble.observeBackgroundTimer() }
-        _showAddNotes_bRank = Binding(projectedValue: showAddNotes_bRank)
     }
         
     //⚠️ this property determines how many bubbles on screen to fit

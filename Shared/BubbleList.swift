@@ -10,22 +10,23 @@ import CoreData
 import Combine
 
 struct BubbleList: View {
-    //showing Detail or DeleteAction views
-    @State var deleteView_bRank:Int? = nil //bubble.rank
-    @State var detailView_bRank:Int? = nil //bubble.rank
-    @State var notesView_bRank:Int? = nil //bubble rank
-    
-    @State private var deleteViewYOffset:CGFloat? = nil
-    @State private var isActive = true
-    @State var paletteShowing = false
-    
-    @Environment(\.managedObjectContext) private var viewContext
     @Environment(\.scenePhase) var scenePhase
+    @Environment(\.managedObjectContext) private var viewContext
     
     @SectionedFetchRequest var results:SectionedFetchResults<Bool, Bubble>
     @StateObject private var viewModel = ViewModel()
     
+    // MARK: -
     @Binding var predicate:NSPredicate?
+    
+    //showing Detail or DeleteAction views
+    @State var showDetail_bRank:Int? = nil //bubble.rank
+    @State var showDeleteAction_bRank:Int? = nil //bubble.rank
+    @State var showAddNotes_bRank:Int? = nil //bubble rank
+    
+    @State private var deleteViewYOffset:CGFloat? = nil
+    @State private var isActive = true
+    @State var paletteShowing = false
     
     // MARK: -
     var body: some View {
@@ -34,17 +35,17 @@ struct BubbleList: View {
             else {
                 ZStack {
                     if !isFocusOn && !notesShowing { RearrangeButton() }
-                    if isFocusOn { ExitFocusView($predicate, $detailView_bRank).zIndex(1)}
+                    if isFocusOn { ExitFocusView($predicate, $showDetail_bRank).zIndex(1)}
                     
                     VStack {
                         List {
                             ForEach(results) { section in
                                 Section {
                                     ForEach (section) {
-                                        BubbleCell($0,
-                                                   $detailView_bRank,
-                                                   $predicate,
-                                                   $deleteView_bRank, $notesView_bRank)
+                                        BubbleCell($0, $predicate,
+                                                   $showDetail_bRank,
+                                                   $showDeleteAction_bRank,
+                                                   $showAddNotes_bRank)
                                         .coordinateSpace(name: "BubbleCell")
                                                 .environmentObject(viewModel)
                                     }
@@ -78,13 +79,13 @@ struct BubbleList: View {
             }
             
             //on top of everything show DetailView (TopDetailView and BottomDetailView
-            if isFocusOn && !notesShowing { DetailView(detailView_bRank) }
+            if isFocusOn && !notesShowing { DetailView(showDetail_bRank) }
             
-            if notesShowing { BubbleStickyNotesList($notesView_bRank, viewModel) }
+            if notesShowing { BubbleStickyNotesList($showAddNotes_bRank, viewModel) }
             
             if deleteViewOffsetComputed && deleteViewShowing {
-                let bubble = viewModel.bubble(for: deleteView_bRank!)
-                DeleteView(bubble, $deleteView_bRank, $predicate, deleteViewYOffset!)
+                let bubble = viewModel.bubble(for: showDeleteAction_bRank!)
+                DeleteView(bubble, $showDeleteAction_bRank, $predicate, deleteViewYOffset!)
                     .environmentObject(viewModel) //pass viewmodel as well
             }
             
@@ -206,13 +207,13 @@ struct BubbleCellLow_Key:PreferenceKey {
 
 // MARK: - Little Helpers
 extension BubbleList {
-    fileprivate var notesShowing:Bool { notesView_bRank != nil }
+    fileprivate var notesShowing:Bool { showAddNotes_bRank != nil }
     
     fileprivate var isFocusOn:Bool { predicate != nil }
     
     fileprivate var isListEmpty:Bool { results.isEmpty }
     
-    fileprivate var deleteViewShowing:Bool { deleteView_bRank != nil }
+    fileprivate var deleteViewShowing:Bool { showDeleteAction_bRank != nil }
     
     var deleteViewOffsetComputed:Bool {
         deleteViewYOffset != nil
