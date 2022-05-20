@@ -188,12 +188,11 @@ class ViewModel: ObservableObject {
             bubble.lastPair!.pause = Date() //close last pair
             
             //compute lastPair duration first
-            bubble.lastPair?.computeDuration(.endSession) { (duration, data) in
+            bubble.lastPair?.computeDuration(.endSession) { (computedDuration, data) in
                 //UIThread 🟢
-                //⚠️ all further code should be included here ⚠️
                 
                 //store pair and session durations
-                bubble.lastPair?.duration = duration
+                bubble.lastPair?.duration = computedDuration
                 bubble.lastPair?.durationAsStrings = data
                 
                 bubble.lastSession?.computeDuration()
