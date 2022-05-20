@@ -26,7 +26,7 @@ struct BubbleList: View {
     
     @State private var deleteViewYOffset:CGFloat? = nil
     @State private var isActive = true
-    @State var paletteShowing = false
+    @State var isPaletteShowing = false
     
     // MARK: -
     var body: some View {
@@ -74,7 +74,7 @@ struct BubbleList: View {
                 }
             }
             if !notesShowing {
-                LeftStrip($paletteShowing, isListEmpty)
+                LeftStrip($isPaletteShowing, isListEmpty)
                     .environmentObject(viewModel)
             }
             
@@ -89,7 +89,7 @@ struct BubbleList: View {
                     .environmentObject(viewModel) //pass viewmodel as well
             }
             
-            PaletteView($paletteShowing).environmentObject(viewModel)
+            PaletteView($isPaletteShowing).environmentObject(viewModel)
         }
         .onPreferenceChange(BubbleCellLow_Key.self) { new in
             let frame = new.frame
