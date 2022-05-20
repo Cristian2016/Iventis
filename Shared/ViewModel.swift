@@ -179,9 +179,9 @@ class ViewModel: ObservableObject {
         bubble.currentClock = bubble.initialClock
         bubble.bubbleCell_Components = bubble.initialClock.timeComponentsAsStrings
         
+        //mark session as ended
         bubble.lastSession?.isEnded = true
-        bubble.bubbleCell_Components = bubble.initialClock.timeComponentsAsStrings
-        
+                
         let bubbleWasStillRunningWhenSessionWasEnded = bubble.lastPair!.pause == nil
         
         if bubbleWasStillRunningWhenSessionWasEnded {
