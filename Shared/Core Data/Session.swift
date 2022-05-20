@@ -16,7 +16,7 @@ public class Session: NSManagedObject {
     }
     
     //⚠️ implement on backgroundthread. warning: wait until pair computes its duration and then compute session.totalduration!!!
-    func computeDuration(completion: @escaping () -> ()) {
+    func computeDuration(completion: @escaping (() -> ())) {
         DispatchQueue.global().async {
             let pairs = self.pairs?.array as! [Pair]
             guard !pairs.isEmpty,

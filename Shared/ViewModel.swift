@@ -112,7 +112,9 @@ class ViewModel: ObservableObject {
                     bubble.currentClock += currentPair!.duration
                     bubble.bubbleCell_Components = bubble.currentClock.timeComponentsAsStrings
                     
-                    bubble.lastSession?.computeDuration()
+                    bubble.lastSession?.computeDuration {
+                        
+                    }
                 }
                 
             case .finished: return
