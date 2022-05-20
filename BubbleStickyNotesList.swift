@@ -9,7 +9,7 @@
 import SwiftUI
 
 struct BubbleStickyNotesList: View {
-    let bubble:Bubble //⚠️ do not use @StateObject because each time Bubble.bubbleCell_Components update, bubble will emit and body will get recomputed each mother fucking second!!!
+    let bubble:Bubble  /* ⚠️ do not use @StateObject bubble:Bubble! because each time Bubble.bubbleCell_Components update, bubble will emit and body will get recomputed each mother fucking second!!!  */
     @EnvironmentObject var viewModel:ViewModel
     @FetchRequest private var items:FetchedResults<BubbleSavedNote>
     
