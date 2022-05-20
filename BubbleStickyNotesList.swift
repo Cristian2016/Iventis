@@ -9,7 +9,7 @@
 import SwiftUI
 
 struct BubbleStickyNotesList: View {
-    @StateObject var bubble:Bubble
+    let bubble:Bubble //⚠️ do not use @StateObject because each time Bubble.bubbleCell_Components update, bubble will emit and body will get recomputed each mother fucking second!!!
     @EnvironmentObject var viewModel:ViewModel
     @FetchRequest private var items:FetchedResults<BubbleSavedNote>
     
@@ -39,7 +39,7 @@ struct BubbleStickyNotesList: View {
         request.predicate = NSPredicate(format: "rank == %i", addBubbleNotesView_BubbleRank.wrappedValue!)
         
         guard let bubble = try? PersistenceController.shared.viewContext.fetch(request).first else { fatalError("fuck bubble") }
-        _bubble = StateObject(wrappedValue: bubble)
+        self.bubble = bubble
         self.initialNote = bubble.note_
         
         let sort = NSSortDescriptor(key: "date", ascending: false)
