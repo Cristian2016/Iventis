@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct Bubble_AddNotesView: View {
+struct BubbleStickyNotesList: View {
     @StateObject var bubble:Bubble
     @EnvironmentObject var viewModel:ViewModel
     @FetchRequest private var items:FetchedResults<BubbleSavedNote>
@@ -46,7 +46,8 @@ struct Bubble_AddNotesView: View {
     private let cornerRadius = CGFloat(24)
     
     var body: some View {
-        ZStack {
+        print("compute body")
+        return ZStack {
             Color.white.opacity(0.001)
                 .onTapGesture {
                     saveTextInput()
@@ -179,6 +180,6 @@ struct Bubble_AddNotesView: View {
 
 struct BubbleNoteView_Previews: PreviewProvider {
     static var previews: some View {
-        Bubble_AddNotesView(.constant(65))
+        BubbleStickyNotesList(.constant(65))
     }
 }
