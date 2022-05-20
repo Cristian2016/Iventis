@@ -15,6 +15,24 @@ struct Global {
     static let longPressLatency = Double(0.7) //seconds
 }
 
+extension Array {
+    func shifted(by amount:Int) -> Array {
+        
+        if amount < 0 { fatalError("can't be negative. only zero or greater") }
+    
+       let shiftedIndices = indices.map { index in
+           (index + amount)%self.indices.count
+        }
+        
+        var shiftedArray = [Element]()
+        shiftedIndices.forEach {
+            shiftedArray.append(self[$0])
+        }
+        
+        return shiftedArray
+    }
+}
+
 extension Color {
     static let label = Color("label")
     static let detailViewBackground = Color("detailViewBackground")
