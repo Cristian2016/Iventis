@@ -43,7 +43,7 @@ public class Pair: NSManagedObject {
                     case .pause:
                         duration = Float(pause.timeIntervalSince(start))
                     case .endSession:
-                        duration = Float(pause.timeIntervalSince(start) - 0.5)
+                        duration = Float(pause.timeIntervalSince(start) - 0.7)
                 }
                 
                 //convert duration to raw data using JSONEncoder
