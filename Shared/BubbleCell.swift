@@ -30,6 +30,8 @@ struct BubbleCell: View {
     @State private var isSecondsTapped = false
     @State private var isSecondsLongPressed = false
     
+    private let circleDiameter = Global.circleDiameter
+    
     init(_ bubble:Bubble,
          _ predicate:Binding<NSPredicate?>,
          _ showDetail_bRank:Binding<Int?>,
@@ -45,12 +47,6 @@ struct BubbleCell: View {
                 
         if !bubble.isObservingBackgroundTimer { bubble.observeBackgroundTimer() }
     }
-        
-    //⚠️ this property determines how many bubbles on screen to fit
-    static let circleDiameter:CGFloat = {
-        print(UIScreen.main.bounds.height)
-        return dic[UIScreen.size.height] ?? 140
-    }()
     
     private var minOpacity:Double {
         bubble.bubbleCell_Components.min > "0" || bubble.bubbleCell_Components.hr > "0" ? 1 : 0.001
@@ -250,11 +246,8 @@ struct BubbleCell: View {
     private var circleBackground: some View {
         Circle()
             .fill(Color.bubble(for: bubble.color ?? "cyan"))
-            .frame(width: BubbleCell.circleDiameter, height: BubbleCell.circleDiameter)
+            .frame(width: circleDiameter, height: circleDiameter)
     }
-    
-    // MARK:
-    static let dic:[CGFloat:CGFloat] = [ /* 12mini */728:140, /* 8 */667:150,  /* ipdo */568:125,  /* 13 pro max */926:150,  /* 13 pro */844:147,  /* 11 pro max */896:150, 812:130,  /* 8max */736:167]
     
     // MARK: - Methods
     ///show/hide DetailView
@@ -289,7 +282,7 @@ extension BubbleCell {
             content
                 .font(.system(size: Ratio.bubbleToFontSize * UIScreen.size.width * 0.85))
                 .foregroundColor(.white)
-                .frame(width: BubbleCell.circleDiameter, height: BubbleCell.circleDiameter)
+                .frame(width: Global.circleDiameter, height: Global.circleDiameter)
         }
     }
 }

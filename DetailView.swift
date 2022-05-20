@@ -15,7 +15,7 @@ struct DetailView: View {
     
     let topDetailHeight = CGFloat(140)
     //empirically computed
-    let bottomDetailHeight = UIScreen.size.height - (2.5 * BubbleCell.circleDiameter +  ExitFocusView.height)
+    let bottomDetailHeight = UIScreen.size.height - (2.5 * Global.circleDiameter +  ExitFocusView.height)
     let detailWidth = UIScreen.size.width * 0.96
     
     init(_ rank:Int?) {
