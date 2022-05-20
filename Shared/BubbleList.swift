@@ -81,7 +81,7 @@ struct BubbleList: View {
             if isFocusOn && !notesShowing { DetailView(detailView_bRank) }
             
             if notesShowing {
-                Bubble_AddNotesView($notesView_bRank)
+                BubbleStickyNotesList($notesView_bRank)
                     .environmentObject(viewModel)
             }
             

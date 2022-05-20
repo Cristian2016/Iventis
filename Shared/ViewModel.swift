@@ -113,7 +113,7 @@ class ViewModel: ObservableObject {
                     bubble.bubbleCell_Components = bubble.currentClock.timeComponentsAsStrings
                     
                     bubble.lastSession?.computeDuration {
-                        
+                        //no need to run any code in the completion
                     }
                 }
                 
