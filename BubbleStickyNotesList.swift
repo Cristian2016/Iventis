@@ -52,8 +52,7 @@ struct BubbleStickyNotesList: View {
     
     // MARK: -
     var body: some View {
-        print("compute body")
-        return ZStack {
+        ZStack {
             Color.white.opacity(0.001)
                 .onTapGesture {
                     saveTextInput()
