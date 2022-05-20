@@ -65,7 +65,7 @@ struct BubbleList: View {
                             header: { headerTitle(for: section.id.description) }
                                     .accentColor(section.id != false ? .clear : .label) //collapse section indicators invisible
                             }
-                            Spacer(minLength: 100)
+                            Spacer(minLength: 100) //overscroll
                         }
                         .padding(EdgeInsets(top: 0, leading: -10, bottom: 0, trailing: -10))
                         .listStyle(.sidebar)
