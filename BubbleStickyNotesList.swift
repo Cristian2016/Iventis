@@ -28,6 +28,10 @@ struct BubbleStickyNotesList: View {
     
     @Binding var addBubbleNotesView_BubbleRank:Int?
     
+    private let size = CGSize(width: 250, height: 420)
+    private let cornerRadius = CGFloat(24)
+    
+    // MARK: -
     init(_ addBubbleNotesView_BubbleRank:Binding<Int?>) {
         _addBubbleNotesView_BubbleRank = Binding(projectedValue: addBubbleNotesView_BubbleRank)
         let request = Bubble.fetchRequest()
@@ -42,9 +46,7 @@ struct BubbleStickyNotesList: View {
         _items = FetchRequest(entity: BubbleSavedNote.entity(), sortDescriptors: [sort], predicate: predicate, animation: .default)
     }
     
-    private let size = CGSize(width: 250, height: 420)
-    private let cornerRadius = CGFloat(24)
-    
+    // MARK: -
     var body: some View {
         print("compute body")
         return ZStack {
@@ -53,7 +55,7 @@ struct BubbleStickyNotesList: View {
                     saveTextInput()
                     dismiss()
                 }
-            darkRoundedRect
+            darkRoundedBackground
                 .overlay {
                     VStack {
                         topSpacer //pushes textfield down a little
@@ -121,8 +123,8 @@ struct BubbleStickyNotesList: View {
         }
     }
     
-    // MARK: - Legoes
-    private var darkRoundedRect: some View {
+    // MARK: - Lego
+    private var darkRoundedBackground: some View {
         RoundedRectangle(cornerRadius: cornerRadius)
             .frame(width: size.width, height: size.height)
             .foregroundColor(Color("searchFieldBackground"))
@@ -149,15 +151,6 @@ struct BubbleStickyNotesList: View {
     }
     
     private var topSpacer: some View { Spacer(minLength: 10) }
-    
-    private func saveTextInput() {
-        if initialNote == textFieldString || textFieldString.isEmpty { return }
-        
-        viewModel.save(textFieldString, for: bubble)
-        UserFeedback.singleHaptic(.heavy)
-        
-        PersistenceController.shared.save()
-    }
         
     private var plusButton:some View {
         Image(systemName: "plus.app.fill")
@@ -175,7 +168,17 @@ struct BubbleStickyNotesList: View {
             .offset(x: 15, y: 15)
     }
     
+    // MARK: -
     private func dismiss() { addBubbleNotesView_BubbleRank = nil }
+    
+    private func saveTextInput() {
+        if initialNote == textFieldString || textFieldString.isEmpty { return }
+        
+        viewModel.save(textFieldString, for: bubble)
+        UserFeedback.singleHaptic(.heavy)
+        
+        PersistenceController.shared.save()
+    }
 }
 
 struct BubbleNoteView_Previews: PreviewProvider {
