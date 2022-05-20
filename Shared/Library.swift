@@ -19,15 +19,15 @@ extension Array {
     func shifted(by amount:Int) -> Array {
         
         if amount < 0 { fatalError("can't be negative. only zero or greater") }
+        if amount == 0 { return self }
     
        let shiftedIndices = indices.map { index in
            (index + amount)%self.indices.count
         }
         
         var shiftedArray = [Element]()
-        shiftedIndices.forEach {
-            shiftedArray.append(self[$0])
-        }
+        
+        shiftedIndices.forEach { shiftedArray.append(self[$0]) }
         
         return shiftedArray
     }
