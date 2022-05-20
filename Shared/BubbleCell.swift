@@ -16,9 +16,9 @@ struct BubbleCell: View {
     
     // MARK: -
     //showing DeleteAction Detail or AddNotes Views
-    @Binding var deleteActionView_bRank:Int? //show delete action
-    @Binding var detailView_bRank:Int? //show detail view
-    @Binding var bubbleNotesView_bRank:Int? //show
+    @Binding var showDeleteAction_bRank:Int? //show delete action
+    @Binding var showDetail_bRank:Int? //show detail view
+    @Binding var showAddNotes_bRank:Int? //show
     
     @Binding var predicate:NSPredicate? //detail view
     
@@ -31,19 +31,19 @@ struct BubbleCell: View {
     @State private var isSecondsLongPressed = false
     
     init(_ bubble:Bubble,
-         _ showDetailView_BubbleRank:Binding<Int?>,
+         _ showDetail_bRank:Binding<Int?>,
          _ predicate:Binding<NSPredicate?>,
-         _ showDeleteActionView_BubbleRank:Binding<Int?>,
-         _ addNotesView_bRank:Binding<Int?>) {
+         _ showDeleteAction_bRank:Binding<Int?>,
+         _ showAddNotes_bRank:Binding<Int?>) {
                 
-        _deleteActionView_bRank = Binding(projectedValue: showDeleteActionView_BubbleRank)
-        _detailView_bRank = Binding(projectedValue: showDetailView_BubbleRank)
+        _showDeleteAction_bRank = Binding(projectedValue: showDeleteAction_bRank)
+        _showDetail_bRank = Binding(projectedValue: showDetail_bRank)
         
         _bubble = StateObject(wrappedValue: bubble)
         _predicate = Binding(projectedValue: predicate)
                 
         if !bubble.isObservingBackgroundTimer { bubble.observeBackgroundTimer() }
-        _bubbleNotesView_bRank = Binding(projectedValue: addNotesView_bRank)
+        _showAddNotes_bRank = Binding(projectedValue: showAddNotes_bRank)
     }
         
     //⚠️ this property determines how many bubbles on screen to fit
@@ -65,7 +65,7 @@ struct BubbleCell: View {
                     .zIndex(10)
                     .onTapGesture {
                         //show AddNotesView again
-                        bubbleNotesView_bRank = Int(bubble.rank)
+                        showAddNotes_bRank = Int(bubble.rank)
                     }
             }
             
@@ -108,7 +108,7 @@ struct BubbleCell: View {
         }
         .swipeActions(edge: .trailing, allowsFullSwipe: true) {
             //delete
-            Button { deleteActionView_bRank = Int(bubble.rank)}
+            Button { showDeleteAction_bRank = Int(bubble.rank)}
         label: { Label { Text("Delete") }
             icon: { Image.trash } }.tint(.red)
             
@@ -136,7 +136,7 @@ struct BubbleCell: View {
                     .onTapGesture(count: 2) { print("edit duration") }
                     .onTapGesture {
                         if bubble.note_.isEmpty {
-                            bubbleNotesView_bRank = Int(bubble.rank)
+                            showAddNotes_bRank = Int(bubble.rank)
                         } else {
                             bubble.isNoteHidden.toggle()
                             PersistenceController.shared.save()
@@ -264,7 +264,7 @@ struct BubbleCell: View {
         
         //%i integer, %f float, %@ object??
         predicate = predicateNotSet ? NSPredicate(format: "rank == %i", bubble.rank) : nil
-        detailView_bRank = predicateNotSet ? Int(bubble.rank) : nil
+        showDetail_bRank = predicateNotSet ? Int(bubble.rank) : nil
         
         //ask viewModel
         let rank = Int(bubble.rank)
@@ -272,12 +272,12 @@ struct BubbleCell: View {
     }
     
     private var showDeleteActionView:Bool {
-        guard let actionViewBubbleRank = deleteActionView_bRank else { return false }
+        guard let actionViewBubbleRank = showDeleteAction_bRank else { return false }
         return bubble.rank == actionViewBubbleRank
     }
     
     private var showDetailView:Bool {
-        guard let showDetailView_BubbleRank = detailView_bRank else { return false }
+        guard let showDetailView_BubbleRank = showDetail_bRank else { return false }
         return bubble.rank == showDetailView_BubbleRank
     }
 }
