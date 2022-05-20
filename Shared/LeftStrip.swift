@@ -20,9 +20,9 @@ struct LeftStrip: View {
             Spacer()
         }
         .ignoresSafeArea()
-        .gesture(DragGesture(minimumDistance: 0, coordinateSpace: .global)
+        .gesture(DragGesture(minimumDistance: 10, coordinateSpace: .global)
             .onEnded { _ in
-                withAnimation(.easeOut(duration: 0.2)) { paletteShowing = true }
+                withAnimation(.easeOut(duration: 0.25)) { paletteShowing = true }
             }
         )
     }
