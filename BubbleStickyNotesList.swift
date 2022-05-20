@@ -51,7 +51,7 @@ struct BubbleStickyNotesList: View {
         self.viewModel = viewModel
         
         let sorts = [
-            NSSortDescriptor(key: "bubble", ascending: false),
+//            NSSortDescriptor(key: "bubble", ascending: false), //⚠️ crashes for some reason..
             NSSortDescriptor(key: "date", ascending: false)
         ]
         _items = FetchRequest(entity: BubbleSavedNote.entity(), sortDescriptors: sorts, predicate: nil, animation: .default)

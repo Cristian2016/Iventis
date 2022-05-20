@@ -37,7 +37,7 @@
         <relationship name="pairs" optional="YES" toMany="YES" deletionRule="Cascade" ordered="YES" destinationEntity="Pair" inverseName="session" inverseEntity="Pair"/>
     </entity>
     <elements>
-        <element name="Bubble" positionX="-1126.346435546875" positionY="1511.206024169922" width="128" height="208"/>
+        <element name="Bubble" positionX="-1126.346435546875" positionY="1511.206024169922" width="128" height="194"/>
         <element name="BubbleSavedNote" positionX="-1167.576232910156" positionY="1853.05224609375" width="128" height="88"/>
         <element name="Pair" positionX="-682.7940063476562" positionY="1990.900634765625" width="128" height="148"/>
         <element name="Session" positionX="-755.014404296875" positionY="1731.148468017579" width="128" height="134"/>
