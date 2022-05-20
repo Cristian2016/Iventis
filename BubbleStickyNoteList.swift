@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-struct BubbleStickyNotesList: View {
+struct BubbleStickyNoteList: View {
     let bubble:Bubble  /* ⚠️ do not use @StateObject bubble:Bubble! because each time Bubble.bubbleCell_Components update, bubble will emit and body will get recomputed each mother fucking second!!!  */
     @EnvironmentObject var viewModel:ViewModel
     @FetchRequest private var items:FetchedResults<BubbleSavedNote>
@@ -41,7 +41,7 @@ struct BubbleStickyNotesList: View {
         guard let bubble = try? PersistenceController.shared.viewContext.fetch(request).first else { fatalError("fuck bubble") }
         self.bubble = bubble
         self.initialNote = bubble.note_
-        
+                
         let sorts = [
 //            NSSortDescriptor(key: "bubble", ascending: false),
             NSSortDescriptor(key: "date", ascending: false)
@@ -186,6 +186,6 @@ struct BubbleStickyNotesList: View {
 
 struct BubbleNoteView_Previews: PreviewProvider {
     static var previews: some View {
-        BubbleStickyNotesList(.constant(65))
+        BubbleStickyNoteList(.constant(65))
     }
 }
