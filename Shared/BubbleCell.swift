@@ -8,21 +8,24 @@
 import SwiftUI
 
 struct BubbleCell: View {
-    ///added to bubbleCell only if cellLow value is needed. ex: to know how to position DeleteActionView
-    private var cellLowEmitterView:some View { Circle().fill(Color.clear) }
+    // MARK: - Dependencies
+    @StateObject var bubble:Bubble
+    @EnvironmentObject private var viewModel:ViewModel
     
+    // MARK: -
     //showing DeleteAction Detail or AddNotes Views
     @Binding var deleteActionView_bRank:Int? //bubble.rank
     @Binding var detailView_bRank:Int?
     @Binding var bubbleNotesView_bRank:Int?
     
+    // MARK: -
+    ////added to bubbleCell only if cellLow value is needed. ex: to know how to position DeleteActionView
+    private var cellLowEmitterView:some View { Circle().fill(Color.clear) }
+    
     @Binding var predicate:NSPredicate?
     
     @Environment(\.editMode) var editMode
     
-    @EnvironmentObject private var viewModel:ViewModel
-    
-    @StateObject var bubble:Bubble
     private let bubbleColor:Color
     
     @State private var scale: CGFloat = 1.4
