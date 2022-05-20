@@ -24,38 +24,40 @@ struct BubbleStickyNote: View {
     
     // MARK: -
     var body: some View {
-        ZStack (alignment: .leading) {
-            //stickyNote
-            HStack (spacing:0) {
-                calendarSymbol
-                stickyNoteContentView
-            }
-            .foregroundColor(.label)
-            .background(background)
-            .cornerRadius(cornerRadius)
-            .shadow(color: .black.opacity(0.1), radius: 2, x: 2, y: 2)
-            //offset controlled by the user via drag gesture
-            .offset(x: offsetX, y: 0)
-            //drag the view to delete
-            .gesture(
-                DragGesture()
-                    .onChanged { value in
-                        withAnimation {
-                            if !triggerDeleteAction {
-                                offsetX = value.translation.width
-                            } else {
-                                if !noteDeleted {
-                                    viewModel.deleteNote(for: bubble)
-                                    noteDeleted = true //block drag gesture.. any other better ideas??
-                                    UserFeedback.singleHaptic(.light)
+        if !bubble.isFault {
+            ZStack (alignment: .leading) {
+                //stickyNote
+                HStack (spacing:0) {
+                    calendarSymbol
+                    stickyNoteContentView
+                }
+                .foregroundColor(.label)
+                .background(background)
+                .cornerRadius(cornerRadius)
+                .shadow(color: .black.opacity(0.1), radius: 2, x: 2, y: 2)
+                //offset controlled by the user via drag gesture
+                .offset(x: offsetX, y: 0)
+                //drag the view to delete
+                .gesture(
+                    DragGesture()
+                        .onChanged { value in
+                            withAnimation {
+                                if !triggerDeleteAction {
+                                    offsetX = value.translation.width
+                                } else {
+                                    if !noteDeleted {
+                                        viewModel.deleteNote(for: bubble)
+                                        noteDeleted = true //block drag gesture.. any other better ideas??
+                                        UserFeedback.singleHaptic(.light)
+                                    }
                                 }
                             }
                         }
-                    }
-                    .onEnded { _ in
-                        withAnimation (.spring()) { offsetX = 0 }
-                    }
-            )
+                        .onEnded { _ in
+                            withAnimation (.spring()) { offsetX = 0 }
+                        }
+                )
+            }
         }
     }
     

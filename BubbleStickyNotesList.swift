@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct BubbleStickyNotesList: View {
+struct Bubble_AddNotesView: View {
     @StateObject var bubble:Bubble
     @EnvironmentObject var viewModel:ViewModel
     @FetchRequest private var items:FetchedResults<BubbleSavedNote>
@@ -37,12 +37,9 @@ struct BubbleStickyNotesList: View {
         _bubble = StateObject(wrappedValue: bubble)
         self.initialNote = bubble.note_
         
-        let sorts = [
-            NSSortDescriptor(key: "bubble", ascending: false),
-            NSSortDescriptor(key: "date", ascending: false)
-        ]
-//        let predicate = NSPredicate(format: "bubble = %@", bubble)
-        _items = FetchRequest(entity: BubbleSavedNote.entity(), sortDescriptors: sorts, predicate: nil, animation: .default)
+        let sort = NSSortDescriptor(key: "date", ascending: false)
+        let predicate = NSPredicate(format: "bubble = %@", bubble)
+        _items = FetchRequest(entity: BubbleSavedNote.entity(), sortDescriptors: [sort], predicate: predicate, animation: .default)
     }
     
     private let size = CGSize(width: 250, height: 420)
@@ -182,6 +179,6 @@ struct BubbleStickyNotesList: View {
 
 struct BubbleNoteView_Previews: PreviewProvider {
     static var previews: some View {
-        BubbleStickyNotesList(.constant(65))
+        Bubble_AddNotesView(.constant(65))
     }
 }
