@@ -25,18 +25,10 @@ struct BubbleCell: View {
     // MARK: -
     ////added to bubbleCell only if cellLow value is needed. ex: to know how to position DeleteActionView
     private var cellLowEmitterView:some View { Circle().fill(Color.clear) }
-    
-    private let bubbleColor:Color
-    
-    @State private var scale: CGFloat = 1.4
-    
+            
     private var isRunning:Bool { bubble.state == .running }
     @State private var isSecondsTapped = false
     @State private var isSecondsLongPressed = false
-    
-    private var sec:Int = 0
-    private var min:Int = 0
-    private var hr:Int = 0
     
     init(_ bubble:Bubble,
          _ showDetailView_BubbleRank:Binding<Int?>,
@@ -49,19 +41,11 @@ struct BubbleCell: View {
         
         _bubble = StateObject(wrappedValue: bubble)
         _predicate = Binding(projectedValue: predicate)
-        
-        self.bubbleColor = Color.bubble(for: bubble.color!)
-        
-        switch bubble.kind {
-            case .stopwatch: sec = 0
-            default: break
-        }
+                
         if !bubble.isObservingBackgroundTimer { bubble.observeBackgroundTimer() }
         _bubbleNotesView_bRank = Binding(projectedValue: addNotesView_bRank)
     }
-    
-    private let spacing:CGFloat = -30
-    
+        
     //⚠️ this property determines how many bubbles on screen to fit
     static var edge:CGFloat = {
         print(UIScreen.main.bounds.height)
@@ -276,7 +260,7 @@ struct BubbleCell: View {
     
     private var circleBackground: some View {
         Circle()
-            .fill(bubbleColor)
+            .fill(Color.bubble(for: bubble.color ?? "cyan"))
             .frame(width: BubbleCell.edge, height: BubbleCell.edge)
     }
     
