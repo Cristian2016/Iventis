@@ -255,14 +255,12 @@ class ViewModel: ObservableObject {
         bubble.note = note
         bubble.isNoteHidden = false
         
-        //add to bubbleHistory
+        //add new item to bubbleHistory
         let context = bubble.managedObjectContext
         let historyItem = BubbleSavedNote(context: context!)
         historyItem.date = Date()
         historyItem.note = note
-        historyItem.bubble = bubble
-        //no need to save viewContext since it will be saved elsewhere
-        try? context?.save()
+        bubble.addToHistory(historyItem)
     }
     
     func delete(_ savedNote:BubbleSavedNote) {
@@ -274,6 +272,18 @@ class ViewModel: ObservableObject {
     func deleteNote(for bubble:Bubble) {
         bubble.note = ""
         PersistenceController.shared.save()
+    }
+    
+    // MARK: -
+    func sortedShiftedOldNotes() -> [BubbleSavedNote] {
+        let request = BubbleSavedNote.fetchRequest()
+//        let sorts  = [
+//            NSSortDescriptor(key: "bubble", ascending: false),
+//            NSSortDescriptor(key: "date", ascending: false)
+//        ]
+//        request.sortDescriptors = sorts
+        let notes = try? PersistenceController.shared.viewContext.fetch(request)
+        return notes ?? []
     }
 }
 

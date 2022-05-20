@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-struct BubbleStickyNoteList: View {
+struct BubbleStickyNotesList: View {
     let bubble:Bubble  /* ⚠️ do not use @StateObject bubble:Bubble! because each time Bubble.bubbleCell_Components update, bubble will emit and body will get recomputed each mother fucking second!!!  */
     let viewModel:ViewModel
     @FetchRequest private var items:FetchedResults<BubbleSavedNote>
@@ -34,98 +34,101 @@ struct BubbleStickyNoteList: View {
     
     // MARK: -
     init(_ addBubbleNotesView_BubbleRank:Binding<Int?>, _ viewModel:ViewModel) {
+        //setting rank to nil dismisses self
         _addBubbleNotesView_BubbleRank = Binding(projectedValue: addBubbleNotesView_BubbleRank)
+        
+        //set Bubble
         let request = Bubble.fetchRequest()
         request.predicate = NSPredicate(format: "rank == %i", addBubbleNotesView_BubbleRank.wrappedValue!)
         
         guard let bubble = try? PersistenceController.shared.viewContext.fetch(request).first else { fatalError("fuck bubble") }
         self.bubble = bubble
+        
+        //set initial note
         self.initialNote = bubble.note_
-                
+        
+        //set viewModel
+        self.viewModel = viewModel
+        
         let sorts = [
-//            NSSortDescriptor(key: "bubble", ascending: false),
+            NSSortDescriptor(key: "bubble", ascending: false),
             NSSortDescriptor(key: "date", ascending: false)
         ]
-        let predicate = NSPredicate(format: "bubble = %@", bubble)
-        _items = FetchRequest(entity: BubbleSavedNote.entity(), sortDescriptors: sorts, predicate: predicate, animation: .default)
-        
-        self.viewModel = viewModel
+        _items = FetchRequest(entity: BubbleSavedNote.entity(), sortDescriptors: sorts, predicate: nil, animation: .default)
     }
     
     // MARK: -
     var body: some View {
-        if addBubbleNotesView_BubbleRank != nil {
-            ZStack {
-                Color.white.opacity(0.001)
-                    .onTapGesture {
-                        saveTextInput()
-                        dismiss()
-                    }
-                darkRoundedBackground
-                    .overlay {
-                        VStack {
-                            topSpacer //pushes textfield down a little
-                            textField
-                                .padding(.leading)
-                                .gesture(
-                                    DragGesture(minimumDistance: 15, coordinateSpace: .global)
-                                        .onChanged {
-                                            if $0.translation.width < -20 { textFieldString = "" }
-                                        }
-                                        .onEnded { _ in
-                                            if textFieldString.isEmpty { UserFeedback.doubleHaptic(.rigid)
-                                            }
-                                        }
-                                )
-                                .overlay {
-                                    plusButton
-                                        .onTapGesture {
-                                            if textFieldString.count > 0 {
-                                                saveTextInput()
-                                                dismiss()
-                                            }
-                                        }
-                                        .onLongPressGesture {
-                                            textFieldString = ""
-                                            UserFeedback.doubleHaptic(.rigid)
-                                        }
-                                }
-                                .onSubmit {
-                                    saveTextInput()
-                                    dismiss()
-                                }
-                            List {
-                                ForEach (filteredItems) { item in
-                                    Text("\(item.note ?? "No Note")")
-                                        .font(.system(size: 25))
-                                        .foregroundColor(.white)
-                                        .padding([.leading, .trailing], 4)
-                                        .background( Rectangle().fill(item.note == bubble.note ? Color.black : .clear))
-                                        .padding(.leading)
-                                        .onTapGesture {
-                                            UserFeedback.singleHaptic(.heavy)
-                                            bubble.note = item.note
-                                            try? PersistenceController.shared.viewContext.save()
-                                            dismiss()
-                                        }
-                                }
-                                .onDelete { viewModel.delete(filteredItems[$0.first!]) }
-                                .listRowSeparator(.hidden)
-                                .listRowBackground(Color("deleteActionViewBackground"))
-                            }
-                            .listStyle(.plain)
-                            .environment(\.defaultMinListRowHeight, 8)
-                        }
-                        .background  { backgroundView }
-                        .clipShape(RoundedRectangle(cornerRadius: cornerRadius))
-                    }
-            }
-            .ignoresSafeArea(.container, edges: .top)
-            .padding(.top, 2)
-            .onAppear {
-                delayExecution(.now() + 0.05) {
-                    withAnimation (.easeInOut(duration: 0.0)) { keyboardVisible = true }
+        ZStack {
+            Color.white.opacity(0.001)
+                .onTapGesture {
+                    saveTextInput()
+                    dismiss()
                 }
+            darkRoundedBackground
+                .overlay {
+                    VStack {
+                        topSpacer //pushes textfield down a little
+                        textField
+                            .padding(.leading)
+                            .gesture(
+                                DragGesture(minimumDistance: 15, coordinateSpace: .global)
+                                    .onChanged {
+                                        if $0.translation.width < -20 { textFieldString = "" }
+                                    }
+                                    .onEnded { _ in
+                                        if textFieldString.isEmpty { UserFeedback.doubleHaptic(.rigid)
+                                        }
+                                    }
+                            )
+                            .overlay {
+                                plusButton
+                                .onTapGesture {
+                                    if textFieldString.count > 0 {
+                                        saveTextInput()
+                                        dismiss()
+                                    }
+                                }
+                                .onLongPressGesture {
+                                    textFieldString = ""
+                                    UserFeedback.doubleHaptic(.rigid)
+                                }
+                            }
+                            .onSubmit {
+                                saveTextInput()
+                                dismiss()
+                            }
+                        List {
+                            ForEach (filteredItems) { item in
+                                Text("\(item.note ?? "No Note")")
+                                    .font(.system(size: 25))
+                                    .foregroundColor(.white)
+                                    .padding([.leading, .trailing], 4)
+                                    .background( Rectangle().fill(item.note == bubble.note ? Color.black : .clear))
+                                    .padding(.leading)
+                                    .onTapGesture {
+                                        UserFeedback.singleHaptic(.heavy)
+                                        bubble.note = item.note
+                                        try? PersistenceController.shared.viewContext.save()
+                                        dismiss()
+                                    }
+                            }
+                            .onDelete { viewModel.delete(filteredItems[$0.first!]) }
+                            .listRowSeparator(.hidden)
+                            .listRowBackground(Color("deleteActionViewBackground"))
+                        }
+                        .listStyle(.plain)
+                        .environment(\.defaultMinListRowHeight, 8)
+                    }
+                    .background  { backgroundView }
+                    .clipShape(RoundedRectangle(cornerRadius: cornerRadius))
+                }
+        }
+        .ignoresSafeArea(.container, edges: .top)
+        .padding(.top, 2)
+        .onAppear {
+            delayExecution(.now() + 0.05) {
+                withAnimation (.easeInOut(duration: 0.0)) { keyboardVisible = true }
             }
         }
     }
@@ -190,6 +193,6 @@ struct BubbleStickyNoteList: View {
 
 struct BubbleNoteView_Previews: PreviewProvider {
     static var previews: some View {
-        BubbleStickyNoteList(.constant(65), ViewModel())
+        BubbleStickyNotesList(.constant(65), ViewModel())
     }
 }
