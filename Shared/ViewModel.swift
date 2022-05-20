@@ -198,17 +198,14 @@ class ViewModel: ObservableObject {
                 
                 bubble.lastSession?.computeDuration()
                 
-                //create calendar event
-                //if there are sessions and is calendar enabled, create an event
-                if !bubble.sessions_.isEmpty && bubble.hasCalendar {
-                    CalendarManager.shared.createNewEvent(for: bubble.lastSession)
-                }
-                
-                try? PersistenceController.shared.viewContext.save()
+                createCalendarEventAndSaveToCoreData(for: bubble)
             }
             
         }
-        
+        else { createCalendarEventAndSaveToCoreData(for: bubble) }
+    }
+    
+    private func createCalendarEventAndSaveToCoreData(for bubble:Bubble) {
         if !bubble.sessions_.isEmpty && bubble.hasCalendar {
             CalendarManager.shared.createNewEvent(for: bubble.lastSession)
         }
