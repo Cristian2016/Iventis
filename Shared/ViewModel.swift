@@ -198,7 +198,7 @@ class ViewModel: ObservableObject {
                 
                 bubble.lastSession?.computeDuration()
                 
-                createCalendarEventAndSaveToCoreData(for: bubble)
+                self.createCalendarEventAndSaveToCoreData(for: bubble)
             }
             
         }
