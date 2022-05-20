@@ -4,6 +4,7 @@
 //
 //  Created by Cristian Lapusan on 16.05.2022.
 //  searchable modifier https://www.youtube.com/watch?v=5soAxQCF29o
+///⚠️⚠️⚠️ do not use didSet or willSet on @State properties, because they don't work! use .onChange(of:perform:) instead!
 
 import SwiftUI
 
@@ -23,7 +24,7 @@ struct BubbleStickyNotesList: View {
     private let textInputLimit = 9
     
     let initialNote:String
-    @State private var textFieldString = ""
+    @State private var textFieldString = "" //willSet didSet does not work anymore
     @FocusState var keyboardVisible:Bool
     
     @Binding var addBubbleNotesView_BubbleRank:Int?
