@@ -124,8 +124,7 @@ struct BubbleCell: View {
         ZStack {
             //HOURS
             Push(.leading) {
-                Text(bubble.bubbleCell_Components.hr)
-                    .textify()
+                Text(bubble.bubbleCell_Components.hr).textify()
                 //background
                     .background { circleBackground }
                     .opacity(hrOpacity)
@@ -148,8 +147,7 @@ struct BubbleCell: View {
             .zIndex(1) //make sure hours text is fully visible by being on top of all the other views
                        //MINUTES
             Push(.middle) {
-                Text(bubble.bubbleCell_Components.min)
-                    .textify()
+                Text(bubble.bubbleCell_Components.min).textify()
                 //background
                     .background { circleBackground }
                     .opacity(minOpacity)
@@ -167,8 +165,7 @@ struct BubbleCell: View {
             .offset(x: editMode?.wrappedValue == .active ? -35 : 0, y: 0)
             //SECONDS
             Push(.trailing) {
-                Text(bubble.bubbleCell_Components.sec)
-                    .textify()
+                Text(bubble.bubbleCell_Components.sec).textify()
                 //background
                     .background { circleBackground }
                 //animations secondsTapped
