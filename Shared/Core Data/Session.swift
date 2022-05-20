@@ -30,7 +30,7 @@ public class Session: NSManagedObject {
                 self.totalDurationAsStrings = data
                 
                 //save all
-                PersistenceController.shared.save()
+//                PersistenceController.shared.save()
             }
         }
     }

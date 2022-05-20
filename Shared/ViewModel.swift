@@ -108,11 +108,11 @@ class ViewModel: ObservableObject {
                     currentPair?.duration = $0 //Float
                     currentPair?.durationAsStrings = $1 //Data
                     
-                    bubble.lastSession?.computeDuration()
-                    
                     //compute and store currentClock
                     bubble.currentClock += currentPair!.duration
                     bubble.bubbleCell_Components = bubble.currentClock.timeComponentsAsStrings
+                    
+                    bubble.lastSession?.computeDuration()
                 }
                 
             case .finished: return
@@ -175,32 +175,45 @@ class ViewModel: ObservableObject {
         
         bubble.continueToUpdateSmallBubbleCell = false
         
+        //reset bubble clock
         bubble.currentClock = bubble.initialClock
         bubble.bubbleCell_Components = bubble.initialClock.timeComponentsAsStrings
         
-        if bubble.lastPair!.pause == nil { bubble.lastPair!.pause = Date() }
+        bubble.lastSession?.isEnded = true
+        bubble.bubbleCell_Components = bubble.initialClock.timeComponentsAsStrings
         
-        //compute first lastPair duration
-        bubble.lastPair?.computeDuration(.endSession) { (duration, data) in
-            //UIThread 🟢
-            //⚠️ all further code should be included here ⚠️
-            bubble.lastSession?.isEnded = true
+        let bubbleWasStillRunningWhenSessionWasEnded = bubble.lastPair!.pause == nil
+        
+        if bubbleWasStillRunningWhenSessionWasEnded {
+            bubble.lastPair!.pause = Date()
             
-            bubble.lastPair?.duration = duration
-            bubble.lastPair?.durationAsStrings = data
-            
-            bubble.lastSession?.computeDuration()
-            
-            bubble.bubbleCell_Components = bubble.initialClock.timeComponentsAsStrings
-            
-            //create calendar event
-            //if there are sessions and is calendar enabled, create an event
-            if !bubble.sessions_.isEmpty && bubble.hasCalendar {
-                CalendarManager.shared.createNewEvent(for: bubble.lastSession)
+            //compute first lastPair duration
+            bubble.lastPair?.computeDuration(.endSession) { (duration, data) in
+                //UIThread 🟢
+                //⚠️ all further code should be included here ⚠️
+                
+                //store pair and session durations
+                bubble.lastPair?.duration = duration
+                bubble.lastPair?.durationAsStrings = data
+                
+                bubble.lastSession?.computeDuration()
+                
+                //create calendar event
+                //if there are sessions and is calendar enabled, create an event
+                if !bubble.sessions_.isEmpty && bubble.hasCalendar {
+                    CalendarManager.shared.createNewEvent(for: bubble.lastSession)
+                }
+                
+                try? PersistenceController.shared.viewContext.save()
             }
             
-            try? PersistenceController.shared.viewContext.save()
         }
+        
+        if !bubble.sessions_.isEmpty && bubble.hasCalendar {
+            CalendarManager.shared.createNewEvent(for: bubble.lastSession)
+        }
+        
+        try? PersistenceController.shared.viewContext.save()
     }
     
     func userTogglesDetail(_ rank:Int?) {
