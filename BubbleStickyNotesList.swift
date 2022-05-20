@@ -43,10 +43,11 @@ struct BubbleStickyNotesList: View {
         self.initialNote = bubble.note_
         
         let sorts = [
-            NSSortDescriptor(key: "bubble", ascending: false),
+//            NSSortDescriptor(key: "bubble", ascending: false),
             NSSortDescriptor(key: "date", ascending: false)
         ]
-        _items = FetchRequest(entity: BubbleSavedNote.entity(), sortDescriptors: sorts, predicate: nil, animation: .default)
+        let predicate = NSPredicate(format: "bubble = %@", bubble)
+        _items = FetchRequest(entity: BubbleSavedNote.entity(), sortDescriptors: sorts, predicate: predicate, animation: .default)
     }
     
     // MARK: -

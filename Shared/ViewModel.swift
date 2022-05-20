@@ -260,8 +260,9 @@ class ViewModel: ObservableObject {
         let historyItem = BubbleSavedNote(context: context!)
         historyItem.date = Date()
         historyItem.note = note
-        bubble.addToHistory(historyItem)
+        historyItem.bubble = bubble
         //no need to save viewContext since it will be saved elsewhere
+        try? context?.save()
     }
     
     func delete(_ savedNote:BubbleSavedNote) {
