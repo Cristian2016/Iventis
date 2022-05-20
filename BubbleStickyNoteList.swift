@@ -79,16 +79,16 @@ struct BubbleStickyNoteList: View {
                                 )
                                 .overlay {
                                     plusButton
-                                    .onTapGesture {
-                                        if textFieldString.count > 0 {
-                                            saveTextInput()
-                                            dismiss()
+                                        .onTapGesture {
+                                            if textFieldString.count > 0 {
+                                                saveTextInput()
+                                                dismiss()
+                                            }
                                         }
-                                    }
-                                    .onLongPressGesture {
-                                        textFieldString = ""
-                                        UserFeedback.doubleHaptic(.rigid)
-                                    }
+                                        .onLongPressGesture {
+                                            textFieldString = ""
+                                            UserFeedback.doubleHaptic(.rigid)
+                                        }
                                 }
                                 .onSubmit {
                                     saveTextInput()
