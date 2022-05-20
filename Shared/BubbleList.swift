@@ -29,8 +29,7 @@ struct BubbleList: View {
     
     // MARK: -
     var body: some View {
-        print("compute bubble list body")
-        return ZStack {
+        ZStack {
             if isListEmpty { EmptyListView() }
             else {
                 ZStack {
@@ -81,7 +80,7 @@ struct BubbleList: View {
             //on top of everything show DetailView (TopDetailView and BottomDetailView
             if isFocusOn && !notesShowing { DetailView(detailView_bRank) }
             
-            if notesShowing { BubbleStickyNoteList($notesView_bRank).environmentObject(viewModel) }
+            if notesShowing { BubbleStickyNoteList($notesView_bRank, viewModel) }
             
             if deleteViewOffsetComputed && deleteViewShowing {
                 let bubble = viewModel.bubble(for: deleteView_bRank!)
