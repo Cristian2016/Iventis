@@ -69,7 +69,7 @@ struct BubbleStickyNote: View {
     private var background: some View {
         ZStack {
             RoundedRectangle(cornerRadius: cornerRadius)
-                .fill(Color.white)
+                .fill(Color.bubble(for: bubble.color!))
                 .scaleEffect(0.4)
             RoundedRectangle(cornerRadius: cornerRadius)
                 .fill(Color.clear)

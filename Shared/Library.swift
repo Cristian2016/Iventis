@@ -10,6 +10,7 @@ import UIKit
 #endif
 import SwiftUI
 
+///various constants and values
 struct Global {
     static let longPressLatency = Double(0.7) //seconds
 }
