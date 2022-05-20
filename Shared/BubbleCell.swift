@@ -47,13 +47,10 @@ struct BubbleCell: View {
     }
         
     //⚠️ this property determines how many bubbles on screen to fit
-    static var edge:CGFloat = {
+    static let circleDiameter:CGFloat = {
         print(UIScreen.main.bounds.height)
         return dic[UIScreen.size.height] ?? 140
     }()
-    
-    ///component padding
-    private let padding = CGFloat(0)
     
     private var minOpacity:Double {
         bubble.bubbleCell_Components.min > "0" || bubble.bubbleCell_Components.hr > "0" ? 1 : 0.001
@@ -261,7 +258,7 @@ struct BubbleCell: View {
     private var circleBackground: some View {
         Circle()
             .fill(Color.bubble(for: bubble.color ?? "cyan"))
-            .frame(width: BubbleCell.edge, height: BubbleCell.edge)
+            .frame(width: BubbleCell.circleDiameter, height: BubbleCell.circleDiameter)
     }
     
     // MARK:
@@ -300,7 +297,7 @@ extension BubbleCell {
             content
                 .font(.system(size: Ratio.bubbleToFontSize * UIScreen.size.width * 0.85))
                 .foregroundColor(.white)
-                .frame(width: BubbleCell.edge, height: BubbleCell.edge)
+                .frame(width: BubbleCell.circleDiameter, height: BubbleCell.circleDiameter)
         }
     }
 }
