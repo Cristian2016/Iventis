@@ -8,23 +8,23 @@
 import SwiftUI
 
 struct BubbleCell: View {
+    @Environment(\.editMode) var editMode //used to toggle move rows
+    
     // MARK: - Dependencies
     @StateObject var bubble:Bubble
     @EnvironmentObject private var viewModel:ViewModel
     
     // MARK: -
     //showing DeleteAction Detail or AddNotes Views
-    @Binding var deleteActionView_bRank:Int? //bubble.rank
-    @Binding var detailView_bRank:Int?
-    @Binding var bubbleNotesView_bRank:Int?
+    @Binding var deleteActionView_bRank:Int? //show delete action
+    @Binding var detailView_bRank:Int? //show detail view
+    @Binding var bubbleNotesView_bRank:Int? //show
+    
+    @Binding var predicate:NSPredicate? //detail view
     
     // MARK: -
     ////added to bubbleCell only if cellLow value is needed. ex: to know how to position DeleteActionView
     private var cellLowEmitterView:some View { Circle().fill(Color.clear) }
-    
-    @Binding var predicate:NSPredicate?
-    
-    @Environment(\.editMode) var editMode
     
     private let bubbleColor:Color
     
