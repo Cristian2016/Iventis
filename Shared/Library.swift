@@ -10,6 +10,10 @@ import UIKit
 #endif
 import SwiftUI
 
+struct Global {
+    static let longPressLatency = Double(0.7) //seconds
+}
+
 extension Color {
     static let label = Color("label")
     static let detailViewBackground = Color("detailViewBackground")
