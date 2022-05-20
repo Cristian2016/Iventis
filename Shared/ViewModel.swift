@@ -198,14 +198,15 @@ class ViewModel: ObservableObject {
                 
                 bubble.lastSession?.computeDuration()
                 
-                self.createCalendarEventAndSaveToCoreData(for: bubble)
+                self.createCalendarEventIfRequiredAndSaveToCoreData(for: bubble)
             }
             
         }
-        else { createCalendarEventAndSaveToCoreData(for: bubble) }
+        else { createCalendarEventIfRequiredAndSaveToCoreData(for: bubble) }
     }
     
-    private func createCalendarEventAndSaveToCoreData(for bubble:Bubble) {
+    ///createds calendar events only if that bubble has calendar, otherwise it only saves to coredata
+    private func createCalendarEventIfRequiredAndSaveToCoreData(for bubble:Bubble) {
         if !bubble.sessions_.isEmpty && bubble.hasCalendar {
             CalendarManager.shared.createNewEvent(for: bubble.lastSession)
         }
