@@ -236,12 +236,7 @@ struct BubbleCell: View {
             Spacer()
         }
     }
-    
-    private var noteSticker: some View {
-        Push(.topLeft) { NoteSticker() }
-            .offset(x: -4, y: -6)
-    }
-    
+        
     private var noteView:some View {
         VStack {
             HStack {
@@ -302,23 +297,11 @@ extension BubbleCell {
     }
 }
 
-//struct BubbleCell1_Previews: PreviewProvider {
-//    static var previews: some View {
-//        BubbleCell(PersistenceController.preview.)
-//    }
-//}
-
 // MARK: - Little Helpers
 extension BubbleCell {
-    private var calendarActionName:String {
-        bubble.hasCalendar ? "Cal OFF" : "Cal ON"
-    }
+    private var calendarActionName:String { bubble.hasCalendar ? "Cal OFF" : "Cal ON" }
     
-    private var calendarActionImageName:String {
-        bubble.hasCalendar ? "calendar" : "calendar"
-    }
+    private var calendarActionImageName:String { bubble.hasCalendar ? "calendar" : "calendar" }
     
-    private var calendarActionColor:Color {
-        bubble.hasCalendar ? Color.calendarOff : .calendar
-    }
+    private var calendarActionColor:Color { bubble.hasCalendar ? Color.calendarOff : .calendar }
 }
