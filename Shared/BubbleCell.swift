@@ -125,7 +125,7 @@ struct BubbleCell: View {
             //HOURS
             Push(.leading) {
                 Text(bubble.bubbleCell_Components.hr)
-                    .modifier(TextModifier())
+                    .textify()
                 //background
                     .background { circleBackground }
                     .opacity(hrOpacity)
@@ -149,7 +149,7 @@ struct BubbleCell: View {
                        //MINUTES
             Push(.middle) {
                 Text(bubble.bubbleCell_Components.min)
-                    .modifier(TextModifier())
+                    .textify()
                 //background
                     .background { circleBackground }
                     .opacity(minOpacity)
@@ -168,7 +168,7 @@ struct BubbleCell: View {
             //SECONDS
             Push(.trailing) {
                 Text(bubble.bubbleCell_Components.sec)
-                    .modifier(TextModifier())
+                    .textify()
                 //background
                     .background { circleBackground }
                 //animations secondsTapped
@@ -295,6 +295,10 @@ extension BubbleCell {
                 .frame(width: BubbleCell.circleDiameter, height: BubbleCell.circleDiameter)
         }
     }
+}
+
+extension View {
+    func textify() -> some View { self.modifier(BubbleCell.TextModifier()) }
 }
 
 // MARK: - Little Helpers
