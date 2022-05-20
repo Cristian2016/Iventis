@@ -187,7 +187,7 @@ class ViewModel: ObservableObject {
         if bubbleWasStillRunningWhenSessionWasEnded {
             bubble.lastPair!.pause = Date() //close last pair
             
-            //compute lastPair duration first
+            //compute lastPair duration first [on background thread 🔴]
             bubble.lastPair?.computeDuration(.endSession) { (computedDuration, data) in
                 //UIThread 🟢
                 
@@ -195,9 +195,9 @@ class ViewModel: ObservableObject {
                 bubble.lastPair?.duration = computedDuration
                 bubble.lastPair?.durationAsStrings = data
                 
-                bubble.lastSession?.computeDuration()
-                
-                self.createCalendarEventIfRequiredAndSaveToCoreData(for: bubble)
+                bubble.lastSession?.computeDuration {//completion called on UIThread 🟢
+                    self.createCalendarEventIfRequiredAndSaveToCoreData(for: bubble)
+                }
             }
             
         }
