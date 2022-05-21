@@ -82,9 +82,7 @@ struct BubbleStickyNotesList: View {
                                         }
                                     }
                             )
-                            .overlay {
-                                plusButton
-                            }
+                            .overlay { plusButton }
                             .onSubmit {
                                 saveTextInput()
                                 dismiss()
@@ -141,7 +139,6 @@ struct BubbleStickyNotesList: View {
         .onChange(of: self.textInput) {
             if $0.count > textInputLimit { textInput = String(textInput.prefix(textInputLimit)) }
         }
-        .onSubmit { saveTextInput() }
     }
     
     private var backgroundView :some View {
