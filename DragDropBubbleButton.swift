@@ -26,8 +26,8 @@ struct DragDropBubbleButton: View {
             Button { toggleEditMode() }
         label: {
             Label {
-                VStack {
-                    Text(editMode?.wrappedValue == .active ? "Drag Bubbles" : "")
+                VStack (alignment:.trailing) {
+                    Text(editMode?.wrappedValue == .active ? "Move Bubbles" : "")
                         .font(.system(size: 28))
                     if editMode?.wrappedValue == .active {
                         Text("Tap to Exit").foregroundColor(.gray)
