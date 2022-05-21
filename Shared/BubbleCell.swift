@@ -54,9 +54,10 @@ struct BubbleCell: View {
     private var hrOpacity:Double { bubble.bubbleCell_Components.hr > "0" ? 1 : 0.001 }
     
     // MARK: - Helpers
-    private func showNotesList () {
-        showAddNotes_bRank = Int(bubble.rank)
-    }
+    private var isEditModeOn:Bool { editMode?.wrappedValue == .active }
+    private var bubbleNotRunning:Bool { bubble.state != .running }
+    
+    private func showNotesList () { showAddNotes_bRank = Int(bubble.rank) }
     
     private var noNote:Bool { bubble.note_.isEmpty }
     
@@ -82,7 +83,8 @@ struct BubbleCell: View {
                         }
                     }
             }
-            if bubble.state != .running {
+            
+            if bubbleNotRunning {
                 centsView.onTapGesture {
                     UserFeedback.singleHaptic(.heavy)
                     viewModel.toggleStart(bubble)
@@ -92,7 +94,7 @@ struct BubbleCell: View {
             if bubble.hasCalendar && noNote { calendarView }
             if !noNote { noteView .onTapGesture { showNotesList() } }
         }
-        .scaleEffect(editMode?.wrappedValue == .active ? 0.9 : 1.0)
+        .scaleEffect(isEditModeOn ? 0.9 : 1.0)
         .swipeActions(edge: .leading, allowsFullSwipe: true) {
             
             //pin
