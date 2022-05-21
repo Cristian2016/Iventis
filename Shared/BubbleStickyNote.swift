@@ -17,15 +17,44 @@ struct BubbleStickyNote: View {
     private let textPadding = EdgeInsets(top: 4, leading: 6, bottom: 4, trailing: 8)
     
     @State private var noteDeleted = false
+    
     // MARK: - Drag to delete
     @State private var offsetX = CGFloat(0)
-    private let offsetDeleteTriggerLimit = CGFloat(140)
+    private let offsetDeleteTriggerLimit = CGFloat(160)
     private var triggerDeleteAction:Bool { offsetX > offsetDeleteTriggerLimit }
+    
+    var dragGesture : some Gesture {
+        DragGesture()
+            .onChanged { value in
+                withAnimation {
+                    if !triggerDeleteAction {
+                        offsetX = value.translation.width
+                    } else {
+                        if !noteDeleted {
+                            delayExecution(.now() + 2) {
+                                viewModel.deleteNote(for: bubble)
+                            }
+                            
+                            noteDeleted = true //block drag gesture.. any other better ideas??
+                            UserFeedback.singleHaptic(.light)
+                        }
+                    }
+                }
+            }
+            .onEnded { value in
+                withAnimation (.easeIn(duration: 1)) {
+                    if value.translation.width < offsetDeleteTriggerLimit {
+                        offsetX = 0
+                    }
+                }
+            }
+    }
     
     // MARK: -
     var body: some View {
         if !bubble.isFault {
             ZStack (alignment: .leading) {
+                underLabel
                 //stickyNote
                 HStack (spacing:0) {
                     calendarSymbol
@@ -34,31 +63,25 @@ struct BubbleStickyNote: View {
                 .foregroundColor(.label)
                 .background(background)
                 .cornerRadius(cornerRadius)
-                .shadow(color: .black.opacity(0.1), radius: 2, x: 2, y: 2)
+                .shadow(color:.black.opacity(0.1), radius: 2, x: 2, y: 2)
                 //offset controlled by the user via drag gesture
                 .offset(x: offsetX, y: 0)
+                .opacity(triggerDeleteAction ? 0 : 1)
                 //drag the view to delete
-                .gesture(
-                    DragGesture()
-                        .onChanged { value in
-                            withAnimation {
-                                if !triggerDeleteAction {
-                                    offsetX = value.translation.width
-                                } else {
-                                    if !noteDeleted {
-                                        viewModel.deleteNote(for: bubble)
-                                        noteDeleted = true //block drag gesture.. any other better ideas??
-                                        UserFeedback.singleHaptic(.light)
-                                    }
-                                }
-                            }
-                        }
-                        .onEnded { _ in
-                            withAnimation (.spring()) { offsetX = 0 }
-                        }
-                )
+                .gesture(dragGesture)
             }
         }
+    }
+    
+    private var underLabel: some View {
+        Rectangle()
+            .fill(noteDeleted ? Color.green : .red)
+            .frame(width: 124, height: 45)
+            .overlay {
+                Text(noteDeleted ? "Done" : "Delete")
+                    .foregroundColor(.white)
+                    .font(.system(size: 24).weight(.medium))
+            }
     }
     
     // MARK: - Lego
