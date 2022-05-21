@@ -19,6 +19,7 @@ struct BubbleCell: View {
     
     // MARK: -
     @Environment(\.editMode) var editMode //used to toggle move rows
+    var editModeOn:Bool { editMode?.wrappedValue == .active }
     
     // MARK: - Dependencies
     @StateObject var bubble:Bubble
@@ -61,7 +62,6 @@ struct BubbleCell: View {
     private var hrOpacity:Double { bubble.bubbleCell_Components.hr > "0" ? 1 : 0.001 }
     
     // MARK: - Helpers
-    private var isEditModeOn:Bool { editMode?.wrappedValue == .active }
     private var bubbleNotRunning:Bool { bubble.state != .running }
     
     private func showNotesList () { showAddNotes_bRank = Int(bubble.rank) }
@@ -131,40 +131,18 @@ struct BubbleCell: View {
         }
     }
     
-    // MARK: -
+    // MARK: - Legoes
     private var timeComponentsViews:some View {
         HStack (spacing: spacing) {
-            circle
-                .overlay { Text(bubble.bubbleCell_Components.hr) }
-                .opacity(hrOpacity)
-            //animations
-                .scaleEffect(isSecondsLongPressed ? 0.2 : 1.0)
-                .offset(x: isSecondsLongPressed ? 20 : 0.0, y: 0)
-                .animation(.secondsLongPressed.delay(0.2), value: isSecondsLongPressed)
-            //gestures
+            hoursView
                 .onTapGesture(count: 2) { print("edit duration") }
                 .onTapGesture { handleHoursTap() }
-            circle //MINUTES
-                .overlay { Text(bubble.bubbleCell_Components.min) }
-                .opacity(minOpacity)
-            //animations
-                .scaleEffect(isSecondsLongPressed ? 0.2 : 1.0)
-                .offset(x: isSecondsLongPressed ? 10 : 0.0, y: 0)
-                .animation(.secondsLongPressed.delay(0.1), value: isSecondsLongPressed)
-                .zIndex(-1)
-            //gestures
+            minutesView
                 .onTapGesture { withAnimation(.easeInOut(duration: 0.05)) {
                     editMode?.wrappedValue = .inactive
                     toggleDetailView()
                 } }
-            circle //SECONDS
-                .overlay { Text(bubble.bubbleCell_Components.sec) }
-            //animations secondsTapped
-                .scaleEffect(isSecondsTapped ? 0.6 : 1.0)
-                .animation(.secondsTapped, value: isSecondsTapped)
-            //animations seconds long pressed
-                .scaleEffect(isSecondsLongPressed ? 0.2 : 1.0)
-                .animation(.secondsLongPressed, value: isSecondsLongPressed)
+            secondsView
             //gestures
                 .onTapGesture {
                     isSecondsTapped = true
@@ -193,7 +171,38 @@ struct BubbleCell: View {
 //        .onDrag { NSItemProvider() }
     }
     
-    // MARK: - Legoes
+    var hoursView : some View {
+        circle
+            .overlay { Text(bubble.bubbleCell_Components.hr) }
+            .opacity(hrOpacity)
+        //animations
+            .scaleEffect(isSecondsLongPressed ? 0.2 : 1.0)
+            .offset(x: isSecondsLongPressed ? 20 : 0.0, y: 0)
+            .animation(.secondsLongPressed.delay(0.2), value: isSecondsLongPressed)
+    }
+    
+    var minutesView : some View {
+        circle //MINUTES
+            .overlay { Text(bubble.bubbleCell_Components.min) }
+            .opacity(minOpacity)
+        //animations
+            .scaleEffect(isSecondsLongPressed ? 0.2 : 1.0)
+            .offset(x: isSecondsLongPressed ? 10 : 0.0, y: 0)
+            .animation(.secondsLongPressed.delay(0.1), value: isSecondsLongPressed)
+            .zIndex(-1)
+    }
+    
+    var secondsView : some View {
+        circle //SECONDS
+            .overlay { Text(bubble.bubbleCell_Components.sec) }
+        //animations secondsTapped
+            .scaleEffect(isSecondsTapped ? 0.6 : 1.0)
+            .animation(.secondsTapped, value: isSecondsTapped)
+        //animations seconds long pressed
+            .scaleEffect(isSecondsLongPressed ? 0.2 : 1.0)
+            .animation(.secondsLongPressed, value: isSecondsLongPressed)
+    }
+    
     ////added to bubbleCell only if cellLow value is needed. ex: to know how to position DeleteActionView
     private var cellLowEmitterView: some View { Circle().fill(Color.clear) }
     
