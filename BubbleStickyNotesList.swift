@@ -14,17 +14,18 @@ struct BubbleStickyNotesList: View {
     @FetchRequest private var items:FetchedResults<BubbleSavedNote>
     
     private var filteredItems:[BubbleSavedNote] {
-        if textFieldString.isEmpty { return Array(items) }
+        if textInput.isEmpty { return Array(items) }
         let filtered = items.filter { history in
-            history.note!.lowercased().contains(textFieldString.lowercased())
+            history.note!.lowercased().contains(textInput.lowercased())
         }
         return Array(filtered)
     }
     
+    @State private var textInput = "" //willSet and didSet do not work anymore
     private let textInputLimit = 9
+    private let textFieldPlaceholder = "Add/Search Note"
     
     let initialNote:String
-    @State private var textFieldString = "" //willSet didSet does not work anymore
     @FocusState var keyboardVisible:Bool
     
     @Binding var addBubbleNotesView_BubbleRank:Int?
@@ -74,10 +75,10 @@ struct BubbleStickyNotesList: View {
                             .gesture(
                                 DragGesture(minimumDistance: 15, coordinateSpace: .global)
                                     .onChanged {
-                                        if $0.translation.width < -20 { textFieldString = "" }
+                                        if $0.translation.width < -20 { textInput = "" }
                                     }
                                     .onEnded { _ in
-                                        if textFieldString.isEmpty { UserFeedback.doubleHaptic(.rigid)
+                                        if textInput.isEmpty { UserFeedback.doubleHaptic(.rigid)
                                         }
                                     }
                             )
@@ -132,13 +133,13 @@ struct BubbleStickyNotesList: View {
     }
     
     private var textField: some View {
-        TextField("Add/Search Note", text: $textFieldString)
+        TextField(textFieldPlaceholder, text: $textInput)
         .font(.title2)
         .padding()
         .focused($keyboardVisible)
         .textInputAutocapitalization(.words)
-        .onChange(of: self.textFieldString) {
-            if $0.count > textInputLimit { textFieldString = String(textFieldString.prefix(textInputLimit)) }
+        .onChange(of: self.textInput) {
+            if $0.count > textInputLimit { textInput = String(textInput.prefix(textInputLimit)) }
         }
         .onSubmit { saveTextInput() }
     }
@@ -154,29 +155,29 @@ struct BubbleStickyNotesList: View {
     
     @ViewBuilder
     private var plusButton:some View {
-        if !textFieldString.isEmpty {
+        if !textInput.isEmpty {
             Image(systemName: "plus.app.fill")
                 .background(Circle().fill(Color.white).padding())
                 .font(.system(size: 72).weight(.light))
-                .foregroundColor(textFieldString.count > 0 ? .blue : .gray)
+                .foregroundColor(textInput.count > 0 ? .blue : .gray)
                 .overlay { remainingCharactersCounterView }
                 .offset(x: 74, y: 0)
             //gestures
                 .onTapGesture {
-                    if textFieldString.count > 0 {
+                    if textInput.count > 0 {
                         saveTextInput()
                         dismiss()
                     }
                 }
                 .onLongPressGesture {
-                    textFieldString = ""
+                    textInput = ""
                     UserFeedback.doubleHaptic(.rigid)
                 }
         }
     }
     
     private var remainingCharactersCounterView:some View {
-        Text("\(textInputLimit - textFieldString.count)")
+        Text("\(textInputLimit - textInput.count)")
             .font(.system(size: 18).weight(.bold))
             .foregroundColor(.white)
             .offset(x: 15, y: 15)
@@ -186,9 +187,9 @@ struct BubbleStickyNotesList: View {
     private func dismiss() { addBubbleNotesView_BubbleRank = nil }
     
     private func saveTextInput() {
-        if initialNote == textFieldString || textFieldString.isEmpty { return }
+        if initialNote == textInput || textInput.isEmpty { return }
         
-        viewModel.save(textFieldString, for: bubble)
+        viewModel.save(textInput, for: bubble)
         UserFeedback.singleHaptic(.heavy)
         
         PersistenceController.shared.save()
