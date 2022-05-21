@@ -97,7 +97,7 @@ struct BubbleCell: View {
                     viewModel.toggleStart(bubble)
                 }
             }
-            timeComponentsViews
+            hrMinSecStack
             if bubble.hasCalendar && noNote { calendarView }
             if !noNote { noteView .onTapGesture { showNotesList() } }
         }
@@ -132,7 +132,7 @@ struct BubbleCell: View {
     }
     
     // MARK: - Legoes
-    private var timeComponentsViews:some View {
+    private var hrMinSecStack:some View {
         HStack (spacing: spacing) {
             hoursView
                 .onTapGesture(count: 2) { print("edit duration") }
