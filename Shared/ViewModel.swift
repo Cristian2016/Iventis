@@ -255,6 +255,8 @@ class ViewModel: ObservableObject {
         bubble.note = note
         bubble.isNoteHidden = false
         
+        print("note is hidden \(bubble.isNoteHidden = false)")
+        
         //add new item to bubbleHistory
         let context = bubble.managedObjectContext
         let historyItem = BubbleSavedNote(context: context!)

@@ -98,6 +98,7 @@ struct BubbleStickyNotesList: View {
                                     .onTapGesture {
                                         UserFeedback.singleHaptic(.heavy)
                                         bubble.note = item.note
+                                        bubble.isNoteHidden = false
                                         try? PersistenceController.shared.viewContext.save()
                                         dismiss()
                                     }
