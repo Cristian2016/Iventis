@@ -58,7 +58,7 @@ struct BubbleStickyNote: View {
     var body: some View {
         if !bubble.isFault {
             ZStack (alignment: .leading) {
-                underLabel
+                deleteConfirmationLabel
                 //stickyNote
                 HStack (spacing:0) {
                     calendarSymbol
@@ -77,7 +77,7 @@ struct BubbleStickyNote: View {
         }
     }
     
-    private var underLabel: some View {
+    private var deleteConfirmationLabel: some View {
         Rectangle()
             .fill(noteDeleted ? Color.green : .red)
             .frame(width: 124, height: 40)
@@ -86,7 +86,8 @@ struct BubbleStickyNote: View {
                     .foregroundColor(.white)
                     .font(.system(size: 24).weight(.medium))
             }
-            .opacity(offsetX > 50 ? 1 : 0)
+            .opacity(offsetX > 60 ? 1 : 0)
+            .offset(y: 10)
     }
     
     // MARK: - Lego
