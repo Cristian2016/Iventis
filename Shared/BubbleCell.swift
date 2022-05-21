@@ -155,7 +155,6 @@ struct BubbleCell: View {
                     editMode?.wrappedValue = .inactive
                     toggleDetailView()
                 } }
-                .onDrag { NSItemProvider() }
             circle //SECONDS
                 .overlay { Text(bubble.bubbleCell_Components.sec) }
             //animations secondsTapped
@@ -189,6 +188,7 @@ struct BubbleCell: View {
         .frame(height: diameter)
         .font(.system(size: fontSize))
         .foregroundColor(.white)
+        .onDrag { NSItemProvider() }
     }
     
     // MARK: - Legoes
@@ -235,7 +235,7 @@ struct BubbleCell: View {
                 BubbleStickyNote()
                     .environmentObject(viewModel)
                     .environmentObject(bubble)
-                    .offset(x: -5, y: -7)
+                    .offset(x:0, y: -3)
                 Spacer()
             }
             Spacer()
