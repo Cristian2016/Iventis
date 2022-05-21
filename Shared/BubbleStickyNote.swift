@@ -31,10 +31,7 @@ struct BubbleStickyNote: View {
                         offsetX = value.translation.width
                     } else {
                         if !noteDeleted {
-                            delayExecution(.now() + 1.5) {
-                                viewModel.deleteNote(for: bubble)
-                            }
-                            
+                            deleteStickyWithDelay()
                             noteDeleted = true //block drag gesture.. any other better ideas??
                             UserFeedback.singleHaptic(.light)
                         }
@@ -50,12 +47,19 @@ struct BubbleStickyNote: View {
                     } else {
                         //user wants to delete sticky and goes all the way
                         //block drag gesture.. any other better ideas??
-                        viewModel.deleteNote(for: bubble)
+                        deleteStickyWithDelay()
                         noteDeleted = true
                         UserFeedback.singleHaptic(.light)
                     }
                 }
             }
+    }
+    
+    ///without delay the animation does not have time to take place
+    func deleteStickyWithDelay() {
+        delayExecution(.now() + 1.5) {
+            viewModel.deleteNote(for: bubble)
+        }
     }
     
     // MARK: -
