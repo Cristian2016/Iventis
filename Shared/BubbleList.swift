@@ -34,7 +34,7 @@ struct BubbleList: View {
             if isListEmpty { EmptyListView() }
             else {
                 ZStack {
-                    if !isFocusOn && !notesShowing { RearrangeButton() }
+                    if !isFocusOn && !notesShowing { DragDropBubbleButton() }
                     if isFocusOn { ExitFocusView($predicate, $showDetail_bRank).zIndex(1)}
                     
                     VStack {

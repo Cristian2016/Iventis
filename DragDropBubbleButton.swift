@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct RearrangeButton: View {
+struct DragDropBubbleButton: View {
     @Environment(\.editMode) var editMode
     
     let fontSize = CGFloat(40)
@@ -26,8 +26,13 @@ struct RearrangeButton: View {
             Button { toggleEditMode() }
         label: {
             Label {
-//                Text(editMode?.wrappedValue == .active ? "Cancel" : "Move")
-//                    .font(.title2)
+                VStack {
+                    Text(editMode?.wrappedValue == .active ? "Drag Bubbles" : "")
+                        .font(.system(size: 28))
+                    if editMode?.wrappedValue == .active {
+                        Text("Tap to Exit").foregroundColor(.gray)
+                    }
+                }
             } icon: {
                 Image(systemName: "arrow.up.arrow.down.circle")
                     .font(.system(size: fontSize).weight(.regular))
@@ -58,6 +63,6 @@ struct RearrangeButton: View {
 
 struct DragAndDropActionButton_Previews: PreviewProvider {
     static var previews: some View {
-        RearrangeButton()
+        DragDropBubbleButton()
     }
 }
