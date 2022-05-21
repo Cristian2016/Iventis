@@ -52,19 +52,26 @@ struct BubbleCell: View {
         bubble.bubbleCell_Components.min > "0" || bubble.bubbleCell_Components.hr > "0" ? 1 : 0.001
     }
     private var hrOpacity:Double { bubble.bubbleCell_Components.hr > "0" ? 1 : 0.001 }
+    
+    // MARK: - Helpers
+    private func showNotesList () {
+        showAddNotes_bRank = Int(bubble.rank)
+    }
+    
+    private var noNote:Bool { bubble.note_.isEmpty }
+    
+    func handleHoursTap() {
+        UserFeedback.singleHaptic(.light)
+        if bubble.note_.isEmpty { showNotesList() }
+        else {
+            bubble.isNoteHidden.toggle()
+            PersistenceController.shared.save()
+        }
+    }
         
     // MARK: -
     var body: some View {
         ZStack {
-            if !bubble.note_.isEmpty {
-                noteView
-                    .zIndex(10)
-                    .onTapGesture {
-                        //show AddNotesView again
-                        showAddNotes_bRank = Int(bubble.rank)
-                    }
-            }
-            
             let putTransparentGeometryReaderView = showDeleteActionView || showDetailView
             if putTransparentGeometryReaderView {
                 cellLowEmitterView
@@ -82,7 +89,8 @@ struct BubbleCell: View {
                 }
             }
             timeComponentsViews
-            if bubble.hasCalendar && bubble.note_.isEmpty { calendarView }
+            if bubble.hasCalendar && noNote { calendarView }
+            if !noNote { noteView .onTapGesture { showNotesList() } }
         }
         .scaleEffect(editMode?.wrappedValue == .active ? 0.9 : 1.0)
         .swipeActions(edge: .leading, allowsFullSwipe: true) {
@@ -130,14 +138,7 @@ struct BubbleCell: View {
                     .animation(.secondsLongPressed.delay(0.2), value: isSecondsLongPressed)
                 //gestures
                     .onTapGesture(count: 2) { print("edit duration") }
-                    .onTapGesture {
-                        if bubble.note_.isEmpty {
-                            showAddNotes_bRank = Int(bubble.rank)
-                        } else {
-                            bubble.isNoteHidden.toggle()
-                            PersistenceController.shared.save()
-                        }
-                    }
+                    .onTapGesture { handleHoursTap() }
             }
             .offset(x: editMode?.wrappedValue == .active ? -70 : 0, y: 0)
             .zIndex(1) //make sure hours text is fully visible by being on top of all the other views
