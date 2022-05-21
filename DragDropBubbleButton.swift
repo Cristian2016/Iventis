@@ -22,31 +22,24 @@ struct DragDropBubbleButton: View {
     
     @ViewBuilder
     private var button:some View {
-        HStack {
-            Button { toggleEditMode() }
-        label: {
-            Label {
-                VStack (alignment:.trailing) {
-                    Text(editMode?.wrappedValue == .active ? "Move Bubbles" : "")
-                        .font(.system(size: 28))
-                    if editMode?.wrappedValue == .active {
-                        Text("Tap to Exit").foregroundColor(.gray)
-                    }
+        Button { toggleEditMode() }
+    label: {
+        Label {
+            Text(editMode?.wrappedValue == .active ? "Exit Move" : "")
+                .font(.system(size: 28))
+        } icon: {
+            Image(systemName: "arrow.up.arrow.down.circle")
+                .font(.system(size: fontSize).weight(.regular))
+                .foregroundColor(editMode?.wrappedValue == .active ? .pink : .blue)
+                .padding(5)
+                .background {
+                    RoundedRectangle(cornerRadius: 12)
+                        .fill(Color.background1)
                 }
-            } icon: {
-                Image(systemName: "arrow.up.arrow.down.circle")
-                    .font(.system(size: fontSize).weight(.regular))
-                    .foregroundColor(editMode?.wrappedValue == .active ? .pink : .blue)
-                    .padding(5)
-                    .background {
-                        RoundedRectangle(cornerRadius: 12)
-                            .fill(Color.background1)
-                    }
-            }
         }
-        .tint(editMode?.wrappedValue == .active ? .pink : .blue)
-        .buttonStyle(.borderless)
-        }
+    }
+    .tint(editMode?.wrappedValue == .active ? .pink : .blue)
+    .buttonStyle(.borderless)
     }
     
     private func toggleEditMode() {
