@@ -8,6 +8,14 @@
 import SwiftUI
 
 struct BubbleCell: View {
+    let diameter = CGFloat(UIScreen.main.bounds.size.width / 2.7)
+    let fontRatio = CGFloat(0.4)
+    let spacingRatio = CGFloat(-0.28)
+    
+    var spacing:CGFloat { diameter * spacingRatio }
+    var fontSize:CGFloat { diameter *  fontRatio }
+    
+    // MARK: -
     @Environment(\.editMode) var editMode //used to toggle move rows
     
     // MARK: - Dependencies
@@ -23,9 +31,6 @@ struct BubbleCell: View {
     @Binding var showAddNotes_bRank:Int? //show
     
     // MARK: -
-    ////added to bubbleCell only if cellLow value is needed. ex: to know how to position DeleteActionView
-    private var cellLowEmitterView:some View { Circle().fill(Color.clear) }
-            
     private var isRunning:Bool { bubble.state == .running }
     @State private var isSecondsTapped = false
     @State private var isSecondsLongPressed = false
@@ -94,7 +99,6 @@ struct BubbleCell: View {
             if bubble.hasCalendar && noNote { calendarView }
             if !noNote { noteView .onTapGesture { showNotesList() } }
         }
-        .scaleEffect(isEditModeOn ? 0.9 : 1.0)
         .swipeActions(edge: .leading, allowsFullSwipe: true) {
             
             //pin
@@ -127,76 +131,70 @@ struct BubbleCell: View {
     
     // MARK: -
     private var timeComponentsViews:some View {
-        ZStack {
-            //HOURS
-            Push(.leading) {
-                Text(bubble.bubbleCell_Components.hr).textify()
-                //background
-                    .background { circleBackground }
-                    .opacity(hrOpacity)
-                //animations
-                    .scaleEffect(isSecondsLongPressed ? 0.2 : 1.0)
-                    .offset(x: isSecondsLongPressed ? 20 : 0.0, y: 0)
-                    .animation(.secondsLongPressed.delay(0.2), value: isSecondsLongPressed)
-                //gestures
-                    .onTapGesture(count: 2) { print("edit duration") }
-                    .onTapGesture { handleHoursTap() }
-            }
-            .offset(x: isEditModeOn ? -70 : 0, y: 0)
-            .zIndex(1) //make sure hours text is fully visible by being on top of all the other views
-                       //MINUTES
-            Push(.middle) {
-                Text(bubble.bubbleCell_Components.min).textify()
-                    .background { circleBackground }
-                    .opacity(minOpacity)
-                //animations
-                    .scaleEffect(isSecondsLongPressed ? 0.2 : 1.0)
-                    .offset(x: isSecondsLongPressed ? 10 : 0.0, y: 0)
-                    .animation(.secondsLongPressed.delay(0.1), value: isSecondsLongPressed)
-                //gestures
-                    .onTapGesture { withAnimation(.easeInOut(duration: 0.05)) {
-                        editMode?.wrappedValue = .inactive
-                        toggleDetailView()
-                    } }
-            }
-            .offset(x: isEditModeOn ? -35 : 0, y: 0)
-            //SECONDS
-            Push(.trailing) {
-                Text(bubble.bubbleCell_Components.sec).textify()
-                //background
-                    .background { circleBackground }
-                //animations secondsTapped
-                    .scaleEffect(isSecondsTapped ? 0.6 : 1.0)
-                    .animation(.secondsTapped, value: isSecondsTapped)
-                //animations seconds long pressed
-                    .scaleEffect(isSecondsLongPressed ? 0.2 : 1.0)
-                    .animation(.secondsLongPressed, value: isSecondsLongPressed)
-                //gestures
-                    .onTapGesture {
-                        isSecondsTapped = true
-                        delayExecution(.now() + 0.1) { isSecondsTapped = false }
-                        
-                        //feedback
-                        UserFeedback.singleHaptic(.heavy)
-                        
-                        //user intent model
-                        viewModel.toggleStart(bubble)
-                    }
-                    .onLongPressGesture {
-                        isSecondsLongPressed = true
-                        delayExecution(.now() + 0.25) { isSecondsLongPressed = false }
-                        
-                        //feedback
-                        UserFeedback.doubleHaptic(.heavy)
-                        
-                        //user intent model
-                        viewModel.endSession(bubble)
-                    }
-            }
+        HStack (spacing: spacing) {
+            circle
+                .overlay { Text(bubble.bubbleCell_Components.hr) }
+                .opacity(hrOpacity)
+            //animations
+                .scaleEffect(isSecondsLongPressed ? 0.2 : 1.0)
+                .offset(x: isSecondsLongPressed ? 20 : 0.0, y: 0)
+                .animation(.secondsLongPressed.delay(0.2), value: isSecondsLongPressed)
+            //gestures
+                .onTapGesture(count: 2) { print("edit duration") }
+                .onTapGesture { handleHoursTap() }
+            circle //MINUTES
+                .overlay { Text(bubble.bubbleCell_Components.min) }
+                .opacity(minOpacity)
+            //animations
+                .scaleEffect(isSecondsLongPressed ? 0.2 : 1.0)
+                .offset(x: isSecondsLongPressed ? 10 : 0.0, y: 0)
+                .animation(.secondsLongPressed.delay(0.1), value: isSecondsLongPressed)
+                .zIndex(-1)
+            //gestures
+                .onTapGesture { withAnimation(.easeInOut(duration: 0.05)) {
+                    editMode?.wrappedValue = .inactive
+                    toggleDetailView()
+                } }
+                .onDrag { NSItemProvider() }
+            circle //SECONDS
+                .overlay { Text(bubble.bubbleCell_Components.sec) }
+            //animations secondsTapped
+                .scaleEffect(isSecondsTapped ? 0.6 : 1.0)
+                .animation(.secondsTapped, value: isSecondsTapped)
+            //animations seconds long pressed
+                .scaleEffect(isSecondsLongPressed ? 0.2 : 1.0)
+                .animation(.secondsLongPressed, value: isSecondsLongPressed)
+            //gestures
+                .onTapGesture {
+                    isSecondsTapped = true
+                    delayExecution(.now() + 0.1) { isSecondsTapped = false }
+                    
+                    //feedback
+                    UserFeedback.singleHaptic(.heavy)
+                    
+                    //user intent model
+                    viewModel.toggleStart(bubble)
+                }
+                .onLongPressGesture {
+                    isSecondsLongPressed = true
+                    delayExecution(.now() + 0.25) { isSecondsLongPressed = false }
+                    
+                    //feedback
+                    UserFeedback.doubleHaptic(.heavy)
+                    
+                    //user intent model
+                    viewModel.endSession(bubble)
+                }
         }
+        .frame(height: diameter)
+        .font(.system(size: fontSize))
+        .foregroundColor(.white)
     }
     
     // MARK: - Legoes
+    ////added to bubbleCell only if cellLow value is needed. ex: to know how to position DeleteActionView
+    private var cellLowEmitterView: some View { Circle().fill(Color.clear) }
+    
     ///hundredths of a second that is :)
     private var centsView:some View {
         VStack {
@@ -244,10 +242,8 @@ struct BubbleCell: View {
         }
     }
     
-    private var circleBackground: some View {
-        Circle()
-            .fill(Color.bubble(for: bubble.color ?? "cyan"))
-            .frame(width: circleDiameter, height: circleDiameter)
+    private var circle: some View {
+        Circle().fill(Color.bubble(for: bubble.color ?? "cyan"))
     }
     
     // MARK: - Methods
@@ -279,17 +275,20 @@ struct BubbleCell: View {
 // MARK: - Modifiers
 extension BubbleCell {
     struct TextModifier : ViewModifier {
+        let fontSize:CGFloat
+        let diameter:CGFloat
+        
         func body(content: Content) -> some View {
             content
-                .font(.system(size: Ratio.bubbleToFontSize * UIScreen.size.width * 0.85))
+                .font(.system(size: fontSize))
                 .foregroundColor(.white)
-                .frame(width: Global.circleDiameter, height: Global.circleDiameter)
+                .frame(width: diameter, height: diameter)
         }
     }
 }
 
 extension View {
-    func textify() -> some View { self.modifier(BubbleCell.TextModifier()) }
+    func textify(fontSize:CGFloat, diameter:CGFloat) -> some View { self.modifier(BubbleCell.TextModifier(fontSize: fontSize, diameter: diameter)) }
 }
 
 // MARK: - Little Helpers
