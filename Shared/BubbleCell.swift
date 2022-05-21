@@ -135,15 +135,15 @@ struct BubbleCell: View {
     private var hrMinSecStack:some View {
         HStack (spacing: spacing) {
             hoursView
-                .onTapGesture(count: 2) { print("edit duration") }
                 .onTapGesture { handleHoursTap() }
+                .onLongPressGesture { print("edit duration") }
             minutesView
                 .onTapGesture { withAnimation(.easeInOut(duration: 0.05)) {
                     editMode?.wrappedValue = .inactive
                     toggleDetailView()
                 } }
+                .onLongPressGesture { print("edit duration") }
             secondsView
-            //gestures
                 .onTapGesture {
                     isSecondsTapped = true
                     delayExecution(.now() + 0.1) { isSecondsTapped = false }
