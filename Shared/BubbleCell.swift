@@ -142,12 +142,11 @@ struct BubbleCell: View {
                     .onTapGesture(count: 2) { print("edit duration") }
                     .onTapGesture { handleHoursTap() }
             }
-            .offset(x: editMode?.wrappedValue == .active ? -70 : 0, y: 0)
+            .offset(x: isEditModeOn ? -70 : 0, y: 0)
             .zIndex(1) //make sure hours text is fully visible by being on top of all the other views
                        //MINUTES
             Push(.middle) {
                 Text(bubble.bubbleCell_Components.min).textify()
-                //background
                     .background { circleBackground }
                     .opacity(minOpacity)
                 //animations
@@ -158,10 +157,9 @@ struct BubbleCell: View {
                     .onTapGesture { withAnimation(.easeInOut(duration: 0.05)) {
                         editMode?.wrappedValue = .inactive
                         toggleDetailView()
-                        //also viewModel.userTogglesDetail called within toggleDetailView()
                     } }
             }
-            .offset(x: editMode?.wrappedValue == .active ? -35 : 0, y: 0)
+            .offset(x: isEditModeOn ? -35 : 0, y: 0)
             //SECONDS
             Push(.trailing) {
                 Text(bubble.bubbleCell_Components.sec).textify()
