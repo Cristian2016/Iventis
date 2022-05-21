@@ -83,16 +83,6 @@ struct BubbleStickyNotesList: View {
                             )
                             .overlay {
                                 plusButton
-                                .onTapGesture {
-                                    if textFieldString.count > 0 {
-                                        saveTextInput()
-                                        dismiss()
-                                    }
-                                }
-                                .onLongPressGesture {
-                                    textFieldString = ""
-                                    UserFeedback.doubleHaptic(.rigid)
-                                }
                             }
                             .onSubmit {
                                 saveTextInput()
@@ -142,7 +132,7 @@ struct BubbleStickyNotesList: View {
     }
     
     private var textField: some View {
-        TextField("Add Note", text: $textFieldString)
+        TextField("Add/Search Note", text: $textFieldString)
         .font(.title2)
         .padding()
         .focused($keyboardVisible)
@@ -161,14 +151,28 @@ struct BubbleStickyNotesList: View {
     }
     
     private var topSpacer: some View { Spacer(minLength: 10) }
-        
+    
+    @ViewBuilder
     private var plusButton:some View {
-        Image(systemName: "plus.app.fill")
-            .background(Circle().fill(Color.white).padding())
-            .font(.system(size: 72).weight(.light))
-            .foregroundColor(textFieldString.count > 0 ? .blue : .gray)
-            .overlay { remainingCharactersCounterView }
-            .offset(x: 74, y: 0)
+        if !textFieldString.isEmpty {
+            Image(systemName: "plus.app.fill")
+                .background(Circle().fill(Color.white).padding())
+                .font(.system(size: 72).weight(.light))
+                .foregroundColor(textFieldString.count > 0 ? .blue : .gray)
+                .overlay { remainingCharactersCounterView }
+                .offset(x: 74, y: 0)
+            //gestures
+                .onTapGesture {
+                    if textFieldString.count > 0 {
+                        saveTextInput()
+                        dismiss()
+                    }
+                }
+                .onLongPressGesture {
+                    textFieldString = ""
+                    UserFeedback.doubleHaptic(.rigid)
+                }
+        }
     }
     
     private var remainingCharactersCounterView:some View {
