@@ -44,10 +44,14 @@ struct BubbleStickyNote: View {
             .onEnded { value in
                 withAnimation {
                     if value.translation.width < offsetDeleteTriggerLimit {
+                        //user lets go without deleting the sticky
+                        //so sticky snaps back to its initial position
                         offsetX = 0
                     } else {
+                        //user wants to delete sticky and goes all the way
+                        //block drag gesture.. any other better ideas??
                         viewModel.deleteNote(for: bubble)
-                        noteDeleted = true //block drag gesture.. any other better ideas??
+                        noteDeleted = true
                         UserFeedback.singleHaptic(.light)
                     }
                 }
