@@ -20,7 +20,7 @@ struct BubbleStickyNote: View {
     
     // MARK: - Drag to delete
     @State private var offsetX = CGFloat(0)
-    private let offsetDeleteTriggerLimit = CGFloat(160)
+    private let offsetDeleteTriggerLimit = CGFloat(180)
     private var triggerDeleteAction:Bool { offsetX >= offsetDeleteTriggerLimit }
     
     var dragGesture : some Gesture {
