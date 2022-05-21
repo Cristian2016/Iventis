@@ -21,7 +21,7 @@ struct BubbleStickyNote: View {
     // MARK: - Drag to delete
     @State private var offsetX = CGFloat(0)
     private let offsetDeleteTriggerLimit = CGFloat(160)
-    private var triggerDeleteAction:Bool { offsetX > offsetDeleteTriggerLimit }
+    private var triggerDeleteAction:Bool { offsetX >= offsetDeleteTriggerLimit }
     
     var dragGesture : some Gesture {
         DragGesture()
@@ -31,7 +31,7 @@ struct BubbleStickyNote: View {
                         offsetX = value.translation.width
                     } else {
                         if !noteDeleted {
-                            delayExecution(.now() + 2) {
+                            delayExecution(.now() + 1.3) {
                                 viewModel.deleteNote(for: bubble)
                             }
                             
@@ -42,9 +42,13 @@ struct BubbleStickyNote: View {
                 }
             }
             .onEnded { value in
-                withAnimation (.easeIn(duration: 1)) {
+                withAnimation {
                     if value.translation.width < offsetDeleteTriggerLimit {
                         offsetX = 0
+                    } else {
+                        viewModel.deleteNote(for: bubble)
+                        noteDeleted = true //block drag gesture.. any other better ideas??
+                        UserFeedback.singleHaptic(.light)
                     }
                 }
             }
@@ -76,12 +80,13 @@ struct BubbleStickyNote: View {
     private var underLabel: some View {
         Rectangle()
             .fill(noteDeleted ? Color.green : .red)
-            .frame(width: 124, height: 45)
+            .frame(width: 124, height: 40)
             .overlay {
                 Text(noteDeleted ? "Done" : "Delete")
                     .foregroundColor(.white)
                     .font(.system(size: 24).weight(.medium))
             }
+            .opacity(offsetX > 50 ? 1 : 0)
     }
     
     // MARK: - Lego
