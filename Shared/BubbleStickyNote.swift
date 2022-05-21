@@ -14,7 +14,7 @@ struct BubbleStickyNote: View {
     private let stickyHeight = CGFloat(40)
     private let font = Font.system(size: 24)
     private let cornerRadius = CGFloat(2)
-    private let textPadding = EdgeInsets(top: 4, leading: 8, bottom: 4, trailing: 6)
+    private let textPadding = EdgeInsets(top: 4, leading: 6, bottom: 4, trailing: 8)
     
     @State private var noteDeleted = false
     // MARK: - Drag to delete

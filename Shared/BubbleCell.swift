@@ -188,7 +188,7 @@ struct BubbleCell: View {
         .frame(height: diameter)
         .font(.system(size: fontSize))
         .foregroundColor(.white)
-        .onDrag { NSItemProvider() }
+//        .onDrag { NSItemProvider() }
     }
     
     // MARK: - Legoes
@@ -235,7 +235,7 @@ struct BubbleCell: View {
                 BubbleStickyNote()
                     .environmentObject(viewModel)
                     .environmentObject(bubble)
-                    .offset(x:0, y: -3)
+                    .offset(x: -6, y: -3)
                 Spacer()
             }
             Spacer()
