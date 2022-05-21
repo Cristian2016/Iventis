@@ -31,7 +31,7 @@ struct BubbleStickyNote: View {
                         offsetX = value.translation.width
                     } else {
                         if !noteDeleted {
-                            delayExecution(.now() + 1.3) {
+                            delayExecution(.now() + 1.5) {
                                 viewModel.deleteNote(for: bubble)
                             }
                             
