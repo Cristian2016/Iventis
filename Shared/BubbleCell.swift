@@ -99,7 +99,10 @@ struct BubbleCell: View {
             }
             hrMinSecStack
             if bubble.hasCalendar && noNote { calendarView }
-            if !noNote { noteView .onTapGesture { showNotesList() } }
+            if !noNote { noteView .onTapGesture {
+                UserFeedback.singleHaptic(.light)
+                showNotesList()
+            } }
         }
         .swipeActions(edge: .leading, allowsFullSwipe: true) {
             
