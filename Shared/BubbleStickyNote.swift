@@ -56,6 +56,7 @@ struct BubbleStickyNote: View {
     }
     
     ///without delay the animation does not have time to take place
+    //⚠️ not the best idea though...
     func deleteStickyWithDelay() {
         delayExecution(.now() + 1.5) {
             viewModel.deleteNote(for: bubble)
