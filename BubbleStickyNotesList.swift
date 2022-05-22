@@ -90,7 +90,7 @@ struct BubbleStickyNotesList: View {
                             List {
                                 //⚠️ this little shit prevents app from crashing
                                 //when textInput is dragged around on screen
-                                if filteredItems.isEmpty { Spacer(minLength: 0) }
+                                if filteredItems.isEmpty { emptyListAlert }
                                 
                                 ForEach (filteredItems) { item in
                                     Text("\(item.note ?? "No Note")")
@@ -131,6 +131,19 @@ struct BubbleStickyNotesList: View {
     }
     
     // MARK: - Lego
+    private var emptyListAlert: some View {
+        VStack (alignment: .leading) {
+            Text("Empty List")
+                .font(.system(size: 30))
+            Text("No Matches Found")
+                .font(.system(size: 26))
+                .background(Color.red)
+        }
+        .foregroundColor(.white)
+        .background(Color("deleteActionViewBackground").padding(-100))
+        .offset(y: 50)
+    }
+    
     private var darkRoundedBackground: some View {
         RoundedRectangle(cornerRadius: cornerRadius)
             .frame(width: size.width, height: size.height)
