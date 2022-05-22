@@ -15,7 +15,7 @@ struct BubbleCell: View {
     var spacing:CGFloat { diameter * spacingRatio }
     var fontSize:CGFloat { diameter *  fontRatio }
     
-    let stickyNoteOffset = CGSize(width: -6, height: -3)
+    let stickyNoteOffset = CGSize(width: -4, height: -3)
     
     // MARK: -
     @Environment(\.editMode) var editMode //used to toggle move rows
