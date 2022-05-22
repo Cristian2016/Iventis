@@ -70,24 +70,26 @@ struct BubbleStickyNotesList: View {
                 .overlay {
                     VStack {
                         topSpacer //pushes textfield down a little
-                        textField
-                            .padding(.leading)
-                            .gesture(
-                                DragGesture(minimumDistance: 15, coordinateSpace: .global)
-                                    .onChanged {
-                                        if $0.translation.width < -20 { textInput = "" }
-                                    }
-                                    .onEnded { _ in
-                                        if textInput.isEmpty { UserFeedback.doubleHaptic(.rigid)
+                            
+                            textField
+                                .padding(.leading)
+                                .gesture(
+                                    DragGesture(minimumDistance: 15, coordinateSpace: .global)
+                                        .onChanged {
+                                            if $0.translation.width < -20 { textInput = "" }
                                         }
-                                    }
-                            )
-                            .overlay { plusButton }
-                            .onSubmit {
-                                saveTextInput()
-                                dismiss()
-                            }
+                                        .onEnded { _ in
+                                            if textInput.isEmpty { UserFeedback.doubleHaptic(.rigid)
+                                            }
+                                        }
+                                )
+                                .overlay { plusButton }
+                                .onSubmit {
+                                    saveTextInput()
+                                    dismiss()
+                                }
                         List {
+                            Rectangle().fill(Color.clear).frame(height: 0)
                             ForEach (filteredItems) { item in
                                 Text("\(item.note ?? "No Note")")
                                     .font(.system(size: 25))
@@ -131,8 +133,19 @@ struct BubbleStickyNotesList: View {
             .standardShadow(false)
     }
     
+    ///I use this because I couldn't find a way to center text placeholder on Text Field
+    private var placeholder: some View {
+            Text(textFieldPlaceholder)
+            .font(.title2)
+            .foregroundColor(.lightGray)
+    }
+    
     private var textField: some View {
-        TextField(textFieldPlaceholder, text: $textInput)
+        ZStack {
+            if textInput.isEmpty { placeholder }
+            TextField("", text: $textInput)
+        }
+        
         .font(.title2)
         .padding()
         .focused($keyboardVisible)
