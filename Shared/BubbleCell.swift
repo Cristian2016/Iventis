@@ -104,13 +104,11 @@ struct BubbleCell: View {
             }
             hrMinSecStack
             if bubble.hasCalendar && noNote { calendarView }
-            ZStack(alignment: .topLeading) {
-                Rectangle().frame(width: 124, height: 44)
-                if !noNote {
-                    bubbleStickyNote.onTapGesture { handleStickyNoteTap() }
-                }
+            if !noNote {
+                bubbleStickyNote
+                    .offset(stickyNoteOffset)
+                    .onTapGesture { handleStickyNoteTap() }
             }
-            .offset(stickyNoteOffset)
         }
         .swipeActions(edge: .leading, allowsFullSwipe: true) {
             

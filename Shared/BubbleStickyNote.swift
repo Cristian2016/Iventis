@@ -89,14 +89,14 @@ struct BubbleStickyNote: View {
     private var deleteConfirmationLabel: some View {
         Rectangle()
             .fill(noteDeleted ? Color.green : .red)
-            .frame(width: 124, height: 40)
+            .frame(width: 124, height: 44)
             .overlay {
                 Text(noteDeleted ? "Done" : "Delete")
                     .foregroundColor(.white)
                     .font(.system(size: 24).weight(.medium))
             }
             .opacity(offsetX > 60 ? 1 : 0)
-            .offset(y: 10)
+            .offset(x: 0, y: 5)
     }
     
     // MARK: - Lego
