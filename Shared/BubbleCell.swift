@@ -99,7 +99,7 @@ struct BubbleCell: View {
             }
             hrMinSecStack
             if bubble.hasCalendar && noNote { calendarView }
-            if !noNote { noteView .onTapGesture {
+            if !noNote { noteView.onTapGesture {
                 UserFeedback.singleHaptic(.light)
                 showNotesList()
             } }
@@ -244,15 +244,11 @@ struct BubbleCell: View {
     }
         
     private var noteView:some View {
-        VStack {
-            HStack {
-                BubbleStickyNote()
-                    .environmentObject(viewModel)
-                    .environmentObject(bubble)
-                    .offset(stickyNoteOffset)
-                Spacer()
-            }
-            Spacer()
+        Push(.topLeft) {
+            BubbleStickyNote()
+                .environmentObject(viewModel)
+                .environmentObject(bubble)
+                .offset(stickyNoteOffset)
         }
     }
     
