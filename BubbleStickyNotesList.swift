@@ -132,12 +132,16 @@ struct BubbleStickyNotesList: View {
     
     // MARK: - Lego
     private var emptyListAlert: some View {
-        VStack (alignment: .leading) {
-            Text("Empty List")
-                .font(.system(size: 30))
-            Text("No Matches Found")
-                .font(.system(size: 26))
-                .background(Color.red)
+        HStack {
+            Spacer()
+            VStack (alignment: .leading) {
+                Text("Empty List")
+                    .font(.system(size: 30))
+                Text("No Matches")
+                    .font(.system(size: 26))
+                    .background(Color.red)
+            }
+            Spacer()
         }
         .foregroundColor(.white)
         .background(Color("deleteActionViewBackground").padding(-100))
