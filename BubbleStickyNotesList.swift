@@ -88,6 +88,8 @@ struct BubbleStickyNotesList: View {
                                     dismiss()
                                 }
                             List {
+                                //⚠️ this little shit prevents app from crashing
+                                //when textInput is dragged around on screen
                                 if filteredItems.isEmpty { Spacer(minLength: 0) }
                                 
                                 ForEach (filteredItems) { item in
