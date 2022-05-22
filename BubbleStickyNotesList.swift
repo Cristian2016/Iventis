@@ -69,27 +69,26 @@ struct BubbleStickyNotesList: View {
             darkRoundedBackground
                 .overlay {
                     VStack {
-                        topSpacer //pushes textfield down a little
-                            
-                            textField
-                                .padding(.leading)
-                                .gesture(
-                                    DragGesture(minimumDistance: 15, coordinateSpace: .global)
-                                        .onChanged {
-                                            if $0.translation.width < -20 { textInput = "" }
+                        Spacer(minLength: 10)
+                        textField
+                            .padding(.leading)
+                            .gesture(
+                                DragGesture(minimumDistance: 15, coordinateSpace: .global)
+                                    .onChanged {
+                                        if $0.translation.width < -20 { textInput = "" }
+                                    }
+                                    .onEnded { _ in
+                                        if textInput.isEmpty { UserFeedback.doubleHaptic(.rigid)
                                         }
-                                        .onEnded { _ in
-                                            if textInput.isEmpty { UserFeedback.doubleHaptic(.rigid)
-                                            }
-                                        }
-                                )
-                                .overlay { plusButton }
-                                .onSubmit {
-                                    saveTextInput()
-                                    dismiss()
-                                }
+                                    }
+                            )
+                            .onSubmit {
+                                saveTextInput()
+                                dismiss()
+                            }
                         List {
-                            Rectangle().fill(Color.clear).frame(height: 0)
+                            if filteredItems.isEmpty { Spacer(minLength: 0) }
+                            
                             ForEach (filteredItems) { item in
                                 Text("\(item.note ?? "No Note")")
                                     .font(.system(size: 25))
@@ -106,8 +105,8 @@ struct BubbleStickyNotesList: View {
                                     }
                             }
                             .onDelete { viewModel.delete(filteredItems[$0.first!]) }
-                            .listRowSeparator(.hidden)
                             .listRowBackground(Color("deleteActionViewBackground"))
+                            .listRowSeparator(.hidden)
                         }
                         .listStyle(.plain)
                         .environment(\.defaultMinListRowHeight, 8)
@@ -161,8 +160,6 @@ struct BubbleStickyNotesList: View {
             Color("deleteActionViewBackground")
         }
     }
-    
-    private var topSpacer: some View { Spacer(minLength: 10) }
     
     @ViewBuilder
     private var plusButton:some View {
