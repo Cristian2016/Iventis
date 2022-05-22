@@ -15,7 +15,7 @@ struct BubbleCell: View {
     var spacing:CGFloat { diameter * spacingRatio }
     var fontSize:CGFloat { diameter *  fontRatio }
     
-    let stickyNoteOffset = CGSize(width: -4, height: -3)
+    let stickyNoteOffset = CGSize(width: 0, height: -6)
     
     // MARK: -
     @Environment(\.editMode) var editMode //used to toggle move rows
@@ -76,6 +76,11 @@ struct BubbleCell: View {
             PersistenceController.shared.save()
         }
     }
+    
+    func handleStickyNoteTap() {
+        UserFeedback.singleHaptic(.light)
+        showNotesList()
+    }
         
     // MARK: -
     var body: some View {
@@ -99,10 +104,13 @@ struct BubbleCell: View {
             }
             hrMinSecStack
             if bubble.hasCalendar && noNote { calendarView }
-            if !noNote { noteView.onTapGesture {
-                UserFeedback.singleHaptic(.light)
-                showNotesList()
-            } }
+            ZStack(alignment: .topLeading) {
+                Rectangle().frame(width: 124, height: 44)
+                if !noNote {
+                    bubbleStickyNote.onTapGesture { handleStickyNoteTap() }
+                }
+            }
+            .offset(stickyNoteOffset)
         }
         .swipeActions(edge: .leading, allowsFullSwipe: true) {
             
@@ -243,12 +251,11 @@ struct BubbleCell: View {
         }
     }
         
-    private var noteView:some View {
+    private var bubbleStickyNote:some View {
         Push(.topLeft) {
             BubbleStickyNote()
                 .environmentObject(viewModel)
                 .environmentObject(bubble)
-                .offset(stickyNoteOffset)
         }
     }
     

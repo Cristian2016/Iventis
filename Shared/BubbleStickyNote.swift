@@ -11,7 +11,7 @@ struct BubbleStickyNote: View {
     @EnvironmentObject var bubble:Bubble
     @EnvironmentObject var viewModel:ViewModel
             
-    private let stickyHeight = CGFloat(40)
+    private let stickyHeight = CGFloat(44)
     private let font = Font.system(size: 24)
     private let cornerRadius = CGFloat(2)
     private let textPadding = EdgeInsets(top: 4, leading: 6, bottom: 4, trailing: 8)
