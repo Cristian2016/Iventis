@@ -272,7 +272,7 @@ class ViewModel: ObservableObject {
     }
     
     func deleteNote(for bubble:Bubble) {
-        bubble.note = ""
+        bubble.note = nil
         PersistenceController.shared.save()
     }
     
