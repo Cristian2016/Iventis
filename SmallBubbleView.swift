@@ -26,12 +26,12 @@ struct SmallBubbleView: View {
                 }
                 
                 if bubble.smallBubbleView_Components.hr != "0" || bubble.smallBubbleView_Components.min != "0" {
-                HStack {
-                    Spacer()
-                    Circle()
-                        .frame(width: edge, height: edge)
-                    Spacer()
-                }
+                    HStack {
+                        Spacer()
+                        Circle()
+                            .frame(width: edge, height: edge)
+                        Spacer()
+                    }
                 }
                 
                 if bubble.smallBubbleView_Components.hr != "0" {
@@ -44,7 +44,7 @@ struct SmallBubbleView: View {
             }
             .compositingGroup()
             .standardShadow(false)
-        
+            
             //time components
             //hours
             if bubble.smallBubbleView_Components.hr != "0" {
