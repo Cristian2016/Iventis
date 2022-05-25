@@ -34,7 +34,7 @@ struct BubbleList: View {
             if isListEmpty { EmptyListView() }
             else {
                 ZStack {
-                    if isFocusOn { ExitFocusView($predicate, $showDetail_bRank).zIndex(1)}
+                    if focusOn { ExitFocusView($predicate, $showDetail_bRank).zIndex(1)}
                     
                     VStack {
                         List {
@@ -71,7 +71,7 @@ struct BubbleList: View {
                     }
                     .ignoresSafeArea(edges:.bottom)
                     
-                    if !isFocusOn && !notesShowing { UpDownArrows() }
+                    if !focusOn && !notesShowing { UpDownArrows() }
                 }
             }
             if !notesShowing {
@@ -80,7 +80,7 @@ struct BubbleList: View {
             }
             
             //on top of everything show DetailView (TopDetailView and BottomDetailView
-            if isFocusOn && !notesShowing { DetailView(showDetail_bRank) }
+            if focusOn && !notesShowing { DetailView(showDetail_bRank) }
             
             if notesShowing { BubbleStickyNotesList($showAddNotes_bRank, viewModel) }
             
@@ -210,7 +210,7 @@ struct BubbleCellLow_Key:PreferenceKey {
 extension BubbleList {
     fileprivate var notesShowing:Bool { showAddNotes_bRank != nil }
     
-    fileprivate var isFocusOn:Bool { predicate != nil }
+    fileprivate var focusOn:Bool { predicate != nil }
     
     fileprivate var isListEmpty:Bool { results.isEmpty }
     
