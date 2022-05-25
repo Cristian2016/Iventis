@@ -28,7 +28,7 @@ struct BubbleStickyNotesList: View {
     let initialNote:String
     @FocusState var keyboardVisible:Bool
     
-    @Binding var addBubbleNotesView_BubbleRank:Int?
+    @Binding var showAddNotes_bRank:Int?
     
     private let size = CGSize(width: 250, height: 420)
     private let cornerRadius = CGFloat(24)
@@ -36,7 +36,7 @@ struct BubbleStickyNotesList: View {
     // MARK: -
     init(_ addBubbleNotesView_BubbleRank:Binding<Int?>, _ viewModel:ViewModel) {
         //setting rank to nil dismisses self
-        _addBubbleNotesView_BubbleRank = Binding(projectedValue: addBubbleNotesView_BubbleRank)
+        _showAddNotes_bRank = Binding(projectedValue: addBubbleNotesView_BubbleRank)
         
         //set Bubble
         let request = Bubble.fetchRequest()
@@ -216,7 +216,7 @@ struct BubbleStickyNotesList: View {
     }
     
     // MARK: -
-    private func dismiss() { addBubbleNotesView_BubbleRank = nil }
+    private func dismiss() { showAddNotes_bRank = nil }
     
     private func saveTextInput() {
         if initialNote == textInput || textInput.isEmpty { return }

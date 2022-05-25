@@ -10,6 +10,21 @@ import UIKit
 #endif
 import SwiftUI
 
+enum Visibility:CaseIterable {
+    case visible
+    case invisible //hidden. still part of VH
+}
+
+extension View {
+    @ViewBuilder
+    func visibility(_ visibility:Visibility) -> some View {
+        switch visibility {
+            case .visible: self
+            case .invisible: self.hidden()
+        }
+    }
+}
+
 ///various constants and values
 struct Global {
     static let longPressLatency = Double(0.65) //seconds
