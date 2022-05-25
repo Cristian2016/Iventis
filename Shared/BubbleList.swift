@@ -34,7 +34,6 @@ struct BubbleList: View {
             if isListEmpty { EmptyListView() }
             else {
                 ZStack {
-                    if !isFocusOn && !notesShowing { UpDownArrows() }
                     if isFocusOn { ExitFocusView($predicate, $showDetail_bRank).zIndex(1)}
                     
                     VStack {
@@ -71,6 +70,8 @@ struct BubbleList: View {
                         .listStyle(.sidebar)
                     }
                     .ignoresSafeArea(edges:.bottom)
+                    
+                    if !isFocusOn && !notesShowing { UpDownArrows() }
                 }
             }
             if !notesShowing {

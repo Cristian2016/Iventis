@@ -17,11 +17,8 @@ struct UpDownArrows: View {
     let fontSize = CGFloat(40)
     
     var body: some View {
-        Push(.topRight) {
-            button
-        }
+        Push(.topRight) { button }
         .padding(padding)
-        .zIndex(3)
     }
     
     @ViewBuilder
@@ -45,10 +42,12 @@ struct UpDownArrows: View {
     }
     
     private func toggleEditMode() {
-        if editMode?.wrappedValue != .active {
-            editMode?.wrappedValue = .active
-        } else {
-            editMode?.wrappedValue = .inactive
+        withAnimation (.easeOut(duration: 0.2)) {
+            if editMode?.wrappedValue != .active {
+                editMode?.wrappedValue = .active
+            } else {
+                editMode?.wrappedValue = .inactive
+            }
         }
         UserFeedback.doubleHaptic(.light)
     }
