@@ -28,18 +28,17 @@ struct UpDownArrows: View {
     private var button:some View {
         Button { toggleEditMode() }
     label: {
-        Label {
-            
-        } icon: {
-            Image(systemName: "arrow.up.arrow.down.circle")
-                .font(.system(size: fontSize).weight(.regular))
-                .foregroundColor(editMode?.wrappedValue == .active ? .pink : .blue)
-                .padding(5)
-                .background {
-                    RoundedRectangle(cornerRadius: 12)
-                        .fill(Color.background1)
-                }
-        }
+        Label { }
+    icon: {
+        Image(systemName: "arrow.up.arrow.down.circle")
+            .font(.system(size: fontSize).weight(.regular))
+            .foregroundColor(editMode?.wrappedValue == .active ? .pink : .blue)
+            .padding(5)
+            .background {
+                RoundedRectangle(cornerRadius: 12)
+                    .fill(Color.background1)
+            }
+    }
     }
     .tint(editMode?.wrappedValue == .active ? .pink : .blue)
     .buttonStyle(.borderless)
