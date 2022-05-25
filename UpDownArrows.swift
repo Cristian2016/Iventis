@@ -7,7 +7,8 @@
 
 import SwiftUI
 
-struct DragDropBubbleButton: View {
+///Drag and Drop (Reaarange) bubbles
+struct UpDownArrows: View {
     @Environment(\.editMode) var editMode
     
     let fontSize = CGFloat(40)
@@ -56,6 +57,6 @@ struct DragDropBubbleButton: View {
 
 struct DragAndDropActionButton_Previews: PreviewProvider {
     static var previews: some View {
-        DragDropBubbleButton()
+        UpDownArrows()
     }
 }

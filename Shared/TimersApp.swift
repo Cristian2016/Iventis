@@ -13,7 +13,7 @@ struct TimersApp: App {
     
     var body: some Scene {
         WindowGroup {
-            AppViewHierarchy()
+            ViewHierarchy()
                 .environment(\.managedObjectContext, viewContext)
                 .coordinateSpace(name: "Device")
         }
@@ -27,8 +27,8 @@ struct TimersApp: App {
     }
 }
 
-struct AppViewHierarchy:View {
-    var body: some View { VStack { BubbleList($predicate) } }
+struct ViewHierarchy:View {
+    var body: some View { BubbleList($predicate) }
     
     @State var predicate:NSPredicate? = nil
 }
