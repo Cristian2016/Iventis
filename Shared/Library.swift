@@ -103,7 +103,7 @@ extension NumberFormatter {
 }
 
 extension String {
-    static let appGroupName = "group.com.CristianLapusan.Timers.container"
+    static let appGroupName = "group.com.Timers.container"
 }
 
 extension FileManager {

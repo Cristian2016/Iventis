@@ -15,7 +15,6 @@ struct TimersApp: App {
         WindowGroup {
             ViewHierarchy()
                 .environment(\.managedObjectContext, viewContext)
-                .coordinateSpace(name: "Device")
         }
     }
     

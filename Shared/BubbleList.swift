@@ -34,8 +34,6 @@ struct BubbleList: View {
             if isListEmpty { EmptyListView() }
             else {
                 ZStack {
-                    if focusOn { ExitFocusView($predicate, $showDetail_bRank).zIndex(1)}
-                    
                     VStack {
                         List {
                             ForEach(results) { section in
@@ -46,7 +44,7 @@ struct BubbleList: View {
                                                    $showDeleteAction_bRank,
                                                    $showAddNotes_bRank)
                                         .coordinateSpace(name: "BubbleCell")
-                                                .environmentObject(viewModel)
+                                        .environmentObject(viewModel)
                                     }
                                     .onMove {
                                         let moveAtTheBottom = ($1 == section.count)
@@ -70,6 +68,7 @@ struct BubbleList: View {
                         .listStyle(.sidebar)
                     }
                     .ignoresSafeArea(edges:.bottom)
+                    if focusOn { ExitFocusView($predicate, $showDetail_bRank).zIndex(1)}
                     
                     if !focusOn && !notesShowing { UpDownArrows() }
                 }
