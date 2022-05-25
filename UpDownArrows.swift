@@ -11,13 +11,16 @@ import SwiftUI
 struct UpDownArrows: View {
     @Environment(\.editMode) var editMode
     
+    ///how view is positioned on screen
+    let padding = EdgeInsets(top: -8, leading: 0, bottom: 2, trailing: 8)
+    
     let fontSize = CGFloat(40)
     
     var body: some View {
         Push(.topRight) {
             button
         }
-        .padding(EdgeInsets(top: -8, leading: 0, bottom: 2, trailing: 16))
+        .padding(padding)
         .zIndex(3)
     }
     
@@ -26,8 +29,7 @@ struct UpDownArrows: View {
         Button { toggleEditMode() }
     label: {
         Label {
-            Text(editMode?.wrappedValue == .active ? "Exit Move" : "")
-                .font(.system(size: 28))
+            
         } icon: {
             Image(systemName: "arrow.up.arrow.down.circle")
                 .font(.system(size: fontSize).weight(.regular))
@@ -44,12 +46,10 @@ struct UpDownArrows: View {
     }
     
     private func toggleEditMode() {
-        withAnimation {
-            if editMode?.wrappedValue != .active {
-                editMode?.wrappedValue = .active
-            } else {
-                editMode?.wrappedValue = .inactive
-            }
+        if editMode?.wrappedValue != .active {
+            editMode?.wrappedValue = .active
+        } else {
+            editMode?.wrappedValue = .inactive
         }
         UserFeedback.doubleHaptic(.light)
     }
