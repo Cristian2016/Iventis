@@ -12,15 +12,17 @@ struct UpDownArrows: View {
     @Environment(\.editMode) var editMode
     
     ///how view is positioned on screen
-    let padding = EdgeInsets(top: -8, leading: 0, bottom: 2, trailing: 8)
+    let padding = EdgeInsets(top: -4, leading: 0, bottom: 2, trailing: 12)
     
     let fontSize = CGFloat(40)
     
+    // MARK: -
     var body: some View {
         Push(.topRight) { button }
         .padding(padding)
     }
     
+    // MARK: -
     @ViewBuilder
     private var button:some View {
         Button { toggleEditMode() }
@@ -30,7 +32,6 @@ struct UpDownArrows: View {
         Image(systemName: "arrow.up.arrow.down.circle")
             .font(.system(size: fontSize).weight(.regular))
             .foregroundColor(editMode?.wrappedValue == .active ? .pink : .blue)
-            .padding(5)
             .background {
                 RoundedRectangle(cornerRadius: 12)
                     .fill(Color.background1)
@@ -41,6 +42,7 @@ struct UpDownArrows: View {
     .buttonStyle(.borderless)
     }
     
+    // MARK: - Methods
     private func toggleEditMode() {
         withAnimation (.easeOut(duration: 0.2)) {
             if editMode?.wrappedValue != .active {
