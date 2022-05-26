@@ -79,7 +79,8 @@ struct BubbleList: View {
             }
             
             //on top of everything show DetailView (TopDetailView and BottomDetailView
-            if focusOn && !notesShowing { DetailView(showDetail_bRank) }
+            if focusOn && !notesShowing {
+                DetailView(showDetail_bRank) }
             
             if notesShowing { BubbleStickyNotesList($stickyNotesList_bRank, viewModel) }
             
