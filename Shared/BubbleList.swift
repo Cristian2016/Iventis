@@ -22,8 +22,8 @@ struct BubbleList: View {
     //showing Detail or DeleteAction views
     @State var showDetail_bRank:Int? = nil //bubble.rank
     @State var showDeleteAction_bRank:Int? = nil //bubble.rank
-    @State var showAddNotes_bRank:Int? = nil //bubble rank
-    
+    @State var stickyNotesList_bRank:Int? = nil //bubble rank
+     
     @State private var deleteViewYOffset:CGFloat? = nil
     @State private var isActive = true
     @State var isPaletteShowing = false
@@ -42,7 +42,7 @@ struct BubbleList: View {
                                         BubbleCell($0, $predicate,
                                                    $showDetail_bRank,
                                                    $showDeleteAction_bRank,
-                                                   $showAddNotes_bRank)
+                                                   $stickyNotesList_bRank)
                                         .coordinateSpace(name: "BubbleCell")
                                         .environmentObject(viewModel)
                                     }
@@ -81,7 +81,7 @@ struct BubbleList: View {
             //on top of everything show DetailView (TopDetailView and BottomDetailView
             if focusOn && !notesShowing { DetailView(showDetail_bRank) }
             
-            if notesShowing { BubbleStickyNotesList($showAddNotes_bRank, viewModel) }
+            if notesShowing { BubbleStickyNotesList($stickyNotesList_bRank, viewModel) }
             
             if deleteViewOffsetComputed && deleteViewShowing {
                 let bubble = viewModel.bubble(for: showDeleteAction_bRank!)
@@ -207,7 +207,7 @@ struct BubbleCellLow_Key:PreferenceKey {
 
 // MARK: - Little Helpers
 extension BubbleList {
-    fileprivate var notesShowing:Bool { showAddNotes_bRank != nil }
+    fileprivate var notesShowing:Bool { stickyNotesList_bRank != nil }
     
     fileprivate var focusOn:Bool { predicate != nil }
     
