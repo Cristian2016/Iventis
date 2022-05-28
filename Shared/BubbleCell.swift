@@ -8,13 +8,17 @@
 import SwiftUI
 
 struct BubbleCell: View {
-    // MARK: - Constants
-    static let diameter = CGFloat(UIScreen.main.bounds.size.width / 2.7)
-    static let fontRatio = CGFloat(0.4)
-    static let spacingRatio = CGFloat(-0.28)
+    struct Metrics {
+        let diameter = CGFloat(UIScreen.main.bounds.size.width / 2.7)
+        let fontRatio = CGFloat(0.4)
+        let spacingRatio = CGFloat(-0.28)
+        
+        lazy var spacing = diameter * spacingRatio
+        lazy var fontSize = diameter * fontRatio
+    }
     
-    let spacing =  BubbleCell.diameter * BubbleCell.spacingRatio
-    var fontSize = BubbleCell.diameter *  BubbleCell.fontRatio
+    // MARK: - Constants
+    static var metrics = Metrics()
     
     let stickyNoteOffset = CGSize(width: 0, height: -6)
     
@@ -142,7 +146,7 @@ struct BubbleCell: View {
     
     // MARK: - Legoes
     private var hrMinSecStack:some View {
-        HStack (spacing: spacing) {
+        HStack (spacing: BubbleCell.metrics.spacing) {
             hoursView
                 .onTapGesture { handleHoursTap() }
                 .onLongPressGesture { print("edit duration") }
@@ -174,8 +178,8 @@ struct BubbleCell: View {
                     viewModel.endSession(bubble)
                 }
         }
-        .frame(height: BubbleCell.diameter)
-        .font(.system(size: fontSize))
+        .frame(height: BubbleCell.metrics.diameter)
+        .font(.system(size: BubbleCell.metrics.fontSize))
         .foregroundColor(.white)
 //        .onDrag { NSItemProvider() }
     }
