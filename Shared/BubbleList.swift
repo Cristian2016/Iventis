@@ -39,6 +39,7 @@ struct BubbleList: View {
                             ForEach(results) { section in
                                 Section {
                                     ForEach (section) { bubble in
+                                        
                                         BubbleCell(bubble, $predicate,
                                                    $showDetail_bRank,
                                                    $showDeleteAction_bRank,
