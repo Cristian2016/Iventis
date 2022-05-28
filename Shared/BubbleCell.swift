@@ -8,12 +8,12 @@
 import SwiftUI
 
 struct BubbleCell: View {
-    let diameter = CGFloat(UIScreen.main.bounds.size.width / 2.7)
-    let fontRatio = CGFloat(0.4)
-    let spacingRatio = CGFloat(-0.28)
+    static let diameter = CGFloat(UIScreen.main.bounds.size.width / 2.7)
+    static let fontRatio = CGFloat(0.4)
+    static let spacingRatio = CGFloat(-0.28)
     
-    var spacing:CGFloat { diameter * spacingRatio }
-    var fontSize:CGFloat { diameter *  fontRatio }
+    let spacing =  BubbleCell.diameter * BubbleCell.spacingRatio
+    var fontSize = BubbleCell.diameter *  BubbleCell.fontRatio
     
     let stickyNoteOffset = CGSize(width: 0, height: -6)
     
@@ -174,7 +174,7 @@ struct BubbleCell: View {
                     viewModel.endSession(bubble)
                 }
         }
-        .frame(height: diameter)
+        .frame(height: BubbleCell.diameter)
         .font(.system(size: fontSize))
         .foregroundColor(.white)
 //        .onDrag { NSItemProvider() }
