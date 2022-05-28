@@ -43,7 +43,6 @@ struct BubbleList: View {
                                                    $showDetail_bRank,
                                                    $showDeleteAction_bRank,
                                                    $stickyNotesList_bRank)
-                                        .coordinateSpace(name: "BubbleCell")
                                         .environmentObject(viewModel)
                                     }
                                     .onMove {
