@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct BubbleCell: View {
+    // MARK: - Constants
     static let diameter = CGFloat(UIScreen.main.bounds.size.width / 2.7)
     static let fontRatio = CGFloat(0.4)
     static let spacingRatio = CGFloat(-0.28)
@@ -46,13 +47,12 @@ struct BubbleCell: View {
          _ showDeleteAction_bRank:Binding<Int?>,
          _ showAddNotes_bRank:Binding<Int?>) {
                 
+        _bubble = StateObject(wrappedValue: bubble)
+        _predicate = Binding(projectedValue: predicate)
         _showDetail_bRank = Binding(projectedValue: showDetail_bRank)
         _showDeleteAction_bRank = Binding(projectedValue: showDeleteAction_bRank)
         _showAddNotes_bRank = Binding(projectedValue: showAddNotes_bRank)
         
-        _bubble = StateObject(wrappedValue: bubble)
-        _predicate = Binding(projectedValue: predicate)
-                
         if !bubble.isObservingBackgroundTimer { bubble.observeBackgroundTimer() }
     }
     
