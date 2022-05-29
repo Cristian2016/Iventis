@@ -114,13 +114,14 @@ class ViewModel: ObservableObject {
                     
                     bubble.lastSession?.computeDuration {
                         //no need to run any code in the completion
+                        PersistenceController.shared.save()
                     }
                 }
                 
             case .finished: return
         }
         
-        try? PersistenceController.shared.viewContext.save()
+        PersistenceController.shared.save()
     }
     
     func toggleCalendar(_ bubble:Bubble) {
@@ -199,6 +200,7 @@ class ViewModel: ObservableObject {
                 
                 bubble.lastSession?.computeDuration {//completion called on UIThread 🟢
                     self.createCalendarEventIfRequiredAndSaveToCoreData(for: bubble)
+                    PersistenceController.shared.save()
                 }
             }
             
