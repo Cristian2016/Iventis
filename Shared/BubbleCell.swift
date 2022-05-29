@@ -20,15 +20,15 @@ struct BubbleCell: View {
     // MARK: - Constants
     static var metrics = Metrics()
     
+    // MARK: - Dependencies
+    @StateObject var bubble:Bubble
+    @EnvironmentObject private var viewModel:ViewModel
+    
     let stickyNoteOffset = CGSize(width: 0, height: -6)
     
     // MARK: -
     @Environment(\.editMode) var editMode //used to toggle move rows
     var editModeOn:Bool { editMode?.wrappedValue == .active }
-    
-    // MARK: - Dependencies
-    @StateObject var bubble:Bubble
-    @EnvironmentObject private var viewModel:ViewModel
     
     // MARK: -
     @Binding var predicate:NSPredicate? //detail view

@@ -15,6 +15,7 @@ struct TimersApp: App {
         WindowGroup {
             ViewHierarchy()
                 .environment(\.managedObjectContext, viewContext)
+                .environmentObject(ViewModel())
         }
     }
     

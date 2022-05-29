@@ -12,9 +12,8 @@ import Combine
 struct BubbleList: View {
     @Environment(\.scenePhase) var scenePhase
     @Environment(\.managedObjectContext) private var viewContext
-    
+    @EnvironmentObject private var viewModel:ViewModel
     @SectionedFetchRequest var results:SectionedFetchResults<Bool, Bubble>
-    @StateObject private var viewModel = ViewModel()
     
     // MARK: -
     @Binding var predicate:NSPredicate?
@@ -44,7 +43,6 @@ struct BubbleList: View {
                                                    $showDetail_bRank,
                                                    $showDeleteAction_bRank,
                                                    $stickyNotesList_bRank)
-                                        .environmentObject(viewModel)
                                     }
                                     .onMove {
                                         let moveAtTheBottom = ($1 == section.count)
