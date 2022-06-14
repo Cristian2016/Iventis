@@ -103,7 +103,7 @@ class ViewModel: ObservableObject {
                 bubble.continueToUpdateSmallBubbleCell = false
                 
                 //⚠️ closure runs on the main queue. whatever you want the user to see put in that closure otherwise it will fail to update!!!!
-                currentPair?.computeDuration(.pause) {
+                currentPair?.computeDuration(.atPause) {
                     //closure runs on main queue
                     currentPair?.duration = $0 //Float
                     currentPair?.durationAsStrings = $1 //Data
@@ -191,7 +191,7 @@ class ViewModel: ObservableObject {
             bubble.lastPair!.pause = Date() //close last pair
             
             //compute lastPair duration first [on background thread 🔴]
-            bubble.lastPair?.computeDuration(.endSession) { (computedDuration, data) in
+            bubble.lastPair?.computeDuration(.atEndSession) { (computedDuration, data) in
                 //UIThread 🟢
                 
                 //store pair and session durations

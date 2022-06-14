@@ -24,8 +24,8 @@ public class Pair: NSManagedObject {
     }
     
     enum DurationComputed {
-        case pause
-        case endSession
+        case atPause
+        case atEndSession
     }
     
     var note_:String {
@@ -38,13 +38,16 @@ public class Pair: NSManagedObject {
         print(#function, "pair")
         DispatchQueue.global().async {
             
+            //make sure Pair duration can be computed
+            //make sure pauseDate is set, otherwise duration cannot be computed
             guard let pause = self.pause else { fatalError() }
+            
             if let start = self.start {
                 let duration:Float
                 switch durationComputed {
-                    case .pause:
+                    case .atPause:
                         duration = Float(pause.timeIntervalSince(start))
-                    case .endSession:
+                    case .atEndSession:
                         duration = Float(pause.timeIntervalSince(start) - Global.longPressLatency)
                 }
                 
