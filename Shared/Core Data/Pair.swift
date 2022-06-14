@@ -35,7 +35,9 @@ public class Pair: NSManagedObject {
     
     ///runs on background thread. it computes at 1.pause or 2.endSession. endSession means substracting 0.5 seconds from the duration
     func computeDuration(_ durationComputed:DurationComputed, completion: @escaping (Float, Data) -> ()) {
+        print(#function, "pair")
         DispatchQueue.global().async {
+            
             guard let pause = self.pause else { fatalError() }
             if let start = self.start {
                 let duration:Float

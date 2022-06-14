@@ -2,7 +2,7 @@
 //  Widgets.swift
 //  Widgets
 //
-//  Created by Cristian Lapusan on 15.04.2022.
+//  Created by Cristian Lapusan on 08.06.2022.
 //
 
 import WidgetKit

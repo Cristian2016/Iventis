@@ -76,9 +76,8 @@ struct BubbleList: View {
                     .environmentObject(viewModel)
             }
             
-            //on top of everything show DetailView (TopDetailView and BottomDetailView
-            if focusOn && !notesShowing {
-                DetailView(showDetail_bRank) }
+            //on top of everything show DetailView (TopDetailView and BottomDetailView)
+            if focusOn && !notesShowing { DetailView(showDetail_bRank) }
             
             if notesShowing { BubbleStickyNotesList($stickyNotesList_bRank, viewModel) }
             

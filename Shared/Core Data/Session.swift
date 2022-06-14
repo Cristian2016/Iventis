@@ -17,7 +17,9 @@ public class Session: NSManagedObject {
     
     //⚠️ implement on backgroundthread. warning: wait until pair computes its duration and then compute session.totalduration!!!
     func computeDuration(completion: @escaping (() -> ())) {
+        print(#function, "session")
         DispatchQueue.global().async {
+            
             let pairs = self.pairs?.array as! [Pair]
             guard !pairs.isEmpty,
                   let lastPairDuration = pairs.last?.duration else { fatalError() }
@@ -34,9 +36,7 @@ public class Session: NSManagedObject {
         }
     }
     
-    var isLastPairClosed:Bool {
-        bubble?.lastPair?.pause != nil
-    }
+    var isLastPairClosed:Bool { bubble?.lastPair?.pause != nil }
     
     var pairs_:[Pair] {
         pairs?.array as? [Pair] ?? []

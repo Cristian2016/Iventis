@@ -18,14 +18,15 @@ struct DetailView: View {
     let bottomDetailHeight = UIScreen.size.height - (2.5 * Global.circleDiameter +  ExitFocusView.height)
     let detailWidth = UIScreen.size.width * 0.96
     
-    init(_ rank:Int?) {
+    init(_ showDetail_bRank:Int?) {
+        print("DetailView init")
         let predicate:NSPredicate?
-        if let rank = rank { predicate = NSPredicate(format: "bubble.rank == %i", rank)
+        if let rank = showDetail_bRank { predicate = NSPredicate(format: "bubble.rank == %i", rank)
         } else { predicate = nil }
         
         let descriptor = NSSortDescriptor(key: "created", ascending: false)
         _sessions = FetchRequest(entity: Session.entity(), sortDescriptors: [descriptor], predicate: predicate, animation: .easeInOut)
-        self.rank = rank
+        self.rank = showDetail_bRank
     }
     
     var body: some View {
