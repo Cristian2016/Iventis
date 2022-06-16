@@ -63,6 +63,34 @@ extension Color {
     static let calendar = Color("calendar")
     static let calendarOff = Color("calendarOff")
     static let background1 = Color("background1")
+    
+    static let colorNames = ["sourCherry":"Sour Cherry",
+                      "mint" : "Mint",
+                      "slateBlue" : "Slate Blue",
+                      "silver" : "Silver",
+                      "ultramarine" : "Ultramarine",
+                      "lemon" : "Lemon",
+                      "red" : "Red",
+                      "sky" : "Sky",
+                      "bubbleGum" : "Bubble Gum",
+                      "green" : "Green",
+                      "charcoal" : "Charcoal",
+                      "magenta" : "Magenta",
+                      "purple" : "Purple",
+                      "orange" : "Orange",
+                      "chocolate" : "Chocolate",
+                      "aqua" : "Aqua",
+                      "byzantium" : "Byzantium",
+                             "rose" : "Rose"]
+    
+    static func friendlyBubbleColorName(for bubbleColorName:String?) -> String {
+        guard
+            let bubbleColorName = bubbleColorName,
+            let colorName = colorNames[bubbleColorName]
+        else { fatalError() }
+        
+        return colorName
+    }
 }
 
 extension Image {

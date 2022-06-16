@@ -35,7 +35,7 @@ public class Pair: NSManagedObject {
     
     ///runs on background thread. it computes at 1.pause or 2.endSession. endSession means substracting 0.5 seconds from the duration
     func computeDuration(_ durationComputed:DurationComputed, completion: @escaping (Float, Data) -> ()) {
-        print(#function, "pair")
+
         DispatchQueue.global().async {
             
             //make sure Pair duration can be computed
@@ -51,11 +51,9 @@ public class Pair: NSManagedObject {
                         duration = Float(pause.timeIntervalSince(start) - Global.longPressLatency)
                 }
                 
-                //convert duration to raw data using JSONEncoder
-                let encoder = JSONEncoder()
-                
+                //convert duration.timeComponentsAsStrings to raw data using JSONEncoder
                 let componentStrings = duration.timeComponentsAsStrings
-                let data = try? encoder.encode(componentStrings)
+                let data = try? JSONEncoder().encode(componentStrings)
                 
                 DispatchQueue.main.async {
                     completion(duration, data!)

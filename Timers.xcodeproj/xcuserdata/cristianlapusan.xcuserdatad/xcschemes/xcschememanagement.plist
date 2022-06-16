@@ -7,7 +7,7 @@
 		<key>Timers (iOS).xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>0</integer>
+			<integer>1</integer>
 		</dict>
 		<key>Timers (macOS).xcscheme_^#shared#^_</key>
 		<dict>
@@ -17,7 +17,20 @@
 		<key>WidgetsExtension.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>1</integer>
+			<integer>0</integer>
+		</dict>
+	</dict>
+	<key>SuppressBuildableAutocreation</key>
+	<dict>
+		<key>1F5F4A5128093FAF00AF3442</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>1FA8346A2850A57A003F4D61</key>
+		<dict>
+			<key>primary</key>
+			<true/>
 		</dict>
 	</dict>
 </dict>

@@ -269,7 +269,8 @@ class CalendarManager: NSObject {
     private func title(for session:Session) -> String {
         guard let bubble = session.bubble else { return "No Title" }
         
-        let stickyNote = bubble.note_.isEmpty ? bubble.friendlyColorName : bubble.note_
+        let friendlyBubbleColorName = Color.friendlyBubbleColorName(for: bubble.color)
+        let stickyNote = bubble.note_.isEmpty ? friendlyBubbleColorName : bubble.note_
         let colorEmoji = Color.emoji(for: bubble.color ?? "mint")
         
         let symbol:String
