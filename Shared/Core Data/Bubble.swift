@@ -11,33 +11,17 @@ import CoreData
 import SwiftUI
 
 public class Bubble: NSManagedObject {
-    enum State {
-        case brandNew //0
-        case running //1
-        case paused //2
-        case finished //3 timers only
+    var sessions_:[Session] {
+        get { sessions?.array as? [Session] ?? [] }
+        set { sessions = NSOrderedSet(array: newValue) }
     }
-    
-    var state:State {
-        guard let lastSession = lastSession else { return .brandNew }
-        
-        if kind != .stopwatch && currentClock <= 0 { return .finished }
-        else {
-            if sessions_.isEmpty || lastSession.isEnded { return .brandNew }
-            else {
-                if lastPair!.pause == nil { return .running }
-                else { return .paused }
-            }
-        }
-    }
-    
-    var sessions_:[Session] { sessions?.array as? [Session] ?? [] }
     
     var history_:[BubbleSavedNote] { history?.array as? [BubbleSavedNote] ?? [] }
     
     ///lastSession is not always currentSession
     var lastSession:Session? { sessions_.last }
     
+    ///lastPair of lastSession
     var lastPair:Pair? { (lastSession?.pairs?.array as? [Pair])?.last }
     
     // MARK: -
@@ -83,6 +67,28 @@ public class Bubble: NSManagedObject {
     var continueToUpdateSmallBubbleCell = false {didSet{
         if !continueToUpdateSmallBubbleCell { smallBubbleView_Components = Float.TimeComponentsAsStrings(hr: "0", min: "0", sec: "0", cents: "0") }
     }}
+}
+
+extension Bubble {
+    enum State {
+        case brandNew //0
+        case running //1
+        case paused //2
+        case finished //3 timers only
+    }
+    
+    var state:State {
+        guard let lastSession = lastSession else { return .brandNew }
+        
+        if kind != .stopwatch && currentClock <= 0 { return .finished }
+        else {
+            if sessions_.isEmpty || lastSession.isEnded { return .brandNew }
+            else {
+                if lastPair!.pause == nil { return .running }
+                else { return .paused }
+            }
+        }
+    }
 }
 
 // MARK: - Observers
