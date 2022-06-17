@@ -9,13 +9,26 @@ import SwiftUI
 
 @main
 struct TimersApp: App {
+    @Environment(\.scenePhase) var scenePhase
     let viewContext = PersistenceController.shared.container.viewContext
+    let viewModel = ViewModel()
     
     var body: some Scene {
         WindowGroup {
             ViewHierarchy()
                 .environment(\.managedObjectContext, viewContext)
-                .environmentObject(ViewModel())
+                .environmentObject(viewModel)
+                .onChange(of: scenePhase) {
+                    switch $0 {
+                        case .active:
+                            viewModel.backgroundTimer(.start)
+                        case .background:
+                            viewModel.backgroundTimer(.pause)
+                        case .inactive: //show notication center, app switcher
+                            break
+                        @unknown default: fatalError()
+                    }
+                }
         }
     }
     

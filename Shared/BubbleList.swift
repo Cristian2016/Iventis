@@ -10,7 +10,6 @@ import CoreData
 import Combine
 
 struct BubbleList: View {
-    @Environment(\.scenePhase) var scenePhase
     @Environment(\.managedObjectContext) private var viewContext
     @EnvironmentObject private var viewModel:ViewModel
     @SectionedFetchRequest var results:SectionedFetchResults<Bool, Bubble>
@@ -94,17 +93,6 @@ struct BubbleList: View {
             if frame == .zero { return }
             
             self.deleteViewYOffset = compute_YOffset(for: new.frame)
-        }
-        .onChange(of: scenePhase) {
-            switch $0 {
-                case .active:
-                    viewModel.backgroundTimer(.start)
-                case .background:
-                    viewModel.backgroundTimer(.pause)
-                case .inactive: //show notication center, app switcher
-                    break
-                @unknown default: fatalError()
-            }
         }
     }
     
