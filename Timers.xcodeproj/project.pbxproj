@@ -201,6 +201,7 @@
 		1F5F4A4728093FAD00AF3442 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				1F9B6AEF280950D600C0A725 /* ViewModel.swift */,
 				1F5F4A942809450A00AF3442 /* Library.swift */,
 				1F5F4A4A28093FAD00AF3442 /* TimersApp.swift */,
 				1F5F4A982809456E00AF3442 /* BubbleList.swift */,
@@ -208,7 +209,6 @@
 				1F97B7E02809B331002FFCA3 /* Assets */,
 				1F8E7EDF2820F8560063A659 /* DetailView */,
 				1FE163AD280EE6F40050C6F5 /* LeftStrip.swift */,
-				1F9B6AEF280950D600C0A725 /* ViewModel.swift */,
 				1FA8F87D28367B7A00394B59 /* BubbleStickyNote.swift */,
 				1F5F4A9C280945C700AF3442 /* BubbleCell.swift */,
 				1F100CA62809493400A3A3C2 /* BackgroundTimer.swift */,

@@ -19,7 +19,6 @@ struct DetailView: View {
     let detailWidth = UIScreen.size.width * 0.96
     
     init(_ showDetail_bRank:Int?) {
-        print("DetailView init")
         let predicate:NSPredicate?
         if let rank = showDetail_bRank { predicate = NSPredicate(format: "bubble.rank == %i", rank)
         } else { predicate = nil }
@@ -37,7 +36,7 @@ struct DetailView: View {
                 TopDetailView(rank)
                     .frame(width: detailWidth, height: topDetailHeight)
                 BottomDetailView(rank)
-                    .frame(width: detailWidth, height: bottomDetailHeight)
+//                    .frame(width: detailWidth, height: bottomDetailHeight)
             }
         }
         .ignoresSafeArea()

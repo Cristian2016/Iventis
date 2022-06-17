@@ -11,6 +11,13 @@ import Combine
 
 
 class ViewModel: ObservableObject {
+    
+    @Published var navigationPath = [Bubble]()
+    
+    @Published var showDetail_bRank:Int? = nil
+    @Published var showDeleteAction_bRank:Int? = nil
+    @Published var stickyNotesList_bRank:Int? = nil //bubble rank
+        
     init() {
         let request = Bubble.fetchRequest()
         let bubbles = try? PersistenceController.shared.viewContext.fetch(request)

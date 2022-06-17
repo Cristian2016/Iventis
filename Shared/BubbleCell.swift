@@ -31,32 +31,14 @@ struct BubbleCell: View {
     var editModeOn:Bool { editMode?.wrappedValue == .active }
     
     // MARK: -
-    @Binding var predicate:NSPredicate? //detail view
-    
-    //showing DeleteAction Detail or AddNotes Views
-    @Binding var showDetail_bRank:Int? //show detail view
-    @Binding var showDeleteAction_bRank:Int? //show delete action
-    @Binding var showAddNotes_bRank:Int? //show
-    
-    // MARK: -
     private var isRunning:Bool { bubble.state == .running }
     @State private var isSecondsTapped = false
     @State private var isSecondsLongPressed = false
     
     private let circleDiameter = Global.circleDiameter
     
-    init(_ bubble:Bubble,
-         _ predicate:Binding<NSPredicate?>,
-         _ showDetail_bRank:Binding<Int?>,
-         _ showDeleteAction_bRank:Binding<Int?>,
-         _ showAddNotes_bRank:Binding<Int?>) {
-                
+    init(_ bubble:Bubble) {
         _bubble = StateObject(wrappedValue: bubble)
-        _predicate = Binding(projectedValue: predicate)
-        _showDetail_bRank = Binding(projectedValue: showDetail_bRank)
-        _showDeleteAction_bRank = Binding(projectedValue: showDeleteAction_bRank)
-        _showAddNotes_bRank = Binding(projectedValue: showAddNotes_bRank)
-        
         if !bubble.isObservingBackgroundTimer { bubble.observeBackgroundTimer() }
     }
     
@@ -68,11 +50,11 @@ struct BubbleCell: View {
     // MARK: - Helpers
     private var bubbleNotRunning:Bool { bubble.state != .running }
     
-    private func showNotesList () { showAddNotes_bRank = Int(bubble.rank) }
+    private func showNotesList () { viewModel.stickyNotesList_bRank = Int(bubble.rank) }
     
     private var noNote:Bool { bubble.note_.isEmpty }
     
-    func handleHoursTap() {
+    func handleLongPress() {
         UserFeedback.singleHaptic(.light)
         if bubble.note_.isEmpty { showNotesList() }
         else {
@@ -101,7 +83,8 @@ struct BubbleCell: View {
             }
             
             if bubbleNotRunning {
-                centsView.onTapGesture {
+                hundredthsView
+                    .onTapGesture {
                     UserFeedback.singleHaptic(.heavy)
                     viewModel.toggleStart(bubble)
                 }
@@ -133,7 +116,7 @@ struct BubbleCell: View {
         }
         .swipeActions(edge: .trailing, allowsFullSwipe: true) {
             //delete
-            Button { showDeleteAction_bRank = Int(bubble.rank)}
+            Button { viewModel.showDeleteAction_bRank = Int(bubble.rank)}
         label: { Label { Text("Delete") }
             icon: { Image.trash } }.tint(.red)
             
@@ -148,12 +131,12 @@ struct BubbleCell: View {
     private var hrMinSecStack:some View {
         HStack (spacing: BubbleCell.metrics.spacing) {
             hoursView
-                .onTapGesture { handleHoursTap() }
-                .onLongPressGesture { print("edit duration") }
+                .onTapGesture { viewModel.navigationPath = [bubble] }
+                .onLongPressGesture { handleLongPress() }
             minutesView
                 .onTapGesture { withAnimation(.easeInOut(duration: 0.05)) {
                     editMode?.wrappedValue = .inactive
-                    toggleDetailView()
+                    viewModel.navigationPath = [bubble]
                 } }
                 .onLongPressGesture { print("edit duration") }
             secondsView
@@ -220,11 +203,8 @@ struct BubbleCell: View {
     private var cellLowEmitterView: some View { Circle().fill(Color.clear) }
     
     ///hundredths of a second that is :)
-    private var centsView:some View {
-        VStack {
-            Spacer()
-            HStack {
-                Spacer()
+    private var hundredthsView:some View {
+        
                 Text(bubble.bubbleCell_Components.cents)
                     .background(Circle()
                         .foregroundColor(Color("pauseStickerColor"))
@@ -237,8 +217,6 @@ struct BubbleCell: View {
                             y: isSecondsTapped && !isRunning ? -20 : 0)
                     .opacity(isSecondsTapped && !isRunning ? 0 : 1)
                     .animation(.spring(response: 0.3, dampingFraction: 0.2), value: isSecondsTapped)
-            }
-        }
         .padding(EdgeInsets(top: 0, leading: 0, bottom: 6, trailing: 8))
         .zIndex(1)
     }
@@ -269,11 +247,8 @@ struct BubbleCell: View {
     ///show/hide DetailView
     fileprivate func toggleDetailView() {
         UserFeedback.singleHaptic(.medium)
-        let predicateNotSet = predicate == nil
         
-        //%i integer, %f float, %@ object??
-        predicate = predicateNotSet ? NSPredicate(format: "rank == %i", bubble.rank) : nil
-        showDetail_bRank = predicateNotSet ? Int(bubble.rank) : nil
+        viewModel.showDetail_bRank = Int(bubble.rank)
         
         //ask viewModel
         let rank = Int(bubble.rank)
@@ -281,12 +256,12 @@ struct BubbleCell: View {
     }
     
     private var showDeleteActionView:Bool {
-        guard let actionViewBubbleRank = showDeleteAction_bRank else { return false }
+        guard let actionViewBubbleRank = viewModel.showDeleteAction_bRank else { return false }
         return bubble.rank == actionViewBubbleRank
     }
     
     private var showDetailView:Bool {
-        guard let showDetailView_BubbleRank = showDetail_bRank else { return false }
+        guard let showDetailView_BubbleRank = viewModel.showDetail_bRank else { return false }
         return bubble.rank == showDetailView_BubbleRank
     }
 }

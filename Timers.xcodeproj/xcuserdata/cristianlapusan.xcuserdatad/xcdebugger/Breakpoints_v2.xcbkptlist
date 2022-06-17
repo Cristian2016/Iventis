@@ -14,9 +14,9 @@
             filePath = "BubbleStickyNotesList.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "46"
-            endingLineNumber = "46"
-            landmarkName = "init(_:_:)"
+            startingLineNumber = "43"
+            endingLineNumber = "43"
+            landmarkName = "init(_:)"
             landmarkType = "7">
             <Actions>
                <BreakpointActionProxy
@@ -39,8 +39,8 @@
             filePath = "Shared/TimersApp.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "18"
-            endingLineNumber = "18"
+            startingLineNumber = "21"
+            endingLineNumber = "21"
             landmarkName = "body"
             landmarkType = "24">
             <Actions>
@@ -64,9 +64,9 @@
             filePath = "Shared/BubbleCell.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "53"
-            endingLineNumber = "53"
-            landmarkName = "init(_:_:_:_:_:)"
+            startingLineNumber = "41"
+            endingLineNumber = "41"
+            landmarkName = "init(_:)"
             landmarkType = "7">
             <Actions>
                <BreakpointActionProxy

@@ -10,7 +10,7 @@ import SwiftUI
 
 struct BubbleStickyNotesList: View {
     let bubble:Bubble  /* ⚠️ do not use @StateObject bubble:Bubble! because each time Bubble.bubbleCell_Components update, bubble will emit and body will get recomputed each mother fucking second!!!  */
-    let viewModel:ViewModel
+    @EnvironmentObject private var viewModel:ViewModel
     @FetchRequest private var items:FetchedResults<BubbleSavedNote>
     
     private var filteredItems:[BubbleSavedNote] {
@@ -34,13 +34,10 @@ struct BubbleStickyNotesList: View {
     private let cornerRadius = CGFloat(24)
     
     // MARK: -
-    init(_ addBubbleNotesView_BubbleRank:Binding<Int?>, _ viewModel:ViewModel) {
-        //setting rank to nil dismisses self
-        _showAddNotes_bRank = Binding(projectedValue: addBubbleNotesView_BubbleRank)
-        
+    init(_ stickyNotesList_bRank:Binding<Int?>) {
         //set Bubble
         let request = Bubble.fetchRequest()
-        request.predicate = NSPredicate(format: "rank == %i", addBubbleNotesView_BubbleRank.wrappedValue!)
+        request.predicate = NSPredicate(format: "rank == %i", stickyNotesList_bRank.wrappedValue!)
         
         guard let bubble = try? PersistenceController.shared.viewContext.fetch(request).first else { fatalError("fuck bubble") }
         self.bubble = bubble
@@ -48,14 +45,12 @@ struct BubbleStickyNotesList: View {
         //set initial note
         self.initialNote = bubble.note_
         
-        //set viewModel
-        self.viewModel = viewModel
-        
         let sorts = [
 //            NSSortDescriptor(key: "bubble", ascending: false), //⚠️ crashes for some reason..
             NSSortDescriptor(key: "date", ascending: false)
         ]
         _items = FetchRequest(entity: BubbleSavedNote.entity(), sortDescriptors: sorts, predicate: nil, animation: .default)
+        _showAddNotes_bRank = Binding(projectedValue: stickyNotesList_bRank)
     }
     
     // MARK: -
@@ -230,6 +225,6 @@ struct BubbleStickyNotesList: View {
 
 struct BubbleNoteView_Previews: PreviewProvider {
     static var previews: some View {
-        BubbleStickyNotesList(.constant(65), ViewModel())
+        BubbleStickyNotesList(.constant(0))
     }
 }

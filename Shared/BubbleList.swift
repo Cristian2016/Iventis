@@ -15,13 +15,6 @@ struct BubbleList: View {
     @SectionedFetchRequest var results:SectionedFetchResults<Bool, Bubble>
     
     // MARK: -
-    @Binding var predicate:NSPredicate?
-    
-    //showing Detail or DeleteAction views
-    @State var showDetail_bRank:Int? = nil //bubble.rank
-    @State var showDeleteAction_bRank:Int? = nil //bubble.rank
-    @State var stickyNotesList_bRank:Int? = nil //bubble rank
-     
     @State private var deleteViewYOffset:CGFloat? = nil
     @State private var isActive = true
     @State var isPaletteShowing = false
@@ -37,24 +30,23 @@ struct BubbleList: View {
                             ForEach(results) { section in
                                 Section {
                                     ForEach (section) { bubble in
-                                        
-                                        BubbleCell(bubble, $predicate,
-                                                   $showDetail_bRank,
-                                                   $showDeleteAction_bRank,
-                                                   $stickyNotesList_bRank)
-                                    }
-                                    .onMove {
-                                        let moveAtTheBottom = ($1 == section.count)
-                                        let sourceRank = section[$0.first!].rank
-                                        
-                                        if moveAtTheBottom {
-                                            let destRank = section[$1 - 1].rank
-                                            viewModel.reorderRanks(sourceRank, destRank, true)
-                                        } else {
-                                            let destRank = section[$1].rank
-                                            viewModel.reorderRanks(sourceRank, destRank)
+                                        ZStack {
+                                            NavigationLink(value: bubble) { }
+                                            BubbleCell(bubble)
                                         }
                                     }
+//                                    .onMove {
+//                                        let moveAtTheBottom = ($1 == section.count)
+//                                        let sourceRank = section[$0.first!].rank
+//
+//                                        if moveAtTheBottom {
+//                                            let destRank = section[$1 - 1].rank
+//                                            viewModel.reorderRanks(sourceRank, destRank, true)
+//                                        } else {
+//                                            let destRank = section[$1].rank
+//                                            viewModel.reorderRanks(sourceRank, destRank)
+//                                        }
+//                                    }
                                 }
                             header: { headerTitle(for: section.id.description) }
                                     .accentColor(section.id != false ? .clear : .label) //collapse section indicators invisible
@@ -63,11 +55,16 @@ struct BubbleList: View {
                         }
                         .padding(EdgeInsets(top: 0, leading: -10, bottom: 0, trailing: -10))
                         .listStyle(.sidebar)
+                        .navigationDestination(for: Bubble.self, destination: { bubble in
+                            VStack {
+                                BubbleCell(bubble)
+                                DetailView(Int(bubble.rank))
+                            }
+                        })
                     }
                     .ignoresSafeArea(edges:.bottom)
-                    if focusOn { ExitFocusView($predicate, $showDetail_bRank).zIndex(1)}
                     
-                    if !focusOn && !notesShowing { UpDownArrows() }
+                    if !notesShowing { UpDownArrows() }
                 }
             }
             if !notesShowing {
@@ -75,14 +72,11 @@ struct BubbleList: View {
                     .environmentObject(viewModel)
             }
             
-            //on top of everything show DetailView (TopDetailView and BottomDetailView)
-            if focusOn && !notesShowing { DetailView(showDetail_bRank) }
-            
-            if notesShowing { BubbleStickyNotesList($stickyNotesList_bRank, viewModel) }
+            if notesShowing { BubbleStickyNotesList($viewModel.stickyNotesList_bRank) }
             
             if deleteViewOffsetComputed && deleteViewShowing {
-                let bubble = viewModel.bubble(for: showDeleteAction_bRank!)
-                DeleteView(bubble, $showDeleteAction_bRank, $predicate, deleteViewYOffset!)
+                let bubble = viewModel.bubble(for: viewModel.showDeleteAction_bRank!)
+                DeleteView(bubble, deleteViewYOffset!)
                     .environmentObject(viewModel) //pass viewmodel as well
             }
             
@@ -97,14 +91,13 @@ struct BubbleList: View {
     }
     
     // MARK: -
-    init(_ predicate:Binding<NSPredicate?>) {
+    init() {
         UITableView.appearance().showsVerticalScrollIndicator = false
         _results = SectionedFetchRequest<Bool, Bubble>(entity: Bubble.entity(),
-                                                        sectionIdentifier: \.isPinned,
-                                                      sortDescriptors: BubbleList.descriptors,
-                                                            predicate: predicate.wrappedValue,
-                                                        animation: .default)
-        _predicate = Binding(projectedValue: predicate)
+                                                       sectionIdentifier: \.isPinned,
+                                                       sortDescriptors: BubbleList.descriptors,
+                                                       predicate: nil,
+                                                       animation: .default)
     }
     
     // MARK: -
@@ -172,7 +165,7 @@ struct BubbleList: View {
 // MARK: -
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        BubbleList(.constant(NSPredicate(value: true)))
+        BubbleList()
     }
 }
 
@@ -193,13 +186,11 @@ struct BubbleCellLow_Key:PreferenceKey {
 
 // MARK: - Little Helpers
 extension BubbleList {
-    fileprivate var notesShowing:Bool { stickyNotesList_bRank != nil }
-    
-    fileprivate var focusOn:Bool { predicate != nil }
-    
+    fileprivate var notesShowing:Bool { viewModel.stickyNotesList_bRank != nil }
+        
     fileprivate var isListEmpty:Bool { results.isEmpty }
     
-    fileprivate var deleteViewShowing:Bool { showDeleteAction_bRank != nil }
+    fileprivate var deleteViewShowing:Bool { viewModel.showDeleteAction_bRank != nil }
     
     var deleteViewOffsetComputed:Bool {
         deleteViewYOffset != nil
