@@ -83,7 +83,7 @@ extension Color {
                              "byzantium" : "Byzantium",
                              "rose" : "Rose"]
     
-    static func friendlyBubbleColorName(for bubbleColorName:String?) -> String {
+    static func userFriendlyBubbleColorName(for bubbleColorName:String?) -> String {
         guard
             let bubbleColorName = bubbleColorName,
             let colorName = colorNames[bubbleColorName]

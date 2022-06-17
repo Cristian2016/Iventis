@@ -25,7 +25,7 @@ public class Bubble: NSManagedObject {
     var lastPair:Pair? { (lastSession?.pairs?.array as? [Pair])?.last }
     
     // MARK: -
-    ///time components that bubbleCell displays. ex: "12"hr "34"min "59"sec
+    ///@Published time components that bubbleCell displays. ex: "12"hr "34"min "59"sec
     @Published var bubbleCell_Components
     = Float.TimeComponentsAsStrings(hr: "0", min: "0", sec: "0", cents: "00")
     { willSet { self.objectWillChange.send() }}

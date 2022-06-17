@@ -104,11 +104,8 @@ class ViewModel: ObservableObject {
                 
                 //⚠️ closure runs on the main queue. whatever you want the user to see put in that closure otherwise it will fail to update!!!!
                 currentPair?.computeDuration(.atPause) {
-                    //closure runs on main queue
-                    currentPair?.duration = $0 //Float
-                    currentPair?.durationAsStrings = $1 //Data
                     
-                    //compute and store currentClock
+                    //set bubble properties
                     bubble.currentClock += currentPair!.duration
                     bubble.bubbleCell_Components = bubble.currentClock.timeComponentsAsStrings
                     
@@ -191,19 +188,13 @@ class ViewModel: ObservableObject {
             bubble.lastPair!.pause = Date() //close last pair
             
             //compute lastPair duration first [on background thread 🔴]
-            bubble.lastPair?.computeDuration(.atEndSession) { (computedDuration, data) in
-                //UIThread 🟢
-                
-                //store pair and session durations
-                bubble.lastPair?.duration = computedDuration
-                bubble.lastPair?.durationAsStrings = data
-                
-                bubble.lastSession?.computeDuration {//completion called on UIThread 🟢
+            bubble.lastPair?.computeDuration(.atEndSession) {
+                bubble.lastSession?.computeDuration {
+                    print(Thread.isMainThread)
                     self.createCalendarEventIfRequiredAndSaveToCoreData(for: bubble)
                     PersistenceController.shared.save()
                 }
             }
-            
         }
         else { createCalendarEventIfRequiredAndSaveToCoreData(for: bubble) }
     }

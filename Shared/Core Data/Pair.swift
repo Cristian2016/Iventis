@@ -34,31 +34,32 @@ public class Pair: NSManagedObject {
     }
     
     ///runs on background thread. it computes at 1.pause or 2.endSession. endSession means substracting 0.5 seconds from the duration
-    func computeDuration(_ durationComputed:DurationComputed, completion: @escaping (Float, Data) -> ()) {
-
+    func computeDuration(_ durationComputed:DurationComputed, completion: @escaping () -> ()) {
+        
         DispatchQueue.global().async {
             
-            //make sure Pair duration can be computed
-            //make sure pauseDate is set, otherwise duration cannot be computed
-            guard let pause = self.pause else { fatalError() }
+            //make sure duration can be computed
+            guard let start = self.start, let pause = self.pause else { fatalError() }
             
-            if let start = self.start {
-                let duration:Float
-                switch durationComputed {
-                    case .atPause:
-                        duration = Float(pause.timeIntervalSince(start))
-                    case .atEndSession:
-                        duration = Float(pause.timeIntervalSince(start) - Global.longPressLatency)
-                }
+            //set duration
+            let duration:Float
+            switch durationComputed {
+                case .atPause:
+                    duration = Float(pause.timeIntervalSince(start))
+                case .atEndSession:
+                    duration = Float(pause.timeIntervalSince(start) - Global.longPressLatency)
+            }
+            
+            //convert duration.timeComponentsAsStrings to Data using JSONEncoder
+            let componentStrings = duration.timeComponentsAsStrings
+            let data = try? JSONEncoder().encode(componentStrings)
+            
+            DispatchQueue.main.async {
+                self.duration = duration
+                self.durationAsStrings = data
                 
-                //convert duration.timeComponentsAsStrings to raw data using JSONEncoder
-                let componentStrings = duration.timeComponentsAsStrings
-                let data = try? JSONEncoder().encode(componentStrings)
-                
-                DispatchQueue.main.async {
-                    completion(duration, data!)
-                    //⚠️ Session computes its duration after pair computes its duration and then session saves context. No need to save context here since session saves it anyway
-                }
+                completion()
+                //⚠️ Session computes its duration after pair computes its duration and then session saves context. No need to save context here since session saves it anyway
             }
         }
     }
