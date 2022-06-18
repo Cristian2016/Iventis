@@ -179,21 +179,20 @@ struct BubbleCell: View {
     
     ///hundredths of a second that is :)
     private var hundredthsView:some View {
-        
-                Text(bubble.bubbleCell_Components.cents)
-                    .background(Circle()
-                        .foregroundColor(Color("pauseStickerColor"))
-                        .padding(-12))
-                    .foregroundColor(Color("pauseStickerFontColor"))
-                    .font(.system(size: BubbleCell.metrics.hundredthsFontSize, weight: .semibold, design: .default))
-                //animations:scale, offset and opacity
-                    .scaleEffect(isSecondsTapped && !isBubbleRunning ? 2 : 1.0)
-                    .offset(x: isSecondsTapped && !isBubbleRunning ? -20 : 0,
-                            y: isSecondsTapped && !isBubbleRunning ? -20 : 0)
-                    .opacity(isSecondsTapped && !isBubbleRunning ? 0 : 1)
-                    .animation(.spring(response: 0.3, dampingFraction: 0.2), value: isSecondsTapped)
-        .padding(EdgeInsets(top: 0, leading: 0, bottom: 6, trailing: 8))
-        .zIndex(1)
+        Text(bubble.bubbleCell_Components.cents)
+            .background(Circle()
+                .foregroundColor(Color("pauseStickerColor"))
+                .padding(-12))
+            .foregroundColor(Color("pauseStickerFontColor"))
+            .font(.system(size: BubbleCell.metrics.hundredthsFontSize, weight: .semibold, design: .default))
+        //animations:scale, offset and opacity
+            .scaleEffect(isSecondsTapped && !isBubbleRunning ? 2 : 1.0)
+            .offset(x: isSecondsTapped && !isBubbleRunning ? -20 : 0,
+                    y: isSecondsTapped && !isBubbleRunning ? -20 : 0)
+            .opacity(isSecondsTapped && !isBubbleRunning ? 0 : 1)
+            .animation(.spring(response: 0.3, dampingFraction: 0.2), value: isSecondsTapped)
+            .padding(EdgeInsets(top: 0, leading: 0, bottom: 6, trailing: 8))
+            .zIndex(1)
     }
     
     private var calendarView:some View {
