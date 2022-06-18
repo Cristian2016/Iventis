@@ -55,12 +55,12 @@ struct BubbleList: View {
                         }
                         .padding(EdgeInsets(top: 0, leading: -10, bottom: 0, trailing: -10))
                         .listStyle(.sidebar)
-                        .navigationDestination(for: Bubble.self, destination: { bubble in
+                        .navigationDestination(for: Bubble.self) { bubble in
                             VStack {
                                 BubbleCell(bubble)
                                 DetailView(Int(bubble.rank))
                             }
-                        })
+                        }
                     }
                     .ignoresSafeArea(edges:.bottom)
                     

@@ -8,15 +8,6 @@
 import SwiftUI
 
 struct BubbleCell: View {
-    struct Metrics {
-        let diameter = CGFloat(UIScreen.main.bounds.size.width / 2.7)
-        let fontRatio = CGFloat(0.4)
-        let spacingRatio = CGFloat(-0.28)
-        
-        lazy var spacing = diameter * spacingRatio
-        lazy var fontSize = diameter * fontRatio
-    }
-    
     // MARK: - Constants
     static var metrics = Metrics()
     
@@ -28,31 +19,15 @@ struct BubbleCell: View {
     
     // MARK: -
     @Environment(\.editMode) var editMode //used to toggle move rows
-    var editModeOn:Bool { editMode?.wrappedValue == .active }
     
-    // MARK: -
-    private var isRunning:Bool { bubble.state == .running }
     @State private var isSecondsTapped = false
     @State private var isSecondsLongPressed = false
     
-    private let circleDiameter = Global.circleDiameter
-    
+    // MARK: -
     init(_ bubble:Bubble) {
         _bubble = StateObject(wrappedValue: bubble)
         if !bubble.isObservingBackgroundTimer { bubble.observeBackgroundTimer() }
     }
-    
-    private var minOpacity:Double {
-        bubble.bubbleCell_Components.min > "0" || bubble.bubbleCell_Components.hr > "0" ? 1 : 0.001
-    }
-    private var hrOpacity:Double { bubble.bubbleCell_Components.hr > "0" ? 1 : 0.001 }
-    
-    // MARK: - Helpers
-    private var bubbleNotRunning:Bool { bubble.state != .running }
-    
-    private func showNotesList () { viewModel.stickyNotesList_bRank = Int(bubble.rank) }
-    
-    private var noNote:Bool { bubble.note_.isEmpty }
     
     func handleLongPress() {
         UserFeedback.singleHaptic(.light)
@@ -82,7 +57,7 @@ struct BubbleCell: View {
                     }
             }
             
-            if bubbleNotRunning {
+            if !isBubbleRunning {
                 hundredthsView
                     .onTapGesture {
                     UserFeedback.singleHaptic(.heavy)
@@ -210,12 +185,12 @@ struct BubbleCell: View {
                         .foregroundColor(Color("pauseStickerColor"))
                         .padding(-12))
                     .foregroundColor(Color("pauseStickerFontColor"))
-                    .font(.system(size: 24, weight: .semibold, design: .default))
+                    .font(.system(size: BubbleCell.metrics.hundredthsFontSize, weight: .semibold, design: .default))
                 //animations:scale, offset and opacity
-                    .scaleEffect(isSecondsTapped && !isRunning ? 2 : 1.0)
-                    .offset(x: isSecondsTapped && !isRunning ? -20 : 0,
-                            y: isSecondsTapped && !isRunning ? -20 : 0)
-                    .opacity(isSecondsTapped && !isRunning ? 0 : 1)
+                    .scaleEffect(isSecondsTapped && !isBubbleRunning ? 2 : 1.0)
+                    .offset(x: isSecondsTapped && !isBubbleRunning ? -20 : 0,
+                            y: isSecondsTapped && !isBubbleRunning ? -20 : 0)
+                    .opacity(isSecondsTapped && !isBubbleRunning ? 0 : 1)
                     .animation(.spring(response: 0.3, dampingFraction: 0.2), value: isSecondsTapped)
         .padding(EdgeInsets(top: 0, leading: 0, bottom: 6, trailing: 8))
         .zIndex(1)
@@ -287,9 +262,37 @@ extension View {
 
 // MARK: - Little Helpers
 extension BubbleCell {
+    // MARK: - Helpers
+    private func showNotesList () { viewModel.stickyNotesList_bRank = Int(bubble.rank) }
+    
     private var calendarActionName:String { bubble.hasCalendar ? "Cal OFF" : "Cal ON" }
     
     private var calendarActionImageName:String { bubble.hasCalendar ? "calendar" : "calendar" }
     
     private var calendarActionColor:Color { bubble.hasCalendar ? Color.calendarOff : .calendar }
+}
+
+extension BubbleCell {
+    var isInEditMode:Bool { editMode?.wrappedValue == .active }
+    
+    private var isBubbleRunning:Bool { bubble.state == .running }
+    
+    //stopwatch: minutes and hours stay hidden initially
+    private var minOpacity:Double {
+        bubble.bubbleCell_Components.min > "0" || bubble.bubbleCell_Components.hr > "0" ? 1 : 0.001
+    }
+    private var hrOpacity:Double { bubble.bubbleCell_Components.hr > "0" ? 1 : 0.001 }
+    
+    private var noNote:Bool { bubble.note_.isEmpty }
+    
+    ///circle diameter, font size, spacing and so on
+    struct Metrics {
+        let diameter = CGFloat(UIScreen.main.bounds.size.width / 2.7)
+        let fontRatio = CGFloat(0.4)
+        let spacingRatio = CGFloat(-0.28)
+        
+        lazy var spacing = diameter * spacingRatio
+        lazy var fontSize = diameter * fontRatio
+        lazy var hundredthsFontSize = diameter / 5
+    }
 }

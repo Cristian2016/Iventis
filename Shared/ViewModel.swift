@@ -11,7 +11,7 @@ import Combine
 
 
 class ViewModel: ObservableObject {
-    
+    ///programmatic navigation
     @Published var navigationPath = [Bubble]()
     
     @Published var showDetail_bRank:Int? = nil
