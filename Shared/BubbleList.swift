@@ -54,7 +54,8 @@ struct BubbleList: View {
                             Spacer(minLength: 100) //overscroll
                         }
                         .padding(EdgeInsets(top: 0, leading: -10, bottom: 0, trailing: -10))
-                        .listStyle(.sidebar)
+                        .listStyle(.inset)
+                        .listRowSeparator(.hidden)
                         .navigationDestination(for: Bubble.self) { bubble in
                             VStack {
                                 BubbleCell(bubble)

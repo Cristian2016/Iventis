@@ -57,13 +57,6 @@ struct BubbleCell: View {
                     }
             }
             
-            if !isBubbleRunning {
-                hundredthsView
-                    .onTapGesture {
-                    UserFeedback.singleHaptic(.heavy)
-                    viewModel.toggleStart(bubble)
-                }
-            }
             hrMinSecStack
             if bubble.hasCalendar && noNote { calendarView }
             if !noNote {
@@ -164,14 +157,26 @@ struct BubbleCell: View {
     }
     
     var secondsView : some View {
-        circle //SECONDS
-            .overlay { Text(bubble.bubbleCell_Components.sec) }
-        //animations secondsTapped
-            .scaleEffect(isSecondsTapped ? 0.6 : 1.0)
-            .animation(.secondsTapped, value: isSecondsTapped)
-        //animations seconds long pressed
-            .scaleEffect(isSecondsLongPressed ? 0.2 : 1.0)
-            .animation(.secondsLongPressed, value: isSecondsLongPressed)
+        ZStack {
+            circle //SECONDS
+                .overlay { Text(bubble.bubbleCell_Components.sec) }
+            //animations secondsTapped
+                .scaleEffect(isSecondsTapped ? 0.6 : 1.0)
+                .animation(.secondsTapped, value: isSecondsTapped)
+            //animations seconds long pressed
+                .scaleEffect(isSecondsLongPressed ? 0.2 : 1.0)
+                .animation(.secondsLongPressed, value: isSecondsLongPressed)
+            
+            if !isBubbleRunning {
+                Push(.bottomRight) {
+                    hundredthsView
+                        .onTapGesture {
+                        UserFeedback.singleHaptic(.heavy)
+                        viewModel.toggleStart(bubble)
+                    }
+                }
+            }
+        }
     }
     
     ////added to bubbleCell only if cellLow value is needed. ex: to know how to position DeleteActionView
