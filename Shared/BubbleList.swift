@@ -32,8 +32,10 @@ struct BubbleList: View {
                                     ForEach (section) { bubble in
                                         ZStack {
                                             NavigationLink(value: bubble) { }
+                                                .opacity(0.0)
                                             BubbleCell(bubble)
                                         }
+                                        .listRowSeparator(.hidden)
                                     }
 //                                    .onMove {
 //                                        let moveAtTheBottom = ($1 == section.count)
@@ -55,7 +57,6 @@ struct BubbleList: View {
                         }
                         .padding(EdgeInsets(top: 0, leading: -10, bottom: 0, trailing: -10))
                         .listStyle(.inset)
-                        .listRowSeparator(.hidden)
                         .navigationDestination(for: Bubble.self) { bubble in
                             VStack {
                                 BubbleCell(bubble)

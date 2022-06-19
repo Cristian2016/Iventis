@@ -95,16 +95,22 @@ struct BubbleCell: View {
         }
     }
     
+    private func presentDetail() {
+        if viewModel.navigationPath.isEmpty {
+            viewModel.navigationPath = [bubble]
+        }
+    }
+    
     // MARK: - Legoes
     private var hrMinSecStack:some View {
         HStack (spacing: BubbleCell.metrics.spacing) {
             hoursView
-                .onTapGesture { viewModel.navigationPath = [bubble] }
+                .onTapGesture { presentDetail() }
                 .onLongPressGesture { handleLongPress() }
             minutesView
                 .onTapGesture { withAnimation(.easeInOut(duration: 0.05)) {
                     editMode?.wrappedValue = .inactive
-                    viewModel.navigationPath = [bubble]
+                    presentDetail()
                 } }
                 .onLongPressGesture { print("edit duration") }
             secondsView
@@ -196,7 +202,7 @@ struct BubbleCell: View {
                     y: isSecondsTapped && !isBubbleRunning ? -20 : 0)
             .opacity(isSecondsTapped && !isBubbleRunning ? 0 : 1)
             .animation(.spring(response: 0.3, dampingFraction: 0.2), value: isSecondsTapped)
-            .padding(EdgeInsets(top: 0, leading: 0, bottom: 6, trailing: 8))
+            .padding(EdgeInsets(top: 0, leading: 0, bottom: 6, trailing: 14))
             .zIndex(1)
     }
     
