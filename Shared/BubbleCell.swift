@@ -107,6 +107,7 @@ struct BubbleCell: View {
                 hoursView
                     .onTapGesture { presentDetail() }
                     .onLongPressGesture { handleLongPress() }
+                    .zIndex(1)
                 minutesView
                     .onTapGesture { withAnimation(.easeInOut(duration: 0.05)) {
                         editMode?.wrappedValue = .inactive
