@@ -11,13 +11,13 @@ import SwiftUI
 struct PlusButton: View {
     @Binding var isPaletteShowing:Bool
     private func showPalette() { withAnimation { isPaletteShowing = true } }
-    let fontSize = CGFloat(40)
+    let fontSize = CGFloat(30)
     
     var body: some View { button }
     
     private var button: some View {
         Button { showPalette() }
-    label: { Label("", systemImage: "plus.circle") }
+    label: { Label("", systemImage: "plus") }
             .font(.system(size: fontSize))
     }
 }

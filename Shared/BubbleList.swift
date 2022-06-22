@@ -55,15 +55,19 @@ struct BubbleList: View {
                 }
             }
             Push(.topRight) {
-                HStack (spacing: 0) {
+                HStack {
                     if UIDevice.isIPad {
                         PlusButton(isPaletteShowing: $isPaletteShowing)
                     }
                     if !notesShowing && !isListEmpty { UpDownArrowsButton() }
                 }
-                .background { RoundedRectangle(cornerRadius: 12).fill(Color.background1) }
+                .background {
+                    RoundedRectangle(cornerRadius: 12)
+                        .fill(Color.background1)
+                        .frame(height: 45)
+                }
             }
-            .padding(EdgeInsets(top: 4, leading: 0, bottom: 0, trailing: 4))
+            .padding(EdgeInsets(top: 4, leading: 0, bottom: 0, trailing: 8))
             
             if !notesShowing {
                 LeftStrip($isPaletteShowing, isListEmpty).environmentObject(viewModel)

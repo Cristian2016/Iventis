@@ -13,7 +13,7 @@ struct UpDownArrowsButton: View {
     
     ///how view is positioned on screen
     let padding = EdgeInsets(top: -4, leading: 0, bottom: 2, trailing: 12)
-    let fontSize = CGFloat(40)
+    let fontSize = CGFloat(30)
     
     // MARK: -
     var body: some View { button }
@@ -24,7 +24,7 @@ struct UpDownArrowsButton: View {
     label: {
         Label { }
     icon: {
-        Image(systemName: "arrow.up.arrow.down.circle")
+        Image(systemName: "arrow.up.and.down")
             .font(.system(size: fontSize).weight(.regular))
             .foregroundColor(editMode?.wrappedValue == .active ? .pink : .blue)
     }
