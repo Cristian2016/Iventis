@@ -11,12 +11,10 @@ import Combine
 
 
 class ViewModel: ObservableObject {
-    ///programmatic navigation
-    @Published var navigationPath = [Bubble]()
-    
-    @Published var showDetail_bRank:Int? = nil
     @Published var showDeleteAction_bRank:Int? = nil
     @Published var stickyNotesList_bRank:Int? = nil //bubble rank
+    
+    @Published var selectedBubbleRank:Int?
         
     init() {
         let request = Bubble.fetchRequest()
@@ -223,7 +221,7 @@ class ViewModel: ObservableObject {
         bubble.continueToUpdateSmallBubbleCell = rank != nil
     }
     
-    // MARK: -
+    // MARK: - Helpers
     func bubble(for rank:Int?) -> Bubble? {
         guard let rank = rank else { fatalError() }
         let request = Bubble.fetchRequest()

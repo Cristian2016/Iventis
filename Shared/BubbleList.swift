@@ -26,60 +26,54 @@ struct BubbleList: View {
             else {
                 ZStack {
                     VStack {
-                        List {
-                            ForEach(results) { section in
-                                Section {
-                                    ForEach (section) { bubble in
-                                        ZStack {
-                                            NavigationLink(value: bubble) { }
-                                                .opacity(0.0)
-                                            BubbleCell(bubble)
-                                        }
+                        List (results, selection: $viewModel.selectedBubbleRank) { section in
+                            Section {
+                                ForEach (section) { bubble in
+                                    BubbleCell(bubble)
                                         .listRowSeparator(.hidden)
-                                    }
-//                                    .onMove {
-//                                        let moveAtTheBottom = ($1 == section.count)
-//                                        let sourceRank = section[$0.first!].rank
-//
-//                                        if moveAtTheBottom {
-//                                            let destRank = section[$1 - 1].rank
-//                                            viewModel.reorderRanks(sourceRank, destRank, true)
-//                                        } else {
-//                                            let destRank = section[$1].rank
-//                                            viewModel.reorderRanks(sourceRank, destRank)
-//                                        }
-//                                    }
                                 }
-                            header: { headerTitle(for: section.id.description) }
-                                    .accentColor(section.id != false ? .clear : .label) //collapse section indicators invisible
+//                                .onMove {
+//                                    let moveAtTheBottom = ($1 == section.count)
+//                                    let sourceRank = section[$0.first!].rank
+//
+//                                    if moveAtTheBottom {
+//                                        let destRank = section[$1 - 1].rank
+//                                        viewModel.reorderRanks(sourceRank, destRank, true)
+//                                    } else {
+//                                        let destRank = section[$1].rank
+//                                        viewModel.reorderRanks(sourceRank, destRank)
+//                                    }
+//                                }
                             }
-                            Spacer(minLength: 100) //overscroll
+                        header: { headerTitle(for: section.id.description) }
+                                .accentColor(section.id != false ? .clear : .label) //collapse section indicators invisible
                         }
                         .padding(EdgeInsets(top: 0, leading: -10, bottom: 0, trailing: -10))
-                        .listStyle(.inset)
-                        .navigationDestination(for: Bubble.self) { bubble in
-                            VStack {
-                                BubbleCell(bubble)
-                                DetailView(Int(bubble.rank))
-                            }
-                        }
+                        .listStyle(.sidebar)
                     }
                     .ignoresSafeArea(edges:.bottom)
-                    
-                    if !notesShowing { UpDownArrows() }
                 }
             }
+            Push(.topRight) {
+                HStack (spacing: 0) {
+                    if UIDevice.isIPad {
+                        PlusButton(isPaletteShowing: $isPaletteShowing)
+                    }
+                    if !notesShowing && !isListEmpty { UpDownArrowsButton() }
+                }
+                .background { RoundedRectangle(cornerRadius: 12).fill(Color.background1) }
+            }
+            .padding(EdgeInsets(top: 4, leading: 0, bottom: 0, trailing: 4))
+            
             if !notesShowing {
-                LeftStrip($isPaletteShowing, isListEmpty)
-                    .environmentObject(viewModel)
+                LeftStrip($isPaletteShowing, isListEmpty).environmentObject(viewModel)
             }
             
             if notesShowing { BubbleStickyNotesList($viewModel.stickyNotesList_bRank) }
             
             if deleteViewOffsetComputed && deleteViewShowing {
                 let bubble = viewModel.bubble(for: viewModel.showDeleteAction_bRank!)
-                DeleteView(bubble, deleteViewYOffset!)
-                    .environmentObject(viewModel) //pass viewmodel as well
+                DeleteView(bubble, deleteViewYOffset!).environmentObject(viewModel)
             }
             
             PaletteView($isPaletteShowing).environmentObject(viewModel)

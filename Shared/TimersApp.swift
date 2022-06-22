@@ -12,11 +12,20 @@ struct TimersApp: App {
     @Environment(\.scenePhase) var scenePhase
     let viewContext = PersistenceController.shared.container.viewContext
     @StateObject var viewModel = ViewModel()
+    @State var visibility = NavigationSplitViewVisibility.doubleColumn
     
+    //the root view of scene is a NavigationSplitView
     var body: some Scene {
         WindowGroup {
-            NavigationStack(path:$viewModel.navigationPath) {
+            NavigationSplitView(columnVisibility: $visibility) {
                 ViewHierarchy()
+            } detail: {
+                if let selectedBubbleRank = viewModel.selectedBubbleRank {
+//                    DetailView(selectedBubbleRank)
+                    Color.blue
+                } else {
+                    Color.red
+                }
             }
             .environment(\.managedObjectContext, viewContext)
             .environmentObject(viewModel)

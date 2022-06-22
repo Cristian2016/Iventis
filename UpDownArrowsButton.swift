@@ -8,7 +8,7 @@
 import SwiftUI
 
 ///Drag and Drop (Reaarange) bubbles
-struct UpDownArrows: View {
+struct UpDownArrowsButton: View {
     @Environment(\.editMode) var editMode
     
     ///how view is positioned on screen
@@ -16,10 +16,9 @@ struct UpDownArrows: View {
     let fontSize = CGFloat(40)
     
     // MARK: -
-    var body: some View { Push(.topRight) { button }.padding(padding) }
+    var body: some View { button }
     
     // MARK: -
-    @ViewBuilder
     private var button:some View {
         Button { toggleEditMode() }
     label: {
@@ -28,7 +27,6 @@ struct UpDownArrows: View {
         Image(systemName: "arrow.up.arrow.down.circle")
             .font(.system(size: fontSize).weight(.regular))
             .foregroundColor(editMode?.wrappedValue == .active ? .pink : .blue)
-            .background { RoundedRectangle(cornerRadius: 12).fill(Color.background1) }
     }
     }
     .tint(editMode?.wrappedValue == .active ? .pink : .blue)
@@ -50,6 +48,6 @@ struct UpDownArrows: View {
 
 struct DragAndDropActionButton_Previews: PreviewProvider {
     static var previews: some View {
-        UpDownArrows()
+        UpDownArrowsButton()
     }
 }

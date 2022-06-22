@@ -96,46 +96,48 @@ struct BubbleCell: View {
     }
     
     private func presentDetail() {
-        if viewModel.navigationPath.isEmpty {
-            viewModel.navigationPath = [bubble]
-        }
+        print(#function)
+        viewModel.selectedBubbleRank = Int(bubble.rank)
     }
     
     // MARK: - Legoes
     private var hrMinSecStack:some View {
-        HStack (spacing: BubbleCell.metrics.spacing) {
-            hoursView
-                .onTapGesture { presentDetail() }
-                .onLongPressGesture { handleLongPress() }
-            minutesView
-                .onTapGesture { withAnimation(.easeInOut(duration: 0.05)) {
-                    editMode?.wrappedValue = .inactive
-                    presentDetail()
-                } }
-                .onLongPressGesture { print("edit duration") }
-            secondsView
-                .onTapGesture {
-                    isSecondsTapped = true
-                    delayExecution(.now() + 0.1) { isSecondsTapped = false }
-                    
-                    //feedback
-                    UserFeedback.singleHaptic(.heavy)
-                    
-                    //user intent model
-                    viewModel.toggleStart(bubble)
-                }
-                .onLongPressGesture {
-                    isSecondsLongPressed = true
-                    delayExecution(.now() + 0.25) { isSecondsLongPressed = false }
-                    
-                    //feedback
-                    UserFeedback.doubleHaptic(.heavy)
-                    
-                    //user intent model
-                    viewModel.endSession(bubble)
-                }
+        ZStack {
+            HStack (spacing: BubbleCell.metrics.spacing) {
+                hoursView
+                    .onTapGesture { presentDetail() }
+                    .onLongPressGesture { handleLongPress() }
+                minutesView
+                    .onTapGesture { withAnimation(.easeInOut(duration: 0.05)) {
+                        editMode?.wrappedValue = .inactive
+                        presentDetail()
+                    } }
+                    .onLongPressGesture { print("edit duration") }
+                secondsView
+                    .onTapGesture {
+                        isSecondsTapped = true
+                        delayExecution(.now() + 0.1) { isSecondsTapped = false }
+                        
+                        //feedback
+                        UserFeedback.singleHaptic(.heavy)
+                        
+                        //user intent model
+                        viewModel.toggleStart(bubble)
+                    }
+                    .onLongPressGesture {
+                        isSecondsLongPressed = true
+                        delayExecution(.now() + 0.25) { isSecondsLongPressed = false }
+                        
+                        //feedback
+                        UserFeedback.doubleHaptic(.heavy)
+                        
+                        //user intent model
+                        viewModel.endSession(bubble)
+                    }
+            }
+            Text(bubble.bubbleCell_Components.min)
         }
-        .frame(height: BubbleCell.metrics.diameter)
+        .frame(height: BubbleCell.metrics.circleDiameter)
         .font(.system(size: BubbleCell.metrics.fontSize))
         .foregroundColor(.white)
 //        .onDrag { NSItemProvider() }
@@ -153,13 +155,11 @@ struct BubbleCell: View {
     
     var minutesView : some View {
         circle //MINUTES
-            .overlay { Text(bubble.bubbleCell_Components.min) }
             .opacity(minOpacity)
         //animations
             .scaleEffect(isSecondsLongPressed ? 0.2 : 1.0)
             .offset(x: isSecondsLongPressed ? 10 : 0.0, y: 0)
             .animation(.secondsLongPressed.delay(0.1), value: isSecondsLongPressed)
-            .zIndex(-1)
     }
     
     var secondsView : some View {
@@ -233,7 +233,7 @@ struct BubbleCell: View {
     fileprivate func toggleDetailView() {
         UserFeedback.singleHaptic(.medium)
         
-        viewModel.showDetail_bRank = Int(bubble.rank)
+        viewModel.selectedBubbleRank = Int(bubble.rank)
         
         //ask viewModel
         let rank = Int(bubble.rank)
@@ -246,8 +246,8 @@ struct BubbleCell: View {
     }
     
     private var showDetailView:Bool {
-        guard let showDetailView_BubbleRank = viewModel.showDetail_bRank else { return false }
-        return bubble.rank == showDetailView_BubbleRank
+        guard let selectedBubbleRank = viewModel.selectedBubbleRank else { return false }
+        return bubble.rank == selectedBubbleRank
     }
 }
 
@@ -297,12 +297,18 @@ extension BubbleCell {
     
     ///circle diameter, font size, spacing and so on
     struct Metrics {
-        let diameter = CGFloat(UIScreen.main.bounds.size.width / 2.7)
+        var circleDiameter:CGFloat = {
+            if UIDevice.isIPad {
+                return 140
+            } else {
+               return CGFloat(UIScreen.main.bounds.size.width / 2.7)
+            }
+        }()
         let fontRatio = CGFloat(0.4)
         let spacingRatio = CGFloat(-0.28)
         
-        lazy var spacing = diameter * spacingRatio
-        lazy var fontSize = diameter * fontRatio
-        lazy var hundredthsFontSize = diameter / 5
+        lazy var spacing = circleDiameter * spacingRatio
+        lazy var fontSize = circleDiameter * fontRatio
+        lazy var hundredthsFontSize = circleDiameter / 6
     }
 }

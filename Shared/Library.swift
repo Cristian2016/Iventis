@@ -10,6 +10,10 @@ import UIKit
 #endif
 import SwiftUI
 
+extension UIDevice {
+    static let isIPad: Bool = UIDevice.current.userInterfaceIdiom == .pad
+}
+
 enum Visibility:CaseIterable {
     case visible
     case invisible //hidden. still part of VH
