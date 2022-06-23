@@ -20,7 +20,7 @@ struct TimersApp: App {
             NavigationSplitView(columnVisibility: $visibility) {
                 ViewHierarchy()
             } detail: {
-                if let selectedBubbleRank = viewModel.selectedBubbleRank {
+                if let selectedBubbleRank = viewModel.rankOfSelectedBubble {
 //                    DetailView(selectedBubbleRank)
                     Color.blue
                 } else {

@@ -14,7 +14,7 @@ class ViewModel: ObservableObject {
     @Published var showDeleteAction_bRank:Int? = nil
     @Published var stickyNotesList_bRank:Int? = nil //bubble rank
     
-    @Published var selectedBubbleRank:Int?
+    @Published var rankOfSelectedBubble:Int?
         
     init() {
         let request = Bubble.fetchRequest()

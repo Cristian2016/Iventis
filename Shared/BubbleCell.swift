@@ -97,7 +97,7 @@ struct BubbleCell: View {
     
     private func presentDetail() {
         print(#function)
-        viewModel.selectedBubbleRank = Int(bubble.rank)
+        viewModel.rankOfSelectedBubble = Int(bubble.rank)
     }
     
     // MARK: - Legoes
@@ -234,7 +234,7 @@ struct BubbleCell: View {
     fileprivate func toggleDetailView() {
         UserFeedback.singleHaptic(.medium)
         
-        viewModel.selectedBubbleRank = Int(bubble.rank)
+        viewModel.rankOfSelectedBubble = Int(bubble.rank)
         
         //ask viewModel
         let rank = Int(bubble.rank)
@@ -247,7 +247,7 @@ struct BubbleCell: View {
     }
     
     private var showDetailView:Bool {
-        guard let selectedBubbleRank = viewModel.selectedBubbleRank else { return false }
+        guard let selectedBubbleRank = viewModel.rankOfSelectedBubble else { return false }
         return bubble.rank == selectedBubbleRank
     }
 }

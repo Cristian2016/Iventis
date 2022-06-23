@@ -26,7 +26,7 @@ struct BubbleList: View {
             else {
                 ZStack {
                     VStack {
-                        List (results, selection: $viewModel.selectedBubbleRank) { section in
+                        List (results, selection: $viewModel.rankOfSelectedBubble) { section in
                             Section {
                                 ForEach (section) { bubble in
                                     BubbleCell(bubble)
@@ -49,7 +49,7 @@ struct BubbleList: View {
                                 .accentColor(section.id != false ? .clear : .label) //collapse section indicators invisible
                         }
                         .padding(EdgeInsets(top: 0, leading: -10, bottom: 0, trailing: -10))
-                        .listStyle(.sidebar)
+                        .listStyle(.plain)
                     }
                     .ignoresSafeArea(edges:.bottom)
                 }
@@ -63,7 +63,7 @@ struct BubbleList: View {
                 }
                 .background {
                     RoundedRectangle(cornerRadius: 12)
-                        .fill(Color.background1)
+                        .fill(Appearance.bubbleListControlBackground)
                         .frame(height: 45)
                 }
             }

@@ -8,6 +8,10 @@
 import CoreData
 
 struct PersistenceController {
+    private static let colors = [
+        "red", "ultramarine", "orange", "sky", "magenta", "silver", "lemon", "charcoal"
+    ]
+    
     init(inMemory: Bool = false) {
         container = NSPersistentContainer(name: "Model")
         
@@ -32,9 +36,11 @@ struct PersistenceController {
     static var preview: PersistenceController = {
         let result = PersistenceController(inMemory: true)
         let viewContext = result.container.viewContext
-        for _ in 0..<10 {
-            let newItem = Bubble(context: viewContext)
-            newItem.created = Date()
+        for index in 0..<8 {
+            let newBubble = Bubble(context: viewContext)
+            newBubble.created = Date()
+            newBubble.color = colors[index]
+            newBubble.rank = Int64(index)
         }
         do {
             try viewContext.save()
