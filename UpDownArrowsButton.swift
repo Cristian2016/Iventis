@@ -24,7 +24,7 @@ struct UpDownArrowsButton: View {
     label: {
         Label { }
     icon: {
-        Image(systemName: "arrow.up.and.down")
+        Image(systemName: "arrow.up.arrow.down")
             .font(.system(size: fontSize).weight(.regular))
             .foregroundColor(editMode?.wrappedValue == .active ? .pink : .blue)
     }
