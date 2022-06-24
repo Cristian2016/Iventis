@@ -388,7 +388,7 @@ extension BubbleCell {
                return CGFloat(UIScreen.main.bounds.size.width / 2.7)
             }
         }()
-        let fontRatio = CGFloat(0.45)
+        let fontRatio = CGFloat(0.42)
         let spacingRatio = CGFloat(-0.28)
         
         lazy var spacing = circleDiameter * spacingRatio

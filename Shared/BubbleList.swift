@@ -30,20 +30,8 @@ struct BubbleList: View {
                             Section {
                                 ForEach (section) { bubble in
                                     BubbleCell(bubble)
-                                        .listRowSeparator(.hidden)
                                 }
-//                                .onMove {
-//                                    let moveAtTheBottom = ($1 == section.count)
-//                                    let sourceRank = section[$0.first!].rank
-//
-//                                    if moveAtTheBottom {
-//                                        let destRank = section[$1 - 1].rank
-//                                        viewModel.reorderRanks(sourceRank, destRank, true)
-//                                    } else {
-//                                        let destRank = section[$1].rank
-//                                        viewModel.reorderRanks(sourceRank, destRank)
-//                                    }
-//                                }
+                                .listRowSeparator(.hidden)
                             }
                         header: { headerTitle(for: section.id.description) }
                                 .accentColor(section.id != false ? .clear : .label) //collapse section indicators invisible
@@ -128,7 +116,7 @@ struct BubbleList: View {
             //rectangle to allow collapse along the entire width
             Rectangle().foregroundColor(.white.opacity(0.001))
         }
-        .font(.title3)
+        .font(.system(size: 26))
     }
     
     private static let descriptors = [
