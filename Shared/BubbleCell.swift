@@ -53,6 +53,27 @@ extension BubbleCell {
             //Seconds
             Circle().fill(Color.clear)
                 .overlay { Text(bubble.bubbleCell_Components.sec) }
+            //gestures
+                .onTapGesture {
+                    isSecondsTapped = true
+                    delayExecution(.now() + 0.1) { isSecondsTapped = false }
+                    
+                    //feedback
+                    UserFeedback.singleHaptic(.heavy)
+                    
+                    //user intent model
+                    viewModel.toggleStart(bubble)
+                }
+                .onLongPressGesture {
+                    isSecondsLongPressed = true
+                    delayExecution(.now() + 0.25) { isSecondsLongPressed = false }
+                    
+                    //feedback
+                    UserFeedback.doubleHaptic(.heavy)
+                    
+                    //user intent model
+                    viewModel.endSession(bubble)
+                }
         }
         .font(.system(size: BubbleCell.metrics.fontSize))
         .foregroundColor(.white)
@@ -100,6 +121,12 @@ struct BubbleCell: View {
         ZStack {
             background
             timeComponents
+            if !isBubbleRunning {
+                hundredthsView.onTapGesture {
+                    UserFeedback.singleHaptic(.heavy)
+                    viewModel.toggleStart(bubble)
+                }
+            }
             let putTransparentGeometryReaderView = showDeleteActionView || showDetailView
             if putTransparentGeometryReaderView {
                 cellLowEmitterView
@@ -245,20 +272,22 @@ struct BubbleCell: View {
     
     ///hundredths of a second that is :)
     private var hundredthsView:some View {
-        Text(bubble.bubbleCell_Components.cents)
-            .background(Circle()
-                .foregroundColor(Color("pauseStickerColor"))
-                .padding(-12))
-            .foregroundColor(Color("pauseStickerFontColor"))
-            .font(.system(size: BubbleCell.metrics.hundredthsFontSize, weight: .semibold, design: .default))
-        //animations:scale, offset and opacity
-            .scaleEffect(isSecondsTapped && !isBubbleRunning ? 2 : 1.0)
-            .offset(x: isSecondsTapped && !isBubbleRunning ? -20 : 0,
-                    y: isSecondsTapped && !isBubbleRunning ? -20 : 0)
-            .opacity(isSecondsTapped && !isBubbleRunning ? 0 : 1)
-            .animation(.spring(response: 0.3, dampingFraction: 0.2), value: isSecondsTapped)
-            .padding(EdgeInsets(top: 0, leading: 0, bottom: 6, trailing: 14))
-            .zIndex(1)
+        Push(.bottomRight) {
+            Text(bubble.bubbleCell_Components.cents)
+                .background(Circle()
+                    .foregroundColor(Color("pauseStickerColor"))
+                    .padding(-12))
+                .foregroundColor(Color("pauseStickerFontColor"))
+                .font(.system(size: BubbleCell.metrics.hundredthsFontSize, weight: .semibold, design: .default))
+            //animations:scale, offset and opacity
+                .scaleEffect(isSecondsTapped && !isBubbleRunning ? 2 : 1.0)
+                .offset(x: isSecondsTapped && !isBubbleRunning ? -20 : 0,
+                        y: isSecondsTapped && !isBubbleRunning ? -20 : 0)
+                .opacity(isSecondsTapped && !isBubbleRunning ? 0 : 1)
+                .animation(.spring(response: 0.3, dampingFraction: 0.2), value: isSecondsTapped)
+                .padding(BubbleCell.metrics.hundredthsInsets)
+                .zIndex(1)
+        }
     }
     
     private var calendarView:some View {
@@ -365,5 +394,7 @@ extension BubbleCell {
         lazy var spacing = circleDiameter * spacingRatio
         lazy var fontSize = circleDiameter * fontRatio
         lazy var hundredthsFontSize = circleDiameter / 6
+        
+        lazy var hundredthsInsets = EdgeInsets(top: 0, leading: 0, bottom: 10, trailing: 14)
     }
 }
