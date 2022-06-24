@@ -82,7 +82,7 @@ extension Color {
         Bubbles.green, Bubbles.charcoal, Bubbles.magenta, Bubbles.purple, Bubbles.orange, Bubbles.chocolate, Bubbles.aqua, Bubbles.byzantium, Bubbles.rose
     ]
     
-    static func bubble(for bubbleColorName:String) -> Color {
+    static func bubbleColor(forName bubbleColorName:String) -> Color {
         (Color.bubbleThrees.filter { $0.description == bubbleColorName }.first ?? Color.Bubbles.mint).sec
     }
     

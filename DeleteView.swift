@@ -64,7 +64,7 @@ struct DeleteView: View {
     init(_ bubble:Bubble?,
          _ deleteActionOffset:CGFloat) {
                         
-        self.bubbleColor = Color.bubble(for: bubble?.color ?? "mint")
+        self.bubbleColor = Color.bubbleColor(forName: bubble?.color ?? "mint")
         self.bubble = bubble
         self.deleteActionOffset = deleteActionOffset
     }

@@ -30,10 +30,10 @@ extension BubbleCell {
     private var shape: some View {
         if bubble.hasWidget {
             RoundedRectangle(cornerRadius: 20)
-                .fill(Color.bubble(for: bubble.color ?? "cyan"))
+                .fill(Color.bubbleColor(forName: bubble.color ?? "cyan"))
         } else {
             Circle()
-                .fill(Color.bubble(for: bubble.color ?? "cyan"))
+                .fill(Color.bubbleColor(forName: bubble.color ?? "cyan"))
         }
     }
 }
@@ -78,16 +78,16 @@ struct BubbleCell: View {
     var body: some View {
         ZStack {
             background
-//            let putTransparentGeometryReaderView = showDeleteActionView || showDetailView
-//            if putTransparentGeometryReaderView {
-//                cellLowEmitterView
-//                    .background {
-//                        GeometryReader {
-//                            let value = BubbleCellLow_Key.RankFrame(rank: Int(bubble.rank), frame: $0.frame(in: .global))
-//                            Color.clear.preference(key: BubbleCellLow_Key.self, value: value)
-//                        }
-//                    }
-//            }
+            let putTransparentGeometryReaderView = showDeleteActionView || showDetailView
+            if putTransparentGeometryReaderView {
+                cellLowEmitterView
+                    .background {
+                        GeometryReader {
+                            let value = BubbleCellLow_Key.RankFrame(rank: Int(bubble.rank), frame: $0.frame(in: .global))
+                            Color.clear.preference(key: BubbleCellLow_Key.self, value: value)
+                        }
+                    }
+            }
             
 //            hrMinSecStack
 //            if bubble.hasCalendar && noNote { calendarView }
@@ -258,7 +258,7 @@ struct BubbleCell: View {
     }
     
     private var circle: some View {
-        Circle().fill(Color.bubble(for: bubble.color ?? "cyan"))
+        Circle().fill(Color.bubbleColor(forName: bubble.color ?? "cyan"))
     }
     
     // MARK: - Methods
