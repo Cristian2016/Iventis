@@ -48,6 +48,7 @@ struct BubbleList: View {
                         header: { headerTitle(for: section.id.description) }
                                 .accentColor(section.id != false ? .clear : .label) //collapse section indicators invisible
                         }
+                        .scrollIndicators(.hidden)
                         .padding(EdgeInsets(top: 0, leading: -10, bottom: 0, trailing: -10))
                         .listStyle(.plain)
                     }

@@ -4,8 +4,39 @@
 //
 //  Created by Cristian Lapusan on 13.04.2022.
 // https://stackoverflow.com/questions/58284994/swiftui-how-to-handle-both-tap-long-press-of-button
+//
 
 import SwiftUI
+
+extension BubbleCell {
+    enum Shape {
+        case circle
+        case square
+    }
+    
+    ///3 Circles or Squares in the background
+    var background: some View {
+        HStack (spacing: BubbleCell.metrics.spacing) {
+            //Hours
+            shape.opacity(hrOpacity)
+            //Minutes
+            shape.opacity(minOpacity)
+            //Seconds
+            shape
+        }
+    }
+    
+    @ViewBuilder
+    private var shape: some View {
+        if bubble.hasWidget {
+            RoundedRectangle(cornerRadius: 20)
+                .fill(Color.bubble(for: bubble.color ?? "cyan"))
+        } else {
+            Circle()
+                .fill(Color.bubble(for: bubble.color ?? "cyan"))
+        }
+    }
+}
 
 struct BubbleCell: View {
     // MARK: - Constants
@@ -46,24 +77,25 @@ struct BubbleCell: View {
     // MARK: -
     var body: some View {
         ZStack {
-            let putTransparentGeometryReaderView = showDeleteActionView || showDetailView
-            if putTransparentGeometryReaderView {
-                cellLowEmitterView
-                    .background {
-                        GeometryReader {
-                            let value = BubbleCellLow_Key.RankFrame(rank: Int(bubble.rank), frame: $0.frame(in: .global))
-                            Color.clear.preference(key: BubbleCellLow_Key.self, value: value)
-                        }
-                    }
-            }
+            background
+//            let putTransparentGeometryReaderView = showDeleteActionView || showDetailView
+//            if putTransparentGeometryReaderView {
+//                cellLowEmitterView
+//                    .background {
+//                        GeometryReader {
+//                            let value = BubbleCellLow_Key.RankFrame(rank: Int(bubble.rank), frame: $0.frame(in: .global))
+//                            Color.clear.preference(key: BubbleCellLow_Key.self, value: value)
+//                        }
+//                    }
+//            }
             
-            hrMinSecStack
-            if bubble.hasCalendar && noNote { calendarView }
-            if !noNote {
-                bubbleStickyNote
-                    .offset(stickyNoteOffset)
-                    .onTapGesture { handleStickyNoteTap() }
-            }
+//            hrMinSecStack
+//            if bubble.hasCalendar && noNote { calendarView }
+//            if !noNote {
+//                bubbleStickyNote
+//                    .offset(stickyNoteOffset)
+//                    .onTapGesture { handleStickyNoteTap() }
+//            }
         }
         .swipeActions(edge: .leading, allowsFullSwipe: true) {
             

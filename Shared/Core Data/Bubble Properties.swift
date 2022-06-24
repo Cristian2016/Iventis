@@ -29,6 +29,8 @@ extension Bubble {
     
     @NSManaged public var isPinned: Bool
     
+    @NSManaged public var hasWidget: Bool
+    
     @NSManaged public var sessions: NSOrderedSet?
     @NSManaged public var history: NSOrderedSet?
 }

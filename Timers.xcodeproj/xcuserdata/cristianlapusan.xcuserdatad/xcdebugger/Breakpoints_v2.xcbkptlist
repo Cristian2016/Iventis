@@ -39,8 +39,8 @@
             filePath = "Shared/BubbleCell.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "28"
-            endingLineNumber = "28"
+            startingLineNumber = "59"
+            endingLineNumber = "59"
             landmarkName = "init(_:)"
             landmarkType = "7">
             <Actions>
