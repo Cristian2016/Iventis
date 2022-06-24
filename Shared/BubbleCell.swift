@@ -8,6 +8,7 @@
 
 import SwiftUI
 
+//Background
 extension BubbleCell {
     enum Shape {
         case circle
@@ -35,6 +36,26 @@ extension BubbleCell {
             Circle()
                 .fill(Color.bubbleColor(forName: bubble.color ?? "cyan"))
         }
+    }
+}
+
+extension BubbleCell {
+    var timeComponents: some View {
+        HStack (spacing: BubbleCell.metrics.spacing) {
+            //Hours
+            Circle().fill(Color.clear)
+                .overlay { Text(bubble.bubbleCell_Components.hr) }
+                .opacity(hrOpacity)
+            //Minutes
+            Circle().fill(Color.clear)
+                .overlay { Text(bubble.bubbleCell_Components.min) }
+                .opacity(minOpacity)
+            //Seconds
+            Circle().fill(Color.clear)
+                .overlay { Text(bubble.bubbleCell_Components.sec) }
+        }
+        .font(.system(size: BubbleCell.metrics.fontSize))
+        .foregroundColor(.white)
     }
 }
 
@@ -78,6 +99,7 @@ struct BubbleCell: View {
     var body: some View {
         ZStack {
             background
+            timeComponents
             let putTransparentGeometryReaderView = showDeleteActionView || showDetailView
             if putTransparentGeometryReaderView {
                 cellLowEmitterView
@@ -337,7 +359,7 @@ extension BubbleCell {
                return CGFloat(UIScreen.main.bounds.size.width / 2.7)
             }
         }()
-        let fontRatio = CGFloat(0.4)
+        let fontRatio = CGFloat(0.45)
         let spacingRatio = CGFloat(-0.28)
         
         lazy var spacing = circleDiameter * spacingRatio
