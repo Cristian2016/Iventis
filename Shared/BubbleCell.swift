@@ -115,6 +115,12 @@ struct BubbleCell: View {
         UserFeedback.singleHaptic(.light)
         showNotesList()
     }
+    
+    // MARK: -
+    private func userTappedHundredthsView() {
+        UserFeedback.singleHaptic(.heavy)
+        viewModel.toggleStart(bubble)
+    }
         
     // MARK: -
     var body: some View {
@@ -122,10 +128,7 @@ struct BubbleCell: View {
             background
             timeComponents
             if !isBubbleRunning {
-                hundredthsView.onTapGesture {
-                    UserFeedback.singleHaptic(.heavy)
-                    viewModel.toggleStart(bubble)
-                }
+                hundredthsView.onTapGesture { userTappedHundredthsView() }
             }
             let putTransparentGeometryReaderView = showDeleteActionView || showDetailView
             if putTransparentGeometryReaderView {
@@ -289,9 +292,9 @@ struct BubbleCell: View {
                         y: isSecondsTapped && !isBubbleRunning ? -20 : 0)
                 .opacity(isSecondsTapped && !isBubbleRunning ? 0 : 1)
                 .animation(.spring(response: 0.3, dampingFraction: 0.2), value: isSecondsTapped)
-                .padding(BubbleCell.metrics.hundredthsInsets)
-                .zIndex(1)
         }
+        .padding(BubbleCell.metrics.hundredthsInsets)
+        .zIndex(1)
     }
     
     private var calendarView:some View {
@@ -399,6 +402,6 @@ extension BubbleCell {
         lazy var fontSize = circleDiameter * fontRatio
         lazy var hundredthsFontSize = circleDiameter / 6
         
-        lazy var hundredthsInsets = EdgeInsets(top: 0, leading: 0, bottom: 10, trailing: 14)
+        lazy var hundredthsInsets = EdgeInsets(top: 0, leading: 0, bottom: 14, trailing: 10)
     }
 }
