@@ -15,11 +15,6 @@ struct BubbleList: View {
     @SectionedFetchRequest var results:SectionedFetchResults<Bool, Bubble>
     
     // MARK: -
-    @State private var deleteViewYOffset:CGFloat? = nil
-    @State private var isActive = true
-    @State var isPaletteShowing = false
-    
-    // MARK: -
     var body: some View {
         ZStack {
             if isListEmpty { EmptyListView() }
@@ -56,26 +51,26 @@ struct BubbleList: View {
                     .ignoresSafeArea(edges:.bottom)
                 }
             }
-            PlusButton(isPaletteShowing: $isPaletteShowing)
+            PlusButton().environmentObject(viewModel)
             
             if !notesShowing {
-                LeftStrip($isPaletteShowing, isListEmpty).environmentObject(viewModel)
+                LeftStrip($viewModel.isPaletteShowing, isListEmpty).environmentObject(viewModel)
             }
             
             if notesShowing { BubbleStickyNotesList($viewModel.stickyNotesList_bRank) }
             
             if deleteViewOffsetComputed && deleteViewShowing {
                 let bubble = viewModel.bubble(for: viewModel.showDeleteAction_bRank!)
-                DeleteView(bubble, deleteViewYOffset!).environmentObject(viewModel)
+                DeleteView(bubble).environmentObject(viewModel)
             }
             
-            PaletteView($isPaletteShowing).environmentObject(viewModel)
+            PaletteView($viewModel.isPaletteShowing).environmentObject(viewModel)
         }
         .onPreferenceChange(BubbleCellLow_Key.self) { new in
             let frame = new.frame
             if frame == .zero { return }
             
-            self.deleteViewYOffset = compute_deleteView_YOffset(for: new.frame)
+            self.viewModel.deleteViewOffset = compute_deleteView_YOffset(for: new.frame)
         }
     }
     
@@ -181,5 +176,5 @@ extension BubbleList {
     
     fileprivate var deleteViewShowing:Bool { viewModel.showDeleteAction_bRank != nil }
     
-    var deleteViewOffsetComputed:Bool { deleteViewYOffset != nil }
+    var deleteViewOffsetComputed:Bool { viewModel.deleteViewOffset != nil }
 }

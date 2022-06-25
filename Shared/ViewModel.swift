@@ -13,6 +13,8 @@ import Combine
 class ViewModel: ObservableObject {
     @Published var showDeleteAction_bRank:Int? = nil
     @Published var stickyNotesList_bRank:Int? = nil //bubble rank
+    @Published var isPaletteShowing = false
+    @Published var deleteViewOffset:CGFloat? = nil
     
     @Published var rankOfSelectedBubble:Int?
         

@@ -13,7 +13,6 @@ struct DeleteView: View {
     let bubbleColor:Color
     
     @EnvironmentObject private var viewModel:ViewModel
-    let deleteActionOffset:CGFloat //I used the preference key approach
     
     //internal properties
     let ratio = CGFloat(0.8037)
@@ -57,16 +56,13 @@ struct DeleteView: View {
                         .padding()
                     }
             }
-            .offset(x: 0, y: deleteActionOffset)
+            .offset(x: 0, y: viewModel.deleteViewOffset ?? 0)
     }
     
     // MARK: - Init
-    init(_ bubble:Bubble?,
-         _ deleteActionOffset:CGFloat) {
-                        
+    init(_ bubble:Bubble?) {
         self.bubbleColor = Color.bubbleColor(forName: bubble?.color ?? "mint")
         self.bubble = bubble
-        self.deleteActionOffset = deleteActionOffset
     }
     
     // MARK: - Legos

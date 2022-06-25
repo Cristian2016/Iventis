@@ -9,8 +9,8 @@ import SwiftUI
 
 ///tap PlusButton to show Palette [on iPad]
 struct PlusButton: View {
-    @Binding var isPaletteShowing:Bool
-    private func showPalette() { withAnimation { isPaletteShowing = true } }
+    @EnvironmentObject var viewModel:ViewModel
+    private func showPalette() { withAnimation { viewModel.isPaletteShowing = true } }
     let fontSize = CGFloat(30)
     
     var body: some View {
@@ -27,6 +27,6 @@ struct PlusButton: View {
 
 struct PlusButton_Previews: PreviewProvider {
     static var previews: some View {
-        PlusButton(isPaletteShowing: .constant(false))
+        PlusButton()
     }
 }
