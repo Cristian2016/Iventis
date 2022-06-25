@@ -13,7 +13,9 @@ struct PlusButton: View {
     private func showPalette() { withAnimation { isPaletteShowing = true } }
     let fontSize = CGFloat(30)
     
-    var body: some View { button }
+    var body: some View {
+        Push(.topRight) { button}
+    }
     
     private var button: some View {
         Button { showPalette() }

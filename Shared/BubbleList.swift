@@ -56,19 +56,8 @@ struct BubbleList: View {
                     .ignoresSafeArea(edges:.bottom)
                 }
             }
-            Push(.topRight) {
-                HStack {
-//                    if UIDevice.isIPad {
-                        PlusButton(isPaletteShowing: $isPaletteShowing)
-//                    }
-                }
-                .background {
-                    RoundedRectangle(cornerRadius: 12)
-                        .fill(Appearance.bubbleListControlBackground)
-                        .frame(height: 45)
-                }
-            }
-            .padding(EdgeInsets(top: 20, leading: 0, bottom: 0, trailing: 20))
+            PlusButton(isPaletteShowing: $isPaletteShowing)
+                .padding(EdgeInsets(top: 8, leading: 0, bottom: 0, trailing: 20))
             
             if !notesShowing {
                 LeftStrip($isPaletteShowing, isListEmpty).environmentObject(viewModel)

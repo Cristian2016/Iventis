@@ -52,6 +52,7 @@
 		1FB7D57D2862F0300085C2BE /* PlusButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB7D57B2862F0300085C2BE /* PlusButton.swift */; };
 		1FCF0C662816F3F600AA1FAA /* EmptyListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FCF0C652816F3F600AA1FAA /* EmptyListView.swift */; };
 		1FD21865281D9AB700B43403 /* ExitFocusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD21864281D9AB700B43403 /* ExitFocusView.swift */; };
+		1FDC1219286772E8004B9A1E /* PushView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F18B456281FA6130080ADA6 /* PushView.swift */; };
 		1FE163AE280EE6F40050C6F5 /* LeftStrip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FE163AD280EE6F40050C6F5 /* LeftStrip.swift */; };
 		1FF0A2FD2810448100B1DB77 /* TopDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF0A2FC2810448100B1DB77 /* TopDetailView.swift */; };
 		1FFC8BAA28142F040059EF2E /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FFC8BA428142F040059EF2E /* Session.swift */; };
@@ -441,6 +442,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1FDC1219286772E8004B9A1E /* PushView.swift in Sources */,
 				1FA834752850A57C003F4D61 /* Widgets.intentdefinition in Sources */,
 				1FA834702850A57A003F4D61 /* Widgets.swift in Sources */,
 				1FB7D57D2862F0300085C2BE /* PlusButton.swift in Sources */,
