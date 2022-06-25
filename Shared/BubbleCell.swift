@@ -268,7 +268,11 @@ struct BubbleCell: View {
     }
     
     ////added to bubbleCell only if cellLow value is needed. ex: to know how to position DeleteActionView
-    private var cellLowEmitterView: some View { Circle().fill(Color.clear) }
+    private var cellLowEmitterView: some View {
+        Circle()
+        .fill(Color.clear)
+        .frame(width: 10, height: 10)
+    }
     
     ///hundredths of a second that is :)
     private var hundredthsView:some View {
