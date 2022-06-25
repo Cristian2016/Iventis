@@ -70,7 +70,7 @@ struct BubbleList: View {
             let frame = new.frame
             if frame == .zero { return }
             
-            self.deleteViewYOffset = compute_YOffset(for: new.frame)
+            self.deleteViewYOffset = compute_deleteView_YOffset(for: new.frame)
         }
     }
     
@@ -119,8 +119,8 @@ struct BubbleList: View {
         NSSortDescriptor(key: "rank", ascending: false)
     ]
     
-    private func compute_YOffset(for frame:CGRect) -> CGFloat {
-        let cellDeleteViewGap = CGFloat(15)
+    private func compute_deleteView_YOffset(for frame:CGRect) -> CGFloat {
+        let cellDeleteViewGap = CGFloat(70)
         
         let cellLow = frame.origin.y + frame.height
         
@@ -176,7 +176,5 @@ extension BubbleList {
     
     fileprivate var deleteViewShowing:Bool { viewModel.showDeleteAction_bRank != nil }
     
-    var deleteViewOffsetComputed:Bool {
-        deleteViewYOffset != nil
-    }
+    var deleteViewOffsetComputed:Bool { deleteViewYOffset != nil }
 }
