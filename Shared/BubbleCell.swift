@@ -42,38 +42,20 @@ extension BubbleCell {
 extension BubbleCell {
     var timeComponents: some View {
         HStack (spacing: BubbleCell.metrics.spacing) {
-            //Hours
+            //HOURS
             Circle().fill(Color.clear)
                 .overlay { Text(bubble.bubbleCell_Components.hr) }
                 .opacity(hrOpacity)
-            //Minutes
+            //MINUTES
             Circle().fill(Color.clear)
                 .overlay { Text(bubble.bubbleCell_Components.min) }
                 .opacity(minOpacity)
-            //Seconds
+            //SECONDS
             Circle().fill(Color.clear)
                 .overlay { Text(bubble.bubbleCell_Components.sec) }
             //gestures
-                .onTapGesture {
-                    isSecondsTapped = true
-                    delayExecution(.now() + 0.1) { isSecondsTapped = false }
-                    
-                    //feedback
-                    UserFeedback.singleHaptic(.heavy)
-                    
-                    //user intent model
-                    viewModel.toggleStart(bubble)
-                }
-                .onLongPressGesture {
-                    isSecondsLongPressed = true
-                    delayExecution(.now() + 0.25) { isSecondsLongPressed = false }
-                    
-                    //feedback
-                    UserFeedback.doubleHaptic(.heavy)
-                    
-                    //user intent model
-                    viewModel.endSession(bubble)
-                }
+                .onTapGesture { userTappedSeconds() }
+                .onLongPressGesture { userLongPressedSeconds() }
         }
         .font(.system(size: BubbleCell.metrics.fontSize))
         .foregroundColor(.white)
@@ -116,10 +98,34 @@ struct BubbleCell: View {
         showNotesList()
     }
     
-    // MARK: -
-    private func userTappedHundredthsView() {
+    // MARK: - Intents
+    private func userTappedHours() { viewModel.rankOfSelectedBubble = Int(bubble.rank) }
+    
+    private func userTappedHundredths() {
         UserFeedback.singleHaptic(.heavy)
         viewModel.toggleStart(bubble)
+    }
+    
+    private func userTappedSeconds() {
+        isSecondsTapped = true
+        delayExecution(.now() + 0.1) { isSecondsTapped = false }
+        
+        //feedback
+        UserFeedback.singleHaptic(.heavy)
+        
+        //user intent model
+        viewModel.toggleStart(bubble)
+    }
+    
+    private func userLongPressedSeconds() {
+        isSecondsLongPressed = true
+        delayExecution(.now() + 0.25) { isSecondsLongPressed = false }
+        
+        //feedback
+        UserFeedback.doubleHaptic(.heavy)
+        
+        //user intent model
+        viewModel.endSession(bubble)
     }
         
     // MARK: -
@@ -128,7 +134,7 @@ struct BubbleCell: View {
             background
             timeComponents
             if !isBubbleRunning {
-                hundredthsView.onTapGesture { userTappedHundredthsView() }
+                hundredthsView.onTapGesture { userTappedHundredths() }
             }
             let putTransparentGeometryReaderView = showDeleteActionView || showDetailView
             if putTransparentGeometryReaderView {
@@ -148,6 +154,7 @@ struct BubbleCell: View {
 //                    .offset(stickyNoteOffset)
 //                    .onTapGesture { handleStickyNoteTap() }
 //            }
+            
         }
         .swipeActions(edge: .leading, allowsFullSwipe: true) {
             
@@ -179,54 +186,29 @@ struct BubbleCell: View {
         }
     }
     
-    private func presentDetail() {
-        print(#function)
-        viewModel.rankOfSelectedBubble = Int(bubble.rank)
-    }
-    
     // MARK: - Legoes
-    private var hrMinSecStack:some View {
-        ZStack {
-            HStack (spacing: BubbleCell.metrics.spacing) {
-                hoursView
-                    .onTapGesture { presentDetail() }
-                    .onLongPressGesture { handleLongPress() }
-                    .zIndex(1)
-                minutesView
-                    .onTapGesture { withAnimation(.easeInOut(duration: 0.05)) {
-                        editMode?.wrappedValue = .inactive
-                        presentDetail()
-                    } }
-                    .onLongPressGesture { print("edit duration") }
-                secondsView
-                    .onTapGesture {
-                        isSecondsTapped = true
-                        delayExecution(.now() + 0.1) { isSecondsTapped = false }
-                        
-                        //feedback
-                        UserFeedback.singleHaptic(.heavy)
-                        
-                        //user intent model
-                        viewModel.toggleStart(bubble)
-                    }
-                    .onLongPressGesture {
-                        isSecondsLongPressed = true
-                        delayExecution(.now() + 0.25) { isSecondsLongPressed = false }
-                        
-                        //feedback
-                        UserFeedback.doubleHaptic(.heavy)
-                        
-                        //user intent model
-                        viewModel.endSession(bubble)
-                    }
-            }
-            Text(bubble.bubbleCell_Components.min)
-        }
-        .frame(height: BubbleCell.metrics.circleDiameter)
-        .font(.system(size: BubbleCell.metrics.fontSize))
-        .foregroundColor(.white)
-//        .onDrag { NSItemProvider() }
-    }
+//    private var hrMinSecStack:some View {
+//        ZStack {
+//            HStack (spacing: BubbleCell.metrics.spacing) {
+//                hoursView
+//                    .onTapGesture { userTappedHours() }
+//                    .onLongPressGesture { handleLongPress() }
+//                    .zIndex(1)
+//                minutesView
+//                    .onTapGesture { withAnimation(.easeInOut(duration: 0.05)) {
+//                        editMode?.wrappedValue = .inactive
+//                        userTappedHours()
+//                    } }
+//                secondsView
+//                    .onTapGesture { userTappedSeconds() }
+//                    .onLongPressGesture { userLongPressedSeconds() }
+//            }
+//            Text(bubble.bubbleCell_Components.min)
+//        }
+//        .frame(height: BubbleCell.metrics.circleDiameter)
+//        .font(.system(size: BubbleCell.metrics.fontSize))
+//        .foregroundColor(.white)
+//    }
     
     var hoursView : some View {
         circle
