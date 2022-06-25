@@ -27,14 +27,9 @@ struct BubbleList: View {
                 ZStack {
                     VStack {
                         List (results, selection: $viewModel.rankOfSelectedBubble) { section in
-                            Section {
-                                ForEach (section) { bubble in
-                                    BubbleCell(bubble)
-                                }
+                            Section { ForEach (section) { BubbleCell($0) }
+                            } header: { headerTitle(for: section.id.description) }
                                 .listRowSeparator(.hidden)
-                            }
-                        header: { headerTitle(for: section.id.description) }
-                                .accentColor(section.id != false ? .clear : .label) //collapse section indicators invisible
                         }
                         .scrollIndicators(.hidden)
                         .padding(EdgeInsets(top: 0, leading: -10, bottom: 0, trailing: -10))
