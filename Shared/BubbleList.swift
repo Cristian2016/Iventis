@@ -27,7 +27,22 @@ struct BubbleList: View {
                 ZStack {
                     VStack {
                         List (results, selection: $viewModel.rankOfSelectedBubble) { section in
-                            Section { ForEach (section) { BubbleCell($0) }
+                            Section {
+                                ForEach (section) { BubbleCell($0)
+                                    
+                                }
+                                .onMove {
+                                    let moveAtTheBottom = ($1 == section.count)
+                                    let sourceRank = section[$0.first!].rank
+                                    
+                                    if moveAtTheBottom {
+                                        let destRank = section[$1 - 1].rank
+                                        viewModel.reorderRanks(sourceRank, destRank, true)
+                                    } else {
+                                        let destRank = section[$1].rank
+                                        viewModel.reorderRanks(sourceRank, destRank)
+                                    }
+                                }
                             } header: { headerTitle(for: section.id.description) }
                                 .listRowSeparator(.hidden)
                         }

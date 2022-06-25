@@ -4,7 +4,7 @@
 //
 //  Created by Cristian Lapusan on 13.04.2022.
 // https://stackoverflow.com/questions/58284994/swiftui-how-to-handle-both-tap-long-press-of-button
-//
+
 
 import SwiftUI
 
@@ -55,10 +55,17 @@ extension BubbleCell {
                 .overlay { Text(bubble.bubbleCell_Components.sec) }
             //gestures
                 .onTapGesture { userTappedSeconds() }
-                .onLongPressGesture { userLongPressedSeconds() }
+                .highPriorityGesture(longPress)
         }
         .font(.system(size: BubbleCell.metrics.fontSize))
         .foregroundColor(.white)
+    }
+    
+    var longPress: some Gesture {
+        LongPressGesture(minimumDuration: 0.3)
+            .onEnded { _ in
+                userLongPressedSeconds()
+            }
     }
 }
 
@@ -118,6 +125,7 @@ struct BubbleCell: View {
     }
     
     private func userLongPressedSeconds() {
+        print(#function)
         isSecondsLongPressed = true
         delayExecution(.now() + 0.25) { isSecondsLongPressed = false }
         
@@ -156,6 +164,7 @@ struct BubbleCell: View {
 //            }
             
         }
+        .onDrag { NSItemProvider() }
         .swipeActions(edge: .leading, allowsFullSwipe: true) {
             
             //pin
