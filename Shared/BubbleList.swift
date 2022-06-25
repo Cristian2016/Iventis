@@ -28,9 +28,7 @@ struct BubbleList: View {
                     VStack {
                         List (results, selection: $viewModel.rankOfSelectedBubble) { section in
                             Section {
-                                ForEach (section) { BubbleCell($0)
-                                    
-                                }
+                                ForEach (section) { BubbleCell($0) }
                                 .onMove {
                                     let moveAtTheBottom = ($1 == section.count)
                                     let sourceRank = section[$0.first!].rank
@@ -58,7 +56,6 @@ struct BubbleList: View {
 //                    if UIDevice.isIPad {
                         PlusButton(isPaletteShowing: $isPaletteShowing)
 //                    }
-//                    if !notesShowing && !isListEmpty { UpDownArrowsButton() }
                 }
                 .background {
                     RoundedRectangle(cornerRadius: 12)

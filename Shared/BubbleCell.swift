@@ -61,11 +61,10 @@ extension BubbleCell {
         .foregroundColor(.white)
     }
     
+    //⚠️ if minDuration is 0.3, it has a shorter minDuration than onDrag, so it will work! Otherwise it doesn't
     var longPress: some Gesture {
         LongPressGesture(minimumDuration: 0.3)
-            .onEnded { _ in
-                userLongPressedSeconds()
-            }
+            .onEnded { _ in userLongPressedSeconds() }
     }
 }
 
