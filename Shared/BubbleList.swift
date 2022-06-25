@@ -57,7 +57,6 @@ struct BubbleList: View {
                 }
             }
             PlusButton(isPaletteShowing: $isPaletteShowing)
-                .padding(EdgeInsets(top: 8, leading: 0, bottom: 0, trailing: 20))
             
             if !notesShowing {
                 LeftStrip($isPaletteShowing, isListEmpty).environmentObject(viewModel)

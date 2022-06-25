@@ -15,6 +15,7 @@ struct PlusButton: View {
     
     var body: some View {
         Push(.topRight) { button}
+            .padding(EdgeInsets(top: 8, leading: 0, bottom: 0, trailing: 20))
     }
     
     private var button: some View {
