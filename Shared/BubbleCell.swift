@@ -46,13 +46,24 @@ extension BubbleCell {
             Circle().fill(Color.clear)
                 .overlay { Text(bubble.bubbleCell_Components.hr) }
                 .opacity(hrOpacity)
+            //animations
+                .scaleEffect(isSecondsLongPressed ? 0.2 : 1.0)
+                .offset(x: isSecondsLongPressed ? 20 : 0.0, y: 0)
+                .animation(.secondsLongPressed.delay(0.2), value: isSecondsLongPressed)
             //MINUTES
             Circle().fill(Color.clear)
                 .overlay { Text(bubble.bubbleCell_Components.min) }
                 .opacity(minOpacity)
+            //animations
+                .scaleEffect(isSecondsLongPressed ? 0.2 : 1.0)
+                .offset(x: isSecondsLongPressed ? 10 : 0.0, y: 0)
+                .animation(.secondsLongPressed.delay(0.1), value: isSecondsLongPressed)
             //SECONDS
             Circle().fill(Color.clear)
                 .overlay { Text(bubble.bubbleCell_Components.sec) }
+            //animations
+                .scaleEffect(isSecondsLongPressed ? 0.2 : 1.0)
+                .animation(.secondsLongPressed, value: isSecondsLongPressed)
             //gestures
                 .onTapGesture { userTappedSeconds() }
                 .highPriorityGesture(longPress)
@@ -154,7 +165,6 @@ struct BubbleCell: View {
                     }
             }
             
-//            hrMinSecStack
 //            if bubble.hasCalendar && noNote { calendarView }
 //            if !noNote {
 //                bubbleStickyNote
@@ -247,16 +257,6 @@ struct BubbleCell: View {
             //animations seconds long pressed
                 .scaleEffect(isSecondsLongPressed ? 0.2 : 1.0)
                 .animation(.secondsLongPressed, value: isSecondsLongPressed)
-            
-            if !isBubbleRunning {
-                Push(.bottomRight) {
-                    hundredthsView
-                        .onTapGesture {
-                        UserFeedback.singleHaptic(.heavy)
-                        viewModel.toggleStart(bubble)
-                    }
-                }
-            }
         }
     }
     

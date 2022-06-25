@@ -43,6 +43,11 @@ struct BubbleList: View {
                                 }
                             } header: { headerTitle(for: section.id.description) }
                                 .listRowSeparator(.hidden)
+                            if !section.id {
+                                Rectangle()
+                                .fill(Color.clear)
+                                .frame(height: 200)
+                            }
                         }
                         .scrollIndicators(.hidden)
                         .padding(EdgeInsets(top: 0, leading: -10, bottom: 0, trailing: -10))
