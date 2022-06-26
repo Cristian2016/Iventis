@@ -28,7 +28,10 @@ struct TimersApp: App {
                         }
                         DetailView(viewModel.rankOfSelectedBubble)
                     } else {
-                        Color.red
+                        VStack {
+                            Text("Bubble Detail")
+                            Text("Select a Bubble")
+                        }
                     }
                 }
                 .padding([.top])
