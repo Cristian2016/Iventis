@@ -28,6 +28,7 @@ struct TopCell: View {
     private let strokeWidth = CGFloat(4)
     private let edgeInset = EdgeInsets(top: 0, leading: 13, bottom: 10, trailing: 6)
     private let dateDurationViewsSpacing = CGFloat(6)
+    private let spacingBetweenCells = CGFloat(-2)
     
     let durationFont = Font.system(size: 24, weight: .medium, design: .default)
     let durationComponentsFont = Font.system(size: 20, weight: .medium, design: .default)
@@ -118,6 +119,7 @@ struct TopCell: View {
                 .strokeBorder(color, lineWidth: strokeWidth, antialiased: true)
             RoundedRectangle(cornerRadius: roundedRectRadius).fill(Color.clear)
         }
+        .padding([.trailing, .leading], 2)
         //makes sure that views with clear colors can also detect gestures
         .contentShape(Rectangle())
     }
