@@ -21,9 +21,15 @@ struct TimersApp: App {
                 ViewHierarchy()
             } detail: {
                 VStack {
-                    //bubbleCell for iOS
-                    BubbleCell(viewModel.bubble(for: 0)!)
-                    DetailView(viewModel.rankOfSelectedBubble)
+                    if let rank = viewModel.rankOfSelectedBubble {
+                        //bubbleCell for iOS
+                        if !UIDevice.isIPad {
+                            BubbleCell(viewModel.bubble(for: rank)!).padding([.leading, .trailing])
+                        }
+                        DetailView(viewModel.rankOfSelectedBubble)
+                    } else {
+                        Color.red
+                    }
                 }
                 .padding([.top])
             }
