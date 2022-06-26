@@ -52,6 +52,12 @@ extension BubbleCell {
                 .animation(.secondsLongPressed.delay(0.2), value: isSecondsLongPressed)
             //gestures
             .onTapGesture { userWantsDetailView() }
+            .highPriorityGesture(
+                LongPressGesture(minimumDuration: 0.3)
+                    .onEnded { _ in
+                        handleLongPress()
+                    }
+            )
             
             //MINUTES
             Circle().fill(Color.clear)
@@ -183,12 +189,11 @@ struct BubbleCell: View {
             }
             
             if bubble.hasCalendar && noNote { calendarView }
-//            if !noNote {
-//                bubbleStickyNote
-//                    .offset(stickyNoteOffset)
-//                    .onTapGesture { handleStickyNoteTap() }
-//            }
-            
+            if !noNote {
+                bubbleStickyNote
+                    .offset(stickyNoteOffset)
+                    .onTapGesture { handleStickyNoteTap() }
+            }
         }
         .onDrag { NSItemProvider() }
         .swipeActions(edge: .leading, allowsFullSwipe: true) {
