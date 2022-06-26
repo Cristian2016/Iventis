@@ -50,6 +50,12 @@ extension BubbleCell {
                 .scaleEffect(isSecondsLongPressed ? 0.2 : 1.0)
                 .offset(x: isSecondsLongPressed ? 20 : 0.0, y: 0)
                 .animation(.secondsLongPressed.delay(0.2), value: isSecondsLongPressed)
+            //gestures
+            .onTapGesture {
+                print("show detail")
+                viewModel.rankOfSelectedBubble = Int(bubble.rank)
+            }
+            
             //MINUTES
             Circle().fill(Color.clear)
                 .overlay { Text(bubble.bubbleCell_Components.min) }
@@ -58,6 +64,12 @@ extension BubbleCell {
                 .scaleEffect(isSecondsLongPressed ? 0.2 : 1.0)
                 .offset(x: isSecondsLongPressed ? 10 : 0.0, y: 0)
                 .animation(.secondsLongPressed.delay(0.1), value: isSecondsLongPressed)
+                //gestures
+                .onTapGesture {
+                    print("show detail")
+                    viewModel.rankOfSelectedBubble = Int(bubble.rank)
+                }
+            
             //SECONDS
             Circle().fill(Color.clear)
                 .overlay { Text(bubble.bubbleCell_Components.sec) }

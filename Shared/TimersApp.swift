@@ -20,12 +20,11 @@ struct TimersApp: App {
             NavigationSplitView(columnVisibility: $visibility) {
                 ViewHierarchy()
             } detail: {
-                if let selectedBubbleRank = viewModel.rankOfSelectedBubble {
-//                    DetailView(selectedBubbleRank)
-                    Color.blue
-                } else {
-                    Color.red
+                VStack {
+                    //bubbleCell for iOS
+                    DetailView(viewModel.rankOfSelectedBubble)
                 }
+                .padding([.top])
             }
             .environment(\.managedObjectContext, viewContext)
             .environmentObject(viewModel)
