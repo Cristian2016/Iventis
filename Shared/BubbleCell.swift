@@ -51,10 +51,7 @@ extension BubbleCell {
                 .offset(x: isSecondsLongPressed ? 20 : 0.0, y: 0)
                 .animation(.secondsLongPressed.delay(0.2), value: isSecondsLongPressed)
             //gestures
-            .onTapGesture {
-                print("show detail")
-                viewModel.rankOfSelectedBubble = Int(bubble.rank)
-            }
+            .onTapGesture { userWantsDetailView() }
             
             //MINUTES
             Circle().fill(Color.clear)
@@ -65,10 +62,7 @@ extension BubbleCell {
                 .offset(x: isSecondsLongPressed ? 10 : 0.0, y: 0)
                 .animation(.secondsLongPressed.delay(0.1), value: isSecondsLongPressed)
                 //gestures
-                .onTapGesture {
-                    print("show detail")
-                    viewModel.rankOfSelectedBubble = Int(bubble.rank)
-                }
+                .onTapGesture { userWantsDetailView() }
             
             //SECONDS
             ZStack {
@@ -112,8 +106,6 @@ struct BubbleCell: View {
     let stickyNoteOffset = CGSize(width: 0, height: -6)
     
     // MARK: -
-    @Environment(\.editMode) var editMode //used to toggle move rows
-    
     @State private var isSecondsTapped = false
     @State private var isSecondsLongPressed = false
     
@@ -165,6 +157,13 @@ struct BubbleCell: View {
         
         //user intent model
         viewModel.endSession(bubble)
+    }
+    
+    ///user taps minutes or hours
+    private func userWantsDetailView() {
+        if viewModel.rankOfSelectedBubble == nil {
+            viewModel.rankOfSelectedBubble = Int(bubble.rank)
+        }
     }
         
     // MARK: -
@@ -381,8 +380,6 @@ extension BubbleCell {
 }
 
 extension BubbleCell {
-    var isInEditMode:Bool { editMode?.wrappedValue == .active }
-    
     private var isBubbleRunning:Bool { bubble.state == .running }
     
     //stopwatch: minutes and hours stay hidden initially
