@@ -135,7 +135,6 @@ struct BubbleCell: View {
     }
     
     private func userLongPressedSeconds() {
-        print(#function)
         isSecondsLongPressed = true
         delayExecution(.now() + 0.25) { isSecondsLongPressed = false }
         
@@ -165,7 +164,7 @@ struct BubbleCell: View {
                     }
             }
             
-//            if bubble.hasCalendar && noNote { calendarView }
+            if bubble.hasCalendar && noNote { calendarView }
 //            if !noNote {
 //                bubbleStickyNote
 //                    .offset(stickyNoteOffset)

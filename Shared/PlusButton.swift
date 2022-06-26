@@ -22,6 +22,7 @@ struct PlusButton: View {
         Button { showPalette() }
     label: { Label("", systemImage: "plus") }
             .font(.system(size: fontSize))
+            .tint(.label)
     }
 }
 
