@@ -71,14 +71,24 @@ extension BubbleCell {
                 }
             
             //SECONDS
-            Circle().fill(Color.clear)
-                .overlay { Text(bubble.bubbleCell_Components.sec) }
-            //animations
-                .scaleEffect(isSecondsLongPressed ? 0.2 : 1.0)
-                .animation(.secondsLongPressed, value: isSecondsLongPressed)
-            //gestures
-                .onTapGesture { userTappedSeconds() }
-                .highPriorityGesture(longPress)
+            ZStack {
+                Circle().fill(Color.clear)
+                    .overlay { Text(bubble.bubbleCell_Components.sec) }
+                //animations
+                    .scaleEffect(isSecondsLongPressed ? 0.2 : 1.0)
+                    .animation(.secondsLongPressed, value: isSecondsLongPressed)
+                //gestures
+                    .onTapGesture { userTappedSeconds() }
+                    .highPriorityGesture(longPress)
+            }
+            .overlay {
+                if !isBubbleRunning {
+                    Push(.bottomRight) {
+                        hundredthsView
+                            .onTapGesture { userTappedHundredths() }
+                    }
+                }
+            }
         }
         .font(.system(size: BubbleCell.metrics.fontSize))
         .foregroundColor(.white)
@@ -162,9 +172,6 @@ struct BubbleCell: View {
         ZStack {
             background
             timeComponents
-            if !isBubbleRunning {
-                hundredthsView.onTapGesture { userTappedHundredths() }
-            }
             let putTransparentGeometryReaderView = showDeleteActionView || showDetailView
             if putTransparentGeometryReaderView {
                 cellLowEmitterView
@@ -239,37 +246,37 @@ struct BubbleCell: View {
 //        .foregroundColor(.white)
 //    }
     
-    var hoursView : some View {
-        circle
-            .overlay { Text(bubble.bubbleCell_Components.hr) }
-            .opacity(hrOpacity)
-        //animations
-            .scaleEffect(isSecondsLongPressed ? 0.2 : 1.0)
-            .offset(x: isSecondsLongPressed ? 20 : 0.0, y: 0)
-            .animation(.secondsLongPressed.delay(0.2), value: isSecondsLongPressed)
-    }
+//    var hoursView : some View {
+//        circle
+//            .overlay { Text(bubble.bubbleCell_Components.hr) }
+//            .opacity(hrOpacity)
+//        //animations
+//            .scaleEffect(isSecondsLongPressed ? 0.2 : 1.0)
+//            .offset(x: isSecondsLongPressed ? 20 : 0.0, y: 0)
+//            .animation(.secondsLongPressed.delay(0.2), value: isSecondsLongPressed)
+//    }
+//
+//    var minutesView : some View {
+//        circle //MINUTES
+//            .opacity(minOpacity)
+//        //animations
+//            .scaleEffect(isSecondsLongPressed ? 0.2 : 1.0)
+//            .offset(x: isSecondsLongPressed ? 10 : 0.0, y: 0)
+//            .animation(.secondsLongPressed.delay(0.1), value: isSecondsLongPressed)
+//    }
     
-    var minutesView : some View {
-        circle //MINUTES
-            .opacity(minOpacity)
-        //animations
-            .scaleEffect(isSecondsLongPressed ? 0.2 : 1.0)
-            .offset(x: isSecondsLongPressed ? 10 : 0.0, y: 0)
-            .animation(.secondsLongPressed.delay(0.1), value: isSecondsLongPressed)
-    }
-    
-    var secondsView : some View {
-        ZStack {
-            circle //SECONDS
-                .overlay { Text(bubble.bubbleCell_Components.sec) }
-            //animations secondsTapped
-                .scaleEffect(isSecondsTapped ? 0.6 : 1.0)
-                .animation(.secondsTapped, value: isSecondsTapped)
-            //animations seconds long pressed
-                .scaleEffect(isSecondsLongPressed ? 0.2 : 1.0)
-                .animation(.secondsLongPressed, value: isSecondsLongPressed)
-        }
-    }
+//    var secondsView : some View {
+//        ZStack {
+//            circle //SECONDS
+//                .overlay { Text(bubble.bubbleCell_Components.sec) }
+//            //animations secondsTapped
+//                .scaleEffect(isSecondsTapped ? 0.6 : 1.0)
+//                .animation(.secondsTapped, value: isSecondsTapped)
+//            //animations seconds long pressed
+//                .scaleEffect(isSecondsLongPressed ? 0.2 : 1.0)
+//                .animation(.secondsLongPressed, value: isSecondsLongPressed)
+//        }
+//    }
     
     ////added to bubbleCell only if cellLow value is needed. ex: to know how to position DeleteActionView
     private var cellLowEmitterView: some View {
@@ -280,22 +287,21 @@ struct BubbleCell: View {
     
     ///hundredths of a second that is :)
     private var hundredthsView:some View {
-        Push(.bottomRight) {
-            Text(bubble.bubbleCell_Components.cents)
-                .background(Circle()
-                    .foregroundColor(Color("pauseStickerColor"))
-                    .padding(-12))
-                .foregroundColor(Color("pauseStickerFontColor"))
-                .font(.system(size: BubbleCell.metrics.hundredthsFontSize, weight: .semibold, design: .default))
-            //animations:scale, offset and opacity
-                .scaleEffect(isSecondsTapped && !isBubbleRunning ? 2 : 1.0)
-                .offset(x: isSecondsTapped && !isBubbleRunning ? -20 : 0,
-                        y: isSecondsTapped && !isBubbleRunning ? -20 : 0)
-                .opacity(isSecondsTapped && !isBubbleRunning ? 0 : 1)
-                .animation(.spring(response: 0.3, dampingFraction: 0.2), value: isSecondsTapped)
-        }
-        .padding(BubbleCell.metrics.hundredthsInsets)
-        .zIndex(1)
+        Text(bubble.bubbleCell_Components.cents)
+            .background(Circle()
+                .foregroundColor(Color("pauseStickerColor"))
+                .padding(-12))
+            .foregroundColor(Color("pauseStickerFontColor"))
+            .font(.system(size: BubbleCell.metrics.hundredthsFontSize, weight: .semibold, design: .default))
+        //animations:scale, offset and opacity
+            .scaleEffect(isSecondsTapped && !isBubbleRunning ? 2 : 1.0)
+            .offset(x: isSecondsTapped && !isBubbleRunning ? -20 : 0,
+                    y: isSecondsTapped && !isBubbleRunning ? -20 : 0)
+            .opacity(isSecondsTapped && !isBubbleRunning ? 0 : 1)
+            .animation(.spring(response: 0.3, dampingFraction: 0.2), value: isSecondsTapped)
+            .frame(width: 50, height: 50)
+            .padding(BubbleCell.metrics.hundredthsInsets)
+            .zIndex(1)
     }
     
     private var calendarView:some View {
@@ -403,6 +409,7 @@ extension BubbleCell {
         lazy var fontSize = circleDiameter * fontRatio
         lazy var hundredthsFontSize = circleDiameter / 6
         
-        lazy var hundredthsInsets = EdgeInsets(top: 0, leading: 0, bottom: 14, trailing: 10)
+//        lazy var hundredthsInsets = EdgeInsets(top: 0, leading: 0, bottom: 14, trailing: 10)
+        lazy var hundredthsInsets = EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0)
     }
 }

@@ -22,6 +22,7 @@ struct TimersApp: App {
             } detail: {
                 VStack {
                     //bubbleCell for iOS
+                    BubbleCell(viewModel.bubble(for: 0)!)
                     DetailView(viewModel.rankOfSelectedBubble)
                 }
                 .padding([.top])
