@@ -42,8 +42,8 @@ struct SmallBubbleView: View {
                     }
                 }
             }
-            .compositingGroup()
-            .standardShadow(false)
+//            .compositingGroup()
+//            .standardShadow(false)
             
             //time components
             //hours
@@ -84,7 +84,7 @@ struct SmallBubbleView: View {
         func body(content: Content) -> some View {
             content
                 .frame(width: edge, height: edge)
-                .foregroundColor(.black) //text color
+                .foregroundColor(.background) //text color
                 .font(.system(size: 40).weight(.medium))
         }
     }
