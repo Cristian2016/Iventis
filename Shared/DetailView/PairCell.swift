@@ -28,7 +28,7 @@ struct PairCell: View {
                         .foregroundColor(.secondary)
                     Image(systemName: "\(pairNumber).circle.fill")
                         .foregroundColor(.lightGray)
-                        .font(.system(size: 24))
+                        .font(.system(size: 26))
                         .padding(.leading, 4)
                 }
                 //pause time and date
