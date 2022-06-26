@@ -187,14 +187,15 @@ struct BubbleCell: View {
                         }
                     }
             }
-            
-            if bubble.hasCalendar && noNote { calendarView }
-            if !noNote {
-                bubbleStickyNote
-                    .offset(stickyNoteOffset)
-                    .onTapGesture { handleStickyNoteTap() }
-            }
         }
+        //subviews
+        .overlay { if !noNote {
+            bubbleStickyNote
+                .offset(stickyNoteOffset)
+                .onTapGesture { handleStickyNoteTap() }
+        } } //noteView
+        .overlay { if bubble.hasCalendar && noNote { calendarView } } //calendar symbol
+        //gestures
         .onDrag { NSItemProvider() }
         .swipeActions(edge: .leading, allowsFullSwipe: true) {
             

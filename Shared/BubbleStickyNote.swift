@@ -71,7 +71,7 @@ struct BubbleStickyNote: View {
                 //stickyNote
                 HStack (spacing:0) {
                     calendarSymbol
-                    stickyNoteContentView
+                    stickyNoteTextView
                 }
                 .foregroundColor(.label)
                 .background(background)
@@ -86,20 +86,7 @@ struct BubbleStickyNote: View {
         }
     }
     
-    private var deleteConfirmationLabel: some View {
-        Rectangle()
-            .fill(noteDeleted ? Color.green : .red)
-            .frame(width: 124, height: 44)
-            .overlay {
-                Text(noteDeleted ? "Done" : "Delete")
-                    .foregroundColor(.white)
-                    .font(.system(size: 24).weight(.medium))
-            }
-            .opacity(offsetX > 60 ? 1 : 0)
-            .offset(x: 0, y: 5)
-    }
-    
-    // MARK: - Lego
+    // MARK: - Lego 4
     private var calendarSymbol: some View {
         Rectangle()
             .fill(bubble.hasCalendar ? Color.calendar : .clear)
@@ -118,7 +105,7 @@ struct BubbleStickyNote: View {
     }
     
     @ViewBuilder
-    private var stickyNoteContentView: some View {
+    private var stickyNoteTextView: some View {
         if !bubble.isNoteHidden {
             Text(bubble.note_)
                 .padding(textPadding)
@@ -128,6 +115,19 @@ struct BubbleStickyNote: View {
                 .padding(textPadding)
                 .font(.system(size: 20))
         }
+    }
+    
+    private var deleteConfirmationLabel: some View {
+        Rectangle()
+            .fill(noteDeleted ? Color.green : .red)
+            .frame(width: 124, height: 44)
+            .overlay {
+                Text(noteDeleted ? "Done" : "Delete")
+                    .foregroundColor(.white)
+                    .font(.system(size: 24).weight(.medium))
+            }
+            .opacity(offsetX > 60 ? 1 : 0)
+            .offset(x: 0, y: 5)
     }
 }
 

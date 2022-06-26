@@ -23,7 +23,7 @@ struct BubbleStickyNotesList: View {
     
     @State private var textInput = "" //willSet and didSet do not work anymore
     private let textInputLimit = 9
-    private let textFieldPlaceholder = "Add/Search Note"
+    private let textFieldPlaceholder = "Note"
     
     let initialNote:String
     @FocusState var keyboardVisible:Bool
@@ -163,7 +163,7 @@ struct BubbleStickyNotesList: View {
             TextField("", text: $textInput)
         }
         
-        .font(.title2)
+        .font(.system(size: 24))
         .padding()
         .focused($keyboardVisible)
         .textInputAutocapitalization(.words)
