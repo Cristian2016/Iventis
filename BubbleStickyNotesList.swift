@@ -113,7 +113,7 @@ struct BubbleStickyNotesList: View {
         //text
             .font(.system(size: 25))
             .background( Rectangle()
-                .fill(item.note == bubble.note ? Color.lightGray : .clear)
+                .fill(item.note == bubble.note ? Color.selectionRed : .clear)
             )
         //layout
             .padding([.leading], 10)

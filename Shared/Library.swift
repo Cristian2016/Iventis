@@ -61,6 +61,7 @@ extension Array {
 }
 
 extension Color {
+    static let selectionRed = Color("selectionRed")
     static let label = Color("label")
     static let detailViewBackground = Color("detailViewBackground")
     static let lightGray = Color("lightGray")
