@@ -40,7 +40,7 @@ struct TimersApp: App {
                         }
                     }
                 }
-                .padding([.top])
+                .padding([.top], 4)
             }
             .environment(\.managedObjectContext, viewContext)
             .environmentObject(viewModel)
