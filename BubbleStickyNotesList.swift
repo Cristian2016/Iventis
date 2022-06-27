@@ -96,7 +96,6 @@ struct BubbleStickyNotesList: View {
                             .listStyle(.plain)
                             .environment(\.defaultMinListRowHeight, 8)
                         }
-                        .background  { backgroundView }
                         .clipShape(RoundedRectangle(cornerRadius: cornerRadius))
                         plusButton
                     }
@@ -186,13 +185,6 @@ struct BubbleStickyNotesList: View {
         .textInputAutocapitalization(.words)
         .onChange(of: self.textInput) {
             if $0.count > textInputLimit { textInput = String(textInput.prefix(textInputLimit)) }
-        }
-    }
-    
-    private var backgroundView :some View {
-        VStack {
-            Spacer(minLength: 90)
-            Color("deleteActionViewBackground")
         }
     }
     
