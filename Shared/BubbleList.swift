@@ -55,13 +55,6 @@ struct BubbleList: View {
                 LeftStrip($viewModel.isPaletteShowing, isListEmpty).environmentObject(viewModel)
             }
             
-            if notesShowing { BubbleStickyNotesList($viewModel.stickyNotesList_bRank) }
-            
-//            if deleteViewOffsetComputed && deleteViewShowing {
-//                let bubble = viewModel.bubble(for: viewModel.showDeleteAction_bRank!)
-//                DeleteView(bubble).environmentObject(viewModel)
-//            }
-            
             PaletteView($viewModel.isPaletteShowing).environmentObject(viewModel)
         }
         .onPreferenceChange(BubbleCellLow_Key.self) { new in

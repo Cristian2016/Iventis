@@ -12,6 +12,8 @@ struct TimersApp: App {
     var deleteViewOffsetComputed:Bool { viewModel.deleteViewOffset != nil }
     fileprivate var deleteViewShowing:Bool { viewModel.showDeleteAction_bRank != nil }
     
+    fileprivate var notesShowing:Bool { viewModel.stickyNotesList_bRank != nil }
+    
     @Environment(\.scenePhase) var scenePhase
     let viewContext = PersistenceController.shared.container.viewContext
     @StateObject var viewModel = ViewModel()
@@ -52,6 +54,8 @@ struct TimersApp: App {
                     let bubble = viewModel.bubble(for: viewModel.showDeleteAction_bRank!)
                     DeleteView(bubble).environmentObject(viewModel)
                 }
+                
+                if notesShowing { BubbleStickyNotesList($viewModel.stickyNotesList_bRank) }
             }
             .environment(\.managedObjectContext, viewContext)
             .environmentObject(viewModel)
