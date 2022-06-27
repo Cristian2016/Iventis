@@ -57,11 +57,7 @@ struct BubbleStickyNotesList: View {
     // MARK: -
     var body: some View {
         ZStack {
-            Color.background.opacity(0.5)
-                .onTapGesture {
-                    saveTextInput()
-                    dismiss()
-                }
+            screenBackground
             darkRoundedBackground
                 .overlay {
                     ZStack {
@@ -154,6 +150,14 @@ struct BubbleStickyNotesList: View {
         .foregroundColor(.white)
         .background(Color("deleteActionViewBackground").padding(-100))
         .offset(y: 50)
+    }
+    
+    private var screenBackground: some View {
+        Color.background.opacity(0.5)
+            .onTapGesture {
+                saveTextInput()
+                dismiss()
+            }
     }
     
     private var darkRoundedBackground: some View {
