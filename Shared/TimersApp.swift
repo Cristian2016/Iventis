@@ -21,7 +21,6 @@ struct TimersApp: App {
     var body: some Scene {
         WindowGroup {
             ZStack {
-                
                 NavigationSplitView(columnVisibility: $visibility) {
                     ViewHierarchy()
                 } detail: {
@@ -30,8 +29,9 @@ struct TimersApp: App {
                             //bubbleCell for iOS
                             if !UIDevice.isIPad {
                                 List {
-                                    BubbleCell(viewModel.bubble(for: rank)!)
-                                        .listRowSeparator(.hidden)
+                                    if let bubble = viewModel.bubble(for: rank) {
+                                        BubbleCell(bubble).listRowSeparator(.hidden)
+                                    }
                                 }
                                 .scrollDisabled(true)
                                 .listStyle(.plain)
@@ -53,7 +53,6 @@ struct TimersApp: App {
                     DeleteView(bubble).environmentObject(viewModel)
                 }
             }
-            
             .environment(\.managedObjectContext, viewContext)
             .environmentObject(viewModel)
             .onChange(of: scenePhase) {
