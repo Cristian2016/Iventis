@@ -9,7 +9,7 @@ import SwiftUI
 
 struct EmptyHistoryAlertView: View {
     var body: some View {
-        VStack (alignment:.leading) {
+        VStack {
             ZStack {
                 Image("secondsImage")
                     .resizable()
