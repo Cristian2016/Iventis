@@ -173,6 +173,7 @@ struct BubbleStickyNotesList: View {
             TextField("", text: $textInput)
         }
         .font(.system(size: 24))
+        .foregroundColor(.white)
         .padding()
         .focused($keyboardVisible)
         .textInputAutocapitalization(.words)
