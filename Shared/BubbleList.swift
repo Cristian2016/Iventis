@@ -61,7 +61,8 @@ struct BubbleList: View {
             let frame = new.frame
             if frame == .zero { return }
             
-            self.viewModel.deleteViewOffset = compute_deleteView_YOffset(for: new.frame)
+            self.viewModel.deleteViewOffset =
+            viewModel.compute_deleteView_YOffset(for: new.frame)
         }
     }
     
@@ -112,32 +113,6 @@ struct BubbleList: View {
         NSSortDescriptor(key: "isPinned", ascending: false),
         NSSortDescriptor(key: "rank", ascending: false)
     ]
-    
-    private func compute_deleteView_YOffset(for frame:CGRect) -> CGFloat {
-        let cellDeleteViewGap = CGFloat(70)
-        
-        let cellLow = frame.origin.y + frame.height
-        
-        let deleteViewHeight = DeleteView.height
-        let deleteViewHigh = (UIScreen.size.height - deleteViewHeight)/2
-        let deleteViewLow = deleteViewHigh + deleteViewHeight
-        
-        //available space below bubble cell
-        let spaceBelowCell = UIScreen.size.height - cellLow
-        
-        //put deleteActionView below cell it's the prefered way to go
-        let putBelow = spaceBelowCell - (cellDeleteViewGap + deleteViewHeight) > 0
-        let delta = cellLow - deleteViewHigh
-        
-        let deleteView_YOffset:CGFloat
-        
-        if putBelow { deleteView_YOffset = delta + cellDeleteViewGap }
-        else {//put up
-            deleteView_YOffset = frame.origin.y - (deleteViewLow + cellDeleteViewGap) - 10
-        }
-        
-        return deleteView_YOffset
-    }
 }
 
 // MARK: -

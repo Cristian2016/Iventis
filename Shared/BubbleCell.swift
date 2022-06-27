@@ -169,6 +169,7 @@ struct BubbleCell: View {
     private func userWantsDetailView() {
         if viewModel.rankOfSelectedBubble == nil {
             viewModel.rankOfSelectedBubble = Int(bubble.rank)
+            viewModel.isDetailViewShowing = true
         }
     }
         
@@ -216,7 +217,12 @@ struct BubbleCell: View {
         }
         .swipeActions(edge: .trailing, allowsFullSwipe: true) {
             //delete
-            Button { viewModel.showDeleteAction_bRank = Int(bubble.rank)}
+            Button {
+                viewModel.showDeleteAction_bRank = Int(bubble.rank)
+                delayExecution(.now() + 0.2) {
+                    viewModel.isDetailViewShowing = false
+                }
+            }
         label: { Label { Text("Delete") }
             icon: { Image.trash } }.tint(.red)
             
