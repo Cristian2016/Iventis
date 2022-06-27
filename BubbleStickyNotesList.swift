@@ -7,6 +7,7 @@
 //⚠️ do not use didSet or willSet on @State properties, because they don't work! use .onChange(of:perform:) instead!
 //⚠️ cell.height:
 // set both 1. environment(\.defaultMinListRowHeight) and 2. cell.frame
+//1 ⚠️ this little shit prevents app from crashing when textInput is dragged around on screen
 
 import SwiftUI
 
@@ -81,9 +82,7 @@ struct BubbleStickyNotesList: View {
                                 dismiss()
                             }
                         List {
-                            //⚠️ this little shit prevents app from crashing
-                            //when textInput is dragged around on screen
-                            if filteredItems.isEmpty { emptyListAlert }
+                            if filteredItems.isEmpty { emptyListAlert } //1
                             
                             ForEach (filteredItems) { cell($0) }
                             //gestures
