@@ -131,17 +131,19 @@ struct BubbleStickyNotesList: View {
     private var emptyListAlert: some View {
         HStack {
             Spacer()
-            VStack (alignment: .leading) {
+            VStack (alignment: .leading, spacing: 4) {
                 Text("Empty List")
                     .font(.system(size: 30))
                 Text("No Matches")
                     .font(.system(size: 26))
                     .background(Color.red)
+                Text("Tap \(Image(systemName: "plus.app.fill")) to Add Note")
+                    .font(.system(size: 24))
             }
             Spacer()
         }
         .foregroundColor(.white)
-        .background(Color("deleteActionViewBackground").padding(-100))
+        .background(Color("deleteActionViewBackground").padding(-250))
         .offset(y: 50)
     }
     
