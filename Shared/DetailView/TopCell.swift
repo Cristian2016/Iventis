@@ -46,7 +46,7 @@ struct TopCell: View {
                 }
                 .frame(height: topCellHeight)
                 .background( backgroundView )
-                if isSelected { selectionIndicator }
+                if isSelected { selectionNeedle }
             }
             .onReceive(NotificationCenter.default.publisher(for: .topCellTapped)) { output in
                 let cellRank = output.userInfo!["topCellTapped"] as! Int
@@ -165,7 +165,7 @@ struct TopCell: View {
     .font(.caption)
     }
     
-    private var selectionIndicator: some View {
+    private var selectionNeedle: some View {
         VStack {
             Rectangle()
                 .fill(selectionIndicatorColor)
