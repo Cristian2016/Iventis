@@ -57,7 +57,7 @@ struct BubbleStickyNotesList: View {
     // MARK: -
     var body: some View {
         ZStack {
-            Color.white.opacity(0.001)
+            Color.background.opacity(0.5)
                 .onTapGesture {
                     saveTextInput()
                     dismiss()
@@ -90,13 +90,17 @@ struct BubbleStickyNotesList: View {
                                 
                                 ForEach (filteredItems) { item in
                                     Text("\(item.note ?? "No Note")")
+                                    //text
                                         .font(.system(size: 25))
                                         .foregroundColor(.white)
-                                        .padding([.leading, .trailing], 4)
                                         .background( Rectangle()
                                             .fill(item.note == bubble.note ? Color.black : .clear)
                                         )
+                                    //layout
                                         .padding(.leading)
+                                        .padding([.leading, .trailing], 4)
+                                        .frame(height: 15)
+                                    //gestures
                                         .onTapGesture {
                                             UserFeedback.singleHaptic(.heavy)
                                             bubble.note = item.note
@@ -104,7 +108,6 @@ struct BubbleStickyNotesList: View {
                                             try? PersistenceController.shared.viewContext.save()
                                             dismiss()
                                         }
-                                        .frame(height: 15)
                                 }
                                 .onDelete { viewModel.delete(filteredItems[$0.first!]) }
                                 .listRowBackground(Color("deleteActionViewBackground"))
@@ -121,7 +124,6 @@ struct BubbleStickyNotesList: View {
                 }
         }
         .ignoresSafeArea(.container, edges: .top)
-        .padding(.top, 2)
         .onAppear {
             delayExecution(.now() + 0.05) {
                 withAnimation (.easeInOut(duration: 0.0)) { keyboardVisible = true }
