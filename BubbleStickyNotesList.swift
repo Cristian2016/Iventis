@@ -25,13 +25,13 @@ struct BubbleStickyNotesList: View {
     
     @State private var textInput = "" //willSet and didSet do not work anymore
     private let textInputLimit = 9
-    private let textFieldPlaceholder = "Add Note"
+    private let textFieldPlaceholder = "Add/Search Note"
     
     let initialNote:String
     @FocusState var keyboardVisible:Bool
     @Binding var showAddNotes_bRank:Int?
     
-    private let size = CGSize(width: 250, height: 420)
+    private let size = CGSize(width: 250, height: 412)
     private let cornerRadius = CGFloat(24)
     
     // MARK: -
