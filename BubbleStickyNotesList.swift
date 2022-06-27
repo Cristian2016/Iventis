@@ -107,6 +107,7 @@ struct BubbleStickyNotesList: View {
                     
                 }
         }
+        .offset(y:10)
         .ignoresSafeArea(.container, edges: .top)
         .onAppear {
             delayExecution(.now() + 0.05) {
