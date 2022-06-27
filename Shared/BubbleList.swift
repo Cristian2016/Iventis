@@ -57,10 +57,10 @@ struct BubbleList: View {
             
             if notesShowing { BubbleStickyNotesList($viewModel.stickyNotesList_bRank) }
             
-            if deleteViewOffsetComputed && deleteViewShowing {
-                let bubble = viewModel.bubble(for: viewModel.showDeleteAction_bRank!)
-                DeleteView(bubble).environmentObject(viewModel)
-            }
+//            if deleteViewOffsetComputed && deleteViewShowing {
+//                let bubble = viewModel.bubble(for: viewModel.showDeleteAction_bRank!)
+//                DeleteView(bubble).environmentObject(viewModel)
+//            }
             
             PaletteView($viewModel.isPaletteShowing).environmentObject(viewModel)
         }
@@ -174,8 +174,4 @@ extension BubbleList {
     fileprivate var notesShowing:Bool { viewModel.stickyNotesList_bRank != nil }
         
     fileprivate var isListEmpty:Bool { results.isEmpty }
-    
-    fileprivate var deleteViewShowing:Bool { viewModel.showDeleteAction_bRank != nil }
-    
-    var deleteViewOffsetComputed:Bool { viewModel.deleteViewOffset != nil }
 }

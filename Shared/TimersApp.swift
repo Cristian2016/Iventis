@@ -9,6 +9,9 @@ import SwiftUI
 
 @main
 struct TimersApp: App {
+    var deleteViewOffsetComputed:Bool { viewModel.deleteViewOffset != nil }
+    fileprivate var deleteViewShowing:Bool { viewModel.showDeleteAction_bRank != nil }
+    
     @Environment(\.scenePhase) var scenePhase
     let viewContext = PersistenceController.shared.container.viewContext
     @StateObject var viewModel = ViewModel()
@@ -17,31 +20,40 @@ struct TimersApp: App {
     //the root view of scene is a NavigationSplitView
     var body: some Scene {
         WindowGroup {
-            NavigationSplitView(columnVisibility: $visibility) {
-                ViewHierarchy()
-            } detail: {
-                VStack {
-                    if let rank = viewModel.rankOfSelectedBubble {
-                        //bubbleCell for iOS
-                        if !UIDevice.isIPad {
-                            List {
-                                BubbleCell(viewModel.bubble(for: rank)!)
-                                    .listRowSeparator(.hidden)
+            ZStack {
+                
+                NavigationSplitView(columnVisibility: $visibility) {
+                    ViewHierarchy()
+                } detail: {
+                    VStack {
+                        if let rank = viewModel.rankOfSelectedBubble {
+                            //bubbleCell for iOS
+                            if !UIDevice.isIPad {
+                                List {
+                                    BubbleCell(viewModel.bubble(for: rank)!)
+                                        .listRowSeparator(.hidden)
+                                }
+                                .scrollDisabled(true)
+                                .listStyle(.plain)
+                                .frame(height: 160)
                             }
-                            .scrollDisabled(true)
-                            .listStyle(.plain)
-                            .frame(height: 160)
-                        }
-                        DetailView(viewModel.rankOfSelectedBubble)
-                    } else {
-                        VStack {
-                            Text("Bubble Detail")
-                            Text("Select a Bubble")
+                            DetailView(viewModel.rankOfSelectedBubble)
+                        } else {
+                            VStack {
+                                Text("Bubble Detail")
+                                Text("Select a Bubble")
+                            }
                         }
                     }
+                    .padding([.top], 2)
                 }
-                .padding([.top], 2)
+                
+                if deleteViewOffsetComputed && deleteViewShowing {
+                    let bubble = viewModel.bubble(for: viewModel.showDeleteAction_bRank!)
+                    DeleteView(bubble).environmentObject(viewModel)
+                }
             }
+            
             .environment(\.managedObjectContext, viewContext)
             .environmentObject(viewModel)
             .onChange(of: scenePhase) {
