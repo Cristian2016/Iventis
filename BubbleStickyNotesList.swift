@@ -60,46 +60,43 @@ struct BubbleStickyNotesList: View {
             screenBackground
             darkRoundedBackground
                 .overlay {
-                    ZStack {
-                        VStack {
-                            Spacer(minLength: 10)
-                            textField
-                            //layout
-                                .padding(.leading)
+                    VStack {
+                        Spacer(minLength: 10)
+                        textField
+                        //layout
+                            .padding(.leading)
+                        //gestures
+                            .gesture(
+                                DragGesture(minimumDistance: 15, coordinateSpace: .global)
+                                    .onChanged {
+                                        if $0.translation.width < -20 { textInput = "" }
+                                    }
+                                    .onEnded { _ in
+                                        if textInput.isEmpty { UserFeedback.doubleHaptic(.rigid)
+                                        }
+                                    }
+                            )
+                            .onSubmit {
+                                saveTextInput()
+                                dismiss()
+                            }
+                        List {
+                            //⚠️ this little shit prevents app from crashing
+                            //when textInput is dragged around on screen
+                            if filteredItems.isEmpty { emptyListAlert }
+                            
+                            ForEach (filteredItems) { cell($0) }
                             //gestures
-                                .gesture(
-                                    DragGesture(minimumDistance: 15, coordinateSpace: .global)
-                                        .onChanged {
-                                            if $0.translation.width < -20 { textInput = "" }
-                                        }
-                                        .onEnded { _ in
-                                            if textInput.isEmpty { UserFeedback.doubleHaptic(.rigid)
-                                            }
-                                        }
-                                )
-                                .onSubmit {
-                                    saveTextInput()
-                                    dismiss()
-                                }
-                            List {
-                                //⚠️ this little shit prevents app from crashing
-                                //when textInput is dragged around on screen
-                                if filteredItems.isEmpty { emptyListAlert }
-                                
-                                ForEach (filteredItems) { cell($0) }
-                                //gestures
                                 .onDelete { viewModel.delete(filteredItems[$0.first!]) }
-                                //
+                            //
                                 .listRowBackground(Color("deleteActionViewBackground"))
                                 .listRowSeparator(.hidden)
-                            }
-                            .listStyle(.plain)
-                            .environment(\.defaultMinListRowHeight, 8)
                         }
-                        .clipShape(RoundedRectangle(cornerRadius: cornerRadius))
-                        plusButton
+                        .listStyle(.plain)
+                        .environment(\.defaultMinListRowHeight, 8)
                     }
-                    
+                    .clipShape(RoundedRectangle(cornerRadius: cornerRadius))
+                    plusButton
                 }
         }
         .offset(y:10)
