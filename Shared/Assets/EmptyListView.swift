@@ -20,7 +20,6 @@ struct EmptyListView: View {
                 tapHold
                 
             }
-            
         }
         .padding()
     }

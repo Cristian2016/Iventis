@@ -9,10 +9,10 @@ import SwiftUI
 
 struct EmptyHistoryAlertView: View {
     var body: some View {
-        VStack {
+        VStack (alignment:.leading) {
             ZStack {
                 Image(systemName: "circle")
-                    .font(.system(size: 150, weight: .ultraLight, design: .default))
+                    .font(.system(size: 80, weight: .ultraLight, design: .default))
                     .aspectRatio(contentMode: .fit)
                     .foregroundColor(.lightGray)
                     .overlay {
@@ -27,7 +27,6 @@ struct EmptyHistoryAlertView: View {
                     .font(.largeTitle)
                     .foregroundColor(.green)
             }
-            
             VStack (alignment:.leading) {
                 Text("History Empty")
                     .font(.title)
@@ -35,7 +34,6 @@ struct EmptyHistoryAlertView: View {
                     .foregroundColor(.secondary)
                     .font(.system(.title3, design: .monospaced))
             }
-            
         }
         .padding()
     }
