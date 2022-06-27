@@ -28,6 +28,7 @@ struct TimersApp: App {
                                 BubbleCell(viewModel.bubble(for: rank)!)
                                     .listRowSeparator(.hidden)
                             }
+                            .scrollDisabled(true)
                             .listStyle(.plain)
                             .frame(height: 160)
                         }
