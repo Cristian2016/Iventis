@@ -26,6 +26,9 @@ struct SmallBubbleView: View {
             //Seconds
             Circle()
         }
+        .compositingGroup()
+        .foregroundColor(.white)
+        .standardShadow()
     }
     
     var timeComponents: some View {
@@ -47,7 +50,7 @@ struct SmallBubbleView: View {
             }
         }
         .font(.system(size: BubbleCell.metrics.fontSize))
-        .foregroundColor(.background)
+        .foregroundColor(.black)
     }
     
     //stopwatch: minutes and hours stay hidden initially
