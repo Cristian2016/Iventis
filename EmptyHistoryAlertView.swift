@@ -11,21 +11,13 @@ struct EmptyHistoryAlertView: View {
     var body: some View {
         VStack (alignment:.leading) {
             ZStack {
-                Image(systemName: "circle")
-                    .font(.system(size: 80, weight: .ultraLight, design: .default))
-                    .aspectRatio(contentMode: .fit)
-                    .foregroundColor(.lightGray)
-                    .overlay {
-                        Push(.bottomRight) {
-                            Image(systemName: "00.circle.fill")
-                                .font(.system(size: 50, weight: .light, design: .default))
-                                .foregroundColor(.secondary)
-                        }
-                        .padding(6)
-                    }
+                Image("secondsImage")
+                    .resizable()
+                    .frame(width: 130, height: 130)
                 Image(systemName: "circle.fill")
                     .font(.largeTitle)
                     .foregroundColor(.green)
+                    .offset(x: -30, y: -30)
             }
             VStack (alignment:.leading) {
                 Text("History Empty")
@@ -36,6 +28,12 @@ struct EmptyHistoryAlertView: View {
             }
         }
         .padding()
+        .padding()
+        .background {
+            RoundedRectangle(cornerRadius: 20)
+                .fill(Color.background)
+                .standardShadow()
+        }
     }
 }
 
