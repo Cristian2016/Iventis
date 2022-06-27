@@ -165,7 +165,7 @@ struct BubbleStickyNotesList: View {
     ///I use this because I couldn't find a way to center text placeholder on Text Field
     private var placeholder: some View {
             Text(textFieldPlaceholder)
-            .font(.title2)
+            .font(.system(size: 26))
             .foregroundColor(.lightGray)
     }
     
