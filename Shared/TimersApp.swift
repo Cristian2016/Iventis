@@ -24,8 +24,12 @@ struct TimersApp: App {
                     if let rank = viewModel.rankOfSelectedBubble {
                         //bubbleCell for iOS
                         if !UIDevice.isIPad {
-                            BubbleCell(viewModel.bubble(for: rank)!)
-                                .padding([.leading, .trailing], 6)
+                            List {
+                                BubbleCell(viewModel.bubble(for: rank)!)
+                                    .listRowSeparator(.hidden)
+                            }
+                            .listStyle(.plain)
+                            .frame(height: 160)
                         }
                         DetailView(viewModel.rankOfSelectedBubble)
                     } else {

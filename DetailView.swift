@@ -30,7 +30,7 @@ struct DetailView: View {
     
     var body: some View {
         ZStack {
-            if sessions.isEmpty { EmptyHistoryAlertView().offset(y: -100) }
+            if sessions.isEmpty { EmptyHistoryAlertView() }
             VStack {
                 Spacer()
                 TopDetailView(rank)
