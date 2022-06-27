@@ -15,9 +15,9 @@ struct EmptyHistoryAlertView: View {
                     .resizable()
                     .frame(width: 130, height: 130)
                 Image(systemName: "circle.fill")
-                    .font(.largeTitle)
+                    .font(.system(size: 50))
                     .foregroundColor(.green)
-                    .offset(x: -30, y: -30)
+                    .offset(x: 40, y: -40)
             }
             VStack (alignment:.leading) {
                 Text("History Empty")
