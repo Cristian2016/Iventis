@@ -97,9 +97,12 @@ struct BubbleList: View {
         HStack {
             //text
             if sectionID == "false" {
-                Text("Bubbles")
-                    .foregroundColor(.label)
-                    .fontWeight(.medium)
+                HStack {
+                    Text("Bubbles")
+                        .foregroundColor(.label)
+                        .fontWeight(.medium)
+                }
+                
             }
             else { Text("\(Image(systemName: "pin.fill")) Pinned")
                     .foregroundColor(.orange)
