@@ -90,10 +90,6 @@ struct BubbleStickyNotesList: View {
                             //
                                 .listRowBackground(Color("deleteActionViewBackground"))
                                 .listRowSeparator(.hidden)
-//                            Rectangle()
-//                                .fill(Color("deleteActionViewBackground"))
-//                                .frame(height: size.height)
-//                                .padding(-40)
                         }
                         .listStyle(.plain)
                         .environment(\.defaultMinListRowHeight, 8)
