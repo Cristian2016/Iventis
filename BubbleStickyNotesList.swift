@@ -68,7 +68,9 @@ struct BubbleStickyNotesList: View {
                         VStack {
                             Spacer(minLength: 10)
                             textField
+                            //layout
                                 .padding(.leading)
+                            //gestures
                                 .gesture(
                                     DragGesture(minimumDistance: 15, coordinateSpace: .global)
                                         .onChanged {
@@ -88,28 +90,10 @@ struct BubbleStickyNotesList: View {
                                 //when textInput is dragged around on screen
                                 if filteredItems.isEmpty { emptyListAlert }
                                 
-                                ForEach (filteredItems) { item in
-                                    Text("\(item.note ?? "No Note")")
-                                    //text
-                                        .font(.system(size: 25))
-                                        .foregroundColor(.white)
-                                        .background( Rectangle()
-                                            .fill(item.note == bubble.note ? Color.black : .clear)
-                                        )
-                                    //layout
-                                        .padding(.leading)
-                                        .padding([.leading, .trailing], 4)
-                                        .frame(height: 15)
-                                    //gestures
-                                        .onTapGesture {
-                                            UserFeedback.singleHaptic(.heavy)
-                                            bubble.note = item.note
-                                            bubble.isNoteHidden = false
-                                            try? PersistenceController.shared.viewContext.save()
-                                            dismiss()
-                                        }
-                                }
+                                ForEach (filteredItems) { cell($0) }
+                                //gestures
                                 .onDelete { viewModel.delete(filteredItems[$0.first!]) }
+                                //
                                 .listRowBackground(Color("deleteActionViewBackground"))
                                 .listRowSeparator(.hidden)
                             }
@@ -132,6 +116,28 @@ struct BubbleStickyNotesList: View {
     }
     
     // MARK: - Lego
+    private func cell(_ item:BubbleSavedNote) -> some View {
+        Text("\(item.note ?? "No Note")")
+        //text
+            .font(.system(size: 25))
+            .foregroundColor(.white)
+            .background( Rectangle()
+                .fill(item.note == bubble.note ? Color.black : .clear)
+            )
+        //layout
+            .padding(.leading)
+            .padding([.leading, .trailing], 4)
+            .frame(height: 15)
+        //gestures
+            .onTapGesture {
+                UserFeedback.singleHaptic(.heavy)
+                bubble.note = item.note
+                bubble.isNoteHidden = false
+                try? PersistenceController.shared.viewContext.save()
+                dismiss()
+            }
+    }
+    
     private var emptyListAlert: some View {
         HStack {
             Spacer()
