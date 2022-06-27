@@ -4,7 +4,9 @@
 //
 //  Created by Cristian Lapusan on 16.05.2022.
 //  searchable modifier https://www.youtube.com/watch?v=5soAxQCF29o
-///⚠️⚠️⚠️ do not use didSet or willSet on @State properties, because they don't work! use .onChange(of:perform:) instead!
+//⚠️ do not use didSet or willSet on @State properties, because they don't work! use .onChange(of:perform:) instead!
+//⚠️ cell.height:
+// set both 1. environment(\.defaultMinListRowHeight) and 2. cell.frame
 
 import SwiftUI
 
@@ -23,11 +25,10 @@ struct BubbleStickyNotesList: View {
     
     @State private var textInput = "" //willSet and didSet do not work anymore
     private let textInputLimit = 9
-    private let textFieldPlaceholder = "Note"
+    private let textFieldPlaceholder = "Add Note"
     
     let initialNote:String
     @FocusState var keyboardVisible:Bool
-    
     @Binding var showAddNotes_bRank:Int?
     
     private let size = CGSize(width: 250, height: 420)
@@ -92,7 +93,9 @@ struct BubbleStickyNotesList: View {
                                         .font(.system(size: 25))
                                         .foregroundColor(.white)
                                         .padding([.leading, .trailing], 4)
-                                        .background( Rectangle().fill(item.note == bubble.note ? Color.black : .clear))
+                                        .background( Rectangle()
+                                            .fill(item.note == bubble.note ? Color.black : .clear)
+                                        )
                                         .padding(.leading)
                                         .onTapGesture {
                                             UserFeedback.singleHaptic(.heavy)
@@ -101,6 +104,7 @@ struct BubbleStickyNotesList: View {
                                             try? PersistenceController.shared.viewContext.save()
                                             dismiss()
                                         }
+                                        .frame(height: 15)
                                 }
                                 .onDelete { viewModel.delete(filteredItems[$0.first!]) }
                                 .listRowBackground(Color("deleteActionViewBackground"))
@@ -145,8 +149,8 @@ struct BubbleStickyNotesList: View {
     
     private var darkRoundedBackground: some View {
         RoundedRectangle(cornerRadius: cornerRadius)
+            .fill(Color("searchFieldBackground"))
             .frame(width: size.width, height: size.height)
-            .foregroundColor(Color("searchFieldBackground"))
             .standardShadow(false)
     }
     

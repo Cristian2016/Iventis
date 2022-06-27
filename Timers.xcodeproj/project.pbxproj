@@ -204,9 +204,9 @@
 		1F5F4A4728093FAD00AF3442 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				1F5F4A4A28093FAD00AF3442 /* TimersApp.swift */,
 				1F9B6AEF280950D600C0A725 /* ViewModel.swift */,
 				1F5F4A942809450A00AF3442 /* Library.swift */,
-				1F5F4A4A28093FAD00AF3442 /* TimersApp.swift */,
 				1F5F4A982809456E00AF3442 /* BubbleList.swift */,
 				1F5F4A93280941FC00AF3442 /* Core Data */,
 				1F97B7E02809B331002FFCA3 /* Assets */,
