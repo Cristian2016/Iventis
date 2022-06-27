@@ -88,7 +88,7 @@ struct BubbleStickyNotesList: View {
                             //gestures
                                 .onDelete { viewModel.delete(filteredItems[$0.first!]) }
                             //
-                                .listRowBackground(Color("deleteActionViewBackground"))
+//                                .listRowBackground(Color("deleteActionViewBackground"))
                                 .listRowSeparator(.hidden)
                         }
                         .listStyle(.plain)
@@ -112,13 +112,11 @@ struct BubbleStickyNotesList: View {
         Text("\(item.note ?? "No Note")")
         //text
             .font(.system(size: 25))
-            .foregroundColor(.white)
             .background( Rectangle()
-                .fill(item.note == bubble.note ? Color.black : .clear)
+                .fill(item.note == bubble.note ? Color.lightGray : .clear)
             )
         //layout
-            .padding(.leading)
-            .padding([.leading, .trailing], 4)
+            .padding([.leading], 10)
             .frame(height: 15)
         //gestures
             .onTapGesture {
@@ -157,7 +155,7 @@ struct BubbleStickyNotesList: View {
     
     private var darkRoundedBackground: some View {
         RoundedRectangle(cornerRadius: cornerRadius)
-            .fill(Color("searchFieldBackground"))
+            .fill(Color("deleteActionViewBackground"))
             .frame(width: size.width, height: size.height)
             .standardShadow(false)
     }
@@ -174,7 +172,6 @@ struct BubbleStickyNotesList: View {
             if textInput.isEmpty { placeholder }
             TextField("", text: $textInput)
         }
-        
         .font(.system(size: 24))
         .padding()
         .focused($keyboardVisible)
