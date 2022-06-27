@@ -20,6 +20,7 @@ class ViewModel: ObservableObject {
     @Published var isPaletteShowing = false
     
     @Published var rankOfSelectedBubble:Int?
+    @Published var idOfSelectedBubble:Bubble.ID?
         
     init() {
         let request = Bubble.fetchRequest()
@@ -234,6 +235,10 @@ class ViewModel: ObservableObject {
         let context = PersistenceController.shared.viewContext
         let bubble = try! context.fetch(request).first
         return bubble
+    }
+    
+    func bubble(for objectID:Bubble.ID) -> Bubble? {
+        return nil
     }
     
     func index(of rank:Int64) -> Int? {

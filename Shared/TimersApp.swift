@@ -27,6 +27,7 @@ struct TimersApp: App {
                     ViewHierarchy()
                 } detail: {
                     VStack {
+                        
                         if let rank = viewModel.rankOfSelectedBubble {
                             //bubbleCell for iOS
                             if !UIDevice.isIPad {
@@ -49,6 +50,7 @@ struct TimersApp: App {
                     }
                     .padding([.top], 2)
                 }
+                .accentColor(.label)
                 
                 if deleteViewOffsetComputed && deleteViewShowing {
                     let bubble = viewModel.bubble(for: viewModel.showDeleteAction_bRank!)
