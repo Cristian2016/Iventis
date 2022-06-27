@@ -10,6 +10,8 @@ import SwiftUI
 ///it's the small bubble cell in the PairCell of BottomDetaiulView that only shows up when bubble is running and detailMode is active
 struct SmallBubbleView: View {
     
+    @AppStorage("zoom") var isZoomed: Bool = true
+    
     @StateObject var bubble:Bubble
     static var metrics = Metrics()
     
@@ -49,7 +51,10 @@ struct SmallBubbleView: View {
                     .overlay { Text(bubble.smallBubbleView_Components.sec) }
             }
         }
-        .font(.system(size: BubbleCell.metrics.fontSize))
+        .font(
+            .system(size: isZoomed ? BubbleCell.metrics.fontSize : 42)
+            .weight(isZoomed ? .regular : .medium)
+        )
         .foregroundColor(.black)
     }
     
@@ -65,18 +70,9 @@ struct SmallBubbleView: View {
             timeComponents
         }
         .frame(width: edge * ratio)
+        .frame(height: isZoomed ? 140 : 110)
         .foregroundColor(Color("smallBubbleCircleColor"))
-    }
-    
-    struct TimeComponents:ViewModifier {
-        let edge:CGFloat
-        
-        func body(content: Content) -> some View {
-            content
-                .frame(width: edge, height: edge)
-                .foregroundColor(.background) //text color
-                .font(.system(size: 45).weight(.medium))
-        }
+        .onTapGesture { withAnimation { isZoomed.toggle() } }
     }
 }
 
