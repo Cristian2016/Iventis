@@ -39,10 +39,7 @@ struct BubbleList: View {
                             } header: { headerTitle(for: section.id.description) }
                                 .listRowSeparator(.hidden)
                             
-                            //overscroll
-                            if !section.id {
-                                Spacer().frame(height: 200)
-                            }
+                            if !section.id { Spacer().frame(height: 200) } //bottom overscroll
                         }
                         .scrollIndicators(.hidden)
                         .padding(EdgeInsets(top: 0, leading: -10, bottom: 0, trailing: -10))
