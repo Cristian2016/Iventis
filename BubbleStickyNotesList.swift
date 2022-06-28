@@ -132,10 +132,10 @@ struct BubbleStickyNotesList: View {
         HStack {
             Spacer()
             VStack (alignment: .leading, spacing: 4) {
-                Text("Empty List")
-                    .font(.system(size: 30))
+//                Text("Empty List")
+//                    .font(.system(size: 30))
                 Text("No Matches")
-                    .font(.system(size: 26))
+                    .font(.system(size: 28).weight(.medium))
                     .background(Color.red)
                 Text("Tap \(Image(systemName: "plus.app.fill")) to Add Note")
                     .font(.system(size: 24))
@@ -150,7 +150,7 @@ struct BubbleStickyNotesList: View {
     private var screenBackground: some View {
         Color.background.opacity(0.5)
             .onTapGesture {
-                saveTextInput()
+                if noteIsValid { saveTextInput() }
                 dismiss()
             }
     }
@@ -195,9 +195,11 @@ struct BubbleStickyNotesList: View {
                     .overlay { remainingCharactersCounterView }
                 //gestures
                     .onTapGesture {
-                        if textInput.count > 0 {
+                        if noteIsValid {
                             saveTextInput()
                             dismiss()
+                        } else {
+                            print("note not valid")
                         }
                     }
                     .onLongPressGesture {
@@ -206,6 +208,16 @@ struct BubbleStickyNotesList: View {
                     }
             }
         }
+    }
+    
+    private var noteIsValid: Bool {
+        let condition = !textInput.trimmingCharacters(in: CharacterSet.whitespaces).isEmpty
+        
+        if textInput.count > 0 && condition {
+            return true
+        }
+        
+        return false
     }
     
     private var remainingCharactersCounterView:some View {

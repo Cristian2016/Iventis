@@ -27,7 +27,6 @@ struct TimersApp: App {
                     ViewHierarchy()
                 } detail: {
                     VStack {
-                        
                         if let rank = viewModel.rankOfSelectedBubble {
                             //bubbleCell for iOS
                             if !UIDevice.isIPad {

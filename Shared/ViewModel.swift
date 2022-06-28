@@ -237,9 +237,6 @@ class ViewModel: ObservableObject {
         return bubble
     }
     
-    func bubble(for objectID:Bubble.ID) -> Bubble? {
-        return nil
-    }
     
     func index(of rank:Int64) -> Int? {
         let request = Bubble.fetchRequest()
@@ -262,9 +259,7 @@ class ViewModel: ObservableObject {
         //set note
         bubble.note = note
         bubble.isNoteHidden = false
-        
-        print("note is hidden \(bubble.isNoteHidden = false)")
-        
+                
         //add new item to bubbleHistory
         let context = bubble.managedObjectContext
         let historyItem = BubbleSavedNote(context: context!)
