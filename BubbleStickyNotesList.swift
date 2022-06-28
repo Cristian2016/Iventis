@@ -139,8 +139,10 @@ struct BubbleStickyNotesList: View {
                 Text(line0)
                     .font(.system(size: 30))
                     .background(Color.red)
-                line1
-                line2
+                if noteIsValid {
+                    line1
+                    line2
+                }
             }
             Spacer()
         }
@@ -188,7 +190,7 @@ struct BubbleStickyNotesList: View {
     
     @ViewBuilder
     private var plusButton:some View {
-        if !textInput.isEmpty {
+        if !textInput.isEmpty && noteIsValid {
             Push(.topRight) {
                 Image(systemName: "plus.app.fill")
                     .background(Circle().fill(Color.white).padding())
