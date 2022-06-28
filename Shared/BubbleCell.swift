@@ -55,7 +55,7 @@ extension BubbleCell {
             .highPriorityGesture(
                 LongPressGesture(minimumDuration: 0.3)
                     .onEnded { _ in
-                        handleLongPress()
+                        userWantsNotesList()
                     }
             )
             
@@ -121,7 +121,7 @@ struct BubbleCell: View {
         if !bubble.isObservingBackgroundTimer { bubble.observeBackgroundTimer() }
     }
     
-    func handleLongPress() {
+    func userWantsNotesList() {
         UserFeedback.singleHaptic(.light)
         showNotesList()
         PersistenceController.shared.save()

@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct PairCell: View {
+    @EnvironmentObject var viewModel:ViewModel
     @StateObject var pair:Pair
     let duration:Float.TimeComponentsAsStrings?
     let pairNumber:Int
@@ -111,10 +112,7 @@ struct PairCell: View {
     // MARK: - Gestures
     private var longPress: some Gesture {
         LongPressGesture(minimumDuration: 0.3)
-            .onEnded { _ in
-                UserFeedback.singleHaptic(.light)
-                print("pair long pressed")
-            }
+            .onEnded { _ in userWantsNotesList() }
     }
     
     // MARK: -
@@ -124,5 +122,12 @@ struct PairCell: View {
         let result = try? decoder.decode(Float.TimeComponentsAsStrings.self, from: pair.durationAsStrings ?? Data())
         self.duration = result
         self.pairNumber = pairNumber
+    }
+    
+    // MARK: - Intents
+    func userWantsNotesList() {
+        UserFeedback.singleHaptic(.light)
+        viewModel.pairOfNotesList = pair
+        PersistenceController.shared.save()
     }
 }

@@ -9,6 +9,7 @@ import SwiftUI
 
 struct BottomCell: View {
     @FetchRequest var pairs:FetchedResults<Pair>
+//    @EnvironmentObject var viewModel:ViewModel
     
     ///how far from the trailing edge should the count label be
     let pairCountPadding = EdgeInsets(top: 4, leading: 0, bottom: 5, trailing: -6)
@@ -24,7 +25,9 @@ struct BottomCell: View {
     
     var body: some View {
         List {
-            ForEach(pairs) { PairCell($0, pairs.count - pairs.firstIndex(of: $0)!) }
+            ForEach(pairs) {
+                PairCell($0, pairs.count - pairs.firstIndex(of: $0)!)
+            }
             .listRowSeparator(.hidden)
 //            .listRowBackground(
 //                RoundedRectangle(cornerRadius: 6).fill(Color("pairCell")).padding(2))

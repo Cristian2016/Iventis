@@ -30,8 +30,40 @@ extension Pair {
 
     //4. other
     @NSManaged public var session: Session?
+    @NSManaged public var history: NSOrderedSet?
 }
 
-extension Pair : Identifiable {
+// MARK: Generated accessors for history
+extension Pair {
+
+    @objc(insertObject:inHistoryAtIndex:)
+    @NSManaged public func insertIntoHistory(_ value: PairSavedNote, at idx: Int)
+
+    @objc(removeObjectFromHistoryAtIndex:)
+    @NSManaged public func removeFromHistory(at idx: Int)
+
+    @objc(insertHistory:atIndexes:)
+    @NSManaged public func insertIntoHistory(_ values: [PairSavedNote], at indexes: NSIndexSet)
+
+    @objc(removeHistoryAtIndexes:)
+    @NSManaged public func removeFromHistory(at indexes: NSIndexSet)
+
+    @objc(replaceObjectInHistoryAtIndex:withObject:)
+    @NSManaged public func replaceHistory(at idx: Int, with value: PairSavedNote)
+
+    @objc(replaceHistoryAtIndexes:withHistory:)
+    @NSManaged public func replaceHistory(at indexes: NSIndexSet, with values: [PairSavedNote])
+
+    @objc(addHistoryObject:)
+    @NSManaged public func addToHistory(_ value: PairSavedNote)
+
+    @objc(removeHistoryObject:)
+    @NSManaged public func removeFromHistory(_ value: PairSavedNote)
+
+    @objc(addHistory:)
+    @NSManaged public func addToHistory(_ values: NSOrderedSet)
+
+    @objc(removeHistory:)
+    @NSManaged public func removeFromHistory(_ values: NSOrderedSet)
 
 }

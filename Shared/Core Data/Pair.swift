@@ -64,3 +64,5 @@ public class Pair: NSManagedObject {
         }
     }
 }
+
+extension Pair : Identifiable { }

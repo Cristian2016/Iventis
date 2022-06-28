@@ -21,6 +21,8 @@ class ViewModel: ObservableObject {
     
     @Published var rankOfSelectedBubble:Int?
     @Published var idOfSelectedBubble:Bubble.ID?
+    
+    @Published var pairOfNotesList:Pair?
         
     init() {
         let request = Bubble.fetchRequest()
@@ -260,6 +262,22 @@ class ViewModel: ObservableObject {
         historyItem.date = Date()
         historyItem.note = note
         bubble.addToHistory(historyItem)
+    }
+    
+    func save(_ textInput:String, for pair:Pair) {
+//        var note = textInput
+//        note.removeWhiteSpaceAtBothEnds()
+//
+//        //set note
+//        bubble.note = note
+//        bubble.isNoteHidden = false
+//
+//        //add new item to bubbleHistory
+//        let context = bubble.managedObjectContext
+//        let historyItem = BubbleSavedNote(context: context!)
+//        historyItem.date = Date()
+//        historyItem.note = note
+//        bubble.addToHistory(historyItem)
     }
     
     func delete(_ savedNote:BubbleSavedNote) {

@@ -14,13 +14,10 @@ import SwiftUI
 struct PairStickyNotesList: View {
     let pair:Pair  /* ⚠️ @StateObject pair:Pair instead?  */
     @EnvironmentObject private var viewModel:ViewModel
-    @FetchRequest private var items:FetchedResults<BubbleSavedNote>
+    @FetchRequest private var items:FetchedResults<PairSavedNote>
     @State private var textInput = "" //willSet and didSet do not work anymore
     
-    //if <2 show userInfo, else hide forever
-    @AppStorage("rowDeleteCount") var rowDeleteCount = 0
-    
-    private var filteredItems:[BubbleSavedNote] {
+    private var filteredItems:[PairSavedNote] {
         if textInput.isEmpty { return Array(items) }
         let filtered = items.filter { history in
             history.note!.lowercased().contains(textInput.lowercased())
@@ -28,7 +25,7 @@ struct PairStickyNotesList: View {
         return Array(filtered)
     }
     
-    private let textInputLimit = 9
+    private let textInputLimit = 12
     private let textFieldPlaceholder = "Add/Search Note"
     private let line0 = "No Matches"
     private let line1 = Text("Tap \(Image(systemName: "plus.app.fill")) to Save Note")
@@ -38,29 +35,23 @@ struct PairStickyNotesList: View {
     
     let initialNote:String
     @FocusState var keyboardVisible:Bool
-    @Binding var showAddNotes_bRank:Int?
+//    @Binding var showAddNotes_bRank:Int?
     
     private let size = CGSize(width: 250, height: 412)
     private let cornerRadius = CGFloat(24)
     
     // MARK: -
-    init(_ stickyNotesList_bRank:Binding<Int?>) {
-        //set Bubble
-        let request = Bubble.fetchRequest()
-        request.predicate = NSPredicate(format: "rank == %i", stickyNotesList_bRank.wrappedValue!)
+    init?(_ pair:Pair?) {
+        guard let pair = pair else { return nil }
         
-        guard let bubble = try? PersistenceController.shared.viewContext.fetch(request).first else { fatalError("fuck bubble") }
-        self.bubble = bubble
-        
-        //set initial note
-        self.initialNote = bubble.note_
+        self.pair = pair
+        self.initialNote = pair.note_
         
         let sorts = [
 //            NSSortDescriptor(key: "bubble", ascending: false), //⚠️ crashes for some reason..
             NSSortDescriptor(key: "date", ascending: false)
         ]
-        _items = FetchRequest(entity: BubbleSavedNote.entity(), sortDescriptors: sorts, predicate: nil, animation: .default)
-        _showAddNotes_bRank = Binding(projectedValue: stickyNotesList_bRank)
+        _items = FetchRequest(entity: PairSavedNote.entity(), sortDescriptors: sorts, predicate: nil, animation: .default)
     }
     
     // MARK: -
@@ -84,35 +75,26 @@ struct PairStickyNotesList: View {
         ZStack {
             screenBackground
             darkRoundedBackground
-                .overlay {
-                    VStack {
-                        Spacer(minLength: 10)
-                        textField
-                        //gestures
-                            .gesture(dragGesture)
-                            .onSubmit { saveTextAndDismiss() }
-                        List {
-                            if filteredItems.isEmpty { emptyListAlert } //1
-                            
-                            ForEach (filteredItems) { cell($0) }
-                                .onDelete {
-                                    //keep track of rowDeleteCount to hide userInfo
-                                    if rowDeleteCount < 2 { rowDeleteCount += 1 }
-                                    
-                                    viewModel.delete(filteredItems[$0.first!])
-                                }
-                                .listRowSeparator(.hidden)
-                            
-                            //show only if user hasn't deleted 2 rows already
-                            if rowDeleteCount < 2 && !items.isEmpty { DeleteRow_InfoView().listRowSeparator(.hidden)
-                            }
-                        }
-                        .listStyle(.plain)
-                        .environment(\.defaultMinListRowHeight, 8)
-                    }
-                    .clipShape(RoundedRectangle(cornerRadius: cornerRadius))
-                    plusButton
-                }
+//                .overlay {
+//                    VStack {
+//                        Spacer(minLength: 10)
+//                        textField
+//                        //gestures
+//                            .gesture(dragGesture)
+//                            .onSubmit { saveTextAndDismiss() }
+//                        List {
+//                            if filteredItems.isEmpty { emptyListAlert } //1
+//
+//                            ForEach (filteredItems) { cell($0) }
+//                                .onDelete { }
+//                                .listRowSeparator(.hidden)
+//                        }
+//                        .listStyle(.plain)
+//                        .environment(\.defaultMinListRowHeight, 8)
+//                    }
+//                    .clipShape(RoundedRectangle(cornerRadius: cornerRadius))
+//                    plusButton
+//                }
         }
         .offset(y: 10)
         .ignoresSafeArea(.container, edges: .top)
@@ -124,12 +106,12 @@ struct PairStickyNotesList: View {
     }
     
     // MARK: - Lego
-    private func cell(_ item:BubbleSavedNote) -> some View {
+    private func cell(_ item:PairSavedNote) -> some View {
         Text("\(item.note ?? "No Note")")
         //text
             .font(.system(size: 25))
             .background( Rectangle()
-                .fill(item.note == bubble.note ? Color.selectionGray : .clear)
+                .fill(item.note == pair.note ? Color.selectionGray : .clear)
             )
         //layout
             .padding([.leading], 10)
@@ -137,8 +119,7 @@ struct PairStickyNotesList: View {
         //gestures
             .onTapGesture {
                 UserFeedback.singleHaptic(.heavy)
-                bubble.note = item.note
-                bubble.isNoteHidden = false
+                pair.note = item.note
                 try? PersistenceController.shared.viewContext.save()
                 dismiss()
             }
@@ -244,20 +225,20 @@ struct PairStickyNotesList: View {
     }
     
     // MARK: -
-    private func dismiss() { showAddNotes_bRank = nil }
+    private func dismiss() { viewModel.pairOfNotesList = nil }
     
     private func saveTextInput() {
         if initialNote == textInput || textInput.isEmpty { return }
         
-        viewModel.save(textInput, for: bubble)
+        viewModel.save(textInput, for: pair)
         UserFeedback.singleHaptic(.heavy)
         
         PersistenceController.shared.save()
     }
 }
 
-struct PairStickyNotesList_Previews: PreviewProvider {
-    static var previews: some View {
-        PairStickyNotesList(.constant(0))
-    }
-}
+//struct PairStickyNotesList_Previews: PreviewProvider {
+//    static var previews: some View {
+//        PairStickyNotesList(<#Pair#>)
+//    }
+//}
