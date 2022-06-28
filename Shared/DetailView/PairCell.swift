@@ -20,17 +20,20 @@ struct PairCell: View {
     
     var body: some View {
         if !pair.isFault {
-            //PairCell
-            VStack (alignment: .leading) {
-                separatorLine.overlay { pairNumberView }
-                pairStartView
-                pairPauseView
-                if pair.pause == nil { SmallBubbleView(bubble: pair.session!.bubble!) }
-                else { durationView }
+            ZStack {
+                //PairCell
+                VStack (alignment: .leading) {
+                    separatorLine.overlay { pairNumberView }
+                    pairStartView
+                    pairPauseView
+                    if pair.pause == nil { SmallBubbleView(bubble: pair.session!.bubble!) }
+                    else { durationView }
+                }
+                .padding(contentFrameGap)
+                .highPriorityGesture(longPress)
+                
                 if let note = pair.note_, !note.isEmpty { noteView }
             }
-            .padding(contentFrameGap)
-            .highPriorityGesture(longPress)
         }
     }
     
@@ -40,10 +43,7 @@ struct PairCell: View {
             .fill(Color.background)
             .standardShadow()
             .frame(width: 120, height: 50)
-            .overlay {
-                Text(pair.note_)
-                    .font(.system(size: 24))
-            }
+            .overlay { Text(pair.note_).font(.system(size: 24)) }
     }
     
     private var pairNumberView: some View {
