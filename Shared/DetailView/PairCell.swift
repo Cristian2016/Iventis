@@ -26,7 +26,13 @@ struct PairCell: View {
                     separatorLine.overlay { pairNumberView }
                     pairStartView
                     pairPauseView
-                    if pair.pause == nil { SmallBubbleView(bubble: pair.session!.bubble!) }
+                    if pair.pause == nil {
+                        HStack {
+                            Spacer()
+                            SmallBubbleView(bubble: pair.session!.bubble!)
+                            Spacer()
+                        }
+                    }
                     else { durationView }
                 }
                 .padding(contentFrameGap)
