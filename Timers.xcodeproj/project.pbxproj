@@ -48,6 +48,7 @@
 		1FA834762850A57C003F4D61 /* Widgets.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 1FA834712850A57A003F4D61 /* Widgets.intentdefinition */; };
 		1FA834792850A57C003F4D61 /* WidgetsExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 1FA8346B2850A57A003F4D61 /* WidgetsExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		1FA8F87E28367B7A00394B59 /* BubbleStickyNote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA8F87D28367B7A00394B59 /* BubbleStickyNote.swift */; };
+		1FB3178F286ACB48006BBE82 /* SomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB3178E286ACB48006BBE82 /* SomeView.swift */; };
 		1FB7D57C2862F0300085C2BE /* PlusButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB7D57B2862F0300085C2BE /* PlusButton.swift */; };
 		1FCF0C662816F3F600AA1FAA /* EmptyListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FCF0C652816F3F600AA1FAA /* EmptyListView.swift */; };
 		1FD21865281D9AB700B43403 /* ExitFocusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD21864281D9AB700B43403 /* ExitFocusView.swift */; };
@@ -130,6 +131,7 @@
 		1FA834722850A57C003F4D61 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1FA834742850A57C003F4D61 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1FA8F87D28367B7A00394B59 /* BubbleStickyNote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BubbleStickyNote.swift; sourceTree = "<group>"; };
+		1FB3178E286ACB48006BBE82 /* SomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SomeView.swift; sourceTree = "<group>"; };
 		1FB7D57B2862F0300085C2BE /* PlusButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlusButton.swift; sourceTree = "<group>"; };
 		1FCF0C652816F3F600AA1FAA /* EmptyListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyListView.swift; sourceTree = "<group>"; };
 		1FD21864281D9AB700B43403 /* ExitFocusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExitFocusView.swift; sourceTree = "<group>"; };
@@ -184,6 +186,7 @@
 		1F5F4A4228093FAC00AF3442 = {
 			isa = PBXGroup;
 			children = (
+				1FB3178E286ACB48006BBE82 /* SomeView.swift */,
 				1FA355CE2832238E00F73111 /* Timers--iOS--Info.plist */,
 				1FA355CA2832186100F73111 /* CalendarManager.swift */,
 				1F3436002834FC4800A018CC /* NoteSticker.swift */,
@@ -433,6 +436,7 @@
 				1FFC8BB628142F040059EF2E /* Pair.swift in Sources */,
 				1F6420062820186D00413E31 /* PairCell.swift in Sources */,
 				1F387CEB2830082000F6B81D /* UpDownArrowsButton.swift in Sources */,
+				1FB3178F286ACB48006BBE82 /* SomeView.swift in Sources */,
 				1F5F4A752809409600AF3442 /* Bubble Properties.swift in Sources */,
 				1FB7D57C2862F0300085C2BE /* PlusButton.swift in Sources */,
 				1F20807F2836111600FD35D6 /* BubbleHistory Properties.swift in Sources */,

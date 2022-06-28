@@ -140,10 +140,7 @@ struct BubbleStickyNotesList: View {
                 Text(line0)
                     .font(.system(size: 30))
                     .background(Color.red)
-                if noteIsValid {
-                    line1
-                    line2
-                }
+                if noteIsValid { SomeView(entry: $textInput) }
                 else { line3 }
             }
             Spacer()
@@ -195,10 +192,9 @@ struct BubbleStickyNotesList: View {
     private var plusButton:some View {
         if !textInput.isEmpty && noteIsValid {
             Push(.topRight) {
-                Image(systemName: "plus.app.fill")
-                    .background(Circle().fill(Color.white).padding())
-                    .font(.system(size: 72).weight(.light))
-                    .foregroundColor(textInput.count > 0 ? .blue : .gray)
+                Image(systemName: "plus.app")
+                    .font(.system(size: 72).weight(.thin))
+                    .foregroundColor(textInput.count > 0 ? .white : .gray)
                     .overlay { remainingCharactersCounterView }
                 //gestures
                     .onTapGesture {
@@ -230,7 +226,7 @@ struct BubbleStickyNotesList: View {
     
     private var remainingCharactersCounterView:some View {
         Text("\(textInputLimit - textInput.count)")
-            .font(.system(size: 18).weight(.bold))
+            .font(.system(size: 18).weight(.medium))
             .foregroundColor(.white)
             .offset(x: 15, y: 15)
     }
