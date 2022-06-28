@@ -35,7 +35,6 @@ struct PairStickyNotesList: View {
     
     let initialNote:String
     @FocusState var keyboardVisible:Bool
-//    @Binding var showAddNotes_bRank:Int?
     
     private let size = CGSize(width: 250, height: 412)
     private let cornerRadius = CGFloat(24)
@@ -86,7 +85,7 @@ struct PairStickyNotesList: View {
                             if filteredItems.isEmpty { emptyListAlert } //1
 
                             ForEach (filteredItems) { cell($0) }
-                                .onDelete { _ in }
+                                .onDelete { viewModel.delete(filteredItems[$0.first!]) }
                                 .listRowSeparator(.hidden)
                         }
                         .listStyle(.plain)
