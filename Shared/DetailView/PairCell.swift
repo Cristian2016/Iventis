@@ -20,6 +20,9 @@ struct PairCell: View {
     var body: some View {
         if !pair.isFault {
             VStack (alignment: .leading) {
+                Rectangle()
+                    .fill(Color.lightGray)
+                    .frame(width: 20, height: 2)
                 //start time and date
                 HStack {
                     Text(DateFormatter.bubbleStyleTime.string(from: pair.start ?? Date()))

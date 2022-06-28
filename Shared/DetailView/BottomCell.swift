@@ -26,8 +26,8 @@ struct BottomCell: View {
         List {
             ForEach(pairs) { PairCell($0, pairs.count - pairs.firstIndex(of: $0)!) }
             .listRowSeparator(.hidden)
-            .listRowBackground(
-                RoundedRectangle(cornerRadius: 6).fill(Color("pairCell")).padding(2))
+//            .listRowBackground(
+//                RoundedRectangle(cornerRadius: 6).fill(Color("pairCell")).padding(2))
         }
         .listStyle(.plain)
     }

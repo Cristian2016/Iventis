@@ -89,7 +89,7 @@ struct BubbleStickyNotesList: View {
                         Spacer(minLength: 10)
                         textField
                         //gestures
-                            .gesture( dragGesture )
+                            .gesture(dragGesture)
                             .onSubmit { saveTextAndDismiss() }
                         List {
                             if filteredItems.isEmpty { emptyListAlert } //1
