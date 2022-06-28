@@ -9,6 +9,35 @@ import SwiftUI
 
 ///it's the small bubble cell in the PairCell of BottomDetaiulView that only shows up when bubble is running and detailMode is active
 struct SmallBubbleView: View {
+    enum Skin {
+        case blackBackgroundBig //default look
+        case shadowBackgroundBig
+        case shadowBackgroundMedium
+    }
+    
+    ///user taps and cycles through various looks
+    var skin: Skin {
+        get {
+            switch skinTapsCount%3 {
+                case 0: return .blackBackgroundBig
+                case 1: return .shadowBackgroundBig
+                case 2: return .shadowBackgroundMedium
+                default: return .blackBackgroundBig
+            }
+        }
+        
+        set {
+            switch newValue {
+                case .blackBackgroundBig : skinTapsCount = 0
+                case .shadowBackgroundBig : skinTapsCount = 1
+                case .shadowBackgroundMedium : skinTapsCount = 2
+            }
+        }
+    }
+    
+    ///user taps and chooses various skins
+    @AppStorage("skinTapsCount") var skinTapsCount: Int = 0
+    
     @Environment(\.colorScheme) var colorScheme
     @AppStorage("zoom") var isZoomed: Bool = true
     
@@ -78,7 +107,11 @@ struct SmallBubbleView: View {
         }
         .frame(height: isZoomed ? 140 : 110)
         .foregroundColor(Color("smallBubbleCircleColor"))
-        .onTapGesture { withAnimation { isZoomed.toggle() } }
+        .onTapGesture { withAnimation {
+            isZoomed.toggle()
+            skinTapsCount += 1
+            print(skin)
+        } }
     }
 }
 
