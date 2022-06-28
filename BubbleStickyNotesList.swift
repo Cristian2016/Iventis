@@ -143,9 +143,8 @@ struct BubbleStickyNotesList: View {
                 if noteIsValid {
                     line1
                     line2
-                } else {
-                    line3
                 }
+                else { line3 }
             }
             Spacer()
         }
