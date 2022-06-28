@@ -92,9 +92,7 @@ struct BubbleStickyNotesList: View {
                             if filteredItems.isEmpty { emptyListAlert } //1
                             
                             ForEach (filteredItems) { cell($0) }
-                            //gestures
                                 .onDelete { viewModel.delete(filteredItems[$0.first!]) }
-                            //
                                 .listRowSeparator(.hidden)
                         }
                         .listStyle(.plain)
