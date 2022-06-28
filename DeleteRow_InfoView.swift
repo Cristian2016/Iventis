@@ -16,7 +16,7 @@ struct DeleteRow_InfoView: View {
                     .frame(maxWidth: .infinity)
                 Text("\(Image(systemName: "trash")) Delete Row")
                 Text("\(Image(systemName: "arrow.backward.circle.fill")) Swipe Left")
-                    .foregroundColor(.lightGray)
+                    .foregroundColor(.gray)
             }
             .fixedSize(horizontal: true, vertical: false)
             Spacer()
