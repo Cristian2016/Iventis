@@ -20,19 +20,27 @@ struct PairCell: View {
     var body: some View {
         if !pair.isFault {
             VStack (alignment: .leading) {
-                Rectangle()
-                    .fill(Color.lightGray)
-                    .frame(width: 20, height: 2)
+                HStack {
+                    Spacer()
+                    Rectangle()
+                        .fill(Color.gray)
+                        .frame(width: 30, height: 2)
+                        .overlay {
+                            Text("\(pairNumber)")
+                                .foregroundColor(.gray)
+                                .font(.system(size: 18).weight(.medium))
+                                .padding(.leading, 6)
+                                .offset(y: 14)
+                        }
+                        .offset(x: 14, y: -10)
+                }
+                
                 //start time and date
                 HStack {
                     Text(DateFormatter.bubbleStyleTime.string(from: pair.start ?? Date()))
                         .font(.monospaced(Font.system(size: 22))())
                     Text(DateFormatter.bubbleStyleDate.string(from: pair.start ?? Date()))
                         .foregroundColor(.secondary)
-                    Image(systemName: "\(pairNumber).circle.fill")
-                        .foregroundColor(.lightGray)
-                        .font(.system(size: 26))
-                        .padding(.leading, 4)
                 }
                 //pause time and date
                 if let pause = pair.pause {

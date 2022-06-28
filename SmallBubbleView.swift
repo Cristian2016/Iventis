@@ -69,7 +69,6 @@ struct SmallBubbleView: View {
             background
             timeComponents
         }
-        .frame(width: edge * ratio)
         .frame(height: isZoomed ? 140 : 110)
         .foregroundColor(Color("smallBubbleCircleColor"))
         .onTapGesture { withAnimation { isZoomed.toggle() } }
