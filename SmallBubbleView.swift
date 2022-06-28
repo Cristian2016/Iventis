@@ -61,11 +61,20 @@ struct SmallBubbleView: View {
         .foregroundColor(.white)
         .standardShadow()
         .background {
-            if colorScheme == .light && isZoomed {
-                RoundedRectangle(cornerRadius: 10)
-                    .fill(Color.black.gradient)
-                    .padding(-10)
-            }
+            RoundedRectangle(cornerRadius: 10)
+                .fill(fillColor)
+                .padding(-10)
+        }
+    }
+    
+    var fillColor: Color {
+        let isLight = colorScheme == .light
+        
+        switch skin {
+            case .blackBackgroundBig:
+                return isLight ? .black : .clear
+            default:
+                return .clear
         }
     }
     
