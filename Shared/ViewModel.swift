@@ -66,8 +66,7 @@ class ViewModel: ObservableObject {
         
         let request = Bubble.fetchRequest()
         let count = try? viewContext.count(for: request)
-        let condition = count! > 1
-        if condition { viewContext.delete(bubble) } else { return }
+        viewContext.delete(bubble)
         
         try? viewContext.save()
     }
@@ -236,7 +235,6 @@ class ViewModel: ObservableObject {
         let bubble = try! context.fetch(request).first
         return bubble
     }
-    
     
     func index(of rank:Int64) -> Int? {
         let request = Bubble.fetchRequest()
