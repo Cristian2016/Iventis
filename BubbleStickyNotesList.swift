@@ -140,8 +140,8 @@ struct BubbleStickyNotesList: View {
                 Text(line0)
                     .font(.system(size: 30))
                     .background(Color.red)
-                if noteIsValid { SomeView() }
-                else { line3 }
+                if noteIsValid { StickyNote_InfoView() }
+                else { EmptyNote_InfoView() }
             }
             Spacer()
         }

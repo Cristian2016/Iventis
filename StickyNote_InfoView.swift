@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct SomeView: View {
+struct StickyNote_InfoView: View {
 //    @Binding var entry:String
     
     var body: some View {
@@ -41,6 +41,6 @@ struct SomeView: View {
 
 struct SomeView_Previews: PreviewProvider {
     static var previews: some View {
-        SomeView()
+        StickyNote_InfoView()
     }
 }
