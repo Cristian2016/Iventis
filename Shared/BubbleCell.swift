@@ -123,16 +123,14 @@ struct BubbleCell: View {
     
     func handleLongPress() {
         UserFeedback.singleHaptic(.light)
-        if bubble.note_.isEmpty { showNotesList() }
-        else {
-            bubble.isNoteHidden.toggle()
-            PersistenceController.shared.save()
-        }
+        showNotesList()
+        PersistenceController.shared.save()
     }
     
     func handleStickyNoteTap() {
         UserFeedback.singleHaptic(.light)
-        showNotesList()
+        bubble.isNoteHidden.toggle()
+        PersistenceController.shared.save()
     }
     
     // MARK: - Intents
