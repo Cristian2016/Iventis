@@ -188,6 +188,7 @@ struct BubbleStickyNotesList: View {
         }
     }
     
+    ///tap plus to save note or long press to delete note
     @ViewBuilder
     private var plusButton:some View {
         if !textInput.isEmpty && noteIsValid {
