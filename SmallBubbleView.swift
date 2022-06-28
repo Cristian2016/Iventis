@@ -34,7 +34,7 @@ struct SmallBubbleView: View {
         .background {
             if colorScheme == .light && isZoomed {
                 RoundedRectangle(cornerRadius: 10)
-                    .fill(Color.black)
+                    .fill(Color.black.gradient)
                     .padding(-10)
             }
         }

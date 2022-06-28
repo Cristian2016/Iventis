@@ -26,7 +26,13 @@
         <attribute name="note" optional="YES" attributeType="String" defaultValueString=""/>
         <attribute name="pause" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="start" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <relationship name="history" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="PairSavedNote" inverseName="pair" inverseEntity="PairSavedNote"/>
         <relationship name="session" optional="YES" maxCount="1" deletionRule="Cascade" ordered="YES" destinationEntity="Session" inverseName="pairs" inverseEntity="Session"/>
+    </entity>
+    <entity name="PairSavedNote" representedClassName=".PairSavedNote" syncable="YES">
+        <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="note" optional="YES" attributeType="String"/>
+        <relationship name="pair" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Pair" inverseName="history" inverseEntity="Pair"/>
     </entity>
     <entity name="Session" representedClassName=".Session" syncable="YES">
         <attribute name="created" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
@@ -40,7 +46,8 @@
     <elements>
         <element name="Bubble" positionX="-1126.346435546875" positionY="1511.206024169922" width="128" height="209"/>
         <element name="BubbleSavedNote" positionX="-1167.576232910156" positionY="1853.05224609375" width="128" height="88"/>
-        <element name="Pair" positionX="-682.7940063476562" positionY="1990.900634765625" width="128" height="148"/>
+        <element name="Pair" positionX="-682.7940063476562" positionY="1990.900634765625" width="128" height="149"/>
+        <element name="PairSavedNote" positionX="-963" positionY="1674" width="128" height="74"/>
         <element name="Session" positionX="-755.014404296875" positionY="1731.148468017579" width="128" height="134"/>
     </elements>
 </model>
