@@ -27,6 +27,10 @@ struct BubbleStickyNotesList: View {
     @State private var textInput = "" //willSet and didSet do not work anymore
     private let textInputLimit = 9
     private let textFieldPlaceholder = "Add/Search Note"
+    private let line0 = "No Matches"
+    private let line1 = Text("Tap \(Image(systemName: "plus.app.fill")) to Save Note")
+        .font(.system(size: 23))
+    private let line2 = Text("Tap Hold \(Image(systemName: "plus.app.fill")) to Delete").font(.system(size: 21))
     
     let initialNote:String
     @FocusState var keyboardVisible:Bool
@@ -132,13 +136,11 @@ struct BubbleStickyNotesList: View {
         HStack {
             Spacer()
             VStack (alignment: .leading, spacing: 4) {
-//                Text("Empty List")
-//                    .font(.system(size: 30))
-                Text("No Matches")
-                    .font(.system(size: 28).weight(.medium))
+                Text(line0)
+                    .font(.system(size: 30))
                     .background(Color.red)
-                Text("Tap \(Image(systemName: "plus.app.fill")) to Add Note")
-                    .font(.system(size: 24))
+                line1
+                line2
             }
             Spacer()
         }
@@ -198,8 +200,6 @@ struct BubbleStickyNotesList: View {
                         if noteIsValid {
                             saveTextInput()
                             dismiss()
-                        } else {
-                            print("note not valid")
                         }
                     }
                     .onLongPressGesture {
