@@ -19,6 +19,7 @@ struct PairCell: View {
     
     var body: some View {
         if !pair.isFault {
+            //PairCell
             VStack (alignment: .leading) {
                 separatorLine.overlay { pairNumberView }
                 pairStartView
@@ -27,6 +28,7 @@ struct PairCell: View {
                 else { durationView }
             }
             .padding(contentFrameGap)
+            .highPriorityGesture(longPress)
         }
     }
     
@@ -104,6 +106,15 @@ struct PairCell: View {
                 }
             }
         }
+    }
+    
+    // MARK: - Gestures
+    private var longPress: some Gesture {
+        LongPressGesture(minimumDuration: 0.3)
+            .onEnded { _ in
+                UserFeedback.singleHaptic(.light)
+                print("pair long pressed")
+            }
     }
     
     // MARK: -
