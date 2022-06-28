@@ -161,7 +161,7 @@ struct BubbleStickyNotesList: View {
     }
     
     private var screenBackground: some View {
-        Color.background
+        Color("notesListScreenBackground")
             .opacity(0.8)
             .onTapGesture {
                 if noteIsValid { saveTextInput() }
