@@ -40,13 +40,8 @@ struct PairCell: View {
     // MARK: - LEGO
     private var noteView: some View {
         Push(.bottomRight) {
-            Text(pair.note_).font(.system(size: 24))
-                .padding(EdgeInsets(top: 4, leading: 8, bottom: 4, trailing: 8))
-                .background {
-                    RoundedRectangle(cornerRadius: 2)
-                        .fill(Color.background)
-                        .standardShadow()
-                }
+            Text("⦚ \(pair.note_) ⦚").font(.system(size: 24))
+                .offset(y: -10)
         }
     }
     
