@@ -39,7 +39,7 @@ struct PairCell: View {
             Text("\(pairNumber)")
                 .foregroundColor(.label)
                 .font(.system(size: 18).weight(.medium))
-                .offset(y: 14)
+                .offset(x: 10, y: 14)
         }
     }
     
