@@ -61,6 +61,22 @@ struct BubbleStickyNotesList: View {
     }
     
     // MARK: -
+    private var dragGesture: some Gesture {
+        DragGesture(minimumDistance: 15, coordinateSpace: .global)
+            .onChanged {
+                if $0.translation.width < -20 { textInput = "" }
+            }
+            .onEnded { _ in
+                if textInput.isEmpty { UserFeedback.doubleHaptic(.rigid)
+                }
+            }
+    }
+    private func saveTextAndDismiss() {
+        saveTextInput()
+        dismiss()
+    }
+    
+    // MARK: -
     var body: some View {
         ZStack {
             screenBackground
@@ -69,23 +85,9 @@ struct BubbleStickyNotesList: View {
                     VStack {
                         Spacer(minLength: 10)
                         textField
-                        //layout
-                            .padding(.leading)
                         //gestures
-                            .gesture(
-                                DragGesture(minimumDistance: 15, coordinateSpace: .global)
-                                    .onChanged {
-                                        if $0.translation.width < -20 { textInput = "" }
-                                    }
-                                    .onEnded { _ in
-                                        if textInput.isEmpty { UserFeedback.doubleHaptic(.rigid)
-                                        }
-                                    }
-                            )
-                            .onSubmit {
-                                saveTextInput()
-                                dismiss()
-                            }
+                            .gesture( dragGesture )
+                            .onSubmit { saveTextAndDismiss() }
                         List {
                             if filteredItems.isEmpty { emptyListAlert } //1
                             
@@ -93,7 +95,6 @@ struct BubbleStickyNotesList: View {
                             //gestures
                                 .onDelete { viewModel.delete(filteredItems[$0.first!]) }
                             //
-//                                .listRowBackground(Color("deleteActionViewBackground"))
                                 .listRowSeparator(.hidden)
                         }
                         .listStyle(.plain)
@@ -147,7 +148,6 @@ struct BubbleStickyNotesList: View {
         }
         .foregroundColor(.white)
         .background(Color("deleteActionViewBackground").padding(-250))
-        .offset(y: 50)
     }
     
     private var screenBackground: some View {
@@ -180,6 +180,7 @@ struct BubbleStickyNotesList: View {
         .font(.system(size: 24))
         .foregroundColor(.white)
         .padding()
+        .padding(.leading)
         .focused($keyboardVisible)
         .textInputAutocapitalization(.words)
         .onChange(of: self.textInput) {
