@@ -9,7 +9,6 @@ import SwiftUI
 
 struct BottomCell: View {
     @FetchRequest var pairs:FetchedResults<Pair>
-//    @EnvironmentObject var viewModel:ViewModel
     
     ///how far from the trailing edge should the count label be
     let pairCountPadding = EdgeInsets(top: 4, leading: 0, bottom: 5, trailing: -6)
@@ -34,9 +33,3 @@ struct BottomCell: View {
         .scrollIndicators(.hidden)
     }
 }
-
-//struct PairsListView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        PairsListView()
-//    }
-//}
