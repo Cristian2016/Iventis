@@ -9,7 +9,7 @@ import SwiftUI
 
 ///it's the small bubble cell in the PairCell of BottomDetaiulView that only shows up when bubble is running and detailMode is active
 struct SmallBubbleView: View {
-    
+    @Environment(\.colorScheme) var colorScheme
     @AppStorage("zoom") var isZoomed: Bool = true
     
     @StateObject var bubble:Bubble
@@ -28,9 +28,16 @@ struct SmallBubbleView: View {
             //Seconds
             Circle()
         }
-        .compositingGroup()
+//        .compositingGroup()
         .foregroundColor(.white)
-        .standardShadow()
+        //        .standardShadow()
+        .background {
+            if colorScheme == .light {
+                RoundedRectangle(cornerRadius: 10)
+                    .fill(Color.black)
+                    .padding(-10)
+            }
+        }
     }
     
     var timeComponents: some View {
