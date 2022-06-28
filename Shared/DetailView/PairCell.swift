@@ -23,16 +23,16 @@ struct PairCell: View {
                 HStack {
                     Spacer()
                     Rectangle()
-                        .fill(Color.gray)
+                        .fill(Color.label)
                         .frame(width: 30, height: 2)
                         .overlay {
                             Text("\(pairNumber)")
-                                .foregroundColor(.gray)
+                                .foregroundColor(.label)
                                 .font(.system(size: 18).weight(.medium))
                                 .padding(.leading, 6)
                                 .offset(y: 14)
                         }
-                        .offset(x: 14, y: -10)
+                        .offset(x: 14, y: -4)
                 }
                 
                 //start time and date
