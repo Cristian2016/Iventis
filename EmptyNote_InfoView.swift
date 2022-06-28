@@ -17,11 +17,8 @@ struct EmptyNote_InfoView: View {
     var body: some View {
         VStack (alignment: .leading) {
             Divider().frame(maxWidth: .infinity)
-            
             Text("\(Image(systemName: "note")) Empty Notes")
-            
-            Text("Are Not Allowed")
-                .foregroundColor(.lightGray)
+            Text("Are Not Allowed").foregroundColor(.lightGray)
         }
         .font(.title3)
         .fixedSize(horizontal: true, vertical: false)

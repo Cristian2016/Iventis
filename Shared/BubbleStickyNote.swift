@@ -15,6 +15,7 @@ struct BubbleStickyNote: View {
     private let font = Font.system(size: 24)
     private let cornerRadius = CGFloat(2)
     private let textPadding = EdgeInsets(top: 4, leading: 6, bottom: 4, trailing: 8)
+    let collapsedStickyNoteWidth = CGFloat(50)
     
     @State private var noteDeleted = false
     
@@ -114,6 +115,7 @@ struct BubbleStickyNote: View {
             Text("\(Image(systemName: "text.alignleft"))")
                 .padding(textPadding)
                 .font(.system(size: 20))
+                .frame(width: collapsedStickyNoteWidth)
         }
     }
     

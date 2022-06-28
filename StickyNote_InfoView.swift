@@ -29,7 +29,7 @@ struct StickyNote_InfoView: View {
                 .background { Rectangle().fill(Color.lightGray) }
             
             VStack (alignment: .leading) {
-                Text("\(Image(systemName: "trash")) Delete Note")
+                Text("\(Image(systemName: "trash")) Delete")
                 Text("Tap & Hold \(Image(systemName: "plus.square"))")
                     .foregroundColor(.lightGray)
             }
