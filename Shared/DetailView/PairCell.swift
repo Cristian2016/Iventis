@@ -17,23 +17,31 @@ struct PairCell: View {
     let durationFont = Font.system(size: 22, weight: .medium, design: .default)
     let durationComponentsFont = Font.system(size: 19, weight: .medium, design: .default)
     
+    private var pairNumberView: some View {
+        HStack {
+            Spacer()
+            Text("\(pairNumber)")
+                .foregroundColor(.label)
+                .font(.system(size: 18).weight(.medium))
+                .offset(y: 14)
+        }
+    }
+    
+    private var separatorLine: some View {
+        HStack {
+            Spacer()
+            Rectangle()
+                .fill(Color.label)
+                .frame(width: 30, height: 2)
+                .offset(x: 14, y: -4)
+        }
+    }
+    
     var body: some View {
         if !pair.isFault {
             VStack (alignment: .leading) {
-                HStack {
-                    Spacer()
-                    Rectangle()
-                        .fill(Color.label)
-                        .frame(width: 30, height: 2)
-                        .overlay {
-                            Text("\(pairNumber)")
-                                .foregroundColor(.label)
-                                .font(.system(size: 18).weight(.medium))
-                                .padding(.leading, 6)
-                                .offset(y: 14)
-                        }
-                        .offset(x: 14, y: -4)
-                }
+                separatorLine
+                    .overlay { pairNumberView }
                 
                 //start time and date
                 HStack {
