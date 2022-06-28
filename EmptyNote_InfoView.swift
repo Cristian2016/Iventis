@@ -20,7 +20,6 @@ struct EmptyNote_InfoView: View {
             Text("\(Image(systemName: "note")) Empty Notes")
             Text("Are Not Allowed").foregroundColor(.lightGray)
         }
-        .font(.title3)
         .fixedSize(horizontal: true, vertical: false)
     }
 }

@@ -34,7 +34,6 @@ struct StickyNote_InfoView: View {
                     .foregroundColor(.lightGray)
             }
         }
-        .font(.title3)
         .fixedSize(horizontal: true, vertical: false)
     }
 }

@@ -102,7 +102,9 @@ struct BubbleStickyNotesList: View {
                                     viewModel.delete(filteredItems[$0.first!])
                                 }
                                 .listRowSeparator(.hidden)
-                            if rowDeleteCount < 2 { DeleteRow_InfoView().listRowSeparator(.hidden)
+                            
+                            //show only if user hasn't deleted 2 rows already
+                            if rowDeleteCount < 2 && !items.isEmpty { DeleteRow_InfoView().listRowSeparator(.hidden)
                             }
                         }
                         .listStyle(.plain)
