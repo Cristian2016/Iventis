@@ -94,6 +94,7 @@ struct BubbleStickyNotesList: View {
                             ForEach (filteredItems) { cell($0) }
                                 .onDelete { viewModel.delete(filteredItems[$0.first!]) }
                                 .listRowSeparator(.hidden)
+                            DeleteRow_InfoView().listRowSeparator(.hidden)
                         }
                         .listStyle(.plain)
                         .environment(\.defaultMinListRowHeight, 8)
@@ -149,7 +150,8 @@ struct BubbleStickyNotesList: View {
     }
     
     private var screenBackground: some View {
-        Color.background.opacity(0.5)
+        Color.background
+            .opacity(0.8)
             .onTapGesture {
                 if noteIsValid { saveTextInput() }
                 dismiss()
