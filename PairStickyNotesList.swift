@@ -75,26 +75,26 @@ struct PairStickyNotesList: View {
         ZStack {
             screenBackground
             darkRoundedBackground
-//                .overlay {
-//                    VStack {
-//                        Spacer(minLength: 10)
-//                        textField
+                .overlay {
+                    VStack {
+                        Spacer(minLength: 10)
+                        textField
 //                        //gestures
 //                            .gesture(dragGesture)
 //                            .onSubmit { saveTextAndDismiss() }
-//                        List {
-//                            if filteredItems.isEmpty { emptyListAlert } //1
-//
-//                            ForEach (filteredItems) { cell($0) }
-//                                .onDelete { }
-//                                .listRowSeparator(.hidden)
-//                        }
-//                        .listStyle(.plain)
-//                        .environment(\.defaultMinListRowHeight, 8)
-//                    }
-//                    .clipShape(RoundedRectangle(cornerRadius: cornerRadius))
-//                    plusButton
-//                }
+                        List {
+                            if filteredItems.isEmpty { emptyListAlert } //1
+
+                            ForEach (filteredItems) { cell($0) }
+                                .onDelete { _ in }
+                                .listRowSeparator(.hidden)
+                        }
+                        .listStyle(.plain)
+                        .environment(\.defaultMinListRowHeight, 8)
+                    }
+                    .clipShape(RoundedRectangle(cornerRadius: cornerRadius))
+                    plusButton
+                }
         }
         .offset(y: 10)
         .ignoresSafeArea(.container, edges: .top)

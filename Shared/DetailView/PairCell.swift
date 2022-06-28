@@ -27,6 +27,7 @@ struct PairCell: View {
                 pairPauseView
                 if pair.pause == nil { SmallBubbleView(bubble: pair.session!.bubble!) }
                 else { durationView }
+                if let note = pair.note_, !note.isEmpty { noteView }
             }
             .padding(contentFrameGap)
             .highPriorityGesture(longPress)
@@ -34,6 +35,17 @@ struct PairCell: View {
     }
     
     // MARK: - LEGO
+    private var noteView: some View {
+        RoundedRectangle(cornerRadius: 2)
+            .fill(Color.background)
+            .standardShadow()
+            .frame(width: 120, height: 50)
+            .overlay {
+                Text(pair.note_)
+                    .font(.system(size: 24))
+            }
+    }
+    
     private var pairNumberView: some View {
         HStack {
             Spacer()

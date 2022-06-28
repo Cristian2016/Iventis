@@ -265,19 +265,18 @@ class ViewModel: ObservableObject {
     }
     
     func save(_ textInput:String, for pair:Pair) {
-//        var note = textInput
-//        note.removeWhiteSpaceAtBothEnds()
-//
-//        //set note
-//        bubble.note = note
-//        bubble.isNoteHidden = false
-//
-//        //add new item to bubbleHistory
-//        let context = bubble.managedObjectContext
-//        let historyItem = BubbleSavedNote(context: context!)
-//        historyItem.date = Date()
-//        historyItem.note = note
-//        bubble.addToHistory(historyItem)
+        var note = textInput
+        note.removeWhiteSpaceAtBothEnds()
+
+        //set note
+        pair.note = note
+
+        //add new item to bubbleHistory
+        let context = pair.managedObjectContext
+        let historyItem = PairSavedNote(context: context!)
+        historyItem.date = Date()
+        historyItem.note = note
+        pair.addToHistory(historyItem)
     }
     
     func delete(_ savedNote:BubbleSavedNote) {
