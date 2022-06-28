@@ -204,10 +204,13 @@ struct BubbleStickyNotesList: View {
                             dismiss()
                         }
                     }
-                    .onLongPressGesture {
-                        textInput = ""
-                        UserFeedback.doubleHaptic(.rigid)
-                    }
+                    .highPriorityGesture (
+                        LongPressGesture(minimumDuration: 0.3)
+                            .onEnded { _ in
+                                textInput = ""
+                                UserFeedback.doubleHaptic(.rigid)
+                            }
+                    )
             }
         }
     }
