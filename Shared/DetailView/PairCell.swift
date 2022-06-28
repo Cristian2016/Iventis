@@ -37,32 +37,41 @@ struct PairCell: View {
         }
     }
     
+    //start time and date
+    private var pairStartView: some View {
+        HStack {
+            Text(DateFormatter.bubbleStyleTime.string(from: pair.start ?? Date()))
+                .font(.monospaced(Font.system(size: 22))())
+            Text(DateFormatter.bubbleStyleDate.string(from: pair.start ?? Date()))
+                .foregroundColor(.secondary)
+        }
+    }
+    
+    //pause time and date
+    @ViewBuilder
+    private var pairPauseView: some View {
+        if let pause = pair.pause {
+            let startAndPauseOnSameDay = DateFormatter.bubbleStyleShortDate.string(from: pair.start!) == DateFormatter.bubbleStyleShortDate.string(from: pause)
+            
+                HStack {
+                    Text(DateFormatter.bubbleStyleTime.string(from: pause))
+                        .font(.monospaced(Font.system(size: 22))())
+                    if !startAndPauseOnSameDay {
+                        Text(DateFormatter.bubbleStyleDate.string(from: pause))
+                            .foregroundColor(.secondary)
+                    }
+                }
+        }
+    }
+    
     var body: some View {
         if !pair.isFault {
             VStack (alignment: .leading) {
                 separatorLine
                     .overlay { pairNumberView }
                 
-                //start time and date
-                HStack {
-                    Text(DateFormatter.bubbleStyleTime.string(from: pair.start ?? Date()))
-                        .font(.monospaced(Font.system(size: 22))())
-                    Text(DateFormatter.bubbleStyleDate.string(from: pair.start ?? Date()))
-                        .foregroundColor(.secondary)
-                }
-                //pause time and date
-                if let pause = pair.pause {
-                    let startAndPauseOnSameDay = DateFormatter.bubbleStyleShortDate.string(from: pair.start!) == DateFormatter.bubbleStyleShortDate.string(from: pause)
-                    
-                        HStack {
-                            Text(DateFormatter.bubbleStyleTime.string(from: pause))
-                                .font(.monospaced(Font.system(size: 22))())
-                            if !startAndPauseOnSameDay {
-                                Text(DateFormatter.bubbleStyleDate.string(from: pause))
-                                    .foregroundColor(.secondary)
-                            }
-                        }
-                }
+                pairStartView
+                pairPauseView
                 
                 if pair.pause == nil { SmallBubbleView(bubble: pair.session!.bubble!) }
                 else { durationView }
