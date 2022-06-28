@@ -8,14 +8,14 @@
 import SwiftUI
 
 struct SomeView: View {
-    @Binding var entry:String
+//    @Binding var entry:String
     
     var body: some View {
         VStack (alignment: .leading) {
             Divider().frame(maxWidth: .infinity)
             
             VStack (alignment: .leading) {
-                Text("\(Image(systemName: "square.and.arrow.down")) Save \"\(entry)\"")
+                Text("\(Image(systemName: "square.and.arrow.down")) Save Note")
                 
                 VStack (alignment: .leading) {
                     Text("Tap \(Image(systemName: "plus.square")) or")
@@ -29,7 +29,7 @@ struct SomeView: View {
                 .background { Rectangle().fill(Color.lightGray) }
             
             VStack (alignment: .leading) {
-                Text("\(Image(systemName: "trash")) Delete")
+                Text("\(Image(systemName: "trash")) Delete Note")
                 Text("Tap & Hold \(Image(systemName: "plus.square"))")
                     .foregroundColor(.lightGray)
             }
@@ -41,6 +41,6 @@ struct SomeView: View {
 
 struct SomeView_Previews: PreviewProvider {
     static var previews: some View {
-        SomeView(entry: .constant("Beautiful"))
+        SomeView()
     }
 }

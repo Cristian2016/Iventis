@@ -140,7 +140,7 @@ struct BubbleStickyNotesList: View {
                 Text(line0)
                     .font(.system(size: 30))
                     .background(Color.red)
-                if noteIsValid { SomeView(entry: $textInput) }
+                if noteIsValid { SomeView() }
                 else { line3 }
             }
             Spacer()
