@@ -15,6 +15,10 @@ struct BubbleStickyNotesList: View {
     let bubble:Bubble  /* ⚠️ do not use @StateObject bubble:Bubble! because each time Bubble.bubbleCell_Components update, bubble will emit and body will get recomputed each mother fucking second!!!  */
     @EnvironmentObject private var viewModel:ViewModel
     @FetchRequest private var items:FetchedResults<BubbleSavedNote>
+    @State private var textInput = "" //willSet and didSet do not work anymore
+    
+    //if <2 show userInfo, else hide forever
+    @AppStorage("rowDeleteCount") var rowDeleteCount = 0
     
     private var filteredItems:[BubbleSavedNote] {
         if textInput.isEmpty { return Array(items) }
@@ -24,7 +28,6 @@ struct BubbleStickyNotesList: View {
         return Array(filtered)
     }
     
-    @State private var textInput = "" //willSet and didSet do not work anymore
     private let textInputLimit = 9
     private let textFieldPlaceholder = "Add/Search Note"
     private let line0 = "No Matches"
@@ -92,9 +95,15 @@ struct BubbleStickyNotesList: View {
                             if filteredItems.isEmpty { emptyListAlert } //1
                             
                             ForEach (filteredItems) { cell($0) }
-                                .onDelete { viewModel.delete(filteredItems[$0.first!]) }
+                                .onDelete {
+                                    //keep track of rowDeleteCount to hide userInfo
+                                    if rowDeleteCount < 2 { rowDeleteCount += 1 }
+                                    
+                                    viewModel.delete(filteredItems[$0.first!])
+                                }
                                 .listRowSeparator(.hidden)
-                            DeleteRow_InfoView().listRowSeparator(.hidden)
+                            if rowDeleteCount < 2 { DeleteRow_InfoView().listRowSeparator(.hidden)
+                            }
                         }
                         .listStyle(.plain)
                         .environment(\.defaultMinListRowHeight, 8)

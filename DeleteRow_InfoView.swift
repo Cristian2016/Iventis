@@ -4,6 +4,7 @@
 //
 //  Created by Cristian Lapusan on 28.06.2022.
 //
+// hide after user deletes at least two rows
 
 import SwiftUI
 
