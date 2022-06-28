@@ -63,11 +63,7 @@ class ViewModel: ObservableObject {
     
     func delete(_ bubble:Bubble) {
         let viewContext = PersistenceController.shared.viewContext
-        
-        let request = Bubble.fetchRequest()
-        let count = try? viewContext.count(for: request)
         viewContext.delete(bubble)
-        
         try? viewContext.save()
     }
     

@@ -40,7 +40,9 @@ struct BubbleList: View {
                                 .listRowSeparator(.hidden)
                             
                             //overscroll
-                            if !section.id { Spacer().frame(height: 200) }
+                            if !section.id {
+                                Spacer().frame(height: 200)
+                            }
                         }
                         .scrollIndicators(.hidden)
                         .padding(EdgeInsets(top: 0, leading: -10, bottom: 0, trailing: -10))

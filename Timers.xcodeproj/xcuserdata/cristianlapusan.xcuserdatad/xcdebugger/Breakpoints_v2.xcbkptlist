@@ -41,8 +41,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "130"
             endingLineNumber = "130"
-            landmarkName = "BubbleCell"
-            landmarkType = "14">
+            landmarkName = "handleStickyNoteTap()"
+            landmarkType = "7">
             <Actions>
                <BreakpointActionProxy
                   ActionExtensionID = "Xcode.BreakpointAction.Log">
@@ -114,8 +114,8 @@
             filePath = "Shared/BubbleList.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "116"
-            endingLineNumber = "116"
+            startingLineNumber = "118"
+            endingLineNumber = "118"
             landmarkName = "BubbleList"
             landmarkType = "14">
          </BreakpointContent>
