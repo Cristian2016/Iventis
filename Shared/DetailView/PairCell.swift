@@ -17,6 +17,20 @@ struct PairCell: View {
     let durationFont = Font.system(size: 22, weight: .medium, design: .default)
     let durationComponentsFont = Font.system(size: 19, weight: .medium, design: .default)
     
+    var body: some View {
+        if !pair.isFault {
+            VStack (alignment: .leading) {
+                separatorLine.overlay { pairNumberView }
+                pairStartView
+                pairPauseView
+                if pair.pause == nil { SmallBubbleView(bubble: pair.session!.bubble!) }
+                else { durationView }
+            }
+            .padding(contentFrameGap)
+        }
+    }
+    
+    // MARK: - LEGO
     private var pairNumberView: some View {
         HStack {
             Spacer()
@@ -64,22 +78,6 @@ struct PairCell: View {
         }
     }
     
-    var body: some View {
-        if !pair.isFault {
-            VStack (alignment: .leading) {
-                separatorLine
-                    .overlay { pairNumberView }
-                
-                pairStartView
-                pairPauseView
-                
-                if pair.pause == nil { SmallBubbleView(bubble: pair.session!.bubble!) }
-                else { durationView }
-            }
-            .padding(contentFrameGap)
-        }
-    }
-    
     private var durationView:some View {
         HStack (spacing: 8) {
             if let duration = duration {
@@ -108,6 +106,7 @@ struct PairCell: View {
         }
     }
     
+    // MARK: -
     init(_ pair:Pair, _ pairNumber:Int) {
         _pair = StateObject(wrappedValue: pair)
         let decoder = JSONDecoder()
