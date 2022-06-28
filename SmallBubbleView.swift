@@ -28,11 +28,11 @@ struct SmallBubbleView: View {
             //Seconds
             Circle()
         }
-//        .compositingGroup()
+        .compositingGroup()
         .foregroundColor(.white)
-        //        .standardShadow()
+        .standardShadow()
         .background {
-            if colorScheme == .light {
+            if colorScheme == .light && isZoomed {
                 RoundedRectangle(cornerRadius: 10)
                     .fill(Color.black)
                     .padding(-10)
