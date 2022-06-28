@@ -31,6 +31,7 @@ struct BubbleStickyNotesList: View {
     private let line1 = Text("Tap \(Image(systemName: "plus.app.fill")) to Save Note")
         .font(.system(size: 23))
     private let line2 = Text("Tap Hold \(Image(systemName: "plus.app.fill")) to Delete").font(.system(size: 21))
+    private let line3 = Text("Empty Notes will not be saved").font(.system(size: 21))
     
     let initialNote:String
     @FocusState var keyboardVisible:Bool
@@ -142,6 +143,8 @@ struct BubbleStickyNotesList: View {
                 if noteIsValid {
                     line1
                     line2
+                } else {
+                    line3
                 }
             }
             Spacer()
