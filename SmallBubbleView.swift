@@ -119,7 +119,6 @@ struct SmallBubbleView: View {
         .onTapGesture { withAnimation {
             isZoomed.toggle()
             skinTapsCount += 1
-            print(skin)
         } }
     }
 }
