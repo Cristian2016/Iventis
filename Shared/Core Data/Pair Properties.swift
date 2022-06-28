@@ -25,7 +25,7 @@ extension Pair {
     @NSManaged public var durationAsStrings: Data?
     
     //3. optionally
-    @NSManaged public var isNoteVisible: Bool
+    @NSManaged public var isNoteHidden: Bool
     @NSManaged public var note: String?
 
     //4. other
