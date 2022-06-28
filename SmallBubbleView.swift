@@ -37,9 +37,9 @@ struct SmallBubbleView: View {
     
     ///user taps and chooses various skins
     @AppStorage("skinTapsCount") var skinTapsCount: Int = 0
+    @AppStorage("zoom") var isZoomed: Bool = true
     
     @Environment(\.colorScheme) var colorScheme
-    @AppStorage("zoom") var isZoomed: Bool = true
     
     @StateObject var bubble:Bubble
     static var metrics = Metrics()
