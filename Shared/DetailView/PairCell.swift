@@ -19,11 +19,7 @@ struct PairCell: View {
     
     ///without delay the animation does not have time to take place
     //⚠️ not the best idea though...
-    func deleteStickyWithDelay() {
-        delayExecution(.now()) {
-            viewModel.deleteNote(for: pair)
-        }
-    }
+    func deleteStickyNote() { viewModel.deleteNote(for: pair) }
     
     var dragToDelete : some Gesture {
         DragGesture()
@@ -34,7 +30,7 @@ struct PairCell: View {
                     } else {
                         print("triggerDeleteAction")
                         if !noteDeleted {
-                            deleteStickyWithDelay()
+                            deleteStickyNote()
                             noteDeleted = true //block drag gesture.. any other better ideas??
                             UserFeedback.singleHaptic(.light)
                         }
@@ -46,7 +42,7 @@ struct PairCell: View {
                     if value.translation.width < offsetDeleteTriggerLimit {
                         offsetX = 0
                     } else {
-                        deleteStickyWithDelay()
+                        deleteStickyNote()
                         noteDeleted = true
                         UserFeedback.singleHaptic(.light)
                     }
@@ -84,9 +80,8 @@ struct PairCell: View {
                 .contentShape(gestureArea) //define gesture area
                 .highPriorityGesture(longPress)
                 
-                PairStickyNoteButton(pair: pair) {
-                    deleteStickyWithDelay()
-                }
+                //like a button it has a closure for action
+                PairStickyNoteButton(pair: pair) { deleteStickyNote() }
             }
         }
     }
