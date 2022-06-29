@@ -44,6 +44,7 @@ struct PairStickyNoteButton: View {
                     .offset(x: offsetX)
                     .gesture(drag)
             }
+            .fixedSize(horizontal: false, vertical: true)
         }
     }
     
@@ -52,13 +53,12 @@ struct PairStickyNoteButton: View {
             .onChanged {
                 offsetX = $0.translation.width
                 
+                //if statement must be executed only once!
                 if triggerPairDeleteAction && !actionTriggered {
-                    print("trigger delete action") //⚠️ must be printed only once
                     actionTriggered = true
+                    UserFeedback.singleHaptic(.medium)
                     action()
-                    withAnimation(.easeInOut(duration: 2)) {
-                        offsetX = 0
-                    }
+                    withAnimation(.easeInOut(duration: 2)) { offsetX = 0 }
                 }
             }
             .onEnded { value in
