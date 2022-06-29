@@ -8,16 +8,19 @@
 import SwiftUI
 
 struct PairCell: View {
+    @EnvironmentObject var viewModel:ViewModel
+    @StateObject var pair:Pair
+    
     //sticky note deletion
     @State private var noteDeleted:Bool = false
     @State private var offsetX:CGFloat = 0.0
     private let offsetDeleteTriggerLimit = CGFloat(180)
-    private var triggerDeleteAction:Bool { offsetX >= offsetDeleteTriggerLimit }
+    private var triggerDeleteAction:Bool { abs(offsetX) >= offsetDeleteTriggerLimit }
     
     ///without delay the animation does not have time to take place
     //⚠️ not the best idea though...
     func deleteStickyWithDelay() {
-        delayExecution(.now() + 1.5) {
+        delayExecution(.now()) {
             viewModel.deleteNote(for: pair)
         }
     }
@@ -29,6 +32,7 @@ struct PairCell: View {
                     if !triggerDeleteAction {
                         offsetX = value.translation.width
                     } else {
+                        print("triggerDeleteAction")
                         if !noteDeleted {
                             deleteStickyWithDelay()
                             noteDeleted = true //block drag gesture.. any other better ideas??
@@ -42,15 +46,14 @@ struct PairCell: View {
                     if value.translation.width < offsetDeleteTriggerLimit {
                         offsetX = 0
                     } else {
+                        deleteStickyWithDelay()
                         noteDeleted = true
                         UserFeedback.singleHaptic(.light)
                     }
                 }
             }
     }
-    
-    @EnvironmentObject var viewModel:ViewModel
-    @StateObject var pair:Pair
+
     let duration:Float.TimeComponentsAsStrings?
     let pairNumber:Int
     
@@ -81,7 +84,9 @@ struct PairCell: View {
                 .contentShape(gestureArea) //define gesture area
                 .highPriorityGesture(longPress)
                 
-                if let note = pair.note_, !note.isEmpty { noteViewAndBackground }
+                PairStickyNoteButton(pair: pair) {
+                    deleteStickyWithDelay()
+                }
             }
         }
     }
@@ -117,6 +122,7 @@ struct PairCell: View {
                     .fill(Color.background)
                     .standardShadow(false)
             )
+//            .opacity(noteDeleted ? 0 : 1)
     }
     
     private var pairNumberView: some View {
