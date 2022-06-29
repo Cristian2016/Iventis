@@ -73,7 +73,7 @@ struct PairStickyNoteButton: View {
             }
             .onEnded { value in
                 if actionTriggered {
-                    delayExecution(.now() + 3) { offsetX = 0 } }
+                    delayExecution(.now() + 1.5) { offsetX = 0 } }
                 else { withAnimation { offsetX = 0 } }
                 
                 if actionTriggered { actionTriggered = false }
