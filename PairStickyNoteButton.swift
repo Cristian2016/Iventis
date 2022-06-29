@@ -10,57 +10,59 @@ import SwiftUI
 
 struct PairStickyNoteButton: View {
     @ObservedObject var pair: Pair
-    @State var offset = CGSize.zero
+    @State var offsetX = CGFloat.zero
     
-    var triggerPairDeleteAction:Bool { abs(offset.width) > 180 }
-    var deleteLabelVisible:Bool { abs(offset.width) > 60 }
+    var triggerPairDeleteAction:Bool { abs(offsetX) > 180 }
+    var deleteLabelVisible:Bool { abs(offsetX) > 60 }
     @State var actionTriggered = false
     
     var action:() -> ()
     
     var body: some View {
-        ZStack {
-            
-            Text(triggerPairDeleteAction ? "Done" : " Delete")
-                .foregroundColor(.white)
-                .font(.system(size: 24).weight(.medium))
-                .padding()
-                .background {
-                    RoundedRectangle(cornerRadius: 2)
-                        .fill(triggerPairDeleteAction ? .green : .red)
-                        .standardShadow(false)
-                }
-                .opacity(deleteLabelVisible ? 1 : 0)
-            
-            Text(pair.note ?? "No Note")
-                .padding()
-                .background {
-                    RoundedRectangle(cornerRadius: 2)
-                        .fill(Color.background)
-                        .standardShadow(false)
-                }
-                .opacity(pair.note_.isEmpty ? 0 : 1)
-                .offset(x: offset.width, y: offset.height)
-                .gesture(drag)
+        Push(.bottomRight) {
+            ZStack {
+                //"Delete"/"Done" Text
+                Text(triggerPairDeleteAction ? "Done" : " Delete")
+                    .foregroundColor(.white)
+                    .font(.system(size: 24).weight(.medium))
+                    .padding()
+                    .background {
+                        RoundedRectangle(cornerRadius: 2)
+                            .fill(triggerPairDeleteAction ? .green : .red)
+                            .standardShadow(false)
+                    }
+                    .opacity(deleteLabelVisible ? 1 : 0)
+                //Note Text
+                Text(pair.note ?? "No Note")
+                    .padding()
+                    .background {
+                        RoundedRectangle(cornerRadius: 2)
+                            .fill(Color.background)
+                            .standardShadow(false)
+                    }
+                    .opacity(pair.note_.isEmpty ? 0 : 1)
+                    .offset(x: offsetX)
+                    .gesture(drag)
+            }
         }
     }
     
     var drag: some Gesture {
         DragGesture()
             .onChanged {
-                offset = $0.translation
+                offsetX = $0.translation.width
                 
                 if triggerPairDeleteAction && !actionTriggered {
                     print("trigger delete action") //⚠️ must be printed only once
                     actionTriggered = true
                     action()
                     withAnimation(.easeInOut(duration: 2)) {
-                        offset = .zero
+                        offsetX = 0
                     }
                 }
             }
             .onEnded { value in
-                withAnimation { offset = .zero }
+                withAnimation { offsetX = 0 }
                 if actionTriggered { actionTriggered = false }
             }
     }
