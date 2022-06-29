@@ -8,6 +8,10 @@
 import SwiftUI
 
 struct PairCell: View {
+    //sticky note deletion
+    @State private var noteDeleted:Bool = false
+    @State private var offsetX:CGFloat = 0.0
+    
     @EnvironmentObject var viewModel:ViewModel
     @StateObject var pair:Pair
     let duration:Float.TimeComponentsAsStrings?
@@ -40,7 +44,7 @@ struct PairCell: View {
                 .contentShape(gestureArea) //define gesture area
                 .highPriorityGesture(longPress)
                 
-                if let note = pair.note_, !note.isEmpty { noteView }
+                if let note = pair.note_, !note.isEmpty { noteViewAndBackground }
             }
         }
     }
@@ -57,6 +61,13 @@ struct PairCell: View {
     }
     
     // MARK: - LEGO
+    private var noteViewAndBackground: some View {
+        ZStack {
+            DeleteConfirmationLabel(noteDeleted: $noteDeleted, offsetX: $offsetX)
+            noteView
+        }
+    }
+    
     private var noteView: some View {
         Push(.bottomRight) {
             Text("\(pair.note_)").font(.title2)
