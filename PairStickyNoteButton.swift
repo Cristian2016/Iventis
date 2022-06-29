@@ -66,7 +66,9 @@ struct PairStickyNoteButton: View {
                 }
             }
             .onEnded { value in
-                withAnimation { offsetX = 0 }
+                if actionTriggered { offsetX = 0 }
+                else { withAnimation { offsetX = 0 } }
+                
                 if actionTriggered { actionTriggered = false }
             }
     }
