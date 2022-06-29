@@ -36,7 +36,7 @@ struct PairStickyNotesList: View {
     let initialNote:String
     @FocusState var keyboardVisible:Bool
     
-    private let size = CGSize(width: 220, height: 418)
+    private let size = CGSize(width: 220, height: 382)
     private let cornerRadius = CGFloat(24)
     
     // MARK: -
@@ -181,10 +181,6 @@ struct PairStickyNotesList: View {
         .onChange(of: self.textInput) {
             if $0.count > textInputLimit { textInput = String(textInput.prefix(textInputLimit)) }
         }
-        .overlay(content: {
-            remainingCharactersCounterView
-                .offset(y: 10)
-        })
     }
     
     ///tap plus to save note or long press to delete note
