@@ -41,7 +41,7 @@ struct PairStickyNoteButton: View {
                     .padding([.leading, .trailing], 10)
                     .background {
                         RoundedRectangle(cornerRadius: 2)
-                            .fill(Color.background)
+                            .fill(Color.background2)
                             .frame(height: 44)
                             .standardShadow(false)
                     }
@@ -49,7 +49,6 @@ struct PairStickyNoteButton: View {
                     .offset(x: offsetX)
                     .gesture(drag)
             }
-            .fixedSize(horizontal: false, vertical: true)
         }
     }
     
