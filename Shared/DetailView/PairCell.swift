@@ -24,8 +24,8 @@ struct PairCell: View {
                 //PairCell
                 VStack (alignment: .leading) {
                     separatorLine.overlay { pairNumberView }
-                    pairStartView
-                    pairPauseView
+                    pairStartView  //first line
+                    pairPauseView //seconds line
                     if pair.pause == nil {
                         HStack {
                             Spacer()
@@ -33,7 +33,7 @@ struct PairCell: View {
                             Spacer()
                         }
                     }
-                    else { durationView }
+                    else { durationView } //third line
                 }
                 .padding(contentFrameGap)
                 .highPriorityGesture(longPress)
