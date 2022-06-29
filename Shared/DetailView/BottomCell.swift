@@ -28,6 +28,9 @@ struct BottomCell: View {
                 PairCell($0, pairs.count - pairs.firstIndex(of: $0)!)
             }
             .listRowSeparator(.hidden)
+            
+            Spacer(minLength: 70)
+                .listRowSeparator(.hidden)
         }
         .listStyle(.plain)
         .scrollIndicators(.hidden)
