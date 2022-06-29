@@ -73,17 +73,21 @@ struct PairStickyNotesList: View {
     var body: some View {
         ZStack {
             screenBackground
+                .onTapGesture {
+                    if noteIsValid { saveTextInput() }
+                    dismiss()
+                }
             darkRoundedBackground
                 .overlay {
                     VStack {
                         Spacer(minLength: 10)
                         textField
-//                        //gestures
-//                            .gesture(dragGesture)
-//                            .onSubmit { saveTextAndDismiss() }
+                        //gestures
+                            .gesture(dragGesture)
+                            .onSubmit { saveTextAndDismiss() }
                         List {
                             if filteredItems.isEmpty { emptyListAlert } //1
-
+                            
                             ForEach (filteredItems) { cell($0) }
                                 .onDelete { viewModel.delete(filteredItems[$0.first!]) }
                                 .listRowSeparator(.hidden)
@@ -140,14 +144,7 @@ struct PairStickyNotesList: View {
         .background(Color("deleteActionViewBackground").padding(-250))
     }
     
-    private var screenBackground: some View {
-        Color("notesListScreenBackground")
-            .opacity(0.8)
-            .onTapGesture {
-                if noteIsValid { saveTextInput() }
-                dismiss()
-            }
-    }
+    private var screenBackground: some View { Color("notesListScreenBackground").opacity(0.8) }
     
     private var darkRoundedBackground: some View {
         RoundedRectangle(cornerRadius: cornerRadius)
