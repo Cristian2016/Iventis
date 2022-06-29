@@ -103,28 +103,6 @@ struct PairCell: View {
     }
     
     // MARK: - LEGO
-    private var noteViewAndBackground: some View {
-        Push(.bottomRight) {
-            ZStack {
-                DeleteConfirmationLabel(noteDeleted: $noteDeleted, offsetX: $offsetX)
-                noteView
-                    .offset(x: offsetX)
-                    .gesture(dragToDelete)
-            }
-        }
-    }
-    
-    private var noteView: some View {
-        Text("\(pair.note_)").font(.title2)
-            .padding(EdgeInsets(top: 8, leading: 12, bottom: 8, trailing: 12))
-            .background(
-                Rectangle()
-                    .fill(Color.background)
-                    .standardShadow(false)
-            )
-//            .opacity(noteDeleted ? 0 : 1)
-    }
-    
     private var pairNumberView: some View {
         HStack {
             Spacer()
