@@ -64,7 +64,7 @@ struct PairCell: View {
                 .background(
                     Rectangle()
                         .fill(Color.background)
-                        .shadow(color:.black.opacity(0.33), radius: 1)
+                        .standardShadow(false)
                 )
         }
     }
