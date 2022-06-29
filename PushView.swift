@@ -8,10 +8,10 @@
 import SwiftUI
 
 struct Push<Content:View>: View {
-    let content:Content
     let position:Position
+    let content:Content
     
-    init(_ position:Position, @ViewBuilder _ content: () -> Content) {
+    init(_ position: Position, @ViewBuilder _ content: () -> Content) {
         self.content = content()
         self.position = position
     }

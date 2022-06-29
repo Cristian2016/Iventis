@@ -68,7 +68,8 @@ struct BubbleStickyNote: View {
     var body: some View {
         if !bubble.isFault {
             ZStack (alignment: .leading) {
-                deleteConfirmationLabel
+                DeleteConfirmationLabel(noteDeleted: $noteDeleted, offsetX: $offsetX)
+                    .offset(x: 0, y: 5)
                 //stickyNote
                 HStack (spacing:0) {
                     calendarSymbol
@@ -118,18 +119,22 @@ struct BubbleStickyNote: View {
                 .frame(width: collapsedStickyNoteWidth)
         }
     }
+}
+
+struct DeleteConfirmationLabel: View {
+    @Binding var noteDeleted:Bool
+    @Binding var offsetX:CGFloat
     
-    private var deleteConfirmationLabel: some View {
+    var body: some View {
         Rectangle()
             .fill(noteDeleted ? Color.green : .red)
             .frame(width: 124, height: 44)
+            .opacity(offsetX > 60 ? 1 : 0)
             .overlay {
                 Text(noteDeleted ? "Done" : "Delete")
                     .foregroundColor(.white)
                     .font(.system(size: 24).weight(.medium))
             }
-            .opacity(offsetX > 60 ? 1 : 0)
-            .offset(x: 0, y: 5)
     }
 }
 

@@ -72,6 +72,9 @@ struct TimersApp: App {
                     @unknown default: fatalError()
                 }
             }
+            .onAppear {
+//                UIApplication.shared.isIdleTimerDisabled = true
+            }
         }
     }
     

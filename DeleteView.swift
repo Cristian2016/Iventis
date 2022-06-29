@@ -29,7 +29,6 @@ struct DeleteView: View {
                 RoundedRectangle(cornerRadius: backgroundRadius)
                     .fill(backgroundColor)
                     .frame(width: width, height: width/ratio)
-                //                .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: 30))
                     .overlay {
                         ZStack {
                             VStack (spacing:6) {
