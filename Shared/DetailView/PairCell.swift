@@ -36,11 +36,19 @@ struct PairCell: View {
                     else { durationView } //third line
                 }
                 .padding(contentFrameGap)
+                //gesture
+                .contentShape(gestureArea) //define gesture area
                 .highPriorityGesture(longPress)
                 
                 if let note = pair.note_, !note.isEmpty { noteView }
             }
         }
+    }
+    
+    //avoid trigger longPress gesture and edge swipe simultaneously
+    //the entire gesture area is shifted right by 30 points
+    var gestureArea: some Shape {
+        Rectangle().offset(x: 30)
     }
     
     // MARK: - LEGO
