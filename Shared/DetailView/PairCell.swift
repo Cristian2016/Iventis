@@ -47,9 +47,7 @@ struct PairCell: View {
     
     //avoid trigger longPress gesture and edge swipe simultaneously
     //the entire gesture area is shifted right by 30 points
-    var gestureArea: some Shape {
-        Rectangle().offset(x: 30)
-    }
+    var gestureArea: some Shape { Rectangle().offset(x: 30) }
     
     // MARK: - LEGO
     private var noteView: some View {
