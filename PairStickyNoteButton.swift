@@ -22,13 +22,19 @@ struct PairStickyNoteButton: View {
         Push(.bottomRight) {
             ZStack {
                 //"Delete"/"Done" Text
-                Text(triggerPairDeleteAction ? "Done" : " Delete")
+                Text(triggerPairDeleteAction ? "Done" : "Delete")
+                    .transaction { transaction in
+                        transaction.animation = nil
+                    }
                     .foregroundColor(.white)
                     .font(.system(size: 24).weight(.medium))
                     .padding()
                     .background {
                         RoundedRectangle(cornerRadius: 2)
                             .fill(triggerPairDeleteAction ? .green : .red)
+                            .transaction { transaction in
+                                transaction.animation = nil
+                            }
                             .frame(width: 124, height: 44)
                             .standardShadow(false)
                     }
