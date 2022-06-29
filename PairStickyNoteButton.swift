@@ -24,9 +24,9 @@ struct PairStickyNoteButton: View {
             ZStack {
                 //"Delete"/"Done" Text
                 Text(triggerPairDeleteAction ? "Done" : "Delete")
-                    .transaction { transaction in //1
+                    .transaction { transaction in
                         transaction.animation = nil
-                    }
+                    } //1
                     .foregroundColor(.white)
                     .font(.system(size: 24).weight(.medium))
                     .padding()
@@ -37,7 +37,6 @@ struct PairStickyNoteButton: View {
                                 transaction.animation = nil
                             }
                             .frame(width: 124, height: 44)
-                            .standardShadow(false)
                     }
                     .offset(y: 8)
                     .opacity(deleteLabelVisible ? 1 : 0)
