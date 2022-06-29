@@ -5,6 +5,7 @@
 //  Created by Cristian Lapusan on 29.06.2022.
 // it is technically a control, maybe button is not the best word
 // it has an action closure
+//1 transaction disables an animation
 
 import SwiftUI
 
@@ -23,7 +24,7 @@ struct PairStickyNoteButton: View {
             ZStack {
                 //"Delete"/"Done" Text
                 Text(triggerPairDeleteAction ? "Done" : "Delete")
-                    .transaction { transaction in
+                    .transaction { transaction in //1
                         transaction.animation = nil
                     }
                     .foregroundColor(.white)
@@ -32,7 +33,7 @@ struct PairStickyNoteButton: View {
                     .background {
                         RoundedRectangle(cornerRadius: 2)
                             .fill(triggerPairDeleteAction ? .green : .red)
-                            .transaction { transaction in
+                            .transaction { transaction in //1
                                 transaction.animation = nil
                             }
                             .frame(width: 124, height: 44)
