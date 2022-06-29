@@ -26,7 +26,7 @@ struct PairStickyNotesList: View {
     }
     
     private let textInputLimit = 12
-    private let textFieldPlaceholder = "Add/Search Note"
+    private let textFieldPlaceholder = "Add Note"
     private let line0 = "No Matches"
     private let line1 = Text("Tap \(Image(systemName: "plus.app.fill")) to Save Note")
         .font(.system(size: 23))
@@ -36,7 +36,7 @@ struct PairStickyNotesList: View {
     let initialNote:String
     @FocusState var keyboardVisible:Bool
     
-    private let size = CGSize(width: 250, height: 418)
+    private let size = CGSize(width: 220, height: 418)
     private let cornerRadius = CGFloat(24)
     
     // MARK: -
@@ -77,6 +77,13 @@ struct PairStickyNotesList: View {
                     if noteIsValid { saveTextInput() }
                     dismiss()
                 }
+                .gesture(
+                    DragGesture(minimumDistance: 10)
+                        .onEnded { _ in
+                            UserFeedback.singleHaptic(.medium)
+                            textInput = ""
+                        }
+                )
             darkRoundedBackground
                 .overlay {
                     VStack {
@@ -96,7 +103,7 @@ struct PairStickyNotesList: View {
                         .environment(\.defaultMinListRowHeight, 8)
                     }
                     .clipShape(RoundedRectangle(cornerRadius: cornerRadius))
-                    plusButton
+//                    plusButton
                 }
         }
         .offset(y: 10)
@@ -174,6 +181,10 @@ struct PairStickyNotesList: View {
         .onChange(of: self.textInput) {
             if $0.count > textInputLimit { textInput = String(textInput.prefix(textInputLimit)) }
         }
+        .overlay(content: {
+            remainingCharactersCounterView
+                .offset(y: 10)
+        })
     }
     
     ///tap plus to save note or long press to delete note

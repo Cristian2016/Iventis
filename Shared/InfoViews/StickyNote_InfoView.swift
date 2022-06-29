@@ -18,7 +18,7 @@ struct StickyNote_InfoView: View {
                 Text("\(Image(systemName: "square.and.arrow.down")) Save Note")
                 
                 VStack (alignment: .leading) {
-                    Text("Tap \(Image(systemName: "plus.square")) or")
+//                    Text("Tap \(Image(systemName: "plus.square")) or")
                     Text("Tap Outside Table")
                 }
                 .foregroundColor(.lightGray)
@@ -29,8 +29,8 @@ struct StickyNote_InfoView: View {
                 .background { Rectangle().fill(Color.lightGray) }
             
             VStack (alignment: .leading) {
-                Text("\(Image(systemName: "trash")) Delete")
-                Text("Tap & Hold \(Image(systemName: "plus.square"))")
+                Text("\(Image(systemName: "trash")) Delete Note")
+                Text("\(Image(systemName: "arrow.left.circle")) Swipe Left\nAcross Screen")
                     .foregroundColor(.lightGray)
             }
         }
