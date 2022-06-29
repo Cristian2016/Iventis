@@ -29,15 +29,20 @@ struct PairStickyNoteButton: View {
                     .background {
                         RoundedRectangle(cornerRadius: 2)
                             .fill(triggerPairDeleteAction ? .green : .red)
+                            .frame(width: 124, height: 44)
                             .standardShadow(false)
                     }
+                    .offset(y: 8)
                     .opacity(deleteLabelVisible ? 1 : 0)
+                    
                 //Note Text
                 Text(pair.note ?? "No Note")
-                    .padding()
+                    .font(.system(size: 26))
+                    .padding([.leading, .trailing], 10)
                     .background {
                         RoundedRectangle(cornerRadius: 2)
                             .fill(Color.background)
+                            .frame(height: 44)
                             .standardShadow(false)
                     }
                     .opacity(pair.note_.isEmpty ? 0 : 1)
