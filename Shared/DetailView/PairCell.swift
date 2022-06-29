@@ -50,6 +50,7 @@ struct PairCell: View {
     //the entire gesture area is shifted right by 30 points
     var gestureArea: some Shape { Rectangle().offset(x: 30) }
     
+    //show stickyNotes list
     private var longPress: some Gesture {
         LongPressGesture(minimumDuration: 0.3)
             .onEnded { _ in userWantsNotesList() }
@@ -58,8 +59,13 @@ struct PairCell: View {
     // MARK: - LEGO
     private var noteView: some View {
         Push(.bottomRight) {
-            Text("⦚ \(pair.note_) ⦚").font(.title2)
-                .offset(y: -10)
+            Text("\(pair.note_)").font(.title2)
+                .padding(EdgeInsets(top: 8, leading: 12, bottom: 8, trailing: 12))
+                .background(
+                    Rectangle()
+                        .fill(Color.background)
+                        .shadow(color:.black.opacity(0.33), radius: 1)
+                )
         }
     }
     
