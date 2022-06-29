@@ -36,7 +36,7 @@ struct PairStickyNotesList: View {
     let initialNote:String
     @FocusState var keyboardVisible:Bool
     
-    private let size = CGSize(width: 250, height: 412)
+    private let size = CGSize(width: 250, height: 418)
     private let cornerRadius = CGFloat(24)
     
     // MARK: -
