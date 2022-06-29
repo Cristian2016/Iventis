@@ -279,20 +279,29 @@ class ViewModel: ObservableObject {
         pair.addToHistory(historyItem)
     }
     
+    //delete BubbleSticky in List
     func delete(_ savedNote:BubbleSavedNote) {
         let context = PersistenceController.shared.viewContext
         context.delete(savedNote)
         PersistenceController.shared.save()
     }
     
+    //delete PairSticky in List
     func delete(_ savedNote:PairSavedNote) {
         let context = PersistenceController.shared.viewContext
         context.delete(savedNote)
         PersistenceController.shared.save()
     }
     
+    //delete BubbleSticky
     func deleteNote(for bubble:Bubble) {
         bubble.note = nil
+        PersistenceController.shared.save()
+    }
+    
+    //delete PairSticky
+    func deleteNote(for pair:Pair) {
+        pair.note = nil
         PersistenceController.shared.save()
     }
     

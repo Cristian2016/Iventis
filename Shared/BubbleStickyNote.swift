@@ -17,9 +17,8 @@ struct BubbleStickyNote: View {
     private let textPadding = EdgeInsets(top: 4, leading: 6, bottom: 4, trailing: 8)
     let collapsedStickyNoteWidth = CGFloat(50)
     
-    @State private var noteDeleted = false
-    
     // MARK: - Drag to delete
+    @State private var noteDeleted = false
     @State private var offsetX = CGFloat(0)
     private let offsetDeleteTriggerLimit = CGFloat(180)
     private var triggerDeleteAction:Bool { offsetX >= offsetDeleteTriggerLimit }
@@ -129,7 +128,7 @@ struct DeleteConfirmationLabel: View {
         Rectangle()
             .fill(noteDeleted ? Color.green : .red)
             .frame(width: 124, height: 44)
-            .opacity(offsetX > 60 ? 1 : 0)
+            .opacity(abs(offsetX) > 60 ? 1 : 0)
             .overlay {
                 Text(noteDeleted ? "Done" : "Delete")
                     .foregroundColor(.white)

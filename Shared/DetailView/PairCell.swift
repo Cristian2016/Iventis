@@ -11,6 +11,43 @@ struct PairCell: View {
     //sticky note deletion
     @State private var noteDeleted:Bool = false
     @State private var offsetX:CGFloat = 0.0
+    private let offsetDeleteTriggerLimit = CGFloat(180)
+    private var triggerDeleteAction:Bool { offsetX >= offsetDeleteTriggerLimit }
+    
+    ///without delay the animation does not have time to take place
+    //⚠️ not the best idea though...
+    func deleteStickyWithDelay() {
+        delayExecution(.now() + 1.5) {
+            viewModel.deleteNote(for: pair)
+        }
+    }
+    
+    var dragToDelete : some Gesture {
+        DragGesture()
+            .onChanged { value in
+                withAnimation {
+                    if !triggerDeleteAction {
+                        offsetX = value.translation.width
+                    } else {
+                        if !noteDeleted {
+                            deleteStickyWithDelay()
+                            noteDeleted = true //block drag gesture.. any other better ideas??
+                            UserFeedback.singleHaptic(.light)
+                        }
+                    }
+                }
+            }
+            .onEnded { value in
+                withAnimation {
+                    if value.translation.width < offsetDeleteTriggerLimit {
+                        offsetX = 0
+                    } else {
+                        noteDeleted = true
+                        UserFeedback.singleHaptic(.light)
+                    }
+                }
+            }
+    }
     
     @EnvironmentObject var viewModel:ViewModel
     @StateObject var pair:Pair
@@ -62,22 +99,24 @@ struct PairCell: View {
     
     // MARK: - LEGO
     private var noteViewAndBackground: some View {
-        ZStack {
-            DeleteConfirmationLabel(noteDeleted: $noteDeleted, offsetX: $offsetX)
-            noteView
+        Push(.bottomRight) {
+            ZStack {
+                DeleteConfirmationLabel(noteDeleted: $noteDeleted, offsetX: $offsetX)
+                noteView
+                    .offset(x: offsetX)
+                    .gesture(dragToDelete)
+            }
         }
     }
     
     private var noteView: some View {
-        Push(.bottomRight) {
-            Text("\(pair.note_)").font(.title2)
-                .padding(EdgeInsets(top: 8, leading: 12, bottom: 8, trailing: 12))
-                .background(
-                    Rectangle()
-                        .fill(Color.background)
-                        .standardShadow(false)
-                )
-        }
+        Text("\(pair.note_)").font(.title2)
+            .padding(EdgeInsets(top: 8, leading: 12, bottom: 8, trailing: 12))
+            .background(
+                Rectangle()
+                    .fill(Color.background)
+                    .standardShadow(false)
+            )
     }
     
     private var pairNumberView: some View {
