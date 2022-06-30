@@ -167,6 +167,8 @@ struct NotesList: View {
     }
     
     //External Actions
+    //each View using this view has different code
+    //implemented within closures
     var dismiss: () -> Void
     var deleteItem: (IndexSet.Element?) -> Void
     
