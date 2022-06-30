@@ -54,7 +54,7 @@ struct PairStickyNotesList: View {
     }
     
     // MARK: -
-    private func saveTextAndDismiss() {
+    private func saveTextInputAndDismiss() {
         saveTextInput()
         dismiss()
     }
@@ -84,7 +84,7 @@ struct PairStickyNotesList: View {
                 .overlay {
                     VStack {
                         Spacer(minLength: 10)
-                        textField.onSubmit { saveTextAndDismiss() }
+                        textField.onSubmit { saveTextInputAndDismiss() }
                         List {
                             if filteredItems.isEmpty { emptyListAlert } //1
                             
@@ -168,7 +168,6 @@ struct PairStickyNotesList: View {
         .font(.system(size: 24))
         .foregroundColor(.white)
         .padding()
-        .padding(.leading)
         .focused($keyboardVisible)
         .textInputAutocapitalization(.words)
         .onChange(of: self.textInput) {

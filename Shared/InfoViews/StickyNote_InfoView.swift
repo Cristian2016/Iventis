@@ -30,10 +30,10 @@ struct StickyNote_InfoView: View {
             
             VStack (alignment: .leading) {
                 Text("\(Image(systemName: "trash")) Delete")
-                Text("\(Image(systemName: "arrow.left.circle")) Swipe Left\nAcross Screen\nor")
+                Text("\(Image(systemName: "arrow.left.circle")) Swipe Left or")
                     .foregroundColor(.lightGray)
-//                Text("Tap & Hold Outside Table")
-//                    .foregroundColor(.lightGray)
+                Text("Tap & Hold")
+                    .foregroundColor(.lightGray)
             }
         }
         .fixedSize(horizontal: true, vertical: false)
