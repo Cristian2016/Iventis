@@ -26,7 +26,7 @@ struct PairStickyNotesList: View {
     }
     
     private let textInputLimit = 12
-    private let textFieldPlaceholder = "Add Note"
+    private let textFieldPlaceholder = "Search/Add Note"
     private let line0 = "No Matches"
     private let line1 = Text("Tap \(Image(systemName: "plus.app.fill")) to Save Note")
         .font(.system(size: 23))
@@ -156,7 +156,7 @@ struct PairStickyNotesList: View {
     ///I use this because I couldn't find a way to center text placeholder on Text Field
     private var placeholder: some View {
             Text(textFieldPlaceholder)
-            .font(.system(size: 26))
+            .font(.system(size: 23))
             .foregroundColor(.lightGray)
     }
     
