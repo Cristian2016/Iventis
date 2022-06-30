@@ -16,13 +16,13 @@ class ViewModel: ObservableObject {
     
     @Published var isDetailViewShowing = false
     
+    @Published var pairOfNotesList:Pair?
+    
     @Published var stickyNotesList_bRank:Int? = nil //bubble rank
     @Published var isPaletteShowing = false
     
     @Published var rankOfSelectedBubble:Int?
     @Published var idOfSelectedBubble:Bubble.ID?
-    
-    @Published var pairOfNotesList:Pair?
         
     init() {
         let request = Bubble.fetchRequest()

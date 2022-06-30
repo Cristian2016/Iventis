@@ -96,7 +96,6 @@ struct PairStickyNotesList: View {
                         .environment(\.defaultMinListRowHeight, 8)
                     }
                     .clipShape(RoundedRectangle(cornerRadius: cornerRadius))
-//                    plusButton
                 }
         }
         .offset(y: 10)
@@ -177,34 +176,7 @@ struct PairStickyNotesList: View {
             if $0.count > textInputLimit { textInput = String(textInput.prefix(textInputLimit)) }
         }
     }
-    
-    ///tap plus to save note or long press to delete note
-    @ViewBuilder
-    private var plusButton:some View {
-        if !textInput.isEmpty && noteIsValid {
-            Push(.topRight) {
-                Image(systemName: "plus.app")
-                    .font(.system(size: 72).weight(.thin))
-                    .foregroundColor(textInput.count > 0 ? .white : .gray)
-                    .overlay { remainingCharactersCounterView }
-                //gestures
-                    .onTapGesture {
-                        if noteIsValid {
-                            saveTextInput()
-                            dismiss()
-                        }
-                    }
-                    .highPriorityGesture (
-                        LongPressGesture(minimumDuration: 0.3)
-                            .onEnded { _ in
-                                textInput = ""
-                                UserFeedback.doubleHaptic(.rigid)
-                            }
-                    )
-            }
-        }
-    }
-    
+        
     private var noteIsValid: Bool {
         let condition = !textInput.trimmingCharacters(in: CharacterSet.whitespaces).isEmpty
         
@@ -227,10 +199,10 @@ struct PairStickyNotesList: View {
     
     private func saveTextInput() {
         if initialNote == textInput || textInput.isEmpty { return }
-        
+                
         viewModel.save(textInput, for: pair)
-        UserFeedback.singleHaptic(.heavy)
         
+        UserFeedback.singleHaptic(.heavy)
         PersistenceController.shared.save()
     }
 }

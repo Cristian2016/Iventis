@@ -19,6 +19,7 @@
 		1F4326B1282AFB19002B6092 /* ScaleDownButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4326B0282AFB19002B6092 /* ScaleDownButton.swift */; };
 		1F48F55A286AE5B30071386A /* EmptyNote_InfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F48F559286AE5B30071386A /* EmptyNote_InfoView.swift */; };
 		1F4DF99D282B82EF00D54BE8 /* CircleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4DF99C282B82EF00D54BE8 /* CircleButton.swift */; };
+		1F542F92286D757000403F13 /* NotesList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F542F91286D757000403F13 /* NotesList.swift */; };
 		1F5987A2286B5DFC00CDB54C /* PairSavedNote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F59879E286B5DFC00CDB54C /* PairSavedNote.swift */; };
 		1F5987A5286B5F8900CDB54C /* PairSavedNote Properties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5987A4286B5F8900CDB54C /* PairSavedNote Properties.swift */; };
 		1F5A0F6C282641D00075E86B /* EmptyHistoryAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5A0F6B282641D00075E86B /* EmptyHistoryAlertView.swift */; };
@@ -105,6 +106,7 @@
 		1F4326B0282AFB19002B6092 /* ScaleDownButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScaleDownButton.swift; sourceTree = "<group>"; };
 		1F48F559286AE5B30071386A /* EmptyNote_InfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyNote_InfoView.swift; sourceTree = "<group>"; };
 		1F4DF99C282B82EF00D54BE8 /* CircleButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleButton.swift; sourceTree = "<group>"; };
+		1F542F91286D757000403F13 /* NotesList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesList.swift; sourceTree = "<group>"; };
 		1F59879E286B5DFC00CDB54C /* PairSavedNote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PairSavedNote.swift; sourceTree = SOURCE_ROOT; };
 		1F5987A4286B5F8900CDB54C /* PairSavedNote Properties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PairSavedNote Properties.swift"; sourceTree = "<group>"; };
 		1F5A0F6B282641D00075E86B /* EmptyHistoryAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyHistoryAlertView.swift; sourceTree = "<group>"; };
@@ -210,6 +212,7 @@
 		1F5F4A4228093FAC00AF3442 = {
 			isa = PBXGroup;
 			children = (
+				1F542F91286D757000403F13 /* NotesList.swift */,
 				1FA355CE2832238E00F73111 /* Timers--iOS--Info.plist */,
 				1FA355CA2832186100F73111 /* CalendarManager.swift */,
 				1F3436002834FC4800A018CC /* NoteSticker.swift */,
@@ -438,6 +441,7 @@
 				1F100CA72809493400A3A3C2 /* BackgroundTimer.swift in Sources */,
 				1FA8F87E28367B7A00394B59 /* BubbleStickyNote.swift in Sources */,
 				1F5A0F6C282641D00075E86B /* EmptyHistoryAlertView.swift in Sources */,
+				1F542F92286D757000403F13 /* NotesList.swift in Sources */,
 				1F98D78A286AF8A300C0A973 /* DeleteRow_InfoView.swift in Sources */,
 				1FE163AE280EE6F40050C6F5 /* LeftStrip.swift in Sources */,
 				1F641FFE281FF70100413E31 /* BottomDetailView.swift in Sources */,
