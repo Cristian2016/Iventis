@@ -53,12 +53,13 @@ struct TimersApp: App {
                 
                 if deleteViewOffsetComputed && deleteViewShowing {
                     let bubble = viewModel.bubble(for: viewModel.showDeleteAction_bRank!)
-                    DeleteView(bubble).environmentObject(viewModel)
+                    DeleteView(bubble)
                 }
                 
                 if bubbleNotesShowing { BubbleStickyNotesList($viewModel.stickyNotesList_bRank) }
                 if let pair = viewModel.pairOfNotesList { PairStickyNotesList(pair) }
             }
+            .ignoresSafeArea()
             .environment(\.managedObjectContext, viewContext)
             .environmentObject(viewModel)
             .onChange(of: scenePhase) {

@@ -281,9 +281,7 @@ struct BubbleCell: View {
         
     private var bubbleStickyNote:some View {
         Push(.topLeft) {
-            BubbleStickyNote()
-                .environmentObject(viewModel)
-                .environmentObject(bubble)
+            BubbleStickyNote().environmentObject(bubble)
         }
     }
     

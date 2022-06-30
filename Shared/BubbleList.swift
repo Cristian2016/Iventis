@@ -20,7 +20,6 @@ struct BubbleList: View {
             if isListEmpty { EmptyListView() }
             else {
                 ZStack {
-                    VStack {
                         List (results, selection: $viewModel.rankOfSelectedBubble) { section in
                             Section {
                                 ForEach (section) { BubbleCell($0) }
@@ -48,17 +47,15 @@ struct BubbleList: View {
                         .scrollIndicators(.hidden)
                         .padding(EdgeInsets(top: 0, leading: -10, bottom: 0, trailing: -10))
                         .listStyle(.plain)
-                    }
-                    .ignoresSafeArea(edges:.bottom)
                 }
             }
-            PlusButton().environmentObject(viewModel)
+            PlusButton()
             
             if !notesShowing {
-                LeftStrip($viewModel.isPaletteShowing, isListEmpty).environmentObject(viewModel)
+                LeftStrip($viewModel.isPaletteShowing, isListEmpty)
             }
             
-            PaletteView($viewModel.isPaletteShowing).environmentObject(viewModel)
+            PaletteView($viewModel.isPaletteShowing)
         }
         .onPreferenceChange(BubbleCellLow_Key.self) { new in
             let frame = new.frame
