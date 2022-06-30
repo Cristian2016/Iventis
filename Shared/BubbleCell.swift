@@ -27,7 +27,7 @@ extension BubbleCell {
         }
     }
     
-    @ViewBuilder
+    @ViewBuilder //it has gradient
     private var secondsShape: some View {
         if bubble.hasWidget {
             RoundedRectangle(cornerRadius: 20)
