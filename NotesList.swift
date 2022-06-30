@@ -132,7 +132,7 @@ struct NotesList: View {
             TextField("", text: $textInput)
         }
         .font(.system(size: 24))
-        .foregroundColor(.white)
+        .foregroundColor(.background2)
         .padding()
         .focused($keyboardVisible)
         .textInputAutocapitalization(.words)
