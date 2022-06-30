@@ -121,7 +121,7 @@ struct NotesList: View {
     
     var darkRoundedBackground: some View {
         RoundedRectangle(cornerRadius: cornerRadius)
-            .fill(Color("deleteActionViewBackground"))
+            .fill(Color.background3)
             .frame(width: size.width, height: size.height)
             .standardShadow(false)
     }
