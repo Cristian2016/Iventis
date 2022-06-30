@@ -19,32 +19,30 @@ struct BubbleList: View {
         ZStack {
             if isListEmpty { EmptyListView() }
             else {
-                ZStack {
-                        List (results, selection: $viewModel.rankOfSelectedBubble) { section in
-                            Section {
-                                ForEach (section) { BubbleCell($0) }
-                                .onMove {
-                                    let moveAtTheBottom = ($1 == section.count)
-                                    let sourceRank = section[$0.first!].rank
-                                    
-                                    if moveAtTheBottom {
-                                        let destRank = section[$1 - 1].rank
-                                        viewModel.reorderRanks(sourceRank, destRank, true)
-                                    } else {
-                                        let destRank = section[$1].rank
-                                        viewModel.reorderRanks(sourceRank, destRank)
-                                    }
+                List (results, selection: $viewModel.rankOfSelectedBubble) { section in
+                    Section {
+                        ForEach (section) { BubbleCell($0) }
+                            .onMove {
+                                let moveAtTheBottom = ($1 == section.count)
+                                let sourceRank = section[$0.first!].rank
+                                
+                                if moveAtTheBottom {
+                                    let destRank = section[$1 - 1].rank
+                                    viewModel.reorderRanks(sourceRank, destRank, true)
+                                } else {
+                                    let destRank = section[$1].rank
+                                    viewModel.reorderRanks(sourceRank, destRank)
                                 }
-                            } header: { headerTitle(for: section.id.description) }
-                                .listRowSeparator(.hidden)
-                            
-                            //bottom overscroll
-                            if !section.id { bottomOverscoll }
-                        }
-                        .scrollIndicators(.hidden)
-                        .padding(EdgeInsets(top: 0, leading: -10, bottom: 0, trailing: -10))
-                        .listStyle(.plain)
+                            }
+                    } header: { headerTitle(for: section.id.description) }
+                        .listRowSeparator(.hidden)
+                    
+                    //bottom overscroll
+                    if !section.id { bottomOverscoll }
                 }
+                .scrollIndicators(.hidden)
+                .padding(EdgeInsets(top: 0, leading: -10, bottom: 0, trailing: -10))
+                .listStyle(.plain)
             }
             PlusButton()
             
