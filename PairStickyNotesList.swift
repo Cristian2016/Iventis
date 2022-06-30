@@ -144,7 +144,10 @@ struct PairStickyNotesList: View {
         .background(Color("deleteActionViewBackground").padding(-250))
     }
     
-    private var screenBackground: some View { Color("notesListScreenBackground").opacity(0.8) }
+    private var screenBackground: some View {
+        Color("notesListScreenBackground").opacity(0.9)
+            .ignoresSafeArea()
+    }
     
     private var darkRoundedBackground: some View {
         RoundedRectangle(cornerRadius: cornerRadius)
