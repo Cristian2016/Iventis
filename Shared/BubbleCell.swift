@@ -28,6 +28,17 @@ extension BubbleCell {
     }
     
     @ViewBuilder
+    private var secondsShape: some View {
+        if bubble.hasWidget {
+            RoundedRectangle(cornerRadius: 20)
+                .fill(Color.bubbleColor(forName: bubble.color ?? "cyan"))
+        } else {
+            Circle()
+                .fill(Color.bubbleColor(forName: bubble.color ?? "cyan").gradient)
+        }
+    }
+    
+    @ViewBuilder
     private var shape: some View {
         if bubble.hasWidget {
             RoundedRectangle(cornerRadius: 20)
@@ -232,61 +243,6 @@ struct BubbleCell: View {
     }
     
     // MARK: - Legoes
-//    private var hrMinSecStack:some View {
-//        ZStack {
-//            HStack (spacing: BubbleCell.metrics.spacing) {
-//                hoursView
-//                    .onTapGesture { userTappedHours() }
-//                    .onLongPressGesture { handleLongPress() }
-//                    .zIndex(1)
-//                minutesView
-//                    .onTapGesture { withAnimation(.easeInOut(duration: 0.05)) {
-//                        editMode?.wrappedValue = .inactive
-//                        userTappedHours()
-//                    } }
-//                secondsView
-//                    .onTapGesture { userTappedSeconds() }
-//                    .onLongPressGesture { userLongPressedSeconds() }
-//            }
-//            Text(bubble.bubbleCell_Components.min)
-//        }
-//        .frame(height: BubbleCell.metrics.circleDiameter)
-//        .font(.system(size: BubbleCell.metrics.fontSize))
-//        .foregroundColor(.white)
-//    }
-    
-//    var hoursView : some View {
-//        circle
-//            .overlay { Text(bubble.bubbleCell_Components.hr) }
-//            .opacity(hrOpacity)
-//        //animations
-//            .scaleEffect(isSecondsLongPressed ? 0.2 : 1.0)
-//            .offset(x: isSecondsLongPressed ? 20 : 0.0, y: 0)
-//            .animation(.secondsLongPressed.delay(0.2), value: isSecondsLongPressed)
-//    }
-//
-//    var minutesView : some View {
-//        circle //MINUTES
-//            .opacity(minOpacity)
-//        //animations
-//            .scaleEffect(isSecondsLongPressed ? 0.2 : 1.0)
-//            .offset(x: isSecondsLongPressed ? 10 : 0.0, y: 0)
-//            .animation(.secondsLongPressed.delay(0.1), value: isSecondsLongPressed)
-//    }
-    
-//    var secondsView : some View {
-//        ZStack {
-//            circle //SECONDS
-//                .overlay { Text(bubble.bubbleCell_Components.sec) }
-//            //animations secondsTapped
-//                .scaleEffect(isSecondsTapped ? 0.6 : 1.0)
-//                .animation(.secondsTapped, value: isSecondsTapped)
-//            //animations seconds long pressed
-//                .scaleEffect(isSecondsLongPressed ? 0.2 : 1.0)
-//                .animation(.secondsLongPressed, value: isSecondsLongPressed)
-//        }
-//    }
-    
     ////added to bubbleCell only if cellLow value is needed. ex: to know how to position DeleteActionView
     private var cellLowEmitterView: some View {
         Circle()
@@ -329,10 +285,6 @@ struct BubbleCell: View {
                 .environmentObject(viewModel)
                 .environmentObject(bubble)
         }
-    }
-    
-    private var circle: some View {
-        Circle().fill(Color.bubbleColor(forName: bubble.color ?? "cyan"))
     }
     
     // MARK: - Methods
