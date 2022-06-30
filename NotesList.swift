@@ -96,7 +96,6 @@ struct NotesList: View {
                             
                             ForEach (filteredItems, id: \.self) { item in
                                 cell(item)
-                                    .onTapGesture { selectExistingNote(item) }
                             }
                             .onDelete { deleteItem($0.first!) }
                                 .listRowSeparator(.hidden)
@@ -106,6 +105,11 @@ struct NotesList: View {
                     }
                     .clipShape(RoundedRectangle(cornerRadius: cornerRadius))
                 }
+        }
+        .onAppear {
+            delayExecution(.now() + 0.05) {
+                withAnimation (.easeInOut(duration: 0.0)) { keyboardVisible = true }
+            }
         }
     }
     
@@ -156,7 +160,7 @@ struct NotesList: View {
         //gestures
             .onTapGesture {
                 UserFeedback.singleHaptic(.heavy)
-                saveNoteToCoredata(item) //will be handled externally
+                selectExistingNote(item) //will be handled externally
                 try? PersistenceController.shared.viewContext.save()
                 dismiss()
             }
