@@ -81,8 +81,6 @@ struct BubbleStickyNotesList: View {
                   saveNoteToCoredata: { viewModel.save($0, for: bubble) },
                   selectExistingNote: { chooseExitingNote($0) }
         )
-        .offset(y: 10)
-        .ignoresSafeArea(.container, edges: .top)
     }
     
     private var remainingCharactersCounterView:some View {

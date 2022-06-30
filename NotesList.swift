@@ -17,7 +17,7 @@ struct NotesList: View {
         let filtered = notes.filter {
             $0.lowercased().contains(textInput.lowercased())
         }
-        return Array(filtered)
+        return Array(Set(filtered)) //Array(Set to avoid duplicates
     }
     
     private let size = CGSize(width: 220, height: 382)
@@ -83,28 +83,32 @@ struct NotesList: View {
                     LongPressGesture(minimumDuration: 0.3)
                         .onEnded { _ in deleteTextInput() }
                 )
-            darkRoundedBackground
-                .overlay {
-                    VStack {
-                        Spacer(minLength: 10)
-                        textField.onSubmit { saveTextInputAndDismiss() }
-                        List {
-                            if filteredItems.isEmpty {
-//                                emptyListAlert
+            VStack {
+                darkRoundedBackground
+                    .overlay {
+                        VStack {
+                            Spacer(minLength: 10)
+                            textField.onSubmit { saveTextInputAndDismiss() }
+                            List {
+                                if filteredItems.isEmpty {
+                                    //                                emptyListAlert
+                                    
+                                } //1
                                 
-                            } //1
-                            
-                            ForEach (filteredItems, id: \.self) { item in
-                                cell(item)
-                            }
-                            .onDelete { deleteItem($0.first!) }
+                                ForEach (filteredItems, id: \.self) { item in
+                                    cell(item)
+                                }
+                                .onDelete { deleteItem($0.first!) }
                                 .listRowSeparator(.hidden)
+                            }
+                            .listStyle(.plain)
+                            .environment(\.defaultMinListRowHeight, 8)
                         }
-                        .listStyle(.plain)
-                        .environment(\.defaultMinListRowHeight, 8)
+                        .clipShape(RoundedRectangle(cornerRadius: cornerRadius))
                     }
-                    .clipShape(RoundedRectangle(cornerRadius: cornerRadius))
-                }
+                Spacer()
+            }
+            .padding([.top], 50)
         }
         .onAppear {
             delayExecution(.now() + 0.05) {

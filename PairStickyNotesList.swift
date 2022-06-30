@@ -64,6 +64,11 @@ struct PairStickyNotesList: View {
         textInput = ""
     }
     
+    var swipeToDeleteTextInput: some Gesture {
+        DragGesture(minimumDistance: 10)
+            .onEnded { _ in deleteTextInput() }
+    }
+    
     // MARK: -
     var body: some View {
         ZStack {
@@ -72,10 +77,7 @@ struct PairStickyNotesList: View {
                     if noteIsValid { saveTextInput() }
                     dismiss()
                 }
-                .gesture(
-                    DragGesture(minimumDistance: 10)
-                        .onEnded { _ in deleteTextInput() }
-                )
+                .gesture( swipeToDeleteTextInput )
                 .highPriorityGesture (
                     LongPressGesture(minimumDuration: 0.3)
                         .onEnded { _ in deleteTextInput() }

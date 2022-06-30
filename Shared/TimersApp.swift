@@ -56,7 +56,9 @@ struct TimersApp: App {
                     DeleteView(bubble)
                 }
                 
-                if bubbleNotesShowing { BubbleStickyNotesList($viewModel.stickyNotesList_bRank) }
+                if bubbleNotesShowing {
+                    BubbleStickyNotesList($viewModel.stickyNotesList_bRank)
+                }
                 if let pair = viewModel.pairOfNotesList { PairStickyNotesList(pair) }
             }
             .ignoresSafeArea()
