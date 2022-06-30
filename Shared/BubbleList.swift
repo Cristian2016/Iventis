@@ -39,10 +39,7 @@ struct BubbleList: View {
                                 .listRowSeparator(.hidden)
                             
                             //bottom overscroll
-                            if !section.id { Spacer()
-                                    .frame(height: 200)
-                                    .listRowSeparator(.hidden)
-                            }
+                            if !section.id { bottomOverscoll }
                         }
                         .scrollIndicators(.hidden)
                         .padding(EdgeInsets(top: 0, leading: -10, bottom: 0, trailing: -10))
@@ -85,6 +82,12 @@ struct BubbleList: View {
         formatter.timeStyle = .short
         return formatter
     }()
+    
+    private var bottomOverscoll: some View {
+        Spacer()
+            .frame(height: 200)
+            .listRowSeparator(.hidden)
+    }
     
     @ViewBuilder
     private func headerTitle(for sectionID:String) -> some View {
