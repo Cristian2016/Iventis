@@ -14,9 +14,9 @@ struct TapHold: View {
             Image(systemName: "circle.fill")
                 .font(.system(size: width * 0.2))
             Image(systemName: "clock.fill")
-                .font(.system(size: width * 0.05))
+                .font(.system(size: width * 0.12))
                 .foregroundColor(.white)
-                .offset(x: 0, y: -20)
+                .offset(x: 0, y: -11)
         }
         .foregroundColor(.green)
     }
