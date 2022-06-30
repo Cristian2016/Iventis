@@ -36,7 +36,9 @@ struct NotesList: View {
     }
     
     func saveTextInputAndDismiss() {
-//        saveTextInput(closure: () -> ())
+        guard !textInput.isEmpty else { return }
+        
+        saveNoteToCoredata(textInput)
         dismiss()
     }
     
@@ -44,18 +46,13 @@ struct NotesList: View {
         closure()
     }
     
-    func saveTextInput(closure: () -> ()) {
+    func saveTextInput() {
         if initialNote == textInput || textInput.isEmpty { return }
         
-        closure()
+        saveNoteToCoredata(textInput)
         
         UserFeedback.singleHaptic(.heavy)
         PersistenceController.shared.save()
-    }
-    
-    var screenBackground: some View {
-        Color("notesListScreenBackground").opacity(0.9)
-            .ignoresSafeArea()
     }
     
     var noteIsValid: Bool {
@@ -74,10 +71,10 @@ struct NotesList: View {
     var body: some View {
         ZStack {
             screenBackground
-//                .onTapGesture {
-//                    if noteIsValid { saveTextInput(closure: <#() -> ()#>) }
-//                    dismiss()
-//                }
+                .onTapGesture {
+                    if noteIsValid { saveTextInput() }
+                    dismiss()
+                }
                 .gesture(
                     DragGesture(minimumDistance: 10)
                         .onEnded { _ in deleteTextInput() }
@@ -97,8 +94,11 @@ struct NotesList: View {
                                 
                             } //1
                             
-                            ForEach (filteredItems, id: \.self) { cell($0) }
-//                                .onDelete { deleteItem }
+                            ForEach (filteredItems, id: \.self) { item in
+                                cell(item)
+                                    .onTapGesture { selectExistingNote(item) }
+                            }
+                            .onDelete { deleteItem($0.first!) }
                                 .listRowSeparator(.hidden)
                         }
                         .listStyle(.plain)
@@ -110,6 +110,11 @@ struct NotesList: View {
     }
     
     // MARK: - Lego
+    var screenBackground: some View {
+        Color("notesListScreenBackground").opacity(0.9)
+            .ignoresSafeArea()
+    }
+    
     var darkRoundedBackground: some View {
         RoundedRectangle(cornerRadius: cornerRadius)
             .fill(Color("deleteActionViewBackground"))
@@ -151,16 +156,18 @@ struct NotesList: View {
         //gestures
             .onTapGesture {
                 UserFeedback.singleHaptic(.heavy)
-                saveNote(item) //will be handled externally
+                saveNoteToCoredata(item) //will be handled externally
                 try? PersistenceController.shared.viewContext.save()
                 dismiss()
             }
     }
     
-    //Actions
-    var saveNote: (String) -> Void
-    var dismiss: () -> ()
-    var deleteItem: (IndexSet.Element?) -> ()
+    //External Actions
+    var dismiss: () -> Void
+    var deleteItem: (IndexSet.Element?) -> Void
+    
+    var saveNoteToCoredata: (String) -> Void
+    var selectExistingNote: (String) -> Void
 }
 
 //struct NotesList_Previews: PreviewProvider {
