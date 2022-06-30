@@ -54,19 +54,14 @@ struct PairStickyNotesList: View {
     }
     
     // MARK: -
-    private var dragGesture: some Gesture {
-        DragGesture(minimumDistance: 15, coordinateSpace: .global)
-            .onChanged {
-                if $0.translation.width < -20 { textInput = "" }
-            }
-            .onEnded { _ in
-                if textInput.isEmpty { UserFeedback.doubleHaptic(.rigid)
-                }
-            }
-    }
     private func saveTextAndDismiss() {
         saveTextInput()
         dismiss()
+    }
+    
+    func deleteTextInput() {
+        UserFeedback.doubleHaptic(.rigid)
+        textInput = ""
     }
     
     // MARK: -
@@ -79,19 +74,17 @@ struct PairStickyNotesList: View {
                 }
                 .gesture(
                     DragGesture(minimumDistance: 10)
-                        .onEnded { _ in
-                            UserFeedback.singleHaptic(.medium)
-                            textInput = ""
-                        }
+                        .onEnded { _ in deleteTextInput() }
+                )
+                .highPriorityGesture (
+                    LongPressGesture(minimumDuration: 0.3)
+                        .onEnded { _ in deleteTextInput() }
                 )
             darkRoundedBackground
                 .overlay {
                     VStack {
                         Spacer(minLength: 10)
-                        textField
-                        //gestures
-                            .gesture(dragGesture)
-                            .onSubmit { saveTextAndDismiss() }
+                        textField.onSubmit { saveTextAndDismiss() }
                         List {
                             if filteredItems.isEmpty { emptyListAlert } //1
                             
