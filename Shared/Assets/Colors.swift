@@ -78,7 +78,9 @@ extension Color {
     static let background = Color("background")
     
     ///PairStickyNote background
+    ///white text in light mode, black in dark mode
     static let background2 = Color("background2")
+    
     static let background3 = Color("background3")
     
     static let bubbleThrees = [
