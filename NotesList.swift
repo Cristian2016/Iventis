@@ -9,7 +9,7 @@ import SwiftUI
 
 struct NotesList: View {
     @State var items:[String]
-    private var filteredItems:[String] {
+    var filteredItems:[String] {
         if textInput.isEmpty { return Array(items) }
         let filtered = items.filter {
             $0.lowercased().contains(textInput.lowercased())
@@ -17,26 +17,26 @@ struct NotesList: View {
         return Array(filtered)
     }
     
-    private let size = CGSize(width: 220, height: 382)
-    private let cornerRadius = CGFloat(24)
+    let size = CGSize(width: 220, height: 382)
+    let cornerRadius = CGFloat(24)
     
     @FocusState var keyboardVisible:Bool
     
-    private let textInputLimit:Int
-    private let textFieldPlaceholder = "Search/Add Note"
-    private let line0 = "No Matches"
-    private let line1 = Text("Tap \(Image(systemName: "plus.app.fill")) to Save Note")
+    let textInputLimit:Int
+    let textFieldPlaceholder = "Search/Add Note"
+    let line0 = "No Matches"
+    let line1 = Text("Tap \(Image(systemName: "plus.app.fill")) to Save Note")
         .font(.system(size: 23))
-    private let line2 = Text("Tap Hold \(Image(systemName: "plus.app.fill")) to Delete").font(.system(size: 21))
-    private let line3 = Text("Empty Notes will not be saved").font(.system(size: 21))
+    let line2 = Text("Tap Hold \(Image(systemName: "plus.app.fill")) to Delete").font(.system(size: 21))
+    let line3 = Text("Empty Notes will not be saved").font(.system(size: 21))
     
     func deleteTextInput() {
         UserFeedback.doubleHaptic(.rigid)
         textInput = ""
     }
     
-    private func saveTextInputAndDismiss() {
-        saveTextInput(closure: () -> ())
+    func saveTextInputAndDismiss() {
+//        saveTextInput(closure: () -> ())
         dismiss()
     }
     
@@ -53,12 +53,12 @@ struct NotesList: View {
         PersistenceController.shared.save()
     }
     
-    private var screenBackground: some View {
+    var screenBackground: some View {
         Color("notesListScreenBackground").opacity(0.9)
             .ignoresSafeArea()
     }
     
-    private var noteIsValid: Bool {
+    var noteIsValid: Bool {
         let condition = !textInput.trimmingCharacters(in: CharacterSet.whitespaces).isEmpty
         
         if textInput.count > 0 && condition {
@@ -69,15 +69,15 @@ struct NotesList: View {
     }
     
     let initialNote:String
-    @State private var textInput = ""
+    @State var textInput = ""
     
     var body: some View {
         ZStack {
             screenBackground
-                .onTapGesture {
-                    if noteIsValid { saveTextInput() }
-                    dismiss()
-                }
+//                .onTapGesture {
+//                    if noteIsValid { saveTextInput(closure: <#() -> ()#>) }
+//                    dismiss()
+//                }
                 .gesture(
                     DragGesture(minimumDistance: 10)
                         .onEnded { _ in deleteTextInput() }
@@ -97,8 +97,8 @@ struct NotesList: View {
                                 
                             } //1
                             
-                            ForEach (filteredItems) { cell($0) }
-                                .onDelete { deleteItem }
+                            ForEach (filteredItems, id: \.self) { cell($0) }
+//                                .onDelete { deleteItem }
                                 .listRowSeparator(.hidden)
                         }
                         .listStyle(.plain)
@@ -110,14 +110,14 @@ struct NotesList: View {
     }
     
     // MARK: - Lego
-    private var darkRoundedBackground: some View {
+    var darkRoundedBackground: some View {
         RoundedRectangle(cornerRadius: cornerRadius)
             .fill(Color("deleteActionViewBackground"))
             .frame(width: size.width, height: size.height)
             .standardShadow(false)
     }
     
-    private var textField: some View {
+    var textField: some View {
         ZStack {
             if textInput.isEmpty { placeholder }
             TextField("", text: $textInput)
@@ -132,13 +132,13 @@ struct NotesList: View {
         }
     }
     
-    private var placeholder: some View {
+    var placeholder: some View {
             Text(textFieldPlaceholder)
             .font(.system(size: 23))
             .foregroundColor(.lightGray)
     }
     
-    private func cell(_ item:String) -> some View {
+    func cell(_ item:String) -> some View {
         Text("\(item)")
         //text
             .font(.system(size: 25))
