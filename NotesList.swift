@@ -8,45 +8,48 @@
 import SwiftUI
 
 struct NotesList: View {
-    var items:[String]
-    var filteredItems:[String] {
-        if textInput.isEmpty { return Array(items) }
-        let filtered = items.filter {
+    var notes:[String]
+    let textInputLimit:Int
+    let initialNote:String
+    
+    private var filteredItems:[String] {
+        if textInput.isEmpty { return Array(notes) }
+        let filtered = notes.filter {
             $0.lowercased().contains(textInput.lowercased())
         }
         return Array(filtered)
     }
     
-    let size = CGSize(width: 220, height: 382)
-    let cornerRadius = CGFloat(24)
+    private let size = CGSize(width: 220, height: 382)
+    private let cornerRadius = CGFloat(24)
     
-    @FocusState var keyboardVisible:Bool
+    @State private var textInput = ""
+    @FocusState private var keyboardVisible:Bool
     
-    let textInputLimit:Int
-    let textFieldPlaceholder = "Search/Add Note"
-    let line0 = "No Matches"
-    let line1 = Text("Tap \(Image(systemName: "plus.app.fill")) to Save Note")
+    private let textFieldPlaceholder = "Search/Add Note"
+    private let line0 = "No Matches"
+    private let line1 = Text("Tap \(Image(systemName: "plus.app.fill")) to Save Note")
         .font(.system(size: 23))
-    let line2 = Text("Tap Hold \(Image(systemName: "plus.app.fill")) to Delete").font(.system(size: 21))
-    let line3 = Text("Empty Notes will not be saved").font(.system(size: 21))
+    private let line2 = Text("Tap Hold \(Image(systemName: "plus.app.fill")) to Delete").font(.system(size: 21))
+    private let line3 = Text("Empty Notes will not be saved").font(.system(size: 21))
     
-    func deleteTextInput() {
+    private func deleteTextInput() {
         UserFeedback.doubleHaptic(.rigid)
         textInput = ""
     }
     
-    func saveTextInputAndDismiss() {
+    private func saveTextInputAndDismiss() {
         guard !textInput.isEmpty else { return }
         
         saveNoteToCoredata(textInput)
         dismiss()
     }
     
-    func dismiss(closure: () ->()) {
+    private func dismiss(closure: () ->()) {
         closure()
     }
     
-    func saveTextInput() {
+    private func saveTextInput() {
         if initialNote == textInput || textInput.isEmpty { return }
         
         saveNoteToCoredata(textInput)
@@ -55,7 +58,7 @@ struct NotesList: View {
         PersistenceController.shared.save()
     }
     
-    var noteIsValid: Bool {
+    private var noteIsValid: Bool {
         let condition = !textInput.trimmingCharacters(in: CharacterSet.whitespaces).isEmpty
         
         if textInput.count > 0 && condition {
@@ -64,9 +67,6 @@ struct NotesList: View {
         
         return false
     }
-    
-    let initialNote:String
-    @State var textInput = ""
     
     var body: some View {
         ZStack {
@@ -114,19 +114,19 @@ struct NotesList: View {
     }
     
     // MARK: - Lego
-    var screenBackground: some View {
+    private var screenBackground: some View {
         Color("notesListScreenBackground").opacity(0.9)
             .ignoresSafeArea()
     }
     
-    var darkRoundedBackground: some View {
+    private var darkRoundedBackground: some View {
         RoundedRectangle(cornerRadius: cornerRadius)
             .fill(Color.background3)
             .frame(width: size.width, height: size.height)
             .standardShadow(false)
     }
     
-    var textField: some View {
+    private var textField: some View {
         ZStack {
             if textInput.isEmpty { placeholder }
             TextField("", text: $textInput)
@@ -141,13 +141,13 @@ struct NotesList: View {
         }
     }
     
-    var placeholder: some View {
+    private var placeholder: some View {
             Text(textFieldPlaceholder)
             .font(.system(size: 23))
             .foregroundColor(.lightGray)
     }
     
-    func cell(_ item:String) -> some View {
+    private func cell(_ item:String) -> some View {
         Text("\(item)")
         //text
             .font(.system(size: 25))
