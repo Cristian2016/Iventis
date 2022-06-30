@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct NotesList: View {
-    @State var items:[String]
+    var items:[String]
     var filteredItems:[String] {
         if textInput.isEmpty { return Array(items) }
         let filtered = items.filter {
