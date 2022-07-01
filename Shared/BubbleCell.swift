@@ -118,7 +118,7 @@ struct BubbleCell: View {
     
     // MARK: - Dependencies
     @StateObject var bubble:Bubble
-    @EnvironmentObject private var viewModel:ViewModel
+    @EnvironmentObject private var vm:ViewModel
     
     let stickyNoteOffset = CGSize(width: 0, height: -6)
     
@@ -145,11 +145,11 @@ struct BubbleCell: View {
     }
     
     // MARK: - Intents
-    private func userTappedHours() { viewModel.rankOfSelectedBubble = Int(bubble.rank) }
+    private func userTappedHours() { vm.rankOfSelectedBubble = Int(bubble.rank) }
     
     private func userTappedHundredths() {
         UserFeedback.singleHaptic(.heavy)
-        viewModel.toggleStart(bubble)
+        vm.toggleStart(bubble)
     }
     
     private func userTappedSeconds() {
@@ -160,7 +160,7 @@ struct BubbleCell: View {
         UserFeedback.singleHaptic(.heavy)
         
         //user intent model
-        viewModel.toggleStart(bubble)
+        vm.toggleStart(bubble)
     }
     
     private func userLongPressedSeconds() {
@@ -171,14 +171,14 @@ struct BubbleCell: View {
         UserFeedback.doubleHaptic(.heavy)
         
         //user intent model
-        viewModel.endSession(bubble)
+        vm.endSession(bubble)
     }
     
     ///user taps minutes or hours
     private func userWantsDetailView() {
-        if viewModel.rankOfSelectedBubble == nil {
-            viewModel.rankOfSelectedBubble = Int(bubble.rank)
-            viewModel.isDetailViewShowing = true
+        if vm.rankOfSelectedBubble == nil {
+            vm.rankOfSelectedBubble = Int(bubble.rank)
+            vm.isDetailViewShowing = true
         }
     }
         
@@ -210,14 +210,14 @@ struct BubbleCell: View {
         .swipeActions(edge: .leading, allowsFullSwipe: true) {
             
             //pin
-            Button { viewModel.togglePin(bubble) }
+            Button { vm.togglePin(bubble) }
         label: { Label { Text(bubble.isPinned ? "Unpin" : "Pin") }
             icon: { Image(systemName: bubble.isPinned ? "pin.slash.fill" : "pin.fill") } }
         .tint(bubble.isPinned ? .gray : .orange)
             
             //calendar
             Button {
-                viewModel.toggleCalendar(bubble)
+                vm.toggleCalendar(bubble)
                 CalendarManager.shared.shouldExportToCalendarAllSessions(of: bubble)
             }
         label: { Label { Text(calendarActionName) }
@@ -227,16 +227,16 @@ struct BubbleCell: View {
         .swipeActions(edge: .trailing, allowsFullSwipe: true) {
             //delete
             Button {
-                viewModel.showDeleteAction_bRank = Int(bubble.rank)
+                vm.showDeleteAction_bRank = Int(bubble.rank)
                 delayExecution(.now() + 0.2) {
-                    viewModel.isDetailViewShowing = false
+                    vm.isDetailViewShowing = false
                 }
             }
         label: { Label { Text("Delete") }
             icon: { Image.trash } }.tint(.red)
             
             //more options
-            Button { viewModel.showMoreOptions(bubble) }
+            Button { vm.showMoreOptions(bubble) }
         label: { Label { Text("More") }
             icon: { Image(systemName: "ellipsis.circle.fill") } }.tint(.lightGray)
         }
@@ -290,20 +290,20 @@ struct BubbleCell: View {
     fileprivate func toggleDetailView() {
         UserFeedback.singleHaptic(.medium)
         
-        viewModel.rankOfSelectedBubble = Int(bubble.rank)
+        vm.rankOfSelectedBubble = Int(bubble.rank)
         
         //ask viewModel
         let rank = Int(bubble.rank)
-        viewModel.userTogglesDetail(rank)
+        vm.userTogglesDetail(rank)
     }
     
     private var showDeleteActionView:Bool {
-        guard let actionViewBubbleRank = viewModel.showDeleteAction_bRank else { return false }
+        guard let actionViewBubbleRank = vm.showDeleteAction_bRank else { return false }
         return bubble.rank == actionViewBubbleRank
     }
     
     private var showDetailView:Bool {
-        guard let selectedBubbleRank = viewModel.rankOfSelectedBubble else { return false }
+        guard let selectedBubbleRank = vm.rankOfSelectedBubble else { return false }
         return bubble.rank == selectedBubbleRank
     }
 }
@@ -330,7 +330,7 @@ extension View {
 // MARK: - Little Helpers
 extension BubbleCell {
     // MARK: - Helpers
-    private func showNotesList () { viewModel.stickyNotesList_bRank = Int(bubble.rank) }
+    private func showNotesList () { vm.stickyNotesList_bRank = Int(bubble.rank) }
     
     private var calendarActionName:String { bubble.hasCalendar ? "Cal OFF" : "Cal ON" }
     

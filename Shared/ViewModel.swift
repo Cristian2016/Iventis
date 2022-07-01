@@ -344,6 +344,15 @@ class ViewModel: ObservableObject {
         
         return deleteView_YOffset
     }
+    
+    // MARK: -
+    func makeBubblesOnFirstAppLaunchEver() {
+        if UserDefaults.shared.bool(forKey: UserDefaults.Key.firstAppLaunchEver) {
+            print("makeBubblesOnFirstAppLaunchEver")
+        } else {
+            print("do not makeBubblesOnFirstAppLaunchEver")
+        }
+    }
 }
 
 extension ViewModel {

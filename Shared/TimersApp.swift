@@ -9,7 +9,7 @@ import SwiftUI
 
 @main
 struct TimersApp: App {
-    @AppStorage(Global.Key.firstAppLaunchEver) var firstAppLaunchEver = true
+    @AppStorage(UserDefaults.Key.firstAppLaunchEver) var firstAppLaunchEver = true
     
     var deleteViewOffsetComputed:Bool { vm.deleteViewOffset != nil }
     fileprivate var deleteViewShowing:Bool { vm.showDeleteAction_bRank != nil }
@@ -78,6 +78,10 @@ struct TimersApp: App {
             .onAppear {
                 delayExecution(.now() + 2) { firstAppLaunchEver = false }
 //                UIApplication.shared.isIdleTimerDisabled = true
+                
+                delayExecution(.now() + 1) {
+                    vm.makeBubblesOnFirstAppLaunchEver()
+                }
             }
         }
     }

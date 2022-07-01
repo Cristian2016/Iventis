@@ -40,10 +40,6 @@ struct Global {
         print(UIScreen.main.bounds.height)
         return dic[UIScreen.size.height] ?? 140
     }()
-    
-    struct Key {
-        static let firstAppLaunchEver = "firstAppLaunchEver"
-    }
 }
 
 extension Array {
@@ -254,22 +250,20 @@ extension Float {
 
 extension UserDefaults {
     struct Key {
-        static let rank = "rank"
+        ///bubble rank
+        static let  /* bubble */ rank =  /* bubble */ "rank"
         
         static let localNotificationsAuthorizationRequestedAlready = "localNotificationsAuthorizationRequestedAlready"
         static let calendarAuthorizationRequestedAlready = "calendarAuthorizationRequestedAlready"
-        static let ctsCount = "ctsCount"
         static let defaultCalendarIdentifier = "defaultCalendarIdentifier"
         
         static let notificationReceivalMoment = "notificationReceivalMoment"
         static let infoBannerNotShownAlready = "infoBannerNotShownAlready"
         
         static let widgetEnabledTimeBubble = "widgetEnabledTimeBubble"
-        static let isCoreDataShared = "isCoreDataShared"
         static let shouldExplainingTextBeVisible = "shouldExplainingTextBeVisible"
         
         static let firstAppLaunchEver = "firstAppLaunchEver"
-        static let quickStartGuidePresentedAlready = "quickStartGuidePresentedAlready"
     }
     
     static func generateRank() -> Int {
@@ -289,6 +283,8 @@ extension UserDefaults {
         let ud = UserDefaults(suiteName: String.appGroupName)!
         ud.set(value, forKey: UserDefaults.Key.rank)
     }
+    
+    static let shared = UserDefaults(suiteName: "group.com.Timers.container")!
 }
 
 public struct UserFeedback {
