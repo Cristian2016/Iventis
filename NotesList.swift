@@ -88,12 +88,20 @@ struct NotesList: View {
                     .overlay {
                         VStack {
                             Spacer(minLength: 10)
-                            textField.onSubmit { saveTextInputAndDismiss() }
+                            textField
+                                .onSubmit { saveTextInputAndDismiss() }
+                                .overlay {
+                                    if !textInput.isEmpty {
+                                        HStack {
+                                            Spacer()
+                                            remainingCharactersCounterView
+                                        }
+                                        .padding(.trailing)
+                                        .offset(y: 22)
+                                    }
+                                }
                             List {
-                                if filteredItems.isEmpty {
-                                    //                                emptyListAlert
-                                    
-                                } //1
+                                if filteredItems.isEmpty { emptyListAlert } //1
                                 
                                 ForEach (filteredItems, id: \.self) { item in
                                     cell(item)
@@ -108,7 +116,7 @@ struct NotesList: View {
                     }
                 Spacer()
             }
-            .padding([.top], 50)
+            .padding([.top], 45)
         }
         .onAppear {
             delayExecution(.now() + 0.05) {
@@ -118,8 +126,25 @@ struct NotesList: View {
     }
     
     // MARK: - Lego
+    private var emptyListAlert: some View {
+        HStack {
+            Spacer()
+            VStack (alignment: .leading, spacing: 4) {
+                Text(line0)
+                    .font(.system(size: 30))
+                    .background(Color.red)
+                if noteIsValid { StickyNote_InfoView() }
+                else { EmptyNote_InfoView() }
+            }
+            Spacer()
+        }
+        .foregroundColor(.white)
+        .background(Color("deleteActionViewBackground").padding(-250))
+    }
+    
     private var screenBackground: some View {
-        Color("notesListScreenBackground").opacity(0.9)
+        Color("notesListScreenBackground")
+            .opacity(0.9)
             .ignoresSafeArea()
     }
     
@@ -170,6 +195,12 @@ struct NotesList: View {
             }
     }
     
+    private var remainingCharactersCounterView:some View {
+        Text("\(textInputLimit - textInput.count)")
+            .font(.system(size: 18).weight(.medium))
+            .foregroundColor(.background2)
+    }
+    
     //External Actions
     //each View using this view has different code
     //implemented within closures
@@ -179,9 +210,3 @@ struct NotesList: View {
     var saveNoteToCoredata: (String) -> Void
     var selectExistingNote: (String) -> Void
 }
-
-//struct NotesList_Previews: PreviewProvider {
-//    static var previews: some View {
-//        NotesList()
-//    }
-//}

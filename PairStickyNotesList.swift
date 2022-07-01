@@ -12,26 +12,13 @@
 import SwiftUI
 
 struct PairStickyNotesList: View {
-    let pair:Pair  /* ⚠️ @StateObject pair:Pair instead?  */
-    @EnvironmentObject private var viewModel:ViewModel
-    @FetchRequest private var items:FetchedResults<PairSavedNote>
+    let pair:Pair
+    @EnvironmentObject private var vm:ViewModel
+    @FetchRequest private var pairSavedNotes:FetchedResults<PairSavedNote>
     @State private var textInput = "" //willSet and didSet do not work anymore
     
-    private var filteredItems:[PairSavedNote] {
-        if textInput.isEmpty { return Array(items) }
-        let filtered = items.filter { history in
-            history.note!.lowercased().contains(textInput.lowercased())
-        }
-        return Array(filtered)
-    }
-    
     private let textInputLimit = 12
-    private let textFieldPlaceholder = "Search/Add Note"
     private let line0 = "No Matches"
-    private let line1 = Text("Tap \(Image(systemName: "plus.app.fill")) to Save Note")
-        .font(.system(size: 23))
-    private let line2 = Text("Tap Hold \(Image(systemName: "plus.app.fill")) to Delete").font(.system(size: 21))
-    private let line3 = Text("Empty Notes will not be saved").font(.system(size: 21))
     
     let initialNote:String
     @FocusState var keyboardVisible:Bool
@@ -50,7 +37,7 @@ struct PairStickyNotesList: View {
 //            NSSortDescriptor(key: "bubble", ascending: false), //⚠️ crashes for some reason..
             NSSortDescriptor(key: "date", ascending: false)
         ]
-        _items = FetchRequest(entity: PairSavedNote.entity(), sortDescriptors: sorts, predicate: nil, animation: .default)
+        _pairSavedNotes = FetchRequest(entity: PairSavedNote.entity(), sortDescriptors: sorts, predicate: nil, animation: .default)
     }
     
     // MARK: -
@@ -71,114 +58,23 @@ struct PairStickyNotesList: View {
     
     // MARK: -
     var body: some View {
-        ZStack {
-            screenBackground
-                .onTapGesture {
-                    if noteIsValid { saveTextInput() }
-                    dismiss()
-                }
-                .gesture( swipeToDeleteTextInput )
-                .highPriorityGesture (
-                    LongPressGesture(minimumDuration: 0.3)
-                        .onEnded { _ in deleteTextInput() }
-                )
-            darkRoundedBackground
-                .overlay {
-                    VStack {
-                        Spacer(minLength: 10)
-                        textField.onSubmit { saveTextInputAndDismiss() }
-                        List {
-                            if filteredItems.isEmpty { emptyListAlert } //1
-                            
-                            ForEach (filteredItems) { cell($0) }
-                                .onDelete { viewModel.delete(filteredItems[$0.first!]) }
-                                .listRowSeparator(.hidden)
-                        }
-                        .listStyle(.plain)
-                        .environment(\.defaultMinListRowHeight, 8)
-                    }
-                    .clipShape(RoundedRectangle(cornerRadius: cornerRadius))
-                }
-        }
-        .offset(y: 10)
-        .ignoresSafeArea(.container, edges: .top)
-        .onAppear {
-            delayExecution(.now() + 0.05) {
-                withAnimation (.easeInOut(duration: 0.0)) { keyboardVisible = true }
-            }
-        }
+        NotesList(notes: pairSavedNotes.compactMap { $0.note },
+                  textInputLimit: textInputLimit,
+                  initialNote: initialNote,
+                  //actions
+                  dismiss: { dismiss() },
+                  deleteItem: { vm.delete(pairSavedNotes[$0!]) },
+                  saveNoteToCoredata: { vm.save($0, for: pair) },
+                  selectExistingNote: { chooseExitingNote($0) }
+        )
     }
     
-    // MARK: - Lego
-    private func cell(_ item:PairSavedNote) -> some View {
-        Text("\(item.note ?? "No Note")")
-        //text
-            .font(.system(size: 25))
-            .background( Rectangle()
-                .fill(item.note == pair.note ? Color.selectionGray : .clear)
-            )
-        //layout
-            .padding([.leading], 10)
-            .frame(height: 15)
-        //gestures
-            .onTapGesture {
-                UserFeedback.singleHaptic(.heavy)
-                pair.note = item.note
-                try? PersistenceController.shared.viewContext.save()
-                dismiss()
-            }
+    private func chooseExitingNote(_ note:String) {
+        UserFeedback.singleHaptic(.heavy)
+        pair.note = note
+        try? PersistenceController.shared.viewContext.save()
     }
     
-    private var emptyListAlert: some View {
-        HStack {
-            Spacer()
-            VStack (alignment: .leading, spacing: 4) {
-                Text(line0)
-                    .font(.system(size: 30))
-                    .background(Color.red)
-                if noteIsValid { StickyNote_InfoView() }
-                else { EmptyNote_InfoView() }
-            }
-            Spacer()
-        }
-        .foregroundColor(.white)
-        .background(Color("deleteActionViewBackground").padding(-250))
-    }
-    
-    private var screenBackground: some View {
-        Color("notesListScreenBackground").opacity(0.9)
-            .ignoresSafeArea()
-    }
-    
-    private var darkRoundedBackground: some View {
-        RoundedRectangle(cornerRadius: cornerRadius)
-            .fill(Color("deleteActionViewBackground"))
-            .frame(width: size.width, height: size.height)
-            .standardShadow(false)
-    }
-    
-    ///I use this because I couldn't find a way to center text placeholder on Text Field
-    private var placeholder: some View {
-            Text(textFieldPlaceholder)
-            .font(.system(size: 23))
-            .foregroundColor(.lightGray)
-    }
-    
-    private var textField: some View {
-        ZStack {
-            if textInput.isEmpty { placeholder }
-            TextField("", text: $textInput)
-        }
-        .font(.system(size: 24))
-        .foregroundColor(.white)
-        .padding()
-        .focused($keyboardVisible)
-        .textInputAutocapitalization(.words)
-        .onChange(of: self.textInput) {
-            if $0.count > textInputLimit { textInput = String(textInput.prefix(textInputLimit)) }
-        }
-    }
-        
     private var noteIsValid: Bool {
         let condition = !textInput.trimmingCharacters(in: CharacterSet.whitespaces).isEmpty
         
@@ -189,20 +85,13 @@ struct PairStickyNotesList: View {
         return false
     }
     
-    private var remainingCharactersCounterView:some View {
-        Text("\(textInputLimit - textInput.count)")
-            .font(.system(size: 18).weight(.medium))
-            .foregroundColor(.white)
-            .offset(x: 15, y: 15)
-    }
-    
     // MARK: -
-    private func dismiss() { viewModel.pairOfNotesList = nil }
+    private func dismiss() { vm.pairOfNotesList = nil }
     
     private func saveTextInput() {
         if initialNote == textInput || textInput.isEmpty { return }
                 
-        viewModel.save(textInput, for: pair)
+        vm.save(textInput, for: pair)
         
         UserFeedback.singleHaptic(.heavy)
         PersistenceController.shared.save()

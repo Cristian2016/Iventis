@@ -12,7 +12,7 @@ struct DeleteView: View {
     let bubble:Bubble?
     let bubbleColor:Color
     
-    @EnvironmentObject private var viewModel:ViewModel
+    @EnvironmentObject private var vm:ViewModel
     
     //internal properties
     let ratio = CGFloat(0.8037)
@@ -25,7 +25,7 @@ struct DeleteView: View {
     var body: some View {
             ZStack {
                 Color.white.opacity(0.01)
-                    .onTapGesture { viewModel.showDeleteAction_bRank = nil }
+                    .onTapGesture { vm.showDeleteAction_bRank = nil }
                 RoundedRectangle(cornerRadius: backgroundRadius)
                     .fill(backgroundColor)
                     .frame(width: width, height: width/ratio)
@@ -37,14 +37,14 @@ struct DeleteView: View {
                                 VStack {
                                     deleteBubbleView
                                         .onTapGesture { withAnimation {
-                                            viewModel.delete(bubble!)
-                                            viewModel.showDeleteAction_bRank = nil
+                                            vm.delete(bubble!)
+                                            vm.showDeleteAction_bRank = nil
                                         } }
                                     deleteHistoryView
                                         .onTapGesture { withAnimation {
                                             if !bubble!.sessions_.isEmpty {
-                                                viewModel.reset(bubble!)
-                                                viewModel.showDeleteAction_bRank = nil
+                                                vm.reset(bubble!)
+                                                vm.showDeleteAction_bRank = nil
                                             }
                                         } }
                                 }
@@ -55,7 +55,7 @@ struct DeleteView: View {
                         .padding()
                     }
             }
-            .offset(x: 0, y: viewModel.deleteViewOffset ?? 0)
+            .offset(x: 0, y: vm.deleteViewOffset ?? 0)
     }
     
     // MARK: - Init

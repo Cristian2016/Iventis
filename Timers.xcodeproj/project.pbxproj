@@ -38,6 +38,8 @@
 		1F641FFE281FF70100413E31 /* BottomDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F641FFD281FF70100413E31 /* BottomDetailView.swift */; };
 		1F6420062820186D00413E31 /* PairCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F6420052820186D00413E31 /* PairCell.swift */; };
 		1F64200A2820204400413E31 /* BottomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F6420092820204400413E31 /* BottomCell.swift */; };
+		1F74878B286EB64E0092674F /* BubbleCell_Info.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F74878A286EB64E0092674F /* BubbleCell_Info.swift */; };
+		1F74878D286ED1B10092674F /* StartInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F74878C286ED1B10092674F /* StartInfoView.swift */; };
 		1F82FB982831435A00E7C5AA /* HelpActionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F82FB972831435A00E7C5AA /* HelpActionButton.swift */; };
 		1F8B6965283790CF006540CB /* BubbleStickyNotesList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8B6964283790CF006540CB /* BubbleStickyNotesList.swift */; };
 		1F97B7DD2809B311002FFCA3 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F97B7DC2809B311002FFCA3 /* Colors.swift */; };
@@ -129,6 +131,8 @@
 		1F641FFD281FF70100413E31 /* BottomDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomDetailView.swift; sourceTree = "<group>"; };
 		1F6420052820186D00413E31 /* PairCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PairCell.swift; sourceTree = "<group>"; };
 		1F6420092820204400413E31 /* BottomCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomCell.swift; sourceTree = "<group>"; };
+		1F74878A286EB64E0092674F /* BubbleCell_Info.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BubbleCell_Info.swift; sourceTree = "<group>"; };
+		1F74878C286ED1B10092674F /* StartInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartInfoView.swift; sourceTree = "<group>"; };
 		1F82FB972831435A00E7C5AA /* HelpActionButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpActionButton.swift; sourceTree = "<group>"; };
 		1F8B6964283790CF006540CB /* BubbleStickyNotesList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BubbleStickyNotesList.swift; sourceTree = "<group>"; };
 		1F97B7DC2809B311002FFCA3 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
@@ -180,11 +184,12 @@
 		1F18B45A281FA9740080ADA6 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				1F542F91286D757000403F13 /* NotesList.swift */,
+				1F8B6964283790CF006540CB /* BubbleStickyNotesList.swift */,
+				1F1CF2F2286B5BD8007102F2 /* PairStickyNotesList.swift */,
 				1F18B456281FA6130080ADA6 /* PushView.swift */,
 				1F18B45B281FA9C90080ADA6 /* CalendarSticker.swift */,
 				1F61BE042822BAAA00B773F9 /* DeleteView.swift */,
-				1F8B6964283790CF006540CB /* BubbleStickyNotesList.swift */,
-				1F1CF2F2286B5BD8007102F2 /* PairStickyNotesList.swift */,
 				1F99AB5E286CA40D00977C9A /* PairStickyNoteButton.swift */,
 			);
 			name = Helpers;
@@ -212,7 +217,6 @@
 		1F5F4A4228093FAC00AF3442 = {
 			isa = PBXGroup;
 			children = (
-				1F542F91286D757000403F13 /* NotesList.swift */,
 				1FA355CE2832238E00F73111 /* Timers--iOS--Info.plist */,
 				1FA355CA2832186100F73111 /* CalendarManager.swift */,
 				1F3436002834FC4800A018CC /* NoteSticker.swift */,
@@ -245,6 +249,8 @@
 				1FE163AD280EE6F40050C6F5 /* LeftStrip.swift */,
 				1FA8F87D28367B7A00394B59 /* BubbleStickyNote.swift */,
 				1F5F4A9C280945C700AF3442 /* BubbleCell.swift */,
+				1F74878A286EB64E0092674F /* BubbleCell_Info.swift */,
+				1F74878C286ED1B10092674F /* StartInfoView.swift */,
 				1FB7D57B2862F0300085C2BE /* PlusButton.swift */,
 				1F100CA62809493400A3A3C2 /* BackgroundTimer.swift */,
 			);
@@ -442,12 +448,14 @@
 				1FA8F87E28367B7A00394B59 /* BubbleStickyNote.swift in Sources */,
 				1F5A0F6C282641D00075E86B /* EmptyHistoryAlertView.swift in Sources */,
 				1F542F92286D757000403F13 /* NotesList.swift in Sources */,
+				1F74878D286ED1B10092674F /* StartInfoView.swift in Sources */,
 				1F98D78A286AF8A300C0A973 /* DeleteRow_InfoView.swift in Sources */,
 				1FE163AE280EE6F40050C6F5 /* LeftStrip.swift in Sources */,
 				1F641FFE281FF70100413E31 /* BottomDetailView.swift in Sources */,
 				1F5F4A6128093FAF00AF3442 /* Persistence.swift in Sources */,
 				1F48F55A286AE5B30071386A /* EmptyNote_InfoView.swift in Sources */,
 				1F9B6AF0280950D600C0A725 /* ViewModel.swift in Sources */,
+				1F74878B286EB64E0092674F /* BubbleCell_Info.swift in Sources */,
 				1F5F4A992809456E00AF3442 /* BubbleList.swift in Sources */,
 				1F5A0F6F282647A80075E86B /* DetailView.swift in Sources */,
 				1FFC8BB928142F040059EF2E /* Pair Properties.swift in Sources */,

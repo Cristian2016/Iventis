@@ -8,22 +8,27 @@
 import SwiftUI
 
 struct TapHold: View {
+    let ratio = CGFloat(1.66)
+    let fontSize: CGFloat
+    
     var body: some View {
-        let width = UIScreen.main.bounds.width
         ZStack {
             Image(systemName: "circle.fill")
-                .font(.system(size: width * 0.2))
-            Image(systemName: "clock.fill")
-                .font(.system(size: width * 0.12))
-                .foregroundColor(.white)
-                .offset(x: 0, y: -11)
+                .font(.system(size: fontSize * ratio))
+            VStack {
+                Image(systemName: "clock.fill")
+                    .font(.system(size: fontSize))
+                    .foregroundColor(.white)
+                Spacer()
+            }
         }
+        .fixedSize(horizontal: false, vertical: true)
         .foregroundColor(.green)
     }
 }
 
 struct SwiftUIView_Previews: PreviewProvider {
     static var previews: some View {
-        TapHold()
+        TapHold(fontSize: 60)
     }
 }

@@ -9,14 +9,16 @@ import SwiftUI
 
 @main
 struct TimersApp: App {
-    var deleteViewOffsetComputed:Bool { viewModel.deleteViewOffset != nil }
-    fileprivate var deleteViewShowing:Bool { viewModel.showDeleteAction_bRank != nil }
+    @AppStorage(Global.Key.firstAppLaunchEver) var firstAppLaunchEver = true
     
-    fileprivate var bubbleNotesShowing:Bool { viewModel.stickyNotesList_bRank != nil }
+    var deleteViewOffsetComputed:Bool { vm.deleteViewOffset != nil }
+    fileprivate var deleteViewShowing:Bool { vm.showDeleteAction_bRank != nil }
+    
+    fileprivate var bubbleNotesShowing:Bool { vm.stickyNotesList_bRank != nil }
     
     @Environment(\.scenePhase) var scenePhase
     let viewContext = PersistenceController.shared.container.viewContext
-    @StateObject var viewModel = ViewModel()
+    @StateObject var vm = ViewModel()
     @State var visibility = NavigationSplitViewVisibility.doubleColumn
     
     //the root view of scene is a NavigationSplitView
@@ -27,11 +29,11 @@ struct TimersApp: App {
                     ViewHierarchy()
                 } detail: {
                     VStack {
-                        if let rank = viewModel.rankOfSelectedBubble {
+                        if let rank = vm.rankOfSelectedBubble {
                             //bubbleCell for iOS
                             if !UIDevice.isIPad {
                                 List {
-                                    if let bubble = viewModel.bubble(for: rank) {
+                                    if let bubble = vm.bubble(for: rank) {
                                         BubbleCell(bubble).listRowSeparator(.hidden)
                                     }
                                 }
@@ -39,7 +41,7 @@ struct TimersApp: App {
                                 .listStyle(.plain)
                                 .frame(height: 160)
                             }
-                            DetailView(viewModel.rankOfSelectedBubble)
+                            DetailView(vm.rankOfSelectedBubble)
                         } else {
                             VStack {
                                 Text("Bubble Detail")
@@ -52,30 +54,29 @@ struct TimersApp: App {
                 .accentColor(.label)
                 
                 if deleteViewOffsetComputed && deleteViewShowing {
-                    let bubble = viewModel.bubble(for: viewModel.showDeleteAction_bRank!)
+                    let bubble = vm.bubble(for: vm.showDeleteAction_bRank!)
                     DeleteView(bubble)
                 }
                 
                 if bubbleNotesShowing {
-                    BubbleStickyNotesList($viewModel.stickyNotesList_bRank)
+                    BubbleStickyNotesList($vm.stickyNotesList_bRank)
                 }
-                if let pair = viewModel.pairOfNotesList { PairStickyNotesList(pair) }
+                if let pair = vm.pairOfNotesList { PairStickyNotesList(pair) }
             }
             .ignoresSafeArea()
             .environment(\.managedObjectContext, viewContext)
-            .environmentObject(viewModel)
+            .environmentObject(vm)
             .onChange(of: scenePhase) {
                 switch $0 {
-                    case .active:
-                        viewModel.backgroundTimer(.start)
-                    case .background:
-                        viewModel.backgroundTimer(.pause)
+                    case .active: vm.backgroundTimer(.start)
+                    case .background: vm.backgroundTimer(.pause)
                     case .inactive: //show notication center, app switcher
                         break
                     @unknown default: fatalError()
                 }
             }
             .onAppear {
+                delayExecution(.now() + 2) { firstAppLaunchEver = false }
 //                UIApplication.shared.isIdleTimerDisabled = true
             }
         }

@@ -11,7 +11,7 @@ import Combine
 
 struct BubbleList: View {
     @Environment(\.managedObjectContext) private var viewContext
-    @EnvironmentObject private var viewModel:ViewModel
+    @EnvironmentObject private var vm:ViewModel
     @SectionedFetchRequest var results:SectionedFetchResults<Bool, Bubble>
     
     // MARK: -
@@ -19,7 +19,7 @@ struct BubbleList: View {
         ZStack {
             if isListEmpty { EmptyListView() }
             else {
-                List (results, selection: $viewModel.rankOfSelectedBubble) { section in
+                List (results, selection: $vm.rankOfSelectedBubble) { section in
                     Section {
                         ForEach (section) { BubbleCell($0) }
                             .onMove {
@@ -28,10 +28,10 @@ struct BubbleList: View {
                                 
                                 if moveAtTheBottom {
                                     let destRank = section[$1 - 1].rank
-                                    viewModel.reorderRanks(sourceRank, destRank, true)
+                                    vm.reorderRanks(sourceRank, destRank, true)
                                 } else {
                                     let destRank = section[$1].rank
-                                    viewModel.reorderRanks(sourceRank, destRank)
+                                    vm.reorderRanks(sourceRank, destRank)
                                 }
                             }
                     } header: { headerTitle(for: section.id.description) }
@@ -46,18 +46,16 @@ struct BubbleList: View {
             }
             PlusButton()
             
-            if !notesShowing {
-                LeftStrip($viewModel.isPaletteShowing, isListEmpty)
-            }
+            if !notesShowing { LeftStrip($vm.isPaletteShowing, isListEmpty) }
             
-            PaletteView($viewModel.isPaletteShowing)
+            PaletteView($vm.isPaletteShowing)
         }
         .onPreferenceChange(BubbleCellLow_Key.self) { new in
             let frame = new.frame
             if frame == .zero { return }
             
-            self.viewModel.deleteViewOffset =
-            viewModel.compute_deleteView_YOffset(for: new.frame)
+            self.vm.deleteViewOffset =
+            vm.compute_deleteView_YOffset(for: new.frame)
         }
     }
     
@@ -140,7 +138,7 @@ struct BubbleCellLow_Key:PreferenceKey {
 
 // MARK: - Little Helpers
 extension BubbleList {
-    fileprivate var notesShowing:Bool { viewModel.stickyNotesList_bRank != nil }
+    fileprivate var notesShowing:Bool { vm.stickyNotesList_bRank != nil }
         
     fileprivate var isListEmpty:Bool { results.isEmpty }
 }

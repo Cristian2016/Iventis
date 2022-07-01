@@ -13,7 +13,7 @@ import SwiftUI
 
 struct BubbleStickyNotesList: View {
     let bubble:Bubble  /* ⚠️ do not use @StateObject bubble:Bubble! because each time Bubble.bubbleCell_Components update, bubble will emit and body will get recomputed each mother fucking second!!!  */
-    @EnvironmentObject private var viewModel:ViewModel
+    @EnvironmentObject private var vm:ViewModel
     @FetchRequest private var bubbleSavedNotes:FetchedResults<BubbleSavedNote>
     @State private var textInput = "" //willSet and didSet do not work anymore
     
@@ -77,26 +77,19 @@ struct BubbleStickyNotesList: View {
                   initialNote: initialNote,
                   //actions
                   dismiss: { dismiss() },
-                  deleteItem: { viewModel.delete(bubbleSavedNotes[$0!]) },
-                  saveNoteToCoredata: { viewModel.save($0, for: bubble) },
+                  deleteItem: { vm.delete(bubbleSavedNotes[$0!]) },
+                  saveNoteToCoredata: { vm.save($0, for: bubble) },
                   selectExistingNote: { chooseExitingNote($0) }
         )
     }
-    
-    private var remainingCharactersCounterView:some View {
-        Text("\(textInputLimit - textInput.count)")
-            .font(.system(size: 18).weight(.medium))
-            .foregroundColor(.white)
-            .offset(x: 15, y: 15)
-    }
-    
+        
     // MARK: -
     private func dismiss() { showAddNotes_bRank = nil }
     
     private func saveTextInput() {
         if initialNote == textInput || textInput.isEmpty { return }
         
-        viewModel.save(textInput, for: bubble)
+        vm.save(textInput, for: bubble)
         UserFeedback.singleHaptic(.heavy)
         
         PersistenceController.shared.save()

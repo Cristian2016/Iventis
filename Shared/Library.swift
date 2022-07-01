@@ -40,6 +40,10 @@ struct Global {
         print(UIScreen.main.bounds.height)
         return dic[UIScreen.size.height] ?? 140
     }()
+    
+    struct Key {
+        static let firstAppLaunchEver = "firstAppLaunchEver"
+    }
 }
 
 extension Array {
