@@ -247,6 +247,7 @@ class ViewModel: ObservableObject {
         return nil
     }
     
+    ///save to CoreData either bubble.note or pair.note
     func save(_ textInput:String, forObject object:NSManagedObject) {
         var note = textInput
         note.removeWhiteSpaceAtBothEnds()
@@ -276,9 +277,6 @@ class ViewModel: ObservableObject {
                 pair.addToHistory(newHistoryItem)
             default: return
         }
-
-        //set note
-        
     }
     
     //delete BubbleSticky in List

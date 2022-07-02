@@ -53,8 +53,6 @@ struct NotesList: View {
         if initialNote == textInput || textInput.isEmpty { return }
         
         saveNoteToCoredata(textInput)
-        
-        UserFeedback.singleHaptic(.heavy)
         PersistenceController.shared.save()
     }
     

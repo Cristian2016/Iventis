@@ -97,6 +97,7 @@ struct BubbleNotesList: View {
         if bubbleSavedNotes.compactMap({ $0.note }).contains(trimmedNote) { return }
         
         vm.save(note, forObject: bubble)
+        UserFeedback.singleHaptic(.heavy)
     }
 }
 

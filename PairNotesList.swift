@@ -80,6 +80,7 @@ struct PairNotesList: View {
         
         //save note to CoreData if no duplicates
         vm.save(trimmedNote, forObject: pair)
+        UserFeedback.singleHaptic(.heavy)
     }
     
     private var noteIsValid: Bool {
