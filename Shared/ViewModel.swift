@@ -255,13 +255,13 @@ class ViewModel: ObservableObject {
         //set note
         bubble.note = note
         bubble.isNoteHidden = false
-                
+        
         //add new item to bubbleHistory
         let context = bubble.managedObjectContext
-        let historyItem = BubbleSavedNote(context: context!)
-        historyItem.date = Date()
-        historyItem.note = note
-        bubble.addToHistory(historyItem)
+        let newHistoryItem = BubbleSavedNote(context: context!)
+        newHistoryItem.date = Date()
+        newHistoryItem.note = note
+        bubble.addToHistory(newHistoryItem)
     }
     
     func save(_ textInput:String, for pair:Pair) {
@@ -270,13 +270,14 @@ class ViewModel: ObservableObject {
 
         //set note
         pair.note = note
+        pair.isNoteHidden = false
 
         //add new item to bubbleHistory
         let context = pair.managedObjectContext
-        let historyItem = PairSavedNote(context: context!)
-        historyItem.date = Date()
-        historyItem.note = note
-        pair.addToHistory(historyItem)
+        let newHistoryItem = PairSavedNote(context: context!)
+        newHistoryItem.date = Date()
+        newHistoryItem.note = note
+        pair.addToHistory(newHistoryItem)
     }
     
     //delete BubbleSticky in List

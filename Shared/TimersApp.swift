@@ -9,7 +9,9 @@ import SwiftUI
 
 @main
 struct TimersApp: App {
-    @AppStorage(UserDefaults.Key.firstAppLaunchEver) var firstAppLaunchEver = true
+    //store firstAppLaunchEver key in the shared UserDefaults, NOT in UserDefaults.standard
+    @AppStorage(UserDefaults.Key.firstAppLaunchEver, store: UserDefaults.shared)
+    var firstAppLaunchEver = true
     
     var deleteViewOffsetComputed:Bool { vm.deleteViewOffset != nil }
     fileprivate var deleteViewShowing:Bool { vm.showDeleteAction_bRank != nil }
@@ -76,12 +78,17 @@ struct TimersApp: App {
                 }
             }
             .onAppear {
-                delayExecution(.now() + 2) { firstAppLaunchEver = false }
-//                UIApplication.shared.isIdleTimerDisabled = true
+//                delayExecution(.now() + 2) { firstAppLaunchEver = false }
+////                UIApplication.shared.isIdleTimerDisabled = true
+//
+//                firstAppLaunchEver = false
                 
-                delayExecution(.now() + 1) {
-                    vm.makeBubblesOnFirstAppLaunchEver()
+                delayExecution(.now() + 5) {
+                    print("key \(UserDefaults.shared.value(forKey: UserDefaults.Key.firstAppLaunchEver) as? Bool)")
+//                    print("key \(UserDefaults.shared.bool(forKey: UserDefaults.Key.firstAppLaunchEver))")
+//                    vm.makeBubblesOnFirstAppLaunchEver()
                 }
+                
             }
         }
     }

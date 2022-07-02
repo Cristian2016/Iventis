@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct NotesList: View {
+struct StickyNotesList: View {
     var notes:[String]
     let textInputLimit:Int
     let initialNote:String
@@ -17,7 +17,7 @@ struct NotesList: View {
         let filtered = notes.filter {
             $0.lowercased().contains(textInput.lowercased())
         }
-        return Array(Set(filtered)) //Array(Set to avoid duplicates
+        return filtered //Array(Set to avoid duplicates
     }
     
     private let size = CGSize(width: 220, height: 382)
