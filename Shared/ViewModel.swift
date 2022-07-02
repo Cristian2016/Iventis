@@ -3,7 +3,7 @@
 //  Timers
 //
 //  Created by Cristian Lapusan on 15.04.2022.
-//
+//  CoreData constraints https://www.youtube.com/watch?v=NZIlmRSB8l8
 
 import Foundation
 import SwiftUI
@@ -237,8 +237,7 @@ class ViewModel: ObservableObject {
     func index(of rank:Int64) -> Int? {
         let request = Bubble.fetchRequest()
         request.sortDescriptors = [NSSortDescriptor(key: "rank", ascending: false)]
-        let context = PersistenceController.shared.viewContext
-        let bubbles = try! context.fetch(request)
+        let bubbles = try! PersistenceController.shared.viewContext.fetch(request)
         
         for (index, bubble) in bubbles.enumerated() {
             if bubble.rank == rank { return index }
