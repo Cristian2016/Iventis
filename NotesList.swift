@@ -56,11 +56,10 @@ struct NotesList: View {
         PersistenceController.shared.save()
     }
     
+    ///if "" or "       " note is not valid
     private var noteIsValid: Bool {
         let allWhiteSpaces = textInput.trimmingCharacters(in: CharacterSet.whitespaces).isEmpty
-        
-        if !textInput.isEmpty > 0 && !allWhiteSpaces { return true }
-        
+        if !textInput.isEmpty && !allWhiteSpaces { return true }
         return false
     }
     
