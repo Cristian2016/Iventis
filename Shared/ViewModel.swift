@@ -264,6 +264,9 @@ class ViewModel: ObservableObject {
                 newHistoryItem.date = Date()
                 newHistoryItem.note = note
                 bubble.addToHistory(newHistoryItem)
+                
+                CalendarManager.shared.updateExistingEvent(.title(bubble))
+                
             case "Pair" :
                 let pair = object as! Pair
                 pair.note = note
@@ -275,6 +278,9 @@ class ViewModel: ObservableObject {
                 newHistoryItem.date = Date()
                 newHistoryItem.note = note
                 pair.addToHistory(newHistoryItem)
+                
+                CalendarManager.shared.updateExistingEvent(.notes(pair.session!))
+                
             default: return
         }
     }

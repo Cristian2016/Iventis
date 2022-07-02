@@ -60,14 +60,8 @@ struct PairNotesList: View {
                   dismiss: { dismiss() },
                   deleteItem: { vm.delete(pairSavedNotes[$0!]) },
                   saveNoteToCoredata: { saveNoteToCoreData($0, for: pair) },
-                  selectExistingNote: { chooseExitingNote($0) }
+                  selectExistingNote: { selectExitingNote($0) }
         )
-    }
-    
-    private func chooseExitingNote(_ note:String) {
-        UserFeedback.singleHaptic(.heavy)
-        pair.note = note
-        try? PersistenceController.shared.viewContext.save()
     }
     
     private func saveNoteToCoreData(_ note:String, for pair: Pair) {
@@ -95,6 +89,8 @@ struct PairNotesList: View {
         UserFeedback.singleHaptic(.heavy)
         pair.note = note
         try? PersistenceController.shared.viewContext.save()
+        
+        CalendarManager.shared.updateExistingEvent(.notes(pair.session!))
     }
     
     private var noteIsValid: Bool {

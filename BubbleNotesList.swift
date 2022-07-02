@@ -79,7 +79,6 @@ struct BubbleNotesList: View {
     private func dismiss() { showAddNotes_bRank = nil }
     
     private func selectExitingNote(_ note:String) {
-        print(#function)
         var trimmedNote = note
         trimmedNote.removeWhiteSpaceAtBothEnds()
         
