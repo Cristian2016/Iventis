@@ -94,7 +94,9 @@ struct NotesList: View {
                     }
                 Spacer()
             }
-            .padding([.top], 45)
+            .padding([.top])
+            .padding([.top])
+            .padding([.top])
         }
         .onAppear {
             delayExecution(.now() + 0.05) {
