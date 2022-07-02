@@ -76,11 +76,25 @@ struct PairNotesList: View {
         trimmedNote.removeWhiteSpaceAtBothEnds()
         
         //avoid duplicates
-        if pairSavedNotes.compactMap({ $0.note }).contains(trimmedNote) { return }
+        if pairSavedNotes.compactMap({ $0.note }).contains(trimmedNote) {
+            selectExitingNote(trimmedNote)
+            return
+        }
         
         //save note to CoreData if no duplicates
         vm.save(trimmedNote, forObject: pair)
         UserFeedback.singleHaptic(.heavy)
+    }
+    
+    private func selectExitingNote(_ note:String) {
+        var trimmedNote = note
+        trimmedNote.removeWhiteSpaceAtBothEnds()
+        
+        if initialNote == trimmedNote { return }
+        
+        UserFeedback.singleHaptic(.heavy)
+        pair.note = note
+        try? PersistenceController.shared.viewContext.save()
     }
     
     private var noteIsValid: Bool {

@@ -79,6 +79,10 @@ struct BubbleNotesList: View {
     private func dismiss() { showAddNotes_bRank = nil }
     
     private func selectExitingNote(_ note:String) {
+        var trimmedNote = note
+        trimmedNote.removeWhiteSpaceAtBothEnds()
+        
+        if initialNote == trimmedNote { return }
         UserFeedback.singleHaptic(.heavy)
         bubble.note = note
         try? PersistenceController.shared.viewContext.save()
@@ -90,7 +94,10 @@ struct BubbleNotesList: View {
         
         var trimmedNote = note
         trimmedNote.removeWhiteSpaceAtBothEnds()
-        if bubbleSavedNotes.compactMap({ $0.note }).contains(trimmedNote) { return }
+        if bubbleSavedNotes.compactMap({ $0.note }).contains(trimmedNote) {
+            selectExitingNote(trimmedNote)
+            return
+        }
         
         vm.save(note, forObject: bubble)
         UserFeedback.singleHaptic(.heavy)
