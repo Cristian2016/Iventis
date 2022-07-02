@@ -317,17 +317,6 @@ class ViewModel: ObservableObject {
     }
     
     // MARK: -
-    func sortedShiftedOldNotes() -> [BubbleSavedNote] {
-        let request = BubbleSavedNote.fetchRequest()
-//        let sorts  = [
-//            NSSortDescriptor(key: "bubble", ascending: false),
-//            NSSortDescriptor(key: "date", ascending: false)
-//        ]
-//        request.sortDescriptors = sorts
-        let notes = try? PersistenceController.shared.viewContext.fetch(request)
-        return notes ?? []
-    }
-    
     func compute_deleteView_YOffset(for frame:CGRect) -> CGFloat {
         guard !isDetailViewShowing else { return 0 }
         
