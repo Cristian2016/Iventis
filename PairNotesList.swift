@@ -71,12 +71,14 @@ struct PairNotesList: View {
     }
     
     private func saveNoteToCoreData(_ note:String, for pair: Pair) {
-        //avoid duplicates
-        //save note to CoreData if no duplicates
-        
+        //clean up textInput by removing white spaces
         var trimmedNote = note
         trimmedNote.removeWhiteSpaceAtBothEnds()
+        
+        //avoid duplicates
         if pairSavedNotes.compactMap({ $0.note }).contains(trimmedNote) { return }
+        
+        //save note to CoreData if no duplicates
         vm.save(trimmedNote, forObject: pair)
     }
     
