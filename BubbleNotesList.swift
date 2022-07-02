@@ -65,10 +65,6 @@ struct BubbleNotesList: View {
                 }
             }
     }
-    private func saveTextAndDismiss() {
-        saveTextInput()
-        dismiss()
-    }
         
     // MARK: -
     var body: some View {
@@ -78,7 +74,7 @@ struct BubbleNotesList: View {
                   //actions
                   dismiss: { dismiss() },
                   deleteItem: { vm.delete(bubbleSavedNotes[$0!]) },
-                  saveNoteToCoredata: { vm.save($0, for: bubble) },
+                  saveNoteToCoredata: { saveNoteToCoreData($0, for: bubble) },
                   selectExistingNote: { chooseExitingNote($0) }
         )
     }
@@ -86,19 +82,20 @@ struct BubbleNotesList: View {
     // MARK: -
     private func dismiss() { showAddNotes_bRank = nil }
     
-    private func saveTextInput() {
-        if initialNote == textInput || textInput.isEmpty { return }
-        
-        vm.save(textInput, for: bubble)
-        UserFeedback.singleHaptic(.heavy)
-        
-        PersistenceController.shared.save()
-    }
-    
     private func chooseExitingNote(_ note:String) {
         UserFeedback.singleHaptic(.heavy)
         bubble.note = note
         try? PersistenceController.shared.viewContext.save()
+    }
+    
+    private func saveNoteToCoreData(_ note:String, for bubble: Bubble) {
+        var trimmedNote = note
+        trimmedNote.removeWhiteSpaceAtBothEnds()
+        if bubbleSavedNotes.compactMap({ $0.note }).contains(trimmedNote) {
+            print("will note save")
+            return
+        }
+        vm.save(note, for: bubble)
     }
 }
 
