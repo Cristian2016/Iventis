@@ -78,17 +78,8 @@ struct NotesList: View {
                         VStack {
                             Spacer(minLength: 10)
                             textField
-                                .onSubmit { saveTextInputAndDismiss() }
-                                .overlay {
-                                    if !textInput.isEmpty {
-                                        HStack {
-                                            Spacer()
-                                            remainingCharactersCounterView
-                                        }
-                                        .padding(.trailing)
-                                        .offset(y: 22)
-                                    }
-                                }
+                                .overlay { remainingCharactersCounterView }
+                                .onSubmit { saveTextInputAndDismiss() } //user tapped Enter key
                             List {
                                 if filteredItems.isEmpty { emptyListAlert } //1
                                 
@@ -184,10 +175,18 @@ struct NotesList: View {
             }
     }
     
+    @ViewBuilder
     private var remainingCharactersCounterView:some View {
-        Text("\(textInputLimit - textInput.count)")
-            .font(.system(size: 18).weight(.medium))
-            .foregroundColor(.background2)
+        if !textInput.isEmpty {
+            HStack {
+                Spacer()
+                Text("\(textInputLimit - textInput.count)")
+                    .font(.system(size: 18).weight(.medium))
+                    .foregroundColor(.background2)
+            }
+            .padding(.trailing)
+            .offset(y: 22)
+        }
     }
     
     //External Actions
