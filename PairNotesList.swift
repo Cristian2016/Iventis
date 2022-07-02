@@ -41,11 +41,6 @@ struct PairNotesList: View {
     }
     
     // MARK: -
-    private func saveTextInputAndDismiss() {
-        saveTextInput()
-        dismiss()
-    }
-    
     func deleteTextInput() {
         UserFeedback.doubleHaptic(.rigid)
         textInput = ""
@@ -82,7 +77,7 @@ struct PairNotesList: View {
         var trimmedNote = note
         trimmedNote.removeWhiteSpaceAtBothEnds()
         if pairSavedNotes.compactMap({ $0.note }).contains(trimmedNote) { return }
-        vm.save(note, for: pair)
+        vm.save(trimmedNote, forObject: pair)
     }
     
     private var noteIsValid: Bool {
@@ -97,15 +92,6 @@ struct PairNotesList: View {
     
     // MARK: -
     private func dismiss() { vm.pairOfNotesList = nil }
-    
-    private func saveTextInput() {
-        if initialNote == textInput || textInput.isEmpty { return }
-                
-        vm.save(textInput, for: pair)
-        
-        UserFeedback.singleHaptic(.heavy)
-        PersistenceController.shared.save()
-    }
 }
 
 //struct PairStickyNotesList_Previews: PreviewProvider {

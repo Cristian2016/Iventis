@@ -95,7 +95,8 @@ struct BubbleNotesList: View {
         var trimmedNote = note
         trimmedNote.removeWhiteSpaceAtBothEnds()
         if bubbleSavedNotes.compactMap({ $0.note }).contains(trimmedNote) { return }
-        vm.save(note, for: bubble)
+        
+        vm.save(note, forObject: bubble)
     }
 }
 

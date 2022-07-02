@@ -8,6 +8,7 @@
 import Foundation
 import SwiftUI
 import Combine
+import CoreData
 
 
 class ViewModel: ObservableObject {
@@ -246,37 +247,38 @@ class ViewModel: ObservableObject {
         return nil
     }
     
-    ///sets a bubbleNote and saves notes to bubble notes history
-    func save(_ textInput:String, for bubble:Bubble) {
+    func save(_ textInput:String, forObject object:NSManagedObject) {
         var note = textInput
         note.removeWhiteSpaceAtBothEnds()
         
+        switch object.entity.name {
+            case "Bubble":
+                let bubble = object as! Bubble
+                bubble.note = note
+                bubble.isNoteHidden = false
+
+                //add new item to bubbleHistory
+                let context = bubble.managedObjectContext
+                let newHistoryItem = BubbleSavedNote(context: context!)
+                newHistoryItem.date = Date()
+                newHistoryItem.note = note
+                bubble.addToHistory(newHistoryItem)
+            case "Pair" :
+                let pair = object as! Pair
+                pair.note = note
+                pair.isNoteHidden = false
+
+                //add new item to bubbleHistory
+                let context = pair.managedObjectContext
+                let newHistoryItem = PairSavedNote(context: context!)
+                newHistoryItem.date = Date()
+                newHistoryItem.note = note
+                pair.addToHistory(newHistoryItem)
+            default: return
+        }
+
         //set note
-        bubble.note = note
-        bubble.isNoteHidden = false
         
-        //add new item to bubbleHistory
-        let context = bubble.managedObjectContext
-        let newHistoryItem = BubbleSavedNote(context: context!)
-        newHistoryItem.date = Date()
-        newHistoryItem.note = note
-        bubble.addToHistory(newHistoryItem)
-    }
-    
-    func save(_ textInput:String, for pair:Pair) {
-        var note = textInput
-        note.removeWhiteSpaceAtBothEnds()
-
-        //set note
-        pair.note = note
-        pair.isNoteHidden = false
-
-        //add new item to bubbleHistory
-        let context = pair.managedObjectContext
-        let newHistoryItem = PairSavedNote(context: context!)
-        newHistoryItem.date = Date()
-        newHistoryItem.note = note
-        pair.addToHistory(newHistoryItem)
     }
     
     //delete BubbleSticky in List
