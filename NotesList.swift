@@ -83,9 +83,7 @@ struct NotesList: View {
                             List {
                                 if filteredItems.isEmpty { emptyListAlert } //1
                                 
-                                ForEach (filteredItems, id: \.self) { item in
-                                    cell(item)
-                                }
+                                ForEach (filteredItems, id: \.self) { cell($0) }
                                 .onDelete { deleteItem($0.first!) }
                                 .listRowSeparator(.hidden)
                             }
