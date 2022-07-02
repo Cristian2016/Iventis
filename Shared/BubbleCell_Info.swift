@@ -48,9 +48,7 @@ struct BubbleCell_Info: View {
         }
     }
     
-    private var bubbleStickyNote:some View {
-        Push(.topLeft) { BubbleStickyNote() }
-    }
+    private var bubbleNote:some View { Push(.topLeft) { BubbleNote() } }
     
     var timeComponents: some View {
         HStack (spacing: BubbleCell.metrics.spacing) {

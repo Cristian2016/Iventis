@@ -120,7 +120,7 @@ struct BubbleCell: View {
     @StateObject var bubble:Bubble
     @EnvironmentObject private var vm:ViewModel
     
-    let stickyNoteOffset = CGSize(width: 0, height: -6)
+    private let noteOffset = CGSize(width: 0, height: -6)
     
     // MARK: -
     @State private var isSecondsTapped = false
@@ -138,7 +138,7 @@ struct BubbleCell: View {
         PersistenceController.shared.save()
     }
     
-    func handleStickyNoteTap() {
+    func handleNoteTap() {
         UserFeedback.singleHaptic(.light)
         bubble.isNoteHidden.toggle()
         PersistenceController.shared.save()
@@ -200,9 +200,9 @@ struct BubbleCell: View {
         }
         //subviews
         .overlay { if !noNote {
-            bubbleStickyNote
-                .offset(stickyNoteOffset)
-                .onTapGesture { handleStickyNoteTap() }
+            bubbleNote
+                .offset(noteOffset)
+                .onTapGesture { handleNoteTap() }
         } } //noteView
         .overlay { if bubble.hasCalendar && noNote { calendarView } } //calendar symbol
         //gestures
@@ -279,9 +279,9 @@ struct BubbleCell: View {
         }
     }
         
-    private var bubbleStickyNote:some View {
+    private var bubbleNote:some View {
         Push(.topLeft) {
-            BubbleStickyNote().environmentObject(bubble)
+            BubbleNote().environmentObject(bubble)
         }
     }
     
@@ -330,7 +330,7 @@ extension View {
 // MARK: - Little Helpers
 extension BubbleCell {
     // MARK: - Helpers
-    private func showNotesList () { vm.stickyNotesList_bRank = Int(bubble.rank) }
+    private func showNotesList () { vm.notesList_bRank = Int(bubble.rank) }
     
     private var calendarActionName:String { bubble.hasCalendar ? "Cal OFF" : "Cal ON" }
     

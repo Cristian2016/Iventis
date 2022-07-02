@@ -16,7 +16,7 @@ struct TimersApp: App {
     var deleteViewOffsetComputed:Bool { vm.deleteViewOffset != nil }
     fileprivate var deleteViewShowing:Bool { vm.showDeleteAction_bRank != nil }
     
-    fileprivate var bubbleNotesShowing:Bool { vm.stickyNotesList_bRank != nil }
+    fileprivate var bubbleNotesShowing:Bool { vm.notesList_bRank != nil }
     
     @Environment(\.scenePhase) var scenePhase
     let viewContext = PersistenceController.shared.container.viewContext
@@ -61,9 +61,9 @@ struct TimersApp: App {
                 }
                 
                 if bubbleNotesShowing {
-                    BubbleStickyNotesList($vm.stickyNotesList_bRank)
+                    BubbleNotesList($vm.notesList_bRank)
                 }
-                if let pair = vm.pairOfNotesList { PairStickyNotesList(pair) }
+                if let pair = vm.pairOfNotesList { PairNotesList(pair) }
             }
             .ignoresSafeArea()
             .environment(\.managedObjectContext, viewContext)

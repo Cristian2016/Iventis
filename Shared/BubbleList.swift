@@ -138,7 +138,7 @@ struct BubbleCellLow_Key:PreferenceKey {
 
 // MARK: - Little Helpers
 extension BubbleList {
-    fileprivate var notesShowing:Bool { vm.stickyNotesList_bRank != nil }
+    fileprivate var notesShowing:Bool { vm.notesList_bRank != nil }
         
     fileprivate var isListEmpty:Bool { results.isEmpty }
 }

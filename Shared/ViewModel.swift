@@ -18,7 +18,7 @@ class ViewModel: ObservableObject {
     
     @Published var pairOfNotesList:Pair?
     
-    @Published var stickyNotesList_bRank:Int? = nil //bubble rank
+    @Published var notesList_bRank:Int? = nil //bubble rank
     @Published var isPaletteShowing = false
     
     @Published var rankOfSelectedBubble:Int?

@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct BubbleStickyNote: View {
+struct BubbleNote: View {
     @EnvironmentObject var bubble:Bubble
     @EnvironmentObject var viewModel:ViewModel
             
@@ -15,7 +15,7 @@ struct BubbleStickyNote: View {
     private let font = Font.system(size: 24)
     private let cornerRadius = CGFloat(2)
     private let textPadding = EdgeInsets(top: 4, leading: 6, bottom: 4, trailing: 8)
-    let collapsedStickyNoteWidth = CGFloat(50)
+    let collapsedNoteWidth = CGFloat(50)
     
     // MARK: - Drag to delete
     @State private var noteDeleted = false
@@ -115,7 +115,7 @@ struct BubbleStickyNote: View {
             Text("\(Image(systemName: "text.alignleft"))")
                 .padding(textPadding)
                 .font(.system(size: 20))
-                .frame(width: collapsedStickyNoteWidth)
+                .frame(width: collapsedNoteWidth)
         }
     }
 }
@@ -139,6 +139,6 @@ struct DeleteConfirmationLabel: View {
 
 struct BubbleStickyNote_Previews: PreviewProvider {
     static var previews: some View {
-        BubbleStickyNote()
+        BubbleNote()
     }
 }

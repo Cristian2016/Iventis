@@ -9,7 +9,7 @@
 
 import SwiftUI
 
-struct PairStickyNoteButton: View {
+struct PairNoteButton: View {
     @ObservedObject var pair: Pair
     @State var offsetX = CGFloat.zero
     
@@ -81,7 +81,7 @@ struct PairStickyNoteButton: View {
     }
 }
 
-struct PairStickyNoteButton_Previews: PreviewProvider {
+struct PairNoteButton_Previews: PreviewProvider {
     static let pair:Pair = {
         let pair = Pair(context: PersistenceController.shared.viewContext)
         pair.note = "Pula Mea"
@@ -89,6 +89,6 @@ struct PairStickyNoteButton_Previews: PreviewProvider {
     }()
     
     static var previews: some View {
-        PairStickyNoteButton(pair: pair) {  }
+        PairNoteButton(pair: pair) {  }
     }
 }

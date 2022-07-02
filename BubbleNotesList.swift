@@ -11,7 +11,7 @@
 
 import SwiftUI
 
-struct BubbleStickyNotesList: View {
+struct BubbleNotesList: View {
     let bubble:Bubble  /* ⚠️ do not use @StateObject bubble:Bubble! because each time Bubble.bubbleCell_Components update, bubble will emit and body will get recomputed each mother fucking second!!!  */
     @EnvironmentObject private var vm:ViewModel
     @FetchRequest private var bubbleSavedNotes:FetchedResults<BubbleSavedNote>
@@ -35,10 +35,10 @@ struct BubbleStickyNotesList: View {
     private let cornerRadius = CGFloat(24)
     
     // MARK: -
-    init(_ stickyNotesList_bRank:Binding<Int?>) {
+    init(_ notesList_bRank:Binding<Int?>) {
         //set Bubble
         let request = Bubble.fetchRequest()
-        request.predicate = NSPredicate(format: "rank == %i", stickyNotesList_bRank.wrappedValue!)
+        request.predicate = NSPredicate(format: "rank == %i", notesList_bRank.wrappedValue!)
         
         guard let bubble = try? PersistenceController.shared.viewContext.fetch(request).first else { fatalError("fuck bubble") }
         self.bubble = bubble
@@ -51,7 +51,7 @@ struct BubbleStickyNotesList: View {
             NSSortDescriptor(key: "date", ascending: false)
         ]
         _bubbleSavedNotes = FetchRequest(entity: BubbleSavedNote.entity(), sortDescriptors: sorts, predicate: nil, animation: .default)
-        _showAddNotes_bRank = Binding(projectedValue: stickyNotesList_bRank)
+        _showAddNotes_bRank = Binding(projectedValue: notesList_bRank)
     }
     
     // MARK: -
@@ -72,7 +72,7 @@ struct BubbleStickyNotesList: View {
         
     // MARK: -
     var body: some View {
-        StickyNotesList(notes: bubbleSavedNotes.compactMap { $0.note },
+        NotesList(notes: bubbleSavedNotes.compactMap { $0.note },
                   textInputLimit: textInputLimit,
                   initialNote: initialNote,
                   //actions
@@ -104,6 +104,6 @@ struct BubbleStickyNotesList: View {
 
 struct BubbleNoteView_Previews: PreviewProvider {
     static var previews: some View {
-        BubbleStickyNotesList(.constant(0))
+        BubbleNotesList(.constant(0))
     }
 }

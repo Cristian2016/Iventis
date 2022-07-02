@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct StickyNotesList: View {
+struct NotesList: View {
     var notes:[String]
     let textInputLimit:Int
     let initialNote:String
@@ -133,7 +133,7 @@ struct StickyNotesList: View {
                 Text(line0)
                     .font(.system(size: 30))
                     .background(Color.red)
-                if noteIsValid { StickyNote_InfoView() }
+                if noteIsValid { Note_InfoView() }
                 else { EmptyNote_InfoView() }
             }
             Spacer()

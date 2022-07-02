@@ -11,7 +11,7 @@
 
 import SwiftUI
 
-struct PairStickyNotesList: View {
+struct PairNotesList: View {
     let pair:Pair
     @EnvironmentObject private var vm:ViewModel
     @FetchRequest private var pairSavedNotes:FetchedResults<PairSavedNote>
@@ -58,7 +58,7 @@ struct PairStickyNotesList: View {
     
     // MARK: -
     var body: some View {
-        StickyNotesList(notes: pairSavedNotes.compactMap { $0.note },
+        NotesList(notes: pairSavedNotes.compactMap { $0.note },
                   textInputLimit: textInputLimit,
                   initialNote: initialNote,
                   //actions

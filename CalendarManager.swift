@@ -52,7 +52,7 @@ extension CalendarManager {
         let notes = composeEventNotes(from: pairs)
         
         let title = title(for: session)
-        session.eventID = newEvent(eventTitle: title, stickyNote:session.bubble?.note, notes: notes, start: firstPair.start!, end: lastPair.pause!)
+        session.eventID = newEvent(eventTitle: title, note:session.bubble?.note, notes: notes, start: firstPair.start!, end: lastPair.pause!)
         PersistenceController.shared.save()
     }
 }
@@ -241,14 +241,14 @@ class CalendarManager: NSObject {
         return bucket
     }
     
-    private func newEvent(eventTitle:String?, stickyNote:String?, notes:String?, start:Date, end:Date) -> String? {
+    private func newEvent(eventTitle:String?, note:String?, notes:String?, start:Date, end:Date) -> String? {
         let event = EKEvent(eventStore: store)
         event.title = eventTitle
         event.notes = notes
         event.startDate = start
         event.endDate = end
         
-        if let calendar = suggestedCalendar(for: stickyNote) { event.calendar = calendar }
+        if let calendar = suggestedCalendar(for: note) { event.calendar = calendar }
         else {//create Calendar if you can't find one
             createCalendarIfNeeded(with: defaultCalendarTitle)
             delayExecution(.now() + 2.0) {[weak self] in
@@ -270,7 +270,7 @@ class CalendarManager: NSObject {
         guard let bubble = session.bubble else { return "No Title" }
         
         let friendlyBubbleColorName = Color.userFriendlyBubbleColorName(for: bubble.color)
-        let stickyNote = bubble.note_.isEmpty ? friendlyBubbleColorName : bubble.note_
+        let note = bubble.note_.isEmpty ? friendlyBubbleColorName : bubble.note_
         let colorEmoji = Color.emoji(for: bubble.color ?? "mint")
         
         let symbol:String
@@ -283,7 +283,7 @@ class CalendarManager: NSObject {
         let latestSubeventTitle = " " + session.pairs_.last!.note_
         
         let count = (subeventsCount != "1") ? "・\(subeventsCount)" : ""
-        let eventTitle = symbol + stickyNote + latestSubeventTitle + count
+        let eventTitle = symbol + note + latestSubeventTitle + count
         
         return eventTitle
     }
@@ -294,11 +294,11 @@ class CalendarManager: NSObject {
     
     // MARK: - helpers
     ///if stickynote matches a calendar already present in the Calendar App
-    private func suggestedCalendar(for stickyNote:String?) -> EKCalendar? {
-        guard let stickyNote = stickyNote else { return nil }
+    private func suggestedCalendar(for note:String?) -> EKCalendar? {
+        guard let note = note else { return nil }
         
         let calendars = store.calendars(for: .event)
-        let possibleCalendar = findMatchingCalendar(from: calendars, for: stickyNote)
+        let possibleCalendar = findMatchingCalendar(from: calendars, for: note)
         
         return possibleCalendar ?? defaultCalendar()
     }
@@ -307,11 +307,11 @@ class CalendarManager: NSObject {
         store.calendars(for: .event).filter({$0.calendarIdentifier == defaultCalendarID}).first
     }
     
-    private func findMatchingCalendar(from calendars:[EKCalendar], for stickyNote:String) -> EKCalendar? {
+    private func findMatchingCalendar(from calendars:[EKCalendar], for note:String) -> EKCalendar? {
         var calendar:EKCalendar? = nil
         
         //check first any common word between caledar title and sticky note title
-        let /* string */ noteSplits = stickyNote.lowercased().split(separator: " ")
+        let /* string */ noteSplits = note.lowercased().split(separator: " ")
         
         calendars.forEach { cal in
             let calSplits = cal.title.lowercased().split(separator:" ")
@@ -330,7 +330,7 @@ class CalendarManager: NSObject {
             calendars.forEach { cal in
                 let calEmojis = cal.title.unicodeScalars.filter { $0.properties.isEmoji }
                 if !calEmojis.isEmpty {
-                    let noteEmojis = stickyNote.unicodeScalars.filter { $0.properties.isEmoji }
+                    let noteEmojis = note.unicodeScalars.filter { $0.properties.isEmoji }
                     if !Set(calEmojis).intersection(noteEmojis).isEmpty {
                         calendar = cal
                     }
