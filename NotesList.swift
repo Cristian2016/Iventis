@@ -109,7 +109,7 @@ struct NotesList: View {
         }
         .onAppear {
             delayExecution(.now() + 0.05) {
-                withAnimation (.easeInOut(duration: 0.0)) { keyboardVisible = true }
+                withAnimation (.easeInOut) { keyboardVisible = true }
             }
         }
     }
