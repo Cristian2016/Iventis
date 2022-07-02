@@ -38,21 +38,13 @@ struct NotesList: View {
         textInput = ""
     }
     
-    private func saveTextInputAndDismiss() {
-        guard !textInput.isEmpty else { return }
-        
-        saveNoteToCoredata(textInput)
-        dismiss()
-    }
-    
     private func dismiss(closure: () ->()) {
         closure()
     }
     
-    private func saveTextInput() {
-        if initialNote == textInput || textInput.isEmpty { return }
-        
+    private func saveTextInputAndDismiss() {
         saveNoteToCoredata(textInput)
+        dismiss()
         PersistenceController.shared.save()
     }
     
@@ -60,6 +52,8 @@ struct NotesList: View {
     private var noteIsValid: Bool {
         let allWhiteSpaces = textInput.trimmingCharacters(in: CharacterSet.whitespaces).isEmpty
         if !textInput.isEmpty && !allWhiteSpaces { return true }
+        if initialNote == textInput { return false }
+        
         return false
     }
     
@@ -67,8 +61,7 @@ struct NotesList: View {
         ZStack {
             screenBackground
                 .onTapGesture {
-                    if noteIsValid { saveTextInput() }
-                    dismiss()
+                    if noteIsValid { saveTextInputAndDismiss() }
                 }
                 .gesture(
                     DragGesture(minimumDistance: 10)

@@ -57,12 +57,8 @@ struct BubbleNotesList: View {
     // MARK: -
     private var dragGesture: some Gesture {
         DragGesture(minimumDistance: 15, coordinateSpace: .global)
-            .onChanged {
-                if $0.translation.width < -20 { textInput = "" }
-            }
-            .onEnded { _ in
-                if textInput.isEmpty { UserFeedback.doubleHaptic(.rigid)
-                }
+            .onChanged { if $0.translation.width < -20 { textInput = "" } }
+            .onEnded { _ in if textInput.isEmpty { UserFeedback.doubleHaptic(.rigid) }
             }
     }
         
@@ -75,14 +71,14 @@ struct BubbleNotesList: View {
                   dismiss: { dismiss() },
                   deleteItem: { vm.delete(bubbleSavedNotes[$0!]) },
                   saveNoteToCoredata: { saveNoteToCoreData($0, for: bubble) },
-                  selectExistingNote: { chooseExitingNote($0) }
+                  selectExistingNote: { selectExitingNote($0) }
         )
     }
         
     // MARK: -
     private func dismiss() { showAddNotes_bRank = nil }
     
-    private func chooseExitingNote(_ note:String) {
+    private func selectExitingNote(_ note:String) {
         UserFeedback.singleHaptic(.heavy)
         bubble.note = note
         try? PersistenceController.shared.viewContext.save()
