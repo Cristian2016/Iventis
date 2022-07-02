@@ -83,6 +83,7 @@ struct BubbleNotesList: View {
         trimmedNote.removeWhiteSpaceAtBothEnds()
         
         if initialNote == trimmedNote { return }
+        
         UserFeedback.singleHaptic(.heavy)
         bubble.note = note
         try? PersistenceController.shared.viewContext.save()

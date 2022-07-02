@@ -62,6 +62,7 @@ struct NotesList: View {
             screenBackground
                 .onTapGesture {
                     if noteIsValid { saveTextInputAndDismiss() }
+                    else { dismiss() }
                 }
                 .gesture(
                     DragGesture(minimumDistance: 10)
