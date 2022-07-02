@@ -79,6 +79,7 @@ struct BubbleNotesList: View {
     private func dismiss() { showAddNotes_bRank = nil }
     
     private func selectExitingNote(_ note:String) {
+        print(#function)
         var trimmedNote = note
         trimmedNote.removeWhiteSpaceAtBothEnds()
         
@@ -87,6 +88,8 @@ struct BubbleNotesList: View {
         UserFeedback.singleHaptic(.heavy)
         bubble.note = note
         try? PersistenceController.shared.viewContext.save()
+        
+        CalendarManager.shared.updateExistingEvent(.title(bubble))
     }
     
     private func saveNoteToCoreData(_ note:String, for bubble: Bubble) {

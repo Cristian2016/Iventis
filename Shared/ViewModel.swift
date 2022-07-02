@@ -296,12 +296,16 @@ class ViewModel: ObservableObject {
     //delete BubbleSticky
     func deleteNote(for bubble:Bubble) {
         bubble.note = nil
+        CalendarManager.shared.updateExistingEvent(.title(bubble))
+        
         PersistenceController.shared.save()
     }
     
     //delete PairSticky
     func deleteNote(for pair:Pair) {
         pair.note = nil
+        //update Calendar Event
+        
         PersistenceController.shared.save()
     }
     
