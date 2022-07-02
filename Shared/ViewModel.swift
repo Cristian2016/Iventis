@@ -313,6 +313,7 @@ class ViewModel: ObservableObject {
         //update Calendar Event
         
         PersistenceController.shared.save()
+        CalendarManager.shared.updateExistingEvent(.notes(pair.session!))
     }
     
     // MARK: -
