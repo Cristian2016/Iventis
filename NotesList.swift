@@ -13,11 +13,9 @@ struct NotesList: View {
     let initialNote:String
     
     private var filteredItems:[String] {
-        if textInput.isEmpty { return Array(notes) }
-        let filtered = notes.filter {
-            $0.lowercased().contains(textInput.lowercased())
-        }
-        return filtered //Array(Set to avoid duplicates
+        if textInput.isEmpty { return notes }
+        let filtered = notes.filter { $0.lowercased().contains(textInput.lowercased()) }
+        return filtered
     }
     
     private let size = CGSize(width: 220, height: 382)
