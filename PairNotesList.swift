@@ -64,7 +64,7 @@ struct PairNotesList: View {
                   //actions
                   dismiss: { dismiss() },
                   deleteItem: { vm.delete(pairSavedNotes[$0!]) },
-                  saveNoteToCoredata: { vm.save($0, for: pair) },
+                  saveNoteToCoredata: { saveNoteToCoreData($0, for: pair) },
                   selectExistingNote: { chooseExitingNote($0) }
         )
     }
@@ -73,6 +73,16 @@ struct PairNotesList: View {
         UserFeedback.singleHaptic(.heavy)
         pair.note = note
         try? PersistenceController.shared.viewContext.save()
+    }
+    
+    private func saveNoteToCoreData(_ note:String, for pair: Pair) {
+        //avoid duplicates
+        //save note to CoreData if no duplicates
+        
+        var trimmedNote = note
+        trimmedNote.removeWhiteSpaceAtBothEnds()
+        if pairSavedNotes.compactMap({ $0.note }).contains(trimmedNote) { return }
+        vm.save(note, for: pair)
     }
     
     private var noteIsValid: Bool {

@@ -89,6 +89,9 @@ struct BubbleNotesList: View {
     }
     
     private func saveNoteToCoreData(_ note:String, for bubble: Bubble) {
+        //avoid duplicates
+        //save note to CoreData if no duplicates
+        
         var trimmedNote = note
         trimmedNote.removeWhiteSpaceAtBothEnds()
         if bubbleSavedNotes.compactMap({ $0.note }).contains(trimmedNote) { return }
