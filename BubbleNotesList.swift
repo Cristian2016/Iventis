@@ -91,10 +91,7 @@ struct BubbleNotesList: View {
     private func saveNoteToCoreData(_ note:String, for bubble: Bubble) {
         var trimmedNote = note
         trimmedNote.removeWhiteSpaceAtBothEnds()
-        if bubbleSavedNotes.compactMap({ $0.note }).contains(trimmedNote) {
-            print("will note save")
-            return
-        }
+        if bubbleSavedNotes.compactMap({ $0.note }).contains(trimmedNote) { return }
         vm.save(note, for: bubble)
     }
 }
