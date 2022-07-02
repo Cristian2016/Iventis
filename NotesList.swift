@@ -57,11 +57,9 @@ struct NotesList: View {
     }
     
     private var noteIsValid: Bool {
-        let condition = !textInput.trimmingCharacters(in: CharacterSet.whitespaces).isEmpty
+        let allWhiteSpaces = textInput.trimmingCharacters(in: CharacterSet.whitespaces).isEmpty
         
-        if textInput.count > 0 && condition {
-            return true
-        }
+        if !textInput.isEmpty > 0 && !allWhiteSpaces { return true }
         
         return false
     }
