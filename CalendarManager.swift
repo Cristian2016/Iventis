@@ -312,6 +312,7 @@ class CalendarManager: NSObject {
         
         let set0 = Set(bubbleNote.lowercased().unicodeScalars.filter { $0.value < 6000 && $0.value != 32 })
         
+        //⚠️ no idea why it's 6000 :)))) I put an arbitrary value jURLStringto make sure all alphanumerics are included. peace!
         calendars.forEach { cal in
             let set1 = Set(cal.title.lowercased().unicodeScalars.filter { $0.value < 6000 && $0.value != 32 })
             if set0 == set1 { calendar = cal }
