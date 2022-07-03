@@ -310,10 +310,10 @@ class CalendarManager: NSObject {
     private func findMatchingCalendar(from calendars:[EKCalendar], for bubbleNote:String) -> EKCalendar? {
         var calendar:EKCalendar? = nil
         
-        let set0 = Set(bubbleNote.lowercased().unicodeScalars.filter { $0.value < 127744 && $0.value != 32 })
+        let set0 = Set(bubbleNote.lowercased().unicodeScalars.filter { $0.value < 6000 && $0.value != 32 })
         
         calendars.forEach { cal in
-            let set1 = Set(cal.title.lowercased().unicodeScalars.filter { $0.value < 127744 && $0.value != 32 })
+            let set1 = Set(cal.title.lowercased().unicodeScalars.filter { $0.value < 6000 && $0.value != 32 })
             if set0 == set1 { calendar = cal }
         }
         
