@@ -307,7 +307,8 @@ class CalendarManager: NSObject {
         store.calendars(for: .event).filter({$0.calendarIdentifier == defaultCalendarID}).first
     }
     
-    ///Calendar name to match with bubble name. ex: "Outdoor 🌳" and "🌞 Outdoor" match
+    ///Calendar name to match with bubble name.
+    ///ex: "Outdoor 🌳" matches "🌞 Outdoor"
     private func findMatchingCalendar(from calendars:[EKCalendar], for bubbleNote:String) -> EKCalendar? {
         var calendar:EKCalendar? = nil
         
