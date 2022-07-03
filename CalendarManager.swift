@@ -307,36 +307,16 @@ class CalendarManager: NSObject {
         store.calendars(for: .event).filter({$0.calendarIdentifier == defaultCalendarID}).first
     }
     
-    private func findMatchingCalendar(from calendars:[EKCalendar], for note:String) -> EKCalendar? {
+    private func findMatchingCalendar(from calendars:[EKCalendar], for bubbleNote:String) -> EKCalendar? {
         var calendar:EKCalendar? = nil
         
-        //check first any common word between caledar title and sticky note title
-        let /* string */ noteSplits = note.lowercased().split(separator: " ")
+        let set0 = Set(bubbleNote.lowercased().unicodeScalars.filter { $0.value < 127744 && $0.value != 32 })
         
         calendars.forEach { cal in
-            let calSplits = cal.title.lowercased().split(separator:" ")
-            let foundCommonWord = !Set(noteSplits).intersection(calSplits).isEmpty
-            
-            if foundCommonWord {
-//                print(calSplits, noteSplits)
-                calendar = cal
-            } else {
-                print("missmatch")
-            }
+            let set1 = Set(cal.title.lowercased().unicodeScalars.filter { $0.value < 127744 && $0.value != 32 })
+            if set0 == set1 { calendar = cal }
         }
         
-        //if calendar still nil, check for any common emojis
-        if calendar == nil {
-            calendars.forEach { cal in
-                let calEmojis = cal.title.unicodeScalars.filter { $0.properties.isEmoji }
-                if !calEmojis.isEmpty {
-                    let noteEmojis = note.unicodeScalars.filter { $0.properties.isEmoji }
-                    if !Set(calEmojis).intersection(noteEmojis).isEmpty {
-                        calendar = cal
-                    }
-                }
-            }
-        }
         return calendar
     }
     
