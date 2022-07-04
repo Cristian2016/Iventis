@@ -119,7 +119,7 @@ class CalendarManager: NSObject {
     
     private(set) var defaultCalendarTitle = "Time Bubbles 📥"
     private let eventNotesSeparator = "Add notes below:\n"
-    private lazy var defaultCalendarID = UserDefaults.shared.value(forKey: UserDefaults.Key.defaultCalendarIdentifier) as? String
+    private var defaultCalendarID:String? { UserDefaults.shared.value(forKey: UserDefaults.Key.defaultCalendarIdentifier) as? String }
     
     // MARK: - public
     private var doNotCreateCalendar = false
