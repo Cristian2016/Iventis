@@ -77,7 +77,7 @@ extension CalendarManager {
     
     // MARK: -
     ///if user swipes on a bubble to enable calendar and bubble already has activity, all activity will be exported to Calendar App
-    func shouldExportToCalendarAllSessions(of bubble:Bubble) {
+    func shouldCreateCalendarEventsForExistingSessions(of bubble:Bubble) {
         guard
             bubble.hasCalendar,
             !bubble.sessions_.isEmpty else { return }
