@@ -21,8 +21,8 @@ extension CalendarManager {
     func requestAuthorizationAndCreateCalendar() {
         if EventStore.authorizationStatus(for: .event) == .authorized { return }
         
-        store.requestAccess(to: .event) { [weak self] /* access */ userGrantedAccess, error in
-            print("request access \(Thread.isMainThread)")
+        store.requestAccess(to: .event) {//not main thread
+            [weak self] /* access */ userGrantedAccess, error in
             guard let self = self else {return}
             if userGrantedAccess { self.createCalendarIfNeeded(with: self.defaultCalendarTitle) }
         }
@@ -80,6 +80,9 @@ class CalendarManager: NSObject {
     ///there is no other calendar with same or similar name.
     ///if it finds an existing calendar, it will set it as the default calendar
     private func createCalendarIfNeeded(with title:String) {
+        //it looks for calendars with "Time Bubbles" or similar name
+        //if it doesn't find calendar with "Time Bubbles" name it will attempt to create one
+        //prefered calDAV or at least local
         
         if doNotCreateCalendar { return }
         
@@ -111,9 +114,6 @@ class CalendarManager: NSObject {
             
             let localSources = store.sources.filter { $0.sourceType == .local }
             if !localSources.isEmpty { calendar.source = localSources.first! }
-            else {
-                
-            }
         }
         
         do {
