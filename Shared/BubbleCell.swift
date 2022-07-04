@@ -218,7 +218,6 @@ struct BubbleCell: View {
             //calendar
             Button {
                 vm.toggleCalendar(bubble)
-                CalendarManager.shared.shouldCreateCalendarEventsForExistingSessions(of: bubble)
             }
         label: { Label { Text(calendarActionName) }
             icon: { Image(systemName: calendarActionImageName) } }
