@@ -216,9 +216,7 @@ struct BubbleCell: View {
         .tint(bubble.isPinned ? .gray : .orange)
             
             //calendar
-            Button {
-                vm.toggleCalendar(bubble)
-            }
+            Button { vm.toggleCalendar(bubble) }
         label: { Label { Text(calendarActionName) }
             icon: { Image(systemName: calendarActionImageName) } }
         .tint(calendarActionColor)

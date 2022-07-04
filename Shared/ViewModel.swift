@@ -140,7 +140,7 @@ class ViewModel: ObservableObject {
         bubble.hasCalendar.toggle()
         PersistenceController.shared.save()
         
-        delayExecution(.now() + 0.2) { CalendarManager.shared.createCalEventsForExistingSessions(of: bubble) }
+        delayExecution(.now() + 2) { CalendarManager.shared.createCalEventsForExistingSessions(of: bubble) }
     }
     
     func showMoreOptions(_ bubble:Bubble) {
