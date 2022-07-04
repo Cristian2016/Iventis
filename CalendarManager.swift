@@ -75,7 +75,6 @@ extension CalendarManager {
         catch { }
     }
     
-    // MARK: -
     ///if user swipes on a bubble to enable calendar and bubble already has activity, all activity will be exported to Calendar App
     func createCalEventsForExistingSessions(of bubble:Bubble) {
         guard
@@ -108,7 +107,9 @@ extension CalendarManager {
                                    eventNotes: notes,
                                    start: firstPair.start!,
                                    end: lastPair.pause!)
-        PersistenceController.shared.save()
+        
+        //since this method is called on bThread, make sure to save CoreData on mThread
+        DispatchQueue.main.async { PersistenceController.shared.save() }
     }
 }
 
