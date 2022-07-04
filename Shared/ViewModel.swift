@@ -199,9 +199,8 @@ class ViewModel: ObservableObject {
             //compute lastPair duration first [on background thread 🔴]
             bubble.lastPair?.computeDuration(.atEndSession) {
                 bubble.lastSession?.computeDuration {
-                    print(Thread.isMainThread)
                     self.createCalendarEventIfRequiredAndSaveToCoreData(for: bubble)
-                    PersistenceController.shared.save()
+//                    PersistenceController.shared.save()
                 }
             }
         }
@@ -214,7 +213,7 @@ class ViewModel: ObservableObject {
             CalendarManager.shared.createNewEvent(for: bubble.lastSession)
         }
         
-        try? PersistenceController.shared.viewContext.save()
+        PersistenceController.shared.save()
     }
     
     func userTogglesDetail(_ rank:Int?) {
