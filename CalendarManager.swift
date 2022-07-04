@@ -11,31 +11,35 @@ import CoreLocation
 import SwiftUI
 
 extension CalendarManager {
-    typealias Store = EKEventStore
+    typealias EventStore = EKEventStore
 }
 
 // MARK: - essential methods
 extension CalendarManager {
+    // MARK: - Main
     ///if authorization granted, create default calendar to add events to it
     func requestAuthorizationAndCreateCalendar() {
-        guard
-            Store.authorizationStatus(for: .event) != .authorized else { return }
+        if EventStore.authorizationStatus(for: .event) == .authorized { return }
         
-        store.requestAccess(to: .event) { [weak self] /* access */ granted, error in
+        store.requestAccess(to: .event) { [weak self] /* access */ userGrantedAccess, error in
+            print("request access \(Thread.isMainThread)")
             guard let self = self else {return}
-            if granted { self.createCalendarIfNeeded(with: self.defaultCalendarTitle) }
+            if userGrantedAccess { self.createCalendarIfNeeded(with: self.defaultCalendarTitle) }
         }
     }
     
+    // MARK: -
     ///if user swipes on a bubble to enable calendar and bubble already has activity, all activity will be exported to Calendar App
     func shouldExportToCalendarAllSessions(of bubble:Bubble) {
         guard
             bubble.hasCalendar,
             !bubble.sessions_.isEmpty else { return }
-        
-        bubble.sessions_.forEach { if $0.isEnded {
-            createNewEvent(for: $0)
-        }}
+                
+        DispatchQueue.global().async { [weak self] in
+            bubble.sessions_.forEach { session in
+                if session.isEnded { self?.createNewEvent(for: session) }
+            }
+        }
     }
     
     ///creates a new event when the user ends a session
@@ -63,27 +67,33 @@ extension CalendarManager {
 
 // MARK: -
 class CalendarManager: NSObject {
-    private lazy var store = Store() /* read write events */
+    private lazy var store = EventStore() /* read write events */
+    
     private(set) var defaultCalendarTitle = "Time Bubbles 📥"
     private let eventNotesSeparator = "Add notes below:\n"
-    private lazy var defaultCalendarID = UserDefaults.standard.value(forKey: UserDefaults.Key.defaultCalendarIdentifier) as? String
+    private lazy var defaultCalendarID = UserDefaults.shared.value(forKey: UserDefaults.Key.defaultCalendarIdentifier) as? String
     
     // MARK: - public
     private var doNotCreateCalendar = false
     
-    ///⚠️ To avoid duplicates, this function creates a calendar only if there is no other calendar with same or similar name. if it finds an existing calendar, it will set it as the default calendar
+    ///⚠️ To avoid duplicates, this function creates a calendar only if
+    ///there is no other calendar with same or similar name.
+    ///if it finds an existing calendar, it will set it as the default calendar
     private func createCalendarIfNeeded(with title:String) {
+        
+        if doNotCreateCalendar { return }
         
         store.calendars(for: .event).forEach {
             //if there is a calendar with that name already or similar name, do not create a calendar
-            if $0.title == defaultCalendarTitle
-                || $0.title.lowercased().contains("time") && $0.title.lowercased().contains("bubble") {
-                UserDefaults.standard.setValue($0.calendarIdentifier, forKey: UserDefaults.Key.defaultCalendarIdentifier)
+            let condition0 = $0.title == defaultCalendarTitle
+            let condition1 = $0.title.lowercased().contains("time") && $0.title.lowercased().contains("bubble")
+            
+            if condition0 || condition1 {
+                UserDefaults.shared.setValue($0.calendarIdentifier, forKey: UserDefaults.Key.defaultCalendarIdentifier)
                 doNotCreateCalendar = true
+                return //early exit from the for loop
             }
         }
-        
-        if doNotCreateCalendar { return }
         
         //calendar creation
         let calendar = EKCalendar(for: .event, eventStore: store)
@@ -108,7 +118,7 @@ class CalendarManager: NSObject {
         
         do {
             try store.saveCalendar(calendar, commit: true)
-            UserDefaults.standard.setValue(calendar.calendarIdentifier, forKey: UserDefaults.Key.defaultCalendarIdentifier)
+            UserDefaults.shared.setValue(calendar.calendarIdentifier, forKey: UserDefaults.Key.defaultCalendarIdentifier)
         }
         catch { }
     }
@@ -183,7 +193,7 @@ class CalendarManager: NSObject {
         event.startDate = Date()
         event.endDate = Date().addingTimeInterval(60*15)
         
-        let defaultCalendarIdentifier = UserDefaults.standard.value(forKey: UserDefaults.Key.defaultCalendarIdentifier) as? String
+        let defaultCalendarIdentifier = UserDefaults.shared.value(forKey: UserDefaults.Key.defaultCalendarIdentifier) as? String
         
         if let calendar = store.calendars(for: .event).filter({$0.calendarIdentifier == defaultCalendarIdentifier}).first {
             event.calendar = calendar
