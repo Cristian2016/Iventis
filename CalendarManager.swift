@@ -52,7 +52,11 @@ extension CalendarManager {
         let notes = composeEventNotes(from: pairs)
         
         let title = title(for: session)
-        session.eventID = newEvent(eventTitle: title, note:session.bubble?.note, notes: notes, start: firstPair.start!, end: lastPair.pause!)
+        session.eventID = newEvent(eventTitle: title,
+                                   bubbleNote:session.bubble?.note,
+                                   eventNotes: notes,
+                                   start: firstPair.start!,
+                                   end: lastPair.pause!)
         PersistenceController.shared.save()
     }
 }
@@ -241,14 +245,14 @@ class CalendarManager: NSObject {
         return bucket
     }
     
-    private func newEvent(eventTitle:String?, note:String?, notes:String?, start:Date, end:Date) -> String? {
+    private func newEvent(eventTitle:String?, bubbleNote:String?, eventNotes:String?, start:Date, end:Date) -> String? {
         let event = EKEvent(eventStore: store)
         event.title = eventTitle
-        event.notes = notes
+        event.notes = eventNotes
         event.startDate = start
         event.endDate = end
         
-        if let calendar = suggestedCalendar(for: note) { event.calendar = calendar }
+        if let calendar = suggestedCalendar(for: bubbleNote) { event.calendar = calendar }
         else {//create Calendar if you can't find one
             createCalendarIfNeeded(with: defaultCalendarTitle)
             delayExecution(.now() + 2.0) {[weak self] in
