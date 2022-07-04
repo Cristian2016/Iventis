@@ -246,11 +246,13 @@ class CalendarManager: NSObject {
     }
     
     private func newEvent(with title:String?, bubbleNote:String?, eventNotes:String?, start:Date, end:Date) -> String? {
+        
         let event = EKEvent(eventStore: store)
+        
         event.title = title
-        event.notes = eventNotes
         event.startDate = start
         event.endDate = end
+        event.notes = eventNotes
         
         if let calendar = suggestedCalendar(for: bubbleNote) { event.calendar = calendar }
         else {//create Calendar if you can't find one
