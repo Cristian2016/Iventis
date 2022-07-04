@@ -298,7 +298,7 @@ class CalendarManager: NSObject {
         guard let note = note else { return nil }
         
         let calendars = store.calendars(for: .event)
-        let possibleCalendar = findMatchingCalendar(from: calendars, for: note)
+        let possibleCalendar = getMatchingCalendar(from: calendars, for: note)
         
         return possibleCalendar ?? defaultCalendar()
     }
@@ -309,18 +309,18 @@ class CalendarManager: NSObject {
     
     ///Calendar name to match with bubble name.
     ///ex: "Outdoor 🌳" matches "🌞 Outdoor"
-    private func findMatchingCalendar(from calendars:[EKCalendar], for bubbleNote:String) -> EKCalendar? {
-        var calendar:EKCalendar? = nil
+    private func getMatchingCalendar(from calendars:[EKCalendar], for bubbleNote:String) -> EKCalendar? {
+        var matchingCalendar:EKCalendar? = nil
         
         let set0 = Set(bubbleNote.lowercased().unicodeScalars.filter { $0.value < 6000 && $0.value != 32 })
         
-        //⚠️ no idea why it's 6000 :)))) I put an arbitrary value jURLStringto make sure all alphanumerics are included. peace!
-        calendars.forEach { cal in
-            let set1 = Set(cal.title.lowercased().unicodeScalars.filter { $0.value < 6000 && $0.value != 32 })
-            if set0 == set1 { calendar = cal }
+        //⚠️ no idea why it's 6000 :)) I put an arbitrary value just to make sure all alphanumerics are included
+        calendars.forEach { calendar in
+            let set1 = Set(calendar.title.lowercased().unicodeScalars.filter { $0.value < 6000 && $0.value != 32 })
+            if set0 == set1 { matchingCalendar = calendar }
         }
         
-        return calendar
+        return matchingCalendar
     }
     
     // MARK: -
