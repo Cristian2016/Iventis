@@ -28,6 +28,53 @@ extension CalendarManager {
         }
     }
     
+    ///⚠️ To avoid duplicates, this function creates a calendar only if
+    ///there is no other calendar with same name or similar name.
+    ///if it finds an existing calendar, it will set it as the default calendar
+    private func createCalendarIfNeeded(with title:String) {
+        //it looks for calendars with "Time Bubbles" or similar name
+        //if it doesn't find calendar with "Time Bubbles" name it will attempt to create one
+        //prefered calDAV or at least local
+        
+        if doNotCreateCalendar { return }
+        
+        store.calendars(for: .event).forEach {
+            //if there is a calendar with that name already or similar name, do not create a calendar
+            let condition0 = $0.title == defaultCalendarTitle
+            let condition1 = $0.title.lowercased().contains("time") && $0.title.lowercased().contains("bubble")
+            
+            if condition0 || condition1 {
+                UserDefaults.shared.setValue($0.calendarIdentifier, forKey: UserDefaults.Key.defaultCalendarIdentifier)
+                doNotCreateCalendar = true
+                return //early exit from the for loop
+            }
+        }
+        
+        //calendar creation
+        let calendar = EKCalendar(for: .event, eventStore: store)
+        calendar.title = defaultCalendarTitle
+        calendar.cgColor = #colorLiteral(red: 1, green: 0.4932718873, blue: 0.4739984274, alpha: 1).cgColor
+        
+        //ideal situation, iCloud calendar that syncs with all devices
+        let calDAVSources = store.sources.filter { $0.sourceType == .calDAV }
+        let calDAVAvailable = !calDAVSources.isEmpty
+        
+        if calDAVAvailable {
+            calendar.source = calDAVSources.first! //use calDAV source for the calendar
+            
+        } else {//try to use a local source for the calendar
+            
+            let localSources = store.sources.filter { $0.sourceType == .local }
+            if !localSources.isEmpty { calendar.source = localSources.first! }
+        }
+        
+        do {
+            try store.saveCalendar(calendar, commit: true)
+            UserDefaults.shared.setValue(calendar.calendarIdentifier, forKey: UserDefaults.Key.defaultCalendarIdentifier)
+        }
+        catch { }
+    }
+    
     // MARK: -
     ///if user swipes on a bubble to enable calendar and bubble already has activity, all activity will be exported to Calendar App
     func shouldExportToCalendarAllSessions(of bubble:Bubble) {
@@ -75,53 +122,6 @@ class CalendarManager: NSObject {
     
     // MARK: - public
     private var doNotCreateCalendar = false
-    
-    ///⚠️ To avoid duplicates, this function creates a calendar only if
-    ///there is no other calendar with same or similar name.
-    ///if it finds an existing calendar, it will set it as the default calendar
-    private func createCalendarIfNeeded(with title:String) {
-        //it looks for calendars with "Time Bubbles" or similar name
-        //if it doesn't find calendar with "Time Bubbles" name it will attempt to create one
-        //prefered calDAV or at least local
-        
-        if doNotCreateCalendar { return }
-        
-        store.calendars(for: .event).forEach {
-            //if there is a calendar with that name already or similar name, do not create a calendar
-            let condition0 = $0.title == defaultCalendarTitle
-            let condition1 = $0.title.lowercased().contains("time") && $0.title.lowercased().contains("bubble")
-            
-            if condition0 || condition1 {
-                UserDefaults.shared.setValue($0.calendarIdentifier, forKey: UserDefaults.Key.defaultCalendarIdentifier)
-                doNotCreateCalendar = true
-                return //early exit from the for loop
-            }
-        }
-        
-        //calendar creation
-        let calendar = EKCalendar(for: .event, eventStore: store)
-        calendar.title = defaultCalendarTitle
-        calendar.cgColor = #colorLiteral(red: 1, green: 0.4932718873, blue: 0.4739984274, alpha: 1).cgColor
-        
-        //ideal situation, iCloud calendar that syncs with all devices
-        let calDAVSources = store.sources.filter { $0.sourceType == .calDAV }
-        let calDAVAvailable = !calDAVSources.isEmpty
-        
-        if calDAVAvailable {
-            calendar.source = calDAVSources.first! //use calDAV source for the calendar
-            
-        } else {//try to use a local source for the calendar
-            
-            let localSources = store.sources.filter { $0.sourceType == .local }
-            if !localSources.isEmpty { calendar.source = localSources.first! }
-        }
-        
-        do {
-            try store.saveCalendar(calendar, commit: true)
-            UserDefaults.shared.setValue(calendar.calendarIdentifier, forKey: UserDefaults.Key.defaultCalendarIdentifier)
-        }
-        catch { }
-    }
     
     // MARK: - Events
     //could this cause memory cycle?? ⚠️
