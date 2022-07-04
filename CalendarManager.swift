@@ -298,12 +298,12 @@ class CalendarManager: NSObject {
         guard let note = note else { return nil }
         
         let calendars = store.calendars(for: .event)
-        let possibleCalendar = getMatchingCalendar(from: calendars, for: note)
+        let matchingCalendar = getMatchingCalendar(from: calendars, for: note)
         
-        return possibleCalendar ?? defaultCalendar()
+        return matchingCalendar ?? defaultCalendar
     }
     
-    private func defaultCalendar() -> EKCalendar? {
+    private var defaultCalendar: EKCalendar? {
         store.calendars(for: .event).filter({$0.calendarIdentifier == defaultCalendarID}).first
     }
     
