@@ -122,7 +122,7 @@ extension Bubble {
         let Δ = Date().timeIntervalSince(lastPairStart)
         let value = currentClock + Float(Δ)
         let componentsString = value.timeComponentsAsStrings
-                            
+                                    
         //since closure runs on bThread, dispatch back to mThread
         DispatchQueue.main.async { self.bCell_Components = componentsString }
     }
