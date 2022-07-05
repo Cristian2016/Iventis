@@ -10,7 +10,7 @@
 import SwiftUI
 
 struct PairNoteButton: View {
-    @ObservedObject var pair: Pair
+    var pair: Pair
     @State var offsetX = CGFloat.zero
     
     var triggerPairDeleteAction:Bool { abs(offsetX) > 180 }
