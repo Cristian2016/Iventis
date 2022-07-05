@@ -124,9 +124,7 @@ extension Bubble {
         let componentsString = value.timeComponentsAsStrings
                             
         //since closure runs on bThread, dispatch back to mThread
-        DispatchQueue.main.async {
-            self.bCell_Components = componentsString
-        }
+        DispatchQueue.main.async { self.bCell_Components = componentsString }
     }
     
     ///update smallBubbleCell time components: hr min sec
