@@ -11,7 +11,11 @@ import CoreData
 import SwiftUI
 
 public class Bubble: NSManagedObject {
+    // MARK: - Testing Only
+    var signalReceived:Date?
+    var componentsUpdated:Date?
     
+    // MARK: -
     var sessions_:[Session] {
         get { sessions?.array as? [Session] ?? [] }
         set { sessions = NSOrderedSet(array: newValue) }
@@ -38,10 +42,7 @@ public class Bubble: NSManagedObject {
         
     private(set) var isObservingBackgroundTimer = false
     
-    deinit {
-        NotificationCenter.default.removeObserver(self)
-//        print("bubble \(color) deinit")
-    }
+    deinit { NotificationCenter.default.removeObserver(self) }
     
     enum Kind:Comparable {
         case stopwatch
@@ -104,6 +105,8 @@ extension Bubble {
         NotificationCenter.default.addObserver(forName: .timerSignal, object: nil, queue: nil) {
             
             [weak self] _ in
+            
+            self?.signalReceived = Date()
             self?.updateBubbleCellComponents()
             self?.updateSmallBubbleCell()
         }
@@ -120,7 +123,9 @@ extension Bubble {
         let componentsString = value.timeComponentsAsStrings
                             
         //since closure is executed on background thread, dispatch back to the main thread
-        DispatchQueue.main.async { self.bCell_Components = componentsString }
+        DispatchQueue.main.async {
+            self.bCell_Components = componentsString
+        }
     }
     
     ///update smallBubbleCell time components: hr min sec
