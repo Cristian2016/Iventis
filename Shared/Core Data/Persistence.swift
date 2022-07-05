@@ -61,6 +61,9 @@ struct PersistenceController {
     lazy var backgroundContext = container.newBackgroundContext()
     
     func save(_ context:NSManagedObjectContext = PersistenceController.shared.viewContext) {
-        if context.hasChanges { try? context.save() }
+        if context.hasChanges {
+            try? context.save()
+            print("Coredata saved")
+        }
     }
 }

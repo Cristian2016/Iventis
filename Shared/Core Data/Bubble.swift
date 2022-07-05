@@ -11,6 +11,7 @@ import CoreData
 import SwiftUI
 
 public class Bubble: NSManagedObject {
+    
     var sessions_:[Session] {
         get { sessions?.array as? [Session] ?? [] }
         set { sessions = NSOrderedSet(array: newValue) }

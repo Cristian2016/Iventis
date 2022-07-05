@@ -70,16 +70,21 @@ struct TimersApp: App {
             .environmentObject(vm)
             .onChange(of: scenePhase) {
                 switch $0 {
-                    case .active: vm.backgroundTimer(.start)
-                    case .background: vm.backgroundTimer(.pause)
-                    case .inactive: //show notication center, app switcher
+                    case .active:
+                        /* app launch, back to foreground */
+                        vm.backgroundTimer(.start)
+                    case .background:
+                        vm.backgroundTimer(.pause)
+                    case .inactive:
+                        //show notication center, app switcherbreak
                         break
-                    @unknown default: fatalError()
+                    @unknown default:
+                        fatalError()
                 }
             }
             .onAppear {
-//                delayExecution(.now() + 2) { firstAppLaunchEver = false }
-////                UIApplication.shared.isIdleTimerDisabled = true
+                //                delayExecution(.now() + 2) { firstAppLaunchEver = false }
+                //               UIApplication.shared.isIdleTimerDisabled = true
 //
 //                firstAppLaunchEver = false
                 
