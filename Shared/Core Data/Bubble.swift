@@ -99,23 +99,6 @@ extension Bubble {
         case stop
     }
     
-    ///set bubble.timeComponents. called [once] on app launch
-    func observeAppLaunch(_ observe:ObserveState) {
-        switch observe {
-            case .start:
-                NotificationCenter.default.addObserver(forName: .appLaunched, object: nil, queue: nil) { [weak self] notification in
-                    guard let self = self else { return }
-                                                            
-                    let componentsString = self.currentClock.timeComponentsAsStrings
-                    print("currentClock \(self.currentClock)")
-                    DispatchQueue.main.async {
-                        self.bCell_Components = componentsString
-                    }
-                }
-            default: NotificationCenter.default.removeObserver(self)
-        }
-    }
-    
     ///observe backgroundtimer signal. update time components only if bubble is running
     func observeBackgroundTimer() { isObservingBackgroundTimer = true
         NotificationCenter.default.addObserver(forName: .timerSignal, object: nil, queue: nil) {
