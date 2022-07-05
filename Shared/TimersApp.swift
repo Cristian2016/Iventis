@@ -78,8 +78,7 @@ struct TimersApp: App {
                     case .inactive:
                         //show notication center, app switcherbreak
                         break
-                    @unknown default:
-                        fatalError()
+                    @unknown default: fatalError()
                 }
             }
             .onAppear {

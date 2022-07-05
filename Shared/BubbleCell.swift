@@ -55,7 +55,7 @@ extension BubbleCell {
         HStack (spacing: BubbleCell.metrics.spacing) {
             //HOURS
             Circle().fill(Color.clear)
-                .overlay { Text(bubble.bubbleCell_Components.hr) }
+                .overlay { Text(bubble.bCell_Components.hr) }
                 .opacity(hrOpacity)
             //animations
                 .scaleEffect(isSecondsLongPressed ? 0.2 : 1.0)
@@ -72,7 +72,7 @@ extension BubbleCell {
             
             //MINUTES
             Circle().fill(Color.clear)
-                .overlay { Text(bubble.bubbleCell_Components.min) }
+                .overlay { Text(bubble.bCell_Components.min) }
                 .opacity(minOpacity)
             //animations
                 .scaleEffect(isSecondsLongPressed ? 0.2 : 1.0)
@@ -84,7 +84,7 @@ extension BubbleCell {
             //SECONDS
             ZStack {
                 Circle().fill(Color.clear)
-                    .overlay { Text(bubble.bubbleCell_Components.sec) }
+                    .overlay { Text(bubble.bCell_Components.sec) }
                 //animations
                     .scaleEffect(isSecondsLongPressed ? 0.2 : 1.0)
                     .animation(.secondsLongPressed, value: isSecondsLongPressed)
@@ -244,7 +244,7 @@ struct BubbleCell: View {
     
     ///hundredths of a second that is :)
     private var hundredthsView:some View {
-        Text(bubble.bubbleCell_Components.cents)
+        Text(bubble.bCell_Components.cents)
             .background(Circle()
                 .foregroundColor(Color("pauseStickerColor"))
                 .padding(-12))
@@ -336,9 +336,9 @@ extension BubbleCell {
     
     //stopwatch: minutes and hours stay hidden initially
     private var minOpacity:Double {
-        bubble.bubbleCell_Components.min > "0" || bubble.bubbleCell_Components.hr > "0" ? 1 : 0.001
+        bubble.bCell_Components.min > "0" || bubble.bCell_Components.hr > "0" ? 1 : 0.001
     }
-    private var hrOpacity:Double { bubble.bubbleCell_Components.hr > "0" ? 1 : 0.001 }
+    private var hrOpacity:Double { bubble.bCell_Components.hr > "0" ? 1 : 0.001 }
     
     private var noNote:Bool { bubble.note_.isEmpty }
     

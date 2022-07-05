@@ -27,7 +27,7 @@ public class Bubble: NSManagedObject {
     
     // MARK: -
     ///@Published time components that bubbleCell displays. ex: "12"hr "34"min "59"sec
-    @Published var bubbleCell_Components
+    @Published var bCell_Components
     = Float.TimeComponentsAsStrings(hr: "0", min: "0", sec: "0", cents: "00")
     { willSet { self.objectWillChange.send() }}
     
@@ -107,7 +107,10 @@ extension Bubble {
                     guard let self = self else { return }
                                                             
                     let componentsString = self.currentClock.timeComponentsAsStrings
-                    DispatchQueue.main.async { self.bubbleCell_Components = componentsString }
+                    print("currentClock \(self.currentClock)")
+                    DispatchQueue.main.async {
+                        self.bCell_Components = componentsString
+                    }
                 }
             default: NotificationCenter.default.removeObserver(self)
         }
@@ -134,7 +137,7 @@ extension Bubble {
         let componentsString = value.timeComponentsAsStrings
                             
         //since closure is executed on background thread, dispatch back to the main thread
-        DispatchQueue.main.async { self.bubbleCell_Components = componentsString }
+        DispatchQueue.main.async { self.bCell_Components = componentsString }
     }
     
     ///update smallBubbleCell time components: hr min sec
