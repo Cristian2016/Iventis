@@ -101,15 +101,16 @@ extension Bubble {
     }
     
     ///observe backgroundtimer signal to update time components only if bubble is running
-    func observeBackgroundTimer() { isObservingBackgroundTimer = true
-        NotificationCenter.default.addObserver(forName: .timerSignal, object: nil, queue: nil) {
-            
-            [weak self] _ in
-            
-            self?.signalReceived = Date()
-            self?.updateBubbleCellComponents()
-            self?.updateSmallBubbleCell()
-        }
+    func observeBackgroundTimer() {
+        isObservingBackgroundTimer = true
+        
+        NotificationCenter.default
+            .addObserver(forName: .timerSignal, object: nil, queue: nil) {
+                [weak self] _ in
+                
+                self?.updateBubbleCellComponents()
+                self?.updateSmallBubbleCell()
+            }
     }
     
     ///time components: hr min sec hundredths
