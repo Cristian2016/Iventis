@@ -77,7 +77,7 @@ struct BubbleNote: View {
                 .foregroundColor(.label)
                 .background(background)
                 .cornerRadius(cornerRadius)
-                .shadow(color:.black.opacity(0.1), radius: 2, x: 2, y: 2)
+                .shadow(color:.black.opacity(0.1), radius: 2, x: 0, y: 2)
                 //offset controlled by the user via drag gesture
                 .offset(x: offsetX, y: 0)
                 .opacity(triggerDeleteAction ? 0 : 1)
@@ -101,7 +101,7 @@ struct BubbleNote: View {
                 .scaleEffect(0.4)
             RoundedRectangle(cornerRadius: cornerRadius)
                 .fill(Color.clear)
-                .background(.thinMaterial)
+                .background(.regularMaterial)
         }
     }
     
