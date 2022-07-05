@@ -28,7 +28,14 @@ class ViewModel: ObservableObject {
     init() {
         let request = Bubble.fetchRequest()
         let bubbles = try? PersistenceController.shared.viewContext.fetch(request)
-        bubbles?.forEach { $0.observeAppLaunch(.start) }
+        delayExecution(.now() + 0.0001) {
+            bubbles?.forEach {
+                if $0.state != .running {
+                    $0.bCell_Components = $0.currentClock.timeComponentsAsStrings
+                }
+            }
+        }
+        
     }
     
     deinit { NotificationCenter.default.removeObserver(self) }
