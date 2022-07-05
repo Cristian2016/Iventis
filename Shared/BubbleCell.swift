@@ -185,16 +185,13 @@ struct BubbleCell: View {
         ZStack {
             background
             timeComponents
-            let putTransparentGeometryReaderView = showDeleteActionView || showDetailView
-            if putTransparentGeometryReaderView {
-                cellLowEmitterView
-                    .background {
-                        GeometryReader {
-                            let value = BubbleCellLow_Key.RankFrame(rank: Int(bubble.rank), frame: $0.frame(in: .global))
-                            Color.clear.preference(key: BubbleCellLow_Key.self, value: value)
-                        }
-                    }
-            }
+            let putPositionEmitterView = showDeleteActionView || showDetailView
+            if putPositionEmitterView { cellLowEmitterView.background {
+                GeometryReader {
+                    let value = BubbleCellLow_Key.RankFrame(rank: Int(bubble.rank), frame: $0.frame(in: .global))
+                    Color.clear.preference(key: BubbleCellLow_Key.self, value: value)
+                }
+            } }
         }
         //subviews
         .overlay { if !noNote {
