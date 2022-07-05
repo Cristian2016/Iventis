@@ -28,6 +28,10 @@ class ViewModel: ObservableObject {
     init() {
         let request = Bubble.fetchRequest()
         let bubbles = try? PersistenceController.shared.viewContext.fetch(request)
+        updateCurrentClock(of: bubbles)
+    }
+    
+    private func updateCurrentClock(of bubbles:[Bubble]?) {
         delayExecution(.now() + 0.0001) {
             bubbles?.forEach {
                 if $0.state != .running {
@@ -35,7 +39,6 @@ class ViewModel: ObservableObject {
                 }
             }
         }
-        
     }
     
     deinit { NotificationCenter.default.removeObserver(self) }
