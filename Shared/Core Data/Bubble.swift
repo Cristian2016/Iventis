@@ -99,7 +99,7 @@ extension Bubble {
         case stop
     }
     
-    ///observe backgroundtimer signal. update time components only if bubble is running
+    ///observe backgroundtimer signal to update time components only if bubble is running
     func observeBackgroundTimer() { isObservingBackgroundTimer = true
         NotificationCenter.default.addObserver(forName: .timerSignal, object: nil, queue: nil) {
             
