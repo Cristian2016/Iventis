@@ -176,12 +176,10 @@ struct BubbleCell: View {
     
     ///user taps minutes or hours
     private func userWantsDetailView() {
-        if vm.rankOfSelectedBubble == nil {
-            vm.rankOfSelectedBubble = Int(bubble.rank)
-            vm.isDetailViewShowing = true
-        }
+        vm.rankOfSelectedBubble = Int(bubble.rank)
+        vm.isDetailViewShowing = true
     }
-        
+    
     // MARK: -
     var body: some View {
         ZStack {
