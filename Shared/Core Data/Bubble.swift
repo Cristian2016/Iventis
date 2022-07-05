@@ -113,7 +113,7 @@ extension Bubble {
             }
     }
     
-    ///time components: hr min sec hundredths
+    ///time components hr:min:sec:hundredths
     private func updateBubbleCellComponents() {
         if state != .running { return }
         guard let lastPairStart = lastPair!.start else { return }
