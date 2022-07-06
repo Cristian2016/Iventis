@@ -10,15 +10,40 @@
 import SwiftUI
 
 struct NoteButton: View {
-    let note: String
+    // MARK: - Data and Action
+    let note: String //what it displayes
+    var action:() -> () //user intent
+    
+    // MARK: -
     @State var offsetX = CGFloat.zero
+    @State var actionTriggered = false
     
     var triggerPairDeleteAction:Bool { abs(offsetX) > 180 }
     var deleteLabelVisible:Bool { abs(offsetX) > 60 }
-    @State var actionTriggered = false
     
-    var action:() -> ()
+    var drag: some Gesture {
+        DragGesture()
+            .onChanged {
+                offsetX = $0.translation.width
+                
+                //if statement must be executed only once!
+                if triggerPairDeleteAction && !actionTriggered {
+                    actionTriggered = true
+                    UserFeedback.singleHaptic(.medium)
+                    action()
+                    withAnimation(.easeInOut(duration: 2)) { offsetX = 0 }
+                }
+            }
+            .onEnded { value in
+                if actionTriggered {
+                    delayExecution(.now() + 1.5) { offsetX = 0 }
+                    actionTriggered = false
+                }
+                else { withAnimation { offsetX = 0 } }
+            }
+    }
     
+    // MARK: -
     var body: some View {
         ZStack {
             //"Delete"/"Done" Text
@@ -50,28 +75,6 @@ struct NoteButton: View {
                 .offset(x: offsetX)
                 .gesture(drag)
         }
-    }
-    
-    var drag: some Gesture {
-        DragGesture()
-            .onChanged {
-                offsetX = $0.translation.width
-                
-                //if statement must be executed only once!
-                if triggerPairDeleteAction && !actionTriggered {
-                    actionTriggered = true
-                    UserFeedback.singleHaptic(.medium)
-                    action()
-                    withAnimation(.easeInOut(duration: 2)) { offsetX = 0 }
-                }
-            }
-            .onEnded { value in
-                if actionTriggered {
-                    delayExecution(.now() + 1.5) { offsetX = 0 }
-                    actionTriggered = false
-                }
-                else { withAnimation { offsetX = 0 } }
-            }
     }
 }
 
