@@ -196,15 +196,12 @@ struct BubbleCell: View {
         //subviews
         .overlay {
             Push(.topLeft) {
-                NoteButton (alignment: .leading) {
-                    noteButtonContent
-                } action: {
-                    vm.deleteNote(for: bubble)
-                }
+                NoteButton (alignment: .leading)
+                { noteButtonContent } action: { vm.deleteNote(for: bubble) }
             }
         } //noteView
         .overlay { if bubble.hasCalendar && noNote { calendarView } } //calendar symbol
-        //gestures
+                                                                      //gestures
         .onDrag { NSItemProvider() }
         .swipeActions(edge: .leading, allowsFullSwipe: true) {
             
