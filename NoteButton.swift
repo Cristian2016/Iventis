@@ -12,13 +12,15 @@ import SwiftUI
 struct NoteButton<Content:View>: View {
     // MARK: - Data and Action
     let content: Content //what it displayes
-    var action:() -> () //user intent
+    var dragAction:() -> () //user intent
+    var tapAction:() -> ()
     let alignment:Alignment
     
-    init(alignment: Alignment = .trailing, @ViewBuilder content: () -> Content, action: @escaping () -> Void) {
+    init(alignment: Alignment = .trailing, @ViewBuilder content: () -> Content, dragAction: @escaping () -> Void, tapAction: @escaping () -> Void) {
         self.content = content()
-        self.action = action
+        self.dragAction = dragAction
         self.alignment = alignment
+        self.tapAction = tapAction
     }
     
     // MARK: -
@@ -37,7 +39,7 @@ struct NoteButton<Content:View>: View {
                 if triggerPairDeleteAction && !actionTriggered {
                     actionTriggered = true
                     UserFeedback.singleHaptic(.medium)
-                    action()
+                    dragAction()
                     withAnimation(.easeInOut(duration: 2)) { offsetX = 0 }
                 }
             }
@@ -68,7 +70,9 @@ struct NoteButton<Content:View>: View {
                 .opacity(deleteLabelVisible ? 1 : 0)
             content
                 .offset(x: offsetX)
+                //gestures
                 .gesture(dragGesture)
+                .onTapGesture { tapAction() }
         }
     }
     

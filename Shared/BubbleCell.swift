@@ -198,11 +198,13 @@ struct BubbleCell: View {
         .overlay {
             Push(.topLeft) {
                 NoteButton (alignment: .leading)
-                { noteButtonContent } action: { vm.deleteNote(for: bubble) }
+                { noteButtonContent }
+            dragAction: { vm.deleteNote(for: bubble) }
+                tapAction : { handleNoteTap() }
             }
             .offset(y: -16)
         } //noteView
-        //gestures
+          //gestures
         .onDrag { NSItemProvider() }
         .swipeActions(edge: .leading, allowsFullSwipe: true) {
             
