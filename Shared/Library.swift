@@ -10,6 +10,16 @@ import UIKit
 #endif
 import SwiftUI
 
+extension Date {
+    func sameDay(with date:Date) -> Bool {
+        let calendar = Calendar(identifier: .gregorian)
+        if calendar.component(.day, from: self) == calendar.component(.day, from: date) {
+            return true
+        }
+        return false
+    }
+}
+
 extension UIDevice {
     static let isIPad: Bool = UIDevice.current.userInterfaceIdiom == .pad
 }
@@ -150,13 +160,6 @@ extension NumberFormatter {
     }
 }
 
-extension String {
-    static let appGroupName = "group.com.Timers.container"
-    
-    static let smallestEmojiValue = 127744
-    static let emptySpaceValue = 32
-}
-
 extension FileManager {
     static var sharedContainerURL:URL = {
         guard let url = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: String.appGroupName)
@@ -166,6 +169,11 @@ extension FileManager {
 }
 
 extension String {
+    static let appGroupName = "group.com.Timers.container"
+    static let smallestEmojiValue = 127744
+    static let emptySpaceValue = 32
+    
+    
     ///if user enters "Gym ", it will be corrected to "Gym"
     mutating func trimWhiteSpaceAtTheEnd() {
         while last == " " { removeLast() }

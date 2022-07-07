@@ -74,10 +74,18 @@ struct TopCell: View {
     private var dateView: some View {
         if let sessionCreated = session.created {
             HStack {
+                //start Date
                 Text(DateFormatter.shortDate.string(from: sessionCreated))
-                if let start = session.pairs_.last?.start, start != sessionCreated {
+                
+                //end Date if end Date is NOT on same day as start Date
+                if let pause = session.pairs_.last?.pause, !pause.sameDay(with: sessionCreated) {
                     Text("-")
-                    Text(DateFormatter.shortDate.string(from: start))
+                    Text(DateFormatter.shortDate.string(from: pause))
+                } else {
+                    if let start = session.pairs_.last?.start, !start.sameDay(with: sessionCreated) {
+                        Text("-")
+                        Text(DateFormatter.shortDate.string(from: start))
+                    }
                 }
             }
             .font(.title2)
