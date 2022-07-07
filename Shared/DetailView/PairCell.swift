@@ -81,8 +81,23 @@ struct PairCell: View {
                 .highPriorityGesture(longPress)
                 
                 //like a button it has a closure for action
-                Push(.bottomRight) { NoteButton(content: pair.note_) { deleteNote() } }
-                    .offset(y: 12)
+                Push(.bottomRight) {
+//                    NoteButton(content: pair.note_) { deleteNote() }
+                    NoteButton {
+                        Text(pair.note_.isEmpty ? "Something" : pair.note_)
+                            .font(.system(size: 26))
+                            .padding([.leading, .trailing], 10)
+                            .background {
+                                RoundedRectangle(cornerRadius: 2)
+                                    .fill(Color.background2)
+                                    .frame(height: 44)
+                                    .standardShadow(false)
+                            }
+                            .opacity(pair.note_.isEmpty ? 0 : 1)
+                    }
+                    action : { deleteNote() }
+                }
+                .offset(y: 12)
             }
         }
     }

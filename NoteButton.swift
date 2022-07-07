@@ -9,10 +9,15 @@
 
 import SwiftUI
 
-struct NoteButton: View {
+struct NoteButton<Content:View>: View {
     // MARK: - Data and Action
-    let content: String //what it displayes
+    let content: Content //what it displayes
     var action:() -> () //user intent
+    
+    init(@ViewBuilder content: () -> Content, action: @escaping () -> Void) {
+        self.content = content()
+        self.action = action
+    }
     
     // MARK: -
     @State var offsetX = CGFloat.zero
@@ -61,16 +66,17 @@ struct NoteButton: View {
                 .opacity(deleteLabelVisible ? 1 : 0)
             
             //Note Text
-            Text(content.isEmpty ? "Something" : content)
-                .font(.system(size: 26))
-                .padding([.leading, .trailing], 10)
-                .background {
-                    RoundedRectangle(cornerRadius: 2)
-                        .fill(Color.background2)
-                        .frame(height: 44)
-                        .standardShadow(false)
-                }
-                .opacity(content.isEmpty ? 0 : 1)
+//            Text(content.isEmpty ? "Something" : content)
+//                .font(.system(size: 26))
+//                .padding([.leading, .trailing], 10)
+//                .background {
+//                    RoundedRectangle(cornerRadius: 2)
+//                        .fill(Color.background2)
+//                        .frame(height: 44)
+//                        .standardShadow(false)
+//                }
+//                .opacity(content.isEmpty ? 0 : 1)
+            content
                 .offset(x: offsetX)
                 .gesture(dragGesture)
         }
@@ -85,14 +91,14 @@ struct NoteButton: View {
     }
 }
 
-struct PairNoteButton_Previews: PreviewProvider {
-    static let pair:Pair = {
-        let pair = Pair(context: PersistenceController.shared.viewContext)
-        pair.note = "Pula Mea"
-        return pair
-    }()
-    
-    static var previews: some View {
-        NoteButton(content: "Ok") {  /* delete action */ }
-    }
-}
+//struct PairNoteButton_Previews: PreviewProvider {
+//    static let pair:Pair = {
+//        let pair = Pair(context: PersistenceController.shared.viewContext)
+//        pair.note = "Pula Mea"
+//        return pair
+//    }()
+//
+//    static var previews: some View {
+//        NoteButton(content: "Ok") {  /* delete action */ }
+//    }
+//}
