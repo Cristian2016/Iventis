@@ -64,6 +64,7 @@ struct PairNotesList: View {
         )
     }
     
+    ///when user types in a new note instead of selecting an existing note
     private func saveNoteToCoreData(_ note:String, for pair: Pair) {
         //clean up textInput by removing white spaces
         var trimmedNote = note
@@ -82,6 +83,7 @@ struct PairNotesList: View {
         UserFeedback.singleHaptic(.heavy)
     }
     
+    ///when user selects an existing note instead of typing in a new note
     private func selectExitingNote(_ note:String) {
         var trimmedNote = note
         trimmedNote.removeWhiteSpaceAtBothEnds()
