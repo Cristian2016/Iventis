@@ -47,15 +47,11 @@ struct NoteButton: View {
     var body: some View {
         ZStack (alignment: .trailing) {
             //"Delete"/"Done" Text
-            Text(triggerPairDeleteAction ?
-                 "\(Image(systemName: "checkmark.circle")) Done"
-                 : "\(Image(systemName: "trash"))  Delete"
-            )
+            deleteText
                 .transaction { $0.animation = nil } //1
                 .foregroundColor(.white)
                 .font(.system(size: 24).weight(.medium))
                 .padding()
-//                .padding([.leading, .trailing], 4)
                 .background {
                     RoundedRectangle(cornerRadius: 2)
                         .fill(triggerPairDeleteAction ? .green : .red)
@@ -79,6 +75,13 @@ struct NoteButton: View {
                 .offset(x: offsetX)
                 .gesture(dragGesture)
         }
+    }
+    
+    private var deleteText:some View {
+        Text(triggerPairDeleteAction ?
+             "\(Image(systemName: "checkmark.circle")) Done"
+             : "\(Image(systemName: "trash")) Delete"
+        )
     }
 }
 
