@@ -58,7 +58,6 @@ struct NoteButton: View {
                         .transaction { $0.animation = nil } //1
                         .frame(height: 44)
                 }
-                .offset(y: 8)
                 .opacity(deleteLabelVisible ? 1 : 0)
             
             //Note Text

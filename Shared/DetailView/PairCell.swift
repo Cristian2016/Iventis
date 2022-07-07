@@ -82,6 +82,7 @@ struct PairCell: View {
                 
                 //like a button it has a closure for action
                 Push(.bottomRight) { NoteButton(content: pair.note_) { deleteNote() } }
+                    .offset(y: 12)
             }
         }
     }
