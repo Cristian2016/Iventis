@@ -53,6 +53,9 @@ struct PairCell: View {
     let duration:Float.TimeComponentsAsStrings?
     let pairNumber:Int
     
+    private let textPadding = EdgeInsets(top: 4, leading: 6, bottom: 4, trailing: 8)
+    let collapsedNoteWidth = CGFloat(50)
+    
     // MARK: - Little Things
     let contentFrameGap = CGFloat(4) //how much gap between content and its enclosing frame
     let durationFont = Font.system(size: 22, weight: .medium, design: .default)
@@ -84,7 +87,7 @@ struct PairCell: View {
                 Push(.bottomRight) {
                     NoteButton { noteButtonContent }
                     dragAction : { deleteNote() }
-                    tapAction : { handleNoteTap() }
+                    tapAction : { toggleNote() }
                 }
                 .offset(y: 12)
             }
@@ -93,7 +96,7 @@ struct PairCell: View {
     
     // MARK: -
     private var noteButtonContent:some View {
-        Text(pair.note_.isEmpty ? "Something" : pair.note_)
+        noteText
             .font(.system(size: 26))
             .padding([.leading, .trailing], 10)
             .background {
@@ -103,6 +106,18 @@ struct PairCell: View {
                     .standardShadow(false)
             }
             .opacity(pair.note_.isEmpty ? 0 : 1)
+    }
+    
+    @ViewBuilder
+    private var noteText:some View {
+        if pair.isNoteHidden {
+            Text("\(Image(systemName: "text.alignleft"))")
+                .padding(textPadding)
+                .font(.system(size: 20))
+                .frame(width: collapsedNoteWidth)
+        } else {
+            Text(pair.note_.isEmpty ? "Something" : pair.note_)
+        }
     }
     
     // MARK: -
@@ -208,7 +223,8 @@ struct PairCell: View {
         PersistenceController.shared.save()
     }
     
-    func handleNoteTap() {
+    ///show/hide Pair.note
+    func toggleNote() {
         UserFeedback.singleHaptic(.light)
         pair.isNoteHidden.toggle()
         PersistenceController.shared.save()
