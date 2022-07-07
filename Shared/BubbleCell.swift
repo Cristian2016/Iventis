@@ -194,11 +194,15 @@ struct BubbleCell: View {
             } }
         }
         //subviews
-        .overlay { if !noNote {
-            bubbleNote
-                .offset(noteOffset)
-                .onTapGesture { handleNoteTap() }
-        } } //noteView
+        .overlay {
+            Push(.topLeft) {
+                NoteButton (alignment: .leading) {
+                    noteButtonContent
+                } action: {
+                    vm.deleteNote(for: bubble)
+                }
+            }
+        } //noteView
         .overlay { if bubble.hasCalendar && noNote { calendarView } } //calendar symbol
         //gestures
         .onDrag { NSItemProvider() }
@@ -236,6 +240,12 @@ struct BubbleCell: View {
     
     // MARK: - Legoes
     ////added to bubbleCell only if cellLow value is needed. ex: to know how to position DeleteActionView
+    
+    // MARK: -
+    private var noteButtonContent:some View {
+        BubbleNote().environmentObject(bubble)
+    }
+    
     private var cellLowEmitterView: some View {
         Circle()
         .fill(Color.clear)
@@ -268,12 +278,6 @@ struct BubbleCell: View {
                 Spacer()
             }
             Spacer()
-        }
-    }
-        
-    private var bubbleNote:some View {
-        Push(.topLeft) {
-            BubbleNote().environmentObject(bubble)
         }
     }
     

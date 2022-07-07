@@ -13,10 +13,12 @@ struct NoteButton<Content:View>: View {
     // MARK: - Data and Action
     let content: Content //what it displayes
     var action:() -> () //user intent
+    let alignment:Alignment
     
-    init(@ViewBuilder content: () -> Content, action: @escaping () -> Void) {
+    init(alignment: Alignment = .trailing, @ViewBuilder content: () -> Content, action: @escaping () -> Void) {
         self.content = content()
         self.action = action
+        self.alignment = alignment
     }
     
     // MARK: -
@@ -50,7 +52,7 @@ struct NoteButton<Content:View>: View {
     
     // MARK: -
     var body: some View {
-        ZStack (alignment: .trailing) {
+        ZStack (alignment: alignment) {
             //"Delete"/"Done" Text
             deleteText
                 .transaction { $0.animation = nil } //1

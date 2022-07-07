@@ -19,56 +19,11 @@ struct BubbleNote: View {
     
     // MARK: - Drag to delete
     @State private var noteDeleted = false
-    @State private var offsetX = CGFloat(0)
-    private let offsetDeleteTriggerLimit = CGFloat(180)
-    private var triggerDeleteAction:Bool { offsetX >= offsetDeleteTriggerLimit }
-    
-    var dragGesture : some Gesture {
-        DragGesture()
-            .onChanged { value in
-                withAnimation {
-                    if !triggerDeleteAction {
-                        offsetX = value.translation.width
-                    } else {
-                        if !noteDeleted {
-                            deleteStickyWithDelay()
-                            noteDeleted = true //block drag gesture.. any other better ideas??
-                            UserFeedback.singleHaptic(.light)
-                        }
-                    }
-                }
-            }
-            .onEnded { value in
-                withAnimation {
-                    if value.translation.width < offsetDeleteTriggerLimit {
-                        //user lets go without deleting the sticky
-                        //so sticky snaps back to its initial position
-                        offsetX = 0
-                    } else {
-                        //user wants to delete sticky and goes all the way
-                        //block drag gesture.. any other better ideas??
-                        deleteStickyWithDelay()
-                        noteDeleted = true
-                        UserFeedback.singleHaptic(.light)
-                    }
-                }
-            }
-    }
-    
-    ///without delay the animation does not have time to take place
-    //⚠️ not the best idea though...
-    func deleteStickyWithDelay() {
-        delayExecution(.now() + 1.5) {
-            viewModel.deleteNote(for: bubble)
-        }
-    }
     
     // MARK: -
     var body: some View {
         if !bubble.isFault {
-            ZStack (alignment: .leading) {
-                DeleteConfirmationLabel(noteDeleted: $noteDeleted, offsetX: $offsetX)
-                    .offset(x: 0, y: 5)
+//            ZStack (alignment: .leading) {
                 //stickyNote
                 HStack (spacing:0) {
                     calendarSymbol
@@ -78,12 +33,7 @@ struct BubbleNote: View {
                 .background(background)
                 .cornerRadius(cornerRadius)
                 .shadow(color:.black.opacity(0.1), radius: 2, x: 0, y: 2)
-                //offset controlled by the user via drag gesture
-                .offset(x: offsetX, y: 0)
-                .opacity(triggerDeleteAction ? 0 : 1)
-                //drag the view to delete
-                .gesture(dragGesture)
-            }
+//            }
         }
     }
     
