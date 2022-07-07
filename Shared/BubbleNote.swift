@@ -23,17 +23,14 @@ struct BubbleNote: View {
     // MARK: -
     var body: some View {
         if !bubble.isFault {
-//            ZStack (alignment: .leading) {
-                //stickyNote
-                HStack (spacing:0) {
-                    calendarSymbol
-                    stickyNoteTextView
-                }
-                .foregroundColor(.label)
-                .background(background)
-                .cornerRadius(cornerRadius)
-                .shadow(color:.black.opacity(0.1), radius: 2, x: 0, y: 2)
-//            }
+            HStack (spacing:0) {
+                calendarSymbol
+                stickyNoteTextView
+            }
+            .foregroundColor(.label)
+            .background(background)
+            .cornerRadius(cornerRadius)
+            .shadow(color:.black.opacity(0.1), radius: 2, x: 0, y: 2)
         }
     }
     

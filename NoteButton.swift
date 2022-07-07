@@ -66,18 +66,6 @@ struct NoteButton<Content:View>: View {
                         .frame(height: 44)
                 }
                 .opacity(deleteLabelVisible ? 1 : 0)
-            
-            //Note Text
-//            Text(content.isEmpty ? "Something" : content)
-//                .font(.system(size: 26))
-//                .padding([.leading, .trailing], 10)
-//                .background {
-//                    RoundedRectangle(cornerRadius: 2)
-//                        .fill(Color.background2)
-//                        .frame(height: 44)
-//                        .standardShadow(false)
-//                }
-//                .opacity(content.isEmpty ? 0 : 1)
             content
                 .offset(x: offsetX)
                 .gesture(dragGesture)

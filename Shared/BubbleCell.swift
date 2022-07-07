@@ -341,7 +341,10 @@ extension BubbleCell {
     }
     private var hrOpacity:Double { bubble.bCell_Components.hr > "0" ? 1 : 0.001 }
     
-    private var noNote:Bool { bubble.note_.isEmpty }
+    private var noNote:Bool {
+        print("bubbleNote \(bubble.note_.isEmpty)")
+        return bubble.note_.isEmpty
+    }
     
     ///circle diameter, font size, spacing and so on
     struct Metrics {
