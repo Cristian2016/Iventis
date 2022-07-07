@@ -199,7 +199,7 @@ struct BubbleCell: View {
                 NoteButton (alignment: .leading)
                 { noteButtonContent } action: { vm.deleteNote(for: bubble) }
             }
-            .offset(y: -14)
+            .offset(y: -16)
         } //noteView
         .overlay { if bubble.hasCalendar && noNote { calendarSymbol } }
         //gestures

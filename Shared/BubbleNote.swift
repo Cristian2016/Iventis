@@ -24,6 +24,7 @@ struct BubbleNote: View {
                 calendarSymbol
                 stickyNoteTextView
             }
+//            .opacity(bubble.note_.isEmpty ? 0 : 1)
             .foregroundColor(.label)
             .background(background)
             .cornerRadius(cornerRadius)
