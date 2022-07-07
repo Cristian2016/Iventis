@@ -21,7 +21,7 @@ struct NoteButton: View {
     var triggerPairDeleteAction:Bool { abs(offsetX) > 180 }
     var deleteLabelVisible:Bool { abs(offsetX) > 60 }
     
-    var drag: some Gesture {
+    var dragGesture: some Gesture {
         DragGesture()
             .onChanged {
                 offsetX = $0.translation.width
@@ -73,7 +73,7 @@ struct NoteButton: View {
                 }
                 .opacity(note.isEmpty ? 0 : 1)
                 .offset(x: offsetX)
-                .gesture(drag)
+                .gesture(dragGesture)
         }
     }
 }
