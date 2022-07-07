@@ -199,9 +199,10 @@ struct BubbleCell: View {
                 NoteButton (alignment: .leading)
                 { noteButtonContent } action: { vm.deleteNote(for: bubble) }
             }
+            .offset(y: -14)
         } //noteView
-        .overlay { if bubble.hasCalendar && noNote { calendarView } } //calendar symbol
-                                                                      //gestures
+        .overlay { if bubble.hasCalendar && noNote { calendarSymbol } }
+        //gestures
         .onDrag { NSItemProvider() }
         .swipeActions(edge: .leading, allowsFullSwipe: true) {
             
@@ -268,7 +269,7 @@ struct BubbleCell: View {
             .zIndex(1)
     }
     
-    private var calendarView:some View {
+    private var calendarSymbol:some View {
         VStack {
             HStack {
                 CalendarSticker().offset(x: -10, y: -10)
@@ -276,6 +277,7 @@ struct BubbleCell: View {
             }
             Spacer()
         }
+        .padding([.leading], 4)
     }
     
     // MARK: - Methods
