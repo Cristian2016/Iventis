@@ -81,9 +81,7 @@ struct PairCell: View {
                 .highPriorityGesture(longPress)
                 
                 //like a button it has a closure for action
-                Push(.bottomRight) {
-                    NoteButton(note: pair.note_) { deleteNote() }
-                }
+                Push(.bottomRight) { NoteButton(content: pair.note_) { deleteNote() } }
             }
         }
     }

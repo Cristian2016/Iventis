@@ -11,7 +11,7 @@ import SwiftUI
 
 struct NoteButton: View {
     // MARK: - Data and Action
-    let note: String //what it displayes
+    let content: String //what it displayes
     var action:() -> () //user intent
     
     // MARK: -
@@ -62,7 +62,7 @@ struct NoteButton: View {
                 .opacity(deleteLabelVisible ? 1 : 0)
             
             //Note Text
-            Text(note.isEmpty ? "Something" : note)
+            Text(content.isEmpty ? "Something" : content)
                 .font(.system(size: 26))
                 .padding([.leading, .trailing], 10)
                 .background {
@@ -71,7 +71,7 @@ struct NoteButton: View {
                         .frame(height: 44)
                         .standardShadow(false)
                 }
-                .opacity(note.isEmpty ? 0 : 1)
+                .opacity(content.isEmpty ? 0 : 1)
                 .offset(x: offsetX)
                 .gesture(dragGesture)
         }
@@ -86,6 +86,6 @@ struct PairNoteButton_Previews: PreviewProvider {
     }()
     
     static var previews: some View {
-        NoteButton(note: "Ok") {  /* delete action */ }
+        NoteButton(content: "Ok") {  /* delete action */ }
     }
 }
