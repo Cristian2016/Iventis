@@ -17,9 +17,6 @@ struct BubbleNote: View {
     private let textPadding = EdgeInsets(top: 4, leading: 6, bottom: 4, trailing: 8)
     let collapsedNoteWidth = CGFloat(50)
     
-    // MARK: - Drag to delete
-    @State private var noteDeleted = false
-    
     // MARK: -
     var body: some View {
         if !bubble.isFault {
@@ -41,17 +38,6 @@ struct BubbleNote: View {
             .frame(width: bubble.hasCalendar ? 10 : 0, height: stickyHeight)
     }
     
-    private var background: some View {
-        ZStack {
-            RoundedRectangle(cornerRadius: cornerRadius)
-                .fill(Color.bubbleColor(forName: bubble.color!))
-                .scaleEffect(0.4)
-            RoundedRectangle(cornerRadius: cornerRadius)
-                .fill(Color.clear)
-                .background(.regularMaterial)
-        }
-    }
-    
     @ViewBuilder
     private var stickyNoteTextView: some View {
         if !bubble.isNoteHidden {
@@ -63,6 +49,17 @@ struct BubbleNote: View {
                 .padding(textPadding)
                 .font(.system(size: 20))
                 .frame(width: collapsedNoteWidth)
+        }
+    }
+    
+    private var background: some View {
+        ZStack {
+            RoundedRectangle(cornerRadius: cornerRadius)
+                .fill(Color.bubbleColor(forName: bubble.color!))
+                .scaleEffect(0.4)
+            RoundedRectangle(cornerRadius: cornerRadius)
+                .fill(Color.clear)
+                .background(.regularMaterial)
         }
     }
 }
