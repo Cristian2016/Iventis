@@ -77,6 +77,7 @@ struct NoteButton: View {
         }
     }
     
+    // MARK: -
     private var deleteText:some View {
         Text(triggerPairDeleteAction ?
              "\(Image(systemName: "checkmark.circle")) Done"
