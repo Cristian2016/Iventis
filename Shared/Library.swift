@@ -347,7 +347,7 @@ extension DateComponentsFormatter {
 
 extension DateFormatter {
     ///Time Bubbles date style: Tue, 15 Feb. 22
-    static let bubbleStyleDate: DateFormatter = {
+    static let date: DateFormatter = {
         let dateFormatter = DateFormatter()
         
         dateFormatter.locale = Locale(identifier: "us_US")
@@ -357,7 +357,7 @@ extension DateFormatter {
         return dateFormatter
     }()
     
-    static let bubbleStyleShortDate: DateFormatter = {
+    static let shortDate: DateFormatter = {
         let dateFormatter = DateFormatter()
         
         dateFormatter.locale = Locale(identifier: "us_US")
@@ -368,7 +368,7 @@ extension DateFormatter {
     }()
     
     ///Time Bubbles time style: 17:39:25
-    static let bubbleStyleTime: DateFormatter = {
+    static let time: DateFormatter = {
         let dateFormatter = DateFormatter()
         
         dateFormatter.locale = Locale.current

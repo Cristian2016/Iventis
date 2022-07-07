@@ -73,11 +73,17 @@ struct TopCell: View {
     @ViewBuilder
     private var dateView: some View {
         if let sessionCreated = session.created {
-            Text(DateFormatter.bubbleStyleShortDate.string(from: sessionCreated))
-                .font(.title2)
-                .fontWeight(.medium)
-                .background(color)
-                .foregroundColor(.white)
+            HStack {
+                Text(DateFormatter.shortDate.string(from: sessionCreated))
+                if let start = session.pairs_.last?.start, start != sessionCreated {
+                    Text("-")
+                    Text(DateFormatter.shortDate.string(from: start))
+                }
+            }
+            .font(.title2)
+            .fontWeight(.medium)
+            .background(color)
+            .foregroundColor(.white)
         } else { EmptyView() }
     }
     

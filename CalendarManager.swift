@@ -219,15 +219,15 @@ class CalendarManager: NSObject {
     
     // MARK: - helpers
     private func dateInterval(start:Date, end:Date) -> String {
-        let startDateString = DateFormatter.bubbleStyleDate.string(from: start)
-        let endDateString = DateFormatter.bubbleStyleDate.string(from: end)
+        let startDateString = DateFormatter.date.string(from: start)
+        let endDateString = DateFormatter.date.string(from: end)
         let startAndEndAreTheSame = startDateString == endDateString
         return !startAndEndAreTheSame ? startDateString + " - " + endDateString : startDateString
     }
     
     private func timeInterval(start:Date, end:Date) -> String {
-        let startTimeString = DateFormatter.bubbleStyleTime.string(from: start)
-        let endTimeString = DateFormatter.bubbleStyleTime.string(from: end)
+        let startTimeString = DateFormatter.time.string(from: start)
+        let endTimeString = DateFormatter.time.string(from: end)
         
         return startTimeString + " - " + endTimeString
     }
