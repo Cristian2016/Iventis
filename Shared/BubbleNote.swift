@@ -67,23 +67,6 @@ struct BubbleNote: View {
     }
 }
 
-struct DeleteConfirmationLabel: View {
-    @Binding var noteDeleted:Bool
-    @Binding var offsetX:CGFloat
-    
-    var body: some View {
-        Rectangle()
-            .fill(noteDeleted ? Color.green : .red)
-            .frame(width: 124, height: 44)
-            .opacity(abs(offsetX) > 60 ? 1 : 0)
-            .overlay {
-                Text(noteDeleted ? "Done" : "Delete")
-                    .foregroundColor(.white)
-                    .font(.system(size: 24).weight(.medium))
-            }
-    }
-}
-
 struct BubbleStickyNote_Previews: PreviewProvider {
     static var previews: some View {
         BubbleNote()
