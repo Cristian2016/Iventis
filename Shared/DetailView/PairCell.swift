@@ -84,7 +84,7 @@ struct PairCell: View {
                 Push(.bottomRight) {
                     NoteButton { noteButtonContent }
                     dragAction : { deleteNote() }
-                    tapAction : {  }
+                    tapAction : { handleNoteTap() }
                 }
                 .offset(y: 12)
             }
@@ -205,6 +205,12 @@ struct PairCell: View {
     func userWantsNotesList() {
         UserFeedback.singleHaptic(.light)
         viewModel.pairOfNotesList = pair
+        PersistenceController.shared.save()
+    }
+    
+    func handleNoteTap() {
+        UserFeedback.singleHaptic(.light)
+        pair.isNoteHidden.toggle()
         PersistenceController.shared.save()
     }
 }
