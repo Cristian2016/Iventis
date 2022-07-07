@@ -194,6 +194,7 @@ struct BubbleCell: View {
             } }
         }
         //subviews
+        .overlay { if bubble.hasCalendar && noNote { calendarSymbol } }
         .overlay {
             Push(.topLeft) {
                 NoteButton (alignment: .leading)
@@ -201,7 +202,6 @@ struct BubbleCell: View {
             }
             .offset(y: -16)
         } //noteView
-        .overlay { if bubble.hasCalendar && noNote { calendarSymbol } }
         //gestures
         .onDrag { NSItemProvider() }
         .swipeActions(edge: .leading, allowsFullSwipe: true) {

@@ -33,23 +33,28 @@ struct BubbleNote: View {
     }
     
     // MARK: - Lego 4
+    @ViewBuilder
     private var calendarSymbol: some View {
-        Rectangle()
-            .fill(bubble.hasCalendar ? Color.calendar : .clear)
-            .frame(width: bubble.hasCalendar ? 10 : 0, height: stickyHeight)
+        if !bubble.note_.isEmpty {
+            Rectangle()
+                .fill(bubble.hasCalendar ? Color.calendar : .clear)
+                .frame(width: bubble.hasCalendar ? 10 : 0, height: stickyHeight)
+        }
     }
     
     @ViewBuilder
     private var stickyNoteTextView: some View {
-        if !bubble.isNoteHidden {
-            Text(bubble.note_)
-                .padding(textPadding)
-                .font(font)
-        } else {
-            Text("\(Image(systemName: "text.alignleft"))")
-                .padding(textPadding)
-                .font(.system(size: 20))
-                .frame(width: collapsedNoteWidth)
+        if !bubble.note_.isEmpty {
+            if !bubble.isNoteHidden {
+                Text(bubble.note_)
+                    .padding(textPadding)
+                    .font(font)
+            } else {
+                Text("\(Image(systemName: "text.alignleft"))")
+                    .padding(textPadding)
+                    .font(.system(size: 20))
+                    .frame(width: collapsedNoteWidth)
+            }
         }
     }
     
