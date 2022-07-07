@@ -86,6 +86,7 @@ struct BubbleNotesList: View {
         
         UserFeedback.singleHaptic(.heavy)
         bubble.note = note
+        bubble.isNoteHidden = false
         try? PersistenceController.shared.viewContext.save()
         
         CalendarManager.shared.updateExistingEvent(.title(bubble))
@@ -104,6 +105,7 @@ struct BubbleNotesList: View {
         
         vm.save(note, forObject: bubble)
         UserFeedback.singleHaptic(.heavy)
+        bubble.isNoteHidden = false
     }
 }
 

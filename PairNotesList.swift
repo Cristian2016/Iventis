@@ -75,6 +75,8 @@ struct PairNotesList: View {
             return
         }
         
+        pair.isNoteHidden = false
+        
         //save note to CoreData if no duplicates
         vm.save(trimmedNote, forObject: pair)
         UserFeedback.singleHaptic(.heavy)
@@ -87,7 +89,11 @@ struct PairNotesList: View {
         if initialNote == trimmedNote { return }
         
         UserFeedback.singleHaptic(.heavy)
+        
+        //set pair.note and show note
         pair.note = note
+        pair.isNoteHidden = false
+        
         try? PersistenceController.shared.viewContext.save()
         
         CalendarManager.shared.updateExistingEvent(.notes(pair.session!))
