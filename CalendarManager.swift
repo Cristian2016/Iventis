@@ -111,26 +111,6 @@ extension CalendarManager {
         //since this method is called on bThread, make sure to save CoreData on mThread
         DispatchQueue.main.async { PersistenceController.shared.save() }
     }
-}
-
-// MARK: -
-class CalendarManager: NSObject {
-    private lazy var store = EventStore() /* read write events */
-    
-    private(set) var defaultCalendarTitle = "Time Bubbles 📥"
-    private let eventNotesSeparator = "Add notes below:\n"
-    private var defaultCalendarID:String? { UserDefaults.shared.value(forKey: UserDefaults.Key.defaultCalendarIdentifier) as? String }
-    
-    // MARK: - public
-    private var doNotCreateCalendar = false
-    
-    // MARK: - Events
-    //could this cause memory cycle?? ⚠️
-    private func lastSubeventNote(for session:Session) -> String {
-        session.bubble?.lastPair?.note ?? ""
-    }
-    
-    // MARK: - Main
     
     func updateExistingEvent(_ kind:EventUpdateKind) {
         switch kind {
@@ -169,7 +149,26 @@ class CalendarManager: NSObject {
             }
         }
     }
+}
+
+// MARK: -
+class CalendarManager: NSObject {
+    private lazy var store = EventStore() /* read write events */
     
+    private(set) var defaultCalendarTitle = "Time Bubbles 📥"
+    private let eventNotesSeparator = "Add notes below:\n"
+    private var defaultCalendarID:String? { UserDefaults.shared.value(forKey: UserDefaults.Key.defaultCalendarIdentifier) as? String }
+    
+    // MARK: - public
+    private var doNotCreateCalendar = false
+    
+    // MARK: - Events
+    //could this cause memory cycle?? ⚠️
+    private func lastSubeventNote(for session:Session) -> String {
+        session.bubble?.lastPair?.note ?? ""
+    }
+    
+    // MARK: - Main
     func deleteEvent(with id:String?) {
         guard
             let id = id,
@@ -284,23 +283,21 @@ class CalendarManager: NSObject {
     }
     
     private func title(for session:Session) -> String {
+        //bNote bubbleNote
+        //emojiSquare 🟪
+        //pCount pairsCount
         guard let bubble = session.bubble else { return "No Title" }
         
         let friendlyBubbleColorName = Color.userFriendlyBubbleColorName(for: bubble.color)
-        let note = bubble.note_.isEmpty ? friendlyBubbleColorName : bubble.note_
-        let colorEmoji = Color.emoji(for: bubble.color ?? "mint")
+        let bNote = bubble.note_.isEmpty ? friendlyBubbleColorName : bubble.note_
+        let emojiSquare = Color.emoji(for: bubble.color ?? "mint")
         
-        let symbol:String
-        switch bubble.kind {
-        case .stopwatch: symbol = colorEmoji
-        case .timer(limit: _): symbol = colorEmoji
-        }
+        let pairsCount = String(session.pairs_.count)
+        let lastPairNote = " " + session.pairs_.last!.note_
         
-        let subeventsCount = String(session.pairs_.count)
-        let latestSubeventTitle = " " + session.pairs_.last!.note_
-        
-        let count = (subeventsCount != "1") ? "・\(subeventsCount)" : ""
-        let eventTitle = symbol + note + latestSubeventTitle + count
+        let pCount = (pairsCount != "1") ? "・\(pairsCount)" : ""
+        let eventTitle = emojiSquare + bNote + lastPairNote + pCount
+        print("eventTitle ", eventTitle)
         
         return eventTitle
     }
