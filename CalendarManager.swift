@@ -183,39 +183,6 @@ class CalendarManager: NSObject {
         event.notes = note
     }
     
-    // MARK: - new feature
-    func newQuickActionEvent() {
-        
-        let event = EKEvent(eventStore: store)
-        event.title = "Quick Action Event"
-        
-        //set event duration to 15 min
-        event.startDate = Date()
-        event.endDate = Date().addingTimeInterval(60*15)
-        
-        let defaultCalendarIdentifier = UserDefaults.shared.value(forKey: UserDefaults.Key.defaultCalendarIdentifier) as? String
-        
-        if let calendar = store.calendars(for: .event).filter({$0.calendarIdentifier == defaultCalendarIdentifier}).first {
-            event.calendar = calendar
-        }
-        else {
-            createCalendarIfNeeded(with: defaultCalendarTitle)
-            delayExecution(.now() + 2.0) {[weak self] in
-                let calendar = self?.store.calendars(for: .event).filter({$0.calendarIdentifier == defaultCalendarIdentifier}).first
-                event.calendar = calendar
-            }
-        }
-        event.alarms = []
-        
-        do {
-            try store.save(event, span: .thisEvent, commit: true)
-        }
-        catch let error {
-            print(error.localizedDescription)
-            return
-        }
-    }
-    
     // MARK: - helpers
     private func dateInterval(start:Date, end:Date) -> String {
         let startDateString = DateFormatter.date.string(from: start)
@@ -300,13 +267,7 @@ class CalendarManager: NSObject {
         
         return eventTitle
     }
-    
-    private func isEventStillInTheCalendar(_ eventID:String) -> Bool {
-        return false
-    }
-    
-    // MARK: - helpers
-    ///if stickynote matches a calendar already present in the Calendar App
+        
     private func suggestedCalendar(for note:String?) -> EKCalendar? {
         guard let note = note else { return nil }
         
