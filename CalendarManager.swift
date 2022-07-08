@@ -101,7 +101,7 @@ extension CalendarManager {
         
         let notes = composeEventNotes(from: pairs)
         
-        let title = title(for: session)
+        let title = eventTitle(for: session)
         session.eventID = newEvent(with: title,
                                    bubbleNote:session.bubble?.note,
                                    eventNotes: notes,
@@ -128,7 +128,7 @@ extension CalendarManager {
                 
                 // FIXME: find a better implementation
                 //change event title here only if the latest note has changed as well
-                event.title = title(for: session)
+                event.title = eventTitle(for: session)
                 event.notes = updatedNotes
                 
                 do { try store.save(event, span: .thisEvent, commit: true) }
@@ -142,7 +142,7 @@ extension CalendarManager {
                     let id = $0.eventID,
                     let event = store.event(withIdentifier: id) {
                     
-                    event.title = title(for: $0)
+                    event.title = eventTitle(for: $0)
                     do { try store.save(event, span: .thisEvent, commit: true) }
                     catch { }
                 }
@@ -282,22 +282,21 @@ class CalendarManager: NSObject {
         catch { return nil }
     }
     
-    private func title(for session:Session) -> String {
+    private func eventTitle(for session:Session) -> String {
         //bNote bubbleNote
         //emojiSquare 🟪
         //pCount pairsCount
         guard let bubble = session.bubble else { return "No Title" }
         
         let friendlyBubbleColorName = Color.userFriendlyBubbleColorName(for: bubble.color)
-        let bNote = bubble.note_.isEmpty ? friendlyBubbleColorName : bubble.note_
         let emojiSquare = Color.emoji(for: bubble.color ?? "mint")
+        let bNote = bubble.note_.isEmpty ? friendlyBubbleColorName : bubble.note_
         
         let pairsCount = String(session.pairs_.count)
         let lastPairNote = " " + session.pairs_.last!.note_
         
         let pCount = (pairsCount != "1") ? "・\(pairsCount)" : ""
         let eventTitle = emojiSquare + bNote + lastPairNote + pCount
-        print("eventTitle ", eventTitle)
         
         return eventTitle
     }
