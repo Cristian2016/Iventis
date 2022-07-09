@@ -31,11 +31,11 @@ extension CalendarManager {
     ///there is no other calendar with same name or similar name.
     ///if it finds an existing calendar, it will set it as the default calendar
     private func createDefaultCalendar() {
-        //it looks for calendars with "Time Bubbles" or similar name
+        //it looks for calendars with title "Fused" or similar
         //if it doesn't find calendar with "Time Bubbles" name it will attempt to create one
         //prefered calDAV or at least local
         
-        if noNeedToCreateCalendar { return }
+        if noNeedToCreateDefaultCalendar { return }
         
     forEachLoop: for calendar in store.calendars(for: .event) {
             //if there is a calendar with that name already or similar name, do not create a calendar
@@ -43,7 +43,7 @@ extension CalendarManager {
                         
             if condition {
                 UserDefaults.shared.setValue(calendar.calendarIdentifier, forKey: UserDefaults.Key.defaultCalendarID)
-                noNeedToCreateCalendar = true
+                noNeedToCreateDefaultCalendar = true
                 break forEachLoop //early exit
             }
         }
@@ -155,12 +155,12 @@ class CalendarManager: NSObject {
     
     let defaultCalendarTitle = "Fused 📥"
     let defaultCalendarColor = #colorLiteral(red: 0.9529411793, green: 0.6862745285, blue: 0.1333333403, alpha: 1)
-    
-    private let eventNotesSeparator = "Add notes below:\n"
     private var defaultCalendarID:String? { UserDefaults.shared.value(forKey: UserDefaults.Key.defaultCalendarID) as? String }
     
+    private let eventNotesSeparator = "Add notes below:\n"
+    
     // MARK: - public
-    private var noNeedToCreateCalendar = false
+    private var noNeedToCreateDefaultCalendar = false
     
     // MARK: - Events
     //could this cause memory cycle?? ⚠️
