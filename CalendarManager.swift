@@ -24,14 +24,14 @@ extension CalendarManager {
         store.requestAccess(to: .event) {//not main thread
             [weak self] /* access */ userGrantedAccess, error in
             guard let self = self else {return}
-            if userGrantedAccess { self.createCalendarIfNeeded() }
+            if userGrantedAccess { self.createDefaultCalendarIfNeeded() }
         }
     }
     
     ///⚠️ To avoid duplicates, this function creates a calendar only if
     ///there is no other calendar with same name or similar name.
     ///if it finds an existing calendar, it will set it as the default calendar
-    private func createCalendarIfNeeded() {
+    private func createDefaultCalendarIfNeeded() {
         //it looks for calendars with "Time Bubbles" or similar name
         //if it doesn't find calendar with "Time Bubbles" name it will attempt to create one
         //prefered calDAV or at least local
@@ -234,7 +234,8 @@ class CalendarManager: NSObject {
         
         if let calendar = suggestedCalendar(for: bubbleNote) { event.calendar = calendar }
         else {//create Calendar if you can't find one
-            createCalendarIfNeeded()
+            createDefaultCalendarIfNeeded()
+            
             delayExecution(.now() + 2.0) {[weak self] in
                 let calendar =
                 self?.store.calendars(for: .event)
