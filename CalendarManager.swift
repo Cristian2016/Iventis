@@ -52,7 +52,7 @@ extension CalendarManager {
         //create calendar if nothing found
         let calendar = EKCalendar(for: .event, eventStore: store)
         calendar.title = defaultCalendarTitle
-        calendar.cgColor = #colorLiteral(red: 1, green: 0.4932718873, blue: 0.4739984274, alpha: 1).cgColor
+        calendar.cgColor = defaultCalendarColor.cgColor
         
         //ideal situation, iCloud calendar that syncs with all devices
         let calDAVSources = store.sources.filter { $0.sourceType == .calDAV }
@@ -154,7 +154,9 @@ extension CalendarManager {
 class CalendarManager: NSObject {
     private lazy var store = EventStore() /* read write events */
     
-    private(set) var defaultCalendarTitle = "Fused 📥"
+    let defaultCalendarTitle = "Fused 📥"
+    let defaultCalendarColor = #colorLiteral(red: 0.9529411793, green: 0.6862745285, blue: 0.1333333403, alpha: 1)
+    
     private let eventNotesSeparator = "Add notes below:\n"
     private var defaultCalendarID:String? { UserDefaults.shared.value(forKey: UserDefaults.Key.defaultCalendarID) as? String }
     
