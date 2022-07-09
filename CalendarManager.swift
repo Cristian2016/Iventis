@@ -67,8 +67,8 @@ extension CalendarManager {
         }
         
         do {
-            UserDefaults.shared.setValue(calendar.calendarIdentifier, forKey: UserDefaults.Key.defaultCalendarID)
             try store.saveCalendar(calendar, commit: true)
+            UserDefaults.shared.setValue(calendar.calendarIdentifier, forKey: UserDefaults.Key.defaultCalendarID)
         }
         catch { }
     }
