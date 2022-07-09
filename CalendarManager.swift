@@ -36,21 +36,20 @@ extension CalendarManager {
         //if it doesn't find calendar with "Time Bubbles" name it will attempt to create one
         //prefered calDAV or at least local
         
-        if doNotCreateCalendar { return }
+        if noNeedToCreateCalendar { return }
         
         store.calendars(for: .event).forEach {
             //if there is a calendar with that name already or similar name, do not create a calendar
-            let condition0 = $0.title == defaultCalendarTitle
-            let condition1 = $0.title.lowercased().contains("time") && $0.title.lowercased().contains("bubble")
-            
-            if condition0 || condition1 {
+            let condition = $0.title.lowercased().contains("time") && $0.title.lowercased().contains("bubble")
+                        
+            if condition {
                 UserDefaults.shared.setValue($0.calendarIdentifier, forKey: UserDefaults.Key.defaultCalendarIdentifier)
-                doNotCreateCalendar = true
+                noNeedToCreateCalendar = true
                 return //early exit from the for loop
             }
         }
         
-        //calendar creation
+        //create calendar if nothing found
         let calendar = EKCalendar(for: .event, eventStore: store)
         calendar.title = defaultCalendarTitle
         calendar.cgColor = #colorLiteral(red: 1, green: 0.4932718873, blue: 0.4739984274, alpha: 1).cgColor
@@ -160,7 +159,7 @@ class CalendarManager: NSObject {
     private var defaultCalendarID:String? { UserDefaults.shared.value(forKey: UserDefaults.Key.defaultCalendarIdentifier) as? String }
     
     // MARK: - public
-    private var doNotCreateCalendar = false
+    private var noNeedToCreateCalendar = false
     
     // MARK: - Events
     //could this cause memory cycle?? ⚠️
@@ -235,12 +234,12 @@ class CalendarManager: NSObject {
         else {//create Calendar if you can't find one
             createCalendarIfNeeded(with: defaultCalendarTitle)
             delayExecution(.now() + 2.0) {[weak self] in
-                let calendar = self?.store.calendars(for: .event).filter({$0.calendarIdentifier == self?.defaultCalendarID}).first
+                let calendar =
+                self?.store.calendars(for: .event)
+                    .filter({$0.calendarIdentifier == self?.defaultCalendarID}).first
                 event.calendar = calendar
             }
         }
-        
-        event.alarms = []
         
         do {
             try store.save(event, span: .thisEvent, commit: true)
