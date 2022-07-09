@@ -272,7 +272,7 @@ class CalendarManager: NSObject {
         guard let note = note else { return nil }
         
         let calendars = store.calendars(for: .event)
-        let matchingCalendar = getMatchingCalendar(from: calendars, for: note)
+        let matchingCalendar = matchingCalendar(from: calendars, for: note)
         
         return matchingCalendar ?? defaultCalendar
     }
@@ -284,7 +284,7 @@ class CalendarManager: NSObject {
     ///Calendar name to match with bubble name.
     ///ex: "Outdoor 🌳" matches "🌞 Outdoor"
     ///for each calendar in calendars, compare calendar.title with bubble.note
-    private func getMatchingCalendar(from calendars:[EKCalendar], for bubbleNote:String) -> EKCalendar? {
+    private func matchingCalendar(from calendars:[EKCalendar], for bubbleNote:String) -> EKCalendar? {
         var matchingCalendar:EKCalendar? = nil
         
         let bubbleNoteScalars = Set(bubbleNote
