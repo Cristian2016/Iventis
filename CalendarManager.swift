@@ -68,8 +68,8 @@ extension CalendarManager {
         }
         
         do {
-            try store.saveCalendar(calendar, commit: true)
             UserDefaults.shared.setValue(calendar.calendarIdentifier, forKey: UserDefaults.Key.defaultCalendarID)
+            try store.saveCalendar(calendar, commit: true)
         }
         catch { }
     }
@@ -89,10 +89,7 @@ extension CalendarManager {
     
     ///creates a new event when the user ends a session
     func createNewEvent(for session: Session?) {
-        guard
-            let session = session,
-            session.isEnded,
-            session.eventID == nil else { return }
+        guard let session = session, session.isEnded else { return }
                 
         let pairs = session.pairs_
         let firstPair = pairs.first!
@@ -101,14 +98,17 @@ extension CalendarManager {
         let notes = composeEventNotes(from: pairs)
         
         let title = eventTitle(for: session)
-        session.eventID = newEvent(with: title,
+        let eventID = newEvent(with: title,
                                    bubbleNote:session.bubble?.note,
                                    eventNotes: notes,
                                    start: firstPair.start!,
                                    end: lastPair.pause!)
         
         //since this method is called on bThread, make sure to save CoreData on mThread
-        DispatchQueue.main.async { PersistenceController.shared.save() }
+        DispatchQueue.main.async {
+            if session.eventID == nil { session.eventID = eventID }
+            PersistenceController.shared.save()
+        }
     }
     
     func updateExistingEvent(_ kind:EventUpdateKind) {
@@ -223,7 +223,10 @@ class CalendarManager: NSObject {
         return bucket
     }
     
+    ///return an eventIdentifier
     private func newEvent(with title:String?, bubbleNote:String?, eventNotes:String?, start:Date, end:Date) -> String? {
+        
+        print(#function)
         
         let event = EKEvent(eventStore: store)
         
@@ -248,7 +251,8 @@ class CalendarManager: NSObject {
             try store.save(event, span: .thisEvent, commit: true)
             return event.eventIdentifier
         }
-        catch { return nil }
+        catch { print("pula error", error) }
+        return nil
     }
     
     private func eventTitle(for session:Session) -> String {
