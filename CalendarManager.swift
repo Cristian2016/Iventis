@@ -287,15 +287,19 @@ class CalendarManager: NSObject {
     private func matchingCalendar(from calendars:[EKCalendar], for bubbleNote:String) -> EKCalendar? {
         var matchingCalendar:EKCalendar? = nil
         
-        let bubbleNoteScalars = Set(bubbleNote
+        let bubbleNote_Scalars = Set(bubbleNote
             .lowercased()
             .unicodeScalars.filter { $0.value < 6000 && $0.value != 32 }
         )
         
         //⚠️ no idea why it's 6000 :)) I put an arbitrary value just to make sure all alphanumerics are included
-        calendars.forEach { calendar in
-            let calendarTitleScalars = Set(calendar.title.lowercased().unicodeScalars.filter { $0.value < 6000 && $0.value != 32 })
-            if bubbleNoteScalars == calendarTitleScalars { matchingCalendar = calendar }
+        calendars.forEach {
+            let calendarTitle_Scalars = Set($0.title
+                .lowercased()
+                .unicodeScalars.filter { $0.value < 6000 && $0.value != 32 }
+            )
+            
+            if bubbleNote_Scalars == calendarTitle_Scalars { matchingCalendar = $0 }
         }
         
         return matchingCalendar
