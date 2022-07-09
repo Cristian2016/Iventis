@@ -37,14 +37,14 @@ extension CalendarManager {
         
         if noNeedToCreateDefaultCalendar { return }
         
-    forEachLoop: for calendar in store.calendars(for: .event) {
+    for calendar in store.calendars(for: .event) {
             //if there is a calendar with that name already or similar name, do not create a calendar
-            let condition = calendar.title.lowercased().contains("fused")
+            let calendarTitleContainsWord = calendar.title.lowercased().contains("fused")
                         
-            if condition {
+            if calendarTitleContainsWord {
                 UserDefaults.shared.setValue(calendar.calendarIdentifier, forKey: UserDefaults.Key.defaultCalendarID)
                 noNeedToCreateDefaultCalendar = true
-                break forEachLoop //early exit
+                return //end function
             }
         }
         
