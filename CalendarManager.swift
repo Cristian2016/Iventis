@@ -69,6 +69,7 @@ extension CalendarManager {
         
         do {
             try store.saveCalendar(calendar, commit: true)
+            print(<#T##Any...#>)
             UserDefaults.shared.setValue(calendar.calendarIdentifier, forKey: UserDefaults.Key.defaultCalendarIdentifier)
         }
         catch { }
@@ -282,15 +283,19 @@ class CalendarManager: NSObject {
     
     ///Calendar name to match with bubble name.
     ///ex: "Outdoor 🌳" matches "🌞 Outdoor"
+    ///for each calendar in calendars, compare calendar.title with bubble.note
     private func getMatchingCalendar(from calendars:[EKCalendar], for bubbleNote:String) -> EKCalendar? {
         var matchingCalendar:EKCalendar? = nil
         
-        let set0 = Set(bubbleNote.lowercased().unicodeScalars.filter { $0.value < 6000 && $0.value != 32 })
+        let bubbleNoteScalars = Set(bubbleNote
+            .lowercased()
+            .unicodeScalars.filter { $0.value < 6000 && $0.value != 32 }
+        )
         
         //⚠️ no idea why it's 6000 :)) I put an arbitrary value just to make sure all alphanumerics are included
         calendars.forEach { calendar in
-            let set1 = Set(calendar.title.lowercased().unicodeScalars.filter { $0.value < 6000 && $0.value != 32 })
-            if set0 == set1 { matchingCalendar = calendar }
+            let calendarTitleScalars = Set(calendar.title.lowercased().unicodeScalars.filter { $0.value < 6000 && $0.value != 32 })
+            if bubbleNoteScalars == calendarTitleScalars { matchingCalendar = calendar }
         }
         
         return matchingCalendar
