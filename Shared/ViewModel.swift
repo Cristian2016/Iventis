@@ -144,7 +144,7 @@ class ViewModel: ObservableObject {
         let key = UserDefaults.Key.calendarAuthorizationRequestedAlready
         
         if UserDefaults.standard.value(forKey: key) == nil {
-            TimersApp.calManager.requestAuthorizationAndCreateCalendar()
+            TimersApp.calManager.requestAccessToCalendar()
             UserDefaults.standard.setValue(true, forKey: key)
         }
         bubble.hasCalendar.toggle()
