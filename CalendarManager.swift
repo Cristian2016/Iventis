@@ -24,28 +24,28 @@ extension CalendarManager {
         store.requestAccess(to: .event) {//not main thread
             [weak self] /* access */ userGrantedAccess, error in
             guard let self = self else {return}
-            if userGrantedAccess { self.createCalendarIfNeeded(with: self.defaultCalendarTitle) }
+            if userGrantedAccess { self.createCalendarIfNeeded() }
         }
     }
     
     ///⚠️ To avoid duplicates, this function creates a calendar only if
     ///there is no other calendar with same name or similar name.
     ///if it finds an existing calendar, it will set it as the default calendar
-    private func createCalendarIfNeeded(with title:String) {
+    private func createCalendarIfNeeded() {
         //it looks for calendars with "Time Bubbles" or similar name
         //if it doesn't find calendar with "Time Bubbles" name it will attempt to create one
         //prefered calDAV or at least local
         
         if noNeedToCreateCalendar { return }
         
-        store.calendars(for: .event).forEach {
+    forEachLoop: for calendar in store.calendars(for: .event) {
             //if there is a calendar with that name already or similar name, do not create a calendar
-            let condition = $0.title.lowercased().contains("time") && $0.title.lowercased().contains("bubble")
+            let condition = calendar.title.lowercased().contains("fused")
                         
             if condition {
-                UserDefaults.shared.setValue($0.calendarIdentifier, forKey: UserDefaults.Key.defaultCalendarIdentifier)
+                UserDefaults.shared.setValue(calendar.calendarIdentifier, forKey: UserDefaults.Key.defaultCalendarID)
                 noNeedToCreateCalendar = true
-                return //early exit from the for loop
+                break forEachLoop //early exit
             }
         }
         
@@ -69,8 +69,7 @@ extension CalendarManager {
         
         do {
             try store.saveCalendar(calendar, commit: true)
-            print(<#T##Any...#>)
-            UserDefaults.shared.setValue(calendar.calendarIdentifier, forKey: UserDefaults.Key.defaultCalendarIdentifier)
+            UserDefaults.shared.setValue(calendar.calendarIdentifier, forKey: UserDefaults.Key.defaultCalendarID)
         }
         catch { }
     }
@@ -155,9 +154,9 @@ extension CalendarManager {
 class CalendarManager: NSObject {
     private lazy var store = EventStore() /* read write events */
     
-    private(set) var defaultCalendarTitle = "Time Bubbles 📥"
+    private(set) var defaultCalendarTitle = "Fused 📥"
     private let eventNotesSeparator = "Add notes below:\n"
-    private var defaultCalendarID:String? { UserDefaults.shared.value(forKey: UserDefaults.Key.defaultCalendarIdentifier) as? String }
+    private var defaultCalendarID:String? { UserDefaults.shared.value(forKey: UserDefaults.Key.defaultCalendarID) as? String }
     
     // MARK: - public
     private var noNeedToCreateCalendar = false
@@ -233,7 +232,7 @@ class CalendarManager: NSObject {
         
         if let calendar = suggestedCalendar(for: bubbleNote) { event.calendar = calendar }
         else {//create Calendar if you can't find one
-            createCalendarIfNeeded(with: defaultCalendarTitle)
+            createCalendarIfNeeded()
             delayExecution(.now() + 2.0) {[weak self] in
                 let calendar =
                 self?.store.calendars(for: .event)
@@ -305,10 +304,34 @@ class CalendarManager: NSObject {
         return matchingCalendar
     }
     
+    ///call each time a new event is created
+    private func calendarToUse(for bubbleNote:String) {
+        
+        ///either a matching or default calendar available, else create default calendar
+        var matchingCalendar:EKCalendar?
+        var defaultCalendar:EKCalendar?
+        
+        store.calendars(for: .event).forEach { calendar in
+            
+        }
+    }
+    
     // MARK: -
     static let shared = CalendarManager()
     private override init() {
         super.init()
+        observeStoreNotifications()
+    }
+    
+    deinit {
+        print("observer removed")
+        NotificationCenter.default.removeObserver(self) }
+    
+    private func observeStoreNotifications() {
+        NotificationCenter.default.addObserver(forName: .EKEventStoreChanged, object: nil, queue: nil) { [weak self] notification in
+            
+            print("notitication", notification.userInfo)
+        }
     }
     
     // MARK: - enums and structs

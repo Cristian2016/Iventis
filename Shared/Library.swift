@@ -266,7 +266,7 @@ extension UserDefaults {
         
         static let localNotificationsAuthorizationRequestedAlready = "localNotificationsAuthorizationRequestedAlready"
         static let calendarAuthorizationRequestedAlready = "calendarAuthorizationRequestedAlready"
-        static let defaultCalendarIdentifier = "defaultCalendarIdentifier"
+        static let defaultCalendarID = "defaultCalendarIdentifier"
         
         static let notificationReceivalMoment = "notificationReceivalMoment"
         static let infoBannerNotShownAlready = "infoBannerNotShownAlready"

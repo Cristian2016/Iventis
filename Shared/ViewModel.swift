@@ -144,13 +144,13 @@ class ViewModel: ObservableObject {
         let key = UserDefaults.Key.calendarAuthorizationRequestedAlready
         
         if UserDefaults.standard.value(forKey: key) == nil {
-            CalendarManager.shared.requestAuthorizationAndCreateCalendar()
+            TimersApp.calManager.requestAuthorizationAndCreateCalendar()
             UserDefaults.standard.setValue(true, forKey: key)
         }
         bubble.hasCalendar.toggle()
         PersistenceController.shared.save()
         
-        delayExecution(.now() + 2) { CalendarManager.shared.createCalEventsForExistingSessions(of: bubble) }
+        delayExecution(.now() + 2) { TimersApp.calManager.createCalEventsForExistingSessions(of: bubble) }
     }
     
     func showMoreOptions(_ bubble:Bubble) {
@@ -224,7 +224,7 @@ class ViewModel: ObservableObject {
     ///createds calendar events only if that bubble has calendar, otherwise it only saves to coredata
     private func createCalendarEventIfRequiredAndSaveToCoreData(for bubble:Bubble) {
         if !bubble.sessions_.isEmpty && bubble.hasCalendar {
-            CalendarManager.shared.createNewEvent(for: bubble.lastSession)
+            TimersApp.calManager.createNewEvent(for: bubble.lastSession)
         }
         
         PersistenceController.shared.save()
@@ -278,7 +278,7 @@ class ViewModel: ObservableObject {
                 newHistoryItem.note = note
                 bubble.addToHistory(newHistoryItem)
                 
-                CalendarManager.shared.updateExistingEvent(.title(bubble))
+                TimersApp.calManager.updateExistingEvent(.title(bubble))
                 
             case "Pair" :
                 let pair = object as! Pair
@@ -292,7 +292,7 @@ class ViewModel: ObservableObject {
                 newHistoryItem.note = note
                 pair.addToHistory(newHistoryItem)
                 
-                CalendarManager.shared.updateExistingEvent(.notes(pair.session!))
+                TimersApp.calManager.updateExistingEvent(.notes(pair.session!))
                 
             default: return
         }
@@ -315,7 +315,7 @@ class ViewModel: ObservableObject {
     //delete BubbleSticky
     func deleteNote(for bubble:Bubble) {
         bubble.note = nil
-        CalendarManager.shared.updateExistingEvent(.title(bubble))
+        TimersApp.calManager.updateExistingEvent(.title(bubble))
         
         PersistenceController.shared.save()
     }
@@ -326,7 +326,7 @@ class ViewModel: ObservableObject {
         //update Calendar Event
         
         PersistenceController.shared.save()
-        CalendarManager.shared.updateExistingEvent(.notes(pair.session!))
+        TimersApp.calManager.updateExistingEvent(.notes(pair.session!))
     }
     
     // MARK: -

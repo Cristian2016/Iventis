@@ -9,6 +9,8 @@ import SwiftUI
 
 @main
 struct TimersApp: App {
+    static var calManager:CalendarManager!
+    
     //store firstAppLaunchEver key in the shared UserDefaults, NOT in UserDefaults.standard
     @AppStorage(UserDefaults.Key.firstAppLaunchEver, store: UserDefaults.shared)
     var firstAppLaunchEver = true
@@ -102,6 +104,7 @@ struct TimersApp: App {
         delayExecution(.now() + 0.001) {
             NotificationCenter.default.post(name: .appLaunched, object: nil)
         }
+        TimersApp.calManager = CalendarManager.shared
     }
 }
 

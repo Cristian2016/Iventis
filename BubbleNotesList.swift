@@ -89,7 +89,7 @@ struct BubbleNotesList: View {
         bubble.isNoteHidden = false
         try? PersistenceController.shared.viewContext.save()
         
-        CalendarManager.shared.updateExistingEvent(.title(bubble))
+        TimersApp.calManager.updateExistingEvent(.title(bubble))
     }
     
     private func saveNoteToCoreData(_ note:String, for bubble: Bubble) {

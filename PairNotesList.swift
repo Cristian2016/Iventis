@@ -97,8 +97,7 @@ struct PairNotesList: View {
         pair.isNoteHidden = false
         
         try? PersistenceController.shared.viewContext.save()
-        
-        CalendarManager.shared.updateExistingEvent(.notes(pair.session!))
+        TimersApp.calManager.updateExistingEvent(.notes(pair.session!))
     }
     
     private var noteIsValid: Bool {
