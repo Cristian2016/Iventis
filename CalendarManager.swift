@@ -19,24 +19,24 @@ extension CalendarManager {
     // MARK: - Main
     ///if authorization granted, create default calendar to add events to it
     func requestAccessToCalendar() {
-        if EventStore.authorizationStatus(for: .event) == .authorized {
-            createDefaultCalendarIfNeeded { [weak self] in//completion handler
-                if let bubble = self?.bubbleToEventify {
-                    self?.createCalEventsForExistingSessions(of: bubble)
-                    self?.bubbleToEventify = nil
-                }
-            }
-            return
-        }
-        
         store.requestAccess(to: .event) { [weak self] userGrantedAccess, error in
             if userGrantedAccess {
-                self?.createDefaultCalendarIfNeeded {//completion handler
-                    if let bubble = self?.bubbleToEventify {
-                        self?.createCalEventsForExistingSessions(of: bubble)
-                        self?.bubbleToEventify = nil
-                    }
-                }
+                self?.createDefaultCalendarIfNeeded_And_CalEvents()
+            }
+        }
+        
+        if EventStore.authorizationStatus(for: .event) == .authorized {
+            createDefaultCalendarIfNeeded_And_CalEvents()
+            return
+        }
+    }
+    
+    ///create DefaultCalendar if none available and create Calendar Events
+    private func createDefaultCalendarIfNeeded_And_CalEvents() {
+        createDefaultCalendarIfNeeded { [weak self] in //completion
+            if let bubble = self?.bubbleToEventify {
+                self?.createCalEventsForExistingSessions(of: bubble)
+                self?.bubbleToEventify = nil
             }
         }
     }
@@ -169,7 +169,9 @@ extension CalendarManager {
 class CalendarManager: NSObject {
     
     ///"Eventify" made up word :)). the bubble for which create events
-    var bubbleToEventify:Bubble?
+    var bubbleToEventify:Bubble? {didSet{
+        
+    }}
     
     private lazy var store = EventStore() /* read write events */
     
