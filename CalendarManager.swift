@@ -19,12 +19,14 @@ extension CalendarManager {
     // MARK: - Main
     ///if authorization granted, create default calendar to add events to it
     func requestAccessToCalendar() {
+        //1. request access
         store.requestAccess(to: .event) { [weak self] userGrantedAccess, error in
             if userGrantedAccess {
                 self?.createDefaultCalendarIfNeeded_And_CalEvents()
             }
         }
         
+        //2. access granted already
         if EventStore.authorizationStatus(for: .event) == .authorized {
             createDefaultCalendarIfNeeded_And_CalEvents()
             return
