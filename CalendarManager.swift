@@ -112,7 +112,9 @@ extension CalendarManager {
                  bubbleNote:session.bubble?.note,
                  eventNotes: notes,
                  start: firstPair.start!,
-                 end: lastPair.pause!)
+                 end: lastPair.pause!,
+                 session
+        )
         
         //since this method is called on bThread, make sure to save CoreData on mThread
         DispatchQueue.main.async {
@@ -145,6 +147,7 @@ extension CalendarManager {
             }
             
         case /* update event */.title(let bubble):
+                
             bubble.sessions_.forEach {
                 if
                     $0.isEnded,
@@ -265,7 +268,7 @@ class CalendarManager: NSObject {
     }
     
     ///return an eventIdentifier
-    private func newEvent(with title:String?, bubbleNote:String?, eventNotes:String?, start:Date, end:Date) {
+    private func newEvent(with title:String?, bubbleNote:String?, eventNotes:String?, start:Date, end:Date, _ session:Session) {
         
         let event = EKEvent(eventStore: store)
         
@@ -284,7 +287,10 @@ class CalendarManager: NSObject {
             }
         }
         
-        do { try store.save(event, span: .thisEvent, commit: true) }
+        do {
+            try store.save(event, span: .thisEvent, commit: true)
+            session.eventID = event.eventIdentifier
+        }
         catch { print("store.save error", error) }
     }
     
