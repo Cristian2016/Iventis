@@ -89,8 +89,12 @@ extension CalendarManager {
                 
         DispatchQueue.global().async { [weak self] in
             bubble.sessions_.forEach { session in
-                if session.isEnded { self?.createNewEvent(for: session) }
+                if session.isEnded && !session.isEventified {
+                    self?.createNewEvent(for: session)
+                    DispatchQueue.main.async { session.isEventified = true }
+                }
             }
+            DispatchQueue.main.async { PersistenceController.shared.save() }
         }
     }
     
