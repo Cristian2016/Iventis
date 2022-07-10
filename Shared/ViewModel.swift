@@ -152,8 +152,7 @@ class ViewModel: ObservableObject {
         PersistenceController.shared.save()
         
         delayExecution(.now() + 2) {
-            if bubble.hasCalendar {
-                TimersApp.calManager.createCalEventsForExistingSessions(of: bubble) }
+            TimersApp.calManager.createCalEventsForExistingSessions(of: bubble)
         }
     }
     
