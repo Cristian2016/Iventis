@@ -276,13 +276,11 @@ class CalendarManager: NSObject {
         
         if let calendar = suggestedCalendar(for: bubbleNote) { event.calendar = calendar }
         else {//create Calendar if you can't find one
-            createDefaultCalendarIfNeeded {
-                delayExecution(.now() + 2.0) {[weak self] in
-                    let calendar =
-                    self?.store.calendars(for: .event)
-                        .filter({$0.calendarIdentifier == self?.defaultCalendarID}).first
-                    event.calendar = calendar
-                }
+            createDefaultCalendarIfNeeded { [weak self] in
+                let calendar =
+                self?.store.calendars(for: .event)
+                    .filter({$0.calendarIdentifier == self?.defaultCalendarID}).first
+                event.calendar = calendar
             }
         }
         

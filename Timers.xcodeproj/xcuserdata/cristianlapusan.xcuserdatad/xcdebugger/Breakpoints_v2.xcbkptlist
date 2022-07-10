@@ -95,53 +95,5 @@
             landmarkType = "14">
          </BreakpointContent>
       </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "573185EB-08DF-49DF-A237-C68349382638"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "CalendarManager.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "277"
-            endingLineNumber = "277"
-            landmarkName = "newEvent(with:bubbleNote:eventNotes:start:end:)"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "573185EB-08DF-49DF-A237-C68349382638 - 25d8dbcee47c2038"
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Timers.CalendarManager.newEvent(with: Swift.Optional&lt;Swift.String&gt;, bubbleNote: Swift.Optional&lt;Swift.String&gt;, eventNotes: Swift.Optional&lt;Swift.String&gt;, start: Foundation.Date, end: Foundation.Date) -&gt; Swift.Optional&lt;Swift.String&gt;"
-                  moduleName = "Timers"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/cristianlapusan/Downloads/Timers/CalendarManager.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "275"
-                  endingLineNumber = "275"
-                  offsetFromSymbolStart = "1404">
-               </Location>
-               <Location
-                  uuid = "573185EB-08DF-49DF-A237-C68349382638 - 25d8dbcee47c2038"
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Timers.CalendarManager.newEvent(with: Swift.Optional&lt;Swift.String&gt;, bubbleNote: Swift.Optional&lt;Swift.String&gt;, eventNotes: Swift.Optional&lt;Swift.String&gt;, start: Foundation.Date, end: Foundation.Date) -&gt; Swift.Optional&lt;Swift.String&gt;"
-                  moduleName = "Timers"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/cristianlapusan/Downloads/Timers/CalendarManager.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "275"
-                  endingLineNumber = "275"
-                  offsetFromSymbolStart = "1468">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
    </Breakpoints>
 </Bucket>
