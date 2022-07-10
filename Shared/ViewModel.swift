@@ -141,19 +141,21 @@ class ViewModel: ObservableObject {
     }
     
     func toggleCalendar(_ bubble:Bubble) {
-        let key = UserDefaults.Key.calendarAuthorizationRequestedAlready
         
+        //if key not set, set it
+        //request access to Calendar App
+        let key = UserDefaults.Key.calendarAuthorizationRequestedAlready
         if UserDefaults.standard.value(forKey: key) == nil {
             TimersApp.calManager.requestAccessToCalendar()
-            
             UserDefaults.standard.setValue(true, forKey: key)
         }
+        
         bubble.hasCalendar.toggle()
         PersistenceController.shared.save()
         
-        delayExecution(.now() + 2) {
-            TimersApp.calManager.createCalEventsForExistingSessions(of: bubble)
-        }
+//        delayExecution(.now() + 2) {
+//            TimersApp.calManager.createCalEventsForExistingSessions(of: bubble)
+//        }
     }
     
     func showMoreOptions(_ bubble:Bubble) {
