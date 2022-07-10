@@ -154,7 +154,7 @@ class ViewModel: ObservableObject {
         PersistenceController.shared.save()
         
         //create events for this bubbble
-        TimersApp.calManager.bubbleWithPendingSessions = bubble
+        TimersApp.calManager.bubbleToEventify = bubble
     }
     
     func showMoreOptions(_ bubble:Bubble) {

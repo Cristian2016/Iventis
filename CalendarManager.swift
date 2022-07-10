@@ -24,9 +24,9 @@ extension CalendarManager {
         store.requestAccess(to: .event) { [weak self] userGrantedAccess, error in
             if userGrantedAccess {
                 self?.createDefaultCalendar {//completion handler
-                    if let bubble = self?.bubbleWithPendingSessions {
+                    if let bubble = self?.bubbleToEventify {
                         self?.createCalEventsForExistingSessions(of: bubble)
-                        self?.bubbleWithPendingSessions = nil
+                        self?.bubbleToEventify = nil
                     }
                 }
             }
@@ -159,7 +159,8 @@ extension CalendarManager {
 // MARK: -
 class CalendarManager: NSObject {
     
-    var bubbleWithPendingSessions:Bubble?
+    ///"Eventify" made up word :)). the bubble for which create events
+    var bubbleToEventify:Bubble?
     
     private lazy var store = EventStore() /* read write events */
     
