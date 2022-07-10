@@ -145,6 +145,7 @@ class ViewModel: ObservableObject {
         
         if UserDefaults.standard.value(forKey: key) == nil {
             TimersApp.calManager.requestAccessToCalendar()
+            
             UserDefaults.standard.setValue(true, forKey: key)
         }
         bubble.hasCalendar.toggle()

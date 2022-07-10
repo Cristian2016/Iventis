@@ -60,8 +60,8 @@ extension CalendarManager {
         if calDAVAvailable {
             calendar.source = calDAVSources.first! //use calDAV source for the calendar
             
-        } else {//try to use a local source for the calendar
-            
+        }
+        else {//use a local calendar source
             let localSources = store.sources.filter { $0.sourceType == .local }
             if !localSources.isEmpty { calendar.source = localSources.first! }
         }
@@ -69,6 +69,7 @@ extension CalendarManager {
         do {
             try store.saveCalendar(calendar, commit: true)
             UserDefaults.shared.setValue(calendar.calendarIdentifier, forKey: UserDefaults.Key.defaultCalendarID)
+            print("calendar created with id \(calendar.calendarIdentifier)")
         }
         catch { }
     }
