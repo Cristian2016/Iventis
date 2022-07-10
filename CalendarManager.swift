@@ -19,11 +19,19 @@ extension CalendarManager {
     // MARK: - Main
     ///if authorization granted, create default calendar to add events to it
     func requestAccessToCalendar() {
-        if EventStore.authorizationStatus(for: .event) == .authorized { return }
+        if EventStore.authorizationStatus(for: .event) == .authorized {
+            createDefaultCalendarIfNeeded { [weak self] in//completion handler
+                if let bubble = self?.bubbleToEventify {
+                    self?.createCalEventsForExistingSessions(of: bubble)
+                    self?.bubbleToEventify = nil
+                }
+            }
+            return
+        }
         
         store.requestAccess(to: .event) { [weak self] userGrantedAccess, error in
             if userGrantedAccess {
-                self?.createDefaultCalendar {//completion handler
+                self?.createDefaultCalendarIfNeeded {//completion handler
                     if let bubble = self?.bubbleToEventify {
                         self?.createCalEventsForExistingSessions(of: bubble)
                         self?.bubbleToEventify = nil
@@ -36,7 +44,7 @@ extension CalendarManager {
     ///⚠️ To avoid duplicates, this function creates a calendar only if
     ///there is no other calendar with same name or similar name.
     ///if it finds an existing calendar, it will set it as the default calendar
-    private func createDefaultCalendar(_ completion: @escaping () -> Void) {
+    private func createDefaultCalendarIfNeeded(_ completion: @escaping () -> Void) {
         //it looks for calendars with title "Fused" or similar
         //if it doesn't find calendar with "Time Bubbles" name it will attempt to create one
         //prefered calDAV or at least local
@@ -50,6 +58,7 @@ extension CalendarManager {
             if calendarTitleContainsWord {
                 UserDefaults.shared.setValue(calendar.calendarIdentifier, forKey: UserDefaults.Key.defaultCalendarID)
                 noNeedToCreateDefaultCalendar = true
+                completion()
                 return //end function without running the code below this line
             }
         }
@@ -247,7 +256,7 @@ class CalendarManager: NSObject {
         
         if let calendar = suggestedCalendar(for: bubbleNote) { event.calendar = calendar }
         else {//create Calendar if you can't find one
-            createDefaultCalendar {  /* completion handler */ }
+            createDefaultCalendarIfNeeded {  /* completion handler */ }
             
             delayExecution(.now() + 2.0) {[weak self] in
                 let calendar =
