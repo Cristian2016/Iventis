@@ -172,7 +172,17 @@ class CalendarManager: NSObject {
     
     ///"Eventify" made up word :)). the bubble for which create events
     var bubbleToEventify:Bubble? {didSet{
+        guard let _ = bubbleToEventify else { return }
         
+        //access request key. if key == nil, no access requested yet
+        let key = UserDefaults.Key.calendarAuthorizationRequestedAlready
+        
+        if UserDefaults.standard.value(forKey: key) == nil { //access not requested yet
+            TimersApp.calManager.requestAccessToCalendar()
+            UserDefaults.standard.setValue(true, forKey: key)
+        } else { //access granted already
+            createDefaultCalendarIfNeeded_And_CalEvents()
+        }
     }}
     
     private lazy var store = EventStore() /* read write events */
