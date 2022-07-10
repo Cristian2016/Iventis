@@ -91,7 +91,6 @@ extension CalendarManager {
             bubble.sessions_.forEach { session in
                 if session.isEnded && !session.isEventified {
                     self?.createNewEvent(for: session)
-                    DispatchQueue.main.async { session.isEventified = true }
                 }
             }
             DispatchQueue.main.async { PersistenceController.shared.save() }
@@ -100,7 +99,7 @@ extension CalendarManager {
     
     ///creates a new event when the user ends a session
     func createNewEvent(for session: Session?) {
-        guard let session = session, session.isEnded else { return }
+        guard let session = session, session.isEnded, !session.isEventified else { return }
                 
         let pairs = session.pairs_
         let firstPair = pairs.first!
@@ -109,15 +108,15 @@ extension CalendarManager {
         let notes = composeEventNotes(from: pairs)
         
         let title = eventTitle(for: session)
-        let eventID = newEvent(with: title,
-                                   bubbleNote:session.bubble?.note,
-                                   eventNotes: notes,
-                                   start: firstPair.start!,
-                                   end: lastPair.pause!)
+        newEvent(with: title,
+                 bubbleNote:session.bubble?.note,
+                 eventNotes: notes,
+                 start: firstPair.start!,
+                 end: lastPair.pause!)
         
         //since this method is called on bThread, make sure to save CoreData on mThread
         DispatchQueue.main.async {
-            if session.eventID == nil { session.eventID = eventID }
+            session.isEventified = true
             PersistenceController.shared.save()
         }
     }
@@ -266,9 +265,7 @@ class CalendarManager: NSObject {
     }
     
     ///return an eventIdentifier
-    private func newEvent(with title:String?, bubbleNote:String?, eventNotes:String?, start:Date, end:Date) -> String? {
-        
-        print(#function)
+    private func newEvent(with title:String?, bubbleNote:String?, eventNotes:String?, start:Date, end:Date) {
         
         let event = EKEvent(eventStore: store)
         
@@ -291,10 +288,8 @@ class CalendarManager: NSObject {
         
         do {
             try store.save(event, span: .thisEvent, commit: true)
-            return event.eventIdentifier
         }
         catch { print("pula error", error) }
-        return nil
     }
     
     private func eventTitle(for session:Session) -> String {
