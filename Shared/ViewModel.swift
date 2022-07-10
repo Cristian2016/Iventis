@@ -145,6 +145,10 @@ class ViewModel: ObservableObject {
         bubble.hasCalendar.toggle()
         PersistenceController.shared.save()
         
+        //create events for this bubbble
+        if bubble.hasCalendar { TimersApp.calManager.bubbleToEventify = bubble }
+        
+        //access request key. if key == nil, no access requested yet
         let key = UserDefaults.Key.calendarAuthorizationRequestedAlready
         
         //access not requested yet
@@ -152,9 +156,6 @@ class ViewModel: ObservableObject {
             TimersApp.calManager.requestAccessToCalendar()
             UserDefaults.standard.setValue(true, forKey: key)
         }
-        
-        //create events for this bubbble
-        if bubble.hasCalendar { TimersApp.calManager.bubbleToEventify = bubble }
     }
     
     func showMoreOptions(_ bubble:Bubble) {
