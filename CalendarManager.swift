@@ -18,28 +18,16 @@ extension CalendarManager {
 extension CalendarManager {
     // MARK: - Main
     ///if authorization granted, create default calendar to add events to it
-    func requestAccessToCalendar() {
-        //1. request access
-        store.requestAccess(to: .event) { [weak self] userGrantedAccess, error in
-            if userGrantedAccess {
-                self?.createDefaultCalendarIfNeeded_And_CalEvents()
+    func requestCalendarAccess(_ completion: @escaping () -> Void) {
+        if !calendarAccessGranted { //1. request access
+            store.requestAccess(to: .event) { [weak self] userGrantedAccess, _ in
+                if userGrantedAccess {
+                    self?.calendarAccessGranted = true
+                    completion()
+                }
             }
-        }
-        
-        //2. access granted already
-        if EventStore.authorizationStatus(for: .event) == .authorized {
-            createDefaultCalendarIfNeeded_And_CalEvents()
-            return
-        }
-    }
-    
-    ///create DefaultCalendar if none available and create Calendar Events
-    private func createDefaultCalendarIfNeeded_And_CalEvents() {
-        createDefaultCalendarIfNeeded { [weak self] in //completion
-            if let bubble = self?.bubbleToEventify {
-                self?.createCalEventsForExistingSessions(of: bubble)
-                self?.bubbleToEventify = nil
-            }
+        } else { //2. access granted already
+            completion()
         }
     }
     
@@ -50,9 +38,7 @@ extension CalendarManager {
         //it looks for calendars with title "Fused" or similar
         //if it doesn't find calendar with "Time Bubbles" name it will attempt to create one
         //prefered calDAV or at least local
-        
-        if noNeedToCreateDefaultCalendar { return }
-        
+                
         //if default calendar found, return imediately
         for calendar in store.calendars(for: .event) {
             //if there is a calendar with that name already or similar name, do not create a calendar
@@ -60,7 +46,6 @@ extension CalendarManager {
             
             if calendarTitleContainsWord {
                 UserDefaults.shared.setValue(calendar.calendarIdentifier, forKey: UserDefaults.Key.defaultCalendarID)
-                noNeedToCreateDefaultCalendar = true
                 completion()
                 return //end function without running the code below this line
             }
@@ -96,8 +81,9 @@ extension CalendarManager {
     }
     
     ///if user swipes on a bubble to enable calendar and bubble already has activity, all activity will be exported to Calendar App
-    func createCalEventsForExistingSessions(of bubble:Bubble) {
+    func createCalEventsForExistingSessions(of bubble:Bubble?) {
         guard
+            let bubble = bubble,
             bubble.hasCalendar,
             !bubble.sessions_.isEmpty else { return }
                 
@@ -173,20 +159,37 @@ extension CalendarManager {
 
 // MARK: -
 class CalendarManager: NSObject {
+    static let shared = CalendarManager()
+    private override init() {
+        super.init()
+        
+    }
+    
+    // MARK: -
+    private var calendarAccessGranted: Bool {
+        get {
+            let key = UserDefaults.Key.calendarAccessGranted
+            return UserDefaults.standard.value(forKey: key) != nil
+        }
+        
+        set {
+            let key = UserDefaults.Key.calendarAccessGranted
+            UserDefaults.standard.set(newValue, forKey: key)
+        }
+    }
     
     ///"Eventify" made up word :)). the bubble for which create events
     var bubbleToEventify:Bubble? {didSet{
-        //only interested in non-nil values
-        guard bubbleToEventify != nil else { return }
-        
-        //access request key. if key == nil, no access requested yet
-        let key = UserDefaults.Key.calendarAuthorizationRequestedAlready
-        
-        if UserDefaults.standard.value(forKey: key) == nil { //access not requested yet
-            TimersApp.calManager.requestAccessToCalendar()
-            UserDefaults.standard.setValue(true, forKey: key)
+        if !calendarAccessGranted { //access not granted yet
+            requestCalendarAccess { [weak self] in //mThread closure
+                self?.createDefaultCalendarIfNeeded {
+                    self?.createCalEventsForExistingSessions(of: self?.bubbleToEventify)
+                }
+            }
         } else { //access granted already
-            createDefaultCalendarIfNeeded_And_CalEvents()
+            createDefaultCalendarIfNeeded { [weak self] in
+                self?.createCalEventsForExistingSessions(of: self?.bubbleToEventify)
+            }
         }
     }}
     
@@ -197,9 +200,6 @@ class CalendarManager: NSObject {
     private var defaultCalendarID:String? { UserDefaults.shared.value(forKey: UserDefaults.Key.defaultCalendarID) as? String }
     
     private let eventNotesSeparator = "Add notes below:\n"
-    
-    // MARK: - public
-    private var noNeedToCreateDefaultCalendar = false
     
     // MARK: - Events
     //could this cause memory cycle?? ⚠️
@@ -347,23 +347,6 @@ class CalendarManager: NSObject {
         }
         
         return matchingCalendar
-    }
-    
-    // MARK: -
-    static let shared = CalendarManager()
-    private override init() {
-        super.init()
-//        observeStoreNotifications()
-    }
-    
-    deinit {
-        print("observer removed")
-        NotificationCenter.default.removeObserver(self) }
-    
-    private func observeStoreNotifications() {
-        NotificationCenter.default.addObserver(forName: .EKEventStoreChanged, object: nil, queue: nil) { [weak self] notification in
-            
-        }
     }
     
     // MARK: - enums and structs

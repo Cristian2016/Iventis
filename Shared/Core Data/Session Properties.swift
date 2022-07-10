@@ -25,6 +25,10 @@ extension Session {
     @NSManaged public var pairs: NSOrderedSet?
 
     @NSManaged public var eventID: String?
+    
+    ///does the Session have a corresponding Calendar Event
+    ///to avoid duplicating events
+    @NSManaged public var isEventified: Bool
 }
 
 // MARK: Generated accessors for pairs

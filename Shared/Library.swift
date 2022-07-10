@@ -265,7 +265,7 @@ extension UserDefaults {
         static let  /* bubble */ rank =  /* bubble */ "rank"
         
         static let localNotificationsAuthorizationRequestedAlready = "localNotificationsAuthorizationRequestedAlready"
-        static let calendarAuthorizationRequestedAlready = "calendarAuthorizationRequestedAlready"
+        static let calendarAccessGranted = "calendarAccessGranted"
         static let defaultCalendarID = "defaultCalendarIdentifier"
         
         static let notificationReceivalMoment = "notificationReceivalMoment"

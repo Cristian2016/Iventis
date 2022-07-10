@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="21223.12" systemVersion="22A5286j" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="21256.2" systemVersion="22A5295h" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Bubble" representedClassName=".Bubble" syncable="YES">
         <attribute name="color" optional="YES" attributeType="String" defaultValueString="Cyan"/>
         <attribute name="created" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
@@ -48,16 +48,10 @@
         <attribute name="created" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="eventID" optional="YES" attributeType="String"/>
         <attribute name="isEnded" optional="YES" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
+        <attribute name="isEventified" optional="YES" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
         <attribute name="totalDuration" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="totalDurationAsStrings" optional="YES" attributeType="Binary"/>
         <relationship name="bubble" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Bubble" inverseName="sessions" inverseEntity="Bubble"/>
         <relationship name="pairs" optional="YES" toMany="YES" deletionRule="Cascade" ordered="YES" destinationEntity="Pair" inverseName="session" inverseEntity="Pair"/>
     </entity>
-    <elements>
-        <element name="Bubble" positionX="-1126.346435546875" positionY="1511.206024169922" width="128" height="209"/>
-        <element name="BubbleSavedNote" positionX="-1167.576232910156" positionY="1853.05224609375" width="128" height="74"/>
-        <element name="Pair" positionX="-682.7940063476562" positionY="1990.900634765625" width="128" height="149"/>
-        <element name="PairSavedNote" positionX="-963" positionY="1674" width="128" height="74"/>
-        <element name="Session" positionX="-755.014404296875" positionY="1731.148468017579" width="128" height="134"/>
-    </elements>
 </model>
