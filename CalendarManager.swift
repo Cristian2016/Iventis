@@ -284,10 +284,8 @@ class CalendarManager: NSObject {
             }
         }
         
-        do {
-            try store.save(event, span: .thisEvent, commit: true)
-        }
-        catch { print("pula error", error) }
+        do { try store.save(event, span: .thisEvent, commit: true) }
+        catch { print("store.save error", error) }
     }
     
     private func eventTitle(for session:Session) -> String {
