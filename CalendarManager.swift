@@ -53,6 +53,7 @@ extension CalendarManager {
         
         if noNeedToCreateDefaultCalendar { return }
         
+        //if default calendar found, return imediately
         for calendar in store.calendars(for: .event) {
             //if there is a calendar with that name already or similar name, do not create a calendar
             let calendarTitleContainsWord = calendar.title.lowercased().contains("fused")
@@ -64,6 +65,9 @@ extension CalendarManager {
                 return //end function without running the code below this line
             }
         }
+        
+        //------------------------------------------------------------
+        //code below runs only if a calendar needs to be created
         
         //create calendar if nothing found
         let calendar = EKCalendar(for: .event, eventStore: store)
@@ -172,7 +176,8 @@ class CalendarManager: NSObject {
     
     ///"Eventify" made up word :)). the bubble for which create events
     var bubbleToEventify:Bubble? {didSet{
-        guard let _ = bubbleToEventify else { return }
+        //only interested in non-nil values
+        guard bubbleToEventify != nil else { return }
         
         //access request key. if key == nil, no access requested yet
         let key = UserDefaults.Key.calendarAuthorizationRequestedAlready
@@ -270,13 +275,13 @@ class CalendarManager: NSObject {
         
         if let calendar = suggestedCalendar(for: bubbleNote) { event.calendar = calendar }
         else {//create Calendar if you can't find one
-            createDefaultCalendarIfNeeded {  /* completion handler */ }
-            
-            delayExecution(.now() + 2.0) {[weak self] in
-                let calendar =
-                self?.store.calendars(for: .event)
-                    .filter({$0.calendarIdentifier == self?.defaultCalendarID}).first
-                event.calendar = calendar
+            createDefaultCalendarIfNeeded {
+                delayExecution(.now() + 2.0) {[weak self] in
+                    let calendar =
+                    self?.store.calendars(for: .event)
+                        .filter({$0.calendarIdentifier == self?.defaultCalendarID}).first
+                    event.calendar = calendar
+                }
             }
         }
         
@@ -348,7 +353,7 @@ class CalendarManager: NSObject {
     static let shared = CalendarManager()
     private override init() {
         super.init()
-        observeStoreNotifications()
+//        observeStoreNotifications()
     }
     
     deinit {
@@ -358,7 +363,6 @@ class CalendarManager: NSObject {
     private func observeStoreNotifications() {
         NotificationCenter.default.addObserver(forName: .EKEventStoreChanged, object: nil, queue: nil) { [weak self] notification in
             
-            print("notitication", notification.userInfo)
         }
     }
     
