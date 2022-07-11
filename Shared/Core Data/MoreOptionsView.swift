@@ -55,8 +55,9 @@ struct MoreOptionsView: View {
             HStack (alignment: .bottom) {
                 Text("\(Color.userFriendlyBubbleColorName(for: bubble.color))")
                     .textModifier(Color.bubbleColor(forName: bubble.color!))
+                    .layoutPriority(1)
                 Text("Choose Color")
-                    .font(.system(size: 24).weight(.medium))
+                    .font(.system(size: 22).weight(.medium))
                     .foregroundColor(.gray)
             }
             .allowsHitTesting(false) //ignore touches
@@ -90,7 +91,7 @@ struct MoreOptionsView: View {
                 Text("\(Int(bubble.startDelay)) s")
                     .textModifier(Color.bubbleColor(forName: bubble.color!))
                 Text("\(Image(systemName: "clock.arrow.circlepath")) Start Delay")
-                    .font(.system(size: 24).weight(.medium))
+                    .font(.system(size: 22).weight(.medium))
                     .foregroundColor(.gray)
             }
             
