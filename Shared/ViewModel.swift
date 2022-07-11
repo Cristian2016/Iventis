@@ -382,7 +382,7 @@ class ViewModel: ObservableObject {
     
     func computeStartDelay(_ bubble:Bubble, _ value: Int) {
         UserFeedback.singleHaptic(.medium)
-        bubble.startDelay += Float(value)
+        bubble.startDelay += Int64(value)
     }
     
     func resetStartDelay(for bubble:Bubble) {

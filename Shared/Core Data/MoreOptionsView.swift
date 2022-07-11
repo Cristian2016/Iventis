@@ -27,9 +27,9 @@ struct MoreOptionsView: View {
                 .ignoresSafeArea()
                 .onTapGesture { vm.saveAndDismissMoreOptionsView() }
             VStack {
-                colorOption
-                Divider()
                 startDelayOption
+                Divider()
+                colorOption
             }
             .padding(8)
             .background {

@@ -100,6 +100,11 @@ extension BubbleCell {
                     }
                 }
             }
+            .overlay {
+                if bubble.startDelay > 0 {
+                    DelayStartSymbol(startValue: $bubble.startDelay)
+                }
+            }
         }
         .font(.system(size: BubbleCell.metrics.fontSize))
         .foregroundColor(.white)
@@ -239,17 +244,14 @@ struct BubbleCell: View {
     }
     
     // MARK: - Legoes
-    ////added to bubbleCell only if cellLow value is needed. ex: to know how to position DeleteActionView
-    
-    // MARK: -
     private var noteButtonContent:some View {
         BubbleNote().environmentObject(bubble)
     }
     
     private var cellLowEmitterView: some View {
         Circle()
-        .fill(Color.clear)
-        .frame(width: 10, height: 10)
+            .fill(Color.clear)
+            .frame(width: 10, height: 10)
     }
     
     ///hundredths of a second that is :)
