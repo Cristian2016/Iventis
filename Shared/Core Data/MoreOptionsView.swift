@@ -18,17 +18,19 @@ struct MoreOptionsView: View {
                 .onTapGesture { vm.rankOfMoreOptionsBubble = nil  /* dismiss */ }
             VStack {
                 Text("Choose New Color")
-                    .font(.system(size: 25))
-                LazyVGrid(columns: [GridItem(), GridItem(), GridItem()]) {
+                    .font(.system(size: 30))
+                LazyVGrid(columns: [GridItem(spacing: 2), GridItem(spacing: 2), GridItem()], spacing: 2) {
                     ForEach(Color.bubbleThrees.map { $0.description }, id: \.self) { colorName in
                         
                         let color = Color.bubbleColor(forName: colorName)
                         ZStack {
-                            Circle().fill(color)
+                            Rectangle()
+                                .fill(color)
+                                .aspectRatio(contentMode: .fit)
                             if colorName == bubble.color {
                                 Image(systemName: "checkmark")
                                     .foregroundColor(.white)
-                                    .font(.system(size: 28).weight(.bold))
+                                    .font(.system(size: 40).weight(.medium))
                             }
                         }
                         .onTapGesture {
