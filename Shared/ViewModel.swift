@@ -329,6 +329,8 @@ class ViewModel: ObservableObject {
     
     //change bubble Color
     func changeColor(for bubble:Bubble, to newColor:String) {
+        if bubble.color == newColor { return }
+        
         bubble.color = newColor
         PersistenceController.shared.save()
     }
