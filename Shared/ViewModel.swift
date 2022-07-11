@@ -372,6 +372,20 @@ class ViewModel: ObservableObject {
             print("do not makeBubblesOnFirstAppLaunchEver")
         }
     }
+    
+    // MARK: - Bubble Start Delay
+    func totalStartDelay(for bubble:Bubble, value: Int) {
+        bubble.startDelay += Float(value)
+    }
+    
+    func saveStartDelay(for bubble:Bubble) {
+        PersistenceController.shared.save()
+    }
+    
+    func resetStartDelay(for bubble:Bubble) {
+        bubble.startDelay = 0
+        PersistenceController.shared.save()
+    }
 }
 
 extension ViewModel {

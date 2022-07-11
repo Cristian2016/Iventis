@@ -18,7 +18,6 @@ struct MoreOptionsView: View {
                 .onTapGesture { vm.rankOfMoreOptionsBubble = nil  /* dismiss */ }
             ScrollView {
                 colorOption
-                Divider()
                 startDelayOption
             }
             .padding(8)
@@ -45,7 +44,7 @@ struct MoreOptionsView: View {
                         RoundedRectangle(cornerRadius: 4)
                             .fill(Color.bubbleColor(forName: bubble.color!))
                     )
-                Text("Choose Different Color")
+                Text("Choose New Color")
                     .font(.system(size: 24).weight(.medium))
                     .foregroundColor(.gray)
             }
