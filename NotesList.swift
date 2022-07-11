@@ -155,12 +155,15 @@ struct NotesList: View {
     }
     
     private func cell(_ item:String) -> some View {
-        Text("\(item)")
-        //text
-            .font(.system(size: 25))
-            .background( Rectangle()
-                .fill(item == initialNote ? Color.selectionGray : .clear)
-            )
+        HStack {
+            Text("\(item)").layoutPriority(1)
+                .font(.system(size: 25))
+                .background(
+                    Rectangle()
+                        .fill(item == initialNote ? Color.selectionGray : .clear)
+                )
+            Rectangle().fill(Color.white.opacity(0.001))
+        }
         //layout
             .padding([.leading], 10)
             .frame(height: 15)
