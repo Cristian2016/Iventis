@@ -20,14 +20,15 @@ struct MoreOptionsView: View {
                 VStack (spacing: 6) {
                     Text("\(Color.userFriendlyBubbleColorName(for: bubble.color))")
                         .foregroundColor(.white)
-                        .font(.system(size: 24).weight(.medium))
-                        .padding(.all, 4)
+                        .font(.system(size: 34))
+                        .padding(EdgeInsets(top: 4, leading: 10, bottom: 4, trailing: 10))
                         .background(
                             RoundedRectangle(cornerRadius: 4)
                                 .fill(Color.bubbleColor(forName: bubble.color!))
                         )
                     Text("Choose New Color")
-                        .font(.system(size: 30))
+                        .font(.system(size: 24))
+                        .foregroundColor(.gray)
                 }
                 .allowsHitTesting(false) //ignore touches
                
