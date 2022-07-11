@@ -19,7 +19,7 @@ struct MoreOptionsView: View {
             VStack {
                 Text("Choose New Color")
                     .font(.system(size: 30))
-                LazyVGrid(columns: [GridItem(spacing: 2), GridItem(spacing: 2), GridItem()], spacing: 2) {
+                LazyVGrid(columns: [GridItem(spacing: 0), GridItem(spacing: 0), GridItem()], spacing: 0) {
                     ForEach(Color.bubbleThrees.map { $0.description }, id: \.self) { colorName in
                         
                         let color = Color.bubbleColor(forName: colorName)
