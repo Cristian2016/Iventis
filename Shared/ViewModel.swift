@@ -26,7 +26,6 @@ class ViewModel: ObservableObject {
     @Published var idOfSelectedBubble:Bubble.ID?
     
     @Published var rankOfMoreOptionsBubble:Int?
-    @Published var optionsModified = false
         
     init() {
         let request = Bubble.fetchRequest()
@@ -368,29 +367,27 @@ class ViewModel: ObservableObject {
     
     // MARK: - MoreOptionsView
     func changeColor(for bubble:Bubble, to newColor:String) {
+        UserFeedback.singleHaptic(.medium)
         if bubble.color == newColor { return }
-        
         bubble.color = newColor
-        optionsModified = true
+        PersistenceController.shared.save()
+        rankOfMoreOptionsBubble = nil
     }
     
     func saveAndDismissMoreOptionsView() {
         rankOfMoreOptionsBubble = nil
-        if optionsModified { PersistenceController.shared.save() }
     }
     
     func computeStartDelay(for bubble:Bubble, value: Int) {
         bubble.startDelay += Float(value)
-        optionsModified = true
     }
     
     func saveStartDelay(for bubble:Bubble) {
         PersistenceController.shared.save()
     }
     
-    func resetAllOptions(for bubble:Bubble) {
+    func resetAllOptions(for bubble:Bubble, _ initialBubbleColor:String) {
         bubble.startDelay = 0
-        
         PersistenceController.shared.save()
     }
 }

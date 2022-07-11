@@ -8,30 +8,18 @@
 import SwiftUI
 
 struct MoreOptionsView: View {
-    init(_ bubble:Bubble) {
-        self.bubble = bubble
-        self.initialBubbleColor = bubble.color!
-    }
-    
-    // MARK: -
-    @ObservedObject var bubble: Bubble
+    let bubble: Bubble
     @EnvironmentObject var vm:ViewModel
     
     // MARK: -
     static let insets = EdgeInsets(top: 4, leading: 10, bottom: 4, trailing: 10)
-    let initialBubbleColor:String
     
     // MARK: - Gestures
     var dragGesture:some Gesture {
         LongPressGesture(minimumDuration: 0.3)
             .onEnded { _ in
                 UserFeedback.doubleHaptic(.medium)
-                //reset color option
-                if initialBubbleColor != bubble.color {
-                    bubble.color = initialBubbleColor
-                }
-                //reset delay start option
-                bubble.startDelay = 0
+                //reset start delay
             }
     }
     
@@ -150,6 +138,6 @@ struct MoreOptionsView_Previews: PreviewProvider {
             bubble.color = "green"
             return bubble
         }()
-        MoreOptionsView(bubble)
+        MoreOptionsView(bubble: bubble)
     }
 }
