@@ -27,7 +27,7 @@ struct MoreOptionsView: View {
                                 .fill(Color.bubbleColor(forName: bubble.color!))
                         )
                     Text("Choose New Color")
-                        .font(.system(size: 24))
+                        .font(.system(size: 24).weight(.medium))
                         .foregroundColor(.gray)
                 }
                 .allowsHitTesting(false) //ignore touches
