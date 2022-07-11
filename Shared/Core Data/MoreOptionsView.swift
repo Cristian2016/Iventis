@@ -22,7 +22,7 @@ struct MoreOptionsView: View {
                         .font(.system(size: 30))
                     Text("\(Color.userFriendlyBubbleColorName(for: bubble.color))")
                         .foregroundColor(.white)
-                        .font(.system(size: 26))
+                        .font(.system(size: 24).weight(.medium))
                         .padding(.all, 4)
                         .background(
                             RoundedRectangle(cornerRadius: 4)
