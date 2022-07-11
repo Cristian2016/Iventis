@@ -44,7 +44,7 @@ struct MoreOptionsView: View {
     
     // MARK: - Lego
     private var moreInfo:some View {
-        Label("More Info", systemImage: "info.circle.fill")
+        Label("Info", systemImage: "info.circle.fill")
             .font(.system(size: Global.FontSize.help))
             .foregroundColor(.gray)
     }
