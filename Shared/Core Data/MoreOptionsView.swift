@@ -91,16 +91,14 @@ struct MoreOptionsView: View {
             
             //buttons row 3
             HStack (spacing: 4) {
-                ForEach(Bubble.startDelayValues, id: \.self) { value in
+                ForEach(Bubble.startDelayValues, id: \.self) { delay in
                     Rectangle()
                         .fill(Color.bubbleColor(forName: bubble.color!))
                         .aspectRatio(contentMode: .fit)
                         .overlay {
-                            Button("\(value)") {
-                                vm.computeStartDelay(for: bubble, value: value)
-                            }
-                        .font(.system(size: 30).weight(.medium))
-                    }
+                            Button("\(delay)") { vm.computeStartDelay(bubble, delay) }
+                                .font(.system(size: 30).weight(.medium))
+                        }
                 }
             }
             .font(.system(size: 26))

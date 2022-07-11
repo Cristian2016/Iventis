@@ -380,7 +380,7 @@ class ViewModel: ObservableObject {
         PersistenceController.shared.save()
     }
     
-    func computeStartDelay(for bubble:Bubble, value: Int) {
+    func computeStartDelay(_ bubble:Bubble, _ value: Int) {
         UserFeedback.singleHaptic(.medium)
         bubble.startDelay += Float(value)
     }
