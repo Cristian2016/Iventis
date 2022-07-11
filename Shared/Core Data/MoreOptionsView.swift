@@ -26,7 +26,7 @@ struct MoreOptionsView: View {
                             RoundedRectangle(cornerRadius: 4)
                                 .fill(Color.bubbleColor(forName: bubble.color!))
                         )
-                    Text("Choose New Color")
+                    Text("Choose Different Color")
                         .font(.system(size: 24).weight(.medium))
                         .foregroundColor(.gray)
                 }
