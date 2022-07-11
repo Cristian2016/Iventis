@@ -17,8 +17,18 @@ struct MoreOptionsView: View {
                 .ignoresSafeArea()
                 .onTapGesture { vm.rankOfMoreOptionsBubble = nil  /* dismiss */ }
             VStack {
-                Text("Choose New Color")
-                    .font(.system(size: 30))
+                VStack (spacing: 6) {
+                    Text("Choose New Color")
+                        .font(.system(size: 30))
+                    Text("\(Color.userFriendlyBubbleColorName(for: bubble.color))")
+                        .foregroundColor(.white)
+                        .padding(.all, 4)
+                        .background(
+                            RoundedRectangle(cornerRadius: 4)
+                                .fill(Color.bubbleColor(forName: bubble.color!))
+                        )
+                }
+               
                 LazyVGrid(columns: [GridItem(spacing: 0), GridItem(spacing: 0), GridItem()], spacing: 0) {
                     ForEach(Color.bubbleThrees.map { $0.description }, id: \.self) { colorName in
                         
