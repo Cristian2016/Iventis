@@ -8,9 +8,13 @@
 import SwiftUI
 
 struct MoreOptionsView: View {
-    let bubble: Bubble
+    @ObservedObject var bubble: Bubble
     @EnvironmentObject var vm:ViewModel
     
+    // MARK: -
+    static let insets = EdgeInsets(top: 4, leading: 10, bottom: 4, trailing: 10)
+    
+    // MARK: -
     var body: some View {
         ZStack {
             Color("notesListScreenBackground").opacity(0.8)
@@ -37,13 +41,7 @@ struct MoreOptionsView: View {
         VStack {
             VStack (spacing: 6) {
                 Text("\(Color.userFriendlyBubbleColorName(for: bubble.color))")
-                    .foregroundColor(.white)
-                    .font(.system(size: 30))
-                    .padding(EdgeInsets(top: 4, leading: 10, bottom: 4, trailing: 10))
-                    .background(
-                        RoundedRectangle(cornerRadius: 4)
-                            .fill(Color.bubbleColor(forName: bubble.color!))
-                    )
+                    .textModifier(Color.bubbleColor(forName: bubble.color!))
                 Text("Choose New Color")
                     .font(.system(size: 24).weight(.medium))
                     .foregroundColor(.gray)
@@ -75,13 +73,14 @@ struct MoreOptionsView: View {
     
     private var startDelayOption: some View {
         VStack {
+            HStack {
+                Text("\(Int(bubble.startDelay)) sec")
+                    .textModifier(.black)
+            }
+            
             Text("\(Image(systemName: "clock.arrow.circlepath")) Start Delay")
                 .font(.system(size: 24).weight(.medium))
                 .foregroundColor(.gray)
-            
-            HStack {
-                Text("30 seconds")
-            }
             
             HStack {
                 Button("5") {
@@ -104,6 +103,24 @@ struct MoreOptionsView: View {
             .foregroundColor(.white)
             .buttonStyle(.borderedProminent)
         }
+    }
+}
+
+struct TextModifier: ViewModifier {
+    let color:Color
+    
+    func body(content: Content) -> some View {
+        content
+            .foregroundColor(.white)
+            .font(.system(size: 30))
+            .padding(MoreOptionsView.insets)
+            .background(RoundedRectangle(cornerRadius: 4).fill(color))
+    }
+}
+
+extension View {
+    func textModifier(_ backgroundColor:Color) -> some View {
+        modifier(TextModifier(color: backgroundColor))
     }
 }
 
