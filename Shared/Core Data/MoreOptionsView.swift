@@ -16,42 +16,10 @@ struct MoreOptionsView: View {
             Color("notesListScreenBackground").opacity(0.8)
                 .ignoresSafeArea()
                 .onTapGesture { vm.rankOfMoreOptionsBubble = nil  /* dismiss */ }
-            VStack {
-                VStack (spacing: 6) {
-                    Text("\(Color.userFriendlyBubbleColorName(for: bubble.color))")
-                        .foregroundColor(.white)
-                        .font(.system(size: 30))
-                        .padding(EdgeInsets(top: 4, leading: 10, bottom: 4, trailing: 10))
-                        .background(
-                            RoundedRectangle(cornerRadius: 4)
-                                .fill(Color.bubbleColor(forName: bubble.color!))
-                        )
-                    Text("Choose Different Color")
-                        .font(.system(size: 24).weight(.medium))
-                        .foregroundColor(.gray)
-                }
-                .allowsHitTesting(false) //ignore touches
-               
-                LazyVGrid(columns: [GridItem(spacing: 0), GridItem(spacing: 0), GridItem(spacing: 0), GridItem()], spacing: 0) {
-                    ForEach(Color.bubbleThrees.map { $0.description }, id: \.self) { colorName in
-                        
-                        let color = Color.bubbleColor(forName: colorName)
-                        ZStack {
-                            Rectangle()
-                                .fill(color)
-                                .aspectRatio(contentMode: .fit)
-                            if colorName == bubble.color {
-                                Image(systemName: "checkmark")
-                                    .foregroundColor(.white)
-                                    .font(.system(size: 40))
-                            }
-                        }
-                        .onTapGesture {
-                            vm.changeColor(for: bubble, to: colorName)
-                            vm.rankOfMoreOptionsBubble = nil //dismiss
-                        }
-                    }
-                }
+            ScrollView {
+                colorOption
+                Divider()
+                startDelayOption
             }
             .padding(8)
             .background {
@@ -62,6 +30,74 @@ struct MoreOptionsView: View {
             }
             .padding()
             .padding()
+        }
+    }
+    
+    // MARK: - Lego
+    private var colorOption:some View {
+        VStack {
+            VStack (spacing: 6) {
+                Text("\(Color.userFriendlyBubbleColorName(for: bubble.color))")
+                    .foregroundColor(.white)
+                    .font(.system(size: 30))
+                    .padding(EdgeInsets(top: 4, leading: 10, bottom: 4, trailing: 10))
+                    .background(
+                        RoundedRectangle(cornerRadius: 4)
+                            .fill(Color.bubbleColor(forName: bubble.color!))
+                    )
+                Text("Choose Different Color")
+                    .font(.system(size: 24).weight(.medium))
+                    .foregroundColor(.gray)
+            }
+            .allowsHitTesting(false) //ignore touches
+           
+            LazyVGrid(columns: [GridItem(spacing: 0), GridItem(spacing: 0), GridItem(spacing: 0), GridItem()], spacing: 0) {
+                ForEach(Color.bubbleThrees.map { $0.description }, id: \.self) { colorName in
+                    
+                    let color = Color.bubbleColor(forName: colorName)
+                    ZStack {
+                        Rectangle()
+                            .fill(color)
+                            .aspectRatio(contentMode: .fit)
+                        if colorName == bubble.color {
+                            Image(systemName: "checkmark")
+                                .foregroundColor(.white)
+                                .font(.system(size: 40))
+                        }
+                    }
+                    .onTapGesture {
+                        vm.changeColor(for: bubble, to: colorName)
+                        vm.rankOfMoreOptionsBubble = nil //dismiss
+                    }
+                }
+            }
+        }
+    }
+    
+    private var startDelayOption: some View {
+        VStack {
+            Text("Start Delay")
+                .font(.system(size: 24).weight(.medium))
+                .foregroundColor(.gray)
+            
+            HStack {
+                Button("5") {
+                    
+                }
+                Button("10") {
+                    
+                }
+                Button("15") {
+                    
+                }
+                Button("30") {
+                    
+                }
+            }
+            .font(.system(size: 26))
+            .foregroundColor(.white)
+            .buttonStyle(.borderedProminent)
+            .tint(.gray)
         }
     }
 }
