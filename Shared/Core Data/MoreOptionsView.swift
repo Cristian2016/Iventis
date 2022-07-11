@@ -26,7 +26,6 @@ struct MoreOptionsView: View {
             Color("notesListScreenBackground").opacity(0.9)
                 .ignoresSafeArea()
                 .onTapGesture { vm.saveAndDismissMoreOptionsView() }
-                .highPriorityGesture(dragGesture)
             VStack {
                 colorOption
                 Divider()
@@ -42,6 +41,7 @@ struct MoreOptionsView: View {
             .padding()
             .padding()
         }
+        .highPriorityGesture(dragGesture)
     }
     
     // MARK: - Lego
