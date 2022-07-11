@@ -52,7 +52,7 @@ struct Global {
     }()
     
     struct FontSize {
-        static let help = CGFloat(24)
+        static let help = CGFloat(30)
     }
 }
 

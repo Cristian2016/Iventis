@@ -21,8 +21,10 @@ struct MoreOptionsView: View {
                 .ignoresSafeArea()
                 .onTapGesture { vm.rankOfMoreOptionsBubble = nil  /* dismiss */ }
             ScrollView {
-                Label("Quick Help", systemImage: "info.circle.fill")
-                    .font(.system(size: Global.FontSize.help))
+                moreInfo
+                    .onTapGesture {
+                        print("show more info")
+                    }
                 Divider()
                 colorOption
                 Divider()
@@ -42,6 +44,11 @@ struct MoreOptionsView: View {
     }
     
     // MARK: - Lego
+    private var moreInfo:some View {
+        Label("More Info", systemImage: "info.circle.fill")
+            .font(.system(size: Global.FontSize.help))
+    }
+    
     private var colorOption:some View {
         VStack (alignment: .leading) {
             HStack (alignment: .bottom) {
