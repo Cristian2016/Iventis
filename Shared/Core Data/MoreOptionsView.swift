@@ -47,7 +47,7 @@ struct MoreOptionsView: View {
     private var moreInfo:some View {
         Label("More Info", systemImage: "info.circle.fill")
             .font(.system(size: Global.FontSize.help))
-            .foregroundColor(.label)
+            .foregroundColor(.gray)
     }
     
     private var colorOption:some View {
