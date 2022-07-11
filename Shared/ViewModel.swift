@@ -375,16 +375,14 @@ class ViewModel: ObservableObject {
     }
     
     func saveAndDismissMoreOptionsView() {
+        UserFeedback.singleHaptic(.medium)
         rankOfMoreOptionsBubble = nil
+        PersistenceController.shared.save()
     }
     
     func computeStartDelay(for bubble:Bubble, value: Int) {
         UserFeedback.singleHaptic(.medium)
         bubble.startDelay += Float(value)
-    }
-    
-    func saveStartDelay(for bubble:Bubble) {
-        PersistenceController.shared.save()
     }
     
     func resetStartDelay(for bubble:Bubble) {

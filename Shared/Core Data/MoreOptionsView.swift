@@ -17,9 +17,7 @@ struct MoreOptionsView: View {
     // MARK: - Gestures
     var dragGesture:some Gesture {
         LongPressGesture(minimumDuration: 0.3)
-            .onEnded { _ in
-                resetStartDelay()
-            }
+            .onEnded { _ in resetStartDelay() }
     }
     
     // MARK: -
