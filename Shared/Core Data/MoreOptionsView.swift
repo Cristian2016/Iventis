@@ -101,6 +101,7 @@ struct MoreOptionsView: View {
                         }
                 }
             }
+            .background() //prevent gestures from underlying view
             .font(.system(size: 26))
             .foregroundColor(.white)
         }
