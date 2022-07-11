@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct MoreOptionsView: View {
-    let bubble: Bubble
+    @ObservedObject var bubble: Bubble
     @EnvironmentObject var vm:ViewModel
     
     // MARK: -
@@ -18,8 +18,7 @@ struct MoreOptionsView: View {
     var dragGesture:some Gesture {
         LongPressGesture(minimumDuration: 0.3)
             .onEnded { _ in
-                UserFeedback.doubleHaptic(.medium)
-                //reset start delay
+                resetStartDelay()
             }
     }
     
@@ -39,7 +38,7 @@ struct MoreOptionsView: View {
             .background {
                 RoundedRectangle(cornerRadius: 10)
                     .fill(Color.white)
-                    .standardShadow(false)
+                    .standardShadow()
                     .onTapGesture { vm.rankOfMoreOptionsBubble = nil  /* dismiss */ }
             }
             .padding()
@@ -109,6 +108,13 @@ struct MoreOptionsView: View {
             .font(.system(size: 26))
             .foregroundColor(.white)
         }
+    }
+    
+    // MARK: - User Intents
+    //long press outside table
+    func resetStartDelay() {
+        UserFeedback.doubleHaptic(.medium)
+        vm.resetStartDelay(for: bubble)
     }
 }
 
