@@ -22,6 +22,7 @@ struct MoreOptionsView: View {
                 .onTapGesture { vm.rankOfMoreOptionsBubble = nil  /* dismiss */ }
             ScrollView {
                 colorOption
+                Divider()
                 startDelayOption
             }
             .padding(8)
@@ -39,10 +40,10 @@ struct MoreOptionsView: View {
     // MARK: - Lego
     private var colorOption:some View {
         VStack {
-            VStack (spacing: 6) {
+            HStack (alignment: .bottom) {
                 Text("\(Color.userFriendlyBubbleColorName(for: bubble.color))")
                     .textModifier(Color.bubbleColor(forName: bubble.color!))
-                Text("Choose New Color")
+                Text("Choose Color")
                     .font(.system(size: 24).weight(.medium))
                     .foregroundColor(.gray)
             }
@@ -73,29 +74,25 @@ struct MoreOptionsView: View {
     
     private var startDelayOption: some View {
         VStack {
-            
             HStack (alignment: .bottom) {
                 Text("\(Int(bubble.startDelay))")
                     .textModifier(.black)
-                Text("Sec")
+                Text("\(Image(systemName: "clock.arrow.circlepath")) Start Delay")
                     .font(.system(size: 24).weight(.medium))
                     .foregroundColor(.gray)
             }
             
-            Text("\(Image(systemName: "clock.arrow.circlepath")) Start Delay")
-                .font(.system(size: 24).weight(.medium))
-                .foregroundColor(.gray)
-            
+            //buttons row 3
             HStack (spacing: 4) {
                 ForEach(Bubble.startDelayValues, id: \.self) { value in
                     Rectangle()
                         .fill(Color.black)
                         .aspectRatio(contentMode: .fit)
                         .overlay {
-                        Button("\(value)") {
-                            vm.computeStartDelay(for: bubble, value: value)
-                        }
-                        .font(.system(size: 24).weight(.medium))
+                            Button("\(value)") {
+                                vm.computeStartDelay(for: bubble, value: value)
+                            }
+                        .font(.system(size: 30).weight(.medium))
                     }
                 }
             }
