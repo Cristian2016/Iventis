@@ -75,15 +75,16 @@ struct MoreOptionsView: View {
         VStack {
             
             HStack (alignment: .bottom) {
-                Text("\(Image(systemName: "clock.arrow.circlepath")) Start Delay")
-                    .font(.system(size: 24).weight(.medium))
-                    .foregroundColor(.gray)
                 Text("\(Int(bubble.startDelay))")
                     .textModifier(.black)
                 Text("Sec")
                     .font(.system(size: 24).weight(.medium))
                     .foregroundColor(.gray)
             }
+            
+            Text("\(Image(systemName: "clock.arrow.circlepath")) Start Delay")
+                .font(.system(size: 24).weight(.medium))
+                .foregroundColor(.gray)
             
             HStack {
                 Button("5") {
