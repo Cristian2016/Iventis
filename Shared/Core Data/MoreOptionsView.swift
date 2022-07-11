@@ -51,7 +51,7 @@ struct MoreOptionsView: View {
             }
             .allowsHitTesting(false) //ignore touches
            
-            LazyVGrid(columns: [GridItem(spacing: 0), GridItem(spacing: 0), GridItem(spacing: 0), GridItem()], spacing: 0) {
+            LazyVGrid(columns: [GridItem(spacing: 4), GridItem(spacing: 4), GridItem(spacing: 4), GridItem()], spacing: 4) {
                 ForEach(Color.bubbleThrees.map { $0.description }, id: \.self) { colorName in
                     
                     let color = Color.bubbleColor(forName: colorName)
