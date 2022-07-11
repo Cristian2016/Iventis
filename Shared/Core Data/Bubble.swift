@@ -11,6 +11,8 @@ import CoreData
 import SwiftUI
 
 public class Bubble: NSManagedObject {
+    static let startDelayValues = [5, 10, 15, 30]
+    
     // MARK: - Testing Only
     var signalReceived:Date?
     var componentsUpdated:Date?

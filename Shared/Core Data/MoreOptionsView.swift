@@ -86,21 +86,16 @@ struct MoreOptionsView: View {
                 .font(.system(size: 24).weight(.medium))
                 .foregroundColor(.gray)
             
-            HStack {
-                Button("5") {
-                    vm.computeStartDelay(for: bubble, value: 5)
-                }
-                Button("10") {
-                    vm.computeStartDelay(for: bubble, value: 10)
-                }
-                Button("15") {
-                    vm.computeStartDelay(for: bubble, value: 15)
-                }
-                Button("30") {
-                    vm.computeStartDelay(for: bubble, value: 30)
-                }
-                Button("60") {
-                    vm.computeStartDelay(for: bubble, value: 60)
+            HStack (spacing: 4) {
+                ForEach(Bubble.startDelayValues, id: \.self) { value in
+                    Rectangle()
+                        .fill(Color.black)
+                        .aspectRatio(contentMode: .fit)
+                        .overlay {
+                        Button("\(value)") {
+                            vm.computeStartDelay(for: bubble, value: 5)
+                        }
+                    }
                 }
             }
             .font(.system(size: 26))
