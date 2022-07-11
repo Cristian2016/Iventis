@@ -86,19 +86,18 @@ struct MoreOptionsView: View {
             
             HStack {
                 Button("5") {
-                    
+                    print("5")
                 }
                 Button("10") {
-                    
+                    print("10")
                 }
                 Button("15") {
-                    
+                    print("15")
                 }
                 Button("30") {
-                    
+                    print("30")
                 }
             }
-            .fixedSize()
             .font(.system(size: 26))
             .foregroundColor(.white)
             .buttonStyle(.borderedProminent)
