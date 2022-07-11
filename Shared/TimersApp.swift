@@ -62,10 +62,12 @@ struct TimersApp: App {
                     DeleteView(bubble)
                 }
                 
-                if bubbleNotesShowing {
-                    BubbleNotesList($vm.notesList_bRank)
-                }
+                if bubbleNotesShowing { BubbleNotesList($vm.notesList_bRank) }
                 if let pair = vm.pairOfNotesList { PairNotesList(pair) }
+                
+                if vm.rankOfMoreOptionsBubble != nil {
+                    MoreOptionsView(bubble: vm.bubble(for: vm.rankOfMoreOptionsBubble)!)
+                }
             }
             .ignoresSafeArea()
             .environment(\.managedObjectContext, viewContext)
