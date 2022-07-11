@@ -35,6 +35,7 @@ struct MoreOptionsView: View {
                 RoundedRectangle(cornerRadius: 10)
                     .fill(Color.white)
                     .standardShadow(false)
+                    .onTapGesture { vm.rankOfMoreOptionsBubble = nil  /* dismiss */ }
             }
             .padding()
             .padding()
