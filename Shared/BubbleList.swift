@@ -48,6 +48,10 @@ struct BubbleList: View {
             
             if !notesShowing { LeftStrip($vm.isPaletteShowing, isListEmpty) }
             
+            if vm.rankOfMoreOptionsBubble != nil {
+                MoreOptionsView(bubble: vm.bubble(for: vm.rankOfMoreOptionsBubble)!)
+            }
+            
             PaletteView($vm.isPaletteShowing)
         }
         .onPreferenceChange(BubbleCellLow_Key.self) { new in

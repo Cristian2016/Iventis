@@ -24,6 +24,8 @@ class ViewModel: ObservableObject {
     
     @Published var rankOfSelectedBubble:Int?
     @Published var idOfSelectedBubble:Bubble.ID?
+    
+    @Published var rankOfMoreOptionsBubble:Int?
         
     init() {
         let request = Bubble.fetchRequest()
@@ -150,7 +152,7 @@ class ViewModel: ObservableObject {
     }
     
     func showMoreOptions(_ bubble:Bubble) {
-        
+        rankOfMoreOptionsBubble = Int(bubble.rank)
     }
     
     //⚠️ super hard to get it right
@@ -323,6 +325,12 @@ class ViewModel: ObservableObject {
         
         PersistenceController.shared.save()
         TimersApp.calManager.updateExistingEvent(.notes(pair.session!))
+    }
+    
+    //change bubble Color
+    func changeColor(for bubble:Bubble, to newColor:String) {
+        bubble.color = newColor
+        PersistenceController.shared.save()
     }
     
     // MARK: -

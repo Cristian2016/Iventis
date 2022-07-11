@@ -41,6 +41,7 @@
 		1F74878B286EB64E0092674F /* BubbleCell_Info.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F74878A286EB64E0092674F /* BubbleCell_Info.swift */; };
 		1F74878D286ED1B10092674F /* StartInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F74878C286ED1B10092674F /* StartInfoView.swift */; };
 		1F82FB982831435A00E7C5AA /* HelpActionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F82FB972831435A00E7C5AA /* HelpActionButton.swift */; };
+		1F864D90287C0356000219CE /* MoreOptionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F864D8F287C0356000219CE /* MoreOptionsView.swift */; };
 		1F8B6965283790CF006540CB /* BubbleNotesList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8B6964283790CF006540CB /* BubbleNotesList.swift */; };
 		1F97B7DD2809B311002FFCA3 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F97B7DC2809B311002FFCA3 /* Colors.swift */; };
 		1F98D78A286AF8A300C0A973 /* DeleteRow_InfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F98D789286AF8A300C0A973 /* DeleteRow_InfoView.swift */; };
@@ -135,6 +136,7 @@
 		1F74878C286ED1B10092674F /* StartInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartInfoView.swift; sourceTree = "<group>"; };
 		1F82FB972831435A00E7C5AA /* HelpActionButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpActionButton.swift; sourceTree = "<group>"; };
 		1F845FAD286EF8730053EAE6 /* WidgetsExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = WidgetsExtension.entitlements; sourceTree = "<group>"; };
+		1F864D8F287C0356000219CE /* MoreOptionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreOptionsView.swift; sourceTree = "<group>"; };
 		1F8B6964283790CF006540CB /* BubbleNotesList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BubbleNotesList.swift; sourceTree = "<group>"; };
 		1F97B7DC2809B311002FFCA3 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		1F98D789286AF8A300C0A973 /* DeleteRow_InfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteRow_InfoView.swift; sourceTree = "<group>"; };
@@ -285,6 +287,7 @@
 				1F9BE0A8280BE14100F87EFA /* PaletteView.swift */,
 				1F9BE0AC280C6AB000F87EFA /* TapHold.swift */,
 				1F5F4A712809409600AF3442 /* Bubble.swift */,
+				1F864D8F287C0356000219CE /* MoreOptionsView.swift */,
 				1F5F4A722809409600AF3442 /* Bubble Properties.swift */,
 				1FFC8BA428142F040059EF2E /* Session.swift */,
 				1FFC8BA528142F040059EF2E /* Session Properties.swift */,
@@ -469,6 +472,7 @@
 				1FA355CB2832186100F73111 /* CalendarManager.swift in Sources */,
 				1F5987A2286B5DFC00CDB54C /* PairSavedNote.swift in Sources */,
 				1F5F4A9D280945C700AF3442 /* BubbleCell.swift in Sources */,
+				1F864D90287C0356000219CE /* MoreOptionsView.swift in Sources */,
 				1F18B460281FAABF0080ADA6 /* TopCell.swift in Sources */,
 				1F5F4A5D28093FAF00AF3442 /* TimersApp.swift in Sources */,
 				1FCF0C662816F3F600AA1FAA /* EmptyListView.swift in Sources */,
