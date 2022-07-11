@@ -47,6 +47,7 @@ struct MoreOptionsView: View {
         Label("Info", systemImage: "info.circle.fill")
             .font(.system(size: Global.FontSize.help))
             .foregroundColor(.gray)
+            .offset(y:10)
     }
     
     private var colorOption:some View {
@@ -110,10 +111,6 @@ struct MoreOptionsView: View {
             }
             .font(.system(size: 26))
             .foregroundColor(.white)
-            
-//            Text("Ex: Delay Bubble Start by\n1 Min: Tap \(Image(systemName: "30.square.fill")) Twice\n45 Sec: Tap \(Image(systemName: "15.square.fill")) and \(Image(systemName: "30.square.fill"))")
-//                .foregroundColor(.gray)
-//                .padding(.leading, 4)
         }
     }
 }
