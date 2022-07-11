@@ -147,7 +147,6 @@ extension CalendarManager {
             }
             
         case /* update event */.title(let bubble):
-                
             bubble.sessions_.forEach {
                 if
                     $0.isEnded,

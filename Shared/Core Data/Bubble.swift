@@ -116,6 +116,7 @@ extension Bubble {
     ///time components hr:min:sec:hundredths
     private func updateBubbleCellComponents() {
         if state != .running { return }
+        
         guard let lastPairStart = lastPair!.start else { return }
         
         //delta is the elapsed duration between pair.start and signal dates
