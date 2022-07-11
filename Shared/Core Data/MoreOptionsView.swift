@@ -8,24 +8,41 @@
 import SwiftUI
 
 struct MoreOptionsView: View {
+    init(_ bubble:Bubble) {
+        self.bubble = bubble
+        self.initialBubbleColor = bubble.color!
+    }
+    
+    // MARK: -
     @ObservedObject var bubble: Bubble
     @EnvironmentObject var vm:ViewModel
     
     // MARK: -
     static let insets = EdgeInsets(top: 4, leading: 10, bottom: 4, trailing: 10)
+    let initialBubbleColor:String
+    
+    // MARK: - Gestures
+    var dragGesture:some Gesture {
+        LongPressGesture(minimumDuration: 0.3)
+            .onEnded { _ in
+                UserFeedback.doubleHaptic(.medium)
+                //reset color option
+                if initialBubbleColor != bubble.color {
+                    bubble.color = initialBubbleColor
+                }
+                //reset delay start option
+                bubble.startDelay = 0
+            }
+    }
     
     // MARK: -
     var body: some View {
         ZStack {
             Color("notesListScreenBackground").opacity(0.9)
                 .ignoresSafeArea()
-                .onTapGesture { vm.rankOfMoreOptionsBubble = nil  /* dismiss */ }
+                .onTapGesture { vm.saveAndDismissMoreOptionsView() }
+                .highPriorityGesture(dragGesture)
             VStack {
-                moreInfo
-                    .onTapGesture {
-                        print("show more info")
-                    }
-                Divider()
                 colorOption
                 Divider()
                 startDelayOption
@@ -43,13 +60,6 @@ struct MoreOptionsView: View {
     }
     
     // MARK: - Lego
-    private var moreInfo:some View {
-        Label("Info", systemImage: "info.circle.fill")
-            .font(.system(size: Global.FontSize.help))
-            .foregroundColor(.gray)
-            .offset(y:10)
-    }
-    
     private var colorOption:some View {
         VStack (alignment: .leading) {
             HStack (alignment: .bottom) {
@@ -78,7 +88,6 @@ struct MoreOptionsView: View {
                     }
                     .onTapGesture {
                         vm.changeColor(for: bubble, to: colorName)
-                        vm.rankOfMoreOptionsBubble = nil //dismiss
                     }
                 }
             }
@@ -141,6 +150,6 @@ struct MoreOptionsView_Previews: PreviewProvider {
             bubble.color = "green"
             return bubble
         }()
-        MoreOptionsView(bubble: bubble)
+        MoreOptionsView(bubble)
     }
 }

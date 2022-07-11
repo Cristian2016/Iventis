@@ -26,6 +26,7 @@ class ViewModel: ObservableObject {
     @Published var idOfSelectedBubble:Bubble.ID?
     
     @Published var rankOfMoreOptionsBubble:Int?
+    @Published var optionsModified = false
         
     init() {
         let request = Bubble.fetchRequest()
@@ -327,14 +328,6 @@ class ViewModel: ObservableObject {
         TimersApp.calManager.updateExistingEvent(.notes(pair.session!))
     }
     
-    //change bubble Color
-    func changeColor(for bubble:Bubble, to newColor:String) {
-        if bubble.color == newColor { return }
-        
-        bubble.color = newColor
-        PersistenceController.shared.save()
-    }
-    
     // MARK: -
     func compute_deleteView_YOffset(for frame:CGRect) -> CGFloat {
         guard !isDetailViewShowing else { return 0 }
@@ -373,18 +366,31 @@ class ViewModel: ObservableObject {
         }
     }
     
-    // MARK: - Bubble Start Delay
+    // MARK: - MoreOptionsView
+    func changeColor(for bubble:Bubble, to newColor:String) {
+        if bubble.color == newColor { return }
+        
+        bubble.color = newColor
+        optionsModified = true
+    }
+    
+    func saveAndDismissMoreOptionsView() {
+        rankOfMoreOptionsBubble = nil
+        if optionsModified { PersistenceController.shared.save() }
+    }
+    
     func computeStartDelay(for bubble:Bubble, value: Int) {
         bubble.startDelay += Float(value)
-        print("delay now is \(bubble.startDelay) seconds")
+        optionsModified = true
     }
     
     func saveStartDelay(for bubble:Bubble) {
         PersistenceController.shared.save()
     }
     
-    func resetStartDelay(for bubble:Bubble) {
+    func resetAllOptions(for bubble:Bubble) {
         bubble.startDelay = 0
+        
         PersistenceController.shared.save()
     }
 }
