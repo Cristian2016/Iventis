@@ -74,6 +74,9 @@ extension Color {
         case aqua
         case byzantium
         case rose
+        
+        case cayenne
+        case aubergine
     }
 }
 
@@ -88,7 +91,7 @@ extension Color {
     
     static let bubbleThrees = [
         Bubbles.mint, Bubbles.slateBlue, Bubbles.sourCherry, Bubbles.silver, Bubbles.ultramarine, Bubbles.lemon, Bubbles.red, Bubbles.sky, Bubbles.bubbleGum,
-        Bubbles.green, Bubbles.charcoal, Bubbles.magenta, Bubbles.purple, Bubbles.orange, Bubbles.chocolate, Bubbles.aqua, Bubbles.byzantium, Bubbles.rose
+        Bubbles.green, Bubbles.charcoal, Bubbles.magenta, Bubbles.purple, Bubbles.orange, Bubbles.chocolate, Bubbles.aqua, Bubbles.byzantium, Bubbles.rose, Bubbles.aubergine, Bubbles.cayenne
     ]
     
     static func bubbleColor(forName bubbleColorName:String) -> Color {
