@@ -96,7 +96,10 @@ extension Color {
                              "chocolate" : "Chocolate",
                              "aqua" : "Aqua",
                              "byzantium" : "Byzantium",
-                             "rose" : "Rose"]
+                             "rose" : "Rose",
+                             "aubergine" : "Aubergine",
+                             "cayenne" : "Cayenne"
+    ]
     
     static func userFriendlyBubbleColorName(for bubbleColorName:String?) -> String {
         guard
