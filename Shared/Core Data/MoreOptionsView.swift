@@ -93,8 +93,9 @@ struct MoreOptionsView: View {
                         .aspectRatio(contentMode: .fit)
                         .overlay {
                         Button("\(value)") {
-                            vm.computeStartDelay(for: bubble, value: 5)
+                            vm.computeStartDelay(for: bubble, value: value)
                         }
+                        .font(.system(size: 24).weight(.medium))
                     }
                 }
             }
