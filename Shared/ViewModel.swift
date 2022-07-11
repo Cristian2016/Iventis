@@ -374,8 +374,9 @@ class ViewModel: ObservableObject {
     }
     
     // MARK: - Bubble Start Delay
-    func totalStartDelay(for bubble:Bubble, value: Int) {
+    func computeStartDelay(for bubble:Bubble, value: Int) {
         bubble.startDelay += Float(value)
+        print("delay now is \(bubble.startDelay) seconds")
     }
     
     func saveStartDelay(for bubble:Bubble) {

@@ -85,16 +85,19 @@ struct MoreOptionsView: View {
             
             HStack {
                 Button("5") {
-                    print("5")
+                    vm.computeStartDelay(for: bubble, value: 5)
                 }
                 Button("10") {
-                    print("10")
+                    vm.computeStartDelay(for: bubble, value: 10)
                 }
                 Button("15") {
-                    print("15")
+                    vm.computeStartDelay(for: bubble, value: 15)
                 }
                 Button("30") {
-                    print("30")
+                    vm.computeStartDelay(for: bubble, value: 30)
+                }
+                Button("60") {
+                    vm.computeStartDelay(for: bubble, value: 60)
                 }
             }
             .font(.system(size: 26))
