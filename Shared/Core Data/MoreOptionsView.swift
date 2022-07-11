@@ -25,6 +25,7 @@ struct MoreOptionsView: View {
                 Divider()
                 startDelayOption
             }
+            .scrollIndicators(.hidden)
             .padding(8)
             .background {
                 RoundedRectangle(cornerRadius: 10)
@@ -39,7 +40,7 @@ struct MoreOptionsView: View {
     
     // MARK: - Lego
     private var colorOption:some View {
-        VStack {
+        VStack (alignment: .leading) {
             HStack (alignment: .bottom) {
                 Text("\(Color.userFriendlyBubbleColorName(for: bubble.color))")
                     .textModifier(Color.bubbleColor(forName: bubble.color!))
@@ -73,9 +74,9 @@ struct MoreOptionsView: View {
     }
     
     private var startDelayOption: some View {
-        VStack {
+        VStack (alignment: .leading) {
             HStack (alignment: .bottom) {
-                Text("\(Int(bubble.startDelay))")
+                Text("\(Int(bubble.startDelay)) s")
                     .textModifier(.black)
                 Text("\(Image(systemName: "clock.arrow.circlepath")) Start Delay")
                     .font(.system(size: 24).weight(.medium))
@@ -98,7 +99,10 @@ struct MoreOptionsView: View {
             }
             .font(.system(size: 26))
             .foregroundColor(.white)
-            .buttonStyle(.borderedProminent)
+            
+            Text("Ex: Delay Bubble Start by\n1 Min: Tap \(Image(systemName: "30.square.fill")) Twice\n45 Sec: Tap \(Image(systemName: "15.square.fill")) and \(Image(systemName: "30.square.fill"))")
+                .foregroundColor(.gray)
+                .padding(.leading, 4)
         }
     }
 }
