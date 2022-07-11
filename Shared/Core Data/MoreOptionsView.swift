@@ -21,6 +21,9 @@ struct MoreOptionsView: View {
                 .ignoresSafeArea()
                 .onTapGesture { vm.rankOfMoreOptionsBubble = nil  /* dismiss */ }
             ScrollView {
+                Label("Quick Help", systemImage: "info.circle.fill")
+                    .font(.system(size: Global.FontSize.help))
+                Divider()
                 colorOption
                 Divider()
                 startDelayOption
@@ -77,7 +80,7 @@ struct MoreOptionsView: View {
         VStack (alignment: .leading) {
             HStack (alignment: .bottom) {
                 Text("\(Int(bubble.startDelay)) s")
-                    .textModifier(.black)
+                    .textModifier(Color.bubbleColor(forName: bubble.color!))
                 Text("\(Image(systemName: "clock.arrow.circlepath")) Start Delay")
                     .font(.system(size: 24).weight(.medium))
                     .foregroundColor(.gray)
@@ -87,7 +90,7 @@ struct MoreOptionsView: View {
             HStack (spacing: 4) {
                 ForEach(Bubble.startDelayValues, id: \.self) { value in
                     Rectangle()
-                        .fill(Color.black)
+                        .fill(Color.bubbleColor(forName: bubble.color!))
                         .aspectRatio(contentMode: .fit)
                         .overlay {
                             Button("\(value)") {
@@ -100,9 +103,9 @@ struct MoreOptionsView: View {
             .font(.system(size: 26))
             .foregroundColor(.white)
             
-            Text("Ex: Delay Bubble Start by\n1 Min: Tap \(Image(systemName: "30.square.fill")) Twice\n45 Sec: Tap \(Image(systemName: "15.square.fill")) and \(Image(systemName: "30.square.fill"))")
-                .foregroundColor(.gray)
-                .padding(.leading, 4)
+//            Text("Ex: Delay Bubble Start by\n1 Min: Tap \(Image(systemName: "30.square.fill")) Twice\n45 Sec: Tap \(Image(systemName: "15.square.fill")) and \(Image(systemName: "30.square.fill"))")
+//                .foregroundColor(.gray)
+//                .padding(.leading, 4)
         }
     }
 }

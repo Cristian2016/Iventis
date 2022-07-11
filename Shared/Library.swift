@@ -50,6 +50,10 @@ struct Global {
         print(UIScreen.main.bounds.height)
         return dic[UIScreen.size.height] ?? 140
     }()
+    
+    struct FontSize {
+        static let help = CGFloat(24)
+    }
 }
 
 extension Array {
