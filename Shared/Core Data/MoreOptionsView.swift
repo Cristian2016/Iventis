@@ -76,9 +76,13 @@ struct MoreOptionsView: View {
     
     private var startDelayOption: some View {
         VStack {
-            Text("Start Delay")
+            Text("\(Image(systemName: "clock.arrow.circlepath")) Start Delay")
                 .font(.system(size: 24).weight(.medium))
                 .foregroundColor(.gray)
+            
+            HStack {
+                Text("30 seconds")
+            }
             
             HStack {
                 Button("5") {
@@ -94,10 +98,10 @@ struct MoreOptionsView: View {
                     
                 }
             }
+            .fixedSize()
             .font(.system(size: 26))
             .foregroundColor(.white)
             .buttonStyle(.borderedProminent)
-            .tint(.gray)
         }
     }
 }
