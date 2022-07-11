@@ -20,7 +20,7 @@ struct MoreOptionsView: View {
                 VStack (spacing: 6) {
                     Text("\(Color.userFriendlyBubbleColorName(for: bubble.color))")
                         .foregroundColor(.white)
-                        .font(.system(size: 34))
+                        .font(.system(size: 30))
                         .padding(EdgeInsets(top: 4, leading: 10, bottom: 4, trailing: 10))
                         .background(
                             RoundedRectangle(cornerRadius: 4)
@@ -43,7 +43,7 @@ struct MoreOptionsView: View {
                             if colorName == bubble.color {
                                 Image(systemName: "checkmark")
                                     .foregroundColor(.white)
-                                    .font(.system(size: 40).weight(.medium))
+                                    .font(.system(size: 40))
                             }
                         }
                         .onTapGesture {
