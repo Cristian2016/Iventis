@@ -20,7 +20,7 @@ struct MoreOptionsView: View {
             Color("notesListScreenBackground").opacity(0.9)
                 .ignoresSafeArea()
                 .onTapGesture { vm.rankOfMoreOptionsBubble = nil  /* dismiss */ }
-            ScrollView {
+            VStack {
                 moreInfo
                     .onTapGesture {
                         print("show more info")
@@ -30,7 +30,6 @@ struct MoreOptionsView: View {
                 Divider()
                 startDelayOption
             }
-            .scrollIndicators(.hidden)
             .padding(8)
             .background {
                 RoundedRectangle(cornerRadius: 10)
