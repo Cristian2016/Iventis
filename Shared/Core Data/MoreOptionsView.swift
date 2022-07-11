@@ -13,7 +13,7 @@ struct MoreOptionsView: View {
     
     var body: some View {
         ZStack {
-            Color.white.opacity(0.8)
+            Color("notesListScreenBackground").opacity(0.8)
                 .ignoresSafeArea()
                 .onTapGesture { vm.rankOfMoreOptionsBubble = nil  /* dismiss */ }
             VStack {
