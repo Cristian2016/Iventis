@@ -34,8 +34,10 @@ struct MoreOptionsView: View {
                     vm.saveAndDismissMoreOptionsView(bubble)
                 }
             VStack {
-                startDelayOption
-                Divider()
+                if bubble.state == .brandNew {
+                    startDelayOption
+                    Divider()
+                }
                 colorOption
             }
             .padding(8)
