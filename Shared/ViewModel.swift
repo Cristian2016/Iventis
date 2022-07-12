@@ -372,7 +372,10 @@ class ViewModel: ObservableObject {
     }
     
     // MARK: - MoreOptionsView
+    ///StartDelayBubble
     @Published var sdb:SDB?
+    
+    ///StartDelayBubble.delay
     var sdbDelay:Int64 = 0
     
     @Published var startDelayWasReset = false
