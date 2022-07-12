@@ -32,6 +32,7 @@ public class SDB: NSManagedObject {
                     backgroundTimer = SDBTimer(dispatchQueue)
                 }
                 backgroundTimer?.perform(.start)
+                print("start")
             case .running:
                 state = .paused
                 backgroundTimer?.perform(.pause)
@@ -45,10 +46,14 @@ public class SDB: NSManagedObject {
     // MARK: -
     func observeSDBTimer() {
         NotificationCenter.default.addObserver(forName: .sdbTimerSignal, object: nil, queue: nil) { [weak self] notification in
+            
+            print("notification received")
             guard let self = self else { return }
             
-            print("sdb timer signal received")
-            if self.delay > 0 { self.delay -= 1 }
+            if self.delay > 0 {
+                self.delay -= 1
+                print(self.delay)
+            }
             else {
                 self.backgroundTimer?.perform(.pause)
                 self.backgroundTimer = nil
@@ -56,5 +61,7 @@ public class SDB: NSManagedObject {
         }
     }
     
-    deinit { NotificationCenter.default.removeObserver(self) }
+    deinit {
+        print("deinit")
+    }
 }
