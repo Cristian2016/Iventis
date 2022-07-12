@@ -30,6 +30,16 @@ struct SDBCell: View {
             .gesture(dragGesture)
             .highPriorityGesture(longPressGesture)
             .onTapGesture { vm.toggle(sdb) }
+            .onReceive(NotificationCenter.Publisher(center: .default, name: .sdbTimerSignal)) { _ in
+                if sdb.delay > 0 {
+                    sdb.delay -= 1
+                } else {
+                    sdb.backgroundTimer?.perform(.pause)
+                    vm.sdb = nil
+                    vm.sdbDelay = 0
+                    vm.toggleStart(sdb.bubble!)
+                }
+            }
     }
     
     private var longPressGesture:some Gesture {
@@ -43,11 +53,6 @@ struct SDBCell: View {
         DragGesture()
             .onChanged { value in offset = value.translation }
             .onEnded { _ in withAnimation { offset = .zero } }
-    }
-    
-    init(_ sdb:SDB) {
-       _sdb = StateObject(wrappedValue: sdb)
-        sdb.observeSDBTimer()
     }
 }
 

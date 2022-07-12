@@ -30,7 +30,9 @@ class SDBTimer {
     }()
     
     private var eventHandler: (() -> Void)? = {
-        NotificationCenter.default.post(name: .sdbTimerSignal, object: nil)
+        DispatchQueue.main.async {
+            NotificationCenter.default.post(name: .sdbTimerSignal, object: nil)
+        }
     }
     
     enum State {
