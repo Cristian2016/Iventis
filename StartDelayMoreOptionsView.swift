@@ -2,7 +2,7 @@ import SwiftUI
 
 ///StartDelayBubbleView
 ///its data dependency is SDB [StartDelayBubble] in the model
-struct SDBView:View {
+struct StartDelayMoreOptionsView:View {
     @EnvironmentObject var vm:ViewModel
     @StateObject var sdb:SDB
     

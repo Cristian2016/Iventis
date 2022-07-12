@@ -37,7 +37,7 @@ struct MoreOptionsView: View {
                 }
             VStack {
                 if bubble.state == .brandNew {
-                    SDBView(sdb: bubble.sdb!)
+                    StartDelayMoreOptionsView(sdb: bubble.sdb!)
                     Divider()
                 }
                 colorOption
