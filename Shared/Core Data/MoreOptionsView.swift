@@ -69,7 +69,7 @@ struct MoreOptionsView: View {
         }
     }
     
-    private var startDelayResetText: some View {
+    private var startDelayIsZeroText: some View {
         VStack {
            Text("\(Image(systemName: "clock.arrow.circlepath")) Start Delay")
             Text("0s").font(.system(size: 40).weight(.medium))
