@@ -13,6 +13,7 @@ struct MoreOptionsView: View {
     
     // MARK: -
     static let insets = EdgeInsets(top: 4, leading: 10, bottom: 4, trailing: 10)
+    let itemSpacing = CGFloat(4)
     
     // MARK: - Gestures
     var dragGesture:some Gesture {
@@ -88,7 +89,7 @@ struct MoreOptionsView: View {
             }
             .allowsHitTesting(false) //ignore touches
            
-            LazyVGrid(columns: [GridItem(spacing: 4), GridItem(spacing: 4), GridItem(spacing: 4), GridItem()], spacing: 4) {
+            LazyVGrid(columns: [GridItem(spacing: itemSpacing), GridItem(spacing: itemSpacing), GridItem(spacing: itemSpacing), GridItem()], spacing: itemSpacing) {
                 ForEach(Color.bubbleThrees.map { $0.description }, id: \.self) { colorName in
                     
                     let color = Color.bubbleColor(forName: colorName)
@@ -119,7 +120,7 @@ struct MoreOptionsView: View {
             }
             
             //buttons row 3
-            HStack (spacing: 4) {
+            HStack (spacing: itemSpacing) {
                 ForEach(Bubble.startDelayValues, id: \.self) { delay in
                     Rectangle()
                         .fill(Color.bubbleColor(forName: bubble.color!))
