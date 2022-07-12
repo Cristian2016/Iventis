@@ -55,14 +55,14 @@ struct MoreOptionsView: View {
             
             if vm.startDelayWasSet && bubble.startDelay != 0 {
                 ConfirmationLabel()
-                { startDelaySetText } action: { vm.startDelayWasSet = false }
+                { startDelayText } action: { vm.startDelayWasSet = false }
             }
         }
         .highPriorityGesture(dragGesture)
     }
     
     // MARK: - Lego
-    private var startDelaySetText: some View {
+    private var startDelayText: some View {
         VStack {
            Text("\(Image(systemName: "clock.arrow.circlepath")) Start Delay")
             Text("\(bubble.startDelay)s").font(.system(size: 40).weight(.medium))
