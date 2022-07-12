@@ -8,13 +8,17 @@
 import Foundation
 
 class SDBTimer {
-    deinit { killTimer() }
+    deinit {
+        print("SDBTimer deinit")
+        killTimer()
+    }
     
     ///event handler called every second
     private let updateFrequency:Double = 1.0 /* every second */
         
     let queue:DispatchQueue
     init(_ queue:DispatchQueue) {
+        print("SDBTimer init")
         self.queue = queue
     }
     

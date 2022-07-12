@@ -17,6 +17,7 @@ extension SDB {
     }
 
     @NSManaged public var delay: Int64
+    
     @NSManaged public var pairs: NSSet?
     @NSManaged public var bubble: Bubble?
 
