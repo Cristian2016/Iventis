@@ -50,7 +50,7 @@ struct MoreOptionsView: View {
             if vm.startDelayWasReset {
                 //reset delay confirmation
                 ConfirmationLabel(isDestructive: true)
-                { startDelayResetText } action: { vm.startDelayWasReset = false }
+                { startDelayIsZeroText } action: { vm.startDelayWasReset = false }
             }
             
             if vm.startDelayWasSet && bubble.startDelay != 0 {

@@ -390,12 +390,9 @@ class ViewModel: ObservableObject {
             PersistenceController.shared.save()
             startDelayWasSet = true
             
-            if bubble.startDelay != 0 {
-                delayExecution(.now() + 1) {
-                    self.moreOptionsData = nil
-                    self.startDelayWasSet = false
-                }
-            } else {
+            let delay = (bubble.startDelay != 0) ? DispatchTime.now() + 1 : .now()
+            
+            delayExecution(delay) {
                 self.moreOptionsData = nil
                 self.startDelayWasSet = false
             }
