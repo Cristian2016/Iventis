@@ -10,10 +10,10 @@ import Foundation
 import CoreData
 
 ///DelayStartBubble Properties
-extension DSB {
+extension SDB {
 
-    @nonobjc public class func fetchRequest() -> NSFetchRequest<DSB> {
-        return NSFetchRequest<DSB>(entityName: "DSB")
+    @nonobjc public class func fetchRequest() -> NSFetchRequest<SDB> {
+        return NSFetchRequest<SDB>(entityName: "DSB")
     }
 
     @NSManaged public var delay: Int64
@@ -23,13 +23,13 @@ extension DSB {
 }
 
 // MARK: Generated accessors for pairs
-extension DSB {
+extension SDB {
 
     @objc(addPairsObject:)
-    @NSManaged public func addToPairs(_ value: DSBPair)
+    @NSManaged public func addToPairs(_ value: SDBPair)
 
     @objc(removePairsObject:)
-    @NSManaged public func removeFromPairs(_ value: DSBPair)
+    @NSManaged public func removeFromPairs(_ value: SDBPair)
 
     @objc(addPairs:)
     @NSManaged public func addToPairs(_ values: NSSet)
@@ -39,6 +39,6 @@ extension DSB {
 
 }
 
-extension DSB : Identifiable {
+extension SDB : Identifiable {
 
 }

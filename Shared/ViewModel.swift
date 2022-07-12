@@ -75,6 +75,10 @@ class ViewModel: ObservableObject {
         newBubble.color = color
         newBubble.rank = Int64(UserDefaults.generateRank())
         
+        let sdb = SDB(context: backgroundContext)
+        newBubble.sdb = sdb
+        sdb.observeSDBTimer()
+        
         try? backgroundContext.save()
     }
     
@@ -153,8 +157,9 @@ class ViewModel: ObservableObject {
         if bubble.hasCalendar { TimersApp.calManager.bubbleToEventify = bubble }
     }
     
-    func showMoreOptions(_ bubble:Bubble) {
-        moreOptionsData = (Int(bubble.rank), Int(bubble.startDelay))
+    func showMoreOptions(for bubble:Bubble) {
+        sdbDelay = bubble.sdb!.delay
+        sdb = bubble.sdb
     }
     
     //⚠️ super hard to get it right
@@ -368,67 +373,72 @@ class ViewModel: ObservableObject {
     }
     
     // MARK: - MoreOptionsView
-    @Published var moreOptionsData:(bubbleRank: Int, startDelay: Int)?
+    @Published var sdb:SDB?
     @Published var startDelayWasReset = false
     @Published var startDelayWasSet = false
+    var sdbDelay:Int64 = 0
     
     func changeColor(for bubble:Bubble, to newColor:String) {
-        guard let moreOptionsData = moreOptionsData else { fatalError() }
+        guard let dsb = sdb else { fatalError() }
         
         //change color and save CoreData
         if bubble.color == newColor { return }
         bubble.color = newColor
         
-        if moreOptionsData.startDelay != bubble.startDelay {//there is a delay set
-            UserFeedback.singleHaptic(.medium)
-            PersistenceController.shared.save()
-            startDelayWasSet = true
-            
-            let delay = (bubble.startDelay != 0) ? DispatchTime.now() + 1 : .now()
-            
-            delayExecution(delay) {
-                self.startDelayWasSet = false
-                self.moreOptionsData = nil //dismiss
-            }
-            
-        } else {//no delay set
-            UserFeedback.singleHaptic(.medium) //haptic feedback
-            self.moreOptionsData = nil //dismiss
-        }
+//        if moreOptionsData.startDelay != bubble.startDelay {//there is a delay set
+//            UserFeedback.singleHaptic(.medium)
+//            PersistenceController.shared.save()
+//            startDelayWasSet = true
+//
+//            let delay = (bubble.startDelay != 0) ? DispatchTime.now() + 1 : .now()
+//
+//            delayExecution(delay) {
+//                self.startDelayWasSet = false
+//                self.moreOptionsData = nil //dismiss
+//            }
+//
+//        } else {//no delay set
+//            UserFeedback.singleHaptic(.medium) //haptic feedback
+//            self.moreOptionsData = nil //dismiss
+//        }
         
         //save CoreData
         PersistenceController.shared.save()
     }
     
     func saveAndDismissMoreOptionsView(_ bubble:Bubble) {
-        guard let moreOptionsData = moreOptionsData else { fatalError() }
+        let userChangedStartDelay = sdbDelay != bubble.sdb!.delay
         
-        if moreOptionsData.startDelay != bubble.startDelay {
+        if userChangedStartDelay {
             UserFeedback.singleHaptic(.medium)
             PersistenceController.shared.save()
             startDelayWasSet = true
-            
-            let delay = (bubble.startDelay != 0) ? DispatchTime.now() + 1 : .now()
-            
+
+            let delay = (bubble.sdb!.delay != 0) ? DispatchTime.now() + 1 : .now()
+
             delayExecution(delay) {
-                self.moreOptionsData = nil
+                self.sdbDelay = 0
+                self.sdb = nil
                 self.startDelayWasSet = false
             }
-            
+
         } else {
             //dismiss MoreOptionsView
-            self.moreOptionsData = nil
+            self.sdb = nil
+            self.sdbDelay = 0
         }
     }
     
-    func computeStartDelay(_ bubble:Bubble, _ value: Int) {
+    func computeStartDelay(_ sdb:SDB, _ value: Int) {
         UserFeedback.singleHaptic(.medium)
-        bubble.startDelay += Int64(value)
+        sdb.delay += Int64(value)
     }
     
     func resetStartDelay(for bubble:Bubble) {
-        if bubble.startDelay != 0 {
-            bubble.startDelay = 0
+        guard let sdb = bubble.sdb else { fatalError() }
+        
+        if sdb.delay != 0 {
+            sdb.delay = 0
             PersistenceController.shared.save()
         }
         

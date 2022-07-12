@@ -13,7 +13,7 @@ struct MoreOptionsView: View {
         
     // MARK: -
     static let insets = EdgeInsets(top: 4, leading: 10, bottom: 4, trailing: 10)
-    let itemSpacing = CGFloat(4)
+    static let itemSpacing = CGFloat(4)
     
     // MARK: - Gestures
     var dragGesture:some Gesture {
@@ -27,7 +27,9 @@ struct MoreOptionsView: View {
             Color("notesListScreenBackground").opacity(0.9)
                 .ignoresSafeArea()
                 .onTapGesture {
-                    if vm.moreOptionsData!.startDelay != bubble.startDelay {
+                    let userChangedStartDelay = vm.sdbDelay != bubble.sdb!.delay
+                    
+                    if userChangedStartDelay {
                         vm.startDelayWasSet = true
                         delayExecution(.now() + 1) { vm.startDelayWasSet = false }
                     }
@@ -35,7 +37,7 @@ struct MoreOptionsView: View {
                 }
             VStack {
                 if bubble.state == .brandNew {
-                    startDelayOption
+                    SDBView(sdb: bubble.sdb!)
                     Divider()
                 }
                 colorOption
@@ -45,7 +47,10 @@ struct MoreOptionsView: View {
                 RoundedRectangle(cornerRadius: 10)
                     .fill(Color.white)
                     .standardShadow()
-                    .onTapGesture { vm.moreOptionsData = nil  /* dismiss */ }
+                    .onTapGesture {
+//                        vm.moreOptionsData = nil  /* dismiss */
+                        
+                    }
             }
             .padding()
             .padding()
@@ -56,7 +61,7 @@ struct MoreOptionsView: View {
                 { zeroStartDelayText } action: { vm.startDelayWasReset = false }
             }
             
-            if vm.startDelayWasSet && bubble.startDelay != 0 {
+            if vm.startDelayWasSet && bubble.sdb!.delay != 0 {
                 ConfirmationLabel()
                 { startDelayText } action: { vm.startDelayWasSet = false }
             }
@@ -68,7 +73,7 @@ struct MoreOptionsView: View {
     private var startDelayText: some View {
         VStack {
             Text("Start Delay").font(.system(size: 24))
-            Text("\(Image(systemName: "clock.arrow.circlepath")) \(bubble.startDelay)s")
+            Text("\(Image(systemName: "clock.arrow.circlepath")) \(bubble.sdb!.delay)s")
                 .font(.system(size: 40).weight(.medium))
         }
     }
@@ -91,9 +96,9 @@ struct MoreOptionsView: View {
                     .font(.system(size: 22).weight(.medium))
                     .foregroundColor(.gray)
             }
-            .allowsHitTesting(false) //ignore touches
+            .allowsHitTesting(false) //ignore touches [which are delivered to superview]
            
-            LazyVGrid(columns: [GridItem(spacing: itemSpacing), GridItem(spacing: itemSpacing), GridItem(spacing: itemSpacing), GridItem()], spacing: itemSpacing) {
+            LazyVGrid(columns: [GridItem(spacing: MoreOptionsView.itemSpacing), GridItem(spacing: MoreOptionsView.itemSpacing), GridItem(spacing: MoreOptionsView.itemSpacing), GridItem()], spacing: MoreOptionsView.itemSpacing) {
                 ForEach(Color.bubbleThrees.map{$0.description},id:\.self) { colorName in
                     
                     let color = Color.bubbleColor(forName: colorName)
@@ -110,34 +115,6 @@ struct MoreOptionsView: View {
                     .onTapGesture { vm.changeColor(for: bubble, to: colorName) }
                 }
             }
-        }
-    }
-    
-    private var startDelayOption: some View {
-        VStack (alignment: .leading) {
-            HStack (alignment: .bottom) {
-                Text("\(Int(bubble.startDelay))s")
-                    .textModifier(Color.bubbleColor(forName: bubble.color!))
-                Text("\(Image(systemName: "clock.arrow.circlepath")) Start Delay")
-                    .font(.system(size: 22).weight(.medium))
-                    .foregroundColor(.gray)
-            }
-            
-            //buttons row 3
-            HStack (spacing: itemSpacing) {
-                ForEach(Bubble.startDelayValues, id: \.self) { delay in
-                    Rectangle()
-                        .fill(Color.bubbleColor(forName: bubble.color!))
-                        .aspectRatio(contentMode: .fit)
-                        .overlay {
-                            Button("\(delay)") { vm.computeStartDelay(bubble, delay) }
-                                .font(.system(size: 30).weight(.medium))
-                        }
-                }
-            }
-            .background(Color.white.opacity(0.001)) //prevent gestures from underlying view
-            .font(.system(size: 26))
-            .foregroundColor(.white)
         }
     }
     

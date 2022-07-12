@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct StartDelayView: View {
-    @StateObject var bubble:Bubble
+    @StateObject var sdb:SDB
     
     @State var offset:CGSize = .zero
     @EnvironmentObject var vm:ViewModel
@@ -20,7 +20,7 @@ struct StartDelayView: View {
                 HStack(spacing: 2) {
                     Image(systemName: "arrow.counterclockwise")
                         .font(.system(size: 20).weight(.bold))
-                    Text("\(bubble.startDelay)")
+                    Text("\(sdb.delay)")
                         .font(.system(size: 60))
                 }.foregroundColor(.black)
             )
@@ -28,7 +28,10 @@ struct StartDelayView: View {
         //gestures
             .gesture(dragGesture)
             .highPriorityGesture(longPressGesture)
-            .onTapGesture { vm.toggleStartDelay(bubble) }
+            .onTapGesture {
+//                vm.toggleStartDelay(bubble)
+                
+            }
     }
     
     private var longPressGesture:some Gesture {

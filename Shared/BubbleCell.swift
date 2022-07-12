@@ -101,9 +101,8 @@ extension BubbleCell {
                 }
             }
             .overlay {
-                if bubble.startDelay > 0 {
-                    StartDelayView(bubble: bubble)
-                        .padding(10)
+                if let sdb = bubble.sdb, sdb.delay > 0 {
+                    StartDelayView(sdb: sdb).padding(10)
                 }
             }
         }
@@ -238,7 +237,7 @@ struct BubbleCell: View {
             icon: { Image.trash } }.tint(.red)
             
             //more options
-            Button { vm.showMoreOptions(bubble) }
+            Button { vm.showMoreOptions(for: bubble) }
         label: { Label { Text("More") }
             icon: { Image(systemName: "ellipsis.circle.fill") } }.tint(.lightGray)
         }

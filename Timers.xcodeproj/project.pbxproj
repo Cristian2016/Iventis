@@ -38,6 +38,8 @@
 		1F641FFE281FF70100413E31 /* BottomDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F641FFD281FF70100413E31 /* BottomDetailView.swift */; };
 		1F6420062820186D00413E31 /* PairCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F6420052820186D00413E31 /* PairCell.swift */; };
 		1F64200A2820204400413E31 /* BottomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F6420092820204400413E31 /* BottomCell.swift */; };
+		1F684821287DB6BA00D8BF81 /* SDBTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F684820287DB6BA00D8BF81 /* SDBTimer.swift */; };
+		1F684823287DBEBB00D8BF81 /* SDBView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F684822287DBEBB00D8BF81 /* SDBView.swift */; };
 		1F695085287D4DF600CC9FF4 /* ConfirmationLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F695084287D4DF600CC9FF4 /* ConfirmationLabel.swift */; };
 		1F695087287D737600CC9FF4 /* StartDelayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F695086287D737600CC9FF4 /* StartDelayView.swift */; };
 		1F74878B286EB64E0092674F /* BubbleCell_Info.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F74878A286EB64E0092674F /* BubbleCell_Info.swift */; };
@@ -66,10 +68,10 @@
 		1FCF0C662816F3F600AA1FAA /* EmptyListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FCF0C652816F3F600AA1FAA /* EmptyListView.swift */; };
 		1FD21865281D9AB700B43403 /* ExitFocusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD21864281D9AB700B43403 /* ExitFocusView.swift */; };
 		1FD2DD972869AB4900831978 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1F5F4A4D28093FAF00AF3442 /* Assets.xcassets */; };
-		1FDB9F12287DA5040028E121 /* DSB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FDB9F0C287DA5040028E121 /* DSB.swift */; };
-		1FDB9F13287DA5040028E121 /* DSB Properties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FDB9F0D287DA5040028E121 /* DSB Properties.swift */; };
-		1FDB9F14287DA5040028E121 /* DSBPair.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FDB9F0E287DA5040028E121 /* DSBPair.swift */; };
-		1FDB9F15287DA5040028E121 /* DSBPair Properties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FDB9F0F287DA5040028E121 /* DSBPair Properties.swift */; };
+		1FDB9F12287DA5040028E121 /* SDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FDB9F0C287DA5040028E121 /* SDB.swift */; };
+		1FDB9F13287DA5040028E121 /* SDB Properties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FDB9F0D287DA5040028E121 /* SDB Properties.swift */; };
+		1FDB9F14287DA5040028E121 /* SDBPair.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FDB9F0E287DA5040028E121 /* SDBPair.swift */; };
+		1FDB9F15287DA5040028E121 /* SDBPair Properties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FDB9F0F287DA5040028E121 /* SDBPair Properties.swift */; };
 		1FDC1219286772E8004B9A1E /* PushView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F18B456281FA6130080ADA6 /* PushView.swift */; };
 		1FE163AE280EE6F40050C6F5 /* LeftStrip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FE163AD280EE6F40050C6F5 /* LeftStrip.swift */; };
 		1FF0A2FD2810448100B1DB77 /* TopDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF0A2FC2810448100B1DB77 /* TopDetailView.swift */; };
@@ -139,6 +141,8 @@
 		1F641FFD281FF70100413E31 /* BottomDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomDetailView.swift; sourceTree = "<group>"; };
 		1F6420052820186D00413E31 /* PairCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PairCell.swift; sourceTree = "<group>"; };
 		1F6420092820204400413E31 /* BottomCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomCell.swift; sourceTree = "<group>"; };
+		1F684820287DB6BA00D8BF81 /* SDBTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SDBTimer.swift; sourceTree = "<group>"; };
+		1F684822287DBEBB00D8BF81 /* SDBView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SDBView.swift; sourceTree = "<group>"; };
 		1F695084287D4DF600CC9FF4 /* ConfirmationLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmationLabel.swift; sourceTree = "<group>"; };
 		1F695086287D737600CC9FF4 /* StartDelayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartDelayView.swift; sourceTree = "<group>"; };
 		1F74878A286EB64E0092674F /* BubbleCell_Info.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BubbleCell_Info.swift; sourceTree = "<group>"; };
@@ -166,10 +170,10 @@
 		1FCF01B2287CBA74009DC95C /* DelayStartSymbol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DelayStartSymbol.swift; sourceTree = "<group>"; };
 		1FCF0C652816F3F600AA1FAA /* EmptyListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyListView.swift; sourceTree = "<group>"; };
 		1FD21864281D9AB700B43403 /* ExitFocusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExitFocusView.swift; sourceTree = "<group>"; };
-		1FDB9F0C287DA5040028E121 /* DSB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DSB.swift; sourceTree = SOURCE_ROOT; };
-		1FDB9F0D287DA5040028E121 /* DSB Properties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DSB Properties.swift"; sourceTree = SOURCE_ROOT; };
-		1FDB9F0E287DA5040028E121 /* DSBPair.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DSBPair.swift; sourceTree = SOURCE_ROOT; };
-		1FDB9F0F287DA5040028E121 /* DSBPair Properties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DSBPair Properties.swift"; sourceTree = SOURCE_ROOT; };
+		1FDB9F0C287DA5040028E121 /* SDB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SDB.swift; sourceTree = SOURCE_ROOT; };
+		1FDB9F0D287DA5040028E121 /* SDB Properties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SDB Properties.swift"; sourceTree = SOURCE_ROOT; };
+		1FDB9F0E287DA5040028E121 /* SDBPair.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SDBPair.swift; sourceTree = SOURCE_ROOT; };
+		1FDB9F0F287DA5040028E121 /* SDBPair Properties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SDBPair Properties.swift"; sourceTree = SOURCE_ROOT; };
 		1FE163AD280EE6F40050C6F5 /* LeftStrip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftStrip.swift; sourceTree = "<group>"; };
 		1FF0A2FC2810448100B1DB77 /* TopDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopDetailView.swift; sourceTree = "<group>"; };
 		1FFC8BA428142F040059EF2E /* Session.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
@@ -234,6 +238,7 @@
 		1F5F4A4228093FAC00AF3442 = {
 			isa = PBXGroup;
 			children = (
+				1F684822287DBEBB00D8BF81 /* SDBView.swift */,
 				1F845FAD286EF8730053EAE6 /* WidgetsExtension.entitlements */,
 				1FA355CE2832238E00F73111 /* Timers--iOS--Info.plist */,
 				1FA355CA2832186100F73111 /* CalendarManager.swift */,
@@ -271,6 +276,7 @@
 				1F74878C286ED1B10092674F /* StartInfoView.swift */,
 				1FB7D57B2862F0300085C2BE /* PlusButton.swift */,
 				1F100CA62809493400A3A3C2 /* BackgroundTimer.swift */,
+				1F684820287DB6BA00D8BF81 /* SDBTimer.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -314,10 +320,10 @@
 				1F5987A4286B5F8900CDB54C /* PairSavedNote Properties.swift */,
 				1F2080782836111600FD35D6 /* BubbleSavedNote.swift */,
 				1F2080792836111600FD35D6 /* BubbleSavedNote Properties.swift */,
-				1FDB9F0C287DA5040028E121 /* DSB.swift */,
-				1FDB9F0D287DA5040028E121 /* DSB Properties.swift */,
-				1FDB9F0E287DA5040028E121 /* DSBPair.swift */,
-				1FDB9F0F287DA5040028E121 /* DSBPair Properties.swift */,
+				1FDB9F0C287DA5040028E121 /* SDB.swift */,
+				1FDB9F0D287DA5040028E121 /* SDB Properties.swift */,
+				1FDB9F0E287DA5040028E121 /* SDBPair.swift */,
+				1FDB9F0F287DA5040028E121 /* SDBPair Properties.swift */,
 			);
 			path = "Core Data";
 			sourceTree = "<group>";
@@ -459,17 +465,19 @@
 			files = (
 				1F8B6965283790CF006540CB /* BubbleNotesList.swift in Sources */,
 				1F4DF99D282B82EF00D54BE8 /* CircleButton.swift in Sources */,
-				1FDB9F13287DA5040028E121 /* DSB Properties.swift in Sources */,
+				1FDB9F13287DA5040028E121 /* SDB Properties.swift in Sources */,
 				1F82FB982831435A00E7C5AA /* HelpActionButton.swift in Sources */,
 				1F695085287D4DF600CC9FF4 /* ConfirmationLabel.swift in Sources */,
 				1F18B457281FA6130080ADA6 /* PushView.swift in Sources */,
-				1FDB9F12287DA5040028E121 /* DSB.swift in Sources */,
+				1FDB9F12287DA5040028E121 /* SDB.swift in Sources */,
 				1FFC8BAD28142F040059EF2E /* Session Properties.swift in Sources */,
 				1F64200A2820204400413E31 /* BottomCell.swift in Sources */,
 				1FD21865281D9AB700B43403 /* ExitFocusView.swift in Sources */,
 				1F20807C2836111600FD35D6 /* BubbleSavedNote.swift in Sources */,
-				1FDB9F15287DA5040028E121 /* DSBPair Properties.swift in Sources */,
+				1FDB9F15287DA5040028E121 /* SDBPair Properties.swift in Sources */,
 				1F61BE052822BAAA00B773F9 /* DeleteView.swift in Sources */,
+				1F684823287DBEBB00D8BF81 /* SDBView.swift in Sources */,
+				1F684821287DB6BA00D8BF81 /* SDBTimer.swift in Sources */,
 				1F9BE0A9280BE14100F87EFA /* PaletteView.swift in Sources */,
 				1F5F4A732809409600AF3442 /* Bubble.swift in Sources */,
 				1F62194028293B5100C9B175 /* SmallBubbleView.swift in Sources */,
@@ -497,7 +505,7 @@
 				1F5F4A6F28093FF800AF3442 /* Model.xcdatamodeld in Sources */,
 				1F9BE0AD280C6AB000F87EFA /* TapHold.swift in Sources */,
 				1FA355CB2832186100F73111 /* CalendarManager.swift in Sources */,
-				1FDB9F14287DA5040028E121 /* DSBPair.swift in Sources */,
+				1FDB9F14287DA5040028E121 /* SDBPair.swift in Sources */,
 				1F5987A2286B5DFC00CDB54C /* PairSavedNote.swift in Sources */,
 				1F5F4A9D280945C700AF3442 /* BubbleCell.swift in Sources */,
 				1F864D90287C0356000219CE /* MoreOptionsView.swift in Sources */,

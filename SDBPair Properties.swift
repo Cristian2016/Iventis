@@ -10,18 +10,18 @@ import Foundation
 import CoreData
 
 
-extension DSBPair {
+extension SDBPair {
 
-    @nonobjc public class func fetchRequest() -> NSFetchRequest<DSBPair> {
-        return NSFetchRequest<DSBPair>(entityName: "DSBPair")
+    @nonobjc public class func fetchRequest() -> NSFetchRequest<SDBPair> {
+        return NSFetchRequest<SDBPair>(entityName: "DSBPair")
     }
 
     @NSManaged public var start: Date?
     @NSManaged public var pause: Date?
-    @NSManaged public var dsb: DSB?
+    @NSManaged public var dsb: SDB?
 
 }
 
-extension DSBPair : Identifiable {
+extension SDBPair : Identifiable {
 
 }

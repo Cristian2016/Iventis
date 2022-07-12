@@ -65,8 +65,9 @@ struct TimersApp: App {
                 if bubbleNotesShowing { BubbleNotesList($vm.notesList_bRank) }
                 if let pair = vm.pairOfNotesList { PairNotesList(pair) }
                 
-                if vm.moreOptionsData != nil {
-                    MoreOptionsView(bubble: vm.bubble(for: vm.moreOptionsData?.bubbleRank)!)
+                if let sdb = vm.sdb, let bubble = sdb.bubble {
+//                    MoreOptionsView(bubble: vm.bubble(for: vm.moreOptionsData?.bubbleRank)!)
+                    MoreOptionsView(bubble: bubble)
                 }
             }
             .ignoresSafeArea()
