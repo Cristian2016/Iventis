@@ -449,8 +449,10 @@ class ViewModel: ObservableObject {
 // MARK: - Control StartDelayView and Model
 extension ViewModel {
     
-    func toggleStartDelay(_ bubble:Bubble) {
+    // MARK: - SDBCell User Intents
+    ///start/pause SDB.timer
+    func toggle(_ sdb:SDB) {
         UserFeedback.singleHaptic(.heavy)
-        print(#function)
+        sdb.toggleStart()
     }
 }

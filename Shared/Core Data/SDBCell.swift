@@ -29,11 +29,7 @@ struct SDBCell: View {
         //gestures
             .gesture(dragGesture)
             .highPriorityGesture(longPressGesture)
-            .onTapGesture {
-                print("tap to start/pause")
-//                vm.toggleStartDelay(bubble)
-                
-            }
+            .onTapGesture { vm.toggle(sdb) }
     }
     
     private var longPressGesture:some Gesture {
