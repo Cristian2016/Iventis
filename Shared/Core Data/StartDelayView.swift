@@ -9,6 +9,7 @@ import SwiftUI
 
 struct StartDelayView: View {
     @Binding var startDelay:Int64
+    @State var offset:CGSize = .zero
     
     var body: some View {
         Circle()
@@ -21,6 +22,7 @@ struct StartDelayView: View {
                         .font(.system(size: 60))
                 }.foregroundColor(.black)
             )
+            .offset(offset)
         //gestures
             .gesture(dragGesture)
             .highPriorityGesture(longPressGesture)
@@ -39,10 +41,12 @@ struct StartDelayView: View {
     private var dragGesture:some Gesture {
         DragGesture()
             .onChanged { value in
-                
+               offset = value.translation
             }
             .onEnded { value in
-                print("drag ended")
+                withAnimation {
+                    offset = .zero
+                }
             }
     }
 }
