@@ -39,7 +39,6 @@ struct SDBCell: View {
                         vm.sdb = nil
                         vm.sdbDelay = 0
                         vm.toggleStart(sdb.bubble!)
-                        
                     }
                 }
             }

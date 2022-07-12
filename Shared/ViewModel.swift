@@ -378,28 +378,30 @@ class ViewModel: ObservableObject {
     var sdbDelay:Int64 = 0
     
     func changeColor(for bubble:Bubble, to newColor:String) {
-        guard let dsb = sdb else { fatalError() }
+        guard let sdb = sdb else { fatalError() }
         
         //change color and save CoreData
         if bubble.color == newColor { return }
         bubble.color = newColor
         
-//        if moreOptionsData.startDelay != bubble.startDelay {//there is a delay set
-//            UserFeedback.singleHaptic(.medium)
-//            PersistenceController.shared.save()
-//            startDelayWasSet = true
-//
-//            let delay = (bubble.startDelay != 0) ? DispatchTime.now() + 1 : .now()
-//
-//            delayExecution(delay) {
-//                self.startDelayWasSet = false
-//                self.moreOptionsData = nil //dismiss
-//            }
-//
-//        } else {//no delay set
-//            UserFeedback.singleHaptic(.medium) //haptic feedback
-//            self.moreOptionsData = nil //dismiss
-//        }
+        if sdbDelay != sdb.delay {//there is a delay set
+            UserFeedback.singleHaptic(.medium)
+            PersistenceController.shared.save()
+            startDelayWasSet = true
+
+            let delay = (sdb.delay != 0) ? DispatchTime.now() + 0.6 : .now()
+
+            delayExecution(delay) {
+                self.startDelayWasSet = false
+                self.sdb = nil
+                self.sdbDelay = 0
+            }
+
+        } else {//no delay set
+            UserFeedback.singleHaptic(.medium) //haptic feedback
+            self.sdb = nil
+            self.sdbDelay = 0 //dismiss
+        }
         
         //save CoreData
         PersistenceController.shared.save()
