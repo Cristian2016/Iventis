@@ -25,7 +25,7 @@ struct MoreOptionsView: View {
         ZStack {
             Color("notesListScreenBackground").opacity(0.9)
                 .ignoresSafeArea()
-                .onTapGesture { vm.saveAndDismissMoreOptionsView() }
+                .onTapGesture { vm.saveAndDismissMoreOptionsView(bubble) }
             VStack {
                 startDelayOption
                 Divider()
