@@ -384,8 +384,8 @@ class ViewModel: ObservableObject {
             let delay = (bubble.startDelay != 0) ? DispatchTime.now() + 1 : .now()
             
             delayExecution(delay) {
-                self.moreOptionsData = nil
                 self.startDelayWasSet = false
+                self.moreOptionsData = nil //dismiss
             }
             
         } else {//no delay set
