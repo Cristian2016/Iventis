@@ -23,7 +23,8 @@ struct ConfirmationLabel<Content:View>: View {
     
     var body: some View {
         ZStack {
-            Color.background.opacity(0.7)
+            Color.background.opacity(0.8)
+            
             content
                 .foregroundColor(.white)
                 .font(.system(size: 30))
