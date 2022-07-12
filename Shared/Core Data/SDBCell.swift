@@ -36,8 +36,9 @@ struct SDBCell: View {
                 guard receivedRank! == sdb.bubble!.rank else { return }
                 
                 if sdb.delay > 0 {
-                    sdb.delay -= 1
+                    sdb.delay -= 1 //decrease by one
                     
+                    //check to see if it reached zero
                     if sdb.delay == 0 {
                         sdb.backgroundTimer?.perform(.pause)
                         vm.sdb = nil
