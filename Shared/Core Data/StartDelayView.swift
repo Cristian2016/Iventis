@@ -40,14 +40,8 @@ struct StartDelayView: View {
     
     private var dragGesture:some Gesture {
         DragGesture()
-            .onChanged { value in
-               offset = value.translation
-            }
-            .onEnded { value in
-                withAnimation {
-                    offset = .zero
-                }
-            }
+            .onChanged { value in offset = value.translation }
+            .onEnded { _ in withAnimation { offset = .zero } }
     }
 }
 
