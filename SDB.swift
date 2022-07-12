@@ -47,8 +47,8 @@ public class SDB: NSManagedObject {
     func observeSDBTimer() {
         NotificationCenter.default.addObserver(forName: .sdbTimerSignal, object: nil, queue: nil) { [weak self] notification in
             
-            print("notification received")
             guard let self = self else { return }
+            print("notification received for \(self.bubble!.color!)")
             
             if self.delay > 0 {
                 self.delay -= 1
