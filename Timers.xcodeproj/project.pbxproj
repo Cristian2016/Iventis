@@ -38,6 +38,7 @@
 		1F641FFE281FF70100413E31 /* BottomDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F641FFD281FF70100413E31 /* BottomDetailView.swift */; };
 		1F6420062820186D00413E31 /* PairCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F6420052820186D00413E31 /* PairCell.swift */; };
 		1F64200A2820204400413E31 /* BottomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F6420092820204400413E31 /* BottomCell.swift */; };
+		1F695085287D4DF600CC9FF4 /* ConfirmationLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F695084287D4DF600CC9FF4 /* ConfirmationLabel.swift */; };
 		1F74878B286EB64E0092674F /* BubbleCell_Info.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F74878A286EB64E0092674F /* BubbleCell_Info.swift */; };
 		1F74878D286ED1B10092674F /* StartInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F74878C286ED1B10092674F /* StartInfoView.swift */; };
 		1F82FB982831435A00E7C5AA /* HelpActionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F82FB972831435A00E7C5AA /* HelpActionButton.swift */; };
@@ -133,6 +134,7 @@
 		1F641FFD281FF70100413E31 /* BottomDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomDetailView.swift; sourceTree = "<group>"; };
 		1F6420052820186D00413E31 /* PairCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PairCell.swift; sourceTree = "<group>"; };
 		1F6420092820204400413E31 /* BottomCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomCell.swift; sourceTree = "<group>"; };
+		1F695084287D4DF600CC9FF4 /* ConfirmationLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmationLabel.swift; sourceTree = "<group>"; };
 		1F74878A286EB64E0092674F /* BubbleCell_Info.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BubbleCell_Info.swift; sourceTree = "<group>"; };
 		1F74878C286ED1B10092674F /* StartInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartInfoView.swift; sourceTree = "<group>"; };
 		1F82FB972831435A00E7C5AA /* HelpActionButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpActionButton.swift; sourceTree = "<group>"; };
@@ -290,6 +292,7 @@
 				1F9BE0AC280C6AB000F87EFA /* TapHold.swift */,
 				1F5F4A712809409600AF3442 /* Bubble.swift */,
 				1F864D8F287C0356000219CE /* MoreOptionsView.swift */,
+				1F695084287D4DF600CC9FF4 /* ConfirmationLabel.swift */,
 				1FCF01B2287CBA74009DC95C /* DelayStartSymbol.swift */,
 				1F5F4A722809409600AF3442 /* Bubble Properties.swift */,
 				1FFC8BA428142F040059EF2E /* Session.swift */,
@@ -442,6 +445,7 @@
 				1F8B6965283790CF006540CB /* BubbleNotesList.swift in Sources */,
 				1F4DF99D282B82EF00D54BE8 /* CircleButton.swift in Sources */,
 				1F82FB982831435A00E7C5AA /* HelpActionButton.swift in Sources */,
+				1F695085287D4DF600CC9FF4 /* ConfirmationLabel.swift in Sources */,
 				1F18B457281FA6130080ADA6 /* PushView.swift in Sources */,
 				1FFC8BAD28142F040059EF2E /* Session Properties.swift in Sources */,
 				1F64200A2820204400413E31 /* BottomCell.swift in Sources */,

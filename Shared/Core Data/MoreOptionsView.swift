@@ -10,6 +10,7 @@ import SwiftUI
 struct MoreOptionsView: View {
     @ObservedObject var bubble: Bubble
     @EnvironmentObject var vm:ViewModel
+    @State var startDelayWasReset = false
     
     // MARK: -
     static let insets = EdgeInsets(top: 4, leading: 10, bottom: 4, trailing: 10)
@@ -40,11 +41,24 @@ struct MoreOptionsView: View {
             }
             .padding()
             .padding()
+            
+            if startDelayWasReset {
+                //reset delay confirmation
+                ConfirmationLabel(isDestructive: true) { startDelayResetText }
+            }
         }
         .highPriorityGesture(dragGesture)
     }
     
     // MARK: - Lego
+    private var startDelayResetText: some View {
+        VStack {
+           Text("\(Image(systemName: "clock.arrow.circlepath")) Start Delay")
+            Text("0s")
+                .font(.system(size: 40).weight(.medium))
+        }
+    }
+    
     private var colorOption:some View {
         VStack (alignment: .leading) {
             HStack (alignment: .bottom) {
@@ -80,7 +94,7 @@ struct MoreOptionsView: View {
     private var startDelayOption: some View {
         VStack (alignment: .leading) {
             HStack (alignment: .bottom) {
-                Text("\(Int(bubble.startDelay)) s")
+                Text("\(Int(bubble.startDelay))s")
                     .textModifier(Color.bubbleColor(forName: bubble.color!))
                 Text("\(Image(systemName: "clock.arrow.circlepath")) Start Delay")
                     .font(.system(size: 22).weight(.medium))
@@ -109,6 +123,9 @@ struct MoreOptionsView: View {
     //long press outside table
     func resetStartDelay() {
         vm.resetStartDelay(for: bubble)
+        startDelayWasReset = true
+        
+        delayExecution(.now() + 1) { startDelayWasReset = false }
     }
 }
 
