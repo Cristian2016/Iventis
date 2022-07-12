@@ -389,10 +389,17 @@ class ViewModel: ObservableObject {
             UserFeedback.singleHaptic(.medium)
             PersistenceController.shared.save()
             startDelayWasSet = true
-            delayExecution(.now() + 1) {
+            
+            if bubble.startDelay != 0 {
+                delayExecution(.now() + 1) {
+                    self.moreOptionsData = nil
+                    self.startDelayWasSet = false
+                }
+            } else {
                 self.moreOptionsData = nil
                 self.startDelayWasSet = false
             }
+            
         } else {
             //dismiss MoreOptionsView
             self.moreOptionsData = nil
