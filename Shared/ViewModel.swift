@@ -373,9 +373,10 @@ class ViewModel: ObservableObject {
     
     // MARK: - MoreOptionsView
     @Published var sdb:SDB?
+    var sdbDelay:Int64 = 0
+    
     @Published var startDelayWasReset = false
     @Published var startDelayWasSet = false
-    var sdbDelay:Int64 = 0
     
     func changeColor(for bubble:Bubble, to newColor:String) {
         guard let sdb = sdb else { fatalError() }

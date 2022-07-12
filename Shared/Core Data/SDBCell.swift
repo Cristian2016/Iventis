@@ -31,6 +31,8 @@ struct SDBCell: View {
             .highPriorityGesture(longPressGesture)
             .onTapGesture { vm.toggle(sdb) }
             .onReceive(NotificationCenter.Publisher(center: .default, name: .sdbTimerSignal)) { _ in
+                print("vm.sdbDelay \(vm.sdbDelay)")
+                
                 if sdb.delay > 0 {
                     sdb.delay -= 1
                     
