@@ -36,7 +36,7 @@ struct MoreOptionsView: View {
                 RoundedRectangle(cornerRadius: 10)
                     .fill(Color.white)
                     .standardShadow()
-                    .onTapGesture { vm.rankOfMoreOptionsBubble = nil  /* dismiss */ }
+                    .onTapGesture { vm.moreOptionsData = nil  /* dismiss */ }
             }
             .padding()
             .padding()
@@ -110,7 +110,6 @@ struct MoreOptionsView: View {
     // MARK: - User Intents
     //long press outside table
     func resetStartDelay() {
-        UserFeedback.doubleHaptic(.medium)
         vm.resetStartDelay(for: bubble)
     }
 }
