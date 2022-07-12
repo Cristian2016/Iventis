@@ -48,8 +48,9 @@ struct MoreOptionsView: View {
                     .fill(Color.white)
                     .standardShadow()
                     .onTapGesture {
-//                        vm.moreOptionsData = nil  /* dismiss */
-                        
+                        //dismiss MoreOptionsView
+                        vm.sdb = nil
+                        vm.sdbDelay = 0
                     }
             }
             .padding()
