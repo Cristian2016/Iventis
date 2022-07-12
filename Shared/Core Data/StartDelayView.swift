@@ -8,8 +8,10 @@
 import SwiftUI
 
 struct StartDelayView: View {
-    @Binding var startDelay:Int64
+    @StateObject var bubble:Bubble
+    
     @State var offset:CGSize = .zero
+    @EnvironmentObject var vm:ViewModel
     
     var body: some View {
         Circle()
@@ -18,7 +20,7 @@ struct StartDelayView: View {
                 HStack(spacing: 2) {
                     Image(systemName: "arrow.counterclockwise")
                         .font(.system(size: 20).weight(.bold))
-                    Text("\(startDelay)")
+                    Text("\(bubble.startDelay)")
                         .font(.system(size: 60))
                 }.foregroundColor(.black)
             )
@@ -45,8 +47,8 @@ struct StartDelayView: View {
     }
 }
 
-struct StartDelayView_Previews: PreviewProvider {
-    static var previews: some View {
-        StartDelayView(startDelay: .constant(59))
-    }
-}
+//struct StartDelayView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        StartDelayView(startDelay: .constant(59))
+//    }
+//}

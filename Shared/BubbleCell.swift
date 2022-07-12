@@ -102,7 +102,7 @@ extension BubbleCell {
             }
             .overlay {
                 if bubble.startDelay > 0 {
-                    StartDelayView(startDelay: $bubble.startDelay)
+                    StartDelayView(bubble: bubble)
                         .padding(10)
                 }
             }
