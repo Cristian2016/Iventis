@@ -10,15 +10,21 @@ import SwiftUI
 struct ConfirmationLabel<Content:View>: View {
     let content:Content
     let isDestructive:Bool
+    let action:() -> ()
     
-    init(isDestructive: Bool = false, @ViewBuilder content: () -> Content) {
+    init(isDestructive: Bool = false,
+         @ViewBuilder content: () -> Content,
+        action: @escaping () -> ()) {
+        
         self.content = content()
         self.isDestructive = isDestructive
+        self.action = action
     }
     
     var body: some View {
         ZStack {
             Color.background.opacity(0.7)
+                .onTapGesture { action() }
             content
                 .foregroundColor(.white)
                 .font(.system(size: 30))
@@ -34,8 +40,6 @@ struct ConfirmationLabel<Content:View>: View {
 
 struct ConfirmationLabel_Previews: PreviewProvider {
     static var previews: some View {
-        ConfirmationLabel(isDestructive: true) {
-            Text("Ok")
-        }
+        ConfirmationLabel { Text("ok") } action: {  /* some code to run */ }
     }
 }

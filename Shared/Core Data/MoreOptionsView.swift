@@ -44,7 +44,8 @@ struct MoreOptionsView: View {
             
             if startDelayWasReset {
                 //reset delay confirmation
-                ConfirmationLabel(isDestructive: true) { startDelayResetText }
+                ConfirmationLabel(isDestructive: true)
+                { startDelayResetText } action: { startDelayWasReset = false }
             }
         }
         .highPriorityGesture(dragGesture)
@@ -54,8 +55,7 @@ struct MoreOptionsView: View {
     private var startDelayResetText: some View {
         VStack {
            Text("\(Image(systemName: "clock.arrow.circlepath")) Start Delay")
-            Text("0s")
-                .font(.system(size: 40).weight(.medium))
+            Text("0s").font(.system(size: 40).weight(.medium))
         }
     }
     

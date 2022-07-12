@@ -397,8 +397,10 @@ class ViewModel: ObservableObject {
     }
     
     func resetStartDelay(for bubble:Bubble) {
-        bubble.startDelay = 0
-        PersistenceController.shared.save()
+        if bubble.startDelay != 0 {
+            bubble.startDelay = 0
+            PersistenceController.shared.save()
+        }
         
         UserFeedback.doubleHaptic(.medium)
     }
