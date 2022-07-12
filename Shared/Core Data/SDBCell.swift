@@ -30,9 +30,9 @@ struct SDBCell: View {
             .gesture(dragGesture)
             .highPriorityGesture(longPressGesture)
             .onTapGesture { vm.toggle(sdb) }
-            .onReceive(NotificationCenter.Publisher(center: .default, name: .sdbTimerSignal)) { notification in
+            .onReceive(NotificationCenter.Publisher(center: .default, name: .sdbTimerSignal)) {
                 
-                let receivedRank = notification.userInfo?["rank"] as? Int64
+                let receivedRank = $0.userInfo?["rank"] as? Int64
                 guard receivedRank! == sdb.bubble!.rank else { return }
                 
                 if sdb.delay > 0 {
