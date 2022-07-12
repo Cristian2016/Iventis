@@ -22,11 +22,11 @@ struct StartDelayView: View {
                 }.foregroundColor(.black)
             )
         //gestures
+            .gesture(dragGesture)
             .highPriorityGesture(longPressGesture)
             .onTapGesture {
                 print("tapped")
             }
-            .gesture(dragGesture)
     }
     
     private var longPressGesture:some Gesture {
