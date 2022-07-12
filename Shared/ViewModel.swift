@@ -439,5 +439,8 @@ class ViewModel: ObservableObject {
 // MARK: - Control StartDelayView and Model
 extension ViewModel {
     
-    
+    func toggleStartDelay(_ bubble:Bubble) {
+        UserFeedback.singleHaptic(.heavy)
+        print(#function)
+    }
 }

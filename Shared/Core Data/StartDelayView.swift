@@ -28,9 +28,7 @@ struct StartDelayView: View {
         //gestures
             .gesture(dragGesture)
             .highPriorityGesture(longPressGesture)
-            .onTapGesture {
-                print("tapped")
-            }
+            .onTapGesture { vm.toggleStartDelay(bubble) }
     }
     
     private var longPressGesture:some Gesture {

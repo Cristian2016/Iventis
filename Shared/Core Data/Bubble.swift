@@ -10,7 +10,26 @@ import Foundation
 import CoreData
 import SwiftUI
 
+extension Bubble {
+    func toggleStartDelay() {
+        if startDelayBTimer == nil {
+            let bTimer:BackgroundTimer = {
+                let timer = BackgroundTimer(dispatchQueue)
+                
+                return timer
+            }()
+            self.startDelayBTimer = bTimer
+        } else {
+            self.startDelayBTimer = nil
+        }
+    }
+}
+
 public class Bubble: NSManagedObject {
+    
+    lazy var dispatchQueue = DispatchQueue(label: "startDelayBTimerDQ")
+    var startDelayBTimer:BackgroundTimer?
+    
     static let startDelayValues = [5, 10, 15, 30]
     
     // MARK: - Testing Only
