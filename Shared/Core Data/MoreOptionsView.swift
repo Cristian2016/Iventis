@@ -27,7 +27,7 @@ struct MoreOptionsView: View {
             Color("notesListScreenBackground").opacity(0.9)
                 .ignoresSafeArea()
                 .onTapGesture {
-                    let userChangedStartDelay = vm.sdbDelay != bubble.sdb!.delay
+                    let userChangedStartDelay = bubble.sdb!.delay != 0
                     
                     if userChangedStartDelay {
                         vm.startDelayWasSet = true
@@ -50,7 +50,6 @@ struct MoreOptionsView: View {
                     .onTapGesture {
                         //dismiss MoreOptionsView
                         vm.sdb = nil
-                        vm.sdbDelay = 0
                     }
             }
             .padding()

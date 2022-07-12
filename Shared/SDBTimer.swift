@@ -8,18 +8,21 @@
 import Foundation
 
 class SDBTimer {
-    deinit {
-        print("SDBTimer deinit")
-        killTimer()
-    }
+    deinit { killTimer() }
     
     ///event handler called every second
     private let updateFrequency:Double = 1.0 /* every second */
-        
+    
     let queue:DispatchQueue
-    init(_ queue:DispatchQueue) {
+    
+    init(_ queue:DispatchQueue, rank:Int64?) {
         print("SDBTimer init")
         self.queue = queue
+        self.eventHandler = {
+            DispatchQueue.main.async {
+                NotificationCenter.default.post(name: .sdbTimerSignal, object: nil, userInfo: ["rank" : rank!])
+            }
+        }
     }
     
     private lazy var timer: DispatchSourceTimer = {
@@ -29,11 +32,7 @@ class SDBTimer {
         return t
     }()
     
-    private var eventHandler: (() -> Void)? = {
-        DispatchQueue.main.async {
-            NotificationCenter.default.post(name: .sdbTimerSignal, object: nil)
-        }
-    }
+    private var eventHandler: (() -> Void)?
     
     enum State {
         case suspended

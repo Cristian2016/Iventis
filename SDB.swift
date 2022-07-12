@@ -29,7 +29,7 @@ public class SDB: NSManagedObject {
             case .brandNew, .paused:
                 state = .running
                 if backgroundTimer == nil {
-                    backgroundTimer = SDBTimer(dispatchQueue)
+                    backgroundTimer = SDBTimer(dispatchQueue, rank: bubble?.rank)
                 }
                 backgroundTimer?.perform(.start)
             case .running:

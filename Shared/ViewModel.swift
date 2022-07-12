@@ -157,7 +157,8 @@ class ViewModel: ObservableObject {
     }
     
     func showMoreOptions(for bubble:Bubble) {
-        sdbDelay = bubble.sdb!.delay
+        //setting the @Published property triggers UI update
+        //so MoreOptionsView will show
         sdb = bubble.sdb
     }
     
@@ -375,9 +376,6 @@ class ViewModel: ObservableObject {
     ///StartDelayBubble
     @Published var sdb:SDB?
     
-    ///StartDelayBubble.delay
-    var sdbDelay:Int64 = 0
-    
     @Published var startDelayWasReset = false
     @Published var startDelayWasSet = false
     
@@ -388,23 +386,19 @@ class ViewModel: ObservableObject {
         if bubble.color == newColor { return }
         bubble.color = newColor
         
-        if sdbDelay != sdb.delay {//there is a delay set
+        if sdb.delay != 0 {//there is a delay set
             UserFeedback.singleHaptic(.medium)
             PersistenceController.shared.save()
             startDelayWasSet = true
-
-            let delay = (sdb.delay != 0) ? DispatchTime.now() + 0.6 : .now()
-
-            delayExecution(delay) {
+            
+            delayExecution(.now() + 0.6) {
                 self.startDelayWasSet = false
                 self.sdb = nil
-                self.sdbDelay = 0
             }
-
+            
         } else {//no delay set
             UserFeedback.singleHaptic(.medium) //haptic feedback
             self.sdb = nil
-            self.sdbDelay = 0 //dismiss
         }
         
         //save CoreData
@@ -412,7 +406,7 @@ class ViewModel: ObservableObject {
     }
     
     func saveAndDismissMoreOptionsView(_ bubble:Bubble) {
-        let userChangedStartDelay = sdbDelay != bubble.sdb!.delay
+        let userChangedStartDelay = bubble.sdb!.delay != 0
         
         if userChangedStartDelay {
             UserFeedback.singleHaptic(.medium)
@@ -422,7 +416,6 @@ class ViewModel: ObservableObject {
             let delay = (bubble.sdb!.delay != 0) ? DispatchTime.now() + 1 : .now()
 
             delayExecution(delay) {
-                self.sdbDelay = 0
                 self.sdb = nil
                 self.startDelayWasSet = false
             }
@@ -430,7 +423,6 @@ class ViewModel: ObservableObject {
         } else {
             //dismiss MoreOptionsView
             self.sdb = nil
-            self.sdbDelay = 0
         }
     }
     

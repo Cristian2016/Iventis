@@ -66,7 +66,6 @@ struct TimersApp: App {
                 if let pair = vm.pairOfNotesList { PairNotesList(pair) }
                 
                 if let sdb = vm.sdb, let bubble = sdb.bubble {
-//                    MoreOptionsView(bubble: vm.bubble(for: vm.moreOptionsData?.bubbleRank)!)
                     MoreOptionsView(bubble: bubble)
                 }
             }
