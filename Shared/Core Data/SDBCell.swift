@@ -44,6 +44,11 @@ struct SDBCell: View {
             .onChanged { value in offset = value.translation }
             .onEnded { _ in withAnimation { offset = .zero } }
     }
+    
+    init(_ sdb:SDB) {
+       _sdb = StateObject(wrappedValue: sdb)
+        sdb.observeSDBTimer()
+    }
 }
 
 //struct StartDelayView_Previews: PreviewProvider {

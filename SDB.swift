@@ -48,15 +48,17 @@ public class SDB: NSManagedObject {
         NotificationCenter.default.addObserver(forName: .sdbTimerSignal, object: nil, queue: nil) { [weak self] notification in
             
             guard let self = self else { return }
-            print("notification received for \(self.bubble!.color!)")
             
-            if self.delay > 0 {
-                self.delay -= 1
-                print(self.delay)
-            }
-            else {
-                self.backgroundTimer?.perform(.pause)
-                self.backgroundTimer = nil
+            if self.state == .running {
+                print("notification received for \(self.bubble!.color!)")
+                if self.delay > 0 {
+                    self.delay -= 1
+                    print(self.delay)
+                }
+                else {
+                    self.backgroundTimer?.perform(.pause)
+                    self.backgroundTimer = nil
+                }
             }
         }
     }
