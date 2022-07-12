@@ -25,17 +25,16 @@ class ViewModel: ObservableObject {
     @Published var rankOfSelectedBubble:Int?
     @Published var idOfSelectedBubble:Bubble.ID?
     
-    //MoreOptionsView
-    @Published var moreOptionsData:(bubbleRank: Int, startDelay: Int)?
-    @Published var startDelayWasReset = false
-    @Published var startDelayWasSet = false
-        
+    //MoreOptionsView 3 @Published
+    
+    // MARK: -
     init() {
         let request = Bubble.fetchRequest()
         let bubbles = try? PersistenceController.shared.viewContext.fetch(request)
         updateCurrentClock(of: bubbles)
     }
     
+    // MARK: -
     private func updateCurrentClock(of bubbles:[Bubble]?) {
         delayExecution(.now() + 0.0001) {
             bubbles?.forEach {
@@ -369,6 +368,10 @@ class ViewModel: ObservableObject {
     }
     
     // MARK: - MoreOptionsView
+    @Published var moreOptionsData:(bubbleRank: Int, startDelay: Int)?
+    @Published var startDelayWasReset = false
+    @Published var startDelayWasSet = false
+    
     func changeColor(for bubble:Bubble, to newColor:String) {
         guard let moreOptionsData = moreOptionsData else { fatalError() }
         
