@@ -25,7 +25,10 @@ class ViewModel: ObservableObject {
     @Published var rankOfSelectedBubble:Int?
     @Published var idOfSelectedBubble:Bubble.ID?
     
+    //MoreOptionsView
     @Published var moreOptionsData:(bubbleRank: Int, startDelay: Int)?
+    @Published var startDelayWasReset = false
+    @Published var startDelayWasSet = false
         
     init() {
         let request = Bubble.fetchRequest()
@@ -385,10 +388,15 @@ class ViewModel: ObservableObject {
         if rankOfMoreOptionsBubble.startDelay != bubble.startDelay {
             UserFeedback.singleHaptic(.medium)
             PersistenceController.shared.save()
+            startDelayWasSet = true
+            delayExecution(.now() + 1) {
+                self.moreOptionsData = nil
+                self.startDelayWasSet = false
+            }
+        } else {
+            //dismiss MoreOptionsView
+            self.moreOptionsData = nil
         }
-        
-        //dismiss MoreOptionsView
-        self.moreOptionsData = nil
     }
     
     func computeStartDelay(_ bubble:Bubble, _ value: Int) {

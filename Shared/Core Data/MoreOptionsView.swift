@@ -10,7 +10,6 @@ import SwiftUI
 struct MoreOptionsView: View {
     @ObservedObject var bubble: Bubble
     @EnvironmentObject var vm:ViewModel
-    @State var startDelayWasReset = false
     
     // MARK: -
     static let insets = EdgeInsets(top: 4, leading: 10, bottom: 4, trailing: 10)
@@ -26,7 +25,13 @@ struct MoreOptionsView: View {
         ZStack {
             Color("notesListScreenBackground").opacity(0.9)
                 .ignoresSafeArea()
-                .onTapGesture { vm.saveAndDismissMoreOptionsView(bubble) }
+                .onTapGesture {
+                    if vm.moreOptionsData!.startDelay != bubble.startDelay {
+                        vm.startDelayWasSet = true
+                        delayExecution(.now() + 1) { vm.startDelayWasSet = false }
+                    }
+                    vm.saveAndDismissMoreOptionsView(bubble)
+                }
             VStack {
                 startDelayOption
                 Divider()
@@ -42,16 +47,28 @@ struct MoreOptionsView: View {
             .padding()
             .padding()
             
-            if startDelayWasReset {
+            if vm.startDelayWasReset {
                 //reset delay confirmation
                 ConfirmationLabel(isDestructive: true)
-                { startDelayResetText } action: { startDelayWasReset = false }
+                { startDelayResetText } action: { vm.startDelayWasReset = false }
+            }
+            
+            if vm.startDelayWasSet && bubble.startDelay != 0 {
+                ConfirmationLabel()
+                { startDelaySetText } action: { vm.startDelayWasSet = false }
             }
         }
         .highPriorityGesture(dragGesture)
     }
     
     // MARK: - Lego
+    private var startDelaySetText: some View {
+        VStack {
+           Text("\(Image(systemName: "clock.arrow.circlepath")) Start Delay")
+            Text("\(bubble.startDelay)s").font(.system(size: 40).weight(.medium))
+        }
+    }
+    
     private var startDelayResetText: some View {
         VStack {
            Text("\(Image(systemName: "clock.arrow.circlepath")) Start Delay")
@@ -123,9 +140,9 @@ struct MoreOptionsView: View {
     //long press outside table
     func resetStartDelay() {
         vm.resetStartDelay(for: bubble)
-        startDelayWasReset = true
+        vm.startDelayWasReset = true
         
-        delayExecution(.now() + 1) { startDelayWasReset = false }
+        delayExecution(.now() + 1) { vm.startDelayWasReset = false }
     }
 }
 
