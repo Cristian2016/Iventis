@@ -33,11 +33,14 @@ struct SDBCell: View {
             .onReceive(NotificationCenter.Publisher(center: .default, name: .sdbTimerSignal)) { _ in
                 if sdb.delay > 0 {
                     sdb.delay -= 1
-                } else {
-                    sdb.backgroundTimer?.perform(.pause)
-                    vm.sdb = nil
-                    vm.sdbDelay = 0
-                    vm.toggleStart(sdb.bubble!)
+                    
+                    if sdb.delay == 0 {
+                        sdb.backgroundTimer?.perform(.pause)
+                        vm.sdb = nil
+                        vm.sdbDelay = 0
+                        vm.toggleStart(sdb.bubble!)
+                        
+                    }
                 }
             }
     }
