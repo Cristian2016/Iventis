@@ -65,6 +65,7 @@ struct MoreOptionsView: View {
     // MARK: - Lego
     private var startDelayText: some View {
         VStack {
+            Text("Start Delay").font(.system(size: 24))
             Text("\(Image(systemName: "clock.arrow.circlepath")) \(bubble.startDelay)s")
                 .font(.system(size: 40).weight(.medium))
         }
@@ -72,8 +73,9 @@ struct MoreOptionsView: View {
     
     private var zeroStartDelayText: some View {
         VStack {
-           Text("\(Image(systemName: "clock.arrow.circlepath")) 0s")
-            .font(.system(size: 40).weight(.medium))
+            Text("No Start Delay").font(.system(size: 24))
+            Text("\(Image(systemName: "clock.arrow.circlepath")) 0s")
+                .font(.system(size: 40).weight(.medium))
         }
     }
     
