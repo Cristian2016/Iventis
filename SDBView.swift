@@ -9,11 +9,8 @@ struct SDBView:View {
     var body: some View {
         VStack (alignment: .leading) {
             HStack (alignment: .bottom) {
-                Text("\(Int(sdb.delay))s")
-                    .textModifier(Color.bubbleColor(forName: sdb.bubble!.color!))
-                Text("\(Image(systemName: "clock.arrow.circlepath")) Start Delay")
-                    .font(.system(size: 22).weight(.medium))
-                    .foregroundColor(.gray)
+                startDelayDisplay
+                startDelaylabel
             }
             
             //buttons row 3
@@ -32,5 +29,18 @@ struct SDBView:View {
             .font(.system(size: 26))
             .foregroundColor(.white)
         }
+    }
+    
+    // MARK: - LEGO
+    ///SDDisplay
+    private var startDelayDisplay:some View {
+        Text("\(Int(sdb.delay))s")
+            .textModifier(Color.bubbleColor(forName: sdb.bubble!.color!))
+    }
+    
+    private var startDelaylabel:some View {
+        Text("\(Image(systemName: "clock.arrow.circlepath")) Start Delay")
+            .font(.system(size: 22).weight(.medium))
+            .foregroundColor(.gray)
     }
 }
