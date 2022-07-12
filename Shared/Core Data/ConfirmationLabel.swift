@@ -24,7 +24,6 @@ struct ConfirmationLabel<Content:View>: View {
     var body: some View {
         ZStack {
             Color.background.opacity(0.7)
-                .onTapGesture { action() }
             content
                 .foregroundColor(.white)
                 .font(.system(size: 30))
@@ -35,6 +34,7 @@ struct ConfirmationLabel<Content:View>: View {
                 }
                 .padding()
         }
+        .onTapGesture { action() }
     }
 }
 
