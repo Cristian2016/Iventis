@@ -12,24 +12,16 @@ struct DelayStartSymbol: View {
     
     var body: some View {
         VStack {
-            ZStack {
-                Image(systemName: "clock.arrow.circlepath")
-                    .foregroundColor(.white)
-                    .font(.system(size: 40))
+            HStack (spacing: 2) {
+                Image(systemName: "arrow.counterclockwise")
+                    .font(.system(size: 12).weight(.bold))
                 Text("\(startValue)")
-                    .foregroundColor(.red)
-                    .font(.system(size: 16).weight(.medium))
-                    .padding(2)
-                    .background {
-                        Circle().fill(Color.white)
-                    }
+                    .font(.system(size: 18).weight(.medium))
             }
-            .background {
-                RoundedRectangle(cornerRadius: 50)
-                    .fill(Color.clear)
-            }
+            .foregroundColor(.white)
             Spacer()
         }
+        .offset(y:6)
     }
 }
 
