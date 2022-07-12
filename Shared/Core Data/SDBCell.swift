@@ -7,7 +7,8 @@
 
 import SwiftUI
 
-struct StartDelayView: View {
+///StartDelayBubbleCell
+struct SDBCell: View {
     @StateObject var sdb:SDB
     
     @State var offset:CGSize = .zero
@@ -29,6 +30,7 @@ struct StartDelayView: View {
             .gesture(dragGesture)
             .highPriorityGesture(longPressGesture)
             .onTapGesture {
+                print("tap to start/pause")
 //                vm.toggleStartDelay(bubble)
                 
             }
