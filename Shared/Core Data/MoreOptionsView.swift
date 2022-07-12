@@ -10,7 +10,7 @@ import SwiftUI
 struct MoreOptionsView: View {
     @ObservedObject var bubble: Bubble
     @EnvironmentObject var vm:ViewModel
-    
+        
     // MARK: -
     static let insets = EdgeInsets(top: 4, leading: 10, bottom: 4, trailing: 10)
     let itemSpacing = CGFloat(4)
