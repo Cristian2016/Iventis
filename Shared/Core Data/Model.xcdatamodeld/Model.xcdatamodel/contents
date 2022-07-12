@@ -12,6 +12,7 @@
         <attribute name="note" optional="YES" attributeType="String" defaultValueString=""/>
         <attribute name="rank" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="startDelay" optional="YES" attributeType="Integer 64" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <relationship name="dsb" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="DSB" inverseName="bubble" inverseEntity="DSB"/>
         <relationship name="history" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="BubbleSavedNote" inverseName="bubble" inverseEntity="BubbleSavedNote"/>
         <relationship name="sessions" optional="YES" toMany="YES" deletionRule="Cascade" ordered="YES" destinationEntity="Session" inverseName="bubble" inverseEntity="Session"/>
     </entity>
@@ -24,6 +25,16 @@
                 <constraint value="note"/>
             </uniquenessConstraint>
         </uniquenessConstraints>
+    </entity>
+    <entity name="DSB" representedClassName="DSB" syncable="YES">
+        <attribute name="delay" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="bubble" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Bubble" inverseName="dsb" inverseEntity="Bubble"/>
+        <relationship name="pairs" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="DSBPair" inverseName="dsb" inverseEntity="DSBPair"/>
+    </entity>
+    <entity name="DSBPair" representedClassName="DSBPair" syncable="YES">
+        <attribute name="pause" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="start" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <relationship name="dsb" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="DSB" inverseName="pairs" inverseEntity="DSB"/>
     </entity>
     <entity name="Pair" representedClassName=".Pair" syncable="YES">
         <attribute name="duration" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES"/>
