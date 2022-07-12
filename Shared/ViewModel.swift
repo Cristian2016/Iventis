@@ -370,22 +370,37 @@ class ViewModel: ObservableObject {
     
     // MARK: - MoreOptionsView
     func changeColor(for bubble:Bubble, to newColor:String) {
+        guard let moreOptionsData = moreOptionsData else { fatalError() }
+        
         //change color and save CoreData
         if bubble.color == newColor { return }
         bubble.color = newColor
+        
+        if moreOptionsData.startDelay != bubble.startDelay {//there is a delay set
+            UserFeedback.singleHaptic(.medium)
+            PersistenceController.shared.save()
+            startDelayWasSet = true
+            
+            let delay = (bubble.startDelay != 0) ? DispatchTime.now() + 1 : .now()
+            
+            delayExecution(delay) {
+                self.moreOptionsData = nil
+                self.startDelayWasSet = false
+            }
+            
+        } else {//no delay set
+            UserFeedback.singleHaptic(.medium) //haptic feedback
+            self.moreOptionsData = nil //dismiss
+        }
+        
+        //save CoreData
         PersistenceController.shared.save()
-        
-        //haptic feedback
-        UserFeedback.singleHaptic(.medium)
-        
-        //dismiss MoreOptionsView
-        moreOptionsData = nil
     }
     
     func saveAndDismissMoreOptionsView(_ bubble:Bubble) {
-        guard let rankOfMoreOptionsBubble = moreOptionsData else { fatalError() }
+        guard let moreOptionsData = moreOptionsData else { fatalError() }
         
-        if rankOfMoreOptionsBubble.startDelay != bubble.startDelay {
+        if moreOptionsData.startDelay != bubble.startDelay {
             UserFeedback.singleHaptic(.medium)
             PersistenceController.shared.save()
             startDelayWasSet = true
