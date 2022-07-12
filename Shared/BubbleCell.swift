@@ -102,7 +102,8 @@ extension BubbleCell {
             }
             .overlay {
                 if bubble.startDelay > 0 {
-                    DelayStartSymbol(startValue: $bubble.startDelay)
+                    StartDelayView(startDelay: $bubble.startDelay)
+                        .padding(10)
                 }
             }
         }
@@ -365,7 +366,6 @@ extension BubbleCell {
         lazy var fontSize = circleDiameter * fontRatio
         lazy var hundredthsFontSize = circleDiameter / 6
         
-//        lazy var hundredthsInsets = EdgeInsets(top: 0, leading: 0, bottom: 14, trailing: 10)
         lazy var hundredthsInsets = EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0)
     }
 }
