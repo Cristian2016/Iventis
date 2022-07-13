@@ -9,6 +9,7 @@ import SwiftUI
 
 struct DisplayAlwaysOnSymbol: View {
     @State private var isDisplayAlwaysON = false
+    @EnvironmentObject var vm:ViewModel
     let fontSize = CGFloat(30)
     
     func toggleDisplayIsAlwaysOn() {
@@ -18,7 +19,10 @@ struct DisplayAlwaysOnSymbol: View {
     
     var body: some View {
         HStack {
-            Button { toggleDisplayIsAlwaysOn() }
+            Button {
+                toggleDisplayIsAlwaysOn()
+                vm.showAlwaysOnDisplayAlert = true
+            }
         label: {
             Label {
                 Text("")
@@ -54,7 +58,7 @@ struct DisplayAlwaysOnSymbol: View {
     
     private var displayONSymbol:some View {
         Image(systemName: "sun.max.fill")
-            .foregroundColor(.black)
+            .foregroundColor(.label)
             .font(.system(size: fontSize))
     }
 }

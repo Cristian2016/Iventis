@@ -9,28 +9,31 @@ import SwiftUI
 
 ///it's the small bubble cell in the PairCell of BottomDetaiulView that only shows up when bubble is running and detailMode is active
 struct SmallBubbleView: View {
-    enum Skin {
-        case blackBackgroundBig //default look
-        case shadowBackgroundBig
-        case shadowBackgroundMedium
+    enum Appearance { //4 cases
+        case bigBlackBackground //default
+        case bigWhiteBackground
+        case medium
+        case small
     }
     
     ///user taps and cycles through various looks
-    var skin: Skin {
+    var appearance: Appearance {
         get {
             switch skinTapsCount%3 {
-                case 0: return .blackBackgroundBig
-                case 1: return .shadowBackgroundBig
-                case 2: return .shadowBackgroundMedium
-                default: return .blackBackgroundBig
+                case 0: return .bigBlackBackground
+                case 1: return .bigWhiteBackground
+                case 2: return .medium
+                case 3: return .small
+                default: return .small
             }
         }
         
         set {
             switch newValue {
-                case .blackBackgroundBig : skinTapsCount = 0
-                case .shadowBackgroundBig : skinTapsCount = 1
-                case .shadowBackgroundMedium : skinTapsCount = 2
+                case .bigBlackBackground : skinTapsCount = 0
+                case .bigWhiteBackground : skinTapsCount = 1
+                case .medium : skinTapsCount = 2
+                case .small : skinTapsCount = 3
             }
         }
     }
@@ -70,8 +73,8 @@ struct SmallBubbleView: View {
     var fillColor: Color {
         let isLight = colorScheme == .light
         
-        switch skin {
-            case .blackBackgroundBig:
+        switch appearance {
+            case .bigBlackBackground:
                 return isLight ? .black : .clear
             default:
                 return .clear

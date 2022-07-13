@@ -121,7 +121,7 @@ struct NotesList: View {
     }
     
     private var screenBackground: some View {
-        Color("notesListScreenBackground")
+        Color.alertScreenBackground
             .opacity(0.9)
             .ignoresSafeArea()
     }

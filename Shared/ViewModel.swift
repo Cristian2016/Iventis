@@ -12,6 +12,10 @@ import CoreData
 
 
 class ViewModel: ObservableObject {
+    // MARK: - Alerts
+    @Published var showAlwaysOnDisplayAlert = false
+    
+    // MARK: -
     @Published var showDeleteAction_bRank:Int? = nil
     @Published var deleteViewOffset:CGFloat? = nil
     

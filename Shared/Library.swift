@@ -83,6 +83,9 @@ extension Color {
     static let calendarOff = Color("calendarOff")
     static let background1 = Color("background1")
     
+    static let alertScreenBackground = Color("alertScreenBackground")
+    
+    
     static let colorNames = ["sourCherry":"Sour Cherry",
                              "mint" : "Mint",
                              "slateBlue" : "Slate Blue",

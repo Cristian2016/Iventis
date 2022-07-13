@@ -187,28 +187,34 @@ struct BubbleCell: View {
     
     // MARK: -
     var body: some View {
-        ZStack {
-            background
-            timeComponents
-            let putPositionEmitterView = showDeleteActionView || showDetailView
-            if putPositionEmitterView { cellLowEmitterView.background {
-                GeometryReader {
-                    let value = BubbleCellLow_Key.RankFrame(rank: Int(bubble.rank), frame: $0.frame(in: .global))
-                    Color.clear.preference(key: BubbleCellLow_Key.self, value: value)
-                }
-            } }
-        }
-        //subviews
-        .overlay { if bubble.hasCalendar && noNote { calendarSymbol } } //calSymbol
-        .overlay {
-            Push(.topLeft) {
-                NoteButton (alignment: .leading)
-                { noteButtonContent }
-            dragAction: { vm.deleteNote(for: bubble) }
-                tapAction : { handleNoteTap() }
+        VStack {
+            ZStack {
+                background
+                timeComponents
+                let putPositionEmitterView = showDeleteActionView || showDetailView
+                if putPositionEmitterView { cellLowEmitterView.background {
+                    GeometryReader {
+                        let value = BubbleCellLow_Key.RankFrame(rank: Int(bubble.rank), frame: $0.frame(in: .global))
+                        Color.clear.preference(key: BubbleCellLow_Key.self, value: value)
+                    }
+                } }
             }
-            .offset(y: -16)
-        } //stickyNote
+            //subviews
+            .overlay { if bubble.hasCalendar && noNote { calendarSymbol } } //calSymbol
+            .overlay {
+                Push(.topLeft) {
+                    NoteButton (alignment: .leading)
+                    { noteButtonContent }
+                dragAction: { vm.deleteNote(for: bubble) }
+                    tapAction : { handleNoteTap() }
+                }
+                .offset(y: -16)
+            } //stickyNote
+//            if !vm.isDetailViewShowing && bubble.state == .running {
+//                SmallBubbleView(bubble: bubble)
+//            }
+        }
+       
           //gestures
         .onDrag { NSItemProvider() }
         .swipeActions(edge: .leading, allowsFullSwipe: true) {
