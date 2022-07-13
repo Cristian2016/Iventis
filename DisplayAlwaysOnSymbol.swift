@@ -29,12 +29,6 @@ struct DisplayAlwaysOnSymbol: View {
         }
         .tint(.red)
         }
-        .highPriorityGesture(
-            LongPressGesture(minimumDuration: 0.3)
-                .onEnded { _ in
-                    print("long pressed")
-                }
-        )
     }
     
     // MARK: -
