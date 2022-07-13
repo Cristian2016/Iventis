@@ -24,14 +24,18 @@ public class SDB: NSManagedObject {
     
     // MARK: - User Intents
     func toggleStart() {
-        print(#function, state)
         switch state {
             case .brandNew, .paused:
                 state = .running
                 if backgroundTimer == nil {
                     backgroundTimer = SDBTimer(dispatchQueue, rank: bubble?.rank)
                 }
-                backgroundTimer?.perform(.start)
+                
+                
+                delayExecution(.now() + 1) {
+                    self.backgroundTimer?.perform(.start)
+                }
+                
             case .running:
                 state = .paused
                 backgroundTimer?.perform(.pause)
