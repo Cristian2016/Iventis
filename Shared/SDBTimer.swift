@@ -16,7 +16,6 @@ class SDBTimer {
     let queue:DispatchQueue
     
     init(_ queue:DispatchQueue, rank:Int64?) {
-        print("SDBTimer init")
         self.queue = queue
         self.eventHandler = {
             DispatchQueue.main.async {

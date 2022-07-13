@@ -18,13 +18,13 @@ public class SDB: NSManagedObject {
         case brandNew
         case running
         case paused
-        case finished
     }
     
     var state = State.brandNew
     
     // MARK: - User Intents
     func toggleStart() {
+        print(#function, state)
         switch state {
             case .brandNew, .paused:
                 state = .running
@@ -34,9 +34,6 @@ public class SDB: NSManagedObject {
                 backgroundTimer?.perform(.start)
             case .running:
                 state = .paused
-                backgroundTimer?.perform(.pause)
-                backgroundTimer = nil
-            case .finished:
                 backgroundTimer?.perform(.pause)
                 backgroundTimer = nil
         }
@@ -51,8 +48,10 @@ public class SDB: NSManagedObject {
             
             if self.delay > 0 { self.delay -= 1 }
             else {
+                print("set to brandnew again")
                 self.backgroundTimer?.perform(.pause)
                 self.backgroundTimer = nil
+                self.state = .brandNew
             }
         }
     }
