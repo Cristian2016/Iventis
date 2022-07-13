@@ -37,14 +37,14 @@ struct MoreOptionsView: View {
                 }
             
             VStack {
-                if bubble.state == .brandNew {
+                if bubble.state != .running {
                     StartDelaySubview(sdb: bubble.sdb!)
                     Divider()
                 }
                 
                 colorsViewTitle //--------
                 ScrollView { colorsView }
-                    .frame(height: bubble.state == .brandNew ? 420 : 520)
+                    .frame(height: bubble.state != .running ? 420 : 520)
                 .scrollIndicators(.hidden) //-------
             }
             .frame(width: 280)
