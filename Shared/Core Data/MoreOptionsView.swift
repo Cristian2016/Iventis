@@ -41,12 +41,11 @@ struct MoreOptionsView: View {
                     StartDelaySubview(sdb: bubble.sdb!)
                     Divider()
                 }
-                //2 Colors View Components -----
-                colorsViewTitle
+                
+                colorsViewTitle //--------
                 ScrollView { colorsView }
-                .frame(height: 420)
-                .scrollIndicators(.hidden)
-                //-------
+                    .frame(height: bubble.state == .brandNew ? 420 : 520)
+                .scrollIndicators(.hidden) //-------
             }
             .padding(8)
             .background {
@@ -82,6 +81,7 @@ struct MoreOptionsView: View {
             Text("Choose Color")
                 .font(.system(size: 22).weight(.medium))
                 .foregroundColor(.gray)
+            Spacer()
         }
         .allowsHitTesting(false) //ignore touches [which are delivered to superview]
     }
