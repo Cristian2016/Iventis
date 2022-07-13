@@ -9,6 +9,7 @@ import SwiftUI
 
 struct DisplayAlwaysOnSymbol: View {
     @State private var isDisplayAlwaysON = false
+    let fontSize = CGFloat(30)
     
     func toggleDisplayIsAlwaysOn() {
         isDisplayAlwaysON.toggle()
@@ -17,10 +18,7 @@ struct DisplayAlwaysOnSymbol: View {
     
     var body: some View {
         HStack {
-            Button {
-                toggleDisplayIsAlwaysOn()
-                
-            }
+            Button { toggleDisplayIsAlwaysOn() }
         label: {
             Label {
                 Text("")
@@ -28,24 +26,29 @@ struct DisplayAlwaysOnSymbol: View {
                 if isDisplayAlwaysON { turnOffDisplaySymbol }
                 else { displayONSymbol }
             }
-        }.tint(.red)
+        }
+        .tint(.red)
         }
     }
-        
+    
     // MARK: -
     private var turnOffDisplaySymbol:some View {
-        ZStack {
-            Image(systemName: "sun.max.fill")
-            Image(systemName: "line.diagonal")
-                .foregroundColor(.black)
+        HStack {
+            Text("Exit Always ON")
+            ZStack {
+                Image(systemName: "sun.max.fill")
+                Image(systemName: "line.diagonal")
+                    .foregroundColor(.black)
+            }
         }
-        .font(.system(size: 30))
+        
+        .font(.system(size: fontSize))
     }
     
     private var displayONSymbol:some View {
         Image(systemName: "sun.max.fill")
             .foregroundColor(.black)
-            .font(.system(size: 30))
+            .font(.system(size: fontSize))
     }
 }
 
