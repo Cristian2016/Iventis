@@ -7,16 +7,16 @@
 
 import SwiftUI
 
-struct AlwaysOnDisplayAlert<ImageContent:View, TextContent:View>: View {
+struct AlertView<ImageContent:View, TextContent:View>: View {
     @AppStorage("displayAlwaysOnAlert") var displayAlwaysOnAlert = true
     
-    init(@ViewBuilder _ image:() -> ImageContent,
-         @ViewBuilder _ text:() -> TextContent,
+    init(@ViewBuilder _ title:() -> ImageContent,
+         @ViewBuilder _ smallText:() -> TextContent,
          dismissAction: @escaping () -> ()) {
         
         self.dismissAction = dismissAction
-        self.image = image()
-        self.text = text()
+        self.image = title()
+        self.text = smallText()
     }
     
     let image:ImageContent
@@ -77,7 +77,7 @@ struct AlwaysOnDisplayAlert<ImageContent:View, TextContent:View>: View {
 
 struct AlwaysOnDisplayAlert_Previews: PreviewProvider {
     static var previews: some View {
-        AlwaysOnDisplayAlert {
+        AlertView {
             Label("Always-On Display", systemImage: "sun.max.fill")
                 .font(.system(size: 24).weight(.medium))
                 .foregroundColor(.black)

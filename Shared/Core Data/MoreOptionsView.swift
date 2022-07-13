@@ -24,7 +24,7 @@ struct MoreOptionsView: View {
     // MARK: -
     var body: some View {
         ZStack {
-            Color("notesListScreenBackground").opacity(0.9)
+            Color.alertScreenBackground.opacity(0.9)
                 .ignoresSafeArea()
                 .onTapGesture {
                     let userChangedStartDelay = bubble.sdb!.delay != 0

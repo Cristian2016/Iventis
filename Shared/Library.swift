@@ -293,6 +293,10 @@ extension UserDefaults {
         
         static let firstAppLaunchEver = "firstAppLaunchEver"
         static let displayIsAlwaysON = "displayIsAlwaysON"
+        
+        struct ShowAlert {
+            static let displayAlwaysOn = "displayAlwaysOn"
+        }
     }
     
     static func generateRank() -> Int {

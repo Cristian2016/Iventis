@@ -59,7 +59,7 @@ struct BubbleList: View {
             PaletteView($vm.isPaletteShowing)
             
             if vm.showAlwaysOnDisplayAlert {
-                AlwaysOnDisplayAlert {
+                AlertView {
                     Label("Always-On Display", systemImage: "sun.max.fill")
                         .font(.system(size: 24))
                         .foregroundColor(.black)

@@ -15,7 +15,7 @@
 		1F20807C2836111600FD35D6 /* BubbleSavedNote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F2080782836111600FD35D6 /* BubbleSavedNote.swift */; };
 		1F20807F2836111600FD35D6 /* BubbleSavedNote Properties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F2080792836111600FD35D6 /* BubbleSavedNote Properties.swift */; };
 		1F3436012834FC4800A018CC /* NoteSticker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F3436002834FC4800A018CC /* NoteSticker.swift */; };
-		1F37028E287EEA6800AE58C6 /* AlwaysOnDisplayAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F37028D287EEA6800AE58C6 /* AlwaysOnDisplayAlert.swift */; };
+		1F37028E287EEA6800AE58C6 /* AlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F37028D287EEA6800AE58C6 /* AlertView.swift */; };
 		1F377E1F287EB2F000E43598 /* DisplayAlwaysOnSymbol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F377E1E287EB2F000E43598 /* DisplayAlwaysOnSymbol.swift */; };
 		1F387CEB2830082000F6B81D /* UpDownArrowsButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F387CEA2830082000F6B81D /* UpDownArrowsButton.swift */; };
 		1F4326B1282AFB19002B6092 /* ScaleDownButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4326B0282AFB19002B6092 /* ScaleDownButton.swift */; };
@@ -116,7 +116,7 @@
 		1F2080782836111600FD35D6 /* BubbleSavedNote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BubbleSavedNote.swift; sourceTree = "<group>"; };
 		1F2080792836111600FD35D6 /* BubbleSavedNote Properties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BubbleSavedNote Properties.swift"; sourceTree = "<group>"; };
 		1F3436002834FC4800A018CC /* NoteSticker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteSticker.swift; sourceTree = "<group>"; };
-		1F37028D287EEA6800AE58C6 /* AlwaysOnDisplayAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlwaysOnDisplayAlert.swift; sourceTree = "<group>"; };
+		1F37028D287EEA6800AE58C6 /* AlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertView.swift; sourceTree = "<group>"; };
 		1F377E1E287EB2F000E43598 /* DisplayAlwaysOnSymbol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayAlwaysOnSymbol.swift; sourceTree = "<group>"; };
 		1F387CEA2830082000F6B81D /* UpDownArrowsButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpDownArrowsButton.swift; sourceTree = "<group>"; };
 		1F4326B0282AFB19002B6092 /* ScaleDownButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScaleDownButton.swift; sourceTree = "<group>"; };
@@ -233,7 +233,7 @@
 		1F37028F287EEA6D00AE58C6 /* Important Alerts */ = {
 			isa = PBXGroup;
 			children = (
-				1F37028D287EEA6800AE58C6 /* AlwaysOnDisplayAlert.swift */,
+				1F37028D287EEA6800AE58C6 /* AlertView.swift */,
 			);
 			path = "Important Alerts";
 			sourceTree = "<group>";
@@ -485,7 +485,7 @@
 				1F18B457281FA6130080ADA6 /* PushView.swift in Sources */,
 				1FDB9F12287DA5040028E121 /* SDB.swift in Sources */,
 				1FFC8BAD28142F040059EF2E /* Session Properties.swift in Sources */,
-				1F37028E287EEA6800AE58C6 /* AlwaysOnDisplayAlert.swift in Sources */,
+				1F37028E287EEA6800AE58C6 /* AlertView.swift in Sources */,
 				1F64200A2820204400413E31 /* BottomCell.swift in Sources */,
 				1FD21865281D9AB700B43403 /* ExitFocusView.swift in Sources */,
 				1F20807C2836111600FD35D6 /* BubbleSavedNote.swift in Sources */,
