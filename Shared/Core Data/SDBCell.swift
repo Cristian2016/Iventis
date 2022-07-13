@@ -34,20 +34,19 @@ struct SDBCell: View {
                 
                 let receivedRank = $0.userInfo?["rank"] as? Int64
                 guard receivedRank! == sdb.bubble!.rank else { return }
+                guard sdb.delay > 0 else { return }
                 
-                if sdb.delay > 0 {
-                    if sdb.delay == 1 {
-                        sdb.backgroundTimer?.perform(.pause)
-                        sdb.backgroundTimer = nil
-                        vm.sdb = nil
-                        sdb.state = .brandNew
-                        
-                        //start bubble automatically
-                        vm.toggleStart(sdb.bubble!)
-                    }
+                if sdb.delay == 1 {
+                    sdb.backgroundTimer?.perform(.pause)
+                    sdb.backgroundTimer = nil
+                    vm.sdb = nil
+                    sdb.state = .brandNew
                     
-                    sdb.delay -= 1 //decrease by one
+                    //start bubble automatically
+                    vm.toggleStart(sdb.bubble!)
                 }
+                
+                sdb.delay -= 1 //decrease by one
             }
     }
     
