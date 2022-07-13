@@ -57,19 +57,6 @@ struct BubbleList: View {
             if !notesShowing { LeftStrip($vm.isPaletteShowing, isListEmpty) }
             
             PaletteView($vm.isPaletteShowing)
-            
-            if vm.showAlwaysOnDisplayAlert {
-                AlertView {
-                    Label("Always-On Display", systemImage: "sun.max.fill")
-                        .font(.system(size: 24))
-                        .foregroundColor(.black)
-                } _: {
-                    Text("This option drains the battery faster. Use only if needed. Do not forget to turn it off again")
-                        .foregroundColor(.gray)
-                } dismissAction: {
-                    vm.showAlwaysOnDisplayAlert = false
-                }
-            }
         }
         .onPreferenceChange(BubbleCellLow_Key.self) { new in
             let frame = new.frame

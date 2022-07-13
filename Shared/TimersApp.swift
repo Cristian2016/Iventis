@@ -68,6 +68,19 @@ struct TimersApp: App {
                 if let sdb = vm.sdb, let bubble = sdb.bubble {
                     MoreOptionsView(bubble: bubble)
                 }
+                
+                if vm.showAlwaysOnDisplayAlert {
+                    AlertView {
+                        Label("Always-On Display", systemImage: "sun.max.fill")
+                            .font(.system(size: 24))
+                            .foregroundColor(.black)
+                    } _: {
+                        Text("This option drains the battery faster. Use only if needed. Do not forget to turn it off again")
+                            .foregroundColor(.gray)
+                    } dismissAction: {
+                        vm.showAlwaysOnDisplayAlert = false
+                    }
+                }
             }
             .ignoresSafeArea()
             .environment(\.managedObjectContext, viewContext)
