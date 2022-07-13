@@ -10,8 +10,7 @@ import SwiftUI
 ///StartDelayBubbleCell
 struct SDBCell: View {
     @StateObject var sdb:SDB
-    
-    @State var offset:CGSize = .zero
+    @State var offset:CGSize = .zero //drag view around
     @EnvironmentObject var vm:ViewModel
     
     var body: some View {
@@ -36,7 +35,7 @@ struct SDBCell: View {
                     let receivedRank = $0.userInfo!["rank"] as! Int64
                     guard receivedRank == sdb.bubble!.rank else { return }
                     guard sdb.delay > 0 else { return }
-                    
+                                        
                     if sdb.delay == 1 {
                         sdb.backgroundTimer?.perform(.pause)
                         sdb.backgroundTimer = nil
