@@ -33,7 +33,7 @@ struct DisplayAlwaysOnSymbol: View {
             }
         }
         .tint(.red)
-        .padding([.leading, .trailing], 8)
+        .padding([.leading, .trailing], 12)
         .background {
             if isDisplayAlwaysON {
                 RoundedRectangle(cornerRadius: 10)
@@ -50,7 +50,7 @@ struct DisplayAlwaysOnSymbol: View {
             ZStack {
                 Image(systemName: "sun.max")
                 Image(systemName: "line.diagonal")
-                    .foregroundColor(.black)
+                    .foregroundColor(.label)
             }
             .foregroundColor(.red)
         .padding([.top, .bottom], 3)
