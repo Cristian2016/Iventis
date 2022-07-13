@@ -16,7 +16,7 @@ struct MoreOptionsView: View {
     static let itemSpacing = CGFloat(4)
     
     // MARK: - Gestures
-    var dragGesture:some Gesture {
+    var longPress:some Gesture {
         LongPressGesture(minimumDuration: 0.3)
             .onEnded { _ in resetStartDelay() }
     }
@@ -47,10 +47,7 @@ struct MoreOptionsView: View {
                 RoundedRectangle(cornerRadius: 10)
                     .fill(Color.white)
                     .standardShadow()
-                    .onTapGesture {
-                        //dismiss MoreOptionsView
-                        vm.sdb = nil
-                    }
+                    .onTapGesture { dismiss() }
             }
             .padding()
             .padding()
@@ -66,13 +63,12 @@ struct MoreOptionsView: View {
                 { startDelayText } action: { vm.startDelayWasSet = false }
             }
         }
-        .highPriorityGesture(dragGesture)
+        .highPriorityGesture(longPress)
     }
     
     // MARK: - Lego
     private var startDelayText: some View {
         VStack {
-            Text("Start Delay").font(.system(size: 24))
             Text("\(Image(systemName: "clock.arrow.circlepath")) \(bubble.sdb!.delay)s")
                 .font(.system(size: 40).weight(.medium))
         }
@@ -80,7 +76,6 @@ struct MoreOptionsView: View {
     
     private var zeroStartDelayText: some View {
         VStack {
-            Text("No Start Delay").font(.system(size: 24))
             Text("\(Image(systemName: "clock.arrow.circlepath")) 0s")
                 .font(.system(size: 40).weight(.medium))
         }
@@ -123,9 +118,12 @@ struct MoreOptionsView: View {
     func resetStartDelay() {
         vm.resetStartDelay(for: bubble)
         vm.startDelayWasReset = true
+        bubble.sdb?.toggleStart()
         
         delayExecution(.now() + 1) { vm.startDelayWasReset = false }
     }
+    
+    func dismiss() { vm.sdb = nil }
 }
 
 struct TextModifier: ViewModifier {
