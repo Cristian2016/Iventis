@@ -37,27 +37,20 @@ struct DisplayAlwaysOnSymbol: View {
     
     // MARK: -
     private var turnOffDisplaySymbol:some View {
-        HStack {
-            Text("Exit ON")
-                .font(.system(size: 20).weight(.medium))
+        
             ZStack {
-                Image(systemName: "sun.max.fill")
+                Image(systemName: "sun.max")
                 Image(systemName: "line.diagonal")
-                    .foregroundColor(.black)
+                    .foregroundColor(.label)
             }
-        }
+            .foregroundColor(.red)
         .padding([.top, .bottom], 3)
         .padding([.leading, .trailing], 10)
-        .background {
-            RoundedRectangle(cornerRadius: 6)
-                .fill(Color.red.opacity(0.3))
-        }
-        
         .font(.system(size: fontSize))
     }
     
     private var displayONSymbol:some View {
-        Image(systemName: "sun.max.fill")
+        Image(systemName: "sun.max")
             .foregroundColor(.label)
             .font(.system(size: fontSize))
     }

@@ -47,6 +47,7 @@ struct MoreOptionsView: View {
                     .frame(height: bubble.state == .brandNew ? 420 : 520)
                 .scrollIndicators(.hidden) //-------
             }
+            .frame(width: 280)
             .padding(8)
             .background {
                 RoundedRectangle(cornerRadius: 10)
