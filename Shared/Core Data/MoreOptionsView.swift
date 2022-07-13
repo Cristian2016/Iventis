@@ -41,18 +41,12 @@ struct MoreOptionsView: View {
                     StartDelaySubview(sdb: bubble.sdb!)
                     Divider()
                 }
-                HStack (alignment: .bottom) {
-                    Text("\(Color.userFriendlyBubbleColorName(for: bubble.color))")
-                        .textModifier(Color.bubbleColor(forName: bubble.color!))
-                        .layoutPriority(1)
-                    Text("Choose Color")
-                        .font(.system(size: 22).weight(.medium))
-                        .foregroundColor(.gray)
-                }
-                .allowsHitTesting(false) //ignore touches [which are delivered to superview]
+                //2 Colors View Components -----
+                colorsViewTitle
                 ScrollView { colorsView }
                 .frame(height: 420)
                 .scrollIndicators(.hidden)
+                //-------
             }
             .padding(8)
             .background {
@@ -79,6 +73,19 @@ struct MoreOptionsView: View {
     }
     
     // MARK: - Lego
+    
+    private var colorsViewTitle:some View {
+        HStack (alignment: .bottom) {
+            Text("\(Color.userFriendlyBubbleColorName(for: bubble.color))")
+                .textModifier(Color.bubbleColor(forName: bubble.color!))
+                .layoutPriority(1)
+            Text("Choose Color")
+                .font(.system(size: 22).weight(.medium))
+                .foregroundColor(.gray)
+        }
+        .allowsHitTesting(false) //ignore touches [which are delivered to superview]
+    }
+    
     private var startDelayText: some View {
         VStack {
             Text("\(Image(systemName: "clock.arrow.circlepath")) \(bubble.sdb!.delay)s")
