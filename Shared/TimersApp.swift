@@ -15,9 +15,6 @@ struct TimersApp: App {
     @AppStorage(UserDefaults.Key.firstAppLaunchEver, store: UserDefaults.shared)
     var firstAppLaunchEver = true
     
-    @AppStorage(UserDefaults.Key.displayIsAlwaysON, store: UserDefaults.shared)
-    var displayIsAlwaysON = false
-    
     var deleteViewOffsetComputed:Bool { vm.deleteViewOffset != nil }
     fileprivate var deleteViewShowing:Bool { vm.showDeleteAction_bRank != nil }
     
@@ -89,8 +86,6 @@ struct TimersApp: App {
                 }
             }
             .onAppear {
-                UIApplication.shared.isIdleTimerDisabled = displayIsAlwaysON ? true : false
-                
                 //                delayExecution(.now() + 2) { firstAppLaunchEver = false }
                 //
                 //                firstAppLaunchEver = false

@@ -8,17 +8,24 @@
 import SwiftUI
 
 struct DisplayAlwaysOnSymbol: View {
-    @AppStorage(UserDefaults.Key.displayIsAlwaysON, store: UserDefaults.shared)
-    var displayIsAlwaysON = false
+    @State private var isDisplayAlwaysON = false
+    
+    func toggleDisplayIsAlwaysOn() {
+        isDisplayAlwaysON.toggle()
+        UIApplication.shared.isIdleTimerDisabled = isDisplayAlwaysON ? true : false
+    }
     
     var body: some View {
         HStack {
-            Button { displayIsAlwaysON.toggle() }
+            Button {
+                toggleDisplayIsAlwaysOn()
+                
+            }
         label: {
             Label {
                 Text("")
             } icon: {
-                if displayIsAlwaysON { displayOffSymbol }
+                if isDisplayAlwaysON { turnOffDisplaySymbol }
                 else { displayONSymbol }
             }
         }.tint(.red)
@@ -26,7 +33,7 @@ struct DisplayAlwaysOnSymbol: View {
     }
         
     // MARK: -
-    private var displayOffSymbol:some View {
+    private var turnOffDisplaySymbol:some View {
         ZStack {
             Image(systemName: "sun.max.fill")
             Image(systemName: "line.diagonal")
