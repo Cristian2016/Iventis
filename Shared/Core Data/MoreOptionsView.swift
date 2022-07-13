@@ -37,7 +37,7 @@ struct MoreOptionsView: View {
                 }
             VStack {
                 if bubble.state == .brandNew {
-                    StartDelayMoreOptionsView(sdb: bubble.sdb!)
+                    StartDelaySubview(sdb: bubble.sdb!)
                     Divider()
                 }
                 colorOption
@@ -52,12 +52,12 @@ struct MoreOptionsView: View {
             .padding()
             .padding()
             
+            //2 Confirmation Labels
             if vm.startDelayWasReset {
                 //reset delay confirmation
                 ConfirmationLabel(isDestructive: true)
                 { zeroStartDelayText } action: { vm.startDelayWasReset = false }
             }
-            
             if vm.startDelayWasSet && bubble.sdb!.delay != 0 {
                 ConfirmationLabel()
                 { startDelayText } action: { vm.startDelayWasSet = false }

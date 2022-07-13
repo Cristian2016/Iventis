@@ -2,7 +2,7 @@ import SwiftUI
 
 ///StartDelayBubbleView
 ///its data dependency is SDB [StartDelayBubble] in the model
-struct StartDelayMoreOptionsView:View {
+struct StartDelaySubview:View {
     @EnvironmentObject var vm:ViewModel
     @StateObject var sdb:SDB
     
@@ -20,8 +20,13 @@ struct StartDelayMoreOptionsView:View {
                         .fill(Color.bubbleColor(forName: sdb.bubble!.color!))
                         .aspectRatio(contentMode: .fit)
                         .overlay {
-                            Button("\(delay)") { vm.computeStartDelay(sdb, delay) }
-                                .font(.system(size: 30).weight(.medium))
+                            Button("\(delay)") {
+                                vm.computeStartDelay(sdb, delay)
+                                
+                                //pause sdb if it's running
+                                if sdb.state == .running { sdb.toggleStart() }
+                            }
+                            .font(.system(size: 30).weight(.medium))
                         }
                 }
             }
