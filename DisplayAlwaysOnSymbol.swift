@@ -18,15 +18,10 @@ struct DisplayAlwaysOnSymbol: View {
             Label {
                 Text("")
             } icon: {
-                if displayIsAlwaysON {
-                    displayOffSymbol
-                } else {
-                    displayONSymbol
-                }
-                
+                if displayIsAlwaysON { displayOffSymbol }
+                else { displayONSymbol }
             }
-        }
-        .tint(.red)
+        }.tint(.red)
         }
     }
         
@@ -43,7 +38,7 @@ struct DisplayAlwaysOnSymbol: View {
     private var displayONSymbol:some View {
         Image(systemName: "sun.max.fill")
             .foregroundColor(.black)
-            .font(.system(size: 25))
+            .font(.system(size: 30))
     }
 }
 
