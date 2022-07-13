@@ -34,12 +34,19 @@ struct DisplayAlwaysOnSymbol: View {
     // MARK: -
     private var turnOffDisplaySymbol:some View {
         HStack {
-            Text("Exit Always ON")
+            Text("Exit ON")
+                .font(.system(size: 20))
             ZStack {
                 Image(systemName: "sun.max.fill")
                 Image(systemName: "line.diagonal")
                     .foregroundColor(.black)
             }
+        }
+        .padding([.top, .bottom], 3)
+        .padding([.leading, .trailing], 10)
+        .background {
+            RoundedRectangle(cornerRadius: 6)
+                .fill(Color.red.opacity(0.3))
         }
         
         .font(.system(size: fontSize))

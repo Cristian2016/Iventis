@@ -46,9 +46,10 @@ struct BubbleList: View {
             }
             Push(.topRight) {
                 HStack {
-                    DisplayAlwaysOnSymbol()
                     PlusButton()
+                    DisplayAlwaysOnSymbol()
                 }
+                .offset(y:-7)
             }
             .padding(EdgeInsets(top: 8, leading: 0, bottom: 0, trailing: 20))
             
