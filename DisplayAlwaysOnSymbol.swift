@@ -29,13 +29,19 @@ struct DisplayAlwaysOnSymbol: View {
         }
         .tint(.red)
         }
+        .highPriorityGesture(
+            LongPressGesture(minimumDuration: 0.3)
+                .onEnded { _ in
+                    print("long pressed")
+                }
+        )
     }
     
     // MARK: -
     private var turnOffDisplaySymbol:some View {
         HStack {
             Text("Exit ON")
-                .font(.system(size: 20))
+                .font(.system(size: 20).weight(.medium))
             ZStack {
                 Image(systemName: "sun.max.fill")
                 Image(systemName: "line.diagonal")
