@@ -86,20 +86,6 @@ struct MoreOptionsView: View {
         .allowsHitTesting(false) //ignore touches [which are delivered to superview]
     }
     
-    private var startDelayText: some View {
-        VStack {
-            Text("\(Image(systemName: "clock.arrow.circlepath")) \(bubble.sdb!.delay)s")
-                .font(.system(size: 40).weight(.medium))
-        }
-    }
-    
-    private var zeroStartDelayText: some View {
-        VStack {
-            Text("\(Image(systemName: "clock.arrow.circlepath")) 0s")
-                .font(.system(size: 40).weight(.medium))
-        }
-    }
-    
     private var colorsView:some View {
         LazyVGrid(columns: [GridItem(spacing: MoreOptionsView.itemSpacing), GridItem(spacing: MoreOptionsView.itemSpacing), GridItem()], spacing: MoreOptionsView.itemSpacing) {
             ForEach(Color.bubbleThrees.map{$0.description},id:\.self) { colorName in
@@ -117,6 +103,20 @@ struct MoreOptionsView: View {
                 }
                 .onTapGesture { vm.changeColor(for: bubble, to: colorName) }
             }
+        }
+    }
+    
+    private var startDelayText: some View {
+        VStack {
+            Text("\(Image(systemName: "clock.arrow.circlepath")) \(bubble.sdb!.delay)s")
+                .font(.system(size: 40).weight(.medium))
+        }
+    }
+    
+    private var zeroStartDelayText: some View {
+        VStack {
+            Text("\(Image(systemName: "clock.arrow.circlepath")) 0s")
+                .font(.system(size: 40).weight(.medium))
         }
     }
     

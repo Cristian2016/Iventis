@@ -102,7 +102,8 @@ extension Color {
                              "byzantium" : "Byzantium",
                              "rose" : "Rose",
                              "aubergine" : "Aubergine",
-                             "cayenne" : "Cayenne"
+                             "cayenne" : "Cayenne",
+                             "mocha" : "Mocha"
     ]
     
     static func userFriendlyBubbleColorName(for bubbleColorName:String?) -> String {
