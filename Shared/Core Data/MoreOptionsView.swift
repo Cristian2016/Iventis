@@ -94,23 +94,21 @@ struct MoreOptionsView: View {
     }
     
     private var colorsView:some View {
-        VStack (alignment: .leading) {
-            LazyVGrid(columns: [GridItem(spacing: MoreOptionsView.itemSpacing), GridItem(spacing: MoreOptionsView.itemSpacing), GridItem()], spacing: MoreOptionsView.itemSpacing) {
-                ForEach(Color.bubbleThrees.map{$0.description},id:\.self) { colorName in
-                    
-                    let color = Color.bubbleColor(forName: colorName)
-                    ZStack {
-                        Rectangle()
-                            .fill(color)
-                            .aspectRatio(contentMode: .fit)
-                        if colorName == bubble.color {
-                            Image(systemName: "checkmark")
-                                .foregroundColor(.white)
-                                .font(.system(size: 40))
-                        }
+        LazyVGrid(columns: [GridItem(spacing: MoreOptionsView.itemSpacing), GridItem(spacing: MoreOptionsView.itemSpacing), GridItem()], spacing: MoreOptionsView.itemSpacing) {
+            ForEach(Color.bubbleThrees.map{$0.description},id:\.self) { colorName in
+                
+                let color = Color.bubbleColor(forName: colorName)
+                ZStack {
+                    Rectangle()
+                        .fill(color)
+                        .aspectRatio(contentMode: .fit)
+                    if colorName == bubble.color {
+                        Image(systemName: "checkmark")
+                            .foregroundColor(.white)
+                            .font(.system(size: 40))
                     }
-                    .onTapGesture { vm.changeColor(for: bubble, to: colorName) }
                 }
+                .onTapGesture { vm.changeColor(for: bubble, to: colorName) }
             }
         }
     }
