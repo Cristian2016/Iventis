@@ -41,11 +41,8 @@ struct MoreOptionsView: View {
                     StartDelaySubview(sdb: bubble.sdb!)
                     Divider()
                 }
-                
-                colorsViewTitle //--------
-                ScrollView { colorsView }
-                    .frame(height: bubble.state != .running ? 420 : 520)
-                .scrollIndicators(.hidden) //-------
+                colorsViewTitle
+                colorsView
             }
             .frame(width: 280)
             .padding(8)
@@ -95,7 +92,7 @@ struct MoreOptionsView: View {
                 ZStack {
                     Rectangle()
                         .fill(color)
-                        .aspectRatio(contentMode: .fit)
+                        .aspectRatio(1.6, contentMode: .fit)
                     if colorName == bubble.color {
                         Image(systemName: "checkmark")
                             .foregroundColor(.white)
