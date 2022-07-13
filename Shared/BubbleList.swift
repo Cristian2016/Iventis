@@ -44,7 +44,14 @@ struct BubbleList: View {
                 .padding(EdgeInsets(top: 0, leading: -10, bottom: 0, trailing: -10))
                 .listStyle(.plain)
             }
-            PlusButton()
+            Push(.topRight) {
+                HStack {
+                    DisplayAlwaysOnSymbol()
+                    PlusButton()
+                }
+            }
+            .padding(EdgeInsets(top: 8, leading: 0, bottom: 0, trailing: 20))
+            
             
             if !notesShowing { LeftStrip($vm.isPaletteShowing, isListEmpty) }
             

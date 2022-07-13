@@ -14,8 +14,7 @@ struct PlusButton: View {
     let fontSize = CGFloat(30)
     
     var body: some View {
-        Push(.topRight) { button}
-            .padding(EdgeInsets(top: 8, leading: 0, bottom: 0, trailing: 20))
+        button
     }
     
     private var button: some View {
