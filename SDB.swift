@@ -31,7 +31,7 @@ public class SDB: NSManagedObject {
                     backgroundTimer = SDBTimer(dispatchQueue, rank: bubble?.rank)
                 }
                 
-                
+                //without delay sdb.delay will be descreased instantly
                 delayExecution(.now() + 1) {
                     self.backgroundTimer?.perform(.start)
                 }
