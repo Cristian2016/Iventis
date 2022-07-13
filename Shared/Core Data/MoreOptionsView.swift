@@ -35,12 +35,15 @@ struct MoreOptionsView: View {
                     }
                     vm.saveAndDismissMoreOptionsView(bubble)
                 }
+            
             VStack {
                 if bubble.state == .brandNew {
                     StartDelaySubview(sdb: bubble.sdb!)
                     Divider()
                 }
-                colorOption
+                ScrollView { colorsView }
+                .frame(height: 500)
+                .scrollIndicators(.hidden)
             }
             .padding(8)
             .background {
@@ -81,7 +84,7 @@ struct MoreOptionsView: View {
         }
     }
     
-    private var colorOption:some View {
+    private var colorsView:some View {
         VStack (alignment: .leading) {
             HStack (alignment: .bottom) {
                 Text("\(Color.userFriendlyBubbleColorName(for: bubble.color))")
@@ -93,7 +96,7 @@ struct MoreOptionsView: View {
             }
             .allowsHitTesting(false) //ignore touches [which are delivered to superview]
            
-            LazyVGrid(columns: [GridItem(spacing: MoreOptionsView.itemSpacing), GridItem(spacing: MoreOptionsView.itemSpacing), GridItem(spacing: MoreOptionsView.itemSpacing), GridItem()], spacing: MoreOptionsView.itemSpacing) {
+            LazyVGrid(columns: [GridItem(spacing: MoreOptionsView.itemSpacing), GridItem(spacing: MoreOptionsView.itemSpacing), GridItem()], spacing: MoreOptionsView.itemSpacing) {
                 ForEach(Color.bubbleThrees.map{$0.description},id:\.self) { colorName in
                     
                     let color = Color.bubbleColor(forName: colorName)
