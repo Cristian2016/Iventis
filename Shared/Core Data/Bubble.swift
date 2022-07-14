@@ -59,7 +59,7 @@ public class Bubble: NSManagedObject {
     ///updates elapsed time inside PairCell. what smallBubbleCell displays. ex: "0"hr "12"min "24"sec
     @Published var smallBubbleView_Components
     = Float.TimeComponentsAsStrings(hr: "0", min: "0", sec: "0", cents: "00")
-    { willSet { self.objectWillChange.send() }}
+    { willSet { DispatchQueue.main.async { self.objectWillChange.send() } }}
         
     private(set) var isObservingBackgroundTimer = false
     
