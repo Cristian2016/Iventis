@@ -23,7 +23,7 @@ struct SDBCell: View {
                 .fill(.ultraThinMaterial)
         }
         //animated value
-            .scaleEffect(isTapped ? 0.85 : 1.0)
+            .scaleEffect(isTapped ? 0.9 : 1.0)
         //
             .overlay (
                 HStack(spacing: 2) {
