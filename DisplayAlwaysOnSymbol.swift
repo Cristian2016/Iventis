@@ -28,7 +28,7 @@ struct DisplayAlwaysOnSymbol: View {
                 Text(isDisplayAlwaysON ? "Exit" : "")
                     .font(.system(size:20).weight(.medium))
             } icon: {
-                if isDisplayAlwaysON { turnOffDisplaySymbol }
+                if isDisplayAlwaysON { exitAlwaysONDisplay_Symbol }
                 else { displayONSymbol }
             }
         }
@@ -38,14 +38,13 @@ struct DisplayAlwaysOnSymbol: View {
             if isDisplayAlwaysON {
                 RoundedRectangle(cornerRadius: 10)
                     .stroke(Color.red, lineWidth: 2)
-                    .foregroundColor(.white)
             }
         }
         }
     }
     
     // MARK: -
-    private var turnOffDisplaySymbol:some View {
+    private var exitAlwaysONDisplay_Symbol:some View {
         
             ZStack {
                 Image(systemName: "sun.max")
