@@ -26,7 +26,7 @@ struct DisplayAlwaysOnSymbol: View {
         label: {
             Label {
                 Text(isDisplayAlwaysON ? "Exit" : "")
-                    .font(.system(size:20).weight(.medium))
+                    .font(.system(size:20).weight(.bold))
             } icon: {
                 if isDisplayAlwaysON { exitAlwaysONDisplay_Symbol }
                 else { displayONSymbol }
@@ -37,7 +37,7 @@ struct DisplayAlwaysOnSymbol: View {
         .background {
             if isDisplayAlwaysON {
                 RoundedRectangle(cornerRadius: 10)
-                    .stroke(Color.red, lineWidth: 2)
+                    .stroke(Color.red, lineWidth: 4)
             }
         }
         }
@@ -46,12 +46,13 @@ struct DisplayAlwaysOnSymbol: View {
     // MARK: -
     private var exitAlwaysONDisplay_Symbol:some View {
         
-            ZStack {
-                Image(systemName: "sun.max")
-                Image(systemName: "line.diagonal")
-                    .foregroundColor(.label)
-            }
-            .foregroundColor(.red)
+        ZStack {
+            Image(systemName: "sun.max")
+            Image(systemName: "line.diagonal")
+                .foregroundColor(.label)
+        }
+        .fontWeight(.semibold)
+        .foregroundColor(.red)
         .padding([.top, .bottom], 3)
         .padding([.leading, .trailing], 10)
         .font(.system(size: fontSize))
