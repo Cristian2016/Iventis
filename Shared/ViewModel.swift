@@ -460,8 +460,10 @@ class ViewModel: ObservableObject {
             
             let sdb = notification.object as? SDB
             guard let bubble = sdb?.bubble else { return }
-            self?.toggleStart(bubble)
-            DispatchQueue.main.async { self?.sdb = nil }
+            
+            DispatchQueue.main.async {
+                self?.toggleStart(bubble)
+                self?.sdb = nil }
         }
     }
 }

@@ -28,21 +28,23 @@ struct SDBCell: View {
         //gestures
             .gesture(dragGesture)
             .highPriorityGesture(longPressGesture)
-            .onTapGesture { vm.toggleStart(sdb) }
+            .onTapGesture { handleTap() }
     }
     
+    // MARK: - handle gestures
+    //1.drag 2.longPress 3.tap
+    private var dragGesture:some Gesture {
+        DragGesture()
+            .onChanged { value in offset = value.translation }
+            .onEnded { _ in withAnimation { offset = .zero } }
+    }
     private var longPressGesture:some Gesture {
         LongPressGesture(minimumDuration: 0.3)
             .onEnded { _ in
                 print("long pressed")
             }
     }
-    
-    private var dragGesture:some Gesture {
-        DragGesture()
-            .onChanged { value in offset = value.translation }
-            .onEnded { _ in withAnimation { offset = .zero } }
-    }
+    func handleTap() { vm.toggleStart(sdb) }
 }
 
 //struct StartDelayView_Previews: PreviewProvider {
