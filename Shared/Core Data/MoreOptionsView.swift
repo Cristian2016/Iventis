@@ -32,7 +32,7 @@ struct MoreOptionsView: View {
                     if userChangedStartDelay {
                         vm.startDelayWasSet = true
                         delayExecution(.now() + 1) { vm.startDelayWasSet = false }
-                    }
+                                            }
                     vm.saveAndDismissMoreOptionsView(bubble)
                 }
             

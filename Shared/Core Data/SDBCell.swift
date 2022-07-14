@@ -28,26 +28,7 @@ struct SDBCell: View {
         //gestures
             .gesture(dragGesture)
             .highPriorityGesture(longPressGesture)
-            .onTapGesture { vm.toggle(sdb) }
-            .onReceive(
-                NotificationCenter.Publisher(center: .default, name: .sdbTimerSignal)) {
-                    
-                    let receivedRank = $0.userInfo!["rank"] as! Int64
-                    guard receivedRank == sdb.bubble!.rank else { return }
-                    guard sdb.delay > 0 else { return }
-                                        
-                    if sdb.delay == 1 {
-                        sdb.backgroundTimer?.perform(.pause)
-                        sdb.backgroundTimer = nil
-                        vm.sdb = nil
-                        sdb.state = .brandNew
-                        
-                        //start bubble automatically
-                        vm.toggleStart(sdb.bubble!)
-                    }
-                    
-                    sdb.delay -= 1 //decrease by one
-                }
+            .onTapGesture { vm.toggleStart(sdb) }
     }
     
     private var longPressGesture:some Gesture {

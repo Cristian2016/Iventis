@@ -8,11 +8,11 @@
 
 import Foundation
 import CoreData
+import SwiftUI
 
 ///StartDelay_Bubble
 public class SDB: NSManagedObject {
     var backgroundTimer:SDBTimer?
-    lazy var dispatchQueue = DispatchQueue(label: "sdbTimer")
     
     enum State {
         case brandNew
@@ -28,7 +28,9 @@ public class SDB: NSManagedObject {
             case .brandNew, .paused:
                 state = .running
                 if backgroundTimer == nil {
-                    backgroundTimer = SDBTimer(dispatchQueue, rank: bubble?.rank)
+                    backgroundTimer = SDBTimer { [weak self] in
+                        self?.task()
+                    }
                 }
                 
                 //without delay sdb.delay will be descreased instantly
@@ -43,6 +45,23 @@ public class SDB: NSManagedObject {
         }
     }
     
+    //task to call each second by bTimer
+    func task() {
+        guard delay > 0 else { return }
+        
+        if delay == 1 {
+            backgroundTimer?.perform(.pause)
+            backgroundTimer = nil
+//            vm.sdb = nil
+            state = .brandNew
+            
+            //start bubble automatically
+//            vm.toggleStart(bubble!)
+        }
+        
+        DispatchQueue.main.async { self.objectWillChange.send() }
+        delay -= 1 //decrease by one
+    }
     
     deinit {
         print("deinit")

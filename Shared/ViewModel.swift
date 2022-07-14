@@ -166,6 +166,13 @@ class ViewModel: ObservableObject {
         sdb = bubble.sdb
     }
     
+    //SDBubble
+    func toggleStart(_ sdb:SDB) {
+        UserFeedback.singleHaptic(.heavy)
+        sdb.toggleStart()
+    }
+    
+    // MARK: -
     //⚠️ super hard to get it right
     func reorderRanks(_ sourceRank:Int64, _ destRank:Int64, _ moveBottom:Bool = false) {
         if sourceRank == destRank { return }
@@ -444,16 +451,5 @@ class ViewModel: ObservableObject {
         }
         
         UserFeedback.doubleHaptic(.medium)
-    }
-}
-
-// MARK: - Control StartDelayView and Model
-extension ViewModel {
-    
-    // MARK: - SDBCell User Intents
-    ///start/pause SDB.timer
-    func toggle(_ sdb:SDB) {
-        UserFeedback.singleHaptic(.heavy)
-        sdb.toggleStart()
     }
 }

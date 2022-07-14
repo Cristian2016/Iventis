@@ -8,24 +8,20 @@
 import Foundation
 
 class SDBTimer {
-    deinit { killTimer() }
+    lazy var dispatchQueue = DispatchQueue(label: "sdbTimer")
+    
+    deinit {
+        killTimer()
+        print("bTimer deinit")
+    }
     
     ///event handler called every second
     private let updateFrequency:Double = 1.0 /* every second */
-    
-    let queue:DispatchQueue
-    
-    init(_ queue:DispatchQueue, rank:Int64?) {
-        self.queue = queue
-        self.eventHandler = {
-            DispatchQueue.main.async {
-                NotificationCenter.default.post(name: .sdbTimerSignal, object: nil, userInfo: ["rank" : rank!])
-            }
-        }
-    }
+        
+    init(_ task: @escaping () -> ()) { self.eventHandler = task }
     
     private lazy var timer: DispatchSourceTimer = {
-        let t = DispatchSource.makeTimerSource(queue: queue)
+        let t = DispatchSource.makeTimerSource(queue: dispatchQueue)
         t.schedule(deadline: .now(), repeating: updateFrequency)
         t.setEventHandler(handler: eventHandler)
         return t
