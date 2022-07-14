@@ -15,8 +15,15 @@ struct SDBCell: View {
     @State var isTapped = false
     
     var body: some View {
-        Circle()
-            .fill(.thinMaterial)
+        ZStack {
+            Circle()
+                .fill(Color.white)
+                .scaleEffect(x:0.7, y:0.7)
+                .offset(x:-10, y:-10)
+            Circle()
+                .fill(.ultraThinMaterial)
+        }
+        
         //animated value
             .scaleEffect(isTapped ? 0.9 : 1.0)
         //
