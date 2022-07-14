@@ -112,6 +112,8 @@ class ViewModel: ObservableObject {
     func toggleStart(_ bubble:Bubble) {
         if bubble.currentClock <= 0 && bubble.kind != .stopwatch  { return }
         
+        bubble.sdb?.currentDelay = 0
+        
         switch bubble.state {
             case .brandNew: /* changes to .running */
                 //create first session and add first pair to the session
@@ -211,6 +213,7 @@ class ViewModel: ObservableObject {
     
     // FIXME: ⚠️ not complete!
     func endSession(_ bubble:Bubble) {
+        bubble.sdb?.currentDelay = 0
         if bubble.state == .brandNew { return }
         
         bubble.continueToUpdateSmallBubbleCell = false
