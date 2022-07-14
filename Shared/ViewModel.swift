@@ -428,14 +428,13 @@ class ViewModel: ObservableObject {
             let dispatchTime = (bubble.sdb!.referenceDelay != 0) ? DispatchTime.now() + 1 : .now()
 
             delayExecution(dispatchTime) {
-                self.sdb = nil
+                self.sdb = nil //dismiss MoreOptionsView
                 self.startDelayWasSet = false
             }
-
-        } else {
-            //dismiss MoreOptionsView
-            self.sdb = nil
+            
+            self.sdb?.currentDelay = self.sdb?.referenceDelay ?? 0
         }
+        else { self.sdb = nil  /* dismiss MoreOptionsView */ }
     }
     
     func computeReferenceStartDelay(_ sdb:SDB, _ value: Int) {
