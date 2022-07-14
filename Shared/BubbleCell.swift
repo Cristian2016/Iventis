@@ -166,7 +166,7 @@ struct BubbleCell: View {
         
         //user intent model
         vm.toggleStart(bubble)
-    }
+}
     
     private func userLongPressedSeconds() {
         isSecondsLongPressed = true
