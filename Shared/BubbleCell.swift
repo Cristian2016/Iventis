@@ -102,7 +102,7 @@ extension BubbleCell {
             }
             .overlay {
                 if let sdb = bubble.sdb, sdb.delay > 0 {
-                    SDBCell(sdb:sdb).padding(10)
+                    SDBCell(sdb:sdb).padding(4)
                 }
             }
         }

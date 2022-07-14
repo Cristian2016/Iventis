@@ -19,13 +19,11 @@ struct SDBCell: View {
             Circle()
                 .fill(Color.white)
                 .scaleEffect(x:0.7, y:0.7)
-                .offset(x:-10, y:-10)
             Circle()
                 .fill(.ultraThinMaterial)
         }
-        
         //animated value
-            .scaleEffect(isTapped ? 0.9 : 1.0)
+            .scaleEffect(isTapped ? 0.8 : 1.0)
         //
             .overlay (
                 HStack(spacing: 2) {
@@ -54,7 +52,7 @@ struct SDBCell: View {
     }
     func handleTap() {
         vm.toggleStart(sdb)
-        withAnimation (.spring().repeatForever()) {
+        withAnimation (.spring(response: 0.5).repeatForever()) {
             isTapped.toggle()
         }
     }
