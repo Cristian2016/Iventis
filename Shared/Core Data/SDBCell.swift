@@ -23,19 +23,22 @@ struct SDBCell: View {
                 .fill(.ultraThinMaterial)
         }
         //animated value
-            .scaleEffect(isTapped ? 0.9 : 1.0)
+        .scaleEffect(isTapped ? 0.9 : 1.0)
         //
-            .overlay (
-                HStack(spacing: 2) {
-                    Text("\(sdb.currentDelay)")
-                        .font(.system(size: 60))
-                }.foregroundColor(.black)
-            )
-            .offset(offset)
+        .overlay (
+            HStack(spacing: 2) {
+                Text("-\(sdb.currentDelay)")
+                    .font(.system(size: 60))
+                    .minimumScaleFactor(0.3)
+                    .padding()
+            }
+                .foregroundColor(.black)
+        )
+        .offset(offset)
         //gestures
-            .gesture(dragGesture)
-            .highPriorityGesture(longPressGesture)
-            .onTapGesture { handleTap() }
+        .gesture(dragGesture)
+        .highPriorityGesture(longPressGesture)
+        .onTapGesture { handleTap() }
     }
     
     // MARK: - handle gestures
