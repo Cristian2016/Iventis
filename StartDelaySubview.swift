@@ -40,7 +40,7 @@ struct StartDelaySubview:View {
     ///SDDisplay
     private var startDelayDisplay:some View {
         Text("\(Int(sdb.referenceDelay))s")
-            .textModifier(Color.bubbleColor(forName: sdb.bubble!.color!))
+            .textModifier(Color.bubbleColor(forName: sdb.bubble!.color!), 40)
     }
     
     private var startDelaylabel:some View {

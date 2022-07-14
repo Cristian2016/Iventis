@@ -133,19 +133,20 @@ struct MoreOptionsView: View {
 
 struct TextModifier: ViewModifier {
     let color:Color
+    let fontSize:CGFloat
     
     func body(content: Content) -> some View {
         content
             .foregroundColor(.white)
-            .font(.system(size: 30))
+            .font(.system(size: fontSize))
             .padding(MoreOptionsView.insets)
             .background(RoundedRectangle(cornerRadius: 4).fill(color))
     }
 }
 
 extension View {
-    func textModifier(_ backgroundColor:Color) -> some View {
-        modifier(TextModifier(color: backgroundColor))
+    func textModifier(_ backgroundColor:Color, _ fontSize:CGFloat = 30) -> some View {
+        modifier(TextModifier(color: backgroundColor, fontSize: fontSize))
     }
 }
 
