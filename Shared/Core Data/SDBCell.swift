@@ -12,14 +12,16 @@ struct SDBCell: View {
     @StateObject var sdb:SDB
     @State var offset:CGSize = .zero //drag view around
     @EnvironmentObject var vm:ViewModel
+    @State var isTapped = false
     
     var body: some View {
         Circle()
             .fill(.thinMaterial)
+        //animated value
+            .scaleEffect(isTapped ? 0.9 : 1.0)
+        //
             .overlay (
                 HStack(spacing: 2) {
-                    Image(systemName: "arrow.counterclockwise")
-                        .font(.system(size: 20).weight(.bold))
                     Text("\(sdb.delay)")
                         .font(.system(size: 60))
                 }.foregroundColor(.black)
@@ -32,7 +34,6 @@ struct SDBCell: View {
     }
     
     // MARK: - handle gestures
-    //1.drag 2.longPress 3.tap
     private var dragGesture:some Gesture {
         DragGesture()
             .onChanged { value in offset = value.translation }
@@ -44,7 +45,12 @@ struct SDBCell: View {
                 print("long pressed")
             }
     }
-    func handleTap() { vm.toggleStart(sdb) }
+    func handleTap() {
+        vm.toggleStart(sdb)
+        withAnimation (.spring().repeatForever()) {
+            isTapped.toggle()
+        }
+    }
 }
 
 //struct StartDelayView_Previews: PreviewProvider {
