@@ -27,7 +27,7 @@ struct SDBCell: View {
         //
             .overlay (
                 HStack(spacing: 2) {
-                    Text("\(sdb.delay)")
+                    Text("\(sdb.currentDelay)")
                         .font(.system(size: 60))
                 }.foregroundColor(.black)
             )
@@ -46,9 +46,7 @@ struct SDBCell: View {
     }
     private var longPressGesture:some Gesture {
         LongPressGesture(minimumDuration: 0.3)
-            .onEnded { _ in
-                print("long pressed")
-            }
+            .onEnded { _ in }
     }
     func handleTap() {
         vm.toggleStart(sdb)

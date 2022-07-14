@@ -47,9 +47,9 @@ public class SDB: NSManagedObject {
     
     //task to call each second by bTimer
     func task() {
-        guard delay > 0 else { return }
+        guard currentDelay > 0 else { return }
         
-        if delay == 1 {
+        if currentDelay == 1 {
             backgroundTimer?.perform(.pause)
             backgroundTimer = nil
             state = .brandNew
@@ -62,6 +62,6 @@ public class SDB: NSManagedObject {
         }
         
         DispatchQueue.main.async { self.objectWillChange.send() }
-        delay -= 1 //decrease by one
+        currentDelay -= 1 //decrease by one
     }
 }

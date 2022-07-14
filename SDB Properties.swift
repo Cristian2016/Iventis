@@ -16,7 +16,8 @@ extension SDB {
         return NSFetchRequest<SDB>(entityName: "DSB")
     }
 
-    @NSManaged public var delay: Int64
+    @NSManaged public var referenceDelay: Int64
+    @NSManaged public var currentDelay: Int64
     
     @NSManaged public var pairs: NSSet?
     @NSManaged public var bubble: Bubble?

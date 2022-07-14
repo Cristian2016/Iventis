@@ -398,7 +398,7 @@ class ViewModel: ObservableObject {
         if bubble.color == newColor { return }
         bubble.color = newColor
         
-        if sdb.delay != 0 {//there is a delay set
+        if sdb.referenceDelay != 0 {//there is a delay set
             UserFeedback.singleHaptic(.medium)
             PersistenceController.shared.save()
             startDelayWasSet = true
@@ -418,16 +418,16 @@ class ViewModel: ObservableObject {
     }
     
     func saveAndDismissMoreOptionsView(_ bubble:Bubble) {
-        let userChangedStartDelay = bubble.sdb!.delay != 0
+        let userChangedReferenceStartDelay = bubble.sdb!.referenceDelay != 0
         
-        if userChangedStartDelay {
+        if userChangedReferenceStartDelay {
             UserFeedback.singleHaptic(.medium)
             PersistenceController.shared.save()
             startDelayWasSet = true
 
-            let delay = (bubble.sdb!.delay != 0) ? DispatchTime.now() + 1 : .now()
+            let dispatchTime = (bubble.sdb!.referenceDelay != 0) ? DispatchTime.now() + 1 : .now()
 
-            delayExecution(delay) {
+            delayExecution(dispatchTime) {
                 self.sdb = nil
                 self.startDelayWasSet = false
             }
@@ -438,16 +438,18 @@ class ViewModel: ObservableObject {
         }
     }
     
-    func computeStartDelay(_ sdb:SDB, _ value: Int) {
+    func computeReferenceStartDelay(_ sdb:SDB, _ value: Int) {
         UserFeedback.singleHaptic(.medium)
-        sdb.delay += Int64(value)
+        sdb.referenceDelay += Int64(value)
+        sdb.currentDelay = sdb.referenceDelay
     }
     
-    func resetStartDelay(for bubble:Bubble) {
+    func setDelayBackToZero(for bubble:Bubble) {
         guard let sdb = bubble.sdb else { fatalError() }
         
-        if sdb.delay != 0 {
-            sdb.delay = 0
+        if sdb.referenceDelay != 0 {
+            sdb.referenceDelay = 0
+            sdb.currentDelay = 0
             PersistenceController.shared.save()
         }
         
@@ -462,8 +464,11 @@ class ViewModel: ObservableObject {
             guard let bubble = sdb?.bubble else { return }
             
             DispatchQueue.main.async {
+                //start bubble automatically
+                //remove SDBCell from BubbleCell
                 self?.toggleStart(bubble)
-                self?.sdb = nil }
+                self?.sdb = nil
+            }
         }
     }
 }

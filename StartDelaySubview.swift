@@ -21,7 +21,7 @@ struct StartDelaySubview:View {
                         .aspectRatio(contentMode: .fit)
                         .overlay {
                             Button("\(delay)") {
-                                vm.computeStartDelay(sdb, delay)
+                                vm.computeReferenceStartDelay(sdb, delay)
                                 
                                 //pause sdb if it's running
                                 if sdb.state == .running { sdb.toggleStart() }
@@ -39,7 +39,7 @@ struct StartDelaySubview:View {
     // MARK: - LEGO
     ///SDDisplay
     private var startDelayDisplay:some View {
-        Text("\(Int(sdb.delay))s")
+        Text("\(Int(sdb.referenceDelay))s")
             .textModifier(Color.bubbleColor(forName: sdb.bubble!.color!))
     }
     

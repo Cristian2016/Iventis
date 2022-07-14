@@ -27,7 +27,7 @@ struct MoreOptionsView: View {
             Color.alertScreenBackground.opacity(0.9)
                 .ignoresSafeArea()
                 .onTapGesture {
-                    let userChangedStartDelay = bubble.sdb!.delay != 0
+                    let userChangedStartDelay = bubble.sdb!.referenceDelay != 0
                     
                     if userChangedStartDelay {
                         vm.startDelayWasSet = true
@@ -61,7 +61,7 @@ struct MoreOptionsView: View {
                 ConfirmationLabel(isDestructive: true)
                 { zeroStartDelayText } action: { vm.startDelayWasReset = false }
             }
-            if vm.startDelayWasSet && bubble.sdb!.delay != 0 {
+            if vm.startDelayWasSet && bubble.sdb!.referenceDelay != 0 {
                 ConfirmationLabel()
                 { startDelayText } action: { vm.startDelayWasSet = false }
             }
@@ -106,7 +106,7 @@ struct MoreOptionsView: View {
     
     private var startDelayText: some View {
         VStack {
-            Text("\(Image(systemName: "clock.arrow.circlepath")) \(bubble.sdb!.delay)s")
+            Text("\(Image(systemName: "clock.arrow.circlepath")) \(bubble.sdb!.referenceDelay)s")
                 .font(.system(size: 40).weight(.medium))
         }
     }
@@ -121,7 +121,7 @@ struct MoreOptionsView: View {
     // MARK: - User Intents
     //long press outside table
     func resetStartDelay() {
-        vm.resetStartDelay(for: bubble)
+        vm.setDelayBackToZero(for: bubble)
         vm.startDelayWasReset = true
         bubble.sdb?.toggleStart()
         
