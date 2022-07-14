@@ -22,6 +22,7 @@ struct SDBCell: View {
             Circle()
                 .fill(.ultraThinMaterial)
         }
+        .padding(6)
         //animated value
         .scaleEffect(isTapped ? 0.9 : 1.0)
         //

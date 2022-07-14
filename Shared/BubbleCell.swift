@@ -101,9 +101,7 @@ extension BubbleCell {
                 }
             }
             .overlay {
-                if let sdb = bubble.sdb, sdb.currentDelay > 0 {
-                    SDBCell(sdb:sdb).padding(4)
-                }
+                if let sdb = bubble.sdb, sdb.currentDelay > 0 { SDBCell(sdb:sdb) }
             }
         }
         .font(.system(size: BubbleCell.metrics.fontSize))
