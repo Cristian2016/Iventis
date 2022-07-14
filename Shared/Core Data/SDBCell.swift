@@ -18,12 +18,12 @@ struct SDBCell: View {
         ZStack {
             Circle()
                 .fill(Color.white)
-                .scaleEffect(x:0.7, y:0.7)
+                .scaleEffect(x:0.8, y:0.8)
             Circle()
                 .fill(.ultraThinMaterial)
         }
         //animated value
-            .scaleEffect(isTapped ? 0.8 : 1.0)
+            .scaleEffect(isTapped ? 0.85 : 1.0)
         //
             .overlay (
                 HStack(spacing: 2) {
