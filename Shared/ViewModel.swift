@@ -36,7 +36,10 @@ class ViewModel: ObservableObject {
         let request = Bubble.fetchRequest()
         let bubbles = try? PersistenceController.shared.viewContext.fetch(request)
         updateCurrentClock(of: bubbles)
+        observe_sdbDelayreachedZero_Notification()
     }
+    
+    deinit { NotificationCenter.default.removeObserver(self) }
     
     // MARK: -
     private func updateCurrentClock(of bubbles:[Bubble]?) {
@@ -48,9 +51,7 @@ class ViewModel: ObservableObject {
             }
         }
     }
-    
-    deinit { NotificationCenter.default.removeObserver(self) }
-            
+                
     private let timer = BackgroundTimer(DispatchQueue(label: "BackgroundTimer", attributes: .concurrent))
     
     func backgroundTimer(_ action:BackgroundTimer.Action) {
@@ -451,5 +452,16 @@ class ViewModel: ObservableObject {
         }
         
         UserFeedback.doubleHaptic(.medium)
+    }
+    
+    // MARK: - StartDelayBubble SDB
+    private func observe_sdbDelayreachedZero_Notification() {
+        NotificationCenter.default.addObserver(forName: .sdbDelayreachedZero, object: nil, queue: nil) { [weak self] notification in
+            
+            let sdb = notification.object as? SDB
+            guard let bubble = sdb?.bubble else { return }
+            self?.toggleStart(bubble)
+            self?.sdb = nil
+        }
     }
 }

@@ -52,18 +52,16 @@ public class SDB: NSManagedObject {
         if delay == 1 {
             backgroundTimer?.perform(.pause)
             backgroundTimer = nil
-//            vm.sdb = nil
             state = .brandNew
             
-            //start bubble automatically
-//            vm.toggleStart(bubble!)
+            //notification to ViewModel to start bubble automatically
+            //viewModel receives notification and
+            //calls vm.toggleStart(bubble!)
+            //vm.sdb = nil causes SDBCell to go away
+            NotificationCenter.default.post(name: .sdbDelayreachedZero, object: self)
         }
         
         DispatchQueue.main.async { self.objectWillChange.send() }
         delay -= 1 //decrease by one
-    }
-    
-    deinit {
-        print("deinit")
     }
 }
