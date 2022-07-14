@@ -213,6 +213,7 @@ class ViewModel: ObservableObject {
     
     // FIXME: ⚠️ not complete!
     func endSession(_ bubble:Bubble) {
+        //make sure no startDelayBubble displayed at this point
         bubble.sdb?.currentDelay = 0
         if bubble.state == .brandNew { return }
         
