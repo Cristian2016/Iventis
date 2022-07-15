@@ -85,23 +85,26 @@ struct MoreOptionsView: View {
     }
     
     private var colorsView:some View {
-        LazyVGrid(columns: [GridItem(spacing: MoreOptionsView.itemSpacing), GridItem(spacing: MoreOptionsView.itemSpacing), GridItem()], spacing: MoreOptionsView.itemSpacing) {
-            ForEach(Color.bubbleThrees.map{$0.description},id:\.self) { colorName in
-                
-                let color = Color.bubbleColor(forName: colorName)
-                ZStack {
-                    Rectangle()
-                        .fill(color)
-                        .aspectRatio(1.6, contentMode: .fit)
-                    if colorName == bubble.color {
-                        Image(systemName: "checkmark")
-                            .foregroundColor(.white)
-                            .font(.system(size: 40))
+        ScrollView {
+            LazyVGrid(columns: [GridItem(spacing: MoreOptionsView.itemSpacing), GridItem(spacing: MoreOptionsView.itemSpacing), GridItem()], spacing: MoreOptionsView.itemSpacing) {
+                ForEach(Color.bubbleThrees.map{$0.description},id:\.self) { colorName in
+                    
+                    let color = Color.bubbleColor(forName: colorName)
+                    ZStack {
+                        Rectangle()
+                            .fill(color)
+                            .aspectRatio(1.6, contentMode: .fit)
+                        if colorName == bubble.color {
+                            Image(systemName: "checkmark")
+                                .foregroundColor(.white)
+                                .font(.system(size: 40))
+                        }
                     }
+                    .onTapGesture { vm.changeColor(for: bubble, to: colorName) }
                 }
-                .onTapGesture { vm.changeColor(for: bubble, to: colorName) }
             }
         }
+        .scrollIndicators(.hidden)
     }
     
     private var startDelayText: some View {
