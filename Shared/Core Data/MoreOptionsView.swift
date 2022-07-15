@@ -28,21 +28,10 @@ struct MoreOptionsView: View {
         ZStack {
             Color.alertScreenBackground.opacity(0.9)
                 .ignoresSafeArea()
-                .onTapGesture {
-                    let userChangedStartDelay = bubble.sdb!.referenceDelay != 0
-                    
-                    if userChangedStartDelay {
-                        vm.startDelayWasSet = true
-                        delayExecution(.now() + 1) { vm.startDelayWasSet = false }
-                                            }
-                    vm.saveAndDismissMoreOptionsView(bubble)
-                }
+                .onTapGesture { handleTap() }
             
             VStack {
-                if display_StartDelayGrid {
-                    StartDelaySubview(sdb: bubble.sdb!)
-                    Divider()
-                }
+                StartDelaySubview(sdb: bubble.sdb!)
                 colorsViewTitle
                 colorsGrid
             }
@@ -135,6 +124,16 @@ struct MoreOptionsView: View {
     }
     
     func dismiss() { vm.sdb = nil }
+    
+    func handleTap() {
+        let userChangedStartDelay = bubble.sdb!.referenceDelay != 0
+        
+        if userChangedStartDelay {
+            vm.startDelayWasSet = true
+            delayExecution(.now() + 1) { vm.startDelayWasSet = false }
+                                }
+        vm.saveAndDismissMoreOptionsView(bubble)
+    }
 }
 
 struct TextModifier: ViewModifier {

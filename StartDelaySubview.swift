@@ -7,32 +7,36 @@ struct StartDelaySubview:View {
     @StateObject var sdb:SDB
     
     var body: some View {
-        VStack (alignment: .leading) {
-            HStack (alignment: .bottom) {
-                startDelayDisplay
-                startDelaylabel
-            }
-            
-            //buttons row 3
-            HStack (spacing: MoreOptionsView.itemSpacing) {
-                ForEach(Bubble.startDelayValues, id: \.self) { delay in
-                    Rectangle()
-                        .fill(Color.bubbleColor(forName: sdb.bubble!.color!))
-                        .aspectRatio(contentMode: .fit)
-                        .overlay {
-                            Button("\(delay)") {
-                                vm.computeReferenceDelay(sdb, delay)
-                                
-                                //pause sdb if it's running
-                                if sdb.state == .running { sdb.toggleStart() }
-                            }
-                            .font(.system(size: 30).weight(.medium))
-                        }
+        if sdb.bubble?.state != .running {
+            VStack (alignment: .leading) {
+                HStack (alignment: .bottom) {
+                    startDelayDisplay
+                    startDelaylabel
                 }
+                
+                //buttons row 3
+                HStack (spacing: MoreOptionsView.itemSpacing) {
+                    ForEach(Bubble.startDelayValues, id: \.self) { delay in
+                        Rectangle()
+                            .fill(Color.bubbleColor(forName: sdb.bubble!.color!))
+                            .aspectRatio(contentMode: .fit)
+                            .overlay {
+                                Button("\(delay)") {
+                                    vm.computeReferenceDelay(sdb, delay)
+                                    
+                                    //pause sdb if it's running
+                                    if sdb.state == .running { sdb.toggleStart() }
+                                }
+                                .font(.system(size: 30).weight(.medium))
+                            }
+                    }
+                }
+                .background(Color.white.opacity(0.001)) //prevent gestures from underlying view
+                .font(.system(size: 26))
+                .foregroundColor(.white)
+                
+                Divider()
             }
-            .background(Color.white.opacity(0.001)) //prevent gestures from underlying view
-            .font(.system(size: 26))
-            .foregroundColor(.white)
         }
     }
     
