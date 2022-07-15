@@ -9,9 +9,15 @@ import SwiftUI
 
 ///StartDelayBubbleCell
 struct SDBCell: View {
-    @StateObject var sdb:SDB
-    @State var offset:CGSize = .zero //drag view around
+    init(_ sdb:SDB) {
+        _sdb = StateObject(wrappedValue: sdb)
+        print("SDBCell init")
+    }
+    
     @EnvironmentObject var vm:ViewModel
+    @StateObject var sdb:SDB
+    
+    @State var offset:CGSize = .zero //drag view around
     @State var isTapped = false
     
     var body: some View {
