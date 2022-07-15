@@ -478,4 +478,7 @@ class ViewModel: ObservableObject {
             }
         }
     }
+    
+    // MARK: - Test
+    func resetToInitialState(_ sdb:SDB) { sdb.resetSDBToInitialState() }
 }

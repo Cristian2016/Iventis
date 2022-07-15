@@ -23,6 +23,12 @@ public class SDB: NSManagedObject {
     var state = State.brandNew
     
     // MARK: - User Intents
+    func resetSDB() {
+        backgroundTimer?.perform(.pause)
+        backgroundTimer = nil
+        state = .brandNew
+    }
+    
     func toggleStart() {
         switch state {
             case .brandNew, .paused:
@@ -43,6 +49,8 @@ public class SDB: NSManagedObject {
                 backgroundTimer = nil
                 state = .paused
         }
+        
+        PersistenceController.shared.save()
     }
     
     //task to call each second by bTimer
@@ -63,5 +71,20 @@ public class SDB: NSManagedObject {
         
         DispatchQueue.main.async { self.objectWillChange.send() }
         currentDelay -= 1 //decrease by one
+    }
+    
+    // MARK: - Test
+    ///SDBCell long pressed
+    func resetSDBToInitialState() {
+        currentDelay = referenceDelay
+        state = .brandNew
+        
+        //stop bTimer
+        if backgroundTimer != nil {
+            backgroundTimer?.perform(.pause)
+            backgroundTimer = nil
+        }
+        
+        PersistenceController.shared.save()
     }
 }

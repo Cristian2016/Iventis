@@ -29,8 +29,9 @@ struct SDBCell: View {
                 .fill(.ultraThinMaterial)
         }
         .padding(6)
-        //animated value
+        //animated value and animation
         .scaleEffect(isTapped ? 0.9 : 1.0)
+        .animation(.spring(response: 0.5).repeatForever(), value: isTapped)
         //
         .overlay (
             HStack(spacing: 2) {
@@ -56,7 +57,13 @@ struct SDBCell: View {
     }
     private var longPressGesture:some Gesture {
         LongPressGesture(minimumDuration: 0.3)
-            .onEnded { _ in }
+            .onEnded { _ in
+                vm.resetToInitialState(sdb)
+                
+                //UI and haptic
+                UserFeedback.doubleHaptic(.heavy)
+                isTapped = false
+            }
     }
     func handleTap() {
         vm.toggleStart(sdb)
