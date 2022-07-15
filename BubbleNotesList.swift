@@ -70,7 +70,9 @@ struct BubbleNotesList: View {
                   //actions
                   dismiss: { dismiss() },
                   deleteItem: { vm.delete(bubbleSavedNotes[$0!]) },
-                  saveNoteToCoredata: { saveNoteToCoreData($0, for: bubble) },
+                  saveNoteToCoredata: {
+            if !$0.isEmpty { saveNoteToCoreData($0, for: bubble) }
+        },
                   selectExistingNote: { selectExitingNote($0) }
         )
     }

@@ -43,13 +43,24 @@ struct StartDelaySubview:View {
     // MARK: - LEGO
     ///SDDisplay
     private var startDelayDisplay:some View {
-        Text("\(Image(systemName: "clock.arrow.circlepath")) \(Int(sdb.referenceDelay))s")
-            .textModifier(Color.bubbleColor(forName: sdb.bubble!.color!), 40)
+        HStack {
+            Text("\(Image(systemName: "clock.arrow.circlepath"))")
+                .font(.system(size: 22).weight(.bold))
+            HStack (alignment: .lastTextBaseline, spacing: 0) {
+                Text("\(Int(sdb.referenceDelay))")
+                Text("s")
+                    .font(.system(size: 22).weight(.bold))
+            }
+        }
+        .textModifier(Color.bubbleColor(forName: sdb.bubble!.color!), 40)
     }
     
+    @ViewBuilder
     private var startDelaylabel:some View {
-        Text("Start Delay")
-            .font(.system(size: 22).weight(.medium))
-            .foregroundColor(.gray)
+        if sdb.referenceDelay == 0 {
+            Text("Start Delay")
+                .font(.system(size: 22).weight(.medium))
+                .foregroundColor(.gray)
+        }
     }
 }
