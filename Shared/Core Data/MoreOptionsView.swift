@@ -26,8 +26,7 @@ struct MoreOptionsView: View {
     // MARK: -
     var body: some View {
         ZStack {
-            Color.alertScreenBackground.opacity(0.9)
-                .ignoresSafeArea()
+            screenBackground
                 .onTapGesture { handleTap() }
             
             VStack {
@@ -56,6 +55,11 @@ struct MoreOptionsView: View {
     }
     
     // MARK: - Lego
+    
+    private var screenBackground:some View {
+        Color.alertScreenBackground.opacity(0.9)
+            .ignoresSafeArea()
+    }
     
     private var whiteBackground:some View {
         RoundedRectangle(cornerRadius: 10)
