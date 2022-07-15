@@ -10,7 +10,7 @@ struct StartDelaySubview:View {
         if sdb.bubble?.state != .running {
             VStack (alignment: .leading) {
                 HStack (alignment: .bottom) {
-                    startDelayDisplay
+                    startDelayDisplay.layoutPriority(1)
                     startDelaylabel
                 }
                 
@@ -43,12 +43,12 @@ struct StartDelaySubview:View {
     // MARK: - LEGO
     ///SDDisplay
     private var startDelayDisplay:some View {
-        Text("\(Int(sdb.referenceDelay))s")
+        Text("\(Image(systemName: "clock.arrow.circlepath")) \(Int(sdb.referenceDelay))s")
             .textModifier(Color.bubbleColor(forName: sdb.bubble!.color!), 40)
     }
     
     private var startDelaylabel:some View {
-        Text("\(Image(systemName: "clock.arrow.circlepath")) Start Delay")
+        Text("Start Delay")
             .font(.system(size: 22).weight(.medium))
             .foregroundColor(.gray)
     }
