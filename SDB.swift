@@ -26,12 +26,12 @@ public class SDB: NSManagedObject {
     func toggleStart() {
         switch state {
             case .brandNew, .paused:
-                state = .running
                 if backgroundTimer == nil {
                     backgroundTimer = SDBTimer { [weak self] in
                         self?.task()
                     }
                 }
+                state = .running
                 
                 //without delay sdb.delay will be descreased instantly
                 delayExecution(.now() + 1) {
@@ -39,9 +39,9 @@ public class SDB: NSManagedObject {
                 }
                 
             case .running:
-                state = .paused
                 backgroundTimer?.perform(.pause)
                 backgroundTimer = nil
+                state = .paused
         }
     }
     
