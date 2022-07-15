@@ -59,8 +59,9 @@ struct PairNotesList: View {
                   //actions
                   dismiss: { dismiss() },
                   deleteItem: { vm.delete(pairSavedNotes[$0!]) },
-                  saveNoteToCoredata: { saveNoteToCoreData($0, for: pair) },
-                  selectExistingNote: { selectExitingNote($0) }
+                  saveNoteToCoredata: {
+            if !$0.isEmpty {  saveNoteToCoreData($0, for: pair) }
+        }, selectExistingNote: { selectExitingNote($0) }
         )
     }
     
