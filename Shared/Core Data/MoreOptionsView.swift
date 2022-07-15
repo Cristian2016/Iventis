@@ -73,7 +73,7 @@ struct MoreOptionsView: View {
             Text("\(Color.userFriendlyBubbleColorName(for: bubble.color))")
                 .textModifier(Color.bubbleColor(forName: bubble.color!))
                 .layoutPriority(1)
-            Text("Choose Color")
+            Text("Color")
                 .font(.system(size: 22).weight(.medium))
                 .foregroundColor(.gray)
             Spacer()
