@@ -10,6 +10,10 @@ import UIKit
 #endif
 import SwiftUI
 
+extension UIScreen {
+    static let deviceNotTallEnough = UIScreen.main.bounds.height <= 667
+}
+
 extension Date {
     func sameDay(with date:Date) -> Bool {
         let calendar = Calendar(identifier: .gregorian)

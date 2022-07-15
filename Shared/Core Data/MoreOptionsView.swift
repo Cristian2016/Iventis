@@ -101,7 +101,7 @@ struct MoreOptionsView: View {
                 }
             }
         }
-        .frame(height: display_StartDelayGrid ? colorsGridHeight : 420)
+        .frame(height: UIScreen.deviceNotTallEnough ? colorsGridHeight : 420)
         .scrollIndicators(.hidden)
     }
     
