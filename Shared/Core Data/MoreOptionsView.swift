@@ -37,12 +37,7 @@ struct MoreOptionsView: View {
             }
             .frame(width: 280)
             .padding(8)
-            .background {
-                RoundedRectangle(cornerRadius: 10)
-                    .fill(Color.white)
-                    .standardShadow()
-                    .onTapGesture { dismiss() }
-            }
+            .background { whiteBackground }
             .padding()
             .padding()
             
@@ -61,6 +56,13 @@ struct MoreOptionsView: View {
     }
     
     // MARK: - Lego
+    
+    private var whiteBackground:some View {
+        RoundedRectangle(cornerRadius: 10)
+            .fill(Color.white)
+            .standardShadow()
+            .onTapGesture { dismiss() }
+    }
     
     private var colorsViewTitle:some View {
         HStack (alignment: .bottom) {
