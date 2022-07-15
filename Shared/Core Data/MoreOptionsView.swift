@@ -14,6 +14,7 @@ struct MoreOptionsView: View {
     // MARK: -
     static let insets = EdgeInsets(top: 4, leading: 10, bottom: 4, trailing: 10)
     static let itemSpacing = CGFloat(4)
+    let colorsListHeight = CGFloat(320)
     
     // MARK: - Gestures
     var longPress:some Gesture {
@@ -104,6 +105,7 @@ struct MoreOptionsView: View {
                 }
             }
         }
+        .frame(height: colorsListHeight)
         .scrollIndicators(.hidden)
     }
     
