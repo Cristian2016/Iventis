@@ -41,13 +41,6 @@ struct SDBCell: View {
             }
                 .foregroundColor(.black)
         )
-        .overlay {
-            if sdb.state != .running {
-                Rectangle()
-                    .frame(width: 4)
-                    .rotationEffect(.degrees(-45))
-            }
-        }
         .offset(offset)
         //gestures
         .gesture(dragGesture)

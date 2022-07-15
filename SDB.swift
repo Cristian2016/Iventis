@@ -14,7 +14,7 @@ import SwiftUI
 public class SDB: NSManagedObject {
     var backgroundTimer:SDBTimer?
     
-    enum State {
+    enum State:String {
         case brandNew
         case running
         case paused
