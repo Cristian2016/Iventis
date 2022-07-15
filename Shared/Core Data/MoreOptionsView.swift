@@ -14,7 +14,7 @@ struct MoreOptionsView: View {
     // MARK: -
     static let insets = EdgeInsets(top: 4, leading: 10, bottom: 4, trailing: 10)
     static let itemSpacing = CGFloat(4)
-    let colorsListHeight = CGFloat(320)
+    let colorsGridHeight = CGFloat(320)
     
     // MARK: - Gestures
     var longPress:some Gesture {
@@ -43,7 +43,7 @@ struct MoreOptionsView: View {
                     Divider()
                 }
                 colorsViewTitle
-                colorsView
+                colorsGridView
             }
             .frame(width: 280)
             .padding(8)
@@ -85,7 +85,7 @@ struct MoreOptionsView: View {
         .allowsHitTesting(false) //ignore touches [which are delivered to superview]
     }
     
-    private var colorsView:some View {
+    private var colorsGridView:some View {
         ScrollView {
             LazyVGrid(columns: [GridItem(spacing: MoreOptionsView.itemSpacing), GridItem(spacing: MoreOptionsView.itemSpacing), GridItem()], spacing: MoreOptionsView.itemSpacing) {
                 ForEach(Color.bubbleThrees.map{$0.description},id:\.self) { colorName in
@@ -105,7 +105,7 @@ struct MoreOptionsView: View {
                 }
             }
         }
-        .frame(height: colorsListHeight)
+        .frame(height: colorsGridHeight)
         .scrollIndicators(.hidden)
     }
     
