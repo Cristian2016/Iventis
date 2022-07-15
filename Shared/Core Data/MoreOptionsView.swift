@@ -110,6 +110,7 @@ struct MoreOptionsView: View {
             Text("\(Image(systemName: "clock.arrow.circlepath")) \(bubble.sdb!.referenceDelay)s")
                 .font(.system(size: 40).weight(.medium))
             Text("Start Delay")
+                .font(.system(size: 20))
         }
     }
     
@@ -118,6 +119,7 @@ struct MoreOptionsView: View {
             Text("\(Image(systemName: "clock.arrow.circlepath")) 0s")
                 .font(.system(size: 40).weight(.medium))
             Text("Start Delay")
+                .font(.system(size: 20))
         }
     }
     
