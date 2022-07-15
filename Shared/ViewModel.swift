@@ -441,7 +441,8 @@ class ViewModel: ObservableObject {
         else { self.sdb = nil  /* dismiss MoreOptionsView */ }
     }
     
-    func computeReferenceStartDelay(_ sdb:SDB, _ value: Int) {
+    ///reference startDelay
+    func computeReferenceDelay(_ sdb:SDB, _ value: Int) {
         UserFeedback.singleHaptic(.medium)
         sdb.referenceDelay += Int64(value)
         sdb.currentDelay = sdb.referenceDelay

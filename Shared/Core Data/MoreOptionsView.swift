@@ -15,6 +15,7 @@ struct MoreOptionsView: View {
     static let insets = EdgeInsets(top: 4, leading: 10, bottom: 4, trailing: 10)
     static let itemSpacing = CGFloat(4)
     let colorsGridHeight = CGFloat(320)
+    var display_StartDelayGrid:Bool { bubble.state != .running }
     
     // MARK: - Gestures
     var longPress:some Gesture {
@@ -38,12 +39,12 @@ struct MoreOptionsView: View {
                 }
             
             VStack {
-                if bubble.state != .running {
+                if display_StartDelayGrid {
                     StartDelaySubview(sdb: bubble.sdb!)
                     Divider()
                 }
                 colorsViewTitle
-                colorsGridView
+                colorsGrid
             }
             .frame(width: 280)
             .padding(8)
@@ -85,7 +86,7 @@ struct MoreOptionsView: View {
         .allowsHitTesting(false) //ignore touches [which are delivered to superview]
     }
     
-    private var colorsGridView:some View {
+    private var colorsGrid:some View {
         ScrollView {
             LazyVGrid(columns: [GridItem(spacing: MoreOptionsView.itemSpacing), GridItem(spacing: MoreOptionsView.itemSpacing), GridItem()], spacing: MoreOptionsView.itemSpacing) {
                 ForEach(Color.bubbleThrees.map{$0.description},id:\.self) { colorName in
@@ -105,7 +106,7 @@ struct MoreOptionsView: View {
                 }
             }
         }
-        .frame(height: colorsGridHeight)
+        .frame(height: display_StartDelayGrid ? colorsGridHeight : 420)
         .scrollIndicators(.hidden)
     }
     

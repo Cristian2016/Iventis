@@ -21,7 +21,7 @@ struct StartDelaySubview:View {
                         .aspectRatio(contentMode: .fit)
                         .overlay {
                             Button("\(delay)") {
-                                vm.computeReferenceStartDelay(sdb, delay)
+                                vm.computeReferenceDelay(sdb, delay)
                                 
                                 //pause sdb if it's running
                                 if sdb.state == .running { sdb.toggleStart() }
