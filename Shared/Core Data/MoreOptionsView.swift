@@ -76,6 +76,7 @@ struct MoreOptionsView: View {
                     .padding()
                     .background {
                         Circle()
+                            .fill(Color.white.opacity(0.001))
                             .onTapGesture { handleInfoLabelTap() }
                     }
             }
