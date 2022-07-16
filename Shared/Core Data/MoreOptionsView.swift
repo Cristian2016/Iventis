@@ -20,8 +20,7 @@ struct MoreOptionsView: View {
     // MARK: -
     var body: some View {
         ZStack {
-            screenBackground
-                .onTapGesture { handleTap() }
+            screenBackground.onTapGesture { handleTap() }
             
             VStack {
                 StartDelaySubview(sdb: bubble.sdb!)

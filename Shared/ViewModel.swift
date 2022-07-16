@@ -424,13 +424,13 @@ class ViewModel: ObservableObject {
     }
     
     func saveAndDismissMoreOptionsView(_ bubble:Bubble) {
-        let userChangedReferenceStartDelay = bubble.sdb!.referenceDelay != 0
+        let userChangedDelay = bubble.sdb!.referenceDelay != 0
         
-        if userChangedReferenceStartDelay {
+        if userChangedDelay {
             UserFeedback.singleHaptic(.medium)
             startDelayWasSet = true
 
-            let dispatchTime = (bubble.sdb!.referenceDelay != 0) ? DispatchTime.now() + 1 : .now()
+            let dispatchTime = (bubble.sdb!.referenceDelay != 0) ? DispatchTime.now() + 0.7 : .now()
 
             delayExecution(dispatchTime) {
                 self.sdb = nil //dismiss MoreOptionsView
