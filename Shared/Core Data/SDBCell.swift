@@ -20,6 +20,10 @@ struct SDBCell: View {
     @State var offset:CGSize = .zero //drag view around
     @State var isTapped = false
     
+    let deleteTriggerOffset = CGFloat(180)
+    var shouldDelete:Bool { abs(offset.width) >= deleteTriggerOffset }
+    @State var deleteTriggered = false
+    
     var body: some View {
         ZStack {
             Circle()
@@ -52,7 +56,9 @@ struct SDBCell: View {
     // MARK: - handle gestures
     private var dragGesture:some Gesture {
         DragGesture(minimumDistance: 4)
-            .onChanged { value in offset = value.translation }
+            .onChanged { value in
+                offset = value.translation
+            }
             .onEnded { _ in withAnimation { offset = .zero } }
     }
     private var longPressGesture:some Gesture {

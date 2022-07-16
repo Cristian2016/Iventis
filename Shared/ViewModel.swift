@@ -450,16 +450,7 @@ class ViewModel: ObservableObject {
     
     ///user long presses in MoreOptionsView
     func removeDelay(for bubble:Bubble) {
-        guard let sdb = bubble.sdb else { fatalError() }
-        
-        print("sdb.referenceDelay", sdb.referenceDelay)
-        
-        if sdb.referenceDelay != 0 {
-            sdb.referenceDelay = 0
-            sdb.currentDelay = 0
-            PersistenceController.shared.save()
-        }
-        
+        bubble.sdb?.removeDelay()
         UserFeedback.doubleHaptic(.medium)
     }
     

@@ -33,6 +33,22 @@ public class SDB: NSManagedObject {
         PersistenceController.shared.save()
     }
     
+    func removeDelay() {
+        //remove bTimer
+        //set both delays to zero
+        //save CoreData
+        
+        if backgroundTimer != nil {
+            backgroundTimer?.perform(.pause)
+            backgroundTimer = nil
+        }
+        
+        referenceDelay = 0
+        currentDelay = 0
+        
+        PersistenceController.shared.save()
+    }
+    
     func toggleStart() {
         switch state {
             case .brandNew, .paused:
