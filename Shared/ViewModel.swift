@@ -164,8 +164,8 @@ class ViewModel: ObservableObject {
     }
     
     func showMoreOptions(for bubble:Bubble) {
-        //setting the @Published property triggers UI update
-        //so MoreOptionsView will show
+        //set @Published property triggers UI update
+        //MoreOptionsView displayed
         sdb = bubble.sdb
     }
     
