@@ -67,16 +67,16 @@ struct SDBButton: View {
              "\(Image(systemName: "checkmark")) Done"
              : "\(Image(systemName: "trash")) Delay"
         )
-        .font(.system(size: 24).weight(.medium))
-        .foregroundColor(.white)
         .padding()
         .background {
             Circle()
                 .fill(deleteTriggered ? .green : .red)
                 .transaction { $0.animation = nil } //1
-//                .padding(-34)
+                .padding(-34)
         }
         .opacity(deleteLabelVisible ? 1 : 0)
+        .font(.system(size: 24).weight(.medium))
+        .foregroundColor(.white)
     }
     
     // MARK: - handle gestures
