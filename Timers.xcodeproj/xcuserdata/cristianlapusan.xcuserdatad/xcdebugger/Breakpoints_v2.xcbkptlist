@@ -74,7 +74,7 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "775BECFE-1B37-4FFA-95B3-90897A41AC55"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "Yes"
             filePath = "Shared/ViewModel.swift"
@@ -99,7 +99,7 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "624B48C6-830F-484A-B532-F9A04C371FE0"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "Yes"
             filePath = "Shared/ViewModel.swift"
@@ -124,7 +124,7 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "866BF0C5-2E52-41DC-A295-0BCBDBBAF21C"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "Yes"
             filePath = "Shared/ViewModel.swift"

@@ -29,9 +29,6 @@ struct SDBCell: View {
                 .fill(.ultraThinMaterial)
         }
         .padding(6)
-        //animated value and animation
-        .scaleEffect(isTapped ? 0.9 : 1.0)
-        .animation(.spring(response: 0.5).repeatForever(autoreverses:true), value: isTapped)
         //
         .overlay (
             HStack(spacing: 2) {
@@ -43,6 +40,9 @@ struct SDBCell: View {
                 .foregroundColor(.black)
         )
         .offset(offset)
+        //animated property and animation
+        .scaleEffect(isTapped ? 0.9 : 1.0)
+        .animation(.spring(response: 0.5).repeatForever(), value: isTapped)
         //gestures
         .gesture(dragGesture)
         .highPriorityGesture(longPressGesture)
