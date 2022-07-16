@@ -49,7 +49,7 @@ struct SDBButton: View {
                 .highPriorityGesture(longPressGesture)
                 .onTapGesture { handleTap() }
         }
-        .font(.system(size: 30).weight(.medium))
+        .font(.system(size: 24).weight(.medium))
     }
     
     // MARK: - Lego
@@ -74,7 +74,7 @@ struct SDBButton: View {
             Circle()
                 .fill(deleteTriggered ? .green : .red)
                 .transaction { $0.animation = nil } //1
-                .padding(-26)
+                .padding(-34)
         }
         .opacity(deleteLabelVisible ? 1 : 0)
     }

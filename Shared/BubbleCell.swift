@@ -92,6 +92,10 @@ extension BubbleCell {
                     .onTapGesture { userTappedSeconds() }
                     .highPriorityGesture(longPress)
             }
+            //font
+            .font(.system(size: BubbleCell.metrics.fontSize))
+            .foregroundColor(.white)
+            //overlays
             .overlay {
                 if !isBubbleRunning {
                     Push(.bottomRight) {
@@ -104,8 +108,6 @@ extension BubbleCell {
                 if bubble.isSDBCellVisible { SDBButton(bubble.sdb) }
             }
         }
-        .font(.system(size: BubbleCell.metrics.fontSize))
-        .foregroundColor(.white)
     }
     
     //⚠️ if minDuration is 0.3, it has a shorter minDuration than onDrag, so it will work! Otherwise it doesn't
