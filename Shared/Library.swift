@@ -89,6 +89,9 @@ extension Color {
     
     static let alertScreenBackground = Color("alertScreenBackground")
     
+    ///unlike Color.clear, Color.transparent allows gestures to be intercepted
+    static let transparent = Color.white.opacity(0.001)
+    
     
     static let colorNames = ["sourCherry":"Sour Cherry",
                              "mint" : "Mint",
