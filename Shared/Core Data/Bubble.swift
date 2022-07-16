@@ -30,7 +30,8 @@ public class Bubble: NSManagedObject {
     lazy var dispatchQueue = DispatchQueue(label: "startDelayBTimerDQ")
     var startDelayBTimer:BackgroundTimer?
     
-    static let startDelayValues = [5, 10, 20, 45]
+    ///4 start delay values
+    static let delays = [5, 10, 20, 45]
     
     // MARK: - Testing Only
     var signalReceived:Date?

@@ -16,7 +16,7 @@ struct StartDelaySubview:View {
                 
                 //buttons row 3
                 HStack (spacing: MoreOptionsView.itemSpacing) {
-                    ForEach(Bubble.startDelayValues, id: \.self) { delay in
+                    ForEach(Bubble.delays, id: \.self) { delay in
                         Rectangle()
                             .fill(Color.bubbleColor(forName: sdb.bubble!.color!))
                             .aspectRatio(contentMode: .fit)
@@ -26,7 +26,7 @@ struct StartDelaySubview:View {
                             }
                     }
                 }
-                .background(Color.white.opacity(0.001)) //prevent gestures from underlying view
+                .background(Color.white.opacity(0.001))
                 .font(.system(size: 26))
                 .foregroundColor(.white)
                 
