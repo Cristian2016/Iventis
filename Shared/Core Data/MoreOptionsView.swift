@@ -130,11 +130,12 @@ struct MoreOptionsView: View {
     
     func handleTap() {
         let userChangedStartDelay = bubble.sdb!.referenceDelay != 0
+        print("userChangedStartDelay \(userChangedStartDelay)")
         
         if userChangedStartDelay {
             vm.startDelayWasSet = true
             delayExecution(.now() + 1) { vm.startDelayWasSet = false }
-                                }
+        }
         vm.saveAndDismissMoreOptionsView(bubble)
     }
 }
