@@ -70,12 +70,16 @@ struct MoreOptionsView: View {
                 .standardShadow()
                 .onTapGesture { dismiss() }
             Push(.topRight) {
-                Image(systemName: "info.circle.fill")
+                Image(systemName: "info.circle")
                     .foregroundColor(.gray)
-                    .onTapGesture { handleInfoLabelTap() }
-                    .font(.system(size: 24))
+                    .font(.system(size: 26))
+                    .padding()
+                    .background {
+                        Circle()
+                            .onTapGesture { handleInfoLabelTap() }
+                    }
             }
-            .padding(6)
+            .padding(-6)
         }
     }
     
@@ -149,7 +153,7 @@ struct MoreOptionsView: View {
     }
     
     func handleInfoLabelTap() {
-        
+        print("tapped")
     }
 }
 
