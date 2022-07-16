@@ -28,8 +28,8 @@ struct SDBCell: View {
             Circle()
                 .fill(.ultraThinMaterial)
         }
+        //layout
         .padding(6)
-        //
         .overlay (
             HStack(spacing: 2) {
                 Text("-\(sdb.currentDelay)")
