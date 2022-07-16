@@ -20,7 +20,9 @@ struct MoreOptionsView: View {
     // MARK: - Gestures
     var longPress:some Gesture {
         LongPressGesture(minimumDuration: 0.3)
-            .onEnded { _ in vm }
+            .onEnded {
+                _ in vm.removeDelay(for: bubble)
+            }
     }
     
     // MARK: -

@@ -455,6 +455,8 @@ class ViewModel: ObservableObject {
     func removeDelay(for bubble:Bubble) {
         guard let sdb = bubble.sdb else { fatalError() }
         
+        print("sdb.referenceDelay", sdb.referenceDelay)
+        
         if sdb.referenceDelay != 0 {
             sdb.referenceDelay = 0
             sdb.currentDelay = 0
