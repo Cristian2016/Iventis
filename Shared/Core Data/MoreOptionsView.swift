@@ -17,14 +17,6 @@ struct MoreOptionsView: View {
     let colorsGridHeight = CGFloat(320)
     var display_StartDelayGrid:Bool { bubble.state != .running }
     
-    // MARK: - Gestures
-    var longPress:some Gesture {
-        LongPressGesture(minimumDuration: 0.3)
-            .onEnded {
-                _ in vm.removeDelay(for: bubble)
-            }
-    }
-    
     // MARK: -
     var body: some View {
         ZStack {
@@ -155,6 +147,17 @@ struct MoreOptionsView: View {
     
     func handleInfoLabelTap() {
         vm.showMoreOptionsInfo = true
+    }
+    
+    var longPress:some Gesture {
+        LongPressGesture(minimumDuration: 0.3)
+            .onEnded { _ in
+                vm.removeDelay(for: bubble)
+                vm.startDelayWasReset = true
+                delayExecution(.now() + 0.5) {
+                    vm.startDelayWasReset = false
+                }
+            }
     }
 }
 

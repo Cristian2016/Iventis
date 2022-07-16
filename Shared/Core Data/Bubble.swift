@@ -36,7 +36,7 @@ public class Bubble: NSManagedObject {
     
     // MARK: - Testing Only
     var signalReceived:Date?
-    var componentsUpdated:Date?
+var componentsUpdated:Date?
     
     // MARK: -
     var sessions_:[Session] {

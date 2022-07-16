@@ -480,8 +480,13 @@ class ViewModel: ObservableObject {
                 //start bubble automatically
                 //remove SDBCell from BubbleCell
                 self?.toggleStart(bubble)
+                
+                sdb?.referenceDelay = 0
+                sdb?.currentDelay = 0
                 self?.sdb = nil
                 bubble.isSDBCellVisible = false
+                
+                PersistenceController.shared.save()
             }
         }
     }
