@@ -426,7 +426,6 @@ class ViewModel: ObservableObject {
         
         if userChangedReferenceStartDelay {
             UserFeedback.singleHaptic(.medium)
-            PersistenceController.shared.save()
             startDelayWasSet = true
 
             let dispatchTime = (bubble.sdb!.referenceDelay != 0) ? DispatchTime.now() + 1 : .now()
@@ -436,9 +435,17 @@ class ViewModel: ObservableObject {
                 self.startDelayWasSet = false
             }
             
-            self.sdb?.currentDelay = self.sdb?.referenceDelay ?? 0
+            if let sdb = sdb {
+                sdb.currentDelay = sdb.referenceDelay
+                if sdb.referenceDelay > 0 {
+                    sdb.bubble?.isSDBCellVisible = true
+                }
+            }
         }
         else { self.sdb = nil  /* dismiss MoreOptionsView */ }
+        
+        //save CoreData
+        PersistenceController.shared.save()
     }
     
     ///reference startDelay
@@ -450,9 +457,11 @@ class ViewModel: ObservableObject {
     
     ///user long presses in MoreOptionsView
     func removeDelay(for bubble:Bubble?) {
+        print(#function)
         guard let bubble = bubble else { return }
         
         bubble.sdb?.removeDelay()
+        bubble.isSDBCellVisible = false
         UserFeedback.doubleHaptic(.medium)
     }
     

@@ -29,6 +29,7 @@ public class Bubble: NSManagedObject {
     
     lazy var dispatchQueue = DispatchQueue(label: "startDelayBTimerDQ")
     var startDelayBTimer:BackgroundTimer?
+    @Published var isSDBCellVisible = false {willSet{ objectWillChange.send() }}
     
     ///4 start delay values
     static let delays = [5, 10, 20, 45]
