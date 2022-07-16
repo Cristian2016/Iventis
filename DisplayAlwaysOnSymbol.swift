@@ -4,7 +4,6 @@
 //
 //  Created by Cristian Lapusan on 13.07.2022.
 //
-
 import SwiftUI
 
 struct DisplayAlwaysOnSymbol: View {
