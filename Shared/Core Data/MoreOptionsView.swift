@@ -154,7 +154,7 @@ struct MoreOptionsView: View {
     }
     
     func handleInfoLabelTap() {
-        print("tapped")
+        vm.showMoreOptionsInfo = true
     }
 }
 

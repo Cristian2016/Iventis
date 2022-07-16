@@ -81,6 +81,8 @@ struct TimersApp: App {
                         vm.showAlwaysOnDisplayAlert = false
                     }
                 }
+                
+                if vm.showMoreOptionsInfo { MoreOptionsInfo() }
             }
             .ignoresSafeArea()
             .environment(\.managedObjectContext, viewContext)

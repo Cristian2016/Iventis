@@ -29,6 +29,8 @@ class ViewModel: ObservableObject {
     @Published var rankOfSelectedBubble:Int?
     @Published var idOfSelectedBubble:Bubble.ID?
     
+    @Published var showMoreOptionsInfo = false
+    
     //MoreOptionsView 3 @Published
     
     // MARK: -
