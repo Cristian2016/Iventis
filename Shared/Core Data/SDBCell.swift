@@ -51,7 +51,7 @@ struct SDBCell: View {
     
     // MARK: - handle gestures
     private var dragGesture:some Gesture {
-        DragGesture()
+        DragGesture(minimumDistance: 4)
             .onChanged { value in offset = value.translation }
             .onEnded { _ in withAnimation { offset = .zero } }
     }

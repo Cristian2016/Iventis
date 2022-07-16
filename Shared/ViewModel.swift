@@ -464,7 +464,7 @@ class ViewModel: ObservableObject {
     }
     
     //long press SDBCell
-    func resetDelay(for sdb:SDB) { sdb.resetSDB() }
+    func resetDelay(for sdb:SDB) { sdb.resetDelay() }
     
     // MARK: - StartDelayBubble SDB
     private func observe_sdbDelayreachedZero_Notification() {

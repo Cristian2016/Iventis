@@ -23,9 +23,11 @@ public class SDB: NSManagedObject {
     var state = State.brandNew
     
     // MARK: - User Intents
-    func resetSDB() {
+    func resetDelay() {
+        //stop bTimer
         backgroundTimer?.perform(.pause)
         backgroundTimer = nil
+        
         currentDelay = referenceDelay
         state = .brandNew
         PersistenceController.shared.save()
