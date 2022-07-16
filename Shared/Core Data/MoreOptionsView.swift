@@ -64,10 +64,19 @@ struct MoreOptionsView: View {
     }
     
     private var whiteBackground:some View {
-        RoundedRectangle(cornerRadius: 10)
-            .fill(Color.white)
-            .standardShadow()
-            .onTapGesture { dismiss() }
+        ZStack {
+            RoundedRectangle(cornerRadius: 10)
+                .fill(Color.white)
+                .standardShadow()
+                .onTapGesture { dismiss() }
+            Push(.topRight) {
+                Image(systemName: "info.circle.fill")
+                    .foregroundColor(.gray)
+                    .onTapGesture { handleInfoLabelTap() }
+                    .font(.system(size: 24))
+            }
+            .padding(6)
+        }
     }
     
     private var colorsViewTitle:some View {
@@ -137,6 +146,10 @@ struct MoreOptionsView: View {
             delayExecution(.now() + 1) { vm.startDelayWasSet = false }
         }
         vm.saveAndDismissMoreOptionsView(bubble)
+    }
+    
+    func handleInfoLabelTap() {
+        
     }
 }
 
