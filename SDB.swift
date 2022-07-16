@@ -28,9 +28,12 @@ public class SDB: NSManagedObject {
         backgroundTimer?.perform(.pause)
         backgroundTimer = nil
         
-        currentDelay = referenceDelay
-        state = .brandNew
-        PersistenceController.shared.save()
+        delayExecution(.now() + 0.01) {
+            self.currentDelay = self.referenceDelay
+            self.state = .brandNew
+            PersistenceController.shared.save()
+        }
+        
     }
     
     func removeDelay() {
