@@ -57,17 +57,6 @@ struct NoteButton<Content:View>: View {
         ZStack (alignment: alignment) {
             //"Delete"/"Done" Text
             deleteText
-                .transaction { $0.animation = nil } //1
-                .foregroundColor(.white)
-                .font(.system(size: 24).weight(.medium))
-                .padding()
-                .background {
-                    RoundedRectangle(cornerRadius: 2)
-                        .fill(triggerPairDeleteAction ? .green : .red)
-                        .transaction { $0.animation = nil } //1
-                        .frame(height: 44)
-                }
-                .opacity(deleteLabelVisible ? 1 : 0)
             content
                 .offset(x: offsetX)
                 //gestures
@@ -82,6 +71,17 @@ struct NoteButton<Content:View>: View {
              "\(Image(systemName: "checkmark")) Done"
              : "\(Image(systemName: "trash")) Delete"
         )
+        .transaction { $0.animation = nil } //1
+        .foregroundColor(.white)
+        .font(.system(size: 24).weight(.medium))
+        .padding()
+        .background {
+            RoundedRectangle(cornerRadius: 2)
+                .fill(triggerPairDeleteAction ? .green : .red)
+                .transaction { $0.animation = nil } //1
+                .frame(height: 44)
+        }
+        .opacity(deleteLabelVisible ? 1 : 0)
     }
 }
 

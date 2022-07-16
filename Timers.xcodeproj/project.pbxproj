@@ -43,7 +43,7 @@
 		1F684821287DB6BA00D8BF81 /* SDBTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F684820287DB6BA00D8BF81 /* SDBTimer.swift */; };
 		1F684823287DBEBB00D8BF81 /* StartDelaySubview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F684822287DBEBB00D8BF81 /* StartDelaySubview.swift */; };
 		1F695085287D4DF600CC9FF4 /* ConfirmationLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F695084287D4DF600CC9FF4 /* ConfirmationLabel.swift */; };
-		1F695087287D737600CC9FF4 /* SDBCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F695086287D737600CC9FF4 /* SDBCell.swift */; };
+		1F695087287D737600CC9FF4 /* SDBButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F695086287D737600CC9FF4 /* SDBButton.swift */; };
 		1F74878B286EB64E0092674F /* BubbleCell_Info.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F74878A286EB64E0092674F /* BubbleCell_Info.swift */; };
 		1F74878D286ED1B10092674F /* StartInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F74878C286ED1B10092674F /* StartInfoView.swift */; };
 		1F82FB982831435A00E7C5AA /* HelpActionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F82FB972831435A00E7C5AA /* HelpActionButton.swift */; };
@@ -148,7 +148,7 @@
 		1F684820287DB6BA00D8BF81 /* SDBTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SDBTimer.swift; sourceTree = "<group>"; };
 		1F684822287DBEBB00D8BF81 /* StartDelaySubview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartDelaySubview.swift; sourceTree = "<group>"; };
 		1F695084287D4DF600CC9FF4 /* ConfirmationLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmationLabel.swift; sourceTree = "<group>"; };
-		1F695086287D737600CC9FF4 /* SDBCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SDBCell.swift; sourceTree = "<group>"; };
+		1F695086287D737600CC9FF4 /* SDBButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SDBButton.swift; sourceTree = "<group>"; };
 		1F74878A286EB64E0092674F /* BubbleCell_Info.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BubbleCell_Info.swift; sourceTree = "<group>"; };
 		1F74878C286ED1B10092674F /* StartInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartInfoView.swift; sourceTree = "<group>"; };
 		1F82FB972831435A00E7C5AA /* HelpActionButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpActionButton.swift; sourceTree = "<group>"; };
@@ -322,7 +322,7 @@
 				1FCF01B2287CBA74009DC95C /* DelayStartSymbol.swift */,
 				1F695084287D4DF600CC9FF4 /* ConfirmationLabel.swift */,
 				1F864D8F287C0356000219CE /* MoreOptionsView.swift */,
-				1F695086287D737600CC9FF4 /* SDBCell.swift */,
+				1F695086287D737600CC9FF4 /* SDBButton.swift */,
 				1F5F4A6D28093FF800AF3442 /* Model.xcdatamodeld */,
 				1F5F4A712809409600AF3442 /* Bubble.swift */,
 				1F5F4A722809409600AF3442 /* Bubble Properties.swift */,
@@ -501,7 +501,7 @@
 				1FA8F87E28367B7A00394B59 /* BubbleNote.swift in Sources */,
 				1F5A0F6C282641D00075E86B /* EmptyHistoryAlertView.swift in Sources */,
 				1F542F92286D757000403F13 /* NotesList.swift in Sources */,
-				1F695087287D737600CC9FF4 /* SDBCell.swift in Sources */,
+				1F695087287D737600CC9FF4 /* SDBButton.swift in Sources */,
 				1F74878D286ED1B10092674F /* StartInfoView.swift in Sources */,
 				1F98D78A286AF8A300C0A973 /* DeleteRow_InfoView.swift in Sources */,
 				1FE163AE280EE6F40050C6F5 /* LeftStrip.swift in Sources */,

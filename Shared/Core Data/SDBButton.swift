@@ -8,7 +8,7 @@
 import SwiftUI
 
 ///StartDelayBubbleCell
-struct SDBCell: View {
+struct SDBButton: View {
     init?(_ sdb:SDB?) {
         guard let sdb = sdb else { return nil }
         _sdb = StateObject(wrappedValue: sdb)
@@ -21,10 +21,45 @@ struct SDBCell: View {
     @State var isTapped = false
     
     let deleteTriggerOffset = CGFloat(180)
+    var deleteLabelVisible:Bool { abs(offset.width) > 120 }
     var shouldDelete:Bool { abs(offset.width) >= deleteTriggerOffset }
     @State var deleteTriggered = false
     
     var body: some View {
+        ZStack {
+            deleteText
+                .padding(-6)
+                .background {
+                    Circle()
+                        .fill(shouldDelete ? .green : .red)
+                        .transaction { $0.animation = nil } //1
+                }
+                .opacity(deleteLabelVisible ? 1 : 0)
+            content
+            //layout
+                .padding(6)
+                .overlay (
+                    HStack(spacing: 2) {
+                        Text("-\(sdb.currentDelay)")
+                            .font(.system(size: 60))
+                            .minimumScaleFactor(0.3)
+                            .padding()
+                    }
+                        .foregroundColor(.black)
+                )
+                .offset(offset)
+            //animated property and animation
+                .scaleEffect(isTapped ? 0.9 : 1.0)
+                .animation(.spring(response: 0.5).repeatForever(), value: isTapped)
+            //gestures
+                .gesture(dragGesture)
+                .highPriorityGesture(longPressGesture)
+                .onTapGesture { handleTap() }
+        }
+    }
+    
+    // MARK: - Lego
+    private var content:some View {
         ZStack {
             Circle()
                 .fill(Color.white)
@@ -32,25 +67,10 @@ struct SDBCell: View {
             Circle()
                 .fill(.ultraThinMaterial)
         }
-        //layout
-        .padding(6)
-        .overlay (
-            HStack(spacing: 2) {
-                Text("-\(sdb.currentDelay)")
-                    .font(.system(size: 60))
-                    .minimumScaleFactor(0.3)
-                    .padding()
-            }
-                .foregroundColor(.black)
-        )
-        .offset(offset)
-        //animated property and animation
-        .scaleEffect(isTapped ? 0.9 : 1.0)
-        .animation(.spring(response: 0.5).repeatForever(), value: isTapped)
-        //gestures
-        .gesture(dragGesture)
-        .highPriorityGesture(longPressGesture)
-        .onTapGesture { handleTap() }
+    }
+    
+    private var deleteText:some View {
+        Text("ok")
     }
     
     // MARK: - handle gestures

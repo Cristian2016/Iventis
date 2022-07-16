@@ -101,7 +101,7 @@ extension BubbleCell {
                 }
             }
             .overlay {
-                if bubble.isSDBCellVisible { SDBCell(bubble.sdb) }
+                if bubble.isSDBCellVisible { SDBButton(bubble.sdb) }
             }
         }
         .font(.system(size: BubbleCell.metrics.fontSize))
