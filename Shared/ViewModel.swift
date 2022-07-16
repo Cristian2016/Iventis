@@ -457,7 +457,6 @@ class ViewModel: ObservableObject {
     
     ///user long presses in MoreOptionsView
     func removeDelay(for bubble:Bubble?) {
-        print(#function)
         guard let bubble = bubble else { return }
         
         bubble.sdb?.removeDelay()
@@ -480,6 +479,7 @@ class ViewModel: ObservableObject {
                 //remove SDBCell from BubbleCell
                 self?.toggleStart(bubble)
                 self?.sdb = nil
+                bubble.isSDBCellVisible = false
             }
         }
     }
