@@ -22,7 +22,7 @@ struct StartDelaySubview:View {
                             .aspectRatio(contentMode: .fit)
                             .overlay {
                                 Button("\(delay)") { buttonTapped(delay) }
-                                .font(.system(size: 30).weight(.medium))
+                                    .font(.system(size: 30).weight(.medium))
                             }
                     }
                 }
