@@ -10,10 +10,7 @@ import Foundation
 class SDBTimer {
     lazy var dispatchQueue = DispatchQueue(label: "sdbTimer")
     
-    deinit {
-        killTimer()
-        print("bTimer deinit")
-    }
+    deinit { killTimer() }
     
     ///event handler called every second
     private let updateFrequency:Double = 1.0 /* every second */
