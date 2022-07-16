@@ -28,6 +28,8 @@ public class SDB: NSManagedObject {
         backgroundTimer?.perform(.pause)
         backgroundTimer = nil
         
+        //⚠️ why delay?
+        //if no delay set, reset goes wrong!
         delayExecution(.now() + 0.01) {
             self.currentDelay = self.referenceDelay
             self.state = .brandNew
