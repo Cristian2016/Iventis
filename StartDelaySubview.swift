@@ -21,12 +21,7 @@ struct StartDelaySubview:View {
                             .fill(Color.bubbleColor(forName: sdb.bubble!.color!))
                             .aspectRatio(contentMode: .fit)
                             .overlay {
-                                Button("\(delay)") {
-                                    vm.computeReferenceDelay(sdb, delay)
-                                    
-                                    //pause sdb if it's running
-                                    if sdb.state == .running { sdb.toggleStart() }
-                                }
+                                Button("\(delay)") { buttonTapped(delay) }
                                 .font(.system(size: 30).weight(.medium))
                             }
                     }
@@ -38,6 +33,14 @@ struct StartDelaySubview:View {
                 Divider()
             }
         }
+    }
+    
+    // MARK: - Handle Gestures
+    private func buttonTapped(_ delay:Int) {
+        vm.computeReferenceDelay(sdb, delay)
+        
+        //pause sdb if it's running
+        if sdb.state == .running { sdb.toggleStart() }
     }
     
     // MARK: - LEGO
