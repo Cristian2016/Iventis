@@ -57,7 +57,13 @@ struct SDBCell: View {
     private var dragGesture:some Gesture {
         DragGesture(minimumDistance: 4)
             .onChanged { value in
+                guard !deleteTriggered else { return }
+                
                 offset = value.translation
+                if shouldDelete {
+                    vm.removeDelay(for: sdb.bubble)
+                    deleteTriggered = true
+                }
             }
             .onEnded { _ in withAnimation { offset = .zero } }
     }
