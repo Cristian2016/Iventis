@@ -28,13 +28,6 @@ struct SDBButton: View {
     var body: some View {
         ZStack {
             deleteText
-                .padding(-6)
-                .background {
-                    Circle()
-                        .fill(shouldDelete ? .green : .red)
-                        .transaction { $0.animation = nil } //1
-                }
-                .opacity(deleteLabelVisible ? 1 : 0)
             content
             //layout
                 .padding(6)
@@ -56,6 +49,7 @@ struct SDBButton: View {
                 .highPriorityGesture(longPressGesture)
                 .onTapGesture { handleTap() }
         }
+        .font(.system(size: 30).weight(.medium))
     }
     
     // MARK: - Lego
@@ -70,7 +64,19 @@ struct SDBButton: View {
     }
     
     private var deleteText:some View {
-        Text("ok")
+        Text(shouldDelete ?
+             "\(Image(systemName: "checkmark")) Done"
+             : "\(Image(systemName: "trash")) Delay"
+        )
+        .foregroundColor(.white)
+        .padding()
+        .background {
+            Circle()
+                .fill(deleteTriggered ? .green : .red)
+                .transaction { $0.animation = nil } //1
+                .padding(-26)
+        }
+        .opacity(deleteLabelVisible ? 1 : 0)
     }
     
     // MARK: - handle gestures
