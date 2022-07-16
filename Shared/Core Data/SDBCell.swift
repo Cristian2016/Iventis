@@ -11,7 +11,6 @@ import SwiftUI
 struct SDBCell: View {
     init(_ sdb:SDB) {
         _sdb = StateObject(wrappedValue: sdb)
-        print("SDBCell init")
     }
     
     @EnvironmentObject var vm:ViewModel
