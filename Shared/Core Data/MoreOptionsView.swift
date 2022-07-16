@@ -153,8 +153,10 @@ struct MoreOptionsView: View {
         LongPressGesture(minimumDuration: 0.3)
             .onEnded { _ in
                 vm.removeDelay(for: bubble)
+                
+                //show 0s red alert and hide after 0.7 seconds
                 vm.startDelayWasReset = true
-                delayExecution(.now() + 0.5) {
+                delayExecution(.now() + 0.7) {
                     vm.startDelayWasReset = false
                 }
             }
