@@ -451,7 +451,8 @@ class ViewModel: ObservableObject {
         sdb.currentDelay = sdb.referenceDelay
     }
     
-    func setDelayBackToZero(for bubble:Bubble) {
+    ///user long presses in MoreOptionsView
+    func removeDelay(for bubble:Bubble) {
         guard let sdb = bubble.sdb else { fatalError() }
         
         if sdb.referenceDelay != 0 {
@@ -462,6 +463,9 @@ class ViewModel: ObservableObject {
         
         UserFeedback.doubleHaptic(.medium)
     }
+    
+    //long press SDBCell
+    func resetDelay(for sdb:SDB) { sdb.resetSDB() }
     
     // MARK: - StartDelayBubble SDB
     private func observe_sdbDelayreachedZero_Notification() {
@@ -478,7 +482,4 @@ class ViewModel: ObservableObject {
             }
         }
     }
-    
-    // MARK: - Test
-    func resetToInitialState(_ sdb:SDB) { sdb.resetSDBToInitialState() }
 }

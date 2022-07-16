@@ -55,12 +55,9 @@ struct StartDelaySubview:View {
         .textModifier(Color.bubbleColor(forName: sdb.bubble!.color!), 40)
     }
     
-    @ViewBuilder
     private var startDelaylabel:some View {
-        if sdb.referenceDelay == 0 {
-            Text("Start Delay")
-                .font(.system(size: 22).weight(.medium))
-                .foregroundColor(.gray)
-        }
+        Text("Start Delay")
+            .font(.system(size: 22).weight(.medium))
+            .foregroundColor(.gray)
     }
 }

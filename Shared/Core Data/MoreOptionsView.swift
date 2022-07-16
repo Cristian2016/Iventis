@@ -20,7 +20,7 @@ struct MoreOptionsView: View {
     // MARK: - Gestures
     var longPress:some Gesture {
         LongPressGesture(minimumDuration: 0.3)
-            .onEnded { _ in resetStartDelay() }
+            .onEnded { _ in vm }
     }
     
     // MARK: -
@@ -124,15 +124,6 @@ struct MoreOptionsView: View {
     }
     
     // MARK: - User Intents
-    //long press outside table
-    func resetStartDelay() {
-        vm.setDelayBackToZero(for: bubble)
-        vm.startDelayWasReset = true
-        bubble.sdb?.toggleStart()
-        
-        delayExecution(.now() + 1) { vm.startDelayWasReset = false }
-    }
-    
     func dismiss() { vm.sdb = nil }
     
     func handleTap() {

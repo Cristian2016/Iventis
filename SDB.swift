@@ -26,7 +26,9 @@ public class SDB: NSManagedObject {
     func resetSDB() {
         backgroundTimer?.perform(.pause)
         backgroundTimer = nil
+        currentDelay = referenceDelay
         state = .brandNew
+        PersistenceController.shared.save()
     }
     
     func toggleStart() {
@@ -71,20 +73,5 @@ public class SDB: NSManagedObject {
         
         DispatchQueue.main.async { self.objectWillChange.send() }
         currentDelay -= 1 //decrease by one
-    }
-    
-    // MARK: - Test
-    ///SDBCell long pressed
-    func resetSDBToInitialState() {
-        currentDelay = referenceDelay
-        state = .brandNew
-        
-        //stop bTimer
-        if backgroundTimer != nil {
-            backgroundTimer?.perform(.pause)
-            backgroundTimer = nil
-        }
-        
-        PersistenceController.shared.save()
     }
 }

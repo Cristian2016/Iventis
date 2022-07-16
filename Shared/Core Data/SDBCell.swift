@@ -57,7 +57,7 @@ struct SDBCell: View {
     private var longPressGesture:some Gesture {
         LongPressGesture(minimumDuration: 0.3)
             .onEnded { _ in
-                vm.resetToInitialState(sdb)
+                vm.resetDelay(for: sdb)
                 
                 //UI and haptic
                 UserFeedback.doubleHaptic(.heavy)
