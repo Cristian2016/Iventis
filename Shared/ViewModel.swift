@@ -167,9 +167,6 @@ class ViewModel: ObservableObject {
         //setting the @Published property triggers UI update
         //so MoreOptionsView will show
         sdb = bubble.sdb
-        
-        //erase any previosly set delay
-        sdb?.referenceDelay = 0
     }
     
     //SDBubble

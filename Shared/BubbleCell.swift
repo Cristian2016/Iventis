@@ -208,9 +208,6 @@ struct BubbleCell: View {
                 }
                 .offset(y: -16)
             } //stickyNote
-//            if !vm.isDetailViewShowing && bubble.state == .running {
-//                SmallBubbleView(bubble: bubble)
-//            }
         }
        
           //gestures
