@@ -54,7 +54,7 @@ public class SDB: NSManagedObject {
             case .brandNew, .paused:
                 if backgroundTimer == nil {
                     backgroundTimer = SDBTimer { [weak self] in
-                        self?.task()
+                        self?.bTimerTask()
                     }
                 }
                 state = .running
@@ -74,7 +74,7 @@ public class SDB: NSManagedObject {
     }
     
     //task to call each second by bTimer
-    func task() {
+    func bTimerTask() {
         guard currentDelay > 0 else { return }
         
         if currentDelay == 1 {
