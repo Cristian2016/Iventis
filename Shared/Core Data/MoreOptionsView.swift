@@ -38,11 +38,11 @@ struct MoreOptionsView: View {
             if vm.startDelayWasReset {
                 //reset delay confirmation
                 ConfirmationLabel(isDestructive: true)
-                { zeroStartDelayText } action: { vm.startDelayWasReset = false }
+                { zeroDelayConfirmation } action: { vm.startDelayWasReset = false }
             }
             if vm.startDelayWasSet && bubble.sdb!.referenceDelay != 0 {
                 ConfirmationLabel()
-                { startDelayText } action: { vm.startDelayWasSet = false }
+                { delaySetConfirmation } action: { vm.startDelayWasSet = false }
             }
         }
         .highPriorityGesture(longPress)
@@ -113,7 +113,7 @@ struct MoreOptionsView: View {
         .scrollIndicators(.hidden)
     }
     
-    private var startDelayText: some View {
+    private var delaySetConfirmation: some View {
         VStack {
             Text("\(Image(systemName: "clock.arrow.circlepath")) \(bubble.sdb!.referenceDelay)s")
                 .font(.system(size: 40).weight(.medium))
@@ -122,7 +122,7 @@ struct MoreOptionsView: View {
         }
     }
     
-    private var zeroStartDelayText: some View {
+    private var zeroDelayConfirmation: some View {
         VStack {
             Text("\(Image(systemName: "clock.arrow.circlepath")) 0s")
                 .font(.system(size: 40).weight(.medium))
