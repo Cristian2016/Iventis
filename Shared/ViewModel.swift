@@ -455,10 +455,9 @@ class ViewModel: ObservableObject {
     ///user long presses in MoreOptionsView
     func removeDelay(for bubble:Bubble?) {
         guard let bubble = bubble else { return }
+        if bubble.sdb!.referenceDelay == 0 { return }
         
         bubble.sdb?.removeDelay()
-        print("delay removed \(bubble.sdb!.referenceDelay)")
-        UserFeedback.doubleHaptic(.medium)
     }
     
     //long press SDBCell
