@@ -103,7 +103,7 @@ extension BubbleCell {
                 }
             }
             .overlay {
-                if bubble.isSDBCellVisible { SDBButton(bubble.sdb) }
+                if sdb.referenceDelay > 0 { SDBButton(bubble.sdb) }
             }
         }
         //font
@@ -124,6 +124,7 @@ struct BubbleCell: View {
     
     // MARK: - Dependencies
     @StateObject var bubble:Bubble
+    @StateObject var sdb:SDB  /* I made this one since apparently bubble.sdb.referenceDelay does not emit */
     @EnvironmentObject private var vm:ViewModel
     
     private let noteOffset = CGSize(width: 0, height: -6)
@@ -135,6 +136,7 @@ struct BubbleCell: View {
     // MARK: -
     init(_ bubble:Bubble) {
         _bubble = StateObject(wrappedValue: bubble)
+        _sdb = StateObject(wrappedValue: bubble.sdb!)
         if !bubble.isObservingBackgroundTimer { bubble.observeBackgroundTimer() }
     }
     

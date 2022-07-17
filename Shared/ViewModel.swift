@@ -440,7 +440,7 @@ class ViewModel: ObservableObject {
             if let sdb = sdb {
                 sdb.currentDelay = sdb.referenceDelay
                 if sdb.referenceDelay > 0 {
-                    sdb.bubble?.isSDBCellVisible = true
+//                    sdb.bubble?.isSDBCellVisible = true
                 }
             }
         }
@@ -462,7 +462,7 @@ class ViewModel: ObservableObject {
         guard let bubble = bubble else { return }
         
         bubble.sdb?.removeDelay()
-        bubble.isSDBCellVisible = false
+        print("delay removed \(bubble.sdb!.referenceDelay)")
         UserFeedback.doubleHaptic(.medium)
     }
     
@@ -484,7 +484,7 @@ class ViewModel: ObservableObject {
                 sdb?.referenceDelay = 0
                 sdb?.currentDelay = 0
                 self?.sdb = nil
-                bubble.isSDBCellVisible = false
+//                bubble.isSDBCellVisible = false
                 
                 PersistenceController.shared.save()
             }
