@@ -124,6 +124,9 @@ struct TimersApp: App {
     func handleEnterBackground() {
         print("moved to background")
         vm.backgroundTimer(.pause)
+        
+        //keep track when SDB is paused
+        
     }
     
     ///called on app launch or returning from background
