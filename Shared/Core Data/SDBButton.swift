@@ -105,7 +105,7 @@ struct SDBButton: View {
             }
     }
     func handleTap() {
-        vm.toggleStart(sdb)
+        vm.toggleSDBStart(sdb)
         isTapped.toggle()
     }
 }

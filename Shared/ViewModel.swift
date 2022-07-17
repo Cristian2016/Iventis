@@ -111,11 +111,10 @@ class ViewModel: ObservableObject {
         PersistenceController.shared.save()
     }
     
-    func toggleStart(_ bubble:Bubble) {
+    func toggleBubbleStart(_ bubble:Bubble) {
         if bubble.currentClock <= 0 && bubble.kind != .stopwatch  { return }
         
-        bubble.sdb?.currentDelay = 0
-        bubble.sdb?.referenceDelay = 0
+       removeDelay(for: bubble)
         
         switch bubble.state {
             case .brandNew: /* changes to .running */
@@ -173,7 +172,7 @@ class ViewModel: ObservableObject {
     }
     
     //SDBubble
-    func toggleStart(_ sdb:SDB) {
+    func toggleSDBStart(_ sdb:SDB) {
         UserFeedback.singleHaptic(.heavy)
         sdb.toggleStart()
     }
@@ -217,8 +216,7 @@ class ViewModel: ObservableObject {
     // FIXME: ⚠️ not complete!
     func endSession(_ bubble:Bubble) {
         //make sure no startDelayBubble displayed at this point
-        bubble.sdb?.currentDelay = 0
-        bubble.sdb?.referenceDelay = 0
+        removeDelay(for: bubble)
         
         if bubble.state == .brandNew { return }
         
@@ -476,7 +474,7 @@ class ViewModel: ObservableObject {
             DispatchQueue.main.async {
                 //start bubble automatically
                 //remove SDBCell from BubbleCell
-                self?.toggleStart(bubble)
+                self?.toggleBubbleStart(bubble)
                 
                 sdb?.referenceDelay = 0
                 sdb?.currentDelay = 0
@@ -485,5 +483,11 @@ class ViewModel: ObservableObject {
                 PersistenceController.shared.save()
             }
         }
+    }
+    
+    // MARK: -
+    func removeDelay(for bubble:Bubble) {
+        bubble.sdb?.currentDelay = 0
+        bubble.sdb?.referenceDelay = 0
     }
 }

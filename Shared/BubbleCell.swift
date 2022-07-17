@@ -158,7 +158,7 @@ struct BubbleCell: View {
     
     private func userTappedHundredths() {
         UserFeedback.singleHaptic(.heavy)
-        vm.toggleStart(bubble)
+        vm.toggleBubbleStart(bubble)
     }
     
     private func userTappedSeconds() {
@@ -169,7 +169,7 @@ struct BubbleCell: View {
         UserFeedback.singleHaptic(.heavy)
         
         //user intent model
-        vm.toggleStart(bubble)
+        vm.toggleBubbleStart(bubble)
 }
     
     private func userLongPressedSeconds() {
