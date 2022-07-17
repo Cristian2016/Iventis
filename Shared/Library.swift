@@ -78,6 +78,12 @@ extension Array {
     }
 }
 
+extension Text {
+    func square(_ value:Int) -> some View {
+        Text("\(Image(systemName: "\(value).square.fill"))")
+    }
+}
+
 extension Color {
     static let selectionGray = Color("selectionGray")
     static let label = Color("label")
