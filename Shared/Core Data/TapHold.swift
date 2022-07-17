@@ -19,7 +19,6 @@ struct TapHold: View {
                 Image(systemName: "clock.fill")
                     .font(.system(size: fontSize))
                     .foregroundColor(.white)
-                Spacer()
             }
         }
         .fixedSize(horizontal: false, vertical: true)

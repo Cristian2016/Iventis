@@ -61,7 +61,7 @@ struct MoreOptionsView: View {
                 .standardShadow()
                 .onTapGesture { dismiss() }
             Push(.topRight) {
-                Image(systemName: "info.circle")
+                Image(systemName: "info.circle.fill")
                     .foregroundColor(.gray)
                     .font(.system(size: 26))
                     .padding()
