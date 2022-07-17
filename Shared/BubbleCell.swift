@@ -124,7 +124,8 @@ struct BubbleCell: View {
     
     // MARK: - Dependencies
     @StateObject var bubble:Bubble
-    @StateObject var sdb:SDB  /* I made this one since apparently bubble.sdb.referenceDelay does not emit */
+    @StateObject var sdb:SDB  /* I made
+                               this one since apparently bubble.sdb.referenceDelay does not emit */
     @EnvironmentObject private var vm:ViewModel
     
     private let noteOffset = CGSize(width: 0, height: -6)
