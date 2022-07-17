@@ -478,7 +478,6 @@ class ViewModel: ObservableObject {
                 sdb?.referenceDelay = 0
                 sdb?.currentDelay = 0
                 self?.sdb = nil
-//                bubble.isSDBCellVisible = false
                 
                 PersistenceController.shared.save()
             }
