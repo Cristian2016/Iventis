@@ -494,21 +494,22 @@ class ViewModel: ObservableObject {
 
 // MARK: - Handle SDBubble start and pause and shit
 extension ViewModel {
-    func allBubbles(runningBubblesOnly:Bool = false) -> [Bubble] {
+    func allBubbles(runningOnly:Bool = false) -> [Bubble] {
         let context = PersistenceController.shared.viewContext
         let request = Bubble.fetchRequest()
                     
         if let bubbles = try? context.fetch(request) {
-            return runningBubblesOnly ? bubbles.filter { $0.state == .running } : bubbles
+            return runningOnly ? bubbles.filter { $0.state == .running } : bubbles
         } else {
             return []
         }
     }
     
-    func allStartDelayBubbles(runningSDBsOnly:Bool = false) -> [SDB] {
+    ///all start delay bubbles
+    func allSDBs(visibleOnly:Bool = false) -> [SDB] {
         let context = PersistenceController.shared.viewContext
         let request = SDB.fetchRequest()
-        if runningSDBsOnly {
+        if visibleOnly {
             let predicate = NSPredicate(format: "referenceDelay > 0")
             request.predicate = predicate
         }

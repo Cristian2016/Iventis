@@ -134,14 +134,17 @@ struct TimersApp: App {
         vm.backgroundTimer(.pause)
         
         //pause all running sdb
-        let result = vm.allStartDelayBubbles(runningSDBsOnly:true)
-        let delays = result.map { $0.referenceDelay }
-        print("delays \(delays)")
+        let runningSDBs = vm.allSDBs(visibleOnly:true)
+        runningSDBs.forEach { sdb in
+            sdb.backgroundTimer?.perform(.pause)
+            sdb.backgroundTimer = nil
+            sdb.state = .paused
+        }
     }
     
     func handleInactivePhase() {
         print("scenePhase.inactive")
-        print(vm.allBubbles(runningBubblesOnly: false).count)
+        print(vm.allBubbles(runningOnly: false).count)
     }
 }
 
