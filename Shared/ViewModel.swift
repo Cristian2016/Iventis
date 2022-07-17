@@ -491,3 +491,17 @@ class ViewModel: ObservableObject {
         bubble.sdb?.referenceDelay = 0
     }
 }
+
+// MARK: - Handle DSBubble start and pause and shit
+extension ViewModel {
+    func allBubbles(runningBubblesOnly:Bool = false) -> [Bubble] {
+        let context = PersistenceController.shared.viewContext
+        let request = Bubble.fetchRequest()
+                    
+        if let bubbles = try? context.fetch(request) {
+            return runningBubblesOnly ? bubbles.filter { $0.state == .running } : bubbles
+        } else {
+            return []
+        }
+    }
+}

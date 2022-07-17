@@ -134,11 +134,11 @@ struct TimersApp: App {
         vm.backgroundTimer(.pause)
         
         //keep track when SDB is paused
-        
     }
     
     func handleInactivePhase() {
         print("scenePhase.inactive")
+        print(vm.allBubbles(runningBubblesOnly:false).count)
     }
 }
 
