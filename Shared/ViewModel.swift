@@ -477,7 +477,7 @@ class ViewModel: ObservableObject {
                 
                 sdb?.referenceDelay = 0
                 sdb?.currentDelay = 0
-                self?.sdb = nil
+                self?.sdb = nil //dismiss MoreOptionsView
                 
                 PersistenceController.shared.save()
             }
