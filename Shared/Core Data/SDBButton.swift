@@ -65,7 +65,7 @@ struct SDBButton: View {
     private var deleteText:some View {
         Text(shouldDelete ?
              "\(Image(systemName: "checkmark")) Done"
-             : "\(Image(systemName: "trash")) Delay"
+             : "\(Image(systemName: "trash")) Delete"
         )
         .padding()
         .background {
