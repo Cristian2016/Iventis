@@ -91,7 +91,7 @@ struct TimersApp: App {
                 switch $0 {
                     case .active: handleBecomeActive()
                     case .background: handleEnterBackground()
-                    case .inactive: print("scenePhase.inactive"); break
+                    case .inactive: handleInactivePhase()
                     @unknown default: fatalError()
                 }
             }
@@ -119,22 +119,26 @@ struct TimersApp: App {
     }
     
     // MARK: - Methods
+    ///called on app launch or returning from background
+    ///also called when app returns from inactive state
+    func handleBecomeActive() {
+        /* app launch, back to foreground */
+        print("scenePhase.active")
+        vm.backgroundTimer(.start)
+    }
+    
     ///called when app killed or moved to background
     ///NOT called on NotificationCenter, incoming call etc
     func handleEnterBackground() {
-        print("moved to background")
+        print("scenePhase.background")
         vm.backgroundTimer(.pause)
         
         //keep track when SDB is paused
         
     }
     
-    ///called on app launch or returning from background
-    ///also called when app returns from inactive state
-    func handleBecomeActive() {
-        /* app launch, back to foreground */
-        print(#function)
-        vm.backgroundTimer(.start)
+    func handleInactivePhase() {
+        print("scenePhase.inactive")
     }
 }
 

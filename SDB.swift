@@ -55,6 +55,7 @@ public class SDB: NSManagedObject {
     }
     
     func toggleStart() {
+        print(#function)
         switch state {
             case .brandNew, .paused:
                 if backgroundTimer == nil {
@@ -64,7 +65,7 @@ public class SDB: NSManagedObject {
                 }
                 state = .running
                 
-                //without delay sdb.delay will be descreased instantly
+                //without delay sdb.delay will be increased instantly
                 delayExecution(.now() + 1) {
                     self.backgroundTimer?.perform(.start)
                 }
@@ -76,6 +77,29 @@ public class SDB: NSManagedObject {
         }
         
         PersistenceController.shared.save()
+    }
+    
+    
+    ///easy to handle entering background or becoming active
+    func start(_ isStart:Bool) {
+        switch isStart {
+            case true: //start
+                if backgroundTimer == nil {
+                    backgroundTimer = SDBTimer { [weak self] in
+                        self?.bTimerTask()
+                    }
+                }
+                state = .running
+                
+                //without delay sdb.delay will be increased instantly
+                delayExecution(.now() + 1) {
+                    self.backgroundTimer?.perform(.start)
+                }
+            case false: //pause
+                backgroundTimer?.perform(.pause)
+                backgroundTimer = nil
+                state = .paused
+        }
     }
     
     //task to call each second by bTimer
