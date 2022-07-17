@@ -89,14 +89,9 @@ struct TimersApp: App {
             .environmentObject(vm)
             .onChange(of: scenePhase) {
                 switch $0 {
-                    case .active:
-                        /* app launch, back to foreground */
-                        vm.backgroundTimer(.start)
-                    case .background:
-                        vm.backgroundTimer(.pause)
-                    case .inactive:
-                        //show notication center, app switcherbreak
-                        break
+                    case .active: handleBecomeActive()
+                    case .background: handleEnterBackground()
+                    case .inactive: print("scenePhase.inactive"); break
                     @unknown default: fatalError()
                 }
             }
@@ -121,6 +116,22 @@ struct TimersApp: App {
             NotificationCenter.default.post(name: .appLaunched, object: nil)
         }
         TimersApp.calManager = CalendarManager.shared
+    }
+    
+    // MARK: - Methods
+    ///called when app killed or moved to background
+    ///NOT called on NotificationCenter, incoming call etc
+    func handleEnterBackground() {
+        print("moved to background")
+        vm.backgroundTimer(.pause)
+    }
+    
+    ///called on app launch or returning from background
+    ///also called when app returns from inactive state
+    func handleBecomeActive() {
+        /* app launch, back to foreground */
+        print(#function)
+        vm.backgroundTimer(.start)
     }
 }
 
