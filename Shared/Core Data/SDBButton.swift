@@ -87,6 +87,7 @@ struct SDBButton: View {
                 
                 offset = value.translation
                 if shouldDelete {
+                    UserFeedback.doubleHaptic(.heavy)
                     vm.removeDelay(for: sdb.bubble)
                     deleteTriggered = true
                 }
