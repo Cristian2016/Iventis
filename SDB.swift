@@ -1,5 +1,5 @@
 //
-//  DSB+CoreDataClass.swift
+//  SDB+CoreDataClass.swift
 //  Timers (iOS)
 //
 //  Created by Cristian Lapusan on 12.07.2022.

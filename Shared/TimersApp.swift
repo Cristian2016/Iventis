@@ -86,7 +86,7 @@ struct TimersApp: App {
             }
             .ignoresSafeArea()
             .environment(\.managedObjectContext, viewContext)
-            .environmentObject(vm)  /* inject here the ViewModel so that any child view can access it */
+            .environmentObject(vm)  /* inject ViewModel for entire view hierarchy */
             .onChange(of: scenePhase) {
                 switch $0 {
                     case .active: handleBecomeActive()
@@ -133,7 +133,10 @@ struct TimersApp: App {
         print("scenePhase.background")
         vm.backgroundTimer(.pause)
         
-        //keep track when SDB is paused
+        //pause all running sdb
+        let result = vm.allStartDelayBubbles(runningSDBsOnly:true)
+        let delays = result.map { $0.referenceDelay }
+        print("delays \(delays)")
     }
     
     func handleInactivePhase() {

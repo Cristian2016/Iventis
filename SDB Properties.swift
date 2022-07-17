@@ -1,5 +1,5 @@
 //
-//  DSB+CoreDataProperties.swift
+//  SDB+CoreDataProperties.swift
 //  Timers (iOS)
 //
 //  Created by Cristian Lapusan on 12.07.2022.
@@ -13,7 +13,7 @@ import CoreData
 extension SDB {
 
     @nonobjc public class func fetchRequest() -> NSFetchRequest<SDB> {
-        return NSFetchRequest<SDB>(entityName: "DSB")
+        return NSFetchRequest<SDB>(entityName: "SDB")
     }
 
     //⚠️ if referenceDelay > 0, SDBCell must be visible

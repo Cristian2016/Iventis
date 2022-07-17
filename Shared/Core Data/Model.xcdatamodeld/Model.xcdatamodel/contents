@@ -50,12 +50,12 @@
         <attribute name="currentDelay" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="referenceDelay" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <relationship name="bubble" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Bubble" inverseName="sdb" inverseEntity="Bubble"/>
-        <relationship name="pairs" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="SDBPair" inverseName="dsb" inverseEntity="SDBPair"/>
+        <relationship name="pairs" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="SDBPair" inverseName="sdb" inverseEntity="SDBPair"/>
     </entity>
     <entity name="SDBPair" representedClassName=".SDBPair" syncable="YES">
         <attribute name="pause" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="start" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
-        <relationship name="dsb" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="SDB" inverseName="pairs" inverseEntity="SDB"/>
+        <relationship name="sdb" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="SDB" inverseName="pairs" inverseEntity="SDB"/>
     </entity>
     <entity name="Session" representedClassName=".Session" syncable="YES">
         <attribute name="created" optional="YES" attributeType="Date" usesScalarValueType="NO"/>

@@ -13,12 +13,12 @@ import CoreData
 extension SDBPair {
 
     @nonobjc public class func fetchRequest() -> NSFetchRequest<SDBPair> {
-        return NSFetchRequest<SDBPair>(entityName: "DSBPair")
+        return NSFetchRequest<SDBPair>(entityName: "SDBPair")
     }
 
     @NSManaged public var start: Date?
     @NSManaged public var pause: Date?
-    @NSManaged public var dsb: SDB?
+    @NSManaged public var sdb: SDB?
 
 }
 
