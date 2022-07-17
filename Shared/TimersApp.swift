@@ -86,7 +86,7 @@ struct TimersApp: App {
             }
             .ignoresSafeArea()
             .environment(\.managedObjectContext, viewContext)
-            .environmentObject(vm)
+            .environmentObject(vm)  /* inject here the ViewModel so that any child view can access it */
             .onChange(of: scenePhase) {
                 switch $0 {
                     case .active: handleBecomeActive()
