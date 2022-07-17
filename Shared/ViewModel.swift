@@ -429,9 +429,9 @@ class ViewModel: ObservableObject {
         if userEditedDelay {
             UserFeedback.singleHaptic(.medium)
             startDelayWasSet = true
-
+            
             let dispatchTime = (bubble.sdb!.referenceDelay != 0) ? DispatchTime.now() + 0.7 : .now()
-
+            
             delayExecution(dispatchTime) {
                 self.sdb = nil //dismiss MoreOptionsView
                 self.startDelayWasSet = false
