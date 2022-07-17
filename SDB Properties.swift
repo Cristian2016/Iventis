@@ -16,7 +16,9 @@ extension SDB {
         return NSFetchRequest<SDB>(entityName: "DSB")
     }
 
+    //⚠️ if referenceDelay > 0, SDBCell must be visible
     @NSManaged public var referenceDelay: Int64
+    
     @NSManaged public var currentDelay: Int64
     
     @NSManaged public var pairs: NSSet?
