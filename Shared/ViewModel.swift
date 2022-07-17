@@ -115,6 +115,7 @@ class ViewModel: ObservableObject {
         if bubble.currentClock <= 0 && bubble.kind != .stopwatch  { return }
         
         bubble.sdb?.currentDelay = 0
+        bubble.sdb?.referenceDelay = 0
         
         switch bubble.state {
             case .brandNew: /* changes to .running */
@@ -217,6 +218,8 @@ class ViewModel: ObservableObject {
     func endSession(_ bubble:Bubble) {
         //make sure no startDelayBubble displayed at this point
         bubble.sdb?.currentDelay = 0
+        bubble.sdb?.referenceDelay = 0
+        
         if bubble.state == .brandNew { return }
         
         bubble.continueToUpdateSmallBubbleCell = false
