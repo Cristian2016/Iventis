@@ -138,7 +138,7 @@ struct TimersApp: App {
     
     func handleInactivePhase() {
         print("scenePhase.inactive")
-        print(vm.allBubbles(runningBubblesOnly:false).count)
+        print(vm.allBubbles(runningBubblesOnly: false).count)
     }
 }
 
