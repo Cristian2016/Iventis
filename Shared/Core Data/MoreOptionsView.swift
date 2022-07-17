@@ -10,6 +10,13 @@ import SwiftUI
 struct MoreOptionsView: View {
     @ObservedObject var bubble: Bubble
     @EnvironmentObject var vm:ViewModel
+    let initialDelay:Int
+    
+    // MARK: -
+    init(for bubble:Bubble) {
+        _bubble = ObservedObject(wrappedValue: bubble)
+        self.initialDelay = Int(bubble.sdb!.referenceDelay)
+    }
         
     // MARK: -
     static let insets = EdgeInsets(top: 4, leading: 10, bottom: 4, trailing: 10)
@@ -134,14 +141,13 @@ struct MoreOptionsView: View {
     func dismiss() { vm.sdb = nil }
     
     func handleTap() {
-        let userChangedStartDelay = bubble.sdb!.referenceDelay != 0
-        print("userChangedStartDelay \(userChangedStartDelay)")
-        
-        if userChangedStartDelay {
+        let userEditedDelay = bubble.sdb!.referenceDelay != initialDelay
+        if userEditedDelay {
             vm.startDelayWasSet = true
             delayExecution(.now() + 1) { vm.startDelayWasSet = false }
         }
-        vm.saveAndDismissMoreOptionsView(bubble)
+        
+        vm.saveAndDismissMoreOptionsView(bubble, initialDelay)
     }
     
     func handleInfoLabelTap() {
@@ -189,6 +195,6 @@ struct MoreOptionsView_Previews: PreviewProvider {
             bubble.color = "green"
             return bubble
         }()
-        MoreOptionsView(bubble: bubble)
+        MoreOptionsView(for: bubble)
     }
 }

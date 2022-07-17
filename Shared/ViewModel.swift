@@ -423,10 +423,10 @@ class ViewModel: ObservableObject {
         PersistenceController.shared.save()
     }
     
-    func saveAndDismissMoreOptionsView(_ bubble:Bubble) {
-        let userChangedDelay = bubble.sdb!.referenceDelay != 0
+    func saveAndDismissMoreOptionsView(_ bubble:Bubble, _ initialDelay:Int) {
+        let userEditedDelay = bubble.sdb!.referenceDelay != initialDelay
         
-        if userChangedDelay {
+        if userEditedDelay {
             UserFeedback.singleHaptic(.medium)
             startDelayWasSet = true
 
@@ -437,12 +437,7 @@ class ViewModel: ObservableObject {
                 self.startDelayWasSet = false
             }
             
-            if let sdb = sdb {
-                sdb.currentDelay = sdb.referenceDelay
-                if sdb.referenceDelay > 0 {
-//                    sdb.bubble?.isSDBCellVisible = true
-                }
-            }
+            if let sdb = sdb { sdb.currentDelay = sdb.referenceDelay }
         }
         else { self.sdb = nil  /* dismiss MoreOptionsView */ }
         

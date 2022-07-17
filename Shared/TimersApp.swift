@@ -66,7 +66,7 @@ struct TimersApp: App {
                 if let pair = vm.pairOfNotesList { PairNotesList(pair) }
                 
                 if let sdb = vm.sdb, let bubble = sdb.bubble {
-                    MoreOptionsView(bubble: bubble)
+                    MoreOptionsView(for: bubble)
                 }
                 
                 if vm.showAlwaysOnDisplayAlert {
