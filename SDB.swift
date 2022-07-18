@@ -94,22 +94,29 @@ public class SDB: NSManagedObject {
         NotificationCenter.default
             .addObserver(forName: .sdbTimerSignal, object: nil, queue: nil) {
                 [weak self] _ in
-                //                self?.updateBubbleCellComponents()
-                //                self?.updateSmallBubbleCell()
+               print("sdbTimerSignal received")
             }
     }
+    
+    private var isObservingSDBTimer = false
     
     var referenceDelay_:Int {
         get { Int(referenceDelay) }
         set {
             referenceDelay = Int64(newValue)
             if newValue > 0 {
-                observeSDBTimer()
-                print("add observer")
+                if !isObservingSDBTimer {
+                    observeSDBTimer()
+                    isObservingSDBTimer = true
+                    print("add observer \(referenceDelay_)")
+                }
             }
             else {
-                NotificationCenter.default.removeObserver(self)
-                print("remove observer")
+                if isObservingSDBTimer {
+                    NotificationCenter.default.removeObserver(self)
+                    isObservingSDBTimer = false
+                    print("remove observer \(referenceDelay_)")
+                }
             }
         }
     }
