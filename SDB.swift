@@ -104,7 +104,10 @@ public class SDB: NSManagedObject {
         get { Int(referenceDelay) }
         set {
             referenceDelay = Int64(newValue)
-            if newValue > 0 {
+            
+            let shouldObserveTimer = newValue > 0
+            
+            if shouldObserveTimer {
                 if !isObservingSDBTimer {
                     observeSDBTimer()
                     isObservingSDBTimer = true
@@ -119,5 +122,5 @@ public class SDB: NSManagedObject {
                 }
             }
         }
-    }
+    }    
 }
