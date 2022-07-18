@@ -1,5 +1,5 @@
 //
-//  BackgroundTimer.swift
+//  BubbleTimer.swift
 //  BubblesSwiftUI
 //
 //  Created by Cristian Lapusan on 14.04.2022.
@@ -8,16 +8,13 @@
 import Foundation
 import SwiftUI
 
-class BackgroundTimer {
+class BubbleTimer {
     deinit { killTimer() }
     
     ///event handler called every second
     private let updateFrequency:Double = 1 /* every second */
         
-    let queue:DispatchQueue
-    init(_ queue:DispatchQueue) {
-        self.queue = queue
-    }
+    let queue = DispatchQueue(label: "BubbleTimer", attributes: .concurrent)
     
     private lazy var timer: DispatchSourceTimer = {
         let t = DispatchSource.makeTimerSource(queue: queue)
@@ -27,7 +24,7 @@ class BackgroundTimer {
     }()
     
     private var eventHandler: (() -> Void)? = {
-        NotificationCenter.default.post(name: .timerSignal, object: nil)
+        NotificationCenter.default.post(name: .bubbleTimerSignal, object: nil)
     }
     
     enum State {

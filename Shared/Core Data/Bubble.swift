@@ -10,32 +10,17 @@ import Foundation
 import CoreData
 import SwiftUI
 
-extension Bubble {
-    func toggleStartDelay() {
-        if startDelayBTimer == nil {
-            let bTimer:BackgroundTimer = {
-                let timer = BackgroundTimer(dispatchQueue)
-                
-                return timer
-            }()
-            self.startDelayBTimer = bTimer
-        } else {
-            self.startDelayBTimer = nil
-        }
-    }
-}
-
 public class Bubble: NSManagedObject {
     
     lazy var dispatchQueue = DispatchQueue(label: "startDelayBTimerDQ")
-    var startDelayBTimer:BackgroundTimer?
+    var startDelayBTimer:BubbleTimer?
     
     ///4 start delay values
     static let delays = [5, 10, 20, 45]
     
     // MARK: - Testing Only
     var signalReceived:Date?
-var componentsUpdated:Date?
+    var componentsUpdated:Date?
     
     // MARK: -
     var sessions_:[Session] {
@@ -62,7 +47,7 @@ var componentsUpdated:Date?
     = Float.TimeComponentsAsStrings(hr: "0", min: "0", sec: "0", cents: "00")
     { willSet { DispatchQueue.main.async { self.objectWillChange.send() } }}
         
-    private(set) var isObservingBackgroundTimer = false
+    private(set) var isObservingBubbleTimer = false
     
     deinit { NotificationCenter.default.removeObserver(self) }
     
@@ -122,12 +107,12 @@ extension Bubble {
         case stop
     }
     
-    ///observe backgroundtimer signal to update time components only if bubble is running
-    func observeBackgroundTimer() {
-        isObservingBackgroundTimer = true
+    ///observe bubbleTimer signal to update time components only if bubble is running
+    func observeBubbleTimer() {
+        isObservingBubbleTimer = true
         
         NotificationCenter.default
-            .addObserver(forName: .timerSignal, object: nil, queue: nil) {
+            .addObserver(forName: .bubbleTimerSignal, object: nil, queue: nil) {
                 [weak self] _ in
                 
                 self?.updateBubbleCellComponents()

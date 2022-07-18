@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1F100CA72809493400A3A3C2 /* BackgroundTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F100CA62809493400A3A3C2 /* BackgroundTimer.swift */; };
+		1F100CA72809493400A3A3C2 /* BubbleTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F100CA62809493400A3A3C2 /* BubbleTimer.swift */; };
 		1F18B457281FA6130080ADA6 /* PushView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F18B456281FA6130080ADA6 /* PushView.swift */; };
 		1F18B45C281FA9C90080ADA6 /* CalendarSticker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F18B45B281FA9C90080ADA6 /* CalendarSticker.swift */; };
 		1F18B460281FAABF0080ADA6 /* TopCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F18B45F281FAABF0080ADA6 /* TopCell.swift */; };
@@ -44,7 +44,7 @@
 		1F684821287DB6BA00D8BF81 /* SDBTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F684820287DB6BA00D8BF81 /* SDBTimer.swift */; };
 		1F684823287DBEBB00D8BF81 /* StartDelaySubview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F684822287DBEBB00D8BF81 /* StartDelaySubview.swift */; };
 		1F695085287D4DF600CC9FF4 /* ConfirmationLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F695084287D4DF600CC9FF4 /* ConfirmationLabel.swift */; };
-		1F695087287D737600CC9FF4 /* SDBButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F695086287D737600CC9FF4 /* SDBButton.swift */; };
+		1F695087287D737600CC9FF4 /* SDButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F695086287D737600CC9FF4 /* SDButton.swift */; };
 		1F74878B286EB64E0092674F /* BubbleCell_Info.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F74878A286EB64E0092674F /* BubbleCell_Info.swift */; };
 		1F74878D286ED1B10092674F /* StartInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F74878C286ED1B10092674F /* StartInfoView.swift */; };
 		1F82FB982831435A00E7C5AA /* HelpActionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F82FB972831435A00E7C5AA /* HelpActionButton.swift */; };
@@ -109,7 +109,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		1F100CA62809493400A3A3C2 /* BackgroundTimer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BackgroundTimer.swift; sourceTree = "<group>"; };
+		1F100CA62809493400A3A3C2 /* BubbleTimer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BubbleTimer.swift; sourceTree = "<group>"; };
 		1F18B456281FA6130080ADA6 /* PushView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushView.swift; sourceTree = "<group>"; };
 		1F18B45B281FA9C90080ADA6 /* CalendarSticker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarSticker.swift; sourceTree = "<group>"; };
 		1F18B45F281FAABF0080ADA6 /* TopCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopCell.swift; sourceTree = "<group>"; };
@@ -150,7 +150,7 @@
 		1F684820287DB6BA00D8BF81 /* SDBTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SDBTimer.swift; sourceTree = "<group>"; };
 		1F684822287DBEBB00D8BF81 /* StartDelaySubview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartDelaySubview.swift; sourceTree = "<group>"; };
 		1F695084287D4DF600CC9FF4 /* ConfirmationLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmationLabel.swift; sourceTree = "<group>"; };
-		1F695086287D737600CC9FF4 /* SDBButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SDBButton.swift; sourceTree = "<group>"; };
+		1F695086287D737600CC9FF4 /* SDButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SDButton.swift; sourceTree = "<group>"; };
 		1F74878A286EB64E0092674F /* BubbleCell_Info.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BubbleCell_Info.swift; sourceTree = "<group>"; };
 		1F74878C286ED1B10092674F /* StartInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartInfoView.swift; sourceTree = "<group>"; };
 		1F82FB972831435A00E7C5AA /* HelpActionButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpActionButton.swift; sourceTree = "<group>"; };
@@ -292,7 +292,7 @@
 				1F74878A286EB64E0092674F /* BubbleCell_Info.swift */,
 				1F74878C286ED1B10092674F /* StartInfoView.swift */,
 				1FB7D57B2862F0300085C2BE /* PlusButton.swift */,
-				1F100CA62809493400A3A3C2 /* BackgroundTimer.swift */,
+				1F100CA62809493400A3A3C2 /* BubbleTimer.swift */,
 				1F684820287DB6BA00D8BF81 /* SDBTimer.swift */,
 			);
 			path = Shared;
@@ -325,7 +325,7 @@
 				1FCF01B2287CBA74009DC95C /* DelayStartSymbol.swift */,
 				1F695084287D4DF600CC9FF4 /* ConfirmationLabel.swift */,
 				1F864D8F287C0356000219CE /* MoreOptionsView.swift */,
-				1F695086287D737600CC9FF4 /* SDBButton.swift */,
+				1F695086287D737600CC9FF4 /* SDButton.swift */,
 				1F5F4A6D28093FF800AF3442 /* Model.xcdatamodeld */,
 				1F5F4A712809409600AF3442 /* Bubble.swift */,
 				1F5F4A722809409600AF3442 /* Bubble Properties.swift */,
@@ -501,11 +501,11 @@
 				1F5F4A732809409600AF3442 /* Bubble.swift in Sources */,
 				1F62194028293B5100C9B175 /* SmallBubbleView.swift in Sources */,
 				1F97B7DD2809B311002FFCA3 /* Colors.swift in Sources */,
-				1F100CA72809493400A3A3C2 /* BackgroundTimer.swift in Sources */,
+				1F100CA72809493400A3A3C2 /* BubbleTimer.swift in Sources */,
 				1FA8F87E28367B7A00394B59 /* BubbleNote.swift in Sources */,
 				1F5A0F6C282641D00075E86B /* EmptyHistoryAlertView.swift in Sources */,
 				1F542F92286D757000403F13 /* NotesList.swift in Sources */,
-				1F695087287D737600CC9FF4 /* SDBButton.swift in Sources */,
+				1F695087287D737600CC9FF4 /* SDButton.swift in Sources */,
 				1F74878D286ED1B10092674F /* StartInfoView.swift in Sources */,
 				1F98D78A286AF8A300C0A973 /* DeleteRow_InfoView.swift in Sources */,
 				1FE163AE280EE6F40050C6F5 /* LeftStrip.swift in Sources */,

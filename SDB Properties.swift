@@ -23,7 +23,6 @@ extension SDB {
     
     @NSManaged public var pairs: NSSet?
     @NSManaged public var bubble: Bubble?
-    
 }
 
 // MARK: Generated accessors for pairs

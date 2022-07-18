@@ -144,7 +144,9 @@ func delayExecution(_ delay:DispatchTime, code:@escaping ()->()) {
 }
 
 extension NSNotification.Name {
-    static let timerSignal = NSNotification.Name("backgroundTimerSignalReceived")
+    static let bubbleTimerSignal = NSNotification.Name("bubbleTimerSignal")
+    
+    static let sdbTimerSignal = NSNotification.Name("sdbTimerSignal")
     
     ///each Bubble has a corresponding StartDelayBubble [SDB]
     ///and each SDB has a corresponding SDBTimer optional. not set by default

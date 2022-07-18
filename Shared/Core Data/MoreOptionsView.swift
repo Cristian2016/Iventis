@@ -15,7 +15,7 @@ struct MoreOptionsView: View {
     // MARK: -
     init(for bubble:Bubble) {
         _bubble = ObservedObject(wrappedValue: bubble)
-        self.initialDelay = Int(bubble.sdb!.referenceDelay)
+        self.initialDelay = bubble.sdb!.referenceDelay_
     }
         
     // MARK: -
@@ -46,7 +46,7 @@ struct MoreOptionsView: View {
                 ConfirmationLabel(isDestructive: true)
                 { zeroDelayConfirmation } action: { vm.startDelayWasReset = false }
             }
-            if vm.startDelayWasSet && bubble.sdb!.referenceDelay != 0 {
+            if vm.startDelayWasSet && bubble.sdb!.referenceDelay_ != 0 {
                 ConfirmationLabel()
                 { delaySetConfirmation } action: { vm.startDelayWasSet = false }
             }
@@ -121,7 +121,7 @@ struct MoreOptionsView: View {
     
     private var delaySetConfirmation: some View {
         VStack {
-            Text("\(Image(systemName: "clock.arrow.circlepath")) \(bubble.sdb!.referenceDelay)s")
+            Text("\(Image(systemName: "clock.arrow.circlepath")) \(bubble.sdb!.referenceDelay_)s")
                 .font(.system(size: 40).weight(.medium))
             Text("Start Delay")
                 .font(.system(size: 20))
@@ -141,7 +141,7 @@ struct MoreOptionsView: View {
     func dismiss() { vm.sdb = nil }
     
     func handleTap() {
-        let userEditedDelay = bubble.sdb!.referenceDelay != initialDelay
+        let userEditedDelay = bubble.sdb!.referenceDelay_ != initialDelay
         if userEditedDelay {
             vm.startDelayWasSet = true
             delayExecution(.now() + 1) { vm.startDelayWasSet = false }

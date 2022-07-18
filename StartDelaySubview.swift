@@ -50,7 +50,7 @@ struct StartDelaySubview:View {
             Text("\(Image(systemName: "clock.arrow.circlepath"))")
                 .font(.system(size: 22).weight(.bold))
             HStack (alignment: .lastTextBaseline, spacing: 0) {
-                Text("\(Int(sdb.referenceDelay))")
+                Text("\(sdb.referenceDelay_)")
                 Text("s")
                     .font(.system(size: 22).weight(.bold))
             }

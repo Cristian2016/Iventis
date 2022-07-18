@@ -92,7 +92,6 @@ extension BubbleCell {
                     .onTapGesture { userTappedSeconds() }
                     .highPriorityGesture(longPress)
             }
-            
             //overlays
             .overlay {
                 if !isBubbleRunning {
@@ -103,7 +102,7 @@ extension BubbleCell {
                 }
             }
             .overlay {
-                if sdb.referenceDelay > 0 { SDBButton(bubble.sdb) }
+                if sdb.referenceDelay_ > 0 { SDButton(bubble.sdb) }
             }
         }
         //font
@@ -138,7 +137,7 @@ struct BubbleCell: View {
     init(_ bubble:Bubble) {
         _bubble = StateObject(wrappedValue: bubble)
         _sdb = StateObject(wrappedValue: bubble.sdb!)
-        if !bubble.isObservingBackgroundTimer { bubble.observeBackgroundTimer() }
+        if !bubble.isObservingBubbleTimer { bubble.observeBubbleTimer() }
     }
     
     func userWantsNotesList() {

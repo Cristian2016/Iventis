@@ -124,22 +124,22 @@ struct TimersApp: App {
     func handleBecomeActive() {
         /* app launch, back to foreground */
         print("scenePhase.active")
-        vm.backgroundTimer(.start)
+        vm.bubbleTimer(.start)
+        
+        //should start sdbTimer
+        vm.sdbTimer(.start)
     }
     
     ///called when app killed or moved to background
     ///NOT called on NotificationCenter, incoming call etc
     func handleEnterBackground() {
         print("scenePhase.background")
-        vm.backgroundTimer(.pause)
+        vm.bubbleTimer(.pause)
         
         //pause all running sdb
-        let runningSDBs = vm.allSDBs(visibleOnly:true)
-        runningSDBs.forEach { sdb in
-            sdb.backgroundTimer?.perform(.pause)
-            sdb.backgroundTimer = nil
-            sdb.state = .paused
-        }
+        
+        //pause sdbTimer
+        vm.sdbTimer(.pause)
     }
     
     func handleInactivePhase() {

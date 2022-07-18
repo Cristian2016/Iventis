@@ -8,7 +8,7 @@
 import SwiftUI
 
 ///StartDelayBubbleCell
-struct SDBButton: View {
+struct SDButton: View {
     init?(_ sdb:SDB?) {
         guard let sdb = sdb else { return nil }
         _sdb = StateObject(wrappedValue: sdb)
