@@ -63,16 +63,12 @@ public class SDB: NSManagedObject {
     ///delay removed either by removing SDButton from Bubble Cell
     ///or longPress in MoreOptionsView
     func removeDelay() {
-        print(#function)
-        //remove bTimer
         //set both delays to zero
         //save CoreData
-        
-       //was timer shit here
-        
+                
         referenceDelay = 0
         currentDelay = 0
-        observe = false
+        observe  /* notifications */ = false
         
         PersistenceController.shared.save()
     }
