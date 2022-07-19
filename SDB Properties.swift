@@ -28,6 +28,8 @@ extension SDB {
         get { pairs?.array as? [SDBPair] ?? [] }
         set { pairs = NSOrderedSet(arrayLiteral: newValue) }
     }
+    
+    var lastPair:SDBPair? { pairs_.last }
 }
 
 // MARK: Generated accessors for pairs
