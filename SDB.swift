@@ -91,17 +91,18 @@ public class SDB: NSManagedObject {
     }
     
     func observeSDBTimer() {
-        print(#function)
         center.addObserver(forName: .sdbTimer, object: nil, queue: nil) { [weak self] _ in
-            guard let self = self, self.observe else { return }
-            self.handleNotification()
+            DispatchQueue.main.async { self?.handleNotification() }
         }
     }
     
     func handleNotification() {
+        guard observe /* notifications */ else { return }
+        
         print(#function)
         guard currentDelay > 0 else {
             state = .paused
+            removeDelay()
             return
         }
         
