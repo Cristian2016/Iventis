@@ -49,7 +49,10 @@ public class Bubble: NSManagedObject {
         
     private(set) var isObservingBubbleTimer = false
     
-    deinit { NotificationCenter.default.removeObserver(self) }
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+        print("\(color ?? "no color")/ bubble deinit")
+    }
     
     enum Kind:Comparable {
         case stopwatch

@@ -23,6 +23,7 @@ public class SDB: NSManagedObject {
     var state = State.brandNew
     
     var observe = false
+    var isObserverAdded = false
     
     // MARK: - User Intents
     func toggleStart() {
@@ -30,6 +31,11 @@ public class SDB: NSManagedObject {
             case .brandNew, .paused:
                 state = .running
                 observe = true
+                
+                if !isObserverAdded {
+                    observeSDBTimer()
+                    isObserverAdded = true
+                }
                 
             case .running:
                 state = .paused
@@ -83,14 +89,15 @@ public class SDB: NSManagedObject {
     }
     
     func observeSDBTimer() {
+        print(#function)
         center.addObserver(forName: .sdbTimer, object: nil, queue: nil) { [weak self] _ in
             guard let self = self, self.observe else { return }
-            
-            print("sdbTimerSignal \(self.bubble?.color ?? "No color")")
+            self.handleNotification()
         }
     }
     
     func handleNotification() {
+        print(#function)
         guard currentDelay > 0 else {
             state = .paused
             return
