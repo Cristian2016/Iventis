@@ -93,6 +93,7 @@ class ViewModel: ObservableObject {
         
         let sdb = SDB(context: backgroundContext)
         newBubble.sdb = sdb
+        sdb.observeSDBTimer()
         
         try? backgroundContext.save()
     }

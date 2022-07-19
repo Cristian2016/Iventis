@@ -23,7 +23,7 @@ class SDBTimer {
     }()
     
     private var eventHandler: (() -> Void)? = {
-        let notification = Notification(name: .sdbTimerSignal)
+        let notification = Notification(name: .sdbTimer)
         NotificationCenter.default.post(notification)
     }
     

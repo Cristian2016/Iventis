@@ -12,6 +12,8 @@ import SwiftUI
 
 ///StartDelay_Bubble
 public class SDB: NSManagedObject {
+    lazy var center = NotificationCenter.default
+    
     enum State:String {
         case brandNew
         case running
@@ -20,17 +22,18 @@ public class SDB: NSManagedObject {
     
     var state = State.brandNew
     
+    var observe = false
+    
     // MARK: - User Intents
     func toggleStart() {
         switch state {
             case .brandNew, .paused:
                 state = .running
-                observeSDBTimer()
+                observe = true
                 
             case .running:
                 state = .paused
-                print("remove observer")
-                NotificationCenter.default.removeObserver(self)
+                observe = false
         }
         
         PersistenceController.shared.save()
@@ -44,10 +47,9 @@ public class SDB: NSManagedObject {
         delayExecution(.now() + 0.01) {
             self.currentDelay = Float(self.referenceDelay)
             self.state = .brandNew
-            NotificationCenter.default.removeObserver(self)
+            self.observe = false
             PersistenceController.shared.save()
         }
-        
     }
     
     func removeDelay() {
@@ -61,19 +63,6 @@ public class SDB: NSManagedObject {
         currentDelay = 0
         
         PersistenceController.shared.save()
-    }
-    
-    
-    ///easy to handle entering background or becoming active
-    func start(_ isStart:Bool) {
-        switch isStart {
-            case true: //start
-                state = .running
-                
-            case false: //pause
-                
-                state = .paused
-        }
     }
     
     //task to call each second by bTimer
@@ -94,11 +83,11 @@ public class SDB: NSManagedObject {
     }
     
     func observeSDBTimer() {
-        NotificationCenter.default
-            .addObserver(forName: .sdbTimerSignal, object: nil, queue: nil) {
-                [weak self] _ in
-                print("sdbTimerSignal received")
-            }
+        center.addObserver(forName: .sdbTimer, object: nil, queue: nil) { [weak self] _ in
+            guard let self = self, self.observe else { return }
+            
+            print("sdbTimerSignal \(self.bubble?.color ?? "No color")")
+        }
     }
     
     func handleNotification() {
@@ -114,4 +103,6 @@ public class SDB: NSManagedObject {
             currentDelay -= 1
         }
     }
+    
+    deinit { center.removeObserver(self) }
 }
