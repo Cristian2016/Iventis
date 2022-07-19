@@ -21,14 +21,30 @@ public class SDB: NSManagedObject {
     var state = State.brandNew
     
     // MARK: - User Intents
+    func toggleStart() {
+        switch state {
+            case .brandNew, .paused:
+                state = .running
+                observeSDBTimer()
+                
+            case .running:
+                state = .paused
+                print("remove observer")
+                NotificationCenter.default.removeObserver(self)
+        }
+        
+        PersistenceController.shared.save()
+    }
+    
     func resetDelay() {
         //stop bTimer
         
         //⚠️ why delay?
         //if no delay set, reset goes wrong!
         delayExecution(.now() + 0.01) {
-            self.currentDelay = Int64(self.referenceDelay_)
+            self.currentDelay = Float(self.referenceDelay)
             self.state = .brandNew
+            NotificationCenter.default.removeObserver(self)
             PersistenceController.shared.save()
         }
         
@@ -41,20 +57,8 @@ public class SDB: NSManagedObject {
         
        //was timer shit here
         
-        referenceDelay_ = 0
+        referenceDelay = 0
         currentDelay = 0
-        
-        PersistenceController.shared.save()
-    }
-    
-    func toggleStart() {
-        switch state {
-            case .brandNew, .paused:
-                state = .running
-                
-            case .running:
-                state = .paused
-        }
         
         PersistenceController.shared.save()
     }
@@ -86,7 +90,6 @@ public class SDB: NSManagedObject {
             NotificationCenter.default.post(name: .sdbDelayreachedZero, object: self)
         }
         
-        DispatchQueue.main.async { self.objectWillChange.send() }
         currentDelay -= 1 //decrease by one
     }
     
@@ -94,33 +97,21 @@ public class SDB: NSManagedObject {
         NotificationCenter.default
             .addObserver(forName: .sdbTimerSignal, object: nil, queue: nil) {
                 [weak self] _ in
-               print("sdbTimerSignal received")
+                print("sdbTimerSignal received")
             }
     }
     
-    private var isObservingSDBTimer = false
-    
-    var referenceDelay_:Int {
-        get { Int(referenceDelay) }
-        set {
-            referenceDelay = Int64(newValue)
-            
-            let shouldObserveTimer = newValue > 0
-            
-            if shouldObserveTimer {
-                if !isObservingSDBTimer {
-                    observeSDBTimer()
-                    isObservingSDBTimer = true
-                    print("add observer \(referenceDelay_)")
-                }
-            }
-            else {
-                if isObservingSDBTimer {
-                    NotificationCenter.default.removeObserver(self)
-                    isObservingSDBTimer = false
-                    print("remove observer \(referenceDelay_)")
-                }
-            }
+    func handleNotification() {
+        guard currentDelay > 0 else {
+            state = .paused
+            return
         }
-    }    
+        
+        if state == .running {
+            if currentDelay == 0 {
+                referenceDelay = Int64(currentDelay)
+            }
+            currentDelay -= 1
+        }
+    }
 }

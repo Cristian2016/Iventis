@@ -33,7 +33,7 @@ struct SDButton: View {
                 .padding(6)
                 .overlay (
                     HStack(spacing: 2) {
-                        Text("-\(sdb.currentDelay)")
+                        Text("-\(sdb.currentDelay.shortString(by: 1))")
                             .font(.system(size: 60))
                             .minimumScaleFactor(0.3)
                             .padding()

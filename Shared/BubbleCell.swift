@@ -102,7 +102,7 @@ extension BubbleCell {
                 }
             }
             .overlay {
-                if sdb.referenceDelay_ > 0 { SDButton(bubble.sdb) }
+                if sdb.referenceDelay > 0 { SDButton(bubble.sdb) }
             }
         }
         //font

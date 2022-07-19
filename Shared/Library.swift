@@ -163,6 +163,13 @@ extension NSNotification.Name {
     static let textLimitExceeded = NSNotification.Name("textLimitExceeded")
 }
 
+extension Float {
+    ///ex: decimalPlaces 2: 1.89099 -> "1.89"
+    func shortString(by decimalPlaces:Int) -> String {
+        String(format: "%.\(decimalPlaces)f", self)
+    }
+}
+
 struct Ratio {
     //BubbleCell
     ///screen width to bubble width |<-|<------->|->|

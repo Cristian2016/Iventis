@@ -19,7 +19,7 @@ extension SDB {
     //⚠️ if referenceDelay > 0, SDBCell must be visible
     @NSManaged public var referenceDelay: Int64
     
-    @NSManaged public var currentDelay: Int64
+    @NSManaged public var currentDelay: Float
     
     @NSManaged public var pairs: NSSet?
     @NSManaged public var bubble: Bubble?

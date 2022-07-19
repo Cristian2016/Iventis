@@ -414,7 +414,7 @@ class ViewModel: ObservableObject {
         if bubble.color == newColor { return }
         bubble.color = newColor
         
-        if sdb.referenceDelay_ != 0 {//there is a delay set
+        if sdb.referenceDelay != 0 {//there is a delay set
             UserFeedback.singleHaptic(.medium)
             PersistenceController.shared.save()
             startDelayWasSet = true
@@ -434,20 +434,20 @@ class ViewModel: ObservableObject {
     }
     
     func saveAndDismissMoreOptionsView(_ bubble:Bubble, _ initialDelay:Int) {
-        let userEditedDelay = bubble.sdb!.referenceDelay_ != initialDelay
+        let userEditedDelay = bubble.sdb!.referenceDelay != initialDelay
         
         if userEditedDelay {
             UserFeedback.singleHaptic(.medium)
             startDelayWasSet = true
             
-            let dispatchTime = (bubble.sdb!.referenceDelay_ != 0) ? DispatchTime.now() + 0.7 : .now()
+            let dispatchTime = (bubble.sdb!.referenceDelay != 0) ? DispatchTime.now() + 0.7 : .now()
             
             delayExecution(dispatchTime) {
                 self.sdb = nil //dismiss MoreOptionsView
                 self.startDelayWasSet = false
             }
             
-            if let sdb = sdb { sdb.currentDelay = Int64(sdb.referenceDelay_) }
+            if let sdb = sdb { sdb.currentDelay = Float(sdb.referenceDelay) }
         }
         else { self.sdb = nil  /* dismiss MoreOptionsView */ }
         
@@ -458,14 +458,14 @@ class ViewModel: ObservableObject {
     ///reference startDelay
     func computeReferenceDelay(_ sdb:SDB, _ value: Int) {
         UserFeedback.singleHaptic(.medium)
-        sdb.referenceDelay_ += value
-        sdb.currentDelay = Int64(sdb.referenceDelay_)
+        sdb.referenceDelay += Int64(value)
+        sdb.currentDelay = Float(sdb.referenceDelay)
     }
     
     ///user long presses in MoreOptionsView
     func removeDelay(for bubble:Bubble?) {
         guard let bubble = bubble else { return }
-        if bubble.sdb!.referenceDelay_ == 0 { return }
+        if bubble.sdb!.referenceDelay == 0 { return }
         
         bubble.sdb?.removeDelay()
     }
@@ -485,7 +485,7 @@ class ViewModel: ObservableObject {
                 //remove SDBCell from BubbleCell
                 self?.toggleBubbleStart(bubble)
                 
-                sdb?.referenceDelay_ = 0
+                sdb?.referenceDelay = 0
                 sdb?.currentDelay = 0
                 self?.sdb = nil //dismiss MoreOptionsView
                 
@@ -497,7 +497,7 @@ class ViewModel: ObservableObject {
     // MARK: -
     func removeDelay(for bubble:Bubble) {
         bubble.sdb?.currentDelay = 0
-        bubble.sdb?.referenceDelay_ = 0
+        bubble.sdb?.referenceDelay = 0
     }
 }
 
