@@ -38,9 +38,14 @@ public class SDB: NSManagedObject {
                 
                 observe = true
                 
+                //add new pair and set start date
+                let newSDBPair = SDBPair(context: managedObjectContext!)
+                newSDBPair.start = Date()
+                
             case .running:
                 state = .paused
                 observe = false
+                
         }
         
         PersistenceController.shared.save()
@@ -63,12 +68,14 @@ public class SDB: NSManagedObject {
     ///delay removed either by removing SDButton from Bubble Cell
     ///or longPress in MoreOptionsView
     func removeDelay() {
+        print(#function)
         //set both delays to zero
         //save CoreData
                 
         referenceDelay = 0
         currentDelay = 0
         observe  /* notifications */ = false
+        state = .brandNew
         
         PersistenceController.shared.save()
     }
@@ -92,25 +99,20 @@ public class SDB: NSManagedObject {
     
     func observeSDBTimer() {
         center.addObserver(forName: .sdbTimer, object: nil, queue: nil) { [weak self] _ in
-            DispatchQueue.main.async { self?.handleNotification() }
+            delayExecution(.now() + 1) {
+                self?.handleNotification()
+            }
         }
     }
     
     func handleNotification() {
         guard observe /* notifications */ else { return }
         
-        print(#function)
-        guard currentDelay > 0 else {
-            state = .paused
-            removeDelay()
-            return
-        }
-        
-        if state == .running {
-            if currentDelay == 0 {
-                referenceDelay = Int64(currentDelay)
+        DispatchQueue.main.async {
+            self.currentDelay -= 1
+            if self.currentDelay == 0 {
+                self.removeDelay()
             }
-            currentDelay -= 1
         }
     }
     

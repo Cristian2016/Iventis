@@ -50,7 +50,7 @@
         <attribute name="currentDelay" optional="YES" attributeType="Float" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="referenceDelay" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <relationship name="bubble" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Bubble" inverseName="sdb" inverseEntity="Bubble"/>
-        <relationship name="pairs" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="SDBPair" inverseName="sdb" inverseEntity="SDBPair"/>
+        <relationship name="pairs" optional="YES" toMany="YES" deletionRule="Cascade" ordered="YES" destinationEntity="SDBPair" inverseName="sdb" inverseEntity="SDBPair"/>
     </entity>
     <entity name="SDBPair" representedClassName=".SDBPair" syncable="YES">
         <attribute name="pause" optional="YES" attributeType="Date" usesScalarValueType="NO"/>

@@ -21,12 +21,30 @@ extension SDB {
     
     @NSManaged public var currentDelay: Float
     
-    @NSManaged public var pairs: NSSet?
+    @NSManaged public var pairs: NSOrderedSet?
     @NSManaged public var bubble: Bubble?
 }
 
 // MARK: Generated accessors for pairs
 extension SDB {
+
+    @objc(insertObject:inPairsAtIndex:)
+    @NSManaged public func insertIntoPairs(_ value: SDBPair, at idx: Int)
+
+    @objc(removeObjectFromPairsAtIndex:)
+    @NSManaged public func removeFromPairs(at idx: Int)
+
+    @objc(insertPairs:atIndexes:)
+    @NSManaged public func insertIntoPairs(_ values: [SDBPair], at indexes: NSIndexSet)
+
+    @objc(removePairsAtIndexes:)
+    @NSManaged public func removeFromPairs(at indexes: NSIndexSet)
+
+    @objc(replaceObjectInPairsAtIndex:withObject:)
+    @NSManaged public func replacePairs(at idx: Int, with value: SDBPair)
+
+    @objc(replacePairsAtIndexes:withPairs:)
+    @NSManaged public func replacePairs(at indexes: NSIndexSet, with values: [SDBPair])
 
     @objc(addPairsObject:)
     @NSManaged public func addToPairs(_ value: SDBPair)
@@ -35,10 +53,10 @@ extension SDB {
     @NSManaged public func removeFromPairs(_ value: SDBPair)
 
     @objc(addPairs:)
-    @NSManaged public func addToPairs(_ values: NSSet)
+    @NSManaged public func addToPairs(_ values: NSOrderedSet)
 
     @objc(removePairs:)
-    @NSManaged public func removeFromPairs(_ values: NSSet)
+    @NSManaged public func removeFromPairs(_ values: NSOrderedSet)
 
 }
 
