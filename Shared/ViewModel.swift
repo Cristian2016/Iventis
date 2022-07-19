@@ -496,8 +496,7 @@ class ViewModel: ObservableObject {
     
     // MARK: -
     func removeDelay(for bubble:Bubble) {
-        bubble.sdb?.currentDelay = 0
-        bubble.sdb?.referenceDelay = 0
+        bubble.sdb?.removeDelay()
     }
 }
 

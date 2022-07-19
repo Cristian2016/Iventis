@@ -30,12 +30,13 @@ public class SDB: NSManagedObject {
         switch state {
             case .brandNew, .paused:
                 state = .running
-                observe = true
                 
                 if !isObserverAdded {
                     observeSDBTimer()
                     isObserverAdded = true
                 }
+                
+                observe = true
                 
             case .running:
                 state = .paused
@@ -46,7 +47,8 @@ public class SDB: NSManagedObject {
     }
     
     func resetDelay() {
-        //stop bTimer
+        
+        observe = false
         
         //⚠️ why delay?
         //if no delay set, reset goes wrong!
@@ -58,7 +60,10 @@ public class SDB: NSManagedObject {
         }
     }
     
+    ///delay removed either by removing SDButton from Bubble Cell
+    ///or longPress in MoreOptionsView
     func removeDelay() {
+        print(#function)
         //remove bTimer
         //set both delays to zero
         //save CoreData
@@ -67,6 +72,7 @@ public class SDB: NSManagedObject {
         
         referenceDelay = 0
         currentDelay = 0
+        observe = false
         
         PersistenceController.shared.save()
     }
