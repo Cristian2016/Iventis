@@ -23,6 +23,11 @@ extension SDB {
     
     @NSManaged public var pairs: NSOrderedSet?
     @NSManaged public var bubble: Bubble?
+    
+    var pairs_:[SDBPair] {
+        get { pairs?.array as? [SDBPair] ?? [] }
+        set { pairs = NSOrderedSet(arrayLiteral: newValue) }
+    }
 }
 
 // MARK: Generated accessors for pairs
