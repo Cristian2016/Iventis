@@ -137,7 +137,6 @@ struct BubbleCell: View {
     init(_ bubble:Bubble) {
         _bubble = StateObject(wrappedValue: bubble)
         _sdb = StateObject(wrappedValue: bubble.sdb!)
-        if !bubble.isObservingBubbleTimer { bubble.observeBubbleTimer() }
     }
     
     func userWantsNotesList() {

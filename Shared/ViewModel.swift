@@ -90,8 +90,10 @@ class ViewModel: ObservableObject {
         
         newBubble.color = color
         newBubble.rank = Int64(UserDefaults.generateRank())
+        newBubble.observeBubbleTimer()
         
         let sdb = SDB(context: backgroundContext)
+        sdb.observeSDBTimer()
         newBubble.sdb = sdb
         
         try? backgroundContext.save()

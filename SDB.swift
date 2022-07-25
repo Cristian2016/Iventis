@@ -26,7 +26,7 @@ public class SDB: NSManagedObject {
     func toggleStart() {
         switch state {
             case .brandNew, .paused: //🔴 start
-                state = .running
+                state = .running //start handle observe timer
                 
                 //create newPair and set newPair.start date
                 let newSDBPair = SDBPair(context: managedObjectContext!)
@@ -34,7 +34,7 @@ public class SDB: NSManagedObject {
                 addToPairs(newSDBPair)
                 
             case .running: //🔴 pause
-                state = .paused
+                state = .paused //stop handle observe timer
                 
                 //set pause and compute duration
                 lastPair?.pause = Date()

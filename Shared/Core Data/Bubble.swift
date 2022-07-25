@@ -39,9 +39,7 @@ public class Bubble: NSManagedObject {
     @Published var smallBubbleView_Components
     = Float.TimeComponentsAsStrings(hr: "0", min: "0", sec: "0", cents: "00")
     { willSet { DispatchQueue.main.async { self.objectWillChange.send() } }}
-        
-    private(set) var isObservingBubbleTimer = false
-    
+            
     deinit {
         NotificationCenter.default.removeObserver(self)
         print("\(color ?? "no color")/ bubble deinit")
@@ -104,12 +102,14 @@ extension Bubble {
     }
     
     ///observe bubbleTimer signal to update time components only if bubble is running
+    ///1.start observing on init, 2.resume observing on reentering active phase 3.remove observer on deinit
     func observeBubbleTimer() {
-        isObservingBubbleTimer = true
         
         NotificationCenter.default
             .addObserver(forName: .bubbleTimerSignal, object: nil, queue: nil) {
                 [weak self] _ in
+                
+                guard self?.state == .running else { return }
                 
                 self?.updateBubbleCellComponents()
                 self?.updateSmallBubbleCell()
@@ -118,8 +118,6 @@ extension Bubble {
     
     ///time components hr:min:sec:hundredths
     private func updateBubbleCellComponents() {
-        if state != .running { return }
-        
         guard let lastPairStart = lastPair!.start else { return }
         
         //delta is the elapsed duration between pair.start and signal dates
@@ -133,7 +131,7 @@ extension Bubble {
     
     ///update smallBubbleCell time components: hr min sec
     private func updateSmallBubbleCell() {
-        if !continueToUpdateSmallBubbleCell, state != .running { return }
+        if !continueToUpdateSmallBubbleCell { return }
         guard let lastPairStart = lastPair?.start else { return }
         
         //delta is the elapsed duration between pair.start and signal dates
