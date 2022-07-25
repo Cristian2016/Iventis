@@ -22,13 +22,13 @@ public class SDB: NSManagedObject {
     
     var state = State.brandNew
     
-    var observe = false
-    var isObserverAdded = false
+    private var observeTimer = false
+    private var isObserverAdded = false
     
     // MARK: - User Intents
     func toggleStart() {
         switch state {
-            case .brandNew, .paused:
+            case .brandNew, .paused: //🔴 start
                 state = .running
                 
                 if !isObserverAdded {
@@ -36,32 +36,32 @@ public class SDB: NSManagedObject {
                     isObserverAdded = true
                 }
                 
-                observe = true
+                observeTimer = true
                 
-                //add new pair and set start date
+                //create newPair and set newPair.start date
                 let newSDBPair = SDBPair(context: managedObjectContext!)
                 newSDBPair.start = Date()
+                addToPairs(newSDBPair)
                 
-            case .running:
+            case .running: //🔴 pause
                 state = .paused
-                observe = false
-                if pairs_.last?.pause != nil { fatalError() }
-                pairs_.last?.pause = Date()
+                observeTimer = false
+                
+                //set pause and compute duration
+                lastPair?.pause = Date()
+                let duration = lastPair!.pause!.timeIntervalSince(lastPair!.start!)
         }
         
         PersistenceController.shared.save()
     }
     
     func resetDelay() {
-        
-        observe = false
-        
         //⚠️ why delay?
         //if no delay set, reset goes wrong!
         delayExecution(.now() + 0.01) {
             self.currentDelay = Float(self.referenceDelay)
             self.state = .brandNew
-            self.observe = false
+            self.observeTimer = false
             PersistenceController.shared.save()
         }
     }
@@ -74,14 +74,14 @@ public class SDB: NSManagedObject {
                 
         referenceDelay = 0
         currentDelay = 0
-        observe  /* notifications */ = false
+        observeTimer  /* notifications */ = false
         state = .brandNew
         
         PersistenceController.shared.save()
     }
     
     //task to call each second by bTimer
-    func bTimerTask() {
+    func timerTask() {
         guard currentDelay > 0 else { return }
         
         if currentDelay == 1 {
@@ -106,7 +106,7 @@ public class SDB: NSManagedObject {
     }
     
     func handleNotification() {
-        guard observe /* notifications */ else { return }
+        guard observeTimer /* notifications */ else { return }
         
         DispatchQueue.main.async {
             
