@@ -138,7 +138,7 @@ struct MoreOptionsView: View {
     }
     
     // MARK: - User Intents
-    func dismiss() { vm.sdb = nil }
+    func dismiss() { vm.oneAndOnlySDB = nil }
     
     func handleTap() {
         let userEditedDelay = bubble.sdb!.referenceDelay != initialDelay

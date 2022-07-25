@@ -69,9 +69,6 @@ public class SDB: NSManagedObject {
     ///delay removed either by removing SDButton from Bubble Cell
     ///or longPress in MoreOptionsView
     func removeDelay() {
-        //set both delays to zero
-        //save CoreData
-                
         referenceDelay = 0
         currentDelay = 0
         observeTimer  /* notifications */ = false

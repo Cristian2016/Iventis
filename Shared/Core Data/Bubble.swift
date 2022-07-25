@@ -11,10 +11,7 @@ import CoreData
 import SwiftUI
 
 public class Bubble: NSManagedObject {
-    
-    lazy var dispatchQueue = DispatchQueue(label: "startDelayBTimerDQ")
-    var startDelayBTimer:BubbleTimer?
-    
+        
     ///4 start delay values
     static let delays = [5, 10, 20, 45]
     

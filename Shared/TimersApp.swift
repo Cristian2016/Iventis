@@ -65,7 +65,7 @@ struct TimersApp: App {
                 if bubbleNotesShowing { BubbleNotesList($vm.notesList_bRank) }
                 if let pair = vm.pairOfNotesList { PairNotesList(pair) }
                 
-                if let sdb = vm.sdb, let bubble = sdb.bubble {
+                if let sdb = vm.oneAndOnlySDB, let bubble = sdb.bubble {
                     MoreOptionsView(for: bubble)
                 }
                 
@@ -122,12 +122,12 @@ struct TimersApp: App {
     ///called on app launch or returning from background
     ///also called when app returns from inactive state
     func handleBecomeActive() {
-        /* app launch, back to foreground */
-        print("scenePhase.active")
+        //Bubble
         vm.bubbleTimer(.start)
         
-        //should start sdbTimer
+        //SDB
         vm.sdbTimer(.start)
+        vm.oneAndOnlySDB
     }
     
     ///called when app killed or moved to background

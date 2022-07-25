@@ -177,7 +177,7 @@ class ViewModel: ObservableObject {
     func showMoreOptions(for bubble:Bubble) {
         //set @Published property triggers UI update
         //MoreOptionsView displayed
-        sdb = bubble.sdb
+        oneAndOnlySDB = bubble.sdb
     }
     
     //SDBubble
@@ -401,14 +401,14 @@ class ViewModel: ObservableObject {
     }
     
     // MARK: - MoreOptionsView
-    ///StartDelayBubble
-    @Published var sdb:SDB?
+    ///StartDelayBubble for the bubble shown in MoreOptionsView
+    @Published var oneAndOnlySDB:SDB?
     
     @Published var startDelayWasReset = false
     @Published var startDelayWasSet = false
     
     func changeColor(for bubble:Bubble, to newColor:String) {
-        guard let sdb = sdb else { fatalError() }
+        guard let sdb = oneAndOnlySDB else { fatalError() }
         
         //change color and save CoreData
         if bubble.color == newColor { return }
@@ -421,12 +421,12 @@ class ViewModel: ObservableObject {
             
             delayExecution(.now() + 0.6) {
                 self.startDelayWasSet = false
-                self.sdb = nil
+                self.oneAndOnlySDB = nil
             }
             
         } else {//no delay set
             UserFeedback.singleHaptic(.medium) //haptic feedback
-            self.sdb = nil
+            self.oneAndOnlySDB = nil
         }
         
         //save CoreData
@@ -443,13 +443,13 @@ class ViewModel: ObservableObject {
             let dispatchTime = (bubble.sdb!.referenceDelay != 0) ? DispatchTime.now() + 0.7 : .now()
             
             delayExecution(dispatchTime) {
-                self.sdb = nil //dismiss MoreOptionsView
+                self.oneAndOnlySDB = nil //dismiss MoreOptionsView
                 self.startDelayWasSet = false
             }
             
-            if let sdb = sdb { sdb.currentDelay = Float(sdb.referenceDelay) }
+            if let sdb = oneAndOnlySDB { sdb.currentDelay = Float(sdb.referenceDelay) }
         }
-        else { self.sdb = nil  /* dismiss MoreOptionsView */ }
+        else { self.oneAndOnlySDB = nil  /* dismiss MoreOptionsView */ }
         
         //save CoreData
         PersistenceController.shared.save()
@@ -487,7 +487,7 @@ class ViewModel: ObservableObject {
                 
                 sdb?.referenceDelay = 0
                 sdb?.currentDelay = 0
-                self?.sdb = nil //dismiss MoreOptionsView
+                self?.oneAndOnlySDB = nil //dismiss MoreOptionsView
                 
                 PersistenceController.shared.save()
             }
