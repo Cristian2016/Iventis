@@ -127,7 +127,8 @@ struct TimersApp: App {
         
         //SDB
         vm.sdbTimer(.start)
-        vm.oneAndOnlySDB
+        //start observing
+        
     }
     
     ///called when app killed or moved to background

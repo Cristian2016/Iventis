@@ -21,22 +21,12 @@ public class SDB: NSManagedObject {
     }
     
     var state = State.brandNew
-    
-    private var observeTimer = false
-    private var isObserverAdded = false
-    
+        
     // MARK: - User Intents
     func toggleStart() {
         switch state {
             case .brandNew, .paused: //🔴 start
                 state = .running
-                
-                if !isObserverAdded {
-                    observeSDBTimer()
-                    isObserverAdded = true
-                }
-                
-                observeTimer = true
                 
                 //create newPair and set newPair.start date
                 let newSDBPair = SDBPair(context: managedObjectContext!)
@@ -45,7 +35,6 @@ public class SDB: NSManagedObject {
                 
             case .running: //🔴 pause
                 state = .paused
-                observeTimer = false
                 
                 //set pause and compute duration
                 lastPair?.pause = Date()
@@ -61,7 +50,6 @@ public class SDB: NSManagedObject {
         delayExecution(.now() + 0.01) {
             self.currentDelay = Float(self.referenceDelay)
             self.state = .brandNew
-            self.observeTimer = false
             PersistenceController.shared.save()
         }
     }
@@ -71,7 +59,6 @@ public class SDB: NSManagedObject {
     func removeDelay() {
         referenceDelay = 0
         currentDelay = 0
-        observeTimer  /* notifications */ = false
         state = .brandNew
         
         PersistenceController.shared.save()
@@ -103,7 +90,7 @@ public class SDB: NSManagedObject {
     }
     
     func handleNotification() {
-        guard observeTimer /* notifications */ else { return }
+        guard state == .running /* notifications */ else { return }
         
         DispatchQueue.main.async {
             
