@@ -504,6 +504,11 @@ class ViewModel: ObservableObject {
     func removeDelay(for bubble:Bubble) {
         bubble.sdb?.removeDelay()
     }
+    
+    // MARK: - User Intents
+    func resumeObservingTimer(for bubble: Bubble) {
+        bubble.addBubbleTimerObserver()
+    }
 }
 
 // MARK: - Handle SDBubble start and pause and shit

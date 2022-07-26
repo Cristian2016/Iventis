@@ -152,6 +152,9 @@ struct BubbleCell: View {
     }
     
     // MARK: - Intents
+    ///user wants to see the running bubble display time
+    private func handleOnAppear() { vm.resumeObservingTimer(for: bubble) }
+    
     private func userTappedHours() { vm.rankOfSelectedBubble = Int(bubble.rank) }
     
     private func userTappedHundredths() {
@@ -213,7 +216,7 @@ struct BubbleCell: View {
                 .offset(y: -16)
             } //stickyNote
         }
-       
+        .onAppear { handleOnAppear() }
           //gestures
         .onDrag { NSItemProvider() }
         .swipeActions(edge: .leading, allowsFullSwipe: true) {
