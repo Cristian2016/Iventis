@@ -90,7 +90,6 @@ class ViewModel: ObservableObject {
         
         newBubble.color = color
         newBubble.rank = Int64(UserDefaults.generateRank())
-        newBubble.observeBubbleTimer()
         
         let sdb = SDB(context: backgroundContext)
         sdb.observeSDBTimer()
@@ -163,6 +162,11 @@ class ViewModel: ObservableObject {
                 
             case .finished: return
         }
+                
+        if bubble.state == .running {
+            bubble.addBubbleTimerObserver()
+        }
+        
         
         PersistenceController.shared.save()
     }

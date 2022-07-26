@@ -11,7 +11,9 @@ import CoreData
 import SwiftUI
 
 public class Bubble: NSManagedObject {
-        
+    
+    var observerAddedAlready = false
+    
     ///4 start delay values
     static let delays = [5, 10, 20, 45]
         
@@ -40,10 +42,7 @@ public class Bubble: NSManagedObject {
     = Float.TimeComponentsAsStrings(hr: "0", min: "0", sec: "0", cents: "00")
     { willSet { DispatchQueue.main.async { self.objectWillChange.send() } }}
             
-    deinit {
-        NotificationCenter.default.removeObserver(self)
-        print("\(color ?? "no color")/ bubble deinit")
-    }
+    deinit { NotificationCenter.default.removeObserver(self) }
     
     enum Kind:Comparable {
         case stopwatch
@@ -73,7 +72,7 @@ public class Bubble: NSManagedObject {
 }
 
 extension Bubble {
-    enum State {
+    enum State: String {
         case brandNew //0
         case running //1
         case paused //2
@@ -101,14 +100,22 @@ extension Bubble {
         case stop
     }
     
+    //isObserving = false
+    
     ///observe bubbleTimer signal to update time components only if bubble is running
     ///1.start observing on init, 2.resume observing on reentering active phase 3.remove observer on deinit
-    func observeBubbleTimer() {
+    func addBubbleTimerObserver() {
+        
+        //make sure observer added only once
+        if observerAddedAlready {
+            print("observer added already")
+            return
+        }
+        observerAddedAlready = true
         
         NotificationCenter.default
             .addObserver(forName: .bubbleTimerSignal, object: nil, queue: nil) {
                 [weak self] _ in
-                
                 guard self?.state == .running else { return }
                 
                 self?.updateBubbleCellComponents()

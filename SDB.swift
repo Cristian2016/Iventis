@@ -12,7 +12,6 @@ import SwiftUI
 
 ///StartDelay_Bubble
 public class SDB: NSManagedObject {
-    lazy var center = NotificationCenter.default
     
     enum State:String {
         case brandNew
@@ -82,7 +81,7 @@ public class SDB: NSManagedObject {
     }
     
     func observeSDBTimer() {
-        center.addObserver(forName: .sdbTimer, object: nil, queue: nil) { [weak self] _ in
+        NotificationCenter.default.addObserver(forName: .sdbTimer, object: nil, queue: nil) { [weak self] _ in
             delayExecution(.now() + 1) {
                 self?.handleNotification()
             }
@@ -105,5 +104,5 @@ public class SDB: NSManagedObject {
         }
     }
     
-    deinit { center.removeObserver(self) }
+    deinit { NotificationCenter.default.removeObserver(self) }
 }
