@@ -12,7 +12,7 @@ class BubbleTimer {
     deinit { killTimer() }
     
     ///event handler called every second
-    private let updateFrequency:Double = 1 /* every second */
+    private let updateFrequency:Double = 0.5 /* every second? */
         
     let queue = DispatchQueue(label: "BubbleTimer", attributes: .concurrent)
     
