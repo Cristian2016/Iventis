@@ -62,13 +62,13 @@ extension BubbleCell {
                 .offset(x: isSecondsLongPressed ? 20 : 0.0, y: 0)
                 .animation(.secondsLongPressed.delay(0.2), value: isSecondsLongPressed)
             //gestures
-            .onTapGesture { userWantsDetailView() }
-            .highPriorityGesture(
-                LongPressGesture(minimumDuration: 0.3)
-                    .onEnded { _ in
-                        userWantsNotesList()
-                    }
-            )
+                .onTapGesture { userWantsDetailView() }
+                .highPriorityGesture(
+                    LongPressGesture(minimumDuration: 0.3)
+                        .onEnded { _ in
+                            userWantsNotesList()
+                        }
+                )
             
             //MINUTES
             Circle().fill(Color.clear)
