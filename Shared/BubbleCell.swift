@@ -51,6 +51,21 @@ extension BubbleCell {
 }
 
 extension BubbleCell {
+    ///LongPress(0) is equaivalent to TapGesture and replaces the normal .onTap modifier
+    private var tapGestureReplacement:some Gesture {
+        LongPressGesture(minimumDuration: 0.0)
+            .onEnded { _ in
+                userWantsDetailView()
+            }
+    }
+    
+    private var shortLongPressGesture:some Gesture {
+        LongPressGesture(minimumDuration: 0.3)
+            .onEnded { _ in
+                userWantsNotesList()
+            }
+    }
+    
     var timeComponents: some View {
         HStack (spacing: BubbleCell.metrics.spacing) {
             //HOURS
@@ -62,13 +77,8 @@ extension BubbleCell {
                 .offset(x: isSecondsLongPressed ? 20 : 0.0, y: 0)
                 .animation(.secondsLongPressed.delay(0.2), value: isSecondsLongPressed)
             //gestures
-                .onTapGesture { userWantsDetailView() }
-                .highPriorityGesture(
-                    LongPressGesture(minimumDuration: 0.3)
-                        .onEnded { _ in
-                            userWantsNotesList()
-                        }
-                )
+                .highPriorityGesture( tapGestureReplacement )
+                .highPriorityGesture( shortLongPressGesture )
             
             //MINUTES
             Circle().fill(Color.clear)
