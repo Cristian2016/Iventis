@@ -52,7 +52,7 @@ extension BubbleCell {
 
 extension BubbleCell {
     ///LongPress(0) is equaivalent to TapGesture and replaces the normal .onTap modifier
-    private var tapGestureReplacement:some Gesture {
+    private var zeroLongPressGesture:some Gesture {
         LongPressGesture(minimumDuration: 0.0)
             .onEnded { _ in userWantsDetailView() }
     }
@@ -73,7 +73,7 @@ extension BubbleCell {
                 .offset(x: isSecondsLongPressed ? 20 : 0.0, y: 0)
                 .animation(.secondsLongPressed.delay(0.2), value: isSecondsLongPressed)
             //gestures
-                .highPriorityGesture( tapGestureReplacement ) //show DetailView
+                .highPriorityGesture( zeroLongPressGesture ) //show DetailView
                 .highPriorityGesture( shortLongPressGesture ) //show NotesList
             
             //MINUTES
