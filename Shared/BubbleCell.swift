@@ -94,8 +94,8 @@ extension BubbleCell {
                 .scaleEffect(isSecondsLongPressed ? 0.2 : 1.0)
                 .animation(.secondsLongPressed, value: isSecondsLongPressed)
             //gestures
+                .gesture(longPress)
                 .onTapGesture { userTappedSeconds() }
-                .highPriorityGesture(longPress)
             //overlays
                 .overlay {
                     if !isBubbleRunning {
@@ -117,7 +117,13 @@ extension BubbleCell {
     //⚠️ if minDuration is 0.3, it has a shorter minDuration than onDrag, so it will work! Otherwise it doesn't
     var longPress: some Gesture {
         LongPressGesture(minimumDuration: 0.3)
-            .onEnded { _ in userLongPressedSeconds() }
+            .onEnded {
+                _ in userLongPressedSeconds()
+                print("ended called")
+            }
+            .onChanged { _ in
+                print("onChanged called")
+            }
     }
 }
 
@@ -222,7 +228,6 @@ struct BubbleCell: View {
         }
         .onAppear { handleOnAppear() }
           //gestures
-        .onDrag { NSItemProvider() }
         .swipeActions(edge: .leading, allowsFullSwipe: true) {
             
             //pin

@@ -22,18 +22,19 @@ struct BubbleList: View {
                 List (results, selection: $vm.rankOfSelectedBubble) { section in
                     Section {
                         ForEach (section) { BubbleCell($0) }
-                            .onMove {
-                                let moveAtTheBottom = ($1 == section.count)
-                                let sourceRank = section[$0.first!].rank
-                                
-                                if moveAtTheBottom {
-                                    let destRank = section[$1 - 1].rank
-                                    vm.reorderRanks(sourceRank, destRank, true)
-                                } else {
-                                    let destRank = section[$1].rank
-                                    vm.reorderRanks(sourceRank, destRank)
-                                }
-                            }
+                            .onMove(perform: nil)
+//                            .onMove {
+//                                let moveAtTheBottom = ($1 == section.count)
+//                                let sourceRank = section[$0.first!].rank
+//
+//                                if moveAtTheBottom {
+//                                    let destRank = section[$1 - 1].rank
+//                                    vm.reorderRanks(sourceRank, destRank, true)
+//                                } else {
+//                                    let destRank = section[$1].rank
+//                                    vm.reorderRanks(sourceRank, destRank)
+//                                }
+//                            }
                     } header: { headerTitle(for: section.id.description) }
                         .listRowSeparator(.hidden)
                     
@@ -52,7 +53,6 @@ struct BubbleList: View {
                 .offset(y:-7)
             }
             .padding(EdgeInsets(top: 8, leading: 0, bottom: 0, trailing: 20))
-            
             
             if !notesShowing { LeftStrip($vm.isPaletteShowing, isListEmpty) }
             
