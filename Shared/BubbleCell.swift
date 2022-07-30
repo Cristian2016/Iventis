@@ -51,17 +51,6 @@ extension BubbleCell {
 }
 
 extension BubbleCell {
-    ///LongPress(0) is equaivalent to TapGesture and replaces the normal .onTap modifier
-    private var zeroLongPressGesture:some Gesture {
-        LongPressGesture(minimumDuration: 0.0)
-            .onEnded { _ in userWantsDetailView() }
-    }
-    
-    private var shortLongPressGesture:some Gesture {
-        LongPressGesture(minimumDuration: 0.3)
-            .onEnded { _ in userWantsNotesList() }
-    }
-    
     var timeComponents: some View {
         HStack (spacing: BubbleCell.metrics.spacing) {
             //HOURS
@@ -73,8 +62,13 @@ extension BubbleCell {
                 .offset(x: isSecondsLongPressed ? 20 : 0.0, y: 0)
                 .animation(.secondsLongPressed.delay(0.2), value: isSecondsLongPressed)
             //gestures
-                .highPriorityGesture( zeroLongPressGesture ) //show DetailView
-                .highPriorityGesture( shortLongPressGesture ) //show NotesList
+                .onTapGesture {
+                    userWantsDetailView()
+                }
+                .onLongPressGesture {
+                    userWantsNotesList()
+                }
+                
             
             //MINUTES
             Circle().fill(Color.clear)
@@ -94,8 +88,8 @@ extension BubbleCell {
                 .scaleEffect(isSecondsLongPressed ? 0.2 : 1.0)
                 .animation(.secondsLongPressed, value: isSecondsLongPressed)
             //gestures
-                .gesture(longPress)
                 .onTapGesture { userTappedSeconds() }
+                .gesture(longPress)
             //overlays
                 .overlay {
                     if !isBubbleRunning {
@@ -257,6 +251,9 @@ struct BubbleCell: View {
             Button { vm.showMoreOptions(for: bubble) }
         label: { Label { Text("More") }
             icon: { Image(systemName: "ellipsis.circle.fill") } }.tint(.lightGray)
+        }
+        .onDrag {
+            NSItemProvider()
         }
     }
     

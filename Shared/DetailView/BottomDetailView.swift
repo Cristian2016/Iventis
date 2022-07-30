@@ -29,6 +29,7 @@ struct BottomDetailView: View {
     }
     
     var body: some View {
+        
         TabView (selection: $tabWrapper.selectedTab) {
             ForEach(sessions) { BottomCell($0).tag(position(of:$0)) }
         }

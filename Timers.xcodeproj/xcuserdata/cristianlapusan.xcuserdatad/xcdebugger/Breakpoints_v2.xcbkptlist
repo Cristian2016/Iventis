@@ -66,8 +66,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "123"
             endingLineNumber = "123"
-            landmarkName = "unknown"
-            landmarkType = "0">
+            landmarkName = "BubbleList"
+            landmarkType = "14">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -96,7 +96,7 @@
             <Locations>
                <Location
                   uuid = "99200F32-A84B-4DCB-A145-DC724B7B2CA5 - 157082b4c74f4227"
-                  shouldBeEnabled = "Yes"
+                  shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "Timers.SDButton.body.getter : some"
@@ -111,7 +111,7 @@
                </Location>
                <Location
                   uuid = "99200F32-A84B-4DCB-A145-DC724B7B2CA5 - 927602c3d67c525d"
-                  shouldBeEnabled = "Yes"
+                  shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "closure #1 () -&gt; SwiftUI.TupleView&lt;(&lt;&lt;opaque return type of Timers.SDButton.deleteText : some&gt;&gt;.0, &lt;&lt;opaque return type of SwiftUI.View.onTapGesture(count: Swift.Int, perform: () -&gt; ()) -&gt; some&gt;&gt;.0)&gt; in Timers.SDButton.body.getter : some"
