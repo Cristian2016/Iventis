@@ -64,10 +64,10 @@
             filePath = "Shared/BubbleList.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "123"
-            endingLineNumber = "123"
-            landmarkName = "BubbleList"
-            landmarkType = "14">
+            startingLineNumber = "144"
+            endingLineNumber = "144"
+            landmarkName = "reduce(value:nextValue:)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
