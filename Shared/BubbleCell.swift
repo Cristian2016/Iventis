@@ -262,9 +262,6 @@ struct BubbleCell: View {
         label: { Label { Text("More") }
             icon: { Image(systemName: "ellipsis.circle.fill") } }.tint(.lightGray)
         }
-//        .onDrag {
-//            NSItemProvider()
-//        }
     }
     
     // MARK: - Legoes
