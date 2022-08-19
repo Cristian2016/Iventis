@@ -22,7 +22,6 @@ struct BubbleList: View {
                 List (results, selection: $vm.rankOfSelectedBubble) { section in
                     Section {
                         ForEach (section) { BubbleCell($0) }
-//                            .onMove(perform: nil)
                             .onMove {
                                 let moveAtTheBottom = ($1 == section.count)
                                 let sourceRank = section[$0.first!].rank

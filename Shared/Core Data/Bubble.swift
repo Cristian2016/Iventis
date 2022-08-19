@@ -107,10 +107,7 @@ extension Bubble {
     func addBubbleTimerObserver() {
         
         //make sure observer added only once
-        if observerAddedAlready {
-            print("observer added already")
-            return
-        }
+        if observerAddedAlready { return }
         observerAddedAlready = true
         
         NotificationCenter.default

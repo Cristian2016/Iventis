@@ -63,7 +63,7 @@ struct PersistenceController {
     func save(_ context:NSManagedObjectContext = PersistenceController.shared.viewContext) {
         if context.hasChanges {
             try? context.save()
-            print("Coredata saved")
+//            print("Coredata saved")
         }
     }
 }
