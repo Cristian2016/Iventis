@@ -82,19 +82,15 @@ extension BubbleCell {
                 .onTapGesture { userWantsDetailView() }
             
             //SECONDS
-            ZStack {
-                Circle().fill(Color.clear)
-                    .contentShape(Circle())
-                    .overlay { Text(bubble.bCell_Components.sec) }
-                //animations
-                    .scaleEffect(isSecondsLongPressed ? 0.2 : 1.0)
-                    .animation(.secondsLongPressed, value: isSecondsLongPressed)
-                //gestures
-                    .gesture(tap)
-                    .gesture(swipe)
-            }
-            .simultaneousGesture(longPress)
-            
+            Circle().fill(Color.clear)
+                .contentShape(Circle())
+                .overlay { Text(bubble.bCell_Components.sec) }
+            //animations
+                .scaleEffect(isSecondsLongPressed ? 0.2 : 1.0)
+                .animation(.secondsLongPressed, value: isSecondsLongPressed)
+            //gestures
+                .gesture(tap)
+                .simultaneousGesture(longPress)
             //overlays
                 .overlay {
                     if !isBubbleRunning {
@@ -106,7 +102,7 @@ extension BubbleCell {
                 }
                 .overlay {
                     if sdb.referenceDelay > 0 { SDButton(bubble.sdb) }
-            }
+                }
         }
         //font
         .font(.system(size: BubbleCell.metrics.fontSize))
