@@ -14,6 +14,7 @@ struct BubbleList: View {
     @EnvironmentObject private var vm:ViewModel
     @SectionedFetchRequest var results:SectionedFetchResults<Bool, Bubble>
     
+    
     // MARK: -
     var body: some View {
         ZStack {
@@ -21,19 +22,23 @@ struct BubbleList: View {
             else {
                 List (results, selection: $vm.rankOfSelectedBubble) { section in
                     Section {
-                        ForEach (section) { BubbleCell($0) }
-                            .onMove {
-                                let moveAtTheBottom = ($1 == section.count)
-                                let sourceRank = section[$0.first!].rank
-
-                                if moveAtTheBottom {
-                                    let destRank = section[$1 - 1].rank
-                                    vm.reorderRanks(sourceRank, destRank, true)
-                                } else {
-                                    let destRank = section[$1].rank
-                                    vm.reorderRanks(sourceRank, destRank)
-                                }
-                            }
+                        ForEach (section) {
+                            BubbleCell($0)
+                            
+                        }
+//                        .onMove { source, destination in
+//                            let moveAtTheBottom = (destination == section.count)
+//                            let sourceRank = section[source.first!].rank
+//
+//                            if moveAtTheBottom {
+//                                let destRank = section[destination - 1].rank
+//                                vm.reorderRanks(sourceRank, destRank, true)
+//                            } else {
+//                                let destRank = section[destination].rank
+//                                vm.reorderRanks(sourceRank, destRank)
+//                            }
+//                        }
+                        .onMove(perform: vm.allowOnMove ? onMoveClosure : nil)
                     } header: { headerTitle(for: section.id.description) }
                         .listRowSeparator(.hidden)
                     
@@ -64,6 +69,10 @@ struct BubbleList: View {
             self.vm.deleteViewOffset =
             vm.compute_deleteView_YOffset(for: new.frame)
         }
+    }
+    
+    private var  onMoveClosure: (IndexSet, Int) -> Void = { indexSet, Int in
+        
     }
     
     // MARK: -

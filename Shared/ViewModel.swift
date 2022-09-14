@@ -31,6 +31,10 @@ class ViewModel: ObservableObject {
     
     @Published var showMoreOptionsInfo = false
     
+    ///allow user to drag and drop tableView cells
+    ///.onMove view modifier will not be nil
+    @Published var allowOnMove = false
+    
     //MoreOptionsView 3 @Published
     
     // MARK: -
@@ -506,7 +510,7 @@ class ViewModel: ObservableObject {
     }
     
     // MARK: - User Intents
-    func resumeObservingTimer(for bubble: Bubble) {
+    func observeTimer(for bubble: Bubble) {
         bubble.addBubbleTimerObserver()
     }
 }

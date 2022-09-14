@@ -79,7 +79,9 @@ extension BubbleCell {
                 .offset(x: isSecondsLongPressed ? 10 : 0.0, y: 0)
                 .animation(.secondsLongPressed.delay(0.1), value: isSecondsLongPressed)
                 //gestures
-                .onTapGesture { userWantsDetailView() }
+                .onTapGesture {
+                    userWantsDetailView()
+                }
             
             //SECONDS
             Circle().fill(Color.clear)
@@ -90,7 +92,7 @@ extension BubbleCell {
                 .animation(.secondsLongPressed, value: isSecondsLongPressed)
             //gestures
                 .gesture(tap)
-                .simultaneousGesture(longPress)
+                .gesture(longPress)
             //overlays
                 .overlay {
                     if !isBubbleRunning {
@@ -111,18 +113,29 @@ extension BubbleCell {
     
     //⚠️ if minDuration is 0.3, it has a shorter minDuration than onDrag, so it will work! Otherwise it doesn't
     private var longPress: some Gesture {
-        LongPressGesture(minimumDuration: 0.6)
-            .onEnded { _ in userLongPressedSeconds() }
+        LongPressGesture(minimumDuration: 0.3)
+            .updating($isDetectingLongPress, body: { currentState, gestureState, _ in
+                /* ⚠️ it does not work on .gesture(longPress) modifier. use maybe .simultaneousGesture or .highPriority */
+                gestureState = currentState
+                print("updating")
+            })
+            .onEnded { _ in
+                endSession()
+            }
     }
+    
     private var tap:some Gesture {
         TapGesture()
             .onEnded { _ in userTappedSeconds() }
     }
     
-    private var swipe:some Gesture {
-        DragGesture(minimumDistance: 10, coordinateSpace: .local)
+    private var drag:some Gesture {
+        DragGesture(minimumDistance: 0)
+            .onChanged { value in
+                print("drag")
+            }
             .onEnded { value in
-                print("swipe gesture ended")
+                print("on ended drag")
             }
     }
 }
@@ -131,12 +144,14 @@ struct BubbleCell: View {
     // MARK: - Constants
     static var metrics = Metrics()
     
+    @GestureState var isDetectingLongPress = false
+    
     // MARK: - Dependencies
     @StateObject var bubble:Bubble
     @StateObject var sdb:SDB  /* I made
                                this one since apparently bubble.sdb.referenceDelay does not emit */
     @EnvironmentObject private var vm:ViewModel
-    
+        
     private let noteOffset = CGSize(width: 0, height: -6)
     
     // MARK: -
@@ -161,12 +176,21 @@ struct BubbleCell: View {
         PersistenceController.shared.save()
     }
     
-    // MARK: - Intents
-    ///user wants to see the running bubble display time
-    private func handleOnAppear() { vm.resumeObservingTimer(for: bubble) }
+    // MARK: - User Intents
+    ///when cell appears bubbleCell will resume observing timer. if it doesn't resume, correct time will not be displayed to the user
+    private func resumeObserveTimer() /* onAppear */ { vm.observeTimer(for: bubble) }
     
-    private func userTappedHours() { vm.rankOfSelectedBubble = Int(bubble.rank) }
-    
+    private func endSession() {
+        isSecondsLongPressed = true
+        delayExecution(.now() + 0.25) { isSecondsLongPressed = false }
+        
+        //feedback
+        UserFeedback.doubleHaptic(.heavy)
+        
+        //user intent model
+        vm.endSession(bubble)
+    }
+        
     private func userTappedHundredths() {
         UserFeedback.singleHaptic(.heavy)
         vm.toggleBubbleStart(bubble)
@@ -182,18 +206,7 @@ struct BubbleCell: View {
         //user intent model
         vm.toggleBubbleStart(bubble)
 }
-    
-    private func userLongPressedSeconds() {
-        isSecondsLongPressed = true
-        delayExecution(.now() + 0.25) { isSecondsLongPressed = false }
-        
-        //feedback
-        UserFeedback.doubleHaptic(.heavy)
-        
-        //user intent model
-        vm.endSession(bubble)
-    }
-    
+
     ///user taps minutes or hours
     private func userWantsDetailView() {
         vm.rankOfSelectedBubble = Int(bubble.rank)
@@ -226,7 +239,7 @@ struct BubbleCell: View {
                 .offset(y: -16)
             } //stickyNote
         }
-        .onAppear { handleOnAppear() }
+        .onAppear { resumeObserveTimer() }
           //gestures
         .swipeActions(edge: .leading, allowsFullSwipe: true) {
             
