@@ -185,12 +185,9 @@ struct BubbleCell: View {
     ///the 3 Circles or 3 Squares
     var background: some View {
         HStack (spacing: BubbleCell.metrics.spacing) {
-            //Hours
-            bubbleShape.opacity(hrOpacity)
-            //Minutes
-            bubbleShape.opacity(minOpacity)
-            //Seconds
-            bubbleShape
+            /* Hr */ bubbleShape.opacity(hrOpacity)
+            /* Min */ bubbleShape.opacity(minOpacity)
+            /* Sec */ bubbleShape
         }
     }
     
