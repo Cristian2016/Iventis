@@ -10,36 +10,15 @@ import SwiftUI
 
 //Background
 extension BubbleCell {
-    enum Shape {
+    ///either circle or square. Square means bubble has a widget
+    enum BubbleShape {
         case circle
         case square
     }
     
-    ///3 Circles or Squares in the background
-    var background: some View {
-        HStack (spacing: BubbleCell.metrics.spacing) {
-            //Hours
-            shape.opacity(hrOpacity)
-            //Minutes
-            shape.opacity(minOpacity)
-            //Seconds
-            shape
-        }
-    }
-    
-    @ViewBuilder //it has gradient
-    private var secondsShape: some View {
-        if bubble.hasWidget {
-            RoundedRectangle(cornerRadius: 20)
-                .fill(Color.bubbleColor(forName: bubble.color ?? "cyan"))
-        } else {
-            Circle()
-                .fill(Color.bubbleColor(forName: bubble.color ?? "cyan").gradient)
-        }
-    }
-    
+    ///either a circle or a square
     @ViewBuilder
-    private var shape: some View {
+    private var bubbleShape: some View {
         if bubble.hasWidget {
             RoundedRectangle(cornerRadius: 20)
                 .fill(Color.bubbleColor(forName: bubble.color ?? "cyan"))
@@ -198,6 +177,20 @@ struct BubbleCell: View {
             Button { vm.showMoreOptions(for: bubble) }
         label: { Label { Text("More") }
             icon: { Image(systemName: "ellipsis.circle.fill") } }.tint(.lightGray)
+        }
+    }
+    
+    // MARK: - Legos
+    
+    ///the 3 Circles or 3 Squares
+    var background: some View {
+        HStack (spacing: BubbleCell.metrics.spacing) {
+            //Hours
+            bubbleShape.opacity(hrOpacity)
+            //Minutes
+            bubbleShape.opacity(minOpacity)
+            //Seconds
+            bubbleShape
         }
     }
     
