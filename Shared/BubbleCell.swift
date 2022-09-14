@@ -63,7 +63,7 @@ extension BubbleCell {
                 .animation(.secondsLongPressed.delay(0.2), value: isSecondsLongPressed)
             //gestures
                 .onTapGesture {
-                    userWantsDetailView()
+                    showBubbleDetail()
                 }
                 .onLongPressGesture {
                     userWantsNotesList()
@@ -80,7 +80,7 @@ extension BubbleCell {
                 .animation(.secondsLongPressed.delay(0.1), value: isSecondsLongPressed)
                 //gestures
                 .onTapGesture {
-                    userWantsDetailView()
+                    showBubbleDetail()
                 }
             
             //SECONDS
@@ -177,7 +177,8 @@ struct BubbleCell: View {
     }
     
     // MARK: - User Intents
-    ///when cell appears bubbleCell will resume observing timer. if it doesn't resume, correct time will not be displayed to the user
+    /*
+     when cell appears bubbleCell will resume observing timer. if it doesn't resume, correct time will not be displayed to the user */
     private func resumeObserveTimer() /* onAppear */ { vm.observeTimer(for: bubble) }
     
     private func endSession() {
@@ -189,6 +190,12 @@ struct BubbleCell: View {
         
         //user intent model
         vm.endSession(bubble)
+    }
+    
+    ///user taps minutes or hours
+    private func showBubbleDetail() {
+        vm.rankOfSelectedBubble = Int(bubble.rank)
+        vm.isDetailViewShowing = true
     }
         
     private func userTappedHundredths() {
@@ -206,12 +213,6 @@ struct BubbleCell: View {
         //user intent model
         vm.toggleBubbleStart(bubble)
 }
-
-    ///user taps minutes or hours
-    private func userWantsDetailView() {
-        vm.rankOfSelectedBubble = Int(bubble.rank)
-        vm.isDetailViewShowing = true
-    }
     
     // MARK: -
     var body: some View {
