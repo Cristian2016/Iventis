@@ -141,6 +141,66 @@ extension BubbleCell {
 }
 
 struct BubbleCell: View {
+    // MARK: - Body
+    var body: some View {
+        VStack {
+            ZStack {
+                background
+                timeComponents
+                let putPositionEmitterView = showDeleteActionView || showDetailView
+                if putPositionEmitterView { cellLowEmitterView.background {
+                    GeometryReader {
+                        let value = BubbleCellLow_Key.RankFrame(rank: Int(bubble.rank), frame: $0.frame(in: .global))
+                        Color.clear.preference(key: BubbleCellLow_Key.self, value: value)
+                    }
+                } }
+            }
+            //subviews
+            .overlay { if bubble.hasCalendar && noNote { calendarSymbol } } //calSymbol
+            .overlay {
+                Push(.topLeft) {
+                    NoteButton (alignment: .leading)
+                    { noteButtonContent }
+                dragAction: { vm.deleteNote(for: bubble) }
+                    tapAction : { handleNoteTap() }
+                }
+                .offset(y: -16)
+            } //stickyNote
+        }
+        .onAppear { resumeObserveTimer() }
+          //gestures
+        .swipeActions(edge: .leading, allowsFullSwipe: true) {
+            
+            //pin
+            Button { vm.togglePin(bubble) }
+        label: { Label { Text(bubble.isPinned ? "Unpin" : "Pin") }
+            icon: { Image(systemName: bubble.isPinned ? "pin.slash.fill" : "pin.fill") } }
+        .tint(bubble.isPinned ? .gray : .orange)
+            
+            //calendar
+            Button { vm.toggleCalendar(bubble) }
+        label: { Label { Text(calendarActionName) }
+            icon: { Image(systemName: calendarActionImageName) } }
+        .tint(calendarActionColor)
+        }
+        .swipeActions(edge: .trailing, allowsFullSwipe: true) {
+            //delete
+            Button {
+                vm.showDeleteAction_bRank = Int(bubble.rank)
+                delayExecution(.now() + 0.2) {
+                    vm.isDetailViewShowing = false
+                }
+            }
+        label: { Label { Text("Delete") }
+            icon: { Image.trash } }.tint(.red)
+            
+            //more options
+            Button { vm.showMoreOptions(for: bubble) }
+        label: { Label { Text("More") }
+            icon: { Image(systemName: "ellipsis.circle.fill") } }.tint(.lightGray)
+        }
+    }
+    
     // MARK: - Constants
     static var metrics = Metrics()
     
@@ -215,65 +275,6 @@ struct BubbleCell: View {
         vm.toggleBubbleStart(bubble)
 }
     
-    // MARK: -
-    var body: some View {
-        VStack {
-            ZStack {
-                background
-                timeComponents
-                let putPositionEmitterView = showDeleteActionView || showDetailView
-                if putPositionEmitterView { cellLowEmitterView.background {
-                    GeometryReader {
-                        let value = BubbleCellLow_Key.RankFrame(rank: Int(bubble.rank), frame: $0.frame(in: .global))
-                        Color.clear.preference(key: BubbleCellLow_Key.self, value: value)
-                    }
-                } }
-            }
-            //subviews
-            .overlay { if bubble.hasCalendar && noNote { calendarSymbol } } //calSymbol
-            .overlay {
-                Push(.topLeft) {
-                    NoteButton (alignment: .leading)
-                    { noteButtonContent }
-                dragAction: { vm.deleteNote(for: bubble) }
-                    tapAction : { handleNoteTap() }
-                }
-                .offset(y: -16)
-            } //stickyNote
-        }
-        .onAppear { resumeObserveTimer() }
-          //gestures
-        .swipeActions(edge: .leading, allowsFullSwipe: true) {
-            
-            //pin
-            Button { vm.togglePin(bubble) }
-        label: { Label { Text(bubble.isPinned ? "Unpin" : "Pin") }
-            icon: { Image(systemName: bubble.isPinned ? "pin.slash.fill" : "pin.fill") } }
-        .tint(bubble.isPinned ? .gray : .orange)
-            
-            //calendar
-            Button { vm.toggleCalendar(bubble) }
-        label: { Label { Text(calendarActionName) }
-            icon: { Image(systemName: calendarActionImageName) } }
-        .tint(calendarActionColor)
-        }
-        .swipeActions(edge: .trailing, allowsFullSwipe: true) {
-            //delete
-            Button {
-                vm.showDeleteAction_bRank = Int(bubble.rank)
-                delayExecution(.now() + 0.2) {
-                    vm.isDetailViewShowing = false
-                }
-            }
-        label: { Label { Text("Delete") }
-            icon: { Image.trash } }.tint(.red)
-            
-            //more options
-            Button { vm.showMoreOptions(for: bubble) }
-        label: { Label { Text("More") }
-            icon: { Image(systemName: "ellipsis.circle.fill") } }.tint(.lightGray)
-        }
-    }
     
     // MARK: - Legoes
     private var noteButtonContent:some View {
