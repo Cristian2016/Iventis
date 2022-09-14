@@ -258,12 +258,12 @@ struct BubbleCell: View {
         vm.toggleBubbleStart(bubble)
 }
     
+    ///long press on hours to show the notes list
     func showNotesList() {
         UserFeedback.singleHaptic(.light)
-        showNotesList()
+        vm.notesList_bRank = Int(bubble.rank)
         PersistenceController.shared.save()
     }
-    
     
     // MARK: - Legoes
     private var noteButtonContent:some View {
@@ -351,8 +351,6 @@ extension View {
 // MARK: - Little Helpers
 extension BubbleCell {
     // MARK: - Helpers
-    private func showNotesList () { vm.notesList_bRank = Int(bubble.rank) }
-    
     private var calendarActionName:String { bubble.hasCalendar ? "Cal OFF" : "Cal ON" }
     
     private var calendarActionImageName:String { bubble.hasCalendar ? "calendar" : "calendar" }
