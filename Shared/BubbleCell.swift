@@ -192,18 +192,19 @@ struct BubbleCell: View {
         vm.endSession(bubble)
     }
     
-    ///user taps minutes or hours
+    ///user taps minutes or hours to reveal details for the tapped bubble
     private func showBubbleDetail() {
         vm.rankOfSelectedBubble = Int(bubble.rank)
         vm.isDetailViewShowing = true
     }
-        
-    private func userTappedHundredths() {
+    
+    //Start/Pause Bubble 2 ways
+    /* 1 */private func userTappedHundredths() {
         UserFeedback.singleHaptic(.heavy)
         vm.toggleBubbleStart(bubble)
     }
     
-    private func userTappedSeconds() {
+    /* 2 */private func userTappedSeconds() {
         isSecondsTapped = true
         delayExecution(.now() + 0.1) { isSecondsTapped = false }
         
