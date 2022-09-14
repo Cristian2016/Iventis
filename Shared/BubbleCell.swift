@@ -30,7 +30,7 @@ extension BubbleCell {
 }
 
 extension BubbleCell {
-    var timeComponents: some View {
+    var timeLabels: some View {
         HStack (spacing: BubbleCell.metrics.spacing) {
             //HOURS
             Circle().fill(Color.clear)
@@ -45,9 +45,8 @@ extension BubbleCell {
                     showBubbleDetail()
                 }
                 .onLongPressGesture {
-                    userWantsNotesList()
+                    showNotesList()
                 }
-                
             
             //MINUTES
             Circle().fill(Color.clear)
@@ -124,8 +123,8 @@ struct BubbleCell: View {
     var body: some View {
         VStack {
             ZStack {
-                background
-                timeComponents
+                timeLabelsBackground
+                timeLabels
                 let putPositionEmitterView = showDeleteActionView || showDetailView
                 if putPositionEmitterView { cellLowEmitterView.background {
                     GeometryReader {
@@ -183,7 +182,7 @@ struct BubbleCell: View {
     // MARK: - Legos
     
     ///the 3 Circles or 3 Squares
-    var background: some View {
+    var timeLabelsBackground: some View {
         HStack (spacing: BubbleCell.metrics.spacing) {
             /* Hr */ bubbleShape.opacity(hrOpacity)
             /* Min */ bubbleShape.opacity(minOpacity)
@@ -212,12 +211,6 @@ struct BubbleCell: View {
     init(_ bubble:Bubble) {
         _bubble = StateObject(wrappedValue: bubble)
         _sdb = StateObject(wrappedValue: bubble.sdb!)
-    }
-    
-    func userWantsNotesList() {
-        UserFeedback.singleHaptic(.light)
-        showNotesList()
-        PersistenceController.shared.save()
     }
     
     func handleNoteTap() {
@@ -264,6 +257,12 @@ struct BubbleCell: View {
         //user intent model
         vm.toggleBubbleStart(bubble)
 }
+    
+    func showNotesList() {
+        UserFeedback.singleHaptic(.light)
+        showNotesList()
+        PersistenceController.shared.save()
+    }
     
     
     // MARK: - Legoes
