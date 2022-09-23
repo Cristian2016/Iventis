@@ -100,9 +100,7 @@ struct BubbleCell: View {
                 .offset(x: isSecondsLongPressed ? 10 : 0.0, y: 0)
                 .animation(.secondsLongPressed.delay(0.1), value: isSecondsLongPressed)
                 //gestures
-                .onTapGesture {
-                    showBubbleDetail()
-                }
+                .onTapGesture { showBubbleDetail() }
             
             //SECONDS
             Circle().fill(Color.clear)
