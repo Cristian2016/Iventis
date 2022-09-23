@@ -34,8 +34,8 @@ struct BubbleCell: View {
     var body: some View {
         VStack {
             ZStack {
-                threeLabelsBackground
-                threeLabels
+                threeLabelsBackgroundView
+                threeLabelsView
                 let putPositionEmitterView = showDeleteActionView || showDetailView
                 if putPositionEmitterView { cellLowEmitterView.background {
                     GeometryReader {
@@ -92,7 +92,7 @@ struct BubbleCell: View {
     
     // MARK: - Legos
     ///labels for each time component: Hr, Min, Sec
-    var threeLabels: some View {
+    var threeLabelsView: some View {
         HStack (spacing: BubbleCell.metrics.spacing) {
             //HOURS
             Circle().fill(Color.clear)
@@ -147,8 +147,8 @@ struct BubbleCell: View {
         .foregroundColor(.white)
     }
     
-    ///3 Circles or 3 Squares for each time component: Hr, Min, Sec
-    var threeLabelsBackground: some View {
+    ///🔴🔴🔴/🟥🟥🟥 for each time component: Hr, Min, Sec
+    var threeLabelsBackgroundView: some View {
         HStack (spacing: BubbleCell.metrics.spacing) {
             /* Hr */ bubbleShape.opacity(hrOpacity)
             /* Min */ bubbleShape.opacity(minOpacity)
@@ -156,7 +156,6 @@ struct BubbleCell: View {
         }
     }
     
-    ///hundredths of a second that is :)
     private var hundredthsView:some View {
         Text(bubble.components.cents)
             .background(Circle()
