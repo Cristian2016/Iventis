@@ -21,8 +21,8 @@ struct BubbleCell: View {
             ZStack {
                 threeLabelsBackgroundView
                 threeLabelsView
-                let putPositionEmitterView = showDeleteActionView || showDetailView
-                if putPositionEmitterView { cellLowEmitterView.background {
+                let addPositionEmitterView = showDeleteActionView || showDetailView
+                if addPositionEmitterView { cellLowEmitterView.background {
                     GeometryReader {
                         let value = BubbleCellLow_Key.RankFrame(rank: Int(bubble.rank), frame: $0.frame(in: .global))
                         Color.clear.preference(key: BubbleCellLow_Key.self, value: value)
@@ -76,7 +76,14 @@ struct BubbleCell: View {
     }
     
     // MARK: - Legos
-    ///labels for each time component: Hr, Min, Sec
+    var threeLabelsBackgroundView: some View {
+        HStack (spacing: BubbleCell.metrics.spacing) {
+            /* Hr */ bubbleShape.opacity(hrOpacity)
+            /* Min */ bubbleShape.opacity(minOpacity)
+            /* Sec */ bubbleShape
+        }
+    }
+    
     var threeLabelsView: some View {
         HStack (spacing: BubbleCell.metrics.spacing) {
             //HOURS
@@ -130,15 +137,6 @@ struct BubbleCell: View {
         .foregroundColor(.white)
     }
     
-    ///🔴🔴🔴/🟥🟥🟥 for each time component: Hr, Min, Sec
-    var threeLabelsBackgroundView: some View {
-        HStack (spacing: BubbleCell.metrics.spacing) {
-            /* Hr */ bubbleShape.opacity(hrOpacity)
-            /* Min */ bubbleShape.opacity(minOpacity)
-            /* Sec */ bubbleShape
-        }
-    }
-    
     private var hundredthsView:some View {
         Text(bubble.components.cents)
             .background(Circle()
@@ -157,6 +155,27 @@ struct BubbleCell: View {
             .zIndex(1)
     }
     
+    private var noteButtonContent:some View {
+        BubbleNote().environmentObject(bubble)
+    }
+    
+    private var cellLowEmitterView: some View {
+        Circle()
+            .fill(Color.clear)
+            .frame(width: 10, height: 10)
+    }
+    
+    private var calendarSymbol:some View {
+        VStack {
+            HStack {
+                CalendarSticker().offset(x: -10, y: -10)
+                Spacer()
+            }
+            Spacer()
+        }
+        .padding([.leading], 4)
+    }
+    
     // MARK: - Gestures
     private var tap:some Gesture { TapGesture().onEnded { _ in userTappedSeconds() } }
     private var longPress: some Gesture {
@@ -171,14 +190,13 @@ struct BubbleCell: View {
             }
     }
     
-    // MARK: - Constants
+    // MARK: - Internal
     static var metrics = Metrics()
     
     @GestureState var isDetectingLongPress = false
         
     private let noteOffset = CGSize(width: 0, height: -6)
     
-    // MARK: -
     @State private var isSecondsTapped = false
     @State private var isSecondsLongPressed = false
     
@@ -238,28 +256,6 @@ struct BubbleCell: View {
         UserFeedback.singleHaptic(.light)
         vm.notesList_bRank = Int(bubble.rank)
         PersistenceController.shared.save()
-    }
-    
-    // MARK: - Legoes
-    private var noteButtonContent:some View {
-        BubbleNote().environmentObject(bubble)
-    }
-    
-    private var cellLowEmitterView: some View {
-        Circle()
-            .fill(Color.clear)
-            .frame(width: 10, height: 10)
-    }
-    
-    private var calendarSymbol:some View {
-        VStack {
-            HStack {
-                CalendarSticker().offset(x: -10, y: -10)
-                Spacer()
-            }
-            Spacer()
-        }
-        .padding([.leading], 4)
     }
     
     // MARK: - Methods
