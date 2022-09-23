@@ -88,7 +88,7 @@ struct BubbleCell: View {
             } //stickyNote
         }
         .onAppear { resumeObserveTimer() }
-          //gestures
+          //gestures. this is nice
         .swipeActions(edge: .leading, allowsFullSwipe: true) {
             
             //pin
