@@ -8,27 +8,6 @@
 
 import SwiftUI
 
-//Background
-extension BubbleCell {
-    ///either circle or square. Square means bubble has a widget
-    enum BubbleShape {
-        case circle
-        case square
-    }
-    
-    ///either a circle or a square
-    @ViewBuilder
-    private var bubbleShape: some View {
-        if bubble.hasWidget {
-            RoundedRectangle(cornerRadius: 20)
-                .fill(Color.bubbleColor(forName: bubble.color ?? "cyan"))
-        } else {
-            Circle()
-                .fill(Color.bubbleColor(forName: bubble.color ?? "cyan"))
-        }
-    }
-}
-
 struct BubbleCell: View {
     // MARK: - Body
     var body: some View {
@@ -365,5 +344,26 @@ extension BubbleCell {
         lazy var hundredthsFontSize = circleDiameter / 6
         
         lazy var hundredthsInsets = EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0)
+    }
+}
+
+//Background
+extension BubbleCell {
+    ///either circle or square. Square means bubble has a widget
+    enum BubbleShape {
+        case circle
+        case square
+    }
+    
+    ///either a circle or a square
+    @ViewBuilder
+    private var bubbleShape: some View {
+        if bubble.hasWidget {
+            RoundedRectangle(cornerRadius: 20)
+                .fill(Color.bubbleColor(forName: bubble.color ?? "cyan"))
+        } else {
+            Circle()
+                .fill(Color.bubbleColor(forName: bubble.color ?? "cyan"))
+        }
     }
 }
