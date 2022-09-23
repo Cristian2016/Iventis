@@ -36,11 +36,12 @@ struct GenericAlertView: View {
                     Image(systemName: alertContent.titleSymbol ?? "")
                     Text(alertContent.title)
                 }
-                .font(.system(size: 24))
+                .font(.system(size: 26))
+                .fontWeight(.medium)
                 Text(alertContent.content)
                     .foregroundColor(.secondary)
                     .padding([.leading, .trailing])
-                Button("Understood") {
+                Button("Do not show again") {
                     
                 }
                 .buttonStyle(.bordered)
@@ -52,6 +53,7 @@ struct GenericAlertView: View {
                     .fill(Color.background2)
                     .standardShadow()
             )
+            .padding()
         }
         .onTapGesture { dismissAction() }
     }
