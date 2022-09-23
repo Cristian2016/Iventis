@@ -29,37 +29,6 @@ extension BubbleCell {
     }
 }
 
-extension BubbleCell {
-    
-    //⚠️ if minDuration is 0.3, it has a shorter minDuration than onDrag, so it will work! Otherwise it doesn't
-    private var longPress: some Gesture {
-        LongPressGesture(minimumDuration: 0.3)
-            .updating($isDetectingLongPress, body: { currentState, gestureState, _ in
-                /* ⚠️ it does not work on .gesture(longPress) modifier. use maybe .simultaneousGesture or .highPriority */
-                gestureState = currentState
-                print("updating")
-            })
-            .onEnded { _ in
-                endSession()
-            }
-    }
-    
-    private var tap:some Gesture {
-        TapGesture()
-            .onEnded { _ in userTappedSeconds() }
-    }
-    
-    private var drag:some Gesture {
-        DragGesture(minimumDistance: 0)
-            .onChanged { value in
-                print("drag")
-            }
-            .onEnded { value in
-                print("on ended drag")
-            }
-    }
-}
-
 struct BubbleCell: View {
     // MARK: - Body
     var body: some View {
@@ -185,6 +154,20 @@ struct BubbleCell: View {
             /* Min */ bubbleShape.opacity(minOpacity)
             /* Sec */ bubbleShape
         }
+    }
+    
+    // MARK: - Gestures
+    private var tap:some Gesture { TapGesture().onEnded { _ in userTappedSeconds() } }
+    private var longPress: some Gesture {
+        LongPressGesture(minimumDuration: 0.3)
+            .updating($isDetectingLongPress, body: { currentState, gestureState, _ in
+                /* ⚠️ it does not work on .gesture(longPress) modifier. use maybe .simultaneousGesture or .highPriority */
+                gestureState = currentState
+                print("updating")
+            })
+            .onEnded { _ in
+                endSession()
+            }
     }
     
     // MARK: - Constants
