@@ -156,6 +156,25 @@ struct BubbleCell: View {
         }
     }
     
+    ///hundredths of a second that is :)
+    private var hundredthsView:some View {
+        Text(bubble.components.cents)
+            .background(Circle()
+                .foregroundColor(Color("pauseStickerColor"))
+                .padding(-12))
+            .foregroundColor(Color("pauseStickerFontColor"))
+            .font(.system(size: BubbleCell.metrics.hundredthsFontSize, weight: .semibold, design: .default))
+        //animations:scale, offset and opacity
+            .scaleEffect(isSecondsTapped && !isBubbleRunning ? 2 : 1.0)
+            .offset(x: isSecondsTapped && !isBubbleRunning ? -20 : 0,
+                    y: isSecondsTapped && !isBubbleRunning ? -20 : 0)
+            .opacity(isSecondsTapped && !isBubbleRunning ? 0 : 1)
+            .animation(.spring(response: 0.3, dampingFraction: 0.2), value: isSecondsTapped)
+            .frame(width: 50, height: 50)
+            .padding(BubbleCell.metrics.hundredthsInsets)
+            .zIndex(1)
+    }
+    
     // MARK: - Gestures
     private var tap:some Gesture { TapGesture().onEnded { _ in userTappedSeconds() } }
     private var longPress: some Gesture {
@@ -254,25 +273,6 @@ struct BubbleCell: View {
         Circle()
             .fill(Color.clear)
             .frame(width: 10, height: 10)
-    }
-    
-    ///hundredths of a second that is :)
-    private var hundredthsView:some View {
-        Text(bubble.components.cents)
-            .background(Circle()
-                .foregroundColor(Color("pauseStickerColor"))
-                .padding(-12))
-            .foregroundColor(Color("pauseStickerFontColor"))
-            .font(.system(size: BubbleCell.metrics.hundredthsFontSize, weight: .semibold, design: .default))
-        //animations:scale, offset and opacity
-            .scaleEffect(isSecondsTapped && !isBubbleRunning ? 2 : 1.0)
-            .offset(x: isSecondsTapped && !isBubbleRunning ? -20 : 0,
-                    y: isSecondsTapped && !isBubbleRunning ? -20 : 0)
-            .opacity(isSecondsTapped && !isBubbleRunning ? 0 : 1)
-            .animation(.spring(response: 0.3, dampingFraction: 0.2), value: isSecondsTapped)
-            .frame(width: 50, height: 50)
-            .padding(BubbleCell.metrics.hundredthsInsets)
-            .zIndex(1)
     }
     
     private var calendarSymbol:some View {
