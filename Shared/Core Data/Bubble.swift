@@ -33,7 +33,7 @@ public class Bubble: NSManagedObject {
     
     // MARK: -
     ///@Published time components that bubbleCell displays. ex: "12"hr "34"min "59"sec
-    @Published var bCell_Components
+    @Published var components
     = Float.TimeComponentsAsStrings(hr: "0", min: "0", sec: "0", cents: "00")
     { willSet { self.objectWillChange.send() }}
     
@@ -130,7 +130,7 @@ extension Bubble {
         let componentsString = value.timeComponentsAsStrings
                                     
         //since closure runs on bThread, dispatch back to mThread
-        DispatchQueue.main.async { self.bCell_Components = componentsString }
+        DispatchQueue.main.async { self.components = componentsString }
     }
     
     ///update smallBubbleCell time components: hr min sec

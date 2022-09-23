@@ -52,7 +52,7 @@ class ViewModel: ObservableObject {
         delayExecution(.now() + 0.0001) {
             bubbles?.forEach {
                 if $0.state != .running {
-                    $0.bCell_Components = $0.currentClock.timeComponentsAsStrings
+                    $0.components = $0.currentClock.timeComponentsAsStrings
                 }
             }
         }
@@ -115,7 +115,7 @@ class ViewModel: ObservableObject {
         let viewContext = PersistenceController.shared.viewContext
         bubble.created = Date()
         bubble.currentClock = bubble.initialClock
-        bubble.bCell_Components = bubble.initialClock.timeComponentsAsStrings
+        bubble.components = bubble.initialClock.timeComponentsAsStrings
         bubble.sessions?.forEach { viewContext.delete($0 as! Session) }
         try? viewContext.save()
     }
@@ -156,7 +156,7 @@ class ViewModel: ObservableObject {
                     
                     //set bubble properties
                     bubble.currentClock += currentPair!.duration
-                    bubble.bCell_Components = bubble.currentClock.timeComponentsAsStrings
+                    bubble.components = bubble.currentClock.timeComponentsAsStrings
                     
                     bubble.lastSession?.computeDuration {
                         //no need to run any code in the completion
@@ -243,7 +243,7 @@ class ViewModel: ObservableObject {
         
         //reset bubble clock
         bubble.currentClock = bubble.initialClock
-        bubble.bCell_Components = bubble.initialClock.timeComponentsAsStrings
+        bubble.components = bubble.initialClock.timeComponentsAsStrings
         
         //mark session as ended
         bubble.lastSession?.isEnded = true

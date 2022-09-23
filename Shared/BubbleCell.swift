@@ -30,64 +30,6 @@ extension BubbleCell {
 }
 
 extension BubbleCell {
-    var timeLabels: some View {
-        HStack (spacing: BubbleCell.metrics.spacing) {
-            //HOURS
-            Circle().fill(Color.clear)
-                .overlay { Text(bubble.bCell_Components.hr) }
-                .opacity(hrOpacity)
-            //animations
-                .scaleEffect(isSecondsLongPressed ? 0.2 : 1.0)
-                .offset(x: isSecondsLongPressed ? 20 : 0.0, y: 0)
-                .animation(.secondsLongPressed.delay(0.2), value: isSecondsLongPressed)
-            //gestures
-                .onTapGesture {
-                    showBubbleDetail()
-                }
-                .onLongPressGesture {
-                    showNotesList()
-                }
-            
-            //MINUTES
-            Circle().fill(Color.clear)
-                .overlay { Text(bubble.bCell_Components.min) }
-                .opacity(minOpacity)
-            //animations
-                .scaleEffect(isSecondsLongPressed ? 0.2 : 1.0)
-                .offset(x: isSecondsLongPressed ? 10 : 0.0, y: 0)
-                .animation(.secondsLongPressed.delay(0.1), value: isSecondsLongPressed)
-                //gestures
-                .onTapGesture {
-                    showBubbleDetail()
-                }
-            
-            //SECONDS
-            Circle().fill(Color.clear)
-                .contentShape(Circle())
-                .overlay { Text(bubble.bCell_Components.sec) }
-            //animations
-                .scaleEffect(isSecondsLongPressed ? 0.2 : 1.0)
-                .animation(.secondsLongPressed, value: isSecondsLongPressed)
-            //gestures
-                .gesture(tap)
-                .gesture(longPress)
-            //overlays
-                .overlay {
-                    if !isBubbleRunning {
-                        Push(.bottomRight) {
-                            hundredthsView
-                                .onTapGesture { userTappedHundredths() }
-                        }
-                    }
-                }
-                .overlay {
-                    if sdb.referenceDelay > 0 { SDButton(bubble.sdb) }
-                }
-        }
-        //font
-        .font(.system(size: BubbleCell.metrics.fontSize))
-        .foregroundColor(.white)
-    }
     
     //⚠️ if minDuration is 0.3, it has a shorter minDuration than onDrag, so it will work! Otherwise it doesn't
     private var longPress: some Gesture {
@@ -123,8 +65,8 @@ struct BubbleCell: View {
     var body: some View {
         VStack {
             ZStack {
-                timeLabelsBackground
-                timeLabels
+                threeLabelsBackground
+                threeLabels
                 let putPositionEmitterView = showDeleteActionView || showDetailView
                 if putPositionEmitterView { cellLowEmitterView.background {
                     GeometryReader {
@@ -180,9 +122,64 @@ struct BubbleCell: View {
     }
     
     // MARK: - Legos
+    ///labels for each time component: Hr, Min, Sec
+    var threeLabels: some View {
+        HStack (spacing: BubbleCell.metrics.spacing) {
+            //HOURS
+            Circle().fill(Color.clear)
+                .overlay { Text(bubble.components.hr) }
+                .opacity(hrOpacity)
+            //animations
+                .scaleEffect(isSecondsLongPressed ? 0.2 : 1.0)
+                .offset(x: isSecondsLongPressed ? 20 : 0.0, y: 0)
+                .animation(.secondsLongPressed.delay(0.2), value: isSecondsLongPressed)
+            //gestures
+                .onTapGesture { showBubbleDetail() }
+                .onLongPressGesture { showNotesList() }
+            
+            //MINUTES
+            Circle().fill(Color.clear)
+                .overlay { Text(bubble.components.min) }
+                .opacity(minOpacity)
+            //animations
+                .scaleEffect(isSecondsLongPressed ? 0.2 : 1.0)
+                .offset(x: isSecondsLongPressed ? 10 : 0.0, y: 0)
+                .animation(.secondsLongPressed.delay(0.1), value: isSecondsLongPressed)
+                //gestures
+                .onTapGesture {
+                    showBubbleDetail()
+                }
+            
+            //SECONDS
+            Circle().fill(Color.clear)
+                .contentShape(Circle())
+                .overlay { Text(bubble.components.sec) }
+            //animations
+                .scaleEffect(isSecondsLongPressed ? 0.2 : 1.0)
+                .animation(.secondsLongPressed, value: isSecondsLongPressed)
+            //gestures
+                .gesture(tap)
+                .gesture(longPress)
+            //overlays
+                .overlay {
+                    if !isBubbleRunning {
+                        Push(.bottomRight) {
+                            hundredthsView
+                                .onTapGesture { userTappedHundredths() }
+                        }
+                    }
+                }
+                .overlay {
+                    if sdb.referenceDelay > 0 { SDButton(bubble.sdb) }
+                }
+        }
+        //font
+        .font(.system(size: BubbleCell.metrics.fontSize))
+        .foregroundColor(.white)
+    }
     
-    ///the 3 Circles or 3 Squares
-    var timeLabelsBackground: some View {
+    ///3 Circles or 3 Squares for each time component: Hr, Min, Sec
+    var threeLabelsBackground: some View {
         HStack (spacing: BubbleCell.metrics.spacing) {
             /* Hr */ bubbleShape.opacity(hrOpacity)
             /* Min */ bubbleShape.opacity(minOpacity)
@@ -278,7 +275,7 @@ struct BubbleCell: View {
     
     ///hundredths of a second that is :)
     private var hundredthsView:some View {
-        Text(bubble.bCell_Components.cents)
+        Text(bubble.components.cents)
             .background(Circle()
                 .foregroundColor(Color("pauseStickerColor"))
                 .padding(-12))
@@ -363,9 +360,9 @@ extension BubbleCell {
     
     //stopwatch: minutes and hours stay hidden initially
     private var minOpacity:Double {
-        bubble.bCell_Components.min > "0" || bubble.bCell_Components.hr > "0" ? 1 : 0.001
+        bubble.components.min > "0" || bubble.components.hr > "0" ? 1 : 0.001
     }
-    private var hrOpacity:Double { bubble.bCell_Components.hr > "0" ? 1 : 0.001 }
+    private var hrOpacity:Double { bubble.components.hr > "0" ? 1 : 0.001 }
     
     private var noNote:Bool { bubble.note_.isEmpty  }
     
