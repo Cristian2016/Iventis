@@ -41,11 +41,11 @@ struct GenericAlertView: View {
                 Text(alertContent.content)
                     .foregroundColor(.secondary)
                     .padding([.leading, .trailing])
-                Button("Do not show again") {
-                    
-                }
+                Button("Do not show again") { buttonAction() }
                 .buttonStyle(.bordered)
+                .fontWeight(.medium)
                 .tint(.red)
+                .padding()
             }
             .padding()
             .background(
@@ -59,7 +59,7 @@ struct GenericAlertView: View {
     }
     
     func doStuff() {
-        viewModel.showAlert_displayAlwaysOn = false
+        viewModel.showAlert1 = false
     }
 }
 

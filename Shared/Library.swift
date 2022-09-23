@@ -320,7 +320,8 @@ extension UserDefaults {
         static let shouldExplainingTextBeVisible = "shouldExplainingTextBeVisible"
         
         static let firstAppLaunchEver = "firstAppLaunchEver"
-        static let displayIsAlwaysOn = "displayIsAlwaysOn"
+        
+        static let neverShowDisplayAlwaysOnAlert = "neverShowDisplayAlwaysOnAlert"
     }
     
     static func generateRank() -> Int {
