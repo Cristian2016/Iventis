@@ -16,7 +16,7 @@ struct AlertView<ImageContent:View, TextContent:View>: View {
         
         self.dismissAction = dismissAction
         self.image = title()
-        self.text = smallText()
+        self.text = smallText() 
     }
     
     let image:ImageContent

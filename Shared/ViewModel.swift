@@ -13,7 +13,7 @@ import CoreData
 
 class ViewModel: ObservableObject {
     // MARK: - Alerts
-    @Published var showAlwaysOnDisplayAlert = false
+    @Published var showAlert_displayAlwaysOn = false
     
     // MARK: -
     @Published var showDeleteAction_bRank:Int? = nil

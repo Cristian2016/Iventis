@@ -69,7 +69,7 @@ struct TimersApp: App {
                     MoreOptionsView(for: bubble)
                 }
                 
-                if vm.showAlwaysOnDisplayAlert {
+                if vm.showAlert_displayAlwaysOn {
                     AlertView {
                         Label("Always-On Display", systemImage: "sun.max.fill")
                             .font(.system(size: 24))
@@ -78,7 +78,7 @@ struct TimersApp: App {
                         Text("This option drains the battery faster. Use only if needed. Do not forget to turn it off again")
                             .foregroundColor(.gray)
                     } dismissAction: {
-                        vm.showAlwaysOnDisplayAlert = false
+                        vm.showAlert_displayAlwaysOn = false
                     }
                 }
                 
