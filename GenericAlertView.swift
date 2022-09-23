@@ -12,9 +12,6 @@ struct AlertContent {
     let titleSymbol:String?
     let title:String
     let content:String
-    
-    let symbolSize:CGFloat = 50
-    let backgroundOpacity:CGFloat = 0.9
 }
 
 struct Alert {
@@ -30,11 +27,11 @@ struct GenericAlertView: View {
     
     var body: some View {
         ZStack {
-            Color.white.opacity(alertContent.backgroundOpacity)
+            Color.white.opacity(0.9)
             VStack(spacing: 10) {
                 Image(systemName: alertContent.symbol)
                     .foregroundColor(.yellow)
-                    .font(.system(size: alertContent.symbolSize))
+                    .font(.system(size: 50))
                 HStack {
                     Image(systemName: alertContent.titleSymbol ?? "")
                     Text(alertContent.title)
