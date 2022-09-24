@@ -32,7 +32,7 @@ struct MoreOptionsView: View {
             VStack {
                 StartDelaySubview(sdb: bubble.sdb!)
                 colorsViewTitle
-                colorsGrid
+                colorsTable
             }
             .frame(width: 280)
             .padding(8)
@@ -43,8 +43,7 @@ struct MoreOptionsView: View {
             //2 Confirmation Labels
             if vm.startDelayWasReset {
                 //reset delay confirmation
-                ConfirmationView(extraText: "0s",
-                                 titleSymbol: "clock.arrow.circlepath",
+                ConfirmationView(titleSymbol: "clock.arrow.circlepath",
                                  title: "Start Delay",
                                  isOn: false
                 )
@@ -101,7 +100,7 @@ struct MoreOptionsView: View {
         .allowsHitTesting(false) //ignore touches [which are delivered to superview]
     }
     
-    private var colorsGrid:some View {
+    private var colorsTable:some View {
         ScrollView {
             LazyVGrid(columns: [GridItem(spacing: MoreOptionsView.itemSpacing), GridItem(spacing: MoreOptionsView.itemSpacing), GridItem()], spacing: MoreOptionsView.itemSpacing) {
                 ForEach(Color.bubbleThrees.map{$0.description},id:\.self) { colorName in
@@ -123,24 +122,6 @@ struct MoreOptionsView: View {
         }
         .frame(height: UIScreen.deviceNotTallEnough ? colorsGridHeight : 420)
         .scrollIndicators(.hidden)
-    }
-    
-    private var delaySetConfirmation: some View {
-        VStack {
-            Text("\(Image(systemName: "clock.arrow.circlepath")) \(bubble.sdb!.referenceDelay)s")
-                .font(.system(size: 40).weight(.medium))
-            Text("Start Delay")
-                .font(.system(size: 20))
-        }
-    }
-    
-    private var zeroDelayConfirmation: some View {
-        VStack {
-            Text("\(Image(systemName: "clock.arrow.circlepath")) 0s")
-                .font(.system(size: 40).weight(.medium))
-            Text("Start Delay")
-                .font(.system(size: 20))
-        }
     }
     
     // MARK: - User Intents
