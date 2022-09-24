@@ -304,10 +304,6 @@ extension Float {
     }
 }
 
-struct DefaultSetting {
-    static var showAlwaysOnDisplayAlert = true
-}
-
 extension UserDefaults {
     struct Key {
         ///bubble rank
