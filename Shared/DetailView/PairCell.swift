@@ -82,7 +82,7 @@ struct PairCell: View {
                 //gesture
                 .contentShape(gestureArea) //define gesture area
                 .onTapGesture {  /* ⚠️ Idiotic!!!!! I need to put this shit here or else I can't scroll */ }
-                .gesture(longPress)
+                .onLongPressGesture { userWantsNotesList() }
                 
                 //like a button it has a closure for action
                 Push(.bottomRight) {
@@ -125,12 +125,6 @@ struct PairCell: View {
     //avoid trigger longPress gesture and edge swipe simultaneously
     //the entire gesture area is shifted right by 30 points
     var gestureArea: some Shape { Rectangle().offset(x: 30) }
-    
-    //show stickyNotes list
-    private var longPress: some Gesture {
-        LongPressGesture(minimumDuration: 0.3)
-            .onEnded { _ in userWantsNotesList() }
-    }
     
     // MARK: - LEGO
     private var pairNumberView: some View {
