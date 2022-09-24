@@ -13,7 +13,6 @@ import CoreData
 
 class ViewModel: ObservableObject {
     // MARK: - Alerts
-    ///Always-On Display Alert
     @Published var showAlert_AlwaysOnDisplay = false
     
     // MARK: -
@@ -35,9 +34,7 @@ class ViewModel: ObservableObject {
     ///allow user to drag and drop tableView cells
     ///.onMove view modifier will not be nil
     @Published var allowOnMove = false
-    
-    //MoreOptionsView 3 @Published
-    
+        
     // MARK: -
     init() {
         let request = Bubble.fetchRequest()
