@@ -175,10 +175,7 @@ class ViewModel: ObservableObject {
             case .finished: return
         }
                 
-        if bubble.state == .running {
-            bubble.addBubbleTimerObserver()
-        }
-        
+        if bubble.state == .running { bubble.addBubbleTimerObserver() }
         
         PersistenceController.shared.save()
     }
