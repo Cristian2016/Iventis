@@ -21,7 +21,7 @@ struct ConfirmationView: View {
     // MARK: - Body
     var body: some View {
         ZStack {
-//            Color.white.opacity(0.9)
+            Color.white.opacity(0.9)
             VStack {
                 Image(systemName: isOn ? "checkmark.circle.fill" : "xmark.circle.fill")
                     .font(.system(size: 50))

@@ -1,13 +1,13 @@
 import SwiftUI
 
 struct AlwaysOnDisplaySymbol: View {
-    @EnvironmentObject var vm:ViewModel
+    @EnvironmentObject var viewModel:ViewModel
     let fontSize = CGFloat(30)
     
     var body: some View {
         HStack {
             Button {
-                vm.showAlert_AlwaysOnDisplay.toggle()
+                viewModel.showAlert_AlwaysOnDisplay.toggle()
                 UIApplication.shared.isIdleTimerDisabled.toggle()
             }
         label: {
