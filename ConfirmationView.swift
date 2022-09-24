@@ -15,8 +15,6 @@ struct ConfirmationView: View {
     var extraText:String? = nil
     let titleSymbol:String?
     let title:String
-    
-    // MARK: - Internal
     var isOn:Bool
     
     // MARK: - Body
@@ -24,7 +22,10 @@ struct ConfirmationView: View {
         ZStack {
             Color.white.opacity(0.9)
             VStack {
-                if extraText != nil { Text(extraText ?? "") }
+                if extraText != nil {
+                    Text(extraText ?? "")
+                        .font(.system(size: 50).weight(.medium))
+                }
                 HStack {
                     Image(systemName: titleSymbol ?? "")
                     Text(title)

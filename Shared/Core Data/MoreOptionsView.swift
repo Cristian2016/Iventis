@@ -47,8 +47,11 @@ struct MoreOptionsView: View {
                 { zeroDelayConfirmation } action: { vm.startDelayWasReset = false }
             }
             if vm.startDelayWasSet && bubble.sdb!.referenceDelay != 0 {
-                ConfirmationLabel()
-                { delaySetConfirmation } action: { vm.startDelayWasSet = false }
+                ConfirmationView(extraText: String(bubble.sdb!.referenceDelay) + "s",
+                                 titleSymbol: "clock.arrow.circlepath",
+                                 title: "Start Delay",
+                                 isOn: true
+                )
             }
         }
         .gesture(longPress)
