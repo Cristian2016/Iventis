@@ -24,13 +24,13 @@ struct ConfirmationView: View {
             Color.white.opacity(0.9)
             VStack {
                 Image(systemName: isOn ? "checkmark.circle.fill" : "xmark.circle.fill")
-                    .font(.system(size: 50))
+                    .font(.system(size: 80))
                     .foregroundColor(isOn ? .green : .red)
                 HStack {
                     Image(systemName: titleSymbol ?? "")
                     Text(title)
                 }
-                .fontWeight(.medium)
+                .font(.system(size: 26).weight(.medium))
             }
             .padding()
             .background(
