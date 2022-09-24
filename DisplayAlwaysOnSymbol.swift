@@ -20,7 +20,7 @@ struct DisplayAlwaysOnSymbol: View {
         HStack {
             Button {
                 toggleDisplayIsAlwaysOn()
-                vm.showAlert1 = true
+                vm.showAlert_AlwaysOnDisplay = true
             }
         label: {
             Label {

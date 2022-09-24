@@ -69,11 +69,11 @@ struct TimersApp: App {
                     MoreOptionsView(for: bubble)
                 }
                 
-                if vm.allowDisplayAlwaysOnAlert {
-                    GenericAlertView(alertContent: Alert.alwaysOnDisplay) {
-                        vm.showAlert1 = false //dismiss alert
+                if vm.showAlert_AlwaysOnDisplay {
+                    GenericAlertView(alertContent: Alert.one) {
+                        vm.showAlert_AlwaysOnDisplay = false //dismiss alert
                     } buttonAction: {
-                        UserDefaults.standard.set(true, forKey: UserDefaults.Key.neverShowDisplayAlwaysOnAlert)
+                        
                     }
                 }
                 

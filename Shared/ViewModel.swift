@@ -14,10 +14,7 @@ import CoreData
 class ViewModel: ObservableObject {
     // MARK: - Alerts
     ///Always-On Display Alert
-    @Published var showAlert1 = false
-    var allowDisplayAlwaysOnAlert:Bool {
-        showAlert1 || UserDefaults.standard.bool(forKey: UserDefaults.Key.neverShowDisplayAlwaysOnAlert)
-    }
+    @Published var showAlert_AlwaysOnDisplay = false
     
     // MARK: -
     @Published var showDeleteAction_bRank:Int? = nil
