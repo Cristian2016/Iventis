@@ -66,8 +66,8 @@ public class Bubble: NSManagedObject {
     }
     
     //shouldUpdateSmallBubbleCellTimeComponents
-    var continueToUpdateSmallBubbleCell = false {didSet{
-        if !continueToUpdateSmallBubbleCell { smallBubbleView_Components = Float.TimeComponentsAsStrings(hr: "0", min: "0", sec: "0", cents: "0") }
+    var syncSmallBubbleCell = false {didSet{
+        if !syncSmallBubbleCell { smallBubbleView_Components = Float.TimeComponentsAsStrings(hr: "0", min: "0", sec: "0", cents: "0") }
     }}
 }
 
@@ -135,7 +135,7 @@ extension Bubble {
     
     ///update smallBubbleCell time components: hr min sec
     private func updateSmallBubbleCell() {
-        if !continueToUpdateSmallBubbleCell { return }
+        if !syncSmallBubbleCell { return }
         guard let lastPairStart = lastPair?.start else { return }
         
         //delta is the elapsed duration between pair.start and signal dates

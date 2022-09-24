@@ -154,10 +154,12 @@ class ViewModel: ObservableObject {
                 newPair.start = Date()
                 bubble.lastSession?.addToPairs(newPair)
                 
+                bubble.syncSmallBubbleCell = true
+                
             case .running: /* changes to .paused */
                 let currentPair = bubble.lastPair
                 currentPair?.pause = Date()
-                bubble.continueToUpdateSmallBubbleCell = false
+                bubble.syncSmallBubbleCell = false
                 
                 //⚠️ closure runs on the main queue. whatever you want the user to see put in that closure otherwise it will fail to update!!!!
                 currentPair?.computeDuration(.atPause) {
@@ -249,7 +251,7 @@ class ViewModel: ObservableObject {
         
         if bubble.state == .brandNew { return }
         
-        bubble.continueToUpdateSmallBubbleCell = false
+        bubble.syncSmallBubbleCell = false
         
         //reset bubble clock
         bubble.currentClock = bubble.initialClock
@@ -288,7 +290,7 @@ class ViewModel: ObservableObject {
         //ask bubble to start/stop updating smallBubbleCellTimeComponents
         guard
             let bubble = bubble(for: rank) else { return }
-        bubble.continueToUpdateSmallBubbleCell = rank != nil
+        bubble.syncSmallBubbleCell = rank != nil
     }
     
     // MARK: - Helpers
