@@ -12,6 +12,12 @@ import CoreData
 
 
 class ViewModel: ObservableObject {
+    ///MoreOptionsView
+    @Published var oneAndOnlySDB:SDB? //StartDelayBubble
+    
+    @Published var startDelayWasReset = false
+    @Published var startDelayWasSet = false
+    
     // MARK: - Confirmation Flashes
     @Published var confirm_AlwaysOnDisplay = false
     @Published var confirm_CalendarOn = (show:false, isCalOn:false)
@@ -417,13 +423,7 @@ class ViewModel: ObservableObject {
         }
     }
     
-    // MARK: - MoreOptionsView
-    ///StartDelayBubble for the bubble shown in MoreOptionsView
-    @Published var oneAndOnlySDB:SDB?
-    
-    @Published var startDelayWasReset = false
-    @Published var startDelayWasSet = false
-    
+    // MARK: -
     func changeColor(for bubble:Bubble, to newColor:String) {
         guard let sdb = oneAndOnlySDB else { fatalError() }
         
