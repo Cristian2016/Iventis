@@ -15,7 +15,7 @@ struct AlertContent {
 }
 
 struct Alert {
-    static let one = AlertContent(symbol: "exclamationmark.triangle.fill", titleSymbol: "sun.max", title: "Always-On Display", content: "This option prevents display from sleeping. It may drain battery faster. Turn it off again if no longer needed")
+    static let alwaysOnDisplay = AlertContent(symbol: "exclamationmark.triangle.fill", titleSymbol: "sun.max", title: "Always-On Display", content: "This option prevents display from sleeping. It may drain battery faster. Turn it off again if no longer needed")
 }
 
 struct GenericAlertView: View {
@@ -65,6 +65,6 @@ struct GenericAlertView: View {
 
 struct GenericAlertView_Previews: PreviewProvider {
     static var previews: some View {
-        GenericAlertView(alertContent: Alert.one, dismissAction: {}, buttonAction: {})
+        GenericAlertView(alertContent: Alert.alwaysOnDisplay, dismissAction: {}, buttonAction: {})
     }
 }
