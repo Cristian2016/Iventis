@@ -11,6 +11,7 @@
 		1F0373C028DEDD97005CE8D3 /* ConfirmationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F0373BF28DEDD97005CE8D3 /* ConfirmationView.swift */; };
 		1F0373C228DEE6F7005CE8D3 /* AlwaysOnDisplayConfirmationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F0373C128DEE6F7005CE8D3 /* AlwaysOnDisplayConfirmationView.swift */; };
 		1F0373C428DF3D36005CE8D3 /* CalendarOnConfirmationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F0373C328DF3D36005CE8D3 /* CalendarOnConfirmationView.swift */; };
+		1F0373C628DF516F005CE8D3 /* OnLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F0373C528DF516F005CE8D3 /* OnLabel.swift */; };
 		1F100CA72809493400A3A3C2 /* BubbleTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F100CA62809493400A3A3C2 /* BubbleTimer.swift */; };
 		1F18B457281FA6130080ADA6 /* PushView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F18B456281FA6130080ADA6 /* PushView.swift */; };
 		1F18B45C281FA9C90080ADA6 /* CalendarSticker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F18B45B281FA9C90080ADA6 /* CalendarSticker.swift */; };
@@ -117,6 +118,7 @@
 		1F0373BF28DEDD97005CE8D3 /* ConfirmationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmationView.swift; sourceTree = SOURCE_ROOT; };
 		1F0373C128DEE6F7005CE8D3 /* AlwaysOnDisplayConfirmationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlwaysOnDisplayConfirmationView.swift; sourceTree = "<group>"; };
 		1F0373C328DF3D36005CE8D3 /* CalendarOnConfirmationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarOnConfirmationView.swift; sourceTree = "<group>"; };
+		1F0373C528DF516F005CE8D3 /* OnLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnLabel.swift; sourceTree = "<group>"; };
 		1F100CA62809493400A3A3C2 /* BubbleTimer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BubbleTimer.swift; sourceTree = "<group>"; };
 		1F18B456281FA6130080ADA6 /* PushView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushView.swift; sourceTree = "<group>"; };
 		1F18B45B281FA9C90080ADA6 /* CalendarSticker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarSticker.swift; sourceTree = "<group>"; };
@@ -244,6 +246,7 @@
 			isa = PBXGroup;
 			children = (
 				1F0373BF28DEDD97005CE8D3 /* ConfirmationView.swift */,
+				1F0373C528DF516F005CE8D3 /* OnLabel.swift */,
 				1F0373C128DEE6F7005CE8D3 /* AlwaysOnDisplayConfirmationView.swift */,
 				1F0373C328DF3D36005CE8D3 /* CalendarOnConfirmationView.swift */,
 				1F76B51028DDE38800543660 /* AlertView.swift */,
@@ -495,6 +498,7 @@
 				1F76B51128DDE38800543660 /* AlertView.swift in Sources */,
 				1F8B6965283790CF006540CB /* BubbleNotesList.swift in Sources */,
 				1F4DF99D282B82EF00D54BE8 /* CircleButton.swift in Sources */,
+				1F0373C628DF516F005CE8D3 /* OnLabel.swift in Sources */,
 				1FDB9F13287DA5040028E121 /* SDB Properties.swift in Sources */,
 				1F680FC52882D97800548F70 /* MoreOptionsInfo.swift in Sources */,
 				1F82FB982831435A00E7C5AA /* HelpActionButton.swift in Sources */,
