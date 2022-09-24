@@ -70,7 +70,7 @@ struct TimersApp: App {
                 }
                 
                 if vm.showAlert_AlwaysOnDisplay {
-                    GenericAlertView(alertContent: Alert.alwaysOnDisplay) {
+                    AlertView(alertContent: Alert.alwaysOnDisplay) {
                         vm.showAlert_AlwaysOnDisplay = false //dismiss alert
                     } buttonAction: {
                         
