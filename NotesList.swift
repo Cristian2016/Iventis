@@ -58,7 +58,6 @@ struct NotesList: View {
                     if noteIsValid { saveTextInputAndDismiss() }
                     else { dismiss() }
                 }
-                
                 .gesture (
                     LongPressGesture(minimumDuration: 0.3)
                         .onEnded { _ in deleteTextInput() }
@@ -94,9 +93,9 @@ struct NotesList: View {
             .padding([.top])
         }
         .onAppear {
-            delayExecution(.now() + 0.05) {
+//            delayExecution(.now() + 0.05) {
                 withAnimation (.easeInOut) { keyboardVisible = true }
-            }
+//            }
         }
     }
     
