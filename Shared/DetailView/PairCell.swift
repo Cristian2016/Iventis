@@ -81,7 +81,7 @@ struct PairCell: View {
                 .padding(contentFrameGap)
                 //gesture
                 .contentShape(gestureArea) //define gesture area
-                .onTapGesture {  /* ⚠️ Idiotic!!!!! I need to put thhis shit here or else I can't scroll */ }
+                .onTapGesture {  /* ⚠️ Idiotic!!!!! I need to put this shit here or else I can't scroll */ }
                 .gesture(longPress)
                 
                 //like a button it has a closure for action
