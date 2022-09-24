@@ -25,11 +25,6 @@ struct ConfirmationView: View {
             VStack {
                 Image(systemName: isOn ? "checkmark.circle.fill" : "xmark.circle.fill")
                     .font(.system(size: 80))
-                    .foregroundColor(isOn ? .green : .red)
-                    .background { Circle()
-                        .fill(Color.white)
-                        .padding()
-                    }
                 HStack {
                     Image(systemName: titleSymbol ?? "")
                     Text(title)
@@ -39,10 +34,11 @@ struct ConfirmationView: View {
             .padding()
             .background(
                 RoundedRectangle(cornerRadius: 14)
-                    .fill(Color.background2)
+                    .fill(isOn ? Color.green : .red)
                     .standardShadow(true)
             )
         }
+        .foregroundColor(.white)
     }
 }
 
