@@ -30,7 +30,6 @@ struct AlwaysOnDisplaySymbol: View {
     
     // MARK: -
     private var exitAlwaysONDisplay_Symbol:some View {
-        
         ZStack {
             Image(systemName: "sun.max")
             Image(systemName: "line.diagonal")
@@ -49,9 +48,8 @@ struct AlwaysOnDisplaySymbol: View {
             .font(.system(size: fontSize))
     }
     
-    private var isDisplayAlwaysON:Bool {
-        get { UIApplication.shared.isIdleTimerDisabled }
-    }
+    // MARK: -
+    private var isDisplayAlwaysON:Bool { get { UIApplication.shared.isIdleTimerDisabled } }
     let fontSize = CGFloat(30)
 }
 
