@@ -6,7 +6,7 @@
 //
 import SwiftUI
 
-struct DisplayAlwaysOnSymbol: View {
+struct AlwaysOnDisplaySymbol: View {
     @EnvironmentObject var vm:ViewModel
     let fontSize = CGFloat(30)
     
@@ -26,8 +26,7 @@ struct DisplayAlwaysOnSymbol: View {
         .padding([.leading, .trailing], 12)
         .background {
             if vm.showAlert_AlwaysOnDisplay {
-                RoundedRectangle(cornerRadius: 10)
-                    .stroke(Color.red, lineWidth: 4)
+                RoundedRectangle(cornerRadius: 10).stroke(.red, lineWidth: 4)
             }
         }
         }
@@ -57,6 +56,6 @@ struct DisplayAlwaysOnSymbol: View {
 
 struct DisplayAlwaysOnSymbol_Previews: PreviewProvider {
     static var previews: some View {
-        DisplayAlwaysOnSymbol()
+        AlwaysOnDisplaySymbol()
     }
 }

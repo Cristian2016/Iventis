@@ -51,7 +51,7 @@ struct BubbleList: View {
             }
             Push(.topRight) {
                 HStack {
-                    DisplayAlwaysOnSymbol()
+                    AlwaysOnDisplaySymbol()
                     PlusButton()
                 }
                 .offset(y:-7)
