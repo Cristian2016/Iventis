@@ -26,6 +26,10 @@ struct ConfirmationView: View {
                 Image(systemName: isOn ? "checkmark.circle.fill" : "xmark.circle.fill")
                     .font(.system(size: 80))
                     .foregroundColor(isOn ? .green : .red)
+                    .background { Circle()
+                        .fill(Color.white)
+                        .padding()
+                    }
                 HStack {
                     Image(systemName: titleSymbol ?? "")
                     Text(title)

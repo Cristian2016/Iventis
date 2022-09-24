@@ -74,7 +74,7 @@ struct TimersApp: App {
                 
                 if vm.showMoreOptionsInfo { MoreOptionsInfo() }
                 
-                if vm.flashConfirmation_CalendarOn.0 { CalendarOnConfirmationView() }
+                if vm.flashConfirmation_CalendarOn.show { CalendarOnConfirmationView() }
             }
             .ignoresSafeArea()
             .environment(\.managedObjectContext, viewContext)
