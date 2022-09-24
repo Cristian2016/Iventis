@@ -36,10 +36,6 @@ struct NotesList: View {
         textInput = ""
     }
     
-    private func dismiss(closure: () ->()) {
-        closure()
-    }
-    
     private func saveTextInputAndDismiss() {
         saveNoteToCoredata(textInput)
         dismiss()
@@ -62,12 +58,13 @@ struct NotesList: View {
                     if noteIsValid { saveTextInputAndDismiss() }
                     else { dismiss() }
                 }
-                .gesture(
-                    DragGesture(minimumDistance: 10)
+                
+                .gesture (
+                    LongPressGesture(minimumDuration: 0.3)
                         .onEnded { _ in deleteTextInput() }
                 )
-                .highPriorityGesture (
-                    LongPressGesture(minimumDuration: 0.3)
+                .gesture(
+                    DragGesture(minimumDistance: 10)
                         .onEnded { _ in deleteTextInput() }
                 )
             VStack {
