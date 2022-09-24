@@ -18,8 +18,6 @@ struct AlwaysOnDisplayAlertView: View {
             } buttonAction: {
                 alwaysOnDisplay = false
             }
-        } else {
-            AlwaysOnDisplayConfirmationView()
         }
     }
 }
