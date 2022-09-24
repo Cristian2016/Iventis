@@ -148,7 +148,7 @@ struct MoreOptionsView: View {
                 
                 //show 0s red alert and hide after 0.7 seconds
                 vm.startDelayWasReset = true
-                delayExecution(.now() + 0.7) { vm.startDelayWasReset = false }
+                delayExecution(.now() + 1) { vm.startDelayWasReset = false }
                 UserFeedback.doubleHaptic(.heavy)
             }
     }
