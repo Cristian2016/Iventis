@@ -12,6 +12,9 @@ import CoreData
 
 
 class ViewModel: ObservableObject {
+    // MARK: - Confirmation Flashes
+    @Published var flashConfirmation_AlwaysOnDisplay = false
+    
     // MARK: - Alerts
     @Published var showAlert_AlwaysOnDisplay = false
     

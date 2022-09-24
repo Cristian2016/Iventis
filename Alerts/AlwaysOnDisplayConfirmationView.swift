@@ -11,7 +11,7 @@ struct AlwaysOnDisplayConfirmationView: View {
     @EnvironmentObject var viewModel:ViewModel
     
     var body: some View {
-        ConfirmationView(titleSymbol: Alert.alwaysOnDisplay.titleSymbol, title: Alert.alwaysOnDisplay.title, isOn: $viewModel.showAlert_AlwaysOnDisplay)
+        ConfirmationView(titleSymbol: Alert.alwaysOnDisplay.titleSymbol, title: Alert.alwaysOnDisplay.title, isOn: UIApplication.shared.isIdleTimerDisabled)
     }
 }
 

@@ -16,7 +16,7 @@ struct ConfirmationView: View {
     let title:String
     
     // MARK: - Internal
-    @Binding var isOn:Bool
+    var isOn:Bool
     
     // MARK: - Body
     var body: some View {
@@ -45,7 +45,7 @@ struct ConfirmationView: View {
 struct ConfirmationView_Previews: PreviewProvider {
     static var previews: some View {
         ConfirmationView(titleSymbol: Alert.alwaysOnDisplay.titleSymbol,
-                         title: Alert.alwaysOnDisplay.title, isOn: .constant(true)
+                         title: Alert.alwaysOnDisplay.title, isOn: true
         )
     }
 }

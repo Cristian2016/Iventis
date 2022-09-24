@@ -8,6 +8,11 @@ struct AlwaysOnDisplaySymbol: View {
             Button {
                 viewModel.showAlert_AlwaysOnDisplay.toggle()
                 UIApplication.shared.isIdleTimerDisabled.toggle()
+                
+                viewModel.flashConfirmation_AlwaysOnDisplay = true
+                delayExecution(.now() + 0.5) {
+                    viewModel.flashConfirmation_AlwaysOnDisplay = false
+                }
             }
         label: {
             Label {

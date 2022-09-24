@@ -70,6 +70,8 @@ struct TimersApp: App {
                 
                 if vm.showAlert_AlwaysOnDisplay { AlwaysOnDisplayAlertView() }
                 
+                if vm.flashConfirmation_AlwaysOnDisplay { AlwaysOnDisplayConfirmationView() }
+                
                 if vm.showMoreOptionsInfo { MoreOptionsInfo() }
             }
             .ignoresSafeArea()
