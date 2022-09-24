@@ -70,6 +70,10 @@ extension Color {
                                 hr: Color(#colorLiteral(red: 0.9601778388, green: 0.5991181135, blue: 0.6990267038, alpha: 1)), min: Color(#colorLiteral(red: 0.9777489305, green: 0.4076962173, blue: 0.5763365626, alpha: 1)), sec: Color(#colorLiteral(red: 0.9909614921, green: 0.2357916832, blue: 0.4794922471, alpha: 1)))
         static let mocha = Three(description: Name.mocha.rawValue,
                                  hr: Color(#colorLiteral(red: 0.584002018, green: 0.3206113577, blue: 0, alpha: 1)), min: Color(#colorLiteral(red: 0.584002018, green: 0.3206113577, blue: 0, alpha: 1)),sec: Color(#colorLiteral(red: 0.584002018, green: 0.3206113577, blue: 0, alpha: 1)))
+        
+        //clear
+        static let clear = Three(description: Name.clear.rawValue,
+                                hr:Color(#colorLiteral(red: 0, green: 0.999099791, blue: 0.8100017905, alpha: 0)), min: Color(#colorLiteral(red: 0, green: 0.9633229375, blue: 0.7392000556, alpha: 0)), sec: Color(#colorLiteral(red: 0, green: 0.838650167, blue: 0.5155212283, alpha: 0)))
     }
     
     enum Name:String {
@@ -100,6 +104,8 @@ extension Color {
         case cayenne
         case aubergine
         case mocha
+        
+        case clear
     }
 }
 
@@ -118,7 +124,7 @@ extension Color {
     ]
     
     static func bubbleColor(forName bubbleColorName:String) -> Color {
-        (Color.bubbleThrees.filter { $0.description == bubbleColorName }.first ?? Color.Bubbles.mint).sec
+        (Color.bubbleThrees.filter { $0.description == bubbleColorName }.first ?? Color.Bubbles.clear).sec
     }
     
     static let emojis = ["lemon":"🟨",

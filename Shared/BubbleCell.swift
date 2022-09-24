@@ -354,10 +354,10 @@ extension BubbleCell {
     private var bubbleShape: some View {
         if bubble.hasWidget {
             RoundedRectangle(cornerRadius: 20)
-                .fill(Color.bubbleColor(forName: bubble.color ?? "cyan"))
+                .fill(Color.bubbleColor(forName: bubble.color ?? "clear"))
         } else {
             Circle()
-                .fill(Color.bubbleColor(forName: bubble.color ?? "cyan"))
+                .fill(Color.bubbleColor(forName: bubble.color ?? "clear"))
         }
     }
 }
