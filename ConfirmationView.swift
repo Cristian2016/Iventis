@@ -12,6 +12,7 @@ struct ConfirmationView: View {
     @EnvironmentObject var viewModel:ViewModel
     
     // MARK: - Content
+    var extraText:String? = nil
     let titleSymbol:String?
     let title:String
     
@@ -23,6 +24,7 @@ struct ConfirmationView: View {
         ZStack {
             Color.white.opacity(0.9)
             VStack {
+                if extraText != nil { Text(extraText ?? "") }
                 HStack {
                     Image(systemName: titleSymbol ?? "")
                     Text(title)
