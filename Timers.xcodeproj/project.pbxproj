@@ -10,6 +10,7 @@
 		1F0373BE28DEDB00005CE8D3 /* AlwaysOnDisplayAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F0373BD28DEDB00005CE8D3 /* AlwaysOnDisplayAlertView.swift */; };
 		1F0373C028DEDD97005CE8D3 /* ConfirmationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F0373BF28DEDD97005CE8D3 /* ConfirmationView.swift */; };
 		1F0373C228DEE6F7005CE8D3 /* AlwaysOnDisplayConfirmationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F0373C128DEE6F7005CE8D3 /* AlwaysOnDisplayConfirmationView.swift */; };
+		1F0373C428DF3D36005CE8D3 /* CalendarOnConfirmationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F0373C328DF3D36005CE8D3 /* CalendarOnConfirmationView.swift */; };
 		1F100CA72809493400A3A3C2 /* BubbleTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F100CA62809493400A3A3C2 /* BubbleTimer.swift */; };
 		1F18B457281FA6130080ADA6 /* PushView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F18B456281FA6130080ADA6 /* PushView.swift */; };
 		1F18B45C281FA9C90080ADA6 /* CalendarSticker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F18B45B281FA9C90080ADA6 /* CalendarSticker.swift */; };
@@ -115,6 +116,7 @@
 		1F0373BD28DEDB00005CE8D3 /* AlwaysOnDisplayAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlwaysOnDisplayAlertView.swift; sourceTree = "<group>"; };
 		1F0373BF28DEDD97005CE8D3 /* ConfirmationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmationView.swift; sourceTree = SOURCE_ROOT; };
 		1F0373C128DEE6F7005CE8D3 /* AlwaysOnDisplayConfirmationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlwaysOnDisplayConfirmationView.swift; sourceTree = "<group>"; };
+		1F0373C328DF3D36005CE8D3 /* CalendarOnConfirmationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarOnConfirmationView.swift; sourceTree = "<group>"; };
 		1F100CA62809493400A3A3C2 /* BubbleTimer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BubbleTimer.swift; sourceTree = "<group>"; };
 		1F18B456281FA6130080ADA6 /* PushView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushView.swift; sourceTree = "<group>"; };
 		1F18B45B281FA9C90080ADA6 /* CalendarSticker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarSticker.swift; sourceTree = "<group>"; };
@@ -242,9 +244,10 @@
 			isa = PBXGroup;
 			children = (
 				1F0373BF28DEDD97005CE8D3 /* ConfirmationView.swift */,
+				1F0373C128DEE6F7005CE8D3 /* AlwaysOnDisplayConfirmationView.swift */,
+				1F0373C328DF3D36005CE8D3 /* CalendarOnConfirmationView.swift */,
 				1F76B51028DDE38800543660 /* AlertView.swift */,
 				1F0373BD28DEDB00005CE8D3 /* AlwaysOnDisplayAlertView.swift */,
-				1F0373C128DEE6F7005CE8D3 /* AlwaysOnDisplayConfirmationView.swift */,
 			);
 			path = Alerts;
 			sourceTree = "<group>";
@@ -547,6 +550,7 @@
 				1F4326B1282AFB19002B6092 /* ScaleDownButton.swift in Sources */,
 				1FF0A2FD2810448100B1DB77 /* TopDetailView.swift in Sources */,
 				1FA834762850A57C003F4D61 /* Widgets.intentdefinition in Sources */,
+				1F0373C428DF3D36005CE8D3 /* CalendarOnConfirmationView.swift in Sources */,
 				1FFC8BAA28142F040059EF2E /* Session.swift in Sources */,
 				1F5F4A952809450A00AF3442 /* Library.swift in Sources */,
 				1FFC8BB628142F040059EF2E /* Pair.swift in Sources */,

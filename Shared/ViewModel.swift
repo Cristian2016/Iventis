@@ -14,6 +14,7 @@ import CoreData
 class ViewModel: ObservableObject {
     // MARK: - Confirmation Flashes
     @Published var flashConfirmation_AlwaysOnDisplay = false
+    @Published var flashConfirmation_CalendarOn = false
     
     // MARK: - Alerts
     @Published var showAlert_AlwaysOnDisplay = false
@@ -183,6 +184,11 @@ class ViewModel: ObservableObject {
         
         //create events for this bubbble
         if bubble.hasCalendar { TimersApp.calManager.bubbleToEventify = bubble }
+        
+        flashConfirmation_CalendarOn = true
+        delayExecution(.now() + 0.5) { [weak self] in
+            self?.flashConfirmation_CalendarOn = false
+        }
     }
     
     func showMoreOptions(for bubble:Bubble) {

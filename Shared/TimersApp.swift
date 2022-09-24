@@ -73,6 +73,8 @@ struct TimersApp: App {
                 if vm.flashConfirmation_AlwaysOnDisplay { AlwaysOnDisplayConfirmationView() }
                 
                 if vm.showMoreOptionsInfo { MoreOptionsInfo() }
+                
+                if vm.flashConfirmation_CalendarOn { CalendarOnConfirmationView() }
             }
             .ignoresSafeArea()
             .environment(\.managedObjectContext, viewContext)
