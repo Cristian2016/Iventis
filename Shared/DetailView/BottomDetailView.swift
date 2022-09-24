@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-class SellectedTabWrapper: ObservableObject {
+class SelectedTabWrapper: ObservableObject {
     @Published var selectedTab = 0 {didSet {
         let info = ["selectedTab" : selectedTab]
         NotificationCenter.default.post(name: .selectedTab, object: nil, userInfo: info)
@@ -17,7 +17,7 @@ class SellectedTabWrapper: ObservableObject {
 ///it's a TabView and each tab contains a List of Paircells
 struct BottomDetailView: View {
     @FetchRequest var sessions:FetchedResults<Session>
-    @StateObject var tabWrapper = SellectedTabWrapper()
+    @StateObject var tabWrapper = SelectedTabWrapper()
     
     init(_ rank:Int?) {
         let predicate:NSPredicate?

@@ -10,7 +10,7 @@ import SwiftUI
 struct DetailView: View {
     let rank:Int?
     
-    @StateObject var tabWrapper = SellectedTabWrapper()
+    @StateObject var tabWrapper = SelectedTabWrapper()
     @FetchRequest var sessions:FetchedResults<Session>
     
     let topDetailHeight = CGFloat(140)
@@ -29,16 +29,19 @@ struct DetailView: View {
     }
     
     var body: some View {
-        ZStack {
-            if sessions.isEmpty { EmptyHistoryAlertView() }
-            else {
-                VStack {
-                    Spacer()
-                    TopDetailView(rank)
-                        .frame(width: detailWidth, height: topDetailHeight)
-                    BottomDetailView(rank)
+        VStack {
+            ZStack {
+                if sessions.isEmpty { EmptyHistoryAlertView() }
+                else {
+                    VStack {
+                        Spacer()
+                        TopDetailView(rank)
+                            .frame(width: detailWidth, height: topDetailHeight)
+                        BottomDetailView(rank)
+                    }
                 }
             }
+            Spacer()
         }
         .ignoresSafeArea()
     }

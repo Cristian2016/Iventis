@@ -45,6 +45,7 @@ struct TimersApp: App {
                                 .frame(height: 160)
                             }
                             DetailView(vm.rankOfSelectedBubble)
+                            
                         } else {
                             VStack {
                                 Text("Bubble Detail")
