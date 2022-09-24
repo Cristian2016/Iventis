@@ -13,7 +13,7 @@ struct CalendarOnConfirmationView: View {
     var body: some View {
         ConfirmationView(titleSymbol: Alert.calendarOn.titleSymbol,
                          title: Alert.calendarOn.title,
-                         isOn: viewModel.flashConfirmation_CalendarOn
+                         isOn: viewModel.flashConfirmation_CalendarOn.1
         )
     }
 }
