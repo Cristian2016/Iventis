@@ -23,13 +23,12 @@ struct TimersApp: App {
     @Environment(\.scenePhase) var scenePhase
     let viewContext = PersistenceController.shared.container.viewContext
     @StateObject var vm = ViewModel()
-    @State var visibility = NavigationSplitViewVisibility.doubleColumn
     
     //the root view of scene is a NavigationSplitView
     var body: some Scene {
         WindowGroup {
             ZStack {
-                NavigationSplitView(columnVisibility: $visibility) {
+                NavigationSplitView {
                     ViewHierarchy()
                 } detail: {
                     VStack {

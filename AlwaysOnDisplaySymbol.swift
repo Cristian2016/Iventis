@@ -1,9 +1,3 @@
-//
-//  DisplayAlwaysOnSymbol.swift
-//  Timers (iOS)
-//
-//  Created by Cristian Lapusan on 13.07.2022.
-//
 import SwiftUI
 
 struct AlwaysOnDisplaySymbol: View {
@@ -12,20 +6,23 @@ struct AlwaysOnDisplaySymbol: View {
     
     var body: some View {
         HStack {
-            Button { vm.showAlert_AlwaysOnDisplay.toggle() }
+            Button {
+                vm.showAlert_AlwaysOnDisplay.toggle()
+                UIApplication.shared.isIdleTimerDisabled.toggle()
+            }
         label: {
             Label {
-                Text(vm.showAlert_AlwaysOnDisplay ? "Exit" : "")
+                Text(UIApplication.shared.isIdleTimerDisabled ? "Exit" : "")
                     .font(.system(size:20).weight(.bold))
             } icon: {
-                if vm.showAlert_AlwaysOnDisplay { exitAlwaysONDisplay_Symbol }
+                if UIApplication.shared.isIdleTimerDisabled { exitAlwaysONDisplay_Symbol }
                 else { displayONSymbol }
             }
         }
         .tint(.red)
         .padding([.leading, .trailing], 12)
         .background {
-            if vm.showAlert_AlwaysOnDisplay {
+            if UIApplication.shared.isIdleTimerDisabled {
                 RoundedRectangle(cornerRadius: 10).stroke(.red, lineWidth: 4)
             }
         }
