@@ -70,11 +70,11 @@ struct TimersApp: App {
                 
                 if vm.showAlert_AlwaysOnDisplay { AlwaysOnDisplayAlertView() }
                 
-                if vm.flashConfirmation_AlwaysOnDisplay { AlwaysOnDisplayConfirmationView() }
+                if vm.confirm_AlwaysOnDisplay { AlwaysOnDisplayConfirmationView() }
                 
                 if vm.showMoreOptionsInfo { MoreOptionsInfo() }
                 
-                if vm.flashConfirmation_CalendarOn.show { CalendarOnConfirmationView() }
+                if vm.confirm_CalendarOn.show { CalendarOnConfirmationView() }
             }
             .ignoresSafeArea()
             .environment(\.managedObjectContext, viewContext)

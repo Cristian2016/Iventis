@@ -9,9 +9,9 @@ struct AlwaysOnDisplaySymbol: View {
                 viewModel.showAlert_AlwaysOnDisplay.toggle()
                 UIApplication.shared.isIdleTimerDisabled.toggle()
                 
-                viewModel.flashConfirmation_AlwaysOnDisplay = true
+                viewModel.confirm_AlwaysOnDisplay = true
                 delayExecution(.now() + 0.5) {
-                    viewModel.flashConfirmation_AlwaysOnDisplay = false
+                    viewModel.confirm_AlwaysOnDisplay = false
                 }
             }
         label: {
