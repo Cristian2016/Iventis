@@ -147,6 +147,8 @@ class ViewModel: ObservableObject {
                 bubble.addToSessions(newSession)
                 newSession.created = Date()
                 newSession.addToPairs(newPair)
+                
+                bubble.syncSmallBubbleCell = true
                                 
             case .paused:  /* changes to running */
                 //create new pair, add it to currentSession

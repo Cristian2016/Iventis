@@ -138,7 +138,7 @@ extension Bubble {
         if !syncSmallBubbleCell { return }
         guard let lastPairStart = lastPair?.start else { return }
         
-        //delta is the elapsed duration between pair.start and signal dates
+        //delta: elapsed duration between pair.start and signal dates
         let Δ = Date().timeIntervalSince(lastPairStart)
         let componentsString = Float(Δ).timeComponentsAsStrings
         
