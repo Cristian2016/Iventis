@@ -51,7 +51,7 @@ struct MoreOptionsView: View {
                 { delaySetConfirmation } action: { vm.startDelayWasSet = false }
             }
         }
-        .highPriorityGesture(longPress)
+        .gesture(longPress)
     }
     
     // MARK: - Lego
