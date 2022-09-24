@@ -2,7 +2,6 @@ import SwiftUI
 
 struct AlwaysOnDisplaySymbol: View {
     @EnvironmentObject var viewModel:ViewModel
-    let fontSize = CGFloat(30)
     
     var body: some View {
         HStack {
@@ -12,17 +11,17 @@ struct AlwaysOnDisplaySymbol: View {
             }
         label: {
             Label {
-                Text(UIApplication.shared.isIdleTimerDisabled ? "Exit" : "")
+                Text(isDisplayAlwaysON ? "Exit" : "")
                     .font(.system(size:20).weight(.bold))
             } icon: {
-                if UIApplication.shared.isIdleTimerDisabled { exitAlwaysONDisplay_Symbol }
+                if isDisplayAlwaysON { exitAlwaysONDisplay_Symbol }
                 else { displayONSymbol }
             }
         }
         .tint(.red)
         .padding([.leading, .trailing], 12)
         .background {
-            if UIApplication.shared.isIdleTimerDisabled {
+            if isDisplayAlwaysON {
                 RoundedRectangle(cornerRadius: 10).stroke(.red, lineWidth: 4)
             }
         }
@@ -49,6 +48,11 @@ struct AlwaysOnDisplaySymbol: View {
             .foregroundColor(.label)
             .font(.system(size: fontSize))
     }
+    
+    private var isDisplayAlwaysON:Bool {
+        get { UIApplication.shared.isIdleTimerDisabled }
+    }
+    let fontSize = CGFloat(30)
 }
 
 struct DisplayAlwaysOnSymbol_Previews: PreviewProvider {
