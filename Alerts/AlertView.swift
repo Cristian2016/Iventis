@@ -57,10 +57,6 @@ struct AlertView: View {
         }
         .onTapGesture { dismissAction() }
     }
-    
-    func doStuff() {
-        viewModel.showAlert_AlwaysOnDisplay = false
-    }
 }
 
 struct AlertView_Previews: PreviewProvider {

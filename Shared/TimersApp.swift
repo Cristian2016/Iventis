@@ -69,13 +69,7 @@ struct TimersApp: App {
                     MoreOptionsView(for: bubble)
                 }
                 
-                if vm.showAlert_AlwaysOnDisplay {
-                    AlertView(alertContent: Alert.alwaysOnDisplay) {
-                        vm.showAlert_AlwaysOnDisplay = false //dismiss alert
-                    } buttonAction: {
-                        
-                    }
-                }
+                if vm.showAlert_AlwaysOnDisplay { AlwaysOnDisplayAlertView() }
                 
                 if vm.showMoreOptionsInfo { MoreOptionsInfo() }
             }

@@ -7,34 +7,25 @@
 import SwiftUI
 
 struct DisplayAlwaysOnSymbol: View {
-    @State private var isDisplayAlwaysON = false
     @EnvironmentObject var vm:ViewModel
     let fontSize = CGFloat(30)
     
-    func toggleDisplayIsAlwaysOn() {
-        isDisplayAlwaysON.toggle()
-        UIApplication.shared.isIdleTimerDisabled = isDisplayAlwaysON ? true : false
-    }
-    
     var body: some View {
         HStack {
-            Button {
-                toggleDisplayIsAlwaysOn()
-                vm.showAlert_AlwaysOnDisplay = true
-            }
+            Button { vm.showAlert_AlwaysOnDisplay.toggle() }
         label: {
             Label {
-                Text(isDisplayAlwaysON ? "Exit" : "")
+                Text(vm.showAlert_AlwaysOnDisplay ? "Exit" : "")
                     .font(.system(size:20).weight(.bold))
             } icon: {
-                if isDisplayAlwaysON { exitAlwaysONDisplay_Symbol }
+                if vm.showAlert_AlwaysOnDisplay { exitAlwaysONDisplay_Symbol }
                 else { displayONSymbol }
             }
         }
         .tint(.red)
         .padding([.leading, .trailing], 12)
         .background {
-            if isDisplayAlwaysON {
+            if vm.showAlert_AlwaysOnDisplay {
                 RoundedRectangle(cornerRadius: 10)
                     .stroke(Color.red, lineWidth: 4)
             }

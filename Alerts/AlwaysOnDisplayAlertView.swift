@@ -9,12 +9,17 @@ import SwiftUI
 
 struct AlwaysOnDisplayAlertView: View {
     @EnvironmentObject var viewModel:ViewModel
+    @AppStorage("alwaysOnDisplay") var alwaysOnDisplay = true
     
     var body: some View {
-        AlertView(alertContent: Alert.alwaysOnDisplay) {
-            viewModel.showAlert_AlwaysOnDisplay = false
-        } buttonAction: {
-            
+        if alwaysOnDisplay {
+            AlertView(alertContent: Alert.alwaysOnDisplay) {
+                viewModel.showAlert_AlwaysOnDisplay = false
+            } buttonAction: {
+                alwaysOnDisplay = false
+            }
+        } else {
+            AlwaysOnDisplayConfirmationView()
         }
     }
 }
