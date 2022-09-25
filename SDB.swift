@@ -108,14 +108,12 @@ public class SDB: NSManagedObject {
             let lastStartDate = lastPair?.start
         else { return }
         
-        print(pairs_.count)
-        
         self.currentDelay -= 1
         
         //               let elapsed = Date().timeIntervalSince(start)
         //                self.currentDelay -= Float(elapsed)
         //            }
         //
-                    if self.currentDelay <= 0 { self.removeDelay() }
+        if self.currentDelay <= 0 { self.removeDelay() }
     }
 }
