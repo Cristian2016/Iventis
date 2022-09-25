@@ -105,20 +105,19 @@ public class SDB: NSManagedObject {
             state == .running,
             let lastStartDate = lastPair?.start
         else { return }
-        
-        if self.currentDelay <= 0 {
-            DispatchQueue.main.async {
-                NotificationCenter.default.post(name: .sdbEnded, object: self)
-                self.removeDelay()
-            }
-            return
-        }
                 
         let delta = Date().timeIntervalSince(lastStartDate)
         
         DispatchQueue.main.async {
             if delta < 1 { self.currentDelay -= Float(delta) }
             else { self.currentDelay -= 1 }
+        }
+        
+        if self.currentDelay <= 0 {
+            DispatchQueue.main.async {
+                NotificationCenter.default.post(name: .sdbEnded, object: self)
+                self.removeDelay()
+            }
         }
     }
 }

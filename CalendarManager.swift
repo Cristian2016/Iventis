@@ -258,7 +258,7 @@ class CalendarManager: NSObject {
             
             //duration
             let stringDuration = Float(pair.duration).timeComponentsAbreviatedString
-            bucket += "Duration " + stringDuration
+            bucket += "🕙 Duration " + stringDuration
             bucket += "\n" + "\n"
         }
         
