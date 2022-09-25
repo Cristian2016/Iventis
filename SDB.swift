@@ -89,22 +89,23 @@ public class SDB: NSManagedObject {
         observerAddedAlready = true
         
         NotificationCenter.default.addObserver(forName: .bubbleTimerSignal, object: nil, queue: nil) { [weak self] _ in
-            delayExecution(.now() + 1) { self?.handleNotification() }
+            delayExecution(.now() + 1) { self?.updateCurrentDelay() }
         }
     }
     
-    func handleNotification() {
+    func updateCurrentDelay() {
         guard state == .running /* notifications */ else { return }
-        print(#function)
         
-        DispatchQueue.main.async {
-            if let start = self.lastPair?.start {
-               let elapsed = Date().timeIntervalSince(start)
-                self.currentDelay -= Float(elapsed)
-            }
-            
-            if self.currentDelay == 0 { self.removeDelay() }
-        }
+        self.currentDelay -= 1
+        
+//        DispatchQueue.main.async {
+//            if let start = self.lastPair?.start {
+//               let elapsed = Date().timeIntervalSince(start)
+//                self.currentDelay -= Float(elapsed)
+//            }
+//
+//            if self.currentDelay <= 0 { self.removeDelay() }
+//        }
     }
     
     deinit { NotificationCenter.default.removeObserver(self) }
