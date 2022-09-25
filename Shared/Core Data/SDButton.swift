@@ -47,7 +47,7 @@ struct SDButton: View {
             //gestures
                 .gesture(dragGesture)
                 .gesture(longPressGesture)
-                .onTapGesture { handleTap() }
+                .onTapGesture { toggleStart() }
         }
     }
     
@@ -104,7 +104,7 @@ struct SDButton: View {
                 isTapped = false
             }
     }
-    func handleTap() {
+    func toggleStart() {
         viewModel.toggleSDBStart(sdb)
         isTapped.toggle()
     }
