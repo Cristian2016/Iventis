@@ -14,7 +14,7 @@ struct SDButton: View {
         _sdb = StateObject(wrappedValue: sdb)
     }
     
-    @EnvironmentObject var vm:ViewModel
+    @EnvironmentObject var viewModel:ViewModel
     @StateObject var sdb:SDB
     
     @State var offset:CGSize = .zero //drag view around
@@ -33,7 +33,7 @@ struct SDButton: View {
                 .padding(6)
                 .overlay (
                     HStack(spacing: 2) {
-                        Text("-\(sdb.currentDelay.shortString(by: 1))")
+                        Text("-\(sdb.currentDelay.shortString(by: 0))")
                             .font(.system(size: 60))
                             .minimumScaleFactor(0.3)
                             .padding()
@@ -88,7 +88,7 @@ struct SDButton: View {
                 offset = value.translation
                 if shouldDelete {
                     UserFeedback.doubleHaptic(.heavy)
-                    vm.removeDelay(for: sdb.bubble)
+                    viewModel.removeDelay(for: sdb.bubble)
                     deleteTriggered = true
                 }
             }
@@ -97,7 +97,7 @@ struct SDButton: View {
     private var longPressGesture:some Gesture {
         LongPressGesture(minimumDuration: 0.3)
             .onEnded { _ in
-                vm.resetDelay(for: sdb)
+                viewModel.resetDelay(for: sdb)
                 
                 //UI and haptic
                 UserFeedback.doubleHaptic(.heavy)
@@ -105,7 +105,7 @@ struct SDButton: View {
             }
     }
     func handleTap() {
-        vm.toggleSDBStart(sdb)
+        viewModel.toggleSDBStart(sdb)
         isTapped.toggle()
     }
 }
