@@ -50,7 +50,7 @@ class ViewModel: ObservableObject {
         let request = Bubble.fetchRequest()
         let bubbles = try? PersistenceController.shared.viewContext.fetch(request)
         updateCurrentClock(of: bubbles)
-        observe_sdbDelayreachedZero_Notification()
+        observe_sdbEnded_Notification()
     }
     
     deinit { NotificationCenter.default.removeObserver(self) }
@@ -126,7 +126,6 @@ class ViewModel: ObservableObject {
     
     func toggleBubbleStart(_ bubble:Bubble) {
         if bubble.currentClock <= 0 && bubble.kind != .stopwatch  { return }
-        
        removeDelay(for: bubble)
         
         switch bubble.state {
@@ -475,8 +474,8 @@ class ViewModel: ObservableObject {
     func resetDelay(for sdb:SDB) { sdb.resetDelay() }
     
     // MARK: - StartDelayBubble SDB
-    private func observe_sdbDelayreachedZero_Notification() {
-        NotificationCenter.default.addObserver(forName: .delayReachedZero, object: nil, queue: nil) { [weak self] notification in
+    private func observe_sdbEnded_Notification() {
+        NotificationCenter.default.addObserver(forName: .sdbEnded, object: nil, queue: nil) { [weak self] notification in
             
             let sdb = notification.object as? SDB
             guard let bubble = sdb?.bubble else { return }
@@ -486,8 +485,6 @@ class ViewModel: ObservableObject {
                 //remove SDBCell from BubbleCell
                 self?.toggleBubbleStart(bubble)
                 
-                sdb?.referenceDelay = 0
-                sdb?.currentDelay = 0
                 self?.oneAndOnlySDB = nil //dismiss MoreOptionsView
                 
                 PersistenceController.shared.save()

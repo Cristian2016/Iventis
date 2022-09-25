@@ -148,7 +148,7 @@ extension NSNotification.Name {
     
     ///each Bubble has a corresponding StartDelayBubble [SDB]
     ///and each SDB has a corresponding SDBTimer optional. not set by default
-    static let delayReachedZero = NSNotification.Name("sdbDelayreachedZero")
+    static let sdbEnded = NSNotification.Name("sdbDelayreachedZero")
     
     static let appLaunched = NSNotification.Name("appLaunched")
     static let bubbleRank =  NSNotification.Name("bubbleIDNotification")

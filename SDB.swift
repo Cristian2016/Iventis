@@ -83,7 +83,7 @@ public class SDB: NSManagedObject {
             //viewModel receives notification and
             //calls vm.toggleStart(bubble!)
             //vm.sdb = nil causes SDBCell to go away
-            NotificationCenter.default.post(name: .delayReachedZero, object: self)
+            NotificationCenter.default.post(name: .sdbEnded, object: self)
         }
         
         currentDelay -= 1 //decrease by one
@@ -107,7 +107,10 @@ public class SDB: NSManagedObject {
         else { return }
         
         if self.currentDelay <= 0 {
-            self.removeDelay()
+            DispatchQueue.main.async {
+                NotificationCenter.default.post(name: .sdbEnded, object: self)
+                self.removeDelay()
+            }
             return
         }
                 
