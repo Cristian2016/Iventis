@@ -81,7 +81,8 @@ public class SDB: NSManagedObject {
     }
     
     func observeSDBTimer() {
-        NotificationCenter.default.addObserver(forName: .sdbTimer, object: nil, queue: nil) { [weak self] _ in
+        NotificationCenter.default.addObserver(forName: .bubbleTimerSignal, object: nil, queue: nil) { [weak self] _ in
+            print(#function)
             delayExecution(.now() + 1) {
                 self?.handleNotification()
             }
@@ -98,9 +99,7 @@ public class SDB: NSManagedObject {
                 self.currentDelay -= Float(elapsed)
             }
             
-            if self.currentDelay == 0 {
-                self.removeDelay()
-            }
+            if self.currentDelay == 0 { self.removeDelay() }
         }
     }
     

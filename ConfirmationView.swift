@@ -30,7 +30,7 @@ struct ConfirmationView: View {
                     Image(systemName: titleSymbol ?? "")
                     Text(title)
                 }
-                .font(.system(size: 26).weight(.medium))
+                .font(.system(size: 30).weight(.medium))
                 Divider()
                     .frame(width: 200)
                 Label(isOn ? "ON" : "OFF", systemImage: isOn ? "checkmark" : "xmark")
