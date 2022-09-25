@@ -67,20 +67,12 @@ class ViewModel: ObservableObject {
     }
          
     // MARK: - background Timers
-    private lazy var sdbTimer = SDBTimer()
     private lazy var bubbleTimer = BubbleTimer()
     
     func bubbleTimer(_ action:BubbleTimer.Action) {
         switch action {
             case .start: bubbleTimer.perform(.start)
             case .pause: bubbleTimer.perform(.pause)
-        }
-    }
-    
-    func sdbTimer(_ action:SDBTimer.Action) {
-        switch action {
-            case .start: sdbTimer.perform(.start)
-            case .pause: sdbTimer.perform(.pause)
         }
     }
     
@@ -484,7 +476,7 @@ class ViewModel: ObservableObject {
     
     // MARK: - StartDelayBubble SDB
     private func observe_sdbDelayreachedZero_Notification() {
-        NotificationCenter.default.addObserver(forName: .sdbDelayreachedZero, object: nil, queue: nil) { [weak self] notification in
+        NotificationCenter.default.addObserver(forName: .delayReachedZero, object: nil, queue: nil) { [weak self] notification in
             
             let sdb = notification.object as? SDB
             guard let bubble = sdb?.bubble else { return }

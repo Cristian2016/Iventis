@@ -83,7 +83,7 @@ public class SDB: NSManagedObject {
             //viewModel receives notification and
             //calls vm.toggleStart(bubble!)
             //vm.sdb = nil causes SDBCell to go away
-            NotificationCenter.default.post(name: .sdbDelayreachedZero, object: self)
+            NotificationCenter.default.post(name: .delayReachedZero, object: self)
         }
         
         currentDelay -= 1 //decrease by one
@@ -94,9 +94,7 @@ public class SDB: NSManagedObject {
         if observerAddedAlready { return }
         observerAddedAlready = true
         
-        NotificationCenter.default.addObserver(forName: .bubbleTimerSignal, object: nil, queue: nil) { [weak self] _ in
-            self?.updateCurrentDelay()
-        }
+        NotificationCenter.default.addObserver(forName: .bubbleTimerSignal, object: nil, queue: nil) { [weak self] _ in self?.updateCurrentDelay() }
     }
     
     deinit { NotificationCenter.default.removeObserver(self) }
@@ -114,7 +112,10 @@ public class SDB: NSManagedObject {
         }
                 
         let delta = Date().timeIntervalSince(lastStartDate)
-        if delta < 1 { self.currentDelay -= Float(delta) }
-        else { currentDelay -= 1 }
+        
+        DispatchQueue.main.async {
+            if delta < 1 { self.currentDelay -= Float(delta) }
+            else { self.currentDelay -= 1 }
+        }
     }
 }

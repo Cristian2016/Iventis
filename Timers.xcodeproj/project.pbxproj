@@ -45,7 +45,6 @@
 		1F6420062820186D00413E31 /* PairCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F6420052820186D00413E31 /* PairCell.swift */; };
 		1F64200A2820204400413E31 /* BottomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F6420092820204400413E31 /* BottomCell.swift */; };
 		1F680FC52882D97800548F70 /* MoreOptionsInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F680FC42882D97800548F70 /* MoreOptionsInfo.swift */; };
-		1F684821287DB6BA00D8BF81 /* SDBTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F684820287DB6BA00D8BF81 /* SDBTimer.swift */; };
 		1F684823287DBEBB00D8BF81 /* StartDelaySubview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F684822287DBEBB00D8BF81 /* StartDelaySubview.swift */; };
 		1F695087287D737600CC9FF4 /* SDButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F695086287D737600CC9FF4 /* SDButton.swift */; };
 		1F74878B286EB64E0092674F /* BubbleCell_Info.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F74878A286EB64E0092674F /* BubbleCell_Info.swift */; };
@@ -155,7 +154,6 @@
 		1F6420052820186D00413E31 /* PairCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PairCell.swift; sourceTree = "<group>"; };
 		1F6420092820204400413E31 /* BottomCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomCell.swift; sourceTree = "<group>"; };
 		1F680FC42882D97800548F70 /* MoreOptionsInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MoreOptionsInfo.swift; path = ../../Documents/MoreOptionsInfo.swift; sourceTree = "<group>"; };
-		1F684820287DB6BA00D8BF81 /* SDBTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SDBTimer.swift; sourceTree = "<group>"; };
 		1F684822287DBEBB00D8BF81 /* StartDelaySubview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartDelaySubview.swift; sourceTree = "<group>"; };
 		1F695086287D737600CC9FF4 /* SDButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SDButton.swift; sourceTree = "<group>"; };
 		1F74878A286EB64E0092674F /* BubbleCell_Info.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BubbleCell_Info.swift; sourceTree = "<group>"; };
@@ -306,7 +304,6 @@
 				1F74878C286ED1B10092674F /* StartInfoView.swift */,
 				1FB7D57B2862F0300085C2BE /* PlusButton.swift */,
 				1F100CA62809493400A3A3C2 /* BubbleTimer.swift */,
-				1F684820287DB6BA00D8BF81 /* SDBTimer.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -510,7 +507,6 @@
 				1FDB9F15287DA5040028E121 /* SDBPair Properties.swift in Sources */,
 				1F61BE052822BAAA00B773F9 /* DeleteView.swift in Sources */,
 				1F684823287DBEBB00D8BF81 /* StartDelaySubview.swift in Sources */,
-				1F684821287DB6BA00D8BF81 /* SDBTimer.swift in Sources */,
 				1F9BE0A9280BE14100F87EFA /* PaletteView.swift in Sources */,
 				1F5F4A732809409600AF3442 /* Bubble.swift in Sources */,
 				1F62194028293B5100C9B175 /* SmallBubbleView.swift in Sources */,

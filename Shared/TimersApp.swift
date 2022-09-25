@@ -114,27 +114,11 @@ struct TimersApp: App {
     // MARK: - Methods
     ///called on app launch or returning from background
     ///also called when app returns from inactive state
-    func handleBecomeActive() {
-        //Bubble
-        vm.bubbleTimer(.start)
-        
-        //SDB
-        vm.sdbTimer(.start)
-        //start observing
-        
-    }
+    func handleBecomeActive() { vm.bubbleTimer(.start) }
     
     ///called when app killed or moved to background
     ///NOT called on NotificationCenter, incoming call etc
-    func handleEnterBackground() {
-        print("scenePhase.background")
-        vm.bubbleTimer(.pause)
-        
-        //pause all running sdb
-        
-        //pause sdbTimer
-        vm.sdbTimer(.pause)
-    }
+    func handleEnterBackground() { vm.bubbleTimer(.pause) }
     
     func handleInactivePhase() {
         print("scenePhase.inactive")
