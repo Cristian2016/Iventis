@@ -451,26 +451,17 @@ class ViewModel: ObservableObject {
         PersistenceController.shared.save()
     }
     
-    func saveAndDismissMoreOptionsView(_ bubble:Bubble, _ initialDelay:Int) {
-        let userEditedDelay = bubble.sdb!.referenceDelay != initialDelay
+    func saveAndDismissMoreOptionsView(_ bubble:Bubble) {
+        startDelayWasSet = true
         
-        if userEditedDelay {
-            UserFeedback.singleHaptic(.medium)
-            startDelayWasSet = true
-            
-            let dispatchTime = (bubble.sdb!.referenceDelay != 0) ? DispatchTime.now() + 0.7 : .now()
-            
-            delayExecution(dispatchTime) {
-                self.oneAndOnlySDB = nil //dismiss MoreOptionsView
-                self.startDelayWasSet = false
-            }
-            
-            if let sdb = oneAndOnlySDB { sdb.currentDelay = Float(sdb.referenceDelay) }
+        let dispatchTime = (bubble.sdb!.referenceDelay != 0) ? DispatchTime.now() + 0.7 : .now()
+        
+        delayExecution(dispatchTime) {
+            self.oneAndOnlySDB = nil //dismiss MoreOptionsView
+            self.startDelayWasSet = false
         }
-        else { self.oneAndOnlySDB = nil  /* dismiss MoreOptionsView */ }
         
-        //save CoreData
-        PersistenceController.shared.save()
+        if let sdb = oneAndOnlySDB { sdb.currentDelay = Float(sdb.referenceDelay) }
     }
     
     ///reference startDelay

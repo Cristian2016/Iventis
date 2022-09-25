@@ -10,12 +10,12 @@ import SwiftUI
 struct MoreOptionsView: View {
     @ObservedObject var bubble: Bubble
     @EnvironmentObject var viewModel:ViewModel
-    let initialDelay:Int
+    let initialReferenceDelay:Int //store initial value for referenceDelay
     
     // MARK: -
     init(for bubble:Bubble) {
         _bubble = ObservedObject(wrappedValue: bubble)
-        self.initialDelay = Int(bubble.sdb!.referenceDelay)
+        self.initialReferenceDelay = Int(bubble.sdb!.referenceDelay)
     }
         
     // MARK: -
@@ -27,7 +27,7 @@ struct MoreOptionsView: View {
     // MARK: -
     var body: some View {
         ZStack {
-            screenBackground.onTapGesture { handleTap() }
+            screenBackground.onTapGesture { saveDelayAndDismissMoreOptionsView() }
             
             VStack {
                 StartDelaySubview(sdb: bubble.sdb!)
@@ -127,14 +127,15 @@ struct MoreOptionsView: View {
     // MARK: - User Intents
     func dismiss() { viewModel.oneAndOnlySDB = nil }
     
-    func handleTap() {
-        let userEditedDelay = bubble.sdb!.referenceDelay != initialDelay
-        if userEditedDelay {
-            viewModel.startDelayWasSet = true
-            delayExecution(.now() + 1) { viewModel.startDelayWasSet = false }
-        }
+    func saveDelayAndDismissMoreOptionsView() {
+        let userHasModifiedDelay = bubble.sdb!.referenceDelay != initialReferenceDelay
         
-        viewModel.saveAndDismissMoreOptionsView(bubble, initialDelay)
+        if userHasModifiedDelay {
+            UserFeedback.singleHaptic(.medium)
+            viewModel.saveAndDismissMoreOptionsView(bubble)
+            PersistenceController.shared.save()
+        }
+        else { dismiss() }
     }
     
     func handleInfoLabelTap() {
