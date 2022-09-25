@@ -107,12 +107,14 @@ public class SDB: NSManagedObject {
             state == .running,
             let lastStartDate = lastPair?.start
         else { return }
+        
+        if self.currentDelay <= 0 {
+            self.removeDelay()
+            return
+        }
                 
         let delta = Date().timeIntervalSince(lastStartDate)
-        print(delta)
         if delta < 1 { self.currentDelay -= Float(delta) }
         else { currentDelay -= 1 }
-        
-        if self.currentDelay <= 0 { self.removeDelay() }
     }
 }
