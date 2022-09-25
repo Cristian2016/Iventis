@@ -22,7 +22,7 @@ public class SDB: NSManagedObject {
     }
     
     var state = State.brandNew
-        
+    
     // MARK: - User Intents
     func toggleStart() {
         switch state {
@@ -93,20 +93,22 @@ public class SDB: NSManagedObject {
         }
     }
     
+    deinit { NotificationCenter.default.removeObserver(self) }
+    
     func updateCurrentDelay() {
-        guard state == .running /* notifications */ else { return }
+        //make sure it updates only if SDB is running
+        guard
+            state == .running,
+            let lastStartDate = lastPair?.start
+        else { return }
         
         self.currentDelay -= 1
         
-//        DispatchQueue.main.async {
-//            if let start = self.lastPair?.start {
-//               let elapsed = Date().timeIntervalSince(start)
-//                self.currentDelay -= Float(elapsed)
-//            }
-//
-//            if self.currentDelay <= 0 { self.removeDelay() }
-//        }
+        
+        //               let elapsed = Date().timeIntervalSince(start)
+        //                self.currentDelay -= Float(elapsed)
+        //            }
+        //
+        //            if self.currentDelay <= 0 { self.removeDelay() }
     }
-    
-    deinit { NotificationCenter.default.removeObserver(self) }
 }
