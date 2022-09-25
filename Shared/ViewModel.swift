@@ -104,7 +104,6 @@ class ViewModel: ObservableObject {
         newBubble.rank = Int64(UserDefaults.generateRank())
         
         let sdb = SDB(context: backgroundContext)
-        sdb.observeSDBTimer()
         newBubble.sdb = sdb
         
         try? backgroundContext.save()
@@ -179,7 +178,7 @@ class ViewModel: ObservableObject {
             case .finished: return
         }
                 
-        if bubble.state == .running { bubble.addBubbleTimerObserver() }
+        if bubble.state == .running { bubble.addObserver() }
         
         PersistenceController.shared.save()
     }
@@ -510,8 +509,8 @@ class ViewModel: ObservableObject {
     }
     
     // MARK: - User Intents
-    func observeTimer(for bubble: Bubble) {
-        bubble.addBubbleTimerObserver()
+    func addObserver(for bubble: Bubble) {
+        bubble.addObserver()
     }
 }
 

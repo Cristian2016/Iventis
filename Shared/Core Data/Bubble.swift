@@ -12,7 +12,7 @@ import SwiftUI
 
 public class Bubble: NSManagedObject {
     
-    var observerAddedAlready = false
+    private var observerAddedAlready = false
     
     ///4 start delay values
     static let delays = [5, 10, 20, 45]
@@ -99,12 +99,10 @@ extension Bubble {
         case start
         case stop
     }
-    
-    //isObserving = false
-    
+        
     ///observe bubbleTimer signal to update time components only if bubble is running
     ///1.start observing on init, 2.resume observing on reentering active phase 3.remove observer on deinit
-    func addBubbleTimerObserver() {
+    func addObserver() {
         //make sure observer added only once
         if observerAddedAlready { return }
         observerAddedAlready = true

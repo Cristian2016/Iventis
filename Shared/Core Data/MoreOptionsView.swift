@@ -49,7 +49,7 @@ struct MoreOptionsView: View {
                 )
             }
             if viewModel.startDelayWasSet && bubble.sdb!.referenceDelay != 0 {
-                ConfirmationView(extraText: String(bubble.sdb!.referenceDelay) + "sec",
+                ConfirmationView(extraText: String(bubble.sdb!.referenceDelay) + "s",
                                  titleSymbol: "clock.arrow.circlepath",
                                  title: "Start Delay",
                                  isOn: true

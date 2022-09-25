@@ -13,6 +13,8 @@ import SwiftUI
 ///StartDelay_Bubble
 public class SDB: NSManagedObject {
     
+    private var observerAddedAlready = false
+    
     enum State:String {
         case brandNew
         case running
@@ -31,6 +33,7 @@ public class SDB: NSManagedObject {
                 let newSDBPair = SDBPair(context: managedObjectContext!)
                 newSDBPair.start = Date()
                 addToPairs(newSDBPair)
+                addObserver()
                 
             case .running: //🔴 pause
                 state = .paused //stop handle observe timer
@@ -80,20 +83,21 @@ public class SDB: NSManagedObject {
         currentDelay -= 1 //decrease by one
     }
     
-    func observeSDBTimer() {
+    func addObserver() {
+        //make sure observer added only once
+        if observerAddedAlready { return }
+        observerAddedAlready = true
+        
         NotificationCenter.default.addObserver(forName: .bubbleTimerSignal, object: nil, queue: nil) { [weak self] _ in
-            print(#function)
-            delayExecution(.now() + 1) {
-                self?.handleNotification()
-            }
+            delayExecution(.now() + 1) { self?.handleNotification() }
         }
     }
     
     func handleNotification() {
         guard state == .running /* notifications */ else { return }
+        print(#function)
         
         DispatchQueue.main.async {
-            
             if let start = self.lastPair?.start {
                let elapsed = Date().timeIntervalSince(start)
                 self.currentDelay -= Float(elapsed)

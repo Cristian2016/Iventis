@@ -215,7 +215,7 @@ struct BubbleCell: View {
     // MARK: - User Intents
     /*
      when cell appears bubbleCell will resume observing timer. if it doesn't resume, correct time will not be displayed to the user */
-    private func resumeObserveTimer() /* onAppear */ { vm.observeTimer(for: bubble) }
+    private func resumeObserveTimer() /* onAppear */ { vm.addObserver(for: bubble) }
     
     private func endSession() {
         isSecondsLongPressed = true
