@@ -59,9 +59,15 @@ public class SDB: NSManagedObject {
     ///delay removed either by removing SDButton from Bubble Cell
     ///or longPress in MoreOptionsView
     func removeDelay() {
+        //resets both reference and current delays back to zero
+        //resets state back to .brandNew
+        //removes all pairs
+        //saves context
+        
         referenceDelay = 0
         currentDelay = 0
         state = .brandNew
+        removeFromPairs(at: NSIndexSet(indexSet: IndexSet(pairs_.indices)))
         
         PersistenceController.shared.save()
     }
@@ -102,13 +108,14 @@ public class SDB: NSManagedObject {
             let lastStartDate = lastPair?.start
         else { return }
         
-        self.currentDelay -= 1
+        print(pairs_.count)
         
+        self.currentDelay -= 1
         
         //               let elapsed = Date().timeIntervalSince(start)
         //                self.currentDelay -= Float(elapsed)
         //            }
         //
-        //            if self.currentDelay <= 0 { self.removeDelay() }
+                    if self.currentDelay <= 0 { self.removeDelay() }
     }
 }
