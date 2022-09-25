@@ -451,7 +451,8 @@ class ViewModel: ObservableObject {
         PersistenceController.shared.save()
     }
     
-    func saveAndDismissMoreOptionsView(_ bubble:Bubble) {
+    ///save delay and dismiss MoreOptionsView
+    func saveStartDelay(for bubble:Bubble) {
         startDelayWasSet = true
         
         let dispatchTime = (bubble.sdb!.referenceDelay != 0) ? DispatchTime.now() + 0.7 : .now()

@@ -27,7 +27,7 @@ struct MoreOptionsView: View {
     // MARK: -
     var body: some View {
         ZStack {
-            screenBackground.onTapGesture { saveDelayAndDismissMoreOptionsView() }
+            screenBackground.onTapGesture { saveStartDelayAndDismiss() }
             
             VStack {
                 StartDelaySubview(sdb: bubble.sdb!)
@@ -127,12 +127,12 @@ struct MoreOptionsView: View {
     // MARK: - User Intents
     func dismiss() { viewModel.oneAndOnlySDB = nil }
     
-    func saveDelayAndDismissMoreOptionsView() {
+    func saveStartDelayAndDismiss() {
         let userHasModifiedDelay = bubble.sdb!.referenceDelay != initialReferenceDelay
         
         if userHasModifiedDelay {
             UserFeedback.singleHaptic(.medium)
-            viewModel.saveAndDismissMoreOptionsView(bubble)
+            viewModel.saveStartDelay(for: bubble)
             PersistenceController.shared.save()
         }
         else { dismiss() }
