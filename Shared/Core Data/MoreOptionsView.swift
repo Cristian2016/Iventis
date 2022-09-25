@@ -9,7 +9,7 @@ import SwiftUI
 
 struct MoreOptionsView: View {
     @ObservedObject var bubble: Bubble
-    @EnvironmentObject var vm:ViewModel
+    @EnvironmentObject var viewModel:ViewModel
     let initialDelay:Int
     
     // MARK: -
@@ -41,14 +41,14 @@ struct MoreOptionsView: View {
             .padding()
             
             //2 Confirmation Labels
-            if vm.startDelayWasReset {
+            if viewModel.startDelayWasReset {
                 //reset delay confirmation
                 ConfirmationView(titleSymbol: "clock.arrow.circlepath",
                                  title: "Start Delay",
                                  isOn: false
                 )
             }
-            if vm.startDelayWasSet && bubble.sdb!.referenceDelay != 0 {
+            if viewModel.startDelayWasSet && bubble.sdb!.referenceDelay != 0 {
                 ConfirmationView(extraText: String(bubble.sdb!.referenceDelay) + "s",
                                  titleSymbol: "clock.arrow.circlepath",
                                  title: "Start Delay",
@@ -116,7 +116,7 @@ struct MoreOptionsView: View {
                                 .font(.system(size: 40))
                         }
                     }
-                    .onTapGesture { vm.changeColor(for: bubble, to: colorName) }
+                    .onTapGesture { viewModel.changeColor(for: bubble, to: colorName) }
                 }
             }
         }
@@ -125,30 +125,30 @@ struct MoreOptionsView: View {
     }
     
     // MARK: - User Intents
-    func dismiss() { vm.oneAndOnlySDB = nil }
+    func dismiss() { viewModel.oneAndOnlySDB = nil }
     
     func handleTap() {
         let userEditedDelay = bubble.sdb!.referenceDelay != initialDelay
         if userEditedDelay {
-            vm.startDelayWasSet = true
-            delayExecution(.now() + 1) { vm.startDelayWasSet = false }
+            viewModel.startDelayWasSet = true
+            delayExecution(.now() + 1) { viewModel.startDelayWasSet = false }
         }
         
-        vm.saveAndDismissMoreOptionsView(bubble, initialDelay)
+        viewModel.saveAndDismissMoreOptionsView(bubble, initialDelay)
     }
     
     func handleInfoLabelTap() {
-        vm.showMoreOptionsInfo = true
+        viewModel.showMoreOptionsInfo = true
     }
     
     var longPress:some Gesture {
         LongPressGesture(minimumDuration: 0.3)
             .onEnded { _ in
-                vm.removeDelay(for: bubble)
+                viewModel.removeDelay(for: bubble)
                 
                 //show 0s red alert and hide after 0.7 seconds
-                vm.startDelayWasReset = true
-                delayExecution(.now() + 1) { vm.startDelayWasReset = false }
+                viewModel.startDelayWasReset = true
+                delayExecution(.now() + 1) { viewModel.startDelayWasReset = false }
                 UserFeedback.doubleHaptic(.heavy)
             }
     }

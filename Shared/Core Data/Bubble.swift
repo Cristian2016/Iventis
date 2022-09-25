@@ -105,7 +105,6 @@ extension Bubble {
     ///observe bubbleTimer signal to update time components only if bubble is running
     ///1.start observing on init, 2.resume observing on reentering active phase 3.remove observer on deinit
     func addBubbleTimerObserver() {
-        
         //make sure observer added only once
         if observerAddedAlready { return }
         observerAddedAlready = true
