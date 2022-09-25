@@ -95,7 +95,7 @@ struct SDButton: View {
             .onEnded { _ in withAnimation { offset = .zero } }
     }
     private var longPressGesture:some Gesture {
-        LongPressGesture(minimumDuration: 0.3)
+        LongPressGesture()
             .onEnded { _ in
                 viewModel.resetDelay(for: sdb)
                 
