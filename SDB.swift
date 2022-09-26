@@ -93,9 +93,12 @@ public class SDB: NSManagedObject {
             else { self.currentDelay -= 1 }
         }
         
-        if self.currentDelay <= 0 {
+        print(currentDelay)
+        
+        if (0...1).contains(self.currentDelay) {
             DispatchQueue.main.async {
                 NotificationCenter.default.post(name: .sdbEnded, object: self)
+                print("remove delay at \(self.currentDelay)")
                 self.removeDelay()
             }
         }

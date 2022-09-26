@@ -31,10 +31,7 @@ struct MoreOptionsView: View {
     // MARK: -
     var body: some View {
         ZStack {
-            screenBackground.onTapGesture {
-                //either 1.save delay and dismiss or 2.dismiss
-                saveDelayIfNeeded()
-            }
+            whiteBackground.onTapGesture { saveDelayIfNeeded() }
             
             VStack {
                 StartDelaySubview(sdb: bubble.sdb!)
@@ -52,7 +49,7 @@ struct MoreOptionsView: View {
                 //reset delay confirmation
                 ConfirmationView(title: "Start Delay", isOn: false)
             }
-            if viewModel.confirm_DelayWasChanged {
+            if viewModel.showConfirmation_DelayWasChanged {
                 ConfirmationView(extraText: String(bubble.sdb!.referenceDelay) + "s",
                                  title: "Start Delay",
                                  isOn: true
@@ -64,7 +61,7 @@ struct MoreOptionsView: View {
     
     // MARK: - Lego
     
-    private var screenBackground:some View {
+    private var whiteBackground:some View {
         Color.alertScreenBackground.opacity(0.9)
             .ignoresSafeArea()
     }
