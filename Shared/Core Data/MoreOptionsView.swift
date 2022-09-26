@@ -27,7 +27,10 @@ struct MoreOptionsView: View {
     // MARK: -
     var body: some View {
         ZStack {
-            screenBackground.onTapGesture { saveStartDelayAndDismiss() }
+            screenBackground.onTapGesture {
+                saveDelay()
+                dismiss()
+            }
             
             VStack {
                 StartDelaySubview(sdb: bubble.sdb!)
@@ -127,15 +130,19 @@ struct MoreOptionsView: View {
     // MARK: - User Intents
     func dismiss() { viewModel.oneAndOnlySDB = nil }
     
-    func saveStartDelayAndDismiss() {
-        let userHasModifiedDelay = bubble.sdb!.referenceDelay != initialReferenceDelay
+    func saveDelay() {
+        /*
+         if user sets a new start delay
+         save delay
+         save CoreData context*/
         
-        if userHasModifiedDelay {
+        let delayWasModified = bubble.sdb!.referenceDelay != initialReferenceDelay
+        
+        if delayWasModified {
             UserFeedback.singleHaptic(.medium)
-            viewModel.saveStartDelay(for: bubble)
+            viewModel.saveDelay(for: bubble)
             PersistenceController.shared.save()
         }
-        else { dismiss() }
     }
     
     func handleInfoLabelTap() {
