@@ -444,10 +444,10 @@ class ViewModel: ObservableObject {
     // MARK: - StartDelay SDB
     ///save delay and dismiss MoreOptionsView
     func saveDelay(for bubble:Bubble) {
-        startDelayWasSet = true
         
         let dispatchTime = (bubble.sdb!.referenceDelay != 0) ? DispatchTime.now() + 0.7 : .now()
-        
+         
+        startDelayWasSet = true
         delayExecution(dispatchTime) {
             self.theOneAndOnlySDB = nil //dismiss MoreOptionsView
             self.startDelayWasSet = false
