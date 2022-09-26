@@ -445,7 +445,8 @@ class ViewModel: ObservableObject {
     ///save delay and dismiss MoreOptionsView
     func saveDelay(for bubble:Bubble) {
         
-        let dispatchTime = (bubble.sdb!.referenceDelay != 0) ? DispatchTime.now() + 0.7 : .now()
+        let dispatchTime:DispatchTime
+        = (bubble.sdb!.referenceDelay != 0) ? .confirmation : .now()
          
         startDelayWasSet = true //set back to false after dispatchTime
         
