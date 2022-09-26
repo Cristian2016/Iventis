@@ -14,12 +14,12 @@ struct MoreOptionsView: View {
     
     ///referenceDelay when the user opens MoreOptionsView
     ///user may or may not edit referenceDelay
-    let storedDelay:Int
+    let storedReferenceDelay:Int
     
     // MARK: -
     init(for bubble:Bubble) {
         _bubble = ObservedObject(wrappedValue: bubble)
-        self.storedDelay = Int(bubble.sdb!.referenceDelay)
+        self.storedReferenceDelay = Int(bubble.sdb!.referenceDelay)
     }
         
     // MARK: -
@@ -55,7 +55,7 @@ struct MoreOptionsView: View {
                                  isOn: false
                 )
             }
-            if viewModel.confirm_DelayWasSet && bubble.sdb!.referenceDelay != 0 {
+            if viewModel.confirm_DelayWasChanged && bubble.sdb!.referenceDelay != 0 {
                 ConfirmationView(extraText: String(bubble.sdb!.referenceDelay) + "s",
                                  titleSymbol: "clock.arrow.circlepath",
                                  title: "Start Delay",
@@ -141,7 +141,7 @@ struct MoreOptionsView: View {
          save CoreData context*/
                 
         UserFeedback.singleHaptic(.medium)
-        viewModel.saveDelay(for: bubble, storedDelay)
+        viewModel.saveDelay(for: bubble, storedReferenceDelay)
     }
     
     func handleInfoLabelTap() {

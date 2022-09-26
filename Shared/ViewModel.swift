@@ -16,7 +16,7 @@ class ViewModel: ObservableObject {
     @Published var theOneAndOnlyEditedSDB:SDB? //StartDelayBubble
     
     @Published var confirm_NoDelay = false
-    @Published var confirm_DelayWasSet = false
+    @Published var confirm_DelayWasChanged = false
     
     // MARK: - Confirmation Flashes
     @Published var confirm_AlwaysOnDisplay = false
@@ -425,10 +425,10 @@ class ViewModel: ObservableObject {
         if sdb.referenceDelay != 0 {//there is a delay set
             UserFeedback.singleHaptic(.medium)
             PersistenceController.shared.save()
-            confirm_DelayWasSet = true
+            confirm_DelayWasChanged = true
             
             delayExecution(.now() + 0.6) {
-                self.confirm_DelayWasSet = false
+                self.confirm_DelayWasChanged = false
                 self.theOneAndOnlyEditedSDB = nil
             }
             
@@ -454,11 +454,11 @@ class ViewModel: ObservableObject {
         
         let delay:DispatchTime = (referenceDelay != 0) ? .confirmation : .now()
          
-        confirm_DelayWasSet = true //set back to false after dispatchTime
+        confirm_DelayWasChanged = true //set back to false after dispatchTime
         
         delayExecution(delay) {
             self.theOneAndOnlyEditedSDB = nil //dismiss MoreOptionsView
-            self.confirm_DelayWasSet = false
+            self.confirm_DelayWasChanged = false
             self.theOneAndOnlyEditedSDB = nil //dismiss MOV
         }
         
