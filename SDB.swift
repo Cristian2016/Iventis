@@ -26,7 +26,7 @@ public class SDB: NSManagedObject {
     // MARK: - User Intents
     func toggleStart() {
         switch state {
-            case .brandNew, .paused: //🔴 start
+            case .brandNew, .paused: //start SDB
                 state = .running //start handle observe timer
                 
                 //create newPair and set newPair.start date
@@ -35,12 +35,11 @@ public class SDB: NSManagedObject {
                 addToPairs(newSDBPair)
                 addObserver()
                 
-            case .running: //🔴 pause
+            case .running: //pause SDB
                 state = .paused //stop handle observe timer
                 
                 //set pause and compute duration
                 lastPair?.pause = Date()
-                let duration = lastPair!.pause!.timeIntervalSince(lastPair!.start!)
         }
         
         PersistenceController.shared.save()
@@ -72,23 +71,6 @@ public class SDB: NSManagedObject {
         PersistenceController.shared.save()
     }
     
-    //task to call each second by bTimer
-    func timerTask() {
-        guard currentDelay > 0 else { return }
-        
-        if currentDelay == 1 {
-            state = .brandNew
-            
-            //notification to ViewModel to start bubble automatically
-            //viewModel receives notification and
-            //calls vm.toggleStart(bubble!)
-            //vm.sdb = nil causes SDBCell to go away
-            NotificationCenter.default.post(name: .sdbEnded, object: self)
-        }
-        
-        currentDelay -= 1 //decrease by one
-    }
-    
     func addObserver() {
         //make sure observer added only once
         if observerAddedAlready { return }
@@ -96,8 +78,6 @@ public class SDB: NSManagedObject {
         
         NotificationCenter.default.addObserver(forName: .bubbleTimerSignal, object: nil, queue: nil) { [weak self] _ in self?.updateCurrentDelay() }
     }
-    
-    deinit { NotificationCenter.default.removeObserver(self) }
     
     func updateCurrentDelay() {
         //make sure it updates only if SDB is running
@@ -120,4 +100,7 @@ public class SDB: NSManagedObject {
             }
         }
     }
+    
+    // MARK: -
+    deinit { NotificationCenter.default.removeObserver(self) }
 }
