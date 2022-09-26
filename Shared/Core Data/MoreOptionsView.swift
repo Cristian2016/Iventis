@@ -55,7 +55,7 @@ struct MoreOptionsView: View {
                                  isOn: false
                 )
             }
-            if viewModel.confirm_DelayWasChanged && bubble.sdb!.referenceDelay != 0 {
+            if viewModel.confirm_DelayWasChanged {
                 ConfirmationView(extraText: String(bubble.sdb!.referenceDelay) + "s",
                                  titleSymbol: "clock.arrow.circlepath",
                                  title: "Start Delay",
@@ -78,7 +78,6 @@ struct MoreOptionsView: View {
             RoundedRectangle(cornerRadius: 10)
                 .fill(Color.white)
                 .standardShadow()
-                .onTapGesture { dismiss() }
             Push(.topRight) {
                 Image(systemName: "info.circle.fill")
                     .foregroundColor(.gray)
@@ -132,7 +131,7 @@ struct MoreOptionsView: View {
     }
     
     // MARK: - User Intents
-    func dismiss() { viewModel.theOneAndOnlyEditedSDB = nil }
+//    func dismiss() { viewModel.theOneAndOnlyEditedSDB = nil }
     
     func saveDelayIfNeeded() {
         /*
