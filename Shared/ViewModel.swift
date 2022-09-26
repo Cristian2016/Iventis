@@ -13,7 +13,7 @@ import CoreData
 
 class ViewModel: ObservableObject {
     ///MoreOptionsView
-    @Published var oneAndOnlySDB:SDB? //StartDelayBubble
+    @Published var theOneAndOnlySDB:SDB? //StartDelayBubble
     
     @Published var startDelayWasReset = false
     @Published var startDelayWasSet = false
@@ -50,7 +50,7 @@ class ViewModel: ObservableObject {
         let request = Bubble.fetchRequest()
         let bubbles = try? PersistenceController.shared.viewContext.fetch(request)
         updateCurrentClock(of: bubbles)
-        observe_sdbEnded_Notification()
+        observe_delayReachedZero_Notification()
     }
     
     deinit { NotificationCenter.default.removeObserver(self) }
@@ -191,7 +191,7 @@ class ViewModel: ObservableObject {
     func showMoreOptions(for bubble:Bubble) {
         //set @Published property triggers UI update
         //MoreOptionsView displayed
-        oneAndOnlySDB = bubble.sdb
+        theOneAndOnlySDB = bubble.sdb
     }
     
     //SDBubble
@@ -416,7 +416,7 @@ class ViewModel: ObservableObject {
     
     // MARK: -
     func changeColor(for bubble:Bubble, to newColor:String) {
-        guard let sdb = oneAndOnlySDB else { fatalError() }
+        guard let sdb = theOneAndOnlySDB else { fatalError() }
         
         //change color and save CoreData
         if bubble.color == newColor { return }
@@ -429,12 +429,12 @@ class ViewModel: ObservableObject {
             
             delayExecution(.now() + 0.6) {
                 self.startDelayWasSet = false
-                self.oneAndOnlySDB = nil
+                self.theOneAndOnlySDB = nil
             }
             
         } else {//no delay set
             UserFeedback.singleHaptic(.medium) //haptic feedback
-            self.oneAndOnlySDB = nil
+            self.theOneAndOnlySDB = nil
         }
         
         //save CoreData
@@ -449,11 +449,11 @@ class ViewModel: ObservableObject {
         let dispatchTime = (bubble.sdb!.referenceDelay != 0) ? DispatchTime.now() + 0.7 : .now()
         
         delayExecution(dispatchTime) {
-            self.oneAndOnlySDB = nil //dismiss MoreOptionsView
+            self.theOneAndOnlySDB = nil //dismiss MoreOptionsView
             self.startDelayWasSet = false
         }
         
-        if let sdb = oneAndOnlySDB { sdb.currentDelay = Float(sdb.referenceDelay) }
+        if let sdb = theOneAndOnlySDB { sdb.currentDelay = Float(sdb.referenceDelay) }
     }
     
     ///user long presses in MoreOptionsView
@@ -474,7 +474,7 @@ class ViewModel: ObservableObject {
         sdb.currentDelay = Float(sdb.referenceDelay)
     }
     
-    private func observe_sdbEnded_Notification() {
+    private func observe_delayReachedZero_Notification() {
         NotificationCenter.default.addObserver(forName: .sdbEnded, object: nil, queue: nil) { [weak self] notification in
             
             let sdb = notification.object as? SDB
@@ -485,7 +485,7 @@ class ViewModel: ObservableObject {
                 //remove SDBCell from BubbleCell
                 self?.toggleBubbleStart(bubble)
                 
-                self?.oneAndOnlySDB = nil //dismiss MoreOptionsView
+                self?.theOneAndOnlySDB = nil //dismiss MoreOptionsView
                 
                 PersistenceController.shared.save()
             }

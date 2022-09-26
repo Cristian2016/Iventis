@@ -128,7 +128,7 @@ struct MoreOptionsView: View {
     }
     
     // MARK: - User Intents
-    func dismiss() { viewModel.oneAndOnlySDB = nil }
+    func dismiss() { viewModel.theOneAndOnlySDB = nil }
     
     func saveDelayIfNeeded() {
         /*
