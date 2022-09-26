@@ -7,22 +7,26 @@
 
 import SwiftUI
 
+///Used to change 1.startDelay or 2.bubble's color
 struct MoreOptionsView: View {
     @ObservedObject var bubble: Bubble
     @EnvironmentObject var viewModel:ViewModel
-    let initialReferenceDelay:Int //stored initial referenceDelay value
+    
+    ///referenceDelay when the user opens MoreOptionsView
+    ///user may or may not edit referenceDelay
+    let storedDelay:Int
     
     // MARK: -
     init(for bubble:Bubble) {
         _bubble = ObservedObject(wrappedValue: bubble)
-        self.initialReferenceDelay = Int(bubble.sdb!.referenceDelay)
+        self.storedDelay = Int(bubble.sdb!.referenceDelay)
     }
         
     // MARK: -
     static let insets = EdgeInsets(top: 4, leading: 10, bottom: 4, trailing: 10)
     static let itemSpacing = CGFloat(4)
     let colorsGridHeight = CGFloat(320)
-    var display_StartDelayGrid:Bool { bubble.state != .running }
+    var show_StartDelayOption:Bool { bubble.state != .running }
     
     // MARK: -
     var body: some View {
@@ -136,7 +140,7 @@ struct MoreOptionsView: View {
          save delay
          save CoreData context*/
         
-        let delayWasModified = bubble.sdb!.referenceDelay != initialReferenceDelay
+        let delayWasModified = bubble.sdb!.referenceDelay != storedDelay
         guard delayWasModified else { return }
                 
         UserFeedback.singleHaptic(.medium)
