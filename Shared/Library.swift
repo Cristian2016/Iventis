@@ -10,6 +10,10 @@ import UIKit
 #endif
 import SwiftUI
 
+extension DispatchTime {
+    static let confirmation = DispatchTime.now() + 0.7
+}
+
 extension UIScreen {
     static let deviceNotTallEnough = UIScreen.main.bounds.height <= 667
 }
