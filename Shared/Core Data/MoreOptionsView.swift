@@ -25,15 +25,15 @@ struct MoreOptionsView: View {
     // MARK: -
     static let insets = EdgeInsets(top: 4, leading: 10, bottom: 4, trailing: 10)
     static let itemSpacing = CGFloat(4)
-    let colorsGridHeight = CGFloat(320)
+    let colorsTableHeight = CGFloat(320)
     var show_StartDelayOption:Bool { bubble.state != .running }
     
     // MARK: -
     var body: some View {
         ZStack {
             screenBackground.onTapGesture {
+                //either 1.save delay and dismiss or 2.dismiss
                 saveDelayIfNeeded()
-                dismiss()
             }
             
             VStack {
@@ -127,7 +127,7 @@ struct MoreOptionsView: View {
                 }
             }
         }
-        .frame(height: UIScreen.deviceNotTallEnough ? colorsGridHeight : 420)
+        .frame(height: UIScreen.deviceNotTallEnough ? colorsTableHeight : 420)
         .scrollIndicators(.hidden)
     }
     
@@ -139,13 +139,9 @@ struct MoreOptionsView: View {
          if user sets a new start delay
          save delay
          save CoreData context*/
-        
-        let delayWasModified = bubble.sdb!.referenceDelay != storedDelay
-        guard delayWasModified else { return }
                 
         UserFeedback.singleHaptic(.medium)
-        viewModel.saveDelay(for: bubble)
-        PersistenceController.shared.save()
+        viewModel.saveDelay(for: bubble, storedDelay)
     }
     
     func handleInfoLabelTap() {

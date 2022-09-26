@@ -443,19 +443,24 @@ class ViewModel: ObservableObject {
     
     // MARK: - StartDelay SDB
     ///save delay and dismiss MoreOptionsView
-    func saveDelay(for bubble:Bubble) {
+    func saveDelay(for bubble:Bubble, _ storedDelay:Int) {
         
-        let dispatchTime:DispatchTime
+        print(bubble.sdb?.referenceDelay, storedDelay)
+        
+        let delay:DispatchTime
         = (bubble.sdb!.referenceDelay != 0) ? .confirmation : .now()
          
         confirm_DelayWasSet = true //set back to false after dispatchTime
         
-        delayExecution(dispatchTime) {
+        delayExecution(delay) {
             self.theOneAndOnlyEditedSDB = nil //dismiss MoreOptionsView
             self.confirm_DelayWasSet = false
+            self.theOneAndOnlyEditedSDB = nil
         }
         
         if let sdb = theOneAndOnlyEditedSDB { sdb.currentDelay = Float(sdb.referenceDelay) }
+        
+        PersistenceController.shared.save()
     }
     
     ///user long presses in MoreOptionsView
