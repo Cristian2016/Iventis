@@ -43,7 +43,7 @@ struct MoreOptionsView: View {
             }
             .frame(width: 280)
             .padding(8)
-            .background { whiteBackground }
+            .background { tableBackground }
             .padding()
             .padding()
             
@@ -73,7 +73,7 @@ struct MoreOptionsView: View {
             .ignoresSafeArea()
     }
     
-    private var whiteBackground:some View {
+    private var tableBackground:some View {
         ZStack {
             RoundedRectangle(cornerRadius: 10)
                 .fill(Color.white)
