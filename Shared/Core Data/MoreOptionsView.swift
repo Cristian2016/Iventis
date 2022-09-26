@@ -10,7 +10,7 @@ import SwiftUI
 struct MoreOptionsView: View {
     @ObservedObject var bubble: Bubble
     @EnvironmentObject var viewModel:ViewModel
-    let initialReferenceDelay:Int //store initial value for referenceDelay
+    let initialReferenceDelay:Int //stored initial referenceDelay value
     
     // MARK: -
     init(for bubble:Bubble) {

@@ -441,6 +441,7 @@ class ViewModel: ObservableObject {
         PersistenceController.shared.save()
     }
     
+    // MARK: - StartDelay SDB
     ///save delay and dismiss MoreOptionsView
     func saveDelay(for bubble:Bubble) {
         startDelayWasSet = true
@@ -455,13 +456,6 @@ class ViewModel: ObservableObject {
         if let sdb = oneAndOnlySDB { sdb.currentDelay = Float(sdb.referenceDelay) }
     }
     
-    ///reference startDelay
-    func computeReferenceDelay(_ sdb:SDB, _ value: Int) {
-        UserFeedback.singleHaptic(.medium)
-        sdb.referenceDelay += Int64(value)
-        sdb.currentDelay = Float(sdb.referenceDelay)
-    }
-    
     ///user long presses in MoreOptionsView
     func removeDelay(for bubble:Bubble?) {
         guard let bubble = bubble else { return }
@@ -470,10 +464,16 @@ class ViewModel: ObservableObject {
         bubble.sdb?.removeDelay()
     }
     
-    //long press SDBCell
+    //long press SDBButton
     func resetDelay(for sdb:SDB) { sdb.resetDelay() }
     
-    // MARK: - StartDelayBubble SDB
+    ///reference startDelay
+    func computeReferenceDelay(_ sdb:SDB, _ value: Int) {
+        UserFeedback.singleHaptic(.medium)
+        sdb.referenceDelay += Int64(value)
+        sdb.currentDelay = Float(sdb.referenceDelay)
+    }
+    
     private func observe_sdbEnded_Notification() {
         NotificationCenter.default.addObserver(forName: .sdbEnded, object: nil, queue: nil) { [weak self] notification in
             
