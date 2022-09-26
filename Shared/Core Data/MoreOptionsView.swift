@@ -44,7 +44,7 @@ struct MoreOptionsView: View {
             .padding()
             
             //2 Confirmation Labels
-            if viewModel.startDelayWasReset {
+            if viewModel.confirm_NoDelay {
                 //reset delay confirmation
                 ConfirmationView(titleSymbol: "clock.arrow.circlepath",
                                  title: "Start Delay",
@@ -128,7 +128,7 @@ struct MoreOptionsView: View {
     }
     
     // MARK: - User Intents
-    func dismiss() { viewModel.theOneAndOnlySDB = nil }
+    func dismiss() { viewModel.theOneAndOnlyEditedSDB = nil }
     
     func saveDelayIfNeeded() {
         /*
@@ -154,8 +154,8 @@ struct MoreOptionsView: View {
                 viewModel.removeDelay(for: bubble)
                 
                 //show 0s red alert and hide after 0.7 seconds
-                viewModel.startDelayWasReset = true
-                delayExecution(.now() + 1) { viewModel.startDelayWasReset = false }
+                viewModel.confirm_NoDelay = true
+                delayExecution(.now() + 1) { viewModel.confirm_NoDelay = false }
                 UserFeedback.doubleHaptic(.heavy)
             }
     }

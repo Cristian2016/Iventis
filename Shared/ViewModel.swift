@@ -13,9 +13,9 @@ import CoreData
 
 class ViewModel: ObservableObject {
     ///MoreOptionsView
-    @Published var theOneAndOnlySDB:SDB? //StartDelayBubble
+    @Published var theOneAndOnlyEditedSDB:SDB? //StartDelayBubble
     
-    @Published var startDelayWasReset = false
+    @Published var confirm_NoDelay = false
     @Published var confirm_DelayWasSet = false
     
     // MARK: - Confirmation Flashes
@@ -191,7 +191,7 @@ class ViewModel: ObservableObject {
     func showMoreOptions(for bubble:Bubble) {
         //set @Published property triggers UI update
         //MoreOptionsView displayed
-        theOneAndOnlySDB = bubble.sdb
+        theOneAndOnlyEditedSDB = bubble.sdb
     }
     
     //SDBubble
@@ -416,7 +416,7 @@ class ViewModel: ObservableObject {
     
     // MARK: -
     func changeColor(for bubble:Bubble, to newColor:String) {
-        guard let sdb = theOneAndOnlySDB else { fatalError() }
+        guard let sdb = theOneAndOnlyEditedSDB else { fatalError() }
         
         //change color and save CoreData
         if bubble.color == newColor { return }
@@ -429,12 +429,12 @@ class ViewModel: ObservableObject {
             
             delayExecution(.now() + 0.6) {
                 self.confirm_DelayWasSet = false
-                self.theOneAndOnlySDB = nil
+                self.theOneAndOnlyEditedSDB = nil
             }
             
         } else {//no delay set
             UserFeedback.singleHaptic(.medium) //haptic feedback
-            self.theOneAndOnlySDB = nil
+            self.theOneAndOnlyEditedSDB = nil
         }
         
         //save CoreData
@@ -452,11 +452,11 @@ class ViewModel: ObservableObject {
         confirm_DelayWasSet = true //set back to false after dispatchTime
         
         delayExecution(dispatchTime) {
-            self.theOneAndOnlySDB = nil //dismiss MoreOptionsView
+            self.theOneAndOnlyEditedSDB = nil //dismiss MoreOptionsView
             self.confirm_DelayWasSet = false
         }
         
-        if let sdb = theOneAndOnlySDB { sdb.currentDelay = Float(sdb.referenceDelay) }
+        if let sdb = theOneAndOnlyEditedSDB { sdb.currentDelay = Float(sdb.referenceDelay) }
     }
     
     ///user long presses in MoreOptionsView
@@ -488,7 +488,7 @@ class ViewModel: ObservableObject {
                 //remove SDBCell from BubbleCell
                 self?.toggleBubbleStart(bubble)
                 
-                self?.theOneAndOnlySDB = nil //dismiss MoreOptionsView
+                self?.theOneAndOnlyEditedSDB = nil //dismiss MoreOptionsView
                 
                 PersistenceController.shared.save()
             }
