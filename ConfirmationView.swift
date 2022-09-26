@@ -22,15 +22,17 @@ struct ConfirmationView: View {
         ZStack {
             Color.white.opacity(0.9)
             VStack {
-                if extraText != nil {
-                    Text(extraText ?? "")
-                        .font(.system(size: 50).weight(.medium))
+                VStack(spacing: 0) {
+                    if extraText != nil {
+                        Text(extraText ?? "")
+                            .font(.system(size: 50).weight(.medium))
+                    }
+                    HStack {
+                        Image(systemName: titleSymbol ?? "")
+                        Text(title)
+                    }
+                    .font(.system(size: 30).weight(.medium))
                 }
-                HStack {
-                    Image(systemName: titleSymbol ?? "")
-                    Text(title)
-                }
-                .font(.system(size: 30).weight(.medium))
                 Divider()
                     .frame(width: 200)
                 Label(isOn ? "ON" : "OFF", systemImage: isOn ? "checkmark" : "xmark")
@@ -49,8 +51,9 @@ struct ConfirmationView: View {
 
 struct ConfirmationView_Previews: PreviewProvider {
     static var previews: some View {
-        ConfirmationView(titleSymbol: Alert.alwaysOnDisplay.titleSymbol,
+        ConfirmationView(extraText: "80s",
+            titleSymbol: Alert.alwaysOnDisplay.titleSymbol,
                          title: Alert.alwaysOnDisplay.title, isOn: true
         )
-    }
-}
+
+    }}
