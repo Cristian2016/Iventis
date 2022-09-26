@@ -444,18 +444,22 @@ class ViewModel: ObservableObject {
     // MARK: - StartDelay SDB
     ///save delay and dismiss MoreOptionsView
     func saveDelay(for bubble:Bubble, _ storedDelay:Int) {
+        guard
+            let referenceDelay = bubble.sdb?.referenceDelay,
+            referenceDelay != storedDelay
+        else {
+            self.theOneAndOnlyEditedSDB = nil //dismiss MOV
+            return
+        }
         
-        print(bubble.sdb?.referenceDelay, storedDelay)
-        
-        let delay:DispatchTime
-        = (bubble.sdb!.referenceDelay != 0) ? .confirmation : .now()
+        let delay:DispatchTime = (referenceDelay != 0) ? .confirmation : .now()
          
         confirm_DelayWasSet = true //set back to false after dispatchTime
         
         delayExecution(delay) {
             self.theOneAndOnlyEditedSDB = nil //dismiss MoreOptionsView
             self.confirm_DelayWasSet = false
-            self.theOneAndOnlyEditedSDB = nil
+            self.theOneAndOnlyEditedSDB = nil //dismiss MOV
         }
         
         if let sdb = theOneAndOnlyEditedSDB { sdb.currentDelay = Float(sdb.referenceDelay) }
