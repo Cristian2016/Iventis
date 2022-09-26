@@ -13,7 +13,7 @@ struct ConfirmationView: View {
     
     // MARK: - Content
     var extraText:String? = nil
-    let titleSymbol:String?
+    var titleSymbol:String? = nil
     let title:String
     var isOn:Bool
     
