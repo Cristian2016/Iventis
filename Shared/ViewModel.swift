@@ -447,7 +447,8 @@ class ViewModel: ObservableObject {
         
         let dispatchTime = (bubble.sdb!.referenceDelay != 0) ? DispatchTime.now() + 0.7 : .now()
          
-        startDelayWasSet = true
+        startDelayWasSet = true //set back to false after dispatchTime
+        
         delayExecution(dispatchTime) {
             self.theOneAndOnlySDB = nil //dismiss MoreOptionsView
             self.startDelayWasSet = false
