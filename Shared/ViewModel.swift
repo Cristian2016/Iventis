@@ -451,12 +451,10 @@ class ViewModel: ObservableObject {
             self.theOneAndOnlyEditedSDB = nil //dismiss MOV
             return
         }
-        
-        let delay:DispatchTime = (referenceDelay != 0) ? .confirmation : .now()
-         
+                 
         confirm_DelayWasChanged = true //set back to false after dispatchTime
         
-        delayExecution(delay) {
+        delayExecution(.now() + 0.8) {
             self.confirm_DelayWasChanged = false
             self.theOneAndOnlyEditedSDB = nil //dismiss MOV
         }
@@ -464,8 +462,6 @@ class ViewModel: ObservableObject {
         if let sdb = theOneAndOnlyEditedSDB { sdb.currentDelay = Float(sdb.referenceDelay) }
         
         PersistenceController.shared.save()
-        
-        print(confirm_DelayWasChanged, delay)
     }
     
     ///user long presses in MoreOptionsView
