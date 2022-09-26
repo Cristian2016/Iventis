@@ -138,7 +138,7 @@ struct MoreOptionsView: View {
         
         let delayWasModified = bubble.sdb!.referenceDelay != initialReferenceDelay
         guard delayWasModified else { return }
-        
+                
         UserFeedback.singleHaptic(.medium)
         viewModel.saveDelay(for: bubble)
         PersistenceController.shared.save()
