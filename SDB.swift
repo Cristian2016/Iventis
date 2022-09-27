@@ -80,30 +80,26 @@ public class SDB: NSManagedObject {
     }
     
     func updateCurrentDelay() {
-        //make sure it updates only if SDB is running
-        guard
-            state == .running,
-            let lastStartDate = lastPair?.start
-        else { return }
-                
-        let delta = Date().timeIntervalSince(lastStartDate)
-        
-        DispatchQueue.main.async {
-            if delta < 1 {
-                self.currentDelay -= Float(delta)
-                print("delta \(delta)")
-            }
-            else { self.currentDelay -= 1 }
-        }
-        
-        print(currentDelay)
-        
-        if (0...1).contains(self.currentDelay) {
+        DispatchQueue.global().async {
+            //make sure it updates only if SDB is running
+            guard
+                self.state == .running,
+                let lastStartDate = self.lastPair?.start
+            else { return }
+            
+            let delta = Date().timeIntervalSince(lastStartDate)
+            
             DispatchQueue.main.async {
-                let info = ["delta": TimeInterval(self.currentDelay)]
-                NotificationCenter.default.post(name: .sdbEnded, object: self, userInfo: info)
-                print("remove delay at \(self.currentDelay)")
-                self.removeDelay()
+                if delta < 1 { self.currentDelay -= Float(delta) }
+                else { self.currentDelay -= 1 }
+            }
+            
+            if (0...1).contains(self.currentDelay) {
+                DispatchQueue.main.async {
+                    let info = ["delta": TimeInterval(self.currentDelay)]
+                    NotificationCenter.default.post(name: .sdbEnded, object: self, userInfo: info)
+                    self.removeDelay()
+                }
             }
         }
     }
