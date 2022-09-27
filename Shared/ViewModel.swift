@@ -124,12 +124,12 @@ class ViewModel: ObservableObject {
         PersistenceController.shared.save()
     }
     
-    func toggleBubbleStart(_ bubble:Bubble, delayDelta:TimeInterval? = nil) {
+    ///delta is always zero if user taps start. if user uses start delay, delta is not zero
+    func toggleBubbleStart(_ bubble:Bubble, delta:TimeInterval? = nil) {
         if bubble.currentClock <= 0 && bubble.kind != .stopwatch  { return }
        removeDelay(for: bubble)
         
-        let startDelayCompensation = delayDelta ?? 0
-        print("startDelayCompensation \(startDelayCompensation)")
+        let startDelayCompensation = delta ?? 0
         
         switch bubble.state {
             case .brandNew: /* changes to .running */
@@ -503,7 +503,7 @@ class ViewModel: ObservableObject {
             DispatchQueue.main.async {
                 //start bubble automatically
                 //remove SDBCell from BubbleCell
-                self?.toggleBubbleStart(bubble, delayDelta: value)
+                self?.toggleBubbleStart(bubble, delta: value)
                 
                 self?.theOneAndOnlyEditedSDB = nil //dismiss MoreOptionsView
                 
