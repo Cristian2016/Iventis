@@ -489,7 +489,13 @@ class ViewModel: ObservableObject {
         NotificationCenter.default.addObserver(forName: .sdbEnded, object: nil, queue: nil) { [weak self] notification in
             
             let sdb = notification.object as? SDB
-            guard let bubble = sdb?.bubble else { return }
+            guard
+                let bubble = sdb?.bubble,
+                let info = notification.userInfo as? [String:TimeInterval],
+                let value = info["delta"] as? TimeInterval
+            else { fatalError() }
+            
+            print("add \(value) to bubble.currentClock")
             
             DispatchQueue.main.async {
                 //start bubble automatically

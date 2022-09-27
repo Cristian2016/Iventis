@@ -89,7 +89,10 @@ public class SDB: NSManagedObject {
         let delta = Date().timeIntervalSince(lastStartDate)
         
         DispatchQueue.main.async {
-            if delta < 1 { self.currentDelay -= Float(delta) }
+            if delta < 1 {
+                self.currentDelay -= Float(delta)
+                print("delta \(delta)")
+            }
             else { self.currentDelay -= 1 }
         }
         
@@ -97,7 +100,8 @@ public class SDB: NSManagedObject {
         
         if (0...1).contains(self.currentDelay) {
             DispatchQueue.main.async {
-                NotificationCenter.default.post(name: .sdbEnded, object: self)
+                let info = ["delta": TimeInterval(1 + self.currentDelay)]
+                NotificationCenter.default.post(name: .sdbEnded, object: self, userInfo: info)
                 print("remove delay at \(self.currentDelay)")
                 self.removeDelay()
             }
