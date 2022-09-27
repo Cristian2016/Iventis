@@ -100,7 +100,7 @@ public class SDB: NSManagedObject {
         
         if (0...1).contains(self.currentDelay) {
             DispatchQueue.main.async {
-                let info = ["delta": TimeInterval(1 + self.currentDelay)]
+                let info = ["delta": TimeInterval(self.currentDelay)]
                 NotificationCenter.default.post(name: .sdbEnded, object: self, userInfo: info)
                 print("remove delay at \(self.currentDelay)")
                 self.removeDelay()

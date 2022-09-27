@@ -124,18 +124,21 @@ class ViewModel: ObservableObject {
         PersistenceController.shared.save()
     }
     
-    func toggleBubbleStart(_ bubble:Bubble) {
+    func toggleBubbleStart(_ bubble:Bubble, delayDelta:TimeInterval? = nil) {
         if bubble.currentClock <= 0 && bubble.kind != .stopwatch  { return }
        removeDelay(for: bubble)
+        
+        let startDelayCompensation = delayDelta ?? 0
+        print("startDelayCompensation \(startDelayCompensation)")
         
         switch bubble.state {
             case .brandNew: /* changes to .running */
                 //create first session and add first pair to the session
                 let newSession = Session(context: PersistenceController.shared.viewContext)
                 let newPair = Pair(context: PersistenceController.shared.viewContext)
-                newPair.start = Date()
+                newPair.start = Date().addingTimeInterval(startDelayCompensation)
                 bubble.addToSessions(newSession)
-                newSession.created = Date()
+                newSession.created = Date().addingTimeInterval(startDelayCompensation)
                 newSession.addToPairs(newPair)
                 
                 bubble.syncSmallBubbleCell = true
@@ -143,7 +146,7 @@ class ViewModel: ObservableObject {
             case .paused:  /* changes to running */
                 //create new pair, add it to currentSession
                 let newPair = Pair(context: PersistenceController.shared.viewContext)
-                newPair.start = Date()
+                newPair.start = Date().addingTimeInterval(startDelayCompensation)
                 bubble.lastSession?.addToPairs(newPair)
                 
                 bubble.syncSmallBubbleCell = true
@@ -500,7 +503,7 @@ class ViewModel: ObservableObject {
             DispatchQueue.main.async {
                 //start bubble automatically
                 //remove SDBCell from BubbleCell
-                self?.toggleBubbleStart(bubble)
+                self?.toggleBubbleStart(bubble, delayDelta: value)
                 
                 self?.theOneAndOnlyEditedSDB = nil //dismiss MoreOptionsView
                 
