@@ -43,6 +43,14 @@ struct BubbleCell: View {
             .overlay {
                 if confirm_CalEventCreated { CalEventCreatedConfirmationView() }
             }
+            .overlay {
+                if !isBubbleRunning {
+                    Push(.bottomRight) {
+                        hundredthsView
+                            .onTapGesture { userTappedHundredths() }
+                    }
+                }
+            }
         }
         .onAppear { resumeObserveTimer() }
           //gestures
@@ -123,14 +131,6 @@ struct BubbleCell: View {
                 .gesture(tap)
                 .gesture(longPress)
             //overlays
-                .overlay {
-                    if !isBubbleRunning {
-                        Push(.bottomRight) {
-                            hundredthsView
-                                .onTapGesture { userTappedHundredths() }
-                        }
-                    }
-                }
                 .overlay {
                     if sdb.referenceDelay > 0 { SDButton(bubble.sdb) }
                 }
