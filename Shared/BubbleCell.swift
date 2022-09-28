@@ -92,6 +92,7 @@ struct BubbleCell: View {
             /* Hr */ bubbleShape.opacity(hrOpacity)
             /* Min */ bubbleShape.opacity(minOpacity)
             /* Sec */ bubbleShape
+                .scaleEffect(isSecondsTapped ? 0.6 : 1.0)
         }
     }
     
