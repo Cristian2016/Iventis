@@ -10,8 +10,8 @@ import SwiftUI
 struct CalendarEventCreatedConfirmationView: View {
     var body: some View {
         HStack {
-            ConfirmationView(title: "Calendar Event",
-                             lowerSymbol: .custom("Created"),
+            ConfirmationView(title: "New Calendar Event",
+                             lowerSymbol: .custom("Done"),
                              isBackgroundRemoved: true
             )
             Spacer()
