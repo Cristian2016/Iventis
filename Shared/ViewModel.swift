@@ -502,15 +502,13 @@ class ViewModel: ObservableObject {
             guard
                 let bubble = sdb?.bubble,
                 let info = notification.userInfo as? [String:TimeInterval],
-                let value = info["delta"] as? TimeInterval
+                let delta = info["delta"]
             else { fatalError() }
-            
-            print("add \(value) to bubble.currentClock")
-            
+                        
             DispatchQueue.main.async {
                 //start bubble automatically
                 //remove SDBCell from BubbleCell
-                self?.toggleBubbleStart(bubble, delta: value)
+                self?.toggleBubbleStart(bubble, delta: delta)
                 
                 self?.theOneAndOnlyEditedSDB = nil //dismiss MoreOptionsView
                 
