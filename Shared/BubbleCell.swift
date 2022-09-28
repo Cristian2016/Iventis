@@ -284,9 +284,7 @@ struct BubbleCell: View {
     }
     
     // MARK: -
-    var confirm_CalEventCreated:Bool {
-        vm.confirm_CalEventCreated == bubble.rank
-    }
+    var confirm_CalEventCreated:Bool { vm.confirm_CalEventCreated == bubble.rank }
 }
 
 // MARK: - Modifiers
