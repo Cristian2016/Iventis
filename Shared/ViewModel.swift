@@ -15,15 +15,16 @@ class ViewModel: ObservableObject {
     ///MoreOptionsView
     @Published var theOneAndOnlyEditedSDB:SDB? //StartDelayBubble
     
+    //Start Delay
     @Published var confirm_NoDelay = false
-    @Published var showConfirmation_DelayWasChanged = false
+    @Published var confirm_DelayWasChanged = false
     
     ///calendarEvent created for bubble.rank. if rank != nil, confirmation will be displayed in the appropriate bubbleCell
     @Published var confirm_CalEventCreated: Int64? = nil
     
     // MARK: - Confirmation Flashes
     @Published var confirm_AlwaysOnDisplay = false
-    @Published var confirm_CalendarOn = (show:false, isCalOn:false)
+    @Published var confirm_CalOn = (show:false, isCalOn:false)
     
     // MARK: - Alerts
     @Published var showAlert_AlwaysOnDisplay = false
@@ -188,9 +189,9 @@ class ViewModel: ObservableObject {
         //create events for this bubbble
         if bubble.hasCalendar { TimersApp.calManager.bubbleToEventify = bubble }
         
-        confirm_CalendarOn = (true, bubble.hasCalendar)
+        confirm_CalOn = (true, bubble.hasCalendar)
         delayExecution(.now() + 0.5) { [weak self] in
-            self?.confirm_CalendarOn = (false, bubble.hasCalendar)
+            self?.confirm_CalOn = (false, bubble.hasCalendar)
         }
     }
     
@@ -435,10 +436,10 @@ class ViewModel: ObservableObject {
         if sdb.referenceDelay != 0 {//there is a delay set
             UserFeedback.singleHaptic(.medium)
             PersistenceController.shared.save()
-            showConfirmation_DelayWasChanged = true
+            confirm_DelayWasChanged = true
             
             delayExecution(.now() + 0.6) {
-                self.showConfirmation_DelayWasChanged = false
+                self.confirm_DelayWasChanged = false
                 self.theOneAndOnlyEditedSDB = nil
             }
             
@@ -465,10 +466,10 @@ class ViewModel: ObservableObject {
             return
         }
                  
-        showConfirmation_DelayWasChanged = true //set back to false after dispatchTime
+        confirm_DelayWasChanged = true //set back to false after dispatchTime
         
         delayExecution(.now() + 0.8) {
-            self.showConfirmation_DelayWasChanged = false
+            self.confirm_DelayWasChanged = false
             self.theOneAndOnlyEditedSDB = nil //dismiss MOV
         }
         

@@ -7,12 +7,12 @@
 
 import SwiftUI
 
-struct CalendarOnConfirmationView: View {
+struct CalOnConfirmationView: View {
     @EnvironmentObject var viewModel:ViewModel
     
     //viewModel.confirm_CalendarOn.isCalOn
     var lowerSymbol:ConfirmationView.LowerSymbol {
-        viewModel.confirm_CalendarOn.isCalOn ? .on : .off
+        viewModel.confirm_CalOn.isCalOn ? .on : .off
     }
     
     var body: some View {
@@ -22,8 +22,8 @@ struct CalendarOnConfirmationView: View {
     }
 }
 
-struct CalendarOnConfirmationView_Previews: PreviewProvider {
+struct CalOnConfirmationView_Previews: PreviewProvider {
     static var previews: some View {
-        CalendarOnConfirmationView()
+        CalOnConfirmationView()
     }
 }
