@@ -41,8 +41,7 @@ struct BubbleCell: View {
                 .offset(y: -16)
             } //stickyNote
             .overlay {
-                if vm.showConfirmation_CalendarEventCreated == bubble.rank {
-                    CalendarEventCreatedConfirmationView()
+                if showConfirmation_CalendarEventCreated { CalendarEventCreatedConfirmationView()
                 }
             }
         }
@@ -283,6 +282,11 @@ struct BubbleCell: View {
     private var showDetailView:Bool {
         guard let selectedBubbleRank = vm.rankOfSelectedBubble else { return false }
         return bubble.rank == selectedBubbleRank
+    }
+    
+    // MARK: -
+    var showConfirmation_CalendarEventCreated:Bool {
+        vm.showConfirmation_CalendarEventCreated == bubble.rank
     }
 }
 
