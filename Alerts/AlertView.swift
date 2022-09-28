@@ -8,15 +8,15 @@
 import SwiftUI
 
 struct AlertContent {
-    let symbol:String
-    let titleSymbol:String?
+    var symbol:String?
+    var titleSymbol:String?
     let title:String
-    let content:String
+    var content:String?
 }
 
 struct Alert {
     static let alwaysOnDisplay = AlertContent(symbol: "exclamationmark.triangle.fill", titleSymbol: "sun.max", title: "Always-On Display", content: "This option prevents display from sleeping. It may drain battery faster. Turn it off again if no longer needed")
-    static let calendarOn = AlertContent(symbol: "calendar", titleSymbol: "calendar", title: "Calendar", content: "")
+    static let calendarOn = AlertContent(title: "Calendar")
 }
 
 struct AlertView: View {
@@ -30,7 +30,7 @@ struct AlertView: View {
         ZStack {
             Color.white.opacity(0.9)
             VStack(spacing: 10) {
-                Image(systemName: alertContent.symbol)
+                Image(systemName: alertContent.symbol ?? "")
                     .foregroundColor(.yellow)
                     .font(.system(size: 50))
                 HStack {
@@ -39,7 +39,7 @@ struct AlertView: View {
                 }
                 .font(.system(size: 26))
                 .fontWeight(.medium)
-                Text(alertContent.content)
+                Text(alertContent.content ?? "")
                     .foregroundColor(.secondary)
                     .padding([.leading, .trailing])
                 Button("Do not show again") { buttonAction() }
