@@ -42,6 +42,8 @@ public class SDB: NSManagedObject {
                 lastPair?.pause = Date()
         }
         
+        print(pairs_)
+        
         PersistenceController.shared.save()
     }
     

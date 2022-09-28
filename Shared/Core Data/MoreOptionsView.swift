@@ -47,12 +47,12 @@ struct MoreOptionsView: View {
             //2 Confirmation Labels
             if viewModel.confirm_NoDelay {
                 //reset delay confirmation
-                ConfirmationView(title: "Start Delay", isOn: false)
+                ConfirmationView(title: "Start Delay", lowerSymbol: .off)
             }
             if viewModel.showConfirmation_DelayWasChanged {
                 ConfirmationView(extraText: String(bubble.sdb!.referenceDelay) + "s",
                                  title: "Start Delay",
-                                 isOn: true
+                                 lowerSymbol: .on
                 )
             }
         }

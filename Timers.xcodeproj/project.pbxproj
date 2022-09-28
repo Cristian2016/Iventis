@@ -85,6 +85,7 @@
 		1FFC8BAD28142F040059EF2E /* Session Properties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FFC8BA528142F040059EF2E /* Session Properties.swift */; };
 		1FFC8BB628142F040059EF2E /* Pair.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FFC8BA828142F040059EF2E /* Pair.swift */; };
 		1FFC8BB928142F040059EF2E /* Pair Properties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FFC8BA928142F040059EF2E /* Pair Properties.swift */; };
+		1FFC93E128E41E0D00451FB3 /* CalendarConfirmation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FFC93E028E41E0D00451FB3 /* CalendarConfirmation.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -192,6 +193,7 @@
 		1FFC8BA528142F040059EF2E /* Session Properties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Session Properties.swift"; sourceTree = "<group>"; };
 		1FFC8BA828142F040059EF2E /* Pair.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pair.swift; sourceTree = "<group>"; };
 		1FFC8BA928142F040059EF2E /* Pair Properties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Pair Properties.swift"; sourceTree = "<group>"; };
+		1FFC93E028E41E0D00451FB3 /* CalendarConfirmation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarConfirmation.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -263,6 +265,7 @@
 		1F5F4A4228093FAC00AF3442 = {
 			isa = PBXGroup;
 			children = (
+				1FFC93E028E41E0D00451FB3 /* CalendarConfirmation.swift */,
 				1F680FC42882D97800548F70 /* MoreOptionsInfo.swift */,
 				1F377E1E287EB2F000E43598 /* AlwaysOnDisplaySymbol.swift */,
 				1F684822287DBEBB00D8BF81 /* StartDelaySubview.swift */,
@@ -511,6 +514,7 @@
 				1F5F4A732809409600AF3442 /* Bubble.swift in Sources */,
 				1F62194028293B5100C9B175 /* SmallBubbleView.swift in Sources */,
 				1F97B7DD2809B311002FFCA3 /* Colors.swift in Sources */,
+				1FFC93E128E41E0D00451FB3 /* CalendarConfirmation.swift in Sources */,
 				1F100CA72809493400A3A3C2 /* BubbleTimer.swift in Sources */,
 				1FA8F87E28367B7A00394B59 /* BubbleNote.swift in Sources */,
 				1F5A0F6C282641D00075E86B /* EmptyHistoryAlertView.swift in Sources */,

@@ -15,7 +15,13 @@ struct ConfirmationView: View {
     var extraText:String? = nil
     var titleSymbol:String? = nil
     let title:String
-    var isOn:Bool
+    let lowerSymbol:LowerSymbol
+    var fillColor:Color {
+        switch lowerSymbol {
+            case .on, .done: return .green
+            case .off, .failed: return .red
+        }
+    }
     
     // MARK: - Body
     var body: some View {
@@ -35,25 +41,45 @@ struct ConfirmationView: View {
                 }
                 Divider()
                     .frame(width: 200)
-                Label(isOn ? "ON" : "OFF", systemImage: isOn ? "checkmark" : "xmark")
+                lowerSymbolView
                     .font(.system(size: 30).weight(.semibold))
             }
             .padding()
             .background(
                 RoundedRectangle(cornerRadius: 14)
-                    .fill(isOn ? Color.green : .red)
+                    .fill(fillColor)
                     .standardShadow(true)
             )
         }
         .foregroundColor(.white)
+    }
+    
+    // MARK: - Lego
+    @ViewBuilder
+    var lowerSymbolView:some View {
+        switch lowerSymbol {
+            case .on: Label("ON", systemImage: "checkmark")
+            case .off: Label("OFF", systemImage: "xmark")
+            case .done: Label("Done", systemImage: "checkmark")
+            case .failed: Label("Failed", systemImage: "xmark")
+        }
+    }
+    
+    // MARK: -
+    enum LowerSymbol {
+        case on
+        case off
+        case done
+        case failed
     }
 }
 
 struct ConfirmationView_Previews: PreviewProvider {
     static var previews: some View {
         ConfirmationView(extraText: "80s",
-            titleSymbol: Alert.alwaysOnDisplay.titleSymbol,
-                         title: Alert.alwaysOnDisplay.title, isOn: true
+                         titleSymbol: Alert.alwaysOnDisplay.titleSymbol,
+                         title: Alert.alwaysOnDisplay.title,
+                         lowerSymbol: .done
         )
-
+        
     }}

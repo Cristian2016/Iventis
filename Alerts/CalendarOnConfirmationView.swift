@@ -10,10 +10,14 @@ import SwiftUI
 struct CalendarOnConfirmationView: View {
     @EnvironmentObject var viewModel:ViewModel
     
+    //viewModel.confirm_CalendarOn.isCalOn
+    var lowerSymbol:ConfirmationView.LowerSymbol {
+        viewModel.confirm_CalendarOn.isCalOn ? .on : .off
+    }
+    
     var body: some View {
         ConfirmationView(titleSymbol: Alert.calendarOn.titleSymbol,
-                         title: Alert.calendarOn.title,
-                         isOn: viewModel.confirm_CalendarOn.isCalOn
+                         title: Alert.calendarOn.title, lowerSymbol: lowerSymbol
         )
     }
 }
