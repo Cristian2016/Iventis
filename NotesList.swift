@@ -38,8 +38,12 @@ struct NotesList: View {
     
     private func saveNoteAndDismiss() {
         saveNoteToCoredata(textInput)
-        dismiss()
-        PersistenceController.shared.save()
+        
+        //apparently it crashes without a bit of delay
+        delayExecution(.now() + 0.1) {
+            self.dismiss()
+            PersistenceController.shared.save()
+        }
     }
     
     ///if "" or "       " note is not valid
