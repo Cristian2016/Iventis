@@ -15,7 +15,7 @@ struct AlwaysOnDisplayConfirmationView: View {
     }
     
     var body: some View {
-        ConfirmationView(titleSymbol: Alert.alwaysOnDisplay.titleSymbol, title: Alert.alwaysOnDisplay.title, lowerSymbol: lowerSymbol)
+        ConfirmationView(title: Alert.alwaysOnDisplay.title, lowerSymbol: lowerSymbol)
     }
 }
 
