@@ -11,7 +11,7 @@ struct CalendarEventCreatedConfirmationView: View {
     var body: some View {
         HStack {
             ConfirmationView(title: "Calendar Event",
-                             lowerSymbol: .custom("Done"),
+                             lowerSymbol: .custom("OK"),
                              isBackgroundRemoved: true
             )
             Spacer()
