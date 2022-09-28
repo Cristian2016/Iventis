@@ -18,6 +18,9 @@ class ViewModel: ObservableObject {
     @Published var confirm_NoDelay = false
     @Published var showConfirmation_DelayWasChanged = false
     
+    ///calendarEvent created for bubble.rank. if rank != nil, confirmation will be displayed in the appropriate bubbleCell
+    @Published var showConfirmation_CalendarEventCreated: Int64? = nil
+    
     // MARK: - Confirmation Flashes
     @Published var confirm_AlwaysOnDisplay = false
     @Published var confirm_CalendarOn = (show:false, isCalOn:false)
@@ -275,6 +278,10 @@ class ViewModel: ObservableObject {
     private func createCalendarEventIfRequiredAndSaveToCoreData(for bubble:Bubble) {
         if !bubble.sessions_.isEmpty && bubble.hasCalendar {
             TimersApp.calManager.createNewEvent(for: bubble.lastSession)
+            
+            //display Cal Event Added to Calenda App confirmation to the user
+            showConfirmation_CalendarEventCreated = bubble.rank
+            delayExecution(.now() + 0.7) { self.showConfirmation_CalendarEventCreated = nil }
         }
         
         PersistenceController.shared.save()

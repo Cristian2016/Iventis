@@ -40,6 +40,11 @@ struct BubbleCell: View {
                 }
                 .offset(y: -16)
             } //stickyNote
+            .overlay {
+                if vm.showConfirmation_CalendarEventCreated == bubble.rank {
+                    CalendarEventCreatedConfirmationView()
+                }
+            }
         }
         .onAppear { resumeObserveTimer() }
           //gestures
