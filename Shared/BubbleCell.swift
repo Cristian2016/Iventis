@@ -41,7 +41,7 @@ struct BubbleCell: View {
                 .offset(y: -16)
             } //stickyNote
             .overlay {
-                if confirm_CalEventCreated { CalendarEventCreatedConfirmationView() }
+                if confirm_CalEventCreated { CalEventCreatedConfirmationView() }
             }
         }
         .onAppear { resumeObserveTimer() }
@@ -285,7 +285,7 @@ struct BubbleCell: View {
     
     // MARK: -
     var confirm_CalEventCreated:Bool {
-        vm.showConfirmation_CalendarEventCreated == bubble.rank
+        vm.confirm_CalEventCreated == bubble.rank
     }
 }
 

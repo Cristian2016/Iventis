@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct CalendarEventCreatedConfirmationView: View {
+struct CalEventCreatedConfirmationView: View {
     var body: some View {
         HStack {
             ConfirmationView(title: "Calendar Event",
@@ -21,6 +21,6 @@ struct CalendarEventCreatedConfirmationView: View {
 
 struct CalendarEventCreatedConfirmationView_Previews: PreviewProvider {
     static var previews: some View {
-        CalendarEventCreatedConfirmationView()
+        CalEventCreatedConfirmationView()
     }
 }

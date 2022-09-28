@@ -19,7 +19,7 @@ class ViewModel: ObservableObject {
     @Published var showConfirmation_DelayWasChanged = false
     
     ///calendarEvent created for bubble.rank. if rank != nil, confirmation will be displayed in the appropriate bubbleCell
-    @Published var showConfirmation_CalendarEventCreated: Int64? = nil
+    @Published var confirm_CalEventCreated: Int64? = nil
     
     // MARK: - Confirmation Flashes
     @Published var confirm_AlwaysOnDisplay = false
@@ -280,8 +280,8 @@ class ViewModel: ObservableObject {
             TimersApp.calManager.createNewEvent(for: bubble.lastSession)
             
             //display Cal Event Added to Calenda App confirmation to the user
-            showConfirmation_CalendarEventCreated = bubble.rank
-            delayExecution(.now() + 0.7) { self.showConfirmation_CalendarEventCreated = nil }
+            confirm_CalEventCreated = bubble.rank
+            delayExecution(.now() + 0.7) { self.confirm_CalEventCreated = nil }
         }
         
         PersistenceController.shared.save()
