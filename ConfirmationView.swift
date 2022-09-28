@@ -20,6 +20,7 @@ struct ConfirmationView: View {
         switch lowerSymbol {
             case .on, .done: return .green
             case .off, .failed: return .red
+            case .custom(_): return .green
         }
     }
     var isBackgroundRemoved:Bool = false
@@ -63,6 +64,7 @@ struct ConfirmationView: View {
             case .off: Label("OFF", systemImage: "xmark")
             case .done: Label("Done", systemImage: "checkmark")
             case .failed: Label("Failed", systemImage: "xmark")
+            case .custom(let text): Label(text, systemImage: "checkmark")
         }
     }
     
@@ -72,6 +74,7 @@ struct ConfirmationView: View {
         case off
         case done
         case failed
+        case custom(String)
     }
 }
 

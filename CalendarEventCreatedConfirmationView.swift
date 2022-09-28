@@ -9,10 +9,13 @@ import SwiftUI
 
 struct CalendarEventCreatedConfirmationView: View {
     var body: some View {
-        ConfirmationView(title: "Calendar Event",
-                         lowerSymbol: .done,
-                         isBackgroundRemoved: true
-        )
+        HStack {
+            ConfirmationView(title: "Calendar Event",
+                             lowerSymbol: .custom("Created"),
+                             isBackgroundRemoved: true
+            )
+            Spacer()
+        }
     }
 }
 
