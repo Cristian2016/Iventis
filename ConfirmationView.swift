@@ -22,11 +22,12 @@ struct ConfirmationView: View {
             case .off, .failed: return .red
         }
     }
+    var isBackgroundRemoved:Bool = false
     
     // MARK: - Body
     var body: some View {
         ZStack {
-            Color.white.opacity(0.9)
+            if !isBackgroundRemoved { Color.background.opacity(0.9) }
             VStack {
                 VStack(spacing: 0) {
                     if extraText != nil {
@@ -77,9 +78,8 @@ struct ConfirmationView: View {
 struct ConfirmationView_Previews: PreviewProvider {
     static var previews: some View {
         ConfirmationView(extraText: "80s",
-                         titleSymbol: Alert.alwaysOnDisplay.titleSymbol,
-                         title: Alert.alwaysOnDisplay.title,
-                         lowerSymbol: .done
+            titleSymbol: Alert.alwaysOnDisplay.titleSymbol,
+                         title: Alert.alwaysOnDisplay.title, lowerSymbol: .done
         )
-        
+
     }}
