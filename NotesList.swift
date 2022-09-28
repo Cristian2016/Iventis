@@ -36,7 +36,7 @@ struct NotesList: View {
         textInput = ""
     }
     
-    private func saveTextInputAndDismiss() {
+    private func saveNoteAndDismiss() {
         saveNoteToCoredata(textInput)
         dismiss()
         PersistenceController.shared.save()
@@ -55,7 +55,7 @@ struct NotesList: View {
         ZStack {
             screenBackground
                 .onTapGesture {
-                    if noteIsValid { saveTextInputAndDismiss() }
+                    if noteIsValid { saveNoteAndDismiss() }
                     else { dismiss() }
                 }
                 .gesture (
@@ -73,7 +73,7 @@ struct NotesList: View {
                             Spacer(minLength: 10)
                             textField
                                 .overlay { remainingCharactersCounterView }
-                                .onSubmit { saveTextInputAndDismiss() } //user tapped Enter key
+                                .onSubmit { saveNoteAndDismiss() } //user tapped Enter key
                             List {
                                 if filteredItems.isEmpty { emptyListAlert } //1
                                 
