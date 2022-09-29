@@ -382,7 +382,6 @@ class ViewModel: ObservableObject {
     
     //delete PairSticky
     func deleteStickyNote(for pair:Pair) {
-        print(#function)
         pair.note = nil
         //update Calendar Event
         
