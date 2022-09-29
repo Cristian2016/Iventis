@@ -15,6 +15,10 @@ extension Color {
         let sec:Color //intense
     }
     
+    static let bubbleColors = [
+        Bubbles.cayenne, Bubbles.aubergine, Bubbles.mint, Bubbles.slateBlue, Bubbles.sourCherry, Bubbles.silver, Bubbles.ultramarine, Bubbles.lemon, Bubbles.red, Bubbles.sky, Bubbles.bubbleGum, Bubbles.green, Bubbles.charcoal, Bubbles.magenta, Bubbles.purple, Bubbles.orange, Bubbles.chocolate, Bubbles.aqua, Bubbles.byzantium, Bubbles.rose, Bubbles.mocha
+    ]
+    
     struct Bubbles {
         //row 1
         static let cayenne = Three(description: Name.cayenne.rawValue,
