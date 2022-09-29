@@ -69,10 +69,7 @@ struct StickyNote<Content:View>: View {
     
     // MARK: -
     private var deleteConfirmationView:some View {
-        Text(deleteOffsetReached ?
-             "\(Image(systemName: "checkmark")) Done"
-             : "\(Image(systemName: "trash")) Delete"
-        )
+        Text(deleteOffsetReached ? "\(Image.checkmark) Done" : "\(Image.trash) Delete")
         .transaction { $0.animation = nil } //1
         .foregroundColor(.white)
         .font(.system(size: 24).weight(.medium))
