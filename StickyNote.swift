@@ -12,14 +12,16 @@ import SwiftUI
 struct StickyNote<Content:View>: View {
     // MARK: - Data and Action
     let content: Content //what it displayes
+    let alignment:Alignment
+    
     var dragAction:() -> () //user intent
     var tapAction:() -> ()
-    let alignment:Alignment
     
     init(alignment: Alignment = .trailing, @ViewBuilder content: () -> Content, dragAction: @escaping () -> Void, tapAction: @escaping () -> Void) {
         self.content = content()
-        self.dragAction = dragAction
         self.alignment = alignment
+        
+        self.dragAction = dragAction //delete bubble/pair sticky note
         self.tapAction = tapAction
     }
     
