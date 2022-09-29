@@ -27,7 +27,7 @@ struct StickyNote<Content:View>: View {
     
     // MARK: -
     @State var offsetX = CGFloat.zero
-    @State var actionTriggered = false
+    @State var deleteActionTriggered = false
     
     var deleteOffsetReached:Bool { abs(offsetX) > 250 }
     var deleteLabelVisible:Bool { abs(offsetX) > 60 }
@@ -38,17 +38,17 @@ struct StickyNote<Content:View>: View {
                 offsetX = $0.translation.width
                 
                 //if statement must be executed only once!
-                if deleteOffsetReached && !actionTriggered {
-                    actionTriggered = true
+                if deleteOffsetReached && !deleteActionTriggered {
+                    deleteActionTriggered = true
                     UserFeedback.singleHaptic(.medium)
                     dragAction()
                     withAnimation(.easeInOut(duration: 2)) { offsetX = 0 }
                 }
             }
             .onEnded { _ in
-                if actionTriggered {
+                if deleteActionTriggered {
                     delayExecution(.now() + 1.5) { offsetX = 0 }
-                    actionTriggered = false
+                    deleteActionTriggered = false
                 }
                 else { withAnimation { offsetX = 0 } }
             }
