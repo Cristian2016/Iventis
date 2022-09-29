@@ -86,15 +86,3 @@ struct StickyNote<Content:View>: View {
         .opacity(deleteLabelVisible ? 1 : 0)
     }
 }
-
-//struct PairNoteButton_Previews: PreviewProvider {
-//    static let pair:Pair = {
-//        let pair = Pair(context: PersistenceController.shared.viewContext)
-//        pair.note = "Pula Mea"
-//        return pair
-//    }()
-//
-//    static var previews: some View {
-//        NoteButton(content: "Ok") {  /* delete action */ }
-//    }
-//}

@@ -163,6 +163,8 @@ extension Image {
     static let pauseSticker = Image("pauseSticker")
     static let spotlight = Image("spotlight")
     static let eyeSlash = Image(systemName: "eye.slash.fill")
+    
+    static let checkmark = Image(systemName: "checkmark")
 }
 
 func delayExecution(_ delay:DispatchTime, code:@escaping ()->()) {
