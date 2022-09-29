@@ -14,11 +14,13 @@ struct ColorConfirmationView: View {
     var body: some View {
         ZStack {
             Color.background.opacity(0.9)
+            Circle().fill(color)
+                .padding()
+                .padding()
             Text(Color.userFriendlyBubbleColorName(for: colorName))
                 .font(.system(size: 40).weight(.medium))
                 .foregroundColor(.white)
                 .padding()
-                .background { RoundedRectangle(cornerRadius: 10).fill(color) }
         }
     }
 }
