@@ -27,7 +27,7 @@ struct NoteButton<Content:View>: View {
     @State var offsetX = CGFloat.zero
     @State var actionTriggered = false
     
-    var triggerPairDeleteAction:Bool { abs(offsetX) > 180 }
+    var triggerPairDeleteAction:Bool { abs(offsetX) > 250 }
     var deleteLabelVisible:Bool { abs(offsetX) > 60 }
     
     var dragGesture: some Gesture {
