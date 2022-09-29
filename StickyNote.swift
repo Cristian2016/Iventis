@@ -9,7 +9,7 @@
 
 import SwiftUI
 
-struct NoteButton<Content:View>: View {
+struct StickyNote<Content:View>: View {
     // MARK: - Data and Action
     let content: Content //what it displayes
     var dragAction:() -> () //user intent
@@ -27,7 +27,7 @@ struct NoteButton<Content:View>: View {
     @State var offsetX = CGFloat.zero
     @State var actionTriggered = false
     
-    var triggerPairDeleteAction:Bool { abs(offsetX) > 250 }
+    var deleteOffsetReached:Bool { abs(offsetX) > 250 }
     var deleteLabelVisible:Bool { abs(offsetX) > 60 }
     
     var dragGesture: some Gesture {
@@ -36,7 +36,7 @@ struct NoteButton<Content:View>: View {
                 offsetX = $0.translation.width
                 
                 //if statement must be executed only once!
-                if triggerPairDeleteAction && !actionTriggered {
+                if deleteOffsetReached && !actionTriggered {
                     actionTriggered = true
                     UserFeedback.singleHaptic(.medium)
                     dragAction()
@@ -67,7 +67,7 @@ struct NoteButton<Content:View>: View {
     
     // MARK: -
     private var deleteText:some View {
-        Text(triggerPairDeleteAction ?
+        Text(deleteOffsetReached ?
              "\(Image(systemName: "checkmark")) Done"
              : "\(Image(systemName: "trash")) Delete"
         )
@@ -77,7 +77,7 @@ struct NoteButton<Content:View>: View {
         .padding()
         .background {
             RoundedRectangle(cornerRadius: 2)
-                .fill(triggerPairDeleteAction ? .green : .red)
+                .fill(deleteOffsetReached ? .green : .red)
                 .transaction { $0.animation = nil } //1
                 .frame(height: 44)
         }

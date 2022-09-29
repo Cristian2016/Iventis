@@ -33,9 +33,9 @@ struct BubbleCell: View {
             .overlay { if bubble.hasCalendar && noNote { calendarSymbol }} //calSymbol
             .overlay {
                 Push(.topLeft) {
-                    NoteButton (alignment: .leading)
+                    StickyNote (alignment: .leading)
                     { noteButtonContent }
-                dragAction: { vm.deleteNote(for: bubble) }
+                dragAction: { vm.deleteStickyNote(for: bubble) }
                     tapAction : { handleNoteTap() }
                 }
                 .offset(y: -16)

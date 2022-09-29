@@ -55,7 +55,7 @@
 		1F8B6965283790CF006540CB /* BubbleNotesList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8B6964283790CF006540CB /* BubbleNotesList.swift */; };
 		1F97B7DD2809B311002FFCA3 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F97B7DC2809B311002FFCA3 /* Colors.swift */; };
 		1F98D78A286AF8A300C0A973 /* DeleteRow_InfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F98D789286AF8A300C0A973 /* DeleteRow_InfoView.swift */; };
-		1F99AB5F286CA40D00977C9A /* NoteButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F99AB5E286CA40D00977C9A /* NoteButton.swift */; };
+		1F99AB5F286CA40D00977C9A /* StickyNote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F99AB5E286CA40D00977C9A /* StickyNote.swift */; };
 		1F9B6AF0280950D600C0A725 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F9B6AEF280950D600C0A725 /* ViewModel.swift */; };
 		1F9BE0A9280BE14100F87EFA /* PaletteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F9BE0A8280BE14100F87EFA /* PaletteView.swift */; };
 		1F9BE0AD280C6AB000F87EFA /* TapHold.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F9BE0AC280C6AB000F87EFA /* TapHold.swift */; };
@@ -167,7 +167,7 @@
 		1F8B6964283790CF006540CB /* BubbleNotesList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BubbleNotesList.swift; sourceTree = "<group>"; };
 		1F97B7DC2809B311002FFCA3 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		1F98D789286AF8A300C0A973 /* DeleteRow_InfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteRow_InfoView.swift; sourceTree = "<group>"; };
-		1F99AB5E286CA40D00977C9A /* NoteButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteButton.swift; sourceTree = "<group>"; };
+		1F99AB5E286CA40D00977C9A /* StickyNote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StickyNote.swift; sourceTree = "<group>"; };
 		1F9B6AEF280950D600C0A725 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		1F9BE0A8280BE14100F87EFA /* PaletteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PaletteView.swift; path = Shared/PaletteView.swift; sourceTree = SOURCE_ROOT; };
 		1F9BE0AC280C6AB000F87EFA /* TapHold.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapHold.swift; sourceTree = "<group>"; };
@@ -227,7 +227,7 @@
 				1F18B456281FA6130080ADA6 /* PushView.swift */,
 				1F18B45B281FA9C90080ADA6 /* CalendarSticker.swift */,
 				1F61BE042822BAAA00B773F9 /* DeleteView.swift */,
-				1F99AB5E286CA40D00977C9A /* NoteButton.swift */,
+				1F99AB5E286CA40D00977C9A /* StickyNote.swift */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -562,7 +562,7 @@
 				1F6420062820186D00413E31 /* PairCell.swift in Sources */,
 				1F387CEB2830082000F6B81D /* UpDownArrowsButton.swift in Sources */,
 				1FB3178F286ACB48006BBE82 /* Note_InfoView.swift in Sources */,
-				1F99AB5F286CA40D00977C9A /* NoteButton.swift in Sources */,
+				1F99AB5F286CA40D00977C9A /* StickyNote.swift in Sources */,
 				1F5F4A752809409600AF3442 /* Bubble Properties.swift in Sources */,
 				1FB7D57C2862F0300085C2BE /* PlusButton.swift in Sources */,
 				1F20807F2836111600FD35D6 /* BSavedNote Properties.swift in Sources */,

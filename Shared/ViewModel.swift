@@ -373,7 +373,7 @@ class ViewModel: ObservableObject {
     }
     
     //delete BubbleSticky
-    func deleteNote(for bubble:Bubble) {
+    func deleteStickyNote(for bubble:Bubble) {
         bubble.note = nil
         TimersApp.calManager.updateExistingEvent(.title(bubble))
         
@@ -381,7 +381,8 @@ class ViewModel: ObservableObject {
     }
     
     //delete PairSticky
-    func deleteNote(for pair:Pair) {
+    func deleteStickyNote(for pair:Pair) {
+        print(#function)
         pair.note = nil
         //update Calendar Event
         

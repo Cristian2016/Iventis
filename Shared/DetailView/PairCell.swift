@@ -19,7 +19,7 @@ struct PairCell: View {
     
     ///without delay the animation does not have time to take place
     //⚠️ not the best idea though...
-    func deleteNote() { viewModel.deleteNote(for: pair) }
+    func deleteStickyNote() { viewModel.deleteStickyNote(for: pair) }
     
     var dragToDelete : some Gesture {
         DragGesture()
@@ -30,7 +30,7 @@ struct PairCell: View {
                     } else {
                         print("triggerDeleteAction")
                         if !noteDeleted {
-                            deleteNote()
+                            deleteStickyNote()
                             noteDeleted = true //block drag gesture.. any other better ideas??
                             UserFeedback.singleHaptic(.light)
                         }
@@ -42,7 +42,7 @@ struct PairCell: View {
                     if value.translation.width < offsetDeleteTriggerLimit {
                         offsetX = 0
                     } else {
-                        deleteNote()
+                        deleteStickyNote()
                         noteDeleted = true
                         UserFeedback.singleHaptic(.light)
                     }
@@ -85,10 +85,10 @@ struct PairCell: View {
                 .onLongPressGesture { userWantsNotesList() }
                 
                 //like a button it has a closure for action
-                Push(.bottomRight) {
-                    NoteButton { noteButtonContent }
-                    dragAction : { deleteNote() }
-                    tapAction : { toggleNote() }
+                Push(.bottomRight) {//PairCell StickyNote
+                    StickyNote { stickyNoteContent }
+                    dragAction : { deleteStickyNote() }
+                    tapAction : { toggleStickyNoteVisibility() }
                 }
                 .offset(y: 12)
             }
@@ -96,8 +96,8 @@ struct PairCell: View {
     }
     
     // MARK: -
-    private var noteButtonContent:some View {
-        noteText
+    private var stickyNoteContent:some View {
+        stickyNoteText
             .font(.system(size: 26))
             .padding([.leading, .trailing], 10)
             .background {
@@ -110,7 +110,7 @@ struct PairCell: View {
     }
     
     @ViewBuilder
-    private var noteText:some View {
+    private var stickyNoteText:some View {
         if pair.isNoteHidden {
             Text("\(Image(systemName: "text.alignleft"))")
                 .padding(textPadding)
@@ -219,7 +219,7 @@ struct PairCell: View {
     }
     
     ///show/hide Pair.note
-    func toggleNote() {
+    func toggleStickyNoteVisibility() {
         UserFeedback.singleHaptic(.light)
         pair.isNoteHidden.toggle()
         PersistenceController.shared.save()
