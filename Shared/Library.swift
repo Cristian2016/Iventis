@@ -10,6 +10,28 @@ import UIKit
 #endif
 import SwiftUI
 
+extension Array {
+    func twoDArray(_ rows/* count */: Int) -> [[Element]] {
+        var finalResult = [[Element]]()
+        var subarray = [Element]()
+        
+        for (index, element) in enumerated() {
+            subarray.append(element)
+            
+            if index%rows == rows - 1 {
+                finalResult.append(subarray)
+                subarray = [] //new cardboard
+            }
+            
+            //append whatever leftover non-empty subarray
+            if index == count - 1 && !subarray.isEmpty {
+                finalResult.append(subarray)
+            }
+        }
+        return finalResult
+    }
+}
+
 extension DispatchTime {
     static let confirmation = DispatchTime.now() + 0.7
 }

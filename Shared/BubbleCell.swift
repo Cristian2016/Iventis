@@ -368,3 +368,9 @@ extension BubbleCell {
         }
     }
 }
+
+extension UIView {
+    open override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        print(#function)
+    }
+}
