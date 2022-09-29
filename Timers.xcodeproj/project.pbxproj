@@ -80,6 +80,7 @@
 		1FDB9F15287DA5040028E121 /* SDBPair Properties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FDB9F0F287DA5040028E121 /* SDBPair Properties.swift */; };
 		1FDC1219286772E8004B9A1E /* PushView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F18B456281FA6130080ADA6 /* PushView.swift */; };
 		1FE163AE280EE6F40050C6F5 /* LeftStrip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FE163AD280EE6F40050C6F5 /* LeftStrip.swift */; };
+		1FE722A128E58200005ADA8E /* ColorConfirmationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FE722A028E58200005ADA8E /* ColorConfirmationView.swift */; };
 		1FF0A2FD2810448100B1DB77 /* TopDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF0A2FC2810448100B1DB77 /* TopDetailView.swift */; };
 		1FFC8BAA28142F040059EF2E /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FFC8BA428142F040059EF2E /* Session.swift */; };
 		1FFC8BAD28142F040059EF2E /* Session Properties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FFC8BA528142F040059EF2E /* Session Properties.swift */; };
@@ -188,6 +189,7 @@
 		1FDB9F0E287DA5040028E121 /* SDBPair.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SDBPair.swift; sourceTree = SOURCE_ROOT; };
 		1FDB9F0F287DA5040028E121 /* SDBPair Properties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SDBPair Properties.swift"; sourceTree = SOURCE_ROOT; };
 		1FE163AD280EE6F40050C6F5 /* LeftStrip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftStrip.swift; sourceTree = "<group>"; };
+		1FE722A028E58200005ADA8E /* ColorConfirmationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorConfirmationView.swift; sourceTree = "<group>"; };
 		1FF0A2FC2810448100B1DB77 /* TopDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopDetailView.swift; sourceTree = "<group>"; };
 		1FFC8BA428142F040059EF2E /* Session.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
 		1FFC8BA528142F040059EF2E /* Session Properties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Session Properties.swift"; sourceTree = "<group>"; };
@@ -243,8 +245,9 @@
 		1F37028F287EEA6D00AE58C6 /* Alerts */ = {
 			isa = PBXGroup;
 			children = (
-				1F0373BF28DEDD97005CE8D3 /* ConfirmationView.swift */,
+				1FE722A028E58200005ADA8E /* ColorConfirmationView.swift */,
 				1F0373C528DF516F005CE8D3 /* OnLabel.swift */,
+				1F0373BF28DEDD97005CE8D3 /* ConfirmationView.swift */,
 				1F0373C128DEE6F7005CE8D3 /* AlwaysOnDisplayConfirmationView.swift */,
 				1F0373C328DF3D36005CE8D3 /* CalOnConfirmationView.swift */,
 				1F76B51028DDE38800543660 /* AlertView.swift */,
@@ -493,6 +496,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1F76B51128DDE38800543660 /* AlertView.swift in Sources */,
+				1FE722A128E58200005ADA8E /* ColorConfirmationView.swift in Sources */,
 				1F8B6965283790CF006540CB /* BubbleNotesList.swift in Sources */,
 				1F4DF99D282B82EF00D54BE8 /* CircleButton.swift in Sources */,
 				1F0373C628DF516F005CE8D3 /* OnLabel.swift in Sources */,

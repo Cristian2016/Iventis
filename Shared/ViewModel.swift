@@ -19,6 +19,8 @@ class ViewModel: ObservableObject {
     @Published var confirm_NoDelay = false
     @Published var confirm_DelayWasChanged = false
     
+    @Published var confirm_ColorChange = false
+    
     ///calendarEvent created for bubble.rank. if rank != nil, confirmation will be displayed in the appropriate bubbleCell
     @Published var confirm_CalEventCreated: Int64? = nil
     
@@ -433,6 +435,8 @@ class ViewModel: ObservableObject {
         if bubble.color == newColor { return }
         bubble.color = newColor
         
+        confirm_ColorChange = true
+        
         if sdb.referenceDelay != 0 {//there is a delay set
             UserFeedback.singleHaptic(.medium)
             PersistenceController.shared.save()
@@ -445,7 +449,11 @@ class ViewModel: ObservableObject {
             
         } else {//no delay set
             UserFeedback.singleHaptic(.medium) //haptic feedback
-            self.theOneAndOnlyEditedSDB = nil
+            
+            delayExecution(.now() + 0.6) {
+                self.confirm_ColorChange = false
+                self.theOneAndOnlyEditedSDB = nil
+            }
         }
         
         //save CoreData

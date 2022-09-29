@@ -55,6 +55,10 @@ struct MoreOptionsView: View {
                                  lowerSymbol: .on
                 )
             }
+            
+            if viewModel.confirm_ColorChange {
+                ColorConfirmationView(colorName: bubble.color!, color: Color.bubbleColor(forName: bubble.color!))
+            }
         }
         .gesture(longPress)
     }
