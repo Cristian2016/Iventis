@@ -56,7 +56,7 @@ struct StickyNote<Content:View>: View {
     var body: some View {
         ZStack (alignment: alignment) {
             //"Delete"/"Done" Text
-            deleteText
+            deleteConfirmationView
             content
                 .offset(x: offsetX)
                 //gestures
@@ -66,7 +66,7 @@ struct StickyNote<Content:View>: View {
     }
     
     // MARK: -
-    private var deleteText:some View {
+    private var deleteConfirmationView:some View {
         Text(deleteOffsetReached ?
              "\(Image(systemName: "checkmark")) Done"
              : "\(Image(systemName: "trash")) Delete"
