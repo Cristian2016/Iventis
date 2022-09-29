@@ -43,7 +43,7 @@ struct StickyNote<Content:View>: View {
                     withAnimation(.easeInOut(duration: 2)) { offsetX = 0 }
                 }
             }
-            .onEnded { value in
+            .onEnded { _ in
                 if actionTriggered {
                     delayExecution(.now() + 1.5) { offsetX = 0 }
                     actionTriggered = false
@@ -56,7 +56,7 @@ struct StickyNote<Content:View>: View {
     var body: some View {
         ZStack (alignment: alignment) {
             //"Delete"/"Done" Text
-            deleteConfirmationView
+            deleteConfirmationView  /* |🗑️ Delete| */
             content
                 .offset(x: offsetX)
                 //gestures
