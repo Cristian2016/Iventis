@@ -45,6 +45,10 @@ struct MoreOptionsView: View {
             .padding()
             
             //2 Confirmation Labels
+            if viewModel.confirm_ColorChange {
+                ColorConfirmationView(colorName: bubble.color!, color: Color.bubbleColor(forName: bubble.color!))
+            }
+            
             if viewModel.confirm_NoDelay {
                 //reset delay confirmation
                 ConfirmationView(title: "Start Delay", lowerSymbol: .off)
@@ -54,10 +58,6 @@ struct MoreOptionsView: View {
                                  title: "Start Delay",
                                  lowerSymbol: .on
                 )
-            }
-            
-            if viewModel.confirm_ColorChange {
-                ColorConfirmationView(colorName: bubble.color!, color: Color.bubbleColor(forName: bubble.color!))
             }
         }
         .gesture(longPress)

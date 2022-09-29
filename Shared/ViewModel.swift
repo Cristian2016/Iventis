@@ -445,6 +445,7 @@ class ViewModel: ObservableObject {
             delayExecution(.now() + 0.6) {
                 self.confirm_DelayWasChanged = false
                 self.theOneAndOnlyEditedSDB = nil
+                self.confirm_ColorChange = false
             }
             
         } else {//no delay set
