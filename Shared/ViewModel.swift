@@ -383,9 +383,9 @@ class ViewModel: ObservableObject {
     //delete PairSticky
     func deleteStickyNote(for pair:Pair) {
         pair.note = nil
-        //update Calendar Event
-        
         PersistenceController.shared.save()
+        
+        //update Calendar Event
         TimersApp.calManager.updateExistingEvent(.notes(pair.session!))
     }
     
