@@ -42,13 +42,13 @@ struct BubbleCell: View {
             } //stickyNote
             .overlay {
                 if confirm_CalEventCreated { CalEventCreatedConfirmationView() }
-            }
+            } //event created confirmation
             .overlay {
                 if !isBubbleRunning {
                     hundredthsView
                         .onTapGesture { userTappedHundredths() }
                 }
-            }
+            } //hundredths view
         }
         .onAppear { resumeObserveTimer() }
           //gestures
