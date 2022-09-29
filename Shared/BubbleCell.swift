@@ -45,10 +45,8 @@ struct BubbleCell: View {
             }
             .overlay {
                 if !isBubbleRunning {
-                    Push(.bottomRight) {
-                        hundredthsView
-                            .onTapGesture { userTappedHundredths() }
-                    }
+                    hundredthsView
+                        .onTapGesture { userTappedHundredths() }
                 }
             }
         }
@@ -92,7 +90,6 @@ struct BubbleCell: View {
             /* Hr */ bubbleShape.opacity(hrOpacity)
             /* Min */ bubbleShape.opacity(minOpacity)
             /* Sec */ bubbleShape
-                .scaleEffect(isSecondsTapped ? 0.6 : 1.0)
         }
     }
     
@@ -142,21 +139,23 @@ struct BubbleCell: View {
     }
     
     private var hundredthsView:some View {
-        Text(bubble.components.cents)
-            .background(Circle()
-                .foregroundColor(Color("pauseStickerColor"))
-                .padding(-12))
-            .foregroundColor(Color("pauseStickerFontColor"))
-            .font(.system(size: BubbleCell.metrics.hundredthsFontSize, weight: .semibold, design: .default))
-        //animations:scale, offset and opacity
-            .scaleEffect(isSecondsTapped && !isBubbleRunning ? 2 : 1.0)
-            .offset(x: isSecondsTapped && !isBubbleRunning ? -20 : 0,
-                    y: isSecondsTapped && !isBubbleRunning ? -20 : 0)
-            .opacity(isSecondsTapped && !isBubbleRunning ? 0 : 1)
-            .animation(.spring(response: 0.3, dampingFraction: 0.2), value: isSecondsTapped)
-            .frame(width: 50, height: 50)
-            .padding(BubbleCell.metrics.hundredthsInsets)
-            .zIndex(1)
+        Push(.bottomRight) {
+            Text(bubble.components.cents)
+                .background(Circle()
+                    .foregroundColor(Color("pauseStickerColor"))
+                    .padding(-12))
+                .foregroundColor(Color("pauseStickerFontColor"))
+                .font(.system(size: BubbleCell.metrics.hundredthsFontSize, weight: .semibold, design: .default))
+            //animations:scale, offset and opacity
+                .scaleEffect(isSecondsTapped && !isBubbleRunning ? 2 : 1.0)
+                .offset(x: isSecondsTapped && !isBubbleRunning ? -20 : 0,
+                        y: isSecondsTapped && !isBubbleRunning ? -20 : 0)
+                .opacity(isSecondsTapped && !isBubbleRunning ? 0 : 1)
+                .animation(.spring(response: 0.3, dampingFraction: 0.2), value: isSecondsTapped)
+                .frame(width: 50, height: 50)
+                .padding(BubbleCell.metrics.hundredthsInsets)
+                .zIndex(1)
+        }
     }
     
     private var noteButtonContent:some View {
