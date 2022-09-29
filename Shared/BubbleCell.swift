@@ -30,7 +30,7 @@ struct BubbleCell: View {
                 } }
             }
             //subviews
-            .overlay { if bubble.hasCalendar && noNote { calendarSymbol } } //calSymbol
+            .overlay { if bubble.hasCalendar && noNote { calendarSymbol }} //calSymbol
             .overlay {
                 Push(.topLeft) {
                     NoteButton (alignment: .leading)
