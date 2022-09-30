@@ -429,13 +429,17 @@ class ViewModel: ObservableObject {
     
     // MARK: - MoreOptionsView
     //color change
-    func changeColor(for bubble:Bubble, to newColor:String) {
+    func saveColorIfNeeded(for bubble:Bubble, to newColor:String) {
         if bubble.color == newColor { return }
         bubble.color = newColor
         
         //flash color was changed
         confirm_ColorChange = true
-        delayExecution(.confirmation) { self.confirm_ColorChange = false }
+        delayExecution(.confirmation) {
+            print(#function)
+            self.confirm_ColorChange = false
+            self.theOneAndOnlyEditedSDB = nil //dismiss
+        }
         
         UserFeedback.singleHaptic(.medium)
     }

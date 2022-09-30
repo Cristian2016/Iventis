@@ -120,10 +120,8 @@ struct MoreOptionsView: View {
                         }
                     }
                     .onTapGesture {
-                        viewModel.changeDelay(for: bubble, storedReferenceDelay)
-                        viewModel.changeColor(for: bubble, to: colorName)
-                        PersistenceController.shared.save() //save CoreData
-                        viewModel.theOneAndOnlyEditedSDB = nil //dismiss
+                        saveDelayIfNeeded()
+                        saveColorIfNeeded(colorName)
                     }
                 }
             }
@@ -142,8 +140,10 @@ struct MoreOptionsView: View {
                 
         UserFeedback.singleHaptic(.medium)
         viewModel.changeDelay(for: bubble, storedReferenceDelay)
-        PersistenceController.shared.save() //save CoreData
-        viewModel.theOneAndOnlyEditedSDB = nil //dismiss
+    }
+    
+    func saveColorIfNeeded(_ colorName:String) {
+        viewModel.saveColorIfNeeded(for: bubble, to: colorName)
     }
     
     func handleInfoLabelTap() {
