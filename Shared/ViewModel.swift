@@ -436,24 +436,20 @@ class ViewModel: ObservableObject {
         bubble.color = newColor
         
         confirm_ColorChange = true
-        delayExecution(.now() + 0.6) { self.confirm_ColorChange = false }
+        delayExecution(.confirmation) { self.confirm_ColorChange = false }
+        UserFeedback.singleHaptic(.medium)
         
         if sdb.referenceDelay != 0 {//there is a delay set
-            UserFeedback.singleHaptic(.medium)
             PersistenceController.shared.save()
             confirm_DelayWasChanged = true
             
-            delayExecution(.now() + 0.6) {
+            delayExecution(.confirmation) {
                 self.confirm_DelayWasChanged = false
                 self.theOneAndOnlyEditedSDB = nil
             }
             
-        } else {//no delay set
-            UserFeedback.singleHaptic(.medium) //haptic feedback
-            
-            delayExecution(.now() + 0.6) {
-                self.theOneAndOnlyEditedSDB = nil
-            }
+        } else {//dismiss if no delay set
+            delayExecution(.confirmation) { self.theOneAndOnlyEditedSDB = nil }
         }
         
         //save CoreData
