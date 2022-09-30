@@ -460,6 +460,7 @@ class ViewModel: ObservableObject {
             return
         }
         
+        //model:
         sdb.currentDelay = Float(sdb.referenceDelay)
         PersistenceController.shared.save()
         
