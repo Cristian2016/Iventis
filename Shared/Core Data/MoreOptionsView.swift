@@ -32,7 +32,6 @@ struct MoreOptionsView: View {
     var body: some View {
         ZStack {
             whiteBackground.onTapGesture { saveDelay() }
-            
             VStack {
                 StartDelaySubview(sdb: bubble.sdb!)
                 colorsViewTitle
