@@ -449,7 +449,6 @@ class ViewModel: ObservableObject {
     
     // start delay
     func saveDelay(for bubble:Bubble, _ storedDelay:Int) {
-        print(#function)
         guard
             let referenceDelay = bubble.sdb?.referenceDelay,
             referenceDelay != storedDelay
