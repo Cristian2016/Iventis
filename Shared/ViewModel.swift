@@ -438,6 +438,8 @@ class ViewModel: ObservableObject {
         
         //user feedback: tactile feedback
         UserFeedback.singleHaptic(.medium)
+        
+        print("theOneAndOnlyEditedSDB \(theOneAndOnlyEditedSDB)")
                 
         //user feedback: flash "color changed" confirmation
         confirm_ColorChange = true
@@ -453,7 +455,10 @@ class ViewModel: ObservableObject {
         guard
             let referenceDelay = bubble.sdb?.referenceDelay,
             referenceDelay != storedDelay
-        else { return }
+        else {
+            self.theOneAndOnlyEditedSDB = nil //dismiss
+            return
+        }
         
         //flash delay was changed
         confirm_DelayWasChanged = true
