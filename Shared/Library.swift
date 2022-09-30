@@ -33,7 +33,8 @@ extension Array {
 }
 
 extension DispatchTime {
-    static let confirmation = DispatchTime.now() + 0.7
+    ///0.8 sec
+    static let confirmation = DispatchTime.now() + 0.8
 }
 
 extension UIScreen {

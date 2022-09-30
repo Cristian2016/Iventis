@@ -472,7 +472,7 @@ class ViewModel: ObservableObject {
                  
         confirm_DelayWasChanged = true //set back to false after dispatchTime
         
-        delayExecution(.now() + 0.8) {
+        delayExecution(.confirmation) {
             self.confirm_DelayWasChanged = false
             self.theOneAndOnlyEditedSDB = nil //dismiss MOV
         }
