@@ -28,7 +28,7 @@ struct MoreOptionsView: View {
     let colorsTableHeight = CGFloat(320)
     var show_StartDelayOption:Bool { bubble.state != .running }
     
-    // MARK: -
+    // MARK: - Body
     var body: some View {
         ZStack {
             whiteBackground.onTapGesture { saveDelayIfNeeded() }
@@ -128,7 +128,6 @@ struct MoreOptionsView: View {
     }
     
     // MARK: - User Intents
-//    func dismiss() { viewModel.theOneAndOnlyEditedSDB = nil }
     
     func saveDelayIfNeeded() {
         /*

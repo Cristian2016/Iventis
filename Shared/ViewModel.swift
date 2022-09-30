@@ -436,6 +436,7 @@ class ViewModel: ObservableObject {
         bubble.color = newColor
         
         confirm_ColorChange = true
+        delayExecution(.now() + 0.6) { self.confirm_ColorChange = false }
         
         if sdb.referenceDelay != 0 {//there is a delay set
             UserFeedback.singleHaptic(.medium)
@@ -445,14 +446,12 @@ class ViewModel: ObservableObject {
             delayExecution(.now() + 0.6) {
                 self.confirm_DelayWasChanged = false
                 self.theOneAndOnlyEditedSDB = nil
-                self.confirm_ColorChange = false
             }
             
         } else {//no delay set
             UserFeedback.singleHaptic(.medium) //haptic feedback
             
             delayExecution(.now() + 0.6) {
-                self.confirm_ColorChange = false
                 self.theOneAndOnlyEditedSDB = nil
             }
         }
