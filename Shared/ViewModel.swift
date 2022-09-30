@@ -433,8 +433,10 @@ class ViewModel: ObservableObject {
         if bubble.color == newColor { return }
         bubble.color = newColor
         
+        //flash color was changed
         confirm_ColorChange = true
         delayExecution(.confirmation) { self.confirm_ColorChange = false }
+        
         UserFeedback.singleHaptic(.medium)
     }
     
