@@ -115,7 +115,13 @@ struct MoreOptionsView: View {
                                 .font(.system(size: 40))
                         }
                     }
-                    .onTapGesture { saveColor(for: bubble, to: colorName) }
+                    .onTapGesture {
+                        saveColor(for: bubble, to: colorName)
+                        // FIXME: try to get rid of if statement and fix both flashes
+                        if storedReferenceDelay != bubble.sdb!.referenceDelay {
+                            saveDelay()
+                        }
+                    }
                 }
             }
         }
