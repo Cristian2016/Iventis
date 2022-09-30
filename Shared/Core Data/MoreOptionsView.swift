@@ -62,7 +62,6 @@ struct MoreOptionsView: View {
     }
     
     // MARK: - Lego
-    
     private var whiteBackground:some View {
         Color.alertScreenBackground.opacity(0.9)
             .ignoresSafeArea()
@@ -117,7 +116,7 @@ struct MoreOptionsView: View {
                                 .font(.system(size: 40))
                         }
                     }
-                    .onTapGesture { viewModel.saveColor(for: bubble, to: colorName) }
+                    .onTapGesture { saveColor(for: bubble, to: colorName) }
                 }
             }
         }
@@ -126,6 +125,10 @@ struct MoreOptionsView: View {
     }
     
     // MARK: - User Intents
+    
+    func saveColor(for bubble:Bubble, to colorName: String) {
+        viewModel.saveColor(for: bubble, to: colorName)
+    }
     
     func saveDelay() {
         /*
