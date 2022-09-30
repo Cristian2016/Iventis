@@ -431,18 +431,20 @@ class ViewModel: ObservableObject {
     //color change
     func saveColor(for bubble:Bubble, to newColor:String) {
         if bubble.color == newColor { return }
+        
+        //change color and save coredata
         bubble.color = newColor
+        PersistenceController.shared.save()
         
-        print(#function)
-        
+        //give tactile feedback to user
+        UserFeedback.singleHaptic(.medium)
+                
         //flash color was changed
         confirm_ColorChange = true
         delayExecution(.confirmation) {
             self.confirm_ColorChange = false
             self.theOneAndOnlyEditedSDB = nil //dismiss
         }
-        
-        UserFeedback.singleHaptic(.medium)
     }
     
     // start delay
