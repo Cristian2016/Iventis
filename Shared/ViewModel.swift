@@ -440,9 +440,9 @@ class ViewModel: ObservableObject {
         UserFeedback.singleHaptic(.medium)
                                 
         //user feedback: flash "color changed" confirmation
-        confirm_ColorChange = true
-        delayExecution(.confirmation) {
-            self.confirm_ColorChange = false
+        confirm_ColorChange = true //show confirmation
+        delayExecution(.confirmation) {//after 0.7 seconds
+            self.confirm_ColorChange = false //hide confirmation
             self.theOneAndOnlyEditedSDB = nil //dismiss
         }
     }
