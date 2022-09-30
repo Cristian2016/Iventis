@@ -119,10 +119,7 @@ struct MoreOptionsView: View {
                                 .font(.system(size: 40))
                         }
                     }
-                    .onTapGesture {
-                        saveDelay()
-                        saveColor(colorName)
-                    }
+                    .onTapGesture { viewModel.saveColor(for: bubble, to: colorName) }
                 }
             }
         }
@@ -140,10 +137,6 @@ struct MoreOptionsView: View {
                 
         UserFeedback.singleHaptic(.medium)
         viewModel.saveDelay(for: bubble, storedReferenceDelay)
-    }
-    
-    func saveColor(_ colorName:String) {
-        viewModel.saveColor(for: bubble, to: colorName)
     }
     
     func handleInfoLabelTap() {

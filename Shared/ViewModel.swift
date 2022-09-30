@@ -430,9 +430,10 @@ class ViewModel: ObservableObject {
     // MARK: - MoreOptionsView
     //color change
     func saveColor(for bubble:Bubble, to newColor:String) {
-        print(#function)
         if bubble.color == newColor { return }
         bubble.color = newColor
+        
+        print(#function)
         
         //flash color was changed
         confirm_ColorChange = true
