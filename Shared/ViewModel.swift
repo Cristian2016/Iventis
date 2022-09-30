@@ -442,6 +442,7 @@ class ViewModel: ObservableObject {
                                 
         //user feedback: flash "color changed" confirmation
         confirm_ColorChange = true //show confirmation
+        print("confirm_ColorChange")
         delayExecution(.confirmation) {//after 0.7 seconds
             self.confirm_ColorChange = false //hide confirmation
             self.theOneAndOnlyEditedSDB = nil //dismiss
@@ -466,6 +467,7 @@ class ViewModel: ObservableObject {
         
         //user feedback: flash delay was changed
         confirm_DelayWasChanged = true
+        print("confirm_DelayWasChanged")
         delayExecution(.confirmation) {
             self.confirm_DelayWasChanged = false
             self.theOneAndOnlyEditedSDB = nil //dismiss
