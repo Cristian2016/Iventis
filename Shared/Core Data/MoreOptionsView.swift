@@ -48,7 +48,6 @@ struct MoreOptionsView: View {
             if viewModel.confirm_ColorChange {
                 ColorConfirmationView(colorName: bubble.color!, color: Color.bubbleColor(forName: bubble.color!))
             }
-            
             if viewModel.confirm_NoDelay {//zero delay confirmation
                 ConfirmationView(title: "Start Delay", lowerSymbol: .off)
             }
