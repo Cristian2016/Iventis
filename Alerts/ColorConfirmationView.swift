@@ -22,6 +22,7 @@ struct ColorConfirmationView: View {
                 .foregroundColor(.white)
                 .padding()
         }
+        .standardShadow(true)
     }
 }
 
