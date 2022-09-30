@@ -436,33 +436,20 @@ class ViewModel: ObservableObject {
         confirm_ColorChange = true
         delayExecution(.confirmation) { self.confirm_ColorChange = false }
         UserFeedback.singleHaptic(.medium)
-        
-        PersistenceController.shared.save() //save CoreData
     }
     
     // start delay
     func changeDelay(for bubble:Bubble, _ storedDelay:Int) {
-        /*
-       if user hasn't changed start delay, dismiss and return
-         */
         guard
             let referenceDelay = bubble.sdb?.referenceDelay,
             referenceDelay != storedDelay
-        else {
-            self.theOneAndOnlyEditedSDB = nil //dismiss MOV
-            return
-        }
-                 
-        confirm_DelayWasChanged = true //set back to false after dispatchTime
+        else { return }
         
-        delayExecution(.confirmation) {
-            self.confirm_DelayWasChanged = false
-            self.theOneAndOnlyEditedSDB = nil //dismiss MOV
-        }
+        //flash delay was changed
+        confirm_DelayWasChanged = true
+        delayExecution(.confirmation) { self.confirm_DelayWasChanged = false }
         
         if let sdb = theOneAndOnlyEditedSDB { sdb.currentDelay = Float(sdb.referenceDelay) }
-        
-        PersistenceController.shared.save()
     }
     
     ///referenceDelay = 0, currentDelay = 0

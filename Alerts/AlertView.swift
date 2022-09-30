@@ -1,10 +1,3 @@
-//
-//  GenericAlertView.swift
-//  Timers (iOS)
-//
-//  Created by Cristian Lapusan on 23.09.2022.
-//
-
 import SwiftUI
 
 struct AlertContent {

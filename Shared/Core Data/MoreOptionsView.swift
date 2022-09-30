@@ -120,8 +120,10 @@ struct MoreOptionsView: View {
                         }
                     }
                     .onTapGesture {
+                        viewModel.changeDelay(for: bubble, storedReferenceDelay)
                         viewModel.changeColor(for: bubble, to: colorName)
-                        
+                        PersistenceController.shared.save() //save CoreData
+                        viewModel.theOneAndOnlyEditedSDB = nil //dismiss
                     }
                 }
             }
