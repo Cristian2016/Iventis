@@ -17,12 +17,12 @@ struct ColorConfirmationView: View {
             Circle().fill(color)
                 .padding()
                 .padding()
+                .standardShadow(true)
             Text(Color.userFriendlyBubbleColorName(for: colorName))
                 .font(.system(size: 40).weight(.medium))
                 .foregroundColor(.white)
                 .padding()
         }
-        .standardShadow(true)
     }
 }
 
