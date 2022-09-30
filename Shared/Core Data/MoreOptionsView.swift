@@ -142,6 +142,8 @@ struct MoreOptionsView: View {
                 
         UserFeedback.singleHaptic(.medium)
         viewModel.changeDelay(for: bubble, storedReferenceDelay)
+        PersistenceController.shared.save() //save CoreData
+        viewModel.theOneAndOnlyEditedSDB = nil //dismiss
     }
     
     func handleInfoLabelTap() {
