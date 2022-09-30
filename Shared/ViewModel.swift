@@ -438,7 +438,7 @@ class ViewModel: ObservableObject {
         
         //user feedback: tactile feedback
         UserFeedback.singleHaptic(.medium)
-                        
+                                
         //user feedback: flash "color changed" confirmation
         confirm_ColorChange = true
         delayExecution(.confirmation) {
