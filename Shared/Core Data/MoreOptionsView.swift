@@ -31,7 +31,7 @@ struct MoreOptionsView: View {
     // MARK: - Body
     var body: some View {
         ZStack {
-            whiteBackground.onTapGesture { saveDelayIfNeeded() }
+            whiteBackground.onTapGesture { saveDelay() }
             
             VStack {
                 StartDelaySubview(sdb: bubble.sdb!)
@@ -120,8 +120,8 @@ struct MoreOptionsView: View {
                         }
                     }
                     .onTapGesture {
-                        saveDelayIfNeeded()
-                        saveColorIfNeeded(colorName)
+                        saveDelay()
+                        saveColor(colorName)
                     }
                 }
             }
@@ -132,18 +132,18 @@ struct MoreOptionsView: View {
     
     // MARK: - User Intents
     
-    func saveDelayIfNeeded() {
+    func saveDelay() {
         /*
          if user sets a new start delay
          save delay
          save CoreData context*/
                 
         UserFeedback.singleHaptic(.medium)
-        viewModel.changeDelay(for: bubble, storedReferenceDelay)
+        viewModel.saveDelay(for: bubble, storedReferenceDelay)
     }
     
-    func saveColorIfNeeded(_ colorName:String) {
-        viewModel.saveColorIfNeeded(for: bubble, to: colorName)
+    func saveColor(_ colorName:String) {
+        viewModel.saveColor(for: bubble, to: colorName)
     }
     
     func handleInfoLabelTap() {

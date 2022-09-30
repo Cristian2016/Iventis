@@ -429,7 +429,8 @@ class ViewModel: ObservableObject {
     
     // MARK: - MoreOptionsView
     //color change
-    func saveColorIfNeeded(for bubble:Bubble, to newColor:String) {
+    func saveColor(for bubble:Bubble, to newColor:String) {
+        print(#function)
         if bubble.color == newColor { return }
         bubble.color = newColor
         
@@ -445,7 +446,8 @@ class ViewModel: ObservableObject {
     }
     
     // start delay
-    func changeDelay(for bubble:Bubble, _ storedDelay:Int) {
+    func saveDelay(for bubble:Bubble, _ storedDelay:Int) {
+        print(#function)
         guard
             let referenceDelay = bubble.sdb?.referenceDelay,
             referenceDelay != storedDelay
