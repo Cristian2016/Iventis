@@ -450,24 +450,24 @@ class ViewModel: ObservableObject {
     
     // start delay
     func saveDelay(for bubble:Bubble, _ storedDelay:Int) {
+        //don't do anything is user hasn't modified the delay
         guard
             let referenceDelay = bubble.sdb?.referenceDelay,
-            referenceDelay != storedDelay
+            referenceDelay != storedDelay,
+            let sdb = = theOneAndOnlyEditedSDB
         else {
             self.theOneAndOnlyEditedSDB = nil //dismiss
             return
         }
+        
+        sdb.currentDelay = Float(sdb.referenceDelay)
+        PersistenceController.shared.save()
         
         //user feedback: flash delay was changed
         confirm_DelayWasChanged = true
         delayExecution(.confirmation) {
             self.confirm_DelayWasChanged = false
             self.theOneAndOnlyEditedSDB = nil //dismiss
-        }
-        
-        if let sdb = theOneAndOnlyEditedSDB {
-            sdb.currentDelay = Float(sdb.referenceDelay)
-            PersistenceController.shared.save()
         }
     }
     
