@@ -49,8 +49,7 @@ struct MoreOptionsView: View {
                 ColorConfirmationView(colorName: bubble.color!, color: Color.bubbleColor(forName: bubble.color!))
             }
             
-            if viewModel.confirm_NoDelay {
-                //reset delay confirmation
+            if viewModel.confirm_NoDelay {//zero delay confirmation
                 ConfirmationView(title: "Start Delay", lowerSymbol: .off)
             }
             if viewModel.confirm_DelayWasChanged {
@@ -60,7 +59,6 @@ struct MoreOptionsView: View {
                 )
             }
         }
-        .gesture(longPress)
     }
     
     // MARK: - Lego
