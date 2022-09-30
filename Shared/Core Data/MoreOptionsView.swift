@@ -119,7 +119,10 @@ struct MoreOptionsView: View {
                                 .font(.system(size: 40))
                         }
                     }
-                    .onTapGesture { viewModel.changeColor(for: bubble, to: colorName) }
+                    .onTapGesture {
+                        viewModel.changeColor(for: bubble, to: colorName)
+                        
+                    }
                 }
             }
         }

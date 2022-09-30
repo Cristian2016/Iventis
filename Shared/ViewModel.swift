@@ -430,9 +430,6 @@ class ViewModel: ObservableObject {
     // MARK: - MoreOptionsView
     //color change
     func changeColor(for bubble:Bubble, to newColor:String) {
-        guard let sdb = theOneAndOnlyEditedSDB else { fatalError() }
-        
-        //change color and save CoreData
         if bubble.color == newColor { return }
         bubble.color = newColor
         
@@ -440,21 +437,7 @@ class ViewModel: ObservableObject {
         delayExecution(.confirmation) { self.confirm_ColorChange = false }
         UserFeedback.singleHaptic(.medium)
         
-        if sdb.referenceDelay != 0 {//there is a delay set
-            PersistenceController.shared.save()
-            confirm_DelayWasChanged = true
-            
-            delayExecution(.confirmation) {
-                self.confirm_DelayWasChanged = false
-                self.theOneAndOnlyEditedSDB = nil
-            }
-            
-        } else {//dismiss if no delay set
-            delayExecution(.confirmation) { self.theOneAndOnlyEditedSDB = nil }
-        }
-        
-        //save CoreData
-        PersistenceController.shared.save()
+        PersistenceController.shared.save() //save CoreData
     }
     
     // start delay
@@ -482,7 +465,7 @@ class ViewModel: ObservableObject {
         PersistenceController.shared.save()
     }
     
-    ///user long presses in MoreOptionsView
+    ///referenceDelay = 0, currentDelay = 0
     func removeDelay(for bubble:Bubble?) {
         guard let bubble = bubble else { return }
         if bubble.sdb!.referenceDelay == 0 { return }
@@ -490,7 +473,7 @@ class ViewModel: ObservableObject {
         bubble.sdb?.removeDelay()
     }
     
-    //long press SDBButton
+    ///currentDelay = referenceDelay
     func resetDelay(for sdb:SDB) { sdb.resetDelay() }
     
     ///reference startDelay

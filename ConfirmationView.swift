@@ -13,6 +13,7 @@ struct ConfirmationView: View {
     
     // MARK: - Content
     var extraText:String? = nil
+    
     var titleSymbol:String? = nil
     let title:String
     let lowerSymbol:LowerSymbol
@@ -46,7 +47,7 @@ struct ConfirmationView: View {
                 lowerSymbolView
                     .font(.system(size: 30).weight(.semibold))
             }
-            .padding()
+            .padding([.top, .bottom])
             .background(
                 RoundedRectangle(cornerRadius: 14)
                     .fill(fillColor)
