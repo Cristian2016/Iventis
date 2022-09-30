@@ -458,9 +458,12 @@ class ViewModel: ObservableObject {
             return
         }
         
-        //flash delay was changed
+        //user feedback: flash delay was changed
         confirm_DelayWasChanged = true
-        delayExecution(.confirmation) { self.confirm_DelayWasChanged = false }
+        delayExecution(.confirmation) {
+            self.confirm_DelayWasChanged = false
+            self.theOneAndOnlyEditedSDB = nil //dismiss
+        }
         
         if let sdb = theOneAndOnlyEditedSDB { sdb.currentDelay = Float(sdb.referenceDelay) }
     }
