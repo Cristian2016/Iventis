@@ -436,10 +436,10 @@ class ViewModel: ObservableObject {
         bubble.color = newColor
         PersistenceController.shared.save()
         
-        //give tactile feedback to user
+        //user feedback: tactile feedback
         UserFeedback.singleHaptic(.medium)
                 
-        //flash color was changed
+        //user feedback: flash "color changed" confirmation
         confirm_ColorChange = true
         delayExecution(.confirmation) {
             self.confirm_ColorChange = false
