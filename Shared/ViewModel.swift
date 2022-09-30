@@ -430,9 +430,10 @@ class ViewModel: ObservableObject {
     // MARK: - MoreOptionsView
     //color change
     func saveColor(for bubble:Bubble, to newColor:String) {
+        //don't do anything unless user changed color
         if bubble.color == newColor { return }
         
-        //change color and save coredata
+        //model: change color and save coredata
         bubble.color = newColor
         PersistenceController.shared.save()
         
