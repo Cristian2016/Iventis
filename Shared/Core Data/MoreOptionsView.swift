@@ -111,7 +111,7 @@ struct MoreOptionsView: View {
                             .fill(color)
                             .aspectRatio(1.6, contentMode: .fit)
                         if colorName == bubble.color {
-                            Image(systemName: "checkmark")
+                            Image.checkmark
                                 .foregroundColor(.white)
                                 .font(.system(size: 40))
                         }
