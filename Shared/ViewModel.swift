@@ -465,7 +465,10 @@ class ViewModel: ObservableObject {
             self.theOneAndOnlyEditedSDB = nil //dismiss
         }
         
-        if let sdb = theOneAndOnlyEditedSDB { sdb.currentDelay = Float(sdb.referenceDelay) }
+        if let sdb = theOneAndOnlyEditedSDB {
+            sdb.currentDelay = Float(sdb.referenceDelay)
+            PersistenceController.shared.save()
+        }
     }
     
     ///referenceDelay = 0, currentDelay = 0
