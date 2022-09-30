@@ -454,7 +454,7 @@ class ViewModel: ObservableObject {
         guard
             let referenceDelay = bubble.sdb?.referenceDelay,
             referenceDelay != storedDelay,
-            let sdb = = theOneAndOnlyEditedSDB
+            let sdb = theOneAndOnlyEditedSDB
         else {
             self.theOneAndOnlyEditedSDB = nil //dismiss
             return
