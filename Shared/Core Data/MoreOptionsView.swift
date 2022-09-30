@@ -125,7 +125,6 @@ struct MoreOptionsView: View {
     }
     
     // MARK: - User Intents
-    
     func saveColor(for bubble:Bubble, to colorName: String) {
         viewModel.saveColor(for: bubble, to: colorName)
     }

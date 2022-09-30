@@ -438,7 +438,6 @@ class ViewModel: ObservableObject {
         //flash color was changed
         confirm_ColorChange = true
         delayExecution(.confirmation) {
-            print(#function)
             self.confirm_ColorChange = false
             self.theOneAndOnlyEditedSDB = nil //dismiss
         }
