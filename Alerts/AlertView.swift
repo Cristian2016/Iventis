@@ -15,7 +15,7 @@ struct AlertContent {
 }
 
 struct Alert {
-    static let alwaysOnDisplay = AlertContent(symbol: "exclamationmark.triangle.fill", titleSymbol: "sun.max", title: "Always-On Display", content: "This option prevents display from sleeping. It may drain battery faster. Turn it off again if no longer needed")
+    static let alwaysOnDisplay = AlertContent(symbol: "exclamationmark.triangle.fill", titleSymbol: "sun.max", title: "Always-On\nDisplay", content: "This option prevents display from sleeping. It may drain battery faster. Turn it off again if no longer needed")
     static let calendarOn = AlertContent(title: "Calendar")
 }
 
