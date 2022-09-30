@@ -427,7 +427,8 @@ class ViewModel: ObservableObject {
         }
     }
     
-    // MARK: -
+    // MARK: - MoreOptionsView
+    //color change
     func changeColor(for bubble:Bubble, to newColor:String) {
         guard let sdb = theOneAndOnlyEditedSDB else { fatalError() }
         
@@ -456,9 +457,8 @@ class ViewModel: ObservableObject {
         PersistenceController.shared.save()
     }
     
-    // MARK: - StartDelay SDB
-    ///save delay and dismiss MoreOptionsView
-    func saveDelay(for bubble:Bubble, _ storedDelay:Int) {
+    // start delay
+    func changeDelay(for bubble:Bubble, _ storedDelay:Int) {
         /*
        if user hasn't changed start delay, dismiss and return
          */
@@ -520,11 +520,6 @@ class ViewModel: ObservableObject {
                 PersistenceController.shared.save()
             }
         }
-    }
-    
-    // MARK: -
-    func removeDelay(for bubble:Bubble) {
-        bubble.sdb?.removeDelay()
     }
     
     // MARK: - User Intents
