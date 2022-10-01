@@ -45,11 +45,6 @@ struct StickyNoteList: View {
     private let line3 = Text("Empty Notes will not be saved").font(.system(size: 21))
     
     // MARK: - Intents
-    private func deleteTextFieldText() {
-        UserFeedback.doubleHaptic(.rigid)
-        textFieldText = ""
-    }
-    
     private func saveNoteAndDismiss() {
         guard stickyNoteIsValid else { dismiss(); return }
         
@@ -60,6 +55,11 @@ struct StickyNoteList: View {
             self.dismiss()
             PersistenceController.shared.save()
         }
+    }
+    
+    private func deleteTextFieldText() {
+        UserFeedback.doubleHaptic(.rigid)
+        textFieldText = ""
     }
     
     // MARK: - Body
