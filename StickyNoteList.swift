@@ -47,7 +47,7 @@ struct StickyNoteList: View {
         }
     }
     
-    ///if "" or "       " note is not valid
+    ///note is not valid: "" or "       "
     private var noteIsValid: Bool {
         //only empty space ex: "    "
         let onlyEmptySpace = textFieldText.isAllEmptySpace
