@@ -53,7 +53,7 @@ struct StickyNoteList: View {
     private func saveNoteAndDismiss() {
         saveNoteToCoredata(textFieldText)
         
-        //apparently it crashes without a bit of delay
+        //⚠️ it crashes without delay
         delayExecution(.now() + 0.1) {
             self.dismiss()
             PersistenceController.shared.save()
