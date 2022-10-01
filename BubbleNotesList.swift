@@ -98,14 +98,15 @@ struct BubbleNotesList: View {
         //avoid duplicates
         //save note to CoreData if no duplicates
         
-        var trimmedNote = note
-        trimmedNote.removeWhiteSpaceAtBothEnds()
-        if bubbleSavedNotes.compactMap({ $0.note }).contains(trimmedNote) {
-            selectExitingNote(trimmedNote)
+        var noteCopy = note
+        
+        noteCopy.removeWhiteSpaceAtBothEnds()
+        if bubbleSavedNotes.compactMap({ $0.note }).contains(noteCopy) {
+            selectExitingNote(note)
             return
         }
         
-        vm.save(note, forObject: bubble)
+        vm.save(noteCopy.capitalized, forObject: bubble)
         UserFeedback.singleHaptic(.heavy)
         bubble.isNoteHidden = false
     }
