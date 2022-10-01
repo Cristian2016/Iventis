@@ -49,8 +49,10 @@ struct StickyNoteList: View {
     
     ///if "" or "       " note is not valid
     private var noteIsValid: Bool {
-        let allWhiteSpaces = textFieldText.trimmingCharacters(in: CharacterSet.whitespaces).isEmpty
-        if !textFieldText.isEmpty && !allWhiteSpaces { return true }
+        //only empty space ex: "    "
+        let onlyEmptySpace = textFieldText.isAllEmptySpace
+        
+        if !textFieldText.isEmpty && !onlyEmptySpace { return true }
         if initialNote == textFieldText { return false }
         
         return false
