@@ -51,7 +51,7 @@
 		1F76B51128DDE38800543660 /* AlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F76B51028DDE38800543660 /* AlertView.swift */; };
 		1F82FB982831435A00E7C5AA /* HelpActionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F82FB972831435A00E7C5AA /* HelpActionButton.swift */; };
 		1F864D90287C0356000219CE /* MoreOptionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F864D8F287C0356000219CE /* MoreOptionsView.swift */; };
-		1F8B6965283790CF006540CB /* BubbleNotesList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8B6964283790CF006540CB /* BubbleNotesList.swift */; };
+		1F8B6965283790CF006540CB /* BubbleStickyNoteList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8B6964283790CF006540CB /* BubbleStickyNoteList.swift */; };
 		1F97B7DD2809B311002FFCA3 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F97B7DC2809B311002FFCA3 /* Colors.swift */; };
 		1F98D78A286AF8A300C0A973 /* DeleteRow_InfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F98D789286AF8A300C0A973 /* DeleteRow_InfoView.swift */; };
 		1F99AB5F286CA40D00977C9A /* StickyNote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F99AB5E286CA40D00977C9A /* StickyNote.swift */; };
@@ -162,7 +162,7 @@
 		1F82FB972831435A00E7C5AA /* HelpActionButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpActionButton.swift; sourceTree = "<group>"; };
 		1F845FAD286EF8730053EAE6 /* WidgetsExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = WidgetsExtension.entitlements; sourceTree = "<group>"; };
 		1F864D8F287C0356000219CE /* MoreOptionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreOptionsView.swift; sourceTree = "<group>"; };
-		1F8B6964283790CF006540CB /* BubbleNotesList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BubbleNotesList.swift; sourceTree = "<group>"; };
+		1F8B6964283790CF006540CB /* BubbleStickyNoteList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BubbleStickyNoteList.swift; sourceTree = "<group>"; };
 		1F97B7DC2809B311002FFCA3 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		1F98D789286AF8A300C0A973 /* DeleteRow_InfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteRow_InfoView.swift; sourceTree = "<group>"; };
 		1F99AB5E286CA40D00977C9A /* StickyNote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StickyNote.swift; sourceTree = "<group>"; };
@@ -220,7 +220,7 @@
 			isa = PBXGroup;
 			children = (
 				1F542F91286D757000403F13 /* StickyNoteList.swift */,
-				1F8B6964283790CF006540CB /* BubbleNotesList.swift */,
+				1F8B6964283790CF006540CB /* BubbleStickyNoteList.swift */,
 				1F1CF2F2286B5BD8007102F2 /* PairNotesList.swift */,
 				1F18B456281FA6130080ADA6 /* PushView.swift */,
 				1F18B45B281FA9C90080ADA6 /* CalendarSticker.swift */,
@@ -494,7 +494,7 @@
 			files = (
 				1F76B51128DDE38800543660 /* AlertView.swift in Sources */,
 				1FE722A128E58200005ADA8E /* ColorConfirmationView.swift in Sources */,
-				1F8B6965283790CF006540CB /* BubbleNotesList.swift in Sources */,
+				1F8B6965283790CF006540CB /* BubbleStickyNoteList.swift in Sources */,
 				1F4DF99D282B82EF00D54BE8 /* CircleButton.swift in Sources */,
 				1F0373C628DF516F005CE8D3 /* OnLabel.swift in Sources */,
 				1FDB9F13287DA5040028E121 /* SDB Properties.swift in Sources */,

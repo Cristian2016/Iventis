@@ -11,8 +11,9 @@
 
 import SwiftUI
 
-struct BubbleNotesList: View {
-    let bubble:Bubble  /* ⚠️ do not use @StateObject bubble:Bubble! because each time Bubble.bubbleCell_Components update, bubble will emit and body will get recomputed each mother fucking second!!!  */
+struct BubbleStickyNoteList: View {
+    let bubble:Bubble  /* ⚠️ do not use @StateObject bubble:Bubble! because each time Bubble.bubbleCell_Components update, bubble will emit and body will get recomputed each mother fucking second!!!
+                        */
     @EnvironmentObject private var vm:ViewModel
     @FetchRequest private var bubbleSavedNotes:FetchedResults<BubbleSavedNote>
     @State private var textInput = "" //willSet and didSet do not work anymore
@@ -114,6 +115,6 @@ struct BubbleNotesList: View {
 
 struct BubbleNoteView_Previews: PreviewProvider {
     static var previews: some View {
-        BubbleNotesList(.constant(0))
+        BubbleStickyNoteList(.constant(0))
     }
 }
