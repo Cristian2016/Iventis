@@ -68,6 +68,7 @@
 		1FA834792850A57C003F4D61 /* WidgetsExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 1FA8346B2850A57A003F4D61 /* WidgetsExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		1FA8F87E28367B7A00394B59 /* BubbleNote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA8F87D28367B7A00394B59 /* BubbleNote.swift */; };
 		1FB3178F286ACB48006BBE82 /* Note_InfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB3178E286ACB48006BBE82 /* Note_InfoView.swift */; };
+		1FB5D8D428E81CD900DD522A /* InfoButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB5D8D328E81CD900DD522A /* InfoButton.swift */; };
 		1FB7D57C2862F0300085C2BE /* PlusButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB7D57B2862F0300085C2BE /* PlusButton.swift */; };
 		1FCF01B3287CBA74009DC95C /* DelayStartSymbol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FCF01B2287CBA74009DC95C /* DelayStartSymbol.swift */; };
 		1FCF0C662816F3F600AA1FAA /* EmptyListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FCF0C652816F3F600AA1FAA /* EmptyListView.swift */; };
@@ -178,6 +179,7 @@
 		1FA834742850A57C003F4D61 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1FA8F87D28367B7A00394B59 /* BubbleNote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BubbleNote.swift; sourceTree = "<group>"; };
 		1FB3178E286ACB48006BBE82 /* Note_InfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Note_InfoView.swift; sourceTree = "<group>"; };
+		1FB5D8D328E81CD900DD522A /* InfoButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoButton.swift; sourceTree = "<group>"; };
 		1FB7D57B2862F0300085C2BE /* PlusButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlusButton.swift; sourceTree = "<group>"; };
 		1FCF01B2287CBA74009DC95C /* DelayStartSymbol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DelayStartSymbol.swift; sourceTree = "<group>"; };
 		1FCF0C652816F3F600AA1FAA /* EmptyListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyListView.swift; sourceTree = "<group>"; };
@@ -266,6 +268,7 @@
 		1F5F4A4228093FAC00AF3442 = {
 			isa = PBXGroup;
 			children = (
+				1FB5D8D328E81CD900DD522A /* InfoButton.swift */,
 				1FFC93E228E4245900451FB3 /* CalEventCreatedConfirmationView.swift */,
 				1F680FC42882D97800548F70 /* MoreOptionsInfo.swift */,
 				1F377E1E287EB2F000E43598 /* AlwaysOnDisplaySymbol.swift */,
@@ -562,6 +565,7 @@
 				1F5F4A752809409600AF3442 /* Bubble Properties.swift in Sources */,
 				1FB7D57C2862F0300085C2BE /* PlusButton.swift in Sources */,
 				1F20807F2836111600FD35D6 /* BSavedNote Properties.swift in Sources */,
+				1FB5D8D428E81CD900DD522A /* InfoButton.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

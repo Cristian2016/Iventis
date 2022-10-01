@@ -78,7 +78,7 @@ struct MoreOptionsView: View {
                 .fill(Color.white)
                 .standardShadow()
             Push(.topRight) {
-                Image(systemName: "info.circle.fill")
+                Image.info
                     .foregroundColor(.gray)
                     .font(.system(size: 26))
                     .padding()

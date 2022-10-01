@@ -166,6 +166,7 @@ extension Image {
     static let eyeSlash = Image(systemName: "eye.slash.fill")
     
     static let checkmark = Image(systemName: "checkmark")
+    static let info = Image(systemName: "info.circle.fill")
 }
 
 func delayExecution(_ delay:DispatchTime, code:@escaping ()->()) {
