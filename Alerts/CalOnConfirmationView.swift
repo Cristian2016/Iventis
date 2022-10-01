@@ -17,7 +17,9 @@ struct CalOnConfirmationView: View {
     
     var body: some View {
         ConfirmationView(titleSymbol: Alert.calendarOn.titleSymbol,
-                         title: Alert.calendarOn.title, lowerSymbol: lowerSymbol
+                         title: Alert.calendarOn.title,
+                         lowerSymbol: lowerSymbol,
+                         dismissAction: { }
         )
     }
 }

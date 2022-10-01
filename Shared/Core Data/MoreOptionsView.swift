@@ -48,13 +48,19 @@ struct MoreOptionsView: View {
                 ColorConfirmationView(colorName: bubble.color!, color: Color.bubbleColor(forName: bubble.color!))
             }
             if viewModel.confirm_NoDelay {//zero delay confirmation
-                ConfirmationView(title: "Start Delay", lowerSymbol: .off)
+                ConfirmationView(title: "Start Delay", lowerSymbol: .off) {
+                    //delete action closure
+                    viewModel.theOneAndOnlyEditedSDB = nil
+                }
             }
             if viewModel.confirm_DelayWasChanged {
                 ConfirmationView(extraText: String(bubble.sdb!.referenceDelay) + "s",
                                  title: "Start Delay",
                                  lowerSymbol: .on
-                )
+                ) {
+                    //delete action closure
+                    viewModel.theOneAndOnlyEditedSDB = nil
+                }
             }
         }
         .gesture(longPress) //remove delay

@@ -17,6 +17,9 @@ struct ConfirmationView: View {
     var titleSymbol:String? = nil
     let title:String
     let lowerSymbol:LowerSymbol
+    var isBackgroundRemoved:Bool = false
+    let dismissAction:() -> Void
+    
     var fillColor:Color {
         switch lowerSymbol {
             case .on, .done: return .green
@@ -24,7 +27,6 @@ struct ConfirmationView: View {
             case .custom(_): return .green
         }
     }
-    var isBackgroundRemoved:Bool = false
     
     // MARK: - Body
     var body: some View {
@@ -55,6 +57,7 @@ struct ConfirmationView: View {
             )
         }
         .foregroundColor(.white)
+        .onTapGesture { dismissAction() }
     }
     
     // MARK: - Lego
@@ -83,7 +86,5 @@ struct ConfirmationView_Previews: PreviewProvider {
     static var previews: some View {
         ConfirmationView(extraText: "80s",
             titleSymbol: Alert.alwaysOnDisplay.titleSymbol,
-                         title: Alert.alwaysOnDisplay.title, lowerSymbol: .done
-        )
-
+                         title: Alert.alwaysOnDisplay.title, lowerSymbol: .done) { }
     }}

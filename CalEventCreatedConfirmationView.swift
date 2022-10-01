@@ -13,8 +13,8 @@ struct CalEventCreatedConfirmationView: View {
             ConfirmationView(titleSymbol: "calendar",
                              title: "Event",
                              lowerSymbol: .custom("Saved"),
-                             isBackgroundRemoved: true
-            )
+                             isBackgroundRemoved: true,
+                             dismissAction:  { })
             Spacer()
         }
     }
