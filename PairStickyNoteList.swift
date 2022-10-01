@@ -11,7 +11,7 @@
 
 import SwiftUI
 
-struct PairNotesList: View {
+struct PairStickyNoteList: View {
     let pair:Pair
     @EnvironmentObject private var vm:ViewModel
     @FetchRequest private var pairSavedNotes:FetchedResults<PairSavedNote>

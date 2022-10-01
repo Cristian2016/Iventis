@@ -16,7 +16,7 @@
 		1F18B457281FA6130080ADA6 /* PushView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F18B456281FA6130080ADA6 /* PushView.swift */; };
 		1F18B45C281FA9C90080ADA6 /* CalendarSticker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F18B45B281FA9C90080ADA6 /* CalendarSticker.swift */; };
 		1F18B460281FAABF0080ADA6 /* TopCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F18B45F281FAABF0080ADA6 /* TopCell.swift */; };
-		1F1CF2F3286B5BD8007102F2 /* PairNotesList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1CF2F2286B5BD8007102F2 /* PairNotesList.swift */; };
+		1F1CF2F3286B5BD8007102F2 /* PairStickyNoteList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1CF2F2286B5BD8007102F2 /* PairStickyNoteList.swift */; };
 		1F20807C2836111600FD35D6 /* BSavedNote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F2080782836111600FD35D6 /* BSavedNote.swift */; };
 		1F20807F2836111600FD35D6 /* BSavedNote Properties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F2080792836111600FD35D6 /* BSavedNote Properties.swift */; };
 		1F377E1F287EB2F000E43598 /* AlwaysOnDisplaySymbol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F377E1E287EB2F000E43598 /* AlwaysOnDisplaySymbol.swift */; };
@@ -122,7 +122,7 @@
 		1F18B456281FA6130080ADA6 /* PushView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushView.swift; sourceTree = "<group>"; };
 		1F18B45B281FA9C90080ADA6 /* CalendarSticker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarSticker.swift; sourceTree = "<group>"; };
 		1F18B45F281FAABF0080ADA6 /* TopCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopCell.swift; sourceTree = "<group>"; };
-		1F1CF2F2286B5BD8007102F2 /* PairNotesList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PairNotesList.swift; sourceTree = "<group>"; };
+		1F1CF2F2286B5BD8007102F2 /* PairStickyNoteList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PairStickyNoteList.swift; sourceTree = "<group>"; };
 		1F2080782836111600FD35D6 /* BSavedNote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BSavedNote.swift; sourceTree = "<group>"; };
 		1F2080792836111600FD35D6 /* BSavedNote Properties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BSavedNote Properties.swift"; sourceTree = "<group>"; };
 		1F377E1E287EB2F000E43598 /* AlwaysOnDisplaySymbol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlwaysOnDisplaySymbol.swift; sourceTree = "<group>"; };
@@ -221,7 +221,7 @@
 			children = (
 				1F542F91286D757000403F13 /* StickyNoteList.swift */,
 				1F8B6964283790CF006540CB /* BubbleStickyNoteList.swift */,
-				1F1CF2F2286B5BD8007102F2 /* PairNotesList.swift */,
+				1F1CF2F2286B5BD8007102F2 /* PairStickyNoteList.swift */,
 				1F18B456281FA6130080ADA6 /* PushView.swift */,
 				1F18B45B281FA9C90080ADA6 /* CalendarSticker.swift */,
 				1F61BE042822BAAA00B773F9 /* DeleteView.swift */,
@@ -535,7 +535,7 @@
 				1F5A0F6F282647A80075E86B /* DetailView.swift in Sources */,
 				1FFC8BB928142F040059EF2E /* Pair Properties.swift in Sources */,
 				1F18B45C281FA9C90080ADA6 /* CalendarSticker.swift in Sources */,
-				1F1CF2F3286B5BD8007102F2 /* PairNotesList.swift in Sources */,
+				1F1CF2F3286B5BD8007102F2 /* PairStickyNoteList.swift in Sources */,
 				1F5F4A6F28093FF800AF3442 /* Model.xcdatamodeld in Sources */,
 				1F9BE0AD280C6AB000F87EFA /* TapHold.swift in Sources */,
 				1FA355CB2832186100F73111 /* CalendarManager.swift in Sources */,
