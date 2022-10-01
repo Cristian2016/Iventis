@@ -7,21 +7,22 @@
 
 import SwiftUI
 
-struct NotesList: View {
+struct StickyNoteList: View {
     var notes:[String]
+    
     let textInputLimit:Int
     let initialNote:String
     
     private var filteredItems:[String] {
-        if textInput.isEmpty { return notes }
-        let filtered = notes.filter { $0.lowercased().contains(textInput.lowercased()) }
+        if textFieldText.isEmpty { return notes }
+        let filtered = notes.filter { $0.lowercased().contains(textFieldText.lowercased()) }
         return filtered
     }
     
     private let size = CGSize(width: 220, height: 382)
     private let cornerRadius = CGFloat(24)
     
-    @State private var textInput = ""
+    @State private var textFieldText = ""
     @FocusState private var keyboardVisible:Bool
     
     private let textFieldPlaceholder = "Search/Add Note"
@@ -33,11 +34,11 @@ struct NotesList: View {
     
     private func deleteTextInput() {
         UserFeedback.doubleHaptic(.rigid)
-        textInput = ""
+        textFieldText = ""
     }
     
     private func saveNoteAndDismiss() {
-        saveNoteToCoredata(textInput)
+        saveNoteToCoredata(textFieldText)
         
         //apparently it crashes without a bit of delay
         delayExecution(.now() + 0.1) {
@@ -48,9 +49,9 @@ struct NotesList: View {
     
     ///if "" or "       " note is not valid
     private var noteIsValid: Bool {
-        let allWhiteSpaces = textInput.trimmingCharacters(in: CharacterSet.whitespaces).isEmpty
-        if !textInput.isEmpty && !allWhiteSpaces { return true }
-        if initialNote == textInput { return false }
+        let allWhiteSpaces = textFieldText.trimmingCharacters(in: CharacterSet.whitespaces).isEmpty
+        if !textFieldText.isEmpty && !allWhiteSpaces { return true }
+        if initialNote == textFieldText { return false }
         
         return false
     }
@@ -135,16 +136,16 @@ struct NotesList: View {
     
     private var textField: some View {
         ZStack {
-            if textInput.isEmpty { placeholder }
-            TextField("", text: $textInput)
+            if textFieldText.isEmpty { placeholder }
+            TextField("", text: $textFieldText)
         }
         .font(.system(size: 24))
         .foregroundColor(.background2)
         .padding()
         .focused($keyboardVisible)
         .textInputAutocapitalization(.words)
-        .onChange(of: self.textInput) {
-            if $0.count > textInputLimit { textInput = String(textInput.prefix(textInputLimit)) }
+        .onChange(of: self.textFieldText) {
+            if $0.count > textInputLimit { textFieldText = String(textFieldText.prefix(textInputLimit)) }
         }
     }
     
@@ -178,10 +179,10 @@ struct NotesList: View {
     
     @ViewBuilder
     private var remainingCharactersCounterView:some View {
-        if !textInput.isEmpty {
+        if !textFieldText.isEmpty {
             HStack {
                 Spacer()
-                Text("\(textInputLimit - textInput.count)")
+                Text("\(textInputLimit - textFieldText.count)")
                     .font(.system(size: 18).weight(.medium))
                     .foregroundColor(.background2)
             }
