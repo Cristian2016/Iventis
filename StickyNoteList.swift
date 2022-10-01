@@ -56,6 +56,10 @@ struct StickyNoteList: View {
         return false
     }
     
+    // MARK: - Intents
+    
+    
+    // MARK: - Body
     var body: some View {
         ZStack {
             screenBackground

@@ -275,6 +275,13 @@ extension String {
     }
         return result
     }
+    
+    //ex: "      "
+    var isAllEmptySpace:Bool {
+        var copy = self
+        while copy.first == " " { copy.removeFirst() }
+        return copy.isEmpty
+    }
 }
 
 
