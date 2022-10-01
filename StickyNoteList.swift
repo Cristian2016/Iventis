@@ -99,7 +99,10 @@ struct StickyNoteList: View {
             .padding([.top])
             .padding([.top])
             .padding([.top])
-            InfoButton { print("show info") }
+            
+            Push(.topRight) { InfoButton(color:.infoButton) { print("show info") }}
+                .padding([.top])
+                .padding([.top])
         }
         .onAppear { withAnimation (.easeInOut) { keyboardVisible = true } }
     }

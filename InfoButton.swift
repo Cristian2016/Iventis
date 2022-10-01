@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct InfoButton: View {
+    var color:Color = .gray
     let tapAction:() -> ()
-    let color:Color = .gray
     
     var body: some View {
         Image.info
