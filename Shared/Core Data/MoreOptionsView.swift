@@ -57,6 +57,7 @@ struct MoreOptionsView: View {
                 )
             }
         }
+        .gesture(longPress) //remove delay
     }
     
     // MARK: - Lego
