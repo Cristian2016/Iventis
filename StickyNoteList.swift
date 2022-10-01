@@ -62,16 +62,18 @@ struct StickyNoteList: View {
         textFieldText = ""
     }
     
+    //deleteTextFieldText
+    private var dragGesture:some Gesture {
+        DragGesture(minimumDistance: 10).onEnded { _ in deleteTextFieldText() }
+    }
+    
     // MARK: - Body
     var body: some View {
         ZStack {
             screenBackground
                 .onTapGesture { saveNoteAndDismiss() }
                 .onLongPressGesture { deleteTextFieldText() }
-                .gesture(
-                    DragGesture(minimumDistance: 10)
-                        .onEnded { _ in deleteTextFieldText() }
-                )
+                .gesture( /* deleteTextFieldText with a */dragGesture)
             VStack {
                 darkRoundedBackground
                     .overlay {
