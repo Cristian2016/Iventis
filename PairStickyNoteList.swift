@@ -53,7 +53,7 @@ struct PairStickyNoteList: View {
     
     // MARK: -
     var body: some View {
-        StickyNoteList(notes: pairSavedNotes.compactMap { $0.note },
+        StickyNoteList(stickyNotes: pairSavedNotes.compactMap { $0.note },
                   textInputLimit: textInputLimit,
                   initialNote: initialNote,
                   //actions

@@ -8,14 +8,14 @@
 import SwiftUI
 
 struct StickyNoteList: View {
-    var notes:[String]
+    var stickyNotes:[String]
     
     let textInputLimit:Int
     let initialNote:String
     
     private var filteredItems:[String] {
-        if textFieldText.isEmpty { return notes }
-        let filtered = notes.filter { $0.lowercased().contains(textFieldText.lowercased()) }
+        if textFieldText.isEmpty { return stickyNotes }
+        let filtered = stickyNotes.filter { $0.lowercased().contains(textFieldText.lowercased()) }
         return filtered
     }
     
@@ -103,11 +103,7 @@ struct StickyNoteList: View {
             .padding([.top])
             .padding([.top])
         }
-        .onAppear {
-//            delayExecution(.now() + 0.05) {
-                withAnimation (.easeInOut) { keyboardVisible = true }
-//            }
-        }
+        .onAppear { withAnimation (.easeInOut) { keyboardVisible = true } }
     }
     
     // MARK: - Lego

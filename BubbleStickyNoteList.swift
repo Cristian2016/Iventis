@@ -65,7 +65,7 @@ struct BubbleStickyNoteList: View {
         
     // MARK: -
     var body: some View {
-        StickyNoteList(notes: bubbleSavedNotes.compactMap { $0.note },
+        StickyNoteList(stickyNotes: bubbleSavedNotes.compactMap { $0.note },
                   textInputLimit: textInputLimit,
                   initialNote: initialNote,
                   //actions
