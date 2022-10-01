@@ -51,6 +51,12 @@ struct StickyNoteList: View {
     }
     
     private func saveNoteAndDismiss() {
+        guard stickyNoteIsValid
+        else {
+            dismiss()
+            return
+        }
+        
         saveNoteToCoredata(textFieldText)
         
         //⚠️ it crashes without delay
@@ -64,10 +70,7 @@ struct StickyNoteList: View {
     var body: some View {
         ZStack {
             screenBackground
-                .onTapGesture {
-                    if stickyNoteIsValid { saveNoteAndDismiss() }
-                    else { dismiss() }
-                }
+                .onTapGesture { saveNoteAndDismiss() }
                 .gesture (
                     LongPressGesture(minimumDuration: 0.3)
                         .onEnded { _ in deleteTextFieldText() }
