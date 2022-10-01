@@ -81,10 +81,10 @@ struct BubbleNotesList: View {
     private func dismiss() { showAddNotes_bRank = nil }
     
     private func selectExitingNote(_ note:String) {
-        var trimmedNote = note
-        trimmedNote.removeWhiteSpaceAtBothEnds()
+        var noteCopy = note
+        noteCopy.removeWhiteSpaceAtBothEnds()
         
-        if initialNote == trimmedNote { return }
+        if initialNote == noteCopy { return }
         
         UserFeedback.singleHaptic(.heavy)
         bubble.note = note
