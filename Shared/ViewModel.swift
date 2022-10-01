@@ -46,6 +46,7 @@ class ViewModel: ObservableObject {
     @Published var idOfSelectedBubble:Bubble.ID?
     
     @Published var showMoreOptionsInfo = false
+    @Published var showStickyNoteListInfo = false
     
     ///allow user to drag and drop tableView cells
     ///.onMove view modifier will not be nil
