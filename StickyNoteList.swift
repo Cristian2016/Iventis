@@ -45,7 +45,7 @@ struct StickyNoteList: View {
     private let line3 = Text("Empty Notes will not be saved").font(.system(size: 21))
     
     // MARK: - Intents
-    private func deleteTextInput() {
+    private func deleteTextFieldText() {
         UserFeedback.doubleHaptic(.rigid)
         textFieldText = ""
     }
@@ -70,11 +70,11 @@ struct StickyNoteList: View {
                 }
                 .gesture (
                     LongPressGesture(minimumDuration: 0.3)
-                        .onEnded { _ in deleteTextInput() }
+                        .onEnded { _ in deleteTextFieldText() }
                 )
                 .gesture(
                     DragGesture(minimumDistance: 10)
-                        .onEnded { _ in deleteTextInput() }
+                        .onEnded { _ in deleteTextFieldText() }
                 )
             VStack {
                 darkRoundedBackground
