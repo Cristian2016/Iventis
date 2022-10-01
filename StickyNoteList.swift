@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct StickyNoteList: View {
+    @EnvironmentObject var vm:ViewModel
     var stickyNotes:[String]
     
     let textInputLimit:Int
@@ -62,6 +63,8 @@ struct StickyNoteList: View {
         textFieldText = ""
     }
     
+    private func showStickyNoteListInfo() { vm.showStickyNoteListInfo = true }
+    
     //deleteTextFieldText
     private var dragGesture:some Gesture {
         DragGesture(minimumDistance: 10).onEnded { _ in deleteTextFieldText() }
@@ -100,9 +103,11 @@ struct StickyNoteList: View {
             .padding([.top])
             .padding([.top])
             
-            Push(.topRight) { InfoButton(color:.infoButton) { print("show info") }}
+            Push(.topRight) { InfoButton(color:.infoButton) { vm.showStickyNoteListInfo = true }}
                 .padding([.top])
                 .padding([.top])
+            
+            if vm.showStickyNoteListInfo { StickyNoteListInfoView() }
         }
         .onAppear { withAnimation (.easeInOut) { keyboardVisible = true } }
     }
