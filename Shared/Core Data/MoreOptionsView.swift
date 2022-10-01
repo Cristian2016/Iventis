@@ -62,7 +62,6 @@ struct MoreOptionsView: View {
                     viewModel.theOneAndOnlyEditedSDB = nil
                 }
             }
-            InfoButton {}
         }
         .gesture(longPress) //remove delay
     }
@@ -78,18 +77,7 @@ struct MoreOptionsView: View {
             RoundedRectangle(cornerRadius: 10)
                 .fill(Color.white)
                 .standardShadow()
-            Push(.topRight) {
-                Image.info
-                    .foregroundColor(.gray)
-                    .font(.system(size: 26))
-                    .padding()
-                    .background {
-                        Circle()
-                            .fill(Color.transparent)
-                            .onTapGesture { handleInfoLabelTap() }
-                    }
-            }
-            .padding(-6)
+            Push(.topRight) { InfoButton { handleInfoButtonTap() } }
         }
     }
     
@@ -99,7 +87,7 @@ struct MoreOptionsView: View {
                 .textModifier(Color.bubbleColor(forName: bubble.color!))
                 .layoutPriority(1)
             Text("Color")
-                .font(.system(size: 22).weight(.medium))
+                .font(.system(size: 26).weight(.medium))
                 .foregroundColor(.gray)
             Spacer()
         }
@@ -151,7 +139,7 @@ struct MoreOptionsView: View {
         viewModel.saveDelay(for: bubble, storedReferenceDelay)
     }
     
-    func handleInfoLabelTap() {
+    func handleInfoButtonTap() {
         viewModel.showMoreOptionsInfo = true
     }
     

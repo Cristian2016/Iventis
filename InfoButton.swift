@@ -9,21 +9,18 @@ import SwiftUI
 
 struct InfoButton: View {
     let tapAction:() -> ()
+    let color:Color = .gray
     
     var body: some View {
-        Push(.topRight) {
-            Image.info
-                .foregroundColor(.infoButton)
-                .font(.system(size: 30))
-                .padding()
-                .background {
-                    Circle()
-                        .fill(Color.transparent)
-                        .onTapGesture { tapAction() }
-                }
-        }
-        .padding([.top])
-        .padding([.top])
+        Image.info
+            .foregroundColor(color)
+            .font(.system(size: 30))
+            .padding()
+            .background {
+                Circle()
+                    .fill(Color.transparent)
+                    .onTapGesture { tapAction() }
+            }
     }
 }
 

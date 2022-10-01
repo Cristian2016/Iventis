@@ -52,7 +52,7 @@ struct StartDelaySubview:View {
             HStack (alignment: .lastTextBaseline, spacing: 0) {
                 Text("\(sdb.referenceDelay)")
                 Text("s")
-                    .font(.system(size: 22).weight(.bold))
+                    .font(.system(size: 26).weight(.bold))
             }
         }
         .textModifier(Color.bubbleColor(forName: sdb.bubble!.color!), 40)
