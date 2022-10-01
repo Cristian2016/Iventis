@@ -112,6 +112,7 @@ extension Text {
 }
 
 extension Color {
+    static let infoButton = Color("infoButton")
     static let selectionGray = Color("selectionGray")
     static let label = Color("label")
     static let detailViewBackground = Color("detailViewBackground")

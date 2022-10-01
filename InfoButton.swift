@@ -13,8 +13,8 @@ struct InfoButton: View {
     var body: some View {
         Push(.topRight) {
             Image.info
-                .foregroundColor(.gray)
-                .font(.system(size: 26))
+                .foregroundColor(.infoButton)
+                .font(.system(size: 30))
                 .padding()
                 .background {
                     Circle()
@@ -22,6 +22,8 @@ struct InfoButton: View {
                         .onTapGesture { tapAction() }
                 }
         }
+        .padding([.top])
+        .padding([.top])
     }
 }
 

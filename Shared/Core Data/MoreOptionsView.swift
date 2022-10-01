@@ -62,6 +62,7 @@ struct MoreOptionsView: View {
                     viewModel.theOneAndOnlyEditedSDB = nil
                 }
             }
+            InfoButton {}
         }
         .gesture(longPress) //remove delay
     }
