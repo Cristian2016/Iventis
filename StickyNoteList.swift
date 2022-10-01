@@ -67,10 +67,7 @@ struct StickyNoteList: View {
         ZStack {
             screenBackground
                 .onTapGesture { saveNoteAndDismiss() }
-                .gesture (
-                    LongPressGesture(minimumDuration: 0.3)
-                        .onEnded { _ in deleteTextFieldText() }
-                )
+                .onLongPressGesture { deleteTextFieldText() }
                 .gesture(
                     DragGesture(minimumDistance: 10)
                         .onEnded { _ in deleteTextFieldText() }
