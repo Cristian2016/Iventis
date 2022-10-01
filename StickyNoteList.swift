@@ -48,7 +48,7 @@ struct StickyNoteList: View {
     }
     
     ///note is not valid: "" or "       "
-    private var noteIsValid: Bool {
+    private var stickyNoteIsValid: Bool {
         //only empty space ex: "    "
         let onlyEmptySpace = textFieldText.isAllEmptySpace
         
@@ -66,7 +66,7 @@ struct StickyNoteList: View {
         ZStack {
             screenBackground
                 .onTapGesture {
-                    if noteIsValid { saveNoteAndDismiss() }
+                    if stickyNoteIsValid { saveNoteAndDismiss() }
                     else { dismiss() }
                 }
                 .gesture (
@@ -118,7 +118,7 @@ struct StickyNoteList: View {
                 Text(line0)
                     .font(.system(size: 30))
                     .background(Color.red)
-                if noteIsValid { Note_InfoView() }
+                if stickyNoteIsValid { Note_InfoView() }
                 else { EmptyNote_InfoView() }
             }
             Spacer()
