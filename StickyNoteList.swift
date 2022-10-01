@@ -13,7 +13,7 @@ struct StickyNoteList: View {
     let textInputLimit:Int
     let initialNote:String
     
-    private var filteredItems:[String] {
+    private var filteredStickyNotes:[String] {
         if textFieldText.isEmpty { return stickyNotes }
         let filtered = stickyNotes.filter { $0.lowercased().contains(textFieldText.lowercased()) }
         return filtered
@@ -86,9 +86,9 @@ struct StickyNoteList: View {
                                 .overlay { remainingCharactersCounterView }
                                 .onSubmit { saveNoteAndDismiss() } //user tapped Enter key
                             List {
-                                if filteredItems.isEmpty { emptyListAlert } //1
+                                if filteredStickyNotes.isEmpty { emptyListAlert } //1
                                 
-                                ForEach (filteredItems, id: \.self) { cell($0) }
+                                ForEach (filteredStickyNotes, id: \.self) { cell($0) }
                                 .onDelete { deleteItem($0.first!) }
                                 .listRowSeparator(.hidden)
                             }
