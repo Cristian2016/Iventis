@@ -51,11 +51,7 @@ struct StickyNoteList: View {
     }
     
     private func saveNoteAndDismiss() {
-        guard stickyNoteIsValid
-        else {
-            dismiss()
-            return
-        }
+        guard stickyNoteIsValid else { dismiss(); return }
         
         saveNoteToCoredata(textFieldText)
         
