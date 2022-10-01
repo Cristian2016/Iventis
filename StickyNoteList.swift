@@ -19,11 +19,23 @@ struct StickyNoteList: View {
         return filtered
     }
     
-    private let size = CGSize(width: 220, height: 382)
-    private let cornerRadius = CGFloat(24)
-    
     @State private var textFieldText = ""
     @FocusState private var keyboardVisible:Bool
+    
+    ///note is not valid: "" or "       "
+    private var stickyNoteIsValid: Bool {
+        //only empty space ex: "    "
+        let onlyEmptySpace = textFieldText.isAllEmptySpace
+        
+        if !textFieldText.isEmpty && !onlyEmptySpace { return true }
+        if initialNote == textFieldText { return false }
+        
+        return false
+    }
+    
+    // MARK: - Metrics
+    private let size = CGSize(width: 220, height: 382)
+    private let cornerRadius = CGFloat(24)
     
     private let textFieldPlaceholder = "Search/Add Note"
     private let line0 = "No Matches"
@@ -32,6 +44,7 @@ struct StickyNoteList: View {
     private let line2 = Text("Tap Hold \(Image(systemName: "plus.app.fill")) to Delete").font(.system(size: 21))
     private let line3 = Text("Empty Notes will not be saved").font(.system(size: 21))
     
+    // MARK: - Intents
     private func deleteTextInput() {
         UserFeedback.doubleHaptic(.rigid)
         textFieldText = ""
@@ -46,20 +59,6 @@ struct StickyNoteList: View {
             PersistenceController.shared.save()
         }
     }
-    
-    ///note is not valid: "" or "       "
-    private var stickyNoteIsValid: Bool {
-        //only empty space ex: "    "
-        let onlyEmptySpace = textFieldText.isAllEmptySpace
-        
-        if !textFieldText.isEmpty && !onlyEmptySpace { return true }
-        if initialNote == textFieldText { return false }
-        
-        return false
-    }
-    
-    // MARK: - Intents
-    
     
     // MARK: - Body
     var body: some View {
@@ -89,7 +88,7 @@ struct StickyNoteList: View {
                                 if filteredStickyNotes.isEmpty { emptyListAlert } //1
                                 
                                 ForEach (filteredStickyNotes, id: \.self) { cell($0) }
-                                .onDelete { deleteItem($0.first!) }
+                                .onDelete { deleteStickyNote($0.first!) }
                                 .listRowSeparator(.hidden)
                             }
                             .listStyle(.plain)
@@ -197,7 +196,7 @@ struct StickyNoteList: View {
     //each View using this view has different code
     //implemented within closures
     var dismiss: () -> Void
-    var deleteItem: (IndexSet.Element?) -> Void
+    var deleteStickyNote: (IndexSet.Element?) -> Void
     
     var saveNoteToCoredata: (String) -> Void
     var selectExistingNote: (String) -> Void

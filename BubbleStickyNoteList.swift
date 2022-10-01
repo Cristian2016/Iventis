@@ -70,7 +70,7 @@ struct BubbleStickyNoteList: View {
                   initialNote: initialNote,
                   //actions
                   dismiss: { dismiss() },
-                  deleteItem: { vm.delete(bubbleSavedNotes[$0!]) },
+                  deleteStickyNote: { vm.delete(bubbleSavedNotes[$0!]) },
                   saveNoteToCoredata: {
             if !$0.isEmpty { saveNoteToCoreData($0, for: bubble) }
         },
