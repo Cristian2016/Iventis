@@ -78,19 +78,18 @@ struct MoreOptionsView: View {
                 .fill(Color.white)
                 .standardShadow()
             Push(.topRight) { InfoButton { handleInfoButtonTap() } }
+                .padding(-8)
         }
     }
     
     private var colorsViewTitle:some View {
-        HStack (alignment: .bottom) {
+        HStack {
             Text("\(Color.userFriendlyBubbleColorName(for: bubble.color))")
                 .textModifier(Color.bubbleColor(forName: bubble.color!))
-                .layoutPriority(1)
-            Text("Color")
-                .font(.system(size: 26).weight(.medium))
-                .foregroundColor(.gray)
             Spacer()
         }
+        
+        .layoutPriority(1)
         .allowsHitTesting(false) //ignore touches [which are delivered to superview]
     }
     

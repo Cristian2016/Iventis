@@ -1,21 +1,24 @@
 import SwiftUI
 
-struct AlertContent {
+struct AlertHintContent {
     var symbol:String?
     var titleSymbol:String?
     let title:String
     var content:String?
 }
 
-struct Alert {
-    static let alwaysOnDisplay = AlertContent(symbol: "exclamationmark.triangle.fill", titleSymbol: "sun.max", title: "Always-On\nDisplay", content: "This option prevents display from sleeping. It may drain battery faster. Turn it off again if no longer needed")
-    static let calendarOn = AlertContent(title: "Calendar")
+struct AlertHint {
+    static let alwaysOnDisplay = AlertHintContent(symbol: "exclamationmark.triangle.fill", titleSymbol: "sun.max", title: "Always-On\nDisplay", content: "This option prevents display from sleeping. It may drain battery faster. Turn it off again if no longer needed")
+    static let calendarOn = AlertHintContent(title: "Calendar")
+    
+    //Hints
+    static let colorChange = AlertHintContent(symbol: "info.circle.fill", titleSymbol: "paintbrush.fill", title: "Change Color", content: "Change the color of a bubble")
 }
 
 struct AlertView: View {
     @EnvironmentObject var viewModel:ViewModel
     
-    let alertContent:AlertContent
+    let alertContent:AlertHintContent
     let dismissAction:() -> ()
     let buttonAction:() -> ()
     
@@ -55,6 +58,6 @@ struct AlertView: View {
 
 struct AlertView_Previews: PreviewProvider {
     static var previews: some View {
-        AlertView(alertContent: Alert.alwaysOnDisplay, dismissAction: {}, buttonAction: {})
+        AlertView(alertContent: AlertHint.colorChange, dismissAction: {}, buttonAction: {})
     }
 }
