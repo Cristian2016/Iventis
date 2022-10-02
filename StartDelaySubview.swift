@@ -22,7 +22,7 @@ struct StartDelaySubview:View {
                             .aspectRatio(contentMode: .fit)
                             .overlay {
                                 Button("\(delay)") { buttonTapped(delay) }
-                                    .font(.system(size: 30).weight(.medium))
+                                    .font(.system(size: 40))
                             }
                     }
                 }
@@ -55,12 +55,12 @@ struct StartDelaySubview:View {
                     .font(.system(size: 26).weight(.bold))
             }
         }
-        .textModifier(Color.bubbleColor(forName: sdb.bubble!.color!), 40)
+        .textModifier(Color.bubbleColor(forName: sdb.bubble!.color!), 44)
     }
     
     private var startDelaylabel:some View {
         Text("Start Delay")
-            .font(.system(size: 22).weight(.medium))
+            .font(.system(size: 26).weight(.medium))
             .foregroundColor(.gray)
     }
 }
