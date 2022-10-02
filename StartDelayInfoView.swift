@@ -17,18 +17,21 @@ struct StartDelayInfoView: View {
         VStack {
             Text("\(Image.startDelay) Start Delay")
                 .font(.system(size: 30).weight(.medium))
+                .foregroundColor(.black)
             Text("*Not available for running bubbles")
                 .font(.footnote)
                 .foregroundColor(.gray)
             
-            Rectangle()
-                .fill(Color.clear)
-                .frame(height: 4)
+            
+            Divider()
                         
             VStack {
                 VStack(alignment: .leading) {
-                    Text("\(Image.checkmark) Set Delay").fontWeight(.semibold)
-                    Text("\(Image.tap) Tap any digit combination").foregroundColor(.gray)
+                    Text("\(Image.checkmark) Set Delay")
+                        .fontWeight(.semibold)
+                        .foregroundColor(.black)
+                    Text("\(Image.tap) Tap any digit combination")
+                        .foregroundColor(.gray)
                 }
                 
                 HStack {
@@ -39,17 +42,18 @@ struct StartDelayInfoView: View {
                         .frame(height: 80)
                     Spacer()
                 }
-                
-                Divider()
-                
+                                
                 HStack {
                     Image(systemName: "iphone")
                         .renderingMode(.original)
                         .font(phoneFont)
                         .background { blueBackground }
                         .overlay { whiteTable }
+                        .foregroundColor(.black)
                     VStack(alignment: .leading) {
-                        Text("\(Image.save) Save").fontWeight(.semibold)
+                        Text("\(Image.save) Save")
+                            .fontWeight(.semibold)
+                            .foregroundColor(.black)
                         Text("\(Image.tap) Tap anywhere outside table")
                             .foregroundColor(.gray)
                     }
@@ -59,12 +63,15 @@ struct StartDelayInfoView: View {
                 HStack {
                     Spacer()
                     VStack(alignment: .leading) {
-                        Text("\(Image.delete) Delete").fontWeight(.semibold)
+                        Text("\(Image.delete) Delete")
+                            .fontWeight(.semibold)
+                            .foregroundColor(.black)
                         Text("\(Image.swipeLeft) Swipe from screen edge")
                             .foregroundColor(.gray)
                     }
                     Image(systemName: "iphone")
                         .renderingMode(.original)
+                        .foregroundColor(.black)
                         .overlay {
                             Image.swipeLeft
                                 .font(gestureFont)
