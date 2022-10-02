@@ -16,11 +16,15 @@ struct StartDelayInfoView: View {
     var body: some View {
         VStack {
             Text("\(Image.startDelay) Start Delay")
-                .font(.system(size: 30).weight(.medium))
+                .font(.system(size: 34).weight(.medium))
                 .foregroundColor(.black)
-            Text("*Not available for running bubbles")
-                .font(.footnote)
-                .foregroundColor(.gray)
+            
+            VStack {
+                Text("*Not available for running bubbles.")
+                Text("Pause bubble first")
+            }
+            .font(.footnote)
+            .foregroundColor(.gray)
             
             
             Divider()
