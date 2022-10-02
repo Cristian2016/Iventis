@@ -169,7 +169,7 @@ struct TextModifier: ViewModifier {
 }
 
 extension View {
-    func textModifier(_ backgroundColor:Color, _ fontSize:CGFloat = 30) -> some View {
+    func textModifier(_ backgroundColor:Color, _ fontSize:CGFloat = 40) -> some View {
         modifier(TextModifier(color: backgroundColor, fontSize: fontSize))
     }
 }
