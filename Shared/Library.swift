@@ -172,6 +172,7 @@ extension Image {
     static let checkmark = Image(systemName: "checkmark")
     static let info = Image(systemName: "info.circle.fill")
     static let remove = Image(systemName: "xmark.circle.fill")
+    static let delete = Image(systemName: "delete.left.fill")
     static let swipeLeft = Image(systemName: "arrow.backward.circle.fill")
     static let tapAndHold = Image(systemName: "smallcircle.filled.circle")
     static let tap = Image(systemName: "circle.fill")
