@@ -26,7 +26,6 @@ struct StartDelayInfoView: View {
             .font(.footnote)
             .foregroundColor(.gray)
             
-            
             Divider()
                         
             VStack {
@@ -44,6 +43,12 @@ struct StartDelayInfoView: View {
                         .resizable()
                         .scaledToFit()
                         .frame(height: 80)
+                        .overlay {
+                            Image.tap
+                                .foregroundColor(gestureColor)
+                                .offset(x: 34)
+                                .font(.system(size: 40))
+                        }
                     Spacer()
                 }
                                 
@@ -93,24 +98,6 @@ struct StartDelayInfoView: View {
         RoundedRectangle(cornerRadius: 4)
             .foregroundColor(.white)
             .frame(width: 56, height: 100)
-    }
-    
-    private var digits:some View {
-        HStack {
-            Spacer()
-            Image(systemName: "5.square.fill")
-            Image(systemName: "10.square.fill")
-                .overlay {
-                    Image.tap
-                      .foregroundColor(.blue)
-                      .font(gestureFont)
-                      .offset(x: 16, y: 16)
-                }
-            Image(systemName: "20.square.fill")
-            Image(systemName: "45.square.fill")
-            Spacer()
-        }
-        .fontWeight(.light)
     }
     
     private var blueBackground:some View {
