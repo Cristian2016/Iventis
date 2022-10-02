@@ -28,6 +28,9 @@ struct MoreOptionsView: View {
     let colorsTableHeight = CGFloat(320)
     var show_StartDelayOption:Bool { bubble.state != .running }
     
+    static let colorTitleSize = CGFloat(40)
+    let checkmarkFont = Font.system(size: 40).weight(.medium)
+    
     // MARK: - Body
     var body: some View {
         ZStack {
@@ -106,7 +109,7 @@ struct MoreOptionsView: View {
                         if colorName == bubble.color {
                             Image.checkmark
                                 .foregroundColor(.white)
-                                .font(.system(size: 40))
+                                .font(checkmarkFont)
                         }
                     }
                     .onTapGesture {
@@ -169,7 +172,7 @@ struct TextModifier: ViewModifier {
 }
 
 extension View {
-    func textModifier(_ backgroundColor:Color, _ fontSize:CGFloat = 40) -> some View {
+    func textModifier(_ backgroundColor:Color, _ fontSize:CGFloat = MoreOptionsView.colorTitleSize) -> some View {
         modifier(TextModifier(color: backgroundColor, fontSize: fontSize))
     }
 }
