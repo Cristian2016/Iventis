@@ -48,7 +48,7 @@ struct StartDelayInfoView: View {
                     Spacer()
                     VStack(alignment: .leading) {
                         Text("\(Image.delete) Delete Delay").fontWeight(.semibold)
-                        Text("\(Image.swipeLeft) Swipe left from right edge")
+                        Text("\(Image.swipeLeft) Swipe left from right screen edge")
                             .foregroundColor(.gray)
                     }
                     Image(systemName: "iphone")
@@ -56,7 +56,7 @@ struct StartDelayInfoView: View {
                             Image.swipeLeft
                                 .font(gestureFont)
                                 .foregroundColor(gestureColor)
-                                .offset(x: 14)
+                                .offset(x: 28)
                         }
                         .font(phoneFont)
                         .foregroundColor(.ultraLightGray)
