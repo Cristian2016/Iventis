@@ -15,7 +15,7 @@ struct AlertHint {
     static let colorChange = AlertHintContent(symbol: "info.circle.fill", titleSymbol: "paintbrush.fill", title: "Change Color", content: "Change the color of a bubble")
 }
 
-struct AlertView: View {
+struct AlertHintView: View {
     @EnvironmentObject var viewModel:ViewModel
     
     let alertContent:AlertHintContent
@@ -58,6 +58,6 @@ struct AlertView: View {
 
 struct AlertView_Previews: PreviewProvider {
     static var previews: some View {
-        AlertView(alertContent: AlertHint.colorChange, dismissAction: {}, buttonAction: {})
+        AlertHintView(alertContent: AlertHint.colorChange, dismissAction: {}, buttonAction: {})
     }
 }

@@ -120,6 +120,9 @@ extension Color {
     static let calendar = Color("calendar")
     static let calendarOff = Color("calendarOff")
     static let background1 = Color("background1")
+    static let ultraLightGray = Color("ultraLightGray")
+    static let gesture = Color("gesture")
+    
     
     static let alertScreenBackground = Color("alertScreenBackground")
     
@@ -168,6 +171,14 @@ extension Image {
     
     static let checkmark = Image(systemName: "checkmark")
     static let info = Image(systemName: "info.circle.fill")
+    static let remove = Image(systemName: "xmark.circle.fill")
+    static let swipeLeft = Image(systemName: "arrow.backward.circle.fill")
+    static let tapAndHold = Image(systemName: "smallcircle.filled.circle")
+    static let tap = Image(systemName: "circle.fill")
+    static let startDelay = Image(systemName: "clock.arrow.circlepath")
+    static let save = Image(systemName: "square.and.arrow.down")
+    
+    static let digits = Image("digits")
 }
 
 func delayExecution(_ delay:DispatchTime, code:@escaping ()->()) {
