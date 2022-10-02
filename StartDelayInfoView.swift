@@ -81,7 +81,7 @@ struct StartDelayInfoView: View {
     private var whiteTable:some View {
         RoundedRectangle(cornerRadius: 4)
             .foregroundColor(.white)
-            .frame(width: 50, height: 90)
+            .frame(width: 56, height: 100)
     }
     
     private var digits:some View {
