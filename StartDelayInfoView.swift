@@ -14,12 +14,15 @@ struct StartDelayInfoView: View {
     let phoneFont = Font.system(size: 180).weight(.ultraLight)
     
     var body: some View {
-        VStack(spacing: 8) {
-            
+        VStack {
             Text("\(Image.startDelay) Start Delay")
-                .font(.system(size: 30))
-            Text("*Start delay unavailable for running bubbles")
+                .font(.system(size: 30).weight(.medium))
+            Text("*Start delay not available for running bubbles")
                 .font(.footnote)
+            
+            Rectangle()
+                .fill(Color.clear)
+                .frame(height: 4)
                         
             VStack {
                 VStack(alignment: .leading) {
@@ -45,14 +48,14 @@ struct StartDelayInfoView: View {
                         Text("\(Image.tap) Tap anywhere outside table")
                             .foregroundColor(.gray)
                     }
-                   
+                    
                 }
                 
                 HStack {
                     Spacer()
                     VStack(alignment: .leading) {
                         Text("\(Image.delete) Delete").fontWeight(.semibold)
-                        Text("\(Image.swipeLeft) Swipe left from right screen edge")
+                        Text("\(Image.swipeLeft) Swipe from screen edge")
                             .foregroundColor(.gray)
                     }
                     Image(systemName: "iphone")
@@ -65,6 +68,7 @@ struct StartDelayInfoView: View {
                         .font(phoneFont)
                         .foregroundColor(.ultraLightGray)
                 }
+                .offset(y: -30)
             }
         }
     }
