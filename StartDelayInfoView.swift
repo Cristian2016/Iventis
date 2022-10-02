@@ -43,8 +43,10 @@ struct StartDelayInfoView: View {
                 Divider()
                 
                 HStack {
-                    Image(systemName: "iphone").font(phoneFont)
-                        .foregroundColor(gestureColor)
+                    Image(systemName: "iphone")
+                        .renderingMode(.original)
+                        .font(phoneFont)
+                        .background { blueBackground }
                         .overlay { whiteTable }
                     VStack(alignment: .leading) {
                         Text("\(Image.save) Save").fontWeight(.semibold)
@@ -62,6 +64,7 @@ struct StartDelayInfoView: View {
                             .foregroundColor(.gray)
                     }
                     Image(systemName: "iphone")
+                        .renderingMode(.original)
                         .overlay {
                             Image.swipeLeft
                                 .font(gestureFont)
@@ -69,7 +72,6 @@ struct StartDelayInfoView: View {
                                 .offset(x: 28)
                         }
                         .font(phoneFont)
-                        .foregroundColor(.ultraLightGray)
                 }
                 .offset(y: -30)
             }
@@ -98,6 +100,12 @@ struct StartDelayInfoView: View {
             Spacer()
         }
         .fontWeight(.light)
+    }
+    
+    private var blueBackground:some View {
+        RoundedRectangle(cornerRadius: 10)
+            .foregroundColor(gestureColor)
+            .frame(width: 90, height: 164)
     }
 }
 
