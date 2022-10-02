@@ -34,7 +34,9 @@ struct MoreOptionsView: View {
     // MARK: - Body
     var body: some View {
         ZStack {
-            whiteBackground.onTapGesture { saveDelay() }
+            whiteBackground
+                .onTapGesture { saveDelay() }
+                .highPriorityGesture(swipeLeft)
             VStack {
                 StartDelaySubview(sdb: bubble.sdb!)
                 colorsViewTitle
@@ -66,7 +68,7 @@ struct MoreOptionsView: View {
                 }
             }
         }
-        .gesture(longPress) //remove delay
+//        .gesture(longPress) //remove delay
     }
     
     // MARK: - Lego
@@ -145,9 +147,9 @@ struct MoreOptionsView: View {
         viewModel.showMoreOptionsInfo = true
     }
     
-    var longPress:some Gesture {
-        LongPressGesture(minimumDuration: 0.3)
-            .onEnded { _ in
+    var swipeLeft:some Gesture {
+        DragGesture(minimumDistance: 10)
+            .onEnded { value in
                 viewModel.removeDelay(for: bubble)
                 
                 //show 0s red alert and hide after 0.7 seconds
@@ -156,6 +158,18 @@ struct MoreOptionsView: View {
                 UserFeedback.doubleHaptic(.heavy)
             }
     }
+    
+//    var longPress:some Gesture {
+//        LongPressGesture(minimumDuration: 0.3)
+//            .onEnded { _ in
+//                viewModel.removeDelay(for: bubble)
+//
+//                //show 0s red alert and hide after 0.7 seconds
+//                viewModel.confirm_NoDelay = true
+//                delayExecution(.now() + 1) { viewModel.confirm_NoDelay = false }
+//                UserFeedback.doubleHaptic(.heavy)
+//            }
+//    }
 }
 
 struct TextModifier: ViewModifier {
