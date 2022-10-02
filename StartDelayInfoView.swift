@@ -32,18 +32,20 @@ struct StartDelayInfoView: View {
                     Spacer()
                 }
                 
-                VStack(alignment: .trailing) {
+                HStack {
+                    Image(systemName: "iphone").font(phoneFont)
+                        .foregroundColor(gestureColor)
+                        .overlay { whiteTable }
                     VStack(alignment: .leading) {
                         Text("\(Image.save) Save Delay").fontWeight(.semibold)
                         Text("\(Image.tap) Tap anywhere outside table")
                             .foregroundColor(.gray)
                     }
-                    Image(systemName: "iphone").font(phoneFont)
-                        .foregroundColor(gestureColor)
-                        .overlay { whiteTable }
+                   
                 }
                 
-                VStack {
+                HStack {
+                    Spacer()
                     VStack(alignment: .leading) {
                         Text("\(Image.remove) Remove").fontWeight(.semibold)
                         Text("\(Image.swipeLeft) Swipe left from right screen edge")
