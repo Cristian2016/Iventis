@@ -25,9 +25,15 @@ struct StartDelayInfoView: View {
             VStack(alignment: .leading) {
                 Text("\(Image.tap) Tap any digit combination").foregroundColor(.gray)
                 
-                digits
-                    .font(.system(size: 70))
-                    .foregroundColor(.lightGray)
+                HStack {
+                    Spacer()
+                    Image.digits
+                        .resizable()
+                        .scaledToFit()
+                        .frame(height: 80)
+                    Spacer()
+                }
+                
                 Divider()
                 HStack {
                     Image(systemName: "iphone").font(phoneFont)
