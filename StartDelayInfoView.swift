@@ -47,21 +47,11 @@ struct StartDelayInfoView: View {
                 }
                 Divider()
                 Text("\(Image.remove) Remove Delay").fontWeight(.semibold)
-                Text("\(Image.tapAndHold) Tap & Hold anywhere or")
-                    .foregroundColor(.gray)
                 Text("\(Image.swipeLeft) Swipe left from right screen edge")
                     .foregroundColor(.gray)
             }
             
             HStack {
-                ZStack {
-                    Image(systemName: "iphone")
-                        .overlay {
-                            Image.tapAndHold
-                                .font(gestureFont)
-                                .foregroundColor(gestureColor)
-                        }
-                }
                 Image(systemName: "iphone")
                     .overlay {
                         Image.swipeLeft
