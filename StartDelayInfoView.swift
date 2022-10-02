@@ -19,9 +19,7 @@ struct StartDelayInfoView: View {
                 .font(.system(size: 30))
             Text("*Start delay is not visible for running bubbles")
                 .font(.footnote)
-            
-            Divider()
-            
+                        
             VStack(alignment: .leading) {
                 Text("\(Image.tap) Tap any digit combination").foregroundColor(.gray)
                 
@@ -34,34 +32,42 @@ struct StartDelayInfoView: View {
                     Spacer()
                 }
                 
-                Divider()
                 HStack {
-                    Image(systemName: "iphone").font(phoneFont)
-                        .foregroundColor(gestureColor)
-                        .overlay { whiteTable }
-                    VStack(alignment: .leading) {
-                        Text("\(Image.save) Save Changes").fontWeight(.semibold)
-                        Text("\(Image.tap) Tap anywhere outside table")
-                            .foregroundColor(.gray)
+                    Spacer()
+                    VStack {
+                        VStack(alignment: .leading) {
+                            Text("\(Image.save) Save Changes").fontWeight(.semibold)
+                            Text("\(Image.tap) Tap anywhere outside table")
+                                .foregroundColor(.gray)
+                        }
+                        Image(systemName: "iphone").font(phoneFont)
+                            .foregroundColor(gestureColor)
+                            .overlay { whiteTable }
+                    }
+                    
+                    Divider()
+                        .frame(height: 300)
+                    
+                    VStack {
+                        VStack(alignment: .leading) {
+                            Text("\(Image.remove) Remove Delay").fontWeight(.semibold)
+                            Text("\(Image.swipeLeft) Swipe left from right screen edge")
+                                .foregroundColor(.gray)
+                        }
+                        Image(systemName: "iphone")
+                            .overlay {
+                                Image.swipeLeft
+                                    .font(gestureFont)
+                                    .foregroundColor(gestureColor)
+                                    .offset(x: 20)
+                            }
+                            .font(phoneFont)
+                            .foregroundColor(.ultraLightGray)
                     }
                 }
-                Divider()
-                Text("\(Image.remove) Remove Delay").fontWeight(.semibold)
-                Text("\(Image.swipeLeft) Swipe left from right screen edge")
-                    .foregroundColor(.gray)
             }
             
-            HStack {
-                Image(systemName: "iphone")
-                    .overlay {
-                        Image.swipeLeft
-                            .font(gestureFont)
-                            .foregroundColor(gestureColor)
-                            .offset(x: 20)
-                    }
-            }
-            .font(phoneFont)
-            .foregroundColor(.ultraLightGray)
+            
         }
         .padding()
     }
