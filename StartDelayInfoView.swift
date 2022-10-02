@@ -17,8 +17,9 @@ struct StartDelayInfoView: View {
         VStack {
             Text("\(Image.startDelay) Start Delay")
                 .font(.system(size: 30).weight(.medium))
-            Text("*Start delay not available for running bubbles")
+            Text("*Not available for running bubbles")
                 .font(.footnote)
+                .foregroundColor(.gray)
             
             Rectangle()
                 .fill(Color.clear)
@@ -38,6 +39,8 @@ struct StartDelayInfoView: View {
                         .frame(height: 80)
                     Spacer()
                 }
+                
+                Divider()
                 
                 HStack {
                     Image(systemName: "iphone").font(phoneFont)
