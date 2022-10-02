@@ -69,7 +69,7 @@ struct StartDelayInfoView: View {
                             Image.swipeLeft
                                 .font(gestureFont)
                                 .foregroundColor(gestureColor)
-                                .offset(x: 32)
+                                .offset(x: 34)
                         }
                         .font(phoneFont)
                 }
