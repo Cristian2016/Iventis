@@ -21,8 +21,10 @@ struct BubbleList: View {
             if isListEmpty { EmptyListView() }
             else {
                 List (results, selection: $vm.rankOfSelectedBubble) { section in
-                    Section { bubble in
-                        ForEach (bubble) { BubbleCell(bubble) }
+                    Section {
+                        ForEach (section) { bubble in
+                            BubbleCell(bubble)
+                        }
 //                        .onMove { source, destination in
 //                            let moveAtTheBottom = (destination == section.count)
 //                            let sourceRank = section[source.first!].rank
