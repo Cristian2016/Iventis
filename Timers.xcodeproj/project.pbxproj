@@ -22,6 +22,7 @@
 		1F377E1F287EB2F000E43598 /* AlwaysOnDisplaySymbol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F377E1E287EB2F000E43598 /* AlwaysOnDisplaySymbol.swift */; };
 		1F387CEB2830082000F6B81D /* UpDownArrowsButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F387CEA2830082000F6B81D /* UpDownArrowsButton.swift */; };
 		1F4326B1282AFB19002B6092 /* ScaleDownButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4326B0282AFB19002B6092 /* ScaleDownButton.swift */; };
+		1F477CA928EAB21900B4F965 /* AddStickyNoteQuickButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F477CA828EAB21900B4F965 /* AddStickyNoteQuickButton.swift */; };
 		1F48F55A286AE5B30071386A /* EmptyNote_InfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F48F559286AE5B30071386A /* EmptyNote_InfoView.swift */; };
 		1F4DF99D282B82EF00D54BE8 /* CircleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4DF99C282B82EF00D54BE8 /* CircleButton.swift */; };
 		1F542F92286D757000403F13 /* StickyNoteList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F542F91286D757000403F13 /* StickyNoteList.swift */; };
@@ -132,6 +133,7 @@
 		1F377E1E287EB2F000E43598 /* AlwaysOnDisplaySymbol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlwaysOnDisplaySymbol.swift; sourceTree = "<group>"; };
 		1F387CEA2830082000F6B81D /* UpDownArrowsButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpDownArrowsButton.swift; sourceTree = "<group>"; };
 		1F4326B0282AFB19002B6092 /* ScaleDownButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScaleDownButton.swift; sourceTree = "<group>"; };
+		1F477CA828EAB21900B4F965 /* AddStickyNoteQuickButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddStickyNoteQuickButton.swift; sourceTree = "<group>"; };
 		1F48F559286AE5B30071386A /* EmptyNote_InfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyNote_InfoView.swift; sourceTree = "<group>"; };
 		1F4DF99C282B82EF00D54BE8 /* CircleButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleButton.swift; sourceTree = "<group>"; };
 		1F542F91286D757000403F13 /* StickyNoteList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StickyNoteList.swift; sourceTree = "<group>"; };
@@ -276,6 +278,7 @@
 			children = (
 				1FB5D8D928E9BF0500DD522A /* GestureLabel.swift */,
 				1FB5D8D728E96CBD00DD522A /* StartDelayInfoView.swift */,
+				1F477CA828EAB21900B4F965 /* AddStickyNoteQuickButton.swift */,
 				1FB5D8D528E8276D00DD522A /* StickyNoteListInfoView.swift */,
 				1FB5D8D328E81CD900DD522A /* InfoButton.swift */,
 				1FFC93E228E4245900451FB3 /* CalEventCreatedConfirmationView.swift */,
@@ -568,6 +571,7 @@
 				1FFC8BAA28142F040059EF2E /* Session.swift in Sources */,
 				1F5F4A952809450A00AF3442 /* Library.swift in Sources */,
 				1FFC8BB628142F040059EF2E /* Pair.swift in Sources */,
+				1F477CA928EAB21900B4F965 /* AddStickyNoteQuickButton.swift in Sources */,
 				1F5987A5286B5F8900CDB54C /* PairSavedNote Properties.swift in Sources */,
 				1FB5D8D628E8276D00DD522A /* StickyNoteListInfoView.swift in Sources */,
 				1F6420062820186D00413E31 /* PairCell.swift in Sources */,

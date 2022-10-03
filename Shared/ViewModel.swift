@@ -12,6 +12,8 @@ import CoreData
 
 
 class ViewModel: ObservableObject {
+    @Published var showAddTagButton_bRank:Int? = nil
+    
     ///MoreOptionsView
     @Published var theOneAndOnlyEditedSDB:SDB? //StartDelayBubble
     
@@ -137,6 +139,10 @@ class ViewModel: ObservableObject {
        removeDelay(for: bubble)
         
         let startDelayCompensation = delta ?? 0
+        
+        if bubble.state == .brandNew || bubble.state == .paused {
+            showAddTagButton_bRank = Int(bubble.rank)
+        }
         
         switch bubble.state {
             case .brandNew: /* changes to .running */
