@@ -9,6 +9,7 @@ import Foundation
 import SwiftUI
 
 class BubbleTimer {
+    // MARK: - Private
     deinit { killTimer() }
     
     ///event handler called every second
