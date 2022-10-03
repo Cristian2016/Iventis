@@ -92,6 +92,7 @@ struct StartDelayInfoView: View {
                 .offset(y: -30)
             }
         }
+        .ignoresSafeArea()
     }
     
     private var whiteTable:some View {
