@@ -8,6 +8,55 @@
 
 import SwiftUI
 
+struct ThreeLabels: View {
+    var body: some View {
+        GeometryReader { geo in
+            VStack {
+                Spacer()
+                HStack(spacing: geo.size.width * UI.bCell.circleSpacingRatio) {
+                    circleBackground
+                        .overlay { componentsText("12") }
+                    circleBackground
+                        .overlay { componentsText("34") }
+                    circleBackground
+                        .overlay { componentsText("59") }
+                }
+                .font(.system(size: 60))
+                Spacer()
+            }
+        }
+        .padding([.leading, .trailing], 3)
+    }
+    
+    func componentsText(_ text:String) -> some View {
+        Text(text).foregroundColor(.white)
+    }
+    
+    private var circleBackground:some View {
+        Circle().fill(Color.clear)
+    }
+}
+
+struct ThreeCircles: View {
+    let color:Color
+    
+    var body: some View {
+        GeometryReader { geo in
+            VStack {
+                Spacer()
+                HStack(spacing: geo.size.width * UI.bCell.circleSpacingRatio) {
+                    Circle()
+                    Circle()
+                    Circle()
+                }
+                Spacer()
+            }
+            .foregroundColor(color)
+        }
+//        .padding([.leading, .trailing], 3)
+    }
+}
+
 struct BubbleCell: View {
     // MARK: - Dependencies
     @StateObject var bubble:Bubble
@@ -362,10 +411,10 @@ extension BubbleCell {
     private var bubbleShape: some View {
         if bubble.hasWidget {
             RoundedRectangle(cornerRadius: 20)
-                .fill(Color.bubbleColor(forName: bubble.color ?? "clear"))
+                .fill(Color.bubbleColor(forName: bubble.color))
         } else {
             Circle()
-                .fill(Color.bubbleColor(forName: bubble.color ?? "clear"))
+                .fill(Color.bubbleColor(forName: bubble.color))
         }
     }
 }

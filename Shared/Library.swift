@@ -10,6 +10,13 @@ import UIKit
 #endif
 import SwiftUI
 
+struct UI {
+    ///BubbleCell
+    struct bCell {
+        static let circleSpacingRatio = -CGFloat(0.11)
+    }
+}
+
 extension Array {
     func twoDArray(_ rows/* count */: Int) -> [[Element]] {
         var finalResult = [[Element]]()
