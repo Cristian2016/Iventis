@@ -5,57 +5,7 @@
 //  Created by Cristian Lapusan on 13.04.2022.
 // https://stackoverflow.com/questions/58284994/swiftui-how-to-handle-both-tap-long-press-of-button
 
-
 import SwiftUI
-
-struct ThreeLabels: View {
-    var body: some View {
-        GeometryReader { geo in
-            VStack {
-                Spacer()
-                HStack(spacing: geo.size.width * UI.bCell.circleSpacingRatio) {
-                    circleBackground
-                        .overlay { componentsText("12") }
-                    circleBackground
-                        .overlay { componentsText("34") }
-                    circleBackground
-                        .overlay { componentsText("59") }
-                }
-                .font(.system(size: 60))
-                Spacer()
-            }
-        }
-        .padding([.leading, .trailing], 3)
-    }
-    
-    func componentsText(_ text:String) -> some View {
-        Text(text).foregroundColor(.white)
-    }
-    
-    private var circleBackground:some View {
-        Circle().fill(Color.clear)
-    }
-}
-
-struct ThreeCircles: View {
-    let color:Color
-    
-    var body: some View {
-        GeometryReader { geo in
-            VStack {
-                Spacer()
-                HStack(spacing: geo.size.width * UI.bCell.circleSpacingRatio) {
-                    Circle()
-                    Circle()
-                    Circle()
-                }
-                Spacer()
-            }
-            .foregroundColor(color)
-        }
-//        .padding([.leading, .trailing], 3)
-    }
-}
 
 struct BubbleCell: View {
     // MARK: - Dependencies
@@ -70,8 +20,8 @@ struct BubbleCell: View {
         
         VStack {
             ZStack {
-                threeLabelsBackgroundView
-                threeLabelsView
+                threeCircles
+                timeComponentsView
                 let addPositionEmitterView = showDeleteActionView || showDetailView
                 if addPositionEmitterView { cellLowEmitterView.background {
                     GeometryReader {
@@ -136,7 +86,8 @@ struct BubbleCell: View {
     }
     
     // MARK: - Legos
-    var threeLabelsBackgroundView: some View {
+    ///timeComponentsView background
+    private var threeCircles: some View {
         HStack (spacing: BubbleCell.metrics.spacing) {
             /* Hr */ bubbleShape.opacity(hrOpacity)
             /* Min */ bubbleShape.opacity(minOpacity)
@@ -144,7 +95,7 @@ struct BubbleCell: View {
         }
     }
     
-    var threeLabelsView: some View {
+    private var timeComponentsView: some View {
         HStack (spacing: BubbleCell.metrics.spacing) {
             //HOURS
             Circle().fill(Color.clear)
