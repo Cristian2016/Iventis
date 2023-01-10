@@ -52,6 +52,10 @@ struct BubbleCell: View {
             } //hundredths view
         }
         .onAppear { resumeObserveTimer() }
+        //used to compute spacing
+        .onReceive(NotificationCenter.default.publisher(for: UIDevice.orientationDidChangeNotification)) { _ in
+            
+        }
           //gestures
         .swipeActions(edge: .leading, allowsFullSwipe: true) {
             
@@ -339,9 +343,9 @@ extension BubbleCell {
             }
         }()
         let fontRatio = CGFloat(0.42)
-        let spacingRatio = CGFloat(-0.28)
+        let spacingRatio = CGFloat(-0.14)
         
-        lazy var spacing = circleDiameter * spacingRatio
+        lazy var spacing = UIScreen.size.width * spacingRatio
         lazy var fontSize = circleDiameter * fontRatio
         lazy var hundredthsFontSize = circleDiameter / 6
         

@@ -80,26 +80,7 @@ struct TimersApp: App {
             .ignoresSafeArea()
             .environment(\.managedObjectContext, viewContext)
             .environmentObject(vm)  /* inject ViewModel for entire view hierarchy */
-            .onChange(of: scenePhase) {
-                switch $0 {
-                    case .active: handleBecomeActive()
-                    case .background: handleEnterBackground()
-                    case .inactive: handleInactivePhase()
-                    @unknown default: fatalError()
-                }
-            }
-            .onAppear {
-                //                delayExecution(.now() + 2) { firstAppLaunchEver = false }
-                //
-                //                firstAppLaunchEver = false
-                
-                delayExecution(.now() + 5) {
-                    print("key \(UserDefaults.shared.value(forKey: UserDefaults.Key.firstAppLaunchEver) as? Bool)")
-                    //                    print("key \(UserDefaults.shared.bool(forKey: UserDefaults.Key.firstAppLaunchEver))")
-                    //                    vm.makeBubblesOnFirstAppLaunchEver()
-                }
-                
-            }
+            .onChange(of: scenePhase) { handleScenePhaseChange($0) }
         }
     }
     
@@ -112,6 +93,15 @@ struct TimersApp: App {
     }
     
     // MARK: - Methods
+    private func handleScenePhaseChange(_ scenePhase:ScenePhase) {
+        switch scenePhase {
+            case .active: handleBecomeActive()
+            case .background: handleEnterBackground()
+            case .inactive: handleInactivePhase()
+            @unknown default: fatalError()
+        }
+    }
+    
     ///called on app launch or returning from background
     ///also called when app returns from inactive state
     func handleBecomeActive() { vm.bubbleTimer(.start) }
