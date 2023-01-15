@@ -9,6 +9,7 @@ import Foundation
 import SwiftUI
 import Combine
 import CoreData
+import MyPackage
 
 
 class ViewModel: ObservableObject {

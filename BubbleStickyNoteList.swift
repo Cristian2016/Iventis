@@ -10,6 +10,7 @@
 //1 ⚠️ this little shit prevents app from crashing when textInput is dragged around on screen
 
 import SwiftUI
+import MyPackage
 
 struct BubbleStickyNoteList: View {
     let bubble:Bubble  /* ⚠️ do not use @StateObject bubble:Bubble! because each time Bubble.bubbleCell_Components update, bubble will emit and body will get recomputed each mother fucking second!!!

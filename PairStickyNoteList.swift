@@ -10,6 +10,7 @@
 //1 ⚠️ this little shit prevents app from crashing when textInput is dragged around on screen
 
 import SwiftUI
+import MyPackage
 
 struct PairStickyNoteList: View {
     let pair:Pair

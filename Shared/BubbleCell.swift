@@ -6,6 +6,7 @@
 // https://stackoverflow.com/questions/58284994/swiftui-how-to-handle-both-tap-long-press-of-button
 
 import SwiftUI
+import MyPackage
 
 struct BubbleCell: View {
     // MARK: - Dependencies
@@ -75,9 +76,7 @@ struct BubbleCell: View {
             //delete
             Button {
                 vm.showDeleteAction_bRank = Int(bubble.rank)
-                delayExecution(.now() + 0.2) {
-                    vm.isDetailViewShowing = false
-                }
+                delayExecution(.now() + 0.2) { vm.isDetailViewShowing = false }
             }
         label: { Label { Text("Delete") }
             icon: { Image.trash } }.tint(.red)

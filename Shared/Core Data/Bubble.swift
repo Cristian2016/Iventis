@@ -9,6 +9,7 @@
 import Foundation
 import CoreData
 import SwiftUI
+import MyPackage
 
 public class Bubble: NSManagedObject {
     

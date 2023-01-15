@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import MyPackage
 
 struct ExitFocusView: View {
     @Binding var predicate:NSPredicate?

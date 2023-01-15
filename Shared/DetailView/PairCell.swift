@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import MyPackage
 
 struct PairCell: View {
     @EnvironmentObject var viewModel:ViewModel

@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import MyPackage
 
 @main
 struct TimersApp: App {
@@ -28,9 +29,9 @@ struct TimersApp: App {
     var body: some Scene {
         WindowGroup {
             ZStack {
-                NavigationSplitView {
+                NavigationSplitView { //Sidebar
                     ViewHierarchy()
-                } detail: {
+                } detail: { //DetailView
                     VStack {
                         if let rank = vm.rankOfSelectedBubble {
                             //bubbleCell for iOS

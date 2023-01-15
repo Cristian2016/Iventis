@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import MyPackage
 
 struct DetailView: View {
     let rank:Int?

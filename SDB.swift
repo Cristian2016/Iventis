@@ -9,6 +9,7 @@
 import Foundation
 import CoreData
 import SwiftUI
+import MyPackage
 
 ///StartDelay_Bubble
 public class SDB: NSManagedObject {

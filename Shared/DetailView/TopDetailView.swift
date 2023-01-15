@@ -7,6 +7,7 @@
 // how to detect scroll view stop https://stackoverflow.com/questions/65062590/swiftui-detect-when-scrollview-has-finished-scrolling
 
 import SwiftUI
+import MyPackage
 
 struct TopDetailView:View {
     @FetchRequest var sessions:FetchedResults<Session>

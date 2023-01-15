@@ -1,4 +1,5 @@
 import SwiftUI
+import MyPackage
 
 struct AlwaysOnDisplaySymbol: View {
     @EnvironmentObject var viewModel:ViewModel

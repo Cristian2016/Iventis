@@ -21,6 +21,7 @@
 		1F20807F2836111600FD35D6 /* BSavedNote Properties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F2080792836111600FD35D6 /* BSavedNote Properties.swift */; };
 		1F377E1F287EB2F000E43598 /* AlwaysOnDisplaySymbol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F377E1E287EB2F000E43598 /* AlwaysOnDisplaySymbol.swift */; };
 		1F387CEB2830082000F6B81D /* UpDownArrowsButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F387CEA2830082000F6B81D /* UpDownArrowsButton.swift */; };
+		1F42B99D2973E34E0024DB5F /* Code Snippets.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 1F42B99C2973E34E0024DB5F /* Code Snippets.rtf */; };
 		1F4326B1282AFB19002B6092 /* ScaleDownButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4326B0282AFB19002B6092 /* ScaleDownButton.swift */; };
 		1F477CA928EAB21900B4F965 /* AddStickyNoteQuickButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F477CA828EAB21900B4F965 /* AddStickyNoteQuickButton.swift */; };
 		1F48F55A286AE5B30071386A /* EmptyNote_InfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F48F559286AE5B30071386A /* EmptyNote_InfoView.swift */; };
@@ -36,7 +37,6 @@
 		1F5F4A6F28093FF800AF3442 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1F5F4A6D28093FF800AF3442 /* Model.xcdatamodeld */; };
 		1F5F4A732809409600AF3442 /* Bubble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5F4A712809409600AF3442 /* Bubble.swift */; };
 		1F5F4A752809409600AF3442 /* Bubble Properties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5F4A722809409600AF3442 /* Bubble Properties.swift */; };
-		1F5F4A952809450A00AF3442 /* Library.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5F4A942809450A00AF3442 /* Library.swift */; };
 		1F5F4A992809456E00AF3442 /* BubbleList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5F4A982809456E00AF3442 /* BubbleList.swift */; };
 		1F5F4A9D280945C700AF3442 /* BubbleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5F4A9C280945C700AF3442 /* BubbleCell.swift */; };
 		1F61BE052822BAAA00B773F9 /* DeleteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F61BE042822BAAA00B773F9 /* DeleteView.swift */; };
@@ -60,13 +60,14 @@
 		1F9BE0A9280BE14100F87EFA /* PaletteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F9BE0A8280BE14100F87EFA /* PaletteView.swift */; };
 		1F9BE0AD280C6AB000F87EFA /* TapHold.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F9BE0AC280C6AB000F87EFA /* TapHold.swift */; };
 		1FA355CB2832186100F73111 /* CalendarManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA355CA2832186100F73111 /* CalendarManager.swift */; };
+		1FA377E82972FE75005ACD41 /* Library.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA377E72972FE75005ACD41 /* Library.swift */; };
 		1FA8346C2850A57A003F4D61 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F5F4A7D280941AA00AF3442 /* WidgetKit.framework */; };
 		1FA8346D2850A57A003F4D61 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F5F4A7F280941AA00AF3442 /* SwiftUI.framework */; };
 		1FA834702850A57A003F4D61 /* Widgets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA8346F2850A57A003F4D61 /* Widgets.swift */; };
 		1FA834732850A57C003F4D61 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1FA834722850A57C003F4D61 /* Assets.xcassets */; };
 		1FA834752850A57C003F4D61 /* Widgets.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 1FA834712850A57A003F4D61 /* Widgets.intentdefinition */; };
 		1FA834762850A57C003F4D61 /* Widgets.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 1FA834712850A57A003F4D61 /* Widgets.intentdefinition */; };
-		1FA834792850A57C003F4D61 /* WidgetsExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 1FA8346B2850A57A003F4D61 /* WidgetsExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		1FA834792850A57C003F4D61 /* WidgetsExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 1FA8346B2850A57A003F4D61 /* WidgetsExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		1FA8F87E28367B7A00394B59 /* BubbleNote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA8F87D28367B7A00394B59 /* BubbleNote.swift */; };
 		1FB3178F286ACB48006BBE82 /* Note_InfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB3178E286ACB48006BBE82 /* Note_InfoView.swift */; };
 		1FB5D8D428E81CD900DD522A /* InfoButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB5D8D328E81CD900DD522A /* InfoButton.swift */; };
@@ -76,6 +77,7 @@
 		1FB7D57C2862F0300085C2BE /* PlusButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB7D57B2862F0300085C2BE /* PlusButton.swift */; };
 		1FCF01B3287CBA74009DC95C /* DelayStartSymbol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FCF01B2287CBA74009DC95C /* DelayStartSymbol.swift */; };
 		1FCF0C662816F3F600AA1FAA /* EmptyListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FCF0C652816F3F600AA1FAA /* EmptyListView.swift */; };
+		1FD15F802972F5D100852073 /* MyPackage in Frameworks */ = {isa = PBXBuildFile; productRef = 1FD15F7F2972F5D100852073 /* MyPackage */; };
 		1FD21865281D9AB700B43403 /* ExitFocusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD21864281D9AB700B43403 /* ExitFocusView.swift */; };
 		1FD2DD972869AB4900831978 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1F5F4A4D28093FAF00AF3442 /* Assets.xcassets */; };
 		1FDB9F12287DA5040028E121 /* SDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FDB9F0C287DA5040028E121 /* SDB.swift */; };
@@ -104,15 +106,15 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		1F5F4A90280941AC00AF3442 /* Embed App Extensions */ = {
+		1F5F4A90280941AC00AF3442 /* Embed Foundation Extensions */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				1FA834792850A57C003F4D61 /* WidgetsExtension.appex in Embed App Extensions */,
+				1FA834792850A57C003F4D61 /* WidgetsExtension.appex in Embed Foundation Extensions */,
 			);
-			name = "Embed App Extensions";
+			name = "Embed Foundation Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
@@ -132,6 +134,7 @@
 		1F2080792836111600FD35D6 /* BSavedNote Properties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BSavedNote Properties.swift"; sourceTree = "<group>"; };
 		1F377E1E287EB2F000E43598 /* AlwaysOnDisplaySymbol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlwaysOnDisplaySymbol.swift; sourceTree = "<group>"; };
 		1F387CEA2830082000F6B81D /* UpDownArrowsButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpDownArrowsButton.swift; sourceTree = "<group>"; };
+		1F42B99C2973E34E0024DB5F /* Code Snippets.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = "Code Snippets.rtf"; sourceTree = "<group>"; };
 		1F4326B0282AFB19002B6092 /* ScaleDownButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScaleDownButton.swift; sourceTree = "<group>"; };
 		1F477CA828EAB21900B4F965 /* AddStickyNoteQuickButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddStickyNoteQuickButton.swift; sourceTree = "<group>"; };
 		1F48F559286AE5B30071386A /* EmptyNote_InfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyNote_InfoView.swift; sourceTree = "<group>"; };
@@ -151,7 +154,6 @@
 		1F5F4A7D280941AA00AF3442 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		1F5F4A7F280941AA00AF3442 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
 		1F5F4A92280941D900AF3442 /* Timers (iOS).entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Timers (iOS).entitlements"; sourceTree = "<group>"; };
-		1F5F4A942809450A00AF3442 /* Library.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Library.swift; sourceTree = "<group>"; };
 		1F5F4A982809456E00AF3442 /* BubbleList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BubbleList.swift; sourceTree = "<group>"; };
 		1F5F4A9C280945C700AF3442 /* BubbleCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BubbleCell.swift; sourceTree = "<group>"; };
 		1F61BE042822BAAA00B773F9 /* DeleteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteView.swift; sourceTree = "<group>"; };
@@ -177,6 +179,7 @@
 		1F9BE0AC280C6AB000F87EFA /* TapHold.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapHold.swift; sourceTree = "<group>"; };
 		1FA355CA2832186100F73111 /* CalendarManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarManager.swift; sourceTree = "<group>"; };
 		1FA355CE2832238E00F73111 /* Timers--iOS--Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Timers--iOS--Info.plist"; sourceTree = "<group>"; };
+		1FA377E72972FE75005ACD41 /* Library.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Library.swift; sourceTree = "<group>"; };
 		1FA8346B2850A57A003F4D61 /* WidgetsExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = WidgetsExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		1FA8346F2850A57A003F4D61 /* Widgets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Widgets.swift; sourceTree = "<group>"; };
 		1FA834712850A57A003F4D61 /* Widgets.intentdefinition */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; path = Widgets.intentdefinition; sourceTree = "<group>"; };
@@ -211,6 +214,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1FD15F802972F5D100852073 /* MyPackage in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -277,6 +281,8 @@
 			isa = PBXGroup;
 			children = (
 				1FB5D8D928E9BF0500DD522A /* GestureLabel.swift */,
+				1F42B99C2973E34E0024DB5F /* Code Snippets.rtf */,
+				1FA377E72972FE75005ACD41 /* Library.swift */,
 				1FB5D8D728E96CBD00DD522A /* StartDelayInfoView.swift */,
 				1F477CA828EAB21900B4F965 /* AddStickyNoteQuickButton.swift */,
 				1FB5D8D528E8276D00DD522A /* StickyNoteListInfoView.swift */,
@@ -310,7 +316,6 @@
 				1F1CF2F1286B5AD2007102F2 /* InfoViews */,
 				1F5F4A4A28093FAD00AF3442 /* TimersApp.swift */,
 				1F9B6AEF280950D600C0A725 /* ViewModel.swift */,
-				1F5F4A942809450A00AF3442 /* Library.swift */,
 				1F5F4A982809456E00AF3442 /* BubbleList.swift */,
 				1F5F4A93280941FC00AF3442 /* Core Data */,
 				1F97B7E02809B331002FFCA3 /* Assets */,
@@ -416,7 +421,7 @@
 				1F5F4A4E28093FAF00AF3442 /* Sources */,
 				1F5F4A4F28093FAF00AF3442 /* Frameworks */,
 				1F5F4A5028093FAF00AF3442 /* Resources */,
-				1F5F4A90280941AC00AF3442 /* Embed App Extensions */,
+				1F5F4A90280941AC00AF3442 /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
@@ -424,6 +429,9 @@
 				1FA834782850A57C003F4D61 /* PBXTargetDependency */,
 			);
 			name = "Timers (iOS)";
+			packageProductDependencies = (
+				1FD15F7F2972F5D100852073 /* MyPackage */,
+			);
 			productName = "Timers (iOS)";
 			productReference = 1F5F4A5228093FAF00AF3442 /* Timers.app */;
 			productType = "com.apple.product-type.application";
@@ -453,7 +461,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1400;
-				LastUpgradeCheck = 1330;
+				LastUpgradeCheck = 1420;
 				TargetAttributes = {
 					1F5F4A5128093FAF00AF3442 = {
 						CreatedOnToolsVersion = 13.3;
@@ -472,6 +480,9 @@
 				Base,
 			);
 			mainGroup = 1F5F4A4228093FAC00AF3442;
+			packageReferences = (
+				1FD15F7E2972F5D100852073 /* XCRemoteSwiftPackageReference "MyPackage" */,
+			);
 			productRefGroup = 1F5F4A5328093FAF00AF3442 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -487,6 +498,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1F42B99D2973E34E0024DB5F /* Code Snippets.rtf in Resources */,
 				1F5F4A6328093FAF00AF3442 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -554,6 +566,7 @@
 				1F1CF2F3286B5BD8007102F2 /* PairStickyNoteList.swift in Sources */,
 				1F5F4A6F28093FF800AF3442 /* Model.xcdatamodeld in Sources */,
 				1F9BE0AD280C6AB000F87EFA /* TapHold.swift in Sources */,
+				1FA377E82972FE75005ACD41 /* Library.swift in Sources */,
 				1FA355CB2832186100F73111 /* CalendarManager.swift in Sources */,
 				1FB5D8D828E96CBD00DD522A /* StartDelayInfoView.swift in Sources */,
 				1FDB9F14287DA5040028E121 /* SDBPair.swift in Sources */,
@@ -569,7 +582,6 @@
 				1FA834762850A57C003F4D61 /* Widgets.intentdefinition in Sources */,
 				1F0373C428DF3D36005CE8D3 /* CalOnConfirmationView.swift in Sources */,
 				1FFC8BAA28142F040059EF2E /* Session.swift in Sources */,
-				1F5F4A952809450A00AF3442 /* Library.swift in Sources */,
 				1FFC8BB628142F040059EF2E /* Pair.swift in Sources */,
 				1F477CA928EAB21900B4F965 /* AddStickyNoteQuickButton.swift in Sources */,
 				1F5987A5286B5F8900CDB54C /* PairSavedNote Properties.swift in Sources */,
@@ -639,6 +651,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
@@ -697,6 +710,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -878,6 +892,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		1FD15F7E2972F5D100852073 /* XCRemoteSwiftPackageReference "MyPackage" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Cristian2016/MyPackage.git";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		1FD15F7F2972F5D100852073 /* MyPackage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1FD15F7E2972F5D100852073 /* XCRemoteSwiftPackageReference "MyPackage" */;
+			productName = MyPackage;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		1F5F4A6D28093FF800AF3442 /* Model.xcdatamodeld */ = {

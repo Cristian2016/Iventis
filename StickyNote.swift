@@ -8,6 +8,7 @@
 //1 transaction disables an animation
 
 import SwiftUI
+import MyPackage
 
 struct StickyNote<Content:View>: View {
     // MARK: - Data and Action

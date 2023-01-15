@@ -11,7 +11,7 @@ import Combine
 
 struct BubbleList: View {
     @Environment(\.managedObjectContext) private var viewContext
-    @EnvironmentObject private var vm:ViewModel
+    @EnvironmentObject private var viewModel:ViewModel
     @SectionedFetchRequest var results:SectionedFetchResults<Bool, Bubble>
     
     
@@ -20,24 +20,13 @@ struct BubbleList: View {
         ZStack {
             if isListEmpty { EmptyListView() }
             else {
-                List (results, selection: $vm.rankOfSelectedBubble) { section in
+                List (results, selection: $viewModel.rankOfSelectedBubble) { section in
                     Section {
                         ForEach (section) { bubble in
                             BubbleCell(bubble)
                         }
-//                        .onMove { source, destination in
-//                            let moveAtTheBottom = (destination == section.count)
-//                            let sourceRank = section[source.first!].rank
-//
-//                            if moveAtTheBottom {
-//                                let destRank = section[destination - 1].rank
-//                                vm.reorderRanks(sourceRank, destRank, true)
-//                            } else {
-//                                let destRank = section[destination].rank
-//                                vm.reorderRanks(sourceRank, destRank)
-//                            }
-//                        }
-                        .onMove(perform: vm.allowOnMove ? onMoveClosure : nil)
+                        .onMove { source, dest in /* Code Snippets file  */}
+                        .onMove(perform: viewModel.allowOnMove ? onMoveClosure : nil)
                     } header: { headerTitle(for: section.id.description) }
                         .listRowSeparator(.hidden)
                     
@@ -57,16 +46,16 @@ struct BubbleList: View {
             }
             .padding(EdgeInsets(top: 8, leading: 0, bottom: 0, trailing: 20))
             
-            if !notesShowing { LeftStrip($vm.isPaletteShowing, isListEmpty) }
+            if !notesShowing { LeftStrip($viewModel.isPaletteShowing, isListEmpty) }
             
-            PaletteView($vm.isPaletteShowing)
+            PaletteView($viewModel.isPaletteShowing)
         }
         .onPreferenceChange(BubbleCellLow_Key.self) { new in
             let frame = new.frame
             if frame == .zero { return }
             
-            self.vm.deleteViewOffset =
-            vm.compute_deleteView_YOffset(for: new.frame)
+            self.viewModel.deleteViewOffset =
+            viewModel.compute_deleteView_YOffset(for: new.frame)
         }
     }
     
@@ -153,7 +142,7 @@ struct BubbleCellLow_Key:PreferenceKey {
 
 // MARK: - Little Helpers
 extension BubbleList {
-    fileprivate var notesShowing:Bool { vm.notesList_bRank != nil }
+    fileprivate var notesShowing:Bool { viewModel.notesList_bRank != nil }
         
     fileprivate var isListEmpty:Bool { results.isEmpty }
 }

@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import MyPackage
 
 ///Used to change 1.startDelay or 2.bubble's color
 struct MoreOptionsView: View {
