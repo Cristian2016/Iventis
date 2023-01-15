@@ -38,8 +38,8 @@ struct TimersApp: App {
                         if let rank = vm.rankOfSelectedBubble {
                             VStack {
                                 List {
-                                    BubbleCell(vm.bubble(for: rank)!)
-                                        .listRowSeparator(.hidden)
+                                    let bubble = vm.bubble(for: rank)!
+                                    BubbleCell(bubble).listRowSeparator(.hidden)
                                 }
                                 .scrollDisabled(true)
                                 .listStyle(.plain)
