@@ -10,14 +10,14 @@ import MyPackage
 
 @main
 struct TimersApp: App {
-    static var calManager:CalendarManager!
+    static var calManager:CalendarManager! /* set at init() */
     
     //store firstAppLaunchEver key in the shared UserDefaults, NOT in UserDefaults.standard
     @AppStorage(UserDefaults.Key.firstAppLaunchEver, store: UserDefaults.shared)
     var firstAppLaunchEver = true
     
-    var deleteViewOffsetComputed:Bool { vm.deleteViewOffset != nil }
-    fileprivate var deleteViewShowing:Bool { vm.showDeleteAction_bRank != nil }
+    var showDeleteActionOffsetComputed:Bool { vm.deleteViewOffset != nil }
+    fileprivate var showDeleteAction:Bool { vm.showDeleteAction_bRank != nil }
     
     fileprivate var bubbleNotesShowing:Bool { vm.notesList_bRank != nil }
     
@@ -29,41 +29,35 @@ struct TimersApp: App {
     var body: some Scene {
         WindowGroup {
             ZStack {
-                NavigationSplitView { //Sidebar
-                    ViewHierarchy()
-                } detail: { //DetailView
-                    VStack {
+                if UIDevice.isIPad { //iPad
+                    
+                } else { //iPhone
+                    NavigationSplitView { //Sidebar
+                        ViewHierarchy()
+                    } detail: { //DetailView
                         if let rank = vm.rankOfSelectedBubble {
-                            //bubbleCell for iOS
-                            if !UIDevice.isIPad {
+                            VStack {
                                 List {
-                                    if let bubble = vm.bubble(for: rank) {
-                                        BubbleCell(bubble).listRowSeparator(.hidden)
-                                    }
+                                    BubbleCell(vm.bubble(for: rank)!)
+                                        .listRowSeparator(.hidden)
                                 }
                                 .scrollDisabled(true)
                                 .listStyle(.plain)
                                 .frame(height: 160)
+                                DetailView(rank)
                             }
-                            DetailView(vm.rankOfSelectedBubble)
-                            
-                        } else {
-                            VStack {
-                                Text("Bubble Detail")
-                                Text("Select a Bubble")
-                            }
+                            .padding([.top], 2)
                         }
                     }
-                    .padding([.top], 2)
                 }
-                .accentColor(.label)
                 
-                if deleteViewOffsetComputed && deleteViewShowing {
+                if showDeleteActionOffsetComputed && showDeleteAction {
                     let bubble = vm.bubble(for: vm.showDeleteAction_bRank!)
                     DeleteView(bubble)
                 }
                 
                 if bubbleNotesShowing { BubbleStickyNoteList($vm.notesList_bRank) }
+                
                 if let pair = vm.pairOfNotesList { PairStickyNoteList(pair) }
                 
                 if let sdb = vm.theOneAndOnlyEditedSDB, let bubble = sdb.bubble {
