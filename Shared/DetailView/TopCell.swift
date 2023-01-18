@@ -8,9 +8,9 @@
 import SwiftUI
 
 struct TopCell: View {
-    @StateObject var session:Session
-    @State var isSelected = false
-    @Environment (\.colorScheme) var colorScheme
+    @StateObject private var session:Session
+    @State private var isSelected = false
+    @Environment (\.colorScheme) private var colorScheme
     
     var color:Color
     //black if bubble is red orange magenta bubblegum
@@ -18,7 +18,7 @@ struct TopCell: View {
     let sessionCount:Int
     let sessionRank:String
     let duration: Float.TimeComponentsAsStrings?
-    
+        
     private let topCellHeight = CGFloat(130)
     private let roundedRectRadius = CGFloat(10)
     private let strokeWidth = CGFloat(4)
