@@ -58,7 +58,7 @@ struct PairCell: View {
     
     // MARK: - Little Things
     let contentFrameGap = CGFloat(4) //how much gap between content and its enclosing frame
-    let durationFont = Font.system(size: 22, weight: .medium)
+    let durationFont = Font.system(size: 20, weight: .medium)
     let durationComponentsFont = Font.system(size: 19, weight: .medium)
     
     var body: some View {
@@ -151,7 +151,7 @@ struct PairCell: View {
     private var pairStartView: some View {
         HStack {
             Text(DateFormatter.time.string(from: pair.start ?? Date()))
-                .font(.monospaced(.system(size: 22))())
+                .font(.monospaced(.system(size: 20))())
             Text(DateFormatter.date.string(from: pair.start ?? Date()))
                 .foregroundColor(.secondary)
         }
@@ -165,7 +165,7 @@ struct PairCell: View {
             
                 HStack {
                     Text(DateFormatter.time.string(from: pause))
-                        .font(.monospaced(.system(size: 22))())
+                        .font(.monospaced(.system(size: 20))())
                     if !startAndPauseOnSameDay {
                         Text(DateFormatter.date.string(from: pause))
                             .foregroundColor(.secondary)

@@ -17,6 +17,7 @@ struct iPadViewHierarchy: View {
             
         } else { //show iPhone-like interface
             NavigationStack(path: $viewModel.path) { ViewHierarchy() }
+                .tint(.label) //color of the back button
         }
     }
     

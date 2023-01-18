@@ -33,6 +33,7 @@ struct TimersApp: App {
                     iPadViewHierarchy()
                 } else { //iPhone
                     NavigationStack(path: $viewModel.path) { ViewHierarchy() }
+                        .tint(.label)
                 }
                 
                 if showDeleteActionOffsetComputed && showDeleteAction {
