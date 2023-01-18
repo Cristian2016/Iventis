@@ -7,6 +7,10 @@
 
 import SwiftUI
 
+public extension UserInterfaceSizeClass {
+    var isRegular:Bool { self == .regular ? true : false }
+}
+
 ///various constants and values
 public struct Global {
     static let longPressLatency = Double(0.3) //seconds

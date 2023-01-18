@@ -13,16 +13,16 @@ struct iPadViewHierarchy: View {
     @EnvironmentObject private var viewModel:ViewModel
     
     var body: some View {
-        if regularSizeClass { //iPad specific interface
+        if sizeClass!.isRegular { //show iPad specific interface
             
-        } else { //iPhone-like interface
+        } else { //show iPhone-like interface
             NavigationStack(path: $viewModel.path) { ViewHierarchy() }
         }
     }
     
     // MARK: - Helpers
     //make code a bit nicer looking
-    private var regularSizeClass:Bool { sizeClass == .regular ? true : false }
     
     // MARK: -
 }
+ok
