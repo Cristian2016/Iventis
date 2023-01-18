@@ -3,7 +3,7 @@
 //  Shared
 //
 //  Created by Cristian Lapusan on 12.04.2022.
-//
+// 1: NavigationLink has a disclosure triangle. DT must be hidden, therefore behind the BubbleCell
 
 import SwiftUI
 import CoreData
@@ -14,19 +14,19 @@ struct BubbleList: View {
     @EnvironmentObject private var viewModel:ViewModel
     @SectionedFetchRequest var results:SectionedFetchResults<Bool, Bubble>
     
-    
     // MARK: -
     var body: some View {
         ZStack {
             if isListEmpty { EmptyListView() }
             else {
-                List (results, selection: $viewModel.rankOfSelectedBubble) { section in
+                List (results) { section in
                     Section {
                         ForEach (section) { bubble in
-                            BubbleCell(bubble)
+                            ZStack { //1
+                                NavigationLink(value: bubble) { }
+                                BubbleCell(bubble)
+                            }
                         }
-                        .onMove { source, dest in /* Code Snippets file  */}
-                        .onMove(perform: viewModel.allowOnMove ? onMoveClosure : nil)
                     } header: { headerTitle(for: section.id.description) }
                         .listRowSeparator(.hidden)
                     
@@ -36,6 +36,18 @@ struct BubbleList: View {
                 .scrollIndicators(.hidden)
                 .padding(EdgeInsets(top: 0, leading: -10, bottom: 0, trailing: -10))
                 .listStyle(.plain)
+                .navigationDestination(for: Bubble.self) { bubble in
+                    VStack {
+                        List {
+                            BubbleCell(bubble).listRowSeparator(.hidden)
+                        }
+                        .scrollDisabled(true)
+                        .listStyle(.plain)
+                        .frame(height: 160)
+                        DetailView(Int(bubble.rank))
+                    }
+                    .padding([.top], 2)
+                }
             }
             Push(.topRight) {
                 HStack {
@@ -57,10 +69,6 @@ struct BubbleList: View {
             self.viewModel.deleteViewOffset =
             viewModel.compute_deleteView_YOffset(for: new.frame)
         }
-    }
-    
-    private var  onMoveClosure: (IndexSet, Int) -> Void = { indexSet, Int in
-        
     }
     
     // MARK: -

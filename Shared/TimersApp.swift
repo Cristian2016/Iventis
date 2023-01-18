@@ -14,67 +14,51 @@ struct TimersApp: App {
     
     //store firstAppLaunchEver key in the shared UserDefaults, NOT in UserDefaults.standard
     @AppStorage(UserDefaults.Key.firstAppLaunchEver, store: UserDefaults.shared)
-    var firstAppLaunchEver = true
+    private var firstAppLaunchEver = true
     
-    var showDeleteActionOffsetComputed:Bool { vm.deleteViewOffset != nil }
-    fileprivate var showDeleteAction:Bool { vm.showDeleteAction_bRank != nil }
+    private var showDeleteActionOffsetComputed:Bool { viewModel.deleteViewOffset != nil }
+    fileprivate var showDeleteAction:Bool { viewModel.showDeleteAction_bRank != nil }
     
-    fileprivate var bubbleNotesShowing:Bool { vm.notesList_bRank != nil }
+    fileprivate var bubbleNotesShowing:Bool { viewModel.notesList_bRank != nil }
     
-    @Environment(\.scenePhase) var scenePhase
-    let viewContext = PersistenceController.shared.container.viewContext
-    @StateObject var vm = ViewModel()
-    
+    @Environment(\.scenePhase) private var scenePhase
+    private let viewContext = PersistenceController.shared.container.viewContext
+    @StateObject private var viewModel = ViewModel()
+        
     //the root view of scene is a NavigationSplitView
     var body: some Scene {
         WindowGroup {
             ZStack {
                 if UIDevice.isIPad { //iPad
-                    
+                    iPadViewHierarchy()
                 } else { //iPhone
-                    NavigationSplitView { //Sidebar
-                        ViewHierarchy()
-                    } detail: { //DetailView
-                        if let rank = vm.rankOfSelectedBubble {
-                            VStack {
-                                List {
-                                    let bubble = vm.bubble(for: rank)!
-                                    BubbleCell(bubble).listRowSeparator(.hidden)
-                                }
-                                .scrollDisabled(true)
-                                .listStyle(.plain)
-                                .frame(height: 160)
-                                DetailView(rank)
-                            }
-                            .padding([.top], 2)
-                        }
-                    }
+                    NavigationStack(path: $viewModel.path) { ViewHierarchy() }
                 }
                 
                 if showDeleteActionOffsetComputed && showDeleteAction {
-                    let bubble = vm.bubble(for: vm.showDeleteAction_bRank!)
+                    let bubble = viewModel.bubble(for: viewModel.showDeleteAction_bRank!)
                     DeleteView(bubble)
                 }
                 
-                if bubbleNotesShowing { BubbleStickyNoteList($vm.notesList_bRank) }
+                if bubbleNotesShowing { BubbleStickyNoteList($viewModel.notesList_bRank) }
                 
-                if let pair = vm.pairOfNotesList { PairStickyNoteList(pair) }
+                if let pair = viewModel.pairOfNotesList { PairStickyNoteList(pair) }
                 
-                if let sdb = vm.theOneAndOnlyEditedSDB, let bubble = sdb.bubble {
+                if let sdb = viewModel.theOneAndOnlyEditedSDB, let bubble = sdb.bubble {
                     MoreOptionsView(for: bubble)
                 }
                 
-                if vm.showAlert_AlwaysOnDisplay { AlwaysOnDisplayAlertView() }
+                if viewModel.showAlert_AlwaysOnDisplay { AlwaysOnDisplayAlertView() }
                 
-                if vm.confirm_AlwaysOnDisplay { AlwaysOnDisplayConfirmationView() }
+                if viewModel.confirm_AlwaysOnDisplay { AlwaysOnDisplayConfirmationView() }
                 
-                if vm.showMoreOptionsInfo { MoreOptionsInfo() }
+                if viewModel.showMoreOptionsInfo { MoreOptionsInfo() }
                 
-                if vm.confirm_CalOn.show { CalOnConfirmationView() }
+                if viewModel.confirm_CalOn.show { CalOnConfirmationView() }
             }
             .ignoresSafeArea()
             .environment(\.managedObjectContext, viewContext)
-            .environmentObject(vm)  /* inject ViewModel for entire view hierarchy */
+            .environmentObject(viewModel)  /* inject ViewModel for entire view hierarchy */
             .onChange(of: scenePhase) { handleScenePhaseChange($0) }
         }
     }
@@ -99,15 +83,15 @@ struct TimersApp: App {
     
     ///called on app launch or returning from background
     ///also called when app returns from inactive state
-    func handleBecomeActive() { vm.bubbleTimer(.start) }
+    func handleBecomeActive() { viewModel.bubbleTimer(.start) }
     
     ///called when app killed or moved to background
     ///NOT called on NotificationCenter, incoming call etc
-    func handleEnterBackground() { vm.bubbleTimer(.pause) }
+    func handleEnterBackground() { viewModel.bubbleTimer(.pause) }
     
     func handleInactivePhase() {
         print("scenePhase.inactive")
-        print(vm.allBubbles(runningOnly: false).count)
+        print(viewModel.allBubbles(runningOnly: false).count)
     }
 }
 

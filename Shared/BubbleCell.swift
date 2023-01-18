@@ -109,7 +109,7 @@ struct BubbleCell: View {
                 .offset(x: isSecondsLongPressed ? 20 : 0.0, y: 0)
                 .animation(.secondsLongPressed.delay(0.2), value: isSecondsLongPressed)
             //gestures
-                .onTapGesture { showBubbleDetail() }
+                .onTapGesture { toggleBubbleDetail() }
                 .onLongPressGesture { showNotesList() }
             
             //MINUTES
@@ -121,7 +121,7 @@ struct BubbleCell: View {
                 .offset(x: isSecondsLongPressed ? 10 : 0.0, y: 0)
                 .animation(.secondsLongPressed.delay(0.1), value: isSecondsLongPressed)
                 //gestures
-                .onTapGesture { showBubbleDetail() }
+                .onTapGesture { toggleBubbleDetail() }
             
             //SECONDS
             Circle().fill(Color.clear)
@@ -236,10 +236,11 @@ struct BubbleCell: View {
         vm.endSession(bubble)
     }
     
-    ///user taps minutes or hours to reveal details for the tapped bubble
-    private func showBubbleDetail() {
-        vm.rankOfSelectedBubble = Int(bubble.rank)
+    ///user taps minutes or hours to show/hide a DetailView of the tapped [selected] bubble
+    private func toggleBubbleDetail() {
+//        vm.rankOfSelectedBubble = Int(bubble.rank)
         vm.isDetailViewShowing = true
+        vm.path = vm.path.isEmpty ? [bubble] : []
     }
     
     //Start/Pause Bubble 2 ways
@@ -267,17 +268,6 @@ struct BubbleCell: View {
     }
     
     // MARK: - Methods
-    ///show/hide DetailView
-    fileprivate func toggleDetailView() {
-        UserFeedback.singleHaptic(.medium)
-        
-        vm.rankOfSelectedBubble = Int(bubble.rank)
-        
-        //ask viewModel
-        let rank = Int(bubble.rank)
-        vm.userTogglesDetail(rank)
-    }
-    
     private var showDeleteActionView:Bool {
         guard let actionViewBubbleRank = vm.showDeleteAction_bRank else { return false }
         return bubble.rank == actionViewBubbleRank
@@ -344,7 +334,7 @@ extension BubbleCell {
         let fontRatio = CGFloat(0.42)
         let spacingRatio = CGFloat(-0.14)
         
-        lazy var spacing = UIScreen.size.width * spacingRatio
+        lazy var spacing = UIDevice.isIPad ? -50 : UIScreen.size.width * spacingRatio
         lazy var fontSize = circleDiameter * fontRatio
         lazy var hundredthsFontSize = circleDiameter / 6
         
