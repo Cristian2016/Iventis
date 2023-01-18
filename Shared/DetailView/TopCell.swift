@@ -26,8 +26,8 @@ struct TopCell: View {
     private let dateDurationViewsSpacing = CGFloat(6)
     private let spacingBetweenCells = CGFloat(-2)
     
-    let durationFont = Font.system(size: 24, weight: .medium, design: .default)
-    let durationComponentsFont = Font.system(size: 20, weight: .medium, design: .default)
+    let durationFont = Font.system(size: 24, weight: .semibold)
+    let durationComponentsFont = Font.system(size: 20, weight: .semibold)
     
     // MARK: -
     var body: some View {
@@ -85,7 +85,7 @@ struct TopCell: View {
                     }
                 }
             }
-            .font(.title2)
+            .font(.system(size: 24))
             .fontWeight(.medium)
             .background(color)
             .foregroundColor(.white)
