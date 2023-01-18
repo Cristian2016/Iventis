@@ -29,7 +29,6 @@ struct PairCell: View {
                     if !triggerDeleteAction {
                         offsetX = value.translation.width
                     } else {
-                        print("triggerDeleteAction")
                         if !noteDeleted {
                             deleteStickyNote()
                             noteDeleted = true //block drag gesture.. any other better ideas??
@@ -59,8 +58,8 @@ struct PairCell: View {
     
     // MARK: - Little Things
     let contentFrameGap = CGFloat(4) //how much gap between content and its enclosing frame
-    let durationFont = Font.system(size: 22, weight: .medium, design: .default)
-    let durationComponentsFont = Font.system(size: 19, weight: .medium, design: .default)
+    let durationFont = Font.system(size: 22, weight: .medium)
+    let durationComponentsFont = Font.system(size: 19, weight: .medium)
     
     var body: some View {
         if !pair.isFault {
@@ -152,7 +151,7 @@ struct PairCell: View {
     private var pairStartView: some View {
         HStack {
             Text(DateFormatter.time.string(from: pair.start ?? Date()))
-                .font(.monospaced(Font.system(size: 22))())
+                .font(.monospaced(.system(size: 22))())
             Text(DateFormatter.date.string(from: pair.start ?? Date()))
                 .foregroundColor(.secondary)
         }
@@ -166,7 +165,7 @@ struct PairCell: View {
             
                 HStack {
                     Text(DateFormatter.time.string(from: pause))
-                        .font(.monospaced(Font.system(size: 22))())
+                        .font(.monospaced(.system(size: 22))())
                     if !startAndPauseOnSameDay {
                         Text(DateFormatter.date.string(from: pause))
                             .foregroundColor(.secondary)
