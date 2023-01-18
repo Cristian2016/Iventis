@@ -58,8 +58,8 @@ struct PairCell: View {
     
     // MARK: - Little Things
     let contentFrameGap = CGFloat(4) //how much gap between content and its enclosing frame
-    let durationFont = Font.system(size: 20, weight: .medium)
-    let durationComponentsFont = Font.system(size: 19, weight: .medium)
+    let durationFont = Font.system(size: 20, weight: .semibold)
+    let durationComponentsFont = Font.system(size: 19, weight: .semibold)
     
     var body: some View {
         if !pair.isFault {
