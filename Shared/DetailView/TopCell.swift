@@ -12,10 +12,6 @@ struct TopCell: View {
     @State var isSelected = false
     @Environment (\.colorScheme) var colorScheme
     
-    private func color(for color:Color) -> Color {
-        .red
-    }
-    
     var color:Color
     //black if bubble is red orange magenta bubblegum
     private var selectionIndicatorColor = Color.red
@@ -66,6 +62,7 @@ struct TopCell: View {
             Text(sessionRank)
                 .foregroundColor(color)
                 .font(.title2)
+                .fontWeight(.medium)
                 .padding(EdgeInsets(top: 8, leading: 0, bottom: 0, trailing: 12))
         }
     }
