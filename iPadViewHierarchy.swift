@@ -25,4 +25,3 @@ struct iPadViewHierarchy: View {
     
     // MARK: -
 }
-ok
