@@ -12,7 +12,7 @@ import MyPackage
 struct TopDetailView:View {
     @FetchRequest var sessions:FetchedResults<Session>
     //use entire screen width, but leave a little leading space
-    let trailingPadding = EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: -5)
+    let trailingPadding = EdgeInsets(top: 0, leading: 3, bottom: 0, trailing: 3)
         
     init(_ rank:Int?) {
         let predicate:NSPredicate?

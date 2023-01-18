@@ -38,7 +38,6 @@ struct DetailView: View {
                         Spacer()
                         TopDetailView(rank)
                             .frame(height: topDetailHeight)
-                            .padding(3)
                         BottomDetailView(rank)
                     }
                 }
