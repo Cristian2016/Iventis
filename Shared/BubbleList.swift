@@ -13,6 +13,7 @@ struct BubbleList: View {
     @Environment(\.managedObjectContext) private var viewContext
     @EnvironmentObject private var viewModel:ViewModel
     @SectionedFetchRequest var results:SectionedFetchResults<Bool, Bubble>
+    @State private var bubbleCellSize = CGSize.zero
     
     // MARK: -
     var body: some View {
@@ -38,10 +39,14 @@ struct BubbleList: View {
                 .listStyle(.plain)
                 .navigationDestination(for: Bubble.self) { bubble in
                     VStack {
-                        List { BubbleCell(bubble).listRowSeparator(.hidden) }
-                            .scrollDisabled(true)
-                            .listStyle(.plain)
-                            .frame(height: 30)
+                        List {
+                            BubbleCell(bubble)
+                                .listRowSeparator(.hidden)
+                                .sizeReader($bubbleCellSize)
+                        }
+                        .scrollDisabled(true)
+                        .listStyle(.plain)
+                        .frame(height: bubbleCellSize.height)
                         DetailView(Int(bubble.rank))
                     }
                     .padding([.top], 1)

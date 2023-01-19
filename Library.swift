@@ -14,7 +14,10 @@ public struct SizeViewModifier:ViewModifier {
         content
             .background {
                 GeometryReader { geo -> Color in
-                    DispatchQueue.main.async { size = geo.size }
+                    DispatchQueue.main.async {
+                        size = geo.size
+                        print("size \(size)")
+                    }
                     return Color.clear
                 }
             }
@@ -24,7 +27,7 @@ public struct SizeViewModifier:ViewModifier {
 extension View {
     ///get view.size and use it inside another view
     func sizeReader(_ size:Binding<CGSize>) -> some View {
-        modifier(SizeViewModifier(size: size))
+       modifier(SizeViewModifier(size: size))
     }
 }
 
