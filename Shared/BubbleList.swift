@@ -38,15 +38,13 @@ struct BubbleList: View {
                 .listStyle(.plain)
                 .navigationDestination(for: Bubble.self) { bubble in
                     VStack {
-                        List {
-                            BubbleCell(bubble).listRowSeparator(.hidden)
-                        }
-                        .scrollDisabled(true)
-                        .listStyle(.plain)
-                        .frame(height: 160)
+                        List { BubbleCell(bubble).listRowSeparator(.hidden) }
+                            .scrollDisabled(true)
+                            .listStyle(.plain)
+                            .frame(height: 30)
                         DetailView(Int(bubble.rank))
                     }
-                    .padding([.top], 2)
+                    .padding([.top], 1)
                 }
             }
             Push(.topRight) {
