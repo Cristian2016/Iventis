@@ -21,8 +21,8 @@ struct BubbleCell: View {
         
         VStack {
             ZStack {
-                threeCircles
-                timeComponentsView
+                threeCircles //🔴🔴🔴
+                threeLabels //⓿⓳➓
                 let addPositionEmitterView = showDeleteActionView || showDetailView
                 if addPositionEmitterView { cellLowEmitterView.background {
                     GeometryReader {
@@ -98,7 +98,7 @@ struct BubbleCell: View {
         }
     }
     
-    private var timeComponentsView: some View {
+    private var threeLabels: some View {
         HStack (spacing: BubbleCell.metrics.spacing) {
             //HOURS
             Circle().fill(Color.clear)
