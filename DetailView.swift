@@ -31,6 +31,7 @@ struct DetailView: View {
     
     var body: some View {
         VStack {
+            Spacer()
             ZStack {
                 if sessions.isEmpty { EmptyHistoryAlertView() }
                 else {
@@ -43,6 +44,7 @@ struct DetailView: View {
                 }
             }
             Spacer()
+            Spacer() //pushes BubbleCell to the top
         }
         .ignoresSafeArea()
     }
