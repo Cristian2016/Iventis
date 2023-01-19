@@ -7,6 +7,26 @@
 
 import SwiftUI
 
+public struct SizeViewModifier:ViewModifier {
+    @Binding var size:CGSize
+    
+    public func body(content: Content) -> some View {
+        content
+            .background {
+                GeometryReader { geo -> Color in
+                    DispatchQueue.main.async { size = geo.size }
+                    return Color.clear
+                }
+            }
+    }
+}
+
+extension View {
+    func sizeModifier(size:Binding<CGSize>) -> some View {
+        modifier(SizeViewModifier(size: size))
+    }
+}
+
 public extension UserInterfaceSizeClass {
     var isRegular:Bool { self == .regular ? true : false }
 }
