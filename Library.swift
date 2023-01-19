@@ -22,6 +22,7 @@ public struct SizeViewModifier:ViewModifier {
 }
 
 extension View {
+    ///get view.size and use it inside another view
     func sizeModifier(size:Binding<CGSize>) -> some View {
         modifier(SizeViewModifier(size: size))
     }
