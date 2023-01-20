@@ -5,6 +5,7 @@
 //  Created by Cristian Lapusan on 12.04.2022.
 // 1: NavigationLink has a disclosure triangle. DT must be hidden, therefore behind the BubbleCell
 // 2: BubbleCell in detailView must look the same as in BubbleList
+// 3: custom modifier that reads BubbleCell.height and sets bubbleCellHeight. The List in DetailView contains only one BubbleCell and will have its height restricted to bubbleCellHeight
 
 import SwiftUI
 import CoreData
@@ -43,7 +44,7 @@ struct BubbleList: View {
                         List {
                             BubbleCell(bubble)
                                 .listRowSeparator(.hidden)
-                                .sizeReader($bubbleCellHeight)
+                                .sizeReader($bubbleCellHeight) //3
                         }
                         .scrollDisabled(true)
                         .listStyle(.plain)
