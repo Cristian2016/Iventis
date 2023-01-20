@@ -8,15 +8,15 @@
 import SwiftUI
 
 public struct SizeViewModifier:ViewModifier {
-    @Binding var size:CGSize
+    @Binding var height:CGFloat
     
     public func body(content: Content) -> some View {
         content
             .background {
                 GeometryReader { geo -> Color in
                     DispatchQueue.main.async {
-                        size = geo.size
-                        print("size \(size)")
+                        height = geo.size.height
+                        print("size \(height)")
                     }
                     return Color.clear
                 }
@@ -26,8 +26,8 @@ public struct SizeViewModifier:ViewModifier {
 
 extension View {
     ///get view.size and use it inside another view
-    func sizeReader(_ size:Binding<CGSize>) -> some View {
-       modifier(SizeViewModifier(size: size))
+    func sizeReader(_ height:Binding<CGFloat>) -> some View {
+       modifier(SizeViewModifier(height: height))
     }
 }
 
