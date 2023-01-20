@@ -4,6 +4,7 @@
 //
 //  Created by Cristian Lapusan on 12.04.2022.
 // 1: NavigationLink has a disclosure triangle. DT must be hidden, therefore behind the BubbleCell
+// 2: BubbleCell in detailView must look the same as in BubbleList
 
 import SwiftUI
 import CoreData
@@ -47,7 +48,7 @@ struct BubbleList: View {
                         .scrollDisabled(true)
                         .listStyle(.plain)
                         .frame(height: bubbleCellHeight * 1.1)
-                        .padding([.leading, .trailing], -10)
+                        .padding([.leading, .trailing], -10) //2
                         DetailView(Int(bubble.rank))
                     }
                     .padding([.top], 1)
