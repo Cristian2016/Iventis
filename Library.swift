@@ -7,30 +7,6 @@
 
 import SwiftUI
 
-public struct SizeViewModifier:ViewModifier {
-    @Binding var height:CGFloat
-    
-    public func body(content: Content) -> some View {
-        content
-            .background {
-                GeometryReader { geo -> Color in
-                    DispatchQueue.main.async {
-                        height = geo.size.height
-                        print("size \(height)")
-                    }
-                    return Color.clear
-                }
-            }
-    }
-}
-
-extension View {
-    ///get view.size and use it inside another view
-    func sizeReader(_ height:Binding<CGFloat>) -> some View {
-       modifier(SizeViewModifier(height: height))
-    }
-}
-
 public extension UserInterfaceSizeClass {
     var isRegular:Bool { self == .regular ? true : false }
 }

@@ -10,12 +10,13 @@
 import SwiftUI
 import CoreData
 import Combine
+import MyPackage
 
 struct BubbleList: View {
     @Environment(\.managedObjectContext) private var viewContext
     @EnvironmentObject private var viewModel:ViewModel
     @SectionedFetchRequest var results:SectionedFetchResults<Bool, Bubble>
-    @State private var bubbleCellHeight = CGFloat(1) /*  */
+    @State private var bubbleCellSize = CGSize(width: 1, height: 1) /*  */
     
     // MARK: -
     var body: some View {
@@ -44,11 +45,11 @@ struct BubbleList: View {
                         List {
                             BubbleCell(bubble)
                                 .listRowSeparator(.hidden)
-                                .sizeReader($bubbleCellHeight) //3
+                                .readSize($bubbleCellSize) //3
                         }
                         .scrollDisabled(true)
                         .listStyle(.plain)
-                        .frame(height: bubbleCellHeight * 1.1)
+                        .frame(height: bubbleCellSize.height * 1.1)
                         .padding([.leading, .trailing], -10) //2
                         DetailView(Int(bubble.rank))
                     }
