@@ -52,6 +52,7 @@ struct BubbleCell: View {
                 }
             } //hundredths view
         }
+        .listRowSeparator(.hidden)
         .onAppear { resumeObserveTimer() }
         //used to compute spacing
         .onReceive(NotificationCenter.default.publisher(for: UIDevice.orientationDidChangeNotification)) { _ in

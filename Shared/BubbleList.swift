@@ -42,11 +42,7 @@ struct BubbleList: View {
                 .listStyle(.plain)
                 .navigationDestination(for: Bubble.self) { bubble in
                     VStack {
-                        List {
-                            BubbleCell(bubble)
-                                .listRowSeparator(.hidden)
-                                .readSize($bubbleCellSize) //3
-                        }
+                        List { BubbleCell(bubble).readSize($bubbleCellSize) } //3
                         .scrollDisabled(true)
                         .listStyle(.plain)
                         .frame(height: bubbleCellSize.height * 1.1)
