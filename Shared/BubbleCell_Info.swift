@@ -34,7 +34,6 @@ struct BubbleCell_Info: View {
             .font(.system(size: BubbleCell.metrics.hundredthsFontSize, weight: .semibold, design: .default))
         //animations:scale, offset and opacity
             .frame(width: 50, height: 50)
-            .padding(BubbleCell.metrics.hundredthsInsets)
             .zIndex(1)
     }
     
