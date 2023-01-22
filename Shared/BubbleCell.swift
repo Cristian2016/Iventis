@@ -44,7 +44,7 @@ struct BubbleCell: View {
                 .offset(y: -16)
             } //stickyNote
             .overlay { if confirm_CalEventCreated { CalEventCreatedConfirmationView() }}
-            .overlay { if !isBubbleRunning { hundredthsView }}
+            .overlay { hundredthsView }
         }
         .listRowSeparator(.hidden)
         .onAppear { resumeObserveTimer() }
@@ -138,22 +138,24 @@ struct BubbleCell: View {
         .foregroundColor(.white)
     }
     
+    @ViewBuilder
     private var hundredthsView:some View {
-        Push(.bottomRight) {
-            Text(bubble.components.cents)
-                .background(Circle()
-                    .foregroundColor(.pauseStickerColor)
-                    .padding(-12))
-                .foregroundColor(.pauseStickerFontColor)
-                .font(.system(size: metrics.hundredthsFontSize, weight: .semibold, design: .default))
-            //animations:scale, offset and opacity
-                .scaleEffect(isSecondsTapped && !isBubbleRunning ? 2 : 1.0)
-                .offset(x: isSecondsTapped && !isBubbleRunning ? -20 : 0,
-                        y: isSecondsTapped && !isBubbleRunning ? -20 : 0)
-                .opacity(isSecondsTapped && !isBubbleRunning ? 0 : 1)
-                .animation(.spring(response: 0.3, dampingFraction: 0.2), value: isSecondsTapped)
-                .zIndex(1)
-                .onTapGesture { userTappedHundredths() }
+        if !isBubbleRunning {
+            Push(.bottomRight) {
+                Text(bubble.components.cents)
+                    .padding()
+                    .background(Circle().foregroundColor(.pauseStickerColor))
+                    .foregroundColor(.pauseStickerFontColor)
+                    .font(.system(size: metrics.hundredthsFontSize, weight: .semibold, design: .default))
+                //animations:scale, offset and opacity
+                    .scaleEffect(isSecondsTapped && !isBubbleRunning ? 2 : 1.0)
+                    .offset(x: isSecondsTapped && !isBubbleRunning ? -20 : 0,
+                            y: isSecondsTapped && !isBubbleRunning ? -20 : 0)
+                    .opacity(isSecondsTapped && !isBubbleRunning ? 0 : 1)
+                    .animation(.spring(response: 0.3, dampingFraction: 0.2), value: isSecondsTapped)
+                    .zIndex(1)
+                    .onTapGesture { userTappedHundredths() }
+            }
         }
     }
     
