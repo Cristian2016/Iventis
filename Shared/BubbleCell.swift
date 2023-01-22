@@ -43,12 +43,8 @@ struct BubbleCell: View {
                 }
                 .offset(y: -16)
             } //stickyNote
-            .overlay {
-                if confirm_CalEventCreated { CalEventCreatedConfirmationView() }
-            } //event created confirmation
-            .overlay {
-                if !isBubbleRunning { hundredthsView.onTapGesture { userTappedHundredths() }}
-            } //hundredths view
+            .overlay { if confirm_CalEventCreated { CalEventCreatedConfirmationView() }}
+            .overlay { if !isBubbleRunning { hundredthsView }}
         }
         .listRowSeparator(.hidden)
         .onAppear { resumeObserveTimer() }
@@ -157,6 +153,7 @@ struct BubbleCell: View {
                 .opacity(isSecondsTapped && !isBubbleRunning ? 0 : 1)
                 .animation(.spring(response: 0.3, dampingFraction: 0.2), value: isSecondsTapped)
                 .zIndex(1)
+                .onTapGesture { userTappedHundredths() }
         }
     }
     
