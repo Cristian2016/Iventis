@@ -201,7 +201,7 @@ struct BubbleCell: View {
     @State private var isSecondsLongPressed = false
     
     // MARK: -
-    init(_ bubble:Bubble, metrics:Metrics) {
+    init(_ bubble:Bubble, _ metrics:Metrics) {
         _bubble = StateObject(wrappedValue: bubble)
         _sdb = StateObject(wrappedValue: bubble.sdb!)
         self.metrics = metrics

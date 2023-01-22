@@ -31,7 +31,7 @@ struct BubbleList: View {
                             ForEach (section) { bubble in
                                 ZStack { //1
                                     NavigationLink(value: bubble) { }
-                                    BubbleCell(bubble, metrics: metrics)
+                                    BubbleCell(bubble, metrics)
                                 }
                             }
                         } header: { headerTitle(for: section.id.description) }
@@ -48,8 +48,7 @@ struct BubbleList: View {
                     VStack {
                         GeometryReader { geo in
                             let metrics = BubbleCell.Metrics(width: geo.size.width)
-                            List { BubbleCell(bubble, metrics: metrics).readSize($bubbleCellSize)
-                            } //3
+                            List { BubbleCell(bubble, metrics).readSize($bubbleCellSize) } //3
                         }
                             .scrollDisabled(true)
                             .listStyle(.plain)
