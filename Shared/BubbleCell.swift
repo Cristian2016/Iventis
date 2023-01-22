@@ -33,18 +33,14 @@ struct BubbleCell: View {
                 } }
             }
             //subviews
-            .overlay { if bubble.hasCalendar && noNote { calendarSymbol }} //calSymbol
+            .overlay { if bubble.hasCalendar && noNote { calendarSymbol }}
             .overlay { stickyNote }
             .overlay { if confirm_CalEventCreated { CalEventCreatedConfirmationView() }}
             .overlay { if !isBubbleRunning { hundredthsView }}
         }
         .listRowSeparator(.hidden)
         .onAppear { resumeObserveTimer() }
-        //used to compute spacing
-        .onReceive(NotificationCenter.default.publisher(for: UIDevice.orientationDidChangeNotification)) { _ in
-            
-        }
-        //gestures
+        //swipe actions
         .swipeActions(edge: .leading, allowsFullSwipe: true) {
             toggleFavoriteButton
             toggleCalendarButton
