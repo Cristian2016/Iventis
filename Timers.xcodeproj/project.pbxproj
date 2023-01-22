@@ -290,9 +290,9 @@
 			isa = PBXGroup;
 			children = (
 				1FA377E72972FE75005ACD41 /* Library.swift */,
+				1F42B99C2973E34E0024DB5F /* Code Snippets.rtf */,
 				1FB4D4DF2977F86500F26D9C /* iPadViewHierarchy.swift */,
 				1FB5D8D928E9BF0500DD522A /* GestureLabel.swift */,
-				1F42B99C2973E34E0024DB5F /* Code Snippets.rtf */,
 				1FB5D8D728E96CBD00DD522A /* StartDelayInfoView.swift */,
 				1F477CA828EAB21900B4F965 /* AddStickyNoteQuickButton.swift */,
 				1FB5D8D528E8276D00DD522A /* StickyNoteListInfoView.swift */,

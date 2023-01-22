@@ -10,6 +10,7 @@ import MyPackage
 
 struct BubbleCell: View {
     // MARK: - Dependencies
+    let metrics: Metrics
     @StateObject var bubble:Bubble
     @StateObject var sdb:SDB  /* I made
                                this one since apparently bubble.sdb.referenceDelay does not emit */
@@ -92,7 +93,7 @@ struct BubbleCell: View {
     // MARK: - Legos
     ///timeComponentsView background
     private var threeCircles: some View {
-        HStack (spacing: BubbleCell.metrics.spacing) {
+        HStack (spacing: metrics.spacing) {
             /* Hr */ bubbleShape.opacity(hrOpacity)
             /* Min */ bubbleShape.opacity(minOpacity)
             /* Sec */ bubbleShape
@@ -100,7 +101,7 @@ struct BubbleCell: View {
     }
     
     private var threeLabels: some View {
-        HStack (spacing: BubbleCell.metrics.spacing) {
+        HStack (spacing: metrics.spacing) {
             //HOURS
             Circle().fill(Color.clear)
                 .overlay { Text(bubble.components.hr) }
@@ -140,7 +141,7 @@ struct BubbleCell: View {
                 }
         }
         //font
-        .font(.system(size: BubbleCell.metrics.fontSize))
+        .font(.system(size: metrics.timeComponentsFontSize))
         .foregroundColor(.white)
     }
     
@@ -151,7 +152,7 @@ struct BubbleCell: View {
                     .foregroundColor(Color("pauseStickerColor"))
                     .padding(-12))
                 .foregroundColor(Color("pauseStickerFontColor"))
-                .font(.system(size: BubbleCell.metrics.hundredthsFontSize, weight: .semibold, design: .default))
+                .font(.system(size: metrics.hundredthsFontSize, weight: .semibold, design: .default))
             //animations:scale, offset and opacity
                 .scaleEffect(isSecondsTapped && !isBubbleRunning ? 2 : 1.0)
                 .offset(x: isSecondsTapped && !isBubbleRunning ? -20 : 0,
@@ -159,7 +160,6 @@ struct BubbleCell: View {
                 .opacity(isSecondsTapped && !isBubbleRunning ? 0 : 1)
                 .animation(.spring(response: 0.3, dampingFraction: 0.2), value: isSecondsTapped)
                 .frame(width: 50, height: 50)
-                .padding(BubbleCell.metrics.hundredthsInsets)
                 .zIndex(1)
         }
     }
@@ -200,8 +200,6 @@ struct BubbleCell: View {
     }
     
     // MARK: - Internal
-    static var metrics = Metrics()
-    
     @GestureState var isDetectingLongPress = false
         
     private let noteOffset = CGSize(width: 0, height: -6)
@@ -210,9 +208,10 @@ struct BubbleCell: View {
     @State private var isSecondsLongPressed = false
     
     // MARK: -
-    init(_ bubble:Bubble) {
+    init(_ bubble:Bubble, metrics:Metrics) {
         _bubble = StateObject(wrappedValue: bubble)
         _sdb = StateObject(wrappedValue: bubble.sdb!)
+        self.metrics = metrics
     }
     
     func handleNoteTap() {
@@ -325,21 +324,15 @@ extension BubbleCell {
     
     ///circle diameter, font size, spacing and so on
     struct Metrics {
-        var circleDiameter:CGFloat = {
-            if UIDevice.isIPad {
-                return 140
-            } else {
-               return CGFloat(UIScreen.main.bounds.size.width / 2.7)
-            }
-        }()
-        let fontRatio = CGFloat(0.42)
-        let spacingRatio = CGFloat(-0.14)
+        init(width:CGFloat) {
+            self.spacing = width * -0.18
+            self.timeComponentsFontSize = width * CGFloat(0.16)
+            self.hundredthsFontSize = width * CGFloat(0.06)
+        }
         
-        lazy var spacing = UIDevice.isIPad ? -50 : UIScreen.size.width * spacingRatio
-        lazy var fontSize = circleDiameter * fontRatio
-        lazy var hundredthsFontSize = circleDiameter / 6
-        
-        lazy var hundredthsInsets = EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0)
+        let spacing:CGFloat
+        let timeComponentsFontSize:CGFloat
+        let hundredthsFontSize:CGFloat
     }
 }
 

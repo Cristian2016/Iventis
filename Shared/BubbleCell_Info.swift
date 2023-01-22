@@ -31,7 +31,7 @@ struct BubbleCell_Info: View {
                 .foregroundColor(Color("pauseStickerColor"))
                 .padding(-12))
             .foregroundColor(Color("pauseStickerFontColor"))
-            .font(.system(size: BubbleCell.metrics.hundredthsFontSize, weight: .semibold, design: .default))
+            .font(.system(size: 12, weight: .semibold, design: .default))
         //animations:scale, offset and opacity
             .frame(width: 50, height: 50)
             .zIndex(1)
@@ -50,18 +50,18 @@ struct BubbleCell_Info: View {
     private var bubbleNote:some View { Push(.topLeft) { BubbleNote() } }
     
     var timeComponents: some View {
-        HStack (spacing: BubbleCell.metrics.spacing) {
+        HStack (spacing: -10) {
             Circle().fill(Color.black)
             Circle().fill(Color.black)
             ZStack { Circle().fill(Color.black.gradient) }
                 .overlay { Push(.bottomRight) { hundredthsView } }
         }
-        .font(.system(size: BubbleCell.metrics.fontSize))
+        .font(.system(size: 10))
         .foregroundColor(.white)
     }
     
     var background: some View {
-        HStack (spacing: BubbleCell.metrics.spacing) {
+        HStack (spacing: -10) {
             Circle().fill(Color.clear)
             Circle().fill(Color.clear)
             Circle()

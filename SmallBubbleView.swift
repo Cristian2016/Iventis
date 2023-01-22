@@ -46,14 +46,14 @@ struct SmallBubbleView: View {
     @Environment(\.colorScheme) var colorScheme
     
     @StateObject var bubble:Bubble
-    static var metrics = Metrics()
+    let metrics:BubbleCell.Metrics
     
     let edge = CGFloat(130)
     let ratio = CGFloat(8.25/3)
     
     // MARK: - LEGOS
     var background: some View {
-        HStack (spacing: BubbleCell.metrics.spacing) {
+        HStack (spacing: metrics.spacing) {
             //Hours
             Circle().opacity(hrOpacity)
             //Minutes
@@ -83,7 +83,7 @@ struct SmallBubbleView: View {
     }
     
     var timeComponents: some View {
-        HStack (spacing: SmallBubbleView.metrics.spacing) {
+        HStack (spacing: metrics.spacing) {
             //HOURS
             Circle().fill(Color.clear)
                 .overlay { Text(bubble.smallBubbleView_Components.hr) }
@@ -101,7 +101,7 @@ struct SmallBubbleView: View {
             }
         }
         .font(
-            .system(size: isZoomed ? BubbleCell.metrics.fontSize : 42)
+            .system(size: isZoomed ? metrics.timeComponentsFontSize : 42)
             .weight(isZoomed ? .regular : .medium)
         )
         .foregroundColor(.black)
@@ -124,27 +124,6 @@ struct SmallBubbleView: View {
             isZoomed.toggle()
             skinTapsCount += 1
         } }
-    }
-}
-
-extension SmallBubbleView {
-    struct Metrics {
-        var circleDiameter:CGFloat = {
-            if UIDevice.isIPad {
-                return 140
-            } else {
-               return CGFloat(UIScreen.main.bounds.size.width / 2.7)
-            }
-        }()
-        let fontRatio = CGFloat(0.42)
-        let spacingRatio = CGFloat(-0.28)
-        
-        lazy var spacing = circleDiameter * spacingRatio
-        lazy var fontSize = circleDiameter * fontRatio
-        lazy var hundredthsFontSize = circleDiameter / 6
-        
-//        lazy var hundredthsInsets = EdgeInsets(top: 0, leading: 0, bottom: 14, trailing: 10)
-        lazy var hundredthsInsets = EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0)
     }
 }
 

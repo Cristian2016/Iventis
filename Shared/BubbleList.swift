@@ -23,30 +23,38 @@ struct BubbleList: View {
         ZStack {
             if isListEmpty { EmptyListView() }
             else {
-                List (results) { section in
-                    Section {
-                        ForEach (section) { bubble in
-                            ZStack { //1
-                                NavigationLink(value: bubble) { }
-                                BubbleCell(bubble)
-                            }
-                        }
-                    } header: { headerTitle(for: section.id.description) }
-                        .listRowSeparator(.hidden)
+                GeometryReader { geo in
+                    let metrics = BubbleCell.Metrics(width: geo.size.width)
                     
-                    //bottom overscroll
-                    if !section.id { bottomOverscoll }
+                    List (results) { section in
+                        Section {
+                            ForEach (section) { bubble in
+                                ZStack { //1
+                                    NavigationLink(value: bubble) { }
+                                    BubbleCell(bubble, metrics: metrics)
+                                }
+                            }
+                        } header: { headerTitle(for: section.id.description) }
+                            .listRowSeparator(.hidden)
+                        
+                        //bottom overscroll
+                        if !section.id { bottomOverscoll }
+                    }
                 }
                 .scrollIndicators(.hidden)
                 .padding(EdgeInsets(top: 0, leading: -10, bottom: 0, trailing: -10))
                 .listStyle(.plain)
                 .navigationDestination(for: Bubble.self) { bubble in
                     VStack {
-                        List { BubbleCell(bubble).readSize($bubbleCellSize) } //3
-                        .scrollDisabled(true)
-                        .listStyle(.plain)
-                        .frame(height: bubbleCellSize.height * 1.1)
-                        .padding([.leading, .trailing], -10) //2
+                        GeometryReader { geo in
+                            let metrics = BubbleCell.Metrics(width: geo.size.width)
+                            List { BubbleCell(bubble, metrics: metrics).readSize($bubbleCellSize)
+                            } //3
+                        }
+                            .scrollDisabled(true)
+                            .listStyle(.plain)
+                            .frame(height: bubbleCellSize.height * 1.1)
+                            .padding([.leading, .trailing], -10) //2
                         DetailView(Int(bubble.rank))
                     }
                     .padding([.top], 1)

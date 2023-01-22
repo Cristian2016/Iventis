@@ -64,34 +64,36 @@ struct PairCell: View {
     
     var body: some View {
         if !pair.isFault {
-            ZStack {
-                //PairCell
-                VStack (alignment: .leading) {
-                    separatorLine.overlay { pairNumberView }
-                    pairStartView  //first line
-                    pairPauseView //seconds line
-                    if pair.pause == nil {
-                        HStack {
-                            Spacer()
-                            SmallBubbleView(bubble: pair.session!.bubble!)
-                            Spacer()
+            GeometryReader { geo in
+                ZStack {
+                    //PairCell
+                    VStack (alignment: .leading) {
+                        separatorLine.overlay { pairNumberView }
+                        pairStartView  //first line
+                        pairPauseView //seconds line
+                        if pair.pause == nil {
+                            HStack {
+                                Spacer()
+                                SmallBubbleView(bubble: pair.session!.bubble!, metrics: BubbleCell.Metrics(width: geo.size.width))
+                                Spacer()
+                            }
                         }
+                        else { durationView } //third line
                     }
-                    else { durationView } //third line
+                    .padding(contentFrameGap)
+                    //gesture
+                    .contentShape(gestureArea) //define gesture area
+                    .onTapGesture {  /* ⚠️ Idiotic!!!!! I need to put this shit here or else I can't scroll */ }
+                    .onLongPressGesture { userWantsNotesList() }
+                    
+                    //like a button it has a closure for action
+                    Push(.bottomRight) {//PairCell StickyNote
+                        StickyNote { stickyNoteContent }
+                        dragAction : { deleteStickyNote() }
+                        tapAction : { toggleStickyNoteVisibility() }
+                    }
+                    .offset(y: 12)
                 }
-                .padding(contentFrameGap)
-                //gesture
-                .contentShape(gestureArea) //define gesture area
-                .onTapGesture {  /* ⚠️ Idiotic!!!!! I need to put this shit here or else I can't scroll */ }
-                .onLongPressGesture { userWantsNotesList() }
-                
-                //like a button it has a closure for action
-                Push(.bottomRight) {//PairCell StickyNote
-                    StickyNote { stickyNoteContent }
-                    dragAction : { deleteStickyNote() }
-                    tapAction : { toggleStickyNoteVisibility() }
-                }
-                .offset(y: 12)
             }
         }
     }
