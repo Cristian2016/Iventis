@@ -18,7 +18,7 @@ struct BubbleCell: View {
     
     // MARK: - Body
     var body: some View {
-//        let _ = Self._printChanges()
+        //        let _ = Self._printChanges()
         
         VStack {
             ZStack {
@@ -44,38 +44,49 @@ struct BubbleCell: View {
         .onReceive(NotificationCenter.default.publisher(for: UIDevice.orientationDidChangeNotification)) { _ in
             
         }
-          //gestures
+        //gestures
         .swipeActions(edge: .leading, allowsFullSwipe: true) {
-            
-            //pin
-            Button { vm.togglePin(bubble) }
-        label: { Label { Text(bubble.isPinned ? "Unpin" : "Pin") }
-            icon: { Image(systemName: bubble.isPinned ? "pin.slash.fill" : "pin.fill") } }
-        .tint(bubble.isPinned ? .gray : .orange)
-            
-            //calendar
-            Button { vm.toggleCalendar(bubble) }
-        label: { Label { Text(calendarActionName) }
-            icon: { Image(systemName: calendarActionImageName) } }
-        .tint(calendarActionColor)
+            toggleFavoriteButton
+            toggleCalendarButton
         }
         .swipeActions(edge: .trailing, allowsFullSwipe: true) {
-            //delete
-            Button {
-                vm.showDeleteAction_bRank = Int(bubble.rank)
-                delayExecution(.now() + 0.2) { vm.isDetailViewShowing = false }
-            }
-        label: { Label { Text("Delete") }
-            icon: { Image.trash } }.tint(.red)
-            
-            //more options
-            Button { vm.showMoreOptions(for: bubble) }
-        label: { Label { Text("More") }
-            icon: { Image(systemName: "ellipsis.circle.fill") } }.tint(.lightGray)
+            deleteActionButton
+            moreOptionsButton
         }
     }
     
     // MARK: - Legos
+    //Leading Swipe actions
+    private var toggleFavoriteButton:some View {
+        Button { vm.togglePin(bubble) }
+    label: { Label { Text(bubble.isPinned ? "Unpin" : "Pin") }
+        icon: { Image(systemName: bubble.isPinned ? "pin.slash.fill" : "pin.fill") } }
+    .tint(bubble.isPinned ? .gray : .orange)
+    }
+    
+    private var toggleCalendarButton:some View {
+        Button { vm.toggleCalendar(bubble) }
+    label: { Label { Text(calendarActionName) }
+        icon: { Image(systemName: calendarActionImageName) } }
+    .tint(calendarActionColor)
+    }
+    
+    //trailing Swipe actions
+    private var deleteActionButton:some View {
+        Button {
+            vm.showDeleteAction_bRank = Int(bubble.rank)
+            delayExecution(.now() + 0.2) { vm.isDetailViewShowing = false }
+        }
+    label: { Label { Text("Delete") }
+        icon: { Image.trash } }.tint(.red)
+    }
+    
+    private var moreOptionsButton:some View {
+        Button { vm.showMoreOptions(for: bubble) }
+    label: { Label { Text("More") }
+        icon: { Image(systemName: "ellipsis.circle.fill") } }.tint(.lightGray)
+    }
+    
     ///time components [threeLabels] background
     private var threeCircles: some View {
         HStack (spacing: metrics.spacing) {
