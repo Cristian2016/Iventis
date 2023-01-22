@@ -84,7 +84,7 @@ struct BubbleCell: View {
     }
     
     // MARK: - Legos
-    ///timeComponentsView background
+    ///time components [threeLabels] background
     private var threeCircles: some View {
         HStack (spacing: metrics.spacing) {
             /* Hr */ bubbleShape.opacity(hrOpacity)
@@ -179,7 +179,7 @@ struct BubbleCell: View {
     }
     
     // MARK: - Gestures
-    private var tap:some Gesture { TapGesture().onEnded { _ in userTappedSeconds() } }
+    private var tap:some Gesture { TapGesture().onEnded { _ in userTappedSeconds() }}
     private var longPress: some Gesture {
         LongPressGesture(minimumDuration: 0.3)
             .updating($isDetectingLongPress, body: { currentState, gestureState, _ in
