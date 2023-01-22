@@ -34,15 +34,7 @@ struct BubbleCell: View {
             }
             //subviews
             .overlay { if bubble.hasCalendar && noNote { calendarSymbol }} //calSymbol
-            .overlay {
-                Push(.topLeft) {
-                    StickyNote (alignment: .leading)
-                    { noteButtonContent }
-                dragAction: { vm.deleteStickyNote(for: bubble) }
-                    tapAction : { handleNoteTap() }
-                }
-                .offset(y: -16)
-            } //stickyNote
+            .overlay { stickyNote }
             .overlay { if confirm_CalEventCreated { CalEventCreatedConfirmationView() }}
             .overlay { if !isBubbleRunning { hundredthsView }}
         }
@@ -175,6 +167,16 @@ struct BubbleCell: View {
             Spacer()
         }
         .padding([.leading], 4)
+    }
+    
+    private var stickyNote:some View {
+        Push(.topLeft) {
+            StickyNote (alignment: .leading)
+            { noteButtonContent }
+        dragAction: { vm.deleteStickyNote(for: bubble) }
+            tapAction : { handleNoteTap() }
+        }
+        .offset(y: -16)
     }
     
     // MARK: - Gestures
