@@ -47,10 +47,7 @@ struct BubbleCell: View {
                 if confirm_CalEventCreated { CalEventCreatedConfirmationView() }
             } //event created confirmation
             .overlay {
-                if !isBubbleRunning {
-                    hundredthsView
-                        .onTapGesture { userTappedHundredths() }
-                }
+                if !isBubbleRunning { hundredthsView.onTapGesture { userTappedHundredths() }}
             } //hundredths view
         }
         .listRowSeparator(.hidden)
@@ -149,9 +146,9 @@ struct BubbleCell: View {
         Push(.bottomRight) {
             Text(bubble.components.cents)
                 .background(Circle()
-                    .foregroundColor(Color("pauseStickerColor"))
+                    .foregroundColor(.pauseStickerColor)
                     .padding(-12))
-                .foregroundColor(Color("pauseStickerFontColor"))
+                .foregroundColor(.pauseStickerFontColor)
                 .font(.system(size: metrics.hundredthsFontSize, weight: .semibold, design: .default))
             //animations:scale, offset and opacity
                 .scaleEffect(isSecondsTapped && !isBubbleRunning ? 2 : 1.0)
@@ -159,7 +156,6 @@ struct BubbleCell: View {
                         y: isSecondsTapped && !isBubbleRunning ? -20 : 0)
                 .opacity(isSecondsTapped && !isBubbleRunning ? 0 : 1)
                 .animation(.spring(response: 0.3, dampingFraction: 0.2), value: isSecondsTapped)
-                .frame(width: 50, height: 50)
                 .zIndex(1)
         }
     }

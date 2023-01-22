@@ -7,6 +7,11 @@
 
 import SwiftUI
 
+extension Color {
+    static let pauseStickerColor = Color("pauseStickerColor")
+    static let pauseStickerFontColor = Color("pauseStickerFontColor")
+}
+
 public extension UserInterfaceSizeClass {
     var isRegular:Bool { self == .regular ? true : false }
 }
