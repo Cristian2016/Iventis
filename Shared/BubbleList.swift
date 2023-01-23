@@ -77,11 +77,7 @@ struct BubbleList: View {
     // MARK: -
     init() {
         UITableView.appearance().showsVerticalScrollIndicator = false
-        _results = SectionedFetchRequest<Bool, Bubble>(entity: Bubble.entity(),
-                                                       sectionIdentifier: \.isPinned,
-                                                       sortDescriptors: BubbleList.descriptors,
-                                                       predicate: nil,
-                                                       animation: .default)
+        _results = SectionedFetchRequest<Bool, Bubble>(entity: Bubble.entity(), sectionIdentifier: \.isPinned, sortDescriptors: BubbleList.descriptors, predicate: nil, animation: .default)
     }
     
     // MARK: -
