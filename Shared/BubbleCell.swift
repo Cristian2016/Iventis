@@ -290,7 +290,9 @@ struct BubbleCell: View {
     
     ///show bubbleCell.frame if it's the same rank and the frame is not set and detailView does not show. In the Detailview there is no need to compute deleteActionView.yOffset
     private var revealBubbleCellFrame:Bool {
-        viewModel.showDeleteAction_bRank == bubble.rank && viewModel.showDeleteAction_bFrame == nil && !viewModel.isDetailViewShowing
+        viewModel.showDeleteAction_bRank == bubble.rank &&
+        viewModel.showDeleteAction_bFrame == nil &&
+        !viewModel.isDetailViewShowing
     }
 }
 
