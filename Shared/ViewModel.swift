@@ -35,8 +35,9 @@ class ViewModel: ObservableObject {
     @Published var showAlert_AlwaysOnDisplay = false
     
     // MARK: -
-    @Published var showDeleteAction_bRank:Int? = nil
-    @Published var deleteViewOffset:CGFloat? = nil
+    ///bubbleCell rank and frame. Frame will not be set if DetailView shows
+    @Published var showDeleteAction_bRank:Int64?
+    @Published var showDeleteAction_bFrame:CGRect?
     
     @Published var isDetailViewShowing = false
     
@@ -400,31 +401,33 @@ class ViewModel: ObservableObject {
     
     // MARK: -
     func compute_deleteView_YOffset(for frame:CGRect) -> CGFloat {
-        guard !isDetailViewShowing else { return 0 }
-        
-        let cellDeleteViewGap = CGFloat(70)
-        
-        let cellLow = frame.origin.y + frame.height
-        
-        let deleteViewHeight = DeleteView.height
-        let deleteViewHigh = (UIScreen.size.height - deleteViewHeight)/2
-        let deleteViewLow = deleteViewHigh + deleteViewHeight
-        
-        //available space below bubble cell
-        let spaceBelowCell = UIScreen.size.height - cellLow
-        
-        //put deleteActionView below cell it's the prefered way to go
-        let putBelow = spaceBelowCell - (cellDeleteViewGap + deleteViewHeight) > 0
-        let delta = cellLow - deleteViewHigh
-        
-        let deleteView_YOffset:CGFloat
-        
-        if putBelow { deleteView_YOffset = delta + cellDeleteViewGap }
-        else {//put up
-            deleteView_YOffset = frame.origin.y - (deleteViewLow + cellDeleteViewGap) - 10
-        }
-        
-        return deleteView_YOffset
+        print(#function)
+//        guard !isDetailViewShowing else { return 0 }
+//
+//        let cellDeleteViewGap = CGFloat(70)
+//
+//        let cellLow = frame.origin.y + frame.height
+//
+//        let deleteViewHeight = DeleteActionView.height
+//        let deleteViewHigh = (UIScreen.size.height - deleteViewHeight)/2
+//        let deleteViewLow = deleteViewHigh + deleteViewHeight
+//
+//        //available space below bubble cell
+//        let spaceBelowCell = UIScreen.size.height - cellLow
+//
+//        //put deleteActionView below cell it's the prefered way to go
+//        let putBelow = spaceBelowCell - (cellDeleteViewGap + deleteViewHeight) > 0
+//        let delta = cellLow - deleteViewHigh
+//
+//        let deleteView_YOffset:CGFloat
+//
+//        if putBelow { deleteView_YOffset = delta + cellDeleteViewGap }
+//        else {//put up
+//            deleteView_YOffset = frame.origin.y - (deleteViewLow + cellDeleteViewGap) - 10
+//        }
+//
+//        return deleteView_YOffset
+        return 0
     }
     
     // MARK: -

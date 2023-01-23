@@ -16,7 +16,6 @@ struct TimersApp: App {
     @AppStorage(UserDefaults.Key.firstAppLaunchEver, store: UserDefaults.shared)
     private var firstAppLaunchEver = true
     
-    private var showDeleteActionOffsetComputed:Bool { viewModel.deleteViewOffset != nil }
     fileprivate var showDeleteAction:Bool { viewModel.showDeleteAction_bRank != nil }
     
     fileprivate var bubbleNotesShowing:Bool { viewModel.notesList_bRank != nil }
@@ -36,9 +35,9 @@ struct TimersApp: App {
                         .tint(.label)
                 }
                 
-                if showDeleteActionOffsetComputed && showDeleteAction {
-                    let bubble = viewModel.bubble(for: viewModel.showDeleteAction_bRank!)
-                    DeleteView(bubble)
+                if viewModel.showDeleteAction_bRank != nil {
+                    let bubble = viewModel.bubble(for: Int(viewModel.showDeleteAction_bRank!))
+                    DeleteActionView(bubble)
                 }
                 
                 if bubbleNotesShowing { BubbleStickyNoteList($viewModel.notesList_bRank) }

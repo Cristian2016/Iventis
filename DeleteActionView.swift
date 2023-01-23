@@ -8,11 +8,11 @@
 import SwiftUI
 
 ///same size on each device
-struct DeleteView: View {
+struct DeleteActionView: View {
     let bubble:Bubble?
     let bubbleColor:Color
     
-    @EnvironmentObject private var vm:ViewModel
+    @EnvironmentObject private var viewModel:ViewModel
     
     //internal properties
     let ratio = CGFloat(0.8037)
@@ -25,7 +25,10 @@ struct DeleteView: View {
     var body: some View {
             ZStack {
                 Color.white.opacity(0.01)
-                    .onTapGesture { vm.showDeleteAction_bRank = nil }
+                    .onTapGesture {
+                        viewModel.showDeleteAction_bRank = nil
+                        viewModel.showDeleteAction_bFrame = nil
+                    }
                 RoundedRectangle(cornerRadius: backgroundRadius)
                     .fill(backgroundColor)
                     .frame(width: width, height: width/ratio)
@@ -37,14 +40,16 @@ struct DeleteView: View {
                                 VStack {
                                     deleteBubbleView
                                         .onTapGesture { withAnimation {
-                                            vm.delete(bubble!)
-                                            vm.showDeleteAction_bRank = nil
+                                            viewModel.delete(bubble!)
+                                            viewModel.showDeleteAction_bRank = nil
+                                            viewModel.showDeleteAction_bFrame = nil
                                         } }
                                     deleteHistoryView
                                         .onTapGesture { withAnimation {
                                             if !bubble!.sessions_.isEmpty {
-                                                vm.reset(bubble!)
-                                                vm.showDeleteAction_bRank = nil
+                                                viewModel.reset(bubble!)
+                                                viewModel.showDeleteAction_bRank = nil
+                                                viewModel.showDeleteAction_bFrame = nil
                                             }
                                         } }
                                 }
@@ -55,7 +60,7 @@ struct DeleteView: View {
                         .padding()
                     }
             }
-            .offset(x: 0, y: vm.deleteViewOffset ?? 0)
+            .offset(x: 0, y: viewModel.compute_deleteView_YOffset(for: .zero))
     }
     
     // MARK: - Init
@@ -98,9 +103,3 @@ struct DeleteView: View {
         }
     }
 }
-
-//struct DeleteActionView1_: PreviewProvider {
-//    static var previews: some View {
-//        DeleteActionView(nil, nil)
-//    }
-//}

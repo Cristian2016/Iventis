@@ -14,23 +14,29 @@ struct BubbleCell: View {
     @StateObject var bubble:Bubble
     @StateObject var sdb:SDB  /* I made
                                this one since apparently bubble.sdb.referenceDelay does not emit */
-    @EnvironmentObject private var vm:ViewModel
+    @EnvironmentObject private var viewModel:ViewModel
     
     // MARK: - Body
     var body: some View {
-        //        let _ = Self._printChanges()
+//                let _ = Self._printChanges()
         
         VStack {
             ZStack {
+                if revealBubbleCellFrame {
+                    Rectangle()
+                        .fill(.clear)
+                        .background {
+                            GeometryReader { geo -> Color in
+                                DispatchQueue.main.async {
+                                    let frame = geo.frame(in: .global)
+                                    viewModel.showDeleteAction_bFrame = frame
+                                }
+                                return .clear
+                            }
+                        }
+                }
                 threeCircles //🔴🔴🔴
                 threeLabels //⓿⓳➓
-                let addPositionEmitterView = showDeleteActionView || showDetailView
-                if addPositionEmitterView { cellLowEmitterView.background {
-                    GeometryReader {
-                        let value = BubbleCellLow_Key.RankFrame(rank: Int(bubble.rank), frame: $0.frame(in: .global))
-                        Color.clear.preference(key: BubbleCellLow_Key.self, value: value)
-                    }
-                } }
             }
             //subviews
             .overlay { if bubble.hasCalendar && noNote { calendarSymbol }}
@@ -54,14 +60,14 @@ struct BubbleCell: View {
     // MARK: - Legos
     //Leading Swipe actions
     private var toggleFavoriteButton:some View {
-        Button { vm.togglePin(bubble) }
+        Button { viewModel.togglePin(bubble) }
     label: { Label { Text(bubble.isPinned ? "Unpin" : "Pin") }
         icon: { Image(systemName: bubble.isPinned ? "pin.slash.fill" : "pin.fill") } }
     .tint(bubble.isPinned ? .gray : .orange)
     }
     
     private var toggleCalendarButton:some View {
-        Button { vm.toggleCalendar(bubble) }
+        Button { viewModel.toggleCalendar(bubble) }
     label: { Label { Text(calendarActionName) }
         icon: { Image(systemName: calendarActionImageName) } }
     .tint(calendarActionColor)
@@ -70,15 +76,15 @@ struct BubbleCell: View {
     //trailing Swipe actions
     private var deleteActionButton:some View {
         Button {
-            vm.showDeleteAction_bRank = Int(bubble.rank)
-            delayExecution(.now() + 0.2) { vm.isDetailViewShowing = false }
+            viewModel.showDeleteAction_bRank = bubble.rank
+//            delayExecution(.now() + 0.2) { vm.isDetailViewShowing = false }
         }
     label: { Label { Text("Delete") }
         icon: { Image.trash } }.tint(.red)
     }
     
     private var moreOptionsButton:some View {
-        Button { vm.showMoreOptions(for: bubble) }
+        Button { viewModel.showMoreOptions(for: bubble) }
     label: { Label { Text("More") }
         icon: { Image(systemName: "ellipsis.circle.fill") } }.tint(.lightGray)
     }
@@ -180,7 +186,7 @@ struct BubbleCell: View {
         Push(.topLeft) {
             StickyNote (alignment: .leading)
             { noteButtonContent }
-        dragAction: { vm.deleteStickyNote(for: bubble) }
+        dragAction: { viewModel.deleteStickyNote(for: bubble) }
             tapAction : { handleNoteTap() }
         }
         .offset(y: -16)
@@ -224,7 +230,7 @@ struct BubbleCell: View {
     // MARK: - User Intents
     /*
      when cell appears bubbleCell will resume observing timer. if it doesn't resume, correct time will not be displayed to the user */
-    private func resumeObserveTimer() /* onAppear */ { vm.addObserver(for: bubble) }
+    private func resumeObserveTimer() /* onAppear */ { viewModel.addObserver(for: bubble) }
     
     private func endSession() {
         isSecondsLongPressed = true
@@ -234,20 +240,20 @@ struct BubbleCell: View {
         UserFeedback.doubleHaptic(.heavy)
         
         //user intent model
-        vm.endSession(bubble)
+        viewModel.endSession(bubble)
     }
     
     ///user taps minutes or hours to show/hide a DetailView of the tapped [selected] bubble
     private func toggleBubbleDetail() {
 //        vm.rankOfSelectedBubble = Int(bubble.rank)
-        vm.isDetailViewShowing = true
-        vm.path = vm.path.isEmpty ? [bubble] : []
+        viewModel.isDetailViewShowing = true
+        viewModel.path = viewModel.path.isEmpty ? [bubble] : []
     }
     
     //Start/Pause Bubble 2 ways
     /* 1 */private func userTappedHundredths() {
         UserFeedback.singleHaptic(.heavy)
-        vm.toggleBubbleStart(bubble)
+        viewModel.toggleBubbleStart(bubble)
     }
     
     /* 2 */private func userTappedSeconds() {
@@ -258,29 +264,34 @@ struct BubbleCell: View {
         UserFeedback.singleHaptic(.heavy)
         
         //user intent model
-        vm.toggleBubbleStart(bubble)
+        viewModel.toggleBubbleStart(bubble)
 }
     
     ///long press on hours to show the notes list
     func showNotesList() {
         UserFeedback.singleHaptic(.light)
-        vm.notesList_bRank = Int(bubble.rank)
+        viewModel.notesList_bRank = Int(bubble.rank)
         PersistenceController.shared.save()
     }
     
     // MARK: - Methods
     private var showDeleteActionView:Bool {
-        guard let actionViewBubbleRank = vm.showDeleteAction_bRank else { return false }
-        return bubble.rank == actionViewBubbleRank
+        guard let bubbleRank = viewModel.showDeleteAction_bRank else { return false }
+        return bubble.rank == bubbleRank
     }
     
     private var showDetailView:Bool {
-        guard let selectedBubbleRank = vm.rankOfSelectedBubble else { return false }
+        guard let selectedBubbleRank = viewModel.rankOfSelectedBubble else { return false }
         return bubble.rank == selectedBubbleRank
     }
     
     // MARK: -
-    var confirm_CalEventCreated:Bool { vm.confirm_CalEventCreated == bubble.rank }
+    var confirm_CalEventCreated:Bool { viewModel.confirm_CalEventCreated == bubble.rank }
+    
+    ///show bubbleCell.frame if it's the same rank and the frame is not set and detailView does not show. In the Detailview there is no need to compute deleteActionView.yOffset
+    private var revealBubbleCellFrame:Bool {
+        viewModel.showDeleteAction_bRank == bubble.rank && viewModel.showDeleteAction_bFrame == nil && !viewModel.isDetailViewShowing
+    }
 }
 
 // MARK: - Modifiers

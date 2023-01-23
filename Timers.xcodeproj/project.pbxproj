@@ -39,7 +39,7 @@
 		1F5F4A752809409600AF3442 /* Bubble Properties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5F4A722809409600AF3442 /* Bubble Properties.swift */; };
 		1F5F4A992809456E00AF3442 /* BubbleList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5F4A982809456E00AF3442 /* BubbleList.swift */; };
 		1F5F4A9D280945C700AF3442 /* BubbleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5F4A9C280945C700AF3442 /* BubbleCell.swift */; };
-		1F61BE052822BAAA00B773F9 /* DeleteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F61BE042822BAAA00B773F9 /* DeleteView.swift */; };
+		1F61BE052822BAAA00B773F9 /* DeleteActionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F61BE042822BAAA00B773F9 /* DeleteActionView.swift */; };
 		1F62194028293B5100C9B175 /* SmallBubbleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F62193F28293B5100C9B175 /* SmallBubbleView.swift */; };
 		1F641FFE281FF70100413E31 /* BottomDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F641FFD281FF70100413E31 /* BottomDetailView.swift */; };
 		1F6420062820186D00413E31 /* PairCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F6420052820186D00413E31 /* PairCell.swift */; };
@@ -157,7 +157,7 @@
 		1F5F4A92280941D900AF3442 /* Timers (iOS).entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Timers (iOS).entitlements"; sourceTree = "<group>"; };
 		1F5F4A982809456E00AF3442 /* BubbleList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BubbleList.swift; sourceTree = "<group>"; };
 		1F5F4A9C280945C700AF3442 /* BubbleCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BubbleCell.swift; sourceTree = "<group>"; };
-		1F61BE042822BAAA00B773F9 /* DeleteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteView.swift; sourceTree = "<group>"; };
+		1F61BE042822BAAA00B773F9 /* DeleteActionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteActionView.swift; sourceTree = "<group>"; };
 		1F62193F28293B5100C9B175 /* SmallBubbleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallBubbleView.swift; sourceTree = "<group>"; };
 		1F641FFD281FF70100413E31 /* BottomDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomDetailView.swift; sourceTree = "<group>"; };
 		1F6420052820186D00413E31 /* PairCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PairCell.swift; sourceTree = "<group>"; };
@@ -240,7 +240,7 @@
 				1F1CF2F2286B5BD8007102F2 /* PairStickyNoteList.swift */,
 				1F18B456281FA6130080ADA6 /* PushView.swift */,
 				1F18B45B281FA9C90080ADA6 /* CalendarSticker.swift */,
-				1F61BE042822BAAA00B773F9 /* DeleteView.swift */,
+				1F61BE042822BAAA00B773F9 /* DeleteActionView.swift */,
 				1F99AB5E286CA40D00977C9A /* StickyNote.swift */,
 			);
 			name = Helpers;
@@ -550,7 +550,7 @@
 				1FD21865281D9AB700B43403 /* ExitFocusView.swift in Sources */,
 				1F20807C2836111600FD35D6 /* BSavedNote.swift in Sources */,
 				1FDB9F15287DA5040028E121 /* SDBPair Properties.swift in Sources */,
-				1F61BE052822BAAA00B773F9 /* DeleteView.swift in Sources */,
+				1F61BE052822BAAA00B773F9 /* DeleteActionView.swift in Sources */,
 				1F684823287DBEBB00D8BF81 /* StartDelaySubview.swift in Sources */,
 				1F9BE0A9280BE14100F87EFA /* PaletteView.swift in Sources */,
 				1F5F4A732809409600AF3442 /* Bubble.swift in Sources */,

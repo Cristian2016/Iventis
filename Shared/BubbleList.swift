@@ -72,13 +72,6 @@ struct BubbleList: View {
             
             PaletteView($viewModel.isPaletteShowing)
         }
-        .onPreferenceChange(BubbleCellLow_Key.self) { new in
-            let frame = new.frame
-            if frame == .zero { return }
-            
-            self.viewModel.deleteViewOffset =
-            viewModel.compute_deleteView_YOffset(for: new.frame)
-        }
     }
     
     // MARK: -
@@ -140,21 +133,6 @@ struct BubbleList: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         BubbleList()
-    }
-}
-
-
-///bubbleCell reports its frame so that deleteActionView knows how to position itself
-///CellLow is Bubble.(originY + height)
-struct BubbleCellLow_Key:PreferenceKey {
-    struct RankFrame:Equatable {
-        let rank:Int
-        let frame:CGRect
-    }
-    
-    static var defaultValue = RankFrame(rank: -1, frame: .zero)
-    static func reduce(value: inout RankFrame, nextValue: () -> RankFrame) {
-        if value.frame == .zero { value = nextValue() }
     }
 }
 
