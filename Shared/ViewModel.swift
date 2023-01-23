@@ -157,7 +157,7 @@ class ViewModel: ObservableObject {
                 newSession.created = Date().addingTimeInterval(startDelayCompensation)
                 newSession.addToPairs(newPair)
                 
-                bubble.syncSmallBubbleCell = true
+//                bubble.syncSmallBubbleCell = true
                                 
             case .paused:  /* changes to running */
                 //create new pair, add it to currentSession
@@ -165,12 +165,12 @@ class ViewModel: ObservableObject {
                 newPair.start = Date().addingTimeInterval(startDelayCompensation)
                 bubble.lastSession?.addToPairs(newPair)
                 
-                bubble.syncSmallBubbleCell = true
+//                bubble.syncSmallBubbleCell = true
                 
             case .running: /* changes to .paused */
                 let currentPair = bubble.lastPair
                 currentPair?.pause = Date()
-                bubble.syncSmallBubbleCell = false
+//                bubble.syncSmallBubbleCell = false
                 
                 //⚠️ closure runs on the main queue. whatever you want the user to see put in that closure otherwise it will fail to update!!!!
                 currentPair?.computeDuration(.atPause) {
@@ -400,34 +400,34 @@ class ViewModel: ObservableObject {
     }
     
     // MARK: -
-    func compute_deleteView_YOffset(for frame:CGRect) -> CGFloat {
+    func compute_deleteView_YOffset(for frame:CGRect?) -> CGFloat {
         print(#function)
-//        guard !isDetailViewShowing else { return 0 }
-//
-//        let cellDeleteViewGap = CGFloat(70)
-//
-//        let cellLow = frame.origin.y + frame.height
-//
-//        let deleteViewHeight = DeleteActionView.height
-//        let deleteViewHigh = (UIScreen.size.height - deleteViewHeight)/2
-//        let deleteViewLow = deleteViewHigh + deleteViewHeight
-//
-//        //available space below bubble cell
-//        let spaceBelowCell = UIScreen.size.height - cellLow
-//
-//        //put deleteActionView below cell it's the prefered way to go
-//        let putBelow = spaceBelowCell - (cellDeleteViewGap + deleteViewHeight) > 0
-//        let delta = cellLow - deleteViewHigh
-//
-//        let deleteView_YOffset:CGFloat
-//
-//        if putBelow { deleteView_YOffset = delta + cellDeleteViewGap }
-//        else {//put up
-//            deleteView_YOffset = frame.origin.y - (deleteViewLow + cellDeleteViewGap) - 10
-//        }
-//
-//        return deleteView_YOffset
-        return 0
+        guard let frame = frame else { return 0 }
+        guard !isDetailViewShowing else { return 0 }
+
+        let cellDeleteViewGap = CGFloat(70)
+
+        let cellLow = frame.origin.y + frame.height
+
+        let deleteViewHeight = DeleteActionView.height
+        let deleteViewHigh = (UIScreen.size.height - deleteViewHeight)/2
+        let deleteViewLow = deleteViewHigh + deleteViewHeight
+
+        //available space below bubble cell
+        let spaceBelowCell = UIScreen.size.height - cellLow
+
+        //put deleteActionView below cell it's the prefered way to go
+        let putBelow = spaceBelowCell - (cellDeleteViewGap + deleteViewHeight) > 0
+        let delta = cellLow - deleteViewHigh
+
+        let deleteView_YOffset:CGFloat
+
+        if putBelow { deleteView_YOffset = delta + cellDeleteViewGap }
+        else {//put up
+            deleteView_YOffset = frame.origin.y - (deleteViewLow + cellDeleteViewGap) - 10
+        }
+
+        return deleteView_YOffset
     }
     
     // MARK: -

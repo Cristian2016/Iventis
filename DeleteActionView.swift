@@ -60,7 +60,7 @@ struct DeleteActionView: View {
                         .padding()
                     }
             }
-            .offset(x: 0, y: viewModel.compute_deleteView_YOffset(for: .zero))
+            .offset(x: 0, y: viewModel.compute_deleteView_YOffset(for: viewModel.showDeleteAction_bFrame))
     }
     
     // MARK: - Init

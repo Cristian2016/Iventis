@@ -18,27 +18,27 @@ struct BubbleCell: View {
     
     // MARK: - Body
     var body: some View {
-//                let _ = Self._printChanges()
+                let _ = Self._printChanges()
         
         VStack {
             ZStack {
-                if revealBubbleCellFrame {
-                    Rectangle()
-                        .fill(.clear)
-                        .background {
-                            GeometryReader { geo -> Color in
-                                DispatchQueue.main.async {
-                                    let frame = geo.frame(in: .global)
-                                    viewModel.showDeleteAction_bFrame = frame
-                                }
-                                return .clear
-                            }
-                        }
-                }
+////                if revealBubbleCellFrame {
+////                    Rectangle()
+////                        .fill(.clear)
+////                        .background {
+////                            GeometryReader { geo -> Color in
+////                                DispatchQueue.main.async {
+////                                    let frame = geo.frame(in: .global)
+////                                    viewModel.showDeleteAction_bFrame = frame
+////                                }
+////                                return .clear
+////                            }
+////                        }
+////                }
                 threeCircles //🔴🔴🔴
                 threeLabels //⓿⓳➓
             }
-            //subviews
+//            //subviews
             .overlay { if bubble.hasCalendar && noNote { calendarSymbol }}
             .overlay { stickyNote }
             .overlay { if confirm_CalEventCreated { CalEventCreatedConfirmationView() }}
@@ -111,7 +111,7 @@ struct BubbleCell: View {
             //gestures
                 .onTapGesture { toggleBubbleDetail() }
                 .onLongPressGesture { showNotesList() }
-            
+
             //MINUTES
             Circle().fill(Color.clear)
                 .overlay { Text(bubble.components.min) }
@@ -127,13 +127,13 @@ struct BubbleCell: View {
             Circle().fill(Color.clear)
                 .contentShape(Circle())
                 .overlay { Text(bubble.components.sec) }
-            //animations
+//            //animations
                 .scaleEffect(isSecondsLongPressed ? 0.2 : 1.0)
                 .animation(.secondsLongPressed, value: isSecondsLongPressed)
-            //gestures
+//            //gestures
                 .gesture(tap)
                 .gesture(longPress)
-            //overlays
+//            //overlays
                 .overlay {
                     if sdb.referenceDelay > 0 { SDButton(bubble.sdb) }
                 }
@@ -163,12 +163,6 @@ struct BubbleCell: View {
     
     private var noteButtonContent:some View {
         BubbleNote().environmentObject(bubble)
-    }
-    
-    private var cellLowEmitterView: some View {
-        Circle()
-            .fill(Color.clear)
-            .frame(width: 10, height: 10)
     }
     
     private var calendarSymbol:some View {
