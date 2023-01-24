@@ -85,3 +85,8 @@ public extension Float {
         let cents:String
     }
 }
+
+extension Notification.Name {
+    static let sizeNotification = Notification.Name("sizeNotification")
+    static let frameNotification = Notification.Name("frameNotification")
+}

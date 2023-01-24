@@ -22,19 +22,19 @@ struct BubbleCell: View {
         
         VStack {
             ZStack {
-////                if revealBubbleCellFrame {
-////                    Rectangle()
-////                        .fill(.clear)
-////                        .background {
-////                            GeometryReader { geo -> Color in
-////                                DispatchQueue.main.async {
-////                                    let frame = geo.frame(in: .global)
-////                                    viewModel.showDeleteAction_bFrame = frame
-////                                }
-////                                return .clear
-////                            }
-////                        }
-////                }
+                if revealBubbleCellFrame {
+//                    Rectangle()
+//                        .fill(.clear)
+//                        .background {
+//                            GeometryReader { geo -> Color in
+//                                DispatchQueue.main.async {
+//                                    let frame = geo.frame(in: .global)
+//                                    viewModel.showDeleteAction_bFrame = frame
+//                                }
+//                                return .clear
+//                            }
+//                        }
+                }
                 threeCircles //🔴🔴🔴
                 threeLabels //⓿⓳➓
             }
