@@ -37,8 +37,6 @@ class ViewModel: ObservableObject {
     // MARK: -
     ///bubbleCell rank and frame. Frame will not be set if DetailView shows
     @Published var showDeleteAction_bRank:Int64? //set when user taps deleteActionButton
-    @Published var showDeleteAction_bFrame:CGRect?
-    @Published var bubbleCellFrame:CGRect?
     
     @Published var isDetailViewShowing = false
     

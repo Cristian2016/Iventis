@@ -27,7 +27,6 @@ struct DeleteActionView: View {
                 Color.white.opacity(0.01)
                     .onTapGesture {
                         viewModel.showDeleteAction_bRank = nil
-                        viewModel.showDeleteAction_bFrame = nil
                     }
                 RoundedRectangle(cornerRadius: backgroundRadius)
                     .fill(backgroundColor)
@@ -42,14 +41,12 @@ struct DeleteActionView: View {
                                         .onTapGesture { withAnimation {
                                             viewModel.delete(bubble!)
                                             viewModel.showDeleteAction_bRank = nil
-                                            viewModel.showDeleteAction_bFrame = nil
                                         } }
                                     deleteHistoryView
                                         .onTapGesture { withAnimation {
                                             if !bubble!.sessions_.isEmpty {
                                                 viewModel.reset(bubble!)
                                                 viewModel.showDeleteAction_bRank = nil
-                                                viewModel.showDeleteAction_bFrame = nil
                                             }
                                         } }
                                 }
@@ -60,7 +57,7 @@ struct DeleteActionView: View {
                         .padding()
                     }
             }
-            .offset(x: 0, y: viewModel.compute_deleteView_YOffset(for: viewModel.showDeleteAction_bFrame))
+            .offset(x: 0, y: 0)
     }
     
     // MARK: - Init
