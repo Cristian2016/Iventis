@@ -16,7 +16,7 @@ struct BubbleList: View {
     @Environment(\.managedObjectContext) private var viewContext
     @EnvironmentObject private var viewModel:ViewModel
     @SectionedFetchRequest var results:SectionedFetchResults<Bool, Bubble>
-    @State private var bubbleCellSize = CGSize(width: 1, height: 1) /*  */
+    @State private var bubbleCellSize:CGSize?
     
     // MARK: -
     var body: some View {
@@ -52,7 +52,7 @@ struct BubbleList: View {
                         }
                             .scrollDisabled(true)
                             .listStyle(.plain)
-                            .frame(height: bubbleCellSize.height * 1.1)
+                            .frame(height: (bubbleCellSize?.height ?? 0) * 1.1)
                             .padding([.leading, .trailing], -10) //2
                         DetailView(Int(bubble.rank))
                     }

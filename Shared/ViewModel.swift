@@ -38,6 +38,7 @@ class ViewModel: ObservableObject {
     ///bubbleCell rank and frame. Frame will not be set if DetailView shows
     @Published var showDeleteAction_bRank:Int64?
     @Published var showDeleteAction_bFrame:CGRect?
+    @Published var bubbleCellFrame:CGRect?
     
     @Published var isDetailViewShowing = false
     
