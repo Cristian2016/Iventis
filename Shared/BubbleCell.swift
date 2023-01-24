@@ -276,9 +276,7 @@ struct BubbleCell: View {
     var confirm_CalEventCreated:Bool { viewModel.confirm_CalEventCreated == bubble.rank }
     
     ///show bubbleCell.frame if it's the same rank and the frame is not set and detailView does not show. In the Detailview there is no need to compute deleteActionView.yOffset
-    private var broadcastBubbleCellFrame:Bool {
-        viewModel.showDeleteAction_bRank == bubble.rank
-    }
+    private var broadcastBubbleCellFrame:Bool { viewModel.showDeleteAction_bRank == bubble.rank }
 }
 
 // MARK: - Modifiers
