@@ -26,7 +26,6 @@ struct BubbleCell: View {
                     Rectangle()
                         .fill(.clear)
                         .readFrame($viewModel.bubbleCellFrame)
-
                 }
                 threeCircles //🔴🔴🔴
                 threeLabels //⓿⓳➓

@@ -35,7 +35,7 @@ struct TimersApp: App {
                         .tint(.label)
                 }
                 
-                if viewModel.showDeleteAction_bRank != nil {
+                if showDeleteActionView {
                     let bubble = viewModel.bubble(for: Int(viewModel.showDeleteAction_bRank!))
                     DeleteActionView(bubble)
                 }
@@ -92,6 +92,10 @@ struct TimersApp: App {
     func handleInactivePhase() {
         print("scenePhase.inactive")
         print(viewModel.allBubbles(runningOnly: false).count)
+    }
+    
+    private var showDeleteActionView:Bool {
+        viewModel.showDeleteAction_bRank != nil
     }
 }
 
