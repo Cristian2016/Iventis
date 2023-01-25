@@ -7,6 +7,38 @@
 
 import SwiftUI
 
+public extension String {
+    static let appGroupName = "group.com.Timers.container"
+}
+
+public extension FileManager {
+    static var sharedContainerURL:URL = {
+        guard let url = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: String.appGroupName)
+        else { fatalError() }
+        return url
+    }()
+}
+
+extension UserDefaults {
+    static func generateRank() -> Int {
+        //get rank
+        //increase rank by one
+        //save rank
+        let ud = UserDefaults(suiteName: String.appGroupName)!
+        var rank = ud.integer(forKey: UserDefaults.Key.rank)
+        defer {
+            rank += 1
+            ud.set(rank, forKey: UserDefaults.Key.rank)
+        }
+        return rank
+    }
+    
+    static func resetRankGenerator(_ value:Int) {
+        let ud = UserDefaults(suiteName: String.appGroupName)!
+        ud.set(value, forKey: UserDefaults.Key.rank)
+    }
+}
+
 extension Color {
     static let pauseStickerColor = Color("pauseStickerColor")
     static let pauseStickerFontColor = Color("pauseStickerFontColor")

@@ -32,7 +32,6 @@
 		1F5A0F6C282641D00075E86B /* EmptyHistoryAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5A0F6B282641D00075E86B /* EmptyHistoryAlertView.swift */; };
 		1F5A0F6F282647A80075E86B /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5A0F6E282647A80075E86B /* DetailView.swift */; };
 		1F5F4A5D28093FAF00AF3442 /* TimersApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5F4A4A28093FAD00AF3442 /* TimersApp.swift */; };
-		1F5F4A6128093FAF00AF3442 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5F4A4C28093FAD00AF3442 /* Persistence.swift */; };
 		1F5F4A6328093FAF00AF3442 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1F5F4A4D28093FAF00AF3442 /* Assets.xcassets */; };
 		1F5F4A6F28093FF800AF3442 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1F5F4A6D28093FF800AF3442 /* Model.xcdatamodeld */; };
 		1F5F4A732809409600AF3442 /* Bubble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5F4A712809409600AF3442 /* Bubble.swift */; };
@@ -59,6 +58,7 @@
 		1F9B6AF0280950D600C0A725 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F9B6AEF280950D600C0A725 /* ViewModel.swift */; };
 		1F9BE0A9280BE14100F87EFA /* PaletteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F9BE0A8280BE14100F87EFA /* PaletteView.swift */; };
 		1F9BE0AD280C6AB000F87EFA /* TapHold.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F9BE0AC280C6AB000F87EFA /* TapHold.swift */; };
+		1FA1F39E2981CFE6000A50F5 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA1F39D2981CFE6000A50F5 /* Persistence.swift */; };
 		1FA355CB2832186100F73111 /* CalendarManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA355CA2832186100F73111 /* CalendarManager.swift */; };
 		1FA377E82972FE75005ACD41 /* Library.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA377E72972FE75005ACD41 /* Library.swift */; };
 		1FA8346C2850A57A003F4D61 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F5F4A7D280941AA00AF3442 /* WidgetKit.framework */; };
@@ -147,7 +147,6 @@
 		1F5A0F6B282641D00075E86B /* EmptyHistoryAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyHistoryAlertView.swift; sourceTree = "<group>"; };
 		1F5A0F6E282647A80075E86B /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
 		1F5F4A4A28093FAD00AF3442 /* TimersApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimersApp.swift; sourceTree = "<group>"; };
-		1F5F4A4C28093FAD00AF3442 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		1F5F4A4D28093FAF00AF3442 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1F5F4A5228093FAF00AF3442 /* Timers.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Timers.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1F5F4A6E28093FF800AF3442 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
@@ -179,6 +178,7 @@
 		1F9B6AEF280950D600C0A725 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		1F9BE0A8280BE14100F87EFA /* PaletteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PaletteView.swift; path = Shared/PaletteView.swift; sourceTree = SOURCE_ROOT; };
 		1F9BE0AC280C6AB000F87EFA /* TapHold.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapHold.swift; sourceTree = "<group>"; };
+		1FA1F39D2981CFE6000A50F5 /* Persistence.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		1FA355CA2832186100F73111 /* CalendarManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarManager.swift; sourceTree = "<group>"; };
 		1FA355CE2832238E00F73111 /* Timers--iOS--Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Timers--iOS--Info.plist"; sourceTree = "<group>"; };
 		1FA377E72972FE75005ACD41 /* Library.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Library.swift; sourceTree = "<group>"; };
@@ -366,7 +366,7 @@
 		1F5F4A93280941FC00AF3442 /* Core Data */ = {
 			isa = PBXGroup;
 			children = (
-				1F5F4A4C28093FAD00AF3442 /* Persistence.swift */,
+				1FA1F39D2981CFE6000A50F5 /* Persistence.swift */,
 				1F9BE0A8280BE14100F87EFA /* PaletteView.swift */,
 				1F9BE0AC280C6AB000F87EFA /* TapHold.swift */,
 				1FCF01B2287CBA74009DC95C /* DelayStartSymbol.swift */,
@@ -569,7 +569,6 @@
 				1F0373C028DEDD97005CE8D3 /* ConfirmationView.swift in Sources */,
 				1FE163AE280EE6F40050C6F5 /* LeftStrip.swift in Sources */,
 				1F641FFE281FF70100413E31 /* BottomDetailView.swift in Sources */,
-				1F5F4A6128093FAF00AF3442 /* Persistence.swift in Sources */,
 				1FCF01B3287CBA74009DC95C /* DelayStartSymbol.swift in Sources */,
 				1F48F55A286AE5B30071386A /* EmptyNote_InfoView.swift in Sources */,
 				1F9B6AF0280950D600C0A725 /* ViewModel.swift in Sources */,
@@ -600,6 +599,7 @@
 				1FFC8BB628142F040059EF2E /* Pair.swift in Sources */,
 				1F477CA928EAB21900B4F965 /* AddStickyNoteQuickButton.swift in Sources */,
 				1F5987A5286B5F8900CDB54C /* PairSavedNote Properties.swift in Sources */,
+				1FA1F39E2981CFE6000A50F5 /* Persistence.swift in Sources */,
 				1FB5D8D628E8276D00DD522A /* StickyNoteListInfoView.swift in Sources */,
 				1FC70BB129807BAB007CD1E6 /* LayoutViewModel.swift in Sources */,
 				1F6420062820186D00413E31 /* PairCell.swift in Sources */,
@@ -759,12 +759,9 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Timers--iOS--Info.plist";
 				INFOPLIST_KEY_NSCalendarsUsageDescription = "Allow the App to create Events in the Calendar App";
-				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -794,12 +791,9 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Timers--iOS--Info.plist";
 				INFOPLIST_KEY_NSCalendarsUsageDescription = "Allow the App to create Events in the Calendar App";
-				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

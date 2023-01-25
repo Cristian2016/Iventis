@@ -16,29 +16,38 @@ class LayoutViewModel: ObservableObject {
     
     @Published var deleteActionViewOffset:CGFloat?
     
-    private(set) var orientation = UIDevice.current.orientation {didSet{
-        print(orientationDescription)
-    }}
+    private(set) var orientation = UIDevice.current.orientation
     
     // MARK: - Methods
     private func set_deleteActionViewOffset(for frame:CGRect?) {
         guard let frame = frame else { return }
-        print(frame)
+        
+        let verticalSpace = isPortrait ? UIScreen.main.bounds.height : UIScreen.main.bounds.width
+        let deleteActionViewHeight = DeleteActionView.height
+        
+        //prefered position of deleteActionView is under the bubbleCell, but only if it has enough room
+        let deleteActionViewFitsUnderneath = verticalSpace - (frame.origin.y + frame.height) > deleteActionViewHeight
+        
+        print("deleteActionViewFitsUnderneath \(deleteActionViewFitsUnderneath)")
     }
     
-    private var orientationDescription:String {
+    private var isPortrait:Bool {
         switch orientation {
-            case .portrait, .portraitUpsideDown: return "portrait"
-            case .landscapeLeft, .landscapeRight: return "landscape"
-            default: return "does not matter"
+            case .portrait, .portraitUpsideDown: return true
+            case .landscapeLeft, .landscapeRight: return false
+            default: return false
         }
     }
     
     // MARK: - Init/deinit
     init() {
-        let notification = UIDevice.orientationDidChangeNotification
-        NotificationCenter.default.addObserver(forName: notification, object: nil, queue: nil) { [weak self] notification in
-            self?.orientation = UIDevice.current.orientation
+        delayExecution(.now() + 0.1) {
+            print(#function)
+            let notification = UIDevice.orientationDidChangeNotification
+            NotificationCenter.default.addObserver(forName: notification, object: nil, queue: nil) { [weak self] notification in
+                self?.orientation = UIDevice.current.orientation
+                print("isPortrait \(self!.orientation.isPortrait)")
+            }
         }
     }
     

@@ -15,7 +15,8 @@ import MyPackage
 struct BubbleList: View {
     @Environment(\.managedObjectContext) private var viewContext
     @EnvironmentObject private var viewModel:ViewModel
-    @SectionedFetchRequest var results:SectionedFetchResults<Bool, Bubble>
+    @SectionedFetchRequest var bubbles:SectionedFetchResults<Bool, Bubble>
+    
     @State private var bubbleCellSize:CGSize?
     
     // MARK: -
@@ -26,7 +27,7 @@ struct BubbleList: View {
                 GeometryReader { geo in
                     let metrics = BubbleCell.Metrics(width: geo.size.width)
                     
-                    List (results) { section in
+                    List (bubbles) { section in
                         Section {
                             ForEach (section) { bubble in
                                 ZStack { //1
@@ -77,7 +78,7 @@ struct BubbleList: View {
     // MARK: -
     init() {
         UITableView.appearance().showsVerticalScrollIndicator = false
-        _results = SectionedFetchRequest<Bool, Bubble>(
+        _bubbles = SectionedFetchRequest<Bool, Bubble>(
             entity: Bubble.entity(),
             sectionIdentifier: \.isPinned,
             sortDescriptors: BubbleList.descriptors,
@@ -142,5 +143,5 @@ struct ContentView_Previews: PreviewProvider {
 extension BubbleList {
     fileprivate var notesShowing:Bool { viewModel.notesList_bRank != nil }
         
-    fileprivate var isListEmpty:Bool { results.isEmpty }
+    fileprivate var isListEmpty:Bool { bubbles.isEmpty }
 }
