@@ -14,8 +14,9 @@ struct BubbleCell: View {
     @StateObject var bubble:Bubble
     @StateObject var sdb:SDB  /* I made
                                this one since apparently bubble.sdb.referenceDelay does not emit */
+    
     @EnvironmentObject private var viewModel:ViewModel
-    @State var bubbleCellFrame:CGRect?
+    @EnvironmentObject private var layoutViewModel:LayoutViewModel
     
     // MARK: - Body
     var body: some View {
@@ -23,10 +24,10 @@ struct BubbleCell: View {
         
         VStack {
             ZStack {
-                if broadcastBubbleCellFrame {
-                    Rectangle()
+                if revealBubbleCellFrame {
+                    Rectangle()    
                         .fill(.clear)
-                        .readFrame($bubbleCellFrame)
+                        .readFrame($layoutViewModel.bubbleCellFrame)
                 }
                 threeCircles //🔴🔴🔴
                 threeLabels //⓿⓳➓
@@ -276,7 +277,10 @@ struct BubbleCell: View {
     var confirm_CalEventCreated:Bool { viewModel.confirm_CalEventCreated == bubble.rank }
     
     ///show bubbleCell.frame if it's the same rank and the frame is not set and detailView does not show. In the Detailview there is no need to compute deleteActionView.yOffset
-    private var broadcastBubbleCellFrame:Bool { viewModel.showDeleteAction_bRank == bubble.rank }
+    private var revealBubbleCellFrame:Bool {
+        viewModel.showDeleteAction_bRank == bubble.rank
+        && layoutViewModel.bubbleCellFrame == nil
+    }
 }
 
 // MARK: - Modifiers

@@ -76,6 +76,7 @@
 		1FB5D8D828E96CBD00DD522A /* StartDelayInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB5D8D728E96CBD00DD522A /* StartDelayInfoView.swift */; };
 		1FB5D8DA28E9BF0500DD522A /* GestureLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB5D8D928E9BF0500DD522A /* GestureLabel.swift */; };
 		1FB7D57C2862F0300085C2BE /* PlusButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB7D57B2862F0300085C2BE /* PlusButton.swift */; };
+		1FC70BB129807BAB007CD1E6 /* LayoutViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FC70BB029807BAB007CD1E6 /* LayoutViewModel.swift */; };
 		1FCF01B3287CBA74009DC95C /* DelayStartSymbol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FCF01B2287CBA74009DC95C /* DelayStartSymbol.swift */; };
 		1FCF0C662816F3F600AA1FAA /* EmptyListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FCF0C652816F3F600AA1FAA /* EmptyListView.swift */; };
 		1FD15F802972F5D100852073 /* MyPackage in Frameworks */ = {isa = PBXBuildFile; productRef = 1FD15F7F2972F5D100852073 /* MyPackage */; };
@@ -194,6 +195,7 @@
 		1FB5D8D728E96CBD00DD522A /* StartDelayInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartDelayInfoView.swift; sourceTree = "<group>"; };
 		1FB5D8D928E9BF0500DD522A /* GestureLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GestureLabel.swift; sourceTree = "<group>"; };
 		1FB7D57B2862F0300085C2BE /* PlusButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlusButton.swift; sourceTree = "<group>"; };
+		1FC70BB029807BAB007CD1E6 /* LayoutViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutViewModel.swift; sourceTree = "<group>"; };
 		1FCF01B2287CBA74009DC95C /* DelayStartSymbol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DelayStartSymbol.swift; sourceTree = "<group>"; };
 		1FCF0C652816F3F600AA1FAA /* EmptyListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyListView.swift; sourceTree = "<group>"; };
 		1FD21864281D9AB700B43403 /* ExitFocusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExitFocusView.swift; sourceTree = "<group>"; };
@@ -327,6 +329,7 @@
 				1F1CF2F1286B5AD2007102F2 /* InfoViews */,
 				1F5F4A4A28093FAD00AF3442 /* TimersApp.swift */,
 				1F9B6AEF280950D600C0A725 /* ViewModel.swift */,
+				1FC70BB029807BAB007CD1E6 /* LayoutViewModel.swift */,
 				1F5F4A982809456E00AF3442 /* BubbleList.swift */,
 				1F5F4A93280941FC00AF3442 /* Core Data */,
 				1F97B7E02809B331002FFCA3 /* Assets */,
@@ -598,6 +601,7 @@
 				1F477CA928EAB21900B4F965 /* AddStickyNoteQuickButton.swift in Sources */,
 				1F5987A5286B5F8900CDB54C /* PairSavedNote Properties.swift in Sources */,
 				1FB5D8D628E8276D00DD522A /* StickyNoteListInfoView.swift in Sources */,
+				1FC70BB129807BAB007CD1E6 /* LayoutViewModel.swift in Sources */,
 				1F6420062820186D00413E31 /* PairCell.swift in Sources */,
 				1F387CEB2830082000F6B81D /* UpDownArrowsButton.swift in Sources */,
 				1FB3178F286ACB48006BBE82 /* Note_InfoView.swift in Sources */,

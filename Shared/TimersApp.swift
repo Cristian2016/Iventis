@@ -23,6 +23,7 @@ struct TimersApp: App {
     @Environment(\.scenePhase) private var scenePhase
     private let viewContext = PersistenceController.shared.container.viewContext
     @StateObject private var viewModel = ViewModel()
+    @StateObject private var layoutViewModel = LayoutViewModel()
         
     //the root view of scene is a NavigationSplitView
     var body: some Scene {
@@ -31,8 +32,7 @@ struct TimersApp: App {
                 if UIDevice.isIPad { //iPad
                     iPadViewHierarchy()
                 } else { //iPhone
-                    NavigationStack(path: $viewModel.path) { ViewHierarchy() }
-                        .tint(.label)
+                    NavigationStack(path: $viewModel.path) { ViewHierarchy() }.tint(.label)
                 }
                 
 //                if showDeleteActionView {
@@ -59,6 +59,7 @@ struct TimersApp: App {
             .ignoresSafeArea()
             .environment(\.managedObjectContext, viewContext)
             .environmentObject(viewModel)  /* inject ViewModel for entire view hierarchy */
+            .environmentObject(layoutViewModel) /* inject LayoutViewModel for entire view hierarchy */
             .onChange(of: scenePhase) { handleScenePhaseChange($0) }
         }
     }
