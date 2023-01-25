@@ -35,10 +35,10 @@ struct TimersApp: App {
                     NavigationStack(path: $viewModel.path) { ViewHierarchy() }.tint(.label)
                 }
                 
-//                if showDeleteActionView {
-//                    let bubble = viewModel.bubble(for: Int(viewModel.showDeleteAction_bRank!))
-//                    DeleteActionView(bubble)
-//                }
+                if showDeleteActionView {
+                    let bubble = viewModel.bubble(for: Int(viewModel.showDeleteAction_bRank!))
+                    DeleteActionView(bubble)
+                }
                 
                 if bubbleNotesShowing { BubbleStickyNoteList($viewModel.notesList_bRank) }
                 
@@ -95,7 +95,10 @@ struct TimersApp: App {
         print(viewModel.allBubbles(runningOnly: false).count)
     }
     
-//    private var showDeleteActionView:Bool { viewModel.showDeleteAction_bRank != nil }
+    private var showDeleteActionView:Bool {
+        viewModel.showDeleteAction_bRank != nil &&
+        layoutViewModel.bubbleCellFrame != nil
+    }
 }
 
 struct ViewHierarchy:View {

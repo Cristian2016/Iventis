@@ -13,6 +13,7 @@ struct DeleteActionView: View {
     let bubbleColor:Color
     
     @EnvironmentObject private var viewModel:ViewModel
+    @EnvironmentObject private var layoutViewModel:LayoutViewModel
     
     //internal properties
     let ratio = CGFloat(0.8037)
@@ -57,7 +58,7 @@ struct DeleteActionView: View {
                         .padding()
                     }
             }
-            .offset(x: 0, y: 0)
+            .offset(x: 0, y: layoutViewModel.deleteActionViewOffset ?? 0)
     }
     
     // MARK: - Init
