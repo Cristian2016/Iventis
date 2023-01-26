@@ -60,10 +60,10 @@ struct TimersApp: App {
             }
             .ignoresSafeArea()
             .environment(\.managedObjectContext, viewContext)
+            .onAppear { createBubblesOnFirstAppLaunch() } //1
             .environmentObject(viewModel) //2
             .environmentObject(layoutViewModel) //2
             .onChange(of: scenePhase) { handleScenePhaseChange($0) } //3
-            .onAppear { createBubblesOnFirstAppLaunch() } //1
         }
     }
     
