@@ -5,6 +5,7 @@
 //  Created by Cristian Lapusan on 15.04.2022.
 //1 on first app launch a timer and a stopwatch will be created
 //2 initialize and inject ViewModel and LayoutViewModel for entire view hierarchy as @StateObject instances
+//3 scenePhase it used to start/stop backgroundTimer which is used by bubbles to update their displayed time
 
 import SwiftUI
 import MyPackage
@@ -61,7 +62,7 @@ struct TimersApp: App {
             .environment(\.managedObjectContext, viewContext)
             .environmentObject(viewModel) //2
             .environmentObject(layoutViewModel) //2
-            .onChange(of: scenePhase) { handleScenePhaseChange($0) }
+            .onChange(of: scenePhase) { handleScenePhaseChange($0) } //3
             .onAppear { createBubblesOnFirstAppLaunch() } //1
         }
     }
