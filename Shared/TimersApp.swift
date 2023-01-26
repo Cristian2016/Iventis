@@ -13,7 +13,7 @@ struct TimersApp: App {
     static var calManager:CalendarManager! /* set at init() */
     
     //store key in UserDefaults.shared [NOT UserDefaults.standard]
-    @AppStorage(UserDefaults.Key.firstAppLaunchEver, store: .shared)
+    @AppStorage(UserDefaults.Key.isFirstAppLaunch, store: .shared)
     private var isFirstAppLaunch = true
     
     fileprivate var showDeleteAction:Bool { viewModel.showDeleteAction_bRank != nil }
