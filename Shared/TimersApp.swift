@@ -6,6 +6,8 @@
 //1 on first app launch a timer & stopwatch will be created
 //2 initialize and inject ViewModel and LayoutViewModel for entire view hierarchy as @StateObject instances
 //3 scenePhase it used to start/stop backgroundTimer which is used by bubbles to update their displayed time. backgroundTimer sends a signal [notification] each second
+// handleBecomeActive: called on app launch, returning from background or returning from inactive state
+// handleEnterBackground: called when app killed or moved to background. NOT called on NotificationCenter, incoming call etc
 //4 deleteActionView can either delete the entire bubble or just its history [all sessions] resetting the bubble to the .brandNew state
 //5 store key in UserDefaults.shared [NOT UserDefaults.standard]
 //6 used by iPad to show either iPhoneViewHierarchy [compact size] or iPadViewHierarchy [regular size]
@@ -82,10 +84,8 @@ struct TimersApp: App {
         }
     } //3
     
-    //called on app launch, returning from background or returning from inactive state
     func handleBecomeActive() { viewModel.bubbleTimer(.start) } //3
     
-    //called when app killed or moved to background. NOT called on NotificationCenter, incoming call etc
     func handleEnterBackground() { viewModel.bubbleTimer(.pause) } //3
     
     private var showDeleteActionView:Bool {
