@@ -12,7 +12,7 @@ struct iPadViewHierarchy: View {
     @Environment(\.horizontalSizeClass) private var horizontalSizeClass
     
     var body: some View {
-        if showIPadViewHierarchy { iPadViewHierarchy() }
+        if showIPadViewHierarchy { Text("iPadViewHierarchy") }
         else { iPhoneViewHierarchy() }
     }
     
