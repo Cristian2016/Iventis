@@ -4,12 +4,12 @@
 //
 //  Created by Cristian Lapusan on 15.04.2022.
 //1 on first app launch a timer & stopwatch will be created
+// isFirstAppLaunch key stored in UserDefaults.shared [NOT UserDefaults.standard]
 //2 initialize and inject ViewModel and LayoutViewModel for entire view hierarchy as @StateObject instances
 //3 scenePhase it used to start/stop backgroundTimer which is used by bubbles to update their displayed time. backgroundTimer sends a signal [notification] each second
 // handleBecomeActive: called on app launch, returning from background or returning from inactive state
 // handleEnterBackground: called when app killed or moved to background. NOT called on NotificationCenter, incoming call etc
 //4 deleteActionView can either delete the entire bubble or just its history [all sessions] resetting the bubble to the .brandNew state
-//5 store key in UserDefaults.shared [NOT UserDefaults.standard]
 //6 used by iPad to show either iPhoneViewHierarchy [compact size] or iPadViewHierarchy [regular size]
 
 import SwiftUI
@@ -18,7 +18,7 @@ import MyPackage
 @main
 struct TimersApp: App {
     @AppStorage(UserDefaults.Key.isFirstAppLaunch, store: .shared)
-    private var isFirstAppLaunch = true //5
+    private var isFirstAppLaunch = true //1
     
     @Environment(\.scenePhase) private var scenePhase //3
     
