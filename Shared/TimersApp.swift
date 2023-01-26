@@ -20,10 +20,6 @@ struct TimersApp: App {
     @AppStorage(UserDefaults.Key.isFirstAppLaunch, store: .shared)
     private var isFirstAppLaunch = true //5
     
-    fileprivate var showDeleteAction:Bool { viewModel.showDeleteAction_bRank != nil }
-    
-    fileprivate var bubbleNotesShowing:Bool { viewModel.notesList_bRank != nil }
-    
     @Environment(\.scenePhase) private var scenePhase //3
     
     @StateObject private var viewModel = ViewModel() //2
@@ -102,6 +98,9 @@ struct TimersApp: App {
     } //1
     
     // MARK: -
+    fileprivate var showDeleteAction:Bool { viewModel.showDeleteAction_bRank != nil }
+    
+    fileprivate var bubbleNotesShowing:Bool { viewModel.notesList_bRank != nil }
 }
 
 struct ViewHierarchy:View {
