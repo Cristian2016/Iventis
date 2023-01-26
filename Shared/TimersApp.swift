@@ -26,7 +26,6 @@ struct TimersApp: App {
     @StateObject private var viewModel = ViewModel() //2
     @StateObject private var layoutViewModel = LayoutViewModel() //2
         
-    //the root view of scene is a NavigationSplitView
     var body: some Scene {
         WindowGroup {
             ZStack {

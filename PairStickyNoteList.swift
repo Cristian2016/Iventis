@@ -115,9 +115,3 @@ struct PairStickyNoteList: View {
     // MARK: -
     private func dismiss() { vm.pairOfNotesList = nil }
 }
-
-//struct PairStickyNotesList_Previews: PreviewProvider {
-//    static var previews: some View {
-//        PairStickyNotesList(<#Pair#>)
-//    }
-//}
