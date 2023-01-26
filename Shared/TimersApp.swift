@@ -7,15 +7,15 @@
 //2 initialize and inject ViewModel and LayoutViewModel for entire view hierarchy as @StateObject instances
 //3 scenePhase it used to start/stop backgroundTimer which is used by bubbles to update their displayed time. backgroundTimer sends a signal [notification] each second
 //4 deleteActionView can either delete the entire bubble or just its history [all sessions] resetting the bubble to the .brandNew state
+//5 store key in UserDefaults.shared [NOT UserDefaults.standard]
 
 import SwiftUI
 import MyPackage
 
 @main
 struct TimersApp: App {
-    //store key in UserDefaults.shared [NOT UserDefaults.standard]
     @AppStorage(UserDefaults.Key.isFirstAppLaunch, store: .shared)
-    private var isFirstAppLaunch = true
+    private var isFirstAppLaunch = true //5
     
     fileprivate var showDeleteAction:Bool { viewModel.showDeleteAction_bRank != nil }
     
