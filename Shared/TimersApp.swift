@@ -3,7 +3,7 @@
 //  Shared
 //
 //  Created by Cristian Lapusan on 15.04.2022.
-//
+//1 on first app launch a timer and a stopwatch will be created
 
 import SwiftUI
 import MyPackage
@@ -14,7 +14,7 @@ struct TimersApp: App {
     
     //store key in UserDefaults.shared [NOT UserDefaults.standard]
     @AppStorage(UserDefaults.Key.firstAppLaunchEver, store: .shared)
-    private var firstAppLaunchEver = true
+    private var isFirstAppLaunch = true
     
     fileprivate var showDeleteAction:Bool { viewModel.showDeleteAction_bRank != nil }
     
@@ -62,9 +62,9 @@ struct TimersApp: App {
             .environmentObject(layoutViewModel) /* inject LayoutViewModel for entire view hierarchy */
             .onChange(of: scenePhase) { handleScenePhaseChange($0) }
             .onAppear {
-                if firstAppLaunchEver {
+                if isFirstAppLaunch {//1
                     viewModel.createBubble(.stopwatch, "lemon")
-                    firstAppLaunchEver = false
+                    isFirstAppLaunch = false
                 }
             }
         }
