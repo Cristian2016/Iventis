@@ -6,6 +6,7 @@
 //1 on first app launch a timer and a stopwatch will be created
 //2 initialize and inject ViewModel and LayoutViewModel for entire view hierarchy as @StateObject instances
 //3 scenePhase it used to start/stop backgroundTimer which is used by bubbles to update their displayed time. backgroundTimer sends a signal [notification] each second
+//4 deleteActionView can either delete the entire bubble or just its history [all sessions] resetting the bubble to the .brandNew state
 
 import SwiftUI
 import MyPackage
@@ -96,7 +97,7 @@ struct TimersApp: App {
     private var showDeleteActionView:Bool {
         viewModel.showDeleteAction_bRank != nil &&
         layoutViewModel.bubbleCellFrame != nil
-    }
+    } //4
     
     private func createBubblesOnFirstAppLaunch() {
         if isFirstAppLaunch {
