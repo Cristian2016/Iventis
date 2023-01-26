@@ -8,21 +8,17 @@
 import SwiftUI
 
 struct iPadViewHierarchy: View {
-    ///horizontalSizeClass. In compact size class show iPhone like interface. Regular size class show iPad specific
-    @Environment(\.horizontalSizeClass) private var sizeClass
     @EnvironmentObject private var viewModel:ViewModel
+    @Environment(\.horizontalSizeClass) private var horizontalSizeClass
     
     var body: some View {
-        if sizeClass!.isRegular { //show iPad specific interface
-            
-        } else { //show iPhone-like interface
-            NavigationStack(path: $viewModel.path) { ViewHierarchy() }
-                .tint(.label) //color of the back button
-        }
+        if showIPadViewHierarchy { iPadViewHierarchy() }
+        else { iPhoneViewHierarchy() }
     }
     
     // MARK: - Helpers
     //make code a bit nicer looking
+    private var showIPadViewHierarchy:Bool { horizontalSizeClass == .regular }
     
     // MARK: -
 }

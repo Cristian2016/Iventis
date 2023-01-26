@@ -23,7 +23,6 @@ struct TimersApp: App {
     fileprivate var bubbleNotesShowing:Bool { viewModel.notesList_bRank != nil }
     
     @Environment(\.scenePhase) private var scenePhase //3
-    @Environment(\.horizontalSizeClass) private var horizontalSizeClass //6
     
     @StateObject private var viewModel = ViewModel() //2
     @StateObject private var layoutViewModel = LayoutViewModel() //2
@@ -33,10 +32,7 @@ struct TimersApp: App {
     var body: some Scene {
         WindowGroup {
             ZStack {
-                if UIDevice.isIPad {
-                    if showIPadViewHierarchy { iPadViewHierarchy() }
-                    else { iPhoneViewHierarchy() }
-                }
+                if UIDevice.isIPad { iPadViewHierarchy() }
                 else { iPhoneViewHierarchy() }
                 
                 if showDeleteActionView {
@@ -108,7 +104,6 @@ struct TimersApp: App {
     } //1
     
     // MARK: -
-    private var showIPadViewHierarchy:Bool { horizontalSizeClass == .regular }
 }
 
 struct ViewHierarchy:View {
