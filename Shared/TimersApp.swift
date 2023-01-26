@@ -73,9 +73,9 @@ struct TimersApp: App {
         }
     } //3
     
-    func handleBecomeActive() { viewModel.bubbleTimer(.start) } //3
+    private func handleBecomeActive() { viewModel.bubbleTimer(.start) } //3
     
-    func handleEnterBackground() { viewModel.bubbleTimer(.pause) } //3
+    private func handleEnterBackground() { viewModel.bubbleTimer(.pause) } //3
     
     private var showDeleteActionView:Bool {
         viewModel.showDeleteAction_bRank != nil &&
