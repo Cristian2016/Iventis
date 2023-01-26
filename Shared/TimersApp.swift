@@ -11,6 +11,7 @@
 // handleEnterBackground: called when app killed or moved to background. NOT called on NotificationCenter, incoming call etc
 //4 deleteActionView can either delete the entire bubble or just its history [all sessions] resetting the bubble to the .brandNew state
 //6 used by iPad to show either iPhoneViewHierarchy [compact size] or iPadViewHierarchy [regular size]
+//7 detect app launch to set bubble.timeComponents to bubble.currentClock
 
 import SwiftUI
 import MyPackage
@@ -63,12 +64,11 @@ struct TimersApp: App {
         }
     }
     
-    //detect app launch to set bubble.timeComponents to bubble.currentClock
     init() {
         delayExecution(.now() + 0.001) {
             NotificationCenter.default.post(name: .appLaunched, object: nil)
         }
-    }
+    } //7
     
     // MARK: - Methods
     private func handleScenePhaseChange(_ scenePhase:ScenePhase) {
