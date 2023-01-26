@@ -64,6 +64,7 @@ struct TimersApp: App {
             .onAppear {
                 if isFirstAppLaunch {//1
                     viewModel.createBubble(.stopwatch, "green", "🌳 Outdoors")
+                    viewModel.createBubble(.stopwatch, "charcoal", "☕️ Break")
                     isFirstAppLaunch = false
                 }
             }
