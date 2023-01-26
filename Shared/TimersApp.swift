@@ -34,10 +34,10 @@ struct TimersApp: App {
         WindowGroup {
             ZStack {
                 if UIDevice.isIPad {
-                    iPadViewHierarchy()
-                } else {
-                    iPhoneViewHierarchy()
+                    if showIPadViewHierarchy { iPadViewHierarchy() }
+                    else { iPhoneViewHierarchy() }
                 }
+                else { iPhoneViewHierarchy() }
                 
                 if showDeleteActionView {
                     let bubble = viewModel.bubble(for: Int(viewModel.showDeleteAction_bRank!))
@@ -106,6 +106,9 @@ struct TimersApp: App {
             isFirstAppLaunch = false
         }
     } //1
+    
+    // MARK: -
+    private var showIPadViewHierarchy:Bool { horizontalSizeClass == .regular }
 }
 
 struct ViewHierarchy:View {
