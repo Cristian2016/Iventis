@@ -4,6 +4,7 @@
 //
 //  Created by Cristian Lapusan on 15.04.2022.
 //1 on first app launch a timer and a stopwatch will be created
+//2 initialize and inject ViewModel and LayoutViewModel for entire view hierarchy as @StateObject instances
 
 import SwiftUI
 import MyPackage
@@ -22,8 +23,8 @@ struct TimersApp: App {
     
     @Environment(\.scenePhase) private var scenePhase
     private let viewContext = PersistenceController.shared.container.viewContext
-    @StateObject private var viewModel = ViewModel()
-    @StateObject private var layoutViewModel = LayoutViewModel()
+    @StateObject private var viewModel = ViewModel() //2
+    @StateObject private var layoutViewModel = LayoutViewModel() //2
         
     //the root view of scene is a NavigationSplitView
     var body: some Scene {
@@ -58,8 +59,8 @@ struct TimersApp: App {
             }
             .ignoresSafeArea()
             .environment(\.managedObjectContext, viewContext)
-            .environmentObject(viewModel)  /* inject ViewModel for entire view hierarchy */
-            .environmentObject(layoutViewModel) /* inject LayoutViewModel for entire view hierarchy */
+            .environmentObject(viewModel) //2
+            .environmentObject(layoutViewModel) //2
             .onChange(of: scenePhase) { handleScenePhaseChange($0) }
             .onAppear { createBubblesOnFirstAppLaunch() } //1
         }
