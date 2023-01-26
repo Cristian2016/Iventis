@@ -83,15 +83,15 @@ struct TimersApp: App {
             case .inactive: break
             @unknown default: fatalError()
         }
-    }
+    } //3
     
     ///called on app launch or returning from background
     ///also called when app returns from inactive state
-    func handleBecomeActive() { viewModel.bubbleTimer(.start) }
+    func handleBecomeActive() { viewModel.bubbleTimer(.start) } //3
     
     ///called when app killed or moved to background
     ///NOT called on NotificationCenter, incoming call etc
-    func handleEnterBackground() { viewModel.bubbleTimer(.pause) }
+    func handleEnterBackground() { viewModel.bubbleTimer(.pause) } //3
     
     private var showDeleteActionView:Bool {
         viewModel.showDeleteAction_bRank != nil &&
