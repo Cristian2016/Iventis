@@ -13,7 +13,7 @@ import MyPackage
 
 @main
 struct TimersApp: App {
-    static var calManager:CalendarManager! /* set at init() */
+    static var calManager:CalendarManager = CalendarManager.shared
     
     //store key in UserDefaults.shared [NOT UserDefaults.standard]
     @AppStorage(UserDefaults.Key.isFirstAppLaunch, store: .shared)
@@ -73,7 +73,6 @@ struct TimersApp: App {
         delayExecution(.now() + 0.001) {
             NotificationCenter.default.post(name: .appLaunched, object: nil)
         }
-        TimersApp.calManager = CalendarManager.shared
     }
     
     // MARK: - Methods
