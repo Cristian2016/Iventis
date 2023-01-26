@@ -63,7 +63,7 @@ struct TimersApp: App {
             .onChange(of: scenePhase) { handleScenePhaseChange($0) }
             .onAppear {
                 if isFirstAppLaunch {//1
-                    viewModel.createBubble(.stopwatch, "lemon", "⛅️ Outdoors")
+                    viewModel.createBubble(.stopwatch, "green", "🌳 Outdoors")
                     isFirstAppLaunch = false
                 }
             }
