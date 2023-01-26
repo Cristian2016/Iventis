@@ -76,12 +76,7 @@ struct TimersApp: App {
     private func handleBecomeActive() { viewModel.bubbleTimer(.start) } //3
     
     private func handleEnterBackground() { viewModel.bubbleTimer(.pause) } //3
-    
-    private var showDeleteActionView:Bool {
-        viewModel.showDeleteAction_bRank != nil &&
-        layoutViewModel.bubbleCellFrame != nil
-    } //4
-    
+        
     private func createBubblesOnFirstAppLaunch() {
         if isFirstAppLaunch {
             viewModel.createBubble(.stopwatch, "charcoal", "☕️ Break")
@@ -91,7 +86,10 @@ struct TimersApp: App {
     } //1
     
     // MARK: -
-    fileprivate var showDeleteAction:Bool { viewModel.showDeleteAction_bRank != nil }
+    private var showDeleteActionView:Bool {
+        viewModel.showDeleteAction_bRank != nil &&
+        layoutViewModel.bubbleCellFrame != nil
+    } //4
     
     fileprivate var bubbleNotesShowing:Bool { viewModel.notesList_bRank != nil }
 }
