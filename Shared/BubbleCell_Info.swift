@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import MyPackage
 
 struct BubbleCell_Info: View {
     var body: some View {

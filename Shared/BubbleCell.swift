@@ -19,8 +19,6 @@ struct BubbleCell: View {
     
     // MARK: - Body
     var body: some View {
-//                let _ = Self._printChanges()
-        
         VStack {
             ZStack {
                 if revealBubbleCellFrame {

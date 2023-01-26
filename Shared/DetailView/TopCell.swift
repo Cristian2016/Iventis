@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import MyPackage
 
 struct TopCell: View {
     @StateObject private var session:Session

@@ -12,8 +12,8 @@ import MyPackage
 struct TimersApp: App {
     static var calManager:CalendarManager! /* set at init() */
     
-    //store firstAppLaunchEver key in the shared UserDefaults, NOT in UserDefaults.standard
-    @AppStorage(UserDefaults.Key.firstAppLaunchEver, store: UserDefaults.shared)
+    //store key in UserDefaults.shared [NOT UserDefaults.standard]
+    @AppStorage(UserDefaults.Key.firstAppLaunchEver, store: .shared)
     private var firstAppLaunchEver = true
     
     fileprivate var showDeleteAction:Bool { viewModel.showDeleteAction_bRank != nil }
@@ -61,6 +61,12 @@ struct TimersApp: App {
             .environmentObject(viewModel)  /* inject ViewModel for entire view hierarchy */
             .environmentObject(layoutViewModel) /* inject LayoutViewModel for entire view hierarchy */
             .onChange(of: scenePhase) { handleScenePhaseChange($0) }
+            .onAppear {
+                if firstAppLaunchEver {
+                    viewModel.createBubble(.stopwatch, "lemon")
+                    firstAppLaunchEver = false
+                }
+            }
         }
     }
     

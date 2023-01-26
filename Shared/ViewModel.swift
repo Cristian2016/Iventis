@@ -200,10 +200,10 @@ class ViewModel: ObservableObject {
         //create events for this bubbble
         if bubble.hasCalendar { TimersApp.calManager.bubbleToEventify = bubble }
         
-        confirm_CalOn = (true, bubble.hasCalendar)
-        delayExecution(.now() + 0.5) { [weak self] in
-            self?.confirm_CalOn = (false, bubble.hasCalendar)
-        }
+//        confirm_CalOn = (true, bubble.hasCalendar)
+//        delayExecution(.now() + 0.5) { [weak self] in
+//            self?.confirm_CalOn = (false, bubble.hasCalendar)
+//        }
     }
     
     func showMoreOptions(for bubble:Bubble) {
@@ -396,16 +396,6 @@ class ViewModel: ObservableObject {
         
         //update Calendar Event
         TimersApp.calManager.updateExistingEvent(.notes(pair.session!))
-    }
-        
-    
-    // MARK: -
-    func makeBubblesOnFirstAppLaunchEver() {
-        if UserDefaults.shared.bool(forKey: UserDefaults.Key.firstAppLaunchEver) {
-            print("makeBubblesOnFirstAppLaunchEver")
-        } else {
-            print("do not makeBubblesOnFirstAppLaunchEver")
-        }
     }
     
     // MARK: - MoreOptionsView
