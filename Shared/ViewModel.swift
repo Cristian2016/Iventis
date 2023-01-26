@@ -108,7 +108,10 @@ class ViewModel: ObservableObject {
         
         let sdb = StartDelayBubble(context: backgroundContext)
         newBubble.sdb = sdb
-        if let note = note { newBubble.note_ = note }
+        if let note = note {
+            newBubble.note_ = note
+            newBubble.isNoteHidden = false
+        }
         
         try? backgroundContext.save()
     }
