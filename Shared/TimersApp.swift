@@ -8,6 +8,7 @@
 //3 scenePhase it used to start/stop backgroundTimer which is used by bubbles to update their displayed time. backgroundTimer sends a signal [notification] each second
 //4 deleteActionView can either delete the entire bubble or just its history [all sessions] resetting the bubble to the .brandNew state
 //5 store key in UserDefaults.shared [NOT UserDefaults.standard]
+//6 used by iPad to show either iPhoneViewHierarchy [compact size] or iPadViewHierarchy [regular size]
 
 import SwiftUI
 import MyPackage
@@ -21,10 +22,13 @@ struct TimersApp: App {
     
     fileprivate var bubbleNotesShowing:Bool { viewModel.notesList_bRank != nil }
     
-    @Environment(\.scenePhase) private var scenePhase
-    private let viewContext = PersistenceController.shared.container.viewContext
+    @Environment(\.scenePhase) private var scenePhase //3
+    @Environment(\.horizontalSizeClass) private var horizontalSizeClass //6
+    
     @StateObject private var viewModel = ViewModel() //2
     @StateObject private var layoutViewModel = LayoutViewModel() //2
+    
+    private let viewContext = PersistenceController.shared.container.viewContext
         
     var body: some Scene {
         WindowGroup {
