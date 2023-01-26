@@ -61,13 +61,7 @@ struct TimersApp: App {
             .environmentObject(viewModel)  /* inject ViewModel for entire view hierarchy */
             .environmentObject(layoutViewModel) /* inject LayoutViewModel for entire view hierarchy */
             .onChange(of: scenePhase) { handleScenePhaseChange($0) }
-            .onAppear {
-                if isFirstAppLaunch {//1
-                    viewModel.createBubble(.stopwatch, "charcoal", "☕️ Break")
-                    viewModel.createBubble(.stopwatch, "green", "🌳 Outdoors")
-                    isFirstAppLaunch = false
-                }
-            }
+            .onAppear { createBubblesOnFirstAppLaunch() }
         }
     }
     
@@ -101,6 +95,14 @@ struct TimersApp: App {
         viewModel.showDeleteAction_bRank != nil &&
         layoutViewModel.bubbleCellFrame != nil
     }
+    
+    private func createBubblesOnFirstAppLaunch() {
+        if isFirstAppLaunch {
+            viewModel.createBubble(.stopwatch, "charcoal", "☕️ Break")
+            viewModel.createBubble(.stopwatch, "green", "🌳 Outdoors")
+            isFirstAppLaunch = false
+        }
+    } //1
 }
 
 struct ViewHierarchy:View {
