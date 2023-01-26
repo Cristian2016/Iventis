@@ -61,7 +61,7 @@ struct TimersApp: App {
             .environmentObject(viewModel)  /* inject ViewModel for entire view hierarchy */
             .environmentObject(layoutViewModel) /* inject LayoutViewModel for entire view hierarchy */
             .onChange(of: scenePhase) { handleScenePhaseChange($0) }
-            .onAppear { createBubblesOnFirstAppLaunch() }
+            .onAppear { createBubblesOnFirstAppLaunch() } //1
         }
     }
     
