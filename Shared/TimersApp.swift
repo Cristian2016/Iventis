@@ -38,21 +38,14 @@ struct TimersApp: App {
                     let bubble = viewModel.bubble(for: Int(viewModel.showDeleteAction_bRank!))
                     DeleteActionView(bubble)
                 }
-                
                 if bubbleNotesShowing { BubbleStickyNoteList($viewModel.notesList_bRank) }
-                
                 if let pair = viewModel.pairOfNotesList { PairStickyNoteList(pair) }
-                
                 if let sdb = viewModel.theOneAndOnlyEditedSDB, let bubble = sdb.bubble {
                     MoreOptionsView(for: bubble)
                 }
-                
                 if viewModel.showAlert_AlwaysOnDisplay { AlwaysOnDisplayAlertView() }
-                
                 if viewModel.confirm_AlwaysOnDisplay { AlwaysOnDisplayConfirmationView() }
-                
                 if viewModel.showMoreOptionsInfo { MoreOptionsInfo() }
-                
                 if viewModel.confirm_CalOn.show { CalOnConfirmationView() }
             }
             .ignoresSafeArea()
