@@ -99,7 +99,7 @@ struct PairStickyNoteList: View {
         pair.isNoteHidden = false
         
         try? PersistenceController.shared.viewContext.save()
-        TimersApp.calManager.updateExistingEvent(.notes(pair.session!))
+        CalendarManager.shared.updateExistingEvent(.notes(pair.session!))
     }
     
     private var noteIsValid: Bool {

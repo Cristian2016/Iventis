@@ -13,8 +13,6 @@ import MyPackage
 
 @main
 struct TimersApp: App {
-    static var calManager:CalendarManager = CalendarManager.shared
-    
     //store key in UserDefaults.shared [NOT UserDefaults.standard]
     @AppStorage(UserDefaults.Key.isFirstAppLaunch, store: .shared)
     private var isFirstAppLaunch = true

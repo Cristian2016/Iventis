@@ -202,7 +202,7 @@ class ViewModel: ObservableObject {
         PersistenceController.shared.save()
         
         //create events for this bubbble
-        if bubble.hasCalendar { TimersApp.calManager.bubbleToEventify = bubble }
+        if bubble.hasCalendar { CalendarManager.shared.bubbleToEventify = bubble }
         
 //        confirm_CalOn = (true, bubble.hasCalendar)
 //        delayExecution(.now() + 0.5) { [weak self] in
@@ -293,7 +293,7 @@ class ViewModel: ObservableObject {
     ///createds calendar events only if that bubble has calendar, otherwise it only saves to coredata
     private func createCalendarEventIfRequiredAndSaveToCoreData(for bubble:Bubble) {
         if !bubble.sessions_.isEmpty && bubble.hasCalendar {
-            TimersApp.calManager.createNewEvent(for: bubble.lastSession)
+            CalendarManager.shared.createNewEvent(for: bubble.lastSession)
             
             //display Cal Event Added to Calenda App confirmation to the user
             confirm_CalEventCreated = bubble.rank
@@ -351,7 +351,7 @@ class ViewModel: ObservableObject {
                 newHistoryItem.note = note
                 bubble.addToHistory(newHistoryItem)
                 
-                TimersApp.calManager.updateExistingEvent(.title(bubble))
+                CalendarManager.shared.updateExistingEvent(.title(bubble))
                 
             case "Pair" :
                 let pair = object as! Pair
@@ -365,7 +365,7 @@ class ViewModel: ObservableObject {
                 newHistoryItem.note = note
                 pair.addToHistory(newHistoryItem)
                 
-                TimersApp.calManager.updateExistingEvent(.notes(pair.session!))
+                CalendarManager.shared.updateExistingEvent(.notes(pair.session!))
                 
             default: return
         }
@@ -388,8 +388,7 @@ class ViewModel: ObservableObject {
     //delete BubbleSticky
     func deleteStickyNote(for bubble:Bubble) {
         bubble.note = nil
-        TimersApp.calManager.updateExistingEvent(.title(bubble))
-        
+        CalendarManager.shared.updateExistingEvent(.title(bubble))
         PersistenceController.shared.save()
     }
     
@@ -399,7 +398,7 @@ class ViewModel: ObservableObject {
         PersistenceController.shared.save()
         
         //update Calendar Event
-        TimersApp.calManager.updateExistingEvent(.notes(pair.session!))
+        CalendarManager.shared.updateExistingEvent(.notes(pair.session!))
     }
     
     // MARK: - MoreOptionsView
