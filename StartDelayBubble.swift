@@ -12,7 +12,7 @@ import SwiftUI
 import MyPackage
 
 ///StartDelay_Bubble
-public class SDB: NSManagedObject {
+public class StartDelayBubble: NSManagedObject {
     
     private var observerAddedAlready = false
     

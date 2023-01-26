@@ -82,7 +82,7 @@
 		1FD15F802972F5D100852073 /* MyPackage in Frameworks */ = {isa = PBXBuildFile; productRef = 1FD15F7F2972F5D100852073 /* MyPackage */; };
 		1FD21865281D9AB700B43403 /* ExitFocusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD21864281D9AB700B43403 /* ExitFocusView.swift */; };
 		1FD2DD972869AB4900831978 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1F5F4A4D28093FAF00AF3442 /* Assets.xcassets */; };
-		1FDB9F12287DA5040028E121 /* SDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FDB9F0C287DA5040028E121 /* SDB.swift */; };
+		1FDB9F12287DA5040028E121 /* StartDelayBubble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FDB9F0C287DA5040028E121 /* StartDelayBubble.swift */; };
 		1FDB9F13287DA5040028E121 /* SDB Properties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FDB9F0D287DA5040028E121 /* SDB Properties.swift */; };
 		1FDB9F14287DA5040028E121 /* SDBPair.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FDB9F0E287DA5040028E121 /* SDBPair.swift */; };
 		1FDB9F15287DA5040028E121 /* SDBPair Properties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FDB9F0F287DA5040028E121 /* SDBPair Properties.swift */; };
@@ -199,7 +199,7 @@
 		1FCF01B2287CBA74009DC95C /* DelayStartSymbol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DelayStartSymbol.swift; sourceTree = "<group>"; };
 		1FCF0C652816F3F600AA1FAA /* EmptyListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyListView.swift; sourceTree = "<group>"; };
 		1FD21864281D9AB700B43403 /* ExitFocusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExitFocusView.swift; sourceTree = "<group>"; };
-		1FDB9F0C287DA5040028E121 /* SDB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SDB.swift; sourceTree = SOURCE_ROOT; };
+		1FDB9F0C287DA5040028E121 /* StartDelayBubble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartDelayBubble.swift; sourceTree = SOURCE_ROOT; };
 		1FDB9F0D287DA5040028E121 /* SDB Properties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SDB Properties.swift"; sourceTree = SOURCE_ROOT; };
 		1FDB9F0E287DA5040028E121 /* SDBPair.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SDBPair.swift; sourceTree = SOURCE_ROOT; };
 		1FDB9F0F287DA5040028E121 /* SDBPair Properties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SDBPair Properties.swift"; sourceTree = SOURCE_ROOT; };
@@ -383,7 +383,7 @@
 				1F5987A4286B5F8900CDB54C /* PairSavedNote Properties.swift */,
 				1F2080782836111600FD35D6 /* BSavedNote.swift */,
 				1F2080792836111600FD35D6 /* BSavedNote Properties.swift */,
-				1FDB9F0C287DA5040028E121 /* SDB.swift */,
+				1FDB9F0C287DA5040028E121 /* StartDelayBubble.swift */,
 				1FDB9F0D287DA5040028E121 /* SDB Properties.swift */,
 				1FDB9F0E287DA5040028E121 /* SDBPair.swift */,
 				1FDB9F0F287DA5040028E121 /* SDBPair Properties.swift */,
@@ -547,7 +547,7 @@
 				1F18B457281FA6130080ADA6 /* PushView.swift in Sources */,
 				1F0373BE28DEDB00005CE8D3 /* AlwaysOnDisplayAlertView.swift in Sources */,
 				1F0373C228DEE6F7005CE8D3 /* AlwaysOnDisplayConfirmationView.swift in Sources */,
-				1FDB9F12287DA5040028E121 /* SDB.swift in Sources */,
+				1FDB9F12287DA5040028E121 /* StartDelayBubble.swift in Sources */,
 				1FFC8BAD28142F040059EF2E /* Session Properties.swift in Sources */,
 				1F64200A2820204400413E31 /* BottomCell.swift in Sources */,
 				1FD21865281D9AB700B43403 /* ExitFocusView.swift in Sources */,

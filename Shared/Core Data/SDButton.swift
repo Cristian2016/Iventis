@@ -10,13 +10,13 @@ import MyPackage
 
 ///StartDelayBubbleCell
 struct SDButton: View {
-    init?(_ sdb:SDB?) {
+    init?(_ sdb:StartDelayBubble?) {
         guard let sdb = sdb else { return nil }
         _sdb = StateObject(wrappedValue: sdb)
     }
     
     @EnvironmentObject var viewModel:ViewModel
-    @StateObject var sdb:SDB
+    @StateObject var sdb:StartDelayBubble
     
     @State var offset:CGSize = .zero //drag view around
     @State var isTapped = false

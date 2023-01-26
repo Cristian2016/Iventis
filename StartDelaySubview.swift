@@ -4,7 +4,7 @@ import SwiftUI
 ///its data dependency is SDB [StartDelayBubble] in the model
 struct StartDelaySubview:View {
     @EnvironmentObject var vm:ViewModel
-    @StateObject var sdb:SDB
+    @StateObject var sdb:StartDelayBubble
     
     var body: some View {
         if sdb.bubble?.state != .running {

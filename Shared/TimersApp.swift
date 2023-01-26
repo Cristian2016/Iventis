@@ -77,7 +77,7 @@ struct TimersApp: App {
         switch scenePhase {
             case .active: handleBecomeActive()
             case .background: handleEnterBackground()
-            case .inactive: handleInactivePhase()
+            case .inactive: break
             @unknown default: fatalError()
         }
     }
@@ -89,11 +89,6 @@ struct TimersApp: App {
     ///called when app killed or moved to background
     ///NOT called on NotificationCenter, incoming call etc
     func handleEnterBackground() { viewModel.bubbleTimer(.pause) }
-    
-    func handleInactivePhase() {
-        print("scenePhase.inactive")
-        print(viewModel.allBubbles(runningOnly: false).count)
-    }
     
     private var showDeleteActionView:Bool {
         viewModel.showDeleteAction_bRank != nil &&

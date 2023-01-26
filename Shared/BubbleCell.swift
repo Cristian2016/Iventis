@@ -11,9 +11,8 @@ import MyPackage
 struct BubbleCell: View {
     // MARK: - Dependencies
     let metrics: Metrics
-    @StateObject var bubble:Bubble
-    @StateObject var sdb:SDB  /* I made
-                               this one since apparently bubble.sdb.referenceDelay does not emit */
+    @StateObject private var bubble:Bubble
+    @StateObject private var startDelayBubble:StartDelayBubble
     
     @EnvironmentObject private var viewModel:ViewModel
     @EnvironmentObject private var layoutViewModel:LayoutViewModel
@@ -59,7 +58,6 @@ struct BubbleCell: View {
         icon: { Image(systemName: bubble.isPinned ? "pin.slash.fill" : "pin.fill") } }
     .tint(bubble.isPinned ? .gray : .orange)
     }
-    
     private var toggleCalendarButton:some View {
         Button { viewModel.toggleCalendar(bubble) }
     label: { Label { Text(calendarActionName) }
@@ -76,7 +74,6 @@ struct BubbleCell: View {
     label: { Label { Text("Delete") }
         icon: { Image.trash } }.tint(.red)
     }
-    
     private var moreOptionsButton:some View {
         Button { viewModel.showMoreOptions(for: bubble) }
     label: { Label { Text("More") }
@@ -129,7 +126,7 @@ struct BubbleCell: View {
                 .gesture(longPress)
 //            //overlays
                 .overlay {
-                    if sdb.referenceDelay > 0 { SDButton(bubble.sdb) }
+                    if startDelayBubble.referenceDelay > 0 { SDButton(bubble.sdb) }
                 }
         }
         //font
@@ -205,7 +202,7 @@ struct BubbleCell: View {
     // MARK: -
     init(_ bubble:Bubble, _ metrics:Metrics) {
         _bubble = StateObject(wrappedValue: bubble)
-        _sdb = StateObject(wrappedValue: bubble.sdb!)
+        _startDelayBubble = StateObject(wrappedValue: bubble.sdb!)
         self.metrics = metrics
     }
     

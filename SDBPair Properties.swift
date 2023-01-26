@@ -18,7 +18,7 @@ extension SDBPair {
 
     @NSManaged public var start: Date?
     @NSManaged public var pause: Date?
-    @NSManaged public var sdb: SDB?
+    @NSManaged public var sdb: StartDelayBubble?
 
 }
 

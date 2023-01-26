@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="21256.2" systemVersion="22A5295i" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="21513" systemVersion="22D5038i" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Bubble" representedClassName=".Bubble" syncable="YES">
         <attribute name="color" optional="YES" attributeType="String" defaultValueString="Cyan"/>
         <attribute name="created" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
@@ -13,7 +13,7 @@
         <attribute name="rank" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="startDelay" optional="YES" attributeType="Integer 64" defaultValueString="0.0" usesScalarValueType="YES"/>
         <relationship name="history" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="BubbleSavedNote" inverseName="bubble" inverseEntity="BubbleSavedNote"/>
-        <relationship name="sdb" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="SDB" inverseName="bubble" inverseEntity="SDB"/>
+        <relationship name="sdb" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="StartDelayBubble" inverseName="bubble" inverseEntity="StartDelayBubble"/>
         <relationship name="sessions" optional="YES" toMany="YES" deletionRule="Cascade" ordered="YES" destinationEntity="Session" inverseName="bubble" inverseEntity="Session"/>
     </entity>
     <entity name="BubbleSavedNote" representedClassName=".BubbleSavedNote" syncable="YES">
@@ -46,16 +46,10 @@
             </uniquenessConstraint>
         </uniquenessConstraints>
     </entity>
-    <entity name="SDB" representedClassName=".SDB" syncable="YES">
-        <attribute name="currentDelay" optional="YES" attributeType="Float" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="referenceDelay" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
-        <relationship name="bubble" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Bubble" inverseName="sdb" inverseEntity="Bubble"/>
-        <relationship name="pairs" optional="YES" toMany="YES" deletionRule="Cascade" ordered="YES" destinationEntity="SDBPair" inverseName="sdb" inverseEntity="SDBPair"/>
-    </entity>
     <entity name="SDBPair" representedClassName=".SDBPair" syncable="YES">
         <attribute name="pause" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="start" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
-        <relationship name="sdb" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="SDB" inverseName="pairs" inverseEntity="SDB"/>
+        <relationship name="sdb" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="StartDelayBubble" inverseName="pairs" inverseEntity="StartDelayBubble"/>
     </entity>
     <entity name="Session" representedClassName=".Session" syncable="YES">
         <attribute name="created" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
@@ -66,5 +60,11 @@
         <attribute name="totalDurationAsStrings" optional="YES" attributeType="Binary"/>
         <relationship name="bubble" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Bubble" inverseName="sessions" inverseEntity="Bubble"/>
         <relationship name="pairs" optional="YES" toMany="YES" deletionRule="Cascade" ordered="YES" destinationEntity="Pair" inverseName="session" inverseEntity="Pair"/>
+    </entity>
+    <entity name="StartDelayBubble" representedClassName=".StartDelayBubble" syncable="YES">
+        <attribute name="currentDelay" optional="YES" attributeType="Float" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="referenceDelay" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="bubble" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Bubble" inverseName="sdb" inverseEntity="Bubble"/>
+        <relationship name="pairs" optional="YES" toMany="YES" deletionRule="Cascade" ordered="YES" destinationEntity="SDBPair" inverseName="sdb" inverseEntity="SDBPair"/>
     </entity>
 </model>

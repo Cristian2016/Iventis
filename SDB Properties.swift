@@ -10,10 +10,10 @@ import Foundation
 import CoreData
 
 ///DelayStartBubble Properties
-extension SDB {
+extension StartDelayBubble {
 
-    @nonobjc public class func fetchRequest() -> NSFetchRequest<SDB> {
-        return NSFetchRequest<SDB>(entityName: "SDB")
+    @nonobjc public class func fetchRequest() -> NSFetchRequest<StartDelayBubble> {
+        return NSFetchRequest<StartDelayBubble>(entityName: "SDB")
     }
 
     //⚠️ if referenceDelay > 0, SDBCell must be visible
@@ -33,7 +33,7 @@ extension SDB {
 }
 
 // MARK: Generated accessors for pairs
-extension SDB {
+extension StartDelayBubble {
 
     @objc(insertObject:inPairsAtIndex:)
     @NSManaged public func insertIntoPairs(_ value: SDBPair, at idx: Int)
@@ -67,6 +67,6 @@ extension SDB {
 
 }
 
-extension SDB : Identifiable {
+extension StartDelayBubble : Identifiable {
 
 }

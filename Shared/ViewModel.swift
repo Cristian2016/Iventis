@@ -16,7 +16,7 @@ class ViewModel: ObservableObject {
     @Published var showAddTagButton_bRank:Int? = nil
     
     ///MoreOptionsView
-    @Published var theOneAndOnlyEditedSDB:SDB? //StartDelayBubble
+    @Published var theOneAndOnlyEditedSDB:StartDelayBubble? //StartDelayBubble
     
     //Start Delay
     @Published var confirm_NoDelay = false
@@ -106,7 +106,7 @@ class ViewModel: ObservableObject {
         newBubble.color = color
         newBubble.rank = Int64(UserDefaults.generateRank())
         
-        let sdb = SDB(context: backgroundContext)
+        let sdb = StartDelayBubble(context: backgroundContext)
         newBubble.sdb = sdb
         
         try? backgroundContext.save()
@@ -213,7 +213,7 @@ class ViewModel: ObservableObject {
     }
     
     //SDBubble
-    func toggleSDBStart(_ sdb:SDB) {
+    func toggleSDBStart(_ sdb:StartDelayBubble) {
         UserFeedback.singleHaptic(.heavy)
         sdb.toggleStart()
     }
@@ -462,10 +462,10 @@ class ViewModel: ObservableObject {
     }
     
     ///currentDelay = referenceDelay
-    func resetDelay(for sdb:SDB) { sdb.resetDelay() }
+    func resetDelay(for sdb:StartDelayBubble) { sdb.resetDelay() }
     
     ///reference startDelay
-    func computeReferenceDelay(_ sdb:SDB, _ value: Int) {
+    func computeReferenceDelay(_ sdb:StartDelayBubble, _ value: Int) {
         UserFeedback.singleHaptic(.medium)
         sdb.referenceDelay += Int64(value)
         sdb.currentDelay = Float(sdb.referenceDelay)
@@ -474,7 +474,7 @@ class ViewModel: ObservableObject {
     private func observe_delayReachedZero_Notification() {
         NotificationCenter.default.addObserver(forName: .sdbEnded, object: nil, queue: nil) { [weak self] notification in
             
-            let sdb = notification.object as? SDB
+            let sdb = notification.object as? StartDelayBubble
             guard
                 let bubble = sdb?.bubble,
                 let info = notification.userInfo as? [String:TimeInterval],
@@ -513,9 +513,9 @@ extension ViewModel {
     }
     
     ///all start delay bubbles
-    func allSDBs(visibleOnly:Bool = false) -> [SDB] {
+    func allSDBs(visibleOnly:Bool = false) -> [StartDelayBubble] {
         let context = PersistenceController.shared.viewContext
-        let request = SDB.fetchRequest()
+        let request = StartDelayBubble.fetchRequest()
         if visibleOnly {
             let predicate = NSPredicate(format: "referenceDelay > 0")
             request.predicate = predicate
