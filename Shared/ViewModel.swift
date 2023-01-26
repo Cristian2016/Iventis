@@ -89,7 +89,7 @@ class ViewModel: ObservableObject {
     
     // MARK: - User Intents
     //from PaletteView and...
-    func createBubble(_ kind:Bubble.Kind, _ color:String) {
+    func createBubble(_ kind:Bubble.Kind, _ color:String, _ note:String? = nil) {
         let backgroundContext = PersistenceController.shared.backgroundContext
                 
         //bubble
@@ -108,6 +108,7 @@ class ViewModel: ObservableObject {
         
         let sdb = StartDelayBubble(context: backgroundContext)
         newBubble.sdb = sdb
+        if let note = note { newBubble.note_ = note }
         
         try? backgroundContext.save()
     }
