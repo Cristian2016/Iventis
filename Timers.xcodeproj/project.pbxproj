@@ -57,6 +57,7 @@
 		1F9B6AF0280950D600C0A725 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F9B6AEF280950D600C0A725 /* ViewModel.swift */; };
 		1F9BE0A9280BE14100F87EFA /* PaletteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F9BE0A8280BE14100F87EFA /* PaletteView.swift */; };
 		1F9BE0AD280C6AB000F87EFA /* TapHold.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F9BE0AC280C6AB000F87EFA /* TapHold.swift */; };
+		1FA1B44A298321D20063B081 /* iPhoneViewHierarchy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA1B449298321D20063B081 /* iPhoneViewHierarchy.swift */; };
 		1FA1F39E2981CFE6000A50F5 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA1F39D2981CFE6000A50F5 /* Persistence.swift */; };
 		1FA355CB2832186100F73111 /* CalendarManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA355CA2832186100F73111 /* CalendarManager.swift */; };
 		1FA377E82972FE75005ACD41 /* Library.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA377E72972FE75005ACD41 /* Library.swift */; };
@@ -176,6 +177,7 @@
 		1F9B6AEF280950D600C0A725 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		1F9BE0A8280BE14100F87EFA /* PaletteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PaletteView.swift; path = Shared/PaletteView.swift; sourceTree = SOURCE_ROOT; };
 		1F9BE0AC280C6AB000F87EFA /* TapHold.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapHold.swift; sourceTree = "<group>"; };
+		1FA1B449298321D20063B081 /* iPhoneViewHierarchy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iPhoneViewHierarchy.swift; sourceTree = "<group>"; };
 		1FA1F39D2981CFE6000A50F5 /* Persistence.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		1FA355CA2832186100F73111 /* CalendarManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarManager.swift; sourceTree = "<group>"; };
 		1FA355CE2832238E00F73111 /* Timers--iOS--Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Timers--iOS--Info.plist"; sourceTree = "<group>"; };
@@ -290,6 +292,7 @@
 		1F5F4A4228093FAC00AF3442 = {
 			isa = PBXGroup;
 			children = (
+				1FA1B449298321D20063B081 /* iPhoneViewHierarchy.swift */,
 				1FA377E72972FE75005ACD41 /* Library.swift */,
 				1F42B99C2973E34E0024DB5F /* Code Snippets.rtf */,
 				1FB5D8D928E9BF0500DD522A /* GestureLabel.swift */,
@@ -549,6 +552,7 @@
 				1FFC8BAD28142F040059EF2E /* Session Properties.swift in Sources */,
 				1F64200A2820204400413E31 /* BottomCell.swift in Sources */,
 				1FD21865281D9AB700B43403 /* ExitFocusView.swift in Sources */,
+				1FA1B44A298321D20063B081 /* iPhoneViewHierarchy.swift in Sources */,
 				1F20807C2836111600FD35D6 /* BSavedNote.swift in Sources */,
 				1FDB9F15287DA5040028E121 /* SDBPair Properties.swift in Sources */,
 				1F61BE052822BAAA00B773F9 /* DeleteActionView.swift in Sources */,

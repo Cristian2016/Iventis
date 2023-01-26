@@ -29,10 +29,10 @@ struct TimersApp: App {
     var body: some Scene {
         WindowGroup {
             ZStack {
-                if UIDevice.isIPad { //iPad
+                if UIDevice.isIPad {
                     iPadViewHierarchy()
-                } else { //iPhone
-                    NavigationStack(path: $viewModel.path) { ViewHierarchy() }.tint(.label)
+                } else {
+                    iPhoneViewHierarchy()
                 }
                 
                 if showDeleteActionView {
