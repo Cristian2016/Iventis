@@ -57,8 +57,8 @@ struct TimersApp: App {
                 if viewModel.confirm_CalOn.show { CalOnConfirmationView() }
             }
             .ignoresSafeArea()
-            .environment(\.managedObjectContext, viewContext)
             .onAppear { createBubblesOnFirstAppLaunch() } //1
+            .environment(\.managedObjectContext, viewContext)
             .environmentObject(viewModel) //2
             .environmentObject(layoutViewModel) //2
             .onChange(of: scenePhase) { handleScenePhaseChange($0) } //3
