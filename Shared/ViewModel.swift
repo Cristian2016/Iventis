@@ -162,7 +162,7 @@ class ViewModel: ObservableObject {
                 newSession.created = Date().addingTimeInterval(startDelayCompensation)
                 newSession.addToPairs(newPair)
                 
-//                bubble.syncSmallBubbleCell = true
+                if isDetailViewShowing { bubble.syncSmallBubbleCell = true }
                                 
             case .paused:  /* changes to running */
                 //create new pair, add it to currentSession
@@ -170,12 +170,13 @@ class ViewModel: ObservableObject {
                 newPair.start = Date().addingTimeInterval(startDelayCompensation)
                 bubble.lastSession?.addToPairs(newPair)
                 
-//                bubble.syncSmallBubbleCell = true
+                if isDetailViewShowing { bubble.syncSmallBubbleCell = true }
                 
             case .running: /* changes to .paused */
                 let currentPair = bubble.lastPair
                 currentPair?.pause = Date()
-//                bubble.syncSmallBubbleCell = false
+                
+                if bubble.syncSmallBubbleCell { bubble.syncSmallBubbleCell = false }
                 
                 //⚠️ closure runs on the main queue. whatever you want the user to see put in that closure otherwise it will fail to update!!!!
                 currentPair?.computeDuration(.atPause) {

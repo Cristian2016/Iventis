@@ -102,6 +102,7 @@ extension Bubble {
                 if self?.state != .running { return }
                 
                 self?.updateBubbleCellComponents()
+                self?.updateSmallBubbleCellComponents()
             }
     } //1
     
