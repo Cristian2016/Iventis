@@ -16,7 +16,7 @@ struct BubbleCell: View {
     
     @EnvironmentObject private var viewModel:ViewModel
     @EnvironmentObject private var layoutViewModel:LayoutViewModel
-    
+        
     // MARK: - Body
     var body: some View {
         VStack {
@@ -31,8 +31,6 @@ struct BubbleCell: View {
             .overlay { if !isBubbleRunning { hundredthsView }}
         }
         .listRowSeparator(.hidden)
-        .onAppear { resumeObserveTimer() }
-        //swipe actions
         .swipeActions(edge: .leading, allowsFullSwipe: true) {
             toggleFavoriteButton
             toggleCalendarButton
@@ -206,10 +204,6 @@ struct BubbleCell: View {
     }
     
     // MARK: - User Intents
-    /*
-     when cell appears bubbleCell will resume observing timer. if it doesn't resume, correct time will not be displayed to the user */
-    private func resumeObserveTimer() /* onAppear */ { viewModel.addObserver(for: bubble) }
-    
     private func endSession() {
         isSecondsLongPressed = true
         delayExecution(.now() + 0.25) { isSecondsLongPressed = false }
