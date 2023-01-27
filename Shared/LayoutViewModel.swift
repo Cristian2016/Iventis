@@ -39,17 +39,15 @@ class LayoutViewModel: ObservableObject {
         }
     }
     
-    // MARK: - Init/deinit
-    init() {
-        delayExecution(.now() + 0.1) {
-            print(#function)
-            let notification = UIDevice.orientationDidChangeNotification
-            NotificationCenter.default.addObserver(forName: notification, object: nil, queue: nil) { [weak self] notification in
-                self?.orientation = UIDevice.current.orientation
-                print("isPortrait \(self!.orientation.isPortrait)")
-            }
+    private func observeOrientationChanges() {
+        let notification = UIDevice.orientationDidChangeNotification
+        NotificationCenter.default.addObserver(forName: notification, object: nil, queue: nil) { [weak self] notification in
+            self?.orientation = UIDevice.current.orientation
         }
     }
+    
+    // MARK: - Init/deinit
+    init() { delayExecution(.now() + 0.1) { self.observeOrientationChanges() } }
     
     deinit { NotificationCenter.default.removeObserver(self) }
 }
