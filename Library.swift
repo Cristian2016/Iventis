@@ -52,14 +52,6 @@ public extension UserInterfaceSizeClass {
 public struct Global {
     static let longPressLatency = Double(0.3) //seconds
     
-    //bubbleCell size
-    static let dic:[CGFloat:CGFloat] = [ /* 12mini */728:140, /* 8 */667:150,  /* ipdo */568:125,  /* 13 pro max */926:150,  /* 13 pro */844:147,  /* 11 pro max */896:150, 812:130,  /* 8max */736:167]
-    
-    static let circleDiameter:CGFloat = {
-        print(UIScreen.main.bounds.height)
-        return dic[UIScreen.size.height] ?? 140
-    }()
-    
     struct FontSize {
         static let help = CGFloat(30)
     }

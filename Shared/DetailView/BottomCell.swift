@@ -34,6 +34,5 @@ struct BottomCell: View {
         }
         .listStyle(.plain)
         .scrollIndicators(.hidden)
-        .background { Color.red }
     }
 }

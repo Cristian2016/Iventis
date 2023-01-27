@@ -15,9 +15,6 @@ struct DetailView: View {
     @FetchRequest var sessions:FetchedResults<Session>
     
     let topDetailHeight = CGFloat(140)
-    //empirically computed
-    let bottomDetailHeight = UIScreen.size.height - (2.5 * Global.circleDiameter +  ExitFocusView.height)
-    let detailWidth = UIScreen.size.width * 0.96
     
     init(_ showDetail_bRank:Int?) {
         let predicate:NSPredicate?
@@ -36,10 +33,9 @@ struct DetailView: View {
                 if sessions.isEmpty { EmptyHistoryAlertView() }
                 else {
                     VStack {
+                        TopDetailView(rank).frame(height: topDetailHeight)
                         Spacer()
-                        TopDetailView(rank)
-                            .frame(height: topDetailHeight)
-                        BottomDetailView(rank)
+//                        BottomDetailView(rank)
                     }
                 }
             }
