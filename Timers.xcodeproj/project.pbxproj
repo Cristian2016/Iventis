@@ -88,6 +88,7 @@
 		1FDB9F14287DA5040028E121 /* SDBPair.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FDB9F0E287DA5040028E121 /* SDBPair.swift */; };
 		1FDB9F15287DA5040028E121 /* SDBPair Properties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FDB9F0F287DA5040028E121 /* SDBPair Properties.swift */; };
 		1FE163AE280EE6F40050C6F5 /* LeftStrip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FE163AD280EE6F40050C6F5 /* LeftStrip.swift */; };
+		1FE3B6F72983ECBF00B9C5D0 /* Explanations.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 1FE3B6F62983ECBF00B9C5D0 /* Explanations.rtf */; };
 		1FE722A128E58200005ADA8E /* ColorConfirmationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FE722A028E58200005ADA8E /* ColorConfirmationView.swift */; };
 		1FF0A2FD2810448100B1DB77 /* TopDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF0A2FC2810448100B1DB77 /* TopDetailView.swift */; };
 		1FFC8BAA28142F040059EF2E /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FFC8BA428142F040059EF2E /* Session.swift */; };
@@ -205,6 +206,7 @@
 		1FDB9F0E287DA5040028E121 /* SDBPair.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SDBPair.swift; sourceTree = SOURCE_ROOT; };
 		1FDB9F0F287DA5040028E121 /* SDBPair Properties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SDBPair Properties.swift"; sourceTree = SOURCE_ROOT; };
 		1FE163AD280EE6F40050C6F5 /* LeftStrip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftStrip.swift; sourceTree = "<group>"; };
+		1FE3B6F62983ECBF00B9C5D0 /* Explanations.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = Explanations.rtf; sourceTree = "<group>"; };
 		1FE722A028E58200005ADA8E /* ColorConfirmationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorConfirmationView.swift; sourceTree = "<group>"; };
 		1FF0A2FC2810448100B1DB77 /* TopDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopDetailView.swift; sourceTree = "<group>"; };
 		1FFC8BA428142F040059EF2E /* Session.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
@@ -295,6 +297,7 @@
 				1FA1B449298321D20063B081 /* iPhoneViewHierarchy.swift */,
 				1FA377E72972FE75005ACD41 /* Library.swift */,
 				1F42B99C2973E34E0024DB5F /* Code Snippets.rtf */,
+				1FE3B6F62983ECBF00B9C5D0 /* Explanations.rtf */,
 				1FB5D8D928E9BF0500DD522A /* GestureLabel.swift */,
 				1FB5D8D728E96CBD00DD522A /* StartDelayInfoView.swift */,
 				1F477CA828EAB21900B4F965 /* AddStickyNoteQuickButton.swift */,
@@ -516,6 +519,7 @@
 			files = (
 				1F42B99D2973E34E0024DB5F /* Code Snippets.rtf in Resources */,
 				1F5F4A6328093FAF00AF3442 /* Assets.xcassets in Resources */,
+				1FE3B6F72983ECBF00B9C5D0 /* Explanations.rtf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
