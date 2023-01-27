@@ -300,7 +300,7 @@ class ViewModel: ObservableObject {
             
             //display Cal Event Added to Calenda App confirmation to the user
             confirm_CalEventCreated = bubble.rank
-            delayExecution(.now() + 0.7) { self.confirm_CalEventCreated = nil }
+            delayExecution(.now() + 3) { self.confirm_CalEventCreated = nil }
         }
         
         PersistenceController.shared.save()

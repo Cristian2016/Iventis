@@ -9,10 +9,7 @@ import SwiftUI
 
 struct CalEventCreatedConfirmationView: View {
     var body: some View {
-        HStack {
-            ConfirmationView1(content: .eventCreated) { /* dismiss action */}
-            Spacer()
-        }
+        ConfirmationView1(content: .eventCreated) { /* dismiss action */}
     }
 }
 

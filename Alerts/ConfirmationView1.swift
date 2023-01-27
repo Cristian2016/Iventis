@@ -17,7 +17,6 @@ struct ConfirmationView1: View {
             Text(content.title)
             Divider().frame(width: 80)
             Label(name, systemImage: systemImage)
-//                .labelStyle(.iconOnly)
         }
         .font(.system(size: 30).weight(.medium))
         .foregroundColor(.white)
