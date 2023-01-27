@@ -15,7 +15,7 @@ public class Bubble: NSManagedObject {
     ///4 start delay values
     static let delays = [5, 10, 20, 45]
         
-    // MARK: -
+    // MARK: - Convenience
     var sessions_:[Session] {
         get { sessions?.array as? [Session] ?? [] }
         set { sessions = NSOrderedSet(array: newValue) }
