@@ -3,20 +3,27 @@
 //  Timers (iOS)
 //
 //  Created by Cristian Lapusan on 24.01.2023.
-//
+//1 DeleteActionView uses bubbleCell.frame to position itself. bubbleCell.frame is set using .readFrame modifier
 
 import SwiftUI
 import MyPackage
 
 class LayoutViewModel: ObservableObject {
-    ///DeleteActionView uses bubbleCellFrame to position itself within the ViewHierarchy. bubbleCellFrame is set using .readFrame($bubbleCellFrame) modifier
     var bubbleCellFrame:CGRect? {didSet{
         set_deleteActionViewOffset(for: bubbleCellFrame)
-    }}
+    }} //1
     
     @Published var deleteActionViewOffset:CGFloat?
     
+    // MARK: - Public API
     private(set) var orientation = UIDevice.current.orientation
+    var isPortrait:Bool {
+        switch orientation {
+            case .portrait, .portraitUpsideDown: return true
+            case .landscapeLeft, .landscapeRight: return false
+            default: return false
+        }
+    }
     
     // MARK: - Methods
     private func set_deleteActionViewOffset(for frame:CGRect?) {
@@ -29,14 +36,6 @@ class LayoutViewModel: ObservableObject {
         let deleteActionViewFitsUnderneath = verticalSpace - (frame.origin.y + frame.height) > deleteActionViewHeight
         
         print("deleteActionViewFitsUnderneath \(deleteActionViewFitsUnderneath)")
-    }
-    
-    private var isPortrait:Bool {
-        switch orientation {
-            case .portrait, .portraitUpsideDown: return true
-            case .landscapeLeft, .landscapeRight: return false
-            default: return false
-        }
     }
     
     private func observeOrientationChanges() {
