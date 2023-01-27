@@ -41,7 +41,7 @@ struct BottomDetailView: View {
     }
     
     private func position(of session:Session) -> Int {
-        return sessions.count - sessions.firstIndex(of: session)!
+        sessions.count - sessions.firstIndex(of: session)!
     }
 }
 
