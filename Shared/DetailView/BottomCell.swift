@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+///BottomCells swipe horizontally! each BottomCell contains a list that swipes vertically. The list contains PairCells
 struct BottomCell: View {
     @FetchRequest var pairs:FetchedResults<Pair>
     

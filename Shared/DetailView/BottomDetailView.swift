@@ -34,7 +34,7 @@ struct BottomDetailView: View {
                 BottomCell($0).tag(position(of:$0))
             }
         }
-        .tabViewStyle(.page(indexDisplayMode: .always))
+        .tabViewStyle(.page(indexDisplayMode: .never))
         .onReceive(NotificationCenter.default.publisher(for: .topCellTapped)) {
             let row = $0.userInfo!["topCellTapped"] as! Int
             withAnimation { tabWrapper.selectedTab = row }
