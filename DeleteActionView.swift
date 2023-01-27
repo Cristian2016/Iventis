@@ -1,5 +1,5 @@
 //
-//  DeleteActionView1.swift
+//  DeleteActionView.swift
 //  Timers
 //
 //  Created by Cristian Lapusan on 04.05.2022.

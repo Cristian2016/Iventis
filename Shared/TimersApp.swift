@@ -88,7 +88,7 @@ struct TimersApp: App {
     
     // MARK: -
     private var showDeleteActionView:Bool {
-        layoutViewModel.bubbleCellFrame != nil
+        viewModel.deleteAction_bRank != nil
     } //4
     
     fileprivate var bubbleNotesShowing:Bool { viewModel.notesList_bRank != nil }
