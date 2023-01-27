@@ -79,6 +79,7 @@ extension Bubble {
         case finished //3 timers only
     }
     
+    // TODO: verify state. make sure it's correct
     var state:State {
         //if sessions.isEmpty state is .brandNew
         guard let lastSession = lastSession else { return .brandNew }
