@@ -39,6 +39,7 @@ struct BubbleCell: View {
             deleteActionButton
             moreOptionsButton
         }
+        .onAppear { bubble.addObserver() }
     }
     
     // MARK: - Legos
