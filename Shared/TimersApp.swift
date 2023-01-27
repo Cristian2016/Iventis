@@ -78,6 +78,7 @@ struct TimersApp: App {
     private func handleEnterBackground() { viewModel.bubbleTimer(.pause) } //3
         
     private func createBubblesOnFirstAppLaunch() {
+        return
         if isFirstAppLaunch {
             viewModel.createBubble(.stopwatch, "charcoal", "☕️ Break")
             viewModel.createBubble(.stopwatch, "green", "🌳 Outdoors")

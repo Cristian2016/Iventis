@@ -113,6 +113,8 @@ class ViewModel: ObservableObject {
             newBubble.isNoteHidden = false
         }
         
+        newBubble.addObserver()
+        
         try? backgroundContext.save()
     }
     
@@ -484,11 +486,6 @@ class ViewModel: ObservableObject {
                 PersistenceController.shared.save()
             }
         }
-    }
-    
-    // MARK: - User Intents
-    func addObserver(for bubble: Bubble) {
-        bubble.addObserver()
     }
 }
 
