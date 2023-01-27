@@ -80,8 +80,10 @@ extension Bubble {
     }
     
     var state:State {
+        //if sessions.isEmpty state is .brandNew
         guard let lastSession = lastSession else { return .brandNew }
         
+        //only timers can have .finished state. timers where .currentClock <= 0 are finished
         if kind != .stopwatch && currentClock <= 0 { return .finished }
         else {
             if sessions_.isEmpty || lastSession.isEnded { return .brandNew }
