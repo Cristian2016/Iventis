@@ -21,11 +21,6 @@ struct BubbleCell: View {
     var body: some View {
         VStack {
             ZStack {
-                if computeBubbleCellFrame {
-                    Rectangle()    
-                        .fill(.clear)
-                        .readFrame($layoutViewModel.bubbleCellFrame)
-                }
                 threeCircles //🔴🔴🔴
                 threeLabels //⓿⓳➓
             }

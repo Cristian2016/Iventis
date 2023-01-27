@@ -211,7 +211,7 @@ class ViewModel: ObservableObject {
     }
     
     func showMoreOptions(for bubble:Bubble) {
-        //set @Published property triggers UI update
+        //set Published property triggers UI update
         //MoreOptionsView displayed
         theOneAndOnlyEditedSDB = bubble.sdb
     }

@@ -33,12 +33,12 @@ public class Bubble: NSManagedObject {
     var lastPair:Pair? { (lastSession?.pairs?.array as? [Pair])?.last }
     
     // MARK: -
-    ///@Published time components that bubbleCell displays. ex: "12"hr "34"min "59"sec
+    //Published time components that bubbleCell displays. ex: "12"hr "34"min "59"sec
     @Published var components
     = Float.TimeComponentsAsStrings(hr: "0", min: "0", sec: "0", cents: "00")
     { willSet { self.objectWillChange.send() }}
     
-    ///updates elapsed time inside PairCell. what smallBubbleCell displays. ex: "0"hr "12"min "24"sec
+    //updates elapsed time inside PairCell. what smallBubbleCell displays. ex: "0"hr "12"min "24"sec
     @Published var smallBubbleView_Components
     = Float.TimeComponentsAsStrings(hr: "0", min: "0", sec: "0", cents: "00")
     { willSet { DispatchQueue.main.async { self.objectWillChange.send() } }}

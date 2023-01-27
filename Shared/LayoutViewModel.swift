@@ -10,7 +10,8 @@ import MyPackage
 
 class LayoutViewModel: ObservableObject {
     var bubbleCellFrame:CGRect? {didSet{
-        set_deleteActionViewOffset(for: bubbleCellFrame)
+        print(bubbleCellFrame)
+//        set_deleteActionViewOffset(for: bubbleCellFrame)
     }} //1
     
     @Published var deleteActionViewOffset:CGFloat?
