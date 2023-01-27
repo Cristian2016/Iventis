@@ -4,7 +4,7 @@
 //
 //  Created by Cristian Lapusan on 15.04.2022.
 //
-//
+//1 observe BackgroundTimer.signal [Notifications]. start observing when bubble is created, stop on deinit
 
 import Foundation
 import CoreData
@@ -12,9 +12,6 @@ import SwiftUI
 import MyPackage
 
 public class Bubble: NSManagedObject {
-    
-    private var observerAddedAlready = false
-    
     ///4 start delay values
     static let delays = [5, 10, 20, 45]
         
@@ -43,7 +40,7 @@ public class Bubble: NSManagedObject {
     = Float.TimeComponentsAsStrings(hr: "0", min: "0", sec: "0", cents: "00")
     { willSet { DispatchQueue.main.async { self.objectWillChange.send() } }}
             
-    deinit { NotificationCenter.default.removeObserver(self) }
+    deinit { NotificationCenter.default.removeObserver(self) } //1
     
     enum Kind:Comparable {
         case stopwatch
@@ -70,6 +67,8 @@ public class Bubble: NSManagedObject {
     var syncSmallBubbleCell = false {didSet{
         if !syncSmallBubbleCell { smallBubbleView_Components = Float.TimeComponentsAsStrings(hr: "0", min: "0", sec: "0", cents: "0") }
     }}
+    
+    var shouldUpdateSmallComponents:Bool = false //1
 }
 
 extension Bubble {
@@ -96,27 +95,15 @@ extension Bubble {
 
 // MARK: - Observers
 extension Bubble {
-    enum ObserveState {
-        case start
-        case stop
-    }
-        
-    ///observe bubbleTimer signal to update time components only if bubble is running
-    ///1.start observing on init, 2.resume observing on reentering active phase 3.remove observer on deinit
     func addObserver() {
-        //make sure observer added only once
-        if observerAddedAlready { return }
-        observerAddedAlready = true
-        
         NotificationCenter.default
             .addObserver(forName: .bubbleTimerSignal, object: nil, queue: nil) {
                 [weak self] _ in
-                guard self?.state == .running else { return }
+                if self?.state != .running { return }
                 
                 self?.updateBubbleCellComponents()
-                self?.updateSmallBubbleCell()
             }
-    }
+    } //1
     
     ///time components hr:min:sec:hundredths
     private func updateBubbleCellComponents() {
@@ -129,10 +116,10 @@ extension Bubble {
                                     
         //since closure runs on bThread, dispatch back to mThread
         DispatchQueue.main.async { self.components = componentsString }
-    }
+    } //1
     
     ///update smallBubbleCell time components: hr min sec
-    private func updateSmallBubbleCell() {
+    private func updateSmallBubbleCellComponents() {
         if !syncSmallBubbleCell { return }
         guard let lastPairStart = lastPair?.start else { return }
         
@@ -141,7 +128,7 @@ extension Bubble {
         let componentsString = Float(Δ).timeComponentsAsStrings
         
         DispatchQueue.main.async { self.smallBubbleView_Components = componentsString }
-    }
+    } //2
     
     func updateCurrentClock(runningOnly:Bool) {
         if runningOnly {
@@ -150,7 +137,7 @@ extension Bubble {
             let elapsedSinceStart = Float(Date().timeIntervalSince(lastPair?.start ?? Date()))
             currentClock += elapsedSinceStart
         }
-    }
+    } //1
 }
 
 extension Bubble {

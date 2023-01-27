@@ -24,14 +24,14 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "AC8C0D49-A769-431E-A531-DAC34AB3968C"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "Yes"
             filePath = "Shared/TimersApp.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "90"
-            endingLineNumber = "90"
+            startingLineNumber = "91"
+            endingLineNumber = "91"
             landmarkName = "showDeleteActionView"
             landmarkType = "24">
             <Actions>
@@ -47,8 +47,8 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "59F07941-1BDC-464F-A88A-10EB01D6D0E4"
-            shouldBeEnabled = "Yes"
+            uuid = "31F9A246-5508-4173-988F-5049D73A425F"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "Yes"
             filePath = "Shared/BubbleCell.swift"
@@ -62,13 +62,13 @@
                <BreakpointActionProxy
                   ActionExtensionID = "Xcode.BreakpointAction.Sound">
                   <ActionContent
-                     soundName = "Blow">
+                     soundName = "Glass">
                   </ActionContent>
                </BreakpointActionProxy>
             </Actions>
             <Locations>
                <Location
-                  uuid = "59F07941-1BDC-464F-A88A-10EB01D6D0E4 - e832dd778b719431"
+                  uuid = "31F9A246-5508-4173-988F-5049D73A425F - e832dd778b719431"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
@@ -83,7 +83,7 @@
                   offsetFromSymbolStart = "1073">
                </Location>
                <Location
-                  uuid = "59F07941-1BDC-464F-A88A-10EB01D6D0E4 - ce6f58b4d77f52ce"
+                  uuid = "31F9A246-5508-4173-988F-5049D73A425F - ce6f58b4d77f52ce"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
