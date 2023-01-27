@@ -262,25 +262,6 @@ struct BubbleCell: View {
     }
 }
 
-// MARK: - Modifiers
-extension BubbleCell {
-    struct TextModifier : ViewModifier {
-        let fontSize:CGFloat
-        let diameter:CGFloat
-        
-        func body(content: Content) -> some View {
-            content
-                .font(.system(size: fontSize))
-                .foregroundColor(.white)
-                .frame(width: diameter, height: diameter)
-        }
-    }
-}
-
-extension View {
-    func textify(fontSize:CGFloat, diameter:CGFloat) -> some View { self.modifier(BubbleCell.TextModifier(fontSize: fontSize, diameter: diameter)) }
-}
-
 // MARK: - Little Helpers
 extension BubbleCell {
     // MARK: - Helpers

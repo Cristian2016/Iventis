@@ -15,19 +15,15 @@ struct ConfirmationView1: View {
     var body: some View {
         VStack {
             Text(content.title)
-                .font(.system(size: 20).weight(.medium))
-                .foregroundColor(.black)
-            Label(content.title, systemImage: systemImage)
-                .labelStyle(.iconOnly)
-                .font(.system(size: 30))
-                .fontWeight(.semibold)
-                .foregroundColor(systemImageColor)
+            Label(name, systemImage: systemImage)
         }
+        .font(.system(size: 30).weight(.medium))
+        .foregroundColor(.white)
         .padding()
         .background(
             RoundedRectangle(cornerRadius: 8)
-                .fill(.white)
-                .shadow(radius: 1)
+                .fill(fillColor)
+                .shadow(radius: 2)
         )
     }
     
@@ -38,10 +34,17 @@ struct ConfirmationView1: View {
             case .created: return "checkmark"
         }
     }
-    private var systemImageColor:Color {
+    private var fillColor:Color {
         switch content.kind {
             case .removed: return .red
             case .created: return .green
+        }
+    }
+    
+    private var name:String {
+        switch content.kind {
+            case .removed: return "Removed"
+            case .created: return "Created"
         }
     }
 }
