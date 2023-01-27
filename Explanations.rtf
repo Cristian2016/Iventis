@@ -18,6 +18,7 @@ Bubble\
 Bubble adds itself as observer to receive background timer notifications\
 - bubble adds itself as an observer on bubble init [createBubble()]\
 - bubble removes itself as observer on bubble deinit\
+- bubble must add itself as observer again, if the app restarts. it will be added in BubbleCell.onAppear \{ \}\
 \
 Notifications are processed by the bubble only if bubble.state is running\
 \
