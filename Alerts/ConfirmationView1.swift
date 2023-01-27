@@ -13,9 +13,11 @@ struct ConfirmationView1: View {
     let dismissAction:() -> Void
     
     var body: some View {
-        VStack {
+        VStack(spacing: 8) {
             Text(content.title)
+            Divider().frame(width: 80)
             Label(name, systemImage: systemImage)
+//                .labelStyle(.iconOnly)
         }
         .font(.system(size: 30).weight(.medium))
         .foregroundColor(.white)
