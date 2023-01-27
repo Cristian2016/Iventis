@@ -35,7 +35,7 @@ struct TimersApp: App {
                 else { iPhoneViewHierarchy() }
                 
                 if showDeleteActionView {
-                    let bubble = viewModel.bubble(for: Int(viewModel.showDeleteAction_bRank!))
+                    let bubble = viewModel.bubble(for: Int(viewModel.deleteAction_bRank!))
                     DeleteActionView(bubble)
                 }
                 if bubbleNotesShowing { BubbleStickyNoteList($viewModel.notesList_bRank) }
@@ -87,7 +87,6 @@ struct TimersApp: App {
     
     // MARK: -
     private var showDeleteActionView:Bool {
-        viewModel.showDeleteAction_bRank != nil &&
         layoutViewModel.bubbleCellFrame != nil
     } //4
     

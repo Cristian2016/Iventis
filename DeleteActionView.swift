@@ -27,7 +27,8 @@ struct DeleteActionView: View {
             ZStack {
                 Color.white.opacity(0.01)
                     .onTapGesture {
-                        viewModel.showDeleteAction_bRank = nil
+                        viewModel.deleteAction_bRank = nil
+                        layoutViewModel.deleteActionViewOffset = nil
                     }
                 RoundedRectangle(cornerRadius: backgroundRadius)
                     .fill(backgroundColor)
@@ -41,13 +42,13 @@ struct DeleteActionView: View {
                                     deleteBubbleView
                                         .onTapGesture { withAnimation {
                                             viewModel.delete(bubble!)
-                                            viewModel.showDeleteAction_bRank = nil
+                                            viewModel.deleteAction_bRank = nil
                                         } }
                                     deleteHistoryView
                                         .onTapGesture { withAnimation {
                                             if !bubble!.sessions_.isEmpty {
                                                 viewModel.reset(bubble!)
-                                                viewModel.showDeleteAction_bRank = nil
+                                                viewModel.deleteAction_bRank = nil
                                             }
                                         } }
                                 }

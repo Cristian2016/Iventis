@@ -21,7 +21,7 @@ struct BubbleCell: View {
     var body: some View {
         VStack {
             ZStack {
-                if revealBubbleCellFrame {
+                if computeBubbleCellFrame {
                     Rectangle()    
                         .fill(.clear)
                         .readFrame($layoutViewModel.bubbleCellFrame)
@@ -66,7 +66,7 @@ struct BubbleCell: View {
     //trailing Swipe actions
     private var deleteActionButton:some View {
         Button {
-            viewModel.showDeleteAction_bRank = bubble.rank
+            viewModel.deleteAction_bRank = bubble.rank
 //            delayExecution(.now() + 0.2) { vm.isDetailViewShowing = false }
         }
     label: { Label { Text("Delete") }
@@ -258,11 +258,6 @@ struct BubbleCell: View {
     }
     
     // MARK: - Methods
-    private var showDeleteActionView:Bool {
-        guard let bubbleRank = viewModel.showDeleteAction_bRank else { return false }
-        return bubble.rank == bubbleRank
-    }
-    
     private var showDetailView:Bool {
         guard let selectedBubbleRank = viewModel.rankOfSelectedBubble else { return false }
         return bubble.rank == selectedBubbleRank
@@ -272,9 +267,8 @@ struct BubbleCell: View {
     var confirm_CalEventCreated:Bool { viewModel.confirm_CalEventCreated == bubble.rank }
     
     ///show bubbleCell.frame if it's the same rank and the frame is not set and detailView does not show. In the Detailview there is no need to compute deleteActionView.yOffset
-    private var revealBubbleCellFrame:Bool {
-        viewModel.showDeleteAction_bRank == bubble.rank
-        && layoutViewModel.bubbleCellFrame == nil
+    private var computeBubbleCellFrame:Bool {
+        viewModel.deleteAction_bRank == bubble.rank
     }
 }
 
