@@ -30,9 +30,11 @@ struct BottomDetailView: View {
     
     var body: some View {
         TabView (selection: $tabWrapper.selectedTab) {
-            ForEach(sessions) { BottomCell($0).tag(position(of:$0)) }
+            ForEach(sessions) {
+                BottomCell($0).tag(position(of:$0))
+            }
         }
-        .tabViewStyle(.page(indexDisplayMode: .never))
+        .tabViewStyle(.page(indexDisplayMode: .always))
         .onReceive(NotificationCenter.default.publisher(for: .topCellTapped)) {
             let row = $0.userInfo!["topCellTapped"] as! Int
             withAnimation { tabWrapper.selectedTab = row }
