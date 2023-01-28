@@ -22,7 +22,7 @@ struct AlwaysOnDisplayButton: View {
     private var label:some View {
         if isDisplayAlwaysON {
             HStack {
-                Text("Always-on Display")
+                Text("Always-On Display")
                     .foregroundColor(.white)
                     .font(.footnote)
                     .padding([.leading, .trailing])
