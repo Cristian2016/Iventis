@@ -15,15 +15,18 @@ struct ConfirmationView1: View {
     var body: some View {
         VStack(spacing: 8) {
             Text(content.title)
+                .font(.system(size: 24).weight(.medium))
+                
             Divider().frame(width: 80)
             Label(name, systemImage: systemImage)
+                .font(.system(size: 24).weight(.semibold))
+                .labelStyle(.iconOnly)
         }
-        .font(.system(size: 30).weight(.medium))
         .foregroundColor(.white)
         .padding()
         .background(
             RoundedRectangle(cornerRadius: 8)
-                .fill(fillColor)
+                .fill(.secondary)
                 .shadow(radius: 2)
         )
         .allowsHitTesting(false)
