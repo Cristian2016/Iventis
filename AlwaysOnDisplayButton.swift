@@ -37,7 +37,8 @@ struct AlwaysOnDisplayButton: View {
         ZStack {
             Image(systemName: "sun.max.fill")
             Image(systemName: "line.diagonal")
-                .foregroundColor(.label)
+                .fontWeight(.black)
+                .foregroundColor(.red)
         }
         .fontWeight(.semibold)
         .foregroundColor(.secondary)
