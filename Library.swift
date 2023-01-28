@@ -22,6 +22,8 @@ public extension URL {
 public extension Color {
     static let deleteActionViewBackground = Color("deleteActionViewBackground")
     static let vibrantGreen = Color("vibrantGreen")
+    ///secondary light mode, white dark mode
+    static let secondaryWhite = Color("secondaryWhite")
 }
 
 public extension String {

@@ -23,13 +23,13 @@ struct AlwaysOnDisplayButton: View {
         if isDisplayAlwaysON {
             HStack {
                 Text("Always-On Display")
-                    .foregroundColor(.background)
+                    .foregroundColor(.secondary)
                     .font(.footnote)
                     .padding([.leading, .trailing])
                     .padding([.top, .bottom], 4)
                     .background {
                         RoundedRectangle(cornerRadius: 8)
-                            .fill(Color.secondary)
+                            .stroke(Color.secondary, lineWidth: 1)
                     }
                 exitAlwaysONDisplay_Symbol
             }
