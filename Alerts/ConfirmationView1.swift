@@ -15,9 +15,9 @@ struct ConfirmationView1: View {
     var body: some View {
         VStack(spacing: 8) {
             Text(content.title)
-                .font(.system(size: 24).weight(.medium))
+                .font(.system(size: 24))
             Label(name, systemImage: systemImage)
-                .font(.system(size: 24).weight(.semibold))
+                .font(.system(size: 24).weight(.medium))
                 .labelStyle(.iconOnly)
         }
         .foregroundColor(.white)

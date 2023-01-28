@@ -4,6 +4,7 @@
 //
 //  Created by Cristian Lapusan on 13.04.2022.
 // https://stackoverflow.com/questions/58284994/swiftui-how-to-handle-both-tap-long-press-of-button
+//1 do not show stickyNote when calEventCreatedConfirmation is visible. for aesthetic reasons only
 
 import SwiftUI
 import MyPackage
@@ -25,8 +26,8 @@ struct BubbleCell: View {
             }
 //            //subviews
             .overlay { if bubble.hasCalendar && noNote { calendarSymbol }}
-            .overlay { stickyNote }
-            .overlay { if confirm_CalEventCreated { calEventCreatedConfirmation }}
+            .overlay { if !confirm_CalEventCreated { stickyNote }}
+            .overlay { if confirm_CalEventCreated { calEventCreatedConfirmation }} //1
             .overlay { if !isBubbleRunning { hundredthsView }}
         }
         .listRowSeparator(.hidden)
