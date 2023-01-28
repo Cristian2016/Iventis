@@ -46,7 +46,7 @@ struct BubbleCell: View {
         Push(.topLeft) {
             ConfirmationView1(content: .eventCreated) {}
         }
-        .offset(y: -16)
+        .offset(y: -10)
     }
     
     //Leading Swipe actions
