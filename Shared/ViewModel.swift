@@ -298,13 +298,13 @@ class ViewModel: ObservableObject {
         if !bubble.sessions_.isEmpty && bubble.hasCalendar {
             CalendarManager.shared.createNewEvent(for: bubble.lastSession)
             
-            //display Cal Event Added to Calenda App confirmation to the user
+            //display Cal Event Added to Calendar App confirmation to the user
             confirm_CalEventCreated = bubble.rank
             delayExecution(.now() + 3) { self.confirm_CalEventCreated = nil }
         }
         
         PersistenceController.shared.save()
-    }
+    }ok
     
     func userTogglesDetail(_ rank:Int?) {
         //identify bubble using rank
