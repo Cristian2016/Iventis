@@ -32,6 +32,8 @@ struct MoreOptionsView: View {
     static let colorTitleSize = CGFloat(40)
     let checkmarkFont = Font.system(size: 40).weight(.medium)
     
+    func dismiss() { viewModel.theOneAndOnlyEditedSDB = nil }
+    
     // MARK: - Body
     var body: some View {
         ZStack {
@@ -53,17 +55,11 @@ struct MoreOptionsView: View {
             if viewModel.confirm_ColorChange {
                 ColorConfirmationView(colorName: bubble.color!, color: Color.bubbleColor(forName: bubble.color!))
             }
-            if viewModel.confirm_NoDelay {//zero delay confirmation
-                ConfirmView(content: .startDelayRemoved) {
-                    //delete action closure
-                    viewModel.theOneAndOnlyEditedSDB = nil
-                }
+            if viewModel.confirm_DelayRemoved {//zero delay confirmation
+                ConfirmView(content: .startDelayRemoved) { dismiss() }
             }
             if viewModel.confirm_DelayWasChanged {
-                ConfirmView(content: .startDelayCreated) {
-                    //delete action closure
-                    viewModel.theOneAndOnlyEditedSDB = nil
-                }
+                ConfirmView(content: .startDelayCreated) { dismiss() }
             }
         }
 //        .gesture(longPress) //remove delay
@@ -151,8 +147,8 @@ struct MoreOptionsView: View {
                 viewModel.removeDelay(for: bubble)
                 
                 //show 0s red alert and hide after 0.7 seconds
-                viewModel.confirm_NoDelay = true
-                delayExecution(.now() + 1) { viewModel.confirm_NoDelay = false }
+                viewModel.confirm_DelayRemoved = true
+                delayExecution(.now() + 1) { viewModel.confirm_DelayRemoved = false }
                 UserFeedback.doubleHaptic(.heavy)
             }
     }
@@ -190,7 +186,6 @@ extension View {
 }
 
 struct MoreOptionsView_Previews: PreviewProvider {
-    
     static var previews: some View {
         let bubble:Bubble = {
             let bubble = Bubble(context: PersistenceController.shared.viewContext)

@@ -19,7 +19,7 @@ class ViewModel: ObservableObject {
     @Published var theOneAndOnlyEditedSDB:StartDelayBubble? //StartDelayBubble
     
     //Start Delay
-    @Published var confirm_NoDelay = false
+    @Published var confirm_DelayRemoved = false
     @Published var confirm_DelayWasChanged = false
     
     @Published var confirm_ColorChange = false
