@@ -17,7 +17,7 @@ struct ConfirmView: View {
         let contentColor = Color.white
     } //1
     
-    let appearance = Appearance() //1
+    private let appearance = Appearance() //1
     let content:Content
     var dismissAction:(() -> Void)? = nil
     
