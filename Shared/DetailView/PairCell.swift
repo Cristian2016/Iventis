@@ -86,18 +86,20 @@ struct PairCell: View {
                     .onTapGesture {  /* ⚠️ Idiotic! I need to put this shit here or else I can't scroll */ }
                     .onLongPressGesture { userWantsNotesList() }
                     
-                    //like a button it has a closure for action
-                    Push(.bottomRight) {//PairCell StickyNote
-                        StickyNote { stickyNoteContent }
-                        dragAction : { deleteStickyNote() }
-                        tapAction : { toggleStickyNoteVisibility() }
-                    }
+                    stickyNote
                 }
             }
         }
     }
     
     // MARK: -
+    private var stickyNote:some View {
+        Push(.bottomRight) {//PairCell StickyNote
+            StickyNote { stickyNoteContent }
+            dragAction : { deleteStickyNote() }
+            tapAction : { toggleStickyNoteVisibility() }
+        }
+    }
     private var stickyNoteContent:some View {
         stickyNoteText
             .font(.system(size: 26))
