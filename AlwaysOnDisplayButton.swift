@@ -1,7 +1,7 @@
 import SwiftUI
 import MyPackage
 
-struct AlwaysOnDisplaySymbol: View {
+struct AlwaysOnDisplayButton: View {
     @EnvironmentObject var viewModel:ViewModel
     
     var body: some View {
@@ -17,10 +17,22 @@ struct AlwaysOnDisplaySymbol: View {
             }
         label: {
             Label {
-//                Text(isDisplayAlwaysON ? "Exit" : "")
-//                    .font(.system(size:20).weight(.bold))
+                //                Text(isDisplayAlwaysON ? "Exit" : "")
+                //                    .font(.system(size:20).weight(.bold))
             } icon: {
-                if isDisplayAlwaysON { exitAlwaysONDisplay_Symbol }
+                if isDisplayAlwaysON {
+                    HStack {
+                        Text("Always-on Display")
+                            .foregroundColor(.white)
+                            .font(.callout)
+                            .padding([.leading, .trailing])
+                            .background {
+                                RoundedRectangle(cornerRadius: 4)
+                                    .fill(Color.red)
+                            }
+                        exitAlwaysONDisplay_Symbol
+                    }
+                }
                 else { displayONSymbol }
             }
         }
@@ -61,6 +73,6 @@ struct AlwaysOnDisplaySymbol: View {
 
 struct DisplayAlwaysOnSymbol_Previews: PreviewProvider {
     static var previews: some View {
-        AlwaysOnDisplaySymbol()
+        AlwaysOnDisplayButton()
     }
 }

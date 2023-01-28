@@ -91,7 +91,7 @@ struct BubbleList: View {
     private var buttonsBar:some View {
         HStack {
             Spacer()
-            AlwaysOnDisplaySymbol()
+            AlwaysOnDisplayButton()
             PlusButton()
         }
     }
