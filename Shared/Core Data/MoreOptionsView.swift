@@ -68,12 +68,14 @@ struct MoreOptionsView: View {
         Push(.topMiddle) {
             ConfirmView(content: .startDelayRemoved) { dismiss() }
         }
+        .padding([.top])
     }
     
     private var delayCreatedConfirmation:some View {
         Push(.topMiddle) {
             ConfirmView(content: .startDelayCreated) { dismiss() }
         }
+        .padding([.top])
     }
     
     private var whiteBackground:some View {
