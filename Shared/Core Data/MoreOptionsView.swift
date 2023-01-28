@@ -49,8 +49,8 @@ struct MoreOptionsView: View {
                 if viewModel.confirm_ColorChange {
                     ColorConfirmationView(colorName: bubble.color!, color: Color.bubbleColor(forName: bubble.color!))
                 }
-                if viewModel.confirm_DelayRemoved { delayRemovedConfirmation }
-                if viewModel.confirm_DelayCreated { delayCreatedConfirmation }
+//                if viewModel.confirm_DelayRemoved { delayRemovedConfirmation }
+//                if viewModel.confirm_DelayCreated { delayCreatedConfirmation }
             }
             .frame(width: 280)
             .padding(8)
@@ -62,9 +62,7 @@ struct MoreOptionsView: View {
     
     // MARK: - Lego
     private var delayRemovedConfirmation:some View {
-        Push(.topMiddle) {
-            ConfirmView(content: .startDelayRemoved) { dismiss() }
-        }
+        Push(.topMiddle) { ConfirmView(content: .startDelayRemoved) { dismiss() }}
         .padding([.top])
     }
     

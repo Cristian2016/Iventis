@@ -442,10 +442,11 @@ class ViewModel: ObservableObject {
         
         //user feedback: flash delay was changed
         confirm_DelayCreated = true
-        delayExecution(.confirmation) {
-            self.confirm_DelayCreated = false
-            self.theOneAndOnlyEditedSDB = nil //dismiss
-        }
+        self.theOneAndOnlyEditedSDB = nil //dismiss
+//        delayExecution(.confirmation) {
+//            self.confirm_DelayCreated = false
+//            self.theOneAndOnlyEditedSDB = nil //dismiss
+//        }
     }
     
     ///referenceDelay = 0, currentDelay = 0
