@@ -15,8 +15,6 @@ struct ColorConfirmationView: View {
         ZStack {
             Color.background.opacity(0.9)
             Circle().fill(color)
-                .padding()
-                .padding()
                 .standardShadow(true)
             Text(Color.userFriendlyBubbleColorName(for: colorName))
                 .font(.system(size: 40).weight(.medium))

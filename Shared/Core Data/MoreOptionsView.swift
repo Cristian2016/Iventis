@@ -46,6 +46,9 @@ struct MoreOptionsView: View {
                 colorsTable
             }
             .overlay {
+                if viewModel.confirm_ColorChange {
+                    ColorConfirmationView(colorName: bubble.color!, color: Color.bubbleColor(forName: bubble.color!))
+                }
                 if viewModel.confirm_DelayRemoved { delayRemovedConfirmation }
                 if viewModel.confirm_DelayCreated { delayCreatedConfirmation }
             }
@@ -54,10 +57,6 @@ struct MoreOptionsView: View {
             .background { tableBackground }
             .padding()
             .padding()
-            
-            if viewModel.confirm_ColorChange {
-                ColorConfirmationView(colorName: bubble.color!, color: Color.bubbleColor(forName: bubble.color!))
-            }
         }
     }
     
