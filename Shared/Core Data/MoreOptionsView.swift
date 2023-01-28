@@ -45,6 +45,10 @@ struct MoreOptionsView: View {
                 colorsViewTitle
                 colorsTable
             }
+            .overlay {
+                if viewModel.confirm_DelayRemoved { delayRemovedConfirmation }
+                if viewModel.confirm_DelayCreated { delayCreatedConfirmation }
+            }
             .frame(width: 280)
             .padding(8)
             .background { tableBackground }
@@ -55,18 +59,21 @@ struct MoreOptionsView: View {
             if viewModel.confirm_ColorChange {
                 ColorConfirmationView(colorName: bubble.color!, color: Color.bubbleColor(forName: bubble.color!))
             }
-            if viewModel.confirm_DelayRemoved { delayRemovedConfirmation }
-            if viewModel.confirm_DelayCreated { delayCreatedConfirmation }
+            
         }
     }
     
     // MARK: - Lego
     private var delayRemovedConfirmation:some View {
+        Push(.topMiddle) {
             ConfirmView(content: .startDelayRemoved) { dismiss() }
+        }
     }
     
     private var delayCreatedConfirmation:some View {
-        ConfirmView(content: .startDelayCreated) { dismiss() }
+        Push(.topMiddle) {
+            ConfirmView(content: .startDelayCreated) { dismiss() }
+        }
     }
     
     private var whiteBackground:some View {
