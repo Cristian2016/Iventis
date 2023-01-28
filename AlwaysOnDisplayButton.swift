@@ -26,9 +26,8 @@ struct AlwaysOnDisplayButton: View {
                     .foregroundColor(.white)
                     .font(.footnote)
                     .padding([.leading, .trailing])
-                    .background {
-                        RoundedRectangle(cornerRadius: 4).fill(.red)
-                    }
+                    .padding([.top, .bottom], 4)
+                    .background { RoundedRectangle(cornerRadius: 8).fill(.red) }
                 exitAlwaysONDisplay_Symbol
             }
         }
