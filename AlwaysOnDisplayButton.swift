@@ -15,27 +15,28 @@ struct AlwaysOnDisplayButton: View {
                     viewModel.confirm_AlwaysOnDisplay = false
                 }
             }
-        label: {
-            if isDisplayAlwaysON {
-                HStack {
-                    Text("Always-on Display")
-                        .foregroundColor(.white)
-                        .font(.footnote)
-                        .padding([.leading, .trailing])
-                        .background {
-                            RoundedRectangle(cornerRadius: 4).fill(.red)
-                        }
-                    exitAlwaysONDisplay_Symbol
-                }
-            }
-            else { displayONSymbol }
-        }
-        .tint(.red)
+        label: { label }
         .padding([.leading, .trailing], 12)
         }
     }
     
     // MARK: - Lego
+    @ViewBuilder
+    private var label:some View {
+        if isDisplayAlwaysON {
+            HStack {
+                Text("Always-on Display")
+                    .foregroundColor(.white)
+                    .font(.footnote)
+                    .padding([.leading, .trailing])
+                    .background {
+                        RoundedRectangle(cornerRadius: 4).fill(.red)
+                    }
+                exitAlwaysONDisplay_Symbol
+            }
+        }
+        else { displayONSymbol }
+    }
     private var exitAlwaysONDisplay_Symbol:some View {
         ZStack {
             Image(systemName: "sun.max.fill")
