@@ -8,12 +8,8 @@
 import SwiftUI
 
 struct AlwaysOnDisplayConfirmationView: View {
-    @EnvironmentObject var viewModel:ViewModel
-    
-    var isON:Bool { UIApplication.shared.isIdleTimerDisabled }
-    
     var body: some View {
-        ConfirmView(content: isON ? .alwaysONDisplayON : .alwaysONDisplayOFF)
+        ConfirmView(content: UIApplication.shared.isIdleTimerDisabled ? .alwaysONDisplayON : .alwaysONDisplayOFF)
     }
 }
 

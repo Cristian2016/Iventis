@@ -11,7 +11,7 @@ struct AlwaysOnDisplaySymbol: View {
                 UIApplication.shared.isIdleTimerDisabled.toggle()
                 
                 viewModel.confirm_AlwaysOnDisplay = true
-                delayExecution(.now() + 0.5) {
+                delayExecution(.now() + 2) {
                     viewModel.confirm_AlwaysOnDisplay = false
                 }
             }

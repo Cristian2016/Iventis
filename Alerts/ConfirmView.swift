@@ -80,6 +80,8 @@ extension ConfirmView {
         static let eventRemoved = Content(title: "Calendar Event", kind: .removed)
         static let alwaysONDisplayON = Content(title: "Always-on Display", kind: .on)
         static let alwaysONDisplayOFF = Content(title: "Always-on Display", kind: .off)
+        static let startDelayCreated = Content(title: "Start Delay", kind: .created)
+        static let startDelayRemoved = Content(title: "Start Delay", kind: .removed)
     }
 }
 
