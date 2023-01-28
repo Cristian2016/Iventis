@@ -69,6 +69,8 @@
 		1FA834762850A57C003F4D61 /* Widgets.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 1FA834712850A57A003F4D61 /* Widgets.intentdefinition */; };
 		1FA834792850A57C003F4D61 /* WidgetsExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 1FA8346B2850A57A003F4D61 /* WidgetsExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		1FA8F87E28367B7A00394B59 /* BubbleNote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA8F87D28367B7A00394B59 /* BubbleNote.swift */; };
+		1FAF39D9298575E9002D833C /* Library.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA377E72972FE75005ACD41 /* Library.swift */; };
+		1FAF39DB29857688002D833C /* MyPackage in Frameworks */ = {isa = PBXBuildFile; productRef = 1FAF39DA29857688002D833C /* MyPackage */; };
 		1FB3178F286ACB48006BBE82 /* Note_InfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB3178E286ACB48006BBE82 /* Note_InfoView.swift */; };
 		1FB4D4E02977F86500F26D9C /* iPadViewHierarchy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB4D4DF2977F86500F26D9C /* iPadViewHierarchy.swift */; };
 		1FB5D8D428E81CD900DD522A /* InfoButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB5D8D328E81CD900DD522A /* InfoButton.swift */; };
@@ -227,6 +229,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1FAF39DB29857688002D833C /* MyPackage in Frameworks */,
 				1FA8346D2850A57A003F4D61 /* SwiftUI.framework in Frameworks */,
 				1FA8346C2850A57A003F4D61 /* WidgetKit.framework in Frameworks */,
 			);
@@ -465,6 +468,9 @@
 			dependencies = (
 			);
 			name = WidgetsExtension;
+			packageProductDependencies = (
+				1FAF39DA29857688002D833C /* MyPackage */,
+			);
 			productName = WidgetsExtension;
 			productReference = 1FA8346B2850A57A003F4D61 /* WidgetsExtension.appex */;
 			productType = "com.apple.product-type.app-extension";
@@ -622,6 +628,7 @@
 			files = (
 				1FA834752850A57C003F4D61 /* Widgets.intentdefinition in Sources */,
 				1FA834702850A57A003F4D61 /* Widgets.swift in Sources */,
+				1FAF39D9298575E9002D833C /* Library.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -923,6 +930,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		1FAF39DA29857688002D833C /* MyPackage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1FD15F7E2972F5D100852073 /* XCRemoteSwiftPackageReference "MyPackage" */;
+			productName = MyPackage;
+		};
 		1FD15F7F2972F5D100852073 /* MyPackage */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 1FD15F7E2972F5D100852073 /* XCRemoteSwiftPackageReference "MyPackage" */;

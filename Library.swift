@@ -7,18 +7,22 @@
 
 import SwiftUI
 
+extension UserDefaults {
+    static let shared = UserDefaults(suiteName: .appGroupName)!
+}
+
 public extension Color {
     static let deleteActionViewBackground = Color("deleteActionViewBackground")
     static let vibrantGreen = Color("vibrantGreen")
 }
 
 public extension String {
-    static let appGroupName = "group.com.Timers.container"
+    static let appGroupName = "group.com.Fused.container"
 }
 
 public extension FileManager {
     static var sharedContainerURL:URL = {
-        guard let url = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: String.appGroupName)
+        guard let url = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: .appGroupName)
         else { fatalError() }
         return url
     }()

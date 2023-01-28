@@ -8,6 +8,7 @@
 import WidgetKit
 import SwiftUI
 import Intents
+import MyPackage
 
 struct Provider: IntentTimelineProvider {
     func placeholder(in context: Context) -> SimpleEntry {
@@ -44,7 +45,9 @@ struct WidgetsEntryView : View {
     var entry: Provider.Entry
 
     var body: some View {
-        Text(entry.date, style: .time)
+        VStack {
+            Text(entry.date, style: .time)
+        }
     }
 }
 
