@@ -9,24 +9,33 @@ import SwiftUI
 import MyPackage
 
 struct ConfirmationView1: View {
+    struct Appearance {
+        let cornerRadius = CGFloat(16)
+        let backgroundColor = Color.deleteActionViewBackground
+        let symbolFont = Font.system(size: 36).weight(.medium)
+        let contentFont = Font.system(size: 24)
+        let contentColor = Color.white
+    }
+    
+    let appearance = Appearance()
     let content:Content
     let dismissAction:() -> Void
     
     var body: some View {
         HStack {
             Label(name, systemImage: systemImage)
-                .font(.system(size: 36).weight(.medium))
+                .font(appearance.symbolFont)
                 .labelStyle(.iconOnly)
                 .foregroundColor(fillColor)
             Text(content.title + "\n" + name)
-                .font(.system(size: 24))
+                .font(appearance.contentFont)
         }
-        .foregroundColor(.white)
+        .foregroundColor(appearance.contentColor)
         .padding()
         .padding([.top, .bottom])
         .background(
-            RoundedRectangle(cornerRadius: 16)
-                .fill(Color.deleteActionViewBackground)
+            RoundedRectangle(cornerRadius: appearance.cornerRadius)
+                .fill(appearance.backgroundColor)
         )
         .allowsHitTesting(false)
     }
