@@ -55,17 +55,20 @@ struct MoreOptionsView: View {
             if viewModel.confirm_ColorChange {
                 ColorConfirmationView(colorName: bubble.color!, color: Color.bubbleColor(forName: bubble.color!))
             }
-            if viewModel.confirm_DelayRemoved {//zero delay confirmation
-                ConfirmView(content: .startDelayRemoved) { dismiss() }
-            }
-            if viewModel.confirm_DelayCreated {
-                ConfirmView(content: .startDelayCreated) { dismiss() }
-            }
+            if viewModel.confirm_DelayRemoved { delayRemovedConfirmation }
+            if viewModel.confirm_DelayCreated { delayCreatedConfirmation }
         }
-//        .gesture(longPress) //remove delay
     }
     
     // MARK: - Lego
+    private var delayRemovedConfirmation:some View {
+            ConfirmView(content: .startDelayRemoved) { dismiss() }
+    }
+    
+    private var delayCreatedConfirmation:some View {
+        ConfirmView(content: .startDelayCreated) { dismiss() }
+    }
+    
     private var whiteBackground:some View {
         Color.alertScreenBackground.opacity(0.9)
             .ignoresSafeArea()
