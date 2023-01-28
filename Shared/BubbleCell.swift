@@ -43,7 +43,10 @@ struct BubbleCell: View {
     
     // MARK: - Legos
     private var calEventCreatedConfirmation:some View {
-        ConfirmationView1(content: .eventCreated) {}
+        Push(.topLeft) {
+            ConfirmationView1(content: .eventCreated) {}
+        }
+        .offset(y: -16)
     }
     
     //Leading Swipe actions

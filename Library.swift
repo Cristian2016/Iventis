@@ -7,6 +7,10 @@
 
 import SwiftUI
 
+public extension Color {
+    static let deleteActionViewBackground = Color("deleteActionViewBackground")
+}
+
 public extension String {
     static let appGroupName = "group.com.Timers.container"
 }
