@@ -45,7 +45,7 @@ struct BubbleCell: View {
     // MARK: - Legos
     private var calEventCreatedConfirmation:some View {
         Push(.leading) {
-            ConfirmView(content: .eventCreated) {}
+            ConfirmView(content: .eventCreated, dismissAction: { })
         }
     }
     

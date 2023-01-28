@@ -19,7 +19,7 @@ struct ConfirmView: View {
     
     let appearance = Appearance()
     let content:Content
-    let dismissAction:(() -> Void)? = nil
+    var dismissAction:(() -> Void)? = nil
     
     var body: some View {
         HStack {
