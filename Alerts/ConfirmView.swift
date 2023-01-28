@@ -42,22 +42,24 @@ struct ConfirmView: View {
     // MARK: -
     private var systemImage:String {
         switch content.kind {
-            case .removed: return "xmark"
-            case .created: return "checkmark"
+            case .removed, .off: return "xmark"
+            case .created, .on: return "checkmark"
         }
     }
     private var name:String {
         switch content.kind {
             case .removed: return "Removed"
             case .created: return "Created"
+            case .on: return "ON"
+            case .off: return "OFF"
         }
     }
     
     // MARK: - Unused
     private var fillColor:Color {
         switch content.kind {
-            case .removed: return .red
-            case .created: return .vibrantGreen
+            case .removed, .off: return .red
+            case .created, .on: return .vibrantGreen
         }
     }
 }
@@ -70,15 +72,18 @@ extension ConfirmView {
         enum Kind {
             case created
             case removed
+            case on
+            case off
         }
         
         static let eventCreated = Content(title: "Calendar Event", kind: .created)
         static let eventRemoved = Content(title: "Calendar Event", kind: .removed)
+        static let alwaysONDisplay = Content(title: "Always-on Display", kind: .off)
     }
 }
 
 struct ConfirmationView1_Previews: PreviewProvider {
     static var previews: some View {
-        ConfirmView(content: .eventRemoved)
+        ConfirmView(content: .alwaysONDisplay)
     }
 }
