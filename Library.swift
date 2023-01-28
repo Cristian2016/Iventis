@@ -11,6 +11,14 @@ extension UserDefaults {
     static let shared = UserDefaults(suiteName: .appGroupName)!
 }
 
+public extension URL {
+    static var sharedContainerURL:URL = {
+        guard let url = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: .appGroupName)
+        else { fatalError() }
+        return url
+    }()
+}
+
 public extension Color {
     static let deleteActionViewBackground = Color("deleteActionViewBackground")
     static let vibrantGreen = Color("vibrantGreen")
@@ -20,20 +28,12 @@ public extension String {
     static let appGroupName = "group.com.Fused.container"
 }
 
-public extension FileManager {
-    static var sharedContainerURL:URL = {
-        guard let url = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: .appGroupName)
-        else { fatalError() }
-        return url
-    }()
-}
-
 extension UserDefaults {
     static func generateRank() -> Int {
         //get rank
         //increase rank by one
         //save rank
-        let ud = UserDefaults(suiteName: String.appGroupName)!
+        let ud = UserDefaults(suiteName: .appGroupName)!
         var rank = ud.integer(forKey: UserDefaults.Key.rank)
         defer {
             rank += 1
