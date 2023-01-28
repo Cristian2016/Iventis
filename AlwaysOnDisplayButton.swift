@@ -41,8 +41,6 @@ struct AlwaysOnDisplayButton: View {
         }
         .fontWeight(.semibold)
         .foregroundColor(.pink)
-//        .padding([.top, .bottom], 3)
-//        .padding([.leading, .trailing], 10)
         .font(.system(size: fontSize))
     }
     
