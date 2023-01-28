@@ -13,17 +13,19 @@ struct ConfirmationView1: View {
     let dismissAction:() -> Void
     
     var body: some View {
-        VStack(spacing: 8) {
-            Text(content.title)
-                .font(.system(size: 24))
+        HStack {
             Label(name, systemImage: systemImage)
-                .font(.system(size: 24).weight(.medium))
+                .font(.system(size: 36).weight(.medium))
                 .labelStyle(.iconOnly)
+                .foregroundColor(fillColor)
+            Text(content.title + "\n" + name)
+                .font(.system(size: 24))
         }
         .foregroundColor(.white)
         .padding()
+        .padding([.top, .bottom])
         .background(
-            RoundedRectangle(cornerRadius: 8)
+            RoundedRectangle(cornerRadius: 16)
                 .fill(Color.deleteActionViewBackground)
         )
         .allowsHitTesting(false)
@@ -47,14 +49,14 @@ struct ConfirmationView1: View {
     private var fillColor:Color {
         switch content.kind {
             case .removed: return .red
-            case .created: return .green
+            case .created: return .vibrantGreen
         }
     }
 }
 
 extension ConfirmationView1 {
     struct Content {
-        let title:LocalizedStringKey
+        let title:String
         let kind:Kind
         
         enum Kind {

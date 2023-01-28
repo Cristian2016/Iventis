@@ -9,6 +9,7 @@ import SwiftUI
 
 public extension Color {
     static let deleteActionViewBackground = Color("deleteActionViewBackground")
+    static let vibrantGreen = Color("vibrantGreen")
 }
 
 public extension String {
