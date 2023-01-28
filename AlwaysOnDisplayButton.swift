@@ -27,7 +27,7 @@ struct AlwaysOnDisplayButton: View {
                     .font(.footnote)
                     .padding([.leading, .trailing])
                     .padding([.top, .bottom], 4)
-                    .background { RoundedRectangle(cornerRadius: 8).fill(.pink) }
+                    .background { RoundedRectangle(cornerRadius: 8).fill(.secondary) }
                 exitAlwaysONDisplay_Symbol
             }
         }
@@ -40,7 +40,7 @@ struct AlwaysOnDisplayButton: View {
                 .foregroundColor(.label)
         }
         .fontWeight(.semibold)
-        .foregroundColor(.pink)
+        .foregroundColor(.secondary)
         .font(.system(size: fontSize))
     }
     
