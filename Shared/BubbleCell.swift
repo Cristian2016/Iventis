@@ -3,7 +3,7 @@
 //  BubblesSwiftUI
 //
 //  Created by Cristian Lapusan on 13.04.2022.
-// https://stackoverflow.com/questions/58284994/swiftui-how-to-handle-both-tap-long-press-of-button
+//1 hide stickyNote when showing calEventCreated confirmation, aesthetic reasons only :)) https://stackoverflow.com/questions/58284994/swiftui-how-to-handle-both-tap-long-press-of-button
 
 import SwiftUI
 import MyPackage
@@ -25,7 +25,7 @@ struct BubbleCell: View {
             }
 //            //subviews
             .overlay { if bubble.hasCalendar && noNote { calendarSymbol }}
-            .overlay { stickyNote }
+            .overlay { if !confirm_CalEventCreated { stickyNote } } //1
             .overlay { if confirm_CalEventCreated { calEventCreatedConfirmation }}
             .overlay { if !isBubbleRunning { hundredthsView }}
         }
@@ -46,7 +46,6 @@ struct BubbleCell: View {
         Push(.topLeft) {
             ConfirmationView1(content: .eventCreated) {}
         }
-        .offset(y: -10)
     }
     
     //Leading Swipe actions
