@@ -16,32 +16,22 @@ struct AlwaysOnDisplayButton: View {
                 }
             }
         label: {
-            Label {
-                //                Text(isDisplayAlwaysON ? "Exit" : "")
-                //                    .font(.system(size:20).weight(.bold))
-            } icon: {
-                if isDisplayAlwaysON {
-                    HStack {
-                        Text("Always-on Display")
-                            .foregroundColor(.white)
-                            .font(.footnote)
-                            .padding([.leading, .trailing])
-                            .background {
-                                RoundedRectangle(cornerRadius: 4).fill(.red)
-                            }
-                        exitAlwaysONDisplay_Symbol
-                    }
+            if isDisplayAlwaysON {
+                HStack {
+                    Text("Always-on Display")
+                        .foregroundColor(.white)
+                        .font(.footnote)
+                        .padding([.leading, .trailing])
+                        .background {
+                            RoundedRectangle(cornerRadius: 4).fill(.red)
+                        }
+                    exitAlwaysONDisplay_Symbol
                 }
-                else { displayONSymbol }
             }
+            else { displayONSymbol }
         }
         .tint(.red)
         .padding([.leading, .trailing], 12)
-//        .background {
-//            if isDisplayAlwaysON {
-//                RoundedRectangle(cornerRadius: 10).stroke(.red, lineWidth: 4)
-//            }
-//        }
         }
     }
     
