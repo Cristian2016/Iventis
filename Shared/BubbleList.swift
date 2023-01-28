@@ -3,9 +3,10 @@
 //  Shared
 //
 //  Created by Cristian Lapusan on 12.04.2022.
-// 1: NavigationLink has a disclosure triangle. DT must be hidden, therefore behind the BubbleCell
-// 2: BubbleCell in detailView must look the same as in BubbleList
-// 3: custom modifier that reads BubbleCell.height and sets bubbleCellHeight. The List in DetailView contains only one BubbleCell and will have its height restricted to bubbleCellHeight
+//1 NavigationLink has a disclosure triangle. DT must be hidden, therefore behind the BubbleCell
+//2 BubbleCell in detailView must look the same as in BubbleList
+//3 custom modifier that reads BubbleCell.height and sets bubbleCellHeight. The List in DetailView contains only one BubbleCell and will have its height restricted to bubbleCellHeight
+//4 ZStack is necessary so that PaletteView.height is all the way to the top of the device. it PaletteView would be inside list, it would be clipped at the top
 
 import SwiftUI
 import CoreData
@@ -21,7 +22,7 @@ struct BubbleList: View {
     
     // MARK: -
     var body: some View {
-        ZStack {
+        ZStack /* 4 */ {
             VStack(spacing: 0) {
                 buttonsBar
                 list
