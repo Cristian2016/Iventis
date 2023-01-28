@@ -23,9 +23,8 @@ struct ConfirmView: View {
     
     var body: some View {
         HStack {
-            Label(name, systemImage: systemImage)
+            Image(systemName: systemImage)
                 .font(appearance.symbolFont)
-                .labelStyle(.iconOnly)
                 .foregroundColor(fillColor)
             Text(content.title + "\n" + name)
                 .font(appearance.contentFont)
@@ -80,6 +79,6 @@ extension ConfirmView {
 
 struct ConfirmationView1_Previews: PreviewProvider {
     static var previews: some View {
-        ConfirmView(content: .eventCreated)
+        ConfirmView(content: .eventRemoved)
     }
 }
