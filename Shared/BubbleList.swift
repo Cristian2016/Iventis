@@ -35,7 +35,7 @@ struct BubbleList: View {
                                     BubbleCell(bubble, metrics)
                                 }
                             }
-                        } header: { headerTitle(for: section.id.description) }
+                        } header: { /* headerTitle(for: section.id.description) */ }
                             .listRowSeparator(.hidden)
                         
                         //bottom overscroll
