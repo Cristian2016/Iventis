@@ -95,7 +95,6 @@
 		1FFC8BAD28142F040059EF2E /* Session Properties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FFC8BA528142F040059EF2E /* Session Properties.swift */; };
 		1FFC8BB628142F040059EF2E /* Pair.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FFC8BA828142F040059EF2E /* Pair.swift */; };
 		1FFC8BB928142F040059EF2E /* Pair Properties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FFC8BA928142F040059EF2E /* Pair Properties.swift */; };
-		1FFC93E328E4245900451FB3 /* CalEventCreatedConfirmationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FFC93E228E4245900451FB3 /* CalEventCreatedConfirmationView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -213,7 +212,6 @@
 		1FFC8BA528142F040059EF2E /* Session Properties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Session Properties.swift"; sourceTree = "<group>"; };
 		1FFC8BA828142F040059EF2E /* Pair.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pair.swift; sourceTree = "<group>"; };
 		1FFC8BA928142F040059EF2E /* Pair Properties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Pair Properties.swift"; sourceTree = "<group>"; };
-		1FFC93E228E4245900451FB3 /* CalEventCreatedConfirmationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalEventCreatedConfirmationView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -303,7 +301,6 @@
 				1F477CA828EAB21900B4F965 /* AddStickyNoteQuickButton.swift */,
 				1FB5D8D528E8276D00DD522A /* StickyNoteListInfoView.swift */,
 				1FB5D8D328E81CD900DD522A /* InfoButton.swift */,
-				1FFC93E228E4245900451FB3 /* CalEventCreatedConfirmationView.swift */,
 				1F680FC42882D97800548F70 /* MoreOptionsInfo.swift */,
 				1F377E1E287EB2F000E43598 /* AlwaysOnDisplaySymbol.swift */,
 				1F684822287DBEBB00D8BF81 /* StartDelaySubview.swift */,
@@ -547,7 +544,6 @@
 				1F4DF99D282B82EF00D54BE8 /* CircleButton.swift in Sources */,
 				1F0373C628DF516F005CE8D3 /* OnLabel.swift in Sources */,
 				1FDB9F13287DA5040028E121 /* SDB Properties.swift in Sources */,
-				1FFC93E328E4245900451FB3 /* CalEventCreatedConfirmationView.swift in Sources */,
 				1F680FC52882D97800548F70 /* MoreOptionsInfo.swift in Sources */,
 				1F82FB982831435A00E7C5AA /* HelpActionButton.swift in Sources */,
 				1F0373BE28DEDB00005CE8D3 /* AlwaysOnDisplayAlertView.swift in Sources */,

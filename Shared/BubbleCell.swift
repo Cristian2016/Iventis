@@ -9,7 +9,6 @@ import SwiftUI
 import MyPackage
 
 struct BubbleCell: View {
-    // MARK: - Dependencies
     let metrics: Metrics
     @StateObject private var bubble:Bubble
     @StateObject private var startDelayBubble:StartDelayBubble
@@ -27,7 +26,7 @@ struct BubbleCell: View {
 //            //subviews
             .overlay { if bubble.hasCalendar && noNote { calendarSymbol }}
             .overlay { stickyNote }
-            .overlay { if confirm_CalEventCreated { CalEventCreatedConfirmationView() }}
+            .overlay { if confirm_CalEventCreated { calEventCreatedConfirmation }}
             .overlay { if !isBubbleRunning { hundredthsView }}
         }
         .listRowSeparator(.hidden)
@@ -43,6 +42,10 @@ struct BubbleCell: View {
     }
     
     // MARK: - Legos
+    private var calEventCreatedConfirmation:some View {
+        ConfirmationView1(content: .eventCreated) {}
+    }
+    
     //Leading Swipe actions
     private var toggleFavoriteButton:some View {
         Button { viewModel.togglePin(bubble) }
@@ -123,6 +126,7 @@ struct BubbleCell: View {
         }
         //font
         .font(.system(size: metrics.timeComponentsFontSize))
+        .fontDesign(.rounded)
         .foregroundColor(.white)
     }
     
@@ -132,7 +136,7 @@ struct BubbleCell: View {
                 .padding()
                 .background(Circle().foregroundColor(.pauseStickerColor))
                 .foregroundColor(.pauseStickerFontColor)
-                .font(.system(size: metrics.hundredthsFontSize, weight: .semibold, design: .default))
+                .font(.system(size: metrics.hundredthsFontSize, weight: .semibold, design: .rounded))
             //animations:scale, offset and opacity
                 .scaleEffect(isSecondsTapped && !isBubbleRunning ? 2 : 1.0)
                 .offset(x: isSecondsTapped && !isBubbleRunning ? -20 : 0,
