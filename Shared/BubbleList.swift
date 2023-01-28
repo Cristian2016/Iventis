@@ -7,6 +7,7 @@
 //2 BubbleCell in detailView must look the same as in BubbleList
 //3 custom modifier that reads BubbleCell.height and sets bubbleCellHeight. The List in DetailView contains only one BubbleCell and will have its height restricted to bubbleCellHeight
 //4 ZStack is necessary so that PaletteView.height is all the way to the top of the device. it PaletteView would be inside list, it would be clipped at the top
+//5 isPinnedSection computed only to find out if there should be a separator line or not
 
 import SwiftUI
 import CoreData
@@ -103,7 +104,7 @@ struct BubbleList: View {
                     let metrics = BubbleCell.Metrics(width: geo.size.width)
                     
                     List (bubbles) { section in
-                        let isPinnedSection = section.id.description == "true"
+                        let isPinnedSection = section.id.description == "true" //5
                         Section {
                             ForEach (section) { bubble in
                                 ZStack { //1
@@ -113,7 +114,7 @@ struct BubbleList: View {
                             }
                         } header: { /* headerTitle(for: section.id.description) */ }
                             .listRowSeparator(.hidden)
-                            .listSectionSeparator(isPinnedSection ? .visible : .hidden, edges: [.bottom])
+                            .listSectionSeparator(isPinnedSection ? .visible : .hidden, edges: [.bottom]) //1
                         //bottom overscroll
                         if !section.id { bottomOverscoll }
                     }
