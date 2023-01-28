@@ -8,7 +8,7 @@
 import SwiftUI
 import MyPackage
 
-struct ConfirmationView1: View {
+struct ConfirmView: View {
     struct Appearance {
         let cornerRadius = CGFloat(16)
         let backgroundColor = Color.deleteActionViewBackground
@@ -19,7 +19,7 @@ struct ConfirmationView1: View {
     
     let appearance = Appearance()
     let content:Content
-    let dismissAction:() -> Void
+    let dismissAction:(() -> Void)? = nil
     
     var body: some View {
         HStack {
@@ -63,7 +63,7 @@ struct ConfirmationView1: View {
     }
 }
 
-extension ConfirmationView1 {
+extension ConfirmView {
     struct Content {
         let title:String
         let kind:Kind
@@ -80,6 +80,6 @@ extension ConfirmationView1 {
 
 struct ConfirmationView1_Previews: PreviewProvider {
     static var previews: some View {
-        ConfirmationView1(content: .eventCreated, dismissAction: {})
+        ConfirmView(content: .eventCreated)
     }
 }
