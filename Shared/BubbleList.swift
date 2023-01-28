@@ -103,6 +103,7 @@ struct BubbleList: View {
                     let metrics = BubbleCell.Metrics(width: geo.size.width)
                     
                     List (bubbles) { section in
+                        let isPinnedSection = section.id.description == "true"
                         Section {
                             ForEach (section) { bubble in
                                 ZStack { //1
@@ -112,7 +113,7 @@ struct BubbleList: View {
                             }
                         } header: { /* headerTitle(for: section.id.description) */ }
                             .listRowSeparator(.hidden)
-                            .listSectionSeparator(.visible, edges: [.bottom])
+                            .listSectionSeparator(isPinnedSection ? .visible : .hidden, edges: [.bottom])
                         //bottom overscroll
                         if !section.id { bottomOverscoll }
                     }
