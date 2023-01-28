@@ -25,7 +25,7 @@ struct BubbleCell: View {
             }
 //            //subviews
             .overlay { if bubble.hasCalendar && noNote { calendarSymbol }}
-            .overlay { if !confirm_CalEventCreated { stickyNote }} //1
+            .overlay { stickyNote } //1
             .overlay { if confirm_CalEventCreated { calEventCreatedConfirmation }}
             .overlay { if !isBubbleRunning { hundredthsView }}
         }
@@ -43,7 +43,7 @@ struct BubbleCell: View {
     
     // MARK: - Legos
     private var calEventCreatedConfirmation:some View {
-        Push(.topLeft) {
+        Push(.leading) {
             ConfirmationView1(content: .eventCreated) {}
         }
     }

@@ -16,7 +16,6 @@ struct ConfirmationView1: View {
         VStack(spacing: 8) {
             Text(content.title)
                 .font(.system(size: 24).weight(.medium))
-//            Divider().frame(width: 80)
             Label(name, systemImage: systemImage)
                 .font(.system(size: 24).weight(.semibold))
                 .labelStyle(.iconOnly)
@@ -26,7 +25,6 @@ struct ConfirmationView1: View {
         .background(
             RoundedRectangle(cornerRadius: 8)
                 .fill(Color.deleteActionViewBackground)
-//                .shadow(radius: 2)
         )
         .allowsHitTesting(false)
     }
