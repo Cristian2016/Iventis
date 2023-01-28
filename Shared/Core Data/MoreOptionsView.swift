@@ -55,11 +55,9 @@ struct MoreOptionsView: View {
             .padding()
             .padding()
             
-            //2 Confirmation Labels
             if viewModel.confirm_ColorChange {
                 ColorConfirmationView(colorName: bubble.color!, color: Color.bubbleColor(forName: bubble.color!))
             }
-            
         }
     }
     
