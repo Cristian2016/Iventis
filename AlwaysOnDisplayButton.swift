@@ -11,12 +11,9 @@ struct AlwaysOnDisplayButton: View {
                 UIApplication.shared.isIdleTimerDisabled.toggle()
                 
                 viewModel.confirm_AlwaysOnDisplay = true
-                delayExecution(.now() + 2) {
-                    viewModel.confirm_AlwaysOnDisplay = false
-                }
+                delayExecution(.now() + 2) { viewModel.confirm_AlwaysOnDisplay = false }
             }
         label: { label }
-        .padding([.leading, .trailing], 12)
         }
     }
     
