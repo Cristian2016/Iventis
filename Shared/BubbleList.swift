@@ -89,7 +89,7 @@ struct BubbleList: View {
     
     // MARK: - Lego
     private var buttonsBar:some View {
-        HStack {
+        HStack (spacing: 20) {
             Spacer()
             AlwaysOnDisplayButton()
             PlusButton()
