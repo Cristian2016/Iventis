@@ -41,16 +41,6 @@ struct SimpleEntry: TimelineEntry {
     let configuration: ConfigurationIntent
 }
 
-struct WidgetsEntryView : View {
-    var entry: Provider.Entry
-
-    var body: some View {
-        VStack {
-            Text(entry.date, style: .time)
-        }
-    }
-}
-
 @main
 struct Widgets: Widget {
     let kind: String = "Widgets"
@@ -61,8 +51,21 @@ struct Widgets: Widget {
         }
         .configurationDisplayName("My Widget")
         .description("This is an example widget.")
+        .supportedFamilies([.accessoryCircular, .accessoryInline, .accessoryRectangular])
     }
 }
+
+struct WidgetsEntryView : View {
+    var entry: Provider.Entry
+
+    var body: some View {
+        ZStack {
+            Circle().fill(.regularMaterial)
+            Text(entry.date, style: .time)
+        }
+    }
+}
+
 
 struct Widgets_Previews: PreviewProvider {
     static var previews: some View {
