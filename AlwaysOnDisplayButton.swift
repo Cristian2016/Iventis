@@ -39,7 +39,7 @@ struct AlwaysOnDisplayButton: View {
     private var exitAlwaysONDisplay_Symbol:some View {
         ZStack {
             Image(systemName: "sun.max.fill")
-                .foregroundColor(.secondary)
+                .foregroundColor(.label)
             Image(systemName: "line.diagonal")
                 .fontWeight(.black)
                 .foregroundColor(.red)
