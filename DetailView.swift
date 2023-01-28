@@ -42,7 +42,6 @@ struct DetailView: View {
             Spacer()
             Spacer() //pushes BubbleCell to the top
         }
-        .ignoresSafeArea()
     }
 }
 
