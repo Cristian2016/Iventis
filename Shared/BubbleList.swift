@@ -22,11 +22,7 @@ struct BubbleList: View {
     // MARK: -
     var body: some View {
         VStack(spacing: 0) {
-                HStack {
-                    Spacer()
-                    AlwaysOnDisplaySymbol()
-                    PlusButton()
-                }
+            buttonsBar
             ZStack {
                 if isListEmpty { EmptyListView() }
                 else {
@@ -129,6 +125,15 @@ struct BubbleList: View {
         NSSortDescriptor(key: "isPinned", ascending: false),
         NSSortDescriptor(key: "rank", ascending: false)
     ]
+    
+    // MARK: - Lego
+    private var buttonsBar:some View {
+        HStack {
+            Spacer()
+            AlwaysOnDisplaySymbol()
+            PlusButton()
+        }
+    }
 }
 
 // MARK: -
