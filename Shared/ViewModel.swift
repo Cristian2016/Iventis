@@ -20,7 +20,7 @@ class ViewModel: ObservableObject {
     
     //Start Delay
     @Published var confirm_DelayRemoved = false
-    @Published var confirm_DelayWasChanged = false
+    @Published var confirm_DelayCreated = false
     
     @Published var confirm_ColorChange = false
     
@@ -442,9 +442,9 @@ class ViewModel: ObservableObject {
         PersistenceController.shared.save()
         
         //user feedback: flash delay was changed
-        confirm_DelayWasChanged = true
+        confirm_DelayCreated = true
         delayExecution(.confirmation) {
-            self.confirm_DelayWasChanged = false
+            self.confirm_DelayCreated = false
             self.theOneAndOnlyEditedSDB = nil //dismiss
         }
     }

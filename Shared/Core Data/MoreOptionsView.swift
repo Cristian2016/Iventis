@@ -58,7 +58,7 @@ struct MoreOptionsView: View {
             if viewModel.confirm_DelayRemoved {//zero delay confirmation
                 ConfirmView(content: .startDelayRemoved) { dismiss() }
             }
-            if viewModel.confirm_DelayWasChanged {
+            if viewModel.confirm_DelayCreated {
                 ConfirmView(content: .startDelayCreated) { dismiss() }
             }
         }
