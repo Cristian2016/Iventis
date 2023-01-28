@@ -29,7 +29,7 @@ struct AlwaysOnDisplayButton: View {
                     .padding([.top, .bottom], 4)
                     .background {
                         RoundedRectangle(cornerRadius: 8)
-                            .fill(Color.label.gradient)
+                            .fill(Color.secondary)
                     }
                 exitAlwaysONDisplay_Symbol
             }
@@ -39,12 +39,12 @@ struct AlwaysOnDisplayButton: View {
     private var exitAlwaysONDisplay_Symbol:some View {
         ZStack {
             Image(systemName: "sun.max.fill")
+                .foregroundColor(.secondary)
             Image(systemName: "line.diagonal")
                 .fontWeight(.black)
                 .foregroundColor(.red)
         }
         .fontWeight(.semibold)
-        .foregroundColor(.label)
         .font(.system(size: fontSize))
     }
     
