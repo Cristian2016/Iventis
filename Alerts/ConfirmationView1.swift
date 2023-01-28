@@ -16,7 +16,6 @@ struct ConfirmationView1: View {
         VStack(spacing: 8) {
             Text(content.title)
                 .font(.system(size: 24).weight(.medium))
-                
             Divider().frame(width: 80)
             Label(name, systemImage: systemImage)
                 .font(.system(size: 24).weight(.semibold))
@@ -39,17 +38,18 @@ struct ConfirmationView1: View {
             case .created: return "checkmark"
         }
     }
-    private var fillColor:Color {
-        switch content.kind {
-            case .removed: return .red
-            case .created: return .green
-        }
-    }
-    
     private var name:String {
         switch content.kind {
             case .removed: return "Removed"
             case .created: return "Created"
+        }
+    }
+    
+    // MARK: - Unused
+    private var fillColor:Color {
+        switch content.kind {
+            case .removed: return .red
+            case .created: return .green
         }
     }
 }
