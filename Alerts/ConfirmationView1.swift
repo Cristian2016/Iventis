@@ -26,6 +26,7 @@ struct ConfirmationView1: View {
                 .fill(fillColor)
                 .shadow(radius: 2)
         )
+        .allowsHitTesting(false)
     }
     
     // MARK: -
