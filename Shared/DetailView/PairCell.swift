@@ -92,7 +92,6 @@ struct PairCell: View {
                         dragAction : { deleteStickyNote() }
                         tapAction : { toggleStickyNoteVisibility() }
                     }
-                    .offset(y: 12)
                 }
             }
         }

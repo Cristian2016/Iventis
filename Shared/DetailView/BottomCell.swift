@@ -27,7 +27,7 @@ struct BottomCell: View {
         List {
             ForEach(pairs) { pair in
                 let pairNumber = pairs.count - pairs.firstIndex(of: pair)!
-                PairCell(pair, pairNumber).frame(height: 80)
+                PairCell(pair, pairNumber).frame(height: 90)
             }
             .listRowSeparator(.hidden)
             
