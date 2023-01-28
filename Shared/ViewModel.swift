@@ -304,7 +304,7 @@ class ViewModel: ObservableObject {
         }
         
         PersistenceController.shared.save()
-    }ok
+    }
     
     func userTogglesDetail(_ rank:Int?) {
         //identify bubble using rank
