@@ -21,57 +21,56 @@ struct BubbleList: View {
     
     // MARK: -
     var body: some View {
-        ZStack {
-            if isListEmpty { EmptyListView() }
-            else {
-                GeometryReader { geo in
-                    let metrics = BubbleCell.Metrics(width: geo.size.width)
-                    
-                    List (bubbles) { section in
-                        Section {
-                            ForEach (section) { bubble in
-                                ZStack { //1
-                                    NavigationLink(value: bubble) { }
-                                    BubbleCell(bubble, metrics)
-                                }
-                            }
-                        } header: { /* headerTitle(for: section.id.description) */ }
-                            .listRowSeparator(.hidden)
-                            .listSectionSeparator(.visible, edges: [.bottom])
-                        //bottom overscroll
-                        if !section.id { bottomOverscoll }
-                    }
+        VStack(spacing: 0) {
+                HStack {
+                    Spacer()
+                    AlwaysOnDisplaySymbol()
+                    PlusButton()
                 }
-                .scrollIndicators(.hidden)
-                .padding(EdgeInsets(top: 0, leading: -10, bottom: 0, trailing: -10))
-                .listStyle(.plain)
-                .navigationDestination(for: Bubble.self) { bubble in
-                    VStack {
-                        GeometryReader { geo in
-                            let metrics = BubbleCell.Metrics(width: geo.size.width)
-                            List { BubbleCell(bubble, metrics).readSize($bubbleCellSize) } //3
+            ZStack {
+                if isListEmpty { EmptyListView() }
+                else {
+                    GeometryReader { geo in
+                        let metrics = BubbleCell.Metrics(width: geo.size.width)
+                        
+                        List (bubbles) { section in
+                            Section {
+                                ForEach (section) { bubble in
+                                    ZStack { //1
+                                        NavigationLink(value: bubble) { }
+                                        BubbleCell(bubble, metrics)
+                                    }
+                                }
+                            } header: { /* headerTitle(for: section.id.description) */ }
+                                .listRowSeparator(.hidden)
+                                .listSectionSeparator(.visible, edges: [.bottom])
+                            //bottom overscroll
+                            if !section.id { bottomOverscoll }
                         }
+                    }
+                    .scrollIndicators(.hidden)
+                    .padding(EdgeInsets(top: 0, leading: -10, bottom: 0, trailing: -10))
+                    .listStyle(.plain)
+                    .navigationDestination(for: Bubble.self) { bubble in
+                        VStack {
+                            GeometryReader { geo in
+                                let metrics = BubbleCell.Metrics(width: geo.size.width)
+                                List { BubbleCell(bubble, metrics).readSize($bubbleCellSize) } //3
+                            }
                             .scrollDisabled(true)
                             .listStyle(.plain)
                             .frame(height: (bubbleCellSize.height) * 1.1)
                             .padding([.leading, .trailing], -10) //2
-                        DetailView(Int(bubble.rank))
+                            DetailView(Int(bubble.rank))
+                        }
+                        .padding([.top], 1)
                     }
-                    .padding([.top], 1)
                 }
+                
+                if !notesShowing { LeftStrip($viewModel.isPaletteShowing, isListEmpty) }
+                
+                PaletteView($viewModel.isPaletteShowing)
             }
-            Push(.topRight) {
-                HStack {
-                    AlwaysOnDisplaySymbol()
-                    PlusButton()
-                }
-                .offset(y:-7)
-            }
-            .padding(EdgeInsets(top: 8, leading: 0, bottom: 0, trailing: 20))
-            
-            if !notesShowing { LeftStrip($viewModel.isPaletteShowing, isListEmpty) }
-            
-            PaletteView($viewModel.isPaletteShowing)
         }
     }
     
