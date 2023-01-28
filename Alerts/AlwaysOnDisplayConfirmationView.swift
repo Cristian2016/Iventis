@@ -10,13 +10,10 @@ import SwiftUI
 struct AlwaysOnDisplayConfirmationView: View {
     @EnvironmentObject var viewModel:ViewModel
     
-    var lowerSymbol:ConfirmationView.LowerSymbol {
-        UIApplication.shared.isIdleTimerDisabled ? .on : .off
-    }
+    var isON:Bool { UIApplication.shared.isIdleTimerDisabled }
     
     var body: some View {
-        ConfirmationView(title: AlertHint.alwaysOnDisplay.title,
-                         lowerSymbol: lowerSymbol) {  /* insert dismiss action here */ }
+        ConfirmView(content: isON ? .alwaysONDisplayON : .alwaysONDisplayOFF)
     }
 }
 
