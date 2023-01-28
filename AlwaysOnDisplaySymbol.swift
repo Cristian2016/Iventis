@@ -17,8 +17,8 @@ struct AlwaysOnDisplaySymbol: View {
             }
         label: {
             Label {
-                Text(isDisplayAlwaysON ? "Exit" : "")
-                    .font(.system(size:20).weight(.bold))
+//                Text(isDisplayAlwaysON ? "Exit" : "")
+//                    .font(.system(size:20).weight(.bold))
             } icon: {
                 if isDisplayAlwaysON { exitAlwaysONDisplay_Symbol }
                 else { displayONSymbol }
@@ -26,25 +26,25 @@ struct AlwaysOnDisplaySymbol: View {
         }
         .tint(.red)
         .padding([.leading, .trailing], 12)
-        .background {
-            if isDisplayAlwaysON {
-                RoundedRectangle(cornerRadius: 10).stroke(.red, lineWidth: 4)
-            }
-        }
+//        .background {
+//            if isDisplayAlwaysON {
+//                RoundedRectangle(cornerRadius: 10).stroke(.red, lineWidth: 4)
+//            }
+//        }
         }
     }
     
     // MARK: -
     private var exitAlwaysONDisplay_Symbol:some View {
         ZStack {
-            Image(systemName: "sun.max")
+            Image(systemName: "sun.max.fill")
             Image(systemName: "line.diagonal")
                 .foregroundColor(.label)
         }
         .fontWeight(.semibold)
         .foregroundColor(.red)
-        .padding([.top, .bottom], 3)
-        .padding([.leading, .trailing], 10)
+//        .padding([.top, .bottom], 3)
+//        .padding([.leading, .trailing], 10)
         .font(.system(size: fontSize))
     }
     
