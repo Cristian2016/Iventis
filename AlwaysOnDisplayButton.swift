@@ -24,11 +24,10 @@ struct AlwaysOnDisplayButton: View {
                     HStack {
                         Text("Always-on Display")
                             .foregroundColor(.white)
-                            .font(.callout)
+                            .font(.footnote)
                             .padding([.leading, .trailing])
                             .background {
-                                RoundedRectangle(cornerRadius: 4)
-                                    .fill(Color.red)
+                                RoundedRectangle(cornerRadius: 4).fill(.red)
                             }
                         exitAlwaysONDisplay_Symbol
                     }
@@ -46,7 +45,7 @@ struct AlwaysOnDisplayButton: View {
         }
     }
     
-    // MARK: -
+    // MARK: - Lego
     private var exitAlwaysONDisplay_Symbol:some View {
         ZStack {
             Image(systemName: "sun.max.fill")
