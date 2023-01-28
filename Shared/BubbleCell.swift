@@ -26,7 +26,7 @@ struct BubbleCell: View {
             }
 //            //subviews
             .overlay { if bubble.hasCalendar && noNote { calendarSymbol }}
-            .overlay { if !confirm_CalEventCreated { stickyNote }}
+            .overlay { stickyNote }
             .overlay { if confirm_CalEventCreated { calEventCreatedConfirmation }} //1
             .overlay { if !isBubbleRunning { hundredthsView }}
         }
