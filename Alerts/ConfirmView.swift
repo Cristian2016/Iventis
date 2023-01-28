@@ -3,7 +3,7 @@
 //  Timers (iOS)
 //
 //  Created by Cristian Lapusan on 26.01.2023.
-//
+//1 does not change! it remains always the same
 
 import SwiftUI
 import MyPackage
@@ -15,9 +15,9 @@ struct ConfirmView: View {
         let symbolFont = Font.system(size: 36).weight(.medium)
         let contentFont = Font.system(size: 24)
         let contentColor = Color.white
-    }
+    } //1
     
-    let appearance = Appearance()
+    let appearance = Appearance() //1
     let content:Content
     var dismissAction:(() -> Void)? = nil
     
