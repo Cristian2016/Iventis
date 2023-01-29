@@ -22,7 +22,7 @@ struct AlwaysOnDisplayButton: View {
     private var label:some View {
         if isDisplayAlwaysON {
             HStack {
-                Text("Always-On Display")
+                Text("Auto-Lock is OFF")
                     .foregroundColor(.secondary)
                     .font(.footnote)
                     .padding([.leading, .trailing])
@@ -41,7 +41,7 @@ struct AlwaysOnDisplayButton: View {
             Image(systemName: "sun.max.fill")
                 .foregroundColor(.label)
             Image(systemName: "line.diagonal")
-                .fontWeight(.black)
+                .fontWeight(.medium)
                 .foregroundColor(.red)
         }
         .fontWeight(.semibold)
