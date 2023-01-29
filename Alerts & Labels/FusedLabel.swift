@@ -12,9 +12,8 @@ struct FusedLabel: View {
     
     var body: some View {
         VStack {
-            let image = Image(systemName: content.symbol!)
             Text(condition ?
-                 LocalizedStringKey("\(content.title) \(image)")
+                 LocalizedStringKey("\(content.title) \(Image(systemName: content.symbol!))")
                  : LocalizedStringKey(content.title)
             )//1
             .foregroundColor(content.isFilled ? .white : content.color)
