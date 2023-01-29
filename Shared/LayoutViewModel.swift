@@ -59,5 +59,9 @@ class LayoutViewModel: ObservableObject {
 struct SizePreferenceKey:PreferenceKey {
     static var defaultValue = CGSize(width: 1, height: 1) //3 ⚠️
     
-    static func reduce(value: inout CGSize, nextValue: () -> CGSize) { value = nextValue() }
+    static func reduce(value: inout CGSize, nextValue: () -> CGSize) {
+        let nextValue = nextValue()
+        value = nextValue
+        print("size is \(nextValue) ")
+    }
 }
