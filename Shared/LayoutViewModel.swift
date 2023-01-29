@@ -4,6 +4,8 @@
 //
 //  Created by Cristian Lapusan on 24.01.2023.
 //1 DeleteActionView uses bubbleCell.frame to position itself. bubbleCell.frame is set using .readFrame modifier
+//2 the size of BubbleCell above the DetailView that is wrapped inside a List. DetailView must be placed right below the List containing the BubbleCell and therefore List must have same height as BubbleCell
+//3 ⚠️ never set size to .zero. it will not work. no fucking idea why!
 
 import SwiftUI
 import MyPackage
@@ -13,6 +15,8 @@ class LayoutViewModel: ObservableObject {
         print(bubbleCellFrame!)
 //        set_deleteActionViewOffset(for: bubbleCellFrame)
     }} //1
+    
+    @Published var bubbleCellSize:CGSize = .zero //2
     
     @Published var deleteActionViewOffset:CGFloat?
     
@@ -50,4 +54,10 @@ class LayoutViewModel: ObservableObject {
     init() { delayExecution(.now() + 0.1) { self.observeOrientationChanges() } }
     
     deinit { NotificationCenter.default.removeObserver(self) }
+}
+
+struct SizePreferenceKey:PreferenceKey {
+    static var defaultValue = CGSize(width: 1, height: 1) //3 ⚠️
+    
+    static func reduce(value: inout CGSize, nextValue: () -> CGSize) { value = nextValue() }
 }
