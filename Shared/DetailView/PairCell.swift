@@ -54,13 +54,13 @@ struct PairCell: View {
     let pairNumber:Int
     
     private let textPadding = EdgeInsets(top: 4, leading: 6, bottom: 4, trailing: 8)
-    let collapsedNoteWidth = CGFloat(50)
+    private let collapsedNoteWidth = CGFloat(50)
     
     // MARK: - Little Things
-    let contentFrameGap = CGFloat(4) //how much gap between content and its enclosing frame
+    private let contentFrameGap = CGFloat(4) //how much gap between content and its enclosing frame
     //these two combined
-    let durationFont = Font.system(size: 22, weight: .medium) //15 59 3
-    let durationComponentsFont = Font.system(size: 22, weight: .medium) //h m s
+    private let durationFont = Font.system(size: 22, weight: .medium) //15 59 3
+    private let durationComponentsFont = Font.system(size: 22, weight: .medium) //h m s
     
     var body: some View {
         if !pair.isFault {
@@ -128,7 +128,7 @@ struct PairCell: View {
     // MARK: -
     //avoid trigger longPress gesture and edge swipe simultaneously
     //the entire gesture area is shifted right by 30 points
-    var gestureArea: some Shape { Rectangle().offset(x: 30) }
+    private var gestureArea: some Shape { Rectangle().offset(x: 30) }
     
     // MARK: - LEGO
     private var pairNumberView: some View {
@@ -218,14 +218,14 @@ struct PairCell: View {
     }
     
     // MARK: - Intents
-    func userWantsNotesList() {
+    private func userWantsNotesList() {
         UserFeedback.singleHaptic(.light)
         viewModel.pairOfNotesList = pair
         PersistenceController.shared.save()
     }
     
     ///show/hide Pair.note
-    func toggleStickyNoteVisibility() {
+    private func toggleStickyNoteVisibility() {
         UserFeedback.singleHaptic(.light)
         pair.isNoteHidden.toggle()
         PersistenceController.shared.save()
