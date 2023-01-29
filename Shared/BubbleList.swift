@@ -10,6 +10,7 @@
 //5 isPinnedSection computed only to find out if there should be a separator line or not
 //6 if Text Size increases to 310%, the stroke is cut off slightly. to prevent that add a bit of padding
 // using strokeBorder is better than stroke! because stroke does not overspill. stroke does overspill slightly
+//7 BubbleCell must know list width in order to compute its spacing which is esential for the look
 
 import SwiftUI
 import CoreData
@@ -104,7 +105,7 @@ struct BubbleList: View {
             if isListEmpty { EmptyListView() }
             else {
                 GeometryReader { geo in
-                    let metrics = BubbleCell.Metrics(width: geo.size.width)
+                    let metrics = BubbleCell.Metrics(geo.size.width) //7
                     
                     List (bubbles) { section in
                         let isPinnedSection = section.id.description == "true" //5
@@ -129,7 +130,7 @@ struct BubbleList: View {
                 .navigationDestination(for: Bubble.self) { bubble in
                     VStack {
                         GeometryReader { geo in
-                            let metrics = BubbleCell.Metrics(width: geo.size.width)
+                            let metrics = BubbleCell.Metrics(geo.size.width)
                             List { BubbleCell(bubble, metrics).readSize($bubbleCellSize) } //3
                         }
                         .scrollDisabled(true)

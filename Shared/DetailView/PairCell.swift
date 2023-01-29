@@ -74,7 +74,7 @@ struct PairCell: View {
                         if pair.pause == nil {
                             HStack {
                                 Spacer()
-                                SmallBubbleView(bubble: pair.session!.bubble!, metrics: BubbleCell.Metrics(width: geo.size.width))
+                                SmallBubbleView(bubble: pair.session!.bubble!, metrics: BubbleCell.Metrics(geo.size.width))
                                 Spacer()
                             }
                         }
