@@ -9,6 +9,7 @@
 //4 ZStack is necessary so that PaletteView.height is all the way to the top of the device. it PaletteView would be inside list, it would be clipped at the top
 //5 isPinnedSection computed only to find out if there should be a separator line or not
 //6 if Text Size increases to 310%, the stroke is cut off slightly. to prevent that add a bit of padding
+// using strokeBorder is better than stroke! because stroke does not overspill. stroke does overspill slightly
 
 import SwiftUI
 import CoreData
