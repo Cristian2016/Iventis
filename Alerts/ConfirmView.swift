@@ -33,8 +33,11 @@ struct ConfirmView: View {
         .padding()
         .padding([.top, .bottom])
         .background(
-            RoundedRectangle(cornerRadius: appearance.cornerRadius)
-                .fill(appearance.backgroundColor)
+            ZStack {
+                RoundedRectangle(cornerRadius: appearance.cornerRadius)
+                    .fill(appearance.backgroundColor)
+                    .shadow(color: .black.opacity(0.3), radius: 2)
+            }
         )
         .allowsHitTesting(false)
     }
