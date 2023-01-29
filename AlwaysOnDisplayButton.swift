@@ -22,15 +22,7 @@ struct AlwaysOnDisplayButton: View {
     private var label:some View {
         if isDisplayAlwaysON {
             HStack {
-                Text("Auto-Lock is OFF")
-                    .foregroundColor(.secondary)
-                    .font(.footnote)
-                    .padding([.leading, .trailing])
-                    .padding([.top, .bottom], 4)
-                    .background {
-                        RoundedRectangle(cornerRadius: 8)
-                            .stroke(Color.secondary, lineWidth: 1)
-                    }
+                FusedLabel(content: .autoLockOff)
                 exitAlwaysONDisplay_Symbol
             }
         }
@@ -41,7 +33,7 @@ struct AlwaysOnDisplayButton: View {
             Image(systemName: "sun.max.fill")
                 .foregroundColor(.label)
             Image(systemName: "line.diagonal")
-                .fontWeight(.medium)
+                .fontWeight(.black)
                 .foregroundColor(.red)
         }
         .fontWeight(.semibold)

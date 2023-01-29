@@ -8,6 +8,7 @@
 //3 custom modifier that reads BubbleCell.height and sets bubbleCellHeight. The List in DetailView contains only one BubbleCell and will have its height restricted to bubbleCellHeight
 //4 ZStack is necessary so that PaletteView.height is all the way to the top of the device. it PaletteView would be inside list, it would be clipped at the top
 //5 isPinnedSection computed only to find out if there should be a separator line or not
+//6 if Text Size increases to 310%, the stroke is cut off slightly. to prevent that add a bit of padding
 
 import SwiftUI
 import CoreData
@@ -95,6 +96,7 @@ struct BubbleList: View {
             AlwaysOnDisplayButton()
             PlusButton()
         }
+        .padding(1) //6
     }
     private var list:some View {
         ZStack {
