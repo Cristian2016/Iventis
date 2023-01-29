@@ -16,14 +16,11 @@ import MyPackage
 @main
 struct TimersApp: App {
     
-    var body: some Scene { WindowGroup {
-        UnitedViewHierarchy()
-    }}
+    var body: some Scene { WindowGroup { UnitedViewHierarchy() }}
     
     init() {
-        delayExecution(.now() + 0.001) {
-            NotificationCenter.default.post(name: .appLaunched, object: nil)
-        }
+        let center = NotificationCenter.default
+        delayExecution(.now() + 0.001) { center.post(name: .appLaunched, object: nil) }
     } //7
 }
 
