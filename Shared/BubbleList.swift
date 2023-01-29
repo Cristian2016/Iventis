@@ -131,13 +131,15 @@ struct BubbleList: View {
                     VStack {
                         GeometryReader { geo in
                             let metrics = BubbleCell.Metrics(geo.size.width)
-                            List { BubbleCell(bubble, metrics).readSize($bubbleCellSize) } //3
+                            List { BubbleCell(bubble, metrics)
+                                .readSize($bubbleCellSize)
+                            } //3
                         }
                         .scrollDisabled(true)
                         .listStyle(.plain)
                         .frame(height: (bubbleCellSize.height) * 1.1)
                         .padding([.leading, .trailing], -10) //2
-                        DetailView(Int(bubble.rank))
+//                        DetailView(Int(bubble.rank))
                     }
                     .padding([.top], 1)
                 }
