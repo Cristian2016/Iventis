@@ -44,7 +44,7 @@ struct UnitedViewHierarchy: View {
         .environment(\.managedObjectContext, viewContext)
         .environmentObject(viewModel) //2
         .environmentObject(layoutViewModel) //2
-//        .onChange(of: scenePhase) { handleScenePhaseChange($0) } //3
+        .onChange(of: scenePhase) { handleScenePhaseChange($0) } //3
     }
     
     // MARK: - Methods
