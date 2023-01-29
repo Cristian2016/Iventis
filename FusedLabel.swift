@@ -3,7 +3,7 @@
 //  Timers (iOS)
 //
 //  Created by Cristian Lapusan on 29.01.2023.
-//
+//1 use LocalizedStringKey instead of String to be able to draw the image within the text
 
 import SwiftUI
 
@@ -12,10 +12,11 @@ struct FusedLabel: View {
     
     var body: some View {
         VStack {
+            let image = Image(systemName: content.symbol!)
             Text(condition ?
-                 LocalizedStringKey("\(content.title) \(Image(systemName: content.symbol!))")
+                 LocalizedStringKey("\(content.title) \(image)")
                  : LocalizedStringKey(content.title)
-            )
+            )//1
             .foregroundColor(content.isFilled ? .white : content.color)
             .padding([.leading, .trailing])
             .padding([.top, .bottom], 4)
