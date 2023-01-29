@@ -11,21 +11,19 @@ struct FusedLabel: View {
     let content:Content
     
     var body: some View {
-        VStack {
-            Text(condition ?
-                 LocalizedStringKey("\(content.title) \(Image(systemName: content.symbol!))")
-                 : LocalizedStringKey(content.title)
-            )//1
-            .foregroundColor(content.isFilled ? .white : content.color)
-            .padding([.leading, .trailing])
-            .padding([.top, .bottom], 4)
-            .font(font)
-            .background {
-                if content.isFilled {
-                    RoundedRectangle(cornerRadius: 8).fill(content.color)
-                } else {
-                    RoundedRectangle(cornerRadius: 8).strokeBorder(content.color)
-                }
+        Text(condition ?
+             LocalizedStringKey("\(content.title) \(Image(systemName: content.symbol!))")
+             : LocalizedStringKey(content.title)
+        )//1
+        .foregroundColor(content.isFilled ? .white : content.color)
+        .padding([.leading, .trailing])
+        .padding([.top, .bottom], 4)
+        .font(font)
+        .background {
+            if content.isFilled {
+                RoundedRectangle(cornerRadius: 8).fill(content.color)
+            } else {
+                RoundedRectangle(cornerRadius: 8).strokeBorder(content.color)
             }
         }
     }
