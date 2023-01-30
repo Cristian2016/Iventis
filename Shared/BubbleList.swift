@@ -113,6 +113,7 @@ struct BubbleList: View {
                                                                                         //bottom overscroll
                         if !section.id { bottomOverscoll }
                     }
+                    .listStyle(.plain)
                     .toolbar(viewModel.isPaletteShowing ? .hidden : .automatic) //8
                     .toolbarBackground(.ultraThinMaterial)
                     .toolbar {
@@ -124,7 +125,6 @@ struct BubbleList: View {
                 }
                 .scrollIndicators(.hidden)
                 .padding(EdgeInsets(top: 0, leading: -14, bottom: 0, trailing: -14))
-                .listStyle(.plain)
                 .navigationDestination(for: Bubble.self) { navigationDestinationView($0) }
             }
             
