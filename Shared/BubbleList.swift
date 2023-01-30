@@ -12,6 +12,7 @@
 // using strokeBorder is better than stroke! because stroke does not overspill. stroke does overspill slightly
 //7 BubbleCell must know list width in order to compute its spacing which is esential for the look
 //8 toolbar hides when PaletteView shows
+//9 BubbleCell must extend horizontally to the edges. -14 points is a good value for smallest phone iPhone SE3
 
 import SwiftUI
 import CoreData
@@ -51,7 +52,7 @@ struct BubbleList: View {
                     .listStyle(.plain)
                     .toolbarBackground(.ultraThinMaterial)
                     .toolbar { ToolbarItemGroup { buttonsBar }}
-                    .padding(.init(top: 0, leading: -14, bottom: 0, trailing: -14))
+                    .padding(.init(top: 0, leading: -14, bottom: 0, trailing: -14)) //9
                     .navigationDestination(for: Bubble.self) { navigationDestinationView($0) }
                 }
             }
