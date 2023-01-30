@@ -63,11 +63,9 @@ struct BubbleList: View {
     
     // MARK: - Lego
     private func navigationDestinationView(_ bubble:Bubble) -> some View {
-        VStack {
-            GeometryReader {
-                let metrics = BubbleCell.Metrics($0.size.width) //10
-                    DetailView(Int(bubble.rank), bubble, metrics)
-            }
+        GeometryReader {
+            let metrics = BubbleCell.Metrics($0.size.width) //10
+            DetailView(Int(bubble.rank), bubble, metrics)
         }
     }
     
