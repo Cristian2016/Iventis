@@ -37,6 +37,7 @@ struct DetailView: View {
                         .background {
                             VStack {
                                 Text("To scroll all the way up..")
+                                    .background { Color("pairCellBackground") }
                                 Color("pairCellBackground")
                             }
                         }
