@@ -37,7 +37,7 @@ struct DetailView: View {
                 if sessions.isEmpty { EmptyHistoryAlertView() }
                 else {
                     TopDetailView(rank).frame(height: topDetailHeight)
-                        .padding([.leading, .trailing], -12) //2
+                        .padding(BubbleCell.padding) //2
                         .listRowSeparator(.hidden)
                     BottomDetailView(rank)
                         .frame(height: 600)
