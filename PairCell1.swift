@@ -16,6 +16,9 @@ struct PairCell1: View {
     let pairNumber:Int
     let duration:Float.TimeComponentsAsStrings?
     
+    private let textPadding = EdgeInsets(top: 4, leading: 6, bottom: 4, trailing: 8)
+    private let collapsedNoteWidth = CGFloat(50)
+    
     var body:some View {
         if !pair.isFault {
             ZStack(alignment: .leading) {
@@ -31,7 +34,11 @@ struct PairCell1: View {
                         .padding([.top, .bottom])
                     }
                     else { durationView } //third line
+                    
+                    Spacer()
                 }
+                
+                Push(.bottomRight) { stickyNote }
             }
             .contentShape(gestureArea) //define gesture area
             .onTapGesture {  /* ⚠️ Idiotic! I need to put this shit here or else I can't scroll */ }
@@ -51,7 +58,76 @@ struct PairCell1: View {
         let durationComponentsFont = Font.system(size: 22, weight: .medium) //h m s
     }
     
+    @State private var noteDeleted:Bool = false
+    @State private var offsetX:CGFloat = 0.0
+    private let offsetDeleteTriggerLimit = CGFloat(180)
+    private var triggerDeleteAction:Bool { abs(offsetX) >= offsetDeleteTriggerLimit }
+    
+    ///without delay the animation does not have time to take place
+    //⚠️ not the best idea though...
+    func deleteStickyNote() { viewModel.deleteStickyNote(for: pair) }
+    
+    var dragToDelete : some Gesture {
+        DragGesture()
+            .onChanged { value in
+                withAnimation {
+                    if !triggerDeleteAction {
+                        offsetX = value.translation.width
+                    } else {
+                        if !noteDeleted {
+                            deleteStickyNote()
+                            noteDeleted = true //block drag gesture.. any other better ideas??
+                            UserFeedback.singleHaptic(.light)
+                        }
+                    }
+                }
+            }
+            .onEnded { value in
+                withAnimation {
+                    if value.translation.width < offsetDeleteTriggerLimit {
+                        offsetX = 0
+                    } else {
+                        deleteStickyNote()
+                        noteDeleted = true
+                        UserFeedback.singleHaptic(.light)
+                    }
+                }
+            }
+    }
+    
     // MARK: - Lego
+    private var stickyNote:some View {
+        Push(.bottomRight) {//PairCell StickyNote
+            StickyNote { stickyNoteContent }
+            dragAction : { deleteStickyNote() }
+            tapAction : { toggleStickyNoteVisibility() }
+        }
+    }
+    private var stickyNoteContent:some View {
+        stickyNoteText
+            .font(.system(size: 26))
+            .padding([.leading, .trailing], 10)
+            .background {
+                RoundedRectangle(cornerRadius: 2)
+                    .fill(Color.background2)
+                    .frame(height: 44)
+                    .standardShadow(false)
+            }
+            .opacity(pair.note_.isEmpty ? 0 : 1)
+    }
+    
+    @ViewBuilder
+    private var stickyNoteText:some View {
+        if pair.isNoteHidden {
+            Text("\(Image(systemName: "text.alignleft"))")
+                .padding(textPadding)
+                .font(.system(size: 20))
+                .frame(width: collapsedNoteWidth)
+        } else {
+            Text(pair.note_.isEmpty ? "Something" : pair.note_)
+        }
+    }
+    
     private var separatorLine:some View {
         Rectangle()
             .fill(Color.label)
