@@ -114,7 +114,7 @@ struct BubbleList: View {
                         if !section.id { bottomOverscoll }
                     }
                     .toolbar(viewModel.isPaletteShowing ? .hidden : .automatic) //8
-                    .toolbarBackground(.systemUltraThinMaterial)
+                    .toolbarBackground(.ultraThinMaterial)
                     .toolbar {
                         ToolbarItemGroup {
                             AutoLockSymbol()
