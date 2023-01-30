@@ -24,9 +24,7 @@ struct BubbleList: View {
     @EnvironmentObject private var viewModel:ViewModel
     @EnvironmentObject private var layoutViewModel:LayoutViewModel
     @SectionedFetchRequest var bubbles:SectionedFetchResults<Bool, Bubble>
-    
-    @State private var bubbleCellSize = CGSize(width: 1, height: 1)
-    
+        
     // MARK: -
     var body: some View {
         ZStack {
@@ -45,8 +43,8 @@ struct BubbleList: View {
                                 }
                             }
                         }
-                            .listRowSeparator(.hidden)
-                            .listSectionSeparator(value ? .visible : .hidden, edges: [.bottom])
+                        .listRowSeparator(.hidden)
+                        .listSectionSeparator(value ? .visible : .hidden, edges: [.bottom])
                         if !section.id { bottomOverscoll }
                     }
                     .scrollIndicators(.hidden)
