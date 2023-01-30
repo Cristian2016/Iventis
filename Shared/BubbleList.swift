@@ -39,11 +39,11 @@ struct BubbleList: View {
                         Section {
                             ForEach (section) { bubble in
                                 ZStack { //1
-                                    NavigationLink(value: bubble) { }
+                                    NavigationLink(value: bubble) { /* leave it empty */ }
                                     BubbleCell(bubble, metrics)
                                 }
                             }
-                        } header: { /* headerTitle(for: section.id.description) */ }
+                        } header: { /* headerTitle */ }
                             .listRowSeparator(.hidden)
                             .listSectionSeparator( isPinnedSection ? .visible : .hidden, edges: [.bottom]) //1
                         if !section.id { bottomOverscoll }
