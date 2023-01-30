@@ -21,7 +21,7 @@ struct PairCell1: View {
             Push(.topRight) { separatorLine.overlay { pairNumberView }}
             
             VStack {
-                
+                Circle()
             }
         }
     }
@@ -37,7 +37,7 @@ struct PairCell1: View {
     private var pairNumberView:some View {
         Text(String(pairNumber))
             .font(.system(size: 20))
-            .offset(x: 6, y: 10)
+            .offset(x: 4, y: 10)
     }
       
     // MARK: -
