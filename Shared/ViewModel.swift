@@ -118,6 +118,7 @@ class ViewModel: ObservableObject {
     }
     
     func delete(_ bubble:Bubble) {
+        if !path.isEmpty { path = [] }
         let viewContext = PersistenceController.shared.viewContext
         viewContext.delete(bubble)
         try? viewContext.save()
