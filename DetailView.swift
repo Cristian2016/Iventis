@@ -31,7 +31,6 @@ struct DetailView: View {
     
     var body: some View {
         ZStack {
-            
             List {
                 BubbleCell(bubble, metrics)
                     .padding([.leading, .trailing], -14) //2
@@ -45,7 +44,7 @@ struct DetailView: View {
                 }
             }
             .listStyle(.plain)
-            .scrollIndicators(.hidden)
+            .scrollIndicators(.visible)
         }
     }
 }
