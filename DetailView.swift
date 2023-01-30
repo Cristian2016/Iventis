@@ -33,7 +33,7 @@ struct DetailView: View {
         ZStack {
             List {
                 BubbleCell(bubble, metrics)
-                    .padding([.leading, .trailing], -12) //2
+                    .padding(BubbleCell.padding) //2
                 if sessions.isEmpty { EmptyHistoryAlertView() }
                 else {
                     TopDetailView(rank).frame(height: topDetailHeight)
