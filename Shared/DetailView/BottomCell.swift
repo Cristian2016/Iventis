@@ -26,18 +26,14 @@ struct BottomCell: View {
     
     var body: some View {
         List {
-            ZStack {
-                Push(.topMiddle) {
-                    SmallAlertHintView(alertContent: AlertHint.scrollToTop)
-                }
-                ForEach(pairs) { pair in
-                    let pairNumber = pairs.count - pairs.firstIndex(of: pair)!
-                    PairCell(pair, pairNumber)
-                }
-                .listRowSeparator(.hidden)
-                Spacer(minLength: 350).listRowSeparator(.hidden)
-                    .listRowSeparator(.hidden)
+            ForEach(pairs) { pair in
+                let pairNumber = pairs.count - pairs.firstIndex(of: pair)!
+                PairCell(pair, pairNumber)
             }
+            .listRowSeparator(.hidden)
+            Spacer(minLength: 350)
+                .listRowSeparator(.hidden)
+                .listRowSeparator(.hidden)
         }
         .listStyle(.plain)
         .scrollIndicators(.hidden)
