@@ -12,7 +12,6 @@ struct SmallAlertHintView: View {
     
     var body: some View {
         ZStack {
-            Color.white.opacity(0.9)
             HStack(spacing: 10) {
                 Image(systemName: alertContent.symbol ?? "")
                     .foregroundColor(.yellow)

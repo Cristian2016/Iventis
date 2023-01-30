@@ -37,9 +37,12 @@ struct BottomCell: View {
         }
         .listStyle(.plain)
         .scrollIndicators(.hidden)
-        .background { Push(.topMiddle) {
-            SmallAlertHintView(alertContent: AlertHint.scrollToTop)
-        }
+        .background {
+            VStack {
+                SmallAlertHintView(alertContent: AlertHint.scrollToTop)
+                    .padding(1)
+                Spacer()
+            }
         }
     }
 }
