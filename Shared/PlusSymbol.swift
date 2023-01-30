@@ -8,10 +8,10 @@
 import SwiftUI
 
 ///tap PlusButton to show Palette [on iPad]
-struct PlusButton: View {
+struct PlusSymbol: View {
     @EnvironmentObject var viewModel:ViewModel
     private func showPalette() { withAnimation { viewModel.isPaletteShowing = true } }
-    let fontSize = CGFloat(30)
+    private let metrics = Metrics()
     
     var body: some View {
         button
@@ -19,14 +19,20 @@ struct PlusButton: View {
     
     private var button: some View {
         Button { showPalette() }
-    label: { Label("", systemImage: "plus") }
-            .font(.system(size: fontSize))
-            .tint(.label)
+    label: { Label("Plus", systemImage: "plus") }
+            .font(metrics.font)
+            .tint(metrics.symbolColor)
+    }
+    
+    struct Metrics {
+        let font = Font.system(.title2)
+        let symbolColor = Color.label
+        let diagonalLineColor = Color.red
     }
 }
 
 struct PlusButton_Previews: PreviewProvider {
     static var previews: some View {
-        PlusButton()
+        PlusSymbol()
     }
 }

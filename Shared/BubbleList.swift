@@ -116,8 +116,8 @@ struct BubbleList: View {
                     .toolbarBackground(.ultraThinMaterial)
                     .toolbar {
                         ToolbarItemGroup {
-                            AlwaysOnDisplayButton()
-                            PlusButton()
+                            AutoLockSymbol()
+                            PlusSymbol()
                         }
                     }
                 }

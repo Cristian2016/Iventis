@@ -1,7 +1,7 @@
 import SwiftUI
 import MyPackage
 
-struct AlwaysOnDisplayButton: View {
+struct AutoLockSymbol: View {
     @EnvironmentObject var viewModel:ViewModel
     let metrics = Metrics()
     
@@ -58,6 +58,6 @@ struct AlwaysOnDisplayButton: View {
 
 struct DisplayAlwaysOnSymbol_Previews: PreviewProvider {
     static var previews: some View {
-        AlwaysOnDisplayButton()
+        AutoLockSymbol()
     }
 }
