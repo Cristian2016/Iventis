@@ -66,17 +66,21 @@ struct BubbleStickyNoteList: View {
         
     // MARK: -
     var body: some View {
-        StickyNoteList(stickyNotes: bubbleSavedNotes.compactMap { $0.note },
-                  textInputLimit: textInputLimit,
-                  initialNote: initialNote,
-                  //actions
-                  dismiss: { dismiss() },
-                  deleteStickyNote: { vm.delete(bubbleSavedNotes[$0!]) },
-                  saveNoteToCoredata: {
-            if !$0.isEmpty { saveNoteToCoreData($0, for: bubble) }
-        },
-                  selectExistingNote: { selectExitingNote($0) }
-        )
+        Push(.topMiddle) {
+            StickyNoteList(
+                stickyNotes: bubbleSavedNotes.compactMap { $0.note },
+                textInputLimit: textInputLimit,
+                initialNote: initialNote,
+                //actions
+                dismiss: { dismiss() },
+                deleteStickyNote: { vm.delete(bubbleSavedNotes[$0!]) },
+                saveNoteToCoredata: {
+                    if !$0.isEmpty { saveNoteToCoreData($0, for: bubble) }
+                },
+                selectExistingNote: { selectExitingNote($0) }
+            )
+        }
+        .ignoresSafeArea()
     }
         
     // MARK: -

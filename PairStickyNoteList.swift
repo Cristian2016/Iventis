@@ -67,6 +67,7 @@ struct PairStickyNoteList: View {
                 }, selectExistingNote: { selectExitingNote($0) }
             )
         }
+        .ignoresSafeArea()
     }
     
     ///when user types in a new note instead of selecting an existing note
