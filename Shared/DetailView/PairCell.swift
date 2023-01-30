@@ -10,7 +10,7 @@ import MyPackage
 
 struct PairCell: View {
     @EnvironmentObject var viewModel:ViewModel
-    @StateObject var pair:Pair
+    @StateObject var pair:Pair //
     
     //sticky note deletion
     @State private var noteDeleted:Bool = false
@@ -82,12 +82,11 @@ struct PairCell: View {
                     }
 //                    .padding(contentFrameGap)
                     //gesture
-//                    .contentShape(gestureArea) //define gesture area
+                    .contentShape(gestureArea) //define gesture area
                     .onTapGesture {  /* ⚠️ Idiotic! I need to put this shit here or else I can't scroll */ }
                     .onLongPressGesture { userWantsNotesList() }
                     
-//                    stickyNote
-                    Rectangle().frame(height: 30)
+                    stickyNote
                 }
             }
         }

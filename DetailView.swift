@@ -32,7 +32,11 @@ struct DetailView: View {
             else {
                 VStack {
                     TopDetailView(rank).frame(height: topDetailHeight)
-                    BottomDetailView(rank).frame(height: 600)
+                    BottomDetailView(rank)
+                        .frame(height: 600)
+                        .background {
+                            Color("pairCellBackground")
+                        }
                 }
             }
         }
