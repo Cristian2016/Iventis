@@ -100,10 +100,10 @@ struct BubbleList: View {
                     List (bubbles) { section in
                         let isPinnedSection = section.id.description == "true" //5
                         Section {
-                            ForEach (section) {
+                            ForEach (section) { bubble in
                                 ZStack { //1
-                                    NavigationLink(value: $0) { }
-                                    BubbleCell($0, metrics)
+                                    NavigationLink(value: bubble) { }
+                                    BubbleCell(bubble, metrics)
                                 }
                             }
                         } header: { /* headerTitle(for: section.id.description) */ }
