@@ -52,7 +52,7 @@ struct BubbleList: View {
                     .listStyle(.plain)
                     .toolbarBackground(.ultraThinMaterial)
                     .toolbar { ToolbarItemGroup { buttonsBar }}
-                    .padding(.init(top: 0, leading: -12, bottom: 0, trailing: -12)) //9
+                    .padding(BubbleCell.padding) //9
                     .navigationDestination(for: Bubble.self) { detailView($0) }
                 }
             }

@@ -10,6 +10,9 @@ import SwiftUI
 import MyPackage
 
 struct BubbleCell: View {
+    ///padding with respect to the list edges so that it comes closer to the edges of the screen
+    static let padding = EdgeInsets(top: 0, leading: -12, bottom: 0, trailing: -12)
+    
     let metrics: Metrics
     @StateObject private var bubble:Bubble
     @StateObject private var startDelayBubble:StartDelayBubble
