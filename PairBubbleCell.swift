@@ -114,10 +114,8 @@ struct PairBubbleCell: View {
                     .overlay { Text(bubble.smallBubbleView_Components.sec) }
             }
         }
-        .font(
-            .system(size: metrics.timeComponentsFontSize)
-            .weight(.medium)
-        )
+        .font(.system(size: metrics.timeComponentsFontSize))
+        .fontDesign(.rounded)
         .foregroundColor(.black)
     }
     

@@ -295,7 +295,6 @@ extension BubbleCell {
         static var width:CGFloat = 0
         
         init(_ width:CGFloat) {
-            print(#function)
             self.spacing = width * -0.18
             self.timeComponentsFontSize = width * CGFloat(0.16)
             self.hundredthsFontSize = width * CGFloat(0.06)

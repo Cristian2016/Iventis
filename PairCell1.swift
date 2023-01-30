@@ -115,10 +115,6 @@ struct PairCell1: View {
                 }
             }
         }
-        .background {
-            RoundedRectangle(cornerRadius: 0)
-                .fill(Color("durationBackground"))
-        }
     }
       
     // MARK: -
