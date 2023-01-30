@@ -41,6 +41,7 @@ struct DetailView: View {
                         .listRowSeparator(.hidden)
                     BottomDetailView(rank)
                         .frame(height: 600)
+                        .listRowSeparator(.hidden)
                 }
             }
             .listStyle(.plain)
