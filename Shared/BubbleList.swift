@@ -113,6 +113,7 @@ struct BubbleList: View {
                                                                                         //bottom overscroll
                         if !section.id { bottomOverscoll }
                     }
+                    .scrollIndicators(.hidden)
                     .listStyle(.plain)
                     .toolbar(viewModel.isPaletteShowing ? .hidden : .automatic) //8
                     .toolbarBackground(.ultraThinMaterial)
@@ -122,10 +123,9 @@ struct BubbleList: View {
                             PlusSymbol()
                         }
                     }
+                    .padding(EdgeInsets(top: 0, leading: -14, bottom: 0, trailing: -14))
+                    .navigationDestination(for: Bubble.self) { navigationDestinationView($0) }
                 }
-                .scrollIndicators(.hidden)
-                .padding(EdgeInsets(top: 0, leading: -14, bottom: 0, trailing: -14))
-                .navigationDestination(for: Bubble.self) { navigationDestinationView($0) }
             }
             
             if !notesShowing { LeftStrip($viewModel.isPaletteShowing, isListEmpty) }
