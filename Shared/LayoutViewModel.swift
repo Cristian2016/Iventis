@@ -16,7 +16,7 @@ class LayoutViewModel: ObservableObject {
 //        set_deleteActionViewOffset(for: bubbleCellFrame)
     }} //1
     
-    @Published var bubbleCellSize:CGSize = .zero //2
+   var bubbleCellSize:CGSize = .zero //2
     
     @Published var deleteActionViewOffset:CGFloat?
     
