@@ -14,7 +14,7 @@ struct AlertHint {
     //Hints
     static let colorChange = AlertHintContent(symbol: "info.circle.fill", titleSymbol: "paintbrush.fill", title: "Change Color", content: "Change the color of a bubble")
     
-    static let scrollToTop = AlertHintContent(symbol: "info.circle.fill", title: "Scroll To Top?", content: "Scroll along screen edgem")
+    static let scrollToTop = AlertHintContent(symbol: "info.circle.fill", title: "Scroll To Top?", content: "Scroll along screen edge")
 }
 
 struct AlertHintView: View {
