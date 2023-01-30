@@ -22,7 +22,12 @@ struct PairCell: View {
     var body:some View {
         if !pair.isFault {
             ZStack(alignment: .leading) {
-                Push(.topRight) { separatorLine.overlay { pairNumberView }}
+                Push(.topRight) {
+                    VStack(alignment: .trailing, spacing: 0) {
+                        separatorLine
+                        pairNumberView
+                    }
+                }.padding([.trailing], -16)
                 
                 VStack (alignment: .leading, spacing: 4) {
                     pairStartView  //first line
@@ -132,13 +137,10 @@ struct PairCell: View {
         Rectangle()
             .fill(Color.label)
             .frame(width: 30, height: 2)
-            .offset(x: 20, y: -4)
     }
     
     private var pairNumberView:some View {
-        Text(String(pairNumber))
-            .font(.system(size: 20))
-            .offset(x: 20, y: 10)
+        Text(String(pairNumber)).font(.system(size: 20))
     }
     
     //start time and date
