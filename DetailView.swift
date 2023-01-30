@@ -33,15 +33,8 @@ struct DetailView: View {
                 VStack {
                     TopDetailView(rank).frame(height: topDetailHeight)
                     BottomDetailView(rank)
+                        .padding(8)
                         .frame(height: 600)
-                        .background {
-                            VStack {
-                                Text("Scroll to Bubble")
-                                    .font(.system(size: 20))
-                                Text("Scroll all the way up by using the device edge")
-                                Spacer()
-                            }
-                        }
                 }
             }
         }
