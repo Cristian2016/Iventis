@@ -26,8 +26,12 @@ struct ConfirmView: View {
             Image(systemName: systemImage)
                 .font(metrics.symbolFont)
                 .foregroundColor(fillColor)
-            Text(content.title + "\n" + name)
-                .font(metrics.contentFont)
+            VStack(alignment: .leading) {
+                Text(content.title)
+                    .font(metrics.contentFont)
+                Text(name)
+                    .font(metrics.contentFont.weight(.medium))
+            }
         }
         .foregroundColor(metrics.contentColor)
         .padding()
