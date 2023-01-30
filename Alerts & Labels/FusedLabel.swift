@@ -52,7 +52,7 @@ struct FusedLabel: View {
             case large
         }
         
-        static let autoLockOff = Content(title: "Auto-Lock is OFF", color: .label)
+        static let autoLockOff = Content(title: "Auto-Lock is OFF")
     }
 }
 
