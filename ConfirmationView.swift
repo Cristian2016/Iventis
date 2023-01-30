@@ -85,6 +85,6 @@ struct ConfirmationView: View {
 struct ConfirmationView_Previews: PreviewProvider {
     static var previews: some View {
         ConfirmationView(extraText: "80s",
-            titleSymbol: AlertHint.alwaysOnDisplay.titleSymbol,
-                         title: AlertHint.alwaysOnDisplay.title, lowerSymbol: .done) { }
+            titleSymbol: AlertHint.deviceAutoLock.titleSymbol,
+                         title: AlertHint.deviceAutoLock.title, lowerSymbol: .done) { }
     }}

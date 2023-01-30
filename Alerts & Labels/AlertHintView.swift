@@ -8,7 +8,7 @@ struct AlertHintContent {
 }
 
 struct AlertHint {
-    static let alwaysOnDisplay = AlertHintContent(symbol: "exclamationmark.triangle.fill", titleSymbol: "sun.max", title: "Always-On\nDisplay", content: "This option prevents display from sleeping. It may drain battery faster. Turn it off again if no longer needed")
+    static let deviceAutoLock = AlertHintContent(symbol: "exclamationmark.triangle.fill", titleSymbol: "sun.max", title: "Always-On\nDisplay", content: "This option prevents the display from sleeping. Battery may drain faster")
     static let calendarOn = AlertHintContent(title: "Calendar")
     
     //Hints
@@ -44,13 +44,12 @@ struct AlertHintView: View {
                 .tint(.red)
                 .padding()
             }
-            .padding()
             .background(
                 RoundedRectangle(cornerRadius: 20)
                     .fill(Color.background2)
                     .standardShadow()
             )
-            .padding()
+            .frame(maxWidth: 320)
         }
         .onTapGesture { dismissAction() }
     }
@@ -58,6 +57,6 @@ struct AlertHintView: View {
 
 struct AlertView_Previews: PreviewProvider {
     static var previews: some View {
-        AlertHintView(alertContent: AlertHint.colorChange, dismissAction: {}, buttonAction: {})
+        AlertHintView(alertContent: AlertHint.deviceAutoLock, dismissAction: {}, buttonAction: {})
     }
 }

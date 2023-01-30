@@ -13,7 +13,7 @@ struct AlwaysOnDisplayAlertView: View {
     
     var body: some View {
         if showAlwaysOnDisplayAlert {
-            AlertHintView(alertContent: AlertHint.alwaysOnDisplay) {
+            AlertHintView(alertContent: AlertHint.deviceAutoLock) {
                 viewModel.showAlert_AlwaysOnDisplay = false
             } buttonAction: { showAlwaysOnDisplayAlert = false }
         }
