@@ -11,6 +11,7 @@
 //6 if Text Size increases to 310%, the stroke is cut off slightly. to prevent that add a bit of padding
 // using strokeBorder is better than stroke! because stroke does not overspill. stroke does overspill slightly
 //7 BubbleCell must know list width in order to compute its spacing which is esential for the look
+//8 toolbar hides when PaletteView shows
 
 import SwiftUI
 import CoreData
@@ -112,7 +113,7 @@ struct BubbleList: View {
                                                                                         //bottom overscroll
                         if !section.id { bottomOverscoll }
                     }
-                    .toolbar(viewModel.isPaletteShowing ? .hidden : .automatic)
+                    .toolbar(viewModel.isPaletteShowing ? .hidden : .automatic) //8
                     .toolbarBackground(.ultraThinMaterial)
                     .toolbar {
                         ToolbarItemGroup {
