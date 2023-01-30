@@ -23,7 +23,7 @@ struct FusedLabel: View {
             if content.isFilled {
                 RoundedRectangle(cornerRadius: 8).fill(content.color)
             } else {
-                RoundedRectangle(cornerRadius: 8).strokeBorder(content.color)
+                RoundedRectangle(cornerRadius: 8).stroke(content.color)
             }
         }
     }
