@@ -18,23 +18,21 @@ struct PairCell1: View {
     
     var body:some View {
         if !pair.isFault {
-                ZStack(alignment: .leading) {
-                    Push(.topRight) { separatorLine.overlay { pairNumberView }}
-                    
-                    VStack (alignment: .leading) {
-                        pairStartView  //first line
-                        pairPauseView //second line
-                        if pair.pause == nil {
-                            HStack {
-                                Spacer()
-                                SmallBubbleView(bubble: pair.session!.bubble!, metrics: BubbleCell.Metrics(150))
-                                Spacer()
-                            }
+            ZStack(alignment: .leading) {
+                Push(.topRight) { separatorLine.overlay { pairNumberView }}
+                
+                VStack (alignment: .leading) {
+                    pairStartView  //first line
+                    pairPauseView //second line
+                    if pair.pause == nil {
+                        Push(.middle) {
+                            PairBubbleCell(bubble: pair.session!.bubble!, metrics: BubbleCell.Metrics(BubbleCell.Metrics.width))
                         }
-                        else { durationView } //third line
                     }
+                    else { durationView } //third line
                 }
             }
+        }
     }
     
     // MARK: - Little Things

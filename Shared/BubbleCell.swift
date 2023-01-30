@@ -292,11 +292,14 @@ extension BubbleCell {
     
     ///circle diameter, font size, spacing and so on
     struct Metrics {
+        static var width:CGFloat = 0
+        
         init(_ width:CGFloat) {
             print(#function)
             self.spacing = width * -0.18
             self.timeComponentsFontSize = width * CGFloat(0.16)
             self.hundredthsFontSize = width * CGFloat(0.06)
+            Metrics.width = width
         }
         
         let spacing:CGFloat
