@@ -11,14 +11,10 @@ struct iPhoneViewHierarchy: View {
     @EnvironmentObject private var viewModel:ViewModel
     var body: some View {
         ZStack {
-            
-            NavigationStack(path: $viewModel.path) {
-                ViewHierarchy()
-            }
+            NavigationStack(path: $viewModel.path) { ViewHierarchy() }
             PaletteView($viewModel.isPaletteShowing)
         }
         .tint(.label)
-       
     }
 }
 

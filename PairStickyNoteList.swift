@@ -52,18 +52,21 @@ struct PairStickyNoteList: View {
             .onEnded { _ in deleteTextInput() }
     }
     
-    // MARK: -
+    // MARK: -ok
     var body: some View {
-        StickyNoteList(stickyNotes: pairSavedNotes.compactMap { $0.note },
-                  textInputLimit: textInputLimit,
-                  initialNote: initialNote,
-                  //actions
-                  dismiss: { dismiss() },
-                  deleteStickyNote: { vm.delete(pairSavedNotes[$0!]) },
-                  saveNoteToCoredata: {
-            if !$0.isEmpty {  saveNoteToCoreData($0, for: pair) }
-        }, selectExistingNote: { selectExitingNote($0) }
-        )
+        Push(.topMiddle) {
+            StickyNoteList(
+                stickyNotes: pairSavedNotes.compactMap { $0.note },
+                textInputLimit: textInputLimit,
+                initialNote: initialNote,
+                //actions
+                dismiss: { dismiss() },
+                deleteStickyNote: { vm.delete(pairSavedNotes[$0!]) },
+                saveNoteToCoredata: {
+                    if !$0.isEmpty {  saveNoteToCoreData($0, for: pair) }
+                }, selectExistingNote: { selectExitingNote($0) }
+            )
+        }
     }
     
     ///when user types in a new note instead of selecting an existing note
