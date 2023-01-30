@@ -13,19 +13,15 @@ struct PairBubbleCell: View {
     enum Appearance { //4 cases
         case bigBlackBackground //default
         case bigWhiteBackground
-        case medium
-        case small
     }
     
     ///user taps and cycles through various looks
     var appearance: Appearance {
         get {
-            switch skinTapsCount%3 {
+            switch skinTapsCount%2 {
                 case 0: return .bigBlackBackground
                 case 1: return .bigWhiteBackground
-                case 2: return .medium
-                case 3: return .small
-                default: return .small
+                default: return .bigBlackBackground
             }
         }
         
@@ -33,8 +29,6 @@ struct PairBubbleCell: View {
             switch newValue {
                 case .bigBlackBackground : skinTapsCount = 0
                 case .bigWhiteBackground : skinTapsCount = 1
-                case .medium : skinTapsCount = 2
-                case .small : skinTapsCount = 3
             }
         }
     }
@@ -101,8 +95,8 @@ struct PairBubbleCell: View {
             }
         }
         .font(
-            .system(size: isZoomed ? metrics.timeComponentsFontSize : 42)
-            .weight(isZoomed ? .regular : .medium)
+            .system(size: metrics.timeComponentsFontSize)
+            .weight(.medium)
         )
         .foregroundColor(.black)
     }
@@ -118,7 +112,6 @@ struct PairBubbleCell: View {
             background
             timeComponents
         }
-        .frame(height: isZoomed ? 140 : 110)
         .foregroundColor(Color("smallBubbleCircleColor"))
         .onTapGesture { withAnimation {
             isZoomed.toggle()

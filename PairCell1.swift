@@ -28,6 +28,7 @@ struct PairCell1: View {
                         Push(.middle) {
                             PairBubbleCell(bubble: pair.session!.bubble!, metrics: BubbleCell.Metrics(BubbleCell.Metrics.width))
                         }
+                        .padding([.top, .bottom])
                     }
                     else { durationView } //third line
                 }
