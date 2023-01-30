@@ -92,7 +92,7 @@ extension ConfirmView {
     }
 }
 
-struct ConfirmationView1_Previews: PreviewProvider {ok
+struct ConfirmationView1_Previews: PreviewProvider {
     static var previews: some View {
         ConfirmView(content: .alwaysONDisplayON)
     }
