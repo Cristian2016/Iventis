@@ -10,7 +10,7 @@
 import SwiftUI
 import MyPackage
 
-struct PairCell1: View {
+struct PairCell: View {
     @EnvironmentObject var viewModel:ViewModel
     @StateObject var pair:Pair //1
     let pairNumber:Int

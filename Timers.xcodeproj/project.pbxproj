@@ -26,7 +26,7 @@
 		1F477CA928EAB21900B4F965 /* AddStickyNoteQuickButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F477CA828EAB21900B4F965 /* AddStickyNoteQuickButton.swift */; };
 		1F48F55A286AE5B30071386A /* EmptyNote_InfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F48F559286AE5B30071386A /* EmptyNote_InfoView.swift */; };
 		1F4DF99D282B82EF00D54BE8 /* CircleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4DF99C282B82EF00D54BE8 /* CircleButton.swift */; };
-		1F520C6D2987DFBC00B25029 /* PairCell1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F520C6C2987DFBC00B25029 /* PairCell1.swift */; };
+		1F520C6D2987DFBC00B25029 /* PairCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F520C6C2987DFBC00B25029 /* PairCell.swift */; };
 		1F542F92286D757000403F13 /* StickyNoteList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F542F91286D757000403F13 /* StickyNoteList.swift */; };
 		1F5987A2286B5DFC00CDB54C /* PairSavedNote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F59879E286B5DFC00CDB54C /* PairSavedNote.swift */; };
 		1F5987A5286B5F8900CDB54C /* PairSavedNote Properties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5987A4286B5F8900CDB54C /* PairSavedNote Properties.swift */; };
@@ -42,7 +42,6 @@
 		1F61BE052822BAAA00B773F9 /* DeleteActionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F61BE042822BAAA00B773F9 /* DeleteActionView.swift */; };
 		1F62194028293B5100C9B175 /* PairBubbleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F62193F28293B5100C9B175 /* PairBubbleCell.swift */; };
 		1F641FFE281FF70100413E31 /* BottomDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F641FFD281FF70100413E31 /* BottomDetailView.swift */; };
-		1F6420062820186D00413E31 /* PairCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F6420052820186D00413E31 /* PairCell.swift */; };
 		1F64200A2820204400413E31 /* BottomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F6420092820204400413E31 /* BottomCell.swift */; };
 		1F680FC52882D97800548F70 /* MoreOptionsInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F680FC42882D97800548F70 /* MoreOptionsInfo.swift */; };
 		1F684823287DBEBB00D8BF81 /* StartDelaySubview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F684822287DBEBB00D8BF81 /* StartDelaySubview.swift */; };
@@ -145,7 +144,7 @@
 		1F477CA828EAB21900B4F965 /* AddStickyNoteQuickButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddStickyNoteQuickButton.swift; sourceTree = "<group>"; };
 		1F48F559286AE5B30071386A /* EmptyNote_InfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyNote_InfoView.swift; sourceTree = "<group>"; };
 		1F4DF99C282B82EF00D54BE8 /* CircleButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleButton.swift; sourceTree = "<group>"; };
-		1F520C6C2987DFBC00B25029 /* PairCell1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PairCell1.swift; sourceTree = "<group>"; };
+		1F520C6C2987DFBC00B25029 /* PairCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PairCell.swift; sourceTree = "<group>"; };
 		1F542F91286D757000403F13 /* StickyNoteList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StickyNoteList.swift; sourceTree = "<group>"; };
 		1F59879E286B5DFC00CDB54C /* PairSavedNote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PairSavedNote.swift; sourceTree = SOURCE_ROOT; };
 		1F5987A4286B5F8900CDB54C /* PairSavedNote Properties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PairSavedNote Properties.swift"; sourceTree = "<group>"; };
@@ -165,7 +164,6 @@
 		1F61BE042822BAAA00B773F9 /* DeleteActionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteActionView.swift; sourceTree = "<group>"; };
 		1F62193F28293B5100C9B175 /* PairBubbleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PairBubbleCell.swift; sourceTree = "<group>"; };
 		1F641FFD281FF70100413E31 /* BottomDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomDetailView.swift; sourceTree = "<group>"; };
-		1F6420052820186D00413E31 /* PairCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PairCell.swift; sourceTree = "<group>"; };
 		1F6420092820204400413E31 /* BottomCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomCell.swift; sourceTree = "<group>"; };
 		1F680FC42882D97800548F70 /* MoreOptionsInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MoreOptionsInfo.swift; path = ../../Documents/MoreOptionsInfo.swift; sourceTree = "<group>"; };
 		1F684822287DBEBB00D8BF81 /* StartDelaySubview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartDelaySubview.swift; sourceTree = "<group>"; };
@@ -300,7 +298,7 @@
 		1F5F4A4228093FAC00AF3442 = {
 			isa = PBXGroup;
 			children = (
-				1F520C6C2987DFBC00B25029 /* PairCell1.swift */,
+				1F520C6C2987DFBC00B25029 /* PairCell.swift */,
 				1FA1B449298321D20063B081 /* iPhoneViewHierarchy.swift */,
 				1FA377E72972FE75005ACD41 /* Library.swift */,
 				1F42B99C2973E34E0024DB5F /* Code Snippets.rtf */,
@@ -410,7 +408,6 @@
 				1F18B45F281FAABF0080ADA6 /* TopCell.swift */,
 				1F641FFD281FF70100413E31 /* BottomDetailView.swift */,
 				1F6420092820204400413E31 /* BottomCell.swift */,
-				1F6420052820186D00413E31 /* PairCell.swift */,
 			);
 			path = DetailView;
 			sourceTree = "<group>";
@@ -593,7 +590,7 @@
 				1F1CF2F3286B5BD8007102F2 /* PairStickyNoteList.swift in Sources */,
 				1F5F4A6F28093FF800AF3442 /* Model.xcdatamodeld in Sources */,
 				1F9BE0AD280C6AB000F87EFA /* TapHold.swift in Sources */,
-				1F520C6D2987DFBC00B25029 /* PairCell1.swift in Sources */,
+				1F520C6D2987DFBC00B25029 /* PairCell.swift in Sources */,
 				1FA377E82972FE75005ACD41 /* Library.swift in Sources */,
 				1FA355CB2832186100F73111 /* CalendarManager.swift in Sources */,
 				1FB5D8D828E96CBD00DD522A /* StartDelayInfoView.swift in Sources */,
@@ -618,7 +615,6 @@
 				1FA1F39E2981CFE6000A50F5 /* Persistence.swift in Sources */,
 				1FB5D8D628E8276D00DD522A /* StickyNoteListInfoView.swift in Sources */,
 				1FC70BB129807BAB007CD1E6 /* LayoutViewModel.swift in Sources */,
-				1F6420062820186D00413E31 /* PairCell.swift in Sources */,
 				1F387CEB2830082000F6B81D /* UpDownArrowsButton.swift in Sources */,
 				1FB3178F286ACB48006BBE82 /* Note_InfoView.swift in Sources */,
 				1F99AB5F286CA40D00977C9A /* StickyNote.swift in Sources */,
