@@ -41,6 +41,8 @@ struct DetailView: View {
                     BottomDetailView(rank)
                         .frame(height: 600)
                 }
+                .listStyle(.plain)
+                .scrollIndicators(.hidden)
             }
         }
     }

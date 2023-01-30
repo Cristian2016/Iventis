@@ -68,8 +68,6 @@ struct BubbleList: View {
                 let metrics = BubbleCell.Metrics($0.size.width) //10
                     DetailView(Int(bubble.rank), bubble, metrics)
             }
-            .listStyle(.plain)
-            .scrollIndicators(.hidden)
         }
     }
     
