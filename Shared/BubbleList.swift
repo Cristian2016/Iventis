@@ -125,25 +125,28 @@ struct BubbleList: View {
                 .scrollIndicators(.hidden)
                 .padding(EdgeInsets(top: 0, leading: -14, bottom: 0, trailing: -14))
                 .listStyle(.plain)
-                .navigationDestination(for: Bubble.self) { bubble in
-                    VStack {
-                        GeometryReader { geo in
-                            let metrics = BubbleCell.Metrics(geo.size.width)
-                            List { BubbleCell(bubble, metrics).readSize($bubbleCellSize)
-                            } //3
-                        }
-                        .scrollDisabled(true)
-                        .listStyle(.plain)
-                        .frame(height: (bubbleCellSize.height) * 1.1)
-                        .padding([.leading, .trailing], -10) //2
-                        DetailView(Int(bubble.rank))
-                    }
-                    .padding([.top], 1)
-                }
+                .navigationDestination(for: Bubble.self) { navigationDestinationView($0) }
             }
             
             if !notesShowing { LeftStrip($viewModel.isPaletteShowing, isListEmpty) }
         }
+    }
+    
+    // MARK: - Lego
+    private func navigationDestinationView(_ bubble:Bubble) -> some View {
+        VStack {
+            GeometryReader {
+                let metrics = BubbleCell.Metrics($0.size.width)
+                List { BubbleCell(bubble, metrics).readSize($bubbleCellSize)
+                } //3
+            }
+            .scrollDisabled(true)
+            .listStyle(.plain)
+            .frame(height: (bubbleCellSize.height) * 1.1)
+            .padding([.leading, .trailing], -10) //2
+            DetailView(Int(bubble.rank))
+        }
+        .padding([.top], 1)
     }
 }
 
