@@ -25,7 +25,7 @@ struct SmallAlertHintView: View {
                     Text(alertContent.content ?? "")
                         .foregroundColor(.secondary)
                         .fontDesign(.monospaced)
-                        .font(.caption)
+                        .font(.caption) 
                 }
             }
             .padding(6)
