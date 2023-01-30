@@ -35,7 +35,7 @@ struct BubbleList: View {
                     let metrics = BubbleCell.Metrics(geo.size.width) //7
                     
                     List (bubbles) { section in
-                        let isPinnedSection = section.id.description == "true" //5
+                        let value = section.id.description == "true" //5
                         Section {
                             ForEach (section) { bubble in
                                 ZStack { //1
@@ -45,8 +45,7 @@ struct BubbleList: View {
                             }
                         } header: { /* headerTitle */ }
                             .listRowSeparator(.hidden)
-                            .listSectionSeparator(
-                                isPinnedSection ? .visible : .hidden, edges: [.bottom]) //1
+                            .listSectionSeparator(value ? .visible : .hidden, edges: [.bottom])
                         if !section.id { bottomOverscoll }
                     }
                     .scrollIndicators(.hidden)
