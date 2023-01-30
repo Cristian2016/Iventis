@@ -132,13 +132,13 @@ struct PairCell: View {
         Rectangle()
             .fill(Color.label)
             .frame(width: 30, height: 2)
-            .offset(x: 10, y: -4)
+            .offset(x: 20, y: -4)
     }
     
     private var pairNumberView:some View {
         Text(String(pairNumber))
             .font(.system(size: 20))
-            .offset(x: 4, y: 10)
+            .offset(x: 20, y: 10)
     }
     
     //start time and date
