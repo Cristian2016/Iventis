@@ -53,7 +53,7 @@ struct BubbleList: View {
                     .toolbarBackground(.ultraThinMaterial)
                     .toolbar { ToolbarItemGroup { buttonsBar }}
                     .padding(.init(top: 0, leading: -12, bottom: 0, trailing: -12)) //9
-                    .navigationDestination(for: Bubble.self) { navigationDestinationView($0) }
+                    .navigationDestination(for: Bubble.self) { detailView($0) }
                 }
             }
             
@@ -62,7 +62,7 @@ struct BubbleList: View {
     }
     
     // MARK: - Lego
-    private func navigationDestinationView(_ bubble:Bubble) -> some View {
+    private func detailView(_ bubble:Bubble) -> some View {
         GeometryReader {
             let metrics = BubbleCell.Metrics($0.size.width) //10
             DetailView(Int(bubble.rank), bubble, metrics)
