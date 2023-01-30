@@ -33,7 +33,6 @@ struct DetailView: View {
                 VStack {
                     TopDetailView(rank).frame(height: topDetailHeight)
                     BottomDetailView(rank)
-                        .padding(8)
                         .frame(height: 600)
                 }
             }

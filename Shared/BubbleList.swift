@@ -68,13 +68,13 @@ struct BubbleList: View {
                 let metrics = BubbleCell.Metrics($0.size.width) //10
                 List {
                     BubbleCell(bubble, metrics)
+                        .padding([.leading, .trailing], -14) //2
                     DetailView(Int(bubble.rank))
                 } //3
             }
             .listStyle(.plain)
             .scrollIndicators(.hidden)
         }
-        .padding([.leading, .trailing], -14) //2
     }
     
     private var buttonsBar:some View {
