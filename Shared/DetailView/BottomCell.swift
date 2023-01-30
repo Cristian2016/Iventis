@@ -40,7 +40,7 @@ struct BottomCell: View {
         .background {
             VStack {
                 SmallAlertHintView(alertContent: AlertHint.scrollToTop)
-                    .padding(1)
+                    .padding(2)
                 Spacer()
             }
         }

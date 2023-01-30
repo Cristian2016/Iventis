@@ -19,21 +19,21 @@ struct SmallAlertHintView: View {
                 VStack(alignment: .leading) {
                     HStack {
                         Text(alertContent.title)
-                            .font(.title3)
+                            .font(.callout)
                             .fontWeight(.medium)
                     }
                     Text(alertContent.content ?? "")
                         .foregroundColor(.secondary)
                         .fontDesign(.monospaced)
-                        .font(.callout)
+                        .font(.caption)
                 }
             }
             .padding(6)
             .background(
                 RoundedRectangle(cornerRadius: 6)
-                    .stroke(Color.secondary, lineWidth: 1)
+                    .stroke(.secondary, lineWidth: 1)
             )
-            .frame(maxWidth: 320)
+            .frame(maxWidth: 400)
         }
     }
 }
