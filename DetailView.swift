@@ -36,9 +36,10 @@ struct DetailView: View {
                         .frame(height: 600)
                         .background {
                             VStack {
-                                Text("To scroll all the way up..")
-                                    .background { Color("pairCellBackground") }
-                                Color("pairCellBackground")
+                                Text("Scroll to Bubble")
+                                    .font(.system(size: 20))
+                                Text("Scroll all the way up by using the device edge")
+                                Spacer()
                             }
                         }
                 }
