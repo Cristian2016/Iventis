@@ -132,7 +132,7 @@ struct PairCell: View {
         Rectangle()
             .fill(Color.label)
             .frame(width: 30, height: 2)
-            .offset(y: -4)
+            .offset(x: 10, y: -4)
     }
     
     private var pairNumberView:some View {

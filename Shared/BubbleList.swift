@@ -66,11 +66,7 @@ struct BubbleList: View {
         VStack {
             GeometryReader {
                 let metrics = BubbleCell.Metrics($0.size.width) //10
-                List {
-                    BubbleCell(bubble, metrics)
-                        .padding([.leading, .trailing], -14) //2
-                    DetailView(Int(bubble.rank))
-                } //3
+                    DetailView(Int(bubble.rank), bubble, metrics)
             }
             .listStyle(.plain)
             .scrollIndicators(.hidden)

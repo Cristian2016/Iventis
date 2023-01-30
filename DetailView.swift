@@ -10,13 +10,14 @@ import MyPackage
 
 struct DetailView: View {
     let rank:Int?
-    
+    let bubble:Bubble
+    let metrics:BubbleCell.Metrics
     @StateObject var tabWrapper = SelectedTabWrapper()
     @FetchRequest var sessions:FetchedResults<Session>
     
     let topDetailHeight = CGFloat(140)
     
-    init(_ showDetail_bRank:Int?) {
+    init(_ showDetail_bRank:Int?, _ bubble:Bubble, _ metrics:BubbleCell.Metrics) {
         let predicate:NSPredicate?
         if let rank = showDetail_bRank { predicate = NSPredicate(format: "bubble.rank == %i", rank)
         } else { predicate = nil }
@@ -24,24 +25,23 @@ struct DetailView: View {
         let descriptor = NSSortDescriptor(key: "created", ascending: false)
         _sessions = FetchRequest(entity: Session.entity(), sortDescriptors: [descriptor], predicate: predicate, animation: .easeInOut)
         self.rank = showDetail_bRank
+        self.bubble = bubble
+        self.metrics = metrics
     }
     
     var body: some View {
         ZStack {
             if sessions.isEmpty { EmptyHistoryAlertView() }
             else {
-                VStack {
+                List {
+                    BubbleCell(bubble, metrics)
+                        .padding([.leading, .trailing], -14) //2
                     TopDetailView(rank).frame(height: topDetailHeight)
+                        .padding([.leading, .trailing], -14) //2
                     BottomDetailView(rank)
                         .frame(height: 600)
                 }
             }
         }
-    }
-}
-
-struct DetailView_Previews: PreviewProvider {
-    static var previews: some View {
-        DetailView(4)
     }
 }
