@@ -80,7 +80,6 @@ struct PairCell: View {
                         }
                         else { durationView } //third line
                     }
-//                    .padding(contentFrameGap)
                     //gesture
                     .contentShape(gestureArea) //define gesture area
                     .onTapGesture {  /* ⚠️ Idiotic! I need to put this shit here or else I can't scroll */ }

@@ -33,10 +33,15 @@ struct PairCell1: View {
                     else { durationView } //third line
                 }
             }
+            .contentShape(gestureArea) //define gesture area
+            .onTapGesture {  /* ⚠️ Idiotic! I need to put this shit here or else I can't scroll */ }
+            .onLongPressGesture { userWantsNotesList() }
         }
     }
     
     // MARK: - Little Things
+    
+    private var gestureArea: some Shape { Rectangle().offset(x: 30) }
     
     private let metrics = Metrics()
     
@@ -124,5 +129,19 @@ struct PairCell1: View {
         let result = try? decoder.decode(Float.TimeComponentsAsStrings.self, from: pair.durationAsStrings ?? Data())
         self.duration = result
         self.pairNumber = pairNumber
+    }
+    
+    // MARK: - Intents
+    private func userWantsNotesList() {
+        UserFeedback.singleHaptic(.light)
+        viewModel.pairOfNotesList = pair
+        PersistenceController.shared.save()
+    }
+    
+    ///show/hide Pair.note
+    private func toggleStickyNoteVisibility() {
+        UserFeedback.singleHaptic(.light)
+        pair.isNoteHidden.toggle()
+        PersistenceController.shared.save()
     }
 }
