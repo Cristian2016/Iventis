@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import MyPackage
 
 ///BottomCells swipe horizontally! each BottomCell contains a list that swipes vertically. The list contains PairCells
 struct BottomCell: View {
@@ -25,13 +26,18 @@ struct BottomCell: View {
     
     var body: some View {
         List {
-            ForEach(pairs) { pair in
-                let pairNumber = pairs.count - pairs.firstIndex(of: pair)!
-                PairCell(pair, pairNumber)
-            }
-            .listRowSeparator(.hidden)
-            Spacer(minLength: 350).listRowSeparator(.hidden)
+            ZStack {
+                Push(.topMiddle) {
+                    SmallAlertHintView(alertContent: AlertHint.scrollToTop)
+                }
+                ForEach(pairs) { pair in
+                    let pairNumber = pairs.count - pairs.firstIndex(of: pair)!
+                    PairCell(pair, pairNumber)
+                }
                 .listRowSeparator(.hidden)
+                Spacer(minLength: 350).listRowSeparator(.hidden)
+                    .listRowSeparator(.hidden)
+            }
         }
         .listStyle(.plain)
         .scrollIndicators(.hidden)
