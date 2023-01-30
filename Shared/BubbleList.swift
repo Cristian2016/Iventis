@@ -123,7 +123,7 @@ struct BubbleList: View {
                             PlusSymbol()
                         }
                     }
-                    .padding(EdgeInsets(top: 0, leading: -14, bottom: 0, trailing: -14))
+                    .padding(.init(top: 0, leading: -14, bottom: 0, trailing: -14))
                     .navigationDestination(for: Bubble.self) { navigationDestinationView($0) }
                 }
             }
