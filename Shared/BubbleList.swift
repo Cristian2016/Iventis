@@ -43,7 +43,7 @@ struct BubbleList: View {
                                     BubbleCell(bubble, metrics)
                                 }
                             }
-                        } header: { /* headerTitle */ }
+                        }
                             .listRowSeparator(.hidden)
                             .listSectionSeparator(value ? .visible : .hidden, edges: [.bottom])
                         if !section.id { bottomOverscoll }
