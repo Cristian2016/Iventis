@@ -17,14 +17,34 @@ struct PairCell1: View {
     let duration:Float.TimeComponentsAsStrings?
     
     var body:some View {
-        ZStack {
-            Push(.topRight) { separatorLine.overlay { pairNumberView }}
-            
-            VStack (alignment: .leading) {
-                pairStartView  //first line
-                pairPauseView //second line
+        if !pair.isFault {
+                ZStack(alignment: .leading) {
+                    Push(.topRight) { separatorLine.overlay { pairNumberView }}
+                    
+                    VStack (alignment: .leading) {
+                        pairStartView  //first line
+                        pairPauseView //second line
+                        if pair.pause == nil {
+                            HStack {
+                                Spacer()
+                                SmallBubbleView(bubble: pair.session!.bubble!, metrics: BubbleCell.Metrics(150))
+                                Spacer()
+                            }
+                        }
+                        else { durationView } //third line
+                    }
+                }
             }
-        }
+    }
+    
+    // MARK: - Little Things
+    
+    private let metrics = Metrics()
+    
+    struct Metrics {
+        //these two combined
+        let durationFont = Font.system(size: 22, weight: .medium) //15 59 3
+        let durationComponentsFont = Font.system(size: 22, weight: .medium) //h m s
     }
     
     // MARK: - Lego
@@ -67,6 +87,34 @@ struct PairCell1: View {
                             .foregroundColor(.secondary)
                     }
                 }
+        }
+    }
+    
+    private var durationView:some View {
+        HStack (spacing: 8) {
+            if let duration = duration {
+                //hr
+                if duration.hr != "0" {
+                    HStack (alignment:.firstTextBaseline ,spacing: 0) {
+                        Text(duration.hr).font(metrics.durationFont)
+                        Text("h").font(metrics.durationComponentsFont)
+                    }
+                }
+                
+                //min
+                if duration.min != "0" {
+                    HStack (alignment:.firstTextBaseline ,spacing: 0) {
+                        Text(duration.min).font(metrics.durationFont)
+                        Text("m").font(metrics.durationComponentsFont)
+                    }
+                }
+                
+                //sec
+                HStack (alignment:.firstTextBaseline ,spacing: 0) {
+                    Text(duration.sec + "." + duration.cents).font(metrics.durationFont)
+                    Text("s").font(metrics.durationComponentsFont)
+                }
+            }
         }
     }
       
