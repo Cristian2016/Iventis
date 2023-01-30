@@ -35,7 +35,7 @@ struct BottomCell: View {
                 .listRowSeparator(.hidden)
                 .listRowSeparator(.hidden)
         }
-        .listStyle(.plain)
+        .listStyle(.plain)ok
         .scrollIndicators(.hidden)
         .background {
             VStack {
