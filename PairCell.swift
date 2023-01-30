@@ -43,6 +43,7 @@ struct PairCell: View {
                     else { durationView } //third line
                     
                     Spacer()
+                    Spacer(minLength: 4)
                 }
                 
                 Push(.bottomRight) { stickyNote }
