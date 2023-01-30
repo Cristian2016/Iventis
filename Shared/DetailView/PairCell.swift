@@ -70,7 +70,7 @@ struct PairCell: View {
                     VStack (alignment: .leading) {
                         separatorLine.overlay { pairNumberView }
                         pairStartView  //first line
-                        pairPauseView //seconds line
+                        pairPauseView //second line
                         if pair.pause == nil {
                             HStack {
                                 Spacer()

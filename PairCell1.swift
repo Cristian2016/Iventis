@@ -16,18 +16,19 @@ struct PairCell1: View {
     let pairNumber:Int
     let duration:Float.TimeComponentsAsStrings?
     
-    var body: some View {
+    var body:some View {
         ZStack {
             Push(.topRight) { separatorLine.overlay { pairNumberView }}
             
-            VStack {
-                Circle()
+            VStack (alignment: .leading) {
+                pairStartView  //first line
+                pairPauseView //second line
             }
         }
     }
     
     // MARK: - Lego
-    private var separatorLine: some View {
+    private var separatorLine:some View {
         Rectangle()
             .fill(Color.label)
             .frame(width: 30, height: 2)
@@ -38,6 +39,35 @@ struct PairCell1: View {
         Text(String(pairNumber))
             .font(.system(size: 20))
             .offset(x: 4, y: 10)
+    }
+    
+    //start time and date
+    private var pairStartView: some View {
+        HStack(alignment: .firstTextBaseline) {
+            //time
+            Text(DateFormatter.time.string(from: pair.start ?? Date()))
+                .font(.monospaced(.system(size: 22))())
+            //date
+            Text(DateFormatter.date.string(from: pair.start ?? Date()))
+                .foregroundColor(.secondary)
+        }
+    }
+    
+    //pause time and date
+    @ViewBuilder
+    private var pairPauseView: some View {
+        if let pause = pair.pause {
+            let startAndPauseOnSameDay = DateFormatter.shortDate.string(from: pair.start!) == DateFormatter.shortDate.string(from: pause)
+            
+                HStack(alignment: .firstTextBaseline) {
+                    Text(DateFormatter.time.string(from: pause))
+                        .font(.monospaced(.system(size: 22))())
+                    if !startAndPauseOnSameDay {
+                        Text(DateFormatter.date.string(from: pause))
+                            .foregroundColor(.secondary)
+                    }
+                }
+        }
     }
       
     // MARK: -
