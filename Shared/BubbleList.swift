@@ -13,6 +13,7 @@
 //7 BubbleCell must know list width in order to compute its spacing which is esential for the look
 //8 toolbar hides when PaletteView shows
 //9 BubbleCell must extend horizontally to the edges. -14 points is a good value for smallest phone iPhone SE3
+//10 BubbleCell must know width of the parent view to compute spacing and have same design regardless of device or orientation
 
 import SwiftUI
 import CoreData
@@ -64,7 +65,7 @@ struct BubbleList: View {
     private func navigationDestinationView(_ bubble:Bubble) -> some View {
         VStack {
             GeometryReader {
-                let metrics = BubbleCell.Metrics($0.size.width)
+                let metrics = BubbleCell.Metrics($0.size.width) //10
                 List {
                     BubbleCell(bubble, metrics)
                     DetailView(Int(bubble.rank))
