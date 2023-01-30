@@ -35,7 +35,10 @@ struct DetailView: View {
                     BottomDetailView(rank)
                         .frame(height: 600)
                         .background {
-                            Color("pairCellBackground")
+                            VStack {
+                                Text("To scroll all the way up..")
+                                Color("pairCellBackground")
+                            }
                         }
                 }
             }
