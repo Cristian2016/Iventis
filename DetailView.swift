@@ -31,19 +31,21 @@ struct DetailView: View {
     
     var body: some View {
         ZStack {
-            if sessions.isEmpty { EmptyHistoryAlertView() }
-            else {
-                List {
-                    BubbleCell(bubble, metrics)
-                        .padding([.leading, .trailing], -14) //2
+            
+            List {
+                BubbleCell(bubble, metrics)
+                    .padding([.leading, .trailing], -14) //2
+                if sessions.isEmpty { EmptyHistoryAlertView() }
+                else {
                     TopDetailView(rank).frame(height: topDetailHeight)
                         .padding([.leading, .trailing], -14) //2
+                        .listRowSeparator(.hidden)
                     BottomDetailView(rank)
                         .frame(height: 600)
                 }
-                .listStyle(.plain)
-                .scrollIndicators(.hidden)
             }
+            .listStyle(.plain)
+            .scrollIndicators(.hidden)
         }
     }
 }
