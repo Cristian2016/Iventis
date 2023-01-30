@@ -27,10 +27,7 @@ struct BubbleList: View {
     // MARK: -
     var body: some View {
         ZStack /* 4 */ {
-            VStack(spacing: 0) {
-                buttonsBar
-                list
-            }
+            list
             PaletteView($viewModel.isPaletteShowing)
         }
     }
@@ -92,14 +89,6 @@ struct BubbleList: View {
     ]
     
     // MARK: - Lego
-    private var buttonsBar:some View {
-        HStack (spacing: 20) {
-            Spacer()
-            AlwaysOnDisplayButton()
-            PlusButton()
-        }
-        .padding(1) //6
-    }
     private var list:some View {
         ZStack {
             if isListEmpty { EmptyListView() }
@@ -120,12 +109,20 @@ struct BubbleList: View {
                             .listRowSeparator(.hidden)
                             .listSectionSeparator(
                                 isPinnedSection ? .visible : .hidden, edges: [.bottom]) //1
-                        //bottom overscroll
+                                                                                        //bottom overscroll
                         if !section.id { bottomOverscoll }
+                    }
+                    .toolbar(.visible, for: .navigationBar)
+                    .toolbarBackground(.ultraThinMaterial)
+                    .toolbar {
+                        ToolbarItemGroup {
+                            AlwaysOnDisplayButton()
+                            PlusButton()
+                        }
                     }
                 }
                 .scrollIndicators(.hidden)
-                .padding(EdgeInsets(top: 0, leading: -10, bottom: 0, trailing: -10))
+                .padding(EdgeInsets(top: 0, leading: -14, bottom: 0, trailing: -14))
                 .listStyle(.plain)
                 .navigationDestination(for: Bubble.self) { bubble in
                     VStack {
