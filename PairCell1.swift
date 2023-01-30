@@ -21,7 +21,7 @@ struct PairCell1: View {
             ZStack(alignment: .leading) {
                 Push(.topRight) { separatorLine.overlay { pairNumberView }}
                 
-                VStack (alignment: .leading) {
+                VStack (alignment: .leading, spacing: 4) {
                     pairStartView  //first line
                     pairPauseView //second line
                     if pair.pause == nil {
@@ -42,7 +42,7 @@ struct PairCell1: View {
     
     struct Metrics {
         //these two combined
-        let durationFont = Font.system(size: 22, weight: .medium) //15 59 3
+        let durationFont = Font.system(size: 24, weight: .medium) //15 59 3
         let durationComponentsFont = Font.system(size: 22, weight: .medium) //h m s
     }
     
@@ -114,6 +114,10 @@ struct PairCell1: View {
                     Text("s").font(metrics.durationComponentsFont)
                 }
             }
+        }
+        .background {
+            RoundedRectangle(cornerRadius: 0)
+                .fill(Color("durationBackground"))
         }
     }
       
