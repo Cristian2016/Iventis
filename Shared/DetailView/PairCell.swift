@@ -80,13 +80,14 @@ struct PairCell: View {
                         }
                         else { durationView } //third line
                     }
-                    .padding(contentFrameGap)
+//                    .padding(contentFrameGap)
                     //gesture
-                    .contentShape(gestureArea) //define gesture area
+//                    .contentShape(gestureArea) //define gesture area
                     .onTapGesture {  /* ⚠️ Idiotic! I need to put this shit here or else I can't scroll */ }
                     .onLongPressGesture { userWantsNotesList() }
                     
-                    stickyNote
+//                    stickyNote
+                    Rectangle().frame(height: 30)
                 }
             }
         }

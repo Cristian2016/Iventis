@@ -27,12 +27,13 @@ struct BottomCell: View {
         List {
             ForEach(pairs) { pair in
                 let pairNumber = pairs.count - pairs.firstIndex(of: pair)!
-                PairCell(pair, pairNumber).frame(height: 90)
+//                PairCell(pair, pairNumber)
             }
             .listRowSeparator(.hidden)
-            
             Spacer(minLength: 350).listRowSeparator(.hidden)
+                .listRowSeparator(.hidden)
         }
+        
         .listStyle(.plain)
         .scrollIndicators(.hidden)
     }
