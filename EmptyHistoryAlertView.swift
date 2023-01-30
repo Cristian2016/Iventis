@@ -16,6 +16,7 @@ struct EmptyHistoryAlertView: View {
                 .foregroundColor(.secondary)
                 .font(.system(.title3, design: .monospaced))
         }
+        .padding([.top])
         .padding([.top, .leading])
         .padding([.top, .leading])
     }
