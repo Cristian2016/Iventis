@@ -27,7 +27,9 @@ struct PairCell: View {
                         separatorLine
                         pairNumberView
                     }
-                }.padding([.trailing], -16)
+                }
+                .padding([.top], -4)
+                .padding([.trailing], -16)
                 
                 VStack (alignment: .leading, spacing: 4) {
                     pairStartView  //first line
@@ -44,6 +46,7 @@ struct PairCell: View {
                 }
                 
                 Push(.bottomRight) { stickyNote }
+                    .padding([.trailing], -12)
             }
             .contentShape(gestureArea) //define gesture area
             .onTapGesture {  /* ⚠️ Idiotic! I need to put this shit here or else I can't scroll */ }
