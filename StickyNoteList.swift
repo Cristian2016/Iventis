@@ -50,7 +50,7 @@ struct StickyNoteList: View {
     private func saveNoteAndDismiss() {
         guard stickyNoteIsValid else { dismiss(); return }
         
-        saveNoteToCoredata(textFieldText)
+        save(textFieldText)
         
         //⚠️ it crashes without delay
         delayExecution(.now() + 0.1) {
@@ -90,7 +90,7 @@ struct StickyNoteList: View {
                                 if filteredStickyNotes.isEmpty { emptyListAlert } //1
                                 
                                 ForEach (filteredStickyNotes, id: \.self) { cell($0) }
-                                .onDelete { deleteStickyNote($0.first!) }
+                                .onDelete { delete($0.first!) }
                                 .listRowSeparator(.hidden)
                             }
                             .listStyle(.plain)
@@ -204,8 +204,7 @@ struct StickyNoteList: View {
     //each View using this view has different code
     //implemented within closures
     var dismiss: () -> Void
-    var deleteStickyNote: (IndexSet.Element?) -> Void
-    
-    var saveNoteToCoredata: (String) -> Void
+    var delete: (IndexSet.Element?) -> Void
+    var save: (String) -> Void
     var selectExistingNote: (String) -> Void
 }
