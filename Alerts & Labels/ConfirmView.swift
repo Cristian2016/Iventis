@@ -9,7 +9,7 @@ import SwiftUI
 import MyPackage
 
 struct ConfirmView: View {
-    struct Appearance {
+    struct Metrics {
         let cornerRadius = CGFloat(16)
         let backgroundColor = Color.deleteActionViewBackground
         let symbolFont = Font.system(size: 36).weight(.medium)
@@ -17,25 +17,25 @@ struct ConfirmView: View {
         let contentColor = Color.white
     } //1
     
-    private let appearance = Appearance() //1
+    private let metrics = Metrics() //1
     let content:Content
     var dismissAction:(() -> Void)? = nil
     
     var body: some View {
         HStack {
             Image(systemName: systemImage)
-                .font(appearance.symbolFont)
+                .font(metrics.symbolFont)
                 .foregroundColor(fillColor)
             Text(content.title + "\n" + name)
-                .font(appearance.contentFont)
+                .font(metrics.contentFont)
         }
-        .foregroundColor(appearance.contentColor)
+        .foregroundColor(metrics.contentColor)
         .padding()
         .padding([.top, .bottom])
         .background(
             ZStack {
-                RoundedRectangle(cornerRadius: appearance.cornerRadius)
-                    .fill(appearance.backgroundColor)
+                RoundedRectangle(cornerRadius: metrics.cornerRadius)
+                    .fill(metrics.backgroundColor)
                     .shadow(color: .black.opacity(0.3), radius: 2)
             }
         )
