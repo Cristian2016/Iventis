@@ -22,6 +22,7 @@ import MyPackage
 struct BubbleList: View {
     @Environment(\.managedObjectContext) private var viewContext
     @EnvironmentObject private var viewModel:ViewModel
+    @EnvironmentObject private var layoutViewModel:LayoutViewModel
     @SectionedFetchRequest var bubbles:SectionedFetchResults<Bool, Bubble>
     
     @State private var bubbleCellSize = CGSize(width: 1, height: 1)
@@ -72,6 +73,7 @@ struct BubbleList: View {
                 } //3
             }
             .listStyle(.plain)
+            .scrollIndicators(.hidden)
         }
         .padding([.leading, .trailing], -14) //2
     }

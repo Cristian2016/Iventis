@@ -31,7 +31,7 @@ struct BottomCell: View {
             }
             .listRowSeparator(.hidden)
             
-            Spacer(minLength: 100).listRowSeparator(.hidden)
+            Spacer(minLength: 350).listRowSeparator(.hidden)
         }
         .listStyle(.plain)
         .scrollIndicators(.hidden)

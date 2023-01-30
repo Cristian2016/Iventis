@@ -27,20 +27,14 @@ struct DetailView: View {
     }
     
     var body: some View {
-        VStack {
-            Spacer()
-            ZStack {
-                if sessions.isEmpty { EmptyHistoryAlertView() }
-                else {
-                    VStack {
-                        TopDetailView(rank).frame(height: topDetailHeight)
-                        Spacer()
-                        BottomDetailView(rank)
-                    }
+        ZStack {
+            if sessions.isEmpty { EmptyHistoryAlertView() }
+            else {
+                VStack {
+                    TopDetailView(rank).frame(height: topDetailHeight)
+                    BottomDetailView(rank).frame(height: 600)
                 }
             }
-            Spacer()
-            Spacer() //pushes BubbleCell to the top
         }
     }
 }
