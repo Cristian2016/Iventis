@@ -26,12 +26,12 @@ struct SmallAlertHintView: View {
                     Text(alertContent.content ?? "")
                         .foregroundColor(.secondary)
                         .fontDesign(.monospaced)
-                        .font(.caption)
+                        .font(.callout)
                 }
             }
             .padding(6)
             .background(
-                RoundedRectangle(cornerRadius: 10)
+                RoundedRectangle(cornerRadius: 6)
                     .stroke(Color.secondary, lineWidth: 1)
             )
             .frame(maxWidth: 320)
@@ -41,6 +41,6 @@ struct SmallAlertHintView: View {
 
 struct SmallAlertHintView_Previews: PreviewProvider {
     static var previews: some View {
-        SmallAlertHintView(alertContent: .init(symbol: "info.circle.fill", title: "Scroll To Top?", content: "Scroll along left/right screen edge"))
+        SmallAlertHintView(alertContent: AlertHint.scrollToTop)
     }
 }
