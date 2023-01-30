@@ -12,7 +12,7 @@ struct ConfirmView: View {
     struct Metrics {
         let cornerRadius = CGFloat(16)
         let backgroundColor = Color.deleteActionViewBackground
-        let symbolFont = Font.system(size: 36).weight(.medium)
+        let symbolFont = Font.system(size: 45).weight(.medium)
         let contentFont = Font.system(size: 24)
         let contentColor = Color.white
     } //1
@@ -85,14 +85,14 @@ extension ConfirmView {
         
         static let eventCreated = Content(title: "Calendar Event", kind: .created)
         static let eventRemoved = Content(title: "Calendar Event", kind: .removed)
-        static let alwaysONDisplayON = Content(title: "Display Auto-Lock", kind: .off)
-        static let alwaysONDisplayOFF = Content(title: "Display Auto-Lock", kind: .on)
+        static let alwaysONDisplayON = Content(title: "Display Sleep", kind: .off)
+        static let alwaysONDisplayOFF = Content(title: "Display Sleep", kind: .on)
         static let startDelayCreated = Content(title: "Start Delay", kind: .created)
         static let startDelayRemoved = Content(title: "Start Delay", kind: .removed)
     }
 }
 
-struct ConfirmationView1_Previews: PreviewProvider {
+struct ConfirmationView1_Previews: PreviewProvider {ok
     static var previews: some View {
         ConfirmView(content: .alwaysONDisplayON)
     }
