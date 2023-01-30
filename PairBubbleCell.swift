@@ -42,6 +42,26 @@ struct PairBubbleCell: View {
     @StateObject var bubble:Bubble
     let metrics:BubbleCell.Metrics
     
+    var body: some View {
+        ZStack {
+            background
+            timeComponents
+                .foregroundColor(Color("smallBubbleCircleColor"))
+                .onTapGesture { withAnimation {
+                    isZoomed.toggle()
+                    skinTapsCount += 1
+                } }
+        }
+        .background {
+            GeometryReader { geo in
+                Color.clear
+                    .onChange(of: geo.size.width) { newValue in
+                        print("width is \(newValue)")
+                    }
+            }
+        }
+    }
+    
     let edge = CGFloat(130)
     let ratio = CGFloat(8.25/3)
     
@@ -106,18 +126,6 @@ struct PairBubbleCell: View {
         bubble.smallBubbleView_Components.min > "0" || bubble.smallBubbleView_Components.hr > "0" ? 1 : 0.001
     }
     private var hrOpacity:Double { bubble.smallBubbleView_Components.hr > "0" ? 1 : 0.001 }
-    
-    var body: some View {
-        ZStack {
-            background
-            timeComponents
-        }
-        .foregroundColor(Color("smallBubbleCircleColor"))
-        .onTapGesture { withAnimation {
-            isZoomed.toggle()
-            skinTapsCount += 1
-        } }
-    }
 }
 
 //struct PairRunningCell_Previews: PreviewProvider {
