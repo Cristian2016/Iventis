@@ -10,10 +10,15 @@ import SwiftUI
 struct iPhoneViewHierarchy: View {
     @EnvironmentObject private var viewModel:ViewModel
     var body: some View {
-        NavigationStack(path: $viewModel.path) {
-            ViewHierarchy()
+        ZStack {
+            
+            NavigationStack(path: $viewModel.path) {
+                ViewHierarchy()
+            }
+            PaletteView($viewModel.isPaletteShowing)
         }
-            .tint(.label)
+        .tint(.label)
+       
     }
 }
 

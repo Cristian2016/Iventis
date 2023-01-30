@@ -13,11 +13,13 @@ struct PaletteView: View {
     private let xOffset = -UIScreen.main.bounds.width
     
     var body: some View {
-        HStack {
-            paletteView
-            RightStrip($showPalette)
+        GeometryReader { geo in
+            HStack {
+                paletteView
+                RightStrip($showPalette)
+            }
+            .offset(x: !showPalette ? -geo.size.width * 1.05 : 0, y: 0)
         }
-        .offset(x: !showPalette ? xOffset : 0, y: 0)
     }
     
     // MARK: -

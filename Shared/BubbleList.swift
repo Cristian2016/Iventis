@@ -27,10 +27,62 @@ struct BubbleList: View {
     
     // MARK: -
     var body: some View {
-        ZStack /* 4 */ {
-            list
-            PaletteView($viewModel.isPaletteShowing)
+        ZStack {
+            if isListEmpty { EmptyListView() }
+            else {
+                GeometryReader { geo in
+                    let metrics = BubbleCell.Metrics(geo.size.width) //7
+                    
+                    List (bubbles) { section in
+                        let isPinnedSection = section.id.description == "true" //5
+                        Section {
+                            ForEach (section) { bubble in
+                                ZStack { //1
+                                    NavigationLink(value: bubble) { }
+                                    BubbleCell(bubble, metrics)
+                                }
+                            }
+                        } header: { /* headerTitle(for: section.id.description) */ }
+                            .listRowSeparator(.hidden)
+                            .listSectionSeparator( isPinnedSection ? .visible : .hidden, edges: [.bottom]) //1
+                        if !section.id { bottomOverscoll }
+                    }
+                    .scrollIndicators(.hidden)
+                    .listStyle(.plain)
+                    .toolbarBackground(.ultraThinMaterial)
+                    .toolbar { ToolbarItemGroup { buttonsBar }}
+                    .padding(.init(top: 0, leading: -14, bottom: 0, trailing: -14))
+                    .navigationDestination(for: Bubble.self) { navigationDestinationView($0) }
+                }
+            }
+            
+            if !notesShowing { LeftStrip($viewModel.isPaletteShowing, isListEmpty) }
         }
+    }
+    
+    // MARK: - Lego
+    private func navigationDestinationView(_ bubble:Bubble) -> some View {
+        VStack {
+            GeometryReader {
+                let metrics = BubbleCell.Metrics($0.size.width)
+                List { BubbleCell(bubble, metrics).readSize($bubbleCellSize)
+                } //3
+            }
+            .scrollDisabled(true)
+            .listStyle(.plain)
+            .frame(height: (bubbleCellSize.height) * 1.1)
+            .padding([.leading, .trailing], -10) //2
+            DetailView(Int(bubble.rank))
+        }
+        .padding([.top], 1)
+    }
+    
+    private var buttonsBar:some View {
+        HStack {
+            AutoLockSymbol()
+            PlusSymbol()
+        }
+           
     }
     
     // MARK: -
@@ -88,64 +140,6 @@ struct BubbleList: View {
         NSSortDescriptor(key: "isPinned", ascending: false),
         NSSortDescriptor(key: "rank", ascending: false)
     ]
-    
-    // MARK: - Lego
-    private var list:some View {
-        ZStack {
-            if isListEmpty { EmptyListView() }
-            else {
-                GeometryReader { geo in
-                    let metrics = BubbleCell.Metrics(geo.size.width) //7
-                    
-                    List (bubbles) { section in
-                        let isPinnedSection = section.id.description == "true" //5
-                        Section {
-                            ForEach (section) { bubble in
-                                ZStack { //1
-                                    NavigationLink(value: bubble) { }
-                                    BubbleCell(bubble, metrics)
-                                }
-                            }
-                        } header: { /* headerTitle(for: section.id.description) */ }
-                            .listRowSeparator(.hidden)
-                            .listSectionSeparator( isPinnedSection ? .visible : .hidden, edges: [.bottom]) //1
-                        if !section.id { bottomOverscoll }
-                    }
-                    .scrollIndicators(.hidden)
-                    .listStyle(.plain)
-                    .toolbar(viewModel.isPaletteShowing ? .hidden : .automatic) //8
-                    .toolbarBackground(.ultraThinMaterial)
-                    .toolbar {
-                        ToolbarItemGroup {
-                            AutoLockSymbol()
-                            PlusSymbol()
-                        }
-                    }
-                    .padding(.init(top: 0, leading: -14, bottom: 0, trailing: -14))
-                    .navigationDestination(for: Bubble.self) { navigationDestinationView($0) }
-                }
-            }
-            
-            if !notesShowing { LeftStrip($viewModel.isPaletteShowing, isListEmpty) }
-        }
-    }
-    
-    // MARK: - Lego
-    private func navigationDestinationView(_ bubble:Bubble) -> some View {
-        VStack {
-            GeometryReader {
-                let metrics = BubbleCell.Metrics($0.size.width)
-                List { BubbleCell(bubble, metrics).readSize($bubbleCellSize)
-                } //3
-            }
-            .scrollDisabled(true)
-            .listStyle(.plain)
-            .frame(height: (bubbleCellSize.height) * 1.1)
-            .padding([.leading, .trailing], -10) //2
-            DetailView(Int(bubble.rank))
-        }
-        .padding([.top], 1)
-    }
 }
 
 // MARK: -
