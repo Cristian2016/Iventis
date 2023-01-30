@@ -112,7 +112,7 @@ struct BubbleList: View {
                                                                                         //bottom overscroll
                         if !section.id { bottomOverscoll }
                     }
-                    .toolbar(.visible, for: .navigationBar)
+                    .toolbar(.automatic, for: .navigationBar)
                     .toolbarBackground(.ultraThinMaterial)
                     .toolbar {
                         ToolbarItemGroup {
