@@ -3,6 +3,7 @@ import MyPackage
 
 struct AlwaysOnDisplayButton: View {
     @EnvironmentObject var viewModel:ViewModel
+    let metrics = Metrics()
     
     var body: some View {
         HStack {
@@ -23,32 +24,36 @@ struct AlwaysOnDisplayButton: View {
         if isDisplayAlwaysON {
             HStack {
                 FusedLabel(content: .autoLockOff)
-                exitAlwaysONDisplay_Symbol
+                exitSymbol
             }
         }
-        else { displayONSymbol }
+        else { enterSymbol }
     }
-    private var exitAlwaysONDisplay_Symbol:some View {
+    private var exitSymbol:some View {
         ZStack {
             Image(systemName: "sun.max.fill")
-                .foregroundColor(.label)
+                .foregroundColor(metrics.symbolColor)
             Image(systemName: "line.diagonal")
-                .fontWeight(.black)
-                .foregroundColor(.red)
+                .foregroundColor(metrics.diagonalLineColor)
+                .fontWeight(.bold)
         }
-        .fontWeight(.semibold)
-        .font(.system(size: fontSize))
+        .font(metrics.font)
     }
     
-    private var displayONSymbol:some View {
+    private var enterSymbol:some View {
         Image(systemName: "sun.max")
-            .foregroundColor(.label)
-            .font(.system(size: fontSize))
+            .foregroundColor(metrics.symbolColor)
+            .font(metrics.font)
     }
     
     // MARK: -
     private var isDisplayAlwaysON:Bool { get { UIApplication.shared.isIdleTimerDisabled } }
-    let fontSize = CGFloat(30)
+    
+    struct Metrics {
+        let font = Font.system(.title2)
+        let symbolColor = Color.label
+        let diagonalLineColor = Color.red
+    }
 }
 
 struct DisplayAlwaysOnSymbol_Previews: PreviewProvider {
