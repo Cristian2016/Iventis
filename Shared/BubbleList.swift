@@ -45,7 +45,8 @@ struct BubbleList: View {
                             }
                         } header: { /* headerTitle */ }
                             .listRowSeparator(.hidden)
-                            .listSectionSeparator( isPinnedSection ? .visible : .hidden, edges: [.bottom]) //1
+                            .listSectionSeparator(
+                                isPinnedSection ? .visible : .hidden, edges: [.bottom]) //1
                         if !section.id { bottomOverscoll }
                     }
                     .scrollIndicators(.hidden)
