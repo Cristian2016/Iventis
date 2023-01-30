@@ -37,5 +37,9 @@ struct BottomCell: View {
         }
         .listStyle(.plain)
         .scrollIndicators(.hidden)
+        .background { Push(.topMiddle) {
+            SmallAlertHintView(alertContent: AlertHint.scrollToTop)
+        }
+        }
     }
 }
