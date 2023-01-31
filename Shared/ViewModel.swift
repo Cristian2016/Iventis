@@ -242,7 +242,7 @@ class ViewModel: ObservableObject {
                     }
                 }
                 
-                if fiveSeconds_bRank != nil { fiveSeconds_bRank = nil } //1
+                if fiveSeconds_bRank == bubble.rank { fiveSeconds_bRank = nil } //1
                 
             case .finished: return
         }
