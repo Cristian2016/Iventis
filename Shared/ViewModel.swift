@@ -27,6 +27,7 @@ class ViewModel: ObservableObject {
     
     ///calendarEvent created for bubble.rank. if rank != nil, confirmation will be displayed in the appropriate bubbleCell
     @Published var confirm_CalEventCreated: Int64? = nil
+    @Published var confirm_CalEventRemoved: Int64? = nil
     
     // MARK: - Confirmation Flashes
     @Published var confirm_AlwaysOnDisplay = false
