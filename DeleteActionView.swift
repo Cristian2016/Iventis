@@ -34,27 +34,25 @@ struct DeleteActionView: View {
                     .fill(backgroundColor)
                     .frame(width: width, height: width/ratio)
                     .overlay {
-                        ZStack {
-                            VStack (spacing:6) {
-                                trashView
-                                
-                                VStack {
-                                    deleteBubbleView
-                                        .onTapGesture { withAnimation {
-                                            viewModel.delete(bubble!)
+                        VStack (spacing:6) {
+                            trashView
+                            
+                            VStack {
+                                deleteBubbleView
+                                    .onTapGesture { withAnimation {
+                                        viewModel.delete(bubble!)
+                                        viewModel.deleteAction_bRank = nil
+                                    } }
+                                deleteHistoryView
+                                    .onTapGesture { withAnimation {
+                                        if !bubble!.sessions_.isEmpty {
+                                            viewModel.reset(bubble!)
                                             viewModel.deleteAction_bRank = nil
-                                        } }
-                                    deleteHistoryView
-                                        .onTapGesture { withAnimation {
-                                            if !bubble!.sessions_.isEmpty {
-                                                viewModel.reset(bubble!)
-                                                viewModel.deleteAction_bRank = nil
-                                            }
-                                        } }
-                                }
-                                .font(.system(size: 30).weight(.medium))
-                                .padding([.bottom], 6)
+                                        }
+                                    } }
                             }
+                            .font(.system(size: 30).weight(.medium))
+                            .padding([.bottom], 6)
                         }
                         .padding()
                     }
