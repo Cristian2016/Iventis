@@ -14,25 +14,21 @@ struct SmallAlertHintView: View {
         ZStack {
             HStack(spacing: 10) {
                 Image(systemName: alertContent.symbol ?? "")
-                    .foregroundColor(.yellow)
+                    .foregroundColor(.black)
                     .font(.system(size: 30))
                 VStack(alignment: .leading) {
-                    HStack {
                         Text(alertContent.title)
                             .font(.callout)
                             .fontWeight(.medium)
-                    }
+                    
                     Text(alertContent.content ?? "")
-                        .foregroundColor(.secondary)
                         .fontDesign(.monospaced)
                         .font(.caption) 
                 }
+                .foregroundColor(.black)
             }
             .padding(6)
-            .background(
-                RoundedRectangle(cornerRadius: 6)
-                    .stroke(.secondary, lineWidth: 1)
-            )
+            .background(.yellow)
             .frame(maxWidth: 400)
         }
     }
