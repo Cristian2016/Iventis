@@ -35,7 +35,8 @@ struct DeleteConfirmationView: View {
     // MARK: -
     ///dismiss view
     private func cancelDeleteAction() {
-        
+        viewModel.deleteAction_bRank = nil
+        layoutViewModel.deleteActionViewOffset = nil
     }
     
     //// MARK: -
@@ -47,12 +48,18 @@ struct DeleteConfirmationView: View {
                 trashView
                 deleteBubbleView
                     .onTapGesture {
-                        
+                        withAnimation {
+                            viewModel.delete(bubble)
+                            viewModel.deleteAction_bRank = nil
+                        }
                     }
                 if !bubble.sessions_.isEmpty {
                     deleteHistoryView
                         .onTapGesture {
-                            
+                            if !bubble.sessions_.isEmpty {
+                                viewModel.reset(bubble)
+                                viewModel.deleteAction_bRank = nil
+                            }
                         }
                 }
             }
