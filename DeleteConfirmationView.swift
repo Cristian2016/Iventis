@@ -9,6 +9,8 @@ import SwiftUI
 
 struct DeleteConfirmationView: View {
     @EnvironmentObject private var viewModel:ViewModel
+    @EnvironmentObject private var layoutViewModel:LayoutViewModel
+    
     let bubble:Bubble
     let metrics:Metrics
     
@@ -21,9 +23,13 @@ struct DeleteConfirmationView: View {
         let buttonHeight:CGFloat = 74
     }
     
-    init(_ bubble:Bubble, _ metrics:Metrics) {
+    init(_ bubble:Bubble) {
         self.bubble = bubble
+        
+        let bubbleColor = Color.bubbleColor(forName: bubble.color ?? "mint")
+        let metrics = Metrics(bubbleColor: bubbleColor)
         self.metrics = metrics
+        
     }
     
     // MARK: -
@@ -58,6 +64,7 @@ struct DeleteConfirmationView: View {
                     .fill(metrics.backgroundColor)
             }
         }
+//        .offset(x: 0, y: layoutViewModel.deleteActionViewOffset ?? 0)
     }
     
     // MARK: - Legos
@@ -92,13 +99,13 @@ struct DeleteConfirmationView: View {
 struct DeleteConfirmationView_Previews: PreviewProvider {
     static let bubble:Bubble = {
         let bubble = Bubble(context: PersistenceController.preview.viewContext)
-        bubble.color = "charcoal"
+        bubble.color = "orange"
         
         let session = Session(context: PersistenceController.preview.viewContext)
         bubble.sessions_ = [session]
         return bubble
     }()
     static var previews: some View {
-        DeleteConfirmationView(bubble, DeleteConfirmationView.Metrics(bubbleColor: .orange))
+        DeleteConfirmationView(bubble)
     }
 }
