@@ -56,6 +56,7 @@ class BackgroundTimer {
     enum Action {
         case start
         case pause
+        case kill
     }
     
     // MARK: - Public
@@ -64,6 +65,7 @@ class BackgroundTimer {
             case .start:
                 if state == .suspended { resume() } else { return }
             case .pause: suspend()
+            case .kill: killTimer()
         }
     }
 }
