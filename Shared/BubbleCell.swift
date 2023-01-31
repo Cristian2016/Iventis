@@ -35,6 +35,13 @@ struct BubbleCell: View {
             .overlay { if confirm_CalEventRemoved { calEventRemovedConfirmation }} //1
             
             .overlay { if !isBubbleRunning { hundredthsView }}
+            
+            HStack {
+                BorderlessLabel(title: "Undo Start", symbol: "arrow.uturn.backward")
+                Divider().frame(height: 20)
+                BorderlessLabel(title: "Add Tag", symbol: "tag")
+            }
+            .font(.title2)
         }
         .listRowSeparator(.hidden)
         .swipeActions(edge: .leading, allowsFullSwipe: true) {
@@ -339,3 +346,19 @@ extension BubbleCell {
         }
     }
 }
+
+//struct BubbleCell_Previews: PreviewProvider {
+//    static let bubble:Bubble = {
+//        let bubble = Bubble(context: PersistenceController.preview.viewContext)
+//        bubble.color = "red"
+//        bubble.currentClock = 340
+//        bubble.kind = .stopwatch
+//        bubble.initialClock = 0
+//        bubble.sdb = StartDelayBubble(context: PersistenceController.preview.viewContext)
+//        bubble.sdb?.currentDelay = 90
+//        return bubble
+//    }()
+//    static var previews: some View {
+//        BubbleCell(bubble, BubbleCell.Metrics(300))
+//    }
+//}
