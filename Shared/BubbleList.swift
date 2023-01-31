@@ -48,7 +48,7 @@ struct BubbleList: View {
                         .listSectionSeparator(value ? .visible : .hidden, edges: [.bottom])
                         if !section.id { bottomOverscoll }
                         if viewModel.showFavoritesOnly {
-                            Text("Show All Bubbles")
+                            Text("Show All")
                                 .listRowSeparator(.hidden)
                                 .font(.footnote)
                                 .foregroundColor(.secondary)
