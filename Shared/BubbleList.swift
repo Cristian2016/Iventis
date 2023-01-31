@@ -61,9 +61,7 @@ struct BubbleList: View {
                             Spacer()
                         }
                     }
-                    .refreshable {
-                        viewModel.showFavoritesOnly.toggle()
-                    }
+                    .refreshable { viewModel.showFavoritesOnly.toggle() } //11
                 }
             }
             
@@ -88,16 +86,6 @@ struct BubbleList: View {
     }
     
     // MARK: -
-    init() {
-        UITableView.appearance().showsVerticalScrollIndicator = false
-        _bubbles = SectionedFetchRequest<Bool, Bubble>(
-            entity: Bubble.entity(),
-            sectionIdentifier: \.isPinned,
-            sortDescriptors: BubbleList.descriptors,
-            predicate: nil,
-            animation: .default
-        )
-    }
     
     init(_ showFavoritesOnly: Bool) {
         var predicate:NSPredicate?
@@ -161,7 +149,7 @@ struct BubbleList: View {
 // MARK: -
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        BubbleList()
+        BubbleList(false)
     }
 }
 
