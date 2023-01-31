@@ -21,6 +21,7 @@ class ViewModel: ObservableObject {
         NotificationCenter.default.addObserver(forName: .fiveSecondsSignal, object: nil, queue: nil) { [weak self] notification in
             print("fiveSecondsSignal is main thread", Thread.isMainThread)
             self?.fiveSeconds_bRank = nil
+            self?.backgroundTimer.perform(.pause)
         }
     } //1
     
@@ -34,7 +35,8 @@ class ViewModel: ObservableObject {
     }() //1
     
     @Published var fiveSeconds_bRank:Int64? {didSet{
-        if fiveSeconds_bRank != nil { print("kick off 5 seconds timer") }
+        if fiveSeconds_bRank != nil { backgroundTimer.perform(.start) }
+        else { backgroundTimer.perform(.pause) }
     }} //1
     
     @Published var showFavoritesOnly = false
@@ -206,7 +208,9 @@ class ViewModel: ObservableObject {
                 newSession.addToPairs(newPair)
                 
                 if isDetailViewShowing { bubble.syncSmallBubbleCell = true }
-                fiveSeconds_bRank = bubble.rank //1
+                
+                //1 both
+                fiveSeconds_bRank = bubble.rank
                                 
             case .paused:  /* changes to running */
                 //create new pair, add it to currentSession
@@ -215,7 +219,9 @@ class ViewModel: ObservableObject {
                 bubble.lastSession?.addToPairs(newPair)
                 
                 if isDetailViewShowing { bubble.syncSmallBubbleCell = true }
-                fiveSeconds_bRank = bubble.rank //1
+                
+                //1 both
+                fiveSeconds_bRank = bubble.rank
                 
             case .running: /* changes to .paused */
                 let currentPair = bubble.lastPair
