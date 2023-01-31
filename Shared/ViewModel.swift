@@ -19,13 +19,20 @@ class ViewModel: ObservableObject {
     
     private var timer:Timer?
     
+    @objc private func handleFiveSecondsTimer() {
+        print(#function)
+        if fiveSeconds_bRank != nil { fiveSeconds_bRank = nil  }
+    }
+    
     @Published var fiveSeconds_bRank:Int64? {didSet{
         if fiveSeconds_bRank != nil {
-            print("fire timer")
-            self.timer = Timer.scheduledTimer(withTimeInterval: 5.0, repeats: true) { _ in
-                //executed when the timer fires :))))
-            }
-            self.timer?.fire()
+            self.timer = Timer.scheduledTimer(
+                timeInterval: 5.0,
+                target: self,
+                selector: #selector(handleFiveSecondsTimer),
+                userInfo: nil,
+                repeats: true
+            )
         }
         else { timer?.invalidate(); timer = nil }
     }} //1
