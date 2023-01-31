@@ -58,9 +58,16 @@ struct BubbleCell: View {
                     if bubble.sessions_.count == 1 && bubble.lastSession?.pairs_.count == 1 {
                         viewModel.deleteSession(bubble.lastSession!)
                         viewModel.fiveSeconds_bRank = nil
+                        //reset bubble clock
+                        bubble.currentClock = bubble.initialClock
+                        bubble.components = bubble.initialClock.timeComponentsAsStrings
+                        
                     } else {
                         viewModel.deletePair(bubble.lastPair)
                         viewModel.fiveSeconds_bRank = nil
+                        //reset bubble clock
+                        bubble.currentClock = bubble.initialClock
+                        bubble.components = bubble.initialClock.timeComponentsAsStrings
                     }
                 }
             Divider().frame(height: 20)
