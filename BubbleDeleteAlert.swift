@@ -53,7 +53,7 @@ struct BubbleDeleteAlert: View {
                         withAnimation {
                             viewModel.delete(bubble)
                             viewModel.deleteAction_bRank = nil
-                            viewModel.showUndoStartAddTagBar_bRank = nil //ViewModel 1
+                            viewModel.fiveSeconds_bRank = nil //ViewModel 1
                         }
                     }
                 if !bubble.sessions_.isEmpty {
@@ -62,7 +62,7 @@ struct BubbleDeleteAlert: View {
                             if !bubble.sessions_.isEmpty {
                                 viewModel.reset(bubble)
                                 viewModel.deleteAction_bRank = nil
-                                viewModel.showUndoStartAddTagBar_bRank = nil //ViewModel 1
+                                viewModel.fiveSeconds_bRank = nil //ViewModel 1
                             }
                         }
                 }

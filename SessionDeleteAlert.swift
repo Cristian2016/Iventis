@@ -64,7 +64,7 @@ struct SessionDeleteAlert: View {
                             viewModel.deleteSession(session)
                             viewModel.sessionToDelete = nil
                         }
-                        if viewModel.showUndoStartAddTagBar_bRank != nil { viewModel.showUndoStartAddTagBar_bRank = nil } //ViewModel 1
+                        if viewModel.fiveSeconds_bRank != nil { viewModel.fiveSeconds_bRank = nil } //ViewModel 1
                     }
             }
             .font(.system(size: 30).weight(.medium))

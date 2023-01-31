@@ -33,8 +33,8 @@ class ViewModel: ObservableObject {
         return timer
     }() //1
     
-    @Published var showUndoStartAddTagBar_bRank:Int64? {didSet{
-        if showUndoStartAddTagBar_bRank != nil { print("kick off 5 seconds timer") }
+    @Published var fiveSeconds_bRank:Int64? {didSet{
+        if fiveSeconds_bRank != nil { print("kick off 5 seconds timer") }
     }} //1
     
     @Published var showFavoritesOnly = false
@@ -206,7 +206,7 @@ class ViewModel: ObservableObject {
                 newSession.addToPairs(newPair)
                 
                 if isDetailViewShowing { bubble.syncSmallBubbleCell = true }
-                showUndoStartAddTagBar_bRank = bubble.rank //1
+                fiveSeconds_bRank = bubble.rank //1
                                 
             case .paused:  /* changes to running */
                 //create new pair, add it to currentSession
@@ -215,7 +215,7 @@ class ViewModel: ObservableObject {
                 bubble.lastSession?.addToPairs(newPair)
                 
                 if isDetailViewShowing { bubble.syncSmallBubbleCell = true }
-                showUndoStartAddTagBar_bRank = bubble.rank //1
+                fiveSeconds_bRank = bubble.rank //1
                 
             case .running: /* changes to .paused */
                 let currentPair = bubble.lastPair
@@ -236,7 +236,7 @@ class ViewModel: ObservableObject {
                     }
                 }
                 
-                if showUndoStartAddTagBar_bRank != nil { showUndoStartAddTagBar_bRank = nil } //1
+                if fiveSeconds_bRank != nil { fiveSeconds_bRank = nil } //1
                 
             case .finished: return
         }
@@ -313,7 +313,7 @@ class ViewModel: ObservableObject {
         //make sure no startDelayBubble displayed at this point
         removeDelay(for: bubble)
         
-        showUndoStartAddTagBar_bRank = nil //1
+        fiveSeconds_bRank = nil //1
         
         if bubble.state == .brandNew { return }
         
