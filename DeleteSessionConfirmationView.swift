@@ -46,7 +46,7 @@ struct DeleteSessionConfirmationView: View {
                 trashView
                 deleteSessionView
                     .overlay {
-                        Text("Session").foregroundColor(metrics.bubbleColor)
+                        Text("Session \(sessionRank)").foregroundColor(metrics.bubbleColor)
                     }
                     .onTapGesture {
                         withAnimation {
