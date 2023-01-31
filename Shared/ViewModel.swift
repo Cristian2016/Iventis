@@ -20,11 +20,11 @@ class ViewModel: ObservableObject {
     private func observeFiveSecondsSignalNotifications() {
         NotificationCenter.default.addObserver(forName: .fiveSecondsSignal, object: nil, queue: nil) { [weak self] notification in
             print("fiveSecondsSignal is main thread", Thread.isMainThread)
-            self?.bubbleTimer
+            self?.fiveSeconds_bRank = nil
         }
     } //1
     
-    private lazy var showUndoStartAddTagTimer:BackgroundTimer = {
+    private lazy var backgroundTimer:BackgroundTimer = {
         let timer = BackgroundTimer()
         timer.eventHandler = { [weak self] in
             NotificationCenter.default.post(name: .fiveSecondsSignal, object: nil)
