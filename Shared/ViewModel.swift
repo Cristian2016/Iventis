@@ -4,6 +4,7 @@
 //
 //  Created by Cristian Lapusan on 15.04.2022.
 //  CoreData constraints https://www.youtube.com/watch?v=NZIlmRSB8l8
+//1 Add Tag and Undo Start. User can undo start or tag activity within 5 seconds after starting the bubble
 
 import Foundation
 import SwiftUI
@@ -185,7 +186,7 @@ class ViewModel: ObservableObject {
                 newSession.addToPairs(newPair)
                 
                 if isDetailViewShowing { bubble.syncSmallBubbleCell = true }
-                showUndoStartAddTagBar_bRank = bubble.rank
+                showUndoStartAddTagBar_bRank = bubble.rank //1
                                 
             case .paused:  /* changes to running */
                 //create new pair, add it to currentSession
@@ -194,7 +195,7 @@ class ViewModel: ObservableObject {
                 bubble.lastSession?.addToPairs(newPair)
                 
                 if isDetailViewShowing { bubble.syncSmallBubbleCell = true }
-                showUndoStartAddTagBar_bRank = bubble.rank
+                showUndoStartAddTagBar_bRank = bubble.rank //1
                 
             case .running: /* changes to .paused */
                 let currentPair = bubble.lastPair
@@ -215,7 +216,7 @@ class ViewModel: ObservableObject {
                     }
                 }
                 
-                if showUndoStartAddTagBar_bRank != nil { showUndoStartAddTagBar_bRank = nil }
+                if showUndoStartAddTagBar_bRank != nil { showUndoStartAddTagBar_bRank = nil } //1
                 
             case .finished: return
         }
