@@ -115,9 +115,7 @@ extension CalendarManager {
                  end: lastPair.pause!,
                  session
         )
-        
-        
-        
+                
         //since this method is called on bThread, make sure to save CoreData on mThread
         DispatchQueue.main.async {
             session.isEventified = true
