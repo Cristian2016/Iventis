@@ -62,7 +62,10 @@ struct BubbleDeleteAlert: View {
                             if !bubble.sessions_.isEmpty {
                                 viewModel.reset(bubble)
                                 viewModel.deleteAction_bRank = nil
-                                viewModel.fiveSeconds_bRank = nil //ViewModel 1
+                                
+                                if viewModel.fiveSeconds_bRank == bubble.rank {
+                                    viewModel.fiveSeconds_bRank = nil
+                                }//ViewModel 1
                             }
                         }
                 }
