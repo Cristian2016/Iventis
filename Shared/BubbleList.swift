@@ -76,7 +76,11 @@ struct BubbleList: View {
                         }
                         .padding([.top], 4)
                     }
-                    .refreshable { viewModel.showFavoritesOnly.toggle() } //11
+                    .refreshable {
+                        DispatchQueue.main.async {
+                            viewModel.showFavoritesOnly.toggle()
+                        }
+                    } //11
                 }
             }
             
