@@ -48,13 +48,11 @@ struct BubbleList: View {
                         .listSectionSeparator(value ? .visible : .hidden, edges: [.bottom])
                         if !section.id { bottomOverscoll }
                         if viewModel.showFavoritesOnly {
-                            Text("\(Image(systemName: "arrow.down.app")) Show All")
+                            Text("\(Image(systemName: "arrow.down.app")) \(Image(systemName: "eye"))")
                                 .listRowSeparator(.hidden)
                                 .font(.footnote)
                                 .foregroundColor(.secondary)
-                                .onTapGesture {
-                                    viewModel.showFavoritesOnly = false
-                                }
+                                .onTapGesture { viewModel.showFavoritesOnly = false }
                                 .padding([.leading])
                         }
                     }
