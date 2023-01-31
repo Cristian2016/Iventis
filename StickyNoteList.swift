@@ -140,7 +140,7 @@ struct StickyNoteList: View {
         RoundedRectangle(cornerRadius: cornerRadius)
             .fill(Color.background3)
             .frame(width: size.width, height: size.height)
-            .standardShadow(false)
+            .standardShadow()
     }
     
     private var textField: some View {

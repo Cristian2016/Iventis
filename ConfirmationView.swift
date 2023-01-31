@@ -53,7 +53,7 @@ struct ConfirmationView: View {
             .background(
                 RoundedRectangle(cornerRadius: 14)
                     .fill(fillColor)
-                    .standardShadow(true)
+                    .standardShadow()
             )
         }
         .foregroundColor(.white)

@@ -124,7 +124,7 @@ struct PairCell: View {
                 RoundedRectangle(cornerRadius: 2)
                     .fill(Color.background2)
                     .frame(height: 44)
-                    .standardShadow(false)
+                    .standardShadow()
             }
             .opacity(pair.note_.isEmpty ? 0 : 1)
     }

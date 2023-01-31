@@ -40,7 +40,7 @@ struct ConfirmView: View {
             ZStack {
                 RoundedRectangle(cornerRadius: metrics.cornerRadius)
                     .fill(metrics.backgroundColor)
-                    .shadow(color: .black.opacity(0.3), radius: 2)
+                    .standardShadow()
             }
         )
         .allowsHitTesting(false)

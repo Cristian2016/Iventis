@@ -75,7 +75,7 @@ struct SessionDeleteAlert: View {
             .background {
                 RoundedRectangle(cornerRadius: metrics.backgroundRadius)
                     .fill(Color.background)
-                    .shadow(color: .black.opacity(0.3), radius: 2)
+                    .standardShadow()
             }
         }
     }
