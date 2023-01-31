@@ -12,6 +12,8 @@ import CoreData
 import MyPackage
 
 class ViewModel: ObservableObject {
+    @Published var showFavoritesOnly = false
+    
     @Published var showAddTagButton_bRank:Int? = nil
     
     ///MoreOptionsView

@@ -25,5 +25,7 @@ struct TimersApp: App {
 }
 
 struct ViewHierarchy:View {
-    var body: some View { BubbleList() }
+    @EnvironmentObject var viewModel:ViewModel
+    
+    var body: some View { BubbleList(viewModel.showFavoritesOnly) }
 }

@@ -54,6 +54,16 @@ struct BubbleList: View {
                     .toolbar { ToolbarItemGroup { buttonsBar }}
                     .padding(BubbleCell.padding) //9
                     .navigationDestination(for: Bubble.self) { detailView($0) }
+                    .background {
+                        VStack {
+                            FusedLabel(content: .init(title: "Toggle Favorites", symbol: "star.fill", isFilled: true))
+                            .padding([.top], 4)
+                            Spacer()
+                        }
+                    }
+                    .refreshable {
+                        viewModel.showFavoritesOnly.toggle()
+                    }
                 }
             }
             
@@ -85,6 +95,20 @@ struct BubbleList: View {
             sectionIdentifier: \.isPinned,
             sortDescriptors: BubbleList.descriptors,
             predicate: nil,
+            animation: .default
+        )
+    }
+    
+    init(_ showFavoritesOnly: Bool) {
+        var predicate:NSPredicate?
+        if showFavoritesOnly { predicate = NSPredicate(format: "isPinned == true")}
+        
+        UITableView.appearance().showsVerticalScrollIndicator = false
+        _bubbles = SectionedFetchRequest<Bool, Bubble>(
+            entity: Bubble.entity(),
+            sectionIdentifier: \.isPinned,
+            sortDescriptors: BubbleList.descriptors,
+            predicate: predicate,
             animation: .default
         )
     }
