@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import MyPackage
 
 struct DeleteSessionConfirmationView: View {
     @EnvironmentObject private var viewModel:ViewModel
@@ -50,6 +51,9 @@ struct DeleteSessionConfirmationView: View {
                     }
                     .onTapGesture {
                         withAnimation {
+                            viewModel.confirm_CalEventRemoved = session.bubble?.rank
+                            delayExecution(.now() + 3) { self.viewModel.confirm_CalEventRemoved = nil }
+                            
                             //⚠️ delete event from calendar first and then delete session from CoreData and Fused App
                             CalendarManager.shared.deleteEvent(with: session.eventID)
                             viewModel.deleteSession(session)
