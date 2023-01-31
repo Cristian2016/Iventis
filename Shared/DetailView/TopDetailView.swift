@@ -42,6 +42,7 @@ struct TopDetailView:View {
                                 withAnimation { proxy.scrollTo(sessionRank, anchor: .center) }
                             }
                             .onLongPressGesture {
+                                UserFeedback.singleHaptic(.heavy)
                                 viewModel.sessionToDelete = (session, sessionRank)
                             }
                             .onReceive(NotificationCenter.default.publisher(for: .selectedTab)) {
