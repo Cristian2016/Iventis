@@ -42,7 +42,7 @@ struct TopDetailView:View {
                                 withAnimation { proxy.scrollTo(sessionRank, anchor: .center) }
                             }
                             .onLongPressGesture {
-                                viewModel.sessionToDelete = session
+                                viewModel.sessionToDelete = (session, sessionRank)
                             }
                             .onReceive(NotificationCenter.default.publisher(for: .selectedTab)) {
                                 let tab = String($0.userInfo!["selectedTab"] as! Int - 1)

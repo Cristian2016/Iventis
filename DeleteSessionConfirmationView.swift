@@ -12,6 +12,7 @@ struct DeleteSessionConfirmationView: View {
     @EnvironmentObject private var layoutViewModel:LayoutViewModel
     
     let session:Session
+    let sessionRank:String
     let metrics:Metrics
     
     struct Metrics {
@@ -23,8 +24,9 @@ struct DeleteSessionConfirmationView: View {
         let buttonHeight:CGFloat = 74
     }
     
-    init(_ session:Session) {
+    init(_ session:Session, _ sessionRank:String) {
         self.session = session
+        self.sessionRank = sessionRank
         
         let bubbleColor = Color.bubbleColor(forName: session.bubble?.color ?? "mint")
         let metrics = Metrics(bubbleColor: bubbleColor)
@@ -60,6 +62,7 @@ struct DeleteSessionConfirmationView: View {
                 RoundedRectangle(cornerRadius: metrics.backgroundRadius)
                     .strokeBorder(metrics.bubbleColor, lineWidth: 4)
             }
+            .padding(-1)
             .background {
                 RoundedRectangle(cornerRadius: metrics.backgroundRadius)
                     .fill(.white)
