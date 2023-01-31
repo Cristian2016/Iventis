@@ -99,6 +99,6 @@ struct DeleteSessionConfirmationView_Previews: PreviewProvider {
         return session
     }()
     static var previews: some View {
-        DeleteSessionConfirmationView(session)
+        DeleteSessionConfirmationView(session, "2")
     }
 }

@@ -31,8 +31,8 @@ struct UnitedViewHierarchy: View {
                 DeleteActionView(bubble)
             }
             
-            if let session = viewModel.sessionToDelete {
-                DeleteSessionConfirmationView(session, viewModel.sessionToDelete.1!)
+            if let session = viewModel.sessionToDelete?.0 {
+                DeleteSessionConfirmationView(session, viewModel.sessionToDelete!.1)
             }
             
             if bubbleNotesShowing { BubbleStickyNoteList($viewModel.notesList_bRank) }
