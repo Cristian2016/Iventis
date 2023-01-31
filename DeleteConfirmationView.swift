@@ -40,7 +40,15 @@ struct DeleteConfirmationView: View {
             VStack (spacing:8) {
                 trashView
                 deleteBubbleView
-                if !bubble.sessions_.isEmpty { deleteHistoryView }
+                    .onTapGesture {
+                        
+                    }
+                if !bubble.sessions_.isEmpty {
+                    deleteHistoryView
+                        .onTapGesture {
+                            
+                        }
+                }
             }
             .frame(width: metrics.width)
             .padding()
