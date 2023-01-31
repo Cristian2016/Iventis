@@ -66,10 +66,10 @@ struct BubbleList: View {
                         VStack(spacing: 4) {
                             let condition = viewModel.showFavoritesOnly
                             let title = condition ?  "Show All" : "Show Pinned Only"
-                            let symbol = condition ? "eye" : "eye"
+//                            let symbol = condition ? "eye" : "eye"
                             let color = condition ? .secondary : Color.orange
                             
-                            FusedLabel(content: .init(title: title, symbol: condition, color: color, isFilled: true))
+                            FusedLabel(content: .init(title: title, symbol: "eye", color: color, isFilled: true))
                             Spacer()
                         }
                         .padding([.top], 4)
