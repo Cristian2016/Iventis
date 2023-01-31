@@ -72,6 +72,7 @@ struct BubbleDeleteAlert: View {
             .background {
                 RoundedRectangle(cornerRadius: metrics.backgroundRadius)
                     .fill(metrics.backgroundColor)
+                    .standardShadow()
             }
         }
 //        .offset(x: 0, y: layoutViewModel.deleteActionViewOffset ?? 0)
