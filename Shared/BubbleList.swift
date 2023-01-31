@@ -60,9 +60,10 @@ struct BubbleList: View {
                             : "Show Pinned Only"
                             let symbol = viewModel.showFavoritesOnly ? "pin.slash.fill" : "pin.fill"
                             let color = viewModel.showFavoritesOnly ? .secondary : Color.orange
-                            FusedLabel(content: .init(title: title, symbol: symbol, color: color, isFilled: true))
                             
-                            .padding([.top], 4)
+                            FusedLabel(content: .init(title: title, symbol: symbol, color: color, isFilled: true))
+                            Text("Pull down to refresh")
+                                .padding([.top], 4)
                             Spacer()
                         }
                     }
