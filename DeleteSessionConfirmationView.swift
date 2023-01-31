@@ -62,8 +62,12 @@ struct DeleteSessionConfirmationView: View {
                 RoundedRectangle(cornerRadius: metrics.backgroundRadius)
                     .stroke(metrics.backgroundColor, lineWidth: 4)
             }
+            .background {
+                RoundedRectangle(cornerRadius: metrics.backgroundRadius)
+                    .fill(.white)
+                    .shadow(color: .black, radius: 2)
+            }
         }
-//        .offset(x: 0, y: layoutViewModel.deleteActionViewOffset ?? 0)
     }
     
     // MARK: - Legos
