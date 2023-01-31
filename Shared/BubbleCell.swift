@@ -36,18 +36,20 @@ struct BubbleCell: View {
             
             .overlay { if !isBubbleRunning { hundredthsView }}
             
-            HStack {
-                BorderlessLabel(title: "Undo Start", symbol: "arrow.uturn.backward")
-                    .onTapGesture {
-                        print("Undo Start")
-                    }
-                Divider().frame(height: 20)
-                BorderlessLabel(title: "Add Tag", symbol: "tag")
-                    .onTapGesture {
-                        print("Add Tag")
-                    }
+            if viewModel.showUndoStartAddTagBar_bRank == bubble.rank {
+                HStack {
+                    BorderlessLabel(title: "Undo Start", symbol: "arrow.uturn.backward")
+                        .onTapGesture {
+                            print("Undo Start")
+                        }
+                    Divider().frame(height: 20)
+                    BorderlessLabel(title: "Add Tag", symbol: "tag")
+                        .onTapGesture {
+                            print("Add Tag")
+                        }
+                }
+                .font(.title)
             }
-            .font(.title)
         }
         .listRowSeparator(.hidden)
         .swipeActions(edge: .leading, allowsFullSwipe: true) {

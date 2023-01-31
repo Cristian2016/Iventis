@@ -12,7 +12,7 @@ import CoreData
 import MyPackage
 
 class ViewModel: ObservableObject {
-    @Published var showUndoStartAddTagBar = false
+    @Published var showUndoStartAddTagBar_bRank:Int64?
     
     @Published var showFavoritesOnly = false
     
@@ -185,7 +185,7 @@ class ViewModel: ObservableObject {
                 newSession.addToPairs(newPair)
                 
                 if isDetailViewShowing { bubble.syncSmallBubbleCell = true }
-                showUndoStartAddTagBar = true
+                showUndoStartAddTagBar_bRank = bubble.rank
                                 
             case .paused:  /* changes to running */
                 //create new pair, add it to currentSession
@@ -194,7 +194,7 @@ class ViewModel: ObservableObject {
                 bubble.lastSession?.addToPairs(newPair)
                 
                 if isDetailViewShowing { bubble.syncSmallBubbleCell = true }
-                showUndoStartAddTagBar = true
+                showUndoStartAddTagBar_bRank = bubble.rank
                 
             case .running: /* changes to .paused */
                 let currentPair = bubble.lastPair
@@ -215,7 +215,7 @@ class ViewModel: ObservableObject {
                     }
                 }
                 
-                if showUndoStartAddTagBar { showUndoStartAddTagBar = false }
+                if showUndoStartAddTagBar_bRank != nil { showUndoStartAddTagBar_bRank = nil }
                 
             case .finished: return
         }
