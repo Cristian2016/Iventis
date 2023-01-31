@@ -313,7 +313,7 @@ class ViewModel: ObservableObject {
         //make sure no startDelayBubble displayed at this point
         removeDelay(for: bubble)
         
-        if viewModel.showUndoStartAddTagBar_bRank != nil { viewModel.showUndoStartAddTagBar_bRank = nil } //1
+        if showUndoStartAddTagBar_bRank == bubble.rank { showUndoStartAddTagBar_bRank = nil } //1
         
         if bubble.state == .brandNew { return }
         
