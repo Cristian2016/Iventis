@@ -58,11 +58,10 @@ struct BubbleList: View {
                         VStack {
                             let title = viewModel.showFavoritesOnly ?  "Show All" : "Show Only Favorites"
                             let symbol = viewModel.showFavoritesOnly ? "star.slash.fill" : "star.fill"
-                            FusedLabel(content: .init(title: title, symbol: symbol, isFilled: true))
+                            let color = viewModel.showFavoritesOnly ? .secondary : Color.orange
+                            FusedLabel(content: .init(title: title, symbol: symbol, color: color, isFilled: true))
+                            
                             .padding([.top], 4)
-                            .onTapGesture {
-                                print("I was tapped")
-                            }
                             Spacer()
                         }
                     }
