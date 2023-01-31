@@ -43,7 +43,7 @@ struct DeleteActionView: View {
                                         viewModel.delete(bubble!)
                                         viewModel.deleteAction_bRank = nil
                                     } }
-                                deleteHistoryView
+                                deleteSessionsView
                                     .onTapGesture { withAnimation {
                                         if !bubble!.sessions_.isEmpty {
                                             viewModel.reset(bubble!)
@@ -81,12 +81,12 @@ struct DeleteActionView: View {
             .overlay { Text("Bubble").foregroundColor(.white) }
     }
     
-    private var deleteHistoryView: some View {
-        let historyAvailable = bubble?.sessions_.isEmpty ?? false
+    private var deleteSessionsView: some View {
+        let sessionsAvailable = bubble?.sessions_.isEmpty ?? false
         return RoundedRectangle(cornerRadius: buttonRadius)
-            .foregroundColor(historyAvailable ? bubbleColor.opacity(0.3) : bubbleColor)
-            .overlay { Text("History \(bubble?.sessions_.count ?? 0)")
-                .foregroundColor(historyAvailable ? .white.opacity(0.3) :  .white) }
+            .foregroundColor(sessionsAvailable ? bubbleColor.opacity(0.3) : bubbleColor)
+            .overlay { Text("Sessions \(bubble?.sessions_.count ?? 0)")
+                .foregroundColor(sessionsAvailable ? .white.opacity(0.3) :  .white) }
     }
     
     // MARK: - Modifiers
