@@ -24,7 +24,7 @@ class ViewModel: ObservableObject {
         if fiveSeconds_bRank != nil { fiveSeconds_bRank = nil  }
     }
     
-    @Published var fiveSeconds_bRank:Int64? {didSet{
+    @Published var fiveSeconds_bRank:Int64? { didSet{
         if fiveSeconds_bRank != nil {
             self.timer = Timer.scheduledTimer( timeInterval: 5.0, target: self,
                                                selector: #selector(handleFiveSecondsTimer),

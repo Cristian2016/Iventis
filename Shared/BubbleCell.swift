@@ -60,7 +60,9 @@ struct BubbleCell: View {
             Divider().frame(height: 20)
             BorderlessLabel(title: "Add Tag", symbol: "tag")
                 .onTapGesture {
-                    print("Add Tag")
+                    UserFeedback.singleHaptic(.light)
+                    viewModel.pairOfNotesList = bubble.lastPair
+                    PersistenceController.shared.save()
                 }
         }
         .font(.title)
