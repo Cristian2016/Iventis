@@ -164,6 +164,13 @@ class ViewModel: ObservableObject {
         try? viewContext.save()
     }
     
+    func deletePair(_ pair:Pair?) {
+        guard let pair = pair else { return }
+        let viewContext = PersistenceController.shared.viewContext
+        viewContext.delete(pair)
+        try? viewContext.save()
+    }
+    
     ///delete all sessions and pairs and make it brandNew
     func reset(_ bubble:Bubble) {
         guard !bubble.sessions_.isEmpty else { return }
