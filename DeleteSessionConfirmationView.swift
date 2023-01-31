@@ -33,10 +33,7 @@ struct DeleteSessionConfirmationView: View {
     
     // MARK: -
     ///dismiss view
-    private func cancelDeleteAction() {
-        viewModel.deleteAction_bRank = nil
-        layoutViewModel.deleteActionViewOffset = nil
-    }
+    private func cancelDeleteAction() { viewModel.sessionToDelete = nil }
     
     //// MARK: -
     var body: some View {
@@ -52,6 +49,7 @@ struct DeleteSessionConfirmationView: View {
                     .onTapGesture {
                         withAnimation {
                             viewModel.deleteSession(session)
+                            viewModel.sessionToDelete = nil
                         }
                     }
             }

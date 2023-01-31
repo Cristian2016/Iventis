@@ -46,6 +46,8 @@ class ViewModel: ObservableObject {
     @Published var notesList_bRank:Int? = nil //bubble rank
     @Published var isPaletteShowing = false
     
+    @Published var sessionToDelete:Session?
+    
     @Published var rankOfSelectedBubble:Int?
     @Published var path = [Bubble]()
     @Published var idOfSelectedBubble:Bubble.ID?

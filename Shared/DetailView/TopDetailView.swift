@@ -41,7 +41,9 @@ struct TopDetailView:View {
                                 //use the same rank info you are sending to scroll self in the center
                                 withAnimation { proxy.scrollTo(sessionRank, anchor: .center) }
                             }
-                            .onLongPressGesture { viewModel.deleteSession(session) }
+                            .onLongPressGesture {
+                                viewModel.sessionToDelete = session
+                            }
                             .onReceive(NotificationCenter.default.publisher(for: .selectedTab)) {
                                 let tab = String($0.userInfo!["selectedTab"] as! Int - 1)
                                 withAnimation { proxy.scrollTo(tab, anchor: .trailing) }

@@ -30,6 +30,11 @@ struct UnitedViewHierarchy: View {
                 let bubble = viewModel.bubble(for: Int(viewModel.deleteAction_bRank!))
                 DeleteActionView(bubble)
             }
+            
+            if let session = viewModel.sessionToDelete {
+                DeleteSessionConfirmationView(session)
+            }
+            
             if bubbleNotesShowing { BubbleStickyNoteList($viewModel.notesList_bRank) }
             if let pair = viewModel.pairOfNotesList { PairStickyNoteList(pair) }
             if let sdb = viewModel.theOneAndOnlyEditedSDB, let bubble = sdb.bubble {
