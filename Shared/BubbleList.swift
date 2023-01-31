@@ -62,20 +62,7 @@ struct BubbleList: View {
                     .toolbar { ToolbarItemGroup { buttonsBar }}
                     .padding(BubbleCell.padding) //9
                     .navigationDestination(for: Bubble.self) { detailView($0) }
-                    .background { //List.background
-                        VStack(spacing: 4) {
-                            let condition = viewModel.showFavoritesOnly
-                            let title = condition ?  "Show All" : "Show Pinned Only"
-                            let symbol = condition ? "eye" : "pin"
-                            let color = condition ? .secondary : Color.orange
-                            
-                            BorderlessLabel(title: title, symbol: symbol,color: color)
-                            Image(systemName: "chevron.compact.down")
-                                .foregroundColor(color)
-                            Spacer()
-                        }
-                        .padding([.top], 4)
-                    }
+                    .background { refresherView }
                     .refreshable { viewModel.showFavoritesOnly.toggle() } //11
                 }
             }
@@ -85,6 +72,21 @@ struct BubbleList: View {
     }
     
     // MARK: - Lego
+    private var refresherView:some View {
+        VStack(spacing: 4) {
+            let condition = viewModel.showFavoritesOnly
+            let title = condition ?  "Show All" : "Show Pinned Only"
+            let symbol = condition ? "eye" : "pin"
+            let color = condition ? .secondary : Color.orange
+            
+            BorderlessLabel(title: title, symbol: symbol,color: color)
+            Image(systemName: "chevron.compact.down")
+                .foregroundColor(color)
+            Spacer()
+        }
+        .padding([.top], 4)
+    }
+    
     private func detailView(_ bubble:Bubble) -> some View {
         GeometryReader {
             let metrics = BubbleCell.Metrics($0.size.width) //10
