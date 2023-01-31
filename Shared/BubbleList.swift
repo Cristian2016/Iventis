@@ -48,7 +48,7 @@ struct BubbleList: View {
                         .listSectionSeparator(value ? .visible : .hidden, edges: [.bottom])
                         if !section.id { bottomOverscoll }
                         if viewModel.showFavoritesOnly {
-                            Text("\(Image(systemName: "eye")) Show All")
+                            Text("\(Image(systemName: "eye")) Show Unpinned")
                                 .listRowSeparator(.hidden)
                                 .font(.footnote)
                                 .foregroundColor(.secondary)
