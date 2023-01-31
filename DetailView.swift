@@ -3,7 +3,7 @@
 //  Timers
 //
 //  Created by Cristian Lapusan on 07.05.2022.
-//
+//1 visible only when scrolling vertically. If it's visible horizontally, it will show scoll indicator when scrolling in the TopDetailView, which doesn't look good
 
 import SwiftUI
 import MyPackage
@@ -44,7 +44,7 @@ struct DetailView: View {
                 }
             }
             .listStyle(.plain)
-            .scrollIndicators(.visible, axes: .vertical) //
+            .scrollIndicators(.visible, axes: .vertical) //1
         }
     }
 }
