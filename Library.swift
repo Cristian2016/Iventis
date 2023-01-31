@@ -7,7 +7,9 @@
 
 import SwiftUI
 
-
+extension Notification.Name {
+    static let fiveSecondsSignal = Notification.Name("fiveSecondsSignal")
+} //1 ViewModel 1//
 
 extension UserDefaults {
     static let shared = UserDefaults(suiteName: .appGroupName)!

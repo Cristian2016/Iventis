@@ -13,6 +13,15 @@ import CoreData
 import MyPackage
 
 class ViewModel: ObservableObject {
+    
+    lazy var showUndoStartAddTagTimer:BackgroundTimer = {
+        let timer = BackgroundTimer()
+        timer.eventHandler = { [weak self] in
+            NotificationCenter.default.post(name: .fiveSecondsSignal, object: nil)
+        }
+        return timer
+    }()
+    
     @Published var showUndoStartAddTagBar_bRank:Int64? {didSet{
         if showUndoStartAddTagBar_bRank != nil { print("kick off 5 seconds timer") }
     }} //1

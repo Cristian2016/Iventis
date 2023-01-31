@@ -41,6 +41,7 @@
 		1F5F4A752809409600AF3442 /* Bubble Properties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5F4A722809409600AF3442 /* Bubble Properties.swift */; };
 		1F5F4A992809456E00AF3442 /* BubbleList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5F4A982809456E00AF3442 /* BubbleList.swift */; };
 		1F5F4A9D280945C700AF3442 /* BubbleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5F4A9C280945C700AF3442 /* BubbleCell.swift */; };
+		1F615B6329899E210006DB0B /* BackgroundTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F615B6229899E210006DB0B /* BackgroundTimer.swift */; };
 		1F61BE052822BAAA00B773F9 /* DeleteActionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F61BE042822BAAA00B773F9 /* DeleteActionView.swift */; };
 		1F62194028293B5100C9B175 /* PairBubbleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F62193F28293B5100C9B175 /* PairBubbleCell.swift */; };
 		1F641FFE281FF70100413E31 /* BottomDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F641FFD281FF70100413E31 /* BottomDetailView.swift */; };
@@ -167,6 +168,7 @@
 		1F5F4A92280941D900AF3442 /* Timers (iOS).entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Timers (iOS).entitlements"; sourceTree = "<group>"; };
 		1F5F4A982809456E00AF3442 /* BubbleList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BubbleList.swift; sourceTree = "<group>"; };
 		1F5F4A9C280945C700AF3442 /* BubbleCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BubbleCell.swift; sourceTree = "<group>"; };
+		1F615B6229899E210006DB0B /* BackgroundTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundTimer.swift; sourceTree = "<group>"; };
 		1F61BE042822BAAA00B773F9 /* DeleteActionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteActionView.swift; sourceTree = "<group>"; };
 		1F62193F28293B5100C9B175 /* PairBubbleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PairBubbleCell.swift; sourceTree = "<group>"; };
 		1F641FFD281FF70100413E31 /* BottomDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomDetailView.swift; sourceTree = "<group>"; };
@@ -306,6 +308,7 @@
 		1F5F4A4228093FAC00AF3442 = {
 			isa = PBXGroup;
 			children = (
+				1F615B6229899E210006DB0B /* BackgroundTimer.swift */,
 				1FA03CA62989250F00AF7395 /* BubbleDeleteAlert.swift */,
 				1FA03CAA29893E6200AF7395 /* SessionDeleteAlert.swift */,
 				1F05B7C72989158E0022FD23 /* BorderlessLabel.swift */,
@@ -577,6 +580,7 @@
 				1F20807C2836111600FD35D6 /* BSavedNote.swift in Sources */,
 				1FA03CA72989251000AF7395 /* BubbleDeleteAlert.swift in Sources */,
 				1FDB9F15287DA5040028E121 /* SDBPair Properties.swift in Sources */,
+				1F615B6329899E210006DB0B /* BackgroundTimer.swift in Sources */,
 				1F61BE052822BAAA00B773F9 /* DeleteActionView.swift in Sources */,
 				1F684823287DBEBB00D8BF81 /* StartDelaySubview.swift in Sources */,
 				1F9BE0A9280BE14100F87EFA /* PaletteView.swift in Sources */,
