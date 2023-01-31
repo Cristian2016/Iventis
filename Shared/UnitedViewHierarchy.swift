@@ -30,8 +30,6 @@ struct UnitedViewHierarchy: View {
                 if let bubble = viewModel.bubble(for: Int(viewModel.deleteAction_bRank!)) {
                     DeleteConfirmationView(bubble)
                 }
-//                DeleteActionView(bubble)
-                
             }
             
             if let session = viewModel.sessionToDelete?.0 {

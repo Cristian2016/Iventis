@@ -17,10 +17,10 @@ struct DeleteConfirmationView: View {
     struct Metrics {
         let backgroundRadius = CGFloat(30)
         let backgroundColor = Color("deleteActionViewBackground")
-        let width = CGFloat(170)
+        let width = CGFloat(180)
         let buttonRadius = CGFloat(13)
         let bubbleColor:Color
-        let buttonHeight:CGFloat = 74
+        let buttonHeight:CGFloat = 80
     }
     
     init(_ bubble:Bubble) {
@@ -109,7 +109,7 @@ struct DeleteConfirmationView_Previews: PreviewProvider {
         bubble.color = "orange"
         
         let session = Session(context: PersistenceController.preview.viewContext)
-//        bubble.sessions_ = [session]
+        bubble.sessions_ = [session]
         return bubble
     }()
     static var previews: some View {
