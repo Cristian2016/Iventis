@@ -30,6 +30,7 @@ struct SmallAlertHintView: View {
             .padding(6)
             .background(.yellow)
             .frame(maxWidth: 400)
+            .dynamicTypeSize(.large...DynamicTypeSize.accessibility2)
         }
     }
 }
