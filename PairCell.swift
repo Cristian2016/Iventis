@@ -160,6 +160,7 @@ struct PairCell: View {
             //date
             Text(DateFormatter.date.string(from: pair.start ?? Date()))
                 .foregroundColor(.secondary)
+                .font(.system(size: 22))
         }
     }
     
@@ -175,6 +176,7 @@ struct PairCell: View {
                     if !startAndPauseOnSameDay {
                         Text(DateFormatter.date.string(from: pause))
                             .foregroundColor(.secondary)
+                            .font(.system(size: 22))
                     }
                 }
         }
