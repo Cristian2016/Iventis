@@ -20,6 +20,7 @@ class ViewModel: ObservableObject {
     private func observeFiveSecondsSignalNotifications() {
         NotificationCenter.default.addObserver(forName: .fiveSecondsSignal, object: nil, queue: nil) { [weak self] notification in
             print("fiveSecondsSignal is main thread", Thread.isMainThread)
+            self?.bubbleTimer
         }
     } //1
     

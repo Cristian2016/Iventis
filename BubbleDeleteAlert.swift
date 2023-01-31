@@ -61,6 +61,7 @@ struct BubbleDeleteAlert: View {
                             if !bubble.sessions_.isEmpty {
                                 viewModel.reset(bubble)
                                 viewModel.deleteAction_bRank = nil
+                                viewModel.showUndoStartAddTagBar_bRank = nil
                             }
                         }
                 }
