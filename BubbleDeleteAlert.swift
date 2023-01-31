@@ -41,6 +41,11 @@ struct BubbleDeleteAlert: View {
         layoutViewModel.deleteActionViewOffset = nil
     }
     
+    //ViewModel 1
+    private var func removeFiveSecondsBar() {
+        if viewModel.fiveSeconds_bRank == bubble.rank { viewModel.fiveSeconds_bRank = nil }
+    }
+    
     //// MARK: -
     var body: some View {
         ZStack {
@@ -53,10 +58,7 @@ struct BubbleDeleteAlert: View {
                         withAnimation {
                             viewModel.delete(bubble)
                             viewModel.deleteAction_bRank = nil
-                            
-                            if viewModel.fiveSeconds_bRank == bubble.rank {
-                                viewModel.fiveSeconds_bRank = nil
-                            }//ViewModel 1
+                            removeFiveSecondsBar()
                         }
                     }
                 if !bubble.sessions_.isEmpty {
