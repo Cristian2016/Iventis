@@ -14,8 +14,8 @@ import MyPackage
 
 class ViewModel: ObservableObject {
     @Published var showUndoStartAddTagBar_bRank:Int64? {didSet{
-        print("kick off 5 seconds timer")
-    }}
+        if showUndoStartAddTagBar_bRank != nil { print("kick off 5 seconds timer") }
+    }} //1
     
     @Published var showFavoritesOnly = false
     
