@@ -40,6 +40,11 @@ struct SessionDeleteAlert: View {
     ///dismiss view
     private func cancelDeleteAction() { viewModel.sessionToDelete = nil }
     
+    //ViewModel 1
+    private func removeFiveSecondsBar() {
+        if viewModel.fiveSeconds_bRank == session.bubble?.rank { viewModel.fiveSeconds_bRank = nil }
+    }
+    
     //// MARK: -
     var body: some View {
         ZStack {
