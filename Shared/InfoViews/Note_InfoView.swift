@@ -30,9 +30,9 @@ struct Note_InfoView: View {
             
             VStack (alignment: .leading) {
                 Text("\(Image(systemName: "trash")) Delete")
-                Text("\(Image(systemName: "arrow.left.circle")) Swipe")
+                Text("\(Image(systemName: "arrow.left.circle")) Swipe Outside")
                     .foregroundColor(.lightGray)
-                Text("Outside Table")
+                Text("Table")
                     .foregroundColor(.lightGray)
             }
         }
