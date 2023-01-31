@@ -21,22 +21,16 @@ class ViewModel: ObservableObject {
         NotificationCenter.default.addObserver(forName: .fiveSecondsSignal, object: nil, queue: nil) { [weak self] notification in
             print("fiveSecondsSignal is main thread", Thread.isMainThread)
             self?.fiveSeconds_bRank = nil
-            self?.backgroundTimer.perform(.pause)
+            self?.timer?.invalidate()
+            self?.timer = nil
         }
     } //1
     
-    private lazy var backgroundTimer:BackgroundTimer = {
-        let timer = BackgroundTimer()
-        timer.eventHandler = { [weak self] in
-            NotificationCenter.default.post(name: .fiveSecondsSignal, object: nil)
-        }
-        self.observeFiveSecondsSignalNotifications()
-        return timer
-    }() //1
+    private var timer:Timer?
     
     @Published var fiveSeconds_bRank:Int64? {didSet{
-        if fiveSeconds_bRank != nil { backgroundTimer.perform(.start) }
-        else { backgroundTimer.perform(.pause) }
+        if fiveSeconds_bRank != nil { timer?.fire() }
+        else { timer?.invalidate(); timer = nil }
     }} //1
     
     @Published var showFavoritesOnly = false
