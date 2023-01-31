@@ -53,10 +53,10 @@ struct BubbleList: View {
                                 .font(.footnote)
                                 .foregroundColor(.secondary)
                                 .onTapGesture { viewModel.showFavoritesOnly = false }
-                                .padding([.leading])
+                                .padding([.leading], 4)
                         }
                     }
-                    .scrollIndicators(.hidden)
+                    .scrollIndicators(.hidden)ok
                     .listStyle(.plain)
                     .toolbarBackground(.ultraThinMaterial)
                     .toolbar { ToolbarItemGroup { buttonsBar }}
