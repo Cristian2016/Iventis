@@ -55,7 +55,11 @@ struct BubbleCell: View {
         HStack {
             BorderlessLabel(title: "Undo Start", symbol: "arrow.uturn.backward")
                 .onTapGesture {
-                    print("Undo Start")
+                    if bubble.sessions_.count == 1 && bubble.lastSession?.pairs_.count == 1 {
+                        print("delete session and pair!")
+                    } else {
+                        print("delete last pair only. do not delete session")
+                    }
                 }
             Divider().frame(height: 20)
             BorderlessLabel(title: "Add Tag", symbol: "tag")
