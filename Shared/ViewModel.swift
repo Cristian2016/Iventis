@@ -129,6 +129,15 @@ class ViewModel: ObservableObject {
     }
     
     func deleteSession(_ session:Session) {
+        guard let bubble = session.bubble else { fatalError() }
+        if bubble.lastSession == session {
+            bubble.syncSmallBubbleCell = false
+            
+            //reset bubble clock
+            bubble.currentClock = bubble.initialClock
+            bubble.components = bubble.initialClock.timeComponentsAsStrings
+        }
+        
         let viewContext = PersistenceController.shared.viewContext
         viewContext.delete(session)
         try? viewContext.save()
