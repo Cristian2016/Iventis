@@ -91,9 +91,7 @@ class ViewModel: ObservableObject {
         updateCurrentClock(of: bubbles)
         observe_delayReachedZero_Notification()
     }
-    
-    deinit { NotificationCenter.default.removeObserver(self) }
-    
+        
     // MARK: -
     private func updateCurrentClock(of bubbles:[Bubble]?) {
         delayExecution(.now() + 0.0001) {

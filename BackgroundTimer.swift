@@ -12,7 +12,7 @@ class BackgroundTimer {
     deinit { killTimer() }
     
     ///event handler called every second
-    private let updateFrequency:Double = 1.0 /* every second? */
+    private let updateFrequency:Double = 5.0 /* every second? */
         
     let queue = DispatchQueue(label: "BackgroundTimer", attributes: .concurrent)
     
