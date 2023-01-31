@@ -66,10 +66,12 @@ struct BubbleList: View {
                         VStack(spacing: 4) {
                             let condition = viewModel.showFavoritesOnly
                             let title = condition ?  "Show All" : "Show Pinned Only"
-//                            let symbol = condition ? "eye" : "eye"
+                            let symbol = condition ? "eye" : "pin"
                             let color = condition ? .secondary : Color.orange
                             
-                            FusedLabel(content: .init(title: title, symbol: "eye", color: color, isFilled: true))
+                            BorderlessLabel(title: title, symbol: symbol,color: color)
+                            Image(systemName: "chevron.compact.down")
+                                .foregroundColor(color)
                             Spacer()
                         }
                         .padding([.top], 4)

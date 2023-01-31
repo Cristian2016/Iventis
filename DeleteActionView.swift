@@ -71,7 +71,7 @@ struct DeleteActionView: View {
     // MARK: - Legos
     private var trashView:some View {
         HStack (alignment:.firstTextBaseline, spacing:2) {
-            Image(systemName: "trash.fill")
+            Image(systemName: "trash")
             Text("Delete")
         }
         .modifier(TrashModifier())
