@@ -54,7 +54,7 @@ struct DeleteConfirmationView: View {
                         }
                     }
                 if !bubble.sessions_.isEmpty {
-                    deleteHistoryView
+                    deleteSessionsView
                         .onTapGesture {
                             if !bubble.sessions_.isEmpty {
                                 viewModel.reset(bubble)
@@ -91,12 +91,12 @@ struct DeleteConfirmationView: View {
             .frame(height: metrics.buttonHeight)
     }
     
-    private var deleteHistoryView: some View {
-        let historyAvailable = bubble.sessions_.isEmpty
+    private var deleteSessionsView: some View {
+        let sessionsAvailable = bubble.sessions_.isEmpty
         return RoundedRectangle(cornerRadius: metrics.buttonRadius)
-            .foregroundColor(historyAvailable ? metrics.bubbleColor.opacity(0.3) : metrics.bubbleColor)
-            .overlay { Text("History \(bubble.sessions_.count)")
-                .foregroundColor(historyAvailable ? .white.opacity(0.3) :  .white) }
+            .foregroundColor(sessionsAvailable ? metrics.bubbleColor.opacity(0.3) : metrics.bubbleColor)
+            .overlay { Text("Sessions \(bubble.sessions_.count)")
+                .foregroundColor(sessionsAvailable ? .white.opacity(0.3) :  .white) }
             .frame(height: metrics.buttonHeight)
     }
     

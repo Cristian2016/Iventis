@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct EmptyHistoryAlertView: View {
+struct NoSessionsAlertView: View {
     var body: some View {
         VStack (alignment:.leading) {
             Text("No History")
@@ -22,8 +22,8 @@ struct EmptyHistoryAlertView: View {
     }
 }
 
-struct EmptyHistoryAlertView_Previews: PreviewProvider {
+struct NoSessionsAlertView_Previews: PreviewProvider {
     static var previews: some View {
-        EmptyHistoryAlertView()
+        NoSessionsAlertView()
     }
 }

@@ -32,7 +32,7 @@
 		1F542F92286D757000403F13 /* StickyNoteList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F542F91286D757000403F13 /* StickyNoteList.swift */; };
 		1F5987A2286B5DFC00CDB54C /* PairSavedNote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F59879E286B5DFC00CDB54C /* PairSavedNote.swift */; };
 		1F5987A5286B5F8900CDB54C /* PairSavedNote Properties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5987A4286B5F8900CDB54C /* PairSavedNote Properties.swift */; };
-		1F5A0F6C282641D00075E86B /* EmptyHistoryAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5A0F6B282641D00075E86B /* EmptyHistoryAlertView.swift */; };
+		1F5A0F6C282641D00075E86B /* NoSessionsAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5A0F6B282641D00075E86B /* NoSessionsAlertView.swift */; };
 		1F5A0F6F282647A80075E86B /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5A0F6E282647A80075E86B /* DetailView.swift */; };
 		1F5F4A5D28093FAF00AF3442 /* TimersApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5F4A4A28093FAD00AF3442 /* TimersApp.swift */; };
 		1F5F4A6328093FAF00AF3442 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1F5F4A4D28093FAF00AF3442 /* Assets.xcassets */; };
@@ -153,7 +153,7 @@
 		1F542F91286D757000403F13 /* StickyNoteList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StickyNoteList.swift; sourceTree = "<group>"; };
 		1F59879E286B5DFC00CDB54C /* PairSavedNote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PairSavedNote.swift; sourceTree = SOURCE_ROOT; };
 		1F5987A4286B5F8900CDB54C /* PairSavedNote Properties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PairSavedNote Properties.swift"; sourceTree = "<group>"; };
-		1F5A0F6B282641D00075E86B /* EmptyHistoryAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyHistoryAlertView.swift; sourceTree = "<group>"; };
+		1F5A0F6B282641D00075E86B /* NoSessionsAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoSessionsAlertView.swift; sourceTree = "<group>"; };
 		1F5A0F6E282647A80075E86B /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
 		1F5F4A4A28093FAD00AF3442 /* TimersApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimersApp.swift; sourceTree = "<group>"; };
 		1F5F4A4D28093FAF00AF3442 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -328,7 +328,7 @@
 				1F62193F28293B5100C9B175 /* PairBubbleCell.swift */,
 				1F37028F287EEA6D00AE58C6 /* Alerts & Labels */,
 				1F4DF99B282B82D900D54BE8 /* Buttons */,
-				1F5A0F6B282641D00075E86B /* EmptyHistoryAlertView.swift */,
+				1F5A0F6B282641D00075E86B /* NoSessionsAlertView.swift */,
 				1F5A0F6E282647A80075E86B /* DetailView.swift */,
 				1F18B45A281FA9740080ADA6 /* Helpers */,
 				1F5F4A92280941D900AF3442 /* Timers (iOS).entitlements */,
@@ -582,7 +582,7 @@
 				1F97B7DD2809B311002FFCA3 /* Colors.swift in Sources */,
 				1F100CA72809493400A3A3C2 /* BubbleTimer.swift in Sources */,
 				1FA8F87E28367B7A00394B59 /* BubbleNote.swift in Sources */,
-				1F5A0F6C282641D00075E86B /* EmptyHistoryAlertView.swift in Sources */,
+				1F5A0F6C282641D00075E86B /* NoSessionsAlertView.swift in Sources */,
 				1F542F92286D757000403F13 /* StickyNoteList.swift in Sources */,
 				1F695087287D737600CC9FF4 /* SDButton.swift in Sources */,
 				1F74878D286ED1B10092674F /* StartInfoView.swift in Sources */,
