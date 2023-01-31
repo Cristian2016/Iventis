@@ -62,7 +62,7 @@ struct BubbleList: View {
                     .toolbar { ToolbarItemGroup { buttonsBar }}
                     .padding(BubbleCell.padding) //9
                     .navigationDestination(for: Bubble.self) { detailView($0) }
-                    .background {
+                    .background { //List.background
                         VStack(spacing: 4) {
                             let condition = viewModel.showFavoritesOnly
                             let title = condition ?  "Show All" : "Show Pinned Only"
