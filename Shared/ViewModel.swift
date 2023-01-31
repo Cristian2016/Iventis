@@ -185,6 +185,7 @@ class ViewModel: ObservableObject {
                 newSession.addToPairs(newPair)
                 
                 if isDetailViewShowing { bubble.syncSmallBubbleCell = true }
+                showUndoStartAddTagBar = true
                                 
             case .paused:  /* changes to running */
                 //create new pair, add it to currentSession
@@ -193,6 +194,7 @@ class ViewModel: ObservableObject {
                 bubble.lastSession?.addToPairs(newPair)
                 
                 if isDetailViewShowing { bubble.syncSmallBubbleCell = true }
+                showUndoStartAddTagBar = true
                 
             case .running: /* changes to .paused */
                 let currentPair = bubble.lastPair
@@ -212,6 +214,8 @@ class ViewModel: ObservableObject {
                         PersistenceController.shared.save()
                     }
                 }
+                
+                if showUndoStartAddTagBar { showUndoStartAddTagBar = false }
                 
             case .finished: return
         }
