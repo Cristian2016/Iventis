@@ -56,8 +56,9 @@ struct BubbleCell: View {
             BorderlessLabel(title: "Undo Start", symbol: "arrow.uturn.backward")
                 .onTapGesture {
                     if bubble.sessions_.count == 1 && bubble.lastSession?.pairs_.count == 1 {
-                        print("delete session and pair!")
+                        viewModel.deleteSession(bubble.lastSession!)
                     } else {
+                        viewModel.deletePair(bubble.lastPair)
                         print("delete last pair only. do not delete session")
                     }
                 }
