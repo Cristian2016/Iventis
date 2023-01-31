@@ -19,8 +19,8 @@ struct BubbleDeleteAlert: View {
         let backgroundColor = Color("deleteActionViewBackground")
         let buttonRadius = CGFloat(13)
         let bubbleColor:Color
-        let width = CGFloat(170)
-        let buttonHeight:CGFloat = 74
+        let width = CGFloat(160)
+        let buttonHeight:CGFloat = 68
     }
     
     init(_ bubble:Bubble) {
@@ -44,7 +44,7 @@ struct BubbleDeleteAlert: View {
         ZStack {
             Color.white.opacity(0.01)
                 .onTapGesture { cancelDeleteAction() }
-            VStack (spacing:8) {
+            VStack (spacing:6) {
                 trashView
                 deleteBubbleView
                     .onTapGesture {
@@ -65,7 +65,8 @@ struct BubbleDeleteAlert: View {
             }
             .font(.system(size: 30).weight(.medium))
             .frame(width: metrics.width)
-            .padding()
+            .padding([.top, .bottom], 14)
+            .padding([.leading, .trailing], 12)
             .background {
                 RoundedRectangle(cornerRadius: metrics.backgroundRadius)
                     .fill(metrics.backgroundColor)
