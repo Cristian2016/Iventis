@@ -21,6 +21,8 @@ struct BubbleDeleteAlert: View {
         let bubbleColor:Color
         let width = CGFloat(174)
         let buttonHeight:CGFloat = 78
+        let trashViewFont = Font.system(size: 28).weight(.medium)
+        let buttonFont = Font.system(size: 28).weight(.medium)
     }
     
     init(_ bubble:Bubble) {
@@ -81,7 +83,7 @@ struct BubbleDeleteAlert: View {
             Image.trash
             Text("Delete")
         }
-        .font(.system(size: 28).weight(.medium))
+        .font(metrics.trashViewFont)
         .foregroundColor(.red)
     }
     
