@@ -50,6 +50,8 @@ struct DeleteSessionConfirmationView: View {
                     }
                     .onTapGesture {
                         withAnimation {
+                            //⚠️ delete event from calendar first and then delete session from CoreData and Fused App
+                            CalendarManager.shared.deleteEvent(with: session.eventID)
                             viewModel.deleteSession(session)
                             viewModel.sessionToDelete = nil
                         }

@@ -116,6 +116,8 @@ extension CalendarManager {
                  session
         )
         
+        
+        
         //since this method is called on bThread, make sure to save CoreData on mThread
         DispatchQueue.main.async {
             session.isEventified = true
@@ -123,6 +125,7 @@ extension CalendarManager {
         }
     }
     
+    ///updates event notes or event title
     func updateExistingEvent(_ kind:EventUpdateKind) {
         switch kind {
         case .notes(let session):
@@ -354,4 +357,8 @@ class CalendarManager: NSObject {
         case title(_ bubble:Bubble)
         case notes(_ session:Session)
     }
+}
+
+extension CalendarManager {
+    
 }
