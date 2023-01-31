@@ -58,12 +58,12 @@ struct DeleteSessionConfirmationView: View {
             .padding()
             .background {
                 RoundedRectangle(cornerRadius: metrics.backgroundRadius)
-                    .stroke(metrics.backgroundColor, lineWidth: 4)
+                    .strokeBorder(metrics.bubbleColor, lineWidth: 4)
             }
             .background {
                 RoundedRectangle(cornerRadius: metrics.backgroundRadius)
                     .fill(.white)
-                    .shadow(color: .black, radius: 2)
+                    .shadow(color: .black.opacity(0.3), radius: 2)
             }
         }
     }
