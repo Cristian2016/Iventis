@@ -9,19 +9,20 @@ import SwiftUI
 
 struct DeleteConfirmationView: View {
     @EnvironmentObject private var viewModel:ViewModel
+    let bubble:Bubble
+    let metrics:Metrics
     
     struct Metrics {
         let backgroundRadius = CGFloat(30)
         let backgroundColor = Color("deleteActionViewBackground")
-        let width = CGFloat(200)
+        let width = CGFloat(170)
         let buttonRadius = CGFloat(13)
         let bubbleColor:Color
-        let buttonHeight:CGFloat = 80
+        let buttonHeight:CGFloat = 74
     }
     
-    let metrics:Metrics
-    
-    init(_ metrics:Metrics) {
+    init(_ bubble:Bubble, _ metrics:Metrics) {
+        self.bubble = bubble
         self.metrics = metrics
     }
     
@@ -36,12 +37,10 @@ struct DeleteConfirmationView: View {
         ZStack {
             Color.white.opacity(0.01)
                 .onTapGesture { cancelDeleteAction() }
-            VStack (spacing:6) {
+            VStack (spacing:8) {
                 trashView
-                
-                VStack {
-                    deleteBubbleView
-                }
+                deleteBubbleView
+                if !bubble.sessions_.isEmpty { deleteHistoryView }
             }
             .frame(width: metrics.width)
             .padding()
@@ -69,11 +68,28 @@ struct DeleteConfirmationView: View {
             .frame(height: metrics.buttonHeight)
     }
     
+    private var deleteHistoryView: some View {
+        let historyAvailable = bubble.sessions_.isEmpty
+        return RoundedRectangle(cornerRadius: metrics.buttonRadius)
+            .foregroundColor(historyAvailable ? metrics.bubbleColor.opacity(0.3) : metrics.bubbleColor)
+            .overlay { Text("History \(bubble.sessions_.count)")
+                .foregroundColor(historyAvailable ? .white.opacity(0.3) :  .white) }
+            .frame(height: metrics.buttonHeight)
+    }
+    
     // MARK: - Modifiers
 }
 
 struct DeleteConfirmationView_Previews: PreviewProvider {
+    static let bubble:Bubble = {
+        let bubble = Bubble(context: PersistenceController.preview.viewContext)
+        bubble.color = "charcoal"
+        
+        let session = Session(context: PersistenceController.preview.viewContext)
+        bubble.sessions_ = [session]
+        return bubble
+    }()
     static var previews: some View {
-        DeleteConfirmationView(DeleteConfirmationView.Metrics(bubbleColor: .orange))
+        DeleteConfirmationView(bubble, DeleteConfirmationView.Metrics(bubbleColor: .orange))
     }
 }
