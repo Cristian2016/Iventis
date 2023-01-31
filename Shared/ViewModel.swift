@@ -22,10 +22,8 @@ class ViewModel: ObservableObject {
     @Published var fiveSeconds_bRank:Int64? {didSet{
         if fiveSeconds_bRank != nil {
             print("fire timer")
-            self.timer = Timer.scheduledTimer(withTimeInterval: 5.0, repeats: false) { [weak self] timer in
-                self?.timer?.invalidate()
-                self?.timer = nil
-                print("signal received")
+            self.timer = Timer.scheduledTimer(withTimeInterval: 5.0, repeats: true) { _ in
+                //executed when the timer fires :))))
             }
             self.timer?.fire()
         }
