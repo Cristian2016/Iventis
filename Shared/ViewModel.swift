@@ -17,24 +17,17 @@ class ViewModel: ObservableObject {
         NotificationCenter.default.removeObserver(self) //1
     }
     
-    private func observeFiveSecondsSignalNotifications() {
-        NotificationCenter.default.addObserver(forName: .fiveSecondsSignal, object: nil, queue: nil) { [weak self] notification in
-            print("fiveSecondsSignal is main thread", Thread.isMainThread)
-            self?.fiveSeconds_bRank = nil
-            self?.timer?.invalidate()
-            self?.timer = nil
-        }
-    } //1
-    
     private var timer:Timer?
     
     @Published var fiveSeconds_bRank:Int64? {didSet{
         if fiveSeconds_bRank != nil {
-            Timer.scheduledTimer(withTimeInterval: 5.0, repeats: false) { [weak self] timer in
+            print("fire timer")
+            self.timer = Timer.scheduledTimer(withTimeInterval: 5.0, repeats: false) { [weak self] timer in
                 self?.timer?.invalidate()
                 self?.timer = nil
+                print("signal received")
             }
-            timer?.fire()
+            self.timer?.fire()
         }
         else { timer?.invalidate(); timer = nil }
     }} //1
