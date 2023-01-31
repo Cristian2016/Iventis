@@ -38,10 +38,16 @@ struct BubbleCell: View {
             
             HStack {
                 BorderlessLabel(title: "Undo Start", symbol: "arrow.uturn.backward")
+                    .onTapGesture {
+                        print("Undo Start")
+                    }
                 Divider().frame(height: 20)
                 BorderlessLabel(title: "Add Tag", symbol: "tag")
+                    .onTapGesture {
+                        print("Add Tag")
+                    }
             }
-            .font(.title2)
+            .font(.title)
         }
         .listRowSeparator(.hidden)
         .swipeActions(edge: .leading, allowsFullSwipe: true) {
