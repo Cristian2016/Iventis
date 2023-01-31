@@ -32,6 +32,10 @@ struct PairCell: View {
                 .padding([.trailing], -16)
                 
                 VStack (alignment: .leading, spacing: 4) {
+                    Rectangle()
+                        .fill(.clear)
+                        .frame(height: 10)
+                    
                     pairStartView  //first line
                     pairPauseView //second line
                     if pair.pause == nil {
@@ -43,7 +47,6 @@ struct PairCell: View {
                     else { durationView } //third line
                     
                     Spacer()
-                    Spacer(minLength: 4)
                 }
                 
                 Push(.bottomRight) { stickyNote }
@@ -65,6 +68,7 @@ struct PairCell: View {
         //these two combined
         let durationFont = Font.system(size: 24, weight: .medium) //15 59 3
         let durationComponentsFont = Font.system(size: 22, weight: .medium) //h m s
+        let pairNumberFont = Font.system(size: 18).weight(.medium)
     }
     
     @State private var noteDeleted:Bool = false
@@ -144,7 +148,7 @@ struct PairCell: View {
     }
     
     private var pairNumberView:some View {
-        Text(String(pairNumber)).font(.system(size: 20))
+        Text(String(pairNumber)).font(metrics.pairNumberFont)
     }
     
     //start time and date
