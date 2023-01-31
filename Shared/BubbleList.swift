@@ -56,8 +56,9 @@ struct BubbleList: View {
                     .navigationDestination(for: Bubble.self) { detailView($0) }
                     .background {
                         VStack {
-                            let title = viewModel.showFavoritesOnly ?  "Show All" : "Favorites Only"
-                            let symbol = viewModel.showFavoritesOnly ? "star.slash.fill" : "star.fill"
+                            let title = viewModel.showFavoritesOnly ?  "Show All"
+                            : "Show Pinned Only"
+                            let symbol = viewModel.showFavoritesOnly ? "pin.slash.fill" : "pin.fill"
                             let color = viewModel.showFavoritesOnly ? .secondary : Color.orange
                             FusedLabel(content: .init(title: title, symbol: symbol, color: color, isFilled: true))
                             
