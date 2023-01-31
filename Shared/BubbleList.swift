@@ -86,7 +86,7 @@ struct BubbleList: View {
             Spacer()
         }
         .padding([.top], 4)
-    }
+    } //11
     
     private func detailView(_ bubble:Bubble) -> some View {
         GeometryReader {
