@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct DeleteConfirmationView: View {
+struct BubbleDeleteAlert: View {
     @EnvironmentObject private var viewModel:ViewModel
     @EnvironmentObject private var layoutViewModel:LayoutViewModel
     
@@ -113,6 +113,6 @@ struct DeleteConfirmationView_Previews: PreviewProvider {
         return bubble
     }()
     static var previews: some View {
-        DeleteConfirmationView(bubble)
+        BubbleDeleteAlert(bubble)
     }
 }

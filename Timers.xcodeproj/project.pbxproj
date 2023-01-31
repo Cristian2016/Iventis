@@ -60,8 +60,8 @@
 		1F9B6AF0280950D600C0A725 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F9B6AEF280950D600C0A725 /* ViewModel.swift */; };
 		1F9BE0A9280BE14100F87EFA /* PaletteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F9BE0A8280BE14100F87EFA /* PaletteView.swift */; };
 		1F9BE0AD280C6AB000F87EFA /* TapHold.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F9BE0AC280C6AB000F87EFA /* TapHold.swift */; };
-		1FA03CA72989251000AF7395 /* DeleteConfirmationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA03CA62989250F00AF7395 /* DeleteConfirmationView.swift */; };
-		1FA03CAB29893E6200AF7395 /* DeleteSessionConfirmationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA03CAA29893E6200AF7395 /* DeleteSessionConfirmationView.swift */; };
+		1FA03CA72989251000AF7395 /* BubbleDeleteAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA03CA62989250F00AF7395 /* BubbleDeleteAlert.swift */; };
+		1FA03CAB29893E6200AF7395 /* SessionDeleteAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA03CAA29893E6200AF7395 /* SessionDeleteAlert.swift */; };
 		1FA1B44A298321D20063B081 /* iPhoneViewHierarchy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA1B449298321D20063B081 /* iPhoneViewHierarchy.swift */; };
 		1FA1F39E2981CFE6000A50F5 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA1F39D2981CFE6000A50F5 /* Persistence.swift */; };
 		1FA25B002986F51E007759EB /* UnitedViewHierarchy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA25AFF2986F51E007759EB /* UnitedViewHierarchy.swift */; };
@@ -187,8 +187,8 @@
 		1F9B6AEF280950D600C0A725 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		1F9BE0A8280BE14100F87EFA /* PaletteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PaletteView.swift; path = Shared/PaletteView.swift; sourceTree = SOURCE_ROOT; };
 		1F9BE0AC280C6AB000F87EFA /* TapHold.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapHold.swift; sourceTree = "<group>"; };
-		1FA03CA62989250F00AF7395 /* DeleteConfirmationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteConfirmationView.swift; sourceTree = "<group>"; };
-		1FA03CAA29893E6200AF7395 /* DeleteSessionConfirmationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteSessionConfirmationView.swift; sourceTree = "<group>"; };
+		1FA03CA62989250F00AF7395 /* BubbleDeleteAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BubbleDeleteAlert.swift; sourceTree = "<group>"; };
+		1FA03CAA29893E6200AF7395 /* SessionDeleteAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionDeleteAlert.swift; sourceTree = "<group>"; };
 		1FA1B449298321D20063B081 /* iPhoneViewHierarchy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iPhoneViewHierarchy.swift; sourceTree = "<group>"; };
 		1FA1F39D2981CFE6000A50F5 /* Persistence.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		1FA25AFF2986F51E007759EB /* UnitedViewHierarchy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnitedViewHierarchy.swift; sourceTree = "<group>"; };
@@ -306,8 +306,8 @@
 		1F5F4A4228093FAC00AF3442 = {
 			isa = PBXGroup;
 			children = (
-				1FA03CA62989250F00AF7395 /* DeleteConfirmationView.swift */,
-				1FA03CAA29893E6200AF7395 /* DeleteSessionConfirmationView.swift */,
+				1FA03CA62989250F00AF7395 /* BubbleDeleteAlert.swift */,
+				1FA03CAA29893E6200AF7395 /* SessionDeleteAlert.swift */,
 				1F05B7C72989158E0022FD23 /* BorderlessLabel.swift */,
 				1F196092298856E500E6A7EA /* SmallAlertHintView.swift */,
 				1F520C6C2987DFBC00B25029 /* PairCell.swift */,
@@ -575,7 +575,7 @@
 				1F64200A2820204400413E31 /* BottomCell.swift in Sources */,
 				1FA1B44A298321D20063B081 /* iPhoneViewHierarchy.swift in Sources */,
 				1F20807C2836111600FD35D6 /* BSavedNote.swift in Sources */,
-				1FA03CA72989251000AF7395 /* DeleteConfirmationView.swift in Sources */,
+				1FA03CA72989251000AF7395 /* BubbleDeleteAlert.swift in Sources */,
 				1FDB9F15287DA5040028E121 /* SDBPair Properties.swift in Sources */,
 				1F61BE052822BAAA00B773F9 /* DeleteActionView.swift in Sources */,
 				1F684823287DBEBB00D8BF81 /* StartDelaySubview.swift in Sources */,
@@ -590,7 +590,7 @@
 				1F695087287D737600CC9FF4 /* SDButton.swift in Sources */,
 				1F74878D286ED1B10092674F /* StartInfoView.swift in Sources */,
 				1F98D78A286AF8A300C0A973 /* DeleteRow_InfoView.swift in Sources */,
-				1FA03CAB29893E6200AF7395 /* DeleteSessionConfirmationView.swift in Sources */,
+				1FA03CAB29893E6200AF7395 /* SessionDeleteAlert.swift in Sources */,
 				1F0373C028DEDD97005CE8D3 /* ConfirmationView.swift in Sources */,
 				1FE163AE280EE6F40050C6F5 /* LeftStrip.swift in Sources */,
 				1F641FFE281FF70100413E31 /* BottomDetailView.swift in Sources */,

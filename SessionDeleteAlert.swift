@@ -8,7 +8,7 @@
 import SwiftUI
 import MyPackage
 
-struct DeleteSessionConfirmationView: View {
+struct SessionDeleteAlert: View {
     @EnvironmentObject private var viewModel:ViewModel
     @EnvironmentObject private var layoutViewModel:LayoutViewModel
     
@@ -96,7 +96,7 @@ struct DeleteSessionConfirmationView: View {
     // MARK: - Modifiers
 }
 
-struct DeleteSessionConfirmationView_Previews: PreviewProvider {
+struct SessionDeleteAlert_Previews: PreviewProvider {
     static let session:Session = {
         let session = Session(context: PersistenceController.preview.viewContext)
         let bubble = Bubble(context: PersistenceController.preview.viewContext)
@@ -105,6 +105,6 @@ struct DeleteSessionConfirmationView_Previews: PreviewProvider {
         return session
     }()
     static var previews: some View {
-        DeleteSessionConfirmationView(session, "2")
+        SessionDeleteAlert(session, "2")
     }
 }
