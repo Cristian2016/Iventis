@@ -36,20 +36,7 @@ struct BubbleCell: View {
             
             .overlay { if !isBubbleRunning { hundredthsView }}
             
-            if viewModel.showUndoStartAddTagBar_bRank == bubble.rank {
-                HStack {
-                    BorderlessLabel(title: "Undo Start", symbol: "arrow.uturn.backward")
-                        .onTapGesture {
-                            print("Undo Start")
-                        }
-                    Divider().frame(height: 20)
-                    BorderlessLabel(title: "Add Tag", symbol: "tag")
-                        .onTapGesture {
-                            print("Add Tag")
-                        }
-                }
-                .font(.title)
-            }
+            if viewModel.showUndoStartAddTagBar_bRank == bubble.rank { fiveSecondsBar }
         }
         .listRowSeparator(.hidden)
         .swipeActions(edge: .leading, allowsFullSwipe: true) {
@@ -64,6 +51,21 @@ struct BubbleCell: View {
     }
     
     // MARK: - Legos
+    private var fiveSecondsBar:some View {
+        HStack {
+            BorderlessLabel(title: "Undo Start", symbol: "arrow.uturn.backward")
+                .onTapGesture {
+                    print("Undo Start")
+                }
+            Divider().frame(height: 20)
+            BorderlessLabel(title: "Add Tag", symbol: "tag")
+                .onTapGesture {
+                    print("Add Tag")
+                }
+        }
+        .font(.title)
+    }
+    
     private var calEventCreatedConfirmation:some View {
         Push(.leading) {
             ConfirmView(content: .eventCreated)
