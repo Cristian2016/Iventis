@@ -13,7 +13,9 @@ import CoreData
 import MyPackage
 
 class ViewModel: ObservableObject {
-    @Published var showUndoStartAddTagBar_bRank:Int64?
+    @Published var showUndoStartAddTagBar_bRank:Int64? {didSet{
+        print("kick off 5 seconds timer")
+    }}
     
     @Published var showFavoritesOnly = false
     
