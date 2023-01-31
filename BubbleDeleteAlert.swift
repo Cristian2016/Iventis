@@ -20,7 +20,7 @@ struct BubbleDeleteAlert: View {
         let buttonRadius = CGFloat(13)
         let bubbleColor:Color
         let width = CGFloat(174)
-        let buttonHeight:CGFloat = 74
+        let buttonHeight:CGFloat = 78
     }
     
     init(_ bubble:Bubble) {
@@ -66,6 +66,7 @@ struct BubbleDeleteAlert: View {
             .font(.system(size: 30).weight(.medium))
             .frame(width: metrics.width)
             .padding(16)
+            .padding([.top], 4)
             .background {
                 RoundedRectangle(cornerRadius: metrics.backgroundRadius)
                     .fill(metrics.backgroundColor)
@@ -80,7 +81,7 @@ struct BubbleDeleteAlert: View {
             Image.trash
             Text("Delete")
         }
-        .font(.system(size: 30).weight(.medium))
+        .font(.system(size: 28).weight(.medium))
         .foregroundColor(.red)
     }
     
@@ -95,7 +96,7 @@ struct BubbleDeleteAlert: View {
         let sessionsAvailable = bubble.sessions_.isEmpty
         return RoundedRectangle(cornerRadius: metrics.buttonRadius)
             .foregroundColor(sessionsAvailable ? metrics.bubbleColor.opacity(0.3) : metrics.bubbleColor)
-            .overlay { Text("Sessions \(bubble.sessions_.count)")
+            .overlay { Text("History \(bubble.sessions_.count)")
                 .foregroundColor(sessionsAvailable ? .white.opacity(0.3) :  .white) }
             .frame(height: metrics.buttonHeight)
     }
