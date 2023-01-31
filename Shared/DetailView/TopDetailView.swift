@@ -10,6 +10,7 @@ import SwiftUI
 import MyPackage
 
 struct TopDetailView:View {
+    @EnvironmentObject private var viewModel:ViewModel
     @FetchRequest var sessions:FetchedResults<Session>
     //use entire screen width, but leave a little leading space
     let trailingPadding = EdgeInsets(top: 0, leading: 3, bottom: 0, trailing: 3)
@@ -30,8 +31,9 @@ struct TopDetailView:View {
         ScrollViewReader { proxy in
             ScrollView(.horizontal, showsIndicators: false) {
                 LazyHStack {
-                    ForEach (sessions) { let sessionRank = sessionRank(of: $0)
-                        TopCell($0, sessions.count, sessionRank)
+                    ForEach (sessions) { session in
+                        let sessionRank = sessionRank(of: session)
+                        TopCell(session, sessions.count, sessionRank)
                             .id(sessionRank)
                             .onTapGesture {
                                 UserFeedback.singleHaptic(.medium)
@@ -39,6 +41,7 @@ struct TopDetailView:View {
                                 //use the same rank info you are sending to scroll self in the center
                                 withAnimation { proxy.scrollTo(sessionRank, anchor: .center) }
                             }
+                            .onLongPressGesture { viewModel.deleteSession(session) }
                             .onReceive(NotificationCenter.default.publisher(for: .selectedTab)) {
                                 let tab = String($0.userInfo!["selectedTab"] as! Int - 1)
                                 withAnimation { proxy.scrollTo(tab, anchor: .trailing) }
