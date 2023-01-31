@@ -62,7 +62,7 @@ struct TopCell: View {
         Push(.topRight) {
             Text(sessionRank)
                 .foregroundColor(color)
-                .font(.title2)
+                .font(.system(size: 30))
                 .fontWeight(.medium)
                 .padding(EdgeInsets(top: 8, leading: 0, bottom: 0, trailing: 12))
         }
