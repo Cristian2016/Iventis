@@ -14,6 +14,7 @@
 //8 toolbar hides when PaletteView shows
 //9 BubbleCell must extend horizontally to the edges. -14 points is a good value for smallest phone iPhone SE3
 //10 BubbleCell must know width of the parent view to compute spacing and have same design regardless of device or orientation
+//11 view that shows when used pulls to refresh the table
 
 import SwiftUI
 import CoreData
@@ -62,7 +63,7 @@ struct BubbleList: View {
                     .toolbar { ToolbarItemGroup { buttonsBar }}
                     .padding(BubbleCell.padding) //9
                     .navigationDestination(for: Bubble.self) { detailView($0) }
-                    .background { refresherView }
+                    .background { refresherView } //11
                     .refreshable { viewModel.showFavoritesOnly.toggle() } //11
                 }
             }
