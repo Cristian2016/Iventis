@@ -49,7 +49,7 @@ struct BubbleList: View {
                         .listRowSeparator(.hidden)
                         .listSectionSeparator(value ? .visible : .hidden, edges: [.bottom])
                         if !section.id { bottomOverscoll }
-                        if viewModel.showFavoritesOnly { showAllButton }
+                        if viewModel.showFavoritesOnly { showAllButton } //11
                     }
                     .scrollIndicators(.hidden)
                     .listStyle(.plain)
@@ -74,7 +74,7 @@ struct BubbleList: View {
             .foregroundColor(.secondary)
             .onTapGesture { viewModel.showFavoritesOnly = false }
             .padding([.leading], 4)
-    }
+    } //11
     
     private var refresherView:some View {
         VStack(spacing: 4) {
