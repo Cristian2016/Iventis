@@ -51,6 +51,11 @@ struct BubbleCell: View {
             ConfirmView(content: .eventCreated)
         }
     }
+    private var calEventRemovedConfirmation:some View {
+        Push(.leading) {
+            ConfirmView(content: .eventRemoved)
+        }
+    }
     
     //Leading Swipe actions
     private var toggleFavoriteButton:some View {
