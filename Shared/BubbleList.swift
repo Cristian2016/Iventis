@@ -15,6 +15,7 @@
 //9 BubbleCell must extend horizontally to the edges. -14 points is a good value for smallest phone iPhone SE3
 //10 BubbleCell must know width of the parent view to compute spacing and have same design regardless of device or orientation
 //11 user can pull down to toggle pinned bubbles only. refresherView shows when used pulls to refresh the table
+//12 initializer with or without predicate. when predicate is set, it fetches only pinned bubbles [bubble.isPinned]. otherwise it fetches everything
 
 import SwiftUI
 import CoreData
@@ -48,14 +49,7 @@ struct BubbleList: View {
                         .listRowSeparator(.hidden)
                         .listSectionSeparator(value ? .visible : .hidden, edges: [.bottom])
                         if !section.id { bottomOverscoll }
-                        if viewModel.showFavoritesOnly {
-                            Text("\(Image(systemName: "eye")) Show All")
-                                .listRowSeparator(.hidden)
-                                .font(.footnote)
-                                .foregroundColor(.secondary)
-                                .onTapGesture { viewModel.showFavoritesOnly = false }
-                                .padding([.leading], 4)
-                        }
+                        if viewModel.showFavoritesOnly { showAllButton }
                     }
                     .scrollIndicators(.hidden)
                     .listStyle(.plain)
@@ -73,6 +67,15 @@ struct BubbleList: View {
     }
     
     // MARK: - Lego
+    private var showAllButton:some View {
+        Text("\(Image(systemName: "eye")) Show All")
+            .listRowSeparator(.hidden)
+            .font(.footnote)
+            .foregroundColor(.secondary)
+            .onTapGesture { viewModel.showFavoritesOnly = false }
+            .padding([.leading], 4)
+    }
+    
     private var refresherView:some View {
         VStack(spacing: 4) {
             let condition = viewModel.showFavoritesOnly
@@ -117,7 +120,7 @@ struct BubbleList: View {
             predicate: predicate,
             animation: .default
         )
-    }
+    } //12
     
     // MARK: -
     private static var formatter:DateFormatter = {
