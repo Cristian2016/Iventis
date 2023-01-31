@@ -109,7 +109,7 @@ struct DeleteConfirmationView_Previews: PreviewProvider {
         bubble.color = "orange"
         
         let session = Session(context: PersistenceController.preview.viewContext)
-        bubble.sessions_ = [session]
+//        bubble.sessions_ = [session]
         return bubble
     }()
     static var previews: some View {
