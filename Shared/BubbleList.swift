@@ -64,14 +64,15 @@ struct BubbleList: View {
                     .navigationDestination(for: Bubble.self) { detailView($0) }
                     .background {
                         VStack(spacing: 4) {
-                            let title = viewModel.showFavoritesOnly ?  "Show All"
-                            : "Show Pinned Only"
-                            let symbol = viewModel.showFavoritesOnly ? "pin.slash.fill" : "pin.fill"
-                            let color = viewModel.showFavoritesOnly ? .secondary : Color.orange
+                            let condition = viewModel.showFavoritesOnly
+                            let title = condition ?  "Show All" : "Show Pinned Only"
+                            let symbol = condition ? "pin.slash.fill" : "pin.fill"
+                            let color = condition ? .secondary : Color.orange
                             
                             FusedLabel(content: .init(title: title, symbol: symbol, color: color, isFilled: true))
                             Spacer()
-                        }.padding([.top], 4)
+                        }
+                        .padding([.top], 4)
                     }
                     .refreshable { viewModel.showFavoritesOnly.toggle() } //11
                 }
