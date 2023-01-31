@@ -12,7 +12,7 @@ struct FusedLabel: View {
     
     var body: some View {
         Text(condition ?
-             LocalizedStringKey("\(content.title) \(Image(systemName: content.symbol!))")
+             LocalizedStringKey("\(Image(systemName: content.symbol!)) \(content.title)")
              : LocalizedStringKey(content.title)
         )//1
         .foregroundColor(content.isFilled ? .white : content.color)
