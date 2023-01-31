@@ -65,8 +65,7 @@ struct BubbleDeleteAlert: View {
             }
             .font(.system(size: 30).weight(.medium))
             .frame(width: metrics.width)
-            .padding([.top, .bottom], 14)
-            .padding([.leading, .trailing], 12)
+            .padding(16)
             .background {
                 RoundedRectangle(cornerRadius: metrics.backgroundRadius)
                     .fill(metrics.backgroundColor)
