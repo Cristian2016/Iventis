@@ -62,10 +62,6 @@ struct BubbleList: View {
                             let color = viewModel.showFavoritesOnly ? .secondary : Color.orange
                             
                             FusedLabel(content: .init(title: title, symbol: symbol, color: color, isFilled: true))
-                            Text("Pull down")
-                                .font(.caption)
-                                .fontDesign(.monospaced)
-                                
                             Spacer()
                         }.padding([.top], 4)
                     }
