@@ -44,7 +44,7 @@ struct DetailView: View {
                 }
             }
             .listStyle(.plain)
-            .scrollIndicators(.visible)
+            .scrollIndicators(.visible, axes: .vertical) //
         }
     }
 }
