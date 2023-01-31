@@ -57,9 +57,10 @@ struct BubbleCell: View {
                 .onTapGesture {
                     if bubble.sessions_.count == 1 && bubble.lastSession?.pairs_.count == 1 {
                         viewModel.deleteSession(bubble.lastSession!)
+                        viewModel.fiveSeconds_bRank = nil
                     } else {
                         viewModel.deletePair(bubble.lastPair)
-                        print("delete last pair only. do not delete session")
+                        viewModel.fiveSeconds_bRank = nil
                     }
                 }
             Divider().frame(height: 20)
