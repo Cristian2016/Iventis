@@ -56,7 +56,7 @@ struct BubbleList: View {
                                 .padding([.leading], 4)
                         }
                     }
-                    .scrollIndicators(.hidden)ok
+                    .scrollIndicators(.hidden)
                     .listStyle(.plain)
                     .toolbarBackground(.ultraThinMaterial)
                     .toolbar { ToolbarItemGroup { buttonsBar }}
