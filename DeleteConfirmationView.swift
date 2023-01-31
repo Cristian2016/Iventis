@@ -50,6 +50,7 @@ struct DeleteConfirmationView: View {
                         }
                 }
             }
+            .font(.system(size: 30).weight(.medium))
             .frame(width: metrics.width)
             .padding()
             .background {
