@@ -56,8 +56,13 @@ struct BubbleList: View {
                     .navigationDestination(for: Bubble.self) { detailView($0) }
                     .background {
                         VStack {
-                            FusedLabel(content: .init(title: "Toggle Favorites", symbol: "star.fill", isFilled: true))
+                            let title = viewModel.showFavoritesOnly ?  "Show All" : "Show Only Favorites"
+                            let symbol = viewModel.showFavoritesOnly ? "star.slash.fill" : "star.fill"
+                            FusedLabel(content: .init(title: title, symbol: symbol, isFilled: true))
                             .padding([.top], 4)
+                            .onTapGesture {
+                                print("I was tapped")
+                            }
                             Spacer()
                         }
                     }
