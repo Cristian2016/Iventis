@@ -36,7 +36,7 @@ struct BubbleCell: View {
             
             .overlay { if !isBubbleRunning { hundredthsView }}
             
-//            if viewModel.fiveSeconds_bRank == bubble.rank { fiveSecondsBar }
+            if viewModel.fiveSeconds_bRank == bubble.rank { fiveSecondsBar }
         }
         .listRowSeparator(.hidden)
         .swipeActions(edge: .leading, allowsFullSwipe: true) {

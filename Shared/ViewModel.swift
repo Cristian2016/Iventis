@@ -29,7 +29,13 @@ class ViewModel: ObservableObject {
     private var timer:Timer?
     
     @Published var fiveSeconds_bRank:Int64? {didSet{
-        if fiveSeconds_bRank != nil { timer?.fire() }
+        if fiveSeconds_bRank != nil {
+            Timer.scheduledTimer(withTimeInterval: 5.0, repeats: false) { [weak self] timer in
+                self?.timer?.invalidate()
+                self?.timer = nil
+            }
+            timer?.fire()
+        }
         else { timer?.invalidate(); timer = nil }
     }} //1
     
