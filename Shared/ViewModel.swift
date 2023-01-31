@@ -13,14 +13,24 @@ import CoreData
 import MyPackage
 
 class ViewModel: ObservableObject {
+    deinit {
+        NotificationCenter.default.removeObserver(self) //1
+    }
     
-    lazy var showUndoStartAddTagTimer:BackgroundTimer = {
+    private func observeFiveSecondsSignalNotifications() {
+        NotificationCenter.default.addObserver(forName: .fiveSecondsSignal, object: nil, queue: nil) { [weak self] notification in
+            print("fiveSecondsSignal is main thread", Thread.isMainThread)
+        }
+    } //1
+    
+    private lazy var showUndoStartAddTagTimer:BackgroundTimer = {
         let timer = BackgroundTimer()
         timer.eventHandler = { [weak self] in
             NotificationCenter.default.post(name: .fiveSecondsSignal, object: nil)
         }
+        self.observeFiveSecondsSignalNotifications()
         return timer
-    }()
+    }() //1
     
     @Published var showUndoStartAddTagBar_bRank:Int64? {didSet{
         if showUndoStartAddTagBar_bRank != nil { print("kick off 5 seconds timer") }
