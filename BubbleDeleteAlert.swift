@@ -17,10 +17,10 @@ struct BubbleDeleteAlert: View {
     struct Metrics {
         let backgroundRadius = CGFloat(30)
         let backgroundColor = Color("deleteActionViewBackground")
-        let width = CGFloat(180)
         let buttonRadius = CGFloat(13)
         let bubbleColor:Color
-        let buttonHeight:CGFloat = 80
+        let width = CGFloat(170)
+        let buttonHeight:CGFloat = 74
     }
     
     init(_ bubble:Bubble) {

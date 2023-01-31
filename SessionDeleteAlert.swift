@@ -19,9 +19,9 @@ struct SessionDeleteAlert: View {
     struct Metrics {
         let backgroundRadius = CGFloat(30)
         let backgroundColor = Color("deleteActionViewBackground")
-        let width = CGFloat(170)
         let buttonRadius = CGFloat(13)
         let bubbleColor:Color
+        let width = CGFloat(170)
         let buttonHeight:CGFloat = 74
     }
     
