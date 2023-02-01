@@ -30,7 +30,7 @@ struct DeleteActionAlert: View {
                     Push(.bottomMiddle) {
                         VStack(spacing: 4) {
                             RoundedCornersShape(corners: [.topLeft, .topRight], radius: 28)
-                                .fill(.red)
+                                .fill(metrics.bubbleColor)
                                 .frame(width: 208, height: 84)
                                 .overlay {
                                     Text("Bubble")
@@ -46,7 +46,7 @@ struct DeleteActionAlert: View {
                                     }
                                 }
                             RoundedCornersShape(corners: [.bottomLeft, .bottomRight], radius: 28)
-                                .fill(.red)
+                                .fill(metrics.bubbleColor)
                                 .frame(width: 208, height: 84)
                                 .overlay {
                                     Text("Session")
