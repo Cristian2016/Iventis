@@ -67,7 +67,7 @@ struct DeleteActionAlert: View {
     }
     
     struct Metrics {
-        let ratio = CGFloat(0.878)
+        let ratio = CGFloat(0.88)
         let width = CGFloat(220)
         var height:CGFloat { width / ratio }
         let radius = CGFloat(40)
