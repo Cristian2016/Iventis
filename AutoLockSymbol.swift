@@ -52,7 +52,7 @@ struct AutoLockSymbol: View {
     
     struct Metrics {
         let font = Font.system(.title2)
-        let symbolColor = Color.label
+        let symbolColor = Color.secondary
         let diagonalLineColor = Color.red
     }
 }
