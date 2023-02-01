@@ -197,6 +197,9 @@ class ViewModel: ObservableObject {
     }
     
     func togglePin(_ bubble:Bubble) {
+        if bubble.isPinned, Secretary.shared.pinnedBubblesCount == 1 {
+            showFavoritesOnly = false
+        }
         bubble.isPinned.toggle()
         PersistenceController.shared.save()
     }

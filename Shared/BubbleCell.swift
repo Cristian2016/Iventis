@@ -35,8 +35,6 @@ struct BubbleCell: View {
             .overlay { if confirm_CalEventRemoved { calEventRemovedConfirmation }} //1
             
             .overlay { if !isBubbleRunning { hundredthsView }}
-            
-//            if viewModel.fiveSeconds_bRank == bubble.rank { fiveSecondsBar }
         }
         .listRowSeparator(.hidden)
         .swipeActions(edge: .leading, allowsFullSwipe: true) {
@@ -99,6 +97,7 @@ struct BubbleCell: View {
         icon: { Image(systemName: bubble.isPinned ? "pin.slash.fill" : "pin.fill") } }
     .tint(bubble.isPinned ? .gray : .orange)
     }
+    
     private var toggleCalendarButton:some View {
         Button { viewModel.toggleCalendar(bubble) }
     label: { Label { Text(calendarActionName) }
@@ -115,6 +114,7 @@ struct BubbleCell: View {
     label: { Label { Text("Delete") }
         icon: { Image.trash } }.tint(.red)
     }
+    
     private var moreOptionsButton:some View {
         Button { viewModel.showMoreOptions(for: bubble) }
     label: { Label { Text("More") }
