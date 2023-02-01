@@ -381,7 +381,7 @@ class ViewModel: ObservableObject {
     
     // MARK: - Helpers
     func bubble(for rank:Int?) -> Bubble? {
-        guard let rank = rank else { fatalError() }
+        guard let rank = rank else { return nil }
         let request = Bubble.fetchRequest()
         request.predicate = NSPredicate(format: "rank = %i", rank)
         let context = PersistenceController.shared.viewContext
