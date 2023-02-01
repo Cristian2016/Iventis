@@ -62,7 +62,11 @@ struct PairStickyNoteList: View {
                 //actions
                 dismiss: { dismiss() },
                 delete: { vm.delete(pairSavedNotes[$0!]) },
-                save: { if !$0.isEmpty {  saveNoteToCoreData($0, for: pair) }}, selectExistingNote: { selectExitingNote($0) }
+                save: { if !$0.isEmpty {
+                    saveNoteToCoreData($0, for: pair)
+                }
+                }, selectExistingNote: { selectExitingNote($0)
+                    }
             )
         }
         .ignoresSafeArea()
@@ -115,5 +119,8 @@ struct PairStickyNoteList: View {
     }
     
     // MARK: -
-    private func dismiss() { vm.pairOfNotesList = nil }
+    private func dismiss() {
+        vm.pairOfNotesList = nil
+        vm.fiveSeconds_bRank = nil
+    }
 }
