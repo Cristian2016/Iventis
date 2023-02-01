@@ -51,7 +51,7 @@ struct DetailView: View {
         .toolbar {
             ToolbarItemGroup {
                 if viewModel.fiveSeconds_bRank == Int(bubble.rank) {
-                    
+                    AddTagButton(bubble)
                 }
             }
         }
