@@ -49,17 +49,17 @@ struct DeleteActionAlert: View {
                                 .fill(metrics.bubbleColor)
                                 .frame(width: 208, height: 84)
                                 .overlay {
-                                    Text("Session")
+                                    Text("History \(bubble.sessions_.count)
                                         .font(.system(size: 32, weight: .medium, design: .rounded))
                                         .foregroundColor(.white)
-                                }
-                                .onTapGesture {
-                                    removeAddTagButton()
-                                    if !bubble.sessions_.isEmpty {
-                                        viewModel.reset(bubble)
-                                        viewModel.deleteAction_bRank = nil
-                                        removeFiveSecondsBar()
-                                    }
+                                         }
+                                        .onTapGesture {
+                                            removeAddTagButton()
+                                            if !bubble.sessions_.isEmpty {
+                                                viewModel.reset(bubble)
+                                                viewModel.deleteAction_bRank = nil
+                                                removeFiveSecondsBar()
+                                            }
                                 }
                         }
                     }
