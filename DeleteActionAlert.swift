@@ -49,7 +49,7 @@ struct DeleteActionAlert: View {
                                 .fill(metrics.bubbleColor)
                                 .frame(width: 208, height: 84)
                                 .overlay {
-                                    Text("History \(bubble.sessions_.count)
+                                    Text("History \(bubble.sessions_.count)")
                                         .font(.system(size: 32, weight: .medium, design: .rounded))
                                         .foregroundColor(.white)
                                          }
