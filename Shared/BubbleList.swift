@@ -59,7 +59,9 @@ struct BubbleList: View {
                     .padding(BubbleCell.padding) //9
                     .navigationDestination(for: Bubble.self) { detailView($0) }
                     .background { refresherView } //11
-                    .refreshable { viewModel.showFavoritesOnly.toggle() } //11
+                    .refreshable {
+                        if Secretary.shared.pinnedBubblesCount != 0 { viewModel.showFavoritesOnly.toggle() }
+                    } //11
                 }
             }
             
@@ -75,9 +77,7 @@ struct BubbleList: View {
             PlusSymbol()
         }
     } //13
-    
-     //3
-    
+        
     private var showAllButton:some View {
         let count = Secretary.shared.unpinnedBubblesCount
         return Text("\(Image(systemName: "eye")) Show \(count)")
