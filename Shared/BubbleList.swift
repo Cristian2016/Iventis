@@ -81,7 +81,10 @@ struct BubbleList: View {
         let color = Color.bubbleColor(forName: colorName)
         
         return Button {
-            
+            let bubble = viewModel.bubble(for: Int(viewModel.fiveSeconds_bRank!))!
+            viewModel.pairOfNotesList = bubble.lastPair
+            UserFeedback.singleHaptic(.light)
+            PersistenceController.shared.save()
         } label: {
             FusedLabel(content: .init(title: "Add Tag", symbol: "tag", size: .medium, color: color, isFilled: true))
         }
