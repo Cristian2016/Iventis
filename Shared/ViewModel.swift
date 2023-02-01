@@ -143,7 +143,7 @@ class ViewModel: ObservableObject {
     }
     
     func delete(_ bubble:Bubble) {
-        //if bubble to delete is pinned and pinned section has only one item in it, unhide unpinned section
+        //if unpinned are hidden & bubble to delete is pinned and pinned section has only one item, unhide unpinned
         if showFavoritesOnly, Secretary.shared.pinnedBubblesCount == 1 {
             showFavoritesOnly = false
         }
