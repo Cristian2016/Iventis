@@ -143,6 +143,11 @@ class ViewModel: ObservableObject {
     }
     
     func delete(_ bubble:Bubble) {
+        //if bubble to delete is pinned and pinned section has only one item in it, unhide unpinned section
+        if showFavoritesOnly, Secretary.shared.pinnedBubblesCount == 1 {
+            showFavoritesOnly = false
+        }
+        
         if !path.isEmpty { path = [] }
         let viewContext = PersistenceController.shared.viewContext
         viewContext.delete(bubble)

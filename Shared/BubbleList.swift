@@ -114,7 +114,7 @@ struct BubbleList: View {
     init(_ showFavoritesOnly: Bool) {
         var predicate:NSPredicate?
         if showFavoritesOnly { predicate = NSPredicate(format: "isPinned == true")}
-        
+                
         UITableView.appearance().showsVerticalScrollIndicator = false
         _bubbles = SectionedFetchRequest<Bool, Bubble>(
             entity: Bubble.entity(),
