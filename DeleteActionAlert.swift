@@ -53,7 +53,7 @@ struct DeleteActionAlert: View {
                                 .overlay {
                                     Text("History \(bubble.sessions_.count)")
                                         .font(.system(size: 32, weight: .medium, design: .rounded))
-                                        .foregroundColor(sessionsAvailable ? .white.opacity(0.3) :  .white)
+                                        .foregroundColor(sessionsAvailable ? .white.opacity(0.5) : .white)
                                 }
                             
                                 .onTapGesture {
