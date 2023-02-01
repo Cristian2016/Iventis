@@ -36,7 +36,7 @@ struct DeleteActionAlert: View {
                         VStack(spacing: 4) {
                             RoundedCornersShape(corners: [.topLeft, .topRight], radius: 28)
                                 .fill(.red)
-                                .frame(width: 208, height: 80)
+                                .frame(width: 208, height: 84)
                                 .overlay {
                                     Text("Bubble")
                                         .font(.system(size: 32, weight: .medium, design: .rounded))
@@ -44,7 +44,7 @@ struct DeleteActionAlert: View {
                                 }
                             RoundedCornersShape(corners: [.bottomLeft, .bottomRight], radius: 28)
                                 .fill(.red)
-                                .frame(width: 208, height: 80)
+                                .frame(width: 208, height: 84)
                                 .overlay {
                                     Text("Session")
                                         .font(.system(size: 32, weight: .medium, design: .rounded))
@@ -58,7 +58,7 @@ struct DeleteActionAlert: View {
                     Push(.topMiddle) {
                         Text("\(Image.trash) Delete")
                             .foregroundColor(.red)
-                            .font(.system(size: 28, weight: .medium))
+                            .font(.system(size: 24, weight: .medium))
                     }
                     .padding([.top])
                     .padding([.top], 6)
