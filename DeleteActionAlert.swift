@@ -52,7 +52,7 @@ struct DeleteActionAlert: View {
                                 }
                         }
                     }
-                        .padding([.bottom], 22)
+                        .padding([.bottom], 18)
                 )
                 .overlay {
                     Push(.topMiddle) {
@@ -61,6 +61,7 @@ struct DeleteActionAlert: View {
                             .font(.system(size: 28, weight: .medium))
                     }
                     .padding([.top])
+                    .padding([.top], 6)
                 }
         }
     }
