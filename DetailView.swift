@@ -50,8 +50,11 @@ struct DetailView: View {
         }
         .toolbar {
             ToolbarItemGroup {
-                if viewModel.fiveSeconds_bRank == Int(bubble.rank) { AddTagButton(bubble) }
+                if isAddTagButtonVisible { AddTagButton(bubble) }
             }
         }
     }
+    
+    // MARK: - Little Helpers
+    var isAddTagButtonVisible:Bool { viewModel.fiveSeconds_bRank == Int(bubble.rank) }
 }
