@@ -56,7 +56,8 @@ struct BubbleList: View {
                     .toolbarBackground(.ultraThinMaterial)
                     .toolbar {
                         ToolbarItemGroup {
-                            buttonsBar
+                            AutoLockSymbol(showLabel: true)
+                            PlusSymbol()
                             Button {
                                 
                             } label: {
@@ -104,13 +105,6 @@ struct BubbleList: View {
         GeometryReader {
             let metrics = BubbleCell.Metrics($0.size.width) //10
             DetailView(Int(bubble.rank), bubble, metrics)
-        }
-    }
-    
-    private var buttonsBar:some View {
-        HStack {
-            AutoLockSymbol(showLabel: true)
-            PlusSymbol()
         }
     }
     
