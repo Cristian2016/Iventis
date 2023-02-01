@@ -16,20 +16,20 @@ struct DeleteActionAlert: View {
             Image("aaa")
                 .resizable()
                 .aspectRatio(contentMode: .fit)
-                .scaleEffect(x: 0.7, y: 0.7)
+                .scaleEffect(x: 0.5, y: 0.5)
             RoundedRectangle(cornerRadius: metrics.radius)
-                .fill(.green)
-                .opacity(0.2)
+                .fill(metrics.backgroundColor)
                 .frame(width: metrics.width, height: metrics.height)
         }
-        
+        .standardShadow()
     }
     
     struct Metrics {
         let ratio = CGFloat(0.878)
-        let width = CGFloat(256)
+        let width = CGFloat(220)
         var height:CGFloat { width / ratio }
         let radius = CGFloat(52)
+        let backgroundColor = Color("deleteActionAlert")
     }
 }
 
