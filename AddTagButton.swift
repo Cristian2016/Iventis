@@ -26,7 +26,7 @@ struct AddTagButton: View {
             UserFeedback.singleHaptic(.light)
             PersistenceController.shared.save()
         } label: {
-            FusedLabel(content: .init(title: "Add Tag", symbol: "tag", size: .small, color: color, isFilled: true))
+            FusedLabel(content: .init(title: "Add Tag", symbol: "tag", size: .small, color: color))
         }
     }
 }
