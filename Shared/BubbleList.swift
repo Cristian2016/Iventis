@@ -70,25 +70,15 @@ struct BubbleList: View {
     // MARK: - Lego
     private var toolbaItems:some View {
         HStack {
-            if viewModel.fiveSeconds_bRank != nil { addTagButton }
+            if let bubble = viewModel.bubble(for: viewModel.fiveSeconds_bRank) {
+                AddTagButton(bubble)
+            }
             AutoLockSymbol(showLabel: viewModel.fiveSeconds_bRank == nil)
             PlusSymbol()
         }
     } //13
     
-    private var addTagButton:some View {
-        let colorName = viewModel.bubble(for: Int(viewModel.fiveSeconds_bRank!))?.color
-        let color = Color.bubbleColor(forName: colorName)
-        
-        return Button {
-            let bubble = viewModel.bubble(for: Int(viewModel.fiveSeconds_bRank!))!
-            viewModel.pairOfNotesList = bubble.lastPair
-            UserFeedback.singleHaptic(.light)
-            PersistenceController.shared.save()
-        } label: {
-            FusedLabel(content: .init(title: "Add Tag", symbol: "tag", size: .medium, color: color, isFilled: true))
-        }
-    } //3
+     //3
     
     private var showAllButton:some View {
         Text("\(Image(systemName: "eye")) Show All")

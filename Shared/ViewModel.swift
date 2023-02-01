@@ -24,7 +24,7 @@ class ViewModel: ObservableObject {
         if fiveSeconds_bRank != nil { fiveSeconds_bRank = nil  }
     }
     
-    @Published var fiveSeconds_bRank:Int64? { didSet{
+    @Published var fiveSeconds_bRank:Int? { didSet{
         if fiveSeconds_bRank != nil {
             self.timer = Timer.scheduledTimer( timeInterval: 5.0, target: self,
                                                selector: #selector(handleFiveSecondsTimer),
@@ -166,7 +166,7 @@ class ViewModel: ObservableObject {
     
     func removeAddTagButton(_ bubble:Bubble) {
         if fiveSeconds_bRank != nil {
-            if fiveSeconds_bRank == bubble.rank {
+            if fiveSeconds_bRank == Int(bubble.rank) {
                 fiveSeconds_bRank = nil
             }
         }
@@ -220,7 +220,7 @@ class ViewModel: ObservableObject {
                 if isDetailViewShowing { bubble.syncSmallBubbleCell = true }
                 
                 //1 both
-                fiveSeconds_bRank = bubble.rank
+                fiveSeconds_bRank = Int(bubble.rank)
                                 
             case .paused:  /* changes to running */
                 //create new pair, add it to currentSession
@@ -231,7 +231,7 @@ class ViewModel: ObservableObject {
                 if isDetailViewShowing { bubble.syncSmallBubbleCell = true }
                 
                 //1 both
-                fiveSeconds_bRank = bubble.rank
+                fiveSeconds_bRank = Int(bubble.rank)
                 
             case .running: /* changes to .paused */
                 let currentPair = bubble.lastPair
@@ -252,7 +252,7 @@ class ViewModel: ObservableObject {
                     }
                 }
                 
-                if fiveSeconds_bRank == bubble.rank { fiveSeconds_bRank = nil } //1
+                if fiveSeconds_bRank == Int(bubble.rank) { fiveSeconds_bRank = nil } //1
                 
             case .finished: return
         }

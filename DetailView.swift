@@ -15,6 +15,8 @@ struct DetailView: View {
     @StateObject var tabWrapper = SelectedTabWrapper()
     @FetchRequest var sessions:FetchedResults<Session>
     
+    @EnvironmentObject private var viewModel:ViewModel
+    
     let topDetailHeight = CGFloat(140)
     
     init(_ showDetail_bRank:Int?, _ bubble:Bubble, _ metrics:BubbleCell.Metrics) {
@@ -45,6 +47,13 @@ struct DetailView: View {
             }
             .listStyle(.plain)
             .scrollIndicators(.visible, axes: .vertical) //1
+        }
+        .toolbar {
+            ToolbarItemGroup {
+                if viewModel.fiveSeconds_bRank == Int(bubble.rank) {
+                    
+                }
+            }
         }
     }
 }
