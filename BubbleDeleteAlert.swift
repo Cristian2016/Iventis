@@ -46,6 +46,8 @@ struct BubbleDeleteAlert: View {
         if viewModel.fiveSeconds_bRank == bubble.rank { viewModel.fiveSeconds_bRank = nil }
     }
     
+    private func removeAddTagButton() { viewModel.removeAddTagButton(bubble) }
+    
     //// MARK: -
     var body: some View {
         ZStack {
@@ -55,6 +57,7 @@ struct BubbleDeleteAlert: View {
                 trashView
                 deleteBubbleView
                     .onTapGesture {
+                        
                         withAnimation {
                             viewModel.delete(bubble)
                             viewModel.deleteAction_bRank = nil

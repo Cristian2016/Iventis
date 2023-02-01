@@ -164,6 +164,14 @@ class ViewModel: ObservableObject {
         try? viewContext.save()
     }
     
+    func removeAddTagButton(_ bubble:Bubble) {
+        if fiveSeconds_bRank != nil {
+            if fiveSeconds_bRank == bubble.rank {
+                fiveSeconds_bRank = nil
+            }
+        }
+    }
+    
     func deletePair(_ pair:Pair?) {
         guard let pair = pair else { return }
         let viewContext = PersistenceController.shared.viewContext
