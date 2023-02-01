@@ -77,6 +77,7 @@
 		1FA834792850A57C003F4D61 /* WidgetsExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 1FA8346B2850A57A003F4D61 /* WidgetsExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		1FA8F87E28367B7A00394B59 /* BubbleNote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA8F87D28367B7A00394B59 /* BubbleNote.swift */; };
 		1FAD1576298A5A6C001139C6 /* AddTagButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FAD1575298A5A6C001139C6 /* AddTagButton.swift */; };
+		1FAD1578298A8346001139C6 /* Secretary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FAD1577298A8345001139C6 /* Secretary.swift */; };
 		1FAF39D9298575E9002D833C /* Library.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA377E72972FE75005ACD41 /* Library.swift */; };
 		1FAF39DB29857688002D833C /* MyPackage in Frameworks */ = {isa = PBXBuildFile; productRef = 1FAF39DA29857688002D833C /* MyPackage */; };
 		1FB3178F286ACB48006BBE82 /* Note_InfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB3178E286ACB48006BBE82 /* Note_InfoView.swift */; };
@@ -205,6 +206,7 @@
 		1FA834742850A57C003F4D61 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1FA8F87D28367B7A00394B59 /* BubbleNote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BubbleNote.swift; sourceTree = "<group>"; };
 		1FAD1575298A5A6C001139C6 /* AddTagButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTagButton.swift; sourceTree = "<group>"; };
+		1FAD1577298A8345001139C6 /* Secretary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Secretary.swift; sourceTree = "<group>"; };
 		1FB3178E286ACB48006BBE82 /* Note_InfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Note_InfoView.swift; sourceTree = "<group>"; };
 		1FB4D4DF2977F86500F26D9C /* iPadViewHierarchy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iPadViewHierarchy.swift; sourceTree = "<group>"; };
 		1FB5D8D328E81CD900DD522A /* InfoButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoButton.swift; sourceTree = "<group>"; };
@@ -328,6 +330,7 @@
 				1FB5D8D328E81CD900DD522A /* InfoButton.swift */,
 				1F680FC42882D97800548F70 /* MoreOptionsInfo.swift */,
 				1F377E1E287EB2F000E43598 /* AutoLockSymbol.swift */,
+				1FAD1577298A8345001139C6 /* Secretary.swift */,
 				1F684822287DBEBB00D8BF81 /* StartDelaySubview.swift */,
 				1F845FAD286EF8730053EAE6 /* WidgetsExtension.entitlements */,
 				1FA355CE2832238E00F73111 /* Timers--iOS--Info.plist */,
@@ -639,6 +642,7 @@
 				1F05B7C82989158E0022FD23 /* BorderlessLabel.swift in Sources */,
 				1FB5D8D628E8276D00DD522A /* StickyNoteListInfoView.swift in Sources */,
 				1FC70BB129807BAB007CD1E6 /* LayoutViewModel.swift in Sources */,
+				1FAD1578298A8346001139C6 /* Secretary.swift in Sources */,
 				1F387CEB2830082000F6B81D /* UpDownArrowsButton.swift in Sources */,
 				1FB3178F286ACB48006BBE82 /* Note_InfoView.swift in Sources */,
 				1F99AB5F286CA40D00977C9A /* StickyNote.swift in Sources */,
