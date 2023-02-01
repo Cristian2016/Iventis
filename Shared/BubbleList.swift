@@ -80,7 +80,7 @@ struct BubbleList: View {
     
     private var showAllButton:some View {
         let count = Secretary.shared.unpinnedBubblesCount
-        return Text("\(Image(systemName: "eye")) \(count) Unpinned")
+        return Text("\(Image(systemName: "eye")) \(count) Hidden")
             .listRowSeparator(.hidden)
             .font(.footnote)
             .foregroundColor(.secondary)
