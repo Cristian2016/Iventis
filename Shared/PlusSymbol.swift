@@ -26,7 +26,7 @@ struct PlusSymbol: View {
     
     struct Metrics {
         let font = Font.system(.title2)
-        let symbolColor = Color.secondary
+        let symbolColor = Color.label
         let diagonalLineColor = Color.red
     }
 }
