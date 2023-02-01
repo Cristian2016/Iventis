@@ -19,6 +19,8 @@ struct DeleteActionAlert: View {
     
     var body: some View {
         ZStack {
+            let sessionsAvailable = bubble.sessions_.isEmpty
+            
             Color.white.opacity(0.01)
                 .onTapGesture { cancelDeleteAction() }
             
