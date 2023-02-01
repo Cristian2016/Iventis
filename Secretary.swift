@@ -21,4 +21,14 @@ class Secretary {
         }
         return 0
     }
+    
+    var unpinnedBubblesCount:Int {
+       let context = PersistenceController.shared.backgroundContext
+        let request = Bubble.fetchRequest()
+        request.predicate = NSPredicate(format: "isPinned == false")
+        if let count = try? context.count(for: request) {
+            return count
+        }
+        return 0
+    }
 }
