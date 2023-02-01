@@ -109,7 +109,7 @@ struct BubbleList: View {
     
     private var buttonsBar:some View {
         HStack {
-            AutoLockSymbol()
+            AutoLockSymbol(showLabel: true)
             PlusSymbol()
         }
     }

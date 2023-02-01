@@ -2,7 +2,7 @@ import SwiftUI
 import MyPackage
 
 struct AutoLockSymbol: View {
-    let showLabel:Bool =  false
+    var showLabel:Bool =  false
     @EnvironmentObject var viewModel:ViewModel
     let metrics = Metrics()
     
