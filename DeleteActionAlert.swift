@@ -19,7 +19,7 @@ struct DeleteActionAlert: View {
                 .scaleEffect(x: 0.7, y: 0.7)
             RoundedRectangle(cornerRadius: metrics.radius)
                 .fill(.green)
-                .opacity(0.6)
+                .opacity(0.2)
                 .frame(width: metrics.width, height: metrics.height)
         }
         
