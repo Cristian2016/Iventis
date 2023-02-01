@@ -54,7 +54,16 @@ struct BubbleList: View {
                     .scrollIndicators(.hidden)
                     .listStyle(.plain)
                     .toolbarBackground(.ultraThinMaterial)
-                    .toolbar { ToolbarItemGroup { buttonsBar }}
+                    .toolbar {
+                        ToolbarItemGroup {
+                            buttonsBar
+                            Button {
+                                
+                            } label: {
+                                
+                            }
+                        }
+                    }
                     .padding(BubbleCell.padding) //9
                     .navigationDestination(for: Bubble.self) { detailView($0) }
                     .background { refresherView } //11

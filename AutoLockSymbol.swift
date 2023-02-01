@@ -2,6 +2,7 @@ import SwiftUI
 import MyPackage
 
 struct AutoLockSymbol: View {
+    let showLabel:Bool =  false
     @EnvironmentObject var viewModel:ViewModel
     let metrics = Metrics()
     
@@ -23,7 +24,7 @@ struct AutoLockSymbol: View {
     private var label:some View {
         if isDisplayAlwaysON {
             HStack {
-                FusedLabel(content: .autoLockOff)
+                if showLabel { FusedLabel(content: .autoLockOff) }
                 exitSymbol
             }
         }
