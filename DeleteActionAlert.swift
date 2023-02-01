@@ -41,9 +41,19 @@ struct DeleteActionAlert: View {
                             RoundedCornersShape(corners: [.topLeft, .topRight], radius: 28)
                                 .fill(.red)
                                 .frame(width: 214, height: 80)
+                                .overlay {
+                                    Text("Bubble")
+                                        .font(.system(size: 36, weight: .medium))
+                                        .foregroundColor(.white)
+                                }
                             RoundedCornersShape(corners: [.bottomLeft, .bottomRight], radius: 28)
                                 .fill(.red)
                                 .frame(width: 214, height: 80)
+                                .overlay {
+                                    Text("Session")
+                                        .font(.system(size: 36, weight: .medium))
+                                        .foregroundColor(.white)
+                                }
                         }
                     }
                         .padding([.bottom], 10)
