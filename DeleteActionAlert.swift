@@ -19,6 +19,9 @@ struct DeleteActionAlert: View {
     
     var body: some View {
         ZStack {
+            Color.white.opacity(0.01)
+                .onTapGesture { cancelDeleteAction() }
+            
             RoundedRectangle(cornerRadius: metrics.radius)
                 .fill(metrics.backgroundColor)
                 .frame(width: metrics.width, height: metrics.height)
@@ -34,6 +37,14 @@ struct DeleteActionAlert: View {
                                         .font(.system(size: 32, weight: .medium, design: .rounded))
                                         .foregroundColor(.white)
                                 }
+                                .onTapGesture {
+                                    removeAddTagButton()
+                                    withAnimation {
+                                        viewModel.delete(bubble)
+                                        viewModel.deleteAction_bRank = nil
+                                        removeFiveSecondsBar()
+                                    }
+                                }
                             RoundedCornersShape(corners: [.bottomLeft, .bottomRight], radius: 28)
                                 .fill(.red)
                                 .frame(width: 208, height: 84)
@@ -41,6 +52,14 @@ struct DeleteActionAlert: View {
                                     Text("Session")
                                         .font(.system(size: 32, weight: .medium, design: .rounded))
                                         .foregroundColor(.white)
+                                }
+                                .onTapGesture {
+                                    removeAddTagButton()
+                                    if !bubble.sessions_.isEmpty {
+                                        viewModel.reset(bubble)
+                                        viewModel.deleteAction_bRank = nil
+                                        removeFiveSecondsBar()
+                                    }
                                 }
                         }
                     }
@@ -75,6 +94,20 @@ struct DeleteActionAlert: View {
         let radius = CGFloat(40)
         let backgroundColor = Color("deleteActionAlert")
     }
+    
+    // MARK: -
+    ///dismiss view
+    private func cancelDeleteAction() {
+        viewModel.deleteAction_bRank = nil
+        layoutViewModel.deleteActionViewOffset = nil
+    }
+    
+    //ViewModel 1
+    private func removeFiveSecondsBar() {
+        if viewModel.fiveSeconds_bRank == Int(bubble.rank) { viewModel.fiveSeconds_bRank = nil }
+    }
+    
+    private func removeAddTagButton() { viewModel.removeAddTagButton(bubble) }
 }
 
 //struct DeleteActionAlert_Previews: PreviewProvider {
