@@ -57,7 +57,7 @@ struct BubbleDeleteAlert: View {
                 trashView
                 deleteBubbleView
                     .onTapGesture {
-                        
+                        removeAddTagButton()
                         withAnimation {
                             viewModel.delete(bubble)
                             viewModel.deleteAction_bRank = nil
@@ -67,6 +67,7 @@ struct BubbleDeleteAlert: View {
                 if !bubble.sessions_.isEmpty {
                     deleteSessionsView
                         .onTapGesture {
+                            removeAddTagButton()
                             if !bubble.sessions_.isEmpty {
                                 viewModel.reset(bubble)
                                 viewModel.deleteAction_bRank = nil
