@@ -110,8 +110,10 @@ struct BubbleDeleteAlert: View {
         let sessionsAvailable = bubble.sessions_.isEmpty
         return RoundedRectangle(cornerRadius: metrics.buttonRadius)
             .foregroundColor(sessionsAvailable ? metrics.bubbleColor.opacity(0.3) : metrics.bubbleColor)
-            .overlay { Text("History \(bubble.sessions_.count)")
-                .foregroundColor(sessionsAvailable ? .white.opacity(0.3) :  .white) }
+            .overlay {
+                Text("History \(bubble.sessions_.count)")
+                    .foregroundColor(sessionsAvailable ? .white.opacity(0.3) :  .white)
+            }
             .frame(height: metrics.buttonHeight)
     }
     
