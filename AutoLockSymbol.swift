@@ -51,7 +51,7 @@ struct AutoLockSymbol: View {
     private var isDisplayAlwaysON:Bool { get { UIApplication.shared.isIdleTimerDisabled } }
     
     struct Metrics {
-        let font = Font.system(.title2)
+        let font = Font.system(.title3)
         let symbolColor = Color.label
         let diagonalLineColor = Color.red
     }
