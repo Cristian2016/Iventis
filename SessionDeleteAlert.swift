@@ -42,7 +42,8 @@ struct SessionDeleteAlert: View {
     
     //ViewModel 1
     private func removeFiveSecondsBar() {
-        let isSameBubble = viewModel.fiveSeconds_bRank == session.bubble?.rank
+        guard let bubbleRank = session.bubble?.rank else { return }
+        let isSameBubble = viewModel.fiveSeconds_bRank == Int(bubbleRank)
         let isLastSession = session == session.bubble?.lastSession
         if isLastSession, isSameBubble { viewModel.fiveSeconds_bRank = nil }
     }
