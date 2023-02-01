@@ -26,18 +26,22 @@ struct DeleteActionAlert: View {
     
     var body: some View {
         ZStack {
-            //            Image("aaa")
-            //                .resizable()
-            //                .aspectRatio(contentMode: .fit)
-            //                .scaleEffect(x: 0.6, y: 0.6)
+            Image("aaa")
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+                .scaleEffect(x: 0.6, y: 0.6)
             RoundedRectangle(cornerRadius: metrics.radius)
                 .fill(metrics.backgroundColor)
                 .frame(width: metrics.width, height: metrics.height)
-            //                .opacity(0.0)
                 .standardShadow()
                 .overlay(
-                    VStack {
-                       
+                    VStack(spacing: 4) {
+                        RoundedCornersShape(corners: [.topLeft, .topRight], radius: 28)
+                            .fill(.red)
+                            .frame(width: 214, height: 80)
+                        RoundedCornersShape(corners: [.bottomLeft, .bottomRight], radius: 28)
+                            .fill(.red)
+                            .frame(width: 214, height: 80)
                     }
                 )
         }
