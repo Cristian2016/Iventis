@@ -8,22 +8,14 @@
 import SwiftUI
 import MyPackage
 
-
-struct RoundedCornersShape: Shape {
-    let corners: UIRectCorner
-    let radius: CGFloat
-    
-    func path(in rect: CGRect) -> Path {
-        let path = UIBezierPath(roundedRect: rect,
-                                byRoundingCorners: corners,
-                                cornerRadii: CGSize(width: radius, height: radius))
-        return Path(path.cgPath)
-    }
-}
-
 struct DeleteActionAlert: View {
     
-    let metrics = Metrics()
+    @EnvironmentObject private var viewModel:ViewModel
+    @EnvironmentObject private var layoutViewModel:LayoutViewModel
+    
+    let bubble:Bubble
+    
+    let metrics:Metrics
     
     var body: some View {
         ZStack {
@@ -58,7 +50,7 @@ struct DeleteActionAlert: View {
                     Push(.topMiddle) {
                         Text("\(Image.trash) Delete")
                             .foregroundColor(.red)
-                            .font(.system(size: 24, weight: .medium))
+                            .font(.system(size: 26, weight: .medium))
                     }
                     .padding([.top])
                     .padding([.top], 6)
@@ -66,7 +58,17 @@ struct DeleteActionAlert: View {
         }
     }
     
+    init(_ bubble:Bubble) {
+        self.bubble = bubble
+        
+        let bubbleColor = Color.bubbleColor(forName: bubble.color ?? "mint")
+        let metrics = Metrics(bubbleColor: bubbleColor)
+        self.metrics = metrics
+    }
+    
     struct Metrics {
+        let bubbleColor:Color
+        
         let ratio = CGFloat(0.88)
         let width = CGFloat(220)
         var height:CGFloat { width / ratio }
@@ -75,8 +77,8 @@ struct DeleteActionAlert: View {
     }
 }
 
-struct DeleteActionAlert_Previews: PreviewProvider {
-    static var previews: some View {
-        DeleteActionAlert()
-    }
-}
+//struct DeleteActionAlert_Previews: PreviewProvider {
+//    static var previews: some View {
+//        DeleteActionAlert()
+//    }
+//}
