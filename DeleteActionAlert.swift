@@ -27,10 +27,6 @@ struct DeleteActionAlert: View {
     
     var body: some View {
         ZStack {
-            Image("aaa")
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-                .scaleEffect(x: 0.6, y: 0.6)
             RoundedRectangle(cornerRadius: metrics.radius)
                 .fill(metrics.backgroundColor)
                 .frame(width: metrics.width, height: metrics.height)
@@ -40,7 +36,7 @@ struct DeleteActionAlert: View {
                         VStack(spacing: 4) {
                             RoundedCornersShape(corners: [.topLeft, .topRight], radius: 28)
                                 .fill(.red)
-                                .frame(width: 214, height: 80)
+                                .frame(width: 204, height: 80)
                                 .overlay {
                                     Text("Bubble")
                                         .font(.system(size: 36, weight: .medium, design: .rounded))
@@ -48,7 +44,7 @@ struct DeleteActionAlert: View {
                                 }
                             RoundedCornersShape(corners: [.bottomLeft, .bottomRight], radius: 28)
                                 .fill(.red)
-                                .frame(width: 214, height: 80)
+                                .frame(width: 204, height: 80)
                                 .overlay {
                                     Text("Session")
                                         .font(.system(size: 36, weight: .medium, design: .rounded))
@@ -56,7 +52,7 @@ struct DeleteActionAlert: View {
                                 }
                         }
                     }
-                        .padding([.bottom], 10)
+                        .padding([.bottom], 22)
                 )
                 .overlay {
                     Push(.topMiddle) {
@@ -65,7 +61,6 @@ struct DeleteActionAlert: View {
                             .font(.system(size: 28, weight: .medium))
                     }
                     .padding([.top])
-                    .padding([.top], 14)
                 }
         }
     }
@@ -74,7 +69,7 @@ struct DeleteActionAlert: View {
         let ratio = CGFloat(0.878)
         let width = CGFloat(220)
         var height:CGFloat { width / ratio }
-        let radius = CGFloat(52)
+        let radius = CGFloat(40)
         let backgroundColor = Color("deleteActionAlert")
     }
 }
