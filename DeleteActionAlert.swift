@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import MyPackage
 
 
 struct RoundedCornersShape: Shape {
@@ -35,14 +36,17 @@ struct DeleteActionAlert: View {
                 .frame(width: metrics.width, height: metrics.height)
                 .standardShadow()
                 .overlay(
-                    VStack(spacing: 4) {
-                        RoundedCornersShape(corners: [.topLeft, .topRight], radius: 28)
-                            .fill(.red)
-                            .frame(width: 214, height: 80)
-                        RoundedCornersShape(corners: [.bottomLeft, .bottomRight], radius: 28)
-                            .fill(.red)
-                            .frame(width: 214, height: 80)
+                    Push(.bottomMiddle) {
+                        VStack(spacing: 4) {
+                            RoundedCornersShape(corners: [.topLeft, .topRight], radius: 28)
+                                .fill(.red)
+                                .frame(width: 214, height: 80)
+                            RoundedCornersShape(corners: [.bottomLeft, .bottomRight], radius: 28)
+                                .fill(.red)
+                                .frame(width: 214, height: 80)
+                        }
                     }
+                        .padding([.bottom])
                 )
         }
     }
