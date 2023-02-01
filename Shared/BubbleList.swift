@@ -70,9 +70,7 @@ struct BubbleList: View {
     // MARK: - Lego
     private var toolbaItems:some View {
         HStack {
-            if let bubble = viewModel.bubble(for: viewModel.fiveSeconds_bRank) {
-                AddTagButton(bubble)
-            }
+            if let bubble = viewModel.fiveSecondsBubble { AddTagButton(bubble) }
             AutoLockSymbol(showLabel: viewModel.fiveSeconds_bRank == nil)
             PlusSymbol()
         }

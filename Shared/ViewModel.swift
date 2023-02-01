@@ -554,6 +554,9 @@ class ViewModel: ObservableObject {
             }
         }
     }
+    
+    // MARK: - Little Helpers
+    var fiveSecondsBubble:Bubble? { bubble(for: fiveSeconds_bRank) }
 }
 
 // MARK: - Handle SDBubble start and pause and shit
