@@ -79,7 +79,8 @@ struct BubbleList: View {
      //3
     
     private var showAllButton:some View {
-        Text("\(Image(systemName: "eye")) Show All")
+        let count = Secretary.shared.unpinnedBubblesCount
+        return Text("\(Image(systemName: "eye")) Show All \(count)")
             .listRowSeparator(.hidden)
             .font(.footnote)
             .foregroundColor(.secondary)
