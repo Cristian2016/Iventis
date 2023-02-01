@@ -43,7 +43,7 @@ struct DeleteActionAlert: View {
                                 .frame(width: 214, height: 80)
                                 .overlay {
                                     Text("Bubble")
-                                        .font(.system(size: 36, weight: .medium))
+                                        .font(.system(size: 36, weight: .medium, design: .rounded))
                                         .foregroundColor(.white)
                                 }
                             RoundedCornersShape(corners: [.bottomLeft, .bottomRight], radius: 28)
@@ -51,7 +51,7 @@ struct DeleteActionAlert: View {
                                 .frame(width: 214, height: 80)
                                 .overlay {
                                     Text("Session")
-                                        .font(.system(size: 36, weight: .medium))
+                                        .font(.system(size: 36, weight: .medium, design: .rounded))
                                         .foregroundColor(.white)
                                 }
                         }
@@ -61,7 +61,7 @@ struct DeleteActionAlert: View {
                 .overlay {
                     Push(.topMiddle) {
                         Text("\(Image.trash) Delete")
-                            .foregroundColor(.white)
+                            .foregroundColor(.red)
                             .font(.system(size: 28, weight: .medium))
                     }
                     .padding([.top])
