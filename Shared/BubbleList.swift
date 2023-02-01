@@ -16,6 +16,7 @@
 //10 BubbleCell must know width of the parent view to compute spacing and have same design regardless of device or orientation
 //11 user can pull down to toggle pinned bubbles only. refresherView shows when used pulls to refresh the table
 //12 initializer with or without predicate. when predicate is set, it fetches only pinned bubbles [bubble.isPinned]. otherwise it fetches everything
+//13 toolbar items is an HStack { PlusButton AutoLock etc }
 
 import SwiftUI
 import CoreData
@@ -54,17 +55,7 @@ struct BubbleList: View {
                     .scrollIndicators(.hidden)
                     .listStyle(.plain)
                     .toolbarBackground(.ultraThinMaterial)
-                    .toolbar {
-                        ToolbarItemGroup {
-                            AutoLockSymbol(showLabel: true)
-                            PlusSymbol()
-                            Button {
-                                
-                            } label: {
-                                
-                            }
-                        }
-                    }
+                    .toolbar { ToolbarItemGroup { toolbaItems }}
                     .padding(BubbleCell.padding) //9
                     .navigationDestination(for: Bubble.self) { detailView($0) }
                     .background { refresherView } //11
@@ -77,6 +68,18 @@ struct BubbleList: View {
     }
     
     // MARK: - Lego
+    private var toolbaItems:some View {
+        HStack {
+            AutoLockSymbol(showLabel: viewModel.fiveSeconds_bRank == nil)
+            PlusSymbol()
+            Button {
+                
+            } label: {
+                
+            }
+        }
+    } //13
+    
     private var showAllButton:some View {
         Text("\(Image(systemName: "eye")) Show All")
             .listRowSeparator(.hidden)
