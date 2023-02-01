@@ -36,18 +36,18 @@ struct DeleteActionAlert: View {
                         VStack(spacing: 4) {
                             RoundedCornersShape(corners: [.topLeft, .topRight], radius: 28)
                                 .fill(.red)
-                                .frame(width: 204, height: 80)
+                                .frame(width: 208, height: 80)
                                 .overlay {
                                     Text("Bubble")
-                                        .font(.system(size: 36, weight: .medium, design: .rounded))
+                                        .font(.system(size: 32, weight: .medium, design: .rounded))
                                         .foregroundColor(.white)
                                 }
                             RoundedCornersShape(corners: [.bottomLeft, .bottomRight], radius: 28)
                                 .fill(.red)
-                                .frame(width: 204, height: 80)
+                                .frame(width: 208, height: 80)
                                 .overlay {
                                     Text("Session")
-                                        .font(.system(size: 36, weight: .medium, design: .rounded))
+                                        .font(.system(size: 32, weight: .medium, design: .rounded))
                                         .foregroundColor(.white)
                                 }
                         }
