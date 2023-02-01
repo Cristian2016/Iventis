@@ -28,8 +28,8 @@ struct UnitedViewHierarchy: View {
             
             if showDeleteActionView {
                 if let bubble = viewModel.bubble(for: Int(viewModel.deleteAction_bRank!)) {
-                    BubbleDeleteAlert(bubble)
-//                    DeleteActionAlert()
+//                    BubbleDeleteAlert(bubble)
+                    DeleteActionAlert(bubble)
                 }
             }
             
