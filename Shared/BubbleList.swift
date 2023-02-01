@@ -103,7 +103,6 @@ struct BubbleList: View {
             AutoLockSymbol()
             PlusSymbol()
         }
-           
     }
     
     // MARK: -
