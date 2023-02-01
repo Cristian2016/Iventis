@@ -46,8 +46,17 @@ struct DeleteActionAlert: View {
                                 .frame(width: 214, height: 80)
                         }
                     }
-                        .padding([.bottom])
+                        .padding([.bottom], 10)
                 )
+                .overlay {
+                    Push(.topMiddle) {
+                        Text("\(Image.trash) Delete")
+                            .foregroundColor(.white)
+                            .font(.system(size: 28, weight: .medium))
+                    }
+                    .padding([.top])
+                    .padding([.top], 14)
+                }
         }
     }
     
