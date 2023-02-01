@@ -48,6 +48,7 @@ struct DetailView: View {
             .listStyle(.plain)
             .scrollIndicators(.visible, axes: .vertical) //1
         }
+        .toolbarBackground(.ultraThinMaterial)
         .toolbar {
             ToolbarItemGroup {
                 if isAddTagButtonVisible { AddTagButton(bubble) }
