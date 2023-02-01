@@ -128,7 +128,7 @@ extension Color {
     ]
     
     static func bubbleColor(forName bubbleColorName:String?) -> Color {
-        (Color.bubbleThrees.filter { $0.description == bubbleColorName }.first ?? Color.Bubbles.clear).sec
+        (bubbleThrees.filter { $0.description == bubbleColorName }.first ?? Color.Bubbles.clear).sec
     }
     
     static let emojis = ["lemon":"🟨",
