@@ -43,7 +43,7 @@ struct BubbleDeleteAlert: View {
     
     //ViewModel 1
     private func removeFiveSecondsBar() {
-        if viewModel.fiveSeconds_bRank == bubble.rank { viewModel.fiveSeconds_bRank = nil }
+        if viewModel.fiveSeconds_bRank == Int(bubble.rank) { viewModel.fiveSeconds_bRank = nil }
     }
     
     private func removeAddTagButton() { viewModel.removeAddTagButton(bubble) }
