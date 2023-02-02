@@ -30,10 +30,15 @@ struct BubbleDeleteActionAlert: View {
     
     var body: some View {
         ZStack {
-            
             transparentBackground
             roundedBackground
-                .overlay( Push(.bottomMiddle) { buttons } .padding([.bottom], 18) )
+                .overlay( Push(.bottomMiddle) {
+                    VStack(spacing: 4) {
+                        topButton
+                        bottomButton
+                    }
+                }
+                    .padding([.bottom], 18) )
                 .overlay { deleteLabel }
         }
     }
@@ -72,7 +77,7 @@ struct BubbleDeleteActionAlert: View {
                 removeFiveSecondsBar()
             }
         } label: {
-            RoundedCornersShape(corners: [.topLeft, .topRight], radius: 28)
+            vRoundedRectangle(corners: [.topLeft, .topRight], radius: 28)
                 .fill(metrics.bubbleColor)
                 .frame(width: 208, height: 84)
                 .overlay {
@@ -96,7 +101,7 @@ struct BubbleDeleteActionAlert: View {
                 removeFiveSecondsBar()
             }
         } label: {
-            RoundedCornersShape(corners: [.bottomLeft, .bottomRight], radius: 28)
+            vRoundedRectangle(corners: [.bottomLeft, .bottomRight], radius: 28)
                 .fill(bubble.sessions_.isEmpty ? metrics.bubbleColor.opacity(0.25) : metrics.bubbleColor)
                 .frame(width: 208, height: 84)
                 .overlay {
@@ -106,14 +111,6 @@ struct BubbleDeleteActionAlert: View {
                 }
         }
         .buttonStyle(DeleteButtonStyle(disabled: bubble.sessions_.isEmpty))
-    }
-    
-    //top and bottom buttons
-    private var buttons:some View {
-        VStack(spacing: 4) {
-            topButton
-            bottomButton
-        }
     }
     
     // MARK: -

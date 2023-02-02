@@ -21,7 +21,7 @@ struct SessionDeleteActionAlert: View {
         let backgroundColor = Color("deleteActionViewBackground")
         let buttonRadius = CGFloat(13)
         let bubbleColor:Color
-        let width = CGFloat(174)
+        let width = CGFloat(190)
         let buttonHeight:CGFloat = 78
         let trashViewFont = Font.system(size: 28).weight(.medium)
         let buttonFont = Font.system(size: 28).weight(.medium)
