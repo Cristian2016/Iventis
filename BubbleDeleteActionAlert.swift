@@ -87,9 +87,7 @@ struct BubbleDeleteActionAlert: View {
             removeAddTagButton()
             if !bubble.sessions_.isEmpty {
                 viewModel.reset(bubble)
-                delayExecution(.now() + 0.3) {
-                    viewModel.deleteAction_bRank = nil
-                }
+                viewModel.deleteAction_bRank = nil
                 
                 removeFiveSecondsBar()
             }
