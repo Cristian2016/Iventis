@@ -8,7 +8,7 @@
 import SwiftUI
 import MyPackage
 
-struct AddTagButton: View {
+struct AddPairCellNoteButton: View {
     @EnvironmentObject private var viewModel:ViewModel
     
     let bubble:Bubble

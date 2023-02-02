@@ -51,7 +51,7 @@ struct DetailView: View {
         .toolbarBackground(.ultraThinMaterial)
         .toolbar {
             ToolbarItemGroup {
-                if isAddTagButtonVisible { AddTagButton(bubble) }
+                if isAddTagButtonVisible { AddPairCellNoteButton(bubble) }
             }
         }
     }
