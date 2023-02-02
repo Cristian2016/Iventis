@@ -37,7 +37,7 @@ struct MoreOptionsView: View {
     // MARK: - Body
     var body: some View {
         ZStack {
-            blurryBackground
+            BlurryBackground()
                 .onTapGesture { saveDelay() }
                 .highPriorityGesture(swipeLeft)
             VStack {
@@ -71,12 +71,6 @@ struct MoreOptionsView: View {
             ConfirmView(content: .startDelayCreated) { dismiss() }
         }
         .padding([.top])
-    }
-    
-    private var blurryBackground:some View {
-        Color.clear
-            .background(.ultraThinMaterial, in: Rectangle())
-            .ignoresSafeArea()
     }
     
     private var tableBackground:some View {
