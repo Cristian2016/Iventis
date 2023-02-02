@@ -111,11 +111,11 @@ struct StickyNoteList: View {
             
             if vm.showStickyNoteListInfo { StickyNoteListInfoView() }
         }
-        .onAppear { keyboardVisible = showKeyboard ? true : false }
+        .onAppear { keyboardVisible = hideKeyboard ? false : true }
     }
     
     // MARK: -
-    private var showKeyboard:Bool {
+    private var hideKeyboard:Bool {
         !UIDevice.isIPad &&
         UIScreen.main.bounds.size.width > UIScreen.main.bounds.size.height
     } //1
