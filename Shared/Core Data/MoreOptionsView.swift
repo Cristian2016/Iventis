@@ -56,11 +56,7 @@ struct MoreOptionsView: View {
             .padding()
             .padding()
             
-            Push(.bottomMiddle) {
-                Text("\(Image(systemName: "hand.tap")) Tap background to dismiss")
-                    .font(.caption)
-                    .foregroundColor(.secondary)
-            }
+            Push(.bottomMiddle) { TapToDismissView() }
             .padding([.bottom])
             .padding([.bottom])
         }
