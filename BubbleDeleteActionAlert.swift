@@ -62,6 +62,7 @@ struct BubbleDeleteActionAlert: View {
     //delete bubble action
     private var topButton:some View {
         Button {
+            UserFeedback.singleHaptic(.heavy)
             removeAddTagButton()
             withAnimation {
                 viewModel.delete(bubble)
@@ -84,6 +85,7 @@ struct BubbleDeleteActionAlert: View {
     //delete History action
     private var bottomButton:some View {
         Button {
+            UserFeedback.singleHaptic(.heavy)
             removeAddTagButton()
             if !bubble.sessions_.isEmpty {
                 viewModel.reset(bubble)
