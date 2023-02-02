@@ -74,7 +74,7 @@ struct StickyNoteList: View {
     // MARK: - Body
     var body: some View {
         ZStack {
-            screenBackground
+            BlurryBackground()
                 .onTapGesture { saveNoteAndDismiss() }
                 .onLongPressGesture { deleteTextFieldText() }
                 .gesture( /* deleteTextFieldText with a */dragGesture)
@@ -128,12 +128,6 @@ struct StickyNoteList: View {
         }
         .foregroundColor(.white)
         .background(Color("deleteActionViewBackground").padding(-250))
-    }
-    
-    private var screenBackground: some View {
-        Color.clear
-            .background(.ultraThinMaterial, in: Rectangle())
-            .ignoresSafeArea()
     }
     
     private var darkRoundedBackground: some View {

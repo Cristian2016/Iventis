@@ -156,11 +156,3 @@ struct BubbleDeleteActionAlert: View {
 //    }
 //}
 
-struct BlurryBackground:View {
-    var material:Material = .ultraThinMaterial
-    var body: some View {
-        Color.clear
-            .background(material, in: Rectangle())
-            .ignoresSafeArea()
-    }
-}
