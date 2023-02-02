@@ -12,7 +12,7 @@ extension BubbleDeleteActionAlert {
     struct DeleteButtonStyle:ButtonStyle {
         func makeBody(configuration: Configuration) -> some View {
             configuration.label
-                .scaleEffect(x: configuration.isPressed ? 0. : 1.0, y: configuration.isPressed ? 0.9 : 1.0)
+                .scaleEffect(x: configuration.isPressed ? 0.9 : 1.0, y: configuration.isPressed ? 0.9 : 1.0)
                 .animation(.spring(), value: configuration.isPressed)
         }
     }
@@ -87,7 +87,10 @@ struct BubbleDeleteActionAlert: View {
             removeAddTagButton()
             if !bubble.sessions_.isEmpty {
                 viewModel.reset(bubble)
-                viewModel.deleteAction_bRank = nil
+                delayExecution(.now() + 0.3) {
+                    viewModel.deleteAction_bRank = nil
+                }
+                
                 removeFiveSecondsBar()
             }
         } label: {
