@@ -87,7 +87,7 @@ struct BubbleDeleteActionAlert: View {
     //delete History action
     private var bottomButton:some View {
         Button {
-            UserFeedback.singleHaptic(.light)
+            if !bubble.sessions_.isEmpty { UserFeedback.singleHaptic(.light) }
             removeAddTagButton()
             if !bubble.sessions_.isEmpty {
                 viewModel.reset(bubble)
@@ -102,6 +102,7 @@ struct BubbleDeleteActionAlert: View {
                 .overlay {
                     Text("History \(bubble.sessions_.count)")
                         .font(.system(size: 32, weight: .medium, design: .rounded))
+                        .foregroundColor(bubble.sessions_.isEmpty ? .black : .white)
                 }
         }
         .buttonStyle(DeleteButtonStyle(disabled: bubble.sessions_.isEmpty))
