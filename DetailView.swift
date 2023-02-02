@@ -52,6 +52,7 @@ struct DetailView: View {
         .toolbar {
             ToolbarItemGroup {
                 if isAddTagButtonVisible { AddPairCellNoteButton(bubble) }
+                FusedLabel(content: .init(title: "Scroll to Top", symbol: "arrow.up", size: .small))
             }
         }
     }
