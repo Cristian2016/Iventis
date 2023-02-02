@@ -55,6 +55,14 @@ struct MoreOptionsView: View {
             .background { tableBackground /* contains info button */ }
             .padding()
             .padding()
+            
+            Push(.bottomMiddle) {
+                Text("\(Image(systemName: "hand.tap")) Tap background to dismiss")
+                    .font(.caption)
+                    .foregroundColor(.secondary)
+            }
+            .padding([.bottom])
+            .padding([.bottom])
         }
         .ignoresSafeArea()
     }
