@@ -18,28 +18,29 @@ struct BubbleDeleteActionAlert: View {
     
     var body: some View {
         ZStack {
-            Color.white.opacity(0.01)
-                .onTapGesture { cancelDeleteAction() }
+            Color.white.opacity(0.01).onTapGesture { cancelDeleteAction() }
             
             RoundedRectangle(cornerRadius: metrics.radius)
                 .fill(metrics.backgroundColor)
                 .frame(width: metrics.width, height: metrics.height)
                 .standardShadow()
                 .overlay( Push(.bottomMiddle) { buttons } .padding([.bottom], 18) )
-                .overlay {
-                    Push(.topMiddle) {
-                        Text("\(Image.trash) Delete")
-                            .foregroundColor(.red)
-                            .font(.system(size: 26, weight: .medium))
-                    }
-                    .padding([.top])
-                    .padding([.top], 6)
-                }
+                .overlay { deleteLabel }
         }
     }
     
     // MARK: - Lego
     //delete bubble action
+    private var deleteLabel:some View {
+        Push(.topMiddle) {
+            Text("\(Image.trash) Delete")
+                .foregroundColor(.red)
+                .font(.system(size: 26, weight: .medium))
+        }
+        .padding([.top])
+        .padding([.top], 6)
+    }
+    
     private var topButton:some View {
         Button {
             removeAddTagButton()
