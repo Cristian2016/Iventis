@@ -54,8 +54,7 @@ struct SessionDeleteActionAlert: View {
     //// MARK: -
     var body: some View {
         ZStack {
-            Color.white.opacity(0.01)
-                .onTapGesture { cancelDeleteAction() }
+            Color.white.opacity(0.01).onTapGesture { cancelDeleteAction() }
             VStack (spacing:8) {
                 trashLabel
                 deleteButton
