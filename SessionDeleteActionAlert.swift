@@ -17,13 +17,14 @@ struct SessionDeleteActionAlert: View {
     let metrics:Metrics
     
     struct Metrics {
-        let backgroundRadius = CGFloat(40)
+        let backgroundRadius = CGFloat(41)
         let backgroundColor = Color("deleteActionViewBackground")
-        let buttonRadius = CGFloat(28)
+        let buttonRadius = CGFloat(25)
         let bubbleColor:Color
         let width = CGFloat(190)
+        let height = CGFloat(150)
         let buttonHeight:CGFloat = 78
-        let trashViewFont = Font.system(size: 28).weight(.medium)
+        let trashViewFont = Font.system(size: 26, weight: .medium)
         let buttonFont = Font.system(size: 28).weight(.medium)
     }
     
@@ -76,9 +77,8 @@ struct SessionDeleteActionAlert: View {
                     }
             }
             .font(.system(size: 30).weight(.medium))
-            .frame(width: metrics.width)
-            .padding(16)
-            .padding([.top], 4)
+            .frame(width: metrics.width, height: metrics.height)
+            .padding(8)
             .background {
                 RoundedRectangle(cornerRadius: metrics.backgroundRadius)
                     .strokeBorder(metrics.bubbleColor, lineWidth: 4)
