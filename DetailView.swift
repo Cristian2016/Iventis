@@ -4,6 +4,7 @@
 //
 //  Created by Cristian Lapusan on 07.05.2022.
 //1 visible only when scrolling vertically. If it's visible horizontally, it will show scoll indicator when scrolling in the TopDetailView, which doesn't look good
+//2 scroll to top for beginners :)))
 
 import SwiftUI
 import MyPackage
@@ -17,7 +18,7 @@ struct DetailView: View {
     
     @EnvironmentObject private var viewModel:ViewModel
     
-    @State private var scrollToTop = false
+    @State private var scrollToTop = false //2
     
     let topDetailHeight = CGFloat(140)
     
@@ -56,14 +57,14 @@ struct DetailView: View {
                         withAnimation { proxy.scrollTo(1) }
                         scrollToTop = false
                     }
-                }
+                } //2
             }
             .toolbarBackground(.ultraThinMaterial)
             .toolbar {
                 ToolbarItemGroup {
                     if isAddTagButtonVisible { AddPairCellNoteButton(bubble) }
                     FusedLabel(content: .init(title: "Scroll to Top", symbol: "arrow.up", size: .small))
-                        .onTapGesture { scrollToTop = true }
+                        .onTapGesture { scrollToTop = true } //2
                 }
             }
         }
