@@ -17,6 +17,8 @@ struct DetailView: View {
     
     @EnvironmentObject private var viewModel:ViewModel
     
+    @State private var scrollToTop = false
+    
     let topDetailHeight = CGFloat(140)
     
     init(_ showDetail_bRank:Int?, _ bubble:Bubble, _ metrics:BubbleCell.Metrics) {
@@ -33,29 +35,36 @@ struct DetailView: View {
     
     var body: some View {
         ZStack {
-            List {
-                BubbleCell(bubble, metrics).padding(BubbleCell.padding) //2
-                if sessions.isEmpty { NoSessionsAlertView() }
-                else {
-                    TopDetailView(rank).frame(height: topDetailHeight)
-                        .padding(BubbleCell.padding) //2
-                        .listRowSeparator(.hidden)
-                    BottomDetailView(rank)
-                        .frame(height: 600)
-                        .listRowSeparator(.hidden)
+            ScrollViewReader { proxy in
+                List {
+                    BubbleCell(bubble, metrics).padding(BubbleCell.padding) //2
+                        .id(1)
+                    if sessions.isEmpty { NoSessionsAlertView() }
+                    else {
+                        TopDetailView(rank).frame(height: topDetailHeight)
+                            .padding(BubbleCell.padding) //2
+                            .listRowSeparator(.hidden)
+                        BottomDetailView(rank)
+                            .frame(height: 600)
+                            .listRowSeparator(.hidden)
+                    }
+                }
+                .listStyle(.plain)
+                .scrollIndicators(.visible, axes: .vertical) //1
+                .onChange(of: scrollToTop) {
+                    if $0 {
+                        withAnimation { proxy.scrollTo(1) }
+                        scrollToTop = false
+                    }
                 }
             }
-            .listStyle(.plain)
-            .scrollIndicators(.visible, axes: .vertical) //1
-        }
-        .toolbarBackground(.ultraThinMaterial)
-        .toolbar {
-            ToolbarItemGroup {
-                if isAddTagButtonVisible { AddPairCellNoteButton(bubble) }
-                FusedLabel(content: .init(title: "Scroll to Top", symbol: "arrow.up", size: .small))
-                    .onTapGesture {
-                        print("Scroll to top")
-                    }
+            .toolbarBackground(.ultraThinMaterial)
+            .toolbar {
+                ToolbarItemGroup {
+                    if isAddTagButtonVisible { AddPairCellNoteButton(bubble) }
+                    FusedLabel(content: .init(title: "Scroll to Top", symbol: "arrow.up", size: .small))
+                        .onTapGesture { scrollToTop = true }
+                }
             }
         }
     }
