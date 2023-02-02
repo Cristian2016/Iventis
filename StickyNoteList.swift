@@ -105,7 +105,7 @@ struct StickyNoteList: View {
             .padding([.top])
             .padding([.top])
             
-            Push(.topRight) { InfoButton(color:.infoButton) { vm.showStickyNoteListInfo = true }}
+            Push(.topRight) { InfoButton(color:.secondary) { vm.showStickyNoteListInfo = true }}
                 .padding([.top])
                 .padding([.top])
             
