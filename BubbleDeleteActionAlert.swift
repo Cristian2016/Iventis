@@ -12,7 +12,8 @@ extension BubbleDeleteActionAlert {
     struct DeleteButtonStyle:ButtonStyle {
         func makeBody(configuration: Configuration) -> some View {
             configuration.label
-                .scaleEffect(x: configuration.isPressed ? 0.8 : 1.0, y: configuration.isPressed ? 0.8 : 1.0)
+                .scaleEffect(x: configuration.isPressed ? 0. : 1.0, y: configuration.isPressed ? 0.9 : 1.0)
+                .animation(.spring(), value: configuration.isPressed)
         }
     }
 }
