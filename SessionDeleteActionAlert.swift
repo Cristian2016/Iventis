@@ -99,7 +99,7 @@ struct SessionDeleteActionAlert: View {
         } label: {
             RoundedRectangle(cornerRadius: metrics.buttonRadius)
                 .fill(metrics.bubbleColor)
-                .frame(width: 208, height: 84)
+                .frame(width: 204, height: 84)
                 .overlay {
                     Text("Session \(sessionRank)")
                         .font(.system(size: 32, weight: .medium, design: .rounded))
