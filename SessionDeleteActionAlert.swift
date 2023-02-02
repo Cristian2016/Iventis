@@ -8,7 +8,7 @@
 import SwiftUI
 import MyPackage
 
-struct SessionDeleteAlert: View {
+struct SessionDeleteActionAlert: View {
     @EnvironmentObject private var viewModel:ViewModel
     @EnvironmentObject private var layoutViewModel:LayoutViewModel
     
@@ -111,7 +111,7 @@ struct SessionDeleteAlert: View {
     // MARK: - Modifiers
 }
 
-struct SessionDeleteAlert_Previews: PreviewProvider {
+struct SessionDeleteActionAlert_Previews: PreviewProvider {
     static let session:Session = {
         let session = Session(context: PersistenceController.preview.viewContext)
         let bubble = Bubble(context: PersistenceController.preview.viewContext)
@@ -120,6 +120,6 @@ struct SessionDeleteAlert_Previews: PreviewProvider {
         return session
     }()
     static var previews: some View {
-        SessionDeleteAlert(session, "2")
+        SessionDeleteActionAlert(session, "2")
     }
 }

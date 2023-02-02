@@ -33,7 +33,7 @@ struct UnitedViewHierarchy: View {
             }
             
             if let session = viewModel.sessionToDelete?.0 {
-                SessionDeleteAlert(session, viewModel.sessionToDelete!.1)
+                SessionDeleteActionAlert(session, viewModel.sessionToDelete!.1)
             }
             
             if bubbleNotesShowing { BubbleStickyNoteList($viewModel.notesList_bRank) }
