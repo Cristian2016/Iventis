@@ -22,8 +22,9 @@ struct SessionDeleteActionAlert: View {
         
         let backgroundColor = Color("deleteActionViewBackground")
         let bubbleColor:Color
-        let width = CGFloat(220)
-        let height = CGFloat(180)
+        var width = CGFloat(220)
+        let ratio = 0.14
+        var height:CGFloat { width/ratio }
         let buttonHeight:CGFloat = 78
         let trashViewFont = Font.system(size: 26, weight: .medium)
         let buttonFont = Font.system(size: 28).weight(.medium)
@@ -56,8 +57,8 @@ struct SessionDeleteActionAlert: View {
             Color.white.opacity(0.01)
                 .onTapGesture { cancelDeleteAction() }
             VStack (spacing:8) {
-                trashView
-                deleteSessionView
+                trashLabel
+                deleteSessionButton
                     .overlay {
                         Text("Session \(sessionRank)").foregroundColor(.white)
                     }
@@ -84,6 +85,7 @@ struct SessionDeleteActionAlert: View {
             .background {
                 RoundedRectangle(cornerRadius: metrics.backgroundRadius)
                     .fill(metrics.backgroundColor)
+                    .frame(width: metrics.width, height: metrics.height)
             }
             .padding(-1)
             .background {
@@ -95,7 +97,7 @@ struct SessionDeleteActionAlert: View {
     }
     
     // MARK: - Legos
-    private var trashView:some View {
+    private var trashLabel:some View {
         HStack (spacing:2) {
             Image.trash
             Text("Delete")
@@ -104,7 +106,7 @@ struct SessionDeleteActionAlert: View {
         .foregroundColor(.red)
     }
     
-    private var deleteSessionView: some View {
+    private var deleteSessionButton: some View {
         RoundedRectangle(cornerRadius: metrics.buttonRadius)
             .fill(metrics.bubbleColor)
             .frame(height: metrics.buttonHeight)
