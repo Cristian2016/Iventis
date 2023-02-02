@@ -12,7 +12,7 @@ struct TapToDismissHint:View {
         Text("\(Image(systemName: "hand.tap")) Tap to Dismiss")
             .font(.caption)
             .foregroundColor(.secondary)
-            .allowsTightening(false)
+            .allowsHitTesting(false)
     }
 }
 
@@ -22,4 +22,3 @@ struct TapToDismissHint_Previews: PreviewProvider {
         TapToDismissHint()
     }
 }
-ok
