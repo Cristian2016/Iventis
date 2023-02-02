@@ -3,7 +3,7 @@
 //  Timers (iOS)
 //
 //  Created by Cristian Lapusan on 02.02.2023.
-//
+//1 it doesn't intercept gestures
 
 import SwiftUI
 
@@ -12,7 +12,7 @@ struct TapToDismissHint:View {
         Text("\(Image(systemName: "hand.tap")) Tap to Dismiss")
             .font(.caption)
             .foregroundColor(.secondary)
-            .allowsHitTesting(false)
+            .allowsHitTesting(false) //1
     }
 }
 
