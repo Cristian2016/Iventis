@@ -3,7 +3,7 @@
 //  Timers (iOS)
 //
 //  Created by Cristian Lapusan on 30.06.2022.
-//
+//1 make keyboard visible on iPhone only if it's portrait mode, in landscape hide it
 
 import SwiftUI
 import MyPackage
@@ -75,6 +75,7 @@ struct StickyNoteList: View {
     var body: some View {
         ZStack {
             BlurryBackground()
+                .ignoresSafeArea()
                 .onTapGesture { saveNoteAndDismiss() }
                 .onLongPressGesture { deleteTextFieldText() }
                 .gesture( /* deleteTextFieldText with a */dragGesture)
@@ -90,8 +91,8 @@ struct StickyNoteList: View {
                                 if filteredStickyNotes.isEmpty { emptyListAlert } //1
                                 
                                 ForEach (filteredStickyNotes, id: \.self) { cell($0) }
-                                .onDelete { delete($0.first!) }
-                                .listRowSeparator(.hidden)
+                                    .onDelete { delete($0.first!) }
+                                    .listRowSeparator(.hidden)
                             }
                             .listStyle(.plain)
                             .environment(\.defaultMinListRowHeight, 8)
@@ -110,11 +111,14 @@ struct StickyNoteList: View {
             
             if vm.showStickyNoteListInfo { StickyNoteListInfoView() }
         }
-        .onAppear {
-            if !UIDevice.isIPad && UIScreen.main.bounds.size.width > UIScreen.main.bounds.size.height { keyboardVisible = false
-            } else { keyboardVisible = true }
-             }
+        .onAppear { keyboardVisible = showKeyboard ? true : false }
     }
+    
+    // MARK: -
+    private var showKeyboard:Bool {
+        !UIDevice.isIPad &&
+        UIScreen.main.bounds.size.width > UIScreen.main.bounds.size.height
+    } //1
     
     // MARK: - Lego
     private var emptyListAlert: some View {
