@@ -8,7 +8,7 @@
 import SwiftUI
 import MyPackage
 
-struct DeleteActionAlert: View {
+struct BubbleDeleteActionAlert: View {
     
     @EnvironmentObject private var viewModel:ViewModel
     @EnvironmentObject private var layoutViewModel:LayoutViewModel

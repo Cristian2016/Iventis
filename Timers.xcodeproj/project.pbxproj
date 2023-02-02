@@ -78,7 +78,7 @@
 		1FA8F87E28367B7A00394B59 /* BubbleNote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA8F87D28367B7A00394B59 /* BubbleNote.swift */; };
 		1FAD1576298A5A6C001139C6 /* AddTagButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FAD1575298A5A6C001139C6 /* AddTagButton.swift */; };
 		1FAD1578298A8346001139C6 /* Secretary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FAD1577298A8345001139C6 /* Secretary.swift */; };
-		1FAD157C298AAFDB001139C6 /* DeleteActionAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FAD157B298AAFDB001139C6 /* DeleteActionAlert.swift */; };
+		1FAD157C298AAFDB001139C6 /* BubbleDeleteActionAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FAD157B298AAFDB001139C6 /* BubbleDeleteActionAlert.swift */; };
 		1FAF39D9298575E9002D833C /* Library.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA377E72972FE75005ACD41 /* Library.swift */; };
 		1FAF39DB29857688002D833C /* MyPackage in Frameworks */ = {isa = PBXBuildFile; productRef = 1FAF39DA29857688002D833C /* MyPackage */; };
 		1FB3178F286ACB48006BBE82 /* Note_InfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB3178E286ACB48006BBE82 /* Note_InfoView.swift */; };
@@ -208,7 +208,7 @@
 		1FA8F87D28367B7A00394B59 /* BubbleNote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BubbleNote.swift; sourceTree = "<group>"; };
 		1FAD1575298A5A6C001139C6 /* AddTagButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTagButton.swift; sourceTree = "<group>"; };
 		1FAD1577298A8345001139C6 /* Secretary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Secretary.swift; sourceTree = "<group>"; };
-		1FAD157B298AAFDB001139C6 /* DeleteActionAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteActionAlert.swift; sourceTree = "<group>"; };
+		1FAD157B298AAFDB001139C6 /* BubbleDeleteActionAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BubbleDeleteActionAlert.swift; sourceTree = "<group>"; };
 		1FB3178E286ACB48006BBE82 /* Note_InfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Note_InfoView.swift; sourceTree = "<group>"; };
 		1FB4D4DF2977F86500F26D9C /* iPadViewHierarchy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iPadViewHierarchy.swift; sourceTree = "<group>"; };
 		1FB5D8D328E81CD900DD522A /* InfoButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoButton.swift; sourceTree = "<group>"; };
@@ -321,7 +321,7 @@
 				1F05B7C72989158E0022FD23 /* BorderlessLabel.swift */,
 				1F196092298856E500E6A7EA /* SmallAlertHintView.swift */,
 				1F520C6C2987DFBC00B25029 /* PairCell.swift */,
-				1FAD157B298AAFDB001139C6 /* DeleteActionAlert.swift */,
+				1FAD157B298AAFDB001139C6 /* BubbleDeleteActionAlert.swift */,
 				1FA1B449298321D20063B081 /* iPhoneViewHierarchy.swift */,
 				1FA377E72972FE75005ACD41 /* Library.swift */,
 				1F42B99C2973E34E0024DB5F /* Code Snippets.rtf */,
@@ -648,7 +648,7 @@
 				1FAD1578298A8346001139C6 /* Secretary.swift in Sources */,
 				1F387CEB2830082000F6B81D /* UpDownArrowsButton.swift in Sources */,
 				1FB3178F286ACB48006BBE82 /* Note_InfoView.swift in Sources */,
-				1FAD157C298AAFDB001139C6 /* DeleteActionAlert.swift in Sources */,
+				1FAD157C298AAFDB001139C6 /* BubbleDeleteActionAlert.swift in Sources */,
 				1F99AB5F286CA40D00977C9A /* StickyNote.swift in Sources */,
 				1F5F4A752809409600AF3442 /* Bubble Properties.swift in Sources */,
 				1FB7D57C2862F0300085C2BE /* PlusSymbol.swift in Sources */,
