@@ -131,8 +131,8 @@ struct StickyNoteList: View {
     }
     
     private var screenBackground: some View {
-        Color.alertScreenBackground
-            .opacity(0.9)
+        Color.clear
+            .background(.ultraThinMaterial, in: Rectangle())
             .ignoresSafeArea()
     }
     

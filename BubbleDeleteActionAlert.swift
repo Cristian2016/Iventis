@@ -108,6 +108,7 @@ struct BubbleDeleteActionAlert: View {
         .buttonStyle(DeleteButtonStyle(disabled: bubble.sessions_.isEmpty))
     }
     
+    //top and bottom buttons
     private var buttons:some View {
         VStack(spacing: 4) {
             topButton
