@@ -39,8 +39,16 @@ struct BubbleDeleteActionAlert: View {
     }
     
     // MARK: - Lego
-    private var buttons:some View {
-        VStack(spacing: 4) {
+    //delete bubble action
+    private var topButton:some View {
+        Button {
+            removeAddTagButton()
+            withAnimation {
+                viewModel.delete(bubble)
+                viewModel.deleteAction_bRank = nil
+                removeFiveSecondsBar()
+            }
+        } label: {
             RoundedCornersShape(corners: [.topLeft, .topRight], radius: 28)
                 .fill(metrics.bubbleColor)
                 .frame(width: 208, height: 84)
@@ -49,14 +57,13 @@ struct BubbleDeleteActionAlert: View {
                         .font(.system(size: 32, weight: .medium, design: .rounded))
                         .foregroundColor(.white)
                 }
-                .onTapGesture {
-                    removeAddTagButton()
-                    withAnimation {
-                        viewModel.delete(bubble)
-                        viewModel.deleteAction_bRank = nil
-                        removeFiveSecondsBar()
-                    }
-                }
+        }
+    }
+    
+    private var buttons:some View {
+        VStack(spacing: 4) {
+            topButton
+                
             RoundedCornersShape(corners: [.bottomLeft, .bottomRight], radius: 28)
                 .fill(metrics.bubbleColor)
                 .frame(width: 208, height: 84)
