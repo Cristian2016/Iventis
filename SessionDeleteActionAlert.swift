@@ -58,25 +58,7 @@ struct SessionDeleteActionAlert: View {
                 .onTapGesture { cancelDeleteAction() }
             VStack (spacing:8) {
                 trashLabel
-                deleteSessionButton
-                    .overlay {
-                        Text("Session \(sessionRank)").foregroundColor(.white)
-                    }
-                    .onTapGesture {
-                        withAnimation {
-                            //show confirmation only if deleted session corresponds to a calendar event
-                            if session.eventID != nil {
-                                viewModel.confirm_CalEventRemoved = session.bubble?.rank
-                                delayExecution(.now() + 3) { self.viewModel.confirm_CalEventRemoved = nil }
-                            }
-                            
-                            //⚠️ delete event from calendar first and then delete session from CoreData and Fused App
-                            CalendarManager.shared.deleteEvent(with: session.eventID)
-                            viewModel.deleteSession(session)
-                            viewModel.sessionToDelete = nil
-                        }
-                        if viewModel.fiveSeconds_bRank != nil { viewModel.fiveSeconds_bRank = nil } //ViewModel 1
-                    }
+                deleteButton
             }
             .font(.system(size: 32, weight: .medium, design: .rounded))
             .frame(width: metrics.width, height: metrics.height)
@@ -104,6 +86,34 @@ struct SessionDeleteActionAlert: View {
         }
         .font(metrics.trashViewFont)
         .foregroundColor(.red)
+    }
+    
+    private var deleteButton:some View {
+        Button {
+            withAnimation {
+                //show confirmation only if deleted session corresponds to a calendar event
+                if session.eventID != nil {
+                    viewModel.confirm_CalEventRemoved = session.bubble?.rank
+                    delayExecution(.now() + 3) { self.viewModel.confirm_CalEventRemoved = nil }
+                }
+                
+                //⚠️ delete event from calendar first and then delete session from CoreData and Fused App
+                CalendarManager.shared.deleteEvent(with: session.eventID)
+                viewModel.deleteSession(session)
+                viewModel.sessionToDelete = nil
+            }
+            if viewModel.fiveSeconds_bRank != nil { viewModel.fiveSeconds_bRank = nil } //ViewModel 1
+        } label: {
+            RoundedRectangle(cornerRadius: metrics.buttonRadius)
+                .fill(metrics.bubbleColor)
+                .frame(width: 208, height: 84)
+                .overlay {
+                    Text("Session \(sessionRank)")
+                        .font(.system(size: 32, weight: .medium, design: .rounded))
+                        .foregroundColor(.white)
+                }
+        }
+        
     }
     
     private var deleteSessionButton: some View {
