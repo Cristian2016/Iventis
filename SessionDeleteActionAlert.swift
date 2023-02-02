@@ -76,7 +76,7 @@ struct SessionDeleteActionAlert: View {
                         if viewModel.fiveSeconds_bRank != nil { viewModel.fiveSeconds_bRank = nil } //ViewModel 1
                     }
             }
-            .font(.system(size: 30).weight(.medium))
+            .font(.system(size: 32, weight: .medium, design: .rounded))
             .frame(width: metrics.width, height: metrics.height)
             .padding(8)
             .background {
@@ -86,7 +86,7 @@ struct SessionDeleteActionAlert: View {
             .padding(-1)
             .background {
                 RoundedRectangle(cornerRadius: metrics.backgroundRadius)
-                    .fill(Color.background)
+                    .fill(Color("deleteActionAlert"))
                     .standardShadow()
             }
         }
