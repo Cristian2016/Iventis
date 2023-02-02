@@ -16,11 +16,14 @@ struct SmallTextHint:View {
             .foregroundColor(.secondary)
             .allowsHitTesting(false) //1
     }
+    
+    static let tapToSave = SmallTextHint(content: "\(Image(systemName: "hand.tap")) Tap to Save")
+    static let tapToDismiss = SmallTextHint(content: "\(Image(systemName: "hand.tap")) Tap to Dismiss")
 }
 
 
 struct SmallTextHint_Previews: PreviewProvider {
     static var previews: some View {
-        SmallTextHint(content: LocalizedStringKey("ok"))
+        SmallTextHint.tapToSave
     }
 }

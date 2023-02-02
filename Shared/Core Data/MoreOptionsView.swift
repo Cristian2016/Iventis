@@ -56,7 +56,7 @@ struct MoreOptionsView: View {
             .padding()
             .padding()
             
-            Push(.bottomMiddle) { SmallTextHint(content: "\(Image(systemName: "hand.tap")) Tap to Dismiss") }
+            Push(.bottomMiddle) { SmallTextHint.tapToDismiss }
             .padding([.bottom])
             .padding([.bottom])
         }
@@ -190,13 +190,13 @@ extension View {
     }
 }
 
-struct MoreOptionsView_Previews: PreviewProvider {
-    static var previews: some View {
-        let bubble:Bubble = {
-            let bubble = Bubble(context: PersistenceController.shared.viewContext)
-            bubble.color = "green"
-            return bubble
-        }()
-        MoreOptionsView(for: bubble)
-    }
-}
+//struct MoreOptionsView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        let bubble:Bubble = {
+//            let bubble = Bubble(context: PersistenceController.shared.viewContext)
+//            bubble.color = "green"
+//            return bubble
+//        }()
+//        MoreOptionsView(for: bubble)
+//    }
+//}
