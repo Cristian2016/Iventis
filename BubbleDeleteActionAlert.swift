@@ -8,6 +8,15 @@
 import SwiftUI
 import MyPackage
 
+extension BubbleDeleteActionAlert {
+    struct DeleteButtonStyle:ButtonStyle {
+        func makeBody(configuration: Configuration) -> some View {
+            configuration.label
+                .scaleEffect(x: configuration.isPressed ? 0.8 : 1.0, y: configuration.isPressed ? 0.8 : 1.0)
+        }
+    }
+}
+
 struct BubbleDeleteActionAlert: View {
     @EnvironmentObject private var viewModel:ViewModel
     @EnvironmentObject private var layoutViewModel:LayoutViewModel
@@ -68,6 +77,7 @@ struct BubbleDeleteActionAlert: View {
                         .foregroundColor(.white)
                 }
         }
+        .buttonStyle(DeleteButtonStyle())
     }
     
     //delete History action
@@ -89,6 +99,7 @@ struct BubbleDeleteActionAlert: View {
                         .foregroundColor(bubble.sessions_.isEmpty ? .white.opacity(0.5) : .white)
                 }
         }
+        .buttonStyle(DeleteButtonStyle())
     }
     
     private var buttons:some View {
