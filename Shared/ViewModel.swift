@@ -5,6 +5,7 @@
 //  Created by Cristian Lapusan on 15.04.2022.
 //  CoreData constraints https://www.youtube.com/watch?v=NZIlmRSB8l8
 //1 Add Tag and Undo Start. User can undo start or tag activity within 5 seconds after starting the bubble
+//1 make sure to set fiveSeconds_bRank to nil first, then set it to a new value
 
 import Foundation
 import SwiftUI
