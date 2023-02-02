@@ -19,11 +19,12 @@ struct SmallTextHint:View {
     
     static let tapToSave = SmallTextHint(content: "\(Image(systemName: "hand.tap")) Tap to Save")
     static let tapToDismiss = SmallTextHint(content: "\(Image(systemName: "hand.tap")) Tap to Dismiss")
+    static let tapToScrollUp = SmallTextHint(content: "\(Image(systemName: "hand.tap")) Scroll to Top")
 }
 
 
 struct SmallTextHint_Previews: PreviewProvider {
     static var previews: some View {
-        SmallTextHint.tapToSave
+        SmallTextHint.tapToScrollUp
     }
 }

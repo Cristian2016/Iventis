@@ -64,7 +64,7 @@ struct DetailView: View {
                 ToolbarItemGroup {
                     if isAddTagButtonVisible { AddPairCellNoteButton(bubble) }
                     else {
-                        FusedLabel(content: .init(title: "Top", symbol: "arrow.up", size: .small))
+                        SmallTextHint.tapToScrollUp
                             .onTapGesture { scrollToTop = true } //2
                     }
                 }
