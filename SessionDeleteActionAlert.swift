@@ -113,7 +113,7 @@ struct SessionDeleteActionAlert: View {
                         .foregroundColor(.white)
                 }
         }
-        
+        .buttonStyle(BubbleDeleteActionAlert.DeleteButtonStyle())
     }
     
     private var deleteSessionButton: some View {
