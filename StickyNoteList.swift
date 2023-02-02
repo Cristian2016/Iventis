@@ -75,7 +75,6 @@ struct StickyNoteList: View {
     var body: some View {
         ZStack {
             BlurryBackground()
-                .ignoresSafeArea()
                 .onTapGesture { saveNoteAndDismiss() }
                 .onLongPressGesture { deleteTextFieldText() }
                 .gesture( /* deleteTextFieldText with a */dragGesture)
