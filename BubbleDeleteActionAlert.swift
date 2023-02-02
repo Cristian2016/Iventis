@@ -95,12 +95,11 @@ struct BubbleDeleteActionAlert: View {
             }
         } label: {
             RoundedCornersShape(corners: [.bottomLeft, .bottomRight], radius: 28)
-                .fill(metrics.bubbleColor)
+                .fill(bubble.sessions_.isEmpty ? metrics.bubbleColor.opacity(0.2) : metrics.bubbleColor)
                 .frame(width: 208, height: 84)
                 .overlay {
                     Text("History \(bubble.sessions_.count)")
                         .font(.system(size: 32, weight: .medium, design: .rounded))
-                        .foregroundColor(bubble.sessions_.isEmpty ? .white.opacity(0.5) : .white)
                 }
         }
         .buttonStyle(DeleteButtonStyle())
