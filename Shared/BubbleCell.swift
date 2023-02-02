@@ -48,37 +48,7 @@ struct BubbleCell: View {
         .onAppear { bubble.addObserver() }
     }
     
-    // MARK: - Legos
-    private var fiveSecondsBar:some View {
-        HStack {
-            BorderlessLabel(title: "Undo Start", symbol: "arrow.uturn.backward")
-                .onTapGesture {
-                    if bubble.sessions_.count == 1 && bubble.lastSession?.pairs_.count == 1 {
-                        viewModel.deleteSession(bubble.lastSession!)
-                        viewModel.fiveSeconds_bRank = nil
-                        //reset bubble clock
-                        bubble.currentClock = bubble.initialClock
-                        bubble.components = bubble.initialClock.timeComponentsAsStrings
-                        
-                    } else {
-                        viewModel.deletePair(bubble.lastPair)
-                        viewModel.fiveSeconds_bRank = nil
-                        //reset bubble clock
-                        bubble.currentClock = bubble.initialClock
-                        bubble.components = bubble.initialClock.timeComponentsAsStrings
-                    }
-                }
-            Divider().frame(height: 20)
-            BorderlessLabel(title: "Add Tag", symbol: "tag")
-                .onTapGesture {
-                    UserFeedback.singleHaptic(.light)
-                    viewModel.pairOfNotesList = bubble.lastPair
-                    PersistenceController.shared.save()
-                }
-        }
-        .font(.title)
-    }
-    
+    // MARK: - Legos    
     private var calEventCreatedConfirmation:some View {
         Push(.leading) {
             ConfirmView(content: .eventCreated)
