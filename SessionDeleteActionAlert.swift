@@ -69,6 +69,7 @@ struct SessionDeleteActionAlert: View {
         RoundedRectangle(cornerRadius: metrics.backgroundRadius)
             .fill(metrics.backgroundColor)
             .frame(width: metrics.width, height: metrics.height)
+            .standardShadow()
     }
     
     private var trashLabel:some View {
