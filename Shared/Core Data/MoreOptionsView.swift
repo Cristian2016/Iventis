@@ -58,6 +58,7 @@ struct MoreOptionsView: View {
             .padding()
             .padding()
         }
+        .ignoresSafeArea()
     }
     
     // MARK: - Lego
