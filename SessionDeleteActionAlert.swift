@@ -58,7 +58,7 @@ struct SessionDeleteActionAlert: View {
                 trashView
                 deleteSessionView
                     .overlay {
-                        Text("Session \(sessionRank)").foregroundColor(metrics.bubbleColor)
+                        Text("Session \(sessionRank)").foregroundColor(.white)
                     }
                     .onTapGesture {
                         withAnimation {
@@ -103,8 +103,8 @@ struct SessionDeleteActionAlert: View {
     }
     
     private var deleteSessionView: some View {
-        vRoundedRectangle(corners: [.bottomLeft, .bottomRight], radius: metrics.buttonRadius)
-            .stroke(metrics.bubbleColor, lineWidth: 4)
+        RoundedRectangle(cornerRadius: metrics.buttonRadius)
+            .fill(metrics.bubbleColor)
             .frame(height: metrics.buttonHeight)
     }
     
@@ -116,7 +116,7 @@ struct SessionDeleteActionAlert_Previews: PreviewProvider {
         let session = Session(context: PersistenceController.preview.viewContext)
         let bubble = Bubble(context: PersistenceController.preview.viewContext)
         session.bubble = bubble
-        session.bubble?.color = "red"
+        session.bubble?.color = "orange"
         return session
     }()
     static var previews: some View {
