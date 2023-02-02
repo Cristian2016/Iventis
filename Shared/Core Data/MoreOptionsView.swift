@@ -56,7 +56,7 @@ struct MoreOptionsView: View {
             .padding()
             .padding()
             
-            Push(.bottomMiddle) { TapToDismissView() }
+            Push(.bottomMiddle) { TapToDismissHint() }
             .padding([.bottom])
             .padding([.bottom])
         }

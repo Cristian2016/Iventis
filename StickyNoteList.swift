@@ -98,6 +98,7 @@ struct StickyNoteList: View {
                         }
                         .clipShape(RoundedRectangle(cornerRadius: cornerRadius))
                     }
+                TapToDismissHint()
                 Spacer()
             }
             .padding([.top])
