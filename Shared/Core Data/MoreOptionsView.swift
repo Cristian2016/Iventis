@@ -49,12 +49,10 @@ struct MoreOptionsView: View {
                 if viewModel.confirm_ColorChange {
                     ColorConfirmationView(colorName: bubble.color!, color: Color.bubbleColor(forName: bubble.color!))
                 }
-//                if viewModel.confirm_DelayRemoved { delayRemovedConfirmation }
-//                if viewModel.confirm_DelayCreated { delayCreatedConfirmation }
             }
             .frame(width: 280)
             .padding(8)
-            .background { tableBackground }
+            .background { tableBackground /* contains info button */ }
             .padding()
             .padding()
         }
@@ -79,8 +77,8 @@ struct MoreOptionsView: View {
             RoundedRectangle(cornerRadius: 10)
                 .fill(Color.white)
                 .standardShadow()
-            Push(.topRight) { InfoButton { handleInfoButtonTap() } }
-                .padding(-8)
+//            Push(.topRight) { InfoButton { handleInfoButtonTap() } }
+//                .padding(-8)
         }
     }
     
