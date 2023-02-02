@@ -60,7 +60,6 @@ struct SessionDeleteActionAlert: View {
                 trashLabel
                 deleteButton
             }
-            
             .background {
                 RoundedRectangle(cornerRadius: metrics.backgroundRadius)
                     .fill(metrics.backgroundColor)
