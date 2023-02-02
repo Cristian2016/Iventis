@@ -50,7 +50,7 @@ struct BubbleDeleteActionAlert: View {
     }
     
     private var roundedBackground:some View {
-        RoundedRectangle(cornerRadius: metrics.radius)
+        RoundedRectangle(cornerRadius: metrics.backgroundRadius)
             .fill(metrics.backgroundColor)
             .frame(width: metrics.width, height: metrics.height)
             .standardShadow()
@@ -77,7 +77,7 @@ struct BubbleDeleteActionAlert: View {
                 removeFiveSecondsBar()
             }
         } label: {
-            vRoundedRectangle(corners: [.topLeft, .topRight], radius: 28)
+            vRoundedRectangle(corners: [.topLeft, .topRight], radius: metrics.butonRadius)
                 .fill(metrics.bubbleColor)
                 .frame(width: 208, height: 84)
                 .overlay {
@@ -101,7 +101,7 @@ struct BubbleDeleteActionAlert: View {
                 removeFiveSecondsBar()
             }
         } label: {
-            vRoundedRectangle(corners: [.bottomLeft, .bottomRight], radius: 28)
+            vRoundedRectangle(corners: [.bottomLeft, .bottomRight], radius: metrics.butonRadius)
                 .fill(bubble.sessions_.isEmpty ? metrics.bubbleColor.opacity(0.25) : metrics.bubbleColor)
                 .frame(width: 208, height: 84)
                 .overlay {
@@ -128,7 +128,9 @@ struct BubbleDeleteActionAlert: View {
         let ratio = CGFloat(0.88)
         let width = CGFloat(220)
         var height:CGFloat { width / ratio }
-        let radius = CGFloat(40)
+        
+        let backgroundRadius = CGFloat(40)
+        let butonRadius = CGFloat(28)
         let backgroundColor = Color("deleteActionAlert")
     }
     
