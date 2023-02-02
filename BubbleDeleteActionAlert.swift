@@ -60,10 +60,15 @@ struct BubbleDeleteActionAlert: View {
         }
     }
     
-    private var buttons:some View {
-        VStack(spacing: 4) {
-            topButton
-                
+    private var bottomButton:some View {
+        Button {
+            removeAddTagButton()
+            if !bubble.sessions_.isEmpty {
+                viewModel.reset(bubble)
+                viewModel.deleteAction_bRank = nil
+                removeFiveSecondsBar()
+            }
+        } label: {
             RoundedCornersShape(corners: [.bottomLeft, .bottomRight], radius: 28)
                 .fill(metrics.bubbleColor)
                 .frame(width: 208, height: 84)
@@ -72,15 +77,13 @@ struct BubbleDeleteActionAlert: View {
                         .font(.system(size: 32, weight: .medium, design: .rounded))
                         .foregroundColor(bubble.sessions_.isEmpty ? .white.opacity(0.5) : .white)
                 }
-            
-                .onTapGesture {
-                    removeAddTagButton()
-                    if !bubble.sessions_.isEmpty {
-                        viewModel.reset(bubble)
-                        viewModel.deleteAction_bRank = nil
-                        removeFiveSecondsBar()
-                    }
-                }
+        }
+    }
+    
+    private var buttons:some View {
+        VStack(spacing: 4) {
+            topButton
+            bottomButton
         }
     }
     
