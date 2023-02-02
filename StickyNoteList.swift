@@ -133,7 +133,8 @@ struct StickyNoteList: View {
     private var darkRoundedBackground: some View {
         RoundedRectangle(cornerRadius: cornerRadius)
             .fill(Color.background3)
-            .frame(width: size.width, height: size.height)
+            .frame(width: size.width)
+            .frame(maxHeight: size.height)
             .standardShadow()
     }
     
