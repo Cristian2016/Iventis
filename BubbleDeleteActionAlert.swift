@@ -20,17 +20,21 @@ struct BubbleDeleteActionAlert: View {
         ZStack {
             Color.white.opacity(0.01).onTapGesture { cancelDeleteAction() }
             
-            RoundedRectangle(cornerRadius: metrics.radius)
-                .fill(metrics.backgroundColor)
-                .frame(width: metrics.width, height: metrics.height)
-                .standardShadow()
+            background
                 .overlay( Push(.bottomMiddle) { buttons } .padding([.bottom], 18) )
                 .overlay { deleteLabel }
         }
     }
     
     // MARK: - Lego
-    //delete bubble action
+    
+    private var background:some View {
+        RoundedRectangle(cornerRadius: metrics.radius)
+            .fill(metrics.backgroundColor)
+            .frame(width: metrics.width, height: metrics.height)
+            .standardShadow()
+    }
+    
     private var deleteLabel:some View {
         Push(.topMiddle) {
             Text("\(Image.trash) Delete")
@@ -41,6 +45,7 @@ struct BubbleDeleteActionAlert: View {
         .padding([.top], 6)
     }
     
+    //delete bubble action
     private var topButton:some View {
         Button {
             removeAddTagButton()
@@ -61,6 +66,7 @@ struct BubbleDeleteActionAlert: View {
         }
     }
     
+    //delete History action
     private var bottomButton:some View {
         Button {
             removeAddTagButton()
