@@ -228,6 +228,7 @@ class ViewModel: ObservableObject {
                 if isDetailViewShowing { bubble.syncSmallBubbleCell = true }
                 
                 //1 both
+                fiveSeconds_bRank = nil
                 fiveSeconds_bRank = Int(bubble.rank)
                                 
             case .paused:  /* changes to running */
@@ -239,6 +240,7 @@ class ViewModel: ObservableObject {
                 if isDetailViewShowing { bubble.syncSmallBubbleCell = true }
                 
                 //1 both
+                fiveSeconds_bRank = nil
                 fiveSeconds_bRank = Int(bubble.rank)
                 
             case .running: /* changes to .paused */
