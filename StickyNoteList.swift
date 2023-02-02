@@ -110,7 +110,10 @@ struct StickyNoteList: View {
             
             if vm.showStickyNoteListInfo { StickyNoteListInfoView() }
         }
-        .onAppear { withAnimation (.easeInOut) { keyboardVisible = true } }
+        .onAppear {
+            if !UIDevice.isIPad && UIScreen.main.bounds.size.width > UIScreen.main.bounds.size.height { keyboardVisible = false
+            } else { keyboardVisible = true }
+             }
     }
     
     // MARK: - Lego
