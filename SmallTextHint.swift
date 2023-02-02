@@ -10,16 +10,18 @@ import SwiftUI
 ///A single line text!
 struct SmallTextHint:View {
     let content:LocalizedStringKey
+    var allowTouches:Bool = false
+    
     var body: some View {
         Text(content)
             .font(.caption)
             .foregroundColor(.secondary)
-            .allowsHitTesting(false) //1
+            .allowsHitTesting(allowTouches) //1
     }
     
     static let tapToSave = SmallTextHint(content: "\(Image(systemName: "hand.tap")) Tap to Save")
     static let tapToDismiss = SmallTextHint(content: "\(Image(systemName: "hand.tap")) Tap to Dismiss")
-    static let tapToScrollUp = SmallTextHint(content: "\(Image(systemName: "hand.tap")) Scroll to Top")
+    static let tapToScrollUp = SmallTextHint(content: "\(Image(systemName: "hand.tap")) Scroll to Top", allowTouches: true)
 }
 
 
