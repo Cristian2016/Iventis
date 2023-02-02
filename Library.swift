@@ -15,6 +15,7 @@ struct vRoundedRectangle: Shape {
         let path = UIBezierPath(roundedRect: rect,
                                 byRoundingCorners: corners,
                                 cornerRadii: CGSize(width: radius, height: radius))
+        path.close()
         return Path(path.cgPath)
     }
 }
