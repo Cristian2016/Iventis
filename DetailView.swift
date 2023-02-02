@@ -63,10 +63,10 @@ struct DetailView: View {
             .toolbar {
                 ToolbarItemGroup {
                     if isAddTagButtonVisible { AddPairCellNoteButton(bubble) }
-                    else {
-                        SmallTextHint.tapToScrollUp
-                            .onTapGesture { scrollToTop = true } //2
-                    }
+//                    else {
+//                        SmallTextHint.tapToScrollUp
+//                            .onTapGesture { scrollToTop = true } //2
+//                    }
                 }
             }
         }
