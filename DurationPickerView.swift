@@ -15,11 +15,17 @@ struct DurationPickerView: View {
     
     var body: some View {
         VStack {
-            let font = Font.system(size: 60, weight: .medium, design: .rounded)
+            let font = Font.system(size: 80, weight: .regular, design: .rounded)
+            let white = Color.white
+            
             vRoundedRectangle(corners: [.topLeft, .topRight], radius: 40)
             LazyVGrid(columns: columns) {
                 ForEach(digits, id:\.self) { symbol in
-                    digit.overlay { Text(symbol).font(font) }
+                    digit.overlay {
+                        Text(symbol)
+                            .font(font)
+                            .foregroundColor(white)
+                    }
                 }
             }
         }
