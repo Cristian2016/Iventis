@@ -65,6 +65,7 @@ struct DetailView: View {
                     if isAddTagButtonVisible { AddPairCellNoteButton(bubble) }
                     else {
                         SmallTextHint.tapToScrollUp
+                            .allowsHitTesting(true)
                             .onTapGesture { scrollToTop = true } //2
                     }
                 }
