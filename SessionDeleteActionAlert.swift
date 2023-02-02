@@ -60,15 +60,17 @@ struct SessionDeleteActionAlert: View {
                 trashLabel
                 deleteButton
             }
-            .background {
-                RoundedRectangle(cornerRadius: metrics.backgroundRadius)
-                    .fill(metrics.backgroundColor)
-                    .frame(width: metrics.width, height: metrics.height)
-            }
+            .background { roundedBackground }
         }
     }
     
     // MARK: - Legos
+    private var roundedBackground:some View {
+        RoundedRectangle(cornerRadius: metrics.backgroundRadius)
+            .fill(metrics.backgroundColor)
+            .frame(width: metrics.width, height: metrics.height)
+    }
+    
     private var trashLabel:some View {
         HStack (spacing:2) {
             Image.trash
