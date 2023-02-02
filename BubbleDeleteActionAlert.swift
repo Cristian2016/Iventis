@@ -10,10 +10,12 @@ import MyPackage
 
 extension BubbleDeleteActionAlert {
     struct DeleteButtonStyle:ButtonStyle {
+        var disabled:Bool = false
         func makeBody(configuration: Configuration) -> some View {
             configuration.label
                 .scaleEffect(x: configuration.isPressed ? 0.9 : 1.0, y: configuration.isPressed ? 0.9 : 1.0)
                 .animation(.spring(), value: configuration.isPressed)
+                .disabled(disabled ? true : false)
         }
     }
 }
@@ -102,7 +104,7 @@ struct BubbleDeleteActionAlert: View {
                         .font(.system(size: 32, weight: .medium, design: .rounded))
                 }
         }
-        .buttonStyle(DeleteButtonStyle())
+        .buttonStyle(DeleteButtonStyle(disabled: bubble.sessions_.isEmpty))
     }
     
     private var buttons:some View {
