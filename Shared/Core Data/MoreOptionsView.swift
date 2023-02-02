@@ -56,7 +56,7 @@ struct MoreOptionsView: View {
             .padding()
             .padding()
             
-            Push(.bottomMiddle) { TapToDismissHint() }
+            Push(.bottomMiddle) { SmallTextHint(content: "\(Image(systemName: "hand.tap")) Tap to Dismiss") }
             .padding([.bottom])
             .padding([.bottom])
         }

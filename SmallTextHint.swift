@@ -7,9 +7,11 @@
 
 import SwiftUI
 
-struct TapToDismissHint:View {
+///A single line text!
+struct SmallTextHint:View {
+    let content:LocalizedStringKey
     var body: some View {
-        Text("\(Image(systemName: "hand.tap")) Tap to Dismiss")
+        Text(content)
             .font(.caption)
             .foregroundColor(.secondary)
             .allowsHitTesting(false) //1
@@ -17,8 +19,8 @@ struct TapToDismissHint:View {
 }
 
 
-struct TapToDismissHint_Previews: PreviewProvider {
+struct SmallTextHint_Previews: PreviewProvider {
     static var previews: some View {
-        TapToDismissHint()
+        SmallTextHint(content: LocalizedStringKey("ok"))
     }
 }

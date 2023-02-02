@@ -98,7 +98,7 @@ struct StickyNoteList: View {
                         }
                         .clipShape(RoundedRectangle(cornerRadius: cornerRadius))
                     }
-                TapToDismissHint()
+                SmallTextHint(content: "\(Image(systemName: "hand.tap")) Tap to Dismiss")
                 Spacer()
             }
             .padding([.top])
