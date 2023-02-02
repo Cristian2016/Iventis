@@ -18,8 +18,6 @@ struct BubbleDeleteActionAlert: View {
     
     var body: some View {
         ZStack {
-            let sessionsAvailable = bubble.sessions_.isEmpty
-            
             Color.white.opacity(0.01)
                 .onTapGesture { cancelDeleteAction() }
             
@@ -27,46 +25,7 @@ struct BubbleDeleteActionAlert: View {
                 .fill(metrics.backgroundColor)
                 .frame(width: metrics.width, height: metrics.height)
                 .standardShadow()
-                .overlay(
-                    Push(.bottomMiddle) {
-                        VStack(spacing: 4) {
-                            RoundedCornersShape(corners: [.topLeft, .topRight], radius: 28)
-                                .fill(metrics.bubbleColor)
-                                .frame(width: 208, height: 84)
-                                .overlay {
-                                    Text("Bubble")
-                                        .font(.system(size: 32, weight: .medium, design: .rounded))
-                                        .foregroundColor(.white)
-                                }
-                                .onTapGesture {
-                                    removeAddTagButton()
-                                    withAnimation {
-                                        viewModel.delete(bubble)
-                                        viewModel.deleteAction_bRank = nil
-                                        removeFiveSecondsBar()
-                                    }
-                                }
-                            RoundedCornersShape(corners: [.bottomLeft, .bottomRight], radius: 28)
-                                .fill(metrics.bubbleColor)
-                                .frame(width: 208, height: 84)
-                                .overlay {
-                                    Text("History \(bubble.sessions_.count)")
-                                        .font(.system(size: 32, weight: .medium, design: .rounded))
-                                        .foregroundColor(sessionsAvailable ? .white.opacity(0.5) : .white)
-                                }
-                            
-                                .onTapGesture {
-                                    removeAddTagButton()
-                                    if !bubble.sessions_.isEmpty {
-                                        viewModel.reset(bubble)
-                                        viewModel.deleteAction_bRank = nil
-                                        removeFiveSecondsBar()
-                                    }
-                                }
-                        }
-                    }
-                        .padding([.bottom], 18)
-                )
+                .overlay( Push(.bottomMiddle) { buttons } .padding([.bottom], 18) )
                 .overlay {
                     Push(.topMiddle) {
                         Text("\(Image.trash) Delete")
@@ -79,6 +38,46 @@ struct BubbleDeleteActionAlert: View {
         }
     }
     
+    // MARK: - Lego
+    private var buttons:some View {
+        VStack(spacing: 4) {
+            RoundedCornersShape(corners: [.topLeft, .topRight], radius: 28)
+                .fill(metrics.bubbleColor)
+                .frame(width: 208, height: 84)
+                .overlay {
+                    Text("Bubble")
+                        .font(.system(size: 32, weight: .medium, design: .rounded))
+                        .foregroundColor(.white)
+                }
+                .onTapGesture {
+                    removeAddTagButton()
+                    withAnimation {
+                        viewModel.delete(bubble)
+                        viewModel.deleteAction_bRank = nil
+                        removeFiveSecondsBar()
+                    }
+                }
+            RoundedCornersShape(corners: [.bottomLeft, .bottomRight], radius: 28)
+                .fill(metrics.bubbleColor)
+                .frame(width: 208, height: 84)
+                .overlay {
+                    Text("History \(bubble.sessions_.count)")
+                        .font(.system(size: 32, weight: .medium, design: .rounded))
+                        .foregroundColor(bubble.sessions_.isEmpty ? .white.opacity(0.5) : .white)
+                }
+            
+                .onTapGesture {
+                    removeAddTagButton()
+                    if !bubble.sessions_.isEmpty {
+                        viewModel.reset(bubble)
+                        viewModel.deleteAction_bRank = nil
+                        removeFiveSecondsBar()
+                    }
+                }
+        }
+    }
+    
+    // MARK: -
     init(_ bubble:Bubble) {
         self.bubble = bubble
         
