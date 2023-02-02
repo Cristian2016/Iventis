@@ -95,7 +95,7 @@ struct BubbleDeleteActionAlert: View {
             }
         } label: {
             RoundedCornersShape(corners: [.bottomLeft, .bottomRight], radius: 28)
-                .fill(bubble.sessions_.isEmpty ? metrics.bubbleColor.opacity(0.2) : metrics.bubbleColor)
+                .fill(bubble.sessions_.isEmpty ? metrics.bubbleColor.opacity(0.25) : metrics.bubbleColor)
                 .frame(width: 208, height: 84)
                 .overlay {
                     Text("History \(bubble.sessions_.count)")
