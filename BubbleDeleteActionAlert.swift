@@ -20,7 +20,7 @@ struct BubbleDeleteActionAlert: View {
         ZStack {
             Color.white.opacity(0.01).onTapGesture { cancelDeleteAction() }
             
-            background
+            roundedBackground
                 .overlay( Push(.bottomMiddle) { buttons } .padding([.bottom], 18) )
                 .overlay { deleteLabel }
         }
@@ -28,7 +28,7 @@ struct BubbleDeleteActionAlert: View {
     
     // MARK: - Lego
     
-    private var background:some View {
+    private var roundedBackground:some View {
         RoundedRectangle(cornerRadius: metrics.radius)
             .fill(metrics.backgroundColor)
             .frame(width: metrics.width, height: metrics.height)
