@@ -12,6 +12,17 @@ struct PaletteView: View {
     @Binding private var showPalette:Bool
     private let xOffset = -UIScreen.main.bounds.width
     
+    private let colorThrees = [
+        Color.Bubbles.mint, Color.Bubbles.slateBlue, Color.Bubbles.sourCherry, Color.Bubbles.silver, Color.Bubbles.ultramarine, Color.Bubbles.lemon, Color.Bubbles.red, Color.Bubbles.sky, Color.Bubbles.bubbleGum,  Color.Bubbles.green, Color.Bubbles.charcoal, Color.Bubbles.magenta, Color.Bubbles.purple, Color.Bubbles.orange, Color.Bubbles.chocolate
+    ]
+    
+    private var colors:[Color] {
+        colorThrees.map { $0.sec }
+    }
+    
+    private let colums = Array(repeating: GridItem(), count: 3)
+    
+    
     var body: some View {
         GeometryReader { geo in
             HStack {
@@ -42,34 +53,11 @@ struct PaletteView: View {
             .standardShadow()
             .ignoresSafeArea()
     }
-    
+                              
     var circles:some View {
-        VStack {
-            HStack(spacing:-20) {
-                circle(Color.Bubbles.mint)
-                circle(Color.Bubbles.slateBlue)
-                circle(Color.Bubbles.sourCherry)
-            }
-            HStack(spacing:-20) {
-                circle(Color.Bubbles.silver)
-                circle(Color.Bubbles.ultramarine)
-                circle(Color.Bubbles.lemon)
-            }
-            
-            HStack(spacing:-20) {
-                circle(Color.Bubbles.red)
-                circle(Color.Bubbles.sky)
-                circle(Color.Bubbles.bubbleGum)
-            }
-            HStack(spacing:-20) {
-                circle(Color.Bubbles.green)
-                circle(Color.Bubbles.charcoal)
-                circle(Color.Bubbles.magenta)
-            }
-            HStack(spacing:-20) {
-                circle(Color.Bubbles.purple)
-                circle(Color.Bubbles.orange)
-                circle(Color.Bubbles.chocolate)
+        LazyVGrid(columns: colums, spacing: 10) {
+            ForEach(colors, id:\.self) { color in
+                Circle().fill(color)
             }
         }
         .padding([.trailing, .leading, .bottom], 3)
