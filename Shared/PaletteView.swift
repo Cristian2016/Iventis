@@ -101,7 +101,7 @@ extension Image {
 
 struct ShadowModifier:ViewModifier {
     func body(content:Content) -> some View {
-        content.shadow(color: .black.opacity(0.3), radius: 2)
+        content.shadow(color: .black.opacity(0.3), radius: 4, y: 2.5)
     }
 }
 
