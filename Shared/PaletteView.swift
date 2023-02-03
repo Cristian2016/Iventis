@@ -22,14 +22,30 @@ struct PaletteView: View {
     
     
     var body: some View {
+        ZStack {
             HStack(spacing: -20) {
                 Rectangle()
                     .foregroundColor(.background)
                     .overlay { circles }
                 RightStrip($showPalette)
             }
+            
+            VStack(alignment: .leading) {
+                Text("\(Image(systemName:"arrow.left")) Swipe to Dismiss")
+//                        Text("from Right Edge").font(.caption)
+                Text("\(Image(systemName:"hand.tap")) Tap Color for Stopwatch")
+                Text("\(Image(systemName:"digitalcrown.horizontal.press")) Long Press for Timer")
+            }
+            .padding()
+            .allowsHitTesting(false)
+            .background {
+                RoundedRectangle(cornerRadius: 20)
+                    .fill(.ultraThinMaterial)
+                    .standardShadow()
+            }
+        }
         .ignoresSafeArea()
-        .offset(x: viewModel.isPaletteShowing ? 0 : -UIScreen.size.height)
+//        .offset(x: viewModel.isPaletteShowing ? 0 : -UIScreen.size.height)
     }
         
     // MARK: - Legoes
