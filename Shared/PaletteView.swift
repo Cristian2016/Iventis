@@ -79,10 +79,6 @@ struct PaletteView: View {
     }
     
     // MARK: - Legoes
-    var background: some View {
-        Color.background
-            .standardShadow()
-    }
                               
     var circles:some View {
         ScrollView {
