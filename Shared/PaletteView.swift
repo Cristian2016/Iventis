@@ -83,7 +83,6 @@ struct PaletteView: View {
                               
     var circles:some View {
         ScrollView {
-            let random = scales.randomElement()!
             LazyVGrid(columns: colums, spacing: 10) {
                 ForEach(tricolors, id:\.self) { tricolor in
                     Circle()
@@ -98,6 +97,7 @@ struct PaletteView: View {
             }
         }
         .scrollIndicators(.hidden)
+        .ignoresSafeArea()
     }
     
     private func circle(_ color:Color.Tricolor) -> some View {
