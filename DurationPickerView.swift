@@ -42,9 +42,9 @@ struct DurationPickerView: View {
                         .frame(height: 60)
                         .overlay {
                             HStack {
-                                DualTextView(content: .init(text1: "\(hr)", text2: "h"))
-                                DualTextView(content: .init(text1: "\(min)", text2: "m"))
-                                DualTextView(content: .init(text1: "\(sec)", text2: "s"))
+                                DualTextView(content: .init(text1: "\(hr)", text2: "h"), metrics: .durationPicker)
+                                DualTextView(content: .init(text1: "\(min)", text2: "m"), metrics: .durationPicker)
+                                DualTextView(content: .init(text1: "\(sec)", text2: "s"), metrics: .durationPicker)
                             }
                         }
                     
