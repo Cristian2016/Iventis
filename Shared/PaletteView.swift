@@ -63,8 +63,7 @@ struct PaletteView: View {
             }
         }
         .gesture(swipeGesture)
-//        .ignoresSafeArea()
-//        .offset(x: viewModel.isPaletteShowing ? 0 : -UIScreen.size.height)
+        .offset(x: viewModel.isPaletteShowing ? 0 : -UIScreen.size.height)
     }
     
     private var swipeGesture:some Gesture {
