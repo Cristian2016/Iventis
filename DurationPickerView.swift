@@ -59,7 +59,8 @@ struct DurationPickerView: View {
                         } label: { }
                         Picker(selection: $sec) {
                             ForEach(secValues, id: \.self) { number in
-                                Text("\(number)").font(metrics.pickerFont)
+                                Text("\(number)")
+                                    .font(metrics.pickerFont)
                             }
                         } label: { }
                     }
