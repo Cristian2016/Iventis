@@ -14,7 +14,6 @@ struct PaletteView: View {
     @Binding private var showPalette:Bool
     
     private let tricolors = [
-        Color.Bubbles.silver, Color.Bubbles.charcoal, Color.Bubbles.silver,
         Color.Bubbles.mint, Color.Bubbles.slateBlue, Color.Bubbles.sourCherry, Color.Bubbles.silver, Color.Bubbles.ultramarine, Color.Bubbles.lemon, Color.Bubbles.red, Color.Bubbles.sky, Color.Bubbles.bubbleGum,  Color.Bubbles.green, Color.Bubbles.charcoal, Color.Bubbles.magenta, Color.Bubbles.purple, Color.Bubbles.orange, Color.Bubbles.chocolate,
         Color.Bubbles.aqua, Color.Bubbles.byzantium, Color.Bubbles.rose, Color.Bubbles.aubergine,
         Color.Bubbles.cayenne, Color.Bubbles.mocha
