@@ -18,11 +18,11 @@ struct DualTextView: View {
         let font1Size:Font
         let font2Size:Font
         
-        static let durationPicker = Metrics(font1Size: .largeTitle, font2Size: .title3)
+        static let durationPicker = Metrics(font1Size: .largeTitle, font2Size: .body)
     }
     
     let content:Content
-    var metrics:Metrics =  Metrics(font1Size: .title, font2Size: .title2)
+    var metrics:Metrics =  Metrics(font1Size: .title, font2Size: .title3)
     
     var body: some View {
         HStack(alignment: .firstTextBaseline, spacing: 2) {
