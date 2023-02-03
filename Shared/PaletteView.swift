@@ -40,7 +40,7 @@ struct PaletteView: View {
                     }
                     .allowsHitTesting(false)
                     Button {
-                        
+                        showPaletteHint = false
                     } label: {
                         Text("Do not show again")
                     }
