@@ -16,9 +16,7 @@ struct PaletteView: View {
         Color.Bubbles.mint, Color.Bubbles.slateBlue, Color.Bubbles.sourCherry, Color.Bubbles.silver, Color.Bubbles.ultramarine, Color.Bubbles.lemon, Color.Bubbles.red, Color.Bubbles.sky, Color.Bubbles.bubbleGum,  Color.Bubbles.green, Color.Bubbles.charcoal, Color.Bubbles.magenta, Color.Bubbles.purple, Color.Bubbles.orange, Color.Bubbles.chocolate
     ]
     
-    private var colors:[Color] {
-        colorThrees.map { $0.sec }
-    }
+    private var colors:[Color] { colorThrees.map { $0.sec }}
     
     private let colums = Array(repeating: GridItem(), count: 3)
     
