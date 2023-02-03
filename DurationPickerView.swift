@@ -51,27 +51,7 @@ struct DurationPickerView: View {
                             .allowsTightening(true)
                         }
                     
-                    HStack {
-                        Picker(selection: $hr) {
-                            ForEach(hrValues, id: \.self) { number in
-                                Text("\(number)").font(metrics.pickerFont)
-                            }
-                        } label: { }
-                        Picker(selection: $min) {
-                            ForEach(minValues, id: \.self) { number in
-                                Text("\(number)")
-                                    .font(metrics.pickerFont)
-                            }
-                        } label: { }
-                        Picker(selection: $sec) {
-                            ForEach(secValues, id: \.self) { number in
-                                Text("\(number)")
-                                    .font(metrics.pickerFont)
-                            }
-                        } label: { }
-                    }
-                    .pickerStyle(.wheel)
-                    .frame(height: 160)
+                    pickers
                 
                     LazyVGrid(columns: columns) {
                         ForEach(digits, id:\.self) { symbol in
@@ -94,6 +74,29 @@ struct DurationPickerView: View {
     }
     
     // MARK: - Lego
+    private var pickers:some View {
+        HStack {
+            Picker(selection: $hr) {
+                ForEach(hrValues, id: \.self) { number in
+                    Text("\(number)").font(metrics.pickerFont)
+                }
+            } label: { }
+            Picker(selection: $min) {
+                ForEach(minValues, id: \.self) { number in
+                    Text("\(number)")
+                        .font(metrics.pickerFont)
+                }
+            } label: { }
+            Picker(selection: $sec) {
+                ForEach(secValues, id: \.self) { number in
+                    Text("\(number)")
+                        .font(metrics.pickerFont)
+                }
+            } label: { }
+        }
+        .pickerStyle(.wheel)
+        .frame(height: 160)
+    }
 }
 
 struct DurationPickerView_Previews: PreviewProvider {
