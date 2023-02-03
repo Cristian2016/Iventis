@@ -79,6 +79,7 @@
 		1FAD1576298A5A6C001139C6 /* AddPairCellNoteButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FAD1575298A5A6C001139C6 /* AddPairCellNoteButton.swift */; };
 		1FAD1578298A8346001139C6 /* Secretary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FAD1577298A8345001139C6 /* Secretary.swift */; };
 		1FAD157C298AAFDB001139C6 /* BubbleDeleteActionAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FAD157B298AAFDB001139C6 /* BubbleDeleteActionAlert.swift */; };
+		1FAE715D298D1CA200E19959 /* DualTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FAE715C298D1CA200E19959 /* DualTextView.swift */; };
 		1FAF39D9298575E9002D833C /* Library.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA377E72972FE75005ACD41 /* Library.swift */; };
 		1FAF39DB29857688002D833C /* MyPackage in Frameworks */ = {isa = PBXBuildFile; productRef = 1FAF39DA29857688002D833C /* MyPackage */; };
 		1FB3178F286ACB48006BBE82 /* Note_InfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB3178E286ACB48006BBE82 /* Note_InfoView.swift */; };
@@ -210,6 +211,7 @@
 		1FAD1575298A5A6C001139C6 /* AddPairCellNoteButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPairCellNoteButton.swift; sourceTree = "<group>"; };
 		1FAD1577298A8345001139C6 /* Secretary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Secretary.swift; sourceTree = "<group>"; };
 		1FAD157B298AAFDB001139C6 /* BubbleDeleteActionAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BubbleDeleteActionAlert.swift; sourceTree = "<group>"; };
+		1FAE715C298D1CA200E19959 /* DualTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DualTextView.swift; sourceTree = "<group>"; };
 		1FB3178E286ACB48006BBE82 /* Note_InfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Note_InfoView.swift; sourceTree = "<group>"; };
 		1FB4D4DF2977F86500F26D9C /* iPadViewHierarchy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iPadViewHierarchy.swift; sourceTree = "<group>"; };
 		1FB5D8D328E81CD900DD522A /* InfoButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoButton.swift; sourceTree = "<group>"; };
@@ -316,6 +318,7 @@
 		1F5F4A4228093FAC00AF3442 = {
 			isa = PBXGroup;
 			children = (
+				1FAE715C298D1CA200E19959 /* DualTextView.swift */,
 				1FF37CAD298BC7DF00AF0EC8 /* SmallTextHint.swift */,
 				1F615B6229899E210006DB0B /* BackgroundTimer.swift */,
 				1FAD1575298A5A6C001139C6 /* AddPairCellNoteButton.swift */,
@@ -575,6 +578,7 @@
 				1FB5D8DA28E9BF0500DD522A /* GestureLabel.swift in Sources */,
 				1F76B51128DDE38800543660 /* AlertHintView.swift in Sources */,
 				1FB4D4E02977F86500F26D9C /* iPadViewHierarchy.swift in Sources */,
+				1FAE715D298D1CA200E19959 /* DualTextView.swift in Sources */,
 				1FE722A128E58200005ADA8E /* ColorConfirmationView.swift in Sources */,
 				1F8B6965283790CF006540CB /* BubbleStickyNoteList.swift in Sources */,
 				1F4DF99D282B82EF00D54BE8 /* CircleButton.swift in Sources */,
