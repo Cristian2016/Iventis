@@ -27,7 +27,7 @@ struct BubbleNote: View {
             .foregroundColor(.label)
             .background(background)
             .cornerRadius(cornerRadius)
-            .standardShadow()
+            .standardShadow(0.2)
         }
     }
     

@@ -43,7 +43,6 @@ struct DurationPickerView: View {
                 Picker(selection: $min) {
                     ForEach(minValues, id: \.self) { number in
                         Text("\(number)")
-                            .padding([.top, .bottom])
                             .font(.system(size: 25))
                     }
                 } label: { }

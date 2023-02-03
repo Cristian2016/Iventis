@@ -100,15 +100,16 @@ extension Image {
 }
 
 struct ShadowModifier:ViewModifier {
+    let opacity:CGFloat
     func body(content:Content) -> some View {
-        content.shadow(color: .black.opacity(0.3), radius: 4, y: 2.5)
+        content.shadow(color: .black.opacity(opacity), radius: 4, y: 2.5)
     }
 }
 
 extension View {
     //https://www.hackingwithswift.com/plus/swiftui-special-effects/shadows-and-glows
     //https://www.youtube.com/watch?v=nGENKnaSWPM
-    func standardShadow() -> some View {
-        modifier(ShadowModifier())
+    func standardShadow(_ opacity:CGFloat = 0.3) -> some View {
+        modifier(ShadowModifier(opacity: opacity))
     }
 }
