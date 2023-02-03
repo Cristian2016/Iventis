@@ -31,7 +31,6 @@ struct DurationPickerView: View {
     }
     
     var body: some View {
-        HStack(spacing:0) {
             ZStack {
                 Color.background.standardShadow()
                 VStack {
@@ -46,7 +45,7 @@ struct DurationPickerView: View {
                                 DualTextView(content: .init(text1: "\(min)", text2: "m"), metrics: .durationPicker)
                                 DualTextView(content: .init(text1: "\(sec)", text2: "s"), metrics: .durationPicker)
                             }
-                            .fontDesign(.rounded)
+//                            .fontDesign(.rounded)
                             .allowsTightening(true)
                         }
                     
@@ -89,19 +88,6 @@ struct DurationPickerView: View {
                 }
                 .padding(3)
             }
-            Rectangle()
-                .fill(Color.clear)
-                .frame(width: 40)
-                .contentShape(Rectangle()) //use if color clear otherwise gesture will not work
-                .ignoresSafeArea()
-                .gesture(DragGesture(minimumDistance: 0, coordinateSpace: .global)
-                    .onEnded { _ in
-                        withAnimation {
-                            viewModel.durationPicker_OfColor = nil
-                        }
-                    }
-                )
-        }
         .ignoresSafeArea()
     }
     
