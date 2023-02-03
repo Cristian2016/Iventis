@@ -64,7 +64,7 @@ struct PaletteView: View {
         }
         .gesture(swipeGesture)
         .ignoresSafeArea()
-        .offset(x: viewModel.isPaletteShowing ? 0 : -UIScreen.size.height)
+//        .offset(x: viewModel.isPaletteShowing ? 0 : -UIScreen.size.height)
     }
     
     private var swipeGesture:some Gesture {
@@ -79,6 +79,8 @@ struct PaletteView: View {
     }
     
     // MARK: - Legoes
+    
+    let scales = [CGFloat(1.5), 1.6, 2.0, 1.9, 1.8, 1.7, 1.4, 2.1, 2.2]
                               
     var circles:some View {
         ScrollView {
@@ -86,10 +88,11 @@ struct PaletteView: View {
                 ForEach(tricolors, id:\.self) { tricolor in
                     Circle()
                         .fill(tricolor.sec)
-                        .scaleEffect(x: 1.4, y: 1.4)
+                        .scaleEffect(x: scales.randomElement()!, y: scales.randomElement()!)
                         .onTapGesture {
                             viewModel.createBubble(.stopwatch, tricolor.description)
                             showPalette = false
+//                            isAnimating = true
                         }
                         .onLongPressGesture { viewModel.durationPicker_OfColor = tricolor.sec }
                 }
