@@ -22,16 +22,17 @@ struct PaletteView: View {
     
     
     var body: some View {
-        HStack(spacing: 0) {
-            Rectangle()
-                .foregroundColor(.background)
-                .standardShadow()
-                .overlay {
-                    circles
-                }
-            RightStrip($showPalette)
-        }
+            HStack(spacing: 0) {
+                Rectangle()
+                    .foregroundColor(.background)
+                    .standardShadow()
+                    .overlay {
+                        circles
+                    }
+                RightStrip($showPalette)
+            }
         .ignoresSafeArea()
+        .offset(x: viewModel.isPaletteShowing ? 0 : -UIScreen.size.width)
     }
     
     // MARK: -
