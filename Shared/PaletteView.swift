@@ -33,9 +33,10 @@ struct PaletteView: View {
             VStack(alignment: .leading) {
                 Text("\(Image(systemName:"hand.tap")) Tap Color for Stopwatch")
                 Text("\(Image(systemName:"digitalcrown.horizontal.press")) Long Press for Timer")
-                Text("\(Image(systemName:"arrow.left")) Swipe to Dismiss")
+                Text("\(Image(systemName:"arrow.left")) Swipe from Edge to Dismiss")
             }
             .padding()
+            .padding([.top, .bottom])
             .allowsHitTesting(false)
             .background {
                 RoundedRectangle(cornerRadius: 20)
