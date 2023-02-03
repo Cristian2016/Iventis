@@ -78,7 +78,7 @@ struct DurationPickerView: View {
                 .padding(3)
             }
             Rectangle()
-                .fill(.ultraThinMaterial)
+                .fill(Color.clear)
                 .frame(width: 40)
                 .contentShape(Rectangle()) //use if color clear otherwise gesture will not work
                 .ignoresSafeArea()
