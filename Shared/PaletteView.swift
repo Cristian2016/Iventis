@@ -22,13 +22,11 @@ struct PaletteView: View {
     
     
     var body: some View {
-            HStack(spacing: 0) {
+            HStack(spacing: -20) {
                 Rectangle()
                     .foregroundColor(.background)
                     .standardShadow()
-                    .overlay {
-                        circles
-                    }
+                    .overlay { circles }
                 RightStrip($showPalette)
             }
         .ignoresSafeArea()
