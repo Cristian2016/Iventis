@@ -25,7 +25,6 @@ struct PaletteView: View {
             HStack(spacing: -20) {
                 Rectangle()
                     .foregroundColor(.background)
-                    .standardShadow()
                     .overlay { circles }
                 RightStrip($showPalette)
             }
