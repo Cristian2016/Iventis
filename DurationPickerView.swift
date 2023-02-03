@@ -49,7 +49,7 @@ struct DurationPickerView: View {
                 .fill(.background)
                 .frame(height: 60)
                 .overlay {
-                    Text("\(hr) \(min) \(sec)")
+                    Text("\(hr)Hr \(min)Min \(sec)Sec")
                         .font(.largeTitle)
                 }
             LazyVGrid(columns: columns) {
