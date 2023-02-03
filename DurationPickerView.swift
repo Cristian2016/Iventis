@@ -45,6 +45,13 @@ struct DurationPickerView: View {
             }
             .pickerStyle(.wheel)
             
+            Rectangle()
+                .fill(.background)
+                .frame(height: 60)
+                .overlay {
+                    Text("\(hr) \(min) \(sec)")
+                        .font(.largeTitle)
+                }
             LazyVGrid(columns: columns) {
                 ForEach(digits, id:\.self) { symbol in
                     digit.overlay {
