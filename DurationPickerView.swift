@@ -27,6 +27,7 @@ struct DurationPickerView: View {
     
     struct Metrics {
         let digitFont = Font.system(size: 45, weight: .regular, design: .rounded)
+        let pickerFont = Font.title
     }
     
     var body: some View {
@@ -47,18 +48,18 @@ struct DurationPickerView: View {
                     HStack {
                         Picker(selection: $hr) {
                             ForEach(hrValues, id: \.self) { number in
-                                Text("\(number)").font(.system(size: 25))
+                                Text("\(number)").font(metrics.pickerFont)
                             }
                         } label: { }
                         Picker(selection: $min) {
                             ForEach(minValues, id: \.self) { number in
                                 Text("\(number)")
-                                    .font(.system(size: 25))
+                                    .font(metrics.pickerFont)
                             }
                         } label: { }
                         Picker(selection: $sec) {
                             ForEach(secValues, id: \.self) { number in
-                                Text("\(number)").font(.system(size: 25))
+                                Text("\(number)").font(metrics.pickerFont)
                             }
                         } label: { }
                     }
