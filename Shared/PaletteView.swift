@@ -22,11 +22,6 @@ struct PaletteView: View {
     
     
     var body: some View {
-            paletteView
-    }
-    
-    // MARK: -
-    private var paletteView:some View {
         HStack(spacing: 0) {
             Rectangle()
                 .foregroundColor(.background)
@@ -37,8 +32,9 @@ struct PaletteView: View {
             RightStrip($showPalette)
         }
         .ignoresSafeArea()
-        .offset(x: viewModel.isPaletteShowing ? 0 : -max(UIScreen.size.width, UIScreen.size.height) )
     }
+    
+    // MARK: -
     
     // MARK: - Legoes
     var background: some View {
