@@ -40,7 +40,7 @@ struct PaletteView: View {
                     Button {
                         showPaletteHint = false
                     } label: {
-                        Text("Do not show")
+                        Text("OK. Don't show")
                     }
                     .buttonStyle(.borderedProminent)
                     .tint(.red)
