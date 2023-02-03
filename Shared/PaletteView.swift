@@ -37,7 +37,7 @@ struct PaletteView: View {
                     }
                     .allowsHitTesting(false)
                     Button {
-                        showPaletteHint = false
+                        withAnimation { showPaletteHint = false }
                     } label: {
                         Text("OK. Don't show")
                     }
