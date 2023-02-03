@@ -53,12 +53,12 @@ struct PaletteView: View {
                         .standardShadow()
                 }
             }
-            Push(.topRight) {
-                Image(systemName: "info.circle.fill")
-            }
-            .padding()
-            .onTapGesture {
-                withAnimation { showPaletteHint = true }
+            if !showPaletteHint {
+                Push(.topRight) { Image(systemName: "info.circle.fill") }
+                .padding()
+                .padding([.top])
+                .padding([.top])
+                .onTapGesture { withAnimation { showPaletteHint = true } }
             }
         }
         .gesture(swipeGesture)
