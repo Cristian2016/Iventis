@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import MyPackage
 
 struct PaletteView: View {
     @AppStorage("showPaletteHint", store: .shared) private var showPaletteHint = true
@@ -51,6 +52,13 @@ struct PaletteView: View {
                         .fill(.thinMaterial)
                         .standardShadow()
                 }
+            }
+            Push(.topRight) {
+                Image(systemName: "info.circle.fill")
+            }
+            .padding()
+            .onTapGesture {
+                withAnimation { showPaletteHint = true }
             }
         }
         .gesture(swipeGesture)
