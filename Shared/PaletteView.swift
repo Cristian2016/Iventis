@@ -31,33 +31,36 @@ struct PaletteView: View {
                 RightStrip($showPalette)
             }
             
-            VStack {
-                VStack(alignment: .leading) {
-                    Text("\(Image(systemName:"hand.tap")) Tap Color for Stopwatch")
-                    Text("\(Image(systemName:"digitalcrown.horizontal.press")) Long Press for Timer")
-                    Text("\(Image(systemName:"arrow.left")) Swipe from Edge to Dismiss")
+            if showPalette {
+                VStack {
+                    VStack(alignment: .leading) {
+                        Text("\(Image(systemName:"hand.tap")) Tap Color for Stopwatch")
+                        Text("\(Image(systemName:"digitalcrown.horizontal.press")) Long Press for Timer")
+                        Text("\(Image(systemName:"arrow.left")) Swipe from Edge to Dismiss")
+                    }
+                    Button {
+                        
+                    } label: {
+                        Text("Do not show again")
+                    }
+                    .buttonStyle(.borderedProminent)
+                    .tint(.red)
                 }
-                Button {
-                    
-                } label: {
-                    Text("Do not show again")
+                .padding()
+                .padding([.top, .bottom])
+                .allowsHitTesting(false)
+                .background {
+                    RoundedRectangle(cornerRadius: 20)
+                        .fill(.ultraThinMaterial)
+                        .standardShadow()
                 }
-                .buttonStyle(.borderedProminent)
-                .tint(.red)
             }
-            .padding()
-            .padding([.top, .bottom])
-            .allowsHitTesting(false)
-            .background {
-                RoundedRectangle(cornerRadius: 20)
-                    .fill(.ultraThinMaterial)
-                    .standardShadow()
-            }
+            
         }
         .ignoresSafeArea()
-//        .offset(x: viewModel.isPaletteShowing ? 0 : -UIScreen.size.height)
+        //        .offset(x: viewModel.isPaletteShowing ? 0 : -UIScreen.size.height)
     }
-        
+    
     // MARK: - Legoes
     var background: some View {
         Color.background
