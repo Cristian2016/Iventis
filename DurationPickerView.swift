@@ -34,13 +34,10 @@ struct DurationPickerView: View {
             ZStack {
                 Color.background.standardShadow()
                 VStack {
-                    Spacer(minLength: 14)
-                    
                     let white = Color.white
                     
                     Rectangle()
                         .fill(.background)
-                        .frame(height: 60)
                         .overlay {
                             HStack {
                                 DualTextView(content: .init(text1: "\(hr)", text2: "h"), metrics: .durationPicker)
@@ -50,9 +47,7 @@ struct DurationPickerView: View {
 //                            .fontDesign(.rounded)
                             .allowsTightening(true)
                         }
-                    
-                    pickers
-                
+                                    
                     LazyVGrid(columns: columns) {
                         ForEach(digits, id:\.self) { symbol in
                             Button {
@@ -70,7 +65,7 @@ struct DurationPickerView: View {
                 }
                 .padding(3)
             }
-        .ignoresSafeArea()
+            .ignoresSafeArea()
     }
     
     // MARK: - Lego
