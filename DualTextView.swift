@@ -18,7 +18,7 @@ struct DualTextView: View {
         let font1Size:Font
         let font2Size:Font
         
-        static let durationPicker = Metrics(font1Size: .largeTitle, font2Size: .title)
+        static let durationPicker = Metrics(font1Size: .largeTitle, font2Size: .title2)
     }
     
     let content:Content
