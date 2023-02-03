@@ -29,7 +29,7 @@ struct PaletteView: View {
                 RightStrip($showPalette)
             }
         .ignoresSafeArea()
-        .offset(x: viewModel.isPaletteShowing ? 0 : -UIScreen.size.width)
+        .offset(x: viewModel.isPaletteShowing ? 0 : -UIScreen.size.height)
     }
         
     // MARK: - Legoes
