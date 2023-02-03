@@ -46,6 +46,7 @@ struct DurationPickerView: View {
                                 DualTextView(content: .init(text1: "\(min)", text2: "m"), metrics: .durationPicker)
                                 DualTextView(content: .init(text1: "\(sec)", text2: "s"), metrics: .durationPicker)
                             }
+                            .fontDesign(.rounded)
                         }
                     
                     HStack {
