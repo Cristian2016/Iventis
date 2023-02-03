@@ -12,6 +12,7 @@ struct PaletteView: View {
     @AppStorage("showPaletteHint", store: .shared) private var showPaletteHint = true
     @EnvironmentObject private var viewModel:ViewModel
     @Binding private var showPalette:Bool
+    @State private var isAnimating = false
     
     private let tricolors = [
         Color.Bubbles.mint, Color.Bubbles.slateBlue, Color.Bubbles.sourCherry, Color.Bubbles.silver, Color.Bubbles.ultramarine, Color.Bubbles.lemon, Color.Bubbles.red, Color.Bubbles.sky, Color.Bubbles.bubbleGum,  Color.Bubbles.green, Color.Bubbles.charcoal, Color.Bubbles.magenta, Color.Bubbles.purple, Color.Bubbles.orange, Color.Bubbles.chocolate,
@@ -64,7 +65,10 @@ struct PaletteView: View {
         }
         .gesture(swipeGesture)
         .ignoresSafeArea()
-//        .offset(x: viewModel.isPaletteShowing ? 0 : -UIScreen.size.height)
+        .offset(x: viewModel.isPaletteShowing ? 0 : -UIScreen.size.height)
+        .onChange(of: showPalette) { newValue in
+            isAnimating = newValue ? true : false
+        }
     }
     
     private var swipeGesture:some Gesture {
@@ -80,7 +84,7 @@ struct PaletteView: View {
     
     // MARK: - Legoes
     
-    let scales = [CGFloat(1.5), 1.6, 2.0, 1.9, 1.8, 1.7, 1.4, 2.1, 2.2]
+    let scales = [CGFloat(1.5), 1.55, 1.65, 1.75, 1.85, 1.6, 2.0, 1.9, 1.8, 1.7, 1.4, 2.1, 2.2]
                               
     var circles:some View {
         ScrollView {
@@ -88,11 +92,11 @@ struct PaletteView: View {
                 ForEach(tricolors, id:\.self) { tricolor in
                     Circle()
                         .fill(tricolor.sec)
-                        .scaleEffect(x: scales.randomElement()!, y: scales.randomElement()!)
+                        .scaleEffect(x: isAnimating ? scales.randomElement()! : 1.53, y: isAnimating ? scales.randomElement()! : 1.53)
+                        .animation(.easeIn(duration: 6).repeatForever(autoreverses: true), value: isAnimating)
                         .onTapGesture {
                             viewModel.createBubble(.stopwatch, tricolor.description)
                             showPalette = false
-//                            isAnimating = true
                         }
                         .onLongPressGesture { viewModel.durationPicker_OfColor = tricolor.sec }
                 }
