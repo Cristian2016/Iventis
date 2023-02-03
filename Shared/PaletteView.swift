@@ -20,13 +20,16 @@ struct PaletteView: View {
     
     
     var body: some View {
-        GeometryReader { geo in
-            HStack {
-                paletteView
-                RightStrip($showPalette)
+        ScrollView {
+            GeometryReader { geo in
+                HStack(spacing: 0) {
+                    paletteView
+                    RightStrip($showPalette)
+                }
+                .offset(x: !showPalette ? -geo.size.width * 1.05 : 0, y: 0)
             }
-            .offset(x: !showPalette ? -geo.size.width * 1.05 : 0, y: 0)
         }
+        .scrollIndicators(.hidden)
     }
     
     // MARK: -
