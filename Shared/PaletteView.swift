@@ -22,26 +22,17 @@ struct PaletteView: View {
     
     
     var body: some View {
-        GeometryReader { geo in
-            HStack(spacing: 0) {
-                paletteView
-                RightStrip($showPalette)
-            }
-            .offset(x: !showPalette ? -geo.size.width * 1.05 : 0, y: 0)
-        }
+            paletteView
     }
     
     // MARK: -
     private var paletteView:some View {
-        ZStack {
-            background
-            circles
-        }
-        .gesture(DragGesture(minimumDistance: 0, coordinateSpace: .global)
-            .onEnded { _ in
-                withAnimation { showPalette = false }
-            }
-        )
+        circles
+            .gesture(DragGesture(minimumDistance: 0, coordinateSpace: .global)
+                .onEnded { _ in
+                    withAnimation { showPalette = false }
+                }
+            )
     }
     
     // MARK: - Legoes
@@ -67,6 +58,7 @@ struct PaletteView: View {
         }
         .padding([.trailing, .leading, .bottom], 2)
         .scrollIndicators(.hidden)
+        .ignoresSafeArea()
     }
     
     private func circle(_ color:Color.Tricolor) -> some View {
