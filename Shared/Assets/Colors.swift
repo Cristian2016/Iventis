@@ -8,7 +8,7 @@
 import SwiftUI
 
 extension Color {
-    struct Three {
+    struct Three:Hashable {
         let description:String
         let hr:Color //light
         let min:Color //medium

@@ -15,9 +15,7 @@ struct PaletteView: View {
     private let colorThrees = [
         Color.Bubbles.mint, Color.Bubbles.slateBlue, Color.Bubbles.sourCherry, Color.Bubbles.silver, Color.Bubbles.ultramarine, Color.Bubbles.lemon, Color.Bubbles.red, Color.Bubbles.sky, Color.Bubbles.bubbleGum,  Color.Bubbles.green, Color.Bubbles.charcoal, Color.Bubbles.magenta, Color.Bubbles.purple, Color.Bubbles.orange, Color.Bubbles.chocolate
     ]
-    
-    private var colors:[Color] { colorThrees.map { $0.sec }}
-    
+        
     private let colums = Array(repeating: GridItem(), count: 3)
     
     
@@ -54,19 +52,21 @@ struct PaletteView: View {
                               
     var circles:some View {
         LazyVGrid(columns: colums, spacing: 10) {
-            ForEach(colors, id:\.self) { color in
-                Circle().fill(color)
+            ForEach(colorThrees, id:\.self) { item in
+                Circle()
+                    .fill(item.sec)
+                    .onTapGesture {
+                        vm.createBubble(.stopwatch, item.description)
+                        showPalette = false
+                    }
             }
         }
-        .padding([.trailing, .leading, .bottom], 3)
+        .padding([.trailing, .leading, .bottom], 2)
     }
     
     private func circle(_ color:Color.Three) -> some View {
         Circle().fill(color.sec)
-            .onTapGesture {
-                vm.createBubble(.stopwatch, color.description)
-                showPalette = false
-            }
+            
     }
     
     // MARK: -
