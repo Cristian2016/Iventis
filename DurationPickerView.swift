@@ -34,7 +34,6 @@ struct DurationPickerView: View {
             ZStack {
                 Color
                     .background.standardShadow()
-                    .gesture(swipeGesture)
                 VStack {
                     let white = Color.white
                     
@@ -46,28 +45,29 @@ struct DurationPickerView: View {
                                 DualTextView(content: .init(text1: "\(min)", text2: "m"), metrics: .durationPicker)
                                 DualTextView(content: .init(text1: "\(sec)", text2: "s"), metrics: .durationPicker)
                             }
-//                            .fontDesign(.rounded)
+                            //                            .fontDesign(.rounded)
                             .allowsTightening(true)
                         }
-                                    
+                    
                     LazyVGrid(columns: columns) {
                         ForEach(digits, id:\.self) { symbol in
-                            Button {
-                                
-                            } label: {
-                                Circle().fill(symbol == "✕" ? .red : color)
-                                    .overlay {
-                                        Text(symbol)
-                                            .font(metrics.digitFont)
-                                            .foregroundColor(white)
-                                    }
-                            }
+                            
+                            Circle().fill(symbol == "✕" ? .red : color)
+                                .overlay {
+                                    Text(symbol)
+                                        .font(metrics.digitFont)
+                                        .foregroundColor(white)
+                                }
+                                .onTapGesture {
+                                    print("Digit tapped")
+                                }
                         }
                     }
-                }
-                .padding(3)
+                    }
+                    .padding(3)
             }
             .ignoresSafeArea()
+            .gesture(swipeGesture)
     }
     
     // MARK: - Lego
