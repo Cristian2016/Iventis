@@ -29,12 +29,13 @@ struct PaletteView: View {
     private var paletteView:some View {
         HStack(spacing: 0) {
             Rectangle()
+                .fill(Color.background)
                 .overlay {
                     circles
                 }
             RightStrip($showPalette)
         }
-        .ignoresSafeArea()
+        .edgesIgnoringSafeArea([.bottom])
         .offset(x: viewModel.isPaletteShowing ? 0 : -UIScreen.size.width)
     }
     
