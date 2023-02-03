@@ -27,12 +27,16 @@ struct PaletteView: View {
     
     // MARK: -
     private var paletteView:some View {
-        circles
-            .gesture(DragGesture(minimumDistance: 0, coordinateSpace: .global)
-                .onEnded { _ in
-                    withAnimation { showPalette = false }
+        HStack(spacing: 0) {
+            Rectangle()
+                .overlay {
+                    circles
                 }
-            )
+            Rectangle()
+                .fill(.red)
+                .frame(width: 20)
+        }
+        .ignoresSafeArea()
     }
     
     // MARK: - Legoes
@@ -58,7 +62,6 @@ struct PaletteView: View {
         }
         .padding([.trailing, .leading, .bottom], 2)
         .scrollIndicators(.hidden)
-        .ignoresSafeArea()
     }
     
     private func circle(_ color:Color.Tricolor) -> some View {
