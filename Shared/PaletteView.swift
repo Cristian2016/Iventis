@@ -63,8 +63,8 @@ struct PaletteView: View {
             }
         }
         .gesture(swipeGesture)
-        .ignoresSafeArea()
-        .offset(x: viewModel.isPaletteShowing ? 0 : -UIScreen.size.height)
+//        .ignoresSafeArea()
+//        .offset(x: viewModel.isPaletteShowing ? 0 : -UIScreen.size.height)
     }
     
     private var swipeGesture:some Gesture {
@@ -89,7 +89,7 @@ struct PaletteView: View {
                 ForEach(tricolors, id:\.self) { tricolor in
                     Circle()
                         .fill(tricolor.sec)
-                        .scaleEffect(x: random , y: random)
+                        .scaleEffect(x: 2.2 , y: 2.2)
                         .onTapGesture {
                             viewModel.createBubble(.stopwatch, tricolor.description)
                             showPalette = false
