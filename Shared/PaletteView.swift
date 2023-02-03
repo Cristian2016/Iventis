@@ -24,19 +24,16 @@ struct PaletteView: View {
     
     var body: some View {
         ZStack {
-            HStack(spacing: -20) {
-                Rectangle()
-                    .foregroundColor(.background)
-                    .overlay { circles }
-                RightStrip($showPalette)
-            }
+            Rectangle()
+                .foregroundColor(.background)
+                .overlay { circles }
             
             if showPaletteHint {
                 VStack {
                     VStack(alignment: .leading) {
                         Text("\(Image(systemName:"hand.tap")) Tap Color for Stopwatch")
                         Text("\(Image(systemName:"digitalcrown.horizontal.press")) Long Press for Timer")
-                        Text("\(Image(systemName:"arrow.left")) Swipe from Right Edge to Dismiss")
+                        Text("\(Image(systemName:"arrow.left")) Swipe Left to Dismiss")
                     }
                     .allowsHitTesting(false)
                     Button {
@@ -55,7 +52,6 @@ struct PaletteView: View {
                         .standardShadow()
                 }
             }
-            
         }
         .gesture(swipeGesture)
         .ignoresSafeArea()
