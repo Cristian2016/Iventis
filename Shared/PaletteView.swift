@@ -20,25 +20,21 @@ struct PaletteView: View {
     
     
     var body: some View {
-        ScrollView {
-            GeometryReader { geo in
-                HStack(spacing: 0) {
-                    paletteView
-                    RightStrip($showPalette)
-                }
-                .offset(x: !showPalette ? -geo.size.width * 1.05 : 0, y: 0)
+        GeometryReader { geo in
+            HStack(spacing: 0) {
+                paletteView
+                RightStrip($showPalette)
             }
+            .offset(x: !showPalette ? -geo.size.width * 1.05 : 0, y: 0)
         }
-        .scrollIndicators(.hidden)
     }
     
     // MARK: -
     private var paletteView:some View {
-        GeometryReader { geo in
-            ZStack {
-                background
-                circles
-            }}
+        ZStack {
+            background
+            circles
+        }
         .gesture(DragGesture(minimumDistance: 0, coordinateSpace: .global)
             .onEnded { _ in
                 withAnimation { showPalette = false }
@@ -54,18 +50,21 @@ struct PaletteView: View {
     }
                               
     var circles:some View {
-        LazyVGrid(columns: colums, spacing: 10) {
-            ForEach(tricolors, id:\.self) { tricolor in
-                Circle()
-                    .fill(tricolor.sec)
-                    .onTapGesture {
-                        viewModel.createBubble(.stopwatch, tricolor.description)
-                        showPalette = false
-                    }
-                    .onLongPressGesture { viewModel.durationPicker_OfColor = tricolor.sec }
+        ScrollView {
+            LazyVGrid(columns: colums, spacing: 10) {
+                ForEach(tricolors, id:\.self) { tricolor in
+                    Circle()
+                        .fill(tricolor.sec)
+                        .onTapGesture {
+                            viewModel.createBubble(.stopwatch, tricolor.description)
+                            showPalette = false
+                        }
+                        .onLongPressGesture { viewModel.durationPicker_OfColor = tricolor.sec }
+                }
             }
         }
         .padding([.trailing, .leading, .bottom], 2)
+        .scrollIndicators(.hidden)
     }
     
     private func circle(_ color:Color.Tricolor) -> some View {
