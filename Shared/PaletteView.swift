@@ -30,10 +30,19 @@ struct PaletteView: View {
                 RightStrip($showPalette)
             }
             
-            VStack(alignment: .leading) {
-                Text("\(Image(systemName:"hand.tap")) Tap Color for Stopwatch")
-                Text("\(Image(systemName:"digitalcrown.horizontal.press")) Long Press for Timer")
-                Text("\(Image(systemName:"arrow.left")) Swipe from Edge to Dismiss")
+            VStack {
+                VStack(alignment: .leading) {
+                    Text("\(Image(systemName:"hand.tap")) Tap Color for Stopwatch")
+                    Text("\(Image(systemName:"digitalcrown.horizontal.press")) Long Press for Timer")
+                    Text("\(Image(systemName:"arrow.left")) Swipe from Edge to Dismiss")
+                }
+                Button {
+                    
+                } label: {
+                    Text("Do not show again")
+                }
+                .buttonStyle(.borderedProminent)
+                .tint(.red)
             }
             .padding()
             .padding([.top, .bottom])
