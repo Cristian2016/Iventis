@@ -23,12 +23,17 @@ struct DurationPickerView: View {
     private let columns = Array(repeating: GridItem(), count: 3)
     private let digits = ["7", "8", "9", "4", "5", "6", "1", "2", "3", "00", "0", "✕"]
     
+    let metrics = Metrics()
+    
+    struct Metrics {
+        let digitFont = Font.system(size: 45, weight: .regular, design: .rounded)
+    }
+    
     var body: some View {
         HStack(spacing:0) {
             ZStack {
                 Color.background.standardShadow()
                 VStack {
-                    let font = Font.system(size: 45, weight: .regular, design: .rounded)
                     let white = Color.white
                     
                     Rectangle()
@@ -68,7 +73,7 @@ struct DurationPickerView: View {
                                 Circle().fill(symbol == "✕" ? .red : color)
                                     .overlay {
                                         Text(symbol)
-                                            .font(font)
+                                            .font(metrics.digitFont)
                                             .foregroundColor(white)
                                     }
                             }
