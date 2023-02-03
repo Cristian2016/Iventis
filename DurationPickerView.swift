@@ -3,22 +3,39 @@
 //  Timers (iOS)
 //
 //  Created by Cristian Lapusan on 02.02.2023.
-//
+// Pickers https://www.youtube.com/watch?v=2pSDE56u2F0
 
 import SwiftUI
 
 struct DurationPickerView: View {
-    let color:Color
+    @State private var hr:Int = 0
+    private let hrValues:Range<Int> = 0..<49
+    
+    
+    @State private var min:Int = 0
+    @State private var sec:Int = 0
+        
+    let bubbleColor:Color
     
     private let columns = Array(repeating: GridItem(), count: 3)
     private let digits = ["7", "8", "9", "4", "5", "6", "1", "2", "3", "00", "0", "✕"]
     
     var body: some View {
         VStack {
-            let font = Font.system(size: 80, weight: .regular, design: .rounded)
+            Text("\(hr)")
+            let font = Font.system(size: 60, weight: .regular, design: .rounded)
             let white = Color.white
             
-            vRoundedRectangle(corners: [.topLeft, .topRight], radius: 40)
+            vRoundedRectangle(corners: [.topLeft, .topRight], radius: 40).fill(.gray)
+                .overlay {
+                    Picker(selection: $hr) {
+                        ForEach(hrValues, id: \.self) { number in
+                            Text("\(number)")
+                        }
+                    } label: { }
+                        .pickerStyle(.wheel)
+                }
+            
             LazyVGrid(columns: columns) {
                 ForEach(digits, id:\.self) { symbol in
                     digit.overlay {
@@ -34,12 +51,12 @@ struct DurationPickerView: View {
     
     // MARK: - Lego
     private var digit:some View {
-        Circle().fill(color)
+        Circle().fill(bubbleColor)
     }
 }
 
 struct DurationPickerView_Previews: PreviewProvider {
     static var previews: some View {
-        DurationPickerView(color: .blue)
+        DurationPickerView(bubbleColor: .blue)
     }
 }
