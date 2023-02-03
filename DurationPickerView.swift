@@ -16,7 +16,7 @@ struct DurationPickerView: View {
     private let minValues:Range<Int> = 0..<60
     private let secValues:Range<Int> = 0..<60
         
-    let bubbleColor:Color
+    let color:Color
     
     private let columns = Array(repeating: GridItem(), count: 3)
     private let digits = ["7", "8", "9", "4", "5", "6", "1", "2", "3", "00", "0", "✕"]
@@ -60,7 +60,7 @@ struct DurationPickerView: View {
                     Button {
                         
                     } label: {
-                        Circle().fill(symbol == "✕" ? .red : bubbleColor)
+                        Circle().fill(symbol == "✕" ? .red : color)
                             .overlay {
                                 Text(symbol)
                                     .font(font)
@@ -78,6 +78,6 @@ struct DurationPickerView: View {
 
 struct DurationPickerView_Previews: PreviewProvider {
     static var previews: some View {
-        DurationPickerView(bubbleColor: .yellow)
+        DurationPickerView(color: .yellow)
     }
 }
