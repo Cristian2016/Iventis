@@ -55,13 +55,17 @@ struct PaletteView: View {
         }
         .gesture(swipeGesture)
         .ignoresSafeArea()
-                .offset(x: viewModel.isPaletteShowing ? 0 : -UIScreen.size.height)
+        .offset(x: viewModel.isPaletteShowing ? 0 : -UIScreen.size.height)
     }
     
     private var swipeGesture:some Gesture {
-        DragGesture(minimumDistance: 1, coordinateSpace: .global)
-            .onEnded { _ in
-                withAnimation(.easeOut(duration: 0.25)) { viewModel.isPaletteShowing = false }
+        DragGesture(minimumDistance: 1)
+            .onEnded {
+                if $0.translation.width < 0 {
+                    withAnimation(.easeOut(duration: 0.25)) {
+                        viewModel.isPaletteShowing = false
+                    }
+                }
             }
     }
     
