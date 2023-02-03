@@ -40,7 +40,7 @@ struct PaletteView: View {
                     Button {
                         showPaletteHint = false
                     } label: {
-                        Text("Do not show again")
+                        Text("Do not show")
                     }
                     .buttonStyle(.borderedProminent)
                     .tint(.red)
@@ -52,8 +52,7 @@ struct PaletteView: View {
                         .fill(.thinMaterial)
                         .standardShadow()
                 }
-            }
-            if !showPaletteHint {
+            } else {
                 Push(.topRight) { Image(systemName: "info.circle.fill") }
                 .padding()
                 .padding([.top])
