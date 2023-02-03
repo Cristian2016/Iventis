@@ -51,7 +51,7 @@ struct PaletteView: View {
                 .padding([.top, .bottom])
                 .background {
                     RoundedRectangle(cornerRadius: 20)
-                        .fill(.ultraThinMaterial)
+                        .fill(.thinMaterial)
                         .standardShadow()
                 }
             }
