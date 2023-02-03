@@ -84,11 +84,12 @@ struct PaletteView: View {
                               
     var circles:some View {
         ScrollView {
+            let random = scales.randomElement()!
             LazyVGrid(columns: colums, spacing: 10) {
                 ForEach(tricolors, id:\.self) { tricolor in
                     Circle()
                         .fill(tricolor.sec)
-                        .scaleEffect(x: scales.randomElement()!, y: scales.randomElement()!)
+                        .scaleEffect(x: random , y: random)
                         .onTapGesture {
                             viewModel.createBubble(.stopwatch, tricolor.description)
                             showPalette = false
