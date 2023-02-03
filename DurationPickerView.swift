@@ -85,9 +85,7 @@ struct DurationPickerView: View {
                 .gesture(DragGesture(minimumDistance: 0, coordinateSpace: .global)
                     .onEnded { _ in
                         withAnimation {
-                            withAnimation {
-                                viewModel.durationPicker_OfColor = nil
-                            }
+                            viewModel.durationPicker_OfColor = nil
                         }
                     }
                 )
