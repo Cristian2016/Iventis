@@ -23,7 +23,6 @@ struct DurationPickerView: View {
     
     var body: some View {
         VStack {
-            Text("\(hr)")
             let font = Font.system(size: 60, weight: .regular, design: .rounded)
             let white = Color.white
             
@@ -33,13 +32,13 @@ struct DurationPickerView: View {
                         Text("\(number)")
                     }
                 } label: { }
-                Picker(selection: $hr) {
-                    ForEach(hrValues, id: \.self) { number in
+                Picker(selection: $min) {
+                    ForEach(minValues, id: \.self) { number in
                         Text("\(number)")
                     }
                 } label: { }
-                Picker(selection: $hr) {
-                    ForEach(hrValues, id: \.self) { number in
+                Picker(selection: $sec) {
+                    ForEach(secValues, id: \.self) { number in
                         Text("\(number)")
                     }
                 } label: { }
