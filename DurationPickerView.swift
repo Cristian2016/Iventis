@@ -27,7 +27,7 @@ struct DurationPickerView: View {
     
     struct Metrics {
         let digitFont = Font.system(size: 45, weight: .regular, design: .rounded)
-        let pickerFont = Font.title
+        let pickerFont = Font.system(size: 20)
     }
     
     var body: some View {
