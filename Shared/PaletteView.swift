@@ -32,9 +32,7 @@ struct PaletteView: View {
                 .overlay {
                     circles
                 }
-            Rectangle()
-                .fill(.red)
-                .frame(width: 20)
+            RightStrip($showPalette)
         }
         .ignoresSafeArea()
         .offset(x: viewModel.isPaletteShowing ? 0 : -UIScreen.size.width)
