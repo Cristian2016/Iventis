@@ -36,15 +36,14 @@ struct PaletteView: View {
                 }
             RightStrip($showPalette)
         }
-        .edgesIgnoringSafeArea([.bottom])
-        .offset(x: viewModel.isPaletteShowing ? 0 : -UIScreen.size.width)
+        .ignoresSafeArea()
+        .offset(x: viewModel.isPaletteShowing ? 0 : -max(UIScreen.size.width, UIScreen.size.height) )
     }
     
     // MARK: - Legoes
     var background: some View {
         Color.background
             .standardShadow()
-            .ignoresSafeArea()
     }
                               
     var circles:some View {
