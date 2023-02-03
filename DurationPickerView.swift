@@ -9,11 +9,12 @@ import SwiftUI
 
 struct DurationPickerView: View {
     @State private var hr:Int = 0
-    private let hrValues:Range<Int> = 0..<49
-    
-    
     @State private var min:Int = 0
     @State private var sec:Int = 0
+    
+    private let hrValues:Range<Int> = 0..<49
+    private let minValues:Range<Int> = 0..<60
+    private let secValues:Range<Int> = 0..<60
         
     let bubbleColor:Color
     
@@ -26,15 +27,24 @@ struct DurationPickerView: View {
             let font = Font.system(size: 60, weight: .regular, design: .rounded)
             let white = Color.white
             
-            vRoundedRectangle(corners: [.topLeft, .topRight], radius: 40).fill(.gray)
-                .overlay {
-                    Picker(selection: $hr) {
-                        ForEach(hrValues, id: \.self) { number in
-                            Text("\(number)")
-                        }
-                    } label: { }
-                        .pickerStyle(.wheel)
-                }
+            HStack {
+                Picker(selection: $hr) {
+                    ForEach(hrValues, id: \.self) { number in
+                        Text("\(number)")
+                    }
+                } label: { }
+                Picker(selection: $hr) {
+                    ForEach(hrValues, id: \.self) { number in
+                        Text("\(number)")
+                    }
+                } label: { }
+                Picker(selection: $hr) {
+                    ForEach(hrValues, id: \.self) { number in
+                        Text("\(number)")
+                    }
+                } label: { }
+            }
+            .pickerStyle(.wheel)
             
             LazyVGrid(columns: columns) {
                 ForEach(digits, id:\.self) { symbol in
