@@ -31,9 +31,7 @@ struct PaletteView: View {
         .ignoresSafeArea()
         .offset(x: viewModel.isPaletteShowing ? 0 : -UIScreen.size.width)
     }
-    
-    // MARK: -
-    
+        
     // MARK: - Legoes
     var background: some View {
         Color.background
