@@ -26,25 +26,6 @@ struct DurationPickerView: View {
             let font = Font.system(size: 60, weight: .regular, design: .rounded)
             let white = Color.white
             
-            HStack {
-                Picker(selection: $hr) {
-                    ForEach(hrValues, id: \.self) { number in
-                        Text("\(number)")
-                    }
-                } label: { }
-                Picker(selection: $min) {
-                    ForEach(minValues, id: \.self) { number in
-                        Text("\(number)")
-                    }
-                } label: { }
-                Picker(selection: $sec) {
-                    ForEach(secValues, id: \.self) { number in
-                        Text("\(number)")
-                    }
-                } label: { }
-            }
-            .pickerStyle(.wheel)
-            
             Rectangle()
                 .fill(.background)
                 .frame(height: 60)
@@ -52,6 +33,29 @@ struct DurationPickerView: View {
                     Text("\(hr)Hr \(min)Min \(sec)Sec")
                         .font(.largeTitle)
                 }
+            
+            HStack {
+                Picker(selection: $hr) {
+                    ForEach(hrValues, id: \.self) { number in
+                        Text("\(number)").font(.system(size: 25))
+                    }
+                } label: { }
+                Picker(selection: $min) {
+                    ForEach(minValues, id: \.self) { number in
+                        Text("\(number)")
+                            .padding([.top, .bottom])
+                            .font(.system(size: 25))
+                    }
+                } label: { }
+                Picker(selection: $sec) {
+                    ForEach(secValues, id: \.self) { number in
+                        Text("\(number)").font(.system(size: 25))
+                    }
+                } label: { }
+            }
+            .pickerStyle(.wheel)
+            .frame(height: 160)
+        
             LazyVGrid(columns: columns) {
                 ForEach(digits, id:\.self) { symbol in
                     Button {
