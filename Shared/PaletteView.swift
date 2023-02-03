@@ -48,6 +48,7 @@ struct PaletteView: View {
                 ForEach(tricolors, id:\.self) { tricolor in
                     Circle()
                         .fill(tricolor.sec)
+                        .scaleEffect(x:1.4, y:1.4)
                         .onTapGesture {
                             viewModel.createBubble(.stopwatch, tricolor.description)
                             showPalette = false
@@ -56,7 +57,6 @@ struct PaletteView: View {
                 }
             }
         }
-        .padding([.trailing, .leading, .bottom], 2)
         .scrollIndicators(.hidden)
     }
     
