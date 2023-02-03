@@ -24,11 +24,11 @@ struct DurationPickerView: View {
     private let digits = ["7", "8", "9", "4", "5", "6", "1", "2", "3", "00", "0", "✕"]
     
     var body: some View {
-        HStack {
+        HStack(spacing:0) {
             ZStack {
-                Color.background
+                Color.background.standardShadow()
                 VStack {
-                    let font = Font.system(size: 60, weight: .regular, design: .rounded)
+                    let font = Font.system(size: 45, weight: .regular, design: .rounded)
                     let white = Color.white
                     
                     Rectangle()
@@ -78,7 +78,7 @@ struct DurationPickerView: View {
                 .padding(3)
             }
             Rectangle()
-                .fill(Color.clear)
+                .fill(.ultraThinMaterial)
                 .frame(width: 40)
                 .contentShape(Rectangle()) //use if color clear otherwise gesture will not work
                 .ignoresSafeArea()
