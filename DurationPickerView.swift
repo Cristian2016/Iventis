@@ -41,8 +41,11 @@ struct DurationPickerView: View {
                         .fill(.background)
                         .frame(height: 60)
                         .overlay {
-                            Text("\(hr)Hr \(min)Min \(sec)Sec")
-                                .font(.largeTitle)
+                            HStack {
+                                DualTextView(content: .init(text1: "\(hr)", text2: "h"))
+                                DualTextView(content: .init(text1: "\(min)", text2: "m"))
+                                DualTextView(content: .init(text1: "\(sec)", text2: "s"))
+                            }
                         }
                     
                     HStack {
