@@ -53,9 +53,12 @@ struct PaletteView: View {
                         .standardShadow()
                 }
             } else {
-                Push(.topRight) { Image(systemName: "info.circle.fill") }
+                Push(.topRight) {
+                    Image(systemName: "info.circle.fill")
+                }
+                .foregroundColor(.white)
                 .padding()
-                .padding([.top])
+                .padding()
                 .padding([.top])
                 .onTapGesture { withAnimation { showPaletteHint = true } }
             }
