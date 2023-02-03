@@ -31,7 +31,7 @@ struct PaletteView: View {
                 RightStrip($showPalette)
             }
             
-            if showPalette {
+            if showPaletteHint {
                 VStack {
                     VStack(alignment: .leading) {
                         Text("\(Image(systemName:"hand.tap")) Tap Color for Stopwatch")
