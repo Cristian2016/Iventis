@@ -36,8 +36,9 @@ struct PaletteView: View {
                     VStack(alignment: .leading) {
                         Text("\(Image(systemName:"hand.tap")) Tap Color for Stopwatch")
                         Text("\(Image(systemName:"digitalcrown.horizontal.press")) Long Press for Timer")
-                        Text("\(Image(systemName:"arrow.left")) Swipe from Edge to Dismiss")
+                        Text("\(Image(systemName:"arrow.left")) Swipe from Right Edge to Dismiss")
                     }
+                    .allowsHitTesting(false)
                     Button {
                         
                     } label: {
@@ -48,7 +49,6 @@ struct PaletteView: View {
                 }
                 .padding()
                 .padding([.top, .bottom])
-                .allowsHitTesting(false)
                 .background {
                     RoundedRectangle(cornerRadius: 20)
                         .fill(.ultraThinMaterial)
@@ -58,7 +58,7 @@ struct PaletteView: View {
             
         }
         .ignoresSafeArea()
-        //        .offset(x: viewModel.isPaletteShowing ? 0 : -UIScreen.size.height)
+                .offset(x: viewModel.isPaletteShowing ? 0 : -UIScreen.size.height)
     }
     
     // MARK: - Legoes
