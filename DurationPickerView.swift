@@ -34,6 +34,8 @@ struct DurationPickerView: View {
             ZStack {
                 Color.background.standardShadow()
                 VStack {
+                    Spacer(minLength: 14)
+                    
                     let white = Color.white
                     
                     Rectangle()
