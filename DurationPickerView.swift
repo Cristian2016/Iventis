@@ -97,7 +97,7 @@ struct DurationPickerView: View {
     
     // MARK: -
     private var swipeGesture:some Gesture {
-        DragGesture(minimumDistance: 10)
+        DragGesture()
             .onChanged { value in
                 print(value)
             }
