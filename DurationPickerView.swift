@@ -32,7 +32,9 @@ struct DurationPickerView: View {
     
     var body: some View {
             ZStack {
-                Color.background.standardShadow()
+                Color
+                    .background.standardShadow()
+                    .gesture(swipeGesture)
                 VStack {
                     let white = Color.white
                     
@@ -91,6 +93,14 @@ struct DurationPickerView: View {
         }
         .pickerStyle(.wheel)
         .frame(height: 160)
+    }
+    
+    // MARK: -
+    private var swipeGesture:some Gesture {
+        DragGesture(minimumDistance: 10)
+            .onChanged { value in
+                print(value)
+            }
     }
 }
 
