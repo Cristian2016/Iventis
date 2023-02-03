@@ -54,10 +54,15 @@ struct DurationPickerView: View {
                 }
             LazyVGrid(columns: columns) {
                 ForEach(digits, id:\.self) { symbol in
-                    digit.overlay {
-                        Text(symbol)
-                            .font(font)
-                            .foregroundColor(white)
+                    Button {
+                        
+                    } label: {
+                        Circle()
+                            .overlay {
+                                Text(symbol)
+                                    .font(font)
+                                    .foregroundColor(white)
+                            }
                     }
                 }
             }
