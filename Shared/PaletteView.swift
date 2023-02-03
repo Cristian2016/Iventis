@@ -29,7 +29,8 @@ struct PaletteView: View {
     private var paletteView:some View {
         HStack(spacing: 0) {
             Rectangle()
-                .fill(Color.background)
+                .foregroundColor(.background)
+                .standardShadow()
                 .overlay {
                     circles
                 }
