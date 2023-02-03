@@ -8,11 +8,11 @@
 import SwiftUI
 
 struct PaletteView: View {
-    @EnvironmentObject private var vm:ViewModel
+    @EnvironmentObject private var viewModel:ViewModel
     @Binding private var showPalette:Bool
     private let xOffset = -UIScreen.main.bounds.width
     
-    private let colorThrees = [
+    private let tricolors = [
         Color.Bubbles.mint, Color.Bubbles.slateBlue, Color.Bubbles.sourCherry, Color.Bubbles.silver, Color.Bubbles.ultramarine, Color.Bubbles.lemon, Color.Bubbles.red, Color.Bubbles.sky, Color.Bubbles.bubbleGum,  Color.Bubbles.green, Color.Bubbles.charcoal, Color.Bubbles.magenta, Color.Bubbles.purple, Color.Bubbles.orange, Color.Bubbles.chocolate
     ]
         
@@ -52,13 +52,14 @@ struct PaletteView: View {
                               
     var circles:some View {
         LazyVGrid(columns: colums, spacing: 10) {
-            ForEach(colorThrees, id:\.self) { item in
+            ForEach(tricolors, id:\.self) { tricolor in
                 Circle()
-                    .fill(item.sec)
+                    .fill(tricolor.sec)
                     .onTapGesture {
-                        vm.createBubble(.stopwatch, item.description)
+                        viewModel.createBubble(.stopwatch, tricolor.description)
                         showPalette = false
                     }
+                    .onLongPressGesture { viewModel.durationPicker_OfColor = tricolor.sec }
             }
         }
         .padding([.trailing, .leading, .bottom], 2)

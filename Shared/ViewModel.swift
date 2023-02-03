@@ -25,6 +25,8 @@ class ViewModel: ObservableObject {
         if fiveSeconds_bRank != nil { fiveSeconds_bRank = nil  }
     }
     
+    @Published var durationPicker_OfColor:Color?
+    
     @Published var fiveSeconds_bRank:Int? { didSet{
         if fiveSeconds_bRank != nil {
             self.timer = Timer.scheduledTimer( timeInterval: 5.0, target: self,
