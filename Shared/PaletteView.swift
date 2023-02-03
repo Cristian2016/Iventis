@@ -65,7 +65,7 @@ struct PaletteView: View {
         .padding([.trailing, .leading, .bottom], 2)
     }
     
-    private func circle(_ color:Color.Three) -> some View {
+    private func circle(_ color:Color.Tricolor) -> some View {
         Circle().fill(color.sec)
             
     }
