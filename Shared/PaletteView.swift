@@ -12,7 +12,6 @@ struct PaletteView: View {
     @AppStorage("showPaletteHint", store: .shared) private var showPaletteHint = true
     @EnvironmentObject private var viewModel:ViewModel
     @Binding private var showPalette:Bool
-    private let xOffset = -UIScreen.main.bounds.width
     
     private let tricolors = [
         Color.Bubbles.mint, Color.Bubbles.slateBlue, Color.Bubbles.sourCherry, Color.Bubbles.silver, Color.Bubbles.ultramarine, Color.Bubbles.lemon, Color.Bubbles.red, Color.Bubbles.sky, Color.Bubbles.bubbleGum,  Color.Bubbles.green, Color.Bubbles.charcoal, Color.Bubbles.magenta, Color.Bubbles.purple, Color.Bubbles.orange, Color.Bubbles.chocolate,
@@ -91,7 +90,7 @@ struct PaletteView: View {
                 ForEach(tricolors, id:\.self) { tricolor in
                     Circle()
                         .fill(tricolor.sec)
-                        .scaleEffect(x:1.4, y:1.4)
+                        .scaleEffect(x: 1.4, y: 1.4)
                         .onTapGesture {
                             viewModel.createBubble(.stopwatch, tricolor.description)
                             showPalette = false
