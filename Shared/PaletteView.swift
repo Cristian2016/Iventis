@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct PaletteView: View {
+    @AppStorage("showPaletteHint", store: .shared) private var showPaletteHint = true
     @EnvironmentObject private var viewModel:ViewModel
     @Binding private var showPalette:Bool
     private let xOffset = -UIScreen.main.bounds.width
