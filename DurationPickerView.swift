@@ -31,43 +31,43 @@ struct DurationPickerView: View {
     }
     
     var body: some View {
-            ZStack {
-                Color
-                    .background.standardShadow()
-                VStack {
-                    let white = Color.white
-                    
-                    Rectangle()
-                        .fill(.background)
-                        .overlay {
-                            HStack {
-                                DualTextView(content: .init(text1: "\(hr)", text2: "h"), metrics: .durationPicker)
-                                DualTextView(content: .init(text1: "\(min)", text2: "m"), metrics: .durationPicker)
-                                DualTextView(content: .init(text1: "\(sec)", text2: "s"), metrics: .durationPicker)
+        ZStack {
+            Color
+                .background.standardShadow()
+            VStack {
+                let white = Color.white
+                
+                Rectangle()
+                    .fill(.background)
+                    .overlay {
+                        HStack {
+                            DualTextView(content: .init(text1: "\(hr)", text2: "h"), metrics: .durationPicker)
+                            DualTextView(content: .init(text1: "\(min)", text2: "m"), metrics: .durationPicker)
+                            DualTextView(content: .init(text1: "\(sec)", text2: "s"), metrics: .durationPicker)
+                        }
+                        //                            .fontDesign(.rounded)
+                        .allowsTightening(true)
+                    }
+                
+                LazyVGrid(columns: columns) {
+                    ForEach(digits, id:\.self) { symbol in
+                        
+                        Circle().fill(symbol == "✕" ? .red : color)
+                            .overlay {
+                                Text(symbol)
+                                    .font(metrics.digitFont)
+                                    .foregroundColor(white)
                             }
-                            //                            .fontDesign(.rounded)
-                            .allowsTightening(true)
-                        }
-                    
-                    LazyVGrid(columns: columns) {
-                        ForEach(digits, id:\.self) { symbol in
-                            
-                            Circle().fill(symbol == "✕" ? .red : color)
-                                .overlay {
-                                    Text(symbol)
-                                        .font(metrics.digitFont)
-                                        .foregroundColor(white)
-                                }
-                                .onTapGesture {
-                                    print("Digit tapped")
-                                }
-                        }
+                            .onTapGesture {
+                                print("Digit tapped")
+                            }
                     }
-                    }
-                    .padding(3)
+                }
             }
-            .ignoresSafeArea()
-            .gesture(swipeGesture)
+            .padding(3)
+        }
+        .ignoresSafeArea()
+        .gesture(swipeGesture)
     }
     
     // MARK: - Lego
