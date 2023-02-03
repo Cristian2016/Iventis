@@ -57,7 +57,7 @@ struct DurationPickerView: View {
                     Button {
                         
                     } label: {
-                        Circle().fill(symbol == "x" ? .red : bubbleColor)
+                        Circle().fill(symbol == "✕" ? .red : bubbleColor)
                             .overlay {
                                 Text(symbol)
                                     .font(font)
