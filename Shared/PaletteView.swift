@@ -57,8 +57,16 @@ struct PaletteView: View {
             }
             
         }
+        .gesture(swipeGesture)
         .ignoresSafeArea()
                 .offset(x: viewModel.isPaletteShowing ? 0 : -UIScreen.size.height)
+    }
+    
+    private var swipeGesture:some Gesture {
+        DragGesture(minimumDistance: 1, coordinateSpace: .global)
+            .onEnded { _ in
+                withAnimation(.easeOut(duration: 0.25)) { viewModel.isPaletteShowing = false }
+            }
     }
     
     // MARK: - Legoes
