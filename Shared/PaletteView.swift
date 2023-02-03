@@ -34,7 +34,7 @@ struct PaletteView: View {
             if showPaletteHint {
                 VStack {
                     VStack(alignment: .leading) {
-                        Text("\(Image(systemName:"hand.tap")) Tap Color for Stopwatch")
+                        Text("\(Image(systemName:"hand.tap")) Tap any Color for Stopwatch")
                         Text("\(Image(systemName:"digitalcrown.horizontal.press")) Long Press for Timer")
                         Text("\(Image(systemName:"arrow.left")) Swipe from Right Edge to Dismiss")
                     }
