@@ -57,7 +57,7 @@ struct DurationPickerView: View {
                     Button {
                         
                     } label: {
-                        Circle()
+                        Circle().fill(bubbleColor)
                             .overlay {
                                 Text(symbol)
                                     .font(font)
@@ -71,13 +71,10 @@ struct DurationPickerView: View {
     }
     
     // MARK: - Lego
-    private var digit:some View {
-        Circle().fill(bubbleColor)
-    }
 }
 
 struct DurationPickerView_Previews: PreviewProvider {
     static var previews: some View {
-        DurationPickerView(bubbleColor: .blue)
+        DurationPickerView(bubbleColor: .red)
     }
 }
