@@ -37,6 +37,7 @@ struct PaletteView: View {
                 .frame(width: 20)
         }
         .ignoresSafeArea()
+        .offset(x: viewModel.isPaletteShowing ? 0 : -UIScreen.size.width)
     }
     
     // MARK: - Legoes
