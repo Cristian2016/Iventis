@@ -44,6 +44,8 @@ struct MaterialLabel<Content:View>: View {
             .fill(.thinMaterial)
             .standardShadow()
     }
+    
+    // MARK: -
 }
 
 struct PaletteLabel_Previews: PreviewProvider {
