@@ -29,7 +29,7 @@ struct PaletteView: View {
         ZStack {
             circles
             if showPaletteHint {
-                ThinMaterialLabel(title: "Create Bubble") { labelContent }
+                ThinMaterialLabel(title: "Create Bubbles") { labelContent }
             action: { withAnimation { showPaletteHint = false } }
 
             }
@@ -78,7 +78,6 @@ struct PaletteView: View {
     var circles:some View {
         let rect = Rectangle().fill(.clear)
        return ScrollView {
-            Spacer()
             rect
             rect
             LazyVGrid(columns: colums, spacing: 10) {
