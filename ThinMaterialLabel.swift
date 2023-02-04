@@ -12,18 +12,26 @@ struct ThinMaterialLabel<Content:View>: View {
         let backgroundRadius = CGFloat(20)
     }
     
-    init(@ViewBuilder _ content:() -> Content, action: @escaping () -> ()) {
+    init(title:String? = nil, @ViewBuilder _ content:() -> Content, action: @escaping () -> ()) {
         self.content = content()
         self.action = action
+        self.title = title
     }
     
+    private var title:String?
     let content:Content
-    let action:() -> ()
+    private let action:() -> ()
     
-    let metrics = Metrics()
+    private let metrics = Metrics()
     
     var body: some View {
         VStack {
+            if let title = title {
+                Text(title)
+                    .padding(.bottom, 1)
+                    .font(.title2)
+                Divider().frame(maxWidth: 300)
+            }
             content
             dismissButton
         }
