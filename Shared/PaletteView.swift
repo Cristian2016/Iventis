@@ -29,11 +29,8 @@ struct PaletteView: View {
         ZStack {
             circles
             if showPaletteHint {
-                ThinMaterialLabel(title: "Create Bubble") {
-                    paletteLabelContent
-                } action: {
-                    withAnimation { showPaletteHint = false }
-                }
+                ThinMaterialLabel(title: "Create Bubble") { labelContent }
+            action: { withAnimation { showPaletteHint = false } }
 
             }
             else { infoSymbol }
@@ -54,7 +51,7 @@ struct PaletteView: View {
     }
     
     // MARK: - Legos
-    private var paletteLabelContent:some View {
+    private var labelContent:some View {
         VStack {
             VStack(alignment: .leading) {
                 Text("\(Image(systemName:"hand.tap")) Tap Color for Stopwatch")
