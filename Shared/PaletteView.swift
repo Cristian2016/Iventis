@@ -42,7 +42,7 @@ struct PaletteView: View {
             clearColor
             clearColor
             LazyVGrid(columns: colums, spacing: 10) {
-                ForEach(Color.bubbleTriColors, id:\.self) { tricolor in
+                ForEach(Color.triColors, id:\.self) { tricolor in
                     Circle()
                         .fill(tricolor.sec)
                         .scaleEffect(x: scale(tricolor) , y: scale(tricolor))

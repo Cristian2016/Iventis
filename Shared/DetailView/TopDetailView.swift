@@ -59,7 +59,7 @@ struct TopDetailView:View {
     // MARK: -
     private func bubbleColor() -> Color {
         let description = sessions.last?.bubble?.color ?? "mint"
-        return (Color.bubbleTriColors.filter { $0.description == description }.first ?? Color.Bubbles.mint).sec
+        return (Color.triColors.filter { $0.description == description }.first ?? Color.Bubbles.mint).sec
         
     }
     
