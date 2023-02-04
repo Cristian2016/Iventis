@@ -82,8 +82,15 @@ struct PaletteView: View {
     }
     
     private func dismiss() {
-        withAnimation(.easeInOut(duration: 0.25)) {
-            offset = -UIScreen.size.width
+        delayExecution(.now() + 0.2) {
+            withAnimation(.easeInOut(duration: 0.25)) {
+                offset = -UIScreen.size.width
+            }
+            
+            delayExecution(.now() + 0.26) {
+                viewModel.isPaletteShowing = false //dismiss PaletteView
+                tappedCircle = nil
+            }
         }
     }
                               
@@ -91,18 +98,8 @@ struct PaletteView: View {
         viewModel.createBubble(.stopwatch, tricolor.description)
         UserFeedback.singleHaptic(.light)
         
-        withAnimation(.easeInOut(duration: 0.1)) {
-            tappedCircle = tricolor.description
-        }
-        
-        delayExecution(.now() + 0.2) {
-            dismiss()
-            
-            delayExecution(.now() + 0.26) {
-                viewModel.isPaletteShowing = false //dismiss PaletteView
-                tappedCircle = nil
-            }
-        }
+        withAnimation(.easeInOut(duration: 0.1)) { tappedCircle = tricolor.description }
+        dismiss()
     }
     
     fileprivate func showDurationPicker(_ tricolor:Color.Tricolor) {
@@ -122,14 +119,7 @@ struct PaletteView: View {
     private var swipeGesture:some Gesture {
         DragGesture(minimumDistance: 1)
             .onEnded {
-                if $0.translation.width < 0 {
-                    delayExecution(.now() + 0.2) {
-                        dismiss()
-                        delayExecution(.now() + 0.26) {
-                            viewModel.isPaletteShowing = false
-                        }
-                    }
-                }
+                if $0.translation.width < 0 { dismiss() }
             }
     }
 }
