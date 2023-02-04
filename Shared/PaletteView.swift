@@ -12,7 +12,7 @@ struct PaletteView: View {
     @AppStorage("showPaletteHint", store: .shared) private var showPaletteHint = true
     @EnvironmentObject private var viewModel:ViewModel
     @Binding private var showPalette:Bool
-    @State private isCircleTapped = false
+    @State private var tappedCircle:String?
     
     let scales = [CGFloat(1.5), 1.55, 1.65, 1.75, 1.85, 1.6, 2.0, 1.9, 1.8, 1.7, 1.4, 2.1, 2.2]
     
@@ -71,22 +71,29 @@ struct PaletteView: View {
         .padding([.top])
         .onTapGesture { withAnimation { showPaletteHint = true } }
     }
+    
+    private func scale(_ tricolor:Color.Tricolor) -> CGFloat {
+        if tricolor.description == tappedCircle { return 2 }
+        return 1.8
+    }
                               
     var circles:some View {
         ScrollView {
-            let scale:CGFloat = isCircleTapped ? 2 : 1.8
-            
             LazyVGrid(columns: colums, spacing: 10) {
                 ForEach(tricolors, id:\.self) { tricolor in
                     Circle()
                         .fill(tricolor.sec)
-                        .scaleEffect(x: scale , y: scale)
+                        .scaleEffect(x: scale(tricolor) , y: scale(tricolor))
                         .onTapGesture {
                             viewModel.createBubble(.stopwatch, tricolor.description)
-                            isCircleTapped = true
+                            
+                            withAnimation(.spring(response: 0.8, dampingFraction: 0.4)) {
+                                tappedCircle = tricolor.description
+                            }
                             
                             delayExecution(.now() + 0.3) {
                                 showPalette = false
+                                tappedCircle = nil
                             }
                         }
                         .onLongPressGesture { viewModel.durationPicker_OfColor = tricolor.sec }
