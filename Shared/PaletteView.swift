@@ -53,13 +53,15 @@ struct PaletteView: View {
     
     // MARK: - Legos
     private var paletteLabelContent:some View {
-        VStack(alignment: .leading) {
+        VStack {
             Text("Make Bubbles")
                 .padding(.bottom, 1)
                 .font(.title2)
-            Text("\(Image(systemName:"hand.tap")) Tap Color for Stopwatch")
-            Text("\(Image(systemName:"digitalcrown.horizontal.press")) Long Press for Timer")
-            Text("\(Image(systemName:"arrow.left")) Swipe Left to Dismiss")
+            VStack(alignment: .leading) {
+                Text("\(Image(systemName:"hand.tap")) Tap Color for Stopwatch")
+                Text("\(Image(systemName:"digitalcrown.horizontal.press")) Long Press for Timer")
+                Text("\(Image(systemName:"arrow.left")) Swipe Left to Dismiss")
+            }
         }
     }
     
