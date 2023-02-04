@@ -16,7 +16,13 @@ extension Color {
     }
     
     static let triColors = [
-        Bubbles.silver, Bubbles.mocha, Bubbles.lemon, Bubbles.darkGreen, Bubbles.mint, Bubbles.chocolate, Bubbles.slateBlue, Bubbles.sourCherry, Bubbles.orange,  Bubbles.ultramarine, Bubbles.charcoal, Bubbles.red, Bubbles.sky, Bubbles.bubbleGum, Bubbles.cayenne, Bubbles.byzantium,  Bubbles.purple, Bubbles.aqua,  Bubbles.rose, Bubbles.aubergine, Bubbles.magenta
+        Bubbles.silver, Bubbles.mocha, Bubbles.lemon,
+        Bubbles.darkGreen, Bubbles.mint, Bubbles.chocolate,
+        Bubbles.slateBlue, Bubbles.sourCherry, Bubbles.orange,
+        Bubbles.ultramarine, Bubbles.charcoal, Bubbles.red,
+        Bubbles.sky, Bubbles.bubbleGum, Bubbles.cayenne,
+        Bubbles.byzantium,  Bubbles.purple, Bubbles.aqua,
+        Bubbles.rose, Bubbles.aubergine, Bubbles.magenta
     ]
     
     struct Bubbles {
