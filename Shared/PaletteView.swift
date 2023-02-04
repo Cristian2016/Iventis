@@ -30,9 +30,7 @@ struct PaletteView: View {
         }
         .offset(x: offset)
         .gesture(swipeGesture)
-        .onAppear {
-            withAnimation(.easeInOut(duration: 0.25)) { offset = 0 }
-        }
+        .onAppear { withAnimation(.easeInOut(duration: 0.25)) { offset = 0 }}
     }
     
     // MARK: - Legos
