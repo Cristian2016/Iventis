@@ -37,10 +37,10 @@ struct PaletteView: View {
     
     // MARK: - Legos
     private var circles:some View {
-        let rect = Color.clear
+        let clearColor = Color.clear
        return ScrollView {
-            rect
-            rect
+            clearColor
+            clearColor
             LazyVGrid(columns: colums, spacing: 10) {
                 ForEach(Color.bubbleTriColors, id:\.self) { tricolor in
                     Circle()
