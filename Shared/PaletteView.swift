@@ -30,7 +30,9 @@ struct PaletteView: View {
             circles
             if showPaletteHint {
                 MaterialLabel { paletteLabelContent }
-            action: { withAnimation { showPaletteHint = false }}
+            action: {
+                withAnimation { showPaletteHint = false }
+            }
             }
             else { infolLabel }
         }
