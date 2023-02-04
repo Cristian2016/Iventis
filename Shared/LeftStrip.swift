@@ -22,7 +22,7 @@ struct LeftStrip: View {
         .ignoresSafeArea()
         .gesture(DragGesture(minimumDistance: 1, coordinateSpace: .global)
             .onEnded { _ in
-                withAnimation(.easeOut(duration: 0.25)) { paletteShowing = true }
+                paletteShowing = true
             }
         )
     }
