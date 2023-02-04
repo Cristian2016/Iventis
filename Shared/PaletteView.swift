@@ -31,7 +31,7 @@ struct PaletteView: View {
         .offset(x: offset)
         .gesture(swipeGesture)
         .onAppear {
-            withAnimation(.easeInOut(duration: 0.25)) { offset = 0 }
+            withAnimation(.easeInOut(duration: 0.3)) { offset = 0 }
         }
     }
     
@@ -85,7 +85,7 @@ struct PaletteView: View {
     
     private func dismiss() {
         delayExecution(.now() + 0.2) {
-            withAnimation(.easeInOut(duration: 0.25)) {
+            withAnimation(.easeInOut(duration: 0.3)) {
                 offset = -UIScreen.size.height
             }
             
