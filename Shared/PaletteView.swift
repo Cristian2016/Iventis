@@ -78,6 +78,7 @@ struct PaletteView: View {
         
     // MARK: - Methods
     private func scale(_ tricolor:Color.Tricolor) -> CGFloat {
+        print(#function)
         if tricolor.description == tappedCircle { return 2.8 }
         if tricolor.description == longPressedCircle { return 4 }
         return 1.8
@@ -89,7 +90,7 @@ struct PaletteView: View {
                 offset = -UIScreen.size.height
             }
             
-            delayExecution(.now() + 0.26) {
+            delayExecution(.now() + 0.5) {
                 viewModel.isPaletteShowing = false //dismiss PaletteView
                 tappedCircle = nil
             }
