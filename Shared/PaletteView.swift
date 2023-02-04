@@ -58,7 +58,7 @@ struct PaletteView: View {
     private var hintLabelContent:some View {
         VStack {
             VStack(alignment: .leading) {
-                Text("\(Image.tap) Tap Color for Stopwatch")
+                Text("\(Image.tap) Tap Any Color for Stopwatch")
                 Text("\(Image.longPress) Long Press for Timer")
                 Text("\(Image.leftSwipe) Swipe from Right Screen Edge to Dismiss")
             }
@@ -80,7 +80,7 @@ struct PaletteView: View {
     private func scale(_ tricolor:Color.Tricolor) -> CGFloat {
         if tricolor.description == tappedCircle { return 2.8 }
         if tricolor.description == longPressedCircle { return 4 }
-        return scales.randomElement()!
+        return 1.8
     }
     
     private func dismiss() {
