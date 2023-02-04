@@ -27,10 +27,7 @@ struct PaletteView: View {
     
     var body: some View {
         ZStack {
-            Rectangle()
-                .foregroundColor(.background)
-                .overlay { circles }
-            
+            circles
             if showPaletteHint {
                 MaterialLabel { paletteLabelContent }
             action: { withAnimation { showPaletteHint = false }}
