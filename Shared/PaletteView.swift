@@ -11,7 +11,6 @@ import MyPackage
 struct PaletteView: View {
     @AppStorage("showPaletteHint", store: .shared) private var showPaletteHint = true
     @EnvironmentObject private var viewModel:ViewModel
-    @Binding private var showPalette:Bool
     
     @State private var tappedCircle:String?
     @State private var longPressedCircle:String?
@@ -30,17 +29,6 @@ struct PaletteView: View {
         }
         .gesture(swipeGesture)
         .offset(x: viewModel.isPaletteShowing ? 0 : -max(UIScreen.size.height, UIScreen.size.width))
-    }
-    
-    private var swipeGesture:some Gesture {
-        DragGesture(minimumDistance: 1)
-            .onEnded {
-                if $0.translation.width < 0 {
-                    withAnimation(.easeOut(duration: 0.25)) {
-                        viewModel.isPaletteShowing = false
-                    }
-                }
-            }
     }
     
     // MARK: - Legos
@@ -78,7 +66,7 @@ struct PaletteView: View {
         }
         
         delayExecution(.now() + 0.2) {
-            showPalette = false
+            viewModel.isPaletteShowing = false //dismiss PaletteView
             tappedCircle = nil
         }
     }
@@ -92,7 +80,7 @@ struct PaletteView: View {
         
         delayExecution(.now() + 0.2) {
             viewModel.durationPicker_OfColor = tricolor.sec
-            showPalette = false
+            viewModel.isPaletteShowing = false //dismiss PaletteView
             longPressedCircle = nil
         }
     }
@@ -122,14 +110,21 @@ struct PaletteView: View {
     }
     
     // MARK: -
-    init(_ showPalette:Binding<Bool>) {
-        _showPalette = .init(projectedValue: showPalette)
+    private var swipeGesture:some Gesture {
+        DragGesture(minimumDistance: 1)
+            .onEnded {
+                if $0.translation.width < 0 {
+                    withAnimation(.easeOut(duration: 0.25)) {
+                        viewModel.isPaletteShowing = false
+                    }
+                }
+            }
     }
 }
 
 struct PaletteView_Previews: PreviewProvider {
     static var previews: some View {
-        PaletteView(.constant(true))
+        PaletteView()
     }
 }
 
