@@ -28,7 +28,7 @@ struct PaletteView: View {
             else { infoSymbol }
         }
         .gesture(swipeGesture)
-        .offset(x: viewModel.isPaletteShowing ? 0 : -max(UIScreen.size.height, UIScreen.size.width))
+        .offset(x: viewModel.isPaletteShowing ? 0 : -UIScreen.size.width
     }
     
     // MARK: - Legos
