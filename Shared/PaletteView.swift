@@ -18,7 +18,6 @@ struct PaletteView: View {
     
     private let colums = Array(repeating: GridItem(), count: 3)
     
-    
     var body: some View {
         ZStack {
             circles
