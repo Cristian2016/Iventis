@@ -76,9 +76,11 @@ struct PaletteView: View {
     }
                               
     var circles:some View {
-        ScrollView {
+        let rect = Rectangle().fill(.clear)
+       return ScrollView {
             Spacer()
-            Spacer()
+            rect
+            rect
             LazyVGrid(columns: colums, spacing: 10) {
                 ForEach(tricolors, id:\.self) { tricolor in
                     Circle()
