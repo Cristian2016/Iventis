@@ -29,28 +29,13 @@ struct PaletteView: View {
                 .overlay { circles }
             
             if showPaletteHint {
-                VStack {
+                PaletteLabel {
                     VStack(alignment: .leading) {
                         Text("\(Image(systemName:"hand.tap")) Tap Color for Stopwatch")
                         Text("\(Image(systemName:"digitalcrown.horizontal.press")) Long Press for Timer")
                         Text("\(Image(systemName:"arrow.left")) Swipe Left to Dismiss")
                     }
-                    .allowsHitTesting(false)
-                    Button {
-                        withAnimation { showPaletteHint = false }
-                    } label: {
-                        Text("OK. Don't show")
-                    }
-                    .buttonStyle(.borderedProminent)
-                    .tint(.red)
-                }
-                .padding()
-                .padding([.top, .bottom])
-                .background {
-                    RoundedRectangle(cornerRadius: 20)
-                        .fill(.thinMaterial)
-                        .standardShadow()
-                }
+                } action: { withAnimation { showPaletteHint = false }}
             } else {
                 Push(.topRight) {
                     Image(systemName: "info.circle.fill")
