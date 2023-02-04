@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct MaterialLabel<Content:View>: View {
+struct ThinMaterialLabel<Content:View>: View {
     struct Metrics {
         let backgroundRadius = CGFloat(20)
     }
@@ -29,7 +29,11 @@ struct MaterialLabel<Content:View>: View {
         }
         .padding()
         .padding([.top, .bottom])
-        .background { roundedBackground }
+        .background {
+            roundedBackground
+                .padding([.leading, .trailing])
+                .frame(maxWidth: 400)
+        }
     }
     
     // MARK: - Legos
@@ -57,6 +61,6 @@ struct PaletteLabel_Previews: PreviewProvider {
         }
     }
     static var previews: some View {
-        MaterialLabel { content } action: { }
+        ThinMaterialLabel { content } action: { }
     }
 }
