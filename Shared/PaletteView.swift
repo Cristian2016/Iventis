@@ -70,7 +70,7 @@ struct PaletteView: View {
         Push(.topRight) {
             Image(systemName: "info.circle.fill")
         }
-        .foregroundColor(.white)
+        .foregroundColor(.black)
         .padding([.trailing])
         .onTapGesture { withAnimation { showPaletteHint = true } }
     }
