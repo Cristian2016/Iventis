@@ -95,9 +95,9 @@ struct PaletteView: View {
     }
                               
     fileprivate func createBubble(_ tricolor:Color.Tricolor) {
-        viewModel.createBubble(.stopwatch, tricolor.description)
         UserFeedback.singleHaptic(.light)
         
+        viewModel.createBubble(.stopwatch, tricolor.description)
         withAnimation(.easeInOut(duration: 0.1)) { tappedCircle = tricolor.description }
         dismiss()
     }
@@ -105,9 +105,7 @@ struct PaletteView: View {
     fileprivate func showDurationPicker(_ tricolor:Color.Tricolor) {
         UserFeedback.singleHaptic(.medium)
         
-        withAnimation(.easeInOut(duration: 0.1)) {
-            longPressedCircle = tricolor.description
-        }
+        withAnimation(.easeInOut(duration: 0.1)) { longPressedCircle = tricolor.description }
         
         delayExecution(.now() + 0.2) {
             viewModel.durationPicker_OfColor = tricolor.sec
@@ -118,9 +116,7 @@ struct PaletteView: View {
     // MARK: -
     private var swipeGesture:some Gesture {
         DragGesture(minimumDistance: 1)
-            .onEnded {
-                if $0.translation.width < 0 { dismiss() }
-            }
+            .onEnded { if $0.translation.width < 0 { dismiss() }}
     }
 }
 
