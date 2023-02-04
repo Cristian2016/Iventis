@@ -66,8 +66,6 @@ struct PaletteView: View {
         }
         .foregroundColor(.white)
         .padding()
-        .padding()
-        .padding([.top])
         .onTapGesture { withAnimation { showPaletteHint = true } }
     }
     
