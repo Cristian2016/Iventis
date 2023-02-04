@@ -105,12 +105,12 @@ struct PaletteView: View {
             rect
             rect
             LazyVGrid(columns: colums, spacing: 10) {
-                ForEach(Color.bubbleTriColors, id:\.self) {
+                ForEach(Color.bubbleTriColors, id:\.self) { tricolor in
                     Circle()
-                        .fill($0.sec)
-                        .scaleEffect(x: scale($0) , y: scale($0))
-                        .onTapGesture { createBubble($0) }
-                        .onLongPressGesture { showDurationPicker($0) }
+                        .fill(tricolor.sec)
+                        .scaleEffect(x: scale(tricolor) , y: scale(tricolor))
+                        .onTapGesture { createBubble(tricolor) }
+                        .onLongPressGesture { showDurationPicker(tricolor) }
                 }
             }
         }
