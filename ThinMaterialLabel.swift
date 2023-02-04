@@ -37,7 +37,7 @@ struct ThinMaterialLabel<Content:View>: View {
         }
         .padding()
         .background { roundedBackground }
-        .frame(maxWidth: 350)
+        .frame(maxWidth: 364)
     }
     
     // MARK: - Legos
