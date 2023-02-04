@@ -87,7 +87,7 @@ struct PaletteView: View {
                         .onTapGesture {
                             viewModel.createBubble(.stopwatch, tricolor.description)
                             
-                            withAnimation(.spring(response: 0.8, dampingFraction: 0.4)) {
+                            withAnimation(.spring(response: 0.1, dampingFraction: 0.5)) {
                                 tappedCircle = tricolor.description
                             }
                             
