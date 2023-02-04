@@ -57,7 +57,7 @@ struct PaletteView: View {
             Text("Make Bubbles")
                 .padding(.bottom, 1)
                 .font(.title2)
-            Divider()
+            Divider().frame(width: 200)
             VStack(alignment: .leading) {
                 Text("\(Image(systemName:"hand.tap")) Tap Color for Stopwatch")
                 Text("\(Image(systemName:"digitalcrown.horizontal.press")) Long Press for Timer")
