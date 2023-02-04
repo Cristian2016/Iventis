@@ -37,7 +37,7 @@ struct PaletteView: View {
     
     // MARK: - Legos
     private var circles:some View {
-        let rect = Rectangle().fill(.clear)
+        let rect = Color.clear
        return ScrollView {
             rect
             rect
