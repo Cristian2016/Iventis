@@ -11,7 +11,7 @@ import MyPackage
 struct PaletteView: View {
     @AppStorage("showPaletteHint", store: .shared) private var showPaletteHint = true
     @EnvironmentObject private var viewModel:ViewModel
-    @State private var offset = -max(UIScreen.size.width, UIScreen.size.height)
+    @State private var offset = -UIScreen.size.height
     
     @State private var tappedCircle:String?
     @State private var longPressedCircle:String?
