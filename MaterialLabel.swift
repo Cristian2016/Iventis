@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct PaletteLabel<Content:View>: View {
+struct MaterialLabel<Content:View>: View {
     struct Metrics {
         let backgroundRadius = CGFloat(20)
     }
@@ -25,16 +25,11 @@ struct PaletteLabel<Content:View>: View {
     var body: some View {
         VStack {
             content
-            .allowsHitTesting(false)
             dismissButton
         }
         .padding()
         .padding([.top, .bottom])
-        .background {
-            RoundedRectangle(cornerRadius: metrics.backgroundRadius)
-                .fill(.thinMaterial)
-                .standardShadow()
-        }
+        .background { roundedBackground }
     }
     
     // MARK: - Legos
@@ -42,6 +37,12 @@ struct PaletteLabel<Content:View>: View {
         Button { action() } label: { Text("OK. Don't show") }
         .buttonStyle(.borderedProminent)
         .tint(.red)
+    }
+    
+    private var roundedBackground:some View {
+        RoundedRectangle(cornerRadius: metrics.backgroundRadius)
+            .fill(.thinMaterial)
+            .standardShadow()
     }
 }
 
@@ -54,6 +55,6 @@ struct PaletteLabel_Previews: PreviewProvider {
         }
     }
     static var previews: some View {
-        PaletteLabel { content } action: { }
+        MaterialLabel { content } action: { }
     }
 }

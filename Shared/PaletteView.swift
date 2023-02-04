@@ -29,13 +29,8 @@ struct PaletteView: View {
                 .overlay { circles }
             
             if showPaletteHint {
-                PaletteLabel {
-                    VStack(alignment: .leading) {
-                        Text("\(Image(systemName:"hand.tap")) Tap Color for Stopwatch")
-                        Text("\(Image(systemName:"digitalcrown.horizontal.press")) Long Press for Timer")
-                        Text("\(Image(systemName:"arrow.left")) Swipe Left to Dismiss")
-                    }
-                } action: { withAnimation { showPaletteHint = false }}
+                MaterialLabel { paletteLabelContent }
+            action: { withAnimation { showPaletteHint = false }}
             } else {
                 Push(.topRight) {
                     Image(systemName: "info.circle.fill")
@@ -62,8 +57,16 @@ struct PaletteView: View {
             }
     }
     
-    // MARK: - Legoes
+    // MARK: - Legos
+    private var paletteLabelContent:some View {
+        VStack(alignment: .leading) {
+            Text("\(Image(systemName:"hand.tap")) Tap Color for Stopwatch")
+            Text("\(Image(systemName:"digitalcrown.horizontal.press")) Long Press for Timer")
+            Text("\(Image(systemName:"arrow.left")) Swipe Left to Dismiss")
+        }
+    }
     
+    // MARK: -
     let scales = [CGFloat(1.5), 1.55, 1.65, 1.75, 1.85, 1.6, 2.0, 1.9, 1.8, 1.7, 1.4, 2.1, 2.2]
                               
     var circles:some View {
