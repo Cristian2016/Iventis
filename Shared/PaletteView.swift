@@ -85,6 +85,20 @@ struct PaletteView: View {
         }
     }
     
+    fileprivate func showDurationPicker(_ tricolor:Color.Tricolor) {
+        UserFeedback.singleHaptic(.medium)
+        
+        withAnimation(.easeInOut(duration: 0.1)) {
+            longPressedCircle = tricolor.description
+        }
+        
+        delayExecution(.now() + 0.2) {
+            viewModel.durationPicker_OfColor = tricolor.sec
+            showPalette = false
+            longPressedCircle = nil
+        }
+    }
+    
     var circles:some View {
         let rect = Rectangle().fill(.clear)
        return ScrollView {
@@ -96,19 +110,7 @@ struct PaletteView: View {
                         .fill(tricolor.sec)
                         .scaleEffect(x: scale(tricolor) , y: scale(tricolor))
                         .onTapGesture { createBubble(tricolor) }
-                        .onLongPressGesture {
-                            UserFeedback.singleHaptic(.medium)
-                            viewModel.durationPicker_OfColor = tricolor.sec
-                            
-                            withAnimation(.easeInOut(duration: 0.1)) {
-                                longPressedCircle = tricolor.description
-                            }
-                            
-                            delayExecution(.now() + 0.2) {
-                                showPalette = false
-                                longPressedCircle = nil
-                            }
-                        }
+                        .onLongPressGesture { showDurationPicker(tricolor) }
                 }
             }
         }
