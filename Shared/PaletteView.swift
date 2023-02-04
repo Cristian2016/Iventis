@@ -31,9 +31,7 @@ struct PaletteView: View {
         .offset(x: offset)
         .gesture(swipeGesture)
         .onAppear {
-            withAnimation(.easeInOut(duration: 3)) {
-                offset = 0
-            }
+            withAnimation(.easeInOut(duration: 0.25)) { offset = 0 }
         }
     }
     
