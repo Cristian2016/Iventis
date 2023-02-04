@@ -11,7 +11,7 @@ import MyPackage
 struct PaletteView: View {
     @AppStorage("showPaletteHint", store: .shared) private var showPaletteHint = true
     @EnvironmentObject private var viewModel:ViewModel
-    @State private var offset = CGFloat(0)
+    @State private var offset = -max(UIScreen.size.width, UIScreen.size.height)
     
     @State private var tappedCircle:String?
     @State private var longPressedCircle:String?
@@ -28,10 +28,11 @@ struct PaletteView: View {
             }
             else { infoSymbol }
         }
+        .offset(x: offset)
         .gesture(swipeGesture)
         .onAppear {
-            withAnimation(.easeInOut(duration: 0.25)) {
-                <#code#>
+            withAnimation(.easeInOut(duration: 3)) {
+                offset = 0
             }
         }
     }
