@@ -30,7 +30,9 @@ struct PaletteView: View {
         }
         .offset(x: offset)
         .gesture(swipeGesture)
-        .onAppear { withAnimation(.easeInOut(duration: 0.25)) { offset = 0 }}
+        .onAppear {
+            withAnimation(.easeInOut(duration: 0.25)) { offset = 0 }
+        }
     }
     
     // MARK: - Legos
@@ -112,7 +114,6 @@ struct PaletteView: View {
         
         delayExecution(.now() + 0.2) {
             viewModel.durationPicker_OfColor = tricolor.sec
-            viewModel.isPaletteShowing = false //dismiss PaletteView
             longPressedCircle = nil
         }
     }
