@@ -54,7 +54,7 @@ struct PaletteView: View {
     // MARK: - Legos
     private var paletteLabelContent:some View {
         VStack {
-            Text("Make Bubbles")
+            Text("Create Bubbles")
                 .padding(.bottom, 1)
                 .font(.title2)
             Divider().frame(maxWidth: 300)
