@@ -28,15 +28,19 @@ struct ThinMaterialLabel<Content:View>: View {
             dismissButton
         }
         .padding()
-        .padding()
         .background { roundedBackground }
+        .frame(maxWidth: 300)
     }
     
     // MARK: - Legos
     private var dismissButton:some View {
-        Button { action() } label: { Text("OK. Don't show") }
-        .buttonStyle(.borderedProminent)
+        Button { action() } label: {
+            Text("OK. Don't show")
+                .frame(maxWidth: .infinity)
+        }
         .tint(.red)
+        
+        .buttonStyle(.borderedProminent)
     }
     
     private var roundedBackground:some View {
