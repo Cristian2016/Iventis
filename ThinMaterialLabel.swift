@@ -55,7 +55,7 @@ struct ThinMaterialLabel<Content:View>: View {
 struct PaletteLabel_Previews: PreviewProvider {
     static var content:some View {
         VStack(alignment: .leading) {
-            Text("\(Image(systemName:"hand.tap")) Tap Color for Stopwatch")
+            Text("\(Image(systemName:"hand.tap")) Tap Any Color for Stopwatch")
             Text("\(Image(systemName:"digitalcrown.horizontal.press")) Long Press for Timer")
             Text("\(Image(systemName:"arrow.left")) Swipe Left to Dismiss")
         }
