@@ -31,7 +31,7 @@ struct PaletteView: View {
             else { infoSymbol }
         }
         .gesture(swipeGesture)
-        .offset(x: viewModel.isPaletteShowing ? 0 : -UIScreen.size.height)
+        .offset(x: viewModel.isPaletteShowing ? 0 : -max(UIScreen.size.height, UIScreen.size.width))
     }
     
     private var swipeGesture:some Gesture {
