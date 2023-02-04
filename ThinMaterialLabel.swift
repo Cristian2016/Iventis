@@ -28,12 +28,8 @@ struct ThinMaterialLabel<Content:View>: View {
             dismissButton
         }
         .padding()
-        .padding([.top, .bottom])
-        .background {
-            roundedBackground
-                .padding([.leading, .trailing])
-                .frame(maxWidth: 400)
-        }
+        .padding()
+        .background { roundedBackground }
     }
     
     // MARK: - Legos
