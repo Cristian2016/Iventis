@@ -9,8 +9,8 @@ import SwiftUI
 import MyPackage
 
 struct PaletteView: View {
-    @AppStorage("showPaletteHint", store: .shared) private var showPaletteHint = true
     @EnvironmentObject private var viewModel:ViewModel
+    @StateObject private var paletteViewModel = PaletteViewModel()
     @State private var offset = -UIScreen.size.height
     
     @State private var tappedCircle:String?
@@ -21,9 +21,9 @@ struct PaletteView: View {
     var body: some View {
         ZStack {
             circles
-            if showPaletteHint {
+            if paletteViewModel.showPaletteHint {
                 ThinMaterialLabel(title: "Create Bubbles") { hintLabelContent }
-            action: { withAnimation { showPaletteHint = false } }
+            action: { withAnimation { paletteViewModel.showPaletteHint = false } }
 
             }
             else { infoSymbol }
@@ -71,7 +71,7 @@ struct PaletteView: View {
         }
         .foregroundColor(.black)
         .padding([.trailing])
-        .onTapGesture { withAnimation { showPaletteHint = true } }
+        .onTapGesture { withAnimation { paletteViewModel.showPaletteHint = true } }
     }
     
     private let scales = [CGFloat(1.8), 1.9, 2.0, 2.1, 2.2, 2.3]

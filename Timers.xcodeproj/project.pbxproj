@@ -69,6 +69,7 @@
 		1FA25B002986F51E007759EB /* UnitedViewHierarchy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA25AFF2986F51E007759EB /* UnitedViewHierarchy.swift */; };
 		1FA355CB2832186100F73111 /* CalendarManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA355CA2832186100F73111 /* CalendarManager.swift */; };
 		1FA377E82972FE75005ACD41 /* Library.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA377E72972FE75005ACD41 /* Library.swift */; };
+		1FA6FF68298EF6370057C800 /* PaletteViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA6FF67298EF6370057C800 /* PaletteViewModel.swift */; };
 		1FA8346C2850A57A003F4D61 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F5F4A7D280941AA00AF3442 /* WidgetKit.framework */; };
 		1FA8346D2850A57A003F4D61 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F5F4A7F280941AA00AF3442 /* SwiftUI.framework */; };
 		1FA834702850A57A003F4D61 /* Widgets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA8346F2850A57A003F4D61 /* Widgets.swift */; };
@@ -204,6 +205,7 @@
 		1FA355CA2832186100F73111 /* CalendarManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarManager.swift; sourceTree = "<group>"; };
 		1FA355CE2832238E00F73111 /* Timers--iOS--Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Timers--iOS--Info.plist"; sourceTree = "<group>"; };
 		1FA377E72972FE75005ACD41 /* Library.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Library.swift; sourceTree = "<group>"; };
+		1FA6FF67298EF6370057C800 /* PaletteViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaletteViewModel.swift; sourceTree = "<group>"; };
 		1FA8346B2850A57A003F4D61 /* WidgetsExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = WidgetsExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		1FA8346F2850A57A003F4D61 /* Widgets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Widgets.swift; sourceTree = "<group>"; };
 		1FA834712850A57A003F4D61 /* Widgets.intentdefinition */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; path = Widgets.intentdefinition; sourceTree = "<group>"; };
@@ -367,6 +369,7 @@
 		1F5F4A4728093FAD00AF3442 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				1FA6FF67298EF6370057C800 /* PaletteViewModel.swift */,
 				1F1CF2F1286B5AD2007102F2 /* InfoViews */,
 				1F5F4A4A28093FAD00AF3442 /* TimersApp.swift */,
 				1FA25AFF2986F51E007759EB /* UnitedViewHierarchy.swift */,
@@ -650,6 +653,7 @@
 				1FFC8BAA28142F040059EF2E /* Session.swift in Sources */,
 				1FFC8BB628142F040059EF2E /* Pair.swift in Sources */,
 				1FA25B002986F51E007759EB /* UnitedViewHierarchy.swift in Sources */,
+				1FA6FF68298EF6370057C800 /* PaletteViewModel.swift in Sources */,
 				1F477CA928EAB21900B4F965 /* AddStickyNoteQuickButton.swift in Sources */,
 				1F5987A5286B5F8900CDB54C /* PairSavedNote Properties.swift in Sources */,
 				1FA1F39E2981CFE6000A50F5 /* Persistence.swift in Sources */,
