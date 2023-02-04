@@ -73,7 +73,7 @@ struct PaletteView: View {
     }
     
     private func scale(_ tricolor:Color.Tricolor) -> CGFloat {
-        if tricolor.description == tappedCircle { return 2.4 }
+        if tricolor.description == tappedCircle { return 2.8 }
         return 1.8
     }
                               
@@ -86,12 +86,13 @@ struct PaletteView: View {
                         .scaleEffect(x: scale(tricolor) , y: scale(tricolor))
                         .onTapGesture {
                             viewModel.createBubble(.stopwatch, tricolor.description)
+                            UserFeedback.singleHaptic(.light)
                             
-                            withAnimation(.spring(response: 0.5, dampingFraction: 0.5).speed(3)) {
+                            withAnimation(.easeInOut(duration: 0.1)) {
                                 tappedCircle = tricolor.description
                             }
                             
-                            delayExecution(.now() + 2) {
+                            delayExecution(.now() + 0.3) {
                                 showPalette = false
                                 tappedCircle = nil
                             }
