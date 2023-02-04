@@ -92,7 +92,7 @@ struct PaletteView: View {
                                 tappedCircle = tricolor.description
                             }
                             
-                            delayExecution(.now() + 0.3) {
+                            delayExecution(.now() + 0.2) {
                                 showPalette = false
                                 tappedCircle = nil
                             }
