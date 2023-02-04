@@ -33,16 +33,8 @@ struct PaletteView: View {
             if showPaletteHint {
                 MaterialLabel { paletteLabelContent }
             action: { withAnimation { showPaletteHint = false }}
-            } else {
-                Push(.topRight) {
-                    Image(systemName: "info.circle.fill")
-                }
-                .foregroundColor(.white)
-                .padding()
-                .padding()
-                .padding([.top])
-                .onTapGesture { withAnimation { showPaletteHint = true } }
             }
+            else { infolLabel }
         }
         .gesture(swipeGesture)
         .offset(x: viewModel.isPaletteShowing ? 0 : -UIScreen.size.height)
@@ -66,6 +58,17 @@ struct PaletteView: View {
             Text("\(Image(systemName:"digitalcrown.horizontal.press")) Long Press for Timer")
             Text("\(Image(systemName:"arrow.left")) Swipe Left to Dismiss")
         }
+    }
+    
+    private var infolLabel:some View {
+        Push(.topRight) {
+            Image(systemName: "info.circle.fill")
+        }
+        .foregroundColor(.white)
+        .padding()
+        .padding()
+        .padding([.top])
+        .onTapGesture { withAnimation { showPaletteHint = true } }
     }
                               
     var circles:some View {
