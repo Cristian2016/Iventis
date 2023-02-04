@@ -12,10 +12,9 @@ struct PaletteView: View {
     @AppStorage("showPaletteHint", store: .shared) private var showPaletteHint = true
     @EnvironmentObject private var viewModel:ViewModel
     @Binding private var showPalette:Bool
+    
     @State private var tappedCircle:String?
     @State private var longPressedCircle:String?
-    
-    let scales = [CGFloat(1.5), 1.55, 1.65, 1.75, 1.85, 1.6, 2.0, 1.9, 1.8, 1.7, 1.4, 2.1, 2.2]
     
     private let colums = Array(repeating: GridItem(), count: 3)
     
@@ -99,7 +98,7 @@ struct PaletteView: View {
         }
     }
     
-    var circles:some View {
+    private var circles:some View {
         let rect = Rectangle().fill(.clear)
        return ScrollView {
             rect
