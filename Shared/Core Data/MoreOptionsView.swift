@@ -100,7 +100,7 @@ struct MoreOptionsView: View {
     private var colorsTable:some View {
         ScrollView {
             LazyVGrid(columns: [GridItem(spacing: MoreOptionsView.itemSpacing), GridItem(spacing: MoreOptionsView.itemSpacing), GridItem()], spacing: MoreOptionsView.itemSpacing) {
-                ForEach(Color.bubbleThrees.map{$0.description},id:\.self) { colorName in
+                ForEach(Color.bubbleTriColors.map{$0.description},id:\.self) { colorName in
                     
                     let color = Color.bubbleColor(forName: colorName)
                     ZStack {

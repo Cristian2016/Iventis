@@ -126,13 +126,8 @@ extension Color {
     
     static let background3 = Color("background3")
     
-    static let bubbleThrees = [
-        Bubbles.mint, Bubbles.slateBlue, Bubbles.sourCherry, Bubbles.silver, Bubbles.ultramarine, Bubbles.lemon, Bubbles.red, Bubbles.sky, Bubbles.bubbleGum,
-        Bubbles.darkGreen, Bubbles.charcoal, Bubbles.magenta, Bubbles.purple, Bubbles.orange, Bubbles.chocolate, Bubbles.aqua, Bubbles.byzantium, Bubbles.rose, Bubbles.aubergine, Bubbles.cayenne, Bubbles.mocha
-    ]
-    
     static func bubbleColor(forName bubbleColorName:String?) -> Color {
-        (bubbleThrees.filter { $0.description == bubbleColorName }.first ?? Color.Bubbles.clear).sec
+        (bubbleTriColors.filter { $0.description == bubbleColorName }.first ?? Color.Bubbles.clear).sec
     }
     
     static let emojis = ["lemon":"🟨",
