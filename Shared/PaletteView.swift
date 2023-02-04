@@ -34,7 +34,7 @@ struct PaletteView: View {
                 withAnimation { showPaletteHint = false }
             }
             }
-            else { infolLabel }
+            else { infoSymbol }
         }
         .gesture(swipeGesture)
         .offset(x: viewModel.isPaletteShowing ? 0 : -UIScreen.size.height)
@@ -57,7 +57,7 @@ struct PaletteView: View {
             Text("Make Bubbles")
                 .padding(.bottom, 1)
                 .font(.title2)
-//            Divider().frame(maxWidth: 300)
+            Divider().frame(maxWidth: 300)
             VStack(alignment: .leading) {
                 Text("\(Image(systemName:"hand.tap")) Tap Any Color for Stopwatch")
                 Text("\(Image(systemName:"digitalcrown.horizontal.press")) Long Press for Timer")
@@ -66,7 +66,7 @@ struct PaletteView: View {
         }
     }
     
-    private var infolLabel:some View {
+    private var infoSymbol:some View {
         Push(.topRight) {
             Image(systemName: "info.circle.fill")
         }
