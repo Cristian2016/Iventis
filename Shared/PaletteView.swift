@@ -13,6 +13,7 @@ struct PaletteView: View {
     @EnvironmentObject private var viewModel:ViewModel
     @Binding private var showPalette:Bool
     @State private var tappedCircle:String?
+    @State private var longPressedCircle:String?
     
     let scales = [CGFloat(1.5), 1.55, 1.65, 1.75, 1.85, 1.6, 2.0, 1.9, 1.8, 1.7, 1.4, 2.1, 2.2]
     
@@ -66,6 +67,7 @@ struct PaletteView: View {
     
     private func scale(_ tricolor:Color.Tricolor) -> CGFloat {
         if tricolor.description == tappedCircle { return 2.8 }
+        if tricolor.description == longPressedCircle { return 4 }
         return 1.8
     }
                               
@@ -94,7 +96,19 @@ struct PaletteView: View {
                         .fill(tricolor.sec)
                         .scaleEffect(x: scale(tricolor) , y: scale(tricolor))
                         .onTapGesture { createBubble(tricolor) }
-                        .onLongPressGesture { viewModel.durationPicker_OfColor = tricolor.sec }
+                        .onLongPressGesture {
+                            UserFeedback.singleHaptic(.medium)
+                            viewModel.durationPicker_OfColor = tricolor.sec
+                            
+                            withAnimation(.easeInOut(duration: 0.1)) {
+                                longPressedCircle = tricolor.description
+                            }
+                            
+                            delayExecution(.now() + 0.2) {
+                                showPalette = false
+                                longPressedCircle = nil
+                            }
+                        }
                 }
             }
         }
