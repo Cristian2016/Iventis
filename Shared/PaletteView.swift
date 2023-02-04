@@ -34,6 +34,25 @@ struct PaletteView: View {
     }
     
     // MARK: - Legos
+    private var circles:some View {
+        let rect = Rectangle().fill(.clear)
+       return ScrollView {
+            rect
+            rect
+            LazyVGrid(columns: colums, spacing: 10) {
+                ForEach(Color.bubbleTriColors, id:\.self) { tricolor in
+                    Circle()
+                        .fill(tricolor.sec)
+                        .scaleEffect(x: scale(tricolor) , y: scale(tricolor))
+                        .onTapGesture { createBubble(tricolor) }
+                        .onLongPressGesture { showDurationPicker(tricolor) }
+                }
+            }
+        }
+        .scrollIndicators(.hidden)
+        .ignoresSafeArea()
+    }
+    
     private var labelContent:some View {
         VStack {
             VStack(alignment: .leading) {
@@ -52,7 +71,8 @@ struct PaletteView: View {
         .padding([.trailing])
         .onTapGesture { withAnimation { showPaletteHint = true } }
     }
-    
+        
+    // MARK: - Methods
     private func scale(_ tricolor:Color.Tricolor) -> CGFloat {
         if tricolor.description == tappedCircle { return 2.8 }
         if tricolor.description == longPressedCircle { return 4 }
@@ -85,30 +105,6 @@ struct PaletteView: View {
             viewModel.isPaletteShowing = false //dismiss PaletteView
             longPressedCircle = nil
         }
-    }
-    
-    private var circles:some View {
-        let rect = Rectangle().fill(.clear)
-       return ScrollView {
-            rect
-            rect
-            LazyVGrid(columns: colums, spacing: 10) {
-                ForEach(Color.bubbleTriColors, id:\.self) { tricolor in
-                    Circle()
-                        .fill(tricolor.sec)
-                        .scaleEffect(x: scale(tricolor) , y: scale(tricolor))
-                        .onTapGesture { createBubble(tricolor) }
-                        .onLongPressGesture { showDurationPicker(tricolor) }
-                }
-            }
-        }
-        .scrollIndicators(.hidden)
-        .ignoresSafeArea()
-    }
-    
-    private func circle(_ color:Color.Tricolor) -> some View {
-        Circle().fill(color.sec)
-            
     }
     
     // MARK: -
