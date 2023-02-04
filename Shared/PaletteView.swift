@@ -17,8 +17,8 @@ struct PaletteView: View {
     let scales = [CGFloat(1.5), 1.55, 1.65, 1.75, 1.85, 1.6, 2.0, 1.9, 1.8, 1.7, 1.4, 2.1, 2.2]
     
     private let tricolors = [
-        Color.Bubbles.mint, Color.Bubbles.slateBlue, Color.Bubbles.sourCherry, Color.Bubbles.silver, Color.Bubbles.ultramarine, Color.Bubbles.lemon, Color.Bubbles.red, Color.Bubbles.sky, Color.Bubbles.bubbleGum,  Color.Bubbles.green, Color.Bubbles.charcoal, Color.Bubbles.magenta, Color.Bubbles.purple, Color.Bubbles.orange, Color.Bubbles.chocolate,
-        Color.Bubbles.aqua, Color.Bubbles.byzantium, Color.Bubbles.rose, Color.Bubbles.aubergine,
+        Color.Bubbles.aqua, Color.Bubbles.slateBlue, Color.Bubbles.lemon, Color.Bubbles.silver, Color.Bubbles.ultramarine, Color.Bubbles.sourCherry, Color.Bubbles.red, Color.Bubbles.sky, Color.Bubbles.bubbleGum,  Color.Bubbles.green, Color.Bubbles.charcoal, Color.Bubbles.magenta, Color.Bubbles.purple, Color.Bubbles.orange, Color.Bubbles.chocolate,
+         Color.Bubbles.mint, Color.Bubbles.byzantium, Color.Bubbles.rose, Color.Bubbles.aubergine,
         Color.Bubbles.cayenne, Color.Bubbles.mocha
     ]
     
