@@ -16,7 +16,7 @@ extension Color {
     }
     
     static let bubbleTriColors = [
-        Bubbles.silver, Bubbles.mocha, Bubbles.lemon, Bubbles.aubergine, Bubbles.mint, Bubbles.chocolate, Bubbles.slateBlue, Bubbles.sourCherry, Bubbles.orange,  Bubbles.ultramarine, Bubbles.charcoal, Bubbles.red, Bubbles.sky, Bubbles.bubbleGum, Bubbles.cayenne, Bubbles.byzantium,  Bubbles.purple, Bubbles.aqua,  Bubbles.rose, Bubbles.green, Bubbles.magenta,
+        Bubbles.silver, Bubbles.mocha, Bubbles.lemon, Bubbles.aubergine, Bubbles.mint, Bubbles.chocolate, Bubbles.slateBlue, Bubbles.sourCherry, Bubbles.orange,  Bubbles.ultramarine, Bubbles.charcoal, Bubbles.red, Bubbles.sky, Bubbles.bubbleGum, Bubbles.cayenne, Bubbles.byzantium,  Bubbles.purple, Bubbles.aqua,  Bubbles.rose, Bubbles.darkGreen, Bubbles.magenta
     ]
     
     struct Bubbles {
@@ -128,7 +128,7 @@ extension Color {
     
     static let bubbleThrees = [
         Bubbles.mint, Bubbles.slateBlue, Bubbles.sourCherry, Bubbles.silver, Bubbles.ultramarine, Bubbles.lemon, Bubbles.red, Bubbles.sky, Bubbles.bubbleGum,
-        Bubbles.green, Bubbles.charcoal, Bubbles.magenta, Bubbles.purple, Bubbles.orange, Bubbles.chocolate, Bubbles.aqua, Bubbles.byzantium, Bubbles.rose, Bubbles.aubergine, Bubbles.cayenne, Bubbles.mocha
+        Bubbles.darkGreen, Bubbles.charcoal, Bubbles.magenta, Bubbles.purple, Bubbles.orange, Bubbles.chocolate, Bubbles.aqua, Bubbles.byzantium, Bubbles.rose, Bubbles.aubergine, Bubbles.cayenne, Bubbles.mocha
     ]
     
     static func bubbleColor(forName bubbleColorName:String?) -> Color {
