@@ -78,6 +78,12 @@ struct PaletteView: View {
         if tricolor.description == longPressedCircle { return 4 }
         return 1.8
     }
+    
+    private func dismiss() {
+        withAnimation(.easeInOut(duration: 0.25)) {
+            offset = -UIScreen.size.width
+        }
+    }
                               
     fileprivate func createBubble(_ tricolor:Color.Tricolor) {
         viewModel.createBubble(.stopwatch, tricolor.description)
@@ -88,8 +94,12 @@ struct PaletteView: View {
         }
         
         delayExecution(.now() + 0.2) {
-            viewModel.isPaletteShowing = false //dismiss PaletteView
-            tappedCircle = nil
+            dismiss()
+            
+            delayExecution(.now() + 0.26) {
+                viewModel.isPaletteShowing = false //dismiss PaletteView
+                tappedCircle = nil
+            }
         }
     }
     
