@@ -48,9 +48,9 @@ struct PaletteView: View {
     private var labelContent:some View {
         VStack {
             VStack(alignment: .leading) {
-                Text("\(Image(systemName:"hand.tap")) Tap Color for Stopwatch")
-                Text("\(Image(systemName:"digitalcrown.horizontal.press")) Long Press for Timer")
-                Text("\(Image(systemName:"arrow.left")) Swipe Left to Dismiss")
+                Text("\(Image.tap) Tap Color for Stopwatch")
+                Text("\(Image.longPress) Long Press for Timer")
+                Text("\(Image.leftSwipe) Swipe Left to Dismiss")
             }
         }
     }

@@ -28,6 +28,12 @@ extension UserDefaults {
     static let shared = UserDefaults(suiteName: .appGroupName)!
 }
 
+public extension Image {
+    static let tap = Image(systemName:"hand.tap")
+    static let longPress = Image(systemName:"digitalcrown.horizontal.press")
+    static let leftSwipe = Image(systemName:"arrow.left")
+}
+
 public extension URL {
     static var sharedContainerURL:URL = {
         guard let url = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: .appGroupName)
