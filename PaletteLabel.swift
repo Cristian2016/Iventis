@@ -8,10 +8,6 @@
 import SwiftUI
 
 struct PaletteLabel<Content:View>: View {
-    struct Content {
-        
-    }
-    
     struct Metrics {
         let backgroundRadius = CGFloat(20)
     }
@@ -23,6 +19,7 @@ struct PaletteLabel<Content:View>: View {
     
     let content:Content
     let action:() -> ()
+    
     let metrics = Metrics()
     
     var body: some View {
