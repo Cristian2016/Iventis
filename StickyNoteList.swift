@@ -174,7 +174,7 @@ struct StickyNoteList: View {
                     Rectangle()
                         .fill(item == initialNote ? Color.selectionGray : .clear)
                 )
-            Rectangle().fill(Color.white.opacity(0.001))
+//            Rectangle().fill(Color.white.opacity(0.001))
         }
         //layout
             .padding([.leading], 10)

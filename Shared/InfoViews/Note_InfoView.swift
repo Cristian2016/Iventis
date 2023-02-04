@@ -26,7 +26,6 @@ struct Note_InfoView: View {
             
             Divider()
                 .frame(maxWidth: .infinity)
-                .background { Rectangle().fill(Color.lightGray) }
             
             VStack (alignment: .leading) {
                 Text("\(Image(systemName: "trash")) Delete")
