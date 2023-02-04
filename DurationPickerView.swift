@@ -6,6 +6,7 @@
 // Pickers https://www.youtube.com/watch?v=2pSDE56u2F0
 
 import SwiftUI
+import MyPackage
 
 struct DurationPickerView: View {
     @EnvironmentObject private var viewModel:ViewModel
@@ -32,8 +33,20 @@ struct DurationPickerView: View {
     
     var body: some View {
         ZStack {
-            Color
-                .background.standardShadow()
+            HStack {
+                Color
+                    .background.standardShadow()
+                Rectangle().frame(width: 60)
+                    .gesture(DragGesture(minimumDistance: 0, coordinateSpace: .global)
+                        .onEnded { _ in
+                            withAnimation {
+                                viewModel.durationPicker_OfColor = nil
+                            }
+                        }
+                    )
+            }
+            
+            
             VStack {
                 let white = Color.white
                 
@@ -51,7 +64,6 @@ struct DurationPickerView: View {
                 
                 LazyVGrid(columns: columns) {
                     ForEach(digits, id:\.self) { symbol in
-                        
                         Circle().fill(symbol == "✕" ? .red : color)
                             .overlay {
                                 Text(symbol)

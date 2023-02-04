@@ -123,8 +123,11 @@ struct PaletteView: View {
         DragGesture(minimumDistance: 1)
             .onEnded {
                 if $0.translation.width < 0 {
-                    withAnimation(.easeOut(duration: 0.25)) {
-                        viewModel.isPaletteShowing = false
+                    delayExecution(.now() + 0.2) {
+                        dismiss()
+                        delayExecution(.now() + 0.26) {
+                            viewModel.isPaletteShowing = false
+                        }
                     }
                 }
             }
