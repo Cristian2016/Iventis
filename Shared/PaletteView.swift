@@ -73,12 +73,14 @@ struct PaletteView: View {
         .padding([.trailing])
         .onTapGesture { withAnimation { showPaletteHint = true } }
     }
+    
+    private let scales = [CGFloat(1.8), 1.9, 2.0, 2.1, 2.2, 2.3]
         
     // MARK: - Methods
     private func scale(_ tricolor:Color.Tricolor) -> CGFloat {
         if tricolor.description == tappedCircle { return 2.8 }
         if tricolor.description == longPressedCircle { return 4 }
-        return 1.8
+        return scales.randomElement()!
     }
     
     private func dismiss() {
