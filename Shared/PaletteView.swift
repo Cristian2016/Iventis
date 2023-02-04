@@ -86,7 +86,7 @@ struct PaletteView: View {
     private func dismiss() {
         delayExecution(.now() + 0.2) {
             withAnimation(.easeInOut(duration: 0.25)) {
-                offset = -UIScreen.size.width
+                offset = -1000
             }
             
             delayExecution(.now() + 0.26) {
