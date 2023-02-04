@@ -78,6 +78,9 @@ extension Color {
         //clear
         static let clear = Tricolor(description: Name.clear.rawValue,
                                 hr:Color(#colorLiteral(red: 0, green: 0.999099791, blue: 0.8100017905, alpha: 0)), min: Color(#colorLiteral(red: 0, green: 0.9633229375, blue: 0.7392000556, alpha: 0)), sec: Color(#colorLiteral(red: 0, green: 0.838650167, blue: 0.5155212283, alpha: 0)))
+        
+        static let darkGreen = Tricolor(description: Name.cayenne.rawValue,
+                                   hr:Color(#colorLiteral(red: 0.005162422545, green: 0.4503709674, blue: 0, alpha: 1)), min: Color(#colorLiteral(red: 0.005512473639, green: 0.4583269358, blue: 0.001565933926, alpha: 1)), sec: Color(#colorLiteral(red: 0, green: 0.4583860636, blue: 0.001866293955, alpha: 1)))
     }
     
     enum Name:String {
@@ -110,6 +113,7 @@ extension Color {
         case mocha
         
         case clear
+        case darkGreen
     }
 }
 
