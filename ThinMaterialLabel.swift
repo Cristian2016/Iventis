@@ -29,13 +29,13 @@ struct ThinMaterialLabel<Content:View>: View {
         }
         .padding()
         .background { roundedBackground }
-        .frame(maxWidth: 300)
+        .frame(maxWidth: 350)
     }
     
     // MARK: - Legos
     private var dismissButton:some View {
         Button { action() } label: {
-            Text("OK. Don't show")
+            Text("Dismiss")
                 .frame(maxWidth: .infinity)
         }
         .tint(.red)
