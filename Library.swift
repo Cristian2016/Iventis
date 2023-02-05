@@ -47,6 +47,8 @@ public extension Color {
     static let vibrantGreen = Color("vibrantGreen")
     ///secondary light mode, white dark mode
     static let secondaryWhite = Color("secondaryWhite")
+    static let pauseStickerColor = Color("pauseStickerColor")
+    static let pauseStickerFontColor = Color("pauseStickerFontColor")
 }
 
 public extension String {
@@ -71,11 +73,6 @@ extension UserDefaults {
         let ud = UserDefaults(suiteName: String.appGroupName)!
         ud.set(value, forKey: UserDefaults.Key.rank)
     }
-}
-
-extension Color {
-    static let pauseStickerColor = Color("pauseStickerColor")
-    static let pauseStickerFontColor = Color("pauseStickerFontColor")
 }
 
 public extension UserInterfaceSizeClass {
