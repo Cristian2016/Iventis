@@ -53,7 +53,7 @@ struct ThinMaterialLabel<Content:View>: View {
     
     private var roundedBackground:some View {
         RoundedRectangle(cornerRadius: metrics.backgroundRadius)
-            .fill(.thinMaterial)
+            .fill(.regularMaterial)
             .standardShadow()
     }
     
