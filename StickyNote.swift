@@ -18,9 +18,14 @@ struct StickyNote<Content:View>: View {
     var dragAction:() -> () //user intent
     var tapAction:() -> ()
     
-    init(alignment: Alignment = .trailing, @ViewBuilder content: () -> Content, dragAction: @escaping () -> Void, tapAction: @escaping () -> Void) {
-        self.alignment = alignment
+    init(
+        alignment: Alignment = .trailing,
+        @ViewBuilder content: () -> Content,
+        dragAction: @escaping () -> Void,
+        tapAction: @escaping () -> Void
+    ) {
         
+        self.alignment = alignment
         self.content = content()
         self.dragAction = dragAction //delete bubble/pair sticky note
         self.tapAction = tapAction
