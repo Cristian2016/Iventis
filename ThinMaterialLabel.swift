@@ -43,11 +43,9 @@ struct ThinMaterialLabel<Content:View>: View {
     // MARK: - Legos
     private var dismissButton:some View {
         Button { action() } label: {
-            Text("OK")
-                .frame(maxWidth: .infinity)
+            Text("OK").frame(maxWidth: .infinity)
         }
         .tint(.red)
-        
         .buttonStyle(.borderedProminent)
     }
     
