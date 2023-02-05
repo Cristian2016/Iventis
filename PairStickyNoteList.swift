@@ -107,12 +107,7 @@ struct PairStickyNoteList: View {
     
     private var noteIsValid: Bool {
         let condition = !textInput.trimmingCharacters(in: CharacterSet.whitespaces).isEmpty
-        
-        if textInput.count > 0 && condition {
-            return true
-        }
-        
-        return false
+        return textInput.count > 0 && condition ? true : false
     }
     
     // MARK: -

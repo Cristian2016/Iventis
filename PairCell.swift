@@ -122,9 +122,9 @@ struct PairCell: View {
             .padding([.leading, .trailing], 10)
             .background {
                 RoundedRectangle(cornerRadius: 2)
-                    .fill(Color.background2)
+                    .fill(Color.background1)
                     .frame(height: 44)
-                    .standardShadow()
+                    .shadow(color: .black.opacity(0.1), radius: 2, y: 2)
             }
             .opacity(pair.note_.isEmpty ? 0 : 1)
     }
