@@ -60,7 +60,7 @@ struct PaletteView: View {
             VStack(alignment: .leading) {
                 Text("\(Image.tap) Tap any color for Stopwatch")
                 Text("\(Image(systemName: "smallcircle.filled.circle")) Long Press for Timer")
-                Text("\(Image(systemName: "arrowshape.backward.fill")) Swipe left from right screen edge to dismiss")
+                Text("\(Image(systemName: "arrowshape.backward.fill")) Swipe Left from right screen edge to dismiss")
             }
         }
     }
