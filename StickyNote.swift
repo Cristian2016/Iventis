@@ -24,7 +24,6 @@ struct StickyNote<Content:View>: View {
         dragAction: @escaping () -> Void,
         tapAction: @escaping () -> Void
     ) {
-        
         self.alignment = alignment
         self.content = content()
         self.dragAction = dragAction //delete bubble/pair sticky note

@@ -27,7 +27,8 @@ struct BubbleNote: View {
             .foregroundColor(.label)
             .background(background)
             .cornerRadius(cornerRadius)
-            .standardShadow(0.2)
+//            .standardShadow(0.2)
+            .shadow(color: .black.opacity(0.1), radius: 2, y: 2)
         }
     }
     
@@ -59,12 +60,12 @@ struct BubbleNote: View {
     
     private var background: some View {
         ZStack {
-            RoundedRectangle(cornerRadius: cornerRadius)
-                .fill(Color.bubbleColor(forName: bubble.color!))
-                .scaleEffect(0.4)
+//            RoundedRectangle(cornerRadius: cornerRadius)
+//                .fill(Color.bubbleColor(forName: bubble.color!))
+//                .scaleEffect(0.4)
             RoundedRectangle(cornerRadius: cornerRadius)
                 .fill(Color.clear)
-                .background(.regularMaterial)
+                .background(Color.background)
         }
     }
 }
