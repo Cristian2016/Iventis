@@ -26,6 +26,6 @@ struct ColorConfirmationView: View {
 
 struct ColorConfirmationView_Previews: PreviewProvider {
     static var previews: some View {
-        ColorConfirmationView(colorName: "Magenta", color: Color.Bubbles.magenta.sec)
+        ColorConfirmationView(colorName: "Magenta", color: Color.Bubble.magenta.sec)
     }
 }

@@ -17,16 +17,16 @@ extension Color {
     
     ///same order in Palette and MoreOptionsView. Both views are reading from this array
     static let triColors = [
-        Bubbles.aqua, Bubbles.mocha, Bubbles.lemon,
-        Bubbles.darkGreen, Bubbles.mint, Bubbles.chocolate,
-        Bubbles.slateBlue, Bubbles.sourCherry, Bubbles.orange,
-        Bubbles.ultramarine, Bubbles.charcoal, Bubbles.red,
-        Bubbles.sky, Bubbles.bubbleGum, Bubbles.cayenne,
-        Bubbles.byzantium,  Bubbles.purple, Bubbles.silver,
-        Bubbles.rose, Bubbles.aubergine, Bubbles.magenta
+        Bubble.aqua, Bubble.mocha, Bubble.lemon,
+        Bubble.darkGreen, Bubble.mint, Bubble.chocolate,
+        Bubble.slateBlue, Bubble.sourCherry, Bubble.orange,
+        Bubble.ultramarine, Bubble.charcoal, Bubble.red,
+        Bubble.sky, Bubble.bubbleGum, Bubble.cayenne,
+        Bubble.byzantium,  Bubble.purple, Bubble.silver,
+        Bubble.rose, Bubble.aubergine, Bubble.magenta
     ]
     
-    struct Bubbles {
+    struct Bubble {
         //row 1
         static let cayenne = Tricolor(description: Name.cayenne.rawValue,
                                    hr:Color(#colorLiteral(red: 0.581685245, green: 0.06705204397, blue: 0.001516064513, alpha: 1)), min: Color(#colorLiteral(red: 0.581685245, green: 0.06705204397, blue: 0.001516064513, alpha: 1)), sec: Color(#colorLiteral(red: 0.581685245, green: 0.06705204397, blue: 0.001516064513, alpha: 1)))
@@ -134,7 +134,7 @@ extension Color {
     static let background3 = Color("background3")
     
     static func bubbleColor(forName bubbleColorName:String?) -> Color {
-        (triColors.filter { $0.description == bubbleColorName }.first ?? Color.Bubbles.clear).sec
+        (triColors.filter { $0.description == bubbleColorName }.first ?? Color.Bubble.clear).sec
     }
     
     static let emojis = ["lemon":"🟨",
