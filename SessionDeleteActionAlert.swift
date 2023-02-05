@@ -95,7 +95,7 @@ struct SessionDeleteActionAlert: View {
                 viewModel.deleteSession(session)
                 
                 //make SessionDAAlert go away after 0.3 seconds, so that user sees button tapped animation
-                delayExecution(.now() + 0.3) { viewModel.sessionToDelete = nil }
+                delayExecution(.now() + 0.25) { viewModel.sessionToDelete = nil }
             }
             if viewModel.fiveSeconds_bRank != nil { viewModel.fiveSeconds_bRank = nil } //ViewModel 1
         } label: {

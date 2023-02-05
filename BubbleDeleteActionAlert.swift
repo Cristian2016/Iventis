@@ -77,7 +77,7 @@ struct BubbleDeleteActionAlert: View {
                 viewModel.delete(bubble)
                 
                 //make BubbleDAAlert go away after 0.3 seconds, so that user sees button tapped animation
-                delayExecution(.now() + 0.3) { viewModel.deleteAction_bRank = nil }
+                delayExecution(.now() + 0.25) { viewModel.deleteAction_bRank = nil }
                 removeFiveSecondsBar()
             }
         } label: {
