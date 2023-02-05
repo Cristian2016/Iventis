@@ -26,7 +26,7 @@ extension Color {
         Bubble.rose, Bubble.aubergine, Bubble.magenta
     ]
     
-    ///Color.Bubble struct vs Bubble class in CoreData
+    ///⚠️ struct Color.Bubble vs CoreData class Bubble
     struct Bubble {
         //row 1
         static let cayenne = Tricolor(description: Name.cayenne.rawValue,
