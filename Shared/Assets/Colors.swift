@@ -15,7 +15,7 @@ extension Color {
         let sec:Color //intense
     }
     
-    ///the order is the same as in Palette and MoreOptionsView. Both views are reading this array
+    ///same order in Palette and MoreOptionsView. Both views are reading from this array
     static let triColors = [
         Bubbles.aqua, Bubbles.mocha, Bubbles.lemon,
         Bubbles.darkGreen, Bubbles.mint, Bubbles.chocolate,
