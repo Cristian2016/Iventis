@@ -92,10 +92,12 @@ struct SessionDeleteActionAlert: View {
                 
                 //⚠️ delete event from calendar first and then delete session from CoreData and Fused App
                 CalendarManager.shared.deleteEvent(with: session.eventID)
-                viewModel.deleteSession(session)
                 
                 //make SessionDAAlert go away after 0.3 seconds, so that user sees button tapped animation
-                delayExecution(.now() + 0.25) { viewModel.sessionToDelete = nil }
+                delayExecution(.now() + 0.25) {
+                    viewModel.deleteSession(session)
+                    viewModel.sessionToDelete = nil
+                }
             }
             if viewModel.fiveSeconds_bRank != nil { viewModel.fiveSeconds_bRank = nil } //ViewModel 1
         } label: {
@@ -110,14 +112,6 @@ struct SessionDeleteActionAlert: View {
         }
         .buttonStyle(BubbleDeleteActionAlert.DeleteButtonStyle())
     }
-    
-    private var deleteSessionButton: some View {
-        RoundedRectangle(cornerRadius: metrics.buttonRadius)
-            .fill(metrics.bubbleColor)
-            .frame(height: metrics.buttonHeight)
-    }
-    
-    // MARK: - Modifiers
 }
 
 struct SessionDeleteActionAlert_Previews: PreviewProvider {
