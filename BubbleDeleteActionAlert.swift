@@ -12,8 +12,11 @@ extension BubbleDeleteActionAlert {
     struct DeleteButtonStyle:ButtonStyle {
         var disabled:Bool = false
         func makeBody(configuration: Configuration) -> some View {
+            let isPressed = configuration.isPressed
+            let scale = isPressed ? 0.8 : 1.0
+            
             configuration.label
-                .scaleEffect(x: configuration.isPressed ? 0.8 : 1.0, y: configuration.isPressed ? 0.8 : 1.0)
+                .scaleEffect(x: scale, y: scale)
                 .disabled(disabled ? true : false)
         }
     }
