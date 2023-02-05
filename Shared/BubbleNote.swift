@@ -65,7 +65,7 @@ struct BubbleNote: View {
 //                .scaleEffect(0.4)
             RoundedRectangle(cornerRadius: cornerRadius)
                 .fill(Color.clear)
-                .background(Color.background)
+                .background(Color.background1)
         }
     }
 }
