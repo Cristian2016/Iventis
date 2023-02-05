@@ -31,7 +31,7 @@ extension UserDefaults {
 public extension Image {
     static let tap = Image(systemName:"hand.tap")
     static let longPress = Image(systemName:"digitalcrown.horizontal.press")
-    static let leftSwipe = Image(systemName:"arrow.left")
+    static let leftSwipe = Image(systemName:"arrow.left.circle.fill")
 }
 
 public extension URL {
