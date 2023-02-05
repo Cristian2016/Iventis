@@ -58,9 +58,9 @@ struct PaletteView: View {
     private var hintLabelContent:some View {
         VStack {
             VStack(alignment: .leading) {
-                Text("\(Image.tap) Tap Any Color for Stopwatch")
+                Text("\(Image.tap) Tap any color for Stopwatch")
                 Text("\(Image(systemName: "smallcircle.filled.circle")) Long Press for Timer")
-                Text("\(Image(systemName: "arrowshape.backward.fill")) Swipe Left from Right Screen Edge to Dismiss")
+                Text("\(Image(systemName: "arrowshape.backward.fill")) Swipe left from right screen edge to dismiss")
             }
         }
     }
@@ -78,7 +78,6 @@ struct PaletteView: View {
         
     // MARK: - Methods
     private func scale(_ tricolor:Color.Tricolor) -> CGFloat {
-        print(#function)
         if tricolor.description == tappedCircle { return 2.8 }
         if tricolor.description == longPressedCircle { return 4 }
         return 1.8
