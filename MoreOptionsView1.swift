@@ -25,18 +25,21 @@ struct MoreOptionsView1: View {
             ZStack {
                 BlurryBackground(material: .ultraThinMaterial)
                 layout {
-                    HStack(spacing: metrics.spacing) {
-                        ForEach(Bubble.delays, id:\.self) { delay in
-                            Button {
-                                
-                            } label: {
-                                bubbleColor
-                                    .aspectRatio(4/3, contentMode: .fit)
-                                    .overlay {
-                                        Text(String(delay))
-                                            .foregroundColor(.white)
-                                            .font(Font.system(size: 30).weight(.medium))
-                                    }
+                    VStack {
+                        Text("Start Delay")
+                        HStack(spacing: metrics.spacing) {
+                            ForEach(Bubble.delays, id:\.self) { delay in
+                                Button {
+                                    
+                                } label: {
+                                    bubbleColor
+                                        .aspectRatio(4/3, contentMode: .fit)
+                                        .overlay {
+                                            Text(String(delay))
+                                                .foregroundColor(.white)
+                                                .font(Font.system(size: 30).weight(.medium))
+                                        }
+                                }
                             }
                         }
                     }
