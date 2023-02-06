@@ -10,10 +10,12 @@ import MyPackage
 
 struct MoreOptionsView1: View {
     let bubble:Bubble
+    let bubbleColor:Color
     @State private var startDelay = Int(0)
     
     init(_ bubble:Bubble) {
         self.bubble = bubble
+        self.bubbleColor = Color.bubbleColor(forName: bubble.color)
         
         if let initialDelay = bubble.sdb?.referenceDelay {
             self.startDelay = Int(initialDelay)
@@ -24,11 +26,8 @@ struct MoreOptionsView1: View {
     
     var body: some View {
         GeometryReader { geo in
-            
-            let columns =  Array(repeating: GridItem(spacing: metrics.spacing), count: 3)
             let isPortrait = geo.size.height > geo.size.width
             let layout = isPortrait ? AnyLayout(VStackLayout()) : AnyLayout(HStackLayout(alignment: .top))
-            let bubbleColor = Color.bubbleColor(forName: bubble.color)
             
             ZStack {
                 BlurryBackground(material: .ultraThinMaterial)
@@ -55,26 +54,7 @@ struct MoreOptionsView1: View {
                             .foregroundColor(.white)
                             .font(metrics.font)
                         
-                        ScrollView {
-                            LazyVGrid(columns: columns, spacing: metrics.spacing) {
-                                ForEach(Color.triColors) { tricolor in
-                                    ZStack {
-                                        Circle()
-                                        tricolor.sec
-                                            .overlay {
-                                                if tricolor.sec == bubbleColor {
-                                                    Image(systemName: "checkmark")
-                                                        .foregroundColor(.white)
-                                                        .font(metrics.font)
-                                                }
-                                            }
-                                    }
-                                    .aspectRatio(isPortrait ? 3/1.7 : 3/1, contentMode: .fit)
-                                }
-                            }
-                        }
-                        .frame(minWidth: metrics.minWidth)
-                        .scrollIndicators(.hidden)
+                        colors
                     }
                 }
                 .padding(8)
@@ -108,6 +88,26 @@ struct MoreOptionsView1: View {
                 }
             }
         }
+    }
+    
+    private var colors:some View {
+        let columns =  Array(repeating: GridItem(spacing: metrics.spacing), count: 3)
+        return ScrollView {
+            LazyVGrid(columns: columns, spacing: metrics.spacing) {
+                ForEach(Color.triColors) { tricolor in
+                    tricolor.sec
+                        .overlay {
+                            if tricolor.sec == bubbleColor {
+                                Image(systemName: "checkmark")
+                                    .foregroundColor(.white)
+                                    .font(metrics.font)
+                            }
+                        }
+                }
+            }
+        }
+        .frame(minWidth: metrics.minWidth)
+        .scrollIndicators(.hidden)
     }
     
     // MARK: -
