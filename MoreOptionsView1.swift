@@ -106,7 +106,8 @@ struct MoreOptionsView1: View {
             LazyVGrid(columns: columns, spacing: metrics.spacing) {
                 ForEach(Color.triColors) { tricolor in
                     ZStack {
-                        Circle().aspectRatio(metrics.ratio, contentMode: .fit)
+                        Circle()
+                            .aspectRatio(metrics.ratio, contentMode: .fit)
                         tricolor.sec
                             .overlay {
                                 if tricolor.sec == bubbleColor {
@@ -121,7 +122,7 @@ struct MoreOptionsView1: View {
             }
         }
         .scrollIndicators(.hidden)
-        .background(.red)
+//        .background(.red)
         .frame(maxHeight: 306)
     }
     
