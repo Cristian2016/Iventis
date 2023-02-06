@@ -40,11 +40,20 @@ struct MoreOptionsView1: View {
                                 Text(String(delay))
                             }
                         }
+                        .padding([.leading, .trailing])
+                        .background(bubbleColor, in: RoundedRectangle(cornerRadius: 4))
+                        .foregroundColor(.white)
+                        .font(metrics.font)
                         digits(bubbleColor)
                     }
                     Divider()
                     ScrollView {
                         Text(Color.userFriendlyBubbleColorName(for: bubble.color))
+                            .padding([.leading, .trailing])
+                            .background(bubbleColor, in: RoundedRectangle(cornerRadius: 4))
+                            .foregroundColor(.white)
+                            .font(metrics.font)
+                        
                         LazyVGrid(columns: columns, spacing: metrics.spacing) {
                             ForEach(Color.triColors) { tricolor in
                                 ZStack {
@@ -97,6 +106,7 @@ struct MoreOptionsView1: View {
         
         let minWidth = CGFloat(300)
         let spacing = CGFloat(4)
+        let font = Font.system(size: 30, weight: .medium)
     }
 }
 
