@@ -27,7 +27,8 @@ struct MoreOptionsView1: View {
     var body: some View {
         GeometryReader { geo in
             let isPortrait = geo.size.height > geo.size.width
-            let layout = isPortrait ? AnyLayout(VStackLayout()) : AnyLayout(HStackLayout(alignment: .top))
+            let layout = isPortrait ?
+            AnyLayout(VStackLayout()) : .init(HStackLayout(alignment: .top))
             
             ZStack {
                 BlurryBackground(material: .ultraThinMaterial)
