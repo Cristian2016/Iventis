@@ -16,24 +16,37 @@ struct MoreOptionsView1: View {
             ZStack {
                 Rectangle().fill(.thinMaterial)
                     .ignoresSafeArea()
-                Color.white.cornerRadius(20)
-                    .padding()
-                    .overlay {
-                        VStack {
-                            
+                VStack {
+                    Color.white.cornerRadius(20)
+                        .standardShadow()
+                        .overlay {
+                            VStack {
+                                Rectangle()
+                                ScrollView {
+                                    LazyVGrid(columns: columns, spacing: 4) {
+                                        ForEach(Color.triColors) { triColor in
+                                            ZStack {
+                                                Circle()
+                                                triColor.sec
+                                            }
+                                            .aspectRatio(isLandscape ? 4/1 : 2/1, contentMode: .fit)
+                                        }
+                                    }
+                                }
+                                .scrollIndicators(.hidden)
+                            }
+                            .padding()
                         }
-                    }
+                    Text("Swipe Left to Dismiss")
+                }
+                    .padding()
+                    
             }
         }
     }
     
     // MARK: - Lego
-    private var colors:some View {
-        ScrollView {
-            
-            
-        }
-    }
+    
     
     // MARK: -
     private let columns = Array(repeating: GridItem(), count: 3)
