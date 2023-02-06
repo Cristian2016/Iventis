@@ -33,16 +33,7 @@ struct MoreOptionsView1: View {
                 BlurryBackground(material: .ultraThinMaterial)
                 layout {
                     VStack(spacing: metrics.vStackSpacing) {
-                        HStack {
-                            Text("Start Delay")
-                            if let delay = startDelay {
-                                Text(String(delay))
-                            }
-                        }
-                        .padding([.leading, .trailing])
-                        .background(bubbleColor, in: RoundedRectangle(cornerRadius: 4))
-                        .foregroundColor(.white)
-                        .font(metrics.font)
+                       startDelayDisplay
                         digits
                     }
                     Divider()
@@ -72,6 +63,19 @@ struct MoreOptionsView1: View {
     }
     
     // MARK: - Lego
+    private var startDelayDisplay:some View {
+        HStack {
+            Text("Start Delay")
+            if let delay = startDelay {
+                Text(String(delay))
+            }
+        }
+        .padding([.leading, .trailing])
+        .background(bubbleColor, in: RoundedRectangle(cornerRadius: 4))
+        .foregroundColor(.white)
+        .font(metrics.font)
+    }
+    
     private var digits:some View {
         HStack(spacing: metrics.spacing) {
             ForEach(Bubble.delays, id:\.self) { delay in
