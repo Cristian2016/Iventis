@@ -47,12 +47,12 @@ struct MoreOptionsView1: View {
                 }
                 .padding(8)
                 .padding([.top, .bottom])
-//                .background {
-//                    Color
-//                        .white
-//                        .cornerRadius(20)
-//                        .standardShadow(0.2)
-//                }
+                .background {
+                    Color
+                        .white
+                        .cornerRadius(20)
+                        .standardShadow(0.2)
+                }
                 .padding()
                 .padding()
             }
@@ -122,6 +122,7 @@ struct MoreOptionsView1: View {
         }
         .scrollIndicators(.hidden)
         .background(.red)
+        .frame(maxHeight: 306)
     }
     
     // MARK: -
