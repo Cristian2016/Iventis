@@ -33,7 +33,7 @@ struct MoreOptionsView1: View {
             ZStack {
                 BlurryBackground(material: .ultraThinMaterial)
                 layout {
-                    VStack(spacing: metrics.vStackSpacing) {
+                    VStack(alignment: .leading, spacing: metrics.vStackSpacing) {
                         startDelayDisplay
                         digits
                     }
@@ -59,13 +59,17 @@ struct MoreOptionsView1: View {
     
     // MARK: - Lego
     private var startDelayDisplay:some View {
-        HStack {
+        HStack(alignment: .bottom) {
             Text(String(startDelay))
+                .padding([.leading, .trailing])
+                .background(bubbleColor, in: RoundedRectangle(cornerRadius: 8))
+                .foregroundColor(.white)
+                .font(metrics.delayFont)
+                .layoutPriority(1)
+            Text("\(Image.startDelay) Start Delay")
+                .font(.caption)
+                .foregroundColor(.gray)
         }
-        .padding([.leading, .trailing])
-        .background(bubbleColor, in: RoundedRectangle(cornerRadius: 8))
-        .foregroundColor(.white)
-        .font(metrics.delayFont)
     }
     
     private var digits:some View {
