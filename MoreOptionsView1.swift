@@ -89,7 +89,7 @@ struct MoreOptionsView1: View {
                         .overlay {
                             Text(String(delay))
                                 .foregroundColor(.white)
-                                .font(Font.system(size: 30).weight(.medium))
+                                .font(metrics.font)
                         }
                 }
             }
