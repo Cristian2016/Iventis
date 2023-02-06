@@ -38,7 +38,7 @@ struct MoreOptionsView1: View {
                         digits
                     }
                     
-                    Divider()
+                    Divider().frame(height: 200)
                     
                     VStack(spacing: metrics.vStackSpacing) {
                         colorNameView
