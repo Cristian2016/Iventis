@@ -21,7 +21,6 @@ class ViewModel: ObservableObject {
     private var timer:Timer?
     
     @objc private func handleFiveSecondsTimer() {
-        print(#function)
         if fiveSeconds_bRank != nil { fiveSeconds_bRank = nil  }
     }
     

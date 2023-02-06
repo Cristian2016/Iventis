@@ -79,17 +79,17 @@ struct PaletteView: View {
         return 1.8
     }
     
-    private func dismiss() {
-        viewModel.togglePaletteView()
-        tappedCircle = nil
-    }
+//    private func dismiss() {
+//        viewModel.togglePaletteView()
+//        tappedCircle = nil
+//    }
                               
     fileprivate func createBubble(_ tricolor:Color.Tricolor) {
         UserFeedback.singleHaptic(.light)
         
         viewModel.createBubble(.stopwatch, tricolor.description)
         withAnimation(.easeInOut(duration: 0.1)) { tappedCircle = tricolor.description }
-        dismiss()
+//        dismiss()
     }
     
     fileprivate func showDurationPicker(_ tricolor:Color.Tricolor) {
@@ -107,8 +107,7 @@ struct PaletteView: View {
     private var swipeGesture:some Gesture {
         DragGesture(minimumDistance: 1)
             .onEnded { if $0.translation.width < 0 {
-                dismiss()
-                
+                viewModel.togglePaletteView()
             }}
     }
 }
