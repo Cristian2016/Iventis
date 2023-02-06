@@ -13,17 +13,25 @@ struct MoreOptionsView1: View {
     @State private var startDelay:Int64?
     let metrics = Metrics()
     
+    
     var body: some View {
-        ZStack {
-            BlurryBackground(material: .thinMaterial)
-            Color.white.cornerRadius(metrics.radius)
-                .padding()
-                .padding()
+        GeometryReader { geo in
+            let isPortrait = geo.size.height > geo.size.width
+            let layout = isPortrait ? AnyLayout(VStackLayout()) : AnyLayout(HStackLayout())
+            
+            ZStack {
+                BlurryBackground(material: .ultraThinMaterial)
+                Color.white
+                    .cornerRadius(metrics.radius)
+                    .padding()
+                    .padding()
+                    .standardShadow()
+            }
         }
     }
     
     struct Metrics {
-        let radius = CGFloat(20)
+        let /* background */radius = CGFloat(20)
     }
 }
 
