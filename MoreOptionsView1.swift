@@ -16,6 +16,8 @@ struct MoreOptionsView1: View {
     
     var body: some View {
         GeometryReader { geo in
+            
+            let columns =  Array(repeating: GridItem(spacing: metrics.spacing), count: 3)
             let isPortrait = geo.size.height > geo.size.width
             let layout = isPortrait ? AnyLayout(VStackLayout()) : AnyLayout(HStackLayout(alignment: .top))
             let bubbleColor = Color.bubbleColor(forName: bubble.color)
@@ -23,7 +25,7 @@ struct MoreOptionsView1: View {
             ZStack {
                 BlurryBackground(material: .ultraThinMaterial)
                 layout {
-                    HStack(spacing: 4) {
+                    HStack(spacing: metrics.spacing) {
                         ForEach(Bubble.delays, id:\.self) { delay in
                             Button {
                                 
@@ -41,7 +43,7 @@ struct MoreOptionsView1: View {
                     Divider()
                     ScrollView {
                         Text(Color.userFriendlyBubbleColorName(for: bubble.color))
-                        LazyVGrid(columns: metrics.columns, spacing: metrics.spacing) {
+                        LazyVGrid(columns: columns, spacing: metrics.spacing) {
                             ForEach(Color.triColors) { tricolor in
                                 ZStack {
                                     Circle()
@@ -69,7 +71,7 @@ struct MoreOptionsView1: View {
     
     struct Metrics {
         let /* background */radius = CGFloat(10)
-        var columns:[GridItem] { Array(repeating: GridItem(spacing: spacing), count: 3) }
+        
         let minWidth = CGFloat(300)
         let spacing = CGFloat(4)
     }
