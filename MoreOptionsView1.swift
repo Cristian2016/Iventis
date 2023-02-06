@@ -15,25 +15,27 @@ struct MoreOptionsView1: View {
                 Rectangle()
                     .fill(.green)
                     .ignoresSafeArea()
-                
-                VStack {
-                    colors
-                    Text("\(Image.swipeLeft) Swipe Left to Save")
-                }
-                .padding()
+                    .overlay {
+                        VStack {
+                            colors
+                            Text("\(Image.swipeLeft) Swipe Left to Save")
+                        }
+                    }
+                    .padding()
             }
         }
     }
     
     // MARK: - Lego
     private var colors:some View {
-        Grid {
-            ForEach(0..<30) { number in
-                GridRow {
-                    
+        ScrollView {
+            LazyVGrid(columns: columns) {
+                ForEach(Color.triColors) { tricolor in
+                    tricolor.sec
                 }
             }
         }
+        .frame(height: 120)
     }
     
     // MARK: -

@@ -8,11 +8,12 @@
 import SwiftUI
 
 extension Color {
-    struct Tricolor:Hashable {
+    struct Tricolor:Hashable, Identifiable {
         let description:String
         let hr:Color //light
         let min:Color //medium
         let sec:Color //intense
+        var id:String { description }
     }
     
     ///same order in Palette and MoreOptionsView. Both views are reading from this array
