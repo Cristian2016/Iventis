@@ -61,6 +61,13 @@ struct MoreOptionsView1: View {
                                     ZStack {
                                         Circle()
                                         tricolor.sec
+                                            .overlay {
+                                                if tricolor.sec == bubbleColor {
+                                                    Image(systemName: "checkmark")
+                                                        .foregroundColor(.white)
+                                                        .font(.system(size: 30).weight(.medium))
+                                                }
+                                            }
                                     }
                                     .aspectRatio(isPortrait ? 3/2 : 3/1, contentMode: .fit)
                                 }
