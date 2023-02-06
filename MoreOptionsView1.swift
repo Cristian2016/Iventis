@@ -10,7 +10,16 @@ import MyPackage
 
 struct MoreOptionsView1: View {
     let bubble:Bubble
-    @State private var startDelay:Int64?
+    @State private var startDelay = Int(0)
+    
+    init(_ bubble:Bubble) {
+        self.bubble = bubble
+        
+        if let initialDelay = bubble.sdb?.referenceDelay {
+            self.startDelay = Int(initialDelay)
+        }
+    }
+    
     let metrics = Metrics()
     
     var body: some View {
@@ -26,6 +35,9 @@ struct MoreOptionsView1: View {
                 layout {
                     VStack {
                         Text("Start Delay")
+                        if let delay = startDelay {
+                            Text(String(delay))
+                        }
                         digits(bubbleColor)
                     }
                     Divider()
@@ -63,7 +75,7 @@ struct MoreOptionsView1: View {
         HStack(spacing: metrics.spacing) {
             ForEach(Bubble.delays, id:\.self) { delay in
                 Button {
-                    
+                    startDelay += delay
                 } label: {
                     color
                         .aspectRatio(4/3, contentMode: .fit)
@@ -79,7 +91,7 @@ struct MoreOptionsView1: View {
     
     // MARK: -
     struct Metrics {
-        let /* background */radius = CGFloat(10)
+        let radius = CGFloat(10)
         
         let minWidth = CGFloat(300)
         let spacing = CGFloat(4)
@@ -93,6 +105,6 @@ struct MoreOptionsView1_Previews: PreviewProvider {
         return bubble
     }()
     static var previews: some View {
-        MoreOptionsView1(bubble: bubble)
+        MoreOptionsView1(bubble)
     }
 }
