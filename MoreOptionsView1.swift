@@ -38,23 +38,25 @@ struct MoreOptionsView1: View {
                         digits
                     }
                     Divider()
-                    colorNameView
-                    colors
+                    
+                    VStack(spacing: metrics.vStackSpacing) {
+                        colorNameView
+                        colors
+                    }
                 }
+                .padding(8)
+                .padding([.top, .bottom])
+                .background {
+                    Color
+                        .white
+                        .cornerRadius(20)
+                        .standardShadow(0.2)
+                }
+                .padding()
+                .padding()
             }
-            .padding(8)
-            .padding([.top, .bottom])
-            .background {
-                Color
-                    .white
-                    .cornerRadius(20)
-                    .standardShadow(0.2)
-            }
-            .padding()
-            .padding()
         }
     }
-}
     
     // MARK: - Lego
     private var startDelayDisplay:some View {
@@ -90,12 +92,11 @@ struct MoreOptionsView1: View {
     }
     
     private var colorNameView:some View {
-        VStack(spacing: metrics.vStackSpacing) {
-            Text(Color.userFriendlyBubbleColorName(for: bubble.color))
-                .padding([.leading, .trailing])
-                .background(bubbleColor, in: RoundedRectangle(cornerRadius: 4))
-                .foregroundColor(.white)
-                .font(metrics.font)
+        Text(Color.userFriendlyBubbleColorName(for: bubble.color))
+            .padding([.leading, .trailing])
+            .background(bubbleColor, in: RoundedRectangle(cornerRadius: 4))
+            .foregroundColor(.white)
+            .font(metrics.font)
     }
     
     private var colors:some View {
