@@ -43,7 +43,7 @@ struct MoreOptionsView1: View {
                         .background(bubbleColor, in: RoundedRectangle(cornerRadius: 4))
                         .foregroundColor(.white)
                         .font(metrics.font)
-                        digits(bubbleColor)
+                        digits
                     }
                     Divider()
                     
@@ -72,7 +72,7 @@ struct MoreOptionsView1: View {
     }
     
     // MARK: - Lego
-    private func digits(_ color:Color) -> some View {
+    private var digits:some View {
         HStack(spacing: metrics.spacing) {
             ForEach(Bubble.delays, id:\.self) { delay in
                 Button {
