@@ -39,7 +39,7 @@ struct UnitedViewHierarchy: View {
             if bubbleNotesShowing { BubbleStickyNoteList($viewModel.notesList_bRank) }
             if let pair = viewModel.pairOfNotesList { PairStickyNoteList(pair) }
             if let sdb = viewModel.theOneAndOnlyEditedSDB, let bubble = sdb.bubble {
-                MoreOptionsView(for: bubble)
+                MoreOptionsView1(bubble)
             }
             if viewModel.showAlert_AlwaysOnDisplay { AlwaysOnDisplayAlertView() }
             if viewModel.confirm_AlwaysOnDisplay { AlwaysOnDisplayConfirmationView() }

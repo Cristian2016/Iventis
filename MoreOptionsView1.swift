@@ -41,16 +41,15 @@ struct MoreOptionsView1: View {
                     Divider()
                     
                     VStack(spacing: metrics.vStackSpacing) {
-                        colorNameView
+                        if isPortrait { colorNameView }
                         colors(isPortrait)
                     }
                 }
-                .padding(8)
-                .padding([.top, .bottom])
+                .padding(10)
                 .background {
                     Color
                         .white
-                        .cornerRadius(20)
+                        .cornerRadius(10)
                         .standardShadow(0.2)
                 }
                 .padding()
@@ -81,7 +80,7 @@ struct MoreOptionsView1: View {
                 } label: {
                     
                     bubbleColor
-                        .aspectRatio(metrics.portraitColorRatio, contentMode: .fit)
+                        .aspectRatio(1, contentMode: .fit)
                         .overlay {
                             Text(String(delay))
                                 .foregroundColor(.white)
@@ -123,9 +122,9 @@ struct MoreOptionsView1: View {
                 }
             }
         }
+        .background { Color.red }
         .scrollIndicators(.hidden)
-//        .background(.red)
-        .frame(maxHeight: 306)
+        .frame(minWidth: 300)
     }
     
     // MARK: -
@@ -138,7 +137,7 @@ struct MoreOptionsView1: View {
         
         
         let portraitColorRatio = CGFloat(2.25)
-        let landscapeColorRatio = CGFloat(3)
+        let landscapeColorRatio = CGFloat(2.54)
                 
         let vStackSpacing = CGFloat(8)
     }
