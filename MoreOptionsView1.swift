@@ -60,15 +60,12 @@ struct MoreOptionsView1: View {
     // MARK: - Lego
     private var startDelayDisplay:some View {
         HStack {
-            Text("Start Delay")
-            if let delay = startDelay {
-                Text(String(delay))
-            }
+            Text(String(startDelay))
         }
         .padding([.leading, .trailing])
         .background(bubbleColor, in: RoundedRectangle(cornerRadius: 4))
         .foregroundColor(.white)
-        .font(metrics.font)
+        .font(metrics.delayFont)
     }
     
     private var digits:some View {
@@ -138,8 +135,10 @@ struct MoreOptionsView1: View {
         
         let minWidth = CGFloat(300)
         let spacing = CGFloat(4)
+        
+        let delayFont = Font.system(size: 60)
         let font = Font.system(size: 30, weight: .medium)
-        let digitFont = Font.system(size: 40, weight: .medium)
+        let digitFont = Font.system(size: 40)
         
         let portraitColorRatio = CGFloat(1.9)
         let landscapeColorRatio = CGFloat(2.54)
