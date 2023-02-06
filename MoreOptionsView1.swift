@@ -41,7 +41,6 @@ struct MoreOptionsView1: View {
                     Divider()
                     
                     VStack(spacing: metrics.vStackSpacing) {
-                        if isPortrait { colorNameView }
                         colors(isPortrait)
                     }
                 }
@@ -121,8 +120,14 @@ struct MoreOptionsView1: View {
                     
                 }
             }
+            .background(.white)
         }
-//        .background { Color.red }
+        .background {
+            VStack {
+                colorNameView
+                Spacer()
+            }
+        }
         .scrollIndicators(.hidden)
         .frame(minWidth: 300)
     }
