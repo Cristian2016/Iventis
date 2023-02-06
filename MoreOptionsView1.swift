@@ -38,7 +38,7 @@ struct MoreOptionsView1: View {
                         digits
                     }
                     
-                    Divider().frame(height: 200)
+                    Divider()
                     
                     VStack(spacing: metrics.vStackSpacing) {
                         colorNameView
@@ -133,7 +133,7 @@ struct MoreOptionsView1: View {
         let radius = CGFloat(10)
         
         let minWidth = CGFloat(300)
-        let spacing = CGFloat(4)
+        let spacing = CGFloat(0)
         let font = Font.system(size: 30, weight: .medium)
         
         
