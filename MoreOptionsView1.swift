@@ -13,6 +13,7 @@ struct MoreOptionsView1: View {
     let bubbleColor:Color
     @EnvironmentObject var viewModel:ViewModel
     @State private var startDelay = Int(0)
+    private var initialStartDelay = 0
         
     init(_ bubble:Bubble) {
         self.bubble = bubble
@@ -20,6 +21,7 @@ struct MoreOptionsView1: View {
         
         if let initialDelay = bubble.sdb?.referenceDelay {
             self.startDelay = Int(initialDelay)
+            self.initialStartDelay = Int(initialDelay)
         }
     }
     
@@ -155,6 +157,19 @@ struct MoreOptionsView1: View {
     }
     
     // MARK: -
+    var swipeLeft:some Gesture {
+        DragGesture(minimumDistance: 10)
+            .onEnded { value in
+                viewModel.removeDelay(for: bubble)
+                
+                //show 0s red alert and hide after 0.7 seconds
+                viewModel.confirm_DelayRemoved = true
+                delayExecution(.now() + 1) { viewModel.confirm_DelayRemoved = false }
+                UserFeedback.doubleHaptic(.heavy)
+            }
+    }
+    
+    // MARK: -
     func dismiss() { viewModel.theOneAndOnlyEditedSDB = nil }
     
     func saveDelay() {
@@ -162,9 +177,13 @@ struct MoreOptionsView1: View {
          if user sets a new start delay
          save delay
          save CoreData context*/
-                
-        UserFeedback.singleHaptic(.medium)
-        viewModel.saveDelay(for: bubble, startDelay)
+        
+        if initialStartDelay != startDelay {
+            UserFeedback.singleHaptic(.medium)
+            viewModel.saveDelay(for: bubble, startDelay)
+        } else {
+            print("no delay to save")
+        }
     }
 }
 
