@@ -33,7 +33,7 @@ struct MoreOptionsView1: View {
             ZStack {
                 BlurryBackground(material: .ultraThinMaterial)
                 layout {
-                    VStack {
+                    VStack(spacing: metrics.vStackSpacing) {
                         HStack {
                             Text("Start Delay")
                             if let delay = startDelay {
@@ -47,25 +47,28 @@ struct MoreOptionsView1: View {
                         digits(bubbleColor)
                     }
                     Divider()
-                    ScrollView {
+                    
+                    VStack(spacing: metrics.vStackSpacing) {
                         Text(Color.userFriendlyBubbleColorName(for: bubble.color))
                             .padding([.leading, .trailing])
                             .background(bubbleColor, in: RoundedRectangle(cornerRadius: 4))
                             .foregroundColor(.white)
                             .font(metrics.font)
                         
-                        LazyVGrid(columns: columns, spacing: metrics.spacing) {
-                            ForEach(Color.triColors) { tricolor in
-                                ZStack {
-                                    Circle()
-                                    tricolor.sec
+                        ScrollView {
+                            LazyVGrid(columns: columns, spacing: metrics.spacing) {
+                                ForEach(Color.triColors) { tricolor in
+                                    ZStack {
+                                        Circle()
+                                        tricolor.sec
+                                    }
+                                    .aspectRatio(isPortrait ? 3/2 : 3/1, contentMode: .fit)
                                 }
-                                .aspectRatio(isPortrait ? 3/2 : 3/1, contentMode: .fit)
                             }
                         }
+                        .frame(minWidth: metrics.minWidth)
+                        .scrollIndicators(.hidden)
                     }
-                    .frame(minWidth: metrics.minWidth)
-                    .scrollIndicators(.hidden)
                 }
                 .padding(8)
                 .padding([.top, .bottom])
@@ -107,6 +110,8 @@ struct MoreOptionsView1: View {
         let minWidth = CGFloat(300)
         let spacing = CGFloat(4)
         let font = Font.system(size: 30, weight: .medium)
+        
+        let vStackSpacing = CGFloat(8)
     }
 }
 
