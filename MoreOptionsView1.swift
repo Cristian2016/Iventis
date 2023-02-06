@@ -69,7 +69,7 @@ struct MoreOptionsView1: View {
                                                 }
                                             }
                                     }
-                                    .aspectRatio(isPortrait ? 3/2 : 3/1, contentMode: .fit)
+                                    .aspectRatio(isPortrait ? 3/1.7 : 3/1, contentMode: .fit)
                                 }
                             }
                         }
