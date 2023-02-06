@@ -136,7 +136,7 @@ struct MoreOptionsView1: View {
         let font = Font.system(size: 30, weight: .medium)
         
         
-        let portraitColorRatio = CGFloat(2.25)
+        let portraitColorRatio = CGFloat(1.9)
         let landscapeColorRatio = CGFloat(2.54)
                 
         let vStackSpacing = CGFloat(8)
