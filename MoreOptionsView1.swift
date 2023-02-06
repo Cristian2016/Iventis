@@ -40,7 +40,8 @@ struct MoreOptionsView1: View {
                     }
                     Divider()
                     ScrollView {
-                        LazyVGrid(columns: metrics.columns, spacing: 4) {
+                        Text(Color.userFriendlyBubbleColorName(for: bubble.color))
+                        LazyVGrid(columns: metrics.columns, spacing: metrics.spacing) {
                             ForEach(Color.triColors) { tricolor in
                                 ZStack {
                                     Circle()
@@ -50,11 +51,11 @@ struct MoreOptionsView1: View {
                             }
                         }
                     }
-                    .frame(minWidth: 300)
+                    .frame(minWidth: metrics.minWidth)
                     .scrollIndicators(.hidden)
                 }
                 .padding(8)
-                .padding([.top])
+                .padding([.top, .bottom])
                 .background {
                     Color
                         .white
@@ -68,7 +69,9 @@ struct MoreOptionsView1: View {
     
     struct Metrics {
         let /* background */radius = CGFloat(10)
-        let columns = Array(repeating: GridItem(), count: 3)
+        var columns:[GridItem] { Array(repeating: GridItem(spacing: spacing), count: 3) }
+        let minWidth = CGFloat(300)
+        let spacing = CGFloat(4)
     }
 }
 
