@@ -65,7 +65,7 @@ struct BubbleList: View {
                 }
             }
             
-            if !notesShowing { LeftStrip($viewModel.isPaletteShowing, isListEmpty) }
+            if !notesShowing { LeftStrip(isListEmpty) }
         }
     }
     

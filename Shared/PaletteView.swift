@@ -11,7 +11,6 @@ import MyPackage
 struct PaletteView: View {
     @EnvironmentObject private var viewModel:ViewModel
     @StateObject private var paletteViewModel = PaletteViewModel()
-    @State private var offset = -UIScreen.size.height
     
     @State private var tappedCircle:String?
     @State private var longPressedCircle:String?
@@ -28,11 +27,7 @@ struct PaletteView: View {
             }
             else { infoSymbol }
         }
-        .offset(x: offset)
         .gesture(swipeGesture)
-        .onAppear {
-            withAnimation(.easeInOut(duration: 0.3)) { offset = 0 }
-        }
     }
     
     // MARK: - Legos
@@ -85,12 +80,8 @@ struct PaletteView: View {
     
     private func dismiss() {
         delayExecution(.now() + 0.2) {
-            withAnimation(.easeInOut(duration: 0.3)) {
-                offset = -UIScreen.size.height
-            }
-            
             delayExecution(.now() + 0.5) {
-                viewModel.isPaletteShowing = false //dismiss PaletteView
+                viewModel.togglePaletteView()
                 tappedCircle = nil
             }
         }

@@ -10,7 +10,6 @@ import SwiftUI
 ///tap PlusButton to show Palette [on iPad]
 struct PlusSymbol: View {
     @EnvironmentObject var viewModel:ViewModel
-    private func showPalette() { withAnimation { viewModel.isPaletteShowing = true } }
     private let metrics = Metrics()
     
     var body: some View {
@@ -18,7 +17,7 @@ struct PlusSymbol: View {
     }
     
     private var button: some View {
-        Button { showPalette() }
+        Button { viewModel.togglePaletteView() }
     label: { Label("Plus", systemImage: "plus") }
             .font(metrics.font)
             .tint(metrics.symbolColor)

@@ -9,7 +9,7 @@ import SwiftUI
 
 ///user swipes right from screen edge and Palette is presented
 struct LeftStrip: View {
-    @Binding var paletteShowing:Bool
+    @EnvironmentObject private var viewModel:ViewModel
     let isListEmpty:Bool
     
     // MARK: -
@@ -22,13 +22,12 @@ struct LeftStrip: View {
         .ignoresSafeArea()
         .gesture(
             DragGesture(minimumDistance: 1)
-                .onEnded { _ in paletteShowing = true }
+                .onEnded { _ in viewModel.togglePaletteView() }
         )
     }
     
     // MARK: -
-    init(_ paletteShowing:Binding<Bool>, _ isListEmpty:Bool) {
-        _paletteShowing = .init(projectedValue: paletteShowing)
+    init(_ isListEmpty:Bool) {
         self.isListEmpty = isListEmpty
     }
 }
@@ -49,7 +48,7 @@ struct RightStrip: View {
             .ignoresSafeArea()
             .gesture(DragGesture(minimumDistance: 0, coordinateSpace: .global)
                 .onEnded { _ in
-                    withAnimation { showPalette = false }
+                    
                 }
             )
     }
