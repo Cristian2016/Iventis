@@ -81,7 +81,7 @@ struct MoreOptionsView1: View {
                 } label: {
                     
                     bubbleColor
-                        .aspectRatio(metrics.ratio, contentMode: .fit)
+                        .aspectRatio(metrics.colorRatio, contentMode: .fit)
                         .overlay {
                             Text(String(delay))
                                 .foregroundColor(.white)
@@ -107,7 +107,7 @@ struct MoreOptionsView1: View {
                 ForEach(Color.triColors) { tricolor in
                     ZStack {
                         Circle()
-                            .aspectRatio(metrics.ratio, contentMode: .fit)
+                            .aspectRatio(metrics.colorRatio, contentMode: .fit)
                         tricolor.sec
                             .overlay {
                                 if tricolor.sec == bubbleColor {
@@ -133,7 +133,7 @@ struct MoreOptionsView1: View {
         let minWidth = CGFloat(300)
         let spacing = CGFloat(4)
         let font = Font.system(size: 30, weight: .medium)
-        let ratio = CGFloat(1/0.64)
+        let colorRatio = CGFloat(1/0.64)
                 
         let vStackSpacing = CGFloat(8)
     }
