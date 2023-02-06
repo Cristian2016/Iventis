@@ -17,12 +17,10 @@ struct MoreOptionsView1: View {
                 .ignoresSafeArea()
             
             VStack {
-               
-                            colors
-                            .cornerRadius(30)
-                    .padding()
+                colors.cornerRadius(30)
                 Text("\(Image.swipeLeft) Swipe Left to Save")
             }
+            .padding()
         }
     }
     
