@@ -191,12 +191,21 @@ extension View {
 }
 
 //struct MoreOptionsView_Previews: PreviewProvider {
+//    static let bubble:Bubble = {
+//        let bubble = Bubble(context: PersistenceController.shared.viewContext)
+//        bubble.color = "charcoal"
+//
+//        let sdb = StartDelayBubble(context: PersistenceController.shared.viewContext)
+//        sdb.referenceDelay = 0
+//        bubble.sdb = sdb
+//        bubble.sdb?.currentDelay = 0
+//        bubble.sdb?.referenceDelay = 0
+//        bubble.rank = 0
+//        bubble.created = Date()
+//        bubble.sessions_ = []
+//        return bubble
+//    }()
 //    static var previews: some View {
-//        let bubble:Bubble = {
-//            let bubble = Bubble(context: PersistenceController.shared.viewContext)
-//            bubble.color = "green"
-//            return bubble
-//        }()
-//        MoreOptionsView(for: bubble)
+//        MoreOptionsView(for: MoreOptionsView_Previews.bubble)
 //    }
 //}

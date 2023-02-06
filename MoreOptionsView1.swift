@@ -6,54 +6,25 @@
 //
 
 import SwiftUI
-import MyPackage
 
 struct MoreOptionsView1: View {
+    let bubble:Bubble
+    @State private var startDelay:Int64?
+    
     var body: some View {
-        GeometryReader { geo in
-            let isLandscape = geo.size.width > geo.size.height
+        ZStack {
             
-            ZStack {
-                Rectangle().fill(.thinMaterial)
-                    .ignoresSafeArea()
-                VStack {
-                    Color.white.cornerRadius(20)
-                        .standardShadow()
-                        .overlay {
-                            VStack {
-                                Rectangle()
-                                ScrollView {
-                                    LazyVGrid(columns: columns, spacing: 4) {
-                                        ForEach(Color.triColors) { triColor in
-                                            ZStack {
-                                                Circle()
-                                                triColor.sec
-                                            }
-                                            .aspectRatio(isLandscape ? 4/1 : 2/1, contentMode: .fit)
-                                        }
-                                    }
-                                }
-                                .scrollIndicators(.hidden)
-                            }
-                            .padding()
-                        }
-                    Text("Swipe Left to Dismiss")
-                }
-                    .padding()
-                    
-            }
         }
     }
-    
-    // MARK: - Lego
-    
-    
-    // MARK: -
-    private let columns = Array(repeating: GridItem(), count: 3)
 }
 
 struct MoreOptionsView1_Previews: PreviewProvider {
+    static let bubble:Bubble = {
+        let bubble = Bubble(context: PersistenceController.preview.viewContext)
+        bubble.color = "darkGreen"
+        return bubble
+    }()
     static var previews: some View {
-        MoreOptionsView1()
+        MoreOptionsView1(bubble: bubble)
     }
 }
