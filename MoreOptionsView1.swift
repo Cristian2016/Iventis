@@ -159,13 +159,11 @@ struct MoreOptionsView1: View {
     // MARK: -
     var swipeLeft:some Gesture {
         DragGesture(minimumDistance: 10)
-            .onEnded { value in
-                viewModel.removeDelay(for: bubble)
-                
-                //show 0s red alert and hide after 0.7 seconds
-                viewModel.confirm_DelayRemoved = true
-                delayExecution(.now() + 1) { viewModel.confirm_DelayRemoved = false }
-                UserFeedback.doubleHaptic(.heavy)
+            .onEnded { _ in
+                if startDelay != initialStartDelay {
+                    UserFeedback.doubleHaptic(.heavy)
+                    startDelay = 0
+                }
             }
     }
     
