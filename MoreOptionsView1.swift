@@ -65,6 +65,7 @@ struct MoreOptionsView1: View {
                     Color
                         .white
                         .cornerRadius(20)
+                        .standardShadow(0.2)
                 }
                 .padding()
                 .padding()
