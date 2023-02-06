@@ -42,7 +42,7 @@ struct MoreOptionsView1: View {
                     
                     VStack(spacing: metrics.vStackSpacing) {
                         colorNameView
-                        colors
+                        colors(isPortrait)
                     }
                 }
                 .padding(8)
@@ -81,7 +81,7 @@ struct MoreOptionsView1: View {
                 } label: {
                     
                     bubbleColor
-                        .aspectRatio(metrics.colorRatio, contentMode: .fit)
+                        .aspectRatio(metrics.portraitColorRatio, contentMode: .fit)
                         .overlay {
                             Text(String(delay))
                                 .foregroundColor(.white)
@@ -100,14 +100,16 @@ struct MoreOptionsView1: View {
             .font(metrics.font)
     }
     
-    private var colors:some View {
+    private func colors(_ isPortrait:Bool) -> some View {
+        let ratio = isPortrait ? metrics.portraitColorRatio : metrics.landscapeColorRatio
+        
         let columns =  Array(repeating: GridItem(spacing: metrics.spacing), count: 3)
         return ScrollView {
             LazyVGrid(columns: columns, spacing: metrics.spacing) {
                 ForEach(Color.triColors) { tricolor in
                     ZStack {
                         Circle()
-                            .aspectRatio(metrics.colorRatio, contentMode: .fit)
+                            .aspectRatio( ratio, contentMode: .fit)
                         tricolor.sec
                             .overlay {
                                 if tricolor.sec == bubbleColor {
@@ -133,7 +135,10 @@ struct MoreOptionsView1: View {
         let minWidth = CGFloat(300)
         let spacing = CGFloat(4)
         let font = Font.system(size: 30, weight: .medium)
-        let colorRatio = CGFloat(1/0.64)
+        
+        
+        let portraitColorRatio = CGFloat(1/0.64)
+        let landscapeColorRatio = CGFloat(3)
                 
         let vStackSpacing = CGFloat(8)
     }
