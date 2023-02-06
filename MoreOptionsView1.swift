@@ -78,8 +78,9 @@ struct MoreOptionsView1: View {
                 Button {
                     startDelay += delay
                 } label: {
-                    color
-                        .aspectRatio(4/3, contentMode: .fit)
+                    
+                    bubbleColor
+                        .aspectRatio(metrics.ratio, contentMode: .fit)
                         .overlay {
                             Text(String(delay))
                                 .foregroundColor(.white)
@@ -117,7 +118,8 @@ struct MoreOptionsView1: View {
         let minWidth = CGFloat(300)
         let spacing = CGFloat(4)
         let font = Font.system(size: 30, weight: .medium)
-        
+        let ratio = CGFloat(1/0.6)
+                
         let vStackSpacing = CGFloat(8)
     }
 }
