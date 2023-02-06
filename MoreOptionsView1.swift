@@ -13,13 +13,18 @@ struct MoreOptionsView1: View {
         GeometryReader { geo in
             let isLandscape = geo.size.width > geo.size.height
             
-            if isLandscape {
-                Circle()
-            } else {
-                RoundedRectangle(cornerRadius: 30)
+            ZStack {
+                Rectangle().fill(.thinMaterial)
+                    .ignoresSafeArea()
+                Color.white.cornerRadius(20)
+                    .padding()
+                    .overlay {
+                        VStack {
+                            
+                        }
+                    }
             }
         }
-        .ignoresSafeArea()
     }
     
     // MARK: - Lego
