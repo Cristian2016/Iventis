@@ -3,7 +3,8 @@
 //  Timers
 //
 //  Created by Cristian Lapusan on 17.04.2022.
-//
+// PaletteView presented either when user taps plusSymbol or swipes right from left screen edge in BubbleList
+// PaletteView dismissed either when user taps a color or swipes left from right screen edge
 
 import SwiftUI
 import MyPackage
@@ -79,12 +80,8 @@ struct PaletteView: View {
     }
     
     private func dismiss() {
-        delayExecution(.now() + 0.2) {
-            delayExecution(.now() + 0.5) {
-                viewModel.togglePaletteView()
-                tappedCircle = nil
-            }
-        }
+        viewModel.togglePaletteView()
+        tappedCircle = nil
     }
                               
     fileprivate func createBubble(_ tricolor:Color.Tricolor) {
@@ -109,7 +106,10 @@ struct PaletteView: View {
     // MARK: -
     private var swipeGesture:some Gesture {
         DragGesture(minimumDistance: 1)
-            .onEnded { if $0.translation.width < 0 { dismiss() }}
+            .onEnded { if $0.translation.width < 0 {
+                dismiss()
+                
+            }}
     }
 }
 
