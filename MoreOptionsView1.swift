@@ -63,7 +63,7 @@ struct MoreOptionsView1: View {
             Text(String(startDelay))
         }
         .padding([.leading, .trailing])
-        .background(bubbleColor, in: RoundedRectangle(cornerRadius: 4))
+        .background(bubbleColor, in: RoundedRectangle(cornerRadius: 8))
         .foregroundColor(.white)
         .font(metrics.delayFont)
     }
