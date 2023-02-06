@@ -13,17 +13,32 @@ struct MoreOptionsView1: View {
         
         ZStack {
             Rectangle()
-                .fill(.green)
+                .fill(.ultraThinMaterial)
                 .ignoresSafeArea()
             
             VStack {
                 Color.white
                     .cornerRadius(30)
                     .padding()
-                Text("\(Image.swipeLeft) Swipe Left ")
+                    .overlay {
+                        colors
+                    }
+                Text("\(Image.swipeLeft) Swipe Left to Save")
             }
         }
     }
+    
+    // MARK: - Lego
+    private var colors:some View {
+        LazyVGrid(columns: columns) {
+            ForEach(Color.triColors, id: \.self) { tricolor in
+                Circle().fill(tricolor.sec)
+            }
+        }
+    }
+    
+    // MARK: -
+    private let columns = Array(repeating: GridItem(.flexible()), count: 3)
 }
 
 struct MoreOptionsView1_Previews: PreviewProvider {
