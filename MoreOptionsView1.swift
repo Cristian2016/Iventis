@@ -34,9 +34,11 @@ struct MoreOptionsView1: View {
                 BlurryBackground(material: .ultraThinMaterial)
                 layout {
                     VStack {
-                        Text("Start Delay")
-                        if let delay = startDelay {
-                            Text(String(delay))
+                        HStack {
+                            Text("Start Delay")
+                            if let delay = startDelay {
+                                Text(String(delay))
+                            }
                         }
                         digits(bubbleColor)
                     }
