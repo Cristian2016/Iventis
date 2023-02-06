@@ -23,15 +23,32 @@ struct MoreOptionsView1: View {
                 BlurryBackground(material: .ultraThinMaterial)
                 Color.white
                     .cornerRadius(metrics.radius)
-                    .padding()
-                    .padding()
                     .standardShadow()
+                    .overlay {
+                        layout {
+                            ScrollView {
+                                LazyVGrid(columns: metrics.columns) {
+                                    ForEach(Color.triColors) { tricolor in
+                                        ZStack {
+                                            Circle()
+                                            tricolor.sec
+                                        }
+                                    }
+                                }
+                            }
+                            .scrollIndicators(.hidden)
+                        }
+                        .padding(10)
+                    }
+                    .padding()
+                    .padding()
             }
         }
     }
     
     struct Metrics {
-        let /* background */radius = CGFloat(20)
+        let /* background */radius = CGFloat(10)
+        let columns = Array(repeating: GridItem(), count: 3)
     }
 }
 
