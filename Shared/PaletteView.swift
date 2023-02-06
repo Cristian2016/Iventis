@@ -11,19 +11,18 @@ import MyPackage
 
 struct PaletteView: View {
     @EnvironmentObject private var viewModel:ViewModel
-    @StateObject private var paletteViewModel = PaletteViewModel()
-    
     @State private var tappedCircle:String?
     @State private var longPressedCircle:String?
+    @AppStorage("showPaletteHint", store: .shared) var showPaletteHint = true
     
     private let colums = Array(repeating: GridItem(), count: 3)
     
     var body: some View {
         ZStack {
             circles
-            if paletteViewModel.showPaletteHint {
+            if showPaletteHint {
                 ThinMaterialLabel(title: "Create Bubbles") { hintLabelContent }
-            action: { withAnimation { paletteViewModel.showPaletteHint = false } }
+            action: { withAnimation { showPaletteHint = false } }
 
             }
             else { infoSymbol }
@@ -67,7 +66,7 @@ struct PaletteView: View {
         }
         .foregroundColor(.black)
         .padding([.trailing])
-        .onTapGesture { withAnimation { paletteViewModel.showPaletteHint = true } }
+        .onTapGesture { withAnimation { showPaletteHint = true } }
     }
     
     private let scales = [CGFloat(1.8), 1.9, 2.0, 2.1, 2.2, 2.3]
@@ -98,7 +97,9 @@ struct PaletteView: View {
         withAnimation(.easeInOut(duration: 0.1)) { longPressedCircle = tricolor.description }
         
         delayExecution(.now() + 0.2) {
-            viewModel.durationPicker_OfColor = tricolor.sec
+            withAnimation {
+                viewModel.durationPicker_OfColor = tricolor.sec
+            }
             longPressedCircle = nil
         }
     }
