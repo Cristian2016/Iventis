@@ -17,50 +17,51 @@ struct MoreOptionsView1: View {
     var body: some View {
         GeometryReader { geo in
             let isPortrait = geo.size.height > geo.size.width
-            let layout = isPortrait ? AnyLayout(VStackLayout()) : AnyLayout(HStackLayout())
+            let layout = isPortrait ? AnyLayout(VStackLayout()) : AnyLayout(HStackLayout(alignment: .top))
             let bubbleColor = Color.bubbleColor(forName: bubble.color)
             
             ZStack {
                 BlurryBackground(material: .ultraThinMaterial)
-                Color.white
-                    .cornerRadius(metrics.radius)
-                    .standardShadow()
-                    .overlay {
-                        layout {
-                            HStack(spacing: 4) {
-                                ForEach(Bubble.delays, id:\.self) { delay in
-                                    Button {
-                                        
-                                    } label: {
-                                        bubbleColor
-                                            .aspectRatio(4/3, contentMode: .fit)
-                                            .overlay {
-                                                Text(String(delay))
-                                                    .foregroundColor(.white)
-                                                    .font(Font.system(size: 30).weight(.medium))
-                                            }
+                layout {
+                    HStack(spacing: 4) {
+                        ForEach(Bubble.delays, id:\.self) { delay in
+                            Button {
+                                
+                            } label: {
+                                bubbleColor
+                                    .aspectRatio(4/3, contentMode: .fit)
+                                    .overlay {
+                                        Text(String(delay))
+                                            .foregroundColor(.white)
+                                            .font(Font.system(size: 30).weight(.medium))
                                     }
-                                }
                             }
-                            Divider()
-                            ScrollView {
-                                LazyVGrid(columns: metrics.columns, spacing: 4) {
-                                    ForEach(Color.triColors) { tricolor in
-                                        ZStack {
-                                            Circle()
-                                            tricolor.sec
-                                        }
-                                        .aspectRatio(isPortrait ? 3/2 : 3/1, contentMode: .fit)
-                                    }
-                                }
-                            }
-                            .frame(minWidth: 330)
-                            .scrollIndicators(.hidden)
                         }
-                        .padding(10)
                     }
-                    .padding()
-                    .padding()
+                    Divider()
+                    ScrollView {
+                        LazyVGrid(columns: metrics.columns, spacing: 4) {
+                            ForEach(Color.triColors) { tricolor in
+                                ZStack {
+                                    Circle()
+                                    tricolor.sec
+                                }
+                                .aspectRatio(isPortrait ? 3/2 : 3/1, contentMode: .fit)
+                            }
+                        }
+                    }
+                    .frame(minWidth: 300)
+                    .scrollIndicators(.hidden)
+                }
+                .padding(8)
+                .padding([.top])
+                .background {
+                    Color
+                        .white
+                        .cornerRadius(20)
+                }
+                .padding()
+                .padding()
             }
         }
     }
