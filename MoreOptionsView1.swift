@@ -65,7 +65,7 @@ struct MoreOptionsView1: View {
                                                 if tricolor.sec == bubbleColor {
                                                     Image(systemName: "checkmark")
                                                         .foregroundColor(.white)
-                                                        .font(.system(size: 30).weight(.medium))
+                                                        .font(metrics.font)
                                                 }
                                             }
                                     }
