@@ -13,7 +13,6 @@ struct MoreOptionsView1: View {
     @State private var startDelay:Int64?
     let metrics = Metrics()
     
-    
     var body: some View {
         GeometryReader { geo in
             
@@ -27,21 +26,7 @@ struct MoreOptionsView1: View {
                 layout {
                     VStack {
                         Text("Start Delay")
-                        HStack(spacing: metrics.spacing) {
-                            ForEach(Bubble.delays, id:\.self) { delay in
-                                Button {
-                                    
-                                } label: {
-                                    bubbleColor
-                                        .aspectRatio(4/3, contentMode: .fit)
-                                        .overlay {
-                                            Text(String(delay))
-                                                .foregroundColor(.white)
-                                                .font(Font.system(size: 30).weight(.medium))
-                                        }
-                                }
-                            }
-                        }
+                        digits(bubbleColor)
                     }
                     Divider()
                     ScrollView {
@@ -73,6 +58,26 @@ struct MoreOptionsView1: View {
         }
     }
     
+    // MARK: - Lego
+    private func digits(_ color:Color) -> some View {
+        HStack(spacing: metrics.spacing) {
+            ForEach(Bubble.delays, id:\.self) { delay in
+                Button {
+                    
+                } label: {
+                    color
+                        .aspectRatio(4/3, contentMode: .fit)
+                        .overlay {
+                            Text(String(delay))
+                                .foregroundColor(.white)
+                                .font(Font.system(size: 30).weight(.medium))
+                        }
+                }
+            }
+        }
+    }
+    
+    // MARK: -
     struct Metrics {
         let /* background */radius = CGFloat(10)
         
