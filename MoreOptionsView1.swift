@@ -37,6 +37,7 @@ struct MoreOptionsView1: View {
                         startDelayDisplay
                         digits
                     }
+                    
                     Divider()
                     
                     VStack(spacing: metrics.vStackSpacing) {
@@ -46,12 +47,12 @@ struct MoreOptionsView1: View {
                 }
                 .padding(8)
                 .padding([.top, .bottom])
-                .background {
-                    Color
-                        .white
-                        .cornerRadius(20)
-                        .standardShadow(0.2)
-                }
+//                .background {
+//                    Color
+//                        .white
+//                        .cornerRadius(20)
+//                        .standardShadow(0.2)
+//                }
                 .padding()
                 .padding()
             }
@@ -104,18 +105,21 @@ struct MoreOptionsView1: View {
         return ScrollView {
             LazyVGrid(columns: columns, spacing: metrics.spacing) {
                 ForEach(Color.triColors) { tricolor in
-                    tricolor.sec
-                        .overlay {
-                            if tricolor.sec == bubbleColor {
-                                Image(systemName: "checkmark")
-                                    .foregroundColor(.white)
-                                    .font(metrics.font)
+                    ZStack {
+                        Circle().aspectRatio(metrics.ratio, contentMode: .fit)
+                        tricolor.sec
+                            .overlay {
+                                if tricolor.sec == bubbleColor {
+                                    Image(systemName: "checkmark")
+                                        .foregroundColor(.white)
+                                        .font(metrics.font)
+                                }
                             }
-                        }
+                    }
+                    
                 }
             }
         }
-        .frame(minWidth: metrics.minWidth)
         .scrollIndicators(.hidden)
     }
     
