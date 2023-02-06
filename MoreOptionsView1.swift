@@ -11,6 +11,7 @@ import MyPackage
 struct MoreOptionsView1: View {
     let bubble:Bubble
     let bubbleColor:Color
+    @EnvironmentObject var viewModel:ViewModel
     @State private var startDelay = Int(0)
     
     init(_ bubble:Bubble) {
@@ -149,6 +150,9 @@ struct MoreOptionsView1: View {
                 
         let vStackSpacing = CGFloat(8)
     }
+    
+    // MARK: -
+    func dismiss() { viewModel.theOneAndOnlyEditedSDB = nil }
 }
 
 struct MoreOptionsView1_Previews: PreviewProvider {
