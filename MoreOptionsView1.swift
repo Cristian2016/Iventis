@@ -148,7 +148,7 @@ struct MoreOptionsView1: View {
         
         let delayFont = Font.system(size: 70)
         let font = Font.system(size: 30, weight: .medium)
-        let digitFont = Font.system(size: 40)
+        let digitFont = Font.system(size: 40, weight: .medium)
         
         let portraitColorRatio = CGFloat(1.9)
         let landscapeColorRatio = CGFloat(2.54)
@@ -175,11 +175,9 @@ struct MoreOptionsView1: View {
          if user sets a new start delay
          save delay
          save CoreData context*/
-        
         if initialStartDelay != startDelay {
             UserFeedback.singleHaptic(.medium)
             viewModel.saveDelay(for: bubble, startDelay)
-            dismiss()
         } else {
             print("no delay to save")
         }
