@@ -72,6 +72,7 @@ class ViewModel: ObservableObject {
     
     @Published var isPaletteViewShowing = false
     func togglePaletteView() {
+        //explicit animation
         withAnimation { isPaletteViewShowing.toggle() }
     }
     
