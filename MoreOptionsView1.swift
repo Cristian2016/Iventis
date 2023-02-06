@@ -33,7 +33,7 @@ struct MoreOptionsView1: View {
                 BlurryBackground(material: .ultraThinMaterial)
                 layout {
                     VStack(spacing: metrics.vStackSpacing) {
-                       startDelayDisplay
+                        startDelayDisplay
                         digits
                     }
                     Divider()
