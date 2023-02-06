@@ -55,7 +55,7 @@ struct PaletteView: View {
             VStack(alignment: .leading) {
                 Text("\(Image.tap) Tap any color for Stopwatch")
                 Text("\(Image(systemName: "smallcircle.filled.circle")) Long Press for Timer")
-                Text("\(Image.swipeLeft) Swipe Left from right screen edge to dismiss")
+                Text("\(Image.swipeLeft) Swipe Left to dismiss")
             }
         }
     }
@@ -88,7 +88,7 @@ struct PaletteView: View {
         
         viewModel.createBubble(.stopwatch, tricolor.description)
         withAnimation(.easeInOut(duration: 0.1)) { tappedCircle = tricolor.description }
-//        dismiss()
+        viewModel.togglePaletteView()
     }
     
     fileprivate func showDurationPicker(_ tricolor:Color.Tricolor) {
