@@ -10,28 +10,27 @@ import MyPackage
 
 struct MoreOptionsView1: View {
     var body: some View {
-        
-        ZStack {
-            Rectangle()
-                .fill(.ultraThinMaterial)
-                .ignoresSafeArea()
-            
-            VStack {
-                colors.cornerRadius(30)
-                Text("\(Image.swipeLeft) Swipe Left to Save")
+        GeometryReader { geo in
+            ZStack {
+                Rectangle()
+                    .fill(.green)
+                    .ignoresSafeArea()
+                
+                VStack {
+                    colors
+                    Text("\(Image.swipeLeft) Swipe Left to Save")
+                }
+                .padding()
             }
-            .padding()
         }
     }
     
     // MARK: - Lego
     private var colors:some View {
-        ScrollView {
-            LazyVGrid(columns: columns) {
-                ForEach(Color.triColors, id: \.self) { tricolor in
-                    Circle()
-                        .fill(tricolor.sec)
-                        .scaleEffect(x: 1.6, y: 1.6)
+        Grid {
+            ForEach(0..<30) { number in
+                GridRow {
+                    
                 }
             }
         }
