@@ -84,7 +84,7 @@ struct MoreOptionsView1: View {
                         .overlay {
                             Text(String(delay))
                                 .foregroundColor(.white)
-                                .font(metrics.font)
+                                .font(metrics.digitFont)
                         }
                 }
             }
@@ -122,7 +122,7 @@ struct MoreOptionsView1: View {
                 }
             }
         }
-        .background { Color.red }
+//        .background { Color.red }
         .scrollIndicators(.hidden)
         .frame(minWidth: 300)
     }
@@ -134,7 +134,7 @@ struct MoreOptionsView1: View {
         let minWidth = CGFloat(300)
         let spacing = CGFloat(4)
         let font = Font.system(size: 30, weight: .medium)
-        
+        let digitFont = Font.system(size: 40, weight: .medium)
         
         let portraitColorRatio = CGFloat(1.9)
         let landscapeColorRatio = CGFloat(2.54)
