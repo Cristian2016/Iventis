@@ -13,7 +13,7 @@ struct MoreOptionsView1: View {
     let bubbleColor:Color
     @EnvironmentObject var viewModel:ViewModel
     @State private var startDelay = Int(0)
-    
+        
     init(_ bubble:Bubble) {
         self.bubble = bubble
         self.bubbleColor = Color.bubbleColor(forName: bubble.color)
@@ -33,6 +33,9 @@ struct MoreOptionsView1: View {
             
             ZStack {
                 BlurryBackground(material: .ultraThinMaterial)
+                    .onTapGesture { saveDelay() }
+                    .highPriorityGesture(swipeLeft)
+                
                 layout {
                     VStack(alignment: .leading, spacing: metrics.vStackSpacing) {
                         startDelayDisplay
@@ -153,6 +156,16 @@ struct MoreOptionsView1: View {
     
     // MARK: -
     func dismiss() { viewModel.theOneAndOnlyEditedSDB = nil }
+    
+    func saveDelay() {
+        /*
+         if user sets a new start delay
+         save delay
+         save CoreData context*/
+                
+        UserFeedback.singleHaptic(.medium)
+        viewModel.saveDelay(for: bubble, startDelay)
+    }
 }
 
 struct MoreOptionsView1_Previews: PreviewProvider {

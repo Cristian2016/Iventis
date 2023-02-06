@@ -27,7 +27,6 @@ struct MoreOptionsView: View {
     static let insets = EdgeInsets(top: 4, leading: 10, bottom: 4, trailing: 10)
     static let itemSpacing = CGFloat(4)
     let colorsTableHeight = CGFloat(320)
-    var show_StartDelayOption:Bool { bubble.state != .running }
     
     static let colorTitleSize = CGFloat(40)
     let checkmarkFont = Font.system(size: 40).weight(.medium)
