@@ -121,6 +121,7 @@ struct MoreOptionsView1: View {
             }
         }
         .scrollIndicators(.hidden)
+        .background(.red)
     }
     
     // MARK: -
@@ -130,7 +131,7 @@ struct MoreOptionsView1: View {
         let minWidth = CGFloat(300)
         let spacing = CGFloat(4)
         let font = Font.system(size: 30, weight: .medium)
-        let ratio = CGFloat(1/0.6)
+        let ratio = CGFloat(1/0.64)
                 
         let vStackSpacing = CGFloat(8)
     }
