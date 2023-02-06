@@ -17,12 +17,10 @@ struct MoreOptionsView1: View {
                 .ignoresSafeArea()
             
             VStack {
-                Color.white
-                    .cornerRadius(30)
+               
+                            colors
+                            .cornerRadius(30)
                     .padding()
-                    .overlay {
-                        colors
-                    }
                 Text("\(Image.swipeLeft) Swipe Left to Save")
             }
         }
@@ -30,9 +28,13 @@ struct MoreOptionsView1: View {
     
     // MARK: - Lego
     private var colors:some View {
-        LazyVGrid(columns: columns) {
-            ForEach(Color.triColors, id: \.self) { tricolor in
-                Circle().fill(tricolor.sec)
+        ScrollView {
+            LazyVGrid(columns: columns) {
+                ForEach(Color.triColors, id: \.self) { tricolor in
+                    Circle()
+                        .fill(tricolor.sec)
+                        .scaleEffect(x: 1.6, y: 1.6)
+                }
             }
         }
     }
