@@ -75,6 +75,7 @@ struct MoreOptionsView: View {
                 .font(.callout)
                 .foregroundColor(.white)
                 .lineLimit(1)
+                .truncationMode(.head)
         }
         .padding([.trailing], 8)
         .background(bubbleColor, in: RoundedRectangle(cornerRadius: 8))
