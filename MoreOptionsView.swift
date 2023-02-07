@@ -69,7 +69,7 @@ struct MoreOptionsView: View {
     // MARK: - Lego
     private var startDelayDisplay:some View {
         HStack(alignment: .firstTextBaseline) {
-            Text(String(userEnteredDelay))
+            Text(String(userEnteredDelay) + "s")
                 .padding([.leading, .trailing])
                 .foregroundColor(.white)
                 .font(metrics.delayFont)
