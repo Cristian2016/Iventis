@@ -8,7 +8,7 @@
 import SwiftUI
 import MyPackage
 
-struct Schematics: View {
+struct FramePortrait: View {
     var body: some View {
         VStack {
             ZStack {
@@ -40,11 +40,14 @@ struct Schematics: View {
                 Text("\(Image(systemName: "2.circle.fill")) Outside frame")
             }
         }
+        .onTapGesture {
+            
+        }
     }
 }
 
-struct Schematics_Previews: PreviewProvider {
+struct FramePortrait_Previews: PreviewProvider {
     static var previews: some View {
-        Schematics()
+        FramePortrait()
     }
 }
