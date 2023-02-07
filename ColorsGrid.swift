@@ -26,7 +26,6 @@ struct ColorsGrid: View {
                 }
             }
         }
-        .ignoresSafeArea()
     }
     
     init(spacing: CGFloat, _ tapAction: @escaping () -> Void) {
@@ -49,6 +48,6 @@ struct ColorsGrid: View {
 
 struct ColorsGrid_Previews: PreviewProvider {
     static var previews: some View {
-        ColorsGrid(spacing: 10) { }
+        ColorsGrid(spacing: 0) { }
     }
 }

@@ -31,7 +31,7 @@ struct MoreOptionsView: View {
         GeometryReader { geo in
             let isPortrait = geo.size.height > geo.size.width
             let layout = isPortrait ?
-            AnyLayout(VStackLayout()) : .init(HStackLayout(alignment: .top, spacing: 6))
+            AnyLayout(VStackLayout()) : .init(HStackLayout(alignment: .top))
             
             ZStack {
                 BlurryBackground(material: .ultraThinMaterial)
@@ -39,27 +39,18 @@ struct MoreOptionsView: View {
                     .highPriorityGesture(swipeLeft)
                 
                 layout {
-                    VStack(alignment: .leading, spacing: metrics.vStackSpacing) {
-                        startDelayDisplay
-                        digits
-                    }
-                    
+                    Rectangle().frame(height: 200)
                     Divider()
-                    
-                    VStack(spacing: metrics.vStackSpacing) {
-                        colors(isPortrait)
-                    }
+                    Color.clear
+                        .overlay {
+                            ColorsGrid(spacing: metrics.spacing) {
+                                
+                            }
+                        }
                 }
-                .padding(10)
-                .background {
-                    Color
-                        .white
-                        .cornerRadius(10)
-                        .standardShadow(0.2)
-                }
-                .padding()
-                .padding()
             }
+            .padding()
+            
         }
     }
     
@@ -111,37 +102,6 @@ struct MoreOptionsView: View {
             .font(metrics.font)
     }
     
-    private func colors(_ isPortrait:Bool) -> some View {
-        let ratio = isPortrait ? metrics.portraitColorRatio : metrics.landscapeColorRatio
-        
-        return ScrollView {
-            LazyVGrid(columns: metrics.columns, spacing: metrics.spacing) {
-                ForEach(Color.triColors) { tricolor in
-                    ZStack {
-                        Circle()
-                            .aspectRatio( ratio, contentMode: .fit)
-                        tricolor.sec
-                            .overlay {
-                                if tricolor.sec == bubbleColor { checkmark }
-                            }
-                            .onTapGesture {
-                                saveColor(for: bubble, to: tricolor.description)
-                            }
-                    }
-                    
-                }
-            }
-            .background(.white)
-        }
-        .background {
-            VStack {
-                colorNameView
-                Spacer()
-            }
-        }
-        .scrollIndicators(.hidden)
-        .frame(minWidth: 300)
-    }
     
     // MARK: -
     struct Metrics {
