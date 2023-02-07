@@ -9,15 +9,16 @@ import SwiftUI
 import MyPackage
 
 struct MoreOptionsView: View {
-    let bubble:Bubble
-    let bubbleColor:Color
+    private let bubble:Bubble
+    private let initialBubbleColor:Color
     @EnvironmentObject var viewModel:ViewModel
     @State private var userEnteredDelay:Int
+    @State private var chosenBubbleColor:String?
     private var initialStartDelay = 0
         
     init(_ bubble:Bubble) {
         self.bubble = bubble
-        self.bubbleColor = Color.bubbleColor(forName: bubble.color)
+        self.initialBubbleColor = Color.bubbleColor(forName: bubble.color)
         
         let refDelay = bubble.sdb?.referenceDelay
         self.userEnteredDelay = Int(refDelay!)
@@ -49,8 +50,7 @@ struct MoreOptionsView: View {
                     
                     Color.clear
                         .overlay {
-                            ColorsGrid(spacing: 0) {
-                                saveColor(to: <#T##String#>)
+                            ColorsGrid(bubble, spacing: 0) {
                                 dismiss()
                             }
                         }
@@ -81,7 +81,7 @@ struct MoreOptionsView: View {
                 .truncationMode(.head)
         }
         .padding([.trailing], 8)
-        .background(bubbleColor, in: RoundedRectangle(cornerRadius: 8))
+        .background(initialBubbleColor, in: RoundedRectangle(cornerRadius: 8))
     }
     
     private var digits:some View {
@@ -91,7 +91,7 @@ struct MoreOptionsView: View {
                     userEnteredDelay += delay
                 } label: {
                     
-                    Circle().fill(bubbleColor)
+                    Circle().fill(initialBubbleColor)
                         .overlay {
                             Text(String(delay))
                                 .foregroundColor(.white)
@@ -105,7 +105,7 @@ struct MoreOptionsView: View {
     private var colorNameView:some View {
         Text(Color.userFriendlyBubbleColorName(for: bubble.color))
             .padding([.leading, .trailing])
-            .background(bubbleColor, in: RoundedRectangle(cornerRadius: 4))
+            .background(initialBubbleColor, in: RoundedRectangle(cornerRadius: 4))
             .foregroundColor(.white)
             .font(metrics.font)
     }

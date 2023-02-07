@@ -8,9 +8,11 @@
 import SwiftUI
 
 struct ColorsGrid: View {
-    let columns:[GridItem]
-    let metrics:Metrics
-    let tapAction:() -> ()
+    @EnvironmentObject private var viewModel:ViewModel
+    private let columns:[GridItem]
+    private let metrics:Metrics
+    private let dismissAction:() -> ()
+    private let bubble:Bubble
     
     var body: some View {
         GeometryReader { geo in
@@ -21,17 +23,21 @@ struct ColorsGrid: View {
                     ForEach(Color.triColors) { tricolor in
                         tricolor.sec
                             .frame(height: height)
-                            .onTapGesture { self.tapAction() }
+                            .onTapGesture {
+                                viewModel.saveColor(for: bubble, to: tricolor.description)
+                                dismissAction()
+                            }
                     }
                 }
             }
         }
     }
     
-    init(spacing: CGFloat, _ tapAction: @escaping () -> Void) {
-        self.tapAction = tapAction
+    init(_ bubble:Bubble, spacing: CGFloat, _ dismissAction: @escaping () -> Void) {
+        self.dismissAction = dismissAction
         self.columns = Array(repeating: GridItem(spacing: spacing), count: 3)
         self.metrics = Metrics(spacing: spacing)
+        self.bubble = bubble
     }
     
     func itemHeight(_ geo:GeometryProxy) -> CGFloat {
@@ -47,7 +53,16 @@ struct ColorsGrid: View {
 }
 
 struct ColorsGrid_Previews: PreviewProvider {
+    static let bubble:Bubble = {
+        let bubble = Bubble(context: PersistenceController.preview.viewContext)
+        let sdb = StartDelayBubble(context: PersistenceController.preview.viewContext)
+        sdb.referenceDelay = 0
+        
+        bubble.sdb = sdb
+        bubble.color = "darkGreen"
+        return bubble
+    }()
     static var previews: some View {
-        ColorsGrid(spacing: 0) { }
+        ColorsGrid(bubble, spacing: 0) {  }
     }
 }
