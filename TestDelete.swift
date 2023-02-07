@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct TestDelete: View {
-    @State private var size = CGSize.zero
     let metrics = Metrics()
     
     struct Metrics {
@@ -26,21 +25,15 @@ struct TestDelete: View {
     
     var body: some View {
         GeometryReader { geo in
-            ZStack {
-                ScrollView {
-                    LazyVGrid(columns: columns, spacing: metrics.spacing) {
-                        let height = height(geo)
-                        ForEach(Color.triColors) { tricolor in
-                            tricolor.sec
-                                .frame(height: height)
-                        }
+            ScrollView {
+                LazyVGrid(columns: columns, spacing: metrics.spacing) {
+                    let height = height(geo)
+                    ForEach(Color.triColors) { tricolor in
+                        tricolor.sec
+                            .frame(height: height)
                     }
                 }
-                .background { Color.yellow }
-                
-                Text("\(size.height)")
             }
-            .onAppear { size = geo.size }
         }
         .ignoresSafeArea()
     }
