@@ -40,11 +40,15 @@ struct MoreOptionsView: View {
                     .ignoresSafeArea()
                 
                 layout {
-                    Rectangle().frame(height: 200)
+                    VStack(spacing: 14) {
+                        startDelayDisplay
+                        digits
+                    }
+                    
                     Divider()
                     Color.clear
                         .overlay {
-                            ColorsGrid(spacing: metrics.spacing) {  }
+                            ColorsGrid(spacing: 0) {  }
                         }
                 }
                 .padding(10)
@@ -81,8 +85,7 @@ struct MoreOptionsView: View {
                     userEnteredDelay += delay
                 } label: {
                     
-                    bubbleColor
-                        .aspectRatio(1, contentMode: .fit)
+                    Circle().fill(bubbleColor)
                         .overlay {
                             Text(String(delay))
                                 .foregroundColor(.white)
