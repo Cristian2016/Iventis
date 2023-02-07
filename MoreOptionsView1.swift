@@ -181,6 +181,7 @@ struct MoreOptionsView1: View {
         } else {
             print("no delay to save")
         }
+        dismiss()
     }
 }
 
