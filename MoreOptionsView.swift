@@ -44,9 +44,16 @@ struct MoreOptionsView: View {
                     Divider()
                     Color.clear
                         .overlay {
-                            ColorsGrid(spacing: metrics.spacing) { saveColor(to: <#T##String#>) }
+                            ColorsGrid(spacing: metrics.spacing) {  }
                         }
                 }
+                .padding(10)
+                .background {
+                    Color.white
+                        .cornerRadius(10)
+                        .standardShadow()
+                }
+                .padding()
                 .padding()
             }
         }
