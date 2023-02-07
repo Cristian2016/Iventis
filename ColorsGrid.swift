@@ -23,6 +23,11 @@ struct ColorsGrid: View {
                     ForEach(Color.triColors) { tricolor in
                         tricolor.sec
                             .frame(height: height)
+                            .overlay {
+                                if tricolor.description == bubble.color {
+                                    checkmark
+                                }
+                            }
                             .onTapGesture {
                                 viewModel.saveColor(for: bubble, to: tricolor.description)
                                 dismissAction()
@@ -31,6 +36,12 @@ struct ColorsGrid: View {
                 }
             }
         }
+    }
+    
+    private var checkmark:some View {
+        Image(systemName: "checkmark")
+            .foregroundColor(.white)
+            .font(metrics.checkmarkFont)
     }
     
     init(_ bubble:Bubble, spacing: CGFloat, _ dismissAction: @escaping () -> Void) {
@@ -49,6 +60,7 @@ struct ColorsGrid: View {
     
     struct Metrics {
         let spacing:CGFloat
+        let checkmarkFont = Font.system(size: 30, weight: .medium)
     }
 }
 

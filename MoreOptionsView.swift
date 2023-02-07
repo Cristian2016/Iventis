@@ -110,12 +110,6 @@ struct MoreOptionsView: View {
             .font(metrics.font)
     }
     
-    private var checkmark:some View {
-        Image(systemName: "checkmark")
-            .foregroundColor(.white)
-            .font(metrics.font)
-    }
-    
     
     // MARK: -
     struct Metrics {
