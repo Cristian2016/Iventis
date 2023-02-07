@@ -51,7 +51,7 @@ struct MoreOptionsView: View {
                     Color.clear
                         .overlay {
                             ColorsGrid(bubble, spacing: 0) {
-                                dismiss()
+                                saveDelay()
                             }
                         }
                 }
