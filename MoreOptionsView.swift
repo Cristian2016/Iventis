@@ -47,9 +47,9 @@ struct MoreOptionsView: View {
                         
                         if !isPortrait {
                             if Int64(userEnteredDelay) != bubble.sdb?.referenceDelay {
-                                Text("\(Image(systemName: "hand.tap")) Tap outside table to save current Start Delay")
+                                Text("\(Image(systemName: "hand.tap")) Tap outside table to save Delay")
                                     .foregroundColor(.gray)
-                                Text("\(Image(systemName: "arrow.left.circle.fill")) Swipe Left from right screen edge to remove Start Delay")
+                                Text("\(Image(systemName: "arrow.left.circle.fill")) Swipe Left from right screen edge to remove Delay")
                                     .foregroundColor(.gray)
                             }
                             else {
