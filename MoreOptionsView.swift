@@ -40,7 +40,7 @@ struct MoreOptionsView: View {
                     .ignoresSafeArea()
                 
                 layout {
-                    VStack(spacing: 14) {
+                    VStack(alignment: .leading, spacing: 14) {
                         startDelayDisplay
                         digits
                     }
@@ -65,17 +65,17 @@ struct MoreOptionsView: View {
     
     // MARK: - Lego
     private var startDelayDisplay:some View {
-        HStack(alignment: .bottom) {
+        HStack(alignment: .firstTextBaseline) {
             Text(String(userEnteredDelay))
                 .padding([.leading, .trailing])
-                .background(bubbleColor, in: RoundedRectangle(cornerRadius: 8))
                 .foregroundColor(.white)
                 .font(metrics.delayFont)
                 .layoutPriority(1)
             Text("\(Image.startDelay) Start Delay")
                 .font(.caption)
-                .foregroundColor(.gray)
+                .foregroundColor(.white)
         }
+        .background(bubbleColor, in: RoundedRectangle(cornerRadius: 8))
     }
     
     private var digits:some View {
@@ -118,9 +118,9 @@ struct MoreOptionsView: View {
         let minWidth = CGFloat(300)
         let spacing = CGFloat(4)
         
-        let delayFont = Font.system(size: 70)
+        let delayFont = Font.system(size: 30, weight: .light)
         let font = Font.system(size: 30, weight: .medium)
-        let digitFont = Font.system(size: 40, weight: .medium)
+        let digitFont = Font.system(size: 34)
         
         let portraitColorRatio = CGFloat(1.9)
         let landscapeColorRatio = CGFloat(2.54)
