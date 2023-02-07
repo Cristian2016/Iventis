@@ -12,6 +12,10 @@ import SwiftUI
 import MyPackage
 
 public class Bubble: NSManagedObject {
+    
+    // MARK: - Observers
+    private var observerAdded = false
+
     ///4 start delay values
     static let delays = [5, 10, 20, 45]
         
@@ -96,9 +100,6 @@ extension Bubble {
     }
 }
 
-// MARK: - Observers
-private var observerAdded = false
-
 extension Bubble {
     func addObserver() {
         if observerAdded { return }
@@ -117,7 +118,7 @@ extension Bubble {
     ///time components hr:min:sec:hundredths
     private func updateBubbleCellComponents() {
         guard let lastPairStart = lastPair!.start else { return }
-//        print(#function)
+        print(#function)
         
         //delta is the elapsed duration between pair.start and signal dates
         let Δ = Date().timeIntervalSince(lastPairStart)
