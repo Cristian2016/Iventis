@@ -125,7 +125,7 @@ struct MoreOptionsView: View {
         
         let delayFont = Font.system(size: 70, design: .rounded)
         let font = Font.system(size: 30, weight: .medium)
-        let digitFont = Font.system(size: 34, weight: .medium, design: .rounded)
+        let digitFont = Font.system(size: 38, weight: .medium, design: .rounded)
         
         let portraitColorRatio = CGFloat(1.9)
         let landscapeColorRatio = CGFloat(2.54)
