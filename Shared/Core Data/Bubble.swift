@@ -14,7 +14,9 @@ import MyPackage
 public class Bubble: NSManagedObject {
     
     // MARK: - Observers
-    private var observerAdded = false
+    var observerAdded = false {didSet{
+        print("dds observerAdded \(observerAdded)")
+    }}
 
     ///4 start delay values
     static let delays = [5, 10, 20, 45]
@@ -104,7 +106,6 @@ extension Bubble {
     func addObserver() {
         if observerAdded { return }
         observerAdded = true
-        print(#function)
         NotificationCenter.default
             .addObserver(forName: .bubbleTimerSignal, object: nil, queue: nil) {
                 [weak self] _ in
@@ -118,7 +119,6 @@ extension Bubble {
     ///time components hr:min:sec:hundredths
     private func updateBubbleCellComponents() {
         guard let lastPairStart = lastPair!.start else { return }
-        print(#function)
         
         //delta is the elapsed duration between pair.start and signal dates
         let Δ = Date().timeIntervalSince(lastPairStart)
