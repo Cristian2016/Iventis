@@ -41,7 +41,7 @@ struct MoreOptionsView: View {
                     .ignoresSafeArea()
                 
                 layout {
-                    if bubble.state == .running {
+                    if bubble.state != .running {
                         VStack(alignment: .leading, spacing: 14) {
                             startDelayDisplay
                             digits
