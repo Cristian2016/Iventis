@@ -46,6 +46,7 @@ struct MoreOptionsView: View {
                     }
                     
                     Divider()
+                    
                     Color.clear
                         .overlay {
                             ColorsGrid(spacing: 0) {  }
@@ -57,7 +58,7 @@ struct MoreOptionsView: View {
                         .cornerRadius(10)
                         .standardShadow()
                 }
-                .padding()
+                .padding(isPortrait ? 14 : 0 )
                 .padding()
             }
         }
@@ -172,7 +173,7 @@ struct MoreOptionsView1_Previews: PreviewProvider {
         sdb.referenceDelay = 0
         
         bubble.sdb = sdb
-        bubble.color = "darkGreen"
+        bubble.color = "sourCherry"
         return bubble
     }()
     static var previews: some View {
