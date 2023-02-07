@@ -124,6 +124,9 @@ struct MoreOptionsView1: View {
                             .overlay {
                                 if tricolor.sec == bubbleColor { checkmark }
                             }
+                            .onTapGesture {
+                                saveColor(for: bubble, to: tricolor.description)
+                            }
                     }
                     
                 }
@@ -180,6 +183,11 @@ struct MoreOptionsView1: View {
             UserFeedback.singleHaptic(.medium)
             viewModel.saveDelay(for: bubble, userEnteredDelay)
         }
+        dismiss()
+    }
+    
+    func saveColor(for bubble:Bubble, to colorName: String) {
+        viewModel.saveColor(for: bubble, to: colorName)
         dismiss()
     }
 }
