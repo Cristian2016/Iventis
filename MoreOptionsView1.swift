@@ -159,7 +159,7 @@ struct MoreOptionsView1: View {
     var swipeLeft:some Gesture {
         DragGesture(minimumDistance: 10)
             .onEnded { _ in
-                if userEnteredDelay != initialStartDelay {
+                if userEnteredDelay != 0 {
                     UserFeedback.doubleHaptic(.heavy)
                     userEnteredDelay = 0
                 }
