@@ -51,7 +51,7 @@ struct MoreOptionsView: View {
                                     .font(.footnote)
                                     .foregroundColor(.gray)
                                 
-                                Text("**Remove** \(Image(systemName: "arrow.left.circle.fill")) Swipe from right screen edge")
+                                Text("**Remove** \(Image(systemName: "arrow.left.circle.fill")) Swipe outside table")
                                     .font(.footnote)
                                     .foregroundColor(.gray)
                             } else {
