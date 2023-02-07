@@ -12,17 +12,16 @@ struct MoreOptionsView1: View {
     let bubble:Bubble
     let bubbleColor:Color
     @EnvironmentObject var viewModel:ViewModel
-    @State private var startDelay = Int(0)
+    @State private var userEnteredDelay:Int
     private var initialStartDelay = 0
         
     init(_ bubble:Bubble) {
         self.bubble = bubble
         self.bubbleColor = Color.bubbleColor(forName: bubble.color)
-        
-        if let initialDelay = bubble.sdb?.referenceDelay {
-            self.startDelay = Int(initialDelay)
-            self.initialStartDelay = Int(initialDelay)
-        }
+        print(bubble.sdb?.referenceDelay)
+        let refDelay = bubble.sdb?.referenceDelay
+            self.userEnteredDelay = Int(refDelay!)
+            self.initialStartDelay = Int(refDelay!)
     }
     
     let metrics = Metrics()
@@ -66,7 +65,7 @@ struct MoreOptionsView1: View {
     // MARK: - Lego
     private var startDelayDisplay:some View {
         HStack(alignment: .bottom) {
-            Text(String(startDelay))
+            Text(String(userEnteredDelay))
                 .padding([.leading, .trailing])
                 .background(bubbleColor, in: RoundedRectangle(cornerRadius: 8))
                 .foregroundColor(.white)
@@ -82,7 +81,7 @@ struct MoreOptionsView1: View {
         HStack(spacing: metrics.spacing) {
             ForEach(Bubble.delays, id:\.self) { delay in
                 Button {
-                    startDelay += delay
+                    userEnteredDelay += delay
                 } label: {
                     
                     bubbleColor
@@ -160,9 +159,9 @@ struct MoreOptionsView1: View {
     var swipeLeft:some Gesture {
         DragGesture(minimumDistance: 10)
             .onEnded { _ in
-                if startDelay != initialStartDelay {
+                if userEnteredDelay != initialStartDelay {
                     UserFeedback.doubleHaptic(.heavy)
-                    startDelay = 0
+                    userEnteredDelay = 0
                 }
             }
     }
@@ -175,9 +174,9 @@ struct MoreOptionsView1: View {
          if user sets a new start delay
          save delay
          save CoreData context*/
-        if initialStartDelay != startDelay {
+        if initialStartDelay != userEnteredDelay {
             UserFeedback.singleHaptic(.medium)
-            viewModel.saveDelay(for: bubble, startDelay)
+            viewModel.saveDelay(for: bubble, userEnteredDelay)
         }
         dismiss()
     }

@@ -509,22 +509,26 @@ class ViewModel: ObservableObject {
     
     // start delay
     func saveDelay(for bubble:Bubble, _ userEnteredDelay:Int) {
-        //don't do anything is user hasn't modified the delay
-        guard
-            let referenceDelay = bubble.sdb?.referenceDelay,
-            referenceDelay != userEnteredDelay,
-            let sdb = theOneAndOnlyEditedSDB
-        else {
-            self.theOneAndOnlyEditedSDB = nil //dismiss
-            return
-        }
-                
-        //model:
-        sdb.referenceDelay = Int64(userEnteredDelay)
+//        //don't do anything is user hasn't modified the delay
+//        guard
+//            let referenceDelay = bubble.sdb?.referenceDelay,
+//            referenceDelay != userEnteredDelay,
+//            let sdb = theOneAndOnlyEditedSDB
+//        else {
+//            self.theOneAndOnlyEditedSDB = nil //dismiss
+//            return
+//        }
+//
+//        //model:
+//        sdb.referenceDelay = Int64(userEnteredDelay)
+//        PersistenceController.shared.save()
+//
+//        confirm_DelayCreated = true
+//        self.theOneAndOnlyEditedSDB = nil //dismiss
+        theOneAndOnlyEditedSDB?.referenceDelay = Int64(userEnteredDelay)
+        theOneAndOnlyEditedSDB?.currentDelay = Float(userEnteredDelay)
         PersistenceController.shared.save()
-        
-        confirm_DelayCreated = true
-        self.theOneAndOnlyEditedSDB = nil //dismiss
+        theOneAndOnlyEditedSDB = nil
     }
     
     ///referenceDelay = 0, currentDelay = 0
