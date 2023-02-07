@@ -47,15 +47,15 @@ struct MoreOptionsView: View {
                         
                         if !isPortrait {
                             if userEnteredDelay != 0 {
-                                Text("Save Delay \(Image(systemName: "hand.tap")) Tap outside table")
+                                Text("**Save Delay** \(Image(systemName: "hand.tap")) Tap outside table")
                                     .font(.footnote)
                                     .foregroundColor(.gray)
                                 
-                                Text("Remove Delay \(Image(systemName: "arrow.left.circle.fill")) Swipe Left from right screen edge")
+                                Text("**Remove Delay** \(Image(systemName: "arrow.left.circle.fill")) Swipe Left from right screen edge")
                                     .font(.footnote)
                                     .foregroundColor(.gray)
                             } else {
-                                Text("Dismiss \(Image(systemName: "hand.tap")) Tap outside table")
+                                Text("**Dismiss** \(Image(systemName: "hand.tap")) Tap outside table")
                                     .font(.footnote)
                                     .foregroundColor(.gray)
                             }
