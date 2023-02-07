@@ -10,7 +10,7 @@ import MyPackage
 
 struct Schematics: View {
     var body: some View {
-        HStack {
+        VStack {
             ZStack {
                 Image(systemName: "iphone")
                     .symbolRenderingMode(.monochrome)
