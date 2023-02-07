@@ -51,7 +51,7 @@ struct MoreOptionsView: View {
                                     .font(.footnote)
                                     .foregroundColor(.gray)
                                 
-                                Text("**Remove** \(Image(systemName: "arrow.left.circle.fill")) Swipe Left from right screen edge")
+                                Text("**Remove** \(Image(systemName: "arrow.left.circle.fill")) Swipe from right screen edge")
                                     .font(.footnote)
                                     .foregroundColor(.gray)
                             } else {
@@ -59,7 +59,7 @@ struct MoreOptionsView: View {
                                     .font(.footnote)
                                     .foregroundColor(.gray)
                             }
-                        }
+                        }dismiss
                     }
                     
                     Divider()
