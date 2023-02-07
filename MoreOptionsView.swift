@@ -80,7 +80,7 @@ struct MoreOptionsView: View {
                         .cornerRadius(10)
                         .standardShadow()
                 }
-                .padding(20)
+                .padding(isPortrait ? 28 : 20)
             }
         }
     }
