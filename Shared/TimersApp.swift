@@ -19,7 +19,6 @@ struct TimersApp: App {
     var body: some Scene { WindowGroup { UnitedViewHierarchy() }}
     
     init() {
-        print(#function, " TimersApp")
         let center = NotificationCenter.default
         delayExecution(.now() + 0.001) { center.post(name: .appLaunched, object: nil) }
     } //7
