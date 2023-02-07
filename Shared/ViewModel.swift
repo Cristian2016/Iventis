@@ -44,9 +44,6 @@ class ViewModel: ObservableObject {
     @Published var theOneAndOnlyEditedSDB:StartDelayBubble? //StartDelayBubble
     
     //Start Delay
-    @Published var confirm_DelayRemoved = false
-    @Published var confirm_DelayCreated = false
-    
     @Published var confirm_ColorChange = false
     
     ///calendarEvent created for bubble.rank. if rank != nil, confirmation will be displayed in the appropriate bubbleCell
