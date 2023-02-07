@@ -8,15 +8,17 @@
 import SwiftUI
 
 struct ColorsGrid: View {
-    let metrics = Metrics()
+    let metrics:Metrics
     let tapAction:() -> ()
     
-    init(_ tapAction: @escaping () -> Void) {
+    init(spacing: CGFloat, _ tapAction: @escaping () -> Void) {
         self.tapAction = tapAction
+        self.columns = Array(repeating: GridItem(spacing: spacing), count: 3)
+        self.metrics = Metrics(spacing: spacing)
     }
     
     struct Metrics {
-        let spacing = CGFloat(4)
+        let spacing:CGFloat
     }
     
     func itemHeight(_ geo:GeometryProxy) -> CGFloat {
@@ -26,13 +28,14 @@ struct ColorsGrid: View {
         return (geo.size.height - metrics.spacing * CGFloat(totalSpacingToSubstract)) / CGFloat(itemCount / columns.count)
     }
     
-    let columns = Array(repeating: GridItem(spacing: 4), count: 3)
+    let columns:[GridItem]
     
     var body: some View {
         GeometryReader { geo in
             ScrollView {
                 LazyVGrid(columns: columns, spacing: metrics.spacing) {
                     let height = itemHeight(geo)
+                    
                     ForEach(Color.triColors) { tricolor in
                         tricolor.sec
                             .frame(height: height)
@@ -47,6 +50,6 @@ struct ColorsGrid: View {
 
 struct ColorsGrid_Previews: PreviewProvider {
     static var previews: some View {
-        ColorsGrid { }
+        ColorsGrid(spacing: 10) { }
     }
 }
