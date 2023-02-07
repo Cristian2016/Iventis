@@ -56,9 +56,12 @@ struct MoreOptionsView: View {
                                     .font(.footnote)
                                     .foregroundColor(.gray)
                             }
-                            Text("\(Image(systemName: "arrow.left.circle.fill")) Swipe Left from right screen edge to remove Delay")
-                                .font(.footnote)
-                                .foregroundColor(.gray)
+                            
+                            if bubble.sdb?.referenceDelay != 0 {
+                                Text("\(Image(systemName: "arrow.left.circle.fill")) Swipe Left from right screen edge to remove Delay")
+                                    .font(.footnote)
+                                    .foregroundColor(.gray)
+                            }
                         }
                     }
                     
