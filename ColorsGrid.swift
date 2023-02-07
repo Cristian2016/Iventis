@@ -12,13 +12,6 @@ struct ColorsGrid: View {
     let metrics:Metrics
     let tapAction:() -> ()
     
-    func itemHeight(_ geo:GeometryProxy) -> CGFloat {
-        let itemCount = Color.triColors.count
-        let totalSpacingToSubstract = itemCount/columns.count - 1
-        
-        return (geo.size.height - metrics.spacing * CGFloat(totalSpacingToSubstract)) / CGFloat(itemCount / columns.count)
-    }
-    
     var body: some View {
         GeometryReader { geo in
             ScrollView {
@@ -40,6 +33,13 @@ struct ColorsGrid: View {
         self.tapAction = tapAction
         self.columns = Array(repeating: GridItem(spacing: spacing), count: 3)
         self.metrics = Metrics(spacing: spacing)
+    }
+    
+    func itemHeight(_ geo:GeometryProxy) -> CGFloat {
+        let itemCount = Color.triColors.count
+        let totalSpacingToSubstract = itemCount/columns.count - 1
+        
+        return (geo.size.height - metrics.spacing * CGFloat(totalSpacingToSubstract)) / CGFloat(itemCount / columns.count)
     }
     
     struct Metrics {
