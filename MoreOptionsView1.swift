@@ -178,8 +178,6 @@ struct MoreOptionsView1: View {
         if initialStartDelay != startDelay {
             UserFeedback.singleHaptic(.medium)
             viewModel.saveDelay(for: bubble, startDelay)
-        } else {
-            print("no delay to save")
         }
         dismiss()
     }
