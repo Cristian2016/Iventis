@@ -22,12 +22,13 @@ struct FramePortrait: View {
                     .frame(width: 150)
 //                    .foregroundColor(.lightGray)
                     .background {
-                        Color.yellow
+                        Color.cyan
                             .cornerRadius(30)
                             .overlay {
                                 Image(systemName: "2.circle.fill")
                                     .rotationEffect(.degrees(isPortrait ? 0 : -90))
                                     .offset(x: 56)
+                                    .foregroundColor(.white)
                                     
                             }
                     }
