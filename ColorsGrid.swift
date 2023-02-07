@@ -35,15 +35,31 @@ struct ColorsGrid: View {
                     }
                 }
             }
+            .background {
+                VStack {
+                    colorNameView
+                    Spacer()
+                }
+            }
         }
     }
     
+    // MARK: - Lego
     private var checkmark:some View {
         Image(systemName: "checkmark")
             .foregroundColor(.white)
             .font(metrics.checkmarkFont)
     }
     
+    private var colorNameView:some View {
+        Text(Color.userFriendlyBubbleColorName(for: bubble.color))
+            .padding([.leading, .trailing])
+            .background(Color.bubbleColor(forName: bubble.color), in: RoundedRectangle(cornerRadius: 4))
+            .foregroundColor(.white)
+            .font(metrics.checkmarkFont)
+    }
+    
+    // MARK: -
     init(_ bubble:Bubble, spacing: CGFloat, _ dismissAction: @escaping () -> Void) {
         self.dismissAction = dismissAction
         self.columns = Array(repeating: GridItem(spacing: spacing), count: 3)
@@ -51,6 +67,7 @@ struct ColorsGrid: View {
         self.bubble = bubble
     }
     
+    // MARK: -
     func itemHeight(_ geo:GeometryProxy) -> CGFloat {
         let itemCount = Color.triColors.count
         let totalSpacingToSubstract = itemCount/columns.count - 1
@@ -60,7 +77,7 @@ struct ColorsGrid: View {
     
     struct Metrics {
         let spacing:CGFloat
-        let checkmarkFont = Font.system(size: 30, weight: .medium)
+        let checkmarkFont = Font.system(size: 30, weight: .medium, design: .rounded)
     }
 }
 

@@ -102,15 +102,6 @@ struct MoreOptionsView: View {
         }
     }
     
-    private var colorNameView:some View {
-        Text(Color.userFriendlyBubbleColorName(for: bubble.color))
-            .padding([.leading, .trailing])
-            .background(initialBubbleColor, in: RoundedRectangle(cornerRadius: 4))
-            .foregroundColor(.white)
-            .font(metrics.font)
-    }
-    
-    
     // MARK: -
     struct Metrics {
         let radius = CGFloat(10)
