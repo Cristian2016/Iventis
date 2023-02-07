@@ -97,8 +97,12 @@ extension Bubble {
 }
 
 // MARK: - Observers
+private var observerAdded = false
+
 extension Bubble {
     func addObserver() {
+        if observerAdded { return }
+        observerAdded = true
         print(#function)
         NotificationCenter.default
             .addObserver(forName: .bubbleTimerSignal, object: nil, queue: nil) {
