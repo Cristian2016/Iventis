@@ -59,7 +59,7 @@ struct MoreOptionsView: View {
                         .standardShadow()
                 }
                 .padding(isPortrait ? 14 : 0 )
-                .padding()
+                .padding(isPortrait ? 14 : 0 )
             }
         }
     }
