@@ -41,28 +41,30 @@ struct MoreOptionsView: View {
                     .ignoresSafeArea()
                 
                 layout {
-                    VStack(alignment: .leading, spacing: 14) {
-                        startDelayDisplay
-                        digits
-                        
-                        if !isPortrait {
-                            if userEnteredDelay != 0 {
-                                Text("**Save** \(Image(systemName: "hand.tap")) Tap outside frame")
-                                    .font(.footnote)
-                                    .foregroundColor(.gray)
-                                
-                                Text("**Remove** \(Image(systemName: "arrow.left.circle.fill")) Swipe outside frame")
-                                    .font(.footnote)
-                                    .foregroundColor(.gray)
-                            } else {
-                                Text("**Dismiss** \(Image(systemName: "hand.tap")) Tap outside frame")
-                                    .font(.footnote)
-                                    .foregroundColor(.gray)
+                    if bubble.state == .running {
+                        VStack(alignment: .leading, spacing: 14) {
+                            startDelayDisplay
+                            digits
+                            
+                            if !isPortrait {
+                                if userEnteredDelay != 0 {
+                                    Text("**Save** \(Image(systemName: "hand.tap")) Tap outside frame")
+                                        .font(.footnote)
+                                        .foregroundColor(.gray)
+                                    
+                                    Text("**Remove** \(Image(systemName: "arrow.left.circle.fill")) Swipe outside frame")
+                                        .font(.footnote)
+                                        .foregroundColor(.gray)
+                                } else {
+                                    Text("**Dismiss** \(Image(systemName: "hand.tap")) Tap outside frame")
+                                        .font(.footnote)
+                                        .foregroundColor(.gray)
+                                }
                             }
                         }
+                        
+                        Divider()
                     }
-                    
-                    Divider()
                     
                     Color.clear
                         .overlay {
