@@ -28,8 +28,6 @@ struct FramePortrait: View {
                                 Image(systemName: "2.circle.fill")
                                     .rotationEffect(.degrees(isPortrait ? 0 : -90))
                                     .offset(x: 56)
-                                    .foregroundColor(.white)
-                                    
                             }
                     }
                     .overlay {
@@ -47,6 +45,7 @@ struct FramePortrait: View {
             VStack(alignment: .leading) {
                 Text("\(Image(systemName: "1.circle.fill")) Inside frame")
                 Text("\(Image(systemName: "2.circle.fill")) Outside frame")
+                    .foregroundColor(.cyan)
             }
         }
         .onTapGesture {

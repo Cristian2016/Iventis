@@ -104,8 +104,10 @@ extension Bubble {
                 [weak self] _ in
                 if self?.state != .running { return }
                 
+                print(Thread.isMainThread)
+                
                 self?.updateBubbleCellComponents()
-                self?.updateSmallBubbleCellComponents()
+//                self?.updateSmallBubbleCellComponents()
             }
     } //1
     
