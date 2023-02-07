@@ -57,7 +57,7 @@ struct MoreOptionsView: View {
                                     .foregroundColor(.gray)
                             }
                             
-                            if bubble.sdb?.referenceDelay != 0 {
+                            if userEnteredDelay != 0 {
                                 Text("\(Image(systemName: "arrow.left.circle.fill")) Swipe Left from right screen edge to remove Delay")
                                     .font(.footnote)
                                     .foregroundColor(.gray)
