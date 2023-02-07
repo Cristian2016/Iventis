@@ -195,6 +195,10 @@ struct MoreOptionsView: View {
 struct MoreOptionsView1_Previews: PreviewProvider {
     static let bubble:Bubble = {
         let bubble = Bubble(context: PersistenceController.preview.viewContext)
+        let sdb = StartDelayBubble(context: PersistenceController.preview.viewContext)
+        sdb.referenceDelay = 0
+        
+        bubble.sdb = sdb
         bubble.color = "darkGreen"
         return bubble
     }()
