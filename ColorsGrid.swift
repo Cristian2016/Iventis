@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct TestDelete: View {
+struct ColorsGrid: View {
     let metrics = Metrics()
     
     struct Metrics {
@@ -39,8 +39,8 @@ struct TestDelete: View {
     }
 }
 
-struct TestDelete_Previews: PreviewProvider {
+struct ColorsGrid_Previews: PreviewProvider {
     static var previews: some View {
-        TestDelete()
+        ColorsGrid()
     }
 }
