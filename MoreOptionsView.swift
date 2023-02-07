@@ -49,7 +49,10 @@ struct MoreOptionsView: View {
                     
                     Color.clear
                         .overlay {
-                            ColorsGrid(spacing: 0) {  }
+                            ColorsGrid(spacing: 0) {
+                                saveColor(to: <#T##String#>)
+                                dismiss()
+                            }
                         }
                 }
                 .padding(10)
@@ -161,7 +164,7 @@ struct MoreOptionsView: View {
     
     func saveColor(to colorName: String) {
         viewModel.saveColor(for: bubble, to: colorName)
-        dismiss()
+        //dimiss will be called separately
     }
 }
 
