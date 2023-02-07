@@ -50,15 +50,15 @@ struct MoreOptionsView: View {
                                 Text("\(Image(systemName: "hand.tap")) Tap outside table to save Delay")
                                     .font(.footnote)
                                     .foregroundColor(.gray)
-                                Text("\(Image(systemName: "arrow.left.circle.fill")) Swipe Left from right screen edge to remove Delay")
-                                    .font(.footnote)
-                                    .foregroundColor(.gray)
                             }
                             else {
                                 Text("\(Image(systemName: "hand.tap")) Tap outside table to dismiss")
                                     .font(.footnote)
                                     .foregroundColor(.gray)
                             }
+                            Text("\(Image(systemName: "arrow.left.circle.fill")) Swipe Left from right screen edge to remove Delay")
+                                .font(.footnote)
+                                .foregroundColor(.gray)
                         }
                     }
                     
