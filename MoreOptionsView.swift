@@ -72,9 +72,11 @@ struct MoreOptionsView: View {
                 .font(metrics.delayFont)
                 .layoutPriority(1)
             Text("\(Image.startDelay) Start Delay")
-                .font(.caption)
+                .font(.callout)
                 .foregroundColor(.white)
+                .lineLimit(1)
         }
+        .padding([.trailing], 8)
         .background(bubbleColor, in: RoundedRectangle(cornerRadius: 8))
     }
     
