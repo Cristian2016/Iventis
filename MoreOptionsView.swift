@@ -8,7 +8,7 @@
 import SwiftUI
 import MyPackage
 
-struct MoreOptionsView1: View {
+struct MoreOptionsView: View {
     let bubble:Bubble
     let bubbleColor:Color
     @EnvironmentObject var viewModel:ViewModel
@@ -199,6 +199,6 @@ struct MoreOptionsView1_Previews: PreviewProvider {
         return bubble
     }()
     static var previews: some View {
-        MoreOptionsView1(bubble)
+        MoreOptionsView(bubble)
     }
 }
