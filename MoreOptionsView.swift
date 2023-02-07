@@ -59,7 +59,7 @@ struct MoreOptionsView: View {
                                     .font(.footnote)
                                     .foregroundColor(.gray)
                             }
-                        }dismiss
+                        }
                     }
                     
                     Divider()
