@@ -104,6 +104,12 @@ struct MoreOptionsView1: View {
             .font(metrics.font)
     }
     
+    private var checkmark:some View {
+        Image(systemName: "checkmark")
+            .foregroundColor(.white)
+            .font(metrics.font)
+    }
+    
     private func colors(_ isPortrait:Bool) -> some View {
         let ratio = isPortrait ? metrics.portraitColorRatio : metrics.landscapeColorRatio
         
@@ -116,11 +122,7 @@ struct MoreOptionsView1: View {
                             .aspectRatio( ratio, contentMode: .fit)
                         tricolor.sec
                             .overlay {
-                                if tricolor.sec == bubbleColor {
-                                    Image(systemName: "checkmark")
-                                        .foregroundColor(.white)
-                                        .font(metrics.font)
-                                }
+                                if tricolor.sec == bubbleColor { checkmark }
                             }
                     }
                     
