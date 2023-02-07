@@ -16,7 +16,8 @@ struct TestDelete: View {
     }
     
     func height(_ geo:GeometryProxy) -> CGFloat {
-        (geo.size.height - metrics.spacing * CGFloat(Color.triColors.count - columns.count)) / CGFloat(Color.triColors.count / columns.count)
+        let totalSpacingToSubstract = Color.triColors.count/columns.count - 1
+        return (geo.size.height - metrics.spacing * CGFloat(totalSpacingToSubstract)) / CGFloat(Color.triColors.count / columns.count)
     }
     
     let columns = Array(repeating: GridItem(spacing: 4), count: 3)
