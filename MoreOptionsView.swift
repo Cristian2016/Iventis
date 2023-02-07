@@ -121,9 +121,9 @@ struct MoreOptionsView: View {
         let minWidth = CGFloat(300)
         let spacing = CGFloat(4)
         
-        let delayFont = Font.system(size: 70)
+        let delayFont = Font.system(size: 70, design: .rounded)
         let font = Font.system(size: 30, weight: .medium)
-        let digitFont = Font.system(size: 34, weight: .medium)
+        let digitFont = Font.system(size: 34, weight: .medium, design: .rounded)
         
         let portraitColorRatio = CGFloat(1.9)
         let landscapeColorRatio = CGFloat(2.54)
