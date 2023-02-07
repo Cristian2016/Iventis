@@ -9,6 +9,8 @@ import SwiftUI
 import MyPackage
 
 struct FramePortrait: View {
+    @State private var isPortrait = true
+    
     var body: some View {
         VStack {
             ZStack {
@@ -22,6 +24,12 @@ struct FramePortrait: View {
                     .background {
                         Color.yellow
                             .cornerRadius(30)
+                            .overlay {
+                                Image(systemName: "2.circle.fill")
+                                    .rotationEffect(.degrees(isPortrait ? 0 : -90))
+                                    .offset(x: 56)
+                                    
+                            }
                     }
                     .overlay {
                         RoundedRectangle(cornerRadius: 4)
@@ -30,8 +38,8 @@ struct FramePortrait: View {
                             .padding(6)
                             .frame(width: 130, height: 240)
                     }
-                Image(systemName: "2.circle.fill")
-                    .offset(x: 56)
+                    .rotationEffect(.degrees(isPortrait ? 0 : 90))
+               
                 Image(systemName: "1.circle.fill")
             }
             
@@ -41,7 +49,7 @@ struct FramePortrait: View {
             }
         }
         .onTapGesture {
-            
+            isPortrait.toggle()
         }
     }
 }
