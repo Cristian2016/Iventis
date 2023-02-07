@@ -44,6 +44,19 @@ struct MoreOptionsView: View {
                     VStack(alignment: .leading, spacing: 14) {
                         startDelayDisplay
                         digits
+                        
+                        if !isPortrait {
+                            if Int64(userEnteredDelay) != bubble.sdb?.referenceDelay {
+                                Text("\(Image(systemName: "hand.tap")) Tap outside table to save current Start Delay")
+                                    .foregroundColor(.secondary)
+                                Text("\(Image(systemName: "arrow.left.circle.fill")) Swipe Left from right screen edge to remove Start Delay")
+                                    .foregroundColor(.secondary)
+                            }
+                            else {
+                                Text("\(Image(systemName: "hand.tap")) Tap outside table to dismiss")
+                                    .foregroundColor(.secondary)
+                            }
+                        }
                     }
                     
                     Divider()
