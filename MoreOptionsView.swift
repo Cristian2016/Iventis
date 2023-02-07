@@ -37,20 +37,18 @@ struct MoreOptionsView: View {
                 BlurryBackground(material: .ultraThinMaterial)
                     .onTapGesture { saveDelay() }
                     .highPriorityGesture(swipeLeft)
+                    .ignoresSafeArea()
                 
                 layout {
                     Rectangle().frame(height: 200)
                     Divider()
                     Color.clear
                         .overlay {
-                            ColorsGrid(spacing: metrics.spacing) {
-                                
-                            }
+                            ColorsGrid(spacing: metrics.spacing) { saveColor(to: <#T##String#>) }
                         }
                 }
+                .padding()
             }
-            .padding()
-            
         }
     }
     
@@ -148,7 +146,7 @@ struct MoreOptionsView: View {
         dismiss()
     }
     
-    func saveColor(for bubble:Bubble, to colorName: String) {
+    func saveColor(to colorName: String) {
         viewModel.saveColor(for: bubble, to: colorName)
         dismiss()
     }
