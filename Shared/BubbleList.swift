@@ -113,6 +113,7 @@ struct BubbleList: View {
     // MARK: -
     
     init(_ showFavoritesOnly: Bool) {
+        print(#function, " bList")
         var predicate:NSPredicate?
         if showFavoritesOnly { predicate = NSPredicate(format: "isPinned == true")}
                 
@@ -172,11 +173,6 @@ struct BubbleList: View {
 }
 
 // MARK: -
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        BubbleList(false)
-    }
-}
 
 // MARK: - Little Helpers
 extension BubbleList {

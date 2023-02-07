@@ -213,6 +213,7 @@ struct BubbleCell: View {
     
     // MARK: -
     init(_ bubble:Bubble, _ metrics:Metrics) {
+        print(#function, " bCell")
         _bubble = StateObject(wrappedValue: bubble)
         _startDelayBubble = StateObject(wrappedValue: bubble.sdb!)
         self.metrics = metrics
