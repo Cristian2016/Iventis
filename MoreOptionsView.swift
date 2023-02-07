@@ -25,7 +25,7 @@ struct MoreOptionsView: View {
         self.metrics = Metrics()
     }
     
-    let metrics:Metrics
+    var metrics:Metrics
     
     var body: some View {
         GeometryReader { geo in
@@ -114,9 +114,8 @@ struct MoreOptionsView: View {
     private func colors(_ isPortrait:Bool) -> some View {
         let ratio = isPortrait ? metrics.portraitColorRatio : metrics.landscapeColorRatio
         
-        let columns =  Array(repeating: GridItem(spacing: metrics.spacing), count: 3)
         return ScrollView {
-            LazyVGrid(columns: columns, spacing: metrics.spacing) {
+            LazyVGrid(columns: metrics.columns, spacing: metrics.spacing) {
                 ForEach(Color.triColors) { tricolor in
                     ZStack {
                         Circle()
@@ -159,6 +158,8 @@ struct MoreOptionsView: View {
         let landscapeColorRatio = CGFloat(2.54)
                 
         let vStackSpacing = CGFloat(8)
+        
+        var columns:[GridItem] { Array(repeating: GridItem(spacing: spacing), count: 3) }
     }
     
     // MARK: -
