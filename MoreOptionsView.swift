@@ -22,9 +22,10 @@ struct MoreOptionsView: View {
         let refDelay = bubble.sdb?.referenceDelay
         self.userEnteredDelay = Int(refDelay!)
         self.initialStartDelay = Int(refDelay!)
+        self.metrics = Metrics()
     }
     
-    let metrics = Metrics()
+    let metrics:Metrics
     
     var body: some View {
         GeometryReader { geo in
