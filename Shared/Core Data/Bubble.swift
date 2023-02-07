@@ -99,15 +99,14 @@ extension Bubble {
 // MARK: - Observers
 extension Bubble {
     func addObserver() {
+        print(#function)
         NotificationCenter.default
             .addObserver(forName: .bubbleTimerSignal, object: nil, queue: nil) {
                 [weak self] _ in
                 if self?.state != .running { return }
                 
-                print(Thread.isMainThread)
-                
                 self?.updateBubbleCellComponents()
-//                self?.updateSmallBubbleCellComponents()
+                self?.updateSmallBubbleCellComponents()
             }
     } //1
     
