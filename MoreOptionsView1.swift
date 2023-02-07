@@ -18,10 +18,10 @@ struct MoreOptionsView1: View {
     init(_ bubble:Bubble) {
         self.bubble = bubble
         self.bubbleColor = Color.bubbleColor(forName: bubble.color)
-        print(bubble.sdb?.referenceDelay)
+        
         let refDelay = bubble.sdb?.referenceDelay
-            self.userEnteredDelay = Int(refDelay!)
-            self.initialStartDelay = Int(refDelay!)
+        self.userEnteredDelay = Int(refDelay!)
+        self.initialStartDelay = Int(refDelay!)
     }
     
     let metrics = Metrics()
