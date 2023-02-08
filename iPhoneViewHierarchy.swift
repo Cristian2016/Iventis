@@ -9,7 +9,10 @@ import SwiftUI
 
 struct iPhoneViewHierarchy: View {
     @EnvironmentObject private var viewModel:ViewModel
+    private let secretary = Secretary.shared
+    
     var body: some View {
+        let _ = print("iPhoneViewHierarchy body")
         ZStack {
             NavigationStack(path: $viewModel.path) { ViewHierarchy() }
             PaletteView().transition(.move(edge: .leading))
