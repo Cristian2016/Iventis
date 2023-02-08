@@ -13,7 +13,7 @@ struct iPhoneViewHierarchy: View {
         ZStack {
             NavigationStack(path: $viewModel.path) { ViewHierarchy() }
             if viewModel.showPaletteView { PaletteView().transition(.move(edge: .leading)) }
-            DurationPickerView().transition(.move(edge: .leading))
+            DurationPickerView()
         }
         .tint(.label)
     }

@@ -49,7 +49,6 @@ struct DurationPickerView: View {
                             )
                     }
                     
-                    
                     VStack {
                         let white = Color.white
                         
@@ -84,6 +83,7 @@ struct DurationPickerView: View {
                 .ignoresSafeArea()
                 .gesture(swipeGesture)
             }
+            else { EmptyView() }
         }
         .onReceive(secretary.$durationPicker_OfColor) { color = $0 }
     }
