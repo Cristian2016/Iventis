@@ -16,6 +16,7 @@ struct MoreOptionsView: View {
         var userEditedDelay:Int
     }
     
+    //set within .onReceive closure. all the information MoreOptionView needs :)
     @State private var input:Input?
         
     @EnvironmentObject var viewModel:ViewModel
