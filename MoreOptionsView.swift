@@ -83,13 +83,11 @@ struct MoreOptionsView: View {
                 let initialStartDelay = Int(sdb.referenceDelay)
                 
                 input = Input(bubble: bubble,
-                                          initialBubbleColor: color,
-                                          initialStartDelay: initialStartDelay,
-                                          userEnteredDelay: initialStartDelay)
+                              initialBubbleColor: color,
+                              initialStartDelay: initialStartDelay,
+                              userEnteredDelay: initialStartDelay)
                 
-            } else {
-                input = nil
-            }
+            } else { input = nil }
         }
     }
     
