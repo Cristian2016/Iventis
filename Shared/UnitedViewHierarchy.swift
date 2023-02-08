@@ -54,6 +54,7 @@ struct UnitedViewHierarchy: View {
         .environmentObject(viewModel) //2
         .environmentObject(layoutViewModel) //2
         .onChange(of: scenePhase) { handleScenePhaseChange($0) } //3
+        //listen to publishers and listen for changes
         .onReceive(secretary.$deleteAction_bRank) {
             deleteActionBubbleRank = $0
         }

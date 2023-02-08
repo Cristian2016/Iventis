@@ -14,6 +14,10 @@ import CoreData
 import MyPackage
 
 class ViewModel: ObservableObject {
+    private let secretary = Secretary.shared
+    
+    private var cancellable:AnyCancellable?
+        
     deinit {
         NotificationCenter.default.removeObserver(self) //1
     }
@@ -21,24 +25,12 @@ class ViewModel: ObservableObject {
     private var timer:Timer?
     
     @objc private func handleFiveSecondsTimer() {
-        if fiveSeconds_bRank != nil { fiveSeconds_bRank = nil  }
+        if secretary.addNoteButton_bRank != nil { secretary.addNoteButton_bRank = nil  }
     }
     
     @Published var durationPicker_OfColor:Color?
     
-    @Published var fiveSeconds_bRank:Int? { didSet{
-        if fiveSeconds_bRank != nil {
-            self.timer = Timer.scheduledTimer( timeInterval: 5.0, target: self,
-                                               selector: #selector(handleFiveSecondsTimer),
-                                               userInfo: nil, repeats: true
-            )
-        }
-        else { timer?.invalidate(); timer = nil }
-    }} //1
-    
     @Published var showFavoritesOnly = false
-    
-    @Published var showAddTagButton_bRank:Int? = nil
     
     ///MoreOptionsView
     @Published var theOneAndOnlyEditedSDB:StartDelayBubble? //StartDelayBubble
@@ -89,6 +81,16 @@ class ViewModel: ObservableObject {
         let bubbles = try? PersistenceController.shared.viewContext.fetch(request)
         updateCurrentClock(of: bubbles)
         observe_delayReachedZero_Notification()
+        
+        self.cancellable = Secretary.shared.$addNoteButton_bRank.sink {
+            if $0 != nil {
+                self.timer = Timer.scheduledTimer( timeInterval: 5.0, target: self,
+                                                   selector: #selector(self.handleFiveSecondsTimer),
+                                                   userInfo: nil, repeats: true
+                )
+            }
+            else { self.timer?.invalidate(); self.timer = nil }
+        }
     }
         
     // MARK: -
@@ -170,11 +172,9 @@ class ViewModel: ObservableObject {
         try? viewContext.save()
     }
     
-    func removeAddTagButton(_ bubble:Bubble) {
-        if fiveSeconds_bRank != nil {
-            if fiveSeconds_bRank == Int(bubble.rank) {
-                fiveSeconds_bRank = nil
-            }
+    func removeAddNoteButton(_ bubble:Bubble) {
+        if let bubbleRank = secretary.addNoteButton_bRank, bubbleRank == Int(bubble.rank) {
+            secretary.addNoteButton_bRank = nil
         }
     }
     
@@ -213,7 +213,7 @@ class ViewModel: ObservableObject {
         let startDelayCompensation = delta ?? 0
         
         if bubble.state == .brandNew || bubble.state == .paused {
-            showAddTagButton_bRank = Int(bubble.rank)
+            secretary.addNoteButton_bRank = Int(bubble.rank)
         }
         
         switch bubble.state {
@@ -229,8 +229,8 @@ class ViewModel: ObservableObject {
                 if isDetailViewShowing { bubble.syncSmallBubbleCell = true }
                 
                 //1 both
-                fiveSeconds_bRank = nil
-                fiveSeconds_bRank = Int(bubble.rank)
+                secretary.addNoteButton_bRank = nil //clear first
+                secretary.addNoteButton_bRank = Int(bubble.rank)
                                 
             case .paused:  /* changes to running */
                 //create new pair, add it to currentSession
@@ -263,7 +263,8 @@ class ViewModel: ObservableObject {
                     }
                 }
                 
-                if fiveSeconds_bRank == Int(bubble.rank) { fiveSeconds_bRank = nil } //1
+                if secretary.addNoteButton_bRank == Int(bubble.rank) { secretary.addNoteButton_bRank = nil
+                } //1
                 
             case .finished: return
         }
@@ -337,7 +338,7 @@ class ViewModel: ObservableObject {
         //make sure no startDelayBubble displayed at this point
         removeDelay(for: bubble)
         
-        fiveSeconds_bRank = nil //1
+        secretary.addNoteButton_bRank = nil //1
         
         if bubble.state == .brandNew { return }
         
@@ -547,7 +548,7 @@ class ViewModel: ObservableObject {
     }
     
     // MARK: - Little Helpers
-    var fiveSecondsBubble:Bubble? { bubble(for: fiveSeconds_bRank) }
+    var fiveSecondsBubble:Bubble? { bubble(for: secretary.addNoteButton_bRank) }
 }
 
 // MARK: - Handle SDBubble start and pause and shit

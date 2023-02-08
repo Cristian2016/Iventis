@@ -17,6 +17,7 @@ struct DetailView: View {
     @FetchRequest var sessions:FetchedResults<Session>
     
     @EnvironmentObject private var viewModel:ViewModel
+    private let secretary = Secretary.shared
     
     @State private var scrollToTop = false //2
     
@@ -62,7 +63,7 @@ struct DetailView: View {
             .toolbarBackground(.ultraThinMaterial)
             .toolbar {
                 ToolbarItemGroup {
-                    if isAddTagButtonVisible { AddPairCellNoteButton(bubble) }
+                    if isAddTagButtonVisible { AddNoteButton() }
 //                    else {
 //                        SmallTextHint.tapToScrollUp
 //                            .onTapGesture { scrollToTop = true } //2
@@ -73,5 +74,5 @@ struct DetailView: View {
     }
     
     // MARK: - Little Helpers
-    var isAddTagButtonVisible:Bool { viewModel.fiveSeconds_bRank == Int(bubble.rank) }
+    var isAddTagButtonVisible:Bool { secretary.addNoteButton_bRank == Int(bubble.rank) }
 }

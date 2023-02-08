@@ -17,6 +17,7 @@ struct PairStickyNoteList: View {
     @EnvironmentObject private var vm:ViewModel
     @FetchRequest private var pairSavedNotes:FetchedResults<PairSavedNote>
     @State private var textInput = "" //willSet and didSet do not work anymore
+    let secretary = Secretary.shared
     
     private let textInputLimit = 12
     private let line0 = "No Matches"
@@ -113,6 +114,6 @@ struct PairStickyNoteList: View {
     // MARK: -
     private func dismiss() {
         vm.pairOfNotesList = nil
-        vm.fiveSeconds_bRank = nil
+        secretary.addNoteButton_bRank = nil
     }
 }

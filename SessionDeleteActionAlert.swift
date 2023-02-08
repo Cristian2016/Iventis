@@ -11,6 +11,7 @@ import MyPackage
 struct SessionDeleteActionAlert: View {
     @EnvironmentObject private var viewModel:ViewModel
     @EnvironmentObject private var layoutViewModel:LayoutViewModel
+    private let secretary = Secretary.shared
     
     let session:Session
     let sessionRank:String
@@ -46,9 +47,9 @@ struct SessionDeleteActionAlert: View {
     //ViewModel 1
     private func removeFiveSecondsBar() {
         guard let bubbleRank = session.bubble?.rank else { return }
-        let isSameBubble = viewModel.fiveSeconds_bRank == Int(bubbleRank)
+        let isSameBubble = secretary.addNoteButton_bRank == Int(bubbleRank)
         let isLastSession = session == session.bubble?.lastSession
-        if isLastSession, isSameBubble { viewModel.fiveSeconds_bRank = nil }
+        if isLastSession, isSameBubble { secretary.addNoteButton_bRank = nil }
     }
     
     //// MARK: -
@@ -99,7 +100,7 @@ struct SessionDeleteActionAlert: View {
                     viewModel.sessionToDelete = nil
                 }
             }
-            if viewModel.fiveSeconds_bRank != nil { viewModel.fiveSeconds_bRank = nil } //ViewModel 1
+            if secretary.addNoteButton_bRank != nil { secretary.addNoteButton_bRank = nil } //ViewModel 1
         } label: {
             RoundedRectangle(cornerRadius: metrics.buttonRadius)
                 .fill(metrics.bubbleColor)

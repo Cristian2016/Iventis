@@ -78,7 +78,7 @@
 		1FA834762850A57C003F4D61 /* Widgets.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 1FA834712850A57A003F4D61 /* Widgets.intentdefinition */; };
 		1FA834792850A57C003F4D61 /* WidgetsExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 1FA8346B2850A57A003F4D61 /* WidgetsExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		1FA8F87E28367B7A00394B59 /* BubbleNote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA8F87D28367B7A00394B59 /* BubbleNote.swift */; };
-		1FAD1576298A5A6C001139C6 /* AddPairCellNoteButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FAD1575298A5A6C001139C6 /* AddPairCellNoteButton.swift */; };
+		1FAD1576298A5A6C001139C6 /* AddNoteButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FAD1575298A5A6C001139C6 /* AddNoteButton.swift */; };
 		1FAD1578298A8346001139C6 /* Secretary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FAD1577298A8345001139C6 /* Secretary.swift */; };
 		1FAD157C298AAFDB001139C6 /* BubbleDeleteActionAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FAD157B298AAFDB001139C6 /* BubbleDeleteActionAlert.swift */; };
 		1FAE715D298D1CA200E19959 /* DualTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FAE715C298D1CA200E19959 /* DualTextView.swift */; };
@@ -212,7 +212,7 @@
 		1FA834722850A57C003F4D61 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1FA834742850A57C003F4D61 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1FA8F87D28367B7A00394B59 /* BubbleNote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BubbleNote.swift; sourceTree = "<group>"; };
-		1FAD1575298A5A6C001139C6 /* AddPairCellNoteButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPairCellNoteButton.swift; sourceTree = "<group>"; };
+		1FAD1575298A5A6C001139C6 /* AddNoteButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNoteButton.swift; sourceTree = "<group>"; };
 		1FAD1577298A8345001139C6 /* Secretary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Secretary.swift; sourceTree = "<group>"; };
 		1FAD157B298AAFDB001139C6 /* BubbleDeleteActionAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BubbleDeleteActionAlert.swift; sourceTree = "<group>"; };
 		1FAE715C298D1CA200E19959 /* DualTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DualTextView.swift; sourceTree = "<group>"; };
@@ -329,7 +329,7 @@
 				1FAE715C298D1CA200E19959 /* DualTextView.swift */,
 				1FF37CAD298BC7DF00AF0EC8 /* SmallTextHint.swift */,
 				1F615B6229899E210006DB0B /* BackgroundTimer.swift */,
-				1FAD1575298A5A6C001139C6 /* AddPairCellNoteButton.swift */,
+				1FAD1575298A5A6C001139C6 /* AddNoteButton.swift */,
 				1FA03CAA29893E6200AF7395 /* SessionDeleteActionAlert.swift */,
 				1F05B7C72989158E0022FD23 /* BorderlessLabel.swift */,
 				1F196092298856E500E6A7EA /* SmallAlertHintView.swift */,
@@ -641,7 +641,7 @@
 				1F5987A2286B5DFC00CDB54C /* PairSavedNote.swift in Sources */,
 				1F5F4A9D280945C700AF3442 /* BubbleCell.swift in Sources */,
 				1F18B460281FAABF0080ADA6 /* TopCell.swift in Sources */,
-				1FAD1576298A5A6C001139C6 /* AddPairCellNoteButton.swift in Sources */,
+				1FAD1576298A5A6C001139C6 /* AddNoteButton.swift in Sources */,
 				1F5F4A5D28093FAF00AF3442 /* TimersApp.swift in Sources */,
 				1F377E1F287EB2F000E43598 /* AutoLockSymbol.swift in Sources */,
 				1FCF0C662816F3F600AA1FAA /* EmptyListView.swift in Sources */,

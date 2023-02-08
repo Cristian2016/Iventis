@@ -35,4 +35,6 @@ class Secretary {
     // MARK: - Publishers
     ///bubbleCell rank and frame. Frame will not be set if DetailView shows
     @Published var deleteAction_bRank:Int64?
+    
+    @Published var addNoteButton_bRank:Int?
 }

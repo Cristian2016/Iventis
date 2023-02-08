@@ -28,9 +28,11 @@ struct BubbleList: View {
     @EnvironmentObject private var viewModel:ViewModel
     @EnvironmentObject private var layoutViewModel:LayoutViewModel
     @SectionedFetchRequest var bubbles:SectionedFetchResults<Bool, Bubble>
+    private let secretary = Secretary.shared
         
     // MARK: -
     var body: some View {
+        let _ = print("BubbleList body")
         ZStack {
             if isListEmpty { EmptyListView() }
             else {
@@ -72,8 +74,8 @@ struct BubbleList: View {
     // MARK: - Lego
     private var toolbaItems:some View {
         HStack {
-            if let bubble = viewModel.fiveSecondsBubble { AddPairCellNoteButton(bubble) }
-            AutoLockSymbol(showLabel: viewModel.fiveSeconds_bRank == nil)
+            AddNoteButton()
+//            AutoLockSymbol(showLabel: addNoteButton_bRank == nil)
             PlusSymbol()
         }
     } //13

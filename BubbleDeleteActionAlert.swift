@@ -148,10 +148,10 @@ struct BubbleDeleteActionAlert: View {
     
     //ViewModel 1
     private func removeFiveSecondsBar() {
-        if viewModel.fiveSeconds_bRank == Int(bubble.rank) { viewModel.fiveSeconds_bRank = nil }
+        if secretary.addNoteButton_bRank == Int(bubble.rank) { secretary.addNoteButton_bRank = nil }
     }
     
-    private func removeAddTagButton() { viewModel.removeAddTagButton(bubble) }
+    private func removeAddTagButton() { viewModel.removeAddNoteButton(bubble) }
 }
 
 //struct DeleteActionAlert_Previews: PreviewProvider {
