@@ -16,7 +16,6 @@ struct iPhoneViewHierarchy: View {
         ZStack {
             NavigationStack(path: $viewModel.path) { ViewHierarchy() }
             PaletteView()
-                .transition(.move(edge: .leading))
             DurationPickerView()
         }
         .tint(.label)

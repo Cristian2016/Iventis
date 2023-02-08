@@ -32,12 +32,11 @@ struct PaletteView: View {
                     else { infoSymbol }
                 }
                 .gesture(swipeGesture)
+                .transition(.move(edge: .leading))
             }
         }
         .onReceive(secretary.$showPaletteView) { output in
-            withAnimation {
-                showPaletteView = output
-            }
+            withAnimation { showPaletteView = output }
         }
     }
     
