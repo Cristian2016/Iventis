@@ -3,20 +3,20 @@
 //  Timers (iOS)
 //
 //  Created by Cristian Lapusan on 06.02.2023.
-//
+//  using the new approach, to avoid @Published property View body evaluate over and over again for Observableobject, I found an approach that seems to work just great. I use onReceive to get publisher.output and use it to sort of instantiate MoreOptionsView struct. It's already instantiated technically, but it's invisible in the ViewHierarchy. using received publisher output I set the @State input struct and that triggers a view redraw and it will show up ob the screen
 
 import SwiftUI
 import MyPackage
 
 struct MoreOptionsView: View {
-    struct EmptyStruct {
+    struct Input {
         var bubble:Bubble
         var initialBubbleColor:Color
         var initialStartDelay:Int
         var userEnteredDelay:Int
     }
     
-    @State private var emptyStruct:EmptyStruct?
+    @State private var input:Input?
         
     @EnvironmentObject var viewModel:ViewModel
     private let secretary = Secretary.shared
@@ -25,7 +25,7 @@ struct MoreOptionsView: View {
     
     var body: some View {
         ZStack {
-            if let emptyStruct = emptyStruct {
+            if let emptyStruct = input {
                 GeometryReader { geo in
                     let isPortrait = geo.size.height > geo.size.width
                     let layout = isPortrait ?
@@ -82,13 +82,13 @@ struct MoreOptionsView: View {
                 let color = Color.bubbleColor(forName: bubble.color)
                 let initialStartDelay = Int(sdb.referenceDelay)
                 
-                emptyStruct = EmptyStruct(bubble: bubble,
+                input = Input(bubble: bubble,
                                           initialBubbleColor: color,
                                           initialStartDelay: initialStartDelay,
                                           userEnteredDelay: initialStartDelay)
                 
             } else {
-                emptyStruct = nil
+                input = nil
             }
         }
     }
@@ -96,7 +96,7 @@ struct MoreOptionsView: View {
     // MARK: - Lego
     private var startDelayDisplay:some View {
         HStack(alignment: .firstTextBaseline) {
-            Text(String(emptyStruct!.userEnteredDelay) + "s")
+            Text(String(input!.userEnteredDelay) + "s")
                 .padding([.leading, .trailing])
                 .foregroundColor(.white)
                 .font(metrics.delayFont)
@@ -108,17 +108,17 @@ struct MoreOptionsView: View {
                 .truncationMode(.head)
         }
         .padding([.trailing], 8)
-        .background(emptyStruct!.initialBubbleColor, in: RoundedRectangle(cornerRadius: 8))
+        .background(input!.initialBubbleColor, in: RoundedRectangle(cornerRadius: 8))
     }
     
     private var digits:some View {
         HStack(spacing: metrics.spacing) {
             ForEach(Bubble.delays, id:\.self) { delay in
                 Button {
-                    emptyStruct!.userEnteredDelay += delay
+                    input!.userEnteredDelay += delay
                 } label: {
                     
-                    Circle().fill(emptyStruct!.initialBubbleColor)
+                    Circle().fill(input!.initialBubbleColor)
                         .overlay {
                             Text(String(delay))
                                 .foregroundColor(.white)
@@ -152,9 +152,9 @@ struct MoreOptionsView: View {
     var swipeLeft:some Gesture {
         DragGesture(minimumDistance: 10)
             .onEnded { _ in
-                if emptyStruct!.userEnteredDelay != 0 {
+                if input!.userEnteredDelay != 0 {
                     UserFeedback.doubleHaptic(.heavy)
-                    emptyStruct!.userEnteredDelay = 0
+                    input!.userEnteredDelay = 0
                 }
             }
     }
@@ -167,15 +167,15 @@ struct MoreOptionsView: View {
          if user sets a new start delay
          save delay
          save CoreData context*/
-        if emptyStruct!.initialStartDelay != emptyStruct!.userEnteredDelay {
+        if input!.initialStartDelay != input!.userEnteredDelay {
             UserFeedback.singleHaptic(.medium)
-            viewModel.saveDelay(for: emptyStruct!.bubble, emptyStruct!.userEnteredDelay)
+            viewModel.saveDelay(for: input!.bubble, input!.userEnteredDelay)
         }
         dismiss()
     }
     
     func saveColor(to colorName: String) {
-        viewModel.saveColor(for: emptyStruct!.bubble, to: colorName)
+        viewModel.saveColor(for: input!.bubble, to: colorName)
         //dimiss will be called separately
     }
 }
