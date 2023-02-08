@@ -241,6 +241,7 @@ class ViewModel: ObservableObject {
                     }
                 }
                 
+                //remove only that 
                 if secretary.addNoteButton_bRank == Int(bubble.rank) { secretary.addNoteButton_bRank = nil
                 } //1
                 

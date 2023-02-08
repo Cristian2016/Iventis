@@ -38,10 +38,11 @@ class Secretary {
     
     @Published var addNoteButton_bRank:Int? {didSet {
         if addNoteButton_bRank != nil {
-            print("add timer")
-            self.timer = Timer.scheduledTimer( timeInterval: 5.0, target: self,
+            self.timer = Timer.scheduledTimer( timeInterval: 5.0,
+                                               target: self,
                                                selector: #selector(self.handleFiveSecondsTimer),
-                                               userInfo: nil, repeats: true
+                                               userInfo: nil,
+                                               repeats: true
             )
         }
         else {
@@ -53,9 +54,6 @@ class Secretary {
     private var timer:Timer?
     
     @objc private func handleFiveSecondsTimer() {
-        print(#function)
-        if addNoteButton_bRank != nil {
-            addNoteButton_bRank = nil
-        }
+        if addNoteButton_bRank != nil { addNoteButton_bRank = nil }
     }
 }
