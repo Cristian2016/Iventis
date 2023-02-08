@@ -25,6 +25,7 @@ struct UnitedViewHierarchy: View {
     private let viewContext = PersistenceController.shared.container.viewContext
     
     var body: some View {
+        
         ZStack {
             if UIDevice.isIPad { iPadViewHierarchy() }
             else { iPhoneViewHierarchy() }
@@ -41,9 +42,7 @@ struct UnitedViewHierarchy: View {
             
             if bubbleNotesShowing { BubbleStickyNoteList($viewModel.notesList_bRank) }
             if let pair = viewModel.pairOfNotesList { PairStickyNoteList(pair) }
-            if let sdb = viewModel.theOneAndOnlyEditedSDB, let bubble = sdb.bubble {
-                MoreOptionsView(bubble)
-            }
+            MoreOptionsView()
             if viewModel.showAlert_AlwaysOnDisplay { AlwaysOnDisplayAlertView() }
             if viewModel.confirm_AlwaysOnDisplay { AlwaysOnDisplayConfirmationView() }
             if viewModel.showMoreOptionsInfo { MoreOptionsInfo() }

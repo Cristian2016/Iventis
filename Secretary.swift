@@ -33,6 +33,8 @@ class Secretary {
     }
     
     // MARK: - Publishers
+    @Published var theOneAndOnlyEditedSDB:StartDelayBubble?
+    
     @Published var showFavoritesOnly = false
         
     ///bubbleCell rank and frame. Frame will not be set if DetailView shows

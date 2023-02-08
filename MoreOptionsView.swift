@@ -9,73 +9,86 @@ import SwiftUI
 import MyPackage
 
 struct MoreOptionsView: View {
-    private let bubble:Bubble
-    private let initialBubbleColor:Color
-    @EnvironmentObject var viewModel:ViewModel
-    @State private var userEnteredDelay:Int
-    @State private var chosenBubbleColor:String?
-    private var initialStartDelay = 0
-        
-    init(_ bubble:Bubble) {
-        self.bubble = bubble
-        self.initialBubbleColor = Color.bubbleColor(forName: bubble.color)
-        
-        let refDelay = bubble.sdb?.referenceDelay
-        self.userEnteredDelay = Int(refDelay!)
-        self.initialStartDelay = Int(refDelay!)
-        self.metrics = Metrics()
+    struct EmptyStruct {
+        var bubble:Bubble
+        var initialBubbleColor:Color
+        var initialStartDelay:Int
+        var userEnteredDelay:Int
     }
     
-    var metrics:Metrics
+    @State private var emptyStruct:EmptyStruct?
+        
+    @EnvironmentObject var viewModel:ViewModel
+    private let secretary = Secretary.shared
+            
+    let metrics = Metrics()
     
     var body: some View {
-        GeometryReader { geo in
-            let isPortrait = geo.size.height > geo.size.width
-            let layout = isPortrait ?
-            AnyLayout(VStackLayout()) : .init(HStackLayout(alignment: .top))
-            
-            ZStack {
-                BlurryBackground(material: .ultraThinMaterial)
-                    .onTapGesture { saveDelay() }
-                    .highPriorityGesture(swipeLeft)
-                    .ignoresSafeArea()
-                
-                layout {
-                    if bubble.state != .running {
-                        VStack(alignment: .leading, spacing: 14) {
-                            startDelayDisplay
-                            digits
-                            
-                            if !isPortrait {
-                                if userEnteredDelay != 0 {
-                                    Text("**Save** \(Image(systemName: "hand.tap")) Tap outside frame")
-                                        .font(.footnote)
-                                        .foregroundColor(.gray)
-                                    
-                                    Text("**Remove** \(Image(systemName: "arrow.left.circle.fill")) Swipe outside frame")
-                                        .font(.footnote)
-                                        .foregroundColor(.gray)
-                                } else {
-                                    Text("**Dismiss** \(Image(systemName: "hand.tap")) Tap outside frame")
-                                        .font(.footnote)
-                                        .foregroundColor(.gray)
-                                }
-                            }
-                        }
-                        
-                        Divider()
-                    }
+        ZStack {
+            if let emptyStruct = emptyStruct {
+                GeometryReader { geo in
+                    let isPortrait = geo.size.height > geo.size.width
+                    let layout = isPortrait ?
+                    AnyLayout(VStackLayout()) : .init(HStackLayout(alignment: .top))
                     
-                    Color.clear
-                        .overlay { ColorsGrid(bubble, spacing: 0) { saveDelay() }}
+                    ZStack {
+                        BlurryBackground(material: .ultraThinMaterial)
+                            .onTapGesture { saveDelay() }
+                            .highPriorityGesture(swipeLeft)
+                            .ignoresSafeArea()
+                        
+                        layout {
+                            if emptyStruct.bubble.state != .running {
+                                VStack(alignment: .leading, spacing: 14) {
+                                    startDelayDisplay
+                                    digits
+                                    
+                                    if !isPortrait {
+                                        if emptyStruct.userEnteredDelay != 0 {
+                                            Text("**Save** \(Image(systemName: "hand.tap")) Tap outside frame")
+                                                .font(.footnote)
+                                                .foregroundColor(.gray)
+                                            
+                                            Text("**Remove** \(Image(systemName: "arrow.left.circle.fill")) Swipe outside frame")
+                                                .font(.footnote)
+                                                .foregroundColor(.gray)
+                                        } else {
+                                            Text("**Dismiss** \(Image(systemName: "hand.tap")) Tap outside frame")
+                                                .font(.footnote)
+                                                .foregroundColor(.gray)
+                                        }
+                                    }
+                                }
+                                
+                                Divider()
+                            }
+                            
+                            Color.clear
+                                .overlay { ColorsGrid(emptyStruct.bubble, spacing: 0) { saveDelay() }}
+                        }
+                        .padding(10)
+                        .background {
+                            Color.white
+                                .cornerRadius(10)
+                                .standardShadow()
+                        }
+                        .padding(isPortrait ? 28 : 20)
+                    }
                 }
-                .padding(10)
-                .background {
-                    Color.white
-                        .cornerRadius(10)
-                        .standardShadow()
-                }
-                .padding(isPortrait ? 28 : 20)
+            }
+        }
+        .onReceive(secretary.$theOneAndOnlyEditedSDB) {
+            if let sdb = $0, let bubble = sdb.bubble {
+                let color = Color.bubbleColor(forName: bubble.color)
+                let initialStartDelay = Int(sdb.referenceDelay)
+                
+                emptyStruct = EmptyStruct(bubble: bubble,
+                                          initialBubbleColor: color,
+                                          initialStartDelay: initialStartDelay,
+                                          userEnteredDelay: initialStartDelay)
+                
+            } else {
+                emptyStruct = nil
             }
         }
     }
@@ -83,7 +96,7 @@ struct MoreOptionsView: View {
     // MARK: - Lego
     private var startDelayDisplay:some View {
         HStack(alignment: .firstTextBaseline) {
-            Text(String(userEnteredDelay) + "s")
+            Text(String(emptyStruct!.userEnteredDelay) + "s")
                 .padding([.leading, .trailing])
                 .foregroundColor(.white)
                 .font(metrics.delayFont)
@@ -95,17 +108,17 @@ struct MoreOptionsView: View {
                 .truncationMode(.head)
         }
         .padding([.trailing], 8)
-        .background(initialBubbleColor, in: RoundedRectangle(cornerRadius: 8))
+        .background(emptyStruct!.initialBubbleColor, in: RoundedRectangle(cornerRadius: 8))
     }
     
     private var digits:some View {
         HStack(spacing: metrics.spacing) {
             ForEach(Bubble.delays, id:\.self) { delay in
                 Button {
-                    userEnteredDelay += delay
+                    emptyStruct!.userEnteredDelay += delay
                 } label: {
                     
-                    Circle().fill(initialBubbleColor)
+                    Circle().fill(emptyStruct!.initialBubbleColor)
                         .overlay {
                             Text(String(delay))
                                 .foregroundColor(.white)
@@ -139,45 +152,45 @@ struct MoreOptionsView: View {
     var swipeLeft:some Gesture {
         DragGesture(minimumDistance: 10)
             .onEnded { _ in
-                if userEnteredDelay != 0 {
+                if emptyStruct!.userEnteredDelay != 0 {
                     UserFeedback.doubleHaptic(.heavy)
-                    userEnteredDelay = 0
+                    emptyStruct!.userEnteredDelay = 0
                 }
             }
     }
     
     // MARK: -
-    func dismiss() { viewModel.theOneAndOnlyEditedSDB = nil }
+    func dismiss() { secretary.theOneAndOnlyEditedSDB = nil }
     
     func saveDelay() {
         /*
          if user sets a new start delay
          save delay
          save CoreData context*/
-        if initialStartDelay != userEnteredDelay {
+        if emptyStruct!.initialStartDelay != emptyStruct!.userEnteredDelay {
             UserFeedback.singleHaptic(.medium)
-            viewModel.saveDelay(for: bubble, userEnteredDelay)
+            viewModel.saveDelay(for: emptyStruct!.bubble, emptyStruct!.userEnteredDelay)
         }
         dismiss()
     }
     
     func saveColor(to colorName: String) {
-        viewModel.saveColor(for: bubble, to: colorName)
+        viewModel.saveColor(for: emptyStruct!.bubble, to: colorName)
         //dimiss will be called separately
     }
 }
 
-struct MoreOptionsView1_Previews: PreviewProvider {
-    static let bubble:Bubble = {
-        let bubble = Bubble(context: PersistenceController.preview.viewContext)
-        let sdb = StartDelayBubble(context: PersistenceController.preview.viewContext)
-        sdb.referenceDelay = 0
-        
-        bubble.sdb = sdb
-        bubble.color = "sourCherry"
-        return bubble
-    }()
-    static var previews: some View {
-        MoreOptionsView(bubble)
-    }
-}
+//struct MoreOptionsView1_Previews: PreviewProvider {
+//    static let bubble:Bubble = {
+//        let bubble = Bubble(context: PersistenceController.preview.viewContext)
+//        let sdb = StartDelayBubble(context: PersistenceController.preview.viewContext)
+//        sdb.referenceDelay = 0
+//
+//        bubble.sdb = sdb
+//        bubble.color = "sourCherry"
+//        return bubble
+//    }()
+//    static var previews: some View {
+//        MoreOptionsView(emptyStruct.bubble)
+//    }
+//}

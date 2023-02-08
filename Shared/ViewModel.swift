@@ -21,7 +21,7 @@ class ViewModel: ObservableObject {
     }
     
     ///MoreOptionsView
-    @Published var theOneAndOnlyEditedSDB:StartDelayBubble? //StartDelayBubble
+//    @Published var theOneAndOnlyEditedSDB:StartDelayBubble? //StartDelayBubble
     
     //Start Delay
     @Published var confirm_ColorChange = false
@@ -257,7 +257,7 @@ class ViewModel: ObservableObject {
     func showMoreOptions(for bubble:Bubble) {
         //set Published property triggers UI update
         //MoreOptionsView displayed
-        theOneAndOnlyEditedSDB = bubble.sdb
+        secretary.theOneAndOnlyEditedSDB = bubble.sdb
     }
     
     //SDBubble
@@ -464,16 +464,16 @@ class ViewModel: ObservableObject {
         confirm_ColorChange = true //show confirmation
         delayExecution(.confirmation) {//after 0.7 seconds
             self.confirm_ColorChange = false //hide confirmation
-            self.theOneAndOnlyEditedSDB = nil //dismiss
+            self.secretary.theOneAndOnlyEditedSDB = nil //dismiss
         }
     }
     
     // start delay
     func saveDelay(for bubble:Bubble, _ userEnteredDelay:Int) {
-        theOneAndOnlyEditedSDB?.referenceDelay = Int64(userEnteredDelay)
-        theOneAndOnlyEditedSDB?.currentDelay = Float(userEnteredDelay)
+        secretary.theOneAndOnlyEditedSDB?.referenceDelay = Int64(userEnteredDelay)
+        secretary.theOneAndOnlyEditedSDB?.currentDelay = Float(userEnteredDelay)
         PersistenceController.shared.save()
-        theOneAndOnlyEditedSDB = nil
+        secretary.theOneAndOnlyEditedSDB = nil
     }
     
     ///referenceDelay = 0, currentDelay = 0
@@ -509,7 +509,7 @@ class ViewModel: ObservableObject {
                 //remove SDBCell from BubbleCell
                 self?.toggleBubbleStart(bubble, delta: delta)
                 
-                self?.theOneAndOnlyEditedSDB = nil //dismiss MoreOptionsView
+                self?.secretary.theOneAndOnlyEditedSDB = nil //dismiss MoreOptionsView
                 
                 PersistenceController.shared.save()
             }
