@@ -20,8 +20,6 @@ class ViewModel: ObservableObject {
         NotificationCenter.default.removeObserver(self) //1
     }
     
-    @Published var durationPicker_OfColor:Color?
-    
     @Published var showFavoritesOnly = false
     
     ///MoreOptionsView
@@ -241,7 +239,7 @@ class ViewModel: ObservableObject {
                     }
                 }
                 
-                //remove only that 
+                //remove only that
                 if secretary.addNoteButton_bRank == Int(bubble.rank) { secretary.addNoteButton_bRank = nil
                 } //1
                 

@@ -14,6 +14,7 @@ struct PaletteView: View {
     @State private var tappedCircle:String?
     @State private var longPressedCircle:String?
     @AppStorage("showPaletteHint", store: .shared) var showPaletteHint = true
+    private let secretary = Secretary.shared
     
     private let colums = Array(repeating: GridItem(), count: 3)
     
@@ -98,7 +99,7 @@ struct PaletteView: View {
         
         delayExecution(.now() + 0.2) {
             withAnimation {
-                viewModel.durationPicker_OfColor = tricolor.sec
+                secretary.durationPicker_OfColor = tricolor.sec
             }
             longPressedCircle = nil
         }

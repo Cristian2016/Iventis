@@ -9,6 +9,9 @@ import SwiftUI
 import MyPackage
 
 struct DurationPickerView: View {
+    private let secretary = Secretary.shared
+    @State private var color:Color?
+    
     @EnvironmentObject private var viewModel:ViewModel
     
     @State private var hr:Int = 0
@@ -18,9 +21,7 @@ struct DurationPickerView: View {
     private let hrValues:Range<Int> = 0..<49
     private let minValues:Range<Int> = 0..<60
     private let secValues:Range<Int> = 0..<60
-        
-    let color:Color
-    
+            
     private let columns = Array(repeating: GridItem(), count: 3)
     private let digits = ["7", "8", "9", "4", "5", "6", "1", "2", "3", "00", "0", "✕"]
     
@@ -33,53 +34,58 @@ struct DurationPickerView: View {
     
     var body: some View {
         ZStack {
-            HStack {
-                Color
-                    .background.standardShadow()
-                Rectangle().frame(width: 60)
-                    .gesture(DragGesture(minimumDistance: 0, coordinateSpace: .global)
-                        .onEnded { _ in
-                            withAnimation {
-                                viewModel.durationPicker_OfColor = nil
-                            }
-                        }
-                    )
-            }
-            
-            
-            VStack {
-                let white = Color.white
-                
-                Rectangle()
-                    .fill(.background)
-                    .overlay {
-                        HStack {
-                            DualTextView(content: .init(text1: "\(hr)", text2: "h"), metrics: .durationPicker)
-                            DualTextView(content: .init(text1: "\(min)", text2: "m"), metrics: .durationPicker)
-                            DualTextView(content: .init(text1: "\(sec)", text2: "s"), metrics: .durationPicker)
-                        }
-                        //                            .fontDesign(.rounded)
-                        .allowsTightening(true)
+            if let color = color {
+                ZStack {
+                    HStack {
+                        Color
+                            .background.standardShadow()
+                        Rectangle().frame(width: 60)
+                            .gesture(DragGesture(minimumDistance: 0, coordinateSpace: .global)
+                                .onEnded { _ in
+                                    withAnimation {
+                                        secretary.durationPicker_OfColor = nil
+                                    }
+                                }
+                            )
                     }
-                
-                LazyVGrid(columns: columns) {
-                    ForEach(digits, id:\.self) { symbol in
-                        Circle().fill(symbol == "✕" ? .red : color)
+                    
+                    
+                    VStack {
+                        let white = Color.white
+                        
+                        Rectangle()
+                            .fill(.background)
                             .overlay {
-                                Text(symbol)
-                                    .font(metrics.digitFont)
-                                    .foregroundColor(white)
+                                HStack {
+                                    DualTextView(content: .init(text1: "\(hr)", text2: "h"), metrics: .durationPicker)
+                                    DualTextView(content: .init(text1: "\(min)", text2: "m"), metrics: .durationPicker)
+                                    DualTextView(content: .init(text1: "\(sec)", text2: "s"), metrics: .durationPicker)
+                                }
+                                //                            .fontDesign(.rounded)
+                                .allowsTightening(true)
                             }
-                            .onTapGesture {
-                                print("Digit tapped")
+                        
+                        LazyVGrid(columns: columns) {
+                            ForEach(digits, id:\.self) { symbol in
+                                Circle().fill(symbol == "✕" ? .red : color)
+                                    .overlay {
+                                        Text(symbol)
+                                            .font(metrics.digitFont)
+                                            .foregroundColor(white)
+                                    }
+                                    .onTapGesture {
+                                        print("Digit tapped")
+                                    }
                             }
+                        }
                     }
+                    .padding(3)
                 }
+                .ignoresSafeArea()
+                .gesture(swipeGesture)
             }
-            .padding(3)
         }
-        .ignoresSafeArea()
-        .gesture(swipeGesture)
+        .onReceive(secretary.$durationPicker_OfColor) { color = $0 }
     }
     
     // MARK: - Lego
@@ -118,6 +124,6 @@ struct DurationPickerView: View {
 
 struct DurationPickerView_Previews: PreviewProvider {
     static var previews: some View {
-        DurationPickerView(color: .yellow)
+        DurationPickerView()
     }
 }

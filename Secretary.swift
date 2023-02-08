@@ -5,7 +5,7 @@
 //  Created by Cristian Lapusan on 01.02.2023.
 // Secretary knows shit on anybody! For example it knows how many pinned bubbles exist at any given time. It collects varous data from various parts of the App
 
-import Foundation
+import SwiftUI
 
 class Secretary {
     private init() { }
@@ -37,6 +37,8 @@ class Secretary {
     @Published var deleteAction_bRank:Int64?
     
     @Published var addNoteButton_bRank:Int? {didSet { handleAddNoteButton_bRank() }}
+    
+    @Published var durationPicker_OfColor:Color?
     
     private var timer:Timer?
     
