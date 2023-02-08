@@ -15,20 +15,28 @@ struct PaletteView: View {
     @State private var longPressedCircle:String?
     @AppStorage("showPaletteHint", store: .shared) var showPaletteHint = true
     private let secretary = Secretary.shared
+    @State private var showPaletteView = false
     
     private let colums = Array(repeating: GridItem(), count: 3)
     
     var body: some View {
         ZStack {
-            circles
-            if showPaletteHint {
-                ThinMaterialLabel(title: "Create Bubbles") { hintLabelContent }
-            action: { withAnimation { showPaletteHint = false } }
+            if showPaletteView {
+                ZStack {
+                    circles
+                    if showPaletteHint {
+                        ThinMaterialLabel(title: "Create Bubbles") { hintLabelContent }
+                    action: { withAnimation { showPaletteHint = false } }
 
+                    }
+                    else { infoSymbol }
+                }
+                .gesture(swipeGesture)
             }
-            else { infoSymbol }
         }
-        .gesture(swipeGesture)
+        .onReceive(secretary.$showPaletteView) {
+            showPaletteView = $0
+        }
     }
     
     // MARK: - Legos
@@ -89,7 +97,7 @@ struct PaletteView: View {
         
         viewModel.createBubble(.stopwatch, tricolor.description)
         withAnimation(.easeInOut(duration: 0.1)) { tappedCircle = tricolor.description }
-        viewModel.togglePaletteView()
+        secretary.togglePaletteView()
     }
     
     fileprivate func showDurationPicker(_ tricolor:Color.Tricolor) {
@@ -109,7 +117,7 @@ struct PaletteView: View {
     private var swipeGesture:some Gesture {
         DragGesture(minimumDistance: 1)
             .onEnded { if $0.translation.width < 0 {
-                viewModel.togglePaletteView()
+                secretary.togglePaletteView()
             }}
     }
 }

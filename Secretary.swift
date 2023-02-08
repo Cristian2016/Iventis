@@ -40,6 +40,12 @@ class Secretary {
     
     @Published var durationPicker_OfColor:Color?
     
+    @Published var showPaletteView = false
+    func togglePaletteView() {
+        //explicit animation
+        withAnimation { showPaletteView.toggle() }
+    }
+    
     private var timer:Timer?
     
     private func handleAddNoteButton_bRank() {

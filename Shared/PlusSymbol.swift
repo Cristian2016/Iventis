@@ -11,13 +11,14 @@ import SwiftUI
 struct PlusSymbol: View {
     @EnvironmentObject var viewModel:ViewModel
     private let metrics = Metrics()
+    private let secretary = Secretary.shared
     
     var body: some View {
         button
     }
     
     private var button: some View {
-        Button { viewModel.togglePaletteView() }
+        Button { secretary.togglePaletteView() }
     label: { Label("Plus", systemImage: "plus") }
             .font(metrics.font)
             .tint(metrics.symbolColor)

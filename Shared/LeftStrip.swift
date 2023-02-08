@@ -10,6 +10,7 @@ import SwiftUI
 ///user swipes right from screen edge and Palette is presented
 struct LeftStrip: View {
     @EnvironmentObject private var viewModel:ViewModel
+    private let secretary = Secretary.shared
     let isListEmpty:Bool
     
     // MARK: -
@@ -22,7 +23,7 @@ struct LeftStrip: View {
         .ignoresSafeArea()
         .gesture(
             DragGesture(minimumDistance: 1)
-                .onEnded { _ in viewModel.togglePaletteView() }
+                .onEnded { _ in secretary.togglePaletteView() }
         )
     }
     

@@ -46,12 +46,6 @@ class ViewModel: ObservableObject {
     
     @Published var notesList_bRank:Int? = nil //bubble rank
     
-    @Published var showPaletteView = false
-    func togglePaletteView() {
-        //explicit animation
-        withAnimation { showPaletteView.toggle() }
-    }
-    
     @Published var sessionToDelete:(Session, String)?
     
     @Published var rankOfSelectedBubble:Int?
