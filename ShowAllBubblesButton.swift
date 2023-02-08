@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-///User pulls down bubbleList and RefresherView shows up
+///User pulls down on bubbleList and RefresherView shows up
 struct RefresherView: View {
     private let secretary = Secretary.shared
     @State private var showFavoritesOnly = false
@@ -39,7 +39,7 @@ struct ShowAllBubblesButton: View {
     var body: some View {
         ZStack {
             if let show = showFavoritesOnly, show {
-                Text("\(Image(systemName: "eye")) Show \(count)")
+                Text("\(Image(systemName: "eye")) Show All")
                     .listRowSeparator(.hidden)
                     .font(.footnote)
                     .foregroundColor(.secondary)
