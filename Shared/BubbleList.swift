@@ -44,7 +44,7 @@ struct BubbleList: View {
                         Section {
                             ForEach (section) { bubble in
                                 ZStack { //1
-                                    NavigationLink(value: bubble) { /* leave it empty */ }
+                                    NavigationLink(value: bubble) { /* empty view */ }.opacity(0)
                                     BubbleCell(bubble, metrics)
                                 }
                             }
