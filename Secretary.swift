@@ -36,5 +36,19 @@ class Secretary {
     ///bubbleCell rank and frame. Frame will not be set if DetailView shows
     @Published var deleteAction_bRank:Int64?
     
-    @Published var addNoteButton_bRank:Int?
+    @Published var addNoteButton_bRank:Int? {willSet{
+        if newValue != nil {
+            self.timer = Timer.scheduledTimer( timeInterval: 5.0, target: self,
+                                               selector: #selector(self.handleFiveSecondsTimer),
+                                               userInfo: nil, repeats: true
+            )
+        }
+        else { self.timer?.invalidate(); self.timer = nil }
+    }}
+    
+    private var timer:Timer?
+    
+    @objc private func handleFiveSecondsTimer() {
+        if addNoteButton_bRank != nil { addNoteButton_bRank = nil  }
+    }
 }

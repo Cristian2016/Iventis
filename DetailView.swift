@@ -24,6 +24,8 @@ struct DetailView: View {
     let topDetailHeight = CGFloat(140)
     
     init(_ showDetail_bRank:Int?, _ bubble:Bubble, _ metrics:BubbleCell.Metrics) {
+        let _ = print("DetailView body")
+        
         let predicate:NSPredicate?
         if let rank = showDetail_bRank { predicate = NSPredicate(format: "bubble.rank == %i", rank)
         } else { predicate = nil }

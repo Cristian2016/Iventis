@@ -15,17 +15,9 @@ import MyPackage
 
 class ViewModel: ObservableObject {
     private let secretary = Secretary.shared
-    
-    private var cancellable:AnyCancellable?
-        
+            
     deinit {
         NotificationCenter.default.removeObserver(self) //1
-    }
-    
-    private var timer:Timer?
-    
-    @objc private func handleFiveSecondsTimer() {
-        if secretary.addNoteButton_bRank != nil { secretary.addNoteButton_bRank = nil  }
     }
     
     @Published var durationPicker_OfColor:Color?
@@ -81,16 +73,6 @@ class ViewModel: ObservableObject {
         let bubbles = try? PersistenceController.shared.viewContext.fetch(request)
         updateCurrentClock(of: bubbles)
         observe_delayReachedZero_Notification()
-        
-        self.cancellable = Secretary.shared.$addNoteButton_bRank.sink {
-            if $0 != nil {
-                self.timer = Timer.scheduledTimer( timeInterval: 5.0, target: self,
-                                                   selector: #selector(self.handleFiveSecondsTimer),
-                                                   userInfo: nil, repeats: true
-                )
-            }
-            else { self.timer?.invalidate(); self.timer = nil }
-        }
     }
         
     // MARK: -
@@ -241,8 +223,8 @@ class ViewModel: ObservableObject {
                 if isDetailViewShowing { bubble.syncSmallBubbleCell = true }
                 
                 //1 both
-//                fiveSeconds_bRank = nil
-//                fiveSeconds_bRank = Int(bubble.rank)
+                secretary.addNoteButton_bRank = nil //clear first
+                secretary.addNoteButton_bRank = Int(bubble.rank)
                 
             case .running: /* changes to .paused */
                 let currentPair = bubble.lastPair
