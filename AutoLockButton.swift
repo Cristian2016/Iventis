@@ -1,22 +1,28 @@
 import SwiftUI
 import MyPackage
 
-struct AutoLockSymbol: View {
-    var showLabel:Bool =  false
+struct AutoLockButton: View {
     @EnvironmentObject var viewModel:ViewModel
     let metrics = Metrics()
+    private let secretary = Secretary.shared
+    @State private var addNoteButton_bRank:Int?
     
     var body: some View {
         HStack {
-            Button {
-                viewModel.showAlert_AlwaysOnDisplay.toggle()
-                UIApplication.shared.isIdleTimerDisabled.toggle()
-                
-                viewModel.confirm_AlwaysOnDisplay = true
-                delayExecution(.now() + 2) { viewModel.confirm_AlwaysOnDisplay = false }
+            if let _ = addNoteButton_bRank {
+                EmptyView()
+            } else {
+                Button {
+                    viewModel.showAlert_AlwaysOnDisplay.toggle()
+                    UIApplication.shared.isIdleTimerDisabled.toggle()
+                    
+                    viewModel.confirm_AlwaysOnDisplay = true
+                    delayExecution(.now() + 2) { viewModel.confirm_AlwaysOnDisplay = false }
+                }
+            label: { label }
             }
-        label: { label }
         }
+        .onReceive(secretary.$addNoteButton_bRank) { addNoteButton_bRank = $0 }
     }
     
     // MARK: - Lego
@@ -24,7 +30,7 @@ struct AutoLockSymbol: View {
     private var label:some View {
         if isDisplayAlwaysON {
             HStack {
-                if showLabel { FusedLabel(content: .autoLockOff) }
+                if addNoteButton_bRank == nil { FusedLabel(content: .autoLockOff) }
                 exitSymbol
             }
         }
@@ -59,6 +65,6 @@ struct AutoLockSymbol: View {
 
 struct DisplayAlwaysOnSymbol_Previews: PreviewProvider {
     static var previews: some View {
-        AutoLockSymbol()
+        AutoLockButton()
     }
 }

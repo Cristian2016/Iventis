@@ -75,7 +75,7 @@ struct BubbleList: View {
     private var toolbaItems:some View {
         HStack {
             AddNoteButton()
-//            AutoLockSymbol(showLabel: addNoteButton_bRank == nil)
+            AutoLockButton()
             PlusSymbol()
         }
     } //13

@@ -64,10 +64,6 @@ struct DetailView: View {
             .toolbar {
                 ToolbarItemGroup {
                     if isAddTagButtonVisible { AddNoteButton() }
-//                    else {
-//                        SmallTextHint.tapToScrollUp
-//                            .onTapGesture { scrollToTop = true } //2
-//                    }
                 }
             }
         }
