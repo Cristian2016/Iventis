@@ -37,18 +37,25 @@ class Secretary {
     @Published var deleteAction_bRank:Int64?
     
     @Published var addNoteButton_bRank:Int? {didSet {
-        if oldValue != nil {
+        if addNoteButton_bRank != nil {
+            print("add timer")
             self.timer = Timer.scheduledTimer( timeInterval: 5.0, target: self,
                                                selector: #selector(self.handleFiveSecondsTimer),
                                                userInfo: nil, repeats: true
             )
         }
-        else { self.timer?.invalidate(); self.timer = nil }
+        else {
+            self.timer?.invalidate()
+            self.timer = nil
+        }
     }}
     
     private var timer:Timer?
     
     @objc private func handleFiveSecondsTimer() {
-        if addNoteButton_bRank != nil { addNoteButton_bRank = nil  }
+        print(#function)
+        if addNoteButton_bRank != nil {
+            addNoteButton_bRank = nil
+        }
     }
 }

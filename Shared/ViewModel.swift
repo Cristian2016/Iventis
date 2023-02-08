@@ -194,10 +194,6 @@ class ViewModel: ObservableObject {
         
         let startDelayCompensation = delta ?? 0
         
-        if bubble.state == .brandNew || bubble.state == .paused {
-            secretary.addNoteButton_bRank = Int(bubble.rank)
-        }
-        
         switch bubble.state {
             case .brandNew: /* changes to .running */
                 //create first session and add first pair to the session

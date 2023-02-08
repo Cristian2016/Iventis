@@ -19,6 +19,7 @@ struct AddNoteButton: View {
             if let rank = addNoteButton_bRank {
                 let bubble = viewModel.bubble(for: Int(rank))!
                 let color = Color.bubbleColor(forName: bubble.color)
+                
                 Button {
                     viewModel.pairOfNotesList = bubble.lastPair
                     UserFeedback.singleHaptic(.light)
