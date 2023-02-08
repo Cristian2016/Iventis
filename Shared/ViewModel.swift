@@ -20,8 +20,6 @@ class ViewModel: ObservableObject {
         NotificationCenter.default.removeObserver(self) //1
     }
     
-    @Published var showFavoritesOnly = false
-    
     ///MoreOptionsView
     @Published var theOneAndOnlyEditedSDB:StartDelayBubble? //StartDelayBubble
     
@@ -121,8 +119,8 @@ class ViewModel: ObservableObject {
     
     func delete(_ bubble:Bubble) {
         //if unpinned are hidden & bubble to delete is pinned and pinned section has only one item, unhide unpinned
-        if showFavoritesOnly, Secretary.shared.pinnedBubblesCount == 1 {
-            showFavoritesOnly = false
+        if secretary.showFavoritesOnly, Secretary.shared.pinnedBubblesCount == 1 {
+            secretary.showFavoritesOnly = false
         }
         
         if !path.isEmpty { path = [] }
@@ -173,7 +171,7 @@ class ViewModel: ObservableObject {
     
     func togglePin(_ bubble:Bubble) {
         if bubble.isPinned, Secretary.shared.pinnedBubblesCount == 1 {
-            showFavoritesOnly = false
+            secretary.showFavoritesOnly = false
         }
         bubble.isPinned.toggle()
         PersistenceController.shared.save()

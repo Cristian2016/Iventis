@@ -25,7 +25,11 @@ struct TimersApp: App {
 }
 
 struct ViewHierarchy:View {
-    @EnvironmentObject var viewModel:ViewModel
+    private let secretary = Secretary.shared
+    @State private var showFavoritesOnly = false
     
-    var body: some View { BubbleList(viewModel.showFavoritesOnly) }
+    var body: some View {
+        BubbleList(showFavoritesOnly)
+            .onReceive(secretary.$showFavoritesOnly) { showFavoritesOnly = $0 }
+    }
 }

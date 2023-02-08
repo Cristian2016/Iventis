@@ -51,8 +51,12 @@ struct BubbleList: View {
                         }
                         .listRowSeparator(.hidden)
                         .listSectionSeparator(value ? .visible : .hidden, edges: [.bottom])
+                        
+                        if secretary.showFavoritesOnly {
+                            ShowAllBubblesButton().listRowSeparator(.hidden)
+                        }
+                        
                         if !section.id { bottomOverscoll }
-                        if viewModel.showFavoritesOnly { showAllButton } //11
                     }
                     .scrollIndicators(.hidden)
                     .listStyle(.plain)
@@ -64,9 +68,9 @@ struct BubbleList: View {
                     }}
                     .padding(BubbleCell.padding) //9
                     .navigationDestination(for: Bubble.self) { detailView($0) }
-                    .background { refresherView } //11
+                    .background { RefresherView() } //11
                     .refreshable {
-                        if Secretary.shared.pinnedBubblesCount != 0 { viewModel.showFavoritesOnly.toggle() }
+                        if Secretary.shared.pinnedBubblesCount != 0 { secretary.showFavoritesOnly.toggle() }
                     } //11
                 }
             }
@@ -76,32 +80,6 @@ struct BubbleList: View {
     }
     
     // MARK: - Lego
-        
-    private var showAllButton:some View {
-        let count = Secretary.shared.unpinnedBubblesCount
-        return Text("\(Image(systemName: "eye")) Show \(count)")
-            .listRowSeparator(.hidden)
-            .font(.footnote)
-            .foregroundColor(.secondary)
-            .onTapGesture { viewModel.showFavoritesOnly = false }
-            .padding([.leading], 4)
-    } //11
-    
-    private var refresherView:some View {
-        VStack(spacing: 4) {
-            let condition = viewModel.showFavoritesOnly
-            let title = condition ?  "Show All" : "Show Pinned Only"
-            let symbol = condition ? "eye" : "pin"
-            let color = condition ? .secondary : Color.orange
-            
-            BorderlessLabel(title: title, symbol: symbol,color: color)
-            Image(systemName: "chevron.compact.down")
-                .foregroundColor(color)
-            Spacer()
-        }
-        .padding([.top], 4)
-    } //11
-    
     private func detailView(_ bubble:Bubble) -> some View {
         GeometryReader {
             let metrics = BubbleCell.Metrics($0.size.width) //10
@@ -109,8 +87,13 @@ struct BubbleList: View {
         }
     }
     
-    // MARK: -
+    private var bottomOverscoll: some View {
+        Spacer()
+            .frame(height: 200)
+            .listRowSeparator(.hidden)
+    }
     
+    // MARK: -
     init(_ showFavoritesOnly: Bool) {
         print(#function, " bList")
         var predicate:NSPredicate?
@@ -135,12 +118,6 @@ struct BubbleList: View {
         formatter.timeStyle = .short
         return formatter
     }()
-    
-    private var bottomOverscoll: some View {
-        Spacer()
-            .frame(height: 200)
-            .listRowSeparator(.hidden)
-    }
     
     @ViewBuilder
     private func headerTitle(for sectionID:String) -> some View {
