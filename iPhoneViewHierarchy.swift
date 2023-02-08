@@ -20,10 +20,6 @@ struct iPhoneViewHierarchy: View {
         }
         .tint(.label)
     }
-    
-    init() {
-        print(#function, "iPhoneViewHierarchy")
-    }
 }
 
 struct iPhoneViewHierarchy_Previews: PreviewProvider {
