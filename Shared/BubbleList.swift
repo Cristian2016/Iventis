@@ -57,7 +57,11 @@ struct BubbleList: View {
                     .scrollIndicators(.hidden)
                     .listStyle(.plain)
                     .toolbarBackground(.ultraThinMaterial)
-                    .toolbar { ToolbarItemGroup { toolbaItems }}
+                    .toolbar { ToolbarItemGroup {
+                        AddNoteButton()
+                        AutoLockButton()
+                        PlusSymbol()
+                    }}
                     .padding(BubbleCell.padding) //9
                     .navigationDestination(for: Bubble.self) { detailView($0) }
                     .background { refresherView } //11
@@ -72,13 +76,6 @@ struct BubbleList: View {
     }
     
     // MARK: - Lego
-    private var toolbaItems:some View {
-        HStack {
-            AddNoteButton()
-            AutoLockButton()
-            PlusSymbol()
-        }
-    } //13
         
     private var showAllButton:some View {
         let count = Secretary.shared.unpinnedBubblesCount
