@@ -8,7 +8,7 @@ struct AutoLockButton: View {
     @State private var addNoteButton_bRank:Int?
     
     var body: some View {
-        HStack {
+        ZStack {
             if let _ = addNoteButton_bRank {
                 EmptyView()
             } else {
