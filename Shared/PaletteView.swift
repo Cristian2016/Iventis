@@ -34,8 +34,10 @@ struct PaletteView: View {
                 .gesture(swipeGesture)
             }
         }
-        .onReceive(secretary.$showPaletteView) {
-            showPaletteView = $0
+        .onReceive(secretary.$showPaletteView) { output in
+            withAnimation {
+                showPaletteView = output
+            }
         }
     }
     
