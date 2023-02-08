@@ -40,7 +40,7 @@ class Secretary {
         if addNoteButton_bRank != nil {
             self.timer = Timer.scheduledTimer( timeInterval: 5.0,
                                                target: self,
-                                               selector: #selector(self.handleFiveSecondsTimer),
+                                               selector: #selector(handleFiveSecondsTimer),
                                                userInfo: nil,
                                                repeats: true
             )
