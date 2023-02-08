@@ -100,6 +100,7 @@ struct PaletteView: View {
         viewModel.createBubble(.stopwatch, tricolor.description)
         withAnimation(.easeInOut(duration: 0.1)) { tappedCircle = tricolor.description }
         secretary.togglePaletteView()
+        tappedCircle = nil
     }
     
     fileprivate func showDurationPicker(_ tricolor:Color.Tricolor) {
