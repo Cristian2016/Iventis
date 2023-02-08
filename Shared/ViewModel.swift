@@ -20,12 +20,6 @@ class ViewModel: ObservableObject {
         NotificationCenter.default.removeObserver(self) //1
     }
     
-    ///MoreOptionsView
-//    @Published var theOneAndOnlyEditedSDB:StartDelayBubble? //StartDelayBubble
-    
-    //Start Delay
-    @Published var confirm_ColorChange = false
-    
     ///calendarEvent created for bubble.rank. if rank != nil, confirmation will be displayed in the appropriate bubbleCell
     @Published var confirm_CalEventCreated: Int64? = nil
     @Published var confirm_CalEventRemoved: Int64? = nil
@@ -48,7 +42,7 @@ class ViewModel: ObservableObject {
     
     @Published var rankOfSelectedBubble:Int?
     @Published var path = [Bubble]()
-    @Published var idOfSelectedBubble:Bubble.ID?
+    @Published var selectedBubbleID:Bubble.ID?
     
     @Published var showMoreOptionsInfo = false
     @Published var showStickyNoteListInfo = false
@@ -461,9 +455,9 @@ class ViewModel: ObservableObject {
         UserFeedback.singleHaptic(.medium)
                                 
         //user feedback: flash "color changed" confirmation
-        confirm_ColorChange = true //show confirmation
+//        confirm_ColorChange = true //show confirmation
         delayExecution(.confirmation) {//after 0.7 seconds
-            self.confirm_ColorChange = false //hide confirmation
+//            self.confirm_ColorChange = false //hide confirmation
             self.secretary.theOneAndOnlyEditedSDB = nil //dismiss
         }
     }

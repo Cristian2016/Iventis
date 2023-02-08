@@ -65,7 +65,7 @@ struct MoreOptionsView: View {
                             }
                             
                             Color.clear
-                                .overlay { ColorsGrid(emptyStruct.bubble, spacing: 0) { saveDelay() }}
+                                .overlay { ColorsGrid(emptyStruct.bubble, spacing: 2) { saveDelay() }}
                         }
                         .padding(10)
                         .background {
