@@ -84,7 +84,6 @@ struct DurationPickerView: View {
                 .gesture(swipeGesture)
                 .transition(.move(edge: .leading))
             }
-            else { EmptyView() }
         }
         .onReceive(secretary.$durationPicker_OfColor) { color = $0 }
     }
