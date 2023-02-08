@@ -35,6 +35,9 @@ class Secretary {
     // MARK: - Publishers
 //    @Published var confirm_ColorChange = false
     
+    @Published var confirm_CalEventCreated: Int64?
+    @Published var confirm_CalEventRemoved: Int64?
+    
     @Published var theOneAndOnlyEditedSDB:StartDelayBubble?
     
     @Published var showFavoritesOnly = false

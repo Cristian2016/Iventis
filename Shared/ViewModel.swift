@@ -20,10 +20,6 @@ class ViewModel: ObservableObject {
         NotificationCenter.default.removeObserver(self) //1
     }
     
-    ///calendarEvent created for bubble.rank. if rank != nil, confirmation will be displayed in the appropriate bubbleCell
-    @Published var confirm_CalEventCreated: Int64? = nil
-    @Published var confirm_CalEventRemoved: Int64? = nil
-    
     // MARK: - Confirmation Flashes
     @Published var confirm_AlwaysOnDisplay = false
     @Published var confirm_CalOn = (show:false, isCalOn:false)
@@ -36,7 +32,7 @@ class ViewModel: ObservableObject {
     
     @Published var pairOfNotesList:Pair?
     
-    @Published var notesList_bRank:Int? = nil //bubble rank
+    @Published var notesList_bRank:Int? //bubble rank
     
     @Published var sessionToDelete:(Session, String)?
     
@@ -336,8 +332,8 @@ class ViewModel: ObservableObject {
             CalendarManager.shared.createNewEvent(for: bubble.lastSession)
             
             //display Cal Event Added to Calendar App confirmation to the user
-            confirm_CalEventCreated = bubble.rank
-            delayExecution(.now() + 3) { self.confirm_CalEventCreated = nil }
+            secretary.confirm_CalEventCreated = bubble.rank
+            delayExecution(.now() + 3) { self.secretary.confirm_CalEventCreated = nil }
         }
         
         PersistenceController.shared.save()

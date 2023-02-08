@@ -87,8 +87,8 @@ struct SessionDeleteActionAlert: View {
             withAnimation {
                 //show confirmation only if deleted session corresponds to a calendar event
                 if session.eventID != nil {
-                    viewModel.confirm_CalEventRemoved = session.bubble?.rank
-                    delayExecution(.now() + 3) { self.viewModel.confirm_CalEventRemoved = nil }
+                    secretary.confirm_CalEventRemoved = session.bubble?.rank
+                    delayExecution(.now() + 3) { self.secretary.confirm_CalEventRemoved = nil }
                 }
                 
                 //⚠️ delete event from calendar first and then delete session from CoreData and Fused App

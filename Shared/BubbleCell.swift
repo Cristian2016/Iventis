@@ -33,8 +33,8 @@ struct BubbleCell: View {
             .overlay { if bubble.hasCalendar && noNote { calendarSymbol }}
             .overlay { stickyNote }
             
-            .overlay { if confirm_CalEventCreated { calEventCreatedConfirmation }} //1
-            .overlay { if confirm_CalEventRemoved { calEventRemovedConfirmation }} //1
+            .overlay { CalendarEventCreatedConfirmation(rank: bubble.rank) } //1
+            .overlay { CalendarEventRemovedConfirmation(rank: bubble.rank) } //1
             
             .overlay { if !isBubbleRunning { hundredthsView }}
         }
@@ -51,11 +51,7 @@ struct BubbleCell: View {
     }
     
     // MARK: - Legos    
-    private var calEventCreatedConfirmation:some View {
-        Push(.leading) {
-            ConfirmView(content: .eventCreated)
-        }
-    }
+    
     private var calEventRemovedConfirmation:some View {
         Push(.leading) {
             ConfirmView(content: .eventRemoved)
@@ -277,8 +273,8 @@ struct BubbleCell: View {
     }
     
     // MARK: -
-    var confirm_CalEventCreated:Bool { viewModel.confirm_CalEventCreated == bubble.rank }
-    var confirm_CalEventRemoved:Bool { viewModel.confirm_CalEventRemoved == bubble.rank }
+    var confirm_CalEventCreated:Bool { secretary.confirm_CalEventCreated == bubble.rank }
+    var confirm_CalEventRemoved:Bool { secretary.confirm_CalEventRemoved == bubble.rank }
     
     ///show bubbleCell.frame if it's the same rank and the frame is not set and detailView does not show. In the Detailview there is no need to compute deleteActionView.yOffset
     private var computeBubbleCellFrame:Bool {
