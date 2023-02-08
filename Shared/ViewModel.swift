@@ -113,6 +113,10 @@ class ViewModel: ObservableObject {
         }
         
         newBubble.addObserver()
+        secretary.showAllBubblesButtonShouldUpdateCount = true
+        delayExecution(.now() + 0.01) {
+            self.secretary.showAllBubblesButtonShouldUpdateCount = false
+        }
         
         try? backgroundContext.save()
     }

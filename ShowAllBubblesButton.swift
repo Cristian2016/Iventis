@@ -33,12 +33,12 @@ struct RefresherView: View {
 
 struct ShowAllBubblesButton: View {
     private let secretary = Secretary.shared
-    @State private var showFavoritesOnly:Bool?
+    @State private var showFavoritesOnly = false
     let count = Secretary.shared.unpinnedBubblesCount
     
     var body: some View {
         ZStack {
-            if let show = showFavoritesOnly, show {
+            if showFavoritesOnly {
                 Text("\(Image(systemName: "eye")) Show All")
                     .listRowSeparator(.hidden)
                     .font(.footnote)
