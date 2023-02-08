@@ -13,7 +13,7 @@ struct MoreOptionsView: View {
         var bubble:Bubble
         var initialBubbleColor:Color
         var initialStartDelay:Int
-        var userEnteredDelay:Int
+        var userEditedDelay:Int
     }
     
     @State private var input:Input?
@@ -44,7 +44,7 @@ struct MoreOptionsView: View {
                                     digits
                                     
                                     if !isPortrait {
-                                        if emptyStruct.userEnteredDelay != 0 {
+                                        if emptyStruct.userEditedDelay != 0 {
                                             Text("**Save** \(Image(systemName: "hand.tap")) Tap outside frame")
                                                 .font(.footnote)
                                                 .foregroundColor(.gray)
@@ -85,7 +85,7 @@ struct MoreOptionsView: View {
                 input = Input(bubble: bubble,
                               initialBubbleColor: color,
                               initialStartDelay: initialStartDelay,
-                              userEnteredDelay: initialStartDelay)
+                              userEditedDelay: initialStartDelay)
                 
             } else { input = nil }
         }
@@ -94,7 +94,7 @@ struct MoreOptionsView: View {
     // MARK: - Lego
     private var startDelayDisplay:some View {
         HStack(alignment: .firstTextBaseline) {
-            Text(String(input!.userEnteredDelay) + "s")
+            Text(String(input!.userEditedDelay) + "s")
                 .padding([.leading, .trailing])
                 .foregroundColor(.white)
                 .font(metrics.delayFont)
@@ -113,7 +113,7 @@ struct MoreOptionsView: View {
         HStack(spacing: metrics.spacing) {
             ForEach(Bubble.delays, id:\.self) { delay in
                 Button {
-                    input!.userEnteredDelay += delay
+                    input!.userEditedDelay += delay
                 } label: {
                     
                     Circle().fill(input!.initialBubbleColor)
@@ -150,9 +150,9 @@ struct MoreOptionsView: View {
     var swipeLeft:some Gesture {
         DragGesture(minimumDistance: 10)
             .onEnded { _ in
-                if input!.userEnteredDelay != 0 {
+                if input!.userEditedDelay != 0 {
                     UserFeedback.doubleHaptic(.heavy)
-                    input!.userEnteredDelay = 0
+                    input!.userEditedDelay = 0
                 }
             }
     }
@@ -165,9 +165,9 @@ struct MoreOptionsView: View {
          if user sets a new start delay
          save delay
          save CoreData context*/
-        if input!.initialStartDelay != input!.userEnteredDelay {
+        if input!.initialStartDelay != input!.userEditedDelay {
             UserFeedback.singleHaptic(.medium)
-            viewModel.saveDelay(for: input!.bubble, input!.userEnteredDelay)
+            viewModel.saveDelay(for: input!.bubble, input!.userEditedDelay)
         }
         dismiss()
     }
