@@ -16,9 +16,7 @@ import MyPackage
 class ViewModel: ObservableObject {
     private let secretary = Secretary.shared
             
-    deinit {
-        NotificationCenter.default.removeObserver(self) //1
-    }
+    deinit { NotificationCenter.default.removeObserver(self) } //1
     
     // MARK: - Confirmation Flashes
     @Published var confirm_AlwaysOnDisplay = false
