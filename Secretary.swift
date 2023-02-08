@@ -34,9 +34,7 @@ class Secretary {
     
     // MARK: - Publishers
     @Published var showFavoritesOnly = false
-    
-    @Published var showAllBubblesButtonShouldUpdateCount = false
-    
+        
     ///bubbleCell rank and frame. Frame will not be set if DetailView shows
     @Published var deleteAction_bRank:Int64?
     

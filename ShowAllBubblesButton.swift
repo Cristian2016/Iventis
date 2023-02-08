@@ -34,8 +34,7 @@ struct RefresherView: View {
 struct ShowAllBubblesButton: View {
     private let secretary = Secretary.shared
     @State private var showFavoritesOnly = false
-    @State private var updateBubbleCount = false
-    let count = Secretary.shared.unpinnedBubblesCount
+    var count = Secretary.shared.unpinnedBubblesCount
     
     var body: some View {
         ZStack {
@@ -49,8 +48,5 @@ struct ShowAllBubblesButton: View {
             }
         }
         .onReceive(secretary.$showFavoritesOnly) { showFavoritesOnly = $0 }
-        .onReceive(secretary.$showAllBubblesButtonShouldUpdateCount) {
-            updateBubbleCount = $0
-        }
     }
 }
