@@ -82,6 +82,7 @@ struct DurationPickerView: View {
                 }
                 .ignoresSafeArea()
                 .gesture(swipeGesture)
+                .transition(.move(edge: .leading))
             }
             else { EmptyView() }
         }
