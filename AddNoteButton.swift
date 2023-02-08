@@ -15,27 +15,21 @@ struct AddNoteButton: View {
     @State private var addNoteButton_bRank:Int?
     
     var body: some View {
-        content
-            .onReceive(secretary.$addNoteButton_bRank) {
-                addNoteButton_bRank = $0
+        ZStack {
+            if let rank = addNoteButton_bRank {
+                let bubble = viewModel.bubble(for: Int(rank))!
+                let color = Color.bubbleColor(forName: bubble.color)
+                Button {
+                    viewModel.pairOfNotesList = bubble.lastPair
+                    UserFeedback.singleHaptic(.light)
+                    PersistenceController.shared.save()
+                } label: {
+                    FusedLabel(content: .init(title: "Add Note", symbol: "text.alignleft", size: .small, color: color, isFilled: true))
+                }
+            } else {
+                EmptyView()
             }
-    }
-    
-    // MARK: - Lego
-    @ViewBuilder
-    private var content:some View {
-        if let rank = addNoteButton_bRank {
-            let bubble = viewModel.bubble(for: Int(rank))!
-            let color = Color.bubbleColor(forName: bubble.color)
-            Button {
-                viewModel.pairOfNotesList = bubble.lastPair
-                UserFeedback.singleHaptic(.light)
-                PersistenceController.shared.save()
-            } label: {
-                FusedLabel(content: .init(title: "Add Note", symbol: "text.alignleft", size: .small, color: color, isFilled: true))
-            }
-        } else {
-            EmptyView()
         }
+        .onReceive(secretary.$addNoteButton_bRank) { addNoteButton_bRank = $0 }
     }
 }
