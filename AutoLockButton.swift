@@ -8,20 +8,14 @@ struct AutoLockButton: View {
     @State private var addNoteButton_bRank:Int?
     
     var body: some View {
-        ZStack {
-            if let _ = addNoteButton_bRank {
-                EmptyView()
-            } else {
-                Button {
-                    viewModel.showAlert_AlwaysOnDisplay.toggle()
-                    UIApplication.shared.isIdleTimerDisabled.toggle()
-                    
-                    viewModel.confirm_AlwaysOnDisplay = true
-                    delayExecution(.now() + 2) { viewModel.confirm_AlwaysOnDisplay = false }
-                }
-            label: { label }
+            Button {
+                viewModel.showAlert_AlwaysOnDisplay.toggle()
+                UIApplication.shared.isIdleTimerDisabled.toggle()
+                
+                viewModel.confirm_AlwaysOnDisplay = true
+                delayExecution(.now() + 2) { viewModel.confirm_AlwaysOnDisplay = false }
             }
-        }
+        label: { label }
         .onReceive(secretary.$addNoteButton_bRank) { addNoteButton_bRank = $0 }
     }
     
