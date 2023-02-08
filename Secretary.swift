@@ -31,4 +31,8 @@ class Secretary {
         }
         return 0
     }
+    
+    // MARK: - Publishers
+    ///bubbleCell rank and frame. Frame will not be set if DetailView shows
+    @Published var deleteAction_bRank:Int64?
 }

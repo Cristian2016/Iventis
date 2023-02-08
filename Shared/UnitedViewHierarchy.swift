@@ -19,6 +19,9 @@ struct UnitedViewHierarchy: View {
     @StateObject private var viewModel = ViewModel() //2
     @Environment(\.scenePhase) private var scenePhase //3 ⚠️
     
+    private let secretary = Secretary.shared
+    @State private var deleteActionBubbleRank:Int64?
+    
     private let viewContext = PersistenceController.shared.container.viewContext
     
     var body: some View {
@@ -27,7 +30,7 @@ struct UnitedViewHierarchy: View {
             else { iPhoneViewHierarchy() }
             
             if showDeleteActionView {
-                if let bubble = viewModel.bubble(for: Int(viewModel.deleteAction_bRank!)) {
+                if let bubble = viewModel.bubble(for: Int(secretary.deleteAction_bRank!)) {
                     BubbleDeleteActionAlert(bubble)
                 }
             }
@@ -51,6 +54,9 @@ struct UnitedViewHierarchy: View {
         .environmentObject(viewModel) //2
         .environmentObject(layoutViewModel) //2
         .onChange(of: scenePhase) { handleScenePhaseChange($0) } //3
+        .onReceive(secretary.$deleteAction_bRank) {
+            deleteActionBubbleRank = $0
+        }
     }
     
     // MARK: - Methods
@@ -78,7 +84,7 @@ struct UnitedViewHierarchy: View {
     
     // MARK: -
     private var showDeleteActionView:Bool {
-        viewModel.deleteAction_bRank != nil
+        deleteActionBubbleRank != nil
     } //4
     
     fileprivate var bubbleNotesShowing:Bool { viewModel.notesList_bRank != nil }

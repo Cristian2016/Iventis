@@ -13,6 +13,8 @@ struct BubbleCell: View {
     ///padding with respect to the list edges so that it comes closer to the edges of the screen
     static let padding = EdgeInsets(top: 0, leading: -12, bottom: 0, trailing: -12)
     
+    private let secretary = Secretary.shared
+    
     let metrics: Metrics
     @StateObject private var bubble:Bubble
     @StateObject private var startDelayBubble:StartDelayBubble
@@ -78,7 +80,7 @@ struct BubbleCell: View {
     //trailing Swipe actions
     private var deleteActionButton:some View {
         Button {
-            viewModel.deleteAction_bRank = bubble.rank
+            secretary.deleteAction_bRank = bubble.rank
 //            delayExecution(.now() + 0.2) { vm.isDetailViewShowing = false }
         }
     label: { Label { Text("Delete") }
@@ -280,7 +282,7 @@ struct BubbleCell: View {
     
     ///show bubbleCell.frame if it's the same rank and the frame is not set and detailView does not show. In the Detailview there is no need to compute deleteActionView.yOffset
     private var computeBubbleCellFrame:Bool {
-        viewModel.deleteAction_bRank == bubble.rank
+        secretary.deleteAction_bRank == bubble.rank
     }
 }
 

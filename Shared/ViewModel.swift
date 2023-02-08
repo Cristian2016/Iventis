@@ -58,9 +58,6 @@ class ViewModel: ObservableObject {
     @Published var showAlert_AlwaysOnDisplay = false
     
     // MARK: -
-    ///bubbleCell rank and frame. Frame will not be set if DetailView shows
-    @Published var deleteAction_bRank:Int64? //set when user taps deleteActionButton
-    
     @Published var isDetailViewShowing = false
     
     @Published var pairOfNotesList:Pair?
@@ -244,8 +241,8 @@ class ViewModel: ObservableObject {
                 if isDetailViewShowing { bubble.syncSmallBubbleCell = true }
                 
                 //1 both
-                fiveSeconds_bRank = nil
-                fiveSeconds_bRank = Int(bubble.rank)
+//                fiveSeconds_bRank = nil
+//                fiveSeconds_bRank = Int(bubble.rank)
                 
             case .running: /* changes to .paused */
                 let currentPair = bubble.lastPair

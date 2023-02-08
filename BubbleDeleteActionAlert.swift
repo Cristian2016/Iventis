@@ -25,6 +25,7 @@ extension BubbleDeleteActionAlert {
 struct BubbleDeleteActionAlert: View {
     @EnvironmentObject private var viewModel:ViewModel
     @EnvironmentObject private var layoutViewModel:LayoutViewModel
+    private let secretary = Secretary.shared
     
     let bubble:Bubble
     
@@ -77,7 +78,7 @@ struct BubbleDeleteActionAlert: View {
                 viewModel.delete(bubble)
                 
                 //make BubbleDAAlert go away after 0.3 seconds, so that user sees button tapped animation
-                delayExecution(.now() + 0.25) { viewModel.deleteAction_bRank = nil }
+                delayExecution(.now() + 0.25) { secretary.deleteAction_bRank = nil }
                 removeFiveSecondsBar()
             }
         } label: {
@@ -100,7 +101,7 @@ struct BubbleDeleteActionAlert: View {
             removeAddTagButton()
             if !bubble.sessions_.isEmpty {
                 viewModel.reset(bubble)
-                viewModel.deleteAction_bRank = nil
+                secretary.deleteAction_bRank = nil
                 
                 removeFiveSecondsBar()
             }
@@ -141,7 +142,7 @@ struct BubbleDeleteActionAlert: View {
     // MARK: -
     ///dismiss view
     private func cancelDeleteAction() {
-        viewModel.deleteAction_bRank = nil
+        secretary.deleteAction_bRank = nil
         layoutViewModel.deleteActionViewOffset = nil
     }
     

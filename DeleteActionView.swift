@@ -9,6 +9,8 @@ import SwiftUI
 
 ///same size on each device
 struct DeleteActionView: View {
+    private let secretary = Secretary.shared
+    
     let bubble:Bubble?
     let bubbleColor:Color
     
@@ -27,7 +29,7 @@ struct DeleteActionView: View {
             ZStack {
                 Color.white.opacity(0.01)
                     .onTapGesture {
-                        viewModel.deleteAction_bRank = nil
+                        secretary.deleteAction_bRank = nil
                         layoutViewModel.deleteActionViewOffset = nil
                     }
                 RoundedRectangle(cornerRadius: backgroundRadius)
@@ -41,13 +43,13 @@ struct DeleteActionView: View {
                                 deleteBubbleView
                                     .onTapGesture { withAnimation {
                                         viewModel.delete(bubble!)
-                                        viewModel.deleteAction_bRank = nil
+                                        secretary.deleteAction_bRank = nil
                                     } }
                                 deleteSessionsView
                                     .onTapGesture { withAnimation {
                                         if !bubble!.sessions_.isEmpty {
                                             viewModel.reset(bubble!)
-                                            viewModel.deleteAction_bRank = nil
+                                            secretary.deleteAction_bRank = nil
                                         }
                                     } }
                             }
