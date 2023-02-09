@@ -28,6 +28,9 @@ struct BubbleList: View {
     @EnvironmentObject private var viewModel:ViewModel
     @EnvironmentObject private var layoutViewModel:LayoutViewModel
     @SectionedFetchRequest var bubbles:SectionedFetchResults<Bool, Bubble>
+    
+    @State private var notesForBubble:Bubble?
+    
     private let secretary = Secretary.shared
             
     // MARK: -
@@ -74,8 +77,11 @@ struct BubbleList: View {
                     } //11
                 }
             }
-            
+            if bubbleNotesShowing { BubbleStickyNoteList(notesForBubble!) }
 //            if !notesShowing { LeftStrip(isListEmpty) }
+        }
+        .onReceive(viewModel.notesForBubble) {
+            notesForBubble = ($0 != nil) ? $0! : nil
         }
     }
     
@@ -146,6 +152,8 @@ struct BubbleList: View {
         NSSortDescriptor(key: "isPinned", ascending: false),
         NSSortDescriptor(key: "rank", ascending: false)
     ]
+    
+    fileprivate var bubbleNotesShowing:Bool { notesForBubble != nil }
 }
 
 // MARK: -
