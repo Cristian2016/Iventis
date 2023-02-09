@@ -26,6 +26,7 @@ struct UnitedViewHierarchy: View {
     private let viewContext = PersistenceController.shared.container.viewContext
     
     var body: some View {
+        let _ = print("UnitedViewHierarchy body")
         
         ZStack {
             if UIDevice.isIPad { iPadViewHierarchy() }
