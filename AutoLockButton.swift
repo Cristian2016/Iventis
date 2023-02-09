@@ -3,8 +3,6 @@ import MyPackage
 
 //button in toolbar
 struct AutoLockButton: View {
-    @EnvironmentObject var viewModel:ViewModel
-    
     let metrics = Metrics()
     
     private let secretary = Secretary.shared
@@ -15,8 +13,8 @@ struct AutoLockButton: View {
                 secretary.showAlert_AlwaysOnDisplay.toggle()
                 UIApplication.shared.isIdleTimerDisabled.toggle()
                 
-                secretary.confirm_AlwaysOnDisplay = true
-                delayExecution(.now() + 2) { secretary.confirm_AlwaysOnDisplay = false }
+                secretary.displayAutoLockConfirmation = true
+                delayExecution(.now() + 2) { secretary.displayAutoLockConfirmation = false }
             }
         label: { label }
         .onReceive(secretary.$addNoteButton_bRank) { addNoteButton_bRank = $0 }
@@ -31,7 +29,10 @@ struct AutoLockButton: View {
                 exitSymbol
             }
         }
-        else { enterSymbol }
+        else {
+            enterSymbol
+            
+        }
     }
     private var exitSymbol:some View {
         ZStack {

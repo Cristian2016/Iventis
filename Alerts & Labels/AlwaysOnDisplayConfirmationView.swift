@@ -17,7 +17,7 @@ struct AlwaysOnDisplayConfirmationView: View {
                 ConfirmView(content: UIApplication.shared.isIdleTimerDisabled ? .alwaysONDisplayON : .alwaysONDisplayOFF)
             }
         }
-        .onReceive(secretary.$confirm_AlwaysOnDisplay) {
+        .onReceive(secretary.$displayAutoLockConfirmation) {
             confirm_AlwaysOnDisplay = $0
         }
     }

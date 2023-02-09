@@ -43,7 +43,7 @@ class Secretary {
     
     @Published var showAlert_AlwaysOnDisplay = false
             
-    @Published var confirm_AlwaysOnDisplay = false
+    @Published var displayAutoLockConfirmation = false
     
     @Published var confirm_CalEventCreated: Int64?
     @Published var confirm_CalEventRemoved: Int64?
