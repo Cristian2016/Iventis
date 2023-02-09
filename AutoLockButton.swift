@@ -1,9 +1,12 @@
 import SwiftUI
 import MyPackage
 
+//button in toolbar
 struct AutoLockButton: View {
     @EnvironmentObject var viewModel:ViewModel
+    
     let metrics = Metrics()
+    
     private let secretary = Secretary.shared
     @State private var addNoteButton_bRank:Int?
     
