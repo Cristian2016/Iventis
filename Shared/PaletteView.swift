@@ -63,9 +63,9 @@ struct PaletteView: View {
     private var hintLabelContent:some View {
         VStack {
             VStack(alignment: .leading) {
-                Text("\(Image.tap) Tap any color for Stopwatch")
-                Text("\(Image(systemName: "smallcircle.filled.circle")) Long Press for Timer")
-                Text("\(Image.swipeLeft) Swipe Left to dismiss")
+                Text("**Stopwatch** \(Image.tap) Tap any color")
+                Text("**Timer** \(Image(systemName: "smallcircle.filled.circle")) Long Press")
+                Text("**Dismiss** \(Image.swipeLeft) Swipe Left")
             }
         }
     }

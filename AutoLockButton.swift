@@ -10,7 +10,7 @@ struct AutoLockButton: View {
     
     var body: some View {
             Button {
-                //displays alert each time AutoLockButton tapped, until user chooses not to display anymore
+                //alerts each time AutoLockButton is tapped, until user chooses not to display anymore
                 secretary.showAlert_AlwaysOnDisplay.toggle()
                 
                 UIApplication.shared.isIdleTimerDisabled.toggle()
@@ -34,7 +34,6 @@ struct AutoLockButton: View {
         }
         else {
             enterSymbol
-            
         }
     }
     private var exitSymbol:some View {
@@ -55,7 +54,7 @@ struct AutoLockButton: View {
     }
     
     // MARK: -
-    private var isDisplayAlwaysON:Bool { get { UIApplication.shared.isIdleTimerDisabled } }
+    private var isDisplayAlwaysON:Bool { UIApplication.shared.isIdleTimerDisabled }
     
     struct Metrics {
         let font = Font.system(.title3)
