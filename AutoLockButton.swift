@@ -13,6 +13,7 @@ struct AutoLockButton: View {
                 secretary.showAlert_AlwaysOnDisplay.toggle()
                 UIApplication.shared.isIdleTimerDisabled.toggle()
                 
+                //displays confirmation for 2 seconds
                 secretary.displayAutoLockConfirmation = true
                 delayExecution(.now() + 2) { secretary.displayAutoLockConfirmation = false }
             }
