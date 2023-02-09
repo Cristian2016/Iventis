@@ -18,9 +18,6 @@ class ViewModel: ObservableObject {
             
     deinit { NotificationCenter.default.removeObserver(self) } //1
     
-    // MARK: - Confirmation Flashes
-    @Published var confirm_CalOn = (show:false, isCalOn:false)
-    
     // MARK: - Alerts
     @Published var showAlert_AlwaysOnDisplay = false
     

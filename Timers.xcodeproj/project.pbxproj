@@ -10,7 +10,6 @@
 		1F0373BE28DEDB00005CE8D3 /* AlwaysOnDisplayAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F0373BD28DEDB00005CE8D3 /* AlwaysOnDisplayAlertView.swift */; };
 		1F0373C028DEDD97005CE8D3 /* ConfirmationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F0373BF28DEDD97005CE8D3 /* ConfirmationView.swift */; };
 		1F0373C228DEE6F7005CE8D3 /* AlwaysOnDisplayConfirmationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F0373C128DEE6F7005CE8D3 /* AlwaysOnDisplayConfirmationView.swift */; };
-		1F0373C428DF3D36005CE8D3 /* CalOnConfirmationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F0373C328DF3D36005CE8D3 /* CalOnConfirmationView.swift */; };
 		1F0373C628DF516F005CE8D3 /* OnLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F0373C528DF516F005CE8D3 /* OnLabel.swift */; };
 		1F05B7C82989158E0022FD23 /* BorderlessLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F05B7C72989158E0022FD23 /* BorderlessLabel.swift */; };
 		1F100CA72809493400A3A3C2 /* BubbleTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F100CA62809493400A3A3C2 /* BubbleTimer.swift */; };
@@ -142,7 +141,6 @@
 		1F0373BD28DEDB00005CE8D3 /* AlwaysOnDisplayAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlwaysOnDisplayAlertView.swift; sourceTree = "<group>"; };
 		1F0373BF28DEDD97005CE8D3 /* ConfirmationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmationView.swift; sourceTree = SOURCE_ROOT; };
 		1F0373C128DEE6F7005CE8D3 /* AlwaysOnDisplayConfirmationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlwaysOnDisplayConfirmationView.swift; sourceTree = "<group>"; };
-		1F0373C328DF3D36005CE8D3 /* CalOnConfirmationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalOnConfirmationView.swift; sourceTree = "<group>"; };
 		1F0373C528DF516F005CE8D3 /* OnLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnLabel.swift; sourceTree = "<group>"; };
 		1F05B7C72989158E0022FD23 /* BorderlessLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BorderlessLabel.swift; sourceTree = "<group>"; };
 		1F100CA62809493400A3A3C2 /* BubbleTimer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BubbleTimer.swift; sourceTree = "<group>"; };
@@ -307,7 +305,6 @@
 				1F0373BF28DEDD97005CE8D3 /* ConfirmationView.swift */,
 				1FC0D9C029828D23004779E0 /* ConfirmView.swift */,
 				1F0373C128DEE6F7005CE8D3 /* AlwaysOnDisplayConfirmationView.swift */,
-				1F0373C328DF3D36005CE8D3 /* CalOnConfirmationView.swift */,
 				1F76B51028DDE38800543660 /* AlertHintView.swift */,
 				1F0373BD28DEDB00005CE8D3 /* AlwaysOnDisplayAlertView.swift */,
 			);
@@ -657,7 +654,6 @@
 				1FA834762850A57C003F4D61 /* Widgets.intentdefinition in Sources */,
 				1FC0D9C129828D23004779E0 /* ConfirmView.swift in Sources */,
 				1F1D17B329916D1A00DD7ECE /* MoreOptionsView.swift in Sources */,
-				1F0373C428DF3D36005CE8D3 /* CalOnConfirmationView.swift in Sources */,
 				1FFC8BAA28142F040059EF2E /* Session.swift in Sources */,
 				1FFC8BB628142F040059EF2E /* Pair.swift in Sources */,
 				1FA25B002986F51E007759EB /* UnitedViewHierarchy.swift in Sources */,

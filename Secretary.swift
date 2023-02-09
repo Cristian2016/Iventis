@@ -34,9 +34,7 @@ class Secretary {
     
     // MARK: - Publishers
 //    @Published var confirm_ColorChange = false
-    
-    @Published var confirm_CalOn = (show:false, isCalOn:false)
-    
+        
     @Published var confirm_AlwaysOnDisplay = false
     
     @Published var confirm_CalEventCreated: Int64?

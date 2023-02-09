@@ -46,7 +46,6 @@ struct UnitedViewHierarchy: View {
             if viewModel.showAlert_AlwaysOnDisplay { AlwaysOnDisplayAlertView() }
             AlwaysOnDisplayConfirmationView()
             if viewModel.showMoreOptionsInfo { MoreOptionsInfo() }
-            CalOnConfirmationView()
         }
         .onAppear { createBubblesOnFirstAppLaunch() } //1
         .environment(\.managedObjectContext, viewContext)
