@@ -266,7 +266,7 @@ struct BubbleCell: View {
     
     // MARK: - Methods
     private var showDetailView:Bool {
-        guard let selectedBubbleRank = viewModel.rankOfSelectedBubble else { return false }
+        guard let selectedBubbleRank = viewModel.path.last?.rank else { return false }
         return bubble.rank == selectedBubbleRank
     }
     

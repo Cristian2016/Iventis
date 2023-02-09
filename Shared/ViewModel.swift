@@ -28,9 +28,7 @@ class ViewModel: ObservableObject {
     
     @Published var sessionToDelete:(Session, String)?
     
-    @Published var rankOfSelectedBubble:Int?
     @Published var path = [Bubble]()
-    @Published var selectedBubbleID:Bubble.ID?
     
     @Published var showMoreOptionsInfo = false
     @Published var showStickyNoteListInfo = false
