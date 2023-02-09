@@ -61,19 +61,11 @@ struct UnitedViewHierarchy: View {
         .onReceive(secretary.$deleteAction_bRank) {
             deleteActionBubbleRank = $0
         }
-        .onReceive(viewModel.notesForPair) { output in
-            if let pair = output {
-                notesForPair = pair
-            } else {
-                notesForPair = nil
-            }
+        .onReceive(viewModel.notesForPair) {
+            notesForPair = ($0 != nil) ? $0! : nil
         }
-        .onReceive(viewModel.notesForBubble) { output in
-            if let bubble = output {
-                notesForBubble = bubble
-            } else {
-                notesForBubble = nil
-            }
+        .onReceive(viewModel.notesForBubble) {
+            notesForBubble = ($0 != nil) ? $0! : nil
         }
     }
     
