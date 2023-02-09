@@ -63,9 +63,7 @@ struct StickyNoteList: View {
         UserFeedback.doubleHaptic(.rigid)
         textFieldText = ""
     }
-    
-    private func showStickyNoteListInfo() { vm.showStickyNoteListInfo = true }
-    
+        
     //deleteTextFieldText
     private var dragGesture:some Gesture {
         DragGesture(minimumDistance: 10).onEnded { _ in deleteTextFieldText() }
@@ -104,12 +102,6 @@ struct StickyNoteList: View {
             .padding([.top])
             .padding([.top])
             .padding([.top])
-            
-            Push(.topRight) { InfoButton(color:.secondary) { vm.showStickyNoteListInfo = true }}
-                .padding([.top])
-                .padding([.top])
-            
-            if vm.showStickyNoteListInfo { StickyNoteListInfoView() }
         }
         .onAppear { keyboardVisible = hideKeyboard ? false : true }
     }

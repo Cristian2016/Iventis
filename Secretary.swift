@@ -39,6 +39,10 @@ class Secretary {
     // MARK: - Publishers
 //    @Published var confirm_ColorChange = false
     
+    ///allow user to drag and drop tableView cells
+    ///.onMove view modifier will not be nil
+//    @Published var allowOnMove = false
+    
     @Published var sessionToDelete:(session:Session, sessionRank:String)?
     
     @Published var showAlert_AlwaysOnDisplay = false

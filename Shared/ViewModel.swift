@@ -25,13 +25,7 @@ class ViewModel: ObservableObject {
     var notesForPair: CurrentValueSubject<Pair?, Never> = .init(nil)
     
     var notesForBubble: CurrentValueSubject<Bubble?, Never> = .init(nil)
-    
-    @Published var showStickyNoteListInfo = false
-    
-    ///allow user to drag and drop tableView cells
-    ///.onMove view modifier will not be nil
-//    @Published var allowOnMove = false
-        
+            
     // MARK: -
     init() {
         let request = Bubble.fetchRequest()
