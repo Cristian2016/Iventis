@@ -19,6 +19,8 @@ class ViewModel: ObservableObject {
     deinit { NotificationCenter.default.removeObserver(self) } //1
     
     // MARK: - Alerts
+    @Published var path = [Bubble]()
+    
     @Published var showAlert_AlwaysOnDisplay = false
     
     // MARK: -
@@ -27,8 +29,6 @@ class ViewModel: ObservableObject {
     var notesForBubble: CurrentValueSubject<Bubble?, Never> = .init(nil)
     
     @Published var sessionToDelete:(Session, String)?
-    
-    @Published var path = [Bubble]()
     
     @Published var showMoreOptionsInfo = false
     @Published var showStickyNoteListInfo = false
