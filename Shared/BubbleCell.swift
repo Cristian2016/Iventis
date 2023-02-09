@@ -260,7 +260,7 @@ struct BubbleCell: View {
     ///long press on hours to show the notes list
     func showNotesList() {
         UserFeedback.singleHaptic(.light)
-        viewModel.notesList_bRank = Int(bubble.rank)
+        viewModel.notesForBubble.send(bubble)
         PersistenceController.shared.save()
     }
     

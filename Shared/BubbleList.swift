@@ -29,7 +29,7 @@ struct BubbleList: View {
     @EnvironmentObject private var layoutViewModel:LayoutViewModel
     @SectionedFetchRequest var bubbles:SectionedFetchResults<Bool, Bubble>
     private let secretary = Secretary.shared
-        
+            
     // MARK: -
     var body: some View {
         let _ = print("BubbleList body")
@@ -75,7 +75,7 @@ struct BubbleList: View {
                 }
             }
             
-            if !notesShowing { LeftStrip(isListEmpty) }
+//            if !notesShowing { LeftStrip(isListEmpty) }
         }
     }
     
@@ -152,7 +152,6 @@ struct BubbleList: View {
 
 // MARK: - Little Helpers
 extension BubbleList {
-    fileprivate var notesShowing:Bool { viewModel.notesList_bRank != nil }
         
     fileprivate var isListEmpty:Bool { bubbles.isEmpty }
 }

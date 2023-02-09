@@ -24,7 +24,7 @@ class ViewModel: ObservableObject {
     // MARK: -
     var notesForPair: CurrentValueSubject<Pair?, Never> = .init(nil)
     
-    @Published var notesList_bRank:Int? //bubble rank
+    var notesForBubble: CurrentValueSubject<Bubble?, Never> = .init(nil)
     
     @Published var sessionToDelete:(Session, String)?
     

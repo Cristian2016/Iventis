@@ -21,7 +21,10 @@ struct UnitedViewHierarchy: View {
     
     private let secretary = Secretary.shared
     @State private var deleteActionBubbleRank:Int64?
+    
     @State private var notesForPair:Pair?
+    
+    @State private var notesForBubble:Bubble?
     
     private let viewContext = PersistenceController.shared.container.viewContext
     
@@ -42,7 +45,7 @@ struct UnitedViewHierarchy: View {
                 SessionDeleteActionAlert(session, viewModel.sessionToDelete!.1)
             }
             
-            if bubbleNotesShowing { BubbleStickyNoteList($viewModel.notesList_bRank) }
+            if bubbleNotesShowing { BubbleStickyNoteList(notesForBubble!) }
             if let pair = notesForPair { PairStickyNoteList(pair) }
             MoreOptionsView()
             if viewModel.showAlert_AlwaysOnDisplay { AlwaysOnDisplayAlertView() }
@@ -63,6 +66,13 @@ struct UnitedViewHierarchy: View {
                 notesForPair = pair
             } else {
                 notesForPair = nil
+            }
+        }
+        .onReceive(viewModel.notesForBubble) { output in
+            if let bubble = output {
+                notesForBubble = bubble
+            } else {
+                notesForBubble = nil
             }
         }
     }
@@ -95,7 +105,7 @@ struct UnitedViewHierarchy: View {
         deleteActionBubbleRank != nil
     } //4
     
-    fileprivate var bubbleNotesShowing:Bool { viewModel.notesList_bRank != nil }
+    fileprivate var bubbleNotesShowing:Bool { notesForBubble != nil }
 }
 
 struct UnitedViewHierarchy_Previews: PreviewProvider {

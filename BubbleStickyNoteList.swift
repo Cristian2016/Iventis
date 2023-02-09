@@ -31,18 +31,16 @@ struct BubbleStickyNoteList: View {
     private let line3 = Text("Empty Notes will not be saved").font(.system(size: 21))
     
     let initialNote:String
-    @Binding var showAddNotes_bRank:Int?
     
     private let size = CGSize(width: 250, height: 412)
     private let cornerRadius = CGFloat(24)
     
     // MARK: -
-    init(_ notesList_bRank:Binding<Int?>) {
+    init(_ bubble:Bubble) {
         //set Bubble
         let request = Bubble.fetchRequest()
-        request.predicate = NSPredicate(format: "rank == %i", notesList_bRank.wrappedValue!)
+        request.predicate = NSPredicate(format: "rank == %i", bubble.rank)
         
-        guard let bubble = try? PersistenceController.shared.viewContext.fetch(request).first else { fatalError("fuck bubble") }
         self.bubble = bubble
         
         //set initial note
@@ -53,7 +51,6 @@ struct BubbleStickyNoteList: View {
             NSSortDescriptor(key: "date", ascending: false)
         ]
         _bubbleSavedNotes = FetchRequest(entity: BubbleSavedNote.entity(), sortDescriptors: sorts, predicate: nil, animation: .default)
-        _showAddNotes_bRank = Binding(projectedValue: notesList_bRank)
     }
     
     // MARK: -
@@ -82,7 +79,7 @@ struct BubbleStickyNoteList: View {
     }
         
     // MARK: -
-    private func dismiss() { showAddNotes_bRank = nil }
+    private func dismiss() { vm.notesForBubble.send(nil) }
     
     private func selectExitingNote(_ note:String) {
         var noteCopy = note
@@ -113,11 +110,5 @@ struct BubbleStickyNoteList: View {
         vm.save(noteCopy.capitalized, forObject: bubble)
         UserFeedback.singleHaptic(.heavy)
         bubble.isNoteHidden = false
-    }
-}
-
-struct BubbleNoteView_Previews: PreviewProvider {
-    static var previews: some View {
-        BubbleStickyNoteList(.constant(0))
     }
 }
