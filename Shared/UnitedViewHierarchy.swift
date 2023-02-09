@@ -44,16 +44,13 @@ struct UnitedViewHierarchy: View {
                 }
             }
             
-            if let session = sessionToDelete?.session, let rank = sessionToDelete?.sessionRank {
-                SessionDeleteActionAlert(session, rank)
-            }
+            SessionDeleteActionAlert()
             
             if let pair = notesForPair { PairStickyNoteList(pair) }
             MoreOptionsView()
             AlwaysOnDisplayAlertView() //shown until user removes it forever
             AlwaysOnDisplayConfirmationView() //shown each time user toggles the button in toolbar
             if viewModel.showMoreOptionsInfo { MoreOptionsInfo() }
-            
             if bubbleNotesShowing { BubbleStickyNoteList(notesForBubble!) }
         }
         .onAppear { createBubblesOnFirstAppLaunch() } //1
@@ -63,18 +60,10 @@ struct UnitedViewHierarchy: View {
         .environmentObject(pathViewModel) //10
         .onChange(of: scenePhase) { handleScenePhaseChange($0) } //3
         //listen to publishers and listen for changes
-        .onReceive(secretary.$deleteAction_bRank) {
-            deleteActionBubbleRank = $0
-        }
-        .onReceive(viewModel.notesForPair) {
-            notesForPair = ($0 != nil) ? $0! : nil
-        }
-        .onReceive(viewModel.notesForBubble) {
-            notesForBubble = ($0 != nil) ? $0! : nil
-        }
-        .onReceive(secretary.$sessionToDelete) {
-            sessionToDelete = $0
-        }
+        .onReceive(secretary.$deleteAction_bRank) { deleteActionBubbleRank = $0 }
+        .onReceive(viewModel.notesForPair) { notesForPair = ($0 != nil) ? $0! : nil }
+        .onReceive(viewModel.notesForBubble) { notesForBubble = ($0 != nil) ? $0! : nil }
+        .onReceive(secretary.$sessionToDelete) { sessionToDelete = $0 }
     }
     
     // MARK: - Methods
