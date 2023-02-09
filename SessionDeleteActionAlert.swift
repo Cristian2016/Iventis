@@ -42,7 +42,7 @@ struct SessionDeleteActionAlert: View {
     
     // MARK: -
     ///dismiss view
-    private func cancelDeleteAction() { viewModel.sessionToDelete = nil }
+    private func cancelDeleteAction() { secretary.sessionToDelete = nil }
     
     //ViewModel 1
     private func removeFiveSecondsBar() {
@@ -97,7 +97,7 @@ struct SessionDeleteActionAlert: View {
                 //make SessionDAAlert go away after 0.3 seconds, so that user sees button tapped animation
                 delayExecution(.now() + 0.25) {
                     viewModel.deleteSession(session)
-                    viewModel.sessionToDelete = nil
+                    secretary.sessionToDelete = nil
                 }
             }
             if secretary.addNoteButton_bRank != nil { secretary.addNoteButton_bRank = nil } //ViewModel 1

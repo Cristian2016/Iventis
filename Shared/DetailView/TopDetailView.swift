@@ -14,6 +14,8 @@ struct TopDetailView:View {
     @FetchRequest var sessions:FetchedResults<Session>
     //use entire screen width, but leave a little leading space
     let trailingPadding = EdgeInsets(top: 0, leading: 3, bottom: 0, trailing: 3)
+    
+    private let secretary = Secretary.shared
         
     init(_ rank:Int?) {
         let predicate:NSPredicate?
@@ -43,7 +45,7 @@ struct TopDetailView:View {
                             }
                             .onLongPressGesture {
                                 UserFeedback.singleHaptic(.heavy)
-                                viewModel.sessionToDelete = (session, sessionRank)
+                                secretary.sessionToDelete = (session, sessionRank)
                             }
                             .onReceive(NotificationCenter.default.publisher(for: .selectedTab)) {
                                 let tab = String($0.userInfo!["selectedTab"] as! Int - 1)

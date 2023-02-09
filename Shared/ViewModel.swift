@@ -26,8 +26,6 @@ class ViewModel: ObservableObject {
     
     var notesForBubble: CurrentValueSubject<Bubble?, Never> = .init(nil)
     
-    @Published var sessionToDelete:(Session, String)?
-    
     @Published var showMoreOptionsInfo = false
     @Published var showStickyNoteListInfo = false
     

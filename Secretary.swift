@@ -39,6 +39,8 @@ class Secretary {
     // MARK: - Publishers
 //    @Published var confirm_ColorChange = false
     
+    @Published var sessionToDelete:(session:Session, sessionRank:String)?
+    
     @Published var showAlert_AlwaysOnDisplay = false
             
     @Published var confirm_AlwaysOnDisplay = false

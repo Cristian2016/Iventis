@@ -24,6 +24,7 @@ struct UnitedViewHierarchy: View {
     
     private let secretary = Secretary.shared
     @State private var deleteActionBubbleRank:Int64?
+    @State private var sessionToDelete:(session:Session, sessionRank:String)?
     
     @State private var notesForPair:Pair?
     @State private var notesForBubble:Bubble?
@@ -43,8 +44,8 @@ struct UnitedViewHierarchy: View {
                 }
             }
             
-            if let session = viewModel.sessionToDelete?.0 {
-                SessionDeleteActionAlert(session, viewModel.sessionToDelete!.1)
+            if let session = sessionToDelete?.session, let rank = sessionToDelete?.sessionRank {
+                SessionDeleteActionAlert(session, rank)
             }
             
             if let pair = notesForPair { PairStickyNoteList(pair) }
@@ -70,6 +71,9 @@ struct UnitedViewHierarchy: View {
         }
         .onReceive(viewModel.notesForBubble) {
             notesForBubble = ($0 != nil) ? $0! : nil
+        }
+        .onReceive(secretary.$sessionToDelete) {
+            sessionToDelete = $0
         }
     }
     
