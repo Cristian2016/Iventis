@@ -18,7 +18,6 @@ struct UnitedViewHierarchy: View {
     
     @StateObject private var layoutViewModel = LayoutViewModel() //2
     @StateObject private var viewModel = ViewModel() //2
-    @StateObject private var pathViewModel = PathViewModel() //10
     
     @Environment(\.scenePhase) private var scenePhase //3 ⚠️
     
@@ -56,7 +55,6 @@ struct UnitedViewHierarchy: View {
         .environment(\.managedObjectContext, viewContext)
         .environmentObject(viewModel) //2
         .environmentObject(layoutViewModel) //2
-        .environmentObject(pathViewModel) //10
         .onChange(of: scenePhase) { handleScenePhaseChange($0) } //3
         //listen to publishers and listen for changes
         .onReceive(secretary.$deleteAction_bRank) { deleteActionBubbleRank = $0 }

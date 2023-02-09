@@ -7,10 +7,6 @@
 
 import SwiftUI
 
-class PathViewModel: ObservableObject {
-    @Published var path = [Bubble]()
-}
-
 class Secretary {
     private init() { }
     static let shared = Secretary()
