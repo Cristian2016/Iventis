@@ -9,6 +9,9 @@ import SwiftUI
 
 struct CalOnConfirmationView: View {
     @EnvironmentObject var viewModel:ViewModel
+    private let secretary = Secretary.shared
+    @State var confirm_CalOn = (show:false, isCalOn:false)
+    
     
     //viewModel.confirm_CalendarOn.isCalOn
     var lowerSymbol:ConfirmationView.LowerSymbol {
@@ -16,11 +19,16 @@ struct CalOnConfirmationView: View {
     }
     
     var body: some View {
-        ConfirmationView(titleSymbol: AlertHint.calendarOn.titleSymbol,
-                         title: AlertHint.calendarOn.title,
-                         lowerSymbol: lowerSymbol,
-                         dismissAction: { }
-        )
+        ZStack {
+            if confirm_CalOn.show {
+                ConfirmationView(titleSymbol: AlertHint.calendarOn.titleSymbol,
+                                 title: AlertHint.calendarOn.title,
+                                 lowerSymbol: lowerSymbol,
+                                 dismissAction: { }
+                )
+            }
+        }
+        .onReceive(secretary.$confirm_CalOn) { confirm_CalOn = $0 }
     }
 }
 
