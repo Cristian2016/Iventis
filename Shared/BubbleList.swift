@@ -75,7 +75,7 @@ struct BubbleList: View {
                     } //11
                 }
             }
-//            if !notesShowing { LeftStrip(isListEmpty) }
+            LeftStrip(isListEmpty)
         }
     }
     
