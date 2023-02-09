@@ -10,7 +10,9 @@ struct AutoLockButton: View {
     
     var body: some View {
             Button {
+                //displays alert until user chooses not to display anymore
                 secretary.showAlert_AlwaysOnDisplay.toggle()
+                
                 UIApplication.shared.isIdleTimerDisabled.toggle()
                 
                 //displays confirmation for 2 seconds
