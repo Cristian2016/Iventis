@@ -20,9 +20,7 @@ class ViewModel: ObservableObject {
     
     // MARK: - Alerts
     @Published var path = [Bubble]()
-    
-    @Published var showAlert_AlwaysOnDisplay = false
-    
+        
     // MARK: -
     var notesForPair: CurrentValueSubject<Pair?, Never> = .init(nil)
     

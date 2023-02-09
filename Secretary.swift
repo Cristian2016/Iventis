@@ -38,6 +38,8 @@ class Secretary {
     
     // MARK: - Publishers
 //    @Published var confirm_ColorChange = false
+    
+    @Published var showAlert_AlwaysOnDisplay = false
             
     @Published var confirm_AlwaysOnDisplay = false
     

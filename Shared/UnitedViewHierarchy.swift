@@ -49,8 +49,8 @@ struct UnitedViewHierarchy: View {
             
             if let pair = notesForPair { PairStickyNoteList(pair) }
             MoreOptionsView()
-            if viewModel.showAlert_AlwaysOnDisplay { AlwaysOnDisplayAlertView() }
-            AlwaysOnDisplayConfirmationView()
+            AlwaysOnDisplayAlertView() //shown until user removes it forever
+            AlwaysOnDisplayConfirmationView() //shown each time user toggles the button in toolbar
             if viewModel.showMoreOptionsInfo { MoreOptionsInfo() }
             
             if bubbleNotesShowing { BubbleStickyNoteList(notesForBubble!) }

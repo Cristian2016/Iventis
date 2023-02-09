@@ -11,11 +11,19 @@ struct AlwaysOnDisplayAlertView: View {
     @EnvironmentObject var viewModel:ViewModel
     @AppStorage("showAlwaysOnDisplayAlert") var showAlwaysOnDisplayAlert = true
     
+    let secretary = Secretary.shared
+    @State private var showAlert_AlwaysOnDisplay = false
+    
     var body: some View {
-        if showAlwaysOnDisplayAlert {
-            AlertHintView(alertContent: AlertHint.deviceAutoLock) {
-                viewModel.showAlert_AlwaysOnDisplay = false
-            } buttonAction: { showAlwaysOnDisplayAlert = false }
+        ZStack {
+            if showAlwaysOnDisplayAlert, showAlert_AlwaysOnDisplay {
+                AlertHintView(alertContent: AlertHint.deviceAutoLock) {
+                    secretary.showAlert_AlwaysOnDisplay = false
+                } buttonAction: { showAlwaysOnDisplayAlert = false }
+            }
+        }
+        .onReceive(secretary.$showAlert_AlwaysOnDisplay) {
+            showAlert_AlwaysOnDisplay = $0
         }
     }
 }

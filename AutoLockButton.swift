@@ -9,7 +9,7 @@ struct AutoLockButton: View {
     
     var body: some View {
             Button {
-                viewModel.showAlert_AlwaysOnDisplay.toggle()
+                secretary.showAlert_AlwaysOnDisplay.toggle()
                 UIApplication.shared.isIdleTimerDisabled.toggle()
                 
                 secretary.confirm_AlwaysOnDisplay = true
