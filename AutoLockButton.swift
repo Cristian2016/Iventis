@@ -12,8 +12,8 @@ struct AutoLockButton: View {
                 viewModel.showAlert_AlwaysOnDisplay.toggle()
                 UIApplication.shared.isIdleTimerDisabled.toggle()
                 
-                viewModel.confirm_AlwaysOnDisplay = true
-                delayExecution(.now() + 2) { viewModel.confirm_AlwaysOnDisplay = false }
+                secretary.confirm_AlwaysOnDisplay = true
+                delayExecution(.now() + 2) { secretary.confirm_AlwaysOnDisplay = false }
             }
         label: { label }
         .onReceive(secretary.$addNoteButton_bRank) { addNoteButton_bRank = $0 }

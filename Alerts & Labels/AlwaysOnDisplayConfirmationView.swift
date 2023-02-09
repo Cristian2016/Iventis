@@ -8,8 +8,18 @@
 import SwiftUI
 
 struct AlwaysOnDisplayConfirmationView: View {
+    private let secretary = Secretary.shared
+    @State var confirm_AlwaysOnDisplay = false
+    
     var body: some View {
-        ConfirmView(content: UIApplication.shared.isIdleTimerDisabled ? .alwaysONDisplayON : .alwaysONDisplayOFF)
+        ZStack {
+            if confirm_AlwaysOnDisplay {
+                ConfirmView(content: UIApplication.shared.isIdleTimerDisabled ? .alwaysONDisplayON : .alwaysONDisplayOFF)
+            }
+        }
+        .onReceive(secretary.$confirm_AlwaysOnDisplay) {
+            confirm_AlwaysOnDisplay = $0
+        }
     }
 }
 

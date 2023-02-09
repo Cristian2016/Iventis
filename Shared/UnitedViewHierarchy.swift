@@ -44,7 +44,7 @@ struct UnitedViewHierarchy: View {
             if let pair = viewModel.pairOfNotesList { PairStickyNoteList(pair) }
             MoreOptionsView()
             if viewModel.showAlert_AlwaysOnDisplay { AlwaysOnDisplayAlertView() }
-            if viewModel.confirm_AlwaysOnDisplay { AlwaysOnDisplayConfirmationView() }
+            AlwaysOnDisplayConfirmationView()
             if viewModel.showMoreOptionsInfo { MoreOptionsInfo() }
             if viewModel.confirm_CalOn.show { CalOnConfirmationView() }
         }
