@@ -22,8 +22,6 @@ class ViewModel: ObservableObject {
     @Published var showAlert_AlwaysOnDisplay = false
     
     // MARK: -
-    @Published var isDetailViewShowing = false
-    
     @Published var pairOfNotesList:Pair?
     
     @Published var notesList_bRank:Int? //bubble rank
@@ -178,7 +176,7 @@ class ViewModel: ObservableObject {
                 newSession.created = Date().addingTimeInterval(startDelayCompensation)
                 newSession.addToPairs(newPair)
                 
-                if isDetailViewShowing { bubble.syncSmallBubbleCell = true }
+                if !path.isEmpty { bubble.syncSmallBubbleCell = true }
                 
                 //1 both
                 secretary.addNoteButton_bRank = nil //clear first
@@ -190,7 +188,7 @@ class ViewModel: ObservableObject {
                 newPair.start = Date().addingTimeInterval(startDelayCompensation)
                 bubble.lastSession?.addToPairs(newPair)
                 
-                if isDetailViewShowing { bubble.syncSmallBubbleCell = true }
+                if !path.isEmpty { bubble.syncSmallBubbleCell = true }
                 
                 //1 both
                 secretary.addNoteButton_bRank = nil //clear first

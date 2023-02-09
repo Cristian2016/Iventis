@@ -16,8 +16,9 @@ struct AddNoteButton: View {
     
     var body: some View {
         ZStack {
-            if let rank = addNoteButton_bRank {
-                let bubble = viewModel.bubble(for: Int(rank))!
+            if let rank = addNoteButton_bRank,
+               let bubble = viewModel.bubble(for: Int(rank)) {
+                
                 let color = Color.bubbleColor(forName: bubble.color)
                 
                 Button {
@@ -25,11 +26,14 @@ struct AddNoteButton: View {
                     UserFeedback.singleHaptic(.light)
                     PersistenceController.shared.save()
                 } label: {
-                    FusedLabel(content: .init(title: "Add Note", symbol: "text.alignleft", size: .small, color: color, isFilled: true))
+                    FusedLabel(content: .init(title: "Add Note",
+                                              symbol: "text.alignleft",
+                                              size: .small,
+                                              color: color,
+                                              isFilled: true)
+                    )
                 }
-            } else {
-                EmptyView()
-            }
+            } else { EmptyView() }
         }
         .onReceive(secretary.$addNoteButton_bRank) { addNoteButton_bRank = $0 }
     }

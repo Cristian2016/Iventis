@@ -237,8 +237,6 @@ struct BubbleCell: View {
     
     ///user taps minutes or hours to show/hide a DetailView of the tapped [selected] bubble
     private func toggleBubbleDetail() {
-//        vm.rankOfSelectedBubble = Int(bubble.rank)
-        viewModel.isDetailViewShowing = true
         viewModel.path = viewModel.path.isEmpty ? [bubble] : []
     }
     
