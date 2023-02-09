@@ -22,7 +22,7 @@ class ViewModel: ObservableObject {
     @Published var showAlert_AlwaysOnDisplay = false
     
     // MARK: -
-    @Published var pairOfNotesList:Pair?
+    var notesForPair: CurrentValueSubject<Pair?, Never> = .init(nil)
     
     @Published var notesList_bRank:Int? //bubble rank
     

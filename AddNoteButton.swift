@@ -22,7 +22,7 @@ struct AddNoteButton: View {
                 let color = Color.bubbleColor(forName: bubble.color)
                 
                 Button {
-                    viewModel.pairOfNotesList = bubble.lastPair
+                    viewModel.notesForPair.send(bubble.lastPair)
                     UserFeedback.singleHaptic(.light)
                     PersistenceController.shared.save()
                 } label: {

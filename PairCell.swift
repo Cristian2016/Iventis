@@ -222,7 +222,7 @@ struct PairCell: View {
     // MARK: - Intents
     private func userWantsNotesList() {
         UserFeedback.singleHaptic(.light)
-        viewModel.pairOfNotesList = pair
+        viewModel.notesForPair.send(pair)
         PersistenceController.shared.save()
     }
     

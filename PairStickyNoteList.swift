@@ -113,7 +113,7 @@ struct PairStickyNoteList: View {
     
     // MARK: -
     private func dismiss() {
-        vm.pairOfNotesList = nil
+        vm.notesForPair.send(nil)
         secretary.addNoteButton_bRank = nil
     }
 }

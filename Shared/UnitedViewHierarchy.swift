@@ -21,6 +21,7 @@ struct UnitedViewHierarchy: View {
     
     private let secretary = Secretary.shared
     @State private var deleteActionBubbleRank:Int64?
+    @State private var notesForPair:Pair?
     
     private let viewContext = PersistenceController.shared.container.viewContext
     
@@ -41,7 +42,7 @@ struct UnitedViewHierarchy: View {
             }
             
             if bubbleNotesShowing { BubbleStickyNoteList($viewModel.notesList_bRank) }
-            if let pair = viewModel.pairOfNotesList { PairStickyNoteList(pair) }
+            if let pair = notesForPair { PairStickyNoteList(pair) }
             MoreOptionsView()
             if viewModel.showAlert_AlwaysOnDisplay { AlwaysOnDisplayAlertView() }
             AlwaysOnDisplayConfirmationView()
@@ -55,6 +56,13 @@ struct UnitedViewHierarchy: View {
         //listen to publishers and listen for changes
         .onReceive(secretary.$deleteAction_bRank) {
             deleteActionBubbleRank = $0
+        }
+        .onReceive(viewModel.notesForPair) { output in
+            if let pair = output {
+                notesForPair = pair
+            } else {
+                notesForPair = nil
+            }
         }
     }
     
