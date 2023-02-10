@@ -12,11 +12,12 @@ import MyPackage
 struct ThreeCircles: View {
     
     let bubble:Bubble
-    private let spacing = CGFloat(-40)
+    private let spacing:CGFloat
     
-    init(_ bubble:Bubble) {
+    init(_ bubble:Bubble, _ spacing:CGFloat) {
         self.bubble = bubble
         self.color = Color.bubbleColor(forName: bubble.color)
+        self.spacing = spacing
     }
     
     @State private var color:Color
@@ -52,11 +53,11 @@ struct ThreeCircles: View {
             case .hr:
                 Circle()
                     .fill(color)
-                    .scaleEffect(showHr ? 1 : 0)
+                    .scaleEffect(showHr ? 1 : 0.01)
             case .min:
                 Circle()
                     .fill(color)
-                    .scaleEffect(showMin ? 1 : 0)
+                    .scaleEffect(showMin ? 1 : 0.01)
             case .sec:
                 Circle()
                     .fill(color)
@@ -77,11 +78,9 @@ struct ThreeLabels: View {
     @State private var time = String()
     
     var body: some View {
-        ZStack {
-            Text(time)
-        }
-        .onReceive(bubble.coordinator.timePublisher) { output in
-            time = String(output)
-        }
+        Text(time)
+            .onReceive(bubble.coordinator.timePublisher) { output in
+                time = String(output)
+            }
     }
 }

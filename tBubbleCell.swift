@@ -14,14 +14,17 @@ struct tBubbleCell: View {
     @EnvironmentObject private var viewModel:ViewModel
     @EnvironmentObject private var layoutViewModel:LayoutViewModel
     
+    private let metrics:Metrics
+    
     init(_ bubble: Bubble, _ metrics: Metrics) {
         self.bubble = bubble
+        self.metrics = metrics
     }
     
     var body: some View {
         let _ = print("tBubble body")
         ZStack {
-            ThreeCircles(bubble)
+            ThreeCircles(bubble, metrics.spacing)
             ThreeLabels(bubble: bubble)
         }
         .onTapGesture {

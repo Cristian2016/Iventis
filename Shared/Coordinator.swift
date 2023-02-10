@@ -34,6 +34,13 @@ class BubbleCellCoordinator {
             .sink { _ in
                 DispatchQueue.main.async {
                     self.timePublisher.value += 1
+                    if self.timePublisher.value == 5 {
+                        self.visibility.send(.min(true))
+                    }
+                    if self.timePublisher.value == 10 {
+                        self.visibility.send(.hr(true))
+                        
+                    }
                 }
             }
             .store(in: &cancellable)
