@@ -33,15 +33,17 @@ struct ThreeCircles: View {
             switch $0 {
                 case .none: break
                 case .min(let show):
-                    withAnimation(.spring(response: 0.5, dampingFraction: 0.6)) { showMin = show }
+                    withAnimation(animation) { showMin = show }
                 case .hr(let show):
-                    withAnimation(.spring(response: 0.8, dampingFraction: 0.2)) { showHr = show }
+                    withAnimation(animation) { showHr = show }
             }
         }
     }
     
-    // MARK: - Lego
+    // MARK: -
+    private let animation = Animation.spring(response: 0.5, dampingFraction: 0.6)
     
+    // MARK: - Lego
     @ViewBuilder
     private func circle(_ kind:Kind) -> some View {
         switch kind {
