@@ -81,6 +81,8 @@
 		1FAD1576298A5A6C001139C6 /* AddNoteButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FAD1575298A5A6C001139C6 /* AddNoteButton.swift */; };
 		1FAD1578298A8346001139C6 /* Secretary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FAD1577298A8345001139C6 /* Secretary.swift */; };
 		1FAD157C298AAFDB001139C6 /* BubbleDeleteActionAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FAD157B298AAFDB001139C6 /* BubbleDeleteActionAlert.swift */; };
+		1FAD9B2029957BF000F49670 /* tBubbleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FAD9B1F29957BF000F49670 /* tBubbleCell.swift */; };
+		1FAD9B4229961FC000F49670 /* ThreeCircles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FAD9B4129961FC000F49670 /* ThreeCircles.swift */; };
 		1FAE715D298D1CA200E19959 /* DualTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FAE715C298D1CA200E19959 /* DualTextView.swift */; };
 		1FAF39D9298575E9002D833C /* Library.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA377E72972FE75005ACD41 /* Library.swift */; };
 		1FAF39DB29857688002D833C /* MyPackage in Frameworks */ = {isa = PBXBuildFile; productRef = 1FAF39DA29857688002D833C /* MyPackage */; };
@@ -215,6 +217,8 @@
 		1FAD1575298A5A6C001139C6 /* AddNoteButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNoteButton.swift; sourceTree = "<group>"; };
 		1FAD1577298A8345001139C6 /* Secretary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Secretary.swift; sourceTree = "<group>"; };
 		1FAD157B298AAFDB001139C6 /* BubbleDeleteActionAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BubbleDeleteActionAlert.swift; sourceTree = "<group>"; };
+		1FAD9B1F29957BF000F49670 /* tBubbleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = tBubbleCell.swift; sourceTree = "<group>"; };
+		1FAD9B4129961FC000F49670 /* ThreeCircles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreeCircles.swift; sourceTree = SOURCE_ROOT; };
 		1FAE715C298D1CA200E19959 /* DualTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DualTextView.swift; sourceTree = "<group>"; };
 		1FB3178E286ACB48006BBE82 /* Note_InfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Note_InfoView.swift; sourceTree = "<group>"; };
 		1FB4D4DF2977F86500F26D9C /* iPadViewHierarchy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iPadViewHierarchy.swift; sourceTree = "<group>"; };
@@ -321,6 +325,7 @@
 		1F5F4A4228093FAC00AF3442 = {
 			isa = PBXGroup;
 			children = (
+				1FAD9B1F29957BF000F49670 /* tBubbleCell.swift */,
 				1F6FA29B2993E4E300D7EF90 /* ShowAllBubblesButton.swift */,
 				1F8AAFA229927B2900328AC7 /* FramePortrait.swift */,
 				1F52B8C7299233AF0093810C /* ColorsGrid.swift */,
@@ -371,6 +376,7 @@
 		1F5F4A4728093FAD00AF3442 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				1FAD9B4129961FC000F49670 /* ThreeCircles.swift */,
 				1F1CF2F1286B5AD2007102F2 /* InfoViews */,
 				1F5F4A4A28093FAD00AF3442 /* TimersApp.swift */,
 				1FA25AFF2986F51E007759EB /* UnitedViewHierarchy.swift */,
@@ -582,6 +588,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1FB5D8DA28E9BF0500DD522A /* GestureLabel.swift in Sources */,
+				1FAD9B2029957BF000F49670 /* tBubbleCell.swift in Sources */,
 				1F76B51128DDE38800543660 /* AlertHintView.swift in Sources */,
 				1F36D56B29942C0B00D70727 /* CalendarEventCreatedConfirmation.swift in Sources */,
 				1FB4D4E02977F86500F26D9C /* iPadViewHierarchy.swift in Sources */,
@@ -602,6 +609,7 @@
 				1F20807C2836111600FD35D6 /* BSavedNote.swift in Sources */,
 				1FDB9F15287DA5040028E121 /* SDBPair Properties.swift in Sources */,
 				1F615B6329899E210006DB0B /* BackgroundTimer.swift in Sources */,
+				1FAD9B4229961FC000F49670 /* ThreeCircles.swift in Sources */,
 				1F8AAFA329927B2900328AC7 /* FramePortrait.swift in Sources */,
 				1F559BCA298E0BA700F07F5F /* ThinMaterialLabel.swift in Sources */,
 				1F61BE052822BAAA00B773F9 /* DeleteActionView.swift in Sources */,

@@ -11,7 +11,6 @@ struct tBubbleCell: View {
     private let secretary = Secretary.shared
     
     @ObservedObject var bubble:Bubble
-    
     @EnvironmentObject private var viewModel:ViewModel
     @EnvironmentObject private var layoutViewModel:LayoutViewModel
     
@@ -27,6 +26,7 @@ struct tBubbleCell: View {
                 bubble.color = Color.triColors.randomElement()!.description
                 PersistenceController.shared.save()
             }
+            .onAppear { bubble.coordinator.wakeUp() }
     }
     
     // MARK: - Lego

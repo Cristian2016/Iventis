@@ -11,7 +11,10 @@ import CoreData
 import SwiftUI
 import MyPackage
 
+@objc(Bubble)
 public class Bubble: NSManagedObject {
+    
+    lazy var coordinator:BubbleCellCoordinator = BubbleCellCoordinator(for: self)
     
     // MARK: - Observers
     var observerAdded = false {didSet{
