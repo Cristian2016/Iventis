@@ -1,0 +1,49 @@
+//
+//  Coordinator.swift
+//  Timers (iOS)
+//
+//  Created by Cristian Lapusan on 10.02.2023.
+//
+
+import SwiftUI
+import Combine
+
+class BubbleCellCoordinator {
+    // MARK: - Publishers
+    //they emit their initial value, without .send()! ⚠️
+    var visibility:CurrentValueSubject<Show, Never> = .init(.none)
+    
+    var color:CurrentValueSubject<Color, Never> = .init(.blue)
+    
+    lazy var timePublisher:CurrentValueSubject<Int, Never> = .init(Int(bubble.currentClock))
+    
+    // MARK: -
+    private var show = Show.none
+    let bubble:Bubble
+    
+    init(for bubble:Bubble) {
+        print(#function, "BubbleCellCoordinator \(bubble.color!)")
+        self.bubble = bubble
+    }
+    
+    private var cancellable = Set<AnyCancellable>()
+    
+    ///on wake-up it starts observing backgroundTimer
+    func wakeUp() {
+        NotificationCenter.Publisher(center: .default, name: .bubbleTimerSignal)
+            .sink { _ in
+                DispatchQueue.main.async {
+                    self.timePublisher.value += 1
+                }
+            }
+            .store(in: &cancellable)
+    }
+}
+
+extension BubbleCellCoordinator {
+    enum Show {
+        case min(Bool)
+        case hr(Bool)
+        case none
+    }
+}

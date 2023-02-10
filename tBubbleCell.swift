@@ -20,23 +20,15 @@ struct tBubbleCell: View {
     
     var body: some View {
         let _ = print("tBubble body")
-        bubbleCellShape(Color.bubbleColor(forName: bubble.color))
-            .frame(height: 100)
-            .onTapGesture {
-                bubble.color = Color.triColors.randomElement()!.description
-                PersistenceController.shared.save()
-            }
-            .onAppear { bubble.coordinator.wakeUp() }
-    }
-    
-    // MARK: - Lego
-    @ViewBuilder
-    private func  bubbleCellShape(_ color:Color) -> some View {
-        if bubble.hasWidget {
-            color.cornerRadius(20)
-        } else {
-            Circle().fill(color)
+        ZStack {
+            ThreeCircles(bubble)
+            ThreeLabels(bubble: bubble)
         }
+        .onTapGesture {
+            bubble.color = Color.triColors.randomElement()!.description
+            PersistenceController.shared.save()
+        }
+        .onAppear { bubble.coordinator.wakeUp() }
     }
 }
 

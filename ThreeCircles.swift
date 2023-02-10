@@ -71,38 +71,17 @@ struct ThreeCircles: View {
     }
 }
 
-class BubbleCellCoordinator {
-    //they emit their initial value, without .send()! ⚠️
-    var visibility:CurrentValueSubject<Show, Never> = .init(.none)
-    var color:CurrentValueSubject<Color, Never> = .init(.blue)
-    
-    private var show = Show.none
+struct ThreeLabels: View {
     let bubble:Bubble
     
-    enum Show {
-        case min(Bool)
-        case hr(Bool)
-        case none
-    }
+    @State private var time = String()
     
-    init(for bubble:Bubble) {
-        print(#function, "BubbleCellCoordinator \(bubble.color!)")
-        self.bubble = bubble
-    }
-    
-    ///on wake-up it starts observing backgroundTimer
-    func wakeUp() {
-        addObserver()
-    }
-    
-    private var cancellable = Set<AnyCancellable>()
-    
-    private func addObserver() {
-        NotificationCenter.Publisher(center: .default, name: .bubbleTimerSignal)
-            .sink { notification in
-                print("signal received")
-            }
-            .store(in: &cancellable)
+    var body: some View {
+        ZStack {
+            Text(time)
+        }
+        .onReceive(bubble.coordinator.timePublisher) { output in
+            time = String(output)
+        }
     }
 }
-
