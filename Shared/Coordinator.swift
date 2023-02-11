@@ -30,14 +30,18 @@ class BubbleCellCoordinator {
     ///on wake-up it starts observing backgroundTimer
     func wakeUp() {
         NotificationCenter.Publisher(center: .default, name: .bubbleTimerSignal)
-            .sink { _ in
+            .sink { [weak self] _ in
+                
+                if self?.bubble.state != .running { return }
+                
+//                print("signal for \(self.bubble.color!)")
                 DispatchQueue.main.async {
-                    self.timePublisher.value += 1
-                    if self.timePublisher.value == 5 {
-                        self.visibility.send(.min(true))
+                    self?.timePublisher.value += 1
+                    if self?.timePublisher.value == 5 {
+                        self?.visibility.send(.min(true))
                     }
-                    if self.timePublisher.value == 10 {
-                        self.visibility.send(.hr(true))
+                    if self?.timePublisher.value == 10 {
+                        self?.visibility.send(.hr(true))
                         
                     }
                 }
