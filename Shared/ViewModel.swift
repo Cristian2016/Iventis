@@ -31,6 +31,7 @@ class ViewModel: ObservableObject {
         let request = Bubble.fetchRequest()
         let bubbles = try? PersistenceController.shared.viewContext.fetch(request)
         updateCurrentClock(of: bubbles)
+        wakeUpCoordinator(of: bubbles)
         observe_delayReachedZero_Notification()
     }
         
@@ -41,6 +42,14 @@ class ViewModel: ObservableObject {
                 if $0.state != .running {
                     $0.components = $0.currentClock.timeComponentsAsStrings
                 }
+            }
+        }
+    }
+    
+    private func wakeUpCoordinator(of bubbles:[Bubble]?) {
+        delayExecution(.now() + 0.0001) {
+            bubbles?.forEach { bubble in
+                bubble.coordinator.wakeUp()
             }
         }
     }
