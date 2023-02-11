@@ -17,6 +17,11 @@ struct ThreeLabels: View {
     @EnvironmentObject private var viewModel:ViewModel
     
     @State private var components:Float.TimeComponentsAsStrings = .zeroAll
+    @State private var hr = String()
+    @State private var min = String()
+    @State private var sec = String()
+    @State private var cents = String()
+    
     @Binding private var isSecondsTapped:Bool
     @Binding private var isSecondsLongPressed:Bool
     
@@ -47,7 +52,7 @@ struct ThreeLabels: View {
         HStack (spacing: spacing) {
             //HOURS
             Circle().fill(Color.clear)
-                .overlay { Text(components.hr) }
+                .overlay { Text(hr) }
                 .opacity(hrOpacity)
             //animations
                 .scaleEffect(isSecondsLongPressed ? 0.2 : 1.0)
@@ -59,7 +64,7 @@ struct ThreeLabels: View {
             
             //MINUTES
             Circle().fill(Color.clear)
-                .overlay { Text(components.min) }
+                .overlay { Text(min) }
                 .opacity(minOpacity)
             //animations
                 .scaleEffect(isSecondsLongPressed ? 0.2 : 1.0)
@@ -71,7 +76,7 @@ struct ThreeLabels: View {
             //SECONDS
             Circle().fill(Color.clear)
                 .contentShape(Circle())
-                .overlay { Text(components.sec) }
+                .overlay { Text(sec) }
             //            //animations
                 .scaleEffect(isSecondsLongPressed ? 0.2 : 1.0)
                 .animation(.secondsLongPressed, value: isSecondsLongPressed)
@@ -94,7 +99,7 @@ struct ThreeLabels: View {
     // MARK: - Lego
     private var hundredthsView:some View {
         Push(.bottomRight) {
-            Text(components.cents)
+            Text(cents)
                 .padding()
                 .background(Circle().foregroundColor(.pauseStickerColor))
                 .foregroundColor(.pauseStickerFontColor)
