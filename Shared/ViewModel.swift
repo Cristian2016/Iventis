@@ -90,7 +90,8 @@ class ViewModel: ObservableObject {
             newBubble.isNoteHidden = false
         }
         
-        newBubble.addObserver()
+//        newBubble.addObserver()
+        newBubble.coordinator.wakeUp()
         
         try? backgroundContext.save()
     }

@@ -22,7 +22,6 @@ class BubbleCellCoordinator {
     let bubble:Bubble
     
     init(for bubble:Bubble) {
-        print(#function, "BubbleCellCoordinator \(bubble.color!)")
         self.bubble = bubble
     }
     
