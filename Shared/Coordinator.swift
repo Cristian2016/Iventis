@@ -15,7 +15,7 @@ class BubbleCellCoordinator {
     
     var color:CurrentValueSubject<Color, Never> = .init(.blue)
     
-    lazy var timePublisher:CurrentValueSubject<Int, Never> = .init(Int(bubble.currentClock))
+    lazy var componentsPublisher:CurrentValueSubject<Float.TimeComponentsAsStrings, Never> = .init(bubble.currentClock.timeComponentsAsStrings)
     
     // MARK: -
     private var show = Show.none
@@ -36,11 +36,11 @@ class BubbleCellCoordinator {
                 
 //                print("signal for \(self.bubble.color!)")
                 DispatchQueue.main.async {
-                    self?.timePublisher.value += 1
-                    if self?.timePublisher.value == 5 {
+                    self?.timeComponentsPublisher.value += 1
+                    if self?.timeComponentsPublisher.value == 5 {
                         self?.visibility.send(.min(true))
                     }
-                    if self?.timePublisher.value == 10 {
+                    if self?.timeComponentsPublisher.value == 10 {
                         self?.visibility.send(.hr(true))
                         
                     }
