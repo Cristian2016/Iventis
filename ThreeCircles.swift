@@ -71,16 +71,3 @@ struct ThreeCircles: View {
         case hr
     }
 }
-
-struct ThreeLabels: View {
-    let bubble:Bubble
-    
-    @State private var time = String()
-    
-    var body: some View {
-        Text(time)
-            .onReceive(bubble.coordinator.componentsPublisher) { output in
-                
-            }
-    }
-}

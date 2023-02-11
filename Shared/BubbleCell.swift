@@ -29,7 +29,12 @@ struct BubbleCell: View {
         VStack {
             ZStack {
                 threeCircles //🔴🔴🔴
-                threeLabels //⓿⓳➓
+                ThreeLabels(metrics.spacing,
+                            metrics.timeComponentsFontSize,
+                            startDelayBubble,
+                            $isSecondsTapped,
+                            $isSecondsLongPressed,
+                            bubble)
             }
 //            //subviews
             .overlay { if bubble.hasCalendar && noNote { calendarSymbol }}
@@ -49,7 +54,6 @@ struct BubbleCell: View {
             deleteActionButton
             moreOptionsButton
         }
-//        .onAppear { bubble.addObserver() }
     }
     
     // MARK: - Legos    
@@ -100,53 +104,6 @@ struct BubbleCell: View {
         }
     }
     
-    private var threeLabels: some View {
-        HStack (spacing: metrics.spacing) {
-            //HOURS
-            Circle().fill(Color.clear)
-                .overlay { Text(components.hr) }
-                .opacity(hrOpacity)
-            //animations
-                .scaleEffect(isSecondsLongPressed ? 0.2 : 1.0)
-                .offset(x: isSecondsLongPressed ? 20 : 0.0, y: 0)
-                .animation(.secondsLongPressed.delay(0.2), value: isSecondsLongPressed)
-            //gestures
-                .onTapGesture { toggleBubbleDetail() }
-                .onLongPressGesture { showNotesList() }
-
-            //MINUTES
-            Circle().fill(Color.clear)
-                .overlay { Text(components.min) }
-                .opacity(minOpacity)
-            //animations
-                .scaleEffect(isSecondsLongPressed ? 0.2 : 1.0)
-                .offset(x: isSecondsLongPressed ? 10 : 0.0, y: 0)
-                .animation(.secondsLongPressed.delay(0.1), value: isSecondsLongPressed)
-                //gestures
-                .onTapGesture { toggleBubbleDetail() }
-            
-            //SECONDS
-            Circle().fill(Color.clear)
-                .contentShape(Circle())
-                .overlay { Text(components.sec) }
-//            //animations
-                .scaleEffect(isSecondsLongPressed ? 0.2 : 1.0)
-                .animation(.secondsLongPressed, value: isSecondsLongPressed)
-//            //gestures
-                .gesture(tap)
-                .gesture(longPress)
-//            //overlays
-                .overlay {
-                    if startDelayBubble.referenceDelay > 0 { SDButton(bubble.sdb) }
-                }
-        }
-        //font
-        .font(.system(size: metrics.timeComponentsFontSize))
-        .fontDesign(.rounded)
-        .foregroundColor(.white)
-        .onReceive(bubble.coordinator.componentsPublisher) { components = $0 }
-    }
-    
     private var hundredthsView:some View {
         Push(.bottomRight) {
             Text(components.cents)
@@ -191,18 +148,6 @@ struct BubbleCell: View {
     }
     
     // MARK: - Gestures
-    private var tap:some Gesture { TapGesture().onEnded { _ in userTappedSeconds() }}
-    private var longPress: some Gesture {
-        LongPressGesture(minimumDuration: 0.3)
-            .updating($isDetectingLongPress, body: { currentState, gestureState, _ in
-                /* ⚠️ it does not work on .gesture(longPress) modifier. use maybe .simultaneousGesture or .highPriority */
-                gestureState = currentState
-                print("updating")
-            })
-            .onEnded { _ in
-                endSession()
-            }
-    }
     
     // MARK: - Internal
     @GestureState var isDetectingLongPress = false
@@ -227,50 +172,17 @@ struct BubbleCell: View {
     }
     
     // MARK: - User Intents
-    private func endSession() {
-        isSecondsLongPressed = true
-        delayExecution(.now() + 0.25) { isSecondsLongPressed = false }
-        
-        //feedback
-        UserFeedback.doubleHaptic(.heavy)
-        
-        //user intent model
-        viewModel.endSession(bubble)
-    }
-    
-    ///user taps minutes or hours to show/hide a DetailView of the tapped [selected] bubble
-    private func toggleBubbleDetail() {
-        viewModel.path = viewModel.path.isEmpty ? [bubble] : []
-    }
-    
     //Start/Pause Bubble 2 ways
     /* 1 */private func userTappedHundredths() {
         UserFeedback.singleHaptic(.heavy)
         viewModel.toggleBubbleStart(bubble)
     }
     
-    /* 2 */private func userTappedSeconds() {
-        isSecondsTapped = true
-        delayExecution(.now() + 0.1) { isSecondsTapped = false }
-        
-        //feedback
-        UserFeedback.singleHaptic(.heavy)
-        
-        //user intent model
-        viewModel.toggleBubbleStart(bubble)
-}
-    
     ///long press on hours to show the notes list
     func showNotesList() {
         UserFeedback.singleHaptic(.light)
         viewModel.notesForBubble.send(bubble)
         PersistenceController.shared.save()
-    }
-    
-    // MARK: - Methods
-    private var showDetailView:Bool {
-        guard let selectedBubbleRank = viewModel.path.last?.rank else { return false }
-        return bubble.rank == selectedBubbleRank
     }
     
     // MARK: -
