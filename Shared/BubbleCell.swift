@@ -28,7 +28,7 @@ struct BubbleCell: View {
     var body: some View {
         VStack {
             ZStack {
-                threeCircles //🔴🔴🔴
+                ThreeCircles(bubble: bubble, metrics: metrics)
                 ThreeLabels(metrics.spacing,
                             metrics.timeComponentsFontSize,
                             metrics.hundredthsFontSize,
@@ -92,15 +92,6 @@ struct BubbleCell: View {
         Button { viewModel.showMoreOptions(for: bubble) }
     label: { Label { Text("More") }
         icon: { Image(systemName: "ellipsis.circle.fill") } }.tint(.lightGray)
-    }
-    
-    ///time components [threeLabels] background
-    private var threeCircles: some View {
-        HStack (spacing: metrics.spacing) {
-            /* Hr */ bubbleShape.opacity(hrOpacity)
-            /* Min */ bubbleShape.opacity(minOpacity)
-            /* Sec */ bubbleShape
-        }
     }
     
     private var noteButtonContent:some View {
@@ -184,12 +175,6 @@ extension BubbleCell {
 extension BubbleCell {
     private var isBubbleRunning:Bool { bubble.state == .running }
     
-    //stopwatch: minutes and hours stay hidden initially
-    private var minOpacity:Double {
-        components.min > "0" || components.hr > "0" ? 1 : 0.001
-    }
-    private var hrOpacity:Double { components.hr > "0" ? 1 : 0.001 }
-    
     private var noNote:Bool { bubble.note_.isEmpty  }
     
     ///circle diameter, font size, spacing and so on
@@ -208,40 +193,3 @@ extension BubbleCell {
         let hundredthsFontSize:CGFloat
     }
 }
-
-//Background
-extension BubbleCell {
-    ///either circle or square. Square means bubble has a widget
-    enum BubbleShape {
-        case circle
-        case square
-    }
-    
-    ///either a circle or a square
-    @ViewBuilder
-    private var bubbleShape: some View {
-        if bubble.hasWidget {
-            RoundedRectangle(cornerRadius: 20)
-                .fill(Color.bubbleColor(forName: bubble.color))
-        } else {
-            Circle()
-                .fill(Color.bubbleColor(forName: bubble.color))
-        }
-    }
-}
-
-//struct BubbleCell_Previews: PreviewProvider {
-//    static let bubble:Bubble = {
-//        let bubble = Bubble(context: PersistenceController.preview.viewContext)
-//        bubble.color = "red"
-//        bubble.currentClock = 340
-//        bubble.kind = .stopwatch
-//        bubble.initialClock = 0
-//        bubble.sdb = StartDelayBubble(context: PersistenceController.preview.viewContext)
-//        bubble.sdb?.currentDelay = 90
-//        return bubble
-//    }()
-//    static var previews: some View {
-//        BubbleCell(bubble, BubbleCell.Metrics(300))
-//    }
-//}

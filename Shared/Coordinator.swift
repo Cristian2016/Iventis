@@ -11,9 +11,9 @@ import Combine
 class BubbleCellCoordinator {
     // MARK: - Publishers
     //they emit their initial value, without .send()! ⚠️
-    var visibility:CurrentValueSubject<Show, Never> = .init(.none)
+    var visibilityPublisher:CurrentValueSubject<Show, Never> = .init(.none)
     
-    var color:CurrentValueSubject<Color, Never> = .init(.blue)
+    var colorPublisher:CurrentValueSubject<Color, Never> = .init(.blue)
     
     lazy var componentsPublisher:CurrentValueSubject<Float.TimeComponentsAsStrings, Never> = .init(bubble.currentClock.timeComponentsAsStrings)
     

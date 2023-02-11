@@ -10,64 +10,40 @@ import Combine
 import MyPackage
 
 struct ThreeCircles: View {
-    
     let bubble:Bubble
-    private let spacing:CGFloat
+    let metrics:BubbleCell.Metrics
     
-    init(_ bubble:Bubble, _ spacing:CGFloat) {
-        self.bubble = bubble
-        self.color = Color.bubbleColor(forName: bubble.color)
-        self.spacing = spacing
-    }
-    
-    @State private var color:Color
-    
-    @State private var showMin = false
-    @State private var showHr = false
+    @State private var minOpacity = CGFloat(0)
+    @State private var hrOpacity = CGFloat(0)
     
     var body: some View {
-            HStack(spacing: spacing) {
-                circle(.hr)
-                circle(.min)
-                circle(.sec)
-            }
-            .onReceive(bubble.coordinator.visibility) {
-            switch $0 {
-                case .none: break
-                case .min(let show):
-                    withAnimation(animation) { showMin = show }
-                case .hr(let show):
-                    withAnimation(animation) { showHr = show }
-            }
+        HStack (spacing: metrics.spacing) {
+            /* Hr */ bubbleShape.opacity(hrOpacity)
+            /* Min */ bubbleShape.opacity(minOpacity)
+            /* Sec */ bubbleShape
         }
-            .onReceive(bubble.coordinator.color) { color = $0 }
+        .onReceive(bubble.coordinator.visibilityPublisher) { output in
+            
+        }
+    }
+}
+
+extension ThreeCircles {
+    ///either circle or square. Square means bubble has a widget
+    enum BubbleShape {
+        case circle
+        case square
     }
     
-    // MARK: -
-    private let animation = Animation.spring(response: 0.5, dampingFraction: 0.6)
-    
-    // MARK: - Lego
+    ///either a circle or a square
     @ViewBuilder
-    private func circle(_ kind:Kind) -> some View {
-        switch kind {
-            case .hr:
-                Circle()
-                    .fill(color)
-                    .scaleEffect(showHr ? 1 : 0.01)
-            case .min:
-                Circle()
-                    .fill(color)
-                    .scaleEffect(showMin ? 1 : 0.01)
-            case .sec:
-                Circle()
-                    .fill(color)
+    private var bubbleShape: some View {
+        if bubble.hasWidget {
+            RoundedRectangle(cornerRadius: 20)
+                .fill(Color.bubbleColor(forName: bubble.color))
+        } else {
+            Circle()
+                .fill(Color.bubbleColor(forName: bubble.color))
         }
-    }
-    
-    // MARK: -
-    enum Kind {
-        case sec
-        case min
-        case hr
     }
 }
