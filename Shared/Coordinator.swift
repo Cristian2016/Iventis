@@ -11,18 +11,25 @@ import Combine
 class BubbleCellCoordinator {
     // MARK: - Publishers
     //they emit their initial value, without .send()! ⚠️
-    var visibilityPublisher:CurrentValueSubject<Show, Never> = .init(.none)
+    var visibilityPublisher:CurrentValueSubject<Component, Never>
     
     var colorPublisher:CurrentValueSubject<Color, Never> = .init(.blue)
     
     lazy var componentsPublisher:CurrentValueSubject<Float.TimeComponentsAsStrings, Never> = .init(bubble.currentClock.timeComponentsAsStrings)
     
     // MARK: -
-    private var show = Show.none
     let bubble:Bubble
     
     init(for bubble:Bubble) {
         self.bubble = bubble
+        
+        let value:Component
+        switch bubble.currentClock {
+            case 0...59: value = Component.min(.hide)
+            case bubble.currentClock where bubble.currentClock > 60: value = Component.min(.show)
+            default: value = Component.min(.hide)
+        }
+        self.visibilityPublisher = .init(value)
     }
     
     private var cancellable = Set<AnyCancellable>()
@@ -45,6 +52,12 @@ class BubbleCellCoordinator {
         //delta is the elapsed duration between pair.start and signal dates
         let Δ = Date().timeIntervalSince(lastPairStart)
         let value = bubble.currentClock + Float(Δ)
+        
+        if value >= 59.5 {
+            DispatchQueue.main.async {
+                self.visibilityPublisher.send(.min(.show))
+            }
+        }
         let componentsString = value.timeComponentsAsStrings
                                     
         //since closure runs on bThread, dispatch back to mThread
@@ -55,9 +68,14 @@ class BubbleCellCoordinator {
 }
 
 extension BubbleCellCoordinator {
+    enum Component {
+        case min(Show)
+        case hr(Show)
+    }
+    
     enum Show {
-        case min(CGFloat)
-        case hr(CGFloat)
-        case none
+        case show
+        case hide
+        
     }
 }
