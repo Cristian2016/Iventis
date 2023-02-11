@@ -12,10 +12,11 @@ struct ThreeLabels: View {
     let bubble:Bubble
     let spacing:CGFloat
     let timeComponentsFontSize:CGFloat
+    let hundredthsFontSize:CGFloat
     
     @EnvironmentObject private var viewModel:ViewModel
     
-    @State private var components:Float.TimeComponentsAsStrings = .init(hr: "-1", min: "-1", sec: "-1", cents: "-1")
+    @State private var components:Float.TimeComponentsAsStrings = .zeroAll
     @Binding private var isSecondsTapped:Bool
     @Binding private var isSecondsLongPressed:Bool
     
@@ -25,6 +26,7 @@ struct ThreeLabels: View {
     
     init(_ spacing: CGFloat,
          _ timeComponentsFontSize:CGFloat,
+         _ hundredthsFontSize:CGFloat,
          _ startDelayBubble:StartDelayBubble,
          _ isSecondsTapped:Binding<Bool>,
          _ isSecondsLongPressed:Binding<Bool>,
@@ -32,6 +34,7 @@ struct ThreeLabels: View {
     ) {
         self.spacing = spacing
         self.timeComponentsFontSize = timeComponentsFontSize
+        self.hundredthsFontSize = hundredthsFontSize
         self.startDelayBubble = startDelayBubble
         _isSecondsTapped = isSecondsTapped
         _isSecondsLongPressed = isSecondsLongPressed
@@ -80,11 +83,31 @@ struct ThreeLabels: View {
                     if startDelayBubble.referenceDelay > 0 { SDButton(bubble.sdb) }
                 }
         }
+        .overlay { if !isBubbleRunning { hundredthsView }}
         //font
         .font(.system(size: timeComponentsFontSize))
         .fontDesign(.rounded)
         .foregroundColor(.white)
         .onReceive(bubble.coordinator.componentsPublisher) { components = $0 }
+    }
+    
+    // MARK: - Lego
+    private var hundredthsView:some View {
+        Push(.bottomRight) {
+            Text(components.cents)
+                .padding()
+                .background(Circle().foregroundColor(.pauseStickerColor))
+                .foregroundColor(.pauseStickerFontColor)
+                .font(.system(size: hundredthsFontSize, weight: .semibold, design: .rounded))
+            //animations:scale, offset and opacity
+                .scaleEffect(isSecondsTapped && !isBubbleRunning ? 2 : 1.0)
+                .offset(x: isSecondsTapped && !isBubbleRunning ? -20 : 0,
+                        y: isSecondsTapped && !isBubbleRunning ? -20 : 0)
+                .opacity(isSecondsTapped && !isBubbleRunning ? 0 : 1)
+                .animation(.spring(response: 0.3, dampingFraction: 0.2), value: isSecondsTapped)
+                .zIndex(1)
+                .onTapGesture { userTappedHundredths() }
+        }
     }
     
     // MARK: - Gestures
@@ -125,6 +148,11 @@ struct ThreeLabels: View {
         viewModel.toggleBubbleStart(bubble)
     }
     
+    /* 1 */private func userTappedHundredths() {
+        UserFeedback.singleHaptic(.heavy)
+        viewModel.toggleBubbleStart(bubble)
+    }
+    
     private func endSession() {
         isSecondsLongPressed = true
         delayExecution(.now() + 0.25) { isSecondsLongPressed = false }
@@ -142,4 +170,6 @@ struct ThreeLabels: View {
     private var minOpacity:Double {
         components.min > "0" || components.hr > "0" ? 1 : 0.001
     }
+    
+    private var isBubbleRunning:Bool { bubble.state == .running }
 }
