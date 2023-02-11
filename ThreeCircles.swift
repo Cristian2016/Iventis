@@ -18,12 +18,16 @@ struct ThreeCircles: View {
     
     var body: some View {
         HStack (spacing: metrics.spacing) {
-            /* Hr */ bubbleShape.opacity(hrOpacity)
-            /* Min */ bubbleShape.opacity(minOpacity)
+            /* Hr */ bubbleShape.opacity(0)
+            /* Min */ bubbleShape.opacity(0)
             /* Sec */ bubbleShape
         }
-        .onReceive(bubble.coordinator.visibilityPublisher) { output in
-            
+        .onReceive(bubble.coordinator.visibilityPublisher) {
+            switch $0 {
+                case .none: break
+                case .min(let value): minOpacity = value
+                case .hr(let value): hrOpacity = value
+            }
         }
     }
 }

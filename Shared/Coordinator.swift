@@ -56,8 +56,8 @@ class BubbleCellCoordinator {
 
 extension BubbleCellCoordinator {
     enum Show {
-        case min(Bool)
-        case hr(Bool)
+        case min(CGFloat)
+        case hr(CGFloat)
         case none
     }
 }
