@@ -34,20 +34,24 @@ class BubbleCellCoordinator {
                 
                 if self?.bubble.state != .running { return }
                 
-//                print("signal for \(self.bubble.color!)")
-                DispatchQueue.main.async {
-                    self?.timeComponentsPublisher.value += 1
-                    if self?.timeComponentsPublisher.value == 5 {
-                        self?.visibility.send(.min(true))
-                    }
-                    if self?.timeComponentsPublisher.value == 10 {
-                        self?.visibility.send(.hr(true))
-                        
-                    }
-                }
+                self?.updateComponents()
             }
             .store(in: &cancellable)
     }
+    
+    private func updateComponents() {
+        guard let lastPairStart = bubble.lastPair!.start else { return }
+        
+        //delta is the elapsed duration between pair.start and signal dates
+        let Δ = Date().timeIntervalSince(lastPairStart)
+        let value = bubble.currentClock + Float(Δ)
+        let componentsString = value.timeComponentsAsStrings
+                                    
+        //since closure runs on bThread, dispatch back to mThread
+        DispatchQueue.main.async {
+            self.componentsPublisher.send(componentsString)
+        }
+    } //1
 }
 
 extension BubbleCellCoordinator {

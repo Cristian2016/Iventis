@@ -30,21 +30,21 @@ class ViewModel: ObservableObject {
     init() {
         let request = Bubble.fetchRequest()
         let bubbles = try? PersistenceController.shared.viewContext.fetch(request)
-        updateCurrentClock(of: bubbles)
+//        updateCurrentClock(of: bubbles)
         wakeUpCoordinator(of: bubbles)
         observe_delayReachedZero_Notification()
     }
         
     // MARK: -
-    private func updateCurrentClock(of bubbles:[Bubble]?) {
-        delayExecution(.now() + 0.0001) {
-            bubbles?.forEach {
-                if $0.state != .running {
-                    $0.components = $0.currentClock.timeComponentsAsStrings
-                }
-            }
-        }
-    }
+//    private func updateCurrentClock(of bubbles:[Bubble]?) {
+//        delayExecution(.now() + 0.0001) {
+//            bubbles?.forEach {
+//                if $0.state != .running {
+//                    $0.components = $0.currentClock.timeComponentsAsStrings
+//                }
+//            }
+//        }
+//    }
     
     private func wakeUpCoordinator(of bubbles:[Bubble]?) {
         delayExecution(.now() + 0.0001) {
@@ -115,7 +115,7 @@ class ViewModel: ObservableObject {
             
             //reset bubble clock
             bubble.currentClock = bubble.initialClock
-            bubble.components = bubble.initialClock.timeComponentsAsStrings
+            bubble.coordinator.componentsPublisher.send(bubble.initialClock.timeComponentsAsStrings)
         }
         
         let viewContext = PersistenceController.shared.viewContext
@@ -143,7 +143,7 @@ class ViewModel: ObservableObject {
         let viewContext = PersistenceController.shared.viewContext
         bubble.created = Date()
         bubble.currentClock = bubble.initialClock
-        bubble.components = bubble.initialClock.timeComponentsAsStrings
+        bubble.coordinator.componentsPublisher.send(bubble.initialClock.timeComponentsAsStrings)
         bubble.sessions?.forEach { viewContext.delete($0 as! Session) }
         try? viewContext.save()
     }
@@ -202,7 +202,7 @@ class ViewModel: ObservableObject {
                     
                     //set bubble properties
                     bubble.currentClock += currentPair!.duration
-                    bubble.components = bubble.currentClock.timeComponentsAsStrings
+                    bubble.coordinator.componentsPublisher.send(bubble.currentClock.timeComponentsAsStrings)
                     
                     bubble.lastSession?.computeDuration {
                         //no need to run any code in the completion
@@ -294,7 +294,7 @@ class ViewModel: ObservableObject {
         
         //reset bubble clock
         bubble.currentClock = bubble.initialClock
-        bubble.components = bubble.initialClock.timeComponentsAsStrings
+        bubble.coordinator.componentsPublisher.send(bubble.initialClock.timeComponentsAsStrings)
         
         //mark session as ended
         bubble.lastSession?.isEnded = true

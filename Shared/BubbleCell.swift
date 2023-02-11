@@ -15,6 +15,8 @@ struct BubbleCell: View {
     
     private let secretary = Secretary.shared
     
+    @State private var components:Float.TimeComponentsAsStrings = .init(hr: "0", min: "0", sec: "0", cents: "0")
+    
     let metrics: Metrics
     @StateObject private var bubble:Bubble
     @StateObject private var startDelayBubble:StartDelayBubble
@@ -47,7 +49,7 @@ struct BubbleCell: View {
             deleteActionButton
             moreOptionsButton
         }
-        .onAppear { bubble.addObserver() }
+//        .onAppear { bubble.addObserver() }
     }
     
     // MARK: - Legos    
@@ -102,7 +104,7 @@ struct BubbleCell: View {
         HStack (spacing: metrics.spacing) {
             //HOURS
             Circle().fill(Color.clear)
-                .overlay { Text(bubble.components.hr) }
+                .overlay { Text(components.hr) }
                 .opacity(hrOpacity)
             //animations
                 .scaleEffect(isSecondsLongPressed ? 0.2 : 1.0)
@@ -114,7 +116,7 @@ struct BubbleCell: View {
 
             //MINUTES
             Circle().fill(Color.clear)
-                .overlay { Text(bubble.components.min) }
+                .overlay { Text(components.min) }
                 .opacity(minOpacity)
             //animations
                 .scaleEffect(isSecondsLongPressed ? 0.2 : 1.0)
@@ -126,7 +128,7 @@ struct BubbleCell: View {
             //SECONDS
             Circle().fill(Color.clear)
                 .contentShape(Circle())
-                .overlay { Text(bubble.components.sec) }
+                .overlay { Text(components.sec) }
 //            //animations
                 .scaleEffect(isSecondsLongPressed ? 0.2 : 1.0)
                 .animation(.secondsLongPressed, value: isSecondsLongPressed)
@@ -142,11 +144,12 @@ struct BubbleCell: View {
         .font(.system(size: metrics.timeComponentsFontSize))
         .fontDesign(.rounded)
         .foregroundColor(.white)
+        .onReceive(bubble.coordinator.componentsPublisher) { components = $0 }
     }
     
     private var hundredthsView:some View {
         Push(.bottomRight) {
-            Text(bubble.components.cents)
+            Text(components.cents)
                 .padding()
                 .background(Circle().foregroundColor(.pauseStickerColor))
                 .foregroundColor(.pauseStickerFontColor)
@@ -295,9 +298,9 @@ extension BubbleCell {
     
     //stopwatch: minutes and hours stay hidden initially
     private var minOpacity:Double {
-        bubble.components.min > "0" || bubble.components.hr > "0" ? 1 : 0.001
+        components.min > "0" || components.hr > "0" ? 1 : 0.001
     }
-    private var hrOpacity:Double { bubble.components.hr > "0" ? 1 : 0.001 }
+    private var hrOpacity:Double { components.hr > "0" ? 1 : 0.001 }
     
     private var noNote:Bool { bubble.note_.isEmpty  }
     

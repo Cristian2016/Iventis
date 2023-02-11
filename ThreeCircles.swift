@@ -79,8 +79,8 @@ struct ThreeLabels: View {
     
     var body: some View {
         Text(time)
-            .onReceive(bubble.coordinator.timeComponentsPublisher) { output in
-                time = String(output)
+            .onReceive(bubble.coordinator.componentsPublisher) { output in
+                
             }
     }
 }

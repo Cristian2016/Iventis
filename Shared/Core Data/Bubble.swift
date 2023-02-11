@@ -39,11 +39,6 @@ public class Bubble: NSManagedObject {
     var lastPair:Pair? { (lastSession?.pairs?.array as? [Pair])?.last }
     
     // MARK: -
-    //Published time components that bubbleCell displays. ex: "12"hr "34"min "59"sec
-    @Published var components
-    = Float.TimeComponentsAsStrings(hr: "0", min: "0", sec: "0", cents: "00")
-    { willSet { self.objectWillChange.send() }}
-    
     //updates elapsed time inside PairCell. what smallBubbleCell displays. ex: "0"hr "12"min "24"sec
     @Published var smallBubbleView_Components
     = Float.TimeComponentsAsStrings(hr: "0", min: "0", sec: "0", cents: "00")
@@ -106,33 +101,7 @@ extension Bubble {
 }
 
 extension Bubble {
-    func addObserver() {
-        if observerAdded { return }
-        observerAdded = true
-        NotificationCenter.default
-            .addObserver(forName: .bubbleTimerSignal, object: nil, queue: nil) {
-                [weak self] _ in
-                if self?.state != .running { return }
-                
-                self?.updateBubbleCellComponents()
-                self?.updateSmallBubbleCellComponents()
-            }
-    } //1
-    
-    ///time components hr:min:sec:hundredths
-    private func updateBubbleCellComponents() {
-        guard let lastPairStart = lastPair!.start else { return }
-        
-        //delta is the elapsed duration between pair.start and signal dates
-        let Δ = Date().timeIntervalSince(lastPairStart)
-        let value = currentClock + Float(Δ)
-        let componentsString = value.timeComponentsAsStrings
-                                    
-        //since closure runs on bThread, dispatch back to mThread
-        DispatchQueue.main.async { self.components = componentsString }
-    } //1
-    
-    ///update smallBubbleCell time components: hr min sec
+      ///update smallBubbleCell time components: hr min sec
     private func updateSmallBubbleCellComponents() {
         if !syncSmallBubbleCell { return }
         guard let lastPairStart = lastPair?.start else { return }
