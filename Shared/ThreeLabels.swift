@@ -168,7 +168,7 @@ struct ThreeLabels: View {
     private var hrOpacity:Double { components.hr > "0" ? 1 : 0.001 }
     
     private var minOpacity:Double {
-        components.min > "0" || components.hr > "0" ? 1 : 0.001
+        return components.min > "0" || components.hr > "0" ? 1 : 0.0
     }
     
     private var isBubbleRunning:Bool { bubble.state == .running }

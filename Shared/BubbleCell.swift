@@ -15,7 +15,7 @@ struct BubbleCell: View {
     
     private let secretary = Secretary.shared
     
-    @State private var components:Float.TimeComponentsAsStrings = .init(hr: "0", min: "0", sec: "0", cents: "0")
+    @State private var components:Float.TimeComponentsAsStrings = .zeroAll
     
     let metrics: Metrics
     @StateObject private var bubble:Bubble
@@ -31,6 +31,7 @@ struct BubbleCell: View {
                 threeCircles //🔴🔴🔴
                 ThreeLabels(metrics.spacing,
                             metrics.timeComponentsFontSize,
+                            metrics.hundredthsFontSize,
                             startDelayBubble,
                             $isSecondsTapped,
                             $isSecondsLongPressed,
@@ -42,8 +43,6 @@ struct BubbleCell: View {
             
             .overlay { CalendarEventCreatedConfirmation(rank: bubble.rank) } //1
             .overlay { CalendarEventRemovedConfirmation(rank: bubble.rank) } //1
-            
-            .overlay { if !isBubbleRunning { hundredthsView }}
         }
         .listRowSeparator(.hidden)
         .swipeActions(edge: .leading, allowsFullSwipe: true) {
@@ -104,24 +103,6 @@ struct BubbleCell: View {
         }
     }
     
-    private var hundredthsView:some View {
-        Push(.bottomRight) {
-            Text(components.cents)
-                .padding()
-                .background(Circle().foregroundColor(.pauseStickerColor))
-                .foregroundColor(.pauseStickerFontColor)
-                .font(.system(size: metrics.hundredthsFontSize, weight: .semibold, design: .rounded))
-            //animations:scale, offset and opacity
-                .scaleEffect(isSecondsTapped && !isBubbleRunning ? 2 : 1.0)
-                .offset(x: isSecondsTapped && !isBubbleRunning ? -20 : 0,
-                        y: isSecondsTapped && !isBubbleRunning ? -20 : 0)
-                .opacity(isSecondsTapped && !isBubbleRunning ? 0 : 1)
-                .animation(.spring(response: 0.3, dampingFraction: 0.2), value: isSecondsTapped)
-                .zIndex(1)
-                .onTapGesture { userTappedHundredths() }
-        }
-    }
-    
     private var noteButtonContent:some View {
         BubbleNote().environmentObject(bubble)
     }
@@ -172,11 +153,6 @@ struct BubbleCell: View {
     }
     
     // MARK: - User Intents
-    //Start/Pause Bubble 2 ways
-    /* 1 */private func userTappedHundredths() {
-        UserFeedback.singleHaptic(.heavy)
-        viewModel.toggleBubbleStart(bubble)
-    }
     
     ///long press on hours to show the notes list
     func showNotesList() {
