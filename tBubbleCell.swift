@@ -31,7 +31,6 @@ struct tBubbleCell: View {
             bubble.color = Color.triColors.randomElement()!.description
             PersistenceController.shared.save()
         }
-        .onAppear { bubble.coordinator.wakeUp() }
     }
 }
 
