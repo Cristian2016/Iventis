@@ -60,11 +60,12 @@ class BubbleCellCoordinator {
         
         //send minute and hour
         if secValue == 0 {
-            let minValue = String(intValue/60%60)
+            let giveMeAName = intValue/60%60
+            let minValue = String(giveMeAName)
             DispatchQueue.main.async { self.minPublisher.send(minValue) }
             
             //send hour
-            if (intValue%3600) == 0 {
+            if (giveMeAName%60) == 0 {
                 let hrValue = String(intValue/3600)
                 DispatchQueue.main.async { self.hrPublisher.send(hrValue) }
             }
