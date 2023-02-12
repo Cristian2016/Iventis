@@ -23,7 +23,12 @@ struct ThreeCircles: View {
             /* Sec */ bubbleShape
         }
         .onReceive(bubble.coordinator.visibilityPublisher) { output in
-            
+            if output.count == 1 {
+                switch output[0] {
+                    case .min(let value): minOpacity = (value == .show) ? 1 : 0
+                    case .hr(let value): hrOpacity = (value == .show) ? 1 : 0
+                }
+            }
         }
     }
 }

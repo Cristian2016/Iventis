@@ -40,7 +40,6 @@ class BubbleCellCoordinator {
     deinit {
         cancellable = []
         NotificationCenter.default.removeObserver(self)
-        print("coord deinit")
     }
     
     private lazy var publisher =
@@ -75,7 +74,10 @@ class BubbleCellCoordinator {
         if secValue == 0 {
             let giveMeAName = intValue/60%60
             let minValue = String(giveMeAName)
-            DispatchQueue.main.async { self.minPublisher.send(minValue) }
+            DispatchQueue.main.async {
+                self.minPublisher.send(minValue)
+                self.visibilityPublisher.send([.min(.show)])
+            }
             
             //send hour
             if (giveMeAName%60) == 0 {
