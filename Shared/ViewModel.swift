@@ -32,7 +32,6 @@ class ViewModel: ObservableObject {
         let bubbles = try? PersistenceController.shared.viewContext.fetch(request)
         wakeUpCoordinator(of: bubbles)
         observe_delayReachedZero_Notification()
-//        delayExecution(.now() + 0.0001) { self.updateTimeComponents(bubbles) }
     }
         
     // MARK: -
@@ -96,7 +95,6 @@ class ViewModel: ObservableObject {
             
             newBubble.coordinator.wakeUp()
             try? context.save()
-            print(context.concurrencyType == .mainQueueConcurrencyType)
         }
     }
     
@@ -226,6 +224,8 @@ class ViewModel: ObservableObject {
                 //remove only that
                 if secretary.addNoteButton_bRank == Int(bubble.rank) { secretary.addNoteButton_bRank = nil
                 } //1
+                
+//                bubble.coordinator.centsPublisher.send(<#T##input: String##String#>)
                 
             case .finished: return
         }

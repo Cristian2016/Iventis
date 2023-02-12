@@ -94,6 +94,7 @@ struct FourLabels: View {
         .onReceive(bubble.coordinator.secPublisher) { sec = $0 }
         .onReceive(bubble.coordinator.minPublisher) { min = $0 }
         .onReceive(bubble.coordinator.hrPublisher) { hr = $0 }
+//        .onReceive(bubble.coordinator.) { hr = $0 }
     }
     
     // MARK: - Lego

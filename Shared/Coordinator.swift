@@ -20,6 +20,7 @@ class BubbleCellCoordinator {
     var secPublisher:CurrentValueSubject<String, Never>
     var minPublisher:CurrentValueSubject<String, Never>
     var hrPublisher:CurrentValueSubject<String, Never>
+//    var centsPublisher:CurrentValueSubject<String, Never>
     
     // MARK: -
     let bubble:Bubble
@@ -49,7 +50,6 @@ class BubbleCellCoordinator {
         NotificationCenter.Publisher(center: .default, name: .bubbleTimerSignal)
             .sink { [weak self] _ in
                 if self?.bubble.state != .running {
-//                    print(self!.bubble.state )
                     return
                 }
                 self?.updateComponents()
