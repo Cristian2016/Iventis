@@ -67,8 +67,7 @@ struct FourLabels: View {
             
             SecondsLabel(bubble: bubble,
                          isSecondsTapped: $isSecondsTapped,
-                         isSecondsLongPressed: $isSecondsLongPressed
-            )
+                         isSecondsLongPressed: $isSecondsLongPressed)
             .overlay { if sDelayBubble.referenceDelay > 0 { SDButton(bubble.sdb) }}
         }
         .overlay { if !isBubbleRunning { hundredthsView }}
