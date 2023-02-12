@@ -20,6 +20,8 @@ class ViewModel: ObservableObject {
     
     // MARK: - Alerts
     @Published var path = [Bubble]()
+    
+    private(set) var bubbles:[Bubble] = []
         
     // MARK: -
     var notesForPair: CurrentValueSubject<Pair?, Never> = .init(nil)
@@ -28,24 +30,13 @@ class ViewModel: ObservableObject {
             
     // MARK: -
     init() {
-        let request = Bubble.fetchRequest()
-        let bubbles = try? PersistenceController.shared.viewContext.fetch(request)
-//        updateCurrentClock(of: bubbles)
-        wakeUpCoordinator(of: bubbles)
-        observe_delayReachedZero_Notification()
+//        let request = Bubble.fetchRequest()
+//        let bubbles = try? PersistenceController.shared.viewContext.fetch(request)
+//        wakeUpCoordinator(of: bubbles)
+//        observe_delayReachedZero_Notification()
     }
         
     // MARK: -
-//    private func updateCurrentClock(of bubbles:[Bubble]?) {
-//        delayExecution(.now() + 0.0001) {
-//            bubbles?.forEach {
-//                if $0.state != .running {
-//                    $0.components = $0.currentClock.timeComponentsAsStrings
-//                }
-//            }
-//        }
-//    }
-    
     private func wakeUpCoordinator(of bubbles:[Bubble]?) {
         delayExecution(.now() + 0.0001) {
             bubbles?.forEach { bubble in
@@ -67,43 +58,52 @@ class ViewModel: ObservableObject {
     // MARK: - User Intents
     //from PaletteView and...
     func createBubble(_ kind:Bubble.Kind, _ color:String, _ note:String? = nil) {
-        let backgroundContext = PersistenceController.shared.backgroundContext
+        
+        let context = PersistenceController.shared.container.newBackgroundContext()
                 
-        //bubble
-        let newBubble = Bubble(context: backgroundContext)
-        newBubble.created = Date()
-        
-        newBubble.kind = kind
-        switch kind {
-            case .timer(let initialClock):
-                newBubble.initialClock = initialClock
-            default: newBubble.initialClock = 0
+        context.perform {
+            let newBubble = Bubble(context: context)
+            newBubble.created = Date()
+            newBubble.kind = kind
+            switch kind {
+                case .timer(let initialClock):
+                    newBubble.initialClock = initialClock
+                default: newBubble.initialClock = 0
+            }
+            
+            newBubble.color = color
+            newBubble.rank = Int64(UserDefaults.generateRank())
+            
+            let sdb = StartDelayBubble(context: newBubble.managedObjectContext!)
+            newBubble.sdb = sdb
+            if let note = note {
+                newBubble.note_ = note
+                newBubble.isNoteHidden = false
+            }
+            
+            newBubble.coordinator.wakeUp()
+            try? context.save()
+            print(context.concurrencyType == .mainQueueConcurrencyType)
         }
-        
-        newBubble.color = color
-        newBubble.rank = Int64(UserDefaults.generateRank())
-        
-        let sdb = StartDelayBubble(context: backgroundContext)
-        newBubble.sdb = sdb
-        if let note = note {
-            newBubble.note_ = note
-            newBubble.isNoteHidden = false
-        }
-        
-        newBubble.coordinator.wakeUp()
-        try? backgroundContext.save()
     }
     
     func delete(_ bubble:Bubble) {
         //if unpinned are hidden & bubble to delete is pinned and pinned section has only one item, unhide unpinned
-        if secretary.showFavoritesOnly, Secretary.shared.pinnedBubblesCount == 1 {
-            secretary.showFavoritesOnly = false
-        }
+//        if secretary.showFavoritesOnly, Secretary.shared.pinnedBubblesCount == 1 {
+//            secretary.showFavoritesOnly = false
+//        }
         
         if !path.isEmpty { path = [] }
-        let viewContext = PersistenceController.shared.viewContext
-        viewContext.delete(bubble)
-        try? viewContext.save()
+        
+        let context = bubble.managedObjectContext!
+        
+        //⚠️ do I really need to set to nil?
+        delayExecution(.now() + 0.2) { bubble.coordinator = nil  }
+
+        context.perform {
+            context.delete(bubble)
+            try? context.save()
+        }
     }
     
     func deleteSession(_ session:Session) {
@@ -147,9 +147,9 @@ class ViewModel: ObservableObject {
     }
     
     func togglePin(_ bubble:Bubble) {
-        if bubble.isPinned, Secretary.shared.pinnedBubblesCount == 1 {
-            secretary.showFavoritesOnly = false
-        }
+//        if bubble.isPinned, Secretary.shared.pinnedBubblesCount == 1 {
+//            secretary.showFavoritesOnly = false
+//        }
         bubble.isPinned.toggle()
         PersistenceController.shared.save()
     }
@@ -164,11 +164,13 @@ class ViewModel: ObservableObject {
         switch bubble.state {
             case .brandNew: /* changes to .running */
                 //create first session and add first pair to the session
-                let newSession = Session(context: PersistenceController.shared.viewContext)
-                let newPair = Pair(context: PersistenceController.shared.viewContext)
+                let newSession = Session(context: bubble.managedObjectContext!)
+                let newPair = Pair(context: bubble.managedObjectContext!)
+                
                 newPair.start = Date().addingTimeInterval(startDelayCompensation)
-                bubble.addToSessions(newSession)
                 newSession.created = Date().addingTimeInterval(startDelayCompensation)
+                
+                bubble.addToSessions(newSession)
                 newSession.addToPairs(newPair)
                 
                 if !path.isEmpty { bubble.syncSmallBubbleCell = true }
@@ -176,6 +178,7 @@ class ViewModel: ObservableObject {
                 //1 both
                 secretary.addNoteButton_bRank = nil //clear first
                 secretary.addNoteButton_bRank = Int(bubble.rank)
+                print(bubble.state)
                                 
             case .paused:  /* changes to running */
                 //create new pair, add it to currentSession

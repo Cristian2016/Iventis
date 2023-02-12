@@ -14,7 +14,7 @@ import MyPackage
 @objc(Bubble)
 public class Bubble: NSManagedObject {
     
-    lazy var coordinator:BubbleCellCoordinator = BubbleCellCoordinator(for: self)
+    lazy var coordinator:BubbleCellCoordinator! = BubbleCellCoordinator(for: self)
     
     // MARK: - Observers
     var observerAdded = false {didSet{
@@ -44,7 +44,10 @@ public class Bubble: NSManagedObject {
     = Float.TimeComponentsAsStrings(hr: "0", min: "0", sec: "0", cents: "00")
     { willSet { DispatchQueue.main.async { self.objectWillChange.send() } }}
             
-    deinit { NotificationCenter.default.removeObserver(self) } //1
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+        print(#function, " \(color)")
+    } //1
     
     enum Kind:Comparable {
         case stopwatch

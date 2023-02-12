@@ -71,7 +71,7 @@ struct BubbleList: View {
                     .navigationDestination(for: Bubble.self) { detailView($0) }
                     .background { RefresherView() } //11
                     .refreshable {
-                        if Secretary.shared.pinnedBubblesCount != 0 { secretary.showFavoritesOnly.toggle() }
+//                        if Secretary.shared.pinnedBubblesCount != 0 { secretary.showFavoritesOnly.toggle() }
                     } //11
                 }
             }

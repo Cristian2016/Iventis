@@ -11,27 +11,6 @@ class Secretary {
     private init() { }
     static let shared = Secretary()
     
-    // MARK: - Shit it knows :)
-    var pinnedBubblesCount:Int {
-       let context = PersistenceController.shared.backgroundContext
-        let request = Bubble.fetchRequest()
-        request.predicate = NSPredicate(format: "isPinned == true")
-        if let count = try? context.count(for: request) {
-            return count
-        }
-        return 0
-    }
-    
-    var unpinnedBubblesCount:Int {
-       let context = PersistenceController.shared.backgroundContext
-        let request = Bubble.fetchRequest()
-        request.predicate = NSPredicate(format: "isPinned == false")
-        if let count = try? context.count(for: request) {
-            return count
-        }
-        return 0
-    }
-    
     // MARK: - Publishers
 //    @Published var confirm_ColorChange = false
     
