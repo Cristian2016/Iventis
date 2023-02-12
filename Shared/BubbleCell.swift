@@ -29,7 +29,7 @@ struct BubbleCell: View {
         VStack {
             ZStack {
                 ThreeCircles(bubble: bubble, metrics: metrics)
-                ThreeLabels(metrics.spacing,
+                FourLabels(metrics.spacing,
                             metrics.timeComponentsFontSize,
                             metrics.hundredthsFontSize,
                             startDelayBubble,

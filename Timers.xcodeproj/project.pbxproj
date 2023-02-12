@@ -86,7 +86,7 @@
 		1FAE715D298D1CA200E19959 /* DualTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FAE715C298D1CA200E19959 /* DualTextView.swift */; };
 		1FAF39D9298575E9002D833C /* Library.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA377E72972FE75005ACD41 /* Library.swift */; };
 		1FAF39DB29857688002D833C /* MyPackage in Frameworks */ = {isa = PBXBuildFile; productRef = 1FAF39DA29857688002D833C /* MyPackage */; };
-		1FB2EA772997BD2F00752595 /* ThreeLabels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB2EA762997BD2F00752595 /* ThreeLabels.swift */; };
+		1FB2EA772997BD2F00752595 /* FourLabels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB2EA762997BD2F00752595 /* FourLabels.swift */; };
 		1FB3178F286ACB48006BBE82 /* Note_InfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB3178E286ACB48006BBE82 /* Note_InfoView.swift */; };
 		1FB4D4E02977F86500F26D9C /* iPadViewHierarchy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB4D4DF2977F86500F26D9C /* iPadViewHierarchy.swift */; };
 		1FB5D8D428E81CD900DD522A /* InfoButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB5D8D328E81CD900DD522A /* InfoButton.swift */; };
@@ -221,7 +221,7 @@
 		1FAD157B298AAFDB001139C6 /* BubbleDeleteActionAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BubbleDeleteActionAlert.swift; sourceTree = "<group>"; };
 		1FAD9B4129961FC000F49670 /* ThreeCircles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreeCircles.swift; sourceTree = SOURCE_ROOT; };
 		1FAE715C298D1CA200E19959 /* DualTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DualTextView.swift; sourceTree = "<group>"; };
-		1FB2EA762997BD2F00752595 /* ThreeLabels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreeLabels.swift; sourceTree = "<group>"; };
+		1FB2EA762997BD2F00752595 /* FourLabels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FourLabels.swift; sourceTree = "<group>"; };
 		1FB3178E286ACB48006BBE82 /* Note_InfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Note_InfoView.swift; sourceTree = "<group>"; };
 		1FB4D4DF2977F86500F26D9C /* iPadViewHierarchy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iPadViewHierarchy.swift; sourceTree = "<group>"; };
 		1FB5D8D328E81CD900DD522A /* InfoButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoButton.swift; sourceTree = "<group>"; };
@@ -378,7 +378,7 @@
 			isa = PBXGroup;
 			children = (
 				1FAD9B4129961FC000F49670 /* ThreeCircles.swift */,
-				1FB2EA762997BD2F00752595 /* ThreeLabels.swift */,
+				1FB2EA762997BD2F00752595 /* FourLabels.swift */,
 				1F3950B929966DEA00DD9423 /* Coordinator.swift */,
 				1F1CF2F1286B5AD2007102F2 /* InfoViews */,
 				1F5F4A4A28093FAD00AF3442 /* TimersApp.swift */,
@@ -638,7 +638,7 @@
 				1F5F4A992809456E00AF3442 /* BubbleList.swift in Sources */,
 				1F5A0F6F282647A80075E86B /* DetailView.swift in Sources */,
 				1FFC8BB928142F040059EF2E /* Pair Properties.swift in Sources */,
-				1FB2EA772997BD2F00752595 /* ThreeLabels.swift in Sources */,
+				1FB2EA772997BD2F00752595 /* FourLabels.swift in Sources */,
 				1F18B45C281FA9C90080ADA6 /* CalendarSticker.swift in Sources */,
 				1F1CF2F3286B5BD8007102F2 /* PairStickyNoteList.swift in Sources */,
 				1F52B8C8299233AF0093810C /* ColorsGrid.swift in Sources */,
