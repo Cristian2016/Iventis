@@ -56,16 +56,16 @@ class BubbleCellCoordinator {
         var value = bubble.currentClock + Float(Δ)
         value.round(.toNearestOrEven) //ex: 2345
         let intValue = Int(value)
+        let secValue = intValue%60
         
-        if (intValue%60) == 0 {
+        if secValue == 0 {
+            let minValue = String(intValue/60%60)
             DispatchQueue.main.async {
-                self.minPublisher.send(String(intValue/60%60))
+                self.minPublisher.send(minValue)
             }
         }
-        
-        let sec = String(intValue%60)
-        
-        DispatchQueue.main.async { self.secPublisher.send(sec) }
+                
+        DispatchQueue.main.async { self.secPublisher.send(String(secValue)) }
     } //1
 }
 
