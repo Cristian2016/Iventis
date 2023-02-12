@@ -65,7 +65,11 @@ class BubbleCellCoordinator {
         }
         
         //send once an hour
-               
+        if (intValue%3600) == 0 {
+            let hrValue = String(intValue/3600)
+            DispatchQueue.main.async { self.hrPublisher.send(hrValue) }
+        }
+        
         //send each second
         DispatchQueue.main.async { self.secPublisher.send(String(secValue)) }
     } //1
