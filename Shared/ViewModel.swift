@@ -178,8 +178,8 @@ class ViewModel: ObservableObject {
                 //1 both
                 secretary.addNoteButton_bRank = nil //clear first
                 secretary.addNoteButton_bRank = Int(bubble.rank)
-                print(bubble.state)
-                                
+                print(bubble.sessions_.count, " sessions")
+                                                
             case .paused:  /* changes to running */
                 //create new pair, add it to currentSession
                 let newPair = Pair(context: PersistenceController.shared.viewContext)

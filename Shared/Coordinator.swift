@@ -39,19 +39,18 @@ class BubbleCellCoordinator {
     deinit {
         cancellable = []
         NotificationCenter.default.removeObserver(self)
-        print(#function, " Coord")
+        print("coord deinit")
     }
     
     private var cancellable = Set<AnyCancellable>()
     
     ///on wake-up it starts observing backgroundTimer
     func wakeUp() {
-        print(#function)
         NotificationCenter.Publisher(center: .default, name: .bubbleTimerSignal)
             .sink { [weak self] _ in
                 if self?.bubble.state != .running {
                     return
-                    print(self!.bubble.state)
+                    print(self!.bubble.state, self!.bubble.sessions_.count, self!.bubble.lastSession?.pairs_.count)
                 }
                 self?.updateComponents()
             }
