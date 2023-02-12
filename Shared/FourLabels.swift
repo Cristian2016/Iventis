@@ -48,8 +48,7 @@ struct FourLabels: View {
         
     var body: some View {
         HStack (spacing: spacing) {
-            //HOURS
-            Circle().fill(Color.clear)
+            Circle().fill(Color.clear) //Hr
                 .overlay { Text(hr) }
                 .opacity(hrOpacity)
                 .scaleEffect(isSecondsLongPressed ? 0.2 : 1.0)
@@ -58,8 +57,7 @@ struct FourLabels: View {
                 .onTapGesture { toggleBubbleDetail() }
                 .onLongPressGesture { showNotesList() }
             
-            //MINUTES
-            Circle().fill(Color.clear)
+            Circle().fill(Color.clear) //Min
                 .overlay { Text(min) }
                 .opacity(minOpacity)
                 .scaleEffect(isSecondsLongPressed ? 0.2 : 1.0)
@@ -67,7 +65,6 @@ struct FourLabels: View {
                 .animation(.secondsLongPressed.delay(0.1), value: isSecondsLongPressed)
                 .onTapGesture { toggleBubbleDetail() }
             
-            //SECONDS
             SecondsLabel(bubble: bubble,
                          isSecondsTapped: $isSecondsTapped,
                          isSecondsLongPressed: $isSecondsLongPressed
