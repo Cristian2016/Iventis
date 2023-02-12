@@ -72,7 +72,10 @@ class BubbleCellCoordinator {
         }
         
         //send each second
-        DispatchQueue.main.async { self.secPublisher.send(String(secValue)) }
+        DispatchQueue.main.async {
+            self.secPublisher.send(String(secValue))
+            print("publish")
+        }
     } //1
 }
 
