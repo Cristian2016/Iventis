@@ -19,7 +19,6 @@ struct FourLabels: View {
     
     @State private var hr = String()
     @State private var min = String()
-    @State private var sec = String()
     @State private var cents = String()
     
     @Binding private var isSecondsTapped:Bool
@@ -35,8 +34,8 @@ struct FourLabels: View {
          _ startDelayBubble:StartDelayBubble,
          _ isSecondsTapped:Binding<Bool>,
          _ isSecondsLongPressed:Binding<Bool>,
-         _ bubble:Bubble
-    ) {
+         _ bubble:Bubble) {
+        
         let _ = print("FourLabels body")
         self.spacing = spacing
         self.timeComponentsFontSize = timeComponentsFontSize
@@ -73,26 +72,15 @@ struct FourLabels: View {
                 .onTapGesture { toggleBubbleDetail() }
             
             //SECONDS
-            Circle().fill(Color.clear)
-                .contentShape(Circle())
-                .overlay { Text(sec) }
-            //            //animations
-                .scaleEffect(isSecondsLongPressed ? 0.2 : 1.0)
-                .animation(.secondsLongPressed, value: isSecondsLongPressed)
-            //            //gestures
-                .gesture(tap)
-                .gesture(longPress)
-            //            //overlays
-                .overlay {
-                    if startDelayBubble.referenceDelay > 0 { SDButton(bubble.sdb) }
-                }
+            SecondsLabel(bubble: bubble,
+                         isSecondsTapped: $isSecondsTapped,
+                         isSecondsLongPressed: $isSecondsLongPressed)
         }
         .overlay { if !isBubbleRunning { hundredthsView }}
         //font
         .font(.system(size: timeComponentsFontSize))
         .fontDesign(.rounded)
         .foregroundColor(.white)
-        .onReceive(bubble.coordinator.secPublisher) { sec = $0 }
         .onReceive(bubble.coordinator.minPublisher) { min = $0 }
         .onReceive(bubble.coordinator.hrPublisher) { hr = $0 }
 //        .onReceive(bubble.coordinator.) { hr = $0 }
@@ -118,11 +106,7 @@ struct FourLabels: View {
     }
     
     // MARK: - Gestures
-    private var tap:some Gesture { TapGesture().onEnded { _ in userTappedSeconds() }}
     
-    private var longPress: some Gesture {
-        LongPressGesture(minimumDuration: 0.3).onEnded { _ in endSession() }
-    }
     
     // MARK: - User Intents
     private func toggleBubbleDetail() {
@@ -136,7 +120,52 @@ struct FourLabels: View {
     }
     
     // MARK: -
-    /* 2 */private func userTappedSeconds() {
+    
+    /* 1 */private func userTappedHundredths() {
+        UserFeedback.singleHaptic(.heavy)
+        viewModel.toggleBubbleStart(bubble)
+    }
+    
+    // MARK: - Small Helpers
+    private var hrOpacity:Double { (hr > "0") ? 1 : 0.001 }
+    
+    private var minOpacity:Double { (min > "0" || hr > "0") ? 1 : 0.0 }
+    
+    private var isBubbleRunning:Bool { bubble.state == .running }
+}
+
+struct SecondsLabel: View {
+    let bubble:Bubble
+    @EnvironmentObject private var viewModel:ViewModel
+    
+    @Binding var isSecondsTapped:Bool
+    @Binding var isSecondsLongPressed:Bool
+    
+    @State private var sec = String()
+    
+    var body: some View {
+        Circle().fill(Color.clear)
+            .contentShape(Circle())
+            .overlay { Text(sec) }
+            .scaleEffect(isSecondsLongPressed ? 0.2 : 1.0)
+            .animation(.secondsLongPressed, value: isSecondsLongPressed)
+            .gesture(tap)
+            .gesture(longPress)
+            .overlay {
+//                if bubble.sdb.referenceDelay > 0 { SDButton(bubble.sdb) }
+            }
+            .onReceive(bubble.coordinator.secPublisher) { sec = $0 }
+    }
+    
+    // MARK: - Gestures
+    private var tap:some Gesture { TapGesture().onEnded { _ in userTappedSeconds() }}
+    
+    private var longPress: some Gesture {
+        LongPressGesture(minimumDuration: 0.3).onEnded { _ in endSession() }
+    }
+    
+    // MARK: -
+    private func userTappedSeconds() {
         isSecondsTapped = true
         delayExecution(.now() + 0.1) { isSecondsTapped = false }
         
@@ -144,11 +173,6 @@ struct FourLabels: View {
         UserFeedback.singleHaptic(.heavy)
         
         //user intent model
-        viewModel.toggleBubbleStart(bubble)
-    }
-    
-    /* 1 */private func userTappedHundredths() {
-        UserFeedback.singleHaptic(.heavy)
         viewModel.toggleBubbleStart(bubble)
     }
     
@@ -162,11 +186,4 @@ struct FourLabels: View {
         //user intent model
         viewModel.endSession(bubble)
     }
-    
-    // MARK: - Small Helpers
-    private var hrOpacity:Double { (hr > "0") ? 1 : 0.001 }
-    
-    private var minOpacity:Double { (min > "0" || hr > "0") ? 1 : 0.0 }
-    
-    private var isBubbleRunning:Bool { bubble.state == .running }
 }
