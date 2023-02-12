@@ -52,11 +52,9 @@ struct FourLabels: View {
             Circle().fill(Color.clear)
                 .overlay { Text(hr) }
                 .opacity(hrOpacity)
-            //animations
                 .scaleEffect(isSecondsLongPressed ? 0.2 : 1.0)
                 .offset(x: isSecondsLongPressed ? 20 : 0.0, y: 0)
                 .animation(.secondsLongPressed.delay(0.2), value: isSecondsLongPressed)
-            //gestures
                 .onTapGesture { toggleBubbleDetail() }
                 .onLongPressGesture { showNotesList() }
             
@@ -64,11 +62,9 @@ struct FourLabels: View {
             Circle().fill(Color.clear)
                 .overlay { Text(min) }
                 .opacity(minOpacity)
-            //animations
                 .scaleEffect(isSecondsLongPressed ? 0.2 : 1.0)
                 .offset(x: isSecondsLongPressed ? 10 : 0.0, y: 0)
                 .animation(.secondsLongPressed.delay(0.1), value: isSecondsLongPressed)
-            //gestures
                 .onTapGesture { toggleBubbleDetail() }
             
             //SECONDS
@@ -79,7 +75,6 @@ struct FourLabels: View {
             .overlay { if sDelayBubble.referenceDelay > 0 { SDButton(bubble.sdb) }}
         }
         .overlay { if !isBubbleRunning { hundredthsView }}
-        //font
         .font(.system(size: timeComponentsFontSize))
         .fontDesign(.rounded)
         .foregroundColor(.white)
