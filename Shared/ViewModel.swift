@@ -30,10 +30,10 @@ class ViewModel: ObservableObject {
             
     // MARK: -
     init() {
-//        let request = Bubble.fetchRequest()
-//        let bubbles = try? PersistenceController.shared.viewContext.fetch(request)
-//        wakeUpCoordinator(of: bubbles)
-//        observe_delayReachedZero_Notification()
+        let request = Bubble.fetchRequest()
+        let bubbles = try? PersistenceController.shared.viewContext.fetch(request)
+        wakeUpCoordinator(of: bubbles)
+        observe_delayReachedZero_Notification()
     }
         
     // MARK: -

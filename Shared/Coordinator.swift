@@ -51,7 +51,7 @@ class BubbleCellCoordinator {
             .sink { [weak self] _ in
                 if self?.bubble.state != .running {
                     return
-//                    print(self!.bubble.state)
+                    print(self!.bubble.state)
                 }
                 self?.updateComponents()
             }
