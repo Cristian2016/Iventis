@@ -43,19 +43,19 @@ class BubbleCellCoordinator {
         print("coord deinit")
     }
     
+    private lazy var publisher = NotificationCenter.Publisher(center: .default, name: .bubbleTimerSignal)
     private var cancellable = Set<AnyCancellable>()
     
     func update(_ action:Action) {
         switch action {
             case .start:
-                NotificationCenter.Publisher(center: .default, name: .bubbleTimerSignal)
+                publisher
                     .sink { [weak self] _ in
                         self?.updateComponents()
                     }
                     .store(in: &cancellable)
             case .pause:
                 cancellable = []
-                NotificationCenter.default.removeObserver(self)
         }
     }
     
