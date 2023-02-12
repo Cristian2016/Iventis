@@ -297,15 +297,14 @@ class ViewModel: ObservableObject {
         
         DispatchQueue.global().async {
             let components = bubble.initialClock.timeComponentsAsStrings
+            
+            DispatchQueue.main.async {
+                bubble.coordinator.hrPublisher.send(components.hr)
+                bubble.coordinator.minPublisher.send(components.min)
+                bubble.coordinator.secPublisher.send(components.sec)
+            }
         }
-        
-        
-        bubble.coordinator.hrPublisher.send(<#T##input: String##String#>)
-        
-        bubble.coordinator.componentsPublisher.send(bubble.initialClock.timeComponentsAsStrings)
-        
-        print("send \(bubble.initialClock.timeComponentsAsStrings)")
-        
+                
         //mark session as ended
         bubble.lastSession?.isEnded = true
                 
