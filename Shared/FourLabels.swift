@@ -26,7 +26,7 @@ struct FourLabels: View {
     
     @GestureState var isDetectingLongPress = false
     
-    private let startDelayBubble:StartDelayBubble
+    private let sDelayBubble:StartDelayBubble
     
     init(_ spacing: CGFloat,
          _ timeComponentsFontSize:CGFloat,
@@ -40,7 +40,7 @@ struct FourLabels: View {
         self.spacing = spacing
         self.timeComponentsFontSize = timeComponentsFontSize
         self.hundredthsFontSize = hundredthsFontSize
-        self.startDelayBubble = startDelayBubble
+        self.sDelayBubble = startDelayBubble
         _isSecondsTapped = isSecondsTapped
         _isSecondsLongPressed = isSecondsLongPressed
         self.bubble = bubble
@@ -76,9 +76,7 @@ struct FourLabels: View {
                          isSecondsTapped: $isSecondsTapped,
                          isSecondsLongPressed: $isSecondsLongPressed
             )
-            .overlay {
-                if startDelayBubble.referenceDelay > 0 { SDButton(bubble.sdb) }
-            }
+            .overlay { if sDelayBubble.referenceDelay > 0 { SDButton(bubble.sdb) }}
         }
         .overlay { if !isBubbleRunning { hundredthsView }}
         //font
