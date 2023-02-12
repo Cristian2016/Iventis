@@ -45,16 +45,18 @@ class BubbleCellCoordinator {
     
     private var cancellable = Set<AnyCancellable>()
     
-    ///on wake-up it starts observing backgroundTimer
-    func wakeUp() {
-        NotificationCenter.Publisher(center: .default, name: .bubbleTimerSignal)
-            .sink { [weak self] _ in
-                if self?.bubble.state != .running {
-                    return
-                }
-                self?.updateComponents()
-            }
-            .store(in: &cancellable)
+    func update(_ action:Action) {
+        switch action {
+            case .start:
+                NotificationCenter.Publisher(center: .default, name: .bubbleTimerSignal)
+                    .sink { [weak self] _ in
+                        self?.updateComponents()
+                    }
+                    .store(in: &cancellable)
+            case .pause:
+                cancellable = []
+                NotificationCenter.default.removeObserver(self)
+        }
     }
     
     private func updateComponents() {
@@ -83,6 +85,11 @@ class BubbleCellCoordinator {
         //send each second
         DispatchQueue.main.async { self.secPublisher.send(String(secValue)) }
     } //1
+    
+    enum Action {
+        case start
+        case pause
+    }
 }
 
 extension BubbleCellCoordinator {

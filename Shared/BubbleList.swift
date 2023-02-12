@@ -68,7 +68,7 @@ struct BubbleList: View {
                         PlusSymbol()
                     }}
                     .padding(BubbleCell.padding) //9
-                    .navigationDestination(for: Bubble.self) { detailView($0) }
+                    .navigationDestination(for: Bubble.self) { _ in EmptyView() }
                     .background { RefresherView() } //11
                     .refreshable {
 //                        if Secretary.shared.pinnedBubblesCount != 0 { secretary.showFavoritesOnly.toggle() }

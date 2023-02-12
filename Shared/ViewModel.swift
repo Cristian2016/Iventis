@@ -52,7 +52,7 @@ class ViewModel: ObservableObject {
     private func wakeUpCoordinator(of bubbles:[Bubble]?) {
         delayExecution(.now() + 0.0001) {
             bubbles?.forEach { bubble in
-                bubble.coordinator.wakeUp()
+//                bubble.coordinator.update()
             }
         }
     }
@@ -93,7 +93,6 @@ class ViewModel: ObservableObject {
                 newBubble.isNoteHidden = false
             }
             
-            newBubble.coordinator.wakeUp()
             try? context.save()
         }
     }
@@ -155,6 +154,9 @@ class ViewModel: ObservableObject {
         bubble.coordinator.componentsPublisher.send(bubble.initialClock.timeComponentsAsStrings)
         bubble.sessions?.forEach { viewContext.delete($0 as! Session) }
         try? viewContext.save()
+        
+        bubble.coordinator.update(.pause)
+        updateTimeComponents([bubble])
     }
     
     func togglePin(_ bubble:Bubble) {
@@ -189,6 +191,8 @@ class ViewModel: ObservableObject {
                 //1 both
                 secretary.addNoteButton_bRank = nil //clear first
                 secretary.addNoteButton_bRank = Int(bubble.rank)
+                
+                bubble.coordinator.update(.start)
                                                 
             case .paused:  /* changes to running */
                 //create new pair, add it to currentSession
@@ -201,6 +205,8 @@ class ViewModel: ObservableObject {
                 //1 both
                 secretary.addNoteButton_bRank = nil //clear first
                 secretary.addNoteButton_bRank = Int(bubble.rank)
+                
+                bubble.coordinator.update(.start)
                 
             case .running: /* changes to .paused */
                 let currentPair = bubble.lastPair
@@ -225,7 +231,7 @@ class ViewModel: ObservableObject {
                 if secretary.addNoteButton_bRank == Int(bubble.rank) { secretary.addNoteButton_bRank = nil
                 } //1
                 
-//                bubble.coordinator.centsPublisher.send(<#T##input: String##String#>)
+                bubble.coordinator.update(.pause)
                 
             case .finished: return
         }
@@ -309,6 +315,7 @@ class ViewModel: ObservableObject {
         bubble.currentClock = bubble.initialClock
         
         updateTimeComponents([bubble])
+        bubble.coordinator.update(.pause)
                 
         //mark session as ended
         bubble.lastSession?.isEnded = true

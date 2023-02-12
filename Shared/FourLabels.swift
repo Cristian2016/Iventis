@@ -37,6 +37,7 @@ struct FourLabels: View {
          _ isSecondsLongPressed:Binding<Bool>,
          _ bubble:Bubble
     ) {
+        let _ = print("FourLabels body")
         self.spacing = spacing
         self.timeComponentsFontSize = timeComponentsFontSize
         self.hundredthsFontSize = hundredthsFontSize
