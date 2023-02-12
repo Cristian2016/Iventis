@@ -11,11 +11,15 @@ import Combine
 class BubbleCellCoordinator {
     // MARK: - Publishers
     //they emit their initial value, without .send()! ⚠️
-    var visibilityPublisher:CurrentValueSubject<Component, Never>
+    var visibilityPublisher:CurrentValueSubject<[Component], Never> = .init([.min(.hide), .hr(.show)])
     
     var colorPublisher:CurrentValueSubject<Color, Never> = .init(.blue)
     
     lazy var componentsPublisher:CurrentValueSubject<Float.TimeComponentsAsStrings, Never> = .init(bubble.currentClock.timeComponentsAsStrings)
+    
+    var secPublisher:CurrentValueSubject<String, Never>
+    var minPublisher:CurrentValueSubject<String, Never>
+    var hrPublisher:CurrentValueSubject<String, Never>
     
     // MARK: -
     let bubble:Bubble
@@ -23,13 +27,13 @@ class BubbleCellCoordinator {
     init(for bubble:Bubble) {
         self.bubble = bubble
         
-        let value:Component
-        switch bubble.currentClock {
-            case 0...59: value = Component.min(.hide)
-            case bubble.currentClock where bubble.currentClock > 60: value = Component.min(.show)
-            default: value = Component.min(.hide)
-        }
-        self.visibilityPublisher = .init(value)
+        
+        // TODO: make it run on backgroundThread
+        let components = bubble.currentClock.timeComponentsAsStrings
+        
+        self.hrPublisher = .init(components.hr)
+        self.minPublisher = .init(components.min)
+        self.secPublisher = .init(components.sec)
     }
     
     private var cancellable = Set<AnyCancellable>()
@@ -38,9 +42,7 @@ class BubbleCellCoordinator {
     func wakeUp() {
         NotificationCenter.Publisher(center: .default, name: .bubbleTimerSignal)
             .sink { [weak self] _ in
-                
                 if self?.bubble.state != .running { return }
-                
                 self?.updateComponents()
             }
             .store(in: &cancellable)
@@ -49,21 +51,14 @@ class BubbleCellCoordinator {
     private func updateComponents() {
         guard let lastPairStart = bubble.lastPair!.start else { return }
         
-        //delta is the elapsed duration between pair.start and signal dates
+        //delta is the elapsed duration between last pair.start and signal date
         let Δ = Date().timeIntervalSince(lastPairStart)
-        let value = bubble.currentClock + Float(Δ)
+        var value = bubble.currentClock + Float(Δ)
+        value.round(.toNearestOrEven) //ex: 2345
         
-        if value >= 59.5 {
-            DispatchQueue.main.async {
-                self.visibilityPublisher.send(.min(.show))
-            }
-        }
-        let componentsString = value.timeComponentsAsStrings
-                                    
-        //since closure runs on bThread, dispatch back to mThread
-        DispatchQueue.main.async {
-            self.componentsPublisher.send(componentsString)
-        }
+        let sec = String(Int(value)%60)
+        
+        DispatchQueue.main.async { self.secPublisher.send(sec) }
     } //1
 }
 
