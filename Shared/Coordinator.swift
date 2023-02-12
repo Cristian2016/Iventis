@@ -57,7 +57,11 @@ class BubbleCellCoordinator {
         value.round(.toNearestOrEven) //ex: 2345
         let intValue = Int(value)
         
-        
+        if (intValue%60) == 0 {
+            DispatchQueue.main.async {
+                self.minPublisher.send(String(intValue/60%60))
+            }
+        }
         
         let sec = String(intValue%60)
         
