@@ -91,6 +91,8 @@ public struct Global {
 public extension Float {
     //converts currentClock to time components to display
     var timeComponents:TimeComponents {
+        if self == 0 { return .zeroAll }
+        
         let decimalValue = Int(self) //used to compute hr. min, sec
         let fractionalValue = Int((self - Float(decimalValue))*100)
         
@@ -131,6 +133,8 @@ public extension Float {
         let min:Int
         let sec:Int
         let cents:Int
+        
+        static let zeroAll = TimeComponents(hr: 0, min: 0, sec: 0, cents: 0)
     }
     
     struct TimeComponentsAsStrings:Encodable, Decodable {
