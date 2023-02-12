@@ -16,7 +16,6 @@ struct ThreeLabels: View {
     
     @EnvironmentObject private var viewModel:ViewModel
     
-    @State private var components:Float.TimeComponentsAsStrings = .zeroAll
     @State private var hr = String()
     @State private var min = String()
     @State private var sec = String()
@@ -93,9 +92,6 @@ struct ThreeLabels: View {
         .font(.system(size: timeComponentsFontSize))
         .fontDesign(.rounded)
         .foregroundColor(.white)
-        .onReceive(bubble.coordinator.componentsPublisher) {
-            components = $0
-        }
         .onReceive(bubble.coordinator.secPublisher) { sec = $0 }
         .onReceive(bubble.coordinator.minPublisher) { min = $0 }
         .onReceive(bubble.coordinator.hrPublisher) { hr = $0 }
@@ -175,11 +171,9 @@ struct ThreeLabels: View {
     }
     
     // MARK: - Small Helpers
-    private var hrOpacity:Double { components.hr > "0" ? 1 : 0.001 }
+    private var hrOpacity:Double { (hr > "0") ? 1 : 0.001 }
     
-    private var minOpacity:Double {
-        return components.min > "0" || components.hr > "0" ? 1 : 0.0
-    }
+    private var minOpacity:Double { (min > "0" || hr > "0") ? 1 : 0.0 }
     
     private var isBubbleRunning:Bool { bubble.state == .running }
 }
