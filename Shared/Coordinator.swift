@@ -55,8 +55,11 @@ class BubbleCellCoordinator {
         let Δ = Date().timeIntervalSince(lastPairStart)
         var value = bubble.currentClock + Float(Δ)
         value.round(.toNearestOrEven) //ex: 2345
+        let intValue = Int(value)
         
-        let sec = String(Int(value)%60)
+        
+        
+        let sec = String(intValue%60)
         
         DispatchQueue.main.async { self.secPublisher.send(sec) }
     } //1
