@@ -45,9 +45,7 @@ struct FourLabels: View {
         _isSecondsLongPressed = isSecondsLongPressed
         self.bubble = bubble
     }
-    
-    @State private var time = String()
-    
+        
     var body: some View {
         HStack (spacing: spacing) {
             //HOURS

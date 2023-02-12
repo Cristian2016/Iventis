@@ -20,9 +20,7 @@ class ViewModel: ObservableObject {
     
     // MARK: - Alerts
     @Published var path = [Bubble]()
-    
-    private(set) var bubbles:[Bubble] = []
-        
+            
     // MARK: -
     var notesForPair: CurrentValueSubject<Pair?, Never> = .init(nil)
     
@@ -34,9 +32,24 @@ class ViewModel: ObservableObject {
         let bubbles = try? PersistenceController.shared.viewContext.fetch(request)
         wakeUpCoordinator(of: bubbles)
         observe_delayReachedZero_Notification()
+//        delayExecution(.now() + 0.0001) { self.updateTimeComponents(bubbles) }
     }
         
     // MARK: -
+    private func updateTimeComponents(_ bubbles: [Bubble]?) {
+        DispatchQueue.global().async {
+            bubbles?.forEach { bubble in
+                let components = bubble.initialClock.timeComponentsAsStrings
+            
+                DispatchQueue.main.async {
+                    bubble.coordinator.hrPublisher.send(components.hr)
+                    bubble.coordinator.minPublisher.send(components.min)
+                    bubble.coordinator.secPublisher.send(components.sec)
+                }
+            }
+        }            
+    }
+    
     private func wakeUpCoordinator(of bubbles:[Bubble]?) {
         delayExecution(.now() + 0.0001) {
             bubbles?.forEach { bubble in
@@ -295,15 +308,7 @@ class ViewModel: ObservableObject {
         //reset bubble clock
         bubble.currentClock = bubble.initialClock
         
-        DispatchQueue.global().async {
-            let components = bubble.initialClock.timeComponentsAsStrings
-            
-            DispatchQueue.main.async {
-                bubble.coordinator.hrPublisher.send(components.hr)
-                bubble.coordinator.minPublisher.send(components.min)
-                bubble.coordinator.secPublisher.send(components.sec)
-            }
-        }
+        updateTimeComponents([bubble])
                 
         //mark session as ended
         bubble.lastSession?.isEnded = true
