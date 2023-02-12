@@ -119,15 +119,7 @@ struct FourLabels: View {
     private var tap:some Gesture { TapGesture().onEnded { _ in userTappedSeconds() }}
     
     private var longPress: some Gesture {
-        LongPressGesture(minimumDuration: 0.3)
-            .updating($isDetectingLongPress, body: { currentState, gestureState, _ in
-                /* ⚠️ it does not work on .gesture(longPress) modifier. use maybe .simultaneousGesture or .highPriority */
-                gestureState = currentState
-                print("updating")
-            })
-            .onEnded { _ in
-                endSession()
-            }
+        LongPressGesture(minimumDuration: 0.3).onEnded { _ in endSession() }
     }
     
     // MARK: - User Intents
