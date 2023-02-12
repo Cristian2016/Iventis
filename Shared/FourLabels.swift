@@ -74,7 +74,11 @@ struct FourLabels: View {
             //SECONDS
             SecondsLabel(bubble: bubble,
                          isSecondsTapped: $isSecondsTapped,
-                         isSecondsLongPressed: $isSecondsLongPressed)
+                         isSecondsLongPressed: $isSecondsLongPressed
+            )
+            .overlay {
+                if startDelayBubble.referenceDelay > 0 { SDButton(bubble.sdb) }
+            }
         }
         .overlay { if !isBubbleRunning { hundredthsView }}
         //font
@@ -83,7 +87,6 @@ struct FourLabels: View {
         .foregroundColor(.white)
         .onReceive(bubble.coordinator.minPublisher) { min = $0 }
         .onReceive(bubble.coordinator.hrPublisher) { hr = $0 }
-//        .onReceive(bubble.coordinator.) { hr = $0 }
     }
     
     // MARK: - Lego
@@ -151,9 +154,6 @@ struct SecondsLabel: View {
             .animation(.secondsLongPressed, value: isSecondsLongPressed)
             .gesture(tap)
             .gesture(longPress)
-            .overlay {
-//                if bubble.sdb.referenceDelay > 0 { SDButton(bubble.sdb) }
-            }
             .onReceive(bubble.coordinator.secPublisher) { sec = $0 }
     }
     
