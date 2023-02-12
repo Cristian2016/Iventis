@@ -37,10 +37,8 @@ struct BubbleCell: View {
                             $isSecondsLongPressed,
                             bubble)
             }
-//            //subviews
             .overlay { if bubble.hasCalendar && noNote { calendarSymbol }}
             .overlay { stickyNote }
-            
             .overlay { CalendarEventCreatedConfirmation(rank: bubble.rank) } //1
             .overlay { CalendarEventRemovedConfirmation(rank: bubble.rank) } //1
         }
