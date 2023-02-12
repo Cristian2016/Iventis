@@ -21,8 +21,8 @@ struct FourLabels: View {
     @State private var min = String()
     @State private var cents = String()
     
-    @Binding private var isSecondsTapped:Bool
-    @Binding private var isSecondsLongPressed:Bool
+    @State private var isSecondsTapped:Bool = false
+    @State private var isSecondsLongPressed:Bool = false
     
     @GestureState var isDetectingLongPress = false
     
@@ -32,8 +32,6 @@ struct FourLabels: View {
          _ timeComponentsFontSize:CGFloat,
          _ hundredthsFontSize:CGFloat,
          _ startDelayBubble:StartDelayBubble,
-         _ isSecondsTapped:Binding<Bool>,
-         _ isSecondsLongPressed:Binding<Bool>,
          _ bubble:Bubble) {
         
         let _ = print("FourLabels body")
@@ -41,8 +39,6 @@ struct FourLabels: View {
         self.timeComponentsFontSize = timeComponentsFontSize
         self.hundredthsFontSize = hundredthsFontSize
         self.sDelayBubble = startDelayBubble
-        _isSecondsTapped = isSecondsTapped
-        _isSecondsLongPressed = isSecondsLongPressed
         self.bubble = bubble
     }
         

@@ -33,8 +33,6 @@ struct BubbleCell: View {
                             metrics.timeComponentsFontSize,
                             metrics.hundredthsFontSize,
                             startDelayBubble,
-                            $isSecondsTapped,
-                            $isSecondsLongPressed,
                             bubble)
             }
             .overlay { if bubble.hasCalendar && noNote { calendarSymbol }}
@@ -123,9 +121,6 @@ struct BubbleCell: View {
     @GestureState var isDetectingLongPress = false
         
     private let noteOffset = CGSize(width: 0, height: -6)
-    
-    @State private var isSecondsTapped = false
-    @State private var isSecondsLongPressed = false
     
     // MARK: -
     init(_ bubble:Bubble, _ metrics:Metrics) {
