@@ -49,8 +49,8 @@ class BubbleCellCoordinator {
         NotificationCenter.Publisher(center: .default, name: .bubbleTimerSignal)
             .sink { [weak self] _ in
                 if self?.bubble.state != .running {
+//                    print(self!.bubble.state )
                     return
-                    print(self!.bubble.state, self!.bubble.sessions_.count, self!.bubble.lastSession?.pairs_.count)
                 }
                 self?.updateComponents()
             }

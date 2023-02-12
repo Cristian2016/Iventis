@@ -93,7 +93,9 @@ struct ThreeLabels: View {
         .font(.system(size: timeComponentsFontSize))
         .fontDesign(.rounded)
         .foregroundColor(.white)
-        .onReceive(bubble.coordinator.componentsPublisher) { components = $0 }
+        .onReceive(bubble.coordinator.componentsPublisher) {
+            components = $0
+        }
         .onReceive(bubble.coordinator.secPublisher) { sec = $0 }
         .onReceive(bubble.coordinator.minPublisher) { min = $0 }
         .onReceive(bubble.coordinator.hrPublisher) { hr = $0 }

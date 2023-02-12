@@ -5,6 +5,7 @@
 //  Created by Cristian Lapusan on 15.04.2022.
 //
 //1 observe BackgroundTimer.signal [Notifications]. start observing when bubble is created, stop on deinit
+//https://www.advancedswift.com/core-data-background-fetch-save-create/
 
 import Foundation
 import CoreData

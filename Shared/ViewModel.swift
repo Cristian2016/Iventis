@@ -178,7 +178,6 @@ class ViewModel: ObservableObject {
                 //1 both
                 secretary.addNoteButton_bRank = nil //clear first
                 secretary.addNoteButton_bRank = Int(bubble.rank)
-                print(bubble.sessions_.count, " sessions")
                                                 
             case .paused:  /* changes to running */
                 //create new pair, add it to currentSession
@@ -295,7 +294,11 @@ class ViewModel: ObservableObject {
         
         //reset bubble clock
         bubble.currentClock = bubble.initialClock
+        
+        bubble.coordinator.hrPublisher.send(<#T##input: String##String#>)
         bubble.coordinator.componentsPublisher.send(bubble.initialClock.timeComponentsAsStrings)
+        
+        print("send \(bubble.initialClock.timeComponentsAsStrings)")
         
         //mark session as ended
         bubble.lastSession?.isEnded = true
