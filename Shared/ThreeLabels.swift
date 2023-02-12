@@ -94,9 +94,9 @@ struct ThreeLabels: View {
         .fontDesign(.rounded)
         .foregroundColor(.white)
         .onReceive(bubble.coordinator.componentsPublisher) { components = $0 }
-        .onReceive(bubble.coordinator.secPublisher) { output in
-            sec = output
-        }
+        .onReceive(bubble.coordinator.secPublisher) { sec = $0 }
+        .onReceive(bubble.coordinator.minPublisher) { min = $0 }
+        .onReceive(bubble.coordinator.hrPublisher) { hr = $0 }
     }
     
     // MARK: - Lego
