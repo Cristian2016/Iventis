@@ -295,7 +295,13 @@ class ViewModel: ObservableObject {
         //reset bubble clock
         bubble.currentClock = bubble.initialClock
         
+        DispatchQueue.global().async {
+            let components = bubble.initialClock.timeComponentsAsStrings
+        }
+        
+        
         bubble.coordinator.hrPublisher.send(<#T##input: String##String#>)
+        
         bubble.coordinator.componentsPublisher.send(bubble.initialClock.timeComponentsAsStrings)
         
         print("send \(bubble.initialClock.timeComponentsAsStrings)")

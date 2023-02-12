@@ -110,10 +110,15 @@ public extension Float {
     }
     
     var timeComponentsAsStrings:TimeComponentsAsStrings {
+        if self == 0 { return .zeroAll }
+        
         let components = timeComponents
         
         let cents = String(format: "%.2d", components.cents)
-        return TimeComponentsAsStrings(hr: String(components.hr), min: String(components.min), sec: String(components.sec), cents: cents)
+        return TimeComponentsAsStrings(hr: String(components.hr),
+                                       min: String(components.min),
+                                       sec: String(components.sec),
+                                       cents: cents)
     }
     
     var timeComponentsAbreviatedString:String {
