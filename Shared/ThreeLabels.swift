@@ -8,8 +8,8 @@
 import SwiftUI
 import MyPackage
 
-//hr min sec cents (4 labels in total)
-struct FourLabels: View {
+//hr min sec cents (4 labels in total actually)
+struct ThreeLabels: View {
     let bubble:Bubble
     let spacing:CGFloat
     let timeComponentsFontSize:CGFloat
