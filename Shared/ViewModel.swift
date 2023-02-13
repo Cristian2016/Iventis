@@ -25,14 +25,6 @@ class ViewModel: ObservableObject {
     var notesForPair: CurrentValueSubject<Pair?, Never> = .init(nil)
     
     var notesForBubble: CurrentValueSubject<Bubble?, Never> = .init(nil)
-            
-    // MARK: -
-    init() {
-//        let request = Bubble.fetchRequest()
-//        let bubbles = try? PersistenceController.shared.viewContext.fetch(request)
-//        wakeUpCoordinator(of: bubbles)
-//        observe_delayReachedZero_Notification()
-    }
         
     // MARK: -
     private func updateTimeComponents(_ bubbles: [Bubble]?) {
@@ -51,7 +43,10 @@ class ViewModel: ObservableObject {
     
     func wakeUpCoordinator(of bubble:Bubble) {
         DispatchQueue.global().async {
-            if bubble.state == .running { bubble.coordinator.update(.start) }
+            if bubble.state == .running {
+                bubble.coordinator.update(.start)
+                print(#function, " \(bubble.color!)")
+            }
         }
     }
     
