@@ -3,10 +3,14 @@
 //  Timers (iOS)
 //
 //  Created by Cristian Lapusan on 10.02.2023.
-//
+//1 publishers emit their initial value, without .send()! ⚠️
 
 import SwiftUI
 import Combine
+
+extension BubbleCellCoordinator {
+    typealias Publisher = CurrentValueSubject
+}
 
 class BubbleCellCoordinator {
     func update(_ action:Action) {
@@ -54,18 +58,22 @@ class BubbleCellCoordinator {
         }
     }
     
-    // MARK: - Publishers
-    //they emit their initial value, without .send()! ⚠️
-    var visibilityPublisher:CurrentValueSubject<[Component], Never> = .init([.min(.hide), .hr(.show)])
+    // MARK: - Publishers 1
+    var visibilityPublisher:Publisher<[Component], Never> = .init([.min(.hide), .hr(.show)])
     
-    var colorPublisher:CurrentValueSubject<Color, Never> = .init(.blue)
+    var colorPublisher:Publisher<Color, Never> = .init(.blue)
     
-    lazy var componentsPublisher:CurrentValueSubject<Float.TimeComponentsAsStrings, Never> = .init(bubble.currentClock.timeComponentsAsStrings)
+    var componentsPublisher:Publisher<Float.TimeComponentsAsStrings, Never> = .init(.zeroAll)
     
-    var secPublisher:CurrentValueSubject<String, Never> = .init("-1")
-    var minPublisher:CurrentValueSubject<String, Never>! = .init("-1")
-    var hrPublisher:CurrentValueSubject<String, Never>! = .init("-1")
-    var centsPublisher:CurrentValueSubject<String, Never>! = .init("-1")
+    var secPublisher:Publisher<String, Never> = .init("-1")
+    var minPublisher:Publisher<String, Never>! = .init("-1")
+    var hrPublisher:Publisher<String, Never>! = .init("-1")
+    var centsPublisher:Publisher<String, Never>! = .init("-1")
+    
+    private lazy var publisher =
+    NotificationCenter.Publisher(center: .default, name: .bubbleTimerSignal)
+    
+    private var cancellable = Set<AnyCancellable>()
     
     // MARK: -
     let bubble:Bubble
@@ -119,11 +127,6 @@ class BubbleCellCoordinator {
         cancellable = []
         NotificationCenter.default.removeObserver(self)
     }
-    
-    private lazy var publisher =
-    NotificationCenter.Publisher(center: .default, name: .bubbleTimerSignal)
-    
-    private var cancellable = Set<AnyCancellable>()
     
     enum Action {
         case start
