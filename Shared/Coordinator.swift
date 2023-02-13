@@ -26,7 +26,7 @@ class BubbleCellCoordinator {
     
     ///every second publisher sends out bTimer signal and this is the task to run
     private func handler() {
-        let lastPairStart = bubble.lastPair!.start!
+        guard let lastPairStart = bubble.lastPair?.start else { return }
                 
         //delta is the elapsed duration between last pair.start and signal date
         let Δ = Date().timeIntervalSince(lastPairStart)
@@ -54,7 +54,6 @@ class BubbleCellCoordinator {
         //send each second
         DispatchQueue.main.async {
             self.secPublisher.send(String(secValue))
-            print(secValue)
         }
     }
     
