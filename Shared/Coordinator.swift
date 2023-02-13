@@ -42,10 +42,11 @@ class BubbleCellCoordinator {
         DispatchQueue.global().async { [weak self] in
             if self?.bubble.state == .running {
                 let Δ = Date().timeIntervalSince(self?.bubble.lastPair?.start ?? Date())
-                let result = (self?.bubble.currentClock ?? 0) + Float(Δ)
-                completion(result)
+                let initialValue = (self?.bubble.currentClock ?? 0) + Float(Δ)
+                completion(initialValue)
             } else {
-                completion(self?.bubble.currentClock ?? 0)
+                let initialValue = self?.bubble.currentClock ?? 0
+                completion(initialValue)
             }
         }
     }
