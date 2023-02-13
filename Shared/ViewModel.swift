@@ -49,6 +49,10 @@ class ViewModel: ObservableObject {
         }
         DispatchQueue.global().async { bubble.coordinator.update(.start) }
     }
+    
+    func updateAtAppLaunch(_ bubble: Bubble) {
+        bubble.coordinator.updateAtAppLaunch()
+    }
          
     // MARK: - background Timers
     private lazy var bubbleTimer = BubbleTimer()

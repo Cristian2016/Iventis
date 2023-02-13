@@ -36,10 +36,33 @@ class BubbleCellCoordinator {
     // MARK: -
     let bubble:Bubble
     
+    private var initialValue:Float?
+    
+    private func setInitialValue(completion: @escaping (Float) -> Void) {
+        DispatchQueue.global().async { [weak self] in
+            if self?.bubble.state == .running {
+                let Δ = Date().timeIntervalSince(self?.bubble.lastPair?.start ?? Date())
+                let result = (self?.bubble.currentClock ?? 0) + Float(Δ)
+                completion(result)
+            } else {
+                completion(self?.bubble.currentClock ?? 0)
+            }
+        }
+    }
+    
     func updateAtAppLaunch() {
         DispatchQueue.global().async { [self] in
             
             if bubble.state == .running { //update with delta
+                let Δ = Date().timeIntervalSince(bubble.lastPair!.start!)
+                let value = bubble.currentClock + Float(Δ)
+                let components = value.timeComponentsAsStrings
+                
+                DispatchQueue.main.async {
+                    self.secPublisher.send(components.sec)
+                    self.minPublisher.send(components.min)
+                    self.hrPublisher.send(components.hr)
+                }
                 
             } else { //update with bubble.currentClock
                 let components = bubble.currentClock.timeComponentsAsStrings
