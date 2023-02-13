@@ -41,12 +41,13 @@ class ViewModel: ObservableObject {
         }            
     }
     
+    ///wakeUp only for running bubbles
     func wakeUpCoordinator(of bubble:Bubble) {
+        guard bubble.state == .running else { return }
+        
         DispatchQueue.global().async {
-            if bubble.state == .running {
-                bubble.coordinator.update(.start)
-                print(#function, " \(bubble.color!)")
-            }
+            bubble.coordinator.update(.start)
+            print(#function, " \(bubble.color!)")
         }
     }
     
