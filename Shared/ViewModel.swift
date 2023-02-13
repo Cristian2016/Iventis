@@ -208,7 +208,7 @@ class ViewModel: ObservableObject {
                     
                     //set bubble properties
                     bubble.currentClock += currentPair!.duration
-                    bubble.coordinator.componentsPublisher.send(bubble.currentClock.timeComponentsAsStrings)
+                    bubble.coordinator.updateComponents(.appActive)
                     
                     bubble.lastSession?.computeDuration {
                         //no need to run any code in the completion

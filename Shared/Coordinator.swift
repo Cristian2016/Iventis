@@ -106,7 +106,17 @@ class BubbleCellCoordinator {
                     }
                     
                 case .appActive:
-                    print("")
+                    let components = value.timeComponentsAsStrings
+                    DispatchQueue.main.async {
+                        if self.bubble.state != .running {
+                            self.secPublisher.send(components.sec)
+                            self.minPublisher.send(components.min)
+                            self.hrPublisher.send(components.hr)
+                            self.centsPublisher.send(components.cents)
+                        } else {
+                            
+                        }
+                    }
             }
         }
     }
