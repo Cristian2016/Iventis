@@ -46,10 +46,6 @@ class ViewModel: ObservableObject {
         guard bubble.state == .running else { return }
         DispatchQueue.global().async { bubble.coordinator.update(.start) }
     }
-    
-    enum <#name#> {
-    case <#case#>
-    }
          
     // MARK: - background Timers
     private lazy var bubbleTimer = BubbleTimer()

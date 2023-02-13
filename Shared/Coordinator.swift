@@ -13,9 +13,7 @@ class BubbleCellCoordinator {
         switch action {
             case .start:
                 publisher
-                    .sink { [weak self] _ in
-                        self?.updateComponents()
-                    }
+                    .sink { [weak self] _ in self?.updateComponents() }
                     .store(in: &cancellable)
             case .pause:
                 cancellable = []
