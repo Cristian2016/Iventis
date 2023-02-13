@@ -47,6 +47,9 @@ struct BubbleList: View {
                                 ZStack { //1
                                     NavigationLink(value: bubble) { /* empty view */ }.opacity(0)
                                     BubbleCell(bubble, metrics)
+                                        .task {
+                                            viewModel.wakeUpCoordinator(bubble)
+                                        }
                                 }
                             }
                         }

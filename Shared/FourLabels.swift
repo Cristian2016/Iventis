@@ -82,7 +82,6 @@ struct FourLabels: View {
                 .background(Circle().foregroundColor(.pauseStickerColor))
                 .foregroundColor(.pauseStickerFontColor)
                 .font(.system(size: hundredthsFontSize, weight: .semibold, design: .rounded))
-            //animations:scale, offset and opacity
                 .scaleEffect(isSecondsTapped && !isBubbleRunning ? 2 : 1.0)
                 .offset(x: isSecondsTapped && !isBubbleRunning ? -20 : 0,
                         y: isSecondsTapped && !isBubbleRunning ? -20 : 0)
@@ -90,6 +89,7 @@ struct FourLabels: View {
                 .animation(.spring(response: 0.3, dampingFraction: 0.2), value: isSecondsTapped)
                 .zIndex(1)
                 .onTapGesture { userTappedHundredths() }
+                .onReceive(bubble.coordinator.centsPublisher) { cents = $0 }
         }
     }
     

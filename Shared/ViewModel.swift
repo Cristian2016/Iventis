@@ -28,10 +28,10 @@ class ViewModel: ObservableObject {
             
     // MARK: -
     init() {
-        let request = Bubble.fetchRequest()
-        let bubbles = try? PersistenceController.shared.viewContext.fetch(request)
-        wakeUpCoordinator(of: bubbles)
-        observe_delayReachedZero_Notification()
+//        let request = Bubble.fetchRequest()
+//        let bubbles = try? PersistenceController.shared.viewContext.fetch(request)
+//        wakeUpCoordinator(of: bubbles)
+//        observe_delayReachedZero_Notification()
     }
         
     // MARK: -
@@ -49,9 +49,20 @@ class ViewModel: ObservableObject {
         }            
     }
     
-    private func wakeUpCoordinator(of bubbles:[Bubble]?) {
+    func wakeUpCoordinator(_ bubble:Bubble) {
+        DispatchQueue.global().async {
+            if bubble.state == .running {
+                bubble.coordinator.update(.start)
+            }
+        }
+    }
+    
+    func wakeUpCoordinator(of bubbles:[Bubble]?) {
         delayExecution(.now() + 0.0001) {
             bubbles?.forEach { bubble in
+                if bubble.state == .running {
+                    print("update for \(bubble.color!)")
+                }
 //                bubble.coordinator.update()
             }
         }

@@ -9,44 +9,6 @@ import SwiftUI
 import Combine
 
 class BubbleCellCoordinator {
-    // MARK: - Publishers
-    //they emit their initial value, without .send()! ⚠️
-    var visibilityPublisher:CurrentValueSubject<[Component], Never> = .init([.min(.hide), .hr(.show)])
-    
-    var colorPublisher:CurrentValueSubject<Color, Never> = .init(.blue)
-    
-    lazy var componentsPublisher:CurrentValueSubject<Float.TimeComponentsAsStrings, Never> = .init(bubble.currentClock.timeComponentsAsStrings)
-    
-    var secPublisher:CurrentValueSubject<String, Never>
-    var minPublisher:CurrentValueSubject<String, Never>
-    var hrPublisher:CurrentValueSubject<String, Never>
-//    var centsPublisher:CurrentValueSubject<String, Never>
-    
-    // MARK: -
-    let bubble:Bubble
-    
-    init(for bubble:Bubble) {
-        self.bubble = bubble
-        
-        
-        // TODO: make it run on backgroundThread
-        let components = bubble.currentClock.timeComponentsAsStrings
-        
-        self.hrPublisher = .init(components.hr)
-        self.minPublisher = .init(components.min)
-        self.secPublisher = .init(components.sec)
-    }
-    
-    deinit {
-        cancellable = []
-        NotificationCenter.default.removeObserver(self)
-    }
-    
-    private lazy var publisher =
-    NotificationCenter.Publisher(center: .default, name: .bubbleTimerSignal)
-    
-    private var cancellable = Set<AnyCancellable>()
-    
     func update(_ action:Action) {
         switch action {
             case .start:
@@ -59,6 +21,44 @@ class BubbleCellCoordinator {
                 cancellable = []
         }
     }
+    
+    // MARK: - Publishers
+    //they emit their initial value, without .send()! ⚠️
+    var visibilityPublisher:CurrentValueSubject<[Component], Never> = .init([.min(.hide), .hr(.show)])
+    
+    var colorPublisher:CurrentValueSubject<Color, Never> = .init(.blue)
+    
+    lazy var componentsPublisher:CurrentValueSubject<Float.TimeComponentsAsStrings, Never> = .init(bubble.currentClock.timeComponentsAsStrings)
+    
+    var secPublisher:CurrentValueSubject<String, Never>
+    var minPublisher:CurrentValueSubject<String, Never>
+    var hrPublisher:CurrentValueSubject<String, Never>
+    var centsPublisher:CurrentValueSubject<String, Never>
+    
+    // MARK: -
+    let bubble:Bubble
+    
+    init(for bubble:Bubble) {
+        self.bubble = bubble
+        
+        // TODO: make it run on backgroundThread
+        let components = bubble.currentClock.timeComponentsAsStrings
+        
+        self.hrPublisher = .init(components.hr)
+        self.minPublisher = .init(components.min)
+        self.secPublisher = .init(components.sec)
+        self.centsPublisher = .init(components.cents)
+    }
+    
+    deinit {
+        cancellable = []
+        NotificationCenter.default.removeObserver(self)
+    }
+    
+    private lazy var publisher =
+    NotificationCenter.Publisher(center: .default, name: .bubbleTimerSignal)
+    
+    private var cancellable = Set<AnyCancellable>()
     
     private func updateComponents() {
         guard let lastPairStart = bubble.lastPair!.start else { return }
