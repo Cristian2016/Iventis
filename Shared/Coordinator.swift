@@ -20,6 +20,40 @@ class BubbleCellCoordinator {
         }
     }
     
+    ///every second publisher sends out bTimer signal and this is the task to run
+    private func handler() {
+        let lastPairStart = bubble.lastPair!.start!
+                
+        //delta is the elapsed duration between last pair.start and signal date
+        let Δ = Date().timeIntervalSince(lastPairStart)
+        var value = bubble.currentClock + Float(Δ) //ex: 2345.87648
+        value.round(.toNearestOrEven) //ex: 2346
+        let intValue = Int(value)
+        let secValue = intValue%60
+        
+        //send minute and hour
+        if secValue == 0 {
+            let giveMeAName = intValue/60%60
+            let minValue = String(giveMeAName)
+            DispatchQueue.main.async {
+                self.minPublisher.send(minValue)
+                self.visibilityPublisher.send([.min(.show)])
+            }
+            
+            //send hour
+            if (giveMeAName%60) == 0 {
+                let hrValue = String(intValue/3600)
+                DispatchQueue.main.async { self.hrPublisher.send(hrValue) }
+            }
+        }
+        
+        //send each second
+        DispatchQueue.main.async {
+            self.secPublisher.send(String(secValue))
+            print(secValue)
+        }
+    }
+    
     // MARK: - Publishers
     //they emit their initial value, without .send()! ⚠️
     var visibilityPublisher:CurrentValueSubject<[Component], Never> = .init([.min(.hide), .hr(.show)])
@@ -90,40 +124,6 @@ class BubbleCellCoordinator {
     NotificationCenter.Publisher(center: .default, name: .bubbleTimerSignal)
     
     private var cancellable = Set<AnyCancellable>()
-    
-    ///every second publisher sends out bTimer signal and this is the task to run
-    private func handler() {
-        let lastPairStart = bubble.lastPair!.start!
-                
-        //delta is the elapsed duration between last pair.start and signal date
-        let Δ = Date().timeIntervalSince(lastPairStart)
-        var value = bubble.currentClock + Float(Δ) //ex: 2345.87648
-        value.round(.toNearestOrEven) //ex: 2346
-        let intValue = Int(value)
-        let secValue = intValue%60
-        
-        //send minute and hour
-        if secValue == 0 {
-            let giveMeAName = intValue/60%60
-            let minValue = String(giveMeAName)
-            DispatchQueue.main.async {
-                self.minPublisher.send(minValue)
-                self.visibilityPublisher.send([.min(.show)])
-            }
-            
-            //send hour
-            if (giveMeAName%60) == 0 {
-                let hrValue = String(intValue/3600)
-                DispatchQueue.main.async { self.hrPublisher.send(hrValue) }
-            }
-        }
-        
-        //send each second
-        DispatchQueue.main.async {
-            self.secPublisher.send(String(secValue))
-            print(secValue)
-        }
-    } //1
     
     enum Action {
         case start
