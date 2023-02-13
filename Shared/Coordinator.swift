@@ -35,9 +35,7 @@ class BubbleCellCoordinator {
     
     // MARK: -
     let bubble:Bubble
-    
-    private var initialValue:Float?
-    
+        
     private func setInitialValue(completion: @escaping (Float) -> Void) {
         DispatchQueue.global().async { [weak self] in
             if self?.bubble.state == .running {
@@ -94,6 +92,7 @@ class BubbleCellCoordinator {
     
     private var cancellable = Set<AnyCancellable>()
     
+    ///every second
     private func updateComponents() {
         guard let lastPairStart = bubble.lastPair!.start else { return }
         
