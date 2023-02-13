@@ -66,6 +66,7 @@ class BubbleCellCoordinator {
         //delta is the elapsed duration between last pair.start and signal date
         let Δ = Date().timeIntervalSince(lastPairStart)
         var value = bubble.currentClock + Float(Δ)
+//        print(value, " value")
         value.round(.toNearestOrEven) //ex: 2345
         let intValue = Int(value)
         let secValue = intValue%60

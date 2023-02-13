@@ -103,6 +103,7 @@ class ViewModel: ObservableObject {
 //            secretary.showFavoritesOnly = false
 //        }
         
+        bubble.coordinator.update(.pause)
         if !path.isEmpty { path = [] }
         
         let context = bubble.managedObjectContext!
