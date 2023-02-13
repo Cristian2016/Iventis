@@ -33,7 +33,7 @@ struct BubbleList: View {
             
     // MARK: -
     var body: some View {
-        let _ = print("BubbleList body")
+//        let _ = print("BubbleList body")
         ZStack {
             if isListEmpty { EmptyListView() }
             else {
@@ -47,7 +47,10 @@ struct BubbleList: View {
                                 ZStack { //1
                                     NavigationLink(value: bubble) { /* empty view */ }.opacity(0)
                                     BubbleCell(bubble, metrics)
-                                        .task { viewModel.wakeUpCoordinator(of: bubble) }
+                                        .task {
+                                            viewModel.wakeUpCoordinator(of: bubble)
+                                            print("run task \(bubble.color!)")
+                                        }
                                 }
                             }
                         }
