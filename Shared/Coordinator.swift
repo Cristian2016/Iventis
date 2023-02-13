@@ -93,8 +93,8 @@ class BubbleCellCoordinator {
     
     ///every second publisher sends out bTimer signal and this is the task to run
     private func handler() {
-        guard let lastPairStart = bubble.lastPair!.start else { return }
-        
+        let lastPairStart = bubble.lastPair!.start!
+                
         //delta is the elapsed duration between last pair.start and signal date
         let Δ = Date().timeIntervalSince(lastPairStart)
         var value = bubble.currentClock + Float(Δ) //ex: 2345.87648
