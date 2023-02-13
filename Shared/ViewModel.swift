@@ -43,7 +43,10 @@ class ViewModel: ObservableObject {
     
     ///wakeUp only for running bubbles
     func wakeUpCoordinator(of bubble:Bubble) {
-        guard bubble.state == .running else { return }
+        guard bubble.state == .running else {
+            bubble.coordinator
+            return
+        }
         DispatchQueue.global().async { bubble.coordinator.update(.start) }
     }
          

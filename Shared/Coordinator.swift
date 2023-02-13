@@ -28,30 +28,37 @@ class BubbleCellCoordinator {
     
     lazy var componentsPublisher:CurrentValueSubject<Float.TimeComponentsAsStrings, Never> = .init(bubble.currentClock.timeComponentsAsStrings)
     
-    var secPublisher:CurrentValueSubject<String, Never> = .init("")
-    var minPublisher:CurrentValueSubject<String, Never>! = .init("")
-    var hrPublisher:CurrentValueSubject<String, Never>! = .init("")
-    var centsPublisher:CurrentValueSubject<String, Never>! = .init("")
+    var secPublisher:CurrentValueSubject<String, Never> = .init("-1")
+    var minPublisher:CurrentValueSubject<String, Never>! = .init("-1")
+    var hrPublisher:CurrentValueSubject<String, Never>! = .init("-1")
+    var centsPublisher:CurrentValueSubject<String, Never>! = .init("-1")
     
     // MARK: -
     let bubble:Bubble
     
-    init(for bubble:Bubble) {
-        self.bubble = bubble
+    func updateAtAppLaunch() {
         DispatchQueue.global().async { [self] in
             
             if bubble.state == .running { //update with delta
                 
             } else { //update with bubble.currentClock
                 let components = bubble.currentClock.timeComponentsAsStrings
-            
-                self.secPublisher.send(components.sec)
-                self.minPublisher.send(components.min)
-                self.hrPublisher.send(components.hr)
-                self.centsPublisher.send(components.cents)
+                
+                if bubble.color! == "orange" {
+                    print(components)
+                }
+                
+                DispatchQueue.main.async {
+                    self.secPublisher.send(components.sec)
+                    self.minPublisher.send(components.min)
+                    self.hrPublisher.send(components.hr)
+                    self.centsPublisher.send(components.cents)
+                }
             }
         }
     }
+    
+    init(for bubble:Bubble) { self.bubble = bubble }
     
     deinit {
         cancellable = []
