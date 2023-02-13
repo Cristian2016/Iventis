@@ -41,7 +41,7 @@ class BubbleCellCoordinator {
             let minValue = String(giveMeAName)
             DispatchQueue.main.async {
                 self.minPublisher.send(minValue)
-                self.visibilityPublisher.send([.min(.show)])
+                self.opacityPublisher.send([.min(.show)])
             }
             
             //send hour
@@ -59,7 +59,7 @@ class BubbleCellCoordinator {
     }
     
     // MARK: - Publishers 1
-    var visibilityPublisher:Publisher<[Component], Never> = .init([.min(.hide), .hr(.show)])
+    var opacityPublisher:Publisher<[Component], Never> = .init([.min(.hide), .hr(.show)])
     
     var colorPublisher:Publisher<Color, Never> = .init(.blue)
     
@@ -91,19 +91,22 @@ class BubbleCellCoordinator {
                 case .appLaunch:
                     let components = value.timeComponentsAsStrings
                     
+                    let minOpacity = components.min > "0" ? Component.min(.show) : .min(.hide)
+                    let hrOpacity = components.hr > "0" ? Component.hr(.show) : .hr(.hide)
+                    
                     //update any bubble (running or notRunning)
                     DispatchQueue.main.async {
+                        //labels update
                         self.secPublisher.send(components.sec)
                         self.minPublisher.send(components.min)
                         self.hrPublisher.send(components.hr)
                         if self.bubble.state != .running {
                             self.centsPublisher.send(components.cents)
                         }
+                        self.opacityPublisher.send([minOpacity, hrOpacity])
                     }
                     
-                    if self.bubble.state == .running {
-                        self.update(.start)
-                    }
+                    if self.bubble.state == .running { self.update(.start) }
                     
                 case .appActive:
                     let components = value.timeComponentsAsStrings
