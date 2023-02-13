@@ -44,22 +44,11 @@ class ViewModel: ObservableObject {
     ///wakeUp only for running bubbles
     func wakeUpCoordinator(of bubble:Bubble) {
         guard bubble.state == .running else { return }
-        
-        DispatchQueue.global().async {
-            bubble.coordinator.update(.start)
-            print(#function, " \(bubble.color!)")
-        }
+        DispatchQueue.global().async { bubble.coordinator.update(.start) }
     }
     
-    func wakeUpCoordinator(of bubbles:[Bubble]?) {
-        delayExecution(.now() + 0.0001) {
-            bubbles?.forEach { bubble in
-                if bubble.state == .running {
-                    print("update for \(bubble.color!)")
-                }
-//                bubble.coordinator.update()
-            }
-        }
+    enum <#name#> {
+    case <#case#>
     }
          
     // MARK: - background Timers
