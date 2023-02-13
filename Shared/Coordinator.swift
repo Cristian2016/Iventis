@@ -13,7 +13,7 @@ class BubbleCellCoordinator {
         switch action {
             case .start:
                 publisher
-                    .sink { [weak self] _ in self?.updateComponents() }
+                    .sink { [weak self] _ in self?.handler() }
                     .store(in: &cancellable)
             case .pause:
                 cancellable = []
@@ -91,8 +91,8 @@ class BubbleCellCoordinator {
     
     private var cancellable = Set<AnyCancellable>()
     
-    ///every second
-    private func updateComponents() {
+    ///every second publisher sends out bTimer signal and this is the task to run
+    private func handler() {
         guard let lastPairStart = bubble.lastPair!.start else { return }
         
         //delta is the elapsed duration between last pair.start and signal date
