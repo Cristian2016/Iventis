@@ -41,17 +41,8 @@ class ViewModel: ObservableObject {
         }            
     }
     
-    ///wakeUp only for running bubbles
-    func wakeUpCoordinator(of bubble:Bubble) {
-        guard bubble.state == .running else {
-            bubble.coordinator
-            return
-        }
-        DispatchQueue.global().async { bubble.coordinator.update(.start) }
-    }
-    
-    func updateAtAppLaunch(_ bubble: Bubble) {
-        bubble.coordinator.updateAtAppLaunch()
+    func updateComponents(_ bubble: Bubble, _ moment: BubbleCellCoordinator.Moment) {
+        bubble.coordinator.updateComponents(moment)
     }
          
     // MARK: - background Timers
@@ -100,7 +91,7 @@ class ViewModel: ObservableObject {
 //            secretary.showFavoritesOnly = false
 //        }
         
-        bubble.coordinator.update(.pause)
+//        bubble.coordinator.update(.pause)
         if !path.isEmpty { path = [] }
         
         let context = bubble.managedObjectContext!
@@ -153,7 +144,7 @@ class ViewModel: ObservableObject {
         bubble.sessions?.forEach { viewContext.delete($0 as! Session) }
         try? viewContext.save()
         
-        bubble.coordinator.update(.pause)
+//        bubble.coordinator.update(.pause)
         updateTimeComponents([bubble])
     }
     
@@ -313,7 +304,7 @@ class ViewModel: ObservableObject {
         bubble.currentClock = bubble.initialClock
         
         updateTimeComponents([bubble])
-        bubble.coordinator.update(.pause)
+//        bubble.coordinator.update(.pause)
                 
         //mark session as ended
         bubble.lastSession?.isEnded = true

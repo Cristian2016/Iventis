@@ -48,9 +48,7 @@ struct BubbleList: View {
                                     NavigationLink(value: bubble) { /* empty view */ }.opacity(0)
                                     BubbleCell(bubble, metrics)
                                         .task {
-                                            viewModel.wakeUpCoordinator(of: bubble)
-                                            viewModel.updateAtAppLaunch(bubble)
-                                            print("run task \(bubble.color!)")
+                                            viewModel.updateComponents(bubble, .appLaunch)
                                         }
                                 }
                             }

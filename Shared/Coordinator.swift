@@ -35,49 +35,48 @@ class BubbleCellCoordinator {
     
     // MARK: -
     let bubble:Bubble
-        
-    private func setInitialValue(completion: @escaping (Float) -> Void) {
-        DispatchQueue.global().async { [weak self] in
-            if self?.bubble.state == .running {
-                let Δ = Date().timeIntervalSince(self?.bubble.lastPair?.start ?? Date())
-                let initialValue = (self?.bubble.currentClock ?? 0) + Float(Δ)
-                completion(initialValue)
-            } else {
-                let initialValue = self?.bubble.currentClock ?? 0
-                completion(initialValue)
+    
+    enum Moment {
+        case appLaunch
+        case appActive
+    }
+    
+    func updateComponents(_ moment:Moment) {
+        DispatchQueue.global().async {
+            
+            let value = self.initialValue
+            switch moment {
+                case .appLaunch:
+                    let components = value.timeComponentsAsStrings
+                    
+                    //update any bubble (running or notRunning)
+                    DispatchQueue.main.async {
+                        self.secPublisher.send(components.sec)
+                        self.minPublisher.send(components.min)
+                        self.hrPublisher.send(components.hr)
+                        if self.bubble.state != .running {
+                            self.centsPublisher.send(components.cents)
+                        }
+                    }
+                    
+                    if self.bubble.state == .running {
+                        self.update(.start)
+                    }
+                    
+                case .appActive:
+                    print("")
             }
         }
     }
-    
-    func updateAtAppLaunch() {
-        DispatchQueue.global().async { [self] in
-            
-            if bubble.state == .running { //update with delta
+        
+    private var initialValue:Float {
+            if bubble.state == .running {
                 let Δ = Date().timeIntervalSince(bubble.lastPair!.start!)
-                let value = bubble.currentClock + Float(Δ)
-                let components = value.timeComponentsAsStrings
-                
-                DispatchQueue.main.async {
-                    self.secPublisher.send(components.sec)
-                    self.minPublisher.send(components.min)
-                    self.hrPublisher.send(components.hr)
-                }
-                
-            } else { //update with bubble.currentClock
-                let components = bubble.currentClock.timeComponentsAsStrings
-                
-                if bubble.color! == "orange" {
-                    print(components)
-                }
-                
-                DispatchQueue.main.async {
-                    self.secPublisher.send(components.sec)
-                    self.minPublisher.send(components.min)
-                    self.hrPublisher.send(components.hr)
-                    self.centsPublisher.send(components.cents)
-                }
+                let initialValue = bubble.currentClock + Float(Δ)
+                return initialValue
+            } else {
+                return bubble.currentClock
             }
-        }
     }
     
     init(for bubble:Bubble) { self.bubble = bubble }
@@ -120,7 +119,10 @@ class BubbleCellCoordinator {
         }
         
         //send each second
-        DispatchQueue.main.async { self.secPublisher.send(String(secValue)) }
+        DispatchQueue.main.async {
+            self.secPublisher.send(String(secValue))
+            print(secValue)
+        }
     } //1
     
     enum Action {
