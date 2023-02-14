@@ -81,6 +81,8 @@ class ViewModel: ObservableObject {
                 newBubble.isNoteHidden = false
             }
             
+            newBubble.coordinator.updateComponents(.create)
+            
             try? context.save()
         }
     }
