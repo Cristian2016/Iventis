@@ -218,9 +218,7 @@ class ViewModel: ObservableObject {
                 //remove only that
                 if secretary.addNoteButton_bRank == Int(bubble.rank) { secretary.addNoteButton_bRank = nil
                 } //1
-                
-                bubble.coordinator.update(.pause)
-                
+                                
             case .finished: return
         }
         PersistenceController.shared.save()

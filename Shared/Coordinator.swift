@@ -13,7 +13,7 @@ extension BubbleCellCoordinator {
 }
 
 class BubbleCellCoordinator {
-    func update(_ action:Action) {
+    private func update(_ action:Action) {
         switch action {
             case .start:
                 publisher
@@ -102,17 +102,10 @@ class BubbleCellCoordinator {
                     
                     if self.bubble.state == .running { self.update(.start) }
                     
-                case .user:
-                    let components = value.timeComponentsAsStrings
-                    DispatchQueue.main.async {
-                        if self.bubble.state != .running {
-                            self.secPublisher.send(components.sec)
-                            self.minPublisher.send(components.min)
-                            self.hrPublisher.send(components.hr)
-                            self.centsPublisher.send(components.cents)
-                        } else {
-                            
-                        }
+                case .user(let action):
+                    switch action {
+                        case .pause: self.update(.pause)
+                        case .start: self.update(.start)
                     }
             }
         }
