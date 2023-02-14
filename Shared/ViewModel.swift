@@ -55,7 +55,8 @@ class ViewModel: ObservableObject {
             switch kind {
                 case .timer(let initialClock):
                     newBubble.initialClock = initialClock
-                default: newBubble.initialClock = 0
+                default:
+                    newBubble.initialClock = 0
             }
             
             newBubble.color = color
