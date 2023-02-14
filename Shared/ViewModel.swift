@@ -181,7 +181,7 @@ class ViewModel: ObservableObject {
                 secretary.addNoteButton_bRank = nil //clear first
                 secretary.addNoteButton_bRank = Int(bubble.rank)
                 
-                bubble.coordinator.updateComponents(.appActive(.start))
+                bubble.coordinator.updateComponents(.user(.start))
                                                 
             case .paused:  /* changes to running */
                 //create new pair, add it to currentSession
@@ -195,7 +195,7 @@ class ViewModel: ObservableObject {
                 secretary.addNoteButton_bRank = nil //clear first
                 secretary.addNoteButton_bRank = Int(bubble.rank)
                 
-                bubble.coordinator.updateComponents(.appActive(.start))
+                bubble.coordinator.updateComponents(.user(.start))
                 
             case .running: /* changes to .paused */
                 let currentPair = bubble.lastPair
@@ -207,7 +207,7 @@ class ViewModel: ObservableObject {
                 currentPair?.computeDuration(.atPause) {
                     //set bubble properties
                     bubble.currentClock += currentPair!.duration
-                    bubble.coordinator.updateComponents(.appActive(.pause))
+                    bubble.coordinator.updateComponents(.user(.pause))
                     
                     bubble.lastSession?.computeDuration {
                         //no need to run any code in the completion

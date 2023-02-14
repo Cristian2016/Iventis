@@ -82,7 +82,7 @@ class BubbleCellCoordinator {
             
             let value = self.initialValue
             switch moment {
-                case .appLaunch:
+                case .automatic:
                     let components = value.timeComponentsAsStrings
                     
                     let minOpacity = value >= 60 ? Component.min(.show) : .min(.hide)
@@ -102,7 +102,7 @@ class BubbleCellCoordinator {
                     
                     if self.bubble.state == .running { self.update(.start) }
                     
-                case .appActive:
+                case .user:
                     let components = value.timeComponentsAsStrings
                     DispatchQueue.main.async {
                         if self.bubble.state != .running {
@@ -137,9 +137,10 @@ class BubbleCellCoordinator {
 }
 
 extension BubbleCellCoordinator {
+    ///automatic means handled by the system. ex. when app launches
     enum Moment {
-        case appLaunch
-        case appActive(Action)
+        case automatic
+        case user(Action)
     }
     
     enum Action {

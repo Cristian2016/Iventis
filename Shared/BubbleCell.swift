@@ -52,7 +52,7 @@ struct BubbleCell: View {
             moreOptionsButton
         }
         .onChange(of: scenePhase) { phase in
-            viewModel.updateComponents(bubble, .appLaunch)
+            viewModel.updateComponents(bubble, .automatic)
         }
     }
     
