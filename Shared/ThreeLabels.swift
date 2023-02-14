@@ -34,7 +34,6 @@ struct ThreeLabels: View {
          _ startDelayBubble:StartDelayBubble,
          _ bubble:Bubble) {
         
-        let _ = print("FourLabels body")
         self.spacing = spacing
         self.timeComponentsFontSize = timeComponentsFontSize
         self.hundredthsFontSize = hundredthsFontSize
@@ -43,6 +42,8 @@ struct ThreeLabels: View {
     }
         
     var body: some View {
+//        let _ = print("ThreeLabels body")
+
         HStack (spacing: spacing) {
             Circle().fill(Color.clear) //Hr
                 .overlay { Text(hr) }
