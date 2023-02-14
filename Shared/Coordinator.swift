@@ -21,7 +21,9 @@ class BubbleCellCoordinator {
                     .sink { [weak self] _ in self?.handler() }
                     .store(in: &cancellable)
             case .pause:
-                centsPublisher.send(String(bubble.currentClock.hundredths))
+                DispatchQueue.main.async {
+                    self.centsPublisher.send(String(self.bubble.currentClock.hundredths))
+                }
                 cancellable = []
         }
     }
@@ -86,7 +88,6 @@ class BubbleCellCoordinator {
             let value = self.initialValue
             switch moment {
                 case .automatic:
-                    if self.bubble.state == .brandNew { return }
                     print("automatic \(self.bubble.color!)")
                     let components = value.timeComponentsAsStrings
                     
@@ -114,8 +115,7 @@ class BubbleCellCoordinator {
                     }
                     
                 case .create:
-                    if self.bubble.state != .brandNew { return }
-                    print("create \(self.bubble.color!)")
+                    print("create \(self.bubble.color ?? "no color")")
                     let components = self.bubble.initialClock.timeComponentsAsStrings
                                         
                     DispatchQueue.main.async {
@@ -147,7 +147,6 @@ class BubbleCellCoordinator {
     
     init(for bubble:Bubble) {
         self.bubble = bubble
-        updateComponents(.create)
     }
     
     deinit {
