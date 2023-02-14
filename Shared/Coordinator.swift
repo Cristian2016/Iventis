@@ -87,7 +87,7 @@ class BubbleCellCoordinator {
             switch moment {
                 case .automatic:
                     if self.bubble.state == .brandNew { return }
-                    print("automatic")
+                    print("automatic \(self.bubble.color!)")
                     let components = value.timeComponentsAsStrings
                     
                     let minOpacity = value >= 60 ? Component.min(.show) : .min(.hide)
@@ -114,7 +114,8 @@ class BubbleCellCoordinator {
                     }
                     
                 case .create:
-                    print("create")
+                    if self.bubble.state != .brandNew { return }
+                    print("create \(self.bubble.color!)")
                     let components = self.bubble.initialClock.timeComponentsAsStrings
                                         
                     DispatchQueue.main.async {
