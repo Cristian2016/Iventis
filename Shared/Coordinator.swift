@@ -77,11 +77,6 @@ class BubbleCellCoordinator {
     // MARK: -
     let bubble:Bubble
     
-    enum Moment {
-        case appLaunch
-        case appActive
-    }
-    
     func updateComponents(_ moment:Moment) {
         DispatchQueue.global().async {
             
@@ -139,14 +134,19 @@ class BubbleCellCoordinator {
         cancellable = []
         NotificationCenter.default.removeObserver(self)
     }
+}
+
+extension BubbleCellCoordinator {
+    enum Moment {
+        case appLaunch
+        case appActive(Action)
+    }
     
     enum Action {
         case start
         case pause
     }
-}
-
-extension BubbleCellCoordinator {
+    
     enum Component {
         case min(Show)
         case hr(Show)

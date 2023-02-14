@@ -181,7 +181,7 @@ class ViewModel: ObservableObject {
                 secretary.addNoteButton_bRank = nil //clear first
                 secretary.addNoteButton_bRank = Int(bubble.rank)
                 
-                bubble.coordinator.update(.start)
+                bubble.coordinator.updateComponents(.appActive(.start))
                                                 
             case .paused:  /* changes to running */
                 //create new pair, add it to currentSession
@@ -195,7 +195,7 @@ class ViewModel: ObservableObject {
                 secretary.addNoteButton_bRank = nil //clear first
                 secretary.addNoteButton_bRank = Int(bubble.rank)
                 
-                bubble.coordinator.update(.start)
+                bubble.coordinator.updateComponents(.appActive(.start))
                 
             case .running: /* changes to .paused */
                 let currentPair = bubble.lastPair
@@ -205,10 +205,9 @@ class ViewModel: ObservableObject {
                 
                 //⚠️ closure runs on the main queue. whatever you want the user to see put in that closure otherwise it will fail to update!!!!
                 currentPair?.computeDuration(.atPause) {
-                    
                     //set bubble properties
                     bubble.currentClock += currentPair!.duration
-                    bubble.coordinator.updateComponents(.appActive)
+                    bubble.coordinator.updateComponents(.appActive(.pause))
                     
                     bubble.lastSession?.computeDuration {
                         //no need to run any code in the completion
