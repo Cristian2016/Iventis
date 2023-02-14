@@ -114,7 +114,7 @@ class BubbleCellCoordinator {
                 case .create, .reset, .endSession:
                     let components = self.bubble.initialClock.timeComponentsAsStrings
                     
-                    if bubble.state == .running { update(.pause) }
+                    if self.bubble.state == .running { self.update(.pause) }
                     
                     DispatchQueue.main.async {
                         self.secPublisher.send(components.sec)
