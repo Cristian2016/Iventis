@@ -86,6 +86,8 @@ class BubbleCellCoordinator {
             let value = self.initialValue
             switch moment {
                 case .automatic:
+                    if self.bubble.state == .brandNew { return }
+                    print("automatic")
                     let components = value.timeComponentsAsStrings
                     
                     let minOpacity = value >= 60 ? Component.min(.show) : .min(.hide)
@@ -111,11 +113,10 @@ class BubbleCellCoordinator {
                         case .start: self.update(.start)
                     }
                     
-                case .create, .reset, .endSession:
+                case .create:
+                    print("create")
                     let components = self.bubble.initialClock.timeComponentsAsStrings
-                    
-                    if self.bubble.state == .running { self.update(.pause) }
-                    
+                                        
                     DispatchQueue.main.async {
                         self.secPublisher.send(components.sec)
                         self.minPublisher.send(components.min)
@@ -128,6 +129,7 @@ class BubbleCellCoordinator {
                             self.opacityPublisher.send([.min(.show), .hr(.show)])
                         }
                     }
+                default : break
             }
         }
     }
