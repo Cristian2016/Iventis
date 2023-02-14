@@ -30,7 +30,7 @@ struct BubbleList: View {
     @SectionedFetchRequest var bubbles:SectionedFetchResults<Bool, Bubble>
     
     private let secretary = Secretary.shared
-            
+                
     // MARK: -
     var body: some View {
 //        let _ = print("BubbleList body")
@@ -47,9 +47,6 @@ struct BubbleList: View {
                                 ZStack { //1
                                     NavigationLink(value: bubble) { /* empty view */ }.opacity(0)
                                     BubbleCell(bubble, metrics)
-                                        .task {
-                                            viewModel.updateComponents(bubble, .appLaunch)
-                                        }
                                 }
                             }
                         }

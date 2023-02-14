@@ -90,8 +90,8 @@ class BubbleCellCoordinator {
                 case .appLaunch:
                     let components = value.timeComponentsAsStrings
                     
-                    let minOpacity = components.min > "0" ? Component.min(.show) : .min(.hide)
-                    let hrOpacity = components.hr > "0" ? Component.hr(.show) : .hr(.hide)
+                    let minOpacity = value >= 60 ? Component.min(.show) : .min(.hide)
+                    let hrOpacity = value >= 3600  ? Component.hr(.show) : .hr(.hide)
                     
                     //update any bubble (running or notRunning)
                     DispatchQueue.main.async {

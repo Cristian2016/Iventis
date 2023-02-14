@@ -16,6 +16,7 @@ struct BubbleCell: View {
     private let secretary = Secretary.shared
     
     @State private var components:Float.TimeComponentsAsStrings = .zeroAll
+    @Environment(\.scenePhase) private var scenePhase
     
     let metrics: Metrics
     @StateObject private var bubble:Bubble
@@ -26,6 +27,7 @@ struct BubbleCell: View {
         
     // MARK: - Body
     var body: some View {
+        let _ = print("BubbleCell body")
         VStack {
             ZStack {
                 ThreeCircles(bubble: bubble, metrics: metrics)
@@ -48,6 +50,9 @@ struct BubbleCell: View {
         .swipeActions(edge: .trailing, allowsFullSwipe: true) {
             deleteActionButton
             moreOptionsButton
+        }
+        .onChange(of: scenePhase) { phase in
+            viewModel.updateComponents(bubble, .appLaunch)
         }
     }
     

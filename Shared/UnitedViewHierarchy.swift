@@ -34,7 +34,7 @@ struct UnitedViewHierarchy: View {
         let _ = print("UnitedViewHierarchy body")
         
         ZStack {
-            if UIDevice.isIPad { iPadViewHierarchy() }
+            if UIDevice.isIPad { EmptyView() }
             else { iPhoneViewHierarchy() }
             
             if showDeleteActionView {
@@ -65,6 +65,7 @@ struct UnitedViewHierarchy: View {
     
     // MARK: - Methods
     private func handleScenePhaseChange(_ scenePhase:ScenePhase) {
+        print(#function)
         switch scenePhase {
             case .active: handleBecomeActive()
             case .background: handleEnterBackground()
@@ -73,7 +74,9 @@ struct UnitedViewHierarchy: View {
         }
     } //3
     
-    private func handleBecomeActive() { viewModel.bubbleTimer(.start) } //3
+    private func handleBecomeActive() {
+        viewModel.bubbleTimer(.start)
+    } //3
     
     private func handleEnterBackground() { viewModel.bubbleTimer(.pause) } //3
         

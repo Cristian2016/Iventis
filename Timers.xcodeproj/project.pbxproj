@@ -46,6 +46,8 @@
 		1F5F4A992809456E00AF3442 /* BubbleList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5F4A982809456E00AF3442 /* BubbleList.swift */; };
 		1F5F4A9D280945C700AF3442 /* BubbleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5F4A9C280945C700AF3442 /* BubbleCell.swift */; };
 		1F615B6329899E210006DB0B /* BackgroundTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F615B6229899E210006DB0B /* BackgroundTimer.swift */; };
+		1F61980F299B7193008894D9 /* MyPackage in Frameworks */ = {isa = PBXBuildFile; productRef = 1F61980E299B7193008894D9 /* MyPackage */; };
+		1F619811299B71A0008894D9 /* MyPackage in Frameworks */ = {isa = PBXBuildFile; productRef = 1F619810299B71A0008894D9 /* MyPackage */; };
 		1F61BE052822BAAA00B773F9 /* DeleteActionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F61BE042822BAAA00B773F9 /* DeleteActionView.swift */; };
 		1F62194028293B5100C9B175 /* PairBubbleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F62193F28293B5100C9B175 /* PairBubbleCell.swift */; };
 		1F641FFE281FF70100413E31 /* BottomDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F641FFD281FF70100413E31 /* BottomDetailView.swift */; };
@@ -85,7 +87,6 @@
 		1FAD9B4229961FC000F49670 /* ThreeCircles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FAD9B4129961FC000F49670 /* ThreeCircles.swift */; };
 		1FAE715D298D1CA200E19959 /* DualTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FAE715C298D1CA200E19959 /* DualTextView.swift */; };
 		1FAF39D9298575E9002D833C /* Library.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA377E72972FE75005ACD41 /* Library.swift */; };
-		1FAF39DB29857688002D833C /* MyPackage in Frameworks */ = {isa = PBXBuildFile; productRef = 1FAF39DA29857688002D833C /* MyPackage */; };
 		1FB2EA772997BD2F00752595 /* ThreeLabels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB2EA762997BD2F00752595 /* ThreeLabels.swift */; };
 		1FB3178F286ACB48006BBE82 /* Note_InfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB3178E286ACB48006BBE82 /* Note_InfoView.swift */; };
 		1FB4D4E02977F86500F26D9C /* iPadViewHierarchy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB4D4DF2977F86500F26D9C /* iPadViewHierarchy.swift */; };
@@ -98,7 +99,6 @@
 		1FC70BB129807BAB007CD1E6 /* LayoutViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FC70BB029807BAB007CD1E6 /* LayoutViewModel.swift */; };
 		1FCF01B3287CBA74009DC95C /* DelayStartSymbol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FCF01B2287CBA74009DC95C /* DelayStartSymbol.swift */; };
 		1FCF0C662816F3F600AA1FAA /* EmptyListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FCF0C652816F3F600AA1FAA /* EmptyListView.swift */; };
-		1FD15F802972F5D100852073 /* MyPackage in Frameworks */ = {isa = PBXBuildFile; productRef = 1FD15F7F2972F5D100852073 /* MyPackage */; };
 		1FD2DD972869AB4900831978 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1F5F4A4D28093FAF00AF3442 /* Assets.xcassets */; };
 		1FDB9F12287DA5040028E121 /* StartDelayBubble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FDB9F0C287DA5040028E121 /* StartDelayBubble.swift */; };
 		1FDB9F13287DA5040028E121 /* SDB Properties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FDB9F0D287DA5040028E121 /* SDB Properties.swift */; };
@@ -253,7 +253,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1FD15F802972F5D100852073 /* MyPackage in Frameworks */,
+				1F619811299B71A0008894D9 /* MyPackage in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -261,7 +261,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1FAF39DB29857688002D833C /* MyPackage in Frameworks */,
+				1F61980F299B7193008894D9 /* MyPackage in Frameworks */,
 				1FA8346D2850A57A003F4D61 /* SwiftUI.framework in Frameworks */,
 				1FA8346C2850A57A003F4D61 /* WidgetKit.framework in Frameworks */,
 			);
@@ -497,7 +497,7 @@
 			);
 			name = "Timers (iOS)";
 			packageProductDependencies = (
-				1FD15F7F2972F5D100852073 /* MyPackage */,
+				1F619810299B71A0008894D9 /* MyPackage */,
 			);
 			productName = "Timers (iOS)";
 			productReference = 1F5F4A5228093FAF00AF3442 /* Timers.app */;
@@ -517,7 +517,7 @@
 			);
 			name = WidgetsExtension;
 			packageProductDependencies = (
-				1FAF39DA29857688002D833C /* MyPackage */,
+				1F61980E299B7193008894D9 /* MyPackage */,
 			);
 			productName = WidgetsExtension;
 			productReference = 1FA8346B2850A57A003F4D61 /* WidgetsExtension.appex */;
@@ -994,12 +994,12 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		1FAF39DA29857688002D833C /* MyPackage */ = {
+		1F61980E299B7193008894D9 /* MyPackage */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 1FD15F7E2972F5D100852073 /* XCRemoteSwiftPackageReference "MyPackage" */;
 			productName = MyPackage;
 		};
-		1FD15F7F2972F5D100852073 /* MyPackage */ = {
+		1F619810299B71A0008894D9 /* MyPackage */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 1FD15F7E2972F5D100852073 /* XCRemoteSwiftPackageReference "MyPackage" */;
 			productName = MyPackage;
