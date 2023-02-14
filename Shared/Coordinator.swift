@@ -63,9 +63,9 @@ class BubbleCellCoordinator {
     // MARK: - Publishers 1
     var opacityPublisher:Publisher<[Component], Never> = .init([.min(.hide), .hr(.hide)])
     
-    var colorPublisher:Publisher<Color, Never> = .init(.blue)
+    private var colorPublisher:Publisher<Color, Never> = .init(.blue)
     
-    var componentsPublisher:Publisher<Float.TimeComponentsAsStrings, Never> = .init(.zeroAll)
+    private var componentsPublisher:Publisher<Float.TimeComponentsAsStrings, Never> = .init(.zeroAll)
     
     var secPublisher:Publisher<String, Never> = .init("-1")
     var minPublisher:Publisher<String, Never>! = .init("-1")
@@ -78,7 +78,7 @@ class BubbleCellCoordinator {
     private var cancellable = Set<AnyCancellable>()
     
     // MARK: -
-    let bubble:Bubble
+    private let bubble:Bubble
     
     func updateComponents(_ moment:Moment) {
         DispatchQueue.global().async {
@@ -111,7 +111,7 @@ class BubbleCellCoordinator {
                         case .start: self.update(.start)
                     }
                     
-                case .create:
+                case .create, .reset:
                     let components = self.bubble.initialClock.timeComponentsAsStrings
                     
                     DispatchQueue.main.async {
@@ -157,6 +157,8 @@ extension BubbleCellCoordinator {
         case automatic
         case user(Action)
         case create
+        case reset
+        case endSession
     }
     
     enum Action {

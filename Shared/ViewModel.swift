@@ -27,19 +27,6 @@ class ViewModel: ObservableObject {
     var notesForBubble: CurrentValueSubject<Bubble?, Never> = .init(nil)
         
     // MARK: -
-    private func updateTimeComponents(_ bubbles: [Bubble]?) {
-        DispatchQueue.global().async {
-            bubbles?.forEach { bubble in
-                let components = bubble.initialClock.timeComponentsAsStrings
-            
-                DispatchQueue.main.async {
-                    bubble.coordinator.hrPublisher.send(components.hr)
-                    bubble.coordinator.minPublisher.send(components.min)
-                    bubble.coordinator.secPublisher.send(components.sec)
-                }
-            }
-        }            
-    }
     
     func updateComponents(_ bubble: Bubble, _ moment: BubbleCellCoordinator.Moment) {
         bubble.coordinator.updateComponents(moment)
@@ -112,7 +99,7 @@ class ViewModel: ObservableObject {
             
             //reset bubble clock
             bubble.currentClock = bubble.initialClock
-            bubble.coordinator.componentsPublisher.send(bubble.initialClock.timeComponentsAsStrings)
+           
         }
         
         let viewContext = PersistenceController.shared.viewContext
@@ -140,12 +127,10 @@ class ViewModel: ObservableObject {
         let viewContext = PersistenceController.shared.viewContext
         bubble.created = Date()
         bubble.currentClock = bubble.initialClock
-        bubble.coordinator.componentsPublisher.send(bubble.initialClock.timeComponentsAsStrings)
         bubble.sessions?.forEach { viewContext.delete($0 as! Session) }
         try? viewContext.save()
         
-//        bubble.coordinator.update(.pause)
-        updateTimeComponents([bubble])
+        bubble.coordinator.updateComponents(.reset)
     }
     
     func togglePin(_ bubble:Bubble) {
@@ -299,10 +284,7 @@ class ViewModel: ObservableObject {
         
         //reset bubble clock
         bubble.currentClock = bubble.initialClock
-        
-        updateTimeComponents([bubble])
-//        bubble.coordinator.update(.pause)
-                
+                        
         //mark session as ended
         bubble.lastSession?.isEnded = true
                 
@@ -320,6 +302,8 @@ class ViewModel: ObservableObject {
             }
         }
         else { createCalendarEventIfRequiredAndSaveToCoreData(for: bubble) }
+        
+        bubble.coordinator.updateComponents(.endSession)
     }
     
     ///createds calendar events only if that bubble has calendar, otherwise it only saves to coredata
