@@ -109,6 +109,10 @@ public extension Float {
         return TimeComponents(hr: hr, min: min, sec: sec, cents: fractionalValue)
     }
     
+    var hundredths:Int {
+        Int((self - Float(Int(self)))*100)
+    }
+    
     var timeComponentsAsStrings:TimeComponentsAsStrings {
         if self == 0 { return .zeroAll }
         

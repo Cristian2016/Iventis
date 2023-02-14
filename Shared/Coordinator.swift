@@ -21,7 +21,7 @@ class BubbleCellCoordinator {
                     .sink { [weak self] _ in self?.handler() }
                     .store(in: &cancellable)
             case .pause:
-                centsPublisher.send(<#T##input: String##String#>)
+                centsPublisher.send(String(bubble.currentClock.hundredths))
                 cancellable = []
         }
     }
@@ -110,6 +110,21 @@ class BubbleCellCoordinator {
                         case .pause: self.update(.pause)
                         case .start: self.update(.start)
                     }
+                    
+                case .create:
+                    let components = self.bubble.initialClock.timeComponentsAsStrings
+                    
+                    DispatchQueue.main.async {
+                        self.secPublisher.send(components.sec)
+                        self.minPublisher.send(components.min)
+                        self.hrPublisher.send(components.hr)
+                        self.centsPublisher.send("0")
+                        if self.bubble.kind == .stopwatch {
+                            self.opacityPublisher.send([.min(.hide), .hr(.hide)])
+                        } else {
+                            self.opacityPublisher.send([.min(.show), .hr(.show)])
+                        }
+                    }
             }
         }
     }
@@ -137,6 +152,7 @@ extension BubbleCellCoordinator {
     enum Moment {
         case automatic
         case user(Action)
+        case create
     }
     
     enum Action {
@@ -152,6 +168,5 @@ extension BubbleCellCoordinator {
     enum Show {
         case show
         case hide
-        
     }
 }
