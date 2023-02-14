@@ -61,7 +61,7 @@ class BubbleCellCoordinator {
     }
     
     // MARK: - Publishers 1
-    var opacityPublisher:Publisher<[Component], Never> = .init([.min(.hide), .hr(.show)])
+    var opacityPublisher:Publisher<[Component], Never> = .init([.min(.hide), .hr(.hide)])
     
     var colorPublisher:Publisher<Color, Never> = .init(.blue)
     
@@ -140,7 +140,10 @@ class BubbleCellCoordinator {
             }
     }
     
-    init(for bubble:Bubble) { self.bubble = bubble }
+    init(for bubble:Bubble) {
+        self.bubble = bubble
+        updateComponents(.create)
+    }
     
     deinit {
         cancellable = []

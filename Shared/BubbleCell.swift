@@ -27,7 +27,7 @@ struct BubbleCell: View {
         
     // MARK: - Body
     var body: some View {
-        let _ = print("BubbleCell body")
+//        let _ = print("BubbleCell body")
         VStack {
             ZStack {
                 ThreeCircles(bubble: bubble, metrics: metrics)
@@ -129,7 +129,6 @@ struct BubbleCell: View {
     
     // MARK: -
     init(_ bubble:Bubble, _ metrics:Metrics) {
-        print(#function, " bCell")
         _bubble = StateObject(wrappedValue: bubble)
         _startDelayBubble = StateObject(wrappedValue: bubble.sdb!)
         self.metrics = metrics
