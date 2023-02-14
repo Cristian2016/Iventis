@@ -4,6 +4,7 @@
 //
 //  Created by Cristian Lapusan on 10.02.2023.
 //1 publishers emit their initial value, without .send()! ⚠️
+//2 delta is the elapsed duration between last pair.start and signal date
 
 import SwiftUI
 import Combine
@@ -20,6 +21,7 @@ class BubbleCellCoordinator {
                     .sink { [weak self] _ in self?.handler() }
                     .store(in: &cancellable)
             case .pause:
+                centsPublisher.send(<#T##input: String##String#>)
                 cancellable = []
         }
     }
@@ -28,10 +30,11 @@ class BubbleCellCoordinator {
     private func handler() {
         guard let lastPairStart = bubble.lastPair?.start else { return }
                 
-        //delta is the elapsed duration between last pair.start and signal date
-        let Δ = Date().timeIntervalSince(lastPairStart)
+        let Δ = Date().timeIntervalSince(lastPairStart) //2
         var value = bubble.currentClock + Float(Δ) //ex: 2345.87648
+        
         value.round(.toNearestOrEven) //ex: 2346
+        
         let intValue = Int(value)
         let secValue = intValue%60
         
