@@ -6,6 +6,8 @@
 //1 publishers emit their initial value, without .send()! ⚠️
 //2 delta is the elapsed duration between last pair.start and signal date
 //3 create means initialization. 1.user creates a bubble or 2.bubble created already but app relaunches
+//4 every second publisher sends out bTimer signal and this is the task to run. bubble.currentClock + ∆
+
 import SwiftUI
 import Combine
 
@@ -26,7 +28,6 @@ class BubbleCellCoordinator {
         }
     }
     
-    ///every second publisher sends out bTimer signal and this is the task to run
     private func continuousUpdate() {
         guard let lastPairStart = bubble.lastPair?.start else { return }
                 
@@ -58,7 +59,7 @@ class BubbleCellCoordinator {
         DispatchQueue.main.async {
             self.secPublisher.send(String(secValue))
         }
-    }
+    } //4
     
     private func atPauseUpdate() {
         DispatchQueue.global().async {
