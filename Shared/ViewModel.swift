@@ -437,15 +437,9 @@ class ViewModel: ObservableObject {
         bubble.color = newColor
         PersistenceController.shared.save()
         
-        //user feedback: tactile feedback
         UserFeedback.singleHaptic(.medium)
-                                
-        //user feedback: flash "color changed" confirmation
-//        confirm_ColorChange = true //show confirmation
-        delayExecution(.confirmation) {//after 0.7 seconds
-//            self.confirm_ColorChange = false //hide confirmation
-            self.secretary.theOneAndOnlyEditedSDB = nil //dismiss
-        }
+        
+        bubble.coordinator.colorPublisher.send(Color.bubbleColor(forName: bubble.color))
     }
     
     // start delay

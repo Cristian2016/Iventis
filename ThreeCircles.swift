@@ -15,6 +15,13 @@ struct ThreeCircles: View {
     
     @State private var minOpacity = CGFloat(0)
     @State private var hrOpacity = CGFloat(0)
+    @State private var color:Color
+    
+    init(bubble: Bubble, metrics: BubbleCell.Metrics) {
+        self.bubble = bubble
+        self.metrics = metrics
+        self.color = Color.bubbleColor(forName: bubble.color)
+    }
     
     var body: some View {
         if !bubble.isFault {
@@ -41,6 +48,10 @@ struct ThreeCircles: View {
                     }
                 }
             }
+            .onReceive(bubble.coordinator.colorPublisher) {
+                color = $0
+                print("color change")
+            }
         }
     }
 }
@@ -57,10 +68,10 @@ extension ThreeCircles {
     private var bubbleShape: some View {
         if bubble.hasWidget {
             RoundedRectangle(cornerRadius: 20)
-                .fill(Color.bubbleColor(forName: bubble.color))
+                .fill(color)
         } else {
             Circle()
-                .fill(Color.bubbleColor(forName: bubble.color))
+                .fill(color)
         }
     }
 }

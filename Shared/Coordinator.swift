@@ -104,7 +104,7 @@ class BubbleCellCoordinator {
     // MARK: - Publishers 1
     var opacityPublisher:Publisher<[Component], Never> = .init([.min(.hide), .hr(.hide)])
     
-    private var colorPublisher:Publisher<Color, Never> = .init(.blue)
+    var colorPublisher:Publisher<Color, Never>
     
     var secPublisher:Publisher<String, Never> = .init("-1")
     var minPublisher:Publisher<String, Never>! = .init("-1")
@@ -177,6 +177,7 @@ class BubbleCellCoordinator {
     
     init(for bubble:Bubble) {
         self.bubble = bubble
+        self.colorPublisher = .init(Color.bubbleColor(forName: bubble.color))
     }
     
     deinit {
