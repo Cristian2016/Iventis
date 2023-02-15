@@ -30,35 +30,38 @@ class BubbleCellCoordinator {
     
     private func continuousUpdate() {
         guard let lastPairStart = bubble.lastPair?.start else { return }
+
+        DispatchQueue.global().async {
+            let Δ = Date().timeIntervalSince(lastPairStart) //2
+            var value = bubble.currentClock + Float(Δ) //ex: 2345.87648
+            
+            value.round(.toNearestOrEven) //ex: 2346
+            
+            let intValue = Int(value)
+            let secValue = intValue%60
+            
+            //send minute and hour
+            if secValue == 0 {
+                let giveMeAName = intValue/60%60
+                let minValue = String(giveMeAName)
+                DispatchQueue.main.async {
+                    self.minPublisher.send(minValue)
+                    self.opacityPublisher.send([.min(.show)])
+                }
                 
-        let Δ = Date().timeIntervalSince(lastPairStart) //2
-        var value = bubble.currentClock + Float(Δ) //ex: 2345.87648
-        
-        value.round(.toNearestOrEven) //ex: 2346
-        
-        let intValue = Int(value)
-        let secValue = intValue%60
-        
-        //send minute and hour
-        if secValue == 0 {
-            let giveMeAName = intValue/60%60
-            let minValue = String(giveMeAName)
-            DispatchQueue.main.async {
-                self.minPublisher.send(minValue)
-                self.opacityPublisher.send([.min(.show)])
+                //send hour
+                if (giveMeAName%60) == 0 {
+                    let hrValue = String(intValue/3600)
+                    DispatchQueue.main.async { self.hrPublisher.send(hrValue) }
+                }
             }
             
-            //send hour
-            if (giveMeAName%60) == 0 {
-                let hrValue = String(intValue/3600)
-                DispatchQueue.main.async { self.hrPublisher.send(hrValue) }
+            //send each second
+            DispatchQueue.main.async {
+                self.secPublisher.send(String(secValue))
             }
         }
         
-        //send each second
-        DispatchQueue.main.async {
-            self.secPublisher.send(String(secValue))
-        }
     } //4
     
     private func oneTimeUpdate() {
