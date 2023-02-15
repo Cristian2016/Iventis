@@ -48,10 +48,7 @@ struct ThreeCircles: View {
                     }
                 }
             }
-            .onReceive(bubble.coordinator.colorPublisher) {
-                color = $0
-                print("color change")
-            }
+            .onReceive(bubble.coordinator.colorPublisher) { color = $0 }
         }
     }
 }
