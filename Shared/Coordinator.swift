@@ -60,6 +60,27 @@ class BubbleCellCoordinator {
         }
     }
     
+    private func atPauseUpdate() {
+        DispatchQueue.global().async {
+            let currentClock = self.bubble.currentClock
+            let stringComponents = currentClock.timeComponentsAsStrings
+                                
+            DispatchQueue.main.async {
+                self.secPublisher.send(stringComponents.sec)
+                self.minPublisher.send(stringComponents.min)
+                self.hrPublisher.send(stringComponents.hr)
+                self.centsPublisher.send(stringComponents.cents)
+                
+                if self.bubble.kind == .stopwatch {
+                    self.setOpacity(for: currentClock.timeComponents)
+                } else {
+                    self.opacityPublisher.send([.min(.show), .hr(.show)])
+                }
+            }
+            print("\(self.bubble.color!) \(self.bubble.currentClock)")
+        }
+    }
+    
     // MARK: - Publishers 1
     var opacityPublisher:Publisher<[Component], Never> = .init([.min(.hide), .hr(.hide)])
     
@@ -147,27 +168,6 @@ class BubbleCellCoordinator {
             } else {
                 return bubble.currentClock
             }
-    }
-    
-    private func atPauseUpdate() {
-        DispatchQueue.global().async {
-            let currentClock = self.bubble.currentClock
-            let stringComponents = currentClock.timeComponentsAsStrings
-                                
-            DispatchQueue.main.async {
-                self.secPublisher.send(stringComponents.sec)
-                self.minPublisher.send(stringComponents.min)
-                self.hrPublisher.send(stringComponents.hr)
-                self.centsPublisher.send(stringComponents.cents)
-                
-                if self.bubble.kind == .stopwatch {
-                    self.setOpacity(for: currentClock.timeComponents)
-                } else {
-                    self.opacityPublisher.send([.min(.show), .hr(.show)])
-                }
-            }
-            print("\(self.bubble.color!) \(self.bubble.currentClock)")
-        }
     }
     
     init(for bubble:Bubble) {
