@@ -115,8 +115,7 @@ class BubbleCellCoordinator {
                     }
                     
                 case .create:
-                    print("create \(self.bubble.color ?? "no color")")
-                    let components = self.bubble.initialClock.timeComponentsAsStrings
+                    let components = self.bubble.currentClock.timeComponentsAsStrings
                                         
                     DispatchQueue.main.async {
                         self.secPublisher.send(components.sec)
@@ -147,7 +146,6 @@ class BubbleCellCoordinator {
     
     init(for bubble:Bubble) {
         self.bubble = bubble
-        print(#function, " set inital value \(bubble.color!)")
         updateComponents(.create)
     }
     
