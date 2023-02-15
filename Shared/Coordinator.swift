@@ -133,6 +133,7 @@ class BubbleCellCoordinator {
             
             switch moment {
                 case .automatic:
+                    self.oneTimeUpdate()
                     if self.bubble.state == .running { self.update(.start) }
                     
                 case .user(let action):
