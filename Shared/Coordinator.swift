@@ -44,9 +44,12 @@ class BubbleCellCoordinator {
             if secValue == 0 {
                 let giveMeAName = intValue/60%60
                 let minValue = String(giveMeAName)
+                
                 DispatchQueue.main.async {
                     self.minPublisher.send(minValue)
-                    self.opacityPublisher.send([.min(.show)])
+                    if intValue > 0 {
+                        self.opacityPublisher.send([.min(.show)])
+                    }
                 }
                 
                 //send hour
