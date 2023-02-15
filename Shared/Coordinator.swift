@@ -16,6 +16,8 @@ extension BubbleCellCoordinator {
 }
 
 class BubbleCellCoordinator {
+    var shouldUpdateOnce = false
+    
     private func update(_ action:Action) {
         switch action {
             case .start:
@@ -113,7 +115,7 @@ class BubbleCellCoordinator {
     private lazy var publisher =
     NotificationCenter.Publisher(center: .default, name: .bubbleTimerSignal)
     
-    private var cancellable = Set<AnyCancellable>()
+    var cancellable = Set<AnyCancellable>()
     
     // MARK: -
     private let bubble:Bubble
@@ -189,8 +191,7 @@ class BubbleCellCoordinator {
     
     init(for bubble:Bubble) {
         self.bubble = bubble
-        oneTimeUpdate()
-        print("init update")
+//        oneTimeUpdate()
     }
     
     deinit {

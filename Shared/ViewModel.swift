@@ -71,12 +71,12 @@ class ViewModel: ObservableObject {
                 newBubble.isNoteHidden = false
             }
             
-//            let info = ["rank" : newBubble.rank]
-//            DispatchQueue.main.async {
-//                delayExecution(.now() + 0.1) {
-//                    NotificationCenter.default.post(name: .init("bubbleCreated"), object: nil, userInfo: info)
-//                }
-//            }
+            let info = ["rank" : newBubble.rank]
+            DispatchQueue.main.async {
+                delayExecution(.now() + 0.1) {
+                    NotificationCenter.default.post(name: .init("bubbleCreated"), object: nil, userInfo: info)
+                }
+            }
             
             try? context.save()
         }
@@ -94,7 +94,10 @@ class ViewModel: ObservableObject {
         let context = bubble.managedObjectContext!
         
         //⚠️ do I really need to set to nil?
-        delayExecution(.now() + 0.2) { bubble.coordinator = nil  }
+        delayExecution(.now() + 0.2) {
+            bubble.coordinator.cancellable = []
+            bubble.coordinator = nil
+        }
 
         context.perform {
             context.delete(bubble)
