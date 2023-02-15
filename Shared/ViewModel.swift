@@ -94,10 +94,7 @@ class ViewModel: ObservableObject {
         let context = bubble.managedObjectContext!
         
         //⚠️ do I really need to set to nil?
-        delayExecution(.now() + 0.2) {
-            bubble.coordinator.cancellable = []
-            bubble.coordinator = nil
-        }
+        delayExecution(.now() + 0.2) { bubble.coordinator = nil }
 
         context.perform {
             context.delete(bubble)
