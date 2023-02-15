@@ -49,7 +49,7 @@ class BubbleCellCoordinator {
                 DispatchQueue.main.async {
                     self.minPublisher.send(minValue)
                     if intValue == 60 {
-                        withAnimation {
+                        withAnimation(.spring(response: 0.5, dampingFraction: 0.5)) {
                             self.opacityPublisher.send([.min(.show)])
                         }
                     }
@@ -82,7 +82,6 @@ class BubbleCellCoordinator {
     private func oneTimeUpdate() {
         DispatchQueue.global().async {
             let initialValue = self.initialValue
-            print(initialValue, " initial value \(self.bubble.color!)")
             let stringComponents = initialValue.timeComponentsAsStrings
                                 
             DispatchQueue.main.async {
