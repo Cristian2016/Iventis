@@ -145,7 +145,7 @@ class BubbleCellCoordinator {
                             self.opacityPublisher.send([.min(.show), .hr(.show)])
                         }
                     }
-                case .endSession:
+                case .endSession, .reset:
                     self.cancellable = []
                     let initialClock = self.bubble.initialClock
                     let stringComponents = initialClock.timeComponentsAsStrings

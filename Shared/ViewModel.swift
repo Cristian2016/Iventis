@@ -125,13 +125,13 @@ class ViewModel: ObservableObject {
     func reset(_ bubble:Bubble) {
         guard !bubble.sessions_.isEmpty else { return }
         
-        bubble.coordinator.updateComponents(.reset)
-        
         let viewContext = PersistenceController.shared.viewContext
         bubble.created = Date()
         bubble.currentClock = bubble.initialClock
         bubble.sessions?.forEach { viewContext.delete($0 as! Session) }
         try? viewContext.save()
+        
+        bubble.coordinator.updateComponents(.reset)
     }
     
     func togglePin(_ bubble:Bubble) {
