@@ -49,8 +49,9 @@ class BubbleCellCoordinator {
                 DispatchQueue.main.async {
                     self.minPublisher.send(minValue)
                     if intValue == 60 {
-                        print("update minutes")
-                        self.opacityPublisher.send([.min(.show)])
+                        withAnimation {
+                            self.opacityPublisher.send([.min(.show)])
+                        }
                     }
                 }
                 
@@ -62,7 +63,9 @@ class BubbleCellCoordinator {
                         self.hrPublisher.send(hrValue)
                         if intValue == 3600 {
                             print("update hr")
-                            self.opacityPublisher.send([.hr(.show)])
+                            withAnimation {
+                                self.opacityPublisher.send([.hr(.show)])
+                            }
                         }
                     }
                 }
