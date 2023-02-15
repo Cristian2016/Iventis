@@ -21,10 +21,10 @@ class BubbleCellCoordinator {
             case .start:
                 publisher
                     .sink { [weak self] _ in self?.continuousUpdate() }
-                    .store(in: &cancellable)
+                    .store(in: &cancellable) //connect
             case .pause:
                 oneTimeUpdate()
-                cancellable = []
+                cancellable = [] //disconnect
         }
     }
     

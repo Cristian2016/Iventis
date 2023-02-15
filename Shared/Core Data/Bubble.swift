@@ -16,11 +16,6 @@ import MyPackage
 public class Bubble: NSManagedObject {
     
     lazy var coordinator:BubbleCellCoordinator! = BubbleCellCoordinator(for: self)
-    
-    // MARK: - Observers
-    var observerAdded = false {didSet{
-        print("dds observerAdded \(observerAdded)")
-    }}
 
     ///4 start delay values
     static let delays = [5, 10, 20, 45]
