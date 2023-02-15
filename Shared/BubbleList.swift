@@ -17,6 +17,7 @@
 //11 user can pull down to toggle pinned bubbles only. refresherView shows when used pulls to refresh the table
 //12 initializer with or without predicate. when predicate is set, it fetches only pinned bubbles [bubble.isPinned]. otherwise it fetches everything
 //13 toolbar items is an HStack { PlusButton AutoLock etc }
+//14 remove gray cell selectio
 
 import SwiftUI
 import CoreData
