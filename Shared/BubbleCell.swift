@@ -52,8 +52,9 @@ struct BubbleCell: View {
             moreOptionsButton
         }
         .onChange(of: scenePhase) { phase in
-            if bubble.state == .running {
-                bubble.coordinator.updateComponents(.automatic)
+            if phase == .active {
+                print("automatic update")
+//                bubble.coordinator.updateComponents(.automatic)
             }
         }
     }

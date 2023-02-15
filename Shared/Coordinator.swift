@@ -69,8 +69,8 @@ class BubbleCellCoordinator {
     
     private func oneTimeUpdate() {
         DispatchQueue.global().async {
-            let currentClock = self.bubble.currentClock
-            let stringComponents = currentClock.timeComponentsAsStrings
+            let initialValue = self.initialValue
+            let stringComponents = initialValue.timeComponentsAsStrings
                                 
             DispatchQueue.main.async {
                 self.secPublisher.send(stringComponents.sec)
@@ -79,7 +79,7 @@ class BubbleCellCoordinator {
                 self.centsPublisher.send(stringComponents.cents)
                 
                 if self.bubble.kind == .stopwatch {
-                    self.setOpacity(for: currentClock.timeComponents)
+                    self.setOpacity(for: initialValue.timeComponents)
                 } else {
                     self.opacityPublisher.send([.min(.show), .hr(.show)])
                 }
@@ -116,26 +116,8 @@ class BubbleCellCoordinator {
     func updateComponents(_ moment:Moment) {
         DispatchQueue.global().async {
             
-            let value = self.initialValue
             switch moment {
                 case .automatic:
-                    let components = value.timeComponentsAsStrings
-                    
-                    let minOpacity = value >= 60 ? Component.min(.show) : .min(.hide)
-                    let hrOpacity = value >= 3600  ? Component.hr(.show) : .hr(.hide)
-                    
-                    //update any bubble (running or notRunning)
-                    DispatchQueue.main.async {
-                        //labels update
-                        self.secPublisher.send(components.sec)
-                        self.minPublisher.send(components.min)
-                        self.hrPublisher.send(components.hr)
-                        if self.bubble.state != .running {
-                            self.centsPublisher.send(components.cents)
-                        }
-                        self.opacityPublisher.send([minOpacity, hrOpacity])
-                    }
-                    
                     if self.bubble.state == .running { self.update(.start) }
                     
                 case .user(let action):
@@ -178,6 +160,7 @@ class BubbleCellCoordinator {
     init(for bubble:Bubble) {
         self.bubble = bubble
         oneTimeUpdate()
+        print("init update")
     }
     
     deinit {
