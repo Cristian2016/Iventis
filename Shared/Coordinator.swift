@@ -82,6 +82,13 @@ class BubbleCellCoordinator {
     // MARK: -
     private let bubble:Bubble
     
+    private func setOpacity(for components: Float.TimeComponents) {
+        if components.min > 0 && components.hr == 0 {
+            if components.hr == 0 { opacityPublisher.send([.min(.show)]) }
+            else { opacityPublisher.send([.min(.show), .hr(.show)]) }
+        }
+    }
+    
     func updateComponents(_ moment:Moment) {
         DispatchQueue.global().async {
             
@@ -115,16 +122,17 @@ class BubbleCellCoordinator {
                     }
                     
                 case .create:
-                    let components = self.bubble.currentClock.timeComponentsAsStrings
+                    let currentClock = self.bubble.currentClock
+                    let stringComponents = currentClock.timeComponentsAsStrings
                                         
                     DispatchQueue.main.async {
-                        self.secPublisher.send(components.sec)
-                        self.minPublisher.send(components.min)
-                        self.hrPublisher.send(components.hr)
-                        self.centsPublisher.send(components.cents)
+                        self.secPublisher.send(stringComponents.sec)
+                        self.minPublisher.send(stringComponents.min)
+                        self.hrPublisher.send(stringComponents.hr)
+                        self.centsPublisher.send(stringComponents.cents)
                         
                         if self.bubble.kind == .stopwatch {
-                            self.opacityPublisher.send([.min(.hide), .hr(.hide)])
+                            self.setOpacity(for: currentClock.timeComponents)
                         } else {
                             self.opacityPublisher.send([.min(.show), .hr(.show)])
                         }
