@@ -54,7 +54,7 @@ struct BubbleCell: View {
         .onChange(of: scenePhase) { phase in
             if phase == .active {
                 print("automatic update")
-//                bubble.coordinator.updateComponents(.automatic)
+                bubble.coordinator.updateComponents(.automatic)
             }
         }
     }
