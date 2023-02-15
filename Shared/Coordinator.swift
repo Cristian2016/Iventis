@@ -5,7 +5,7 @@
 //  Created by Cristian Lapusan on 10.02.2023.
 //1 publishers emit their initial value, without .send()! ⚠️
 //2 delta is the elapsed duration between last pair.start and signal date
-
+//3 create means initialization. 1.user creates a bubble or 2.bubble created already but app relaunches
 import SwiftUI
 import Combine
 
@@ -114,7 +114,7 @@ class BubbleCellCoordinator {
                         case .start: self.update(.start)
                     }
                     
-                case .atInit:
+                case .create:
                     print("create \(self.bubble.color ?? "no color")")
                     let components = self.bubble.initialClock.timeComponentsAsStrings
                                         
@@ -148,7 +148,7 @@ class BubbleCellCoordinator {
     init(for bubble:Bubble) {
         self.bubble = bubble
         print(#function, " set inital value \(bubble.color!)")
-        updateComponents(.atInit)
+        updateComponents(.create)
     }
     
     deinit {
@@ -162,7 +162,7 @@ extension BubbleCellCoordinator {
     enum Moment {
         case automatic
         case user(Action)
-        case atInit
+        case create //3
         case reset
         case endSession
     }
