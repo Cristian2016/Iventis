@@ -33,7 +33,7 @@ class BubbleCellCoordinator {
 
         DispatchQueue.global().async {
             let Δ = Date().timeIntervalSince(lastPairStart) //2
-            var value = bubble.currentClock + Float(Δ) //ex: 2345.87648
+            var value = self.bubble.currentClock + Float(Δ) //ex: 2345.87648
             
             value.round(.toNearestOrEven) //ex: 2346
             
