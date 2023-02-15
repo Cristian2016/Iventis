@@ -65,7 +65,6 @@ struct UnitedViewHierarchy: View {
     
     // MARK: - Methods
     private func handleScenePhaseChange(_ scenePhase:ScenePhase) {
-        print(#function)
         switch scenePhase {
             case .active: handleBecomeActive()
             case .background: handleEnterBackground()
