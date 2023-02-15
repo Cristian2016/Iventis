@@ -111,7 +111,7 @@ public extension Float {
     }
     
     var hundredths:Int {
-        Int((self - Float(Int(self)))*100)
+        Int(((self - Float(Int(self))) * 100).rounded(.toNearestOrEven))
     }
     
     var timeComponentsAsStrings:TimeComponentsAsStrings {
