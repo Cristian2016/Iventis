@@ -70,6 +70,7 @@ class BubbleCellCoordinator {
     private func oneTimeUpdate() {
         DispatchQueue.global().async {
             let initialValue = self.initialValue
+            print(initialValue, " initial value \(self.bubble.color!)")
             let stringComponents = initialValue.timeComponentsAsStrings
                                 
             DispatchQueue.main.async {
@@ -79,7 +80,7 @@ class BubbleCellCoordinator {
                 self.centsPublisher.send(stringComponents.cents)
                 
                 if self.bubble.kind == .stopwatch {
-                    self.setOpacity(for: initialValue.timeComponents)
+                    self.setOpacity(for: initialValue)
                 } else {
                     self.opacityPublisher.send([.min(.show), .hr(.show)])
                 }
@@ -106,10 +107,12 @@ class BubbleCellCoordinator {
     // MARK: -
     private let bubble:Bubble
     
-    private func setOpacity(for components: Float.TimeComponents) {
-        if components.min > 0 && components.hr == 0 {
-            if components.hr == 0 { opacityPublisher.send([.min(.show)]) }
-            else { opacityPublisher.send([.min(.show), .hr(.show)]) }
+    private func setOpacity(for initialValue: Float) {
+        if initialValue >= 60 {
+            opacityPublisher.send([.min(.show)])
+        }
+        if initialValue >= 3600 {
+            opacityPublisher.send([.min(.show), .hr(.show)])
         }
     }
     
@@ -137,7 +140,7 @@ class BubbleCellCoordinator {
                         self.centsPublisher.send(stringComponents.cents)
                         
                         if self.bubble.kind == .stopwatch {
-                            self.setOpacity(for: currentClock.timeComponents)
+                            self.setOpacity(for: currentClock)
                         } else {
                             self.opacityPublisher.send([.min(.show), .hr(.show)])
                         }
