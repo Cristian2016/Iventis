@@ -58,7 +58,7 @@ class BubbleCellCoordinator {
                     let hrValue = String(intValue/3600)
                     DispatchQueue.main.async {
                         self.hrPublisher.send(hrValue)
-                        if (3599...3600).contains(intValue) {
+                        if (3599...3601).contains(intValue) {
                             print("update hr")
                             self.opacityPublisher.send([.hr(.show)])
                         }
