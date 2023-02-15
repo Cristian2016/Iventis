@@ -93,8 +93,6 @@ class BubbleCellCoordinator {
     
     private var colorPublisher:Publisher<Color, Never> = .init(.blue)
     
-    private var componentsPublisher:Publisher<Float.TimeComponentsAsStrings, Never> = .init(.zeroAll)
-    
     var secPublisher:Publisher<String, Never> = .init("-1")
     var minPublisher:Publisher<String, Never>! = .init("-1")
     var hrPublisher:Publisher<String, Never>! = .init("-1")
