@@ -43,8 +43,6 @@ struct ThreeLabels: View {
         
     var body: some View {
         if !bubble.isFault {
-            //        let _ = print("ThreeLabels body")
-            
             HStack (spacing: spacing) {
                 Circle().fill(Color.clear) //Hr
                     .overlay { Text(hr) }
