@@ -69,10 +69,6 @@ class ViewModel: ObservableObject {
                 newBubble.isNoteHidden = false
             }
             
-            DispatchQueue.main.async {
-                newBubble.coordinator.updateComponents(.create)
-            }
-            
             try? context.save()
         }
     }

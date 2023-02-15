@@ -147,6 +147,7 @@ class BubbleCellCoordinator {
     
     init(for bubble:Bubble) {
         self.bubble = bubble
+        print(#function, " set inital value here")
     }
     
     deinit {

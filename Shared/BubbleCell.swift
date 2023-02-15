@@ -52,6 +52,7 @@ struct BubbleCell: View {
             moreOptionsButton
         }
         .onChange(of: scenePhase) { phase in
+            print(#function, " start running bubbles")
             viewModel.updateComponents(bubble, .automatic)
         }
     }
