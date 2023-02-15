@@ -45,20 +45,22 @@ class BubbleCellCoordinator {
                 let giveMeAName = intValue/60%60
                 let minValue = String(giveMeAName)
                 
+                //send min
                 DispatchQueue.main.async {
                     self.minPublisher.send(minValue)
-                    if (59...60).contains(intValue) {
+                    if intValue == 60 {
                         print("update minutes")
                         self.opacityPublisher.send([.min(.show)])
                     }
                 }
                 
-                //send hour
                 if (giveMeAName%60) == 0 {
                     let hrValue = String(intValue/3600)
+                    
+                    //send hour
                     DispatchQueue.main.async {
                         self.hrPublisher.send(hrValue)
-                        if (3599...3601).contains(intValue) {
+                        if intValue == 3600 {
                             print("update hr")
                             self.opacityPublisher.send([.hr(.show)])
                         }
@@ -66,7 +68,7 @@ class BubbleCellCoordinator {
                 }
             }
             
-            //send each second
+            //send second
             DispatchQueue.main.async {
                 self.secPublisher.send(String(secValue))
             }
