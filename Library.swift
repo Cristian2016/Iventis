@@ -153,7 +153,7 @@ public extension Float {
         let sec:String
         let cents:String
         
-        static let zeroAll = TimeComponentsAsStrings.init(hr: "0", min: "0", sec: "0", cents: "0")
+        static let zeroAll = TimeComponentsAsStrings.init(hr: "0", min: "0", sec: "0", cents: "00")
     }
 }
 
