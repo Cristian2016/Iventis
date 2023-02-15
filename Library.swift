@@ -94,7 +94,8 @@ public extension Float {
         if self == 0 { return .zeroAll }
         
         let decimalValue = Int(self) //used to compute hr. min, sec
-        let fractionalValue = Int((self - Float(decimalValue))*100)
+//        let fractionalValue = Int((self - Float(decimalValue))*100)
+        let fractionalValue = Int(((self - Float(Int(self))) * 100).rounded(.toNearestOrEven))
         
         //how many full hours
         let hr = decimalValue/3600

@@ -124,6 +124,10 @@ class BubbleCellCoordinator {
                 case .create:
                     let currentClock = self.bubble.currentClock
                     let stringComponents = currentClock.timeComponentsAsStrings
+                    
+                    if self.bubble.color == "chocolate" {
+                        print("chocolate \(currentClock)")
+                    }
                                         
                     DispatchQueue.main.async {
                         self.secPublisher.send(stringComponents.sec)
