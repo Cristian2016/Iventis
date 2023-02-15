@@ -17,26 +17,28 @@ struct ThreeCircles: View {
     @State private var hrOpacity = CGFloat(0)
     
     var body: some View {
-        HStack (spacing: metrics.spacing) {
-            /* Hr */ bubbleShape.opacity(hrOpacity)
-            /* Min */ bubbleShape.opacity(minOpacity)
-            /* Sec */ bubbleShape
-        }
-        .onReceive(bubble.coordinator.opacityPublisher) { output in
-            if output.count == 1 {
-                switch output[0] {
-                    case .min(let value): minOpacity = (value == .show) ? 1 : 0
-                    case .hr(let value): hrOpacity = (value == .show) ? 1 : 0
-                }
-            } else {
-                switch output[0] {
-                    case .min(let value): minOpacity = (value == .show) ? 1 : 0
-                    default: break
-                }
-                
-                switch output[1] {
-                    case .hr(let value): hrOpacity = (value == .show) ? 1 : 0
-                    default: break
+        if !bubble.isFault {
+            HStack (spacing: metrics.spacing) {
+                /* Hr */ bubbleShape.opacity(hrOpacity)
+                /* Min */ bubbleShape.opacity(minOpacity)
+                /* Sec */ bubbleShape
+            }
+            .onReceive(bubble.coordinator.opacityPublisher) { output in
+                if output.count == 1 {
+                    switch output[0] {
+                        case .min(let value): minOpacity = (value == .show) ? 1 : 0
+                        case .hr(let value): hrOpacity = (value == .show) ? 1 : 0
+                    }
+                } else {
+                    switch output[0] {
+                        case .min(let value): minOpacity = (value == .show) ? 1 : 0
+                        default: break
+                    }
+                    
+                    switch output[1] {
+                        case .hr(let value): hrOpacity = (value == .show) ? 1 : 0
+                        default: break
+                    }
                 }
             }
         }

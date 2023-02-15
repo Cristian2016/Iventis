@@ -191,7 +191,7 @@ class BubbleCellCoordinator {
     
     init(for bubble:Bubble) {
         self.bubble = bubble
-//        oneTimeUpdate()
+        oneTimeUpdate()
     }
     
     deinit {
