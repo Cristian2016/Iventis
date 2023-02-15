@@ -18,33 +18,16 @@ class BubbleCellCoordinator {
         switch action {
             case .start:
                 publisher
-                    .sink { [weak self] _ in self?.handler() }
+                    .sink { [weak self] _ in self?.continuousUpdate() }
                     .store(in: &cancellable)
             case .pause:
-                DispatchQueue.global().async {
-                    let currentClock = self.bubble.currentClock
-                    let stringComponents = currentClock.timeComponentsAsStrings
-                                        
-                    DispatchQueue.main.async {
-                        self.secPublisher.send(stringComponents.sec)
-                        self.minPublisher.send(stringComponents.min)
-                        self.hrPublisher.send(stringComponents.hr)
-                        self.centsPublisher.send(stringComponents.cents)
-                        
-                        if self.bubble.kind == .stopwatch {
-                            self.setOpacity(for: currentClock.timeComponents)
-                        } else {
-                            self.opacityPublisher.send([.min(.show), .hr(.show)])
-                        }
-                    }
-                    print("\(self.bubble.color!) \(self.bubble.currentClock)")
-                }
+                atPauseUpdate()
                 cancellable = []
         }
     }
     
     ///every second publisher sends out bTimer signal and this is the task to run
-    private func handler() {
+    private func continuousUpdate() {
         guard let lastPairStart = bubble.lastPair?.start else { return }
                 
         let Δ = Date().timeIntervalSince(lastPairStart) //2
@@ -164,6 +147,27 @@ class BubbleCellCoordinator {
             } else {
                 return bubble.currentClock
             }
+    }
+    
+    private func atPauseUpdate() {
+        DispatchQueue.global().async {
+            let currentClock = self.bubble.currentClock
+            let stringComponents = currentClock.timeComponentsAsStrings
+                                
+            DispatchQueue.main.async {
+                self.secPublisher.send(stringComponents.sec)
+                self.minPublisher.send(stringComponents.min)
+                self.hrPublisher.send(stringComponents.hr)
+                self.centsPublisher.send(stringComponents.cents)
+                
+                if self.bubble.kind == .stopwatch {
+                    self.setOpacity(for: currentClock.timeComponents)
+                } else {
+                    self.opacityPublisher.send([.min(.show), .hr(.show)])
+                }
+            }
+            print("\(self.bubble.color!) \(self.bubble.currentClock)")
+        }
     }
     
     init(for bubble:Bubble) {
