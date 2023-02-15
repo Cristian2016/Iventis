@@ -56,9 +56,12 @@ struct BubbleCell: View {
                 bubble.coordinator.updateComponents(.automatic)
             }
         }
-//        .onReceive(NotificationCenter.Publisher(center: .default, name: .init("bubbleCreated"))) { output in
-//            print(output.userInfo!["rank"]!, bubble.color!)
-//        }
+        .onReceive(NotificationCenter.Publisher(center: .default, name: .init("bubbleCreated"))) { output in
+            let rank = output.userInfo!["rank"]! as! Int64
+            if rank == bubble.rank {
+                bubble.coordinator.updateComponents(.create)
+            }
+        }
     }
     
     // MARK: - Legos    

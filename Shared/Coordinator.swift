@@ -98,7 +98,6 @@ class BubbleCellCoordinator {
                     self.opacityPublisher.send([.min(.show), .hr(.show)])
                 }
             }
-//            print("\(self.bubble.color!) \(self.bubble.currentClock)")
         }
     }
     
@@ -142,22 +141,8 @@ class BubbleCellCoordinator {
                         case .start: self.update(.start)
                     }
                     
-                case .create:
-                    let currentClock = self.bubble.currentClock
-                    let stringComponents = currentClock.timeComponentsAsStrings
-                                        
-                    DispatchQueue.main.async {
-                        self.secPublisher.send(stringComponents.sec)
-                        self.minPublisher.send(stringComponents.min)
-                        self.hrPublisher.send(stringComponents.hr)
-                        self.centsPublisher.send(stringComponents.cents)
-                        
-                        if self.bubble.kind == .stopwatch {
-                            self.setOpacity(for: currentClock)
-                        } else {
-                            self.opacityPublisher.send([.min(.show), .hr(.show)])
-                        }
-                    }
+                case .create: self.oneTimeUpdate()
+                    
                 case .endSession, .reset, .deleteLastSession:
                     self.cancellable = []
                     let initialClock = self.bubble.initialClock
@@ -191,7 +176,6 @@ class BubbleCellCoordinator {
     
     init(for bubble:Bubble) {
         self.bubble = bubble
-        oneTimeUpdate()
     }
     
     deinit {
