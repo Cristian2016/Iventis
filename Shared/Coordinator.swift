@@ -23,7 +23,7 @@ class BubbleCellCoordinator {
                     .sink { [weak self] _ in self?.continuousUpdate() }
                     .store(in: &cancellable)
             case .pause:
-                atPauseUpdate()
+                oneTimeUpdate()
                 cancellable = []
         }
     }
@@ -61,7 +61,7 @@ class BubbleCellCoordinator {
         }
     } //4
     
-    private func atPauseUpdate() {
+    private func oneTimeUpdate() {
         DispatchQueue.global().async {
             let currentClock = self.bubble.currentClock
             let stringComponents = currentClock.timeComponentsAsStrings
@@ -173,7 +173,7 @@ class BubbleCellCoordinator {
     
     init(for bubble:Bubble) {
         self.bubble = bubble
-        atPauseUpdate()
+        oneTimeUpdate()
     }
     
     deinit {
