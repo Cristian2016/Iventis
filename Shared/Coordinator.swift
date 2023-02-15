@@ -21,8 +21,23 @@ class BubbleCellCoordinator {
                     .sink { [weak self] _ in self?.handler() }
                     .store(in: &cancellable)
             case .pause:
-                DispatchQueue.main.async {
-                    self.centsPublisher.send(String(self.bubble.currentClock.hundredths))
+                DispatchQueue.global().async {
+                    let currentClock = self.bubble.currentClock
+                    let stringComponents = currentClock.timeComponentsAsStrings
+                                        
+                    DispatchQueue.main.async {
+                        self.secPublisher.send(stringComponents.sec)
+                        self.minPublisher.send(stringComponents.min)
+                        self.hrPublisher.send(stringComponents.hr)
+                        self.centsPublisher.send(stringComponents.cents)
+                        
+                        if self.bubble.kind == .stopwatch {
+                            self.setOpacity(for: currentClock.timeComponents)
+                        } else {
+                            self.opacityPublisher.send([.min(.show), .hr(.show)])
+                        }
+                    }
+                    print("\(self.bubble.color!) \(self.bubble.currentClock)")
                 }
                 cancellable = []
         }
@@ -95,7 +110,6 @@ class BubbleCellCoordinator {
             let value = self.initialValue
             switch moment {
                 case .automatic:
-                    print("automatic \(self.bubble.color!)")
                     let components = value.timeComponentsAsStrings
                     
                     let minOpacity = value >= 60 ? Component.min(.show) : .min(.hide)
@@ -124,10 +138,6 @@ class BubbleCellCoordinator {
                 case .create:
                     let currentClock = self.bubble.currentClock
                     let stringComponents = currentClock.timeComponentsAsStrings
-                    
-                    if self.bubble.color == "chocolate" {
-                        print("chocolate \(currentClock)")
-                    }
                                         
                     DispatchQueue.main.async {
                         self.secPublisher.send(stringComponents.sec)
