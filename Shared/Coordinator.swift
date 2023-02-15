@@ -121,7 +121,7 @@ class BubbleCellCoordinator {
                         self.secPublisher.send(components.sec)
                         self.minPublisher.send(components.min)
                         self.hrPublisher.send(components.hr)
-                        self.centsPublisher.send("00")
+                        self.centsPublisher.send(components.cents)
                         
                         if self.bubble.kind == .stopwatch {
                             self.opacityPublisher.send([.min(.hide), .hr(.hide)])
