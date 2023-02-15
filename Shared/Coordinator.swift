@@ -114,7 +114,7 @@ class BubbleCellCoordinator {
                         case .start: self.update(.start)
                     }
                     
-                case .create:
+                case .atInit:
                     print("create \(self.bubble.color ?? "no color")")
                     let components = self.bubble.initialClock.timeComponentsAsStrings
                                         
@@ -147,7 +147,8 @@ class BubbleCellCoordinator {
     
     init(for bubble:Bubble) {
         self.bubble = bubble
-        print(#function, " set inital value here")
+        print(#function, " set inital value \(bubble.color!)")
+        updateComponents(.atInit)
     }
     
     deinit {
@@ -161,7 +162,7 @@ extension BubbleCellCoordinator {
     enum Moment {
         case automatic
         case user(Action)
-        case create
+        case atInit
         case reset
         case endSession
     }
