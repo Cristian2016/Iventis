@@ -145,7 +145,7 @@ class BubbleCellCoordinator {
                             self.opacityPublisher.send([.min(.show), .hr(.show)])
                         }
                     }
-                case .endSession, .reset:
+                case .endSession, .reset, .deleteLastSession:
                     self.cancellable = []
                     let initialClock = self.bubble.initialClock
                     let stringComponents = initialClock.timeComponentsAsStrings
@@ -162,8 +162,6 @@ class BubbleCellCoordinator {
                             self.opacityPublisher.send([.min(.show), .hr(.show)])
                         }
                     }
-                    
-                default : break
             }
         }
     }
@@ -198,6 +196,7 @@ extension BubbleCellCoordinator {
         case create //3
         case reset
         case endSession
+        case deleteLastSession
     }
     
     enum Action {

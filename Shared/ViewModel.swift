@@ -100,7 +100,7 @@ class ViewModel: ObservableObject {
             
             //reset bubble clock
             bubble.currentClock = bubble.initialClock
-           
+            bubble.coordinator.updateComponents(.deleteLastSession)
         }
         
         let viewContext = PersistenceController.shared.viewContext
