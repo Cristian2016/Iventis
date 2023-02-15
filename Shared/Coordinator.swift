@@ -173,7 +173,7 @@ class BubbleCellCoordinator {
     
     init(for bubble:Bubble) {
         self.bubble = bubble
-        updateComponents(.create)
+        atPauseUpdate()
     }
     
     deinit {
