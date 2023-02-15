@@ -84,7 +84,7 @@ class BubbleCellCoordinator {
                     self.opacityPublisher.send([.min(.show), .hr(.show)])
                 }
             }
-            print("\(self.bubble.color!) \(self.bubble.currentClock)")
+//            print("\(self.bubble.color!) \(self.bubble.currentClock)")
         }
     }
     
@@ -142,6 +142,24 @@ class BubbleCellCoordinator {
                             self.opacityPublisher.send([.min(.show), .hr(.show)])
                         }
                     }
+                case .endSession:
+                    self.cancellable = []
+                    let initialClock = self.bubble.initialClock
+                    let stringComponents = initialClock.timeComponentsAsStrings
+                    
+                    DispatchQueue.main.async {
+                        self.secPublisher.send(stringComponents.sec)
+                        self.minPublisher.send(stringComponents.min)
+                        self.hrPublisher.send(stringComponents.hr)
+                        self.centsPublisher.send(stringComponents.cents)
+                        
+                        if self.bubble.kind == .stopwatch {
+                            self.opacityPublisher.send([.min(.hide), .hr(.hide)])
+                        } else {
+                            self.opacityPublisher.send([.min(.show), .hr(.show)])
+                        }
+                    }
+                    
                 default : break
             }
         }
