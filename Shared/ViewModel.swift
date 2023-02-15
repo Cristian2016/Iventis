@@ -44,7 +44,9 @@ class ViewModel: ObservableObject {
     
     // MARK: - User Intents
     //from PaletteView and...
-    func createBubble(_ kind:Bubble.Kind, _ color:String, _ note:String? = nil) {
+    func createBubble(_ kind:Bubble.Kind,
+                      _ color:String,
+                      _ note:String? = nil) {
         
         let context = PersistenceController.shared.container.newBackgroundContext()
                 
@@ -68,6 +70,13 @@ class ViewModel: ObservableObject {
                 newBubble.note_ = note
                 newBubble.isNoteHidden = false
             }
+            
+//            let info = ["rank" : newBubble.rank]
+//            DispatchQueue.main.async {
+//                delayExecution(.now() + 0.1) {
+//                    NotificationCenter.default.post(name: .init("bubbleCreated"), object: nil, userInfo: info)
+//                }
+//            }
             
             try? context.save()
         }

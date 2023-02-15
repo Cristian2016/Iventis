@@ -56,6 +56,9 @@ struct BubbleCell: View {
                 bubble.coordinator.updateComponents(.automatic)
             }
         }
+//        .onReceive(NotificationCenter.Publisher(center: .default, name: .init("bubbleCreated"))) { output in
+//            print(output.userInfo!["rank"]!, bubble.color!)
+//        }
     }
     
     // MARK: - Legos    
