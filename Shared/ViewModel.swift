@@ -492,6 +492,20 @@ class ViewModel: ObservableObject {
     
     // MARK: - Little Helpers
     var fiveSecondsBubble:Bubble? { bubble(for: secretary.addNoteButton_bRank) }
+    
+    // MARK: - CoreData
+    private func fetchAllBubbles(completion: @escaping ([Bubble]) -> Void) {
+        let container = PersistenceController.shared.container
+        let context = container.newBackgroundContext()
+        context.automaticallyMergesChangesFromParent = true
+        
+        context.perform {
+            let request = Bubble.fetchRequest()
+            if let bubbles = try? context.fetch(request) {
+                completion(bubbles)
+            }
+        }
+    }
 }
 
 // MARK: - Handle SDBubble start and pause and shit
