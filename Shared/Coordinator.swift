@@ -7,6 +7,7 @@
 //2 delta is the elapsed duration between last pair.start and signal date
 //3 create means initialization. 1.user creates a bubble or 2.bubble created already but app relaunches
 //4 every second publisher sends out bTimer signal and this is the task to run. bubble.currentClock + ∆
+//5 lets continuousUpdate do one pass to refresh all components
 
 import SwiftUI
 import Combine
@@ -16,7 +17,6 @@ extension BubbleCellCoordinator {
 }
 
 class BubbleCellCoordinator {
-    var shouldUpdateOnce = false
     
     private func update(_ action:Action) {
         switch action {
@@ -29,6 +29,8 @@ class BubbleCellCoordinator {
                 cancellable = [] //disconnect
         }
     }
+    
+    var refresh /* all components */ = false //5
     
     private func continuousUpdate() {
         guard let lastPairStart = bubble.lastPair?.start else { return }
