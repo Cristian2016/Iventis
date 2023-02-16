@@ -6,6 +6,7 @@
 //  CoreData constraints https://www.youtube.com/watch?v=NZIlmRSB8l8
 //1 Add Tag and Undo Start. User can undo start or tag activity within 5 seconds after starting the bubble
 //1 make sure to set fiveSeconds_bRank to nil first, then set it to a new value
+//2 fetches bubbles using a backgroundContext but I don't know how to use it afterwards
 
 import Foundation
 import SwiftUI
@@ -505,7 +506,7 @@ class ViewModel: ObservableObject {
                 completion(bubbles)
             }
         }
-    }
+    } //2
 }
 
 // MARK: - Handle SDBubble start and pause and shit
