@@ -42,37 +42,35 @@ struct ThreeLabels: View {
     }
         
     var body: some View {
-        if !bubble.isFault {
-            HStack (spacing: spacing) {
-                Circle().fill(Color.clear) //Hr
-                    .overlay { Text(hr) }
-                    .opacity(hrOpacity)
-                    .scaleEffect(isSecondsLongPressed ? 0.2 : 1.0)
-                    .offset(x: isSecondsLongPressed ? 20 : 0.0, y: 0)
-                    .animation(.secondsLongPressed.delay(0.2), value: isSecondsLongPressed)
-                    .onTapGesture { toggleBubbleDetail() }
-                    .onLongPressGesture { showNotesList() }
-                
-                Circle().fill(Color.clear) //Min
-                    .overlay { Text(min) }
-                    .opacity(minOpacity)
-                    .scaleEffect(isSecondsLongPressed ? 0.2 : 1.0)
-                    .offset(x: isSecondsLongPressed ? 10 : 0.0, y: 0)
-                    .animation(.secondsLongPressed.delay(0.1), value: isSecondsLongPressed)
-                    .onTapGesture { toggleBubbleDetail() }
-                
-                SecondsLabel(bubble: bubble,
-                             isSecondsTapped: $isSecondsTapped,
-                             isSecondsLongPressed: $isSecondsLongPressed)
-                .overlay { if sDelayBubble.referenceDelay > 0 { SDButton(bubble.sdb) }}
-            }
-            .overlay { if !isBubbleRunning { hundredthsView }}
-            .font(.system(size: timeComponentsFontSize))
-            .fontDesign(.rounded)
-            .foregroundColor(.white)
-            .onReceive(bubble.coordinator.minPublisher) { min = $0 }
-            .onReceive(bubble.coordinator.hrPublisher) { hr = $0 }
+        HStack (spacing: spacing) {
+            Circle().fill(Color.clear) //Hr
+                .overlay { Text(hr) }
+                .opacity(hrOpacity)
+                .scaleEffect(isSecondsLongPressed ? 0.2 : 1.0)
+                .offset(x: isSecondsLongPressed ? 20 : 0.0, y: 0)
+                .animation(.secondsLongPressed.delay(0.2), value: isSecondsLongPressed)
+                .onTapGesture { toggleBubbleDetail() }
+                .onLongPressGesture { showNotesList() }
+            
+            Circle().fill(Color.clear) //Min
+                .overlay { Text(min) }
+                .opacity(minOpacity)
+                .scaleEffect(isSecondsLongPressed ? 0.2 : 1.0)
+                .offset(x: isSecondsLongPressed ? 10 : 0.0, y: 0)
+                .animation(.secondsLongPressed.delay(0.1), value: isSecondsLongPressed)
+                .onTapGesture { toggleBubbleDetail() }
+            
+            SecondsLabel(bubble: bubble,
+                         isSecondsTapped: $isSecondsTapped,
+                         isSecondsLongPressed: $isSecondsLongPressed)
+            .overlay { if sDelayBubble.referenceDelay > 0 { SDButton(bubble.sdb) }}
         }
+        .overlay { if !isBubbleRunning { hundredthsView }}
+        .font(.system(size: timeComponentsFontSize))
+        .fontDesign(.rounded)
+        .foregroundColor(.white)
+        .onReceive(bubble.coordinator.minPublisher) { min = $0 }
+        .onReceive(bubble.coordinator.hrPublisher) { hr = $0 }
     }
     
     // MARK: - Lego

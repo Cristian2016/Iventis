@@ -49,6 +49,7 @@ class BubbleCellCoordinator {
                 let giveMeAName = intValue/60%60
                 let minValue = String(giveMeAName)
                 
+                
                 //send min
                 DispatchQueue.main.async {
                     self.minPublisher.send(minValue)
@@ -181,6 +182,10 @@ class BubbleCellCoordinator {
     init(for bubble:Bubble) {
         self.bubble = bubble
         self.colorPublisher = .init(Color.bubbleColor(forName: bubble.color))
+        
+        DispatchQueue.main.async {
+            self.updateComponents(.automatic)
+        }
     }
     
     deinit {
