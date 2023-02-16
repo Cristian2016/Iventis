@@ -39,7 +39,7 @@ struct BubbleList: View {
             if isListEmpty { EmptyListView() }
             else {
                 GeometryReader { geo in
-                    let metrics = BubbleCell.Metrics(geo.size.width) //7
+//                    let metrics = BubbleCell.Metrics(geo.size.width) //7
                     
                     List (bubbles) { section in
                         let value = section.id.description == "true" //5
@@ -47,7 +47,7 @@ struct BubbleList: View {
                             ForEach (section) { bubble in
                                 ZStack {
                                     NavigationLink(value: bubble) { }.opacity(0)
-                                    BubbleCell(bubble, metrics)
+                                    BubbleCell(bubble, BubbleCell.Metrics(375))
                                 }
                             }
                         }
