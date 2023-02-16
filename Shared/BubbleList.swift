@@ -30,6 +30,8 @@ struct BubbleList: View {
     @EnvironmentObject private var layoutViewModel:LayoutViewModel
     @SectionedFetchRequest var bubbles:SectionedFetchResults<Bool, Bubble>
     
+    @State private var widths = Widths()
+    
     private let secretary = Secretary.shared
                 
     // MARK: -
@@ -70,6 +72,23 @@ struct BubbleList: View {
                     }}
                     .padding(BubbleCell.padding) //9
                     .background { RefresherView() } //11
+                    .background {
+                        if !widths.isComputed {
+                            GeometryReader { geo -> Color in
+                                DispatchQueue.main.async {
+                                    print("compute widths")
+                                    if geo.size.width < geo.size.height {//portrait
+                                        widths.portrait = geo.size.width
+                                        widths.landscape = geo.size.height
+                                    } else {//landscape
+                                        widths.landscape = geo.size.width
+                                        widths.portrait = geo.size.height
+                                    }
+                                }
+                                return Color.clear
+                            }
+                        }
+                    }
 //                    .refreshable {
 //                        if Secretary.shared.pinnedBubblesCount != 0 { secretary.showFavoritesOnly.toggle() }
 //                    } //11
@@ -162,4 +181,13 @@ struct BubbleList: View {
 extension BubbleList {
         
     fileprivate var isListEmpty:Bool { bubbles.isEmpty }
+    
+    struct Widths {
+        var portrait:CGFloat?
+        var landscape:CGFloat?
+        
+        var isComputed:Bool {
+            portrait != nil && landscape != nil
+        }
+    }
 }
