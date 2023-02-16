@@ -46,7 +46,7 @@ struct ThreeLabels: View {
     var body: some View {
         HStack (spacing: spacing) {
             Circle().fill(Color.clear) //Hr
-                .overlay { Text(hr) }
+                .overlay { Text(hr).allowsHitTesting(false) }
                 .opacity(hrOpacity)
                 .scaleEffect(isSecondsLongPressed ? 0.2 : 1.0)
                 .offset(x: isSecondsLongPressed ? 20 : 0.0, y: 0)
@@ -55,7 +55,7 @@ struct ThreeLabels: View {
                 .onLongPressGesture { showNotesList() }
             
             Circle().fill(Color.clear) //Min
-                .overlay { Text(min) }
+                .overlay { Text(min).allowsHitTesting(false) }
                 .opacity(minOpacity)
                 .scaleEffect(isSecondsLongPressed ? 0.2 : 1.0)
                 .offset(x: isSecondsLongPressed ? 10 : 0.0, y: 0)

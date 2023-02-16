@@ -16,22 +16,10 @@ import MyPackage
 @main
 struct TimersApp: App {
     
-    var body: some Scene { WindowGroup { UnitedViewHierarchy() }}
+    var body: some Scene { WindowGroup { ViewHierarchy() }}
     
     init() {
         let center = NotificationCenter.default
         delayExecution(.now() + 0.001) { center.post(name: .appLaunched, object: nil) }
     } //7
-}
-
-struct ViewHierarchy:View {
-    private let secretary = Secretary.shared
-    @State private var showFavoritesOnly = false
-    @State private var showDetail_bRank:Int64?
-    
-    var body: some View {
-        BubbleList(showFavoritesOnly, showDetail_bRank)
-            .onReceive(secretary.$showFavoritesOnly) { showFavoritesOnly = $0 }
-            .onReceive(secretary.$showDetail_bRank) { showDetail_bRank = $0 }
-    }
 }

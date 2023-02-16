@@ -11,13 +11,14 @@ struct iPhoneViewHierarchy: View {
     @EnvironmentObject private var viewModel:ViewModel
     
     private let secretary = Secretary.shared
+    @State private var showFavoritesOnly = false
+    @State private var showDetail_bRank:Int64?
     
     var body: some View {
-        let _ = print("iPhoneViewHierarchy body")
-        ZStack {
-            NavigationStack(path: $viewModel.path) { ViewHierarchy() }
-            PaletteView()
-            DurationPickerView()
+        NavigationStack(path: $viewModel.path) {
+            BubbleList(showFavoritesOnly, showDetail_bRank)
+                .onReceive(secretary.$showFavoritesOnly) { showFavoritesOnly = $0 }
+                .onReceive(secretary.$showDetail_bRank) { showDetail_bRank = $0 }
         }
         .tint(.label)
     }

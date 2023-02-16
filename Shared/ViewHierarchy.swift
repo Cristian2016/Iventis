@@ -12,7 +12,7 @@
 
 import SwiftUI
 
-struct UnitedViewHierarchy: View {
+struct ViewHierarchy: View {
     @AppStorage(UserDefaults.Key.isFirstAppLaunch, store: .shared)
     private var isFirstAppLaunch = true //1
     
@@ -31,10 +31,10 @@ struct UnitedViewHierarchy: View {
     private let viewContext = PersistenceController.shared.container.viewContext
     
     var body: some View {
-        let _ = print("UnitedViewHierarchy body")
+        let _ = print("ViewHierarchy body")
         
         ZStack {
-            if UIDevice.isIPad { EmptyView() }
+            if UIDevice.isIPad { iPadViewHierarchy() }
             else { iPhoneViewHierarchy() }
             
             if showDeleteActionView {
@@ -96,6 +96,6 @@ struct UnitedViewHierarchy: View {
 
 struct UnitedViewHierarchy_Previews: PreviewProvider {
     static var previews: some View {
-        UnitedViewHierarchy()
+        ViewHierarchy()
     }
 }

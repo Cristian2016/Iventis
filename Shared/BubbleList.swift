@@ -45,10 +45,10 @@ struct BubbleList: View {
                         let value = section.id.description == "true" //5
                         Section {
                             ForEach (section) { bubble in
-                                BubbleCell(bubble, metrics)
-                                    .onTapGesture {
-                                        secretary.toggleDetail(bubble.rank)
-                                    }
+                                ZStack {
+                                    NavigationLink(value: bubble) { }.opacity(0)
+                                    BubbleCell(bubble, metrics)
+                                }
                             }
                         }
                         .listRowSeparator(.hidden)
@@ -76,6 +76,8 @@ struct BubbleList: View {
                 }
             }
             LeftStrip(isListEmpty)
+            PaletteView()
+            DurationPickerView()
         }
     }
     
