@@ -42,7 +42,7 @@ struct BubbleList: View {
             else {
                 GeometryReader { geo in
                     let portrait = geo.size.width < geo.size.height
-                    let metrics = BubbleCell.Metrics(portrait ? widths.portrait : widths.landscape) //7
+                    let metrics = BubbleCell.Metrics(portrait ? widths.portrait ?? 0 : widths.landscape ?? 0) //7
                     
                     List (bubbles) { section in
                         let value = section.id.description == "true" //5
@@ -89,6 +89,10 @@ struct BubbleList: View {
                                 return Color.clear
                             }
                         }
+                    }
+                    .onAppear {}
+                    .onReceive(NotificationCenter.default.publisher(for: UIDevice.orientationDidChangeNotification)) { output in
+                        print(output)
                     }
 //                    .refreshable {
 //                        if Secretary.shared.pinnedBubblesCount != 0 { secretary.showFavoritesOnly.toggle() }
