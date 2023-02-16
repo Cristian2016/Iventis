@@ -60,6 +60,9 @@ struct BubbleList: View {
                         
                         if !section.id { bottomOverscoll }
                     }
+                    .navigationDestination(for: Bubble.self) { bubble in
+                        Text("bubble")
+                    }
                     .scrollIndicators(.hidden)
                     .listStyle(.plain)
                     .toolbarBackground(.ultraThinMaterial)
@@ -70,9 +73,9 @@ struct BubbleList: View {
                     }}
                     .padding(BubbleCell.padding) //9
                     .background { RefresherView() } //11
-                    .refreshable {
+//                    .refreshable {
 //                        if Secretary.shared.pinnedBubblesCount != 0 { secretary.showFavoritesOnly.toggle() }
-                    } //11
+//                    } //11
                 }
             }
             LeftStrip(isListEmpty)
