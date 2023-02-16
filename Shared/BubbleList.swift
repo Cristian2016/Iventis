@@ -60,9 +60,6 @@ struct BubbleList: View {
                         
                         if !section.id { bottomOverscoll }
                     }
-                    .navigationDestination(for: Bubble.self) { bubble in
-                        Text("bubble")
-                    }
                     .scrollIndicators(.hidden)
                     .listStyle(.plain)
                     .toolbarBackground(.ultraThinMaterial)
@@ -82,9 +79,10 @@ struct BubbleList: View {
             PaletteView()
             DurationPickerView()
         }
-        .onReceive(NotificationCenter.Publisher(center: .default, name: .orientation)) { output in
-            print(output)
-        }
+//        .onReceive(NotificationCenter.Publisher(center: .default, name: .orientation)) { output in
+//            print(output)
+//            
+//        }
     }
     
     // MARK: - Lego
