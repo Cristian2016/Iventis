@@ -45,7 +45,7 @@ class BubbleCellCoordinator {
             let secValue = intValue%60
             
             //send minute and hour
-            if secValue == 0 {
+            if secValue == 0 || self.refresh {
                 let giveMeAName = intValue/60%60
                 let minValue = String(giveMeAName)
                 
@@ -59,14 +59,13 @@ class BubbleCellCoordinator {
                     }
                 }
                 
-                if (giveMeAName%60) == 0 {
+                if (giveMeAName%60) == 0 || self.refresh {
                     let hrValue = String(intValue/3600)
                     
                     //send hour
                     DispatchQueue.main.async {
                         self.hrPublisher.send(hrValue)
-                        if intValue == 3600 {
-                            print("update hr")
+                        if intValue == 3600 || self.refresh {
                             withAnimation {
                                 self.opacityPublisher.send([.hr(.show)])
                             }
@@ -79,6 +78,8 @@ class BubbleCellCoordinator {
             DispatchQueue.main.async {
                 self.secPublisher.send(String(secValue))
             }
+            
+            refresh = false
         }
         
     } //4
