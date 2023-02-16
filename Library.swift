@@ -7,6 +7,10 @@
 
 import SwiftUI
 
+extension Notification.Name {
+    static let orientation = Notification.Name("UIDevice.orientationDidChangeNotification")
+}
+
 struct vRoundedRectangle: Shape {
     let corners: UIRectCorner
     let radius: CGFloat

@@ -38,7 +38,7 @@ struct BubbleList: View {
         ZStack {
             if isListEmpty { EmptyListView() }
             else {
-                GeometryReader { geo in
+//                GeometryReader { geo in
 //                    let metrics = BubbleCell.Metrics(geo.size.width) //7
                     
                     List (bubbles) { section in
@@ -76,11 +76,14 @@ struct BubbleList: View {
 //                    .refreshable {
 //                        if Secretary.shared.pinnedBubblesCount != 0 { secretary.showFavoritesOnly.toggle() }
 //                    } //11
-                }
+//                }
             }
             LeftStrip(isListEmpty)
             PaletteView()
             DurationPickerView()
+        }
+        .onReceive(NotificationCenter.Publisher(center: .default, name: .orientation)) { output in
+            print(output)
         }
     }
     
