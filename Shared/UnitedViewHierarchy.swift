@@ -73,9 +73,7 @@ struct UnitedViewHierarchy: View {
         }
     } //3
     
-    private func handleBecomeActive() {
-        viewModel.bubbleTimer(.start)
-    } //3
+    private func handleBecomeActive() { viewModel.bubbleTimer(.start) } //3
     
     private func handleEnterBackground() { viewModel.bubbleTimer(.pause) } //3
         
