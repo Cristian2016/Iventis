@@ -62,10 +62,10 @@
             filePath = "Shared/ThreeLabels.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "91"
-            endingLineNumber = "91"
-            landmarkName = "unknown"
-            landmarkType = "0">
+            startingLineNumber = "93"
+            endingLineNumber = "93"
+            landmarkName = "hundredthsView"
+            landmarkType = "24">
             <Locations>
                <Location
                   uuid = "E96EDD08-841F-4DC6-B899-6FB3E5835688 - 23b69174dee463f4"

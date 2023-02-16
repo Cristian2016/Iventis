@@ -33,17 +33,17 @@ struct ThreeCircles: View {
             .onReceive(bubble.coordinator.opacityPublisher) { output in
                 if output.count == 1 {
                     switch output[0] {
-                        case .min(let value): minOpacity = (value == .show) ? 1 : 0
-                        case .hr(let value): hrOpacity = (value == .show) ? 1 : 0
+                        case .min(let value): minOpacity = (value == .show) ? 1 : 0.01
+                        case .hr(let value): hrOpacity = (value == .show) ? 1 : 0.01
                     }
                 } else {
                     switch output[0] {
-                        case .min(let value): minOpacity = (value == .show) ? 1 : 0
+                        case .min(let value): minOpacity = (value == .show) ? 1 : 0.01
                         default: break
                     }
                     
                     switch output[1] {
-                        case .hr(let value): hrOpacity = (value == .show) ? 1 : 0
+                        case .hr(let value): hrOpacity = (value == .show) ? 1 : 0.01
                         default: break
                     }
                 }

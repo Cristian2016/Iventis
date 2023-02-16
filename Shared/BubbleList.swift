@@ -45,10 +45,10 @@ struct BubbleList: View {
                         let value = section.id.description == "true" //5
                         Section {
                             ForEach (section) { bubble in
-                                ZStack { //1
-                                    NavigationLink(value: bubble) { /* empty view */ }.opacity(0)
-                                    BubbleCell(bubble, metrics)
-                                }
+                                BubbleCell(bubble, metrics)
+                                    .onTapGesture {
+                                        secretary.toggleDetail(bubble.rank)
+                                    }
                             }
                         }
                         .listRowSeparator(.hidden)
@@ -69,7 +69,6 @@ struct BubbleList: View {
                         PlusSymbol()
                     }}
                     .padding(BubbleCell.padding) //9
-                    .navigationDestination(for: Bubble.self) { _ in EmptyView() }
                     .background { RefresherView() } //11
                     .refreshable {
 //                        if Secretary.shared.pinnedBubblesCount != 0 { secretary.showFavoritesOnly.toggle() }
@@ -95,9 +94,12 @@ struct BubbleList: View {
     }
     
     // MARK: -
-    init(_ showFavoritesOnly: Bool) {
+    init(_ showFavoritesOnly: Bool, _ showDetail_bRank:Int64? = nil) {
         var predicate:NSPredicate?
         if showFavoritesOnly { predicate = NSPredicate(format: "isPinned == true")}
+        if let rank = showDetail_bRank {
+            predicate = NSPredicate(format: "rank == %D", rank)
+        }
                 
         UITableView.appearance().showsVerticalScrollIndicator = false
         _bubbles = SectionedFetchRequest<Bool, Bubble>(

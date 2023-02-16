@@ -122,9 +122,7 @@ struct BubbleCell: View {
         }
         .offset(y: -16)
     }
-    
-    // MARK: - Gestures
-    
+        
     // MARK: - Internal
     @GestureState var isDetectingLongPress = false
         

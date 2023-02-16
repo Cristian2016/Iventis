@@ -25,11 +25,18 @@ class Secretary {
     @Published var displayAutoLockConfirmation = false
     
     @Published var confirm_CalEventCreated: Int64?
+    
     @Published var confirm_CalEventRemoved: Int64?
     
     @Published var theOneAndOnlyEditedSDB:StartDelayBubble?
     
     @Published var showFavoritesOnly = false
+    
+    @Published var showDetail_bRank:Int64?
+    
+    func toggleDetail(_ rank:Int64?) {
+        showDetail_bRank = showDetail_bRank == nil ? rank : nil
+    }
         
     ///bubbleCell rank and frame. Frame will not be set if DetailView shows
     @Published var deleteAction_bRank:Int64?
