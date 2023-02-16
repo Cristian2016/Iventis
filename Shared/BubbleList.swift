@@ -40,8 +40,9 @@ struct BubbleList: View {
         ZStack {
             if isListEmpty { EmptyListView() }
             else {
-//                GeometryReader { geo in
-//                    let metrics = BubbleCell.Metrics(geo.size.width) //7
+                GeometryReader { geo in
+                    let portrait = geo.size.width < geo.size.height
+                    let metrics = BubbleCell.Metrics(portrait ? widths.portrait : widths.landscape) //7
                     
                     List (bubbles) { section in
                         let value = section.id.description == "true" //5
@@ -49,7 +50,7 @@ struct BubbleList: View {
                             ForEach (section) { bubble in
                                 ZStack {
                                     NavigationLink(value: bubble) { }.opacity(0)
-                                    BubbleCell(bubble, BubbleCell.Metrics(375))
+                                    BubbleCell(bubble, metrics)
                                 }
                             }
                         }
@@ -76,7 +77,7 @@ struct BubbleList: View {
                         if !widths.isComputed {
                             GeometryReader { geo -> Color in
                                 DispatchQueue.main.async {
-                                    print("compute widths")
+                                    print("compute bubblecell widths")
                                     if geo.size.width < geo.size.height {//portrait
                                         widths.portrait = geo.size.width
                                         widths.landscape = geo.size.height
@@ -92,7 +93,7 @@ struct BubbleList: View {
 //                    .refreshable {
 //                        if Secretary.shared.pinnedBubblesCount != 0 { secretary.showFavoritesOnly.toggle() }
 //                    } //11
-//                }
+                }
             }
             LeftStrip(isListEmpty)
             PaletteView()
