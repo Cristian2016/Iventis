@@ -106,10 +106,10 @@ class BubbleCellCoordinator {
     
     var colorPublisher:Publisher<Color, Never>
     
-    var secPublisher:Publisher<String, Never> = .init("")
-    var minPublisher:Publisher<String, Never>! = .init("")
-    var hrPublisher:Publisher<String, Never>! = .init("")
-    var centsPublisher:Publisher<String, Never>! = .init("")
+    var secPublisher:Publisher<String, Never> = .init("i")
+    var minPublisher:Publisher<String, Never>! = .init("i")
+    var hrPublisher:Publisher<String, Never>! = .init("i")
+    var centsPublisher:Publisher<String, Never>! = .init("i")
     
     private lazy var publisher =
     NotificationCenter.Publisher(center: .default, name: .bubbleTimerSignal)
