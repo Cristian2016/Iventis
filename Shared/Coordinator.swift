@@ -79,7 +79,7 @@ class BubbleCellCoordinator {
                 self.secPublisher.send(String(secValue))
             }
             
-            refresh = false
+            self.refresh = false
         }
         
     } //4

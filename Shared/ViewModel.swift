@@ -74,9 +74,7 @@ class ViewModel: ObservableObject {
             
             let info = ["rank" : newBubble.rank]
             DispatchQueue.main.async {
-                delayExecution(.now() + 0.1) {
-                    NotificationCenter.default.post(name: .init("bubbleCreated"), object: nil, userInfo: info)
-                }
+                NotificationCenter.default.post(name: .init("bubbleCreated"), object: nil, userInfo: info)
             }
             
             try? context.save()
