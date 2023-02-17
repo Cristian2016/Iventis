@@ -177,7 +177,7 @@ class BubbleCellCoordinator {
         self.colorPublisher = .init(Color.bubbleColor(forName: bubble.color))
         
         DispatchQueue.global().async {
-            let components = self.bubble.currentClock.timeComponentsAsStrings
+            let components = self.initialValue.timeComponentsAsStrings
             self.components = Components(hr: components.hr,
                                          min: components.min,
                                          sec: components.sec,
