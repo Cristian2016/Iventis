@@ -198,11 +198,11 @@ class ViewModel: ObservableObject {
                 currentPair?.computeDuration(.atPause) {
                     //set bubble properties
                     bubble.currentClock += currentPair!.duration
-                    bubble.coordinator.updateComponents(.user(.pause))
                     
                     bubble.lastSession?.computeDuration {
                         //no need to run any code in the completion
                         PersistenceController.shared.save()
+                        bubble.coordinator.updateAtPause()
                     }
                 }
                 

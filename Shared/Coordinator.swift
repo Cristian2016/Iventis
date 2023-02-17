@@ -161,8 +161,19 @@ class BubbleCellCoordinator {
             }
         }
     }
+    
+    func updateAtPause()  {
+        cancellable = []
+        DispatchQueue.global().async {
+            let components = self.initialValue.timeComponentsAsStrings
+            self.components = Components(hr: components.hr,
+                                         min: components.min,
+                                         sec: components.sec,
+                                         hundredths: components.hundredths)
+        }
+    }
         
-    private var initialValue:Float {
+    var initialValue:Float {
             if bubble.state == .running {
                 let Δ = Date().timeIntervalSince(bubble.lastPair!.start!)
                 let initialValue = bubble.currentClock + Float(Δ)
