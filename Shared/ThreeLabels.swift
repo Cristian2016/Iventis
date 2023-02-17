@@ -34,7 +34,9 @@ struct ThreeLabels: View {
          _ startDelayBubble:StartDelayBubble,
          _ bubble:Bubble) {
         
-        print("ThreeLabels init \(bubble.color ?? "no color")")
+        if bubble.color == "orange" {
+            print("ThreeLabels init \(bubble.color ?? "no color")")
+        }
         
         self.spacing = spacing
         self.timeComponentsFontSize = timeComponentsFontSize
