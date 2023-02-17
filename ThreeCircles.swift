@@ -30,23 +30,9 @@ struct ThreeCircles: View {
                 /* Min */ bubbleShape.opacity(minOpacity)
                 /* Sec */ bubbleShape
             }
-            .onReceive(bubble.coordinator.opacityPublisher) { output in
-                if output.count == 1 {
-                    switch output[0] {
-                        case .min(let value): minOpacity = (value == .show) ? 1 : 0.01
-                        case .hr(let value): hrOpacity = (value == .show) ? 1 : 0.01
-                    }
-                } else {
-                    switch output[0] {
-                        case .min(let value): minOpacity = (value == .show) ? 1 : 0.01
-                        default: break
-                    }
-                    
-                    switch output[1] {
-                        case .hr(let value): hrOpacity = (value == .show) ? 1 : 0.01
-                        default: break
-                    }
-                }
+            .onReceive(bubble.coordinator.$opacity) {
+                minOpacity = $0.min
+                hrOpacity = $0.hr
             }
             .onReceive(bubble.coordinator.colorPublisher) { color = $0 }
         }

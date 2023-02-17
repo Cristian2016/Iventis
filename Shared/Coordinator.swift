@@ -45,7 +45,6 @@ class BubbleCellCoordinator {
                     .sink { [weak self] _ in self?.continuousUpdate() }
                     .store(in: &cancellable) //connect
             case .pause:
-                oneTimeUpdate()
                 cancellable = [] //disconnect
         }
     }
@@ -75,7 +74,7 @@ class BubbleCellCoordinator {
                     self.components.min = minValue
                     if intValue == 60 {
                         withAnimation(.spring(response: 0.5, dampingFraction: 0.5)) {
-                            self.opacityPublisher.send([.min(.show)])
+                            self.opacity.update(value)
                         }
                     }
                 }
@@ -88,7 +87,7 @@ class BubbleCellCoordinator {
                         self.components.hr = hrValue
                         if intValue == 3600 || self.refresh {
                             withAnimation {
-                                self.opacityPublisher.send([.hr(.show)])
+                                self.opacity.update(value)
                             }
                         }
                     }
@@ -105,23 +104,7 @@ class BubbleCellCoordinator {
         
     } //4
     
-    private func oneTimeUpdate() {
-        DispatchQueue.global().async {
-            let initialValue = self.initialValue
-                                
-            DispatchQueue.main.async {
-                
-                if self.bubble.kind == .stopwatch {
-                    self.setOpacity(for: initialValue)
-                } else {
-                    self.opacityPublisher.send([.min(.show), .hr(.show)])
-                }
-            }
-        }
-    }
-    
     // MARK: - Publishers 1
-    var opacityPublisher:Publisher<[Component], Never> = .init([.min(.hide), .hr(.hide)])
     
     var colorPublisher:Publisher<Color, Never>
         
@@ -132,15 +115,6 @@ class BubbleCellCoordinator {
     
     // MARK: -
     private let bubble:Bubble
-    
-    private func setOpacity(for initialValue: Float) {
-        if initialValue >= 60 {
-            opacityPublisher.send([.min(.show)])
-        }
-        if initialValue >= 3600 {
-            opacityPublisher.send([.min(.show), .hr(.show)])
-        }
-    }
     
     func updateComponents(_ moment:Moment) {
         DispatchQueue.global().async {
@@ -164,9 +138,9 @@ class BubbleCellCoordinator {
                         self.components.hundredths = stringComponents.hundredths
                         
                         if self.bubble.kind == .stopwatch {
-                            self.opacityPublisher.send([.min(.hide), .hr(.hide)])
+                            self.opacity.update(0)
                         } else {
-                            self.opacityPublisher.send([.min(.show), .hr(.show)])
+                            self.opacity.update(self.bubble.initialClock)
                         }
                     }
             }
@@ -233,15 +207,5 @@ extension BubbleCellCoordinator {
     enum Action {
         case start
         case pause
-    }
-    
-    enum Component {
-        case min(Show)
-        case hr(Show)
-    }
-    
-    enum Show {
-        case show
-        case hide
     }
 }
