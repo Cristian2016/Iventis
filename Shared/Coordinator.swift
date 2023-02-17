@@ -100,7 +100,6 @@ class BubbleCellCoordinator {
             let stringComponents = initialValue.timeComponentsAsStrings
                                 
             DispatchQueue.main.async {
-                self.centsPublisher.send(stringComponents.cents)
                 
                 if self.bubble.kind == .stopwatch {
                     self.setOpacity(for: initialValue)
@@ -115,9 +114,7 @@ class BubbleCellCoordinator {
     var opacityPublisher:Publisher<[Component], Never> = .init([.min(.hide), .hr(.hide)])
     
     var colorPublisher:Publisher<Color, Never>
-    
-    var centsPublisher:Publisher<String, Never>! = .init("i")
-    
+        
     private lazy var publisher =
     NotificationCenter.Publisher(center: .default, name: .bubbleTimerSignal)
     
@@ -160,7 +157,7 @@ class BubbleCellCoordinator {
                         self.components.hr = stringComponents.hr
                         self.components.min = stringComponents.min
                         self.components.sec = stringComponents.sec
-                        self.centsPublisher.send(stringComponents.cents)
+                        self.components.hundredths = stringComponents.cents
                         
                         if self.bubble.kind == .stopwatch {
                             self.opacityPublisher.send([.min(.hide), .hr(.hide)])

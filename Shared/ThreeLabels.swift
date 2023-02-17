@@ -90,7 +90,7 @@ struct ThreeLabels: View {
                 .animation(.spring(response: 0.3, dampingFraction: 0.2), value: isSecondsTapped)
                 .zIndex(1)
                 .onTapGesture { userTappedHundredths() }
-                .onReceive(bubble.coordinator.centsPublisher) { cents = $0 }
+                .onReceive(bubble.coordinator.$components) { cents = $0.hundredths }
         }
     }
     
