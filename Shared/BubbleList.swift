@@ -97,8 +97,6 @@ struct BubbleList: View {
                 }
             }
             LeftStrip(isListEmpty)
-            PaletteView()
-            DurationPickerView()
         }
     }
     

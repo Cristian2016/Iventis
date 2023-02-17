@@ -15,12 +15,16 @@ struct iPhoneViewHierarchy: View {
     @State private var showDetail_bRank:Int64?
     
     var body: some View {
-        NavigationStack(path: $viewModel.path) {
-            BubbleList(showFavoritesOnly, showDetail_bRank)
-                .onReceive(secretary.$showFavoritesOnly) { showFavoritesOnly = $0 }
-                .onReceive(secretary.$showDetail_bRank) { showDetail_bRank = $0 }
+        ZStack {
+            NavigationStack(path: $viewModel.path) {
+                BubbleList(showFavoritesOnly, showDetail_bRank)
+                    .onReceive(secretary.$showFavoritesOnly) { showFavoritesOnly = $0 }
+                    .onReceive(secretary.$showDetail_bRank) { showDetail_bRank = $0 }
+            }
+            .tint(.label)
+            PaletteView()
+            DurationPickerView()
         }
-        .tint(.label)
     }
 }
 
