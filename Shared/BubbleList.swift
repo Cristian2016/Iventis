@@ -103,10 +103,6 @@ struct BubbleList: View {
             PaletteView()
             DurationPickerView()
         }
-//        .onReceive(NotificationCenter.Publisher(center: .default, name: .orientation)) { output in
-//            print(output)
-//            
-//        }
     }
     
     // MARK: - Lego

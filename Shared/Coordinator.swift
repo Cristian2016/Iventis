@@ -86,6 +86,7 @@ class BubbleCellCoordinator {
             
             //send second
             DispatchQueue.main.async {
+                print("updating seconds")
                 self.components.sec = String(secValue)
             }
             
@@ -97,7 +98,6 @@ class BubbleCellCoordinator {
     private func oneTimeUpdate() {
         DispatchQueue.global().async {
             let initialValue = self.initialValue
-            let stringComponents = initialValue.timeComponentsAsStrings
                                 
             DispatchQueue.main.async {
                 
@@ -137,6 +137,7 @@ class BubbleCellCoordinator {
             
             switch moment {
                 case .automatic:
+                    print(#function, " automatic")
                     self.oneTimeUpdate()
                     if self.bubble.state == .running { self.update(.start) }
                     
