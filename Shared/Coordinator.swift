@@ -166,10 +166,13 @@ class BubbleCellCoordinator {
         cancellable = []
         DispatchQueue.global().async {
             let components = self.initialValue.timeComponentsAsStrings
-            self.components = Components(hr: components.hr,
-                                         min: components.min,
-                                         sec: components.sec,
-                                         hundredths: components.hundredths)
+            
+            DispatchQueue.main.async {
+                self.components = Components(hr: components.hr,
+                                             min: components.min,
+                                             sec: components.sec,
+                                             hundredths: components.hundredths)
+            }
         }
     }
         
