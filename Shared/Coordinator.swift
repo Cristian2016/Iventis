@@ -19,12 +19,23 @@ extension BubbleCellCoordinator {
 class BubbleCellCoordinator {
     
     @Published private(set) var components = Components(hr: "-1", min: "-1", sec: "-1", hundredths: "-1")
+    @Published private(set) var opacity = Opacity()
     
     struct Components {
         var hr:String
         var min:String
         var sec:String
         var hundredths:String
+    }
+    
+    struct Opacity {
+        var hr = CGFloat(0)
+        var min = CGFloat(0)
+        
+        mutating func update(_ value:Float) {
+            min = value > 59 ? 1 : 0
+            hr = value > 3599 ?  1 : 0
+        }
     }
     
     private func update(_ action:Action) {
@@ -197,6 +208,8 @@ class BubbleCellCoordinator {
                                          sec: components.sec,
                                          hundredths: components.hundredths
             )
+            
+            self.opacity.update(self.initialValue)
             
             if bubble.state == .running { self.update(.start) }
         }
