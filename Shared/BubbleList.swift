@@ -29,9 +29,7 @@ struct BubbleList: View {
     @EnvironmentObject private var viewModel:ViewModel
     @EnvironmentObject private var layoutViewModel:LayoutViewModel
     @SectionedFetchRequest var bubbles:SectionedFetchResults<Bool, Bubble>
-    
-    @State private var widths = Widths()
-    
+
     private let secretary = Secretary.shared
                 
     // MARK: -
@@ -41,8 +39,7 @@ struct BubbleList: View {
             if isListEmpty { EmptyListView() }
             else {
                 GeometryReader { geo in
-                    let portrait = geo.size.width < geo.size.height
-                    let metrics = BubbleCell.Metrics(portrait ? widths.portrait ?? 0 : widths.landscape ?? 0) //7
+                    let metrics = BubbleCell.Metrics(geo.size.width) //7
                     
                     List (bubbles) { section in
                         let value = section.id.description == "true" //5
@@ -73,23 +70,6 @@ struct BubbleList: View {
                     }}
                     .padding(BubbleCell.padding) //9
                     .background { RefresherView() } //11
-                    .background {
-                        if !widths.isComputed {
-                            GeometryReader { geo -> Color in
-                                DispatchQueue.main.async {
-                                    print("compute bubblecell widths")
-                                    if geo.size.width < geo.size.height {//portrait
-                                        widths.portrait = geo.size.width
-                                        widths.landscape = geo.size.height
-                                    } else {//landscape
-                                        widths.landscape = geo.size.width
-                                        widths.portrait = geo.size.height
-                                    }
-                                }
-                                return Color.clear
-                            }
-                        }
-                    }
                     .onAppear {}
 //                    .refreshable {
 //                        if Secretary.shared.pinnedBubblesCount != 0 { secretary.showFavoritesOnly.toggle() }
