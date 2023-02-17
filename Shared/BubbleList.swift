@@ -91,9 +91,6 @@ struct BubbleList: View {
                         }
                     }
                     .onAppear {}
-                    .onReceive(NotificationCenter.default.publisher(for: UIDevice.orientationDidChangeNotification)) { output in
-                        print(output)
-                    }
 //                    .refreshable {
 //                        if Secretary.shared.pinnedBubblesCount != 0 { secretary.showFavoritesOnly.toggle() }
 //                    } //11
