@@ -17,9 +17,9 @@ struct ThreeLabels: View {
     
     @EnvironmentObject private var viewModel:ViewModel
     
-    @State private var hr = String()
-    @State private var min = String()
-    @State private var hundredths = String()
+    @State private var hr:String
+    @State private var min:String
+    @State private var hundredths:String
     
     @State private var isSecondsTapped:Bool = false
     @State private var isSecondsLongPressed:Bool = false
@@ -34,15 +34,16 @@ struct ThreeLabels: View {
          _ startDelayBubble:StartDelayBubble,
          _ bubble:Bubble) {
         
-        if bubble.color == "orange" {
-            print("ThreeLabels init \(bubble.color ?? "no color")")
-        }
-        
         self.spacing = spacing
         self.timeComponentsFontSize = timeComponentsFontSize
         self.hundredthsFontSize = hundredthsFontSize
         self.sDelayBubble = startDelayBubble
         self.bubble = bubble
+        
+        let components = self.bubble.coordinator.components
+        hr = components.hr
+        min = components.min
+        hundredths = components.hundredths
     }
         
     var body: some View {
@@ -129,7 +130,7 @@ struct SecondsLabel: View {
     @Binding var isSecondsTapped:Bool
     @Binding var isSecondsLongPressed:Bool
     
-    @State private var sec = String()
+    @State private var sec:String
     
     var body: some View {
         Circle().fill(Color.clear)
@@ -140,6 +141,13 @@ struct SecondsLabel: View {
             .gesture(tap)
             .gesture(longPress)
             .onReceive(bubble.coordinator.$components) { sec = $0.sec }
+    }
+    
+    init(bubble: Bubble, isSecondsTapped: Binding<Bool>, isSecondsLongPressed: Binding<Bool>) {
+        self.bubble = bubble
+        _isSecondsTapped = isSecondsTapped
+        _isSecondsLongPressed = isSecondsLongPressed
+        self.sec = bubble.coordinator.components.sec
     }
     
     // MARK: - Gestures
