@@ -94,9 +94,6 @@ struct ThreeLabels: View {
         }
     }
     
-    // MARK: - Gestures
-    
-    
     // MARK: - User Intents
     private func toggleBubbleDetail() {
         viewModel.path = viewModel.path.isEmpty ? [bubble] : []
