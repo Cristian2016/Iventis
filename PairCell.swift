@@ -203,7 +203,7 @@ struct PairCell: View {
                 
                 //sec
                 HStack (alignment:.firstTextBaseline ,spacing: 0) {
-                    Text(duration.sec + "." + duration.cents).font(metrics.durationFont)
+                    Text(duration.sec + "." + duration.hundredths).font(metrics.durationFont)
                     Text("s").font(metrics.durationComponentsFont)
                 }
             }

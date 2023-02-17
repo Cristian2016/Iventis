@@ -157,7 +157,7 @@ class BubbleCellCoordinator {
                         self.components.hr = stringComponents.hr
                         self.components.min = stringComponents.min
                         self.components.sec = stringComponents.sec
-                        self.components.hundredths = stringComponents.cents
+                        self.components.hundredths = stringComponents.hundredths
                         
                         if self.bubble.kind == .stopwatch {
                             self.opacityPublisher.send([.min(.hide), .hr(.hide)])
@@ -188,7 +188,7 @@ class BubbleCellCoordinator {
             self.components = Components(hr: components.hr,
                                          min: components.min,
                                          sec: components.sec,
-                                         hundredths: components.cents
+                                         hundredths: components.hundredths
             )
         }
     }

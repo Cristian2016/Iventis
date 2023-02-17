@@ -37,7 +37,7 @@ public class Bubble: NSManagedObject {
     // MARK: -
     //updates elapsed time inside PairCell. what smallBubbleCell displays. ex: "0"hr "12"min "24"sec
     @Published var smallBubbleView_Components
-    = Float.TimeComponentsAsStrings(hr: "0", min: "0", sec: "0", cents: "00")
+    = Float.TimeComponentsAsStrings(hr: "0", min: "0", sec: "0", hundredths: "00")
     { willSet { DispatchQueue.main.async { self.objectWillChange.send() } }}
             
     deinit { NotificationCenter.default.removeObserver(self) } //1
@@ -65,7 +65,7 @@ public class Bubble: NSManagedObject {
     
     //shouldUpdateSmallBubbleCellTimeComponents
     var syncSmallBubbleCell = false {didSet{
-        if !syncSmallBubbleCell { smallBubbleView_Components = Float.TimeComponentsAsStrings(hr: "0", min: "0", sec: "0", cents: "0") }
+        if !syncSmallBubbleCell { smallBubbleView_Components = Float.TimeComponentsAsStrings(hr: "0", min: "0", sec: "0", hundredths: "0") }
     }}
     
     var shouldUpdateSmallComponents:Bool = false //1

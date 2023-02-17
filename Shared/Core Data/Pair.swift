@@ -12,13 +12,6 @@ import CoreData
 
 public class Pair: NSManagedObject {
     
-    struct TimeComponentsAsString:Codable {
-        let hr:String
-        let min:String
-        let sec:String
-        let cents:String //hundredths :)
-    }
-    
     deinit {
 //        print("pair deinit")
     }

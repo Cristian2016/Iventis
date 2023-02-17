@@ -19,7 +19,7 @@ struct ThreeLabels: View {
     
     @State private var hr = String()
     @State private var min = String()
-    @State private var cents = String()
+    @State private var hundredths = String()
     
     @State private var isSecondsTapped:Bool = false
     @State private var isSecondsLongPressed:Bool = false
@@ -78,7 +78,7 @@ struct ThreeLabels: View {
     // MARK: - Lego
     private var hundredthsView:some View {
         Push(.bottomRight) {
-            Text(cents)
+            Text(hundredths)
                 .padding()
                 .background(Circle().foregroundColor(.pauseStickerColor))
                 .foregroundColor(.pauseStickerFontColor)
@@ -90,7 +90,7 @@ struct ThreeLabels: View {
                 .animation(.spring(response: 0.3, dampingFraction: 0.2), value: isSecondsTapped)
                 .zIndex(1)
                 .onTapGesture { userTappedHundredths() }
-                .onReceive(bubble.coordinator.$components) { cents = $0.hundredths }
+                .onReceive(bubble.coordinator.$components) { hundredths = $0.hundredths }
         }
     }
     

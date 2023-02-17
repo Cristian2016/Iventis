@@ -116,7 +116,7 @@ struct TopCell: View {
                     //sec
                     if showSeconds() {
                         HStack (alignment:.firstTextBaseline ,spacing: 0) {
-                            Text(duration.sec + "." + duration.cents).font(durationFont)
+                            Text(duration.sec + "." + duration.hundredths).font(durationFont)
                             Text("s").font(durationComponentsFont)
                         }
                     }

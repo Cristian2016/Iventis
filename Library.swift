@@ -111,7 +111,7 @@ public extension Float {
         //remaining
         let sec = hrRemaining%60
         
-        return TimeComponents(hr: hr, min: min, sec: sec, cents: fractionalValue)
+        return TimeComponents(hr: hr, min: min, sec: sec, hundredths: fractionalValue)
     }
     
     var hundredths:Int {
@@ -123,11 +123,11 @@ public extension Float {
         
         let components = timeComponents
         
-        let cents = String(format: "%.2d", components.cents)
+        let hundredths = String(format: "%.2d", components.hundredths)
         return TimeComponentsAsStrings(hr: String(components.hr),
                                        min: String(components.min),
                                        sec: String(components.sec),
-                                       cents: cents)
+                                       hundredths: hundredths)
     }
     
     var timeComponentsAbreviatedString:String {
@@ -135,8 +135,8 @@ public extension Float {
         
         let hr = (components.hr != "0") ? components.hr + "h" : ""
         let min = (components.min != "0") ? components.min + "m" : ""
-        let cents = components.cents
-        let sec = components.sec + "." + cents + "s"
+        let hundredths = components.hundredths
+        let sec = components.sec + "." + hundredths + "s"
         var result = hr + " " + min + " " + sec
         result.trimWhiteSpaceAtTheBeginning()
         return result
@@ -146,18 +146,18 @@ public extension Float {
         let hr:Int
         let min:Int
         let sec:Int
-        let cents:Int
+        let hundredths:Int
         
-        static let zeroAll = TimeComponents(hr: 0, min: 0, sec: 0, cents: 0)
+        static let zeroAll = TimeComponents(hr: 0, min: 0, sec: 0, hundredths: 0)
     }
     
     struct TimeComponentsAsStrings:Encodable, Decodable {
         let hr:String
         let min:String
         let sec:String
-        let cents:String
+        let hundredths:String
         
-        static let zeroAll = TimeComponentsAsStrings.init(hr: "0", min: "0", sec: "0", cents: "00")
+        static let zeroAll = TimeComponentsAsStrings.init(hr: "0", min: "0", sec: "0", hundredths: "00")
     }
 }
 
