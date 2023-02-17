@@ -86,7 +86,6 @@ class BubbleCellCoordinator {
             
             //send second
             DispatchQueue.main.async {
-                print("updating seconds")
                 self.components.sec = String(secValue)
             }
             
@@ -136,19 +135,12 @@ class BubbleCellCoordinator {
         DispatchQueue.global().async {
             
             switch moment {
-                case .automatic:
-                    print(#function, " automatic")
-                    self.oneTimeUpdate()
-                    if self.bubble.state == .running { self.update(.start) }
-                    
                 case .user(let action):
                     switch action {
                         case .pause: self.update(.pause)
                         case .start: self.update(.start)
                     }
-                    
-                case .create: self.oneTimeUpdate()
-                    
+                                        
                 case .endSession, .reset, .deleteLastSession:
                     self.cancellable = []
                     let initialClock = self.bubble.initialClock
@@ -191,6 +183,8 @@ class BubbleCellCoordinator {
                                          sec: components.sec,
                                          hundredths: components.hundredths
             )
+            
+            if bubble.state == .running { self.update(.start) }
         }
     }
     
@@ -203,9 +197,7 @@ class BubbleCellCoordinator {
 extension BubbleCellCoordinator {
     ///automatic means handled by the system. ex. when app launches
     enum Moment {
-        case automatic
         case user(Action)
-        case create //3
         case reset
         case endSession
         case deleteLastSession
