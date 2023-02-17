@@ -18,7 +18,7 @@ extension BubbleCellCoordinator {
 
 class BubbleCellCoordinator {
     
-    @Published var components = Components(hr: "-1", min: "-1", sec: "-1", hundredths: "-1")
+    @Published private(set) var components = Components(hr: "-1", min: "-1", sec: "-1", hundredths: "-1")
     
     struct Components {
         var hr:String
