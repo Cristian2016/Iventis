@@ -51,12 +51,6 @@ struct BubbleCell: View {
             deleteActionButton
             moreOptionsButton
         }
-        .onReceive(NotificationCenter.Publisher(center: .default, name: .init("bubbleCreated"))) { output in
-            let rank = output.userInfo!["rank"]! as! Int64
-            if rank == bubble.rank {
-                bubble.coordinator.updateComponents(.create)
-            }
-        }
     }
     
     // MARK: - Legos    

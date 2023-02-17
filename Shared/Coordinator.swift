@@ -18,6 +18,15 @@ extension BubbleCellCoordinator {
 
 class BubbleCellCoordinator {
     
+    @Published var components = Components(hr: "-1", min: "-1", sec: "-1", hundredths: "-1")
+    
+    struct Components {
+        var hr:String
+        var min:String
+        var sec:String
+        var hundredths:String
+    }
+    
     private func update(_ action:Action) {
         switch action {
             case .start:
@@ -52,7 +61,7 @@ class BubbleCellCoordinator {
                 
                 //send min
                 DispatchQueue.main.async {
-                    self.minPublisher.send(minValue)
+                    self.components.min = minValue
                     if intValue == 60 {
                         withAnimation(.spring(response: 0.5, dampingFraction: 0.5)) {
                             self.opacityPublisher.send([.min(.show)])
@@ -65,7 +74,7 @@ class BubbleCellCoordinator {
                     
                     //send hour
                     DispatchQueue.main.async {
-                        self.hrPublisher.send(hrValue)
+                        self.components.hr = hrValue
                         if intValue == 3600 || self.refresh {
                             withAnimation {
                                 self.opacityPublisher.send([.hr(.show)])
@@ -77,7 +86,7 @@ class BubbleCellCoordinator {
             
             //send second
             DispatchQueue.main.async {
-                self.secPublisher.send(String(secValue))
+                self.components.sec = String(secValue)
             }
             
             self.refresh = false
@@ -91,9 +100,6 @@ class BubbleCellCoordinator {
             let stringComponents = initialValue.timeComponentsAsStrings
                                 
             DispatchQueue.main.async {
-                self.secPublisher.send(stringComponents.sec)
-                self.minPublisher.send(stringComponents.min)
-                self.hrPublisher.send(stringComponents.hr)
                 self.centsPublisher.send(stringComponents.cents)
                 
                 if self.bubble.kind == .stopwatch {
@@ -110,9 +116,6 @@ class BubbleCellCoordinator {
     
     var colorPublisher:Publisher<Color, Never>
     
-    var secPublisher:Publisher<String, Never> = .init("i")
-    var minPublisher:Publisher<String, Never>! = .init("i")
-    var hrPublisher:Publisher<String, Never>! = .init("i")
     var centsPublisher:Publisher<String, Never>! = .init("i")
     
     private lazy var publisher =
@@ -154,9 +157,9 @@ class BubbleCellCoordinator {
                     let stringComponents = initialClock.timeComponentsAsStrings
                     
                     DispatchQueue.main.async {
-                        self.secPublisher.send(stringComponents.sec)
-                        self.minPublisher.send(stringComponents.min)
-                        self.hrPublisher.send(stringComponents.hr)
+                        self.components.hr = stringComponents.hr
+                        self.components.min = stringComponents.min
+                        self.components.sec = stringComponents.sec
                         self.centsPublisher.send(stringComponents.cents)
                         
                         if self.bubble.kind == .stopwatch {
@@ -183,8 +186,13 @@ class BubbleCellCoordinator {
         self.bubble = bubble
         self.colorPublisher = .init(Color.bubbleColor(forName: bubble.color))
         
-        DispatchQueue.main.async {
-            self.updateComponents(.automatic)
+        DispatchQueue.global().async {
+            let components = self.bubble.currentClock.timeComponentsAsStrings
+            self.components = Components(hr: components.hr,
+                                         min: components.min,
+                                         sec: components.sec,
+                                         hundredths: components.cents
+            )
         }
     }
     

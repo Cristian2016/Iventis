@@ -71,8 +71,8 @@ struct ThreeLabels: View {
         .font(.system(size: timeComponentsFontSize))
         .fontDesign(.rounded)
         .foregroundColor(.white)
-        .onReceive(bubble.coordinator.minPublisher) { min = $0 }
-        .onReceive(bubble.coordinator.hrPublisher) { hr = $0 }
+        .onReceive(bubble.coordinator.$components) { min = $0.min }
+        .onReceive(bubble.coordinator.$components) { hr = $0.hr }
     }
     
     // MARK: - Lego
@@ -140,7 +140,7 @@ struct SecondsLabel: View {
             .animation(.secondsLongPressed, value: isSecondsLongPressed)
             .gesture(tap)
             .gesture(longPress)
-            .onReceive(bubble.coordinator.secPublisher) { sec = $0 }
+            .onReceive(bubble.coordinator.$components) { sec = $0.sec }
     }
     
     // MARK: - Gestures
