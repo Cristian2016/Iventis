@@ -15,8 +15,8 @@ struct ThreeLabels: View {
     let hundredthsFontSize:CGFloat
     
     let circleScale = CGFloat(1.8)
-    let hstackScale = CGFloat(0.87)
-    let ratio = CGFloat(2.0)
+    let hstackScale = CGFloat(0.85)
+    let ratio = CGFloat(2.1)
     
     @EnvironmentObject private var viewModel:ViewModel
     
