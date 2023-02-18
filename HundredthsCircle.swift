@@ -19,6 +19,7 @@ struct HundredthsCircle: View {
             .foregroundColor(.background)
             .allowsHitTesting(false)
             .onReceive(bubble.coordinator.$components) { hundredths = $0.hundredths }
+        //properties that will be animated
             .opacity(isBubbleRunning ? 0 : 1)
             .offset(x: isBubbleRunning ? -20 : 0, y: isBubbleRunning ? -20 : 0)
             .scaleEffect(!isBubbleRunning ? scale : 0.7, anchor: .bottomTrailing )
