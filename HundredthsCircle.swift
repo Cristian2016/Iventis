@@ -10,6 +10,7 @@ import SwiftUI
 struct HundredthsCircle: View {
     let bubble:Bubble
     @State private var hundredths:String
+    let scale = CGFloat(0.34)
     
     var body: some View {
         Circle()
@@ -17,8 +18,12 @@ struct HundredthsCircle: View {
             .adaptiveText(hundredths, true)
             .foregroundColor(.background)
             .allowsHitTesting(false)
-            .scaleEffect(x: 0.34, y: 0.34, anchor: .bottomTrailing)
+            .scaleEffect(x: scale, y: scale, anchor: .bottomTrailing)
             .onReceive(bubble.coordinator.$components) { hundredths = $0.hundredths }
+            .opacity(isBubbleRunning ? 0 : 1)
+            .offset(x: !isBubbleRunning ? -20 : 0, y: !isBubbleRunning ? -20 : 0)
+            .scaleEffect(!isBubbleRunning ? 2 : 0.34 * scale )
+            .animation(.spring(response: 0.3, dampingFraction: 0.2), value: isBubbleRunning)
     }
     
     init(bubble: Bubble) {
@@ -27,4 +32,6 @@ struct HundredthsCircle: View {
         let components = bubble.coordinator.components
         self.hundredths = components.hundredths
     }
+    
+    private var isBubbleRunning:Bool { bubble.state == .running }
 }

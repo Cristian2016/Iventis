@@ -41,6 +41,10 @@ class BubbleCellCoordinator {
     private func update(_ action:Action) {
         switch action {
             case .start:
+                DispatchQueue.main.async {
+                    self.components.hundredths = "-1"
+                }
+
                 publisher
                     .sink { [weak self] _ in self?.continuousUpdate() }
                     .store(in: &cancellable) //connect
