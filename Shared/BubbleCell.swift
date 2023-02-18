@@ -111,14 +111,12 @@ struct BubbleCell: View {
         dragAction: { viewModel.deleteStickyNote(for: bubble) }
             tapAction : { handleNoteTap() }
         }
-        .offset(y: -16)
+        .offset(x: -12, y: -16)
     }
         
     // MARK: - Internal
     @GestureState var isDetectingLongPress = false
-        
-    private let noteOffset = CGSize(width: 0, height: -6)
-    
+            
     // MARK: -
     init(_ bubble:Bubble) {
         _bubble = StateObject(wrappedValue: bubble)
