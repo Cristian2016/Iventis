@@ -162,7 +162,7 @@ struct SecondsLabel: View {
                 Rectangle().fill(.clear)
                     .aspectRatio(1.2, contentMode: .fit)
                     .overlay {
-                        Text(sec).allowsHitTesting(false)
+                        Text(sec)
                             .font(.system(size: 400))
                             .lineLimit(1)
                             .minimumScaleFactor(0.1)
