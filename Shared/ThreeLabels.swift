@@ -12,7 +12,6 @@ import MyPackage
 struct ThreeLabels: View {
     let bubble:Bubble
     let timeComponentsFontSize:CGFloat
-    let hundredthsFontSize:CGFloat
     
     let circleScale = CGFloat(1.8)
     let hstackScale = CGFloat(0.833)
@@ -32,12 +31,10 @@ struct ThreeLabels: View {
     private let sDelayBubble:StartDelayBubble
     
     init(_ timeComponentsFontSize:CGFloat,
-         _ hundredthsFontSize:CGFloat,
          _ startDelayBubble:StartDelayBubble,
          _ bubble:Bubble) {
         
         self.timeComponentsFontSize = timeComponentsFontSize
-        self.hundredthsFontSize = hundredthsFontSize
         self.sDelayBubble = startDelayBubble
         self.bubble = bubble
         
@@ -94,31 +91,11 @@ struct ThreeLabels: View {
                 }
                 .scaleEffect(x: hstackScale, y: hstackScale)
             }
-            .overlay { if !isBubbleRunning { hundredthsView }}
             .font(.system(size: timeComponentsFontSize))
             .fontDesign(.rounded)
             .foregroundColor(.white)
             .onReceive(bubble.coordinator.$components) { min = $0.min }
             .onReceive(bubble.coordinator.$components) { hr = $0.hr }
-    }
-    
-    // MARK: - Lego
-    private var hundredthsView:some View {
-        Push(.bottomRight) {
-            Text(hundredths)
-                .padding()
-                .background(Circle().foregroundColor(.pauseStickerColor))
-                .foregroundColor(.pauseStickerFontColor)
-                .font(.system(size: hundredthsFontSize, weight: .semibold, design: .rounded))
-                .scaleEffect(isSecondsTapped && !isBubbleRunning ? 2 : 1.0)
-                .offset(x: isSecondsTapped && !isBubbleRunning ? -20 : 0,
-                        y: isSecondsTapped && !isBubbleRunning ? -20 : 0)
-                .opacity(isSecondsTapped && !isBubbleRunning ? 0 : 1)
-                .animation(.spring(response: 0.3, dampingFraction: 0.2), value: isSecondsTapped)
-                .zIndex(1)
-                .onTapGesture { userTappedHundredths() }
-                .onReceive(bubble.coordinator.$components) { hundredths = $0.hundredths }
-        }
     }
     
     // MARK: - User Intents

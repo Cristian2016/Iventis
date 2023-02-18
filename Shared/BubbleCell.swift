@@ -29,7 +29,6 @@ struct BubbleCell: View {
             ZStack {
                 ThreeCircles(bubble: bubble, metrics: metrics)
                 ThreeLabels(metrics.timeComponentsFontSize,
-                            metrics.hundredthsFontSize,
                             startDelayBubble,
                             bubble)
             }

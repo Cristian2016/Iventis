@@ -15,7 +15,7 @@ struct HundredthsCircle: View {
         Circle()
             .fill(Color.pauseStickerColor)
             .adaptiveText(hundredths, true)
-            .foregroundColor(.black)
+            .foregroundColor(.background)
             .allowsHitTesting(false)
             .scaleEffect(x: 0.34, y: 0.34, anchor: .bottomTrailing)
             .onReceive(bubble.coordinator.$components) { hundredths = $0.hundredths }
