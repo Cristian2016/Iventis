@@ -17,10 +17,12 @@ struct AdaptiveText: ViewModifier {
             content //seconds circle ex
                 .overlay {
                     Rectangle().fill(.clear)
-                        .aspectRatio(1.2, contentMode: .fit)
+                        .aspectRatio(2.1, contentMode: .fit)
                         .overlay {
                             Text(text)
                                 .font(.system(size: maxFontSize))
+                                .fontDesign(.rounded)
+                                .fontWeight(.semibold)
                                 .lineLimit(1)
                                 .minimumScaleFactor(0.1)
                         }

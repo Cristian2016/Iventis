@@ -33,9 +33,11 @@ struct ThreeCircles: View {
                 .aspectRatio(ratio, contentMode: .fit)
                 .overlay {
                     HStack {
-                        /* Hr */ colorCircle.opacity(hrOpacity)
-                        /* Min */ colorCircle.opacity(minOpacity)
-                        /* Sec */ SecondsCircle(color: color, scale: circleScale)
+                        /* Hr */ colorCircle
+                            .opacity(hrOpacity)
+                        /* Min */ colorCircle
+                            .opacity(minOpacity)
+                        /* Sec */ SecondsCircle(bubble: bubble, color: color, scale: circleScale)
                     }
                     .scaleEffect(x: hstackScale, y: hstackScale)
                     .onReceive(bubble.coordinator.$opacity) {

@@ -4,10 +4,6 @@
 //
 //  Created by Cristian Lapusan on 29.01.2023.
 //
-//3 scenePhase it used to start/stop backgroundTimer which is used by bubbles to update their displayed time. backgroundTimer sends a signal [notification] each second
-// handleBecomeActive: called on app launch, returning from background or returning from inactive state
-// handleEnterBackground: called when app killed or moved to background. NOT called on NotificationCenter, incoming call etc
-//3 ⚠️ never put scenePhase in App struct! it recomputed body 3 times because of it
 //10 is this overkill? A single obsevable object only to manage the navigationStack?? Not sure though
 
 import SwiftUI

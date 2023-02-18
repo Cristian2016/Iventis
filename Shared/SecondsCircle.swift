@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct SecondsCircle: View {
+    let bubble:Bubble
     let color:Color
     let scale:CGFloat
     
@@ -16,9 +17,7 @@ struct SecondsCircle: View {
             Circle()
                 .fill(color)
                 
-            Circle()
-                .fill(Color.pauseStickerColor)
-                .scaleEffect(x: 0.35, y: 0.35, anchor: .bottomTrailing)
+            HundredthsCircle(bubble: bubble)
         }
         .scaleEffect(x: scale, y: scale)
     }
