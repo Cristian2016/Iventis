@@ -14,7 +14,7 @@ struct ThreeCircles: View {
     let metrics:BubbleCell.Metrics
     
     let circleScale = CGFloat(1.8)
-    let hstackScale = CGFloat(0.85)
+    let hstackScale = CGFloat(0.833)
     let ratio = CGFloat(2.05)
     
     @State private var minOpacity = CGFloat(0)
