@@ -177,6 +177,7 @@ class BubbleCellCoordinator {
                 
         observeActivePhase()
         
+        //set initial values when bubble is created [ViewModel.createBubble]
         DispatchQueue.global().async {
             let components = self.initialValue.timeComponentsAsStrings
             
