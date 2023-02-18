@@ -22,8 +22,8 @@ struct HundredthsCircle: View {
             .opacity(isBubbleRunning ? 0 : 1)
             .offset(x: isBubbleRunning ? -20 : 0, y: isBubbleRunning ? -20 : 0)
             .scaleEffect(!isBubbleRunning ? scale : 0.7, anchor: .bottomTrailing )
-            .animation(.spring(response: 0.3, dampingFraction: 0.2), value: isBubbleRunning)
             .zIndex(isBubbleRunning ? -1 : 0)
+            .animation(.spring(response: 0.3, dampingFraction: 0.2), value: isBubbleRunning)
     }
     
     init(bubble: Bubble) {
