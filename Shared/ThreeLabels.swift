@@ -53,7 +53,16 @@ struct ThreeLabels: View {
             .overlay {
                 HStack {
                     clearCircle //Hr
-                        .overlay { Text(hr).allowsHitTesting(false) }
+                        .overlay {
+                            Rectangle().fill(.clear)
+                                .aspectRatio(1.2, contentMode: .fit)
+                                .overlay {
+                                    Text(hr).allowsHitTesting(false)
+                                        .font(.system(size: 400))
+                                        .lineLimit(1)
+                                        .minimumScaleFactor(0.1)
+                                }
+                        }
                         .opacity(hrOpacity)
                         .scaleEffect(isSecondsLongPressed ? 0.2 : 1.0)
                         .offset(x: isSecondsLongPressed ? 20 : 0.0, y: 0)
@@ -62,7 +71,16 @@ struct ThreeLabels: View {
                         .onLongPressGesture { showNotesList() }
                     
                     clearCircle //Min
-                        .overlay { Text(min).allowsHitTesting(false) }
+                        .overlay {
+                            Rectangle().fill(.clear)
+                                .aspectRatio(1.2, contentMode: .fit)
+                                .overlay {
+                                    Text(min).allowsHitTesting(false)
+                                        .font(.system(size: 400))
+                                        .lineLimit(1)
+                                        .minimumScaleFactor(0.1)
+                                }
+                        }
                         .opacity(minOpacity)
                         .scaleEffect(isSecondsLongPressed ? 0.2 : 1.0)
                         .offset(x: isSecondsLongPressed ? 10 : 0.0, y: 0)
