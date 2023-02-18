@@ -23,7 +23,6 @@ struct ThreeLabels: View {
     @State private var min:String
     @State private var hundredths:String
     
-    @State private var isSecondsTapped:Bool = false
     @State private var isSecondsLongPressed:Bool = false
     
     @GestureState var isDetectingLongPress = false
@@ -85,7 +84,6 @@ struct ThreeLabels: View {
                         .onTapGesture { toggleBubbleDetail() }
                     
                     SecondsLabel(bubble: bubble,
-                                 isSecondsTapped: $isSecondsTapped,
                                  isSecondsLongPressed: $isSecondsLongPressed)
                     .overlay { if sDelayBubble.referenceDelay > 0 { SDButton(bubble.sdb) }}
                 }
@@ -128,7 +126,6 @@ struct SecondsLabel: View {
     let bubble:Bubble
     @EnvironmentObject private var viewModel:ViewModel
     
-    @Binding var isSecondsTapped:Bool
     @Binding var isSecondsLongPressed:Bool
     
     @State private var sec:String
@@ -152,9 +149,8 @@ struct SecondsLabel: View {
             .onReceive(bubble.coordinator.$components) { sec = $0.sec }
     }
     
-    init(bubble: Bubble, isSecondsTapped: Binding<Bool>, isSecondsLongPressed: Binding<Bool>) {
+    init(bubble: Bubble, isSecondsLongPressed: Binding<Bool>) {
         self.bubble = bubble
-        _isSecondsTapped = isSecondsTapped
         _isSecondsLongPressed = isSecondsLongPressed
         self.sec = bubble.coordinator.components.sec
     }
@@ -168,9 +164,6 @@ struct SecondsLabel: View {
     
     // MARK: -
     private func userTappedSeconds() {
-        isSecondsTapped = true
-        delayExecution(.now() + 0.1) { isSecondsTapped = false }
-        
         //feedback
         UserFeedback.singleHaptic(.heavy)
         
