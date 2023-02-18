@@ -55,7 +55,7 @@ struct ThreeLabels: View {
                     clearCircle //Hr
                         .overlay {
                             Rectangle().fill(.clear)
-                                .aspectRatio(1.2, contentMode: .fit)
+                                .aspectRatio(1.3, contentMode: .fit)
                                 .overlay {
                                     Text(hr).allowsHitTesting(false)
                                         .font(.system(size: 400))
@@ -73,7 +73,7 @@ struct ThreeLabels: View {
                     clearCircle //Min
                         .overlay {
                             Rectangle().fill(.clear)
-                                .aspectRatio(1.2, contentMode: .fit)
+                                .aspectRatio(1.3, contentMode: .fit)
                                 .overlay {
                                     Text(min).allowsHitTesting(false)
                                         .font(.system(size: 400))
@@ -160,7 +160,7 @@ struct SecondsLabel: View {
         Circle().fill(Color.clear)
             .overlay {
                 Rectangle().fill(.clear)
-                    .aspectRatio(1.2, contentMode: .fit)
+                    .aspectRatio(1.3, contentMode: .fit)
                     .overlay {
                         Text(sec)
                             .font(.system(size: 400))
