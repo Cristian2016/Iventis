@@ -174,20 +174,22 @@ class BubbleCellCoordinator {
     init(for bubble:Bubble) {
         self.bubble = bubble
         self.colorPublisher = .init(Color.bubbleColor(forName: bubble.color))
-        
-        DispatchQueue.global().async {
-            let components = self.initialValue.timeComponentsAsStrings
-            
-            DispatchQueue.main.async {
-                self.components = Components(hr: components.hr,
-                                             min: components.min,
-                                             sec: components.sec,
-                                             hundredths: components.hundredths
-                )
                 
-                self.opacity.update(self.initialValue)
+        NotificationCenter.default.addObserver(forName: UIApplication.didBecomeActiveNotification, object: nil, queue: nil) { _ in
+            DispatchQueue.global().async {
+                let components = self.initialValue.timeComponentsAsStrings
                 
-                if bubble.state == .running { self.update(.start) }
+                DispatchQueue.main.async {
+                    self.components = Components(hr: components.hr,
+                                                 min: components.min,
+                                                 sec: components.sec,
+                                                 hundredths: components.hundredths
+                    )
+                    
+                    self.opacity.update(self.initialValue)
+                    
+                    if bubble.state == .running { self.update(.start) }
+                }
             }
         }
     }
