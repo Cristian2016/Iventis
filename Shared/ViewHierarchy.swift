@@ -18,9 +18,7 @@ struct ViewHierarchy: View {
     
     @StateObject private var layoutViewModel = LayoutViewModel() //2
     @StateObject private var viewModel = ViewModel() //2
-    
-    @Environment(\.scenePhase) private var scenePhase //3 ⚠️
-    
+        
     private let secretary = Secretary.shared
     @State private var deleteActionBubbleRank:Int64?
     @State private var sessionToDelete:(session:Session, sessionRank:String)?
@@ -55,7 +53,6 @@ struct ViewHierarchy: View {
         .environment(\.managedObjectContext, viewContext)
         .environmentObject(viewModel) //2
         .environmentObject(layoutViewModel) //2
-        .onChange(of: scenePhase) { handleScenePhaseChange($0) } //3
         //listen to publishers and listen for changes
         .onReceive(secretary.$deleteAction_bRank) { deleteActionBubbleRank = $0 }
         .onReceive(viewModel.notesForPair) { notesForPair = ($0 != nil) ? $0! : nil }
@@ -64,19 +61,7 @@ struct ViewHierarchy: View {
     }
     
     // MARK: - Methods
-    private func handleScenePhaseChange(_ scenePhase:ScenePhase) {
-        switch scenePhase {
-            case .active: handleBecomeActive()
-            case .background: handleEnterBackground()
-            case .inactive: break
-            @unknown default: fatalError()
-        }
-    } //3
-    
-    private func handleBecomeActive() { viewModel.bubbleTimer(.start) } //3
-    
-    private func handleEnterBackground() { viewModel.bubbleTimer(.pause) } //3
-        
+            
     private func createBubblesOnFirstAppLaunch() {
         return
         if isFirstAppLaunch {

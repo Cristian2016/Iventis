@@ -464,6 +464,22 @@ class ViewModel: ObservableObject {
         sdb.currentDelay = Float(sdb.referenceDelay)
     }
     
+    private func observe_ApplicationActive() {
+        NotificationCenter.default.addObserver(forName: UIApplication.didBecomeActiveNotification, object: nil, queue: nil) { [weak self] _ in
+            self?.handleBecomeActive()
+        }
+    }
+    
+    private func observe_ApplicationBackground() {
+        NotificationCenter.default.addObserver(forName: UIApplication.didEnterBackgroundNotification, object: nil, queue: nil) { [weak self] _ in
+            self?.handleEnterBackground()
+        }
+    }
+    
+    private func handleEnterBackground() { bubbleTimer(.pause) } //3
+    
+    private func handleBecomeActive() { bubbleTimer(.start) } //3
+    
     private func observe_delayReachedZero_Notification() {
         NotificationCenter.default.addObserver(forName: .sdbEnded, object: nil, queue: nil) { [weak self] notification in
             
@@ -502,6 +518,12 @@ class ViewModel: ObservableObject {
             }
         }
     } //2
+    
+    init() {
+        observe_ApplicationActive()
+        observe_ApplicationBackground()
+        observe_delayReachedZero_Notification()
+    }
 }
 
 // MARK: - Handle SDBubble start and pause and shit

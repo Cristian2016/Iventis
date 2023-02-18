@@ -14,7 +14,6 @@ struct BubbleCell: View {
     private let secretary = Secretary.shared
     
     @State private var components:Float.TimeComponentsAsStrings = .zeroAll
-    @Environment(\.scenePhase) private var scenePhase
     
     let metrics = Metrics()
     @StateObject private var bubble:Bubble
