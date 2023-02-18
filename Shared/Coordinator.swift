@@ -42,7 +42,7 @@ class BubbleCellCoordinator {
         switch action {
             case .start:
                 DispatchQueue.main.async {
-                    self.components.hundredths = "-1"
+                    self.components.hundredths = ""
                 }
 
                 publisher
