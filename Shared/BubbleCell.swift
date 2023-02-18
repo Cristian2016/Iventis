@@ -11,14 +11,12 @@ import MyPackage
 
 struct BubbleCell: View {
     ///padding with respect to the list edges so that it comes closer to the edges of the screen
-    static let padding = EdgeInsets(top: 0, leading: -12, bottom: 0, trailing: -12)
-    
     private let secretary = Secretary.shared
     
     @State private var components:Float.TimeComponentsAsStrings = .zeroAll
     @Environment(\.scenePhase) private var scenePhase
     
-    let metrics: Metrics
+    let metrics = Metrics()
     @StateObject private var bubble:Bubble
     @StateObject private var startDelayBubble:StartDelayBubble
     
@@ -27,12 +25,11 @@ struct BubbleCell: View {
         
     // MARK: - Body
     var body: some View {
-//        let _ = print("BubbleCell body")
+        let _ = print("BubbleCell \(bubble.color ?? "nocolor") body")
         VStack {
             ZStack {
                 ThreeCircles(bubble: bubble, metrics: metrics)
-                ThreeLabels(metrics.spacing,
-                            metrics.timeComponentsFontSize,
+                ThreeLabels(metrics.timeComponentsFontSize,
                             metrics.hundredthsFontSize,
                             startDelayBubble,
                             bubble)
@@ -123,10 +120,9 @@ struct BubbleCell: View {
     private let noteOffset = CGSize(width: 0, height: -6)
     
     // MARK: -
-    init(_ bubble:Bubble, _ metrics:Metrics) {
+    init(_ bubble:Bubble) {
         _bubble = StateObject(wrappedValue: bubble)
         _startDelayBubble = StateObject(wrappedValue: bubble.sdb!)
-        self.metrics = metrics
     }
     
     func handleNoteTap() {
@@ -171,17 +167,7 @@ extension BubbleCell {
     
     ///circle diameter, font size, spacing and so on
     struct Metrics {
-        static var width:CGFloat = 0
-        
-        init(_ width:CGFloat) {
-            self.spacing = width * -0.18
-            self.timeComponentsFontSize = width * CGFloat(0.16)
-            self.hundredthsFontSize = width * CGFloat(0.06)
-            Metrics.width = width
-        }
-        
-        let spacing:CGFloat
-        let timeComponentsFontSize:CGFloat
-        let hundredthsFontSize:CGFloat
+        let timeComponentsFontSize = 375 * CGFloat(0.16)
+        let hundredthsFontSize:CGFloat = 375 * CGFloat(0.06)
     }
 }

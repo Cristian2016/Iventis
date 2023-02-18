@@ -11,9 +11,12 @@ import MyPackage
 //hr min sec cents (4 labels in total actually)
 struct ThreeLabels: View {
     let bubble:Bubble
-    let spacing:CGFloat
     let timeComponentsFontSize:CGFloat
     let hundredthsFontSize:CGFloat
+    
+    let circleScale = CGFloat(1.8)
+    let hstackScale = CGFloat(0.87)
+    let ratio = CGFloat(2.0)
     
     @EnvironmentObject private var viewModel:ViewModel
     
@@ -28,13 +31,11 @@ struct ThreeLabels: View {
     
     private let sDelayBubble:StartDelayBubble
     
-    init(_ spacing: CGFloat,
-         _ timeComponentsFontSize:CGFloat,
+    init(_ timeComponentsFontSize:CGFloat,
          _ hundredthsFontSize:CGFloat,
          _ startDelayBubble:StartDelayBubble,
          _ bubble:Bubble) {
         
-        self.spacing = spacing
         self.timeComponentsFontSize = timeComponentsFontSize
         self.hundredthsFontSize = hundredthsFontSize
         self.sDelayBubble = startDelayBubble
@@ -45,37 +46,42 @@ struct ThreeLabels: View {
         min = components.min
         hundredths = components.hundredths
     }
-        
+    
     var body: some View {
-        HStack (spacing: spacing) {
-            Circle().fill(Color.clear) //Hr
-                .overlay { Text(hr).allowsHitTesting(false) }
-                .opacity(hrOpacity)
-                .scaleEffect(isSecondsLongPressed ? 0.2 : 1.0)
-                .offset(x: isSecondsLongPressed ? 20 : 0.0, y: 0)
-                .animation(.secondsLongPressed.delay(0.2), value: isSecondsLongPressed)
-                .onTapGesture { toggleBubbleDetail() }
-                .onLongPressGesture { showNotesList() }
-            
-            Circle().fill(Color.clear) //Min
-                .overlay { Text(min).allowsHitTesting(false) }
-                .opacity(minOpacity)
-                .scaleEffect(isSecondsLongPressed ? 0.2 : 1.0)
-                .offset(x: isSecondsLongPressed ? 10 : 0.0, y: 0)
-                .animation(.secondsLongPressed.delay(0.1), value: isSecondsLongPressed)
-                .onTapGesture { toggleBubbleDetail() }
-            
-            SecondsLabel(bubble: bubble,
-                         isSecondsTapped: $isSecondsTapped,
-                         isSecondsLongPressed: $isSecondsLongPressed)
-            .overlay { if sDelayBubble.referenceDelay > 0 { SDButton(bubble.sdb) }}
-        }
-        .overlay { if !isBubbleRunning { hundredthsView }}
-        .font(.system(size: timeComponentsFontSize))
-        .fontDesign(.rounded)
-        .foregroundColor(.white)
-        .onReceive(bubble.coordinator.$components) { min = $0.min }
-        .onReceive(bubble.coordinator.$components) { hr = $0.hr }
+        Rectangle().fill(.clear)
+            .aspectRatio(ratio, contentMode: .fit)
+            .overlay {
+                HStack {
+                    clearCircle //Hr
+                        .overlay { Text(hr).allowsHitTesting(false) }
+                        .opacity(hrOpacity)
+                        .scaleEffect(isSecondsLongPressed ? 0.2 : 1.0)
+                        .offset(x: isSecondsLongPressed ? 20 : 0.0, y: 0)
+                        .animation(.secondsLongPressed.delay(0.2), value: isSecondsLongPressed)
+                        .onTapGesture { toggleBubbleDetail() }
+                        .onLongPressGesture { showNotesList() }
+                    
+                    clearCircle //Min
+                        .overlay { Text(min).allowsHitTesting(false) }
+                        .opacity(minOpacity)
+                        .scaleEffect(isSecondsLongPressed ? 0.2 : 1.0)
+                        .offset(x: isSecondsLongPressed ? 10 : 0.0, y: 0)
+                        .animation(.secondsLongPressed.delay(0.1), value: isSecondsLongPressed)
+                        .onTapGesture { toggleBubbleDetail() }
+                    
+                    SecondsLabel(bubble: bubble,
+                                 isSecondsTapped: $isSecondsTapped,
+                                 isSecondsLongPressed: $isSecondsLongPressed)
+                    .overlay { if sDelayBubble.referenceDelay > 0 { SDButton(bubble.sdb) }}
+                }
+                .scaleEffect(x: hstackScale, y: hstackScale)
+            }
+            .overlay { if !isBubbleRunning { hundredthsView }}
+            .font(.system(size: timeComponentsFontSize))
+            .fontDesign(.rounded)
+            .foregroundColor(.white)
+            .onReceive(bubble.coordinator.$components) { min = $0.min }
+            .onReceive(bubble.coordinator.$components) { hr = $0.hr }
     }
     
     // MARK: - Lego
@@ -178,5 +184,13 @@ struct SecondsLabel: View {
         
         //user intent model
         viewModel.endSession(bubble)
+    }
+}
+
+extension ThreeLabels {
+    private var clearCircle:some View {
+        Circle()
+            .fill(.clear)
+            .scaleEffect(x: circleScale, y: circleScale)
     }
 }

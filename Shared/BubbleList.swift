@@ -76,13 +76,6 @@ struct BubbleList: View {
     }
     
     // MARK: - Lego
-    private func detailView(_ bubble:Bubble) -> some View {
-        GeometryReader { geo in
-            let metrics = BubbleCell.Metrics() //10
-            DetailView(Int(bubble.rank), bubble, metrics)
-        }
-    }
-    
     private var bottomOverscoll: some View {
         Spacer()
             .frame(height: 200)
