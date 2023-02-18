@@ -41,12 +41,11 @@ struct DetailView: View {
         ZStack {
             ScrollViewReader { proxy in
                 List {
-                    BubbleCell(bubble, metrics).padding(BubbleCell.padding) //2
+                    BubbleCell(bubble)
                         .id(1)
                     if sessions.isEmpty { NoSessionsAlertView() }
                     else {
                         TopDetailView(rank).frame(height: topDetailHeight)
-                            .padding(BubbleCell.padding) //2
                             .listRowSeparator(.hidden)
                         BottomDetailView(rank)
                             .frame(height: 600)

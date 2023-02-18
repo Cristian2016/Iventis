@@ -67,7 +67,7 @@ struct PairBubbleCell: View {
     
     // MARK: - LEGOS
     var background: some View {
-        HStack (spacing: metrics.spacing) {
+        HStack (spacing: -40) {
             //Hours
             Circle().opacity(hrOpacity)
             //Minutes
@@ -97,7 +97,7 @@ struct PairBubbleCell: View {
     }
     
     var timeComponents: some View {
-        HStack (spacing: metrics.spacing) {
+        HStack (spacing: -40) {
             //HOURS
             Circle().fill(Color.clear)
                 .overlay { Text(bubble.smallBubbleView_Components.hr) }

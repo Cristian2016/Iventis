@@ -34,47 +34,42 @@ struct BubbleList: View {
                 
     // MARK: -
     var body: some View {
-//        let _ = print("BubbleList body")
+        //        let _ = print("BubbleList body")
         ZStack {
             if isListEmpty { EmptyListView() }
             else {
-                GeometryReader { geo in
-                    let metrics = BubbleCell.Metrics(geo.size.width) //7
-                    
-                    List (bubbles) { section in
-                        let value = section.id.description == "true" //5
-                        Section {
-                            ForEach (section) { bubble in
-                                ZStack {
-                                    NavigationLink(value: bubble) { }.opacity(0)
-                                    BubbleCell(bubble, metrics)
-                                }
+                List (bubbles) { section in
+                    let value = section.id.description == "true" //5
+                    Section {
+                        ForEach (section) { bubble in
+                            ZStack {
+                                NavigationLink(value: bubble) { }.opacity(0)
+                                BubbleCell(bubble)
                             }
                         }
-                        .listRowSeparator(.hidden)
-                        .listSectionSeparator(value ? .visible : .hidden, edges: [.bottom])
-                        
-                        if secretary.showFavoritesOnly {
-                            ShowAllBubblesButton().listRowSeparator(.hidden)
-                        }
-                        
-                        if !section.id { bottomOverscoll }
                     }
-                    .scrollIndicators(.hidden)
-                    .listStyle(.plain)
-                    .toolbarBackground(.ultraThinMaterial)
-                    .toolbar { ToolbarItemGroup {
-                        AddNoteButton()
-                        AutoLockButton()
-                        PlusSymbol()
-                    }}
-                    .padding(BubbleCell.padding) //9
-                    .background { RefresherView() } //11
-                    .onAppear {}
-//                    .refreshable {
-//                        if Secretary.shared.pinnedBubblesCount != 0 { secretary.showFavoritesOnly.toggle() }
-//                    } //11
+                    .listRowSeparator(.hidden)
+                    .listSectionSeparator(value ? .visible : .hidden, edges: [.bottom])
+                    
+                    if secretary.showFavoritesOnly {
+                        ShowAllBubblesButton().listRowSeparator(.hidden)
+                    }
+                    
+                    if !section.id { bottomOverscoll }
                 }
+                .scrollIndicators(.hidden)
+                .listStyle(.plain)
+                .toolbarBackground(.ultraThinMaterial)
+                .toolbar { ToolbarItemGroup {
+                    AddNoteButton()
+                    AutoLockButton()
+                    PlusSymbol()
+                }}
+                .background { RefresherView() } //11
+                .onAppear {}
+                //                    .refreshable {
+                //                        if Secretary.shared.pinnedBubblesCount != 0 { secretary.showFavoritesOnly.toggle() }
+                //                    } //11
             }
             LeftStrip(isListEmpty)
         }
@@ -82,8 +77,8 @@ struct BubbleList: View {
     
     // MARK: - Lego
     private func detailView(_ bubble:Bubble) -> some View {
-        GeometryReader {
-            let metrics = BubbleCell.Metrics($0.size.width) //10
+        GeometryReader { geo in
+            let metrics = BubbleCell.Metrics() //10
             DetailView(Int(bubble.rank), bubble, metrics)
         }
     }
