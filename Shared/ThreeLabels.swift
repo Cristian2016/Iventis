@@ -158,8 +158,16 @@ struct SecondsLabel: View {
     
     var body: some View {
         Circle().fill(Color.clear)
-            .contentShape(Circle())
-            .overlay { Text(sec) }
+            .overlay {
+                Rectangle().fill(.clear)
+                    .aspectRatio(1.2, contentMode: .fit)
+                    .overlay {
+                        Text(sec).allowsHitTesting(false)
+                            .font(.system(size: 400))
+                            .lineLimit(1)
+                            .minimumScaleFactor(0.1)
+                    }
+            }
             .scaleEffect(isSecondsLongPressed ? 0.2 : 1.0)
             .animation(.secondsLongPressed, value: isSecondsLongPressed)
             .gesture(tap)
