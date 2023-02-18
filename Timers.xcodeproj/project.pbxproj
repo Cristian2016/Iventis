@@ -57,6 +57,7 @@
 		1F74878B286EB64E0092674F /* BubbleCell_Info.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F74878A286EB64E0092674F /* BubbleCell_Info.swift */; };
 		1F74878D286ED1B10092674F /* StartInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F74878C286ED1B10092674F /* StartInfoView.swift */; };
 		1F76B51128DDE38800543660 /* AlertHintView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F76B51028DDE38800543660 /* AlertHintView.swift */; };
+		1F7F1AE429A10D9C0061EB40 /* AdaptiveText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F7F1AE329A10D9C0061EB40 /* AdaptiveText.swift */; };
 		1F82FB982831435A00E7C5AA /* HelpActionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F82FB972831435A00E7C5AA /* HelpActionButton.swift */; };
 		1F8AAFA329927B2900328AC7 /* FramePortrait.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8AAFA229927B2900328AC7 /* FramePortrait.swift */; };
 		1F8B6965283790CF006540CB /* BubbleStickyNoteList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8B6964283790CF006540CB /* BubbleStickyNoteList.swift */; };
@@ -192,6 +193,7 @@
 		1F74878A286EB64E0092674F /* BubbleCell_Info.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BubbleCell_Info.swift; sourceTree = "<group>"; };
 		1F74878C286ED1B10092674F /* StartInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartInfoView.swift; sourceTree = "<group>"; };
 		1F76B51028DDE38800543660 /* AlertHintView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertHintView.swift; sourceTree = "<group>"; };
+		1F7F1AE329A10D9C0061EB40 /* AdaptiveText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdaptiveText.swift; sourceTree = "<group>"; };
 		1F82FB972831435A00E7C5AA /* HelpActionButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpActionButton.swift; sourceTree = "<group>"; };
 		1F845FAD286EF8730053EAE6 /* WidgetsExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = WidgetsExtension.entitlements; sourceTree = "<group>"; };
 		1F8AAFA229927B2900328AC7 /* FramePortrait.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FramePortrait.swift; sourceTree = "<group>"; };
@@ -327,6 +329,7 @@
 		1F5F4A4228093FAC00AF3442 = {
 			isa = PBXGroup;
 			children = (
+				1F7F1AE329A10D9C0061EB40 /* AdaptiveText.swift */,
 				1F6FA29B2993E4E300D7EF90 /* ShowAllBubblesButton.swift */,
 				1F8AAFA229927B2900328AC7 /* FramePortrait.swift */,
 				1F52B8C7299233AF0093810C /* ColorsGrid.swift */,
@@ -616,6 +619,7 @@
 				1F559BCA298E0BA700F07F5F /* ThinMaterialLabel.swift in Sources */,
 				1F61BE052822BAAA00B773F9 /* DeleteActionView.swift in Sources */,
 				1F9BE0A9280BE14100F87EFA /* PaletteView.swift in Sources */,
+				1F7F1AE429A10D9C0061EB40 /* AdaptiveText.swift in Sources */,
 				1F5F4A732809409600AF3442 /* Bubble.swift in Sources */,
 				1F62194028293B5100C9B175 /* PairBubbleCell.swift in Sources */,
 				1F97B7DD2809B311002FFCA3 /* Colors.swift in Sources */,
