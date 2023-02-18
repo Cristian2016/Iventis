@@ -175,6 +175,26 @@ class BubbleCellCoordinator {
         self.bubble = bubble
         self.colorPublisher = .init(Color.bubbleColor(forName: bubble.color))
                 
+        observeActivePhase()
+        
+        DispatchQueue.global().async {
+            let components = self.initialValue.timeComponentsAsStrings
+            
+            self.components = Components(hr: components.hr,
+                                         min: components.min,
+                                         sec: components.sec,
+                                         hundredths: components.hundredths
+            )
+            self.opacity.update(self.initialValue)
+        }
+    }
+    
+    deinit {
+        cancellable = []
+        NotificationCenter.default.removeObserver(self)
+    }
+    
+    private func observeActivePhase() {
         NotificationCenter.default.addObserver(forName: UIApplication.didBecomeActiveNotification, object: nil, queue: nil) { _ in
             DispatchQueue.global().async {
                 let components = self.initialValue.timeComponentsAsStrings
@@ -188,15 +208,10 @@ class BubbleCellCoordinator {
                     
                     self.opacity.update(self.initialValue)
                     
-                    if bubble.state == .running { self.update(.start) }
+                    if self.bubble.state == .running { self.update(.start) }
                 }
             }
         }
-    }
-    
-    deinit {
-        cancellable = []
-        NotificationCenter.default.removeObserver(self)
     }
 }
 
