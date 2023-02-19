@@ -52,12 +52,12 @@ struct DetailView: View {
                 }
                 .listStyle(.plain)
                 .scrollIndicators(.visible, axes: .vertical) //1
-                .onReceive(secretary.$scrollToTop) {
+                .onReceive(secretary.$shouldScrollToTop) {
                     if $0 {
                         withAnimation { proxy.scrollTo(1) }
                         
                         delayExecution(.now() + 0.1) {
-                            secretary.scrollToTop = false
+                            secretary.shouldScrollToTop = false
                         }
                     }
                 }
