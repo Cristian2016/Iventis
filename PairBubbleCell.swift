@@ -52,14 +52,6 @@ struct PairBubbleCell: View {
                     skinTapsCount += 1
                 } }
         }
-        .background {
-            GeometryReader { geo in
-                Color.clear
-                    .onChange(of: geo.size.width) { newValue in
-                        print("width is \(newValue)")
-                    }
-            }
-        }
     }
     
     let edge = CGFloat(130)

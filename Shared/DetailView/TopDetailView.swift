@@ -57,7 +57,7 @@ struct TopDetailView:View {
                     }
                 }
             }
-            .padding(.init(top: 0, leading: -12, bottom: 0, trailing: -12))
+            .padding(.init(top: 0, leading: -17, bottom: 0, trailing: -17))
         }
     }
     
