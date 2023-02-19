@@ -16,6 +16,7 @@ struct BubbleCell: View {
     @State private var components:Float.TimeComponentsAsStrings = .zeroAll
     
     let metrics = Metrics()
+    
     @StateObject private var bubble:Bubble
     @StateObject private var startDelayBubble:StartDelayBubble
     
@@ -165,5 +166,9 @@ extension BubbleCell {
     struct Metrics {
         let timeComponentsFontSize = 375 * CGFloat(0.16)
         let hundredthsFontSize:CGFloat = 375 * CGFloat(0.06)
+        
+        let circleScale = CGFloat(1.8)
+        let hstackScale = CGFloat(0.833)
+        let ratio = CGFloat(2.05)
     }
 }

@@ -13,10 +13,6 @@ struct ThreeCircles: View {
     let bubble:Bubble
     let metrics:BubbleCell.Metrics
     
-    let circleScale = CGFloat(1.8)
-    let hstackScale = CGFloat(0.833)
-    let ratio = CGFloat(2.05)
-    
     @State private var minOpacity = CGFloat(0)
     @State private var hrOpacity = CGFloat(0)
     @State private var color:Color
@@ -30,16 +26,16 @@ struct ThreeCircles: View {
     var body: some View {
         if !bubble.isFault {
             Rectangle().fill(.clear)
-                .aspectRatio(ratio, contentMode: .fit)
+                .aspectRatio(metrics.ratio, contentMode: .fit)
                 .overlay {
                     HStack {
                         /* Hr */ colorCircle
                             .opacity(hrOpacity)
                         /* Min */ colorCircle
                             .opacity(minOpacity)
-                        /* Sec */ SecondsCircle(bubble: bubble, color: color, scale: circleScale)
+                        /* Sec */ SecondsCircle(bubble: bubble, color: color, scale: metrics.circleScale)
                     }
-                    .scaleEffect(x: hstackScale, y: hstackScale)
+                    .scaleEffect(x: metrics.hstackScale, y: metrics.hstackScale)
                     .onReceive(bubble.coordinator.$opacity) {
                         minOpacity = $0.min
                         hrOpacity = $0.hr
@@ -72,6 +68,7 @@ extension ThreeCircles {
     private var colorCircle:some View {
         Circle()
             .fill(color)
-            .scaleEffect(x: circleScale, y: circleScale)
+            .scaleEffect(x: metrics.circleScale, y: metrics.circleScale)
     }
 }
+

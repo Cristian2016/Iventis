@@ -12,10 +12,7 @@ import MyPackage
 struct ThreeLabels: View {
     var bubble:Bubble?
     let timeComponentsFontSize:CGFloat
-    
-    let circleScale = CGFloat(1.8)
-    let hstackScale = CGFloat(0.833)
-    let ratio = CGFloat(2.05)
+    let metrics = BubbleCell.Metrics()
     
     @EnvironmentObject private var viewModel:ViewModel
     
@@ -50,7 +47,7 @@ struct ThreeLabels: View {
     var body: some View {
         if let bubble = bubble  {
             Rectangle().fill(.clear)
-                .aspectRatio(ratio, contentMode: .fit)
+                .aspectRatio(metrics.ratio, contentMode: .fit)
                 .overlay {
                     HStack {
                         clearCircle //Hr
@@ -92,7 +89,7 @@ struct ThreeLabels: View {
                                      isSecondsLongPressed: $isSecondsLongPressed)
                         .overlay { if sDelayBubble.referenceDelay > 0 { SDButton(bubble.sdb) }}
                     }
-                    .scaleEffect(x: hstackScale, y: hstackScale)
+                    .scaleEffect(x: metrics.hstackScale, y: metrics.hstackScale)
                 }
                 .font(.system(size: timeComponentsFontSize))
                 .fontDesign(.rounded)
@@ -199,6 +196,6 @@ extension ThreeLabels {
     private var clearCircle:some View {
         Circle()
             .fill(.clear)
-            .scaleEffect(x: circleScale, y: circleScale)
+            .scaleEffect(x: metrics.circleScale, y: metrics.circleScale)
     }
 }
