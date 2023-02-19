@@ -12,6 +12,7 @@ import MyPackage
 struct ThreeCircles: View {
     let bubble:Bubble
     let metrics:BubbleCell.Metrics
+    @EnvironmentObject private var viewModel:ViewModel
     
     @State private var minOpacity = CGFloat(0)
     @State private var hrOpacity = CGFloat(0)
@@ -31,8 +32,10 @@ struct ThreeCircles: View {
                     HStack {
                         /* Hr */ colorCircle
                             .opacity(hrOpacity)
+                            .onTapGesture { toggleBubbleDetail() }
                         /* Min */ colorCircle
                             .opacity(minOpacity)
+                            .onTapGesture { toggleBubbleDetail() }
                         /* Sec */ SecondsCircle(bubble: bubble, color: color, scale: metrics.circleScale)
                     }
                     .scaleEffect(x: metrics.hstackScale, y: metrics.hstackScale)
@@ -43,6 +46,12 @@ struct ThreeCircles: View {
                     .onReceive(bubble.coordinator.colorPublisher) { color = $0 }
                 }
         }
+    }
+    
+    // MARK: - User Intents
+    private func toggleBubbleDetail() {
+        print(#function)
+        viewModel.path = viewModel.path.isEmpty ? [bubble] : []
     }
 }
 

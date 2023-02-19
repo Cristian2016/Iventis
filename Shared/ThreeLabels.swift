@@ -65,7 +65,6 @@ struct ThreeLabels: View {
                             .scaleEffect(isSecondsLongPressed ? 0.2 : 1.0)
                             .offset(x: isSecondsLongPressed ? 20 : 0.0, y: 0)
                             .animation(.secondsLongPressed.delay(0.2), value: isSecondsLongPressed)
-                            .onTapGesture { toggleBubbleDetail() }
                             .onLongPressGesture { showNotesList() }
                         
                         clearCircle //Min
@@ -83,7 +82,6 @@ struct ThreeLabels: View {
                             .scaleEffect(isSecondsLongPressed ? 0.2 : 1.0)
                             .offset(x: isSecondsLongPressed ? 10 : 0.0, y: 0)
                             .animation(.secondsLongPressed.delay(0.1), value: isSecondsLongPressed)
-                            .onTapGesture { toggleBubbleDetail() }
                         
                         SecondsLabel(bubble: bubble,
                                      isSecondsLongPressed: $isSecondsLongPressed)
@@ -101,10 +99,6 @@ struct ThreeLabels: View {
     }
     
     // MARK: - User Intents
-    private func toggleBubbleDetail() {
-        guard let bubble = bubble else { return }
-        viewModel.path = viewModel.path.isEmpty ? [bubble] : []
-    }
     
     func showNotesList() {
         UserFeedback.singleHaptic(.light)
