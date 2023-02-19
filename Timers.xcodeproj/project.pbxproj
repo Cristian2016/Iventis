@@ -96,6 +96,7 @@
 		1FB5D8D828E96CBD00DD522A /* StartDelayInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB5D8D728E96CBD00DD522A /* StartDelayInfoView.swift */; };
 		1FB5D8DA28E9BF0500DD522A /* GestureLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB5D8D928E9BF0500DD522A /* GestureLabel.swift */; };
 		1FB7D57C2862F0300085C2BE /* PlusSymbol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB7D57B2862F0300085C2BE /* PlusSymbol.swift */; };
+		1FBE775629A248F5005968EC /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FBE775529A248F5005968EC /* GradientView.swift */; };
 		1FC0D9C129828D23004779E0 /* ConfirmView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FC0D9C029828D23004779E0 /* ConfirmView.swift */; };
 		1FC70BB129807BAB007CD1E6 /* LayoutViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FC70BB029807BAB007CD1E6 /* LayoutViewModel.swift */; };
 		1FCF01B3287CBA74009DC95C /* DelayStartSymbol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FCF01B2287CBA74009DC95C /* DelayStartSymbol.swift */; };
@@ -233,6 +234,7 @@
 		1FB5D8D728E96CBD00DD522A /* StartDelayInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartDelayInfoView.swift; sourceTree = "<group>"; };
 		1FB5D8D928E9BF0500DD522A /* GestureLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GestureLabel.swift; sourceTree = "<group>"; };
 		1FB7D57B2862F0300085C2BE /* PlusSymbol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlusSymbol.swift; sourceTree = "<group>"; };
+		1FBE775529A248F5005968EC /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = SOURCE_ROOT; };
 		1FC0D9C029828D23004779E0 /* ConfirmView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfirmView.swift; sourceTree = "<group>"; };
 		1FC70BB029807BAB007CD1E6 /* LayoutViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutViewModel.swift; sourceTree = "<group>"; };
 		1FCF01B2287CBA74009DC95C /* DelayStartSymbol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DelayStartSymbol.swift; sourceTree = "<group>"; };
@@ -385,6 +387,7 @@
 		1F5F4A4728093FAD00AF3442 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				1FBE775529A248F5005968EC /* GradientView.swift */,
 				1FAD9B4129961FC000F49670 /* ThreeCircles.swift */,
 				1FE68FAD29A135C600D05EE6 /* SecondsCircle.swift */,
 				1FB2EA762997BD2F00752595 /* ThreeLabels.swift */,
@@ -678,6 +681,7 @@
 				1FA25B002986F51E007759EB /* ViewHierarchy.swift in Sources */,
 				1F477CA928EAB21900B4F965 /* AddStickyNoteQuickButton.swift in Sources */,
 				1F5987A5286B5F8900CDB54C /* PairSavedNote Properties.swift in Sources */,
+				1FBE775629A248F5005968EC /* GradientView.swift in Sources */,
 				1FA1F39E2981CFE6000A50F5 /* Persistence.swift in Sources */,
 				1F05B7C82989158E0022FD23 /* BorderlessLabel.swift in Sources */,
 				1FB5D8D628E8276D00DD522A /* StickyNoteListInfoView.swift in Sources */,
