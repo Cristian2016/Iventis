@@ -28,7 +28,7 @@ struct AddNoteButton: View {
                 } label: {
                     FusedLabel(content: .init(title: "Add Note",
                                               symbol: "text.alignleft",
-                                              size: .small,
+                                              size: .medium,
                                               color: color,
                                               isFilled: true)
                     )
