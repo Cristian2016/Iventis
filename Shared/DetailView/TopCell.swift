@@ -33,18 +33,22 @@ struct TopCell: View {
     // MARK: -
     var body: some View {
         if !session.isFault {
-            ZStack {
-                sessionRankView
-                Push(.bottomLeft) {
-                    VStack (alignment:.leading, spacing: dateDurationViewsSpacing) {
-                        dateView
-                        durationView.padding(2)
-                    }.padding(edgeInset)
+            HStack {
+                ZStack {
+                    sessionRankView
+                    Push(.bottomLeft) {
+                        VStack (alignment:.leading, spacing: dateDurationViewsSpacing) {
+                            dateView
+                            durationView.padding(2)
+                        }.padding(edgeInset)
+                    }
+                    .frame(height: topCellHeight)
+                    .background( backgroundView )
+                    if isSelected { selectionNeedle }
                 }
-                .frame(height: topCellHeight)
-                .background( backgroundView )
-                if isSelected { selectionNeedle }
+                Color.lightGray.frame(width:1, height: 100)
             }
+           
             .onReceive(NotificationCenter.default.publisher(for: .topCellTapped)) { output in
                 let cellRank = output.userInfo!["topCellTapped"] as! Int
                 isSelected = cellRank == Int(sessionRank)!
@@ -61,8 +65,8 @@ struct TopCell: View {
     private var sessionRankView: some View {
         Push(.topRight) {
             Text(sessionRank)
-                .foregroundColor(color)
-                .font(.system(size: 30))
+                .foregroundColor(.gray)
+                .font(.footnote)
                 .fontWeight(.medium)
                 .padding(EdgeInsets(top: 8, leading: 0, bottom: 0, trailing: 12))
         }
@@ -121,19 +125,13 @@ struct TopCell: View {
                         }
                     }
             }
-           
         }
     }
     
     private var backgroundView: some View {
-        ZStack {
-            RoundedRectangle(cornerRadius: roundedRectRadius)
-                .strokeBorder(color, lineWidth: strokeWidth, antialiased: true)
-            RoundedRectangle(cornerRadius: roundedRectRadius).fill(Color.clear)
-        }
-        .padding([.trailing, .leading], 2)
-        //makes sure that views with clear colors can also detect gestures
-        .contentShape(Rectangle())
+        RoundedRectangle(cornerRadius: roundedRectRadius).fill(Color.clear)
+            .padding([.trailing, .leading], 2)
+            .contentShape(Rectangle())
     }
     
     // MARK: -

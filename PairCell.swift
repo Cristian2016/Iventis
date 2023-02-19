@@ -116,6 +116,7 @@ struct PairCell: View {
             tapAction : { toggleStickyNoteVisibility() }
         }
     }
+    
     private var stickyNoteContent:some View {
         stickyNoteText
             .font(.system(size: 26))
@@ -143,12 +144,15 @@ struct PairCell: View {
     
     private var separatorLine:some View {
         Rectangle()
-            .fill(Color.label)
-            .frame(width: 30, height: 2)
+            .fill(Color.lightGray)
+            .frame(width: 30, height: 1)
     }
     
     private var pairNumberView:some View {
-        Text(String(pairNumber)).font(metrics.pairNumberFont)
+        Text(String(pairNumber))
+            .foregroundColor(.gray)
+            .font(.footnote)
+            .fontWeight(.medium)
     }
     
     //start time and date
