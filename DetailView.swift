@@ -34,7 +34,7 @@ struct DetailView: View {
     }
     
     var body: some View {
-        ZStack {
+        VStack {
             if sessions.isEmpty { NoSessionsAlertView() }
             else {
                 TopDetailView(rank).frame(height: topDetailHeight)
