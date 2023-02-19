@@ -236,8 +236,8 @@ extension BubbleCellCoordinator {
         var min = CGFloat(0)
         
         mutating func update(_ value:Float) {
-            min = value > 59 ? 1 : 0
-            hr = value > 3599 ?  1 : 0
+            min = value > 59 ? 1 : 0.001
+            hr = value > 3599 ?  1 : 0.001
         }
     }
 }
