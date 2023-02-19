@@ -61,7 +61,7 @@ struct TopCell: View {
         }
     }
     
-    // MARK: - Legoes
+    // MARK: - Legos
     private var sessionRankView: some View {
         Push(.topRight) {
             Text(sessionRank)
@@ -134,6 +134,28 @@ struct TopCell: View {
             .contentShape(Rectangle())
     }
     
+    private var bubbleRunningAlert: some View {
+        Button { } label: { Label { Text("Running").fontWeight(.semibold) } icon: { } }
+    .buttonStyle(.borderedProminent)
+    .foregroundColor(.white)
+    .tint(.green)
+    .font(.caption)
+    }
+    
+    private var selectionNeedle: some View {
+        VStack {
+            ZStack {
+                Rectangle()
+                    .fill(selectionIndicatorColor)
+                    .frame(width: 4, height: 35)
+                selectionIndicatorColor
+                    .frame(width: 20, height: 1)
+            }
+            
+            Spacer()
+        }
+    }
+    
     // MARK: -
     private func showSeconds() -> Bool {
         guard let duration = duration else { return false }
@@ -165,23 +187,6 @@ struct TopCell: View {
 //        if Int(sessionRank)! == sessionCount {
 //            self.isSelected = true
 //        }
-    }
-    
-    private var bubbleRunningAlert: some View {
-        Button { } label: { Label { Text("Running").fontWeight(.semibold) } icon: { } }
-    .buttonStyle(.borderedProminent)
-    .foregroundColor(.white)
-    .tint(.green)
-    .font(.caption)
-    }
-    
-    private var selectionNeedle: some View {
-        VStack {
-            Rectangle()
-                .fill(selectionIndicatorColor)
-                .frame(width: 4, height: 35)
-            Spacer()
-        }
     }
 }
 
