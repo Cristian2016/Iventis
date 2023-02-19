@@ -53,6 +53,7 @@ struct FusedLabel: View {
         }
         
         static let autoLockOff = Content(title: "Auto-Lock is OFF")
+        static let detailON = Content(title: "Detail is ON")
     }
 }
 

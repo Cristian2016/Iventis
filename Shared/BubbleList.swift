@@ -62,6 +62,10 @@ struct BubbleList: View {
                 .toolbarBackground(.ultraThinMaterial)
                 .toolbar {
                     ToolbarItemGroup(placement: .navigationBarLeading) {
+                        if secretary.showDetail_bRank != nil {
+                            FusedLabel(content: .detailON)
+                                .onTapGesture { secretary.showDetail_bRank = nil }
+                        }
                         AddNoteButton()
                     }
                     ToolbarItemGroup {
