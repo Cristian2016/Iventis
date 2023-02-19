@@ -13,7 +13,7 @@ struct TopDetailView:View {
     @EnvironmentObject private var viewModel:ViewModel
     @FetchRequest var sessions:FetchedResults<Session>
     //use entire screen width, but leave a little leading space
-    let trailingPadding = EdgeInsets(top: 0, leading: 3, bottom: 0, trailing: 3)
+//    let trailingPadding = EdgeInsets(top: 0, leading: 3, bottom: 0, trailing: 3)
     
     private let secretary = Secretary.shared
         
@@ -55,7 +55,7 @@ struct TopDetailView:View {
                 }
             }
         }
-        .padding(trailingPadding)
+        .padding(.init(top: 0, leading: -12, bottom: 0, trailing: -12))
     }
     
     // MARK: -
