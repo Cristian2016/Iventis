@@ -70,5 +70,9 @@ class Secretary {
         if addNoteButton_bRank != nil { addNoteButton_bRank = nil }
     }
     
-    @Published var scrollToTop = false
+    @Published var shouldScrollToTop = false
+    
+    func scrollToTop() {
+        if !shouldScrollToTop { shouldScrollToTop = true }
+    }
 }
