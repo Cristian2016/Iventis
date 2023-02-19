@@ -64,7 +64,7 @@ struct DetailView: View {
             }
             .toolbarBackground(.ultraThinMaterial)
             .toolbar {
-                ToolbarItemGroup(placement: .navigationBarLeading) {
+                ToolbarItemGroup {
                     if isAddTagButtonVisible { AddNoteButton() }
                 }
             }

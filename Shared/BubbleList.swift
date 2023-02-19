@@ -65,10 +65,8 @@ struct BubbleList: View {
                 .listStyle(.plain)
                 .toolbarBackground(.ultraThinMaterial)
                 .toolbar {
-                    ToolbarItemGroup(placement: .navigationBarLeading) {
-                        AddNoteButton()
-                    }
                     ToolbarItemGroup {
+                        AddNoteButton()
                         AutoLockButton()
                         PlusSymbol()
                     }
