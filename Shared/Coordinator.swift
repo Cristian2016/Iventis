@@ -18,25 +18,10 @@ extension BubbleCellCoordinator {
 
 class BubbleCellCoordinator {
     
-    @Published private(set) var components = Components(hr: "-1", min: "-1", sec: "-1", hundredths: "-1")
+    unowned private let bubble:Bubble
+    
+    @Published private(set) var components = Components("-1", "-1", "-1", "-1")
     @Published private(set) var opacity = Opacity()
-    
-    struct Components {
-        var hr:String
-        var min:String
-        var sec:String
-        var hundredths:String
-    }
-    
-    struct Opacity {
-        var hr = CGFloat(0)
-        var min = CGFloat(0)
-        
-        mutating func update(_ value:Float) {
-            min = value > 59 ? 1 : 0
-            hr = value > 3599 ?  1 : 0
-        }
-    }
     
     private func update(_ action:Action) {
         switch action {
@@ -118,7 +103,6 @@ class BubbleCellCoordinator {
     var cancellable = Set<AnyCancellable>()
     
     // MARK: -
-    unowned private let bubble:Bubble
     
     func updateComponents(_ moment:Moment) {
         DispatchQueue.global().async {
@@ -157,10 +141,10 @@ class BubbleCellCoordinator {
             let components = self.initialValue.timeComponentsAsStrings
             
             DispatchQueue.main.async {
-                self.components = Components(hr: components.hr,
-                                             min: components.min,
-                                             sec: components.sec,
-                                             hundredths: components.hundredths)
+                self.components = Components(components.hr,
+                                             components.min,
+                                             components.sec,
+                                             components.hundredths)
             }
         }
     }
@@ -185,11 +169,10 @@ class BubbleCellCoordinator {
         DispatchQueue.global().async {
             let components = self.initialValue.timeComponentsAsStrings
             
-            self.components = Components(hr: components.hr,
-                                         min: components.min,
-                                         sec: components.sec,
-                                         hundredths: components.hundredths
-            )
+            self.components = Components(components.hr,
+                                         components.min,
+                                         components.sec,
+                                         components.hundredths)
             self.opacity.update(self.initialValue)
         }
     }
@@ -205,10 +188,10 @@ class BubbleCellCoordinator {
                 let components = self.initialValue.timeComponentsAsStrings
                 
                 DispatchQueue.main.async {
-                    self.components = Components(hr: components.hr,
-                                                 min: components.min,
-                                                 sec: components.sec,
-                                                 hundredths: components.hundredths
+                    self.components = Components(components.hr,
+                                                 components.min,
+                                                 components.sec,
+                                                 components.hundredths
                     )
                     
                     self.opacity.update(self.initialValue)
@@ -232,5 +215,29 @@ extension BubbleCellCoordinator {
     enum Action {
         case start
         case pause
+    }
+    
+    struct Components {
+        var hr:String
+        var min:String
+        var sec:String
+        var hundredths:String
+        
+        init(_ hr:String, _ min:String, _ sec:String, _ hundredths:String) {
+            self.hr = hr
+            self.min = min
+            self.sec = sec
+            self.hundredths = hundredths
+        }
+    }
+    
+    struct Opacity {
+        var hr = CGFloat(0)
+        var min = CGFloat(0)
+        
+        mutating func update(_ value:Float) {
+            min = value > 59 ? 1 : 0
+            hr = value > 3599 ?  1 : 0
+        }
     }
 }
