@@ -26,22 +26,16 @@ struct BubbleCell: View {
     // MARK: - Body
     var body: some View {
         let _ = print("BubbleCell \(bubble.color ?? "nocolor") body")
-        VStack {
-            ZStack {
-                ThreeCircles(bubble: bubble, metrics: metrics)
-                ThreeLabels(metrics.timeComponentsFontSize,
-                            startDelayBubble,
-                            bubble)
-            }
-            .overlay { if bubble.hasCalendar && noNote { calendarSymbol }}
-            .overlay { stickyNote }
-            .overlay { CalendarEventCreatedConfirmation(rank: bubble.rank) } //1
-            .overlay { CalendarEventRemovedConfirmation(rank: bubble.rank) } //1
-            
-            if let rank = secretary.showDetail_bRank {
-                DetailView(Int(rank), bubble)
-            }
+        ZStack {
+            ThreeCircles(bubble: bubble, metrics: metrics)
+            ThreeLabels(metrics.timeComponentsFontSize,
+                        startDelayBubble,
+                        bubble)
         }
+        .overlay { if bubble.hasCalendar && noNote { calendarSymbol }}
+        .overlay { stickyNote }
+        .overlay { CalendarEventCreatedConfirmation(rank: bubble.rank) } //1
+        .overlay { CalendarEventRemovedConfirmation(rank: bubble.rank) } //1
         .listRowSeparator(.hidden)
         .swipeActions(edge: .leading, allowsFullSwipe: true) {
             toggleFavoriteButton
