@@ -4,6 +4,7 @@
 //
 //  Created by Cristian Lapusan on 01.02.2023.
 // Secretary knows shit on anybody! For example it knows how many pinned bubbles exist at any given time. It collects varous data from various parts of the App
+//1 scrolls top top in DetailView when user pulls down on the table
 
 import SwiftUI
 
@@ -74,5 +75,5 @@ class Secretary {
     
     func scrollToTop() {
         if !shouldScrollToTop { shouldScrollToTop = true }
-    }
+    } //1
 }
