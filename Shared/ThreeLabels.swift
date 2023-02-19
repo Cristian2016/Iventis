@@ -10,7 +10,7 @@ import MyPackage
 
 //hr min sec cents (4 labels in total actually)
 struct ThreeLabels: View {
-    let bubble:Bubble
+    var bubble:Bubble?
     let timeComponentsFontSize:CGFloat
     
     let circleScale = CGFloat(1.8)
@@ -29,75 +29,83 @@ struct ThreeLabels: View {
     
     private let sDelayBubble:StartDelayBubble
     
-    init(_ timeComponentsFontSize:CGFloat,
+    init?(_ timeComponentsFontSize:CGFloat,
          _ startDelayBubble:StartDelayBubble,
-         _ bubble:Bubble) {
+         _ bubble:Bubble?) {
+        
+        guard let bubble = bubble else { return nil }
         
         self.timeComponentsFontSize = timeComponentsFontSize
         self.sDelayBubble = startDelayBubble
         self.bubble = bubble
+                
+        if bubble.color == nil { return nil }
         
-        let components = self.bubble.coordinator.components
+        let components = bubble.coordinator.components
         hr = components.hr
         min = components.min
         hundredths = components.hundredths
     }
     
     var body: some View {
-        Rectangle().fill(.clear)
-            .aspectRatio(ratio, contentMode: .fit)
-            .overlay {
-                HStack {
-                    clearCircle //Hr
-                        .overlay {
-                            Rectangle().fill(.clear)
-                                .aspectRatio(1.2, contentMode: .fit)
-                                .overlay {
-                                    Text(hr).allowsHitTesting(false)
-                                        .font(.system(size: 400))
-                                        .lineLimit(1)
-                                        .minimumScaleFactor(0.1)
-                                }
-                        }
-                        .opacity(hrOpacity)
-                        .scaleEffect(isSecondsLongPressed ? 0.2 : 1.0)
-                        .offset(x: isSecondsLongPressed ? 20 : 0.0, y: 0)
-                        .animation(.secondsLongPressed.delay(0.2), value: isSecondsLongPressed)
-                        .onTapGesture { toggleBubbleDetail() }
-                        .onLongPressGesture { showNotesList() }
-                    
-                    clearCircle //Min
-                        .overlay {
-                            Rectangle().fill(.clear)
-                                .aspectRatio(1.2, contentMode: .fit)
-                                .overlay {
-                                    Text(min).allowsHitTesting(false)
-                                        .font(.system(size: 400))
-                                        .lineLimit(1)
-                                        .minimumScaleFactor(0.1)
-                                }
-                        }
-                        .opacity(minOpacity)
-                        .scaleEffect(isSecondsLongPressed ? 0.2 : 1.0)
-                        .offset(x: isSecondsLongPressed ? 10 : 0.0, y: 0)
-                        .animation(.secondsLongPressed.delay(0.1), value: isSecondsLongPressed)
-                        .onTapGesture { toggleBubbleDetail() }
-                    
-                    SecondsLabel(bubble: bubble,
-                                 isSecondsLongPressed: $isSecondsLongPressed)
-                    .overlay { if sDelayBubble.referenceDelay > 0 { SDButton(bubble.sdb) }}
+        if let bubble = bubble  {
+            Rectangle().fill(.clear)
+                .aspectRatio(ratio, contentMode: .fit)
+                .overlay {
+                    HStack {
+                        clearCircle //Hr
+                            .overlay {
+                                Rectangle().fill(.clear)
+                                    .aspectRatio(1.2, contentMode: .fit)
+                                    .overlay {
+                                        Text(hr).allowsHitTesting(false)
+                                            .font(.system(size: 400))
+                                            .lineLimit(1)
+                                            .minimumScaleFactor(0.1)
+                                    }
+                            }
+                            .opacity(hrOpacity)
+                            .scaleEffect(isSecondsLongPressed ? 0.2 : 1.0)
+                            .offset(x: isSecondsLongPressed ? 20 : 0.0, y: 0)
+                            .animation(.secondsLongPressed.delay(0.2), value: isSecondsLongPressed)
+                            .onTapGesture { toggleBubbleDetail() }
+                            .onLongPressGesture { showNotesList() }
+                        
+                        clearCircle //Min
+                            .overlay {
+                                Rectangle().fill(.clear)
+                                    .aspectRatio(1.2, contentMode: .fit)
+                                    .overlay {
+                                        Text(min).allowsHitTesting(false)
+                                            .font(.system(size: 400))
+                                            .lineLimit(1)
+                                            .minimumScaleFactor(0.1)
+                                    }
+                            }
+                            .opacity(minOpacity)
+                            .scaleEffect(isSecondsLongPressed ? 0.2 : 1.0)
+                            .offset(x: isSecondsLongPressed ? 10 : 0.0, y: 0)
+                            .animation(.secondsLongPressed.delay(0.1), value: isSecondsLongPressed)
+                            .onTapGesture { toggleBubbleDetail() }
+                        
+                        SecondsLabel(bubble: bubble,
+                                     isSecondsLongPressed: $isSecondsLongPressed)
+                        .overlay { if sDelayBubble.referenceDelay > 0 { SDButton(bubble.sdb) }}
+                    }
+                    .scaleEffect(x: hstackScale, y: hstackScale)
                 }
-                .scaleEffect(x: hstackScale, y: hstackScale)
-            }
-            .font(.system(size: timeComponentsFontSize))
-            .fontDesign(.rounded)
-            .foregroundColor(.white)
-            .onReceive(bubble.coordinator.$components) { min = $0.min }
-            .onReceive(bubble.coordinator.$components) { hr = $0.hr }
+                .font(.system(size: timeComponentsFontSize))
+                .fontDesign(.rounded)
+                .foregroundColor(.white)
+                .onReceive(bubble.coordinator.$components) { min = $0.min }
+                .onReceive(bubble.coordinator.$components) { hr = $0.hr }
+        }
+        
     }
     
     // MARK: - User Intents
     private func toggleBubbleDetail() {
+        guard let bubble = bubble else { return }
         viewModel.path = viewModel.path.isEmpty ? [bubble] : []
     }
     
@@ -110,6 +118,7 @@ struct ThreeLabels: View {
     // MARK: -
     
     /* 1 */private func userTappedHundredths() {
+        guard let bubble = bubble else { return }
         UserFeedback.singleHaptic(.heavy)
         viewModel.toggleBubbleStart(bubble)
     }
@@ -119,7 +128,10 @@ struct ThreeLabels: View {
     
     private var minOpacity:Double { (min > "0" || hr > "0") ? 1 : 0.0 }
     
-    private var isBubbleRunning:Bool { bubble.state == .running }
+    private var isBubbleRunning:Bool {
+        guard let bubble = bubble else { return false }
+        return bubble.state == .running
+    }
 }
 
 struct SecondsLabel: View {

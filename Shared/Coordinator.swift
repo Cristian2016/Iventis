@@ -118,7 +118,7 @@ class BubbleCellCoordinator {
     var cancellable = Set<AnyCancellable>()
     
     // MARK: -
-    private let bubble:Bubble
+    unowned private let bubble:Bubble
     
     func updateComponents(_ moment:Moment) {
         DispatchQueue.global().async {
