@@ -17,7 +17,8 @@ struct SecondsCircle: View {
     var body: some View {
         ZStack {
             Circle()
-                .fill(color)
+                .fill(color.gradient)
+                .rotationEffect(.degrees(45))
                 .gesture(tap)
                 .gesture(longPress)
                 
