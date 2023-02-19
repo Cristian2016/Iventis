@@ -45,7 +45,10 @@ struct BottomCell: View {
             }
         }
         .refreshable {
-            if !Secretary.shared.scrollToTop { Secretary.shared.scrollToTop = true }
+            if !Secretary.shared.scrollToTop {
+                Secretary.shared.scrollToTop = true
+                print("scroll to top requested")
+            }
         }
     }
 }
