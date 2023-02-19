@@ -60,11 +60,15 @@ struct BubbleList: View {
                 .scrollIndicators(.hidden)
                 .listStyle(.plain)
                 .toolbarBackground(.ultraThinMaterial)
-                .toolbar { ToolbarItemGroup {
-                    AddNoteButton()
-                    AutoLockButton()
-                    PlusSymbol()
-                }}
+                .toolbar {
+                    ToolbarItemGroup(placement: .navigationBarLeading) {
+                        AddNoteButton()
+                    }
+                    ToolbarItemGroup {
+                        AutoLockButton()
+                        PlusSymbol()
+                    }
+                }
                 .background { RefresherView() } //11
                 .onAppear {}
                 //                    .refreshable {
