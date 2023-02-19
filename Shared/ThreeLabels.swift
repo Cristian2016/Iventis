@@ -20,8 +20,6 @@ struct ThreeLabels: View {
     @State private var min:String
     @State private var hundredths:String
     
-    @State private var isSecondsLongPressed:Bool = false
-    
     @GestureState var isDetectingLongPress = false
     
     private let sDelayBubble:StartDelayBubble
@@ -62,9 +60,6 @@ struct ThreeLabels: View {
                                     }
                             }
                             .opacity(hrOpacity)
-                            .scaleEffect(isSecondsLongPressed ? 0.2 : 1.0)
-                            .offset(x: isSecondsLongPressed ? 20 : 0.0, y: 0)
-                            .animation(.secondsLongPressed.delay(0.2), value: isSecondsLongPressed)
                         
                         clearCircle //Min
                             .overlay {
@@ -78,12 +73,7 @@ struct ThreeLabels: View {
                                     }
                             }
                             .opacity(minOpacity)
-                            .scaleEffect(isSecondsLongPressed ? 0.2 : 1.0)
-                            .offset(x: isSecondsLongPressed ? 10 : 0.0, y: 0)
-                            .animation(.secondsLongPressed.delay(0.1), value: isSecondsLongPressed)
-                        
-                        SecondsLabel(bubble: bubble,
-                                     isSecondsLongPressed: $isSecondsLongPressed)
+                        SecondsLabel(bubble: bubble)
                         .overlay { if sDelayBubble.referenceDelay > 0 { SDButton(bubble.sdb) }}
                     }
                     .scaleEffect(x: metrics.hstackScale, y: metrics.hstackScale)
@@ -119,9 +109,7 @@ struct ThreeLabels: View {
 struct SecondsLabel: View {
     let bubble:Bubble
     @EnvironmentObject private var viewModel:ViewModel
-    
-    @Binding var isSecondsLongPressed:Bool
-    
+        
     @State private var sec:String
     
     var body: some View {
@@ -130,50 +118,18 @@ struct SecondsLabel: View {
                 Rectangle().fill(.clear)
                     .aspectRatio(1.2, contentMode: .fit)
                     .overlay {
-                        Text(sec)
+                        Text(sec).allowsHitTesting(false)
                             .font(.system(size: 400))
                             .lineLimit(1)
                             .minimumScaleFactor(0.1)
                     }
             }
-            .scaleEffect(isSecondsLongPressed ? 0.2 : 1.0)
-            .animation(.secondsLongPressed, value: isSecondsLongPressed)
-            .gesture(tap)
-            .gesture(longPress)
             .onReceive(bubble.coordinator.$components) { sec = $0.sec }
     }
     
-    init(bubble: Bubble, isSecondsLongPressed: Binding<Bool>) {
+    init(bubble: Bubble) {
         self.bubble = bubble
-        _isSecondsLongPressed = isSecondsLongPressed
         self.sec = bubble.coordinator.components.sec
-    }
-    
-    // MARK: - Gestures
-    private var tap:some Gesture { TapGesture().onEnded { _ in userTappedSeconds() }}
-    
-    private var longPress: some Gesture {
-        LongPressGesture(minimumDuration: 0.3).onEnded { _ in endSession() }
-    }
-    
-    // MARK: -
-    private func userTappedSeconds() {
-        //feedback
-        UserFeedback.singleHaptic(.heavy)
-        
-        //user intent model
-        viewModel.toggleBubbleStart(bubble)
-    }
-    
-    private func endSession() {
-        isSecondsLongPressed = true
-        delayExecution(.now() + 0.25) { isSecondsLongPressed = false }
-        
-        //feedback
-        UserFeedback.doubleHaptic(.heavy)
-        
-        //user intent model
-        viewModel.endSession(bubble)
     }
 }
 
