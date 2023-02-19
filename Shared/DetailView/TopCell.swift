@@ -147,6 +147,7 @@ struct TopCell: View {
             ZStack {
                 Image(systemName: "arrowtriangle.down.fill")
                     .foregroundColor(.red)
+                    .font(.system(size: 30))
                 Divider()
                     .frame(width: 40)
             }

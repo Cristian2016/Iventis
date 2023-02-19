@@ -12,6 +12,7 @@ import MyPackage
 struct TopDetailView:View {
     @EnvironmentObject private var viewModel:ViewModel
     @FetchRequest var sessions:FetchedResults<Session>
+    @Environment(\.colorScheme) var colorScheme
     
     private let secretary = Secretary.shared
         
@@ -32,29 +33,38 @@ struct TopDetailView:View {
             Color.background
                 .padding([.leading, .trailing], -100)
                 .shadow(color: .black.opacity(0.1), radius: 2, y: 3)
-            ScrollViewReader { proxy in
-                ScrollView(.horizontal, showsIndicators: false) {
-                    LazyHStack {
-                        ForEach (sessions) { session in
-                            let sessionRank = sessionRank(of: session)
-                            TopCell(session, sessions.count, sessionRank)
-                                .id(sessionRank)
-                                .onTapGesture {
-                                    UserFeedback.singleHaptic(.medium)
-                                    postTopCellTappedNotification(for: sessionRank)
-                                    //use the same rank info you are sending to scroll self in the center
-                                    withAnimation { proxy.scrollTo(sessionRank, anchor: .center) }
-                                }
-                                .onLongPressGesture {
-                                    UserFeedback.singleHaptic(.heavy)
-                                    secretary.sessionToDelete = (session, sessionRank)
-                                }
-                                .onReceive(NotificationCenter.default.publisher(for: .selectedTab)) {
-                                    let tab = String($0.userInfo!["selectedTab"] as! Int - 1)
-                                    withAnimation { proxy.scrollTo(tab, anchor: .trailing) }
-                                }
+            VStack {
+                ScrollViewReader { proxy in
+                    ScrollView(.horizontal, showsIndicators: false) {
+                        LazyHStack {
+                            ForEach (sessions) { session in
+                                let sessionRank = sessionRank(of: session)
+                                TopCell(session, sessions.count, sessionRank)
+                                    .id(sessionRank)
+                                    .onTapGesture {
+                                        UserFeedback.singleHaptic(.medium)
+                                        postTopCellTappedNotification(for: sessionRank)
+                                        //use the same rank info you are sending to scroll self in the center
+                                        withAnimation { proxy.scrollTo(sessionRank, anchor: .center) }
+                                    }
+                                    .onLongPressGesture {
+                                        UserFeedback.singleHaptic(.heavy)
+                                        secretary.sessionToDelete = (session, sessionRank)
+                                    }
+                                    .onReceive(NotificationCenter.default.publisher(for: .selectedTab)) {
+                                        let tab = String($0.userInfo!["selectedTab"] as! Int - 1)
+                                        withAnimation { proxy.scrollTo(tab, anchor: .trailing) }
+                                    }
+                            }
                         }
                     }
+                }
+                
+                if colorScheme == .dark {
+                    Color.lightGray
+                        .frame(height: 1)
+                        .frame(maxWidth: .infinity)
+                        .padding([.leading, .trailing], -100)
                 }
             }
             .padding(.init(top: 0, leading: -17, bottom: 0, trailing: -17))
