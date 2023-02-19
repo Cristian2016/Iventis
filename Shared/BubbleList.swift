@@ -59,7 +59,7 @@ struct BubbleList: View {
                         DetailView(Int(rank), viewModel.bubble(for: Int(rank))!)
                     }
                     
-                    if !section.id { bottomOverscoll }
+                    if !section.id && secretary.showDetail_bRank == nil { bottomOverscoll }
                 }
                 .scrollIndicators(.hidden)
                 .listStyle(.plain)
