@@ -144,8 +144,12 @@ struct TopCell: View {
     
     private var selectionNeedle: some View {
         VStack {
-            Image(systemName: "arrowtriangle.down.fill")
-                .foregroundColor(selectionIndicatorColor)
+            ZStack {
+                Image(systemName: "arrowtriangle.down.fill")
+                    .foregroundColor(.red)
+                Divider()
+                    .frame(width: 40)
+            }
             Spacer()
         }
 //        VStack {
