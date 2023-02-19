@@ -17,7 +17,9 @@ struct DetailView: View {
     
     @EnvironmentObject private var viewModel:ViewModel
     private let secretary = Secretary.shared
-        
+    
+    @State private var scrollToTop = false //2
+    
     let topDetailHeight = CGFloat(140)
     
     init(_ showDetail_bRank:Int?, _ bubble:Bubble) {
@@ -34,14 +36,34 @@ struct DetailView: View {
     }
     
     var body: some View {
-        VStack {
-            if sessions.isEmpty { NoSessionsAlertView() }
-            else {
-                TopDetailView(rank).frame(height: topDetailHeight)
-                    .listRowSeparator(.hidden)
-                BottomDetailView(rank)
-                    .frame(height: 600)
-                    .listRowSeparator(.hidden)
+        ZStack {
+            ScrollViewReader { proxy in
+                List {
+                    BubbleCell(bubble)
+                        .id(1)
+                    if sessions.isEmpty { NoSessionsAlertView() }
+                    else {
+                        TopDetailView(rank).frame(height: topDetailHeight)
+                            .listRowSeparator(.hidden)
+                        BottomDetailView(rank)
+                            .frame(height: 600)
+                            .listRowSeparator(.hidden)
+                    }
+                }
+                .listStyle(.plain)
+                .scrollIndicators(.visible, axes: .vertical) //1
+                .onChange(of: scrollToTop) {
+                    if $0 {
+                        withAnimation { proxy.scrollTo(1) }
+                        scrollToTop = false
+                    }
+                } //2
+            }
+            .toolbarBackground(.ultraThinMaterial)
+            .toolbar {
+                ToolbarItemGroup {
+                    if isAddTagButtonVisible { AddNoteButton() }
+                }
             }
         }
     }

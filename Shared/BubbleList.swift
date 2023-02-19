@@ -55,21 +55,16 @@ struct BubbleList: View {
                         ShowAllBubblesButton().listRowSeparator(.hidden)
                     }
                     
-                    if let rank = secretary.showDetail_bRank {
-                        DetailView(Int(rank), viewModel.bubble(for: Int(rank))!)
-                    }
-                    
-                    if !section.id && secretary.showDetail_bRank == nil { bottomOverscoll }
+                    if !section.id { bottomOverscoll }
+                }
+                .navigationDestination(for: Bubble.self) { bubble in
+                    DetailView(Int(bubble.rank), bubble)
                 }
                 .scrollIndicators(.hidden)
                 .listStyle(.plain)
                 .toolbarBackground(.ultraThinMaterial)
                 .toolbar {
                     ToolbarItemGroup(placement: .navigationBarLeading) {
-                        if secretary.showDetail_bRank != nil {
-                            FusedLabel(content: .detailON)
-                                .onTapGesture { secretary.showDetail_bRank = nil }
-                        }
                         AddNoteButton()
                     }
                     ToolbarItemGroup {
