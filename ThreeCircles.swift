@@ -52,8 +52,7 @@ struct ThreeCircles: View {
     
     // MARK: - User Intents
     private func toggleBubbleDetail() {
-        print(#function)
-        viewModel.path = viewModel.path.isEmpty ? [bubble] : []
+        Secretary.shared.toggleDetail(bubble.rank)
     }
     
     func showNotesList() {

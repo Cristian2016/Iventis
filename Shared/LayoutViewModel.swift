@@ -17,7 +17,6 @@ class LayoutViewModel: ObservableObject {
     }} //1
     
    var bubbleCellHeight:CGFloat! {didSet{
-    print("bubblecellheight \(bubbleCellHeight)")
 }}
     
     @Published var deleteActionViewOffset:CGFloat?

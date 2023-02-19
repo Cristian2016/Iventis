@@ -71,9 +71,7 @@ class ViewModel: ObservableObject {
                 newBubble.note_ = note
                 newBubble.isNoteHidden = false
             }
-            
-            let info = ["rank" : newBubble.rank]
-                        
+                                    
             try? context.save()
         }
     }
