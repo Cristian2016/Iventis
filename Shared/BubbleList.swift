@@ -55,6 +55,10 @@ struct BubbleList: View {
                         ShowAllBubblesButton().listRowSeparator(.hidden)
                     }
                     
+                    if let rank = secretary.showDetail_bRank {
+                        DetailView(Int(rank), viewModel.bubble(for: Int(rank))!)
+                    }
+                    
                     if !section.id { bottomOverscoll }
                 }
                 .scrollIndicators(.hidden)
