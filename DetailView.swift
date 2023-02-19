@@ -37,7 +37,9 @@ struct DetailView: View {
         ZStack {
             ScrollViewReader { proxy in
                 List {
-                    BubbleCell(bubble).id(1)
+                    BubbleCell(bubble)
+                        .id(1)
+                        .offset(y: -6)
                     if sessions.isEmpty { NoSessionsAlertView() }
                     else {
                         TopDetailView(rank)
