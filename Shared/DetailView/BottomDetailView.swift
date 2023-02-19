@@ -34,6 +34,7 @@ struct BottomDetailView: View {
                 BottomCell($0).tag(position(of:$0))
             }
         }
+        .padding(.init(top: 0, leading: -12, bottom: 0, trailing: -12))
         .tabViewStyle(.page(indexDisplayMode: .never))
         .onReceive(NotificationCenter.default.publisher(for: .topCellTapped)) {
             let row = $0.userInfo!["topCellTapped"] as! Int

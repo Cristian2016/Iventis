@@ -44,5 +44,8 @@ struct BottomCell: View {
                 Spacer()
             }
         }
+        .refreshable {
+            if !Secretary.shared.scrollToTop { Secretary.shared.scrollToTop = true }
+        }
     }
 }

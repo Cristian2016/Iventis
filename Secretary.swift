@@ -69,4 +69,6 @@ class Secretary {
     @objc private func handleFiveSecondsTimer() {
         if addNoteButton_bRank != nil { addNoteButton_bRank = nil }
     }
+    
+    @Published var scrollToTop = false
 }
