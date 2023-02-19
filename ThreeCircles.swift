@@ -33,9 +33,11 @@ struct ThreeCircles: View {
                         /* Hr */ colorCircle
                             .opacity(hrOpacity)
                             .onTapGesture { toggleBubbleDetail() }
+                            .onLongPressGesture { showNotesList() }
                         /* Min */ colorCircle
                             .opacity(minOpacity)
                             .onTapGesture { toggleBubbleDetail() }
+                            .onLongPressGesture { showNotesList() }
                         /* Sec */ SecondsCircle(bubble: bubble, color: color, scale: metrics.circleScale)
                     }
                     .scaleEffect(x: metrics.hstackScale, y: metrics.hstackScale)
@@ -52,6 +54,12 @@ struct ThreeCircles: View {
     private func toggleBubbleDetail() {
         print(#function)
         viewModel.path = viewModel.path.isEmpty ? [bubble] : []
+    }
+    
+    func showNotesList() {
+        UserFeedback.singleHaptic(.light)
+        viewModel.notesForBubble.send(bubble)
+        PersistenceController.shared.save()
     }
 }
 

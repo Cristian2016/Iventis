@@ -65,7 +65,6 @@ struct ThreeLabels: View {
                             .scaleEffect(isSecondsLongPressed ? 0.2 : 1.0)
                             .offset(x: isSecondsLongPressed ? 20 : 0.0, y: 0)
                             .animation(.secondsLongPressed.delay(0.2), value: isSecondsLongPressed)
-                            .onLongPressGesture { showNotesList() }
                         
                         clearCircle //Min
                             .overlay {
@@ -96,14 +95,6 @@ struct ThreeLabels: View {
                 .onReceive(bubble.coordinator.$components) { hr = $0.hr }
         }
         
-    }
-    
-    // MARK: - User Intents
-    
-    func showNotesList() {
-        UserFeedback.singleHaptic(.light)
-        viewModel.notesForBubble.send(bubble)
-        PersistenceController.shared.save()
     }
     
     // MARK: -
