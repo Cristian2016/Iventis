@@ -12,18 +12,15 @@ import MyPackage
 struct DetailView: View {
     let rank:Int?
     let bubble:Bubble
-    let metrics:BubbleCell.Metrics
     @StateObject var tabWrapper = SelectedTabWrapper()
     @FetchRequest var sessions:FetchedResults<Session>
     
     @EnvironmentObject private var viewModel:ViewModel
     private let secretary = Secretary.shared
-    
-    @State private var scrollToTop = false //2
-    
+        
     let topDetailHeight = CGFloat(140)
     
-    init(_ showDetail_bRank:Int?, _ bubble:Bubble, _ metrics:BubbleCell.Metrics) {
+    init(_ showDetail_bRank:Int?, _ bubble:Bubble) {
         let _ = print("DetailView body")
         
         let predicate:NSPredicate?
@@ -34,38 +31,17 @@ struct DetailView: View {
         _sessions = FetchRequest(entity: Session.entity(), sortDescriptors: [descriptor], predicate: predicate, animation: .easeInOut)
         self.rank = showDetail_bRank
         self.bubble = bubble
-        self.metrics = metrics
     }
     
     var body: some View {
         ZStack {
-            ScrollViewReader { proxy in
-                List {
-                    BubbleCell(bubble)
-                        .id(1)
-                    if sessions.isEmpty { NoSessionsAlertView() }
-                    else {
-                        TopDetailView(rank).frame(height: topDetailHeight)
-                            .listRowSeparator(.hidden)
-                        BottomDetailView(rank)
-                            .frame(height: 600)
-                            .listRowSeparator(.hidden)
-                    }
-                }
-                .listStyle(.plain)
-                .scrollIndicators(.visible, axes: .vertical) //1
-                .onChange(of: scrollToTop) {
-                    if $0 {
-                        withAnimation { proxy.scrollTo(1) }
-                        scrollToTop = false
-                    }
-                } //2
-            }
-            .toolbarBackground(.ultraThinMaterial)
-            .toolbar {
-                ToolbarItemGroup {
-                    if isAddTagButtonVisible { AddNoteButton() }
-                }
+            if sessions.isEmpty { NoSessionsAlertView() }
+            else {
+                TopDetailView(rank).frame(height: topDetailHeight)
+                    .listRowSeparator(.hidden)
+                BottomDetailView(rank)
+                    .frame(height: 600)
+                    .listRowSeparator(.hidden)
             }
         }
     }

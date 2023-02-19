@@ -37,6 +37,10 @@ struct BubbleCell: View {
             .overlay { stickyNote }
             .overlay { CalendarEventCreatedConfirmation(rank: bubble.rank) } //1
             .overlay { CalendarEventRemovedConfirmation(rank: bubble.rank) } //1
+            
+            if let rank = secretary.showDetail_bRank {
+                DetailView(Int(rank), bubble)
+            }
         }
         .listRowSeparator(.hidden)
         .swipeActions(edge: .leading, allowsFullSwipe: true) {
