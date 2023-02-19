@@ -18,7 +18,6 @@ struct Note_InfoView: View {
                 Text("\(Image(systemName: "square.and.arrow.down")) Save Note")
                 
                 VStack (alignment: .leading) {
-//                    Text("Tap \(Image(systemName: "plus.square")) or")
                     Text("Tap Outside Table")
                 }
                 .foregroundColor(.lightGray)

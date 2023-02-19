@@ -136,10 +136,10 @@ struct TopCell: View {
     
     private var bubbleRunningAlert: some View {
         Button { } label: { Label { Text("Running").fontWeight(.semibold) } icon: { } }
-    .buttonStyle(.borderedProminent)
-    .foregroundColor(.white)
-    .tint(.green)
-    .font(.caption)
+            .buttonStyle(.borderedProminent)
+            .foregroundColor(.white)
+            .tint(.green)
+            .font(.caption)
     }
     
     private var selectionNeedle: some View {
