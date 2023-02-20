@@ -10,8 +10,8 @@ import MyPackage
 
 ///it's the small bubble cell in the PairCell of BottomDetaiulView that only shows up when bubble is running and detailMode is active
 struct PairBubbleCell: View {
-            
-    let bubble:Bubble
+    let bubble:Bubble //dependecy
+    
     let metrics:BubbleCell.Metrics
     
     var body: some View {
@@ -20,9 +20,6 @@ struct PairBubbleCell: View {
            
         }
     }
-    
-    let edge = CGFloat(130)
-    let ratio = CGFloat(8.25/3)
     
     // MARK: - LEGOS
     var background: some View {
