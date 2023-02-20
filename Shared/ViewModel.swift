@@ -9,6 +9,7 @@
 //2 fetches bubbles using a backgroundContext but I don't know how to use it afterwards
 //3 notifies PairBubbleCellCoordinator that detailview is visible or not
 //4 the reason for the 0.005 slight delay is to allow PairBubbleCellCoordinator initialize first otherwise it will not receive any notifications, duh :))
+//5 PairBubbleCellCoordinator is interested in knowing when DetailView is visible or hidden, cause it needs to resume or pause work respectively
 
 import Foundation
 import SwiftUI
@@ -30,7 +31,7 @@ class ViewModel: ObservableObject {
                                                 userInfo: info) //3
             } //4
         }
-    }
+    } //5
     
     // MARK: - Alerts
     @Published var path = [Bubble]() {didSet{ notifyPath() }}
