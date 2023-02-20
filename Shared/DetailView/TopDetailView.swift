@@ -15,6 +15,7 @@ struct TopDetailView:View {
     @Environment(\.colorScheme) var colorScheme
     
     private let secretary = Secretary.shared
+    private static var publisher = NotificationCenter.default.publisher(for: .selectedTab)
         
     init(_ rank:Int?) {
         let predicate:NSPredicate?
@@ -50,7 +51,7 @@ struct TopDetailView:View {
                                     UserFeedback.singleHaptic(.heavy)
                                     secretary.sessionToDelete = (session, sessionRank)
                                 }
-                                .onReceive(NotificationCenter.default.publisher(for: .selectedTab)) {
+                                .onReceive(TopDetailView.publisher) {
                                     let tab = String($0.userInfo!["selectedTab"] as! Int - 1)
                                     withAnimation { proxy.scrollTo(tab, anchor: .trailing) }
                                 }
