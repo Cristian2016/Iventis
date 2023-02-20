@@ -84,7 +84,11 @@ class PairBubbleCellCoordinator {
                         publisher
                             .sink { [weak self] _ in self?.update() }
                             .store(in: &cancellable)
-                    case .pause, .deleteCurrentSession, .endSession, .reset:
+                    case .pause, .deleteCurrentSession, .endSession:
+                        components = Components("0", "0", "0")
+                        cancellable = []
+                
+                    case .reset:
                         components = Components("0", "0", "0")
                         cancellable = []
                 }

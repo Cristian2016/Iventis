@@ -146,7 +146,7 @@ class ViewModel: ObservableObject {
         try? viewContext.save()
         
         bubble.coordinator.updateComponents(.reset)
-//        bubble.pairBubbleCellCoordinator.update(.pause)
+        bubble.pairBubbleCellCoordinator.update(.user(.reset))
     }
     
     func togglePin(_ bubble:Bubble) {
@@ -294,7 +294,7 @@ class ViewModel: ObservableObject {
         if bubble.state == .brandNew { return }
         
         bubble.coordinator.updateComponents(.endSession)
-//        bubble.pairBubbleCellCoordinator.update(.pause)
+        bubble.pairBubbleCellCoordinator.update(.user(.endSession))
                 
         //reset bubble clock
         bubble.currentClock = bubble.initialClock
