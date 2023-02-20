@@ -83,8 +83,8 @@ class PairBubbleCellCoordinator {
             case .user(let action) :
                 switch action {
                     case .start:
-                        update()
                         refresh = false
+                        update()
                     case .pause, .deleteCurrentSession, .endSession, .reset:
                         cancellable = []
                 }
