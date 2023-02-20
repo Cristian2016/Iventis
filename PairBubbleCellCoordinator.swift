@@ -5,6 +5,7 @@
 //  Created by Cristian Lapusan on 20.02.2023.
 //1 if cancellable is set to emty set, it will stop updating
 //2 unowned because Coordinator must always have a bubble. If bubble gets deinit, Coordinator deinits as well
+//5 if app is back onscreen it must refresh the PairBubbleCell [refresh = true]
 
 import Combine
 import Foundation
@@ -120,10 +121,11 @@ class PairBubbleCellCoordinator {
     }
     
     private func observe_AppActive() {
-        NotificationCenter.default.addObserver(forName: .appActive, object: nil, queue: nil) { _ in
+        let center = NotificationCenter.default
+        center.addObserver(forName: .appActive, object: nil, queue: nil) { _ in
             self.refresh = true
         }
-    }
+    } //5
     
     private lazy var publisher =
     NotificationCenter.Publisher(center: .default, name: .bubbleTimerSignal)
