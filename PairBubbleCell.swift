@@ -40,6 +40,8 @@ struct PairBubbleCell: View {
             .background {
                 RoundedRectangle(cornerRadius: 30)
                     .fill(Color.label)
+                    .padding(-14)
+                    .padding([.leading, .trailing], -4)
             }
     }
     
