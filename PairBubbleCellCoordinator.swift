@@ -4,12 +4,13 @@
 //
 //  Created by Cristian Lapusan on 20.02.2023.
 //1 if cancellable is set to emty set, it will stop updating
+//2 unowned because Coordinator must always have a bubble. If bubble gets deinit, Coordinator deinits as well
 
 import Combine
 import Foundation
 
 class PairBubbleCellCoordinator {
-    unowned private let bubble:Bubble
+    unowned private let bubble:Bubble //2
     
     @Published private(set) var components = Components("-1", "-1", "-1")
     
