@@ -99,9 +99,6 @@ class ViewModel: ObservableObject {
     func deleteSession(_ session:Session) {
         guard let bubble = session.bubble else { fatalError() }
         if bubble.lastSession == session {
-            bubble.syncSmallBubbleCell = false
-            
-            //reset bubble clock
             bubble.currentClock = bubble.initialClock
             bubble.coordinator.updateComponents(.deleteLastSession)
         }
@@ -163,9 +160,7 @@ class ViewModel: ObservableObject {
                 
                 bubble.addToSessions(newSession)
                 newSession.addToPairs(newPair)
-                
-                if !path.isEmpty { bubble.syncSmallBubbleCell = true }
-                
+                                
                 //1 both
                 secretary.addNoteButton_bRank = nil //clear first
                 secretary.addNoteButton_bRank = Int(bubble.rank)
@@ -177,9 +172,7 @@ class ViewModel: ObservableObject {
                 let newPair = Pair(context: PersistenceController.shared.viewContext)
                 newPair.start = Date().addingTimeInterval(startDelayCompensation)
                 bubble.lastSession?.addToPairs(newPair)
-                
-                if !path.isEmpty { bubble.syncSmallBubbleCell = true }
-                
+                                
                 //1 both
                 secretary.addNoteButton_bRank = nil //clear first
                 secretary.addNoteButton_bRank = Int(bubble.rank)
@@ -189,9 +182,7 @@ class ViewModel: ObservableObject {
             case .running: /* changes to .paused */
                 let currentPair = bubble.lastPair
                 currentPair?.pause = Date()
-                
-                if bubble.syncSmallBubbleCell { bubble.syncSmallBubbleCell = false }
-                
+                                
                 //⚠️ closure runs on the main queue. whatever you want the user to see put in that closure otherwise it will fail to update!!!!
                 currentPair?.computeDuration(.atPause) {
                     //set bubble properties
@@ -285,9 +276,7 @@ class ViewModel: ObservableObject {
         if bubble.state == .brandNew { return }
         
         bubble.coordinator.updateComponents(.endSession)
-        
-        bubble.syncSmallBubbleCell = false
-        
+                
         //reset bubble clock
         bubble.currentClock = bubble.initialClock
                         
@@ -321,14 +310,6 @@ class ViewModel: ObservableObject {
         }
         
         PersistenceController.shared.save()
-    }
-    
-    func userTogglesDetail(_ rank:Int?) {
-        //identify bubble using rank
-        //ask bubble to start/stop updating smallBubbleCellTimeComponents
-        guard
-            let bubble = bubble(for: rank) else { return }
-        bubble.syncSmallBubbleCell = rank != nil
     }
     
     // MARK: - Helpers
