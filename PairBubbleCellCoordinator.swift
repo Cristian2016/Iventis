@@ -27,6 +27,7 @@ class PairBubbleCellCoordinator {
     }
     
     private func update() {
+        print(#function)
         guard let lastPairStart = bubble.lastPair?.start else { return }
         
         DispatchQueue.global().async {
@@ -41,7 +42,6 @@ class PairBubbleCellCoordinator {
             if secValue == 0 || self.refresh {
                 let giveMeAName = intValue/60%60
                 let minValue = String(giveMeAName)
-                
                 
                 //send min
                 DispatchQueue.main.async { self.components.min = minValue }
@@ -84,8 +84,11 @@ class PairBubbleCellCoordinator {
                 switch action {
                     case .start:
                         refresh = false
-                        update()
+                        publisher
+                            .sink { [weak self] _ in self?.update() }
+                            .store(in: &cancellable)
                     case .pause, .deleteCurrentSession, .endSession, .reset:
+                        components = Components("-1", "-1", "-1")
                         cancellable = []
                 }
         }
