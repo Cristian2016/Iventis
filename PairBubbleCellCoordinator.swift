@@ -28,6 +28,7 @@ class PairBubbleCellCoordinator {
     
     private func update() {
         guard let lastPairStart = bubble.lastPair?.start else { return }
+        print(#function)
         
         DispatchQueue.global().async {
             var Δ = Float(Date().timeIntervalSince(lastPairStart))
@@ -82,7 +83,9 @@ class PairBubbleCellCoordinator {
                     case .start:
                         refresh = false
                         publisher
-                            .sink { [weak self] _ in self?.update() }
+                            .sink { [weak self] _ in
+                                self?.update()
+                            }
                             .store(in: &cancellable)
                     case .pause, .deleteCurrentSession, .endSession:
                         components = Components("0", "0", "0")
