@@ -72,35 +72,26 @@ extension PairBubbleCell {
                     HStack {
                         clearCircle
                             .overlay {
-                                Rectangle().fill(.clear)
-                                    .aspectRatio(1.2, contentMode: .fit)
+                                clearRectangle
                                     .overlay {
-                                        Text(hr).allowsHitTesting(false)
-                                            .font(.system(size: 400))
-                                            .lineLimit(1)
-                                            .minimumScaleFactor(0.1)
+                                        Text(hr)
+                                            .modifier(ComponentsTextStyle())
                                     }
                             }
                         clearCircle
                             .overlay {
-                                Rectangle().fill(.clear)
-                                    .aspectRatio(1.2, contentMode: .fit)
+                                clearRectangle
                                     .overlay {
-                                        Text(min).allowsHitTesting(false)
-                                            .font(.system(size: 400))
-                                            .lineLimit(1)
-                                            .minimumScaleFactor(0.1)
+                                        Text(min)
+                                            .modifier(ComponentsTextStyle())
                                     }
                             }
                         clearCircle
                             .overlay {
-                                Rectangle().fill(.clear)
-                                    .aspectRatio(1.2, contentMode: .fit)
+                                clearRectangle
                                     .overlay {
-                                        Text(sec).allowsHitTesting(false)
-                                            .font(.system(size: 400))
-                                            .lineLimit(1)
-                                            .minimumScaleFactor(0.1)
+                                        Text(sec)
+                                            .modifier(ComponentsTextStyle())
                                     }
                             }
                     }
@@ -113,6 +104,11 @@ extension PairBubbleCell {
             Circle()
                 .fill(.clear)
                 .scaleEffect(x: metrics.circleScale, y: metrics.circleScale)
+        }
+        
+        private var clearRectangle:some View {
+            Rectangle().fill(.clear)
+                .aspectRatio(1.2, contentMode: .fit)
         }
         
         // MARK: -
@@ -131,5 +127,15 @@ extension PairBubbleCell {
             min = components.min
             sec = components.sec
         }
+    }
+}
+
+struct ComponentsTextStyle: ViewModifier {
+    func body(content: Content) -> some View {
+        content
+            .allowsHitTesting(false)
+                .font(.system(size: 400))
+                .lineLimit(1)
+                .minimumScaleFactor(0.1)
     }
 }
