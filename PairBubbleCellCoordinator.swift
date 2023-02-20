@@ -27,7 +27,7 @@ class PairBubbleCellCoordinator {
     
     private func update() {
         guard let lastPairStart = bubble.lastPair?.start else { return }
-
+        
         DispatchQueue.global().async {
             var Δ = Float(Date().timeIntervalSince(lastPairStart))
             
@@ -43,24 +43,18 @@ class PairBubbleCellCoordinator {
                 
                 
                 //send min
-                DispatchQueue.main.async {
-                    self.components.min = minValue
-                }
+                DispatchQueue.main.async { self.components.min = minValue }
                 
                 if (giveMeAName%60) == 0 || self.refresh {
                     let hrValue = String(intValue/3600)
                     
                     //send hour
-                    DispatchQueue.main.async {
-                        self.components.hr = hrValue
-                    }
+                    DispatchQueue.main.async { self.components.hr = hrValue }
                 }
             }
             
             //send second
-            DispatchQueue.main.async {
-                self.components.sec = String(secValue)
-            }
+            DispatchQueue.main.async { self.components.sec = String(secValue) }
             
             self.refresh = false
         }
@@ -68,13 +62,13 @@ class PairBubbleCellCoordinator {
     }
     
     private var initialValue:Float {
-            if bubble.state == .running {
-                let Δ = Date().timeIntervalSince(bubble.lastPair!.start!)
-                let initialValue = Float(Δ)
-                return initialValue
-            } else {
-                return bubble.currentClock
-            }
+        if bubble.state == .running {
+            let Δ = Date().timeIntervalSince(bubble.lastPair!.start!)
+            let initialValue = Float(Δ)
+            return initialValue
+        } else {
+            return bubble.currentClock
+        }
     }
     
     func update(_ moment:Moment) {
@@ -96,19 +90,19 @@ class PairBubbleCellCoordinator {
                         break
                 }
                 
-//            case .start:
-//                publisher
-//                    .sink { [weak self] _ in
-//
-//                    }
-//                    .store(in: &cancellable)
-//            case .pause:
-//                cancellable = []
+                //            case .start:
+                //                publisher
+                //                    .sink { [weak self] _ in
+                //
+                //                    }
+                //                    .store(in: &cancellable)
+                //            case .pause:
+                //                cancellable = []
         }
     }
     
     private var shouldWork = false {didSet{
-//        update(shouldWork ? .start : .pause)
+        //        update(shouldWork ? .start : .pause)
     }}
     
     private var refresh = false
