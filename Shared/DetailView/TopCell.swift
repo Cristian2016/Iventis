@@ -94,7 +94,7 @@ struct TopCell: View {
             .fontWeight(.medium)
             .background(color)
             .foregroundColor(.white)
-            .onReceive(session.bubble!.coordinator.colorPublisher) {
+            .onReceive(session.bubble?.coordinator.colorPublisher ?? .init(.clear)) {
                 self.color = $0
             }
         } else { EmptyView() }
