@@ -62,26 +62,17 @@ extension PairBubbleCell {
                             clearCircle
                                 .overlay {
                                     clearRectangle
-                                        .overlay {
-                                            Text(hr)
-                                                .componentsTextStyle()
-                                        }
+                                        .overlay { Text(hr).componentsTextStyle() }
                                 }
                             clearCircle
                                 .overlay {
                                     clearRectangle
-                                        .overlay {
-                                            Text(min)
-                                                .componentsTextStyle()
-                                        }
+                                        .overlay { Text(min).componentsTextStyle() }
                                 }
                             clearCircle
                                 .overlay {
                                     clearRectangle
-                                        .overlay {
-                                            Text(sec)
-                                                .componentsTextStyle()
-                                        }
+                                        .overlay {  Text(sec).componentsTextStyle() }
                                 }
                         }
                         .scaleEffect(x: metrics.hstackScale, y: metrics.hstackScale)
