@@ -25,6 +25,48 @@ class PairBubbleCellCoordinator {
         NotificationCenter.default.removeObserver(self)
     }
     
+    private func update() {
+        guard let lastPairStart = bubble.lastPair?.start else { return }
+
+        DispatchQueue.global().async {
+            var Δ = Float(Date().timeIntervalSince(lastPairStart))
+            
+            Δ.round(.toNearestOrEven) //ex: 2346
+            
+            let intValue = Int(Δ)
+            let secValue = intValue%60
+            
+            //send minute and hour
+            if secValue == 0 || self.refresh {
+                let giveMeAName = intValue/60%60
+                let minValue = String(giveMeAName)
+                
+                
+                //send min
+                DispatchQueue.main.async {
+                    self.components.min = minValue
+                }
+                
+                if (giveMeAName%60) == 0 || self.refresh {
+                    let hrValue = String(intValue/3600)
+                    
+                    //send hour
+                    DispatchQueue.main.async {
+                        self.components.hr = hrValue
+                    }
+                }
+            }
+            
+            //send second
+            DispatchQueue.main.async {
+                self.components.sec = String(secValue)
+            }
+            
+            self.refresh = false
+        }
+        
+    }
+    
     private var initialValue:Float {
             if bubble.state == .running {
                 let Δ = Date().timeIntervalSince(bubble.lastPair!.start!)
@@ -35,22 +77,38 @@ class PairBubbleCellCoordinator {
             }
     }
     
-    func update(_ action:Action) {
-        switch action {
-            case .start:
+    func update(_ moment:Moment) {
+        switch moment {
+            case .automatic:
                 publisher
                     .sink { [weak self] _ in
-                        
+                        self?.update()
                     }
                     .store(in: &cancellable)
-            case .pause:
-                cancellable = []
-            default:break
+                
+            case .user(let action) :
+                switch action {
+                    case .start:
+                        break
+                    case .pause:
+                        break
+                    default:
+                        break
+                }
+                
+//            case .start:
+//                publisher
+//                    .sink { [weak self] _ in
+//
+//                    }
+//                    .store(in: &cancellable)
+//            case .pause:
+//                cancellable = []
         }
     }
     
     private var shouldWork = false {didSet{
-        update(shouldWork ? .start : .pause)
+//        update(shouldWork ? .start : .pause)
     }}
     
     private var refresh = false
