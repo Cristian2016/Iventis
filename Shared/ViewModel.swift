@@ -7,6 +7,7 @@
 //1 Add Tag and Undo Start. User can undo start or tag activity within 5 seconds after starting the bubble
 //1 make sure to set fiveSeconds_bRank to nil first, then set it to a new value
 //2 fetches bubbles using a backgroundContext but I don't know how to use it afterwards
+//3 notifies PairBubbleCellCoordinator that detailview is visible or not
 
 import Foundation
 import SwiftUI
@@ -20,7 +21,14 @@ class ViewModel: ObservableObject {
     deinit { NotificationCenter.default.removeObserver(self) } //1
     
     // MARK: - Alerts
-    @Published var path = [Bubble]()
+    @Published var path = [Bubble]() {didSet{
+        DispatchQueue.global().async {
+            let info = ["detailViewVisible" : self.path.isEmpty ? false : true]
+            NotificationCenter.default.post(name: .detailViewVisible,
+                                            object: nil,
+                                            userInfo: info) //3
+        }
+    }}
             
     // MARK: -
     var notesForPair: CurrentValueSubject<Pair?, Never> = .init(nil)

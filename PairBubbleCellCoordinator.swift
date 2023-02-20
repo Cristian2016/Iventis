@@ -14,20 +14,24 @@ class PairBubbleCellCoordinator {
     
     @Published private(set) var components = Components("-1", "-1", "-1")
     
+    
     init(bubble: Bubble) {
         self.bubble = bubble
+        observe_detailViewVisible()
     }
     
     deinit {
         "PairBubbleCellCoordinator deinit"
+        NotificationCenter.default.removeObserver(self)
     }
     
     func update(_ action:Action) {
         switch action {
             case .start:
+                if !shouldIWork { return }
                 publisher
                     .sink { [weak self] _ in
-                        print("signal received")
+                        print("PairBubbleCellCoordinator signal received")
                     }
                     .store(in: &cancellable)
             case .pause:
@@ -35,10 +39,21 @@ class PairBubbleCellCoordinator {
         }
     }
     
+    private var shouldIWork = false
+    
+    private func observe_detailViewVisible() {
+        NotificationCenter.Publisher(center: .default, name: .detailViewVisible)
+            .sink {
+                self.shouldIWork = $0.userInfo!["detailViewVisible"] as! Bool
+            }
+            .store(in: &detailViewVisibleCancellable)
+    }
+    
     private lazy var publisher =
     NotificationCenter.Publisher(center: .default, name: .bubbleTimerSignal)
     
     private var cancellable = Set<AnyCancellable>() //1
+    private var detailViewVisibleCancellable = Set<AnyCancellable>() //1
 }
 
 extension PairBubbleCellCoordinator {

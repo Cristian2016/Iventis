@@ -26,6 +26,7 @@ struct vRoundedRectangle: Shape {
 
 extension Notification.Name {
     static let fiveSecondsSignal = Notification.Name("fiveSecondsSignal")
+    static let detailViewVisible = Notification.Name("detailViewVisible")
 } //1 ViewModel 1//
 
 extension UserDefaults {
