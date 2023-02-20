@@ -17,10 +17,8 @@ class PairBubbleCellCoordinator {
     
     init(bubble: Bubble) {
         self.bubble = bubble
+        self.isBubbleRunning = (bubble.state == .running) ? true : false
         observe_detailViewVisible()
-        if bubble.state == .running {
-            
-        }
     }
     
     deinit {
@@ -43,7 +41,7 @@ class PairBubbleCellCoordinator {
     }
     
     private var detailVisible = false
-    var isBubbleRunning = false
+    var isBubbleRunning:Bool
     
     private func observe_detailViewVisible() {
         NotificationCenter.Publisher(center: .default, name: .detailViewVisible)
