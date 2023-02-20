@@ -22,12 +22,11 @@ class PairBubbleCellCoordinator {
     }
     
     deinit {
-        print("PairBubbleCellCoordinator deinit")
+//        print("PairBubbleCellCoordinator deinit")
         NotificationCenter.default.removeObserver(self)
     }
     
     private func update() {
-        print(#function)
         guard let lastPairStart = bubble.lastPair?.start else { return }
         
         DispatchQueue.global().async {
