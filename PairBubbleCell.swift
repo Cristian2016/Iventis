@@ -75,12 +75,12 @@ extension PairBubbleCell {
                             }
                     }
                     .scaleEffect(x: metrics.hstackScale, y: metrics.hstackScale)
-                }
-                .onReceive(bubble!.pairBubbleCellCoordinator.$components) {
-                    //                        print("received update")
-                    hr = $0.hr
-                    min = $0.min
-                    sec = $0.sec
+                    .onReceive(bubble!.pairBubbleCellCoordinator.$components) {
+                        print("received update")
+                        hr = $0.hr
+                        min = $0.min
+                        sec = $0.sec
+                    }
                 }
         }
         
@@ -101,7 +101,6 @@ extension PairBubbleCell {
              _ bubble:Bubble?) {
             
             guard let bubble = bubble else { return nil }
-            print("ThreeLabels init")
             
             self.timeComponentsFontSize = timeComponentsFontSize
             self.bubble = bubble
