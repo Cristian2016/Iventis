@@ -43,7 +43,7 @@ struct PairBubbleCell: View {
             RoundedRectangle(cornerRadius: 30)
                 .fill(Color.label)
                 .padding(-14)
-                .padding([.leading, .trailing], -8)
+                .padding([.leading, .trailing], -10)
         }
     }
     
