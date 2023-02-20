@@ -26,7 +26,7 @@ struct PairBubbleCell: View {
                         circle
                     }
                     .compositingGroup()
-                    .standardShadow()
+                    .shadow(color: .black.opacity(0.1), radius: 4, x: 1, y: 2)
                     .scaleEffect(x: metrics.hstackScale, y: metrics.hstackScale)
                 }
             PairBubbleCell.ThreeLabels(metrics.timeComponentsFontSize, bubble)
