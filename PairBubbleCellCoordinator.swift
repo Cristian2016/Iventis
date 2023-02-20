@@ -18,6 +18,7 @@ class PairBubbleCellCoordinator {
     init(bubble: Bubble) {
         self.bubble = bubble
         observe_detailViewVisible()
+        self.refresh = true
     }
     
     deinit {
@@ -69,7 +70,7 @@ class PairBubbleCellCoordinator {
             let initialValue = Float(Δ)
             return initialValue
         } else {
-            return bubble.currentClock
+            return 0
         }
     }
     
@@ -86,23 +87,18 @@ class PairBubbleCellCoordinator {
                     case .start:
                         break
                     case .pause:
-                        break
+                        cancellable = []
                     default:
                         break
                 }
-                
-                //            case .start:
-                //                publisher
-                //                    .sink { [weak self] _ in
-                //
-                //                    }
-                //                    .store(in: &cancellable)
-                //            case .pause:
-                //                cancellable = []
         }
     }
     
-    private var shouldWork = false
+    private var shouldWork = false {didSet{
+        if shouldWork {
+            update(.automatic)
+        }
+    }}
     
     private var refresh = false
     

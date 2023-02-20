@@ -181,7 +181,7 @@ class ViewModel: ObservableObject {
                 secretary.addNoteButton_bRank = Int(bubble.rank)
                 
                 bubble.coordinator.updateComponents(.user(.start))
-//                bubble.pairBubbleCellCoordinator.update(.start)
+                bubble.pairBubbleCellCoordinator.update(.user(.start))
                                                 
             case .paused:  /* changes to running */
                 //create new pair, add it to currentSession
@@ -194,7 +194,7 @@ class ViewModel: ObservableObject {
                 secretary.addNoteButton_bRank = Int(bubble.rank)
                 
                 bubble.coordinator.updateComponents(.user(.start))
-//                bubble.pairBubbleCellCoordinator.update(.start)
+                bubble.pairBubbleCellCoordinator.update(.user(.start))
                 
             case .running: /* changes to .paused */
                 let currentPair = bubble.lastPair
@@ -209,7 +209,7 @@ class ViewModel: ObservableObject {
                         //no need to run any code in the completion
                         PersistenceController.shared.save()
                         bubble.coordinator.updateAtPause()
-//                        bubble.pairBubbleCellCoordinator.update(.pause)
+                        bubble.pairBubbleCellCoordinator.update(.user(.pause))
                     }
                 }
                 
