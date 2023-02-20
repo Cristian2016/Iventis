@@ -16,6 +16,7 @@ import MyPackage
 public class Bubble: NSManagedObject {
     
     lazy var coordinator:BubbleCellCoordinator! = BubbleCellCoordinator(for: self)
+    lazy var pairBubbleCellCoordinator:PairBubbleCellCoordinator! = PairBubbleCellCoordinator(bubble: self)
 
     ///4 start delay values
     static let delays = [5, 10, 20, 45]
