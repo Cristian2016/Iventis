@@ -11,7 +11,7 @@ import MyPackage
 ///it's the small bubble cell in the PairCell of BottomDetaiulView that only shows up when bubble is running and detailMode is active
 struct PairBubbleCell: View {
             
-    @StateObject var bubble:Bubble
+    let bubble:Bubble
     let metrics:BubbleCell.Metrics
     
     var body: some View {
@@ -45,6 +45,7 @@ struct PairBubbleCell: View {
             }
     }
     
+    // MARK: - Lego
     private var whiteCircle:some View {
         Circle()
             .fill(.white)
@@ -70,5 +71,34 @@ struct PairBubbleCell: View {
         .font(.system(size: metrics.timeComponentsFontSize))
         .fontDesign(.rounded)
         .foregroundColor(.black)
+    }
+}
+
+extension PairBubbleCell {
+    struct ThreeLabels {
+        var bubble:Bubble?
+        let timeComponentsFontSize:CGFloat
+        let metrics = BubbleCell.Metrics()
+        
+        @State private var hr:String
+        @State private var min:String
+        @State private var sec:String
+        
+        
+        init?(_ timeComponentsFontSize:CGFloat,
+             _ bubble:Bubble?) {
+            
+            guard let bubble = bubble else { return nil }
+            
+            self.timeComponentsFontSize = timeComponentsFontSize
+            self.bubble = bubble
+                    
+            if bubble.color == nil { return nil }
+            
+            let components = bubble.coordinator.components
+            hr = components.hr
+            min = components.min
+            sec = components.sec
+        }
     }
 }
