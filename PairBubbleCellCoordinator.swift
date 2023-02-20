@@ -22,7 +22,7 @@ class PairBubbleCellCoordinator {
         "PairBubbleCellCoordinator deinit"
     }
     
-    private func update(_ action:Action) {
+    func update(_ action:Action) {
         switch action {
             case .start:
                 publisher
