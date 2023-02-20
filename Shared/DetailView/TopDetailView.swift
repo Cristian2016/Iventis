@@ -57,12 +57,15 @@ struct TopDetailView:View {
                         }
                     }
                 }
-                .background {
-                    LinearGradient(colors: [.topDetailViewBackground1, .topDetailViewBackground], startPoint: .bottom, endPoint: .top)
-                }
+                .background { gradientBackground }
             }
             .padding(.init(top: 0, leading: -17, bottom: 0, trailing: -17))
         }
+    }
+    
+    // MARK: - Lego
+    private var gradientBackground:some View {
+        LinearGradient(colors: [.topDetailViewBackground1, .topDetailViewBackground], startPoint: .bottom, endPoint: .top)
     }
     
     // MARK: -
