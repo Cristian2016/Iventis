@@ -50,7 +50,7 @@ struct PairBubbleCell: View {
     // MARK: - Lego
     private var whiteCircle:some View {
         Circle()
-            .fill(.white)
+            .fill(Color.background)
             .scaleEffect(x: metrics.circleScale, y: metrics.circleScale)
     }
 }
@@ -137,5 +137,6 @@ struct ComponentsTextStyle: ViewModifier {
                 .font(.system(size: 400))
                 .lineLimit(1)
                 .minimumScaleFactor(0.1)
+                .foregroundColor(.label)
     }
 }
