@@ -3,7 +3,8 @@
 //  Timers
 //
 //  Created by Cristian Lapusan on 09.05.2022.
-//
+//⚠️ if I don't add task modifier View does not update components from PairBubbleCellCoordinator
+// if I add onTap{ } it will have no effect! what the fuck!!!!
 
 import SwiftUI
 import MyPackage
@@ -81,7 +82,7 @@ extension PairBubbleCell {
                         min = $0.min
                         sec = $0.sec
                     }
-                    .task { }
+                    .task { } //⚠️
                 }
         }
         
