@@ -69,12 +69,6 @@ struct TopDetailView:View {
     }
     
     // MARK: -
-    private func bubbleColor() -> Color {
-        let description = sessions.last?.bubble?.color ?? "mint"
-        return (Color.triColors.filter { $0.description == description }.first ?? Color.Bubble.mint).sec
-        
-    }
-    
     private func sessionRank(of session:Session) -> String {
         String(sessions.count - Int(sessions.firstIndex(of: session)!))
     }
