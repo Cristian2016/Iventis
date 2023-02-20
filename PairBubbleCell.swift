@@ -19,6 +19,11 @@ struct PairBubbleCell: View {
         ZStack {
             Rectangle().fill(.clear)
                 .aspectRatio(metrics.ratio, contentMode: .fit)
+                .background {
+                    RoundedRectangle(cornerRadius: 35)
+                        .fill(.thinMaterial)
+                        .scaleEffect(x: 1.12, y: 1.17)
+                }
                 .overlay {
                     HStack {
                         circle
@@ -31,6 +36,8 @@ struct PairBubbleCell: View {
                 }
             PairBubbleCell.ThreeLabels(metrics.timeComponentsFontSize, bubble)
         }
+        .padding(10)
+
     }
     
     // MARK: - Lego
