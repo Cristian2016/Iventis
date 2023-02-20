@@ -20,26 +20,20 @@ struct PairBubbleCell: View {
                 .aspectRatio(metrics.ratio, contentMode: .fit)
                 .overlay {
                     HStack {
-                        whiteCircle
-                        whiteCircle
-                        whiteCircle
+                        circle
+                        circle
+                        circle
                     }
                     .scaleEffect(x: metrics.hstackScale, y: metrics.hstackScale)
                 }
             PairBubbleCell.ThreeLabels(metrics.timeComponentsFontSize, bubble)
         }
-        .background {
-            RoundedRectangle(cornerRadius: 30)
-                .fill(Color.label)
-                .padding(-14)
-                .padding([.leading, .trailing], -10)
-        }
     }
     
     // MARK: - Lego
-    private var whiteCircle:some View {
+    private var circle:some View {
         Circle()
-            .fill(Color.background)
+            .fill(Color.label)
             .scaleEffect(x: metrics.circleScale, y: metrics.circleScale)
     }
     
@@ -138,7 +132,7 @@ struct ComponentsTextStyle: ViewModifier {
                 .font(.system(size: 400))
                 .lineLimit(1)
                 .minimumScaleFactor(0.1)
-                .foregroundColor(.label)
+                .foregroundColor(.background)
     }
 }
 
