@@ -17,7 +17,6 @@ class PairBubbleCellCoordinator {
     
     init(bubble: Bubble) {
         self.bubble = bubble
-        self.isBubbleRunning = (bubble.state == .running) ? true : false
         observe_detailViewVisible()
     }
     
@@ -29,25 +28,26 @@ class PairBubbleCellCoordinator {
     func update(_ action:Action) {
         switch action {
             case .start:
-                if detailVisible && isBubbleRunning {
-                    publisher
-                        .sink { [weak self] _ in
-                            print("PairBubbleCellCoordinator signal received")
-                        }
-                        .store(in: &cancellable)
-                }
+                publisher
+                    .sink { [weak self] _ in
+                        print("PairBubbleCellCoordinator signal received")
+                    }
+                    .store(in: &cancellable)
             case .pause:
                 cancellable = []
         }
     }
     
-    private var detailVisible = false
-    var isBubbleRunning:Bool
+    private var shouldWork = false {didSet{
+        update(shouldWork ? .start : .pause)
+    }}
     
     private func observe_detailViewVisible() {
         NotificationCenter.Publisher(center: .default, name: .detailViewVisible)
             .sink {
-                self.detailVisible = $0.userInfo!["detailViewVisible"] as! Bool
+                let detailViewVisible = $0.userInfo!["detailViewVisible"] as! Bool
+                let condition = detailViewVisible && self.bubble.state == .running
+                self.shouldWork = condition ? true : false
             }
             .store(in: &detailViewVisibleCancellable)
     }
