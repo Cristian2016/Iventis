@@ -31,9 +31,9 @@ struct TopDetailView:View {
     // MARK: -
     var body: some View {
         ZStack {
-            Color.background
-                .padding([.leading, .trailing], -100)
-                .shadow(color: .black.opacity(0.1), radius: 2, y: 3)
+//            Color.background
+//                .padding([.leading, .trailing], -100)
+//                .shadow(color: .black.opacity(0.1), radius: 2, y: 3)
             ScrollViewReader { proxy in
                 ScrollView(.horizontal, showsIndicators: false) {
                     LazyHStack {
