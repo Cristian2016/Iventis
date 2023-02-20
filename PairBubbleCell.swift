@@ -17,8 +17,7 @@ struct PairBubbleCell: View {
     var body: some View {
         ZStack {
             background
-            timeComponents
-                .foregroundColor(Color("smallBubbleCircleColor"))
+           
         }
     }
     
@@ -27,22 +26,25 @@ struct PairBubbleCell: View {
     
     // MARK: - LEGOS
     var background: some View {
-        Rectangle().fill(.clear)
-            .aspectRatio(metrics.ratio, contentMode: .fit)
-            .overlay {
-                HStack {
-                    whiteCircle
-                    whiteCircle
-                    whiteCircle
+        ZStack {
+            Rectangle().fill(.clear)
+                .aspectRatio(metrics.ratio, contentMode: .fit)
+                .overlay {
+                    HStack {
+                        whiteCircle
+                        whiteCircle
+                        whiteCircle
+                    }
+                    .scaleEffect(x: metrics.hstackScale, y: metrics.hstackScale)
                 }
-                .scaleEffect(x: metrics.hstackScale, y: metrics.hstackScale)
-            }
-            .background {
-                RoundedRectangle(cornerRadius: 30)
-                    .fill(Color.label)
-                    .padding(-14)
-                    .padding([.leading, .trailing], -4)
-            }
+            PairBubbleCell.ThreeLabels(metrics.timeComponentsFontSize, bubble)
+        }
+        .background {
+            RoundedRectangle(cornerRadius: 30)
+                .fill(Color.label)
+                .padding(-14)
+                .padding([.leading, .trailing], -4)
+        }
     }
     
     // MARK: - Lego
@@ -51,31 +53,10 @@ struct PairBubbleCell: View {
             .fill(.white)
             .scaleEffect(x: metrics.circleScale, y: metrics.circleScale)
     }
-    
-    var timeComponents: some View {
-        HStack (spacing: -40) {
-            //HOURS
-            Circle().fill(Color.clear)
-                .overlay { Text(bubble.smallBubbleView_Components.hr) }
-            
-            //MINUTES
-            Circle().fill(Color.clear)
-                .overlay { Text(bubble.smallBubbleView_Components.min) }
-            
-            //SECONDS
-            ZStack {
-                Circle().fill(Color.clear)
-                    .overlay { Text(bubble.smallBubbleView_Components.sec) }
-            }
-        }
-        .font(.system(size: metrics.timeComponentsFontSize))
-        .fontDesign(.rounded)
-        .foregroundColor(.black)
-    }
 }
 
 extension PairBubbleCell {
-    struct ThreeLabels {
+    struct ThreeLabels : View {
         var bubble:Bubble?
         let timeComponentsFontSize:CGFloat
         let metrics = BubbleCell.Metrics()
@@ -84,7 +65,57 @@ extension PairBubbleCell {
         @State private var min:String
         @State private var sec:String
         
+        var body: some View {
+            Rectangle().fill(.clear)
+                .aspectRatio(metrics.ratio, contentMode: .fit)
+                .overlay {
+                    HStack {
+                        clearCircle
+                            .overlay {
+                                Rectangle().fill(.green)
+                                    .aspectRatio(1.2, contentMode: .fit)
+                                    .overlay {
+                                        Text(hr).allowsHitTesting(false)
+                                            .font(.system(size: 400))
+                                            .lineLimit(1)
+                                            .minimumScaleFactor(0.1)
+                                    }
+                            }
+                        clearCircle
+                            .overlay {
+                                Rectangle().fill(.white)
+                                    .aspectRatio(1.2, contentMode: .fit)
+                                    .overlay {
+                                        Text(min).allowsHitTesting(false)
+                                            .font(.system(size: 400))
+                                            .lineLimit(1)
+                                            .minimumScaleFactor(0.1)
+                                    }
+                            }
+                        clearCircle
+                            .overlay {
+                                Rectangle().fill(.green)
+                                    .aspectRatio(1.2, contentMode: .fit)
+                                    .overlay {
+                                        Text(sec).allowsHitTesting(false)
+                                            .font(.system(size: 400))
+                                            .lineLimit(1)
+                                            .minimumScaleFactor(0.1)
+                                    }
+                            }
+                    }
+                    .scaleEffect(x: metrics.hstackScale, y: metrics.hstackScale)
+                }
+        }
         
+        // MARK: - Lego
+        private var clearCircle:some View {
+            Circle()
+                .fill(.clear)
+                .scaleEffect(x: metrics.circleScale, y: metrics.circleScale)
+        }
+        
+        // MARK: -
         init?(_ timeComponentsFontSize:CGFloat,
              _ bubble:Bubble?) {
             
