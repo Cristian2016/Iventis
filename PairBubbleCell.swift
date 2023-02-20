@@ -77,7 +77,6 @@ extension PairBubbleCell {
                     }
                     .scaleEffect(x: metrics.hstackScale, y: metrics.hstackScale)
                     .onReceive(bubble!.pairBubbleCellCoordinator.$components) {
-                        print("received update")
                         hr = $0.hr
                         min = $0.min
                         sec = $0.sec
