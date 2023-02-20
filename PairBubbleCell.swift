@@ -81,6 +81,9 @@ extension PairBubbleCell {
                         min = $0.min
                         sec = $0.sec
                     }
+                    .task {
+                        print("task")
+                    }
                 }
         }
         

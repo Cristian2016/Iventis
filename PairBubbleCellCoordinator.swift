@@ -56,7 +56,6 @@ class PairBubbleCellCoordinator {
             
             self.refresh = false
         }
-        
     }
     
     private var initialValue:Float {
