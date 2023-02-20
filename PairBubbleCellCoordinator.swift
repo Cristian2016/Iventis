@@ -25,12 +25,22 @@ class PairBubbleCellCoordinator {
         NotificationCenter.default.removeObserver(self)
     }
     
+    var initialValue:Float {
+            if bubble.state == .running {
+                let Δ = Date().timeIntervalSince(bubble.lastPair!.start!)
+                let initialValue = bubble.currentClock + Float(Δ)
+                return initialValue
+            } else {
+                return bubble.currentClock
+            }
+    }
+    
     func update(_ action:Action) {
         switch action {
             case .start:
                 publisher
                     .sink { [weak self] _ in
-                        print("PairBubbleCellCoordinator signal received")
+                        
                     }
                     .store(in: &cancellable)
             case .pause:
