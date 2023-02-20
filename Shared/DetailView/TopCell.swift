@@ -13,8 +13,6 @@ struct TopCell: View {
     @State private var isSelected = false
     @Environment (\.colorScheme) private var colorScheme
     
-    @State var color:Color
-    //black if bubble is red orange magenta bubblegum
     private var selectionIndicatorColor = Color.red
     let sessionCount:Int
     let sessionRank:String
@@ -32,6 +30,7 @@ struct TopCell: View {
     
     // MARK: -
     var body: some View {
+        let _ = print("Top Cell body")
         if !session.isFault {
             HStack {
                 ZStack {
@@ -92,11 +91,8 @@ struct TopCell: View {
             }
             .font(.system(size: 24))
             .fontWeight(.medium)
-            .background(color)
+            .background(DateViewBackgroundColor(session: session))
             .foregroundColor(.white)
-            .onReceive(session.bubble?.coordinator.colorPublisher ?? .init(.clear)) {
-                self.color = $0
-            }
         } else { EmptyView() }
     }
     
@@ -185,7 +181,6 @@ struct TopCell: View {
         self.sessionCount = sessionCount
         _session = StateObject(wrappedValue: session)
         
-        _color = State(wrappedValue: Color.bubbleColor(forName: session.bubble?.color))
         self.sessionRank = sessionRank
         
         let decoder = JSONDecoder()
@@ -204,3 +199,20 @@ struct TopCell: View {
 //        TopCell(color: .red, sessionCount: <#Int#>, session: <#Binding<Session>#>)
 //    }
 //}
+
+struct DateViewBackgroundColor: View {
+    let session:Session
+    @State var color:Color
+    
+    init(session: Session) {
+        self.session = session
+        self.color = Color.bubbleColor(forName: session.bubble?.color)
+    }
+    
+    var body: some View {
+        color
+            .onReceive(session.bubble?.coordinator.colorPublisher ?? .init(.clear)) {
+                self.color = $0
+            }
+    }
+}
