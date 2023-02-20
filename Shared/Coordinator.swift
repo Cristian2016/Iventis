@@ -22,6 +22,7 @@ class BubbleCellCoordinator {
     
     @Published private(set) var components = Components("-1", "-1", "-1", "-1")
     @Published private(set) var opacity = Opacity()
+    var colorPublisher:Publisher<Color, Never>
     
     private func update(_ action:Action) {
         switch action {
@@ -94,8 +95,6 @@ class BubbleCellCoordinator {
     } //4
     
     // MARK: - Publishers 1
-    
-    var colorPublisher:Publisher<Color, Never>
         
     private lazy var publisher =
     NotificationCenter.Publisher(center: .default, name: .bubbleTimerSignal)

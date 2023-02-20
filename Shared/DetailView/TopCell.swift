@@ -13,7 +13,7 @@ struct TopCell: View {
     @State private var isSelected = false
     @Environment (\.colorScheme) private var colorScheme
     
-    var color:Color
+    @State var color:Color
     //black if bubble is red orange magenta bubblegum
     private var selectionIndicatorColor = Color.red
     let sessionCount:Int
@@ -94,6 +94,9 @@ struct TopCell: View {
             .fontWeight(.medium)
             .background(color)
             .foregroundColor(.white)
+            .onReceive(session.bubble!.coordinator.colorPublisher) {
+                self.color = $0
+            }
         } else { EmptyView() }
     }
     
@@ -182,7 +185,7 @@ struct TopCell: View {
         self.sessionCount = sessionCount
         _session = StateObject(wrappedValue: session)
         
-        self.color = Color.bubbleColor(forName: session.bubble?.color)
+        _color = State(wrappedValue: Color.bubbleColor(forName: session.bubble?.color))
         self.sessionRank = sessionRank
         
         let decoder = JSONDecoder()
