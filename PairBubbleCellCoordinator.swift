@@ -33,6 +33,8 @@ class PairBubbleCellCoordinator {
             
             Δ.round(.toNearestOrEven) //ex: 2346
             
+            print(Δ)
+            
             let intValue = Int(Δ)
             let secValue = intValue%60
             
@@ -74,12 +76,11 @@ class PairBubbleCellCoordinator {
     func update(_ moment:Moment) {
         switch moment {
             case .automatic:
-                publisher
-                    .sink { [weak self] _ in
-                        self?.update()
-                    }
-                    .store(in: &cancellable)
-                
+                if shouldWork {
+                    publisher
+                        .sink { [weak self] _ in self?.update() }
+                        .store(in: &cancellable)
+                }
             case .user(let action) :
                 switch action {
                     case .start:
@@ -101,9 +102,7 @@ class PairBubbleCellCoordinator {
         }
     }
     
-    private var shouldWork = false {didSet{
-        //        update(shouldWork ? .start : .pause)
-    }}
+    private var shouldWork = false
     
     private var refresh = false
     
