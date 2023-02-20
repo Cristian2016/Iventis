@@ -50,6 +50,12 @@ struct PairBubbleCell: View {
             .fill(Color.background)
             .scaleEffect(x: metrics.circleScale, y: metrics.circleScale)
     }
+    
+    init?(bubble: Bubble?, metrics: BubbleCell.Metrics) {
+        guard let bubble = bubble else { return nil }
+        self.bubble = bubble
+        self.metrics = metrics
+    }
 }
 
 extension PairBubbleCell {
