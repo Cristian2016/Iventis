@@ -18,6 +18,7 @@ class PairBubbleCellCoordinator {
     init(bubble: Bubble) {
         self.bubble = bubble
         observe_detailViewVisible()
+        observe_AppActive()
         self.refresh = true
     }
     
@@ -115,6 +116,12 @@ class PairBubbleCellCoordinator {
                 self.refresh = true
             }
             .store(in: &detailViewVisibleCancellable)
+    }
+    
+    private func observe_AppActive() {
+        NotificationCenter.default.addObserver(forName: .appLaunched, object: nil, queue: nil) { _ in
+            self.refresh = true
+        }
     }
     
     private lazy var publisher =
