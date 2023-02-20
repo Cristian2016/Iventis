@@ -8,6 +8,7 @@
 
 import Combine
 import Foundation
+import UIKit
 
 class PairBubbleCellCoordinator {
     unowned private let bubble:Bubble //2
@@ -119,8 +120,9 @@ class PairBubbleCellCoordinator {
     }
     
     private func observe_AppActive() {
-        NotificationCenter.default.addObserver(forName: .appLaunched, object: nil, queue: nil) { _ in
+        NotificationCenter.default.addObserver(forName: UIApplication.didBecomeActiveNotification, object: nil, queue: nil) { _ in
             self.refresh = true
+            print("refresh set to true")
         }
     }
     
