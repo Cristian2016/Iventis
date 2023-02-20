@@ -114,7 +114,7 @@ class ViewModel: ObservableObject {
         if bubble.lastSession == session {
             bubble.currentClock = bubble.initialClock
             bubble.coordinator.updateComponents(.deleteLastSession)
-//            bubble.pairBubbleCellCoordinator.update(.pause)
+            bubble.pairBubbleCellCoordinator.update(.user(.deleteCurrentSession))
         }
         
         let viewContext = PersistenceController.shared.viewContext
