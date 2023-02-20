@@ -29,12 +29,13 @@ class PairBubbleCellCoordinator {
     func update(_ action:Action) {
         switch action {
             case .start:
-                if !detailVisible { return }
-                publisher
-                    .sink { [weak self] _ in
-                        print("PairBubbleCellCoordinator signal received")
-                    }
-                    .store(in: &cancellable)
+                if detailVisible && isBubbleRunning {
+                    publisher
+                        .sink { [weak self] _ in
+                            print("PairBubbleCellCoordinator signal received")
+                        }
+                        .store(in: &cancellable)
+                }
             case .pause:
                 cancellable = []
         }
