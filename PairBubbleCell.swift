@@ -75,7 +75,7 @@ extension PairBubbleCell {
                                 clearRectangle
                                     .overlay {
                                         Text(hr)
-                                            .modifier(ComponentsTextStyle())
+                                            .componentsTextStyle()
                                     }
                             }
                         clearCircle
@@ -83,7 +83,7 @@ extension PairBubbleCell {
                                 clearRectangle
                                     .overlay {
                                         Text(min)
-                                            .modifier(ComponentsTextStyle())
+                                            .componentsTextStyle()
                                     }
                             }
                         clearCircle
@@ -91,7 +91,7 @@ extension PairBubbleCell {
                                 clearRectangle
                                     .overlay {
                                         Text(sec)
-                                            .modifier(ComponentsTextStyle())
+                                            .componentsTextStyle()
                                     }
                             }
                     }
@@ -138,5 +138,11 @@ struct ComponentsTextStyle: ViewModifier {
                 .lineLimit(1)
                 .minimumScaleFactor(0.1)
                 .foregroundColor(.label)
+    }
+}
+
+extension View {
+    func componentsTextStyle() -> some View {
+        modifier(ComponentsTextStyle())
     }
 }
