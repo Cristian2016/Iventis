@@ -72,7 +72,7 @@ extension PairBubbleCell {
                     HStack {
                         clearCircle
                             .overlay {
-                                Rectangle().fill(.green)
+                                Rectangle().fill(.clear)
                                     .aspectRatio(1.2, contentMode: .fit)
                                     .overlay {
                                         Text(hr).allowsHitTesting(false)
@@ -94,7 +94,7 @@ extension PairBubbleCell {
                             }
                         clearCircle
                             .overlay {
-                                Rectangle().fill(.green)
+                                Rectangle().fill(.clear)
                                     .aspectRatio(1.2, contentMode: .fit)
                                     .overlay {
                                         Text(sec).allowsHitTesting(false)
