@@ -16,13 +16,6 @@ struct PairBubbleCell: View {
     
     var body: some View {
         ZStack {
-            background
-        }
-    }
-    
-    // MARK: - LEGOS
-    var background: some View {
-        ZStack {
             Rectangle().fill(.clear)
                 .aspectRatio(metrics.ratio, contentMode: .fit)
                 .overlay {
