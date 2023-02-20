@@ -25,10 +25,10 @@ class PairBubbleCellCoordinator {
         NotificationCenter.default.removeObserver(self)
     }
     
-    var initialValue:Float {
+    private var initialValue:Float {
             if bubble.state == .running {
                 let Δ = Date().timeIntervalSince(bubble.lastPair!.start!)
-                let initialValue = bubble.currentClock + Float(Δ)
+                let initialValue = Float(Δ)
                 return initialValue
             } else {
                 return bubble.currentClock
@@ -45,12 +45,15 @@ class PairBubbleCellCoordinator {
                     .store(in: &cancellable)
             case .pause:
                 cancellable = []
+            default:break
         }
     }
     
     private var shouldWork = false {didSet{
         update(shouldWork ? .start : .pause)
     }}
+    
+    private var refresh = false
     
     private func observe_detailViewVisible() {
         NotificationCenter.Publisher(center: .default, name: .detailViewVisible)
@@ -82,8 +85,16 @@ extension PairBubbleCellCoordinator {
         }
     }
     
+    enum Moment {
+        case user(Action)
+        case automatic
+    }
+    
     enum Action {
         case start
         case pause
+        case reset
+        case endSession
+        case deleteCurrentSession
     }
 }
