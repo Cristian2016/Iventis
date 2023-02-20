@@ -16,7 +16,6 @@ class PairBubbleCellCoordinator {
     
     @Published private(set) var components = Components("0", "0", "0")
     
-    
     init(bubble: Bubble) {
         self.bubble = bubble
         observe_detailViewVisible()

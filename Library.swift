@@ -55,6 +55,8 @@ public extension Color {
     static let secondaryWhite = Color("secondaryWhite")
     static let pauseStickerColor = Color("pauseStickerColor")
     static let pauseStickerFontColor = Color("pauseStickerFontColor")
+    static let topDetailViewBackground = Color("topDetailViewBackground")
+    static let topDetailViewBackground1 = Color("topDetailViewBackground1")
 }
 
 public extension String {
