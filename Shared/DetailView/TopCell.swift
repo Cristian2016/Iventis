@@ -182,7 +182,6 @@ struct TopCell: View {
         self.sessionCount = sessionCount
         _session = StateObject(wrappedValue: session)
         
-        let bubbleColorDescription = session.bubble?.color
         self.color = Color.bubbleColor(forName: session.bubble?.color)
         self.sessionRank = sessionRank
         
