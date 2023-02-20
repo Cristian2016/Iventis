@@ -40,7 +40,7 @@ struct PairCell: View {
                     pairPauseView //second line
                     if pair.pause == nil {
                         Push(.middle) {
-                            PairBubbleCell(bubble: pair.session?.bubble, metrics: BubbleCell.Metrics())
+                            PairBubbleCell(bubble: pair.session?.bubble)
                         }
                         .padding([.top, .bottom])
                     }

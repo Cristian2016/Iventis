@@ -12,7 +12,7 @@ import MyPackage
 struct PairBubbleCell: View {
     let bubble:Bubble //dependecy
     
-    let metrics:BubbleCell.Metrics
+    let metrics = BubbleCell.Metrics()
     
     var body: some View {
         ZStack {
@@ -51,10 +51,9 @@ struct PairBubbleCell: View {
             .scaleEffect(x: metrics.circleScale, y: metrics.circleScale)
     }
     
-    init?(bubble: Bubble?, metrics: BubbleCell.Metrics) {
+    init?(bubble: Bubble?) {
         guard let bubble = bubble else { return nil }
         self.bubble = bubble
-        self.metrics = metrics
     }
 }
 
