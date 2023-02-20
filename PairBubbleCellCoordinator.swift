@@ -12,7 +12,7 @@ import Foundation
 class PairBubbleCellCoordinator {
     unowned private let bubble:Bubble //2
     
-    @Published private(set) var components = Components("-1", "-1", "-1")
+    @Published private(set) var components = Components("0", "0", "0")
     
     
     init(bubble: Bubble) {
@@ -88,7 +88,7 @@ class PairBubbleCellCoordinator {
                             .sink { [weak self] _ in self?.update() }
                             .store(in: &cancellable)
                     case .pause, .deleteCurrentSession, .endSession, .reset:
-                        components = Components("0", "0", "-1")
+                        components = Components("0", "0", "0")
                         cancellable = []
                 }
         }
