@@ -25,6 +25,8 @@ struct PairBubbleCell: View {
                         circle
                         circle
                     }
+                    .compositingGroup()
+                    .standardShadow()
                     .scaleEffect(x: metrics.hstackScale, y: metrics.hstackScale)
                 }
             PairBubbleCell.ThreeLabels(metrics.timeComponentsFontSize, bubble)
@@ -34,7 +36,7 @@ struct PairBubbleCell: View {
     // MARK: - Lego
     private var circle:some View {
         Circle()
-            .fill(Color.label)
+            .fill(.white)
             .scaleEffect(x: metrics.circleScale, y: metrics.circleScale)
     }
     
@@ -123,7 +125,7 @@ struct ComponentsTextStyle: ViewModifier {
                 .fontDesign(.rounded)
                 .lineLimit(1)
                 .minimumScaleFactor(0.1)
-                .foregroundColor(.background)
+                .foregroundColor(.black)
     }
 }
 
