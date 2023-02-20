@@ -103,14 +103,13 @@ extension PairBubbleCell {
             guard let bubble = bubble else { return nil }
             
             self.timeComponentsFontSize = timeComponentsFontSize
-            self.bubble = bubble
-                    
-            if bubble.color == nil { return nil }
-            
+                                
             let components = bubble.pairBubbleCellCoordinator.components
             hr = components.hr
             min = components.min
             sec = components.sec
+            
+            self.bubble = bubble
         }
     }
 }
