@@ -108,7 +108,7 @@ struct BubbleCell: View {
         dragAction: { viewModel.deleteStickyNote(for: bubble) }
             tapAction : { handleNoteTap() }
         }
-        .offset(x: -12, y: -16)
+        .offset(x: -12, y: -8)
     }
         
     // MARK: - Internal
