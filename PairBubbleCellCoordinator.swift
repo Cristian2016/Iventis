@@ -85,10 +85,8 @@ class PairBubbleCellCoordinator {
                     case .start:
                         update()
                         refresh = false
-                    case .pause:
+                    case .pause, .deleteCurrentSession, .endSession, .reset:
                         cancellable = []
-                    default:
-                        break
                 }
         }
     }
