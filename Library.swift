@@ -9,6 +9,7 @@ import SwiftUI
 
 extension Notification.Name {
     static let orientation = Notification.Name("UIDevice.orientationDidChangeNotification")
+    static let appActive:NSNotification.Name = UIApplication.didBecomeActiveNotification
 }
 
 struct vRoundedRectangle: Shape {
