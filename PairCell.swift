@@ -15,6 +15,7 @@ struct PairCell: View {
     @StateObject var pair:Pair //1
     let pairNumber:Int
     let duration:Float.TimeComponentsAsStrings?
+    @State private var shouldShowPairBubbleCell = false
     
     private let textPadding = EdgeInsets(top: 4, leading: 6, bottom: 4, trailing: 8)
     private let collapsedNoteWidth = CGFloat(50)
@@ -41,6 +42,7 @@ struct PairCell: View {
                     if pair.pause == nil {
                         Push(.middle) {
                             PairBubbleCell(bubble: pair.session?.bubble)
+                                .transition(.scale)
                         }
                         .padding([.top, .bottom])
                     }

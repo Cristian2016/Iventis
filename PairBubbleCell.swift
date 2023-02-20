@@ -121,6 +121,7 @@ struct ComponentsTextStyle: ViewModifier {
         content
             .allowsHitTesting(false)
                 .font(.system(size: 400))
+                .fontDesign(.rounded)
                 .lineLimit(1)
                 .minimumScaleFactor(0.1)
                 .foregroundColor(.background)
