@@ -83,7 +83,7 @@ extension PairBubbleCell {
                             }
                         clearCircle
                             .overlay {
-                                Rectangle().fill(.white)
+                                Rectangle().fill(.clear)
                                     .aspectRatio(1.2, contentMode: .fit)
                                     .overlay {
                                         Text(min).allowsHitTesting(false)
