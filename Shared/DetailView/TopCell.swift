@@ -189,9 +189,6 @@ struct TopCell: View {
         let result = try? decoder.decode(Float.TimeComponentsAsStrings.self, from: session.totalDurationAsStrings ?? Data())
         self.duration = result
         
-        if ["magenta", "red", "bubbleGum", "orange", "sourCherry"].contains(bubbleColorDescription) {
-            self.selectionIndicatorColor = .label
-        }
         //⚠️ why it doesnt work
 //        if Int(sessionRank)! == sessionCount {
 //            self.isSelected = true
