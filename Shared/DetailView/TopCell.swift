@@ -183,7 +183,7 @@ struct TopCell: View {
         _session = StateObject(wrappedValue: session)
         
         let bubbleColorDescription = session.bubble?.color
-        self.color = (Color.triColors.filter { $0.description == bubbleColorDescription }.first ?? Color.Bubble.mint).sec
+        self.color = Color.bubbleColor(forName: session.bubble?.color)
         self.sessionRank = sessionRank
         
         let decoder = JSONDecoder()
