@@ -8,6 +8,7 @@
 //1 make sure to set fiveSeconds_bRank to nil first, then set it to a new value
 //2 fetches bubbles using a backgroundContext but I don't know how to use it afterwards
 //3 notifies PairBubbleCellCoordinator that detailview is visible or not
+//4 the reason for the 0.005 slight delay is to allow PairBubbleCellCoordinator initialize first otherwise it will not receive any notifications, duh :))
 
 import Foundation
 import SwiftUI
@@ -23,10 +24,12 @@ class ViewModel: ObservableObject {
     // MARK: - Alerts
     @Published var path = [Bubble]() {didSet{
         DispatchQueue.global().async {
-            let info = ["detailViewVisible" : self.path.isEmpty ? false : true]
-            NotificationCenter.default.post(name: .detailViewVisible,
-                                            object: nil,
-                                            userInfo: info) //3
+            delayExecution(.now() + 0.005) {
+                let info = ["detailViewVisible" : self.path.isEmpty ? false : true]
+                NotificationCenter.default.post(name: .detailViewVisible,
+                                                object: nil,
+                                                userInfo: info) //3
+            } //4
         }
     }}
             
