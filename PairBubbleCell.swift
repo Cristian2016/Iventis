@@ -17,7 +17,6 @@ struct PairBubbleCell: View {
     var body: some View {
         ZStack {
             background
-           
         }
     }
     
