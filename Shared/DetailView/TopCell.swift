@@ -186,19 +186,8 @@ struct TopCell: View {
         let decoder = JSONDecoder()
         let result = try? decoder.decode(Float.TimeComponentsAsStrings.self, from: session.totalDurationAsStrings ?? Data())
         self.duration = result
-        
-        //⚠️ why it doesnt work
-//        if Int(sessionRank)! == sessionCount {
-//            self.isSelected = true
-//        }
     }
 }
-
-//struct TopCell_Previews: PreviewProvider {
-//    static var previews: some View {
-//        TopCell(color: .red, sessionCount: <#Int#>, session: <#Binding<Session>#>)
-//    }
-//}
 
 struct DateViewBackgroundColor: View {
     let session:Session
