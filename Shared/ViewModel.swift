@@ -21,8 +21,7 @@ class ViewModel: ObservableObject {
             
     deinit { NotificationCenter.default.removeObserver(self) } //1
     
-    // MARK: - Alerts
-    @Published var path = [Bubble]() {didSet{
+    private func notifyPath() {
         DispatchQueue.global().async {
             delayExecution(.now() + 0.005) {
                 let info = ["detailViewVisible" : self.path.isEmpty ? false : true]
@@ -31,8 +30,11 @@ class ViewModel: ObservableObject {
                                                 userInfo: info) //3
             } //4
         }
-    }}
-            
+    }
+    
+    // MARK: - Alerts
+    @Published var path = [Bubble]() {didSet{ notifyPath() }}
+                
     // MARK: -
     var notesForPair: CurrentValueSubject<Pair?, Never> = .init(nil)
     
