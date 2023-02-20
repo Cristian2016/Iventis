@@ -34,39 +34,38 @@ struct DetailView: View {
     }
     
     var body: some View {
-        ZStack {
-            ScrollViewReader { proxy in
-                List {
-                    BubbleCell(bubble)
-                        .id(1)
-                        .offset(y: -6)
-                    if sessions.isEmpty { NoSessionsAlertView() }
-                    else {
-                        TopDetailView(rank)
-                            .frame(height: topDetailHeight)
-                            .listRowSeparator(.hidden)
-                        BottomDetailView(rank)
-                            .frame(height: 600)
-                            .listRowSeparator(.hidden)
-                    }
+        ScrollViewReader { proxy in
+            List {
+                BubbleCell(bubble)
+                    .id(1)
+                    .offset(y: -6)
+                if sessions.isEmpty { NoSessionsAlertView() }
+                else {
+                    TopDetailView(rank)
+                        .frame(height: topDetailHeight)
+                        .listRowSeparator(.hidden)
+                    BottomDetailView(rank)
+                        .frame(height: 600)
+                        .listRowSeparator(.hidden)
+                        .offset(y: -18)
                 }
-                .listStyle(.plain)
-                .scrollIndicators(.visible, axes: .vertical) //1
-                .onReceive(secretary.$shouldScrollToTop) {
-                    if $0 {
-                        withAnimation { proxy.scrollTo(1) }
-                        
-                        delayExecution(.now() + 0.1) {
-                            secretary.shouldScrollToTop = false
-                        }
+            }
+            .listStyle(.plain)
+            .scrollIndicators(.visible, axes: .vertical) //1
+            .onReceive(secretary.$shouldScrollToTop) {
+                if $0 {
+                    withAnimation { proxy.scrollTo(1) }
+                    
+                    delayExecution(.now() + 0.1) {
+                        secretary.shouldScrollToTop = false
                     }
                 }
             }
-            .toolbarBackground(.ultraThinMaterial)
-            .toolbar {
-                ToolbarItemGroup {
-                    if isAddTagButtonVisible { AddNoteButton() }
-                }
+        }
+        .toolbarBackground(.ultraThinMaterial)
+        .toolbar {
+            ToolbarItemGroup {
+                if isAddTagButtonVisible { AddNoteButton() }
             }
         }
     }

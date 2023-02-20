@@ -30,38 +30,33 @@ struct TopDetailView:View {
     
     // MARK: -
     var body: some View {
-        ZStack {
-//            Color.background
-//                .padding([.leading, .trailing], -100)
-//                .shadow(color: .black.opacity(0.1), radius: 2, y: 3)
-            ScrollViewReader { proxy in
-                ScrollView(.horizontal, showsIndicators: false) {
-                    LazyHStack {
-                        ForEach (sessions) { session in
-                            let sessionRank = sessionRank(of: session)
-                            TopCell(session, sessions.count, sessionRank)
-                                .id(sessionRank)
-                                .onTapGesture {
-                                    UserFeedback.singleHaptic(.medium)
-                                    postTopCellTappedNotification(for: sessionRank)
-                                    //use the same rank info you are sending to scroll self in the center
-                                    withAnimation { proxy.scrollTo(sessionRank, anchor: .center) }
-                                }
-                                .onLongPressGesture {
-                                    UserFeedback.singleHaptic(.heavy)
-                                    secretary.sessionToDelete = (session, sessionRank)
-                                }
-                                .onReceive(TopDetailView.publisher) {
-                                    let tab = String($0.userInfo!["selectedTab"] as! Int - 1)
-                                    withAnimation { proxy.scrollTo(tab, anchor: .trailing) }
-                                }
-                        }
+        ScrollViewReader { proxy in
+            ScrollView(.horizontal, showsIndicators: false) {
+                LazyHStack {
+                    ForEach (sessions) { session in
+                        let sessionRank = sessionRank(of: session)
+                        TopCell(session, sessions.count, sessionRank)
+                            .id(sessionRank)
+                            .onTapGesture {
+                                UserFeedback.singleHaptic(.medium)
+                                postTopCellTappedNotification(for: sessionRank)
+                                //use the same rank info you are sending to scroll self in the center
+                                withAnimation { proxy.scrollTo(sessionRank, anchor: .center) }
+                            }
+                            .onLongPressGesture {
+                                UserFeedback.singleHaptic(.heavy)
+                                secretary.sessionToDelete = (session, sessionRank)
+                            }
+                            .onReceive(TopDetailView.publisher) {
+                                let tab = String($0.userInfo!["selectedTab"] as! Int - 1)
+                                withAnimation { proxy.scrollTo(tab, anchor: .trailing) }
+                            }
                     }
                 }
-                .background { gradientBackground }
             }
-            .padding(.init(top: 0, leading: -17, bottom: 0, trailing: -17))
+            .background { gradientBackground }
         }
+        .padding(.init(top: 0, leading: -17, bottom: 0, trailing: -17))
     }
     
     // MARK: - Lego
