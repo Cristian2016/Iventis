@@ -33,9 +33,7 @@ class PairBubbleCellCoordinator {
             var Δ = Float(Date().timeIntervalSince(lastPairStart))
             
             Δ.round(.toNearestOrEven) //ex: 2346
-            
-            print(Δ)
-            
+                        
             let intValue = Int(Δ)
             let secValue = intValue%60
             
@@ -85,7 +83,8 @@ class PairBubbleCellCoordinator {
             case .user(let action) :
                 switch action {
                     case .start:
-                        break
+                        update()
+                        refresh = false
                     case .pause:
                         cancellable = []
                     default:
@@ -97,6 +96,8 @@ class PairBubbleCellCoordinator {
     private var shouldWork = false {didSet{
         if shouldWork {
             update(.automatic)
+        } else {
+            update(.user(.pause))
         }
     }}
     
