@@ -45,6 +45,7 @@ class PairBubbleCellCoordinator {
         NotificationCenter.Publisher(center: .default, name: .detailViewVisible)
             .sink {
                 self.shouldIWork = $0.userInfo!["detailViewVisible"] as! Bool
+                print("self.shouldIWork \(self.shouldIWork)")
             }
             .store(in: &detailViewVisibleCancellable)
     }
