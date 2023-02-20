@@ -28,7 +28,6 @@ class PairBubbleCellCoordinator {
     
     private func update() {
         guard let lastPairStart = bubble.lastPair?.start else { return }
-        print(#function)
         
         DispatchQueue.global().async {
             var Δ = Float(Date().timeIntervalSince(lastPairStart))
@@ -37,7 +36,7 @@ class PairBubbleCellCoordinator {
                         
             let intValue = Int(Δ)
             let secValue = intValue%60
-            
+                        
             //send minute and hour
             if secValue == 0 || self.refresh {
                 let giveMeAName = intValue/60%60
