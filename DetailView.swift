@@ -78,10 +78,28 @@ struct DetailView: View {
         .toolbarBackground(.ultraThinMaterial)
         .toolbar {
             ToolbarItemGroup {
-                if isAddTagButtonVisible { AddNoteButton() }
                 DetailViewInfoButton()
                 ScrollToTopButton()
+                if isAddTagButtonVisible { AddNoteButton() }
             }
+        }
+        .overlay { thinMaterialLabel }
+    }
+    
+    // MARK: - Lego
+    private var thinMaterialLabel:some View {
+        ThinMaterialLabel(title: "Scroll To Top?") {
+            thinMaterialLabelContent
+        } action: {
+            
+        }
+    }
+    
+    private var thinMaterialLabelContent:some View {
+        VStack(alignment: .leading) {
+            Text("Two ways of doing it:")
+            Text("\(Image(systemName: "rectangle.and.hand.point.up.left")) Scroll Down along any edge")
+            Text("or \(Image.tap) Tap \(Image.scrollToTop) Symbol")
         }
     }
     

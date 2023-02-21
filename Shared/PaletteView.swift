@@ -85,11 +85,6 @@ struct PaletteView: View {
         if tricolor.description == longPressedCircle { return 4 }
         return 1.8
     }
-    
-//    private func dismiss() {
-//        viewModel.togglePaletteView()
-//        tappedCircle = nil
-//    }
                               
     fileprivate func createBubble(_ tricolor:Color.Tricolor) {
         UserFeedback.singleHaptic(.light)
