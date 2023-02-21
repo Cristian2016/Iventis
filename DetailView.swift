@@ -92,11 +92,7 @@ struct ScrollToTopButton: View {
     @State private var show = false
     
     var body: some View {
-        Button {
-            Secretary.shared.scrollToTop()
-        } label: {
-            Image(systemName: "arrow.up.to.line.compact")
-        }
+        Button { Secretary.shared.scrollToTop() } label: { Image.scrollToTop }
         .opacity(show ? 1 : 0)
         .onReceive(Secretary.shared.$showScrollToTopButton) { output in
             withAnimation {
