@@ -55,10 +55,7 @@ struct DetailView: View {
             .onReceive(secretary.$shouldScrollToTop) {
                 if $0 {
                     withAnimation { proxy.scrollTo(1) }
-                    
-                    delayExecution(.now() + 0.1) {
-                        secretary.shouldScrollToTop = false
-                    }
+                    delayExecution(.now() + 0.1) { secretary.shouldScrollToTop = false }
                 }
             }
         }
