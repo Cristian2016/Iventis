@@ -22,7 +22,7 @@ struct DetailViewInfoButton: View {
                     Image.info
                 }
                 .tint(.infoButtonColor)
-                .transition(.scale)
+                .transition(.scale.combined(with: .move(edge: .leading)))
             }
         }
         .onReceive(Secretary.shared.$showDetailViewInfoButton) { output in
