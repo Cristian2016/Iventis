@@ -51,7 +51,7 @@ struct DetailView: View {
                 }
             }
             .listStyle(.plain)
-            .scrollIndicators(.visible, axes: .vertical) //1
+            .scrollIndicators(.hidden, axes: .vertical) //1
             .onReceive(secretary.$shouldScrollToTop) {
                 if $0 {
                     withAnimation { proxy.scrollTo(1) }
