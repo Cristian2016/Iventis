@@ -94,7 +94,7 @@ struct ShowDetailViewInfoView: View {
     @State private var showDetailViewInfo = false
     
     var body: some View {
-        ThinMaterialLabel(title: "Scroll To Top?") {
+        ThinMaterialLabel(title: "Can't Scroll To Top?") {
             thinMaterialLabelContent
         } action: {
             Secretary.shared.showDetailViewInfo = false
