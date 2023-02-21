@@ -37,9 +37,6 @@ struct PairBubbleCell: View {
             PairBubbleCell.ThreeLabels(metrics.timeComponentsFontSize, bubble)
         }
         .padding(10)
-        .task {
-            
-        }
     }
     
     // MARK: - Lego
