@@ -14,12 +14,15 @@ struct ScrollToTopButton: View {
         ZStack {
             if show {
                 Button { Secretary.shared.scrollToTop() } label: { Image.scrollToTop }
-                    .transition(.asymmetric(insertion: .scale, removal: .slide))
+                    .transition(scale)
             }
         }
         .onReceive(Secretary.shared.$showScrollToTopButton) { output in
             withAnimation { show = output }
         }
     }
+    
+    // MARK: -
+    let scale = AnyTransition.asymmetric(insertion: .scale, removal: .slide)
 }
 
