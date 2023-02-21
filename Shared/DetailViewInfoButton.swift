@@ -13,7 +13,7 @@ struct DetailViewInfoButton: View {
     
     var body: some View {
         Button {
-            
+            Secretary.shared.showDetailViewInfo = true
         } label: {
             Image.info
         }

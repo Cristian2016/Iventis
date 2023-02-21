@@ -83,15 +83,27 @@ struct DetailView: View {
                 if isAddTagButtonVisible { AddNoteButton() }
             }
         }
-        .overlay { thinMaterialLabel }
+        .overlay { ShowDetailViewInfoView() }
     }
     
-    // MARK: - Lego
-    private var thinMaterialLabel:some View {
+    // MARK: - Little Helpers
+    var isAddTagButtonVisible:Bool { secretary.addNoteButton_bRank == Int(bubble.rank) }
+}
+
+struct ShowDetailViewInfoView: View {
+    @State private var showDetailViewInfo = false
+    
+    var body: some View {
         ThinMaterialLabel(title: "Scroll To Top?") {
             thinMaterialLabelContent
         } action: {
-            
+            Secretary.shared.showDetailViewInfo = false
+        }
+        .opacity(showDetailViewInfo ? 1 : 0)
+        .onReceive(Secretary.shared.$showDetailViewInfo) { output in
+            withAnimation {
+                showDetailViewInfo = output
+            }
         }
     }
     
@@ -101,7 +113,4 @@ struct DetailView: View {
             Text("or \(Image.tap) Tap \(Image.scrollToTop) Symbol")
         }
     }
-    
-    // MARK: - Little Helpers
-    var isAddTagButtonVisible:Bool { secretary.addNoteButton_bRank == Int(bubble.rank) }
 }

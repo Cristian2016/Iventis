@@ -22,6 +22,8 @@ struct ThinMaterialLabel<Content:View>: View {
     let content:Content
     private let action:() -> ()
     
+    @State private var hide = false
+    
     private let metrics = Metrics()
     
     var body: some View {
