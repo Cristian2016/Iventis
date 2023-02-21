@@ -97,7 +97,7 @@ struct DetailView: View {
     
     private var thinMaterialLabelContent:some View {
         VStack(alignment: .leading) {
-            Text("\(Image(systemName: "rectangle.and.hand.point.up.left")) Scroll along screen edge")
+            Text("\(Image(systemName: "rectangle.and.hand.point.up.left")) Scroll along any screen edge")
             Text("or \(Image.tap) Tap \(Image.scrollToTop) Symbol")
         }
     }
