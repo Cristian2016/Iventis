@@ -26,6 +26,7 @@ struct DetailViewInfoButton: View {
         .onReceive(Secretary.shared.$showDetailViewInfoButton) { output in
             withAnimation { show = output }
         }
+        .transition(.scale)
         .tint(.yellow)
     }
 }
