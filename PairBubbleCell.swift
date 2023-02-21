@@ -13,6 +13,8 @@ import MyPackage
 struct PairBubbleCell: View {
     let bubble:Bubble //dependecy
     
+    @Environment(\.colorScheme) private var colorScheme
+    
     let metrics = BubbleCell.Metrics()
     
     var body: some View {
@@ -20,10 +22,12 @@ struct PairBubbleCell: View {
             Rectangle().fill(.clear)
                 .aspectRatio(metrics.ratio, contentMode: .fit)
                 .background {
-                    RoundedRectangle(cornerRadius: 35)
-                        .fill(.thinMaterial)
-                        .scaleEffect(x: 1.12, y: 1.17)
-                        .allowsHitTesting(false)
+                    if colorScheme != .dark {
+                        RoundedRectangle(cornerRadius: 35)
+                            .fill(.thinMaterial)
+                            .scaleEffect(x: 1.12, y: 1.17)
+                            .allowsHitTesting(false)
+                    }
                 }
                 .overlay {
                     HStack {
@@ -102,7 +106,7 @@ extension PairBubbleCell {
         }
         
         private var clearRectangle:some View {
-            Rectangle().fill(.clear)
+            Color.clear
                 .aspectRatio(1.2, contentMode: .fit)
         }
         

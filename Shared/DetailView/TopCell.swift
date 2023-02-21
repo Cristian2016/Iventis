@@ -14,7 +14,6 @@ struct TopCell: View {
     @Environment (\.colorScheme) private var colorScheme
     
     private var selectionIndicatorColor = Color.red
-    let sessionCount:Int
     let sessionRank:String
     let duration: Float.TimeComponentsAsStrings?
         
@@ -174,11 +173,9 @@ struct TopCell: View {
         return true
     }
     
-    init(_ session:Session ,
-         _ sessionCount:Int,
+    init(_ session:Session,
          _ sessionRank:String) {
         
-        self.sessionCount = sessionCount
         _session = StateObject(wrappedValue: session)
         
         self.sessionRank = sessionRank

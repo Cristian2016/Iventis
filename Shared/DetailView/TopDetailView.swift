@@ -34,8 +34,10 @@ struct TopDetailView:View {
             ScrollView(.horizontal, showsIndicators: false) {
                 LazyHStack {
                     ForEach (sessions) { session in
+                        
                         let sessionRank = sessionRank(of: session)
-                        TopCell(session, sessions.count, sessionRank)
+                        
+                        TopCell(session, sessionRank)
                             .id(sessionRank)
                             .onTapGesture {
                                 UserFeedback.singleHaptic(.medium)
