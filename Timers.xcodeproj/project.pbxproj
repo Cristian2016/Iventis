@@ -51,7 +51,7 @@
 		1F61BE052822BAAA00B773F9 /* DeleteActionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F61BE042822BAAA00B773F9 /* DeleteActionView.swift */; };
 		1F62194028293B5100C9B175 /* PairBubbleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F62193F28293B5100C9B175 /* PairBubbleCell.swift */; };
 		1F641FFE281FF70100413E31 /* BottomDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F641FFD281FF70100413E31 /* BottomDetailView.swift */; };
-		1F64200A2820204400413E31 /* BottomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F6420092820204400413E31 /* BottomCell.swift */; };
+		1F64200A2820204400413E31 /* PairList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F6420092820204400413E31 /* PairList.swift */; };
 		1F695087287D737600CC9FF4 /* SDButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F695086287D737600CC9FF4 /* SDButton.swift */; };
 		1F6FA29C2993E4E300D7EF90 /* ShowAllBubblesButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F6FA29B2993E4E300D7EF90 /* ShowAllBubblesButton.swift */; };
 		1F74878B286EB64E0092674F /* BubbleCell_Info.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F74878A286EB64E0092674F /* BubbleCell_Info.swift */; };
@@ -191,7 +191,7 @@
 		1F61BE042822BAAA00B773F9 /* DeleteActionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteActionView.swift; sourceTree = "<group>"; };
 		1F62193F28293B5100C9B175 /* PairBubbleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PairBubbleCell.swift; sourceTree = "<group>"; };
 		1F641FFD281FF70100413E31 /* BottomDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomDetailView.swift; sourceTree = "<group>"; };
-		1F6420092820204400413E31 /* BottomCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomCell.swift; sourceTree = "<group>"; };
+		1F6420092820204400413E31 /* PairList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PairList.swift; sourceTree = "<group>"; };
 		1F695086287D737600CC9FF4 /* SDButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SDButton.swift; sourceTree = "<group>"; };
 		1F6FA29B2993E4E300D7EF90 /* ShowAllBubblesButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowAllBubblesButton.swift; sourceTree = "<group>"; };
 		1F74878A286EB64E0092674F /* BubbleCell_Info.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BubbleCell_Info.swift; sourceTree = "<group>"; };
@@ -467,7 +467,7 @@
 				1FF0A2FC2810448100B1DB77 /* TopDetailView.swift */,
 				1F18B45F281FAABF0080ADA6 /* TopCell.swift */,
 				1F641FFD281FF70100413E31 /* BottomDetailView.swift */,
-				1F6420092820204400413E31 /* BottomCell.swift */,
+				1F6420092820204400413E31 /* PairList.swift */,
 			);
 			path = DetailView;
 			sourceTree = "<group>";
@@ -621,7 +621,7 @@
 				1F0373C228DEE6F7005CE8D3 /* AlwaysOnDisplayConfirmationView.swift in Sources */,
 				1FDB9F12287DA5040028E121 /* StartDelayBubble.swift in Sources */,
 				1FFC8BAD28142F040059EF2E /* Session Properties.swift in Sources */,
-				1F64200A2820204400413E31 /* BottomCell.swift in Sources */,
+				1F64200A2820204400413E31 /* PairList.swift in Sources */,
 				1FA1B44A298321D20063B081 /* iPhoneViewHierarchy.swift in Sources */,
 				1F20807C2836111600FD35D6 /* BSavedNote.swift in Sources */,
 				1FDB9F15287DA5040028E121 /* SDBPair Properties.swift in Sources */,

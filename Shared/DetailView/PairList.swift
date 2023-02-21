@@ -9,7 +9,7 @@ import SwiftUI
 import MyPackage
 
 ///BottomCells swipe horizontally! each BottomCell contains a list that swipes vertically. The list contains PairCells
-struct BottomCell: View {
+struct PairList: View {
     @FetchRequest var pairs:FetchedResults<Pair>
     
     ///how far from the trailing edge should the count label be
