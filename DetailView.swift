@@ -92,15 +92,12 @@ struct ScrollToTopButton: View {
     @State private var show = false
     
     var body: some View {
-        ZStack {
-            if show {
-                Button {
-                    Secretary.shared.scrollToTop()
-                } label: {
-                    Image(systemName: "arrow.up.to.line.compact")
-                }
-            }
+        Button {
+            Secretary.shared.scrollToTop()
+        } label: {
+            Image(systemName: "arrow.up.to.line.compact")
         }
+        .opacity(show ? 1 : 0)
         .onReceive(Secretary.shared.$showScrollToTopButton) { output in
             withAnimation {
                 print("value received")
