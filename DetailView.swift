@@ -65,13 +65,13 @@ struct DetailView: View {
         .toolbarBackground(.ultraThinMaterial)
         .toolbar {
             ToolbarItemGroup {
+                if isAddTagButtonVisible { AddNoteButton() }
+                
                 Button {
                     Secretary.shared.scrollToTop()
                 } label: {
                     Image(systemName: "arrow.up.to.line.compact")
                 }
-
-                if isAddTagButtonVisible { AddNoteButton() }
             }
         }
     }
