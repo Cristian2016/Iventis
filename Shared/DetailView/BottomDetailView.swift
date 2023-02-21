@@ -18,6 +18,9 @@ class SelectedTabWrapper: ObservableObject {
 struct BottomDetailView: View {
     @FetchRequest var sessions:FetchedResults<Session>
     @StateObject var tabWrapper = SelectedTabWrapper()
+    @State private var pairBubbleCellNeedsDisplay = false
+    
+    private let secretary = Secretary.shared
     
     init(_ rank:Int?) {
         let predicate:NSPredicate?
@@ -39,6 +42,9 @@ struct BottomDetailView: View {
         .onReceive(NotificationCenter.default.publisher(for: .topCellTapped)) {
             let row = $0.userInfo!["topCellTapped"] as! Int
             withAnimation { tabWrapper.selectedTab = row }
+        }
+        .onReceive(secretary.$pairBubbleCellNeedsDisplay) { output in
+            pairBubbleCellNeedsDisplay = output
         }
     }
     

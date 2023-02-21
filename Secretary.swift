@@ -19,6 +19,8 @@ class Secretary {
     ///.onMove view modifier will not be nil
 //    @Published var allowOnMove = false
     
+    @Published var pairBubbleCellNeedsDisplay = false
+    
     @Published var sessionToDelete:(session:Session, sessionRank:String)?
     
     @Published var showAlert_AlwaysOnDisplay = false
