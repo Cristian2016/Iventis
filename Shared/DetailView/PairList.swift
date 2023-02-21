@@ -37,13 +37,5 @@ struct PairList: View {
         }
         .listStyle(.plain)
         .scrollIndicators(.hidden)
-        .background {
-            VStack {
-                SmallAlertHintView(alertContent: AlertHint.scrollToTop)
-                    .padding(2)
-                Spacer()
-            }
-        }
-        .refreshable { Secretary.shared.scrollToTop() }
     }
 }
