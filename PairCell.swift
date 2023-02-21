@@ -42,7 +42,6 @@ struct PairCell: View {
                     if pair.pause == nil {
                         Push(.middle) {
                             PairBubbleCell(bubble: pair.session?.bubble)
-                                .transition(.scale)
                         }
                         .padding([.top, .bottom])
                     }
