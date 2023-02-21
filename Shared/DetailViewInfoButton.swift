@@ -21,12 +21,11 @@ struct DetailViewInfoButton: View {
                 } label: {
                     Image.info
                 }
+                .transition(.scale)
             }
         }
         .onReceive(Secretary.shared.$showDetailViewInfoButton) { output in
             withAnimation { show = output }
         }
-        .transition(.scale)
-        .tint(.yellow)
     }
 }

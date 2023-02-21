@@ -14,9 +14,9 @@ struct ScrollToTopButton: View {
         ZStack {
             if show {
                 Button { Secretary.shared.scrollToTop() } label: { Image.scrollToTop }
+                    .transition(.scale)
             }
         }
-        .transition(.scale)
         .onReceive(Secretary.shared.$showScrollToTopButton) { output in
             withAnimation { show = output }
         }
