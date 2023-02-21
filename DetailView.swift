@@ -87,18 +87,3 @@ struct DetailView: View {
     // MARK: - Little Helpers
     var isAddTagButtonVisible:Bool { secretary.addNoteButton_bRank == Int(bubble.rank) }
 }
-
-struct ScrollToTopButton: View {
-    @State private var show = false
-    
-    var body: some View {
-        Button { Secretary.shared.scrollToTop() } label: { Image.scrollToTop }
-        .opacity(show ? 1 : 0)
-        .onReceive(Secretary.shared.$showScrollToTopButton) { output in
-            withAnimation {
-                print("value received")
-                show = output
-            }
-        }
-    }
-}
