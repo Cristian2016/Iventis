@@ -36,7 +36,7 @@ struct TopDetailView:View {
                     ForEach (sessions) { session in
                         
                         let sessionRank = sessionRank(of: session)
-                        
+                    
                         TopCell(session, sessionRank)
                             .id(sessionRank)
                             .onTapGesture {
