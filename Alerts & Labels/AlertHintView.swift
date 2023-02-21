@@ -40,7 +40,7 @@ struct AlertHintView: View {
                 Text(alertContent.content ?? "")
                     .foregroundColor(.secondary)
                     .padding([.leading, .trailing])
-                Button("Do not show again") { buttonAction() }
+                Button("OK") { buttonAction() }
                 .buttonStyle(.bordered)
                 .fontWeight(.medium)
                 .tint(.red)
@@ -59,6 +59,6 @@ struct AlertHintView: View {
 
 struct AlertView_Previews: PreviewProvider {
     static var previews: some View {
-        AlertHintView(alertContent: AlertHint.deviceAutoLock, dismissAction: {}, buttonAction: {})
+        AlertHintView(alertContent: AlertHint.scrollToTop, dismissAction: {}, buttonAction: {})
     }
 }

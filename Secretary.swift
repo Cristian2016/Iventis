@@ -7,6 +7,7 @@
 //1 scrolls top top in DetailView when user pulls down on the table [PairCellList]
 
 import SwiftUI
+import MyPackage
 
 class Secretary {
     private init() { }
@@ -75,6 +76,14 @@ class Secretary {
     
     @Published var showScrollToTopButton = false
     @Published var shouldScrollToTop = false
+    
+    @Published var showDetailViewInfoButton = false {didSet{
+        if showDetailViewInfoButton {
+            delayExecution(.now() + 5.0) { [weak self] in
+                self?.showDetailViewInfoButton.toggle()
+            }
+        }
+    }}
     
     func scrollToTop() {
         if !shouldScrollToTop { shouldScrollToTop = true }

@@ -79,6 +79,7 @@ struct DetailView: View {
         .toolbar {
             ToolbarItemGroup {
                 if isAddTagButtonVisible { AddNoteButton() }
+                DetailViewInfoButton()
                 ScrollToTopButton()
             }
         }

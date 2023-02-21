@@ -37,5 +37,8 @@ struct PairList: View {
         }
         .listStyle(.plain)
         .scrollIndicators(.hidden)
+        .refreshable {
+            Secretary.shared.showDetailViewInfoButton.toggle()
+        }
     }
 }
