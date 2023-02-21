@@ -39,6 +39,22 @@ struct DetailView: View {
                 BubbleCell(bubble)
                     .id(1)
                     .offset(y: -6)
+                    .background {
+                        GeometryReader { geo -> Color in
+                            DispatchQueue.main.async {
+                                let offsetY = geo.frame(in: .global).origin.y
+
+                                if offsetY < -90, !secretary.showScrollToTopButton {
+                                    secretary.showScrollToTopButton = true
+                                }
+
+                                if offsetY > -90, secretary.showScrollToTopButton {
+                                    secretary.showScrollToTopButton = false
+                                }
+                            }
+                            return .clear
+                        }
+                    }
                 if sessions.isEmpty { NoSessionsAlertView() }
                 else {
                     TopDetailView(rank)
@@ -63,7 +79,21 @@ struct DetailView: View {
         .toolbar {
             ToolbarItemGroup {
                 if isAddTagButtonVisible { AddNoteButton() }
-                
+                ScrollToTopButton()
+            }
+        }
+    }
+    
+    // MARK: - Little Helpers
+    var isAddTagButtonVisible:Bool { secretary.addNoteButton_bRank == Int(bubble.rank) }
+}
+
+struct ScrollToTopButton: View {
+    @State private var show = false
+    
+    var body: some View {
+        ZStack {
+            if show {
                 Button {
                     Secretary.shared.scrollToTop()
                 } label: {
@@ -71,8 +101,11 @@ struct DetailView: View {
                 }
             }
         }
+        .onReceive(Secretary.shared.$showScrollToTopButton) { output in
+            withAnimation {
+                print("value received")
+                show = output
+            }
+        }
     }
-    
-    // MARK: - Little Helpers
-    var isAddTagButtonVisible:Bool { secretary.addNoteButton_bRank == Int(bubble.rank) }
 }
