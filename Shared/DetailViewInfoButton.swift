@@ -25,9 +25,3 @@ struct DetailViewInfoButton: View {
         }
     }
 }
-
-struct DetailViewInfoButton_Previews: PreviewProvider {
-    static var previews: some View {
-        DetailViewInfoButton()
-    }
-}
