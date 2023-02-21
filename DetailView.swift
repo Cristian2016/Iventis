@@ -96,7 +96,6 @@ struct ShowDetailViewInfoView: View {
     var body: some View {
         ThinMaterialLabel(title: "Scroll To Top?") {
             thinMaterialLabelContent
-                .allowsHitTesting(false)
         } action: {
             Secretary.shared.showDetailViewInfo = false
         }
