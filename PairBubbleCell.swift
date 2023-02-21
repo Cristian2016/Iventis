@@ -23,6 +23,7 @@ struct PairBubbleCell: View {
                     RoundedRectangle(cornerRadius: 35)
                         .fill(.thinMaterial)
                         .scaleEffect(x: 1.12, y: 1.17)
+                        .allowsHitTesting(false)
                 }
                 .overlay {
                     HStack {
