@@ -12,14 +12,17 @@ struct DetailViewInfoButton: View {
     @State private var show = false
     
     var body: some View {
-        Button {
-            if !Secretary.shared.showDetailViewInfo {
-                Secretary.shared.showDetailViewInfo = true
+        ZStack {
+            if show {
+                Button {
+                    if !Secretary.shared.showDetailViewInfo {
+                        Secretary.shared.showDetailViewInfo = true
+                    }
+                } label: {
+                    Image.info
+                }
             }
-        } label: {
-            Image.info
         }
-        .opacity(show ? 1 : 0)
         .onReceive(Secretary.shared.$showDetailViewInfoButton) { output in
             withAnimation { show = output }
         }

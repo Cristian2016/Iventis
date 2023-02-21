@@ -11,10 +11,14 @@ struct ScrollToTopButton: View {
     @State private var show = false
     
     var body: some View {
-        Button { Secretary.shared.scrollToTop() } label: { Image.scrollToTop }
-        .opacity(show ? 1 : 0)
+        ZStack {
+            if show {
+                Button { Secretary.shared.scrollToTop() } label: { Image.scrollToTop }
+            }
+        }
         .onReceive(Secretary.shared.$showScrollToTopButton) { output in
             withAnimation { show = output }
         }
     }
 }
+
