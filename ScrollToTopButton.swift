@@ -13,8 +13,13 @@ struct ScrollToTopButton: View {
     var body: some View {
         ZStack {
             if show {
-                Button { Secretary.shared.scrollToTop() } label: { Image.scrollToTop }
-                    .transition(.scale.combined(with: .move(edge: .leading)))
+                Button { Secretary.shared.scrollToTop() } label: {
+//                    Image.scrollToTop
+//                        .padding([.leading, .trailing])
+//                        .background(.quaternary, in: RoundedRectangle(cornerRadius: 4))
+                    FusedLabel(content: .scrollToTop)
+                }
+                .transition(.scale.combined(with: .move(edge: .leading)))
             }
         }
         .onReceive(Secretary.shared.$showScrollToTopButton) { output in

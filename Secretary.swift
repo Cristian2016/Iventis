@@ -87,8 +87,6 @@ class Secretary {
     
     @Published var showDetailViewInfo = false
     
-    @Published var theOneAndOnlySelectedTopCell_Rank:Int?
-    
     func scrollToTop() {
         if !shouldScrollToTop { shouldScrollToTop = true }
     } //1

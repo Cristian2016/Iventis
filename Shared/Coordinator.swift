@@ -20,6 +20,8 @@ class BubbleCellCoordinator {
     
     unowned private let bubble:Bubble
     
+    @Published var theOneAndOnlySelectedTopCell:String?
+    
     @Published private(set) var components = Components("-1", "-1", "-1", "-1")
     @Published private(set) var opacity = Opacity()
     var colorPublisher:Publisher<Color, Never>
@@ -163,6 +165,7 @@ class BubbleCellCoordinator {
         self.colorPublisher = .init(Color.bubbleColor(forName: bubble.color))
                 
         observeActivePhase()
+        observe_detailViewVisible()
         
         //set initial values when bubble is created [ViewModel.createBubble]
         DispatchQueue.global().async {
@@ -181,6 +184,7 @@ class BubbleCellCoordinator {
         NotificationCenter.default.removeObserver(self)
     }
     
+    // MARK: - Observers
     private func observeActivePhase() {
         NotificationCenter.default.addObserver(forName: UIApplication.didBecomeActiveNotification, object: nil, queue: nil) { _ in
             DispatchQueue.global().async {
@@ -197,6 +201,15 @@ class BubbleCellCoordinator {
                     
                     if self.bubble.state == .running { self.update(.start) }
                 }
+            }
+        }
+    }
+    
+    private func observe_detailViewVisible() {
+        NotificationCenter.default.addObserver(forName: .detailViewVisible, object: nil, queue: nil) { [weak self] in
+            let detailViewVisible = $0.userInfo!["detailViewVisible"] as! Bool
+            if !detailViewVisible {
+                self?.theOneAndOnlySelectedTopCell = nil
             }
         }
     }

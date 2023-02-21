@@ -36,8 +36,9 @@ struct TopDetailView:View {
                     ForEach (sessions) { session in
                         
                         let sessionRank = sessionRank(of: session)
+                        let shouldSelect = sessionRank == String(sessions.count)
                     
-                        TopCell(session, sessionRank)
+                        TopCell(session, sessionRank, shouldSelect)
                             .id(sessionRank)
                             .onTapGesture {
                                 UserFeedback.singleHaptic(.medium)

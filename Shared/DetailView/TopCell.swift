@@ -12,6 +12,7 @@ struct TopCell: View {
     @StateObject private var session:Session
     @State private var isSelected = false
     @Environment (\.colorScheme) private var colorScheme
+    let secretary = Secretary.shared
     
     private var selectionIndicatorColor = Color.red
     let sessionRank:String
@@ -26,6 +27,7 @@ struct TopCell: View {
     
     let durationFont = Font.system(size: 24, weight: .semibold)
     let durationComponentsFont = Font.system(size: 20, weight: .semibold)
+    
     
     // MARK: -
     var body: some View {
@@ -151,17 +153,6 @@ struct TopCell: View {
             }
             Spacer()
         }
-//        VStack {
-//            ZStack {
-//                Rectangle()
-//                    .fill(selectionIndicatorColor)
-//                    .frame(width: 4, height: 35)
-//                selectionIndicatorColor
-//                    .frame(width: 20, height: 1)
-//            }
-//
-//            Spacer()
-//        }
     }
     
     // MARK: -
@@ -173,8 +164,7 @@ struct TopCell: View {
         return true
     }
     
-    init(_ session:Session,
-         _ sessionRank:String) {
+    init(_ session:Session, _ sessionRank:String, _ shouldSelect:Bool) {
         
         _session = StateObject(wrappedValue: session)
         
@@ -183,6 +173,15 @@ struct TopCell: View {
         let decoder = JSONDecoder()
         let result = try? decoder.decode(Float.TimeComponentsAsStrings.self, from: session.totalDurationAsStrings ?? Data())
         self.duration = result
+        
+        let coordinator = session.bubble?.coordinator
+        let selectedTopCell = coordinator?.theOneAndOnlySelectedTopCell
+        
+        if selectedTopCell == nil && shouldSelect {
+            isSelected = true
+            coordinator?.theOneAndOnlySelectedTopCell = sessionRank
+            print("shouldSelect \(sessionRank)")
+        }
     }
 }
 
