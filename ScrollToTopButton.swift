@@ -18,10 +18,3 @@ struct ScrollToTopButton: View {
         }
     }
 }
-
-
-struct ScrollToTopButton_Previews: PreviewProvider {
-    static var previews: some View {
-        ScrollToTopButton()
-    }
-}
