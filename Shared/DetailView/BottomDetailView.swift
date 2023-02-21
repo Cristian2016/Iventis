@@ -46,9 +46,3 @@ struct BottomDetailView: View {
         sessions.count - sessions.firstIndex(of: session)!
     }
 }
-
-//struct DetailBottomView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        DetailBottomView(session: PersistenceController.shared.viewContext.count(for: <#T##NSFetchRequest<NSFetchRequestResult>#>))
-//    }
-//}
