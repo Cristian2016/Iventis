@@ -13,7 +13,9 @@ struct DetailViewInfoButton: View {
     
     var body: some View {
         Button {
-            Secretary.shared.showDetailViewInfo = true
+            if !Secretary.shared.showDetailViewInfo {
+                Secretary.shared.showDetailViewInfo = true
+            }
         } label: {
             Image.info
         }
