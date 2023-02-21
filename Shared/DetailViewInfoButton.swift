@@ -21,6 +21,7 @@ struct DetailViewInfoButton: View {
                 } label: {
                     Image.info
                 }
+                .tint(.infoButtonColor)
                 .transition(.scale)
             }
         }
