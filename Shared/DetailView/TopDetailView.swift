@@ -30,37 +30,43 @@ struct TopDetailView:View {
     
     // MARK: -
     var body: some View {
-        ScrollViewReader { proxy in
-            ScrollView(.horizontal, showsIndicators: false) {
-                LazyHStack {
-                    ForEach (sessions) { session in
-                        
-                        let sessionRank = sessionRank(of: session)
-                    
-                        TopCell(session, sessionRank)
-                            .id(sessionRank)
-                            .onTapGesture {
-                                UserFeedback.singleHaptic(.medium)
-                                postTopCellTappedNotification(for: sessionRank)
-                                //use the same rank info you are sending to scroll self in the center
-                                withAnimation { proxy.scrollTo(sessionRank, anchor: .center) }
-                                
-                                delayExecution(.now() + 0.3) {
-                                    Secretary.shared.pairBubbleCellNeedsDisplay.toggle()
+        ZStack {
+            Color.background
+                .cornerRadius(24)
+                .shadow(color: .black.opacity(0.08), radius: 2, x: 0, y: 3)
+                .padding([.leading, .trailing], -100)
+            
+            ScrollViewReader { proxy in
+                ScrollView(.horizontal, showsIndicators: false) {
+                    LazyHStack {
+                        ForEach (sessions) { session in
+                            
+                            let sessionRank = sessionRank(of: session)
+                            
+                            TopCell(session, sessionRank)
+                                .id(sessionRank)
+                                .onTapGesture {
+                                    UserFeedback.singleHaptic(.medium)
+                                    postTopCellTappedNotification(for: sessionRank)
+                                    //use the same rank info you are sending to scroll self in the center
+                                    withAnimation { proxy.scrollTo(sessionRank, anchor: .center) }
+                                    
+                                    delayExecution(.now() + 0.3) {
+                                        Secretary.shared.pairBubbleCellNeedsDisplay.toggle()
+                                    }
                                 }
-                            }
-                            .onLongPressGesture {
-                                UserFeedback.singleHaptic(.heavy)
-                                secretary.sessionToDelete = (session, sessionRank)
-                            }
-                            .onReceive(TopDetailView.publisher) {
-                                let tab = String($0.userInfo!["selectedTab"] as! Int - 1)
-                                withAnimation { proxy.scrollTo(tab, anchor: .trailing) }
-                            }
+                                .onLongPressGesture {
+                                    UserFeedback.singleHaptic(.heavy)
+                                    secretary.sessionToDelete = (session, sessionRank)
+                                }
+                                .onReceive(TopDetailView.publisher) {
+                                    let tab = String($0.userInfo!["selectedTab"] as! Int - 1)
+                                    withAnimation { proxy.scrollTo(tab, anchor: .trailing) }
+                                }
+                        }
                     }
                 }
             }
-            .background { gradientBackground }
         }
         .padding(.init(top: 0, leading: -17, bottom: 0, trailing: -17))
     }

@@ -63,7 +63,6 @@ struct DetailView: View {
                     BottomDetailView(rank)
                         .frame(height: 600)
                         .listRowSeparator(.hidden)
-                        .offset(y: -18)
                 }
             }
             .listStyle(.plain)
