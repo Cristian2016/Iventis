@@ -177,8 +177,8 @@ struct TopCell: View {
         let selectedTopCell = coordinator?.theOneAndOnlySelectedTopCell
         
         if selectedTopCell == nil {
+            coordinator?.theOneAndOnlySelectedTopCell = sessionRank
             _isSelected = State(wrappedValue: true)
-//            coordinator?.theOneAndOnlySelectedTopCell = sessionRank
             print("shouldSelect \(sessionRank)")
         }
     }

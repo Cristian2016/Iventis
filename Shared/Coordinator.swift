@@ -20,9 +20,7 @@ class BubbleCellCoordinator {
     
     unowned private let bubble:Bubble
     
-    @Published var theOneAndOnlySelectedTopCell:String? {didSet{
-        print("theOneAndOnlySelectedTopCell \(theOneAndOnlySelectedTopCell)")
-    }}
+    var theOneAndOnlySelectedTopCell:String?
     
     @Published private(set) var components = Components("-1", "-1", "-1", "-1")
     @Published private(set) var opacity = Opacity()
