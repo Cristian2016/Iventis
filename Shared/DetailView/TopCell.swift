@@ -166,13 +166,12 @@ struct TopCell: View {
         
         guard let session = session else { return nil }
         
-        self.session = session
-        
-        self.sessionRank = sessionRank
-        
         let decoder = JSONDecoder()
         let result = try? decoder.decode(Float.TimeComponentsAsStrings.self, from: session.totalDurationAsStrings ?? Data())
+        
         self.duration = result
+        self.session = session
+        self.sessionRank = sessionRank
         
         let coordinator = session.bubble?.coordinator
         let selectedTopCell = coordinator?.theOneAndOnlySelectedTopCell

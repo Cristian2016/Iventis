@@ -36,7 +36,6 @@ struct TopDetailView:View {
                     ForEach (sessions) { session in
                         
                         let sessionRank = sessionRank(of: session)
-                        let shouldSelect = sessionRank == String(sessions.count)
                     
                         TopCell(session, sessionRank)
                             .id(sessionRank)
