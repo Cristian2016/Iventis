@@ -36,9 +36,7 @@ struct BottomDetailView: View {
     
     var body: some View {
         TabView (selection: $tabWrapper.selectedTab) {
-            ForEach(sessions) {
-                PairList($0).tag(sessionRank(of:$0))
-            }
+            ForEach(sessions) { PairList($0).tag(sessionRank(of:$0)) }
         }
         .padding(.init(top: 0, leading: -12, bottom: 0, trailing: -12))
         .tabViewStyle(.page(indexDisplayMode: .never))
