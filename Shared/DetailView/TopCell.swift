@@ -9,7 +9,7 @@ import SwiftUI
 import MyPackage
 
 struct TopCell: View {
-    @StateObject private var session:Session
+    let session:Session
     @State private var isSelected = false
     @Environment (\.colorScheme) private var colorScheme
     let secretary = Secretary.shared
@@ -31,7 +31,7 @@ struct TopCell: View {
     
     // MARK: -
     var body: some View {
-        let _ = print("Top Cell body")
+//        let _ = print("Top Cell body")
         HStack {
             ZStack {
                 sessionRankView
@@ -166,7 +166,7 @@ struct TopCell: View {
         
         guard let session = session else { return nil }
         
-        _session = StateObject(wrappedValue: session)
+        self.session = session
         
         self.sessionRank = sessionRank
         
