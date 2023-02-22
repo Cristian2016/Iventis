@@ -32,32 +32,30 @@ struct TopCell: View {
     // MARK: -
     var body: some View {
         let _ = print("Top Cell body")
-        if !session.isFault {
-            HStack {
-                ZStack {
-                    sessionRankView
-                    Push(.bottomLeft) {
-                        VStack (alignment:.leading, spacing: dateDurationViewsSpacing) {
-                            dateView
-                            durationView.padding(2)
-                        }.padding(edgeInset)
-                    }
-                    .frame(height: topCellHeight)
-                    .background( backgroundView )
-                    if isSelected { selectionNeedle }
+        HStack {
+            ZStack {
+                sessionRankView
+                Push(.bottomLeft) {
+                    VStack (alignment:.leading, spacing: dateDurationViewsSpacing) {
+                        dateView
+                        durationView.padding(2)
+                    }.padding(edgeInset)
                 }
-                Color.lightGray.frame(width:1, height: 100)
+                .frame(height: topCellHeight)
+                .background( backgroundView )
+                if isSelected { selectionNeedle }
             }
-           
-            .onReceive(NotificationCenter.default.publisher(for: .topCellTapped)) { output in
-                let cellRank = output.userInfo!["topCellTapped"] as! Int
-                isSelected = cellRank == Int(sessionRank)!
-            }
-            .onReceive(NotificationCenter.default.publisher(for: .selectedTab)) { output in
-                let selectedTab = output.userInfo?["selectedTab"] as! Int
-                if sessionRank == String(selectedTab) { isSelected = true }
-                else { isSelected = false }
-            }
+            Color.lightGray.frame(width:1, height: 100)
+        }
+        
+        .onReceive(NotificationCenter.default.publisher(for: .topCellTapped)) { output in
+            let cellRank = output.userInfo!["topCellTapped"] as! Int
+            isSelected = cellRank == Int(sessionRank)!
+        }
+        .onReceive(NotificationCenter.default.publisher(for: .selectedTab)) { output in
+            let selectedTab = output.userInfo?["selectedTab"] as! Int
+            if sessionRank == String(selectedTab) { isSelected = true }
+            else { isSelected = false }
         }
     }
     
@@ -164,7 +162,9 @@ struct TopCell: View {
         return true
     }
     
-    init(_ session:Session, _ sessionRank:String, _ shouldSelect:Bool) {
+    init?(_ session:Session?, _ sessionRank:String) {
+        
+        guard let session = session else { return nil }
         
         _session = StateObject(wrappedValue: session)
         
@@ -177,9 +177,9 @@ struct TopCell: View {
         let coordinator = session.bubble?.coordinator
         let selectedTopCell = coordinator?.theOneAndOnlySelectedTopCell
         
-        if selectedTopCell == nil && shouldSelect {
-            isSelected = true
-            coordinator?.theOneAndOnlySelectedTopCell = sessionRank
+        if selectedTopCell == nil {
+            _isSelected = State(wrappedValue: true)
+//            coordinator?.theOneAndOnlySelectedTopCell = sessionRank
             print("shouldSelect \(sessionRank)")
         }
     }
