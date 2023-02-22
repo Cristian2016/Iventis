@@ -67,7 +67,11 @@ struct TopDetailView:View {
     
     // MARK: - Lego
     private var gradientBackground:some View {
-        LinearGradient(colors: [.topDetailViewBackground1, .topDetailViewBackground], startPoint: .bottom, endPoint: .top)
+        let stops = [
+            Gradient.Stop(color: .topDetailViewBackground1, location: 0.1),
+            .init(color: .topDetailViewBackground, location: 0.2)
+        ]
+       return LinearGradient(stops: stops, startPoint: .bottom, endPoint: .top)
     }
     
     // MARK: -
