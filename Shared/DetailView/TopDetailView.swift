@@ -54,6 +54,8 @@ struct TopDetailView:View {
                                     delayExecution(.now() + 0.3) {
                                         Secretary.shared.pairBubbleCellNeedsDisplay.toggle()
                                     }
+                                    
+                                    session.bubble?.coordinator.theOneAndOnlySelectedTopCell = sessionRank
                                 }
                                 .onLongPressGesture {
                                     UserFeedback.singleHaptic(.heavy)
@@ -77,7 +79,7 @@ struct TopDetailView:View {
             Gradient.Stop(color: .topDetailViewBackground1, location: 0.05),
             .init(color: .topDetailViewBackground, location: 1)
         ]
-       return LinearGradient(stops: stops, startPoint: .bottom, endPoint: .top)
+        return LinearGradient(stops: stops, startPoint: .bottom, endPoint: .top)
     }
     
     // MARK: -

@@ -120,6 +120,18 @@ class ViewModel: ObservableObject {
         let viewContext = PersistenceController.shared.viewContext
         viewContext.delete(session)
         try? viewContext.save()
+        
+        let sessionToDeleteRank = secretary.sessionToDelete!.sessionRank
+        let selectedSessionRank = bubble.coordinator.theOneAndOnlySelectedTopCell!
+        
+        print(sessionToDeleteRank, selectedSessionRank)
+        
+        if  sessionToDeleteRank == selectedSessionRank {
+            bubble.coordinator.theOneAndOnlySelectedTopCell = String(bubble.sessions_.count)
+            delayExecution(.now() + 0.3) {
+                self.secretary.pairBubbleCellNeedsDisplay.toggle()
+            }
+        }
     }
     
     func removeAddNoteButton(_ bubble:Bubble) {
@@ -180,6 +192,7 @@ class ViewModel: ObservableObject {
                 secretary.addNoteButton_bRank = nil //clear first
                 secretary.addNoteButton_bRank = Int(bubble.rank)
                 
+                //repetitive chunk of code ⚠️
                 bubble.coordinator.updateComponents(.user(.start))
                 bubble.pairBubbleCellCoordinator.update(.user(.start))
                 bubble.coordinator.theOneAndOnlySelectedTopCell = String(bubble.sessions_.count)
@@ -197,6 +210,7 @@ class ViewModel: ObservableObject {
                 secretary.addNoteButton_bRank = nil //clear first
                 secretary.addNoteButton_bRank = Int(bubble.rank)
                 
+                //repetitive chunk of code ⚠️
                 bubble.coordinator.updateComponents(.user(.start))
                 bubble.pairBubbleCellCoordinator.update(.user(.start))
                 bubble.coordinator.theOneAndOnlySelectedTopCell = String(bubble.sessions_.count)
