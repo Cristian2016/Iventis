@@ -31,9 +31,17 @@ struct TopDetailView:View {
     // MARK: -
     var body: some View {
         ZStack {
-            Color.background
-                .shadow(color: .black.opacity(0.08), radius: 2, x: 0, y: 3)
-                .padding([.leading, .trailing], -100)
+            
+            if colorScheme == .light {
+                Color.background
+                    .shadow(color: .black.opacity(0.08), radius: 2, x: 0, y: 3)
+                    .padding([.leading, .trailing], -100)
+            }
+            
+            if colorScheme == .dark {
+                gradientBackground
+            }
+            
             
             ScrollViewReader { proxy in
                 ScrollView(.horizontal, showsIndicators: false) {
@@ -74,9 +82,9 @@ struct TopDetailView:View {
     
     // MARK: - Lego
     private var gradientBackground:some View {
-        let stops = [
-            Gradient.Stop(color: .topDetailViewBackground1, location: 0.05),
-            .init(color: .topDetailViewBackground, location: 1)
+        let stops:[Gradient.Stop] = [
+            .init(color: .topDetailViewBackground, location: 0.05),
+            .init(color: .topDetailViewBackground1, location: 1)
         ]
         return LinearGradient(stops: stops, startPoint: .bottom, endPoint: .top)
     }
