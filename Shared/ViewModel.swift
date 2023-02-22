@@ -126,7 +126,7 @@ class ViewModel: ObservableObject {
         
         print(sessionToDeleteRank, selectedSessionRank)
         
-        if  sessionToDeleteRank == selectedSessionRank {
+        if sessionToDeleteRank == selectedSessionRank {
             bubble.coordinator.theOneAndOnlySelectedTopCell = String(bubble.sessions_.count)
             delayExecution(.now() + 0.3) {
                 self.secretary.pairBubbleCellNeedsDisplay.toggle()
