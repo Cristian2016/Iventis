@@ -37,7 +37,7 @@ struct BottomDetailView: View {
     var body: some View {
         TabView (selection: $tabWrapper.selectedTab) {
             ForEach(sessions) {
-                PairList($0).tag(position(of:$0))
+                PairList($0).tag(sessionRank(of:$0))
             }
         }
         .padding(.init(top: 0, leading: -12, bottom: 0, trailing: -12))
@@ -56,7 +56,7 @@ struct BottomDetailView: View {
         }
     }
     
-    private func position(of session:Session) -> Int {
+    private func sessionRank(of session:Session) -> Int {
         sessions.count - sessions.firstIndex(of: session)!
     }
 }

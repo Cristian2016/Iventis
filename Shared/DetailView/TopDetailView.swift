@@ -46,8 +46,7 @@ struct TopDetailView:View {
                                 .onTapGesture {
                                     UserFeedback.singleHaptic(.medium)
                                     postTopCellTappedNotification(for: sessionRank)
-                                    //use the same rank info you are sending to scroll self in the center
-                                    withAnimation { proxy.scrollTo(sessionRank, anchor: .center) }
+                                    withAnimation { proxy.scrollTo(sessionRank) }
                                     
                                     delayExecution(.now() + 0.3) {
                                         Secretary.shared.pairBubbleCellNeedsDisplay.toggle()
