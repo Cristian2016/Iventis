@@ -19,13 +19,16 @@ struct BottomDetailView: View {
     @FetchRequest var sessions:FetchedResults<Session>
     @StateObject var tabWrapper = SelectedTabWrapper()
     @State private var pairBubbleCellNeedsDisplay = false
+    private let bubble:Bubble
     
     private let secretary = Secretary.shared
     
-    init(_ rank:Int?) {
-        let predicate:NSPredicate?
-        if let rank = rank { predicate = NSPredicate(format: "bubble.rank == %i", rank)
-        } else { predicate = nil }
+    init?(_ bubble:Bubble?) {
+        guard let bubble = bubble else { return nil }
+        self.bubble = bubble
+        
+        
+        let predicate = NSPredicate(format: "bubble.rank == %i", bubble.rank)
         
         let descriptor = NSSortDescriptor(key: "created", ascending: false)
         _sessions = FetchRequest(entity: Session.entity(), sortDescriptors: [descriptor], predicate: predicate, animation: .easeInOut)
@@ -45,6 +48,11 @@ struct BottomDetailView: View {
         }
         .onReceive(secretary.$pairBubbleCellNeedsDisplay) { output in
             pairBubbleCellNeedsDisplay = output
+        }
+        .onReceive(bubble.coordinator.$theOneAndOnlySelectedTopCell) { output in
+            if let output = output {
+                withAnimation { tabWrapper.selectedTab = Int(output)!}
+            }
         }
     }
     

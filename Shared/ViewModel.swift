@@ -183,6 +183,9 @@ class ViewModel: ObservableObject {
                 bubble.coordinator.updateComponents(.user(.start))
                 bubble.pairBubbleCellCoordinator.update(.user(.start))
                 bubble.coordinator.theOneAndOnlySelectedTopCell = String(bubble.sessions_.count)
+                delayExecution(.now() + 0.3) {
+                    self.secretary.pairBubbleCellNeedsDisplay.toggle()
+                }
                                                 
             case .paused:  /* changes to running */
                 //create new pair, add it to currentSession
@@ -197,6 +200,9 @@ class ViewModel: ObservableObject {
                 bubble.coordinator.updateComponents(.user(.start))
                 bubble.pairBubbleCellCoordinator.update(.user(.start))
                 bubble.coordinator.theOneAndOnlySelectedTopCell = String(bubble.sessions_.count)
+                delayExecution(.now() + 0.3) {
+                    self.secretary.pairBubbleCellNeedsDisplay.toggle()
+                }
                 
             case .running: /* changes to .paused */
                 let currentPair = bubble.lastPair

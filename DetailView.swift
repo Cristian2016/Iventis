@@ -60,7 +60,7 @@ struct DetailView: View {
                     TopDetailView(rank)
                         .frame(height: topDetailHeight)
                         .listRowSeparator(.hidden)
-                    BottomDetailView(rank)
+                    BottomDetailView(bubble)
                         .frame(height: 600)
                         .listRowSeparator(.hidden)
                 }
