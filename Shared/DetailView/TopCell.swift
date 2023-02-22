@@ -56,8 +56,8 @@ struct TopCell: View {
             if sessionRank == String(selectedTab) { isSelected = true }
             else { isSelected = false }
         }
-        .onReceive((session.bubble?.coordinator?.$theOneAndOnlySelectedTopCell)!) {
-            if $0 == sessionRank { isSelected = true }
+        .onReceive(((session.bubble?.coordinator?.$theOneAndOnlySelectedTopCell)!)) {
+            isSelected = ($0 == sessionRank) ? true : false
         }
     }
     
@@ -166,7 +166,10 @@ struct TopCell: View {
     
     init?(_ session:Session?, _ sessionRank:String) {
         
-        guard let session = session else { return nil }
+        guard
+            let session = session,
+            let coordinator = session.bubble?.coordinator
+        else { return nil }
         
         let decoder = JSONDecoder()
         let result = try? decoder.decode(Float.TimeComponentsAsStrings.self, from: session.totalDurationAsStrings ?? Data())
@@ -175,11 +178,10 @@ struct TopCell: View {
         self.session = session
         self.sessionRank = sessionRank
         
-        let coordinator = session.bubble?.coordinator
-        let selectedTopCell = coordinator?.theOneAndOnlySelectedTopCell
+        let selectedTopCell = coordinator.theOneAndOnlySelectedTopCell
         
         if selectedTopCell == nil && sessionRank == String(session.bubble!.sessions_.count) {
-            coordinator?.theOneAndOnlySelectedTopCell = sessionRank
+            coordinator.theOneAndOnlySelectedTopCell = sessionRank
         }
     }
 }
