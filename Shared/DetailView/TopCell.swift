@@ -56,10 +56,8 @@ struct TopCell: View {
             if sessionRank == String(selectedTab) { isSelected = true }
             else { isSelected = false }
         }
-        .onReceive((session.bubble?.coordinator?.$theOneAndOnlySelectedTopCell)!) { output in
-            if output == sessionRank {
-                isSelected = true
-            }
+        .onReceive((session.bubble?.coordinator?.$theOneAndOnlySelectedTopCell)!) {
+            if $0 == sessionRank { isSelected = true }
         }
     }
     
