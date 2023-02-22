@@ -34,8 +34,6 @@ struct PairList: View {
             Spacer(minLength: 350)
                 .listRowSeparator(.hidden)
         }
-        .listStyle(.plain)
-        .scrollIndicators(.hidden)
         .refreshable {
             Secretary.shared.showDetailViewInfoButton.toggle()
             Secretary.shared.scrollToTop()
