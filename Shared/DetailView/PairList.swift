@@ -41,39 +41,4 @@ struct PairList: View {
             Secretary.shared.scrollToTop()
         }
     }
-    
-    static private var initialYOffset:CGFloat?
-    static private var track = true
-    
-    private var drag:some Gesture {
-        DragGesture(minimumDistance: 0, coordinateSpace: .global)
-            .onChanged { value in
-                print(value.translation.height)
-            }
-    }
-    
-    private var geoCircle:some View {
-        Circle()
-            .fill(.clear)
-            .frame(height: 1)
-            .background {
-                GeometryReader { geo -> Color in
-                    DispatchQueue.main.async {
-                        if !PairList.track { return }
-                        
-                        let yOffset = geo.frame(in: .global).origin.y
-                        if PairList.initialYOffset == nil {
-                            PairList.initialYOffset = yOffset
-                        } else {
-                            print(PairList.initialYOffset! - yOffset)
-                            if PairList.initialYOffset! - yOffset < -114 {
-                                PairList.track = false
-                                Secretary.shared.scrollToTop()
-                            }
-                        }
-                    }
-                    return .clear
-                }
-            }
-    }
 }
