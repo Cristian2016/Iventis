@@ -17,7 +17,7 @@ struct TopCell: View {
     private var selectionIndicatorColor = Color.red
     let sessionRank:String
     let duration: Float.TimeComponentsAsStrings?
-        
+    
     private let topCellHeight = CGFloat(130)
     private let roundedRectRadius = CGFloat(10)
     private let strokeWidth = CGFloat(4)
@@ -33,35 +33,35 @@ struct TopCell: View {
     var body: some View {
         if !session.isFault {
             //        let _ = print("Top Cell body")
-                    HStack {
-                        ZStack {
-                            sessionRankView
-                            Push(.bottomLeft) {
-                                VStack (alignment:.leading, spacing: dateDurationViewsSpacing) {
-                                    dateView
-                                    durationView.padding(2)
-                                }.padding(edgeInset)
-                            }
-                            .frame(height: topCellHeight)
-                            .background( backgroundView )
-                            if isSelected { selectionNeedle }
-                        }
-                        Color.lightGray.frame(width:1, height: 100)
+            HStack {
+                ZStack {
+                    sessionRankView
+                    Push(.bottomLeft) {
+                        VStack (alignment:.leading, spacing: dateDurationViewsSpacing) {
+                            dateView
+                            durationView.padding(2)
+                        }.padding(edgeInset)
                     }
-                    .onReceive(NotificationCenter.default.publisher(for: .topCellTapped)) { output in
-                        let cellRank = output.userInfo!["topCellTapped"] as! Int
-                        isSelected = cellRank == Int(sessionRank)!
-                    }
-                    .onReceive(NotificationCenter.default.publisher(for: .selectedTab)) { output in
-                        let selectedTab = output.userInfo?["selectedTab"] as! Int
-                        if sessionRank == String(selectedTab) { isSelected = true }
-                        else { isSelected = false }
-                    }
-                    .onReceive((session.bubble?.coordinator?.$theOneAndOnlySelectedTopCell)!) {
-                        isSelected = ($0 == sessionRank) ? true : false
-                    }
+                    .frame(height: topCellHeight)
+                    .background( backgroundView )
+                    if isSelected { selectionNeedle }
+                }
+                Color.lightGray.frame(width:1, height: 100)
+            }
+            .onReceive(NotificationCenter.default.publisher(for: .topCellTapped)) { output in
+                let cellRank = output.userInfo!["topCellTapped"] as! Int
+                isSelected = cellRank == Int(sessionRank)!
+            }
+            .onReceive(NotificationCenter.default.publisher(for: .selectedTab)) { output in
+                let selectedTab = output.userInfo?["selectedTab"] as! Int
+                if sessionRank == String(selectedTab) { isSelected = true }
+                else { isSelected = false }
+            }
+            .onReceive((session.bubble?.coordinator?.$theOneAndOnlySelectedTopCell)!) {
+                isSelected = ($0 == sessionRank) ? true : false
+            }
         }
-
+        
     }
     
     // MARK: - Legos
@@ -104,29 +104,29 @@ struct TopCell: View {
     private var durationView: some View {
         if let duration = duration {
             HStack (spacing: 8) {
-                    //hr
-                    if duration.hr != "0" {
-                        HStack (alignment:.firstTextBaseline ,spacing: 0) {
-                            Text(duration.hr).font(durationFont)
-                            Text("h").font(durationComponentsFont)
-                        }
+                //hr
+                if duration.hr != "0" {
+                    HStack (alignment:.firstTextBaseline ,spacing: 0) {
+                        Text(duration.hr).font(durationFont)
+                        Text("h").font(durationComponentsFont)
                     }
-                    
-                    //min
-                    if duration.min != "0" {
-                        HStack (alignment:.firstTextBaseline ,spacing: 0) {
-                            Text(duration.min).font(durationFont)
-                            Text("m").font(durationComponentsFont)
-                        }
+                }
+                
+                //min
+                if duration.min != "0" {
+                    HStack (alignment:.firstTextBaseline ,spacing: 0) {
+                        Text(duration.min).font(durationFont)
+                        Text("m").font(durationComponentsFont)
                     }
-                    
-                    //sec
-                    if showSeconds() {
-                        HStack (alignment:.firstTextBaseline ,spacing: 0) {
-                            Text(duration.sec + "." + duration.hundredths).font(durationFont)
-                            Text("s").font(durationComponentsFont)
-                        }
+                }
+                
+                //sec
+                if showSeconds() {
+                    HStack (alignment:.firstTextBaseline ,spacing: 0) {
+                        Text(duration.sec + "." + duration.hundredths).font(durationFont)
+                        Text("s").font(durationComponentsFont)
                     }
+                }
             }
         }
     }
