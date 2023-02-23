@@ -32,28 +32,30 @@ struct DetailView: View {
         self.bubble = bubble
     }
     
+    private var yPositionTrackerView:some View {
+        GeometryReader { geo -> Color in
+            DispatchQueue.main.async {
+                let offsetY = geo.frame(in: .global).origin.y
+
+                if offsetY < -90, !secretary.showScrollToTopButton {
+                    secretary.showScrollToTopButton = true
+                }
+
+                if offsetY > -90, secretary.showScrollToTopButton {
+                    secretary.showScrollToTopButton = false
+                }
+            }
+            return .clear
+        }
+    }
+    
     var body: some View {
         ScrollViewReader { proxy in
             List {
                 BubbleCell(bubble)
                     .id(1)
                     .offset(y: -6)
-                    .background {
-                        GeometryReader { geo -> Color in
-                            DispatchQueue.main.async {
-                                let offsetY = geo.frame(in: .global).origin.y
-
-                                if offsetY < -90, !secretary.showScrollToTopButton {
-                                    secretary.showScrollToTopButton = true
-                                }
-
-                                if offsetY > -90, secretary.showScrollToTopButton {
-                                    secretary.showScrollToTopButton = false
-                                }
-                            }
-                            return .clear
-                        }
-                    }
+                    .background { yPositionTrackerView }
                 if sessions.isEmpty { NoSessionsAlertView() }
                 else {
                     TopDetailView(bubble)
