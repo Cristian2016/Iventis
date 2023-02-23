@@ -17,7 +17,6 @@ struct TopCell: View {
     
     @State private var showNeedle = false
     
-    private var selectionIndicatorColor = Color.red
     let duration: Float.TimeComponentsAsStrings?
     
     private let topCellHeight = CGFloat(130)
@@ -75,7 +74,7 @@ struct TopCell: View {
     private var sessionRankView: some View {
         Push(.topRight) {
             Text(String(myRank))
-                .foregroundColor(showNeedle ? .red : .gray)
+                .foregroundColor(.gray)
                 .font(.footnote)
                 .fontWeight(.medium)
                 .padding(EdgeInsets(top: 8, leading: 0, bottom: 0, trailing: 12))
@@ -109,7 +108,7 @@ struct TopCell: View {
     
     @ViewBuilder
     private var durationView: some View {
-        if let duration = duration {
+        if let duration = duration, shouldDisplayDuration {
             HStack (spacing: 8) {
                 //hr
                 if duration.hr != "0" {
@@ -181,6 +180,7 @@ struct TopCell: View {
             let coordinator = session.bubble?.coordinator
         else { return nil }
         
+        // TODO: this should run on a backgraound thread
         let decoder = JSONDecoder()
         let result = try? decoder.decode(Float.TimeComponentsAsStrings.self, from: session.totalDurationAsStrings ?? Data())
         
@@ -193,9 +193,19 @@ struct TopCell: View {
         if selectedTopCell == nil && sessionRank == session.bubble!.sessions_.count {
             coordinator.selectedTopCellRank = sessionRank
         }
+        
+        print("my rank \(myRank), total sessions \(session.bubble!.sessions_.count)")
     }
     
     private var pairBubbleCellShows: Bool { !session.isLastPairClosed }
+    
+    private var shouldDisplayDuration:Bool {
+        
+        if myRank != session.bubble?.sessions_.count { return true }
+        else {
+            return pairBubbleCellShows ? false : true
+        }
+    }
 }
 
 struct DateViewBackgroundColor: View {
