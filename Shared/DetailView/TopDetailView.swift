@@ -13,16 +13,16 @@ struct TopDetailView:View {
     @EnvironmentObject private var viewModel:ViewModel
     @FetchRequest var sessions:FetchedResults<Session>
     @Environment(\.colorScheme) var colorScheme
+    private let bubble:Bubble
     
     private let secretary = Secretary.shared
     private static var publisher = NotificationCenter.default.publisher(for: .selectedTab)
         
-    init(_ rank:Int?) {
-        let predicate:NSPredicate?
-        if let rank = rank {
-            predicate = NSPredicate(format: "bubble.rank == %i", rank)
-        }
-        else { predicate = nil }
+    init?(_ bubble:Bubble?) {
+        guard let bubble = bubble else { return nil }
+        
+        self.bubble = bubble
+        let predicate = NSPredicate(format: "bubble.rank == %i", bubble.rank)
         
         let descriptor = NSSortDescriptor(key: "created", ascending: false)
         _sessions = FetchRequest(entity: Session.entity(), sortDescriptors: [descriptor], predicate: predicate, animation: .easeInOut)
@@ -37,33 +37,15 @@ struct TopDetailView:View {
             ScrollViewReader { proxy in
                 ScrollView(.horizontal, showsIndicators: false) {
                     LazyHStack {
-                        ForEach (sessions) { session in
+                        ForEach (sessions) {
+                            let sessionRank = sessionRank(of: $0)
                             
-                            let sessionRank = sessionRank(of: session)
-                            
-                            TopCell(session, sessionRank)
-                                .id(sessionRank)
-                                .onTapGesture {
-                                    UserFeedback.singleHaptic(.medium)
-                                    postTopCellTappedNotification(for: sessionRank)
-                                    withAnimation { proxy.scrollTo(sessionRank) }
-                                    
-                                    delayExecution(.now() + 0.3) {
-                                        Secretary.shared.pairBubbleCellNeedsDisplay.toggle()
-                                    }
-                                    
-                                    session.bubble?.coordinator.theOneAndOnlySelectedTopCell = sessionRank
-                                }
-                                .onLongPressGesture {
-                                    UserFeedback.singleHaptic(.heavy)
-                                    secretary.sessionToDelete = (session, sessionRank)
-                                }
-                                .onReceive(TopDetailView.publisher) {
-                                    let tab = String($0.userInfo!["selectedTab"] as! Int - 1)
-                                    withAnimation { proxy.scrollTo(tab, anchor: .trailing) }
-                                }
+                            TopCell($0, sessionRank).id(sessionRank)
                         }
                     }
+                }
+                .onReceive(bubble.coordinator.$selectedTopCellRank) { selectedRank in
+                    withAnimation { proxy.scrollTo(selectedRank, anchor: .center) }
                 }
             }
         }
@@ -86,13 +68,8 @@ struct TopDetailView:View {
     }
     
     // MARK: -
-    private func sessionRank(of session:Session) -> String {
-        String(sessions.count - Int(sessions.firstIndex(of: session)!))
-    }
-    
-    ///send rank information
-    private func postTopCellTappedNotification(for rank:String) {
-        NotificationCenter.default.post(name: .topCellTapped, object: nil, userInfo: ["topCellTapped":Int(rank)!])
+    private func sessionRank(of session:Session) -> Int {
+        sessions.count - Int(sessions.firstIndex(of: session)!)
     }
     
     struct DurationComponents {
@@ -105,11 +82,5 @@ struct TopDetailView:View {
             self.min = min
             self.sec = sec
         }
-    }
-}
-
-struct BubbleDetail_Previews: PreviewProvider {
-    static var previews: some View {
-        TopDetailView(10)
     }
 }

@@ -17,7 +17,7 @@ struct ViewHierarchy: View {
         
     private let secretary = Secretary.shared
     @State private var deleteActionBubbleRank:Int64?
-    @State private var sessionToDelete:(session:Session, sessionRank:String)?
+    @State private var sessionToDelete:(session:Session, sessionRank:Int)?
     
     @State private var notesForPair:Pair?
     @State private var notesForBubble:Bubble?

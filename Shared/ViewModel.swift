@@ -122,12 +122,12 @@ class ViewModel: ObservableObject {
         try? viewContext.save()
         
         let sessionToDeleteRank = secretary.sessionToDelete!.sessionRank
-        let selectedSessionRank = bubble.coordinator.theOneAndOnlySelectedTopCell!
+        let selectedSessionRank = bubble.coordinator.selectedTopCellRank!
         
         print(sessionToDeleteRank, selectedSessionRank)
         
         if sessionToDeleteRank == selectedSessionRank {
-            bubble.coordinator.theOneAndOnlySelectedTopCell = String(bubble.sessions_.count)
+            bubble.coordinator.selectedTopCellRank = bubble.sessions_.count
             delayExecution(.now() + 0.3) {
                 self.secretary.pairBubbleCellNeedsDisplay.toggle()
             }
@@ -195,7 +195,7 @@ class ViewModel: ObservableObject {
                 //repetitive chunk of code ⚠️
                 bubble.coordinator.updateComponents(.user(.start))
                 bubble.pairBubbleCellCoordinator.update(.user(.start))
-                bubble.coordinator.theOneAndOnlySelectedTopCell = String(bubble.sessions_.count)
+//                bubble.coordinator.theOneAndOnlySelectedTopCell = String(bubble.sessions_.count)
                 delayExecution(.now() + 0.3) {
                     self.secretary.pairBubbleCellNeedsDisplay.toggle()
                 }
@@ -213,7 +213,7 @@ class ViewModel: ObservableObject {
                 //repetitive chunk of code ⚠️
                 bubble.coordinator.updateComponents(.user(.start))
                 bubble.pairBubbleCellCoordinator.update(.user(.start))
-                bubble.coordinator.theOneAndOnlySelectedTopCell = String(bubble.sessions_.count)
+//                bubble.coordinator.theOneAndOnlySelectedTopCell = String(bubble.sessions_.count)
                 delayExecution(.now() + 0.3) {
                     self.secretary.pairBubbleCellNeedsDisplay.toggle()
                 }

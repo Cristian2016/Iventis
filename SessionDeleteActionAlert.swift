@@ -17,7 +17,7 @@ struct SessionDeleteActionAlert: View {
     
     struct Input {
         let session:Session
-        let sessionRank:String
+        let sessionRank:Int
     }
     
     @State private var input:Input?

@@ -3,19 +3,21 @@
 //  Timers
 //
 //  Created by Cristian Lapusan on 02.05.2022.
-//
+//1 make sure bubbleCellTimer refreshes
 
 import SwiftUI
 import MyPackage
 
 struct TopCell: View {
-    let session:Session
-    @State private var isSelected = false
     @Environment (\.colorScheme) private var colorScheme
+    
     let secretary = Secretary.shared
+    let session:Session
+    let myRank:Int
+    
+    @State private var showNeedle = false
     
     private var selectionIndicatorColor = Color.red
-    let sessionRank:String
     let duration: Float.TimeComponentsAsStrings?
     
     private let topCellHeight = CGFloat(130)
@@ -27,7 +29,6 @@ struct TopCell: View {
     
     let durationFont = Font.system(size: 24, weight: .semibold)
     let durationComponentsFont = Font.system(size: 20, weight: .semibold)
-    
     
     // MARK: -
     var body: some View {
@@ -44,30 +45,36 @@ struct TopCell: View {
                     }
                     .frame(height: topCellHeight)
                     .background( backgroundView )
-                    if isSelected { selectionNeedle }
+                    if showNeedle { selectionNeedle }
                 }
                 Color.lightGray.frame(width:1, height: 100)
             }
-            .onReceive(NotificationCenter.default.publisher(for: .topCellTapped)) { output in
-                let cellRank = output.userInfo!["topCellTapped"] as! Int
-                isSelected = cellRank == Int(sessionRank)!
+            .onTapGesture {
+                UserFeedback.singleHaptic(.medium)
+                
+                delayExecution(.now() + 0.3) {
+                    if pairBubbleCellShows {
+                        Secretary.shared.pairBubbleCellNeedsDisplay.toggle()
+                    }
+                } //1
+                
+                session.bubble?.coordinator.selectedTopCellRank = myRank
+                showNeedle = true
             }
-            .onReceive(NotificationCenter.default.publisher(for: .selectedTab)) { output in
-                let selectedTab = output.userInfo?["selectedTab"] as! Int
-                if sessionRank == String(selectedTab) { isSelected = true }
-                else { isSelected = false }
+            .onLongPressGesture {
+                UserFeedback.singleHaptic(.heavy)
+                secretary.sessionToDelete = (session, myRank)
             }
-            .onReceive((session.bubble?.coordinator?.$theOneAndOnlySelectedTopCell)!) {
-                isSelected = ($0 == sessionRank) ? true : false
+            .onReceive(session.bubble!.coordinator.$selectedTopCellRank) { selectedRank in
+                showNeedle = selectedRank != myRank ? false : true
             }
         }
-        
     }
     
     // MARK: - Legos
     private var sessionRankView: some View {
         Push(.topRight) {
-            Text(sessionRank)
+            Text(String(myRank))
                 .foregroundColor(.gray)
                 .font(.footnote)
                 .fontWeight(.medium)
@@ -167,7 +174,7 @@ struct TopCell: View {
         return true
     }
     
-    init?(_ session:Session?, _ sessionRank:String) {
+    init?(_ session:Session?, _ sessionRank:Int) {
         
         guard
             let session = session,
@@ -179,14 +186,16 @@ struct TopCell: View {
         
         self.duration = result
         self.session = session
-        self.sessionRank = sessionRank
+        self.myRank = sessionRank
         
-        let selectedTopCell = coordinator.theOneAndOnlySelectedTopCell
+        let selectedTopCell = coordinator.selectedTopCellRank
         
-        if selectedTopCell == nil && sessionRank == String(session.bubble!.sessions_.count) {
-            coordinator.theOneAndOnlySelectedTopCell = sessionRank
+        if selectedTopCell == nil && sessionRank == session.bubble!.sessions_.count {
+            coordinator.selectedTopCellRank = sessionRank
         }
     }
+    
+    private var pairBubbleCellShows: Bool { !session.isLastPairClosed }
 }
 
 struct DateViewBackgroundColor: View {

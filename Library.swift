@@ -36,7 +36,7 @@ extension UserDefaults {
 
 public extension Image {
     static let tap = Image(systemName:"hand.tap")
-    static let longPress = Image(systemName:"digitalcrown.horizontal.press")
+    static let longPress = Image(systemName:"target")
     static let leftSwipe = Image(systemName:"arrow.left.circle.fill")
     static let scrollToTop = Image(systemName: "arrow.up.to.line.compact")
 }

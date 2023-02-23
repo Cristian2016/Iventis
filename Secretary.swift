@@ -22,7 +22,7 @@ class Secretary {
     
     @Published var pairBubbleCellNeedsDisplay = false
     
-    @Published var sessionToDelete:(session:Session, sessionRank:String)?
+    @Published var sessionToDelete:(session:Session, sessionRank:Int)?
     
     @Published var showAlert_AlwaysOnDisplay = false
             

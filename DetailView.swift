@@ -12,7 +12,6 @@ import MyPackage
 struct DetailView: View {
     let rank:Int?
     let bubble:Bubble
-    @StateObject var tabWrapper = SelectedTabWrapper()
     @FetchRequest var sessions:FetchedResults<Session>
     
     @EnvironmentObject private var viewModel:ViewModel
@@ -57,7 +56,7 @@ struct DetailView: View {
                     }
                 if sessions.isEmpty { NoSessionsAlertView() }
                 else {
-                    TopDetailView(rank)
+                    TopDetailView(bubble)
                         .frame(height: topDetailHeight)
                         .listRowSeparator(.hidden)
                     BottomDetailView(bubble)

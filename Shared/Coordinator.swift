@@ -20,7 +20,8 @@ class BubbleCellCoordinator {
     
     unowned private let bubble:Bubble
     
-    @Published var theOneAndOnlySelectedTopCell:String?
+    ///the one and only selected TopCell
+    @Published var selectedTopCellRank:Int?
     
     @Published private(set) var components = Components("-1", "-1", "-1", "-1")
     @Published private(set) var opacity = Opacity()
@@ -209,7 +210,7 @@ class BubbleCellCoordinator {
         NotificationCenter.default.addObserver(forName: .detailViewVisible, object: nil, queue: nil) { [weak self] in
             let detailViewVisible = $0.userInfo!["detailViewVisible"] as! Bool
             if !detailViewVisible {
-                self?.theOneAndOnlySelectedTopCell = nil
+                self?.selectedTopCellRank = nil
             }
         }
     }
