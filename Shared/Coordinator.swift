@@ -22,7 +22,9 @@ class BubbleCellCoordinator {
     unowned private let bubble:Bubble
     
     ///the one and only selected TopCell
-    @Published var needleRank:Int?
+    @Published var needleRank:Int? {didSet{
+        print("needleRank \(needleRank)")
+    }}
     var userMovedNeedle:Bool { needleRank != bubble.sessions_.count } //6⚠️
     
     @Published private(set) var components = Components("-1", "-1", "-1", "-1")
