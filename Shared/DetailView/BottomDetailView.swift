@@ -35,8 +35,8 @@ struct BottomDetailView: View {
         .padding(.init(top: 0, leading: -12, bottom: 0, trailing: -12))
         .tabViewStyle(.page(indexDisplayMode: .never))
         .onReceive(secretary.$pairBubbleCellNeedsDisplay) { pairBubbleCellNeedsDisplay = $0 }
-        .onReceive(bubble.coordinator.$selectedTopCellRank) { output in
-                withAnimation { selectedTab = output ?? 0 }
+        .onReceive(bubble.coordinator.$selectedTopCellRank) { selectedTab in
+            if let selectedTab = selectedTab { withAnimation { self.selectedTab = selectedTab }}
         }
         .onChange(of: selectedTab) { bubble.coordinator.selectedTopCellRank = $0 }
     }
