@@ -36,15 +36,9 @@ struct BottomDetailView: View {
         .tabViewStyle(.page(indexDisplayMode: .never))
         .onReceive(secretary.$pairBubbleCellNeedsDisplay) { pairBubbleCellNeedsDisplay = $0 }
         .onReceive(bubble.coordinator.$selectedTopCellRank) { output in
-            if let output = output {
-                print("scroll to \(output)")
-                withAnimation { selectedTab = output }
-            }
+                withAnimation { selectedTab = output ?? 0 }
         }
-        .onChange(of: selectedTab) { tab in
-            print("selected tab \(tab)")
-            bubble.coordinator.selectedTopCellRank = tab
-        }
+        .onChange(of: selectedTab) { bubble.coordinator.selectedTopCellRank = $0 }
     }
     
     private func sessionRank(of session:Session) -> Int {
