@@ -10,7 +10,6 @@ import SwiftUI
 import MyPackage
 
 struct DetailView: View {
-    let rank:Int?
     let bubble:Bubble
     @FetchRequest var sessions:FetchedResults<Session>
     
@@ -19,17 +18,15 @@ struct DetailView: View {
         
     let topDetailHeight = CGFloat(140)
     
-    init(_ showDetail_bRank:Int?, _ bubble:Bubble) {
-        let _ = print("DetailView body")
+    init?(_ bubble:Bubble?) {
+        guard let bubble = bubble else { return nil }
         
-        let predicate:NSPredicate?
-        if let rank = showDetail_bRank { predicate = NSPredicate(format: "bubble.rank == %i", rank)
-        } else { predicate = nil }
-        
-        let descriptor = NSSortDescriptor(key: "created", ascending: false)
-        _sessions = FetchRequest(entity: Session.entity(), sortDescriptors: [descriptor], predicate: predicate, animation: .easeInOut)
-        self.rank = showDetail_bRank
         self.bubble = bubble
+        
+        let predicate = NSPredicate(format: "bubble.rank == %i", bubble.rank)
+        let descriptor = NSSortDescriptor(key: "created", ascending: false)
+        
+        _sessions = FetchRequest(entity: Session.entity(), sortDescriptors: [descriptor], predicate: predicate, animation: .easeInOut)
     }
     
     var body: some View {
