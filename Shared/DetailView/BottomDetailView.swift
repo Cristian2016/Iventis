@@ -36,9 +36,11 @@ struct BottomDetailView: View {
         .tabViewStyle(.page(indexDisplayMode: .never))
         .onReceive(secretary.$pairBubbleCellNeedsDisplay) { pairBubbleCellNeedsDisplay = $0 }
 //        .onReceive(bubble.coordinator.$needleRank) { needleRank in
-//            withAnimation { self.selectedTab = needleRank ?? 0 }
+//            if !bubble.coordinator.userMovedNeedle {
+//                withAnimation { self.selectedTab = needleRank ?? 0 }
+//            }
 //        }
-//        .onChange(of: selectedTab) { bubble.coordinator.needleRank = $0 }
+        .onChange(of: selectedTab) { bubble.coordinator.needleRank = $0 }
     }
     
     private func sessionRank(of session:Session) -> Int {
