@@ -24,9 +24,12 @@ struct DetailView: View {
         self.bubble = bubble
         
         let predicate = NSPredicate(format: "bubble.rank == %i", bubble.rank)
-        let descriptor = NSSortDescriptor(key: "created", ascending: false)
+        let descriptors = [NSSortDescriptor(key: "created", ascending: false)]
         
-        _sessions = FetchRequest(entity: Session.entity(), sortDescriptors: [descriptor], predicate: predicate, animation: .easeInOut)
+        _sessions = FetchRequest(entity: Session.entity(),
+                                 sortDescriptors: descriptors,
+                                 predicate: predicate,
+                                 animation: .easeInOut)
     }
     
     var body: some View {
