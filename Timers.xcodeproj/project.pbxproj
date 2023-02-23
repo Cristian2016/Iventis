@@ -66,6 +66,7 @@
 		1F8B6965283790CF006540CB /* BubbleStickyNoteList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8B6964283790CF006540CB /* BubbleStickyNoteList.swift */; };
 		1F97B7DD2809B311002FFCA3 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F97B7DC2809B311002FFCA3 /* Colors.swift */; };
 		1F98D78A286AF8A300C0A973 /* DeleteRow_InfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F98D789286AF8A300C0A973 /* DeleteRow_InfoView.swift */; };
+		1F991A7029A7545C0045B04C /* TopCellDurationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F991A6F29A7545C0045B04C /* TopCellDurationView.swift */; };
 		1F99AB5F286CA40D00977C9A /* StickyNote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F99AB5E286CA40D00977C9A /* StickyNote.swift */; };
 		1F9B6AF0280950D600C0A725 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F9B6AEF280950D600C0A725 /* ViewModel.swift */; };
 		1F9BDCDF298C67F800E44E80 /* DurationPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F9BDCDE298C67F800E44E80 /* DurationPickerView.swift */; };
@@ -210,6 +211,7 @@
 		1F8B6964283790CF006540CB /* BubbleStickyNoteList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BubbleStickyNoteList.swift; sourceTree = "<group>"; };
 		1F97B7DC2809B311002FFCA3 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		1F98D789286AF8A300C0A973 /* DeleteRow_InfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteRow_InfoView.swift; sourceTree = "<group>"; };
+		1F991A6F29A7545C0045B04C /* TopCellDurationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopCellDurationView.swift; sourceTree = SOURCE_ROOT; };
 		1F99AB5E286CA40D00977C9A /* StickyNote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StickyNote.swift; sourceTree = "<group>"; };
 		1F9B6AEF280950D600C0A725 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		1F9BDCDE298C67F800E44E80 /* DurationPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DurationPickerView.swift; sourceTree = "<group>"; };
@@ -395,6 +397,7 @@
 		1F5F4A4728093FAD00AF3442 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				1F991A6F29A7545C0045B04C /* TopCellDurationView.swift */,
 				1F42B36D29A50B9500DCD473 /* SmallPairBubbleCell.swift */,
 				1F0FD40129A4CD090097FF7F /* ScrollToTopButton.swift */,
 				1FC08DC829A35B6500E25D79 /* PairBubbleCellCoordinator.swift */,
@@ -628,6 +631,7 @@
 				1F196093298856E500E6A7EA /* SmallAlertHintView.swift in Sources */,
 				1F82FB982831435A00E7C5AA /* HelpActionButton.swift in Sources */,
 				1F0373BE28DEDB00005CE8D3 /* AlwaysOnDisplayAlertView.swift in Sources */,
+				1F991A7029A7545C0045B04C /* TopCellDurationView.swift in Sources */,
 				1F0373C228DEE6F7005CE8D3 /* AlwaysOnDisplayConfirmationView.swift in Sources */,
 				1FDB9F12287DA5040028E121 /* StartDelayBubble.swift in Sources */,
 				1FFC8BAD28142F040059EF2E /* Session Properties.swift in Sources */,

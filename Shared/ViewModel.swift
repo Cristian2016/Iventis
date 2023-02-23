@@ -195,10 +195,16 @@ class ViewModel: ObservableObject {
                 //repetitive chunk of code ⚠️
                 bubble.coordinator.updateComponents(.user(.start))
                 bubble.pairBubbleCellCoordinator.update(.user(.start))
-//                bubble.coordinator.theOneAndOnlySelectedTopCell = String(bubble.sessions_.count)
+                
+                if TopCell.trackLatestSession {
+                    bubble.coordinator.selectedTopCellRank = bubble.sessions_.count
+                }
+                
                 delayExecution(.now() + 0.3) {
                     self.secretary.pairBubbleCellNeedsDisplay.toggle()
                 }
+                
+                
                                                 
             case .paused:  /* changes to running */
                 //create new pair, add it to currentSession

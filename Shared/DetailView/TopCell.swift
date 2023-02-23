@@ -11,6 +11,10 @@ import MyPackage
 struct TopCell: View {
     @Environment (\.colorScheme) private var colorScheme
     
+    static var trackLatestSession = true {didSet{
+        print("trackLatestSession \(trackLatestSession)")
+    }}
+    
     let secretary = Secretary.shared
     let session:Session
     let myRank:Int
@@ -49,6 +53,11 @@ struct TopCell: View {
                 Color.lightGray.frame(width:1, height: 100)
             }
             .onTapGesture {
+                if myRank == session.bubble?.coordinator.selectedTopCellRank { return }
+                
+                let userWantsToTrack = myRank == session.bubble?.sessions_.count
+                TopCell.trackLatestSession = userWantsToTrack ? true : false
+                
                 UserFeedback.singleHaptic(.medium)
                 
                 delayExecution(.now() + 0.3) {
@@ -180,9 +189,11 @@ struct TopCell: View {
             let coordinator = session.bubble?.coordinator
         else { return nil }
         
-        // TODO: this should run on a backgraound thread
         let decoder = JSONDecoder()
         let result = try? decoder.decode(Float.TimeComponentsAsStrings.self, from: session.totalDurationAsStrings ?? Data())
+        
+        // FIXME: - doing twice the work and decodes data here, instead on a background thread
+        print("decode data")
         
         self.duration = result
         self.session = session
@@ -193,8 +204,6 @@ struct TopCell: View {
         if selectedTopCell == nil && sessionRank == session.bubble!.sessions_.count {
             coordinator.selectedTopCellRank = sessionRank
         }
-        
-        print("my rank \(myRank), total sessions \(session.bubble!.sessions_.count)")
     }
     
     private var pairBubbleCellShows: Bool { !session.isLastPairClosed }
