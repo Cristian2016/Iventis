@@ -189,6 +189,10 @@ struct TopCell: View {
         self.duration = result
         self.myRank = sessionRank
         _needleRank = needleRank
+        
+        if myRank == session.bubble?.sessions_.count {
+            _showNeedle = State(initialValue: true)
+        }
     }
     
     private var pairBubbleCellShows: Bool { !session.isLastPairClosed }
