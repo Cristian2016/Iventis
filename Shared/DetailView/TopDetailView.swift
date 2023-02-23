@@ -17,7 +17,6 @@ struct TopDetailView:View {
     @Binding var needleRank:Int
     
     private let secretary = Secretary.shared
-    private static var publisher = NotificationCenter.default.publisher(for: .selectedTab)
         
     init?(_ bubble:Bubble?, _ needleRank:Binding<Int>) {
         guard let bubble = bubble else { return nil }
