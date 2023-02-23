@@ -32,23 +32,6 @@ struct DetailView: View {
         self.bubble = bubble
     }
     
-    private var yPositionTrackerView:some View {
-        GeometryReader { geo -> Color in
-            DispatchQueue.main.async {
-                let offsetY = geo.frame(in: .global).origin.y
-                
-                if offsetY < -90, !secretary.showScrollToTopButton {
-                    secretary.showScrollToTopButton = true
-                }
-                
-                if offsetY > -90, secretary.showScrollToTopButton {
-                    secretary.showScrollToTopButton = false
-                }
-            }
-            return .clear
-        }
-    }
-    
     var body: some View {
         ScrollViewReader { proxy in
             List {
@@ -84,6 +67,24 @@ struct DetailView: View {
             }
         }
         .overlay { ShowDetailViewInfoView() }
+    }
+    
+    // MARK: - Lego
+    private var yPositionTrackerView:some View {
+        GeometryReader { geo -> Color in
+            DispatchQueue.main.async {
+                let offsetY = geo.frame(in: .global).origin.y
+                
+                if offsetY < -90, !secretary.showScrollToTopButton {
+                    secretary.showScrollToTopButton = true
+                }
+                
+                if offsetY > -90, secretary.showScrollToTopButton {
+                    secretary.showScrollToTopButton = false
+                }
+            }
+            return .clear
+        }
     }
     
     // MARK: - Little Helpers
