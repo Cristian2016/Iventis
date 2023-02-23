@@ -8,6 +8,7 @@
 //3 create means initialization. 1.user creates a bubble or 2.bubble created already but app relaunches
 //4 every second publisher sends out bTimer signal and this is the task to run. bubble.currentClock + ∆
 //5 lets continuousUpdate do one pass to refresh all components
+//6 evaluate before creating a new session, otherwise the value will be alwatys false
 
 import SwiftUI
 import Combine
@@ -21,7 +22,8 @@ class BubbleCellCoordinator {
     unowned private let bubble:Bubble
     
     ///the one and only selected TopCell
-    @Published var selectedTopCellRank:Int?
+    @Published var needleRank:Int?
+    var userMovedNeedle:Bool { needleRank != bubble.sessions_.count } //6⚠️
     
     @Published private(set) var components = Components("-1", "-1", "-1", "-1")
     @Published private(set) var opacity = Opacity()
@@ -210,7 +212,7 @@ class BubbleCellCoordinator {
         NotificationCenter.default.addObserver(forName: .detailViewVisible, object: nil, queue: nil) { [weak self] in
             let detailViewVisible = $0.userInfo!["detailViewVisible"] as! Bool
             if !detailViewVisible {
-                self?.selectedTopCellRank = nil
+                self?.needleRank = nil
             }
         }
     }

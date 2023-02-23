@@ -11,13 +11,10 @@ import MyPackage
 struct TopCell: View {
     @Environment (\.colorScheme) private var colorScheme
     
-    static var trackLatestSession = true {didSet{
-        print("trackLatestSession \(trackLatestSession)")
-    }}
-    
     let secretary = Secretary.shared
     let session:Session
     let myRank:Int
+    let coordinator:BubbleCellCoordinator
     
     @State private var showNeedle = false
     
@@ -53,12 +50,9 @@ struct TopCell: View {
                 Color.lightGray.frame(width:1, height: 100)
             }
             .onTapGesture {
-                if myRank == session.bubble?.coordinator.selectedTopCellRank { return }
-                
-                let userWantsToTrack = myRank == session.bubble?.sessions_.count
-                TopCell.trackLatestSession = userWantsToTrack ? true : false
-                
                 UserFeedback.singleHaptic(.medium)
+                
+                if myRank == session.bubble?.coordinator.needleRank { return }
                 
                 delayExecution(.now() + 0.3) {
                     if pairBubbleCellShows {
@@ -66,15 +60,15 @@ struct TopCell: View {
                     }
                 } //1
                 
-                session.bubble?.coordinator.selectedTopCellRank = myRank
+                session.bubble?.coordinator.needleRank = myRank
                 showNeedle = true
             }
             .onLongPressGesture {
                 UserFeedback.singleHaptic(.heavy)
                 secretary.sessionToDelete = (session, myRank)
             }
-            .onReceive(session.bubble!.coordinator.$selectedTopCellRank) { selectedRank in
-                showNeedle = selectedRank != myRank ? false : true
+            .onReceive(session.bubble!.coordinator.$needleRank) { needleRank in
+                showNeedle = needleRank != myRank ? false : true
             }
         }
     }
@@ -189,6 +183,9 @@ struct TopCell: View {
             let coordinator = session.bubble?.coordinator
         else { return nil }
         
+        self.session = session
+        self.coordinator = coordinator
+        
         let decoder = JSONDecoder()
         let result = try? decoder.decode(Float.TimeComponentsAsStrings.self, from: session.totalDurationAsStrings ?? Data())
         
@@ -196,13 +193,12 @@ struct TopCell: View {
         print("decode data")
         
         self.duration = result
-        self.session = session
         self.myRank = sessionRank
         
-        let selectedTopCell = coordinator.selectedTopCellRank
+        let selectedTopCell = coordinator.needleRank
         
         if selectedTopCell == nil && sessionRank == session.bubble!.sessions_.count {
-            coordinator.selectedTopCellRank = sessionRank
+            coordinator.needleRank = sessionRank
         }
     }
     

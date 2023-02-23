@@ -122,12 +122,12 @@ class ViewModel: ObservableObject {
         try? viewContext.save()
         
         let sessionToDeleteRank = secretary.sessionToDelete!.sessionRank
-        let selectedSessionRank = bubble.coordinator.selectedTopCellRank!
+        let selectedSessionRank = bubble.coordinator.needleRank!
         
         print(sessionToDeleteRank, selectedSessionRank)
         
         if sessionToDeleteRank == selectedSessionRank {
-            bubble.coordinator.selectedTopCellRank = bubble.sessions_.count
+            bubble.coordinator.needleRank = bubble.sessions_.count
             delayExecution(.now() + 0.3) {
                 self.secretary.pairBubbleCellNeedsDisplay.toggle()
             }
@@ -185,8 +185,15 @@ class ViewModel: ObservableObject {
                 newPair.start = Date().addingTimeInterval(startDelayCompensation)
                 newSession.created = Date().addingTimeInterval(startDelayCompensation)
                 
+                let userMovedNeedle = bubble.coordinator.userMovedNeedle
+                
                 bubble.addToSessions(newSession)
                 newSession.addToPairs(newPair)
+                
+                //needle tracks latest session because user did not move the needle
+                if !userMovedNeedle {
+                    bubble.coordinator.needleRank = bubble.sessions_.count
+                }
                                 
                 //1 both
                 secretary.addNoteButton_bRank = nil //clear first
@@ -196,16 +203,10 @@ class ViewModel: ObservableObject {
                 bubble.coordinator.updateComponents(.user(.start))
                 bubble.pairBubbleCellCoordinator.update(.user(.start))
                 
-                if TopCell.trackLatestSession {
-                    bubble.coordinator.selectedTopCellRank = bubble.sessions_.count
-                }
-                
                 delayExecution(.now() + 0.3) {
                     self.secretary.pairBubbleCellNeedsDisplay.toggle()
                 }
-                
-                
-                                                
+                                                                
             case .paused:  /* changes to running */
                 //create new pair, add it to currentSession
                 let newPair = Pair(context: PersistenceController.shared.viewContext)
@@ -223,6 +224,11 @@ class ViewModel: ObservableObject {
                 delayExecution(.now() + 0.3) {
                     self.secretary.pairBubbleCellNeedsDisplay.toggle()
                 }
+                
+//                if bubble.coordinator.trackLatestSession {
+//                    print("trackLatestSession for \(bubble.color ?? "no color")")
+//                    bubble.coordinator.selectedTopCellRank = bubble.sessions_.count
+//                }
                 
             case .running: /* changes to .paused */
                 let currentPair = bubble.lastPair

@@ -44,7 +44,7 @@ struct TopDetailView:View {
                         }
                     }
                 }
-                .onReceive(bubble.coordinator.$selectedTopCellRank) { selectedRank in
+                .onReceive(bubble.coordinator.$needleRank) { selectedRank in
                     withAnimation { proxy.scrollTo(selectedRank, anchor: .center) }
                 }
             }
