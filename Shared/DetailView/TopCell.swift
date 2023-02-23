@@ -15,7 +15,7 @@ struct TopCell: View {
     let session:Session
     let myRank:Int
     
-    @Binding var selectedTab:Int
+    @Binding var needleRank:Int
     
     @State private var showNeedle = false
     
@@ -59,13 +59,13 @@ struct TopCell: View {
                     }
                 } //1
                 
-                withAnimation { selectedTab = myRank }
+                withAnimation { needleRank = myRank }
             }
             .onLongPressGesture {
                 UserFeedback.singleHaptic(.heavy)
                 secretary.sessionToDelete = (session, myRank)
             }
-            .onChange(of: selectedTab) { newValue in
+            .onChange(of: needleRank) { newValue in
                 showNeedle =  newValue == myRank ? true : false
             }
         }
@@ -188,7 +188,7 @@ struct TopCell: View {
         
         self.duration = result
         self.myRank = sessionRank
-        _selectedTab = selectedTab
+        _needleRank = selectedTab
     }
     
     private var pairBubbleCellShows: Bool { !session.isLastPairClosed }
