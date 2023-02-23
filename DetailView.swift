@@ -36,11 +36,11 @@ struct DetailView: View {
         GeometryReader { geo -> Color in
             DispatchQueue.main.async {
                 let offsetY = geo.frame(in: .global).origin.y
-
+                
                 if offsetY < -90, !secretary.showScrollToTopButton {
                     secretary.showScrollToTopButton = true
                 }
-
+                
                 if offsetY > -90, secretary.showScrollToTopButton {
                     secretary.showScrollToTopButton = false
                 }
