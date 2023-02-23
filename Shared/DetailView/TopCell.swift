@@ -59,8 +59,7 @@ struct TopCell: View {
                     }
                 } //1
                 
-                selectedTab = myRank
-                showNeedle = true
+                withAnimation { selectedTab = myRank }
             }
             .onLongPressGesture {
                 UserFeedback.singleHaptic(.heavy)
