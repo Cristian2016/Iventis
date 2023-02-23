@@ -122,16 +122,13 @@ class ViewModel: ObservableObject {
         try? viewContext.save()
         
         let sessionToDeleteRank = secretary.sessionToDelete!.sessionRank
-        let selectedSessionRank = bubble.coordinator.needleRank!
-        
-        print(sessionToDeleteRank, selectedSessionRank)
-        
-        if sessionToDeleteRank == selectedSessionRank {
-            bubble.coordinator.needleRank = bubble.sessions_.count
-            delayExecution(.now() + 0.3) {
-                self.secretary.pairBubbleCellNeedsDisplay.toggle()
-            }
-        }
+                
+//        if sessionToDeleteRank == selectedSessionRank {
+//            bubble.coordinator.needleRank = bubble.sessions_.count
+//            delayExecution(.now() + 0.3) {
+//                self.secretary.pairBubbleCellNeedsDisplay.toggle()
+//            }
+//        }
     }
     
     func removeAddNoteButton(_ bubble:Bubble) {
@@ -190,17 +187,13 @@ class ViewModel: ObservableObject {
                 
                 newPair.start = Date().addingTimeInterval(startDelayCompensation)
                 newSession.created = Date().addingTimeInterval(startDelayCompensation)
-                
-                let userMovedNeedle = bubble.coordinator.userMovedNeedle
-                
+                                
                 bubble.addToSessions(newSession)
                 newSession.addToPairs(newPair)
                 
                 //needle tracks latest session because user did not move the needle
-                if !userMovedNeedle {
-                    bubble.coordinator.needleRank = bubble.sessions_.count
-                }
-                                
+//                bubble.coordinator.needleRank = bubble.sessions_.count
+                
                 //1 both
                 secretary.addNoteButton_bRank = nil //clear first
                 secretary.addNoteButton_bRank = Int(bubble.rank)
@@ -226,15 +219,9 @@ class ViewModel: ObservableObject {
                 //repetitive chunk of code ⚠️
                 bubble.coordinator.updateComponents(.user(.start))
                 bubble.pairBubbleCellCoordinator.update(.user(.start))
-//                bubble.coordinator.theOneAndOnlySelectedTopCell = String(bubble.sessions_.count)
                 delayExecution(.now() + 0.3) {
                     self.secretary.pairBubbleCellNeedsDisplay.toggle()
                 }
-                
-//                if bubble.coordinator.trackLatestSession {
-//                    print("trackLatestSession for \(bubble.color ?? "no color")")
-//                    bubble.coordinator.selectedTopCellRank = bubble.sessions_.count
-//                }
                 
             case .running: /* changes to .paused */
                 let currentPair = bubble.lastPair

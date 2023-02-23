@@ -14,7 +14,8 @@ struct TopCell: View {
     let secretary = Secretary.shared
     let session:Session
     let myRank:Int
-    let coordinator:BubbleCellCoordinator
+    
+    @Binding var selectedTab:Int
     
     @State private var showNeedle = false
     
@@ -51,24 +52,22 @@ struct TopCell: View {
             }
             .onTapGesture {
                 UserFeedback.singleHaptic(.medium)
-                
-                if myRank == session.bubble?.coordinator.needleRank { return }
-                
+                                
                 delayExecution(.now() + 0.3) {
                     if pairBubbleCellShows {
                         Secretary.shared.pairBubbleCellNeedsDisplay.toggle()
                     }
                 } //1
                 
-                session.bubble?.coordinator.needleRank = myRank
+                selectedTab = myRank
                 showNeedle = true
             }
             .onLongPressGesture {
                 UserFeedback.singleHaptic(.heavy)
                 secretary.sessionToDelete = (session, myRank)
             }
-            .onReceive(session.bubble!.coordinator.$needleRank) { needleRank in
-                showNeedle = needleRank != myRank ? false : true
+            .onChange(of: selectedTab) { newValue in
+                showNeedle =  newValue == myRank ? true : false
             }
         }
     }
@@ -176,15 +175,11 @@ struct TopCell: View {
         return true
     }
     
-    init?(_ session:Session?, _ sessionRank:Int) {
+    init?(_ session:Session?, _ sessionRank:Int, _ selectedTab:Binding<Int>) {
         
-        guard
-            let session = session,
-            let coordinator = session.bubble?.coordinator
-        else { return nil }
+        guard let session = session else { return nil }
         
         self.session = session
-        self.coordinator = coordinator
         
         let decoder = JSONDecoder()
         let result = try? decoder.decode(Float.TimeComponentsAsStrings.self, from: session.totalDurationAsStrings ?? Data())
@@ -194,12 +189,7 @@ struct TopCell: View {
         
         self.duration = result
         self.myRank = sessionRank
-        
-        let selectedTopCell = coordinator.needleRank
-        
-        if selectedTopCell == nil && sessionRank == session.bubble!.sessions_.count {
-            coordinator.needleRank = sessionRank
-        }
+        _selectedTab = selectedTab
     }
     
     private var pairBubbleCellShows: Bool { !session.isLastPairClosed }

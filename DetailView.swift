@@ -18,6 +18,8 @@ struct DetailView: View {
         
     let topDetailHeight = CGFloat(140)
     
+    @State private var selectedTab:Int
+    
     init?(_ bubble:Bubble?) {
         guard let bubble = bubble else { return nil }
         
@@ -30,6 +32,8 @@ struct DetailView: View {
                                  sortDescriptors: descriptors,
                                  predicate: predicate,
                                  animation: .easeInOut)
+        
+        _selectedTab = State(initialValue: bubble.sessions_.count)
     }
     
     var body: some View {
@@ -41,10 +45,10 @@ struct DetailView: View {
                     .background { yPositionTrackerView }
                 if sessions.isEmpty { NoSessionsAlertView() }
                 else {
-                    TopDetailView(bubble)
+                    TopDetailView(bubble, $selectedTab)
                         .frame(height: topDetailHeight)
                         .listRowSeparator(.hidden)
-                    BottomDetailView(bubble)
+                    BottomDetailView(bubble, $selectedTab)
                         .frame(height: 600)
                         .listRowSeparator(.hidden)
                 }

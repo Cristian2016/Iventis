@@ -21,12 +21,6 @@ class BubbleCellCoordinator {
     
     unowned private let bubble:Bubble
     
-    ///the one and only selected TopCell
-    @Published var needleRank:Int? {didSet{
-        print("needleRank \(needleRank)")
-    }}
-    var userMovedNeedle:Bool { needleRank != bubble.sessions_.count } //6⚠️
-    
     @Published private(set) var components = Components("-1", "-1", "-1", "-1")
     @Published private(set) var opacity = Opacity()
     var colorPublisher:Publisher<Color, Never>
@@ -170,7 +164,6 @@ class BubbleCellCoordinator {
         self.colorPublisher = .init(Color.bubbleColor(forName: bubble.color))
                 
         observeActivePhase()
-        observe_detailViewVisible()
         
         //set initial values when bubble is created [ViewModel.createBubble]
         DispatchQueue.global().async {
@@ -206,15 +199,6 @@ class BubbleCellCoordinator {
                     
                     if self.bubble.state == .running { self.update(.start) }
                 }
-            }
-        }
-    }
-    
-    private func observe_detailViewVisible() {
-        NotificationCenter.default.addObserver(forName: .detailViewVisible, object: nil, queue: nil) { [weak self] in
-            let detailViewVisible = $0.userInfo!["detailViewVisible"] as! Bool
-            if !detailViewVisible {
-                self?.needleRank = nil
             }
         }
     }

@@ -14,11 +14,12 @@ struct TopDetailView:View {
     @FetchRequest var sessions:FetchedResults<Session>
     @Environment(\.colorScheme) var colorScheme
     private let bubble:Bubble
+    @Binding var selectedTab:Int
     
     private let secretary = Secretary.shared
     private static var publisher = NotificationCenter.default.publisher(for: .selectedTab)
         
-    init?(_ bubble:Bubble?) {
+    init?(_ bubble:Bubble?, _ selectedTab:Binding<Int>) {
         guard let bubble = bubble else { return nil }
         
         self.bubble = bubble
@@ -26,6 +27,7 @@ struct TopDetailView:View {
         
         let descriptor = NSSortDescriptor(key: "created", ascending: false)
         _sessions = FetchRequest(entity: Session.entity(), sortDescriptors: [descriptor], predicate: predicate, animation: .easeInOut)
+        _selectedTab = selectedTab
     }
     
     // MARK: -
@@ -40,12 +42,12 @@ struct TopDetailView:View {
                         ForEach (sessions) {
                             let sessionRank = sessionRank(of: $0)
                             
-                            TopCell($0, sessionRank).id(sessionRank)
+                            TopCell($0, sessionRank, $selectedTab).id(sessionRank)
                         }
                     }
                 }
-                .onReceive(bubble.coordinator.$needleRank) { selectedRank in
-                    withAnimation { proxy.scrollTo(selectedRank, anchor: .center) }
+                .onChange(of: selectedTab) { newValue in
+                    withAnimation { proxy.scrollTo(newValue, anchor: .center) }
                 }
             }
         }
