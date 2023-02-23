@@ -174,7 +174,7 @@ struct TopCell: View {
         return true
     }
     
-    init?(_ session:Session?, _ sessionRank:Int, _ selectedTab:Binding<Int>) {
+    init?(_ session:Session?, _ sessionRank:Int, _ needleRank:Binding<Int>) {
         
         guard let session = session else { return nil }
         
@@ -188,7 +188,7 @@ struct TopCell: View {
         
         self.duration = result
         self.myRank = sessionRank
-        _needleRank = selectedTab
+        _needleRank = needleRank
     }
     
     private var pairBubbleCellShows: Bool { !session.isLastPairClosed }
