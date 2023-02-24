@@ -47,7 +47,7 @@ struct TopCell: View {
                 Color.lightGray.frame(width:1, height: 100)
             }
             .onTapGesture {
-                if userSetNeedleRank == myRank { return }
+                if userSetNeedleRank == myRank || userSetNeedleRank == -1 { return }
                 UserFeedback.singleHaptic(.medium)
                 
                 delayExecution(.now() + 0.3) {
