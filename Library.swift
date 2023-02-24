@@ -29,7 +29,12 @@ extension Notification.Name {
     static let fiveSecondsSignal = Notification.Name("fiveSecondsSignal")
     static let detailViewVisible = Notification.Name("detailViewVisible")
     static let needleTracksLatestSession = Notification.Name("needleTracksLatestSession")
+    static let resetNeedle = Notification.Name("resetNeedle")
 } //1 ViewModel 1//
+
+extension Notification {
+    static let resetNeedle = Notification.init(name: .resetNeedle)
+}
 
 extension UserDefaults {
     static let shared = UserDefaults(suiteName: .appGroupName)!

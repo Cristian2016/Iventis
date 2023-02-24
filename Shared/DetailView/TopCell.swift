@@ -57,10 +57,7 @@ struct TopCell: View {
                 } //1
                 
                 if session == session.bubble?.lastSession {
-//                    userSetNeedleRank = -1 useless. does not update @State
-//                    _userSetNeedleRank = Binding(-1)
-//                    _userSetNeedleRank.update()
-                    NotificationCenter.default.post(.init(name: .init("resetNeedle")))
+                    NotificationCenter.default.post(.resetNeedle)
                 }
                 withAnimation { userSetNeedleRank = myRank }
             }
