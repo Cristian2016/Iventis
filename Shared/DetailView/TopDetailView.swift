@@ -45,7 +45,7 @@ struct TopDetailView:View {
                                 if shouldShowNeedle(for: session) {
                                     selectionNeedle
                                         .matchedGeometryEffect(id: "needle", in: namespace)
-                                        .animation(.spring(), value: shouldShowNeedle(for: session))
+                                        .animation(.easeInOut, value: shouldShowNeedle(for: session))
                                 }
                                 TopCell(session, sessionRank, $userSetNeedleRank).id(sessionRank)
                             }
