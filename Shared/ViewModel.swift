@@ -120,6 +120,8 @@ class ViewModel: ObservableObject {
         //delete session
         let context = session.managedObjectContext!
         context.perform {
+            let deletedSessionRank = bubble.sessions_.firstIndex(of: session)!
+            
             context.delete(session)
             try? context.save()
         }
