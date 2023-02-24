@@ -61,7 +61,7 @@ struct DetailView: View {
                     delayExecution(.now() + 0.1) { secretary.shouldScrollToTop = false }
                 }
             }
-            .onReceive(NotificationCenter.Publisher(center: .default, name: .init("resetNeedle"))) { _ in
+            .onReceive(NotificationCenter.Publisher(center: .default, name: .resetNeedle)) { _ in
                 userSetNeedleRank = -1
             }
         }
