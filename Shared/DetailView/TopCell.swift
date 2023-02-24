@@ -14,12 +14,7 @@ struct TopCell: View {
     let secretary = Secretary.shared
     let session:Session
     let myRank:Int
-    
-    @Binding var needleRank:Int
-    @State var latestSessionNeedleRank:Int!
-    
-    @State private var showNeedle = false
-    
+            
     let duration: Float.TimeComponentsAsStrings?
     
     private let topCellHeight = CGFloat(130)
@@ -32,10 +27,11 @@ struct TopCell: View {
     let durationFont = Font.system(size: 24, weight: .semibold)
     let durationComponentsFont = Font.system(size: 20, weight: .semibold)
     
+    @Binding var userSetNeedleRank:Int
+    
     // MARK: -
     var body: some View {
         if !session.isFault {
-            //        let _ = print("Top Cell body")
             HStack {
                 ZStack {
                     sessionRankView
@@ -47,36 +43,30 @@ struct TopCell: View {
                     }
                     .frame(height: topCellHeight)
                     .background( backgroundView )
-                    if showNeedle { selectionNeedle }
                 }
                 Color.lightGray.frame(width:1, height: 100)
             }
             .onTapGesture {
-                if needleRank == myRank {
-                    print("fuck")
-                    return
-                }
+                if userSetNeedleRank == myRank { return }
                 UserFeedback.singleHaptic(.medium)
-                                
+                
                 delayExecution(.now() + 0.3) {
                     if pairBubbleCellShows {
                         Secretary.shared.pairBubbleCellNeedsDisplay.toggle()
                     }
                 } //1
                 
-                withAnimation { needleRank = myRank }
+                if session == session.bubble?.lastSession {
+//                    userSetNeedleRank = -1 useless. does not update @State
+//                    _userSetNeedleRank = Binding(-1)
+//                    _userSetNeedleRank.update()
+                    NotificationCenter.default.post(.init(name: .init("resetNeedle")))
+                }
+                withAnimation { userSetNeedleRank = myRank }
             }
             .onLongPressGesture {
                 UserFeedback.singleHaptic(.heavy)
                 secretary.sessionToDelete = (session, myRank)
-            }
-            .onChange(of: needleRank) { newValue in
-                showNeedle =  newValue == myRank ? true : false
-            }
-            .onReceive(NotificationCenter.Publisher(center: .default, name: .needleTracksLatestSession)) { notification in
-                guard let needleRank = notification.userInfo?["needleRank"] as? Int else { return }
-                self.latestSessionNeedleRank = needleRank
-                print("latestSessionNeedleRank \(latestSessionNeedleRank ?? -1)")
             }
         }
     }
@@ -162,19 +152,6 @@ struct TopCell: View {
             .font(.caption)
     }
     
-    private var selectionNeedle: some View {
-        VStack {
-            ZStack {
-                Image(systemName: "arrowtriangle.down.fill")
-                    .foregroundColor(.red)
-                    .font(.footnote)
-                Divider()
-                    .frame(width: 40)
-            }
-            Spacer()
-        }
-    }
-    
     // MARK: -
     private func showSeconds() -> Bool {
         guard let duration = duration else { return false }
@@ -184,7 +161,7 @@ struct TopCell: View {
         return true
     }
     
-    init?(_ session:Session?, _ sessionRank:Int, _ needleRank:Binding<Int>) {
+    init?(_ session:Session?, _ sessionRank:Int, _ userSetNeedleRank:Binding<Int>) {
         
         guard let session = session else { return nil }
         
@@ -198,8 +175,7 @@ struct TopCell: View {
         
         self.duration = result
         self.myRank = sessionRank
-        _needleRank = needleRank
-        _showNeedle = State(initialValue: myRank == self.needleRank ? true : false)
+        _userSetNeedleRank = userSetNeedleRank
     }
     
     private var pairBubbleCellShows: Bool { !session.isLastPairClosed }

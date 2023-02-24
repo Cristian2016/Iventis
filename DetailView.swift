@@ -18,7 +18,9 @@ struct DetailView: View {
         
     let topDetailHeight = CGFloat(140)
     
-    @State private var needleRank:Int
+    @State private var userSetNeedleRank:Int = -1
+    
+    private var count:Int { sessions.count }
     
     init?(_ bubble:Bubble?) {
         guard let bubble = bubble else { return nil }
@@ -32,8 +34,6 @@ struct DetailView: View {
                                  sortDescriptors: descriptors,
                                  predicate: predicate,
                                  animation: .easeInOut)
-        
-        _needleRank = State(initialValue: bubble.sessions_.count)
     }
     
     var body: some View {
@@ -45,10 +45,10 @@ struct DetailView: View {
                     .background { yPositionTrackerView }
                 if sessions.isEmpty { NoSessionsAlertView() }
                 else {
-                    TopDetailView(bubble, $needleRank)
+                    TopDetailView(bubble, $userSetNeedleRank)
                         .frame(height: topDetailHeight)
                         .listRowSeparator(.hidden)
-                    BottomDetailView(bubble, $needleRank)
+                    BottomDetailView(bubble, $userSetNeedleRank)
                         .frame(height: 600)
                         .listRowSeparator(.hidden)
                 }
@@ -60,6 +60,9 @@ struct DetailView: View {
                     withAnimation { proxy.scrollTo(1) }
                     delayExecution(.now() + 0.1) { secretary.shouldScrollToTop = false }
                 }
+            }
+            .onReceive(NotificationCenter.Publisher(center: .default, name: .init("resetNeedle"))) { _ in
+                userSetNeedleRank = -1
             }
         }
         .toolbarBackground(.ultraThinMaterial)

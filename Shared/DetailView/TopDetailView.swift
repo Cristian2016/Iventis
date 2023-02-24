@@ -14,7 +14,7 @@ struct TopDetailView:View {
     @FetchRequest var sessions:FetchedResults<Session>
     @Environment(\.colorScheme) var colorScheme
     private let bubble:Bubble
-    @Binding var needleRank:Int
+    @Binding var userSetNeedleRank:Int
     
     private let secretary = Secretary.shared
         
@@ -26,7 +26,7 @@ struct TopDetailView:View {
         
         let descriptor = NSSortDescriptor(key: "created", ascending: false)
         _sessions = FetchRequest(entity: Session.entity(), sortDescriptors: [descriptor], predicate: predicate, animation: .easeInOut)
-        _needleRank = needleRank
+        _userSetNeedleRank = needleRank
     }
     
     // MARK: -
@@ -38,14 +38,17 @@ struct TopDetailView:View {
             ScrollViewReader { proxy in
                 ScrollView(.horizontal, showsIndicators: false) {
                     LazyHStack {
-                        ForEach (sessions) {
-                            let sessionRank = sessionRank(of: $0)
-                            
-                            TopCell($0, sessionRank, $needleRank).id(sessionRank)
+                        ForEach (sessions) { session in
+                            let sessionRank = sessionRank(of: session)
+                            ZStack {
+                                TopCell(session, sessionRank, $userSetNeedleRank).id(sessionRank)
+                                
+                                if shouldShowNeedle(for: session) { selectionNeedle }
+                            }
                         }
                     }
                 }
-                .onChange(of: needleRank) { newValue in
+                .onChange(of: userSetNeedleRank) { newValue in
                     withAnimation { proxy.scrollTo(newValue, anchor: .center) }
                 }
             }
@@ -54,6 +57,19 @@ struct TopDetailView:View {
     }
     
     // MARK: - Lego
+    private var selectionNeedle: some View {
+        VStack {
+            ZStack {
+                Image(systemName: "arrowtriangle.down.fill")
+                    .foregroundColor(.red)
+                    .font(.footnote)
+                Divider()
+                    .frame(width: 40)
+            }
+            Spacer()
+        }
+    }
+    
     private var shadowBackground:some View {
         Color.background
             .shadow(color: .black.opacity(0.08), radius: 2, x: 0, y: 3)
@@ -71,6 +87,16 @@ struct TopDetailView:View {
     // MARK: -
     private func sessionRank(of session:Session) -> Int {
         sessions.count - Int(sessions.firstIndex(of: session)!)
+    }
+    
+    private func shouldShowNeedle(for session:Session) -> Bool {
+        let sessionRank = sessionRank(of: session)
+        
+        if userSetNeedleRank == -1, sessionRank  == bubble.sessions_.count {
+            return true
+        } else {
+            return  sessionRank == userSetNeedleRank ? true : false
+        }
     }
     
     struct DurationComponents {
