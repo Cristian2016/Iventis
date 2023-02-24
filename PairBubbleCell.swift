@@ -11,23 +11,37 @@ import MyPackage
 
 ///it's the small bubble cell in the PairCell of BottomDetaiulView that only shows up when bubble is running and detailMode is active
 struct PairBubbleCell: View {
-    let bubble:Bubble //dependecy
-    
     @Environment(\.colorScheme) private var colorScheme
-    
+    let bubble:Bubble
     let metrics = BubbleCell.Metrics()
+    
+    @ViewBuilder
+    private var roundedRectangle:some View {
+        if colorScheme == .light {
+            RoundedRectangle(cornerRadius: 35)
+                .fill(.thinMaterial)
+        } else {
+            RoundedRectangle(cornerRadius: 35)
+                .fill(gradientBackground)
+        }
+    }
+    
+    private var gradientBackground:LinearGradient {
+        let stops:[Gradient.Stop] = [
+            .init(color: .topDetailViewBackground1, location: 0.05),
+            .init(color: .topDetailViewBackground, location: 1)
+        ]
+        return LinearGradient(stops: stops, startPoint: .bottom, endPoint: .top)
+    }
     
     var body: some View {
         ZStack {
             Rectangle().fill(.clear)
                 .aspectRatio(metrics.ratio, contentMode: .fit)
                 .background {
-                    if colorScheme != .dark {
-                        RoundedRectangle(cornerRadius: 35)
-                            .fill(.thinMaterial)
-                            .scaleEffect(x: 1.12, y: 1.17)
-                            .allowsHitTesting(false)
-                    }
+                    roundedRectangle
+                        .scaleEffect(x: 1.12, y: 1.17)
+                        .allowsHitTesting(false)
                 }
                 .overlay {
                     HStack {
