@@ -62,6 +62,7 @@
 		1F76B51128DDE38800543660 /* AlertHintView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F76B51028DDE38800543660 /* AlertHintView.swift */; };
 		1F7F1AE429A10D9C0061EB40 /* AdaptiveText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F7F1AE329A10D9C0061EB40 /* AdaptiveText.swift */; };
 		1F82FB982831435A00E7C5AA /* HelpActionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F82FB972831435A00E7C5AA /* HelpActionButton.swift */; };
+		1F83A44F29A965D90058E6E2 /* DigitsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F83A44E29A965D90058E6E2 /* DigitsView.swift */; };
 		1F8AAFA329927B2900328AC7 /* FramePortrait.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8AAFA229927B2900328AC7 /* FramePortrait.swift */; };
 		1F8B6965283790CF006540CB /* BubbleStickyNoteList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8B6964283790CF006540CB /* BubbleStickyNoteList.swift */; };
 		1F97B7DD2809B311002FFCA3 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F97B7DC2809B311002FFCA3 /* Colors.swift */; };
@@ -206,6 +207,7 @@
 		1F76B51028DDE38800543660 /* AlertHintView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertHintView.swift; sourceTree = "<group>"; };
 		1F7F1AE329A10D9C0061EB40 /* AdaptiveText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdaptiveText.swift; sourceTree = "<group>"; };
 		1F82FB972831435A00E7C5AA /* HelpActionButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpActionButton.swift; sourceTree = "<group>"; };
+		1F83A44E29A965D90058E6E2 /* DigitsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DigitsView.swift; sourceTree = SOURCE_ROOT; };
 		1F845FAD286EF8730053EAE6 /* WidgetsExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = WidgetsExtension.entitlements; sourceTree = "<group>"; };
 		1F8AAFA229927B2900328AC7 /* FramePortrait.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FramePortrait.swift; sourceTree = "<group>"; };
 		1F8B6964283790CF006540CB /* BubbleStickyNoteList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BubbleStickyNoteList.swift; sourceTree = "<group>"; };
@@ -397,6 +399,7 @@
 		1F5F4A4728093FAD00AF3442 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				1F83A44E29A965D90058E6E2 /* DigitsView.swift */,
 				1F991A6F29A7545C0045B04C /* TopCellDurationView.swift */,
 				1F42B36D29A50B9500DCD473 /* SmallPairBubbleCell.swift */,
 				1F0FD40129A4CD090097FF7F /* ScrollToTopButton.swift */,
@@ -718,6 +721,7 @@
 				1F38C5A32986615F00057B8C /* FusedLabel.swift in Sources */,
 				1F6FA29C2993E4E300D7EF90 /* ShowAllBubblesButton.swift in Sources */,
 				1FB5D8D428E81CD900DD522A /* InfoButton.swift in Sources */,
+				1F83A44F29A965D90058E6E2 /* DigitsView.swift in Sources */,
 				1F0FD40229A4CD090097FF7F /* ScrollToTopButton.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
