@@ -10,6 +10,7 @@ import SwiftUI
 import MyPackage
 
 struct TopDetailView:View {
+    @Namespace private var namespace
     @EnvironmentObject private var viewModel:ViewModel
     @FetchRequest var sessions:FetchedResults<Session>
     @Environment(\.colorScheme) var colorScheme
@@ -41,9 +42,12 @@ struct TopDetailView:View {
                         ForEach (sessions) { session in
                             let sessionRank = sessionRank(of: session)
                             ZStack {
+                                if shouldShowNeedle(for: session) {
+                                    selectionNeedle
+                                        .matchedGeometryEffect(id: "needle", in: namespace)
+                                        .animation(.spring(), value: shouldShowNeedle(for: session))
+                                }
                                 TopCell(session, sessionRank, $userSetNeedleRank).id(sessionRank)
-                                
-                                if shouldShowNeedle(for: session) { selectionNeedle }
                             }
                         }
                     }
