@@ -16,6 +16,7 @@ struct TopCell: View {
     let myRank:Int
     
     @Binding var needleRank:Int
+    @State var latestSessionNeedleRank:Int!
     
     @State private var showNeedle = false
     
@@ -51,7 +52,10 @@ struct TopCell: View {
                 Color.lightGray.frame(width:1, height: 100)
             }
             .onTapGesture {
-                if needleRank == myRank { return }
+                if needleRank == myRank {
+                    print("fuck")
+                    return
+                }
                 UserFeedback.singleHaptic(.medium)
                                 
                 delayExecution(.now() + 0.3) {
@@ -68,6 +72,11 @@ struct TopCell: View {
             }
             .onChange(of: needleRank) { newValue in
                 showNeedle =  newValue == myRank ? true : false
+            }
+            .onReceive(NotificationCenter.Publisher(center: .default, name: .needleTracksLatestSession)) { notification in
+                guard let needleRank = notification.userInfo?["needleRank"] as? Int else { return }
+                self.latestSessionNeedleRank = needleRank
+                print("latestSessionNeedleRank \(latestSessionNeedleRank ?? -1)")
             }
         }
     }

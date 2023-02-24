@@ -18,11 +18,15 @@ struct BottomDetailView: View {
     init?(_ bubble:Bubble?, _ needleRank:Binding<Int>) {
         guard let bubble = bubble else { return nil }
         
-        _needleRank = needleRank
-        
         let predicate = NSPredicate(format: "bubble.rank == %i", bubble.rank)
         let descriptor = NSSortDescriptor(key: "created", ascending: false)
-        _sessions = FetchRequest(entity: Session.entity(), sortDescriptors: [descriptor], predicate: predicate, animation: .easeInOut)
+        
+        _sessions = FetchRequest(entity: Session.entity(),
+                                 sortDescriptors: [descriptor],
+                                 predicate: predicate,
+                                 animation: .easeInOut)
+        
+        _needleRank = needleRank
     }
     
     var body: some View {

@@ -205,6 +205,12 @@ class ViewModel: ObservableObject {
                 delayExecution(.now() + 0.3) {
                     self.secretary.pairBubbleCellNeedsDisplay.toggle()
                 }
+                
+                let info = ["needleRank" : bubble.sessions_.count]
+                NotificationCenter.default.post(name: .needleTracksLatestSession,
+                                                object: nil,
+                                                userInfo: info
+                )
                                                                 
             case .paused:  /* changes to running */
                 //create new pair, add it to currentSession

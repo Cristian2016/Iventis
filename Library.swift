@@ -28,6 +28,7 @@ struct vRoundedRectangle: Shape {
 extension Notification.Name {
     static let fiveSecondsSignal = Notification.Name("fiveSecondsSignal")
     static let detailViewVisible = Notification.Name("detailViewVisible")
+    static let needleTracksLatestSession = Notification.Name("needleTracksLatestSession")
 } //1 ViewModel 1//
 
 extension UserDefaults {
