@@ -38,6 +38,11 @@ struct BottomDetailView: View {
         .padding(.init(top: 0, leading: -12, bottom: 0, trailing: -12))
         .tabViewStyle(.page(indexDisplayMode: .never))
         .onReceive(secretary.$pairBubbleCellNeedsDisplay) { pairBubbleCellNeedsDisplay = $0 }
+        .onChange(of: needleRank) { newValue in
+            if newValue == sessions.count {
+                NotificationCenter.default.post(.init(name: .init("resetNeedle")))
+            }
+        }
     }
     
     private func sessionRank(of session:Session) -> Int {
