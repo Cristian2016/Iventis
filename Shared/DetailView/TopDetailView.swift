@@ -52,8 +52,8 @@ struct TopDetailView:View {
                         }
                     }
                 }
-                .onChange(of: userSetNeedleRank) { newValue in
-                    withAnimation { proxy.scrollTo(newValue, anchor: .center) }
+                .onChange(of: userSetNeedleRank) {
+                    withAnimation { proxy.scrollTo($0, anchor: .center) }
                 }
             }
         }
