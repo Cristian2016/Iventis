@@ -39,33 +39,16 @@ struct TopCell: View {
                         VStack (alignment:.leading, spacing: dateDurationViewsSpacing) {
                             dateView
                             durationView.padding(2)
-                        }.padding(edgeInset)
+                        }
+                        .padding(edgeInset)
                     }
                     .frame(height: topCellHeight)
                     .background( backgroundView )
                 }
                 Color.lightGray.frame(width:1, height: 100)
             }
-            .onTapGesture {
-                if needlePosition == myRank { return }
-                print(needlePosition, myRank)
-                UserFeedback.singleHaptic(.medium)
-                
-                delayExecution(.now() + 0.3) {
-                    if pairBubbleCellShows {
-                        Secretary.shared.pairBubbleCellNeedsDisplay.toggle()
-                    }
-                } //1
-                
-                if session == session.bubble?.lastSession {
-                    NotificationCenter.default.post(.resetNeedle)
-                }
-                withAnimation { needlePosition = myRank }
-            }
-            .onLongPressGesture {
-                UserFeedback.singleHaptic(.heavy)
-                secretary.sessionToDelete = (session, myRank)
-            }
+            .onTapGesture { handleTopCellTapped() }
+            .onLongPressGesture { handleTopCellLongPressed() }
         }
     }
     
@@ -151,6 +134,27 @@ struct TopCell: View {
     }
     
     // MARK: -
+    private func handleTopCellLongPressed() {
+        UserFeedback.singleHaptic(.heavy)
+        secretary.sessionToDelete = (session, myRank)
+    }
+    
+    private func handleTopCellTapped() {
+        if needlePosition == myRank { return }
+        UserFeedback.singleHaptic(.medium)
+        
+        delayExecution(.now() + 0.3) {
+            if pairBubbleCellShows {
+                Secretary.shared.pairBubbleCellNeedsDisplay.toggle()
+            }
+        } //1
+        
+        if session == session.bubble?.lastSession {
+            NotificationCenter.default.post(.resetNeedle)
+        }
+        withAnimation { needlePosition = myRank }
+    }
+    
     private func showSeconds() -> Bool {
         guard let duration = duration else { return false }
         
