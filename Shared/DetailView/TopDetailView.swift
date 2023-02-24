@@ -77,7 +77,7 @@ struct TopDetailView:View {
     
     private var gradientBackground:some View {
         let stops:[Gradient.Stop] = [
-            .init(color: .topDetailViewBackground, location: 0.05),
+            .init(color: .topDetailViewBackground, location: 0.6),
             .init(color: .topDetailViewBackground1, location: 1)
         ]
         return LinearGradient(stops: stops, startPoint: .bottom, endPoint: .top)
