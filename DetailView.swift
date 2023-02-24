@@ -18,7 +18,7 @@ struct DetailView: View {
         
     let topDetailHeight = CGFloat(140)
     
-    @State private var userSetNeedleRank:Int = -1
+    @State private var userSetNeedleRank = -1
     
     private var count:Int { sessions.count }
     
