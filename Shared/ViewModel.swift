@@ -186,10 +186,7 @@ class ViewModel: ObservableObject {
                                 
                 bubble.addToSessions(newSession)
                 newSession.addToPairs(newPair)
-                
-                //needle tracks latest session because user did not move the needle
-//                bubble.coordinator.needleRank = bubble.sessions_.count
-                
+                                
                 //1 both
                 secretary.addNoteButton_bRank = nil //clear first
                 secretary.addNoteButton_bRank = Int(bubble.rank)
@@ -201,12 +198,6 @@ class ViewModel: ObservableObject {
                 delayExecution(.now() + 0.3) {
                     self.secretary.pairBubbleCellNeedsDisplay.toggle()
                 }
-                
-                let info = ["needleRank" : bubble.sessions_.count]
-                NotificationCenter.default.post(name: .needleTracksLatestSession,
-                                                object: nil,
-                                                userInfo: info
-                )
                                                                 
             case .paused:  /* changes to running */
                 //create new pair, add it to currentSession

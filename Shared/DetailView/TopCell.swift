@@ -27,7 +27,7 @@ struct TopCell: View {
     let durationFont = Font.system(size: 24, weight: .semibold)
     let durationComponentsFont = Font.system(size: 20, weight: .semibold)
     
-    @Binding var userSetNeedleRank:Int
+    @Binding var needlePosition:Int
     
     // MARK: -
     var body: some View {
@@ -47,8 +47,8 @@ struct TopCell: View {
                 Color.lightGray.frame(width:1, height: 100)
             }
             .onTapGesture {
-                if userSetNeedleRank == myRank { return }
-                print(userSetNeedleRank, myRank)
+                if needlePosition == myRank { return }
+                print(needlePosition, myRank)
                 UserFeedback.singleHaptic(.medium)
                 
                 delayExecution(.now() + 0.3) {
@@ -60,7 +60,7 @@ struct TopCell: View {
                 if session == session.bubble?.lastSession {
                     NotificationCenter.default.post(.resetNeedle)
                 }
-                withAnimation { userSetNeedleRank = myRank }
+                withAnimation { needlePosition = myRank }
             }
             .onLongPressGesture {
                 UserFeedback.singleHaptic(.heavy)
@@ -159,7 +159,7 @@ struct TopCell: View {
         return true
     }
     
-    init?(_ session:Session?, _ sessionRank:Int, _ userSetNeedleRank:Binding<Int>) {
+    init?(_ session:Session?, _ sessionRank:Int, _ needlePosition:Binding<Int>) {
         
         guard let session = session else { return nil }
         
@@ -169,11 +169,10 @@ struct TopCell: View {
         let result = try? decoder.decode(Float.TimeComponentsAsStrings.self, from: session.totalDurationAsStrings ?? Data())
         
         // FIXME: - doing twice the work and decodes data here, instead on a background thread
-        print("decode data")
         
         self.duration = result
         self.myRank = sessionRank
-        _userSetNeedleRank = userSetNeedleRank
+        _needlePosition = needlePosition
     }
     
     private var pairBubbleCellShows: Bool { !session.isLastPairClosed }

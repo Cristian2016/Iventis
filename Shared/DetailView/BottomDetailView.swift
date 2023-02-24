@@ -11,11 +11,11 @@ import MyPackage
 struct BottomDetailView: View {
     @FetchRequest var sessions:FetchedResults<Session>
     @State private var pairBubbleCellNeedsDisplay = false
-    @Binding var needleRank:Int
+    @Binding var needlePosition:Int
     
     private let secretary = Secretary.shared
     
-    init?(_ bubble:Bubble?, _ needleRank:Binding<Int>) {
+    init?(_ bubble:Bubble?, _ needlePosition:Binding<Int>) {
         guard let bubble = bubble else { return nil }
         
         let predicate = NSPredicate(format: "bubble.rank == %i", bubble.rank)
@@ -26,11 +26,11 @@ struct BottomDetailView: View {
                                  predicate: predicate,
                                  animation: .easeInOut)
         
-        _needleRank = needleRank
+        _needlePosition = needlePosition
     }
     
     var body: some View {
-        TabView (selection: $needleRank) {
+        TabView (selection: $needlePosition) {
             ForEach(sessions) {
                 PairList($0).tag(sessionRank(of:$0))
             }
@@ -38,7 +38,7 @@ struct BottomDetailView: View {
         .padding(.init(top: 0, leading: -12, bottom: 0, trailing: -12))
         .tabViewStyle(.page(indexDisplayMode: .never))
         .onReceive(secretary.$pairBubbleCellNeedsDisplay) { pairBubbleCellNeedsDisplay = $0 }
-        .onChange(of: needleRank) {
+        .onChange(of: needlePosition) {
             if $0 == sessions.count { NotificationCenter.default.post(.resetNeedle) }
         }
     }

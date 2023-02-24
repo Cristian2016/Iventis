@@ -10,16 +10,15 @@ import SwiftUI
 import MyPackage
 
 struct TopDetailView:View {
-    @Namespace private var namespace
     @EnvironmentObject private var viewModel:ViewModel
     @FetchRequest var sessions:FetchedResults<Session>
     @Environment(\.colorScheme) var colorScheme
     private let bubble:Bubble
-    @Binding var userSetNeedleRank:Int
+    @Binding var userSetNeedlePosition:Int
     
     private let secretary = Secretary.shared
         
-    init?(_ bubble:Bubble?, _ needleRank:Binding<Int>) {
+    init?(_ bubble:Bubble?, _ needlePosition:Binding<Int>) {
         guard let bubble = bubble else { return nil }
         
         self.bubble = bubble
@@ -27,7 +26,7 @@ struct TopDetailView:View {
         
         let descriptor = NSSortDescriptor(key: "created", ascending: false)
         _sessions = FetchRequest(entity: Session.entity(), sortDescriptors: [descriptor], predicate: predicate, animation: .easeInOut)
-        _userSetNeedleRank = needleRank
+        _userSetNeedlePosition = needlePosition
     }
     
     // MARK: -
@@ -42,18 +41,14 @@ struct TopDetailView:View {
                         ForEach (sessions) { session in
                             let sessionRank = sessionRank(of: session)
                             ZStack {
-                                if shouldShowNeedle(for: session) {
-                                    selectionNeedle
-                                        .matchedGeometryEffect(id: "needle", in: namespace)
-                                        .animation(.easeInOut, value: shouldShowNeedle(for: session))
-                                }
-                                TopCell(session, sessionRank, $userSetNeedleRank).id(sessionRank)
+                                if shouldShowNeedle(for: session) { selectionNeedle }
+                                TopCell(session, sessionRank, $userSetNeedlePosition).id(sessionRank)
                             }
                         }
                     }
                 }
-                .onChange(of: userSetNeedleRank) {
-                    withAnimation { proxy.scrollTo($0, anchor: .center) }
+                .onChange(of: userSetNeedlePosition) { position in
+                    withAnimation { proxy.scrollTo(position, anchor: .center) }
                 }
             }
         }
@@ -96,10 +91,10 @@ struct TopDetailView:View {
     private func shouldShowNeedle(for session:Session) -> Bool {
         let sessionRank = sessionRank(of: session)
         
-        if userSetNeedleRank == -1, sessionRank  == bubble.sessions_.count {
+        if userSetNeedlePosition == -1, sessionRank  == bubble.sessions_.count {
             return true
         } else {
-            return  sessionRank == userSetNeedleRank ? true : false
+            return  sessionRank == userSetNeedlePosition ? true : false
         }
     }
     

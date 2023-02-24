@@ -18,7 +18,7 @@ struct DetailView: View {
         
     let topDetailHeight = CGFloat(140)
     
-    @State private var userSetNeedleRank = -1
+    @State private var needlePosition = -1
     
     private var count:Int { sessions.count }
     
@@ -45,10 +45,10 @@ struct DetailView: View {
                     .background { yPositionTrackerView }
                 if sessions.isEmpty { NoSessionsAlertView() }
                 else {
-                    TopDetailView(bubble, $userSetNeedleRank)
+                    TopDetailView(bubble, $needlePosition)
                         .frame(height: topDetailHeight)
                         .listRowSeparator(.hidden)
-                    BottomDetailView(bubble, $userSetNeedleRank)
+                    BottomDetailView(bubble, $needlePosition)
                         .frame(height: 600)
                         .listRowSeparator(.hidden)
                 }
@@ -62,7 +62,7 @@ struct DetailView: View {
                 }
             }
             .onReceive(NotificationCenter.Publisher(center: .default, name: .resetNeedle)) { _ in
-                userSetNeedleRank = -1
+                needlePosition = -1
             }
         }
         .toolbarBackground(.ultraThinMaterial)

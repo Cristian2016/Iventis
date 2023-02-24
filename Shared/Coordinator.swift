@@ -18,11 +18,8 @@ extension BubbleCellCoordinator {
 }
 
 class BubbleCellCoordinator {
-    
     unowned private let bubble:Bubble
-    
-    @Published var needleRank:Int?
-    
+        
     @Published private(set) var components = Components("-1", "-1", "-1", "-1")
     @Published private(set) var opacity = Opacity()
     var colorPublisher:Publisher<Color, Never>
