@@ -94,14 +94,14 @@ class ViewModel: ObservableObject {
 //        bubble.pairBubbleCellCoordinator.update(.pause)
         if !path.isEmpty { path = [] }
         
-        let context = bubble.managedObjectContext!
-        
         //⚠️ do I really need to set to nil?
         delayExecution(.now() + 0.2) {
             bubble.coordinator = nil
             bubble.pairBubbleCellCoordinator = nil
         }
 
+        //delete bubble
+        let context = bubble.managedObjectContext!
         context.perform {
             context.delete(bubble)
             try? context.save()
@@ -117,18 +117,12 @@ class ViewModel: ObservableObject {
             bubble.pairBubbleCellCoordinator.update(.user(.deleteCurrentSession))
         }
         
-        let viewContext = PersistenceController.shared.viewContext
-        viewContext.delete(session)
-        try? viewContext.save()
-        
-        let sessionToDeleteRank = secretary.sessionToDelete!.sessionRank
-                
-//        if sessionToDeleteRank == selectedSessionRank {
-//            bubble.coordinator.needleRank = bubble.sessions_.count
-//            delayExecution(.now() + 0.3) {
-//                self.secretary.pairBubbleCellNeedsDisplay.toggle()
-//            }
-//        }
+        //delete session
+        let context = session.managedObjectContext!
+        context.perform {
+            context.delete(session)
+            try? context.save()
+        }
     }
     
     func removeAddNoteButton(_ bubble:Bubble) {
