@@ -61,9 +61,6 @@ struct DetailView: View {
                     delayExecution(.now() + 0.1) { secretary.shouldScrollToTop = false }
                 }
             }
-            .onChange(of: sessions.count) { newValue in
-                if newValue == 1 { needlePosition = -1 }
-            }
         }
         .toolbarBackground(.ultraThinMaterial)
         .toolbar {

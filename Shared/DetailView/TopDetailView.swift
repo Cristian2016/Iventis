@@ -50,8 +50,11 @@ struct TopDetailView:View {
                         }
                     }
                 }
-                .onChange(of: needlePosition) { position in
-                    withAnimation { proxy.scrollTo(position, anchor: .center) }
+                .onChange(of: needlePosition) { newPosition in
+                    withAnimation { proxy.scrollTo(newPosition, anchor: .center) }
+                }
+                .onChange(of: sessions.count) { newCount in
+                    if newCount == 1 { needlePosition = -1 }
                 }
             }
         }
