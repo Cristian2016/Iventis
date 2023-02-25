@@ -16,6 +16,25 @@ struct BottomDetailView: View {
     
     private let secretary = Secretary.shared
     
+    var body: some View {
+        TabView (selection: $needlePosition) {
+            ForEach(sessions) {
+                PairList($0).tag(sessionRank(of:$0))
+            }
+        }
+        .padding(.init(top: 0, leading: -12, bottom: 0, trailing: -12))
+        .tabViewStyle(.page)
+        .onReceive(secretary.$pairBubbleCellNeedsDisplay) { pairBubbleCellNeedsDisplay = $0 }
+        .onChange(of: needlePosition) {
+            if $0 == sessions.count { withAnimation { needlePosition = -1 }}
+        } //1
+    }
+    
+    private func sessionRank(of session:Session) -> Int {
+        sessions.count - sessions.firstIndex(of: session)!
+    }
+    
+    // MARK: - Init
     init?(_ bubble:Bubble?, _ needlePosition:Binding<Int>) {
         guard let bubble = bubble else { return nil }
         
@@ -28,23 +47,5 @@ struct BottomDetailView: View {
                                  animation: .easeInOut)
         
         _needlePosition = needlePosition
-    }
-    
-    var body: some View {
-        TabView (selection: $needlePosition) {
-            ForEach(sessions) {
-                PairList($0).tag(sessionRank(of:$0))
-            }
-        }
-        .padding(.init(top: 0, leading: -12, bottom: 0, trailing: -12))
-        .tabViewStyle(.page(indexDisplayMode: .always))
-        .onReceive(secretary.$pairBubbleCellNeedsDisplay) { pairBubbleCellNeedsDisplay = $0 }
-        .onChange(of: needlePosition) {
-            if $0 == sessions.count { withAnimation { needlePosition = -1 }}
-        } //1
-    }
-    
-    private func sessionRank(of session:Session) -> Int {
-        sessions.count - sessions.firstIndex(of: session)!
     }
 }
