@@ -139,8 +139,8 @@ struct TopCell: View {
     }
     
     private func handleTopCellTapped() {
-        if needlePosition.wrappedValue == myRank { return }
-        if needlePosition.wrappedValue == -1 && myRank == session.bubble?.sessions_.count { return }
+        if needlePosition.wrappedValue == myRank || (needleNotSet && latestTopCell) { return }
+        
         UserFeedback.singleHaptic(.medium)
         
         delayExecution(.now() + 0.3) {
@@ -185,6 +185,15 @@ struct TopCell: View {
         
         self.duration = result
         self.myRank = sessionRank
+    }
+    
+    // MARK: - Little Helpers
+    private var latestTopCell:Bool {
+        myRank == session.bubble?.sessions_.count
+    }
+    
+    private var needleNotSet:Bool {
+        needlePosition.wrappedValue == -1
     }
 }
 
