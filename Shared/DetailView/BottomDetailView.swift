@@ -37,7 +37,7 @@ struct BottomDetailView: View {
             }
         }
         .padding(.init(top: 0, leading: -12, bottom: 0, trailing: -12))
-        .tabViewStyle(.page(indexDisplayMode: .never))
+        .tabViewStyle(.page(indexDisplayMode: .always))
         .onReceive(secretary.$pairBubbleCellNeedsDisplay) { pairBubbleCellNeedsDisplay = $0 }
         .onChange(of: needlePosition) {
             if $0 == sessions.count { withAnimation { needlePosition = -1 }}
