@@ -92,7 +92,7 @@ struct ThreeLabels: View {
     /* 1 */private func userTappedHundredths() {
         guard let bubble = bubble else { return }
         UserFeedback.singleHaptic(.heavy)
-        viewModel.toggleBubbleStart(bubble)
+        viewModel.toggleStart(bubble)
     }
     
     // MARK: - Small Helpers

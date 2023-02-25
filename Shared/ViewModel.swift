@@ -102,6 +102,8 @@ class ViewModel: ObservableObject {
 
         //delete bubble
         let context = bubble.managedObjectContext!
+        context.automaticallyMergesChangesFromParent = true
+        
         context.perform {
             context.delete(bubble)
             try? context.save()
@@ -119,6 +121,8 @@ class ViewModel: ObservableObject {
         
         //delete session
         let context = session.managedObjectContext!
+        context.automaticallyMergesChangesFromParent = true
+        
         context.perform {
             let deletedSessionRank = bubble.sessions_.firstIndex(of: session)!
             
@@ -169,7 +173,7 @@ class ViewModel: ObservableObject {
     }
     
     ///delta is always zero if user taps start. if user uses start delay, delta is not zero
-    func toggleBubbleStart(_ bubble:Bubble, delta:TimeInterval? = nil) {
+    func toggleStart(_ bubble:Bubble, delta:TimeInterval? = nil) {
         if bubble.currentClock <= 0 && bubble.kind != .stopwatch  { return }
        removeDelay(for: bubble)
         
@@ -178,14 +182,20 @@ class ViewModel: ObservableObject {
         switch bubble.state {
             case .brandNew: /* changes to .running */
                 //create first session and add first pair to the session
-                let newSession = Session(context: bubble.managedObjectContext!)
-                let newPair = Pair(context: bubble.managedObjectContext!)
                 
-                newPair.start = Date().addingTimeInterval(startDelayCompensation)
-                newSession.created = Date().addingTimeInterval(startDelayCompensation)
-                                
-                bubble.addToSessions(newSession)
-                newSession.addToPairs(newPair)
+                let context = bubble.managedObjectContext!
+                context.automaticallyMergesChangesFromParent = true
+                
+                context.perform {
+                    let newSession = Session(context: bubble.managedObjectContext!)
+                    let newPair = Pair(context: bubble.managedObjectContext!)
+                    
+                    newPair.start = Date().addingTimeInterval(startDelayCompensation)
+                    newSession.created = Date().addingTimeInterval(startDelayCompensation)
+                                    
+                    bubble.addToSessions(newSession)
+                    newSession.addToPairs(newPair)
+                }
                                 
                 //1 both
                 secretary.addNoteButton_bRank = nil //clear first
@@ -200,10 +210,15 @@ class ViewModel: ObservableObject {
                 }
                                                                 
             case .paused:  /* changes to running */
-                //create new pair, add it to currentSession
-                let newPair = Pair(context: PersistenceController.shared.viewContext)
-                newPair.start = Date().addingTimeInterval(startDelayCompensation)
-                bubble.lastSession?.addToPairs(newPair)
+                let context = bubble.managedObjectContext!
+                context.automaticallyMergesChangesFromParent = true
+                
+                context.perform {
+                    //create new pair, add it to currentSession
+                    let newPair = Pair(context: bubble.managedObjectContext!)
+                    newPair.start = Date().addingTimeInterval(startDelayCompensation)
+                    bubble.lastSession?.addToPairs(newPair)
+                }
                                 
                 //1 both
                 secretary.addNoteButton_bRank = nil //clear first
@@ -505,7 +520,7 @@ class ViewModel: ObservableObject {
             DispatchQueue.main.async {
                 //start bubble automatically
                 //remove SDBCell from BubbleCell
-                self?.toggleBubbleStart(bubble, delta: delta)
+                self?.toggleStart(bubble, delta: delta)
                 
                 self?.secretary.theOneAndOnlyEditedSDB = nil //dismiss MoreOptionsView
                 
@@ -517,20 +532,7 @@ class ViewModel: ObservableObject {
     // MARK: - Little Helpers
     var fiveSecondsBubble:Bubble? { bubble(for: secretary.addNoteButton_bRank) }
     
-    // MARK: - CoreData
-    func fetchAllBubbles(completion: @escaping ([Bubble]) -> Void) {
-        let container = PersistenceController.shared.container
-        let context = container.newBackgroundContext()
-        context.automaticallyMergesChangesFromParent = true
-        
-        context.perform {
-            let request = Bubble.fetchRequest()
-            if let bubbles = try? context.fetch(request) {
-                completion(bubbles)
-            }
-        }
-    } //2
-    
+    // MARK: - Init
     init() {
         observe_ApplicationActive()
         observe_ApplicationBackground()
