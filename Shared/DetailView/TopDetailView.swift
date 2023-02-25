@@ -43,7 +43,8 @@ struct TopDetailView:View {
                             let sessionRank = sessionRank(of: session)
                             ZStack {
                                 if shouldShowNeedle(for: session) { selectionNeedle }
-                                TopCell(session, sessionRank, $needlePosition).id(sessionRank)
+                                TopCell(session, sessionRank, $needlePosition)
+                                    .id(sessionRank)
                             }
                         }
                     }
