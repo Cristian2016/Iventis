@@ -9,8 +9,7 @@ import SwiftUI
 import MyPackage
 
 struct TopCell: View {
-    @Binding var needlePosition:Int
-    
+    @Environment (\.needlePosition) private var needlePosition
     @Environment (\.colorScheme) private var colorScheme
     
     let secretary = Secretary.shared
@@ -140,7 +139,7 @@ struct TopCell: View {
     }
     
     private func handleTopCellTapped() {
-        if needlePosition == myRank { return }
+        if needlePosition.wrappedValue == myRank { return }
         UserFeedback.singleHaptic(.medium)
         
         delayExecution(.now() + 0.3) {
@@ -152,7 +151,7 @@ struct TopCell: View {
         if session == session.bubble?.lastSession {
             NotificationCenter.default.post(.resetNeedle)
         }
-        withAnimation { needlePosition = myRank }
+        withAnimation { needlePosition.wrappedValue = myRank }
     }
     
     private func showSeconds() -> Bool {
@@ -163,7 +162,7 @@ struct TopCell: View {
         return true
     }
     
-    init?(_ session:Session?, _ sessionRank:Int, _ needlePosition:Binding<Int>) {
+    init?(_ session:Session?, _ sessionRank:Int) {
         
         guard let session = session else { return nil }
         
@@ -176,7 +175,6 @@ struct TopCell: View {
         
         self.duration = result
         self.myRank = sessionRank
-        _needlePosition = needlePosition
     }
     
     private var pairBubbleCellShows: Bool { !session.isLastPairClosed }

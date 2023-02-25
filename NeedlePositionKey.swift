@@ -19,6 +19,7 @@ extension EnvironmentValues {
 }
 
 extension View {
+    ///injects needlePosition, from DetailView into TopCell, as an environment value
     func needlePosition(_ value:Binding<Int>) -> some View {
         self.environment(\.needlePosition, value)
     }
