@@ -10,6 +10,8 @@ import SwiftUI
 import MyPackage
 
 struct DetailView: View {
+    @State private var needlePosition = -1
+    
     let bubble:Bubble
     @FetchRequest var sessions:FetchedResults<Session>
     
@@ -17,8 +19,6 @@ struct DetailView: View {
     private let secretary = Secretary.shared
         
     let topDetailHeight = CGFloat(140)
-    
-    @State private var needlePosition = -1
     
     private var count:Int { sessions.count }
     

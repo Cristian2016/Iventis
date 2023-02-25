@@ -9,6 +9,8 @@ import SwiftUI
 import MyPackage
 
 struct TopCell: View {
+    @Binding var needlePosition:Int
+    
     @Environment (\.colorScheme) private var colorScheme
     
     let secretary = Secretary.shared
@@ -26,8 +28,6 @@ struct TopCell: View {
     
     let durationFont = Font.system(size: 24, weight: .semibold)
     let durationComponentsFont = Font.system(size: 20, weight: .semibold)
-    
-    @Binding var needlePosition:Int
     
     // MARK: -
     var body: some View {

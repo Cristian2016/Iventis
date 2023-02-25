@@ -9,9 +9,10 @@ import SwiftUI
 import MyPackage
 
 struct BottomDetailView: View {
+    @Binding var needlePosition:Int
+    
     @FetchRequest var sessions:FetchedResults<Session>
     @State private var pairBubbleCellNeedsDisplay = false
-    @Binding var needlePosition:Int
     
     private let secretary = Secretary.shared
     

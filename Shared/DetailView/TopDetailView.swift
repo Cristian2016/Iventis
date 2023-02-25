@@ -10,11 +10,12 @@ import SwiftUI
 import MyPackage
 
 struct TopDetailView:View {
+    @Binding var needlePosition:Int
+    
     @EnvironmentObject private var viewModel:ViewModel
     @FetchRequest var sessions:FetchedResults<Session>
     @Environment(\.colorScheme) var colorScheme
     private let bubble:Bubble
-    @Binding var userSetNeedlePosition:Int
     
     private let secretary = Secretary.shared
         
@@ -26,7 +27,7 @@ struct TopDetailView:View {
         
         let descriptor = NSSortDescriptor(key: "created", ascending: false)
         _sessions = FetchRequest(entity: Session.entity(), sortDescriptors: [descriptor], predicate: predicate, animation: .easeInOut)
-        _userSetNeedlePosition = needlePosition
+        _needlePosition = needlePosition
     }
     
     // MARK: -
@@ -42,12 +43,12 @@ struct TopDetailView:View {
                             let sessionRank = sessionRank(of: session)
                             ZStack {
                                 if shouldShowNeedle(for: session) { selectionNeedle }
-                                TopCell(session, sessionRank, $userSetNeedlePosition).id(sessionRank)
+                                TopCell(session, sessionRank, $needlePosition).id(sessionRank)
                             }
                         }
                     }
                 }
-                .onChange(of: userSetNeedlePosition) { position in
+                .onChange(of: needlePosition) { position in
                     withAnimation { proxy.scrollTo(position, anchor: .center) }
                 }
             }
@@ -91,10 +92,10 @@ struct TopDetailView:View {
     private func shouldShowNeedle(for session:Session) -> Bool {
         let sessionRank = sessionRank(of: session)
         
-        if userSetNeedlePosition == -1, sessionRank  == bubble.sessions_.count {
+        if needlePosition == -1, sessionRank  == bubble.sessions_.count {
             return true
         } else {
-            return  sessionRank == userSetNeedlePosition ? true : false
+            return  sessionRank == needlePosition ? true : false
         }
     }
     
