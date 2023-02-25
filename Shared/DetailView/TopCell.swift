@@ -13,21 +13,13 @@ struct TopCell: View {
     @Environment (\.needlePosition) private var needlePosition
     @Environment (\.colorScheme) private var colorScheme
     
-    let secretary = Secretary.shared
-    let session:Session
-    let myRank:Int
+    private let secretary = Secretary.shared
+    private let session:Session
+    private let myRank:Int
             
-    let duration: Float.TimeComponentsAsStrings?
+    private let duration: Float.TimeComponentsAsStrings?
     
-    private let topCellHeight = CGFloat(130)
-    private let roundedRectRadius = CGFloat(10)
-    private let strokeWidth = CGFloat(4)
-    private let edgeInset = EdgeInsets(top: 0, leading: 13, bottom: 10, trailing: 6)
-    private let dateDurationViewsSpacing = CGFloat(6)
-    private let spacingBetweenCells = CGFloat(-2)
-    
-    let durationFont = Font.system(size: 24, weight: .semibold)
-    let durationComponentsFont = Font.system(size: 20, weight: .semibold)
+    private let metrics = Metrics()
     
     // MARK: -
     var body: some View {
@@ -36,13 +28,13 @@ struct TopCell: View {
                 ZStack {
                     sessionRankView
                     Push(.bottomLeft) {
-                        VStack (alignment:.leading, spacing: dateDurationViewsSpacing) {
+                        VStack (alignment:.leading, spacing: metrics.dateDurationViewsSpacing) {
                             dateView
                             durationView.padding(2)
                         }
-                        .padding(edgeInset)
+                        .padding(metrics.edgeInset)
                     }
-                    .frame(height: topCellHeight)
+                    .frame(height: metrics.topCellHeight)
                     .background( backgroundView )
                 }
                 Color.lightGray.frame(width:1, height: 100)
@@ -95,24 +87,24 @@ struct TopCell: View {
                 //hr
                 if duration.hr != "0" {
                     HStack (alignment:.firstTextBaseline ,spacing: 0) {
-                        Text(duration.hr).font(durationFont)
-                        Text("h").font(durationComponentsFont)
+                        Text(duration.hr).font(metrics.durationFont)
+                        Text("h").font(metrics.durationComponentsFont)
                     }
                 }
                 
                 //min
                 if duration.min != "0" {
                     HStack (alignment:.firstTextBaseline ,spacing: 0) {
-                        Text(duration.min).font(durationFont)
-                        Text("m").font(durationComponentsFont)
+                        Text(duration.min).font(metrics.durationFont)
+                        Text("m").font(metrics.durationComponentsFont)
                     }
                 }
                 
                 //sec
                 if showSeconds() {
                     HStack (alignment:.firstTextBaseline ,spacing: 0) {
-                        Text(duration.sec + "." + duration.hundredths).font(durationFont)
-                        Text("s").font(durationComponentsFont)
+                        Text(duration.sec + "." + duration.hundredths).font(metrics.durationFont)
+                        Text("s").font(metrics.durationComponentsFont)
                     }
                 }
             }
@@ -120,17 +112,9 @@ struct TopCell: View {
     }
     
     private var backgroundView: some View {
-        RoundedRectangle(cornerRadius: roundedRectRadius).fill(Color.clear)
+        RoundedRectangle(cornerRadius: metrics.roundedRectRadius).fill(Color.clear)
             .padding([.trailing, .leading], 2)
             .contentShape(Rectangle())
-    }
-    
-    private var bubbleRunningAlert: some View {
-        Button { } label: { Label { Text("Running").fontWeight(.semibold) } icon: { } }
-            .buttonStyle(.borderedProminent)
-            .foregroundColor(.white)
-            .tint(.green)
-            .font(.caption)
     }
     
     // MARK: -
@@ -193,6 +177,19 @@ struct TopCell: View {
     private var latestTopCell:Bool { myRank == session.bubble?.sessions_.count }
     
     private var needleNotSet:Bool { needlePosition.wrappedValue == -1 }
+}
+
+extension TopCell {
+    struct Metrics {
+        let topCellHeight = CGFloat(130)
+        let roundedRectRadius = CGFloat(10)
+        let strokeWidth = CGFloat(4)
+        let edgeInset = EdgeInsets(top: 0, leading: 13, bottom: 10, trailing: 6)
+        let dateDurationViewsSpacing = CGFloat(6)
+        let spacingBetweenCells = CGFloat(-2)
+        let durationFont = Font.system(size: 24, weight: .semibold)
+        let durationComponentsFont = Font.system(size: 20, weight: .semibold)
+    }
 }
 
 struct DateViewBackgroundColor: View {

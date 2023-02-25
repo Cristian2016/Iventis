@@ -3,7 +3,7 @@
 //  Timers (iOS)
 //
 //  Created by Cristian Lapusan on 23.02.2023.
-//
+//  when bubble isRunning, show > duration, else show duration
 
 import SwiftUI
 
