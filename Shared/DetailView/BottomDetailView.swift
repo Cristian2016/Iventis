@@ -3,7 +3,7 @@
 //  Timers
 //
 //  Created by Cristian Lapusan on 02.05.2022.
-//1 needs to reset needlePosition, so that needle follows newly created TopCell items
+//1 monitors position change, so if the user decides to put needle back in its original position, needlePosition must be reset
 
 import SwiftUI
 import MyPackage
@@ -39,11 +39,9 @@ struct BottomDetailView: View {
         .padding(.init(top: 0, leading: -12, bottom: 0, trailing: -12))
         .tabViewStyle(.page(indexDisplayMode: .never))
         .onReceive(secretary.$pairBubbleCellNeedsDisplay) { pairBubbleCellNeedsDisplay = $0 }
-        .onChange(of: needlePosition) { newPosition in
-            if newPosition == sessions.count {
-                withAnimation { needlePosition = -1 }
-            } //1
-        }
+        .onChange(of: needlePosition) {
+            if $0 == sessions.count { withAnimation { needlePosition = -1 }}
+        } //1
     }
     
     private func sessionRank(of session:Session) -> Int {
