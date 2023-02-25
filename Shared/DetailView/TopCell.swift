@@ -148,8 +148,8 @@ struct TopCell: View {
             }
         } //1
         
-        let condition = session.bubble!.sessions_.count == myRank
-        withAnimation { needlePosition.wrappedValue = condition ? -1 : myRank }
+        let latestSessionRank = session.bubble!.sessions_.count == myRank
+        withAnimation { needlePosition.wrappedValue = latestSessionRank ? -1 : myRank }
     }
     
     private func showSeconds() -> Bool {
