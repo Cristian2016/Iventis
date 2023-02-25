@@ -9,6 +9,7 @@ import SwiftUI
 import MyPackage
 
 struct TopCell: View {
+    @State private var topCellTapped = false
     @Environment (\.needlePosition) private var needlePosition
     @Environment (\.colorScheme) private var colorScheme
     
@@ -141,6 +142,7 @@ struct TopCell: View {
     private func handleTopCellTapped() {
         if needlePosition.wrappedValue == myRank || (needleNotSet && latestTopCell) { return }
         
+        //user feedback: visual and taptic
         UserFeedback.singleHaptic(.medium)
         
         delayExecution(.now() + 0.3) {
@@ -188,13 +190,9 @@ struct TopCell: View {
     }
     
     // MARK: - Little Helpers
-    private var latestTopCell:Bool {
-        myRank == session.bubble?.sessions_.count
-    }
+    private var latestTopCell:Bool { myRank == session.bubble?.sessions_.count }
     
-    private var needleNotSet:Bool {
-        needlePosition.wrappedValue == -1
-    }
+    private var needleNotSet:Bool { needlePosition.wrappedValue == -1 }
 }
 
 struct DateViewBackgroundColor: View {
