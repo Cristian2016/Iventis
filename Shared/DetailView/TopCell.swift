@@ -140,6 +140,7 @@ struct TopCell: View {
     
     private func handleTopCellTapped() {
         if needlePosition.wrappedValue == myRank { return }
+        if needlePosition.wrappedValue == -1 && myRank == session.bubble?.sessions_.count { return }
         UserFeedback.singleHaptic(.medium)
         
         delayExecution(.now() + 0.3) {
