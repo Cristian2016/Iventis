@@ -12,8 +12,8 @@ import MyPackage
 struct DetailView: View {
     @State private var needlePosition = -1
     
-    let bubble:Bubble
-    @FetchRequest var sessions:FetchedResults<Session>
+    private let bubble:Bubble
+    @FetchRequest private var sessions:FetchedResults<Session>
     
     @EnvironmentObject private var viewModel:ViewModel
     private let secretary = Secretary.shared
