@@ -3,7 +3,7 @@
 //  Timers
 //
 //  Created by Cristian Lapusan on 02.05.2022.
-//
+//1 needs to reset needlePosition, so that needle follows newly created TopCell items
 
 import SwiftUI
 import MyPackage
@@ -40,7 +40,7 @@ struct BottomDetailView: View {
         .tabViewStyle(.page(indexDisplayMode: .never))
         .onReceive(secretary.$pairBubbleCellNeedsDisplay) { pairBubbleCellNeedsDisplay = $0 }
         .onChange(of: needlePosition) {
-            if $0 == sessions.count { NotificationCenter.default.post(.resetNeedle) }
+            if $0 == sessions.count { needlePosition = -1 } //1
         }
     }
     

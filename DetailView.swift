@@ -61,9 +61,6 @@ struct DetailView: View {
                     delayExecution(.now() + 0.1) { secretary.shouldScrollToTop = false }
                 }
             }
-            .onReceive(NotificationCenter.Publisher(center: .default, name: .resetNeedle)) { _ in
-                needlePosition = -1
-            }
         }
         .toolbarBackground(.ultraThinMaterial)
         .toolbar {

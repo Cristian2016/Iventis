@@ -148,9 +148,6 @@ struct TopCell: View {
             }
         } //1
         
-        if session == session.bubble?.lastSession {
-            NotificationCenter.default.post(.resetNeedle)
-        }
         withAnimation { needlePosition.wrappedValue = myRank }
     }
     
