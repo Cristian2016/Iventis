@@ -6,6 +6,7 @@
 //1 if cancellable is set to emty set, it will stop updating
 //2 unowned because Coordinator must always have a bubble. If bubble gets deinit, Coordinator deinits as well
 //5 if app is back onscreen it must refresh the PairBubbleCell [refresh = true]
+//6 it shows if detailView is visible and bubble is running. ex: if bubble is not running and detailView viisble, it will return false. if bubble is running and detailView not visible it returns false. if bubble runs and detailview visible it returns true
 
 import Combine
 import Foundation
@@ -14,6 +15,7 @@ import UIKit
 class PairBubbleCellCoordinator {
     unowned private let bubble:Bubble //2
     
+    @Published var isPairBubbleCellRunning = false
     @Published private(set) var components = Components("0", "0", "0")
     
     init(bubble: Bubble) {
@@ -78,9 +80,11 @@ class PairBubbleCellCoordinator {
                         .sink { [weak self] _ in self?.update() }
                         .store(in: &cancellable)
                 }
+                isPairBubbleCellRunning = true
             case .user(let action) :
                 switch action {
                     case .start:
+                        isPairBubbleCellRunning = true
                         refresh = false
                         publisher
                             .sink { [weak self] _ in
@@ -88,10 +92,12 @@ class PairBubbleCellCoordinator {
                             }
                             .store(in: &cancellable)
                     case .pause, .deleteCurrentSession, .endSession:
+                        isPairBubbleCellRunning = false
                         components = Components("0", "0", "0")
                         cancellable = []
                 
                     case .reset:
+                        isPairBubbleCellRunning = false
                         components = Components("0", "0", "0")
                         cancellable = []
                 }
@@ -104,7 +110,7 @@ class PairBubbleCellCoordinator {
         } else {
             update(.user(.pause))
         }
-    }}
+    }} //6
     
     private var refresh = false
     

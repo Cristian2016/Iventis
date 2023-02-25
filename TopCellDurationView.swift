@@ -8,44 +8,51 @@
 import SwiftUI
 
 struct TopCellDurationView: View {
+    private let duration: Float.TimeComponentsAsStrings?
+    private let shouldDisplayDuration:Bool
+    private let metrics:TopCell.Metrics
+    
     var body: some View {
-        EmptyView()
-//        if let duration = duration, shouldDisplayDuration {
-//            HStack (spacing: 8) {
-//                //hr
-//                if duration.hr != "0" {
-//                    HStack (alignment:.firstTextBaseline ,spacing: 0) {
-//                        Text(duration.hr).font(durationFont)
-//                        Text("h").font(durationComponentsFont)
-//                    }
-//                }
-//
-//                //min
-//                if duration.min != "0" {
-//                    HStack (alignment:.firstTextBaseline ,spacing: 0) {
-//                        Text(duration.min).font(durationFont)
-//                        Text("m").font(durationComponentsFont)
-//                    }
-//                }
-//
-//                //sec
-//                if showSeconds() {
-//                    HStack (alignment:.firstTextBaseline ,spacing: 0) {
-//                        Text(duration.sec + "." + duration.hundredths).font(durationFont)
-//                        Text("s").font(durationComponentsFont)
-//                    }
-//                }
-//            }
-//        }
+        if let duration = duration, shouldDisplayDuration {
+            HStack (spacing: 8) {
+                //hr
+                if duration.hr != "0" {
+                    HStack (alignment:.firstTextBaseline ,spacing: 0) {
+                        Text(duration.hr).font(metrics.durationFont)
+                        Text("h").font(metrics.durationComponentsFont)
+                    }
+                }
+                
+                //min
+                if duration.min != "0" {
+                    HStack (alignment:.firstTextBaseline ,spacing: 0) {
+                        Text(duration.min).font(metrics.durationFont)
+                        Text("m").font(metrics.durationComponentsFont)
+                    }
+                }
+                
+                //sec
+                if showSeconds() {
+                    HStack (alignment:.firstTextBaseline ,spacing: 0) {
+                        Text(duration.sec + "." + duration.hundredths).font(metrics.durationFont)
+                        Text("s").font(metrics.durationComponentsFont)
+                    }
+                }
+            }
+        }
     }
     
-//    init?(_ duration:) {
-//        <#statements#>
-//    }
-}
-
-struct TopCellDurationView_Previews: PreviewProvider {
-    static var previews: some View {
-        TopCellDurationView()
+    init(_ duration: Float.TimeComponentsAsStrings?, _ shouldDisplayDuration:Bool, _ metrics:TopCell.Metrics) {
+        self.duration = duration
+        self.shouldDisplayDuration = shouldDisplayDuration
+        self.metrics = metrics
+    }
+    
+    private func showSeconds() -> Bool {
+        guard let duration = duration else { return false }
+        
+        let condition = (duration.min != "0" || duration.hr != "0")
+        if duration.sec == "0" { return condition ? false : true }
+        return true
     }
 }
