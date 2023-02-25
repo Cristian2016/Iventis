@@ -9,7 +9,6 @@ import SwiftUI
 import MyPackage
 
 struct TopCell: View {
-    @State private var topCellTapped = false
     @Environment (\.needlePosition) private var needlePosition
     @Environment (\.colorScheme) private var colorScheme
     

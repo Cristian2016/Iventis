@@ -45,7 +45,7 @@ struct TopDetailView:View {
                     }
                 }
                 .onChange(of: needlePosition) { newPosition in
-                    withAnimation { proxy.scrollTo(newPosition, anchor: .center) }
+                    withAnimation { proxy.scrollTo(newPosition == -1 ? sessions.count : newPosition, anchor: .center) }
                 }
                 .onChange(of: sessions.count) {
                     if $0 == 1 { needlePosition = -1 }
