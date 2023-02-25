@@ -5,6 +5,7 @@
 //  Created by Cristian Lapusan on 20.04.2022.
 // References:
 // how to detect scroll view stop https://stackoverflow.com/questions/65062590/swiftui-detect-when-scrollview-has-finished-scrolling
+//1 reset needle if user deletes history [sessions.isEmpty] and starts bubble again [sessions is 1 now]
 
 import SwiftUI
 import MyPackage
@@ -53,9 +54,9 @@ struct TopDetailView:View {
                 .onChange(of: needlePosition) { newPosition in
                     withAnimation { proxy.scrollTo(newPosition, anchor: .center) }
                 }
-                .onChange(of: sessions.count) { newCount in
-                    if newCount == 1 { needlePosition = -1 }
-                }
+                .onChange(of: sessions.count) {
+                    if $0 == 1 { needlePosition = -1 }
+                } //1
             }
         }
         .padding(.init(top: 0, leading: -17, bottom: 0, trailing: -17))

@@ -159,6 +159,17 @@ struct TopCell: View {
         return true
     }
     
+    private var pairBubbleCellShows: Bool { !session.isLastPairClosed }
+    
+    private var shouldDisplayDuration:Bool {
+        
+        if myRank != session.bubble?.sessions_.count { return true }
+        else {
+            return pairBubbleCellShows ? false : true
+        }
+    }
+    
+    // MARK: - init
     init?(_ session:Session?, _ sessionRank:Int) {
         
         guard let session = session else { return nil }
@@ -172,16 +183,6 @@ struct TopCell: View {
         
         self.duration = result
         self.myRank = sessionRank
-    }
-    
-    private var pairBubbleCellShows: Bool { !session.isLastPairClosed }
-    
-    private var shouldDisplayDuration:Bool {
-        
-        if myRank != session.bubble?.sessions_.count { return true }
-        else {
-            return pairBubbleCellShows ? false : true
-        }
     }
 }
 
