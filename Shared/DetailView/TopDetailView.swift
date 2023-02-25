@@ -47,9 +47,7 @@ struct TopDetailView:View {
                 .onChange(of: needlePosition) { newPosition in
                     withAnimation { proxy.scrollTo(newPosition == -1 ? sessions.count : newPosition, anchor: .center) }
                 }
-                .onChange(of: sessions.count) {
-                    if $0 == 1 { needlePosition = -1 }
-                } //1
+                .onChange(of: sessions.count) { if $0 == 1 { needlePosition = -1 }} //1
             }
         }
         .padding(.init(top: 0, leading: -17, bottom: 0, trailing: -17))
