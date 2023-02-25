@@ -10,8 +10,8 @@ import MyPackage
 
 struct BottomDetailView: View {
     @Binding var needlePosition:Int
+    private var sessions: FetchedResults<Session>
     
-    @FetchRequest var sessions:FetchedResults<Session>
     @State private var pairBubbleCellNeedsDisplay = false
     
     private let secretary = Secretary.shared
@@ -35,17 +35,8 @@ struct BottomDetailView: View {
     }
     
     // MARK: - Init
-    init?(_ bubble:Bubble?, _ needlePosition:Binding<Int>) {
-        guard let bubble = bubble else { return nil }
-        
-        let predicate = NSPredicate(format: "bubble.rank == %i", bubble.rank)
-        let descriptor = NSSortDescriptor(key: "created", ascending: false)
-        
-        _sessions = FetchRequest(entity: Session.entity(),
-                                 sortDescriptors: [descriptor],
-                                 predicate: predicate,
-                                 animation: .easeInOut)
-        
+    init?(_ needlePosition:Binding<Int>, _ sessions:FetchedResults<Session>) {
         _needlePosition = needlePosition
+        self.sessions = sessions
     }
 }

@@ -45,10 +45,10 @@ struct DetailView: View {
                     .background { yPositionTrackerView }
                 if sessions.isEmpty { NoSessionsAlertView() }
                 else {
-                    TopDetailView(bubble, $needlePosition)
+                    TopDetailView($needlePosition, sessions)
                         .frame(height: topDetailHeight)
                         .listRowSeparator(.hidden)
-                    BottomDetailView(bubble, $needlePosition)
+                    BottomDetailView($needlePosition, sessions)
                         .frame(height: 600)
                         .listRowSeparator(.hidden)
                 }

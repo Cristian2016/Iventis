@@ -12,23 +12,16 @@ import MyPackage
 
 struct TopDetailView:View {
     @Binding var needlePosition:Int
+    private var sessions: FetchedResults<Session>
     
     @EnvironmentObject private var viewModel:ViewModel
-    @FetchRequest var sessions:FetchedResults<Session>
     @Environment(\.colorScheme) var colorScheme
-    private let bubble:Bubble
     
     private let secretary = Secretary.shared
         
-    init?(_ bubble:Bubble?, _ needlePosition:Binding<Int>) {
-        guard let bubble = bubble else { return nil }
-        
-        self.bubble = bubble
-        let predicate = NSPredicate(format: "bubble.rank == %i", bubble.rank)
-        
-        let descriptor = NSSortDescriptor(key: "created", ascending: false)
-        _sessions = FetchRequest(entity: Session.entity(), sortDescriptors: [descriptor], predicate: predicate, animation: .easeInOut)
+    init?(_ needlePosition:Binding<Int>, _ sessions:FetchedResults<Session>) {
         _needlePosition = needlePosition
+        self.sessions = sessions
     }
     
     // MARK: -
@@ -98,7 +91,7 @@ struct TopDetailView:View {
     private func shouldShowNeedle(for session:Session) -> Bool {
         let sessionRank = sessionRank(of: session)
         
-        if needlePosition == -1, sessionRank  == bubble.sessions_.count {
+        if needlePosition == -1, sessionRank  == sessions.count {
             return true
         } else {
             return  sessionRank == needlePosition ? true : false
