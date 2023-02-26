@@ -87,8 +87,7 @@ class BubbleCellCoordinator {
     var cancellable = Set<AnyCancellable>()
     
     // MARK: - Public API
-    func update(_ moment:Moment) {
-        print(#function)
+    func task(_ moment:Moment) {
         DispatchQueue.global().async {
             
             switch moment {
@@ -175,7 +174,7 @@ class BubbleCellCoordinator {
                     
                     self.opacity.update(self.initialValue)
                     
-                    if self.bubble.state == .running { self.update(.automatic) }
+                    if self.bubble.state == .running { self.task(.automatic) }
                 }
             }
         }

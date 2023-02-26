@@ -24,7 +24,7 @@ class PairBubbleCellCoordinator {
             case .automatic:
                 if shouldWork {
                     publisher
-                        .sink { [weak self] _ in self?.update() }
+                        .sink { [weak self] _ in self?.task() }
                         .store(in: &cancellable)
                 }
                 isPairBubbleCellRunning = true
@@ -36,7 +36,7 @@ class PairBubbleCellCoordinator {
                         refresh = false
                         publisher
                             .sink { [weak self] _ in
-                                self?.update()
+                                self?.task()
                             }
                             .store(in: &cancellable)
                     case .pause, .deleteCurrentSession, .endSession:
@@ -60,7 +60,7 @@ class PairBubbleCellCoordinator {
     }
     
     // MARK: -
-    private func update() {
+    private func task() {
         guard let lastPairStart = bubble.lastPair?.start else { return }
         
         DispatchQueue.global().async {
