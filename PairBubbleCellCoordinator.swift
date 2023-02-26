@@ -18,18 +18,6 @@ class PairBubbleCellCoordinator {
     @Published var isPairBubbleCellRunning = false
     @Published private(set) var components = Components("0", "0", "0")
     
-    init(bubble: Bubble) {
-        self.bubble = bubble
-        observe_detailViewVisible()
-        observe_AppActive()
-        self.refresh = true
-    }
-    
-    deinit {
-//        print("PairBubbleCellCoordinator deinit")
-        NotificationCenter.default.removeObserver(self)
-    }
-    
     private func update() {
         guard let lastPairStart = bubble.lastPair?.start else { return }
         
@@ -152,6 +140,19 @@ class PairBubbleCellCoordinator {
     
     private var cancellable = Set<AnyCancellable>() //1
     private var detailViewVisibleCancellable = Set<AnyCancellable>() //1
+    
+    // MARK: - Init Deinit
+    init(bubble: Bubble) {
+        self.bubble = bubble
+        observe_detailViewVisible()
+        observe_AppActive()
+        self.refresh = true
+    }
+    
+    deinit {
+//        print("PairBubbleCellCoordinator deinit")
+        NotificationCenter.default.removeObserver(self)
+    }
 }
 
 extension PairBubbleCellCoordinator {

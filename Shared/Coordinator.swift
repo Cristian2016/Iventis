@@ -158,6 +158,28 @@ class BubbleCellCoordinator {
             }
     }
     
+    // MARK: - Observers
+    private func observeActivePhase() {
+        NotificationCenter.default.addObserver(forName: UIApplication.didBecomeActiveNotification, object: nil, queue: nil) { _ in
+            DispatchQueue.global().async {
+                let components = self.initialValue.timeComponentsAsStrings
+                
+                DispatchQueue.main.async {
+                    self.components = Components(components.hr,
+                                                 components.min,
+                                                 components.sec,
+                                                 components.hundredths
+                    )
+                    
+                    self.opacity.update(self.initialValue)
+                    
+                    if self.bubble.state == .running { self.update(.start) }
+                }
+            }
+        }
+    }
+    
+    // MARK: - Init Deinit
     init(for bubble:Bubble) {
         self.bubble = bubble
         self.colorPublisher = .init(Color.bubbleColor(forName: bubble.color))
@@ -179,27 +201,6 @@ class BubbleCellCoordinator {
     deinit {
         cancellable = []
         NotificationCenter.default.removeObserver(self)
-    }
-    
-    // MARK: - Observers
-    private func observeActivePhase() {
-        NotificationCenter.default.addObserver(forName: UIApplication.didBecomeActiveNotification, object: nil, queue: nil) { _ in
-            DispatchQueue.global().async {
-                let components = self.initialValue.timeComponentsAsStrings
-                
-                DispatchQueue.main.async {
-                    self.components = Components(components.hr,
-                                                 components.min,
-                                                 components.sec,
-                                                 components.hundredths
-                    )
-                    
-                    self.opacity.update(self.initialValue)
-                    
-                    if self.bubble.state == .running { self.update(.start) }
-                }
-            }
-        }
     }
 }
 

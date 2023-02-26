@@ -113,7 +113,7 @@ class ViewModel: ObservableObject {
         
         if bubble.lastSession == session {
             bubble.currentClock = bubble.initialClock
-            bubble.coordinator.updateComponents(.deleteLastSession)
+            bubble.coordinator.updateComponents(.endSession)
             bubble.pairBubbleCellCoordinator.update(.user(.deleteCurrentSession))
         }
         
