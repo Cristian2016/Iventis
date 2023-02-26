@@ -40,11 +40,10 @@ struct BubbleStickyNoteList: View {
     init(_ bubble:Bubble) {
         self.bubble = bubble
         self.initialNote = bubble.note_ //2
-        
+                
         let sorts = [
             NSSortDescriptor(key: "bubble.rank", ascending: false),
             NSSortDescriptor(key: "date", ascending: false)
-            
         ]
         _bubbleSavedNotes = FetchRequest(entity: BubbleSavedNote.entity(),
                                          sortDescriptors: sorts,
