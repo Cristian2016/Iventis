@@ -117,7 +117,7 @@ class PairBubbleCellCoordinator {
     private func observe_detailViewVisible() {
         NotificationCenter.Publisher(center: .default, name: .detailViewVisible)
             .sink { [weak self] in
-                let detailViewVisible = $0.userInfo!["detailViewVisible"] as! Bool
+                guard let detailViewVisible = $0.userInfo?["detailViewVisible"] as? Bool else { return }
                 let condition = detailViewVisible && self?.bubble.state == .running
                 self?.shouldWork = condition ? true : false
                 self?.refresh = true

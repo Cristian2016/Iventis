@@ -97,8 +97,8 @@ class ViewModel: ObservableObject {
         if !path.isEmpty { path = [] }
         
         //⚠️ do I really need to set to nil?
-        bubble.coordinator = nil
-        bubble.pairBubbleCellCoordinator = nil
+//        bubble.coordinator = nil
+//        bubble.pairBubbleCellCoordinator = nil
 
         //delete bubble
         let context = bubble.managedObjectContext!

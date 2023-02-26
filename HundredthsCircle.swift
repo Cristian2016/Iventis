@@ -27,10 +27,11 @@ struct HundredthsCircle: View {
             .animation(.spring(response: 0.3, dampingFraction: 0.2), value: isBubbleRunning)
     }
     
-    init(bubble: Bubble) {
+    init?(bubble: Bubble) {
         self.bubble = bubble
+        guard let coordinator = bubble.coordinator else { return nil }
         
-        let components = bubble.coordinator.components
+        let components = coordinator.components
         self.hundredths = components.hundredths
     }
     
