@@ -3,7 +3,6 @@
 //  Timers (iOS)
 //
 //  Created by Cristian Lapusan on 01.02.2023.
-//⚠️ task { } called only once! when app is launched. no idea why is not called each time self appears
 
 import SwiftUI
 import MyPackage
@@ -33,7 +32,7 @@ struct AddNoteButton: View {
                                               isFilled: true)
                     )
                 }
-            } else { EmptyView() }
+            }
         }
         .onReceive(secretary.$addNoteButton_bRank) { addNoteButton_bRank = $0 }
     }
