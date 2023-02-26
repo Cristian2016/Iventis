@@ -130,10 +130,9 @@ class PairBubbleCellCoordinator {
                     let detailViewVisible = notification.userInfo?["detailViewVisible"] as? Bool
                 else { return }
                 
+                // FIXME: -
                 if self.stop { return }
-                
-                print("unowned reference \(self.bubble.color)")
-                
+                                
                 let condition = detailViewVisible && self.bubble.state == .running
                 self.shouldWork = condition ? true : false
                 self.refresh = true
