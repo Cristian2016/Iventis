@@ -12,13 +12,14 @@ struct AddNoteButton: View {
     private let secretary = Secretary.shared
     @EnvironmentObject private var viewModel:ViewModel
     @State private var addNoteButton_bRank:Int?
+    @State private var newColor:Color?
     
     var body: some View {
         ZStack {
             if let rank = addNoteButton_bRank,
                let bubble = viewModel.bubble(for: Int(rank)) {
                 
-                let color = Color.bubbleColor(forName: bubble.color)
+                let color = newColor ?? Color.bubbleColor(forName: bubble.color)
                 
                 Button {
                     viewModel.notesForPair.send(bubble.lastPair)
