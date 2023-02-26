@@ -30,6 +30,7 @@ struct TopCell: View {
                         VStack (alignment:.leading, spacing: metrics.dateDurationViewsSpacing) {
                             dateView
                             durationView.padding(2)
+//                            TopCellDurationView(metrics, session, myRank)
                         }
                         .padding(metrics.edgeInset)
                     }

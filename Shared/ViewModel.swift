@@ -57,10 +57,11 @@ class ViewModel: ObservableObject {
                       _ color:String,
                       _ note:String? = nil) {
         
-        let context = PersistenceController.shared.container.newBackgroundContext()
+        let bContext = PersistenceController.shared.container.newBackgroundContext()
+        bContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
                 
-        context.perform {
-            let newBubble = Bubble(context: context)
+        bContext.perform {
+            let newBubble = Bubble(context: bContext)
             newBubble.created = Date()
             newBubble.kind = kind
             switch kind {
@@ -73,6 +74,7 @@ class ViewModel: ObservableObject {
             newBubble.color = color
             newBubble.rank = Int64(UserDefaults.generateRank())
             
+            // FIXME: - no more StartDelayBubble!
             let sdb = StartDelayBubble(context: newBubble.managedObjectContext!)
             newBubble.sdb = sdb
             if let note = note {
@@ -80,7 +82,7 @@ class ViewModel: ObservableObject {
                 newBubble.isNoteHidden = false
             }
                                     
-            try? context.save()
+            try? bContext.save()
         }
     }
     
