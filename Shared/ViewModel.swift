@@ -92,19 +92,19 @@ class ViewModel: ObservableObject {
 //            secretary.showFavoritesOnly = false
 //        }
         
-//        bubble.coordinator.update(.pause)
-//        bubble.pairBubbleCellCoordinator.update(.pause)
+        bubble.coordinator.updateComponents(.reset)
+        bubble.pairBubbleCellCoordinator.update(.user(.reset))
         if !path.isEmpty { path = [] }
         
         //⚠️ do I really need to set to nil?
-        delayExecution(.now() + 0.2) {
-            bubble.coordinator = nil
-            bubble.pairBubbleCellCoordinator = nil
-        }
+        bubble.coordinator = nil
+        bubble.pairBubbleCellCoordinator = nil
 
         //delete bubble
         let context = bubble.managedObjectContext!
         context.automaticallyMergesChangesFromParent = true
+        
+        print(context.parent, context.registeredObjects, context.concurrencyType == .privateQueueConcurrencyType)
         
         context.perform {
             context.delete(bubble)

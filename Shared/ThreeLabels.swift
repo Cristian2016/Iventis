@@ -10,7 +10,7 @@ import MyPackage
 
 //hr min sec cents (4 labels in total actually)
 struct ThreeLabels: View {
-    var bubble:Bubble?
+    let bubble:Bubble
     let timeComponentsFontSize:CGFloat
     let metrics = BubbleCell.Metrics()
     
@@ -43,7 +43,7 @@ struct ThreeLabels: View {
     }
     
     var body: some View {
-        if let bubble = bubble  {
+        if let coordinator = bubble.coordinator  {
             Rectangle().fill(.clear)
                 .aspectRatio(metrics.ratio, contentMode: .fit)
                 .overlay {
@@ -90,7 +90,6 @@ struct ThreeLabels: View {
     // MARK: -
     
     /* 1 */private func userTappedHundredths() {
-        guard let bubble = bubble else { return }
         UserFeedback.singleHaptic(.heavy)
         viewModel.toggleStart(bubble)
     }
@@ -101,7 +100,6 @@ struct ThreeLabels: View {
     private var minOpacity:Double { (min > "0" || hr > "0") ? 1 : 0.0 }
     
     private var isBubbleRunning:Bool {
-        guard let bubble = bubble else { return false }
         return bubble.state == .running
     }
 }
@@ -113,21 +111,24 @@ struct SecondsLabel: View {
     @State private var sec:String
     
     var body: some View {
-        Circle().fill(Color.clear)
-            .overlay {
-                Rectangle().fill(.clear)
-                    .aspectRatio(1.2, contentMode: .fit)
-                    .overlay {
-                        Text(sec).allowsHitTesting(false)
-                            .font(.system(size: 400))
-                            .lineLimit(1)
-                            .minimumScaleFactor(0.1)
-                    }
-            }
-            .onReceive(bubble.coordinator.$components) { sec = $0.sec }
+        if bubble.coordinator != nil {
+            Circle().fill(Color.clear)
+                .overlay {
+                    Rectangle().fill(.clear)
+                        .aspectRatio(1.2, contentMode: .fit)
+                        .overlay {
+                            Text(sec).allowsHitTesting(false)
+                                .font(.system(size: 400))
+                                .lineLimit(1)
+                                .minimumScaleFactor(0.1)
+                        }
+                }
+                .onReceive(bubble.coordinator.$components) { sec = $0.sec }
+        }
     }
     
-    init(bubble: Bubble) {
+    init?(bubble: Bubble?) {
+        guard let bubble = bubble, !bubble.isFault else { return nil }
         self.bubble = bubble
         self.sec = bubble.coordinator.components.sec
     }
