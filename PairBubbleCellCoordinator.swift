@@ -100,6 +100,13 @@ class PairBubbleCellCoordinator {
                         isPairBubbleCellRunning = false
                         components = Components("0", "0", "0")
                         cancellable = []
+                        
+                    case .deleteBubble:
+                        stop = true
+                        isPairBubbleCellRunning = false
+                        components = Components("0", "0", "0")
+                        cancellable = []
+                        NotificationCenter.default.removeObserver(self, name: .detailViewVisible, object: bubble)
                 }
         }
     }
@@ -111,16 +118,25 @@ class PairBubbleCellCoordinator {
             update(.user(.pause))
         }
     }} //6
+    private var stop = false
     
     private var refresh = false
     
     private func observe_detailViewVisible() {
         NotificationCenter.Publisher(center: .default, name: .detailViewVisible)
-            .sink { [weak self] in
-                guard let detailViewVisible = $0.userInfo?["detailViewVisible"] as? Bool else { return }
-                let condition = detailViewVisible && self?.bubble.state == .running
-                self?.shouldWork = condition ? true : false
-                self?.refresh = true
+            .sink { [weak self] notification in
+                guard
+                    let self = self,
+                    let detailViewVisible = notification.userInfo?["detailViewVisible"] as? Bool
+                else { return }
+                
+                if self.stop { return }
+                
+                print("unowned reference \(self.bubble.color)")
+                
+                let condition = detailViewVisible && self.bubble.state == .running
+                self.shouldWork = condition ? true : false
+                self.refresh = true
             }
             .store(in: &detailViewVisibleCancellable)
     }
@@ -163,5 +179,6 @@ extension PairBubbleCellCoordinator {
         case reset
         case endSession
         case deleteCurrentSession
+        case deleteBubble
     }
 }

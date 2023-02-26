@@ -92,17 +92,15 @@ class ViewModel: ObservableObject {
 //            secretary.showFavoritesOnly = false
 //        }
         
-        bubble.coordinator.updateComponents(.reset)
-        bubble.pairBubbleCellCoordinator.update(.user(.reset))
         if !path.isEmpty { path = [] }
         
         //⚠️ do I really need to set to nil?
-//        bubble.coordinator = nil
-//        bubble.pairBubbleCellCoordinator = nil
-
+        bubble.coordinator.updateComponents(.user(.pause))
+        bubble.pairBubbleCellCoordinator.update(.user(.deleteBubble))
+                
         //delete bubble
         let context = bubble.managedObjectContext!
-        context.automaticallyMergesChangesFromParent = true
+        context.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
         
         context.perform {
             context.delete(bubble)

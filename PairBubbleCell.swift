@@ -82,34 +82,36 @@ extension PairBubbleCell {
         @State private var sec:String
         
         var body: some View {
-            Rectangle().fill(.clear)
-                .aspectRatio(metrics.ratio, contentMode: .fit)
-                .overlay {
-                    HStack {
-                        clearCircle
-                            .overlay {
-                                clearRectangle
-                                    .overlay { Text(hr).componentsTextStyle() }
-                            }
-                        clearCircle
-                            .overlay {
-                                clearRectangle
-                                    .overlay { Text(min).componentsTextStyle() }
-                            }
-                        clearCircle
-                            .overlay {
-                                clearRectangle
-                                    .overlay {  Text(sec).componentsTextStyle() }
-                            }
+            if let pairCoordinator = bubble?.pairBubbleCellCoordinator {
+                Rectangle().fill(.clear)
+                    .aspectRatio(metrics.ratio, contentMode: .fit)
+                    .overlay {
+                        HStack {
+                            clearCircle
+                                .overlay {
+                                    clearRectangle
+                                        .overlay { Text(hr).componentsTextStyle() }
+                                }
+                            clearCircle
+                                .overlay {
+                                    clearRectangle
+                                        .overlay { Text(min).componentsTextStyle() }
+                                }
+                            clearCircle
+                                .overlay {
+                                    clearRectangle
+                                        .overlay {  Text(sec).componentsTextStyle() }
+                                }
+                        }
+                        .scaleEffect(x: metrics.hstackScale, y: metrics.hstackScale)
+                        .onReceive(pairCoordinator.$components) {
+                            hr = $0.hr
+                            min = $0.min
+                            sec = $0.sec
+                        }
+                        .task { } //⚠️
                     }
-                    .scaleEffect(x: metrics.hstackScale, y: metrics.hstackScale)
-                    .onReceive(bubble!.pairBubbleCellCoordinator.$components) {
-                        hr = $0.hr
-                        min = $0.min
-                        sec = $0.sec
-                    }
-                    .task { } //⚠️
-                }
+            }
         }
         
         // MARK: - Lego
