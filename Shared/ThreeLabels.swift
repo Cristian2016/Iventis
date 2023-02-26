@@ -28,15 +28,16 @@ struct ThreeLabels: View {
          _ startDelayBubble:StartDelayBubble,
          _ bubble:Bubble?) {
         
-        guard let bubble = bubble else { return nil }
+        guard
+            bubble?.color != nil,
+            let coordinator = bubble?.coordinator
+        else { return nil }
         
         self.timeComponentsFontSize = timeComponentsFontSize
         self.sDelayBubble = startDelayBubble
-        self.bubble = bubble
-                
-        if bubble.color == nil { return nil }
-        
-        let components = bubble.coordinator.components
+        self.bubble = bubble!
+                        
+        let components = coordinator.components
         hr = components.hr
         min = components.min
         hundredths = components.hundredths

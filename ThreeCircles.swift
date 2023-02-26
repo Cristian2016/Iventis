@@ -25,7 +25,7 @@ struct ThreeCircles: View {
     }
     
     var body: some View {
-        if !bubble.isFault {
+        if !bubble.isFault && bubble.coordinator != nil {
             Rectangle().fill(.clear)
                 .aspectRatio(metrics.ratio, contentMode: .fit)
                 .overlay {
