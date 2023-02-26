@@ -22,6 +22,8 @@ class BubbleCellCoordinator {
     
     // MARK: - Public API
     func update(_ moment:Moment) {
+        if self.stop { return }
+        
         DispatchQueue.global().async {
             
             switch moment {
@@ -87,6 +89,7 @@ class BubbleCellCoordinator {
     private var refresh /* all components */ = false //5
     
     private func task() {
+        if stop { return }
         guard let lastPairStart = bubble.lastPair?.start else { return }
 
         DispatchQueue.global().async {
@@ -149,6 +152,8 @@ class BubbleCellCoordinator {
     private var stop = false
     
     private var initialValue:Float {
+        if stop { return 0}
+        
         if bubble.state == .running {
             let Δ = Date().timeIntervalSince(bubble.lastPair!.start!)
             let initialValue = bubble.currentClock + Float(Δ)
@@ -160,7 +165,11 @@ class BubbleCellCoordinator {
     
     // MARK: - Observers
     private func observeActivePhase() {
-        NotificationCenter.default.addObserver(forName: UIApplication.didBecomeActiveNotification, object: nil, queue: nil) { _ in
+        NotificationCenter.default.addObserver(forName: UIApplication.didBecomeActiveNotification, object: nil, queue: nil) { [weak self] _ in
+            
+            guard let self = self else { return }
+            if self.stop { return }
+            
             DispatchQueue.global().async {
                 let components = self.initialValue.timeComponentsAsStrings
                 
