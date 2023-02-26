@@ -104,8 +104,6 @@ class ViewModel: ObservableObject {
         let context = bubble.managedObjectContext!
         context.automaticallyMergesChangesFromParent = true
         
-        print(context.parent, context.registeredObjects, context.concurrencyType == .privateQueueConcurrencyType)
-        
         context.perform {
             context.delete(bubble)
             try? context.save()

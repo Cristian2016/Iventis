@@ -8,6 +8,7 @@
 //⚠️ cell.height:
 // set both 1. environment(\.defaultMinListRowHeight) and 2. cell.frame
 //1 ⚠️ this little shit prevents app from crashing when textInput is dragged around on screen
+//2 store initial note
 
 import SwiftUI
 import MyPackage
@@ -37,20 +38,17 @@ struct BubbleStickyNoteList: View {
     
     // MARK: -
     init(_ bubble:Bubble) {
-        //set Bubble
-        let request = Bubble.fetchRequest()
-        request.predicate = NSPredicate(format: "rank == %i", bubble.rank)
-        
         self.bubble = bubble
-        
-        //set initial note
-        self.initialNote = bubble.note_
+        self.initialNote = bubble.note_ //2
         
         let sorts = [
-//            NSSortDescriptor(key: "bubble", ascending: false), //⚠️ crashes for some reason..
+            NSSortDescriptor(key: "bubble.rank", ascending: false),
             NSSortDescriptor(key: "date", ascending: false)
         ]
-        _bubbleSavedNotes = FetchRequest(entity: BubbleSavedNote.entity(), sortDescriptors: sorts, predicate: nil, animation: .default)
+        _bubbleSavedNotes = FetchRequest(entity: BubbleSavedNote.entity(),
+                                         sortDescriptors: sorts,
+                                         predicate: nil,
+                                         animation: .default)
     }
     
     // MARK: -
