@@ -95,7 +95,7 @@ class ViewModel: ObservableObject {
         if !path.isEmpty { path = [] }
         
         //⚠️ do I really need to set to nil?
-        bubble.coordinator.updateComponents(.user(.pause))
+        bubble.coordinator.update(.user(.deleteBubble))
         bubble.pairBubbleCellCoordinator.update(.user(.deleteBubble))
                 
         //delete bubble
@@ -113,7 +113,7 @@ class ViewModel: ObservableObject {
         
         if bubble.lastSession == session {
             bubble.currentClock = bubble.initialClock
-            bubble.coordinator.updateComponents(.endSession)
+            bubble.coordinator.update(.user(.deleteCurrentSession))
             bubble.pairBubbleCellCoordinator.update(.user(.deleteCurrentSession))
         }
         
@@ -152,7 +152,7 @@ class ViewModel: ObservableObject {
         bubble.sessions?.forEach { viewContext.delete($0 as! Session) }
         try? viewContext.save()
         
-        bubble.coordinator.updateComponents(.reset)
+        bubble.coordinator.update(.user(.reset))
         bubble.pairBubbleCellCoordinator.update(.user(.reset))
     }
     
@@ -200,7 +200,7 @@ class ViewModel: ObservableObject {
                 secretary.addNoteButton_bRank = Int(bubble.rank)
                 
                 //repetitive chunk of code ⚠️
-                bubble.coordinator.updateComponents(.user(.start))
+                bubble.coordinator.update(.user(.start))
                 bubble.pairBubbleCellCoordinator.update(.user(.start))
                 
                 delayExecution(.now() + 0.3) {
@@ -223,7 +223,7 @@ class ViewModel: ObservableObject {
                 secretary.addNoteButton_bRank = Int(bubble.rank)
                 
                 //repetitive chunk of code ⚠️
-                bubble.coordinator.updateComponents(.user(.start))
+                bubble.coordinator.update(.user(.start))
                 bubble.pairBubbleCellCoordinator.update(.user(.start))
                 delayExecution(.now() + 0.3) {
                     self.secretary.pairBubbleCellNeedsDisplay.toggle()
@@ -241,7 +241,7 @@ class ViewModel: ObservableObject {
                     bubble.lastSession?.computeDuration {
                         //no need to run any code in the completion
                         PersistenceController.shared.save()
-                        bubble.coordinator.updateAtPause()
+                        bubble.coordinator.update(.user(.pause))
                         bubble.pairBubbleCellCoordinator.update(.user(.pause))
                     }
                 }
@@ -320,7 +320,7 @@ class ViewModel: ObservableObject {
         
         if bubble.state == .brandNew { return }
         
-        bubble.coordinator.updateComponents(.endSession)
+        bubble.coordinator.update(.user(.endSession))
         bubble.pairBubbleCellCoordinator.update(.user(.endSession))
                 
         //reset bubble clock

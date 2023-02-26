@@ -24,22 +24,7 @@ class BubbleCellCoordinator {
     @Published private(set) var opacity = Opacity()
     var colorPublisher:Publisher<Color, Never>
     
-    private func update(_ action:Action) {
-        switch action {
-            case .start:
-                DispatchQueue.main.async {
-                    self.components.hundredths = ""
-                }
-
-                publisher
-                    .sink { [weak self] _ in self?.continuousUpdate() }
-                    .store(in: &cancellable) //connect
-            case .pause:
-                cancellable = [] //disconnect
-        }
-    }
-    
-    var refresh /* all components */ = false //5
+    private var refresh /* all components */ = false //5
     
     private func continuousUpdate() {
         guard let lastPairStart = bubble.lastPair?.start else { return }
@@ -101,61 +86,78 @@ class BubbleCellCoordinator {
     
     var cancellable = Set<AnyCancellable>()
     
-    // MARK: -
-    
-    func updateComponents(_ moment:Moment) {
+    // MARK: - Public API
+    func update(_ moment:Moment) {
+        print(#function)
         DispatchQueue.global().async {
             
             switch moment {
+                case .automatic:
+                    print(#function, " automatic")
+                    DispatchQueue.main.async { self.components.hundredths = "" }
+                    self.refresh = true
+                    self.publisher
+                        .sink { [weak self] _ in self?.continuousUpdate() }
+                        .store(in: &self.cancellable) //connect
+                    
                 case .user(let action):
                     switch action {
-                        case .pause: self.update(.pause)
-                        case .start: self.update(.start)
-                    }
-                                        
-                case .endSession, .reset, .deleteLastSession:
-                    self.cancellable = []
-                    let initialClock = self.bubble.initialClock
-                    let stringComponents = initialClock.timeComponentsAsStrings
-                    
-                    DispatchQueue.main.async {
-                        self.components.hr = stringComponents.hr
-                        self.components.min = stringComponents.min
-                        self.components.sec = stringComponents.sec
-                        self.components.hundredths = stringComponents.hundredths
-                        
-                        if self.bubble.kind == .stopwatch {
-                            self.opacity.update(0)
-                        } else {
-                            self.opacity.update(self.bubble.initialClock)
-                        }
+                        case .pause:
+                            self.cancellable = []
+                            DispatchQueue.global().async {
+                                let components = self.initialValue.timeComponentsAsStrings
+                                
+                                DispatchQueue.main.async {
+                                    self.components = Components(components.hr,
+                                                                 components.min,
+                                                                 components.sec,
+                                                                 components.hundredths)
+                                }
+                            }
+                        case .start:
+                            self.refresh = false
+                            self.publisher
+                                .sink { [weak self] _ in self?.continuousUpdate() }
+                                .store(in: &self.cancellable) //connect
+                            DispatchQueue.main.async { self.components.hundredths = "" }
+                            
+                        case .endSession, .reset, .deleteCurrentSession:
+                            self.cancellable = []
+                            let initialClock = self.bubble.initialClock
+                            let stringComponents = initialClock.timeComponentsAsStrings
+                            
+                            DispatchQueue.main.async {
+                                self.components.hr = stringComponents.hr
+                                self.components.min = stringComponents.min
+                                self.components.sec = stringComponents.sec
+                                self.components.hundredths = stringComponents.hundredths
+                                
+                                if self.bubble.kind == .stopwatch {
+                                    self.opacity.update(0)
+                                } else {
+                                    self.opacity.update(self.bubble.initialClock)
+                                }
+                            }
+                            
+                        case .deleteBubble:
+                            self.stop = true
+                            self.cancellable = []
+                            NotificationCenter.default.removeObserver(self)
                     }
             }
         }
     }
     
-    func updateAtPause()  {
-        cancellable = []
-        DispatchQueue.global().async {
-            let components = self.initialValue.timeComponentsAsStrings
-            
-            DispatchQueue.main.async {
-                self.components = Components(components.hr,
-                                             components.min,
-                                             components.sec,
-                                             components.hundredths)
-            }
+    private var stop = false
+    
+    private var initialValue:Float {
+        if bubble.state == .running {
+            let Δ = Date().timeIntervalSince(bubble.lastPair!.start!)
+            let initialValue = bubble.currentClock + Float(Δ)
+            return initialValue
+        } else {
+            return bubble.currentClock
         }
-    }
-        
-    var initialValue:Float {
-            if bubble.state == .running {
-                let Δ = Date().timeIntervalSince(bubble.lastPair!.start!)
-                let initialValue = bubble.currentClock + Float(Δ)
-                return initialValue
-            } else {
-                return bubble.currentClock
-            }
     }
     
     // MARK: - Observers
@@ -173,7 +175,7 @@ class BubbleCellCoordinator {
                     
                     self.opacity.update(self.initialValue)
                     
-                    if self.bubble.state == .running { self.update(.start) }
+                    if self.bubble.state == .running { self.update(.automatic) }
                 }
             }
         }
@@ -183,7 +185,7 @@ class BubbleCellCoordinator {
     init(for bubble:Bubble) {
         self.bubble = bubble
         self.colorPublisher = .init(Color.bubbleColor(forName: bubble.color))
-                
+        
         observeActivePhase()
         
         //set initial values when bubble is created [ViewModel.createBubble]
@@ -208,14 +210,16 @@ extension BubbleCellCoordinator {
     ///automatic means handled by the system. ex. when app launches
     enum Moment {
         case user(Action)
-        case reset
-        case endSession
-        case deleteLastSession
+        case automatic
     }
     
     enum Action {
         case start
         case pause
+        case reset
+        case endSession
+        case deleteCurrentSession
+        case deleteBubble
     }
     
     struct Components {

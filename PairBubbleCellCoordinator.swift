@@ -18,6 +18,48 @@ class PairBubbleCellCoordinator {
     @Published var isPairBubbleCellRunning = false
     @Published private(set) var components = Components("0", "0", "0")
     
+    // MARK: - Public API
+    func update(_ moment:Moment) {
+        switch moment {
+            case .automatic:
+                if shouldWork {
+                    publisher
+                        .sink { [weak self] _ in self?.update() }
+                        .store(in: &cancellable)
+                }
+                isPairBubbleCellRunning = true
+                
+            case .user(let action) :
+                switch action {
+                    case .start:
+                        isPairBubbleCellRunning = true
+                        refresh = false
+                        publisher
+                            .sink { [weak self] _ in
+                                self?.update()
+                            }
+                            .store(in: &cancellable)
+                    case .pause, .deleteCurrentSession, .endSession:
+                        isPairBubbleCellRunning = false
+                        components = Components("0", "0", "0")
+                        cancellable = []
+                
+                    case .reset:
+                        isPairBubbleCellRunning = false
+                        components = Components("0", "0", "0")
+                        cancellable = []
+                        
+                    case .deleteBubble:
+                        stop = true
+                        isPairBubbleCellRunning = false
+                        components = Components("0", "0", "0")
+                        cancellable = []
+                        NotificationCenter.default.removeObserver(self, name: .detailViewVisible, object: bubble)
+                }
+        }
+    }
+    
+    // MARK: -
     private func update() {
         guard let lastPairStart = bubble.lastPair?.start else { return }
         
@@ -57,45 +99,6 @@ class PairBubbleCellCoordinator {
             return initialValue
         } else {
             return 0
-        }
-    }
-    
-    func update(_ moment:Moment) {
-        switch moment {
-            case .automatic:
-                if shouldWork {
-                    publisher
-                        .sink { [weak self] _ in self?.update() }
-                        .store(in: &cancellable)
-                }
-                isPairBubbleCellRunning = true
-            case .user(let action) :
-                switch action {
-                    case .start:
-                        isPairBubbleCellRunning = true
-                        refresh = false
-                        publisher
-                            .sink { [weak self] _ in
-                                self?.update()
-                            }
-                            .store(in: &cancellable)
-                    case .pause, .deleteCurrentSession, .endSession:
-                        isPairBubbleCellRunning = false
-                        components = Components("0", "0", "0")
-                        cancellable = []
-                
-                    case .reset:
-                        isPairBubbleCellRunning = false
-                        components = Components("0", "0", "0")
-                        cancellable = []
-                        
-                    case .deleteBubble:
-                        stop = true
-                        isPairBubbleCellRunning = false
-                        components = Components("0", "0", "0")
-                        cancellable = []
-                        NotificationCenter.default.removeObserver(self, name: .detailViewVisible, object: bubble)
-                }
         }
     }
     
@@ -156,18 +159,6 @@ class PairBubbleCellCoordinator {
 }
 
 extension PairBubbleCellCoordinator {
-    struct Components {
-        var hr:String
-        var min:String
-        var sec:String
-        
-        init(_ hr: String, _ min: String, _ sec: String) {
-            self.hr = hr
-            self.min = min
-            self.sec = sec
-        }
-    }
-    
     enum Moment {
         case user(Action)
         case automatic
@@ -180,5 +171,17 @@ extension PairBubbleCellCoordinator {
         case endSession
         case deleteCurrentSession
         case deleteBubble
+    }
+    
+    struct Components {
+        var hr:String
+        var min:String
+        var sec:String
+        
+        init(_ hr: String, _ min: String, _ sec: String) {
+            self.hr = hr
+            self.min = min
+            self.sec = sec
+        }
     }
 }
