@@ -6,7 +6,7 @@
 //1 publishers emit their initial value, without .send()! ⚠️
 //2 delta is the elapsed duration between last pair.start and signal date
 //3 create means initialization. 1.user creates a bubble or 2.bubble created already but app relaunches
-//4 update() called each second. every second publisher sends out bTimer signal and this is the task to run. bubble.currentClock + ∆. maybe in the future I decide to call this task every 0.5 seconds.. maybe :)
+//4 repetitive task() called each second. every second publisher sends out bTimer signal and this is the task to run. bubble.currentClock + ∆. maybe in the future I decide to call this task every 0.5 seconds.. maybe :)
 //5 lets continuousUpdate do one pass to refresh all components
 //6 evaluate before creating a new session, otherwise the value will be alwatys false
 
@@ -19,7 +19,67 @@ extension BubbleCellCoordinator {
 
 class BubbleCellCoordinator {
     unowned private let bubble:Bubble
-        
+    
+    // MARK: - Public API
+    func update(_ moment:Moment) {
+        DispatchQueue.global().async {
+            
+            switch moment {
+                case .automatic:
+                    DispatchQueue.main.async { self.components.hundredths = "" }
+                    self.refresh = true
+                    self.publisher
+                        .sink { [weak self] _ in self?.task() }
+                        .store(in: &self.cancellable) //connect
+                    
+                case .user(let action):
+                    switch action {
+                        case .pause:
+                            self.cancellable = []
+                            DispatchQueue.global().async {
+                                let components = self.initialValue.timeComponentsAsStrings
+                                
+                                DispatchQueue.main.async {
+                                    self.components = Components(components.hr,
+                                                                 components.min,
+                                                                 components.sec,
+                                                                 components.hundredths)
+                                }
+                            }
+                        case .start:
+                            self.refresh = false
+                            self.publisher
+                                .sink { [weak self] _ in self?.task() }
+                                .store(in: &self.cancellable) //connect
+                            DispatchQueue.main.async { self.components.hundredths = "" }
+                            
+                        case .endSession, .reset, .deleteCurrentSession:
+                            self.cancellable = []
+                            let initialClock = self.bubble.initialClock
+                            let stringComponents = initialClock.timeComponentsAsStrings
+                            
+                            DispatchQueue.main.async {
+                                self.components.hr = stringComponents.hr
+                                self.components.min = stringComponents.min
+                                self.components.sec = stringComponents.sec
+                                self.components.hundredths = stringComponents.hundredths
+                                
+                                if self.bubble.kind == .stopwatch {
+                                    self.opacity.update(0)
+                                } else {
+                                    self.opacity.update(self.bubble.initialClock)
+                                }
+                            }
+                            
+                        case .deleteBubble:
+                            self.stop = true
+                            self.cancellable = []
+                            NotificationCenter.default.removeObserver(self)
+                    }
+            }
+        }
+    }
+    
     @Published private(set) var components = Components("-1", "-1", "-1", "-1")
     @Published private(set) var opacity = Opacity()
     var colorPublisher:Publisher<Color, Never>
@@ -84,67 +144,7 @@ class BubbleCellCoordinator {
     private lazy var publisher =
     NotificationCenter.Publisher(center: .default, name: .bubbleTimerSignal)
     
-    var cancellable = Set<AnyCancellable>()
-    
-    // MARK: - Public API
-    func update(_ moment:Moment) {
-        DispatchQueue.global().async {
-            
-            switch moment {
-                case .automatic:
-                    DispatchQueue.main.async { self.components.hundredths = "" }
-                    self.refresh = true
-                    self.publisher
-                        .sink { [weak self] _ in self?.task() }
-                        .store(in: &self.cancellable) //connect
-                    
-                case .user(let action):
-                    switch action {
-                        case .pause:
-                            self.cancellable = []
-                            DispatchQueue.global().async {
-                                let components = self.initialValue.timeComponentsAsStrings
-                                
-                                DispatchQueue.main.async {
-                                    self.components = Components(components.hr,
-                                                                 components.min,
-                                                                 components.sec,
-                                                                 components.hundredths)
-                                }
-                            }
-                        case .start:
-                            self.refresh = false
-                            self.publisher
-                                .sink { [weak self] _ in self?.task() }
-                                .store(in: &self.cancellable) //connect
-                            DispatchQueue.main.async { self.components.hundredths = "" }
-                            
-                        case .endSession, .reset, .deleteCurrentSession:
-                            self.cancellable = []
-                            let initialClock = self.bubble.initialClock
-                            let stringComponents = initialClock.timeComponentsAsStrings
-                            
-                            DispatchQueue.main.async {
-                                self.components.hr = stringComponents.hr
-                                self.components.min = stringComponents.min
-                                self.components.sec = stringComponents.sec
-                                self.components.hundredths = stringComponents.hundredths
-                                
-                                if self.bubble.kind == .stopwatch {
-                                    self.opacity.update(0)
-                                } else {
-                                    self.opacity.update(self.bubble.initialClock)
-                                }
-                            }
-                            
-                        case .deleteBubble:
-                            self.stop = true
-                            self.cancellable = []
-                            NotificationCenter.default.removeObserver(self)
-                    }
-            }
-        }
-    }
+    private var cancellable = Set<AnyCancellable>()
     
     private var stop = false
     

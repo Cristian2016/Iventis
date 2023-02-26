@@ -15,9 +15,6 @@ import UIKit
 class PairBubbleCellCoordinator {
     unowned private let bubble:Bubble //2
     
-    @Published var isPairBubbleCellRunning = false
-    @Published private(set) var components = Components("0", "0", "0")
-    
     // MARK: - Public API
     func update(_ moment:Moment) {
         switch moment {
@@ -58,6 +55,9 @@ class PairBubbleCellCoordinator {
                 }
         }
     }
+    
+    @Published var isPairBubbleCellRunning = false
+    @Published private(set) var components = Components("0", "0", "0")
     
     // MARK: -
     private func task() {
