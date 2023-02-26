@@ -26,7 +26,7 @@ class BubbleCellCoordinator {
     
     private var refresh /* all components */ = false //5
     
-    private func update() {
+    private func task() {
         guard let lastPairStart = bubble.lastPair?.start else { return }
 
         DispatchQueue.global().async {
@@ -87,16 +87,15 @@ class BubbleCellCoordinator {
     var cancellable = Set<AnyCancellable>()
     
     // MARK: - Public API
-    func task(_ moment:Moment) {
+    func update(_ moment:Moment) {
         DispatchQueue.global().async {
             
             switch moment {
                 case .automatic:
-                    print(#function, " automatic")
                     DispatchQueue.main.async { self.components.hundredths = "" }
                     self.refresh = true
                     self.publisher
-                        .sink { [weak self] _ in self?.update() }
+                        .sink { [weak self] _ in self?.task() }
                         .store(in: &self.cancellable) //connect
                     
                 case .user(let action):
@@ -116,7 +115,7 @@ class BubbleCellCoordinator {
                         case .start:
                             self.refresh = false
                             self.publisher
-                                .sink { [weak self] _ in self?.update() }
+                                .sink { [weak self] _ in self?.task() }
                                 .store(in: &self.cancellable) //connect
                             DispatchQueue.main.async { self.components.hundredths = "" }
                             
@@ -174,7 +173,7 @@ class BubbleCellCoordinator {
                     
                     self.opacity.update(self.initialValue)
                     
-                    if self.bubble.state == .running { self.task(.automatic) }
+                    if self.bubble.state == .running { self.update(.automatic) }
                 }
             }
         }
