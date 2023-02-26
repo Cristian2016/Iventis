@@ -6,7 +6,7 @@
 //1 publishers emit their initial value, without .send()! ⚠️
 //2 delta is the elapsed duration between last pair.start and signal date
 //3 create means initialization. 1.user creates a bubble or 2.bubble created already but app relaunches
-//4 every second publisher sends out bTimer signal and this is the task to run. bubble.currentClock + ∆
+//4 update() called each second. every second publisher sends out bTimer signal and this is the task to run. bubble.currentClock + ∆. maybe in the future I decide to call this task every 0.5 seconds.. maybe :)
 //5 lets continuousUpdate do one pass to refresh all components
 //6 evaluate before creating a new session, otherwise the value will be alwatys false
 
@@ -26,7 +26,7 @@ class BubbleCellCoordinator {
     
     private var refresh /* all components */ = false //5
     
-    private func continuousUpdate() {
+    private func update() {
         guard let lastPairStart = bubble.lastPair?.start else { return }
 
         DispatchQueue.global().async {
@@ -97,7 +97,7 @@ class BubbleCellCoordinator {
                     DispatchQueue.main.async { self.components.hundredths = "" }
                     self.refresh = true
                     self.publisher
-                        .sink { [weak self] _ in self?.continuousUpdate() }
+                        .sink { [weak self] _ in self?.update() }
                         .store(in: &self.cancellable) //connect
                     
                 case .user(let action):
@@ -117,7 +117,7 @@ class BubbleCellCoordinator {
                         case .start:
                             self.refresh = false
                             self.publisher
-                                .sink { [weak self] _ in self?.continuousUpdate() }
+                                .sink { [weak self] _ in self?.update() }
                                 .store(in: &self.cancellable) //connect
                             DispatchQueue.main.async { self.components.hundredths = "" }
                             
