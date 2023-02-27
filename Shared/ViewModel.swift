@@ -173,22 +173,6 @@ class ViewModel: ObservableObject {
         }
     }
     
-    //delete BubbleSticky
-    func deleteStickyNote(for bubble:Bubble) {
-        bubble.note = nil
-        CalendarManager.shared.updateExistingEvent(.title(bubble))
-        PersistenceController.shared.save()
-    }
-    
-    //delete PairSticky
-    func deleteStickyNote(for pair:Pair) {
-        pair.note = nil
-        PersistenceController.shared.save()
-        
-        //update Calendar Event
-        CalendarManager.shared.updateExistingEvent(.notes(pair.session!))
-    }
-    
     // start delay
     func saveDelay(for bubble:Bubble, _ userEnteredDelay:Int) {
         secretary.theOneAndOnlyEditedSDB?.referenceDelay = Int64(userEnteredDelay)
@@ -680,6 +664,24 @@ extension ViewModel {
                 bContext.delete(thisNote)
                 try? bContext.save()
             }
+        }
+    }
+    
+    //delete BubbleSticky
+    func deleteStickyNote(for bubble:Bubble) {
+        bubble.managedObjectContext?.perform {
+            bubble.note = nil
+            CalendarManager.shared.updateExistingEvent(.title(bubble))
+            try? bubble.managedObjectContext?.save()
+        }
+    }
+    
+    //delete PairSticky
+    func deleteStickyNote(for pair:Pair) {
+        pair.managedObjectContext?.perform {
+            pair.note = nil
+            CalendarManager.shared.updateExistingEvent(.notes(pair.session!))
+            try? pair.managedObjectContext?.save()
         }
     }
 }
