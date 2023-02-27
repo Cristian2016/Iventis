@@ -59,28 +59,6 @@ class ViewModel: ObservableObject {
     // MARK: - User Intents
     //from PaletteView and...
     
-    func delete(_ bubble:Bubble) {
-        //if unpinned are hidden & bubble to delete is pinned and pinned section has only one item, unhide unpinned
-        //        if secretary.showFavoritesOnly, Secretary.shared.pinnedBubblesCount == 1 {
-        //            secretary.showFavoritesOnly = false
-        //        }
-        
-        if !path.isEmpty { path = [] }
-        
-        //⚠️ do I really need to set to nil?
-        bubble.coordinator.update(.user(.deleteBubble))
-        bubble.pairBubbleCellCoordinator.update(.user(.deleteBubble))
-        
-        //delete bubble
-        let context = bubble.managedObjectContext!
-        context.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
-        
-        context.perform {
-            context.delete(bubble)
-            try? context.save()
-        }
-    }
-    
     func removeAddNoteButton(_ bubble:Bubble) {
         if let bubbleRank = secretary.addNoteButton_bRank, bubbleRank == Int(bubble.rank) {
             secretary.addNoteButton_bRank = nil
@@ -627,6 +605,30 @@ extension ViewModel {
                 DispatchQueue.main.async {
                     bubble.coordinator.colorPublisher.send(color)
                 }
+            }
+        }
+    }
+    
+    func delete(_ bubble:Bubble) {
+        //if unpinned are hidden & bubble to delete is pinned and pinned section has only one item, unhide unpinned
+        //        if secretary.showFavoritesOnly, Secretary.shared.pinnedBubblesCount == 1 {
+        //            secretary.showFavoritesOnly = false
+        //        }
+        if !path.isEmpty { path = [] }
+        
+        //⚠️ do I really need to set to nil?
+//        bubble.coordinator.update(.user(.deleteBubble))
+//        bubble.pairBubbleCellCoordinator.update(.user(.deleteBubble))
+        
+        DispatchQueue.main.async {
+            let bContext = self.controller.bContext
+            let objID = bubble.objectID
+            
+            bContext.perform {
+                let thisBubble = bContext.object(with: objID) as! Bubble
+                bContext.delete(thisBubble)
+                
+                try? bContext.save()
             }
         }
     }
