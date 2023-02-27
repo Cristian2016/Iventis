@@ -602,7 +602,6 @@ extension ViewModel {
                     
                     let changes = [NSDeletedObjectsKey : ids]
                     
-                    
                     NSManagedObjectContext.mergeChanges(
                         fromRemoteContextSave: changes, into: [self.controller.viewContext]
                     )
