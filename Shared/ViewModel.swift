@@ -294,11 +294,6 @@ class ViewModel: ObservableObject {
                 //create events for this bubbble
                 if thisBubble.hasCalendar { CalendarManager.shared.bubbleToEventify = thisBubble }
                 
-                //        confirm_CalOn = (true, bubble.hasCalendar)
-                //        delayExecution(.now() + 0.5) { [weak self] in
-                //            self?.confirm_CalOn = (false, bubble.hasCalendar)
-                //        }
-                
                 do {
                     try bContext.save()
                 } catch let error {
