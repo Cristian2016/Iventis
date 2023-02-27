@@ -344,31 +344,39 @@ class ViewModel: ObservableObject {
         
         secretary.addNoteButton_bRank = nil //1
         
+        let objID = bubble.objectID
+        let bContext = controller.bContext
         if bubble.state == .brandNew { return }
         
-        bubble.coordinator.update(.user(.endSession))
-        bubble.pairBubbleCellCoordinator.update(.user(.endSession))
-                
-        //reset bubble clock
-        bubble.currentClock = bubble.initialClock
-                        
-        //mark session as ended
-        bubble.lastSession?.isEnded = true
-                
-        let bubbleWasStillRunningWhenSessionWasEnded = bubble.lastPair!.pause == nil
-        
-        if bubbleWasStillRunningWhenSessionWasEnded {
-            bubble.lastPair!.pause = Date() //close last pair
+        bContext.perform {
+            let thisBubble = self.controller.grabObj(objID) as! Bubble
             
-            //compute lastPair duration first [on background thread 🔴]
-            bubble.lastPair?.computeDuration(.atEndSession) {
-                bubble.lastSession?.computeDuration {
-                    self.createCalendarEventIfRequiredAndSaveToCoreData(for: bubble)
-//                    PersistenceController.shared.save()
+            //reset bubble clock
+            thisBubble.currentClock = thisBubble.initialClock
+            //mark session as ended
+            thisBubble.lastSession?.isEnded = true
+            
+            let bubbleWasStillRunningWhenSessionWasEnded = thisBubble.lastPair!.pause == nil
+            
+            if bubbleWasStillRunningWhenSessionWasEnded {
+                thisBubble.lastPair!.pause = Date() //close last pair
+                
+                //compute lastPair duration first [on background thread 🔴]
+                thisBubble.lastPair?.computeDuration(.atEndSession) {
+                    thisBubble.lastSession?.computeDuration {
+                        self.createCalendarEventIfRequiredAndSaveToCoreData(for: thisBubble)
+                    }
                 }
             }
+            else { self.createCalendarEventIfRequiredAndSaveToCoreData(for: thisBubble) }
+            
+           try? bContext.save() //⚠️ from this moment on, viewContext can see the changes
+            
+            DispatchQueue.main.async {
+                bubble.coordinator.update(.user(.endSession))
+                bubble.pairBubbleCellCoordinator.update(.user(.endSession))
+            }
         }
-        else { createCalendarEventIfRequiredAndSaveToCoreData(for: bubble) }
     }
     
     ///createds calendar events only if that bubble has calendar, otherwise it only saves to coredata
