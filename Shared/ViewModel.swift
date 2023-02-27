@@ -603,11 +603,12 @@ extension ViewModel {
                     
                     let changes = [NSDeletedObjectsKey : ids]
                     
-                    try bContext.save()
                     
                     NSManagedObjectContext.mergeChanges(
                         fromRemoteContextSave: changes, into: [self.controller.viewContext]
                     )
+                    
+                    try bContext.save()
                     
                     DispatchQueue.main.async {
                         bubble.coordinator.update(.user(.reset))
