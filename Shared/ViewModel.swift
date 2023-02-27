@@ -393,8 +393,10 @@ class ViewModel: ObservableObject {
             CalendarManager.shared.createNewEvent(for: bubble.lastSession)
             
             //display Cal Event Added to Calendar App confirmation to the user
-            secretary.confirm_CalEventCreated = bubble.rank
-            delayExecution(.now() + 3) { self.secretary.confirm_CalEventCreated = nil }
+            DispatchQueue.main.async {
+                self.secretary.confirm_CalEventCreated = bubble.rank
+                delayExecution(.now() + 3) { self.secretary.confirm_CalEventCreated = nil }
+            }
         }
     }
     
