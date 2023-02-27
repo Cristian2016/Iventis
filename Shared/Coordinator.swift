@@ -25,7 +25,6 @@ class BubbleCellCoordinator {
         if self.stop { return }
         
         DispatchQueue.global().async {
-            
             switch moment {
                 case .automatic:
                     DispatchQueue.main.async { self.components.hundredths = "" }
@@ -91,7 +90,7 @@ class BubbleCellCoordinator {
     private func task() {
         if stop { return }
         guard let lastPairStart = bubble.lastPair?.start else { return }
-
+        
         DispatchQueue.global().async {
             let Δ = Date().timeIntervalSince(lastPairStart) //2
             var value = self.bubble.currentClock + Float(Δ) //ex: 2345.87648
