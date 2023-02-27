@@ -58,7 +58,11 @@ struct PersistenceController {
     
     lazy var viewContext = container.viewContext
     
-    lazy var bContext:NSManagedObjectContext = container.newBackgroundContext()
+    lazy var bContext:NSManagedObjectContext = {
+       let bContext = container.newBackgroundContext()
+        bContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
+        return bContext
+    }()
     
     mutating func grabObj(_ objectID:NSManagedObjectID) -> NSManagedObject {
         bContext.object(with: objectID)

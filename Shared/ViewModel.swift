@@ -579,7 +579,6 @@ extension ViewModel {
         DispatchQueue.global().async {
             let objID = bubble.objectID
             let bContext = self.controller.bContext
-            bContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
             
             bContext.perform {
                 let thisBubble = bContext.object(with: objID) as! Bubble
