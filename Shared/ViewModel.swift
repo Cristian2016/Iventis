@@ -150,18 +150,6 @@ class ViewModel: ObservableObject {
         return bubble
     }
     
-    func index(of rank:Int64) -> Int? {
-        let request = Bubble.fetchRequest()
-        request.sortDescriptors = [NSSortDescriptor(key: "rank", ascending: false)]
-        let bubbles = try! PersistenceController.shared.viewContext.fetch(request)
-        
-        for (index, bubble) in bubbles.enumerated() {
-            if bubble.rank == rank { return index }
-        }
-        
-        return nil
-    }
-    
     ///save to CoreData either bubble.note or pair.note
     func save(_ textInput:String, forObject object:NSManagedObject) {
         var note = textInput
