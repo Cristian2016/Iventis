@@ -57,43 +57,6 @@ class ViewModel: ObservableObject {
     
     // MARK: - User Intents
     //from PaletteView and...
-    func createBubble(_ kind:Bubble.Kind,
-                      _ color:String,
-                      _ note:String? = nil) {
-        
-        DispatchQueue.global().async {
-            let bContext = PersistenceController.shared.bContext
-            
-            bContext.perform {
-                let newBubble = Bubble(context: bContext)
-                newBubble.created = Date()
-                newBubble.kind = kind
-                switch kind {
-                    case .timer(let initialClock):
-                        newBubble.initialClock = initialClock
-                    default:
-                        newBubble.initialClock = 0
-                }
-                
-                newBubble.color = color
-                newBubble.rank = Int64(UserDefaults.generateRank())
-                
-                // FIXME: - no more StartDelayBubble!
-                let sdb = StartDelayBubble(context: newBubble.managedObjectContext!)
-                newBubble.sdb = sdb
-                if let note = note {
-                    newBubble.note_ = note
-                    newBubble.isNoteHidden = false
-                }
-                  
-                do {
-                    try bContext.save()
-                } catch let error {
-                    print("pula CoreData \(error.localizedDescription)")
-                }
-            }
-        }
-    }
     
     func delete(_ bubble:Bubble) {
         //if unpinned are hidden & bubble to delete is pinned and pinned section has only one item, unhide unpinned
@@ -171,12 +134,6 @@ class ViewModel: ObservableObject {
 //        }
         bubble.isPinned.toggle()
         PersistenceController.shared.save()
-    }
-    
-    //SDBubble
-    func toggleSDBStart(_ sdb:StartDelayBubble) {
-        UserFeedback.singleHaptic(.heavy)
-        sdb.toggleStart()
     }
     
     ///delta is always zero if user taps start. if user uses start delay, delta is not zero
@@ -281,28 +238,6 @@ class ViewModel: ObservableObject {
         }
     }
     
-    func toggleCalendar(_ bubble:Bubble) {
-        DispatchQueue.global().async {
-            let objID = bubble.objectID
-            let bContext = self.controller.bContext
-            
-            bContext.perform {
-                let thisBubble = bContext.object(with: objID) as! Bubble
-                
-                thisBubble.hasCalendar.toggle()
-                
-                //create events for this bubbble
-                if thisBubble.hasCalendar { CalendarManager.shared.bubbleToEventify = thisBubble }
-                
-                do {
-                    try bContext.save()
-                } catch let error {
-                    print("CoreData error \(error.localizedDescription)")
-                }
-            }
-        }
-    }
-    
     func showMoreOptions(for bubble:Bubble) {
         //set Published property triggers UI update
         //MoreOptionsView displayed
@@ -343,48 +278,6 @@ class ViewModel: ObservableObject {
         UserDefaults.resetRankGenerator(sortedBubbles.count) //reset rank generator
         
         PersistenceController.shared.save()
-    }
-    
-    // FIXME: ⚠️ not complete!
-    func endSession(_ bubble:Bubble) {
-        //make sure no startDelayBubble displayed at this point
-        removeDelay(for: bubble)
-        
-        secretary.addNoteButton_bRank = nil //1
-        
-        let objID = bubble.objectID
-        let bContext = controller.bContext
-        if bubble.state == .brandNew { return }
-        
-        bContext.perform {
-            let thisBubble = self.controller.grabObj(objID) as! Bubble
-            
-            //reset bubble clock
-            thisBubble.currentClock = thisBubble.initialClock
-            //mark session as ended
-            thisBubble.lastSession?.isEnded = true
-            
-            let bubbleWasStillRunningWhenSessionWasEnded = thisBubble.lastPair!.pause == nil
-            
-            if bubbleWasStillRunningWhenSessionWasEnded {
-                thisBubble.lastPair!.pause = Date() //close last pair
-                
-                //compute lastPair duration first [on background thread 🔴]
-                thisBubble.lastPair?.computeDuration(.atEndSession) {
-                    thisBubble.lastSession?.computeDuration {
-                        self.createCalendarEventIfRequiredAndSaveToCoreData(for: thisBubble)
-                    }
-                }
-            }
-            else { self.createCalendarEventIfRequiredAndSaveToCoreData(for: thisBubble) }
-            
-           try? bContext.save() //⚠️ from this moment on, viewContext can see the changes
-            
-            DispatchQueue.main.async {
-                bubble.coordinator.update(.user(.endSession))
-                bubble.pairBubbleCellCoordinator.update(.user(.endSession))
-            }
-        }
     }
     
     ///createds calendar events only if that bubble has calendar, otherwise it only saves to coredata
@@ -604,5 +497,115 @@ extension ViewModel {
                     
         if let sdbArray = try? context.fetch(request) { return sdbArray }
         else { return [] }
+    }
+}
+
+// MARK: - Bubble operations
+extension ViewModel {
+    // MARK: - User Intents
+    func createBubble(_ kind:Bubble.Kind,
+                      _ color:String,
+                      _ note:String? = nil) {
+        
+        DispatchQueue.global().async {
+            let bContext = PersistenceController.shared.bContext
+            
+            bContext.perform {
+                let newBubble = Bubble(context: bContext)
+                newBubble.created = Date()
+                newBubble.kind = kind
+                switch kind {
+                    case .timer(let initialClock):
+                        newBubble.initialClock = initialClock
+                    default:
+                        newBubble.initialClock = 0
+                }
+                
+                newBubble.color = color
+                newBubble.rank = Int64(UserDefaults.generateRank())
+                
+                // FIXME: - no more StartDelayBubble!
+                let sdb = StartDelayBubble(context: newBubble.managedObjectContext!)
+                newBubble.sdb = sdb
+                if let note = note {
+                    newBubble.note_ = note
+                    newBubble.isNoteHidden = false
+                }
+                  
+                do {
+                    try bContext.save()
+                } catch let error {
+                    print("pula CoreData \(error.localizedDescription)")
+                }
+            }
+        }
+    }
+    
+    func toggleSDBStart(_ sdb:StartDelayBubble) {
+        UserFeedback.singleHaptic(.heavy)
+        sdb.toggleStart()
+    }
+    
+    func endSession(_ bubble:Bubble) {
+        //make sure no startDelayBubble displayed at this point
+        removeDelay(for: bubble)
+        
+        secretary.addNoteButton_bRank = nil //1
+        
+        let objID = bubble.objectID
+        let bContext = controller.bContext
+        if bubble.state == .brandNew { return }
+        
+        bContext.perform {
+            let thisBubble = self.controller.grabObj(objID) as! Bubble
+            
+            //reset bubble clock
+            thisBubble.currentClock = thisBubble.initialClock
+            //mark session as ended
+            thisBubble.lastSession?.isEnded = true
+            
+            let bubbleWasStillRunningWhenSessionWasEnded = thisBubble.lastPair!.pause == nil
+            
+            if bubbleWasStillRunningWhenSessionWasEnded {
+                thisBubble.lastPair!.pause = Date() //close last pair
+                
+                //compute lastPair duration first [on background thread 🔴]
+                thisBubble.lastPair?.computeDuration(.atEndSession) {
+                    thisBubble.lastSession?.computeDuration {
+                        self.createCalendarEventIfRequiredAndSaveToCoreData(for: thisBubble)
+                    }
+                }
+            }
+            else { self.createCalendarEventIfRequiredAndSaveToCoreData(for: thisBubble) }
+            
+           try? bContext.save() //⚠️ from this moment on, viewContext can see the changes
+            
+            DispatchQueue.main.async {
+                bubble.coordinator.update(.user(.endSession))
+                bubble.pairBubbleCellCoordinator.update(.user(.endSession))
+            }
+        }
+    }
+    
+    func toggleCalendar(_ bubble:Bubble) {
+        DispatchQueue.global().async {
+            let objID = bubble.objectID
+            let bContext = self.controller.bContext
+            
+            bContext.perform {
+                let thisBubble = bContext.object(with: objID) as! Bubble
+                
+                thisBubble.hasCalendar.toggle()
+                
+                //create events for this bubbble
+                if thisBubble.hasCalendar { CalendarManager.shared.bubbleToEventify = thisBubble }
+                
+                do {
+                    try bContext.save()
+                } catch let error {
+                    print("CoreData error \(error.localizedDescription)")
+                }
+            }
+        }
     }
 }
