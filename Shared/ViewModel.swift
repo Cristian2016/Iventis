@@ -84,8 +84,12 @@ class ViewModel: ObservableObject {
                 newBubble.note_ = note
                 newBubble.isNoteHidden = false
             }
-                                    
-            try? bContext.save()
+              
+            do {
+                try bContext.save()
+            } catch let error {
+                print("pula CoreData \(error.localizedDescription)")
+            }
         }
     }
     
