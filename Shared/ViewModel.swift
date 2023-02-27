@@ -10,6 +10,7 @@
 //3 notifies PairBubbleCellCoordinator that detailview is visible or not
 //4 the reason for the 0.005 slight delay is to allow PairBubbleCellCoordinator initialize first otherwise it will not receive any notifications, duh :))
 //5 PairBubbleCellCoordinator is interested in knowing when DetailView is visible or hidden, since it needs to resume or pause work
+//6 creates new bubble.session and new pair on a bContext. changes will be seen by viewContxt only if you save bContext first!
 
 import Foundation
 import SwiftUI
@@ -178,30 +179,35 @@ class ViewModel: ObservableObject {
         
         switch bubble.state {
             case .brandNew: /* changes to .running */
-                //create first session and add first pair to the session
                 
-                let context = bubble.managedObjectContext!
-                context.automaticallyMergesChangesFromParent = true
+                let bubbleID = bubble.objectID
+                let bContext = PersistenceController.shared.bContext
                 
-                context.perform {
-                    let newSession = Session(context: bubble.managedObjectContext!)
-                    let newPair = Pair(context: bubble.managedObjectContext!)
+                bContext.perform {
+                    let thisBubble = bContext.object(with: bubbleID) as! Bubble
+                    
+                    let newSession = Session(context: thisBubble.managedObjectContext!)
+                    let newPair = Pair(context: thisBubble.managedObjectContext!)
                     
                     newPair.start = Date().addingTimeInterval(startDelayCompensation)
                     newSession.created = Date().addingTimeInterval(startDelayCompensation)
                                     
-                    bubble.addToSessions(newSession)
+                    thisBubble.addToSessions(newSession)
                     newSession.addToPairs(newPair)
+                    
+                    try? bContext.save() //⚠️
+                    
+                    DispatchQueue.main.async {
+                        //repetitive chunk of code ⚠️
+                        bubble.coordinator.update(.user(.start))
+                        bubble.pairBubbleCellCoordinator.update(.user(.start))
+                        
+                        //1 both
+                        self.secretary.addNoteButton_bRank = nil //clear first
+                        self.secretary.addNoteButton_bRank = Int(bubble.rank)
+                    }
                 }
                                 
-                //1 both
-                secretary.addNoteButton_bRank = nil //clear first
-                secretary.addNoteButton_bRank = Int(bubble.rank)
-                
-                //repetitive chunk of code ⚠️
-                bubble.coordinator.update(.user(.start))
-                bubble.pairBubbleCellCoordinator.update(.user(.start))
-                
                 delayExecution(.now() + 0.3) {
                     self.secretary.pairBubbleCellNeedsDisplay.toggle()
                 }
