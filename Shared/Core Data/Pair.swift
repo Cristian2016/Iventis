@@ -47,13 +47,12 @@ public class Pair: NSManagedObject {
             let componentStrings = duration.timeComponentsAsStrings
             let data = try? JSONEncoder().encode(componentStrings)
             
-            DispatchQueue.main.async {
+            self.managedObjectContext?.perform {
                 self.duration = duration
                 self.durationAsStrings = data
-                
-                completion()
-                //⚠️ Session computes its duration after pair computes its duration and then session saves context. No need to save context here since session saves it anyway
             }
+            
+            DispatchQueue.main.async { completion() }
         }
     }
 }

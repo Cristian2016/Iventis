@@ -24,11 +24,13 @@ public class Session: NSManagedObject {
             guard !pairs.isEmpty,
                   let lastPairDuration = pairs.last?.duration else { fatalError() }
             
-            self.totalDuration += lastPairDuration
-            
             //encode Data and set session.totalDurationAsStrings
             let data = try? JSONEncoder().encode(self.totalDuration.timeComponentsAsStrings)
-            self.totalDurationAsStrings = data
+            
+            self.managedObjectContext?.perform {
+                self.totalDurationAsStrings = data
+                self.totalDuration += lastPairDuration
+            }
             
             DispatchQueue.main.async { completion() }
         }
