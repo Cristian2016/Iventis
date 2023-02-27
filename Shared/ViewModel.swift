@@ -60,16 +60,16 @@ class ViewModel: ObservableObject {
     
     func delete(_ bubble:Bubble) {
         //if unpinned are hidden & bubble to delete is pinned and pinned section has only one item, unhide unpinned
-//        if secretary.showFavoritesOnly, Secretary.shared.pinnedBubblesCount == 1 {
-//            secretary.showFavoritesOnly = false
-//        }
+        //        if secretary.showFavoritesOnly, Secretary.shared.pinnedBubblesCount == 1 {
+        //            secretary.showFavoritesOnly = false
+        //        }
         
         if !path.isEmpty { path = [] }
         
         //⚠️ do I really need to set to nil?
         bubble.coordinator.update(.user(.deleteBubble))
         bubble.pairBubbleCellCoordinator.update(.user(.deleteBubble))
-                
+        
         //delete bubble
         let context = bubble.managedObjectContext!
         context.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
@@ -83,21 +83,29 @@ class ViewModel: ObservableObject {
     func deleteSession(_ session:Session) {
         guard let bubble = session.bubble else { fatalError() }
         
-        if bubble.lastSession == session {
-            bubble.currentClock = bubble.initialClock
-            bubble.coordinator.update(.user(.deleteCurrentSession))
-            bubble.pairBubbleCellCoordinator.update(.user(.deleteCurrentSession))
-        }
+        let bContext = controller.bContext
+        let bubbleID = bubble.objectID
+        let sessionID = session.objectID
         
-        //delete session
-        let context = session.managedObjectContext!
-        context.automaticallyMergesChangesFromParent = true
-        
-        context.perform {
-            let deletedSessionRank = bubble.sessions_.firstIndex(of: session)!
+        bContext.perform {
+            let thisBubble = bContext.object(with: bubbleID) as! Bubble
+            let thisSession = bContext.object(with: sessionID) as! Session
             
-            context.delete(session)
-            try? context.save()
+            if thisBubble.lastSession == thisSession {
+                thisBubble.currentClock = thisBubble.initialClock
+                
+                DispatchQueue.main.async {
+                    bubble.coordinator.update(.user(.deleteCurrentSession))
+                    bubble.pairBubbleCellCoordinator.update(.user(.deleteCurrentSession))
+                }
+            }
+            
+            bContext.delete(thisSession)
+            
+            do {
+                try bContext.save() //from here on viewContext can see all changes
+            }
+            catch let error { print(error.localizedDescription) }
         }
     }
     
