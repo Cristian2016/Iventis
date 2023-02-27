@@ -282,17 +282,30 @@ class ViewModel: ObservableObject {
     }
     
     func toggleCalendar(_ bubble:Bubble) {
-        
-        bubble.hasCalendar.toggle()
-        PersistenceController.shared.save()
-        
-        //create events for this bubbble
-        if bubble.hasCalendar { CalendarManager.shared.bubbleToEventify = bubble }
-        
-//        confirm_CalOn = (true, bubble.hasCalendar)
-//        delayExecution(.now() + 0.5) { [weak self] in
-//            self?.confirm_CalOn = (false, bubble.hasCalendar)
-//        }
+        DispatchQueue.global().async {
+            let objID = bubble.objectID
+            let bContext = self.controller.bContext
+            
+            bContext.perform {
+                let thisBubble = bContext.object(with: objID) as! Bubble
+                
+                thisBubble.hasCalendar.toggle()
+                
+                //create events for this bubbble
+                if thisBubble.hasCalendar { CalendarManager.shared.bubbleToEventify = thisBubble }
+                
+                //        confirm_CalOn = (true, bubble.hasCalendar)
+                //        delayExecution(.now() + 0.5) { [weak self] in
+                //            self?.confirm_CalOn = (false, bubble.hasCalendar)
+                //        }
+                
+                do {
+                    try bContext.save()
+                } catch let error {
+                    print("CoreData error \(error.localizedDescription)")
+                }
+            }
+        }
     }
     
     func showMoreOptions(for bubble:Bubble) {
@@ -388,8 +401,6 @@ class ViewModel: ObservableObject {
             secretary.confirm_CalEventCreated = bubble.rank
             delayExecution(.now() + 3) { self.secretary.confirm_CalEventCreated = nil }
         }
-        
-        PersistenceController.shared.save()
     }
     
     // MARK: - Helpers
