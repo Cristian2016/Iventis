@@ -75,7 +75,7 @@ struct BubbleDeleteActionAlert: View {
             UserFeedback.singleHaptic(.light)
             removeAddTagButton()
             withAnimation {
-                viewModel.delete(bubble)
+                viewModel.deleteBubble(bubble)
                 
                 //make BubbleDAAlert go away after 0.3 seconds, so that user sees button tapped animation
                 delayExecution(.now() + 0.25) { secretary.deleteAction_bRank = nil }

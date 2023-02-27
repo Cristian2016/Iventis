@@ -42,7 +42,7 @@ struct DeleteActionView: View {
                             VStack {
                                 deleteBubbleView
                                     .onTapGesture { withAnimation {
-                                        viewModel.delete(bubble!)
+                                        viewModel.deleteBubble(bubble!)
                                         secretary.deleteAction_bRank = nil
                                     } }
                                 deleteSessionsView

@@ -462,47 +462,6 @@ extension ViewModel {
         }
     }
     
-    func endSession(_ bubble:Bubble) {
-        //make sure no startDelayBubble displayed at this point
-        removeDelay(for: bubble)
-        
-        secretary.addNoteButton_bRank = nil //1
-        
-        let objID = bubble.objectID
-        let bContext = controller.bContext
-        if bubble.state == .brandNew { return }
-        
-        bContext.perform {
-            let thisBubble = self.controller.grabObj(objID) as! Bubble
-            
-            //reset bubble clock
-            thisBubble.currentClock = thisBubble.initialClock
-            //mark session as ended
-            thisBubble.lastSession?.isEnded = true
-            
-            let bubbleWasStillRunningWhenSessionWasEnded = thisBubble.lastPair!.pause == nil
-            
-            if bubbleWasStillRunningWhenSessionWasEnded {
-                thisBubble.lastPair!.pause = Date() //close last pair
-                
-                //compute lastPair duration first [on background thread 🔴]
-                thisBubble.lastPair?.computeDuration(.atEndSession) {
-                    thisBubble.lastSession?.computeDuration {
-                        self.createCalendarEventIfRequiredAndSaveToCoreData(for: thisBubble)
-                    }
-                }
-            }
-            else { self.createCalendarEventIfRequiredAndSaveToCoreData(for: thisBubble) }
-            
-            try? bContext.save() //⚠️ from this moment on, viewContext can see the changes
-            
-            DispatchQueue.main.async {
-                bubble.coordinator.update(.user(.endSession))
-                bubble.pairBubbleCellCoordinator.update(.user(.endSession))
-            }
-        }
-    }
-    
     ///delete history. delete all sessions and pairs and make it brandNew
     func reset(_ bubble:Bubble) {
         guard !bubble.sessions_.isEmpty else { return }
@@ -596,7 +555,8 @@ extension ViewModel {
         }
     }
     
-    func delete(_ bubble:Bubble) {
+    // MARK: -
+    func deleteBubble(_ bubble:Bubble) {
         //if unpinned are hidden & bubble to delete is pinned and pinned section has only one item, unhide unpinned
         //        if secretary.showFavoritesOnly, Secretary.shared.pinnedBubblesCount == 1 {
         //            secretary.showFavoritesOnly = false
@@ -645,6 +605,47 @@ extension ViewModel {
                 
                 do { try bContext.save() } //7
                 catch let error { print(error.localizedDescription) }
+            }
+        }
+    }
+    
+    func endSession(_ bubble:Bubble) {
+        //make sure no startDelayBubble displayed at this point
+        removeDelay(for: bubble)
+        
+        secretary.addNoteButton_bRank = nil //1
+        
+        let objID = bubble.objectID
+        let bContext = controller.bContext
+        if bubble.state == .brandNew { return }
+        
+        bContext.perform {
+            let thisBubble = self.controller.grabObj(objID) as! Bubble
+            
+            //reset bubble clock
+            thisBubble.currentClock = thisBubble.initialClock
+            //mark session as ended
+            thisBubble.lastSession?.isEnded = true
+            
+            let bubbleWasStillRunningWhenSessionWasEnded = thisBubble.lastPair!.pause == nil
+            
+            if bubbleWasStillRunningWhenSessionWasEnded {
+                thisBubble.lastPair!.pause = Date() //close last pair
+                
+                //compute lastPair duration first [on background thread 🔴]
+                thisBubble.lastPair?.computeDuration(.atEndSession) {
+                    thisBubble.lastSession?.computeDuration {
+                        self.createCalendarEventIfRequiredAndSaveToCoreData(for: thisBubble)
+                    }
+                }
+            }
+            else { self.createCalendarEventIfRequiredAndSaveToCoreData(for: thisBubble) }
+            
+            try? bContext.save() //⚠️ from this moment on, viewContext can see the changes
+            
+            DispatchQueue.main.async {
+                bubble.coordinator.update(.user(.endSession))
+                bubble.pairBubbleCellCoordinator.update(.user(.endSession))
             }
         }
     }
