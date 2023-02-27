@@ -173,20 +173,6 @@ class ViewModel: ObservableObject {
         }
     }
     
-    //delete BubbleSticky in List
-    func deleteBubbleNote(_ savedNote:BubbleSavedNote) {
-        let context = PersistenceController.shared.viewContext
-        context.delete(savedNote)
-        PersistenceController.shared.save()
-    }
-    
-    //delete PairSticky in List
-    func deletePairNote(_ savedNote:PairSavedNote) {
-        let context = PersistenceController.shared.viewContext
-        context.delete(savedNote)
-        PersistenceController.shared.save()
-    }
-    
     //delete BubbleSticky
     func deleteStickyNote(for bubble:Bubble) {
         bubble.note = nil
@@ -228,6 +214,8 @@ class ViewModel: ObservableObject {
         sdb.referenceDelay += Int64(value)
         sdb.currentDelay = Float(sdb.referenceDelay)
     }
+    
+    // MARK: - Observers
     
     private func observe_ApplicationActive() {
         NotificationCenter.default.addObserver(forName: .appActive, object: nil, queue: nil) { [weak self] _ in
@@ -663,6 +651,34 @@ extension ViewModel {
             DispatchQueue.main.async {
                 bubble.coordinator.update(.user(.endSession))
                 bubble.pairBubbleCellCoordinator.update(.user(.endSession))
+            }
+        }
+    }
+    
+    //delete BubbleSticky in List
+    func deleteBubbleNote(_ savedNote:BubbleSavedNote) {
+        DispatchQueue.global().async {
+            let bContext = self.controller.bContext
+            let objID = savedNote.objectID
+            
+            bContext.perform {
+                let thisNote = bContext.object(with: objID) as! BubbleSavedNote
+                bContext.delete(thisNote)
+                try? bContext.save()
+            }
+        }
+    }
+    
+    //delete PairSticky in List
+    func deletePairNote(_ savedNote:PairSavedNote) {
+        DispatchQueue.global().async {
+            let bContext = self.controller.bContext
+            let objID = savedNote.objectID
+            
+            bContext.perform {
+                let thisNote = bContext.object(with: objID) as! PairSavedNote
+                bContext.delete(thisNote)
+                try? bContext.save()
             }
         }
     }
