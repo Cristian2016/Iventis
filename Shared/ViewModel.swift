@@ -57,9 +57,8 @@ class ViewModel: ObservableObject {
                       _ color:String,
                       _ note:String? = nil) {
         
-        let bContext = PersistenceController.shared.container.newBackgroundContext()
-        bContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
-                
+        let bContext = PersistenceController.shared.bContext
+        
         bContext.perform {
             let newBubble = Bubble(context: bContext)
             newBubble.created = Date()
