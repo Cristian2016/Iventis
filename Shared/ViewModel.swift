@@ -11,6 +11,7 @@
 //4 the reason for the 0.005 slight delay is to allow PairBubbleCellCoordinator initialize first otherwise it will not receive any notifications, duh :))
 //5 PairBubbleCellCoordinator is interested in knowing when DetailView is visible or hidden, since it needs to resume or pause work
 //6 creates new bubble.session and new pair on a bContext. changes will be seen by viewContxt only if you save bContext first!
+//7 from here on viewContext can see all changes
 
 import Foundation
 import SwiftUI
@@ -102,9 +103,7 @@ class ViewModel: ObservableObject {
             
             bContext.delete(thisSession)
             
-            do {
-                try bContext.save() //from here on viewContext can see all changes
-            }
+            do { try bContext.save() } //7
             catch let error { print(error.localizedDescription) }
         }
     }
