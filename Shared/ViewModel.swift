@@ -667,6 +667,7 @@ extension ViewModel {
         }
     }
     
+    // TODO: To verify it works
     //delete BubbleSticky
     func deleteStickyNote(for bubble:Bubble) {
         bubble.managedObjectContext?.perform {
