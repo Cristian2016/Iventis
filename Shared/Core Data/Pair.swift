@@ -28,32 +28,25 @@ public class Pair: NSManagedObject {
     
     ///runs on background thread. it computes at 1.pause or 2.endSession. endSession means substracting 0.5 seconds from the duration
     func computeDuration(_ durationComputed:DurationComputed, completion: @escaping () -> ()) {
+        guard let start = start, let pause = pause else { fatalError() }
         
-        DispatchQueue.global().async {
-            
-            //make sure duration can be computed
-            guard let start = self.start, let pause = self.pause else { fatalError() }
-            
-            //set duration
-            let duration:Float
-            switch durationComputed {
-                case .atPause:
-                    duration = Float(pause.timeIntervalSince(start))
-                case .atEndSession:
-                    duration = Float(pause.timeIntervalSince(start) - Global.longPressLatency)
-            }
-            
-            //convert duration.timeComponentsAsStrings to Data using JSONEncoder
-            let componentStrings = duration.timeComponentsAsStrings
-            let data = try? JSONEncoder().encode(componentStrings)
-            
-            self.managedObjectContext?.perform {
-                self.duration = duration
-                self.durationAsStrings = data
-            }
-            
-            DispatchQueue.main.async { completion() }
+        //set duration
+        let duration:Float
+        switch durationComputed {
+            case .atPause:
+                duration = Float(pause.timeIntervalSince(start))
+            case .atEndSession:
+                duration = Float(pause.timeIntervalSince(start) - Global.longPressLatency)
         }
+        
+        //convert duration.timeComponentsAsStrings to Data using JSONEncoder
+        let componentStrings = duration.timeComponentsAsStrings
+        let data = try? JSONEncoder().encode(componentStrings)
+        
+        self.duration = duration
+        durationAsStrings = data
+        
+        completion()
     }
 }
 

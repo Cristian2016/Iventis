@@ -20,6 +20,9 @@ import MyPackage
 
 class ViewModel: ObservableObject {
     private let secretary = Secretary.shared
+    
+    ///PersistanceController.shared
+    private lazy var controller = PersistenceController.shared
             
     deinit { NotificationCenter.default.removeObserver(self) } //1
     
@@ -180,20 +183,20 @@ class ViewModel: ObservableObject {
         switch bubble.state {
             case .brandNew: /* changes to .running */
                 
-                let bubbleID = bubble.objectID
                 let bContext = PersistenceController.shared.bContext
+                let objID = bubble.objectID
                 
                 bContext.perform {
-                    let thisBubble = bContext.object(with: bubbleID) as! Bubble
+                    let thisBubble = bContext.object(with: objID) as! Bubble
                     
                     let newSession = Session(context: thisBubble.managedObjectContext!)
-                    let newPair = Pair(context: thisBubble.managedObjectContext!)
-                    
-                    newPair.start = Date().addingTimeInterval(startDelayCompensation)
                     newSession.created = Date().addingTimeInterval(startDelayCompensation)
+                    
+                    let newPair = Pair(context: thisBubble.managedObjectContext!)
+                    newPair.start = Date().addingTimeInterval(startDelayCompensation)
+                    newSession.addToPairs(newPair)
                                     
                     thisBubble.addToSessions(newSession)
-                    newSession.addToPairs(newPair)
                     
                     try? bContext.save() //⚠️
                     
@@ -205,59 +208,71 @@ class ViewModel: ObservableObject {
                         //1 both
                         self.secretary.addNoteButton_bRank = nil //clear first
                         self.secretary.addNoteButton_bRank = Int(bubble.rank)
+                        
+                        delayExecution(.now() + 0.3) {
+                            self.secretary.pairBubbleCellNeedsDisplay.toggle()
+                        }
                     }
-                }
-                                
-                delayExecution(.now() + 0.3) {
-                    self.secretary.pairBubbleCellNeedsDisplay.toggle()
                 }
                                                                 
             case .paused:  /* changes to running */
-                let context = bubble.managedObjectContext!
-                context.automaticallyMergesChangesFromParent = true
+                let bContext = PersistenceController.shared.bContext
+                let objID = bubble.objectID
                 
-                context.perform {
-                    //create new pair, add it to currentSession
-                    let newPair = Pair(context: bubble.managedObjectContext!)
-                    newPair.start = Date().addingTimeInterval(startDelayCompensation)
-                    bubble.lastSession?.addToPairs(newPair)
-                }
-                                
-                //1 both
-                secretary.addNoteButton_bRank = nil //clear first
-                secretary.addNoteButton_bRank = Int(bubble.rank)
-                
-                //repetitive chunk of code ⚠️
-                bubble.coordinator.update(.user(.start))
-                bubble.pairBubbleCellCoordinator.update(.user(.start))
-                delayExecution(.now() + 0.3) {
-                    self.secretary.pairBubbleCellNeedsDisplay.toggle()
-                }
-                
-            case .running: /* changes to .paused */
-                let currentPair = bubble.lastPair
-                currentPair?.pause = Date()
-                                
-                //⚠️ closure runs on the main queue. whatever you want the user to see put in that closure otherwise it will fail to update!!!!
-                currentPair?.computeDuration(.atPause) {
-                    //set bubble properties
-                    bubble.currentClock += currentPair!.duration
+                bContext.perform {
+                    let thisBubble = bContext.object(with: objID) as! Bubble
                     
-                    bubble.lastSession?.computeDuration {
-                        //no need to run any code in the completion
-                        PersistenceController.shared.save()
-                        bubble.coordinator.update(.user(.pause))
-                        bubble.pairBubbleCellCoordinator.update(.user(.pause))
+                    //create new pair, add it to currentSession
+                    let newPair = Pair(context: thisBubble.managedObjectContext!)
+                    newPair.start = Date().addingTimeInterval(startDelayCompensation)
+                    thisBubble.lastSession?.addToPairs(newPair)
+                    
+                    try? bContext.save()
+                    
+                    DispatchQueue.main.async {
+                        //repetitive chunk of code ⚠️
+                        bubble.coordinator.update(.user(.start))
+                        bubble.pairBubbleCellCoordinator.update(.user(.start))
+                        
+                        //1 both
+                        self.secretary.addNoteButton_bRank = nil //clear first
+                        self.secretary.addNoteButton_bRank = Int(bubble.rank)
+                        
+                        delayExecution(.now() + 0.3) {
+                            self.secretary.pairBubbleCellNeedsDisplay.toggle()
+                        }
                     }
                 }
                 
-                //remove only that
-                if secretary.addNoteButton_bRank == Int(bubble.rank) { secretary.addNoteButton_bRank = nil
-                } //1
+            case .running: /* changes to .paused */
+                let bContext = PersistenceController.shared.bContext
+                let objID = bubble.objectID
+                
+                bContext.perform {
+                    let thisBubble = self.controller.grabObj(objID) as! Bubble
+                    let currentPair = thisBubble.lastPair
+                    currentPair?.pause = Date()
+                    
+                    currentPair?.computeDuration(.atPause) {
+                        thisBubble.currentClock += currentPair!.duration
+                        
+                        thisBubble.lastSession?.computeDuration { //completion handler
+                            try? bContext.save()
+                            
+                            DispatchQueue.main.async {
+                                bubble.coordinator.update(.user(.pause))
+                                bubble.pairBubbleCellCoordinator.update(.user(.pause))
                                 
+                                //remove only that
+                                if self.secretary.addNoteButton_bRank == Int(bubble.rank) { self.secretary.addNoteButton_bRank = nil
+                                } //1
+                            }
+                        }
+                    }
+                }
+                
             case .finished: return
         }
-        PersistenceController.shared.save()
     }
     
     func toggleCalendar(_ bubble:Bubble) {

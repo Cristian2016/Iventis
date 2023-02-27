@@ -58,10 +58,13 @@ struct PersistenceController {
     
     lazy var viewContext = container.viewContext
     
+    lazy var bContext:NSManagedObjectContext = container.newBackgroundContext()
+    
+    mutating func grabObj(_ objectID:NSManagedObjectID) -> NSManagedObject {
+        bContext.object(with: objectID)
+    }
+    
     func save(_ context:NSManagedObjectContext = PersistenceController.shared.viewContext) {
-        if context.hasChanges {
-            try? context.save()
-//            print("Coredata saved")
-        }
+        if context.hasChanges { try? context.save() }
     }
 }
