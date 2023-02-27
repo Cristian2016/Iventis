@@ -16,22 +16,21 @@ public class Session: NSManagedObject {
     }
     
     //⚠️ implement on backgroundthread. warning: wait until pair computes its duration and then compute session.totalduration!!!
-    func computeDuration(completion: @escaping (() -> ())) {
+    func computeDuration(completion: @escaping () -> Void) {
         DispatchQueue.global().async {
             
-            let pairs = self.pairs?.array as! [Pair]
+            let pairs = self.pairs_
+            
             guard !pairs.isEmpty,
                   let lastPairDuration = pairs.last?.duration else { fatalError() }
             
-            DispatchQueue.main.async {
-                self.totalDuration += lastPairDuration
-                
-                let encoder = JSONEncoder()
-                let data = try? encoder.encode(self.totalDuration.timeComponentsAsStrings)
-                self.totalDurationAsStrings = data
-                
-                completion()
-            }
+            self.totalDuration += lastPairDuration
+            
+            let encoder = JSONEncoder()
+            let data = try? encoder.encode(self.totalDuration.timeComponentsAsStrings)
+            self.totalDurationAsStrings = data
+            
+            DispatchQueue.main.async { completion() }
         }
     }
     
