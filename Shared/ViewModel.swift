@@ -582,14 +582,14 @@ extension ViewModel {
                 let thisSession = bContext.object(with: sessionID) as! Session
                 
                 //set this property and use it after context was saved
-                let isLastSession = thisBubble.lastSession == thisSession
+                let isCurrentSession = thisBubble.lastSession == thisSession
                 
                 bContext.delete(thisSession)
                 
                 do {
                     try bContext.save()
                     
-                    if isLastSession {
+                    if isCurrentSession {
                         thisBubble.currentClock = thisBubble.initialClock
                         
                         DispatchQueue.main.async {
