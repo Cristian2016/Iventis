@@ -26,8 +26,8 @@ public class Session: NSManagedObject {
             
             self.totalDuration += lastPairDuration
             
-            let encoder = JSONEncoder()
-            let data = try? encoder.encode(self.totalDuration.timeComponentsAsStrings)
+            //encode Data and set session.totalDurationAsStrings
+            let data = try? JSONEncoder().encode(self.totalDuration.timeComponentsAsStrings)
             self.totalDurationAsStrings = data
             
             DispatchQueue.main.async { completion() }
