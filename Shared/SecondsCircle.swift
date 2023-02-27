@@ -40,7 +40,7 @@ struct SecondsCircle: View {
         UserFeedback.singleHaptic(.heavy)
         
         //user intent model
-        viewModel.toggleStart(bubble)
+        viewModel.toggleBubbleStart(bubble)
     }
     
     private func endSession() {

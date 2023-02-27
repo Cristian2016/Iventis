@@ -136,106 +136,9 @@ class ViewModel: ObservableObject {
         PersistenceController.shared.save()
     }
     
-    ///delta is always zero if user taps start. if user uses start delay, delta is not zero
-    func toggleStart(_ bubble:Bubble, delta:TimeInterval? = nil) {
-        if bubble.currentClock <= 0 && bubble.kind != .stopwatch  { return }
-       removeDelay(for: bubble)
-        
-        let startDelayCompensation = delta ?? 0
-        
-        switch bubble.state {
-            case .brandNew: /* changes to .running */
-                
-                let bContext = PersistenceController.shared.bContext
-                let objID = bubble.objectID
-                
-                bContext.perform {
-                    let thisBubble = bContext.object(with: objID) as! Bubble
-                    
-                    let newSession = Session(context: thisBubble.managedObjectContext!)
-                    newSession.created = Date().addingTimeInterval(startDelayCompensation)
-                    
-                    let newPair = Pair(context: thisBubble.managedObjectContext!)
-                    newPair.start = Date().addingTimeInterval(startDelayCompensation)
-                    newSession.addToPairs(newPair)
-                                    
-                    thisBubble.addToSessions(newSession)
-                    
-                    try? bContext.save() //⚠️
-                    
-                    DispatchQueue.main.async {
-                        //repetitive chunk of code ⚠️
-                        bubble.coordinator.update(.user(.start))
-                        bubble.pairBubbleCellCoordinator.update(.user(.start))
-                        
-                        //1 both
-                        self.secretary.addNoteButton_bRank = nil //clear first
-                        self.secretary.addNoteButton_bRank = Int(bubble.rank)
-                        
-                        delayExecution(.now() + 0.3) {
-                            self.secretary.pairBubbleCellNeedsDisplay.toggle()
-                        }
-                    }
-                }
-                                                                
-            case .paused:  /* changes to running */
-                let bContext = PersistenceController.shared.bContext
-                let objID = bubble.objectID
-                
-                bContext.perform {
-                    let thisBubble = bContext.object(with: objID) as! Bubble
-                    
-                    //create new pair, add it to currentSession
-                    let newPair = Pair(context: thisBubble.managedObjectContext!)
-                    newPair.start = Date().addingTimeInterval(startDelayCompensation)
-                    thisBubble.lastSession?.addToPairs(newPair)
-                    
-                    try? bContext.save()
-                    
-                    DispatchQueue.main.async {
-                        //repetitive chunk of code ⚠️
-                        bubble.coordinator.update(.user(.start))
-                        bubble.pairBubbleCellCoordinator.update(.user(.start))
-                        
-                        //1 both
-                        self.secretary.addNoteButton_bRank = nil //clear first
-                        self.secretary.addNoteButton_bRank = Int(bubble.rank)
-                        
-                        delayExecution(.now() + 0.3) {
-                            self.secretary.pairBubbleCellNeedsDisplay.toggle()
-                        }
-                    }
-                }
-                
-            case .running: /* changes to .paused */
-                let bContext = PersistenceController.shared.bContext
-                let objID = bubble.objectID
-                
-                bContext.perform {
-                    let thisBubble = self.controller.grabObj(objID) as! Bubble
-                    let currentPair = thisBubble.lastPair
-                    currentPair?.pause = Date()
-                    
-                    currentPair?.computeDuration(.atPause) {
-                        thisBubble.currentClock += currentPair!.duration
-                        
-                        thisBubble.lastSession?.computeDuration { //completion handler
-                            try? bContext.save()
-                            
-                            DispatchQueue.main.async {
-                                bubble.coordinator.update(.user(.pause))
-                                bubble.pairBubbleCellCoordinator.update(.user(.pause))
-                                
-                                //remove only that
-                                if self.secretary.addNoteButton_bRank == Int(bubble.rank) { self.secretary.addNoteButton_bRank = nil
-                                } //1
-                            }
-                        }
-                    }
-                }
-                
-            case .finished: return
-        }
+    func toggleSDBStart(_ sdb:StartDelayBubble) {
+        UserFeedback.singleHaptic(.heavy)
+        sdb.toggleStart()
     }
     
     func showMoreOptions(for bubble:Bubble) {
@@ -453,7 +356,7 @@ class ViewModel: ObservableObject {
             DispatchQueue.main.async {
                 //start bubble automatically
                 //remove SDBCell from BubbleCell
-                self?.toggleStart(bubble, delta: delta)
+                self?.toggleBubbleStart(bubble, delta: delta)
                 
                 self?.secretary.theOneAndOnlyEditedSDB = nil //dismiss MoreOptionsView
                 
@@ -540,10 +443,106 @@ extension ViewModel {
             }
         }
     }
-    
-    func toggleSDBStart(_ sdb:StartDelayBubble) {
-        UserFeedback.singleHaptic(.heavy)
-        sdb.toggleStart()
+    ///delta is always zero if user taps start. if user uses start delay, delta is not zero
+    func toggleBubbleStart(_ bubble:Bubble, delta:TimeInterval? = nil) {
+        if bubble.currentClock <= 0 && bubble.kind != .stopwatch  { return }
+       removeDelay(for: bubble)
+        
+        let startDelayCompensation = delta ?? 0
+        
+        switch bubble.state {
+            case .brandNew: /* changes to .running */
+                
+                let bContext = PersistenceController.shared.bContext
+                let objID = bubble.objectID
+                
+                bContext.perform {
+                    let thisBubble = bContext.object(with: objID) as! Bubble
+                    
+                    let newSession = Session(context: thisBubble.managedObjectContext!)
+                    newSession.created = Date().addingTimeInterval(startDelayCompensation)
+                    
+                    let newPair = Pair(context: thisBubble.managedObjectContext!)
+                    newPair.start = Date().addingTimeInterval(startDelayCompensation)
+                    newSession.addToPairs(newPair)
+                                    
+                    thisBubble.addToSessions(newSession)
+                    
+                    try? bContext.save() //⚠️
+                    
+                    DispatchQueue.main.async {
+                        //repetitive chunk of code ⚠️
+                        bubble.coordinator.update(.user(.start))
+                        bubble.pairBubbleCellCoordinator.update(.user(.start))
+                        
+                        //1 both
+                        self.secretary.addNoteButton_bRank = nil //clear first
+                        self.secretary.addNoteButton_bRank = Int(bubble.rank)
+                        
+                        delayExecution(.now() + 0.3) {
+                            self.secretary.pairBubbleCellNeedsDisplay.toggle()
+                        }
+                    }
+                }
+                                                                
+            case .paused:  /* changes to running */
+                let bContext = PersistenceController.shared.bContext
+                let objID = bubble.objectID
+                
+                bContext.perform {
+                    let thisBubble = bContext.object(with: objID) as! Bubble
+                    
+                    //create new pair, add it to currentSession
+                    let newPair = Pair(context: thisBubble.managedObjectContext!)
+                    newPair.start = Date().addingTimeInterval(startDelayCompensation)
+                    thisBubble.lastSession?.addToPairs(newPair)
+                    
+                    try? bContext.save()
+                    
+                    DispatchQueue.main.async {
+                        //repetitive chunk of code ⚠️
+                        bubble.coordinator.update(.user(.start))
+                        bubble.pairBubbleCellCoordinator.update(.user(.start))
+                        
+                        //1 both
+                        self.secretary.addNoteButton_bRank = nil //clear first
+                        self.secretary.addNoteButton_bRank = Int(bubble.rank)
+                        
+                        delayExecution(.now() + 0.3) {
+                            self.secretary.pairBubbleCellNeedsDisplay.toggle()
+                        }
+                    }
+                }
+                
+            case .running: /* changes to .paused */
+                let bContext = PersistenceController.shared.bContext
+                let objID = bubble.objectID
+                
+                bContext.perform {
+                    let thisBubble = self.controller.grabObj(objID) as! Bubble
+                    let currentPair = thisBubble.lastPair
+                    currentPair?.pause = Date()
+                    
+                    currentPair?.computeDuration(.atPause) {
+                        thisBubble.currentClock += currentPair!.duration
+                        
+                        thisBubble.lastSession?.computeDuration { //completion handler
+                            try? bContext.save()
+                            
+                            DispatchQueue.main.async {
+                                bubble.coordinator.update(.user(.pause))
+                                bubble.pairBubbleCellCoordinator.update(.user(.pause))
+                                
+                                //remove only that
+                                if self.secretary.addNoteButton_bRank == Int(bubble.rank) { self.secretary.addNoteButton_bRank = nil
+                                } //1
+                            }
+                        }
+                    }
+                }
+                
+            case .finished: return
+        }
     }
     
     func endSession(_ bubble:Bubble) {
