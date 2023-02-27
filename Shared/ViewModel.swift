@@ -375,7 +375,7 @@ extension ViewModel {
     ///delta is always zero if user taps start. if user uses start delay, delta is not zero
     func toggleBubbleStart(_ bubble:Bubble, delta:TimeInterval? = nil) {
         if bubble.currentClock <= 0 && bubble.kind != .stopwatch  { return }
-       removeDelay(for: bubble)
+        removeDelay(for: bubble)
         
         let startDelayCompensation = delta ?? 0
         
@@ -394,7 +394,7 @@ extension ViewModel {
                     let newPair = Pair(context: thisBubble.managedObjectContext!)
                     newPair.start = Date().addingTimeInterval(startDelayCompensation)
                     newSession.addToPairs(newPair)
-                                    
+                    
                     thisBubble.addToSessions(newSession)
                     
                     try? bContext.save() //⚠️
@@ -413,7 +413,7 @@ extension ViewModel {
                         }
                     }
                 }
-                                                                
+                
             case .paused:  /* changes to running */
                 let bContext = PersistenceController.shared.bContext
                 let objID = bubble.objectID
@@ -506,7 +506,7 @@ extension ViewModel {
             }
             else { self.createCalendarEventIfRequiredAndSaveToCoreData(for: thisBubble) }
             
-           try? bContext.save() //⚠️ from this moment on, viewContext can see the changes
+            try? bContext.save() //⚠️ from this moment on, viewContext can see the changes
             
             DispatchQueue.main.async {
                 bubble.coordinator.update(.user(.endSession))
@@ -617,8 +617,8 @@ extension ViewModel {
         if !path.isEmpty { path = [] }
         
         //⚠️ do I really need to set to nil?
-//        bubble.coordinator.update(.user(.deleteBubble))
-//        bubble.pairBubbleCellCoordinator.update(.user(.deleteBubble))
+        //        bubble.coordinator.update(.user(.deleteBubble))
+        //        bubble.pairBubbleCellCoordinator.update(.user(.deleteBubble))
         
         DispatchQueue.main.async {
             let bContext = self.controller.bContext
