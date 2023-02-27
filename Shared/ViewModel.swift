@@ -189,14 +189,14 @@ class ViewModel: ObservableObject {
     }
     
     //delete BubbleSticky in List
-    func delete(_ savedNote:BubbleSavedNote) {
+    func deleteBubbleNote(_ savedNote:BubbleSavedNote) {
         let context = PersistenceController.shared.viewContext
         context.delete(savedNote)
         PersistenceController.shared.save()
     }
     
     //delete PairSticky in List
-    func delete(_ savedNote:PairSavedNote) {
+    func deletePairNote(_ savedNote:PairSavedNote) {
         let context = PersistenceController.shared.viewContext
         context.delete(savedNote)
         PersistenceController.shared.save()
