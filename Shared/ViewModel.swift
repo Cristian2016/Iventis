@@ -114,20 +114,6 @@ class ViewModel: ObservableObject {
         try? viewContext.save()
     }
     
-    ///delete all sessions and pairs and make it brandNew
-    func reset(_ bubble:Bubble) {
-        guard !bubble.sessions_.isEmpty else { return }
-        
-        let viewContext = PersistenceController.shared.viewContext
-        bubble.created = Date()
-        bubble.currentClock = bubble.initialClock
-        bubble.sessions?.forEach { viewContext.delete($0 as! Session) }
-        try? viewContext.save()
-        
-        bubble.coordinator.update(.user(.reset))
-        bubble.pairBubbleCellCoordinator.update(.user(.reset))
-    }
-    
     func togglePin(_ bubble:Bubble) {
 //        if bubble.isPinned, Secretary.shared.pinnedBubblesCount == 1 {
 //            secretary.showFavoritesOnly = false
@@ -582,6 +568,53 @@ extension ViewModel {
             DispatchQueue.main.async {
                 bubble.coordinator.update(.user(.endSession))
                 bubble.pairBubbleCellCoordinator.update(.user(.endSession))
+            }
+        }
+    }
+    
+    ///delete history. delete all sessions and pairs and make it brandNew
+    func reset(_ bubble:Bubble) {
+        guard !bubble.sessions_.isEmpty else { return }
+        
+        DispatchQueue.global().async {
+            let objID = bubble.objectID
+            let bContext = self.controller.bContext
+            
+            bContext.perform {
+                let thisBubble = bContext.object(with: objID) as! Bubble
+                
+                thisBubble.created = Date()
+                thisBubble.currentClock = thisBubble.initialClock
+                
+                //batch-delete all sessions
+                let request:NSFetchRequest<NSFetchRequestResult> = Session.fetchRequest()
+                
+                let batchDeleteRequest = NSBatchDeleteRequest(fetchRequest: request)
+                batchDeleteRequest.resultType = .resultTypeObjectIDs
+                
+                do {
+                    let result = try bContext.execute(batchDeleteRequest)
+                    
+                    guard
+                        let deleteResult = result as? NSBatchDeleteResult,
+                        let ids = deleteResult.result as? [NSManagedObjectID]
+                    else { return }
+                    
+                    let changes = [NSDeletedObjectsKey : ids]
+                    
+                    NSManagedObjectContext.mergeChanges(
+                        fromRemoteContextSave: changes, into: [self.controller.viewContext]
+                    )
+//                    try bContext.save()
+                    
+                    DispatchQueue.main.async {
+                        bubble.coordinator.update(.user(.reset))
+                        bubble.pairBubbleCellCoordinator.update(.user(.reset))
+                    }
+                    
+                } catch let error {
+                    print("CoreData pula \(error.localizedDescription)")
+                }
             }
         }
     }
