@@ -579,6 +579,7 @@ extension ViewModel {
         DispatchQueue.global().async {
             let objID = bubble.objectID
             let bContext = self.controller.bContext
+            bContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
             
             bContext.perform {
                 let thisBubble = bContext.object(with: objID) as! Bubble
@@ -602,10 +603,11 @@ extension ViewModel {
                     
                     let changes = [NSDeletedObjectsKey : ids]
                     
+                    try bContext.save()
+                    
                     NSManagedObjectContext.mergeChanges(
                         fromRemoteContextSave: changes, into: [self.controller.viewContext]
                     )
-//                    try bContext.save()
                     
                     DispatchQueue.main.async {
                         bubble.coordinator.update(.user(.reset))
