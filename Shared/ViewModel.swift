@@ -65,13 +65,6 @@ class ViewModel: ObservableObject {
         }
     }
     
-    func deletePair(_ pair:Pair?) {
-        guard let pair = pair else { return }
-        let viewContext = PersistenceController.shared.viewContext
-        viewContext.delete(pair)
-        try? viewContext.save()
-    }
-    
     func toggleSDBStart(_ sdb:StartDelayBubble) {
         UserFeedback.singleHaptic(.heavy)
         sdb.toggleStart()
@@ -584,6 +577,21 @@ extension ViewModel {
                 let thisBubble = bContext.object(with: objID) as! Bubble
                 bContext.delete(thisBubble)
                 
+                try? bContext.save()
+            }
+        }
+    }
+    
+    func deletePair(_ pair:Pair?) {
+        guard let pair = pair else { return }
+        
+        DispatchQueue.global().async {
+            let objID = pair.objectID
+            let bContext = self.controller.bContext
+            
+            bContext.perform {
+                let thisPair = bContext.object(with: objID) as! Pair
+                bContext.delete(thisPair)
                 try? bContext.save()
             }
         }
