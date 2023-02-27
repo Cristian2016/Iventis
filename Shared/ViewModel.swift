@@ -81,33 +81,6 @@ class ViewModel: ObservableObject {
         }
     }
     
-    func deleteSession(_ session:Session) {
-        guard let bubble = session.bubble else { fatalError() }
-        
-        let bContext = controller.bContext
-        let bubbleID = bubble.objectID
-        let sessionID = session.objectID
-        
-        bContext.perform {
-            let thisBubble = bContext.object(with: bubbleID) as! Bubble
-            let thisSession = bContext.object(with: sessionID) as! Session
-            
-            if thisBubble.lastSession == thisSession {
-                thisBubble.currentClock = thisBubble.initialClock
-                
-                DispatchQueue.main.async {
-                    bubble.coordinator.update(.user(.deleteCurrentSession))
-                    bubble.pairBubbleCellCoordinator.update(.user(.deleteCurrentSession))
-                }
-            }
-            
-            bContext.delete(thisSession)
-            
-            do { try bContext.save() } //7
-            catch let error { print(error.localizedDescription) }
-        }
-    }
-    
     func removeAddNoteButton(_ bubble:Bubble) {
         if let bubbleRank = secretary.addNoteButton_bRank, bubbleRank == Int(bubble.rank) {
             secretary.addNoteButton_bRank = nil
@@ -655,6 +628,33 @@ extension ViewModel {
                     bubble.coordinator.colorPublisher.send(color)
                 }
             }
+        }
+    }
+    
+    func deleteSession(_ session:Session) {
+        guard let bubble = session.bubble else { fatalError() }
+        
+        let bContext = controller.bContext
+        let bubbleID = bubble.objectID
+        let sessionID = session.objectID
+        
+        bContext.perform {
+            let thisBubble = bContext.object(with: bubbleID) as! Bubble
+            let thisSession = bContext.object(with: sessionID) as! Session
+            
+            if thisBubble.lastSession == thisSession {
+                thisBubble.currentClock = thisBubble.initialClock
+                
+                DispatchQueue.main.async {
+                    bubble.coordinator.update(.user(.deleteCurrentSession))
+                    bubble.pairBubbleCellCoordinator.update(.user(.deleteCurrentSession))
+                }
+            }
+            
+            bContext.delete(thisSession)
+            
+            do { try bContext.save() } //7
+            catch let error { print(error.localizedDescription) }
         }
     }
 }
