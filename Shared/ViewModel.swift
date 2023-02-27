@@ -272,21 +272,6 @@ class ViewModel: ObservableObject {
         CalendarManager.shared.updateExistingEvent(.notes(pair.session!))
     }
     
-    // MARK: - MoreOptionsView
-    //color change
-    func saveColor(for bubble:Bubble, to newColor:String) {
-        //don't do anything unless user changed color
-        if bubble.color == newColor { return }
-        
-        //model: change color and save coredata
-        bubble.color = newColor
-        PersistenceController.shared.save()
-        
-        UserFeedback.singleHaptic(.medium)
-        
-        bubble.coordinator.colorPublisher.send(Color.bubbleColor(forName: bubble.color))
-    }
-    
     // start delay
     func saveDelay(for bubble:Bubble, _ userEnteredDelay:Int) {
         secretary.theOneAndOnlyEditedSDB?.referenceDelay = Int64(userEnteredDelay)
@@ -637,6 +622,30 @@ extension ViewModel {
                     try bContext.save()
                 } catch let error {
                     print("CoreData error \(error.localizedDescription)")
+                }
+            }
+        }
+    }
+    
+    // MARK: - MoreOptionsView
+    //color change
+    func changeColor(of bubble:Bubble, to newColor:String) {
+        //don't do anything unless user changed color
+        if bubble.color == newColor { return }
+        UserFeedback.singleHaptic(.medium)
+        
+        DispatchQueue.global().async {
+            let bContext = self.controller.bContext
+            let objID = bubble.objectID
+            
+            bContext.perform {
+                let thisBubble = self.controller.grabObj(objID) as! Bubble
+                thisBubble.color = newColor
+                try? bContext.save()
+                
+                let color = Color.bubbleColor(forName: thisBubble.color)
+                DispatchQueue.main.async {
+                    bubble.coordinator.colorPublisher.send(color)
                 }
             }
         }

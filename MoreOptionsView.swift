@@ -174,7 +174,7 @@ struct MoreOptionsView: View {
     }
     
     func saveColor(to colorName: String) {
-        viewModel.saveColor(for: input!.bubble, to: colorName)
+        viewModel.changeColor(of: input!.bubble, to: colorName)
         //dimiss will be called separately
     }
 }

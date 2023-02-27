@@ -29,7 +29,7 @@ struct ColorsGrid: View {
                                 }
                             }
                             .onTapGesture {
-                                viewModel.saveColor(for: bubble, to: tricolor.description)
+                                viewModel.changeColor(of: bubble, to: tricolor.description)
                                 dismissAction()
                             }
                     }
