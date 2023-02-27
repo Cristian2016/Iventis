@@ -581,18 +581,22 @@ extension ViewModel {
                 let thisBubble = bContext.object(with: bubbleID) as! Bubble
                 let thisSession = bContext.object(with: sessionID) as! Session
                 
-                if thisBubble.lastSession == thisSession {
-                    thisBubble.currentClock = thisBubble.initialClock
-                    
-                    DispatchQueue.main.async {
-                        bubble.coordinator.update(.user(.deleteCurrentSession))
-                        bubble.pairBubbleCellCoordinator.update(.user(.deleteCurrentSession))
-                    }
-                }
+                let isLastSession = thisBubble.lastSession == thisSession
                 
                 bContext.delete(thisSession)
                 
-                do { try bContext.save() } //7
+                do {
+                    try bContext.save()
+                    
+                    if isLastSession {
+                        thisBubble.currentClock = thisBubble.initialClock
+                        
+                        DispatchQueue.main.async {
+                            bubble.coordinator.update(.user(.deleteCurrentSession))
+                            bubble.pairBubbleCellCoordinator.update(.user(.deleteCurrentSession))
+                        }
+                    }
+                } //7
                 catch let error { print(error.localizedDescription) }
             }
         }
