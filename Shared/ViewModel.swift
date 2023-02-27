@@ -61,34 +61,36 @@ class ViewModel: ObservableObject {
                       _ color:String,
                       _ note:String? = nil) {
         
-        let bContext = PersistenceController.shared.bContext
-        
-        bContext.perform {
-            let newBubble = Bubble(context: bContext)
-            newBubble.created = Date()
-            newBubble.kind = kind
-            switch kind {
-                case .timer(let initialClock):
-                    newBubble.initialClock = initialClock
-                default:
-                    newBubble.initialClock = 0
-            }
+        DispatchQueue.global().async {
+            let bContext = PersistenceController.shared.bContext
             
-            newBubble.color = color
-            newBubble.rank = Int64(UserDefaults.generateRank())
-            
-            // FIXME: - no more StartDelayBubble!
-            let sdb = StartDelayBubble(context: newBubble.managedObjectContext!)
-            newBubble.sdb = sdb
-            if let note = note {
-                newBubble.note_ = note
-                newBubble.isNoteHidden = false
-            }
-              
-            do {
-                try bContext.save()
-            } catch let error {
-                print("pula CoreData \(error.localizedDescription)")
+            bContext.perform {
+                let newBubble = Bubble(context: bContext)
+                newBubble.created = Date()
+                newBubble.kind = kind
+                switch kind {
+                    case .timer(let initialClock):
+                        newBubble.initialClock = initialClock
+                    default:
+                        newBubble.initialClock = 0
+                }
+                
+                newBubble.color = color
+                newBubble.rank = Int64(UserDefaults.generateRank())
+                
+                // FIXME: - no more StartDelayBubble!
+                let sdb = StartDelayBubble(context: newBubble.managedObjectContext!)
+                newBubble.sdb = sdb
+                if let note = note {
+                    newBubble.note_ = note
+                    newBubble.isNoteHidden = false
+                }
+                  
+                do {
+                    try bContext.save()
+                } catch let error {
+                    print("pula CoreData \(error.localizedDescription)")
+                }
             }
         }
     }
