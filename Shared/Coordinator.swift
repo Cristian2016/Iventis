@@ -85,6 +85,7 @@ class BubbleCellCoordinator {
     @Published private(set) var opacity = Opacity()
     var colorPublisher:Publisher<Color, Never>
     
+    // MARK: - Private API
     private var refresh /* all components */ = false //5
     
     private func task() {

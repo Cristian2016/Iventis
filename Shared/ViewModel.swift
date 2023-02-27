@@ -72,14 +72,6 @@ class ViewModel: ObservableObject {
         try? viewContext.save()
     }
     
-    func togglePin(_ bubble:Bubble) {
-//        if bubble.isPinned, Secretary.shared.pinnedBubblesCount == 1 {
-//            secretary.showFavoritesOnly = false
-//        }
-        bubble.isPinned.toggle()
-        PersistenceController.shared.save()
-    }
-    
     func toggleSDBStart(_ sdb:StartDelayBubble) {
         UserFeedback.singleHaptic(.heavy)
         sdb.toggleStart()
@@ -551,6 +543,23 @@ extension ViewModel {
                 DispatchQueue.main.async {
                     bubble.coordinator.colorPublisher.send(color)
                 }
+            }
+        }
+    }
+    
+    func togglePin(_ bubble:Bubble) {
+//        if bubble.isPinned, Secretary.shared.pinnedBubblesCount == 1 {
+//            secretary.showFavoritesOnly = false
+//        }
+        
+        DispatchQueue.global().async {
+            let bContext = self.controller.bContext
+            let objID = bubble.objectID
+            
+            bContext.perform {
+                let thisBubble = self.controller.grabObj(objID) as! Bubble
+                thisBubble.isPinned.toggle()
+                try? bContext.save()
             }
         }
     }
