@@ -161,13 +161,9 @@ struct TopCell: View {
     
     // MARK: - init
     init?(_ session:Session?, _ sessionRank:Int) {
-        
         guard let session = session else { return nil }
-        
         self.session = session
-                
         self.duration = session.totalDuration.timeComponentsAsStrings
-        
         self.myRank = sessionRank
     }
     
