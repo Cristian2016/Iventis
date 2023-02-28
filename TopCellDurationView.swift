@@ -16,14 +16,26 @@ struct TopCellDurationView: View {
     
     private let myRank:Int
     
-    private func showSeconds() -> Bool {
-        guard let duration = duration else { return false }
-        
-        let condition = (duration.min != "0" || duration.hr != "0")
-        if duration.sec == "0" { return condition ? false : true }
-        return true
+    var body: some View {
+        ZStack {
+            durationView
+        }
+        .onChange(of: session.totalDuration) { newTotalDuration in
+            DispatchQueue.global().async {
+                let components = newTotalDuration.timeComponentsAsStrings
+                DispatchQueue.main.async { self.duration = components }
+            }
+        }
+        .onChange(of: session.pairs_.last?.pause) { newValue in
+            if newValue == nil {
+                print("bubble is running")
+            } else {
+                print("bubble not running")
+            }
+        }
     }
     
+    // MARK: - Legos
     @ViewBuilder
     private var durationView: some View {
         if let duration = duration {
@@ -55,25 +67,16 @@ struct TopCellDurationView: View {
         }
     }
     
-    var body: some View {
-        ZStack {
-            durationView
-        }
-        .onChange(of: session.totalDuration) { newTotalDuration in
-            DispatchQueue.global().async {
-                let components = newTotalDuration.timeComponentsAsStrings
-                DispatchQueue.main.async { self.duration = components }
-            }
-        }
-        .onChange(of: session.pairs_.last?.pause) { newValue in
-            if newValue == nil {
-                print("bubble is running")
-            } else {
-                print("bubble not running")
-            }
-        }
+    // MARK: - Methods
+    private func showSeconds() -> Bool {
+        guard let duration = duration else { return false }
+        
+        let condition = (duration.min != "0" || duration.hr != "0")
+        if duration.sec == "0" { return condition ? false : true }
+        return true
     }
     
+    // MARK: - Init
     init(_ metrics:TopCell.Metrics,
           _ session:Session,
           _ myRank:Int) {
