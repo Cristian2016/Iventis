@@ -13,6 +13,7 @@ struct TopCellDurationView: View {
     
     @StateObject private var session:Session
     @State private var duration: Float.TimeComponentsAsStrings?
+    @State private var isBubbleRunning = false
     
     private let myRank:Int
     
@@ -39,10 +40,8 @@ struct TopCellDurationView: View {
             }
         }
         .onChange(of: session.pairs_.last?.pause) { newValue in
-            if newValue == nil {
-                print("bubble is running")
-            } else {
-                print("bubble not running")
+            if myRank == session.bubble?.sessions_.count {
+                isBubbleRunning = newValue == nil ? true : false
             }
         }
     }
