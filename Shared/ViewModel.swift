@@ -138,36 +138,56 @@ class ViewModel: ObservableObject {
     ///save to CoreData either bubble.note or pair.note
     func save(_ textInput:String, forObject object:NSManagedObject) {
         var note = textInput
-        note.removeWhiteSpaceAtBothEnds()
+        
+        let bContext = PersistenceController.shared.bContext
         
         switch object.entity.name {
             case "Bubble":
                 let bubble = object as! Bubble
-                bubble.note = note
-                bubble.isNoteHidden = false
-
-                //add new item to bubbleHistory
-                let context = bubble.managedObjectContext
-                let newHistoryItem = BubbleSavedNote(context: context!)
-                newHistoryItem.date = Date()
-                newHistoryItem.note = note
-                bubble.addToHistory(newHistoryItem)
+                let objID = bubble.objectID
                 
-                CalendarManager.shared.updateExistingEvent(.title(bubble))
+                bContext.perform {
+                    note.removeWhiteSpaceAtBothEnds()
+                    let theBubble = PersistenceController.shared.grabObj(objID) as! Bubble
+                    theBubble.note = note
+                    theBubble.isNoteHidden = false
+                    
+                    //add new item to bubbleHistory
+                    let newHistoryItem = BubbleSavedNote(context: theBubble.managedObjectContext!)
+                    newHistoryItem.date = Date()
+                    newHistoryItem.note = note
+                    theBubble.addToHistory(newHistoryItem)
+                    
+                    try? bContext.save() //viewContext will see changes from here on
+                    
+                    DispatchQueue.main.async {
+                        CalendarManager.shared.updateExistingEvent(.title(bubble))
+                    }
+                }
                 
             case "Pair" :
                 let pair = object as! Pair
-                pair.note = note
-                pair.isNoteHidden = false
-
-                //add new item to bubbleHistory
-                let context = pair.managedObjectContext
-                let newHistoryItem = PairSavedNote(context: context!)
-                newHistoryItem.date = Date()
-                newHistoryItem.note = note
-                pair.addToHistory(newHistoryItem)
+                let objID = pair.objectID
                 
-                CalendarManager.shared.updateExistingEvent(.notes(pair.session!))
+                bContext.perform {
+                    note.removeWhiteSpaceAtBothEnds()
+                    let thePair = PersistenceController.shared.grabObj(objID) as! Pair
+                    
+                    thePair.note = note
+                    thePair.isNoteHidden = false
+                    
+                    //add new item to bubbleHistory
+                    let newHistoryItem = PairSavedNote(context: thePair.managedObjectContext!)
+                    newHistoryItem.date = Date()
+                    newHistoryItem.note = note
+                    thePair.addToHistory(newHistoryItem)
+                    
+                    try? bContext.save() //viewContext will see changes from here on
+                    
+                    DispatchQueue.main.async {
+                        CalendarManager.shared.updateExistingEvent(.notes(pair.session!))
+                    }
+                }
                 
             default: return
         }
