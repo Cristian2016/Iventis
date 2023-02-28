@@ -128,7 +128,7 @@ public extension Float {
         //how many full minutes
         let min = hrRemaining/60
         //remaining
-        var sec = hrRemaining%60 + addedToSec
+        let sec = hrRemaining%60 + addedToSec
         
         return TimeComponents(hr: hr, min: min, sec: sec, hundredths: fractionalValue)
     }
