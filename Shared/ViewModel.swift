@@ -537,34 +537,32 @@ extension ViewModel {
     func deleteSession(_ session:Session) {
         guard let bubble = session.bubble else { fatalError() }
         
-        DispatchQueue.global().async {
-            let bContext = self.controller.bContext
-            let bubbleID = bubble.objectID
-            let sessionID = session.objectID
+        let bContext = self.controller.bContext
+        let bubbleID = bubble.objectID
+        let sessionID = session.objectID
+        
+        bContext.perform {
+            let thisBubble = bContext.object(with: bubbleID) as! Bubble
+            let thisSession = bContext.object(with: sessionID) as! Session
             
-            bContext.perform {
-                let thisBubble = bContext.object(with: bubbleID) as! Bubble
-                let thisSession = bContext.object(with: sessionID) as! Session
+            //set this property and use it after context was saved
+            let isCurrentSession = thisBubble.lastSession == thisSession
+            
+            bContext.delete(thisSession)
+            
+            do {
+                try bContext.save()
                 
-                //set this property and use it after context was saved
-                let isCurrentSession = thisBubble.lastSession == thisSession
-                
-                bContext.delete(thisSession)
-                
-                do {
-                    try bContext.save()
+                if isCurrentSession {
+                    thisBubble.currentClock = thisBubble.initialClock
                     
-                    if isCurrentSession {
-                        thisBubble.currentClock = thisBubble.initialClock
-                        
-                        DispatchQueue.main.async {
-                            bubble.coordinator.update(.user(.deleteCurrentSession))
-                            bubble.pairBubbleCellCoordinator.update(.user(.deleteCurrentSession))
-                        }
+                    DispatchQueue.main.async {
+                        bubble.coordinator.update(.user(.deleteCurrentSession))
+                        bubble.pairBubbleCellCoordinator.update(.user(.deleteCurrentSession))
                     }
-                } //7
-                catch let error { print(error.localizedDescription) }
-            }
+                }
+            } //7
+            catch let error { print(error.localizedDescription) }
         }
     }
     
@@ -584,7 +582,7 @@ extension ViewModel {
             //reset bubble clock
             thisBubble.currentClock = thisBubble.initialClock
             //mark session as ended
-            thisBubble.lastSession?.isEnded = true
+            thisBubble.lastSession!.isEnded = true
             
             let bubbleWasStillRunningWhenSessionWasEnded = thisBubble.lastPair!.pause == nil
             

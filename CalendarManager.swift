@@ -100,7 +100,7 @@ extension CalendarManager {
     ///creates a new event when the user ends a session
     func createNewEvent(for session: Session?) {
         guard let session = session, session.isEnded, !session.isEventified else { return }
-                
+        
         let pairs = session.pairs_
         let firstPair = pairs.first!
         let lastPair = pairs.last!
@@ -115,11 +115,11 @@ extension CalendarManager {
                  end: lastPair.pause!,
                  session
         )
-                
+        
         //since this method is called on bThread, make sure to save CoreData on mThread
-        DispatchQueue.main.async {
+        session.managedObjectContext?.perform {
             session.isEventified = true
-            PersistenceController.shared.save()
+            try? session.managedObjectContext?.save()
         }
     }
     
