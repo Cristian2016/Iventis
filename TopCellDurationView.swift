@@ -13,19 +13,18 @@ struct TopCellDurationView: View {
     
     @StateObject private var session:Session
     @State private var duration: Float.TimeComponentsAsStrings?
-    @State private var isBubbleRunning = false
-    @State private var showPlaceholder = false
     @State private var showGreaterThenSymbol = false
     
     private let myRank:Int
     
     var body: some View {
         ZStack {
-            if !showPlaceholder {
-                HStack(spacing: 0) {
-                    if isBubbleRunning { Image.greaterThan }
-                    durationView
+            HStack(spacing: 0) {
+                if showGreaterThenSymbol {
+                    Image.greaterThan
+                        .font(.caption2)
                 }
+                durationView
             }
         }
         .onAppear {
@@ -34,10 +33,6 @@ struct TopCellDurationView: View {
                     let components = session.totalDuration.timeComponentsAsStrings
                     if components != .zeroAll {
                         DispatchQueue.main.async { self.duration = components }
-                    } else {
-                        if myRank == session.bubble?.sessions_.count {
-                            showPlaceholder = true
-                        }
                     }
                 }
             }
@@ -46,14 +41,17 @@ struct TopCellDurationView: View {
             if myRank == session.bubble?.sessions_.count {
                 DispatchQueue.global().async {
                     let components = newDuration.timeComponentsAsStrings
-                    DispatchQueue.main.async { self.duration = components }
+                    DispatchQueue.main.async {
+                        self.duration = components
+                        self.showGreaterThenSymbol = false
+                    }
                 }
             }
         }
         .onChange(of: session.pairs_.last?.pause) { pauseDate in
             if myRank == session.bubble?.sessions_.count {
-                isBubbleRunning = pauseDate == nil ? true : false
-                showPlaceholder = (pauseDate == nil) && duration == nil ? true : false
+                let isBubbleRunning = pauseDate == nil
+                showGreaterThenSymbol = isBubbleRunning ? true : false
             }
         }
     }
