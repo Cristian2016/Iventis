@@ -550,12 +550,14 @@ extension ViewModel {
             
             bContext.delete(thisSession)
             
+            if isCurrentSession {
+                thisBubble.currentClock = thisBubble.initialClock
+            }
+            
             do {
                 try bContext.save()
                 
                 if isCurrentSession {
-                    thisBubble.currentClock = thisBubble.initialClock
-                    
                     DispatchQueue.main.async {
                         bubble.coordinator.update(.user(.deleteCurrentSession))
                         bubble.pairBubbleCellCoordinator.update(.user(.deleteCurrentSession))
