@@ -15,6 +15,7 @@ struct TopCellDurationView: View {
     @State private var duration: Float.TimeComponentsAsStrings?
     @State private var isBubbleRunning = false
     @State private var showPlaceholder = false
+    @State private var showGreaterThenSymbol = false
     
     private let myRank:Int
     
@@ -102,15 +103,16 @@ struct TopCellDurationView: View {
     init(_ metrics:TopCell.Metrics,
           _ session:Session,
           _ myRank:Int) {
+        
+        let isLatestSession = myRank == session.bubble?.sessions_.count
+        let isBubbleRunning = session.bubble?.state == .running
+        
+        if isLatestSession && isBubbleRunning {
+            self.showGreaterThenSymbol = (session.totalDuration != 0) ? true : false
+        }
                 
         self.metrics = metrics
         self.myRank = myRank
         _session = StateObject(wrappedValue: session)
-        
-        if myRank == session.bubble?.sessions_.count {
-            let pauseDate = session.pairs_.last?.pause
-            isBubbleRunning = pauseDate == nil ? true : false
-            showPlaceholder = (pauseDate == nil) && duration == nil ? true : false
-        }
     }
 }
