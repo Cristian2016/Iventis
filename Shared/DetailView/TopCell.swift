@@ -82,7 +82,7 @@ struct TopCell: View {
     
     @ViewBuilder
     private var durationView: some View {
-        let _ = print("duration view")
+//        let _ = print("duration view body \(duration!)")
         
         if let duration = duration, shouldDisplayDuration {
             HStack (spacing: 8) {
@@ -173,6 +173,8 @@ struct TopCell: View {
         
         self.duration = result
         self.myRank = sessionRank
+        
+        print("session duration at init \(self.duration ?? .zeroAll)")
     }
     
     // MARK: - Little Helpers

@@ -112,7 +112,13 @@ public extension Float {
         
         let decimalValue = Int(self) //used to compute hr. min, sec
 //        let fractionalValue = Int((self - Float(decimalValue))*100)
-        let fractionalValue = Int(((self - Float(Int(self))) * 100).rounded(.toNearestOrEven))
+        var fractionalValue = Int(((self - Float(Int(self))) * 100).rounded(.toNearestOrEven))
+        
+        var addedToSec = 0
+        if fractionalValue == 100 {
+            fractionalValue = 0
+            addedToSec = 1
+        }
         
         //how many full hours
         let hr = decimalValue/3600
@@ -122,7 +128,7 @@ public extension Float {
         //how many full minutes
         let min = hrRemaining/60
         //remaining
-        let sec = hrRemaining%60
+        var sec = hrRemaining%60 + addedToSec
         
         return TimeComponents(hr: hr, min: min, sec: sec, hundredths: fractionalValue)
     }

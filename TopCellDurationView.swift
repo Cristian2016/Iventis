@@ -9,9 +9,9 @@ import SwiftUI
 
 struct TopCellDurationView: View {
     private let metrics:TopCell.Metrics
-    private let coordinator:PairBubbleCellCoordinator
+//    private let coordinator:PairBubbleCellCoordinator
     
-    private let session:Session
+    @StateObject private var session:Session
     @State private var duration: Float.TimeComponentsAsStrings?
     
     private let myRank:Int
@@ -32,6 +32,11 @@ struct TopCellDurationView: View {
                 DispatchQueue.main.async {
                     self.duration = duration
                 }
+                
+                session.totalDurationAsStrings
+            }
+            .onChange(of: session.totalDurationAsStrings) { newValue in
+                print(newValue, " onChange")
             }
     }
     
@@ -95,11 +100,19 @@ struct TopCellDurationView: View {
             let coordinator = session.bubble?.pairBubbleCellCoordinator
         else { return nil }
         
-        self.coordinator = coordinator
+//        self.coordinator = coordinator
         
         self.metrics = metrics
         self.myRank = myRank
-        self.session = session
+        _session = StateObject(wrappedValue: session)
+        
+        DispatchQueue.global().async {
+            if let data = session.totalDurationAsStrings {
+              let result = try? JSONDecoder().decode(Float.TimeComponentsAsStrings.self, from: data)
+                print(result, " result")
+            }
+        }
+        session.totalDurationAsStrings
     }
     
     private func showSeconds() -> Bool {
