@@ -270,12 +270,8 @@ extension ViewModel {
                     newBubble.note_ = note
                     newBubble.isNoteHidden = false
                 }
-                  
-                do {
-                    try bContext.save()
-                } catch let error {
-                    print("pula CoreData \(error.localizedDescription)")
-                }
+                
+                try? bContext.save()
             }
         }
     }
