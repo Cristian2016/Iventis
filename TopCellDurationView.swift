@@ -14,12 +14,17 @@ struct TopCellDurationView: View {
     @StateObject private var session:Session
     @State private var duration: Float.TimeComponentsAsStrings?
     @State private var isBubbleRunning = false
+    @State private var showPlaceholder = false
     
     private let myRank:Int
     
     var body: some View {
         ZStack {
-            durationView
+            if showPlaceholder {
+                FusedLabel(content: .init(title: "Active", size: .small, color: .label, isFilled: false))
+            } else {
+                durationView
+            }
         }
         .onAppear {
             if duration == nil {
@@ -28,20 +33,24 @@ struct TopCellDurationView: View {
                     if components != .zeroAll {
                         DispatchQueue.main.async { self.duration = components }
                     } else {
-                        
+                        if myRank == session.bubble?.sessions_.count {
+                            showPlaceholder = true
+                        }
                     }
                 }
             }
         }
         .onChange(of: session.totalDuration) { newTotalDuration in
-            DispatchQueue.global().async {
-                let components = newTotalDuration.timeComponentsAsStrings
-                DispatchQueue.main.async { self.duration = components }
+            if myRank == session.bubble?.sessions_.count {
+                DispatchQueue.global().async {
+                    let components = newTotalDuration.timeComponentsAsStrings
+                    DispatchQueue.main.async { self.duration = components }
+                }
             }
         }
         .onChange(of: session.pairs_.last?.pause) { newValue in
             if myRank == session.bubble?.sessions_.count {
-                isBubbleRunning = newValue == nil ? true : false
+                showPlaceholder = newValue == nil ? true : false
             }
         }
     }
