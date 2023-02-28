@@ -40,17 +40,17 @@ struct TopCellDurationView: View {
                 }
             }
         }
-        .onChange(of: session.totalDuration) { newTotalDuration in
+        .onChange(of: session.totalDuration) { newDuration in
             if myRank == session.bubble?.sessions_.count {
                 DispatchQueue.global().async {
-                    let components = newTotalDuration.timeComponentsAsStrings
+                    let components = newDuration.timeComponentsAsStrings
                     DispatchQueue.main.async { self.duration = components }
                 }
             }
         }
-        .onChange(of: session.pairs_.last?.pause) { newValue in
+        .onChange(of: session.pairs_.last?.pause) { pauseDate in
             if myRank == session.bubble?.sessions_.count {
-                showPlaceholder = newValue == nil ? true : false
+                showPlaceholder = pauseDate == nil ? true : false
             }
         }
     }
