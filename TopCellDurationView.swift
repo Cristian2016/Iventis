@@ -27,33 +27,9 @@ struct TopCellDurationView: View {
                 durationView
             }
         }
-        .onAppear {
-            if duration == nil {
-                DispatchQueue.global().async {
-                    let components = session.totalDuration.timeComponentsAsStrings
-                    if components != .zeroAll {
-                        DispatchQueue.main.async { self.duration = components }
-                    }
-                }
-            }
-        }
-        .onChange(of: session.totalDuration) { newDuration in
-            if myRank == session.bubble?.sessions_.count {
-                DispatchQueue.global().async {
-                    let components = newDuration.timeComponentsAsStrings
-                    DispatchQueue.main.async {
-                        self.duration = components
-                        self.showGreaterThenSymbol = false
-                    }
-                }
-            }
-        }
-        .onChange(of: session.pairs_.last?.pause) { pauseDate in
-            if myRank == session.bubble?.sessions_.count {
-                let isBubbleRunning = pauseDate == nil
-                showGreaterThenSymbol = isBubbleRunning ? true : false
-            }
-        }
+        .onAppear { handleOnAppear() }
+        .onChange(of: session.totalDuration) { handleNewDuration($0) }
+        .onChange(of: session.pairs_.last?.pause) { handlePauseDate($0) }
     }
     
     // MARK: - Legos
@@ -97,10 +73,40 @@ struct TopCellDurationView: View {
         return true
     }
     
+    private func handleOnAppear() {
+        if duration == nil {
+            DispatchQueue.global().async {
+                let components = session.totalDuration.timeComponentsAsStrings
+                if components != .zeroAll {
+                    DispatchQueue.main.async { self.duration = components }
+                }
+            }
+        }
+    }
+    
+    private func handleNewDuration(_ newDuration:Float) {
+        if myRank == session.bubble?.sessions_.count {
+            DispatchQueue.global().async {
+                let components = newDuration.timeComponentsAsStrings
+                DispatchQueue.main.async {
+                    self.duration = components
+                    self.showGreaterThenSymbol = false
+                }
+            }
+        }
+    }
+    
+    private func handlePauseDate(_ pauseDate:Date?) {
+        if myRank == session.bubble?.sessions_.count {
+            let isBubbleRunning = pauseDate == nil
+            showGreaterThenSymbol = isBubbleRunning ? true : false
+        }
+    }
+    
     // MARK: - Init
     init(_ metrics:TopCell.Metrics,
-          _ session:Session,
-          _ myRank:Int) {
+         _ session:Session,
+         _ myRank:Int) {
         
         let isLatestSession = myRank == session.bubble?.sessions_.count
         let isBubbleRunning = session.bubble?.state == .running
@@ -108,7 +114,7 @@ struct TopCellDurationView: View {
         if isLatestSession && isBubbleRunning {
             self.showGreaterThenSymbol = (session.totalDuration != 0) ? true : false
         }
-                
+        
         self.metrics = metrics
         self.myRank = myRank
         _session = StateObject(wrappedValue: session)
