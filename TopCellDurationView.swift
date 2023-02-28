@@ -20,10 +20,11 @@ struct TopCellDurationView: View {
     
     var body: some View {
         ZStack {
-            if showPlaceholder {
-                FusedLabel(content: .init(title: "Active", size: .small, color: .label, isFilled: false))
-            } else {
-                durationView
+            if !showPlaceholder {
+                HStack(spacing: 0) {
+                    if isBubbleRunning { Image.greaterThan }
+                    durationView
+                }
             }
         }
         .onAppear {
@@ -50,7 +51,8 @@ struct TopCellDurationView: View {
         }
         .onChange(of: session.pairs_.last?.pause) { pauseDate in
             if myRank == session.bubble?.sessions_.count {
-                showPlaceholder = pauseDate == nil ? true : false
+                isBubbleRunning = pauseDate == nil ? true : false
+                showPlaceholder = (pauseDate == nil) && duration == nil ? true : false
             }
         }
     }
@@ -104,5 +106,11 @@ struct TopCellDurationView: View {
         self.metrics = metrics
         self.myRank = myRank
         _session = StateObject(wrappedValue: session)
+        
+        if myRank == session.bubble?.sessions_.count {
+            let pauseDate = session.pairs_.last?.pause
+            isBubbleRunning = pauseDate == nil ? true : false
+            showPlaceholder = (pauseDate == nil) && duration == nil ? true : false
+        }
     }
 }

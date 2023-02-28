@@ -45,7 +45,7 @@ public extension Image {
     static let longPress = Image(systemName:"target")
     static let leftSwipe = Image(systemName:"arrow.left.circle.fill")
     static let scrollToTop = Image(systemName: "arrow.up.to.line.compact")
-    static let greaterThan = Image(systemName: "greaterthan.circle.fill")
+    static let greaterThan = Image(systemName: "greaterthan")
 }
 
 public extension URL {
