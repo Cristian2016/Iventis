@@ -23,7 +23,7 @@ struct TopCell: View {
     // MARK: -
     var body: some View {
         if !session.isFault {
-            let _ = print("Topcell body")
+//            let _ = print("Topcell body")
             HStack {
                 ZStack {
                     sessionRankView

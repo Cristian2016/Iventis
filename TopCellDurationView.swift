@@ -18,49 +18,43 @@ struct TopCellDurationView: View {
     
     @State private var isPairBubbleCellRunning = false
     
+        private func showSeconds() -> Bool {
+            guard let duration = duration else { return false }
+    
+            let condition = (duration.min != "0" || duration.hr != "0")
+            if duration.sec == "0" { return condition ? false : true }
+            return true
+        }
+    
     @ViewBuilder
     private var durationView: some View {
-        //        let _ = print("duration view body \(duration!)")
-        
-        HStack {
-            Text(duration?.hr ?? "e")
-            Text(duration?.min ?? "e")
-            Text(duration?.sec ?? "e")
+        if let duration = duration {
+            HStack (spacing: 8) {
+                //hr
+                if duration.hr != "0" {
+                    HStack (alignment:.firstTextBaseline ,spacing: 0) {
+                        Text(duration.hr).font(metrics.durationFont)
+                        Text("h").font(metrics.durationComponentsFont)
+                    }
+                }
+                
+                //min
+                if duration.min != "0" {
+                    HStack (alignment:.firstTextBaseline ,spacing: 0) {
+                        Text(duration.min).font(metrics.durationFont)
+                        Text("m").font(metrics.durationComponentsFont)
+                    }
+                }
+                
+                //sec
+                if showSeconds() {
+                    HStack (alignment:.firstTextBaseline ,spacing: 0) {
+                        Text(duration.sec + "." + duration.hundredths).font(metrics.durationFont)
+                        Text("s").font(metrics.durationComponentsFont)
+                    }
+                }
+            }
         }
-        
-        //    private func showSeconds() -> Bool {
-        //        guard let duration = duration else { return false }
-        //
-        //        let condition = (duration.min != "0" || duration.hr != "0")
-        //        if duration.sec == "0" { return condition ? false : true }
-        //        return true
-        //    }
-        
-//        HStack (spacing: 8) {
-//            //hr
-//            if duration.hr != "0" {
-//                HStack (alignment:.firstTextBaseline ,spacing: 0) {
-//                    Text(duration.hr).font(metrics.durationFont)
-//                    Text("h").font(metrics.durationComponentsFont)
-//                }
-//            }
-//
-//            //min
-//            if duration.min != "0" {
-//                HStack (alignment:.firstTextBaseline ,spacing: 0) {
-//                    Text(duration.min).font(metrics.durationFont)
-//                    Text("m").font(metrics.durationComponentsFont)
-//                }
-//            }
-//
-//            //sec
-//            if showSeconds() {
-//                HStack (alignment:.firstTextBaseline ,spacing: 0) {
-//                    Text(duration.sec + "." + duration.hundredths).font(metrics.durationFont)
-//                    Text("s").font(metrics.durationComponentsFont)
-//                }
-//            }
-//        }
     }
     
     var body: some View {
