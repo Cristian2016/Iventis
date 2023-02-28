@@ -9,22 +9,20 @@ import SwiftUI
 
 struct TopCellDurationView: View {
     private let metrics:TopCell.Metrics
-//    private let coordinator:PairBubbleCellCoordinator
+    //    private let coordinator:PairBubbleCellCoordinator
     
     @StateObject private var session:Session
     @State private var duration: Float.TimeComponentsAsStrings?
     
     private let myRank:Int
     
-    @State private var isPairBubbleCellRunning = false
-    
-        private func showSeconds() -> Bool {
-            guard let duration = duration else { return false }
-    
-            let condition = (duration.min != "0" || duration.hr != "0")
-            if duration.sec == "0" { return condition ? false : true }
-            return true
-        }
+    private func showSeconds() -> Bool {
+        guard let duration = duration else { return false }
+        
+        let condition = (duration.min != "0" || duration.hr != "0")
+        if duration.sec == "0" { return condition ? false : true }
+        return true
+    }
     
     @ViewBuilder
     private var durationView: some View {
