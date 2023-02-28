@@ -16,21 +16,21 @@ struct TopCell: View {
     private let session:Session
     private let myRank:Int
             
-    private let duration: Float.TimeComponentsAsStrings?
+    @State private var duration: Float.TimeComponentsAsStrings?
     
     private let metrics = Metrics()
     
     // MARK: -
     var body: some View {
         if !session.isFault {
+            let _ = print("Topcell body")
             HStack {
                 ZStack {
                     sessionRankView
                     Push(.bottomLeft) {
                         VStack (alignment:.leading, spacing: metrics.dateDurationViewsSpacing) {
                             dateView
-                            durationView.padding(2)
-//                            TopCellDurationView(metrics, session, myRank)
+                            TopCellDurationView(metrics, session, myRank).padding(2)
                         }
                         .padding(metrics.edgeInset)
                     }
@@ -80,39 +80,6 @@ struct TopCell: View {
         } else { EmptyView() }
     }
     
-    @ViewBuilder
-    private var durationView: some View {
-//        let _ = print("duration view body \(duration!)")
-        
-        if let duration = duration, shouldDisplayDuration {
-            HStack (spacing: 8) {
-                //hr
-                if duration.hr != "0" {
-                    HStack (alignment:.firstTextBaseline ,spacing: 0) {
-                        Text(duration.hr).font(metrics.durationFont)
-                        Text("h").font(metrics.durationComponentsFont)
-                    }
-                }
-                
-                //min
-                if duration.min != "0" {
-                    HStack (alignment:.firstTextBaseline ,spacing: 0) {
-                        Text(duration.min).font(metrics.durationFont)
-                        Text("m").font(metrics.durationComponentsFont)
-                    }
-                }
-                
-                //sec
-                if showSeconds() {
-                    HStack (alignment:.firstTextBaseline ,spacing: 0) {
-                        Text(duration.sec + "." + duration.hundredths).font(metrics.durationFont)
-                        Text("s").font(metrics.durationComponentsFont)
-                    }
-                }
-            }
-        }
-    }
-    
     private var backgroundView: some View {
         RoundedRectangle(cornerRadius: metrics.roundedRectRadius).fill(Color.clear)
             .padding([.trailing, .leading], 2)
@@ -141,14 +108,6 @@ struct TopCell: View {
         withAnimation { needlePosition.wrappedValue = latestSessionRank ? -1 : myRank }
     }
     
-    private func showSeconds() -> Bool {
-        guard let duration = duration else { return false }
-        
-        let condition = (duration.min != "0" || duration.hr != "0")
-        if duration.sec == "0" { return condition ? false : true }
-        return true
-    }
-    
     private var pairBubbleCellShows: Bool { !session.isLastPairClosed }
     
     private var shouldDisplayDuration:Bool {
@@ -163,7 +122,7 @@ struct TopCell: View {
     init?(_ session:Session?, _ sessionRank:Int) {
         guard let session = session else { return nil }
         self.session = session
-        self.duration = session.totalDuration.timeComponentsAsStrings
+//        _session = StateObject(wrappedValue: session)
         self.myRank = sessionRank
     }
     
