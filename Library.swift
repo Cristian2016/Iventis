@@ -112,7 +112,7 @@ public extension Float {
         
         let decimalValue = Int(self) //used to compute hr. min, sec
 //        let fractionalValue = Int((self - Float(decimalValue))*100)
-        var fractionalValue = Int(((self - Float(Int(self))) * 100).rounded(.toNearestOrEven))
+        var fractionalValue = Int(((self - Float(decimalValue)) * 100).rounded(.toNearestOrEven))
         
         var addedToSec = 0
         if fractionalValue == 100 {

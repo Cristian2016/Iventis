@@ -12,7 +12,6 @@ struct TopCellDurationView: View {
 //    private let coordinator:PairBubbleCellCoordinator
     
     @StateObject private var session:Session
-    @State private var duration: Float.TimeComponentsAsStrings?
     
     private let myRank:Int
     
@@ -20,24 +19,8 @@ struct TopCellDurationView: View {
     
     var body: some View {
         ZStack {
-            if let duration = duration {
-                Text(duration.hr + duration.min + duration.sec)
-            }
+            EmptyView()
         }
-            .task {
-                print("task")
-                guard let data = session.totalDurationAsStrings else { return }
-                guard let duration = try? JSONDecoder().decode(Float.TimeComponentsAsStrings.self, from: data) else { return }
-                
-                DispatchQueue.main.async {
-                    self.duration = duration
-                }
-                
-                session.totalDurationAsStrings
-            }
-            .onChange(of: session.totalDurationAsStrings) { newValue in
-                print(newValue, " onChange")
-            }
     }
     
 //    var body: some View {
@@ -105,20 +88,5 @@ struct TopCellDurationView: View {
         self.metrics = metrics
         self.myRank = myRank
         _session = StateObject(wrappedValue: session)
-        
-        DispatchQueue.global().async {
-            if let data = session.totalDurationAsStrings {
-              let result = try? JSONDecoder().decode(Float.TimeComponentsAsStrings.self, from: data)
-                print(result, " result")
-            }
-        }
-        session.totalDurationAsStrings
-    }
-    
-    private func showSeconds() -> Bool {
-        guard let duration = duration else { return false }
-        let condition = (duration.min != "0" || duration.hr != "0")
-        if duration.sec == "0" { return condition ? false : true }
-        return true
     }
 }

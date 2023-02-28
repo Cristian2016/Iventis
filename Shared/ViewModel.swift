@@ -397,23 +397,20 @@ extension ViewModel {
                     let currentPair = thisBubble.lastPair
                     currentPair?.pause = Date()
                     
-                    currentPair?.computeDuration(.atPause) {
+                    currentPair?.computeDuration(.atPause) { //completion handler
                         thisBubble.currentClock += currentPair!.duration
                         
                         thisBubble.lastSession?.computeDuration { //completion handler
                             
                             do {
                                 try bContext.save()
-                                let dur = thisBubble.lastSession!.totalDuration
-                                delayExecution(.now() + 0.1) {
-                                    DispatchQueue.main.async {
-                                        bubble.coordinator.update(.user(.pause))
-                                        bubble.pairBubbleCellCoordinator.update(.user(.pause))
-                                        
-                                        //remove only that
-                                        if self.secretary.addNoteButton_bRank == Int(bubble.rank) { self.secretary.addNoteButton_bRank = nil
-                                        } //1
-                                    }
+                                DispatchQueue.main.async {
+                                    bubble.coordinator.update(.user(.pause))
+                                    bubble.pairBubbleCellCoordinator.update(.user(.pause))
+                                    
+                                    //remove only that
+                                    if self.secretary.addNoteButton_bRank == Int(bubble.rank) { self.secretary.addNoteButton_bRank = nil
+                                    } //1
                                 }
                             }
                             catch let error { print(error.localizedDescription) }

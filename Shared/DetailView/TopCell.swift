@@ -165,16 +165,10 @@ struct TopCell: View {
         guard let session = session else { return nil }
         
         self.session = session
+                
+        self.duration = session.totalDuration.timeComponentsAsStrings
         
-        let decoder = JSONDecoder()
-        let result = try? decoder.decode(Float.TimeComponentsAsStrings.self, from: session.totalDurationAsStrings ?? Data())
-        
-        // FIXME: - doing twice the work and decodes data here, instead on a background thread
-        
-        self.duration = result
         self.myRank = sessionRank
-        
-        print("session duration at init \(self.duration ?? .zeroAll)")
     }
     
     // MARK: - Little Helpers

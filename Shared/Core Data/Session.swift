@@ -8,6 +8,7 @@
 
 import Foundation
 import CoreData
+import MyPackage
 
 
 public class Session: NSManagedObject {
@@ -23,13 +24,7 @@ public class Session: NSManagedObject {
         guard !pairs.isEmpty,
               let lastPairDuration = pairs.last?.duration else { fatalError() }
         
-        //encode Data and set session.totalDurationAsStrings
-        let data = try? JSONEncoder().encode(totalDuration.timeComponentsAsStrings)
-        
-        totalDurationAsStrings = data
         totalDuration += lastPairDuration
-        
-        print(totalDuration, " totalDuration session")
         
         completion()
     }
