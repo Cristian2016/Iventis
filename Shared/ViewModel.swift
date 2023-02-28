@@ -371,7 +371,7 @@ extension ViewModel {
                     newPair.start = Date().addingTimeInterval(startDelayCompensation)
                     thisBubble.lastSession?.addToPairs(newPair)
                     
-                    try? bContext.save()
+                    try? bContext.save() //this also makes changes visible to the viewContext as well
                     
                     DispatchQueue.main.async {
                         //repetitive chunk of code ⚠️
@@ -401,7 +401,9 @@ extension ViewModel {
                         thisBubble.currentClock += currentPair!.duration
                         
                         thisBubble.lastSession?.computeDuration { //completion handler
-                            try? bContext.save()
+                            
+                            do { try bContext.save() }
+                            catch let error { print(error.localizedDescription) }
                             
                             DispatchQueue.main.async {
                                 bubble.coordinator.update(.user(.pause))

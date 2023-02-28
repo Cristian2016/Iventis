@@ -15,7 +15,7 @@ public class Session: NSManagedObject {
 //        print("session deinit")
     }
     
-    //⚠️ implement on backgroundthread. warning: wait until pair computes its duration and then compute session.totalduration!!!
+    //⚠️ will run on a backgroundthread. wait until pair computes its duration and then compute session.totalduration!
     func computeDuration(completion: @escaping () -> Void) {
         
         let pairs = self.pairs_
@@ -28,6 +28,8 @@ public class Session: NSManagedObject {
         
         totalDurationAsStrings = data
         totalDuration += lastPairDuration
+        
+        print(totalDuration, " totalDuration session")
         
         completion()
     }
