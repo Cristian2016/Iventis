@@ -62,24 +62,22 @@ struct TopCellDurationView: View {
         .onChange(of: session.totalDuration) { newTotalDuration in
             DispatchQueue.global().async {
                 let components = newTotalDuration.timeComponentsAsStrings
-                DispatchQueue.main.async {
-                    print(components)
-                    self.duration = components
-                }
+                DispatchQueue.main.async { self.duration = components }
+            }
+        }
+        .onChange(of: session.pairs_.last?.pause) { newValue in
+            if newValue == nil {
+                print("bubble is running")
+            } else {
+                print("bubble not running")
             }
         }
     }
     
-    init?(_ metrics:TopCell.Metrics,
+    init(_ metrics:TopCell.Metrics,
           _ session:Session,
           _ myRank:Int) {
-        
-        guard
-            let coordinator = session.bubble?.pairBubbleCellCoordinator
-        else { return nil }
-        
-        //        self.coordinator = coordinator
-        
+                
         self.metrics = metrics
         self.myRank = myRank
         _session = StateObject(wrappedValue: session)
