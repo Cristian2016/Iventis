@@ -170,7 +170,7 @@ public extension Float {
         static let zeroAll = TimeComponents(hr: 0, min: 0, sec: 0, hundredths: 0)
     }
     
-    struct TimeComponentsAsStrings:Encodable, Decodable {
+    struct TimeComponentsAsStrings:Encodable, Decodable, Equatable {
         let hr:String
         let min:String
         let sec:String

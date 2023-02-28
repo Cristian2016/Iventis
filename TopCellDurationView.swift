@@ -20,6 +20,18 @@ struct TopCellDurationView: View {
         ZStack {
             durationView
         }
+        .onAppear {
+            if duration == nil {
+                DispatchQueue.global().async {
+                    let components = session.totalDuration.timeComponentsAsStrings
+                    if components != .zeroAll {
+                        DispatchQueue.main.async { self.duration = components }
+                    } else {
+                        
+                    }
+                }
+            }
+        }
         .onChange(of: session.totalDuration) { newTotalDuration in
             DispatchQueue.global().async {
                 let components = newTotalDuration.timeComponentsAsStrings
