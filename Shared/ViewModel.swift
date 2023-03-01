@@ -249,8 +249,14 @@ extension ViewModel {
         let bContext = controller.bContext
         let objID = bubble.objectID
         
+        bubble.managedObjectContext?.perform {
+            bubble.coordinator = nil
+            bubble.pairBubbleCellCoordinator.update(.user(.deleteBubble))
+        }
+        
         bContext.perform {
             let thisBubble = bContext.object(with: objID) as! Bubble
+            
             bContext.delete(thisBubble)
             
             //both contexts must save

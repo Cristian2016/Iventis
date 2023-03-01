@@ -47,10 +47,9 @@ class PairBubbleCellCoordinator {
                         cancellable = []
                         
                     case .deleteBubble:
-                        stop = true
+                        cancellable = []
                         isPairBubbleCellRunning = false
                         components = Components("0", "0", "0")
-                        cancellable = []
                         NotificationCenter.default.removeObserver(self, name: .detailViewVisible, object: bubble)
                 }
         }
