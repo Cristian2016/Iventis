@@ -241,6 +241,41 @@ extension ViewModel {
                     newBubble.isNoteHidden = false
                 }
                 PersistenceController.shared.save(bContext)
+                
+                delayExecution(.now() + 3) {
+                    print(PersistenceController.shared.bContext.registeredObjects.count)
+                    DispatchQueue.main.async {
+                        print(PersistenceController.shared.viewContext.registeredObjects.count)
+                    }
+                }
+            }
+        }
+    }
+    
+    func deleteBubble(_ bubble:Bubble) {
+        //if unpinned are hidden & bubble to delete is pinned and pinned section has only one item, unhide unpinned
+        //        if secretary.showFavoritesOnly, Secretary.shared.pinnedBubblesCount == 1 {
+        //            secretary.showFavoritesOnly = false
+        //        }
+        if !path.isEmpty { path = [] }
+        
+        DispatchQueue.main.async {
+            let bContext = self.controller.bContext
+            let objID = bubble.objectID
+            
+            bContext.perform {
+                let thisBubble = bContext.object(with: objID) as! Bubble
+                bContext.delete(thisBubble)
+                
+                PersistenceController.shared.save(bContext)
+                DispatchQueue.main.async { PersistenceController.shared.save() }
+                
+                delayExecution(.now() + 3) {
+                    print(PersistenceController.shared.bContext.registeredObjects.count)
+                    DispatchQueue.main.async {
+                        print(PersistenceController.shared.viewContext.registeredObjects.count)
+                    }
+                }
             }
         }
     }
@@ -454,30 +489,6 @@ extension ViewModel {
     }
     
     // MARK: -
-    func deleteBubble(_ bubble:Bubble) {
-        //if unpinned are hidden & bubble to delete is pinned and pinned section has only one item, unhide unpinned
-        //        if secretary.showFavoritesOnly, Secretary.shared.pinnedBubblesCount == 1 {
-        //            secretary.showFavoritesOnly = false
-        //        }
-        if !path.isEmpty { path = [] }
-        
-        //⚠️ do I really need to set to nil?
-        //        bubble.coordinator.update(.user(.deleteBubble))
-        //        bubble.pairBubbleCellCoordinator.update(.user(.deleteBubble))
-        
-        DispatchQueue.main.async {
-            let bContext = self.controller.bContext
-            let objID = bubble.objectID
-            
-            bContext.perform {
-                let thisBubble = bContext.object(with: objID) as! Bubble
-                bContext.delete(thisBubble)
-                
-                PersistenceController.shared.save(bContext)
-            }
-        }
-    }
-    
     func deletePair(_ pair:Pair?) {
         guard let pair = pair else { return }
         
