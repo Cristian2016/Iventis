@@ -295,7 +295,7 @@ extension ViewModel {
                     //this also makes changes visible to the viewContext as well
                     self.controller.save(bContext) //⚠️ no need to save vContext
                     
-                    DispatchQueue.main.async {
+                    DispatchQueue.main.async { //UI stuff
                         //repetitive chunk of code ⚠️
                         bubble.coordinator.update(.user(.start))
                         bubble.pairBubbleCellCoordinator.update(.user(.start))
@@ -322,7 +322,7 @@ extension ViewModel {
                     //this also makes changes visible to the viewContext as well
                     PersistenceController.shared.save(bContext) //⚠️ no need to save vContext
                     
-                    DispatchQueue.main.async {
+                    DispatchQueue.main.async { //UI stuff
                         //repetitive chunk of code ⚠️
                         bubble.coordinator.update(.user(.start))
                         bubble.pairBubbleCellCoordinator.update(.user(.start))
