@@ -299,9 +299,7 @@ extension ViewModel {
                         //repetitive chunk of code ⚠️
                         bubble.coordinator.update(.user(.start))
                         bubble.pairBubbleCellCoordinator.update(.user(.start))
-                        
-//                        self.controller.save() //viewContext.save() on mainQueue no need to save??
-                        
+                                                
                         //1 both
                         self.secretary.addNoteButton_bRank = nil //clear first
                         self.secretary.addNoteButton_bRank = Int(bubble.rank)
