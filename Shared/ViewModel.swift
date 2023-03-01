@@ -252,17 +252,15 @@ extension ViewModel {
         //        }
         if !path.isEmpty { path = [] }
         
-        DispatchQueue.main.async {
-            let bContext = self.controller.bContext
-            let objID = bubble.objectID
+        let bContext = self.controller.bContext
+        let objID = bubble.objectID
+        
+        bContext.perform {
+            let thisBubble = bContext.object(with: objID) as! Bubble
+            bContext.delete(thisBubble)
             
-            bContext.perform {
-                let thisBubble = bContext.object(with: objID) as! Bubble
-                bContext.delete(thisBubble)
-                
-                PersistenceController.shared.save(bContext)
-                DispatchQueue.main.async { PersistenceController.shared.save() }
-            }
+            PersistenceController.shared.save(bContext)
+            DispatchQueue.main.async { PersistenceController.shared.save() }
         }
     } //9
     
