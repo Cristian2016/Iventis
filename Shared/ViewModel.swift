@@ -372,7 +372,7 @@ extension ViewModel {
             let objID = bubble.objectID
             let bContext = self.pController.bContext
             
-            bContext.perform {
+            bContext.perform {ok
                 let thisBubble = bContext.object(with: objID) as! Bubble
                 
                 thisBubble.created = Date()
@@ -380,6 +380,7 @@ extension ViewModel {
                 
                 //batch-delete all sessions
                 let request:NSFetchRequest<NSFetchRequestResult> = Session.fetchRequest()
+                request.predicate = NSPredicate(format: "bubble.rank == %i", bubble.rank)
                 
                 let batchDeleteRequest = NSBatchDeleteRequest(fetchRequest: request)
                 batchDeleteRequest.resultType = .resultTypeObjectIDs
