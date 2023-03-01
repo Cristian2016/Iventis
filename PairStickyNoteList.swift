@@ -91,7 +91,6 @@ struct PairStickyNoteList: View {
     
     ///when user selects an existing note instead of typing in a new note
     private func selectExitingNote(_ note:String) {
-        print(#function)
         DispatchQueue.global().async {
             var trimmedNote = note
             trimmedNote.removeWhiteSpaceAtBothEnds()
@@ -105,7 +104,7 @@ struct PairStickyNoteList: View {
                 let thisPair = PersistenceController.shared.grabObj(objID) as! Pair
                 
                 //set pair.note and show note
-                thisPair.note = note
+                thisPair.note = trimmedNote
                 thisPair.isNoteHidden = false
                 
                 PersistenceController.shared.save(bContext)
