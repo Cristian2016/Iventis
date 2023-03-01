@@ -89,7 +89,7 @@ struct TopCellDurationView: View {
                 let components = newDuration.timeComponentsAsStrings
                 DispatchQueue.main.async {
                     self.duration = components
-                    self.showGreaterThenSymbol = false
+                    withAnimation { self.showGreaterThenSymbol = false }
                 }
             }
         }
@@ -98,7 +98,7 @@ struct TopCellDurationView: View {
     private func handlePauseDate(_ pauseDate:Date?) {
         if myRank == session.bubble?.sessions_.count {
             let isBubbleRunning = pauseDate == nil
-            showGreaterThenSymbol = isBubbleRunning ? true : false
+            withAnimation { showGreaterThenSymbol = isBubbleRunning ? true : false }
         }
     }
     
