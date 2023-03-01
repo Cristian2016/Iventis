@@ -259,6 +259,7 @@ extension ViewModel {
             let thisBubble = bContext.object(with: objID) as! Bubble
             bContext.delete(thisBubble)
             
+            //both contexts must save
             PersistenceController.shared.save(bContext)
             DispatchQueue.main.async { PersistenceController.shared.save() }
         }

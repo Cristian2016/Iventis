@@ -24,23 +24,25 @@ struct BubbleCell: View {
         
     // MARK: - Body
     var body: some View {
-        let _ = print("BubbleCell \(bubble.color ?? "nocolor") body")
-        ZStack {
-            ThreeCircles(bubble: bubble, metrics: metrics)
-            ThreeLabels(metrics.timeComponentsFontSize, bubble)
-        }
-        .overlay { if bubble.hasCalendar && noNote { calendarSymbol }}
-        .overlay { stickyNote }
-        .overlay { CalendarEventCreatedConfirmation(rank: bubble.rank) } //1
-        .overlay { CalendarEventRemovedConfirmation(rank: bubble.rank) } //1
-        .listRowSeparator(.hidden)
-        .swipeActions(edge: .leading, allowsFullSwipe: true) {
-            toggleFavoriteButton
-            toggleCalendarButton
-        }
-        .swipeActions(edge: .trailing, allowsFullSwipe: true) {
-            deleteActionButton
-            moreOptionsButton
+        if !bubble.isFault {
+            let _ = print("BubbleCell \(bubble.color ?? "nocolor") body")
+            ZStack {
+                ThreeCircles(bubble: bubble, metrics: metrics)
+                ThreeLabels(metrics.timeComponentsFontSize, bubble)
+            }
+            .overlay { if bubble.hasCalendar && noNote { calendarSymbol }}
+            .overlay { stickyNote }
+            .overlay { CalendarEventCreatedConfirmation(rank: bubble.rank) } //1
+            .overlay { CalendarEventRemovedConfirmation(rank: bubble.rank) } //1
+            .listRowSeparator(.hidden)
+            .swipeActions(edge: .leading, allowsFullSwipe: true) {
+                toggleFavoriteButton
+                toggleCalendarButton
+            }
+            .swipeActions(edge: .trailing, allowsFullSwipe: true) {
+                deleteActionButton
+                moreOptionsButton
+            }
         }
     }
     
