@@ -102,7 +102,6 @@ struct SDButton: View {
             }
     }
     func toggleStart() {
-        viewModel.toggleSDBStart(sdb)
         isTapped.toggle()
     }
 }

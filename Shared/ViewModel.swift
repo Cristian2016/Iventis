@@ -60,16 +60,10 @@ class ViewModel: ObservableObject {
     
     // MARK: - User Intents
     //from PaletteView and...
-    
     func removeAddNoteButton(_ bubble:Bubble) {
         if let bubbleRank = secretary.addNoteButton_bRank, bubbleRank == Int(bubble.rank) {
             secretary.addNoteButton_bRank = nil
         }
-    }
-    
-    func toggleSDBStart(_ sdb:StartDelayBubble) {
-        UserFeedback.singleHaptic(.heavy)
-        sdb.toggleStart()
     }
     
     func showMoreOptions(for bubble:Bubble) {
@@ -261,7 +255,9 @@ extension ViewModel {
             
             //both contexts must save
             PersistenceController.shared.save(bContext)
-            DispatchQueue.main.async { PersistenceController.shared.save() }
+            DispatchQueue.main.async {
+                PersistenceController.shared.save()
+            }
         }
     } //9
     
@@ -290,6 +286,7 @@ extension ViewModel {
                     thisBubble.addToSessions(newSession)
                     
                     PersistenceController.shared.save(bContext) //⚠️
+                    print(PersistenceController.shared.bContext.registeredObjects.count)
                     
                     DispatchQueue.main.async {
                         //repetitive chunk of code ⚠️
