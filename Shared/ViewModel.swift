@@ -532,14 +532,15 @@ extension ViewModel {
             thisBubble.currentClock = thisBubble.initialClock
             thisBubble.lastSession!.isEnded = true
             
-            let bubbleWasStillRunningWhenSessionWasEnded = thisBubble.lastPair!.pause == nil
+            //when user ended session, was bubble still running?
+            let bubbleIsRunning = thisBubble.lastPair!.pause == nil
             
-            if bubbleWasStillRunningWhenSessionWasEnded {
+            if bubbleIsRunning {
                 thisBubble.lastPair!.pause = Date() //close last pair
                 
                 //compute lastPair duration first [on background thread 🔴]
-                thisBubble.lastPair?.computeDuration(.atEndSession) {
-                    thisBubble.lastSession?.computeDuration {
+                thisBubble.lastPair?.computeDuration(.atEndSession) { //completion
+                    thisBubble.lastSession?.computeDuration { //completion
                         self.createCalendarEventIfRequiredAndSaveToCoreData(for: thisBubble)
                     }
                 }
