@@ -117,9 +117,15 @@ struct BubbleCell: View {
     }
     
     func handleNoteTap() {
-        UserFeedback.singleHaptic(.light)
-        bubble.isNoteHidden.toggle()
-        PersistenceController.shared.save()
+        let bContext = PersistenceController.shared.bContext
+        let objID = bubble.objectID
+        
+        bContext.perform {
+            UserFeedback.singleHaptic(.light)
+            let thisBubble = PersistenceController.shared.grabObj(objID) as! Bubble
+            thisBubble.isNoteHidden.toggle()
+            PersistenceController.shared.save(bContext)
+        }
     }
     
     // MARK: - User Intents
