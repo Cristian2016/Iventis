@@ -282,11 +282,11 @@ extension ViewModel {
                 bContext.perform {
                     let thisBubble = bContext.object(with: objID) as! Bubble
                     
-                    let newSession = Session(context: thisBubble.managedObjectContext!)
-                    newSession.created = Date().addingTimeInterval(startDelayCompensation)
-                    
-                    let newPair = Pair(context: thisBubble.managedObjectContext!)
+                    let newPair = Pair(context: bContext)
                     newPair.start = Date().addingTimeInterval(startDelayCompensation)
+                    
+                    let newSession = Session(context: bContext)
+                    newSession.created = Date().addingTimeInterval(startDelayCompensation)
                     newSession.addToPairs(newPair)
                     
                     thisBubble.addToSessions(newSession)
@@ -298,7 +298,7 @@ extension ViewModel {
                         bubble.coordinator.update(.user(.start))
                         bubble.pairBubbleCellCoordinator.update(.user(.start))
                         
-                        self.controller.save()
+                        self.controller.save() //viewContext.save() on mainQueue
                         
                         //1 both
                         self.secretary.addNoteButton_bRank = nil //clear first
