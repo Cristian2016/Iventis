@@ -105,6 +105,7 @@ class ViewModel: ObservableObject {
         
         UserDefaults.resetRankGenerator(sortedBubbles.count) //reset rank generator
         
+        // FIXME: -
         PersistenceController.shared.save()
     }
     
@@ -166,6 +167,7 @@ class ViewModel: ObservableObject {
                 
                 self?.secretary.theOneAndOnlyEditedSDB = nil //dismiss MoreOptionsView
                 
+                // FIXME: -
                 PersistenceController.shared.save()
             }
         }
@@ -262,9 +264,7 @@ extension ViewModel {
             
             //both contexts must save
             PersistenceController.shared.save(bContext)
-            DispatchQueue.main.async {
-                PersistenceController.shared.save()
-            }
+            DispatchQueue.main.async { PersistenceController.shared.save() }
         }
     } //9
     
