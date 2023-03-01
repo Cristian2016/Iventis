@@ -226,7 +226,6 @@ struct PairCell: View {
     private func userWantsNotesList() {
         UserFeedback.singleHaptic(.light)
         viewModel.notesForPair.send(pair)
-        PersistenceController.shared.save()
     }
     
     ///show/hide Pair.note
