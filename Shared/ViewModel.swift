@@ -241,13 +241,6 @@ extension ViewModel {
                     newBubble.isNoteHidden = false
                 }
                 PersistenceController.shared.save(bContext)
-                
-                delayExecution(.now() + 3) {
-                    print(PersistenceController.shared.bContext.registeredObjects.count)
-                    DispatchQueue.main.async {
-                        print(PersistenceController.shared.viewContext.registeredObjects.count)
-                    }
-                }
             }
         }
     }
@@ -269,13 +262,6 @@ extension ViewModel {
                 
                 PersistenceController.shared.save(bContext)
                 DispatchQueue.main.async { PersistenceController.shared.save() }
-                
-                delayExecution(.now() + 3) {
-                    print(PersistenceController.shared.bContext.registeredObjects.count)
-                    DispatchQueue.main.async {
-                        print(PersistenceController.shared.viewContext.registeredObjects.count)
-                    }
-                }
             }
         }
     }
