@@ -14,6 +14,7 @@
 //7 from here on viewContext can see all changes
 //8 when creating a bubble, it is necessary to bContext.save(). after that vContext 'absorbs' the object and bContext will have no obj registered, but vContext.registeredObjs increases by one. No need to vContext.save()!!!
 //9 after deleting the obj, must do both vContext and bContext save. vContext must always be used on mainQueue, otherwise error!!!
+//10 if you forget about the predicate, it will delete all sessions of all bubbles :))
 
 import Foundation
 import SwiftUI
@@ -372,7 +373,7 @@ extension ViewModel {
             let objID = bubble.objectID
             let bContext = self.pController.bContext
             
-            bContext.perform {ok
+            bContext.perform {
                 let thisBubble = bContext.object(with: objID) as! Bubble
                 
                 thisBubble.created = Date()
@@ -380,7 +381,7 @@ extension ViewModel {
                 
                 //batch-delete all sessions
                 let request:NSFetchRequest<NSFetchRequestResult> = Session.fetchRequest()
-                request.predicate = NSPredicate(format: "bubble.rank == %i", bubble.rank)
+                request.predicate = NSPredicate(format: "bubble.rank == %i", bubble.rank) //⚠️ 10
                 
                 let batchDeleteRequest = NSBatchDeleteRequest(fetchRequest: request)
                 batchDeleteRequest.resultType = .resultTypeObjectIDs
