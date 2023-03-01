@@ -82,18 +82,21 @@ extension CalendarManager {
     
     ///if user swipes on a bubble to enable calendar and bubble already has activity, all activity will be exported to Calendar App
     func createCalEventsForExistingSessions(of bubble:Bubble?) {
+        //not viewContextBubble here
         guard
             let bubble = bubble,
             bubble.hasCalendar,
             !bubble.sessions_.isEmpty else { return }
-                
-        DispatchQueue.global().async { [weak self] in
+                        
+        let bContext = bubble.managedObjectContext //⚠️  it is already the backgroundContext
+        
+        bContext?.perform { [weak self] in
             bubble.sessions_.forEach { session in
                 if session.isEnded && !session.isEventified {
                     self?.createNewEvent(for: session)
                 }
             }
-            DispatchQueue.main.async { PersistenceController.shared.save() }
+            PersistenceController.shared.save(bContext)
         }
     }
     
