@@ -108,8 +108,8 @@ struct BubbleStickyNoteList: View {
         //save note to CoreData if no duplicates
         
         var noteCopy = note
-        
         noteCopy.removeWhiteSpaceAtBothEnds()
+        
         if bubbleSavedNotes.compactMap({ $0.note }).contains(noteCopy) {
             selectExitingNote(note)
             return

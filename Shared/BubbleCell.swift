@@ -124,13 +124,6 @@ struct BubbleCell: View {
     
     // MARK: - User Intents
     
-    ///long press on hours to show the notes list
-    func showNotesList() {
-        UserFeedback.singleHaptic(.light)
-        viewModel.notesForBubble.send(bubble)
-        PersistenceController.shared.save()
-    }
-    
     // MARK: -
     var confirm_CalEventCreated:Bool { secretary.confirm_CalEventCreated == bubble.rank }
     var confirm_CalEventRemoved:Bool { secretary.confirm_CalEventRemoved == bubble.rank }

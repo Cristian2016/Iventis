@@ -58,7 +58,6 @@ struct ThreeCircles: View {
     func showNotesList() {
         UserFeedback.singleHaptic(.light)
         viewModel.notesForBubble.send(bubble)
-        PersistenceController.shared.save()
     }
 }
 
