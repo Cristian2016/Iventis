@@ -244,7 +244,7 @@ extension ViewModel {
         //        if secretary.showFavoritesOnly, Secretary.shared.pinnedBubblesCount == 1 {
         //            secretary.showFavoritesOnly = false
         //        }
-        if !path.isEmpty { path = [] }
+        if !path.isEmpty { withAnimation(.easeInOut) { path = [] }}
         
         let bContext = controller.bContext
         let objID = bubble.objectID
