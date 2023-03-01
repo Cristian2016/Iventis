@@ -291,13 +291,14 @@ extension ViewModel {
                     
                     thisBubble.addToSessions(newSession)
                     
-                    PersistenceController.shared.save(bContext) //⚠️
-                    print(PersistenceController.shared.bContext.registeredObjects.count)
+                    self.controller.save(bContext) //⚠️
                     
                     DispatchQueue.main.async {
                         //repetitive chunk of code ⚠️
                         bubble.coordinator.update(.user(.start))
                         bubble.pairBubbleCellCoordinator.update(.user(.start))
+                        
+                        self.controller.save()
                         
                         //1 both
                         self.secretary.addNoteButton_bRank = nil //clear first
