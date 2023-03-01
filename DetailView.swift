@@ -35,11 +35,6 @@ struct DetailView: View {
                                  sortDescriptors: descriptors,
                                  predicate: predicate,
                                  animation: .easeInOut)
-        
-        let request = Session.fetchRequest()
-        request.predicate = predicate
-        let sessions = try? PersistenceController.shared.viewContext.count(for: request)
-        print("sessions \(sessions ?? -1)")
     }
     
     var body: some View {
