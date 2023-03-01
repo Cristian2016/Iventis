@@ -91,19 +91,27 @@ struct PairStickyNoteList: View {
     
     ///when user selects an existing note instead of typing in a new note
     private func selectExitingNote(_ note:String) {
-        var trimmedNote = note
-        trimmedNote.removeWhiteSpaceAtBothEnds()
-        
-        if initialNote == trimmedNote { return }
-        
-        UserFeedback.singleHaptic(.heavy)
-        
-        //set pair.note and show note
-        pair.note = note
-        pair.isNoteHidden = false
-        
-        try? PersistenceController.shared.viewContext.save()
-        CalendarManager.shared.updateExistingEvent(.notes(pair.session!))
+        print(#function)
+        DispatchQueue.global().async {
+            var trimmedNote = note
+            trimmedNote.removeWhiteSpaceAtBothEnds()
+            if initialNote == trimmedNote { return }
+            UserFeedback.singleHaptic(.heavy)
+            
+            let bContext = PersistenceController.shared.bContext
+            let objID = pair.objectID
+            
+            bContext.perform {
+                let thisPair = PersistenceController.shared.grabObj(objID) as! Pair
+                
+                //set pair.note and show note
+                thisPair.note = note
+                thisPair.isNoteHidden = false
+                
+                PersistenceController.shared.save(bContext)
+                CalendarManager.shared.updateExistingEvent(.notes(thisPair.session!))
+            }
+        }
     }
     
     private var noteIsValid: Bool {
