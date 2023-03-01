@@ -71,13 +71,8 @@ extension ThreeCircles {
     ///either a circle or a square
     @ViewBuilder
     private var bubbleShape: some View {
-        if bubble.hasWidget {
-            RoundedRectangle(cornerRadius: 20)
-                .fill(color)
-        } else {
-            Circle()
-                .fill(color)
-        }
+        if bubble.hasWidget { RoundedRectangle(cornerRadius: 20).fill(color) }
+        else { Circle().fill(color) }
     }
     
     private var colorCircle:some View {
