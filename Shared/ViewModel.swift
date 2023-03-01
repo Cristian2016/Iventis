@@ -252,7 +252,7 @@ extension ViewModel {
         //        }
         if !path.isEmpty { path = [] }
         
-        let bContext = self.controller.bContext
+        let bContext = controller.bContext
         let objID = bubble.objectID
         
         bContext.perform {
