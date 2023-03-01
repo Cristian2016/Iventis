@@ -314,7 +314,7 @@ extension ViewModel {
                     let thisBubble = bContext.object(with: objID) as! Bubble
                     
                     //create new pair, add it to currentSession
-                    let newPair = Pair(context: thisBubble.managedObjectContext!)
+                    let newPair = Pair(context: bContext)
                     newPair.start = Date().addingTimeInterval(startDelayCompensation)
                     thisBubble.lastSession?.addToPairs(newPair)
                     
