@@ -648,7 +648,7 @@ extension ViewModel {
                     newHistoryItem.note = note
                     theBubble.addToHistory(newHistoryItem)
                     
-                    try? bContext.save() //viewContext will see changes from here on
+                    self.controller.save(bContext)
                     
                     DispatchQueue.main.async {
                         CalendarManager.shared.updateExistingEvent(.title(bubble))
@@ -672,7 +672,7 @@ extension ViewModel {
                     newHistoryItem.note = note
                     thePair.addToHistory(newHistoryItem)
                     
-                    try? bContext.save() //viewContext will see changes from here on
+                    self.controller.save(bContext)
                     
                     DispatchQueue.main.async {
                         CalendarManager.shared.updateExistingEvent(.notes(pair.session!))
