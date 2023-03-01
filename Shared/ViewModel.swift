@@ -282,6 +282,7 @@ extension ViewModel {
                 bContext.perform {
                     let thisBubble = bContext.object(with: objID) as! Bubble
                     
+                    //create newPair, newSession and add them to the newBubble
                     let newPair = Pair(context: bContext)
                     newPair.start = Date().addingTimeInterval(startDelayCompensation)
                     
