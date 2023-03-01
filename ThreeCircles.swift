@@ -25,29 +25,27 @@ struct ThreeCircles: View {
     }
     
     var body: some View {
-        if !bubble.isFault && bubble.coordinator != nil {
-            Rectangle().fill(.clear)
-                .aspectRatio(metrics.ratio, contentMode: .fit)
-                .overlay {
-                    HStack {
-                        /* Hr */ colorCircle
-                            .opacity(hrOpacity)
-                            .onTapGesture { toggleBubbleDetail() }
-                            .onLongPressGesture { showNotesList() }
-                        /* Min */ colorCircle
-                            .opacity(minOpacity)
-                            .onTapGesture { toggleBubbleDetail() }
-                            .onLongPressGesture { showNotesList() }
-                        /* Sec */ SecondsCircle(bubble: bubble, color: color, scale: metrics.circleScale)
-                    }
-                    .scaleEffect(x: metrics.hstackScale, y: metrics.hstackScale)
-                    .onReceive(bubble.coordinator.$opacity) {
-                        minOpacity = $0.min
-                        hrOpacity = $0.hr
-                    }
-                    .onReceive(bubble.coordinator.colorPublisher) { color = $0 }
+        Rectangle().fill(.clear)
+            .aspectRatio(metrics.ratio, contentMode: .fit)
+            .overlay {
+                HStack {
+                    /* Hr */ colorCircle
+                        .opacity(hrOpacity)
+                        .onTapGesture { toggleBubbleDetail() }
+                        .onLongPressGesture { showNotesList() }
+                    /* Min */ colorCircle
+                        .opacity(minOpacity)
+                        .onTapGesture { toggleBubbleDetail() }
+                        .onLongPressGesture { showNotesList() }
+                    /* Sec */ SecondsCircle(bubble: bubble, color: color, scale: metrics.circleScale)
                 }
-        }
+                .scaleEffect(x: metrics.hstackScale, y: metrics.hstackScale)
+                .onReceive(bubble.coordinator.$opacity) {
+                    minOpacity = $0.min
+                    hrOpacity = $0.hr
+                }
+                .onReceive(bubble.coordinator.colorPublisher) { color = $0 }
+            }
     }
     
     // MARK: - User Intents
