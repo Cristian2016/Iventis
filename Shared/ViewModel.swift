@@ -291,6 +291,7 @@ extension ViewModel {
                     newSession.addToPairs(newPair)
                     
                     thisBubble.addToSessions(newSession)
+                    //.....................................................
                     
                     self.controller.save(bContext) //⚠️
                     
@@ -299,7 +300,7 @@ extension ViewModel {
                         bubble.coordinator.update(.user(.start))
                         bubble.pairBubbleCellCoordinator.update(.user(.start))
                         
-                        self.controller.save() //viewContext.save() on mainQueue
+//                        self.controller.save() //viewContext.save() on mainQueue no need to save??
                         
                         //1 both
                         self.secretary.addNoteButton_bRank = nil //clear first
