@@ -120,7 +120,7 @@ struct SecondsLabel: View {
     }
     
     init?(bubble: Bubble?) {
-        guard let bubble = bubble, !bubble.isFault else { return nil }
+        guard let bubble = bubble else { return nil }
         self.bubble = bubble
         self.sec = bubble.coordinator.components.sec
     }

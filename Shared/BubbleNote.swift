@@ -19,16 +19,14 @@ struct BubbleNote: View {
     
     // MARK: -
     var body: some View {
-        if !bubble.isFault {
-            HStack (spacing:0) {
-                calendarSymbol
-                stickyNoteTextView
-            }
-            .foregroundColor(.label)
-            .background(background)
-            .cornerRadius(cornerRadius)
-            .shadow(color: .black.opacity(0.1), radius: 2, y: 2)
+        HStack (spacing:0) {
+            calendarSymbol
+            stickyNoteTextView
         }
+        .foregroundColor(.label)
+        .background(background)
+        .cornerRadius(cornerRadius)
+        .shadow(color: .black.opacity(0.1), radius: 2, y: 2)
     }
     
     // MARK: - Lego 4

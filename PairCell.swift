@@ -21,42 +21,40 @@ struct PairCell: View {
     private let collapsedNoteWidth = CGFloat(50)
     
     var body:some View {
-        if !pair.isFault {
-            ZStack(alignment: .leading) {
-                Push(.topRight) {
-                    VStack(alignment: .trailing, spacing: 0) {
-                        separatorLine
-                        pairNumberView
-                    }
+        ZStack(alignment: .leading) {
+            Push(.topRight) {
+                VStack(alignment: .trailing, spacing: 0) {
+                    separatorLine
+                    pairNumberView
                 }
-                .padding([.top], -4)
-                .padding([.trailing], -16)
-                
-                VStack (alignment: .leading, spacing: 4) {
-                    Rectangle()
-                        .fill(.clear)
-                        .frame(height: 10)
-                    
-                    pairStartView  //first line
-                    pairPauseView //second line
-                    if pair.pause == nil {
-                        Push(.middle) {
-                            PairBubbleCell(bubble: pair.session?.bubble)
-                        }
-                        .padding([.top, .bottom])
-                    }
-                    else { durationView } //third line
-                    
-                    if !pair.note_.isEmpty { Spacer() }
-                }
-                
-                Push(.bottomRight) { stickyNote }
-                    .padding([.trailing], -12)
             }
-            .contentShape(gestureArea) //define gesture area
-            .onTapGesture {  /* ⚠️ Idiotic! I need to put this shit here or else I can't scroll */ }
-            .onLongPressGesture { userWantsNotesList() }
+            .padding([.top], -4)
+            .padding([.trailing], -16)
+            
+            VStack (alignment: .leading, spacing: 4) {
+                Rectangle()
+                    .fill(.clear)
+                    .frame(height: 10)
+                
+                pairStartView  //first line
+                pairPauseView //second line
+                if pair.pause == nil {
+                    Push(.middle) {
+                        PairBubbleCell(bubble: pair.session?.bubble)
+                    }
+                    .padding([.top, .bottom])
+                }
+                else { durationView } //third line
+                
+                if !pair.note_.isEmpty { Spacer() }
+            }
+            
+            Push(.bottomRight) { stickyNote }
+                .padding([.trailing], -12)
         }
+        .contentShape(gestureArea) //define gesture area
+        .onTapGesture {  /* ⚠️ Idiotic! I need to put this shit here or else I can't scroll */ }
+        .onLongPressGesture { userWantsNotesList() }
     }
     
     // MARK: - Little Things
