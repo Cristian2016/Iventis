@@ -671,6 +671,7 @@ extension ViewModel {
             case "Pair" :
                 let pair = object as! Pair
                 
+                    //it's bContext since pair is coming from PairStickyNoteLost.saveNoteToCoredata
                 pair.managedObjectContext?.perform {  [weak self] in
                     guard let self = self else { return }
                     

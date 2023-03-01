@@ -72,7 +72,6 @@ struct PairStickyNoteList: View {
     
     ///when user types in a new note instead of selecting an existing note
     private func saveNoteToCoreData(_ note:String, for pair: Pair) {
-        
         let objID = pair.objectID
         
         DispatchQueue.global().async {
