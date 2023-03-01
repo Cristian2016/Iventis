@@ -293,7 +293,7 @@ extension ViewModel {
                     thisBubble.addToSessions(newSession)
                     //.....................................................
                     
-                    self.controller.save(bContext) //⚠️
+                    self.controller.save(bContext) //⚠️ no need to save vContext
                     
                     DispatchQueue.main.async {
                         //repetitive chunk of code ⚠️
