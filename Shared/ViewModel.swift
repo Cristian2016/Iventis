@@ -279,7 +279,7 @@ extension ViewModel {
         
         switch bubble.state {
             case .brandNew: /* changes to .running */
-                bContext.perform {
+                bContext.perform { [weak self] in
                     let thisBubble = bContext.object(with: objID) as! Bubble
                     
                     //create newPair, newSession and add them to the newBubble
@@ -294,18 +294,18 @@ extension ViewModel {
                     //.....................................................
                     
                     //this also makes changes visible to the viewContext as well
-                    self.pController.save(bContext) //⚠️ no need to save vContext
+                    self?.pController.save(bContext) //⚠️ no need to save vContext
                     
                     DispatchQueue.main.async { //UI stuff
                         bubble.coordinator.update(.user(.start))
                         bubble.pairBubbleCellCoordinator.update(.user(.start))
                                                 
                         //1 both
-                        self.secretary.addNoteButton_bRank = nil //clear first
-                        self.secretary.addNoteButton_bRank = Int(bubble.rank)
+                        self?.secretary.addNoteButton_bRank = nil //clear first
+                        self?.secretary.addNoteButton_bRank = Int(bubble.rank)
                         
                         delayExecution(.now() + 0.3) {
-                            self.secretary.pairBubbleCellNeedsDisplay.toggle()
+                            self?.secretary.pairBubbleCellNeedsDisplay.toggle()
                         }
                     }
                 }
@@ -337,7 +337,9 @@ extension ViewModel {
                 }
                 
             case .running: /* changes to .paused */
-                bContext.perform {
+                bContext.perform { [weak self] in
+                    guard let self = self else { return }
+                    
                     let thisBubble = self.pController.grabObj(objID) as! Bubble
                     let currentPair = thisBubble.lastPair
                     currentPair!.pause = Date()
