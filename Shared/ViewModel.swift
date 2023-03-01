@@ -550,7 +550,7 @@ extension ViewModel {
             }
             else { self.createCalendarEventIfRequiredAndSaveToCoreData(for: thisBubble) }
             
-            PersistenceController.shared.save(bContext)
+            self.pController.save(bContext)
             
             DispatchQueue.main.async {
                 bubble.coordinator.update(.user(.endSession))
