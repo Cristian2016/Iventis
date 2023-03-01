@@ -107,16 +107,25 @@ struct BubbleStickyNoteList: View {
         //avoid duplicates
         //save note to CoreData if no duplicates
         
-        var noteCopy = note
-        noteCopy.removeWhiteSpaceAtBothEnds()
+        let objID = bubble.objectID
         
-        if bubbleSavedNotes.compactMap({ $0.note }).contains(noteCopy) {
-            selectExitingNote(note)
-            return
+        DispatchQueue.global().async {
+            var noteCopy = note
+            noteCopy.removeWhiteSpaceAtBothEnds()
+            if bubbleSavedNotes.compactMap({ $0.note }).contains(noteCopy) {
+                selectExitingNote(note)
+                return
+            }
+            
+            let bContext = PersistenceController.shared.bContext
+            
+            bContext.perform {
+                let thisBubble = PersistenceController.shared.grabObj(objID) as! Bubble
+                vm.save(noteCopy.capitalized, forObject: thisBubble)
+                UserFeedback.singleHaptic(.heavy)
+                thisBubble.isNoteHidden = false
+                PersistenceController.shared.save(bContext)
+            }
         }
-        
-        vm.save(noteCopy.capitalized, forObject: bubble)
-        UserFeedback.singleHaptic(.heavy)
-        bubble.isNoteHidden = false
     }
 }

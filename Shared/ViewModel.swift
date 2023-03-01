@@ -670,22 +670,20 @@ extension ViewModel {
                 
             case "Pair" :
                 let pair = object as! Pair
-                let objID = pair.objectID
                 
-                bContext.perform {  [weak self] in
+                pair.managedObjectContext?.perform {  [weak self] in
                     guard let self = self else { return }
                     
                     note.removeWhiteSpaceAtBothEnds()
-                    let thePair = PersistenceController.shared.grabObj(objID) as! Pair
                     
-                    thePair.note = note
-                    thePair.isNoteHidden = false
+                    pair.note = note
+                    pair.isNoteHidden = false
                     
                     //add new item to bubbleHistory
-                    let newHistoryItem = PairSavedNote(context: thePair.managedObjectContext!)
+                    let newHistoryItem = PairSavedNote(context: pair.managedObjectContext!)
                     newHistoryItem.date = Date()
                     newHistoryItem.note = note
-                    thePair.addToHistory(newHistoryItem)
+                    pair.addToHistory(newHistoryItem)
                     
                     self.pController.save(bContext)
                     

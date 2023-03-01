@@ -72,25 +72,35 @@ struct PairStickyNoteList: View {
     
     ///when user types in a new note instead of selecting an existing note
     private func saveNoteToCoreData(_ note:String, for pair: Pair) {
-        //clean up textInput by removing white spaces
-        var trimmedNote = note
-        trimmedNote.removeWhiteSpaceAtBothEnds()
         
-        //avoid duplicates
-        if pairSavedNotes.compactMap({ $0.note }).contains(trimmedNote) {
-            selectExitingNote(trimmedNote)
-            return
+        let objID = pair.objectID
+        
+        DispatchQueue.global().async {
+            //clean up textInput by removing white spaces
+            var trimmedNote = note
+            trimmedNote.removeWhiteSpaceAtBothEnds()
+            
+            //avoid duplicates
+            if pairSavedNotes
+                .compactMap({ $0.note })
+                .contains(trimmedNote) {
+                
+                selectExitingNote(trimmedNote)
+                return
+            }
+            
+            let thePair = PersistenceController.shared.grabObj(objID) as! Pair
+            thePair.isNoteHidden = false
+            
+            //save note to CoreData if no duplicates
+            vm.save(trimmedNote, forObject: thePair)
+            UserFeedback.singleHaptic(.heavy)
         }
-        
-        pair.isNoteHidden = false
-        
-        //save note to CoreData if no duplicates
-        vm.save(trimmedNote, forObject: pair)
-        UserFeedback.singleHaptic(.heavy)
     }
     
     ///when user selects an existing note instead of typing in a new note
     private func selectExitingNote(_ note:String) {
+        print(#function)
         DispatchQueue.global().async {
             var trimmedNote = note
             trimmedNote.removeWhiteSpaceAtBothEnds()

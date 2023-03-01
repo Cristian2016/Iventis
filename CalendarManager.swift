@@ -146,8 +146,7 @@ extension CalendarManager {
                 event.title = eventTitle(for: session)
                 event.notes = updatedNotes
                 
-                do { try store.save(event, span: .thisEvent, commit: true) }
-                catch { }
+                try? store.save(event, span: .thisEvent, commit: true)
             }
             
         case /* update event */.title(let bubble):

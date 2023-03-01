@@ -166,7 +166,6 @@ struct StickyNoteList: View {
                     Rectangle()
                         .fill(item == initialNote ? Color.selectionGray : .clear)
                 )
-//            Rectangle().fill(Color.white.opacity(0.001))
         }
         //layout
             .padding([.leading], 10)
@@ -175,7 +174,6 @@ struct StickyNoteList: View {
             .onTapGesture {
                 UserFeedback.singleHaptic(.heavy)
                 selectExistingNote(item) //will be handled externally
-                try? PersistenceController.shared.viewContext.save()
                 dismiss()
             }
     }
