@@ -221,29 +221,27 @@ extension ViewModel {
                       _ color:String,
                       _ note:String? = nil) {
         
-        DispatchQueue.global().async {
-            let bContext = PersistenceController.shared.bContext
-            
-            bContext.perform {
-                let newBubble = Bubble(context: bContext)
-                newBubble.created = Date()
-                newBubble.kind = kind
-                switch kind {
-                    case .timer(let initialClock):
-                        newBubble.initialClock = initialClock
-                    default:
-                        newBubble.initialClock = 0
-                }
-                
-                newBubble.color = color
-                newBubble.rank = Int64(UserDefaults.generateRank())
-                
-                if let note = note {
-                    newBubble.note_ = note
-                    newBubble.isNoteHidden = false
-                }
-                PersistenceController.shared.save(bContext)
+        let bContext = PersistenceController.shared.bContext
+        
+        bContext.perform {
+            let newBubble = Bubble(context: bContext)
+            newBubble.created = Date()
+            newBubble.kind = kind
+            switch kind {
+                case .timer(let initialClock):
+                    newBubble.initialClock = initialClock
+                default:
+                    newBubble.initialClock = 0
             }
+            
+            newBubble.color = color
+            newBubble.rank = Int64(UserDefaults.generateRank())
+            
+            if let note = note {
+                newBubble.note_ = note
+                newBubble.isNoteHidden = false
+            }
+            PersistenceController.shared.save(bContext)
         }
     } //8
     
