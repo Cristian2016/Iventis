@@ -21,8 +21,7 @@ struct TopCellDurationView: View {
         ZStack {
             HStack(spacing: 0) {
                 if showGreaterThenSymbol {
-                    Image.greaterThan
-                        .font(.caption2)
+                    Image.greaterThan.font(.caption2)
                 }
                 durationView
             }
