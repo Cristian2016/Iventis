@@ -18,24 +18,6 @@ struct DetailView: View {
     
     @EnvironmentObject private var viewModel:ViewModel
     private let secretary = Secretary.shared
-        
-    let topDetailHeight = CGFloat(140)
-    
-    private var count:Int { sessions.count }
-    
-    init?(_ bubble:Bubble?) {
-        guard let bubble = bubble else { return nil }
-        
-        self.bubble = bubble
-        
-        let predicate = NSPredicate(format: "bubble.rank == %i", bubble.rank)
-        let descriptors = [NSSortDescriptor(key: "created", ascending: false)]
-        
-        _sessions = FetchRequest(entity: Session.entity(),
-                                 sortDescriptors: descriptors,
-                                 predicate: predicate,
-                                 animation: .easeInOut)
-    }
     
     var body: some View {
         ScrollViewReader { proxy in
@@ -73,6 +55,10 @@ struct DetailView: View {
         }
         .overlay { ShowDetailViewInfoView() }
     }
+        
+    let topDetailHeight = CGFloat(140)
+    
+    private var count:Int { sessions.count }
     
     // MARK: - Lego
     private var yPositionTrackerView:some View {
@@ -94,6 +80,21 @@ struct DetailView: View {
     
     // MARK: - Little Helpers
     var isAddTagButtonVisible:Bool { secretary.addNoteButton_bRank == Int(bubble.rank) }
+    
+    // MARK: - Init
+    init?(_ bubble:Bubble?) {
+        guard let bubble = bubble else { return nil }
+        
+        self.bubble = bubble
+        
+        let predicate = NSPredicate(format: "bubble.rank == %i", bubble.rank)
+        let descriptors = [NSSortDescriptor(key: "created", ascending: false)]
+        
+        _sessions = FetchRequest(entity: Session.entity(),
+                                 sortDescriptors: descriptors,
+                                 predicate: predicate,
+                                 animation: .easeInOut)
+    }
 }
 
 struct ShowDetailViewInfoView: View {
