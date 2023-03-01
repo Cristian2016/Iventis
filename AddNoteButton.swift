@@ -22,9 +22,8 @@ struct AddNoteButton: View {
                 let color = newColor ?? Color.bubbleColor(forName: bubble.color)
                 
                 Button {
-                    viewModel.notesForPair.send(bubble.lastPair)
                     UserFeedback.singleHaptic(.light)
-                    PersistenceController.shared.save()
+                    viewModel.notesForPair.send(bubble.lastPair)
                 } label: {
                     FusedLabel(content: .init(title: "Add Note",
                                               symbol: "text.alignleft",
