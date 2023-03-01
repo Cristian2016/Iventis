@@ -105,10 +105,10 @@
 		1FC08DC929A35B6500E25D79 /* PairBubbleCellCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FC08DC829A35B6500E25D79 /* PairBubbleCellCoordinator.swift */; };
 		1FC0D9C129828D23004779E0 /* ConfirmView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FC0D9C029828D23004779E0 /* ConfirmView.swift */; };
 		1FC70BB129807BAB007CD1E6 /* LayoutViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FC70BB029807BAB007CD1E6 /* LayoutViewModel.swift */; };
+		1FCAD26E29AF242C0037E7F6 /* StartDelayBubble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FCAD26D29AF242C0037E7F6 /* StartDelayBubble.swift */; };
 		1FCF01B3287CBA74009DC95C /* DelayStartSymbol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FCF01B2287CBA74009DC95C /* DelayStartSymbol.swift */; };
 		1FCF0C662816F3F600AA1FAA /* EmptyListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FCF0C652816F3F600AA1FAA /* EmptyListView.swift */; };
 		1FD2DD972869AB4900831978 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1F5F4A4D28093FAF00AF3442 /* Assets.xcassets */; };
-		1FDB9F12287DA5040028E121 /* StartDelayBubble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FDB9F0C287DA5040028E121 /* StartDelayBubble.swift */; };
 		1FDB9F13287DA5040028E121 /* SDB Properties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FDB9F0D287DA5040028E121 /* SDB Properties.swift */; };
 		1FDB9F14287DA5040028E121 /* SDBPair.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FDB9F0E287DA5040028E121 /* SDBPair.swift */; };
 		1FDB9F15287DA5040028E121 /* SDBPair Properties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FDB9F0F287DA5040028E121 /* SDBPair Properties.swift */; };
@@ -250,9 +250,9 @@
 		1FC08DC829A35B6500E25D79 /* PairBubbleCellCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PairBubbleCellCoordinator.swift; sourceTree = SOURCE_ROOT; };
 		1FC0D9C029828D23004779E0 /* ConfirmView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfirmView.swift; sourceTree = "<group>"; };
 		1FC70BB029807BAB007CD1E6 /* LayoutViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutViewModel.swift; sourceTree = "<group>"; };
+		1FCAD26D29AF242C0037E7F6 /* StartDelayBubble.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StartDelayBubble.swift; sourceTree = "<group>"; };
 		1FCF01B2287CBA74009DC95C /* DelayStartSymbol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DelayStartSymbol.swift; sourceTree = "<group>"; };
 		1FCF0C652816F3F600AA1FAA /* EmptyListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyListView.swift; sourceTree = "<group>"; };
-		1FDB9F0C287DA5040028E121 /* StartDelayBubble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartDelayBubble.swift; sourceTree = SOURCE_ROOT; };
 		1FDB9F0D287DA5040028E121 /* SDB Properties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SDB Properties.swift"; sourceTree = SOURCE_ROOT; };
 		1FDB9F0E287DA5040028E121 /* SDBPair.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SDBPair.swift; sourceTree = SOURCE_ROOT; };
 		1FDB9F0F287DA5040028E121 /* SDBPair Properties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SDBPair Properties.swift"; sourceTree = SOURCE_ROOT; };
@@ -471,7 +471,7 @@
 				1F5987A4286B5F8900CDB54C /* PairSavedNote Properties.swift */,
 				1F2080782836111600FD35D6 /* BSavedNote.swift */,
 				1F2080792836111600FD35D6 /* BSavedNote Properties.swift */,
-				1FDB9F0C287DA5040028E121 /* StartDelayBubble.swift */,
+				1FCAD26D29AF242C0037E7F6 /* StartDelayBubble.swift */,
 				1FDB9F0D287DA5040028E121 /* SDB Properties.swift */,
 				1FDB9F0E287DA5040028E121 /* SDBPair.swift */,
 				1FDB9F0F287DA5040028E121 /* SDBPair Properties.swift */,
@@ -639,7 +639,6 @@
 				1F0373BE28DEDB00005CE8D3 /* AlwaysOnDisplayAlertView.swift in Sources */,
 				1F991A7029A7545C0045B04C /* TopCellDurationView.swift in Sources */,
 				1F0373C228DEE6F7005CE8D3 /* AlwaysOnDisplayConfirmationView.swift in Sources */,
-				1FDB9F12287DA5040028E121 /* StartDelayBubble.swift in Sources */,
 				1FFC8BAD28142F040059EF2E /* Session Properties.swift in Sources */,
 				1F64200A2820204400413E31 /* PairList.swift in Sources */,
 				1FA1B44A298321D20063B081 /* iPhoneViewHierarchy.swift in Sources */,
@@ -666,6 +665,7 @@
 				1FA03CAB29893E6200AF7395 /* SessionDeleteActionAlert.swift in Sources */,
 				1F0373C028DEDD97005CE8D3 /* ConfirmationView.swift in Sources */,
 				1FE163AE280EE6F40050C6F5 /* LeftStrip.swift in Sources */,
+				1FCAD26E29AF242C0037E7F6 /* StartDelayBubble.swift in Sources */,
 				1F641FFE281FF70100413E31 /* BottomDetailView.swift in Sources */,
 				1FCF01B3287CBA74009DC95C /* DelayStartSymbol.swift in Sources */,
 				1FF5AC3A29A9EDC4000DD0E2 /* NeedlePositionKey.swift in Sources */,

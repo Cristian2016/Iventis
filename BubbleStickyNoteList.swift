@@ -80,17 +80,27 @@ struct BubbleStickyNoteList: View {
     private func dismiss() { vm.notesForBubble.send(nil) }
     
     private func selectExitingNote(_ note:String) {
-        var noteCopy = note
-        noteCopy.removeWhiteSpaceAtBothEnds()
-        
-        if initialNote == noteCopy { return }
-        
-        UserFeedback.singleHaptic(.heavy)
-        bubble.note = note
-        bubble.isNoteHidden = false
-        try? PersistenceController.shared.viewContext.save()
-        
-        CalendarManager.shared.updateExistingEvent(.title(bubble))
+        DispatchQueue.global().async {
+            var noteCopy = note
+            noteCopy.removeWhiteSpaceAtBothEnds()
+            
+            if initialNote == noteCopy { return }
+            UserFeedback.singleHaptic(.heavy)
+            
+            let bContext = PersistenceController.shared.bContext
+            let objID = bubble.objectID
+            
+            bContext.perform {
+                let thisBubble = PersistenceController.shared.grabObj(objID) as! Bubble
+                thisBubble.note = noteCopy
+                thisBubble.isNoteHidden = false
+                PersistenceController.shared.save(bContext)
+                
+                DispatchQueue.main.async {
+                    CalendarManager.shared.updateExistingEvent(.title(bubble))
+                }
+            }
+        }
     }
     
     private func saveNoteToCoreData(_ note:String, for bubble: Bubble) {
