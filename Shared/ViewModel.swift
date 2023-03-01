@@ -250,7 +250,7 @@ extension ViewModel {
         let objID = bubble.objectID
         
         bubble.managedObjectContext?.perform {
-            bubble.coordinator = nil
+            bubble.coordinator.update(.user(.deleteBubble))
             bubble.pairBubbleCellCoordinator.update(.user(.deleteBubble))
         }
         
