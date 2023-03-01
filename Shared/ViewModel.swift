@@ -503,7 +503,7 @@ extension ViewModel {
         let bubbleID = bubble.objectID
         let sessionID = session.objectID
         
-        bContext.perform { [weak self] in
+        bContext.perform {
             let thisBubble = bContext.object(with: bubbleID) as! Bubble
             let thisSession = bContext.object(with: sessionID) as! Session
             
@@ -535,7 +535,9 @@ extension ViewModel {
         let objID = bubble.objectID
         let bContext = pController.bContext
         
-        bContext.perform {
+        bContext.perform {  [weak self] in
+            guard let self = self else { return }
+            
             let thisBubble = self.pController.grabObj(objID) as! Bubble
             
             //reset bubble clock
@@ -601,7 +603,9 @@ extension ViewModel {
         let objID = bubble.objectID
         let bContext = pController.bContext
         
-        bContext.perform {
+        bContext.perform {  [weak self] in
+            guard let self = self else { return }
+            
             let thisBubble = self.pController.grabObj(objID) as! Bubble
             thisBubble.note = nil
             PersistenceController.shared.save(bContext)
@@ -619,7 +623,9 @@ extension ViewModel {
         let objID = pair.objectID
         let bContext = pController.bContext
         
-        bContext.perform {
+        bContext.perform { [weak self] in
+            guard let self = self else { return }
+            
             let thisPair = self.pController.grabObj(objID) as! Pair
             thisPair.note = nil
             PersistenceController.shared.save(bContext)
@@ -642,7 +648,8 @@ extension ViewModel {
                 let bubble = object as! Bubble
                 let objID = bubble.objectID
                 
-                bContext.perform {
+                bContext.perform {  [weak self] in
+                    
                     note.removeWhiteSpaceAtBothEnds()
                     let theBubble = PersistenceController.shared.grabObj(objID) as! Bubble
                     theBubble.note = note
@@ -654,7 +661,7 @@ extension ViewModel {
                     newHistoryItem.note = note
                     theBubble.addToHistory(newHistoryItem)
                     
-                    self.pController.save(bContext)
+                    self?.pController.save(bContext)
                     
                     DispatchQueue.main.async {
                         CalendarManager.shared.updateExistingEvent(.title(bubble))
@@ -665,7 +672,9 @@ extension ViewModel {
                 let pair = object as! Pair
                 let objID = pair.objectID
                 
-                bContext.perform {
+                bContext.perform {  [weak self] in
+                    guard let self = self else { return }
+                    
                     note.removeWhiteSpaceAtBothEnds()
                     let thePair = PersistenceController.shared.grabObj(objID) as! Pair
                     
