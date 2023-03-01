@@ -51,12 +51,7 @@ struct StickyNoteList: View {
         guard stickyNoteIsValid else { dismiss(); return }
         
         save(textFieldText)
-        
-        //⚠️ it crashes without delay
-        delayExecution(.now() + 0.1) {
-            self.dismiss()
-            PersistenceController.shared.save()
-        }
+        self.dismiss()
     }
     
     private func deleteTextFieldText() {
