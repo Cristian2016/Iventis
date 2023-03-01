@@ -535,6 +535,7 @@ extension ViewModel {
             //when user ended session, was bubble still running?
             let bubbleIsRunning = thisBubble.lastPair!.pause == nil
             
+            //close lastPair and compute durations for lastPair and lastSession
             if bubbleIsRunning {
                 thisBubble.lastPair!.pause = Date() //close last pair
                 
