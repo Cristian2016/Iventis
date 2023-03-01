@@ -232,7 +232,13 @@ struct PairCell: View {
     ///show/hide Pair.note
     private func toggleStickyNoteVisibility() {
         UserFeedback.singleHaptic(.light)
-        pair.isNoteHidden.toggle()
-        PersistenceController.shared.save()
+        let bContext = PersistenceController.shared.bContext
+        let objID = pair.objectID
+        
+        bContext.perform {
+            let thisPair = PersistenceController.shared.grabObj(objID) as! Pair
+            thisPair.isNoteHidden.toggle()
+            PersistenceController.shared.save(bContext)
+        }
     }
 }
