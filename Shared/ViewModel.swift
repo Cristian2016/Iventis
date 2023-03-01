@@ -603,17 +603,28 @@ extension ViewModel {
             thisBubble.note = nil
             PersistenceController.shared.save(bContext)
             DispatchQueue.main.async {
-                CalendarManager.shared.updateExistingEvent(.title(bubble))
+                bubble.managedObjectContext?.perform {
+                    CalendarManager.shared.updateExistingEvent(.title(bubble))
+                }
             }
         }
     }
     
     //delete PairSticky
     func deleteStickyNote(for pair:Pair) {
-        pair.managedObjectContext?.perform {
-            pair.note = nil
-            CalendarManager.shared.updateExistingEvent(.notes(pair.session!))
-            try? pair.managedObjectContext?.save()
+        
+        let objID = pair.objectID
+        let bContext = controller.bContext
+        
+        bContext.perform {
+            let thisPair = self.controller.grabObj(objID) as! Pair
+            thisPair.note = nil
+            PersistenceController.shared.save(bContext)
+            DispatchQueue.main.async {
+                pair.managedObjectContext?.perform {
+                    CalendarManager.shared.updateExistingEvent(.notes(pair.session!))
+                }
+            }
         }
     }
     
