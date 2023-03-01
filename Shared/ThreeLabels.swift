@@ -38,48 +38,45 @@ struct ThreeLabels: View {
     }
     
     var body: some View {
-        if let coordinator = bubble.coordinator  {
-            Rectangle().fill(.clear)
-                .aspectRatio(metrics.ratio, contentMode: .fit)
-                .overlay {
-                    HStack {
-                        clearCircle //Hr
-                            .overlay {
-                                Rectangle().fill(.clear)
-                                    .aspectRatio(1.2, contentMode: .fit)
-                                    .overlay {
-                                        Text(hr).allowsHitTesting(false)
-                                            .font(.system(size: 400))
-                                            .lineLimit(1)
-                                            .minimumScaleFactor(0.1)
-                                    }
-                            }
-                            .opacity(hrOpacity)
-                        
-                        clearCircle //Min
-                            .overlay {
-                                Rectangle().fill(.clear)
-                                    .aspectRatio(1.2, contentMode: .fit)
-                                    .overlay {
-                                        Text(min).allowsHitTesting(false)
-                                            .font(.system(size: 400))
-                                            .lineLimit(1)
-                                            .minimumScaleFactor(0.1)
-                                    }
-                            }
-                            .opacity(minOpacity)
-                        SecondsLabel(bubble: bubble)
-//                        .overlay { if sDelayBubble.referenceDelay > 0 { SDButton(bubble.sdb) }}
-                    }
-                    .scaleEffect(x: metrics.hstackScale, y: metrics.hstackScale)
+        Rectangle().fill(.clear)
+            .aspectRatio(metrics.ratio, contentMode: .fit)
+            .overlay {
+                HStack {
+                    clearCircle //Hr
+                        .overlay {
+                            Rectangle().fill(.clear)
+                                .aspectRatio(1.2, contentMode: .fit)
+                                .overlay {
+                                    Text(hr).allowsHitTesting(false)
+                                        .font(.system(size: 400))
+                                        .lineLimit(1)
+                                        .minimumScaleFactor(0.1)
+                                }
+                        }
+                        .opacity(hrOpacity)
+                    
+                    clearCircle //Min
+                        .overlay {
+                            Rectangle().fill(.clear)
+                                .aspectRatio(1.2, contentMode: .fit)
+                                .overlay {
+                                    Text(min).allowsHitTesting(false)
+                                        .font(.system(size: 400))
+                                        .lineLimit(1)
+                                        .minimumScaleFactor(0.1)
+                                }
+                        }
+                        .opacity(minOpacity)
+                    SecondsLabel(bubble: bubble)
+                    //                        .overlay { if sDelayBubble.referenceDelay > 0 { SDButton(bubble.sdb) }}
                 }
-                .font(.system(size: timeComponentsFontSize))
-                .fontDesign(.rounded)
-                .foregroundColor(.white)
-                .onReceive(bubble.coordinator.$components) { min = $0.min }
-                .onReceive(bubble.coordinator.$components) { hr = $0.hr }
-        }
-        
+                .scaleEffect(x: metrics.hstackScale, y: metrics.hstackScale)
+            }
+            .font(.system(size: timeComponentsFontSize))
+            .fontDesign(.rounded)
+            .foregroundColor(.white)
+            .onReceive(bubble.coordinator.$components) { min = $0.min }
+            .onReceive(bubble.coordinator.$components) { hr = $0.hr }
     }
     
     // MARK: -
