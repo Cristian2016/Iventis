@@ -87,7 +87,6 @@ struct SDButton: View {
                 offset = value.translation
                 if shouldDelete {
                     UserFeedback.doubleHaptic(.heavy)
-                    viewModel.removeDelay(for: sdb.bubble)
                     deleteTriggered = true
                 }
             }
@@ -96,7 +95,6 @@ struct SDButton: View {
     private var longPressGesture:some Gesture {
         LongPressGesture()
             .onEnded { _ in
-                viewModel.resetDelay(for: sdb)
                 
                 //UI and haptic
                 UserFeedback.doubleHaptic(.heavy)

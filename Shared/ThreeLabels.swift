@@ -21,20 +21,14 @@ struct ThreeLabels: View {
     @State private var hundredths:String
     
     @GestureState var isDetectingLongPress = false
-    
-    private let sDelayBubble:StartDelayBubble
-    
-    init?(_ timeComponentsFontSize:CGFloat,
-         _ startDelayBubble:StartDelayBubble,
-         _ bubble:Bubble?) {
         
+    init?(_ timeComponentsFontSize:CGFloat, _ bubble:Bubble?) {
         guard
             bubble?.color != nil,
             let coordinator = bubble?.coordinator
         else { return nil }
         
         self.timeComponentsFontSize = timeComponentsFontSize
-        self.sDelayBubble = startDelayBubble
         self.bubble = bubble!
                         
         let components = coordinator.components
@@ -75,7 +69,7 @@ struct ThreeLabels: View {
                             }
                             .opacity(minOpacity)
                         SecondsLabel(bubble: bubble)
-                        .overlay { if sDelayBubble.referenceDelay > 0 { SDButton(bubble.sdb) }}
+//                        .overlay { if sDelayBubble.referenceDelay > 0 { SDButton(bubble.sdb) }}
                     }
                     .scaleEffect(x: metrics.hstackScale, y: metrics.hstackScale)
                 }

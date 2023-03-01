@@ -18,7 +18,6 @@ struct BubbleCell: View {
     let metrics = Metrics()
     
     @StateObject private var bubble:Bubble
-    @StateObject private var startDelayBubble:StartDelayBubble
     
     @EnvironmentObject private var viewModel:ViewModel
     @EnvironmentObject private var layoutViewModel:LayoutViewModel
@@ -28,9 +27,7 @@ struct BubbleCell: View {
         let _ = print("BubbleCell \(bubble.color ?? "nocolor") body")
         ZStack {
             ThreeCircles(bubble: bubble, metrics: metrics)
-            ThreeLabels(metrics.timeComponentsFontSize,
-                        startDelayBubble,
-                        bubble)
+            ThreeLabels(metrics.timeComponentsFontSize, bubble)
         }
         .overlay { if bubble.hasCalendar && noNote { calendarSymbol }}
         .overlay { stickyNote }
@@ -117,7 +114,6 @@ struct BubbleCell: View {
     // MARK: -
     init(_ bubble:Bubble) {
         _bubble = StateObject(wrappedValue: bubble)
-        _startDelayBubble = StateObject(wrappedValue: bubble.sdb!)
     }
     
     func handleNoteTap() {

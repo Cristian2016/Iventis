@@ -73,7 +73,6 @@ class ViewModel: ObservableObject {
     func showMoreOptions(for bubble:Bubble) {
         //set Published property triggers UI update
         //MoreOptionsView displayed
-        secretary.theOneAndOnlyEditedSDB = bubble.sdb
     }
     
     // MARK: -
@@ -133,32 +132,6 @@ class ViewModel: ObservableObject {
         let context = PersistenceController.shared.viewContext
         let bubble = try! context.fetch(request).first
         return bubble
-    }
-    
-    // start delay
-    func saveDelay(for bubble:Bubble, _ userEnteredDelay:Int) {
-        secretary.theOneAndOnlyEditedSDB?.referenceDelay = Int64(userEnteredDelay)
-        secretary.theOneAndOnlyEditedSDB?.currentDelay = Float(userEnteredDelay)
-        PersistenceController.shared.save()
-        secretary.theOneAndOnlyEditedSDB = nil
-    }
-    
-    ///referenceDelay = 0, currentDelay = 0
-    func removeDelay(for bubble:Bubble?) {
-        guard let bubble = bubble else { return }
-        if bubble.sdb!.referenceDelay == 0 { return }
-        
-        bubble.sdb?.removeDelay()
-    }
-    
-    ///currentDelay = referenceDelay
-    func resetDelay(for sdb:StartDelayBubble) { sdb.resetDelay() }
-    
-    ///reference startDelay
-    func computeReferenceDelay(_ sdb:StartDelayBubble, _ value: Int) {
-        UserFeedback.singleHaptic(.medium)
-        sdb.referenceDelay += Int64(value)
-        sdb.currentDelay = Float(sdb.referenceDelay)
     }
     
     // MARK: - Observers
@@ -263,22 +236,17 @@ extension ViewModel {
                 newBubble.color = color
                 newBubble.rank = Int64(UserDefaults.generateRank())
                 
-                // FIXME: - no more StartDelayBubble!
-                let sdb = StartDelayBubble(context: newBubble.managedObjectContext!)
-                newBubble.sdb = sdb
                 if let note = note {
                     newBubble.note_ = note
                     newBubble.isNoteHidden = false
                 }
-                
-                try? bContext.save()
+                PersistenceController.shared.save(bContext)
             }
         }
     }
     ///delta is always zero if user taps start. if user uses start delay, delta is not zero
     func toggleBubbleStart(_ bubble:Bubble, delta:TimeInterval? = nil) {
         if bubble.currentClock <= 0 && bubble.kind != .stopwatch  { return }
-        removeDelay(for: bubble)
         
         let startDelayCompensation = delta ?? 0
         
@@ -300,7 +268,7 @@ extension ViewModel {
                     
                     thisBubble.addToSessions(newSession)
                     
-                    try? bContext.save() //⚠️
+                    PersistenceController.shared.save(bContext) //⚠️
                     
                     DispatchQueue.main.async {
                         //repetitive chunk of code ⚠️
@@ -329,7 +297,8 @@ extension ViewModel {
                     newPair.start = Date().addingTimeInterval(startDelayCompensation)
                     thisBubble.lastSession?.addToPairs(newPair)
                     
-                    try? bContext.save() //this also makes changes visible to the viewContext as well
+                    //this also makes changes visible to the viewContext as well
+                    PersistenceController.shared.save(bContext)
                     
                     DispatchQueue.main.async {
                         //repetitive chunk of code ⚠️
@@ -361,7 +330,7 @@ extension ViewModel {
                         thisBubble.lastSession?.computeDuration { //completion handler
                             
                             do {
-                                try bContext.save()
+                                PersistenceController.shared.save(bContext)
                                 DispatchQueue.main.async {
                                     bubble.coordinator.update(.user(.pause))
                                     bubble.pairBubbleCellCoordinator.update(.user(.pause))
@@ -414,7 +383,7 @@ extension ViewModel {
                         fromRemoteContextSave: changes, into: [self.controller.viewContext]
                     )
                     
-                    try bContext.save()
+                    PersistenceController.shared.save(bContext)
                     
                     DispatchQueue.main.async {
                         bubble.coordinator.update(.user(.reset))
@@ -441,11 +410,7 @@ extension ViewModel {
                 //create events for this bubbble
                 if thisBubble.hasCalendar { CalendarManager.shared.bubbleToEventify = thisBubble }
                 
-                do {
-                    try bContext.save()
-                } catch let error {
-                    print("CoreData error \(error.localizedDescription)")
-                }
+                PersistenceController.shared.save(bContext)
             }
         }
     }
@@ -463,7 +428,7 @@ extension ViewModel {
             bContext.perform {
                 let thisBubble = self.controller.grabObj(objID) as! Bubble
                 thisBubble.color = newColor
-                try? bContext.save()
+                PersistenceController.shared.save(bContext)
                 
                 let color = Color.bubbleColor(forName: thisBubble.color)
                 DispatchQueue.main.async {
@@ -485,7 +450,7 @@ extension ViewModel {
             bContext.perform {
                 let thisBubble = self.controller.grabObj(objID) as! Bubble
                 thisBubble.isPinned.toggle()
-                try? bContext.save()
+                PersistenceController.shared.save(bContext)
             }
         }
     }
@@ -510,7 +475,7 @@ extension ViewModel {
                 let thisBubble = bContext.object(with: objID) as! Bubble
                 bContext.delete(thisBubble)
                 
-                try? bContext.save()
+                PersistenceController.shared.save(bContext)
             }
         }
     }
@@ -525,7 +490,7 @@ extension ViewModel {
             bContext.perform {
                 let thisPair = bContext.object(with: objID) as! Pair
                 bContext.delete(thisPair)
-                try? bContext.save()
+                PersistenceController.shared.save(bContext)
             }
         }
     }
@@ -550,24 +515,18 @@ extension ViewModel {
                 thisBubble.currentClock = thisBubble.initialClock
             }
             
-            do {
-                try bContext.save()
-                
-                if isCurrentSession {
-                    DispatchQueue.main.async {
-                        bubble.coordinator.update(.user(.deleteCurrentSession))
-                        bubble.pairBubbleCellCoordinator.update(.user(.deleteCurrentSession))
-                    }
+            PersistenceController.shared.save(bContext)
+            
+            if isCurrentSession {
+                DispatchQueue.main.async {
+                    bubble.coordinator.update(.user(.deleteCurrentSession))
+                    bubble.pairBubbleCellCoordinator.update(.user(.deleteCurrentSession))
                 }
-            } //7
-            catch let error { print(error.localizedDescription) }
+            }//7
         }
     }
     
     func endSession(_ bubble:Bubble) {
-        //make sure no startDelayBubble displayed at this point
-        removeDelay(for: bubble)
-        
         secretary.addNoteButton_bRank = nil //1
         
         let objID = bubble.objectID
@@ -596,7 +555,7 @@ extension ViewModel {
             }
             else { self.createCalendarEventIfRequiredAndSaveToCoreData(for: thisBubble) }
             
-            try? bContext.save() //⚠️ from this moment on, viewContext can see the changes
+            PersistenceController.shared.save(bContext)
             
             DispatchQueue.main.async {
                 bubble.coordinator.update(.user(.endSession))
@@ -614,7 +573,7 @@ extension ViewModel {
             bContext.perform {
                 let thisNote = bContext.object(with: objID) as! BubbleSavedNote
                 bContext.delete(thisNote)
-                try? bContext.save()
+                PersistenceController.shared.save(bContext)
             }
         }
     }
@@ -628,7 +587,7 @@ extension ViewModel {
             bContext.perform {
                 let thisNote = bContext.object(with: objID) as! PairSavedNote
                 bContext.delete(thisNote)
-                try? bContext.save()
+                PersistenceController.shared.save(bContext)
             }
         }
     }
@@ -636,10 +595,16 @@ extension ViewModel {
     // TODO: To verify it works
     //delete BubbleSticky
     func deleteStickyNote(for bubble:Bubble) {
-        bubble.managedObjectContext?.perform {
-            bubble.note = nil
-            CalendarManager.shared.updateExistingEvent(.title(bubble))
-            try? bubble.managedObjectContext?.save()
+        let objID = bubble.objectID
+        let bContext = controller.bContext
+        
+        bContext.perform {
+            let thisBubble = self.controller.grabObj(objID) as! Bubble
+            thisBubble.note = nil
+            PersistenceController.shared.save(bContext)
+            DispatchQueue.main.async {
+                CalendarManager.shared.updateExistingEvent(.title(bubble))
+            }
         }
     }
     

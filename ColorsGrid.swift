@@ -88,7 +88,6 @@ struct ColorsGrid_Previews: PreviewProvider {
         let sdb = StartDelayBubble(context: PersistenceController.preview.viewContext)
         sdb.referenceDelay = 0
         
-        bubble.sdb = sdb
         bubble.color = "darkGreen"
         return bubble
     }()

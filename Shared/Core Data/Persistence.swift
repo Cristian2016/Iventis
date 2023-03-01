@@ -69,6 +69,18 @@ struct PersistenceController {
     }
     
     func save(_ context:NSManagedObjectContext = PersistenceController.shared.viewContext) {
-        if context.hasChanges { try? context.save() }
+        if context == PersistenceController.shared.viewContext {
+            print("⚠️ viewContext save")
+        } else {
+            print("🔴 bContext save")
+        }
+        
+        if context.hasChanges {
+            do {
+                try context.save()
+            } catch {
+                print(error.localizedDescription)
+            }
+        }
     }
 }

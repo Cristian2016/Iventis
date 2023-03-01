@@ -168,7 +168,6 @@ struct MoreOptionsView: View {
          save CoreData context*/
         if input!.initialStartDelay != input!.userEditedDelay {
             UserFeedback.singleHaptic(.medium)
-            viewModel.saveDelay(for: input!.bubble, input!.userEditedDelay)
         }
         dismiss()
     }
