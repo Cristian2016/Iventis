@@ -99,6 +99,7 @@ struct BubbleDeleteActionAlert: View {
         Button {
             if !bubble.sessions_.isEmpty { UserFeedback.singleHaptic(.light) }
             removeAddTagButton()
+            
             if !bubble.sessions_.isEmpty {
                 viewModel.reset(bubble)
                 secretary.deleteAction_bRank = nil

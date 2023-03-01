@@ -22,26 +22,24 @@ struct TopCell: View {
     
     // MARK: -
     var body: some View {
-        if !session.isFault {
-//            let _ = print("Topcell body")
-            HStack {
-                ZStack {
-                    sessionRankView
-                    Push(.bottomLeft) {
-                        VStack (alignment:.leading, spacing: metrics.dateDurationViewsSpacing) {
-                            dateView
-                            TopCellDurationView(metrics, session, myRank).padding(2)
-                        }
-                        .padding(metrics.edgeInset)
+        //            let _ = print("Topcell body")
+        HStack {
+            ZStack {
+                sessionRankView
+                Push(.bottomLeft) {
+                    VStack (alignment:.leading, spacing: metrics.dateDurationViewsSpacing) {
+                        dateView
+                        TopCellDurationView(metrics, session, myRank).padding(2)
                     }
-                    .frame(height: metrics.topCellHeight)
-                    .background( backgroundView )
+                    .padding(metrics.edgeInset)
                 }
-                Color.lightGray.frame(width:1, height: 100)
+                .frame(height: metrics.topCellHeight)
+                .background( backgroundView )
             }
-            .onTapGesture { handleTopCellTapped() }
-            .onLongPressGesture { handleTopCellLongPressed() }
+            Color.lightGray.frame(width:1, height: 100)
         }
+        .onTapGesture { handleTopCellTapped() }
+        .onLongPressGesture { handleTopCellLongPressed() }
     }
     
     // MARK: - Legos
