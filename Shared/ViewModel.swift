@@ -296,7 +296,6 @@ extension ViewModel {
                     self.controller.save(bContext) //⚠️ no need to save vContext
                     
                     DispatchQueue.main.async { //UI stuff
-                        //repetitive chunk of code ⚠️
                         bubble.coordinator.update(.user(.start))
                         bubble.pairBubbleCellCoordinator.update(.user(.start))
                                                 
@@ -323,7 +322,6 @@ extension ViewModel {
                     PersistenceController.shared.save(bContext) //⚠️ no need to save vContext
                     
                     DispatchQueue.main.async { //UI stuff
-                        //repetitive chunk of code ⚠️
                         bubble.coordinator.update(.user(.start))
                         bubble.pairBubbleCellCoordinator.update(.user(.start))
                         
@@ -341,14 +339,15 @@ extension ViewModel {
                 bContext.perform {
                     let thisBubble = self.controller.grabObj(objID) as! Bubble
                     let currentPair = thisBubble.lastPair
-                    currentPair?.pause = Date()
+                    currentPair!.pause = Date()
                     
-                    currentPair?.computeDuration(.atPause) { //completion handler
+                    currentPair!.computeDuration(.atPause) { //completion handler
                         thisBubble.currentClock += currentPair!.duration
                         
-                        thisBubble.lastSession?.computeDuration { //completion
+                        thisBubble.lastSession!.computeDuration { //completion
                             
                             PersistenceController.shared.save(bContext)
+                            
                             DispatchQueue.main.async {
                                 bubble.coordinator.update(.user(.pause))
                                 bubble.pairBubbleCellCoordinator.update(.user(.pause))
