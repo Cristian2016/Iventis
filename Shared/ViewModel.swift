@@ -319,7 +319,7 @@ extension ViewModel {
                     thisBubble.lastSession?.addToPairs(newPair)
                     
                     //this also makes changes visible to the viewContext as well
-                    PersistenceController.shared.save(bContext) //⚠️ no need to save vContext
+                    self.controller.save(bContext) //⚠️ no need to save vContext
                     
                     DispatchQueue.main.async { //UI stuff
                         bubble.coordinator.update(.user(.start))
@@ -346,7 +346,7 @@ extension ViewModel {
                         
                         thisBubble.lastSession!.computeDuration { //completion
                             
-                            PersistenceController.shared.save(bContext)
+                            self.controller.save(bContext)
                             
                             DispatchQueue.main.async {
                                 bubble.coordinator.update(.user(.pause))
