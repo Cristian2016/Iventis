@@ -375,7 +375,9 @@ extension ViewModel {
             let objID = bubble.objectID
             let bContext = self.pController.bContext
             
-            bContext.perform {
+            bContext.perform { [weak self] in
+                guard let self = self else { return }
+                
                 let thisBubble = bContext.object(with: objID) as! Bubble
                 
                 thisBubble.created = Date()
@@ -444,7 +446,9 @@ extension ViewModel {
             let bContext = self.pController.bContext
             let objID = bubble.objectID
             
-            bContext.perform {
+            bContext.perform { [weak self] in
+                guard let self = self else { return }
+                
                 let thisBubble = self.pController.grabObj(objID) as! Bubble
                 thisBubble.color = newColor
                 PersistenceController.shared.save(bContext)
@@ -466,7 +470,9 @@ extension ViewModel {
             let bContext = self.pController.bContext
             let objID = bubble.objectID
             
-            bContext.perform {
+            bContext.perform { [weak self] in
+                guard let self = self else { return }
+                
                 let thisBubble = self.pController.grabObj(objID) as! Bubble
                 thisBubble.isPinned.toggle()
                 PersistenceController.shared.save(bContext)
@@ -497,7 +503,7 @@ extension ViewModel {
         let bubbleID = bubble.objectID
         let sessionID = session.objectID
         
-        bContext.perform {
+        bContext.perform { [weak self] in
             let thisBubble = bContext.object(with: bubbleID) as! Bubble
             let thisSession = bContext.object(with: sessionID) as! Session
             
