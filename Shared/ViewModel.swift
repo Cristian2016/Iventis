@@ -640,16 +640,13 @@ extension ViewModel {
     ///save to CoreData either bubble.note or pair.note
     func save(_ textInput:String, forObject object:NSManagedObject) {
         var note = textInput
-        
-        let bContext = PersistenceController.shared.bContext
-        
+                
         switch object.entity.name {
             case "Bubble":
                 let bubble = object as! Bubble
                 let objID = bubble.objectID
                 
-                bContext.perform {  [weak self] in
-                    
+                bubble.managedObjectContext?.perform {  [weak self] in
                     note.removeWhiteSpaceAtBothEnds()
                     let theBubble = PersistenceController.shared.grabObj(objID) as! Bubble
                     theBubble.note = note
@@ -661,7 +658,7 @@ extension ViewModel {
                     newHistoryItem.note = note
                     theBubble.addToHistory(newHistoryItem)
                     
-                    self?.pController.save(bContext)
+                    self?.pController.save(bubble.managedObjectContext)
                     
                     DispatchQueue.main.async {
                         CalendarManager.shared.updateExistingEvent(.title(bubble))
@@ -686,7 +683,7 @@ extension ViewModel {
                     newHistoryItem.note = note
                     pair.addToHistory(newHistoryItem)
                     
-                    self.pController.save(bContext)
+                    self.pController.save(pair.managedObjectContext)
                     
                     DispatchQueue.main.async {
                         CalendarManager.shared.updateExistingEvent(.notes(pair.session!))
