@@ -273,12 +273,11 @@ extension ViewModel {
         
         let startDelayCompensation = delta ?? 0
         
+        let bContext = PersistenceController.shared.bContext
+        let objID = bubble.objectID
+        
         switch bubble.state {
             case .brandNew: /* changes to .running */
-                
-                let bContext = PersistenceController.shared.bContext
-                let objID = bubble.objectID
-                
                 bContext.perform {
                     let thisBubble = bContext.object(with: objID) as! Bubble
                     
@@ -311,9 +310,6 @@ extension ViewModel {
                 }
                 
             case .paused:  /* changes to running */
-                let bContext = PersistenceController.shared.bContext
-                let objID = bubble.objectID
-                
                 bContext.perform {
                     let thisBubble = bContext.object(with: objID) as! Bubble
                     
@@ -341,9 +337,6 @@ extension ViewModel {
                 }
                 
             case .running: /* changes to .paused */
-                let bContext = PersistenceController.shared.bContext
-                let objID = bubble.objectID
-                
                 bContext.perform {
                     let thisBubble = self.controller.grabObj(objID) as! Bubble
                     let currentPair = thisBubble.lastPair
