@@ -292,6 +292,7 @@ extension ViewModel {
                     thisBubble.addToSessions(newSession)
                     //.....................................................
                     
+                    //this also makes changes visible to the viewContext as well
                     self.controller.save(bContext) //⚠️ no need to save vContext
                     
                     DispatchQueue.main.async {
