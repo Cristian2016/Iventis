@@ -16,9 +16,10 @@ struct PersistenceController {
         container = NSPersistentContainer(name: "Model")
         
         //one shared database for App Widgets and Siri
-        let sharedDataBaseURL = URL.sharedContainerURL.appendingPathComponent("sharedDatabase.sqlite")
-        let description = NSPersistentStoreDescription(url: sharedDataBaseURL)
-        container.persistentStoreDescriptions = [description]
+        let sharedDatabase = URL.sharedContainerURL.appendingPathComponent("sharedDatabase.sqlite")
+                
+        //moved database to shared location
+        container.persistentStoreDescriptions = [NSPersistentStoreDescription(url: sharedDatabase)]
         
         if inMemory {
             container.persistentStoreDescriptions.first!.url = URL(fileURLWithPath: "/dev/null")
