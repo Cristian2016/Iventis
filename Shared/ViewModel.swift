@@ -13,6 +13,7 @@
 //6 creates new bubble.session and new pair on a bContext. changes will be seen by viewContxt only if you save bContext first!
 //7 from here on viewContext can see all changes
 //8 when creating a bubble, it is necessary to bContext.save(). after that vContext 'absorbs' the object and bContext will have no obj registered, but vContext.registeredObjs increases by one. No need to vContext.save()!!!
+//9 after deleting the obj, must do both vContext and bContext save. vContext must always be used on mainQueue, otherwise error!!!
 
 import Foundation
 import SwiftUI
@@ -265,7 +266,7 @@ extension ViewModel {
                 DispatchQueue.main.async { PersistenceController.shared.save() }
             }
         }
-    }
+    } //9
     
     ///delta is always zero if user taps start. if user uses start delay, delta is not zero
     func toggleBubbleStart(_ bubble:Bubble, delta:TimeInterval? = nil) {
