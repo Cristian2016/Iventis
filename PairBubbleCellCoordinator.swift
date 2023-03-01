@@ -35,14 +35,17 @@ class PairBubbleCellCoordinator {
                             }
                             .store(in: &cancellable)
                     case .pause, .deleteCurrentSession, .endSession:
+                        stop = true
                         cancellable = []
                         components = Components("0", "0", "0")
                         
                     case .reset:
+                        stop = true
                         cancellable = []
                         components = Components("0", "0", "0")
                         
                     case .deleteBubble:
+                        stop = true
                         cancellable = []
                         components = Components("0", "0", "0")
                         NotificationCenter.default.removeObserver(self, name: .detailViewVisible, object: bubble)
