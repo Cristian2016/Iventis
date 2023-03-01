@@ -11,7 +11,7 @@ struct EmptyListView: View {
     var body: some View {
         VStack (alignment:.center, spacing: 20) {
             HStack {
-                Text("How to\nCreate Bubbles").font(.title)
+                Text("Create Bubbles").font(.title)
                     .multilineTextAlignment(.center)
             }
             VStack (alignment:.leading, spacing: 15) {
