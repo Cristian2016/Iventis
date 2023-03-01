@@ -12,6 +12,7 @@
 //5 PairBubbleCellCoordinator is interested in knowing when DetailView is visible or hidden, since it needs to resume or pause work
 //6 creates new bubble.session and new pair on a bContext. changes will be seen by viewContxt only if you save bContext first!
 //7 from here on viewContext can see all changes
+//8 when creating a bubble, it is necessary to bContext.save(). after that vContext 'absorbs' the object and bContext will have no obj registered, but vContext.registeredObjs increases by one. No need to vContext.save()!!!
 
 import Foundation
 import SwiftUI
@@ -243,7 +244,7 @@ extension ViewModel {
                 PersistenceController.shared.save(bContext)
             }
         }
-    }
+    } //8
     
     func deleteBubble(_ bubble:Bubble) {
         //if unpinned are hidden & bubble to delete is pinned and pinned section has only one item, unhide unpinned
