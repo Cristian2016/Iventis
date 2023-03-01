@@ -244,6 +244,7 @@ extension ViewModel {
             }
         }
     }
+    
     ///delta is always zero if user taps start. if user uses start delay, delta is not zero
     func toggleBubbleStart(_ bubble:Bubble, delta:TimeInterval? = nil) {
         if bubble.currentClock <= 0 && bubble.kind != .stopwatch  { return }
