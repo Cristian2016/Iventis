@@ -518,18 +518,18 @@ extension ViewModel {
     }
     
     func endSession(_ bubble:Bubble) {
+        if bubble.state == .brandNew { return }
+        
         secretary.addNoteButton_bRank = nil //1
         
         let objID = bubble.objectID
         let bContext = pController.bContext
-        if bubble.state == .brandNew { return }
         
         bContext.perform {
             let thisBubble = self.pController.grabObj(objID) as! Bubble
             
             //reset bubble clock
             thisBubble.currentClock = thisBubble.initialClock
-            //mark session as ended
             thisBubble.lastSession!.isEnded = true
             
             let bubbleWasStillRunningWhenSessionWasEnded = thisBubble.lastPair!.pause == nil
