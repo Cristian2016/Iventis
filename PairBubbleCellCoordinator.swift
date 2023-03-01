@@ -24,12 +24,10 @@ class PairBubbleCellCoordinator {
                         .sink { [weak self] _ in self?.task() }
                         .store(in: &cancellable)
                 }
-                isPairBubbleCellRunning = true
                 
             case .user(let action) :
                 switch action {
                     case .start:
-                        isPairBubbleCellRunning = true
                         refresh = false
                         publisher
                             .sink { [weak self] _ in
@@ -37,25 +35,21 @@ class PairBubbleCellCoordinator {
                             }
                             .store(in: &cancellable)
                     case .pause, .deleteCurrentSession, .endSession:
-                        isPairBubbleCellRunning = false
-                        components = Components("0", "0", "0")
                         cancellable = []
-                
+                        components = Components("0", "0", "0")
+                        
                     case .reset:
-                        isPairBubbleCellRunning = false
-                        components = Components("0", "0", "0")
                         cancellable = []
+                        components = Components("0", "0", "0")
                         
                     case .deleteBubble:
                         cancellable = []
-                        isPairBubbleCellRunning = false
                         components = Components("0", "0", "0")
                         NotificationCenter.default.removeObserver(self, name: .detailViewVisible, object: bubble)
                 }
         }
     }
     
-    @Published var isPairBubbleCellRunning = false
     @Published private(set) var components = Components("0", "0", "0")
     
     // MARK: -
