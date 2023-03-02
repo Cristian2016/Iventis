@@ -404,14 +404,14 @@ extension ViewModel {
                     
                     let changes = [NSDeletedObjectsKey : ids]
                     
-                    NSManagedObjectContext.mergeChanges(
-                        fromRemoteContextSave: changes, into: [self.controller.viewContext]
-                    )
-                    
                     //save bContext only and update UI, if save was successfull
                     self.controller.save(bContext) {
-                        
                         DispatchQueue.main.async {
+                            
+                            //merge changes
+                            NSManagedObjectContext.mergeChanges(
+                                fromRemoteContextSave: changes, into: [self.controller.viewContext]
+                            )
                             bubble.coordinator.update(.user(.reset))
                             bubble.pairBubbleCellCoordinator.update(.user(.reset))
                         }
