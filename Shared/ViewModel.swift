@@ -221,7 +221,8 @@ extension ViewModel {
         
         let bContext = PersistenceController.shared.bContext
         
-        bContext.perform {
+        bContext.perform { [weak self] in
+            
             let newBubble = Bubble(context: bContext)
             newBubble.created = Date()
             newBubble.kind = kind
@@ -239,7 +240,7 @@ extension ViewModel {
                 newBubble.note_ = note
                 newBubble.isNoteHidden = false
             }
-            PersistenceController.shared.save(bContext)
+            self?.controller.save(bContext)
         }
     } //8
     
