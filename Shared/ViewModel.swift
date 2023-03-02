@@ -323,18 +323,18 @@ extension ViewModel {
                     thisBubble.lastSession?.addToPairs(newPair)
                     
                     //this also makes changes visible to the viewContext as well
-                    self.controller.save(bContext) //⚠️ no need to save vContext
-                    
-                    DispatchQueue.main.async { //UI stuff
-                        bubble.coordinator.update(.user(.start))
-                        bubble.pairBubbleCellCoordinator.update(.user(.start))
-                        
-                        //1 both
-                        self.secretary.addNoteButton_bRank = nil //clear first
-                        self.secretary.addNoteButton_bRank = Int(bubble.rank)
-                        
-                        delayExecution(.now() + 0.3) {
-                            self.secretary.pairBubbleCellNeedsDisplay.toggle()
+                    self.controller.save(bContext) { //⚠️ no need to save vContext
+                        DispatchQueue.main.async { //UI stuff
+                            bubble.coordinator.update(.user(.start))
+                            bubble.pairBubbleCellCoordinator.update(.user(.start))
+                            
+                            //1 both
+                            self.secretary.addNoteButton_bRank = nil //clear first
+                            self.secretary.addNoteButton_bRank = Int(bubble.rank)
+                            
+                            delayExecution(.now() + 0.3) {
+                                self.secretary.pairBubbleCellNeedsDisplay.toggle()
+                            }
                         }
                     }
                 }
