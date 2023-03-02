@@ -409,7 +409,8 @@ extension ViewModel {
                     )
                     
                     //save bContext only and update UI, if save was successfull
-                    PersistenceController.shared.save(bContext) {
+                    self.controller.save(bContext) {
+                        
                         DispatchQueue.main.async {
                             bubble.coordinator.update(.user(.reset))
                             bubble.pairBubbleCellCoordinator.update(.user(.reset))
@@ -424,7 +425,10 @@ extension ViewModel {
     }
     
     func toggleCalendar(_ bubble:Bubble) {
-        DispatchQueue.global().async {
+        DispatchQueue.global().async { [weak self] in
+            
+            guard let self = self else { return }
+            
             let objID = bubble.objectID
             let bContext = self.controller.bContext
             
@@ -436,7 +440,7 @@ extension ViewModel {
                 //create events for this bubbble
                 if thisBubble.hasCalendar { CalendarManager.shared.bubbleToEventify = thisBubble }
                 
-                PersistenceController.shared.save(bContext)
+                self.controller.save(bContext)
             }
         }
     }
@@ -458,7 +462,8 @@ extension ViewModel {
                 thisBubble.color = newColor
                 
                 //save changes to CoreData using bContext and update UI
-                PersistenceController.shared.save(bContext) {
+                self.controller.save(bContext) {
+                    
                     let color = Color.bubbleColor(forName: thisBubble.color)
                     DispatchQueue.main.async {
                         bubble.coordinator.colorPublisher.send(color)
@@ -482,7 +487,7 @@ extension ViewModel {
                 
                 let thisBubble = self.controller.grabObj(objID) as! Bubble
                 thisBubble.isPinned.toggle()
-                PersistenceController.shared.save(bContext)
+                self.controller.save(bContext)
             }
         }
     }
@@ -498,7 +503,7 @@ extension ViewModel {
             bContext.perform {
                 let thisPair = bContext.object(with: objID) as! Pair
                 bContext.delete(thisPair)
-                PersistenceController.shared.save(bContext)
+                self.controller.save(bContext)
             }
         }
     }
@@ -510,7 +515,8 @@ extension ViewModel {
         let bubbleID = bubble.objectID
         let sessionID = session.objectID
         
-        bContext.perform {
+        bContext.perform { [weak self] in
+            
             let thisBubble = bContext.object(with: bubbleID) as! Bubble
             let thisSession = bContext.object(with: sessionID) as! Session
             
@@ -523,7 +529,8 @@ extension ViewModel {
                 thisBubble.currentClock = thisBubble.initialClock
             }
             
-            PersistenceController.shared.save(bContext) { //7
+            self?.controller.save(bContext) { //7
+                
                 if isCurrentSession {
                     DispatchQueue.main.async {
                         bubble.coordinator.update(.user(.deleteCurrentSession))
