@@ -565,9 +565,8 @@ extension ViewModel {
             }
             else { self.createCalendarEventIfRequiredAndSaveToCoreData(for: thisBubble) }
             
-            self.controller.save(bContext) {
-                
-                //after save bContext -> viewContext can see the changes -> so UI update can be done here
+            self.controller.save(bContext) { /*
+                                              after save bContext -> viewContext can see the changes -> so UI update can be done here */
                 DispatchQueue.main.async {
                     bubble.coordinator.update(.user(.endSession))
                     bubble.pairBubbleCellCoordinator.update(.user(.endSession))
