@@ -405,6 +405,7 @@ extension ViewModel {
                         fromRemoteContextSave: changes, into: [self.controller.viewContext]
                     )
                     
+                    //save bContext only and update UI, if save was successfull
                     PersistenceController.shared.save(bContext) {
                         DispatchQueue.main.async {
                             bubble.coordinator.update(.user(.reset))
