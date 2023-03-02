@@ -69,7 +69,8 @@ struct PersistenceController {
         bContext.object(with: objectID)
     }
     
-    func save(_ context:NSManagedObjectContext? = PersistenceController.shared.viewContext) {
+    ///closure inserts code right after successful save, within do statement
+    func save(_ context:NSManagedObjectContext? = PersistenceController.shared.viewContext, closure: (() -> Void)? = nil) {
         guard let context = context else { return }
         
         if context == PersistenceController.shared.viewContext {
@@ -81,6 +82,7 @@ struct PersistenceController {
         if context.hasChanges {
             do {
                 try context.save()
+                closure?()
             } catch {
                 print(error.localizedDescription)
             }

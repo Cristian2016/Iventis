@@ -26,7 +26,7 @@ class ViewModel: ObservableObject {
     private let secretary = Secretary.shared
     
     ///PersistanceController.shared
-    private lazy var pController = PersistenceController.shared
+    private lazy var controller = PersistenceController.shared
             
     deinit { NotificationCenter.default.removeObserver(self) } //1
     
@@ -249,7 +249,7 @@ extension ViewModel {
         //        }
         if !path.isEmpty { withAnimation(.easeInOut) { path = [] }}
         
-        let bContext = pController.bContext
+        let bContext = controller.bContext
         let objID = bubble.objectID
         
         bubble.managedObjectContext?.perform {
@@ -263,8 +263,9 @@ extension ViewModel {
             bContext.delete(thisBubble)
             
             //both contexts must save
-            PersistenceController.shared.save(bContext)
-            DispatchQueue.main.async { PersistenceController.shared.save() }
+            self.controller.save(bContext) {
+                DispatchQueue.main.async { self.controller.save() }
+            }
         }
     } //9
     
@@ -294,7 +295,7 @@ extension ViewModel {
                     //.....................................................
                     
                     //this also makes changes visible to the viewContext as well
-                    self?.pController.save(bContext) //⚠️ no need to save vContext
+                    self?.controller.save(bContext) //⚠️ no need to save vContext
                     
                     DispatchQueue.main.async { //UI stuff
                         bubble.coordinator.update(.user(.start))
@@ -320,7 +321,7 @@ extension ViewModel {
                     thisBubble.lastSession?.addToPairs(newPair)
                     
                     //this also makes changes visible to the viewContext as well
-                    self.pController.save(bContext) //⚠️ no need to save vContext
+                    self.controller.save(bContext) //⚠️ no need to save vContext
                     
                     DispatchQueue.main.async { //UI stuff
                         bubble.coordinator.update(.user(.start))
@@ -340,7 +341,7 @@ extension ViewModel {
                 bContext.perform { [weak self] in
                     guard let self = self else { return }
                     
-                    let thisBubble = self.pController.grabObj(objID) as! Bubble
+                    let thisBubble = self.controller.grabObj(objID) as! Bubble
                     let currentPair = thisBubble.lastPair
                     currentPair!.pause = Date()
                     
@@ -349,7 +350,7 @@ extension ViewModel {
                         
                         thisBubble.lastSession!.computeDuration { //completion
                             
-                            self.pController.save(bContext)
+                            self.controller.save(bContext)
                             
                             DispatchQueue.main.async {
                                 bubble.coordinator.update(.user(.pause))
@@ -373,7 +374,7 @@ extension ViewModel {
         
         DispatchQueue.global().async {
             let objID = bubble.objectID
-            let bContext = self.pController.bContext
+            let bContext = self.controller.bContext
             
             bContext.perform { [weak self] in
                 guard let self = self else { return }
@@ -401,7 +402,7 @@ extension ViewModel {
                     let changes = [NSDeletedObjectsKey : ids]
                     
                     NSManagedObjectContext.mergeChanges(
-                        fromRemoteContextSave: changes, into: [self.pController.viewContext]
+                        fromRemoteContextSave: changes, into: [self.controller.viewContext]
                     )
                     
                     PersistenceController.shared.save(bContext)
@@ -421,7 +422,7 @@ extension ViewModel {
     func toggleCalendar(_ bubble:Bubble) {
         DispatchQueue.global().async {
             let objID = bubble.objectID
-            let bContext = self.pController.bContext
+            let bContext = self.controller.bContext
             
             bContext.perform {
                 let thisBubble = bContext.object(with: objID) as! Bubble
@@ -443,13 +444,13 @@ extension ViewModel {
         UserFeedback.singleHaptic(.medium)
         
         DispatchQueue.global().async {
-            let bContext = self.pController.bContext
+            let bContext = self.controller.bContext
             let objID = bubble.objectID
             
             bContext.perform { [weak self] in
                 guard let self = self else { return }
                 
-                let thisBubble = self.pController.grabObj(objID) as! Bubble
+                let thisBubble = self.controller.grabObj(objID) as! Bubble
                 thisBubble.color = newColor
                 PersistenceController.shared.save(bContext)
                 
@@ -467,13 +468,13 @@ extension ViewModel {
 //        }
         
         DispatchQueue.global().async {
-            let bContext = self.pController.bContext
+            let bContext = self.controller.bContext
             let objID = bubble.objectID
             
             bContext.perform { [weak self] in
                 guard let self = self else { return }
                 
-                let thisBubble = self.pController.grabObj(objID) as! Bubble
+                let thisBubble = self.controller.grabObj(objID) as! Bubble
                 thisBubble.isPinned.toggle()
                 PersistenceController.shared.save(bContext)
             }
@@ -486,7 +487,7 @@ extension ViewModel {
         
         DispatchQueue.global().async {
             let objID = pair.objectID
-            let bContext = self.pController.bContext
+            let bContext = self.controller.bContext
             
             bContext.perform {
                 let thisPair = bContext.object(with: objID) as! Pair
@@ -499,7 +500,7 @@ extension ViewModel {
     func deleteSession(_ session:Session) {
         guard let bubble = session.bubble else { fatalError() }
         
-        let bContext = self.pController.bContext
+        let bContext = self.controller.bContext
         let bubbleID = bubble.objectID
         let sessionID = session.objectID
         
@@ -533,12 +534,12 @@ extension ViewModel {
         secretary.addNoteButton_bRank = nil //1
         
         let objID = bubble.objectID
-        let bContext = pController.bContext
+        let bContext = controller.bContext
         
         bContext.perform {  [weak self] in
             guard let self = self else { return }
             
-            let thisBubble = self.pController.grabObj(objID) as! Bubble
+            let thisBubble = self.controller.grabObj(objID) as! Bubble
             
             //reset bubble clock
             thisBubble.currentClock = thisBubble.initialClock
@@ -560,7 +561,7 @@ extension ViewModel {
             }
             else { self.createCalendarEventIfRequiredAndSaveToCoreData(for: thisBubble) }
             
-            self.pController.save(bContext)
+            self.controller.save(bContext)
             
             DispatchQueue.main.async {
                 bubble.coordinator.update(.user(.endSession))
@@ -572,7 +573,7 @@ extension ViewModel {
     //delete BubbleSticky in List
     func deleteBubbleNote(_ savedNote:BubbleSavedNote) {
         DispatchQueue.global().async {
-            let bContext = self.pController.bContext
+            let bContext = self.controller.bContext
             let objID = savedNote.objectID
             
             bContext.perform {
@@ -586,7 +587,7 @@ extension ViewModel {
     //delete PairSticky in List
     func deletePairNote(_ savedNote:PairSavedNote) {
         DispatchQueue.global().async {
-            let bContext = self.pController.bContext
+            let bContext = self.controller.bContext
             let objID = savedNote.objectID
             
             bContext.perform {
@@ -601,12 +602,12 @@ extension ViewModel {
     //delete BubbleSticky
     func deleteStickyNote(for bubble:Bubble) {
         let objID = bubble.objectID
-        let bContext = pController.bContext
+        let bContext = controller.bContext
         
         bContext.perform {  [weak self] in
             guard let self = self else { return }
             
-            let thisBubble = self.pController.grabObj(objID) as! Bubble
+            let thisBubble = self.controller.grabObj(objID) as! Bubble
             thisBubble.note = nil
             PersistenceController.shared.save(bContext)
             DispatchQueue.main.async {
@@ -621,12 +622,12 @@ extension ViewModel {
     func deleteStickyNote(for pair:Pair) {
         
         let objID = pair.objectID
-        let bContext = pController.bContext
+        let bContext = controller.bContext
         
         bContext.perform { [weak self] in
             guard let self = self else { return }
             
-            let thisPair = self.pController.grabObj(objID) as! Pair
+            let thisPair = self.controller.grabObj(objID) as! Pair
             thisPair.note = nil
             PersistenceController.shared.save(bContext)
             DispatchQueue.main.async {
@@ -658,7 +659,7 @@ extension ViewModel {
                     newHistoryItem.note = note
                     theBubble.addToHistory(newHistoryItem)
                     
-                    self?.pController.save(bubble.managedObjectContext)
+                    self?.controller.save(bubble.managedObjectContext)
                     
                     DispatchQueue.main.async {
                         CalendarManager.shared.updateExistingEvent(.title(bubble))
@@ -683,7 +684,7 @@ extension ViewModel {
                     newHistoryItem.note = note
                     pair.addToHistory(newHistoryItem)
                     
-                    self.pController.save(pair.managedObjectContext)
+                    self.controller.save(pair.managedObjectContext)
                     
                     DispatchQueue.main.async {
                         CalendarManager.shared.updateExistingEvent(.notes(pair.session!))
