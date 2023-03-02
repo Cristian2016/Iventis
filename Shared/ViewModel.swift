@@ -394,31 +394,24 @@ extension ViewModel {
                 let batchDeleteRequest = NSBatchDeleteRequest(fetchRequest: request)
                 batchDeleteRequest.resultType = .resultTypeObjectIDs
                 
-                do {
-                    let result = try bContext.execute(batchDeleteRequest)
-                    
-                    guard
-                        let deleteResult = result as? NSBatchDeleteResult,
-                        let ids = deleteResult.result as? [NSManagedObjectID]
-                    else { return }
-                    
-                    let changes = [NSDeletedObjectsKey : ids]
-                    
-                    //save bContext only and update UI, if save was successfull
-                    self.controller.save(bContext) {
-                        DispatchQueue.main.async {
-                            
-                            //merge changes
-                            NSManagedObjectContext.mergeChanges(
-                                fromRemoteContextSave: changes, into: [self.controller.viewContext]
-                            )
-                            bubble.coordinator.update(.user(.reset))
-                            bubble.pairBubbleCellCoordinator.update(.user(.reset))
-                        }
+                let result = try bContext.execute(batchDeleteRequest)
+                
+                guard
+                    let deleteResult = result as? NSBatchDeleteResult,
+                    let ids = deleteResult.result as? [NSManagedObjectID]
+                else { return }
+                
+                let changes = [NSDeletedObjectsKey : ids]
+                
+                //save bContext only and update UI, if save was successfull
+                self.controller.save(bContext) {
+                    DispatchQueue.main.async { //merge changes and update UI
+                        NSManagedObjectContext.mergeChanges(
+                            fromRemoteContextSave: changes, into: [self.controller.viewContext]
+                        )
+                        bubble.coordinator.update(.user(.reset))
+                        bubble.pairBubbleCellCoordinator.update(.user(.reset))
                     }
-                                        
-                } catch let error {
-                    print("CoreData pula \(error.localizedDescription)")
                 }
             }
         }
