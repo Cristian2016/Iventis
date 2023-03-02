@@ -108,7 +108,7 @@ extension CalendarManager {
         let firstPair = pairs.first!
         let lastPair = pairs.last!
         
-        let notes = composeEventNotes(from: pairs)
+        let notes = createEventNotes(from: pairs)
         
         let title = eventTitle(for: session)
         newEvent(with: title,
@@ -138,7 +138,7 @@ extension CalendarManager {
             
             if let previousNotes = event.notes {
                 let notesAddedInCalendarByTheUser = previousNotes.components(separatedBy: eventNotesSeparator).last!
-                let notesAddedInTheApp = composeEventNotes(from: session.pairs_)
+                let notesAddedInTheApp = createEventNotes(from: session.pairs_)
                 let updatedNotes = notesAddedInTheApp + notesAddedInCalendarByTheUser
                 
                 // FIXME: find a better implementation
@@ -245,8 +245,14 @@ class CalendarManager: NSObject {
         return startTimeString + " - " + endTimeString
     }
     
-    private func composeEventNotes(from pairs:[Pair]) -> String {
-        var bucket = String()
+    private func createEventNotes(from pairs:[Pair]) -> String {
+        
+        let eventDuration = pairs.first?.session?.totalDuration
+        let componentsAsAbreviatedString = eventDuration?.timeComponentsAbreviatedString ?? ""
+        let string = String("◻︎ Total \(componentsAsAbreviatedString)\n")
+        
+        var bucket = String(string)
+        
         for (index, pair) in pairs.enumerated() {
             let note = (!pair.note_.isEmpty ? pair.note_ : "Untitled")
             bucket += "◼︎ \(index + 1). " + note + "\n"
@@ -261,7 +267,7 @@ class CalendarManager: NSObject {
             
             //duration
             let stringDuration = Float(pair.duration).timeComponentsAbreviatedString
-            bucket += "🕙 Duration " + stringDuration
+            bucket += stringDuration
             bucket += "\n" + "\n"
         }
         
