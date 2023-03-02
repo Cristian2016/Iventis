@@ -389,7 +389,7 @@ extension ViewModel {
                 
                 //batch-delete all sessions
                 let request:NSFetchRequest<NSFetchRequestResult> = Session.fetchRequest()
-                request.predicate = NSPredicate(format: "bubble.rank == %i", bubble.rank) //⚠️ 10
+                request.predicate = NSPredicate(format: "bubble.rank == %i", thisBubble.rank) //⚠️ 10
                 
                 let batchDeleteRequest = NSBatchDeleteRequest(fetchRequest: request)
                 batchDeleteRequest.resultType = .resultTypeObjectIDs
