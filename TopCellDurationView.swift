@@ -20,12 +20,15 @@ struct TopCellDurationView: View {
     var body: some View {
         ZStack {
             HStack(spacing: 0) {
-//                if showGreaterThenSymbol {
-//                    Image.greaterThan.font(.caption2)
-//                }
+                //                if showGreaterThenSymbol {
+                //                    Image.greaterThan.font(.caption2)
+                //                }
                 durationView
                     .overlay {
-                        if showGreaterThenSymbol { Rectangle().frame(height: 1) }
+                        if showGreaterThenSymbol {
+                            Rectangle()
+                                .fill(.red)
+                                .frame(height: 1) }
                     }
             }
         }
@@ -92,7 +95,7 @@ struct TopCellDurationView: View {
                 let components = newDuration.timeComponentsAsStrings
                 DispatchQueue.main.async {
                     self.duration = components
-                    withAnimation { self.showGreaterThenSymbol = false }
+                    self.showGreaterThenSymbol = false
                 }
             }
         }
@@ -101,7 +104,7 @@ struct TopCellDurationView: View {
     private func handlePauseDate(_ pauseDate:Date?) {
         if myRank == session.bubble?.sessions_.count {
             let isBubbleRunning = pauseDate == nil
-            withAnimation { showGreaterThenSymbol = isBubbleRunning ? true : false }
+            showGreaterThenSymbol = isBubbleRunning ? true : false
         }
     }
     
