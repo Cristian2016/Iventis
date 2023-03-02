@@ -576,6 +576,7 @@ extension ViewModel {
             
             self.controller.save(bContext) { /*
                                               after save bContext -> viewContext can see the changes -> so UI update can be done here */
+                
                 DispatchQueue.main.async {
                     bubble.coordinator.update(.user(.endSession))
                     bubble.pairBubbleCellCoordinator.update(.user(.endSession))
@@ -594,6 +595,7 @@ extension ViewModel {
             let objID = savedNote.objectID
             
             bContext.perform {
+                
                 let thisNote = bContext.object(with: objID) as! BubbleSavedNote
                 bContext.delete(thisNote)
                 self.controller.save(bContext)
@@ -607,10 +609,10 @@ extension ViewModel {
             let bContext = self.controller.bContext
             let objID = savedNote.objectID
             
-            bContext.perform {
+            bContext.perform { [weak self] in
                 let thisNote = bContext.object(with: objID) as! PairSavedNote
                 bContext.delete(thisNote)
-                PersistenceController.shared.save(bContext)
+                self?.controller.save(bContext)
             }
         }
     }
@@ -628,6 +630,7 @@ extension ViewModel {
             thisBubble.note = nil
             
             self.controller.save(bContext) {
+                
                 DispatchQueue.main.async {
                     bubble.managedObjectContext?.perform {
                         CalendarManager.shared.updateExistingEvent(.title(bubble))
@@ -650,6 +653,7 @@ extension ViewModel {
             thisPair.note = nil
             
             self.controller.save(bContext) {
+                
                 DispatchQueue.main.async {
                     pair.managedObjectContext?.perform {
                         CalendarManager.shared.updateExistingEvent(.notes(pair.session!))
