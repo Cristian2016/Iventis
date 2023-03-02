@@ -578,13 +578,16 @@ extension ViewModel {
     //delete BubbleSticky in List
     func deleteBubbleNote(_ savedNote:BubbleSavedNote) {
         DispatchQueue.global().async { [weak self] in
+            
+            guard let self = self else { return }
+            
             let bContext = self.controller.bContext
             let objID = savedNote.objectID
             
             bContext.perform {
                 let thisNote = bContext.object(with: objID) as! BubbleSavedNote
                 bContext.delete(thisNote)
-                self?.controller.save(bContext)
+                self.controller.save(bContext)
             }
         }
     }
