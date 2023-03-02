@@ -254,12 +254,12 @@ class CalendarManager: NSObject {
         var bucket = String(string)
         
         for (index, pair) in pairs.enumerated() {
-            let note = (!pair.note_.isEmpty ? pair.note_ : "Untitled")
+            let note = (!pair.note_.isEmpty ? pair.note_ : "")
             bucket += "◼︎ \(index + 1). " + note + "\n"
             
             //date interval
-            bucket += dateInterval(start: pair.start!, end: pair.pause!)
-            bucket += "\n"
+//            bucket += dateInterval(start: pair.start!, end: pair.pause!)
+//            bucket += "\n"
             
             //time interval
             bucket += timeInterval(start: pair.start!, end: pair.pause!)
