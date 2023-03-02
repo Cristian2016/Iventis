@@ -453,11 +453,13 @@ extension ViewModel {
                 
                 let thisBubble = self.controller.grabObj(objID) as! Bubble
                 thisBubble.color = newColor
-                PersistenceController.shared.save(bContext)
                 
-                let color = Color.bubbleColor(forName: thisBubble.color)
-                DispatchQueue.main.async {
-                    bubble.coordinator.colorPublisher.send(color)
+                //save changes to CoreData using bContext and update UI
+                PersistenceController.shared.save(bContext) {
+                    let color = Color.bubbleColor(forName: thisBubble.color)
+                    DispatchQueue.main.async {
+                        bubble.coordinator.colorPublisher.send(color)
+                    }
                 }
             }
         }
