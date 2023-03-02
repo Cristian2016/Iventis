@@ -352,15 +352,16 @@ extension ViewModel {
                         
                         thisBubble.lastSession!.computeDuration { //completion
                             
-                            self.controller.save(bContext)
-                            
-                            DispatchQueue.main.async {
-                                bubble.coordinator.update(.user(.pause))
-                                bubble.pairBubbleCellCoordinator.update(.user(.pause))
+                            self.controller.save(bContext) {
                                 
-                                //remove only that
-                                if self.secretary.addNoteButton_bRank == Int(bubble.rank) { self.secretary.addNoteButton_bRank = nil
-                                } //1
+                                DispatchQueue.main.async {
+                                    bubble.coordinator.update(.user(.pause))
+                                    bubble.pairBubbleCellCoordinator.update(.user(.pause))
+                                    
+                                    //remove only that
+                                    if self.secretary.addNoteButton_bRank == Int(bubble.rank) { self.secretary.addNoteButton_bRank = nil
+                                    } //1
+                                }
                             }
                         }
                     }
