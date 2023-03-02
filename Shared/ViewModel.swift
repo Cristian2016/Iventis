@@ -15,6 +15,7 @@
 //8 when creating a bubble, it is necessary to bContext.save(). after that vContext 'absorbs' the object and bContext will have no obj registered, but vContext.registeredObjs increases by one. No need to vContext.save()!!!
 //9 after deleting the obj, must do both vContext and bContext save. vContext must always be used on mainQueue, otherwise error!!!
 //10 if you forget about the predicate, it will delete all sessions of all bubbles :))
+//11 save changes to bContext and, if deleted Session was lastSession, update BubbleCell UI as well
 
 import Foundation
 import SwiftUI
@@ -520,14 +521,14 @@ extension ViewModel {
                 thisBubble.currentClock = thisBubble.initialClock
             }
             
-            PersistenceController.shared.save(bContext) {
+            PersistenceController.shared.save(bContext) { //7
                 if isCurrentSession {
                     DispatchQueue.main.async {
                         bubble.coordinator.update(.user(.deleteCurrentSession))
                         bubble.pairBubbleCellCoordinator.update(.user(.deleteCurrentSession))
                     }
-                }//7
-            }
+                }
+            } //11
         }
     }
     
