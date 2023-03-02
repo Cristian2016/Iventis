@@ -617,10 +617,12 @@ extension ViewModel {
             
             let thisBubble = self.controller.grabObj(objID) as! Bubble
             thisBubble.note = nil
-            PersistenceController.shared.save(bContext)
-            DispatchQueue.main.async {
-                bubble.managedObjectContext?.perform {
-                    CalendarManager.shared.updateExistingEvent(.title(bubble))
+            
+            self.controller.save(bContext) {
+                DispatchQueue.main.async {
+                    bubble.managedObjectContext?.perform {
+                        CalendarManager.shared.updateExistingEvent(.title(bubble))
+                    }
                 }
             }
         }
