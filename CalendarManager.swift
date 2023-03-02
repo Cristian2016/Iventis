@@ -249,12 +249,12 @@ class CalendarManager: NSObject {
         
         let eventDuration = pairs.first?.session?.totalDuration
         let componentsAsAbreviatedString = eventDuration?.timeComponentsAbreviatedString ?? ""
-        let string = String("◻︎ Total \(componentsAsAbreviatedString)\n")
+        let string = String("◆ Total \(componentsAsAbreviatedString)\n")
         
         var bucket = String(string)
         
         for (index, pair) in pairs.enumerated() {
-            let note = (!pair.note_.isEmpty ? pair.note_ : "")
+            let note = (!pair.note_.isEmpty ? pair.note_ : "no title")
             bucket += "◼︎ \(index + 1). " + note + "\n"
             
             //date interval
