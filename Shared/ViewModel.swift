@@ -639,10 +639,12 @@ extension ViewModel {
             
             let thisPair = self.controller.grabObj(objID) as! Pair
             thisPair.note = nil
-            PersistenceController.shared.save(bContext)
-            DispatchQueue.main.async {
-                pair.managedObjectContext?.perform {
-                    CalendarManager.shared.updateExistingEvent(.notes(pair.session!))
+            
+            self.controller.save(bContext) {
+                DispatchQueue.main.async {
+                    pair.managedObjectContext?.perform {
+                        CalendarManager.shared.updateExistingEvent(.notes(pair.session!))
+                    }
                 }
             }
         }
