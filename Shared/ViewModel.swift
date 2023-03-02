@@ -297,10 +297,7 @@ extension ViewModel {
                     //.....................................................
                     
                     //this also makes changes visible to the viewContext as well
-                    self?.controller.save(bContext) {
-                        
-                        //⚠️ no need to save viewContext
-                        
+                    self?.controller.save(bContext) { //⚠️ no need to save viewContext
                         DispatchQueue.main.async { //UI stuff
                             bubble.coordinator.update(.user(.start))
                             bubble.pairBubbleCellCoordinator.update(.user(.start))
