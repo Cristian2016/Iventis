@@ -405,13 +405,13 @@ extension ViewModel {
                         fromRemoteContextSave: changes, into: [self.controller.viewContext]
                     )
                     
-                    PersistenceController.shared.save(bContext)
-                    
-                    DispatchQueue.main.async {
-                        bubble.coordinator.update(.user(.reset))
-                        bubble.pairBubbleCellCoordinator.update(.user(.reset))
+                    PersistenceController.shared.save(bContext) {
+                        DispatchQueue.main.async {
+                            bubble.coordinator.update(.user(.reset))
+                            bubble.pairBubbleCellCoordinator.update(.user(.reset))
+                        }
                     }
-                    
+                                        
                 } catch let error {
                     print("CoreData pula \(error.localizedDescription)")
                 }
