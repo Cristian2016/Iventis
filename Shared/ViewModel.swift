@@ -394,7 +394,9 @@ extension ViewModel {
                 let batchDeleteRequest = NSBatchDeleteRequest(fetchRequest: request)
                 batchDeleteRequest.resultType = .resultTypeObjectIDs
                 
-                let result = try bContext.execute(batchDeleteRequest)
+                let result = try? bContext.execute(batchDeleteRequest)
+                
+                try? bContext.save()
                 
                 guard
                     let deleteResult = result as? NSBatchDeleteResult,
@@ -403,15 +405,11 @@ extension ViewModel {
                 
                 let changes = [NSDeletedObjectsKey : ids]
                 
-                //save bContext only and update UI, if save was successfull
-                self.controller.save(bContext) {
-                    DispatchQueue.main.async { //merge changes and update UI
-                        NSManagedObjectContext.mergeChanges(
-                            fromRemoteContextSave: changes, into: [self.controller.viewContext]
-                        )
-                        bubble.coordinator.update(.user(.reset))
-                        bubble.pairBubbleCellCoordinator.update(.user(.reset))
-                    }
+                DispatchQueue.main.async {
+                    NSManagedObjectContext.mergeChanges(
+                        fromRemoteContextSave: changes, into: [self.controller.viewContext])
+                    bubble.coordinator.update(.user(.reset))
+                    bubble.pairBubbleCellCoordinator.update(.user(.reset))
                 }
             }
         }
