@@ -520,14 +520,14 @@ extension ViewModel {
                 thisBubble.currentClock = thisBubble.initialClock
             }
             
-            PersistenceController.shared.save(bContext)
-            
-            if isCurrentSession {
-                DispatchQueue.main.async {
-                    bubble.coordinator.update(.user(.deleteCurrentSession))
-                    bubble.pairBubbleCellCoordinator.update(.user(.deleteCurrentSession))
-                }
-            }//7
+            PersistenceController.shared.save(bContext) {
+                if isCurrentSession {
+                    DispatchQueue.main.async {
+                        bubble.coordinator.update(.user(.deleteCurrentSession))
+                        bubble.pairBubbleCellCoordinator.update(.user(.deleteCurrentSession))
+                    }
+                }//7
+            }
         }
     }
     
