@@ -103,7 +103,6 @@ struct BubbleDeleteActionAlert: View {
             if !bubble.sessions_.isEmpty {
                 viewModel.reset(bubble)
                 secretary.deleteAction_bRank = nil
-                
                 removeFiveSecondsBar()
             }
         } label: {
@@ -117,6 +116,7 @@ struct BubbleDeleteActionAlert: View {
                 }
         }
         .buttonStyle(DeleteButtonStyle(disabled: bubble.sessions_.isEmpty))
+        .disabled(!bubble.sessions_.isEmpty ? false : true)
     }
     
     // MARK: -
