@@ -510,7 +510,7 @@ extension ViewModel {
             let thisBubble = bContext.object(with: bubbleID) as! Bubble
             let thisSession = bContext.object(with: sessionID) as! Session
             
-            //set this property here and use it after context was saved
+            //set property here and use it after context was saved
             let isCurrentSession = thisBubble.lastSession == thisSession
             
             bContext.delete(thisSession)
