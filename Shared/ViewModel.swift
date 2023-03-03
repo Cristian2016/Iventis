@@ -16,6 +16,7 @@
 //9 after deleting the obj, must do both vContext and bContext save. vContext must always be used on mainQueue, otherwise error!!!
 //10 if you forget about the predicate, it will delete all sessions of all bubbles :))
 //11 save changes to bContext and, if deleted Session was lastSession, update BubbleCell UI as well
+//12 ⚠️ never access viewContext on a background thread! always use UI thread (main thread)
 
 import Foundation
 import SwiftUI
@@ -401,13 +402,13 @@ extension ViewModel {
                 guard
                     let deleteResult = result as? NSBatchDeleteResult,
                     let ids = deleteResult.result as? [NSManagedObjectID]
-                else { return }
+                else { fatalError() }
                 
                 let changes = [NSDeletedObjectsKey : ids]
                 
                 DispatchQueue.main.async {
                     NSManagedObjectContext.mergeChanges(
-                        fromRemoteContextSave: changes, into: [self.controller.viewContext])
+                        fromRemoteContextSave: changes, into: [self.controller.viewContext]) //12
                     bubble.coordinator.update(.user(.reset))
                     bubble.pairBubbleCellCoordinator.update(.user(.reset))
                 }
