@@ -24,7 +24,7 @@ struct BubbleCell: View {
         
     // MARK: - Body
     var body: some View {
-        let _ = print("BubbleCell \(bubble.color ?? "nocolor") body")
+//        let _ = print("BubbleCell \(bubble.color ?? "nocolor") body")
         ZStack {
             ThreeCircles(bubble: bubble, metrics: metrics)
             ThreeLabels(metrics.timeComponentsFontSize, bubble)

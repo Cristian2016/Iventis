@@ -37,7 +37,7 @@
             <Locations>
                <Location
                   uuid = "C0CC8A9F-3F20-478A-80B4-CC2CE14ABD95 - 2a5e324d10de84c3"
-                  shouldBeEnabled = "Yes"
+                  shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "Timers.ViewModel.toggleBubbleStart(_: Timers.Bubble, delta: Swift.Optional&lt;Swift.Double&gt;) -&gt; ()"
@@ -52,7 +52,7 @@
                </Location>
                <Location
                   uuid = "C0CC8A9F-3F20-478A-80B4-CC2CE14ABD95 - 8cbff5bae7a16f31"
-                  shouldBeEnabled = "Yes"
+                  shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "closure #2 () -&gt; () in Timers.ViewModel.toggleBubbleStart(_: Timers.Bubble, delta: Swift.Optional&lt;Swift.Double&gt;) -&gt; ()"
@@ -67,7 +67,7 @@
                </Location>
                <Location
                   uuid = "C0CC8A9F-3F20-478A-80B4-CC2CE14ABD95 - 8cbff5bae7a168d2"
-                  shouldBeEnabled = "Yes"
+                  shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "closure #2 () -&gt; () in Timers.ViewModel.toggleBubbleStart(_: Timers.Bubble, delta: Swift.Optional&lt;Swift.Double&gt;) -&gt; ()"
@@ -78,6 +78,21 @@
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "318"
                   endingLineNumber = "318"
+                  offsetFromSymbolStart = "260">
+               </Location>
+               <Location
+                  uuid = "C0CC8A9F-3F20-478A-80B4-CC2CE14ABD95 - 8cbff5bae7a168f3"
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #2 () -&gt; () in Timers.ViewModel.toggleBubbleStart(_: Timers.Bubble, delta: Swift.Optional&lt;Swift.Double&gt;) -&gt; ()"
+                  moduleName = "Timers"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/cristianlapusan/Downloads/Timers/Shared/ViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "317"
+                  endingLineNumber = "317"
                   offsetFromSymbolStart = "260">
                </Location>
             </Locations>
@@ -199,7 +214,7 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "94DD76FC-39C6-4B2C-89CB-40444CBA1625"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Shared/ViewModel.swift"
@@ -212,7 +227,7 @@
             <Locations>
                <Location
                   uuid = "94DD76FC-39C6-4B2C-89CB-40444CBA1625 - a1a58bca1ce95036"
-                  shouldBeEnabled = "Yes"
+                  shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "closure #1 () -&gt; () in closure #1 () -&gt; () in Timers.ViewModel.deleteSession(Timers.Session) -&gt; ()"
@@ -227,7 +242,7 @@
                </Location>
                <Location
                   uuid = "94DD76FC-39C6-4B2C-89CB-40444CBA1625 - bf44752973a818b3"
-                  shouldBeEnabled = "Yes"
+                  shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "closure #1 @Swift.MainActor () -&gt; () in closure #1 () -&gt; () in closure #1 () -&gt; () in Timers.ViewModel.deleteSession(Timers.Session) -&gt; ()"
@@ -239,6 +254,36 @@
                   startingLineNumber = "527"
                   endingLineNumber = "527"
                   offsetFromSymbolStart = "72">
+               </Location>
+               <Location
+                  uuid = "94DD76FC-39C6-4B2C-89CB-40444CBA1625 - a1a58bca1ce951db"
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 () -&gt; () in closure #1 () -&gt; () in Timers.ViewModel.deleteSession(Timers.Session) -&gt; ()"
+                  moduleName = "Timers"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/cristianlapusan/Downloads/Timers/Shared/ViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "529"
+                  endingLineNumber = "529"
+                  offsetFromSymbolStart = "0">
+               </Location>
+               <Location
+                  uuid = "94DD76FC-39C6-4B2C-89CB-40444CBA1625 - bf44752973a81890"
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 @Swift.MainActor () -&gt; () in closure #1 () -&gt; () in closure #1 () -&gt; () in Timers.ViewModel.deleteSession(Timers.Session) -&gt; ()"
+                  moduleName = "Timers"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/cristianlapusan/Downloads/Timers/Shared/ViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "526"
+                  endingLineNumber = "526"
+                  offsetFromSymbolStart = "260">
                </Location>
             </Locations>
          </BreakpointContent>
