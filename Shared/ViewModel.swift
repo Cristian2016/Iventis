@@ -510,14 +510,14 @@ extension ViewModel {
             let thisBubble = bContext.object(with: bubbleID) as! Bubble
             let thisSession = bContext.object(with: sessionID) as! Session
             
-            //set property here and use it after context was saved
-            let isCurrentSession = thisBubble.lastSession == thisSession
+            //1. set property here
+            let isCurrentSession = (thisBubble.lastSession == thisSession)
             
-            bContext.delete(thisSession)
+            bContext.delete(thisSession) //2. wait until context saves
             
             if isCurrentSession { thisBubble.currentClock = thisBubble.initialClock }
             
-            //use it here
+            //3. use property here
             PersistenceController.shared.save(bContext) { //7
                 if isCurrentSession {
                     DispatchQueue.main.async {
@@ -653,8 +653,8 @@ extension ViewModel {
     }
     
     ///save to CoreData either bubble.note or pair.note
-    func save(_ textInput:String, forObject object:NSManagedObject) {
-        var note = textInput
+    func save(_ userInput:String, forObject object:NSManagedObject) {
+        var note = userInput
                 
         switch object.entity.name {
             case "Bubble":
