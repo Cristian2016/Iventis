@@ -461,21 +461,18 @@ extension ViewModel {
     }
     
     func togglePin(_ bubble:Bubble) {
-//        if bubble.isPinned, Secretary.shared.pinnedBubblesCount == 1 {
-//            secretary.showFavoritesOnly = false
-//        }
+        //        if bubble.isPinned, Secretary.shared.pinnedBubblesCount == 1 {
+        //            secretary.showFavoritesOnly = false
+        //        }
+        let bContext = self.controller.bContext
+        let objID = bubble.objectID
         
-        DispatchQueue.global().async {
-            let bContext = self.controller.bContext
-            let objID = bubble.objectID
+        bContext.perform { [weak self] in
+            guard let self = self else { return }
             
-            bContext.perform { [weak self] in
-                guard let self = self else { return }
-                
-                let thisBubble = self.controller.grabObj(objID) as! Bubble
-                thisBubble.isPinned.toggle()
-                self.controller.save(bContext)
-            }
+            let thisBubble = self.controller.grabObj(objID) as! Bubble
+            thisBubble.isPinned.toggle()
+            self.controller.save(bContext)
         }
     }
     
