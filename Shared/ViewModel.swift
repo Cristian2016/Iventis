@@ -506,8 +506,7 @@ extension ViewModel {
         let bubbleID = bubble.objectID
         let sessionID = session.objectID
         
-        bContext.perform { [weak self] in
-            
+        bContext.perform {
             let thisBubble = bContext.object(with: bubbleID) as! Bubble
             let thisSession = bContext.object(with: sessionID) as! Session
             
@@ -519,7 +518,7 @@ extension ViewModel {
             if isCurrentSession { thisBubble.currentClock = thisBubble.initialClock }
             
             //use it here
-            self?.controller.save(bContext) { //7
+            PersistenceController.shared.save(bContext) { //7
                 if isCurrentSession {
                     DispatchQueue.main.async {
                         bubble.coordinator.update(.user(.deleteCurrentSession))
@@ -561,7 +560,9 @@ extension ViewModel {
                     }
                 }
             }
-            else { self.createCalendarEventIfRequiredAndSaveToCoreData(for: thisBubble) }
+            else {
+                self.createCalendarEventIfRequiredAndSaveToCoreData(for: thisBubble)
+            }
             
             self.controller.save(bContext) { /*
                                               after save bContext -> viewContext can see the changes -> so UI update can be done here */
