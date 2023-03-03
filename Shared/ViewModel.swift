@@ -263,7 +263,6 @@ extension ViewModel {
         bContext.perform {
             let thisBubble = bContext.object(with: objID) as! Bubble
             
-            
             bContext.delete(thisBubble) //13
             self.controller.save(bContext) {
                 DispatchQueue.main.async { self.controller.save() }
