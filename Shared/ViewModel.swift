@@ -416,23 +416,19 @@ extension ViewModel {
     }
     
     func toggleCalendar(_ bubble:Bubble) {
-        DispatchQueue.global().async { [weak self] in
+        
+        let objID = bubble.objectID
+        let bContext = self.controller.bContext
+        
+        bContext.perform {
+            let thisBubble = bContext.object(with: objID) as! Bubble
             
-            guard let self = self else { return }
+            thisBubble.hasCalendar.toggle()
             
-            let objID = bubble.objectID
-            let bContext = self.controller.bContext
+            //create events for this bubbble
+            if thisBubble.hasCalendar { CalendarManager.shared.bubbleToEventify = thisBubble }
             
-            bContext.perform {
-                let thisBubble = bContext.object(with: objID) as! Bubble
-                
-                thisBubble.hasCalendar.toggle()
-                
-                //create events for this bubbble
-                if thisBubble.hasCalendar { CalendarManager.shared.bubbleToEventify = thisBubble }
-                
-                self.controller.save(bContext)
-            }
+            self.controller.save(bContext)
         }
     }
     

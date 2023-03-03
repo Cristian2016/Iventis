@@ -156,9 +156,9 @@
             filePath = "Shared/ViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "570"
-            endingLineNumber = "570"
-            landmarkName = "endSession(_:)"
+            startingLineNumber = "566"
+            endingLineNumber = "566"
+            landmarkName = "deleteBubbleNote(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -220,9 +220,9 @@
             filePath = "Shared/ViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "525"
-            endingLineNumber = "525"
-            landmarkName = "deleteSession(_:)"
+            startingLineNumber = "521"
+            endingLineNumber = "521"
+            landmarkName = "endSession(_:)"
             landmarkType = "7">
             <Locations>
                <Location
