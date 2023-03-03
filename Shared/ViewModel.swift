@@ -511,17 +511,15 @@ extension ViewModel {
             let thisBubble = bContext.object(with: bubbleID) as! Bubble
             let thisSession = bContext.object(with: sessionID) as! Session
             
-            //set this property and use it after context was saved
+            //set this property here and use it after context was saved
             let isCurrentSession = thisBubble.lastSession == thisSession
             
             bContext.delete(thisSession)
             
-            if isCurrentSession {
-                thisBubble.currentClock = thisBubble.initialClock
-            }
+            if isCurrentSession { thisBubble.currentClock = thisBubble.initialClock }
             
+            //use it here
             self?.controller.save(bContext) { //7
-                
                 if isCurrentSession {
                     DispatchQueue.main.async {
                         bubble.coordinator.update(.user(.deleteCurrentSession))
