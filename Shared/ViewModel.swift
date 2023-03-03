@@ -17,6 +17,7 @@
 //10 if you forget about the predicate, it will delete all sessions of all bubbles :))
 //11 save changes to bContext and, if deleted Session was lastSession, update BubbleCell UI as well
 //12 ⚠️ never access viewContext on a background thread! always use UI thread (main thread)
+//13 both contexts must save [bContext and viewContext]
 
 import Foundation
 import SwiftUI
@@ -223,7 +224,6 @@ extension ViewModel {
         let bContext = PersistenceController.shared.bContext
         
         bContext.perform { [weak self] in
-            
             let newBubble = Bubble(context: bContext)
             newBubble.created = Date()
             newBubble.kind = kind
@@ -263,9 +263,8 @@ extension ViewModel {
         bContext.perform {
             let thisBubble = bContext.object(with: objID) as! Bubble
             
-            bContext.delete(thisBubble)
             
-            //both contexts must save
+            bContext.delete(thisBubble) //13
             self.controller.save(bContext) {
                 DispatchQueue.main.async { self.controller.save() }
             }
@@ -352,9 +351,7 @@ extension ViewModel {
                         thisBubble.currentClock += currentPair!.duration
                         
                         thisBubble.lastSession!.computeDuration { //completion
-                            
                             self.controller.save(bContext) {
-                                
                                 DispatchQueue.main.async {
                                     bubble.coordinator.update(.user(.pause))
                                     bubble.pairBubbleCellCoordinator.update(.user(.pause))
@@ -398,6 +395,9 @@ extension ViewModel {
                 let result = try? bContext.execute(batchDeleteRequest)
                 
                 try? bContext.save()
+                DispatchQueue.main.async {
+                    try? bubble.managedObjectContext?.save()
+                }
                 
                 guard
                     let deleteResult = result as? NSBatchDeleteResult,
@@ -568,7 +568,6 @@ extension ViewModel {
             
             self.controller.save(bContext) { /*
                                               after save bContext -> viewContext can see the changes -> so UI update can be done here */
-                
                 DispatchQueue.main.async {
                     bubble.coordinator.update(.user(.endSession))
                     bubble.pairBubbleCellCoordinator.update(.user(.endSession))
