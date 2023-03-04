@@ -18,6 +18,7 @@
 //11 save changes to bContext and, if deleted Session was lastSession, update BubbleCell UI as well
 //12 ⚠️ never access viewContext on a background thread! always use UI thread (main thread)
 //13 both contexts must save [bContext and viewContext]
+//14 after save bContext -> viewContext can see the changes -> so UI update can be done here
 
 import Foundation
 import SwiftUI
@@ -113,7 +114,7 @@ class ViewModel: ObservableObject {
     }
     
     ///createds calendar events only if that bubble has calendar, otherwise it only saves to coredata
-    private func createCalendarEventIfRequiredAndSaveToCoreData(for bubble:Bubble) {
+    private func createCalEventAndSave(for bubble:Bubble) {
         if !bubble.sessions_.isEmpty && bubble.hasCalendar {
             CalendarManager.shared.createNewEvent(for: bubble.lastSession)
             
@@ -346,19 +347,17 @@ extension ViewModel {
                     let currentPair = thisBubble.lastPair
                     currentPair!.pause = Date()
                     
-                    currentPair!.computeDuration(.atPause) { //completion handler
-                        thisBubble.currentClock += currentPair!.duration
-                        thisBubble.lastSession!.computeDuration { //completion
-                            self.controller.save(bContext) {
-                                DispatchQueue.main.async {
-                                    bubble.coordinator.update(.user(.pause))
-                                    bubble.pairBubbleCellCoordinator.update(.user(.pause))
-                                    
-                                    //remove only that
-                                    if self.secretary.addNoteButton_bRank == Int(bubble.rank) { self.secretary.addNoteButton_bRank = nil
-                                    } //1
-                                }
-                            }
+                    currentPair!.computeDuration(.atPause)
+                    thisBubble.currentClock += currentPair!.duration
+                    thisBubble.lastSession!.computeDuration()
+                    self.controller.save(bContext) {
+                        DispatchQueue.main.async {
+                            bubble.coordinator.update(.user(.pause))
+                            bubble.pairBubbleCellCoordinator.update(.user(.pause))
+                            
+                            //remove only that
+                            if self.secretary.addNoteButton_bRank == Int(bubble.rank) { self.secretary.addNoteButton_bRank = nil
+                            } //1
                         }
                     }
                 }
@@ -541,24 +540,18 @@ extension ViewModel {
             //when user ended session, was bubble still running?
             let bubbleIsRunning = thisBubble.lastPair!.pause == nil
             
-            //close lastPair and compute durations for lastPair and lastSession
+            //1.close lastPair and then compute durations for 2.lastPair and 3.lastSession
             if bubbleIsRunning {
-                thisBubble.lastPair!.pause = Date() //close last pair
-                
-                //compute lastPair duration first [on background thread 🔴]
-                thisBubble.lastPair?.computeDuration(.atEndSession) { //completion
-                    thisBubble.lastSession?.computeDuration { //completion
-                        self.createCalendarEventIfRequiredAndSaveToCoreData(for: thisBubble)
-                    }
-                }
-            }
-            else {
-                self.createCalendarEventIfRequiredAndSaveToCoreData(for: thisBubble)
+                thisBubble.lastPair!.pause = Date() //1
+                thisBubble.lastPair?.computeDuration(.atEndSession) //2
+                thisBubble.lastSession?.computeDuration() //3
             }
             
-            self.controller.save(bContext) { /*
-                                              after save bContext -> viewContext can see the changes -> so UI update can be done here */
+            self.controller.save(bContext) { //14
+                self.createCalEventAndSave(for: thisBubble)
+                
                 DispatchQueue.main.async {
+                    print("update UI")
                     bubble.coordinator.update(.user(.endSession))
                     bubble.pairBubbleCellCoordinator.update(.user(.endSession))
                 }

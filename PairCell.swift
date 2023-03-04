@@ -152,6 +152,7 @@ struct PairCell: View {
             .foregroundColor(.gray)
             .font(.footnote)
             .fontWeight(.medium)
+            .dynamicTypeSize(...DynamicTypeSize.accessibility2)
     }
     
     //start time and date

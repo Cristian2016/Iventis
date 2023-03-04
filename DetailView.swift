@@ -54,7 +54,6 @@ struct DetailView: View {
             }
         }
         .overlay { ShowDetailViewInfoView() }
-        .dynamicTypeSize(...DynamicTypeSize.accessibility2)
     }
         
     let topDetailHeight = CGFloat(140)

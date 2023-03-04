@@ -121,6 +121,7 @@ extension CalendarManager {
         
         //since this method is called on bThread, make sure to save CoreData on mThread
         session.managedObjectContext?.perform {
+            print(#function, " save session.isEventified")
             session.isEventified = true
             PersistenceController.shared.save(session.managedObjectContext!)
         }

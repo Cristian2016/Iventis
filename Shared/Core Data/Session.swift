@@ -17,16 +17,11 @@ public class Session: NSManagedObject {
     }
     
     //⚠️ will run on a backgroundthread. wait until pair computes its duration and then compute session.totalduration!
-    func computeDuration(completion: @escaping () -> Void) {
-        
+    func computeDuration() {
         let pairs = self.pairs_
-        
         guard !pairs.isEmpty,
               let lastPairDuration = pairs.last?.duration else { fatalError() }
-        
         totalDuration += lastPairDuration
-        
-        completion()
     }
     
     var isLastPairClosed:Bool { bubble?.lastPair?.pause != nil }

@@ -68,6 +68,7 @@ struct TopDetailView:View {
             }
             Spacer()
         }
+        .dynamicTypeSize(...DynamicTypeSize.accessibility2)
     }
     
     private var shadowBackground:some View {
