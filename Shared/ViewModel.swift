@@ -19,6 +19,7 @@
 //12 ⚠️ never access viewContext on a background thread! always use UI thread (main thread)
 //13 both contexts must save [bContext and viewContext]
 //14 after save bContext -> viewContext can see the changes -> so UI update can be done here
+//15 Update UI only after bContext has saved
 
 import Foundation
 import SwiftUI
@@ -549,9 +550,7 @@ extension ViewModel {
             
             self.controller.save(bContext) { //14
                 self.createCalEventAndSave(for: thisBubble)
-                
-                DispatchQueue.main.async {
-                    print("update UI")
+                DispatchQueue.main.async { //15
                     bubble.coordinator.update(.user(.endSession))
                     bubble.pairBubbleCellCoordinator.update(.user(.endSession))
                 }
