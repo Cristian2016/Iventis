@@ -30,8 +30,8 @@
             filePath = "Shared/ViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "319"
-            endingLineNumber = "319"
+            startingLineNumber = "320"
+            endingLineNumber = "320"
             landmarkName = "toggleBubbleStart(_:delta:)"
             landmarkType = "7">
             <Locations>
@@ -108,8 +108,8 @@
             filePath = "Shared/ViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "287"
-            endingLineNumber = "287"
+            startingLineNumber = "288"
+            endingLineNumber = "288"
             landmarkName = "toggleBubbleStart(_:delta:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -124,25 +124,9 @@
             filePath = "Shared/ViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "358"
-            endingLineNumber = "358"
+            startingLineNumber = "359"
+            endingLineNumber = "359"
             landmarkName = "toggleBubbleStart(_:delta:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "01D0F2B3-E678-47DB-A7D9-23A6632742DF"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Shared/ViewModel.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "413"
-            endingLineNumber = "413"
-            landmarkName = "reset(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -156,8 +140,8 @@
             filePath = "Shared/ViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "246"
-            endingLineNumber = "246"
+            startingLineNumber = "247"
+            endingLineNumber = "247"
             landmarkName = "createBubble(_:_:_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -172,8 +156,8 @@
             filePath = "Shared/ViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "271"
-            endingLineNumber = "271"
+            startingLineNumber = "272"
+            endingLineNumber = "272"
             landmarkName = "deleteBubble(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -188,8 +172,8 @@
             filePath = "Shared/ViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "228"
-            endingLineNumber = "228"
+            startingLineNumber = "229"
+            endingLineNumber = "229"
             landmarkName = "createBubble(_:_:_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -204,8 +188,8 @@
             filePath = "Shared/ViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "517"
-            endingLineNumber = "517"
+            startingLineNumber = "520"
+            endingLineNumber = "520"
             landmarkName = "deleteSession(_:)"
             landmarkType = "7">
             <Locations>
@@ -345,9 +329,41 @@
             filePath = "Shared/ViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "539"
-            endingLineNumber = "539"
+            startingLineNumber = "542"
+            endingLineNumber = "542"
             landmarkName = "endSession(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "9D3DE41B-F6BD-4036-848F-E50A9BA82DE4"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Shared/ViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "410"
+            endingLineNumber = "410"
+            landmarkName = "reset(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "2BA1DEA2-00B1-428C-9F71-C6BCFD5B61FE"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Shared/ViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "415"
+            endingLineNumber = "415"
+            landmarkName = "reset(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

@@ -20,6 +20,7 @@
 //13 both contexts must save [bContext and viewContext]
 //14 after save bContext -> viewContext can see the changes -> so UI update can be done here
 //15 Update UI only after bContext has saved
+//16 why?????? if I don't reset bContext sessions will still be there after batchdelete
 
 import Foundation
 import SwiftUI
@@ -404,6 +405,8 @@ extension ViewModel {
                 
                 let changes = [NSDeletedObjectsKey : ids]
                 
+                bContext.reset() //⚠️ 16
+                                
                 DispatchQueue.main.async {
                     NSManagedObjectContext.mergeChanges(
                         fromRemoteContextSave: changes, into: [self.controller.viewContext]) //12
@@ -539,7 +542,7 @@ extension ViewModel {
             thisBubble.lastSession!.isEnded = true
             
             //when user ended session, was bubble still running?
-            let bubbleIsRunning = thisBubble.lastPair!.pause == nil
+            let bubbleIsRunning = (thisBubble.lastPair!.pause == nil)
             
             //1.close lastPair and then compute durations for 2.lastPair and 3.lastSession
             if bubbleIsRunning {

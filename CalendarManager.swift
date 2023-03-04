@@ -249,8 +249,8 @@ class CalendarManager: NSObject {
     private func createEventNotes(from pairs:[Pair]) -> String {
         
         let eventDuration = pairs.first?.session?.totalDuration
-        let componentsAsAbreviatedString = eventDuration?.timeComponentsAbreviatedString ?? ""
-        let string = String("◼︎ Total \(componentsAsAbreviatedString)\n")
+        let totalDuration = eventDuration?.timeComponentsAbreviatedString ?? ""
+        let string = String("◼︎ Total \(totalDuration)\n")
         
         var bucket = String(string)
         
