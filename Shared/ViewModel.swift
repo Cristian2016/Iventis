@@ -348,7 +348,6 @@ extension ViewModel {
                     
                     currentPair!.computeDuration(.atPause) { //completion handler
                         thisBubble.currentClock += currentPair!.duration
-                        
                         thisBubble.lastSession!.computeDuration { //completion
                             self.controller.save(bContext) {
                                 DispatchQueue.main.async {
