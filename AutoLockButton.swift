@@ -11,10 +11,7 @@ struct AutoLockButton: View {
     
     var body: some View {
         Button { buttonAction() } label: { label }
-            .onReceive(secretary.$addNoteButton_bRank) {
-                addNoteButton_bRank = $0
-                print("received message")
-            }
+            .onReceive(secretary.$addNoteButton_bRank) { addNoteButton_bRank = $0 }
     }
     
     // MARK: - Lego
