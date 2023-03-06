@@ -204,8 +204,8 @@ class CalendarManager: NSObject {
     
     private lazy var store = EventStore() /* read write events */
     
-    let defaultCalendarTitle = "Fused 📥"
-    let defaultCalendarColor = #colorLiteral(red: 0.9529411793, green: 0.6862745285, blue: 0.1333333403, alpha: 1)
+    private let defaultCalendarTitle = "Fused 📥"
+    private let defaultCalendarColor = #colorLiteral(red: 0.9529411793, green: 0.6862745285, blue: 0.1333333403, alpha: 1)
     private var defaultCalendarID:String? { UserDefaults.shared.value(forKey: UserDefaults.Key.defaultCalendarID) as? String }
     
     private let eventNotesSeparator = "Add notes below:\n"
