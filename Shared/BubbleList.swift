@@ -60,9 +60,7 @@ struct BubbleList: View {
                     
                     if !section.id { bottomOverscoll }
                 }
-                .navigationDestination(for: Bubble.self) { bubble in
-                    DetailView(bubble)
-                }
+                .navigationDestination(for: Bubble.self) { DetailView($0) }
                 .scrollIndicators(.hidden)
                 .listStyle(.plain)
                 .toolbarBackground(.ultraThinMaterial)
