@@ -71,6 +71,7 @@ struct PersistenceController {
         let sharedDatabase = URL.sharedContainerURL.appendingPathComponent("sharedDatabase.sqlite")
                 
         //moved database to shared location
+        //overrides the type (or types) of persistent store(s) used by the container
         container.persistentStoreDescriptions = [NSPersistentStoreDescription(url: sharedDatabase)]
         
         if inMemory {
