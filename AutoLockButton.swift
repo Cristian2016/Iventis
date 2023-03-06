@@ -10,21 +10,11 @@ struct AutoLockButton: View {
     @State private var isDisplayAlwaysON = false
     
     var body: some View {
-            Button {
-                //alerts each time AutoLockButton is tapped, until user chooses not to display anymore
-                secretary.showAlert_AlwaysOnDisplay.toggle()
-                UIApplication.shared.isIdleTimerDisabled.toggle()
-                isDisplayAlwaysON = UIApplication.shared.isIdleTimerDisabled ? true : false
-                
-                //displays confirmation for 2 seconds
-                secretary.displayAutoLockConfirmation = true
-                delayExecution(.now() + 2) { secretary.displayAutoLockConfirmation = false }
+        Button { buttonAction() } label: { label }
+            .onReceive(secretary.$addNoteButton_bRank) {
+                addNoteButton_bRank = $0
+                print("received message")
             }
-        label: { label }
-        .onReceive(secretary.$addNoteButton_bRank) {
-            addNoteButton_bRank = $0
-            print("received message")
-        }
     }
     
     // MARK: - Lego
@@ -54,6 +44,19 @@ struct AutoLockButton: View {
         Image(systemName: "sun.max")
             .foregroundColor(metrics.symbolColor)
             .font(metrics.font)
+    }
+    
+    // MARK: - methods
+    private func buttonAction() {
+        //alerts each time AutoLockButton is tapped, until user chooses not to display anymore
+        
+        secretary.showAlert_AlwaysOnDisplay.toggle()
+        UIApplication.shared.isIdleTimerDisabled.toggle()
+        isDisplayAlwaysON = UIApplication.shared.isIdleTimerDisabled ? true : false
+        
+        //displays confirmation for 2 seconds
+        secretary.displayAutoLockConfirmation = true
+        delayExecution(.now() + 2) { secretary.displayAutoLockConfirmation = false }
     }
     
     // MARK: -
