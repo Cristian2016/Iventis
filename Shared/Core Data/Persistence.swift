@@ -12,26 +12,6 @@ struct PersistenceController {
         "red", "ultramarine", "orange", "sky", "magenta", "silver", "lemon", "charcoal"
     ]
     
-    init(inMemory: Bool = false) {
-        container = NSPersistentContainer(name: "Model")
-        
-        //one shared database for App Widgets and Siri
-        let sharedDatabase = URL.sharedContainerURL.appendingPathComponent("sharedDatabase.sqlite")
-                
-        //moved database to shared location
-        container.persistentStoreDescriptions = [NSPersistentStoreDescription(url: sharedDatabase)]
-        
-        if inMemory {
-            container.persistentStoreDescriptions.first!.url = URL(fileURLWithPath: "/dev/null")
-        }
-        container.loadPersistentStores(completionHandler: { (storeDescription, error) in
-            if let error = error as NSError? {
-                fatalError("Unresolved error \(error), \(error.userInfo)")
-            }
-        })
-        container.viewContext.automaticallyMergesChangesFromParent = true
-    }
-    
     static var shared = PersistenceController()
 
     static var preview: PersistenceController = {
@@ -81,5 +61,26 @@ struct PersistenceController {
                 print("problemo with saving, dumb dumb!!! ", error.localizedDescription)
             }
         }
+    }
+    
+    // MARK: - Init
+    init(inMemory: Bool = false) {
+        container = NSPersistentContainer(name: "Model")
+        
+        //one shared database for App Widgets and Siri
+        let sharedDatabase = URL.sharedContainerURL.appendingPathComponent("sharedDatabase.sqlite")
+                
+        //moved database to shared location
+        container.persistentStoreDescriptions = [NSPersistentStoreDescription(url: sharedDatabase)]
+        
+        if inMemory {
+            container.persistentStoreDescriptions.first!.url = URL(fileURLWithPath: "/dev/null")
+        }
+        container.loadPersistentStores(completionHandler: { (storeDescription, error) in
+            if let error = error as NSError? {
+                fatalError("Unresolved error \(error), \(error.userInfo)")
+            }
+        })
+        container.viewContext.automaticallyMergesChangesFromParent = true
     }
 }
