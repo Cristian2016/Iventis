@@ -26,8 +26,10 @@ import MyPackage
 
 struct BubbleList: View {
     @Environment(\.managedObjectContext) private var viewContext
+    
     @EnvironmentObject private var viewModel:ViewModel
     @EnvironmentObject private var layoutViewModel:LayoutViewModel
+    
     @SectionedFetchRequest var bubbles:SectionedFetchResults<Bool, Bubble>
 
     private let secretary = Secretary.shared
