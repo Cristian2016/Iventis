@@ -73,9 +73,9 @@ struct BubbleList: View {
                 }
                 .background { RefresherView() } //11
                 .onAppear {}
-                //                    .refreshable {
-                //                        if Secretary.shared.pinnedBubblesCount != 0 { secretary.showFavoritesOnly.toggle() }
-                //                    } //11
+//                .refreshable {
+////                    if false { secretary.showFavoritesOnly.toggle() }
+//                } //11
             }
             LeftStrip(isListEmpty)
         }
