@@ -116,9 +116,6 @@ class PairBubbleCellCoordinator {
                     let self = self,
                     let detailViewVisible = notification.userInfo?["detailViewVisible"] as? Bool
                 else { return }
-                
-                // FIXME: -
-                if self.stop { return }
                                 
                 let condition = detailViewVisible && self.bubble.state == .running
                 self.shouldWork = condition ? true : false
