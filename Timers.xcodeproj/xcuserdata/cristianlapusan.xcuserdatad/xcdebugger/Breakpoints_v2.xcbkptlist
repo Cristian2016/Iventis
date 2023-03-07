@@ -30,8 +30,8 @@
             filePath = "Shared/ViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "320"
-            endingLineNumber = "320"
+            startingLineNumber = "324"
+            endingLineNumber = "324"
             landmarkName = "toggleBubbleStart(_:delta:)"
             landmarkType = "7">
             <Locations>
@@ -138,8 +138,8 @@
             filePath = "Shared/ViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "288"
-            endingLineNumber = "288"
+            startingLineNumber = "292"
+            endingLineNumber = "292"
             landmarkName = "toggleBubbleStart(_:delta:)"
             landmarkType = "7">
             <Locations>
@@ -179,22 +179,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "216E8CC3-4B94-47E6-BE00-1AF34AC2D955"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Shared/ViewModel.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "359"
-            endingLineNumber = "359"
-            landmarkName = "toggleBubbleStart(_:delta:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "47135E2B-70EE-4A67-B7B8-6D14985805C6"
             shouldBeEnabled = "No"
             ignoreCount = "0"
@@ -202,25 +186,9 @@
             filePath = "Shared/ViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "247"
-            endingLineNumber = "247"
+            startingLineNumber = "249"
+            endingLineNumber = "249"
             landmarkName = "createBubble(_:_:_:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "D688BD48-2F52-4220-837B-3BB0F31FF147"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Shared/ViewModel.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "272"
-            endingLineNumber = "272"
-            landmarkName = "deleteBubble(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -234,8 +202,8 @@
             filePath = "Shared/ViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "229"
-            endingLineNumber = "229"
+            startingLineNumber = "231"
+            endingLineNumber = "231"
             landmarkName = "createBubble(_:_:_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -298,182 +266,10 @@
             filePath = "Shared/ViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "543"
-            endingLineNumber = "543"
+            startingLineNumber = "531"
+            endingLineNumber = "531"
             landmarkName = "endSession(_:)"
-            landmarkType = "9">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "9D3DE41B-F6BD-4036-848F-E50A9BA82DE4"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Shared/ViewModel.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "410"
-            endingLineNumber = "410"
-            landmarkName = "reset(_:)"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "9D3DE41B-F6BD-4036-848F-E50A9BA82DE4 - 7be8cfe23ae1f3d6"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 () -&gt; () in closure #1 () -&gt; () in Timers.ViewModel.reset(Timers.Bubble) -&gt; ()"
-                  moduleName = "Timers"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/cristianlapusan/Downloads/Timers/Shared/ViewModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "410"
-                  endingLineNumber = "410"
-                  offsetFromSymbolStart = "2675">
-               </Location>
-               <Location
-                  uuid = "9D3DE41B-F6BD-4036-848F-E50A9BA82DE4 - 6e190f982f8fc40c"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #2 @Swift.MainActor () -&gt; () in closure #1 () -&gt; () in closure #1 () -&gt; () in Timers.ViewModel.reset(Timers.Bubble) -&gt; ()"
-                  moduleName = "Timers"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/cristianlapusan/Downloads/Timers/Shared/ViewModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "411"
-                  endingLineNumber = "411"
-                  offsetFromSymbolStart = "105">
-               </Location>
-               <Location
-                  uuid = "9D3DE41B-F6BD-4036-848F-E50A9BA82DE4 - 7be8cfe23ae1f3d6"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 () -&gt; () in closure #1 () -&gt; () in Timers.ViewModel.reset(Timers.Bubble) -&gt; ()"
-                  moduleName = "Timers"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/cristianlapusan/Downloads/Timers/Shared/ViewModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "410"
-                  endingLineNumber = "410"
-                  offsetFromSymbolStart = "2220">
-               </Location>
-               <Location
-                  uuid = "9D3DE41B-F6BD-4036-848F-E50A9BA82DE4 - 6e190f982f8fc40c"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #2 @Swift.MainActor () -&gt; () in closure #1 () -&gt; () in closure #1 () -&gt; () in Timers.ViewModel.reset(Timers.Bubble) -&gt; ()"
-                  moduleName = "Timers"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/cristianlapusan/Downloads/Timers/Shared/ViewModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "411"
-                  endingLineNumber = "411"
-                  offsetFromSymbolStart = "116">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "2BA1DEA2-00B1-428C-9F71-C6BCFD5B61FE"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Shared/ViewModel.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "415"
-            endingLineNumber = "415"
-            landmarkName = "reset(_:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "23349D73-C957-414D-82AB-1432694B4768"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Shared/ViewModel.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "356"
-            endingLineNumber = "356"
-            landmarkName = "toggleBubbleStart(_:delta:)"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "23349D73-C957-414D-82AB-1432694B4768 - b5d7ebe4ab8eb602"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 () -&gt; () in closure #3 () -&gt; () in Timers.ViewModel.toggleBubbleStart(_: Timers.Bubble, delta: Swift.Optional&lt;Swift.Double&gt;) -&gt; ()"
-                  moduleName = "Timers"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/cristianlapusan/Downloads/Timers/Shared/ViewModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "356"
-                  endingLineNumber = "356"
-                  offsetFromSymbolStart = "208">
-               </Location>
-               <Location
-                  uuid = "23349D73-C957-414D-82AB-1432694B4768 - 2f9b7b2395d2bc8c"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 @Swift.MainActor () -&gt; () in closure #1 () -&gt; () in closure #3 () -&gt; () in Timers.ViewModel.toggleBubbleStart(_: Timers.Bubble, delta: Swift.Optional&lt;Swift.Double&gt;) -&gt; ()"
-                  moduleName = "Timers"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/cristianlapusan/Downloads/Timers/Shared/ViewModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "357"
-                  endingLineNumber = "357"
-                  offsetFromSymbolStart = "84">
-               </Location>
-               <Location
-                  uuid = "23349D73-C957-414D-82AB-1432694B4768 - b5d7ebe4ab8eb602"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 () -&gt; () in closure #3 () -&gt; () in Timers.ViewModel.toggleBubbleStart(_: Timers.Bubble, delta: Swift.Optional&lt;Swift.Double&gt;) -&gt; ()"
-                  moduleName = "Timers"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/cristianlapusan/Downloads/Timers/Shared/ViewModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "356"
-                  endingLineNumber = "356"
-                  offsetFromSymbolStart = "180">
-               </Location>
-               <Location
-                  uuid = "23349D73-C957-414D-82AB-1432694B4768 - 2f9b7b2395d2bc8c"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 @Swift.MainActor () -&gt; () in closure #1 () -&gt; () in closure #3 () -&gt; () in Timers.ViewModel.toggleBubbleStart(_: Timers.Bubble, delta: Swift.Optional&lt;Swift.Double&gt;) -&gt; ()"
-                  moduleName = "Timers"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/cristianlapusan/Downloads/Timers/Shared/ViewModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "357"
-                  endingLineNumber = "357"
-                  offsetFromSymbolStart = "68">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

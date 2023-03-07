@@ -29,6 +29,8 @@ import CoreData
 import MyPackage
 
 class ViewModel: ObservableObject {
+    private let delay:DispatchTime = .now() + 0.01
+    
     private let secretary = Secretary.shared
     
     ///PersistanceController.shared
@@ -268,7 +270,7 @@ extension ViewModel {
             
             bContext.delete(thisBubble) //13
             self.controller.save(bContext) {
-                DispatchQueue.main.async { self.controller.save() }
+                delayExecution(self.delay) { self.controller.save() }
             }
         }
     } //9
@@ -285,6 +287,8 @@ extension ViewModel {
         switch bubble.state {
             case .brandNew: /* changes to .running */
                 bContext.perform { [weak self] in
+                    guard let self = self else { return }
+                    
                     let thisBubble = bContext.object(with: objID) as! Bubble
                     
                     //create newPair, newSession and add them to the newBubble
@@ -299,17 +303,17 @@ extension ViewModel {
                     //.....................................................
                     
                     //this also makes changes visible to the viewContext as well
-                    self?.controller.save(bContext) { //⚠️ no need to save viewContext
-                        DispatchQueue.main.async { //UI stuff
+                    self.controller.save(bContext) { //⚠️ no need to save viewContext
+                        delayExecution(self.delay) { //UI stuff
                             bubble.coordinator.update(.user(.start))
                             bubble.pairBubbleCellCoordinator.update(.user(.start))
                             
                             //1 both
-                            self?.secretary.addNoteButton_bRank = nil //clear first
-                            self?.secretary.addNoteButton_bRank = Int(bubble.rank)
+                            self.secretary.addNoteButton_bRank = nil //clear first
+                            self.secretary.addNoteButton_bRank = Int(bubble.rank)
                             
                             delayExecution(.now() + 0.3) {
-                                self?.secretary.pairBubbleCellNeedsDisplay.toggle()
+                                self.secretary.pairBubbleCellNeedsDisplay.toggle()
                             }
                         }
                     }
@@ -326,7 +330,7 @@ extension ViewModel {
                     
                     //this also makes changes visible to the viewContext as well
                     self.controller.save(bContext) { //⚠️ no need to save vContext
-                        DispatchQueue.main.async { //UI stuff
+                        delayExecution(self.delay) { //UI stuff
                             bubble.coordinator.update(.user(.start))
                             bubble.pairBubbleCellCoordinator.update(.user(.start))
                             
@@ -353,7 +357,7 @@ extension ViewModel {
                     thisBubble.currentClock += currentPair!.duration
                     thisBubble.lastSession!.computeDuration()
                     self.controller.save(bContext) {
-                        DispatchQueue.main.async {
+                        delayExecution(self.delay) {
                             bubble.coordinator.update(.user(.pause))
                             bubble.pairBubbleCellCoordinator.update(.user(.pause))
                             
@@ -406,8 +410,8 @@ extension ViewModel {
                 let changes = [NSDeletedObjectsKey : ids]
                 
                 bContext.reset() //⚠️ 16
-                                
-                DispatchQueue.main.async {
+                
+                delayExecution(self.delay) {
                     NSManagedObjectContext.mergeChanges(
                         fromRemoteContextSave: changes, into: [self.controller.viewContext]) //12
                     bubble.coordinator.update(.user(.reset))
@@ -452,9 +456,8 @@ extension ViewModel {
                 
                 //save changes to CoreData using bContext and update UI
                 self.controller.save(bContext) {
-                    
                     let color = Color.bubbleColor(forName: thisBubble.color)
-                    DispatchQueue.main.async {
+                    delayExecution(self.delay) {
                         bubble.coordinator.colorPublisher.send(color)
                     }
                 }
@@ -479,21 +482,6 @@ extension ViewModel {
     }
     
     // MARK: -
-    func deletePair(_ pair:Pair?) {
-        guard let pair = pair else { return }
-        
-        DispatchQueue.global().async {
-            let objID = pair.objectID
-            let bContext = self.controller.bContext
-            
-            bContext.perform {
-                let thisPair = bContext.object(with: objID) as! Pair
-                bContext.delete(thisPair)
-                self.controller.save(bContext)
-            }
-        }
-    }
-    
     func deleteSession(_ session:Session) {
         guard let bubble = session.bubble else { fatalError() }
         
@@ -514,8 +502,8 @@ extension ViewModel {
             
             //3. use property here
             PersistenceController.shared.save(bContext) { //7
-                DispatchQueue.main.async {
-//                    try? PersistenceController.shared.viewContext.save()
+                delayExecution(self.delay) {
+                    // try? PersistenceController.shared.viewContext.save()
                     if isCurrentSession {
                         bubble.coordinator.update(.user(.deleteCurrentSession))
                         bubble.pairBubbleCellCoordinator.update(.user(.deleteCurrentSession))
@@ -554,7 +542,7 @@ extension ViewModel {
             
             self.controller.save(bContext) { //14
                 self.createCalEventAndSave(for: thisBubble)
-                DispatchQueue.main.async { //15
+                delayExecution(self.delay) { //15
                     bubble.coordinator.update(.user(.endSession))
                     bubble.pairBubbleCellCoordinator.update(.user(.endSession))
                 }
@@ -572,7 +560,6 @@ extension ViewModel {
             let objID = savedNote.objectID
             
             bContext.perform {
-                
                 let thisNote = bContext.object(with: objID) as! BubbleSavedNote
                 bContext.delete(thisNote)
                 self.controller.save(bContext)
@@ -607,8 +594,7 @@ extension ViewModel {
             thisBubble.note = nil
             
             self.controller.save(bContext) {
-                
-                DispatchQueue.main.async {
+                delayExecution(self.delay) {
                     bubble.managedObjectContext?.perform {
                         CalendarManager.shared.updateExistingEvent(.title(bubble))
                     }
@@ -630,8 +616,7 @@ extension ViewModel {
             thisPair.note = nil
             
             self.controller.save(bContext) {
-                
-                DispatchQueue.main.async {
+                delayExecution(self.delay) {
                     pair.managedObjectContext?.perform {
                         CalendarManager.shared.updateExistingEvent(.notes(pair.session!))
                     }
@@ -650,6 +635,8 @@ extension ViewModel {
                 let objID = bubble.objectID
                 
                 bubble.managedObjectContext?.perform {  [weak self] in
+                    guard let self = self else { return }
+                    
                     note.removeWhiteSpaceAtBothEnds()
                     let theBubble = PersistenceController.shared.grabObj(objID) as! Bubble
                     theBubble.note = note
@@ -661,9 +648,9 @@ extension ViewModel {
                     newHistoryItem.note = note
                     theBubble.addToHistory(newHistoryItem)
                     
-                    self?.controller.save(bubble.managedObjectContext)
+                    self.controller.save(bubble.managedObjectContext)
                     
-                    DispatchQueue.main.async {
+                    delayExecution(self.delay) {
                         CalendarManager.shared.updateExistingEvent(.title(bubble))
                     }
                 }
@@ -688,7 +675,7 @@ extension ViewModel {
                     
                     self.controller.save(pair.managedObjectContext)
                     
-                    DispatchQueue.main.async {
+                    delayExecution(self.delay) {
                         CalendarManager.shared.updateExistingEvent(.notes(pair.session!))
                     }
                 }
