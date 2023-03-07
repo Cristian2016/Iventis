@@ -89,11 +89,8 @@ struct BubbleList: View {
     init(_ showFavoritesOnly: Bool, _ showDetail_bRank:Int64? = nil) {
         var predicate:NSPredicate?
         if showFavoritesOnly { predicate = NSPredicate(format: "isPinned == true")}
-        if let rank = showDetail_bRank {
-            predicate = NSPredicate(format: "rank == %D", rank)
-        }
-                
-        UITableView.appearance().showsVerticalScrollIndicator = false
+        if let rank = showDetail_bRank { predicate = NSPredicate(format: "rank == %D", rank) }
+            
         _bubbles = SectionedFetchRequest<Bool, Bubble>(
             entity: Bubble.entity(),
             sectionIdentifier: \.isPinned,
