@@ -144,7 +144,7 @@ struct PairCell: View {
     private var separatorLine:some View {
         Rectangle()
             .fill(Color.lightGray)
-            .frame(width: 30, height: 1)
+            .frame(width: 20, height: 1)
     }
     
     private var pairNumberView:some View {
