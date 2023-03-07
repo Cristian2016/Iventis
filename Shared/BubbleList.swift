@@ -25,6 +25,7 @@ import Combine
 import MyPackage
 
 struct BubbleList: View {
+    @Environment(\.refresh) private var refresh
     @Environment(\.managedObjectContext) private var viewContext
     
     @EnvironmentObject private var viewModel:ViewModel
@@ -46,8 +47,7 @@ struct BubbleList: View {
                         ForEach (section) { bubble in
                             ZStack {
                                 NavigationLink(value: bubble) { }.opacity(0)
-                                BubbleCell(bubble)
-                                    .offset(y: -6)
+                                BubbleCell(bubble).offset(y: -6)
                             }
                         }
                     }
@@ -73,9 +73,6 @@ struct BubbleList: View {
                 }
                 .background { RefresherView() } //11
                 .onAppear {}
-//                .refreshable {
-////                    if false { secretary.showFavoritesOnly.toggle() }
-//                } //11
             }
             LeftStrip(isListEmpty)
         }
