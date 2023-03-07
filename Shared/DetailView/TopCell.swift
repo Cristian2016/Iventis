@@ -47,10 +47,9 @@ struct TopCell: View {
         Push(.topRight) {
             Text(String(myRank))
                 .foregroundColor(.gray)
-                .font(.footnote)
+                .font(.system(size: 16))
                 .fontWeight(.medium)
                 .padding(EdgeInsets(top: 8, leading: 0, bottom: 0, trailing: 12))
-                .dynamicTypeSize(...DynamicTypeSize.accessibility2)
         }
     }
     

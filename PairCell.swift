@@ -150,9 +150,8 @@ struct PairCell: View {
     private var pairNumberView:some View {
         Text(String(pairNumber))
             .foregroundColor(.gray)
-            .font(.footnote)
+            .font(.system(size: 16))
             .fontWeight(.medium)
-            .dynamicTypeSize(...DynamicTypeSize.accessibility2)
     }
     
     //start time and date
