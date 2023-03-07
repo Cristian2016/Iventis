@@ -3,7 +3,7 @@
 //  Time Bubbles
 //
 //  Created by Cristian Lapusan on 08.05.2021.
-//
+//1 runs on background Thread
 
 import EventKit
 import EventKitUI
@@ -247,7 +247,6 @@ class CalendarManager: NSObject {
     }
     
     private func createEventNotes(from pairs:[Pair]) -> String {
-        
         let eventDuration = pairs.first?.session?.totalDuration
         let totalDuration = eventDuration?.timeComponentsAbreviatedString ?? ""
         let string = String("Total \(totalDuration)\n-------------------\n")
@@ -271,7 +270,7 @@ class CalendarManager: NSObject {
         
         bucket += eventNotesSeparator
         return bucket
-    }
+    } //1
     
     ///return an eventIdentifier
     private func newEvent(with title:String?, bubbleNote:String?, eventNotes:String?, start:Date, end:Date, _ session:Session) {
