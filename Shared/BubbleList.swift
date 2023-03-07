@@ -160,18 +160,3 @@ extension BubbleList {
         }
     }
 }
-
-struct PairCountModifier: ViewModifier {
-    func body(content: Content) -> some View {
-        content
-            .foregroundColor(.gray)
-            .font(.system(size: 16))
-            .fontWeight(.medium)
-    }
-}
-
-extension View {
-    func pairCountModifier() -> some View {
-        modifier(PairCountModifier())
-    }
-}

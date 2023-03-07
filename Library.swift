@@ -30,7 +30,9 @@ extension Notification.Name {
     static let detailViewVisible = Notification.Name("detailViewVisible")
     static let needleTracksLatestSession = Notification.Name("needleTracksLatestSession")
     static let doNotLetNeedleJump = Notification.Name("doNotLetNeedleJump")
-} //1 ViewModel 1//
+    static let sizeNotification = Notification.Name("sizeNotification")
+    static let frameNotification = Notification.Name("frameNotification")
+} //1 ViewModel
 
 extension Notification {
     static let doNotLetNeedleJump = Notification.init(name: .doNotLetNeedleJump)
@@ -178,9 +180,4 @@ public extension Float {
         
         static let zeroAll = TimeComponentsAsStrings.init(hr: "0", min: "0", sec: "0", hundredths: "00")
     }
-}
-
-extension Notification.Name {
-    static let sizeNotification = Notification.Name("sizeNotification")
-    static let frameNotification = Notification.Name("frameNotification")
 }

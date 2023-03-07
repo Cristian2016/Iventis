@@ -31,8 +31,21 @@ struct AdaptiveText: ViewModifier {
     }
 }
 
+struct PairCountModifier: ViewModifier {
+    func body(content: Content) -> some View {
+        content
+            .foregroundColor(.gray)
+            .font(.system(size: 16))
+            .fontWeight(.medium)
+    }
+}
+
 extension View {
     func adaptiveText(_ text:String, maxSize:CGFloat = 200, _ show:Bool) -> some View {
         self.modifier(AdaptiveText(text: text, maxFontSize: maxSize, show: show))
+    }
+    
+    func pairCountModifier() -> some View {
+        modifier(PairCountModifier())
     }
 }
