@@ -149,9 +149,7 @@ struct PairCell: View {
     
     private var pairNumberView:some View {
         Text(String(pairNumber))
-            .foregroundColor(.gray)
-            .font(.system(size: 16))
-            .fontWeight(.medium)
+            .pairCountModifier()
     }
     
     //start time and date

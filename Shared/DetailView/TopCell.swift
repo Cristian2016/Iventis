@@ -46,9 +46,7 @@ struct TopCell: View {
     private var sessionRankView: some View {
         Push(.topRight) {
             Text(String(myRank))
-                .foregroundColor(.gray)
-                .font(.system(size: 16))
-                .fontWeight(.medium)
+                .pairCountModifier()
                 .padding(EdgeInsets(top: 8, leading: 0, bottom: 0, trailing: 12))
         }
     }
