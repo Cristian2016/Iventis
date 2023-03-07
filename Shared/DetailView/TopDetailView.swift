@@ -62,13 +62,12 @@ struct TopDetailView:View {
             ZStack {
                 Image(systemName: "arrowtriangle.down.fill")
                     .foregroundColor(.red)
-                    .font(.footnote)
+                    .font(.system(size: 20))
                 Divider()
                     .frame(width: 40)
             }
             Spacer()
         }
-        .dynamicTypeSize(...DynamicTypeSize.accessibility2)
     }
     
     private var shadowBackground:some View {
