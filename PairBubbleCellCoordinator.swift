@@ -13,7 +13,7 @@ import Foundation
 import UIKit
 
 class PairBubbleCellCoordinator {
-    unowned private let bubble:Bubble //2
+    weak private var bubble:Bubble? //2
     
     // MARK: - Public API
     func update(_ moment:Moment) {
@@ -35,17 +35,14 @@ class PairBubbleCellCoordinator {
                             }
                             .store(in: &cancellable)
                     case .pause, .deleteCurrentSession, .endSession:
-                        stop = true
                         cancellable = []
                         components = Components("0", "0", "0")
                         
                     case .reset:
-                        stop = true
                         cancellable = []
                         components = Components("0", "0", "0")
                         
                     case .deleteBubble:
-                        stop = true
                         cancellable = []
                         components = Components("0", "0", "0")
                         NotificationCenter.default.removeObserver(self, name: .detailViewVisible, object: bubble)
@@ -57,7 +54,9 @@ class PairBubbleCellCoordinator {
     
     // MARK: -
     private func task() {
-        guard let lastPairStart = bubble.lastPair?.start else { return }
+        guard
+            let bubble = bubble,
+            let lastPairStart = bubble.lastPair?.start else { return }
         
         DispatchQueue.global().async {
             var Δ = Float(Date().timeIntervalSince(lastPairStart))
@@ -89,6 +88,9 @@ class PairBubbleCellCoordinator {
     }
     
     private var initialValue:Float {
+        guard let bubble = bubble else {
+            fatalError()
+        }
         if bubble.state == .running {
             let Δ = Date().timeIntervalSince(bubble.lastPair!.start!)
             let initialValue = Float(Δ)
@@ -105,7 +107,6 @@ class PairBubbleCellCoordinator {
             update(.user(.pause))
         }
     }} //6
-    private var stop = false
     
     private var refresh = false
     
@@ -113,11 +114,12 @@ class PairBubbleCellCoordinator {
         NotificationCenter.Publisher(center: .default, name: .detailViewVisible)
             .sink { [weak self] notification in
                 guard
+                    let bubble = self?.bubble,
                     let self = self,
                     let detailViewVisible = notification.userInfo?["detailViewVisible"] as? Bool
                 else { return }
                                 
-                let condition = detailViewVisible && self.bubble.state == .running
+                let condition = detailViewVisible && bubble.state == .running
                 self.shouldWork = condition ? true : false
                 self.refresh = true
             }
