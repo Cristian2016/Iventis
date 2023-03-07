@@ -18,11 +18,11 @@ extension BubbleCellCoordinator {
 }
 
 class BubbleCellCoordinator {
-    unowned private let bubble:Bubble
+    weak private var bubble:Bubble?
     
     // MARK: - Public API
     func update(_ moment:Moment) {
-        if self.stop { return }
+        guard let bubble = bubble else { return }
         
         DispatchQueue.global().async {
             switch moment {
@@ -56,7 +56,7 @@ class BubbleCellCoordinator {
                             
                         case .endSession, .reset, .deleteCurrentSession:
                             self.cancellable = []
-                            let initialClock = self.bubble.initialClock
+                            let initialClock = bubble.initialClock
                             let stringComponents = initialClock.timeComponentsAsStrings
                             
                             DispatchQueue.main.async {
@@ -65,15 +65,14 @@ class BubbleCellCoordinator {
                                 self.components.sec = stringComponents.sec
                                 self.components.hundredths = stringComponents.hundredths
                                 
-                                if self.bubble.kind == .stopwatch {
+                                if bubble.kind == .stopwatch {
                                     self.opacity.update(0)
                                 } else {
-                                    self.opacity.update(self.bubble.initialClock)
+                                    self.opacity.update(bubble.initialClock)
                                 }
                             }
                             
                         case .deleteBubble:
-                            self.stop = true
                             self.cancellable = []
                             NotificationCenter.default.removeObserver(self)
                     }
@@ -89,12 +88,13 @@ class BubbleCellCoordinator {
     private var refresh /* all components */ = false //5
     
     private func task() {
-        if stop { return }
-        guard let lastPairStart = bubble.lastPair?.start else { return }
+        guard
+            let bubble = self.bubble,
+            let lastPairStart = bubble.lastPair?.start else { return }
         
         DispatchQueue.global().async {
             let Δ = Date().timeIntervalSince(lastPairStart) //2
-            var value = self.bubble.currentClock + Float(Δ) //ex: 2345.87648
+            var value = bubble.currentClock + Float(Δ) //ex: 2345.87648
             
             value.round(.toNearestOrEven) //ex: 2346
             
@@ -148,12 +148,9 @@ class BubbleCellCoordinator {
     NotificationCenter.Publisher(center: .default, name: .bubbleTimerSignal)
     
     private var cancellable = Set<AnyCancellable>()
-    
-    private var stop = false
-    
-    private var initialValue:Float {
-        if stop { return 0}
         
+    private var initialValue:Float {
+        guard let bubble = bubble else { fatalError() }
         if bubble.state == .running {
             let Δ = Date().timeIntervalSince(bubble.lastPair!.start!)
             let initialValue = bubble.currentClock + Float(Δ)
@@ -167,8 +164,9 @@ class BubbleCellCoordinator {
     private func observeActivePhase() {
         NotificationCenter.default.addObserver(forName: UIApplication.didBecomeActiveNotification, object: nil, queue: nil) { [weak self] _ in
             
-            guard let self = self else { return }
-            if self.stop { return }
+            guard
+                let bubble = self?.bubble,
+                let self = self else { return }
             
             DispatchQueue.global().async {
                 let components = self.initialValue.timeComponentsAsStrings
@@ -182,7 +180,7 @@ class BubbleCellCoordinator {
                     
                     self.opacity.update(self.initialValue)
                     
-                    if self.bubble.state == .running { self.update(.automatic) }
+                    if bubble.state == .running { self.update(.automatic) }
                 }
             }
         }
