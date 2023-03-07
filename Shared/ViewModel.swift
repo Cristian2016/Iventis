@@ -514,8 +514,9 @@ extension ViewModel {
             
             //3. use property here
             PersistenceController.shared.save(bContext) { //7
-                if isCurrentSession {
-                    DispatchQueue.main.async {
+                DispatchQueue.main.async {
+//                    try? PersistenceController.shared.viewContext.save()
+                    if isCurrentSession {
                         bubble.coordinator.update(.user(.deleteCurrentSession))
                         bubble.pairBubbleCellCoordinator.update(.user(.deleteCurrentSession))
                     }

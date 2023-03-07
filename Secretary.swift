@@ -90,4 +90,6 @@ class Secretary {
     func scrollToTop() {
         if !shouldScrollToTop { shouldScrollToTop = true }
     } //1
+    
+    var pinned = 0
 }

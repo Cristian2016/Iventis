@@ -250,13 +250,15 @@ class CalendarManager: NSObject {
         
         let eventDuration = pairs.first?.session?.totalDuration
         let totalDuration = eventDuration?.timeComponentsAbreviatedString ?? ""
-        let string = String("◼︎ Total \(totalDuration)\n")
+        let string = String("◼︎ Total \(totalDuration)\n-------------------\n")
         
         var bucket = String(string)
         
         for (index, pair) in pairs.enumerated() {
-            let note = (!pair.note_.isEmpty ? pair.note_ : "no title")
-            bucket += "▪︎ \(index + 1). " + note + "\n"
+            let pairDuration = Float(pair.duration).timeComponentsAbreviatedString
+            let pairNote = (!pair.note_.isEmpty ? pair.note_ : "")
+            
+            bucket += "\(index + 1) ▪︎ \(pairDuration) \(pairNote)\n"
             
             //date interval
 //            bucket += dateInterval(start: pair.start!, end: pair.pause!)
@@ -264,12 +266,7 @@ class CalendarManager: NSObject {
             
             //time interval
             bucket += timeInterval(start: pair.start!, end: pair.pause!)
-            bucket += "\n"
-            
-            //duration
-            let stringDuration = Float(pair.duration).timeComponentsAbreviatedString
-            bucket += stringDuration
-            bucket += "\n" + "\n"
+            bucket += "\n\n"
         }
         
         bucket += eventNotesSeparator

@@ -50,11 +50,6 @@ struct BubbleList: View {
                                 BubbleCell(bubble).offset(y: -6)
                             }
                         }
-                        .task(id: section.count, priority: .low) {
-                            if section.id == true {
-                                print(print("task pinned \(section.count)"))
-                            }
-                        }
                     }
                     .listRowSeparator(.hidden)
                     .listSectionSeparator(value ? .visible : .hidden, edges: [.bottom])
