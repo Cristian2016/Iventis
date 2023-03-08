@@ -25,7 +25,6 @@ import Combine
 import MyPackage
 
 struct BubbleList: View {
-    @Environment(\.refresh) private var refresh
     @Environment(\.managedObjectContext) private var viewContext
     
     @EnvironmentObject private var viewModel:ViewModel
