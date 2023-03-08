@@ -34,8 +34,6 @@ class Secretary {
     
     @Published var theOneAndOnlyEditedSDB:StartDelayBubble?
     
-    @Published var showFavoritesOnly = false
-    
     @Published var showDetail_bRank:Int64?
     
     func toggleDetail(_ rank:Int64?) {
@@ -91,11 +89,9 @@ class Secretary {
         if !shouldScrollToTop { shouldScrollToTop = true }
     } //1
     
-    @Published var isBubblesReportReady = false {didSet{
-        if isBubblesReportReady {
-            print(bubblesReport)
-        }
-    }}
+    @Published var showFavoritesOnly = false
+    
+    @Published var isBubblesReportReady = false
     var bubblesReport = BubblesReport()
 }
 

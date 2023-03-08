@@ -11,23 +11,32 @@ import SwiftUI
 struct RefresherView: View {
     private let secretary = Secretary.shared
     @State private var showFavoritesOnly = false
+    @State private var show = false
     
     var body:some View {
         ZStack {
-            VStack(spacing: 4) {
-                let condition = showFavoritesOnly
-                let title = condition ?  "Show All" : "Show Pinned Only"
-                let symbol = condition ? "eye" : "pin"
-                let color = condition ? .secondary : Color.orange
-                
-                BorderlessLabel(title: title, symbol: symbol,color: color)
-                Image(systemName: "chevron.compact.down")
-                    .foregroundColor(color)
-                Spacer()
+            if show {
+                VStack(spacing: 4) {
+                    let condition = showFavoritesOnly
+                    let title = condition ?  "Show All" : "Show Pinned Only"
+                    let symbol = condition ? "eye" : "pin"
+                    let color = condition ? .secondary : Color.orange
+                    
+                    BorderlessLabel(title: title, symbol: symbol,color: color)
+                    Image(systemName: "chevron.compact.down")
+                        .foregroundColor(color)
+                    Spacer()
+                }
+                .padding([.top], 4)
             }
-            .padding([.top], 4)
         }
         .onReceive(secretary.$showFavoritesOnly) { showFavoritesOnly = $0 }
+        .onReceive(secretary.$isBubblesReportReady) {
+            print("secretary.$isBubblesReportReady \($0)")
+            if $0 {
+                show = secretary.bubblesReport.pinned == 0 ? false : true
+            }
+        }
     }
 }
 
