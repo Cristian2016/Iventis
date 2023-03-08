@@ -16,7 +16,9 @@ import MyPackage
 @main
 struct TimersApp: App {
     
-    var body: some Scene { WindowGroup { ViewHierarchy() }}
+    var body: some Scene {
+        WindowGroup { ViewHierarchy() }
+    }
     
     init() {
         let center = NotificationCenter.default

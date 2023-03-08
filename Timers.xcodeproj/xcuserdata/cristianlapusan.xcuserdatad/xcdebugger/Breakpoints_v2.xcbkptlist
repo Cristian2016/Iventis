@@ -97,7 +97,7 @@
                </Location>
                <Location
                   uuid = "C0CC8A9F-3F20-478A-80B4-CC2CE14ABD95 - 8cbff5bae7a16f10"
-                  shouldBeEnabled = "Yes"
+                  shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "closure #2 () -&gt; () in Timers.ViewModel.toggleBubbleStart(_: Timers.Bubble, delta: Swift.Optional&lt;Swift.Double&gt;) -&gt; ()"
@@ -112,7 +112,7 @@
                </Location>
                <Location
                   uuid = "C0CC8A9F-3F20-478A-80B4-CC2CE14ABD95 - 8cbff5bae7a16f10"
-                  shouldBeEnabled = "Yes"
+                  shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "closure #2 () -&gt; () in Timers.ViewModel.toggleBubbleStart(_: Timers.Bubble, delta: Swift.Optional&lt;Swift.Double&gt;) -&gt; ()"
@@ -145,7 +145,7 @@
             <Locations>
                <Location
                   uuid = "321E3AA0-F691-48D0-81D2-4AB1796D94D4 - 268e73264a28d131"
-                  shouldBeEnabled = "Yes"
+                  shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "closure #1 () -&gt; () in Timers.ViewModel.toggleBubbleStart(_: Timers.Bubble, delta: Swift.Optional&lt;Swift.Double&gt;) -&gt; ()"
@@ -160,7 +160,7 @@
                </Location>
                <Location
                   uuid = "321E3AA0-F691-48D0-81D2-4AB1796D94D4 - 268e73264a28d131"
-                  shouldBeEnabled = "Yes"
+                  shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "closure #1 () -&gt; () in Timers.ViewModel.toggleBubbleStart(_: Timers.Bubble, delta: Swift.Optional&lt;Swift.Double&gt;) -&gt; ()"
@@ -225,7 +225,7 @@
             <Locations>
                <Location
                   uuid = "AF0680DE-2644-435E-BCF2-490866FACE77 - dd1badcc6dd6fb11"
-                  shouldBeEnabled = "Yes"
+                  shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "closure #1 () -&gt; () in Timers.BubbleDeleteActionAlert.bottomButton.getter : some"
@@ -240,7 +240,7 @@
                </Location>
                <Location
                   uuid = "AF0680DE-2644-435E-BCF2-490866FACE77 - dd1badcc6dd6fb11"
-                  shouldBeEnabled = "Yes"
+                  shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "closure #1 () -&gt; () in Timers.BubbleDeleteActionAlert.bottomButton.getter : some"
@@ -270,6 +270,62 @@
             endingLineNumber = "531"
             landmarkName = "endSession(_:)"
             landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "F17DEDD5-CDFF-424A-AE3A-3DF0486E535C"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "Yes"
+            filePath = "Shared/ViewHierarchy.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "29"
+            endingLineNumber = "29"
+            landmarkName = "body"
+            landmarkType = "24">
+            <Actions>
+               <BreakpointActionProxy
+                  ActionExtensionID = "Xcode.BreakpointAction.Sound">
+                  <ActionContent
+                     soundName = "Blow">
+                  </ActionContent>
+               </BreakpointActionProxy>
+            </Actions>
+            <Locations>
+               <Location
+                  uuid = "F17DEDD5-CDFF-424A-AE3A-3DF0486E535C - b953213ec6d7651b"
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Timers.ViewHierarchy.body.getter : some"
+                  moduleName = "Timers"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/cristianlapusan/Downloads/Timers/Shared/ViewHierarchy.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "30"
+                  endingLineNumber = "30"
+                  offsetFromSymbolStart = "1184">
+               </Location>
+               <Location
+                  uuid = "F17DEDD5-CDFF-424A-AE3A-3DF0486E535C - 78e95ae31d22d80c"
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 () -&gt; SwiftUI.TupleView&lt;(SwiftUI._ConditionalContent&lt;Timers.iPadViewHierarchy, Timers.iPhoneViewHierarchy&gt;, Swift.Optional&lt;Swift.Optional&lt;Timers.BubbleDeleteActionAlert&gt;&gt;, Timers.SessionDeleteActionAlert, Swift.Optional&lt;Swift.Optional&lt;Timers.PairStickyNoteList&gt;&gt;, Timers.MoreOptionsView, Timers.AlwaysOnDisplayAlertView, Timers.AlwaysOnDisplayConfirmationView, Swift.Optional&lt;Timers.BubbleStickyNoteList&gt;)&gt; in Timers.ViewHierarchy.body.getter : some"
+                  moduleName = "Timers"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/cristianlapusan/Downloads/Timers/Shared/ViewHierarchy.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "31"
+                  endingLineNumber = "31"
+                  offsetFromSymbolStart = "972">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

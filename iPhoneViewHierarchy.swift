@@ -27,9 +27,3 @@ struct iPhoneViewHierarchy: View {
         }
     }
 }
-
-struct iPhoneViewHierarchy_Previews: PreviewProvider {
-    static var previews: some View {
-        iPhoneViewHierarchy()
-    }
-}

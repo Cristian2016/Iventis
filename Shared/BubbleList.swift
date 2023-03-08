@@ -31,7 +31,7 @@ struct BubbleList: View {
     @EnvironmentObject private var viewModel:ViewModel
     @EnvironmentObject private var layoutViewModel:LayoutViewModel
     
-    @SectionedFetchRequest var bubbles:SectionedFetchResults<Bool, Bubble>
+    @SectionedFetchRequest var sections:SectionedFetchResults<Bool, Bubble>
 
     private let secretary = Secretary.shared
                 
@@ -41,7 +41,7 @@ struct BubbleList: View {
         ZStack {
             if isListEmpty { EmptyListView() }
             else {
-                List (bubbles) { section in
+                List (sections) { section in
                     let value = section.id.description == "true" //5
                     Section {
                         ForEach (section) { bubble in
@@ -72,7 +72,6 @@ struct BubbleList: View {
                     }
                 }
                 .background { RefresherView() } //11
-                .onAppear {}
             }
             LeftStrip(isListEmpty)
         }
@@ -91,7 +90,7 @@ struct BubbleList: View {
         if showFavoritesOnly { predicate = NSPredicate(format: "isPinned == true")}
         if let rank = showDetail_bRank { predicate = NSPredicate(format: "rank == %D", rank) }
             
-        _bubbles = SectionedFetchRequest<Bool, Bubble>(
+        _sections = SectionedFetchRequest<Bool, Bubble>(
             entity: Bubble.entity(),
             sectionIdentifier: \.isPinned,
             sortDescriptors: BubbleList.descriptors,
@@ -144,7 +143,7 @@ struct BubbleList: View {
 // MARK: - Little Helpers
 extension BubbleList {
         
-    fileprivate var isListEmpty:Bool { bubbles.isEmpty }
+    fileprivate var isListEmpty:Bool { sections.isEmpty }
     
     struct Widths {
         var portrait:CGFloat?
