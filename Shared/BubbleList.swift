@@ -37,7 +37,6 @@ struct BubbleList: View {
                 
     // MARK: -
     var body: some View {
-        //        let _ = print("BubbleList body")
         ZStack {
             if isListEmpty { EmptyListView() }
             else {
