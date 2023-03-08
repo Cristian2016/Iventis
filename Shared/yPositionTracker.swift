@@ -22,20 +22,15 @@ struct yPositionTracker: View {
                 if track {
                     GeometryReader { geo -> Color in
                         DispatchQueue.main.async {
-                            let originY = geo.frame(in: .named("circle")).origin.y
-                            if Self.initial == nil { Self.initial = originY }
-                            let offset = originY - Self.initial
-                            
                             if !Self.stop {
+                                let originY = geo.frame(in: .named("circle")).origin.y
+                                if Self.initial == nil { Self.initial = originY }
+                                let offset = originY - Self.initial
+                                
                                 if offset > threshHold {
-                                        secretary.showFavoritesOnly.toggle()
+                                    secretary.showFavoritesOnly.toggle()
                                     Self.stop = true
                                 }
-                            }
-                            
-                            if offset < 1 && offset > 0 && Self.stop {
-                                Self.stop = false
-                                print("offset less than 10")
                             }
                         }
                         return .clear
@@ -43,7 +38,10 @@ struct yPositionTracker: View {
                 }
             }
             .onReceive(secretary.$isBubblesReportReady) {
-                if $0 { track = secretary.bubblesReport.pinned == 0 ? false : true } //1
+                if $0 {
+                    track = secretary.bubblesReport.pinned == 0 ? false : true
+                    print("onReceive $isBubblesReportReady")
+                } //1
             }
     }
 }
