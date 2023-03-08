@@ -22,11 +22,14 @@ struct yPositionTracker: View {
                 if track {
                     GeometryReader { geo -> Color in
                         DispatchQueue.main.async {
-                            let originY = geo.frame(in: .named("circle")).origin.y
-                            if Self.initial == nil { Self.initial = originY }
-                            let offset = originY - Self.initial
-                            if offset > threshHold {
-                                secretary.showFavoritesOnly = true
+                            if !Self.stop {
+                                let originY = geo.frame(in: .named("circle")).origin.y
+                                if Self.initial == nil { Self.initial = originY }
+                                let offset = originY - Self.initial
+                                if offset > threshHold {
+                                    secretary.showFavoritesOnly.toggle()
+                                    Self.stop = true
+                                }
                             }
                         }
                         return .clear
