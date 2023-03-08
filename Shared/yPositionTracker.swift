@@ -33,8 +33,9 @@ struct yPositionTracker: View {
                                 }
                             }
                             
-                            if offset == 0 && Self.stop {
-                                print("set stop to false again")
+                            if offset < 1 && offset > 0 && Self.stop {
+                                Self.stop = false
+                                print("offset less than 10")
                             }
                         }
                         return .clear
