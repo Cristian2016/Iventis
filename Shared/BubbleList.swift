@@ -71,6 +71,13 @@ struct BubbleList: View {
             }
             LeftStrip(isListEmpty)
         }
+        .onReceive(sections.publisher) { output in
+            if output.id {
+                print("pinned \(output.count)")
+            } else {
+                print("ordinary \(output.count)")
+            }
+        }
     }
     
     // MARK: - Lego
