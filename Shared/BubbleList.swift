@@ -74,17 +74,17 @@ struct BubbleList: View {
     }
     
     // MARK: - Lego
-    private var bottomOverscoll: some View {
-        Spacer()
-            .frame(height: 200)
-            .listRowSeparator(.hidden)
-    }
-    
     @ViewBuilder
     private var showAllBubblesButton:some View {
         if secretary.showFavoritesOnly {
             ShowAllBubblesButton().listRowSeparator(.hidden)
         }
+    }
+    
+    private var bottomOverscoll: some View {
+        Spacer()
+            .frame(height: 200)
+            .listRowSeparator(.hidden)
     }
     
     // MARK: -
