@@ -55,6 +55,7 @@ struct BubbleList: View {
                     showAllBubblesButton
                     
                     if !section.id { bottomOverscoll }
+                    if !section.id { yPositionTracker() }
                 }
                 .navigationDestination(for: Bubble.self) { DetailView($0) }
                 .scrollIndicators(.hidden)

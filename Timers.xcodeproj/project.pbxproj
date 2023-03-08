@@ -25,6 +25,7 @@
 		1F36D56B29942C0B00D70727 /* CalendarEventCreatedConfirmation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F36D56A29942C0B00D70727 /* CalendarEventCreatedConfirmation.swift */; };
 		1F377E1F287EB2F000E43598 /* AutoLockButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F377E1E287EB2F000E43598 /* AutoLockButton.swift */; };
 		1F387CEB2830082000F6B81D /* UpDownArrowsButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F387CEA2830082000F6B81D /* UpDownArrowsButton.swift */; };
+		1F38A00429B9000D009AD543 /* yPositionTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F38A00329B9000D009AD543 /* yPositionTracker.swift */; };
 		1F38C5A32986615F00057B8C /* FusedLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F38C5A22986615F00057B8C /* FusedLabel.swift */; };
 		1F3950BA29966DEA00DD9423 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F3950B929966DEA00DD9423 /* Coordinator.swift */; };
 		1F42B36E29A50B9500DCD473 /* SmallPairBubbleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F42B36D29A50B9500DCD473 /* SmallPairBubbleCell.swift */; };
@@ -169,6 +170,7 @@
 		1F36D56A29942C0B00D70727 /* CalendarEventCreatedConfirmation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarEventCreatedConfirmation.swift; sourceTree = "<group>"; };
 		1F377E1E287EB2F000E43598 /* AutoLockButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoLockButton.swift; sourceTree = "<group>"; };
 		1F387CEA2830082000F6B81D /* UpDownArrowsButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpDownArrowsButton.swift; sourceTree = "<group>"; };
+		1F38A00329B9000D009AD543 /* yPositionTracker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = yPositionTracker.swift; sourceTree = "<group>"; };
 		1F38C5A22986615F00057B8C /* FusedLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FusedLabel.swift; sourceTree = "<group>"; };
 		1F3950B929966DEA00DD9423 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		1F42B36D29A50B9500DCD473 /* SmallPairBubbleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallPairBubbleCell.swift; sourceTree = SOURCE_ROOT; };
@@ -402,6 +404,7 @@
 		1F5F4A4728093FAD00AF3442 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				1F38A00329B9000D009AD543 /* yPositionTracker.swift */,
 				1F83A44E29A965D90058E6E2 /* DigitsView.swift */,
 				1F991A6F29A7545C0045B04C /* TopCellDurationView.swift */,
 				1F42B36D29A50B9500DCD473 /* SmallPairBubbleCell.swift */,
@@ -657,6 +660,7 @@
 				1F97B7DD2809B311002FFCA3 /* Colors.swift in Sources */,
 				1F100CA72809493400A3A3C2 /* BubbleTimer.swift in Sources */,
 				1FA8F87E28367B7A00394B59 /* BubbleNote.swift in Sources */,
+				1F38A00429B9000D009AD543 /* yPositionTracker.swift in Sources */,
 				1F5A0F6C282641D00075E86B /* NoSessionsAlertView.swift in Sources */,
 				1F542F92286D757000403F13 /* StickyNoteList.swift in Sources */,
 				1F695087287D737600CC9FF4 /* SDButton.swift in Sources */,
