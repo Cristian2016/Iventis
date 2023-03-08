@@ -16,33 +16,33 @@ struct yPositionTracker: View {
     @State private var track = false
     
     var body: some View {
-        Circle()
-            .frame(height: 10)
-            .background {
-                if track {
-                    GeometryReader { geo -> Color in
-                        DispatchQueue.main.async {
-                            if !Self.stop {
-                                let originY = geo.frame(in: .named("circle")).origin.y
-                                if Self.initial == nil { Self.initial = originY }
-                                let offset = originY - Self.initial
-                                
-                                if offset > threshHold {
-                                    secretary.showFavoritesOnly.toggle()
-                                    Self.stop = true
+        ZStack {
+            if track {
+                Circle()
+                    .frame(height: 10)
+                    .background {
+                        GeometryReader { geo -> Color in
+                            DispatchQueue.main.async {
+                                if !Self.stop {
+                                    let originY = geo.frame(in: .named("circle")).origin.y
+                                    if Self.initial == nil { Self.initial = originY }
+                                    let offset = originY - Self.initial
+                                    
+                                    if offset > threshHold {
+                                        secretary.showFavoritesOnly.toggle()
+                                        Self.stop = true
+                                    }
                                 }
                             }
+                            return .clear
                         }
-                        return .clear
                     }
-                }
             }
-            .onReceive(secretary.$isBubblesReportReady) {
-                if $0 {
-                    track = secretary.bubblesReport.pinned == 0 ? false : true
-                    print("onReceive $isBubblesReportReady")
-                } //1
-            }
+        }
+        .listRowSeparator(.hidden)
+        .onReceive(secretary.$isBubblesReportReady) {
+            if $0 { track = secretary.bubblesReport.pinned == 0 ? false : true } //1
+        }
     }
 }
 
