@@ -52,7 +52,7 @@ struct BubbleList: View {
                     .listRowSeparator(.hidden)
                     .listSectionSeparator(value ? .visible : .hidden, edges: [.bottom])
                     
-                    if secretary.showFavoritesOnly { showAllBubblesButton }
+                    showAllBubblesButton
                     
                     if !section.id { bottomOverscoll }
                 }
@@ -80,8 +80,11 @@ struct BubbleList: View {
             .listRowSeparator(.hidden)
     }
     
+    @ViewBuilder
     private var showAllBubblesButton:some View {
-        ShowAllBubblesButton().listRowSeparator(.hidden)
+        if secretary.showFavoritesOnly {
+            ShowAllBubblesButton().listRowSeparator(.hidden)
+        }
     }
     
     // MARK: -
