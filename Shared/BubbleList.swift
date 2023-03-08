@@ -72,10 +72,25 @@ struct BubbleList: View {
             LeftStrip(isListEmpty)
         }
         .onReceive(sections.publisher) { output in
-            if output.id {
-                print("pinned \(output.count)")
+            let count = try! sections.publisher.count().result.get()
+            
+            let pinned = output.id == true
+            let onlyOneEmits = count == 1
+            
+            if pinned {
+                secretary.bubblesReport.pinned = output.count
+                if onlyOneEmits {
+                    secretary.bubblesReport.ordinary = 0
+                    secretary.isBubblesReportReady = true
+                }
             } else {
-                print("ordinary \(output.count)")
+                secretary.bubblesReport.ordinary = output.count
+                if onlyOneEmits {
+                    secretary.bubblesReport.pinned = 0
+                    secretary.isBubblesReportReady = true
+                } else {
+                    secretary.isBubblesReportReady = true
+                }
             }
         }
     }

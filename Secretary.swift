@@ -91,5 +91,19 @@ class Secretary {
         if !shouldScrollToTop { shouldScrollToTop = true }
     } //1
     
-    var pinned = 0
+    @Published var isBubblesReportReady = false {didSet{
+        if isBubblesReportReady {
+            print(bubblesReport)
+        }
+    }}
+    var bubblesReport = BubblesReport()
+}
+
+extension Secretary {
+    struct BubblesReport {
+        var pinned = 0
+        var ordinary = 0
+        var all:Int { pinned + ordinary }
+        var ordinaryColors = [String]()
+    }
 }
