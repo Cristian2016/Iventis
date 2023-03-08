@@ -15,7 +15,6 @@ struct ScrollToTopButton: View {
             if show {
                 Button { Secretary.shared.scrollToTop() } label: {
                     Image.scrollToTop
-//                        .padding([.leading, .trailing])
                         .background(.white.opacity(0.001))
                 }
                 .transition(.scale)

@@ -8,6 +8,10 @@
 import SwiftUI
 
 struct yPositionTracker: View {
+    private static var stop = false
+    private static var initial:CGFloat!
+    
+    private let threshHold = CGFloat(50)
     private let secretary = Secretary.shared
     @State private var track = false
     
@@ -18,7 +22,12 @@ struct yPositionTracker: View {
                 if track {
                     GeometryReader { geo -> Color in
                         DispatchQueue.main.async {
-                            print(geo.frame(in: .named("circle")).origin.y)
+                            let originY = geo.frame(in: .named("circle")).origin.y
+                            if Self.initial == nil { Self.initial = originY }
+                            let offset = originY - Self.initial
+                            if offset > threshHold {
+                                secretary.showFavoritesOnly = true
+                            }
                         }
                         return .clear
                     }
