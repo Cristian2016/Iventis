@@ -3,7 +3,7 @@
 //  Timers (iOS)
 //
 //  Created by Cristian Lapusan on 08.02.2023.
-//
+//1 show RefresherView if there is at least one pinned bubble. otherwise do NOT show
 
 import SwiftUI
 
@@ -32,10 +32,7 @@ struct RefresherView: View {
         }
         .onReceive(secretary.$showFavoritesOnly) { showFavoritesOnly = $0 }
         .onReceive(secretary.$isBubblesReportReady) {
-            print("secretary.$isBubblesReportReady \($0)")
-            if $0 {
-                show = secretary.bubblesReport.pinned == 0 ? false : true
-            }
+            if $0 { show = secretary.bubblesReport.pinned == 0 ? false : true } //1
         }
     }
 }
