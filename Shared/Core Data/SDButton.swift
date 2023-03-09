@@ -10,13 +10,13 @@ import MyPackage
 
 ///StartDelayBubbleCell
 struct SDButton: View {
-    init?(_ sdb:StartDelayBubble?) {
-        guard let sdb = sdb else { return nil }
-        _sdb = StateObject(wrappedValue: sdb)
+    init?(_ bubble:Bubble?) {
+        guard let bubble = bubble else { return nil }
+        self.bubble = bubble
     }
     
     @EnvironmentObject var viewModel:ViewModel
-    @StateObject var sdb:StartDelayBubble
+    private let  bubble:Bubble
     
     @State var offset:CGSize = .zero //drag view around
     @State var isTapped = false
@@ -33,7 +33,7 @@ struct SDButton: View {
             //layout
                 .padding(6)
                 .overlay (
-                    Text("-\(sdb.currentDelay.shortString(by: 0))")
+                    Text("-\(bubble.startDelay.shortString(by: 0))")
                         .font(.system(size: 60))
                         .minimumScaleFactor(0.3)
                         .padding()

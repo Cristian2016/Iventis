@@ -34,7 +34,7 @@ class Secretary {
     
     @Published var confirm_CalEventRemoved: Int64?
     
-    @Published var theOneAndOnlyEditedSDB:StartDelayBubble?
+    @Published var moreOptionsBuble:Bubble?
     
     @Published var showDetail_bRank:Int64?
     

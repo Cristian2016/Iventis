@@ -77,8 +77,7 @@ class ViewModel: ObservableObject {
     }
     
     func showMoreOptions(for bubble:Bubble) {
-        //set Published property triggers UI update
-        //MoreOptionsView displayed
+        secretary.moreOptionsBuble = bubble
     }
     
     // MARK: -
@@ -159,29 +158,6 @@ class ViewModel: ObservableObject {
     
     private func handleBecomeActive() { bubbleTimer(.start) } //3
     
-    private func observe_delayReachedZero_Notification() {
-        NotificationCenter.default.addObserver(forName: .sdbEnded, object: nil, queue: nil) { [weak self] notification in
-            
-            let sdb = notification.object as? StartDelayBubble
-            guard
-                let bubble = sdb?.bubble,
-                let info = notification.userInfo as? [String:TimeInterval],
-                let delta = info["delta"]
-            else { fatalError() }
-                        
-            DispatchQueue.main.async {
-                //start bubble automatically
-                //remove SDBCell from BubbleCell
-                self?.toggleBubbleStart(bubble, delta: delta)
-                
-                self?.secretary.theOneAndOnlyEditedSDB = nil //dismiss MoreOptionsView
-                
-                // FIXME: -
-                PersistenceController.shared.save()
-            }
-        }
-    }
-    
     // MARK: - Little Helpers
     var fiveSecondsBubble:Bubble? { bubble(for: secretary.addNoteButton_bRank) }
     
@@ -189,7 +165,6 @@ class ViewModel: ObservableObject {
     init() {
         observe_ApplicationActive()
         observe_ApplicationBackground()
-        observe_delayReachedZero_Notification()
         
         secretary.updateBubblesReport(.appLaunch)
     }
@@ -206,19 +181,6 @@ extension ViewModel {
         } else {
             return []
         }
-    }
-    
-    ///all start delay bubbles
-    func allSDBs(visibleOnly:Bool = false) -> [StartDelayBubble] {
-        let context = PersistenceController.shared.viewContext
-        let request = StartDelayBubble.fetchRequest()
-        if visibleOnly {
-            let predicate = NSPredicate(format: "referenceDelay > 0")
-            request.predicate = predicate
-        }
-                    
-        if let sdbArray = try? context.fetch(request) { return sdbArray }
-        else { return [] }
     }
 }
 

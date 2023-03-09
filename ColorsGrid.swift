@@ -82,16 +82,16 @@ struct ColorsGrid: View {
     }
 }
 
-struct ColorsGrid_Previews: PreviewProvider {
-    static let bubble:Bubble = {
-        let bubble = Bubble(context: PersistenceController.preview.viewContext)
-        let sdb = StartDelayBubble(context: PersistenceController.preview.viewContext)
-        sdb.referenceDelay = 0
-        
-        bubble.color = "darkGreen"
-        return bubble
-    }()
-    static var previews: some View {
-        ColorsGrid(bubble, spacing: 0) {  }
-    }
-}
+//struct ColorsGrid_Previews: PreviewProvider {
+//    static let bubble:Bubble = {
+//        let bubble = Bubble(context: PersistenceController.preview.viewContext)
+//        let sdb = StartDelayBubble(context: PersistenceController.preview.viewContext)
+//        sdb.referenceDelay = 0
+//
+//        bubble.color = "darkGreen"
+//        return bubble
+//    }()
+//    static var previews: some View {
+//        ColorsGrid(bubble, spacing: 0) {  }
+//    }
+//}

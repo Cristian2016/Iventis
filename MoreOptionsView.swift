@@ -78,10 +78,10 @@ struct MoreOptionsView: View {
                 }
             }
         }
-        .onReceive(secretary.$theOneAndOnlyEditedSDB) {
-            if let sdb = $0, let bubble = sdb.bubble {
+        .onReceive(secretary.$moreOptionsBuble) {
+            if let bubble = $0 {
                 let color = Color.bubbleColor(forName: bubble.color)
-                let initialStartDelay = Int(sdb.referenceDelay)
+                let initialStartDelay = Int(bubble.startDelay)
                 
                 input = Input(bubble: bubble,
                               initialBubbleColor: color,
@@ -159,7 +159,7 @@ struct MoreOptionsView: View {
     }
     
     // MARK: -
-    func dismiss() { secretary.theOneAndOnlyEditedSDB = nil }
+    func dismiss() { secretary.moreOptionsBuble = nil }
     
     func saveDelay() {
         /*
