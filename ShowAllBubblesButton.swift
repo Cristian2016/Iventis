@@ -47,10 +47,14 @@ struct ShowAllBubblesButton: View {
             if showFavoritesOnly {
                 HStack (spacing: 4) {
                     text
-                    ForEach(colors.reversed()) { color in
-                        Circle()
-                            .fill(color.color)
-                            .frame(width: 10)
+                    ScrollView(.horizontal) {
+                        HStack {
+                            ForEach(colors.reversed()) { color in
+                                Circle()
+                                    .fill(color.color)
+                                    .frame(width: 10)
+                            }
+                        }
                     }
                 }
                 .onTapGesture { secretary.showFavoritesOnly = false }
@@ -67,9 +71,9 @@ struct ShowAllBubblesButton: View {
     
     // MARK: - Lego
     private var text:some View {
-        Text("\(Image(systemName: "eye")) Show \(count)")
+        Text("\(count) more")
             .listRowSeparator(.hidden)
-            .font(.footnote)
+            .font(.caption2)
             .foregroundColor(.secondary)
     }
 }
