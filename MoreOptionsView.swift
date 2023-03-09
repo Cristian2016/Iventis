@@ -41,8 +41,11 @@ struct MoreOptionsView: View {
                         layout {
                             if emptyStruct.bubble.state != .running {
                                 VStack(alignment: .trailing, spacing: 14) {
-                                    startDelayDisplay
-                                    digits
+                                    
+                                    VStack(alignment: .trailing, spacing: 4) {
+                                        startDelayDisplay
+                                        digits
+                                    }
                                     
                                     if !isPortrait {
                                         if emptyStruct.userEditedDelay != 0 {
@@ -95,8 +98,9 @@ struct MoreOptionsView: View {
     // MARK: - Lego
     private var startDelayDisplay:some View {
         HStack(alignment: .firstTextBaseline) {
-            Text("\(Image.startDelay) Start Delay")
+            Text("Start Delay")
                 .font(.callout)
+                .minimumScaleFactor(0.1)
                 .lineLimit(1)
                 .truncationMode(.head)
             
