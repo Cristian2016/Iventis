@@ -170,9 +170,7 @@ extension Secretary {
     
     struct BubblesReport {
         var pinned = 0
-        var ordinary = 0 {didSet{
-            print("ordinary \(ordinary)")
-        }}
+        var ordinary = 0
         var colors = [idColor]()
         var all:Int { pinned + ordinary }
     }

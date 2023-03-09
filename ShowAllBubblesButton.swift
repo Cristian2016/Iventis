@@ -59,8 +59,8 @@ struct ShowAllBubblesButton: View {
         .onReceive(secretary.$showFavoritesOnly) { showFavoritesOnly = $0 }
         .onReceive(secretary.$isBubblesReportReady) { output in
             if output {
-               count = secretary.bubblesReport.ordinary
-               colors = secretary.bubblesReport.colors
+                count = secretary.bubblesReport.ordinary
+                colors = secretary.bubblesReport.colors
             }
         }
     }
@@ -71,6 +71,5 @@ struct ShowAllBubblesButton: View {
             .listRowSeparator(.hidden)
             .font(.footnote)
             .foregroundColor(.secondary)
-            .padding([.leading], 4)
     }
 }
