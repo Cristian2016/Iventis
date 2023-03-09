@@ -57,7 +57,9 @@ struct ShowAllBubblesButton: View {
                         }
                     }
                 }
-                .onTapGesture { secretary.showFavoritesOnly = false }
+                .onTapGesture { showAllBubbles()
+                   
+                }
             }
         }
         .onReceive(secretary.$showFavoritesOnly) { showFavoritesOnly = $0 }
@@ -76,4 +78,7 @@ struct ShowAllBubblesButton: View {
             .font(.caption)
             .foregroundColor(.secondary)
     }
+    
+    // MARK: -
+    private func showAllBubbles() { withAnimation { secretary.showFavoritesOnly = false }}
 }
