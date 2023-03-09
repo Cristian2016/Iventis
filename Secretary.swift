@@ -124,16 +124,12 @@ class Secretary {
                     isBubblesReportReady = true
                 }
             case .create(let bubble):
-                guard let color = bubble.color else { return }
-                
                 bubblesReport.ordinary += 1
                 bubblesReport.colors.append(idColor(id: bubble.rank, color: Color.bubbleColor(forName: bubble.color)))
                 
                 DispatchQueue.main.async { self.isBubblesReportReady = true }
             
             case .delete(let bubble):
-                guard let color = bubble.color else { return }
-                
                 if bubble.isPinned {
                     bubblesReport.pinned -= 1
                 } else {
@@ -144,8 +140,6 @@ class Secretary {
                 DispatchQueue.main.async { self.isBubblesReportReady = true }
             
             case .pin(let bubble):
-                guard let color = bubble.color else { return }
-                
                 if bubble.isPinned {
                     bubblesReport.ordinary -= 1
                     bubblesReport.pinned += 1

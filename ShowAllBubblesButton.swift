@@ -47,7 +47,7 @@ struct ShowAllBubblesButton: View {
             if showFavoritesOnly {
                 HStack (spacing: 4) {
                     text
-                    ForEach(colors) { color in
+                    ForEach(colors.reversed()) { color in
                         Circle()
                             .fill(color.color)
                             .frame(width: 10)
