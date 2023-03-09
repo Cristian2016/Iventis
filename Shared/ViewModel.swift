@@ -250,6 +250,7 @@ extension ViewModel {
                 newBubble.isNoteHidden = false
             }
             self?.controller.save(bContext)
+            self?.secretary.updateBubblesReport(.create(newBubble))
         }
     } //8
     
@@ -268,8 +269,10 @@ extension ViewModel {
             let thisBubble = bContext.object(with: objID) as! Bubble
             
             bContext.delete(thisBubble) //13
+            self.secretary.updateBubblesReport(.delete(thisBubble))
+            
             self.controller.save(bContext) {
-                delayExecution(self.delay) { [self] in
+                delayExecution(self.delay) {
                     self.controller.save()
                     
                     if self.secretary.showFavoritesOnly && self.secretary.bubblesReport.pinned == 1 {

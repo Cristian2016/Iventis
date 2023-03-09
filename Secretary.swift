@@ -125,6 +125,26 @@ class Secretary {
                     
                     isBubblesReportReady = true
                 }
+            case .create(let bubble):
+                guard let color = bubble.color else { return }
+                
+                bubblesReport.ordinary += 1
+                bubblesReport.ordinaryBubbleColors.append(color)
+                
+                DispatchQueue.main.async { self.isBubblesReportReady = true }
+            
+            case .delete(let bubble):
+                guard let color = bubble.color else { return }
+                
+                if bubble.isPinned {
+                    bubblesReport.pinned -= 1
+                } else {
+                    bubblesReport.ordinary -= 1
+                    bubblesReport.ordinaryBubbleColors.removeAll { $0 == color }
+                }
+                
+                DispatchQueue.main.async { self.isBubblesReportReady = true }
+                
             default: break
         }
     }
@@ -142,8 +162,8 @@ extension Secretary {
     
     enum UpdateKind {
         case appLaunch
-        case delete //bubble
-        case create //bubble
+        case delete(Bubble) //bubble
+        case create(Bubble) //bubble
         case pin //pin/unpin bubble
     }
 }
