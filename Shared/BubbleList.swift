@@ -55,7 +55,6 @@ struct BubbleList: View {
                     showAllBubblesButton
                     
                     if !section.id { bottomOverscoll }
-                    if !section.id { yPositionTracker() }
                 }
                 .navigationDestination(for: Bubble.self) { DetailView($0) }
                 .scrollIndicators(.hidden)
@@ -65,10 +64,9 @@ struct BubbleList: View {
                     ToolbarItemGroup {
                         AddNoteButton()
                         AutoLockButton()
-                        PlusSymbol()
+                        PlusButton()
                     }
                 }
-                .background { RefresherView() } //11
             }
             LeftStrip(isListEmpty)
         }

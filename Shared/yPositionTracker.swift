@@ -8,29 +8,37 @@
 import SwiftUI
 
 struct yPositionTracker: View {
-    private static var stop = false
-    private static var initial:CGFloat!
+    private static var initial:CGFloat! {didSet{
+        print("initial was set \(Self.initial)")
+    }}
     
     private let threshHold = CGFloat(50)
     private let secretary = Secretary.shared
-    @State private var track = false
+    @State private var trackYPosition = false
+    @State private var stop = false
     
     var body: some View {
         ZStack {
-            if track {
+            if trackYPosition {
                 Circle()
+                    .fill(.clear)
                     .frame(height: 10)
                     .background {
                         GeometryReader { geo -> Color in
                             DispatchQueue.main.async {
-                                if !Self.stop {
-                                    let originY = geo.frame(in: .named("circle")).origin.y
-                                    if Self.initial == nil { Self.initial = originY }
-                                    let offset = originY - Self.initial
-                                    
+                                let originY = geo.frame(in: .named("circle")).origin.y
+                                if Self.initial == nil { Self.initial = originY }
+                                let offset = originY - Self.initial
+                                print("yOffset ", offset)
+                                
+                                if stop && offset < 1 && offset > 0 {
+                                        stop = false
+                                }
+                                
+                                if !stop {
                                     if offset > threshHold {
                                         secretary.showFavoritesOnly.toggle()
-                                        Self.stop = true
+                                        stop = true
                                     }
                                 }
                             }
@@ -41,13 +49,8 @@ struct yPositionTracker: View {
         }
         .listRowSeparator(.hidden)
         .onReceive(secretary.$isBubblesReportReady) {
-            if $0 { track = secretary.bubblesReport.pinned == 0 ? false : true } //1
+            print("report ready")
+            if $0 { trackYPosition = secretary.bubblesReport.pinned == 0 ? false : true } //1
         }
-    }
-}
-
-struct yPositionTracker_Previews: PreviewProvider {
-    static var previews: some View {
-        yPositionTracker()
     }
 }

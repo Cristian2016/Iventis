@@ -17,16 +17,16 @@ struct RefresherView: View {
         ZStack {
             if show {
                 VStack(spacing: 4) {
-                    let condition = showFavoritesOnly
-                    let title = condition ?  "Show All" : "Show Pinned Only"
-                    let symbol = condition ? "eye" : "pin"
-                    let color = condition ? .secondary : Color.orange
+                    let title = "Show Pinned Only"
+                    let symbol = "pin"
+                    let color = Color.orange
                     
                     BorderlessLabel(title: title, symbol: symbol,color: color)
                     Image(systemName: "chevron.compact.down")
                         .foregroundColor(color)
                     Spacer()
                 }
+                .opacity(showFavoritesOnly ? 0 : 1)
                 .padding([.top], 4)
             }
         }

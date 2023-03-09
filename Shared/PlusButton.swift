@@ -8,7 +8,7 @@
 import SwiftUI
 
 ///tap PlusButton to show Palette [on iPad]
-struct PlusSymbol: View {
+struct PlusButton: View {
     @EnvironmentObject var viewModel:ViewModel
     private let metrics = Metrics()
     private let secretary = Secretary.shared
@@ -33,6 +33,6 @@ struct PlusSymbol: View {
 
 struct PlusButton_Previews: PreviewProvider {
     static var previews: some View {
-        PlusSymbol()
+        PlusButton()
     }
 }
