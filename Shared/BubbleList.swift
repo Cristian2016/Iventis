@@ -67,6 +67,12 @@ struct BubbleList: View {
                         PlusButton()
                     }
                 }
+                .background {
+                    RefresherView()
+                }
+                .refreshable {
+                    secretary.showFavoritesOnly.toggle()
+                }
             }
             LeftStrip(isListEmpty)
         }
