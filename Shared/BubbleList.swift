@@ -82,29 +82,6 @@ struct BubbleList: View {
             }
             LeftStrip(isListEmpty)
         }
-//        .onReceive(sections.publisher) { output in
-//            let count = try! sections.publisher.count().result.get()
-//
-//            let pinned = output.id == true
-//            let onlyOneEmits = count == 1
-//
-//            if pinned {
-//                secretary.bubblesReport.pinned = output.count
-//                if onlyOneEmits {
-//                    secretary.bubblesReport.ordinary = 0
-//                    secretary.isBubblesReportReady = true
-//                }
-//            } else {
-//                secretary.bubblesReport.ordinary = output.count
-//
-//                if onlyOneEmits { //only ordinary emits
-//                    secretary.bubblesReport.pinned = 0
-//                    secretary.isBubblesReportReady = true
-//                } else {
-//                    secretary.isBubblesReportReady = true
-//                }
-//            }
-//        }
     }
     
     // MARK: - Lego

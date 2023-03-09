@@ -486,6 +486,9 @@ extension ViewModel {
             
             let thisBubble = self.controller.grabObj(objID) as! Bubble
             thisBubble.isPinned.toggle()
+            
+            secretary.updateBubblesReport(.pin(thisBubble))
+            
             self.controller.save(bContext)
         }
     }
