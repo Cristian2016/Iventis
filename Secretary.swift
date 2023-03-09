@@ -163,9 +163,10 @@ extension Secretary {
     }
     
     struct BubblesReport {
-        var pinned = 0
+        var colors = [idColor]() //ordinary colors
         var ordinary = 0
-        var colors = [idColor]()
+        var pinned = 0
+        
         var all:Int { pinned + ordinary }
     }
     
