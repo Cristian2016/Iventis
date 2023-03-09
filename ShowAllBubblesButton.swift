@@ -71,9 +71,9 @@ struct ShowAllBubblesButton: View {
     
     // MARK: - Lego
     private var text:some View {
-        Text("\(count) more")
+        Text("\(Image(systemName: "eye")) \(count)")
             .listRowSeparator(.hidden)
-            .font(.caption2)
+            .font(.caption)
             .foregroundColor(.secondary)
     }
 }
