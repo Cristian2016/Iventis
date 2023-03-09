@@ -58,7 +58,6 @@ struct ShowAllBubblesButton: View {
                     }
                 }
                 .onTapGesture { showAllBubbles()
-                   
                 }
             }
         }
