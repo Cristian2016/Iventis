@@ -113,7 +113,9 @@ class Secretary {
                     
                     let ordinaryBubbleColors = bubbles
                         .filter { !$0.isPinned } //filter out pinned bubbles
-                        .compactMap { idColor(id: $0.rank, color: Color.bubbleColor(forName: $0.color)) } //get colors of ordinary bubbles
+                        .compactMap {
+                            idColor(id: $0.rank, color: Color.bubbleColor(forName: $0.color))
+                        } //get colors of ordinary bubbles
                     
                     bubblesReport.ordinary = ordinaryBubbleColors.count
                     bubblesReport.pinned = bubblesCount - bubblesReport.ordinary
