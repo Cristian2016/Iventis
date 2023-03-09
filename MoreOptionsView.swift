@@ -114,6 +114,7 @@ struct MoreOptionsView: View {
                     .font(.callout)
             }
         }
+        .foregroundColor(.black)
     }
     
     private var digits:some View {
