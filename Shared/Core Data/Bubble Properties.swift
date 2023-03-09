@@ -17,19 +17,20 @@ extension Bubble {
     }
 
     @NSManaged public var rank: Int64
-    @NSManaged public var color: String?
     @NSManaged public var created: Date?
-    @NSManaged public var initialClock: Float
+    @NSManaged public var color: String?
     
+    @NSManaged public var initialClock: Float
     @NSManaged public var currentClock: Float
-    @NSManaged public var hasCalendar: Bool
+    @NSManaged public var startDelay: Float
     
     @NSManaged public var note: String?
     @NSManaged public var isNoteHidden: Bool
     
-    @NSManaged public var isPinned: Bool
-    
+    @NSManaged public var hasCalendar: Bool
     @NSManaged public var hasWidget: Bool
+    
+    @NSManaged public var isPinned: Bool
     
     @NSManaged public var sessions: NSOrderedSet?
     @NSManaged public var history: NSOrderedSet?
