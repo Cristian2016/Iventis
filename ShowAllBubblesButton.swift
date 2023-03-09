@@ -39,11 +39,12 @@ struct RefresherView: View {
 struct ShowAllBubblesButton: View {
     private let secretary = Secretary.shared
     @State private var showFavoritesOnly = false
+    @State private var count = 0
     
     var body: some View {
         ZStack {
             if showFavoritesOnly {
-                Text("\(Image(systemName: "eye")) Show All")
+                Text("\(Image(systemName: "eye")) Show \(count)")
                     .listRowSeparator(.hidden)
                     .font(.footnote)
                     .foregroundColor(.secondary)
@@ -52,5 +53,10 @@ struct ShowAllBubblesButton: View {
             }
         }
         .onReceive(secretary.$showFavoritesOnly) { showFavoritesOnly = $0 }
+        .onReceive(secretary.$isBubblesReportReady) { output in
+            if output {
+               count = secretary.bubblesReport.ordinary
+            }
+        }
     }
 }
