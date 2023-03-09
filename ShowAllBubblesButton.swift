@@ -48,11 +48,11 @@ struct ShowAllBubblesButton: View {
                 HStack (spacing: 4) {
                     text
                     ScrollView(.horizontal) {
-                        HStack {
+                        HStack(spacing: 0) {
                             ForEach(colors.reversed()) { color in
-                                Circle()
-                                    .fill(color.color)
-                                    .frame(width: 10)
+                                Image(systemName: "circle.fill")
+                                    .foregroundColor(color.color)
+                                    .font(.caption2)
                             }
                         }
                     }
