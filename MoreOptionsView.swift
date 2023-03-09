@@ -107,8 +107,9 @@ struct MoreOptionsView: View {
             HStack(alignment: .firstTextBaseline, spacing: 0) {
                 Text(String(input!.userEditedDelay))
                     .font(metrics.delayFont)
-                    .minimumScaleFactor(0.1)
                     .lineLimit(1)
+                    .minimumScaleFactor(0.1)
+                    .layoutPriority(10)
                 Text("s")
                     .font(.callout)
             }
