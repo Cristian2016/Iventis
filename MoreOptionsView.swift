@@ -40,7 +40,7 @@ struct MoreOptionsView: View {
                         
                         layout {
                             if emptyStruct.bubble.state != .running {
-                                VStack(alignment: .leading, spacing: 14) {
+                                VStack(alignment: .trailing, spacing: 14) {
                                     startDelayDisplay
                                     digits
                                     
@@ -95,19 +95,20 @@ struct MoreOptionsView: View {
     // MARK: - Lego
     private var startDelayDisplay:some View {
         HStack(alignment: .firstTextBaseline) {
-            Text(String(input!.userEditedDelay) + "s")
-                .padding([.leading, .trailing])
-                .foregroundColor(.white)
-                .font(metrics.delayFont)
-                .layoutPriority(1)
+            
             Text("\(Image.startDelay) Start Delay")
                 .font(.callout)
-                .foregroundColor(.white)
+                .foregroundColor(.label)
                 .lineLimit(1)
                 .truncationMode(.head)
+            
+            Text(String(input!.userEditedDelay))
+                .padding([.leading, .trailing])
+                .foregroundColor(.label)
+                .font(metrics.delayFont)
+                .layoutPriority(1)
         }
         .padding([.trailing], 8)
-        .background(input!.initialBubbleColor, in: RoundedRectangle(cornerRadius: 8))
     }
     
     private var digits:some View {
@@ -136,7 +137,7 @@ struct MoreOptionsView: View {
         let minWidth = CGFloat(300)
         let spacing = CGFloat(4)
         
-        let delayFont = Font.system(size: 70, design: .rounded)
+        let delayFont = Font.system(size: 80, design: .rounded)
         let font = Font.system(size: 30, weight: .medium)
         let digitFont = Font.system(size: 38, weight: .medium, design: .rounded)
         
