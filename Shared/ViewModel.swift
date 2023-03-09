@@ -251,10 +251,6 @@ extension ViewModel {
     } //8
     
     func deleteBubble(_ bubble:Bubble) {
-        //if unpinned are hidden & bubble to delete is pinned and pinned section has only one item, unhide unpinned
-        //        if secretary.showFavoritesOnly, Secretary.shared.pinnedBubblesCount == 1 {
-        //            secretary.showFavoritesOnly = false
-        //        }
         if !path.isEmpty { withAnimation(.easeInOut) { path = [] }}
         
         let bContext = controller.bContext
@@ -270,7 +266,13 @@ extension ViewModel {
             
             bContext.delete(thisBubble) //13
             self.controller.save(bContext) {
-                delayExecution(self.delay) { self.controller.save() }
+                delayExecution(self.delay) { [self] in
+                    self.controller.save()
+                    //if unpinned are hidden & bubble to delete is pinned and pinned section has only one item, unhide unpinned
+                    if self.secretary.showFavoritesOnly && self.secretary.bubblesReport.pinned == 1 {
+                        self.secretary.showFavoritesOnly = false
+                    }
+                }
             }
         }
     } //9
