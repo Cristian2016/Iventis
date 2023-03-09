@@ -21,6 +21,7 @@
 //14 after save bContext -> viewContext can see the changes -> so UI update can be done here
 //15 Update UI only after bContext has saved
 //16 why?????? if I don't reset bContext sessions will still be there after batchdelete
+//17 if ordinary bubbles are hidden & bubble to delete is pinned and pinned section has only one item, show ordinary!
 
 import Foundation
 import SwiftUI
@@ -268,10 +269,10 @@ extension ViewModel {
             self.controller.save(bContext) {
                 delayExecution(self.delay) { [self] in
                     self.controller.save()
-                    //if unpinned are hidden & bubble to delete is pinned and pinned section has only one item, unhide unpinned
+                    
                     if self.secretary.showFavoritesOnly && self.secretary.bubblesReport.pinned == 1 {
                         self.secretary.showFavoritesOnly = false
-                    }
+                    } //17
                 }
             }
         }
