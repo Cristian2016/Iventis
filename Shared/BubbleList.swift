@@ -71,6 +71,11 @@ struct BubbleList: View {
                     RefresherView()
                 }
                 .refreshable {
+                    guard secretary.bubblesReport.ordinary != 0 &&
+                            secretary.bubblesReport.pinned > 0
+                    else { return }
+                    
+                    print("toggle showFavoritesOnly")
                     secretary.showFavoritesOnly.toggle()
                 }
             }
@@ -91,7 +96,7 @@ struct BubbleList: View {
             } else {
                 secretary.bubblesReport.ordinary = output.count
                 
-                if onlyOneEmits {
+                if onlyOneEmits { //only ordinary emits
                     secretary.bubblesReport.pinned = 0
                     secretary.isBubblesReportReady = true
                 } else {

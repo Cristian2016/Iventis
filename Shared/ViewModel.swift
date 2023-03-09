@@ -466,9 +466,10 @@ extension ViewModel {
     }
     
     func togglePin(_ bubble:Bubble) {
-        //        if bubble.isPinned, Secretary.shared.pinnedBubblesCount == 1 {
-        //            secretary.showFavoritesOnly = false
-        //        }
+        if secretary.bubblesReport.ordinary == 1 && !bubble.isPinned {
+            return
+        }
+        
         let bContext = self.controller.bContext
         let objID = bubble.objectID
         
