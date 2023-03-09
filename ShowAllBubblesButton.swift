@@ -45,7 +45,8 @@ struct ShowAllBubblesButton: View {
     var body: some View {
         ZStack {
             if showFavoritesOnly {
-                VStack (alignment: .leading, spacing: 4) {
+                HStack (spacing: 4) {
+                    text
                     ScrollView(.horizontal) {
                         HStack {
                             ForEach(colors.reversed()) { color in
@@ -55,7 +56,6 @@ struct ShowAllBubblesButton: View {
                             }
                         }
                     }
-                    text
                 }
                 .onTapGesture { secretary.showFavoritesOnly = false }
             }
@@ -71,7 +71,7 @@ struct ShowAllBubblesButton: View {
     
     // MARK: - Lego
     private var text:some View {
-        Text("Show \(count)")
+        Text("\(Image(systemName: "eye")) Show \(count)")
             .listRowSeparator(.hidden)
             .font(.caption)
             .foregroundColor(.secondary)
