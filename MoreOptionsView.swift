@@ -117,7 +117,8 @@ struct MoreOptionsView: View {
                     input!.userEditedDelay += delay
                 } label: {
                     
-                    Circle().fill(input!.initialBubbleColor)
+                    RoundedRectangle(cornerRadius: 4).fill(input!.initialBubbleColor)
+                        .aspectRatio(1, contentMode: .fit)
                         .overlay {
                             Text(String(delay))
                                 .foregroundColor(.white)
