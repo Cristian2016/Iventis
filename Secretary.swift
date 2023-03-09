@@ -160,6 +160,7 @@ class Secretary {
 }
 
 extension Secretary {
+    ///it's a Color with an ID so that it plays nicely with ForEach views
     struct idColor:Identifiable {
         let id = UUID().uuidString
         let color:Color
