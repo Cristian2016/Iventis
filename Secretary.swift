@@ -151,6 +151,22 @@ class Secretary {
                 }
                 
                 DispatchQueue.main.async { self.isBubblesReportReady = true }
+                
+            case .colorChange(let bubble):
+                if bubble.isPinned {
+                    
+                } else {
+                    guard
+                        let index = bubblesReport
+                            .colors.firstIndex (where: { $0.id == bubble.rank })
+                    else { fatalError() }
+                    
+                    print(index)
+                    
+                    bubblesReport.colors[index] = idColor(id: bubble.rank, color: Color.bubbleColor(forName: bubble.color))
+                    
+                    DispatchQueue.main.async { self.isBubblesReportReady = true }
+                }
         }
     }
 }
@@ -175,5 +191,6 @@ extension Secretary {
         case delete(Bubble) //bubble
         case create(Bubble) //bubble
         case pin(Bubble) //pin/unpin bubble
+        case colorChange(Bubble) //change bubble color [MoreOptionsView]
     }
 }

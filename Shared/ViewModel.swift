@@ -424,6 +424,8 @@ extension ViewModel {
                 let thisBubble = self.controller.grabObj(objID) as! Bubble
                 thisBubble.color = newColor
                 
+                secretary.updateBubblesReport(.colorChange(thisBubble))
+                
                 //save changes to CoreData using bContext and update UI
                 self.controller.save(bContext) {
                     let color = Color.bubbleColor(forName: thisBubble.color)
