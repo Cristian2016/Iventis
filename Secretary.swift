@@ -94,11 +94,7 @@ class Secretary {
     // MARK: - Pinned versus Ordinary bubbles
     @Published var showFavoritesOnly = false
     
-    @Published var isBubblesReportReady = false {didSet{
-        if isBubblesReportReady {
-            print(bubblesReport)
-        }
-    }}
+    @Published var isBubblesReportReady = false
     
     var bubblesReport = BubblesReport()
     

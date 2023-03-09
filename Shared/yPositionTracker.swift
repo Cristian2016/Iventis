@@ -8,9 +8,7 @@
 import SwiftUI
 
 struct yPositionTracker: View {
-    private static var initial:CGFloat! {didSet{
-        print("initial was set \(Self.initial)")
-    }}
+    private static var initial:CGFloat!
     
     private let threshHold = CGFloat(50)
     private let secretary = Secretary.shared
@@ -21,13 +19,16 @@ struct yPositionTracker: View {
         ZStack {
             if trackYPosition {
                 Circle()
-                    .fill(.clear)
+                    .fill(.red)
                     .frame(height: 10)
                     .background {
                         GeometryReader { geo -> Color in
                             DispatchQueue.main.async {
                                 let originY = geo.frame(in: .named("circle")).origin.y
-                                if Self.initial == nil { Self.initial = originY }
+                                if Self.initial == nil {
+                                    Self.initial = originY
+                                    print("set initial \(Self.initial)")
+                                }
                                 let offset = originY - Self.initial
                                 print("yOffset ", offset)
                                 
