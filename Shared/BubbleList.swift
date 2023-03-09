@@ -152,8 +152,6 @@ struct BubbleList: View {
     ]
 }
 
-// MARK: -
-
 // MARK: - Little Helpers
 extension BubbleList {
         
