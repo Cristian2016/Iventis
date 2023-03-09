@@ -98,8 +98,9 @@ class Secretary {
 extension Secretary {
     struct BubblesReport {
         var pinned = 0
-        var ordinary = 0
+        var ordinary = 0 {didSet{
+            print("ordinary \(ordinary)")
+        }}
         var all:Int { pinned + ordinary }
-        var ordinaryColors = [String]()
     }
 }

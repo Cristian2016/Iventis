@@ -40,6 +40,9 @@ struct ShowAllBubblesButton: View {
     private let secretary = Secretary.shared
     @State private var showFavoritesOnly = false
     
+    ///ordinary bubbles count [the opposite would be pinned bubbles count]
+    @State private var ordinaryCount:Int!
+    
     var body: some View {
         ZStack {
             if showFavoritesOnly {
@@ -52,5 +55,10 @@ struct ShowAllBubblesButton: View {
             }
         }
         .onReceive(secretary.$showFavoritesOnly) { showFavoritesOnly = $0 }
+        .onReceive(secretary.$isBubblesReportReady) {
+            if $0 {
+                ordinaryCount = secretary.bubblesReport.ordinary
+            }
+        }
     }
 }

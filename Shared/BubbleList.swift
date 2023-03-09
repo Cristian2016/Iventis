@@ -90,6 +90,7 @@ struct BubbleList: View {
                 }
             } else {
                 secretary.bubblesReport.ordinary = output.count
+                
                 if onlyOneEmits {
                     secretary.bubblesReport.pinned = 0
                     secretary.isBubblesReportReady = true
