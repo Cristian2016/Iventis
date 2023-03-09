@@ -95,18 +95,19 @@ struct MoreOptionsView: View {
     // MARK: - Lego
     private var startDelayDisplay:some View {
         HStack(alignment: .firstTextBaseline) {
-            
             Text("\(Image.startDelay) Start Delay")
                 .font(.callout)
-                .foregroundColor(.label)
                 .lineLimit(1)
                 .truncationMode(.head)
             
-            Text(String(input!.userEditedDelay))
-                .padding([.leading, .trailing])
-                .foregroundColor(.label)
-                .font(metrics.delayFont)
-                .layoutPriority(1)
+            HStack(alignment: .firstTextBaseline, spacing: 0) {
+                Text(String(input!.userEditedDelay))
+                    .font(metrics.delayFont)
+                    .minimumScaleFactor(0.2)
+                    .lineLimit(1)
+                Text("s")
+                    .font(.callout)
+            }
         }
         .padding([.trailing], 8)
     }
