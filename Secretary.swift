@@ -91,12 +91,12 @@ class Secretary {
         if !shouldScrollToTop { shouldScrollToTop = true }
     } //1
     
-    // MARK: - Pinned versus Ordinary bubbles
+    // MARK: - Toggle Favorites [Pinned versus Ordinary bubbles]
     @Published var showFavoritesOnly = false
     
     @Published var isBubblesReportReady = false
     
-    var bubblesReport = BubblesReport()
+    private(set) var bubblesReport = BubblesReport()
     
     func updateBubblesReport(_ updateKind: UpdateKind) {
         switch updateKind {
