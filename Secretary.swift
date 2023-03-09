@@ -115,12 +115,12 @@ class Secretary {
                     
                     let bubblesCount = bubbles.count
                     
-                    let colors = bubbles
+                    let ordinaryBubbleColors = bubbles
                         .filter { !$0.isPinned } //filter out pinned bubbles
                         .compactMap { $0.color } //get colors of ordinary bubbles
                     
-                    bubblesReport.ordinaryBubbleColors = colors
-                    bubblesReport.ordinary = colors.count
+                    bubblesReport.ordinaryBubbleColors = ordinaryBubbleColors
+                    bubblesReport.ordinary = ordinaryBubbleColors.count
                     bubblesReport.pinned = bubblesCount - bubblesReport.ordinary
                     
                     isBubblesReportReady = true
