@@ -190,6 +190,8 @@ class ViewModel: ObservableObject {
         observe_ApplicationActive()
         observe_ApplicationBackground()
         observe_delayReachedZero_Notification()
+        
+        secretary.updateBubblesReport(.appLaunch)
     }
 }
 

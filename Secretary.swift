@@ -10,7 +10,9 @@ import SwiftUI
 import MyPackage
 
 class Secretary {
-    private init() { }
+    private init() {
+        print(#function, " Secretary")
+    }
     static let shared = Secretary()
     
     // MARK: - Publishers
@@ -89,10 +91,43 @@ class Secretary {
         if !shouldScrollToTop { shouldScrollToTop = true }
     } //1
     
+    // MARK: - Pinned versus Ordinary bubbles
     @Published var showFavoritesOnly = false
     
-    @Published var isBubblesReportReady = false
+    @Published var isBubblesReportReady = false {didSet{
+        if isBubblesReportReady {
+            print(bubblesReport)
+        }
+    }}
+    
     var bubblesReport = BubblesReport()
+    
+    func updateBubblesReport(_ updateKind: UpdateKind) {
+        switch updateKind {
+            case .appLaunch:
+                let bContext = PersistenceController.shared.bContext
+                
+                bContext.perform { [weak self] in
+                    guard let self = self else { return }
+                    
+                    let request = Bubble.fetchRequest()
+                    guard let bubbles = try? bContext.fetch(request) else { fatalError() }
+                    
+                    let bubblesCount = bubbles.count
+                    
+                    let colors = bubbles
+                        .filter { !$0.isPinned } //filter out pinned bubbles
+                        .compactMap { $0.color } //get colors of ordinary bubbles
+                    
+                    bubblesReport.ordinaryBubbleColors = colors
+                    bubblesReport.ordinary = colors.count
+                    bubblesReport.pinned = bubblesCount - bubblesReport.ordinary
+                    
+                    isBubblesReportReady = true
+                }
+            default: break
+        }
+    }
 }
 
 extension Secretary {
@@ -101,6 +136,14 @@ extension Secretary {
         var ordinary = 0 {didSet{
             print("ordinary \(ordinary)")
         }}
+        var ordinaryBubbleColors = [String]()
         var all:Int { pinned + ordinary }
+    }
+    
+    enum UpdateKind {
+        case appLaunch
+        case delete //bubble
+        case create //bubble
+        case pin //pin/unpin bubble
     }
 }
