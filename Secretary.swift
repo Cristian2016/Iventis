@@ -113,11 +113,11 @@ class Secretary {
                     
                     let ordinaryBubbleColors = bubbles
                         .filter { !$0.isPinned } //filter out pinned bubbles
-                        .compactMap { $0.color } //get colors of ordinary bubbles
+                        .compactMap { idColor(id: $0.rank, color: Color.bubbleColor(forName: $0.color)) } //get colors of ordinary bubbles
                     
-                    bubblesReport.ordinaryBubbleColors = ordinaryBubbleColors
                     bubblesReport.ordinary = ordinaryBubbleColors.count
                     bubblesReport.pinned = bubblesCount - bubblesReport.ordinary
+                    bubblesReport.colors = ordinaryBubbleColors
                     
                     isBubblesReportReady = true
                 }
@@ -125,7 +125,7 @@ class Secretary {
                 guard let color = bubble.color else { return }
                 
                 bubblesReport.ordinary += 1
-                bubblesReport.ordinaryBubbleColors.append(color)
+                bubblesReport.colors.append(idColor(id: bubble.rank, color: Color.bubbleColor(forName: bubble.color)))
                 
                 DispatchQueue.main.async { self.isBubblesReportReady = true }
             
@@ -136,7 +136,7 @@ class Secretary {
                     bubblesReport.pinned -= 1
                 } else {
                     bubblesReport.ordinary -= 1
-                    bubblesReport.ordinaryBubbleColors.removeAll { $0 == color }
+                    bubblesReport.colors.removeAll { $0.id == bubble.rank }
                 }
                 
                 DispatchQueue.main.async { self.isBubblesReportReady = true }
@@ -147,11 +147,11 @@ class Secretary {
                 if bubble.isPinned {
                     bubblesReport.ordinary -= 1
                     bubblesReport.pinned += 1
-                    bubblesReport.ordinaryBubbleColors.removeAll { $0 == color }
+                    bubblesReport.colors.removeAll { $0.id == bubble.rank }
                 } else {
                     bubblesReport.pinned -= 1
                     bubblesReport.ordinary += 1
-                    bubblesReport.ordinaryBubbleColors.append(color)
+                    bubblesReport.colors.append(idColor(id: bubble.rank, color: Color.bubbleColor(forName: bubble.color)))
                 }
                 
                 DispatchQueue.main.async { self.isBubblesReportReady = true }
@@ -162,7 +162,7 @@ class Secretary {
 extension Secretary {
     ///it's a Color with an ID so that it plays nicely with ForEach views
     struct idColor:Identifiable {
-        let id = UUID().uuidString
+        let id:Int64 //bubble rank
         let color:Color
     }
     
@@ -171,12 +171,7 @@ extension Secretary {
         var ordinary = 0 {didSet{
             print("ordinary \(ordinary)")
         }}
-        var ordinaryBubbleColors = [String]()
-        var colors:[idColor] {
-            ordinaryBubbleColors.map {
-                idColor(color: Color.bubbleColor(forName: $0))
-            }
-        }
+        var colors = [idColor]()
         var all:Int { pinned + ordinary }
     }
     
