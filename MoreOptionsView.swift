@@ -103,13 +103,12 @@ struct MoreOptionsView: View {
             HStack(alignment: .firstTextBaseline, spacing: 0) {
                 Text(String(input!.userEditedDelay))
                     .font(metrics.delayFont)
-                    .minimumScaleFactor(0.2)
+                    .minimumScaleFactor(0.1)
                     .lineLimit(1)
                 Text("s")
                     .font(.callout)
             }
         }
-        .padding([.trailing], 8)
     }
     
     private var digits:some View {
