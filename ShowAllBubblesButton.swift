@@ -18,7 +18,7 @@ struct RefresherView: View {
             if show {
                 VStack(spacing: 4) {
                     let title = showFavoritesOnly ? "Show All" : "Show Pinned Only"
-                    let symbol = showFavoritesOnly ? "eye" : "pin"
+                    let symbol = showFavoritesOnly ? nil : "pin"
                     let color = showFavoritesOnly ? .secondary : Color.orange
                     
                     BorderlessLabel(title: title, symbol: symbol,color: color)
@@ -71,7 +71,7 @@ struct ShowAllBubblesButton: View {
     
     // MARK: - Lego
     private var text:some View {
-        Text("\(Image(systemName: "eye")) Show \(count)")
+        Text("Show \(count)")
             .listRowSeparator(.hidden)
             .font(.caption)
             .foregroundColor(.secondary)
