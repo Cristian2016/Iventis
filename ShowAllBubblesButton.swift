@@ -40,23 +40,37 @@ struct ShowAllBubblesButton: View {
     private let secretary = Secretary.shared
     @State private var showFavoritesOnly = false
     @State private var count = 0
+    @State private var colors = [Secretary.idColor]()
     
     var body: some View {
         ZStack {
             if showFavoritesOnly {
-                Text("\(Image(systemName: "eye")) Show \(count)")
-                    .listRowSeparator(.hidden)
-                    .font(.footnote)
-                    .foregroundColor(.secondary)
-                    .onTapGesture { secretary.showFavoritesOnly = false }
-                    .padding([.leading], 4)
+                HStack (spacing: 4) {
+                    text
+                    ForEach(colors) { color in
+                        Circle()
+                            .fill(color.color)
+                            .frame(width: 10)
+                    }
+                }
+                .onTapGesture { secretary.showFavoritesOnly = false }
             }
         }
         .onReceive(secretary.$showFavoritesOnly) { showFavoritesOnly = $0 }
         .onReceive(secretary.$isBubblesReportReady) { output in
             if output {
                count = secretary.bubblesReport.ordinary
+               colors = secretary.bubblesReport.colors
             }
         }
+    }
+    
+    // MARK: - Lego
+    private var text:some View {
+        Text("\(Image(systemName: "eye")) Show \(count)")
+            .listRowSeparator(.hidden)
+            .font(.footnote)
+            .foregroundColor(.secondary)
+            .padding([.leading], 4)
     }
 }

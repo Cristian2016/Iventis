@@ -160,12 +160,22 @@ class Secretary {
 }
 
 extension Secretary {
+    struct idColor:Identifiable {
+        let id = UUID().uuidString
+        let color:Color
+    }
+    
     struct BubblesReport {
         var pinned = 0
         var ordinary = 0 {didSet{
             print("ordinary \(ordinary)")
         }}
         var ordinaryBubbleColors = [String]()
+        var colors:[idColor] {
+            ordinaryBubbleColors.map {
+                idColor(color: Color.bubbleColor(forName: $0))
+            }
+        }
         var all:Int { pinned + ordinary }
     }
     

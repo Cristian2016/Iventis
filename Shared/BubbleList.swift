@@ -75,7 +75,6 @@ struct BubbleList: View {
                             secretary.bubblesReport.pinned > 0
                     else { return }
                     
-                    print("toggle showFavoritesOnly")
                     secretary.showFavoritesOnly.toggle()
                 }
             }
