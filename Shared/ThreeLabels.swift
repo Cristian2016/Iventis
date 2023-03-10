@@ -68,7 +68,8 @@ struct ThreeLabels: View {
                         }
                         .opacity(minOpacity)
                     SecondsLabel(bubble: bubble)
-                    //                        .overlay { if sDelayBubble.referenceDelay > 0 { SDButton(bubble.sdb) }}
+                        .overlay { SDButton(bubble) }
+                        
                 }
                 .scaleEffect(x: metrics.hstackScale, y: metrics.hstackScale)
             }

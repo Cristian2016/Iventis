@@ -673,7 +673,7 @@ extension ViewModel {
         }
     }
     
-    func setStartDelay(_ delay:Float, for bubble:Bubble?) {
+    func setupStartDelayBubble(_ delay:Float, for bubble:Bubble?) {
         guard let bubble = bubble else { return }
         
         let bContext = controller.bContext
@@ -683,7 +683,15 @@ extension ViewModel {
             guard let self = self else { return }
             
             let thisBubble = self.controller.grabObj(objID) as! Bubble
-            thisBubble.startDelay = delay
+            if let sdb = thisBubble.startDelayBubble { //set existing SDB
+                sdb.initialClock = delay
+            } else { //create SDB
+                let sdb = StartDelayBubble(context: bContext)
+                sdb.created = Date()
+                sdb.initialClock = delay
+                thisBubble.startDelayBubble = sdb
+            }
+            
             controller.save(bContext)
         }
     }

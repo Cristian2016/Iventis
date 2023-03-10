@@ -11,12 +11,18 @@ import MyPackage
 ///StartDelayBubbleCell
 struct SDButton: View {
     init?(_ bubble:Bubble?) {
-        guard let bubble = bubble else { return nil }
+        guard
+            let bubble = bubble,
+            let sdb = bubble.startDelayBubble
+        else { return nil }
+        
         self.bubble = bubble
+        _sdb = StateObject(wrappedValue: sdb)
     }
     
     @EnvironmentObject var viewModel:ViewModel
     private let  bubble:Bubble
+    @StateObject private var sdb:StartDelayBubble
     
     @State var offset:CGSize = .zero //drag view around
     @State var isTapped = false
@@ -26,28 +32,37 @@ struct SDButton: View {
     var shouldDelete:Bool { abs(offset.width) >= deleteTriggerOffset }
     @State var deleteTriggered = false
     
+    let metrics = BubbleCell.Metrics()
+    
     var body: some View {
         ZStack {
-            deleteText
-            content
-            //layout
-                .padding(6)
-                .overlay (
-                    Text("-\(bubble.startDelay.shortString(by: 0))")
-                        .font(.system(size: 60))
-                        .minimumScaleFactor(0.3)
-                        .padding()
-                        .foregroundColor(.black)
-                )
-                .offset(offset)
-            //animated property and animation
-                .scaleEffect(isTapped ? 0.9 : 1.0)
-                .animation(.spring(response: 0.5).repeatForever(), value: isTapped)
-            //gestures
-                .gesture(dragGesture)
-                .gesture(longPressGesture)
-                .onTapGesture { toggleStart() }
+            if sdb.initialClock != 0 {
+                deleteText
+                content
+                //layout
+                    .overlay {
+                        Rectangle().fill(.clear)
+                            .aspectRatio(2.2, contentMode: .fit)
+                            .overlay {
+                                Text("-\(sdb.initialClock.shortString(by: 0))")
+                                    .font(.system(size: 400))
+                                    .lineLimit(1)
+                                    .minimumScaleFactor(0.1)
+                                    .foregroundColor(.black)
+                            }
+                    }
+
+                    .offset(offset)
+                //animated property and animation
+                    .scaleEffect(isTapped ? 0.9 : 1.0)
+                    .animation(.spring(response: 0.5).repeatForever(), value: isTapped)
+                //gestures
+                    .gesture(dragGesture)
+                    .gesture(longPressGesture)
+                    .onTapGesture { toggleStart() }
+            }
         }
+        .scaleEffect(x: metrics.circleScale, y: metrics.circleScale)
     }
     
     // MARK: - Lego

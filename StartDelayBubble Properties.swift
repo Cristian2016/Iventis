@@ -18,8 +18,10 @@ extension StartDelayBubble {
 
     @NSManaged public var created: Date?
     @NSManaged public var initialClock: Float
-    @NSManaged public var currentClock: Float
+    
     @NSManaged public var bubble: Bubble?
+    
+    @NSManaged public var currentClock: Float
     @NSManaged public var pairs: NSOrderedSet?
 
 }

@@ -22,7 +22,6 @@ extension Bubble {
     
     @NSManaged public var initialClock: Float
     @NSManaged public var currentClock: Float
-    @NSManaged public var startDelay: Float
     
     @NSManaged public var note: String?
     @NSManaged public var isNoteHidden: Bool

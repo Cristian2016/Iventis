@@ -12,7 +12,6 @@
 		1F0373C228DEE6F7005CE8D3 /* AlwaysOnDisplayConfirmationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F0373C128DEE6F7005CE8D3 /* AlwaysOnDisplayConfirmationView.swift */; };
 		1F0373C628DF516F005CE8D3 /* OnLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F0373C528DF516F005CE8D3 /* OnLabel.swift */; };
 		1F04768D29BB073000641CDC /* SecondsLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F04768C29BB073000641CDC /* SecondsLabel.swift */; };
-		1F04768F29BB20F600641CDC /* StartDelayButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F04768E29BB20F600641CDC /* StartDelayButton.swift */; };
 		1F04769229BB4AFF00641CDC /* StartDelayBubble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F04769029BB4AFF00641CDC /* StartDelayBubble.swift */; };
 		1F04769329BB4AFF00641CDC /* StartDelayBubble Properties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F04769129BB4AFF00641CDC /* StartDelayBubble Properties.swift */; };
 		1F04769629BB4C2400641CDC /* SDBPair.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F04769429BB4C2400641CDC /* SDBPair.swift */; };
@@ -158,7 +157,6 @@
 		1F0373C128DEE6F7005CE8D3 /* AlwaysOnDisplayConfirmationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlwaysOnDisplayConfirmationView.swift; sourceTree = "<group>"; };
 		1F0373C528DF516F005CE8D3 /* OnLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnLabel.swift; sourceTree = "<group>"; };
 		1F04768C29BB073000641CDC /* SecondsLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondsLabel.swift; sourceTree = "<group>"; };
-		1F04768E29BB20F600641CDC /* StartDelayButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartDelayButton.swift; sourceTree = SOURCE_ROOT; };
 		1F04769029BB4AFF00641CDC /* StartDelayBubble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartDelayBubble.swift; sourceTree = SOURCE_ROOT; };
 		1F04769129BB4AFF00641CDC /* StartDelayBubble Properties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StartDelayBubble Properties.swift"; sourceTree = SOURCE_ROOT; };
 		1F04769429BB4C2400641CDC /* SDBPair.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SDBPair.swift; sourceTree = SOURCE_ROOT; };
@@ -407,7 +405,6 @@
 		1F5F4A4728093FAD00AF3442 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
-				1F04768E29BB20F600641CDC /* StartDelayButton.swift */,
 				1F38A00329B9000D009AD543 /* yPositionTracker.swift */,
 				1F83A44E29A965D90058E6E2 /* DigitsView.swift */,
 				1F991A6F29A7545C0045B04C /* TopCellDurationView.swift */,
@@ -701,7 +698,6 @@
 				1F18B460281FAABF0080ADA6 /* TopCell.swift in Sources */,
 				1FAD1576298A5A6C001139C6 /* AddNoteButton.swift in Sources */,
 				1F5F4A5D28093FAF00AF3442 /* TimersApp.swift in Sources */,
-				1F04768F29BB20F600641CDC /* StartDelayButton.swift in Sources */,
 				1F377E1F287EB2F000E43598 /* AutoLockButton.swift in Sources */,
 				1FCF0C662816F3F600AA1FAA /* EmptyListView.swift in Sources */,
 				1F4326B1282AFB19002B6092 /* ScaleDownButton.swift in Sources */,
