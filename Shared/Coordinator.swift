@@ -87,6 +87,8 @@ class BubbleCellCoordinator {
         }
     }
     
+    @Published var isSDBSet = false
+    
     @Published private(set) var components = Components("-1", "-1", "-1", "-1")
     @Published private(set) var opacity = Opacity()
     var colorPublisher:Publisher<Color, Never>

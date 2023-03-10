@@ -56,13 +56,9 @@ struct SDButton: View {
                 .scaleEffect(x: metrics.circleScale * 0.85, y: metrics.circleScale * 0.85)
             }
         }
-        .onReceive(bubble.objectWillChange) { _ in
-            let sdbNotSet = bubble.startDelayBubble == nil
-            
-            withAnimation {
-                show = sdbNotSet ? false : true
-                print("show \(show)")
-            }
+        .onReceive(bubble.coordinator.$isSDBSet) {
+            show = $0 ? true : false
+            print("show \(show)")
         }
     }
     
