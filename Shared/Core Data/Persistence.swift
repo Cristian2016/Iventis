@@ -78,7 +78,7 @@ struct PersistenceController {
             container.persistentStoreDescriptions.first!.url = URL(fileURLWithPath: "/dev/null")
         }
         container.loadPersistentStores { description, error in
-            if let error = error as NSError? { fatalError() }
+            if let _ = error as NSError? { fatalError() }
         }
         container.viewContext.automaticallyMergesChangesFromParent = true
     }

@@ -34,6 +34,7 @@ extension Bubble {
     
     @NSManaged public var sessions: NSOrderedSet?
     @NSManaged public var history: NSOrderedSet?
+    @NSManaged public var startDelayBubble: StartDelayBubble?
 }
 
 // MARK: Generated accessors for sessions

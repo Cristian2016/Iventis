@@ -13,6 +13,10 @@
 		1F0373C628DF516F005CE8D3 /* OnLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F0373C528DF516F005CE8D3 /* OnLabel.swift */; };
 		1F04768D29BB073000641CDC /* SecondsLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F04768C29BB073000641CDC /* SecondsLabel.swift */; };
 		1F04768F29BB20F600641CDC /* StartDelayButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F04768E29BB20F600641CDC /* StartDelayButton.swift */; };
+		1F04769229BB4AFF00641CDC /* StartDelayBubble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F04769029BB4AFF00641CDC /* StartDelayBubble.swift */; };
+		1F04769329BB4AFF00641CDC /* StartDelayBubble Properties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F04769129BB4AFF00641CDC /* StartDelayBubble Properties.swift */; };
+		1F04769629BB4C2400641CDC /* SDBPair.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F04769429BB4C2400641CDC /* SDBPair.swift */; };
+		1F04769729BB4C2400641CDC /* SDBPair Properties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F04769529BB4C2400641CDC /* SDBPair Properties.swift */; };
 		1F05B7C82989158E0022FD23 /* BorderlessLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F05B7C72989158E0022FD23 /* BorderlessLabel.swift */; };
 		1F0FD40229A4CD090097FF7F /* ScrollToTopButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F0FD40129A4CD090097FF7F /* ScrollToTopButton.swift */; };
 		1F0FD40629A4D93D0097FF7F /* DetailViewInfoButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F0FD40529A4D93D0097FF7F /* DetailViewInfoButton.swift */; };
@@ -155,6 +159,10 @@
 		1F0373C528DF516F005CE8D3 /* OnLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnLabel.swift; sourceTree = "<group>"; };
 		1F04768C29BB073000641CDC /* SecondsLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondsLabel.swift; sourceTree = "<group>"; };
 		1F04768E29BB20F600641CDC /* StartDelayButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartDelayButton.swift; sourceTree = SOURCE_ROOT; };
+		1F04769029BB4AFF00641CDC /* StartDelayBubble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartDelayBubble.swift; sourceTree = SOURCE_ROOT; };
+		1F04769129BB4AFF00641CDC /* StartDelayBubble Properties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StartDelayBubble Properties.swift"; sourceTree = SOURCE_ROOT; };
+		1F04769429BB4C2400641CDC /* SDBPair.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SDBPair.swift; sourceTree = SOURCE_ROOT; };
+		1F04769529BB4C2400641CDC /* SDBPair Properties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SDBPair Properties.swift"; sourceTree = SOURCE_ROOT; };
 		1F05B7C72989158E0022FD23 /* BorderlessLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BorderlessLabel.swift; sourceTree = "<group>"; };
 		1F0FD40129A4CD090097FF7F /* ScrollToTopButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollToTopButton.swift; sourceTree = SOURCE_ROOT; };
 		1F0FD40529A4D93D0097FF7F /* DetailViewInfoButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewInfoButton.swift; sourceTree = "<group>"; };
@@ -454,6 +462,10 @@
 		1F5F4A93280941FC00AF3442 /* Core Data */ = {
 			isa = PBXGroup;
 			children = (
+				1F04769429BB4C2400641CDC /* SDBPair.swift */,
+				1F04769529BB4C2400641CDC /* SDBPair Properties.swift */,
+				1F04769029BB4AFF00641CDC /* StartDelayBubble.swift */,
+				1F04769129BB4AFF00641CDC /* StartDelayBubble Properties.swift */,
 				1FA1F39D2981CFE6000A50F5 /* Persistence.swift */,
 				1F9BE0A8280BE14100F87EFA /* PaletteView.swift */,
 				1F9BE0AC280C6AB000F87EFA /* TapHold.swift */,
@@ -617,6 +629,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1F04769729BB4C2400641CDC /* SDBPair Properties.swift in Sources */,
 				1FB5D8DA28E9BF0500DD522A /* GestureLabel.swift in Sources */,
 				1F76B51128DDE38800543660 /* AlertHintView.swift in Sources */,
 				1F36D56B29942C0B00D70727 /* CalendarEventCreatedConfirmation.swift in Sources */,
@@ -625,6 +638,7 @@
 				1FE722A128E58200005ADA8E /* ColorConfirmationView.swift in Sources */,
 				1F42B36E29A50B9500DCD473 /* SmallPairBubbleCell.swift in Sources */,
 				1F8B6965283790CF006540CB /* BubbleStickyNoteList.swift in Sources */,
+				1F04769329BB4AFF00641CDC /* StartDelayBubble Properties.swift in Sources */,
 				1F4DF99D282B82EF00D54BE8 /* CircleButton.swift in Sources */,
 				1F0373C628DF516F005CE8D3 /* OnLabel.swift in Sources */,
 				1F196093298856E500E6A7EA /* SmallAlertHintView.swift in Sources */,
@@ -633,6 +647,7 @@
 				1F991A7029A7545C0045B04C /* TopCellDurationView.swift in Sources */,
 				1F0373C228DEE6F7005CE8D3 /* AlwaysOnDisplayConfirmationView.swift in Sources */,
 				1FFC8BAD28142F040059EF2E /* Session Properties.swift in Sources */,
+				1F04769629BB4C2400641CDC /* SDBPair.swift in Sources */,
 				1F64200A2820204400413E31 /* PairList.swift in Sources */,
 				1FA1B44A298321D20063B081 /* iPhoneViewHierarchy.swift in Sources */,
 				1F20807C2836111600FD35D6 /* BSavedNote.swift in Sources */,
@@ -673,6 +688,7 @@
 				1F1CF2F3286B5BD8007102F2 /* PairStickyNoteList.swift in Sources */,
 				1F52B8C8299233AF0093810C /* ColorsGrid.swift in Sources */,
 				1F5F4A6F28093FF800AF3442 /* Model.xcdatamodeld in Sources */,
+				1F04769229BB4AFF00641CDC /* StartDelayBubble.swift in Sources */,
 				1F9BE0AD280C6AB000F87EFA /* TapHold.swift in Sources */,
 				1F520C6D2987DFBC00B25029 /* PairCell.swift in Sources */,
 				1FA377E82972FE75005ACD41 /* Library.swift in Sources */,
