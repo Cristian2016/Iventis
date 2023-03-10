@@ -49,7 +49,7 @@ struct SDButton: View {
                     .onTapGesture { toggleStart() }
             }
         }
-        .scaleEffect(x: metrics.circleScale * 0.85, y: metrics.circleScale * 0.85)
+        .scaleEffect(x: metrics.circleScale, y: metrics.circleScale)
     }
     
     // MARK: - Lego
