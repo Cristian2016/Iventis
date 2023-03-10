@@ -132,6 +132,7 @@ class Secretary {
             case .create(let bubble):
                 bubblesReport.ordinary += 1
                 bubblesReport.colors.append(idColor(id: bubble.rank, color: Color.bubbleColor(forName: bubble.color)))
+                bubblesReport.ordinaryRanks.append(Int(bubble.rank))
                 
                 DispatchQueue.main.async { self.isBubblesReportReady = true }
             
@@ -141,19 +142,23 @@ class Secretary {
                 } else {
                     bubblesReport.ordinary -= 1
                     bubblesReport.colors.removeAll { $0.id == bubble.rank }
+                    bubblesReport.ordinaryRanks.removeAll { $0 == Int(bubble.rank) }
                 }
                 
                 DispatchQueue.main.async { self.isBubblesReportReady = true }
             
             case .pin(let bubble):
                 if bubble.isPinned {
-                    bubblesReport.ordinary -= 1
                     bubblesReport.pinned += 1
+                    
+                    bubblesReport.ordinary -= 1
+                    bubblesReport.ordinaryRanks.removeAll { $0 == Int(bubble.rank) }
                     bubblesReport.colors.removeAll { $0.id == bubble.rank }
                 } else {
                     bubblesReport.pinned -= 1
                     bubblesReport.ordinary += 1
                     bubblesReport.colors.append(idColor(id: bubble.rank, color: Color.bubbleColor(forName: bubble.color)))
+                    bubblesReport.ordinaryRanks.append(Int(bubble.rank))
                 }
                 
                 DispatchQueue.main.async { self.isBubblesReportReady = true }
