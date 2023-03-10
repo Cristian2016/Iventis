@@ -684,7 +684,8 @@ extension ViewModel {
         
         bContext.perform {
             let thisBubble = self.controller.grabObj(objID) as! Bubble
-            bContext.delete(thisBubble.startDelayBubble!)
+            bContext.delete(thisBubble.startDelayBubble!) //sdb removed from database
+            thisBubble.startDelayBubble = nil
             self.controller.save(bContext)
         }
     }
@@ -703,7 +704,7 @@ extension ViewModel {
             if let sdb = thisBubble.startDelayBubble { //set existing SDB
                 sdb.initialClock = delay
                 sdb.currentClock = delay
-                sdb.objectWillChange.send()
+                
             } else { //create SDB
                 let sdb = StartDelayBubble(context: bContext)
                 sdb.created = Date()
@@ -713,6 +714,10 @@ extension ViewModel {
             }
             
             controller.save(bContext)
+            DispatchQueue.main.async {
+                bubble.objectWillChange.send()
+            }
+            
         }
     }
 }
