@@ -750,6 +750,50 @@ extension ViewModel {
         }
     }
     
+    func resetSDB(_ bubble:Bubble?) {
+        //delete all SDBPairs and set sdb.currentClock to sdb.initialClock
+        guard
+            let bubble = bubble,
+            let sdb = bubble.startDelayBubble else { return }
+        
+        let bContext = controller.bContext
+        let objID = sdb.objectID
+        
+        bContext.perform {
+            let thisSDB = self.controller.grabObj(objID) as! StartDelayBubble
+            
+            thisSDB.currentClock = thisSDB.initialClock
+            
+            //batch-delete all sessions
+            let request:NSFetchRequest<NSFetchRequestResult> = SDBPair.fetchRequest()
+            request.predicate = NSPredicate(format: "sdBubble == %@", thisSDB) //⚠️ 10
+            
+            let batchDeleteRequest = NSBatchDeleteRequest(fetchRequest: request)
+            batchDeleteRequest.resultType = .resultTypeObjectIDs
+            
+            let result = try? bContext.execute(batchDeleteRequest)
+            
+            try? bContext.save()
+            DispatchQueue.main.async {
+                try? bubble.managedObjectContext?.save()
+            }
+            
+            guard
+                let deleteResult = result as? NSBatchDeleteResult,
+                let ids = deleteResult.result as? [NSManagedObjectID]
+            else { fatalError() }
+            
+            let changes = [NSDeletedObjectsKey : ids]
+            
+            bContext.reset() //⚠️ 16
+            
+            delayExecution(self.delay) {
+                NSManagedObjectContext.mergeChanges(
+                    fromRemoteContextSave: changes, into: [self.controller.viewContext]) //12
+            }
+        }
+    }
+    
     enum SDBMode {
         case start
         case pause

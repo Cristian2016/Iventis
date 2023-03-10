@@ -104,10 +104,11 @@ struct SDButton: View {
             .onEnded { _ in
                 //UserFeedback
                 UserFeedback.doubleHaptic(.heavy)
-                
+                viewModel.resetSDB(bubble)
                 isTapped = false
             }
     }
+    
     func toggleStart() {
         isTapped.toggle()
         viewModel.toggleSDBubble(bubble)
