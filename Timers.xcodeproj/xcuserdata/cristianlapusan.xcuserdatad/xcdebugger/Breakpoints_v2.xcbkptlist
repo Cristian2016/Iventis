@@ -408,8 +408,8 @@
             filePath = "Shared/ViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "687"
-            endingLineNumber = "687"
+            startingLineNumber = "703"
+            endingLineNumber = "703"
             landmarkName = "setupStartDelayBubble(_:for:)"
             landmarkType = "7">
             <Locations>
@@ -456,8 +456,8 @@
             filePath = "Shared/ViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "690"
-            endingLineNumber = "690"
+            startingLineNumber = "706"
+            endingLineNumber = "706"
             landmarkName = "setupStartDelayBubble(_:for:)"
             landmarkType = "7">
             <Locations>

@@ -10,19 +10,8 @@ import MyPackage
 
 ///StartDelayBubbleCell
 struct SDButton: View {
-    init?(_ bubble:Bubble?) {
-        guard
-            let bubble = bubble,
-            let sdb = bubble.startDelayBubble
-        else { return nil }
-        
-        self.bubble = bubble
-        _sdb = StateObject(wrappedValue: sdb)
-    }
-    
     @EnvironmentObject var viewModel:ViewModel
-    private let  bubble:Bubble
-    @StateObject private var sdb:StartDelayBubble
+    @StateObject private var  bubble:Bubble
     
     @State var offset:CGSize = .zero //drag view around
     @State var isTapped = false
@@ -36,7 +25,7 @@ struct SDButton: View {
     
     var body: some View {
         ZStack {
-            if sdb.currentClock != 0 {
+            if let sdb = bubble.startDelayBubble {
                 deleteText
                 content
                 //layout
@@ -118,6 +107,11 @@ struct SDButton: View {
     }
     func toggleStart() {
         isTapped.toggle()
+    }
+    
+    init?(_ bubble:Bubble?) {
+        guard let bubble = bubble else { return nil }
+        _bubble = StateObject(wrappedValue: bubble)
     }
 }
 

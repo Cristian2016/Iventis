@@ -673,6 +673,22 @@ extension ViewModel {
         }
     }
     
+    func removeStartDelay(for bubble:Bubble?)  {
+        guard
+            let bubble = bubble,
+            bubble.startDelayBubble != nil
+        else { return }
+        
+        let bContext = controller.bContext
+        let objID = bubble.objectID
+        
+        bContext.perform {
+            let thisBubble = self.controller.grabObj(objID) as! Bubble
+            bContext.delete(thisBubble.startDelayBubble!)
+            self.controller.save(bContext)
+        }
+    }
+    
     func setupStartDelayBubble(_ delay:Float, for bubble:Bubble?) {
         guard let bubble = bubble else { return }
         

@@ -69,7 +69,6 @@ struct ThreeLabels: View {
                         .opacity(minOpacity)
                     SecondsLabel(bubble: bubble)
                         .overlay { SDButton(bubble) }
-                        
                 }
                 .scaleEffect(x: metrics.hstackScale, y: metrics.hstackScale)
             }
