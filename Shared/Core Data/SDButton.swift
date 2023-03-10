@@ -15,9 +15,7 @@ struct SDButton: View {
     
     @State var offset:CGSize = .zero //drag view around
     @State var isTapped = false
-    
-    @State private var show = false
-    
+        
     let deleteTriggerOffset = CGFloat(180)
     var deleteLabelVisible:Bool { abs(offset.width) > 120 }
     var shouldDelete:Bool { abs(offset.width) >= deleteTriggerOffset }
@@ -27,39 +25,31 @@ struct SDButton: View {
     
     var body: some View {
         ZStack {
-            if show {
-                ZStack {
-                    content
-                    //layout
-                        .overlay {
-                            Rectangle().fill(.clear)
-                                .aspectRatio(2.2, contentMode: .fit)
-                                .overlay {
-                                    if let sdb = bubble.startDelayBubble {
-                                        Text("-\(sdb.currentClock.shortString(by: 0))")
-                                            .font(.system(size: 400))
-                                            .lineLimit(1)
-                                            .minimumScaleFactor(0.1)
-                                            .foregroundColor(.black)
-                                    }
-                                }
-                        }
-                        .offset(offset)
-                    //animated property and animation
-                        .scaleEffect(isTapped ? 0.9 : 1.0)
-                        .animation(.spring(response: 0.5).repeatForever(), value: isTapped)
-                    //gestures
-                        .gesture(dragGesture)
-                        .gesture(longPressGesture)
-                        .onTapGesture { toggleStart() }
-                }
-                .scaleEffect(x: metrics.circleScale * 0.85, y: metrics.circleScale * 0.85)
+            if let sdb = bubble.startDelayBubble {
+                content
+                //layout
+                    .overlay {
+                        Rectangle().fill(.clear)
+                            .aspectRatio(2.2, contentMode: .fit)
+                            .overlay {
+                                Text("-\(sdb.currentClock.shortString(by: 0))")
+                                    .font(.system(size: 400))
+                                    .lineLimit(1)
+                                    .minimumScaleFactor(0.1)
+                                    .foregroundColor(.black)
+                            }
+                    }
+                    .offset(offset)
+                //animated property and animation
+                    .scaleEffect(isTapped ? 0.9 : 1.0)
+                    .animation(.spring(response: 0.5).repeatForever(), value: isTapped)
+                //gestures
+                    .gesture(dragGesture)
+                    .gesture(longPressGesture)
+                    .onTapGesture { toggleStart() }
             }
         }
-        .onReceive(bubble.coordinator.$isSDBSet) {
-            show = $0 ? true : false
-            print("show \(show)")
-        }
+        .scaleEffect(x: metrics.circleScale * 0.85, y: metrics.circleScale * 0.85)
     }
     
     // MARK: - Lego

@@ -686,11 +686,7 @@ extension ViewModel {
             let thisBubble = self.controller.grabObj(objID) as! Bubble
             bContext.delete(thisBubble.startDelayBubble!) //sdb removed from database
             thisBubble.startDelayBubble = nil //sdb removed from memory
-            self.controller.save(bContext) {
-                DispatchQueue.main.async {
-                    bubble.coordinator.isSDBSet = false
-                }
-            }
+            self.controller.save(bContext)
         }
     }
     
@@ -718,10 +714,7 @@ extension ViewModel {
             }
             
             controller.save(bContext)
-            DispatchQueue.main.async {
-                bubble.objectWillChange.send()
-                bubble.coordinator.isSDBSet = true
-            }
+            DispatchQueue.main.async { bubble.objectWillChange.send() }
         }
     }
 }
