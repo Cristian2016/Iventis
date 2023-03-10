@@ -685,10 +685,12 @@ extension ViewModel {
             let thisBubble = self.controller.grabObj(objID) as! Bubble
             if let sdb = thisBubble.startDelayBubble { //set existing SDB
                 sdb.initialClock = delay
+                sdb.currentClock = delay
             } else { //create SDB
                 let sdb = StartDelayBubble(context: bContext)
                 sdb.created = Date()
                 sdb.initialClock = delay
+                sdb.currentClock = delay
                 thisBubble.startDelayBubble = sdb
             }
             

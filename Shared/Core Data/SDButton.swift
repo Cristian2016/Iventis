@@ -36,7 +36,7 @@ struct SDButton: View {
     
     var body: some View {
         ZStack {
-            if sdb.initialClock != 0 {
+            if sdb.currentClock != 0 {
                 deleteText
                 content
                 //layout
@@ -44,7 +44,7 @@ struct SDButton: View {
                         Rectangle().fill(.clear)
                             .aspectRatio(2.2, contentMode: .fit)
                             .overlay {
-                                Text("-\(sdb.initialClock.shortString(by: 0))")
+                                Text("-\(sdb.currentClock.shortString(by: 0))")
                                     .font(.system(size: 400))
                                     .lineLimit(1)
                                     .minimumScaleFactor(0.1)
