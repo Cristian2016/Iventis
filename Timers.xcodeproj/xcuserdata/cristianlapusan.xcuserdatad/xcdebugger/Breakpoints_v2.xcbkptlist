@@ -365,6 +365,21 @@
                   endingLineNumber = "28"
                   offsetFromSymbolStart = "330">
                </Location>
+               <Location
+                  uuid = "33550BF5-F33E-4302-82D8-ECFCE76BB8F0 - 859deae3c65283ea"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 @Swift.MainActor () -&gt; () in closure #1 (SwiftUI.GeometryProxy) -&gt; SwiftUI.Color in closure #1 () -&gt; SwiftUI.GeometryReader&lt;SwiftUI.Color&gt; in closure #1 () -&gt; Swift.Optional&lt;&lt;&lt;opaque return type of SwiftUI.View.background&lt;&#x3c4;_0_0 where &#x3c4;_1_0: SwiftUI.View&gt;(alignment: SwiftUI.Alignment, content: () -&gt; &#x3c4;_1_0) -&gt; some&gt;&gt;.0&gt; in Timers.yPositionTracker.body.getter : some"
+                  moduleName = "Timers"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/cristianlapusan/Downloads/Timers/Shared/yPositionTracker.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "28"
+                  endingLineNumber = "28"
+                  offsetFromSymbolStart = "364">
+               </Location>
             </Locations>
          </BreakpointContent>
       </BreakpointProxy>

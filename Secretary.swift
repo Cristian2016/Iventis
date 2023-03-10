@@ -111,15 +111,21 @@ class Secretary {
                     
                     let bubblesCount = bubbles.count
                     
-                    let ordinaryBubbleColors = bubbles
+                    let ordinaryBubbles = bubbles
                         .filter { !$0.isPinned } //filter out pinned bubbles
+                    
+                    let ordinaryBubbleColors = ordinaryBubbles
                         .compactMap {
                             idColor(id: $0.rank, color: Color.bubbleColor(forName: $0.color))
                         } //get colors of ordinary bubbles
                     
+                    let ordinaryBubbleRanks = ordinaryBubbles
+                        .map { Int($0.rank) }
+                    
                     bubblesReport.ordinary = ordinaryBubbleColors.count
                     bubblesReport.pinned = bubblesCount - bubblesReport.ordinary
                     bubblesReport.colors = ordinaryBubbleColors
+                    bubblesReport.ordinaryRanks = ordinaryBubbleRanks
                     
                     isBubblesReportReady = true
                 }
@@ -182,6 +188,7 @@ extension Secretary {
         var colors = [idColor]() //ordinary colors
         var ordinary = 0 //ordinary bubbles
         var pinned = 0 //pinned bubbles
+        var ordinaryRanks = [Int]()
         
         var all:Int { pinned + ordinary }
     }

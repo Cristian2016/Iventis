@@ -11,6 +11,7 @@
 		1F0373C028DEDD97005CE8D3 /* ConfirmationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F0373BF28DEDD97005CE8D3 /* ConfirmationView.swift */; };
 		1F0373C228DEE6F7005CE8D3 /* AlwaysOnDisplayConfirmationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F0373C128DEE6F7005CE8D3 /* AlwaysOnDisplayConfirmationView.swift */; };
 		1F0373C628DF516F005CE8D3 /* OnLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F0373C528DF516F005CE8D3 /* OnLabel.swift */; };
+		1F04768D29BB073000641CDC /* SecondsLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F04768C29BB073000641CDC /* SecondsLabel.swift */; };
 		1F05B7C82989158E0022FD23 /* BorderlessLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F05B7C72989158E0022FD23 /* BorderlessLabel.swift */; };
 		1F0FD40229A4CD090097FF7F /* ScrollToTopButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F0FD40129A4CD090097FF7F /* ScrollToTopButton.swift */; };
 		1F0FD40629A4D93D0097FF7F /* DetailViewInfoButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F0FD40529A4D93D0097FF7F /* DetailViewInfoButton.swift */; };
@@ -152,6 +153,7 @@
 		1F0373BF28DEDD97005CE8D3 /* ConfirmationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmationView.swift; sourceTree = SOURCE_ROOT; };
 		1F0373C128DEE6F7005CE8D3 /* AlwaysOnDisplayConfirmationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlwaysOnDisplayConfirmationView.swift; sourceTree = "<group>"; };
 		1F0373C528DF516F005CE8D3 /* OnLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnLabel.swift; sourceTree = "<group>"; };
+		1F04768C29BB073000641CDC /* SecondsLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondsLabel.swift; sourceTree = "<group>"; };
 		1F05B7C72989158E0022FD23 /* BorderlessLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BorderlessLabel.swift; sourceTree = "<group>"; };
 		1F0FD40129A4CD090097FF7F /* ScrollToTopButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollToTopButton.swift; sourceTree = SOURCE_ROOT; };
 		1F0FD40529A4D93D0097FF7F /* DetailViewInfoButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewInfoButton.swift; sourceTree = "<group>"; };
@@ -343,6 +345,7 @@
 		1F5F4A4228093FAC00AF3442 = {
 			isa = PBXGroup;
 			children = (
+				1F04768C29BB073000641CDC /* SecondsLabel.swift */,
 				1FF5AC3929A9EDC4000DD0E2 /* NeedlePositionKey.swift */,
 				1FE68FAF29A13BF700D05EE6 /* HundredthsCircle.swift */,
 				1F7F1AE329A10D9C0061EB40 /* View Modifiers.swift */,
@@ -648,6 +651,7 @@
 				1FA8F87E28367B7A00394B59 /* BubbleNote.swift in Sources */,
 				1F38A00429B9000D009AD543 /* yPositionTracker.swift in Sources */,
 				1F5A0F6C282641D00075E86B /* NoSessionsAlertView.swift in Sources */,
+				1F04768D29BB073000641CDC /* SecondsLabel.swift in Sources */,
 				1F542F92286D757000403F13 /* StickyNoteList.swift in Sources */,
 				1F695087287D737600CC9FF4 /* SDButton.swift in Sources */,
 				1F74878D286ED1B10092674F /* StartInfoView.swift in Sources */,

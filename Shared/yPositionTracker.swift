@@ -27,7 +27,6 @@ struct yPositionTracker: View {
                                 let originY = geo.frame(in: .named("circle")).origin.y
                                 if Self.initial == nil {
                                     Self.initial = originY
-                                    print("set initial \(Self.initial)")
                                 }
                                 let offset = originY - Self.initial
                                 print("yOffset ", offset)

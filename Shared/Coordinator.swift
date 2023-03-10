@@ -47,6 +47,7 @@ class BubbleCellCoordinator {
                                                                  components.hundredths)
                                 }
                             }
+                            
                         case .start:
                             self.refresh = false
                             self.publisher
@@ -124,18 +125,14 @@ class BubbleCellCoordinator {
                     DispatchQueue.main.async {
                         self.components.hr = hrValue
                         if intValue == 3600 || self.refresh {
-                            withAnimation {
-                                self.opacity.update(value)
-                            }
+                            withAnimation { self.opacity.update(value) }
                         }
                     }
                 }
             }
             
             //send second
-            DispatchQueue.main.async {
-                self.components.sec = String(secValue)
-            }
+            DispatchQueue.main.async { self.components.sec = String(secValue) }
             
             self.refresh = false
         }
@@ -143,7 +140,6 @@ class BubbleCellCoordinator {
     } //4
     
     // MARK: - Publishers 1
-        
     private lazy var publisher =
     NotificationCenter.Publisher(center: .default, name: .bubbleTimerSignal)
     
