@@ -71,6 +71,7 @@ struct BubbleList: View {
                     RefresherView()
                 }
                 .refreshable {
+                    //allow pull-down on table if at least one pinned bubble available
                     guard secretary.bubblesReport.pinned > 0 else { return }
                     
                     secretary.showFavoritesOnly.toggle()
