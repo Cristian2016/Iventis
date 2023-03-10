@@ -719,12 +719,34 @@ extension ViewModel {
         }
     }
     
-    func toggleSDBubble(_ mode:SDBMode) {
-        switch mode {
-            case .start:
-                break
-            case .pause:
-                break
+    func toggleSDBubble(_ bubble:Bubble?) {
+        guard
+            let bubble = bubble,
+            let sdb = bubble.startDelayBubble else { return }
+        
+        let bContext = controller.bContext
+        let objID = sdb.objectID
+        
+        bContext.perform {
+            let theSDB = self.controller.grabObj(objID) as! StartDelayBubble
+            
+            //figure out if it should start or pause
+            switch theSDB.state {
+                case .brandNew, .paused: //changes to .running
+                    let pair = SDBPair(context: theSDB.managedObjectContext!)
+                    pair.start = Date()
+                    theSDB.addToPairs(pair)
+                    
+                case .running: //changes to paused
+                    let lastPair = theSDB.pairs_.last!
+                    
+                    //close lastPair
+                    lastPair.pause = Date()
+            }
+            
+            self.controller.save(bContext) {
+                print(theSDB.pairs_.compactMap { $0.pause }.count)
+            }
         }
     }
     

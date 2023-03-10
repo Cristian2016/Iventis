@@ -11,5 +11,7 @@ import CoreData
 
 
 public class SDBPair: NSManagedObject {
-
+    deinit {
+        print(#function, "SDBPair")
+    }
 }

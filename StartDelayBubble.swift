@@ -27,5 +27,6 @@ public class StartDelayBubble: NSManagedObject {
     
     var pairs_:[SDBPair] {
         get { pairs?.array as? [SDBPair] ?? [] }
+        set { pairs = NSOrderedSet(array: newValue) }
     }
 }

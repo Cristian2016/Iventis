@@ -110,6 +110,7 @@ struct SDButton: View {
     }
     func toggleStart() {
         isTapped.toggle()
+        viewModel.toggleSDBubble(bubble)
     }
     
     init?(_ bubble:Bubble?) {
