@@ -16,6 +16,8 @@ struct SDButton: View {
     @State var offset:CGSize = .zero //drag view around
     @State var isTapped = false
     
+    @State private var show = false
+    
     let deleteTriggerOffset = CGFloat(180)
     var deleteLabelVisible:Bool { abs(offset.width) > 120 }
     var shouldDelete:Bool { abs(offset.width) >= deleteTriggerOffset }
@@ -25,14 +27,14 @@ struct SDButton: View {
     
     var body: some View {
         ZStack {
-            if let sdb = bubble.startDelayBubble {
+            if show {
                 content
                 //layout
                     .overlay {
                         Rectangle().fill(.clear)
                             .aspectRatio(2.2, contentMode: .fit)
                             .overlay {
-                                Text("-\(sdb.currentClock.shortString(by: 0))")
+                                Text("-\(bubble.startDelayBubble!.currentClock.shortString(by: 0))")
                                     .font(.system(size: 400))
                                     .lineLimit(1)
                                     .minimumScaleFactor(0.1)
@@ -51,6 +53,10 @@ struct SDButton: View {
             }
         }
         .scaleEffect(x: metrics.circleScale * 0.85, y: metrics.circleScale * 0.85)
+        .onReceive(bubble.objectWillChange) { _ in
+            let sdbNotSet = bubble.startDelayBubble == nil
+            show = sdbNotSet ? false : true
+        }
     }
     
     // MARK: - Lego

@@ -717,7 +717,6 @@ extension ViewModel {
             DispatchQueue.main.async {
                 bubble.objectWillChange.send()
             }
-            
         }
     }
 }
