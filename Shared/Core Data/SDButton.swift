@@ -26,7 +26,6 @@ struct SDButton: View {
     var body: some View {
         ZStack {
             if let sdb = bubble.startDelayBubble {
-                deleteText
                 content
                 //layout
                     .overlay {
@@ -51,7 +50,7 @@ struct SDButton: View {
                     .onTapGesture { toggleStart() }
             }
         }
-        .scaleEffect(x: metrics.circleScale, y: metrics.circleScale)
+        .scaleEffect(x: metrics.circleScale * 0.85, y: metrics.circleScale * 0.85)
     }
     
     // MARK: - Lego
@@ -92,6 +91,11 @@ struct SDButton: View {
                 if shouldDelete {
                     UserFeedback.doubleHaptic(.heavy)
                     deleteTriggered = true
+                    viewModel.removeStartDelay(for: bubble)
+                    delayExecution(.now() + 0.1) {
+                        deleteTriggered = false
+                        offset = .zero
+                    }
                 }
             }
             .onEnded { _ in withAnimation { offset = .zero } }
@@ -100,8 +104,9 @@ struct SDButton: View {
         LongPressGesture()
             .onEnded { _ in
                 
-                //UI and haptic
+                //UserFeedback
                 UserFeedback.doubleHaptic(.heavy)
+                
                 isTapped = false
             }
     }

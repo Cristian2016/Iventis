@@ -699,6 +699,7 @@ extension ViewModel {
             guard let self = self else { return }
             
             let thisBubble = self.controller.grabObj(objID) as! Bubble
+            
             if let sdb = thisBubble.startDelayBubble { //set existing SDB
                 sdb.initialClock = delay
                 sdb.currentClock = delay
