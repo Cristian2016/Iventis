@@ -71,9 +71,7 @@ struct BubbleList: View {
                     RefresherView()
                 }
                 .refreshable {
-                    guard secretary.bubblesReport.ordinary != 0 &&
-                            secretary.bubblesReport.pinned > 0
-                    else { return }
+                    guard secretary.bubblesReport.pinned > 0 else { return }
                     
                     secretary.showFavoritesOnly.toggle()
                     viewModel.refreshOrdinaryBubbles()
