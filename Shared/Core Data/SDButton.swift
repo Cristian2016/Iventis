@@ -28,34 +28,41 @@ struct SDButton: View {
     var body: some View {
         ZStack {
             if show {
-                content
-                //layout
-                    .overlay {
-                        Rectangle().fill(.clear)
-                            .aspectRatio(2.2, contentMode: .fit)
-                            .overlay {
-                                Text("-\(bubble.startDelayBubble!.currentClock.shortString(by: 0))")
-                                    .font(.system(size: 400))
-                                    .lineLimit(1)
-                                    .minimumScaleFactor(0.1)
-                                    .foregroundColor(.black)
-                            }
-                    }
-                
-                    .offset(offset)
-                //animated property and animation
-                    .scaleEffect(isTapped ? 0.9 : 1.0)
-                    .animation(.spring(response: 0.5).repeatForever(), value: isTapped)
-                //gestures
-                    .gesture(dragGesture)
-                    .gesture(longPressGesture)
-                    .onTapGesture { toggleStart() }
+                ZStack {
+                    content
+                    //layout
+                        .overlay {
+                            Rectangle().fill(.clear)
+                                .aspectRatio(2.2, contentMode: .fit)
+                                .overlay {
+                                    if let sdb = bubble.startDelayBubble {
+                                        Text("-\(sdb.currentClock.shortString(by: 0))")
+                                            .font(.system(size: 400))
+                                            .lineLimit(1)
+                                            .minimumScaleFactor(0.1)
+                                            .foregroundColor(.black)
+                                    }
+                                }
+                        }
+                        .offset(offset)
+                    //animated property and animation
+                        .scaleEffect(isTapped ? 0.9 : 1.0)
+                        .animation(.spring(response: 0.5).repeatForever(), value: isTapped)
+                    //gestures
+                        .gesture(dragGesture)
+                        .gesture(longPressGesture)
+                        .onTapGesture { toggleStart() }
+                }
+                .scaleEffect(x: metrics.circleScale * 0.85, y: metrics.circleScale * 0.85)
             }
         }
-        .scaleEffect(x: metrics.circleScale * 0.85, y: metrics.circleScale * 0.85)
         .onReceive(bubble.objectWillChange) { _ in
             let sdbNotSet = bubble.startDelayBubble == nil
-            show = sdbNotSet ? false : true
+            
+            withAnimation {
+                show = sdbNotSet ? false : true
+                print("show \(show)")
+            }
         }
     }
     
