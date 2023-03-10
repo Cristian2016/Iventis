@@ -703,6 +703,7 @@ extension ViewModel {
             if let sdb = thisBubble.startDelayBubble { //set existing SDB
                 sdb.initialClock = delay
                 sdb.currentClock = delay
+                sdb.objectWillChange.send()
             } else { //create SDB
                 let sdb = StartDelayBubble(context: bContext)
                 sdb.created = Date()

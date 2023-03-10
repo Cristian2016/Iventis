@@ -11,7 +11,7 @@ import MyPackage
 ///StartDelayBubbleCell
 struct SDButton: View {
     @EnvironmentObject var viewModel:ViewModel
-    @StateObject private var  bubble:Bubble
+    @StateObject private var  sdb:StartDelayBubble
     
     @State var offset:CGSize = .zero //drag view around
     @State var isTapped = false
@@ -25,30 +25,28 @@ struct SDButton: View {
     
     var body: some View {
         ZStack {
-            if let sdb = bubble.startDelayBubble {
-                content
-                //layout
-                    .overlay {
-                        Rectangle().fill(.clear)
-                            .aspectRatio(2.2, contentMode: .fit)
-                            .overlay {
-                                Text("-\(sdb.currentClock.shortString(by: 0))")
-                                    .font(.system(size: 400))
-                                    .lineLimit(1)
-                                    .minimumScaleFactor(0.1)
-                                    .foregroundColor(.black)
-                            }
-                    }
-
-                    .offset(offset)
-                //animated property and animation
-                    .scaleEffect(isTapped ? 0.9 : 1.0)
-                    .animation(.spring(response: 0.5).repeatForever(), value: isTapped)
-                //gestures
-                    .gesture(dragGesture)
-                    .gesture(longPressGesture)
-                    .onTapGesture { toggleStart() }
-            }
+            content
+            //layout
+                .overlay {
+                    Rectangle().fill(.clear)
+                        .aspectRatio(2.2, contentMode: .fit)
+                        .overlay {
+                            Text("-\(sdb.currentClock.shortString(by: 0))")
+                                .font(.system(size: 400))
+                                .lineLimit(1)
+                                .minimumScaleFactor(0.1)
+                                .foregroundColor(.black)
+                        }
+                }
+            
+                .offset(offset)
+            //animated property and animation
+                .scaleEffect(isTapped ? 0.9 : 1.0)
+                .animation(.spring(response: 0.5).repeatForever(), value: isTapped)
+            //gestures
+                .gesture(dragGesture)
+                .gesture(longPressGesture)
+                .onTapGesture { toggleStart() }
         }
         .scaleEffect(x: metrics.circleScale * 0.85, y: metrics.circleScale * 0.85)
     }
@@ -91,7 +89,7 @@ struct SDButton: View {
                 if shouldDelete {
                     UserFeedback.doubleHaptic(.heavy)
                     deleteTriggered = true
-                    viewModel.removeStartDelay(for: bubble)
+                    viewModel.removeStartDelay(for: sdb.bubble!)
                     delayExecution(.now() + 0.1) {
                         deleteTriggered = false
                         offset = .zero
@@ -115,8 +113,12 @@ struct SDButton: View {
     }
     
     init?(_ bubble:Bubble?) {
-        guard let bubble = bubble else { return nil }
-        _bubble = StateObject(wrappedValue: bubble)
+        guard
+            let bubble = bubble,
+            bubble.startDelayBubble != nil
+        else { return nil }
+        
+        _sdb = StateObject(wrappedValue: bubble.startDelayBubble!)
     }
 }
 
