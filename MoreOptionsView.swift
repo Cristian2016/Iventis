@@ -85,7 +85,7 @@ struct MoreOptionsView: View {
             if let bubble = $0 {
                 let color = Color.bubbleColor(forName: bubble.color)
                 let initialStartDelay = Int(bubble.startDelay)
-                
+                                
                 input = Input(bubble: bubble,
                               initialBubbleColor: color,
                               initialStartDelay: initialStartDelay,
@@ -176,6 +176,7 @@ struct MoreOptionsView: View {
          save CoreData context*/
         if input!.initialStartDelay != input!.userEditedDelay {
             UserFeedback.singleHaptic(.medium)
+            viewModel.setStartDelay(Float(input!.userEditedDelay), for: input?.bubble)
         }
         dismiss()
     }

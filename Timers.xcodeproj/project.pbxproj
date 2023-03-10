@@ -12,6 +12,7 @@
 		1F0373C228DEE6F7005CE8D3 /* AlwaysOnDisplayConfirmationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F0373C128DEE6F7005CE8D3 /* AlwaysOnDisplayConfirmationView.swift */; };
 		1F0373C628DF516F005CE8D3 /* OnLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F0373C528DF516F005CE8D3 /* OnLabel.swift */; };
 		1F04768D29BB073000641CDC /* SecondsLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F04768C29BB073000641CDC /* SecondsLabel.swift */; };
+		1F04768F29BB20F600641CDC /* StartDelayButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F04768E29BB20F600641CDC /* StartDelayButton.swift */; };
 		1F05B7C82989158E0022FD23 /* BorderlessLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F05B7C72989158E0022FD23 /* BorderlessLabel.swift */; };
 		1F0FD40229A4CD090097FF7F /* ScrollToTopButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F0FD40129A4CD090097FF7F /* ScrollToTopButton.swift */; };
 		1F0FD40629A4D93D0097FF7F /* DetailViewInfoButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F0FD40529A4D93D0097FF7F /* DetailViewInfoButton.swift */; };
@@ -107,7 +108,6 @@
 		1FC08DC929A35B6500E25D79 /* PairBubbleCellCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FC08DC829A35B6500E25D79 /* PairBubbleCellCoordinator.swift */; };
 		1FC0D9C129828D23004779E0 /* ConfirmView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FC0D9C029828D23004779E0 /* ConfirmView.swift */; };
 		1FC70BB129807BAB007CD1E6 /* LayoutViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FC70BB029807BAB007CD1E6 /* LayoutViewModel.swift */; };
-		1FCF01B3287CBA74009DC95C /* DelayStartSymbol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FCF01B2287CBA74009DC95C /* DelayStartSymbol.swift */; };
 		1FCF0C662816F3F600AA1FAA /* EmptyListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FCF0C652816F3F600AA1FAA /* EmptyListView.swift */; };
 		1FD2DD972869AB4900831978 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1F5F4A4D28093FAF00AF3442 /* Assets.xcassets */; };
 		1FE163AE280EE6F40050C6F5 /* LeftStrip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FE163AD280EE6F40050C6F5 /* LeftStrip.swift */; };
@@ -154,6 +154,7 @@
 		1F0373C128DEE6F7005CE8D3 /* AlwaysOnDisplayConfirmationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlwaysOnDisplayConfirmationView.swift; sourceTree = "<group>"; };
 		1F0373C528DF516F005CE8D3 /* OnLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnLabel.swift; sourceTree = "<group>"; };
 		1F04768C29BB073000641CDC /* SecondsLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondsLabel.swift; sourceTree = "<group>"; };
+		1F04768E29BB20F600641CDC /* StartDelayButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartDelayButton.swift; sourceTree = SOURCE_ROOT; };
 		1F05B7C72989158E0022FD23 /* BorderlessLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BorderlessLabel.swift; sourceTree = "<group>"; };
 		1F0FD40129A4CD090097FF7F /* ScrollToTopButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollToTopButton.swift; sourceTree = SOURCE_ROOT; };
 		1F0FD40529A4D93D0097FF7F /* DetailViewInfoButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewInfoButton.swift; sourceTree = "<group>"; };
@@ -250,7 +251,6 @@
 		1FC08DC829A35B6500E25D79 /* PairBubbleCellCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PairBubbleCellCoordinator.swift; sourceTree = SOURCE_ROOT; };
 		1FC0D9C029828D23004779E0 /* ConfirmView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfirmView.swift; sourceTree = "<group>"; };
 		1FC70BB029807BAB007CD1E6 /* LayoutViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutViewModel.swift; sourceTree = "<group>"; };
-		1FCF01B2287CBA74009DC95C /* DelayStartSymbol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DelayStartSymbol.swift; sourceTree = "<group>"; };
 		1FCF0C652816F3F600AA1FAA /* EmptyListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyListView.swift; sourceTree = "<group>"; };
 		1FE163AD280EE6F40050C6F5 /* LeftStrip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftStrip.swift; sourceTree = "<group>"; };
 		1FE3B6F62983ECBF00B9C5D0 /* Explanations.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = Explanations.rtf; sourceTree = "<group>"; };
@@ -399,6 +399,7 @@
 		1F5F4A4728093FAD00AF3442 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				1F04768E29BB20F600641CDC /* StartDelayButton.swift */,
 				1F38A00329B9000D009AD543 /* yPositionTracker.swift */,
 				1F83A44E29A965D90058E6E2 /* DigitsView.swift */,
 				1F991A6F29A7545C0045B04C /* TopCellDurationView.swift */,
@@ -456,7 +457,6 @@
 				1FA1F39D2981CFE6000A50F5 /* Persistence.swift */,
 				1F9BE0A8280BE14100F87EFA /* PaletteView.swift */,
 				1F9BE0AC280C6AB000F87EFA /* TapHold.swift */,
-				1FCF01B2287CBA74009DC95C /* DelayStartSymbol.swift */,
 				1F695086287D737600CC9FF4 /* SDButton.swift */,
 				1F5F4A6D28093FF800AF3442 /* Model.xcdatamodeld */,
 				1F5F4A712809409600AF3442 /* Bubble.swift */,
@@ -660,7 +660,6 @@
 				1F0373C028DEDD97005CE8D3 /* ConfirmationView.swift in Sources */,
 				1FE163AE280EE6F40050C6F5 /* LeftStrip.swift in Sources */,
 				1F641FFE281FF70100413E31 /* BottomDetailView.swift in Sources */,
-				1FCF01B3287CBA74009DC95C /* DelayStartSymbol.swift in Sources */,
 				1FF5AC3A29A9EDC4000DD0E2 /* NeedlePositionKey.swift in Sources */,
 				1FF37CAE298BC7DF00AF0EC8 /* SmallTextHint.swift in Sources */,
 				1F48F55A286AE5B30071386A /* EmptyNote_InfoView.swift in Sources */,
@@ -686,6 +685,7 @@
 				1F18B460281FAABF0080ADA6 /* TopCell.swift in Sources */,
 				1FAD1576298A5A6C001139C6 /* AddNoteButton.swift in Sources */,
 				1F5F4A5D28093FAF00AF3442 /* TimersApp.swift in Sources */,
+				1F04768F29BB20F600641CDC /* StartDelayButton.swift in Sources */,
 				1F377E1F287EB2F000E43598 /* AutoLockButton.swift in Sources */,
 				1FCF0C662816F3F600AA1FAA /* EmptyListView.swift in Sources */,
 				1F4326B1282AFB19002B6092 /* ScaleDownButton.swift in Sources */,

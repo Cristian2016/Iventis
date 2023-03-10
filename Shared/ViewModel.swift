@@ -672,4 +672,19 @@ extension ViewModel {
             default: return
         }
     }
+    
+    func setStartDelay(_ delay:Float, for bubble:Bubble?) {
+        guard let bubble = bubble else { return }
+        
+        let bContext = controller.bContext
+        let objID = bubble.objectID
+        
+        bContext.perform { [weak self] in
+            guard let self = self else { return }
+            
+            let thisBubble = self.controller.grabObj(objID) as! Bubble
+            thisBubble.startDelay = delay
+            controller.save(bContext)
+        }
+    }
 }

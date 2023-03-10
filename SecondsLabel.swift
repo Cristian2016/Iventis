@@ -26,6 +26,9 @@ struct SecondsLabel: View {
                                 .minimumScaleFactor(0.1)
                         }
                 }
+                .overlay {
+                    StartDelayButton(bubble: bubble)
+                }
                 .onReceive(bubble.coordinator.$components) { sec = $0.sec }
         }
     }
