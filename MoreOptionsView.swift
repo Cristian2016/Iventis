@@ -162,6 +162,7 @@ struct MoreOptionsView: View {
                 if input!.userEditedDelay != 0 {
                     UserFeedback.doubleHaptic(.heavy)
                     input!.userEditedDelay = 0
+                    viewModel.removeStartDelay(for: input?.bubble)
                 }
             }
     }
