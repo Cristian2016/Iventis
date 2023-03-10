@@ -26,6 +26,12 @@ class BubbleCellCoordinator {
         
         DispatchQueue.global().async {
             switch moment {
+                case .showAll:
+                    if bubble.state == .running && !bubble.isPinned {
+                        self.refresh = true
+                        print("refresh for \(bubble.color ?? "pula color")")
+                    }
+                    
                 case .automatic:
                     DispatchQueue.main.async { self.components.hundredths = "" }
                     self.refresh = true
@@ -212,6 +218,7 @@ extension BubbleCellCoordinator {
     enum Moment {
         case user(Action)
         case automatic
+        case showAll //show all bubbles, including the ordinary ones
     }
     
     enum Action {

@@ -161,6 +161,15 @@ class ViewModel: ObservableObject {
     // MARK: - Little Helpers
     var fiveSecondsBubble:Bubble? { bubble(for: secretary.addNoteButton_bRank) }
     
+    func refreshOrdinaryBubbles(_ ranks:[Int]) {
+        DispatchQueue.global().async {
+           let bubbles = ranks.compactMap { self.bubble(for: $0) }
+            bubbles.forEach {
+                $0.coordinator.update(.showAll)
+            }
+        }
+    }
+    
     // MARK: - Init
     init() {
         observe_ApplicationActive()

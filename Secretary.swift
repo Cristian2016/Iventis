@@ -10,9 +10,6 @@ import SwiftUI
 import MyPackage
 
 class Secretary {
-    private init() {
-        print(#function, " Secretary")
-    }
     static let shared = Secretary()
     
     // MARK: - Publishers
@@ -180,6 +177,9 @@ class Secretary {
                 }
         }
     }
+    
+    // MARK: - Init/Deinit
+    private init() {}
 }
 
 extension Secretary {

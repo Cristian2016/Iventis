@@ -76,6 +76,11 @@ struct BubbleList: View {
                     else { return }
                     
                     secretary.showFavoritesOnly.toggle()
+                    if !secretary.showFavoritesOnly {
+                        let bubblesToRefresh = secretary
+                            .bubblesReport.colors.map { Int($0.id) }
+                        viewModel.refreshOrdinaryBubbles(bubblesToRefresh)
+                    }
                 }
             }
             LeftStrip(isListEmpty)
