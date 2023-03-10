@@ -29,7 +29,7 @@ class BubbleCellCoordinator {
                 case .showAll:
                     if bubble.state == .running && !bubble.isPinned {
                         self.refresh = true
-                        print("refresh for \(bubble.color ?? "pula color")")
+//                        print("refresh for \(bubble.color ?? "pula color")")
                     }
                     
                 case .automatic:

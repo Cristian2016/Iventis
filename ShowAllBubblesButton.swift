@@ -37,6 +37,7 @@ struct RefresherView: View {
 }
 
 struct ShowAllBubblesButton: View {
+    @EnvironmentObject private var viewModel:ViewModel
     private let secretary = Secretary.shared
     @State private var showFavoritesOnly = false
     @State private var count = 0
@@ -79,5 +80,9 @@ struct ShowAllBubblesButton: View {
     }
     
     // MARK: -
-    private func showAllBubbles() { withAnimation { secretary.showFavoritesOnly = false }}
+    private func showAllBubbles() {
+        withAnimation { secretary.showFavoritesOnly = false }
+        let bubblesToRefresh = secretary.bubblesReport.colors.map { Int($0.id) }
+        viewModel.refreshOrdinaryBubbles(bubblesToRefresh)
+    }
 }
