@@ -82,7 +82,6 @@ struct ShowAllBubblesButton: View {
     // MARK: -
     private func showAllBubbles() {
         withAnimation { secretary.showFavoritesOnly = false }
-        let bubblesToRefresh = secretary.bubblesReport.colors.map { Int($0.id) }
-        viewModel.refreshOrdinaryBubbles(bubblesToRefresh)
+        viewModel.refreshOrdinaryBubbles()
     }
 }
