@@ -15,6 +15,10 @@ struct StartDelayButton: View {
         ZStack {
             if $bubble.startDelay.wrappedValue != 0 {
                 Circle()
+                    .fill(.red)
+                    .overlay {
+                        Text("\(Int(bubble.startDelay))")
+                    }
             }
         }
     }
