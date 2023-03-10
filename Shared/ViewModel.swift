@@ -673,6 +673,7 @@ extension ViewModel {
         }
     }
     
+    // MARK: - StartDelayBubble
     func removeStartDelay(for bubble:Bubble?)  {
         guard
             let bubble = bubble,
@@ -716,5 +717,19 @@ extension ViewModel {
             controller.save(bContext)
             DispatchQueue.main.async { bubble.objectWillChange.send() }
         }
+    }
+    
+    func toggleSDBubble(_ mode:SDBMode) {
+        switch mode {
+            case .start:
+                break
+            case .pause:
+                break
+        }
+    }
+    
+    enum SDBMode {
+        case start
+        case pause
     }
 }
