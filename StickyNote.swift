@@ -88,3 +88,23 @@ struct StickyNote<Content:View>: View {
         .opacity(deleteLabelVisible ? 1 : 0)
     }
 }
+
+struct DeleteConfirmationLabel: View {
+    @State private var deleteOffsetReached = false
+    @State private var deleteLabelVisible = false
+    
+    var body: some View {
+        Text(deleteOffsetReached ? "\(Image.checkmark) Done" : "\(Image.trash) Delete")
+        .transaction { $0.animation = nil } //1
+        .foregroundColor(.white)
+        .font(.system(size: 24).weight(.medium))
+        .padding()
+        .background {
+            RoundedRectangle(cornerRadius: 2)
+                .fill(deleteOffsetReached ? .green : .red)
+                .transaction { $0.animation = nil } //1
+                .frame(height: 44)
+        }
+        .opacity(deleteLabelVisible ? 1 : 0)
+    }
+}
