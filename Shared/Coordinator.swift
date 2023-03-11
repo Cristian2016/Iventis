@@ -153,6 +153,7 @@ class BubbleCellCoordinator {
         
     private var initialValue:Float {
         guard let bubble = bubble else { fatalError() }
+        
         if bubble.state == .running {
             let Δ = Date().timeIntervalSince(bubble.lastPair!.start!)
             let initialValue = bubble.currentClock + Float(Δ)

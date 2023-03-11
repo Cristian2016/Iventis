@@ -74,6 +74,13 @@ extension StartDelayBubble {
             self.sdb = sdb
             self.currentClock = sdb.currentClock
             observeActivePhase()
+            
+            //compute delta
+            if sdb.state == .running {
+                let elapsedSinceLastStart = Date().timeIntervalSince(sdb.pairs_.last!.start)
+                //let total = totalDurationOfAllPairs + elapsedSinceLastStart
+                //compare total to sdb.currentClock to know if overdue
+            }
         }
         
         deinit { NotificationCenter.default.removeObserver(self) }
