@@ -38,7 +38,10 @@ struct SDButton: View {
                     .animation(.spring(response: 0.5).repeatForever(), value: isTapped) //2
                     .gesture(dragGesture) //3
                     .onTapGesture { toggleStart() } //3
-                    .onReceive(sdb.coordinator.$currentClock) { sdbCurrentClock = $0 } //4
+                    .onReceive(sdb.coordinator.$currentClock) {
+                        sdbCurrentClock = $0
+                        print("new currentClock \($0)")
+                    } //4
             }
         }
         .scaleEffect(x: metrics.circleScale * 0.93, y: metrics.circleScale * 0.93)

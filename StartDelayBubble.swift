@@ -20,8 +20,9 @@ extension StartDelayBubble {
         private weak var sdb: StartDelayBubble?
         
         private func task() {
-//            print(#function)
-            
+            DispatchQueue.main.async {
+                self.currentClock -= 1
+            }
         }
         
         func update(_ moment:Moment) {
