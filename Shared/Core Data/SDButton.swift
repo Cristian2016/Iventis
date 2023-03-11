@@ -47,6 +47,7 @@ struct SDButton: View {
                 //gestures
                     .gesture(dragGesture)
                     .onTapGesture { toggleStart() }
+                //observing publishers
                     .onReceive(sdb.coordinator.$currentClock) { sdbCurrentClock = $0 }
             }
         }
