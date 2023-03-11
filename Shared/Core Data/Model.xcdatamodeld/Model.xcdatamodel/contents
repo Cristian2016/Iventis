@@ -46,6 +46,7 @@
         </uniquenessConstraints>
     </entity>
     <entity name="SDBPair" representedClassName=".SDBPair" syncable="YES">
+        <attribute name="duration" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="pause" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="start" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <relationship name="sdBubble" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="StartDelayBubble" inverseName="pairs" inverseEntity="StartDelayBubble"/>

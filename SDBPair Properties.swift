@@ -18,6 +18,7 @@ extension SDBPair {
 
     @NSManaged public var start: Date
     @NSManaged public var pause: Date?
+    @NSManaged public var duration: Float
     @NSManaged public var sdBubble: StartDelayBubble!
 
 }
