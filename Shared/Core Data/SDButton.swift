@@ -3,7 +3,10 @@
 //  Timers (iOS)
 //
 //  Created by Cristian Lapusan on 12.07.2022.
-//
+//1 offset is mutated by the drag gesture
+//2 animated property and animation
+//3 gestures
+//4 observing publishers
 
 import SwiftUI
 import MyPackage
@@ -34,15 +37,12 @@ struct SDButton: View {
                             .aspectRatio(2.2, contentMode: .fit)
                             .overlay { text }
                     }
-                    .offset(offset)
-                //animated property and animation
-                    .scaleEffect(isTapped ? 0.9 : 1.0)
-                    .animation(.spring(response: 0.5).repeatForever(), value: isTapped)
-                //gestures
-                    .gesture(dragGesture)
-                    .onTapGesture { toggleStart() }
-                //observing publishers
-                    .onReceive(sdb.coordinator.$currentClock) { sdbCurrentClock = $0 }
+                    .offset(offset) //1
+                    .scaleEffect(isTapped ? 0.9 : 1.0) //2
+                    .animation(.spring(response: 0.5).repeatForever(), value: isTapped) //2
+                    .gesture(dragGesture) //3
+                    .onTapGesture { toggleStart() } //3
+                    .onReceive(sdb.coordinator.$currentClock) { sdbCurrentClock = $0 } //4
             }
         }
         .scaleEffect(x: metrics.circleScale * 0.93, y: metrics.circleScale * 0.93)
