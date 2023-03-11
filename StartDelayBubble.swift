@@ -22,7 +22,6 @@ extension StartDelayBubble {
         private func task() {
             if currentClock > 0 {
                 DispatchQueue.main.async {
-                    self.currentClock -= 1
                 }
             } else {
                 cancellable = []
@@ -48,6 +47,7 @@ extension StartDelayBubble {
                             
                         case .pause:
                             cancellable = []
+                            currentClock = sdb!.currentClock
                             
                         case .reset: //sdb.currentClock has reached zero
                             cancellable = []
