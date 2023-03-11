@@ -747,10 +747,14 @@ extension ViewModel {
                 case .running: //changes to paused
                     let lastPair = theSDB.pairs_.last!
                     
-                    //close lastPair and compute duration
+                    //close lastPair and compute pair.duration
                     lastPair.pause = Date()
                     lastPair.duration = lastPair.computeDuration()
-                    print("lastPair duration \(lastPair.duration)")
+                    
+                    //update sdb.totalDuration
+                    theSDB.totalDuration += lastPair.duration
+                    
+                    print("lastPair duration \(lastPair.duration), total \(theSDB.totalDuration)")
                     
                     self.controller.save(bContext) {
                         DispatchQueue.main.async {
