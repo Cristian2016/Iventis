@@ -32,6 +32,7 @@ extension Notification.Name {
     static let doNotLetNeedleJump = Notification.Name("doNotLetNeedleJump")
     static let sizeNotification = Notification.Name("sizeNotification")
     static let frameNotification = Notification.Name("frameNotification")
+    static let didBecomeActive = UIApplication.didBecomeActiveNotification
 } //1 ViewModel
 
 extension Notification {

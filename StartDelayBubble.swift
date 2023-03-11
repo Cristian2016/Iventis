@@ -6,8 +6,9 @@
 //
 //
 
-import Foundation
 import CoreData
+import SwiftUI
+import Combine
 
 
 public class StartDelayBubble: NSManagedObject {
@@ -18,9 +19,24 @@ extension StartDelayBubble {
     class Coordinator {
         private weak var sdb: StartDelayBubble?
         
+        @Published private(set) var currentClock = -1
+        
+        private func observeActivePhase() {
+            let center = NotificationCenter.default
+            center.addObserver(forName: .didBecomeActive, object: nil, queue: nil) {
+                [weak self] _ in
+                
+                
+            }
+        }
+        
+        // MARK: - Init Deinit
         init(_ sdb:StartDelayBubble) {
             self.sdb = sdb
+            observeActivePhase()
         }
+        
+        deinit { NotificationCenter.default.removeObserver(self) }
     }
     
     enum State {
