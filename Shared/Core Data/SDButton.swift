@@ -27,8 +27,7 @@ struct SDButton: View {
     var body: some View {
         ZStack {
             if let sdb = bubble.startDelayBubble {
-                content
-                //layout
+                background
                     .overlay {
                         Rectangle()
                             .fill(.clear)
@@ -58,7 +57,7 @@ struct SDButton: View {
             .foregroundColor(.black)
     }
     
-    private var content:some View {
+    private var background:some View {
         ZStack {
             Circle()
                 .fill(Color.white)
