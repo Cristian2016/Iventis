@@ -750,6 +750,7 @@ extension ViewModel {
                     //close lastPair and compute duration
                     lastPair.pause = Date()
                     lastPair.duration = lastPair.computeDuration()
+                    print("lastPair duration \(lastPair.duration)")
                     
                     self.controller.save(bContext) {
                         DispatchQueue.main.async {

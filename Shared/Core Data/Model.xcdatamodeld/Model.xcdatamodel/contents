@@ -64,6 +64,7 @@
         <attribute name="created" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="currentClock" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="initialClock" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="totalDuration" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES"/>
         <relationship name="bubble" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Bubble" inverseName="startDelayBubble" inverseEntity="Bubble"/>
         <relationship name="pairs" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="SDBPair" inverseName="sdBubble" inverseEntity="SDBPair"/>
     </entity>

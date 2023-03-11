@@ -4,7 +4,8 @@
 //
 //  Created by Cristian Lapusan on 10.03.2023.
 //
-//
+//1 combined duration of duration of each pair for all pairs.
+//1 totalDuration = pair(0).duration + pair(1).duration + ... + pair(n).duration
 
 import Foundation
 import CoreData
@@ -18,6 +19,8 @@ extension StartDelayBubble {
 
     @NSManaged public var created: Date?
     @NSManaged public var initialClock: Float
+    
+    @NSManaged public var totalDuration: Float //1
     
     @NSManaged public var bubble: Bubble?
     
