@@ -4,7 +4,7 @@
 //
 //  Created by Cristian Lapusan on 10.03.2023.
 //
-//
+//1 each time this published property is set, publisher emits and any view with a receiver on it, will receive the value. ex: SDButton.onReceive (sdb.coordinator.$currentClock) { currentClock in }
 
 import CoreData
 import SwiftUI
@@ -48,7 +48,7 @@ extension StartDelayBubble {
             }
         }
         
-        @Published private(set) var currentClock:Float
+        @Published private(set) var currentClock:Float //1
         
         private lazy var publisher =
         NotificationCenter.Publisher(center: .default, name: .bubbleTimerSignal)
