@@ -204,7 +204,7 @@ extension ViewModel {
         
         let bContext = PersistenceController.shared.bContext
         
-        bContext.perform { [weak self] in
+        bContext.perform {
             let newBubble = Bubble(context: bContext)
             newBubble.created = Date()
             newBubble.kind = kind
@@ -222,8 +222,8 @@ extension ViewModel {
                 newBubble.note_ = note
                 newBubble.isNoteHidden = false
             }
-            self?.controller.save(bContext)
-            self?.secretary.updateBubblesReport(.create(newBubble))
+            self.controller.save(bContext)
+            self.secretary.updateBubblesReport(.create(newBubble))
         }
     } //8
     
@@ -267,9 +267,7 @@ extension ViewModel {
         
         switch bubble.state {
             case .brandNew: /* changes to .running */
-                bContext.perform { [weak self] in
-                    guard let self = self else { return }
-                    
+                bContext.perform {
                     let thisBubble = bContext.object(with: objID) as! Bubble
                     
                     //create newPair, newSession and add them to the newBubble
@@ -327,9 +325,7 @@ extension ViewModel {
                 }
                 
             case .running: /* changes to .paused */
-                bContext.perform { [weak self] in
-                    guard let self = self else { return }
-                    
+                bContext.perform {
                     let thisBubble = self.controller.grabObj(objID) as! Bubble
                     let currentPair = thisBubble.lastPair
                     currentPair!.pause = Date()
@@ -361,9 +357,7 @@ extension ViewModel {
             let objID = bubble.objectID
             let bContext = self.controller.bContext
             
-            bContext.perform { [weak self] in
-                guard let self = self else { return }
-                
+            bContext.perform {
                 let thisBubble = bContext.object(with: objID) as! Bubble
                 
                 thisBubble.created = Date()
@@ -429,13 +423,11 @@ extension ViewModel {
             let bContext = self.controller.bContext
             let objID = bubble.objectID
             
-            bContext.perform { [weak self] in
-                guard let self = self else { return }
-                
+            bContext.perform {
                 let thisBubble = self.controller.grabObj(objID) as! Bubble
                 thisBubble.color = newColor
                 
-                secretary.updateBubblesReport(.colorChange(thisBubble))
+                self.secretary.updateBubblesReport(.colorChange(thisBubble))
                 
                 //save changes to CoreData using bContext and update UI
                 self.controller.save(bContext) {
@@ -456,14 +448,10 @@ extension ViewModel {
         let bContext = self.controller.bContext
         let objID = bubble.objectID
         
-        bContext.perform { [weak self] in
-            guard let self = self else { return }
-            
+        bContext.perform {
             let thisBubble = self.controller.grabObj(objID) as! Bubble
             thisBubble.isPinned.toggle()
-            
-            secretary.updateBubblesReport(.pin(thisBubble))
-            
+            self.secretary.updateBubblesReport(.pin(thisBubble))
             self.controller.save(bContext)
         }
     }
@@ -508,9 +496,7 @@ extension ViewModel {
         let objID = bubble.objectID
         let bContext = controller.bContext
         
-        bContext.perform {  [weak self] in
-            guard let self = self else { return }
-            
+        bContext.perform {
             let thisBubble = self.controller.grabObj(objID) as! Bubble
             
             //reset bubble clock
@@ -560,10 +546,10 @@ extension ViewModel {
             let bContext = self.controller.bContext
             let objID = savedNote.objectID
             
-            bContext.perform { [weak self] in
+            bContext.perform {
                 let thisNote = bContext.object(with: objID) as! PairSavedNote
                 bContext.delete(thisNote)
-                self?.controller.save(bContext)
+                self.controller.save(bContext)
             }
         }
     }
@@ -574,9 +560,7 @@ extension ViewModel {
         let objID = bubble.objectID
         let bContext = controller.bContext
         
-        bContext.perform {  [weak self] in
-            guard let self = self else { return }
-            
+        bContext.perform {
             let thisBubble = self.controller.grabObj(objID) as! Bubble
             thisBubble.note = nil
             
@@ -596,9 +580,7 @@ extension ViewModel {
         let objID = pair.objectID
         let bContext = controller.bContext
         
-        bContext.perform { [weak self] in
-            guard let self = self else { return }
-            
+        bContext.perform {
             let thisPair = self.controller.grabObj(objID) as! Pair
             thisPair.note = nil
             
@@ -621,9 +603,7 @@ extension ViewModel {
                 let bubble = object as! Bubble
                 let objID = bubble.objectID
                 
-                bubble.managedObjectContext?.perform {  [weak self] in
-                    guard let self = self else { return }
-                    
+                bubble.managedObjectContext?.perform {
                     note.removeWhiteSpaceAtBothEnds()
                     let theBubble = PersistenceController.shared.grabObj(objID) as! Bubble
                     theBubble.note = note
@@ -646,9 +626,7 @@ extension ViewModel {
                 let pair = object as! Pair
                 
                     //it's bContext since pair is coming from PairStickyNoteLost.saveNoteToCoredata
-                pair.managedObjectContext?.perform {  [weak self] in
-                    guard let self = self else { return }
-                    
+                pair.managedObjectContext?.perform {
                     note.removeWhiteSpaceAtBothEnds()
                     
                     pair.note = note
@@ -695,9 +673,7 @@ extension ViewModel {
         let bContext = controller.bContext
         let objID = bubble.objectID
         
-        bContext.perform { [weak self] in
-            guard let self = self else { return }
-            
+        bContext.perform {
             let thisBubble = self.controller.grabObj(objID) as! Bubble
             
             if let sdb = thisBubble.startDelayBubble { //set existing SDB
@@ -712,7 +688,7 @@ extension ViewModel {
                 thisBubble.startDelayBubble = sdb
             }
             
-            controller.save(bContext)
+            self.controller.save(bContext)
             DispatchQueue.main.async { bubble.objectWillChange.send() }
         }
     }
@@ -739,9 +715,7 @@ extension ViewModel {
                     theSDB.addToPairs(pair)
                     
                     self.controller.save(bContext) {
-                        DispatchQueue.main.async {
-                            sdb.coordinator.update(.user(.start))
-                        }
+                        DispatchQueue.main.async { sdb.coordinator.update(.user(.start)) }
                     }
                     
                 case .running: //changes to paused

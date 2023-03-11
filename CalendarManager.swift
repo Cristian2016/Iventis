@@ -90,10 +90,10 @@ extension CalendarManager {
                         
         let bContext = bubble.managedObjectContext //⚠️  it is already the backgroundContext
         
-        bContext?.perform { [weak self] in
+        bContext?.perform {
             bubble.sessions_.forEach { session in
                 if session.isEnded && !session.isEventified {
-                    self?.createNewEvent(for: session)
+                    self.createNewEvent(for: session)
                 }
             }
             PersistenceController.shared.save(bContext)
@@ -121,7 +121,6 @@ extension CalendarManager {
         
         //since this method is called on bThread, make sure to save CoreData on mThread
         session.managedObjectContext?.perform {
-            print(#function, " save session.isEventified")
             session.isEventified = true
             PersistenceController.shared.save(session.managedObjectContext!)
         }

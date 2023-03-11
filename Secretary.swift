@@ -100,9 +100,7 @@ class Secretary {
             case .appLaunch:
                 let bContext = PersistenceController.shared.bContext
                 
-                bContext.perform { [weak self] in
-                    guard let self = self else { return }
-                    
+                bContext.perform { //no need to use [weak self]
                     let request = Bubble.fetchRequest()
                     guard let bubbles = try? bContext.fetch(request) else { fatalError() }
                     
@@ -119,12 +117,12 @@ class Secretary {
                     let ordinaryBubbleRanks = ordinaryBubbles
                         .map { Int($0.rank) }
                     
-                    bubblesReport.ordinary = ordinaryBubbleColors.count
-                    bubblesReport.pinned = bubblesCount - bubblesReport.ordinary
-                    bubblesReport.colors = ordinaryBubbleColors
-                    bubblesReport.ordinaryRanks = ordinaryBubbleRanks
+                    self.bubblesReport.ordinary = ordinaryBubbleColors.count
+                    self.bubblesReport.pinned = bubblesCount - self.bubblesReport.ordinary
+                    self.bubblesReport.colors = ordinaryBubbleColors
+                    self.bubblesReport.ordinaryRanks = ordinaryBubbleRanks
                     
-                    isBubblesReportReady = true
+                    self.isBubblesReportReady = true
                 }
             case .create(let bubble):
                 bubblesReport.ordinary += 1
