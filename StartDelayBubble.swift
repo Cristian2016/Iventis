@@ -19,24 +19,29 @@ extension StartDelayBubble {
     class Coordinator {
         private weak var sdb: StartDelayBubble?
         
-        private func task() { print(#function)
+        private func task() {
+//            print(#function)
             
         }
         
         func update(_ moment:Moment) {
             switch moment {
-                case .automatic: break
+                case .automatic: //when app lanches
+                    self.publisher
+                        .sink { [weak self] _ in self?.task() }
+                        .store(in: &self.cancellable) //connect
+                    
                 case .user(let action) :
                     switch action {
                         case .start:
                             publisher
                                 .sink { [weak self] _ in self?.task() }
                                 .store(in: &cancellable)
-        
+                            
                         case .pause:
                             cancellable = []
                             
-                        case .reset:
+                        case .reset: //sdb.currentClock has reached zero
                             cancellable = []
                     }
             }
