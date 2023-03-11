@@ -20,8 +20,12 @@ extension StartDelayBubble {
         private weak var sdb: StartDelayBubble?
         
         private func task() {
-            DispatchQueue.main.async {
-                self.currentClock -= 1
+            if currentClock > 0 {
+                DispatchQueue.main.async {
+                    self.currentClock -= 1
+                }
+            } else {
+                cancellable = []
             }
         }
         
