@@ -30,15 +30,10 @@ struct SDButton: View {
                 content
                 //layout
                     .overlay {
-                        Rectangle().fill(.clear)
+                        Rectangle()
+                            .fill(.clear)
                             .aspectRatio(2.2, contentMode: .fit)
-                            .overlay {
-                                Text("-\(sdbCurrentClock.shortString(by: 0))")
-                                    .font(.system(size: 400))
-                                    .lineLimit(1)
-                                    .minimumScaleFactor(0.1)
-                                    .foregroundColor(.black)
-                            }
+                            .overlay { text }
                     }
                     .offset(offset)
                 //animated property and animation
@@ -55,6 +50,14 @@ struct SDButton: View {
     }
     
     // MARK: - Lego
+    private var text:some View {
+        Text("-\(sdbCurrentClock.shortString(by: 0))")
+            .font(.system(size: 400))
+            .lineLimit(1)
+            .minimumScaleFactor(0.1)
+            .foregroundColor(.black)
+    }
+    
     private var content:some View {
         ZStack {
             Circle()
