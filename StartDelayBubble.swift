@@ -19,19 +19,35 @@ extension StartDelayBubble {
     class Coordinator {
         private weak var sdb: StartDelayBubble?
         
+        private func task() { print(#function)
+            
+        }
+        
         func update(_ moment:Moment) {
             switch moment {
                 case .automatic: break
                 case .user(let action) :
                     switch action {
-                        case .start: break
-                        case .pause: break
-                        case .reset: break
+                        case .start:
+                            publisher
+                                .sink { [weak self] _ in self?.task() }
+                                .store(in: &cancellable)
+        
+                        case .pause:
+                            cancellable = []
+                            
+                        case .reset:
+                            cancellable = []
                     }
             }
         }
         
         @Published private(set) var currentClock:Float
+        
+        private lazy var publisher =
+        NotificationCenter.Publisher(center: .default, name: .bubbleTimerSignal)
+        
+        private var cancellable = Set<AnyCancellable>()
         
         private func observeActivePhase() {
             let center = NotificationCenter.default
