@@ -736,12 +736,14 @@ extension ViewModel {
                     let pair = SDBPair(context: theSDB.managedObjectContext!)
                     pair.start = Date()
                     theSDB.addToPairs(pair)
+                    theSDB.coordinator.update(.user(.start))
                     
                 case .running: //changes to paused
                     let lastPair = theSDB.pairs_.last!
                     
                     //close lastPair
                     lastPair.pause = Date()
+                    theSDB.coordinator.update(.user(.pause))
             }
             
             self.controller.save(bContext)

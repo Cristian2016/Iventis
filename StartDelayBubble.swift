@@ -19,7 +19,17 @@ extension StartDelayBubble {
     class Coordinator {
         private weak var sdb: StartDelayBubble?
         
-        
+        func update(_ moment:Moment) {
+            switch moment {
+                case .automatic: break
+                case .user(let action) :
+                    switch action {
+                        case .start: break
+                        case .pause: break
+                        case .reset: break
+                    }
+            }
+        }
         
         @Published private(set) var currentClock:Float
         
@@ -59,5 +69,16 @@ extension StartDelayBubble {
     var pairs_:[SDBPair] {
         get { pairs?.array as? [SDBPair] ?? [] }
         set { pairs = NSOrderedSet(array: newValue) }
+    }
+    
+    enum Moment {
+        case user(Action)
+        case automatic
+    }
+    
+    enum Action {
+        case start
+        case pause
+        case reset
     }
 }
