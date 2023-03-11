@@ -26,6 +26,9 @@ extension StartDelayBubble {
                 }
             } else {
                 cancellable = []
+                //notify viewModel that currentClock has reached zero
+                //viewModel will remove SDB
+                //viewModel starts bubble [toggleBubbleStart]
             }
         }
         
