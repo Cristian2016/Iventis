@@ -731,6 +731,7 @@ extension ViewModel {
             //figure out if it should start or pause
             switch theSDB.state {
                 case .finished: return
+                    
                 case .brandNew, .paused: //changes to .running
                     let pair = SDBPair(context: theSDB.managedObjectContext!)
                     pair.start = Date()
