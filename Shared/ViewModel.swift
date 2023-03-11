@@ -730,12 +730,14 @@ extension ViewModel {
             
             //figure out if it should start or pause
             switch theSDB.state {
-                case .finished: return
+                case .finished:
+                    return
                     
                 case .brandNew, .paused: //changes to .running
                     let pair = SDBPair(context: theSDB.managedObjectContext!)
                     pair.start = Date()
                     theSDB.addToPairs(pair)
+                    
                     self.controller.save(bContext) {
                         DispatchQueue.main.async {
                             sdb.coordinator.update(.user(.start))
@@ -745,8 +747,10 @@ extension ViewModel {
                 case .running: //changes to paused
                     let lastPair = theSDB.pairs_.last!
                     
-                    //close lastPair
+                    //close lastPair and compute duration
                     lastPair.pause = Date()
+                    lastPair.duration = lastPair.computeDuration()
+                    
                     self.controller.save(bContext) {
                         DispatchQueue.main.async {
                             sdb.coordinator.update(.user(.pause))

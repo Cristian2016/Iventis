@@ -15,7 +15,7 @@ public class SDBPair: NSManagedObject {
         print(#function, "SDBPair")
     }
     
-    func computeDuration() async -> Float {
+    func computeDuration() -> Float {
         Float(pause?.timeIntervalSince(self.start) ?? 0)
     }
 }
