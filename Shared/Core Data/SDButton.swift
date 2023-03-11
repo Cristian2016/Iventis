@@ -20,6 +20,7 @@ struct SDButton: View {
     var deleteLabelVisible:Bool { abs(offset.width) > 120 }
     var shouldDelete:Bool { abs(offset.width) >= deleteTriggerOffset }
     @State var deleteTriggered = false
+    @State private var sdbCurrentClock = Float(0)
     
     let metrics = BubbleCell.Metrics()
     
@@ -32,7 +33,7 @@ struct SDButton: View {
                         Rectangle().fill(.clear)
                             .aspectRatio(2.2, contentMode: .fit)
                             .overlay {
-                                Text("-\(sdb.currentClock.shortString(by: 0))")
+                                Text("-\(sdbCurrentClock.shortString(by: 0))")
                                     .font(.system(size: 400))
                                     .lineLimit(1)
                                     .minimumScaleFactor(0.1)
@@ -45,8 +46,8 @@ struct SDButton: View {
                     .animation(.spring(response: 0.5).repeatForever(), value: isTapped)
                 //gestures
                     .gesture(dragGesture)
-//                    .gesture(longPressGesture)
                     .onTapGesture { toggleStart() }
+                    .onReceive(sdb.coordinator.$currentClock) { sdbCurrentClock = $0 }
             }
         }
         .scaleEffect(x: metrics.circleScale * 0.93, y: metrics.circleScale * 0.93)

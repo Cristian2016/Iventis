@@ -167,9 +167,7 @@ class ViewModel: ObservableObject {
         DispatchQueue.global().async {
             if !self.secretary.showFavoritesOnly {
                 let bubbles = ranks.compactMap { self.bubble(for: $0) }
-                bubbles.forEach {
-                    $0.coordinator.update(.showAll)
-                }
+                bubbles.forEach { $0.coordinator.update(.showAll) }
             }
         }
     }

@@ -19,20 +19,19 @@ extension StartDelayBubble {
     class Coordinator {
         private weak var sdb: StartDelayBubble?
         
-        @Published private(set) var currentClock = -1
+        @Published private(set) var currentClock:Float
         
         private func observeActivePhase() {
             let center = NotificationCenter.default
             center.addObserver(forName: .didBecomeActive, object: nil, queue: nil) {
                 [weak self] _ in
-                
-                
             }
         }
         
         // MARK: - Init Deinit
         init(_ sdb:StartDelayBubble) {
             self.sdb = sdb
+            self.currentClock = sdb.currentClock
             observeActivePhase()
         }
         

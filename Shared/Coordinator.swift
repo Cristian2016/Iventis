@@ -164,7 +164,7 @@ class BubbleCellCoordinator {
     
     // MARK: - Observers
     private func observeActivePhase() {
-        NotificationCenter.default.addObserver(forName: UIApplication.didBecomeActiveNotification, object: nil, queue: nil) { [weak self] _ in
+        NotificationCenter.default.addObserver(forName: .didBecomeActive, object: nil, queue: nil) { [weak self] _ in
             
             guard
                 let bubble = self?.bubble,
