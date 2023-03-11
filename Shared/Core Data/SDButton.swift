@@ -32,9 +32,7 @@ struct SDButton: View {
             if let sdb = bubble.startDelayBubble {
                 background
                     .overlay {
-                        Rectangle()
-                            .fill(.clear)
-                            .aspectRatio(2.2, contentMode: .fit)
+                        textCorset
                             .overlay { text }
                     }
                     .offset(offset) //1
@@ -49,6 +47,12 @@ struct SDButton: View {
     }
     
     // MARK: - Lego
+    private var textCorset: some View {
+        Rectangle()
+            .fill(.clear)
+            .aspectRatio(2.2, contentMode: .fit)
+    }
+    
     private var text:some View {
         Text("-\(sdbCurrentClock.shortString(by: 0))")
             .font(.system(size: 400))
