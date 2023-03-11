@@ -732,6 +732,7 @@ extension ViewModel {
             
             //figure out if it should start or pause
             switch theSDB.state {
+                case .finished: return
                 case .brandNew, .paused: //changes to .running
                     let pair = SDBPair(context: theSDB.managedObjectContext!)
                     pair.start = Date()
@@ -744,9 +745,7 @@ extension ViewModel {
                     lastPair.pause = Date()
             }
             
-            self.controller.save(bContext) {
-                print(theSDB.pairs_.compactMap { $0.pause }.count)
-            }
+            self.controller.save(bContext)
         }
     }
     

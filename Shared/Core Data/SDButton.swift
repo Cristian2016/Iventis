@@ -45,7 +45,7 @@ struct SDButton: View {
                     .animation(.spring(response: 0.5).repeatForever(), value: isTapped)
                 //gestures
                     .gesture(dragGesture)
-                    .gesture(longPressGesture)
+//                    .gesture(longPressGesture)
                     .onTapGesture { toggleStart() }
             }
         }

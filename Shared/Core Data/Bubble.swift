@@ -82,9 +82,7 @@ extension Bubble {
             }
         }
     }
-}
-
-extension Bubble {
+    
     func updateCurrentClock(runningOnly:Bool) {
         if runningOnly {
             guard state == .running else { return }
@@ -93,9 +91,7 @@ extension Bubble {
             currentClock += elapsedSinceStart
         }
     } //1
-}
-
-extension Bubble {
+    
     var note_:String {
         get { note ?? "" }
         set { note = newValue }
