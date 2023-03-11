@@ -7,6 +7,7 @@
 //2 animated property and animation
 //3 gestures
 //4 observing publishers
+//5 textCage because it prevents text expanding too much
 
 import SwiftUI
 import MyPackage
@@ -32,7 +33,7 @@ struct SDButton: View {
             if let sdb = bubble.startDelayBubble {
                 background
                     .overlay {
-                        textCorset
+                        textCage
                             .overlay { text }
                     }
                     .offset(offset) //1
@@ -47,11 +48,11 @@ struct SDButton: View {
     }
     
     // MARK: - Lego
-    private var textCorset: some View {
+    private var textCage: some View {
         Rectangle()
             .fill(.clear)
             .aspectRatio(2.2, contentMode: .fit)
-    }
+    } //5
     
     private var text:some View {
         Text("-\(sdbCurrentClock.shortString(by: 0))")
