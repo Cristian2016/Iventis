@@ -32,10 +32,7 @@ struct SDButton: View {
         ZStack {
             if let sdb = bubble.startDelayBubble {
                 background
-                    .overlay {
-                        textCage
-                            .overlay { text }
-                    }
+                    .overlay { textCage.overlay { text }}
                     .offset(offset) //1
                     .scaleEffect(isTapped ? 0.9 : 1.0) //2
                     .animation(.spring(response: 0.5).repeatForever(), value: isTapped) //2
