@@ -176,6 +176,7 @@ class ViewModel: ObservableObject {
     init() {
         observe_ApplicationActive()
         observe_ApplicationBackground()
+        observe_KillSDB()
         
         secretary.updateBubblesReport(.appLaunch)
     }
@@ -736,50 +737,20 @@ extension ViewModel {
         }
     }
     
-    func resetSDB(_ bubble:Bubble?) {
-        //delete all SDBPairs and set sdb.currentClock to sdb.initialClock
-        guard
-            let bubble = bubble,
-            let sdb = bubble.startDelayBubble else { return }
-        
-        let bContext = controller.bContext
-        let objID = sdb.objectID
-        
-        bContext.perform {
-            let thisSDB = self.controller.grabObj(objID) as! StartDelayBubble
-            
-            thisSDB.currentClock = thisSDB.initialClock
-            
-            //batch-delete all sessions
-            let request:NSFetchRequest<NSFetchRequestResult> = SDBPair.fetchRequest()
-            request.predicate = NSPredicate(format: "sdBubble == %@", thisSDB) //⚠️ 10
-            
-            let batchDeleteRequest = NSBatchDeleteRequest(fetchRequest: request)
-            batchDeleteRequest.resultType = .resultTypeObjectIDs
-            
-            let result = try? bContext.execute(batchDeleteRequest)
-            
-            try? bContext.save()
-            DispatchQueue.main.async {
-                try? bubble.managedObjectContext?.save()
-            }
+    private func observe_KillSDB() {
+        let center = NotificationCenter.default
+        center.addObserver(forName: .killSDB, object: nil, queue: nil) {
+            [weak self] notification in
             
             guard
-                let deleteResult = result as? NSBatchDeleteResult,
-                let ids = deleteResult.result as? [NSManagedObjectID]
+                let rank = notification.userInfo?["rank"] as? Int64,
+                let bubble = self?.bubble(for: Int(rank))
             else { fatalError() }
             
-            let changes = [NSDeletedObjectsKey : ids]
-            
-            bContext.reset() //⚠️ 16
-            
-            delayExecution(self.delay) {
-                NSManagedObjectContext.mergeChanges(
-                    fromRemoteContextSave: changes, into: [self.controller.viewContext]) //12
-            }
+            self?.removeStartDelay(for: bubble)
         }
     }
-    
+        
     enum SDBMode {
         case start
         case pause

@@ -24,9 +24,7 @@ extension StartDelayBubble {
         private lazy var initialClock = sdb?.initialClock ?? 0
         
         private func task(_ totalDuration:Float, _ lastStart:Date, _ currentClock:Float) { //bThread
-            
-            print("initialClock ", initialClock, "currentClock ", currentClock)
-            
+                        
             let Δ = Float(Date().timeIntervalSince(lastStart)) //3
             let elapsedSinceFirstStart = totalDuration + Δ
             
@@ -43,9 +41,11 @@ extension StartDelayBubble {
                 //-> viewModel starts bubble [toggleBubbleStart]
                 
                 DispatchQueue.main.async {
+                    let info = ["rank" : self.sdb!.bubble!.rank]
+                    NotificationCenter.default.post(name: .killSDB, object: nil, userInfo: info)
+                    
                     self.cancellable = []
                     self.sdb!.currentClock = 0
-                    print(self.sdb!.state)
                 }
             }
         }
