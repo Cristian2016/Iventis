@@ -739,11 +739,10 @@ extension ViewModel {
     
     private func observe_KillSDB() {
         let center = NotificationCenter.default
-        center.addObserver(forName: .killSDB, object: nil, queue: nil) {
-            [weak self] notification in
-            
+        center.addObserver(forName: .killSDB, object: nil, queue: nil) {[weak self] in
+                        
             guard
-                let rank = notification.userInfo?["rank"] as? Int64,
+                let rank = $0.userInfo?["rank"] as? Int64,
                 let bubble = self?.bubble(for: Int(rank))
             else { fatalError() }
             

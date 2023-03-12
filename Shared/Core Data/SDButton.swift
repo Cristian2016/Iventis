@@ -105,15 +105,6 @@ struct SDButton: View {
             }
             .onEnded { _ in withAnimation { offset = .zero } }
     }
-    private var longPressGesture:some Gesture {
-        LongPressGesture()
-            .onEnded { _ in
-                //UserFeedback
-                UserFeedback.doubleHaptic(.heavy)
-                viewModel.resetSDB(bubble)
-                isTapped = false
-            }
-    }
     
     func toggleStart() {
         isTapped.toggle()

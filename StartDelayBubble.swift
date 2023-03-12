@@ -35,7 +35,6 @@ extension StartDelayBubble {
             }
             
             if viewModelShouldStartBubble {
-                print(elapsedSinceFirstStart, initialClock, Δ >= initialClock)
                 //notify viewModel that currentClock has reached zero ->
                 //-> viewModel will remove SDB
                 //-> viewModel starts bubble [toggleBubbleStart]
