@@ -6,6 +6,7 @@
 //
 //1 each time this published property is set, publisher emits and any view with a receiver on it, will receive the value. ex: SDButton.onReceive (sdb.coordinator.$currentClock) { currentClock in }
 //2 should remove SDButton because state is ended
+//3 elapsed since lastStart sdb.lastPair.start
 
 import CoreData
 import SwiftUI
@@ -24,17 +25,17 @@ extension StartDelayBubble {
         
         private func task(_ totalDuration:Float, _ lastStart:Date, _ currentClock:Float) { //bThread
             
-            let elapsedSinceLastStart = Float(Date().timeIntervalSince(lastStart)) //Δ
-            let elapsedSinceFirstStart = totalDuration + elapsedSinceLastStart
+            let Δ = Float(Date().timeIntervalSince(lastStart)) //3
+            let elapsedSinceFirstStart = totalDuration + Δ
             
             let viewModelShouldStartBubble = elapsedSinceFirstStart >= initialClock //2
             
             DispatchQueue.main.async {
-                self.valueToDisplay = currentClock - elapsedSinceLastStart //cClock - Δ
+                self.valueToDisplay = currentClock - Δ
             }
             
             if viewModelShouldStartBubble {
-                print(elapsedSinceFirstStart, initialClock, elapsedSinceLastStart >= initialClock)
+                print(elapsedSinceFirstStart, initialClock, Δ >= initialClock)
                 //notify viewModel that currentClock has reached zero ->
                 //-> viewModel will remove SDB
                 //-> viewModel starts bubble [toggleBubbleStart]
