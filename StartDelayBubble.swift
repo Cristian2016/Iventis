@@ -35,8 +35,15 @@ extension StartDelayBubble {
             }
             
             let difference = initialClock - elapsedSinceFirstStart
+            
             if difference < 1 && difference > 0 {
                 print("start dismiss timer at \(difference)")
+                let date = TimeInterval(difference)
+                timer = Timer.scheduledTimer(withTimeInterval: date, repeats: false) { [weak self] _ in
+                    print("start bubble!")
+                }
+                timer?.fire()
+                return
             }
             
             if viewModelShouldStartBubble { startBubble(elapsedSinceFirstStart) }
@@ -86,6 +93,8 @@ extension StartDelayBubble {
                 [weak self] _ in
             }
         }
+        
+        private var timer:Timer?
         
         private func startBubble(_ elapsedSinceFirstStart: Float) {
             //compute startCorrection
