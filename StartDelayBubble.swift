@@ -19,24 +19,29 @@ extension StartDelayBubble {
     class Coordinator {
         private weak var sdb: StartDelayBubble?
         
-        private func task(_ totalDuration:Float, _ lastStart:Date) { //bThread ⚠️
+        private func task(_ totalDuration:Float, _ lastStart:Date, _ initialClock:Float) { //bThread
             
             let elapsedSinceLastStart = Float(Date().timeIntervalSince(lastStart))
-            let grandTotal = totalDuration + elapsedSinceLastStart
-            print("""
-                  totalDuration \(totalDuration),
-                  elapsed \(elapsedSinceLastStart),
-                  grandTotal \(grandTotal)
-                  """)
+            let elapsedSinceFirstStart = totalDuration + elapsedSinceLastStart
+//            print("""
+//                  totalDuration \(totalDuration),
+//                  elapsed \(elapsedSinceLastStart),
+//                  grandTotal \(grandTotal)
+//                  """)
+            if elapsedSinceFirstStart >= initialClock {
+                print(elapsedSinceFirstStart, initialClock, elapsedSinceLastStart >= initialClock)
+                //notify viewModel that currentClock has reached zero
+                //viewModel will remove SDB
+                //viewModel starts bubble [toggleBubbleStart]
+                cancellable = []
+            }
             
             //            if currentClock > 0 {
 //                DispatchQueue.main.async {
 //                }
 //            } else {
 //                cancellable = []
-//                //notify viewModel that currentClock has reached zero
-//                //viewModel will remove SDB
-//                //viewModel starts bubble [toggleBubbleStart]
+//
 //            }
             
             //let total = totalDurationOfAllPairs + elapsedSinceLastStart
@@ -44,26 +49,28 @@ extension StartDelayBubble {
         }
         
         func update(_ moment:Moment) { //main Thread
+            
             let lastStart = sdb!.pairs_.last!.start
             let totalDuration = sdb!.totalDuration
+            let initialClock = sdb!.initialClock
             
             switch moment {
                 case .automatic: //when app lanches
                     self.publisher
-                        .sink { [weak self] _ in self?.task(totalDuration, lastStart) }
+                        .sink { [weak self] _ in self?.task(totalDuration, lastStart, initialClock) }
                         .store(in: &self.cancellable) //connect
                     
                 case .user(let action) :
                     switch action {
                         case .start:
                             publisher
-                                .sink { [weak self] _ in self?.task(totalDuration, lastStart) }
+                                .sink { [weak self] _ in self?.task(totalDuration, lastStart, initialClock) }
                                 .store(in: &cancellable)
                             
                         case .pause:
                             cancellable = []
                             valueToDisplay = sdb!.currentClock
-                            print("valueToDisplay \(valueToDisplay)")
+                            print("totalDuration at pause \(sdb!.totalDuration)")
                             
                         case .reset: //sdb.currentClock has reached zero
                             cancellable = []
