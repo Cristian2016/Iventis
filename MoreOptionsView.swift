@@ -121,6 +121,7 @@ struct MoreOptionsView: View {
         HStack(spacing: metrics.spacing) {
             ForEach(Bubble.delays, id:\.self) { delay in
                 Button {
+                    UserFeedback.singleHaptic(.light)
                     input!.userEditedDelay += delay
                 } label: {
                     
