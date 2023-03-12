@@ -100,8 +100,8 @@ class BubbleCellCoordinator {
     // MARK: - Private API
     private var refresh /* all components */ = false //5
     
-    private func task(_ currentClock:Float, _ lastPairStart:Date?) { //bThread ⚠️
-        guard let lastPairStart = lastPairStart else { return }
+    private func task(_ currentClock:Float, _ lastStart:Date?) { //bThread ⚠️
+        guard let lastPairStart = lastStart else { return }
                         
         let Δ = Date().timeIntervalSince(lastPairStart) //2
         var value = currentClock + Float(Δ) //ex: 2345.87648
