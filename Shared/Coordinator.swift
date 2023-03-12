@@ -7,8 +7,8 @@
 //1 publishers emit their initial value, without .send()! ⚠️
 //2 delta is the elapsed duration between last pair.start and signal date
 //3 create means initialization. 1.user creates a bubble or 2.bubble created already but app relaunches
-//4 repetitive task() called each second. every second publisher sends out bTimer signal and this is the task to run. bubble.currentClock + ∆. maybe in the future I decide to call this task every 0.5 seconds.. maybe :)
-//5 lets continuousUpdate do one pass to refresh all components
+//4 repetitive task() called each second on bThread. every second publisher sends out bTimer signal and this is the task to run. bubble.currentClock + ∆. maybe in the future I decide to call this task every 0.5 seconds.. maybe :)
+//5 lets continuous update do one pass to refresh all components
 //6 evaluate before creating a new session, otherwise the value will be alwatys false
 //7 read currentClock on the mainThread. do not access bubble on a backgroundThread!
 
