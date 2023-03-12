@@ -101,6 +101,17 @@ struct MoreOptionsView: View {
             }
         }
         .foregroundColor(.black)
+        .onTapGesture { saveDelay() }
+        .gesture(
+            DragGesture(minimumDistance: 10)
+                .onEnded { value in
+                    if input!.userEditedDelay != 0 {
+                        UserFeedback.doubleHaptic(.heavy)
+                        input!.userEditedDelay = 0
+                        viewModel.removeStartDelay(for: input?.bubble)
+                    }
+                }
+        )
     }
     
     @ViewBuilder
