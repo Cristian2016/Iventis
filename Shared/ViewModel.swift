@@ -143,7 +143,7 @@ class ViewModel: ObservableObject {
     // MARK: - Observers
     
     private func observe_ApplicationActive() {
-        NotificationCenter.default.addObserver(forName: .appActive, object: nil, queue: nil) { [weak self] _ in
+        NotificationCenter.default.addObserver(forName: .didBecomeActive, object: nil, queue: nil) { [weak self] _ in
             self?.handleBecomeActive()
         }
     }

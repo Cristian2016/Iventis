@@ -7,11 +7,6 @@
 
 import SwiftUI
 
-extension Notification.Name {
-    static let orientation = Notification.Name("UIDevice.orientationDidChangeNotification")
-    static let appActive:NSNotification.Name = UIApplication.didBecomeActiveNotification
-}
-
 struct vRoundedRectangle: Shape {
     let corners: UIRectCorner
     let radius: CGFloat
@@ -33,6 +28,8 @@ extension Notification.Name {
     static let sizeNotification = Notification.Name("sizeNotification")
     static let frameNotification = Notification.Name("frameNotification")
     static let didBecomeActive = UIApplication.didBecomeActiveNotification
+    
+    static let killSDB = Notification.Name("killSDB")
 } //1 ViewModel
 
 extension Notification {

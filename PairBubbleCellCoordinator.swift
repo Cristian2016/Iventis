@@ -128,7 +128,7 @@ class PairBubbleCellCoordinator {
     
     private func observe_AppActive() {
         let center = NotificationCenter.default
-        center.addObserver(forName: .appActive, object: nil, queue: nil) { _ in
+        center.addObserver(forName: .didBecomeActive, object: nil, queue: nil) { _ in
             self.refresh = true
         }
     } //5
