@@ -211,6 +211,6 @@ struct SmallDigit:ButtonStyle {
         let pressed = configuration.isPressed
         configuration.label
             .scaleEffect(x: pressed ? 0.9 : 1.0, y: pressed ? 0.9 : 1.0)
-            .opacity(pressed ? 0.8 : 1.0)
+            .opacity(pressed ? 0.3 : 1.0)
     }
 }
