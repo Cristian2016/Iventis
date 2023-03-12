@@ -3,6 +3,7 @@
 //  Timers (iOS)
 //
 //  Created by Cristian Lapusan on 10.02.2023.
+//⚠️ task { bThread }, update { mainThread }. task method runs on bThread and update method on UI Thread. be careful when accessing bubble.properties since bubble is MSManagedObject and these objects are not thread safe!!! use bubble.objID property to "grab" bubble and use is on a bThread. theBubble is the bThread version of bubble. bubble is tied to viewContext. theBubble is tied to bContext
 //1 publishers emit their initial value, without .send()! ⚠️
 //2 delta is the elapsed duration between last pair.start and signal date
 //3 create means initialization. 1.user creates a bubble or 2.bubble created already but app relaunches
