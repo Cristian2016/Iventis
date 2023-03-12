@@ -751,10 +751,9 @@ extension ViewModel {
                 let startCorrection = $0.userInfo?["startCorrection"] as? Float,
                 let bubble = self?.bubble(for: Int(rank))
             else { fatalError() }
-            
-            print("startCorrection \(startCorrection)")
-            
+                        
             self?.removeStartDelay(for: bubble)
+            self?.toggleBubbleStart(bubble)
         }
     }
         
