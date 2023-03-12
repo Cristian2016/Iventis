@@ -29,6 +29,8 @@ class BubbleCellCoordinator {
         let isPinned = bubble.isPinned
         let state = bubble.state
         let initialClock = bubble.initialClock
+        let currentClock = bubble.currentClock
+        let lastPairStart = bubble.lastPair?.start
         
         DispatchQueue.global().async {
             switch moment {
@@ -39,7 +41,7 @@ class BubbleCellCoordinator {
                     DispatchQueue.main.async { self.components.hundredths = "" }
                     self.refresh = true
                     self.publisher
-                        .sink { [weak self] _ in self?.task() }
+                        .sink { [weak self] _ in self?.task(currentClock, lastPairStart) }
                         .store(in: &self.cancellable) //connect
                     
                 case .user(let action):
@@ -61,7 +63,7 @@ class BubbleCellCoordinator {
                         case .start:
                             self.refresh = false
                             self.publisher
-                                .sink { [weak self] _ in self?.task() }
+                                .sink { [weak self] _ in self?.task(currentClock, lastPairStart) }
                                 .store(in: &self.cancellable) //connect
                             DispatchQueue.main.async { self.components.hundredths = "" }
                             
@@ -97,52 +99,45 @@ class BubbleCellCoordinator {
     // MARK: - Private API
     private var refresh /* all components */ = false //5
     
-    private func task() { //bThread ⚠️
-        guard
-            let bubble = self.bubble,
-            let lastPairStart = bubble.lastPair?.start else { return }
-        
-        let currentClock = bubble.currentClock //
-        
-        DispatchQueue.global().async {
-            let Δ = Date().timeIntervalSince(lastPairStart) //2
-            var value = currentClock + Float(Δ) //ex: 2345.87648
-            
-            value.round(.toNearestOrEven) //ex: 2346
-            
-            let intValue = Int(value)
-            let secValue = intValue%60
-            
-            if secValue == 0 || self.refresh { //send minute and hour
-                let giveMeAName = intValue/60%60
-                let minValue = String(giveMeAName)
+    private func task(_ currentClock:Float, _ lastPairStart:Date?) { //bThread ⚠️
+        guard let lastPairStart = lastPairStart else { return }
                 
-                DispatchQueue.main.async { //send min
-                    self.components.min = minValue
-                    if intValue == 60 {
-                        withAnimation(.spring(response: 0.5, dampingFraction: 0.5)) {
-                            self.opacity.update(value)
-                        }
-                    }
-                }
-                
-                if (giveMeAName%60) == 0 || self.refresh {
-                    let hrValue = String(intValue/3600)
-                    
-                    DispatchQueue.main.async { //send hour
-                        self.components.hr = hrValue
-                        if intValue == 3600 || self.refresh {
-                            withAnimation { self.opacity.update(value) }
-                        }
+        let Δ = Date().timeIntervalSince(lastPairStart) //2
+        var value = currentClock + Float(Δ) //ex: 2345.87648
+        
+        value.round(.toNearestOrEven) //ex: 2346
+        
+        let intValue = Int(value)
+        let secValue = intValue%60
+        
+        if secValue == 0 || self.refresh { //send minute and hour
+            let giveMeAName = intValue/60%60
+            let minValue = String(giveMeAName)
+            
+            DispatchQueue.main.async { //send min
+                self.components.min = minValue
+                if intValue == 60 {
+                    withAnimation(.spring(response: 0.5, dampingFraction: 0.5)) {
+                        self.opacity.update(value)
                     }
                 }
             }
             
-            DispatchQueue.main.async { self.components.sec = String(secValue) } //send second
-            
-            self.refresh = false
+            if (giveMeAName%60) == 0 || self.refresh {
+                let hrValue = String(intValue/3600)
+                
+                DispatchQueue.main.async { //send hour
+                    self.components.hr = hrValue
+                    if intValue == 3600 || self.refresh {
+                        withAnimation { self.opacity.update(value) }
+                    }
+                }
+            }
         }
         
+        DispatchQueue.main.async { self.components.sec = String(secValue) } //send second
+        
+        self.refresh = false
     } //4
     
     // MARK: - Publishers 1
