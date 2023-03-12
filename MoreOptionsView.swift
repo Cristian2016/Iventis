@@ -49,15 +49,15 @@ struct MoreOptionsView: View {
                                     
                                     if !isPortrait {
                                         if emptyStruct.userEditedDelay != 0 {
-                                            Text("**Save** \(Image(systemName: "hand.tap")) Tap outside frame")
+                                            Text("**Save** \(Image.tap) Tap outside frame")
                                                 .font(metrics.infoFont)
                                                 .foregroundColor(.gray)
                                             
-                                            Text("**Remove** \(Image(systemName: "arrow.left.circle.fill")) Swipe outside frame")
+                                            Text("**Remove** \(Image.leftSwipe) Swipe outside frame")
                                                 .font(metrics.infoFont)
                                                 .foregroundColor(.gray)
                                         } else {
-                                            Text("**Dismiss** \(Image(systemName: "hand.tap")) Tap outside frame")
+                                            Text("**Dismiss** \(Image.tap) Tap outside frame")
                                                 .font(metrics.infoFont)
                                                 .foregroundColor(.gray)
                                         }
