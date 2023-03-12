@@ -5,6 +5,7 @@
 //  Created by Cristian Lapusan on 10.03.2023.
 //
 //1 each time this published property is set, publisher emits and any view with a receiver on it, will receive the value. ex: SDButton.onReceive (sdb.coordinator.$currentClock) { currentClock in }
+//2 should remove SDButton because state is ended
 
 import CoreData
 import SwiftUI
@@ -24,7 +25,9 @@ extension StartDelayBubble {
             let elapsedSinceLastStart = Float(Date().timeIntervalSince(lastStart))
             let elapsedSinceFirstStart = totalDuration + elapsedSinceLastStart
             
-            if elapsedSinceFirstStart >= initialClock {
+            let viewModelShouldStartBubble = elapsedSinceFirstStart >= initialClock //2
+            
+            if viewModelShouldStartBubble {
                 print(elapsedSinceFirstStart, initialClock, elapsedSinceLastStart >= initialClock)
                 //notify viewModel that currentClock has reached zero ->
                 //-> viewModel will remove SDB
