@@ -52,7 +52,7 @@ struct SDButton: View {
     } //5
     
     private var text:some View {
-        Text("-\(sdbCurrentClock.shortString(by: 2))")
+        Text("-\(sdbCurrentClock.shortString(by: 0))")
             .font(.system(size: 400))
             .lineLimit(1)
             .minimumScaleFactor(0.1)
