@@ -22,7 +22,7 @@ struct MoreOptionsView: View {
     @EnvironmentObject var viewModel:ViewModel
     private let secretary = Secretary.shared
             
-    let metrics = Metrics()
+    private let metrics = Metrics()
     
     var body: some View {
         ZStack {
@@ -84,6 +84,7 @@ struct MoreOptionsView: View {
     // MARK: - Lego
     private var startDelayDisplay:some View {
         HStack(alignment: .firstTextBaseline) {
+            Spacer()
             Text("Start Delay")
                 .font(.callout)
                 .minimumScaleFactor(0.1)
@@ -101,6 +102,7 @@ struct MoreOptionsView: View {
             }
         }
         .foregroundColor(.black)
+        .frame(maxWidth: .infinity)
         .onTapGesture { saveDelay() }
         .gesture(
             DragGesture(minimumDistance: 10)
@@ -158,7 +160,7 @@ struct MoreOptionsView: View {
     }
     
     // MARK: -
-    struct Metrics {
+    private struct Metrics {
         let radius = CGFloat(10)
         
         let minWidth = CGFloat(300)
@@ -178,7 +180,7 @@ struct MoreOptionsView: View {
     }
     
     // MARK: -
-    var swipeLeft:some Gesture {
+    private var swipeLeft:some Gesture {
         DragGesture(minimumDistance: 10)
             .onEnded { _ in
                 if input!.userEditedDelay != 0 {
@@ -190,9 +192,9 @@ struct MoreOptionsView: View {
     }
     
     // MARK: -
-    func dismiss() { secretary.moreOptionsBuble = nil }
+    private func dismiss() { secretary.moreOptionsBuble = nil }
     
-    func saveDelay() {
+    private func saveDelay() {
         /*
          if user sets a new start delay
          save delay
@@ -204,7 +206,7 @@ struct MoreOptionsView: View {
         dismiss()
     }
     
-    func saveColor(to colorName: String) {
+    private func saveColor(to colorName: String) {
         viewModel.changeColor(of: input!.bubble, to: colorName)
         //dimiss will be called separately
     }
