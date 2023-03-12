@@ -47,21 +47,7 @@ struct MoreOptionsView: View {
                                         digits
                                     }
                                     
-                                    if !isPortrait {
-                                        if emptyStruct.userEditedDelay != 0 {
-                                            Text("**Save** \(Image.tap) Tap outside frame")
-                                                .font(metrics.infoFont)
-                                                .foregroundColor(.gray)
-                                            
-                                            Text("**Remove** \(Image.leftSwipe) Swipe outside frame")
-                                                .font(metrics.infoFont)
-                                                .foregroundColor(.gray)
-                                        } else {
-                                            Text("**Dismiss** \(Image.tap) Tap outside frame")
-                                                .font(metrics.infoFont)
-                                                .foregroundColor(.gray)
-                                        }
-                                    }
+                                    hintView(isPortrait)
                                 }
                                 
                                 Divider()
@@ -115,6 +101,27 @@ struct MoreOptionsView: View {
             }
         }
         .foregroundColor(.black)
+    }
+    
+    @ViewBuilder
+    private func hintView(_ isPortrait:Bool) -> some View {
+        if let emptyStruct = input {
+            if !isPortrait {
+                if emptyStruct.userEditedDelay != 0 {
+                    Text("**Save** \(Image.tap) Tap outside frame")
+                        .font(metrics.infoFont)
+                        .foregroundColor(.gray)
+                    
+                    Text("**Remove** \(Image.leftSwipe) Swipe outside frame")
+                        .font(metrics.infoFont)
+                        .foregroundColor(.gray)
+                } else {
+                    Text("**Dismiss** \(Image.tap) Tap outside frame")
+                        .font(metrics.infoFont)
+                        .foregroundColor(.gray)
+                }
+            }
+        }
     }
     
     private var digits:some View {
