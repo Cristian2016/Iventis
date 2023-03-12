@@ -674,7 +674,8 @@ extension ViewModel {
         }
     }
     
-    func setupStartDelayBubble(_ delay:Float, for bubble:Bubble?) {
+    func setStartDelayBubble(_ delay:Float, for bubble:Bubble?) {
+        print(#function)
         guard let bubble = bubble else { return }
         
         let bContext = controller.bContext
