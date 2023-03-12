@@ -29,6 +29,7 @@ extension Notification.Name {
     static let frameNotification = Notification.Name("frameNotification")
     static let didBecomeActive = UIApplication.didBecomeActiveNotification
     
+    ///kill StartSelayBubble  since sdb.state is now .finished
     static let killSDB = Notification.Name("killSDB")
 } //1 ViewModel
 
