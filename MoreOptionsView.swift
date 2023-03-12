@@ -123,18 +123,20 @@ struct MoreOptionsView: View {
                 Button {
                     UserFeedback.singleHaptic(.light)
                     input!.userEditedDelay += delay
-                } label: {
-                    
-                    RoundedRectangle(cornerRadius: 4).fill(input!.initialBubbleColor)
-                        .aspectRatio(1, contentMode: .fit)
-                        .overlay {
-                            Text(String(delay))
-                                .foregroundColor(.white)
-                                .font(metrics.digitFont)
-                        }
-                }
+                } label: { digitLabel(delay) }
+                    .buttonStyle(SmallDigit())
             }
         }
+    }
+    
+    private func digitLabel(_ delay: Int) -> some View {
+        RoundedRectangle(cornerRadius: 4).fill(input!.initialBubbleColor)
+            .aspectRatio(1, contentMode: .fit)
+            .overlay {
+                Text(String(delay))
+                    .foregroundColor(.white)
+                    .font(metrics.digitFont)
+            }
     }
     
     // MARK: -
@@ -203,3 +205,12 @@ struct MoreOptionsView: View {
 //        MoreOptionsView(emptyStruct.bubble)
 //    }
 //}
+
+struct SmallDigit:ButtonStyle {
+    func makeBody(configuration: Configuration) -> some View {
+        let pressed = configuration.isPressed
+        configuration.label
+            .scaleEffect(x: pressed ? 0.9 : 1.0, y: pressed ? 0.9 : 1.0)
+            .opacity(pressed ? 0.8 : 1.0)
+    }
+}
