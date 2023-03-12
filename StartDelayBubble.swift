@@ -32,7 +32,12 @@ extension StartDelayBubble {
                 //notify viewModel that currentClock has reached zero ->
                 //-> viewModel will remove SDB
                 //-> viewModel starts bubble [toggleBubbleStart]
-                cancellable = []
+                
+                DispatchQueue.main.async {
+                    self.cancellable = []
+                    self.sdb!.currentClock = 0
+                    print(self.sdb!.state)
+                }
             }
         }
         
@@ -71,7 +76,7 @@ extension StartDelayBubble {
         private lazy var publisher =
         NotificationCenter.Publisher(center: .default, name: .bubbleTimerSignal)
         
-        private var cancellable = Set<AnyCancellable>()
+        private(set) var cancellable = Set<AnyCancellable>()
         
         private func observeActivePhase() {
             let center = NotificationCenter.default
@@ -102,7 +107,7 @@ extension StartDelayBubble {
     var state: State {
         if pairs_.isEmpty { return .brandNew }
         else {
-            if currentClock <= 0 { return .finished }
+            if currentClock == 0 { return .finished }
             let lastPair = pairs_.last!
             return lastPair.pause != nil ? .paused : .running
         }
