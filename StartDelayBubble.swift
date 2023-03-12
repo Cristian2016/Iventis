@@ -19,9 +19,11 @@ extension StartDelayBubble {
     class Coordinator {
         private weak var sdb: StartDelayBubble?
         
-        private func task(_ lastStart:Date) { //bThread ⚠️
+        private func task(_ totalDuration:Float, _ lastStart:Date) { //bThread ⚠️
             
-            let elapsedSinceLastStart = Date().timeIntervalSince(lastStart)
+            let elapsedSinceLastStart = Float(Date().timeIntervalSince(lastStart))
+            let grandTotal = totalDuration + elapsedSinceLastStart
+            print("totalDuration \(totalDuration), elapsed \(elapsedSinceLastStart), grandTotal \(grandTotal)")
             
             //            if currentClock > 0 {
 //                DispatchQueue.main.async {
@@ -39,18 +41,19 @@ extension StartDelayBubble {
         
         func update(_ moment:Moment) { //main Thread
             let lastStart = sdb!.pairs_.last!.start
+            let totalDuration = sdb!.totalDuration
             
             switch moment {
                 case .automatic: //when app lanches
                     self.publisher
-                        .sink { [weak self] _ in self?.task(lastStart) }
+                        .sink { [weak self] _ in self?.task(totalDuration, lastStart) }
                         .store(in: &self.cancellable) //connect
                     
                 case .user(let action) :
                     switch action {
                         case .start:
                             publisher
-                                .sink { [weak self] _ in self?.task(lastStart) }
+                                .sink { [weak self] _ in self?.task(totalDuration, lastStart) }
                                 .store(in: &cancellable)
                             
                         case .pause:

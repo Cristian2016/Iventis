@@ -103,8 +103,8 @@ class BubbleCellCoordinator {
     private func task(_ currentClock:Float, _ lastStart:Date?) { //bThread ⚠️
         guard let lastPairStart = lastStart else { return }
                         
-        let Δ = Date().timeIntervalSince(lastPairStart) //2
-        var value = currentClock + Float(Δ) //ex: 2345.87648
+        let Δ = Float(Date().timeIntervalSince(lastPairStart)) //2
+        var value = currentClock + Δ //ex: 2345.87648
         
         value.round(.toNearestOrEven) //ex: 2346
         
