@@ -39,7 +39,7 @@ extension StartDelayBubble {
                 //-> viewModel will remove SDB
                 //-> viewModel starts bubble [toggleBubbleStart]
                 
-                let startCorrection = elapsedSinceFirstStart - initialClock
+                let startCorrection = TimeInterval(elapsedSinceFirstStart - initialClock)
                 
                 DispatchQueue.main.async {
                     let info:[String : Any] = ["rank" : self.sdb!.bubble!.rank,

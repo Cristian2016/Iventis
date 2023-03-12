@@ -273,10 +273,10 @@ extension ViewModel {
                     
                     //create newPair, newSession and add them to the newBubble
                     let newPair = Pair(context: bContext)
-                    newPair.start = Date().addingTimeInterval(startDelayCompensation)
+                    newPair.start = Date().addingTimeInterval(-startDelayCompensation)
                     
                     let newSession = Session(context: bContext)
-                    newSession.created = Date().addingTimeInterval(startDelayCompensation)
+                    newSession.created = Date().addingTimeInterval(-startDelayCompensation)
                     newSession.addToPairs(newPair)
                     
                     thisBubble.addToSessions(newSession)
@@ -305,7 +305,7 @@ extension ViewModel {
                     
                     //create new pair, add it to currentSession
                     let newPair = Pair(context: bContext)
-                    newPair.start = Date().addingTimeInterval(startDelayCompensation)
+                    newPair.start = Date().addingTimeInterval(-startDelayCompensation)
                     thisBubble.lastSession?.addToPairs(newPair)
                     
                     //this also makes changes visible to the viewContext as well
@@ -748,12 +748,12 @@ extension ViewModel {
                         
             guard
                 let rank = $0.userInfo?["rank"] as? Int64,
-                let startCorrection = $0.userInfo?["startCorrection"] as? Float,
+                let startCorrection = $0.userInfo?["startCorrection"] as? TimeInterval,
                 let bubble = self?.bubble(for: Int(rank))
             else { fatalError() }
                         
             self?.removeStartDelay(for: bubble)
-            self?.toggleBubbleStart(bubble)
+            self?.toggleBubbleStart(bubble, delta: startCorrection)
         }
     }
         
