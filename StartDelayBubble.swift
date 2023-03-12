@@ -51,7 +51,7 @@ extension StartDelayBubble {
         
         func update(_ moment:Moment) { //main Thread
             
-            let lastStart = sdb!.pairs_.last!.start
+            guard let lastStart = sdb?.pairs_.last?.start else { return }
             let totalDuration = sdb!.totalDuration
             let currentClock = sdb!.currentClock
             
@@ -103,7 +103,10 @@ extension StartDelayBubble {
             if sdb.state == .running { update(.automatic) }
         }
         
-        deinit { NotificationCenter.default.removeObserver(self) }
+        deinit {
+            NotificationCenter.default.removeObserver(self)
+            print(#function, " SDBCoordinator")
+        }
     }
     
     enum State {
