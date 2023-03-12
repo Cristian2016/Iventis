@@ -696,7 +696,9 @@ extension ViewModel {
             }
             
             self.controller.save(bContext)
-            DispatchQueue.main.async { bubble.objectWillChange.send() }
+            DispatchQueue.main.async {
+                bubble.startDelayBubble?.coordinator.valueToDisplay = delay
+            }
         }
     }
     

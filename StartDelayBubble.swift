@@ -84,7 +84,7 @@ extension StartDelayBubble {
             }
         }
         
-        @Published private(set) var valueToDisplay:Float //1
+        @Published var valueToDisplay:Float //1
         
         private lazy var publisher =
         NotificationCenter.Publisher(center: .default, name: .bubbleTimerSignal)
