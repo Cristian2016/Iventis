@@ -30,7 +30,7 @@ struct SDButton: View {
     
     var body: some View {
         ZStack {
-            if let sdb = bubble.startDelayBubble {
+            if let sdb = bubble.startDelayBubble, sdb.coordinator != nil {
                 background
                     .overlay { textCage.overlay { text }} //5
                     .offset(offset) //1
@@ -97,13 +97,14 @@ struct SDButton: View {
                     UserFeedback.doubleHaptic(.heavy)
                     deleteTriggered = true
                     viewModel.removeStartDelay(for: bubble)
+                    
                     delayExecution(.now() + 0.1) {
                         deleteTriggered = false
                         offset = .zero
                     }
                 }
             }
-            .onEnded { _ in withAnimation { offset = .zero } }
+            .onEnded { _ in withAnimation { offset = .zero }}
     }
     
     func toggleStart() {
