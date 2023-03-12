@@ -39,7 +39,10 @@ extension StartDelayBubble {
             
             if (Float(0)...1).contains(difference) {
                 let delay = TimeInterval(difference)
-                delayExecution(.now() + delay) { self.startBubble(self.initialClock) }
+                DispatchQueue.global(qos: .userInteractive).asyncAfter(deadline: .now() + delay) {
+                    self.startBubble(self.initialClock)
+                }
+                print("timer executed")
                 return
             }
             
