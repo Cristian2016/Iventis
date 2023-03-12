@@ -108,14 +108,11 @@ class BubbleCellCoordinator {
             let intValue = Int(value)
             let secValue = intValue%60
             
-            //send minute and hour
-            if secValue == 0 || self.refresh {
+            if secValue == 0 || self.refresh { //send minute and hour
                 let giveMeAName = intValue/60%60
                 let minValue = String(giveMeAName)
                 
-                
-                //send min
-                DispatchQueue.main.async {
+                DispatchQueue.main.async { //send min
                     self.components.min = minValue
                     if intValue == 60 {
                         withAnimation(.spring(response: 0.5, dampingFraction: 0.5)) {
@@ -127,8 +124,7 @@ class BubbleCellCoordinator {
                 if (giveMeAName%60) == 0 || self.refresh {
                     let hrValue = String(intValue/3600)
                     
-                    //send hour
-                    DispatchQueue.main.async {
+                    DispatchQueue.main.async { //send hour
                         self.components.hr = hrValue
                         if intValue == 3600 || self.refresh {
                             withAnimation { self.opacity.update(value) }
@@ -137,8 +133,7 @@ class BubbleCellCoordinator {
                 }
             }
             
-            //send second
-            DispatchQueue.main.async { self.components.sec = String(secValue) }
+            DispatchQueue.main.async { self.components.sec = String(secValue) } //send second
             
             self.refresh = false
         }

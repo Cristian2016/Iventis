@@ -20,18 +20,25 @@ extension StartDelayBubble {
         private weak var sdb: StartDelayBubble?
         
         private func task() {
-            if currentClock > 0 {
-                DispatchQueue.main.async {
-                }
-            } else {
-                cancellable = []
-                //notify viewModel that currentClock has reached zero
-                //viewModel will remove SDB
-                //viewModel starts bubble [toggleBubbleStart]
-            }
+            print(#function, "main thread \(Thread.isMainThread)")
+//            let elapsedSinceLastStart = Date().timeIntervalSince(sdb.pairs_.last!.start)
+            
+            //            if currentClock > 0 {
+//                DispatchQueue.main.async {
+//                }
+//            } else {
+//                cancellable = []
+//                //notify viewModel that currentClock has reached zero
+//                //viewModel will remove SDB
+//                //viewModel starts bubble [toggleBubbleStart]
+//            }
+            
+            //let total = totalDurationOfAllPairs + elapsedSinceLastStart
+            //compare total to sdb.currentClock to know if overdue
         }
         
         func update(_ moment:Moment) {
+            print(#function, "main thread \(Thread.isMainThread)")
             switch moment {
                 case .automatic: //when app lanches
                     self.publisher
@@ -48,6 +55,7 @@ extension StartDelayBubble {
                         case .pause:
                             cancellable = []
                             currentClock = sdb!.currentClock
+                            print("sdb.currentClock \(currentClock)")
                             
                         case .reset: //sdb.currentClock has reached zero
                             cancellable = []
@@ -75,12 +83,7 @@ extension StartDelayBubble {
             self.currentClock = sdb.currentClock
             observeActivePhase()
             
-            //compute delta
-            if sdb.state == .running {
-                let elapsedSinceLastStart = Date().timeIntervalSince(sdb.pairs_.last!.start)
-                //let total = totalDurationOfAllPairs + elapsedSinceLastStart
-                //compare total to sdb.currentClock to know if overdue
-            }
+            if sdb.state == .running { update(.automatic) }
         }
         
         deinit { NotificationCenter.default.removeObserver(self) }
