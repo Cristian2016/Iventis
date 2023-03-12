@@ -101,7 +101,7 @@ public extension UserInterfaceSizeClass {
 
 ///various constants and values
 public struct Global {
-    static let longPressLatency = Double(0.5) //1
+    static let longPressLatency = Double(0.65) //1
     
     struct FontSize {
         static let help = CGFloat(30)

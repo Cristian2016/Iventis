@@ -36,9 +36,3 @@ struct SecondsLabel: View {
         self.sec = bubble.coordinator.components.sec
     }
 }
-
-//struct SecondsLabel_Previews: PreviewProvider {
-//    static var previews: some View {
-//        SecondsLabel(bubble: <#Bubble?#>)
-//    }
-//}

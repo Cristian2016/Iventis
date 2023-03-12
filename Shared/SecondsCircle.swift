@@ -31,7 +31,7 @@ struct SecondsCircle: View {
     private var tap:some Gesture { TapGesture().onEnded { _ in userTappedSeconds() }}
     
     private var longPress: some Gesture {
-        LongPressGesture(minimumDuration: 0.3).onEnded { _ in endSession() }
+        LongPressGesture().onEnded { _ in endSession() }
     }
     
     // MARK: -
