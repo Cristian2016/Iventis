@@ -20,7 +20,7 @@ extension StartDelayBubble {
         private weak var sdb: StartDelayBubble?
         
         private func task() {
-            print(#function, "main thread \(Thread.isMainThread)")
+            print(#function, Thread.isMainThread)
 //            let elapsedSinceLastStart = Date().timeIntervalSince(sdb.pairs_.last!.start)
             
             //            if currentClock > 0 {

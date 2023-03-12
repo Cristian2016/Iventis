@@ -9,6 +9,7 @@
 //4 repetitive task() called each second. every second publisher sends out bTimer signal and this is the task to run. bubble.currentClock + ∆. maybe in the future I decide to call this task every 0.5 seconds.. maybe :)
 //5 lets continuousUpdate do one pass to refresh all components
 //6 evaluate before creating a new session, otherwise the value will be alwatys false
+//7 read currentClock on the mainThread. do not access bubble on a backgroundThread!
 
 import SwiftUI
 import Combine
@@ -99,9 +100,11 @@ class BubbleCellCoordinator {
             let bubble = self.bubble,
             let lastPairStart = bubble.lastPair?.start else { return }
         
+        let currentClock = bubble.currentClock //
+        
         DispatchQueue.global().async {
             let Δ = Date().timeIntervalSince(lastPairStart) //2
-            var value = bubble.currentClock + Float(Δ) //ex: 2345.87648
+            var value = currentClock + Float(Δ) //ex: 2345.87648
             
             value.round(.toNearestOrEven) //ex: 2346
             
