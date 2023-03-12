@@ -37,9 +37,9 @@ extension StartDelayBubble {
             
             let difference = initialClock - elapsedSinceFirstStart
             
-            if difference < 1 && difference > 0 {
-                let date = TimeInterval(difference)
-                delayExecution(.now() + date) { self.startBubble(self.initialClock) }
+            if (Float(0)...1).contains(difference) {
+                let delay = TimeInterval(difference)
+                delayExecution(.now() + delay) { self.startBubble(self.initialClock) }
                 return
             }
             
