@@ -25,13 +25,15 @@ extension StartDelayBubble {
         
         private func task(_ totalDuration:Float, _ lastStart:Date, _ currentClock:Float) { //bThread
             
+            print("initialClock ", initialClock, "currentClock ", currentClock)
+            
             let Δ = Float(Date().timeIntervalSince(lastStart)) //3
             let elapsedSinceFirstStart = totalDuration + Δ
             
             let viewModelShouldStartBubble = elapsedSinceFirstStart >= initialClock //2
             
             DispatchQueue.main.async {
-                self.valueToDisplay = currentClock - Δ
+                self.valueToDisplay = self.initialClock - elapsedSinceFirstStart
             }
             
             if viewModelShouldStartBubble {
@@ -64,13 +66,14 @@ extension StartDelayBubble {
                     switch action {
                         case .start:
                             publisher
-                                .sink { [weak self] _ in self?.task(totalDuration, lastStart, currentClock) }
+                                .sink { [weak self] _ in
+                                    self?.task(totalDuration, lastStart, currentClock)
+                                }
                                 .store(in: &cancellable)
                             
                         case .pause:
                             cancellable = []
                             valueToDisplay = sdb!.currentClock
-                            print("totalDuration at pause \(sdb!.totalDuration)")
                             
                         case .reset: //sdb.currentClock has reached zero
                             cancellable = []

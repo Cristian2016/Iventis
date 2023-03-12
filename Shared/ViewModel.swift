@@ -727,8 +727,8 @@ extension ViewModel {
                     
                     //update sdb.totalDuration
                     theSDB.totalDuration += lastPair.duration
-                    theSDB.currentClock -= theSDB.totalDuration
-                                                            
+                    theSDB.currentClock = theSDB.initialClock - theSDB.totalDuration
+                                                                                
                     self.controller.save(bContext) {
                         DispatchQueue.main.async { sdb.coordinator.update(.user(.pause)) }
                     }
