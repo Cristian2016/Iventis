@@ -46,6 +46,7 @@ class BubbleCellCoordinator {
                     switch action {
                         case .pause:
                             self.cancellable = []
+                            
                             DispatchQueue.global().async {
                                 let components = self.initialValue.timeComponentsAsStrings
                                 
