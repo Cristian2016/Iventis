@@ -31,7 +31,7 @@ class BubbleCellCoordinator {
         let initialClock = bubble.initialClock
         let currentClock = bubble.currentClock
         let lastPairStart = bubble.lastPair?.start
-        
+                
         DispatchQueue.global().async {
             switch moment {
                 case .showAll:
@@ -101,7 +101,7 @@ class BubbleCellCoordinator {
     
     private func task(_ currentClock:Float, _ lastPairStart:Date?) { //bThread ⚠️
         guard let lastPairStart = lastPairStart else { return }
-                
+                        
         let Δ = Date().timeIntervalSince(lastPairStart) //2
         var value = currentClock + Float(Δ) //ex: 2345.87648
         
