@@ -30,33 +30,16 @@ extension StartDelayBubble {
             
             let viewModelShouldStartBubble = elapsedSinceFirstStart >= initialClock //2
             
+            DispatchQueue.main.async {
+                self.valueToDisplay = self.initialClock - elapsedSinceFirstStart
+            }
+            
             let difference = initialClock - elapsedSinceFirstStart
             if difference < 1 && difference > 0 {
                 print("start dismiss timer at \(difference)")
             }
             
-            DispatchQueue.main.async {
-                self.valueToDisplay = self.initialClock - elapsedSinceFirstStart
-            }
-            
-            if viewModelShouldStartBubble {
-                //compute startCorrection
-                //notify viewModel currentClock has reached zero, send startCorrection ->
-                //-> viewModel removes SDButton
-                //-> viewModel starts bubble [toggleBubbleStart] with startCorrection
-                
-                let startCorrection = TimeInterval(elapsedSinceFirstStart - initialClock)
-                
-                DispatchQueue.main.async {
-                    let info:[String : Any] = ["rank" : self.sdb!.bubble!.rank,
-                                               "startCorrection" : startCorrection]
-                    
-                    NotificationCenter.default.post(name: .killSDB, object: nil, userInfo: info)
-                    
-                    self.cancellable = []
-                    self.sdb!.currentClock = 0 //only to set sdb.state to .finished
-                }
-            }
+            if viewModelShouldStartBubble { startBubble(elapsedSinceFirstStart) }
         }
         
         func update(_ moment:Moment) { //main Thread
@@ -101,6 +84,25 @@ extension StartDelayBubble {
             let center = NotificationCenter.default
             center.addObserver(forName: .didBecomeActive, object: nil, queue: nil) {
                 [weak self] _ in
+            }
+        }
+        
+        private func startBubble(_ elapsedSinceFirstStart: Float) {
+            //compute startCorrection
+            //notify viewModel currentClock has reached zero, send startCorrection ->
+            //-> viewModel removes SDButton
+            //-> viewModel starts bubble [toggleBubbleStart] with startCorrection
+            
+            let startCorrection = TimeInterval(elapsedSinceFirstStart - initialClock)
+            
+            DispatchQueue.main.async {
+                let info:[String : Any] = ["rank" : self.sdb!.bubble!.rank,
+                                           "startCorrection" : startCorrection]
+                
+                NotificationCenter.default.post(name: .killSDB, object: nil, userInfo: info)
+                
+                self.cancellable = []
+                self.sdb!.currentClock = 0 //only to set sdb.state to .finished
             }
         }
         
