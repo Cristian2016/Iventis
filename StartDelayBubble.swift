@@ -20,12 +20,18 @@ extension StartDelayBubble {
     class Coordinator {
         private weak var sdb: StartDelayBubble?
         
-        private func task(_ totalDuration:Float, _ lastStart:Date, _ initialClock:Float) { //bThread
+        private lazy var initialClock = sdb?.initialClock ?? 0
+        
+        private func task(_ totalDuration:Float, _ lastStart:Date, _ currentClock:Float) { //bThread
             
-            let elapsedSinceLastStart = Float(Date().timeIntervalSince(lastStart))
+            let elapsedSinceLastStart = Float(Date().timeIntervalSince(lastStart)) //Δ
             let elapsedSinceFirstStart = totalDuration + elapsedSinceLastStart
             
             let viewModelShouldStartBubble = elapsedSinceFirstStart >= initialClock //2
+            
+            DispatchQueue.main.async {
+                self.valueToDisplay = currentClock - elapsedSinceLastStart //cClock - Δ
+            }
             
             if viewModelShouldStartBubble {
                 print(elapsedSinceFirstStart, initialClock, elapsedSinceLastStart >= initialClock)
@@ -45,19 +51,19 @@ extension StartDelayBubble {
             
             let lastStart = sdb!.pairs_.last!.start
             let totalDuration = sdb!.totalDuration
-            let initialClock = sdb!.initialClock
+            let currentClock = sdb!.currentClock
             
             switch moment {
                 case .automatic: //when app lanches
                     self.publisher
-                        .sink { [weak self] _ in self?.task(totalDuration, lastStart, initialClock) }
+                        .sink { [weak self] _ in self?.task(totalDuration, lastStart, currentClock) }
                         .store(in: &self.cancellable) //connect
                     
                 case .user(let action) :
                     switch action {
                         case .start:
                             publisher
-                                .sink { [weak self] _ in self?.task(totalDuration, lastStart, initialClock) }
+                                .sink { [weak self] _ in self?.task(totalDuration, lastStart, currentClock) }
                                 .store(in: &cancellable)
                             
                         case .pause:
