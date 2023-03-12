@@ -23,7 +23,11 @@ extension StartDelayBubble {
             
             let elapsedSinceLastStart = Float(Date().timeIntervalSince(lastStart))
             let grandTotal = totalDuration + elapsedSinceLastStart
-            print("totalDuration \(totalDuration), elapsed \(elapsedSinceLastStart), grandTotal \(grandTotal)")
+            print("""
+                  totalDuration \(totalDuration),
+                  elapsed \(elapsedSinceLastStart),
+                  grandTotal \(grandTotal)
+                  """)
             
             //            if currentClock > 0 {
 //                DispatchQueue.main.async {
