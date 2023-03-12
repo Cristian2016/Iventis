@@ -32,6 +32,7 @@ extension StartDelayBubble {
             
             DispatchQueue.main.async {
                 self.valueToDisplay = self.initialClock - elapsedSinceFirstStart
+                print(self.valueToDisplay, " valueToDisplay")
             }
             
             if viewModelShouldStartBubble {
