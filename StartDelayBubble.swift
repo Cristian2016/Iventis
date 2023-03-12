@@ -30,9 +30,13 @@ extension StartDelayBubble {
             
             let viewModelShouldStartBubble = elapsedSinceFirstStart >= initialClock //2
             
+            let difference = initialClock - elapsedSinceFirstStart
+            if difference < 1 && difference > 0 {
+                print("start dismiss timer at \(difference)")
+            }
+            
             DispatchQueue.main.async {
                 self.valueToDisplay = self.initialClock - elapsedSinceFirstStart
-                print(self.valueToDisplay, " valueToDisplay")
             }
             
             if viewModelShouldStartBubble {
