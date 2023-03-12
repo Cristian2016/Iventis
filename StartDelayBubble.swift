@@ -39,10 +39,12 @@ extension StartDelayBubble {
                 //-> viewModel will remove SDB
                 //-> viewModel starts bubble [toggleBubbleStart]
                 
-                let startCorrection = Int64(elapsedSinceFirstStart - initialClock)
+                let startCorrection = elapsedSinceFirstStart - initialClock
                 
                 DispatchQueue.main.async {
-                    let info = ["rank" : self.sdb!.bubble!.rank, "correction" : startCorrection]
+                    let info:[String : Any] = ["rank" : self.sdb!.bubble!.rank,
+                                               "startCorrection" : startCorrection]
+                    
                     NotificationCenter.default.post(name: .killSDB, object: nil, userInfo: info)
                     
                     self.cancellable = []
