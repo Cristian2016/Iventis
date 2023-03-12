@@ -50,15 +50,15 @@ struct MoreOptionsView: View {
                                     if !isPortrait {
                                         if emptyStruct.userEditedDelay != 0 {
                                             Text("**Save** \(Image(systemName: "hand.tap")) Tap outside frame")
-                                                .font(.footnote)
+                                                .font(metrics.infoFont)
                                                 .foregroundColor(.gray)
                                             
                                             Text("**Remove** \(Image(systemName: "arrow.left.circle.fill")) Swipe outside frame")
-                                                .font(.footnote)
+                                                .font(metrics.infoFont)
                                                 .foregroundColor(.gray)
                                         } else {
                                             Text("**Dismiss** \(Image(systemName: "hand.tap")) Tap outside frame")
-                                                .font(.footnote)
+                                                .font(metrics.infoFont)
                                                 .foregroundColor(.gray)
                                         }
                                     }
@@ -149,6 +149,7 @@ struct MoreOptionsView: View {
         let delayFont = Font.system(size: 80, design: .rounded)
         let font = Font.system(size: 30, weight: .medium)
         let digitFont = Font.system(size: 38, weight: .medium, design: .rounded)
+        let infoFont = Font.system(size: 20)
         
         let portraitColorRatio = CGFloat(1.9)
         let landscapeColorRatio = CGFloat(2.54)
