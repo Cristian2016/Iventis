@@ -22,16 +22,18 @@ class BubbleCellCoordinator {
     weak private var bubble:Bubble?
     
     // MARK: - Public API
-    func update(_ moment:Moment) {
+    func update(_ moment:Moment) { //main Thread ⚠️
         guard let bubble = bubble else { return }
+        
+        //⚠️ do not access bubble on bThread. extract properties here!!!
+        let isPinned = bubble.isPinned
+        let state = bubble.state
+        let initialClock = bubble.initialClock
         
         DispatchQueue.global().async {
             switch moment {
                 case .showAll:
-                    if bubble.state == .running && !bubble.isPinned {
-                        self.refresh = true
-                        print("refresh for \(bubble.color ?? "pula color")")
-                    }
+                    if state == .running && !isPinned { self.refresh = true }
                     
                 case .automatic:
                     DispatchQueue.main.async { self.components.hundredths = "" }
@@ -64,7 +66,6 @@ class BubbleCellCoordinator {
                             
                         case .endSession, .reset, .deleteCurrentSession:
                             self.cancellable = []
-                            let initialClock = bubble.initialClock
                             let stringComponents = initialClock.timeComponentsAsStrings
                             
                             DispatchQueue.main.async {
@@ -95,7 +96,7 @@ class BubbleCellCoordinator {
     // MARK: - Private API
     private var refresh /* all components */ = false //5
     
-    private func task() {
+    private func task() { //bThread ⚠️
         guard
             let bubble = self.bubble,
             let lastPairStart = bubble.lastPair?.start else { return }
