@@ -23,11 +23,7 @@ extension StartDelayBubble {
             
             let elapsedSinceLastStart = Float(Date().timeIntervalSince(lastStart))
             let elapsedSinceFirstStart = totalDuration + elapsedSinceLastStart
-//            print("""
-//                  totalDuration \(totalDuration),
-//                  elapsed \(elapsedSinceLastStart),
-//                  grandTotal \(grandTotal)
-//                  """)
+            
             if elapsedSinceFirstStart >= initialClock {
                 print(elapsedSinceFirstStart, initialClock, elapsedSinceLastStart >= initialClock)
                 //notify viewModel that currentClock has reached zero
@@ -35,17 +31,6 @@ extension StartDelayBubble {
                 //viewModel starts bubble [toggleBubbleStart]
                 cancellable = []
             }
-            
-            //            if currentClock > 0 {
-//                DispatchQueue.main.async {
-//                }
-//            } else {
-//                cancellable = []
-//
-//            }
-            
-            //let total = totalDurationOfAllPairs + elapsedSinceLastStart
-            //compare total to sdb.currentClock to know if overdue
         }
         
         func update(_ moment:Moment) { //main Thread
