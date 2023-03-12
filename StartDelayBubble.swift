@@ -37,7 +37,7 @@ extension StartDelayBubble {
             if viewModelShouldStartBubble {
                 //notify viewModel that currentClock has reached zero ->
                 //-> viewModel will remove SDB
-                //-> viewModel starts bubble [toggleBubbleStart]
+                //-> viewModel starts bubble [toggleBubbleStart] with startCorrection
                 
                 let startCorrection = TimeInterval(elapsedSinceFirstStart - initialClock)
                 
