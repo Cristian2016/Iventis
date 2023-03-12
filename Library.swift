@@ -3,7 +3,7 @@
 //  Timers (iOS)
 //
 //  Created by Cristian Lapusan on 14.01.2023.
-//
+//1 The LongPressGesture can be done by long-pressing which prompts an action. By default, the LongPressGesture is activated after half a second and you may even choose to change the duration (seconds)
 
 import SwiftUI
 
@@ -101,7 +101,7 @@ public extension UserInterfaceSizeClass {
 
 ///various constants and values
 public struct Global {
-    static let longPressLatency = Double(0.3) //seconds
+    static let longPressLatency = Double(0.5) //1
     
     struct FontSize {
         static let help = CGFloat(30)
