@@ -11,6 +11,7 @@
 import CoreData
 import SwiftUI
 import Combine
+import MyPackage
 
 
 public class StartDelayBubble: NSManagedObject {
@@ -37,12 +38,10 @@ extension StartDelayBubble {
             let difference = initialClock - elapsedSinceFirstStart
             
             if difference < 1 && difference > 0 {
-                print("start dismiss timer at \(difference)")
                 let date = TimeInterval(difference)
-                timer = Timer.scheduledTimer(withTimeInterval: date, repeats: false) { [weak self] _ in
-                    print("start bubble!")
+                delayExecution(.now() + date) {
+                    self.startBubble(self.initialClock)
                 }
-                timer?.fire()
                 return
             }
             
@@ -96,11 +95,13 @@ extension StartDelayBubble {
         
         private var timer:Timer?
         
-        private func startBubble(_ elapsedSinceFirstStart: Float) {
+        private func startBubble(_ elapsedSinceFirstStart: Float?) {
             //compute startCorrection
             //notify viewModel currentClock has reached zero, send startCorrection ->
             //-> viewModel removes SDButton
             //-> viewModel starts bubble [toggleBubbleStart] with startCorrection
+            
+            guard let elapsedSinceFirstStart = elapsedSinceFirstStart else { return }
             
             let startCorrection = TimeInterval(elapsedSinceFirstStart - initialClock)
             
