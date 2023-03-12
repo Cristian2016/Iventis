@@ -113,7 +113,6 @@ struct SDButton: View {
     
     init?(_ bubble:Bubble?) {
         guard let bubble = bubble else { return nil }
-        
         _bubble = StateObject(wrappedValue: bubble)
     }
 }
