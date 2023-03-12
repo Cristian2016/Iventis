@@ -54,7 +54,7 @@ extension StartDelayBubble {
                     NotificationCenter.default.post(name: .killSDB, object: nil, userInfo: info)
                     
                     self.cancellable = []
-                    self.sdb!.currentClock = 0
+                    self.sdb!.currentClock = 0 //only to set sdb.state to .finished
                 }
             }
         }
