@@ -55,8 +55,8 @@ extension StartDelayBubble {
                             
                         case .pause:
                             cancellable = []
-                            currentClock = sdb!.currentClock
-                            print("sdb.currentClock \(currentClock)")
+                            valueToDisplay = sdb!.currentClock
+                            print("valueToDisplay \(valueToDisplay)")
                             
                         case .reset: //sdb.currentClock has reached zero
                             cancellable = []
@@ -64,7 +64,7 @@ extension StartDelayBubble {
             }
         }
         
-        @Published private(set) var currentClock:Float //1
+        @Published private(set) var valueToDisplay:Float //1
         
         private lazy var publisher =
         NotificationCenter.Publisher(center: .default, name: .bubbleTimerSignal)
@@ -81,7 +81,7 @@ extension StartDelayBubble {
         // MARK: - Init Deinit
         init(_ sdb:StartDelayBubble) {
             self.sdb = sdb
-            self.currentClock = sdb.currentClock
+            self.valueToDisplay = sdb.currentClock
             observeActivePhase()
             
             if sdb.state == .running { update(.automatic) }
