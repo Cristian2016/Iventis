@@ -220,7 +220,7 @@ extension MoreOptionsView {
 //                        Text("**Start Delay**")
                         Text("**Use Green Area to**")
                         Divider().frame(width: 100)
-                        Text("**Save Delay** \(Image.tap) Tap")
+                        Text("**Save Start Delay** \(Image.tap) Tap")
                         Text("**Remove** \(Image.leftSwipe) Swipe")
                         Text("**Dismiss** \(Image.tap) Tap")
                     }
