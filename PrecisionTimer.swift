@@ -18,12 +18,42 @@ class PrecisionTimer {
     func setHandler(with deadline:DispatchTime, handler: @escaping () -> Void) {
         timer.setEventHandler { handler() }
         timer.schedule(deadline: deadline, leeway: .nanoseconds(0))
-        timer.activate()
+        perform(.start)
     }
     
     private var handler: (() -> Void)?
     
     deinit {
+        perform(.kill)
         print("PrecisionTimer deinit")
+    }
+    
+    enum Action {
+        case start
+        case kill
+    }
+    
+    enum State {
+        case suspended
+        case resumed
+    }
+    private(set) var state: State = .suspended
+    
+    private func perform(_ action:Action) {
+        switch action {
+            case .start:
+                if state == .suspended { resume() } else { return }
+            case .kill:
+                timer.setEventHandler {}
+                timer.cancel()
+                resume()
+                handler = nil
+        }
+    }
+    
+    private func resume() {
+        if state == .resumed {return}
+        state = .resumed
+        timer.resume()
     }
 }
