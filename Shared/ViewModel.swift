@@ -684,6 +684,9 @@ extension ViewModel {
             let thisBubble = self.controller.grabObj(objID) as! Bubble
             
             if let sdb = thisBubble.startDelayBubble {
+                DispatchQueue.main.async {
+                    bubble.startDelayBubble?.coordinator.update(.user(.reset))
+                }
                 thisBubble.startDelayBubble = nil
                 bContext.delete(sdb)
             }
