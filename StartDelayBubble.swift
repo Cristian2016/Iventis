@@ -38,15 +38,13 @@ extension StartDelayBubble {
             let difference = initialClock - elapsedSinceFirstStart
             
             if (Float(0)...1).contains(difference) {
-                let delay = TimeInterval(difference)
-                DispatchQueue.global(qos: .userInteractive).asyncAfter(deadline: .now() + delay) {
-                    self.startBubble(self.initialClock)
+                let deadline = DispatchTimeInterval.milliseconds(Int(difference * 1000))
+                precisionTimer.setHandler(with: .now() + deadline) { [weak self] in
+                    self?.startBubble(difference)
                 }
-                print("timer executed")
-                return
+            } else {
+                if viewModelShouldStartBubble { startBubble(elapsedSinceFirstStart) }
             }
-            
-            if viewModelShouldStartBubble { startBubble(elapsedSinceFirstStart) }
         }
         
         func update(_ moment:Moment) { //main Thread
@@ -94,7 +92,7 @@ extension StartDelayBubble {
             }
         }
         
-        private var timer:Timer?
+        private var precisionTimer = PrecisionTimer()
         
         private func startBubble(_ elapsedSinceFirstStart: Float?) {
             //compute startCorrection
