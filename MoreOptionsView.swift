@@ -83,38 +83,42 @@ struct MoreOptionsView: View {
     
     // MARK: - Lego
     private var startDelayDisplay:some View {
-        HStack(alignment: .firstTextBaseline) {
-            Spacer()
-            Text("Start Delay")
-                .font(.callout)
-                .minimumScaleFactor(0.1)
-                .lineLimit(1)
-                .truncationMode(.head)
-            
-            HStack(alignment: .firstTextBaseline, spacing: 0) {
-                Text(String(input!.userEditedDelay))
-                    .font(metrics.delayFont)
-                    .lineLimit(1)
-                    .minimumScaleFactor(0.1)
-                    .layoutPriority(10)
-                Text("s")
+        ZStack(alignment: .topLeading) {
+            HStack(alignment: .firstTextBaseline) {
+                Spacer()
+                Text("Start Delay")
                     .font(.callout)
-            }
-        }
-        .foregroundColor(.black)
-        .frame(maxWidth: .infinity)
-        .background(.white) //
-        .onTapGesture { saveDelay() }
-        .gesture(
-            DragGesture(minimumDistance: 10)
-                .onEnded { value in
-                    if input!.userEditedDelay != 0 {
-                        UserFeedback.doubleHaptic(.heavy)
-                        input!.userEditedDelay = 0
-                        viewModel.removeStartDelay(for: input?.bubble)
-                    }
+                    .minimumScaleFactor(0.1)
+                    .lineLimit(1)
+                    .truncationMode(.head)
+                
+                HStack(alignment: .firstTextBaseline, spacing: 0) {
+                    Text(String(input!.userEditedDelay))
+                        .font(metrics.delayFont)
+                        .lineLimit(1)
+                        .minimumScaleFactor(0.1)
+                        .layoutPriority(10)
+                    Text("s")
+                        .font(.callout)
                 }
-        )
+            }
+            .foregroundColor(.black)
+            .frame(maxWidth: .infinity)
+            .background(.white) //
+            .onTapGesture { saveDelay() }
+            .gesture(
+                DragGesture(minimumDistance: 10)
+                    .onEnded { value in
+                        if input!.userEditedDelay != 0 {
+                            UserFeedback.doubleHaptic(.heavy)
+                            input!.userEditedDelay = 0
+                            viewModel.removeStartDelay(for: input?.bubble)
+                        }
+                    }
+            )
+            Image.info
+                .foregroundColor(.black)
+        }
     }
     
     @ViewBuilder
