@@ -13,6 +13,9 @@ class PrecisionTimer {
         let timer = DispatchSource.makeTimerSource(flags: .strict, queue: queue)
         return timer
     }()
+    private(set) var state: State = .suspended
+    
+    private var handler: (() -> Void)?
     
     // MARK: - Public API
     func setHandler(with deadline:DispatchTime, handler: @escaping () -> Void) {
@@ -22,8 +25,6 @@ class PrecisionTimer {
     }
     
     // MARK: -
-    private var handler: (() -> Void)?
-    
     private func perform(_ action:Action) {
         switch action {
             case .start:
@@ -41,8 +42,6 @@ class PrecisionTimer {
         state = .resumed
         timer.resume()
     }
-    
-    private(set) var state: State = .suspended
     
     deinit {
         perform(.kill)
