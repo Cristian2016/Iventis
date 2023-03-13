@@ -23,6 +23,7 @@
 //16 why?????? if I don't reset bContext sessions will still be there after batchdelete
 //17 if ordinary bubbles are hidden & bubble to delete is pinned and pinned section has only one item, show ordinary!
 //18 Viewmodel listens for killStartDelayBubble notifications. ex: user sets a startDelay of 30 seconds. after 30 seconds StartDelayButton (SDButton) will be removed and bubble will be started. but it will be started with a correction (startCorrection) that is computed by sdbCoordinator. ViewModel.toggleBubbleStart calls the startCorrection "delta". Maybe I should change names a bit :)
+//19 set startDelay or replace existing startDelay with a new delay. if no sdb, create sdb and set startDelay. if sdb exists already, remove it and create a new sdb with a new startDelay
 
 import Foundation
 import SwiftUI
@@ -709,7 +710,7 @@ extension ViewModel {
                 coordinator?.valueToDisplay = delay
             }
         }
-    }
+    } //19
     
     func toggleSDBubble(_ bubble:Bubble?) {
         guard
