@@ -21,23 +21,8 @@ class PrecisionTimer {
         perform(.start)
     }
     
+    // MARK: -
     private var handler: (() -> Void)?
-    
-    deinit {
-        perform(.kill)
-        print("PrecisionTimer deinit")
-    }
-    
-    enum Action {
-        case start
-        case kill
-    }
-    
-    enum State {
-        case suspended
-        case resumed
-    }
-    private(set) var state: State = .suspended
     
     private func perform(_ action:Action) {
         switch action {
@@ -55,5 +40,24 @@ class PrecisionTimer {
         if state == .resumed {return}
         state = .resumed
         timer.resume()
+    }
+    
+    private(set) var state: State = .suspended
+    
+    deinit {
+        perform(.kill)
+        print("PrecisionTimer deinit")
+    }
+}
+
+extension PrecisionTimer {
+    enum Action {
+        case start
+        case kill
+    }
+    
+    enum State {
+        case suspended
+        case resumed
     }
 }
