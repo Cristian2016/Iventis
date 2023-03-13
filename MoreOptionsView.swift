@@ -39,27 +39,27 @@ struct MoreOptionsView: View {
                             .onTapGesture { saveDelay() }
                             .highPriorityGesture(swipeLeft)
                             .ignoresSafeArea()
-                            .overlay { MoreOptionsGreenArea() }
+                            .overlay { GreenArea() }
                         
                         layout {
                             if emptyStruct.bubble.state != .running {
                                 VStack(alignment: .trailing, spacing: 14) {
                                     VStack(alignment: .trailing, spacing: 4) {
                                         startDelayDisplay
-                                            .overlay { MoreOptionsGreenArea() }
+                                            .overlay { GreenArea() }
                                         digits
-                                            .overlay { MoreOptionsMaskArea() }
+                                            .overlay { MaskArea() }
                                     }
                                 }
                                 
                                 Divider()
-                                    .overlay { MoreOptionsMaskArea() }
+                                    .overlay { MaskArea() }
                             }
                             
                             Color.clear
                                 .overlay {
                                     ColorsGrid(emptyStruct.bubble, spacing: metrics.colorsSpacing) { saveDelay() }
-                                        .overlay { MoreOptionsMaskArea() }
+                                        .overlay { MaskArea() }
                                 }
                         }
                         .padding(10)
@@ -236,22 +236,52 @@ extension MoreOptionsView {
             let infoFont = Font.system(size: 20)
         }
     }
-}
+    
+    struct GreenArea: View {
+        @State private var showMoreOptionsHint = false
+        
+        var body: some View {
+            ZStack {
+                if showMoreOptionsHint {
+                    Color
+                        .green
+                        .ignoresSafeArea()
+                        .onTapGesture {
+                            withAnimation {
+                                Secretary.shared.showMoreOptionsHint = false
+                            }
+                        }
+                }
+            }
+            .onReceive(Secretary.shared.$showMoreOptionsHint) { output in
+                withAnimation { showMoreOptionsHint = output }
+            }
+        }
+    }
 
-//struct MoreOptionsView1_Previews: PreviewProvider {
-//    static let bubble:Bubble = {
-//        let bubble = Bubble(context: PersistenceController.preview.viewContext)
-//        let sdb = StartDelayBubble(context: PersistenceController.preview.viewContext)
-//        sdb.referenceDelay = 0
-//
-//        bubble.sdb = sdb
-//        bubble.color = "sourCherry"
-//        return bubble
-//    }()
-//    static var previews: some View {
-//        MoreOptionsView(emptyStruct.bubble)
-//    }
-//}
+    struct MaskArea: View {
+        @State private var showMoreOptionsHint = false
+        
+        var body: some View {
+            ZStack {
+                if showMoreOptionsHint {
+                    Color
+                        .white
+                        .ignoresSafeArea()
+                        .onTapGesture {
+                            withAnimation {
+                                Secretary.shared.showMoreOptionsHint = false
+                            }
+                        }
+                }
+            }
+            .onReceive(Secretary.shared.$showMoreOptionsHint) { output in
+                withAnimation { showMoreOptionsHint = output }
+            }
+        }
+    }
+    
+}
 
 struct SmallDigit:ButtonStyle {
     func makeBody(configuration: Configuration) -> some View {
