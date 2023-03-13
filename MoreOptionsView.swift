@@ -50,8 +50,6 @@ struct MoreOptionsView: View {
                                         digits
                                             .overlay { MoreOptionsMaskArea() }
                                     }
-                                    
-                                    hintView(isPortrait)
                                 }
                                 
                                 Divider()
@@ -74,6 +72,7 @@ struct MoreOptionsView: View {
                     }
                 }
             }
+            Hint()
         }
         .onReceive(secretary.$moreOptionsBuble) {
             if let bubble = $0 {
@@ -129,27 +128,6 @@ struct MoreOptionsView: View {
             } label: {
                 Image.info
                     .foregroundColor(.black)
-            }
-        }
-    }
-    
-    @ViewBuilder
-    private func hintView(_ isPortrait:Bool) -> some View {
-        if let emptyStruct = input {
-            if !isPortrait {
-                if emptyStruct.userEditedDelay != 0 {
-                    Text("**Save** \(Image.tap) Tap outside frame")
-                        .font(metrics.infoFont)
-                        .foregroundColor(.gray)
-                    
-                    Text("**Remove** \(Image.leftSwipe) Swipe outside frame")
-                        .font(metrics.infoFont)
-                        .foregroundColor(.gray)
-                } else {
-                    Text("**Dismiss** \(Image.tap) Tap outside frame")
-                        .font(metrics.infoFont)
-                        .foregroundColor(.gray)
-                }
             }
         }
     }
@@ -227,6 +205,36 @@ struct MoreOptionsView: View {
     private func saveColor(to colorName: String) {
         viewModel.changeColor(of: input!.bubble, to: colorName)
         //dimiss will be called separately
+    }
+}
+
+extension MoreOptionsView {
+    struct Hint: View {
+        @State private var showMoreOptionsHint = false
+        let metrics = Metrics()
+        
+        var body: some View {
+            ZStack {
+                if showMoreOptionsHint {
+                    VStack(alignment: .leading) {
+                        Text("Use Green Area To")
+                        Text("**Save Start Delay** \(Image.tap) Tap")
+                        Text("**Remove Start Delay** \(Image.leftSwipe) Swipe")
+                        Text("**Dismiss** \(Image.tap) Tap")
+                    }
+                    .font(metrics.infoFont)
+                    .foregroundColor(.gray)
+                }
+            }
+            .onReceive(Secretary.shared.$showMoreOptionsHint) { output in
+                withAnimation { showMoreOptionsHint = output }
+            }
+        }
+        
+        struct Metrics {
+            let font = Font.system(size: 30, weight: .medium)
+            let infoFont = Font.system(size: 20)
+        }
     }
 }
 
