@@ -42,7 +42,6 @@ struct MoreOptionsView: View {
                         layout {
                             if emptyStruct.bubble.state != .running {
                                 VStack(alignment: .trailing, spacing: 14) {
-                                    
                                     VStack(alignment: .trailing, spacing: 4) {
                                         startDelayDisplay
                                         digits
@@ -55,7 +54,7 @@ struct MoreOptionsView: View {
                             }
                             
                             Color.clear
-                                .overlay { ColorsGrid(emptyStruct.bubble, spacing: 4) { saveDelay() }}
+                                .overlay { ColorsGrid(emptyStruct.bubble, spacing: metrics.colorsSpacing) { saveDelay() }}
                         }
                         .padding(10)
                         .background {
@@ -140,7 +139,7 @@ struct MoreOptionsView: View {
     }
     
     private var digits:some View {
-        HStack(spacing: metrics.spacing) {
+        HStack(spacing: metrics.digitSpacing) {
             ForEach(Bubble.delays, id:\.self) { delay in
                 Button {
                     UserFeedback.singleHaptic(.light)
@@ -166,7 +165,8 @@ struct MoreOptionsView: View {
         let radius = CGFloat(10)
         
         let minWidth = CGFloat(300)
-        let spacing = CGFloat(4)
+        let digitSpacing = CGFloat(4)
+        let colorsSpacing = CGFloat(0)
         
         let delayFont = Font.system(size: 80, design: .rounded)
         let font = Font.system(size: 30, weight: .medium)
@@ -178,7 +178,7 @@ struct MoreOptionsView: View {
                 
         let vStackSpacing = CGFloat(8)
         
-        var columns:[GridItem] { Array(repeating: GridItem(spacing: spacing), count: 3) }
+        var columns:[GridItem] { Array(repeating: GridItem(spacing: 0), count: 3) }
     }
     
     // MARK: -
