@@ -74,6 +74,7 @@ extension StartDelayBubble {
                             
                         case .reset: //sdb.currentClock has reached zero
                             cancellable = []
+                            animateSDButton = false
                             //remove all pairs
                             
                     }
