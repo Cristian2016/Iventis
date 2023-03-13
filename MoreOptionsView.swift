@@ -219,7 +219,7 @@ extension MoreOptionsView {
                     VStack(alignment: .leading) {
                         Color.clear
                             .frame(width: 20, height: 20)
-                        Text("**Use Green Area to**")
+                        Text("**Use Green Areas to**")
                         Divider().frame(width: 100)
                         Text("**Save Start Delay** \(Image.tap) Tap")
                         Text("**Remove** \(Image.leftSwipe) Swipe")
