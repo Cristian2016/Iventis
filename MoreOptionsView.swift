@@ -10,7 +10,7 @@ import SwiftUI
 import MyPackage
 
 struct MoreOptionsView: View {
-    @AppStorage("showMoreOptionsHint", store: .shared) var showMoreOptionsHint = false
+    @AppStorage("moreOptionsHint", store: .shared) var moreOptionsHint = false
     
     struct Input {
         var bubble:Bubble
@@ -90,7 +90,7 @@ struct MoreOptionsView: View {
     // MARK: - Lego
     @ViewBuilder
     private var whiteArea:some View {
-        if showMoreOptionsHint {
+        if moreOptionsHint {
             Color
                 .white
                 .ignoresSafeArea()
@@ -99,14 +99,13 @@ struct MoreOptionsView: View {
     
     @ViewBuilder
     private var greenArea:some View {
-        if showMoreOptionsHint {
+        if moreOptionsHint {
             Rectangle()
                 .fill(.green)
                 .ignoresSafeArea()
                 .allowsHitTesting(true)
                 .onTapGesture {
-                    print("green area tapped")
-                    showMoreOptionsHint = false
+                    moreOptionsHint = false
                 }
         }
     }
@@ -146,7 +145,7 @@ struct MoreOptionsView: View {
                     }
             )
             Button {
-                showMoreOptionsHint = true
+                moreOptionsHint = true
             } label: {
                 Image.info
                     .foregroundColor(.black)
