@@ -7,6 +7,7 @@
 
 import Foundation
 
+///executes handler only once [at a specified dealine] and then it deinits immediately
 class PrecisionTimer {
     private var timer:DispatchSourceTimer = {
         let queue = DispatchQueue(label: "precisionTimer", qos: .userInteractive)
