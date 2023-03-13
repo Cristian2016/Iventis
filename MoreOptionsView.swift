@@ -10,6 +10,8 @@ import SwiftUI
 import MyPackage
 
 struct MoreOptionsView: View {
+    @AppStorage("showMoreOptionsHint", store: .shared) var showMoreOptionsHint = false
+    
     struct Input {
         var bubble:Bubble
         var initialBubbleColor:Color
@@ -38,12 +40,14 @@ struct MoreOptionsView: View {
                             .onTapGesture { saveDelay() }
                             .highPriorityGesture(swipeLeft)
                             .ignoresSafeArea()
+                            .overlay { greenArea }
                         
                         layout {
                             if emptyStruct.bubble.state != .running {
                                 VStack(alignment: .trailing, spacing: 14) {
                                     VStack(alignment: .trailing, spacing: 4) {
                                         startDelayDisplay
+                                            .overlay { greenArea }
                                         digits
                                     }
                                     
@@ -54,7 +58,9 @@ struct MoreOptionsView: View {
                             }
                             
                             Color.clear
-                                .overlay { ColorsGrid(emptyStruct.bubble, spacing: metrics.colorsSpacing) { saveDelay() }}
+                                .overlay {
+                                    ColorsGrid(emptyStruct.bubble, spacing: metrics.colorsSpacing) { saveDelay() }
+                                }
                         }
                         .padding(10)
                         .background {
@@ -71,9 +77,7 @@ struct MoreOptionsView: View {
             if let bubble = $0 {
                 let color = Color.bubbleColor(forName: bubble.color)
                 let initialStartDelay = Int(bubble.startDelayBubble?.initialClock ?? 0)
-                
-                print("received delay initialClock \(bubble.startDelayBubble?.initialClock)")
-                                
+                                                
                 input = Input(bubble: bubble,
                               initialBubbleColor: color,
                               initialStartDelay: initialStartDelay,
@@ -84,6 +88,29 @@ struct MoreOptionsView: View {
     }
     
     // MARK: - Lego
+    @ViewBuilder
+    private var whiteArea:some View {
+        if showMoreOptionsHint {
+            Color
+                .white
+                .ignoresSafeArea()
+        }
+    }
+    
+    @ViewBuilder
+    private var greenArea:some View {
+        if showMoreOptionsHint {
+            Rectangle()
+                .fill(.green)
+                .ignoresSafeArea()
+                .allowsHitTesting(true)
+                .onTapGesture {
+                    print("green area tapped")
+                    showMoreOptionsHint = false
+                }
+        }
+    }
+    
     private var startDelayDisplay:some View {
         ZStack(alignment: .topLeading) {
             HStack(alignment: .firstTextBaseline) {
@@ -118,8 +145,12 @@ struct MoreOptionsView: View {
                         }
                     }
             )
-            Image.info
-                .foregroundColor(.black)
+            Button {
+                showMoreOptionsHint = true
+            } label: {
+                Image.info
+                    .foregroundColor(.black)
+            }
         }
     }
     
