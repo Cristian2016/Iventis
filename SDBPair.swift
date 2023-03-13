@@ -12,7 +12,7 @@ import CoreData
 
 public class SDBPair: NSManagedObject {
     deinit {
-//        print(#function, "SDBPair")
+        print(#function, "SDBPair")
     }
     
     func computeDuration() -> Float {

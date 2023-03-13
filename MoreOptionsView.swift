@@ -71,6 +71,8 @@ struct MoreOptionsView: View {
             if let bubble = $0 {
                 let color = Color.bubbleColor(forName: bubble.color)
                 let initialStartDelay = Int(bubble.startDelayBubble?.initialClock ?? 0)
+                
+                print("received delay initialClock \(bubble.startDelayBubble?.initialClock)")
                                 
                 input = Input(bubble: bubble,
                               initialBubbleColor: color,

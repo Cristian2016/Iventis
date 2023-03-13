@@ -683,21 +683,27 @@ extension ViewModel {
         bContext.perform {
             let thisBubble = self.controller.grabObj(objID) as! Bubble
             
-            if let sdb = thisBubble.startDelayBubble { //set existing SDB
-                sdb.initialClock = delay
-                sdb.currentClock = delay
-                
-            } else { //create SDB
+            if let sdb = thisBubble.startDelayBubble {
+                thisBubble.startDelayBubble = nil
+                bContext.delete(sdb)
+            }
+            
+            //create SDB
                 let sdb = StartDelayBubble(context: bContext)
                 sdb.created = Date()
                 sdb.initialClock = delay
                 sdb.currentClock = delay
                 thisBubble.startDelayBubble = sdb
-            }
             
             self.controller.save(bContext)
             DispatchQueue.main.async {
-                bubble.startDelayBubble?.coordinator.valueToDisplay = delay
+                let coordinator = bubble.startDelayBubble?.coordinator
+                if let cancellabble = coordinator?.cancellable, !cancellabble.isEmpty {
+                    coordinator?.update(.user(.reset))
+                    //remove all sdb.pairs
+                    
+                }
+                coordinator?.valueToDisplay = delay
             }
         }
     }

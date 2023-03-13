@@ -52,7 +52,7 @@ extension StartDelayBubble {
             guard let lastStart = sdb?.pairs_.last?.start else { return }
             let totalDuration = sdb!.totalDuration
             let currentClock = sdb!.currentClock
-            
+                        
             switch moment {
                 case .automatic: //when app lanches
                     self.publisher
@@ -74,6 +74,8 @@ extension StartDelayBubble {
                             
                         case .reset: //sdb.currentClock has reached zero
                             cancellable = []
+                            //remove all pairs
+                            
                     }
             }
         }
