@@ -78,7 +78,7 @@ struct ColorsGrid: View {
     
     struct Metrics {
         let spacing:CGFloat
-        let checkmarkFont = Font.system(size: 30, weight: .medium, design: .rounded)
+        let checkmarkFont = Font.system(size: 30, weight: .semibold)
     }
 }
 
