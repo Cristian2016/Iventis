@@ -676,7 +676,10 @@ extension ViewModel {
     }
     
     func setStartDelayBubble(_ delay:Float, for bubble:Bubble?) {
-        guard let bubble = bubble else { return }
+        guard let bubble = bubble, bubble.state != .running else {
+            
+            return
+        }
         
         let bContext = controller.bContext
         let objID = bubble.objectID
@@ -710,6 +713,7 @@ extension ViewModel {
                 coordinator?.valueToDisplay = delay
             }
         }
+        print(#function)
     } //19
     
     func toggleSDBubble(_ bubble:Bubble?) {
