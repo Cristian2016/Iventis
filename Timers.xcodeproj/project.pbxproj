@@ -99,6 +99,7 @@
 		1FAD157C298AAFDB001139C6 /* BubbleDeleteActionAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FAD157B298AAFDB001139C6 /* BubbleDeleteActionAlert.swift */; };
 		1FAD9B4229961FC000F49670 /* ThreeCircles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FAD9B4129961FC000F49670 /* ThreeCircles.swift */; };
 		1FAE715D298D1CA200E19959 /* DualTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FAE715C298D1CA200E19959 /* DualTextView.swift */; };
+		1FAE726129BFAF5300080165 /* MoreOptionsGreenArea.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FAE726029BFAF5300080165 /* MoreOptionsGreenArea.swift */; };
 		1FAF39D9298575E9002D833C /* Library.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA377E72972FE75005ACD41 /* Library.swift */; };
 		1FB2EA772997BD2F00752595 /* ThreeLabels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB2EA762997BD2F00752595 /* ThreeLabels.swift */; };
 		1FB3178F286ACB48006BBE82 /* Note_InfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB3178E286ACB48006BBE82 /* Note_InfoView.swift */; };
@@ -247,6 +248,7 @@
 		1FAD157B298AAFDB001139C6 /* BubbleDeleteActionAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BubbleDeleteActionAlert.swift; sourceTree = "<group>"; };
 		1FAD9B4129961FC000F49670 /* ThreeCircles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreeCircles.swift; sourceTree = SOURCE_ROOT; };
 		1FAE715C298D1CA200E19959 /* DualTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DualTextView.swift; sourceTree = "<group>"; };
+		1FAE726029BFAF5300080165 /* MoreOptionsGreenArea.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreOptionsGreenArea.swift; sourceTree = SOURCE_ROOT; };
 		1FB2EA762997BD2F00752595 /* ThreeLabels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreeLabels.swift; sourceTree = "<group>"; };
 		1FB3178E286ACB48006BBE82 /* Note_InfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Note_InfoView.swift; sourceTree = "<group>"; };
 		1FB4D4DF2977F86500F26D9C /* iPadViewHierarchy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iPadViewHierarchy.swift; sourceTree = "<group>"; };
@@ -407,6 +409,7 @@
 		1F5F4A4728093FAD00AF3442 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				1FAE726029BFAF5300080165 /* MoreOptionsGreenArea.swift */,
 				1F53DD6B29BEFB8A00E33B77 /* PrecisionTimer.swift */,
 				1F38A00329B9000D009AD543 /* yPositionTracker.swift */,
 				1F83A44E29A965D90058E6E2 /* DigitsView.swift */,
@@ -651,6 +654,7 @@
 				1F64200A2820204400413E31 /* PairList.swift in Sources */,
 				1FA1B44A298321D20063B081 /* iPhoneViewHierarchy.swift in Sources */,
 				1F20807C2836111600FD35D6 /* BSavedNote.swift in Sources */,
+				1FAE726129BFAF5300080165 /* MoreOptionsGreenArea.swift in Sources */,
 				1F615B6329899E210006DB0B /* BackgroundTimer.swift in Sources */,
 				1FAD9B4229961FC000F49670 /* ThreeCircles.swift in Sources */,
 				1F8AAFA329927B2900328AC7 /* FramePortrait.swift in Sources */,

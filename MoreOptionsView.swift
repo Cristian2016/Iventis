@@ -10,8 +10,6 @@ import SwiftUI
 import MyPackage
 
 struct MoreOptionsView: View {
-    @AppStorage("moreOptionsHint", store: .shared) var moreOptionsHint = false
-    
     struct Input {
         var bubble:Bubble
         var initialBubbleColor:Color
@@ -32,6 +30,7 @@ struct MoreOptionsView: View {
             if let emptyStruct = input {
                 GeometryReader { geo in
                     let isPortrait = geo.size.height > geo.size.width
+                    
                     let layout = isPortrait ?
                     AnyLayout(VStackLayout()) : .init(HStackLayout(alignment: .top))
                     
@@ -40,26 +39,29 @@ struct MoreOptionsView: View {
                             .onTapGesture { saveDelay() }
                             .highPriorityGesture(swipeLeft)
                             .ignoresSafeArea()
-                            .overlay { greenArea }
+                            .overlay { MoreOptionsGreenArea() }
                         
                         layout {
                             if emptyStruct.bubble.state != .running {
                                 VStack(alignment: .trailing, spacing: 14) {
                                     VStack(alignment: .trailing, spacing: 4) {
                                         startDelayDisplay
-                                            .overlay { greenArea }
+                                            .overlay { MoreOptionsGreenArea() }
                                         digits
+                                            .overlay { MoreOptionsMaskArea() }
                                     }
                                     
                                     hintView(isPortrait)
                                 }
                                 
                                 Divider()
+                                    .overlay { MoreOptionsMaskArea() }
                             }
                             
                             Color.clear
                                 .overlay {
                                     ColorsGrid(emptyStruct.bubble, spacing: metrics.colorsSpacing) { saveDelay() }
+                                        .overlay { MoreOptionsMaskArea() }
                                 }
                         }
                         .padding(10)
@@ -88,28 +90,6 @@ struct MoreOptionsView: View {
     }
     
     // MARK: - Lego
-    @ViewBuilder
-    private var whiteArea:some View {
-        if moreOptionsHint {
-            Color
-                .white
-                .ignoresSafeArea()
-        }
-    }
-    
-    @ViewBuilder
-    private var greenArea:some View {
-        if moreOptionsHint {
-            Rectangle()
-                .fill(.green)
-                .ignoresSafeArea()
-                .allowsHitTesting(true)
-                .onTapGesture {
-                    moreOptionsHint = false
-                }
-        }
-    }
-    
     private var startDelayDisplay:some View {
         ZStack(alignment: .topLeading) {
             HStack(alignment: .firstTextBaseline) {
@@ -145,7 +125,7 @@ struct MoreOptionsView: View {
                     }
             )
             Button {
-                moreOptionsHint = true
+                secretary.showMoreOptionsHint = true
             } label: {
                 Image.info
                     .foregroundColor(.black)
