@@ -217,7 +217,8 @@ extension MoreOptionsView {
             ZStack {
                 if showMoreOptionsHint {
                     VStack(alignment: .leading) {
-//                        Text("**Start Delay**")
+                        Color.clear
+                            .frame(width: 20, height: 20)
                         Text("**Use Green Area to**")
                         Divider().frame(width: 100)
                         Text("**Save Start Delay** \(Image.tap) Tap")
