@@ -675,7 +675,7 @@ extension ViewModel {
         }
     }
     
-    func setStartDelayBubble(_ delay:Float, for bubble:Bubble?) {
+    func setStartDelay(_ delay:Float, for bubble:Bubble?) {
         guard let bubble = bubble, bubble.state != .running else {
             print("show alert could not set start delay since the bubble was already running")
             return
@@ -688,6 +688,9 @@ extension ViewModel {
             let thisBubble = self.controller.grabObj(objID) as! Bubble
             
             if let sdb = thisBubble.startDelayBubble {
+                //startDelay exists already
+                //remove existing startDelay
+                
                 DispatchQueue.main.async {
                     bubble.startDelayBubble?.coordinator.update(.user(.reset))
                 }

@@ -81,6 +81,7 @@ extension StartDelayBubble {
         }
         
         @Published var valueToDisplay:Float //1
+        @Published var animateSDButton = false
         
         private lazy var publisher =
         NotificationCenter.Publisher(center: .default, name: .bubbleTimerSignal)
