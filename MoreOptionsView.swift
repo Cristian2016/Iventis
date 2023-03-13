@@ -217,9 +217,11 @@ extension MoreOptionsView {
             ZStack {
                 if showMoreOptionsHint {
                     VStack(alignment: .leading) {
-                        Text("Use Green Area To")
-                        Text("**Save Start Delay** \(Image.tap) Tap")
-                        Text("**Remove Start Delay** \(Image.leftSwipe) Swipe")
+                        Text("**Start Delay**")
+                        Text("Use Green Area to:")
+                        Divider().frame(width: 100)
+                        Text("**Save** \(Image.tap) Tap")
+                        Text("**Remove** \(Image.leftSwipe) Swipe")
                         Text("**Dismiss** \(Image.tap) Tap")
                     }
                     .font(metrics.infoFont)
