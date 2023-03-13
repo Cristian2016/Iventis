@@ -16,11 +16,8 @@ class PrecisionTimer {
     
     // MARK: - Public API
     func setHandler(with deadline:DispatchTime, handler: @escaping () -> Void) {
+        timer.setEventHandler { handler() }
         timer.schedule(deadline: deadline, leeway: .nanoseconds(0))
-        timer.setEventHandler {
-            print("handler set")
-            handler()
-        }
         timer.activate()
     }
     

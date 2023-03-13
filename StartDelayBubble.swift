@@ -38,9 +38,9 @@ extension StartDelayBubble {
             let difference = initialClock - elapsedSinceFirstStart
             
             if (Float(0)...1).contains(difference) {
-                let deadline = DispatchTimeInterval.milliseconds(Int(difference * 1000))
-                precisionTimer.setHandler(with: .now() + deadline) { [weak self] in
-                    self?.startBubble(difference)
+                let deadline:DispatchTime = .now() + DispatchTimeInterval.milliseconds(Int(difference * 1000))
+                precisionTimer.setHandler(with: deadline) { [weak self] in
+                    self?.startBubble(self?.initialClock)
                 }
             } else {
                 if viewModelShouldStartBubble { startBubble(elapsedSinceFirstStart) }
