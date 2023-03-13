@@ -677,7 +677,7 @@ extension ViewModel {
     
     func setStartDelayBubble(_ delay:Float, for bubble:Bubble?) {
         guard let bubble = bubble, bubble.state != .running else {
-            
+            print("show alert could not set start delay since the bubble was already running")
             return
         }
         
@@ -696,24 +696,22 @@ extension ViewModel {
             }
             
             //create SDB
-                let sdb = StartDelayBubble(context: bContext)
-                sdb.created = Date()
-                sdb.initialClock = delay
-                sdb.currentClock = delay
-                thisBubble.startDelayBubble = sdb
+            let sdb = StartDelayBubble(context: bContext)
+            sdb.created = Date()
+            sdb.initialClock = delay
+            sdb.currentClock = delay
+            thisBubble.startDelayBubble = sdb
             
             self.controller.save(bContext)
+            
             DispatchQueue.main.async {
                 let coordinator = bubble.startDelayBubble?.coordinator
                 if let cancellabble = coordinator?.cancellable, !cancellabble.isEmpty {
                     coordinator?.update(.user(.reset))
-                    //remove all sdb.pairs
-                    
                 }
                 coordinator?.valueToDisplay = delay
             }
         }
-        print(#function)
     } //19
     
     func toggleSDBubble(_ bubble:Bubble?) {
