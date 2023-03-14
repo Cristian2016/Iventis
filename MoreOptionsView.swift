@@ -230,7 +230,7 @@ extension MoreOptionsView {
                 if showMoreOptionsHint {
                     ThinMaterialLabel(title: "\(delay) Start Delay") {
                         if !delay.isEmpty {
-                            Text("Start delayed by \(input.userEditedDelay) sec")
+                            Text("Start after \(input.userEditedDelay) sec")
                                 .foregroundColor(.secondary)
                             Divider().frame(maxWidth: 300)
                         } else {
