@@ -245,6 +245,7 @@ extension MoreOptionsView {
                             Text("**Remove** \(Image.leftSwipe) Swipe")
                             Text("**Dismiss** \(Image.tap) Tap")
                         }
+                        .foregroundColor(.label)
                     } action: {
                         withAnimation {
                             Secretary.shared.showMoreOptionsHint = false
@@ -252,7 +253,6 @@ extension MoreOptionsView {
                     }
                     
                     .font(metrics.infoFont)
-                    .foregroundColor(.label)
                 }
             }
             .onReceive(Secretary.shared.$showMoreOptionsHint) { output in
