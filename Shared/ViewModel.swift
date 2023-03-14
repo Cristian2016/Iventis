@@ -260,10 +260,10 @@ extension ViewModel {
     } //9
     
     ///delta is always zero if user taps start. if user uses start delay, delta is not zero
-    func toggleBubbleStart(_ bubble:Bubble, delta:TimeInterval? = nil) {
+    func toggleBubbleStart(_ bubble:Bubble, startDelayCompensation:TimeInterval? = nil) {
         if bubble.currentClock <= 0 && bubble.kind != .stopwatch  { return }
         
-        let startDelayCompensation = delta ?? 0
+        let startDelayCompensation = startDelayCompensation ?? 0
         let bContext = PersistenceController.shared.bContext
         let objID = bubble.objectID
         
@@ -770,7 +770,7 @@ extension ViewModel {
             else { fatalError() }
                         
             self?.removeStartDelay(for: bubble)
-            self?.toggleBubbleStart(bubble, delta: startCorrection)
+            self?.toggleBubbleStart(bubble, startDelayCompensation: startCorrection)
         }
     } //18
         

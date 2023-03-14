@@ -79,9 +79,9 @@ class BubbleCellCoordinator {
                                 self.components.hundredths = stringComponents.hundredths
                                 
                                 if bubble.kind == .stopwatch {
-                                    self.opacity.update(0)
+                                    self.opacity.updateOpacity(0)
                                 } else {
-                                    self.opacity.update(bubble.initialClock)
+                                    self.opacity.updateOpacity(bubble.initialClock)
                                 }
                             }
                             
@@ -119,7 +119,7 @@ class BubbleCellCoordinator {
                 self.components.min = minValue
                 if intValue == 60 || self.refresh {
                     withAnimation(.spring(response: 0.5, dampingFraction: 0.5)) {
-                        self.opacity.update(value)
+                        self.opacity.updateOpacity(value)
                     }
                 }
             }
@@ -130,7 +130,7 @@ class BubbleCellCoordinator {
                 DispatchQueue.main.async { //send hour
                     self.components.hr = hrValue
                     if intValue == 3600 || self.refresh {
-                        withAnimation { self.opacity.update(value) }
+                        withAnimation { self.opacity.updateOpacity(value) }
                     }
                 }
             }
@@ -177,7 +177,7 @@ class BubbleCellCoordinator {
                                                  components.hundredths
                     )
                     
-                    self.opacity.update(self.initialValue)
+                    self.opacity.updateOpacity(self.initialValue)
                     
                     if bubble.state == .running { self.update(.automatic) }
                 }
@@ -200,7 +200,7 @@ class BubbleCellCoordinator {
                                          components.min,
                                          components.sec,
                                          components.hundredths)
-            self.opacity.update(self.initialValue)
+            self.opacity.updateOpacity(self.initialValue)
         }
     }
     
@@ -245,7 +245,7 @@ extension BubbleCellCoordinator {
         var hr = CGFloat(0)
         var min = CGFloat(0)
         
-        mutating func update(_ value:Float) {
+        mutating func updateOpacity(_ value:Float) {
             min = value > 59 ? 1 : 0.001
             hr = value > 3599 ?  1 : 0.001
         }
