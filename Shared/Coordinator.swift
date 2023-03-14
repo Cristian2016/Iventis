@@ -23,7 +23,7 @@ class BubbleCellCoordinator {
     weak private var bubble:Bubble?
     
     // MARK: - Public API
-    func update(_ moment:Moment) { //main Thread ⚠️
+    func update(_ moment:Moment, refresh:Bool = false) { //main Thread ⚠️
         guard let bubble = bubble else { return }
         
         //⚠️ do not access bubble on bThread. extract properties here!!!
@@ -62,7 +62,8 @@ class BubbleCellCoordinator {
                             }
                             
                         case .start:
-                            self.refresh = false
+                            self.refresh = refresh
+                            print("start with refresh \(self.refresh)")
                             self.publisher
                                 .sink { [weak self] _ in self?.task(currentClock, lastPairStart) }
                                 .store(in: &self.cancellable) //connect
@@ -102,6 +103,7 @@ class BubbleCellCoordinator {
     
     private func task(_ currentClock:Float, _ lastStart:Date?) { //bThread ⚠️
         guard let lastPairStart = lastStart else { return }
+        let refresh = self.refresh
                         
         let Δ = Float(Date().timeIntervalSince(lastPairStart)) //2
         var value = currentClock + Δ //ex: 2345.87648
@@ -111,26 +113,25 @@ class BubbleCellCoordinator {
         let intValue = Int(value)
         let secValue = intValue%60
         
-        if secValue == 0 || self.refresh { //send minute and hour
+        if secValue == 0 || refresh { //send minute and hour
             let giveMeAName = intValue/60%60
             let minValue = String(giveMeAName)
             
             DispatchQueue.main.async { //send min
                 self.components.min = minValue
-                if intValue == 60 || self.refresh {
-                    withAnimation(.spring(response: 0.5, dampingFraction: 0.5)) {
-                        self.opacity.updateOpacity(value)
-                    }
+                if intValue == 60 || refresh {
+                    print("update min opacity \(intValue)")
+                    self.opacity.updateOpacity(value)
                 }
             }
             
-            if (giveMeAName%60) == 0 || self.refresh {
+            if (giveMeAName%60) == 0 || refresh {
                 let hrValue = String(intValue/3600)
                 
                 DispatchQueue.main.async { //send hour
                     self.components.hr = hrValue
-                    if intValue == 3600 || self.refresh {
-                        withAnimation { self.opacity.updateOpacity(value) }
+                    if intValue == 3600 || refresh {
+                        self.opacity.updateOpacity(value)
                     }
                 }
             }

@@ -286,7 +286,9 @@ extension ViewModel {
                     //this also makes changes visible to the viewContext as well
                     self.controller.save(bContext) { //⚠️ no need to save viewContext
                         delayExecution(self.delay) { //UI stuff
-                            bubble.coordinator.update(.user(.start))
+                            let refresh = startDelayCompensation != 0
+                            bubble.coordinator.update(.user(.start), refresh: refresh)
+                            
                             bubble.pairBubbleCellCoordinator.update(.user(.start))
                             
                             //1 both
@@ -312,7 +314,10 @@ extension ViewModel {
                     //this also makes changes visible to the viewContext as well
                     self.controller.save(bContext) { //⚠️ no need to save vContext
                         delayExecution(self.delay) { //UI stuff
-                            bubble.coordinator.update(.user(.start))
+                            
+                            let refresh = startDelayCompensation != 0
+                            bubble.coordinator.update(.user(.start), refresh: refresh)
+                            
                             bubble.pairBubbleCellCoordinator.update(.user(.start))
                             
                             //1 both
@@ -770,6 +775,7 @@ extension ViewModel {
             else { fatalError() }
                         
             self?.removeStartDelay(for: bubble)
+            
             self?.toggleBubbleStart(bubble, startDelayCompensation: startCorrection)
         }
     } //18
