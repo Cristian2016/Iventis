@@ -15,7 +15,7 @@ struct SecondsLabel: View {
     
     var body: some View {
         if bubble.coordinator != nil {
-            Circle().fill(Color.clear)
+            circle
                 .overlay {
                     rectangle
                         .aspectRatio(1.2, contentMode: .fit)
@@ -27,6 +27,10 @@ struct SecondsLabel: View {
     }
     
     // MARK: - Lego
+    private var circle: some View {
+        Circle().fill(Color.clear)
+    }
+    
     private var rectangle:some View {
         Rectangle().fill(.clear)
     }
