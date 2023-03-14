@@ -234,6 +234,10 @@ extension MoreOptionsView {
                             Text("Start delayed by \(input.userEditedDelay) sec")
                                 .foregroundColor(.secondary)
                             Divider().frame(maxWidth: 300)
+                        } else {
+                            Text("Delay start by a number of seconds")
+                                .foregroundColor(.secondary)
+                            Divider().frame(maxWidth: 300)
                         }
                         VStack(alignment: .leading) {
                             Text("*Use Yellow Areas to*")
