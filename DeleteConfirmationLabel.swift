@@ -17,13 +17,13 @@ struct DeleteConfirmationLabel: View {
         RoundedRectangle(cornerRadius: 4)
             .fill(deleteOffsetReached ? .green : .red)
             .aspectRatio(3.5, contentMode: .fit)
+            .frame(height: 100)
             .overlay {
                 Text("Delete").allowsHitTesting(false)
                     .font(.system(size: 300))
                     .minimumScaleFactor(0.1)
                     .foregroundColor(.white)
             }
-            .frame(height: 100)
             .opacity(deleteLabelVisible ? 1 : 1)
     }
     
@@ -36,9 +36,9 @@ struct DeleteConfirmationLabel: View {
 
 //RoundedRectangle()
 //    .aspectRatio(3.5, contentMode: .fit)
+//    .frame(height: 100)
 //    .overlay {
 //        Text("Delete")
 //            .font(.system(size: 300))
 //            .minimumScaleFactor(0.1)
 //    }
-//    .frame(height: 100)
