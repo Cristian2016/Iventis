@@ -39,14 +39,14 @@ struct MoreOptionsView: View {
                             .onTapGesture { saveDelay() }
                             .highPriorityGesture(swipeLeft)
                             .ignoresSafeArea()
-                            .overlay { GreenArea() }
+                            .overlay { YellowArea() }
                         
                         layout {
                             if emptyStruct.bubble.state != .running {
                                 VStack(alignment: .trailing, spacing: 14) {
                                     VStack(alignment: .trailing, spacing: 4) {
                                         startDelayDisplay
-                                            .overlay { GreenArea() }
+                                            .overlay { YellowArea() }
                                         digits
                                             .overlay { MaskArea() }
                                     }
@@ -219,14 +219,14 @@ extension MoreOptionsView {
                     VStack(alignment: .leading) {
                         Color.clear
                             .frame(width: 20, height: 20)
-                        Text("**Use Green Areas to**")
+                        Text("**Use Yellow Areas to**")
                         Divider().frame(width: 100)
                         Text("**Save Start Delay** \(Image.tap) Tap")
                         Text("**Remove** \(Image.leftSwipe) Swipe")
                         Text("**Dismiss** \(Image.tap) Tap")
                     }
                     .font(metrics.infoFont)
-                    .foregroundColor(.gray)
+                    .foregroundColor(.black)
                 }
             }
             .onReceive(Secretary.shared.$showMoreOptionsHint) { output in
@@ -240,14 +240,14 @@ extension MoreOptionsView {
         }
     }
     
-    struct GreenArea: View {
+    struct YellowArea: View {
         @State private var showMoreOptionsHint = false
         
         var body: some View {
             ZStack {
                 if showMoreOptionsHint {
                     Color
-                        .green
+                        .yellow
                         .ignoresSafeArea()
                         .onTapGesture {
                             withAnimation {
