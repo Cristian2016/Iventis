@@ -3,7 +3,7 @@
 //  Timers (iOS)
 //
 //  Created by Cristian Lapusan on 14.03.2023.
-//
+// Text that fits a given frame see notes
 
 import SwiftUI
 
@@ -14,19 +14,17 @@ struct DeleteConfirmationLabel: View {
     // .transaction { $0.animation = nil } //1
     
     var body: some View {
-        VStack {
-            RoundedRectangle(cornerRadius: 4)
-                .fill(deleteOffsetReached ? .green : .red)
-                .aspectRatio(3.5, contentMode: .fit)
-                .overlay {
-                    Text("Delete").allowsHitTesting(false)
-                        .font(.system(size: 300))
-                        .minimumScaleFactor(0.1)
-                        .foregroundColor(.white)
-                }
-                .frame(height: 100)
-                .opacity(deleteLabelVisible ? 1 : 1)
-        }
+        RoundedRectangle(cornerRadius: 4)
+            .fill(deleteOffsetReached ? .green : .red)
+            .aspectRatio(3.5, contentMode: .fit)
+            .overlay {
+                Text("Delete").allowsHitTesting(false)
+                    .font(.system(size: 300))
+                    .minimumScaleFactor(0.1)
+                    .foregroundColor(.white)
+            }
+            .frame(height: 100)
+            .opacity(deleteLabelVisible ? 1 : 1)
     }
     
     struct DeleteConfirmationLabel_Previews: PreviewProvider {
