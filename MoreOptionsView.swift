@@ -128,6 +128,7 @@ struct MoreOptionsView: View {
             } label: {
                 Image.info
                     .foregroundColor(.black)
+                    .font(.system(size: 24))
             }
         }
     }

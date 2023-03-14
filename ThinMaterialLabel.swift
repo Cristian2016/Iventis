@@ -32,6 +32,7 @@ struct ThinMaterialLabel<Content:View>: View {
                 Text(title)
                     .padding(.bottom, 1)
                     .font(.title2)
+                    .minimumScaleFactor(0.1)
                 Divider().frame(maxWidth: 300)
             }
             content
