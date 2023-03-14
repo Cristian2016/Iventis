@@ -105,6 +105,6 @@ struct DeleteConfirmationLabel: View {
                 .transaction { $0.animation = nil } //1
                 .frame(height: 44)
         }
-        .opacity(deleteLabelVisible ? 1 : 0)
+        .opacity(deleteLabelVisible ? 1 : 1)
     }
 }

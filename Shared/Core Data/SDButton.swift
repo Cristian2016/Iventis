@@ -31,21 +31,23 @@ struct SDButton: View {
     var body: some View {
         ZStack {
             if let sdb = bubble.startDelayBubble, sdb.coordinator != nil {
-                background
-                    .overlay { textCage.overlay { text }} //5
+                translucentCircle
+                    .overlay {
+                        textStiffRect.overlay { text }
+                    } //5
                     .offset(offset) //1
                     .scaleEffect(shouldPulsate ? 0.9 : 1.0) //2
                     .animation(.spring(response: 0.5).repeatForever(), value: shouldPulsate) //2
                     .gesture(dragGesture) //3
                     .onTapGesture { toggleStart() } //3
                     .onReceive(sdb.coordinator.$valueToDisplay) { sdbCurrentClock = $0 } //4
+                    .scaleEffect(x: metrics.circleScale * 0.93, y: metrics.circleScale * 0.93)
             }
         }
-        .scaleEffect(x: metrics.circleScale * 0.93, y: metrics.circleScale * 0.93)
     }
     
     // MARK: - Lego
-    private var textCage: some View {
+    private var textStiffRect: some View {
         Rectangle()
             .fill(.clear)
             .aspectRatio(2.2, contentMode: .fit)
@@ -59,7 +61,7 @@ struct SDButton: View {
             .foregroundColor(.black)
     }
     
-    private var background:some View {
+    private var translucentCircle:some View {
         ZStack {
             Circle()
                 .fill(Color.white)
