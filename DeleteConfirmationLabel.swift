@@ -15,7 +15,8 @@ struct DeleteConfirmationLabel: View {
     
     var body: some View {
         rectangle
-            .modifier(AdaptiveFontSize())
+            .aspectRatio(3.5, contentMode: .fit)
+            .frame(height: 100)
             .overlay (text)
             .opacity(deleteLabelVisible ? 1 : 1)
     }
@@ -34,24 +35,9 @@ struct DeleteConfirmationLabel: View {
     
     private var text: some View {
         Text("Delete").allowsHitTesting(false)
-            .modifier(AdaptiveFontSize())
-            .foregroundColor(.white)
-    }
-}
-
-struct AdaptiveFontSize:ViewModifier {
-    func body(content: Content) -> some View {
-        content
             .font(.system(size: 300))
             .minimumScaleFactor(0.1)
-    }
-}
-
-struct AdaptiveFontFrame:ViewModifier {
-    func body(content: Content) -> some View {
-        content
-            .aspectRatio(3.5, contentMode: .fit)
-            .frame(height: 100)
+            .foregroundColor(.white)
     }
 }
 
