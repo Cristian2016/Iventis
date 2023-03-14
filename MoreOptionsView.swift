@@ -72,7 +72,7 @@ struct MoreOptionsView: View {
                     }
                 }
             }
-            Hint()
+            Hint(input)
         }
         .onReceive(secretary.$moreOptionsBuble) {
             if let bubble = $0 {
@@ -210,13 +210,30 @@ struct MoreOptionsView: View {
 
 extension MoreOptionsView {
     struct Hint: View {
+        private let input:Input
         @State private var showMoreOptionsHint = false
         let metrics = Metrics()
         
+        private var delayAsString:String {
+            input.userEditedDelay == 0 ? "" : String(input.userEditedDelay)
+        }
+        
+        init?(_ input:Input?) {
+            guard let input = input else { return nil }
+            self.input = input
+        }
+        
         var body: some View {
             ZStack {
+                let delay = delayAsString
+                
                 if showMoreOptionsHint {
-                    ThinMaterialLabel(title: "Start Delay") {
+                    ThinMaterialLabel(title: "\(delay) Start Delay") {
+                        if !delay.isEmpty {
+                            Text("Bubble will start after \(input.userEditedDelay) seconds")
+                                .foregroundColor(.secondary)
+                            Divider().frame(maxWidth: 300)
+                        }
                         VStack(alignment: .leading) {
                             Text("*Use Yellow Areas to*")
                                 .foregroundColor(.secondary)
