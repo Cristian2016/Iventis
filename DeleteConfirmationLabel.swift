@@ -15,8 +15,8 @@ struct DeleteConfirmationLabel: View {
     
     var body: some View {
         rectangle
-            .aspectRatio(3.5, contentMode: .fit)
-            .frame(height: 100)
+            .aspectRatio(2.8, contentMode: .fit)
+            .padding([.leading, .trailing], -20)
             .overlay (text)
             .opacity(deleteLabelVisible ? 1 : 1)
     }

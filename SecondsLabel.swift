@@ -25,6 +25,9 @@ struct SecondsLabel: View {
                                 .lineLimit(1)
                                 .minimumScaleFactor(0.1)
                         }
+                        .overlay {
+                            DeleteConfirmationLabel()
+                        }
                 }
                 .onReceive(bubble.coordinator.$components) { sec = $0.sec }
         }
