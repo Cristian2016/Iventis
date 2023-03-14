@@ -119,10 +119,7 @@ class BubbleCellCoordinator {
             
             DispatchQueue.main.async { //send min
                 self.components.min = minValue
-                if intValue == 60 || refresh {
-                    print("update min opacity \(intValue)")
-                    self.opacity.updateOpacity(value)
-                }
+                if intValue == 60 || refresh { self.opacity.updateOpacity(value) }
             }
             
             if (giveMeAName%60) == 0 || refresh {
@@ -130,9 +127,7 @@ class BubbleCellCoordinator {
                 
                 DispatchQueue.main.async { //send hour
                     self.components.hr = hrValue
-                    if intValue == 3600 || refresh {
-                        self.opacity.updateOpacity(value)
-                    }
+                    if intValue == 3600 || refresh { self.opacity.updateOpacity(value) }
                 }
             }
         }
