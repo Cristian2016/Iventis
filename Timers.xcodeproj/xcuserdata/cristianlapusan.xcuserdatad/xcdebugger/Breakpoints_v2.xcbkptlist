@@ -30,8 +30,8 @@
             filePath = "Shared/ViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "307"
-            endingLineNumber = "307"
+            startingLineNumber = "305"
+            endingLineNumber = "305"
             landmarkName = "toggleBubbleStart(_:delta:)"
             landmarkType = "7">
             <Locations>
@@ -138,8 +138,8 @@
             filePath = "Shared/ViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "277"
-            endingLineNumber = "277"
+            startingLineNumber = "275"
+            endingLineNumber = "275"
             landmarkName = "toggleBubbleStart(_:delta:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -234,8 +234,8 @@
             filePath = "Shared/ViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "508"
-            endingLineNumber = "508"
+            startingLineNumber = "506"
+            endingLineNumber = "506"
             landmarkName = "endSession(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -306,8 +306,8 @@
             filePath = "Shared/ViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "397"
-            endingLineNumber = "397"
+            startingLineNumber = "395"
+            endingLineNumber = "395"
             landmarkName = "reset(_:)"
             landmarkType = "7">
          </BreakpointContent>

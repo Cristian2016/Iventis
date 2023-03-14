@@ -61,10 +61,8 @@ class BubbleCellCoordinator {
                                 }
                             }
                             
-                        case .start(let refresh):
-                            
-                            self.refresh = refresh ? true : false
-                            print("start with refresh \(self.refresh)")
+                        case .start:
+                            self.refresh = false
                             self.publisher
                                 .sink { [weak self] _ in self?.task(currentClock, lastPairStart) }
                                 .store(in: &self.cancellable) //connect
@@ -221,7 +219,7 @@ extension BubbleCellCoordinator {
     }
     
     enum Action {
-        case start(refresh:Bool)
+        case start
         case pause
         case reset
         case endSession
