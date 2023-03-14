@@ -18,7 +18,7 @@ struct SDButton: View {
     @StateObject private var  bubble:Bubble
     
     @State var offset:CGSize = .zero //drag view around
-    @State var isTapped = false
+    @State var shouldPulsate = false
         
     let deleteTriggerOffset = CGFloat(180)
     var deleteLabelVisible:Bool { abs(offset.width) > 120 }
@@ -34,8 +34,8 @@ struct SDButton: View {
                 background
                     .overlay { textCage.overlay { text }} //5
                     .offset(offset) //1
-                    .scaleEffect(isTapped ? 0.9 : 1.0) //2
-                    .animation(.spring(response: 0.5).repeatForever(), value: isTapped) //2
+                    .scaleEffect(shouldPulsate ? 0.9 : 1.0) //2
+                    .animation(.spring(response: 0.5).repeatForever(), value: shouldPulsate) //2
                     .gesture(dragGesture) //3
                     .onTapGesture { toggleStart() } //3
                     .onReceive(sdb.coordinator.$valueToDisplay) { sdbCurrentClock = $0 } //4
@@ -108,13 +108,17 @@ struct SDButton: View {
     }
     
     func toggleStart() {
-        isTapped.toggle()
+        shouldPulsate.toggle()
         viewModel.toggleSDBubble(bubble)
     }
     
     init?(_ bubble:Bubble?) {
         guard let bubble = bubble else { return nil }
         _bubble = StateObject(wrappedValue: bubble)
+        
+//        if bubble.startDelayBubble?.state == .running {
+//            shouldPulsate = true
+//        }
     }
 }
 

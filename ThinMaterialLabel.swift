@@ -64,8 +64,7 @@ struct ThinMaterialLabel<Content:View>: View {
 struct PaletteLabel_Previews: PreviewProvider {
     static var content:some View {
         VStack(alignment: .leading) {
-            Text("- \(Image(systemName: "rectangle.and.hand.point.up.left")) Scroll Down along any screen edge")
-            Text("- or \(Image.tap) Tap top right corner button \(Image.scrollToTop)")
+            Text("Existing Calendar Events will not be removed by any of the two actions")
         }
     }
     static var previews: some View {
