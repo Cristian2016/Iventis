@@ -63,7 +63,6 @@ class BubbleCellCoordinator {
                             
                         case .start:
                             self.refresh = refresh
-                            print("start with refresh \(self.refresh)")
                             self.publisher
                                 .sink { [weak self] _ in self?.task(currentClock, lastPairStart) }
                                 .store(in: &self.cancellable) //connect
@@ -104,7 +103,7 @@ class BubbleCellCoordinator {
     private func task(_ currentClock:Float, _ lastStart:Date?) { //bThread ⚠️
         guard let lastPairStart = lastStart else { return }
         let refresh = self.refresh
-                        
+                                
         let Δ = Float(Date().timeIntervalSince(lastPairStart)) //2
         var value = currentClock + Δ //ex: 2345.87648
         
