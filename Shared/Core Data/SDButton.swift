@@ -17,12 +17,12 @@ struct SDButton: View {
     @EnvironmentObject var viewModel:ViewModel
     @StateObject private var  bubble:Bubble
     
-    @State var offset:CGSize = .zero //drag view around
+    @State var xOffset:CGFloat = 0 //drag view around
     @State var shouldPulsate = false
         
     let deleteTriggerOffset = CGFloat(180)
-    var deleteLabelVisible:Bool { abs(offset.width) > 120 }
-    var shouldDelete:Bool { abs(offset.width) >= deleteTriggerOffset }
+    var deleteLabelVisible:Bool { abs(xOffset) > 120 }
+    var shouldDelete:Bool { abs(xOffset) >= deleteTriggerOffset }
     @State var deleteTriggered = false
     @State private var sdbCurrentClock = Float(0)
     
@@ -35,7 +35,7 @@ struct SDButton: View {
                     .overlay {
                         textStiffRect.overlay { text }
                     } //5
-                    .offset(offset) //1
+                    .offset(x: xOffset) //1
                     .scaleEffect(shouldPulsate ? 0.9 : 1.0) //2
                     .animation(.spring(response: 0.5).repeatForever(), value: shouldPulsate) //2
                     .gesture(dragGesture) //3
@@ -94,7 +94,7 @@ struct SDButton: View {
             .onChanged { value in
                 guard !deleteTriggered else { return }
                 
-                offset = value.translation
+                xOffset = value.translation.width
                 if shouldDelete {
                     UserFeedback.doubleHaptic(.heavy)
                     deleteTriggered = true
@@ -102,11 +102,11 @@ struct SDButton: View {
                     
                     delayExecution(.now() + 0.1) {
                         deleteTriggered = false
-                        offset = .zero
+                        xOffset = .zero
                     }
                 }
             }
-            .onEnded { _ in withAnimation { offset = .zero }}
+            .onEnded { _ in withAnimation { xOffset = .zero }}
     }
     
     func toggleStart() {
