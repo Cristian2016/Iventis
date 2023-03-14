@@ -218,7 +218,8 @@ extension MoreOptionsView {
                 if showMoreOptionsHint {
                     ThinMaterialLabel(title: "Start Delay") {
                         VStack(alignment: .leading) {
-                            Text("**Use Yellow Areas to**")
+                            Text("*Use Yellow Areas to*")
+                                .foregroundColor(.secondary)
                             Text("**Save Delay** \(Image.tap) Tap")
                             Text("**Remove** \(Image.leftSwipe) Swipe")
                             Text("**Dismiss** \(Image.tap) Tap")
