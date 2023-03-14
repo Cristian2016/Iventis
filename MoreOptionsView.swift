@@ -150,6 +150,7 @@ struct MoreOptionsView: View {
             .overlay {
                 Text(String(delay))
                     .font(metrics.digitFont)
+                    .foregroundColor(.white)
             }
     }
     
