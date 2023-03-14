@@ -234,7 +234,7 @@ extension MoreOptionsView {
                                 .foregroundColor(.secondary)
                             Divider().frame(maxWidth: 300)
                         } else {
-                            Text("Start after a number of seconds")
+                            Text("Delay start by a number of seconds")
                                 .foregroundColor(.secondary)
                             Divider().frame(maxWidth: 300)
                         }
