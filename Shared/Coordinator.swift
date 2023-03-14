@@ -61,8 +61,10 @@ class BubbleCellCoordinator {
                                 }
                             }
                             
-                        case .start:
-                            self.refresh = false
+                        case .start(let refresh):
+                            
+                            self.refresh = refresh ? true : false
+                            print("start with refresh \(self.refresh)")
                             self.publisher
                                 .sink { [weak self] _ in self?.task(currentClock, lastPairStart) }
                                 .store(in: &self.cancellable) //connect
@@ -117,7 +119,7 @@ class BubbleCellCoordinator {
             
             DispatchQueue.main.async { //send min
                 self.components.min = minValue
-                if intValue == 60 {
+                if intValue == 60 || self.refresh {
                     withAnimation(.spring(response: 0.5, dampingFraction: 0.5)) {
                         self.opacity.update(value)
                     }
@@ -219,7 +221,7 @@ extension BubbleCellCoordinator {
     }
     
     enum Action {
-        case start
+        case start(refresh:Bool)
         case pause
         case reset
         case endSession

@@ -264,6 +264,7 @@ extension ViewModel {
         if bubble.currentClock <= 0 && bubble.kind != .stopwatch  { return }
         
         let startDelayCompensation = delta ?? 0
+        let shouldRefresh = startDelayCompensation != 0
         
         let bContext = PersistenceController.shared.bContext
         let objID = bubble.objectID
@@ -287,7 +288,7 @@ extension ViewModel {
                     //this also makes changes visible to the viewContext as well
                     self.controller.save(bContext) { //⚠️ no need to save viewContext
                         delayExecution(self.delay) { //UI stuff
-                            bubble.coordinator.update(.user(.start))
+                            bubble.coordinator.update(.user(.start(refresh: shouldRefresh)))
                             bubble.pairBubbleCellCoordinator.update(.user(.start))
                             
                             //1 both
@@ -313,7 +314,7 @@ extension ViewModel {
                     //this also makes changes visible to the viewContext as well
                     self.controller.save(bContext) { //⚠️ no need to save vContext
                         delayExecution(self.delay) { //UI stuff
-                            bubble.coordinator.update(.user(.start))
+                            bubble.coordinator.update(.user(.start(refresh: shouldRefresh)))
                             bubble.pairBubbleCellCoordinator.update(.user(.start))
                             
                             //1 both
