@@ -64,7 +64,7 @@ struct MoreOptionsView: View {
                         }
                         .padding(10)
                         .background {
-                            Color.white
+                            Color.background
                                 .cornerRadius(10)
                                 .standardShadow()
                         }
@@ -109,9 +109,8 @@ struct MoreOptionsView: View {
                         .font(.callout)
                 }
             }
-            .foregroundColor(.black)
             .frame(maxWidth: .infinity)
-            .background(.white) //
+            .background() //
             .onTapGesture { saveDelay() }
             .gesture(
                 DragGesture(minimumDistance: 10)
@@ -127,8 +126,8 @@ struct MoreOptionsView: View {
                 secretary.showMoreOptionsHint = true
             } label: {
                 Image.info
-                    .foregroundColor(.black)
                     .font(.system(size: 24))
+                    .foregroundColor(.label)
             }
         }
     }
@@ -150,7 +149,6 @@ struct MoreOptionsView: View {
             .aspectRatio(1, contentMode: .fit)
             .overlay {
                 Text(String(delay))
-                    .foregroundColor(.white)
                     .font(metrics.digitFont)
             }
     }
@@ -296,7 +294,7 @@ extension MoreOptionsView {
             ZStack {
                 if showMoreOptionsHint {
                     Color
-                        .white
+                        .background
                         .ignoresSafeArea()
                         .onTapGesture {
                             withAnimation {
