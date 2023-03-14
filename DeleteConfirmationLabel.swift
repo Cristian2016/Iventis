@@ -33,3 +33,12 @@ struct DeleteConfirmationLabel: View {
         }
     }
 }
+
+//RoundedRectangle()
+//    .aspectRatio(3.5, contentMode: .fit)
+//    .overlay {
+//        Text("Delete")
+//            .font(.system(size: 300))
+//            .minimumScaleFactor(0.1)
+//    }
+//    .frame(height: 100)
