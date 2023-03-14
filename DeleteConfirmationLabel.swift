@@ -14,16 +14,10 @@ struct DeleteConfirmationLabel: View {
     // .transaction { $0.animation = nil } //1
     
     var body: some View {
-        RoundedRectangle(cornerRadius: 4)
-            .fill(deleteOffsetReached ? .green : .red)
+        rectangle
             .aspectRatio(3.5, contentMode: .fit)
             .frame(height: 100)
-            .overlay {
-                Text("Delete").allowsHitTesting(false)
-                    .font(.system(size: 300))
-                    .minimumScaleFactor(0.1)
-                    .foregroundColor(.white)
-            }
+            .overlay (text)
             .opacity(deleteLabelVisible ? 1 : 1)
     }
     
@@ -31,6 +25,19 @@ struct DeleteConfirmationLabel: View {
         static var previews: some View {
             DeleteConfirmationLabel()
         }
+    }
+    
+    // MARK: - Lego
+    private var rectangle: some View {
+        RoundedRectangle(cornerRadius: 4)
+            .fill(deleteOffsetReached ? .green : .red)
+    }
+    
+    private var text: some View {
+        Text("Delete").allowsHitTesting(false)
+            .font(.system(size: 300))
+            .minimumScaleFactor(0.1)
+            .foregroundColor(.white)
     }
 }
 
