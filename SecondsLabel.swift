@@ -17,7 +17,7 @@ struct SecondsLabel: View {
         if bubble.coordinator != nil {
             Circle().fill(Color.clear)
                 .overlay {
-                    Rectangle().fill(.clear)
+                    rectangle
                         .aspectRatio(1.2, contentMode: .fit)
                         .overlay (text)
                         .overlay (DeleteConfirmationLabel())
@@ -27,6 +27,10 @@ struct SecondsLabel: View {
     }
     
     // MARK: - Lego
+    private var rectangle:some View {
+        Rectangle().fill(.clear)
+    }
+    
     private var text:some View {
         Text(sec).allowsHitTesting(false)
             .font(.system(size: 400))
