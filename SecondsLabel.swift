@@ -16,12 +16,12 @@ struct SecondsLabel: View {
     var body: some View {
         if bubble.coordinator != nil {
             clearCircle
-                .overlay {
+                .overlay (
                     clearRectangle
                         .aspectRatio(1.2, contentMode: .fit)
                         .overlay (text)
                         .overlay (DeleteConfirmationLabel())
-                }
+                )
                 .onReceive(bubble.coordinator.$components) { sec = $0.sec }
         }
     }
