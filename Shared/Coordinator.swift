@@ -132,9 +132,10 @@ class BubbleCellCoordinator {
             }
         }
         
-        DispatchQueue.main.async { self.components.sec = String(secValue) } //send second
-        
-        self.refresh = false
+        DispatchQueue.main.async {
+            self.components.sec = String(secValue) //send second
+            self.refresh = false
+        }
     } //4
     
     // MARK: - Publishers 1
