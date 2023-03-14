@@ -18,7 +18,7 @@ struct DeleteConfirmationLabel: View {
             .aspectRatio(2.8, contentMode: .fit)
             .padding([.leading, .trailing], -20)
             .overlay (text)
-            .opacity(deleteLabelVisible ? 1 : 1)
+            .opacity(deleteLabelVisible ? 1 : 0)
     }
     
     struct DeleteConfirmationLabel_Previews: PreviewProvider {
