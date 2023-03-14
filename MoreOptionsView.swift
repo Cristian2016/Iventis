@@ -216,17 +216,21 @@ extension MoreOptionsView {
         var body: some View {
             ZStack {
                 if showMoreOptionsHint {
-                    VStack(alignment: .leading) {
-                        Color.clear
-                            .frame(width: 20, height: 20)
-                        Text("**Use Yellow Areas to**")
-                        Divider().frame(width: 100)
-                        Text("**Save Start Delay** \(Image.tap) Tap")
-                        Text("**Remove** \(Image.leftSwipe) Swipe")
-                        Text("**Dismiss** \(Image.tap) Tap")
+                    ThinMaterialLabel(title: "Start Delay") {
+                        VStack(alignment: .leading) {
+                            Text("**Use Yellow Areas to**")
+                            Text("**Save Delay** \(Image.tap) Tap")
+                            Text("**Remove** \(Image.leftSwipe) Swipe")
+                            Text("**Dismiss** \(Image.tap) Tap")
+                        }
+                    } action: {
+                        withAnimation {
+                            Secretary.shared.showMoreOptionsHint = false
+                        }
                     }
+                    
                     .font(metrics.infoFont)
-                    .foregroundColor(.black)
+                    .foregroundColor(.label)
                 }
             }
             .onReceive(Secretary.shared.$showMoreOptionsHint) { output in
