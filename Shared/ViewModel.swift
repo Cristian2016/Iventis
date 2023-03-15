@@ -287,9 +287,9 @@ extension ViewModel {
                     self.controller.save(bContext) { //⚠️ no need to save viewContext
                         delayExecution(self.delay) { //UI stuff
                             let refresh = startDelayCompensation != 0
-                            bubble.coordinator.update(.user(.start), refresh: refresh)
                             
-                            bubble.pairBubbleCellCoordinator.update(.user(.start))
+                            bubble.coordinator.update(.user(.start), refresh: refresh)
+                            bubble.pairBubbleCellCoordinator.update(.user(.start), refresh)
                             
                             //1 both
                             self.secretary.addNoteButton_bRank = nil //clear first
