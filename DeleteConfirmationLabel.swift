@@ -40,12 +40,6 @@ struct DeleteConfirmationLabel: View {
         .allowsHitTesting(false)
     }
     
-    struct DeleteConfirmationLabel_Previews: PreviewProvider {
-        static var previews: some View {
-            DeleteConfirmationLabel()
-        }
-    }
-    
     // MARK: - Lego
     private var rectangle: some View {
         RoundedRectangle(cornerRadius: 2)
@@ -61,6 +55,12 @@ struct DeleteConfirmationLabel: View {
     
     init(_ coordinator: BubbleCellCoordinator? = nil) {
         self.coordinator = coordinator
+    }
+}
+
+struct DeleteConfirmationLabel_Previews: PreviewProvider {
+    static var previews: some View {
+        DeleteConfirmationLabel()
     }
 }
 
