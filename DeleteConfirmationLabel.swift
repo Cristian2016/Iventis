@@ -53,7 +53,7 @@ struct DeleteConfirmationLabel: View {
     }
     
     private var text: some View {
-        Text(isRemoved ? "Done" : "Delete")
+        Text(isRemoved ? " Done " : "Delete")
             .font(.system(size: 200))
             .minimumScaleFactor(0.1)
             .foregroundColor(.white)
