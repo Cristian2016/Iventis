@@ -25,14 +25,8 @@ struct DeleteConfirmationLabel: View {
                     .padding([.leading, .trailing], -20)
                     .overlay (text)
                     .opacity(isVisible ? 1 : 0)
-                    .onReceive(coordinator.$sdButtonYOffset) { yOffset in
-//                        print("new yOffset \(yOffset)")
-                        isVisible = yOffset < -120
-                        if yOffset < -170 {
-                            print("deleteOffsetReached")
-                            isRemoved = true
-                        }
-                    }
+                    .onReceive(coordinator.$sdButtonYOffset) { isVisible = $0 < -120 }
+                    .onReceive(coordinator.$sdbDeleteTriggered) { isRemoved = $0 }
             }
         }
         .allowsHitTesting(false)

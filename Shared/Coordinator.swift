@@ -94,6 +94,7 @@ class BubbleCellCoordinator {
     }
     
     @Published var sdButtonYOffset = CGFloat(0)
+    @Published var sdbDeleteTriggered = false
         
     @Published private(set) var components = Components("-1", "-1", "-1", "-1")
     @Published private(set) var opacity = Opacity()

@@ -45,6 +45,9 @@ struct SDButton: View {
                     .onChange(of: yOffset) { newValue in
                         bubble.coordinator.sdButtonYOffset = yOffset
                     }
+                    .onChange(of: deleteTriggered) {
+                        if $0 { bubble.coordinator.sdbDeleteTriggered = true }
+                    }
             }
         }
     }
@@ -86,9 +89,6 @@ struct SDButton: View {
                 .transaction { $0.animation = nil } //1
                 .padding(-34)
         }
-//        .opacity(deleteLabelVisible ? 1 : 0)
-        .font(.system(size: 24).weight(.medium))
-        .foregroundColor(.white)
     }
     
     // MARK: - handle gestures
