@@ -8,9 +8,10 @@
 import SwiftUI
 
 struct DeleteConfirmationLabel: View {
+    private var coordinator:BubbleCellCoordinator?
+    
     @State private var deleteOffsetReached = false
     @State private var deleteLabelVisible = false
-    private var coordinator:BubbleCellCoordinator?
     
     // .transaction { $0.animation = nil } //1
     
@@ -20,9 +21,9 @@ struct DeleteConfirmationLabel: View {
                 rectangle
                     .aspectRatio(2.8, contentMode: .fit)
                     .padding([.leading, .trailing], -20)
-                    .overlay (text)
+                    .overlay (Text("Pula mea"))
                     .opacity(deleteLabelVisible ? 1 : 0)
-                    .onReceive(coordinator.$sdButtonOffset) { yOffset in
+                    .onReceive(coordinator.$sdButtonYOffset) { yOffset in
                         print("new yOffset \(yOffset)")
                         deleteLabelVisible = abs(yOffset) > 120
                     }
@@ -43,11 +44,15 @@ struct DeleteConfirmationLabel: View {
     }
     
     private var text: some View {
-        Text(deleteOffsetReached ? "\(Image.checkmark) Done" : "\(Image.trash) Delete")
+        Text("\(Image.trash) Delete")
             .allowsHitTesting(false)
             .font(.system(size: 300))
             .minimumScaleFactor(0.1)
             .foregroundColor(.white)
+    }
+    
+    init(_ coordinator: BubbleCellCoordinator? = nil) {
+        self.coordinator = coordinator
     }
 }
 

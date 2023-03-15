@@ -17,11 +17,11 @@ struct SDButton: View {
     @EnvironmentObject var viewModel:ViewModel
     @StateObject private var  bubble:Bubble
     
-    @State var xOffset:CGFloat = 0 //drag view around
+    @State var yOffset:CGFloat = 0 //drag view around
     @State var shouldPulsate = false
         
     let deleteTriggerOffset = CGFloat(180)
-    var shouldDelete:Bool { abs(xOffset) >= deleteTriggerOffset }
+    var shouldDelete:Bool { abs(yOffset) >= deleteTriggerOffset }
     @State var deleteTriggered = false
     @State private var sdbCurrentClock = Float(0)
     
@@ -29,19 +29,22 @@ struct SDButton: View {
     
     var body: some View {
         ZStack {
-            DeleteConfirmationLabel()
+            DeleteConfirmationLabel(bubble.coordinator)
             if let sdb = bubble.startDelayBubble, sdb.coordinator != nil {
                 translucentCircle
                     .overlay {
                         textStiffRect.overlay { text }
                     } //5
-                    .offset(x: xOffset) //1
+                    .offset(x: yOffset) //1
                     .scaleEffect(shouldPulsate ? 0.9 : 1.0) //2
                     .animation(.spring(response: 0.5).repeatForever(), value: shouldPulsate) //2
                     .gesture(dragGesture) //3
                     .onTapGesture { toggleStart() } //3
                     .onReceive(sdb.coordinator.$valueToDisplay) { sdbCurrentClock = $0 } //4
                     .scaleEffect(x: metrics.circleScale * 0.93, y: metrics.circleScale * 0.93)
+                    .onChange(of: yOffset) { newValue in
+                        bubble.coordinator.sdButtonYOffset = yOffset
+                    }
             }
         }
     }
@@ -94,7 +97,7 @@ struct SDButton: View {
             .onChanged { value in
                 guard !deleteTriggered else { return }
                 
-                xOffset = value.translation.width
+                yOffset = value.translation.width
                 if shouldDelete {
                     UserFeedback.doubleHaptic(.heavy)
                     deleteTriggered = true
@@ -102,11 +105,11 @@ struct SDButton: View {
                     
                     delayExecution(.now() + 0.1) {
                         deleteTriggered = false
-                        xOffset = .zero
+                        yOffset = .zero
                     }
                 }
             }
-            .onEnded { _ in withAnimation { xOffset = .zero }}
+            .onEnded { _ in withAnimation { yOffset = .zero }}
     }
     
     func toggleStart() {
