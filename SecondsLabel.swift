@@ -20,7 +20,6 @@ struct SecondsLabel: View {
                     clearRectangle
                         .aspectRatio(1.2, contentMode: .fit)
                         .overlay (text)
-                        .overlay (DeleteConfirmationLabel())
                 )
                 .onReceive(bubble.coordinator.$components) { sec = $0.sec }
         }

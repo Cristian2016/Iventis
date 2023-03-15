@@ -29,7 +29,7 @@ struct DeleteConfirmationLabel: View {
     
     // MARK: - Lego
     private var rectangle: some View {
-        RoundedRectangle(cornerRadius: 4)
+        RoundedRectangle(cornerRadius: 2)
             .fill(deleteOffsetReached ? .green : .red)
     }
     

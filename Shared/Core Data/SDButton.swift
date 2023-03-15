@@ -30,6 +30,7 @@ struct SDButton: View {
     
     var body: some View {
         ZStack {
+            DeleteConfirmationLabel()
             if let sdb = bubble.startDelayBubble, sdb.coordinator != nil {
                 translucentCircle
                     .overlay {
