@@ -27,7 +27,7 @@ struct DeleteConfirmationLabel: View {
                     .overlay (text)
                     .opacity(isVisible ? 1 : 0)
                     .onReceive(coordinator.$sdButtonYOffset) { isVisible = $0 < -120 }
-                    .onReceive(coordinator.$sdbDeleteTriggered) {
+                    .onReceive(coordinator.$sdbDeleteTriggered) { guard $0 else { return }
                         isRemoved = $0
                         delayExecution(.now() + 1) {
                             isVisible = false
