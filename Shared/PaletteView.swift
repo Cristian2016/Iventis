@@ -71,11 +71,11 @@ struct PaletteView: View {
     }
     
     private var infoSymbol:some View {
-        Push(.topRight) {
+        Push(.topLeft) {
             Image(systemName: "info.circle.fill")
         }
         .foregroundColor(.label)
-        .padding([.trailing])
+        .padding([.leading])
         .onTapGesture { withAnimation { showPaletteHint = true } }
     }
             
