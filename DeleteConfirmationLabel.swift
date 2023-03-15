@@ -2,7 +2,7 @@
 //  DeleteConfirmationLabel.swift
 //  Timers (iOS)
 //
-//  Created by Cristian Lapusan on 14.03.2023.
+// Created by Cristian Lapusan on 14.03.2023.
 // Text that fits a given frame see notes
 //1 is StartDelayBubble removed
 //2 is DeleteConfirmationLabel visible
