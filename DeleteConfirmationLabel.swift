@@ -20,7 +20,7 @@ struct DeleteConfirmationLabel: View {
         ZStack {
             if let coordinator = coordinator {
                 rectangle
-                    .aspectRatio(2.3, contentMode: .fit)
+                    .aspectRatio(2.8, contentMode: .fit)
                     .overlay (text)
                     .opacity(isVisible ? 1 : 0)
                     .onReceive(coordinator.$sdButtonYOffset) {
@@ -36,6 +36,7 @@ struct DeleteConfirmationLabel: View {
                     }
             }
         }
+        .scaleEffect(x: 1.4, y: 1.4)
         .allowsHitTesting(false)
     }
     
