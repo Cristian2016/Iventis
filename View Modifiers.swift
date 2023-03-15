@@ -58,6 +58,7 @@ extension View {
         modifier(PairCountModifier())
     }
     
+    ///it doesn't allow animations on that view, puta!
     func animationDisabled() -> some View {
         modifier(DisableAnimation())
     }
