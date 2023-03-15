@@ -71,17 +71,15 @@ class PairBubbleCellCoordinator {
                 let giveMeAName = intValue/60%60
                 let minValue = String(giveMeAName)
                 
-                DispatchQueue.main.async { self.components.min = minValue } //Min
+                DispatchQueue.main.async { self.components.min = minValue } //send Min
                 
                 if (giveMeAName%60) == 0 || self.refresh {
                     let hrValue = String(intValue/3600)
-                    
-                    DispatchQueue.main.async { self.components.hr = hrValue } //Hr
+                    DispatchQueue.main.async { self.components.hr = hrValue } //send Hr
                 }
             }
             
-            //send second
-            DispatchQueue.main.async {
+            DispatchQueue.main.async { //send Sec
                 self.components.sec = String(secValue)
                 self.refresh = false
             }
