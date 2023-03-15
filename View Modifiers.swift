@@ -40,6 +40,15 @@ struct PairCountModifier: ViewModifier {
     }
 }
 
+struct DisableAnimation:ViewModifier {
+    func body(content: Content) -> some View {
+        content
+            .transaction {
+                $0.disablesAnimations = true
+            }
+    }
+}
+
 extension View {
     func adaptiveText(_ text:String, maxSize:CGFloat = 200, _ show:Bool) -> some View {
         self.modifier(AdaptiveText(text: text, maxFontSize: maxSize, show: show))
@@ -47,5 +56,9 @@ extension View {
     
     func pairCountModifier() -> some View {
         modifier(PairCountModifier())
+    }
+    
+    func animationDisabled() -> some View {
+        modifier(DisableAnimation())
     }
 }

@@ -15,9 +15,7 @@ struct DeleteConfirmationLabel: View {
     
     @State private var isRemoved = false //1
     @State private var isVisible = false //2
-    
-    // .transaction { $0.animation = nil } //1
-    
+        
     var body: some View {
         ZStack {
             if let coordinator = coordinator {
