@@ -302,7 +302,7 @@ extension MoreOptionsView {
                                 Secretary.shared.showMoreOptionsHint = false
                             }
                         }
-                        .opacity(0.9)
+                        .opacity(0.8)
                 }
             }
             .onReceive(Secretary.shared.$showMoreOptionsHint) { output in

@@ -11,7 +11,7 @@ struct DeleteConfirmationLabel: View {
     private var coordinator:BubbleCellCoordinator?
     
     @State private var deleteOffsetReached = false
-    @State private var deleteLabelVisible = false
+    @State private var isVisible = false
     
     // .transaction { $0.animation = nil } //1
     
@@ -22,11 +22,12 @@ struct DeleteConfirmationLabel: View {
                     .aspectRatio(2.8, contentMode: .fit)
                     .padding([.leading, .trailing], -20)
                     .overlay (text)
-                    .opacity(deleteLabelVisible ? 1 : 0)
+                    .opacity(isVisible ? 1 : 0)
                     .onReceive(coordinator.$sdButtonYOffset) { yOffset in
-                        print("new yOffset \(yOffset)")
-                        deleteLabelVisible = yOffset < -120
-                        if yOffset < -180 {
+//                        print("new yOffset \(yOffset)")
+                        isVisible = yOffset < -120
+                        if yOffset < -170 {
+                            print("deleteOffsetReached")
                             deleteOffsetReached = true
                         }
                     }
@@ -48,9 +49,10 @@ struct DeleteConfirmationLabel: View {
     }
     
     private var text: some View {
-        Text("\(Image.trash) Delete")
-            .font(.system(size: 20))
+        Text(deleteOffsetReached ? "Done" : "Delete")
+            .font(.system(size: 200))
             .minimumScaleFactor(0.1)
+            .foregroundColor(.white)
     }
     
     init(_ coordinator: BubbleCellCoordinator? = nil) {
