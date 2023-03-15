@@ -22,7 +22,7 @@ struct DeleteConfirmationLabel: View {
         ZStack {
             if let coordinator = coordinator {
                 rectangle
-                    .aspectRatio(3.0, contentMode: .fit)
+                    .aspectRatio(2.3, contentMode: .fit)
                     .padding([.leading, .trailing], -20)
                     .overlay (text)
                     .opacity(isVisible ? 1 : 0)
