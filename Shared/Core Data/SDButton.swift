@@ -42,13 +42,11 @@ struct SDButton: View {
                     .onTapGesture { toggleStart() } //3
                     .onReceive(sdb.coordinator.$valueToDisplay) { sdbCurrentClock = $0 } //4
                     .scaleEffect(x: metrics.circleScale * 0.93, y: metrics.circleScale * 0.93)
-                    .onChange(of: yOffset) { newValue in
-                        bubble.coordinator.sdButtonYOffset = yOffset
-                    }
-                    .onChange(of: deleteTriggered) {
-                        if $0 { bubble.coordinator.sdbDeleteTriggered = true }
-                    }
+                    .onChange(of: yOffset) { bubble.coordinator.sdButtonYOffset = $0 }
             }
+        }
+        .onChange(of: deleteTriggered) {
+            if $0 { bubble.coordinator.sdbDeleteTriggered = true }
         }
     }
     

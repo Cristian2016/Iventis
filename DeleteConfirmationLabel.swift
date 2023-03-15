@@ -8,6 +8,7 @@
 //2 is DeleteConfirmationLabel visible
 
 import SwiftUI
+import MyPackage
 
 struct DeleteConfirmationLabel: View {
     private var coordinator:BubbleCellCoordinator?
