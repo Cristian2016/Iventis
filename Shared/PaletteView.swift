@@ -71,9 +71,7 @@ struct PaletteView: View {
     }
     
     private var infoSymbol:some View {
-        Push(.topLeft) {
-            Image(systemName: "info.circle.fill")
-        }
+        Push(.topLeft) {Image.info }
         .foregroundColor(.label)
         .padding([.leading])
         .onTapGesture { withAnimation { showPaletteHint = true } }

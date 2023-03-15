@@ -47,6 +47,7 @@ public extension Image {
     static let leftSwipe = Image(systemName:"arrow.left.circle.fill")
     static let scrollToTop = Image(systemName: "arrow.up.to.line.compact")
     static let greaterThan = Image(systemName: "greaterthan.circle.fill")
+    static let info = Image(systemName: "info.circle.fill")
 }
 
 public extension URL {
