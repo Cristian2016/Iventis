@@ -4,6 +4,7 @@
 //
 //  Created by Cristian Lapusan on 18.02.2023.
 // .overlay { if !isBubbleRunning { hundredthsView }}
+//1 https://www.avanderlee.com/swiftui/disable-animations-transactions/
 
 import SwiftUI
 
@@ -40,7 +41,7 @@ struct PairCountModifier: ViewModifier {
     }
 }
 
-struct DisableAnimation:ViewModifier {
+struct DisableAnimation:ViewModifier { //1
     func body(content: Content) -> some View {
         content
             .transaction {
