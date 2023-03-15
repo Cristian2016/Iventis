@@ -20,7 +20,7 @@ extension BubbleCellCoordinator {
 }
 
 class BubbleCellCoordinator {
-    weak private var bubble:Bubble?
+    weak private(set) var bubble:Bubble?
     
     // MARK: - Public API
     func update(_ moment:Moment, refresh:Bool = false) { //main Thread ⚠️
