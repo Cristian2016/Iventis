@@ -29,10 +29,8 @@ struct DeleteConfirmationLabel: View {
                     .onReceive(coordinator.$sdButtonYOffset) { isVisible = $0 < -120 }
                     .onReceive(coordinator.$sdbDeleteTriggered) {
                         isRemoved = $0
-                        withAnimation(.easeInOut(duration: 1)) {
-                            isVisible = false
-                        }
                         delayExecution(.now() + 1) {
+                            isVisible = false
                             isRemoved = false
                         }
                     }
