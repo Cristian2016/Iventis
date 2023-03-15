@@ -21,7 +21,6 @@ struct DeleteConfirmationLabel: View {
             if let coordinator = coordinator {
                 rectangle
                     .aspectRatio(2.3, contentMode: .fit)
-                    .padding([.leading, .trailing], -20)
                     .overlay (text)
                     .opacity(isVisible ? 1 : 0)
                     .onReceive(coordinator.$sdButtonYOffset) {
@@ -47,10 +46,11 @@ struct DeleteConfirmationLabel: View {
     }
     
     private var text: some View {
-        Text(isRemoved ? " Done " : "Delete")
+        Text(isRemoved ? "Done" : "Delete")
             .font(.system(size: 200))
             .minimumScaleFactor(0.1)
             .foregroundColor(.white)
+            .padding([.leading, .trailing])
     }
     
     init(_ coordinator: BubbleCellCoordinator? = nil) {
