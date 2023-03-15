@@ -36,7 +36,7 @@ struct DeleteConfirmationLabel: View {
                     }
             }
         }
-        .scaleEffect(x: 1.5, y: 1.5)
+        .scaleEffect(x: 1.52, y: 1.52)
         .allowsHitTesting(false)
     }
     
