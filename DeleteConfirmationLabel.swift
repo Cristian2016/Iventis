@@ -10,15 +10,24 @@ import SwiftUI
 struct DeleteConfirmationLabel: View {
     @State private var deleteOffsetReached = false
     @State private var deleteLabelVisible = false
+    private var coordinator:BubbleCellCoordinator?
     
     // .transaction { $0.animation = nil } //1
     
     var body: some View {
-        rectangle
-            .aspectRatio(2.8, contentMode: .fit)
-            .padding([.leading, .trailing], -20)
-            .overlay (text)
-            .opacity(deleteLabelVisible ? 1 : 0)
+        ZStack {
+            if let coordinator = coordinator {
+                rectangle
+                    .aspectRatio(2.8, contentMode: .fit)
+                    .padding([.leading, .trailing], -20)
+                    .overlay (text)
+                    .opacity(deleteLabelVisible ? 1 : 0)
+                    .onReceive(coordinator.$sdButtonOffset) { yOffset in
+                        print("new yOffset \(yOffset)")
+                        deleteLabelVisible = abs(yOffset) > 120
+                    }
+            }
+        }
     }
     
     struct DeleteConfirmationLabel_Previews: PreviewProvider {
@@ -34,7 +43,8 @@ struct DeleteConfirmationLabel: View {
     }
     
     private var text: some View {
-        Text("Delete").allowsHitTesting(false)
+        Text(deleteOffsetReached ? "\(Image.checkmark) Done" : "\(Image.trash) Delete")
+            .allowsHitTesting(false)
             .font(.system(size: 300))
             .minimumScaleFactor(0.1)
             .foregroundColor(.white)

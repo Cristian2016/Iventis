@@ -92,6 +92,8 @@ class BubbleCellCoordinator {
             }
         }
     }
+    
+    @Published var sdButtonOffset = CGFloat(0)
         
     @Published private(set) var components = Components("-1", "-1", "-1", "-1")
     @Published private(set) var opacity = Opacity()

@@ -21,7 +21,6 @@ struct SDButton: View {
     @State var shouldPulsate = false
         
     let deleteTriggerOffset = CGFloat(180)
-    var deleteLabelVisible:Bool { abs(xOffset) > 120 }
     var shouldDelete:Bool { abs(xOffset) >= deleteTriggerOffset }
     @State var deleteTriggered = false
     @State private var sdbCurrentClock = Float(0)
@@ -84,7 +83,7 @@ struct SDButton: View {
                 .transaction { $0.animation = nil } //1
                 .padding(-34)
         }
-        .opacity(deleteLabelVisible ? 1 : 0)
+//        .opacity(deleteLabelVisible ? 1 : 0)
         .font(.system(size: 24).weight(.medium))
         .foregroundColor(.white)
     }
