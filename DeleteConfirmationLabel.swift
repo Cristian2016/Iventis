@@ -21,14 +21,18 @@ struct DeleteConfirmationLabel: View {
                 rectangle
                     .aspectRatio(2.8, contentMode: .fit)
                     .padding([.leading, .trailing], -20)
-                    .overlay (Text("Pula mea"))
+                    .overlay (text)
                     .opacity(deleteLabelVisible ? 1 : 0)
                     .onReceive(coordinator.$sdButtonYOffset) { yOffset in
                         print("new yOffset \(yOffset)")
-                        deleteLabelVisible = abs(yOffset) > 120
+                        deleteLabelVisible = yOffset < -120
+                        if yOffset < -180 {
+                            deleteOffsetReached = true
+                        }
                     }
             }
         }
+        .allowsHitTesting(false)
     }
     
     struct DeleteConfirmationLabel_Previews: PreviewProvider {
@@ -45,10 +49,8 @@ struct DeleteConfirmationLabel: View {
     
     private var text: some View {
         Text("\(Image.trash) Delete")
-            .allowsHitTesting(false)
-            .font(.system(size: 300))
+            .font(.system(size: 20))
             .minimumScaleFactor(0.1)
-            .foregroundColor(.white)
     }
     
     init(_ coordinator: BubbleCellCoordinator? = nil) {
