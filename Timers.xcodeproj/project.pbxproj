@@ -33,7 +33,6 @@
 		1F38A00429B9000D009AD543 /* yPositionTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F38A00329B9000D009AD543 /* yPositionTracker.swift */; };
 		1F38C5A32986615F00057B8C /* FusedLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F38C5A22986615F00057B8C /* FusedLabel.swift */; };
 		1F3950BA29966DEA00DD9423 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F3950B929966DEA00DD9423 /* Coordinator.swift */; };
-		1F42B36E29A50B9500DCD473 /* SmallPairBubbleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F42B36D29A50B9500DCD473 /* SmallPairBubbleCell.swift */; };
 		1F42B99D2973E34E0024DB5F /* Code Snippets.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 1F42B99C2973E34E0024DB5F /* Code Snippets.rtf */; };
 		1F4326B1282AFB19002B6092 /* ScaleDownButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4326B0282AFB19002B6092 /* ScaleDownButton.swift */; };
 		1F477CA928EAB21900B4F965 /* AddStickyNoteQuickButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F477CA828EAB21900B4F965 /* AddStickyNoteQuickButton.swift */; };
@@ -180,7 +179,6 @@
 		1F38A00329B9000D009AD543 /* yPositionTracker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = yPositionTracker.swift; sourceTree = "<group>"; };
 		1F38C5A22986615F00057B8C /* FusedLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FusedLabel.swift; sourceTree = "<group>"; };
 		1F3950B929966DEA00DD9423 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
-		1F42B36D29A50B9500DCD473 /* SmallPairBubbleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallPairBubbleCell.swift; sourceTree = SOURCE_ROOT; };
 		1F42B99C2973E34E0024DB5F /* Code Snippets.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = "Code Snippets.rtf"; sourceTree = "<group>"; };
 		1F4326B0282AFB19002B6092 /* ScaleDownButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScaleDownButton.swift; sourceTree = "<group>"; };
 		1F477CA828EAB21900B4F965 /* AddStickyNoteQuickButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddStickyNoteQuickButton.swift; sourceTree = "<group>"; };
@@ -414,7 +412,6 @@
 				1F38A00329B9000D009AD543 /* yPositionTracker.swift */,
 				1F83A44E29A965D90058E6E2 /* DigitsView.swift */,
 				1F991A6F29A7545C0045B04C /* TopCellDurationView.swift */,
-				1F42B36D29A50B9500DCD473 /* SmallPairBubbleCell.swift */,
 				1F0FD40129A4CD090097FF7F /* ScrollToTopButton.swift */,
 				1FC08DC829A35B6500E25D79 /* PairBubbleCellCoordinator.swift */,
 				1F0FD40529A4D93D0097FF7F /* DetailViewInfoButton.swift */,
@@ -639,7 +636,6 @@
 				1FB4D4E02977F86500F26D9C /* iPadViewHierarchy.swift in Sources */,
 				1FAE715D298D1CA200E19959 /* DualTextView.swift in Sources */,
 				1FE722A128E58200005ADA8E /* ColorConfirmationView.swift in Sources */,
-				1F42B36E29A50B9500DCD473 /* SmallPairBubbleCell.swift in Sources */,
 				1F8B6965283790CF006540CB /* BubbleStickyNoteList.swift in Sources */,
 				1F04769329BB4AFF00641CDC /* StartDelayBubble Properties.swift in Sources */,
 				1F4DF99D282B82EF00D54BE8 /* CircleButton.swift in Sources */,

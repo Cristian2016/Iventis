@@ -81,9 +81,10 @@ class PairBubbleCellCoordinator {
             }
             
             //send second
-            DispatchQueue.main.async { self.components.sec = String(secValue) }
-            
-            self.refresh = false
+            DispatchQueue.main.async {
+                self.components.sec = String(secValue)
+                self.refresh = false
+            }
         }
     }
     
