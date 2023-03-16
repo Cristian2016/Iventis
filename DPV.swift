@@ -65,6 +65,9 @@ struct DPV: View {
             .font(.system(size: 65, design: .rounded))
             .minimumScaleFactor(0.1)
             .foregroundColor(.white)
+            .onTapGesture {
+                print("tapped \(title)")
+            }
     }
 }
 
