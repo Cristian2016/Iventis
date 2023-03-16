@@ -20,12 +20,12 @@ struct DurationPickerView: View {
     var body: some View {
         ZStack {
             if color != nil {
+                Rectangle()
+                    .fill(.ultraThinMaterial)
+                    .ignoresSafeArea()
+                    .gesture(swipe)
+                
                 ZStack {
-//                    Rectangle()
-//                        .fill(.ultraThinMaterial)
-//                        .padding(-40)
-//                        .gesture(swipe)
-                    
                     VStack(spacing: 0) {
                         display
                         digitsGrid
