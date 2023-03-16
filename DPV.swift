@@ -17,7 +17,7 @@ struct DPV: View {
     
     var body: some View {
         ZStack {
-            if let color = color {
+            if color != nil {
                 ZStack(alignment: .trailing) {
                     VStack(spacing: 2) {
                         display
