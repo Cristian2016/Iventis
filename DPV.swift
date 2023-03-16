@@ -61,6 +61,24 @@ struct DPV: View {
     }
 }
 
+extension DPV {
+    struct RightStrip:View {
+        var body: some View {
+            Rectangle()
+                .opacity(0.001)
+                .frame(width: 4)
+                .gesture(swipe)
+        }
+        
+        private var swipe: some Gesture {
+            DragGesture(minimumDistance: 0)
+                .onEnded { _ in
+                    print("dismiss Duration Picker")
+                }
+        }
+    }
+}
+
 struct DPV_Previews: PreviewProvider {
     static var previews: some View {
         DPV()
