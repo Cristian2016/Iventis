@@ -18,12 +18,15 @@ struct DPV: View {
     var body: some View {
         ZStack {
             if let color = color {
-                VStack(spacing: 2) {
-                    display
-                    digitsGrid
+                ZStack(alignment: .trailing) {
+                    VStack(spacing: 2) {
+                        display
+                        digitsGrid
+                    }
+                    .padding(6)
+                    .background()
+                    RightStrip()
                 }
-                .padding(6)
-                .background()
             }
         }
         .onReceive(Secretary.shared.$durationPicker_OfColor) { color = $0 }
@@ -65,8 +68,8 @@ extension DPV {
     struct RightStrip:View {
         var body: some View {
             Rectangle()
-                .opacity(0.001)
-                .frame(width: 4)
+                .fill(.red)
+                .frame(width: 6)
                 .gesture(swipe)
         }
         
