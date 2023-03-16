@@ -13,6 +13,7 @@ struct DPV: View {
     
     @EnvironmentObject private var viewModel:ViewModel
     @State private var color:Color? //1
+    let gridSpacing = CGFloat(4)
     
     var body: some View {
         ZStack {
@@ -27,7 +28,7 @@ struct DPV: View {
                         .onTapGesture {
                             self.color = nil
                         }
-                    Grid(horizontalSpacing: 2, verticalSpacing: 2) {
+                    Grid(horizontalSpacing: gridSpacing, verticalSpacing: gridSpacing) {
                         ForEach(digits, id: \.self) { subarray in
                             GridRow {
                                 ForEach(subarray, id: \.self) { digit in
