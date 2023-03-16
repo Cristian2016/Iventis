@@ -23,6 +23,8 @@ struct iPhoneViewHierarchy: View {
             }
             .tint(.label)
             PaletteView()
+            
+            DurationPickerTranslucentBackground()
             DurationPickerView()
         }
     }
