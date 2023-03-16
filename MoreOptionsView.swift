@@ -49,7 +49,6 @@ struct MoreOptionsView: View {
                                             .overlay { YellowArea() }
                                         digits
                                             .overlay { MaskArea() }
-                                            .buttonStyle(SmallDigit())
                                     }
                                 }
                                 
@@ -65,7 +64,7 @@ struct MoreOptionsView: View {
                         }
                         .padding(10)
                         .background {
-                            Color.background
+                            Color.white
                                 .cornerRadius(10)
                                 .standardShadow()
                         }
@@ -110,8 +109,9 @@ struct MoreOptionsView: View {
                         .font(.callout)
                 }
             }
+            .foregroundColor(.black)
             .frame(maxWidth: .infinity)
-            .background() //
+            .background(.white) //
             .onTapGesture { saveDelay() }
             .gesture(
                 DragGesture(minimumDistance: 10)
@@ -128,7 +128,7 @@ struct MoreOptionsView: View {
             } label: {
                 Image.info
                     .font(.system(size: 24))
-                    .foregroundColor(.label)
+                    .foregroundColor(.black)
             }
         }
     }
@@ -295,14 +295,14 @@ extension MoreOptionsView {
             ZStack {
                 if showMoreOptionsHint {
                     Color
-                        .background
+                        .white
                         .ignoresSafeArea()
                         .onTapGesture {
                             withAnimation {
                                 Secretary.shared.showMoreOptionsHint = false
                             }
                         }
-                        .opacity(0.8)
+//                        .opacity(0.8)
                 }
             }
             .onReceive(Secretary.shared.$showMoreOptionsHint) { output in

@@ -34,7 +34,7 @@ struct ColorsGrid: View {
                             }
                     }
                 }
-                .background()
+                .background(.white)
             }
             .background {
                 VStack {
