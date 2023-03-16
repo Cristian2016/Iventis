@@ -25,8 +25,9 @@ struct DPV: View {
                     }
                     .padding(6)
                     .background()
-                    RightStrip { self.color = nil }
+                    RightStrip { dismiss() }
                 }
+                .transition(.move(edge: .leading))
             }
         }
         .onReceive(Secretary.shared.$durationPicker_OfColor) { color = $0 }
@@ -38,9 +39,7 @@ struct DPV: View {
             .foregroundColor(.black)
             .font(.system(size: 90, design: .rounded))
             .frame(height: 100)
-            .onTapGesture {
-                self.color = nil
-            }
+            .onTapGesture { dismiss() }
     }
     
     private var digitsGrid:some View {
@@ -68,6 +67,12 @@ struct DPV: View {
             .onTapGesture {
                 print("tapped \(title)")
             }
+    }
+    
+    func dismiss() {
+        withAnimation {
+            self.color = nil
+        }
     }
 }
 
