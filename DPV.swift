@@ -25,7 +25,7 @@ struct DPV: View {
                     }
                     .padding(6)
                     .background()
-                    RightStrip()
+                    RightStrip { self.color = nil }
                 }
             }
         }
@@ -68,7 +68,7 @@ extension DPV {
     struct RightStrip:View {
         var body: some View {
             Rectangle()
-                .fill(.red)
+                .opacity(0.01)
                 .frame(width: 6)
                 .gesture(swipe)
         }
@@ -76,9 +76,11 @@ extension DPV {
         private var swipe: some Gesture {
             DragGesture(minimumDistance: 0)
                 .onEnded { _ in
-                    print("dismiss Duration Picker")
+                    action()
                 }
         }
+        
+        let action: () -> ()
     }
 }
 
