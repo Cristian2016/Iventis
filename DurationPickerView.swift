@@ -38,6 +38,7 @@ struct DurationPickerView: View {
                 .background(.ultraThinMaterial)
                 .gesture(swipe)
                 .transition(.move(edge: .leading))
+                .standardShadow()
             }
         }
         .onReceive(Secretary.shared.$durationPicker_OfColor) { color = $0 }
