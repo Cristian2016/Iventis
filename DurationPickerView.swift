@@ -21,9 +21,11 @@ struct DurationPickerView: View {
         ZStack {
             if color != nil {
                 Rectangle()
-                    .fill(.ultraThinMaterial)
+                    .fill(.regularMaterial)
                     .ignoresSafeArea()
-                    .gesture(swipe)
+                    .onTapGesture {
+                        dismiss()
+                    }
                 
                 ZStack {
                     VStack(spacing: 0) {
