@@ -86,7 +86,7 @@ extension DPV {
                     withAnimation {
                         isTapped = true
                     }
-                    delayExecution(.now() + 0.3) {
+                    delayExecution(.now() + 0.05) {
                         isTapped = false
                     }
                     print("tapped \(title)")
