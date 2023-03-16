@@ -83,13 +83,12 @@ extension DPV {
                 .opacity(isTapped ? 0.6 : 1.0)
                 .onTapGesture {
                     UserFeedback.singleHaptic(.light)
-                    withAnimation {
+                    withAnimation(.easeIn(duration: 0.1)) {
                         isTapped = true
                     }
-                    delayExecution(.now() + 0.05) {
+                    delayExecution(.now() + 0.2) {
                         isTapped = false
                     }
-                    print("tapped \(title)")
                 }
         }
     }
