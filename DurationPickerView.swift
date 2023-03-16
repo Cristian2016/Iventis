@@ -36,7 +36,6 @@ struct DurationPickerView: View {
                     .background { background }
                 }
                 .padding(4)
-                .transition(.move(edge: .leading))
             }
         }
         .onReceive(Secretary.shared.$durationPicker_OfColor) { color = $0 }
@@ -79,11 +78,7 @@ struct DurationPickerView: View {
     }
     
     // MARK: -
-    func dismiss() {
-        withAnimation {
-            self.color = nil
-        }
-    }
+    func dismiss() { self.color = nil }
 }
 
 extension DurationPickerView {

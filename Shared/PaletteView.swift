@@ -99,9 +99,7 @@ struct PaletteView: View {
         withAnimation(.easeInOut(duration: 0.1)) { longPressedCircle = tricolor.description }
         
         delayExecution(.now() + 0.2) {
-            withAnimation {
-                secretary.durationPicker_OfColor = tricolor.sec
-            }
+            secretary.durationPicker_OfColor = tricolor.sec
             longPressedCircle = nil
         }
     }
