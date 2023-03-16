@@ -47,20 +47,24 @@ struct DPV: View {
         Grid(horizontalSpacing: gridSpacing, verticalSpacing: gridSpacing) {
             ForEach(digits, id: \.self) { subarray in
                 GridRow {
-                    ForEach(subarray, id: \.self) { digit in
+                    ForEach(subarray, id: \.self) { title in
                         Rectangle()
                             .fill(color!)
                             .overlay {
-                                Text(digit)
-                                    .font(.system(size: 65, design: .rounded))
-                                    .minimumScaleFactor(0.1)
-                                    .foregroundColor(.white)
+                                digit(title)
                             }
                     }
                 }
             }
         }
         .clipShape(vRoundedRectangle(corners: [.bottomLeft, .bottomRight], radius: 30))
+    }
+    
+    private func digit(_ title:String) -> some View {
+        Text(title)
+            .font(.system(size: 65, design: .rounded))
+            .minimumScaleFactor(0.1)
+            .foregroundColor(.white)
     }
 }
 
