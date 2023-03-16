@@ -25,6 +25,7 @@ struct DurationPickerView: View {
                         display
                         digitsGrid
                     }
+                    .offset(y: -4)
                     .padding([.leading, .trailing, .bottom])
                     .padding(4)
                     .background {
@@ -69,7 +70,6 @@ struct DurationPickerView: View {
                 }
             }
         }
-//        .clipShape(vRoundedRectangle(corners: [.bottomLeft, .bottomRight], radius: 30))
     }
     
     // MARK: -
