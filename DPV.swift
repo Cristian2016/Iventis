@@ -39,6 +39,7 @@ struct DPV: View {
             .foregroundColor(.black)
             .font(.system(size: 90, design: .rounded))
             .frame(height: 100)
+            .background()
             .onTapGesture { dismiss() }
     }
     
