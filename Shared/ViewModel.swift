@@ -423,7 +423,7 @@ extension ViewModel {
     //MoreOptionsView color change
     func changeColor(of bubble:Bubble, to newColor:String) {
         //don't do anything unless user changed color
-        if bubble.color == newColor { return }
+//        if bubble.color == newColor { return }
         UserFeedback.singleHaptic(.medium)
         
         DispatchQueue.global().async {
