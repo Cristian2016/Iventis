@@ -21,10 +21,10 @@ struct DurationPickerView: View {
         ZStack {
             if color != nil {
                 ZStack {
-                    Rectangle()
-                        .fill(.ultraThinMaterial)
-                        .padding(-40)
-                        .gesture(swipe)
+//                    Rectangle()
+//                        .fill(.ultraThinMaterial)
+//                        .padding(-40)
+//                        .gesture(swipe)
                     
                     VStack(spacing: 0) {
                         display
@@ -33,12 +33,7 @@ struct DurationPickerView: View {
                     .offset(y: -4)
                     .padding([.leading, .trailing, .bottom])
                     .padding(4)
-                    .background {
-                        vRoundedRectangle(corners: [.bottomLeft, .bottomRight], radius: 40)
-                            .fill(.background)
-                            .padding([.leading, .trailing])
-                            .standardShadow()
-                    }
+                    .background { background }
                 }
                 .padding(4)
                 .transition(.move(edge: .leading))
@@ -55,6 +50,13 @@ struct DurationPickerView: View {
     }
     
     // MARK: - Lego
+    private var background: some View {
+        vRoundedRectangle(corners: [.bottomLeft, .bottomRight], radius: 40)
+            .fill(.background)
+            .padding([.leading, .trailing])
+            .standardShadow()
+    }
+    
     private var display: some View {
         Text("12:56:89")
             .font(.system(size: 80, design: .rounded))
