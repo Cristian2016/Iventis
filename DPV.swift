@@ -85,7 +85,7 @@ extension DPV {
                     withAnimation(.easeIn(duration: 0.1)) {
                         isTapped = true
                     }
-                    delayExecution(.now() + 0.2) {
+                    delayExecution(.now() + 0.12) {
                         isTapped = false
                     }
                 }
