@@ -91,7 +91,7 @@ extension DurationPickerView {
             switch title {
                 case "✕":
                     vRoundedRectangle(corners: .bottomRight, radius: 32)
-                        .fill(color)
+                        .fill(.red)
                 case "00":
                     vRoundedRectangle(corners: .bottomLeft, radius: 32)
                         .fill(color)
@@ -120,24 +120,6 @@ extension DurationPickerView {
                     }
                 }
         }
-    }
-    
-    struct RightStrip:View {
-        var body: some View {
-            Rectangle()
-                .opacity(0.01)
-                .frame(width: 6)
-                .gesture(swipe)
-        }
-        
-        private var swipe: some Gesture {
-            DragGesture(minimumDistance: 0)
-                .onEnded { _ in
-                    action()
-                }
-        }
-        
-        let action: () -> ()
     }
 }
 
