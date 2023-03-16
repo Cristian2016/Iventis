@@ -3,7 +3,7 @@
 //  Timers (iOS)
 //
 //  Created by Cristian Lapusan on 07.02.2023.
-//
+//1 if newColor is not the same as currentColor
 
 import SwiftUI
 
@@ -21,15 +21,13 @@ struct ColorsGrid: View {
                     let height = itemHeight(geo)
                     
                     ForEach(Color.triColors) { tricolor in
-                        let sameColor = tricolor.description == bubble.color
+                        let currentColor = tricolor.description == bubble.color
                         
                         tricolor.sec
                             .frame(height: height)
-                            .overlay {
-                                if sameColor { checkmark }
-                            }
+                            .overlay { if currentColor { checkmark }}
                             .onTapGesture {
-                                if !sameColor {
+                                if !currentColor { //1
                                     viewModel.changeColor(of: bubble, to: tricolor.description)
                                     dismissAction()
                                 }
