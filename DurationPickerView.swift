@@ -20,27 +20,41 @@ struct DurationPickerView: View {
     var body: some View {
         ZStack {
             if color != nil {
-                ZStack(alignment: .trailing) {
+                ZStack {
                     VStack(spacing: 2) {
                         display
                         digitsGrid
                     }
-                    .padding(6)
-                    .background()
-                    RightStrip { dismiss() }
+                    .padding()
+                    .padding(4)
+                    .background {
+                        vRoundedRectangle(corners: [.bottomLeft, .bottomRight], radius: 40)
+                            .fill(.background)
+                            .padding([.leading, .trailing])
+                    }
                 }
+                .background(.ultraThinMaterial)
+                .gesture(swipe)
                 .transition(.move(edge: .leading))
             }
         }
         .onReceive(Secretary.shared.$durationPicker_OfColor) { color = $0 }
     }
     
+    private var swipe: some Gesture {
+        DragGesture(minimumDistance: 0)
+            .onEnded { _ in
+                dismiss()
+            }
+    }
+    
     // MARK: - Lego
     private var display: some View {
         Text("12:56:89")
             .font(.system(size: 90, design: .rounded))
+            .minimumScaleFactor(0.1)
             .frame(height: 100)
-            .background()
+            .background(.red)
             .onTapGesture { dismiss() }
     }
     
@@ -54,7 +68,7 @@ struct DurationPickerView: View {
                 }
             }
         }
-        .clipShape(vRoundedRectangle(corners: [.bottomLeft, .bottomRight], radius: 30))
+//        .clipShape(vRoundedRectangle(corners: [.bottomLeft, .bottomRight], radius: 30))
     }
     
     // MARK: -
@@ -71,9 +85,23 @@ extension DurationPickerView {
         let title:String
         let color:Color
         
+        @ViewBuilder
+        private var shape:some View {
+            switch title {
+                case "✕":
+                    vRoundedRectangle(corners: .bottomRight, radius: 32)
+                        .fill(color)
+                case "00":
+                    vRoundedRectangle(corners: .bottomLeft, radius: 32)
+                        .fill(color)
+                default:
+                    Rectangle()
+                        .fill(color)
+            }
+        }
+        
         var body: some View {
-            Rectangle()
-                .fill(color)
+            shape
                 .overlay {
                     Text(title)
                         .font(.system(size: 65, design: .rounded))
