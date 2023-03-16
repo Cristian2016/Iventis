@@ -17,9 +17,12 @@ struct DPV: View {
     var body: some View {
         ZStack {
             if let color = color {
-                VStack {
+                VStack(spacing: 2) {
                     Rectangle()
-                        .frame(height: 120)
+                        .frame(height: 100)
+                        .onTapGesture {
+                            self.color = nil
+                        }
                     Grid(horizontalSpacing: 2, verticalSpacing: 2) {
                         ForEach(digits, id: \.self) { subarray in
                             GridRow {
