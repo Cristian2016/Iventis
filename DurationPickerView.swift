@@ -53,7 +53,7 @@ struct DurationPickerView: View {
     // MARK: - Lego
     private var display: some View {
         Text("12:56:89")
-            .font(.system(size: 90, design: .rounded))
+            .font(.system(size: 80, design: .rounded))
             .minimumScaleFactor(0.1)
             .frame(height: 100)
             .background()
@@ -105,7 +105,7 @@ extension DurationPickerView {
             shape
                 .overlay {
                     Text(title)
-                        .font(.system(size: 65, design: .rounded))
+                        .font(.system(size: 50, design: .rounded))
                         .minimumScaleFactor(0.1)
                         .foregroundColor(.white)
                 }
