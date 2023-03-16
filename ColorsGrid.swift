@@ -29,8 +29,10 @@ struct ColorsGrid: View {
                                 }
                             }
                             .onTapGesture {
-                                viewModel.changeColor(of: bubble, to: tricolor.description)
-                                dismissAction()
+                                if tricolor.description != bubble.color {
+                                    viewModel.changeColor(of: bubble, to: tricolor.description)
+                                    dismissAction()
+                                }
                             }
                     }
                 }
