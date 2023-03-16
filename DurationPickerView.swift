@@ -15,7 +15,7 @@ struct DurationPickerView: View {
     
     @EnvironmentObject private var viewModel:ViewModel
     @State private var color:Color? //1
-    let gridSpacing = CGFloat(4)
+    let gridSpacing = CGFloat(1)
     
     var body: some View {
         ZStack {
