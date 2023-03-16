@@ -19,37 +19,46 @@ struct DPV: View {
         ZStack {
             if let color = color {
                 VStack(spacing: 2) {
-                    Rectangle()
-                        .fill(.background)
-                        .overlay(content: {
-                            Text("Timer Duration")
-                        })
-                        .frame(height: 100)
-                        .onTapGesture {
-                            self.color = nil
-                        }
-                    Grid(horizontalSpacing: gridSpacing, verticalSpacing: gridSpacing) {
-                        ForEach(digits, id: \.self) { subarray in
-                            GridRow {
-                                ForEach(subarray, id: \.self) { digit in
-                                    Rectangle()
-                                        .fill(color)
-                                        .overlay {
-                                            Text(digit)
-                                                .font(.system(size: 65, design: .rounded))
-                                                .minimumScaleFactor(0.1)
-                                                .foregroundColor(.white)
-                                        }
-                                }
-                            }
-                        }
-                    }
+                    display
+                    digitsGrid
                 }
                 .padding(2)
                 .background()
             }
         }
         .onReceive(Secretary.shared.$durationPicker_OfColor) { color = $0 }
+    }
+    
+    // MARK: - Lego
+    private var display: some View {
+        Rectangle()
+            .fill(.background)
+            .overlay(content: {
+                Text("Timer Duration")
+            })
+            .frame(height: 100)
+            .onTapGesture {
+                self.color = nil
+            }
+    }
+    
+    private var digitsGrid:some View {
+        Grid(horizontalSpacing: gridSpacing, verticalSpacing: gridSpacing) {
+            ForEach(digits, id: \.self) { subarray in
+                GridRow {
+                    ForEach(subarray, id: \.self) { digit in
+                        Rectangle()
+                            .fill(color!)
+                            .overlay {
+                                Text(digit)
+                                    .font(.system(size: 65, design: .rounded))
+                                    .minimumScaleFactor(0.1)
+                                    .foregroundColor(.white)
+                            }
+                    }
+                }
+            }
+        }
     }
 }
 
