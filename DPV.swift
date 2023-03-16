@@ -22,8 +22,8 @@ struct DPV: View {
                     display
                     digitsGrid
                 }
-                .background()
                 .padding(6)
+                .background()
             }
         }
         .onReceive(Secretary.shared.$durationPicker_OfColor) { color = $0 }
