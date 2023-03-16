@@ -21,15 +21,15 @@ struct ColorsGrid: View {
                     let height = itemHeight(geo)
                     
                     ForEach(Color.triColors) { tricolor in
+                        let sameColor = tricolor.description == bubble.color
+                        
                         tricolor.sec
                             .frame(height: height)
                             .overlay {
-                                if tricolor.description == bubble.color {
-                                    checkmark
-                                }
+                                if sameColor { checkmark }
                             }
                             .onTapGesture {
-                                if tricolor.description != bubble.color {
+                                if !sameColor {
                                     viewModel.changeColor(of: bubble, to: tricolor.description)
                                     dismissAction()
                                 }
