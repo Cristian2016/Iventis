@@ -49,6 +49,7 @@ struct MoreOptionsView: View {
                                             .overlay { YellowArea() }
                                         digits
                                             .overlay { MaskArea() }
+                                            .buttonStyle(SmallDigit())
                                     }
                                 }
                                 
@@ -139,7 +140,6 @@ struct MoreOptionsView: View {
                     UserFeedback.singleHaptic(.light)
                     input!.userEditedDelay += delay
                 } label: { digitLabel(delay) }
-                    .buttonStyle(SmallDigit())
             }
         }
     }
