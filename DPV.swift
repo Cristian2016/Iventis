@@ -59,6 +59,7 @@ struct DPV: View {
                 }
             }
         }
+        .clipShape(vRoundedRectangle(corners: [.bottomLeft, .bottomRight], radius: 30))
     }
 }
 
