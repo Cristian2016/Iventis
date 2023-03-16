@@ -49,11 +49,7 @@ struct DPV: View {
             ForEach(digits, id: \.self) { subarray in
                 GridRow {
                     ForEach(subarray, id: \.self) { title in
-                        Rectangle()
-                            .fill(color!)
-                            .overlay {
-                                Digit(title: title)
-                            }
+                        Digit(title: title, color: self.color!)
                     }
                 }
             }
@@ -73,18 +69,24 @@ extension DPV {
     struct Digit:View {
         @State private var isTapped = false
         let title:String
+        let color:Color
         
         var body: some View {
-            Text(title)
-                .font(.system(size: 65, design: .rounded))
-                .minimumScaleFactor(0.1)
-                .foregroundColor(.white)
+            Rectangle()
+                .fill(color)
+                .overlay {
+                    Text(title)
+                        .font(.system(size: 65, design: .rounded))
+                        .minimumScaleFactor(0.1)
+                        .foregroundColor(.white)
+                }
                 .opacity(isTapped ? 0.6 : 1.0)
                 .onTapGesture {
+                    UserFeedback.singleHaptic(.light)
                     withAnimation {
                         isTapped = true
                     }
-                    delayExecution(.now() + 0.05) {
+                    delayExecution(.now() + 0.3) {
                         isTapped = false
                     }
                     print("tapped \(title)")
