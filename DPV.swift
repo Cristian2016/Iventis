@@ -19,6 +19,10 @@ struct DPV: View {
             if let color = color {
                 VStack(spacing: 2) {
                     Rectangle()
+                        .fill(.background)
+                        .overlay(content: {
+                            Text("Timer Duration")
+                        })
                         .frame(height: 100)
                         .onTapGesture {
                             self.color = nil
@@ -31,7 +35,7 @@ struct DPV: View {
                                         .fill(color)
                                         .overlay {
                                             Text(digit)
-                                                .font(.system(size: 200, design: .rounded))
+                                                .font(.system(size: 65, design: .rounded))
                                                 .minimumScaleFactor(0.1)
                                                 .foregroundColor(.white)
                                         }
