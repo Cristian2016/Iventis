@@ -7,6 +7,7 @@
 //1 self.color:Color? because self will appear when the user has chosen a color for the timer to be created. self will init with no values
 
 import SwiftUI
+import MyPackage
 
 struct DPV: View {
     private let digits = [["7", "8", "9"], ["4", "5", "6"], ["1", "2", "3"], ["00", "0", "✕"]]
@@ -51,23 +52,13 @@ struct DPV: View {
                         Rectangle()
                             .fill(color!)
                             .overlay {
-                                digit(title)
+                                Digit(title: title)
                             }
                     }
                 }
             }
         }
         .clipShape(vRoundedRectangle(corners: [.bottomLeft, .bottomRight], radius: 30))
-    }
-    
-    private func digit(_ title:String) -> some View {
-        Text(title)
-            .font(.system(size: 65, design: .rounded))
-            .minimumScaleFactor(0.1)
-            .foregroundColor(.white)
-            .onTapGesture {
-                print("tapped \(title)")
-            }
     }
     
     // MARK: -
@@ -79,6 +70,28 @@ struct DPV: View {
 }
 
 extension DPV {
+    struct Digit:View {
+        @State private var isTapped = false
+        let title:String
+        
+        var body: some View {
+            Text(title)
+                .font(.system(size: 65, design: .rounded))
+                .minimumScaleFactor(0.1)
+                .foregroundColor(.white)
+                .opacity(isTapped ? 0.6 : 1.0)
+                .onTapGesture {
+                    withAnimation {
+                        isTapped = true
+                    }
+                    delayExecution(.now() + 0.05) {
+                        isTapped = false
+                    }
+                    print("tapped \(title)")
+                }
+        }
+    }
+    
     struct RightStrip:View {
         var body: some View {
             Rectangle()
