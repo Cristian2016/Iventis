@@ -22,8 +22,8 @@ struct DPV: View {
                     display
                     digitsGrid
                 }
-                .padding(2)
-                .background(.ultraThinMaterial)
+                .background()
+                .padding(6)
             }
         }
         .onReceive(Secretary.shared.$durationPicker_OfColor) { color = $0 }
@@ -31,12 +31,9 @@ struct DPV: View {
     
     // MARK: - Lego
     private var display: some View {
-        Rectangle()
-            .overlay(content: {
-                Text("12:56:89")
-                    .foregroundColor(.black)
-                    .font(.system(size: 90, design: .rounded))
-            })
+        Text("12:56:89")
+            .foregroundColor(.black)
+            .font(.system(size: 90, design: .rounded))
             .frame(height: 100)
             .onTapGesture {
                 self.color = nil
