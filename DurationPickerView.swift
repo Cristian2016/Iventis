@@ -21,6 +21,11 @@ struct DurationPickerView: View {
         ZStack {
             if color != nil {
                 ZStack {
+                    Rectangle()
+                        .fill(.ultraThinMaterial)
+                        .padding(-40)
+                        .gesture(swipe)
+                    
                     VStack(spacing: 0) {
                         display
                         digitsGrid
@@ -36,8 +41,6 @@ struct DurationPickerView: View {
                     }
                 }
                 .padding(4)
-                .background(.ultraThinMaterial)
-                .gesture(swipe)
                 .transition(.move(edge: .leading))
             }
         }
