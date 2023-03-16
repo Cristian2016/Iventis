@@ -112,7 +112,7 @@ extension DurationPickerView {
                         .minimumScaleFactor(0.1)
                         .foregroundColor(.white)
                 }
-                .opacity(isTapped ? 0.6 : 1.0)
+                .opacity(isTapped ? 0.2 : 1.0)
                 .onTapGesture {
                     UserFeedback.singleHaptic(.light)
                     withAnimation(.easeIn(duration: 0.1)) {
