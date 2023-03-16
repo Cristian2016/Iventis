@@ -32,13 +32,13 @@ struct DurationPickerView: View {
                         vRoundedRectangle(corners: [.bottomLeft, .bottomRight], radius: 40)
                             .fill(.background)
                             .padding([.leading, .trailing])
+                            .standardShadow()
                     }
                 }
                 .padding(4)
                 .background(.ultraThinMaterial)
                 .gesture(swipe)
                 .transition(.move(edge: .leading))
-                .standardShadow()
             }
         }
         .onReceive(Secretary.shared.$durationPicker_OfColor) { color = $0 }
