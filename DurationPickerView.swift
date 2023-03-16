@@ -25,7 +25,7 @@ struct DurationPickerView: View {
                         display
                         digitsGrid
                     }
-                    .padding()
+                    .padding([.leading, .trailing, .bottom])
                     .padding(4)
                     .background {
                         vRoundedRectangle(corners: [.bottomLeft, .bottomRight], radius: 40)
@@ -33,6 +33,7 @@ struct DurationPickerView: View {
                             .padding([.leading, .trailing])
                     }
                 }
+                .padding(4)
                 .background(.ultraThinMaterial)
                 .gesture(swipe)
                 .transition(.move(edge: .leading))
@@ -54,7 +55,7 @@ struct DurationPickerView: View {
             .font(.system(size: 90, design: .rounded))
             .minimumScaleFactor(0.1)
             .frame(height: 100)
-            .background(.red)
+            .background()
             .onTapGesture { dismiss() }
     }
     
