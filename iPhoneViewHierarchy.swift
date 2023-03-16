@@ -23,7 +23,7 @@ struct iPhoneViewHierarchy: View {
             }
             .tint(.label)
             PaletteView()
-            DPV()
+            DurationPickerView()
         }
     }
 }
