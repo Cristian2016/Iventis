@@ -21,7 +21,7 @@ struct DurationPickerView: View {
         ZStack {
             if color != nil {
                 ZStack {
-                    VStack(spacing: 2) {
+                    VStack(spacing: 0) {
                         display
                         digitsGrid
                     }
