@@ -46,8 +46,6 @@ class Secretary {
     
     @Published var addNoteButton_bRank:Int? {didSet { handleAddNoteButton_bRank() }}
     
-    @Published var durationPicker_OfColor:Color?
-    
     @Published var showPaletteView = false
     func togglePaletteView() { withAnimation { showPaletteView.toggle() }}
     
@@ -180,6 +178,14 @@ class Secretary {
     
     // MARK: - Init/Deinit
     private init() {}
+    
+    // MARK: - DurationPicker
+    @Published var durationPickerMode: Mode?
+    
+    enum Mode {
+        case create(Color) //timer
+        case edit(Bubble) //existing timer
+    }
 }
 
 extension Secretary {

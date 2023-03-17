@@ -15,17 +15,15 @@ struct DurationPickerView: View {
     
     @EnvironmentObject private var viewModel:ViewModel
     @State private var color:Color? //1
+    @State private var bubble:Bubble?
+    
     let gridSpacing = CGFloat(1)
     
     var body: some View {
         ZStack {
             if color != nil {
-                Rectangle()
-                    .fill(.thinMaterial)
-                    .ignoresSafeArea()
-                    .onTapGesture {
-                        dismiss()
-                    }
+                translucentBackground
+                    .onTapGesture { dismiss() }
                 
                 ZStack {
                     VStack(spacing: 0) {
@@ -40,17 +38,38 @@ struct DurationPickerView: View {
                 .padding(4)
             }
         }
-        .onReceive(Secretary.shared.$durationPicker_OfColor) { color = $0 }
+        .onReceive(Secretary.shared.$durationPickerMode) { output in
+            if let mode = output {
+                switch mode {
+                    case .create(let color):
+                        self.color = color
+                    case .edit(let bubble):
+                        print(bubble.color)
+                }
+            }
+        }
     }
     
     private var swipe: some Gesture {
         DragGesture(minimumDistance: 0)
-            .onEnded { _ in
-                dismiss()
+            .onEnded {
+                let xTranslation = $0.translation.width
+                
+                if xTranslation > 0 {
+                    print("advance right")
+                } else {
+                    print("advance left")
+                }
             }
     }
     
     // MARK: - Lego
+    private var translucentBackground:some View {
+        Rectangle()
+            .fill(.thinMaterial)
+            .ignoresSafeArea()
+    }
+    
     private var background: some View {
         vRoundedRectangle(corners: [.bottomLeft, .bottomRight], radius: 40)
             .fill(.background)
@@ -77,6 +96,7 @@ struct DurationPickerView: View {
                 }
             }
         }
+        .gesture(swipe)
     }
     
     // MARK: -
@@ -122,6 +142,13 @@ extension DurationPickerView {
                         isTapped = false
                     }
                 }
+        }
+    }
+    
+    struct Display:View {
+//        @State private var
+        var body: some View {
+            Text("")
         }
     }
 }
