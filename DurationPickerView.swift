@@ -14,6 +14,9 @@ struct DurationPickerView: View {
     private let digits = [["7", "8", "9"], ["4", "5", "6"], ["1", "2", "3"], ["00", "0", "✕"]]
     
     @EnvironmentObject private var viewModel:ViewModel
+    let manager = Manager.shared
+    
+    // MARK: - Mode [either 1. create a timerBubble with color or 2. edit a timerBubble]
     @State private var color:Color? //1
     @State private var bubble:Bubble?
     
@@ -44,14 +47,14 @@ struct DurationPickerView: View {
                     case .create(let color):
                         self.color = color
                     case .edit(let bubble):
-                        print(bubble.color)
+                        self.bubble = bubble
                 }
             }
         }
     }
     
     private var swipe: some Gesture {
-        DragGesture(minimumDistance: 0)
+        DragGesture(minimumDistance: 5)
             .onEnded {
                 let xTranslation = $0.translation.width
                 
@@ -105,7 +108,11 @@ struct DurationPickerView: View {
 
 extension DurationPickerView {
     struct Digit:View {
+        let manager = Manager.shared
+        
         @State private var isTapped = false
+        @State private var disabled = false
+        
         let title:String
         let color:Color
         
@@ -141,6 +148,26 @@ extension DurationPickerView {
                     delayExecution(.now() + 0.12) {
                         isTapped = false
                     }
+                    
+                    switch title {
+                        case "✕" : manager.removelastDigit()
+                        case "00" : manager.addDoubleZero()
+                        default : manager.addToDigits(Int(title)!)
+                    }
+                                    }
+                .onLongPressGesture {
+                    if title == "✕" { manager.removeALlDigits() }
+                }
+                .disabled(disabled ? true : false)
+                .opacity(disabled ? 0.4 : 1.0)
+                .onReceive(manager.$notAllowedCharacters) {
+                    if title.unicodeScalars.count == 1 {
+                        if $0.contains(title.unicodeScalars.first!) {
+                            disabled = true
+                        } else {
+                            disabled = false
+                        }
+                    }
                 }
         }
     }
@@ -150,6 +177,55 @@ extension DurationPickerView {
         var body: some View {
             Text("")
         }
+    }
+}
+
+extension DurationPickerView {
+    class Manager {
+        typealias Characters = CharacterSet
+        
+        private(set) var digits = [Int]() {didSet{
+            print("digits string \(digits)")
+        }}
+        
+        @Published var notAllowedCharacters = Characters(charactersIn: "56789✕")
+        
+        // MARK: - Public API
+        static let shared = Manager()
+        
+        func addToDigits(_ value:Int) {
+            digits.append(value)
+        }
+        
+        func addDoubleZero() {
+            digits.append(contentsOf: [0,0])
+        }
+        
+        func removelastDigit() { digits.removeLast() }
+        
+        func removeALlDigits() { digits = [] }
+        
+        // MARK: -
+//        public func charactersToDisable(for digits:String?) -> Characters {
+//            guard let string = string else {return Characters()}
+//
+//            if (string == "48") {return Characters(charactersIn: "0123456789").union(doubleZero)}
+//            if (string == "00000") {return Characters(charactersIn: "0").union(doubleZero)}
+//            if (string == "0000") {return doubleZero.union(Characters(charactersIn: "6789"))}
+//
+//            switch string.count {
+//            case 0: return Characters(charactersIn: "56789✕")
+//            case 1, 3, 5:
+//                return (string == "4") ? Characters(charactersIn: "9").union(doubleZero) : Characters().union(doubleZero)
+//            case 2: return Characters(charactersIn: "6789")
+//            case 4: return Characters(charactersIn: "6789")
+//            case 6: return Characters(charactersIn: "0123456789").union(doubleZero)
+//            default: return Characters(charactersIn: "✕")
+//            }
+//        }
+        
+        // MARK: -
+        private init() { }
     }
 }
 
