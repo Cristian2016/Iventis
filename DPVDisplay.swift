@@ -30,18 +30,17 @@ struct DPVDisplay: View {
             }
         }
         .frame(height: 100)
-        .background(.red)
+        .background()
         .allowsHitTesting(false)
-        .onReceive(manager.$digits) { output in
-            print("out from manager \(output)")
-            switch output.count {
+        .onReceive(manager.$digits) {
+            switch $0.count {
                 case 0:
                     hr = ""
                     min = ""
                     sec = ""
-                case 1, 2: hr = output.reduce("") { String($0) + String($1) }
-                case 3, 4: min = output.dropFirst(2).reduce("") { String($0) + String($1) }
-                case 5, 6: sec = output.dropFirst(4).reduce("") { String($0) + String($1) }
+                case 1, 2: hr = $0.reduce("") { String($0) + String($1) }
+                case 3, 4: min = $0.dropFirst(2).reduce("") { String($0) + String($1) }
+                case 5, 6: sec = $0.dropFirst(4).reduce("") { String($0) + String($1) }
                 default: break
             }
         }
