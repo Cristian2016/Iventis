@@ -87,8 +87,8 @@ struct DurationPickerView: View {
     private var display: some View {
         HStack {
             componentView(hr, \.hr)
-//            componentView(min, \.min)
-//            componentView(sec, \.sec)
+            componentView(min, \.min)
+            componentView(sec, \.sec)
         }
         .frame(height: 100)
         .background()
@@ -154,7 +154,7 @@ extension DurationPickerView {
                         .minimumScaleFactor(0.1)
                         .foregroundColor(.white)
                 }
-                .opacity(isTapped ? 0.2 : 1.0)
+                .opacity(isTapped ? 0 : 1.0)
                 .onTapGesture {
                     UserFeedback.singleHaptic(.light)
                     withAnimation(.easeIn(duration: 0.1)) {
@@ -185,6 +185,9 @@ extension DurationPickerView {
                             disabled = false
                         }
                     }
+                }
+                .onAppear {
+                    print("digit with color \(color.description)")
                 }
         }
         
