@@ -19,7 +19,8 @@ struct DPVDisplay: View {
     var body: some View {
         ZStack {
             if hr.isEmpty {
-                VStack(spacing: -2) {
+                VStack(spacing: 0) {
+                    Spacer()
                     Text("Enter Duration")
                         .font(.largeTitle)
                         .fontDesign(.rounded)
