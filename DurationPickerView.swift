@@ -145,21 +145,6 @@ extension DurationPickerView {
         let title:String
         let color:Color
         
-        @ViewBuilder
-        private var shape:some View {
-            switch title {
-                case "✕":
-                    vRoundedRectangle(corners: .bottomRight, radius: 32)
-                        .fill(.red)
-                case "*":
-                    vRoundedRectangle(corners: .bottomLeft, radius: 32)
-                        .fill(color)
-                default:
-                    Rectangle()
-                        .fill(color)
-            }
-        }
-        
         var body: some View {
             shape
                 .opacity(disabled ? 0.3 : 1.0)
@@ -201,6 +186,22 @@ extension DurationPickerView {
                         }
                     }
                 }
+        }
+        
+        // MARK: - Lego
+        @ViewBuilder
+        private var shape:some View {
+            switch title {
+                case "✕":
+                    vRoundedRectangle(corners: .bottomRight, radius: 32)
+                        .fill(.red)
+                case "*":
+                    vRoundedRectangle(corners: .bottomLeft, radius: 32)
+                        .fill(color)
+                default:
+                    Rectangle()
+                        .fill(color)
+            }
         }
     }
     
