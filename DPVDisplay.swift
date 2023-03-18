@@ -19,11 +19,11 @@ struct DPVDisplay: View {
     var body: some View {
         ZStack {
             if hr.isEmpty {
-                VStack {
+                VStack(spacing: -2) {
                     Text("Enter Duration")
                         .font(.largeTitle)
                         .fontDesign(.rounded)
-                        .fontWeight(.medium)
+                        .fontWeight(.semibold)
                     Text("Maximum 48 hours")
                         .font(.caption2)
                         .foregroundColor(.secondary)
