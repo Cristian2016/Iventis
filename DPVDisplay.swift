@@ -23,7 +23,7 @@ struct DPVDisplay: View {
                     Text("Choose Duration")
                         .font(.largeTitle)
                         .fontDesign(.rounded)
-                    Text("Max 48 Hours")
+                    Text("Maximum 48 hours")
                         .font(.caption2)
                         .foregroundColor(.secondary)
                 }
