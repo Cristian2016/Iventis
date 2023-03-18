@@ -23,17 +23,27 @@ struct DPVDisplay: View {
             } else {
                 HStack {
                     componentView(hr, \.hr)
-                    componentView(min, \.min)
-                    componentView(sec, \.sec)
+                    if !min.isEmpty { componentView(min, \.min) }
+                    if !sec.isEmpty { componentView(sec, \.sec) }
                 }
                 .padding([.leading, .trailing], 4)
             }
         }
-        .allowsHitTesting(false)
         .frame(height: 100)
         .background(.red)
+        .allowsHitTesting(false)
         .onReceive(manager.$digits) { output in
             print("out from manager \(output)")
+            switch output.count {
+                case 0:
+                    hr = ""
+                    min = ""
+                    sec = ""
+                case 1, 2: hr = output.reduce("") { String($0) + String($1) }
+                case 3, 4: min = output.dropFirst(2).reduce("") { String($0) + String($1) }
+                case 5, 6: sec = output.dropFirst(4).reduce("") { String($0) + String($1) }
+                default: break
+            }
         }
     }
     
