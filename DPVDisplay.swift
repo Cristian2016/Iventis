@@ -48,9 +48,18 @@ struct DPVDisplay: View {
                     hr = ""
                     min = ""
                     sec = ""
-                case 1, 2: hr = $0.reduce("") { String($0) + String($1) }
-                case 3, 4: min = $0.dropFirst(2).reduce("") { String($0) + String($1) }
-                case 5, 6: sec = $0.dropFirst(4).reduce("") { String($0) + String($1) }
+                case 1:
+                    hr = $0.reduce("") { String($0) + String($1) } + "_"
+                case 2:
+                    hr = $0.reduce("") { String($0) + String($1) }
+                case 3:
+                    min = $0.dropFirst(2).reduce("") { String($0) + String($1) } + "_"
+                case 4:
+                    min = $0.dropFirst(2).reduce("") { String($0) + String($1) }
+                case 5:
+                    sec = $0.dropFirst(4).reduce("") { String($0) + String($1) } + "_"
+                    case 6:
+                    sec = $0.dropFirst(4).reduce("") { String($0) + String($1) }
                 default: break
             }
         }
