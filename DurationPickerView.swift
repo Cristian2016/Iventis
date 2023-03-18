@@ -240,14 +240,17 @@ extension DurationPickerView {
         
         // MARK: -
         public func charactersToDisable() {
-            if digits == [48] {
+            if digits == [4,8] {
                 notAllowedCharacters = Characters(charactersIn: "0123456789")
-            } //union doubleZero
+                return
+            }
             if digits == [0,0,0,0,0] {
                 notAllowedCharacters = Characters(charactersIn: "0")
+                return
             }
             if digits == [0,0,0,0] {
                 notAllowedCharacters = (Characters(charactersIn: "6789"))
+                return
             }
             
             switch digits.count {
