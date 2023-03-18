@@ -67,7 +67,7 @@ struct DPVDisplay: View {
     
     // MARK: - Lego
     private func componentView(_ value:String, _ keyPath:KeyPath<DPVDisplay, String>) -> some View {
-        var abbreviation = "ok"
+        var abbreviation:String?
         switch keyPath {
             case \.hr: abbreviation = "h"
             case \.min: abbreviation = "m"
@@ -79,7 +79,7 @@ struct DPVDisplay: View {
             Text(value)
                 .font(.system(size: 80, design: .rounded))
                 .minimumScaleFactor(0.1)
-            Text(abbreviation)
+            Text(abbreviation!)
                 .font(.system(size: 20, design: .rounded))
                 .fontWeight(.bold)
         }
