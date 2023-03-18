@@ -11,7 +11,7 @@ import SwiftUI
 import MyPackage
 
 struct DurationPickerView: View {
-    private let digits = [["7", "8", "9"], ["4", "5", "6"], ["1", "2", "3"], ["00", "0", "✕"]]
+    private let digits = [["7", "8", "9"], ["4", "5", "6"], ["1", "2", "3"], ["*", "0", "✕"]]
     
     @EnvironmentObject private var viewModel:ViewModel
     let manager = Manager.shared
@@ -151,7 +151,7 @@ extension DurationPickerView {
                 case "✕":
                     vRoundedRectangle(corners: .bottomRight, radius: 32)
                         .fill(.red)
-                case "00":
+                case "*":
                     vRoundedRectangle(corners: .bottomLeft, radius: 32)
                         .fill(color)
                 default:
@@ -164,7 +164,7 @@ extension DurationPickerView {
             shape
                 .opacity(disabled ? 0.3 : 1.0)
                 .overlay {
-                    Text(title)
+                    Text(title == "*" ? "00" : title)
                         .font(.system(size: 50, design: .rounded))
                         .minimumScaleFactor(0.1)
                         .foregroundColor(.white)
@@ -181,7 +181,7 @@ extension DurationPickerView {
                     
                     switch title {
                         case "✕" : manager.removelastDigit()
-                        case "00" : manager.addDoubleZero()
+                        case "*" : manager.addDoubleZero()
                         default : manager.addToDigits(Int(title)!)
                     }
                                     }
@@ -241,28 +241,28 @@ extension DurationPickerView {
         // MARK: -
         public func charactersToDisable() {
             if digits == [4,8] {
-                notAllowedCharacters = Characters(charactersIn: "0123456789") //and 00
+                notAllowedCharacters = Characters(charactersIn: "0123456789*")
                 return
             }
             if digits == [0,0,0,0,0] {
-                notAllowedCharacters = Characters(charactersIn: "0") //and 00
+                notAllowedCharacters = Characters(charactersIn: "0*")
                 return
             }
             if digits == [0,0,0,0] {
-                notAllowedCharacters = (Characters(charactersIn: "6789")) //and 00
+                notAllowedCharacters = (Characters(charactersIn: "6789*"))
                 return
             }
             
             switch digits.count {
             case 0: notAllowedCharacters = Characters(charactersIn: "56789✕")
             case 1, 3, 5:
-                    notAllowedCharacters = digits == [4] ? Characters(charactersIn: "9") : Characters() //and 00
+                    notAllowedCharacters = digits == [4] ? Characters(charactersIn: "9*") : Characters(charactersIn: "*")
             case 2:
                     notAllowedCharacters = Characters(charactersIn: "6789")
             case 4:
                     notAllowedCharacters = Characters(charactersIn: "6789")
             case 6:
-                    notAllowedCharacters = Characters(charactersIn: "0123456789") //and 00
+                    notAllowedCharacters = Characters(charactersIn: "0123456789*")
             default:
                     notAllowedCharacters = Characters(charactersIn: "✕")
             }
