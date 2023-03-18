@@ -20,6 +20,10 @@ struct vRoundedRectangle: Shape {
     }
 }
 
+extension CharacterSet {
+    static let allDigits = CharacterSet(charactersIn: "0123456789*")
+}
+
 extension Notification.Name {
     static let fiveSecondsSignal = Notification.Name("fiveSecondsSignal")
     static let detailViewVisible = Notification.Name("detailViewVisible")

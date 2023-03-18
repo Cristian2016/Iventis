@@ -240,11 +240,10 @@ extension DurationPickerView {
         
         func removeALlDigits() { digits = [] }
         
-        
         // MARK: -
         public func charactersToDisable() {
             if digits == [4,8] {
-                notAllowedCharacters = Characters(charactersIn: "0123456789*")
+                notAllowedCharacters = .allDigits
                 return
             }
             if digits == [0,0,0,0,0] {
@@ -265,7 +264,7 @@ extension DurationPickerView {
             case 4:
                     notAllowedCharacters = Characters(charactersIn: "6789")
             case 6:
-                    notAllowedCharacters = Characters(charactersIn: "0123456789*")
+                    notAllowedCharacters = .allDigits
             default:
                     notAllowedCharacters = Characters(charactersIn: "✕")
             }
