@@ -19,7 +19,15 @@ struct DPVDisplay: View {
     var body: some View {
         ZStack {
             if hr.isEmpty {
-                Text("Choose Duration")
+                VStack {
+                    Text("Choose Duration")
+                        .font(.largeTitle)
+                        .fontDesign(.rounded)
+                    Text("Max 48 Hours")
+                        .font(.caption2)
+                        .foregroundColor(.secondary)
+                }
+                .minimumScaleFactor(0.1)
             } else {
                 HStack {
                     componentView(hr, \.hr)
