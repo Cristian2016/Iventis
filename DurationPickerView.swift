@@ -186,9 +186,6 @@ extension DurationPickerView {
                         }
                     }
                 }
-                .onAppear {
-                    print("digit with color \(color.description)")
-                }
         }
         
         // MARK: - Lego
