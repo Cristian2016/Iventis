@@ -87,8 +87,8 @@ struct DurationPickerView: View {
     private var display: some View {
         HStack {
             componentView(hr, \.hr)
-            componentView(min, \.min)
-            componentView(sec, \.sec)
+//            componentView(min, \.min)
+//            componentView(sec, \.sec)
         }
         .frame(height: 100)
         .background()
@@ -214,7 +214,8 @@ extension DurationPickerView {
         typealias Characters = CharacterSet
         
         private(set) var digits = [Int]() {didSet{
-            print("digits string \(digits)")
+            print(digits)
+            charactersToDisable()
         }}
         
         @Published var notAllowedCharacters = Characters(charactersIn: "56789✕")
@@ -236,24 +237,33 @@ extension DurationPickerView {
         
         func removeALlDigits() { digits = [] }
         
+        
         // MARK: -
-//        public func charactersToDisable(for digits:String?) -> Characters {
-//            guard let string = string else {return Characters()}
-//
-//            if (string == "48") {return Characters(charactersIn: "0123456789").union(doubleZero)}
-//            if (string == "00000") {return Characters(charactersIn: "0").union(doubleZero)}
-//            if (string == "0000") {return doubleZero.union(Characters(charactersIn: "6789"))}
-//
-//            switch string.count {
-//            case 0: return Characters(charactersIn: "56789✕")
-//            case 1, 3, 5:
-//                return (string == "4") ? Characters(charactersIn: "9").union(doubleZero) : Characters().union(doubleZero)
-//            case 2: return Characters(charactersIn: "6789")
-//            case 4: return Characters(charactersIn: "6789")
-//            case 6: return Characters(charactersIn: "0123456789").union(doubleZero)
-//            default: return Characters(charactersIn: "✕")
-//            }
-//        }
+        public func charactersToDisable() {
+            if digits == [48] {
+                notAllowedCharacters = Characters(charactersIn: "0123456789")
+            } //union doubleZero
+            if digits == [0,0,0,0,0] {
+                notAllowedCharacters = Characters(charactersIn: "0")
+            }
+            if digits == [0,0,0,0] {
+                notAllowedCharacters = (Characters(charactersIn: "6789"))
+            }
+            
+            switch digits.count {
+            case 0: notAllowedCharacters = Characters(charactersIn: "56789✕")
+            case 1, 3, 5:
+                    notAllowedCharacters = digits == [4] ? Characters(charactersIn: "9") : Characters()
+            case 2:
+                    notAllowedCharacters = Characters(charactersIn: "6789")
+            case 4:
+                    notAllowedCharacters = Characters(charactersIn: "6789")
+            case 6:
+                    notAllowedCharacters = Characters(charactersIn: "0123456789") //.union(doubleZero)
+            default:
+                    notAllowedCharacters = Characters(charactersIn: "✕")
+            }
+        }
         
         // MARK: -
         private init() { }
