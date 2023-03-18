@@ -76,7 +76,7 @@ struct DPVDisplay: View {
             default: abbreviation = ""
         }
         
-        return HStack(alignment: .firstTextBaseline, spacing: 2) {
+        return HStack(spacing: 2) {
             Text(value)
                 .font(.system(size: 80, design: .rounded))
                 .minimumScaleFactor(0.1)
