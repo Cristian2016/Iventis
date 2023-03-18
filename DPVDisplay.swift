@@ -72,7 +72,7 @@ struct DPVDisplay: View {
                 .minimumScaleFactor(0.1)
             Text(abbreviation)
                 .font(.system(size: 20, design: .rounded))
-                .fontWeight(.medium)
+                .fontWeight(.bold)
         }
     }
 }
