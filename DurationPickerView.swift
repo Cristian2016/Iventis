@@ -186,7 +186,10 @@ extension DurationPickerView {
                     }
                                     }
                 .onLongPressGesture {
-                    if title == "✕" { manager.removeALlDigits() }
+                    if title == "✕" {
+                        manager.removeALlDigits()
+                        UserFeedback.singleHaptic(.heavy)
+                    }
                 }
                 .disabled(disabled ? true : false)
                 .onReceive(manager.$notAllowedCharacters) {
