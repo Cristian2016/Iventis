@@ -20,9 +20,9 @@ struct DurationPickerView: View {
     @State private var color:Color? //1
     @State private var bubble:Bubble?
     
-    @State private var hr:String = "0"
-    @State private var min:String = "0"
-    @State private var sec:String = "0"
+    @State private var hr:String?
+    @State private var min:String?
+    @State private var sec:String?
     
     let gridSpacing = CGFloat(1)
     
@@ -34,7 +34,7 @@ struct DurationPickerView: View {
                 
                 ZStack {
                     VStack(spacing: 0) {
-                        display
+                        DPVDisplay { dismiss() }
                         digitsGrid
                     }
                     .offset(y: -4)
@@ -82,18 +82,7 @@ struct DurationPickerView: View {
             .fill(.background)
             .padding([.leading, .trailing])
             .standardShadow()
-    }
-    
-    private var display: some View {
-        HStack {
-            componentView(hr, \.hr)
-            componentView(min, \.min)
-            componentView(sec, \.sec)
-        }
-        .frame(height: 100)
-        .background()
-        .onTapGesture { dismiss() }
-        .padding([.leading, .trailing], 4)
+            .onTapGesture { dismiss() }
     }
     
     private func componentView(_ value:String, _ keyPath:KeyPath<DurationPickerView, String>) -> some View {
@@ -204,27 +193,25 @@ extension DurationPickerView {
             }
         }
     }
-    
-    struct Display:View {
-//        @State private var
-        var body: some View {
-            Text("")
-        }
-    }
 }
 
 extension DurationPickerView {
     class Manager {
         typealias Characters = CharacterSet
         
-        private(set) var digits = [Int]() {didSet{
+        @Published var digits = [Int]() {didSet{
             print(digits)
             charactersToDisable()
         }}
         
+        struct DisplayComponents {
+            let hr:String
+            let min:String
+            let sec:String
+        }
+        
         @Published var notAllowedCharacters = Characters(charactersIn: "56789✕")
         
-//        @Published var display =
         
         // MARK: - Public API
         static let shared = Manager()

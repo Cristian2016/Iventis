@@ -78,6 +78,7 @@
 		1F9BE0A9280BE14100F87EFA /* PaletteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F9BE0A8280BE14100F87EFA /* PaletteView.swift */; };
 		1F9BE0AD280C6AB000F87EFA /* TapHold.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F9BE0AC280C6AB000F87EFA /* TapHold.swift */; };
 		1FA03CAB29893E6200AF7395 /* SessionDeleteActionAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA03CAA29893E6200AF7395 /* SessionDeleteActionAlert.swift */; };
+		1FA188E929C5E7A60050816C /* DPVDisplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA188E829C5E7A60050816C /* DPVDisplay.swift */; };
 		1FA1B44A298321D20063B081 /* iPhoneViewHierarchy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA1B449298321D20063B081 /* iPhoneViewHierarchy.swift */; };
 		1FA1F39E2981CFE6000A50F5 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA1F39D2981CFE6000A50F5 /* Persistence.swift */; };
 		1FA25B002986F51E007759EB /* ViewHierarchy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA25AFF2986F51E007759EB /* ViewHierarchy.swift */; };
@@ -225,6 +226,7 @@
 		1F9BE0A8280BE14100F87EFA /* PaletteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PaletteView.swift; path = Shared/PaletteView.swift; sourceTree = SOURCE_ROOT; };
 		1F9BE0AC280C6AB000F87EFA /* TapHold.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapHold.swift; sourceTree = "<group>"; };
 		1FA03CAA29893E6200AF7395 /* SessionDeleteActionAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionDeleteActionAlert.swift; sourceTree = "<group>"; };
+		1FA188E829C5E7A60050816C /* DPVDisplay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DPVDisplay.swift; sourceTree = SOURCE_ROOT; };
 		1FA1B449298321D20063B081 /* iPhoneViewHierarchy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iPhoneViewHierarchy.swift; sourceTree = "<group>"; };
 		1FA1F39D2981CFE6000A50F5 /* Persistence.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		1FA25AFF2986F51E007759EB /* ViewHierarchy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewHierarchy.swift; sourceTree = "<group>"; };
@@ -401,6 +403,7 @@
 		1F5F4A4728093FAD00AF3442 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				1FA188E829C5E7A60050816C /* DPVDisplay.swift */,
 				1F5FFDA029C2E92D005FFB32 /* DurationPickerView.swift */,
 				1F53DD6B29BEFB8A00E33B77 /* PrecisionTimer.swift */,
 				1F38A00329B9000D009AD543 /* yPositionTracker.swift */,
@@ -643,6 +646,7 @@
 				1F64200A2820204400413E31 /* PairList.swift in Sources */,
 				1FA1B44A298321D20063B081 /* iPhoneViewHierarchy.swift in Sources */,
 				1F20807C2836111600FD35D6 /* BSavedNote.swift in Sources */,
+				1FA188E929C5E7A60050816C /* DPVDisplay.swift in Sources */,
 				1F615B6329899E210006DB0B /* BackgroundTimer.swift in Sources */,
 				1FAD9B4229961FC000F49670 /* ThreeCircles.swift in Sources */,
 				1F8AAFA329927B2900328AC7 /* FramePortrait.swift in Sources */,
