@@ -49,15 +49,15 @@ struct DPVDisplay: View {
                     min = ""
                     sec = ""
                 case 1:
-                    hr = String($0[0]) + "_"
+                    hr = String($0[0]) + "⎽"
                 case 2:
                     hr = $0.reduce("") { String($0) + String($1) }
                 case 3:
-                    min = String($0[2]) + "_"
+                    min = String($0[2]) + "⎽"
                 case 4:
                     min = $0.dropFirst(2).reduce("") { String($0) + String($1) }
                 case 5:
-                    sec = String($0[4]) + "_"
+                    sec = String($0[4]) + "⎽"
                 case 6:
                     sec = $0.dropFirst(4).reduce("") { String($0) + String($1) }
                 default: break
