@@ -20,6 +20,10 @@ struct DurationPickerView: View {
     @State private var color:Color? //1
     @State private var bubble:Bubble?
     
+    @State private var hr:String = "0"
+    @State private var min:String = "0"
+    @State private var sec:String = "0"
+    
     let gridSpacing = CGFloat(1)
     
     var body: some View {
@@ -81,12 +85,35 @@ struct DurationPickerView: View {
     }
     
     private var display: some View {
-        Text("12:56:89")
-            .font(.system(size: 80, design: .rounded))
-            .minimumScaleFactor(0.1)
-            .frame(height: 100)
-            .background()
-            .onTapGesture { dismiss() }
+        HStack {
+            componentView(hr, \.hr)
+            componentView(min, \.min)
+            componentView(sec, \.sec)
+        }
+        .frame(height: 100)
+        .background()
+        .onTapGesture { dismiss() }
+        .padding([.leading, .trailing], 4)
+    }
+    
+    private func componentView(_ value:String, _ keyPath:KeyPath<DurationPickerView, String>) -> some View {
+        
+        var abbreviation:String = "ok"
+        switch keyPath {
+            case \.hr: abbreviation = "h"
+            case \.min: abbreviation = "m"
+            case \.sec: abbreviation = "s"
+            default: abbreviation = ""
+        }
+        
+        return HStack(alignment: .firstTextBaseline, spacing: 2) {
+            Text(value)
+                .font(.system(size: 80, design: .rounded))
+                .minimumScaleFactor(0.1)
+            Text(abbreviation)
+                .font(.system(size: 20, design: .rounded))
+                .fontWeight(.medium)
+        }
     }
     
     private var digitsGrid:some View {
@@ -103,7 +130,9 @@ struct DurationPickerView: View {
     }
     
     // MARK: -
-    func dismiss() { self.color = nil }
+    func dismiss() {
+        self.color = nil
+    }
 }
 
 extension DurationPickerView {
@@ -133,6 +162,7 @@ extension DurationPickerView {
         
         var body: some View {
             shape
+                .opacity(disabled ? 0.3 : 1.0)
                 .overlay {
                     Text(title)
                         .font(.system(size: 50, design: .rounded))
@@ -159,7 +189,6 @@ extension DurationPickerView {
                     if title == "✕" { manager.removeALlDigits() }
                 }
                 .disabled(disabled ? true : false)
-                .opacity(disabled ? 0.4 : 1.0)
                 .onReceive(manager.$notAllowedCharacters) {
                     if title.unicodeScalars.count == 1 {
                         if $0.contains(title.unicodeScalars.first!) {
@@ -189,6 +218,8 @@ extension DurationPickerView {
         }}
         
         @Published var notAllowedCharacters = Characters(charactersIn: "56789✕")
+        
+//        @Published var display =
         
         // MARK: - Public API
         static let shared = Manager()
