@@ -179,7 +179,7 @@ extension DurationPickerView {
             switch title {
                 case "✕":
                     vRoundedRectangle(corners: .bottomRight, radius: 32)
-                        .fill(.red)
+                        .fill(disabled ? Color.Bubble.clearButtonRed.hr : Color.Bubble.clearButtonRed.sec)
                 case "*":
                     vRoundedRectangle(corners: .bottomLeft, radius: 32)
                         .fill(disabled ? tricolor.hr : tricolor.sec)
