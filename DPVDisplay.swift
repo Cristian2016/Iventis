@@ -56,10 +56,11 @@ struct DPVDisplay: View {
                 .fontDesign(.rounded)
                 .fontWeight(.semibold)
             Text("Maximum 48 hours")
-                .font(.caption2)
+                .font(.caption2.weight(.medium))
                 .foregroundColor(.secondary)
         }
         .minimumScaleFactor(0.1)
+        .offset(y: -4)
     }
     
     private var durationComponentsStack:some View {
