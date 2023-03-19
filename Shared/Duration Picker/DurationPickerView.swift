@@ -140,6 +140,8 @@ struct DurationPickerView: View {
         self.tricolor = nil
         if manager.digits.count%2 == 0 {
             print("create timers and remove all digits")
+        } else {
+            print("do not create timer, remove all digits")
         }
         manager.removeAllDigits()
     }
