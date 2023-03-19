@@ -76,11 +76,11 @@ extension Color {
         
         //row 6
         static let aqua = Tricolor(description: Name.aqua.rawValue,
-                                hr: Color(#colorLiteral(red: 0, green: 0.9749670625, blue: 1, alpha: 1)), min: Color(#colorLiteral(red: 0.003376292763, green: 0.9073271751, blue: 0.9472805858, alpha: 1)), sec: Color(#colorLiteral(red: 0, green: 0.855682075, blue: 0.8874734044, alpha: 1)))
+                                hr: Color(#colorLiteral(red: 0.633831501, green: 0.9293289781, blue: 0.9423958063, alpha: 1)), min: Color(#colorLiteral(red: 0.003376292763, green: 0.9073271751, blue: 0.9472805858, alpha: 1)), sec: Color(#colorLiteral(red: 0, green: 0.855682075, blue: 0.8874734044, alpha: 1)))
         static let byzantium = Tricolor(description: Name.byzantium.rawValue,
-                                     hr: Color(#colorLiteral(red: 0.6075749397, green: 0.2570540309, blue: 0.5635319352, alpha: 1)), min: Color(#colorLiteral(red: 0.5355527997, green: 0.2330842912, blue: 0.4949119091, alpha: 1)), sec: Color(#colorLiteral(red: 0.4615408778, green: 0.1781537533, blue: 0.4272875786, alpha: 1)))
+                                     hr: Color(#colorLiteral(red: 0.7369340062, green: 0.5903325677, blue: 0.7177190185, alpha: 1)), min: Color(#colorLiteral(red: 0.5355527997, green: 0.2330842912, blue: 0.4949119091, alpha: 1)), sec: Color(#colorLiteral(red: 0.4615408778, green: 0.1781537533, blue: 0.4272875786, alpha: 1)))
         static let rose = Tricolor(description: Name.rose.rawValue,
-                                hr: Color(#colorLiteral(red: 0.9601778388, green: 0.5991181135, blue: 0.6990267038, alpha: 1)), min: Color(#colorLiteral(red: 0.9777489305, green: 0.4076962173, blue: 0.5763365626, alpha: 1)), sec: Color(#colorLiteral(red: 0.9909614921, green: 0.2357916832, blue: 0.4794922471, alpha: 1)))
+                                hr: Color(#colorLiteral(red: 1, green: 0.6383054852, blue: 0.74250108, alpha: 1)), min: Color(#colorLiteral(red: 0.9777489305, green: 0.4076962173, blue: 0.5763365626, alpha: 1)), sec: Color(#colorLiteral(red: 0.9909614921, green: 0.2357916832, blue: 0.4794922471, alpha: 1)))
         static let mocha = Tricolor(description: Name.mocha.rawValue,
                                  hr: Color(#colorLiteral(red: 0.6546627879, green: 0.4379749894, blue: 0.2150397599, alpha: 1)), min: Color(#colorLiteral(red: 0.584002018, green: 0.3206113577, blue: 0, alpha: 1)),sec: Color(#colorLiteral(red: 0.584002018, green: 0.3206113577, blue: 0, alpha: 1)))
         
