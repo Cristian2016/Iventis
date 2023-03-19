@@ -86,10 +86,6 @@ extension DurationPickerView {
         // MARK: -
         private func updateComponents(_ digits:[Int]) {
             switch digits.count {
-                case 0:
-                    hr = ""
-                    min = ""
-                    sec = ""
                 case 1:
                     hr = String(digits[0]) + "⎽"
                 case 2:

@@ -18,7 +18,7 @@ extension DurationPickerView {
             switch digits.count {
                 case 0: displayIsEmpty = true
                 default:
-                    <#code#>
+                    break
             }
         }
         
