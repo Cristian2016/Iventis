@@ -46,7 +46,7 @@ extension Color {
         static let silver = Tricolor(description: Name.silver.rawValue,
                                   hr: Color(#colorLiteral(red: 0.7019609809, green: 0.7019608617, blue: 0.7019608617, alpha: 1)), min: Color(#colorLiteral(red: 0.6000001431, green: 0.6000000834, blue: 0.6000000834, alpha: 1)), sec: Color(#colorLiteral(red: 0.5333333611, green: 0.5333333611, blue: 0.5333333611, alpha: 1)))
         static let ultramarine = Tricolor(description: Name.ultramarine.rawValue,
-                                       hr: Color(#colorLiteral(red: 0.2087187171, green: 0.6593058705, blue: 0.9996295571, alpha: 1)), min: Color(#colorLiteral(red: 0.06983245909, green: 0.548355639, blue: 1, alpha: 1)), sec: Color(#colorLiteral(red: 0, green: 0.3887374103, blue: 0.9969165921, alpha: 1)))
+                                       hr: Color(#colorLiteral(red: 0.553342402, green: 0.6936868429, blue: 1, alpha: 1)), min: Color(#colorLiteral(red: 0.06983245909, green: 0.548355639, blue: 1, alpha: 1)), sec: Color(#colorLiteral(red: 0, green: 0.3887374103, blue: 0.9969165921, alpha: 1)))
         static let lemon = Tricolor(description: Name.lemon.rawValue,
                                  hr: Color(#colorLiteral(red: 0.9868611693, green: 0.8992189169, blue: 0.5978651643, alpha: 1)), min: Color(#colorLiteral(red: 0.9715102315, green: 0.8551748395, blue: 0, alpha: 1)), sec: Color(#colorLiteral(red: 0.9762087464, green: 0.8017882705, blue: 0.01509543974, alpha: 1)))
         
