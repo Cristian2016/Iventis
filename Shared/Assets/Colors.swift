@@ -82,7 +82,7 @@ extension Color {
         static let rose = Tricolor(description: Name.rose.rawValue,
                                 hr: Color(#colorLiteral(red: 0.9601778388, green: 0.5991181135, blue: 0.6990267038, alpha: 1)), min: Color(#colorLiteral(red: 0.9777489305, green: 0.4076962173, blue: 0.5763365626, alpha: 1)), sec: Color(#colorLiteral(red: 0.9909614921, green: 0.2357916832, blue: 0.4794922471, alpha: 1)))
         static let mocha = Tricolor(description: Name.mocha.rawValue,
-                                 hr: Color(#colorLiteral(red: 0.584002018, green: 0.3206113577, blue: 0, alpha: 1)), min: Color(#colorLiteral(red: 0.584002018, green: 0.3206113577, blue: 0, alpha: 1)),sec: Color(#colorLiteral(red: 0.584002018, green: 0.3206113577, blue: 0, alpha: 1)))
+                                 hr: Color(#colorLiteral(red: 0.6546627879, green: 0.4379749894, blue: 0.2150397599, alpha: 1)), min: Color(#colorLiteral(red: 0.584002018, green: 0.3206113577, blue: 0, alpha: 1)),sec: Color(#colorLiteral(red: 0.584002018, green: 0.3206113577, blue: 0, alpha: 1)))
         
         //clear
         static let clear = Tricolor(description: Name.clear.rawValue,

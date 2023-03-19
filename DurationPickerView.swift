@@ -136,12 +136,12 @@ extension DurationPickerView {
         
         var body: some View {
             shape
-                .opacity(disabled ? 0.3 : 1.0)
                 .overlay {
                     Text(title == "*" ? "00" : title)
                         .font(.system(size: 50, design: .rounded))
                         .minimumScaleFactor(0.1)
                         .foregroundColor(.white)
+                        .opacity(disabled ? 0.5 : 1.0)
                 }
                 .opacity(isTapped ? 0 : 1.0)
                 .onTapGesture {
@@ -182,10 +182,10 @@ extension DurationPickerView {
                         .fill(.red)
                 case "*":
                     vRoundedRectangle(corners: .bottomLeft, radius: 32)
-                        .fill(tricolor.sec)
+                        .fill(disabled ? tricolor.hr : tricolor.sec)
                 default:
                     Rectangle()
-                        .fill(tricolor.sec)
+                        .fill(disabled ? tricolor.hr : tricolor.sec)
             }
         }
     }
