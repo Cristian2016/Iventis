@@ -35,6 +35,7 @@ extension DurationPickerView {
                     .font(.largeTitle)
                     .fontWeight(.semibold)
                     .layoutPriority(1)
+                
                 Text("48 hours max")
                     .font(.footnote)
                     .foregroundColor(.secondary)

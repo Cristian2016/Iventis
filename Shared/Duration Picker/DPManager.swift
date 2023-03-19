@@ -13,6 +13,7 @@ extension DurationPickerView {
         
         @Published var digits = [Int]() {didSet{ charactersToDisable() }}
         @Published var notAllowedCharacters = Characters(charactersIn: "56789✕")
+        @Published var component = Component
         
         struct DisplayComponents {
             let hr:String
@@ -67,5 +68,12 @@ extension DurationPickerView {
         
         // MARK: -
         private init() { }
+        
+        // MARK: -
+        enum Component {
+            case hr(String)
+            case min(String)
+            case sec(String)
+        }
     }
 }
