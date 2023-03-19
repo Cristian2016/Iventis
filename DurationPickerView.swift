@@ -93,6 +93,7 @@ struct DurationPickerView: View {
             .padding([.leading, .trailing])
             .standardShadow()
             .onTapGesture { dismiss() }
+            .gesture(swipeToClearDisplay)
     }
     
     private func componentView(_ value:String, _ keyPath:KeyPath<DurationPickerView, String>) -> some View {
