@@ -14,14 +14,14 @@ struct DPVDisplay: View {
     @State private var min = String()
     @State private var sec = String()
     
-    let action: () -> ()
+    let dismiss: () -> ()
         
     var body: some View {
         ZStack {
             if hr.isEmpty { welcomeText }
             else {
                 durationComponentsStack
-                    .gesture(swipe /* to delete */)
+                    .gesture(swipe) //clear display
             }
         }
         .frame(height: 100)
@@ -96,9 +96,11 @@ struct DPVDisplay: View {
     // MARK: -
     private var swipe:some Gesture {
         DragGesture(minimumDistance: 4)
-            .onEnded { _ in
-                action()
-            }
+            .onEnded { _ in clearDisplay() }
+    }
+    
+    private func clearDisplay() {
+        manager.removeAllDigits()
     }
 }
 

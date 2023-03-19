@@ -163,7 +163,7 @@ extension DurationPickerView {
                                     }
                 .onLongPressGesture {
                     if title == "✕" {
-                        manager.removeALlDigits()
+                        manager.removeAllDigits()
                         UserFeedback.singleHaptic(.heavy)
                     }
                 }
@@ -225,7 +225,7 @@ extension DurationPickerView {
         
         func removelastDigit() { digits.removeLast() }
         
-        func removeALlDigits() { digits = [] }
+        func removeAllDigits() { digits = [] }
         
         // MARK: -
         public func charactersToDisable() {
