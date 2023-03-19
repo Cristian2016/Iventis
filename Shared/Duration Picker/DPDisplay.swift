@@ -16,28 +16,6 @@ extension DurationPickerView {
         @State private var sec = String()
         
         let dismiss: () -> ()
-        
-        private func updateComponents(_ digits:[Int]) {
-            switch digits.count {
-                case 0:
-                    hr = ""
-                    min = ""
-                    sec = ""
-                case 1:
-                    hr = String(digits[0]) + "⎽"
-                case 2:
-                    hr = digits.reduce("") { String($0) + String($1) }
-                case 3:
-                    min = String(digits[2]) + "⎽"
-                case 4:
-                    min = digits.dropFirst(2).reduce("") { String($0) + String($1) }
-                case 5:
-                    sec = String(digits[4]) + "⎽"
-                case 6:
-                    sec = digits.dropFirst(4).reduce("") { String($0) + String($1) }
-                default: break
-            }
-        }
             
         var body: some View {
             ZStack {
@@ -90,6 +68,29 @@ extension DurationPickerView {
                 Text(abbreviation)
                     .font(.system(size: 20, design: .rounded))
                     .fontWeight(.bold)
+            }
+        }
+        
+        // MARK: -
+        private func updateComponents(_ digits:[Int]) {
+            switch digits.count {
+                case 0:
+                    hr = ""
+                    min = ""
+                    sec = ""
+                case 1:
+                    hr = String(digits[0]) + "⎽"
+                case 2:
+                    hr = digits.reduce("") { String($0) + String($1) }
+                case 3:
+                    min = String(digits[2]) + "⎽"
+                case 4:
+                    min = digits.dropFirst(2).reduce("") { String($0) + String($1) }
+                case 5:
+                    sec = String(digits[4]) + "⎽"
+                case 6:
+                    sec = digits.dropFirst(4).reduce("") { String($0) + String($1) }
+                default: break
             }
         }
     }
