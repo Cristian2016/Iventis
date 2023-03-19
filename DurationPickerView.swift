@@ -167,9 +167,7 @@ extension DurationPickerView {
                 }
                 .disabled(disabled ? true : false)
                 .onReceive(manager.$notAllowedCharacters) {
-                    if title.unicodeScalars.count == 1 {
-                        disabled = $0.contains(title.unicodeScalars.first!) ? true : false
-                    }
+                    disabled = $0.contains(title.unicodeScalars.first!) ? true : false
                 }
         }
         
