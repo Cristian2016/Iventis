@@ -120,6 +120,9 @@
 		1FF0A2FD2810448100B1DB77 /* TopDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF0A2FC2810448100B1DB77 /* TopDetailView.swift */; };
 		1FF37CAE298BC7DF00AF0EC8 /* SmallTextHint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF37CAD298BC7DF00AF0EC8 /* SmallTextHint.swift */; };
 		1FF5AC3A29A9EDC4000DD0E2 /* NeedlePositionKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF5AC3929A9EDC4000DD0E2 /* NeedlePositionKey.swift */; };
+		1FF8254D29C72C2C0003E4A0 /* DPManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF8254C29C72C2C0003E4A0 /* DPManager.swift */; };
+		1FF8254F29C750C40003E4A0 /* DPDigit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF8254E29C750C40003E4A0 /* DPDigit.swift */; };
+		1FF8255129C750F40003E4A0 /* DPDisplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF8255029C750F40003E4A0 /* DPDisplay.swift */; };
 		1FFC8BAA28142F040059EF2E /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FFC8BA428142F040059EF2E /* Session.swift */; };
 		1FFC8BAD28142F040059EF2E /* Session Properties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FFC8BA528142F040059EF2E /* Session Properties.swift */; };
 		1FFC8BB628142F040059EF2E /* Pair.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FFC8BA828142F040059EF2E /* Pair.swift */; };
@@ -201,7 +204,7 @@
 		1F5F4A982809456E00AF3442 /* BubbleList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BubbleList.swift; sourceTree = "<group>"; };
 		1F5F4A9C280945C700AF3442 /* BubbleCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BubbleCell.swift; sourceTree = "<group>"; };
 		1F5FFD9E29C2426E005FFB32 /* AdaptiveView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdaptiveView.swift; sourceTree = "<group>"; };
-		1F5FFDA029C2E92D005FFB32 /* DurationPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DurationPickerView.swift; sourceTree = SOURCE_ROOT; };
+		1F5FFDA029C2E92D005FFB32 /* DurationPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DurationPickerView.swift; path = "Shared/Duration Picker/DurationPickerView.swift"; sourceTree = SOURCE_ROOT; };
 		1F615B6229899E210006DB0B /* BackgroundTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundTimer.swift; sourceTree = "<group>"; };
 		1F61BE042822BAAA00B773F9 /* DeleteActionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteActionView.swift; sourceTree = "<group>"; };
 		1F62193F28293B5100C9B175 /* PairBubbleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PairBubbleCell.swift; sourceTree = "<group>"; };
@@ -264,6 +267,9 @@
 		1FF0A2FC2810448100B1DB77 /* TopDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopDetailView.swift; sourceTree = "<group>"; };
 		1FF37CAD298BC7DF00AF0EC8 /* SmallTextHint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallTextHint.swift; sourceTree = "<group>"; };
 		1FF5AC3929A9EDC4000DD0E2 /* NeedlePositionKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeedlePositionKey.swift; sourceTree = "<group>"; };
+		1FF8254C29C72C2C0003E4A0 /* DPManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DPManager.swift; sourceTree = "<group>"; };
+		1FF8254E29C750C40003E4A0 /* DPDigit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DPDigit.swift; sourceTree = "<group>"; };
+		1FF8255029C750F40003E4A0 /* DPDisplay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DPDisplay.swift; sourceTree = "<group>"; };
 		1FFC8BA428142F040059EF2E /* Session.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
 		1FFC8BA528142F040059EF2E /* Session Properties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Session Properties.swift"; sourceTree = "<group>"; };
 		1FFC8BA828142F040059EF2E /* Pair.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pair.swift; sourceTree = "<group>"; };
@@ -401,7 +407,7 @@
 		1F5F4A4728093FAD00AF3442 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
-				1F5FFDA029C2E92D005FFB32 /* DurationPickerView.swift */,
+				1FF8255229C751160003E4A0 /* Duration Picker */,
 				1F53DD6B29BEFB8A00E33B77 /* PrecisionTimer.swift */,
 				1F38A00329B9000D009AD543 /* yPositionTracker.swift */,
 				1F83A44E29A965D90058E6E2 /* DigitsView.swift */,
@@ -509,6 +515,17 @@
 				1FA834742850A57C003F4D61 /* Info.plist */,
 			);
 			path = Widgets;
+			sourceTree = "<group>";
+		};
+		1FF8255229C751160003E4A0 /* Duration Picker */ = {
+			isa = PBXGroup;
+			children = (
+				1FF8254C29C72C2C0003E4A0 /* DPManager.swift */,
+				1FF8255029C750F40003E4A0 /* DPDisplay.swift */,
+				1FF8254E29C750C40003E4A0 /* DPDigit.swift */,
+				1F5FFDA029C2E92D005FFB32 /* DurationPickerView.swift */,
+			);
+			path = "Duration Picker";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -706,11 +723,14 @@
 				1FA25B002986F51E007759EB /* ViewHierarchy.swift in Sources */,
 				1F477CA928EAB21900B4F965 /* AddStickyNoteQuickButton.swift in Sources */,
 				1F5987A5286B5F8900CDB54C /* PairSavedNote Properties.swift in Sources */,
+				1FF8255129C750F40003E4A0 /* DPDisplay.swift in Sources */,
 				1FBE775629A248F5005968EC /* GradientView.swift in Sources */,
 				1FA1F39E2981CFE6000A50F5 /* Persistence.swift in Sources */,
 				1F05B7C82989158E0022FD23 /* BorderlessLabel.swift in Sources */,
 				1FB5D8D628E8276D00DD522A /* StickyNoteListInfoView.swift in Sources */,
+				1FF8254F29C750C40003E4A0 /* DPDigit.swift in Sources */,
 				1F53DD6C29BEFB8A00E33B77 /* PrecisionTimer.swift in Sources */,
+				1FF8254D29C72C2C0003E4A0 /* DPManager.swift in Sources */,
 				1FC70BB129807BAB007CD1E6 /* LayoutViewModel.swift in Sources */,
 				1FAD1578298A8346001139C6 /* Secretary.swift in Sources */,
 				1F387CEB2830082000F6B81D /* UpDownArrowsButton.swift in Sources */,
