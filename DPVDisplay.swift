@@ -60,7 +60,7 @@ struct DPVDisplay: View {
                 .foregroundColor(.secondary)
         }
         .minimumScaleFactor(0.1)
-        .offset(y: -4)
+        .offset(y: -2)
     }
     
     private var durationComponentsStack:some View {
