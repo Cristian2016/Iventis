@@ -23,7 +23,8 @@ struct DPCheckmark: View {
                     if isVisible { isVisible = false }
                     return
                 }
-                isVisible = output.count%2 == 0 ? true : false
+                let condition = output.count%2 == 0 && output.reduce(0) { $0 + $1 } != 0
+                isVisible = condition ? true : false
             }
     }
 }
