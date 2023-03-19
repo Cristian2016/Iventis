@@ -67,11 +67,11 @@ extension DurationPickerView {
             return HStack(alignment: .firstTextBaseline, spacing: 2) {
                 Text(value)
                     .font(.system(size: 80, design: .rounded))
-                    .minimumScaleFactor(0.1)
                 Text(abbreviation)
                     .font(.system(size: 20, design: .rounded))
                     .fontWeight(.bold)
             }
+            .minimumScaleFactor(0.1)
         }
         
         // MARK: -
