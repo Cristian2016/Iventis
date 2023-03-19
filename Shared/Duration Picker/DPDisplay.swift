@@ -35,6 +35,7 @@ extension DurationPickerView {
                     case .sec(let sec): self.sec = sec
                 }
             }
+            .onReceive(manager.$displayIsEmpty) { if $0 { clearDisplay() }}
         }
         
         // MARK: - Lego
@@ -103,6 +104,12 @@ extension DurationPickerView {
                     sec = digits.dropFirst(4).reduce("") { String($0) + String($1) }
                 default: break
             }
+        }
+        
+        private func clearDisplay() {
+            hr = ""
+            min = ""
+            sec = ""
         }
     }
 }

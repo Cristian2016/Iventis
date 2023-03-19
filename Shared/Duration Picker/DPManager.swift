@@ -11,9 +11,21 @@ extension DurationPickerView {
     class Manager {
         typealias Characters = CharacterSet
         
-        @Published var digits = [Int]() {didSet{ charactersToDisable() }}
+        ///updates both display and digitsGrid
+        private func updateUI() {
+            charactersToDisable() //update digitsGrid
+            
+            switch digits.count {
+                case 0: displayIsEmpty = true
+                default:
+                    <#code#>
+            }
+        }
+        
+        @Published var digits = [Int]() {didSet{ updateUI() }}
         @Published var notAllowedCharacters = Characters(charactersIn: "56789✕")
         @Published var component:Component?
+        @Published var displayIsEmpty = false //when true display will be cleared
         
         struct DisplayComponents {
             let hr:String
