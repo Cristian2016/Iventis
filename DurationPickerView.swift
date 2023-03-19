@@ -26,10 +26,20 @@ struct DurationPickerView: View {
     
     let gridSpacing = CGFloat(1)
     
+    private var swipeToClearDisplay:some Gesture {
+        DragGesture(minimumDistance: 4)
+            .onEnded { _ in clearDisplay() }
+    }
+    
+    private func clearDisplay() {
+        manager.removeAllDigits()
+    }
+    
     var body: some View {
         ZStack {
             if tricolor != nil {
                 translucentBackground
+                    .gesture(swipeToClearDisplay)
                     .onTapGesture { dismiss() }
                 
                 ZStack {

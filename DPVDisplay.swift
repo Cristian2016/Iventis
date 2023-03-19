@@ -19,10 +19,7 @@ struct DPVDisplay: View {
     var body: some View {
         ZStack {
             if hr.isEmpty { welcomeText }
-            else {
-                durationComponentsStack
-                    .gesture(swipe) //clear display
-            }
+            else { durationComponentsStack }
         }
         .frame(height: 100)
         .background()
@@ -91,16 +88,6 @@ struct DPVDisplay: View {
                 .font(.system(size: 20, design: .rounded))
                 .fontWeight(.bold)
         }
-    }
-    
-    // MARK: -
-    private var swipe:some Gesture {
-        DragGesture(minimumDistance: 4)
-            .onEnded { _ in clearDisplay() }
-    }
-    
-    private func clearDisplay() {
-        manager.removeAllDigits()
     }
 }
 
