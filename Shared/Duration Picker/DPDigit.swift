@@ -29,21 +29,7 @@ extension DurationPickerView {
                         .opacity(disabled ? 0.5 : 1.0)
                 }
                 .opacity(isTapped || hidden ? 0 : 1.0)
-                .onTapGesture {
-                    UserFeedback.singleHaptic(.light)
-                    withAnimation(.easeIn(duration: 0.1)) {
-                        isTapped = true
-                    }
-                    delayExecution(.now() + 0.12) {
-                        isTapped = false
-                    }
-                    
-                    switch title {
-                        case "✕" : manager.removelastDigit()
-                        case "*" : manager.addDoubleZero()
-                        default : manager.addToDigits(Int(title)!)
-                    }
-                                    }
+                .onTapGesture { handleTap() }
                 .onLongPressGesture {
                     if title == "✕" {
                         manager.removeAllDigits()
@@ -75,6 +61,20 @@ extension DurationPickerView {
                 default:
                     Rectangle()
                         .fill(disabled ? tricolor.hr : tricolor.sec)
+            }
+        }
+        
+        // MARK: -
+        private func handleTap() {
+            //User Feedback
+            UserFeedback.singleHaptic(.light)
+            withAnimation(.easeIn(duration: 0.1)) { isTapped = true }
+            delayExecution(.now() + 0.12) { isTapped = false }
+            
+            switch title {
+                case "✕" : manager.removelastDigit()
+                case "*" : manager.addDoubleZero()
+                default : manager.addToDigits(Int(title)!)
             }
         }
     }
