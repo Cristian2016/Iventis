@@ -63,8 +63,8 @@ extension DurationPickerView {
         private func didTapDigit() {
             //User Feedback
             UserFeedback.singleHaptic(.light)
-            withAnimation(.easeIn(duration: 0.1)) { isTapped = true }
-            delayExecution(.now() + 0.12) { isTapped = false }
+            withAnimation(.easeIn(duration: 0.05)) { isTapped = true }
+            delayExecution(.now() + 0.05) { isTapped = false }
             
             switch title {
                 case "✕" : manager.removelastDigit()
