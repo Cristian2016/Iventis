@@ -15,9 +15,8 @@ extension DurationPickerView {
         private func updateUI() {
             let count = digits.count
             let digits = self.digits
-            self.charactersToDisable() //update digitsGrid
             
-            print(#function, count)
+            self.charactersToDisable() //update digitsGrid
             
             DispatchQueue.global().async {
                 switch count {
