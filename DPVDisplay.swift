@@ -19,7 +19,7 @@ struct DPVDisplay: View {
     var body: some View {
         ZStack {
             if hr.isEmpty { welcomeText }
-            else { componentsStack }
+            else { durationComponentsStack }
         }
         .frame(height: 100)
         .background()
@@ -62,16 +62,16 @@ struct DPVDisplay: View {
         .minimumScaleFactor(0.1)
     }
     
-    private var componentsStack:some View {
+    private var durationComponentsStack:some View {
         HStack {
-            componentView(hr, \.hr)
-            if !min.isEmpty { componentView(min, \.min) }
-            if !sec.isEmpty { componentView(sec, \.sec) }
+            durationComponentView(hr, \.hr)
+            if !min.isEmpty { durationComponentView(min, \.min) }
+            if !sec.isEmpty { durationComponentView(sec, \.sec) }
         }
         .padding([.leading, .trailing], 4)
     }
     
-    private func componentView(_ value:String, _ keyPath:KeyPath<DPVDisplay, String>) -> some View {
+    private func durationComponentView(_ value:String, _ keyPath:KeyPath<DPVDisplay, String>) -> some View {
         var abbreviation:String!
         switch keyPath {
             case \.hr: abbreviation = "h"
