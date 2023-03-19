@@ -31,16 +31,16 @@ extension Color {
     struct Bubble {
         //row 1
         static let cayenne = Tricolor(description: Name.cayenne.rawValue,
-                                   hr:Color(#colorLiteral(red: 0.581685245, green: 0.06705204397, blue: 0.001516064513, alpha: 1)), min: Color(#colorLiteral(red: 0.581685245, green: 0.06705204397, blue: 0.001516064513, alpha: 1)), sec: Color(#colorLiteral(red: 0.581685245, green: 0.06705204397, blue: 0.001516064513, alpha: 1)))
+                                   hr:Color(#colorLiteral(red: 0.8052194715, green: 0.5541458726, blue: 0.5246914029, alpha: 1)), min: Color(#colorLiteral(red: 0.581685245, green: 0.06705204397, blue: 0.001516064513, alpha: 1)), sec: Color(#colorLiteral(red: 0.581685245, green: 0.06705204397, blue: 0.001516064513, alpha: 1)))
         static let aubergine = Tricolor(description: Name.aubergine.rawValue,
-                                     hr:Color(#colorLiteral(red: 0.3245052695, green: 0.1053605601, blue: 0.5749494433, alpha: 1)), min: Color(#colorLiteral(red: 0.3245052695, green: 0.1053605601, blue: 0.5749494433, alpha: 1)), sec: Color(#colorLiteral(red: 0.3245052695, green: 0.1053605601, blue: 0.5749494433, alpha: 1)))
+                                     hr:Color(#colorLiteral(red: 0.6648913622, green: 0.5564103723, blue: 0.7883563638, alpha: 1)), min: Color(#colorLiteral(red: 0.3245052695, green: 0.1053605601, blue: 0.5749494433, alpha: 1)), sec: Color(#colorLiteral(red: 0.3245052695, green: 0.1053605601, blue: 0.5749494433, alpha: 1)))
         
         static let mint = Tricolor(description: Name.mint.rawValue,
-                                hr:Color(#colorLiteral(red: 0, green: 0.999099791, blue: 0.8100017905, alpha: 1)), min: Color(#colorLiteral(red: 0, green: 0.9633229375, blue: 0.7392000556, alpha: 1)), sec: Color(#colorLiteral(red: 0, green: 0.838650167, blue: 0.5155212283, alpha: 1)))
+                                hr:Color(#colorLiteral(red: 0.619730413, green: 0.9218133092, blue: 0.7571437359, alpha: 1)), min: Color(#colorLiteral(red: 0, green: 0.9633229375, blue: 0.7392000556, alpha: 1)), sec: Color(#colorLiteral(red: 0, green: 0.838650167, blue: 0.5155212283, alpha: 1)))
         static let slateBlue = Tricolor(description: Name.slateBlue.rawValue,
-                                     hr: Color(#colorLiteral(red: 0.6250013709, green: 0.643127501, blue: 0.9769508243, alpha: 1)), min: Color(#colorLiteral(red: 0.4915649891, green: 0.5337389708, blue: 0.9743657708, alpha: 1)), sec: Color(#colorLiteral(red: 0.4223788977, green: 0.4790267348, blue: 0.9767156243, alpha: 1)))
+                                     hr: Color(#colorLiteral(red: 0.7082151771, green: 0.7418351769, blue: 0.996162951, alpha: 1)), min: Color(#colorLiteral(red: 0.4915649891, green: 0.5337389708, blue: 0.9743657708, alpha: 1)), sec: Color(#colorLiteral(red: 0.4223788977, green: 0.4790267348, blue: 0.9767156243, alpha: 1)))
         static let sourCherry = Tricolor(description: Name.sourCherry.rawValue,
-                                      hr: Color(#colorLiteral(red: 0.9564458728, green: 0.06965851039, blue: 0.4674955606, alpha: 1)), min: Color(#colorLiteral(red: 0.8373516798, green: 0.06469952315, blue: 0.41300717, alpha: 1)), sec: Color(#colorLiteral(red: 0.7311170697, green: 0.05191928893, blue: 0.3622907996, alpha: 1)))
+                                      hr: Color(#colorLiteral(red: 0.8802435994, green: 0.5620880127, blue: 0.6864048243, alpha: 1)), min: Color(#colorLiteral(red: 0.8373516798, green: 0.06469952315, blue: 0.41300717, alpha: 1)), sec: Color(#colorLiteral(red: 0.7311170697, green: 0.05191928893, blue: 0.3622907996, alpha: 1)))
         
         //row 2
         static let silver = Tricolor(description: Name.silver.rawValue,
