@@ -45,7 +45,7 @@ struct DurationPickerView: View {
                     .gesture(swipeToClearDisplay)
                     .onTapGesture { dismiss() }
                 
-                ZStack {
+                ZStack(alignment: .topTrailing) {
                     VStack(spacing: 0) {
                         Display { dismiss() }
                         digitsGrid
@@ -54,6 +54,8 @@ struct DurationPickerView: View {
                     .padding([.leading, .trailing, .bottom])
                     .padding(4)
                     .background { background }
+                    
+                    DPCheckmark()
                 }
                 .padding(4)
             }

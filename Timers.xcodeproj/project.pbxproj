@@ -123,6 +123,7 @@
 		1FF8254D29C72C2C0003E4A0 /* DPManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF8254C29C72C2C0003E4A0 /* DPManager.swift */; };
 		1FF8254F29C750C40003E4A0 /* DPDigit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF8254E29C750C40003E4A0 /* DPDigit.swift */; };
 		1FF8255129C750F40003E4A0 /* DPDisplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF8255029C750F40003E4A0 /* DPDisplay.swift */; };
+		1FF8255429C7980A0003E4A0 /* DPCheckmark.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF8255329C7980A0003E4A0 /* DPCheckmark.swift */; };
 		1FFC8BAA28142F040059EF2E /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FFC8BA428142F040059EF2E /* Session.swift */; };
 		1FFC8BAD28142F040059EF2E /* Session Properties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FFC8BA528142F040059EF2E /* Session Properties.swift */; };
 		1FFC8BB628142F040059EF2E /* Pair.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FFC8BA828142F040059EF2E /* Pair.swift */; };
@@ -270,6 +271,7 @@
 		1FF8254C29C72C2C0003E4A0 /* DPManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DPManager.swift; sourceTree = "<group>"; };
 		1FF8254E29C750C40003E4A0 /* DPDigit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DPDigit.swift; sourceTree = "<group>"; };
 		1FF8255029C750F40003E4A0 /* DPDisplay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DPDisplay.swift; sourceTree = "<group>"; };
+		1FF8255329C7980A0003E4A0 /* DPCheckmark.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DPCheckmark.swift; sourceTree = SOURCE_ROOT; };
 		1FFC8BA428142F040059EF2E /* Session.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
 		1FFC8BA528142F040059EF2E /* Session Properties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Session Properties.swift"; sourceTree = "<group>"; };
 		1FFC8BA828142F040059EF2E /* Pair.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pair.swift; sourceTree = "<group>"; };
@@ -520,6 +522,7 @@
 		1FF8255229C751160003E4A0 /* Duration Picker */ = {
 			isa = PBXGroup;
 			children = (
+				1FF8255329C7980A0003E4A0 /* DPCheckmark.swift */,
 				1FF8254C29C72C2C0003E4A0 /* DPManager.swift */,
 				1FF8255029C750F40003E4A0 /* DPDisplay.swift */,
 				1FF8254E29C750C40003E4A0 /* DPDigit.swift */,
@@ -661,6 +664,7 @@
 				1FA1B44A298321D20063B081 /* iPhoneViewHierarchy.swift in Sources */,
 				1F20807C2836111600FD35D6 /* BSavedNote.swift in Sources */,
 				1F615B6329899E210006DB0B /* BackgroundTimer.swift in Sources */,
+				1FF8255429C7980A0003E4A0 /* DPCheckmark.swift in Sources */,
 				1FAD9B4229961FC000F49670 /* ThreeCircles.swift in Sources */,
 				1F8AAFA329927B2900328AC7 /* FramePortrait.swift in Sources */,
 				1F559BCA298E0BA700F07F5F /* ThinMaterialLabel.swift in Sources */,
