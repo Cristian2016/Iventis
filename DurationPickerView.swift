@@ -199,10 +199,7 @@ extension DurationPickerView {
     class Manager {
         typealias Characters = CharacterSet
         
-        @Published var digits = [Int]() {didSet{
-            print(digits)
-            charactersToDisable()
-        }}
+        @Published var digits = [Int]() {didSet{ charactersToDisable() }}
         
         struct DisplayComponents {
             let hr:String
