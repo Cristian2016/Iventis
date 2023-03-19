@@ -12,15 +12,13 @@ extension DurationPickerView {
         typealias Characters = CharacterSet
         
         @Published var digits = [Int]() {didSet{ charactersToDisable() }}
+        @Published var notAllowedCharacters = Characters(charactersIn: "56789✕")
         
         struct DisplayComponents {
             let hr:String
             let min:String
             let sec:String
         }
-        
-        @Published var notAllowedCharacters = Characters(charactersIn: "56789✕")
-        
         
         // MARK: - Public API
         static let shared = Manager()
