@@ -115,6 +115,7 @@ struct DurationPickerView: View {
                 }
             }
         }
+        .background()
         .gesture(swipe)
     }
     
