@@ -26,6 +26,15 @@ extension DurationPickerView {
             .background()
             .allowsHitTesting(false)
             .onReceive(manager.$digits) { updateComponents($0) }
+            .onReceive(manager.$component) { output in
+                guard let component = output else { return }
+                
+                switch component {
+                    case .hr(let hr): self.hr = hr
+                    case .min(let min): self.min = min
+                    case .sec(let sec): self.sec = sec
+                }
+            }
         }
         
         // MARK: - Lego
