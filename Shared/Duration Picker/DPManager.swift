@@ -16,7 +16,22 @@ extension DurationPickerView {
             charactersToDisable() //update digitsGrid
             
             switch digits.count {
-                case 0: displayIsEmpty = true
+                case 0:
+                    displayIsEmpty = true
+                case 1:
+                    component = .hr(String(digits.first!) + "⎽")
+                case 2:
+                    let result = digits.reduce("") { String($0) + String($1) }
+                    component = .hr(result)
+                case 3:
+                    component = .min(String(digits.last!) + "⎽")
+                case 4:
+                    let result = digits.dropFirst(2).reduce("") { String($0) + String($1) }
+                    component = .min(result)
+                case 5:
+                    component = .sec(String(digits.last!) + "⎽")
+                case 6:
+                    component = .sec(String(digits[4]) + String(digits[5]))
                 default:
                     break
             }

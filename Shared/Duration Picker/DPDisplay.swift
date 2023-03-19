@@ -25,16 +25,7 @@ extension DurationPickerView {
             .frame(height: 100)
             .background()
             .allowsHitTesting(false)
-            .onReceive(manager.$digits) { updateComponents($0) }
-            .onReceive(manager.$component) { output in
-                guard let component = output else { return }
-                
-                switch component {
-                    case .hr(let hr): self.hr = hr
-                    case .min(let min): self.min = min
-                    case .sec(let sec): self.sec = sec
-                }
-            }
+            .onReceive(manager.$component) { received(component: $0) }
             .onReceive(manager.$displayIsEmpty) { if $0 { clearDisplay() }}
         }
         
@@ -84,28 +75,20 @@ extension DurationPickerView {
         }
         
         // MARK: -
-        private func updateComponents(_ digits:[Int]) {
-            switch digits.count {
-                case 1:
-                    hr = String(digits[0]) + "⎽"
-                case 2:
-                    hr = digits.reduce("") { String($0) + String($1) }
-                case 3:
-                    min = String(digits[2]) + "⎽"
-                case 4:
-                    min = digits.dropFirst(2).reduce("") { String($0) + String($1) }
-                case 5:
-                    sec = String(digits[4]) + "⎽"
-                case 6:
-                    sec = digits.dropFirst(4).reduce("") { String($0) + String($1) }
-                default: break
-            }
-        }
-        
         private func clearDisplay() {
             hr = ""
             min = ""
             sec = ""
+        }
+        
+        private func received(component:Manager.Component?) {
+            guard let component = component else { return }
+            
+            switch component {
+                case .hr(let hr): self.hr = hr
+                case .min(let min): self.min = min
+                case .sec(let sec): self.sec = sec
+            }
         }
     }
 }
