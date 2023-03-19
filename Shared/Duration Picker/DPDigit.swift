@@ -3,7 +3,7 @@
 //  Timers (iOS)
 //
 //  Created by Cristian Lapusan on 19.03.2023.
-//
+//1 gestures tap (send title to manager) and longPress (x digit only clear display)
 
 import SwiftUI
 import MyPackage
@@ -28,9 +28,9 @@ extension DurationPickerView {
                         .foregroundColor(.white)
                         .opacity(disabled ? 0.5 : 1.0)
                 }
+                .onTapGesture { handleDigitTapped() } //1
+                .onLongPressGesture { clearDisplay() } //1
                 .opacity(isTapped || hidden ? 0 : 1.0)
-                .onTapGesture { handleTap() }
-                .onLongPressGesture { handleLongPress() }
                 .disabled(disabled ? true : false)
                 .onReceive(manager.$notAllowedCharacters) {
                     if $0 == .allDigits && title != "✕" {
@@ -60,7 +60,7 @@ extension DurationPickerView {
         }
         
         // MARK: -
-        private func handleTap() {
+        private func handleDigitTapped() {
             //User Feedback
             UserFeedback.singleHaptic(.light)
             withAnimation(.easeIn(duration: 0.1)) { isTapped = true }
@@ -73,7 +73,7 @@ extension DurationPickerView {
             }
         }
         
-        private func handleLongPress() {
+        private func clearDisplay() {
             if title == "✕" {
                 UserFeedback.singleHaptic(.heavy)
                 manager.removeAllDigits()
