@@ -183,7 +183,7 @@ class Secretary {
     @Published var durationPickerMode: Mode?
     
     enum Mode {
-        case create(Color) //timer
+        case create(Color.Tricolor) //timer
         case edit(Bubble) //existing timer
     }
 }

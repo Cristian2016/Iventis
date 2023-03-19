@@ -17,7 +17,7 @@ struct DurationPickerView: View {
     let manager = Manager.shared
     
     // MARK: - Mode [either 1. create a timerBubble with color or 2. edit a timerBubble]
-    @State private var color:Color? //1
+    @State private var tricolor:Color.Tricolor? //1
     @State private var bubble:Bubble?
     
     @State private var hr:String?
@@ -28,7 +28,7 @@ struct DurationPickerView: View {
     
     var body: some View {
         ZStack {
-            if color != nil {
+            if tricolor != nil {
                 translucentBackground
                     .onTapGesture { dismiss() }
                 
@@ -48,8 +48,8 @@ struct DurationPickerView: View {
         .onReceive(Secretary.shared.$durationPickerMode) { output in
             if let mode = output {
                 switch mode {
-                    case .create(let color):
-                        self.color = color
+                    case .create(let tricolor):
+                        self.tricolor = tricolor
                     case .edit(let bubble):
                         self.bubble = bubble
                 }
@@ -110,7 +110,7 @@ struct DurationPickerView: View {
             ForEach(digits, id: \.self) { subarray in
                 GridRow {
                     ForEach(subarray, id: \.self) { title in
-                        Digit(title: title, color: self.color!)
+                        Digit(title: title, tricolor: self.tricolor!)
                     }
                 }
             }
@@ -120,7 +120,7 @@ struct DurationPickerView: View {
     
     // MARK: -
     func dismiss() {
-        self.color = nil
+        self.tricolor = nil
     }
 }
 
@@ -132,7 +132,7 @@ extension DurationPickerView {
         @State private var disabled = false
         
         let title:String
-        let color:Color
+        let tricolor:Color.Tricolor
         
         var body: some View {
             shape
@@ -168,11 +168,7 @@ extension DurationPickerView {
                 .disabled(disabled ? true : false)
                 .onReceive(manager.$notAllowedCharacters) {
                     if title.unicodeScalars.count == 1 {
-                        if $0.contains(title.unicodeScalars.first!) {
-                            disabled = true
-                        } else {
-                            disabled = false
-                        }
+                        disabled = $0.contains(title.unicodeScalars.first!) ? true : false
                     }
                 }
         }
@@ -186,10 +182,10 @@ extension DurationPickerView {
                         .fill(.red)
                 case "*":
                     vRoundedRectangle(corners: .bottomLeft, radius: 32)
-                        .fill(color)
+                        .fill(tricolor.sec)
                 default:
                     Rectangle()
-                        .fill(color)
+                        .fill(tricolor.sec)
             }
         }
     }
