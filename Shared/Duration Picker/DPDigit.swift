@@ -30,12 +30,7 @@ extension DurationPickerView {
                 }
                 .opacity(isTapped || hidden ? 0 : 1.0)
                 .onTapGesture { handleTap() }
-                .onLongPressGesture {
-                    if title == "✕" {
-                        manager.removeAllDigits()
-                        UserFeedback.singleHaptic(.heavy)
-                    }
-                }
+                .onLongPressGesture { handleLongPress() }
                 .disabled(disabled ? true : false)
                 .onReceive(manager.$notAllowedCharacters) {
                     if $0 == .allDigits && title != "✕" {
@@ -75,6 +70,13 @@ extension DurationPickerView {
                 case "✕" : manager.removelastDigit()
                 case "*" : manager.addDoubleZero()
                 default : manager.addToDigits(Int(title)!)
+            }
+        }
+        
+        private func handleLongPress() {
+            if title == "✕" {
+                UserFeedback.singleHaptic(.heavy)
+                manager.removeAllDigits()
             }
         }
     }
