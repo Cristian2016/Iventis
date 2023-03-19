@@ -130,6 +130,7 @@ extension DurationPickerView {
         
         @State private var isTapped = false
         @State private var disabled = false
+        @State private var hidden = false
         
         let title:String
         let tricolor:Color.Tricolor
@@ -143,7 +144,7 @@ extension DurationPickerView {
                         .foregroundColor(.white)
                         .opacity(disabled ? 0.5 : 1.0)
                 }
-                .opacity(isTapped ? 0 : 1.0)
+                .opacity(isTapped || hidden ? 0 : 1.0)
                 .onTapGesture {
                     UserFeedback.singleHaptic(.light)
                     withAnimation(.easeIn(duration: 0.1)) {
@@ -167,6 +168,12 @@ extension DurationPickerView {
                 }
                 .disabled(disabled ? true : false)
                 .onReceive(manager.$notAllowedCharacters) {
+                    if $0 == .allDigits && title != "✕" {
+                        hidden = true
+                        return
+                    } else {
+                        hidden = false
+                    }
                     disabled = $0.contains(title.unicodeScalars.first!) ? true : false
                 }
         }
