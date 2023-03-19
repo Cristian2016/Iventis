@@ -55,7 +55,7 @@ struct DPVDisplay: View {
                 .font(.largeTitle)
                 .fontDesign(.rounded)
                 .fontWeight(.semibold)
-            Text("Maximum 48 hours")
+            Text("Up to 48 hours")
                 .font(.caption2.weight(.medium))
                 .foregroundColor(.secondary)
         }
