@@ -32,7 +32,10 @@ struct DurationPickerView: View {
     }
     
     private func clearDisplay() {
-        manager.removeAllDigits()
+        if !manager.digits.isEmpty {
+            UserFeedback.singleHaptic(.heavy)
+            manager.removeAllDigits()
+        }
     }
     
     var body: some View {
