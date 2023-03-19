@@ -59,7 +59,7 @@ extension DurationPickerView {
             }
         }
         
-        // MARK: -
+        // MARK: - Intents
         private func didTapDigit() {
             //User Feedback
             UserFeedback.singleHaptic(.light)
