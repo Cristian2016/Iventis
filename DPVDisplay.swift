@@ -52,11 +52,10 @@ struct DPVDisplay: View {
         VStack {
             Text("Enter Duration")
                 .font(.largeTitle)
-                .fontDesign(.rounded)
                 .fontWeight(.semibold)
                 .layoutPriority(1)
             Text("Up to 48 hours")
-                .font(.caption2.weight(.medium))
+                .font(.caption2)
                 .foregroundColor(.secondary)
                 .fontDesign(.monospaced)
         }
