@@ -68,7 +68,7 @@ extension Color {
         
         //row 5
         static let purple = Tricolor(description: Name.purple.rawValue,
-                                  hr: Color(#colorLiteral(red: 0.7857518196, green: 0.4235508442, blue: 0.9829426408, alpha: 1)), min: Color(#colorLiteral(red: 0.72523278, green: 0.255584538, blue: 0.983091414, alpha: 1)), sec: Color(#colorLiteral(red: 0.6532509923, green: 0.1514221728, blue: 0.9810264707, alpha: 1)))
+                                  hr: Color(#colorLiteral(red: 0.8372673392, green: 0.5888972282, blue: 0.9974243045, alpha: 1)), min: Color(#colorLiteral(red: 0.72523278, green: 0.255584538, blue: 0.983091414, alpha: 1)), sec: Color(#colorLiteral(red: 0.6532509923, green: 0.1514221728, blue: 0.9810264707, alpha: 1)))
         static let orange = Tricolor(description: Name.orange.rawValue,
                                   hr: Color(#colorLiteral(red: 1, green: 0.6843567491, blue: 0.5630380511, alpha: 1)), min: Color(#colorLiteral(red: 0.9978527427, green: 0.4815151691, blue: 0.0934284851, alpha: 1)), sec: Color(#colorLiteral(red: 0.9940095544, green: 0.3513067961, blue: 0, alpha: 1)))
         static let chocolate = Tricolor(description: Name.chocolate.rawValue,
