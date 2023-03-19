@@ -58,6 +58,7 @@ struct DPVDisplay: View {
             Text("Up to 48 hours")
                 .font(.caption2.weight(.medium))
                 .foregroundColor(.secondary)
+                .fontDesign(.monospaced)
         }
         .minimumScaleFactor(0.1)
     }
