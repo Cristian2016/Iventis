@@ -53,6 +53,7 @@ extension DurationPickerView {
                 if !sec.isEmpty { durationComponentView(sec, \.sec) }
             }
             .padding([.leading, .trailing], 4)
+            .minimumScaleFactor(0.1)
         }
         
         private func durationComponentView(_ value:String, _ keyPath:KeyPath<Display, String>) -> some View {
@@ -66,12 +67,11 @@ extension DurationPickerView {
             
             return HStack(alignment: .firstTextBaseline, spacing: 2) {
                 Text(value)
-                    .font(.system(size: 80, design: .rounded))
+                    .font(.system(size: 75, design: .rounded))
                 Text(abbreviation)
                     .font(.system(size: 20, design: .rounded))
                     .fontWeight(.bold)
             }
-            .minimumScaleFactor(0.1)
         }
         
         // MARK: -
