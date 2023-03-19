@@ -28,7 +28,7 @@ extension DurationPickerView {
                         .foregroundColor(.white)
                         .opacity(disabled ? 0.5 : 1.0)
                 }
-                .onTapGesture { handleDigitTapped() } //1
+                .onTapGesture { didTapDigit() } //1
                 .onLongPressGesture { clearDisplay() } //1
                 .opacity(isTapped || hidden ? 0 : 1.0)
                 .disabled(disabled ? true : false)
@@ -60,7 +60,7 @@ extension DurationPickerView {
         }
         
         // MARK: -
-        private func handleDigitTapped() {
+        private func didTapDigit() {
             //User Feedback
             UserFeedback.singleHaptic(.light)
             withAnimation(.easeIn(duration: 0.1)) { isTapped = true }
