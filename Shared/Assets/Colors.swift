@@ -24,12 +24,12 @@ extension Color {
         Bubble.ultramarine, Bubble.charcoal, Bubble.red,
         Bubble.sky, Bubble.bubbleGum, Bubble.cayenne,
         Bubble.byzantium,  Bubble.purple, Bubble.silver,
-        Bubble.rose, Bubble.aubergine, Bubble.magenta
+        Bubble.rose, Bubble.aubergine, Bubble.magenta, Bubble.clearButtonRed
     ]
     
     ///⚠️ struct Color.Bubble vs CoreData class Bubble
     struct Bubble {
-        static let clearButtonRed = Tricolor(description: Name.cayenne.rawValue,
+        static let clearButtonRed = Tricolor(description: Name.clearButtonRed.rawValue,
                                    hr:Color(#colorLiteral(red: 1, green: 0.6340145469, blue: 0.603394568, alpha: 1)), min: Color(#colorLiteral(red: 0.581685245, green: 0.06705204397, blue: 0.001516064513, alpha: 1)), sec: Color(#colorLiteral(red: 0.9907863736, green: 0.2364294529, blue: 0.187119931, alpha: 1)))
         
         //row 1
@@ -126,6 +126,8 @@ extension Color {
         
         case clear
         case darkGreen
+        
+        case clearButtonRed
     }
 }
 
