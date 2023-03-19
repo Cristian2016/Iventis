@@ -17,6 +17,8 @@ extension DurationPickerView {
             let digits = self.digits
             self.charactersToDisable() //update digitsGrid
             
+            print(#function, count)
+            
             DispatchQueue.global().async {
                 switch count {
                     case 0:
@@ -26,13 +28,19 @@ extension DurationPickerView {
                         DispatchQueue.main.async { self.component = .hr(result) }
                     case 2:
                         let result = digits.reduce("") { String($0) + String($1) }
-                        DispatchQueue.main.async { self.component = .hr(result) }
+                        DispatchQueue.main.async {
+                            self.component = .hr(result)
+                            self.component = .min("")
+                        }
                     case 3:
                         let result = String(digits.last!) + "⎽"
                         DispatchQueue.main.async { self.component = .min(result) }
                     case 4:
                         let result = digits.dropFirst(2).reduce("") { String($0) + String($1) }
-                        DispatchQueue.main.async { self.component = .min(result) }
+                        DispatchQueue.main.async {
+                            self.component = .min(result)
+                            self.component = .sec("")
+                        }
                     case 5:
                         let result = String(digits.last!) + "⎽"
                         DispatchQueue.main.async { self.component = .sec(result)}
