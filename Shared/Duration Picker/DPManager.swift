@@ -13,27 +13,35 @@ extension DurationPickerView {
         
         ///updates both display and digitsGrid
         private func updateUI() {
-            charactersToDisable() //update digitsGrid
+            let count = digits.count
+            let digits = self.digits
+            self.charactersToDisable() //update digitsGrid
             
-            switch digits.count {
-                case 0:
-                    displayIsEmpty = true
-                case 1:
-                    component = .hr(String(digits.first!) + "⎽")
-                case 2:
-                    let result = digits.reduce("") { String($0) + String($1) }
-                    component = .hr(result)
-                case 3:
-                    component = .min(String(digits.last!) + "⎽")
-                case 4:
-                    let result = digits.dropFirst(2).reduce("") { String($0) + String($1) }
-                    component = .min(result)
-                case 5:
-                    component = .sec(String(digits.last!) + "⎽")
-                case 6:
-                    component = .sec(String(digits[4]) + String(digits[5]))
-                default:
-                    break
+            DispatchQueue.global().async {
+                switch count {
+                    case 0:
+                        DispatchQueue.main.async { self.displayIsEmpty = true }
+                    case 1:
+                        let result = String(digits.first!) + "⎽"
+                        DispatchQueue.main.async { self.component = .hr(result) }
+                    case 2:
+                        let result = digits.reduce("") { String($0) + String($1) }
+                        DispatchQueue.main.async { self.component = .hr(result) }
+                    case 3:
+                        let result = String(digits.last!) + "⎽"
+                        DispatchQueue.main.async { self.component = .min(result) }
+                    case 4:
+                        let result = digits.dropFirst(2).reduce("") { String($0) + String($1) }
+                        DispatchQueue.main.async { self.component = .min(result) }
+                    case 5:
+                        let result = String(digits.last!) + "⎽"
+                        DispatchQueue.main.async { self.component = .sec(result)}
+                    case 6:
+                        let result = String(digits[4]) + String(digits[5])
+                        DispatchQueue.main.async { self.component = .sec(result) }
+                    default:
+                        break
+                }
             }
         }
         
