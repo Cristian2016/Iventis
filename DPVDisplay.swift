@@ -49,18 +49,17 @@ struct DPVDisplay: View {
     
     // MARK: - Lego
     private var welcomeText:some View {
-        VStack(spacing: 0) {
-            Spacer()
+        VStack {
             Text("Enter Duration")
                 .font(.largeTitle)
                 .fontDesign(.rounded)
                 .fontWeight(.semibold)
+                .layoutPriority(1)
             Text("Up to 48 hours")
                 .font(.caption2.weight(.medium))
                 .foregroundColor(.secondary)
         }
         .minimumScaleFactor(0.1)
-        .offset(y: -2)
     }
     
     private var durationComponentsStack:some View {
