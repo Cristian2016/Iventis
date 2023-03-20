@@ -47,16 +47,16 @@ extension DurationPickerView {
         
         private var durationComponentsStack:some View {
             HStack {
-                durationComponentView(hr, \.hr)
-                if !min.isEmpty { durationComponentView(min, \.min) }
-                if !sec.isEmpty { durationComponentView(sec, \.sec) }
+                component(hr, \.hr)
+                if !min.isEmpty { component(min, \.min) }
+                if !sec.isEmpty { component(sec, \.sec) }
                 DPCheckmark()
             }
             .padding([.leading, .trailing], 4)
             .minimumScaleFactor(0.1)
         }
         
-        private func durationComponentView(_ value:String, _ keyPath:KeyPath<Display, String>) -> some View {
+        private func component(_ value:String, _ keyPath:KeyPath<Display, String>) -> some View {
             var abbreviation:String!
             switch keyPath {
                 case \.hr: abbreviation = "h"
