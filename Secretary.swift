@@ -27,7 +27,9 @@ class Secretary {
     
     @Published var pairBubbleCellNeedsDisplay = false
     
-    @Published var sessionToDelete:(session:Session, sessionRank:Int)?
+    @Published var sessionToDelete:(session:Session, sessionRank:Int)? {didSet{
+        topMostView = sessionToDelete?.sessionRank != nil ? .sessionDeleteActionView :.bubble
+    }}
     
     @Published var showAlert_AlwaysOnDisplay = false
             
@@ -83,6 +85,7 @@ class Secretary {
     }
     
     @Published var showScrollToTopButton = false
+    
     @Published var shouldScrollToTop = false
     
     @Published var showDetailViewInfoButton = false {didSet{
@@ -231,6 +234,7 @@ extension Secretary {
         case durationPicker
         case moreOptionsView
         case deleteActionView
+        case sessionDeleteActionView
         case bubble
     }
 }
