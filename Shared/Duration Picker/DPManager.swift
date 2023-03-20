@@ -80,15 +80,20 @@ extension DurationPickerView {
         func removeAllDigits() { digits = [] }
         
         func computeInitialClock(color:String) {
-            let sum = digits.reduce(0) { $0 + $1 }
-            let condition = digits.count%2 == 0 && sum != 0
-            guard condition else { return }
+            let digitsCopy = digits
             
-            let initialClock = zip(digits, matrix)
-                .reduce(0) { partialResult, tuple in
-                    tuple.0 * tuple.1 + partialResult
-                }
-            print("\(color) timer with initial clock ", initialClock)
+            DispatchQueue.global().async {
+                let sum = digitsCopy.reduce(0) { $0 + $1 }
+                let condition = digitsCopy.count%2 == 0 && sum != 0
+                guard condition else { return }
+                
+                let initialClock = zip(digitsCopy, self.matrix)
+                    .reduce(0) { partialResult, tuple in
+                        tuple.0 * tuple.1 + partialResult
+                    }
+                print("\(color) timer with initial clock ", initialClock)
+                //ask viewModel to create timer of color and initialClock
+            }
         }
         
         // MARK: -
