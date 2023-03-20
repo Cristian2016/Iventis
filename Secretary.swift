@@ -50,7 +50,10 @@ class Secretary {
     
     @Published var addNoteButton_bRank:Int? {didSet { handleAddNoteButton_bRank() }}
     
-    @Published var showPaletteView = false
+    @Published var showPaletteView = false {didSet{
+        Secretary.shared.topMostView = showPaletteView ? .palette : .bubbleList
+    }}
+    
     func togglePaletteView() { withAnimation { showPaletteView.toggle() }}
     
     private var timer:Timer?

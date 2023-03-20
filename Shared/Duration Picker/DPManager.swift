@@ -101,7 +101,6 @@ extension DurationPickerView {
                 DispatchQueue.main.async {
                     withAnimation {
                         Secretary.shared.showPaletteView = false
-                        Secretary.shared.topMostView = .bubbleList
                     }
                 }
             }
