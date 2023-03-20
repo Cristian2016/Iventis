@@ -23,7 +23,6 @@ extension DurationPickerView {
                 else { durationComponentsStack }
             }
             .frame(height: 100)
-            .frame(maxWidth: .infinity)
             .allowsHitTesting(false)
             .onReceive(manager.$component) { received(component: $0) }
             .onReceive(manager.$displayIsEmpty) { if $0 { clearDisplay() }}
