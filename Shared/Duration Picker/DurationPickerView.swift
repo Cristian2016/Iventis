@@ -50,7 +50,7 @@ struct DurationPickerView: View {
                     Display { dismiss() }
                     digitsGrid
                 }
-                .overlay { InfoButton() } //3
+//                .overlay { InfoButton() } //3
                 .padding([.leading, .trailing, .bottom])
                 .padding(6)
                 .background { vRectangle }
@@ -155,7 +155,7 @@ extension DurationPickerView {
                             Image.info
                         }
                     }
-                    .tint(.secondary)
+                    .tint(.lightGray)
                 }
             }
             .onReceive(manager.$digits) { show = $0.isEmpty ? true : false }
