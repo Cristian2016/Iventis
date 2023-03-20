@@ -21,15 +21,8 @@ extension DurationPickerView {
             ZStack {
                 if hr.isEmpty { welcomeText }
                 else { durationComponentsStack }
-                VStack {
-                    Spacer()
-                    HStack {
-                        Spacer()
-                        DPCheckmark()
-                    }
-                }
             }
-            .frame(height: 120)
+            .frame(height: 100)
             .frame(maxWidth: .infinity)
             .allowsHitTesting(false)
             .onReceive(manager.$component) { received(component: $0) }
@@ -61,7 +54,6 @@ extension DurationPickerView {
             }
             .padding([.leading, .trailing], 4)
             .minimumScaleFactor(0.1)
-            .offset(y: -6)
         }
         
         private func durationComponentView(_ value:String, _ keyPath:KeyPath<Display, String>) -> some View {
