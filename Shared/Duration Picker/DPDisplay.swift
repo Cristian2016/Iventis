@@ -51,6 +51,7 @@ extension DurationPickerView {
                 durationComponentView(hr, \.hr)
                 if !min.isEmpty { durationComponentView(min, \.min) }
                 if !sec.isEmpty { durationComponentView(sec, \.sec) }
+                DPCheckmark()
             }
             .padding([.leading, .trailing], 4)
             .minimumScaleFactor(0.1)

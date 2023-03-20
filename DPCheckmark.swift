@@ -12,13 +12,10 @@ struct DPCheckmark: View {
     @State private var isVisible = false
     
     var body: some View {
-        Image.checkmark
+        Image(systemName: "checkmark.circle.fill")
             .foregroundColor(.green)
-            .fontWeight(.bold)
             .font(.system(size: 18))
             .opacity(isVisible ? 1 : 0)
-            .padding([.top, .trailing], 10)
-            .padding([.trailing], 12)
             .onReceive(manager.$digits) { output in
                 guard !output.isEmpty else {
                     if isVisible { isVisible = false }
