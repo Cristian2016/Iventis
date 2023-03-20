@@ -53,7 +53,10 @@ class ViewModel: ObservableObject {
     } //5
     
     // MARK: - Alerts
-    @Published var path = [Bubble]() {didSet{ notifyPath() }}
+    @Published var path = [Bubble]() {didSet{
+        notifyPath()
+        secretary.topMostView = path.isEmpty ? .bubbleList : .detailView
+    }}
                 
     // MARK: -
     var notesForPair: CurrentValueSubject<Pair?, Never> = .init(nil)
