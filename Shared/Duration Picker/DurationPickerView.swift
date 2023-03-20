@@ -6,6 +6,7 @@
 // DurationPickerView
 // Pickers https://www.youtube.com/watch?v=2pSDE56u2F0
 //1 self.color:Color? because self will appear when the user has chosen a color for the timer to be created. self will init with no values
+//2 on iPhone 8 looks bad without a bit of padding
 
 import SwiftUI
 import MyPackage
@@ -89,7 +90,7 @@ struct DurationPickerView: View {
         vRoundedRectangle(corners: [.bottomLeft, .bottomRight], radius: 40)
             .fill(.background)
             .padding([.leading, .trailing])
-            .padding([.bottom], 4) //
+            .padding([.bottom], 4) //2
             .standardShadow()
             .onTapGesture { dismiss() }
             .gesture(swipeToClearDisplay)
