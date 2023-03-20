@@ -12,25 +12,23 @@ struct DPCheckmark: View {
     @State private var isVisible = false
     
     var body: some View {
-        HStack(spacing: 0) {
-            Image.checkmark
-                .foregroundColor(.green)
-                .fontWeight(.bold)
-            Text("**Save** \(Image.tap)")
-                .foregroundColor(.secondary)
-        }
-        .font(.system(size: 18))
-        .opacity(isVisible ? 1 : 0)
-        .onReceive(manager.$digits) { output in
-            guard !output.isEmpty else {
-                if isVisible { isVisible = false }
-                return
+        Image.checkmark
+            .foregroundColor(.green)
+            .fontWeight(.bold)
+            .font(.system(size: 18))
+            .opacity(isVisible ? 1 : 0)
+            .padding([.top, .trailing], 10)
+            .padding([.trailing], 12)
+            .onReceive(manager.$digits) { output in
+                guard !output.isEmpty else {
+                    if isVisible { isVisible = false }
+                    return
+                }
+                
+                let sum = output.reduce(0) { $0 + $1 }
+                let condition = output.count%2 == 0 && sum != 0
+                isVisible = condition ? true : false
             }
-            
-            let sum = output.reduce(0) { $0 + $1 }
-            let condition = output.count%2 == 0 && sum != 0
-            isVisible = condition ? true : false
-        }
     }
 }
 

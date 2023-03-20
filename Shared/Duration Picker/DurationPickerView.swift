@@ -50,7 +50,12 @@ struct DurationPickerView: View {
                 }
                 .padding([.leading, .trailing, .bottom])
                 .padding(6)
-                .background { background }
+                .background {
+                    ZStack(alignment: .topTrailing) {
+                        background
+                        DPCheckmark()
+                    }
+                }
             }
         }
         .onReceive(Secretary.shared.$durationPickerMode) { output in
