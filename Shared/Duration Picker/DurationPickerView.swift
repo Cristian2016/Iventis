@@ -7,6 +7,7 @@
 // Pickers https://www.youtube.com/watch?v=2pSDE56u2F0
 //1 self.color:Color? because self will appear when the user has chosen a color for the timer to be created. self will init with no values
 //2 on iPhone 8 looks bad without a bit of padding
+//3 order matters! it is applied before applying the paddings to the vRoundedRect
 
 import SwiftUI
 import MyPackage
@@ -49,6 +50,7 @@ struct DurationPickerView: View {
                     Display { dismiss() }
                     digitsGrid
                 }
+                .overlay { InfoButton() } //3
                 .padding([.leading, .trailing, .bottom])
                 .padding(6)
                 .background { vRectangle }
@@ -138,8 +140,24 @@ struct DurationPickerView: View {
     }
 }
 
-struct DPV_Previews: PreviewProvider {
-    static var previews: some View {
-        DurationPickerView()
+extension DurationPickerView {
+    struct InfoButton:View {
+        private let manager = Manager.shared
+        @State private var show = false
+        
+        var body: some View {
+            ZStack {
+                if show {
+                    Push(.topLeft) {
+                        Button {
+                            print("show info")
+                        } label: {
+                            Image.info
+                        }
+                    }
+                }
+            }
+            .onReceive(manager.$displayIsEmpty) { show = $0 ? true : false }
+        }
     }
 }
