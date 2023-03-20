@@ -21,8 +21,15 @@ extension DurationPickerView {
             ZStack {
                 if hr.isEmpty { welcomeText }
                 else { durationComponentsStack }
+                VStack {
+                    Spacer()
+                    HStack {
+                        Spacer()
+                        DPCheckmark()
+                    }
+                }
             }
-            .frame(height: 100)
+            .frame(height: 120)
             .frame(maxWidth: .infinity)
             .background()
             .allowsHitTesting(false)
