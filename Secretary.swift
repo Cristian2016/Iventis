@@ -38,7 +38,7 @@ class Secretary {
     @Published var confirm_CalEventRemoved: Int64?
     
     @Published var moreOptionsBuble:Bubble? {didSet{
-        topMostView = moreOptionsBuble != nil ? .moreOptionsView : .bubbleList
+        topMostView = moreOptionsBuble != nil ? .moreOptionsView : .bubble
     }}
     
     @Published var showDetail_bRank:Int64?
@@ -48,12 +48,14 @@ class Secretary {
     }
         
     ///bubbleCell rank and frame. Frame will not be set if DetailView shows
-    @Published var deleteAction_bRank:Int64?
+    @Published var deleteAction_bRank:Int64? {didSet{
+        topMostView = deleteAction_bRank == nil ? .bubble : .deleteActionView
+    }}
     
     @Published var addNoteButton_bRank:Int? {didSet { handleAddNoteButton_bRank() }}
     
     @Published var showPaletteView = false {didSet{
-        Secretary.shared.topMostView = showPaletteView ? .palette : .bubbleList
+        Secretary.shared.topMostView = showPaletteView ? .palette : .bubble
     }}
     
     func togglePaletteView() { withAnimation { showPaletteView.toggle() }}
@@ -229,7 +231,6 @@ extension Secretary {
         case durationPicker
         case moreOptionsView
         case deleteActionView
-        case bubbleList
-        case detailView
+        case bubble
     }
 }

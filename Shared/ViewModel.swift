@@ -55,7 +55,6 @@ class ViewModel: ObservableObject {
     // MARK: - Alerts
     @Published var path = [Bubble]() {didSet{
         notifyPath()
-        secretary.topMostView = path.isEmpty ? .bubbleList : .detailView
     }}
                 
     // MARK: -
