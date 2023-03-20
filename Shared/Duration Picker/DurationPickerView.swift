@@ -52,7 +52,7 @@ struct DurationPickerView: View {
                 .padding(6)
                 .background {
                     ZStack(alignment: .topTrailing) {
-                        background
+                        vRectangle
                         DPCheckmark()
                     }
                 }
@@ -90,7 +90,7 @@ struct DurationPickerView: View {
             .ignoresSafeArea()
     }
     
-    private var background: some View {
+    private var vRectangle: some View {
         vRoundedRectangle(corners: [.bottomLeft, .bottomRight], radius: 40)
             .fill(.background)
             .padding([.leading, .trailing])
