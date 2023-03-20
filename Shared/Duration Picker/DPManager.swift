@@ -109,7 +109,9 @@ extension DurationPickerView {
         }
         
         // MARK: -
-        private init() { }
+        private init() {
+//            print(#function, " Manager")
+        }
         
         // MARK: -
         enum Component {

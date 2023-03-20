@@ -45,19 +45,13 @@ struct DurationPickerView: View {
                     .gesture(swipeToClearDisplay)
                     .onTapGesture { dismiss() }
                 
-                ZStack(alignment: .topTrailing) {
-                    VStack(spacing: 0) {
-                        Display { dismiss() }
-                        digitsGrid
-                    }
-                    .offset(y: -4)
-                    .padding([.leading, .trailing, .bottom])
-                    .padding(4)
-                    .background { background }
-                    
-                    DPCheckmark()
+                VStack(spacing: 0) {
+                    Display { dismiss() }
+                    digitsGrid
                 }
-                .padding(4)
+                .padding([.leading, .trailing, .bottom])
+                .padding(6)
+                .background { background }
             }
         }
         .onReceive(Secretary.shared.$durationPickerMode) { output in
