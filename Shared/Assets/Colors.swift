@@ -29,6 +29,7 @@ extension Color {
     
     ///⚠️ struct Color.Bubble vs CoreData class Bubble
     struct Bubble {
+        ///it will not show up in Color.tricolors
         static let clearButtonRed = Tricolor(description: Name.clearButtonRed.rawValue,
                                    hr:Color(#colorLiteral(red: 1, green: 0.6340145469, blue: 0.603394568, alpha: 1)), min: Color(#colorLiteral(red: 0.581685245, green: 0.06705204397, blue: 0.001516064513, alpha: 1)), sec: Color(#colorLiteral(red: 0.9907863736, green: 0.2364294529, blue: 0.187119931, alpha: 1)))
         
