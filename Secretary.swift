@@ -37,7 +37,9 @@ class Secretary {
     
     @Published var confirm_CalEventRemoved: Int64?
     
-    @Published var moreOptionsBuble:Bubble?
+    @Published var moreOptionsBuble:Bubble? {didSet{
+        topMostView = moreOptionsBuble != nil ? .moreOptionsView : .bubbleList
+    }}
     
     @Published var showDetail_bRank:Int64?
     
@@ -228,5 +230,6 @@ extension Secretary {
         case moreOptionsView
         case deleteActionView
         case bubbleList
+        case detailView
     }
 }
