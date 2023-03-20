@@ -79,7 +79,11 @@ extension DurationPickerView {
         
         func removeAllDigits() { digits = [] }
         
-        func computeInitialClock(color:String?) {
+        func computeInitialClock(color:String) {
+            let sum = digits.reduce(0) { $0 + $1 }
+            let condition = digits.count%2 == 0 && sum != 0
+            guard condition else { return }
+            
             let initialClock = zip(digits, matrix)
                 .reduce(0) { partialResult, tuple in
                     tuple.0 * tuple.1 + partialResult
