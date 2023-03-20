@@ -16,7 +16,7 @@ struct DPCheckmark: View {
             Image.checkmark
                 .foregroundColor(.green)
                 .fontWeight(.bold)
-            Text("**Save** \(Image.tap) Tap")
+            Text("**Save** \(Image.tap)")
                 .foregroundColor(.secondary)
         }
         .font(.system(size: 18))

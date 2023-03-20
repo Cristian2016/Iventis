@@ -31,7 +31,6 @@ extension DurationPickerView {
             }
             .frame(height: 120)
             .frame(maxWidth: .infinity)
-            .background()
             .allowsHitTesting(false)
             .onReceive(manager.$component) { received(component: $0) }
             .onReceive(manager.$displayIsEmpty) { if $0 { clearDisplay() }}
@@ -62,6 +61,7 @@ extension DurationPickerView {
             }
             .padding([.leading, .trailing], 4)
             .minimumScaleFactor(0.1)
+            .offset(y: -6)
         }
         
         private func durationComponentView(_ value:String, _ keyPath:KeyPath<Display, String>) -> some View {
