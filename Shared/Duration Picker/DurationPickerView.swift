@@ -132,12 +132,13 @@ struct DurationPickerView: View {
     
     // MARK: -
     func dismiss() {
-        self.tricolor = nil
         if manager.digits.count%2 == 0 {
-            print("create timers and remove all digits")
+            print("create timers \(manager.digits)")
+            manager.computeInitialClock(color: tricolor?.description)
         } else {
-            print("do not create timer, remove all digits")
+            print("dismiss only. do not create timer")
         }
+        self.tricolor = nil
         manager.removeAllDigits()
     }
 }

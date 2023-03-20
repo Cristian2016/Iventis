@@ -10,6 +10,7 @@ import Foundation
 extension DurationPickerView {
     class Manager {
         typealias Characters = CharacterSet
+        let matrix = [36_000, 3600, 600, 60, 10, 1]
         
         ///updates both display and digitsGrid
         private func updateUI() {
@@ -77,6 +78,14 @@ extension DurationPickerView {
         func removelastDigit() { digits.removeLast() }
         
         func removeAllDigits() { digits = [] }
+        
+        func computeInitialClock(color:String?) {
+            let initialClock = zip(digits, matrix)
+                .reduce(0) { partialResult, tuple in
+                    tuple.0 * tuple.1 + partialResult
+                }
+            print("\(color) timer with initial clock ", initialClock)
+        }
         
         // MARK: -
         public func charactersToDisable() {
