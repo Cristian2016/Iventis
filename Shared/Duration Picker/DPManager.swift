@@ -83,16 +83,21 @@ extension DurationPickerView {
             let digitsCopy = digits
             
             DispatchQueue.global().async {
+                //make sure the entered digits are valid
                 let sum = digitsCopy.reduce(0) { $0 + $1 }
                 let condition = digitsCopy.count%2 == 0 && sum != 0
                 guard condition else { return }
                 
+                //compute duration, in other words initialClock [total seconds]
                 let initialClock = zip(digitsCopy, self.matrix)
                     .reduce(0) { partialResult, tuple in
                         tuple.0 * tuple.1 + partialResult
                     }
+                
                 print("\(color) timer with initial clock ", initialClock)
                 //ask viewModel to create timer of color and initialClock
+                
+                //dismiss palette also
                 DispatchQueue.main.async {
                     withAnimation {
                         Secretary.shared.showPaletteView = false
