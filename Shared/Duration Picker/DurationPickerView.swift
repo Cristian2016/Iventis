@@ -89,6 +89,7 @@ struct DurationPickerView: View {
         vRoundedRectangle(corners: [.bottomLeft, .bottomRight], radius: 40)
             .fill(.background)
             .padding([.leading, .trailing])
+            .padding([.bottom], 4) //
             .standardShadow()
             .onTapGesture { dismiss() }
             .gesture(swipeToClearDisplay)
