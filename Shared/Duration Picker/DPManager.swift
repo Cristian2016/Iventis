@@ -89,8 +89,7 @@ extension DurationPickerView {
                 guard condition else { return }
                 
                 //compute duration, in other words initialClock [total seconds]
-                let initialClock = zip(digitsCopy, self.matrix)
-                    .reduce(0) { $0 + $1.0 * $1.1 }
+                let initialClock = zip(digitsCopy, self.matrix).reduce(0) { $0 + $1.0 * $1.1 }
                 
                 print("\(color) timer with initial clock ", initialClock)
                 //ask viewModel to create timer of color and initialClock
