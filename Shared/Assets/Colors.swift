@@ -24,7 +24,7 @@ extension Color {
         Bubble.ultramarine, Bubble.charcoal, Bubble.red,
         Bubble.sky, Bubble.bubbleGum, Bubble.cayenne,
         Bubble.byzantium,  Bubble.purple, Bubble.silver,
-        Bubble.rose, Bubble.aubergine, Bubble.magenta, Bubble.clearButtonRed
+        Bubble.rose, Bubble.aubergine, Bubble.magenta
     ]
     
     ///⚠️ struct Color.Bubble vs CoreData class Bubble
