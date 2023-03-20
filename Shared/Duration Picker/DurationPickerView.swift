@@ -155,9 +155,10 @@ extension DurationPickerView {
                             Image.info
                         }
                     }
+                    .tint(.secondary)
                 }
             }
-            .onReceive(manager.$displayIsEmpty) { show = $0 ? true : false }
+            .onReceive(manager.$digits) { show = $0.isEmpty ? true : false }
         }
     }
 }
