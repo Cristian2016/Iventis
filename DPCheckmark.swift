@@ -13,17 +13,15 @@ struct DPCheckmark: View {
     
     var body: some View {
         HStack(spacing: 0) {
-            Image.checkmark
-                .foregroundColor(.green)
-                .fontWeight(.bold)
-            HStack(spacing: 0) {
-                Text("**Save**")
-                Text("\(Image.tap)")
-                Text("Tap")
-            }
-            .foregroundColor(.secondary)
+//            Image.checkmark
+//                .foregroundColor(.green)
+//                .fontWeight(.bold)
+                Text("**Save** \(Image.tap) Tap Duration")
+                .foregroundColor(.secondary)
         }
         .font(.system(size: 18))
+        .padding([.leading, .trailing])
+        .background(.thickMaterial, in: RoundedRectangle(cornerRadius: 2))
         .opacity(isVisible ? 1 : 0)
         .onReceive(manager.$digits) { output in
             guard !output.isEmpty else {
@@ -35,6 +33,7 @@ struct DPCheckmark: View {
             let condition = output.count%2 == 0 && sum != 0
             isVisible = condition ? true : false
         }
+        .offset(y: 6)
     }
 }
 

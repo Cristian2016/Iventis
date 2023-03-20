@@ -47,7 +47,12 @@ struct DurationPickerView: View {
                 
                 VStack(spacing: 0) {
                     Display { dismiss() }
-                    digitsGrid
+                    
+                    ZStack(alignment: .top) {
+                        digitsGrid
+                        DPCheckmark()
+                    }
+                    
                 }
                 .padding([.leading, .trailing, .bottom])
                 .padding(6)
