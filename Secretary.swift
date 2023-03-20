@@ -19,6 +19,10 @@ class Secretary {
     ///.onMove view modifier will not be nil
 //    @Published var allowOnMove = false
     
+    var topMostView:TopMostView = .none {didSet{
+        print("topmostview \(topMostView)")
+    }}
+    
     @Published var showMoreOptionsHint = false
     
     @Published var pairBubbleCellNeedsDisplay = false
@@ -210,5 +214,16 @@ extension Secretary {
         case create(Bubble) //bubble
         case pin(Bubble) //pin/unpin bubble
         case colorChange(Bubble) //change bubble color [MoreOptionsView]
+    }
+}
+
+extension Secretary {
+    enum TopMostView {
+        case none
+        case palette
+        case durationPicker
+        case moreOptionsView
+        case deleteActionView
+        case bubbleList
     }
 }

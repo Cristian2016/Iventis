@@ -66,6 +66,11 @@ struct DurationPickerView: View {
                 }
             }
         }
+        .onChange(of: tricolor) {
+            if $0 != nil {
+                Secretary.shared.topMostView = .durationPicker
+            }
+        }
     }
     
     private var swipe: some Gesture {

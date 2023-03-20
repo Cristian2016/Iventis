@@ -86,7 +86,10 @@ extension DurationPickerView {
                 //make sure the entered digits are valid
                 let sum = digitsCopy.reduce(0) { $0 + $1 }
                 let condition = digitsCopy.count%2 == 0 && sum != 0
-                guard condition else { return }
+                guard condition else {
+                    Secretary.shared.topMostView = .palette
+                    return
+                }
                 
                 //compute duration, in other words initialClock [total seconds]
                 let initialClock = zip(digitsCopy, self.matrix).reduce(0) { $0 + $1.0 * $1.1 }
@@ -96,7 +99,10 @@ extension DurationPickerView {
                 
                 //dismiss palette also
                 DispatchQueue.main.async {
-                    withAnimation { Secretary.shared.showPaletteView = false }
+                    withAnimation {
+                        Secretary.shared.showPaletteView = false
+                        Secretary.shared.topMostView = .bubbleList
+                    }
                 }
             }
         }
