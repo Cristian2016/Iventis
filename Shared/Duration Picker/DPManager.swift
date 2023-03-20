@@ -5,7 +5,7 @@
 //  Created by Cristian Lapusan on 19.03.2023.
 //
 
-import Foundation
+import SwiftUI
 
 extension DurationPickerView {
     class Manager {
@@ -93,6 +93,11 @@ extension DurationPickerView {
                     }
                 print("\(color) timer with initial clock ", initialClock)
                 //ask viewModel to create timer of color and initialClock
+                DispatchQueue.main.async {
+                    withAnimation {
+                        Secretary.shared.showPaletteView = false
+                    }
+                }
             }
         }
         
