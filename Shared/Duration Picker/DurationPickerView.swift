@@ -147,17 +147,24 @@ struct DurationPickerView: View {
 
 extension DurationPickerView {
     struct Info:View {
+        @State private var show = false
+        
         var body: some View {
-            ThinMaterialLabel(title: "Timer Duration") {
-                VStack {
-                    Text("*Choose Duration and tap any*")
-                    Text("*yellow area*")
+            ZStack {
+                ThinMaterialLabel(title: "Timer Duration") {
+                    VStack {
+                        Text("*Choose Duration and tap any*")
+                        Text("*yellow area*")
+                    }
+                    .foregroundColor(.secondary)
+                    Divider().frame(maxWidth: 300)
+                    DPInfoView()
+                } action: {
+                    Secretary.shared.showDurationPickerInfo = false
                 }
-                .foregroundColor(.secondary)
-                Divider().frame(maxWidth: 300)
-                DPInfoView()
-            } action: {
-                
+            }
+            .onReceive(Secretary.shared.$showDurationPickerInfo) { output in
+                withAnimation { show = output }
             }
         }
     }
