@@ -82,9 +82,9 @@ struct SessionDeleteInfoView:View {
     // MARK: - Lego
     private var content:some View {
         VStack(alignment: .leading) {
-            Text("**Removes Session and**")
+            Text("*Removes Session and*")
                 .foregroundColor(.secondary)
-            Text("**associated Calendar Event**")
+            Text("*associated Calendar Event*")
                 .foregroundColor(.secondary)
             Divider().frame(maxWidth: 300)
             Text("**Delete** \(Image.tap) Tap")
