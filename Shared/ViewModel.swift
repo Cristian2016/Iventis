@@ -462,8 +462,8 @@ extension ViewModel {
             thisBubble.isPinned.toggle()
             self.secretary.updateBubblesReport(.pin(thisBubble))
             
-            if self.secretary.bubblesReport.pinned == 0 {
-                //if no pinned bubbles and ordinary are hidden, show all bubbles
+            if self.secretary.bubblesReport.pinned == 0 && self.secretary.showFavoritesOnly {
+                //if no pinned bubbles and ordinary buubles are hidden, show all bubbles
                 DispatchQueue.main.async {
                     withAnimation {
                         self.secretary.showFavoritesOnly = false
