@@ -31,6 +31,7 @@ struct BlueInfoButton: View {
                             }
                     }
                 }
+                .transition(.slide)
                 .tint(scheme == .dark ? .yellow : .blue)
                 .padding([.leading], 4)
             }
