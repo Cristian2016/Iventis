@@ -158,7 +158,7 @@ extension DurationPickerView {
                     
                     ThinMaterialLabel(title: "Timer Duration") {
                         VStack {
-                            Text("*Choose Duration and tap any*")
+                            Text("*Choose Duration, then tap any*")
                             Text("*yellow area*")
                         }
                         .foregroundColor(.secondary)
