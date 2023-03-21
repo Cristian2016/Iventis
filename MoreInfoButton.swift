@@ -66,15 +66,7 @@ struct SessionDeleteInfoView:View {
         ZStack {
             if show {
                 ThinMaterialLabel(title: "Delete Session") {
-                    VStack(alignment: .leading) {
-                        Text("Also removes any associated")
-                            .foregroundColor(.secondary)
-                        Text("Calendar Event, if any")
-                            .foregroundColor(.secondary)
-                        Text("**Delete** \(Image.tap) Tap")
-                        Text("**Cancel** \(Image.tap) Tap Outside Shape")
-                    }
-                    .font(.system(size: 24))
+                    content
                 } action: {
                     withAnimation {
                         Secretary.shared.showSessionDeleteInfo = false
@@ -85,5 +77,18 @@ struct SessionDeleteInfoView:View {
         .onReceive(Secretary.shared.$showSessionDeleteInfo) { output in
             withAnimation { show = output }
         }
+    }
+    
+    // MARK: - Lego
+    private var content:some View {
+        VStack(alignment: .leading) {
+            Text("Also removes any associated")
+                .foregroundColor(.secondary)
+            Text("Calendar Event, if any")
+                .foregroundColor(.secondary)
+            Text("**Delete** \(Image.tap) Tap")
+            Text("**Cancel** \(Image.tap) Tap Outside Shape")
+        }
+        .font(.system(size: 24))
     }
 }
