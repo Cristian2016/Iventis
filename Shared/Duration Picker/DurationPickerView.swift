@@ -151,21 +151,25 @@ extension DurationPickerView {
         
         var body: some View {
             ZStack {
-                ThinMaterialLabel(title: "Timer Duration") {
-                    VStack {
-                        Text("*Choose Duration and tap any*")
-                        Text("*yellow area*")
-                    }
-                    .foregroundColor(.secondary)
-                    Divider().frame(maxWidth: 300)
-                    DPInfoView()
-                } action: {
-                    Secretary.shared.showDurationPickerInfo = false
+                if show {
+                    ThinMaterialLabel(title: "Timer Duration") {
+                        VStack {
+                            Text("*Choose Duration and tap any*")
+                            Text("*yellow area*")
+                        }
+                        .foregroundColor(.secondary)
+                        Divider().frame(maxWidth: 300)
+                        DPInfoView()
+                    } action: { dismiss() }
                 }
             }
             .onReceive(Secretary.shared.$showDurationPickerInfo) { output in
                 withAnimation { show = output }
             }
+        }
+        
+        private func dismiss() {
+            Secretary.shared.showDurationPickerInfo = false
         }
     }
 }
