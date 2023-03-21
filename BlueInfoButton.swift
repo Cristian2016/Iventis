@@ -49,7 +49,7 @@ struct BlueInfoButton: View {
             case .durationPicker:
                 Secretary.shared.showDurationPickerInfo = true
             case .moreOptionsView:
-                Secretary.shared.showMoreOptionsHint = true
+                Secretary.shared.showMoreOptionsInfo = true
             case .palette:
                 Secretary.shared.showPaletteInfo = true
             case .sessionDeleteActionView:

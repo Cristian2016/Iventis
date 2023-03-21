@@ -216,28 +216,21 @@ extension MoreOptionsView {
         
         var body: some View {
             ZStack {
-                let delay = delayAsString
-                
+                let title = "Start Delay"
                 let subtitle = "Start after a number of seconds"
                 
                 if showMoreOptionsHint {
-                    ThinMaterialLabel(title: "Start Delay", subtitle: subtitle) {
+                    ThinMaterialLabel(title: title, subtitle: subtitle) {
                         Text("*Use Yellow Areas to*")
                             .foregroundColor(.secondary)
                         Divider().frame(maxWidth: 300)
-                        
                         MoreOptionsInfoView()
                         
-                    } action: {
-                        withAnimation {
-                            Secretary.shared.showMoreOptionsHint = false
-                        }
-                    }
-                    
+                    } action: { showInfo() }
                     .font(metrics.infoFont)
                 }
             }
-            .onReceive(Secretary.shared.$showMoreOptionsHint) { output in
+            .onReceive(Secretary.shared.$showMoreOptionsInfo) { output in
                 withAnimation { showMoreOptionsHint = output }
             }
         }
@@ -245,6 +238,12 @@ extension MoreOptionsView {
         struct Metrics {
             let font = Font.system(size: 30, weight: .medium)
             let infoFont = Font.system(size: 20)
+        }
+        
+        private func showInfo() {
+            withAnimation {
+                Secretary.shared.showMoreOptionsInfo = false
+            }
         }
     }
 }

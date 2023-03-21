@@ -36,7 +36,7 @@ class Secretary {
     
     @Published var showDurationPickerInfo = false
     
-    @Published var showMoreOptionsHint = false
+    @Published var showMoreOptionsInfo = false
     
     @Published var pairBubbleCellNeedsDisplay = false
     
