@@ -69,8 +69,8 @@ struct SessionDeleteInfoView:View {
                     VStack(alignment: .leading) {
                         Text("Removes Session and any associated Calendar Events")
                             .foregroundColor(.secondary)
-                        Text("**Delete Session** \(Image.tap) Tap Button")
-                        Text("**Dismiss** \(Image.tap) Tap Outside Shape")
+                        Text("**Delete** \(Image.tap) Tap")
+                        Text("**Cancel** \(Image.tap) Tap Outside Shape")
                     }
                 } action: {
                     withAnimation {
