@@ -67,9 +67,9 @@ struct SessionDeleteInfoView:View {
             if show {
                 ThinMaterialLabel(title: "Delete Session") {
                     VStack(alignment: .leading) {
-                        Text("Removes session together with")
+                        Text("\(Image.alert) Also removes any")
                             .foregroundColor(.secondary)
-                        Text("any associated Calendar Event")
+                        Text("associated Calendar Event, if any")
                             .foregroundColor(.secondary)
                         Text("**Delete** \(Image.tap) Tap")
                         Text("**Cancel** \(Image.tap) Tap Outside Shape")

@@ -52,6 +52,7 @@ public extension Image {
     static let scrollToTop = Image(systemName: "arrow.up.to.line.compact")
     static let greaterThan = Image(systemName: "greaterthan.circle.fill")
     static let info = Image(systemName: "info.circle.fill")
+    static let alert = Image(systemName: "exclamationmark.triangle.fill")
 }
 
 public extension URL {
