@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import MyPackage
 
 extension DurationPickerView {
     struct Display: View {
@@ -20,18 +21,19 @@ extension DurationPickerView {
         let dismiss: () -> ()
             
         var body: some View {
-            ZStack(alignment: .bottomTrailing) {
+            ZStack {
                 if hr.isEmpty { welcomeText }
                 else { durationComponentsStack }
-                
-                if showSaveAction {
-                    Text("Save \(Image.tap)")
-                        .font(.system(size: 18))
-                        .foregroundColor(.secondary)
-                }
             }
             .frame(height: 100)
             .frame(maxWidth: .infinity)
+            .overlay {
+                if showSaveAction {
+                    Push(.bottomRight) { Text("Save \(Image.tap)") }
+                    .font(.system(size: 18))
+                    .foregroundColor(.secondary)
+                }
+            }
             .allowsHitTesting(false)
             .onReceive(manager.$component) { received(component: $0) }
             .onReceive(manager.$displayIsEmpty) { if $0 { clearDisplay() }}
