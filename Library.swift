@@ -53,6 +53,10 @@ public extension Image {
     static let greaterThan = Image(systemName: "greaterthan.circle.fill")
     static let info = Image(systemName: "info.circle.fill")
     static let alert = Image(systemName: "exclamationmark.triangle.fill")
+    static let roundCheckmark = Image(systemName: "checkmark.circle.fill")
+    
+    // MARK: - Info Assets
+    static let dpv = Image("DurationPicker")
 }
 
 public extension URL {

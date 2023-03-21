@@ -20,6 +20,8 @@
 		1F0FD40229A4CD090097FF7F /* ScrollToTopButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F0FD40129A4CD090097FF7F /* ScrollToTopButton.swift */; };
 		1F0FD40629A4D93D0097FF7F /* DetailViewInfoButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F0FD40529A4D93D0097FF7F /* DetailViewInfoButton.swift */; };
 		1F100CA72809493400A3A3C2 /* BubbleTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F100CA62809493400A3A3C2 /* BubbleTimer.swift */; };
+		1F112A2229C9D8EC00D4A541 /* InfoAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1F112A2129C9D8EC00D4A541 /* InfoAssets.xcassets */; };
+		1F112A2429C9D95400D4A541 /* DPInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F112A2329C9D95400D4A541 /* DPInfoView.swift */; };
 		1F18B45C281FA9C90080ADA6 /* CalendarSticker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F18B45B281FA9C90080ADA6 /* CalendarSticker.swift */; };
 		1F18B460281FAABF0080ADA6 /* TopCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F18B45F281FAABF0080ADA6 /* TopCell.swift */; };
 		1F196093298856E500E6A7EA /* SmallAlertHintView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F196092298856E500E6A7EA /* SmallAlertHintView.swift */; };
@@ -169,6 +171,8 @@
 		1F0FD40129A4CD090097FF7F /* ScrollToTopButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollToTopButton.swift; sourceTree = SOURCE_ROOT; };
 		1F0FD40529A4D93D0097FF7F /* DetailViewInfoButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewInfoButton.swift; sourceTree = "<group>"; };
 		1F100CA62809493400A3A3C2 /* BubbleTimer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BubbleTimer.swift; sourceTree = "<group>"; };
+		1F112A2129C9D8EC00D4A541 /* InfoAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = InfoAssets.xcassets; sourceTree = SOURCE_ROOT; };
+		1F112A2329C9D95400D4A541 /* DPInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DPInfoView.swift; sourceTree = "<group>"; };
 		1F18B45B281FA9C90080ADA6 /* CalendarSticker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarSticker.swift; sourceTree = "<group>"; };
 		1F18B45F281FAABF0080ADA6 /* TopCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopCell.swift; sourceTree = "<group>"; };
 		1F196092298856E500E6A7EA /* SmallAlertHintView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallAlertHintView.swift; sourceTree = "<group>"; };
@@ -357,6 +361,7 @@
 		1F5F4A4228093FAC00AF3442 = {
 			isa = PBXGroup;
 			children = (
+				1F112A2329C9D95400D4A541 /* DPInfoView.swift */,
 				1F5FFD9E29C2426E005FFB32 /* AdaptiveView.swift */,
 				1FD2A3DC29C10C6C00EB7B10 /* DeleteConfirmationLabel.swift */,
 				1F04768C29BB073000641CDC /* SecondsLabel.swift */,
@@ -411,6 +416,7 @@
 		1F5F4A4728093FAD00AF3442 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				1F112A2129C9D8EC00D4A541 /* InfoAssets.xcassets */,
 				1F96282629C9070000E93760 /* MoreInfoButton.swift */,
 				1FF8255229C751160003E4A0 /* Duration Picker */,
 				1F53DD6B29BEFB8A00E33B77 /* PrecisionTimer.swift */,
@@ -626,6 +632,7 @@
 			files = (
 				1F42B99D2973E34E0024DB5F /* Code Snippets.rtf in Resources */,
 				1F5F4A6328093FAF00AF3442 /* Assets.xcassets in Resources */,
+				1F112A2229C9D8EC00D4A541 /* InfoAssets.xcassets in Resources */,
 				1FE3B6F72983ECBF00B9C5D0 /* Explanations.rtf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -658,6 +665,7 @@
 				1F0373C628DF516F005CE8D3 /* OnLabel.swift in Sources */,
 				1F196093298856E500E6A7EA /* SmallAlertHintView.swift in Sources */,
 				1F5FFD9F29C2426E005FFB32 /* AdaptiveView.swift in Sources */,
+				1F112A2429C9D95400D4A541 /* DPInfoView.swift in Sources */,
 				1F0373BE28DEDB00005CE8D3 /* AlwaysOnDisplayAlertView.swift in Sources */,
 				1F991A7029A7545C0045B04C /* TopCellDurationView.swift in Sources */,
 				1F0373C228DEE6F7005CE8D3 /* AlwaysOnDisplayConfirmationView.swift in Sources */,
