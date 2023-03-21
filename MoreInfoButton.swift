@@ -86,6 +86,7 @@ struct SessionDeleteInfoView:View {
                 .foregroundColor(.secondary)
             Text("Calendar Event, if any")
                 .foregroundColor(.secondary)
+            Divider().frame(maxWidth: 300)
             Text("**Delete** \(Image.tap) Tap")
             Text("**Cancel** \(Image.tap) Tap Outside Shape")
         }
