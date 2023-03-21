@@ -110,6 +110,7 @@
 		1FBE775629A248F5005968EC /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FBE775529A248F5005968EC /* GradientView.swift */; };
 		1FC08DC929A35B6500E25D79 /* PairBubbleCellCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FC08DC829A35B6500E25D79 /* PairBubbleCellCoordinator.swift */; };
 		1FC0D9C129828D23004779E0 /* ConfirmView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FC0D9C029828D23004779E0 /* ConfirmView.swift */; };
+		1FC2335929CA488900FBE483 /* MoreOptionsInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FC2335829CA488900FBE483 /* MoreOptionsInfoView.swift */; };
 		1FC70BB129807BAB007CD1E6 /* LayoutViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FC70BB029807BAB007CD1E6 /* LayoutViewModel.swift */; };
 		1FCF0C662816F3F600AA1FAA /* EmptyListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FCF0C652816F3F600AA1FAA /* EmptyListView.swift */; };
 		1FD2A3DD29C10C6C00EB7B10 /* DeleteConfirmationLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD2A3DC29C10C6C00EB7B10 /* DeleteConfirmationLabel.swift */; };
@@ -262,6 +263,7 @@
 		1FBE775529A248F5005968EC /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = SOURCE_ROOT; };
 		1FC08DC829A35B6500E25D79 /* PairBubbleCellCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PairBubbleCellCoordinator.swift; sourceTree = SOURCE_ROOT; };
 		1FC0D9C029828D23004779E0 /* ConfirmView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfirmView.swift; sourceTree = "<group>"; };
+		1FC2335829CA488900FBE483 /* MoreOptionsInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreOptionsInfoView.swift; sourceTree = SOURCE_ROOT; };
 		1FC70BB029807BAB007CD1E6 /* LayoutViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutViewModel.swift; sourceTree = "<group>"; };
 		1FCF0C652816F3F600AA1FAA /* EmptyListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyListView.swift; sourceTree = "<group>"; };
 		1FD2A3DC29C10C6C00EB7B10 /* DeleteConfirmationLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteConfirmationLabel.swift; sourceTree = "<group>"; };
@@ -416,6 +418,7 @@
 		1F5F4A4728093FAD00AF3442 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				1FC2335829CA488900FBE483 /* MoreOptionsInfoView.swift */,
 				1FE76DB929C9F213003012F0 /* BlueInfoButton.swift */,
 				1F112A2129C9D8EC00D4A541 /* InfoAssets.xcassets */,
 				1FF8255229C751160003E4A0 /* Duration Picker */,
@@ -691,6 +694,7 @@
 				1F100CA72809493400A3A3C2 /* BubbleTimer.swift in Sources */,
 				1FA8F87E28367B7A00394B59 /* BubbleNote.swift in Sources */,
 				1F38A00429B9000D009AD543 /* yPositionTracker.swift in Sources */,
+				1FC2335929CA488900FBE483 /* MoreOptionsInfoView.swift in Sources */,
 				1F5A0F6C282641D00075E86B /* NoSessionsAlertView.swift in Sources */,
 				1F04768D29BB073000641CDC /* SecondsLabel.swift in Sources */,
 				1F542F92286D757000403F13 /* StickyNoteList.swift in Sources */,

@@ -39,27 +39,22 @@ struct MoreOptionsView: View {
                             .onTapGesture { saveDelay() }
                             .highPriorityGesture(swipeLeft)
                             .ignoresSafeArea()
-                            .overlay { YellowArea() }
                         
                         layout {
                             if emptyStruct.bubble.state != .running {
                                 VStack(alignment: .trailing, spacing: 14) {
                                     VStack(alignment: .trailing, spacing: 4) {
                                         startDelayDisplay
-                                            .overlay { YellowArea() }
                                         digits
-                                            .overlay { MaskArea() }
                                     }
                                 }
                                 
                                 Divider()
-                                    .overlay { MaskArea() }
                             }
                             
                             Color.clear
                                 .overlay {
                                     ColorsGrid(emptyStruct.bubble, spacing: metrics.colorsSpacing) { saveDelay() }
-                                        .overlay { MaskArea() }
                                 }
                         }
                         .padding(10)
@@ -226,7 +221,7 @@ extension MoreOptionsView {
                 if showMoreOptionsHint {
                     ThinMaterialLabel(title: "\(delay) Start Delay") {
                         if !delay.isEmpty {
-                            Text("Start after \(input.userEditedDelay) sec")
+                            Text("Delay start by \(input.userEditedDelay) sec")
                                 .foregroundColor(.secondary)
                             Divider().frame(maxWidth: 300)
                         } else {
@@ -234,14 +229,12 @@ extension MoreOptionsView {
                                 .foregroundColor(.secondary)
                             Divider().frame(maxWidth: 300)
                         }
-                        VStack(alignment: .leading) {
                             Text("*Use Yellow Areas to*")
                                 .foregroundColor(.secondary)
-                            Text("**Save Delay** \(Image.tap) Tap")
-                            Text("**Remove** \(Image.leftSwipe) Swipe")
-                            Text("**Dismiss** \(Image.tap) Tap")
-                        }
-                        .foregroundColor(.label)
+                            Divider().frame(maxWidth: 300)
+                        
+                        MoreOptionsInfoView()
+                        
                     } action: {
                         withAnimation {
                             Secretary.shared.showMoreOptionsHint = false
@@ -261,52 +254,6 @@ extension MoreOptionsView {
             let infoFont = Font.system(size: 20)
         }
     }
-    
-    struct YellowArea: View {
-        @State private var showMoreOptionsHint = false
-        
-        var body: some View {
-            ZStack {
-                if showMoreOptionsHint {
-                    Color
-                        .yellow
-                        .ignoresSafeArea()
-                        .onTapGesture {
-                            withAnimation {
-                                Secretary.shared.showMoreOptionsHint = false
-                            }
-                        }
-                }
-            }
-            .onReceive(Secretary.shared.$showMoreOptionsHint) { output in
-                withAnimation { showMoreOptionsHint = output }
-            }
-        }
-    }
-
-    struct MaskArea: View {
-        @State private var showMoreOptionsHint = false
-        
-        var body: some View {
-            ZStack {
-                if showMoreOptionsHint {
-                    Color
-                        .white
-                        .ignoresSafeArea()
-                        .onTapGesture {
-                            withAnimation {
-                                Secretary.shared.showMoreOptionsHint = false
-                            }
-                        }
-//                        .opacity(0.8)
-                }
-            }
-            .onReceive(Secretary.shared.$showMoreOptionsHint) { output in
-                withAnimation { showMoreOptionsHint = output }
-            }
-        }
-    }
-    
 }
 
 struct SmallDigit:ButtonStyle {

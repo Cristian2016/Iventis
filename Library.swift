@@ -57,6 +57,7 @@ public extension Image {
     
     // MARK: - Info Assets
     static let dpv = Image("DurationPicker")
+    static let moreOptionsView = Image("MoreOptions")
 }
 
 public extension URL {
