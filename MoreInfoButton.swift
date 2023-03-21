@@ -66,7 +66,7 @@ struct SessionDeleteInfoView:View {
         ZStack {
             if show {
                 ThinMaterialLabel(title: "Delete Session") {
-                    Circle().fill(.clear)
+                    
                 } action: {
                     withAnimation {
                         Secretary.shared.showSessionDeleteInfo = false

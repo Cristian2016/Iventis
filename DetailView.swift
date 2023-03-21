@@ -53,11 +53,9 @@ struct DetailView: View {
                 if isAddTagButtonVisible { AddNoteButton() }
             }
         }
-        .overlay {
-            SessionDeleteActionAlert()
-        }
-        .overlay { ShowDetailViewInfoView() }
-        .overlay { SessionDeleteInfoView() }
+        .overlay (SessionDeleteActionAlert())
+        .overlay (ShowDetailViewInfoView())
+        .overlay (SessionDeleteInfoView())
     }
         
     let topDetailHeight = CGFloat(140)
