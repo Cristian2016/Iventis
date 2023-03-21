@@ -87,11 +87,9 @@ struct SessionDeleteInfoView:View {
     // MARK: - Lego
     private var content:some View {
         VStack(alignment: .leading) {
-            VStack { //to place it in the middle
-                Text("*Deletes session together with any associated Calendar Event*")
-                    .fixedSize(horizontal: false, vertical: true) //⚠️
-            }
-            .foregroundColor(.secondary)
+            Text("*Deletes session together with any associated Calendar Event*")
+                .fixedSize(horizontal: false, vertical: true) //⚠️
+                .foregroundColor(.secondary)
             
             Divider().frame(maxWidth: 300)
             Text("**Delete** \(Image.tap) Tap")
