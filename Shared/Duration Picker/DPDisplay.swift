@@ -38,7 +38,8 @@ extension DurationPickerView {
             .onReceive(manager.$component) { received(component: $0) }
             .onReceive(manager.$displayIsEmpty) { if $0 { clearDisplay() }}
             .onReceive(manager.$digits) { output in
-                showSaveAction = output.count%2 == 0 ? true : false
+                let isDurationValid = output.count%2 == 0 && output.reduce(0) { $0 + $1 } != 0
+                showSaveAction = isDurationValid ? true : false
             }
         }
         
