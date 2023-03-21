@@ -82,7 +82,7 @@ struct SessionDeleteInfoView:View {
     // MARK: - Lego
     private var content:some View {
         VStack(alignment: .leading) {
-            Text("Also removes any associated")
+            Text("Removes Session and associated")
                 .foregroundColor(.secondary)
             Text("Calendar Event, if any")
                 .foregroundColor(.secondary)
