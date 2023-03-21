@@ -15,17 +15,29 @@ extension DurationPickerView {
         @State private var min = String()
         @State private var sec = String()
         
+        @State private var showSaveAction = false
+        
         let dismiss: () -> ()
             
         var body: some View {
-            ZStack {
+            ZStack(alignment: .bottomTrailing) {
                 if hr.isEmpty { welcomeText }
                 else { durationComponentsStack }
+                
+                if showSaveAction {
+                    Text("Save \(Image.tap)")
+                        .font(.system(size: 18))
+                        .foregroundColor(.secondary)
+                }
             }
             .frame(height: 100)
+            .frame(maxWidth: .infinity)
             .allowsHitTesting(false)
             .onReceive(manager.$component) { received(component: $0) }
             .onReceive(manager.$displayIsEmpty) { if $0 { clearDisplay() }}
+            .onReceive(manager.$digits) { output in
+                showSaveAction = output.count%2 == 0 ? true : false
+            }
         }
         
         // MARK: - Lego
@@ -41,7 +53,7 @@ extension DurationPickerView {
                     .foregroundColor(.secondary)
                     .fontDesign(.monospaced)
             }
-            .padding([.leading, .trailing], 4)
+//            .padding([.leading, .trailing], 4)
             .minimumScaleFactor(0.1)
         }
         
