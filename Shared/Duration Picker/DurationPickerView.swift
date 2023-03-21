@@ -164,6 +164,7 @@ extension DurationPickerView {
                         Divider().frame(maxWidth: 300)
                         DPInfoView()
                     } action: { dismiss() }
+                        .font(.system(size: 20))
                 }
             }
             .onReceive(Secretary.shared.$showDurationPickerInfo) { output in
