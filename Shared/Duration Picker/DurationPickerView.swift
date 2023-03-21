@@ -53,9 +53,7 @@ struct DurationPickerView: View {
                 .padding([.leading, .trailing, .bottom])
                 .padding(6)
                 .background { vRectangle }
-                .overlay {
-                    Info()
-                }
+                .overlay { Info() }
             }
         }
         .onReceive(Secretary.shared.$durationPickerMode) { output in
@@ -151,7 +149,13 @@ extension DurationPickerView {
     struct Info:View {
         var body: some View {
             ThinMaterialLabel(title: "Timer Duration") {
-                
+                VStack {
+                    Text("*Choose Duration and tap any*")
+                    Text("*yellow area*")
+                }
+                .foregroundColor(.secondary)
+                Divider().frame(maxWidth: 300)
+                DPInfoView()
             } action: {
                 
             }

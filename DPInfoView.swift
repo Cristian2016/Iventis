@@ -34,7 +34,7 @@ struct DPInfoView: View {
                 }
             }
         }
-        .font(.system(size: 20))
+        .font(.system(size: 22))
     }
 }
 
