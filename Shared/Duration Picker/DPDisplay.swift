@@ -26,14 +26,6 @@ extension DurationPickerView {
                 else { durationComponentsStack }
             }
             .frame(height: 100)
-            .frame(maxWidth: .infinity)
-            .overlay {
-                if showSaveAction {
-                    Push(.bottomRight) { Text("Save \(Image.tap)") }
-                    .font(.system(size: 16))
-                    .foregroundColor(.secondary)
-                }
-            }
             .allowsHitTesting(false)
             .onReceive(manager.$component) { received(component: $0) }
             .onReceive(manager.$displayIsEmpty) { if $0 { clearDisplay() }}
