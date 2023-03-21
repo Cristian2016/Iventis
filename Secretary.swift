@@ -19,10 +19,10 @@ class Secretary {
     ///.onMove view modifier will not be nil
 //    @Published var allowOnMove = false
     
-    private var precisionTimer = PrecisionTimer()
+    private var fiveSecTimer = PrecisionTimer()
     @Published var showBlueInfoButton = false {didSet{
         if !oldValue {
-            precisionTimer.setHandler(with: .now() + 5) { [weak self] in
+            fiveSecTimer.setHandler(with: .now() + 5) { [weak self] in
                 DispatchQueue.main.async { self?.showBlueInfoButton = false }
             }
         }
