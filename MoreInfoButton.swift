@@ -24,7 +24,11 @@ struct BlueInfoButton: View {
                             .font(.system(size: 80, weight: .light))
                             .symbolRenderingMode(.hierarchical)
                             .padding([.leading, .trailing], 10)
-                            .background(.ultraThickMaterial, in: RoundedRectangle(cornerRadius: 15))
+                            .background {
+                                RoundedRectangle(cornerRadius: 15)
+                                    .fill(.ultraThickMaterial)
+                                    .standardShadow()
+                            }
                     }
                 }
                 .tint(scheme == .dark ? .yellow : .blue)
