@@ -45,7 +45,6 @@ struct BlueInfoButton: View {
             case .durationPicker: print("durationPicker info")
             case .moreOptionsView:
                 Secretary.shared.showMoreOptionsHint = true
-                print("moreOptionsView info")
             case .palette: print("palette info")
             case .sessionDeleteActionView: print("sessionDeleteActionView info")
         }
