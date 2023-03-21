@@ -32,6 +32,8 @@ class Secretary {
     
     var topMostView:TopMostView = .bubble
     
+    @Published var showPaletteInfo = false
+    
     @Published var showMoreOptionsHint = false
     
     @Published var pairBubbleCellNeedsDisplay = false

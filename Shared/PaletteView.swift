@@ -26,7 +26,10 @@ struct PaletteView: View {
                     circles
                     if showPaletteInfo {
                         ThinMaterialLabel(title: "Create Bubbles") { hintLabelContent }
-                    action: { withAnimation { showPaletteInfo = false } }
+                    action: {
+                        withAnimation { showPaletteInfo = false }
+                        secretary.showPaletteInfo = false
+                    }
 
                     }
                     else { infoSymbol }
@@ -37,6 +40,13 @@ struct PaletteView: View {
         }
         .onReceive(secretary.$showPaletteView) { output in
             withAnimation { showPaletteView = output }
+        }
+        .onReceive(secretary.$showPaletteInfo) { output in
+            if output {
+                withAnimation {
+                    self.showPaletteInfo = true
+                }
+            }
         }
     }
     
