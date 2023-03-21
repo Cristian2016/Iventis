@@ -15,7 +15,7 @@ struct DPInfoView: View {
                 .scaledToFit()
                 .frame(height: 200)
             VStack(alignment: .leading, spacing: 4) {
-                Text("***Yellow Gesture Areas***")
+                Text("*Yellow Gesture Areas*")
                     .foregroundColor(.secondary)
                 VStack(alignment: .leading) {
                     Text("**Dismiss** \(Image.tap) Tap")
@@ -27,7 +27,11 @@ struct DPInfoView: View {
                     Text("*If \(Image.roundCheckmark) symbol shows*")
                         .foregroundColor(.secondary)
                 }
-                Text("**Clear Display** \(Image.leftSwipe) Swipe")
+                VStack(alignment: .leading) {
+                    Text("**Clear Display** \(Image.leftSwipe) Swipe")
+                    Text("*Any direction works*")
+                        .foregroundColor(.secondary)
+                }
             }
         }
         .font(.system(size: 20))
