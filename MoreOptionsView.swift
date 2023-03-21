@@ -218,20 +218,13 @@ extension MoreOptionsView {
             ZStack {
                 let delay = delayAsString
                 
+                let subtitle = "Start after a number of seconds"
+                
                 if showMoreOptionsHint {
-                    ThinMaterialLabel(title: "\(delay) Start Delay") {
-                        if !delay.isEmpty {
-                            Text("Delay start by \(input.userEditedDelay) sec")
-                                .foregroundColor(.secondary)
-                            Divider().frame(maxWidth: 300)
-                        } else {
-                            Text("Delay start by a number of seconds")
-                                .foregroundColor(.secondary)
-                            Divider().frame(maxWidth: 300)
-                        }
-                            Text("*Use Yellow Areas to*")
-                                .foregroundColor(.secondary)
-                            Divider().frame(maxWidth: 300)
+                    ThinMaterialLabel(title: "Start Delay", subtitle: subtitle) {
+                        Text("*Use Yellow Areas to*")
+                            .foregroundColor(.secondary)
+                        Divider().frame(maxWidth: 300)
                         
                         MoreOptionsInfoView()
                         

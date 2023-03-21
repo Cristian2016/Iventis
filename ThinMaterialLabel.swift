@@ -12,13 +12,16 @@ struct ThinMaterialLabel<Content:View>: View {
         let backgroundRadius = CGFloat(20)
     }
     
-    init(title:String? = nil, @ViewBuilder _ content:() -> Content, action: @escaping () -> ()) {
+    init(title:String? = nil, subtitle:String? = nil, @ViewBuilder _ content:() -> Content, action: @escaping () -> ()) {
         self.content = content()
         self.action = action
         self.title = title
+        self.subtitle = subtitle
     }
     
     private var title:String?
+    private var subtitle:String?
+    
     let content:Content
     private let action:() -> ()
     
@@ -33,6 +36,9 @@ struct ThinMaterialLabel<Content:View>: View {
                     .padding(.bottom, 1)
                     .font(.title2)
                     .minimumScaleFactor(0.1)
+                if let subtitle = subtitle {
+                    Text(subtitle)
+                }
                 Divider().frame(maxWidth: 300)
             }
             content
