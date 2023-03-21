@@ -88,7 +88,7 @@ struct SessionDeleteInfoView:View {
     private var content:some View {
         VStack(alignment: .leading) {
             Text("*Deletes session together with any associated Calendar Event*")
-                .fixedSize(horizontal: false, vertical: true) //⚠️
+                .forceMultipleLines() //⚠️
                 .foregroundColor(.secondary)
             
             Divider().frame(maxWidth: 300)
@@ -96,5 +96,11 @@ struct SessionDeleteInfoView:View {
             Text("**Cancel** \(Image.tap) Tap Outside Shape")
         }
         .font(.system(size: 20))
+    }
+}
+
+extension View {
+    func forceMultipleLines() -> some View {
+        self.fixedSize(horizontal: false, vertical: true)
     }
 }
