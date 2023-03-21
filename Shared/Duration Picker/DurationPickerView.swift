@@ -50,10 +50,12 @@ struct DurationPickerView: View {
                     Display { dismiss() }
                     digitsGrid
                 }
-//                .overlay { InfoButton() } //3
                 .padding([.leading, .trailing, .bottom])
                 .padding(6)
                 .background { vRectangle }
+                .overlay {
+                    Info()
+                }
             }
         }
         .onReceive(Secretary.shared.$durationPickerMode) { output in
@@ -146,24 +148,13 @@ struct DurationPickerView: View {
 }
 
 extension DurationPickerView {
-    struct InfoButton:View {
-        private let manager = Manager.shared
-        @State private var show = false
-        
+    struct Info:View {
         var body: some View {
-            ZStack {
-                if show {
-                    Push(.topLeft) {
-                        Button {
-                            print("show info")
-                        } label: {
-                            Image.info
-                        }
-                    }
-                    .tint(.lightGray)
-                }
+            ThinMaterialLabel(title: "Timer Duration") {
+                
+            } action: {
+                
             }
-            .onReceive(manager.$digits) { show = $0.isEmpty ? true : false }
         }
     }
 }
