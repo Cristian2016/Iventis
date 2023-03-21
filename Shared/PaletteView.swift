@@ -13,7 +13,7 @@ struct PaletteView: View {
     @EnvironmentObject private var viewModel:ViewModel
     @State private var tappedCircle:String?
     @State private var longPressedCircle:String?
-    @AppStorage("showPaletteHint", store: .shared) var showPaletteHint = true
+    @AppStorage("showPaletteHint", store: .shared) var showPaletteInfo = true
     private let secretary = Secretary.shared
     @State private var showPaletteView = false
     
@@ -24,9 +24,9 @@ struct PaletteView: View {
             if showPaletteView {
                 ZStack {
                     circles
-                    if showPaletteHint {
+                    if showPaletteInfo {
                         ThinMaterialLabel(title: "Create Bubbles") { hintLabelContent }
-                    action: { withAnimation { showPaletteHint = false } }
+                    action: { withAnimation { showPaletteInfo = false } }
 
                     }
                     else { infoSymbol }
@@ -74,7 +74,7 @@ struct PaletteView: View {
         Push(.topLeft) {Image.info }
         .foregroundColor(.label)
         .padding([.leading])
-        .onTapGesture { withAnimation { showPaletteHint = true } }
+        .onTapGesture { withAnimation { showPaletteInfo = true } }
     }
             
     // MARK: - Methods
