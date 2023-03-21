@@ -9,28 +9,28 @@ import SwiftUI
 
 struct DPInfoView: View {
     var body: some View {
-        HStack(alignment: .top) {
-            Image.dpv
-                .resizable()
-                .scaledToFit()
-                .frame(height: 200)
-            VStack(alignment: .leading, spacing: 4) {
-                Text("*Yellow Gesture Areas*")
-                    .foregroundColor(.secondary)
-                VStack(alignment: .leading) {
-                    Text("**Dismiss** \(Image.tap) Tap")
-                    Text("*If Duration not set*")
-                        .foregroundColor(.secondary)
-                }
-                VStack(alignment: .leading) {
-                    Text("**Create Timer** \(Image.tap) Tap")
-                    Text("*If \(Image.roundCheckmark) symbol shows*")
-                        .foregroundColor(.secondary)
-                }
-                VStack(alignment: .leading) {
-                    Text("**Clear Display** \(Image.leftSwipe) Swipe")
-                    Text("*Any direction works*")
-                        .foregroundColor(.secondary)
+        ScrollView {
+            HStack(alignment: .top) {
+                Image.dpv
+                    .resizable()
+                    .scaledToFit()
+                    .frame(height: 200)
+                VStack(alignment: .leading, spacing: 10) {
+                    VStack(alignment: .leading) {
+                        Text("**Dismiss** \(Image.tap) Tap")
+                        Text("*If Duration not set*")
+                            .foregroundColor(.secondary)
+                    }
+                    VStack(alignment: .leading) {
+                        Text("**Create Timer** \(Image.tap) Tap")
+                        Text("*If \(Image.roundCheckmark) symbol shows*")
+                            .foregroundColor(.secondary)
+                    }
+                    VStack(alignment: .leading) {
+                        Text("**Clear Display** \(Image.leftSwipe) Swipe")
+                        Text("*Any direction works*")
+                            .foregroundColor(.secondary)
+                    }
                 }
             }
         }

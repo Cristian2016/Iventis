@@ -156,10 +156,9 @@ extension DurationPickerView {
                         .fill(Color.label.opacity(0.8))
                         .ignoresSafeArea()
                     
-                    ThinMaterialLabel(title: "Timer Duration") {
+                    ThinMaterialLabel(title: "Set Timer Duration") {
                         VStack {
-                            Text("*Choose Duration, then tap any*")
-                            Text("*yellow area*")
+                            Text("*Use Yellow Areas to*")
                         }
                         .foregroundColor(.secondary)
                         Divider().frame(maxWidth: 300)
