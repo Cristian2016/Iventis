@@ -36,9 +36,7 @@ struct ThinMaterialLabel<Content:View>: View {
                     .padding(.bottom, 1)
                     .font(.system(size: 25, weight: .medium))
                     .minimumScaleFactor(0.1)
-                if let subtitle = subtitle {
-                    Text("*\(subtitle)*")
-                }
+                if let subtitle = subtitle { Text("*\(subtitle)*") }
                 Divider().frame(maxWidth: 300)
             }
             content
@@ -52,8 +50,7 @@ struct ThinMaterialLabel<Content:View>: View {
     // MARK: - Legos
     private var dismissButton:some View {
         Button { action() } label: {
-            Text("OK")
-                .frame(maxWidth: .infinity)
+            Text("OK").frame(maxWidth: .infinity)
         }
         .tint(.red)
         .buttonStyle(.borderedProminent)
