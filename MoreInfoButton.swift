@@ -48,7 +48,7 @@ struct BlueInfoButton: View {
             case .palette:
                 Secretary.shared.showPaletteInfo = true
             case .sessionDeleteActionView:
-                print("sessionDeleteActionView info")
+                Secretary.shared.showSessionDeleteInfo = true
         }
     }
 }
@@ -56,5 +56,30 @@ struct BlueInfoButton: View {
 struct BlueInfoButton_Previews: PreviewProvider {
     static var previews: some View {
         BlueInfoButton()
+    }
+}
+
+struct SessionDeleteInfoView:View {
+    @State private var show = false
+    
+    var body: some View {
+        ZStack {
+            if show {
+                ThinMaterialLabel(title: "Delete Session") {
+                    
+                } action: {
+                    withAnimation {
+                        Secretary.shared.showSessionDeleteInfo = false
+                    }
+                }
+            }
+        }
+        .onReceive(Secretary.shared.$showSessionDeleteInfo) { output in
+            if output {
+                withAnimation {
+                    
+                }
+            }
+        }
     }
 }

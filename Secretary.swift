@@ -109,6 +109,8 @@ class Secretary {
     
     @Published var showDetailViewInfo = false
     
+    @Published var showSessionDeleteInfo = false
+    
     func scrollToTop() {
         if !shouldScrollToTop { shouldScrollToTop = true }
     } //1

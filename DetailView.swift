@@ -54,6 +54,7 @@ struct DetailView: View {
             }
         }
         .overlay { ShowDetailViewInfoView() }
+        .overlay { SessionDeleteInfoView() }
     }
         
     let topDetailHeight = CGFloat(140)
