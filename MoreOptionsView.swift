@@ -67,7 +67,7 @@ struct MoreOptionsView: View {
                     }
                 }
             }
-            Hint(input)
+            Info(input)
         }
         .onReceive(secretary.$moreOptionsBuble) {
             if let bubble = $0 {
@@ -200,7 +200,7 @@ struct MoreOptionsView: View {
 }
 
 extension MoreOptionsView {
-    struct Hint: View {
+    struct Info: View {
         private let input:Input
         @State private var showMoreOptionsHint = false
         let metrics = Metrics()
