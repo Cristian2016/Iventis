@@ -17,7 +17,7 @@ struct DPInfoView: View {
             VStack(alignment: .leading, spacing: 10) {
                 VStack(alignment: .leading) {
                     Text("**Create Timer** \(Image.tap) Tap")
-                    Text("*Only if \(Image.roundCheckmark) symbol shows*")
+                    Text("*Only if \(Image.roundCheckmark) shows*")
                         .foregroundColor(.secondary)
                 }
                 VStack(alignment: .leading) {
