@@ -152,6 +152,10 @@ extension DurationPickerView {
         var body: some View {
             ZStack {
                 if show {
+                    Rectangle()
+                        .fill(Color.label.opacity(0.8))
+                        .ignoresSafeArea()
+                    
                     ThinMaterialLabel(title: "Timer Duration") {
                         VStack {
                             Text("*Choose Duration and tap any*")
