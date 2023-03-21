@@ -10,6 +10,7 @@ import MyPackage
 
 struct BlueInfoButton: View {
     @State private var show = false
+    @Environment(\.colorScheme) private var scheme
     
     var body: some View {
         ZStack {
@@ -26,8 +27,8 @@ struct BlueInfoButton: View {
                             .background(.ultraThickMaterial, in: RoundedRectangle(cornerRadius: 15))
                     }
                 }
-                .tint(.blue)
-                .padding([.leading, .top], 4)
+                .tint(scheme == .dark ? .yellow : .blue)
+                .padding([.leading], 4)
             }
         }
         .onReceive(Secretary.shared.$showBlueInfoButton) { output in
