@@ -89,7 +89,7 @@ struct SessionDeleteInfoView:View {
         VStack(alignment: .leading) {
             VStack { //to place it in the middle
                 Text("*Also removes any associated Calendar Event*")
-                    .fixedSize(horizontal: false, vertical: true)
+                    .fixedSize(horizontal: false, vertical: true) //⚠️
             }
             .foregroundColor(.secondary)
             
