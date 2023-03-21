@@ -88,6 +88,18 @@ struct MoreOptionsView: View {
         }
     }
     
+    // MARK: -
+    private var swipe:some Gesture {
+        DragGesture(minimumDistance: 10)
+            .onEnded { value in
+                if input!.userEditedDelay != 0 {
+                    UserFeedback.doubleHaptic(.heavy)
+                    input!.userEditedDelay = 0
+                    viewModel.removeStartDelay(for: input?.bubble)
+                }
+            }
+    }
+    
     // MARK: - Lego
     private var startDelayDisplay:some View {
         ZStack(alignment: .topLeading) {
@@ -113,23 +125,7 @@ struct MoreOptionsView: View {
             .frame(maxWidth: .infinity)
             .background(.white) //
             .onTapGesture { saveDelay() }
-            .gesture(
-                DragGesture(minimumDistance: 10)
-                    .onEnded { value in
-                        if input!.userEditedDelay != 0 {
-                            UserFeedback.doubleHaptic(.heavy)
-                            input!.userEditedDelay = 0
-                            viewModel.removeStartDelay(for: input?.bubble)
-                        }
-                    }
-            )
-            Button {
-                secretary.showMoreOptionsHint = true
-            } label: {
-                Image.info
-                    .font(.system(size: 24))
-                    .foregroundColor(.black)
-            }
+            .gesture(swipe) //remove delay
         }
     }
     

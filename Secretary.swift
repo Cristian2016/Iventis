@@ -29,7 +29,7 @@ class Secretary {
         }
     }}
     
-    var topMostView:TopMostView = .none {didSet{
+    var topMostView:TopMostView = .bubble {didSet{
         print("topmostview \(topMostView)")
     }}
     
@@ -239,7 +239,6 @@ extension Secretary {
 
 extension Secretary {
     enum TopMostView {
-        case none
         case palette
         case durationPicker
         case moreOptionsView
