@@ -172,6 +172,7 @@ extension UIViewController {
     open override func motionBegan(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
             if motion == .motionShake {
                 if !Secretary.shared.showBlueInfoButton {
+                    UserFeedback.singleHaptic(.heavy)
                     Secretary.shared.showBlueInfoButton = true
                 }
             }
