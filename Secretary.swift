@@ -19,7 +19,14 @@ class Secretary {
     ///.onMove view modifier will not be nil
 //    @Published var allowOnMove = false
     
-    @Published var showBlueInfoButton = false
+    private var precisionTimer = PrecisionTimer()
+    @Published var showBlueInfoButton = false {didSet{
+        if !oldValue {
+            precisionTimer.setHandler(with: .now() + 5) { [weak self] in
+                DispatchQueue.main.async { self?.showBlueInfoButton = false }
+            }
+        }
+    }}
     
     var topMostView:TopMostView = .none {didSet{
         print("topmostview \(topMostView)")
