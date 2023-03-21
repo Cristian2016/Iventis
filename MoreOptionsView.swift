@@ -202,7 +202,7 @@ struct MoreOptionsView: View {
 extension MoreOptionsView {
     struct Info: View {
         private let input:Input
-        @State private var showMoreOptionsHint = false
+        @State private var show = false
         let metrics = Metrics()
         
         private var delayAsString:String {
@@ -219,7 +219,11 @@ extension MoreOptionsView {
                 let title = "Start Delay"
                 let subtitle = "Start after a number of seconds"
                 
-                if showMoreOptionsHint {
+                if show {
+                    Rectangle()
+                        .fill(Color.label.opacity(0.8))
+                        .ignoresSafeArea()
+                    
                     ThinMaterialLabel(title: title, subtitle: subtitle) {
                         Text("*Use Yellow Areas to*")
                             .foregroundColor(.secondary)
@@ -231,7 +235,7 @@ extension MoreOptionsView {
                 }
             }
             .onReceive(Secretary.shared.$showMoreOptionsInfo) { output in
-                withAnimation { showMoreOptionsHint = output }
+                withAnimation { show = output }
             }
         }
         
