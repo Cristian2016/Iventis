@@ -57,10 +57,8 @@ struct SessionDeleteActionAlert: View {
                     trashLabel
                     deleteButton
                 }
-                .offset(x: 0, y: 12)
                 .background { roundedBackground }
             }
-           
         }
         .onReceive(secretary.$sessionToDelete) {
             if let value = $0 {

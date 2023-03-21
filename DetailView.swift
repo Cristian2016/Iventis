@@ -53,6 +53,9 @@ struct DetailView: View {
                 if isAddTagButtonVisible { AddNoteButton() }
             }
         }
+        .overlay {
+            SessionDeleteActionAlert()
+        }
         .overlay { ShowDetailViewInfoView() }
         .overlay { SessionDeleteInfoView() }
     }

@@ -35,8 +35,6 @@ struct ViewHierarchy: View {
                 }
             }
             
-            SessionDeleteActionAlert()
-            
             if let pair = notesForPair { PairStickyNoteList(pair) }
             MoreOptionsView()
             AlwaysOnDisplayAlertView() //shown until user removes it forever
