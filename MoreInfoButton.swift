@@ -6,19 +6,23 @@
 //
 
 import SwiftUI
+import MyPackage
 
 struct BlueInfoButton: View {
     @State private var show = false
     
     var body: some View {
         ZStack {
-            if show {
-                Button {
-                    showInfo()
-                } label: {
-                    Image(systemName: "info.square.fill")
-                        .font(.system(size: 80, weight: .light))
-                        .symbolRenderingMode(.hierarchical)
+            if true {
+                Push(.topLeft) {
+                    Button {
+                        showInfo()
+                        Secretary.shared.showBlueInfoButton = false
+                    } label: {
+                        Image(systemName: "info.square.fill")
+                            .font(.system(size: 80, weight: .light))
+                            .symbolRenderingMode(.hierarchical)
+                    }
                 }
                 .buttonStyle(.bordered)
                 .tint(.blue)
