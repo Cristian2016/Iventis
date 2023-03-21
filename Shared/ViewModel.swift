@@ -461,6 +461,15 @@ extension ViewModel {
             let thisBubble = self.controller.grabObj(objID) as! Bubble
             thisBubble.isPinned.toggle()
             self.secretary.updateBubblesReport(.pin(thisBubble))
+            
+            if self.secretary.bubblesReport.pinned == 0 {
+                //if no pinned bubbles and ordinary are hidden, show all bubbles
+                DispatchQueue.main.async {
+                    withAnimation {
+                        self.secretary.showFavoritesOnly = false
+                    }
+                }
+            }
             self.controller.save(bContext)
         }
     }
