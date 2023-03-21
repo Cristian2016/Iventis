@@ -23,10 +23,11 @@ struct BlueInfoButton: View {
                             .font(.system(size: 80, weight: .light))
                             .symbolRenderingMode(.hierarchical)
                             .padding([.leading, .trailing], 10)
-                            .background(.thinMaterial, in: RoundedRectangle(cornerRadius: 15))
+                            .background(.ultraThickMaterial, in: RoundedRectangle(cornerRadius: 15))
                     }
                 }
                 .tint(.blue)
+                .padding([.leading, .top], 4)
             }
         }
         .onReceive(Secretary.shared.$showBlueInfoButton) { output in
