@@ -13,7 +13,7 @@ struct BlueInfoButton: View {
     
     var body: some View {
         ZStack {
-            if true {
+            if show {
                 Push(.topLeft) {
                     Button {
                         showInfo()
@@ -22,9 +22,10 @@ struct BlueInfoButton: View {
                         Image(systemName: "info.square.fill")
                             .font(.system(size: 80, weight: .light))
                             .symbolRenderingMode(.hierarchical)
+                            .padding([.leading, .trailing], 10)
+                            .background(.thinMaterial, in: RoundedRectangle(cornerRadius: 15))
                     }
                 }
-                .buttonStyle(.bordered)
                 .tint(.blue)
             }
         }
