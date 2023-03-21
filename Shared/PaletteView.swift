@@ -19,6 +19,11 @@ struct PaletteView: View {
     
     private let colums = Array(repeating: GridItem(), count: 3)
     
+    private func dismiss() {
+        withAnimation { showPaletteInfo = false }
+        secretary.showPaletteInfo = false
+    }
+    
     var body: some View {
         ZStack {
             if showPaletteView {
@@ -26,13 +31,8 @@ struct PaletteView: View {
                     circles
                     if showPaletteInfo {
                         ThinMaterialLabel(title: "Create Bubbles") { hintLabelContent }
-                    action: {
-                        withAnimation { showPaletteInfo = false }
-                        secretary.showPaletteInfo = false
+                    action: { dismiss() }
                     }
-
-                    }
-                    else { infoSymbol }
                 }
                 .gesture(swipeGesture)
                 .transition(.move(edge: .leading))
@@ -78,13 +78,6 @@ struct PaletteView: View {
                 Text("**Dismiss** \(Image.swipeLeft) Swipe Left")
             }
         }
-    }
-    
-    private var infoSymbol:some View {
-        Push(.topLeft) {Image.info }
-        .foregroundColor(.label)
-        .padding([.leading])
-        .onTapGesture { withAnimation { showPaletteInfo = true } }
     }
             
     // MARK: - Methods
