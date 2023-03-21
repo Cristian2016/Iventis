@@ -25,8 +25,6 @@ struct ViewHierarchy: View {
     private let viewContext = PersistenceController.shared.container.viewContext
     
     var body: some View {
-//        let _ = print("ViewHierarchy body")
-        
         ZStack {
             if UIDevice.isIPad { iPadViewHierarchy() }
             else { iPhoneViewHierarchy() }
@@ -44,12 +42,12 @@ struct ViewHierarchy: View {
             AlwaysOnDisplayAlertView() //shown until user removes it forever
             AlwaysOnDisplayConfirmationView() //shown each time user toggles the button in toolbar
             if bubbleNotesShowing { BubbleStickyNoteList(notesForBubble!) }
+            BlueInfoButton()
         }
         .onAppear { createBubblesOnFirstAppLaunch() } //1
         .environment(\.managedObjectContext, viewContext)
         .environmentObject(viewModel) //2
         .environmentObject(layoutViewModel) //2
-        //listen to publishers and listen for changes
         .onReceive(secretary.$deleteAction_bRank) { deleteActionBubbleRank = $0 }
         .onReceive(viewModel.notesForPair) { notesForPair = ($0 != nil) ? $0! : nil }
         .onReceive(viewModel.notesForBubble) { notesForBubble = ($0 != nil) ? $0! : nil }

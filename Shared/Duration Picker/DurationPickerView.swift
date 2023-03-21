@@ -171,7 +171,9 @@ extension DurationPickerView {
 extension UIViewController {
     open override func motionBegan(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
             if motion == .motionShake {
-                print("shook")
+                if !Secretary.shared.showBlueInfoButton {
+                    Secretary.shared.showBlueInfoButton = true
+                }
             }
         }
     }

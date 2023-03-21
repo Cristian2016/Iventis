@@ -19,6 +19,8 @@ class Secretary {
     ///.onMove view modifier will not be nil
 //    @Published var allowOnMove = false
     
+    @Published var showBlueInfoButton = false
+    
     var topMostView:TopMostView = .none {didSet{
         print("topmostview \(topMostView)")
     }}

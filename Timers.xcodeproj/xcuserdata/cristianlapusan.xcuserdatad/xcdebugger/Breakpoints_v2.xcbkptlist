@@ -243,62 +243,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "F17DEDD5-CDFF-424A-AE3A-3DF0486E535C"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "Yes"
-            filePath = "Shared/ViewHierarchy.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "29"
-            endingLineNumber = "29"
-            landmarkName = "body"
-            landmarkType = "24">
-            <Actions>
-               <BreakpointActionProxy
-                  ActionExtensionID = "Xcode.BreakpointAction.Sound">
-                  <ActionContent
-                     soundName = "Blow">
-                  </ActionContent>
-               </BreakpointActionProxy>
-            </Actions>
-            <Locations>
-               <Location
-                  uuid = "F17DEDD5-CDFF-424A-AE3A-3DF0486E535C - b953213ec6d7651b"
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Timers.ViewHierarchy.body.getter : some"
-                  moduleName = "Timers"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/cristianlapusan/Downloads/Timers/Shared/ViewHierarchy.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "30"
-                  endingLineNumber = "30"
-                  offsetFromSymbolStart = "1184">
-               </Location>
-               <Location
-                  uuid = "F17DEDD5-CDFF-424A-AE3A-3DF0486E535C - 78e95ae31d22d80c"
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 () -&gt; SwiftUI.TupleView&lt;(SwiftUI._ConditionalContent&lt;Timers.iPadViewHierarchy, Timers.iPhoneViewHierarchy&gt;, Swift.Optional&lt;Swift.Optional&lt;Timers.BubbleDeleteActionAlert&gt;&gt;, Timers.SessionDeleteActionAlert, Swift.Optional&lt;Swift.Optional&lt;Timers.PairStickyNoteList&gt;&gt;, Timers.MoreOptionsView, Timers.AlwaysOnDisplayAlertView, Timers.AlwaysOnDisplayConfirmationView, Swift.Optional&lt;Timers.BubbleStickyNoteList&gt;)&gt; in Timers.ViewHierarchy.body.getter : some"
-                  moduleName = "Timers"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/cristianlapusan/Downloads/Timers/Shared/ViewHierarchy.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "31"
-                  endingLineNumber = "31"
-                  offsetFromSymbolStart = "972">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "92AE5A6E-4AF7-4177-A398-E9070FF3B525"
             shouldBeEnabled = "No"
             ignoreCount = "0"

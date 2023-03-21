@@ -8,17 +8,27 @@
 import SwiftUI
 
 struct BlueInfoButton: View {
+    @State private var show = false
+    
     var body: some View {
-        Button {
-            showInfo()
-        } label: {
-            Image(systemName: "info.square.fill")
-                .font(.system(size: 80, weight: .light))
-                .symbolRenderingMode(.hierarchical)
-//                .foregroundColor(.black)
+        ZStack {
+            if show {
+                Button {
+                    showInfo()
+                } label: {
+                    Image(systemName: "info.square.fill")
+                        .font(.system(size: 80, weight: .light))
+                        .symbolRenderingMode(.hierarchical)
+                }
+                .buttonStyle(.bordered)
+                .tint(.blue)
+            }
         }
-        .buttonStyle(.bordered)
-        .tint(.blue)
+        .onReceive(Secretary.shared.$showBlueInfoButton) { output in
+            withAnimation {
+                show = output ? true : false
+            }
+        }
     }
     
     private func showInfo() {
