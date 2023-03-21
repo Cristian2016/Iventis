@@ -224,7 +224,7 @@ extension MoreOptionsView {
                         .fill(Color.label.opacity(0.8))
                         .ignoresSafeArea()
                     
-                    ThinMaterialLabel(title: title, subtitle: "*\(subtitle)*") {
+                    ThinMaterialLabel(title: title, subtitle: subtitle) {
                         Text("*Use Yellow Areas to*")
                             .foregroundColor(.secondary)
                         Divider().frame(maxWidth: 300)

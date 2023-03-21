@@ -37,7 +37,7 @@ struct ThinMaterialLabel<Content:View>: View {
                     .font(.system(size: 25, weight: .medium))
                     .minimumScaleFactor(0.1)
                 if let subtitle = subtitle {
-                    Text(subtitle)
+                    Text("*\(subtitle)*")
                 }
                 Divider().frame(maxWidth: 300)
             }
@@ -57,7 +57,7 @@ struct ThinMaterialLabel<Content:View>: View {
         }
         .tint(.red)
         .buttonStyle(.borderedProminent)
-        .font(.system(size: 20, weight: .medium))
+        .font(.system(size: 24, weight: .medium))
     }
     
     private var roundedBackground:some View {
