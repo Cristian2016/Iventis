@@ -21,6 +21,7 @@ class Secretary {
 //    @Published var allowOnMove = false
     
     private var fiveSecTimer = PrecisionTimer() //2
+    
     @Published var showBlueInfoButton = false {didSet{
         if !oldValue {
             fiveSecTimer.setHandler(with: .now() + 5) { [weak self] in
@@ -29,9 +30,7 @@ class Secretary {
         }
     }}
     
-    var topMostView:TopMostView = .bubble {didSet{
-        print("topmostview \(topMostView)")
-    }}
+    var topMostView:TopMostView = .bubble
     
     @Published var showMoreOptionsHint = false
     
