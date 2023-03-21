@@ -72,7 +72,7 @@
 		1F83A44F29A965D90058E6E2 /* DigitsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F83A44E29A965D90058E6E2 /* DigitsView.swift */; };
 		1F8AAFA329927B2900328AC7 /* FramePortrait.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8AAFA229927B2900328AC7 /* FramePortrait.swift */; };
 		1F8B6965283790CF006540CB /* BubbleStickyNoteList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8B6964283790CF006540CB /* BubbleStickyNoteList.swift */; };
-		1F96282729C9070000E93760 /* MoreInfoButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F96282629C9070000E93760 /* MoreInfoButton.swift */; };
+		1F96282729C9070000E93760 /* BlueInfoButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F96282629C9070000E93760 /* BlueInfoButton.swift */; };
 		1F97B7DD2809B311002FFCA3 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F97B7DC2809B311002FFCA3 /* Colors.swift */; };
 		1F98D78A286AF8A300C0A973 /* DeleteRow_InfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F98D789286AF8A300C0A973 /* DeleteRow_InfoView.swift */; };
 		1F991A7029A7545C0045B04C /* TopCellDurationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F991A6F29A7545C0045B04C /* TopCellDurationView.swift */; };
@@ -226,7 +226,7 @@
 		1F845FAD286EF8730053EAE6 /* WidgetsExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = WidgetsExtension.entitlements; sourceTree = "<group>"; };
 		1F8AAFA229927B2900328AC7 /* FramePortrait.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FramePortrait.swift; sourceTree = "<group>"; };
 		1F8B6964283790CF006540CB /* BubbleStickyNoteList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BubbleStickyNoteList.swift; sourceTree = "<group>"; };
-		1F96282629C9070000E93760 /* MoreInfoButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreInfoButton.swift; sourceTree = SOURCE_ROOT; };
+		1F96282629C9070000E93760 /* BlueInfoButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlueInfoButton.swift; sourceTree = SOURCE_ROOT; };
 		1F97B7DC2809B311002FFCA3 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		1F98D789286AF8A300C0A973 /* DeleteRow_InfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteRow_InfoView.swift; sourceTree = "<group>"; };
 		1F991A6F29A7545C0045B04C /* TopCellDurationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopCellDurationView.swift; sourceTree = SOURCE_ROOT; };
@@ -417,7 +417,7 @@
 			isa = PBXGroup;
 			children = (
 				1F112A2129C9D8EC00D4A541 /* InfoAssets.xcassets */,
-				1F96282629C9070000E93760 /* MoreInfoButton.swift */,
+				1F96282629C9070000E93760 /* BlueInfoButton.swift */,
 				1FF8255229C751160003E4A0 /* Duration Picker */,
 				1F53DD6B29BEFB8A00E33B77 /* PrecisionTimer.swift */,
 				1F38A00329B9000D009AD543 /* yPositionTracker.swift */,
@@ -703,7 +703,7 @@
 				1FF5AC3A29A9EDC4000DD0E2 /* NeedlePositionKey.swift in Sources */,
 				1FF37CAE298BC7DF00AF0EC8 /* SmallTextHint.swift in Sources */,
 				1FD2A3DD29C10C6C00EB7B10 /* DeleteConfirmationLabel.swift in Sources */,
-				1F96282729C9070000E93760 /* MoreInfoButton.swift in Sources */,
+				1F96282729C9070000E93760 /* BlueInfoButton.swift in Sources */,
 				1F48F55A286AE5B30071386A /* EmptyNote_InfoView.swift in Sources */,
 				1F9B6AF0280950D600C0A725 /* ViewModel.swift in Sources */,
 				1F74878B286EB64E0092674F /* BubbleCell_Info.swift in Sources */,
