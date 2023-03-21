@@ -30,17 +30,14 @@ extension DurationPickerView {
             .overlay {
                 if showSaveAction {
                     Push(.bottomRight) { Text("Save \(Image.tap)") }
-                    .font(.system(size: 18))
+                    .font(.system(size: 16))
                     .foregroundColor(.secondary)
                 }
             }
             .allowsHitTesting(false)
             .onReceive(manager.$component) { received(component: $0) }
             .onReceive(manager.$displayIsEmpty) { if $0 { clearDisplay() }}
-            .onReceive(manager.$digits) { output in
-                let isDurationValid = output.count%2 == 0 && output.reduce(0) { $0 + $1 } != 0
-                showSaveAction = isDurationValid ? true : false
-            }
+            .onReceive(manager.$isDurationValid) { showSaveAction = $0 ? true : false }
         }
         
         // MARK: - Lego

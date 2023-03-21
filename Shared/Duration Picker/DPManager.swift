@@ -20,6 +20,12 @@ extension DurationPickerView {
             self.charactersToDisable() //update digitsGrid
             
             DispatchQueue.global().async {
+               let isDurationValid = count%2 == 0 && digits.reduce(0) { $0 + $1 } != 0
+                
+                DispatchQueue.main.async {
+                    self.isDurationValid = isDurationValid
+                }
+                
                 switch count {
                     case 0:
                         DispatchQueue.main.async { self.displayIsEmpty = true }
@@ -57,6 +63,7 @@ extension DurationPickerView {
         @Published var notAllowedCharacters = Characters(charactersIn: "56789✕")
         @Published var component:Component?
         @Published var displayIsEmpty = false //when true display will be cleared
+        @Published var isDurationValid = false
         
         struct DisplayComponents {
             let hr:String
