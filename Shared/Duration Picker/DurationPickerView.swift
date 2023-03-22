@@ -8,6 +8,7 @@
 //1 self.color:Color? because self will appear when the user has chosen a color for the timer to be created. self will init with no values
 //2 on iPhone 8 looks bad without a bit of padding
 //3 order matters! it is applied before applying the paddings to the vRoundedRect
+//4 this is how app knows topMostView displayed to the user is the DurationPickerView
 
 import SwiftUI
 import MyPackage
@@ -143,11 +144,10 @@ struct DurationPickerView: View {
         }
     }
     
-    ///this is how app knows topMostView displayed to the user is the DurationPickerView
     private func handle(tricolor:Color.Tricolor?) {
         guard let tricolor = tricolor else { return }
         Secretary.shared.topMostView = .durationPicker
-    }
+    } //4
 }
 
 extension DurationPickerView {
