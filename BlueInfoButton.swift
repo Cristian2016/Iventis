@@ -73,9 +73,7 @@ struct SessionDeleteInfoView:View {
                 let title = "Delete Session"
                 let subtitle = "Any associated Calendar Event will also be removed"
                 
-                Color.black.opacity(0.6)
-                    .ignoresSafeArea()
-                
+                Color.black.opacity(0.6).ignoresSafeArea()
                 ThinMaterialLabel(title, subtitle) { infoContent } action: { dismiss() }
             }
         }
