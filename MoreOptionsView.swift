@@ -221,7 +221,7 @@ extension MoreOptionsView {
                 
                 if show {
                     Rectangle()
-                        .fill(Color.label.opacity(0.8))
+                        .fill(Color.black.opacity(0.8))
                         .ignoresSafeArea()
                     
                     ThinMaterialLabel(title: title, subtitle: subtitle) {
