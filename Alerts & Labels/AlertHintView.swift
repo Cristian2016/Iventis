@@ -30,12 +30,12 @@ struct AlertHintView: View {
                 ScrollView {
                     VStack(alignment: .leading, spacing: 8) {
                         VStack(alignment: .leading) {
-                            Text("*Caffeinated* overrides Auto-Lock option")
+                            Text("***Caffeinated*** overrides Auto-Lock option")
                             Text("*Settings App > Display & Brightness > Auto-Lock*")
                                 .foregroundColor(.secondary)
                         }
                         VStack(alignment: .leading) {
-                            Text("Regardless of the current device settings, Auto-Lock for this app is now set to 'Never'. Display will not sleep, unless 'Caffeinated' is switched off")
+                            Text("Regardless of the current device settings, Auto-Lock for this app is now set to 'Never'. Display will not sleep, unless ***Caffeinated*** is switched off")
                         }
                     }
                 }
