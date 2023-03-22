@@ -26,32 +26,42 @@ struct AlertHintView: View {
     
     var body: some View {
         ZStack {
-            Color.white.opacity(0.9)
-            VStack(spacing: 10) {
-                Image(systemName: alertContent.symbol ?? "")
-                    .foregroundColor(.yellow)
-                    .font(.system(size: 50))
-                HStack {
-                    Image(systemName: alertContent.titleSymbol ?? "")
-                    Text(alertContent.title)
+            ThinMaterialLabel("Caffeinated", "App had a cup of coffee and will not sleep!") {
+                VStack {
+                    Text("This option overrides Auto-Lock option. Regardless of the current device setting, Auto-Lock for this app is now set to 'Never'")
+                    Text("*Settings App > Display & Brightness > Auto-Lock*")
+                        .foregroundColor(.secondary)
                 }
-                .font(.system(size: 26))
-                .fontWeight(.medium)
-                Text(alertContent.content ?? "")
-                    .foregroundColor(.secondary)
-                    .padding([.leading, .trailing])
-                Button("OK") { buttonAction() }
-                .buttonStyle(.bordered)
-                .fontWeight(.medium)
-                .tint(.red)
-                .padding()
+                .forceMultipleLines()
+            } action: {
+                buttonAction()
             }
-            .background(
-                RoundedRectangle(cornerRadius: 20)
-                    .fill(Color.background2)
-                    .standardShadow()
-            )
-            .frame(maxWidth: 320)
+
+//            VStack(spacing: 10) {
+//                Image(systemName: alertContent.symbol ?? "")
+//                    .foregroundColor(.yellow)
+//                    .font(.system(size: 50))
+//                HStack {
+//                    Image(systemName: alertContent.titleSymbol ?? "")
+//                    Text(alertContent.title)
+//                }
+//                .font(.system(size: 26))
+//                .fontWeight(.medium)
+//                Text(alertContent.content ?? "")
+//                    .foregroundColor(.secondary)
+//                    .padding([.leading, .trailing])
+//                Button("OK") { buttonAction() }
+//                .buttonStyle(.bordered)
+//                .fontWeight(.medium)
+//                .tint(.red)
+//                .padding()
+//            }
+//            .background(
+//                RoundedRectangle(cornerRadius: 20)
+//                    .fill(Color.background2)
+//                    .standardShadow()
+//            )
+//            .frame(maxWidth: 320)
         }
         .onTapGesture { dismissAction() }
     }
