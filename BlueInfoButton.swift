@@ -92,7 +92,6 @@ struct SessionDeleteInfoView:View {
                 .foregroundColor(.secondary)
             
             Divider().frame(maxWidth: 300)
-            Text("**Delete** \(Image.tap) Tap")
             Text("**Dismiss** \(Image.tap) Tap Outside Shape")
         }
         .font(.system(size: 20))
