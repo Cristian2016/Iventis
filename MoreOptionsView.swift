@@ -220,9 +220,7 @@ extension MoreOptionsView {
                 let subtitle = "Start after a number of seconds"
                 
                 if show {
-                    Rectangle()
-                        .fill(Color.black.opacity(0.8))
-                        .ignoresSafeArea()
+                    Color.black.opacity(0.6).ignoresSafeArea()
                     
                     ThinMaterialLabel(title, subtitle) { MoreOptionsInfoView() } action: { showInfo() }
                     .font(metrics.infoFont)
