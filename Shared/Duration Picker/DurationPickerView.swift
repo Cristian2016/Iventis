@@ -163,11 +163,6 @@ extension DurationPickerView {
                         .ignoresSafeArea()
                     
                     ThinMaterialLabel(title: "Timer Duration") {
-                        VStack {
-                            Text("*Use Yellow Areas to*")
-                        }
-                        .foregroundColor(.secondary)
-                        Divider().frame(maxWidth: 300)
                         DPInfoView()
                     } action: { dismiss() }
                         .font(.system(size: 20))
