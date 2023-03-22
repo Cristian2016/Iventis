@@ -71,8 +71,7 @@ struct SessionDeleteInfoView:View {
         ZStack {
             if show {
                 let subtitle = "Any associated Calendar Event will also be removed"
-                Rectangle()
-                    .fill(Color.black.opacity(0.7))
+                Color.black.opacity(0.6)
                     .ignoresSafeArea()
                 
                 ThinMaterialLabel(title: "Delete Session", subtitle: subtitle) {
