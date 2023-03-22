@@ -143,6 +143,7 @@ struct DurationPickerView: View {
         }
     }
     
+    ///this is how app knows topMostView displayed to the user is the DurationPickerView
     private func handle(tricolor:Color.Tricolor?) {
         guard let tricolor = tricolor else { return }
         Secretary.shared.topMostView = .durationPicker
