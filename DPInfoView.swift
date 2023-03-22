@@ -14,7 +14,7 @@ struct DPInfoView: View {
                 .resizable()
                 .scaledToFit()
                 .frame(height: 210)
-            VStack(alignment: .leading) {
+            VStack(alignment: .leading, spacing: 8) {
                 Text("*Use Yellow Areas to*")
                     .foregroundColor(.secondary)
                 Divider()
@@ -25,8 +25,6 @@ struct DPInfoView: View {
                 }
                 VStack(alignment: .leading) {
                     Text("**Clear Display** \(Image.leftSwipe) Swipe")
-                    Text("*Any direction works*")
-                        .foregroundColor(.secondary)
                 }
                 VStack(alignment: .leading) {
                     Text("**Dismiss** \(Image.tap) Tap")
