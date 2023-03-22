@@ -13,40 +13,8 @@ struct SessionDeleteActionAlert: View {
     @EnvironmentObject private var layoutViewModel:LayoutViewModel
     private let secretary = Secretary.shared
     
-    @State private var metrics:Metrics?
-    
-    struct Input {
-        let session:Session
-        let sessionRank:Int
-    }
-    
     @State private var input:Input?
-    
-    struct Metrics {
-        let backgroundRadius = CGFloat(44)
-        let buttonRadius = CGFloat(28)
-        
-        let backgroundColor = Color("deleteActionViewBackground")
-        let bubbleColor:Color
-        var width = CGFloat(220)
-        let ratio = 1.25
-        var height:CGFloat { width/ratio }
-        let buttonHeight:CGFloat = 78
-        let trashViewFont = Font.system(size: 26, weight: .medium)
-        let buttonFont = Font.system(size: 28).weight(.medium)
-    }
-    
-    // MARK: -
-    ///dismiss view
-    private func cancelDeleteAction() { secretary.sessionToDelete = nil }
-    
-    //ViewModel 1
-    private func removeFiveSecondsBar() {
-        guard let bubbleRank = input!.session.bubble?.rank else { return }
-        let isSameBubble = secretary.addNoteButton_bRank == Int(bubbleRank)
-        let isLastSession = input!.session == input!.session.bubble?.lastSession
-        if isLastSession, isSameBubble { secretary.addNoteButton_bRank = nil }
-    }
+    @State private var metrics:Metrics?
     
     //// MARK: -
     var body: some View {
@@ -120,17 +88,37 @@ struct SessionDeleteActionAlert: View {
         }
         .buttonStyle(BubbleDeleteActionAlert.DeleteButtonStyle())
     }
+    
+    // MARK: -
+    ///dismiss view
+    private func cancelDeleteAction() { secretary.sessionToDelete = nil }
+    
+    //ViewModel 1
+    private func removeFiveSecondsBar() {
+        guard let bubbleRank = input!.session.bubble?.rank else { return }
+        let isSameBubble = secretary.addNoteButton_bRank == Int(bubbleRank)
+        let isLastSession = input!.session == input!.session.bubble?.lastSession
+        if isLastSession, isSameBubble { secretary.addNoteButton_bRank = nil }
+    }
 }
 
-//struct SessionDeleteActionAlert_Previews: PreviewProvider {
-//    static let session:Session = {
-//        let session = Session(context: PersistenceController.preview.viewContext)
-//        let bubble = Bubble(context: PersistenceController.preview.viewContext)
-//        session.bubble = bubble
-//        session.bubble?.color = "orange"
-//        return session
-//    }()
-//    static var previews: some View {
-//        SessionDeleteActionAlert(session, "2")
-//    }
-//}
+extension SessionDeleteActionAlert {
+    struct Input {
+        let session:Session
+        let sessionRank:Int
+    }
+    
+    struct Metrics {
+        let backgroundRadius = CGFloat(44)
+        let buttonRadius = CGFloat(28)
+        
+        let backgroundColor = Color("deleteActionViewBackground")
+        let bubbleColor:Color
+        var width = CGFloat(220)
+        let ratio = 1.25
+        var height:CGFloat { width/ratio }
+        let buttonHeight:CGFloat = 78
+        let trashViewFont = Font.system(size: 26, weight: .medium)
+        let buttonFont = Font.system(size: 28).weight(.medium)
+    }
+}
