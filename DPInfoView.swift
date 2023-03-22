@@ -13,11 +13,11 @@ struct DPInfoView: View {
             Image.dpv
                 .resizable()
                 .scaledToFit()
-                .frame(height: 200)
+                .frame(height: 210)
             VStack(alignment: .leading) {
                 Text("*Use Yellow Areas to*")
                     .foregroundColor(.secondary)
-                
+                Divider()
                 VStack(alignment: .leading) {
                     Text("**Create Timer** \(Image.tap) Tap")
                     Text("*If \(Image.roundCheckmark) symbol shows*")
