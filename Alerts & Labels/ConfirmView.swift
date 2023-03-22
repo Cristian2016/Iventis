@@ -85,8 +85,8 @@ extension ConfirmView {
         
         static let eventCreated = Content(title: "Calendar Event", kind: .created)
         static let eventRemoved = Content(title: "Calendar Event", kind: .removed)
-        static let alwaysONDisplayON = Content(title: "Device Auto-Lock", kind: .off)
-        static let alwaysONDisplayOFF = Content(title: "Device Auto-Lock", kind: .on)
+        static let alwaysONDisplayON = Content(title: "Always-On Display", kind: .on)
+        static let alwaysONDisplayOFF = Content(title: "Always-On Display", kind: .on)
         static let startDelayCreated = Content(title: "Start Delay", kind: .created)
         static let startDelayRemoved = Content(title: "Start Delay", kind: .removed)
     }
