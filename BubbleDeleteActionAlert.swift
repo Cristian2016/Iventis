@@ -160,3 +160,20 @@ struct BubbleDeleteActionAlert: View {
 //        DeleteActionAlert()
 //    }
 //}
+
+extension BubbleDeleteActionAlert {
+    struct Info:View {
+        @State private var show = false
+        
+        var body: some View {
+            ZStack {
+                if show {
+                   Rectangle()
+                }
+            }
+            .onReceive(Secretary.shared.$showDeleteActionViewInfo) { output in
+                withAnimation { show = output }
+            }
+        }
+    }
+}

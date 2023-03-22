@@ -36,7 +36,7 @@ class LayoutViewModel: ObservableObject {
         guard let frame = frame else { return }
         
         let verticalSpace = isPortrait ? UIScreen.main.bounds.height : UIScreen.main.bounds.width
-        let deleteActionViewHeight = DeleteActionView.height
+        let deleteActionViewHeight = CGFloat(250)
         
         //prefered position of deleteActionView is under the bubbleCell, but only if it has enough room
         let deleteActionViewFitsUnderneath = verticalSpace - (frame.origin.y + frame.height) > deleteActionViewHeight

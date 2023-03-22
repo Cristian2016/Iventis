@@ -59,7 +59,6 @@
 		1F615B6329899E210006DB0B /* BackgroundTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F615B6229899E210006DB0B /* BackgroundTimer.swift */; };
 		1F61980F299B7193008894D9 /* MyPackage in Frameworks */ = {isa = PBXBuildFile; productRef = 1F61980E299B7193008894D9 /* MyPackage */; };
 		1F619811299B71A0008894D9 /* MyPackage in Frameworks */ = {isa = PBXBuildFile; productRef = 1F619810299B71A0008894D9 /* MyPackage */; };
-		1F61BE052822BAAA00B773F9 /* DeleteActionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F61BE042822BAAA00B773F9 /* DeleteActionView.swift */; };
 		1F62194028293B5100C9B175 /* PairBubbleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F62193F28293B5100C9B175 /* PairBubbleCell.swift */; };
 		1F641FFE281FF70100413E31 /* BottomDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F641FFD281FF70100413E31 /* BottomDetailView.swift */; };
 		1F64200A2820204400413E31 /* PairList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F6420092820204400413E31 /* PairList.swift */; };
@@ -214,7 +213,6 @@
 		1F5FFD9E29C2426E005FFB32 /* AdaptiveView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdaptiveView.swift; sourceTree = "<group>"; };
 		1F5FFDA029C2E92D005FFB32 /* DurationPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DurationPickerView.swift; path = "Shared/Duration Picker/DurationPickerView.swift"; sourceTree = SOURCE_ROOT; };
 		1F615B6229899E210006DB0B /* BackgroundTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundTimer.swift; sourceTree = "<group>"; };
-		1F61BE042822BAAA00B773F9 /* DeleteActionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteActionView.swift; sourceTree = "<group>"; };
 		1F62193F28293B5100C9B175 /* PairBubbleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PairBubbleCell.swift; sourceTree = "<group>"; };
 		1F641FFD281FF70100413E31 /* BottomDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomDetailView.swift; sourceTree = "<group>"; };
 		1F6420092820204400413E31 /* PairList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PairList.swift; sourceTree = "<group>"; };
@@ -317,7 +315,6 @@
 				1F8B6964283790CF006540CB /* BubbleStickyNoteList.swift */,
 				1F1CF2F2286B5BD8007102F2 /* PairStickyNoteList.swift */,
 				1F18B45B281FA9C90080ADA6 /* CalendarSticker.swift */,
-				1F61BE042822BAAA00B773F9 /* DeleteActionView.swift */,
 				1F99AB5E286CA40D00977C9A /* StickyNote.swift */,
 			);
 			name = Helpers;
@@ -687,7 +684,6 @@
 				1F8AAFA329927B2900328AC7 /* FramePortrait.swift in Sources */,
 				1F559BCA298E0BA700F07F5F /* ThinMaterialLabel.swift in Sources */,
 				1FE68FAE29A135C600D05EE6 /* SecondsCircle.swift in Sources */,
-				1F61BE052822BAAA00B773F9 /* DeleteActionView.swift in Sources */,
 				1F9BE0A9280BE14100F87EFA /* PaletteView.swift in Sources */,
 				1F7F1AE429A10D9C0061EB40 /* View Modifiers.swift in Sources */,
 				1F5FFDA129C2E92D005FFB32 /* DurationPickerView.swift in Sources */,

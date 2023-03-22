@@ -36,16 +36,16 @@ struct BlueInfoButton: View {
             }
         }
         .onReceive(Secretary.shared.$showBlueInfoButton) { output in
-            withAnimation {
-                show = output ? true : false
-            }
+            withAnimation { show = output ? true : false }
         }
     }
     
     private func showInfo() {
         switch Secretary.shared.topMostView {
-            case .bubble: print("bubble info")
-            case .deleteActionView: print("deleteActionView info")
+            case .bubble:
+                Secretary.shared.showBubbleInfo = true
+            case .deleteActionView:
+                Secretary.shared.showDeleteActionViewInfo = true
             case .durationPicker:
                 Secretary.shared.showDurationPickerInfo = true
             case .moreOptionsView:

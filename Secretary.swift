@@ -32,6 +32,10 @@ class Secretary {
     
     var topMostView:TopMostView = .bubble
     
+    @Published var showBubbleInfo = false
+    
+    @Published var showDeleteActionViewInfo = false
+    
     @Published var showPaletteInfo = false
     
     @Published var showDurationPickerInfo = false
