@@ -28,7 +28,7 @@ struct PaletteView: View {
         ZStack {
             if showPaletteView {
                 ZStack {
-                    circles
+                    colors
                     if showPaletteInfo {
                         ThinMaterialLabel(title: "Create Bubbles") { hintLabelContent }
                     action: { dismiss() }
@@ -43,31 +43,31 @@ struct PaletteView: View {
         }
         .onReceive(secretary.$showPaletteInfo) { output in
             if output {
-                withAnimation {
-                    self.showPaletteInfo = true
-                }
+                withAnimation { self.showPaletteInfo = true }
             }
         }
     }
     
     // MARK: - Legos
-    private var circles:some View {
-        let clearColor = Color.clear
-       return ScrollView {
-            clearColor
-            clearColor
-            LazyVGrid(columns: colums, spacing: 10) {
-                ForEach(Color.triColors, id:\.self) { tricolor in
-                    Circle()
-                        .fill(tricolor.sec)
-                        .scaleEffect(x: scale(tricolor) , y: scale(tricolor))
-                        .onTapGesture { createBubble(tricolor) }
-                        .onLongPressGesture { showDurationPicker(tricolor) }
+    private var colors:some View {
+        ScrollView {
+            Color.clear
+                .frame(height: 30)
+            Grid {
+                ForEach(Color.paletteTriColors, id: \.self) { subarray in
+                    GridRow {
+                        ForEach(subarray) { tricolor in
+                            Circle()
+                                .fill(tricolor.sec)
+                                .scaleEffect(x: scale(tricolor) , y: scale(tricolor))
+                                .onTapGesture { createBubble(tricolor) }
+                                .onLongPressGesture { showDurationPicker(tricolor) }
+                        }
+                    }
                 }
             }
         }
         .scrollIndicators(.hidden)
-        .ignoresSafeArea()
     }
     
     private var hintLabelContent:some View {

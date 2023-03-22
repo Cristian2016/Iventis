@@ -27,6 +27,16 @@ extension Color {
         Bubble.rose, Bubble.aubergine, Bubble.magenta
     ]
     
+    static let paletteTriColors = [
+        [Bubble.aqua, Bubble.mocha, Bubble.lemon],
+        [Bubble.darkGreen, Bubble.mint, Bubble.chocolate],
+        [Bubble.slateBlue, Bubble.sourCherry, Bubble.orange],
+        [Bubble.ultramarine, Bubble.charcoal, Bubble.red],
+        [Bubble.sky, Bubble.bubbleGum, Bubble.cayenne],
+        [Bubble.byzantium,  Bubble.purple, Bubble.silver],
+        [Bubble.rose, Bubble.aubergine, Bubble.magenta]
+    ]
+    
     ///⚠️ struct Color.Bubble vs CoreData class Bubble
     struct Bubble {
         ///it will not show up in Color.tricolors
