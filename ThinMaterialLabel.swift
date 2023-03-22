@@ -12,7 +12,7 @@ struct ThinMaterialLabel<Content:View>: View {
         let backgroundRadius = CGFloat(20)
     }
     
-    init(title:String? = nil, subtitle:String? = nil, @ViewBuilder _ content:() -> Content, action: @escaping () -> ()) {
+    init(_ title:String? = nil, _ subtitle:String? = nil, @ViewBuilder _ content:() -> Content, action: @escaping () -> ()) {
         self.content = content()
         self.action = action
         self.title = title

@@ -30,8 +30,8 @@ struct PaletteView: View {
                 ZStack {
                     colors
                     if showPaletteInfo {
-                        ThinMaterialLabel(title: "Create Bubbles") { infoContent }
-                    action: { dismiss() }
+                        let title = "Create Bubbles"
+                        ThinMaterialLabel(title) { infoContent } action: { dismiss() }
                     }
                 }
                 .gesture(swipeGesture)

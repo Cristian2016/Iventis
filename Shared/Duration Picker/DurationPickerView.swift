@@ -146,7 +146,7 @@ struct DurationPickerView: View {
     } //5
     
     private func handle(tricolor:Color.Tricolor?) {
-        guard let tricolor = tricolor else { return }
+        guard tricolor != nil else { return }
         Secretary.shared.topMostView = .durationPicker
     } //4
 }
@@ -154,6 +154,7 @@ struct DurationPickerView: View {
 extension DurationPickerView {
     struct Info:View {
         @State private var show = false
+        private let title = "Timer Duration"
         
         var body: some View {
             ZStack {
@@ -162,9 +163,7 @@ extension DurationPickerView {
                         .fill(Color.black.opacity(0.8))
                         .ignoresSafeArea()
                     
-                    ThinMaterialLabel(title: "Timer Duration") {
-                        DPInfoView()
-                    } action: { dismiss() }
+                    ThinMaterialLabel(title) { DPInfoView() } action: { dismiss() }
                         .font(.system(size: 20))
                 }
             }

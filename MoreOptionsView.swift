@@ -224,9 +224,7 @@ extension MoreOptionsView {
                         .fill(Color.black.opacity(0.8))
                         .ignoresSafeArea()
                     
-                    ThinMaterialLabel(title: title, subtitle: subtitle) {
-                        MoreOptionsInfoView()
-                    } action: { showInfo() }
+                    ThinMaterialLabel(title, subtitle) { MoreOptionsInfoView() } action: { showInfo() }
                     .font(metrics.infoFont)
                 }
             }

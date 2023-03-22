@@ -70,17 +70,13 @@ struct SessionDeleteInfoView:View {
     var body: some View {
         ZStack {
             if show {
+                let title = "Delete Session"
                 let subtitle = "Any associated Calendar Event will also be removed"
+                
                 Color.black.opacity(0.6)
                     .ignoresSafeArea()
                 
-                ThinMaterialLabel(title: "Delete Session", subtitle: subtitle) {
-                    content
-                } action: {
-                    withAnimation {
-                        Secretary.shared.showSessionDeleteInfo = false
-                    }
-                }
+                ThinMaterialLabel(title, subtitle) { infoContent } action: { dismiss() }
             }
         }
         .onReceive(Secretary.shared.$showSessionDeleteInfo) { output in
@@ -89,7 +85,7 @@ struct SessionDeleteInfoView:View {
     }
     
     // MARK: - Lego
-    private var content:some View {
+    private var infoContent:some View {
         HStack(alignment: .top) {
             Image("SessionDelete")
                 .thumbnail(140)
@@ -107,6 +103,13 @@ struct SessionDeleteInfoView:View {
             }
         }
         .font(.system(size: 20))
+    }
+    
+    // MARK: -
+    private func dismiss() {
+        withAnimation {
+            Secretary.shared.showSessionDeleteInfo = false
+        }
     }
 }
 

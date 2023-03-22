@@ -101,25 +101,25 @@ struct DetailView: View {
 
 struct ShowDetailViewInfoView: View {
     @State private var showDetailViewInfo = false
+    let title = "Scroll To Top"
     
     var body: some View {
-        ThinMaterialLabel(title: "Scroll To Top") {
-            thinMaterialLabelContent
-        } action: {
-            Secretary.shared.showDetailViewInfo = false
-        }
+        ThinMaterialLabel(title) { infoContent } action: { dismiss() }
         .opacity(showDetailViewInfo ? 1 : 0)
         .onReceive(Secretary.shared.$showDetailViewInfo) { output in
-            withAnimation {
-                showDetailViewInfo = output
-            }
+            withAnimation { showDetailViewInfo = output }
         }
     }
     
-    private var thinMaterialLabelContent:some View {
+    private var infoContent:some View {
         VStack(alignment: .leading) {
             Text("\(Image(systemName: "digitalcrown.arrow.counterclockwise")) Scroll along any screen edge")
             Text("or \(Image.tap) Tap \(Image.scrollToTop) Symbol, if visible")
         }
+    }
+    
+    // MARK: -
+    private func dismiss() {
+        Secretary.shared.showDetailViewInfo = false
     }
 }
