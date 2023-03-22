@@ -27,18 +27,13 @@ struct AutoLockButton: View {
     }
     
     private var exitSymbol:some View {
-        ZStack {
-            Image(systemName: "sun.max.fill")
-                .foregroundColor(metrics.symbolColor)
-            Image(systemName: "line.diagonal")
-                .foregroundColor(metrics.diagonalLineColor)
-                .fontWeight(.bold)
-        }
-        .font(metrics.font)
+        Image(systemName: "cup.and.saucer.fill")
+            .foregroundColor(metrics.symbolColor)
+            .font(metrics.font)
     }
     
     private var enterSymbol:some View {
-        Image(systemName: "sun.max")
+        Image(systemName: "cup.and.saucer")
             .foregroundColor(metrics.symbolColor)
             .font(metrics.font)
     }
@@ -58,7 +53,7 @@ struct AutoLockButton: View {
     
     // MARK: -
     struct Metrics {
-        let font = Font.system(.title3)
+        let font = Font.system(size: 18)
         let symbolColor = Color.label
         let diagonalLineColor = Color.red
     }
