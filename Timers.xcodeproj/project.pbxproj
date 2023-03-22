@@ -132,6 +132,7 @@
 		1FFC8BAD28142F040059EF2E /* Session Properties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FFC8BA528142F040059EF2E /* Session Properties.swift */; };
 		1FFC8BB628142F040059EF2E /* Pair.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FFC8BA828142F040059EF2E /* Pair.swift */; };
 		1FFC8BB928142F040059EF2E /* Pair Properties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FFC8BA928142F040059EF2E /* Pair Properties.swift */; };
+		1FFE8E0029CAD57400EF5B2A /* DPOKCircle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FFE8DFF29CAD57400EF5B2A /* DPOKCircle.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -284,6 +285,7 @@
 		1FFC8BA528142F040059EF2E /* Session Properties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Session Properties.swift"; sourceTree = "<group>"; };
 		1FFC8BA828142F040059EF2E /* Pair.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pair.swift; sourceTree = "<group>"; };
 		1FFC8BA928142F040059EF2E /* Pair Properties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Pair Properties.swift"; sourceTree = "<group>"; };
+		1FFE8DFF29CAD57400EF5B2A /* DPOKCircle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DPOKCircle.swift; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -418,6 +420,7 @@
 		1F5F4A4728093FAD00AF3442 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				1FFE8DFF29CAD57400EF5B2A /* DPOKCircle.swift */,
 				1FC2335829CA488900FBE483 /* MoreOptionsInfoView.swift */,
 				1FE76DB929C9F213003012F0 /* BlueInfoButton.swift */,
 				1F112A2129C9D8EC00D4A541 /* InfoAssets.xcassets */,
@@ -715,6 +718,7 @@
 				1F5A0F6F282647A80075E86B /* DetailView.swift in Sources */,
 				1FFC8BB928142F040059EF2E /* Pair Properties.swift in Sources */,
 				1FB2EA772997BD2F00752595 /* ThreeLabels.swift in Sources */,
+				1FFE8E0029CAD57400EF5B2A /* DPOKCircle.swift in Sources */,
 				1F18B45C281FA9C90080ADA6 /* CalendarSticker.swift in Sources */,
 				1F1CF2F3286B5BD8007102F2 /* PairStickyNoteList.swift in Sources */,
 				1F52B8C8299233AF0093810C /* ColorsGrid.swift in Sources */,

@@ -51,6 +51,7 @@ struct DurationPickerView: View {
                 VStack(spacing: 0) {
                     Display { dismiss() }
                     digitsGrid
+                        .overlay { DPOKCircle() }
                 }
                 .padding([.leading, .trailing, .bottom])
                 .padding(6)
