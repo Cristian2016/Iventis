@@ -27,6 +27,7 @@ extension Color {
         Bubble.rose, Bubble.aubergine, Bubble.magenta
     ]
     
+    ///to use with Grid and GridRow
     static let paletteTriColors = [
         [Bubble.aqua, Bubble.mocha, Bubble.lemon],
         [Bubble.darkGreen, Bubble.mint, Bubble.chocolate],
