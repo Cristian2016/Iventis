@@ -9,6 +9,7 @@
 //2 on iPhone 8 looks bad without a bit of padding
 //3 order matters! it is applied before applying the paddings to the vRoundedRect
 //4 this is how app knows topMostView displayed to the user is the DurationPickerView
+//5 either create new timer or edit duration of existing timer
 
 import SwiftUI
 import MyPackage
@@ -132,7 +133,6 @@ struct DurationPickerView: View {
         manager.removeAllDigits()
     }
     
-    ///either create new timer or edit duration of existing timer
     private func handle(mode: Secretary.Mode?) {
         if let mode = mode {
             switch mode {
@@ -142,7 +142,7 @@ struct DurationPickerView: View {
                     self.bubble = bubble
             }
         }
-    }
+    } //5
     
     private func handle(tricolor:Color.Tricolor?) {
         guard let tricolor = tricolor else { return }
