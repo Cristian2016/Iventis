@@ -51,6 +51,8 @@ struct ConfirmView: View {
         switch content.kind {
             case .removed, .off: return "xmark"
             case .created, .on: return "checkmark"
+            case .caffeinated: return "cup.and.saucer.fill"
+            case .sleepy: return "moon.zzz.fill"
         }
     }
     private var name:String {
@@ -59,6 +61,7 @@ struct ConfirmView: View {
             case .created: return "Created"
             case .on: return "ON"
             case .off: return "OFF"
+            case .caffeinated, .sleepy: return ""
         }
     }
     
@@ -67,6 +70,7 @@ struct ConfirmView: View {
         switch content.kind {
             case .removed, .off: return .red
             case .created, .on: return .vibrantGreen
+            case .caffeinated, .sleepy: return .white
         }
     }
 }
@@ -81,12 +85,14 @@ extension ConfirmView {
             case removed
             case on
             case off
+            case caffeinated
+            case sleepy
         }
         
         static let eventCreated = Content(title: "Calendar Event", kind: .created)
         static let eventRemoved = Content(title: "Calendar Event", kind: .removed)
-        static let alwaysONDisplayON = Content(title: "Always-On Display", kind: .on)
-        static let alwaysONDisplayOFF = Content(title: "Always-On Display", kind: .on)
+        static let appCaffeinated = Content(title: "App Caffeinated", kind: .caffeinated)
+        static let appCanSleep = Content(title: "App Can Sleep", kind: .sleepy)
         static let startDelayCreated = Content(title: "Start Delay", kind: .created)
         static let startDelayRemoved = Content(title: "Start Delay", kind: .removed)
     }
@@ -94,6 +100,6 @@ extension ConfirmView {
 
 struct ConfirmationView1_Previews: PreviewProvider {
     static var previews: some View {
-        ConfirmView(content: .alwaysONDisplayON)
+        ConfirmView(content: .appCaffeinated)
     }
 }

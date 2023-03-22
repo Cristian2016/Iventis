@@ -14,7 +14,7 @@ struct AlwaysOnDisplayConfirmationView: View {
     var body: some View {
         ZStack {
             if confirm_AlwaysOnDisplay {
-                ConfirmView(content: UIApplication.shared.isIdleTimerDisabled ? .alwaysONDisplayON : .alwaysONDisplayOFF)
+                ConfirmView(content: UIApplication.shared.isIdleTimerDisabled ? .appCaffeinated : .appCanSleep)
             }
         }
         .onReceive(secretary.$displayAutoLockConfirmation) {
