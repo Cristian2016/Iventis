@@ -18,9 +18,18 @@ struct MoreOptionsInfoView: View {
                 Text("*Use Yellow Areas to*")
                     .foregroundColor(.secondary)
                 Divider()
-                Text("**Save Delay** \(Image.tap) Tap")
+                VStack(alignment: .leading) {
+                    Text("**Save Delay** \(Image.tap) Tap")
+                    Text("*If delay is not zero*")
+                        .foregroundColor(.secondary)
+                }
                 Text("**Remove** \(Image.leftSwipe) Swipe")
-                Text("**Dismiss** \(Image.tap) Tap")
+                
+                VStack(alignment: .leading) {
+                    Text("**Dismiss** \(Image.tap) Tap")
+                    Text("*If delay is zero*")
+                        .foregroundColor(.secondary)
+                }
             }
         }
     }
