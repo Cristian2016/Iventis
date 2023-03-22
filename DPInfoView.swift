@@ -11,6 +11,7 @@ struct DPInfoView: View {
     var body: some View {
         HStack(alignment: .top) {
             Image.dpv.thumbnail()
+            
             VStack(alignment: .leading, spacing: 8) {
                 Text("*Use Yellow Areas to*")
                     .foregroundColor(.secondary)

@@ -164,16 +164,37 @@ struct BubbleDeleteActionAlert: View {
 extension BubbleDeleteActionAlert {
     struct Info:View {
         @State private var show = false
+        private let title = "Delete Bubble or History"
+        let subtitle = "Associated Calendar Events will not be removed"
         
         var body: some View {
             ZStack {
                 if show {
-                   Rectangle()
+                    Color.black.opacity(0.6).ignoresSafeArea()
+                    
+                    ThinMaterialLabel(title, subtitle) { content } action: { dismiss() }
+                        .font(.system(size: 20))
                 }
             }
             .onReceive(Secretary.shared.$showDeleteActionViewInfo) { output in
                 withAnimation { show = output }
             }
         }
+        
+        // MARK: - Lego
+        private var content:some View {
+            VStack {
+                VStack(alignment: .leading, spacing: 8) {
+                    VStack(alignment: .leading) {
+                        Text("**Dismiss** \(Image.tap) Tap")
+                        Text("*Outside Shape*")
+                            .foregroundColor(.secondary)
+                    }
+                }
+            }
+        }
+        
+        // MARK: -
+        private func dismiss() { Secretary.shared.showDeleteActionViewInfo = false }
     }
 }
