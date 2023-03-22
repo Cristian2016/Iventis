@@ -70,7 +70,8 @@ struct SessionDeleteInfoView:View {
     var body: some View {
         ZStack {
             if show {
-                ThinMaterialLabel(title: "Delete Session") {
+                let subtitle = "Deletes session together with the associated Calendar Event, if any"
+                ThinMaterialLabel(title: "Delete Session", subtitle: subtitle) {
                     content
                 } action: {
                     withAnimation {
@@ -87,11 +88,6 @@ struct SessionDeleteInfoView:View {
     // MARK: - Lego
     private var content:some View {
         VStack(alignment: .leading) {
-            Text("*Deletes session together with the associated Calendar Event, if any*")
-                .forceMultipleLines() //⚠️
-                .foregroundColor(.secondary)
-            
-            Divider().frame(maxWidth: 300)
             Text("**Dismiss** \(Image.tap) Tap Outside Shape")
         }
         .font(.system(size: 20))
