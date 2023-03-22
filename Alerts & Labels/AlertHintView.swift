@@ -35,7 +35,7 @@ struct AlertHintView: View {
                                 .foregroundColor(.secondary)
                         }
                         VStack(alignment: .leading) {
-                            Text("Regardless of the device settings, Auto-Lock for this app is set to 'Never'. This means the display will not sleep, unless ***Caffeinated*** is switched off again")
+                            Text("Regardless of the device settings, Auto-Lock for this app is set to 'Never'. This means the display stays on, unless ***Caffeinated*** is switched off again")
                         }
                     }
                 }
