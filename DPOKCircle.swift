@@ -3,7 +3,7 @@
 //  Timers (iOS)
 //
 //  Created by Cristian Lapusan on 22.03.2023.
-//
+//1 sets timer duration and dismisses DPV
 
 import SwiftUI
 
@@ -11,7 +11,7 @@ extension DurationPickerView {
     struct DPOKCircle: View {
         let manager = DurationPickerView.Manager.shared
         @State private var show = false
-        let action:() -> ()
+        let action:() -> () //1
         
         var body: some View {
             ZStack {
@@ -29,10 +29,7 @@ extension DurationPickerView {
                                         .foregroundColor(.white)
                                 }
                         }
-                        .onTapGesture {
-                            print("OK was tapped, create timer with duration")
-                            action()
-                        }
+                        .onTapGesture { action() } //1
                 }
             }
             .padding()

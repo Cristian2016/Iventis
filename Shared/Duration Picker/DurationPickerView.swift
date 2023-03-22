@@ -129,6 +129,7 @@ struct DurationPickerView: View {
     
     // MARK: -
     private func dismiss() {
+        print(#function)
         manager.computeInitialClock(color: tricolor!.description)
         self.tricolor = nil
         manager.removeAllDigits()
