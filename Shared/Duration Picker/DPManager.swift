@@ -88,7 +88,7 @@ extension DurationPickerView {
         func removeAllDigits() { digits = [] }
         
         ///if duration is valid, a timer will be created and then DPV dismissed. If duration not valid, silently dismiss DPV
-        func computeInitialClock(color:String) {
+        func shouldComputeInitialClock(color:String) {
             let digitsCopy = digits
             
             DispatchQueue.global().async {
