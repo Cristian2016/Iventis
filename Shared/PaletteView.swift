@@ -52,7 +52,7 @@ struct PaletteView: View {
     private var colors:some View {
         ScrollView {
             Color.clear
-                .frame(height: 30)
+                .frame(height: 35)
             Grid {
                 ForEach(Color.paletteTriColors, id: \.self) { subarray in
                     GridRow {
@@ -68,6 +68,7 @@ struct PaletteView: View {
             }
         }
         .scrollIndicators(.hidden)
+        .ignoresSafeArea()
     }
     
     private var hintLabelContent:some View {
