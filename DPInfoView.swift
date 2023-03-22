@@ -13,7 +13,7 @@ struct DPInfoView: View {
             Image.dpv
                 .resizable()
                 .scaledToFit()
-                .frame(height: 210)
+                .frame(height: 220)
             VStack(alignment: .leading, spacing: 8) {
                 Text("*Use Yellow Areas to*")
                     .foregroundColor(.secondary)
@@ -24,11 +24,12 @@ struct DPInfoView: View {
                         .foregroundColor(.secondary)
                 }
                 VStack(alignment: .leading) {
-                    Text("**Clear Display** \(Image.leftSwipe) Swipe")
+                    Text("**Clear** \(Image.leftSwipe) Swipe")
                 }
                 VStack(alignment: .leading) {
                     Text("**Dismiss** \(Image.tap) Tap")
                     Text("*If \(Image.roundCheckmark) symbol does not show*")
+                        .forceMultipleLines()
                         .foregroundColor(.secondary)
                 }
             }
