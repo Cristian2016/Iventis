@@ -25,7 +25,7 @@ struct PlusButton: View {
     }
     
     struct Metrics {
-        let font = Font.system(.title3)
+        let font = Font.system(size: 18)
         let symbolColor = Color.label
         let diagonalLineColor = Color.red
     }
