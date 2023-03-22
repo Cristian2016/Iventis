@@ -56,21 +56,8 @@ struct DurationPickerView: View {
                 .overlay { Info() }
             }
         }
-        .onReceive(Secretary.shared.$durationPickerMode) { output in
-            if let mode = output {
-                switch mode {
-                    case .create(let tricolor):
-                        self.tricolor = tricolor
-                    case .edit(let bubble):
-                        self.bubble = bubble
-                }
-            }
-        }
-        .onChange(of: tricolor) {
-            if $0 != nil {
-                Secretary.shared.topMostView = .durationPicker
-            }
-        }
+        .onReceive(Secretary.shared.$durationPickerMode) { handle(mode: $0) }
+        .onChange(of: tricolor) { handle(tricolor: $0) }
     }
     
     private var swipe: some Gesture {
@@ -138,10 +125,27 @@ struct DurationPickerView: View {
     }
     
     // MARK: -
-    func dismiss() {
+    private func dismiss() {
         manager.computeInitialClock(color: tricolor!.description)
         self.tricolor = nil
         manager.removeAllDigits()
+    }
+    
+    ///either create new timer or edit duration of existing timer
+    private func handle(mode: Secretary.Mode?) {
+        if let mode = mode {
+            switch mode {
+                case .create(let tricolor):
+                    self.tricolor = tricolor
+                case .edit(let bubble):
+                    self.bubble = bubble
+            }
+        }
+    }
+    
+    private func handle(tricolor:Color.Tricolor?) {
+        guard let tricolor = tricolor else { return }
+        Secretary.shared.topMostView = .durationPicker
     }
 }
 
