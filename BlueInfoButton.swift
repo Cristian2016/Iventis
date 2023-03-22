@@ -71,9 +71,9 @@ struct SessionDeleteInfoView:View {
         ZStack {
             if show {
                 let subtitle = "Removes session and any associated Calendar Event"
-                Rectangle()
-                    .fill(Color.black.opacity(0.8))
-                    .ignoresSafeArea()
+//                Rectangle()
+//                    .fill(Color.black.opacity(0.8))
+//                    .ignoresSafeArea()
                 
                 ThinMaterialLabel(title: "Delete Session", subtitle: subtitle) {
                     content
@@ -91,10 +91,21 @@ struct SessionDeleteInfoView:View {
     
     // MARK: - Lego
     private var content:some View {
-        VStack(alignment: .leading) {
+        HStack(alignment: .top) {
             Image("SessionDelete")
-                .thumbnail()
-            Text("**Dismiss** \(Image.tap) Tap Outside Shape")
+                .thumbnail(140)
+            VStack(alignment: .leading, spacing: 8) {
+                VStack(alignment: .leading) {
+                    Text("**Delete** \(Image.tap) Tap")
+                    Text("*Yellow Button*")
+                        .foregroundColor(.secondary)
+                }
+                VStack(alignment: .leading) {
+                    Text("**Dismiss** \(Image.tap) Tap")
+                    Text("*Outside Shape*")
+                        .foregroundColor(.secondary)
+                }
+            }
         }
         .font(.system(size: 20))
     }
