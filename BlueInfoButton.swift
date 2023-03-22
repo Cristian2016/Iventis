@@ -92,6 +92,8 @@ struct SessionDeleteInfoView:View {
     // MARK: - Lego
     private var content:some View {
         VStack(alignment: .leading) {
+            Image("SessionDelete")
+                .thumbnail()
             Text("**Dismiss** \(Image.tap) Tap Outside Shape")
         }
         .font(.system(size: 20))

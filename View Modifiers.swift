@@ -68,10 +68,10 @@ extension View {
 }
 
 extension Image {
-    func thumbnail() -> some View {
+    func thumbnail(_ height:CGFloat = 220) -> some View {
         self
             .resizable()
             .scaledToFit()
-            .frame(height: 220)
+            .frame(height: height)
     }
 }
