@@ -42,32 +42,6 @@ struct AlertHintView: View {
             } action: {
                 buttonAction()
             }
-
-//            VStack(spacing: 10) {
-//                Image(systemName: alertContent.symbol ?? "")
-//                    .foregroundColor(.yellow)
-//                    .font(.system(size: 50))
-//                HStack {
-//                    Image(systemName: alertContent.titleSymbol ?? "")
-//                    Text(alertContent.title)
-//                }
-//                .font(.system(size: 26))
-//                .fontWeight(.medium)
-//                Text(alertContent.content ?? "")
-//                    .foregroundColor(.secondary)
-//                    .padding([.leading, .trailing])
-//                Button("OK") { buttonAction() }
-//                .buttonStyle(.bordered)
-//                .fontWeight(.medium)
-//                .tint(.red)
-//                .padding()
-//            }
-//            .background(
-//                RoundedRectangle(cornerRadius: 20)
-//                    .fill(Color.background2)
-//                    .standardShadow()
-//            )
-//            .frame(maxWidth: 320)
         }
         .onTapGesture { dismissAction() }
     }
