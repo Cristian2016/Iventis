@@ -26,11 +26,11 @@ struct AlertHintView: View {
     
     var body: some View {
         ZStack {
-            ThinMaterialLabel("Caffeinated", "App had a cup of coffee and will not sleep!") {
+            ThinMaterialLabel("Caffeinated", "App will not sleep!") {
                 ScrollView {
                     VStack(alignment: .leading, spacing: 8) {
                         VStack(alignment: .leading) {
-                            Text("This option overrides Auto-Lock option")
+                            Text("*Caffeinated* overrides Auto-Lock option")
                             Text("*Settings App > Display & Brightness > Auto-Lock*")
                                 .foregroundColor(.secondary)
                         }
