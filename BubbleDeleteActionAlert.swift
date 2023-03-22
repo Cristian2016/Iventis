@@ -183,8 +183,16 @@ extension BubbleDeleteActionAlert {
         
         // MARK: - Lego
         private var content:some View {
-            VStack {
+            HStack(alignment: .top) {
+                Image("BubbleDelete")
+                    .thumbnail(150)
                 VStack(alignment: .leading, spacing: 8) {
+                    VStack(alignment: .leading) {
+                        Text("**Delete** \(Image.tap) Tap")
+                        Text("*Any Yellow Button*")
+                            .foregroundColor(.secondary)
+                    }
+                    
                     VStack(alignment: .leading) {
                         Text("**Dismiss** \(Image.tap) Tap")
                         Text("*Outside Shape*")
