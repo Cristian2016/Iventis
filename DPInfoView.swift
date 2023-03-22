@@ -28,7 +28,7 @@ struct DPInfoView: View {
                 }
                 VStack(alignment: .leading) {
                     Text("**Dismiss** \(Image.tap) Tap")
-                    Text("*If \(Image.roundCheckmark) symbol does not show*")
+                    Text("*If \(Image.roundCheckmark) symbol hidden*")
                         .forceMultipleLines()
                         .foregroundColor(.secondary)
                 }
