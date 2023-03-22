@@ -19,7 +19,7 @@ struct MoreOptionsInfoView: View {
                     .foregroundColor(.secondary)
                 Divider()
                 Text("**Save Delay** \(Image.tap) Tap")
-                Text("**Clear Display** \(Image.leftSwipe) Swipe")
+                Text("**Remove** \(Image.leftSwipe) Swipe")
                 Text("**Dismiss** \(Image.tap) Tap")
             }
         }

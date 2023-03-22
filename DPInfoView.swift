@@ -24,7 +24,7 @@ struct DPInfoView: View {
                         .foregroundColor(.secondary)
                 }
                 VStack(alignment: .leading) {
-                    Text("**Clear** \(Image.leftSwipe) Swipe")
+                    Text("**Remove** \(Image.leftSwipe) Swipe")
                 }
                 VStack(alignment: .leading) {
                     Text("**Dismiss** \(Image.tap) Tap")
