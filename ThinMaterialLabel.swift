@@ -36,7 +36,10 @@ struct ThinMaterialLabel<Content:View>: View {
                     .padding(.bottom, 1)
                     .font(.system(size: 28, weight: .medium))
                     .minimumScaleFactor(0.1)
-                if let subtitle = subtitle { Text("*\(subtitle)*") }
+                if let subtitle = subtitle {
+                    Text("*\(subtitle)*")
+                        .forceMultipleLines()
+                }
                 Divider().frame(maxWidth: 300)
             }
             content

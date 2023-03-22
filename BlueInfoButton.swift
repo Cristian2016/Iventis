@@ -70,7 +70,7 @@ struct SessionDeleteInfoView:View {
     var body: some View {
         ZStack {
             if show {
-                let subtitle = "Deletes session together with any associated Calendar Event"
+                let subtitle = "Removes session and any associated Calendar Event"
                 Rectangle()
                     .fill(Color.black.opacity(0.8))
                     .ignoresSafeArea()
