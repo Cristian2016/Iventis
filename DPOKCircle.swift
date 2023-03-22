@@ -11,6 +11,7 @@ extension DurationPickerView {
     struct DPOKCircle: View {
         let manager = DurationPickerView.Manager.shared
         @State private var show = false
+        let action:() -> ()
         
         var body: some View {
             ZStack {
@@ -27,6 +28,10 @@ extension DurationPickerView {
                                         .minimumScaleFactor(0.1)
                                         .foregroundColor(.white)
                                 }
+                        }
+                        .onTapGesture {
+                            print("OK was tapped, create timer with duration")
+                            action()
                         }
                 }
             }
