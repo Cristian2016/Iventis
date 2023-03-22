@@ -225,11 +225,7 @@ extension MoreOptionsView {
                         .ignoresSafeArea()
                     
                     ThinMaterialLabel(title: title, subtitle: subtitle) {
-                        Text("*Use Yellow Areas to*")
-                            .foregroundColor(.secondary)
-                        Divider().frame(maxWidth: 300)
                         MoreOptionsInfoView()
-                        
                     } action: { showInfo() }
                     .font(metrics.infoFont)
                 }

@@ -13,14 +13,13 @@ struct MoreOptionsInfoView: View {
             Image.moreOptionsView
                 .resizable()
                 .scaledToFit()
-                .frame(height: 200)
-            VStack(alignment: .leading, spacing: 10) {
+                .frame(height: 220)
+            VStack(alignment: .leading, spacing: 8) {
+                Text("*Use Yellow Areas to*")
+                    .foregroundColor(.secondary)
+                Divider()
                 Text("**Save Delay** \(Image.tap) Tap")
-                VStack(alignment: .leading) {
-                    Text("**Clear Display** \(Image.leftSwipe) Swipe")
-                    Text("*Any direction works*")
-                        .foregroundColor(.secondary)
-                }
+                Text("**Clear Display** \(Image.leftSwipe) Swipe")
                 Text("**Dismiss** \(Image.tap) Tap")
             }
         }
