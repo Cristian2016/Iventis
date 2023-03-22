@@ -30,7 +30,7 @@ struct PaletteView: View {
                 ZStack {
                     colors
                     if showPaletteInfo {
-                        ThinMaterialLabel(title: "Create Bubbles") { hintLabelContent }
+                        ThinMaterialLabel(title: "Create Bubbles") { infoContent }
                     action: { dismiss() }
                     }
                 }
@@ -72,7 +72,7 @@ struct PaletteView: View {
         .ignoresSafeArea()
     }
     
-    private var hintLabelContent:some View {
+    private var infoContent:some View {
         VStack {
             VStack(alignment: .leading) {
                 Text("**Stopwatch** \(Image.tap) Tap any color")
