@@ -71,7 +71,7 @@ struct SessionDeleteInfoView:View {
         ZStack {
             if show {
                 let title = "Delete Session"
-                let subtitle = "Any associated Calendar Event will also be removed"
+                let subtitle = "Any associated Calendar Event will be removed from the Calendar App"
                 
                 Color.black.opacity(0.6).ignoresSafeArea()
                 ThinMaterialLabel(title, subtitle) { infoContent } action: { dismiss() }
@@ -86,7 +86,7 @@ struct SessionDeleteInfoView:View {
     private var infoContent:some View {
         HStack(alignment: .top) {
             Image("SessionDelete")
-                .thumbnail(140)
+                .thumbnail(130)
             VStack(alignment: .leading, spacing: 8) {
                 VStack(alignment: .leading) {
                     Text("**Delete** \(Image.tap) Tap")
