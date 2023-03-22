@@ -10,10 +10,7 @@ import SwiftUI
 struct MoreOptionsInfoView: View {
     var body: some View {
         HStack(alignment: .top) {
-            Image.moreOptionsView
-                .resizable()
-                .scaledToFit()
-                .frame(height: 220)
+            Image.moreOptionsView.thumbnail()
             VStack(alignment: .leading, spacing: 8) {
                 Text("*Use Yellow Areas to*")
                     .foregroundColor(.secondary)

@@ -66,3 +66,12 @@ extension View {
         modifier(DisableAnimation())
     }
 }
+
+extension Image {
+    func thumbnail() -> some View {
+        self
+            .resizable()
+            .scaledToFit()
+            .frame(height: 220)
+    }
+}

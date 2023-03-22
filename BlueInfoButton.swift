@@ -93,7 +93,7 @@ struct SessionDeleteInfoView:View {
             
             Divider().frame(maxWidth: 300)
             Text("**Delete** \(Image.tap) Tap")
-            Text("**Cancel** \(Image.tap) Tap Outside Shape")
+            Text("**Dismiss** \(Image.tap) Tap Outside Shape")
         }
         .font(.system(size: 20))
     }
