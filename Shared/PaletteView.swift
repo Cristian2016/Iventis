@@ -15,7 +15,7 @@ struct PaletteView: View {
     @State private var longPressedCircle:String?
     @AppStorage("showPaletteHint", store: .shared) var showPaletteInfo = true
     private let secretary = Secretary.shared
-    @State private var showPaletteView = false
+    @State private var show = false
     
     private let colums = Array(repeating: GridItem(), count: 3)
     
@@ -26,7 +26,7 @@ struct PaletteView: View {
     
     var body: some View {
         ZStack {
-            if showPaletteView {
+            if show {
                 ZStack {
                     colors
                     if showPaletteInfo {
@@ -39,7 +39,7 @@ struct PaletteView: View {
             }
         }
         .onReceive(secretary.$showPaletteView) { output in
-            withAnimation { showPaletteView = output }
+            withAnimation { show = output }
         }
         .onReceive(secretary.$showPaletteInfo) { output in
             if output {
