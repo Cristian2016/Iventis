@@ -87,7 +87,7 @@ struct SessionDeleteInfoView:View {
     // MARK: - Lego
     private var content:some View {
         VStack(alignment: .leading) {
-            Text("*Deletes session together with any associated Calendar Event*")
+            Text("*Deletes session together with the associated Calendar Event, if any*")
                 .forceMultipleLines() //⚠️
                 .foregroundColor(.secondary)
             
