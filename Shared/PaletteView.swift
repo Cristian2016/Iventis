@@ -51,8 +51,9 @@ struct PaletteView: View {
     // MARK: - Legos
     private var colors:some View {
         ScrollView {
-            Color.clear
-                .frame(height: 35)
+            Color
+                .clear
+                .frame(height: 30)
             Grid {
                 ForEach(Color.paletteTriColors, id: \.self) { subarray in
                     GridRow {
