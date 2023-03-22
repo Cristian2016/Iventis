@@ -17,7 +17,7 @@ struct MoreOptionsInfoView: View {
                 Divider()
                 VStack(alignment: .leading) {
                     Text("**Save Delay** \(Image.tap) Tap")
-                    Text("*If delay is set*")
+                    Text("*If delay is set (not zero)*")
                         .foregroundColor(.secondary)
                 }
                 Text("**Remove** \(Image.leftSwipe) Swipe")
