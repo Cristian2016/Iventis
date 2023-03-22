@@ -159,7 +159,7 @@ extension DurationPickerView {
             ZStack {
                 if show {
                     Rectangle()
-                        .fill(Color.label.opacity(0.8))
+                        .fill(Color.black.opacity(0.8))
                         .ignoresSafeArea()
                     
                     ThinMaterialLabel(title: "Timer Duration") {
