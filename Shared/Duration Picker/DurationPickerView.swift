@@ -124,14 +124,13 @@ struct DurationPickerView: View {
             }
         }
         .background()
-        .gesture(swipe)
+//        .gesture(swipe)
     }
     
     // MARK: -
     private func dismiss() {
-        print(#function)
         manager.shouldComputeInitialClock(color: tricolor!.description)
-        self.tricolor = nil
+        self.tricolor = nil //dismiss Self
         manager.removeAllDigits()
     }
     

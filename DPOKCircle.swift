@@ -16,19 +16,9 @@ extension DurationPickerView {
         var body: some View {
             ZStack {
                 if show {
-                    Circle()
-                        .fill(.green)
-                        .overlay {
-                            Rectangle()
-                                .fill(.clear)
-                                .aspectRatio(2.0, contentMode: .fit)
-                                .overlay {
-                                    Text("OK")
-                                        .font(.system(size: 100))
-                                        .minimumScaleFactor(0.1)
-                                        .foregroundColor(.white)
-                                }
-                        }
+                    Image.roundCheckmark
+                        .font(.system(size: 200, weight: .ultraLight))
+                        .foregroundColor(.green)
                         .onTapGesture { action() } //1
                 }
             }
