@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import MyPackage
 
 extension DurationPickerView {
     class Manager {
@@ -97,6 +98,8 @@ extension DurationPickerView {
                     Secretary.shared.topMostView = .palette
                     return
                 }
+                
+                UserFeedback.singleHaptic(.medium)
                 
                 //compute duration, in other words initialClock [total seconds]
                 let initialClock = zip(digitsCopy, self.matrix).reduce(0) { $0 + $1.0 * $1.1 }
