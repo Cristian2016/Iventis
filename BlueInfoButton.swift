@@ -75,6 +75,7 @@ struct SessionDeleteInfoView:View {
                 
                 Color.black.opacity(0.6).ignoresSafeArea()
                 ThinMaterialLabel(title, subtitle) { infoContent } action: { dismiss() }
+                    .font(.system(size: 20))
             }
         }
         .onReceive(Secretary.shared.$showSessionDeleteInfo) { output in
