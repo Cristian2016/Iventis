@@ -57,6 +57,8 @@ public class Bubble: NSManagedObject {
             }
         }
     }
+    
+    var isTimer:Bool { kind != .stopwatch }
 }
 
 extension Bubble {

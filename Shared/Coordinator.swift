@@ -117,12 +117,7 @@ class BubbleCellCoordinator {
         let intValue = Int(value)
         let secValue = intValue%60
         
-        if bubble?.color == "mint" {
-            print("secValue \(secValue)")
-        }
-        
         let refreshForTimer = isTimer && secValue == 59
-//        print("refreshForTimer \(refreshForTimer)")
         
         if secValue == 0 || refresh || refreshForTimer { //send minute and hour
             let giveMeAName = intValue/60%60

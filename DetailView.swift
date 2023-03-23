@@ -45,6 +45,7 @@ struct DetailView: View {
                 }
             }
         }
+        .navigationTitle(Text(bubble.isTimer ? "\(bubble.initialClock.timerTitle)" : ""))
         .toolbarBackground(.ultraThinMaterial)
         .toolbar {
             ToolbarItemGroup {

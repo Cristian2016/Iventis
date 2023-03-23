@@ -175,6 +175,17 @@ public extension Float {
         return result
     }
     
+    var timerTitle:String {
+        let components = self.timeComponentsAsStrings
+        
+        let hr = (components.hr != "0") ? components.hr + "h" : ""
+        let min = (components.min != "0") ? components.min + "m" : ""
+        let sec = components.sec != "0" ? components.sec + "s" : ""
+        var result = hr + " " + min + " " + sec
+        result.trimWhiteSpaceAtTheBeginning()
+        return result
+    }
+    
     struct TimeComponents {
         let hr:Int
         let min:Int
