@@ -29,7 +29,6 @@ class PairBubbleCellCoordinator {
                 switch action {
                     case .start:
                         refresh = shouldRefresh ? true : false
-                        print("refresh \(refresh)")
                         publisher
                             .sink { [weak self] _ in self?.task() }
                             .store(in: &cancellable)

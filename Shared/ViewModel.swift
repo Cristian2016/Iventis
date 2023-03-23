@@ -299,7 +299,7 @@ extension ViewModel {
                             let refresh = thisBubble.kind != .stopwatch || startDelayCompensation != 0
                             
                             bubble.coordinator.update(.user(.start), refresh: refresh)
-                            bubble.pairBubbleCellCoordinator.update(.user(.start), refresh)
+                            bubble.pairBubbleCellCoordinator.update(.user(.start))
                             
                             //1 both
                             self.secretary.addNoteButton_bRank = nil //clear first
@@ -324,14 +324,7 @@ extension ViewModel {
                     //this also makes changes visible to the viewContext as well
                     self.controller.save(bContext) { //⚠️ no need to save vContext
                         delayExecution(self.delay) { //UI stuff
-                            
-                            //refresh if it's a timer or bubble has a startDelay
-                            let isTimer = thisBubble.kind != .stopwatch
-                            let hasStartDelay = startDelayCompensation != 0
-                            let refresh = isTimer || hasStartDelay
-                            
-                            bubble.coordinator.update(.user(.start), refresh: refresh)
-                            
+                            bubble.coordinator.update(.user(.start))
                             bubble.pairBubbleCellCoordinator.update(.user(.start))
                             
                             //1 both

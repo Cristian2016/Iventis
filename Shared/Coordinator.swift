@@ -63,7 +63,7 @@ class BubbleCellCoordinator {
                             }
                             
                         case .start:
-                            self.refresh = refresh
+                            self.refresh = true
                             self.publisher
                                 .sink { [weak self] _ in self?.task(currentClock, lastPairStart) }
                                 .store(in: &self.cancellable) //connect
@@ -117,7 +117,14 @@ class BubbleCellCoordinator {
         let intValue = Int(value)
         let secValue = intValue%60
         
-        if secValue == 0 || refresh { //send minute and hour
+        if bubble?.color == "mint" {
+            print("secValue \(secValue)")
+        }
+        
+        let refreshForTimer = isTimer && secValue == 59
+//        print("refreshForTimer \(refreshForTimer)")
+        
+        if secValue == 0 || refresh || refreshForTimer { //send minute and hour
             let giveMeAName = intValue/60%60
             let minValue = String(giveMeAName)
             
@@ -126,12 +133,12 @@ class BubbleCellCoordinator {
                 if intValue == 60 || refresh { self.opacity.updateOpacity(value) }
             }
             
-            if (giveMeAName%60) == 0 || refresh {
+            if (giveMeAName%60) == 0 || refresh || refreshForTimer {
                 let hrValue = String(intValue/3600)
                 
                 DispatchQueue.main.async { //send hour
                     self.components.hr = hrValue
-                    if intValue == 3600 || refresh { self.opacity.updateOpacity(value) }
+                    if intValue == 3600 || refresh || refreshForTimer { self.opacity.updateOpacity(value) }
                 }
             }
         }
