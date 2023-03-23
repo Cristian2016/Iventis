@@ -74,6 +74,7 @@ class BubbleCellCoordinator {
                             let stringComponents = initialClock.timeComponentsAsStrings
                             
                             DispatchQueue.main.async {
+                                self.elapsedPercentage = 1
                                 self.components.hr = stringComponents.hr
                                 self.components.min = stringComponents.min
                                 self.components.sec = stringComponents.sec

@@ -76,7 +76,7 @@ extension SecondsLabel {
                                 .stroke(.white, lineWidth: 1)
                         }
                         .onReceive(bubble.coordinator.$elapsedPercentage) { output in
-                            timerProgress = String(format: "%.2f", output)
+                            timerProgress = String(format: "%.3f", output)
                         }
                 }
             }
