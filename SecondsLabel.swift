@@ -21,6 +21,16 @@ struct SecondsLabel: View {
                         .aspectRatio(1.2, contentMode: .fit)
                         .overlay (text)
                 )
+                .overlay(content: {
+                    VStack {
+                        Color.clear
+                            .aspectRatio(6, contentMode: .fit)
+                            .overlay { TimerPercentageView(bubble) }
+                        Color.clear
+                        Color.clear
+                    }
+                    .scaleEffect(x: 1.4, y: 1.4)
+                })
                 .onReceive(bubble.coordinator.$components) { sec = $0.sec }
         }
     }
@@ -46,5 +56,30 @@ struct SecondsLabel: View {
         guard let bubble = bubble else { return nil }
         self.bubble = bubble
         self.sec = bubble.coordinator.components.sec
+    }
+}
+
+extension SecondsLabel {
+    struct TimerPercentageView:View {
+        let bubble:Bubble
+        
+        var body: some View {
+            ZStack {
+                if bubble.isTimer {
+                    Text("0.1")
+                        .font(.system(size: 30, design: .monospaced))
+                        .minimumScaleFactor(0.1)
+                        .padding([.leading, .trailing], 8)
+                        .background {
+                            RoundedRectangle(cornerRadius: 2)
+                                .stroke(.white, lineWidth: 1)
+                        }
+                }
+            }
+        }
+        
+        init(_ bubble: Bubble) {
+            self.bubble = bubble
+        }
     }
 }
