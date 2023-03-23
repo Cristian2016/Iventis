@@ -35,6 +35,8 @@ extension Notification.Name {
     
     ///kill StartSelayBubble  since sdb.state is now .finished
     static let killSDB = Notification.Name("killSDB")
+    
+    static let createTimer = Notification.Name("createTimer")
 } //1 ViewModel
 
 extension Notification {

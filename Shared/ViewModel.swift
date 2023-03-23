@@ -24,6 +24,7 @@
 //17 if ordinary bubbles are hidden & bubble to delete is pinned and pinned section has only one item, show ordinary!
 //18 Viewmodel listens for killStartDelayBubble notifications. ex: user sets a startDelay of 30 seconds. after 30 seconds StartDelayButton (SDButton) will be removed and bubble will be started. but it will be started with a correction (startCorrection) that is computed by sdbCoordinator. ViewModel.toggleBubbleStart calls the startCorrection "delta". Maybe I should change names a bit :)
 //19 set startDelay or replace existing startDelay with a new delay. if no sdb, create sdb and set startDelay. if sdb exists already, remove it and create a new sdb with a new startDelay
+//20 DurationPickerView.Manager posts when user created a valid duration for the timer. this means timer can be created by the viewModel
 
 import Foundation
 import SwiftUI
@@ -32,6 +33,8 @@ import CoreData
 import MyPackage
 
 class ViewModel: ObservableObject {
+    let center = NotificationCenter.default
+    
     private let delay:DispatchTime = .now() + 0.01
     
     private let secretary = Secretary.shared
@@ -181,6 +184,7 @@ class ViewModel: ObservableObject {
         observe_ApplicationActive()
         observe_ApplicationBackground()
         observe_KillSDB()
+        observe_CreateTimer()
         
         secretary.updateBubblesReport(.appLaunch)
     }
@@ -776,7 +780,6 @@ extension ViewModel {
     }
     
     private func observe_KillSDB() {
-        let center = NotificationCenter.default
         center.addObserver(forName: .killSDB, object: nil, queue: nil) {[weak self] in
                         
             guard
@@ -790,6 +793,16 @@ extension ViewModel {
             self?.toggleBubbleStart(bubble, startDelayCompensation: startCorrection)
         }
     } //18
+    
+    private func observe_CreateTimer() {
+        center.addObserver(forName: .createTimer, object: nil, queue: nil) { [weak self] in
+            guard
+                let color = $0.userInfo!["color"] as? String,
+                let initialClock = $0.userInfo!["initialClock"] as? Int else { return }
+            
+            self?.createBubble(.timer(Float(initialClock)), color)
+        }
+    } //20
         
     enum SDBMode {
         case start

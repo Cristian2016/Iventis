@@ -35,6 +35,7 @@
 		1F38A00429B9000D009AD543 /* yPositionTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F38A00329B9000D009AD543 /* yPositionTracker.swift */; };
 		1F38C5A32986615F00057B8C /* FusedLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F38C5A22986615F00057B8C /* FusedLabel.swift */; };
 		1F3950BA29966DEA00DD9423 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F3950B929966DEA00DD9423 /* Coordinator.swift */; };
+		1F3C164129CB5549003B39C0 /* BubbleInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F3C164029CB5549003B39C0 /* BubbleInfoView.swift */; };
 		1F42B99D2973E34E0024DB5F /* Code Snippets.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 1F42B99C2973E34E0024DB5F /* Code Snippets.rtf */; };
 		1F477CA928EAB21900B4F965 /* AddStickyNoteQuickButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F477CA828EAB21900B4F965 /* AddStickyNoteQuickButton.swift */; };
 		1F48F55A286AE5B30071386A /* EmptyNote_InfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F48F559286AE5B30071386A /* EmptyNote_InfoView.swift */; };
@@ -187,6 +188,7 @@
 		1F38A00329B9000D009AD543 /* yPositionTracker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = yPositionTracker.swift; sourceTree = "<group>"; };
 		1F38C5A22986615F00057B8C /* FusedLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FusedLabel.swift; sourceTree = "<group>"; };
 		1F3950B929966DEA00DD9423 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
+		1F3C164029CB5549003B39C0 /* BubbleInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BubbleInfoView.swift; sourceTree = SOURCE_ROOT; };
 		1F42B99C2973E34E0024DB5F /* Code Snippets.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = "Code Snippets.rtf"; sourceTree = "<group>"; };
 		1F477CA828EAB21900B4F965 /* AddStickyNoteQuickButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddStickyNoteQuickButton.swift; sourceTree = "<group>"; };
 		1F48F559286AE5B30071386A /* EmptyNote_InfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyNote_InfoView.swift; sourceTree = "<group>"; };
@@ -417,6 +419,7 @@
 		1F5F4A4728093FAD00AF3442 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				1F3C164029CB5549003B39C0 /* BubbleInfoView.swift */,
 				1FFE8DFF29CAD57400EF5B2A /* DPOKCircle.swift */,
 				1FC2335829CA488900FBE483 /* MoreOptionsInfoView.swift */,
 				1FE76DB929C9F213003012F0 /* BlueInfoButton.swift */,
@@ -722,6 +725,7 @@
 				1F04769229BB4AFF00641CDC /* StartDelayBubble.swift in Sources */,
 				1F9BE0AD280C6AB000F87EFA /* TapHold.swift in Sources */,
 				1F520C6D2987DFBC00B25029 /* PairCell.swift in Sources */,
+				1F3C164129CB5549003B39C0 /* BubbleInfoView.swift in Sources */,
 				1FA377E82972FE75005ACD41 /* Library.swift in Sources */,
 				1FA355CB2832186100F73111 /* CalendarManager.swift in Sources */,
 				1FB5D8D828E96CBD00DD522A /* StartDelayInfoView.swift in Sources */,

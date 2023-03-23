@@ -3,7 +3,7 @@
 //  Timers (iOS)
 //
 //  Created by Cristian Lapusan on 19.03.2023.
-//
+//1 create bubble.timer of this color and this many seconds as initialClock
 
 import SwiftUI
 import MyPackage
@@ -95,18 +95,20 @@ extension DurationPickerView {
                 //make sure the entered digits are valid
                 let sum = digitsCopy.reduce(0) { $0 + $1 }
                 let condition = digitsCopy.count%2 == 0 && sum != 0
-                guard condition else {
+                
+                guard condition else { //digits are not valid
                     Secretary.shared.topMostView = .palette
                     return
                 }
                 
+                //digits are valid
                 UserFeedback.singleHaptic(.medium)
                 
-                //compute duration, in other words initialClock [total seconds]
+                //compute duration [initialClock] as total seconds
                 let initialClock = zip(digitsCopy, self.matrix).reduce(0) { $0 + $1.0 * $1.1 }
                 
-                print("\(color) timer with initial clock ", initialClock)
                 //ask viewModel to create timer of color and initialClock
+                self.askViewModelToCreateTimer(with:color, and:initialClock)
                 
                 //dismiss palette also
                 DispatchQueue.main.async {
@@ -118,6 +120,11 @@ extension DurationPickerView {
         }
         
         // MARK: -
+        private func askViewModelToCreateTimer(with color:String, and initialClock: Int) {
+            let info : [String : Any] = ["color" : color, "initialClock" : initialClock]
+            NotificationCenter.default.post(name: .createTimer, object: nil, userInfo: info)
+        } //
+        
         public func charactersToDisable() {
             if digits == [4,8] {
                 notAllowedCharacters = .allDigits
