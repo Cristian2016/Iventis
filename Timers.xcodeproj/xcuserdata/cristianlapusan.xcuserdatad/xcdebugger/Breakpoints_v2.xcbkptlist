@@ -220,8 +220,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "413"
             endingLineNumber = "413"
-            landmarkName = "toggleCalendar(_:)"
-            landmarkType = "7">
+            landmarkName = "ViewModel"
+            landmarkType = "21">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy

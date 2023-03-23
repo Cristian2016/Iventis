@@ -21,6 +21,7 @@ extension BubbleCellCoordinator {
 
 class BubbleCellCoordinator {
     weak private(set) var bubble:Bubble?
+    private let isTimer:Bool
     
     // MARK: - Public API
     func update(_ moment:Moment, refresh:Bool = false) { //main Thread ⚠️
@@ -188,6 +189,7 @@ class BubbleCellCoordinator {
     init(for bubble:Bubble) {
         self.bubble = bubble
         self.colorPublisher = .init(Color.bubbleColor(forName: bubble.color))
+        self.isTimer = bubble.kind != .stopwatch
         
         observeActivePhase()
         
