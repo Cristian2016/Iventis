@@ -61,6 +61,7 @@ struct SecondsLabel: View {
 
 extension SecondsLabel {
     struct TimerPercentageView:View {
+        private let precision = "%.3f"
         private let bubble:Bubble
         @State private var timerProgress = "1.0"
         
@@ -75,8 +76,8 @@ extension SecondsLabel {
                             RoundedRectangle(cornerRadius: 4)
                                 .stroke(.white, lineWidth: 1)
                         }
-                        .onReceive(bubble.coordinator.$elapsedPercentage) { output in
-                            timerProgress = String(format: "%.3f", output)
+                        .onReceive(bubble.coordinator.$timerProgress) { output in
+                            timerProgress = String(format: precision, output)
                         }
                 }
             }

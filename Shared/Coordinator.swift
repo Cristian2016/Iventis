@@ -74,7 +74,7 @@ class BubbleCellCoordinator {
                             let stringComponents = initialClock.timeComponentsAsStrings
                             
                             DispatchQueue.main.async {
-                                self.elapsedPercentage = 1
+                                self.timerProgress = 1
                                 self.components.hr = stringComponents.hr
                                 self.components.min = stringComponents.min
                                 self.components.sec = stringComponents.sec
@@ -97,7 +97,7 @@ class BubbleCellCoordinator {
     
     @Published var sdButtonYOffset = CGFloat(0)
     @Published var sdbDeleteTriggered = false
-    @Published var elapsedPercentage = 1.0
+    @Published var timerProgress = 1.0
         
     @Published private(set) var components = Components("-1", "-1", "-1", "-1")
     @Published private(set) var opacity = Opacity()
@@ -118,7 +118,7 @@ class BubbleCellCoordinator {
         
         if isTimer {
             DispatchQueue.main.async { [weak self] in
-                self?.elapsedPercentage = Double(value/(self?.bubble?.initialClock ?? 1))
+                self?.timerProgress = Double(value/(self?.bubble?.initialClock ?? 1))
             }
         }
         
