@@ -13,8 +13,6 @@ struct BubbleCell: View {
     ///padding with respect to the list edges so that it comes closer to the edges of the screen
     private let secretary = Secretary.shared
     
-    @State private var components:Float.TimeComponentsAsStrings = .zeroAll
-    
     let metrics = Metrics()
     
     @StateObject private var bubble:Bubble
