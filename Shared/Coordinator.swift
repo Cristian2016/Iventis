@@ -11,6 +11,7 @@
 //5 lets continuous update do one pass to refresh all time components. for ex: when user starts bubble, there is no need for a refresh
 //6 evaluate before creating a new session, otherwise the value will be alwatys false
 //7 read currentClock on the mainThread. do not access bubble on a backgroundThread!
+//8 the tiny label that a timer has on seconds
 
 import SwiftUI
 import Combine
@@ -97,7 +98,7 @@ class BubbleCellCoordinator {
     
     @Published var sdButtonYOffset = CGFloat(0)
     @Published var sdbDeleteTriggered = false
-    @Published var timerProgress = 1.0
+    @Published var timerProgress = 1.0 //8
         
     @Published private(set) var components = Components("-1", "-1", "-1", "-1")
     @Published private(set) var opacity = Opacity()
