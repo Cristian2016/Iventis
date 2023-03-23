@@ -96,6 +96,7 @@ class BubbleCellCoordinator {
     
     @Published var sdButtonYOffset = CGFloat(0)
     @Published var sdbDeleteTriggered = false
+    @Published var elapsedPercentage = 1.0
         
     @Published private(set) var components = Components("-1", "-1", "-1", "-1")
     @Published private(set) var opacity = Opacity()
@@ -113,6 +114,12 @@ class BubbleCellCoordinator {
         var value = isTimer ? currentClock - Δ : currentClock + Δ //ex: 2345.87648
         
         value.round(.toNearestOrEven) //ex: 2346
+        
+        if isTimer {
+            DispatchQueue.main.async { [weak self] in
+                self?.elapsedPercentage = Double(value/(self?.bubble?.initialClock ?? 1))
+            }
+        }
         
         let intValue = Int(value)
         let secValue = intValue%60

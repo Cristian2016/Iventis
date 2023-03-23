@@ -62,18 +62,21 @@ struct SecondsLabel: View {
 extension SecondsLabel {
     struct TimerPercentageView:View {
         private let bubble:Bubble
-        @State private var percentage = "1.0"
+        @State private var timerProgress = "1.0"
         
         var body: some View {
             ZStack {
                 if bubble.isTimer {
-                    Text(percentage)
+                    Text(timerProgress)
                         .font(.system(size: 30, design: .monospaced))
                         .minimumScaleFactor(0.1)
                         .padding([.leading, .trailing], 8)
                         .background {
                             RoundedRectangle(cornerRadius: 4)
                                 .stroke(.white, lineWidth: 1)
+                        }
+                        .onReceive(bubble.coordinator.$elapsedPercentage) { output in
+                            timerProgress = String(format: "%.2f", output)
                         }
                 }
             }
