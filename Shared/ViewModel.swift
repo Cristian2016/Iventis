@@ -294,6 +294,8 @@ extension ViewModel {
                     //this also makes changes visible to the viewContext as well
                     self.controller.save(bContext) { //⚠️ no need to save viewContext
                         delayExecution(self.delay) { //UI stuff
+                            
+                            //refresh if it's a timer or bubble has a startDelay
                             let refresh = thisBubble.kind != .stopwatch || startDelayCompensation != 0
                             
                             bubble.coordinator.update(.user(.start), refresh: refresh)
@@ -323,7 +325,10 @@ extension ViewModel {
                     self.controller.save(bContext) { //⚠️ no need to save vContext
                         delayExecution(self.delay) { //UI stuff
                             
-                            let refresh = thisBubble.kind != .stopwatch || startDelayCompensation != 0
+                            //refresh if it's a timer or bubble has a startDelay
+                            let isTimer = thisBubble.kind != .stopwatch
+                            let hasStartDelay = startDelayCompensation != 0
+                            let refresh = isTimer || hasStartDelay
                             
                             bubble.coordinator.update(.user(.start), refresh: refresh)
                             
