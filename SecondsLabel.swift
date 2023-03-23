@@ -72,7 +72,7 @@ extension SecondsLabel {
                         .minimumScaleFactor(0.1)
                         .padding([.leading, .trailing], 8)
                         .background {
-                            RoundedRectangle(cornerRadius: 2)
+                            RoundedRectangle(cornerRadius: 4)
                                 .stroke(.white, lineWidth: 1)
                         }
                 }
