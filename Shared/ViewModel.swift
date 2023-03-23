@@ -294,7 +294,7 @@ extension ViewModel {
                     //this also makes changes visible to the viewContext as well
                     self.controller.save(bContext) { //⚠️ no need to save viewContext
                         delayExecution(self.delay) { //UI stuff
-                            let refresh = startDelayCompensation != 0
+                            let refresh = thisBubble.kind != .stopwatch || startDelayCompensation != 0
                             
                             bubble.coordinator.update(.user(.start), refresh: refresh)
                             bubble.pairBubbleCellCoordinator.update(.user(.start), refresh)
@@ -323,7 +323,8 @@ extension ViewModel {
                     self.controller.save(bContext) { //⚠️ no need to save vContext
                         delayExecution(self.delay) { //UI stuff
                             
-                            let refresh = startDelayCompensation != 0
+                            let refresh = thisBubble.kind != .stopwatch || startDelayCompensation != 0
+                            
                             bubble.coordinator.update(.user(.start), refresh: refresh)
                             
                             bubble.pairBubbleCellCoordinator.update(.user(.start))
@@ -346,7 +347,15 @@ extension ViewModel {
                     currentPair!.pause = Date()
                     
                     currentPair!.computeDuration(.atPause)
-                    thisBubble.currentClock += currentPair!.duration
+                    
+                    let isTimer = thisBubble.kind != .stopwatch
+                    
+                    if isTimer {
+                        thisBubble.currentClock -= currentPair!.duration
+                    } else {
+                        thisBubble.currentClock += currentPair!.duration
+                    }
+                    
                     thisBubble.lastSession!.computeDuration()
                     self.controller.save(bContext) {
                         delayExecution(self.delay) {

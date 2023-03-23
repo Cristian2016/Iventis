@@ -109,7 +109,8 @@ class BubbleCellCoordinator {
         let refresh = self.refresh
                                 
         let Δ = Float(Date().timeIntervalSince(lastPairStart)) //2
-        var value = currentClock + Δ //ex: 2345.87648
+        
+        var value = isTimer ? currentClock - Δ : currentClock + Δ //ex: 2345.87648
         
         value.round(.toNearestOrEven) //ex: 2346
         
