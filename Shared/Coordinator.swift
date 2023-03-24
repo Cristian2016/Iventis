@@ -12,6 +12,7 @@
 //6 evaluate before creating a new session, otherwise the value will be alwatys false
 //7 read currentClock on the mainThread. do not access bubble on a backgroundThread!
 //8 the tiny label that a timer has on seconds
+//9 ⚠️ I made a copy because I'm not sure it's safe to read bubble.properties from a background thread, since initialValue is reading bubble.properties
 
 import SwiftUI
 import Combine
@@ -179,7 +180,7 @@ class BubbleCellCoordinator {
                 let bubble = self?.bubble,
                 let self = self else { return }
             
-            let initialValueCopy = initialValue
+            let initialValueCopy = initialValue //9
             
             DispatchQueue.global().async {
                 let components = initialValueCopy.timeComponentsAsStrings
