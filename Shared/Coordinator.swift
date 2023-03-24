@@ -77,7 +77,7 @@ class BubbleCellCoordinator {
                             let stringComponents = initialClock.timeComponentsAsStrings
                             
                             DispatchQueue.main.async {
-                                self.timerProgress = 1
+                                self.timerProgress = 0.0
                                 self.components.hr = stringComponents.hr
                                 self.components.min = stringComponents.min
                                 self.components.sec = stringComponents.sec
@@ -162,11 +162,12 @@ class BubbleCellCoordinator {
     private var cancellable = Set<AnyCancellable>()
         
     private var initialValue:Float {
+        print("initialValue main \(Thread.isMainThread)")
         guard let bubble = bubble else { fatalError() }
         
         if bubble.state == .running {
             let Δ = Date().timeIntervalSince(bubble.lastPair!.start!)
-            let initialValue = bubble.currentClock + Float(Δ)
+            let initialValue = isTimer ?  bubble.currentClock - Float(Δ) : bubble.currentClock + Float(Δ)
             return initialValue
         } else {
             return bubble.currentClock
@@ -174,17 +175,15 @@ class BubbleCellCoordinator {
     }
     
     // MARK: - Observers
-    private func observeActivePhase() {
+    private func observeActivePhase(_ initialValue:Float) {
         NotificationCenter.default.addObserver(forName: .didBecomeActive, object: nil, queue: nil) { [weak self] _ in
             
             guard
                 let bubble = self?.bubble,
                 let self = self else { return }
-                        
-            let initialValueCopy = initialValue //9
-            
-            DispatchQueue.global().async {
-                let components = initialValueCopy.timeComponentsAsStrings
+                                    
+            DispatchQueue.global().async { //⚪️
+                let components = initialValue.timeComponentsAsStrings
                 
                 DispatchQueue.main.async {
                     self.components = Components(components.hr,
@@ -193,7 +192,7 @@ class BubbleCellCoordinator {
                                                  components.hundredths
                     )
                     
-                    self.opacity.updateOpacity(self.initialValue)
+                    self.opacity.updateOpacity(initialValue)
                     
                     if bubble.state == .running { self.update(.automatic) }
                 }
@@ -207,16 +206,18 @@ class BubbleCellCoordinator {
         self.colorPublisher = .init(Color.bubbleColor(forName: bubble.color))
         self.isTimer = bubble.kind != .stopwatch
         
-        observeActivePhase() //10
+        let initialValueCopy = self.initialValue
+        
+        observeActivePhase(initialValueCopy) //10
         
         //set initial values when bubble is created [ViewModel.createBubble]
         DispatchQueue.global().async {
-            let components = self.initialValue.timeComponentsAsStrings
+            let components = initialValueCopy.timeComponentsAsStrings
             self.components = Components(components.hr,
                                          components.min,
                                          components.sec,
                                          components.hundredths)
-            self.opacity.updateOpacity(self.initialValue)
+            self.opacity.updateOpacity(initialValueCopy)
         }
     }
     
