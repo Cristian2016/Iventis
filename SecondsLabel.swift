@@ -72,7 +72,6 @@ extension SecondsLabel {
                     
                     Text(timerProgress)
                         .font(.system(size: 30, weight: .semibold))
-                        .foregroundColor(.black)
                         .minimumScaleFactor(0.1)
                         .padding([.leading, .trailing], 4)
                         .background {
