@@ -24,7 +24,7 @@ struct SecondsLabel: View {
                 .overlay(content: {
                     VStack {
                         Color.clear
-                            .aspectRatio(6, contentMode: .fit)
+                            .aspectRatio(2.2, contentMode: .fit)
                             .overlay { TimerPercentageView(bubble) }
                         Color.clear
                         Color.clear
@@ -61,20 +61,23 @@ struct SecondsLabel: View {
 
 extension SecondsLabel {
     struct TimerPercentageView:View {
-        private let precision = "%.2f"
+        private let precision = "%.1f"
         private let bubble:Bubble
         @State private var timerProgress = "1.0"
         
         var body: some View {
             ZStack {
                 if bubble.isTimer {
+                    let color = Color.bubbleColor(forName: bubble.color)
+                    
                     Text(timerProgress)
-                        .font(.system(size: 30, design: .monospaced))
+                        .font(.system(size: 30, weight: .semibold))
                         .minimumScaleFactor(0.1)
-                        .padding([.leading, .trailing], 8)
+                        .padding(6)
                         .background {
-                            RoundedRectangle(cornerRadius: 4)
-                                .stroke(.white, lineWidth: 1)
+                            Ellipse()
+                                .fill(color.gradient)
+                                .scaleEffect(x: 1.2, y: 1.2)
                         }
                         .onReceive(bubble.coordinator.$timerProgress) { output in
                             timerProgress = String(format: precision, output)
