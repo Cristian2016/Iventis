@@ -55,8 +55,8 @@ class BubbleCellCoordinator {
                         case .pause:
                             self.cancellable = []
                             
-                            DispatchQueue.global().async {
-                                let components = self.initialValue.timeComponentsAsStrings
+                            self.bInitialValue {
+                                let components = $0.timeComponentsAsStrings
                                 
                                 DispatchQueue.main.async {
                                     self.components = Components(components.hr,
@@ -161,22 +161,7 @@ class BubbleCellCoordinator {
     NotificationCenter.Publisher(center: .default, name: .bubbleTimerSignal)
     
     private var cancellable = Set<AnyCancellable>()
-    
-    private var initialValue:Float {
-        guard let bubble = bubble else { fatalError() }
         
-        let isRunning = bubble.state == .running
-        let lastPairStart = bubble.lastPair?.start
-        let currentClock = bubble.currentClock
-        
-        if isRunning {
-            let Δ = Date().timeIntervalSince(lastPairStart!)
-            let initialValue = isTimer ?  currentClock - Float(Δ) : currentClock + Float(Δ)
-            return initialValue
-        }
-        else { return currentClock }
-    }
-    
     private func bInitialValue(completion: @escaping (Float) -> Void) {
         guard let bubble = bubble else { fatalError() }
         
