@@ -160,7 +160,7 @@ class BubbleCellCoordinator {
     NotificationCenter.Publisher(center: .default, name: .bubbleTimerSignal)
     
     private var cancellable = Set<AnyCancellable>()
-        
+    
     private var initialValue:Float {
         guard let bubble = bubble else { fatalError() }
         let isRunning = bubble.state == .running
@@ -172,9 +172,8 @@ class BubbleCellCoordinator {
             let initialValue = isTimer ?  currentClock - Float(Δ) : currentClock + Float(Δ)
             
             return initialValue
-        } else {
-            return currentClock
         }
+        else { return currentClock }
     }
     
     // MARK: - Observers
