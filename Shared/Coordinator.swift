@@ -176,6 +176,25 @@ class BubbleCellCoordinator {
         else { return currentClock }
     }
     
+    private func bInitialValue(completion: @escaping (Float) -> Void) {
+        guard let bubble = bubble else { fatalError() }
+        
+        let isRunning = bubble.state == .running
+        let lastPairStart = bubble.lastPair!.start!
+        let currentClock = bubble.currentClock
+        let isTimer = bubble.isTimer
+        
+        DispatchQueue.global().async {
+            if isRunning {
+                let Δ = Date().timeIntervalSince(lastPairStart)
+                let initialValue = isTimer ?  currentClock - Float(Δ) : currentClock + Float(Δ)
+                
+                completion(initialValue)
+            }
+            else { completion(currentClock) }
+        }
+    }
+    
     // MARK: - Observers
     private func observeActivePhase(_ initialValue:Float) {
         NotificationCenter.default.addObserver(forName: .didBecomeActive, object: nil, queue: nil) { [weak self] _ in
