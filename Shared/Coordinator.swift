@@ -202,7 +202,7 @@ class BubbleCellCoordinator {
         NotificationCenter.default.addObserver(forName: .didBecomeActive, object: nil, queue: nil) { [weak self] _ in
             
             guard let bubble = self?.bubble, let self = self else { return }
-                                                
+            
             DispatchQueue.global().async {
                 let comp = initialValue.timeComponentsAsStrings //components
                 
