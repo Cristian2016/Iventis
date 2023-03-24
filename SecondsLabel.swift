@@ -75,11 +75,6 @@ extension SecondsLabel {
                         .foregroundColor(.black)
                         .minimumScaleFactor(0.1)
                         .padding([.leading, .trailing], 4)
-//                        .background {
-//                            RoundedRectangle(cornerRadius: 4)
-//                                .stroke(color, lineWidth: 1)
-//                                .scaleEffect(x: 1.2, y: 1.2)
-//                        }
                         .background(.thinMaterial, in: RoundedRectangle(cornerRadius: 4))
                         .onReceive(bubble.coordinator.$timerProgress) { output in
                             timerProgress = String(format: precision, output)
