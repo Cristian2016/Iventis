@@ -162,15 +162,18 @@ class BubbleCellCoordinator {
     private var cancellable = Set<AnyCancellable>()
         
     private var initialValue:Float {
-        print("initialValue main \(Thread.isMainThread)")
         guard let bubble = bubble else { fatalError() }
+        let isRunning = bubble.state == .running
+        let lastPairStart = bubble.lastPair!.start!
+        let currentClock = bubble.currentClock
         
         if bubble.state == .running {
-            let Δ = Date().timeIntervalSince(bubble.lastPair!.start!)
-            let initialValue = isTimer ?  bubble.currentClock - Float(Δ) : bubble.currentClock + Float(Δ)
+            let Δ = Date().timeIntervalSince(lastPairStart)
+            let initialValue = isTimer ?  currentClock - Float(Δ) : currentClock + Float(Δ)
+            
             return initialValue
         } else {
-            return bubble.currentClock
+            return currentClock
         }
     }
     
