@@ -206,9 +206,8 @@ class BubbleCellCoordinator {
         self.bubble = bubble
         self.colorPublisher = .init(Color.bubbleColor(forName: bubble.color))
         self.isTimer = bubble.kind != .stopwatch
-        print(#function, " BubbleCoordinator")
         
-//        observeActivePhase() //10
+        observeActivePhase() //10
         
         //set initial values when bubble is created [ViewModel.createBubble]
 //        DispatchQueue.global().async {

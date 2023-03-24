@@ -363,6 +363,36 @@
                   endingLineNumber = "180"
                   offsetFromSymbolStart = "584">
                </Location>
+               <Location
+                  uuid = "A3B42165-53EA-49AE-9130-084489F866EE - 58bc98fb413ceb1e"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Timers.BubbleCellCoordinator.observeActivePhase() -&gt; ()"
+                  moduleName = "Timers"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/cristianlapusan/Downloads/Timers/Shared/Coordinator.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "178"
+                  endingLineNumber = "178"
+                  offsetFromSymbolStart = "28">
+               </Location>
+               <Location
+                  uuid = "A3B42165-53EA-49AE-9130-084489F866EE - 2c4241cbd9601c16"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 @Sendable (Foundation.Notification) -&gt; () in Timers.BubbleCellCoordinator.observeActivePhase() -&gt; ()"
+                  moduleName = "Timers"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/cristianlapusan/Downloads/Timers/Shared/Coordinator.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "178"
+                  endingLineNumber = "178"
+                  offsetFromSymbolStart = "308">
+               </Location>
             </Locations>
          </BreakpointContent>
       </BreakpointProxy>
