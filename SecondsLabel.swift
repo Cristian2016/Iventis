@@ -25,7 +25,7 @@ struct SecondsLabel: View {
                     VStack {
                         Color.clear
                             .aspectRatio(6, contentMode: .fit)
-                            .overlay { TimerPercentageView(bubble) }
+                            .overlay { TimerProgressView(bubble) }
                         Color.clear
                         Color.clear
                     }
@@ -60,7 +60,7 @@ struct SecondsLabel: View {
 }
 
 extension SecondsLabel {
-    struct TimerPercentageView:View {
+    struct TimerProgressView:View {
         private let precision = "%.2f"
         private let bubble:Bubble
         @State private var timerProgress = "1.0"
