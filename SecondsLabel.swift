@@ -82,8 +82,6 @@ extension SecondsLabel {
             }
         }
         
-        init(_ bubble: Bubble) {
-            self.bubble = bubble
-        }
+        init(_ bubble: Bubble) { self.bubble = bubble }
     }
 }
