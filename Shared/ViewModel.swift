@@ -148,8 +148,7 @@ class ViewModel: ObservableObject {
         return bubble
     }
     
-    // MARK: - Observers
-    
+    // MARK: - Observers app is active/background
     private func observe_ApplicationActive() {
         NotificationCenter.default.addObserver(forName: .didBecomeActive, object: nil, queue: nil) { [weak self] _ in
             self?.handleBecomeActive()
@@ -165,6 +164,32 @@ class ViewModel: ObservableObject {
     private func handleEnterBackground() { bubbleTimer(.pause) } //3
     
     private func handleBecomeActive() { bubbleTimer(.start) } //3
+    
+    // MARK: - Observers
+    private func observe_KillSDB() {
+        center.addObserver(forName: .killSDB, object: nil, queue: nil) {[weak self] in
+                        
+            guard
+                let rank = $0.userInfo?["rank"] as? Int64,
+                let startCorrection = $0.userInfo?["startCorrection"] as? TimeInterval,
+                let bubble = self?.bubble(for: Int(rank))
+            else { fatalError() }
+                        
+            self?.removeStartDelay(for: bubble)
+            
+            self?.toggleBubbleStart(bubble, startDelayCompensation: startCorrection)
+        }
+    } //18
+    
+    private func observe_CreateTimer() {
+        center.addObserver(forName: .createTimer, object: nil, queue: nil) { [weak self] in
+            guard
+                let color = $0.userInfo!["color"] as? String,
+                let initialClock = $0.userInfo!["initialClock"] as? Int else { return }
+            
+            self?.createBubble(.timer(Float(initialClock)), color)
+        }
+    } //20
     
     // MARK: - Little Helpers
     var fiveSecondsBubble:Bubble? { bubble(for: secretary.addNoteButton_bRank) }
@@ -787,31 +812,6 @@ extension ViewModel {
             }
         }
     }
-    
-    private func observe_KillSDB() {
-        center.addObserver(forName: .killSDB, object: nil, queue: nil) {[weak self] in
-                        
-            guard
-                let rank = $0.userInfo?["rank"] as? Int64,
-                let startCorrection = $0.userInfo?["startCorrection"] as? TimeInterval,
-                let bubble = self?.bubble(for: Int(rank))
-            else { fatalError() }
-                        
-            self?.removeStartDelay(for: bubble)
-            
-            self?.toggleBubbleStart(bubble, startDelayCompensation: startCorrection)
-        }
-    } //18
-    
-    private func observe_CreateTimer() {
-        center.addObserver(forName: .createTimer, object: nil, queue: nil) { [weak self] in
-            guard
-                let color = $0.userInfo!["color"] as? String,
-                let initialClock = $0.userInfo!["initialClock"] as? Int else { return }
-            
-            self?.createBubble(.timer(Float(initialClock)), color)
-        }
-    } //20
         
     enum SDBMode {
         case start
