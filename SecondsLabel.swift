@@ -63,19 +63,19 @@ extension SecondsLabel {
     struct TimerProgressView:View {
         private let precision = "%.2f"
         private let bubble:Bubble
-        @State private var timerProgress = "1.0"
+        @State private var progress = "1.0"
         
         var body: some View {
             ZStack {
                 if bubble.isTimer {
-                    Text(timerProgress)
+                    Text(progress)
                         .font(.system(size: 30, weight: .semibold))
                         .foregroundColor(.black)
                         .minimumScaleFactor(0.1)
                         .padding([.leading, .trailing], 4)
                         .background(.thinMaterial, in: RoundedRectangle(cornerRadius: 4))
-                        .onReceive(bubble.coordinator.$timerProgress) { output in
-                            timerProgress = String(format: precision, output)
+                        .onReceive(bubble.coordinator.$timerProgress) {
+                            progress = String(format: precision, $0)
                         }
                         .environment(\.colorScheme, .light)
                 }
