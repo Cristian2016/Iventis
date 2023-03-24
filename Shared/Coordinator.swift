@@ -179,8 +179,10 @@ class BubbleCellCoordinator {
                 let bubble = self?.bubble,
                 let self = self else { return }
             
+            let initialValueCopy = initialValue
+            
             DispatchQueue.global().async {
-                let components = self.initialValue.timeComponentsAsStrings
+                let components = initialValueCopy.timeComponentsAsStrings
                 
                 DispatchQueue.main.async {
                     self.components = Components(components.hr,
