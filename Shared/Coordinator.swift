@@ -163,6 +163,7 @@ class BubbleCellCoordinator {
     
     private var initialValue:Float {
         guard let bubble = bubble else { fatalError() }
+        
         let isRunning = bubble.state == .running
         let lastPairStart = bubble.lastPair!.start!
         let currentClock = bubble.currentClock
