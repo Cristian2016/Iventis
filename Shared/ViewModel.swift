@@ -148,7 +148,7 @@ class ViewModel: ObservableObject {
         return bubble
     }
     
-    // MARK: - Observers app is active/background
+    // MARK: - Observers [active/background]
     private func observe_ApplicationActive() {
         NotificationCenter.default.addObserver(forName: .didBecomeActive, object: nil, queue: nil) { [weak self] _ in
             self?.handleBecomeActive()
@@ -165,7 +165,7 @@ class ViewModel: ObservableObject {
     
     private func handleBecomeActive() { bubbleTimer(.start) } //3
     
-    // MARK: - Observers
+    // MARK: Observers
     private func observe_KillSDB() {
         center.addObserver(forName: .killSDB, object: nil, queue: nil) {[weak self] in
                         
