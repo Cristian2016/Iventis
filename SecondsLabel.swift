@@ -68,13 +68,16 @@ extension SecondsLabel {
         var body: some View {
             ZStack {
                 if bubble.isTimer {
+                    let color = bubble.color == "charcoal" ? .white : Color.black
+                    
                     Text(timerProgress)
                         .font(.system(size: 30, weight: .semibold))
+                        .foregroundColor(color)
                         .minimumScaleFactor(0.1)
                         .padding([.leading, .trailing], 4)
                         .background {
                             RoundedRectangle(cornerRadius: 4)
-                                .stroke(lineWidth: 1)
+                                .stroke(color, lineWidth: 1)
                                 .scaleEffect(x: 1.2, y: 1.2)
                         }
                         .onReceive(bubble.coordinator.$timerProgress) { output in
