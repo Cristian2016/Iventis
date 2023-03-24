@@ -68,8 +68,6 @@ extension SecondsLabel {
         var body: some View {
             ZStack {
                 if bubble.isTimer {
-                    let color = Color.bubbleColor(forName: bubble.color)
-                    
                     Text(timerProgress)
                         .font(.system(size: 30, weight: .semibold))
                         .minimumScaleFactor(0.1)
