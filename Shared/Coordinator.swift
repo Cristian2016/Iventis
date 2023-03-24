@@ -13,6 +13,7 @@
 //7 read currentClock on the mainThread. do not access bubble on a backgroundThread!
 //8 the tiny label that a timer has on seconds
 //9 ⚠️ I made a copy because I'm not sure it's safe to read bubble.properties from a background thread, since initialValue is reading bubble.properties
+//10 observeActivePhase updates bubbleCell.timeComponnets on self.init. not calling observeActivePhase, components [hr, min, sec, hundredths] would show -1 -1 -1 -1
 
 import SwiftUI
 import Combine
@@ -205,18 +206,19 @@ class BubbleCellCoordinator {
         self.bubble = bubble
         self.colorPublisher = .init(Color.bubbleColor(forName: bubble.color))
         self.isTimer = bubble.kind != .stopwatch
+        print(#function, " BubbleCoordinator")
         
-        observeActivePhase()
+//        observeActivePhase() //10
         
         //set initial values when bubble is created [ViewModel.createBubble]
-        DispatchQueue.global().async {
-            let components = self.initialValue.timeComponentsAsStrings
-            self.components = Components(components.hr,
-                                         components.min,
-                                         components.sec,
-                                         components.hundredths)
-            self.opacity.updateOpacity(self.initialValue)
-        }
+//        DispatchQueue.global().async {
+//            let components = self.initialValue.timeComponentsAsStrings
+//            self.components = Components(components.hr,
+//                                         components.min,
+//                                         components.sec,
+//                                         components.hundredths)
+//            self.opacity.updateOpacity(self.initialValue)
+//        }
     }
     
     deinit {

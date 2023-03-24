@@ -320,8 +320,8 @@
             filePath = "Shared/Coordinator.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "177"
-            endingLineNumber = "177"
+            startingLineNumber = "178"
+            endingLineNumber = "178"
             landmarkName = "observeActivePhase()"
             landmarkType = "7">
             <Actions>
@@ -334,7 +334,7 @@
             </Actions>
             <Locations>
                <Location
-                  uuid = "A3B42165-53EA-49AE-9130-084489F866EE - 2c4241cbd9601c31"
+                  uuid = "A3B42165-53EA-49AE-9130-084489F866EE - 2c4241cbd9601c50"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
@@ -344,12 +344,12 @@
                   urlString = "file:///Users/cristianlapusan/Downloads/Timers/Shared/Coordinator.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "179"
-                  endingLineNumber = "179"
-                  offsetFromSymbolStart = "332">
+                  startingLineNumber = "180"
+                  endingLineNumber = "180"
+                  offsetFromSymbolStart = "340">
                </Location>
                <Location
-                  uuid = "A3B42165-53EA-49AE-9130-084489F866EE - 2c4241cbd9601c31"
+                  uuid = "A3B42165-53EA-49AE-9130-084489F866EE - 2c4241cbd9601c50"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
@@ -359,9 +359,9 @@
                   urlString = "file:///Users/cristianlapusan/Downloads/Timers/Shared/Coordinator.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "179"
-                  endingLineNumber = "179"
-                  offsetFromSymbolStart = "576">
+                  startingLineNumber = "180"
+                  endingLineNumber = "180"
+                  offsetFromSymbolStart = "584">
                </Location>
             </Locations>
          </BreakpointContent>
