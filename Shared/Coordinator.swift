@@ -190,7 +190,6 @@ class BubbleCellCoordinator {
             if isRunning {
                 let Δ = Date().timeIntervalSince(lastPairStart!)
                 let initialValue = isTimer ?  currentClock - Float(Δ) : currentClock + Float(Δ)
-                
                 completion(initialValue)
             }
             else { completion(currentClock) }
@@ -229,18 +228,16 @@ class BubbleCellCoordinator {
         self.colorPublisher = .init(Color.bubbleColor(forName: bubble.color))
         self.isTimer = bubble.kind != .stopwatch
         
-        let initialValueCopy = self.initialValue
-        
-        observeActivePhase(initialValueCopy) //10
-        
-        //set initial values when bubble is created [ViewModel.createBubble]
-        DispatchQueue.global().async {
-            let components = initialValueCopy.timeComponentsAsStrings
-            self.components = Components(components.hr,
+        bInitialValue { [weak self] value in
+            self?.observeActivePhase(value) //10
+            
+            //set initial values when bubble is created [ViewModel.createBubble]
+            let components = value.timeComponentsAsStrings
+            self?.components = Components(components.hr,
                                          components.min,
                                          components.sec,
                                          components.hundredths)
-            self.opacity.updateOpacity(initialValueCopy)
+            self?.opacity.updateOpacity(value)
         }
     }
     
