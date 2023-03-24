@@ -180,7 +180,7 @@ class BubbleCellCoordinator {
             guard
                 let bubble = self?.bubble,
                 let self = self else { return }
-            
+                        
             let initialValueCopy = initialValue //9
             
             DispatchQueue.global().async {
