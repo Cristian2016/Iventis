@@ -51,7 +51,7 @@ struct DetailView: View {
             ToolbarItemGroup {
                 DetailViewInfoButton()
                 ScrollToTopButton()
-                if isAddTagButtonVisible { AddNoteButton() }
+                AddNoteButton()
             }
         }
         .overlay (SessionDeleteActionAlert())
@@ -80,9 +80,6 @@ struct DetailView: View {
             return .clear
         }
     }
-    
-    // MARK: - Little Helpers
-    var isAddTagButtonVisible:Bool { secretary.addNoteButton_bRank == Int(bubble.rank) }
     
     // MARK: - Init
     init?(_ bubble:Bubble?) {
