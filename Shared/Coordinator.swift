@@ -121,7 +121,7 @@ class BubbleCellCoordinator {
         
         if isTimer {
             DispatchQueue.main.async { [weak self] in
-                self?.timerProgress = Double(value/(self?.bubble?.initialClock ?? 1))
+                self?.timerProgress = 1 - Double(value/(self?.bubble?.initialClock ?? 1))
             }
         }
         
