@@ -56,7 +56,7 @@ public extension Image {
     static let info = Image(systemName: "info.circle.fill")
     static let alert = Image(systemName: "exclamationmark.triangle.fill")
     static let roundCheckmark = Image(systemName: "checkmark.circle.fill")
-    static let timer = Image(systemName: "timer.circle.fill")
+    static let timer = Image(systemName: "timer")
     
     // MARK: - Info Assets
     static let dpv = Image("DurationPicker")
