@@ -21,16 +21,16 @@ struct SecondsLabel: View {
                         .aspectRatio(1.2, contentMode: .fit)
                         .overlay (text)
                 )
-//                .overlay(content: {
-//                    VStack {
-//                        Color.clear
-//                            .aspectRatio(6, contentMode: .fit)
-//                            .overlay { TimerPercentageView(bubble) }
-//                        Color.clear
-//                        Color.clear
-//                    }
-//                    .scaleEffect(x: 1.4, y: 1.4)
-//                })
+                .overlay(content: {
+                    VStack {
+                        Color.clear
+                            .aspectRatio(6, contentMode: .fit)
+                            .overlay { TimerPercentageView(bubble) }
+                        Color.clear
+                        Color.clear
+                    }
+                    .scaleEffect(x: 1.4, y: 1.4)
+                })
                 .onReceive(bubble.coordinator.$components) { sec = $0.sec }
         }
     }
@@ -61,7 +61,7 @@ struct SecondsLabel: View {
 
 extension SecondsLabel {
     struct TimerPercentageView:View {
-        private let precision = "%.1f"
+        private let precision = "%.2f"
         private let bubble:Bubble
         @State private var timerProgress = "1.0"
         
@@ -72,10 +72,12 @@ extension SecondsLabel {
                     
                     Text(timerProgress)
                         .font(.system(size: 30, weight: .semibold))
+                        .foregroundColor(.black)
                         .minimumScaleFactor(0.1)
+                        .padding([.leading, .trailing], 4)
                         .background {
-                            RoundedRectangle(cornerRadius: 1)
-                                .fill(color.gradient)
+                            RoundedRectangle(cornerRadius: 4)
+                                .stroke(lineWidth: 1)
                                 .scaleEffect(x: 1.2, y: 1.2)
                         }
                         .onReceive(bubble.coordinator.$timerProgress) { output in
