@@ -227,11 +227,8 @@ class BubbleCellCoordinator {
             self?.observeActivePhase($0) //10
                         
             //set initial values when bubble is created [ViewModel.createBubble]
-            let components = $0.timeComponentsAsStrings
-            self?.components = Components(components.hr,
-                                         components.min,
-                                         components.sec,
-                                         components.hundredths)
+            let comp = $0.timeComponentsAsStrings
+            self?.components = Components(comp.hr, comp.min, comp.sec, comp.hundredths)
             self?.opacity.updateOpacity($0)
         }
     }
