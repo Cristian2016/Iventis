@@ -165,11 +165,11 @@ class BubbleCellCoordinator {
         guard let bubble = bubble else { fatalError() }
         
         let isRunning = bubble.state == .running
-        let lastPairStart = bubble.lastPair!.start!
+        let lastPairStart = bubble.lastPair?.start
         let currentClock = bubble.currentClock
         
-        if bubble.state == .running {
-            let Δ = Date().timeIntervalSince(lastPairStart)
+        if isRunning {
+            let Δ = Date().timeIntervalSince(lastPairStart!)
             let initialValue = isTimer ?  currentClock - Float(Δ) : currentClock + Float(Δ)
             return initialValue
         }
@@ -179,14 +179,16 @@ class BubbleCellCoordinator {
     private func bInitialValue(completion: @escaping (Float) -> Void) {
         guard let bubble = bubble else { fatalError() }
         
+        //extract properties to use inside bQueue. do not use bubble within bQueue!
         let isRunning = bubble.state == .running
-        let lastPairStart = bubble.lastPair!.start!
+        let lastPairStart = bubble.lastPair?.start
         let currentClock = bubble.currentClock
         let isTimer = bubble.isTimer
         
+        //use extracted properties here
         DispatchQueue.global().async {
             if isRunning {
-                let Δ = Date().timeIntervalSince(lastPairStart)
+                let Δ = Date().timeIntervalSince(lastPairStart!)
                 let initialValue = isTimer ?  currentClock - Float(Δ) : currentClock + Float(Δ)
                 
                 completion(initialValue)
