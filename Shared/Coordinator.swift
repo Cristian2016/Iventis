@@ -200,7 +200,6 @@ class BubbleCellCoordinator {
     // MARK: - Observers
     private func observeActivePhase(_ initialValue:Float) {
         let center = NotificationCenter.default
-        
         center.addObserver(forName: .didBecomeActive, object: nil, queue: nil) { [weak self] _ in
             
             guard let bubble = self?.bubble else { return }
@@ -211,7 +210,6 @@ class BubbleCellCoordinator {
                 
                 DispatchQueue.main.async {
                     self?.components = Components(comp.hr, comp.min, comp.sec, comp.hundredths)
-                    
                     self?.opacity.updateOpacity(initialValue)
                     if isRunning { self?.update(.automatic) }
                 }
