@@ -203,7 +203,9 @@ class BubbleCellCoordinator {
             guard
                 let bubble = self?.bubble,
                 let self = self else { return }
-                                    
+            
+            //notification received on mainQueue
+                                                
             DispatchQueue.global().async { //⚪️
                 let components = initialValue.timeComponentsAsStrings
                 
@@ -228,16 +230,16 @@ class BubbleCellCoordinator {
         self.colorPublisher = .init(Color.bubbleColor(forName: bubble.color))
         self.isTimer = bubble.kind != .stopwatch
         
-        bInitialValue { [weak self] value in
-            self?.observeActivePhase(value) //10
-            
+        bInitialValue { [weak self] in
+            self?.observeActivePhase($0) //10
+                        
             //set initial values when bubble is created [ViewModel.createBubble]
-            let components = value.timeComponentsAsStrings
+            let components = $0.timeComponentsAsStrings
             self?.components = Components(components.hr,
                                          components.min,
                                          components.sec,
                                          components.hundredths)
-            self?.opacity.updateOpacity(value)
+            self?.opacity.updateOpacity($0)
         }
     }
     
