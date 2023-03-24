@@ -35,11 +35,6 @@ struct AddNoteButton: View {
 //                .transition(.asymmetric(insertion: .scale, removal: .identity))
             }
         }
-        .onReceive(secretary.$addNoteButton_bRank) { output in
-            
-            withAnimation {
-                addNoteButton_bRank = output
-            }
-        }
+        .onReceive(secretary.$addNoteButton_bRank) { addNoteButton_bRank = $0 }
     }
 }
