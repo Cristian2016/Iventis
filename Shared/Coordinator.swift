@@ -14,6 +14,7 @@
 //8 the tiny label that a timer has on seconds
 //9 ⚠️ I made a copy because I'm not sure it's safe to read bubble.properties from a background thread, since initialValue is reading bubble.properties
 //10 observeActivePhase updates bubbleCell.timeComponnets on self.init. not calling observeActivePhase, components [hr, min, sec, hundredths] would show -1 -1 -1 -1
+//11 notification received on mainQueue
 
 import SwiftUI
 import Combine
@@ -203,26 +204,19 @@ class BubbleCellCoordinator {
             guard
                 let bubble = self?.bubble,
                 let self = self else { return }
-            
-            //notification received on mainQueue
                                                 
-            DispatchQueue.global().async { //⚪️
-                let components = initialValue.timeComponentsAsStrings
+            DispatchQueue.global().async {
+                let comp = initialValue.timeComponentsAsStrings //components
                 
                 DispatchQueue.main.async {
-                    self.components = Components(components.hr,
-                                                 components.min,
-                                                 components.sec,
-                                                 components.hundredths
-                    )
+                    self.components = Components(comp.hr, comp.min, comp.sec, comp.hundredths)
                     
                     self.opacity.updateOpacity(initialValue)
-                    
                     if bubble.state == .running { self.update(.automatic) }
                 }
             }
         }
-    }
+    } //11
     
     // MARK: - Init Deinit
     init(for bubble:Bubble) {
