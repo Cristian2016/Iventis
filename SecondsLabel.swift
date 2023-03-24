@@ -21,16 +21,16 @@ struct SecondsLabel: View {
                         .aspectRatio(1.2, contentMode: .fit)
                         .overlay (text)
                 )
-                .overlay(content: {
-                    VStack {
-                        Color.clear
-                            .aspectRatio(2.2, contentMode: .fit)
-                            .overlay { TimerPercentageView(bubble) }
-                        Color.clear
-                        Color.clear
-                    }
-                    .scaleEffect(x: 1.4, y: 1.4)
-                })
+//                .overlay(content: {
+//                    VStack {
+//                        Color.clear
+//                            .aspectRatio(6, contentMode: .fit)
+//                            .overlay { TimerPercentageView(bubble) }
+//                        Color.clear
+//                        Color.clear
+//                    }
+//                    .scaleEffect(x: 1.4, y: 1.4)
+//                })
                 .onReceive(bubble.coordinator.$components) { sec = $0.sec }
         }
     }
@@ -73,9 +73,8 @@ extension SecondsLabel {
                     Text(timerProgress)
                         .font(.system(size: 30, weight: .semibold))
                         .minimumScaleFactor(0.1)
-                        .padding(6)
                         .background {
-                            Ellipse()
+                            RoundedRectangle(cornerRadius: 1)
                                 .fill(color.gradient)
                                 .scaleEffect(x: 1.2, y: 1.2)
                         }
