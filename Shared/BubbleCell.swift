@@ -66,12 +66,11 @@ struct BubbleCell: View {
     //trailing Swipe actions
     private var deleteActionButton:some View {
         Button { secretary.deleteAction_bRank = bubble.rank }
-    label: { Label { Text("Delete") } icon: { Image.trash } }.tint(.red) }
+        label: { Label { Text("Delete") } icon: { Image.trash } }.tint(.red) }
     
     private var moreOptionsButton:some View {
         Button { viewModel.showMoreOptions(for: bubble) }
-    label: { Label { Text("More") }
-        icon: { Image(systemName: "ellipsis.circle.fill") } }.tint(.lightGray)
+    label: { Label { Text("More") } icon: { Image.more } }.tint(.lightGray)
     }
     
     private var noteButtonContent:some View {
