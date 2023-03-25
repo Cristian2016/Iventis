@@ -18,16 +18,9 @@ struct EmptyListView: View {
                 }
                 
                 VStack(alignment: .leading) {
-                    Text("**Info** \(Image(systemName: "iphone.radiowaves.left.and.right")) Shake")
-                    HStack(alignment: .bottom) {
-                        Image("BlueInfoButton")
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(height: 80)
-                        Text("*shake device at any time*")
-                            .foregroundColor(.secondary)
-                    }
-                    .frame(maxWidth: 250)
+                    Text("\(Image(systemName: "info.square.fill")) **Info** \(Image(systemName: "iphone.radiowaves.left.and.right")) Shake")
+                    Text("*for guidance shake device at any time*")
+                        .foregroundColor(.secondary)
                 }
                 
                 Text("*[Watch Short Tutorials](https://example.com)*")
