@@ -10,6 +10,7 @@ import SwiftUI
 struct PermanentLabel<Content:View>: View {
     
     private let title:String
+    private var subtitle:String?
     private let content:Content
     
     var body: some View {
@@ -18,6 +19,7 @@ struct PermanentLabel<Content:View>: View {
                 .padding(.bottom, 1)
                 .font(.system(size: 28, weight: .medium))
                 .minimumScaleFactor(0.1)
+            subtitleView
             Divider().frame(maxWidth: 300)
             content
         }
@@ -25,8 +27,16 @@ struct PermanentLabel<Content:View>: View {
         .padding()
     }
     
-    init(title:String, @ViewBuilder _ content:() -> Content) {
+    @ViewBuilder
+    private var subtitleView:some View {
+        if let subtitle = subtitle {
+            Text("*\(subtitle)*").forceMultipleLines()
+        }
+    }
+    
+    init(title:String, _ subtitle:String? = nil, @ViewBuilder _ content:() -> Content) {
         self.title = title
+        self.subtitle = subtitle
         self.content = content()
     }
 }
