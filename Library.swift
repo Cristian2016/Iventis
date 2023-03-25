@@ -83,6 +83,7 @@ public extension Color {
     static let topDetailViewBackground = Color("topDetailViewBackground")
     static let topDetailViewBackground1 = Color("topDetailViewBackground1")
     static let infoButtonColor = Color("infoButtonColor")
+    static let intenseYellow = Color("intenseYellow")
 }
 
 public extension String {
