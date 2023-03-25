@@ -30,8 +30,8 @@
             filePath = "Shared/ViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "347"
-            endingLineNumber = "347"
+            startingLineNumber = "355"
+            endingLineNumber = "355"
             landmarkName = "toggleBubbleStart(_:startDelayCompensation:)"
             landmarkType = "7">
             <Locations>
@@ -138,8 +138,8 @@
             filePath = "Shared/ViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "313"
-            endingLineNumber = "313"
+            startingLineNumber = "321"
+            endingLineNumber = "321"
             landmarkName = "toggleBubbleStart(_:startDelayCompensation:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -202,8 +202,8 @@
             filePath = "Shared/ViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "565"
-            endingLineNumber = "565"
+            startingLineNumber = "573"
+            endingLineNumber = "573"
             landmarkName = "endSession(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -218,10 +218,10 @@
             filePath = "Shared/ViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "445"
-            endingLineNumber = "445"
-            landmarkName = "ViewModel"
-            landmarkType = "21">
+            startingLineNumber = "453"
+            endingLineNumber = "453"
+            landmarkName = "toggleCalendar(_:)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
