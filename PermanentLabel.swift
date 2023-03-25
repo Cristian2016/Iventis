@@ -18,7 +18,7 @@ struct PermanentLabel<Content:View>: View {
                 .padding(.bottom, 1)
                 .font(.system(size: 28, weight: .medium))
                 .minimumScaleFactor(0.1)
-            Divider().frame(maxWidth: 250)
+            Divider().frame(maxWidth: 300)
             content
         }
         .offset(x: 20) //the width of the LeftStrip is 20
