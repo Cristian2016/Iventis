@@ -33,7 +33,7 @@ struct EmptyListView: View {
                 Text("Swipe right")
                     .font(.system(.title2, design: .monospaced))
                     .foregroundColor(.green)
-                Text("on the Yellow Strip")
+                Text("on the Yellow Area")
                     .foregroundColor(.secondary)
             }
         }

@@ -220,7 +220,7 @@ class BubbleCellCoordinator {
     
     // MARK: - Init Deinit
     init(for bubble:Bubble) {
-        print(#function)
+        print(#function, " BubbleCoordinator")
         self.bubble = bubble
         self.colorPublisher = .init(Color.bubbleColor(forName: bubble.color))
         self.isTimer = bubble.kind != .stopwatch
