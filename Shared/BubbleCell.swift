@@ -65,13 +65,8 @@ struct BubbleCell: View {
     
     //trailing Swipe actions
     private var deleteActionButton:some View {
-        Button {
-            secretary.deleteAction_bRank = bubble.rank
-//            delayExecution(.now() + 0.2) { vm.isDetailViewShowing = false }
-        }
-    label: { Label { Text("Delete") }
-        icon: { Image.trash } }.tint(.red)
-    }
+        Button { secretary.deleteAction_bRank = bubble.rank }
+    label: { Label { Text("Delete") } icon: { Image.trash } }.tint(.red) }
     
     private var moreOptionsButton:some View {
         Button { viewModel.showMoreOptions(for: bubble) }
