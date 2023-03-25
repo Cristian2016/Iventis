@@ -65,6 +65,10 @@ extension View {
     func animationDisabled() -> some View {
         modifier(DisableAnimation())
     }
+    
+    func restrictDynamicFontSize() -> some View {
+        self.dynamicTypeSize(...DynamicTypeSize.accessibility2)
+    }
 }
 
 extension Image {

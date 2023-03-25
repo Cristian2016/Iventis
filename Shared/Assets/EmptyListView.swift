@@ -26,7 +26,7 @@ struct EmptyListView: View {
                 Text("*[Watch Short Tutorials](https://example.com)*")
                     .tint(.blue)
             }
-            .dynamicTypeSize(...DynamicTypeSize.accessibility2)
+            .restrictDynamicFontSize()
         }
     }
 }
