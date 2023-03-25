@@ -22,7 +22,11 @@ struct EmptyListView: View {
                     Text("*shake device at any time*")
                         .foregroundColor(.secondary)
                 }
+                
+                Text("*[Watch Short Tutorials](https://example.com)*")
+                    .tint(.blue)
             }
+            .dynamicTypeSize(...DynamicTypeSize.accessibility2)
         }
     }
 }
