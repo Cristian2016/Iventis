@@ -22,6 +22,7 @@ struct PermanentLabel<Content:View>: View {
             content
         }
         .offset(x: 20) //the width of the LeftStrip is 20
+        .padding()
     }
     
     init(title:String, @ViewBuilder _ content:() -> Content) {
