@@ -10,7 +10,7 @@ import SwiftUI
 struct EmptyListView: View {
     var body: some View {
         PermanentLabel(title: "Quick Start") {
-            VStack(alignment: .leading, spacing: 8) {
+            VStack(alignment: .leading, spacing: 10) {
                 VStack(alignment: .leading) {
                     Text("**Create Bubbles** \(Image.rightSwipe) Swipe")
                     Text("*on the yellow area*")
