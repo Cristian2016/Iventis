@@ -19,7 +19,7 @@ struct EmptyListView: View {
                 
                 VStack(alignment: .leading) {
                     Text("**Info** \(Image(systemName: "iphone.radiowaves.left.and.right")) Shake")
-                    HStack(alignment: .top) {
+                    HStack(alignment: .bottom) {
                         Image("BlueInfoButton")
                             .resizable()
                             .aspectRatio(contentMode: .fit)
