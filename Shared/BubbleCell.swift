@@ -78,14 +78,12 @@ struct BubbleCell: View {
     private var calendarSymbol:some View { Push(.topLeft) { CalendarSticker() }.offset(x: -10) }
     
     private var stickyNote:some View {
-        Push(.topLeft) {
-            StickyNote (alignment: .leading) { noteButtonContent }
-        dragAction: { viewModel.deleteStickyNote(for: bubble) }
-            tapAction : { handleNoteTap() }
+        Push(.topLeft) { StickyNote (alignment: .leading) { noteButtonContent }
+        dragAction: { viewModel.deleteStickyNote(for: bubble) } tapAction : { handleNoteTap() }
         }
         .offset(x: -12, y: -8)
     }
-        
+    
     // MARK: - Internal
     @GestureState var isDetectingLongPress = false
             
