@@ -9,77 +9,19 @@ import SwiftUI
 
 struct EmptyListView: View {
     var body: some View {
-        VStack (alignment:.center, spacing: 20) {
-            HStack {
-                Text("Create Bubbles").font(.title)
-                    .multilineTextAlignment(.center)
-            }
-            VStack (alignment:.leading, spacing: 15) {
-                swipeRight
-                tap
-                tapHold
-                
-            }
-        }
-        .padding()
-    }
-    
-    var swipeRight:some View {
-        HStack (alignment:.top) {
-            Image(systemName: "arrow.right.circle.fill")
-                .font(.largeTitle)
-                .foregroundColor(.green)
-            VStack (alignment:.leading) {
-                Text("Swipe right")
-                    .font(.system(.title2, design: .monospaced))
-                    .foregroundColor(.green)
-                Text("on the Yellow Area")
-                    .foregroundColor(.secondary)
-            }
-        }
-    }
-    
-    var tap:some View {
-        HStack (alignment:.top) {
-            Image(systemName: "circle.fill")
-                .font(.largeTitle)
-                .foregroundColor(.green)
-            VStack (alignment:.leading) {
-                HStack (alignment:.lastTextBaseline) {
-                    Text("Tap")
-                        .font(.system(.title2, design: .monospaced))
-                        .foregroundColor(.green)
-                    Text("any Color")
+        PermanentLabel(title: "QuickStart") {
+            VStack(alignment: .leading, spacing: 8) {
+                VStack(alignment: .leading) {
+                    Text("**Create Bubbles** \(Image.rightSwipe) Swipe")
+                    Text("*on the yellow area*")
                         .foregroundColor(.secondary)
                 }
-                HStack {
-                    Text("for Stopwatch")
-                    Image(systemName: "stopwatch")
-                }.foregroundColor(.secondary)
-            }
-        }
-    }
-    
-    var tapHold:some View {
-        HStack (alignment:.top) {
-            ZStack {
-                Image(systemName: "circle.fill")
-                    .font(.largeTitle)
-                    .foregroundColor(.green)
-                Image(systemName: "clock.fill")
-                    .font(.body)
-                    .foregroundColor(.white)
-                    .offset(x: 0, y: -5)
-            }
-            
-            VStack (alignment:.leading) {
-                Text("Tap & Hold")
-                    .font(.system(.title2, design: .monospaced))
-                    .foregroundColor(.green)
-                HStack {
-                    Text("for Timer")
-                    Image(systemName: "timer")
-                }.foregroundColor(.secondary)
+                
+                VStack(alignment: .leading) {
+                    Text("**Info** \(Image(systemName: "iphone.radiowaves.left.and.right")) Shake")
+                    Text("*shake device at any time*")
+                        .foregroundColor(.secondary)
+                }
             }
         }
     }

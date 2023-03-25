@@ -34,6 +34,7 @@
 		1F1D17B329916D1A00DD7ECE /* MoreOptionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1D17B229916D1A00DD7ECE /* MoreOptionsView.swift */; };
 		1F20807C2836111600FD35D6 /* BSavedNote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F2080782836111600FD35D6 /* BSavedNote.swift */; };
 		1F20807F2836111600FD35D6 /* BSavedNote Properties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F2080792836111600FD35D6 /* BSavedNote Properties.swift */; };
+		1F22183029CF2B4D0006227E /* PermanentLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F22182F29CF2B4D0006227E /* PermanentLabel.swift */; };
 		1F36D56B29942C0B00D70727 /* CalendarEventCreatedConfirmation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F36D56A29942C0B00D70727 /* CalendarEventCreatedConfirmation.swift */; };
 		1F377E1F287EB2F000E43598 /* AutoLockButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F377E1E287EB2F000E43598 /* AutoLockButton.swift */; };
 		1F387CEB2830082000F6B81D /* UpDownArrowsButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F387CEA2830082000F6B81D /* UpDownArrowsButton.swift */; };
@@ -202,6 +203,7 @@
 		1F1D17B229916D1A00DD7ECE /* MoreOptionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreOptionsView.swift; sourceTree = "<group>"; };
 		1F2080782836111600FD35D6 /* BSavedNote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BSavedNote.swift; sourceTree = "<group>"; };
 		1F2080792836111600FD35D6 /* BSavedNote Properties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BSavedNote Properties.swift"; sourceTree = "<group>"; };
+		1F22182F29CF2B4D0006227E /* PermanentLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermanentLabel.swift; sourceTree = SOURCE_ROOT; };
 		1F36D56A29942C0B00D70727 /* CalendarEventCreatedConfirmation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarEventCreatedConfirmation.swift; sourceTree = "<group>"; };
 		1F377E1E287EB2F000E43598 /* AutoLockButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoLockButton.swift; sourceTree = "<group>"; };
 		1F387CEA2830082000F6B81D /* UpDownArrowsButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpDownArrowsButton.swift; sourceTree = "<group>"; };
@@ -460,6 +462,7 @@
 		1F5F4A4728093FAD00AF3442 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				1F22182F29CF2B4D0006227E /* PermanentLabel.swift */,
 				1F3C164029CB5549003B39C0 /* BubbleInfoView.swift */,
 				1FFE8DFF29CAD57400EF5B2A /* DPOKCircle.swift */,
 				1FC2335829CA488900FBE483 /* MoreOptionsInfoView.swift */,
@@ -745,6 +748,7 @@
 				1FE76DBA29C9F213003012F0 /* BlueInfoButton.swift in Sources */,
 				1FB5D8DA28E9BF0500DD522A /* GestureLabel.swift in Sources */,
 				1F76B51128DDE38800543660 /* AlertHintView.swift in Sources */,
+				1F22183029CF2B4D0006227E /* PermanentLabel.swift in Sources */,
 				1F36D56B29942C0B00D70727 /* CalendarEventCreatedConfirmation.swift in Sources */,
 				1FB4D4E02977F86500F26D9C /* iPadViewHierarchy.swift in Sources */,
 				1FAE715D298D1CA200E19959 /* DualTextView.swift in Sources */,
