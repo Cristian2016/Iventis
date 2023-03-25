@@ -75,20 +75,11 @@ struct BubbleCell: View {
     
     private var noteButtonContent:some View { BubbleNote().environmentObject(bubble) }
     
-    private var calendarSymbol:some View {
-        VStack {
-            HStack {
-                CalendarSticker().offset(x: -10)
-                Spacer()
-            }
-            Spacer()
-        }
-    }
+    private var calendarSymbol:some View { Push(.topLeft) { CalendarSticker() }.offset(x: -10) }
     
     private var stickyNote:some View {
         Push(.topLeft) {
-            StickyNote (alignment: .leading)
-            { noteButtonContent }
+            StickyNote (alignment: .leading) { noteButtonContent }
         dragAction: { viewModel.deleteStickyNote(for: bubble) }
             tapAction : { handleNoteTap() }
         }
