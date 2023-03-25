@@ -18,6 +18,7 @@
 
 import SwiftUI
 import Combine
+import MyPackage
 
 extension BubbleCellCoordinator {
     typealias Publisher = CurrentValueSubject
@@ -37,16 +38,19 @@ class BubbleCellCoordinator {
         let initialClock = bubble.initialClock
         let currentClock = bubble.currentClock
         let lastPairStart = bubble.lastPair?.start
-                
+        
         DispatchQueue.global().async {
             switch moment {
                 case .create: //bubble is created [ViewModel.createBubble]
                     print(#function, " create")
-                    self.bInitialValue { [weak self] in
-                        let comp = $0.timeComponentsAsStrings
-                        self?.components = Components(comp.hr, comp.min, comp.sec, comp.hundredths)
-                        self?.opacity.updateOpacity($0)
+                    if self.components.hr == "-1" {
+                        self.bInitialValue { [weak self] in
+                            let comp = $0.timeComponentsAsStrings
+                            self?.components = Components(comp.hr, comp.min, comp.sec, comp.hundredths)
+                            self?.opacity.updateOpacity($0)
+                        }
                     }
+                    
                 case .showAll:
                     if state == .running && !isPinned { self.refresh = true }
                     print(#function, " show all")
@@ -114,7 +118,7 @@ class BubbleCellCoordinator {
     @Published var sdbDeleteTriggered = false
     @Published var timerProgress = 0.0 //8
         
-    @Published private(set) var components = Components("-1", "-1", "-1", "-1")
+    @Published  var components = Components("-1", "-1", "-1", "-1")
     @Published private(set) var opacity = Opacity()
     var colorPublisher:Publisher<Color, Never>
     
@@ -204,7 +208,7 @@ class BubbleCellCoordinator {
             DispatchQueue.global().async { //bQueue 🔴
                 let comp = initialValue.timeComponentsAsStrings //components
                 
-                DispatchQueue.main.async {
+                DispatchQueue.main.async {//mainQueue 🟢
                     self?.components = Components(comp.hr, comp.min, comp.sec, comp.hundredths)
                     self?.opacity.updateOpacity(initialValue)
                     if isRunning { self?.update(.automatic) }
@@ -223,9 +227,7 @@ class BubbleCellCoordinator {
         
         bInitialValue { [weak self] in
             self?.observeActivePhase($0) //10
-            if self?.components.hr == "-1" {
-                self?.update(.create)
-            }
+            self?.update(.create)
         }
     }
     

@@ -26,7 +26,7 @@ public class Bubble: NSManagedObject {
         get { sessions?.array as? [Session] ?? [] }
         set { sessions = NSOrderedSet(array: newValue) }
     }
-    
+        
     var history_:[BubbleSavedNote] { history?.array as? [BubbleSavedNote] ?? [] }
     
     ///lastSession is not always currentSession
