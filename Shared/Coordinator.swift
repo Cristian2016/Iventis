@@ -41,6 +41,7 @@ class BubbleCellCoordinator {
         DispatchQueue.global().async {
             switch moment {
                 case .create: //bubble is created [ViewModel.createBubble]
+                    print(#function, " create")
                     self.bInitialValue { [weak self] in
                         let comp = $0.timeComponentsAsStrings
                         self?.components = Components(comp.hr, comp.min, comp.sec, comp.hundredths)
@@ -195,12 +196,12 @@ class BubbleCellCoordinator {
     // MARK: - Observers
     private func observeActivePhase(_ initialValue:Float) {
         let center = NotificationCenter.default
-        center.addObserver(forName: .didBecomeActive, object: nil, queue: nil) { [weak self] _ in
-            
+        center.addObserver(forName: .didBecomeActive, object: nil, queue: nil) {
+            [weak self] _ in //mainQueue 🟢
             guard let bubble = self?.bubble else { return }
             let isRunning = bubble.state == .running
             
-            DispatchQueue.global().async {
+            DispatchQueue.global().async { //bQueue 🔴
                 let comp = initialValue.timeComponentsAsStrings //components
                 
                 DispatchQueue.main.async {
