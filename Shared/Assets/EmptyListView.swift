@@ -19,14 +19,22 @@ struct EmptyListView: View {
                 
                 VStack(alignment: .leading) {
                     Text("**Info** \(Image(systemName: "iphone.radiowaves.left.and.right")) Shake")
-                    Text("*for guidance shake device at any time*")
-                        .foregroundColor(.secondary)
+                    HStack(alignment: .top) {
+                        Image("BlueInfoButton")
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(height: 80)
+                        Text("*shake device at any time*")
+                            .foregroundColor(.secondary)
+                    }
+                    .frame(maxWidth: 250)
                 }
                 
                 Text("*[Watch Short Tutorials](https://example.com)*")
                     .tint(.blue)
             }
             .restrictDynamicFontSize()
+            .forceMultipleLines()
         }
     }
 }
