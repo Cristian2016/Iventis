@@ -19,7 +19,7 @@ struct EmptyListView: View {
                 
                 VStack(alignment: .leading) {
                     Text("\(Image(systemName: "info.square.fill")) **Info** \(Image(systemName: "iphone.radiowaves.left.and.right")) Shake")
-                    Text("*for guidance shake device at any time*")
+                    Text("*shake device at any time*")
                         .foregroundColor(.secondary)
                 }
                 
