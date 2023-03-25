@@ -73,9 +73,7 @@ struct BubbleCell: View {
     label: { Label { Text("More") } icon: { Image.more } }.tint(.lightGray)
     }
     
-    private var noteButtonContent:some View {
-        BubbleNote().environmentObject(bubble)
-    }
+    private var noteButtonContent:some View { BubbleNote().environmentObject(bubble) }
     
     private var calendarSymbol:some View {
         VStack {
@@ -85,7 +83,6 @@ struct BubbleCell: View {
             }
             Spacer()
         }
-        .padding([.leading], 4)
     }
     
     private var stickyNote:some View {
