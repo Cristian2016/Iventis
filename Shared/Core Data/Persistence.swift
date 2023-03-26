@@ -41,6 +41,8 @@ struct PersistenceController {
     
     lazy var bContext:NSManagedObjectContext = {
        let bContext = container.newBackgroundContext()
+        
+        //updates are propagated between bContext and my viewContext
         bContext.automaticallyMergesChangesFromParent = true //⚠️
         return bContext
     }()
