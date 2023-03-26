@@ -56,7 +56,7 @@ class BubbleCellCoordinator {
                     DispatchQueue.main.async { self.components.hundredths = "" }
                     self.refresh = true
                     self.publisher
-                        .sink { [weak self] _ in self?.task(theBubble.currentClock, theBubble.lastPair!.start!) }
+                        .sink { [weak self] _ in self?.task(theBubble.currentClock, theBubble.lastPair?.start) }
                         .store(in: &self.cancellable) //connect
                     
                 case .user(let action):
