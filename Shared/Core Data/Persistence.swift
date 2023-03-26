@@ -3,7 +3,7 @@
 //  Shared
 //
 //  Created by Cristian Lapusan on 15.04.2022.
-//⚠️ I replaced mergePolicy with automaticallyMergesChangesFromParent! make sure it does not crash
+//
 
 import CoreData
 
@@ -41,10 +41,7 @@ struct PersistenceController {
     
     lazy var bContext:NSManagedObjectContext = {
        let bContext = container.newBackgroundContext()
-        
-        //updates are propagated between bContext and my viewContext
-        bContext.automaticallyMergesChangesFromParent = true //⚠️
-        
+        bContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
         return bContext
     }()
     
