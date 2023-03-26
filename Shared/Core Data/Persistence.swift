@@ -44,6 +44,7 @@ struct PersistenceController {
         
         //updates are propagated between bContext and my viewContext
         bContext.automaticallyMergesChangesFromParent = true //⚠️
+        
         return bContext
     }()
     
