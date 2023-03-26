@@ -21,7 +21,7 @@ struct SecondsLabel: View {
                         .aspectRatio(1.2, contentMode: .fit)
                         .overlay (text)
                 )
-                .overlay(content: {
+                .overlay {
                     VStack {
                         Color.clear
                             .aspectRatio(6, contentMode: .fit)
@@ -30,8 +30,13 @@ struct SecondsLabel: View {
                         Color.clear
                     }
                     .scaleEffect(x: 1.4, y: 1.4)
-                })
-                .onReceive(bubble.coordinator.$components) { sec = $0.sec }
+                }
+                .onReceive(bubble.coordinator.$components) {
+                    sec = $0.sec
+                    if bubble.color == "charcoal" {
+                        print("received seconds \($0.sec)")
+                    }
+                }
         }
     }
     
