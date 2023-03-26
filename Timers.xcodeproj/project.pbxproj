@@ -35,6 +35,7 @@
 		1F20807C2836111600FD35D6 /* BSavedNote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F2080782836111600FD35D6 /* BSavedNote.swift */; };
 		1F20807F2836111600FD35D6 /* BSavedNote Properties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F2080792836111600FD35D6 /* BSavedNote Properties.swift */; };
 		1F22183029CF2B4D0006227E /* PermanentLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F22182F29CF2B4D0006227E /* PermanentLabel.swift */; };
+		1F31C86229D01F26008349D2 /* ⚠️ Important.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 1F31C86129D01F26008349D2 /* ⚠️ Important.rtf */; };
 		1F36D56B29942C0B00D70727 /* CalendarEventCreatedConfirmation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F36D56A29942C0B00D70727 /* CalendarEventCreatedConfirmation.swift */; };
 		1F377E1F287EB2F000E43598 /* AutoLockButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F377E1E287EB2F000E43598 /* AutoLockButton.swift */; };
 		1F387CEB2830082000F6B81D /* UpDownArrowsButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F387CEA2830082000F6B81D /* UpDownArrowsButton.swift */; };
@@ -204,6 +205,7 @@
 		1F2080782836111600FD35D6 /* BSavedNote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BSavedNote.swift; sourceTree = "<group>"; };
 		1F2080792836111600FD35D6 /* BSavedNote Properties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BSavedNote Properties.swift"; sourceTree = "<group>"; };
 		1F22182F29CF2B4D0006227E /* PermanentLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermanentLabel.swift; sourceTree = SOURCE_ROOT; };
+		1F31C86129D01F26008349D2 /* ⚠️ Important.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = "⚠️ Important.rtf"; sourceTree = "<group>"; };
 		1F36D56A29942C0B00D70727 /* CalendarEventCreatedConfirmation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarEventCreatedConfirmation.swift; sourceTree = "<group>"; };
 		1F377E1E287EB2F000E43598 /* AutoLockButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoLockButton.swift; sourceTree = "<group>"; };
 		1F387CEA2830082000F6B81D /* UpDownArrowsButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpDownArrowsButton.swift; sourceTree = "<group>"; };
@@ -431,6 +433,7 @@
 				1FA377E72972FE75005ACD41 /* Library.swift */,
 				1F42B99C2973E34E0024DB5F /* Code Snippets.rtf */,
 				1FE3B6F62983ECBF00B9C5D0 /* Explanations.rtf */,
+				1F31C86129D01F26008349D2 /* ⚠️ Important.rtf */,
 				1FB5D8D928E9BF0500DD522A /* GestureLabel.swift */,
 				1FB5D8D728E96CBD00DD522A /* StartDelayInfoView.swift */,
 				1F477CA828EAB21900B4F965 /* AddStickyNoteQuickButton.swift */,
@@ -717,6 +720,7 @@
 				1F5F4A6328093FAF00AF3442 /* Assets.xcassets in Resources */,
 				1F112A2229C9D8EC00D4A541 /* InfoAssets.xcassets in Resources */,
 				1FE3B6F72983ECBF00B9C5D0 /* Explanations.rtf in Resources */,
+				1F31C86229D01F26008349D2 /* ⚠️ Important.rtf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

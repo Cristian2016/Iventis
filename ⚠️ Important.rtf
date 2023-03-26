@@ -1,0 +1,23 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2709
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fnil\fcharset0 Menlo-Regular;\f1\fnil\fcharset0 AppleColorEmoji;}
+{\colortbl;\red255\green255\blue255;\red251\green2\blue128;\red25\green25\blue25;\red76\green76\blue76;
+\red255\green255\blue255;\red33\green255\blue255;\red192\green138\blue255;\red127\green127\blue127;}
+{\*\expandedcolortbl;;\csgenericrgb\c98605\c833\c50192;\csgenericrgb\c9804\c9804\c9804;\csgenericrgb\c29804\c29805\c29804;
+\csgenericrgb\c100000\c100000\c100000;\csgenericrgb\c12770\c99978\c99905;\csgenericrgb\c75482\c53948\c99907;\csgenericrgb\c49804\c49805\c49804;}
+\paperw12240\paperh15840\margl1440\margr1440\vieww9000\viewh8400\viewkind0
+\deftab741
+\pard\tx741\pardeftab741\partightenfactor0
+
+\f0\fs30 \cf2 \cb3 PersistenceController\
+\pard\tx741\pardeftab741\partightenfactor0
+\cf4 \cb3 lazy\cf5  \cf4 var\cf5  \cf2 \cb3 bContext\cf5 \cb3 :\cf6 NSManagedObjectContext\cf5  = \{\
+       \cf4 let\cf5  bContext = \cf2 \cb3 container\cf5 \cb3 .\cf7 newBackgroundContext\cf5 ()\
+        bContext.automaticallyMergesChangesFromParent = \cf4 true\cf5  \cf8 //
+\f1 \uc0\u9888 \u65039 
+\f0 \cf5 \
+        \cf4 return\cf5  bContext\
+    \}()\
+\cf8 //
+\f1 \uc0\u9888 \u65039 
+\f0  I replaced mergePolicy with automaticallyMergesChangesFromParent! make sure it does not crash\cf5 \
+}
