@@ -89,16 +89,13 @@ class BubbleCellCoordinator {
                             
                             DispatchQueue.main.async {
                                 self.timerProgress = 0.0
+                                
                                 self.components.hr = stringComponents.hr
                                 self.components.min = stringComponents.min
                                 self.components.sec = stringComponents.sec
                                 self.components.hundredths = stringComponents.hundredths
                                 
-                                if bubble.kind == .stopwatch {
-                                    self.opacity.updateOpacity(0)
-                                } else {
-                                    self.opacity.updateOpacity(bubble.initialClock)
-                                }
+                                self.opacity.updateOpacity(bubble.isTimer ? bubble.initialClock : 0)
                             }
                             
                         case .deleteBubble:
