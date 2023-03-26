@@ -42,7 +42,6 @@ class BubbleCellCoordinator {
             switch moment {
                 case .create: //bubble is created [ViewModel.createBubble]
                     if self.components.hr == "-1" {
-                        print("update create")
                         let comp = theInitialValue.timeComponentsAsStrings
                         DispatchQueue.main.async {
                             self.components = Components(comp.hr, comp.min, comp.sec, comp.hundredths)
@@ -59,7 +58,6 @@ class BubbleCellCoordinator {
                     self.publisher
                         .sink { [weak self] _ in self?.task(theBubble.currentClock, theBubble.lastPair!.start!) }
                         .store(in: &self.cancellable) //connect
-                    print(#function, " automatic")
                     
                 case .user(let action):
                     switch action {
@@ -73,15 +71,17 @@ class BubbleCellCoordinator {
                                                              components.sec,
                                                              components.hundredths)
                             }
-                            print(#function, " automatic")
                             
                         case .start:
                             self.refresh = true
+                            
+                            let cuurentClock = theBubble.currentClock
+                            let lastPairStart = theBubble.lastPair!.start!
+                            
                             self.publisher
-                                .sink { [weak self] _ in self?.task(theBubble.currentClock, theBubble.lastPair!.start!) }
+                                .sink { [weak self] _ in self?.task(cuurentClock, lastPairStart) }
                                 .store(in: &self.cancellable) //connect
                             DispatchQueue.main.async { self.components.hundredths = "" }
-                            print(#function, " start")
                             
                         case .endSession, .reset, .deleteCurrentSession:
                             self.cancellable = []
@@ -204,7 +204,6 @@ class BubbleCellCoordinator {
                     self?.components = Components(comp.hr, comp.min, comp.sec, comp.hundredths)
                     self?.opacity.updateOpacity(initialValue)
                     if theBubble.state == .running { self?.update(.automatic) }
-                    print(#function, " observeActivePhase")
                 }
             }
         }
