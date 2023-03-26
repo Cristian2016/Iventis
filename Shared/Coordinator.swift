@@ -185,20 +185,25 @@ class BubbleCellCoordinator {
     }
     
     // MARK: - Observers
-    private func observeActivePhase(_ initialValue:Float) {
+    private func observeActivePhase() {
         let center = NotificationCenter.default
         center.addObserver(forName: .didBecomeActive, object: nil, queue: nil) {
             [weak self] _ in //mainQueue 🟢
             guard let bubble = self?.bubble else { return }
-            let isRunning = bubble.state == .running
             
-            DispatchQueue.global().async { //bQueue 🔴
+            let bContext = PersistenceController.shared.bContext
+            let objID = bubble.objectID
+            
+            bContext.perform {//bQueue 🔴
+                let theBubble = PersistenceController.shared.grabObj(objID) as! Bubble
+                
+                guard let initialValue = self?.initialValue(theBubble) else { return }
                 let comp = initialValue.timeComponentsAsStrings //components
                 
                 DispatchQueue.main.async {//mainQueue 🟢
                     self?.components = Components(comp.hr, comp.min, comp.sec, comp.hundredths)
                     self?.opacity.updateOpacity(initialValue)
-                    if isRunning { self?.update(.automatic) }
+                    if theBubble.state == .running { self?.update(.automatic) }
                     print(#function, " observeActivePhase")
                 }
             }
@@ -211,7 +216,7 @@ class BubbleCellCoordinator {
         self.colorPublisher = .init(Color.bubbleColor(forName: bubble.color))
         self.isTimer = bubble.kind != .stopwatch
         
-        self?.observeActivePhase($0) //10
+        self.observeActivePhase() //10
         self.update(.create)
     }
     
