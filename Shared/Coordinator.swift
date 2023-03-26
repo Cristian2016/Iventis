@@ -32,34 +32,31 @@ class BubbleCellCoordinator {
     func update(_ moment:Moment, refresh:Bool = false) { //main Thread ⚠️
         guard let bubble = bubble else { return }
         
-        //⚠️ do not access bubble on bThread. extract properties here!!!
-        let isPinned = bubble.isPinned
-        let state = bubble.state
-        let initialClock = bubble.initialClock
-        let currentClock = bubble.currentClock
-        let lastPairStart = bubble.lastPair?.start
+        let bContext = PersistenceController.shared.bContext
+        let objID = bubble.objectID
         
-        DispatchQueue.global().async {
+        bContext.perform {
+            let theBubble = PersistenceController.shared.grabObj(objID) as! Bubble
+            let theInitialValue = self.initialValue(theBubble)
+            
             switch moment {
                 case .create: //bubble is created [ViewModel.createBubble]
-                    print(#function, " create")
                     if self.components.hr == "-1" {
-                        self.bInitialValue { [weak self] in
-                            let comp = $0.timeComponentsAsStrings
-                            self?.components = Components(comp.hr, comp.min, comp.sec, comp.hundredths)
-                            self?.opacity.updateOpacity($0)
+                        let comp = theInitialValue.timeComponentsAsStrings
+                        DispatchQueue.main.async {
+                            self.components = Components(comp.hr, comp.min, comp.sec, comp.hundredths)
+                            self.opacity.updateOpacity(theInitialValue)
                         }
                     }
                     
                 case .showAll:
-                    if state == .running && !isPinned { self.refresh = true }
-                    print(#function, " show all")
+                    if theBubble.state == .running && !theBubble.isPinned { self.refresh = true }
                     
                 case .automatic:
                     DispatchQueue.main.async { self.components.hundredths = "" }
                     self.refresh = true
                     self.publisher
-                        .sink { [weak self] _ in self?.task(currentClock, lastPairStart) }
+                        .sink { [weak self] _ in self?.task(theBubble.currentClock, theBubble.lastPair!.start!) }
                         .store(in: &self.cancellable) //connect
                     print(#function, " automatic")
                     
@@ -67,30 +64,27 @@ class BubbleCellCoordinator {
                     switch action {
                         case .pause:
                             self.cancellable = []
+                            let components = theInitialValue.timeComponentsAsStrings
                             
-                            self.bInitialValue {
-                                let components = $0.timeComponentsAsStrings
-                                
-                                DispatchQueue.main.async {
-                                    self.components = Components(components.hr,
-                                                                 components.min,
-                                                                 components.sec,
-                                                                 components.hundredths)
-                                }
-                                print(#function, " automatic")
+                            DispatchQueue.main.async {
+                                self.components = Components(components.hr,
+                                                             components.min,
+                                                             components.sec,
+                                                             components.hundredths)
                             }
+                            print(#function, " automatic")
                             
                         case .start:
                             self.refresh = true
                             self.publisher
-                                .sink { [weak self] _ in self?.task(currentClock, lastPairStart) }
+                                .sink { [weak self] _ in self?.task(theBubble.currentClock, theBubble.lastPair!.start!) }
                                 .store(in: &self.cancellable) //connect
                             DispatchQueue.main.async { self.components.hundredths = "" }
                             print(#function, " start")
                             
                         case .endSession, .reset, .deleteCurrentSession:
                             self.cancellable = []
-                            let stringComponents = initialClock.timeComponentsAsStrings
+                            let stringComponents = theBubble.initialClock.timeComponentsAsStrings
                             
                             DispatchQueue.main.async {
                                 self.timerProgress = 0.0
@@ -176,25 +170,17 @@ class BubbleCellCoordinator {
     NotificationCenter.Publisher(center: .default, name: .bubbleTimerSignal)
     
     private var cancellable = Set<AnyCancellable>()
+            
+    ///do not use bubble from viewContext! read bubble from bContext
+    private func initialValue(_ bBubble:Bubble) -> Float {
+        let currentClock = bBubble.currentClock
         
-    private func bInitialValue(completion: @escaping (Float) -> Void) {
-        guard let bubble = bubble else { fatalError() }
-        
-        //extract properties to use inside bQueue. do not use bubble within bQueue!
-        let isRunning = bubble.state == .running
-        let lastPairStart = bubble.lastPair?.start
-        let currentClock = bubble.currentClock
-        let isTimer = bubble.isTimer
-        
-        //use extracted properties here
-        DispatchQueue.global().async {
-            if isRunning {
-                let Δ = Date().timeIntervalSince(lastPairStart!)
-                let initialValue = isTimer ?  currentClock - Float(Δ) : currentClock + Float(Δ)
-                completion(initialValue)
-            }
-            else { completion(currentClock) }
+        if bBubble.state == .running {
+            let Δ = Date().timeIntervalSince(bBubble.lastPair!.start!)
+            let initialValue = isTimer ?  currentClock - Float(Δ) : currentClock + Float(Δ)
+            return initialValue
         }
+        else { return currentClock }
     }
     
     // MARK: - Observers
@@ -220,15 +206,12 @@ class BubbleCellCoordinator {
     
     // MARK: - Init Deinit
     init(for bubble:Bubble) {
-        print(#function, " BubbleCoordinator")
         self.bubble = bubble
         self.colorPublisher = .init(Color.bubbleColor(forName: bubble.color))
         self.isTimer = bubble.kind != .stopwatch
         
-        bInitialValue { [weak self] in
-            self?.observeActivePhase($0) //10
-            self?.update(.create)
-        }
+//        self?.observeActivePhase($0) //10
+        self.update(.create)
     }
     
     deinit {
