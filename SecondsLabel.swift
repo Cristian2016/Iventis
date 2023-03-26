@@ -72,7 +72,7 @@ extension SecondsLabel {
                         .font(.system(size: 30, weight: .semibold))
                         .foregroundColor(.black)
                         .minimumScaleFactor(0.1)
-                        .padding([.leading, .trailing], 6)
+                        .padding([.leading, .trailing], 4)
                         .background(.thinMaterial, in: RoundedRectangle(cornerRadius: 4))
                         .onReceive(bubble.coordinator.$timerProgress) {
                             progress = String(format: precision, $0)
