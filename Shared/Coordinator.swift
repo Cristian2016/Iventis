@@ -42,6 +42,7 @@ class BubbleCellCoordinator {
             switch moment {
                 case .create: //bubble is created [ViewModel.createBubble]
                     if self.components.hr == "-1" {
+                        print("update create")
                         let comp = theInitialValue.timeComponentsAsStrings
                         DispatchQueue.main.async {
                             self.components = Components(comp.hr, comp.min, comp.sec, comp.hundredths)
@@ -210,7 +211,7 @@ class BubbleCellCoordinator {
         self.colorPublisher = .init(Color.bubbleColor(forName: bubble.color))
         self.isTimer = bubble.kind != .stopwatch
         
-//        self?.observeActivePhase($0) //10
+        self?.observeActivePhase($0) //10
         self.update(.create)
     }
     
