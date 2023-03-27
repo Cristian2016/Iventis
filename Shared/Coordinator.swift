@@ -188,6 +188,8 @@ class BubbleCellCoordinator {
             [weak self] _ in //mainQueue 🟢
             guard let bubble = self?.bubble else { return }
             
+            self?.activePhaseCalled = true
+            
             let bContext = PersistenceController.shared.bContext
             let objID = bubble.objectID
             
@@ -202,8 +204,6 @@ class BubbleCellCoordinator {
                     self?.components = Components(comp.hr, comp.min, comp.sec, comp.hundredths)
                     self?.opacity.updateOpacity(initialValue)
                 }
-                
-                self?.activePhaseCalled = true
             }
         }
     } //11
@@ -214,6 +214,8 @@ class BubbleCellCoordinator {
         guard
             activePhaseCalled == false,
             let bubble = bubble else { return }
+        
+        print(#function)
         
         let bContext = PersistenceController.shared.bContext
         let objID = bubble.objectID
