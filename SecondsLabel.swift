@@ -33,7 +33,10 @@ struct SecondsLabel: View {
                     .scaleEffect(x: 1.4, y: 1.4)
                 }
                 .onReceive(bubble.coordinator.$components) { sec = $0.sec }
-                .task { bubble.coordinator.makeSureBubbleCellUpdates() }
+                .task {
+                    print("task called")
+                    bubble.coordinator.makeSureBubbleCellUpdates()
+                }
         }
     }
     
@@ -57,6 +60,7 @@ struct SecondsLabel: View {
     init?(bubble: Bubble?) {
         guard let bubble = bubble else { return nil }
         self.bubble = bubble
+        self.sec = bubble.coordinator.components.sec
     }
 }
 

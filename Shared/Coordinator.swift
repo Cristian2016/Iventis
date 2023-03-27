@@ -190,6 +190,8 @@ class BubbleCellCoordinator {
             
             self?.activePhaseCalled = true
             
+            print(#function)
+            
             let bContext = PersistenceController.shared.bContext
             let objID = bubble.objectID
             
