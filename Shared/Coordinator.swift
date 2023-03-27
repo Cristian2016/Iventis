@@ -113,7 +113,7 @@ class BubbleCellCoordinator {
     @Published  var components = Components("-1", "-1", "-1", "-1")
     @Published private(set) var opacity = Opacity()
     var colorPublisher:Publisher<Color, Never>
-    
+      
     // MARK: - Private API
     private var refresh = false //5
     
@@ -197,14 +197,32 @@ class BubbleCellCoordinator {
                 guard let initialValue = self?.initialValue(theBubble) else { return }
                 let comp = initialValue.timeComponentsAsStrings //components
                 
+                if theBubble.state == .running { self?.update(.automatic) }
                 DispatchQueue.main.async {//mainQueue 🟢
                     self?.components = Components(comp.hr, comp.min, comp.sec, comp.hundredths)
                     self?.opacity.updateOpacity(initialValue)
-                    if theBubble.state == .running { self?.update(.automatic) }
                 }
+                
+                self?.activePhaseCalled = true
             }
         }
     } //11
+    
+    private var activePhaseCalled = false
+    
+    func makeSureBubbleCellUpdates() {
+        guard
+            activePhaseCalled == false,
+            let bubble = bubble else { return }
+        
+        let bContext = PersistenceController.shared.bContext
+        let objID = bubble.objectID
+        
+        bContext.perform {
+            let theBubble = PersistenceController.shared.grabObj(objID) as! Bubble
+            if theBubble.state == .running { self.update(.automatic) }
+        }
+    }
     
     // MARK: - Init Deinit
     init(for bubble:Bubble) {
