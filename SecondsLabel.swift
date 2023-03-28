@@ -34,8 +34,13 @@ struct SecondsLabel: View {
                 }
                 .onReceive(bubble.coordinator.$components) { sec = $0.sec }
                 .task {
-                    print("task called")
+                    print("task called \(bubble.color ?? "pula")")
                     bubble.coordinator.makeSureBubbleCellUpdates()
+                }
+                .onChange(of: scenePhase) { newValue in
+                    if bubble.color == "charcoal" {
+                        print("scenephase \(newValue)")
+                    }
                 }
         }
     }

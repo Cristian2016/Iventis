@@ -217,6 +217,8 @@ class BubbleCellCoordinator {
             activePhaseCalled == false,
             let bubble = bubble else { return }
         
+        activePhaseCalled = true
+        
         print(#function)
         
         let bContext = PersistenceController.shared.bContext
@@ -241,6 +243,32 @@ class BubbleCellCoordinator {
     deinit {
         cancellable = []
         NotificationCenter.default.removeObserver(self)
+    }
+    
+    // MARK: - Testing
+    private func update(_ moment:Moment) {
+        guard let bubble = bubble else { return }
+        print(#function, " create")
+        
+        let bContext = PersistenceController.shared.bContext
+        let objID = bubble.objectID
+        
+        bContext.perform {
+            let bBubble = PersistenceController.shared.grabObj(objID) as! Bubble
+            let bInitialValue = self.initialValue(bBubble)
+            let components = bInitialValue.timeComponentsAsStrings
+            
+            DispatchQueue.main.async {
+                self.components
+                = Components(components.hr, components.min, components.sec, components.hundredths)
+                self.opacity.updateOpacity(bInitialValue)
+            }
+        }
+        
+        switch moment {
+            case .create: break
+            default: break
+        }
     }
 }
 
