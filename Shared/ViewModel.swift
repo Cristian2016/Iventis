@@ -480,7 +480,7 @@ extension ViewModel {
                 self.controller.save(bContext) {
                     let color = Color.bubbleColor(forName: thisBubble.color)
                     delayExecution(self.delay) {
-                        bubble.coordinator.colorPublisher.send(color)
+                        bubble.coordinator.colorChangePublisher.send(color)
                     }
                 }
             }

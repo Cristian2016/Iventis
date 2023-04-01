@@ -112,7 +112,7 @@ class BubbleCellCoordinator {
     @Published var timerProgress = 0.0 //8
     @Published  var timeComponents = Components("-1", "-1", "-1", "-1")
     @Published private(set) var timeComponentsOpacity = Opacity()
-    var colorPublisher:Publisher<Color, Never>
+    var colorChangePublisher:Publisher<Color, Never>
       
     // MARK: - Private API
     private var refresh = false //5
@@ -233,7 +233,7 @@ class BubbleCellCoordinator {
     // MARK: - Init Deinit
     init(for bubble:Bubble) {
         self.bubble = bubble
-        self.colorPublisher = .init(Color.bubbleColor(forName: bubble.color))
+        self.colorChangePublisher = .init(Color.bubbleColor(forName: bubble.color))
         self.isTimer = bubble.kind != .stopwatch
         
         self.observeActivePhase() //10

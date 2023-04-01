@@ -152,7 +152,7 @@ struct DateViewBackgroundColor: View {
     
     var body: some View {
         color
-            .onReceive(session.bubble?.coordinator.colorPublisher ?? .init(.clear)) {
+            .onReceive(session.bubble?.coordinator.colorChangePublisher ?? .init(.clear)) {
                 self.color = $0
             }
     }
