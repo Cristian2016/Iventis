@@ -23,7 +23,7 @@ struct DeleteConfirmationLabel: View {
                     .aspectRatio(3.0, contentMode: .fit)
                     .overlay (text)
                     .opacity(isVisible ? 1 : 0)
-                    .onReceive(coordinator.$sdButtonYOffset) {
+                    .onReceive(coordinator.$sdbOffset) {
                         guard coordinator.bubble?.startDelayBubble != nil else { return }
                         isVisible = $0 < -120
                     }

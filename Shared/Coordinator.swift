@@ -106,10 +106,10 @@ class BubbleCellCoordinator {
         }
     }
     
-    @Published var sdButtonYOffset = CGFloat(0)
+    @Published var sdbOffset = CGFloat(0) //start delay button YOffset
     @Published var sdbDeleteTriggered = false
+    
     @Published var timerProgress = 0.0 //8
-        
     @Published  var components = Components("-1", "-1", "-1", "-1")
     @Published private(set) var opacity = Opacity()
     var colorPublisher:Publisher<Color, Never>

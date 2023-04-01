@@ -17,35 +17,31 @@ struct SecondsLabel: View {
     var body: some View {
         if bubble.coordinator != nil {
             clearCircle
-                .overlay (
-                    clearRectangle
-                        .aspectRatio(1.2, contentMode: .fit)
-                        .overlay (text)
-                )
-                .overlay {
-                    VStack {
-                        Color.clear
-                            .aspectRatio(6, contentMode: .fit)
-                            .overlay { TimerProgressView(bubble) }
-                        Color.clear
-                        Color.clear
-                    }
-                    .scaleEffect(x: 1.4, y: 1.4)
-                }
+                .overlay (secondsLabel)
+                .overlay (timerProgressView)
                 .onReceive(bubble.coordinator.$components) { sec = $0.sec }
-                .task {
-                    print("task called \(bubble.color ?? "pula")")
-                    bubble.coordinator.makeSureBubbleCellUpdates()
-                }
-                .onChange(of: scenePhase) { newValue in
-                    if bubble.color == "charcoal" {
-                        print("scenephase \(newValue)")
-                    }
-                }
+                .task { bubble.coordinator.makeSureBubbleCellUpdates() }
         }
     }
     
     // MARK: - Lego
+    private var secondsLabel:some View {
+        clearRectangle
+            .aspectRatio(1.2, contentMode: .fit)
+            .overlay (text)
+    }
+    
+    private var timerProgressView:some View {
+        VStack {
+            Color.clear
+                .aspectRatio(6, contentMode: .fit)
+                .overlay { TimerProgressView(bubble) }
+            Color.clear
+            Color.clear
+        }
+        .scaleEffect(x: 1.4, y: 1.4)
+    }
+     
     private var clearCircle: some View {
         Circle().fill(Color.clear)
     }
