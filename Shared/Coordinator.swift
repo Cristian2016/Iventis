@@ -186,7 +186,7 @@ class BubbleCellCoordinator {
         let center = NotificationCenter.default
         center.addObserver(forName: .didBecomeActive, object: nil, queue: nil) {
             [weak self] _ in //mainQueue 🟢
-            guard let bubble = self?.bubble else { return }
+            guard let bubble = self?.bubble, bubble.color != nil else { return }
             
             self?.activePhaseCalled = true
             
