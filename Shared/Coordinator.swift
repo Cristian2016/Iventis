@@ -110,7 +110,7 @@ class BubbleCellCoordinator {
     @Published var sdbDeleteTriggered = false //start delay button delete triggered
     
     @Published var timerProgress = 0.0 //8
-    @Published  var timeComponents = Components("-1", "-1", "-1", "-1")
+    @Published var timeComponents = Components("-1", "-1", "-1", "-1")
     @Published private(set) var timeComponentsOpacity = Opacity()
     var colorChangePublisher:Publisher<Color, Never>
       
