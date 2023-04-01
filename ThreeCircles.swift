@@ -40,7 +40,7 @@ struct ThreeCircles: View {
                     /* Sec */ SecondsCircle(bubble: bubble, color: color, scale: metrics.circleScale)
                 }
                 .scaleEffect(x: metrics.hstackScale, y: metrics.hstackScale)
-                .onReceive(bubble.coordinator.$opacity) { output in
+                .onReceive(bubble.coordinator.$timeComponentsOpacity) { output in
                     minOpacity = output.min
                     hrOpacity = output.hr
                 }

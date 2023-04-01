@@ -19,7 +19,7 @@ struct SecondsLabel: View {
             clearCircle
                 .overlay (secondsLabel)
                 .overlay (timerProgressView)
-                .onReceive(bubble.coordinator.$components) { sec = $0.sec }
+                .onReceive(bubble.coordinator.$timeComponents) { sec = $0.sec }
                 .task { bubble.coordinator.makeSureBubbleCellUpdates() }
         }
     }
@@ -61,7 +61,7 @@ struct SecondsLabel: View {
     init?(bubble: Bubble?) {
         guard let bubble = bubble else { return nil }
         self.bubble = bubble
-        self.sec = bubble.coordinator.components.sec
+        self.sec = bubble.coordinator.timeComponents.sec
     }
 }
 

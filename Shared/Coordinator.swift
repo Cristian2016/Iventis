@@ -11,7 +11,7 @@
 //5 lets continuous update do one pass to refresh all time components. for ex: when user starts bubble, there is no need for a refresh
 //6 evaluate before creating a new session, otherwise the value will be alwatys false
 //7 read currentClock on the mainThread. do not access bubble on a backgroundThread!
-//8 the tiny label that a timer has on seconds
+//8 the tiny label that a timer has above seconds
 //9 ⚠️ I made a copy because I'm not sure it's safe to read bubble.properties from a background thread, since initialValue is reading bubble.properties
 //10 observeActivePhase updates bubbleCell.timeComponnets on self.init. not calling observeActivePhase, components [hr, min, sec, hundredths] would show -1 -1 -1 -1
 //11 notification received on mainQueue
@@ -41,11 +41,11 @@ class BubbleCellCoordinator {
             
             switch moment {
                 case .create: //bubble is created [ViewModel.createBubble]
-                    if self.components.hr == "-1" {
+                    if self.timeComponents.hr == "-1" {
                         let comp = theInitialValue.timeComponentsAsStrings
                         DispatchQueue.main.async {
-                            self.components = Components(comp.hr, comp.min, comp.sec, comp.hundredths)
-                            self.opacity.updateOpacity(theInitialValue)
+                            self.timeComponents = Components(comp.hr, comp.min, comp.sec, comp.hundredths)
+                            self.timeComponentsOpacity.updateOpacity(theInitialValue)
                         }
                     }
                     
@@ -53,7 +53,7 @@ class BubbleCellCoordinator {
                     if theBubble.state == .running && !theBubble.isPinned { self.refresh = true }
                     
                 case .automatic:
-                    DispatchQueue.main.async { self.components.hundredths = "" }
+                    DispatchQueue.main.async { self.timeComponents.hundredths = "" }
                     self.refresh = true
                     self.publisher
                         .sink { [weak self] _ in self?.task(theBubble.currentClock, theBubble.lastPair?.start) }
@@ -66,7 +66,7 @@ class BubbleCellCoordinator {
                             let components = theInitialValue.timeComponentsAsStrings
                             
                             DispatchQueue.main.async {
-                                self.components = Components(components.hr,
+                                self.timeComponents = Components(components.hr,
                                                              components.min,
                                                              components.sec,
                                                              components.hundredths)
@@ -81,7 +81,7 @@ class BubbleCellCoordinator {
                             self.publisher
                                 .sink { [weak self] _ in self?.task(cuurentClock, lastPairStart) }
                                 .store(in: &self.cancellable) //connect
-                            DispatchQueue.main.async { self.components.hundredths = "" }
+                            DispatchQueue.main.async { self.timeComponents.hundredths = "" }
                             
                         case .endSession, .reset, .deleteCurrentSession:
                             self.cancellable = []
@@ -90,12 +90,12 @@ class BubbleCellCoordinator {
                             DispatchQueue.main.async {
                                 self.timerProgress = 0.0
                                 
-                                self.components.hr = stringComponents.hr
-                                self.components.min = stringComponents.min
-                                self.components.sec = stringComponents.sec
-                                self.components.hundredths = stringComponents.hundredths
+                                self.timeComponents.hr = stringComponents.hr
+                                self.timeComponents.min = stringComponents.min
+                                self.timeComponents.sec = stringComponents.sec
+                                self.timeComponents.hundredths = stringComponents.hundredths
                                 
-                                self.opacity.updateOpacity(bubble.isTimer ? bubble.initialClock : 0)
+                                self.timeComponentsOpacity.updateOpacity(bubble.isTimer ? bubble.initialClock : 0)
                             }
                             
                         case .deleteBubble:
@@ -107,11 +107,11 @@ class BubbleCellCoordinator {
     }
     
     @Published var sdbOffset = CGFloat(0) //start delay button YOffset
-    @Published var sdbDeleteTriggered = false
+    @Published var sdbDeleteTriggered = false //start delay button delete triggered
     
     @Published var timerProgress = 0.0 //8
-    @Published  var components = Components("-1", "-1", "-1", "-1")
-    @Published private(set) var opacity = Opacity()
+    @Published  var timeComponents = Components("-1", "-1", "-1", "-1")
+    @Published private(set) var timeComponentsOpacity = Opacity()
     var colorPublisher:Publisher<Color, Never>
       
     // MARK: - Private API
@@ -143,22 +143,22 @@ class BubbleCellCoordinator {
             let minValue = String(giveMeAName)
             
             DispatchQueue.main.async { //send min
-                self.components.min = minValue
-                if intValue == 60 || refresh { self.opacity.updateOpacity(value) }
+                self.timeComponents.min = minValue
+                if intValue == 60 || refresh { self.timeComponentsOpacity.updateOpacity(value) }
             }
             
             if (giveMeAName%60) == 0 || refresh || refreshForTimer {
                 let hrValue = String(intValue/3600)
                 
                 DispatchQueue.main.async { //send hour
-                    self.components.hr = hrValue
-                    if intValue == 3600 || refresh || refreshForTimer { self.opacity.updateOpacity(value) }
+                    self.timeComponents.hr = hrValue
+                    if intValue == 3600 || refresh || refreshForTimer { self.timeComponentsOpacity.updateOpacity(value) }
                 }
             }
         }
         
         DispatchQueue.main.async {
-            self.components.sec = String(secValue) //send second
+            self.timeComponents.sec = String(secValue) //send second
             self.refresh = false
         }
     } //4
@@ -203,8 +203,8 @@ class BubbleCellCoordinator {
                 
                 if theBubble.state == .running { self?.update(.automatic) }
                 DispatchQueue.main.async {//mainQueue 🟢
-                    self?.components = Components(comp.hr, comp.min, comp.sec, comp.hundredths)
-                    self?.opacity.updateOpacity(initialValue)
+                    self?.timeComponents = Components(comp.hr, comp.min, comp.sec, comp.hundredths)
+                    self?.timeComponentsOpacity.updateOpacity(initialValue)
                 }
             }
         }
@@ -259,9 +259,9 @@ class BubbleCellCoordinator {
             let components = bInitialValue.timeComponentsAsStrings
             
             DispatchQueue.main.async {
-                self.components
+                self.timeComponents
                 = Components(components.hr, components.min, components.sec, components.hundredths)
-                self.opacity.updateOpacity(bInitialValue)
+                self.timeComponentsOpacity.updateOpacity(bInitialValue)
             }
         }
         

@@ -31,7 +31,7 @@ struct ThreeLabels: View {
         self.timeComponentsFontSize = timeComponentsFontSize
         self.bubble = bubble!
                         
-        let components = coordinator.components
+        let components = coordinator.timeComponents
         hr = components.hr
         min = components.min
         hundredths = components.hundredths
@@ -75,8 +75,8 @@ struct ThreeLabels: View {
             .font(.system(size: timeComponentsFontSize))
             .fontDesign(.rounded)
             .foregroundColor(.white)
-            .onReceive(bubble.coordinator.$components) { min = $0.min }
-            .onReceive(bubble.coordinator.$components) { hr = $0.hr }
+            .onReceive(bubble.coordinator.$timeComponents) { min = $0.min }
+            .onReceive(bubble.coordinator.$timeComponents) { hr = $0.hr }
     }
     
     // MARK: -

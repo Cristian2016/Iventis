@@ -18,7 +18,7 @@ struct HundredthsCircle: View {
             .adaptiveText(hundredths, true)
             .foregroundColor(.background)
             .allowsHitTesting(false)
-            .onReceive(bubble.coordinator.$components) { hundredths = $0.hundredths }
+            .onReceive(bubble.coordinator.$timeComponents) { hundredths = $0.hundredths }
         //properties that will be animated
             .opacity(isBubbleRunning ? 0 : 1)
             .offset(x: isBubbleRunning ? -20 : 0, y: isBubbleRunning ? -20 : 0)
@@ -31,7 +31,7 @@ struct HundredthsCircle: View {
         self.bubble = bubble
         guard let coordinator = bubble.coordinator else { return nil }
         
-        let components = coordinator.components
+        let components = coordinator.timeComponents
         self.hundredths = components.hundredths
     }
     
