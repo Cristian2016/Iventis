@@ -136,7 +136,7 @@ struct BubbleDeleteActionAlert: View {
     struct Metrics {
         let bubbleColor:Color
         
-        let ratio = CGFloat(0.88)
+        let ratio = CGFloat(0.84)
         let width = CGFloat(220)
         var height:CGFloat { width / ratio }
         
