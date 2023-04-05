@@ -42,7 +42,7 @@ struct BubbleDeleteActionAlert: View {
                     }
                 }
                     .padding([.bottom], 18) )
-                .overlay { deleteLabel }
+                .overlay { titleLabel }
         }
     }
     
@@ -59,14 +59,17 @@ struct BubbleDeleteActionAlert: View {
             .standardShadow()
     }
     
-    private var deleteLabel:some View {
+    private var titleLabel:some View {
         Push(.topMiddle) {
-            Text("\(Image.trash) Delete")
-                .foregroundColor(.red)
-                .font(.system(size: 26, weight: .medium))
+            VStack {
+                Text("\(Color.userFriendlyBubbleColorName(for: bubble.color))")
+                    .font(.system(size: 22, weight: .semibold, design: .monospaced))
+                Text("\(bubble.sessions_.count) Sessions")
+                    .font(.system(size: 16, weight: .regular, design: .monospaced))
+            }
+            .foregroundColor(Color("Color"))
+            .padding(.top, 10)
         }
-        .padding([.top])
-        .padding([.top], 6)
     }
     
     //delete bubble action
@@ -86,7 +89,7 @@ struct BubbleDeleteActionAlert: View {
                 .fill(metrics.bubbleColor)
                 .frame(width: 208, height: 84)
                 .overlay {
-                    Text("Bubble")
+                    Text("\(Image.trash) Delete")
                         .font(.system(size: 32, weight: .medium, design: .rounded))
                         .foregroundColor(.white)
                 }
@@ -110,9 +113,11 @@ struct BubbleDeleteActionAlert: View {
                 .fill(bubble.sessions_.isEmpty ? metrics.bubbleColor.opacity(0.25) : metrics.bubbleColor)
                 .frame(width: 208, height: 84)
                 .overlay {
-                    Text("History \(bubble.sessions_.count)")
-                        .font(.system(size: 32, weight: .medium, design: .rounded))
-                        .foregroundColor(bubble.sessions_.isEmpty ? .black : .white)
+                    VStack(spacing: 0) {
+                        Text("\(Image.reset) Reset")
+                            .font(.system(size: 32, weight: .medium, design: .rounded))
+                    }
+                    .foregroundColor(bubble.sessions_.isEmpty ? .black : .white)
                 }
         }
         .buttonStyle(DeleteButtonStyle(disabled: bubble.sessions_.isEmpty))

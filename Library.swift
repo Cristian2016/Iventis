@@ -59,6 +59,7 @@ public extension Image {
     static let roundCheckmark = Image(systemName: "checkmark.circle.fill")
     static let timer = Image(systemName: "timer")
     static let more = Image(systemName: "ellipsis.circle.fill")
+    static let reset = Image(systemName: "arrow.counterclockwise")
     
     // MARK: - Info Assets
     static let dpv = Image("DurationPicker")
