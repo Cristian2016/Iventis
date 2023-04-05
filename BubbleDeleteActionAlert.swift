@@ -177,7 +177,7 @@ struct BubbleDeleteActionAlert: View {
 extension BubbleDeleteActionAlert {
     struct Info:View {
         @State private var show = false
-        private let title = "Delete Bubble or History"
+        private let title = "Delete/Reset Bubble"
         let subtitle = "Associated Calendar Events are safe! They will not be removed from the Calendar App"
         
         var body: some View {
