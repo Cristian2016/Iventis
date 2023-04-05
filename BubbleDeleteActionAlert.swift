@@ -137,9 +137,9 @@ struct BubbleDeleteActionAlert: View {
         
         let bubbleColor = Color.bubbleColor(forName: bubble.color ?? "mint")
         
-        let titleColor = (bubble.color ?? "mint") + "Text"
+//        let titleColor = (bubble.color ?? "mint") + "Text"
         
-        let metrics = Metrics(bubbleColor: bubbleColor, titleColor: Color(titleColor))
+        let metrics = Metrics(bubbleColor: bubbleColor, titleColor: Color("silverText"))
         self.metrics = metrics
     }
     
