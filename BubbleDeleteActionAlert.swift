@@ -64,11 +64,11 @@ struct BubbleDeleteActionAlert: View {
             VStack {
                 Text("\(Color.userFriendlyBubbleColorName(for: bubble.color))")
                     .font(.system(size: 22, weight: .semibold, design: .monospaced))
-                Text("\(bubble.sessions_.count) Sessions")
+                Text("^[\(bubble.sessions_.count) Session](inflect: true)")
                     .font(.system(size: 18, weight: .medium, design: .monospaced))
             }
             .foregroundColor(Color("darkGrayFont"))
-            .padding(.top, 12)
+            .padding(.top, 14)
         }
     }
     
