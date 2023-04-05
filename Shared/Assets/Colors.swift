@@ -156,6 +156,10 @@ extension Color {
         (triColors.filter { $0.description == bubbleColorName }.first ?? Color.Bubble.clear).sec
     }
     
+    static func tricolor(forName bubbleColorName:String?) -> Tricolor {
+        (triColors.filter { $0.description == bubbleColorName }.first ?? Color.Bubble.clear)
+    }
+    
     static let emojis = ["lemon":"🟨",
                               "red":"🟥",
                               "ultramarine":"🟦",
