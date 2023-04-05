@@ -140,7 +140,7 @@ struct BubbleDeleteActionAlert: View {
         
         let backgroundRadius = CGFloat(40)
         let butonRadius = CGFloat(28)
-        let backgroundColor = Color("deleteActionAlert")
+        let backgroundColor = Color("deleteActionAlert1")
     }
     
     // MARK: -
