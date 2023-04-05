@@ -47,7 +47,6 @@ struct BubbleDeleteActionAlert: View {
     }
     
     // MARK: - Lego
-    
     private var transparentBackground: some View {
         Color.white.opacity(0.01).onTapGesture { cancelDeleteAction() }
     }
@@ -56,7 +55,7 @@ struct BubbleDeleteActionAlert: View {
         RoundedRectangle(cornerRadius: metrics.backgroundRadius)
             .fill(metrics.backgroundColor)
             .frame(width: metrics.width, height: metrics.height)
-            .standardShadow()
+//            .standardShadow()
             .overlay {
                 Push(.topLeft) {
                     Image.info
@@ -208,9 +207,10 @@ extension BubbleDeleteActionAlert {
                     
                     VStack(alignment: .leading) {
                         Text("**Dismiss** \(Image.tap) Tap")
-                        Text("*Outside Shape*")
+                        Text("*Outside Dark Gray Area*")
                             .foregroundColor(.secondary)
                     }
+                    .forceMultipleLines()
                 }
             }
         }
