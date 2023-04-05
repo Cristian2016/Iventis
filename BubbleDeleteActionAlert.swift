@@ -65,10 +65,10 @@ struct BubbleDeleteActionAlert: View {
                 Text("\(Color.userFriendlyBubbleColorName(for: bubble.color))")
                     .font(.system(size: 22, weight: .semibold, design: .monospaced))
                 Text("\(bubble.sessions_.count) Sessions")
-                    .font(.system(size: 16, weight: .regular, design: .monospaced))
+                    .font(.system(size: 18, weight: .medium, design: .monospaced))
             }
             .foregroundColor(Color("darkGrayFont"))
-            .padding(.top, 10)
+            .padding(.top, 12)
         }
     }
     
