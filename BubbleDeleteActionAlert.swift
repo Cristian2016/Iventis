@@ -37,12 +37,12 @@ struct BubbleDeleteActionAlert: View {
             roundedBackground
                 .overlay( Push(.bottomMiddle) {
                     VStack(spacing: 4) {
+                        titleLabel
                         topButton
                         bottomButton
                     }
                 }
                     .padding([.bottom], 18) )
-                .overlay { titleLabel }
         }
     }
     
@@ -60,16 +60,15 @@ struct BubbleDeleteActionAlert: View {
     }
     
     private var titleLabel:some View {
-        Push(.topMiddle) {
-            VStack {
-                Text("\(Color.userFriendlyBubbleColorName(for: bubble.color))")
-                    .font(.system(size: 22, weight: .semibold, design: .monospaced))
+        VStack {
+            Text("\(Color.userFriendlyBubbleColorName(for: bubble.color))")
+                .font(.system(size: 22, weight: .semibold, design: .monospaced))
+            if bubble.sessions_.count > 0 {
                 Text("^[\(bubble.sessions_.count) Session](inflect: true)")
                     .font(.system(size: 18, weight: .medium, design: .monospaced))
             }
-            .foregroundColor(Color("darkGrayFont"))
-            .padding(.top, 14)
         }
+        .foregroundColor(Color("darkGrayFont"))
     }
     
     //delete bubble action

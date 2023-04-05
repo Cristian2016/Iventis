@@ -154,10 +154,10 @@
             filePath = "BubbleDeleteActionAlert.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "107"
-            endingLineNumber = "107"
-            landmarkName = "unknown"
-            landmarkType = "0">
+            startingLineNumber = "106"
+            endingLineNumber = "106"
+            landmarkName = "bottomButton"
+            landmarkType = "24">
             <Locations>
                <Location
                   uuid = "AF0680DE-2644-435E-BCF2-490866FACE77 - dd1badcc6dd6fb11"
