@@ -89,7 +89,7 @@ struct BubbleDeleteActionAlert: View {
                 .fill(metrics.bubbleColor)
                 .frame(width: 208, height: 84)
                 .overlay {
-                    Text("\(Image.trash) Delete")
+                    Text("Delete")
                         .font(.system(size: 32, weight: .medium, design: .rounded))
                         .foregroundColor(.white)
                 }
@@ -113,11 +113,9 @@ struct BubbleDeleteActionAlert: View {
                 .fill(bubble.sessions_.isEmpty ? metrics.bubbleColor.opacity(0.25) : metrics.bubbleColor)
                 .frame(width: 208, height: 84)
                 .overlay {
-                    VStack(spacing: 0) {
-                        Text("\(Image.reset) Reset")
-                            .font(.system(size: 32, weight: .medium, design: .rounded))
-                    }
-                    .foregroundColor(bubble.sessions_.isEmpty ? .black : .white)
+                    Text("Reset")
+                        .font(.system(size: 32, weight: .medium, design: .rounded))
+                        .foregroundColor(bubble.sessions_.isEmpty ? .black : .white)
                 }
         }
         .buttonStyle(DeleteButtonStyle(disabled: bubble.sessions_.isEmpty))
