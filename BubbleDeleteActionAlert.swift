@@ -55,7 +55,7 @@ struct BubbleDeleteActionAlert: View {
         RoundedRectangle(cornerRadius: metrics.backgroundRadius)
             .fill(metrics.backgroundColor)
             .frame(width: metrics.width, height: metrics.height)
-//            .standardShadow()
+            .standardShadow()
             .overlay {
                 Push(.topLeft) {
                     Image.info
@@ -207,7 +207,7 @@ extension BubbleDeleteActionAlert {
                     
                     VStack(alignment: .leading) {
                         Text("**Dismiss** \(Image.tap) Tap")
-                        Text("*Outside Dark Gray Area*")
+                        Text("*Outside Rectangle*")
                             .foregroundColor(.secondary)
                     }
                     .forceMultipleLines()
