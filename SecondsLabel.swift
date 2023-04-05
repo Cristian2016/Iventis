@@ -20,7 +20,6 @@ struct SecondsLabel: View {
                 .overlay (secondsLabel)
                 .overlay (timerProgressView)
                 .onReceive(bubble.coordinator.$timeComponents) { sec = $0.sec }
-                .task { bubble.coordinator.makeSureBubbleCellUpdates() }
         }
     }
     

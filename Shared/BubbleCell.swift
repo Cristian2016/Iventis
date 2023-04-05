@@ -14,11 +14,13 @@ struct BubbleCell: View {
     private let secretary = Secretary.shared
     
     let metrics = Metrics()
+    @State private var pula = false
     
     @StateObject private var bubble:Bubble
     
     @EnvironmentObject private var viewModel:ViewModel
     @EnvironmentObject private var layoutViewModel:LayoutViewModel
+    @Environment(\.scenePhase) private var phase
         
     // MARK: - Body
     var body: some View {
@@ -38,6 +40,10 @@ struct BubbleCell: View {
         .swipeActions(edge: .trailing, allowsFullSwipe: true) {
             deleteActionButton
             moreOptionsButton
+        }
+        .onAppear { //before the view appears
+            let timeComponentsAreSet = bubble.coordinator.timeComponentsSet
+            if !timeComponentsAreSet { bubble.coordinator.update(.automatic) }
         }
     }
     

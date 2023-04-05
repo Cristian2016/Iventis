@@ -15,6 +15,7 @@
 //9 ⚠️ I made a copy because I'm not sure it's safe to read bubble.properties from a background thread, since initialValue is reading bubble.properties
 //10 observeActivePhase updates bubbleCell.timeComponnets on self.init. not calling observeActivePhase, components [hr, min, sec, hundredths] would show -1 -1 -1 -1
 //11 notification received on mainQueue
+//12 refreshOnAppActive() no idea why didBecomeActive notification received twice when I pull dow notification center. This method ensures that all components will be updated when app returns from the background
 
 import SwiftUI
 import Combine
@@ -40,49 +41,51 @@ class BubbleCellCoordinator {
             let theInitialValue = self.initialValue(theBubble)
             
             switch moment {
-                case .create: //bubble is created [ViewModel.createBubble]
-                    if self.timeComponents.hr == "-1" {
-                        let comp = theInitialValue.timeComponentsAsStrings
-                        DispatchQueue.main.async {
-                            self.timeComponents = Components(comp.hr, comp.min, comp.sec, comp.hundredths)
-                            self.timeComponentsOpacity.updateOpacity(theInitialValue)
-                        }
-                    }
-                    
                 case .showAll:
                     if theBubble.state == .running && !theBubble.isPinned { self.refresh = true }
                     
                 case .automatic:
-                    DispatchQueue.main.async { self.timeComponents.hundredths = "" }
-                    self.refresh = true
-                    self.publisher
-                        .sink { [weak self] _ in self?.task(theBubble.currentClock, theBubble.lastPair?.start) }
-                        .store(in: &self.cancellable) //connect
+                    let comp = theInitialValue.timeComponentsAsStrings
+                    let progress = self.computeTimerProgress(for: theBubble, and: theInitialValue)
+                    
+                    DispatchQueue.main.async {
+                        self.timeComponents = Components(comp.hr, comp.min, comp.sec, comp.hundredths)
+                        self.timeComponentsOpacity.updateOpacity(theInitialValue)
+                        self.timerProgress = progress
+                    }
+                    
+                    if theBubble.state == .running {
+                        DispatchQueue.main.async { self.timeComponents.hundredths = "" }
+                        self.refresh = true
+                        self.publisher
+                            .sink { [weak self] _ in self?.task(theBubble) }
+                            .store(in: &self.cancellable) //connect
+                    }
                     
                 case .user(let action):
                     switch action {
                         case .pause:
                             self.cancellable = []
+                            
                             let components = theInitialValue.timeComponentsAsStrings
+                            let hr = components.hr
+                            let min = components.min
+                            let sec = components.sec
+                            let hundredths = components.hundredths
                             
                             DispatchQueue.main.async {
-                                self.timeComponents = Components(components.hr,
-                                                             components.min,
-                                                             components.sec,
-                                                             components.hundredths)
+                                self.timeComponents = Components(hr, min, sec, hundredths)
                             }
                             
                         case .start:
                             self.refresh = true
                             
-                            let cuurentClock = theBubble.currentClock
-                            let lastPairStart = theBubble.lastPair!.start!
-                            
                             self.publisher
-                                .sink { [weak self] _ in self?.task(cuurentClock, lastPairStart) }
+                                .sink { [weak self] _ in self?.task(theBubble) }
                                 .store(in: &self.cancellable) //connect
-                            DispatchQueue.main.async { self.timeComponents.hundredths = "" }
                             
+                            DispatchQueue.main.async { self.timeComponents.hundredths = "" }
+                                                        
                         case .endSession, .reset, .deleteCurrentSession:
                             self.cancellable = []
                             let stringComponents = theBubble.initialClock.timeComponentsAsStrings
@@ -111,15 +114,21 @@ class BubbleCellCoordinator {
     
     @Published var timerProgress = 0.0 //8
     @Published var timeComponents = Components("-1", "-1", "-1", "-1")
+    var timeComponentsSet:Bool { timeComponents.hr != "-1" }
     @Published private(set) var timeComponentsOpacity = Opacity()
     var colorChangePublisher:Publisher<Color, Never>
+    
+    private func computeTimerProgress(for bubble:Bubble, and value:Float) -> Double {
+        1 - Double(value/(bubble.initialClock))
+    }
       
     // MARK: - Private API
     private var refresh = false //5
     
-    private func task(_ currentClock:Float, _ lastStart:Date?) { //bThread ⚠️
-        guard let lastPairStart = lastStart else { return }
+    private func task(_ bubble:Bubble) { //bThread ⚠️
+        guard let lastPairStart = bubble.lastPair?.start else { return }
         let refresh = self.refresh
+        let currentClock = bubble.currentClock
                                 
         let Δ = Float(Date().timeIntervalSince(lastPairStart)) //2
         
@@ -128,9 +137,8 @@ class BubbleCellCoordinator {
         value.round(.toNearestOrEven) //ex: 2346
         
         if isTimer {
-            DispatchQueue.main.async { [weak self] in
-                self?.timerProgress = 1 - Double(value/(self?.bubble?.initialClock ?? 1))
-            }
+            let progress = self.computeTimerProgress(for: bubble, and: value)
+            DispatchQueue.main.async { self.timerProgress = progress }
         }
         
         let intValue = Int(value)
@@ -181,101 +189,32 @@ class BubbleCellCoordinator {
         else { return currentClock }
     }
     
-    // MARK: - Observers
-    private func observeActivePhase() {
-        let center = NotificationCenter.default
-        center.addObserver(forName: .didBecomeActive, object: nil, queue: nil) {
-            [weak self] _ in //mainQueue 🟢
-            guard let bubble = self?.bubble, bubble.color != nil else { return }
-            
-            self?.activePhaseCalled = true
-            
-            print(#function)
-            
-            let bContext = PersistenceController.shared.bContext
-            let objID = bubble.objectID
-            
-            bContext.perform {//bQueue 🔴
-                let theBubble = PersistenceController.shared.grabObj(objID) as! Bubble
-                
-                guard let initialValue = self?.initialValue(theBubble) else { return }
-                let comp = initialValue.timeComponentsAsStrings //components
-                
-                if theBubble.state == .running { self?.update(.automatic) }
-                DispatchQueue.main.async {//mainQueue 🟢
-                    self?.timeComponents = Components(comp.hr, comp.min, comp.sec, comp.hundredths)
-                    self?.timeComponentsOpacity.updateOpacity(initialValue)
-                }
-            }
-        }
-    } //11
-    
     private var activePhaseCalled = false
     
-    func makeSureBubbleCellUpdates() {
-        guard
-            activePhaseCalled == false,
-            let bubble = bubble else { return }
-        
-        activePhaseCalled = true
-        
-        print(#function)
-        
-        let bContext = PersistenceController.shared.bContext
-        let objID = bubble.objectID
-        
-        bContext.perform {
-            let theBubble = PersistenceController.shared.grabObj(objID) as! Bubble
-            if theBubble.state == .running { self.update(.automatic) }
+    private func refreshOnAppActive() {
+        NotificationCenter.default.addObserver(forName: .didBecomeActive, object: nil, queue: nil) { [weak self] _ in
+            if self?.refresh == false { self?.refresh = true }
         }
-    }
-    
+    } //12
+        
     // MARK: - Init Deinit
     init(for bubble:Bubble) {
         self.bubble = bubble
         self.colorChangePublisher = .init(Color.bubbleColor(forName: bubble.color))
         self.isTimer = bubble.kind != .stopwatch
         
-        self.observeActivePhase() //10
-        self.update(.create)
+        refreshOnAppActive()
     }
     
     deinit {
         cancellable = []
         NotificationCenter.default.removeObserver(self)
     }
-    
-    // MARK: - Testing
-    private func update(_ moment:Moment) {
-        guard let bubble = bubble else { return }
-        print(#function, " create")
-        
-        let bContext = PersistenceController.shared.bContext
-        let objID = bubble.objectID
-        
-        bContext.perform {
-            let bBubble = PersistenceController.shared.grabObj(objID) as! Bubble
-            let bInitialValue = self.initialValue(bBubble)
-            let components = bInitialValue.timeComponentsAsStrings
-            
-            DispatchQueue.main.async {
-                self.timeComponents
-                = Components(components.hr, components.min, components.sec, components.hundredths)
-                self.timeComponentsOpacity.updateOpacity(bInitialValue)
-            }
-        }
-        
-        switch moment {
-            case .create: break
-            default: break
-        }
-    }
 }
 
 extension BubbleCellCoordinator {
     ///automatic means handled by the system. ex. when app launches
     enum Moment {
-        case create
         case user(Action)
         case automatic
         case showAll //show all bubbles, including the ordinary ones

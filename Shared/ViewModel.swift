@@ -430,9 +430,7 @@ extension ViewModel {
                 else { fatalError() }
                 
                 let changes = [NSDeletedObjectsKey : ids]
-                
-                bContext.reset() //⚠️ 16
-                
+                                
                 delayExecution(self.delay) {
                     NSManagedObjectContext.mergeChanges(
                         fromRemoteContextSave: changes, into: [self.controller.viewContext]) //12
