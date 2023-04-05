@@ -110,7 +110,7 @@ struct BubbleDeleteActionAlert: View {
             }
         } label: {
             vRoundedRectangle(corners: [.bottomLeft, .bottomRight], radius: metrics.butonRadius)
-                .fill(bubble.sessions_.isEmpty ? metrics.bubbleColor.opacity(0.25) : metrics.bubbleColor)
+                .fill(bubble.sessions_.isEmpty ? metrics.bubbleColor.opacity(0.4) : metrics.bubbleColor)
                 .frame(width: 208, height: 84)
                 .overlay {
                     Text("Reset")
