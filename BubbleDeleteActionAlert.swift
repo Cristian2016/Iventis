@@ -60,7 +60,7 @@ struct BubbleDeleteActionAlert: View {
                 Push(.topLeft) {
                     Image.info
                         .font(.system(size: 22))
-                        .foregroundColor(Color("darkGrayFont"))
+                        .foregroundColor(metrics.titleColor)
                         .padding()
                 }
             }
@@ -76,7 +76,7 @@ struct BubbleDeleteActionAlert: View {
                     .font(.system(size: 18, weight: .medium, design: .monospaced))
             }
         }
-        .foregroundColor(Color("darkGrayFont"))
+        .foregroundColor(metrics.titleColor)
         .offset(y: bubble.sessions_.count == 0 ? -14 : -4)
         .allowsHitTesting(false)
     }
@@ -136,12 +136,16 @@ struct BubbleDeleteActionAlert: View {
         self.bubble = bubble
         
         let bubbleColor = Color.bubbleColor(forName: bubble.color ?? "mint")
-        let metrics = Metrics(bubbleColor: bubbleColor)
+        
+        let titleColor = (bubble.color ?? "mint") + "Text"
+        
+        let metrics = Metrics(bubbleColor: bubbleColor, titleColor: Color(titleColor))
         self.metrics = metrics
     }
     
     struct Metrics {
         let bubbleColor:Color
+        let titleColor:Color
         
         let ratio = CGFloat(0.84)
         let width = CGFloat(220)
