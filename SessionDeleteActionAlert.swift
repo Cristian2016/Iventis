@@ -25,6 +25,7 @@ struct SessionDeleteActionAlert: View {
                     Text("Session \(input!.sessionRank)")
                         .font(.system(size: 18, weight: .medium, design: .monospaced))
                         .foregroundColor(Color("silverText"))
+                        .allowsHitTesting(false)
                     deleteButton
                 }
                 .background { roundedBackground }
@@ -53,20 +54,11 @@ struct SessionDeleteActionAlert: View {
                 Push(.topLeft) {
                     Image.info
                         .font(.system(size: 26))
-                        .foregroundColor(Color("deleteActionViewBackground"))
+                        .foregroundColor(Color("deleteActionAlert1"))
                         .padding(-20)
                 }
             }
             .onTapGesture { secretary.showSessionDeleteInfo = true }
-    }
-    
-    private var trashLabel:some View {
-        HStack (spacing:2) {
-            Image.trash
-            Text("Delete")
-        }
-        .font(metrics!.trashViewFont)
-        .foregroundColor(.red)
     }
     
     private var deleteButton:some View {
@@ -124,7 +116,7 @@ extension SessionDeleteActionAlert {
         let backgroundRadius = CGFloat(44)
         let buttonRadius = CGFloat(32)
         
-        let backgroundColor = Color("deleteActionViewBackground")
+        let backgroundColor = Color("deleteActionAlert1")
         let bubbleColor:Color
         var width = CGFloat(220)
         let ratio = 1.55
