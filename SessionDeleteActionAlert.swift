@@ -56,7 +56,7 @@ struct SessionDeleteActionAlert: View {
         }
         .compositingGroup()
         .foregroundColor(metrics!.backgroundColor)
-        .standardShadow()
+//        .standardShadow()
         .onTapGesture { secretary.showSessionDeleteInfo = true }
     }
     
