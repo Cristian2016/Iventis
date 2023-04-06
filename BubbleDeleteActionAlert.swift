@@ -56,14 +56,14 @@ struct BubbleDeleteActionAlert: View {
             .fill(metrics.backgroundColor)
             .frame(width: metrics.width, height: metrics.height)
             .standardShadow()
-            .overlay {
-                Push(.topLeft) {
-                    Image.info
-                        .font(.system(size: 20))
-                        .foregroundColor(metrics.titleColor)
-                        .padding(EdgeInsets(top: 12, leading: 18, bottom: 0, trailing: 0))
-                }
-            }
+//            .overlay {
+//                Push(.topLeft) {
+//                    Image.info
+//                        .font(.system(size: 20))
+//                        .foregroundColor(metrics.titleColor)
+//                        .padding(EdgeInsets(top: 12, leading: 18, bottom: 0, trailing: 0))
+//                }
+//            }
             .onTapGesture { secretary.showDeleteActionViewInfo = true }
     }
     
