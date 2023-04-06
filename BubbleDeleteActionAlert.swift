@@ -209,7 +209,7 @@ extension BubbleDeleteActionAlert {
                     
                     VStack(alignment: .leading) {
                         Text("**Dismiss** \(Image.tap) Tap")
-                        Text("*Outside Rectangle*")
+                        Text("*Outside Gray Rectangle*")
                             .foregroundColor(.secondary)
                     }
                     .forceMultipleLines()
