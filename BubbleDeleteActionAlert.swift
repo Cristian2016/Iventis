@@ -69,7 +69,7 @@ struct BubbleDeleteActionAlert: View {
     private var infoSymbol:some View {
         Push(.topLeft) {
             Image.info
-                .font(.system(size: 20))
+                .font(.system(size: 24))
                 .foregroundColor(metrics.titleColor)
                 .padding(10)
         }
