@@ -71,6 +71,7 @@ struct BubbleDeleteActionAlert: View {
             Image.info
                 .font(.system(size: 20))
                 .foregroundColor(metrics.titleColor)
+                .padding(14)
         }
     }
     
