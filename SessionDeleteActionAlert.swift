@@ -23,7 +23,7 @@ struct SessionDeleteActionAlert: View {
                 Color.white.opacity(0.01).onTapGesture { cancelDeleteAction() }
                 VStack (spacing:8) {
                     Text("Session \(input!.sessionRank)")
-                        .font(.system(size: 18, weight: .medium, design: .monospaced))
+                        .font(.system(size: 18, weight: .medium))
                         .foregroundColor(Color("silverText"))
                         .allowsHitTesting(false)
                     deleteButton
@@ -46,19 +46,22 @@ struct SessionDeleteActionAlert: View {
     
     // MARK: - Legos
     private var roundedBackground:some View {
-        RoundedRectangle(cornerRadius: metrics!.backgroundRadius)
-            .fill(metrics!.backgroundColor)
-            .frame(width: metrics!.width, height: metrics!.height)
-            .standardShadow()
-            .onTapGesture { secretary.showSessionDeleteInfo = true }
+        ZStack(alignment: .topLeading) {
+            RoundedRectangle(cornerRadius: metrics!.backgroundRadius)
+                .fill(metrics!.backgroundColor)
+            infoSymbol
+        }
+        .frame(width: metrics!.width, height: metrics!.height)
+        .standardShadow()
+        .onTapGesture { secretary.showSessionDeleteInfo = true }
     }
     
     private var infoSymbol:some View {
         Push(.topLeft) {
             Image.info
-                .font(.system(size: 24))
+                .font(.system(size: 20))
                 .foregroundColor(Color("silverText"))
-                .padding(10)
+                .padding(EdgeInsets(top: 12, leading: 22, bottom: 0, trailing: 0))
         }
     }
     
@@ -84,7 +87,7 @@ struct SessionDeleteActionAlert: View {
         } label: {
             RoundedRectangle(cornerRadius: metrics!.buttonRadius)
                 .fill(metrics!.bubbleColor)
-                .frame(width: 210, height: 90)
+                .frame(width: 208, height: 90)
                 .overlay {
                     Text("Delete")
                         .font(.system(size: 32, weight: .medium, design: .rounded))
@@ -120,8 +123,8 @@ extension SessionDeleteActionAlert {
         let backgroundColor = Color("deleteActionAlert1")
         let bubbleColor:Color
         var width = CGFloat(220)
-        let ratio = 1.55
-        var height:CGFloat { width/ratio }
+        let ratio = 1.50
+        var height:CGFloat { width / ratio }
         let trashViewFont = Font.system(size: 26, weight: .medium)
         let buttonFont = Font.system(size: 28).weight(.medium)
     }
