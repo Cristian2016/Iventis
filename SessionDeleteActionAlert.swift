@@ -22,12 +22,15 @@ struct SessionDeleteActionAlert: View {
             if input != nil {
                 Color.white.opacity(0.01).onTapGesture { cancelDeleteAction() }
                 VStack (spacing:8) {
-                    trashLabel
+                    Text("Session \(input!.sessionRank)")
+                        .font(.system(size: 18, weight: .medium, design: .monospaced))
+                        .foregroundColor(Color("silverText"))
                     deleteButton
                 }
                 .background { roundedBackground }
             }
         }
+        .offset(y: -24)
         .onReceive(secretary.$sessionToDelete) {
             if let value = $0 {
                 let session = value.session
@@ -81,7 +84,7 @@ struct SessionDeleteActionAlert: View {
                 .fill(metrics!.bubbleColor)
                 .frame(width: 204, height: 84)
                 .overlay {
-                    Text("Session \(input!.sessionRank)")
+                    Text("Delete")
                         .font(.system(size: 32, weight: .medium, design: .rounded))
                         .foregroundColor(.white)
                 }
@@ -115,7 +118,7 @@ extension SessionDeleteActionAlert {
         let backgroundColor = Color("deleteActionViewBackground")
         let bubbleColor:Color
         var width = CGFloat(220)
-        let ratio = 1.25
+        let ratio = 1.53
         var height:CGFloat { width/ratio }
         let buttonHeight:CGFloat = 78
         let trashViewFont = Font.system(size: 26, weight: .medium)
