@@ -62,7 +62,7 @@ struct BubbleDeleteActionAlert: View {
         }
         .compositingGroup()
         .foregroundColor(metrics.backgroundColor)
-//        .standardShadow()
+        .standardShadow()
         .onTapGesture { secretary.showDeleteActionViewInfo = true }
     }
     
