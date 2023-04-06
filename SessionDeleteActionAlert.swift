@@ -50,15 +50,17 @@ struct SessionDeleteActionAlert: View {
             .fill(metrics!.backgroundColor)
             .frame(width: metrics!.width, height: metrics!.height)
             .standardShadow()
-//            .overlay {
-//                Push(.topLeft) {
-//                    Image.info
-//                        .font(.system(size: 20))
-//                        .foregroundColor(Color("silverText"))
-//                        .padding(EdgeInsets(top: 10, leading: 18, bottom: 0, trailing: 0))
-//                }
-//            }
             .onTapGesture { secretary.showSessionDeleteInfo = true }
+//            .overlay { infoButton }
+    }
+    
+    private var infoButton:some View {
+        Push(.topLeft) {
+            Image.info
+                .font(.system(size: 20))
+                .foregroundColor(Color("silverText"))
+                .padding(EdgeInsets(top: 10, leading: 18, bottom: 0, trailing: 0))
+        }
     }
     
     private var deleteButton:some View {
