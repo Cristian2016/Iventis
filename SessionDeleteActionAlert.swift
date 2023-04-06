@@ -46,20 +46,26 @@ struct SessionDeleteActionAlert: View {
     
     // MARK: - Legos
     private var roundedBackground:some View {
-        RoundedRectangle(cornerRadius: metrics!.backgroundRadius)
-            .fill(metrics!.backgroundColor)
-            .frame(width: metrics!.width, height: metrics!.height)
-            .standardShadow()
-            .onTapGesture { secretary.showSessionDeleteInfo = true }
-//            .overlay { infoButton }
+        ZStack(alignment: .topLeading) {
+            RoundedRectangle(cornerRadius: metrics!.backgroundRadius)
+                .frame(width: metrics!.width, height: metrics!.height)
+            RoundedRectangle(cornerRadius: 14)
+                .aspectRatio(1, contentMode: .fit)
+                .frame(width: 50)
+                .overlay { infoSymbol }
+        }
+        .compositingGroup()
+        .foregroundColor(metrics!.backgroundColor)
+        .standardShadow()
+        .onTapGesture { secretary.showSessionDeleteInfo = true }
     }
     
-    private var infoButton:some View {
+    private var infoSymbol:some View {
         Push(.topLeft) {
             Image.info
-                .font(.system(size: 20))
+                .font(.system(size: 24))
                 .foregroundColor(Color("silverText"))
-                .padding(EdgeInsets(top: 10, leading: 18, bottom: 0, trailing: 0))
+                .padding(10)
         }
     }
     
