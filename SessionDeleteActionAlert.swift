@@ -30,7 +30,7 @@ struct SessionDeleteActionAlert: View {
                 .background { roundedBackground }
             }
         }
-        .offset(y: -24)
+        .offset(y: -30)
         .onReceive(secretary.$sessionToDelete) {
             if let value = $0 {
                 let session = value.session
@@ -82,7 +82,7 @@ struct SessionDeleteActionAlert: View {
         } label: {
             RoundedRectangle(cornerRadius: metrics!.buttonRadius)
                 .fill(metrics!.bubbleColor)
-                .frame(width: 204, height: 84)
+                .frame(width: 210, height: 90)
                 .overlay {
                     Text("Delete")
                         .font(.system(size: 32, weight: .medium, design: .rounded))
@@ -113,14 +113,13 @@ extension SessionDeleteActionAlert {
     
     struct Metrics {
         let backgroundRadius = CGFloat(44)
-        let buttonRadius = CGFloat(28)
+        let buttonRadius = CGFloat(32)
         
         let backgroundColor = Color("deleteActionViewBackground")
         let bubbleColor:Color
         var width = CGFloat(220)
-        let ratio = 1.53
+        let ratio = 1.55
         var height:CGFloat { width/ratio }
-        let buttonHeight:CGFloat = 78
         let trashViewFont = Font.system(size: 26, weight: .medium)
         let buttonFont = Font.system(size: 28).weight(.medium)
     }
