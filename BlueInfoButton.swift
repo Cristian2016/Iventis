@@ -64,54 +64,6 @@ struct BlueInfoButton_Previews: PreviewProvider {
     }
 }
 
-struct SessionDeleteInfoView:View {
-    @State private var show = false
-    
-    var body: some View {
-        ZStack {
-            if show {
-                let title = "Delete Session"
-                let subtitle = "Any associated Calendar Event will be removed from the Calendar App"
-                
-                Color.black.opacity(0.6).ignoresSafeArea()
-                ThinMaterialLabel(title, subtitle) { infoContent } action: { dismiss() }
-                    .font(.system(size: 20))
-            }
-        }
-        .onReceive(Secretary.shared.$showSessionDeleteInfo) { output in
-            withAnimation { show = output }
-        }
-    }
-    
-    // MARK: - Lego
-    private var infoContent:some View {
-        HStack(alignment: .top) {
-            Image("SessionDelete")
-                .thumbnail(130)
-            VStack(alignment: .leading, spacing: 8) {
-                VStack(alignment: .leading) {
-                    Text("**Delete** \(Image.tap) Tap")
-                    Text("*Yellow Button*")
-                        .foregroundColor(.secondary)
-                }
-                VStack(alignment: .leading) {
-                    Text("**Dismiss** \(Image.tap) Tap")
-                    Text("*Outside Shape*")
-                        .foregroundColor(.secondary)
-                }
-            }
-        }
-        .font(.system(size: 20))
-    }
-    
-    // MARK: -
-    private func dismiss() {
-        withAnimation {
-            Secretary.shared.showSessionDeleteInfo = false
-        }
-    }
-}
-
 extension View {
     func forceMultipleLines() -> some View {
         self.fixedSize(horizontal: false, vertical: true)
