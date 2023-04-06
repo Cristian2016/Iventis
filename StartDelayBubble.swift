@@ -89,13 +89,6 @@ extension StartDelayBubble {
         
         private(set) var cancellable = Set<AnyCancellable>()
         
-        private func observeActivePhase() {
-            let center = NotificationCenter.default
-            center.addObserver(forName: .didBecomeActive, object: nil, queue: nil) {
-                [weak self] _ in
-            }
-        }
-        
         private var precisionTimer = PrecisionTimer()
         
         private func startBubble(_ elapsedSinceFirstStart: Float?) {
@@ -123,7 +116,6 @@ extension StartDelayBubble {
         init(_ sdb:StartDelayBubble) {
             self.sdb = sdb
             self.valueToDisplay = sdb.currentClock
-            observeActivePhase()
             
             if sdb.state == .running { update(.automatic) }
         }
