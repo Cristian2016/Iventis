@@ -120,10 +120,7 @@ extension StartDelayBubble {
             if sdb.state == .running { update(.automatic) }
         }
         
-        deinit {
-            NotificationCenter.default.removeObserver(self)
-            print(#function, " SDBCoordinator")
-        }
+        deinit { NotificationCenter.default.removeObserver(self) }
     }
     
     enum State {
