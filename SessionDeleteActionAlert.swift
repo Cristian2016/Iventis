@@ -49,6 +49,15 @@ struct SessionDeleteActionAlert: View {
             .fill(metrics!.backgroundColor)
             .frame(width: metrics!.width, height: metrics!.height)
             .standardShadow()
+            .overlay {
+                Push(.topLeft) {
+                    Image.info
+                        .font(.system(size: 26))
+                        .foregroundColor(Color("deleteActionAlert1"))
+                        .padding(-20)
+                }
+            }
+            .onTapGesture { secretary.showSessionDeleteInfo = true }
     }
     
     private var trashLabel:some View {
