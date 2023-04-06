@@ -56,7 +56,9 @@ extension StartDelayBubble {
             switch moment {
                 case .automatic: //when app lanches
                     self.publisher
-                        .sink { [weak self] _ in self?.task(totalDuration, lastStart, currentClock) }
+                        .sink { [weak self] _ in
+                            self?.task(totalDuration, lastStart, currentClock)
+                        }
                         .store(in: &self.cancellable) //connect
                     
                 case .user(let action) :
