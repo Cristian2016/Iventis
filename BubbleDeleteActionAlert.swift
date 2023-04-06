@@ -207,7 +207,7 @@ extension BubbleDeleteActionAlert {
                 VStack(alignment: .leading, spacing: 8) {
                     VStack(alignment: .leading) {
                         Text("**Delete/Reset** \(Image.tap) Tap")
-                        Text("*Yellow Button*")
+                        Text("*Yellow Buttons*")
                             .foregroundColor(.secondary)
                     }
                     
