@@ -23,7 +23,7 @@ struct SessionDeleteActionAlert: View {
                 Color.white.opacity(0.01).onTapGesture { cancelDeleteAction() }
                 VStack (spacing:8) {
                     Text("Session \(input!.sessionRank)")
-                        .font(.system(size: 18, weight: .medium))
+                        .font(.system(size: 21, weight: .medium))
                         .foregroundColor(Color("silverText"))
                         .allowsHitTesting(false)
                     deleteButton
