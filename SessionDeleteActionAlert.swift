@@ -53,9 +53,9 @@ struct SessionDeleteActionAlert: View {
             .overlay {
                 Push(.topLeft) {
                     Image.info
-                        .font(.system(size: 26))
+                        .font(.system(size: 20))
                         .foregroundColor(Color("deleteActionAlert1"))
-                        .padding(-20)
+                        .padding(14)
                 }
             }
             .onTapGesture { secretary.showSessionDeleteInfo = true }
