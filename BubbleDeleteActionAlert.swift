@@ -52,12 +52,18 @@ struct BubbleDeleteActionAlert: View {
     }
     
     private var roundedBackground:some View {
-        RoundedRectangle(cornerRadius: metrics.backgroundRadius)
-            .fill(metrics.backgroundColor)
-            .frame(width: metrics.width, height: metrics.height)
-            .standardShadow()
-            .onTapGesture { secretary.showDeleteActionViewInfo = true }
-//            .overlay { infoSymbol }
+        ZStack(alignment: .topLeading) {
+            RoundedRectangle(cornerRadius: metrics.backgroundRadius)
+                .frame(width: metrics.width, height: metrics.height)
+            RoundedRectangle(cornerRadius: 10)
+                .aspectRatio(1, contentMode: .fit)
+                .frame(width: 50)
+                .overlay { infoSymbol }
+        }
+        .compositingGroup()
+        .foregroundColor(metrics.backgroundColor)
+        .standardShadow()
+        .onTapGesture { secretary.showDeleteActionViewInfo = true }
     }
     
     private var infoSymbol:some View {
@@ -65,7 +71,6 @@ struct BubbleDeleteActionAlert: View {
             Image.info
                 .font(.system(size: 20))
                 .foregroundColor(metrics.titleColor)
-                .padding(EdgeInsets(top: 12, leading: 18, bottom: 0, trailing: 0))
         }
     }
     
