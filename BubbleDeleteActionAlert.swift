@@ -52,11 +52,14 @@ struct BubbleDeleteActionAlert: View {
     }
     
     private var roundedBackground:some View {
-        RoundedRectangle(cornerRadius: metrics.backgroundRadius)
-            .fill(metrics.backgroundColor)
-            .frame(width: metrics.width, height: metrics.height)
-            .standardShadow()
-            .onTapGesture { secretary.showDeleteActionViewInfo = true }
+        ZStack(alignment: .topLeading) {
+            RoundedRectangle(cornerRadius: metrics.backgroundRadius)
+                .fill(metrics.backgroundColor)
+            infoSymbol
+        }
+        .frame(width: metrics.width, height: metrics.height)
+        .standardShadow()
+        .onTapGesture { secretary.showDeleteActionViewInfo = true }
     }
     
     private var infoSymbol:some View {
@@ -64,7 +67,7 @@ struct BubbleDeleteActionAlert: View {
             Image.info
                 .font(.system(size: 24))
                 .foregroundColor(metrics.titleColor)
-                .padding(10)
+                .padding(16)
         }
     }
     
@@ -74,9 +77,9 @@ struct BubbleDeleteActionAlert: View {
         let content:LocalizedStringKey = condition ? text1 : "No Sessions"
         
         return Text(content)
-            .font(.system(size: 18, weight: .medium, design: .monospaced))
+            .font(.system(size: 21, weight: .medium))
             .foregroundColor(metrics.titleColor)
-            .padding(.bottom, 4)
+            .padding(.bottom, 8)
             .allowsHitTesting(false)
     }
     
@@ -142,7 +145,7 @@ struct BubbleDeleteActionAlert: View {
         let bubbleColor:Color
         let titleColor = Color("silverText")
         
-        let ratio = CGFloat(0.94)
+        let ratio = CGFloat(0.90)
         let width = CGFloat(220)
         var height:CGFloat { width / ratio }
         
