@@ -61,9 +61,9 @@ struct BubbleDeleteActionAlert: View {
     private var titleLabel:some View {
         let condition = bubble.sessions_.count > 0
         let text1:LocalizedStringKey = "^[\(bubble.sessions_.count) Session](inflect: true)"
-        let text:LocalizedStringKey = condition ? text1 : "No Sessions"
+        let content:LocalizedStringKey = condition ? text1 : "No Sessions"
         
-        return Text(text)
+        return Text(content)
             .font(.system(size: 18, weight: .medium, design: .monospaced))
             .foregroundColor(metrics.titleColor)
             .padding(.bottom, 4)
