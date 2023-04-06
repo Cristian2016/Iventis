@@ -60,8 +60,8 @@ struct BubbleDeleteActionAlert: View {
                 Push(.topLeft) {
                     Image.info
                         .font(.system(size: 26))
-                        .foregroundColor(metrics.backgroundColor)
-                        .padding(-20)
+                        .foregroundColor(metrics.titleColor)
+                        .padding()
                 }
             }
             .onTapGesture { secretary.showDeleteActionViewInfo = true }
