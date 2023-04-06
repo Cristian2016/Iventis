@@ -54,7 +54,7 @@ struct SessionDeleteActionAlert: View {
                 Push(.topLeft) {
                     Image.info
                         .font(.system(size: 20))
-                        .foregroundColor(Color("deleteActionAlert1"))
+                        .foregroundColor(Color("silverText"))
                         .padding(14)
                 }
             }

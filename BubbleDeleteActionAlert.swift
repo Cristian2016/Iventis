@@ -133,13 +133,13 @@ struct BubbleDeleteActionAlert: View {
     init(_ bubble:Bubble) {
         self.bubble = bubble
         let bubbleColor = Color.bubbleColor(forName: bubble.color ?? "mint")
-        let metrics = Metrics(bubbleColor: bubbleColor, titleColor: Color("silverText"))
+        let metrics = Metrics(bubbleColor: bubbleColor)
         self.metrics = metrics
     }
     
     struct Metrics {
         let bubbleColor:Color
-        let titleColor:Color
+        let titleColor = Color("silverText")
         
         let ratio = CGFloat(0.94)
         let width = CGFloat(220)
