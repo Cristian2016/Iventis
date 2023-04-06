@@ -55,7 +55,7 @@ struct BubbleDeleteActionAlert: View {
         ZStack(alignment: .topLeading) {
             RoundedRectangle(cornerRadius: metrics.backgroundRadius)
                 .frame(width: metrics.width, height: metrics.height)
-            RoundedRectangle(cornerRadius: 10)
+            RoundedRectangle(cornerRadius: 14)
                 .aspectRatio(1, contentMode: .fit)
                 .frame(width: 50)
                 .overlay { infoSymbol }
@@ -71,7 +71,7 @@ struct BubbleDeleteActionAlert: View {
             Image.info
                 .font(.system(size: 20))
                 .foregroundColor(metrics.titleColor)
-                .padding(14)
+                .padding(6)
         }
     }
     
