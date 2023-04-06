@@ -10,7 +10,7 @@ import SwiftUI
 struct NoSessionsAlertView: View {
     var body: some View {
         VStack (alignment:.leading) {
-            Text("No History")
+            Text("No Sessions")
                 .font(.title)
             Text("Tap Seconds\nto Start")
                 .foregroundColor(.secondary)
