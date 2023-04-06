@@ -55,7 +55,7 @@ struct SessionDeleteActionAlert: View {
                     Image.info
                         .font(.system(size: 20))
                         .foregroundColor(Color("silverText"))
-                        .padding(14)
+                        .padding(EdgeInsets(top: 10, leading: 18, bottom: 0, trailing: 0))
                 }
             }
             .onTapGesture { secretary.showSessionDeleteInfo = true }
