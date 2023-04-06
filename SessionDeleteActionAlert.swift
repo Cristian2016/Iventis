@@ -159,8 +159,9 @@ extension SessionDeleteActionAlert {
                     }
                     VStack(alignment: .leading) {
                         Text("**Dismiss** \(Image.tap) Tap")
-                        Text("*Outside Gray Shape*")
+                        Text("*Outside Gray Rectangle*")
                             .foregroundColor(.secondary)
+                            .forceMultipleLines()
                     }
                 }
             }
