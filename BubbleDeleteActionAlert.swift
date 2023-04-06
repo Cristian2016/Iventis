@@ -56,28 +56,13 @@ struct BubbleDeleteActionAlert: View {
             .fill(metrics.backgroundColor)
             .frame(width: metrics.width, height: metrics.height)
             .standardShadow()
-            .overlay {
-                Push(.topLeft) {
-                    Image.info
-                        .font(.system(size: 22))
-                        .foregroundColor(metrics.titleColor)
-                        .padding()
-                }
-            }
-            .onTapGesture { secretary.showDeleteActionViewInfo = true }
     }
     
     private var titleLabel:some View {
-        VStack {
-            Text("\(Color.userFriendlyBubbleColorName(for: bubble.color))")
-                .font(.system(size: 22, weight: .semibold))
-            if bubble.sessions_.count > 0 {
-                Text("^[\(bubble.sessions_.count) Session](inflect: true)")
-                    .font(.system(size: 18, weight: .medium, design: .monospaced))
-            }
-        }
+        Text("^[\(bubble.sessions_.count) Session](inflect: true)")
+            .font(.system(size: 18, weight: .medium, design: .monospaced))
         .foregroundColor(metrics.titleColor)
-        .offset(y: bubble.sessions_.count == 0 ? -14 : -4)
+        .padding(.bottom, 4)
         .allowsHitTesting(false)
     }
     
@@ -147,7 +132,7 @@ struct BubbleDeleteActionAlert: View {
         let bubbleColor:Color
         let titleColor:Color
         
-        let ratio = CGFloat(0.84)
+        let ratio = CGFloat(0.94)
         let width = CGFloat(220)
         var height:CGFloat { width / ratio }
         
