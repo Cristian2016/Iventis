@@ -18,17 +18,17 @@ struct DPInfoView: View {
                 Divider()
                 VStack(alignment: .leading) {
                     Text("**Create Timer** \(Image.tap) Tap")
-                    Text("*(if \(Image.roundCheckmark) symbol shows)*")
+                    Text("*if \(Image.roundCheckmark) symbol shows*")
                         .foregroundColor(.secondary)
                 }
                 VStack(alignment: .leading) {
-                    Text("**Clear Display** \(Image.leftSwipe) Swipe")
+                    Text("**Clear** \(Image.leftSwipe) Swipe")
                     Text("*in any direction*")
                         .foregroundColor(.secondary)
                 }
                 VStack(alignment: .leading) {
                     Text("**Dismiss** \(Image.tap) Tap")
-                    Text("*(if \(Image.roundCheckmark) symbol hidden)*")
+                    Text("*if \(Image.roundCheckmark) symbol hidden*")
                         .foregroundColor(.secondary)
                 }
             }
