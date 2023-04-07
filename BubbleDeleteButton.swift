@@ -52,14 +52,11 @@ struct BubbleDeleteButton: View {
     }
     
     private var roundedBackground:some View {
-        ZStack(alignment: .topLeading) {
-            RoundedRectangle(cornerRadius: metrics.backgroundRadius)
-                .fill(metrics.backgroundColor)
-//            infoSymbol
-        }
-        .frame(width: metrics.width, height: metrics.height)
-        .standardShadow()
-        .onTapGesture { secretary.showBubbleDeleteInfo = true }
+        RoundedRectangle(cornerRadius: metrics.radius)
+            .fill(metrics.backgroundColor)
+            .frame(width: metrics.width, height: metrics.height)
+            .standardShadow()
+            .onTapGesture { secretary.showBubbleDeleteInfo = true }
     }
     
     private var infoSymbol:some View {
@@ -149,7 +146,7 @@ struct BubbleDeleteButton: View {
         let width = CGFloat(220)
         var height:CGFloat { width / ratio }
         
-        let backgroundRadius = CGFloat(40)
+        let radius = CGFloat(40)
         let butonRadius = CGFloat(28)
         let backgroundColor = Color("deleteActionAlert1")
     }
