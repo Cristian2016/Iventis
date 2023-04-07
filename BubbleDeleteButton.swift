@@ -55,7 +55,7 @@ struct BubbleDeleteButton: View {
         ZStack(alignment: .topLeading) {
             RoundedRectangle(cornerRadius: metrics.backgroundRadius)
                 .fill(metrics.backgroundColor)
-            infoSymbol
+//            infoSymbol
         }
         .frame(width: metrics.width, height: metrics.height)
         .standardShadow()
@@ -73,8 +73,8 @@ struct BubbleDeleteButton: View {
     
     private var titleLabel:some View {
         let condition = bubble.sessions_.count > 0
-        let text1:LocalizedStringKey = "^[\(bubble.sessions_.count) Session](inflect: true)"
-        let content:LocalizedStringKey = condition ? text1 : "No Sessions"
+        let text1:LocalizedStringKey = "^[\(bubble.sessions_.count) Session](inflect: true) \(Image.info)"
+        let content:LocalizedStringKey = condition ? text1 : "No Sessions \(Image.info)"
         
         return Text(content)
             .font(.system(size: 21, weight: .medium))
@@ -191,23 +191,15 @@ extension BubbleDeleteButton {
         
         // MARK: - Lego
         private var content:some View {
-            HStack(alignment: .top) {
+            HStack {
                 Image("BubbleDelete")
                     .thumbnail(150)
-                VStack(alignment: .leading, spacing: 8) {
-                    VStack(alignment: .leading) {
-                        Text("**Delete/Reset** \(Image.tap) Tap")
-                        Text("*Yellow Buttons*")
-                            .foregroundColor(.secondary)
-                    }
-                    
-                    VStack(alignment: .leading) {
-                        Text("**Dismiss** \(Image.tap) Tap")
-                        Text("*Outside Gray Shape*")
-                            .foregroundColor(.secondary)
-                    }
-                    .forceMultipleLines()
+                VStack(alignment: .leading) {
+                    Text("**Dismiss** \(Image.tap) Tap")
+                    Text("*Outside Gray Shape*")
+                        .foregroundColor(.secondary)
                 }
+                .forceMultipleLines()
             }
         }
         
