@@ -22,10 +22,12 @@ extension InfoOverlay {
             VStack(alignment: .leading) {
                 HStack {
                     Text("**\(content.title)**")
-                    Image(systemName: content.symbol)
+                    Image.dic[content.symbol]
                     Text(content.symbolTitle)
                 }
-                if let detail = content.detail { Text("*\(detail)*") }
+                if let detail = content.detail {
+                    Text("*\(detail)*").foregroundColor(.secondary)
+                }
             }
         }
         
@@ -35,7 +37,7 @@ extension InfoOverlay {
             let symbolTitle:String
             var detail:String?
             
-            static let bubbleDelete = Content.init(title: "Dismiss", symbol: "hand.tap.fill", symbolTitle: "Tap", detail: "outside Gray Shape")
+            static let bubbleDelete = Content.init(title: "Dismiss", symbol: "tap", symbolTitle: "Tap", detail: "outside Gray Shape")
         }
     }
 }

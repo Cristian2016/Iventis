@@ -64,6 +64,10 @@ public extension Image {
     // MARK: - Info Assets
     static let dpv = Image("DurationPicker")
     static let moreOptionsView = Image("MoreOptions")
+    
+    static let dic = [
+        "tap" : Image.tap, "longPress" : Image.longPress, "leftSwipe" : Image.leftSwipe, "rightSwipe" : Image.rightSwipe
+    ]
 }
 
 public extension URL {
