@@ -22,7 +22,7 @@ struct SessionDeleteButton: View {
             if input != nil {
                 Color.white.opacity(0.01).onTapGesture { cancelDeleteAction() }
                 VStack (spacing:8) {
-                    Text("Session \(input!.sessionRank)")
+                    Text("Session \(input!.sessionRank) \(Image.info)")
                         .font(.system(size: 21, weight: .medium))
                         .foregroundColor(Color("silverText"))
                         .allowsHitTesting(false)
@@ -46,25 +46,13 @@ struct SessionDeleteButton: View {
     
     // MARK: - Legos
     private var roundedBackground:some View {
-        ZStack(alignment: .topLeading) {
-            RoundedRectangle(cornerRadius: metrics!.backgroundRadius)
-                .fill(metrics!.backgroundColor)
-            infoSymbol
-        }
+        RoundedRectangle(cornerRadius: metrics!.backgroundRadius)
+            .fill(metrics!.backgroundColor)
         .frame(width: metrics!.width, height: metrics!.height)
         .standardShadow()
         .onTapGesture { secretary.showSessionDeleteInfo = true }
     }
-    
-    private var infoSymbol:some View {
-        Push(.topLeft) {
-            Image.info
-                .font(.system(size: 20))
-                .foregroundColor(Color("silverText"))
-                .padding(EdgeInsets(top: 12, leading: 22, bottom: 0, trailing: 0))
-        }
-    }
-    
+        
     private var deleteButton:some View {
         Button {
             withAnimation {
@@ -141,7 +129,7 @@ extension SessionDeleteButton {
                     let subtitle = "Any associated Calendar Event will be removed from the Calendar App"
                     
                     Color.black.opacity(0.6).ignoresSafeArea()
-                    ThinMaterialLabel(title, subtitle) { infoContent } action: { dismiss() }
+                    ThinMaterialLabel(title, subtitle) { content } action: { dismiss() }
                         .font(.system(size: 20))
                 }
             }
@@ -151,22 +139,15 @@ extension SessionDeleteButton {
         }
         
         // MARK: - Lego
-        private var infoContent:some View {
-            HStack(alignment: .top) {
+        private var content:some View {
+            HStack {
                 Image("SessionDelete")
                     .thumbnail(130)
-                VStack(alignment: .leading, spacing: 8) {
-                    VStack(alignment: .leading) {
-                        Text("**Delete** \(Image.tap) Tap")
-                        Text("*Yellow Button*")
-                            .foregroundColor(.secondary)
-                    }
-                    VStack(alignment: .leading) {
-                        Text("**Dismiss** \(Image.tap) Tap")
-                        Text("*Outside Gray Shape*")
-                            .foregroundColor(.secondary)
-                            .forceMultipleLines()
-                    }
+                VStack(alignment: .leading) {
+                    Text("**Dismiss** \(Image.tap) Tap")
+                    Text("*Outside Gray Shape*")
+                        .foregroundColor(.secondary)
+                        .forceMultipleLines()
                 }
             }
             .font(.system(size: 20))

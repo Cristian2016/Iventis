@@ -58,16 +58,7 @@ struct BubbleDeleteButton: View {
             .standardShadow()
             .onTapGesture { secretary.showBubbleDeleteInfo = true }
     }
-    
-    private var infoSymbol:some View {
-        Push(.topLeft) {
-            Image.info
-                .font(.system(size: 24))
-                .foregroundColor(metrics.titleColor)
-                .padding(16)
-        }
-    }
-    
+        
     private var titleLabel:some View {
         let condition = bubble.sessions_.count > 0
         let text1:LocalizedStringKey = "^[\(bubble.sessions_.count) Session](inflect: true) \(Image.info)"
