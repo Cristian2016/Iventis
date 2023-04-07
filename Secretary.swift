@@ -34,7 +34,7 @@ class Secretary {
     
     @Published var showBubbleInfo = false
     
-    @Published var showDeleteActionViewInfo = false
+    @Published var showBubbleDeleteInfo = false
     
     @Published var showPaletteInfo = false
     

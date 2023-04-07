@@ -8,7 +8,7 @@
 import SwiftUI
 import MyPackage
 
-extension BubbleDeleteActionAlert {
+extension BubbleDeleteButton {
     struct DeleteButtonStyle:ButtonStyle {
         var disabled:Bool = false
         func makeBody(configuration: Configuration) -> some View {
@@ -22,7 +22,7 @@ extension BubbleDeleteActionAlert {
     }
 }
 
-struct BubbleDeleteActionAlert: View {
+struct BubbleDeleteButton: View {
     @EnvironmentObject private var viewModel:ViewModel
     @EnvironmentObject private var layoutViewModel:LayoutViewModel
     private let secretary = Secretary.shared
@@ -59,7 +59,7 @@ struct BubbleDeleteActionAlert: View {
         }
         .frame(width: metrics.width, height: metrics.height)
         .standardShadow()
-        .onTapGesture { secretary.showDeleteActionViewInfo = true }
+        .onTapGesture { secretary.showBubbleDeleteInfo = true }
     }
     
     private var infoSymbol:some View {
@@ -169,13 +169,7 @@ struct BubbleDeleteActionAlert: View {
     private func removeAddTagButton() { viewModel.removeAddNoteButton(bubble) }
 }
 
-//struct DeleteActionAlert_Previews: PreviewProvider {
-//    static var previews: some View {
-//        DeleteActionAlert()
-//    }
-//}
-
-extension BubbleDeleteActionAlert {
+extension BubbleDeleteButton {
     struct Info:View {
         @State private var show = false
         private let title = "Delete/Reset Bubble"
@@ -190,7 +184,7 @@ extension BubbleDeleteActionAlert {
                         .font(.system(size: 20))
                 }
             }
-            .onReceive(Secretary.shared.$showDeleteActionViewInfo) { output in
+            .onReceive(Secretary.shared.$showBubbleDeleteInfo) { output in
                 withAnimation { show = output }
             }
         }
@@ -218,6 +212,6 @@ extension BubbleDeleteActionAlert {
         }
         
         // MARK: -
-        private func dismiss() { Secretary.shared.showDeleteActionViewInfo = false }
+        private func dismiss() { Secretary.shared.showBubbleDeleteInfo = false }
     }
 }

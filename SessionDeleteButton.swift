@@ -8,7 +8,7 @@
 import SwiftUI
 import MyPackage
 
-struct SessionDeleteActionAlert: View {
+struct SessionDeleteButton: View {
     @EnvironmentObject private var viewModel:ViewModel
     @EnvironmentObject private var layoutViewModel:LayoutViewModel
     private let secretary = Secretary.shared
@@ -94,7 +94,7 @@ struct SessionDeleteActionAlert: View {
                         .foregroundColor(.white)
                 }
         }
-        .buttonStyle(BubbleDeleteActionAlert.DeleteButtonStyle())
+        .buttonStyle(BubbleDeleteButton.DeleteButtonStyle())
     }
     
     // MARK: -
@@ -110,7 +110,7 @@ struct SessionDeleteActionAlert: View {
     }
 }
 
-extension SessionDeleteActionAlert {
+extension SessionDeleteButton {
     struct Input {
         let session:Session
         let sessionRank:Int
@@ -130,7 +130,7 @@ extension SessionDeleteActionAlert {
     }
 }
 
-extension SessionDeleteActionAlert {
+extension SessionDeleteButton {
     struct SessionDeleteInfoView:View {
         @State private var show = false
         

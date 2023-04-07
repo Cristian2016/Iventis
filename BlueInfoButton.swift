@@ -45,7 +45,7 @@ struct BlueInfoButton: View {
             case .bubble:
                 Secretary.shared.showBubbleInfo = true
             case .deleteActionView:
-                Secretary.shared.showDeleteActionViewInfo = true
+                Secretary.shared.showBubbleDeleteInfo = true
             case .durationPicker:
                 Secretary.shared.showDurationPickerInfo = true
             case .moreOptionsView:

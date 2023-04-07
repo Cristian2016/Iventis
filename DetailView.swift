@@ -54,9 +54,9 @@ struct DetailView: View {
                 AddNoteButton()
             }
         }
-        .overlay (SessionDeleteActionAlert())
+        .overlay (SessionDeleteButton())
         .overlay (ShowDetailViewInfoView())
-        .overlay (SessionDeleteActionAlert.SessionDeleteInfoView())
+        .overlay (SessionDeleteButton.SessionDeleteInfoView())
     }
         
     let topDetailHeight = CGFloat(140)
