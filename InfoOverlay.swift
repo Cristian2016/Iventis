@@ -9,7 +9,7 @@ import SwiftUI
 
 struct InfoOverlay: View {
     var body: some View {
-        VUnit(content: .init(title: "Dismiss", symbol: "hand.tap.fill", symbolTitle: "Tap"))
+        VUnit(content: .bubbleDelete)
     }
 }
 
@@ -34,6 +34,8 @@ extension InfoOverlay {
             let symbol:String
             let symbolTitle:String
             var detail:String?
+            
+            static let bubbleDelete = Content.init(title: "Dismiss", symbol: "hand.tap.fill", symbolTitle: "Tap", detail: "outside Gray Shape")
         }
     }
 }
