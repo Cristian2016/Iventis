@@ -14,7 +14,7 @@ struct NoSessionsAlertView: View {
                 .font(.title)
             Text("**Start** \(Image.tap) Tap Seconds")
             Text("**Dismiss** \(Image.rightSwipe) Swipe Right")
-            Text("*From Left Screen Edge*")
+            Text("*from Left Screen Edge*")
                 .foregroundColor(.secondary)
         }
         .padding([.top])
