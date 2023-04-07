@@ -24,11 +24,7 @@ extension InfoOverlay {
         
         var body: some View {
             VStack(alignment: .leading) {
-                HStack {
-                    Text("**\(content.title)**")
-                    Image.dic[content.symbol]
-                    Text(content.symbolTitle)
-                }
+                Text("**\(content.title)** \(Image.dic[content.symbol]!) \(content.symbolTitle)")
                 if let detail = content.detail {
                     Text(detail)
                 }
