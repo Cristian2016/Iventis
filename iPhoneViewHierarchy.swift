@@ -21,7 +21,7 @@ struct iPhoneViewHierarchy: View {
                     .onReceive(secretary.$showFavoritesOnly) { showFavoritesOnly = $0 }
                     .onReceive(secretary.$showDetail_bRank) { showDetail_bRank = $0 }
             }
-            .tint(.label)
+            .tint(.clear)
             PaletteView()
             DurationPickerView()
         }
