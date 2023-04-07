@@ -39,11 +39,12 @@ extension StartDelayBubble {
             
             if (Float(0)...1).contains(difference) {
                 let deadline:DispatchTime = .now() + .milliseconds(Int(difference * 1000))
+                
                 precisionTimer.executeAction(after: deadline) { [weak self] in
-                    self?.notifyBubbleStart(self?.initialClock)
+                    self?.startBubble(self?.initialClock)
                 }
             } else {
-                if viewModelShouldStartBubble { notifyBubbleStart(elapsedSinceFirstStart) }
+                if viewModelShouldStartBubble { startBubble(elapsedSinceFirstStart) }
             }
         }
         
@@ -91,9 +92,10 @@ extension StartDelayBubble {
         
         private(set) var cancellable = Set<AnyCancellable>()
         
-        private var precisionTimer = PrecisionTimer()
+        private lazy var precisionTimer = PrecisionTimer()
         
-        private func notifyBubbleStart(_ elapsedSinceFirstStart: Float?) {
+        ///notifies ViewModel to start the bubble
+        private func startBubble(_ elapsedSinceFirstStart: Float?) {
             //compute startCorrection
             //notify viewModel currentClock has reached zero, send startCorrection ->
             //-> viewModel removes SDButton
