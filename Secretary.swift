@@ -14,8 +14,6 @@ class Secretary {
     static let shared = Secretary()
     
     // MARK: - Publishers
-//    @Published var confirm_ColorChange = false
-    
     ///allow user to drag and drop tableView cells
     ///.onMove view modifier will not be nil
 //    @Published var allowOnMove = false
@@ -25,7 +23,6 @@ class Secretary {
     @Published var showBlueInfoButton = false {didSet{
         if !oldValue {
             let fiveSeconds = DispatchTime.now() + 5
-            
             fiveSecTimer.executeAction(after: fiveSeconds) { [weak self] in
                 DispatchQueue.main.async { self?.showBlueInfoButton = false }
             }
