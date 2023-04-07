@@ -23,6 +23,8 @@ class Secretary {
     @Published var showBlueInfoButton = false {didSet{
         if !oldValue {
             let fiveSeconds = DispatchTime.now() + 5
+            
+            //main
             fiveSecTimer.executeAction(after: fiveSeconds) { [weak self] in
                 DispatchQueue.main.async { self?.showBlueInfoButton = false }
             }
