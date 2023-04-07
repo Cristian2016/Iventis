@@ -13,7 +13,7 @@ import CoreData
 struct DetailView: View {
     @State private var needlePosition = -1
     
-    private let bubble:Bubble
+    @StateObject var bubble:Bubble
     @FetchRequest private var sessions:FetchedResults<Session>
     
     @EnvironmentObject private var viewModel:ViewModel
@@ -90,7 +90,7 @@ struct DetailView: View {
     init?(_ bubble:Bubble?) {
         guard let bubble = bubble else { return nil }
         
-        self.bubble = bubble
+        _bubble = StateObject(wrappedValue: bubble)
         
         let predicate = NSPredicate(format: "bubble.rank == %i", bubble.rank)
         let descriptors = [NSSortDescriptor(key: "created", ascending: false)]
