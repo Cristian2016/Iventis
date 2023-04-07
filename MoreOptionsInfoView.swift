@@ -22,7 +22,7 @@ struct MoreOptionsInfoView: View {
                 }
                 
                 VStack(alignment: .leading) {
-                    Text("**Remove** \(Image.leftSwipe) Swipe")
+                    Text("**Clear** \(Image.leftSwipe) Swipe")
                     Text("*in any direction*")
                         .foregroundColor(.secondary)
                 }
