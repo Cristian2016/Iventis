@@ -199,7 +199,6 @@ extension BubbleDeleteButton {
                     Text("*Outside Gray Shape*")
                         .foregroundColor(.secondary)
                 }
-                .forceMultipleLines()
             }
         }
         
