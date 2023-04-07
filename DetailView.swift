@@ -82,8 +82,8 @@ struct DetailView: View {
     }
     
     private var titleView:Text {
-        let timerContent = bubble.isTimer ? " \(bubble.initialClock.timerTitle)" : ""
-        return Text("\(Color.userFriendlyBubbleColorName(for: bubble.color))" + timerContent)
+        let title = bubble.isTimer ? " \(bubble.initialClock.timerTitle)" : "\(Color.userFriendlyBubbleColorName(for: bubble.color))"
+        return Text(title)
     }
     
     // MARK: - Init
