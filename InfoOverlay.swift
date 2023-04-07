@@ -40,10 +40,10 @@ extension InfoOverlay {
             let symbolTitle:String
             var detail:LocalizedStringKey?
             
-            static let bubbleDelete = Self.init(title: "Dismiss", symbol: "tap", symbolTitle: "Tap", detail: "*outside Gray Shape*")
+            static let bubbleDelete = Self(title: "Dismiss", symbol: "tap", symbolTitle: "Tap", detail: "*outside Gray Shape*")
             static let createTimer = Self.init(title: "Create Timer", symbol: "tap", symbolTitle: "Tap", detail: "*if \(Image.roundCheckmark) symbol shows*")
-            static let remove = Self.init(title: "Remove", symbol: "leftSwipe", symbolTitle: "Swipe", detail: "*in any direction*")
-            static let dismiss = Self.init(title: "Dismiss", symbol: "tap", symbolTitle: "Tap", detail: "*if \(Image.roundCheckmark) symbol hidden*")
+            static let remove = Self(title: "Remove", symbol: "leftSwipe", symbolTitle: "Swipe", detail: "*in any direction*")
+            static let dismiss = Self(title: "Dismiss", symbol: "tap", symbolTitle: "Tap", detail: "*if \(Image.roundCheckmark) symbol hidden*")
         }
     }
 }
