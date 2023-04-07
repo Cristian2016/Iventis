@@ -24,12 +24,12 @@ extension InfoOverlay {
         
         var body: some View {
             
-            let title = content.title
-            let image = Image.dic[content.symbol]!
+            let keyword = content.title
+            let symbol = Image.dic[content.symbol]!
             let symbolTitle = content.symbolTitle
             
-           return VStack(alignment: .leading) {
-                Text("**\(title)** \(image) \(symbolTitle)")
+            return VStack(alignment: .leading) {
+                Text("**\(keyword)** \(symbol) \(symbolTitle)")
                 if let detail = content.detail { Text(detail) }
             }
         }
