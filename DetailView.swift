@@ -18,7 +18,7 @@ struct DetailView: View {
     
     @EnvironmentObject private var viewModel:ViewModel
     private let secretary = Secretary.shared
-    
+        
     var body: some View {
         ScrollViewReader { proxy in
             List {
@@ -45,7 +45,7 @@ struct DetailView: View {
                 }
             }
         }
-        .navigationTitle(Text(bubble.isTimer ? "\(bubble.initialClock.timerTitle)" : ""))
+        .navigationTitle(titleView)
         .toolbarBackground(.ultraThinMaterial)
         .toolbar {
             ToolbarItemGroup {
@@ -79,6 +79,11 @@ struct DetailView: View {
             }
             return .clear
         }
+    }
+    
+    private var titleView:Text {
+        let timerContent = bubble.isTimer ? " \(bubble.initialClock.timerTitle)" : ""
+        return Text("\(Color.userFriendlyBubbleColorName(for: bubble.color))" + timerContent)
     }
     
     // MARK: - Init

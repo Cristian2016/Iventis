@@ -18,6 +18,7 @@ struct ScrollToTopButton: View {
                         .background(.white.opacity(0.001))
                 }
                 .transition(.scale)
+                .tint(.infoButtonColor)
             }
         }
         .onReceive(Secretary.shared.$showScrollToTopButton) { output in
