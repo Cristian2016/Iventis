@@ -9,7 +9,10 @@ import SwiftUI
 
 struct InfoOverlay: View {
     var body: some View {
-        VUnit(content: .bubbleDelete)
+        VStack(alignment: .leading, spacing: 8) {
+            VUnit(content: .bubbleDelete)
+            VUnit(content: .createTimer)
+        }
     }
 }
 
@@ -26,7 +29,7 @@ extension InfoOverlay {
                     Text(content.symbolTitle)
                 }
                 if let detail = content.detail {
-                    Text("*\(detail)*").foregroundColor(.secondary)
+                    Text(detail).foregroundColor(.secondary)
                 }
             }
         }
@@ -35,9 +38,10 @@ extension InfoOverlay {
             let title:String
             let symbol:String
             let symbolTitle:String
-            var detail:String?
+            var detail:LocalizedStringKey?
             
-            static let bubbleDelete = Content.init(title: "Dismiss", symbol: "tap", symbolTitle: "Tap", detail: "outside Gray Shape")
+            static let bubbleDelete = Content.init(title: "Dismiss", symbol: "tap", symbolTitle: "Tap", detail: "*outside Gray Shape*")
+            static let createTimer = Content.init(title: "Create Timer", symbol: "tap", symbolTitle: "Tap", detail: "*if \(Image.roundCheckmark) symbol shows*")
         }
     }
 }
