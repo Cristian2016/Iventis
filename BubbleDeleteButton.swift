@@ -184,7 +184,7 @@ extension BubbleDeleteButton {
                     .thumbnail(150)
                 VStack(alignment: .leading) {
                     Text("**Dismiss** \(Image.tap) Tap")
-                    Text("*Outside Gray Shape*")
+                    Text("*outside Gray Shape*")
                         .foregroundColor(.secondary)
                 }
             }
