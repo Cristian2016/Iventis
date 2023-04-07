@@ -146,7 +146,6 @@ extension SessionDeleteButton {
                 VStack(alignment: .leading) {
                     Text("**Dismiss** \(Image.tap) Tap")
                     Text("*outside Gray Shape*")
-                        .foregroundColor(.secondary)
                         .forceMultipleLines()
                 }
             }

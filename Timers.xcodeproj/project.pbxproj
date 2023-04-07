@@ -22,7 +22,6 @@
 		1F0FD40629A4D93D0097FF7F /* DetailViewInfoButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F0FD40529A4D93D0097FF7F /* DetailViewInfoButton.swift */; };
 		1F100CA72809493400A3A3C2 /* BubbleTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F100CA62809493400A3A3C2 /* BubbleTimer.swift */; };
 		1F112A2229C9D8EC00D4A541 /* InfoAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1F112A2129C9D8EC00D4A541 /* InfoAssets.xcassets */; };
-		1F112A2429C9D95400D4A541 /* DPInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F112A2329C9D95400D4A541 /* DPInfoView.swift */; };
 		1F13EA0029CD87C5007A0461 /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F13E9FF29CD87C5007A0461 /* UserNotifications.framework */; };
 		1F13EA0229CD87C5007A0461 /* UserNotificationsUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F13EA0129CD87C5007A0461 /* UserNotificationsUI.framework */; };
 		1F13EA0529CD87C5007A0461 /* NotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F13EA0429CD87C5007A0461 /* NotificationViewController.swift */; };
@@ -192,7 +191,6 @@
 		1F0FD40529A4D93D0097FF7F /* DetailViewInfoButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewInfoButton.swift; sourceTree = "<group>"; };
 		1F100CA62809493400A3A3C2 /* BubbleTimer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BubbleTimer.swift; sourceTree = "<group>"; };
 		1F112A2129C9D8EC00D4A541 /* InfoAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = InfoAssets.xcassets; sourceTree = SOURCE_ROOT; };
-		1F112A2329C9D95400D4A541 /* DPInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DPInfoView.swift; sourceTree = "<group>"; };
 		1F13E9FE29CD87C5007A0461 /* Notifications.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = Notifications.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		1F13E9FF29CD87C5007A0461 /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
 		1F13EA0129CD87C5007A0461 /* UserNotificationsUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotificationsUI.framework; path = System/Library/Frameworks/UserNotificationsUI.framework; sourceTree = SDKROOT; };
@@ -412,7 +410,6 @@
 		1F5F4A4228093FAC00AF3442 = {
 			isa = PBXGroup;
 			children = (
-				1F112A2329C9D95400D4A541 /* DPInfoView.swift */,
 				1F5FFD9E29C2426E005FFB32 /* AdaptiveView.swift */,
 				1FD2A3DC29C10C6C00EB7B10 /* DeleteConfirmationLabel.swift */,
 				1F04768C29BB073000641CDC /* SecondsLabel.swift */,
@@ -768,7 +765,6 @@
 				1F0373C628DF516F005CE8D3 /* OnLabel.swift in Sources */,
 				1F196093298856E500E6A7EA /* SmallAlertHintView.swift in Sources */,
 				1F5FFD9F29C2426E005FFB32 /* AdaptiveView.swift in Sources */,
-				1F112A2429C9D95400D4A541 /* DPInfoView.swift in Sources */,
 				1F0373BE28DEDB00005CE8D3 /* AlwaysOnDisplayAlertView.swift in Sources */,
 				1F991A7029A7545C0045B04C /* TopCellDurationView.swift in Sources */,
 				1F0373C228DEE6F7005CE8D3 /* AlwaysOnDisplayConfirmationView.swift in Sources */,

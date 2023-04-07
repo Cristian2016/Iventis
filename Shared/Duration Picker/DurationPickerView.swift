@@ -161,7 +161,7 @@ extension DurationPickerView {
                 if show {
                     Color.black.opacity(0.6).ignoresSafeArea()
                     
-                    ThinMaterialLabel(title) { DPInfoView() } action: { dismiss() }
+                    ThinMaterialLabel(title) { InfoView() } action: { dismiss() }
                         .font(.system(size: 20))
                 }
             }
@@ -172,6 +172,35 @@ extension DurationPickerView {
         
         private func dismiss() {
             Secretary.shared.showDurationPickerInfo = false
+        }
+    }
+}
+
+extension DurationPickerView {
+    struct InfoView: View {
+        var body: some View {
+            HStack(alignment: .top) {
+                Image.dpv.thumbnail()
+                
+                VStack(alignment: .leading, spacing: 8) {
+                    Text("*Use Yellow Areas to*")
+                        .foregroundColor(.secondary)
+                    Divider()
+                    VStack(alignment: .leading) {
+                        Text("**Create Timer** \(Image.tap) Tap")
+                        Text("*if \(Image.roundCheckmark) symbol shows*")
+                    }
+                    VStack(alignment: .leading) {
+                        Text("**Clear** \(Image.leftSwipe) Swipe")
+                        Text("*in any direction*")
+                    }
+                    VStack(alignment: .leading) {
+                        Text("**Dismiss** \(Image.tap) Tap")
+                        Text("*if \(Image.roundCheckmark) symbol hidden*")
+                    }
+                }
+            }
+            .font(.system(size: 22))
         }
     }
 }
