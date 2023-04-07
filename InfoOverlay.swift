@@ -10,8 +10,9 @@ import SwiftUI
 struct InfoOverlay: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
-            VUnit(content: .bubbleDelete)
             VUnit(content: .createTimer)
+            VUnit(content: .remove)
+            VUnit(content: .dismiss)
         }
     }
 }
@@ -29,7 +30,7 @@ extension InfoOverlay {
                     Text(content.symbolTitle)
                 }
                 if let detail = content.detail {
-                    Text(detail).foregroundColor(.secondary)
+                    Text(detail)
                 }
             }
         }
@@ -42,6 +43,8 @@ extension InfoOverlay {
             
             static let bubbleDelete = Content.init(title: "Dismiss", symbol: "tap", symbolTitle: "Tap", detail: "*outside Gray Shape*")
             static let createTimer = Content.init(title: "Create Timer", symbol: "tap", symbolTitle: "Tap", detail: "*if \(Image.roundCheckmark) symbol shows*")
+            static let remove = Content.init(title: "Remove", symbol: "leftSwipe", symbolTitle: "Swipe", detail: "*in any direction*")
+            static let dismiss = Content.init(title: "Dismiss", symbol: "tap", symbolTitle: "Tap", detail: "*if \(Image.roundCheckmark) symbol hidden*")
         }
     }
 }
