@@ -23,11 +23,14 @@ extension InfoOverlay {
         let content:Content
         
         var body: some View {
-            VStack(alignment: .leading) {
-                Text("**\(content.title)** \(Image.dic[content.symbol]!) \(content.symbolTitle)")
-                if let detail = content.detail {
-                    Text(detail)
-                }
+            
+            let title = content.title
+            let image = Image.dic[content.symbol]!
+            let symbolTitle = content.symbolTitle
+            
+           return VStack(alignment: .leading) {
+                Text("**\(title)** \(image) \(symbolTitle)")
+                if let detail = content.detail { Text(detail) }
             }
         }
         
