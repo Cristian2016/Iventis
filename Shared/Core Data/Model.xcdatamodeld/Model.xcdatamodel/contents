@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="21752.1" systemVersion="22E5236f" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="21754" systemVersion="22F5027f" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Bubble" representedClassName=".Bubble" syncable="YES">
         <attribute name="color" optional="YES" attributeType="String" defaultValueString="Cyan"/>
         <attribute name="created" optional="YES" attributeType="Date" usesScalarValueType="NO"/>

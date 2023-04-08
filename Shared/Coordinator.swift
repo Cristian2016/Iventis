@@ -16,6 +16,7 @@
 //10 observeActivePhase updates bubbleCell.timeComponnets on self.init. not calling observeActivePhase, components [hr, min, sec, hundredths] would show -1 -1 -1 -1
 //11 notification received on mainQueue
 //12 refreshOnAppActive() no idea why didBecomeActive notification received twice when I pull dow notification center. This method ensures that all components will be updated when app returns from the background
+//13 elapsed beyond zero. timers only
 
 import SwiftUI
 import Combine
@@ -28,6 +29,8 @@ extension BubbleCellCoordinator {
 class BubbleCellCoordinator {
     weak private(set) var bubble:Bubble?
     private let isTimer:Bool
+    
+    private var precisionTimer = PrecisionTimer()
     
     // MARK: - Public API
     func update(_ moment:Moment, refresh:Bool = false) { //main Thread ⚠️
@@ -126,19 +129,30 @@ class BubbleCellCoordinator {
     private var refresh = false //5
     
     private func task(_ bubble:Bubble) { //bThread ⚠️
-        guard let lastPairStart = bubble.lastPair?.start else { return }
+        guard let lastStart = bubble.lastPair?.start else { return }
+        
         let refresh = self.refresh
         let currentClock = bubble.currentClock
                                 
-        let Δ = Float(Date().timeIntervalSince(lastPairStart)) //2
+        let elapsedSinceLastStart = Float(Date().timeIntervalSince(lastStart)) //2
         
-        var value = isTimer ? currentClock - Δ : currentClock + Δ //ex: 2345.87648
+        var value = isTimer ? currentClock - elapsedSinceLastStart : currentClock + elapsedSinceLastStart //ex: 2345.87648
         
         value.round(.toNearestOrEven) //ex: 2346
         
         if isTimer {
+            //compute progress
             let progress = self.computeTimerProgress(for: bubble, and: value)
             DispatchQueue.main.async { self.timerProgress = progress }
+            
+            //check if timer should finish
+            let totalDuration = bubble.lastSession!.totalDuration
+            let elapsedSinceFirstStart = totalDuration + elapsedSinceLastStart
+            let overspill = bubble.initialClock - elapsedSinceFirstStart //
+            
+            if overspill < 0 {
+                print("timer finish \(overspill)")
+            }
         }
         
         let intValue = Int(value)

@@ -18,6 +18,8 @@ extension Session {
 
     @NSManaged public var created: Date?
     @NSManaged public var isEnded: Bool
+    
+    ///sum of durations of all closed pairs. not-closed pair is not included
     @NSManaged public var totalDuration: Float
     
     @NSManaged public var bubble: Bubble?
