@@ -44,6 +44,13 @@ class BubbleCellCoordinator {
             let theInitialValue = self.initialValue(theBubble)
             
             switch moment {
+                    
+                case .finishTimer:
+                    self.cancellable = []
+                    DispatchQueue.main.async {
+                        self.timeComponents = Components("0", "0", "0", "00")
+                    }
+                    
                 case .showAll:
                     if theBubble.state == .running && !theBubble.isPinned { self.refresh = true }
                     
@@ -150,8 +157,18 @@ class BubbleCellCoordinator {
             let elapsedSinceFirstStart = totalDuration + elapsedSinceLastStart
             let overspill = bubble.initialClock - elapsedSinceFirstStart //
             
-            if overspill < 0 {
-                print("timer finish \(overspill)")
+            if (Float(0)...1).contains(overspill) {
+                let deadline:DispatchTime = .now() + .milliseconds(Int(overspill * 1000))
+                
+                precisionTimer.executeAction(after: deadline) { [weak self] in
+                    self?.finishBubble() //at exactly 0.0 overspill
+                    self?.update(.finishTimer)
+                }
+            } else {
+                if overspill < 0 {
+                    self.finishBubble(overspill)
+                    self.update(.finishTimer)
+                }
             }
         }
         
@@ -210,6 +227,15 @@ class BubbleCellCoordinator {
             if self?.refresh == false { self?.refresh = true }
         }
     } //12
+    
+    ///notifies ViewModel to finish bubble
+    private func finishBubble(_ overspill:Float? = nil) {
+        guard let bubble = bubble else { return }
+        
+        let info:[String : Any] = ["rank" : bubble.rank, "overspill" : overspill ?? 0.0]
+        
+        NotificationCenter.default.post(name: .killTimer, object: nil, userInfo: info)
+    }
         
     // MARK: - Init Deinit
     init(for bubble:Bubble) {
@@ -232,6 +258,7 @@ extension BubbleCellCoordinator {
         case user(Action)
         case automatic
         case showAll //show all bubbles, including the ordinary ones
+        case finishTimer
     }
     
     enum Action {

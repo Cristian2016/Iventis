@@ -37,6 +37,7 @@ extension Notification.Name {
     static let killSDB = Notification.Name("killSDB")
     
     static let createTimer = Notification.Name("createTimer")
+    static let killTimer = Notification.Name("killTimer")
 } //1 ViewModel
 
 extension Notification {

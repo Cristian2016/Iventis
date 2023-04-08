@@ -191,6 +191,14 @@ class ViewModel: ObservableObject {
         }
     } //20
     
+    ///Bubble.Coordinator.task() notifies if timer must finish
+    private func observe_KillTimer() {
+        NotificationCenter.default.addObserver(forName: .killTimer, object: nil, queue: nil) {[weak self] in
+            let info = $0.userInfo
+            print(info)
+        }
+    }
+    
     // MARK: - Little Helpers
     var fiveSecondsBubble:Bubble? { bubble(for: secretary.addNoteButton_bRank) }
     
@@ -211,6 +219,7 @@ class ViewModel: ObservableObject {
         observe_ApplicationBackground()
         observe_KillSDB()
         observe_CreateTimer()
+        observe_KillTimer()
         
         secretary.updateBubblesReport(.appLaunch)
     }
@@ -394,6 +403,10 @@ extension ViewModel {
                 
             case .finished: return
         }
+    }
+    
+    func finishTimer(_ bubble:Bubble) {
+        
     }
     
     ///delete history. delete all sessions and pairs and make it brandNew
