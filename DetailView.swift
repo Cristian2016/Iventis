@@ -20,43 +20,45 @@ struct DetailView: View {
     private let secretary = Secretary.shared
         
     var body: some View {
-        ScrollViewReader { proxy in
-            List {
-                BubbleCell(bubble)
-                    .id(1)
-                    .offset(y: -6)
-                    .background { yPositionTrackerView }
-                if sessions.isEmpty { NoSessionsAlertView() }
-                else {
-                    TopDetailView($needlePosition, sessions)
-                        .frame(height: topDetailHeight)
-                        .listRowSeparator(.hidden)
-                    BottomDetailView($needlePosition, sessions)
-                        .frame(height: 600)
-                        .listRowSeparator(.hidden)
+        if bubble.color != nil {
+            ScrollViewReader { proxy in
+                List {
+                    BubbleCell(bubble)
+                        .id(1)
+                        .offset(y: -6)
+                        .background { yPositionTrackerView }
+                    if sessions.isEmpty { NoSessionsAlertView() }
+                    else {
+                        TopDetailView($needlePosition, sessions)
+                            .frame(height: topDetailHeight)
+                            .listRowSeparator(.hidden)
+                        BottomDetailView($needlePosition, sessions)
+                            .frame(height: 600)
+                            .listRowSeparator(.hidden)
+                    }
+                }
+                .listStyle(.plain)
+                .scrollIndicators(.hidden) //1
+                .onReceive(secretary.$shouldScrollToTop) {
+                    if $0 {
+                        withAnimation { proxy.scrollTo(1) }
+                        delayExecution(.now() + 0.1) { secretary.shouldScrollToTop = false }
+                    }
                 }
             }
-            .listStyle(.plain)
-            .scrollIndicators(.hidden) //1
-            .onReceive(secretary.$shouldScrollToTop) {
-                if $0 {
-                    withAnimation { proxy.scrollTo(1) }
-                    delayExecution(.now() + 0.1) { secretary.shouldScrollToTop = false }
+            .navigationTitle(titleView)
+            .toolbarBackground(.ultraThinMaterial)
+            .toolbar {
+                ToolbarItemGroup {
+                    DetailViewInfoButton()
+                    ScrollToTopButton()
+                    AddNoteButton()
                 }
             }
+            .overlay (SessionDeleteButton())
+            .overlay (ShowDetailViewInfoView())
+            .overlay (SessionDeleteButton.SessionDeleteInfoView())
         }
-        .navigationTitle(titleView)
-        .toolbarBackground(.ultraThinMaterial)
-        .toolbar {
-            ToolbarItemGroup {
-                DetailViewInfoButton()
-                ScrollToTopButton()
-                AddNoteButton()
-            }
-        }
-        .overlay (SessionDeleteButton())
-        .overlay (ShowDetailViewInfoView())
-        .overlay (SessionDeleteButton.SessionDeleteInfoView())
     }
         
     let topDetailHeight = CGFloat(140)
