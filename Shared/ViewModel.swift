@@ -195,7 +195,9 @@ class ViewModel: ObservableObject {
     private func observe_KillTimer() {
         NotificationCenter.default.addObserver(forName: .killTimer, object: nil, queue: nil) {[weak self] in
             let info = $0.userInfo
-            print(info)
+            
+            let overspill = info!["overspill"] as! Float
+            let bubbleRank = info!["rank"] as! Int64
         }
     }
     
