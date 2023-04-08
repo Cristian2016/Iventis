@@ -10,12 +10,8 @@ import SwiftUI
 struct NoSessionsAlertView: View {
     var body: some View {
         VStack (alignment:.leading) {
-            Text("No Sessions")
-                .font(.title)
+            Text("No Sessions").font(.title)
             Text("**Start** \(Image.tap) Tap Seconds")
-            Text("**Dismiss** \(Image.rightSwipe) Swipe Right")
-            Text("*from Left Screen Edge*")
-                .foregroundColor(.secondary)
         }
         .padding([.top])
         .padding([.top, .leading])
