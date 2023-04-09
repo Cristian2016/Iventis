@@ -170,7 +170,7 @@ class BubbleCellCoordinator {
                 
                 precisionTimer.executeAction(after: deadline) { [weak self] in
                     self?.finishBubble() //at exactly 0.0 overspill
-                    self?.timerProgress = "Done"
+                    DispatchQueue.main.async { self?.timerProgress = "Done" }
                     self?.update(.finishTimer)
                 }
             } else {
