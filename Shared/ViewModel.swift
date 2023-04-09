@@ -343,8 +343,6 @@ extension ViewModel {
             return
         }
         
-        handleNotification(.start, for: bubble)
-        
         let startDelayCompensation = startDelayCompensation ?? 0
         let bContext = PersistenceController.shared.bContext
         let objID = bubble.objectID
@@ -353,6 +351,9 @@ extension ViewModel {
         
         switch bubble.state {
             case .brandNew: /* changes to .running */
+                
+                handleLocalNotification(.start, for: bubble)
+                
                 bContext.perform {
                     let thisBubble = bContext.object(with: objID) as! Bubble
                     
@@ -389,6 +390,9 @@ extension ViewModel {
                 }
                 
             case .paused:  /* changes to running */
+                
+                handleLocalNotification(.start, for: bubble)
+                
                 bContext.perform {
                     let thisBubble = bContext.object(with: objID) as! Bubble
                     
@@ -415,6 +419,8 @@ extension ViewModel {
                 }
                 
             case .running: /* changes to .paused */
+                handleLocalNotification(.pause, for: bubble)
+                
                 bContext.perform {
                     let thisBubble = self.controller.grabObj(objID) as! Bubble
                     let currentPair = thisBubble.lastPair
@@ -884,7 +890,7 @@ extension ViewModel {
     }
     
     ///before ct.state changed!!!
-    func handleNotification(_ situation:NotificationSituation, for timer:Bubble) {
+    func handleLocalNotification(_ situation:NotificationSituation, for timer:Bubble) {
         guard timer.isTimer else { return }
         
         switch situation {
