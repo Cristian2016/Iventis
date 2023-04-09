@@ -215,7 +215,7 @@ class ViewModel: ObservableObject {
         bContext.perform {
             let thisBubble = self.controller.grabObj(objID) as! Bubble
             let currentPair = thisBubble.lastPair
-            currentPair!.pause = Date()
+            currentPair!.pause = Date().addingTimeInterval(TimeInterval(overspill))
             
             currentPair!.computeDuration(.atPause)
             
