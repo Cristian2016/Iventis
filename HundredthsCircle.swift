@@ -26,11 +26,7 @@ struct HundredthsCircle: View {
             .animation(.spring(response: 0.3, dampingFraction: 0.2), value: isBubbleRunning)
         //publisher
             .onReceive(bubble.coordinator.$timeComponents) {
-                if bubble.state == .finished {
-                    hundredths = "✖︎"
-                    return
-                }
-                hundredths = $0.hundredths
+                hundredths = bubble.state == .finished ? "✖︎" : $0.hundredths
             }
     }
     
