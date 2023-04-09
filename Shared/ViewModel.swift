@@ -225,7 +225,7 @@ class ViewModel: ObservableObject {
             
             self.controller.save(bContext) {
                 delayExecution(self.delay) {
-                    bubble.coordinator.update(.user(.pause))
+                    bubble.coordinator.update(.finishTimer)
                     bubble.pairBubbleCellCoordinator.update(.user(.pause))
                 }
             }
