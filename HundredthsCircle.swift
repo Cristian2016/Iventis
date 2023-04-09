@@ -25,7 +25,13 @@ struct HundredthsCircle: View {
             .zIndex(isBubbleRunning ? -1 : 0)
             .animation(.spring(response: 0.3, dampingFraction: 0.2), value: isBubbleRunning)
         //publisher
-            .onReceive(bubble.coordinator.$timeComponents) { hundredths = $0.hundredths }
+            .onReceive(bubble.coordinator.$timeComponents) {
+                if bubble.state == .finished {
+                    hundredths = "✕"
+                    return
+                }
+                hundredths = $0.hundredths
+            }
     }
     
     init?(bubble: Bubble) {

@@ -80,7 +80,7 @@ extension SecondsLabel {
                         .padding([.leading, .trailing], 4)
                         .background(.thinMaterial, in: RoundedRectangle(cornerRadius: 4))
                         .onReceive(bubble.coordinator.$timerProgress) {
-                            if $0 == 1 {
+                            if bubble.state == .finished {
                                 progress = "Done"
                                 return
                             }
