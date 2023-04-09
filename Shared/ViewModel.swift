@@ -465,6 +465,8 @@ extension ViewModel {
     func reset(_ bubble:Bubble) {
         guard !bubble.sessions_.isEmpty else { return }
         
+        handleLocalNotification(.reset, for: bubble)
+        
         DispatchQueue.global().async {
             let objID = bubble.objectID
             let bContext = self.controller.bContext
@@ -609,6 +611,8 @@ extension ViewModel {
     
     func endSession(_ bubble:Bubble) {
         if bubble.state == .brandNew { return }
+        
+        handleLocalNotification(.endSession, for: bubble)
         
         secretary.addNoteButton_bRank = nil //1
         
@@ -889,6 +893,7 @@ extension ViewModel {
         case start
         case pause
         case delete
+        case reset
     }
     
     ///before ct.state changed!!!
@@ -909,7 +914,7 @@ extension ViewModel {
                 guard timer.state == .paused || timer.state == .brandNew else { return }
                 localNotificationsManager.scheduleNotification(for: timer, atSecondsFromNow: TimeInterval(timer.currentClock), isSnooze: false)
                 
-            case .delete:
+            case .delete, .reset:
                 if timer.state == .running {
                     localNotificationsManager.cancelScheduledNotification(for: timer)
                 }
