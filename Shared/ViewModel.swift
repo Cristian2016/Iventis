@@ -223,6 +223,7 @@ class ViewModel: ObservableObject {
             thisBubble.currentClock -= currentPair!.duration
             
             thisBubble.lastSession!.computeDuration()
+            
             self.controller.save(bContext) {
                 delayExecution(self.delay) {
                     bubble.coordinator.update(.user(.pause))
