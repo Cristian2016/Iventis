@@ -48,7 +48,7 @@ class BubbleCellCoordinator {
                 case .finishTimer:
                     self.cancellable = []
                     DispatchQueue.main.async {
-                        self.timeComponents = Components("0", "0", "0", "X")
+                        self.timeComponents = Components("0", "0", "0", "✖︎")
                         self.timerProgress = 1.0
                     }
                     

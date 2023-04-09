@@ -68,7 +68,7 @@ extension SecondsLabel {
     struct TimerProgressView:View {
         private let precision = "%.2f"
         private let bubble:Bubble
-        @State private var progress = "1.0"
+        @State private var progress = "0.0"
         
         var body: some View {
             ZStack {
@@ -80,6 +80,10 @@ extension SecondsLabel {
                         .padding([.leading, .trailing], 4)
                         .background(.thinMaterial, in: RoundedRectangle(cornerRadius: 4))
                         .onReceive(bubble.coordinator.$timerProgress) {
+                            if $0 == 1 {
+                                progress = "Done"
+                                return
+                            }
                             progress = String(format: precision, $0)
                         }
                         .environment(\.colorScheme, .light)
