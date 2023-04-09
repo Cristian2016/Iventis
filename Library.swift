@@ -61,6 +61,7 @@ public extension Image {
     static let timer = Image(systemName: "timer")
     static let more = Image(systemName: "ellipsis.circle.fill")
     static let reset = Image(systemName: "arrow.counterclockwise")
+    static let xmark = Image(systemName: "xmark.square.fill")
     
     // MARK: - Info Assets
     static let dpv = Image("DurationPicker")
