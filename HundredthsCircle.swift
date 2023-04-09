@@ -14,7 +14,7 @@ struct HundredthsCircle: View {
     
     var body: some View {
         Circle()
-            .fill(hundredths != "✖︎" ? Color.pauseStickerColor : .red)
+            .fill(hundredths != "✕" ? Color.pauseStickerColor : .red)
             .adaptiveText(hundredths, true)
             .foregroundColor(.background)
             .allowsHitTesting(false)
