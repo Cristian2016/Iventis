@@ -206,9 +206,7 @@ class ViewModel: ObservableObject {
     
     private func killTimer(_ bubble:Bubble?, _ overspill:Float) {
         guard let bubble = bubble else { return }
-        
-        print(overspill, " overspill")
-        
+                
         let bContext = PersistenceController.shared.bContext
         let objID = bubble.objectID
         
