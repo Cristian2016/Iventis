@@ -27,7 +27,7 @@ struct HundredthsCircle: View {
         //publisher
             .onReceive(bubble.coordinator.$timeComponents) {
                 if bubble.state == .finished {
-                    hundredths = "✕"
+                    hundredths = "✖︎"
                     return
                 }
                 hundredths = $0.hundredths
