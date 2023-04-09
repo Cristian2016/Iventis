@@ -215,8 +215,9 @@ class ViewModel: ObservableObject {
         bContext.perform {
             let thisBubble = self.controller.grabObj(objID) as! Bubble
             let currentPair = thisBubble.lastPair
-            currentPair!.pause = Date().addingTimeInterval(TimeInterval(overspill))
             
+            //pair has a pauseDate and therefore duration can be computed
+            currentPair!.pause = Date().addingTimeInterval(TimeInterval(overspill))
             currentPair!.computeDuration(.atPause)
             
             thisBubble.currentClock -= currentPair!.duration
