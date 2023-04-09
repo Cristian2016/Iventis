@@ -309,7 +309,7 @@ extension ViewModel {
     func deleteBubble(_ bubble:Bubble) {
         if !path.isEmpty { withAnimation(.easeInOut) { path = [] }}
         
-        handleLocalNotification(.delete, for: bubble)
+        setupNotification(.delete, for: bubble)
         
         let bContext = controller.bContext
         let objID = bubble.objectID
@@ -354,7 +354,7 @@ extension ViewModel {
         switch bubble.state {
             case .brandNew: /* changes to .running */
                 
-                handleLocalNotification(.start, for: bubble)
+                setupNotification(.start, for: bubble)
                 
                 bContext.perform {
                     let thisBubble = bContext.object(with: objID) as! Bubble
@@ -393,7 +393,7 @@ extension ViewModel {
                 
             case .paused:  /* changes to running */
                 
-                handleLocalNotification(.start, for: bubble)
+                setupNotification(.start, for: bubble)
                 
                 bContext.perform {
                     let thisBubble = bContext.object(with: objID) as! Bubble
@@ -421,7 +421,7 @@ extension ViewModel {
                 }
                 
             case .running: /* changes to .paused */
-                handleLocalNotification(.pause, for: bubble)
+                setupNotification(.pause, for: bubble)
                 
                 bContext.perform {
                     let thisBubble = self.controller.grabObj(objID) as! Bubble
@@ -465,7 +465,7 @@ extension ViewModel {
     func reset(_ bubble:Bubble) {
         guard !bubble.sessions_.isEmpty else { return }
         
-        handleLocalNotification(.reset, for: bubble)
+        setupNotification(.reset, for: bubble)
         
         DispatchQueue.global().async {
             let objID = bubble.objectID
@@ -612,7 +612,7 @@ extension ViewModel {
     func endSession(_ bubble:Bubble) {
         if bubble.state == .brandNew { return }
         
-        handleLocalNotification(.endSession, for: bubble)
+        setupNotification(.endSession, for: bubble)
         
         secretary.addNoteButton_bRank = nil //1
         
@@ -897,7 +897,7 @@ extension ViewModel {
     }
     
     ///before ct.state changed!!!
-    func handleLocalNotification(_ situation:NotificationSituation, for timer:Bubble) {
+    func setupNotification(_ situation:NotificationSituation, for timer:Bubble) {
         guard timer.isTimer else { return }
         
         switch situation {
