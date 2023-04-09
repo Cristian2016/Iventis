@@ -46,3 +46,17 @@ struct CalendarEventRemovedConfirmation: View {
     }
 }
 
+///when user taps finished timer, this alert will show
+struct CloseSessionAlert: View {
+    private let secretary = Secretary.shared
+    @State private var show = false
+    
+    var body: some View {
+        ZStack {
+            if show {
+                ConfirmView(content: .eventRemoved)
+            }
+        }
+        .onReceive(secretary.$showAlert_closeSession) { show = $0 }
+    }
+}

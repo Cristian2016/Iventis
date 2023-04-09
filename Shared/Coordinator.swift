@@ -157,7 +157,7 @@ class BubbleCellCoordinator {
             //compute progress
             let progress = self.computeTimerProgress(for: bubble, and: value)
             DispatchQueue.main.async {
-                self.timerProgress = (self.timerProgress != "1.00") ? String(format: "%.2f", progress) : "Done"
+                self.timerProgress = String(format: "%.2f", progress)
             }
             
             //check if timer should finish
@@ -170,11 +170,13 @@ class BubbleCellCoordinator {
                 
                 precisionTimer.executeAction(after: deadline) { [weak self] in
                     self?.finishBubble() //at exactly 0.0 overspill
+                    self?.timerProgress = "Done"
                     self?.update(.finishTimer)
                 }
             } else {
                 if overspill < 0 {
                     self.finishBubble(overspill)
+                    self.timerProgress = "Done"
                     self.update(.finishTimer)
                 }
             }

@@ -36,9 +36,6 @@ struct SecondsCircle: View {
     
     // MARK: -
     private func userTappedSeconds() {
-        //feedback
-        UserFeedback.singleHaptic(.heavy)
-        
         //user intent model
         viewModel.toggleBubbleStart(bubble)
     }

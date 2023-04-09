@@ -51,6 +51,6 @@ struct AlertHintView: View {
 
 struct AlertView_Previews: PreviewProvider {
     static var previews: some View {
-        AlertHintView(alertContent: AlertHint.scrollToTop, dismissAction: {}, buttonAction: {})
+        AlertHintView(alertContent: AlertHint.colorChange, dismissAction: {}, buttonAction: {})
     }
 }

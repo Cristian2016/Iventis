@@ -63,6 +63,8 @@ class Secretary {
     
     @Published var showDetail_bRank:Int64?
     
+    @Published var showAlert_closeSession = false
+    
     func toggleDetail(_ rank:Int64?) {
         showDetail_bRank = showDetail_bRank == nil ? rank : nil
     }

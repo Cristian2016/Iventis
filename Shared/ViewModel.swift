@@ -336,11 +336,19 @@ extension ViewModel {
     
     ///delta is always zero if user taps start. if user uses start delay, delta is not zero
     func toggleBubbleStart(_ bubble:Bubble, startDelayCompensation:TimeInterval? = nil) {
-        if bubble.currentClock <= 0 && bubble.kind != .stopwatch  { return }
+        if bubble.currentClock <= 0 && bubble.kind != .stopwatch  {
+            secretary.showAlert_closeSession = true
+            delayExecution(.now() + 3) {
+                self.secretary.showAlert_closeSession = false
+            }
+            return
+        }
         
         let startDelayCompensation = startDelayCompensation ?? 0
         let bContext = PersistenceController.shared.bContext
         let objID = bubble.objectID
+        
+        UserFeedback.singleHaptic(.heavy)
         
         switch bubble.state {
             case .brandNew: /* changes to .running */
@@ -434,7 +442,9 @@ extension ViewModel {
                     }
                 }
                 
-            case .finished: return
+            case .finished:
+                print("it's finished")
+                return
         }
     }
     
