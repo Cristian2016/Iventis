@@ -198,6 +198,36 @@ class ViewModel: ObservableObject {
             
             let overspill = info!["overspill"] as! Float
             let bubbleRank = info!["rank"] as! Int64
+            
+            let bubble = self?.bubble(for: Int(bubbleRank))
+            self?.killTimer(bubble, overspill)
+        }
+    }
+    
+    private func killTimer(_ bubble:Bubble?, _ overspill:Float) {
+        guard let bubble = bubble else { return }
+        
+        print(overspill, " overspill")
+        
+        let bContext = PersistenceController.shared.bContext
+        let objID = bubble.objectID
+        
+        bContext.perform {
+            let thisBubble = self.controller.grabObj(objID) as! Bubble
+            let currentPair = thisBubble.lastPair
+            currentPair!.pause = Date()
+            
+            currentPair!.computeDuration(.atPause)
+            
+            thisBubble.currentClock -= currentPair!.duration
+            
+            thisBubble.lastSession!.computeDuration()
+            self.controller.save(bContext) {
+                delayExecution(self.delay) {
+                    bubble.coordinator.update(.user(.pause))
+                    bubble.pairBubbleCellCoordinator.update(.user(.pause))
+                }
+            }
         }
     }
     
@@ -408,7 +438,7 @@ extension ViewModel {
     }
     
     func finishTimer(_ bubble:Bubble) {
-        
+        toggleBubbleStart(bubble)
     }
     
     ///delete history. delete all sessions and pairs and make it brandNew
