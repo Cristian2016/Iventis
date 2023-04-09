@@ -16,6 +16,8 @@ import MyPackage
 @main
 struct TimersApp: App {
     
+    @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
+    
     var body: some Scene {
         WindowGroup { ViewHierarchy() }
     }
