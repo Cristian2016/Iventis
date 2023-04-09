@@ -204,7 +204,7 @@ class ViewModel: ObservableObject {
         }
     }
     
-    ///overspill is the elapsed time after timer has reached zero. it is a negative value
+    ///overspill is the elapsed time after timer has reached zero. overspill is either zero or negative negative
     private func killTimer(_ bubble:Bubble?, _ overspill:Float) {
         guard let bubble = bubble else { return }
                 
