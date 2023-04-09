@@ -309,6 +309,8 @@ extension ViewModel {
     func deleteBubble(_ bubble:Bubble) {
         if !path.isEmpty { withAnimation(.easeInOut) { path = [] }}
         
+        handleLocalNotification(.delete, for: bubble)
+        
         let bContext = controller.bContext
         let objID = bubble.objectID
         
