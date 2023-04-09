@@ -149,6 +149,10 @@ struct DurationPickerView: View {
         guard tricolor != nil else { return }
         Secretary.shared.topMostView = .durationPicker
     } //4
+    
+    init() {
+        ScheduledNotificationsManager.shared.requestAuthorization()
+    }
 }
 
 extension DurationPickerView {

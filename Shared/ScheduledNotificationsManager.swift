@@ -43,15 +43,7 @@ class ScheduledNotificationsManager {
             completed, error in
         }
     }
-    private lazy var options:UNAuthorizationOptions = [
-        .alert,
-        .sound,
-        .badge,
-        .carPlay,
-        .announcement,
-//        .providesAppNotificationSettings,
-//        .provisional
-    ]
+    private lazy var options:UNAuthorizationOptions = [.alert, .sound, .badge, .carPlay]
     
     ///ex: user starts 10 minutes timer. a notification is scheduled to for delivery at 10 minutes after timer start
     func scheduleNotification(for timer:Bubble, atSecondsFromNow timeInterval:TimeInterval, isSnooze:Bool) {
