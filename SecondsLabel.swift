@@ -79,13 +79,7 @@ extension SecondsLabel {
                         .minimumScaleFactor(0.1)
                         .padding([.leading, .trailing], 4)
                         .background(.thinMaterial, in: RoundedRectangle(cornerRadius: 4))
-                        .onReceive(bubble.coordinator.$timerProgress) {
-                            if bubble.state == .finished {
-                                progress = "Done"
-                                return
-                            }
-                            progress = String(format: precision, $0)
-                        }
+                        .onReceive(bubble.coordinator.$timerProgress) { progress = $0 }
                         .environment(\.colorScheme, .light)
                 }
             }

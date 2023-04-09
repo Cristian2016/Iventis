@@ -49,7 +49,7 @@ class BubbleCellCoordinator {
                     self.cancellable = []
                     DispatchQueue.main.async {
                         self.timeComponents = Components("0", "0", "0", "✕")
-                        self.timerProgress = 1.0
+                        self.timerProgress = "1.0"
                     }
                     
                 case .showAll:
@@ -62,7 +62,7 @@ class BubbleCellCoordinator {
                     DispatchQueue.main.async {
                         self.timeComponents = Components(comp.hr, comp.min, comp.sec, comp.hundredths)
                         self.timeComponentsOpacity.updateOpacity(theInitialValue)
-                        self.timerProgress = progress
+                        self.timerProgress = String(format: "%.2f", progress)
                     }
                     
                     if theBubble.state == .running {
@@ -102,7 +102,7 @@ class BubbleCellCoordinator {
                             let stringComponents = theBubble.initialClock.timeComponentsAsStrings
                             
                             DispatchQueue.main.async {
-                                self.timerProgress = 0.0
+                                self.timerProgress = "0.0"
                                 
                                 self.timeComponents.hr = stringComponents.hr
                                 self.timeComponents.min = stringComponents.min
@@ -123,7 +123,7 @@ class BubbleCellCoordinator {
     @Published var sdbOffset = CGFloat(0) //start delay button YOffset
     @Published var sdbDeleteTriggered = false //start delay button delete triggered
     
-    @Published var timerProgress = 0.0 //8
+    @Published var timerProgress = "0.0" //8
     @Published var timeComponents = Components("-1", "-1", "-1", "-1")
     var timeComponentsSet:Bool { timeComponents.hr != "-1" }
     @Published private(set) var timeComponentsOpacity = Opacity()
@@ -151,7 +151,7 @@ class BubbleCellCoordinator {
         if isTimer {
             //compute progress
             let progress = self.computeTimerProgress(for: bubble, and: value)
-            DispatchQueue.main.async { self.timerProgress = progress }
+            DispatchQueue.main.async { self.timerProgress = String(format: "%.2f", progress) }
             
             //check if timer should finish
             let totalDuration = bubble.lastSession!.totalDuration
