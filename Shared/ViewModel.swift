@@ -34,6 +34,7 @@ import CoreData
 import MyPackage
 
 class ViewModel: ObservableObject {
+    let localNotificationsManager = ScheduledNotificationsManager.shared
     let center = NotificationCenter.default
     
     private let delay:DispatchTime = .now() + 0.01
@@ -338,11 +339,11 @@ extension ViewModel {
     func toggleBubbleStart(_ bubble:Bubble, startDelayCompensation:TimeInterval? = nil) {
         if bubble.currentClock <= 0 && bubble.kind != .stopwatch  {
             secretary.showAlert_closeSession = true
-            delayExecution(.now() + 3) {
-                self.secretary.showAlert_closeSession = false
-            }
+            delayExecution(.now() + 3) { self.secretary.showAlert_closeSession = false }
             return
         }
+        
+        handleNotification(.start, for: bubble)
         
         let startDelayCompensation = startDelayCompensation ?? 0
         let bContext = PersistenceController.shared.bContext
@@ -870,5 +871,40 @@ extension ViewModel {
     enum SDBMode {
         case start
         case pause
+    }
+}
+
+// MARK: - Local Notifications
+extension ViewModel {
+    enum NotificationSituation {
+        case endSession
+        case start
+        case pause
+        case delete
+    }
+    
+    ///before ct.state changed!!!
+    func handleNotification(_ situation:NotificationSituation, for timer:Bubble) {
+        guard timer.isTimer else { return }
+        
+        switch situation {
+            case .pause: /* current situation is running */
+                guard timer.state == .running else { return }
+                localNotificationsManager.cancelScheduledNotification(for: timer)
+                
+            case /* now */.endSession: /* current situation is running */
+                if timer.state == .running {/* for running timers only! the other ones */
+                    localNotificationsManager.cancelScheduledNotification(for: timer)
+                }
+                
+            case /* now */ .start: /* current situation is paused */
+                guard timer.state == .paused || timer.state == .brandNew else { return }
+                localNotificationsManager.scheduleNotification(for: timer, atSecondsFromNow: TimeInterval(timer.currentClock), isSnooze: false)
+                
+            case .delete:
+                if timer.state == .running {
+                    localNotificationsManager.cancelScheduledNotification(for: timer)
+                }
+        }
     }
 }

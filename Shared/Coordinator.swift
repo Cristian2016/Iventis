@@ -176,7 +176,7 @@ class BubbleCellCoordinator {
             } else {
                 if overspill < 0 {
                     self.finishBubble(overspill)
-                    self.timerProgress = "Done"
+                    DispatchQueue.main.async { self.timerProgress = "Done" }
                     self.update(.finishTimer)
                 }
             }
