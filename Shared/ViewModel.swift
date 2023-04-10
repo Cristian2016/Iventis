@@ -901,20 +901,11 @@ extension ViewModel {
         guard timer.isTimer else { return }
         
         switch situation {
-            case .pause: /* current situation is running */
-                guard timer.state == .running else { return }
-                localNotificationsManager.cancelScheduledNotification(for: timer)
-                
-            case /* now */.endSession: /* current situation is running */
-                if timer.state == .running {/* for running timers only! the other ones */
-                    localNotificationsManager.cancelScheduledNotification(for: timer)
-                }
-                
-            case /* now */ .start: /* current situation is paused */
+            case .start:
                 guard timer.state == .paused || timer.state == .brandNew else { return }
                 localNotificationsManager.scheduleNotification(for: timer, atSecondsFromNow: TimeInterval(timer.currentClock), isSnooze: false)
                 
-            case .delete, .reset:
+            case .delete, .reset, .endSession, .pause:
                 if timer.state == .running {
                     localNotificationsManager.cancelScheduledNotification(for: timer)
                 }

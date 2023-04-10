@@ -72,7 +72,7 @@ class ScheduledNotificationsManager {
         content.title = contentTitle(timer)
         content.body = "Duration \(duration.timerTitle)"
         
-//        if let image = image(for: color) { content.attachments = [image] }
+        if let image = image(for: color) { content.attachments = [image] }
         
         //2.trigger
         let trigger = UNTimeIntervalNotificationTrigger(timeInterval: timeInterval, repeats: false)
@@ -167,7 +167,7 @@ class ScheduledNotificationsManager {
             content.body = request.content.body
             
             //this will be updated. all the rest of the code is identical to updateStickyNoteInNotification
-//            if let image = self.image(for: timer.color) { content.attachments = [image] }
+            if let image = self.image(for: timer.color) { content.attachments = [image] }
             
             content.title = self.contentTitle(timer)
             content.categoryIdentifier = request.content.categoryIdentifier

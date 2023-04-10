@@ -58,17 +58,13 @@ struct BubbleDeleteButton: View {
             .standardShadow()
             .onTapGesture { secretary.showBubbleDeleteInfo = true }
     }
-        
+    
     private var titleLabel:some View {
-        let condition = bubble.sessions_.count > 0
-        let text1:LocalizedStringKey = "^[\(bubble.sessions_.count) Session](inflect: true) \(Image.info)"
-        let content:LocalizedStringKey = condition ? text1 : "No Sessions \(Image.info)"
-        
-        return Text(content)
-            .font(.system(size: 21, weight: .medium))
-            .foregroundColor(metrics.titleColor)
-            .padding(.bottom, 8)
+        Text("\(Image.trash) Delete")
+            .foregroundColor(.red)
+            .padding(.bottom, 6)
             .allowsHitTesting(false)
+            .font(.system(size: 23, weight: .semibold))
     }
     
     //delete bubble action
@@ -88,7 +84,7 @@ struct BubbleDeleteButton: View {
                 .fill(metrics.bubbleColor)
                 .frame(width: 208, height: 84)
                 .overlay {
-                    Text("Delete")
+                    Text("Bubble")
                         .font(.system(size: 32, weight: .medium, design: .rounded))
                         .foregroundColor(.white)
                 }
@@ -112,7 +108,7 @@ struct BubbleDeleteButton: View {
                 .fill(bubble.sessions_.isEmpty ? metrics.bubbleColor.opacity(0.4) : metrics.bubbleColor)
                 .frame(width: 208, height: 84)
                 .overlay {
-                    Text("Reset")
+                    Text("^[\(bubble.sessions_.count) Event](inflect: true)")
                         .font(.system(size: 32, weight: .medium, design: .rounded))
                         .foregroundColor(bubble.sessions_.isEmpty ? .black : .white)
                 }
