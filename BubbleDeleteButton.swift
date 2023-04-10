@@ -53,10 +53,10 @@ struct BubbleDeleteButton: View {
     
     private var roundedBackground:some View {
         ZStack(alignment: .topLeading) {
-            Image(systemName: "info.circle.fill")
-                .fontWeight(.medium)
-                .background()
-                .padding(-14)
+//            Image(systemName: "info.circle.fill")
+//                .fontWeight(.medium)
+//                .contentShape(Rectangle())
+//                .padding(-14)
             RoundedRectangle(cornerRadius: metrics.radius)
                 .frame(width: metrics.width, height: metrics.height)
                 .standardShadow()
@@ -115,7 +115,7 @@ struct BubbleDeleteButton: View {
                 .frame(width: 208, height: 84)
                 .overlay {
                     let content:LocalizedStringKey = bubble.sessions_.isEmpty ? "0 Events" : "^[\(bubble.sessions_.count) Event](inflect: true)"
-                    Text(content)
+                    Text("History")
                         .font(.system(size: 32, weight: .medium, design: .rounded))
                         .foregroundColor(bubble.sessions_.isEmpty ? .black : .white)
                 }
