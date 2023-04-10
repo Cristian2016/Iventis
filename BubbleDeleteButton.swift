@@ -53,12 +53,13 @@ struct BubbleDeleteButton: View {
     
     private var roundedBackground:some View {
         ZStack(alignment: .topLeading) {
+            Image(systemName: "info.circle.fill")
+                .fontWeight(.medium)
+                .background()
+                .padding(-14)
             RoundedRectangle(cornerRadius: metrics.radius)
                 .frame(width: metrics.width, height: metrics.height)
                 .standardShadow()
-            Image(systemName: "info.circle.fill")
-                .fontWeight(.medium)
-                .padding(-14)
         }
         .foregroundColor(metrics.backgroundColor)
         .onTapGesture { secretary.showBubbleDeleteInfo = true }
