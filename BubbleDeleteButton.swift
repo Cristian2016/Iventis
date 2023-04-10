@@ -52,11 +52,17 @@ struct BubbleDeleteButton: View {
     }
     
     private var roundedBackground:some View {
-        RoundedRectangle(cornerRadius: metrics.radius)
-            .fill(metrics.backgroundColor)
-            .frame(width: metrics.width, height: metrics.height)
-            .standardShadow()
-            .onTapGesture { secretary.showBubbleDeleteInfo = true }
+        ZStack(alignment: .topLeading) {
+            RoundedRectangle(cornerRadius: metrics.radius)
+                .fill(metrics.backgroundColor)
+                .frame(width: metrics.width, height: metrics.height)
+                .standardShadow()
+            Image(systemName: "info.circle.fill")
+                .foregroundColor(metrics.backgroundColor)
+                .fontWeight(.medium)
+                .padding(-14)
+        }
+        .onTapGesture { secretary.showBubbleDeleteInfo = true }
     }
     
     private var titleLabel:some View {
