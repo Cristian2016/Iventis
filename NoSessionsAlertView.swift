@@ -12,6 +12,7 @@ struct NoSessionsAlertView: View {
         VStack (alignment:.leading) {
             Text("No Events").font(.title)
             Text("**Start** \(Image.tap) Tap Seconds")
+                .foregroundColor(.primary)
         }
         .padding([.top])
         .padding([.top, .leading])
