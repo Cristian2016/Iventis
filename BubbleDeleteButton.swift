@@ -114,8 +114,7 @@ struct BubbleDeleteButton: View {
                 .fill(bubble.sessions_.isEmpty ? metrics.bubbleColor.opacity(0.4) : metrics.bubbleColor)
                 .frame(width: 208, height: 84)
                 .overlay {
-                    let content:LocalizedStringKey = bubble.sessions_.isEmpty ? "0 Events" : "^[\(bubble.sessions_.count) Event](inflect: true)"
-                    Text("History")
+                    Text("History \(bubble.sessions_.count)")
                         .font(.system(size: 32, weight: .medium, design: .rounded))
                         .foregroundColor(bubble.sessions_.isEmpty ? .black : .white)
                 }

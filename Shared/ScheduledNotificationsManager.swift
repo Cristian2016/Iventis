@@ -188,11 +188,11 @@ class ScheduledNotificationsManager {
     // MARK: - Actions
     //actions of Category "zeroTimer"
     private lazy var repeatAction:Action = {
-        
         let id = ActionID.repeatTimer
         let title = "Repeat Timer"
         return Action(identifier: id, title: title, options: [.foreground, .destructive])
     }()
+    
     private func snoozeActions() -> [Action] {
         
         let snoozes = [5, 10, 15, 30, 60/* minutes */]
@@ -217,6 +217,7 @@ class ScheduledNotificationsManager {
     private func pause_Action() -> Action {
         Action(identifier: ActionID.pauseTimer, title: "Pause Timer", options: [])
     }
+    
     private func resume_Action() -> Action {
         Action(identifier: ActionID.resumeTimer, title: "Resume Timer", options: [])
     }
