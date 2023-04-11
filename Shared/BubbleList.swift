@@ -33,7 +33,7 @@ struct BubbleList: View {
     @SectionedFetchRequest var sections:SectionedFetchResults<Bool, Bubble>
 
     private let secretary = Secretary.shared
-                
+                    
     // MARK: -
     var body: some View {
         ZStack {
@@ -47,9 +47,9 @@ struct BubbleList: View {
                                 ZStack {
                                     NavigationLink(value: bubble) { }.opacity(0)
                                     BubbleCell(bubble)
-                                        .tag(bubble.rank)
                                         .offset(y: -6)
                                 }
+                                .id(String(bubble.rank))
                             }
                         }
                         .listRowSeparator(.hidden)
@@ -72,6 +72,12 @@ struct BubbleList: View {
                     }
                     .background { RefresherView() }
                     .refreshable { refresh() }
+                    .onReceive(NotificationCenter.Publisher(center: .default, name: Notification.Name("scrollToBubble"))) { output in
+                        let rank = output.userInfo!["scrollRank"] as! String
+                        delayExecution(.now() + 1) {
+                            withAnimation { proxy.scrollTo(rank, anchor: .center) }
+                        }
+                    }
                 }
             }
             LeftStrip(isListEmpty)

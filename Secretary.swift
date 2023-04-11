@@ -13,6 +13,9 @@ import MyPackage
 class Secretary {
     static let shared = Secretary()
     
+    ///used when user taps a notification. programmatically scoll in BubbleList to BubbleCell with id == scrollRank
+    @Published var scrollRank:Int64?
+    
     // MARK: - Publishers
     ///allow user to drag and drop tableView cells
     ///.onMove view modifier will not be nil

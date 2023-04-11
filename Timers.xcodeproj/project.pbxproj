@@ -43,6 +43,7 @@
 		1F38C5A32986615F00057B8C /* FusedLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F38C5A22986615F00057B8C /* FusedLabel.swift */; };
 		1F3950BA29966DEA00DD9423 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F3950B929966DEA00DD9423 /* Coordinator.swift */; };
 		1F3C164129CB5549003B39C0 /* BubbleInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F3C164029CB5549003B39C0 /* BubbleInfoView.swift */; };
+		1F3CBC9F29E5448F00350AC6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB8E84E29E2FBC50005909E /* AppDelegate.swift */; };
 		1F42B99D2973E34E0024DB5F /* Code Snippets.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 1F42B99C2973E34E0024DB5F /* Code Snippets.rtf */; };
 		1F477CA928EAB21900B4F965 /* AddStickyNoteQuickButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F477CA828EAB21900B4F965 /* AddStickyNoteQuickButton.swift */; };
 		1F48F55A286AE5B30071386A /* EmptyNote_InfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F48F559286AE5B30071386A /* EmptyNote_InfoView.swift */; };
@@ -115,7 +116,6 @@
 		1FB5D8DA28E9BF0500DD522A /* GestureLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB5D8D928E9BF0500DD522A /* GestureLabel.swift */; };
 		1FB7D57C2862F0300085C2BE /* PlusButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB7D57B2862F0300085C2BE /* PlusButton.swift */; };
 		1FB8E84F29E2FBC50005909E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB8E84E29E2FBC50005909E /* AppDelegate.swift */; };
-		1FB8E85029E2FBC50005909E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB8E84E29E2FBC50005909E /* AppDelegate.swift */; };
 		1FB8E85229E2FC870005909E /* ScheduledNotificationsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB8E85129E2FC870005909E /* ScheduledNotificationsManager.swift */; };
 		1FB8E85529E3096C0005909E /* magic.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 1FB8E85429E3096B0005909E /* magic.mp3 */; };
 		1FB8E85629E3096C0005909E /* magic.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 1FB8E85429E3096B0005909E /* magic.mp3 */; };
@@ -932,7 +932,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1FB8E85029E2FBC50005909E /* AppDelegate.swift in Sources */,
 				1F13EA0529CD87C5007A0461 /* NotificationViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1064,6 +1063,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1F3CBC9F29E5448F00350AC6 /* AppDelegate.swift in Sources */,
 				1FA834752850A57C003F4D61 /* Widgets.intentdefinition in Sources */,
 				1FA834702850A57A003F4D61 /* Widgets.swift in Sources */,
 				1FAF39D9298575E9002D833C /* Library.swift in Sources */,

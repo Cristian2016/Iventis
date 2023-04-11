@@ -36,8 +36,12 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         let timerID = self.getTimerID(from: response) //which timer was it
         
         switch response.actionIdentifier {
-            case UNNotificationDefaultActionIdentifier :
-                print("user tapped notification \(timerID)")
+            case UNNotificationDefaultActionIdentifier:
+                
+                let name = Notification.Name("scrollToBubble")
+                let info = ["scrollRank" : timerID]
+                
+                NotificationCenter.default.post(name: name, object: nil, userInfo: info)
                 
             default: break
         }
