@@ -63,11 +63,20 @@ class BubbleCellCoordinator {
                         self.timeComponents = Components(comp.hr, comp.min, comp.sec, comp.hundredths)
                         self.timeComponentsOpacity.updateOpacity(theInitialValue)
                         
-                        if bubble.state == .finished {
-                            self.timerProgress = "Done"
-                        } else {
-                            self.timerProgress = String(format: "%.2f", progress)
+                        switch bubble.state {
+                            case .finished:
+                                self.timerProgress = "Done"
+                            case .brandNew:
+                                self.timerProgress = "OK"
+                            default:
+                                self.timerProgress = String(format: "%.2f", progress)
                         }
+                        
+//                        if bubble.state == .finished {
+//                            self.timerProgress = "Done"
+//                        } else {
+//                            self.timerProgress = String(format: "%.2f", progress)
+//                        }
                     }
                     
                     if theBubble.state == .running {
@@ -107,7 +116,7 @@ class BubbleCellCoordinator {
                             let stringComponents = theBubble.initialClock.timeComponentsAsStrings
                             
                             DispatchQueue.main.async {
-                                self.timerProgress = "0.00"
+                                self.timerProgress = "OK"
                                 
                                 self.timeComponents.hr = stringComponents.hr
                                 self.timeComponents.min = stringComponents.min
