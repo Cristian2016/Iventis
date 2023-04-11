@@ -70,7 +70,7 @@ struct BubbleDeleteButton: View {
             .foregroundColor(.red)
             .padding(.bottom, 6)
             .allowsHitTesting(false)
-            .font(.system(size: 23, weight: .semibold))
+            .font(.system(size: 23, weight: .medium))
     }
     
     //delete bubble action

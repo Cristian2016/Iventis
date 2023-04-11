@@ -75,6 +75,8 @@ struct BubbleList: View {
                     .onReceive(NotificationCenter.Publisher(center: .default, name: Notification.Name("scrollToBubble"))) { output in
                         let rank = output.userInfo!["scrollRank"] as! String
                         withAnimation { proxy.scrollTo(rank, anchor: .center) }
+                        
+                        secretary.durationPickerMode = nil
                     }
                 }
             }
