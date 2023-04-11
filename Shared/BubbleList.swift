@@ -39,43 +39,39 @@ struct BubbleList: View {
         ZStack {
             if isListEmpty { EmptyListView() }
             else {
-                List (sections) { section in
-                    let value = section.id.description == "true" //5
-                    Section {
-                        ForEach (section) { bubble in
-                            ZStack {
-                                NavigationLink(value: bubble) { }.opacity(0)
-                                BubbleCell(bubble).offset(y: -6)
+                ScrollViewReader { proxy in
+                    List (sections) { section in
+                        let value = section.id.description == "true" //5
+                        Section {
+                            ForEach (section) { bubble in
+                                ZStack {
+                                    NavigationLink(value: bubble) { }.opacity(0)
+                                    BubbleCell(bubble)
+                                        .tag(bubble.rank)
+                                        .offset(y: -6)
+                                }
                             }
                         }
+                        .listRowSeparator(.hidden)
+                        .listSectionSeparator(value ? .visible : .hidden, edges: [.bottom])
+                        
+                        showAllBubblesButton
+                        
+                        if !section.id { bottomOverscoll }
                     }
-                    .listRowSeparator(.hidden)
-                    .listSectionSeparator(value ? .visible : .hidden, edges: [.bottom])
-                    
-                    showAllBubblesButton
-                    
-                    if !section.id { bottomOverscoll }
-                }
-                .navigationDestination(for: Bubble.self) { DetailView($0) }
-                .scrollIndicators(.hidden)
-                .listStyle(.plain)
-                .toolbarBackground(.ultraThinMaterial)
-                .toolbar {
-                    ToolbarItemGroup {
-                        AddNoteButton()
-                        AutoLockButton()
-                        PlusButton()
+                    .navigationDestination(for: Bubble.self) { DetailView($0) }
+                    .scrollIndicators(.hidden)
+                    .listStyle(.plain)
+                    .toolbarBackground(.ultraThinMaterial)
+                    .toolbar {
+                        ToolbarItemGroup {
+                            AddNoteButton()
+                            AutoLockButton()
+                            PlusButton()
+                        }
                     }
-                }
-                .background {
-                    RefresherView()
-                }
-                .refreshable {
-                    //allow pull-down on table if at least one pinned bubble available
-                    guard secretary.bubblesReport.pinned > 0 else { return }
-                    
-                    secretary.showFavoritesOnly.toggle()
-                    viewModel.refreshOrdinaryBubbles()
+                    .background { RefresherView() }
+                    .refreshable { refresh() }
                 }
             }
             LeftStrip(isListEmpty)
@@ -148,6 +144,15 @@ struct BubbleList: View {
         NSSortDescriptor(key: "isPinned", ascending: false),
         NSSortDescriptor(key: "rank", ascending: false)
     ]
+    
+    // MARK: -
+    private func refresh() {
+        //allow pull-down on table if at least one pinned bubble available
+        guard secretary.bubblesReport.pinned > 0 else { return }
+        
+        secretary.showFavoritesOnly.toggle()
+        viewModel.refreshOrdinaryBubbles()
+    }
 }
 
 // MARK: - Little Helpers
