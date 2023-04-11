@@ -74,9 +74,7 @@ struct BubbleList: View {
                     .refreshable { refresh() }
                     .onReceive(NotificationCenter.Publisher(center: .default, name: Notification.Name("scrollToBubble"))) { output in
                         let rank = output.userInfo!["scrollRank"] as! String
-                        delayExecution(.now() + 1) {
-                            withAnimation { proxy.scrollTo(rank, anchor: .center) }
-                        }
+                        withAnimation { proxy.scrollTo(rank, anchor: .center) }
                     }
                 }
             }

@@ -41,7 +41,9 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
                 let name = Notification.Name("scrollToBubble")
                 let info = ["scrollRank" : timerID]
                 
-                NotificationCenter.default.post(name: name, object: nil, userInfo: info)
+                delayExecution(.now() + 1) {
+                    NotificationCenter.default.post(name: name, object: nil, userInfo: info)
+                }
                 
             default: break
         }
