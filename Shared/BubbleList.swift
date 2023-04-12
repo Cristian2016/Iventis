@@ -95,7 +95,7 @@ struct BubbleList: View {
             secretary.showFavoritesOnly = false //show all bubbles
         }
         
-        delayExecution(.now() + 1) {
+        delayExecution(.now() + 0.3) {
             withAnimation { proxy.scrollTo(rank, anchor: .center) } //scroll to timer
         }
     }
