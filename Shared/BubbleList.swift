@@ -95,7 +95,7 @@ struct BubbleList: View {
             secretary.showFavoritesOnly = false //show all bubbles
         }
         
-        withAnimation { proxy.scrollTo(rank, anchor: .center) } //scroll to timer
+        proxy.scrollTo(rank, anchor: .center) //scroll to timer
     }
     
     // MARK: - Lego
