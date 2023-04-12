@@ -24,6 +24,10 @@ import CoreData
 import Combine
 import MyPackage
 
+extension BubbleList {
+    typealias Output = NotificationCenter.Publisher.Output
+}
+
 struct BubbleList: View {
     @Environment(\.managedObjectContext) private var viewContext
     
@@ -81,9 +85,9 @@ struct BubbleList: View {
         }
     }
     
-    private func handleScrollToTimerNotification(_ output: NotificationCenter.Publisher.Output, _ proxy:ScrollViewProxy) {
+    private func handleScrollToTimerNotification(_ output: Output, _ proxy:ScrollViewProxy) {
         let rank = output.userInfo!["scrollRank"] as! String
-
+        
         secretary.durationPickerMode = nil //remove durationpicker
         secretary.showPaletteView = false //remove palette
         withAnimation { proxy.scrollTo(rank, anchor: .center) } //scroll to timer
