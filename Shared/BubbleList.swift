@@ -35,6 +35,8 @@ struct BubbleList: View {
     @EnvironmentObject private var layoutViewModel:LayoutViewModel
     
     @SectionedFetchRequest var sections:SectionedFetchResults<Bool, Bubble>
+    
+    private static let publisher = NotificationCenter.Publisher(center: .default, name: .scrollToTimer)
 
     private let secretary = Secretary.shared
                     
@@ -76,9 +78,7 @@ struct BubbleList: View {
                     }
                     .background { RefresherView() }
                     .refreshable { refresh() }
-                    .onReceive(NotificationCenter.Publisher(center: .default, name: .scrollToTimer)) {
-                        handleScrollToTimerNotification($0, proxy)
-                    }
+                    .onReceive(Self.publisher) { handleScrollToTimerNotification($0, proxy) }
                 }
             }
             LeftStrip(isListEmpty)
