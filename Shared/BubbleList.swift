@@ -78,19 +78,26 @@ struct BubbleList: View {
                     }
                     .background { RefresherView() }
                     .refreshable { refresh() }
-                    .onReceive(Self.publisher) { handleScrollToTimerNotification($0, proxy) } //15
+                    .onReceive(Self.publisher) { handleScrollToFinishedTimerNotification($0, proxy) } //15
                 }
             }
             LeftStrip(isListEmpty)
         }
     }
     
-    private func handleScrollToTimerNotification(_ output: Output, _ proxy:ScrollViewProxy) {
+    private func handleScrollToFinishedTimerNotification(_ output: Output, _ proxy:ScrollViewProxy) {
         let rank = output.userInfo!["scrollRank"] as! String
         
         secretary.durationPickerMode = nil //remove durationpicker
         secretary.showPaletteView = false //remove palette
-        withAnimation { proxy.scrollTo(rank, anchor: .center) } //scroll to timer
+        
+        if secretary.showFavoritesOnly && secretary.bubblesReport.ordinaryRanks.contains(Int(rank)!) {
+            secretary.showFavoritesOnly = false //show all bubbles
+        }
+        
+        delayExecution(.now() + 1) {
+            withAnimation { proxy.scrollTo(rank, anchor: .center) } //scroll to timer
+        }
     }
     
     // MARK: - Lego
