@@ -17,7 +17,7 @@
 //11 user can pull down to toggle pinned bubbles only. refresherView shows when used pulls to refresh the table
 //12 initializer with or without predicate. when predicate is set, it fetches only pinned bubbles [bubble.isPinned]. otherwise it fetches everything
 //13 toolbar items is an HStack { PlusButton AutoLock etc }
-//14 remove gray cell selectio
+//15 user taps notification when timer is done. when notification tapped -> BubbleList is notified via NotificationCenter to scroll to timer
 
 import SwiftUI
 import CoreData
@@ -78,7 +78,7 @@ struct BubbleList: View {
                     }
                     .background { RefresherView() }
                     .refreshable { refresh() }
-                    .onReceive(Self.publisher) { handleScrollToTimerNotification($0, proxy) }
+                    .onReceive(Self.publisher) { handleScrollToTimerNotification($0, proxy) } //15
                 }
             }
             LeftStrip(isListEmpty)
