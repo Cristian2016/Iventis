@@ -72,16 +72,21 @@ struct BubbleList: View {
                     }
                     .background { RefresherView() }
                     .refreshable { refresh() }
-                    .onReceive(NotificationCenter.Publisher(center: .default, name: Notification.Name("scrollToBubble"))) { output in
-                        let rank = output.userInfo!["scrollRank"] as! String
-                        withAnimation { proxy.scrollTo(rank, anchor: .center) }
-                        
-                        secretary.durationPickerMode = nil
+                    .onReceive(NotificationCenter.Publisher(center: .default, name: Notification.Name("scrollToBubble"))) {
+                        handleScrollToTimerNotification($0, proxy)
                     }
                 }
             }
             LeftStrip(isListEmpty)
         }
+    }
+    
+    private func handleScrollToTimerNotification(_ output: NotificationCenter.Publisher.Output, _ proxy:ScrollViewProxy) {
+        let rank = output.userInfo!["scrollRank"] as! String
+
+        secretary.durationPickerMode = nil //remove durationpicker
+        secretary.showPaletteView = false //remove palette
+        withAnimation { proxy.scrollTo(rank, anchor: .center) } //scroll to timer
     }
     
     // MARK: - Lego
