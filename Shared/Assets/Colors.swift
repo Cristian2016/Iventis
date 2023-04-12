@@ -19,7 +19,7 @@ extension Color {
     ///same order in Palette and MoreOptionsView. Both views are reading from this array
     static let triColors = [
         Bubble.aqua, Bubble.mocha, Bubble.lemon,
-        Bubble.darkGreen, Bubble.mint, Bubble.chocolate,
+        Bubble.green, Bubble.mint, Bubble.chocolate,
         Bubble.slateBlue, Bubble.sourCherry, Bubble.orange,
         Bubble.ultramarine, Bubble.charcoal, Bubble.red,
         Bubble.sky, Bubble.bubbleGum, Bubble.cayenne,
@@ -30,7 +30,7 @@ extension Color {
     ///to use with Grid and GridRow
     static let paletteTriColors = [
         [Bubble.aqua, Bubble.mocha, Bubble.lemon],
-        [Bubble.darkGreen, Bubble.mint, Bubble.chocolate],
+        [Bubble.green, Bubble.mint, Bubble.chocolate],
         [Bubble.slateBlue, Bubble.sourCherry, Bubble.orange],
         [Bubble.ultramarine, Bubble.charcoal, Bubble.red],
         [Bubble.sky, Bubble.bubbleGum, Bubble.cayenne],
@@ -75,7 +75,7 @@ extension Color {
         
         //row 4
         static let green = Tricolor(description: Name.green.rawValue,
-                                 hr: Color(#colorLiteral(red: 0.1198918894, green: 0.8718696237, blue: 0.155010134, alpha: 1)), min: Color(#colorLiteral(red: 0.1077821925, green: 0.7843493819, blue: 0.1306060255, alpha: 1)), sec: Color(#colorLiteral(red: 0.08472224325, green: 0.6849253774, blue: 0.1049573496, alpha: 1)))
+                                 hr: Color(#colorLiteral(red: 0.5665775537, green: 0.7303215861, blue: 0.5441692472, alpha: 1)), min: Color(#colorLiteral(red: 0, green: 0.4583860636, blue: 0.001866293955, alpha: 1)), sec: Color(#colorLiteral(red: 0, green: 0.4583860636, blue: 0.001866293955, alpha: 1)))
         static let charcoal = Tricolor(description: Name.charcoal.rawValue,
                                     hr: Color(#colorLiteral(red: 0.4745098948, green: 0.4745098948, blue: 0.4745098948, alpha: 1)), min: Color(#colorLiteral(red: 0.2588235736, green: 0.2588236034, blue: 0.2588235736, alpha: 1)), sec: Color("charcoal"))
         static let magenta = Tricolor(description: Name.magenta.rawValue,
@@ -102,9 +102,6 @@ extension Color {
         //clear
         static let clear = Tricolor(description: Name.clear.rawValue,
                                 hr:Color(#colorLiteral(red: 0, green: 0.999099791, blue: 0.8100017905, alpha: 0)), min: Color(#colorLiteral(red: 0, green: 0.9633229375, blue: 0.7392000556, alpha: 0)), sec: Color(#colorLiteral(red: 0, green: 0.838650167, blue: 0.5155212283, alpha: 0)))
-        
-        static let darkGreen = Tricolor(description: Name.darkGreen.rawValue,
-                                   hr:Color(#colorLiteral(red: 0.5665775537, green: 0.7303215861, blue: 0.5441692472, alpha: 1)), min: Color(#colorLiteral(red: 0.005512473639, green: 0.4583269358, blue: 0.001565933926, alpha: 1)), sec: Color(#colorLiteral(red: 0, green: 0.4583860636, blue: 0.001866293955, alpha: 1)))
     }
     
     enum Name:String {
@@ -137,7 +134,6 @@ extension Color {
         case mocha
         
         case clear
-        case darkGreen
         
         case clearButtonRed
     }

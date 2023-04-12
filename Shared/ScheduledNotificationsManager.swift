@@ -9,6 +9,7 @@ import Foundation
 import UserNotifications
 import UIKit
 import CoreData
+import SwiftUI
 
 extension  ScheduledNotificationsManager {
     typealias Action = UNNotificationAction
@@ -232,10 +233,12 @@ class ScheduledNotificationsManager {
     }
     
     private func contentTitle(_ timer:Bubble) -> String {
-        let timerDone = "Done!"
+        let timerDone = "Done ✔︎"
         if !timer.note_.isEmpty {
             return timer.note_ + " " + timerDone
         }
-        return timer.color! + " • " + timerDone
+        
+        let timerColor = Color.userFriendlyBubbleColorName(for: timer.color!)
+        return timerColor + " " + timerDone
     }
 }
