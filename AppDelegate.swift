@@ -38,14 +38,12 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         let timerID = self.getTimerID(from: response) //which timer was it
         
         switch response.actionIdentifier {
-            case UNNotificationDefaultActionIdentifier:
+            case UNNotificationDefaultActionIdentifier: //user taps notification
                 
                 let name = Notification.Name("scrollToBubble")
                 let info = ["scrollRank" : timerID]
                 
-                delayExecution(.now() + 1) {
-                    NotificationCenter.default.post(name: name, object: nil, userInfo: info)
-                }
+                NotificationCenter.default.post(name: name, object: nil, userInfo: info)
                 
             case "repeat timer" :
                 print("repeat timer")
