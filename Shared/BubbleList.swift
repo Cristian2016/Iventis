@@ -76,7 +76,7 @@ struct BubbleList: View {
                     }
                     .background { RefresherView() }
                     .refreshable { refresh() }
-                    .onReceive(NotificationCenter.Publisher(center: .default, name: Notification.Name("scrollToBubble"))) {
+                    .onReceive(NotificationCenter.Publisher(center: .default, name: .scrollToTimer)) {
                         handleScrollToTimerNotification($0, proxy)
                     }
                 }

@@ -39,7 +39,7 @@ extension Notification.Name {
     static let createTimer = Notification.Name("createTimer")
     static let killTimer = Notification.Name("killTimer")
     
-    static let scrollToBubble = Notification.Name("scrollToBubble")
+    static let scrollToTimer = Notification.Name("scrollToTimer")
 } //1 ViewModel
 
 extension Notification {
