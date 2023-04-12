@@ -88,6 +88,8 @@ struct BubbleList: View {
     private func handleScrollToFinishedTimerNotification(_ output: Output, _ proxy:ScrollViewProxy) {
         let rank = output.userInfo!["scrollRank"] as! String
         
+        /* first remove all views that might obscure the finished timer. if finished timer is in the ordinary list and ordinary list is hidden [pinned only shows], show all bubbles. scroll to the finished timer */
+        
         secretary.durationPickerMode = nil //remove durationpicker
         secretary.showPaletteView = false //remove palette
         
