@@ -135,13 +135,16 @@ struct DurationPickerView: View {
     }
     
     private func handle(mode: Secretary.Mode?) {
-        if let mode = mode {
-            switch mode {
-                case .create(let tricolor):
-                    self.tricolor = tricolor
-                case .edit(let bubble):
-                    self.bubble = bubble
-            }
+        guard let mode = mode else {
+            if self.tricolor != nil { self.tricolor = nil }
+            return
+        }
+        
+        switch mode {
+            case .create(let tricolor):
+                self.tricolor = tricolor
+            case .edit(let bubble):
+                self.bubble = bubble
         }
     } //5
     

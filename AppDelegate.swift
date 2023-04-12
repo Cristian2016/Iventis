@@ -13,6 +13,8 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         UNUserNotificationCenter.current().delegate = self
         return true
     }
+    
+    let snoozes = [5, 10, 15, 30, 60]
 }
 
 extension AppDelegate: UNUserNotificationCenterDelegate {
@@ -45,47 +47,18 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
                     NotificationCenter.default.post(name: name, object: nil, userInfo: info)
                 }
                 
-            default: break
-        }
-        
-//        switch response.actionIdentifier {
-//
-//        case UNNotificationDefaultActionIdentifier:
-//            /*
-//             user taps notification
-//             if app was killed, it needs time to restart. without delay app crashes
-//             */
-//            delayExecution(.now() + 0.1) {
-////                cttvc.userTouchedNotification = (timerID, nil)
-//            }
-//
-//        case "repeat timer": //takes user to the finished timer and restarts it
-//            break
-//
-//        default:
-//                break
-//            let snoozes = [5, 10, 15, 30, 60]
-//            snoozes.forEach {
-//                if response.actionIdentifier == String($0) {
-//                    print("action identifier \(response.actionIdentifier)")
-//                }
-//            }
-//        }
+            case "repeat timer" :
+                print("repeat timer")
                 
-        completionHandler()
+            default:
+                print(response.actionIdentifier, " actionIdentifier")
+                break
+        }
+                
+        completionHandler() //notify system
     }
 
     // MARK: helpers
-    //maybe app is dead, so try to use a notification to the CTTVC instead. see if it works. if not, fuck it!
-    private func notifyCTTVCToRestartTimer(for timerID:String) {
-
-        let name = NSNotification.Name(rawValue: "repeatTimerWhenYouWakeUp")
-        let info = ["timerID" : timerID]
-        delayExecution(.now() + 0.1) {
-            NotificationCenter.default.post(name: name, object: nil, userInfo: info)
-        }
-    }
-
     private func getTimerID(from response:UNNotificationResponse) -> String {
         response.notification.request.identifier
     }
