@@ -114,7 +114,7 @@ struct BubbleDeleteButton: View {
                 .fill(bubble.sessions_.isEmpty ? metrics.bubbleColor.opacity(0.4) : metrics.bubbleColor)
                 .frame(width: 208, height: 84)
                 .overlay {
-                    Text("History \(bubble.sessions_.count)")
+                    Text("\(bubble.sessions_.count) Items")
                         .font(.system(size: 32, weight: .medium, design: .rounded))
                         .foregroundColor(bubble.sessions_.isEmpty ? .black : .white)
                 }
