@@ -114,7 +114,7 @@ struct BubbleDeleteButton: View {
                 .fill(bubble.sessions_.isEmpty ? metrics.bubbleColor.opacity(0.4) : metrics.bubbleColor)
                 .frame(width: 208, height: 84)
                 .overlay {
-                    Text("\(bubble.sessions_.count) Items")
+                    Text("^[\(bubble.sessions_.count) Entry](inflect: true)")
                         .font(.system(size: 32, weight: .medium, design: .rounded))
                         .foregroundColor(bubble.sessions_.isEmpty ? .black : .white)
                 }
