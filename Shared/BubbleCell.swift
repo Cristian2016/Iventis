@@ -16,7 +16,7 @@ struct BubbleCell: View {
     let metrics = Metrics()
     @State private var pula = false
     
-    @StateObject private var bubble:Bubble
+    @ObservedObject private var bubble:Bubble
     
     @EnvironmentObject private var viewModel:ViewModel
     @EnvironmentObject private var layoutViewModel:LayoutViewModel
@@ -97,7 +97,7 @@ struct BubbleCell: View {
             
     // MARK: -
     init(_ bubble:Bubble) {
-        _bubble = StateObject(wrappedValue: bubble)
+        _bubble = ObservedObject(wrappedValue: bubble)
     }
     
     func handleNoteTap() {

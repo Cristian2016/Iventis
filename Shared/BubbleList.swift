@@ -53,8 +53,8 @@ struct BubbleList: View {
                                 ZStack {
                                     NavigationLink(value: bubble) { }.opacity(0)
                                     BubbleCell(bubble)
-                                        .offset(y: -6)
                                 }
+                                .offset(y: -6)
                                 .id(String(bubble.rank))
                             }
                         }
