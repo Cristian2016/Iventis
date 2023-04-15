@@ -56,7 +56,7 @@ struct BubbleDeleteButton: View {
             Image(systemName: "info.circle.fill")
                 .fontWeight(.medium)
                 .contentShape(Rectangle())
-                .padding(-20)
+                .padding(-14)
                 .font(.system(size: 24))
             RoundedRectangle(cornerRadius: metrics.radius)
                 .frame(width: metrics.width, height: metrics.height)
