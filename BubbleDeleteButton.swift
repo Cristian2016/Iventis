@@ -53,11 +53,11 @@ struct BubbleDeleteButton: View {
     
     private var roundedBackground:some View {
         ZStack(alignment: .topLeading) {
-            Image(systemName: "info.circle.fill")
-                .fontWeight(.medium)
-                .contentShape(Rectangle())
-                .padding(-14)
-                .font(.system(size: 24))
+//            Image(systemName: "info.circle.fill")
+//                .fontWeight(.medium)
+//                .contentShape(Rectangle())
+//                .padding(-14)
+//                .font(.system(size: 24))
             RoundedRectangle(cornerRadius: metrics.radius)
                 .frame(width: metrics.width, height: metrics.height)
                 .standardShadow()
@@ -67,7 +67,7 @@ struct BubbleDeleteButton: View {
     }
     
     private var titleLabel:some View {
-        Text("\(Image.trash) Delete")
+        Text("\(Image.info) Delete")
             .foregroundColor(.red)
             .padding(.bottom, 6)
             .allowsHitTesting(false)

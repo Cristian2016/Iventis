@@ -10,8 +10,8 @@
 
 \f0\fs30 \cf2 \cb3 PersistenceController\
 \pard\tx741\pardeftab741\partightenfactor0
-\cf4 \cb3 lazy\cf5  \cf4 var\cf5  \cf2 \cb3 bContext\cf5 \cb3 :\cf6 NSManagedObjectContext\cf5  = \{\
-       \cf4 let\cf5  bContext = \cf2 \cb3 container\cf5 \cb3 .\cf7 newBackgroundContext\cf5 ()\
+\cf4 lazy\cf5  \cf4 var\cf5  \cf2 bContext\cf5 :\cf6 NSManagedObjectContext\cf5  = \{\
+       \cf4 let\cf5  bContext = \cf2 container\cf5 .\cf7 newBackgroundContext\cf5 ()\
         bContext.automaticallyMergesChangesFromParent = \cf4 true\cf5  \cf8 //
 \f1 \uc0\u9888 \u65039 
 \f0 \cf5 \
@@ -20,4 +20,7 @@
 \cf8 //
 \f1 \uc0\u9888 \u65039 
 \f0  I replaced mergePolicy with automaticallyMergesChangesFromParent! make sure it does not crash\cf5 \
+\
+not good! switched back to amcfp\
+\
 }
