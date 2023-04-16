@@ -126,7 +126,7 @@ extension SessionDeleteButton {
             ZStack {
                 if show {
                     let title = "Delete Entry"
-                    let subtitle = "Any associated Calendar Event will be removed from the Calendar App"
+                    let subtitle = "If an entry has a corresponding Calendar Event, the Event will be removed from the Calendar App"
                     
                     Color.black.opacity(0.6).ignoresSafeArea()
                     ThinMaterialLabel(title, subtitle) { content } action: { dismiss() }
