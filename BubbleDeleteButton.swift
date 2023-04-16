@@ -67,11 +67,11 @@ struct BubbleDeleteButton: View {
     }
     
     private var titleLabel:some View {
-        Text("\(Image.info) Delete")
+        Text("\(Image.info) **Delete**")
             .foregroundColor(.red)
             .padding(.bottom, 6)
             .allowsHitTesting(false)
-            .font(.system(size: 23, weight: .medium))
+            .font(.system(size: 23))
     }
     
     //delete bubble action

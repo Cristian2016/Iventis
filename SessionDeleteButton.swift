@@ -22,8 +22,8 @@ struct SessionDeleteButton: View {
             if input != nil {
                 Color.white.opacity(0.01).onTapGesture { cancelDeleteAction() }
                 VStack (spacing:8) {
-                    Text("\(Image.info) Delete")
-                        .font(.system(size: 23, weight: .medium))
+                    Text("\(Image.info) **Delete**")
+                        .font(.system(size: 23))
                         .foregroundColor(.red)
                         .allowsHitTesting(false)
                     deleteButton
