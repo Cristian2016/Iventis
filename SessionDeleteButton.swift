@@ -22,9 +22,9 @@ struct SessionDeleteButton: View {
             if input != nil {
                 Color.white.opacity(0.01).onTapGesture { cancelDeleteAction() }
                 VStack (spacing:8) {
-                    Text("Session \(input!.sessionRank) \(Image.info)")
+                    Text("\(Image.info) Delete")
                         .font(.system(size: 21, weight: .medium))
-                        .foregroundColor(Color("silverText"))
+                        .foregroundColor(.red)
                         .allowsHitTesting(false)
                     deleteButton
                 }
@@ -77,7 +77,7 @@ struct SessionDeleteButton: View {
                 .fill(metrics!.bubbleColor)
                 .frame(width: 208, height: 90)
                 .overlay {
-                    Text("Delete")
+                    Text("Entry \(input!.sessionRank)")
                         .font(.system(size: 32, weight: .medium, design: .rounded))
                         .foregroundColor(.white)
                 }
