@@ -23,7 +23,7 @@ struct SessionDeleteButton: View {
                 Color.white.opacity(0.01).onTapGesture { cancelDeleteAction() }
                 VStack (spacing:8) {
                     Text("\(Image.info) Delete")
-                        .font(.system(size: 21, weight: .medium))
+                        .font(.system(size: 23, weight: .medium))
                         .foregroundColor(.red)
                         .allowsHitTesting(false)
                     deleteButton
@@ -125,7 +125,7 @@ extension SessionDeleteButton {
         var body: some View {
             ZStack {
                 if show {
-                    let title = "Delete Session"
+                    let title = "Delete Entry"
                     let subtitle = "Any associated Calendar Event will be removed from the Calendar App"
                     
                     Color.black.opacity(0.6).ignoresSafeArea()
