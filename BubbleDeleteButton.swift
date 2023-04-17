@@ -215,7 +215,7 @@ extension BubbleDeleteButton {
                         VStack {
                             Text("A Bubble's activity is made up of entries. Calendar-enabled bubbles \(Image.calendar) will create a calendar event for each entry")
                             Divider()
-                            Text("Ex: Calendar-enabled 20 minutes timer has two entries in its activity. Each entry has a corresponding event in the Calendar App")
+                            Text("Ex: Calendar-enabled 20 minutes timer. The timer's activity has so far two entries. Each entry has a corresponding event in the Calendar App")
                             Image("bubbleDeleteMoreInfo")
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
