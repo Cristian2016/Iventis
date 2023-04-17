@@ -20,8 +20,10 @@ struct iPhoneViewHierarchy: View {
                 BubbleList(showFavoritesOnly, showDetail_bRank)
                     .onReceive(secretary.$showFavoritesOnly) { showFavoritesOnly = $0 }
                     .onReceive(secretary.$showDetail_bRank) { showDetail_bRank = $0 }
+                    .navigationTitle("")
+                    .navigationBarTitleDisplayMode(.inline)
             }
-            .tint(.clear)
+            .tint(.black)
             PaletteView()
             DurationPickerView()
         }
