@@ -195,6 +195,7 @@ extension BubbleDeleteButton {
                         Secretary.shared.bubbleDeleteButtonShowMore = true
                     }
                     .buttonStyle(.bordered)
+                    .tint(.blue)
                 }
             }
         }
