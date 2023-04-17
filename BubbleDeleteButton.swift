@@ -213,15 +213,21 @@ extension BubbleDeleteButton {
                 if show {
                     ScrollView {
                         VStack {
+                            HStack {
+                                Spacer()
+                                Button("Dismiss") {
+                                    Secretary.shared.bubbleDeleteButtonShowMore = false
+                                }
+                                .buttonStyle(.bordered)
+                                .tint(.red)
+                            }
+                            
                             Text("A Bubble's activity is made up of entries. Calendar-enabled \(Image.calendar) bubbles create a calendar event for each entry")
                             Divider()
                             Text("Ex: Calendar-enabled 20 minutes timer. The timer's activity has two entries. Each entry has a corresponding event in the Calendar App")
                             Image("bubbleDeleteMoreInfo")
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
-                        }
-                        .onTapGesture {
-                            Secretary.shared.bubbleDeleteButtonShowMore = false
                         }
                     }
                     .scrollIndicators(.hidden)
