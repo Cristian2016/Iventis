@@ -224,8 +224,8 @@ extension BubbleDeleteButton {
                             Secretary.shared.bubbleDeleteButtonShowMore = false
                         }
                     }
-                    .padding()
                     .background()
+                    .padding()
                 }
             }
             .onReceive(Secretary.shared.$bubbleDeleteButtonShowMore) { show = $0 }
