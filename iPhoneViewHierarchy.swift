@@ -3,7 +3,7 @@
 //  Timers (iOS)
 //
 //  Created by Cristian Lapusan on 26.01.2023.
-//
+//1 show in DetailView only back button without any title 🟪Feature
 
 import SwiftUI
 
@@ -20,8 +20,8 @@ struct iPhoneViewHierarchy: View {
                 BubbleList(showFavoritesOnly, showDetail_bRank)
                     .onReceive(secretary.$showFavoritesOnly) { showFavoritesOnly = $0 }
                     .onReceive(secretary.$showDetail_bRank) { showDetail_bRank = $0 }
-                    .navigationTitle("")
-                    .navigationBarTitleDisplayMode(.inline)
+                    .navigationTitle("") //1
+                    .navigationBarTitleDisplayMode(.inline) //1
             }
             .tint(.black)
             PaletteView()
