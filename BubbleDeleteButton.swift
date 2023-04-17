@@ -163,11 +163,12 @@ struct BubbleDeleteButton: View {
     private func removeAddTagButton() { viewModel.removeAddNoteButton(bubble) }
 }
 
+//show up in ViewHierarchy
 extension BubbleDeleteButton {
     struct Info:View {
         @State private var show = false
         private let title = "Delete Bubble/Activity Entries"
-        let subtitle = "Calendar Events are safe! Delete actions do not remove events in the Calendar App"
+        let subtitle = "Calendar Events are safe! Delete actions do not remove events from the Calendar App"
         
         var body: some View {
             ZStack {
@@ -202,5 +203,30 @@ extension BubbleDeleteButton {
         
         // MARK: -
         private func dismiss() { Secretary.shared.showBubbleDeleteInfo = false }
+    }
+    
+    struct MoreInfo: View {
+        @State private var show = false
+        
+        var body: some View {
+            ZStack {
+                if show {
+                    ScrollView {
+                        VStack {
+                            Text("A Bubble's activity is made up of entries. Calendar-enabled bubbles \(Image.calendar) will create a calendar event for each entry")
+                                .padding()
+                            Image("bubbleDeleteMoreInfo")
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                        }
+                        .onTapGesture {
+                            Secretary.shared.bubbleDeleteButtonShowMore = false
+                        }
+                    }
+                    .background()
+                }
+            }
+            .onReceive(Secretary.shared.$bubbleDeleteButtonShowMore) { show = $0 }
+        }
     }
 }
