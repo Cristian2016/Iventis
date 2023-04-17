@@ -192,7 +192,7 @@ extension BubbleDeleteButton {
                     Text("**Dismiss** \(Image.tap) Tap")
                     Text("*outside Gray Shape*")
                     Button("show more") {
-                        print("show more info")
+                        Secretary.shared.bubbleDeleteButtonShowMore = true
                     }
                     .buttonStyle(.bordered)
                 }
