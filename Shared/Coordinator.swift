@@ -141,7 +141,7 @@ class BubbleCellCoordinator {
     @Published var timeComponents = Components("-1", "-1", "-1", "-1")
     var timeComponentsSet:Bool { timeComponents.hr != "-1" }
     @Published private(set) var timeComponentsOpacity = Opacity()
-    var colorChangePublisher:Publisher<Color, Never>
+    var colorPublisher:Publisher<Color, Never>
     
     private func computeTimerProgress(for bubble:Bubble, and value:Float) -> Double {
         1 - Double(value/(bubble.initialClock))
@@ -259,7 +259,7 @@ class BubbleCellCoordinator {
     // MARK: - Init Deinit
     init(for bubble:Bubble) {
         self.bubble = bubble
-        self.colorChangePublisher = .init(Color.bubbleColor(forName: bubble.color))
+        self.colorPublisher = .init(Color.bubbleColor(forName: bubble.color))
         self.isTimer = bubble.kind != .stopwatch
         
         refreshOnAppActive()
