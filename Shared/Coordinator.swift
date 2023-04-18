@@ -241,7 +241,7 @@ class BubbleCellCoordinator {
     
     private var activePhaseCalled = false
     
-    ///set refresh to true
+    ///sets refresh to true
     private func observeAppActive() {
         NotificationCenter.default.addObserver(forName: .didBecomeActive, object: nil, queue: nil) { [weak self] _ in
             if self?.refresh == false { self?.refresh = true }
