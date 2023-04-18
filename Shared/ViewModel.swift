@@ -528,7 +528,6 @@ extension ViewModel {
     //MoreOptionsView color change
     func changeColor(of bubble:Bubble, to newColor:String) {
         //don't do anything unless user changed color
-//        if bubble.color == newColor { return }
         UserFeedback.singleHaptic(.medium)
         
         DispatchQueue.global().async {
@@ -545,7 +544,7 @@ extension ViewModel {
                 self.controller.save(bContext) {
                     let color = Color.bubbleColor(forName: thisBubble.color)
                     delayExecution(self.delay) {
-                        bubble.coordinator.colorChangePublisher.send(color)
+                        bubble.coordinator.colorPublisher.send(color)
                     }
                 }
             }

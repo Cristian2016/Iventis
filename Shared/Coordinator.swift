@@ -244,6 +244,7 @@ class BubbleCellCoordinator {
     private func refreshOnAppActive() {
         NotificationCenter.default.addObserver(forName: .didBecomeActive, object: nil, queue: nil) { [weak self] _ in
             if self?.refresh == false { self?.refresh = true }
+            print(#function, " \(self?.bubble?.color ?? "pula")")
         }
     } //12
     
@@ -262,6 +263,9 @@ class BubbleCellCoordinator {
         self.colorPublisher = .init(Color.bubbleColor(forName: bubble.color))
         self.isTimer = bubble.kind != .stopwatch
         
+        print(#function, " \(bubble.color ?? "pula")")
+        
+        //refresh components when app active again
         refreshOnAppActive()
     }
     
