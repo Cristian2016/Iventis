@@ -241,7 +241,8 @@ class BubbleCellCoordinator {
     
     private var activePhaseCalled = false
     
-    private func refreshOnAppActive() {
+    ///set refresh to true
+    private func observeAppActive() {
         NotificationCenter.default.addObserver(forName: .didBecomeActive, object: nil, queue: nil) { [weak self] _ in
             if self?.refresh == false { self?.refresh = true }
             print(#function, " \(self?.bubble?.color ?? "pula")")
@@ -266,7 +267,7 @@ class BubbleCellCoordinator {
         print(#function, " \(bubble.color ?? "pula")")
         
         //refresh components when app active again
-        refreshOnAppActive()
+        observeAppActive()
     }
     
     deinit {
