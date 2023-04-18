@@ -249,7 +249,7 @@ class BubbleCellCoordinator {
         }
     } //12
     
-    ///notifies ViewModel to finish bubble
+    ///notifies ViewModel to finish bubble. refresh components when app active again
     private func finishBubble(_ overspill:Float? = nil) {
         guard let bubble = bubble else { return }
         
@@ -263,11 +263,9 @@ class BubbleCellCoordinator {
         self.bubble = bubble
         self.colorPublisher = .init(Color.bubbleColor(forName: bubble.color))
         self.isTimer = bubble.kind != .stopwatch
+        observeAppActive()
         
         print(#function, " \(bubble.color ?? "pula")")
-        
-        //refresh components when app active again
-        observeAppActive()
     }
     
     deinit {
