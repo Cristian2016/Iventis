@@ -223,18 +223,21 @@ extension BubbleDeleteButton {
                             }
                             
                             Text("A Bubble's activity is made up of entries. Calendar-enabled \(Image.calendar) bubbles create a calendar event for each entry")
+                                .foregroundColor(.black)
                             Divider()
                             Text("Ex: **Calendar-enabled \(Image.calendar), 20 Minute Timer.** Timer's activity has two entries. Each entry has a corresponding event in the Calendar App")
+                                .foregroundColor(.black)
                             Image("bubbleDeleteMoreInfo")
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
                             Divider()
                             Text("To sum up the user can **delete \(Image(systemName: "1.circle.fill")) the bubble** / **\(Image(systemName: "2.circle.fill")) its activity** / **\(Image(systemName: "3.circle.fill")) a single entry**. Unlike **\(Image(systemName: "1.circle.fill")) \(Image(systemName: "2.circle.fill"))**, **\(Image(systemName: "3.circle.fill"))** will remove both the entry and its corresponding Calendar App event. To **\(Image(systemName: "3.circle.fill")) delete a single entry** long-press on that entry")
+                                .foregroundColor(.black)
                         }
                     }
                     .scrollIndicators(.hidden)
                     .padding()
-                    .background()
+                    .background(.white)
                 }
             }
             .edgesIgnoringSafeArea(.bottom)

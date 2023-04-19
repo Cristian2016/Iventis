@@ -23,7 +23,7 @@ struct iPhoneViewHierarchy: View {
                     .navigationTitle("") //1
                     .navigationBarTitleDisplayMode(.inline) //1
             }
-            .tint(.black)
+            .tint(.label)
             PaletteView()
             DurationPickerView()
         }
