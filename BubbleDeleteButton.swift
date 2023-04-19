@@ -229,7 +229,7 @@ extension BubbleDeleteButton {
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
                             Divider()
-                            Text("To sum up the user can **delete \(Image(systemName: "1.circle.fill")) the bubble** / **\(Image(systemName: "2.circle.fill")) its activity** / **\(Image(systemName: "3.circle.fill")) a single entry**. Unlike **\(Image(systemName: "1.circle.fill")) \(Image(systemName: "2.circle.fill"))**, **\(Image(systemName: "3.circle.fill"))** will remove both the entry and its corresponding event from the Calendar App. To **\(Image(systemName: "3.circle.fill")) delete a single entry** long-press on that entry")
+                            Text("To sum up the user can **delete \(Image(systemName: "1.circle.fill")) the bubble** / **\(Image(systemName: "2.circle.fill")) its activity** / **\(Image(systemName: "3.circle.fill")) a single entry**. Unlike **\(Image(systemName: "1.circle.fill")) \(Image(systemName: "2.circle.fill"))**, **\(Image(systemName: "3.circle.fill"))** will remove both the entry and its corresponding Calendar App event. To **\(Image(systemName: "3.circle.fill")) delete a single entry** long-press on that entry")
                         }
                     }
                     .scrollIndicators(.hidden)
