@@ -147,7 +147,7 @@ extension SessionDeleteButton {
                     Text("**Dismiss** \(Image.tap) Tap")
                     Text("*outside Gray Shape*")
                         .forceMultipleLines()
-                    Button("Show More") {
+                    Button("Learn More") {
                         Secretary.shared.bubbleDeleteButtonShowMore = true
                     }
                     .buttonStyle(.bordered)
