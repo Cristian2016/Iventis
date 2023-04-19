@@ -224,7 +224,7 @@ extension BubbleDeleteButton {
                             
                             Text("A Bubble's activity is made up of entries. Calendar-enabled \(Image.calendar) bubbles create a calendar event for each entry")
                             Divider()
-                            Text("Ex: **Calendar-enabled \(Image.calendar), 20 Minute Timer.** Timer's activity has two entries. Each entry has a corresponding event in the Calendar App")
+                            Text("Ex: **Calendar-enabled \(Image.calendar), 20 Minute Timer.** Timer's activity has two entries and each entry has a corresponding event in the Calendar App")
                             Image("bubbleDeleteMoreInfo")
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
@@ -235,6 +235,7 @@ extension BubbleDeleteButton {
                     .background()
                 }
             }
+            .edgesIgnoringSafeArea(.bottom)
             .onReceive(Secretary.shared.$bubbleDeleteButtonShowMore) { show = $0 }
         }
     }

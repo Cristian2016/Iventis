@@ -44,6 +44,34 @@ class BubbleCellCoordinator {
             let theInitialValue = self.initialValue(theBubble)
             
             switch moment {
+                case .automatic:
+                    let comp = theInitialValue.timeComponentsAsStrings
+                    let progress = self.computeTimerProgress(for: theBubble, and: theInitialValue)
+                    
+                    DispatchQueue.main.async {
+                        self.timeComponents = Components(comp.hr, comp.min, comp.sec, comp.hundredths)
+                        self.timeComponentsOpacity.updateOpacity(theInitialValue)
+                        
+                        //compute timer progress
+                        if bubble.isTimer {
+                            switch bubble.state {
+                                case .finished:
+                                    self.timerProgress = "Done"
+                                case .brandNew:
+                                    self.timerProgress = "OK"
+                                default:
+                                    self.timerProgress = String(format: "%.2f", progress)
+                            }
+                        }
+                    }
+                    
+                    if theBubble.state == .running {
+                        DispatchQueue.main.async { self.timeComponents.hundredths = "" }
+                        self.refresh = true
+                        self.publisher
+                            .sink { [weak self] _ in self?.task(theBubble) }
+                            .store(in: &self.cancellable) //connect
+                    }
                     
                 case .finishTimer:
                     self.cancellable = []
@@ -54,38 +82,6 @@ class BubbleCellCoordinator {
                     
                 case .showAll:
                     if theBubble.state == .running && !theBubble.isPinned { self.refresh = true }
-                    
-                case .automatic:
-                    let comp = theInitialValue.timeComponentsAsStrings
-                    let progress = self.computeTimerProgress(for: theBubble, and: theInitialValue)
-                    
-                    DispatchQueue.main.async {
-                        self.timeComponents = Components(comp.hr, comp.min, comp.sec, comp.hundredths)
-                        self.timeComponentsOpacity.updateOpacity(theInitialValue)
-                        
-                        switch bubble.state {
-                            case .finished:
-                                self.timerProgress = "Done"
-                            case .brandNew:
-                                self.timerProgress = "OK"
-                            default:
-                                self.timerProgress = String(format: "%.2f", progress)
-                        }
-                        
-//                        if bubble.state == .finished {
-//                            self.timerProgress = "Done"
-//                        } else {
-//                            self.timerProgress = String(format: "%.2f", progress)
-//                        }
-                    }
-                    
-                    if theBubble.state == .running {
-                        DispatchQueue.main.async { self.timeComponents.hundredths = "" }
-                        self.refresh = true
-                        self.publisher
-                            .sink { [weak self] _ in self?.task(theBubble) }
-                            .store(in: &self.cancellable) //connect
-                    }
                     
                 case .user(let action):
                     switch action {
