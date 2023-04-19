@@ -33,9 +33,9 @@ struct ViewHierarchy: View {
                 if let bubble = viewModel.bubble(for: Int(secretary.deleteAction_bRank!)) {
                     BubbleDeleteButton(bubble)
                     BubbleDeleteButton.Info()
-                    BubbleDeleteButton.MoreInfo()
                 }
             }
+            BubbleDeleteButton.MoreInfo()
             
             if let pair = notesForPair { PairStickyNoteList(pair) }
             MoreOptionsView()
