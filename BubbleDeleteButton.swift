@@ -192,11 +192,10 @@ extension BubbleDeleteButton {
                 VStack(alignment: .leading) {
                     Text("**Dismiss** \(Image.tap) Tap")
                     Text("*outside Gray Shape*")
-                    Button("show more") {
+                    Button("Show More") {
                         Secretary.shared.bubbleDeleteButtonShowMore = true
                     }
                     .buttonStyle(.bordered)
-                    .tint(.blue)
                 }
             }
         }
