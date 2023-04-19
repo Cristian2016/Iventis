@@ -151,6 +151,7 @@ extension SessionDeleteButton {
                         Secretary.shared.bubbleDeleteButtonShowMore = true
                     }
                     .buttonStyle(.bordered)
+                    .tint(.blue)
                 }
             }
             .font(.system(size: 20))
