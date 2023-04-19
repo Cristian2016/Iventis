@@ -168,7 +168,7 @@ extension BubbleDeleteButton {
     struct Info:View {
         @State private var show = false
         private let title = "Delete Bubble/Activity"
-        let subtitle = "Calendar Events are safe! Deleting either the bubble or its activity will not remove events from the Calendar App"
+        let subtitle = "Calendar Events are safe! Deleting the bubble or its activity does not remove events from the Calendar App"
         
         var body: some View {
             ZStack {
