@@ -132,11 +132,10 @@ class BubbleCellCoordinator {
     
     // MARK: - Publishers
     //1 BubbleCell
-    @Published var timeComponents = Components("-1", "-1", "-1", "-1")
-    @Published private(set) var timeComponentsOpacity = Opacity()
-    private(set) var color:Publisher<Color, Never>
-    @Published var timerProgress = "0.00" //8
-    var timeComponentsSet:Bool { timeComponents.hr != "-1" }
+    @Published var timeComponents = Components("-1", "-1", "-1", "-1") //ThreeLabels & HundredthsLabel
+    @Published private(set) var timeComponentsOpacity = Opacity() //ThreeCircles opacity
+    private(set) var color:Publisher<Color, Never> //ThreeCircles color
+    @Published var timerProgress = "0.00" //8 Timers only
     
     //2 StartDelayBubble
     @Published var sdbOffset = CGFloat(0) //start delay button YOffset
