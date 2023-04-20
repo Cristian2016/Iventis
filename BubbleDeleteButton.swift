@@ -35,7 +35,7 @@ struct BubbleDeleteButton: View {
         ZStack {
             transparentBackground
             roundedBackground
-                .overlay(controls)
+                .overlay(controls) //title and 2 delete buttons
                 .onTapGesture { secretary.showBubbleDeleteInfo = true }
         }
     }
