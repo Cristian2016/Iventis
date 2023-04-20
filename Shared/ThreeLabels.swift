@@ -75,9 +75,9 @@ struct ThreeLabels: View {
             .font(.system(size: timeComponentsFontSize))
             .fontDesign(.rounded)
             .foregroundColor(.white)
-            .onReceive(bubble.coordinator.$timeComponents) {
-                min = $0.min
-                hr = $0.hr
+            .onReceive(bubble.coordinator.$timeComponents) { components in
+                hr = components.hr
+                min = components.min
             }
     }
     
