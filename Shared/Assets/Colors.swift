@@ -69,7 +69,7 @@ extension Color {
         static let red = Tricolor(description: Name.red.rawValue,
                                hr: Color(#colorLiteral(red: 0.9993676543, green: 0.515832901, blue: 0.4665791392, alpha: 1)), min: Color(#colorLiteral(red: 0.9752207398, green: 0.301009059, blue: 0.2363895774, alpha: 1)), sec: Color(#colorLiteral(red: 0.9948095679, green: 0.04287932068, blue: 0.01928717084, alpha: 1)))
         static let sky = Tricolor(description: Name.sky.rawValue,
-                               hr: Color(#colorLiteral(red: 0.6118832231, green: 0.8855128884, blue: 1, alpha: 1)), min: Color(#colorLiteral(red: 0.09564081579, green: 0.8035189509, blue: 0.9921918511, alpha: 1)), sec: Color(#colorLiteral(red: 0, green: 0.7678601742, blue: 0.9985458255, alpha: 1)))
+                               hr: Color(#colorLiteral(red: 0.6118832231, green: 0.8855128884, blue: 1, alpha: 1)), min: Color(#colorLiteral(red: 0.01006806083, green: 0.6884089112, blue: 0.852398932, alpha: 1)), sec: Color(#colorLiteral(red: 0.01006806083, green: 0.6884089112, blue: 0.852398932, alpha: 1)))
         static let bubbleGum = Tricolor(description: Name.bubbleGum.rawValue,
                                      hr: Color(#colorLiteral(red: 1, green: 0.6671735644, blue: 0.813333869, alpha: 1)), min: Color(#colorLiteral(red: 1, green: 0.4408499599, blue: 0.6894205213, alpha: 1)), sec: Color(#colorLiteral(red: 0.996430099, green: 0.3117666543, blue: 0.6224691272, alpha: 1)))
         
