@@ -35,6 +35,7 @@ struct BubbleDeleteButton: View {
         ZStack {
             transparentBackground
             roundedBackground
+                .onTapGesture { secretary.showBubbleDeleteInfo = true }
                 .overlay( Push(.bottomMiddle) {
                     VStack(spacing: 4) {
                         titleLabel
@@ -42,7 +43,7 @@ struct BubbleDeleteButton: View {
                         bottomButton
                     }
                 }
-                    .padding([.bottom], 18) )
+                .padding([.bottom], 18) )
         }
     }
     
@@ -52,18 +53,10 @@ struct BubbleDeleteButton: View {
     }
     
     private var roundedBackground:some View {
-        ZStack(alignment: .topLeading) {
-//            Image(systemName: "info.circle.fill")
-//                .fontWeight(.medium)
-//                .contentShape(Rectangle())
-//                .padding(-14)
-//                .font(.system(size: 24))
-            RoundedRectangle(cornerRadius: metrics.radius)
-                .frame(width: metrics.width, height: metrics.height)
-                .standardShadow()
-        }
-        .foregroundColor(metrics.backgroundColor)
-        .onTapGesture { secretary.showBubbleDeleteInfo = true }
+        RoundedRectangle(cornerRadius: metrics.radius)
+            .frame(width: metrics.width, height: metrics.height)
+            .standardShadow()
+            .foregroundColor(metrics.backgroundColor)
     }
     
     private var titleLabel:some View {
