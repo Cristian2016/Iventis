@@ -22,7 +22,7 @@ struct SecondsCircle: View {
                 .gesture(tap)
                 .gesture(longPress)
                 
-            HundredthsCircle(bubble: bubble)
+            HundredthsLabel(bubble: bubble)
         }
         .scaleEffect(x: scale, y: scale)
     }

@@ -196,7 +196,7 @@
 		1FE163AE280EE6F40050C6F5 /* LeftStrip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FE163AD280EE6F40050C6F5 /* LeftStrip.swift */; };
 		1FE3B6F72983ECBF00B9C5D0 /* Explanations.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 1FE3B6F62983ECBF00B9C5D0 /* Explanations.rtf */; };
 		1FE68FAE29A135C600D05EE6 /* SecondsCircle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FE68FAD29A135C600D05EE6 /* SecondsCircle.swift */; };
-		1FE68FB029A13BF700D05EE6 /* HundredthsCircle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FE68FAF29A13BF700D05EE6 /* HundredthsCircle.swift */; };
+		1FE68FB029A13BF700D05EE6 /* HundredthsLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FE68FAF29A13BF700D05EE6 /* HundredthsLabel.swift */; };
 		1FE722A128E58200005ADA8E /* ColorConfirmationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FE722A028E58200005ADA8E /* ColorConfirmationView.swift */; };
 		1FE76DBA29C9F213003012F0 /* BlueInfoButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FE76DB929C9F213003012F0 /* BlueInfoButton.swift */; };
 		1FEB508629DED01F000C242E /* BubbleDeleteActionAlert1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FEB508529DED01F000C242E /* BubbleDeleteActionAlert1.swift */; };
@@ -392,7 +392,7 @@
 		1FE163AD280EE6F40050C6F5 /* LeftStrip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftStrip.swift; sourceTree = "<group>"; };
 		1FE3B6F62983ECBF00B9C5D0 /* Explanations.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = Explanations.rtf; sourceTree = "<group>"; };
 		1FE68FAD29A135C600D05EE6 /* SecondsCircle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondsCircle.swift; sourceTree = "<group>"; };
-		1FE68FAF29A13BF700D05EE6 /* HundredthsCircle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HundredthsCircle.swift; sourceTree = "<group>"; };
+		1FE68FAF29A13BF700D05EE6 /* HundredthsLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HundredthsLabel.swift; sourceTree = "<group>"; };
 		1FE722A028E58200005ADA8E /* ColorConfirmationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorConfirmationView.swift; sourceTree = "<group>"; };
 		1FE76DB929C9F213003012F0 /* BlueInfoButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlueInfoButton.swift; sourceTree = SOURCE_ROOT; };
 		1FEB508529DED01F000C242E /* BubbleDeleteActionAlert1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BubbleDeleteActionAlert1.swift; sourceTree = SOURCE_ROOT; };
@@ -511,7 +511,7 @@
 				1FD2A3DC29C10C6C00EB7B10 /* DeleteConfirmationLabel.swift */,
 				1F04768C29BB073000641CDC /* SecondsLabel.swift */,
 				1FF5AC3929A9EDC4000DD0E2 /* NeedlePositionKey.swift */,
-				1FE68FAF29A13BF700D05EE6 /* HundredthsCircle.swift */,
+				1FE68FAF29A13BF700D05EE6 /* HundredthsLabel.swift */,
 				1F7F1AE329A10D9C0061EB40 /* View Modifiers.swift */,
 				1F6FA29B2993E4E300D7EF90 /* ShowAllBubblesButton.swift */,
 				1F8AAFA229927B2900328AC7 /* FramePortrait.swift */,
@@ -1021,7 +1021,7 @@
 				1FA377E82972FE75005ACD41 /* Library.swift in Sources */,
 				1FA355CB2832186100F73111 /* CalendarManager.swift in Sources */,
 				1FB5D8D828E96CBD00DD522A /* StartDelayInfoView.swift in Sources */,
-				1FE68FB029A13BF700D05EE6 /* HundredthsCircle.swift in Sources */,
+				1FE68FB029A13BF700D05EE6 /* HundredthsLabel.swift in Sources */,
 				1F5987A2286B5DFC00CDB54C /* PairSavedNote.swift in Sources */,
 				1F0FD40629A4D93D0097FF7F /* DetailViewInfoButton.swift in Sources */,
 				1FB8E85229E2FC870005909E /* ScheduledNotificationsManager.swift in Sources */,
