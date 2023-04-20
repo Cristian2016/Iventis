@@ -41,10 +41,6 @@ struct BubbleCell: View {
             deleteActionButton
             moreOptionsButton
         }
-        .onAppear { //before the view appears
-            let timeComponentsAreSet = bubble.coordinator.timeComponentsSet
-            if !timeComponentsAreSet { bubble.coordinator.update(.automatic) }
-        }
     }
     
     // MARK: - Legos    

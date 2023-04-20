@@ -265,7 +265,7 @@ class BubbleCellCoordinator {
         self.isTimer = bubble.kind != .stopwatch
         observeAppActive()
         
-        print(#function, " \(bubble.color ?? "pula")")
+        self.update(.automatic)
     }
     
     deinit {
