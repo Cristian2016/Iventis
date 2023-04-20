@@ -131,11 +131,12 @@ class BubbleCellCoordinator {
     }
     
     // MARK: - Publishers
-    @Published var timerProgress = "0.00" //8
     @Published var timeComponents = Components("-1", "-1", "-1", "-1")
-    var timeComponentsSet:Bool { timeComponents.hr != "-1" }
     @Published private(set) var timeComponentsOpacity = Opacity()
-    var color:Publisher<Color, Never>
+    private(set) var color:Publisher<Color, Never>
+    
+    @Published var timerProgress = "0.00" //8
+    var timeComponentsSet:Bool { timeComponents.hr != "-1" }
     
     @Published var sdbOffset = CGFloat(0) //start delay button YOffset
     @Published var sdbDeleteTriggered = false //start delay button delete triggered
