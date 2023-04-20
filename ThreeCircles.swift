@@ -44,7 +44,7 @@ struct ThreeCircles: View {
                     minOpacity = output.min
                     hrOpacity = output.hr
                 }
-                .onReceive(bubble.coordinator.colorPublisher) { color = $0 }
+                .onReceive(bubble.coordinator.color) { color = $0 }
             }
     }
     

@@ -130,15 +130,17 @@ class BubbleCellCoordinator {
         }
     }
     
-    @Published var sdbOffset = CGFloat(0) //start delay button YOffset
-    @Published var sdbDeleteTriggered = false //start delay button delete triggered
-    
+    // MARK: - Publishers
     @Published var timerProgress = "0.00" //8
     @Published var timeComponents = Components("-1", "-1", "-1", "-1")
     var timeComponentsSet:Bool { timeComponents.hr != "-1" }
     @Published private(set) var timeComponentsOpacity = Opacity()
-    var colorPublisher:Publisher<Color, Never>
+    var color:Publisher<Color, Never>
     
+    @Published var sdbOffset = CGFloat(0) //start delay button YOffset
+    @Published var sdbDeleteTriggered = false //start delay button delete triggered
+    
+    // MARK: -
     private func computeTimerProgress(for bubble:Bubble, and value:Float) -> Double {
         1 - Double(value/(bubble.initialClock))
     }
@@ -257,7 +259,7 @@ class BubbleCellCoordinator {
     // MARK: - Init Deinit
     init(for bubble:Bubble) {
         self.bubble = bubble
-        self.colorPublisher = .init(Color.bubbleColor(forName: bubble.color))
+        self.color = .init(Color.bubbleColor(forName: bubble.color))
         self.isTimer = bubble.kind != .stopwatch
         observeAppActive()
         
