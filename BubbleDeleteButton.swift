@@ -35,14 +35,7 @@ struct BubbleDeleteButton: View {
         ZStack {
             transparentBackground
             roundedBackground
-                .overlay( Push(.bottomMiddle) {
-                    VStack(spacing: 4) {
-                        titleLabel
-                        topButton
-                        bottomButton
-                    }
-                }
-                .padding([.bottom], 18) )
+                .overlay(controls)
                 .onTapGesture { secretary.showBubbleDeleteInfo = true }
         }
     }
@@ -50,6 +43,17 @@ struct BubbleDeleteButton: View {
     // MARK: - Lego
     private var transparentBackground: some View {
         Color.white.opacity(0.01).onTapGesture { cancelDeleteAction() }
+    }
+    
+    private var controls:some View {
+        Push(.bottomMiddle) {
+            VStack(spacing: 4) {
+                titleLabel
+                topButton
+                bottomButton
+            }
+        }
+        .padding([.bottom], 18)
     }
     
     private var roundedBackground:some View {
