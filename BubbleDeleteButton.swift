@@ -35,7 +35,6 @@ struct BubbleDeleteButton: View {
         ZStack {
             transparentBackground
             roundedBackground
-                .onTapGesture { secretary.showBubbleDeleteInfo = true }
                 .overlay( Push(.bottomMiddle) {
                     VStack(spacing: 4) {
                         titleLabel
@@ -44,6 +43,7 @@ struct BubbleDeleteButton: View {
                     }
                 }
                 .padding([.bottom], 18) )
+                .onTapGesture { secretary.showBubbleDeleteInfo = true }
         }
     }
     
