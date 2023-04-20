@@ -45,6 +45,7 @@ struct BubbleDeleteButton: View {
         Color.white.opacity(0.01).onTapGesture { cancelDeleteAction() }
     }
     
+    //title and 2 delete buttons
     private var controls:some View {
         Push(.bottomMiddle) {
             VStack(spacing: 4) {
