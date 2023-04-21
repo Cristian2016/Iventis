@@ -35,7 +35,6 @@ struct ViewHierarchy: View {
                     BubbleDeleteButton.Info()
                 }
             }
-            BubbleDeleteButton.MoreInfo()
             
             if let pair = notesForPair { PairStickyNoteList(pair) }
             MoreOptionsView()

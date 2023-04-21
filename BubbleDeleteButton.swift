@@ -204,47 +204,28 @@ extension BubbleDeleteButton {
     }
     
     struct MoreInfo: View {
-        @State private var show = false
-        
         var body: some View {
-            ZStack {
-                if show {
-                    ScrollView {
-                        VStack {
-                            HStack {
-                                Spacer()
-                                Button("Dismiss") {
-                                    Secretary.shared.bubbleDeleteButtonShowMore = false
-                                }
-                                .buttonStyle(.bordered)
-                                .tint(.red)
-                            }
-                            
-                            Text("1. Activity is made up of entries")
-                                .fontWeight(.medium)
-                                .foregroundColor(.black)
-                            Image("Untitled")
-                                .resizable()
-                                .scaledToFit()
-                            Divider()
-                            Text("2. Calendar-enabled \(Image.calendar) bubbles create a calendar event for each entry")
-                                .fontWeight(.medium)
-                                .foregroundColor(.black)
-                            Image("bubbleDeleteMoreInfo")
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                            Divider()
-                            Text("The user can **delete \(Image(systemName: "1.circle.fill")) a bubble** / **\(Image(systemName: "2.circle.fill")) its activity** / **\(Image(systemName: "3.circle.fill")) a single entry**. Unlike **\(Image(systemName: "1.circle.fill")) \(Image(systemName: "2.circle.fill"))**, **\(Image(systemName: "3.circle.fill"))** will remove both the entry and its corresponding Calendar App event. Think of **\(Image(systemName: "2.circle.fill"))** as a reset action. To **\(Image(systemName: "3.circle.fill")) delete a single entry** long-press on that entry")
-                                .foregroundColor(.black)
-                        }
-                    }
-                    .scrollIndicators(.hidden)
-                    .padding()
-                    .background(.white)
+            ScrollView {
+                VStack(alignment: .leading) {
+                    Text("1. Activity is made up of entries")
+                        .fontWeight(.medium)
+                        .foregroundColor(.black)
+                    Image("Untitled")
+                        .resizable()
+                        .scaledToFit()
+                    Divider()
+                    Text("2. Calendar-enabled \(Image.calendar) bubbles create a calendar event for each entry")
+                        .fontWeight(.medium)
+                        .foregroundColor(.black)
+                    Image("bubbleDeleteMoreInfo")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                    Divider()
+                    Text("The user can **delete \(Image(systemName: "1.circle.fill")) a bubble** / **\(Image(systemName: "2.circle.fill")) its activity** / **\(Image(systemName: "3.circle.fill")) a single entry**. Unlike **\(Image(systemName: "1.circle.fill")) \(Image(systemName: "2.circle.fill"))**, **\(Image(systemName: "3.circle.fill"))** will remove both the entry and its corresponding Calendar App event. Think of **\(Image(systemName: "2.circle.fill"))** as a reset action. To **\(Image(systemName: "3.circle.fill")) delete a single entry** long-press on that entry")
+                        .foregroundColor(.black)
                 }
             }
-            .edgesIgnoringSafeArea(.bottom)
-            .onReceive(Secretary.shared.$bubbleDeleteButtonShowMore) { show = $0 }
+            .scrollIndicators(.hidden)
         }
     }
 }

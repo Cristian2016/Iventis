@@ -44,18 +44,14 @@ struct InfoViewHierarchy: View {
                                 Text(info.name)
                             }
                         }
-                        .navigationTitle("Info")
-                        .navigationBarTitleDisplayMode(.inline)
+//                        .navigationTitle("Info")
                     }
                     .listStyle(.plain)
                     .scrollIndicators(.hidden)
                     .navigationDestination(for: InfoStore.Info.self) { info in
-                        Text(info.name)
+                        BubbleDeleteButton.MoreInfo()
                             .toolbar {
-                                ToolbarItem(placement: .navigationBarTrailing) {
-                                    Button("Dismiss") { dismiss() }
-                                    .tint(.red)
-                                }
+                                dismissButton
                             }
                     }
                     .toolbar {
@@ -68,14 +64,35 @@ struct InfoViewHierarchy: View {
             }
         }
         .onReceive(Secretary.shared.$showInfoVH) { output in
-            withAnimation {
-                show = output
+            if !output {
+                withAnimation {
+                    show = false
+                }
+            } else {
+                handleOnReceive()
             }
         }
     }
     
+    // MARK: - Lego
+    private var dismissButton:some View {
+        Button("Dismiss") { dismiss() }
+            .tint(.red)
+    }
+    
+    // MARK: - Methods
     private func dismiss() {
         Secretary.shared.showInfoVH = false
+    }
+    
+    private func handleOnReceive() {
+        switch Secretary.shared.topMostView {
+            case .bubbleDeleteActionView:
+                path = [InfoStore.infos[2]]
+            default:
+                break
+        }
+        show = true
     }
 }
 
