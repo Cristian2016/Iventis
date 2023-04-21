@@ -15,8 +15,10 @@ struct InfoStore {
     }
     
     static let infos = [
-        Info(name: "Delete Bubble"),
-        Info(name: "Delete Bubble Session")
+        Info(name: "Enable Calendar"),
+        Info(name: "Create Timer"),
+        Info(name: "Delete Bubble/Activity"),
+        Info(name: "Delete Activity Item"),
     ]
 }
 
@@ -31,6 +33,7 @@ struct InfoView: View {
                         Text(info.name)
                     }
                 }
+                .navigationTitle("Info")
             }
             .scrollIndicators(.hidden)
             .navigationDestination(for: InfoStore.Info.self) { info in
