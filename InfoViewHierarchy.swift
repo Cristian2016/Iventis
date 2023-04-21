@@ -57,6 +57,14 @@ struct InfoViewHierarchy: View {
                         }
                     }
             }
+            .toolbar {
+                ToolbarItem {
+                    Button("Dismiss") {
+                        
+                    }
+                    .tint(.red)
+                }
+            }
         }
     }
 }
