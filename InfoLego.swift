@@ -28,6 +28,7 @@ struct InfoLego:View {
                 Image(name)
                     .resizable()
                     .scaledToFit()
+                    .padding(4)
             }
         }
     }
@@ -39,7 +40,7 @@ extension InfoLego {
         var subtitle:LocalizedStringKey?
         var image:String?
         
-        static let bubble = Input.init(title: "*Use Yellow Area to*", subtitle: "**Show/Hide Activity** \(Image.tap) Tap\n**Add Bubble Note** \(Image.longPress) Long Press", image: "bubble")
+        static let bubble = Input.init(title: "*Use Yellow Area to*", subtitle: "**Show/Hide Activity** \(Image.tap) Tap\n**Add Note** \(Image.longPress) Long Press", image: "bubble")
         static let activity = Input.init(title: "1. Activity is made up of entries", subtitle: "***Show/Hide Activity** \(Image.tap) Tap yellow area*", image: "Untitled")
     }
 }
