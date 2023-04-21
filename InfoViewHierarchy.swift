@@ -22,7 +22,7 @@ struct InfoStore {
     ]
 }
 
-struct InfoView: View {
+struct InfoViewHierarchy: View {
     @State private var path = [InfoStore.Info]()
     
     var body: some View {
@@ -34,6 +34,7 @@ struct InfoView: View {
                     }
                 }
                 .navigationTitle("Info")
+                .navigationBarTitleDisplayMode(.inline)
             }
             .scrollIndicators(.hidden)
             .navigationDestination(for: InfoStore.Info.self) { info in
@@ -51,8 +52,12 @@ struct InfoView: View {
     }
 }
 
-struct InfoView_Previews: PreviewProvider {
+extension InfoViewHierarchy {
+    
+}
+
+struct InfoViewHierarchy_Previews: PreviewProvider {
     static var previews: some View {
-        InfoView()
+        InfoViewHierarchy()
     }
 }
