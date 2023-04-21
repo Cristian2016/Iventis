@@ -38,11 +38,14 @@ extension InfoLego {
         var title:LocalizedStringKey?
         var subtitle:LocalizedStringKey?
         var image:String?
+        
+        static let bubble = Input.init(title: "*Use Yellow Area to*", subtitle: "**Show/Hide Activity** \(Image.tap) Tap\n**Add Bubble Note** \(Image.longPress) Long Press", image: "bubble")
+        static let activity = Input.init(title: "1. Activity is made up of entries", subtitle: "***Show/Hide Activity** \(Image.tap) Tap yellow area*", image: "Untitled")
     }
 }
 
 struct InfoLego_Previews: PreviewProvider {
     static var previews: some View {
-        InfoLego(input: InfoLego.Input.init(title: "1. Activity is made up of entries", subtitle: "***Toggle Activity** \(Image.tap) Tap minutes/hours*", image: "Untitled"))
+        InfoLego(input: InfoLego.Input.bubble)
     }
 }

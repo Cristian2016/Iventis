@@ -125,6 +125,7 @@
 		1FB2EA772997BD2F00752595 /* ThreeLabels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB2EA762997BD2F00752595 /* ThreeLabels.swift */; };
 		1FB3178F286ACB48006BBE82 /* Note_InfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB3178E286ACB48006BBE82 /* Note_InfoView.swift */; };
 		1FB4D4E02977F86500F26D9C /* iPadViewHierarchy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB4D4DF2977F86500F26D9C /* iPadViewHierarchy.swift */; };
+		1FB4D60D29F2AE1E0035650D /* GeneralInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB4D60C29F2AE1E0035650D /* GeneralInfoView.swift */; };
 		1FB5D8D428E81CD900DD522A /* InfoButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB5D8D328E81CD900DD522A /* InfoButton.swift */; };
 		1FB5D8D628E8276D00DD522A /* StickyNoteListInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB5D8D528E8276D00DD522A /* StickyNoteListInfoView.swift */; };
 		1FB5D8D828E96CBD00DD522A /* StartDelayInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB5D8D728E96CBD00DD522A /* StartDelayInfoView.swift */; };
@@ -359,6 +360,7 @@
 		1FB2EA762997BD2F00752595 /* ThreeLabels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreeLabels.swift; sourceTree = "<group>"; };
 		1FB3178E286ACB48006BBE82 /* Note_InfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Note_InfoView.swift; sourceTree = "<group>"; };
 		1FB4D4DF2977F86500F26D9C /* iPadViewHierarchy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iPadViewHierarchy.swift; sourceTree = "<group>"; };
+		1FB4D60C29F2AE1E0035650D /* GeneralInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralInfoView.swift; sourceTree = "<group>"; };
 		1FB5D8D328E81CD900DD522A /* InfoButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoButton.swift; sourceTree = "<group>"; };
 		1FB5D8D528E8276D00DD522A /* StickyNoteListInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StickyNoteListInfoView.swift; sourceTree = "<group>"; };
 		1FB5D8D728E96CBD00DD522A /* StartDelayInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartDelayInfoView.swift; sourceTree = "<group>"; };
@@ -590,6 +592,7 @@
 				1F0FD40529A4D93D0097FF7F /* DetailViewInfoButton.swift */,
 				1FBE775529A248F5005968EC /* GradientView.swift */,
 				1FAD9B4129961FC000F49670 /* ThreeCircles.swift */,
+				1FB4D60C29F2AE1E0035650D /* GeneralInfoView.swift */,
 				1FE68FAD29A135C600D05EE6 /* SecondsCircle.swift */,
 				1FB2EA762997BD2F00752595 /* ThreeLabels.swift */,
 				1F3950B929966DEA00DD9423 /* Coordinator.swift */,
@@ -984,6 +987,7 @@
 				1FE68FAE29A135C600D05EE6 /* SecondsCircle.swift in Sources */,
 				1FEB508629DED01F000C242E /* BubbleDeleteActionAlert1.swift in Sources */,
 				1F9BE0A9280BE14100F87EFA /* PaletteView.swift in Sources */,
+				1FB4D60D29F2AE1E0035650D /* GeneralInfoView.swift in Sources */,
 				1F7F1AE429A10D9C0061EB40 /* View Modifiers.swift in Sources */,
 				1F5FFDA129C2E92D005FFB32 /* DurationPickerView.swift in Sources */,
 				1F5F4A732809409600AF3442 /* Bubble.swift in Sources */,
