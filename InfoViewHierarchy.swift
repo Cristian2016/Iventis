@@ -28,6 +28,12 @@ struct InfoViewHierarchy: View {
     var body: some View {
         NavigationStack(path: $path) {
             List {
+                VStack(alignment: .leading, spacing: -20) {
+                    InfoLego(input: .bubbleSecondsArea)
+                    InfoLego(input: .bubbleYellowArea)
+                }
+                .listRowSeparator(.hidden)
+                
                 ForEach(InfoStore.infos) { info in
                     NavigationLink(value: info) {
                         Text(info.name)
@@ -36,6 +42,7 @@ struct InfoViewHierarchy: View {
                 .navigationTitle("Info")
                 .navigationBarTitleDisplayMode(.inline)
             }
+            .listStyle(.plain)
             .scrollIndicators(.hidden)
             .navigationDestination(for: InfoStore.Info.self) { info in
                 Text(info.name)
