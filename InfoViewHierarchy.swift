@@ -53,18 +53,14 @@ struct InfoViewHierarchy: View {
                         Text(info.name)
                             .toolbar {
                                 ToolbarItem(placement: .navigationBarTrailing) {
-                                    Button("Dismiss") {
-                                        Secretary.shared.showInfoVH = false
-                                    }
+                                    Button("Dismiss") { dismiss() }
                                     .tint(.red)
                                 }
                             }
                     }
                     .toolbar {
                         ToolbarItem {
-                            Button("Dismiss") {
-                                Secretary.shared.showInfoVH = false
-                            }
+                            Button("Dismiss") { dismiss() }
                             .tint(.red)
                         }
                     }
@@ -76,6 +72,10 @@ struct InfoViewHierarchy: View {
                 show = output
             }
         }
+    }
+    
+    private func dismiss() {
+        Secretary.shared.showInfoVH = false
     }
 }
 

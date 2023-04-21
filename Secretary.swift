@@ -79,7 +79,7 @@ class Secretary {
         
     ///bubbleCell rank and frame. Frame will not be set if DetailView shows
     @Published var deleteAction_bRank:Int64? {didSet{
-        topMostView = deleteAction_bRank == nil ? .bubble : .deleteActionView
+        topMostView = deleteAction_bRank == nil ? .bubble : .bubbleDeleteActionView
     }}
     
     @Published var addNoteButton_bRank:Int? {didSet { handleAddNoteButton_bRank() }}
@@ -262,7 +262,7 @@ extension Secretary {
         case palette
         case durationPicker
         case moreOptionsView
-        case deleteActionView
+        case bubbleDeleteActionView
         case sessionDeleteActionView
         case bubble
     }
