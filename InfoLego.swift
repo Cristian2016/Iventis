@@ -38,12 +38,12 @@ struct HInfoLego:View {
     var inverseColors = false
     
     var body: some View {
-        HStack {
+        HStack(alignment: .bottom) {
             if let name = input.image {
                 Image(name)
                     .resizable()
                     .scaledToFit()
-                    .frame(height: 130)
+                    .frame(height: 110)
             }
             VStack(alignment: .leading) {
                 if let title = input.title {
@@ -78,7 +78,7 @@ extension InfoLego {
         var image:String?
         
         static let bubbleSecondsArea = Input.init(title: "*Use Seconds to*", subtitle: "**Start/Pause** \(Image.tap) Tap\n**End Entry** \(Image.longPress) Long Press")
-        static let bubbleYellowArea = Input.init(title: "*Use Yellow Area to*", subtitle: "**Show/Hide Activity** \(Image.tap) Tap **Add Note** \(Image.longPress) Long Press", image: "bubble")
+        static let bubbleYellowArea = Input.init(title: "*Use Yellow Area to*", subtitle: "**Show/Hide Activity** \(Image.tap) Tap\n**Add Note** \(Image.longPress) Long Press", image: "bubble")
         static let activity = Input.init(title: "1. Activity is made up of entries", subtitle: "***Show/Hide Activity** \(Image.tap) Tap yellow area*", image: "Untitled")
     }
 }

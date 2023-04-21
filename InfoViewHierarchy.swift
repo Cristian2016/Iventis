@@ -30,7 +30,9 @@ struct InfoViewHierarchy: View {
             List {
                 VStack(alignment: .leading) {
                     HInfoLego(input: .bubbleSecondsArea, inverseColors: true)
+                    Divider()
                     InfoLego(input: .bubbleYellowArea, inverseColors: true)
+                    Divider()
                 }
                 .listRowSeparator(.hidden)
                 
