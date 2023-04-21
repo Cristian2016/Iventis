@@ -220,21 +220,21 @@ extension BubbleDeleteButton {
                                 .tint(.red)
                             }
                             
-                            Text("Activity is made up of entries")
+                            Text("1. Activity is made up of entries")
                                 .fontWeight(.medium)
                                 .foregroundColor(.black)
                             Image("Untitled")
                                 .resizable()
                                 .scaledToFit()
                             Divider()
-                            Text("Calendar-enabled \(Image.calendar) bubbles create a calendar event for each entry")
+                            Text("2. Calendar-enabled \(Image.calendar) bubbles create a calendar event for each entry")
                                 .fontWeight(.medium)
                                 .foregroundColor(.black)
                             Image("bubbleDeleteMoreInfo")
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
                             Divider()
-                            Text("To sum up the user can **delete \(Image(systemName: "1.circle.fill")) the bubble** / **\(Image(systemName: "2.circle.fill")) its activity** / **\(Image(systemName: "3.circle.fill")) a single entry**. Unlike **\(Image(systemName: "1.circle.fill")) \(Image(systemName: "2.circle.fill"))**, **\(Image(systemName: "3.circle.fill"))** will remove both the entry and its corresponding Calendar App event. To **\(Image(systemName: "3.circle.fill")) delete a single entry** long-press on that entry")
+                            Text("The user can **delete \(Image(systemName: "1.circle.fill")) a bubble** / **\(Image(systemName: "2.circle.fill")) its activity** / **\(Image(systemName: "3.circle.fill")) a single entry**. Unlike **\(Image(systemName: "1.circle.fill")) \(Image(systemName: "2.circle.fill"))**, **\(Image(systemName: "3.circle.fill"))** will remove both the entry and its corresponding Calendar App event. To **\(Image(systemName: "3.circle.fill")) delete a single entry** long-press on that entry")
                                 .foregroundColor(.black)
                         }
                     }
