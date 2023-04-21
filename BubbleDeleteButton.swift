@@ -220,13 +220,15 @@ extension BubbleDeleteButton {
                                 .tint(.red)
                             }
                             
-                            Text("A Bubble's activity is made up of entries. Calendar-enabled \(Image.calendar) bubbles create a calendar event for each entry")
+                            Text("Activity is made up of entries")
+                                .fontWeight(.medium)
                                 .foregroundColor(.black)
                             Image("Untitled")
                                 .resizable()
                                 .scaledToFit()
                             Divider()
-                            Text("Ex: **Calendar-enabled \(Image.calendar), 20 Minute Timer.** Timer's activity has two entries. Each entry has a corresponding event in the Calendar App")
+                            Text("Calendar-enabled \(Image.calendar) bubbles create a calendar event for each entry")
+                                .fontWeight(.medium)
                                 .foregroundColor(.black)
                             Image("bubbleDeleteMoreInfo")
                                 .resizable()
