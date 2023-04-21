@@ -226,7 +226,7 @@ extension BubbleDeleteButton {
                 }
             }
             .scrollIndicators(.hidden)
-            .padding([.leading, .trailing], 6)
+            .padding([.leading, .trailing])
         }
     }
 }

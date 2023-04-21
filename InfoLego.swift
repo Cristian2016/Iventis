@@ -67,7 +67,7 @@ extension HInfoLego {
         var subtitle:LocalizedStringKey?
         var image:String?
         
-        static let bubbleSecondsArea = Input.init(title: "*Use Seconds to*", subtitle: "**Start/Pause Bubble** \(Image.tap) Tap\n**Finish Entry** \(Image.longPress) Long Press", image: "sec")
+        static let bubbleSecondsArea = Input.init(title: "*Use Seconds to*", subtitle: "**Start/Pause** \(Image.tap) Tap\n**Finish** \(Image.longPress) Long Press", image: "sec")
     }
 }
 

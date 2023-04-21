@@ -44,7 +44,8 @@ struct InfoViewHierarchy: View {
                                 Text(info.name)
                             }
                         }
-//                        .navigationTitle("Info")
+                        .navigationTitle("Info")
+                        .navigationBarTitleDisplayMode(.inline)
                     }
                     .listStyle(.plain)
                     .scrollIndicators(.hidden)
