@@ -24,12 +24,10 @@ struct InfoLego:View {
                         .foregroundColor(inverseColors ? .black : .secondary)
                 }
             }
-            .padding()
             if let name = input.image {
                 Image(name)
                     .resizable()
                     .scaledToFit()
-                    .padding(4)
             }
         }
     }
