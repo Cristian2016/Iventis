@@ -24,46 +24,56 @@ struct InfoStore {
 
 struct InfoViewHierarchy: View {
     @State private var path = [InfoStore.Info]()
+    @State private var show = false
     
     var body: some View {
-        NavigationStack(path: $path) {
-            List {
-                VStack(alignment: .leading) {
-                    HInfoLego(input: .bubbleSecondsArea, inverseColors: true)
-                    Divider()
-                    InfoLego(input: .bubbleYellowArea, inverseColors: true)
-                    Divider()
-                }
-                .listRowSeparator(.hidden)
-                
-                ForEach(InfoStore.infos) { info in
-                    NavigationLink(value: info) {
-                        Text(info.name)
+        ZStack {
+            if show {
+                NavigationStack(path: $path) {
+                    List {
+                        VStack(alignment: .leading) {
+                            HInfoLego(input: .bubbleSecondsArea, inverseColors: true)
+                            Divider()
+                            InfoLego(input: .bubbleYellowArea, inverseColors: true)
+                            Divider()
+                        }
+                        .listRowSeparator(.hidden)
+                        
+                        ForEach(InfoStore.infos) { info in
+                            NavigationLink(value: info) {
+                                Text(info.name)
+                            }
+                        }
+                        .navigationTitle("Info")
+                        .navigationBarTitleDisplayMode(.inline)
                     }
-                }
-                .navigationTitle("Info")
-                .navigationBarTitleDisplayMode(.inline)
-            }
-            .listStyle(.plain)
-            .scrollIndicators(.hidden)
-            .navigationDestination(for: InfoStore.Info.self) { info in
-                Text(info.name)
+                    .listStyle(.plain)
+                    .scrollIndicators(.hidden)
+                    .navigationDestination(for: InfoStore.Info.self) { info in
+                        Text(info.name)
+                            .toolbar {
+                                ToolbarItem(placement: .navigationBarTrailing) {
+                                    Button("Dismiss") {
+                                        Secretary.shared.showInfoVH = false
+                                    }
+                                    .tint(.red)
+                                }
+                            }
+                    }
                     .toolbar {
-                        ToolbarItem(placement: .navigationBarTrailing) {
+                        ToolbarItem {
                             Button("Dismiss") {
-                                print("Dismiss")
+                                Secretary.shared.showInfoVH = false
                             }
                             .tint(.red)
                         }
                     }
-            }
-            .toolbar {
-                ToolbarItem {
-                    Button("Dismiss") {
-                        
-                    }
-                    .tint(.red)
                 }
+            }
+        }
+        .onReceive(Secretary.shared.$showInfoVH) { output in
+            withAnimation {
+                show = output
             }
         }
     }

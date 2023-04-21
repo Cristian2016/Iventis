@@ -16,7 +16,6 @@ class Secretary {
     // MARK: - Show More Info
     @Published var bubbleDeleteButtonShowMore = false
     
-    
     // MARK: - Publishers
     ///allow user to drag and drop tableView cells
     ///.onMove view modifier will not be nil
@@ -39,6 +38,8 @@ class Secretary {
     }}
     
     var topMostView:TopMostView = .bubble
+    
+    @Published var showInfoVH = false
     
     @Published var showBubbleInfo = false
     

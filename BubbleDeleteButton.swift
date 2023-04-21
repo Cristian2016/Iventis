@@ -191,7 +191,7 @@ extension BubbleDeleteButton {
                     Text("**Dismiss** \(Image.tap) Tap")
                     Text("*outside Gray Shape*")
                     Button("Learn More") {
-                        Secretary.shared.bubbleDeleteButtonShowMore = true
+                        Secretary.shared.showInfoVH = true
                     }
                     .buttonStyle(.bordered)
                     .tint(.blue)
