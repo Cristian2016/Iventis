@@ -12,7 +12,7 @@ struct SecondsLabel: View {
     @EnvironmentObject private var viewModel:ViewModel
     @Environment(\.scenePhase) private var scenePhase
         
-    @State private var sec = ""
+    @State private var sec = "e"
     
     var body: some View {
         if bubble.coordinator != nil {
