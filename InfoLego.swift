@@ -9,18 +9,19 @@ import SwiftUI
 
 struct InfoLego:View {
     let input:Input
+    var inverseColors = false
     
     var body: some View {
         VStack(alignment: .leading) {
             VStack(alignment: .leading) {
                 if let title = input.title {
                     Text(title)
-                        .foregroundColor(.black)
+                        .foregroundColor(inverseColors ? .secondary : .black)
                         .fontWeight(.medium)
                 }
                 if let subtitle = input.subtitle {
                     Text(subtitle)
-                        .foregroundColor(.secondary)
+                        .foregroundColor(inverseColors ? .black : .secondary)
                 }
             }
             .padding()

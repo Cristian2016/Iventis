@@ -29,8 +29,8 @@ struct InfoViewHierarchy: View {
         NavigationStack(path: $path) {
             List {
                 VStack(alignment: .leading, spacing: -20) {
-                    InfoLego(input: .bubbleSecondsArea)
-                    InfoLego(input: .bubbleYellowArea)
+                    InfoLego(input: .bubbleSecondsArea, inverseColors: true)
+                    InfoLego(input: .bubbleYellowArea, inverseColors: true)
                 }
                 .listRowSeparator(.hidden)
                 
