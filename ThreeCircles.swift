@@ -14,8 +14,8 @@ struct ThreeCircles: View {
     let metrics:BubbleCell.Metrics
     @EnvironmentObject private var viewModel:ViewModel
     
-    @State private var minOpacity = CGFloat(0)
-    @State private var hrOpacity = CGFloat(0)
+    @State private var minOpacity = CGFloat(1)
+    @State private var hrOpacity = CGFloat(1)
     @State private var color:Color
     
     init(bubble: Bubble, metrics: BubbleCell.Metrics) {
