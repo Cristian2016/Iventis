@@ -28,12 +28,8 @@ struct InfoViewHierarchy: View {
     var body: some View {
         NavigationStack(path: $path) {
             List {
-                VStack(alignment: .leading, spacing: 0) {
-                    Image("sec")
-                        .resizable()
-                        .scaledToFit()
-                        .frame(height: 150)
-                    InfoLego(input: .bubbleSecondsArea, inverseColors: true)
+                VStack(alignment: .leading) {
+                    HInfoLego(input: .bubbleSecondsArea, inverseColors: true)
                     InfoLego(input: .bubbleYellowArea, inverseColors: true)
                 }
                 .listRowSeparator(.hidden)
