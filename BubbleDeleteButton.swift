@@ -234,7 +234,7 @@ extension BubbleDeleteButton {
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
                             Divider()
-                            Text("The user can **delete \(Image(systemName: "1.circle.fill")) a bubble** / **\(Image(systemName: "2.circle.fill")) its activity** / **\(Image(systemName: "3.circle.fill")) a single entry**. Unlike **\(Image(systemName: "1.circle.fill")) \(Image(systemName: "2.circle.fill"))**, **\(Image(systemName: "3.circle.fill"))** will remove both the entry and its corresponding Calendar App event. To **\(Image(systemName: "3.circle.fill")) delete a single entry** long-press on that entry")
+                            Text("The user can **delete \(Image(systemName: "1.circle.fill")) a bubble** / **\(Image(systemName: "2.circle.fill")) its activity** / **\(Image(systemName: "3.circle.fill")) a single entry**. Unlike **\(Image(systemName: "1.circle.fill")) \(Image(systemName: "2.circle.fill"))**, **\(Image(systemName: "3.circle.fill"))** will remove both the entry and its corresponding Calendar App event. Think of **\(Image(systemName: "2.circle.fill"))** as a reset action. To **\(Image(systemName: "3.circle.fill")) delete a single entry** long-press on that entry")
                                 .foregroundColor(.black)
                         }
                     }
