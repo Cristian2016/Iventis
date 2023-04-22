@@ -186,7 +186,7 @@ extension BubbleDeleteButton {
         private var content:some View {
             HStack {
                 Image("BubbleDelete")
-                    .thumbnail(150)
+                    .thumbnail(140)
                 VStack(alignment: .leading) {
                     Text("**Dismiss** \(Image.tap) Tap")
                     Text("*outside Gray Shape*")
@@ -195,7 +195,7 @@ extension BubbleDeleteButton {
                     } label: {
                         Label("*More Info*", systemImage: "info.square.fill")
                     }
-                    .buttonStyle(.bordered)
+                    .fontWeight(.medium)
                     
                 }
             }
