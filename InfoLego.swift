@@ -79,7 +79,7 @@ extension InfoLego {
         
         static let bubbleSecondsArea = Input(subtitle: "**Start/Pause** \(Image.tap) Tap\n**End Entry** \(Image.longPress) Long Press")
         static let bubbleYellowArea = Input(title: "*Use Yellow Area to*", subtitle: "**Show Activity** \(Image.tap) Tap\n**Add Note** \(Image.longPress) Long Press", image: "bubble")
-        static let activity = Input(title: "Activity is made up of entries", subtitle: "***Show Activity** \(Image.tap) Tap yellow area*", image: "Untitled")
+        static let activity = Input(title: "Bubble activity is made up of entries", subtitle: "***Show Activity** \(Image.tap) Tap yellow area*", image: "Untitled")
     }
 }
 

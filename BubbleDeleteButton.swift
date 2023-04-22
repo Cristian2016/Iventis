@@ -210,14 +210,14 @@ extension BubbleDeleteButton {
         var body: some View {
             ScrollView {
                 VStack {
-                    Text("Bubble activity is made up of entries")
+                    Text("Bubble activity contains entries")
                         .fontWeight(.medium)
                         .foregroundColor(.black)
                     Image("Untitled")
                         .resizable()
                         .scaledToFit()
                     Divider()
-                    Text("Calendar-enabled \(Image.calendar) bubbles create a calendar event for each entry")
+                    Text("A calendar-enabled \(Image.calendar) bubble creates a calendar event for each entry")
                         .fontWeight(.medium)
                         .foregroundColor(.black)
                     Image("bubbleDeleteMoreInfo")
