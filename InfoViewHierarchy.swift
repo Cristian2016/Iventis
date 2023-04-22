@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import MyPackage
 
 struct InfoStore {
     struct Info:Identifiable, Hashable {
@@ -52,7 +53,9 @@ struct InfoViewHierarchy: View {
                     .navigationDestination(for: InfoStore.Info.self) { info in
                         BubbleDeleteButton.MoreInfo()
                             .toolbar {
-                                dismissButton
+                                ToolbarItemGroup {
+                                    dismissButton
+                                }
                             }
                     }
                     .toolbar {
@@ -84,12 +87,15 @@ struct InfoViewHierarchy: View {
     // MARK: - Methods
     private func dismiss() {
         Secretary.shared.showInfoVH = false
+        path = [] //empty navigation stack
     }
     
     private func handleOnReceive() {
         switch Secretary.shared.topMostView {
             case .bubbleDeleteActionView:
-                path = [InfoStore.infos[2]]
+                delayExecution(.now() + 0.1) {
+                    path = [InfoStore.infos[2]]
+                }
             default:
                 break
         }
