@@ -67,7 +67,7 @@ extension HInfoLego {
         var subtitle:LocalizedStringKey?
         var image:String?
         
-        static let bubbleSecondsArea = Input.init(title: "*Use Seconds to*", subtitle: "**Start/Pause** \(Image.tap) Tap\n**Finish** \(Image.longPress) Long Press", image: "sec")
+        static let bubbleSecondsArea = Input(subtitle: "**Start/Pause** \(Image.tap) Tap\n**Finish** \(Image.longPress) Long Press", image: "sec")
     }
 }
 
@@ -77,9 +77,9 @@ extension InfoLego {
         var subtitle:LocalizedStringKey?
         var image:String?
         
-        static let bubbleSecondsArea = Input.init(title: "*Use Seconds to*", subtitle: "**Start/Pause** \(Image.tap) Tap\n**End Entry** \(Image.longPress) Long Press")
-        static let bubbleYellowArea = Input.init(title: "*Use Yellow Area to*", subtitle: "**Toggle Activity** \(Image.tap) Tap\n**Add Note** \(Image.longPress) Long Press", image: "bubble")
-        static let activity = Input.init(title: "1. Activity is made up of entries", subtitle: "***Toggle Activity** \(Image.tap) Tap yellow area*", image: "Untitled")
+        static let bubbleSecondsArea = Input(subtitle: "**Start/Pause** \(Image.tap) Tap\n**End Entry** \(Image.longPress) Long Press")
+        static let bubbleYellowArea = Input(title: "*Use Yellow Area to*", subtitle: "**Show Activity** \(Image.tap) Tap\n**Add Note** \(Image.longPress) Long Press", image: "bubble")
+        static let activity = Input(title: "Activity is made up of entries", subtitle: "***Show Activity** \(Image.tap) Tap yellow area*", image: "Untitled")
     }
 }
 
