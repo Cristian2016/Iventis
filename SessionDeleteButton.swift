@@ -142,16 +142,18 @@ extension SessionDeleteButton {
         private var content:some View {
             HStack {
                 Image("SessionDelete")
-                    .thumbnail(130)
+                    .thumbnail(120)
                 VStack(alignment: .leading) {
                     Text("**Dismiss** \(Image.tap) Tap")
                     Text("*outside Gray Shape*")
                         .forceMultipleLines()
-                    Button("Learn More") {
-                        Secretary.shared.bubbleDeleteButtonShowMore = true
+                    Button {
+                        Secretary.shared.showInfoVH = true
+                    } label: {
+                        Label("*More Info*", systemImage: "info.square.fill")
                     }
-                    .buttonStyle(.bordered)
                     .tint(.blue)
+                    .fontWeight(.medium)
                 }
             }
             .font(.system(size: 20))

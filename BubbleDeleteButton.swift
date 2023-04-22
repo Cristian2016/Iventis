@@ -196,7 +196,6 @@ extension BubbleDeleteButton {
                         Label("*More Info*", systemImage: "info.square.fill")
                     }
                     .fontWeight(.medium)
-                    
                 }
             }
             .forceMultipleLines()
