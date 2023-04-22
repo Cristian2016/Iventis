@@ -210,7 +210,7 @@ extension BubbleDeleteButton {
         var body: some View {
             ScrollView {
                 VStack {
-                    Text("A bubble's activity log contains entries")
+                    Text("A bubble's activity log has entries")
                         .fontWeight(.medium)
                         .foregroundColor(.black)
                     Image("bubbleActivity")
