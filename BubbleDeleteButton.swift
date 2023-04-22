@@ -209,8 +209,8 @@ extension BubbleDeleteButton {
     struct MoreInfo: View {
         var body: some View {
             ScrollView {
-                VStack(alignment: .leading) {
-                    Text("Activity is made up of entries")
+                VStack {
+                    Text("Bubble activity is made up of entries")
                         .fontWeight(.medium)
                         .foregroundColor(.black)
                     Image("Untitled")
