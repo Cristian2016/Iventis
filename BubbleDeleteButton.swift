@@ -213,7 +213,7 @@ extension BubbleDeleteButton {
                     Text("A bubble's activity is made up of entries")
                         .fontWeight(.medium)
                         .foregroundColor(.black)
-                    Image("Untitled")
+                    Image("bubbleActivity")
                         .resizable()
                         .scaledToFit()
                     Divider()
