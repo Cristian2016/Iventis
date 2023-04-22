@@ -217,7 +217,7 @@ extension BubbleDeleteButton {
                         .resizable()
                         .scaledToFit()
                     Divider()
-                    Text("A calendar-enabled \(Image.calendar) bubble creates a calendar event for each entry")
+                    Text("Only calendar-enabled \(Image.calendar) bubbles create calendar events. Each event corresponds to an entry")
                         .fontWeight(.medium)
                         .foregroundColor(.black)
                     Image("bubbleDeleteMoreInfo")
