@@ -24,6 +24,10 @@ struct InfoEntry: View {
                         Text(title)
                             .font(.system(size: 20))
                     }
+                    if let footnote = input.footnote {
+                        Text(footnote)
+                            .font(.caption2)
+                    }
                     if let subtitle = input.subtitle {
                         Text(subtitle)
                             .font(.system(size: 18))
@@ -33,9 +37,6 @@ struct InfoEntry: View {
                         Image(imageName)
                             .resizable()
                             .scaledToFit()
-                    }
-                    if let footnote = input.footnote {
-                        Text(footnote)
                     }
                 }
             case .small:
@@ -70,7 +71,8 @@ extension InfoEntry {
         var imageName:String?
         var footnote:LocalizedStringKey?
         
-        static let sec = Input(title: "**Start/Pause** \(Image.tap) Tap\n**Finish** \(Image.longPress) Long Press", imageName: "sec", footnote: "If bubble")
+        static let sec = Input(title: "**Start/Pause** \(Image.tap) Tap\n**Finish** \(Image.longPress) Long Press", imageName: "sec")
+        static let activity = Input(title: "A bubble's activity log has entries", imageName: "bubbleActivity", footnote: "Entries are similar to calendar events. An entry has a *start* and *end date*. An entry may have multiple sub-entries. Each start followed by a pause creates a sub-entry. Sub-entries are shown below the entry. To end an entry long-press on seconds. Ending an entry creates a calendar event, if the bubble is \(Image.calendar) calendar-enabled")
     }
     
     enum Kind {
@@ -82,6 +84,6 @@ extension InfoEntry {
 
 struct InfoEntry_Previews: PreviewProvider {
     static var previews: some View {
-        InfoEntry(input: InfoEntry.Input.sec, kind: .small)
+        InfoEntry(input: .activity)
     }
 }
