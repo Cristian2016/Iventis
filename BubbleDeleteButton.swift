@@ -3,7 +3,8 @@
 //  Timers (iOS)
 //
 //  Created by Cristian Lapusan on 01.02.2023.
-//
+// Seems like you can fix it by indicating what part of speech this should be applied
+// Text("I have ^[(pCocktails.count) recipe](inflect: true, partOfSpeech: noun) from ")
 
 import SwiftUI
 import MyPackage
