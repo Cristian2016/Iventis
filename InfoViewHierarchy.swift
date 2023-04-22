@@ -52,18 +52,9 @@ struct InfoViewHierarchy: View {
                     .scrollIndicators(.hidden)
                     .navigationDestination(for: InfoStore.Info.self) { info in
                         BubbleDeleteButton.MoreInfo()
-                            .toolbar {
-                                ToolbarItemGroup {
-                                    dismissButton
-                                }
-                            }
+                            .toolbar { dismissButton }
                     }
-                    .toolbar {
-                        ToolbarItem {
-                            Button("Dismiss") { dismiss() }
-                            .tint(.red)
-                        }
-                    }
+                    .toolbar { dismissButton }
                 }
             }
         }
