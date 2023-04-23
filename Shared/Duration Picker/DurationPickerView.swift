@@ -168,7 +168,7 @@ extension DurationPickerView {
                 if show {
                     Color.black.opacity(0.6).ignoresSafeArea()
                     
-                    ThinMaterialLabel(title) { InfoView() } action: { dismiss() }
+                    ThinMaterialLabel(title, "\(Image(systemName: "checkmark.circle.fill")) green checkmark confirms entered duration is valid") { InfoView() } action: { dismiss() }
                         .font(.system(size: 20))
                 }
             }

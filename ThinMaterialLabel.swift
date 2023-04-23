@@ -12,7 +12,7 @@ struct ThinMaterialLabel<Content:View>: View {
         let backgroundRadius = CGFloat(20)
     }
     
-    init(_ title:String? = nil, _ subtitle:String? = nil, @ViewBuilder _ content:() -> Content, action: @escaping () -> ()) {
+    init(_ title:String? = nil, _ subtitle:LocalizedStringKey? = nil, @ViewBuilder _ content:() -> Content, action: @escaping () -> ()) {
         self.content = content()
         self.action = action
         self.title = title
@@ -20,7 +20,7 @@ struct ThinMaterialLabel<Content:View>: View {
     }
     
     private var title:String?
-    private var subtitle:String?
+    private var subtitle:LocalizedStringKey?
     
     let content:Content
     private let action:() -> ()
@@ -51,7 +51,7 @@ struct ThinMaterialLabel<Content:View>: View {
     @ViewBuilder
     private var subtitleView:some View {
         if let subtitle = subtitle {
-            Text("*\(subtitle)*").forceMultipleLines()
+            Text(subtitle).forceMultipleLines()
         }
     }
     
