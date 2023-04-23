@@ -161,7 +161,7 @@ struct DurationPickerView: View {
 extension DurationPickerView {
     struct Info:View {
         @State private var show = false
-        private let title = "Set Timer Duration"
+        private let title = "Choose Duration"
         private let subtitle:LocalizedStringKey = "\(Image(systemName: "checkmark.circle.fill")) symbol confirms valid duration"
         
         var body: some View {
