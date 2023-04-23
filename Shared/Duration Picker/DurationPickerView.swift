@@ -162,7 +162,7 @@ extension DurationPickerView {
     struct Info:View {
         @State private var show = false
         private let title = "Choose Duration"
-        private let subtitle:LocalizedStringKey = "\(Image(systemName: "checkmark.circle.fill")) symbol confirms valid duration"
+        private let subtitle:LocalizedStringKey = "Green \(Image(systemName: "checkmark.circle.fill")) confirms valid duration"
         
         var body: some View {
             ZStack {
@@ -194,18 +194,9 @@ extension DurationPickerView {
                     Text("*Use Yellow Areas to*")
                         .foregroundColor(.secondary)
                     Divider()
-                    VStack(alignment: .leading) {
-                        Text("**Create Timer** \(Image.tap) Tap")
-                        Text("*if \(Image.roundCheckmark) symbol shows*")
-                    }
-                    VStack(alignment: .leading) {
-                        Text("**Clear** \(Image.leftSwipe) Swipe")
-                        Text("*in any direction*")
-                    }
-                    VStack(alignment: .leading) {
-                        Text("**Dismiss** \(Image.tap) Tap")
-                        Text("*if \(Image.roundCheckmark) symbol hidden*")
-                    }
+                    InfoUnit(.dpCreate)
+                    InfoUnit(.dpClear)
+                    InfoUnit(.dpDismiss)
                 }
             }
             .font(.system(size: 22))

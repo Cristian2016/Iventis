@@ -10,6 +10,8 @@ import SwiftUI
 struct InfoUnit: View {
     let input:Input
     
+    init(_ input: Input) { self.input = input }
+    
     var body: some View {
         VStack(alignment: .leading) {
             HStack(spacing: 3) {
@@ -52,6 +54,6 @@ extension InfoUnit {
 
 struct InfoUnit_Previews: PreviewProvider {
     static var previews: some View {
-        InfoUnit(input: .dpDismiss)
+        InfoUnit(.dpDismiss)
     }
 }
