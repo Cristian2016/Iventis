@@ -40,7 +40,12 @@ struct ThinMaterialLabel<Content:View>: View {
                 Divider().frame(maxWidth: 300)
             }
             content
-            dismissButton
+            Button {
+            } label: {
+                Label("More Info", systemImage: "info.square.fill")
+                    .frame(maxWidth: .infinity)
+            }
+            .buttonStyle(.bordered)
         }
         .padding()
         .background { roundedBackground }
