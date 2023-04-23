@@ -72,7 +72,7 @@ extension InfoEntry {
         var footnote:LocalizedStringKey?
         
         static let sec = Input(title: "**Start/Pause** \(Image.tap) Tap\n**Finish** \(Image.longPress) Long Press", imageName: "sec")
-        static let activity = Input(title: "A bubble's activity has entries", imageName: "bubbleActivity", footnote: "Entries are like calendar events. An entry has a duration, a start and end date. An entry may have multiple sub-entries. Each start (\(Image.tap) Tap) followed by a pause (\(Image.tap)) creates a new sub-entry. Sub-entries are shown below their parent entry. To end an entry \(Image.longPress) long-press on seconds. Ending an entry creates a calendar event, but only if the bubble is \(Image.calendar) calendar-enabled")
+        static let activity = Input(title: "A bubble's activity is made up of entries", imageName: "bubbleActivity", footnote: "Entries are similar to calendar events. An entry has a duration, start and end dates. An entry may have multiple sub-entries. Each start (\(Image.tap) Tap) followed by a pause (\(Image.tap)) creates a new sub-entry. Sub-entries are shown below their parent entry. To end an entry \(Image.longPress) long-press on seconds. Ending an entry creates a calendar event, but only if the bubble is \(Image.calendar) calendar-enabled")
     }
     
     enum Kind {
@@ -80,6 +80,8 @@ extension InfoEntry {
         case small
         case smallReversed
     }
+    
+    
 }
 
 struct InfoEntry_Previews: PreviewProvider {
