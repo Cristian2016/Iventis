@@ -35,13 +35,13 @@ extension InfoUnit {
         let gesture:String
         var footnote:LocalizedStringKey?
         
-        static let bubbleTap = Input(keyword: "Start/Pause", symbol: "hand.tap.fill", gesture: "Tap")
+        static let bubbleTap = Input(keyword: "Toggle", symbol: "hand.tap.fill", gesture: "Tap", footnote: "seconds to start or pause a bubble")
         static let bubbleFinish = Input(keyword: "End", symbol: "target", gesture: "Long Press", footnote: "on seconds to end an entry")
     }
 }
 
 struct InfoUnit_Previews: PreviewProvider {
     static var previews: some View {
-        InfoUnit(input: .bubbleFinish)
+        InfoUnit(input: .bubbleTap)
     }
 }
