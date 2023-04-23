@@ -47,6 +47,7 @@ struct ThinMaterialLabel<Content:View>: View {
                     
                 } label: {
                     Label("More", systemImage: "info.square.fill")
+                        .font(.system(size: 24, weight: .medium))
                         .frame(maxWidth: .infinity)
                 }
                 .buttonStyle(.bordered)
@@ -73,7 +74,7 @@ struct ThinMaterialLabel<Content:View>: View {
             Text("OK").frame(maxWidth: .infinity)
         }
         .tint(.red)
-        .buttonStyle(.borderedProminent)
+        .buttonStyle(.bordered)
         .font(.system(size: 24, weight: .medium))
     }
     
