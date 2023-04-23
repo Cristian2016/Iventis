@@ -51,7 +51,9 @@ struct ThinMaterialLabel<Content:View>: View {
     @ViewBuilder
     private var subtitleView:some View {
         if let subtitle = subtitle {
-            Text(subtitle).forceMultipleLines()
+            Text(subtitle)
+                .forceMultipleLines()
+                .italic()
         }
     }
     
