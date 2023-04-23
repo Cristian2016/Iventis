@@ -43,11 +43,16 @@ extension InfoUnit {
         static let durationClear = Input(keyword: "Clear", symbol: "arrow.backward.circle.fill", gesture: "Swipe", footnote: "any swipe direction works")
         
         static let dismissDP = Input(keyword: "Dismiss", symbol: "hand.tap.fill", gesture: "Tap", footnote: "\(Image.init(systemName: "checkmark.circle.fill")) checkmark is hidden")
+        
+        static let paletteStopwatch = Input(keyword: "Stopwatch", symbol: "hand.tap.fill", gesture: "Tap any color")
+        
+        static let paletteTimer = Input(keyword: "Timer", symbol: "target", gesture: "Long Press")
+        static let paletteDismiss = Input(keyword: "Dismiss", symbol: "arrow.backward.circle.fill", gesture: "Swipe Left")
     }
 }
 
 struct InfoUnit_Previews: PreviewProvider {
     static var previews: some View {
-        InfoUnit(input: .createTimer)
+        InfoUnit(input: .paletteDismiss)
     }
 }
