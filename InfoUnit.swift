@@ -35,7 +35,7 @@ extension InfoUnit {
         let gesture:String
         var footnote:LocalizedStringKey?
         
-        static let bubbleTap = Input(keyword: "Toggle", symbol: "hand.tap.fill", gesture: "Tap", footnote: "seconds to start or pause a bubble")
+        static let bubbleTap = Input(keyword: "Toggle", symbol: "hand.tap.fill", gesture: "Tap", footnote: "tap seconds to start or pause")
         static let bubbleFinish = Input(keyword: "End", symbol: "target", gesture: "Long Press", footnote: "on seconds to end an entry")
     }
 }
