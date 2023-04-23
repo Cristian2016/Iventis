@@ -162,7 +162,7 @@ extension DurationPickerView {
     struct Info:View {
         @State private var show = false
         private let title = "Choose Duration"
-        private let subtitle:LocalizedStringKey = "Green \(Image(systemName: "checkmark.circle.fill")) confirms valid duration"
+        private let subtitle:LocalizedStringKey = "\(Image(systemName: "checkmark.circle.fill")) green checkmark confirms valid duration"
         
         var body: some View {
             ZStack {
