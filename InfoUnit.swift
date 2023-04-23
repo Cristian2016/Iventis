@@ -38,14 +38,13 @@ extension InfoUnit {
         static let bubbleTap = Input(keyword: "Toggle", symbol: "hand.tap.fill", gesture: "Tap", footnote: "tap seconds to start or pause")
         static let bubbleFinish = Input(keyword: "End", symbol: "target", gesture: "Long Press", footnote: "long press to end an entry")
         
-        static let dpCreate = Input(keyword: "Create Timer", symbol: "hand.tap.fill", gesture: "Tap", footnote: "\(Image.init(systemName: "checkmark.circle.fill")) checkmark confirms valid duration")
+        static let dpCreate = Input(keyword: "Create Timer", symbol: "hand.tap.fill", gesture: "Tap", footnote: "\(Image.roundCheckmark) checkmark confirms valid duration")
         
         static let dpClear = Input(keyword: "Clear", symbol: "arrow.backward.circle.fill", gesture: "Swipe", footnote: "any swipe direction works")
         
-        static let dpDismiss = Input(keyword: "Dismiss", symbol: "hand.tap.fill", gesture: "Tap", footnote: "\(Image.init(systemName: "checkmark.circle.fill")) checkmark is hidden")
+        static let dpDismiss = Input(keyword: "Dismiss", symbol: "hand.tap.fill", gesture: "Tap", footnote: "\(Image.roundCheckmark) checkmark is hidden")
         
         static let paletteStopwatch = Input(keyword: "Stopwatch", symbol: "hand.tap.fill", gesture: "Tap any color")
-        
         static let paletteTimer = Input(keyword: "Timer", symbol: "target", gesture: "Long Press")
         static let paletteDismiss = Input(keyword: "Dismiss", symbol: "arrow.backward.circle.fill", gesture: "Swipe Left")
     }
@@ -53,6 +52,6 @@ extension InfoUnit {
 
 struct InfoUnit_Previews: PreviewProvider {
     static var previews: some View {
-        InfoUnit(input: .paletteDismiss)
+        InfoUnit(input: .dpCreate)
     }
 }
