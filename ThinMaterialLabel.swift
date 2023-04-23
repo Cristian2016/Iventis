@@ -43,6 +43,7 @@ struct ThinMaterialLabel<Content:View>: View {
             Button {
             } label: {
                 Label("More Info", systemImage: "info.square.fill")
+                    .fontWeight(.medium)
                     .frame(maxWidth: .infinity)
             }
             .buttonStyle(.bordered)
@@ -60,15 +61,6 @@ struct ThinMaterialLabel<Content:View>: View {
                 .forceMultipleLines()
                 .italic()
         }
-    }
-    
-    private var dismissButton:some View {
-        Button { action() } label: {
-            Text("OK").frame(maxWidth: .infinity)
-        }
-        .tint(.red)
-        .buttonStyle(.borderedProminent)
-        .font(.system(size: 24, weight: .medium))
     }
     
     private var roundedBackground:some View {

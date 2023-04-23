@@ -167,7 +167,10 @@ extension DurationPickerView {
         var body: some View {
             ZStack {
                 if show {
-                    Color.black.opacity(0.6).ignoresSafeArea()
+                    Color.black
+                        .opacity(0.6)
+                        .ignoresSafeArea()
+                        .onTapGesture { dismiss() }
                     
                     ThinMaterialLabel(title, subtitle) { InfoView() } action: { dismiss() }
                         .font(.system(size: 20))
