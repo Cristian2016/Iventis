@@ -40,13 +40,18 @@ struct ThinMaterialLabel<Content:View>: View {
                 Divider().frame(maxWidth: 300)
             }
             content
-            Button {
-            } label: {
-                Label("More Info", systemImage: "info.square.fill")
-                    .fontWeight(.medium)
-                    .frame(maxWidth: .infinity)
+            
+            HStack {
+                dismissButton
+                Button {
+                    
+                } label: {
+                    Label("More", systemImage: "info.square.fill")
+                        .frame(maxWidth: .infinity)
+                }
+                .buttonStyle(.bordered)
             }
-            .buttonStyle(.bordered)
+            
         }
         .padding()
         .background { roundedBackground }
@@ -61,6 +66,15 @@ struct ThinMaterialLabel<Content:View>: View {
                 .forceMultipleLines()
                 .italic()
         }
+    }
+    
+    private var dismissButton:some View {
+        Button { action() } label: {
+            Text("OK").frame(maxWidth: .infinity)
+        }
+        .tint(.red)
+        .buttonStyle(.borderedProminent)
+        .font(.system(size: 24, weight: .medium))
     }
     
     private var roundedBackground:some View {
