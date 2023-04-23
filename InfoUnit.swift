@@ -38,7 +38,7 @@ extension InfoUnit {
         static let bubbleTap = Input(keyword: "Toggle", symbol: "hand.tap.fill", gesture: "Tap", footnote: "tap seconds to start or pause")
         static let bubbleFinish = Input(keyword: "End", symbol: "target", gesture: "Long Press", footnote: "long press to end an entry")
         
-        static let createTimer = Input(keyword: "Create Timer", symbol: "hand.tap.fill", gesture: "Tap", footnote: "\(Image.init(systemName: "checkmark.circle.fill")) green checkmark shows")
+        static let createTimer = Input(keyword: "Create Timer", symbol: "hand.tap.fill", gesture: "Tap", footnote: "\(Image.init(systemName: "checkmark.circle.fill")) checkmark confirms valid duration")
         
         static let durationClear = Input(keyword: "Clear", symbol: "arrow.backward.circle.fill", gesture: "Swipe", footnote: "any swipe direction works")
         
@@ -48,6 +48,6 @@ extension InfoUnit {
 
 struct InfoUnit_Previews: PreviewProvider {
     static var previews: some View {
-        InfoUnit(input: .dismissDP)
+        InfoUnit(input: .createTimer)
     }
 }
