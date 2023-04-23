@@ -12,7 +12,7 @@ struct InfoUnit: View {
     
     var body: some View {
         VStack(alignment: .leading) {
-            HStack(spacing: 4) {
+            HStack(spacing: 3) {
                 Text(input.keyword)
                     .fontWeight(.medium)
                 Image(systemName: input.symbol)
