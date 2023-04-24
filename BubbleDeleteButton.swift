@@ -115,7 +115,7 @@ struct BubbleDeleteButton: View {
                 .frame(width: 208, height: 84)
                 .overlay {
                     let count = bubble.sessions_.count
-                    let text:LocalizedStringKey = count > 0 ? "^[\(bubble.sessions_.count) Entry](inflect: true, partOfSpeech: noun)" : "0 Entries"
+                    let text:LocalizedStringKey = count > 0 ? "^[\(bubble.sessions_.count) Entry](inflect: true)" : "0 Entries"
                     
                     Text(text)
                         .font(.system(size: 32, weight: .medium, design: .rounded))
