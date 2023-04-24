@@ -43,7 +43,7 @@ struct AlertHintView: View {
                 .forceMultipleLines()
             } action: {
                 buttonAction()
-            }
+            } moreInfo: { }
         }
         .onTapGesture { dismissAction() }
     }

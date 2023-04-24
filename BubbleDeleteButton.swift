@@ -174,7 +174,9 @@ extension BubbleDeleteButton {
                 if show {
                     Color.black.opacity(0.6).ignoresSafeArea()
                     
-                    ThinMaterialLabel(title, subtitle) { content } action: { dismiss() }
+                    ThinMaterialLabel(title, subtitle) { content } action: { dismiss() } moreInfo: { moreInfo()
+                        
+                    }
                         .font(.system(size: 20))
                 }
             }
@@ -191,12 +193,6 @@ extension BubbleDeleteButton {
                 VStack(alignment: .leading) {
                     Text("**Dismiss** \(Image.tap) Tap")
                     Text("*outside Gray Shape*")
-                    Button {
-                        Secretary.shared.showInfoVH = true
-                    } label: {
-                        Label("*More Info*", systemImage: "info.square.fill")
-                    }
-                    .fontWeight(.medium)
                 }
             }
             .forceMultipleLines()
@@ -204,6 +200,11 @@ extension BubbleDeleteButton {
         
         // MARK: -
         private func dismiss() { Secretary.shared.showBubbleDeleteInfo = false }
+        
+        private func moreInfo() {
+            Secretary.shared.showInfoVH = true
+            print(#function)
+        }
     }
     
     struct MoreInfo: View {

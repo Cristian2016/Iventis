@@ -24,6 +24,10 @@ struct PaletteView: View {
         secretary.showPaletteInfo = false
     }
     
+    private func moreInfo() {
+        secretary.showInfoVH = true
+    }
+    
     var body: some View {
         ZStack {
             if show {
@@ -31,7 +35,9 @@ struct PaletteView: View {
                     colors
                     if showPaletteInfo {
                         let title = "Create Stopwatch/Timer"
-                        ThinMaterialLabel(title) { infoContent } action: { dismiss() }
+                        ThinMaterialLabel(title) { infoContent } action: { dismiss() } moreInfo: {
+                            
+                        }
                     }
                 }
                 .gesture(swipeGesture)

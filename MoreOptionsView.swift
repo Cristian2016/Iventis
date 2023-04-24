@@ -222,7 +222,7 @@ extension MoreOptionsView {
                 if show {
                     Color.black.opacity(0.6).ignoresSafeArea()
                     
-                    ThinMaterialLabel(title, subtitle) { MoreOptionsInfoView() } action: { showInfo() }
+                    ThinMaterialLabel(title, subtitle) { MoreOptionsInfoView() } action: { showInfo() } moreInfo: { }
                     .font(metrics.infoFont)
                 }
             }

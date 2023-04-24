@@ -172,7 +172,7 @@ extension DurationPickerView {
                         .ignoresSafeArea()
                         .onTapGesture { dismiss() }
                     
-                    ThinMaterialLabel(title, subtitle) { InfoView() } action: { dismiss() }
+                    ThinMaterialLabel(title, subtitle) { InfoView() } action: { dismiss() } moreInfo: { }
                         .font(.system(size: 20))
                 }
             }

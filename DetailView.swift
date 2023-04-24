@@ -109,7 +109,7 @@ struct ShowDetailViewInfoView: View {
     let title = "Scroll To Top"
     
     var body: some View {
-        ThinMaterialLabel(title) { infoContent } action: { dismiss() }
+        ThinMaterialLabel(title) { infoContent } action: { dismiss() } moreInfo: { }
         .opacity(showDetailViewInfo ? 1 : 0)
         .onReceive(Secretary.shared.$showDetailViewInfo) { output in
             withAnimation { showDetailViewInfo = output }

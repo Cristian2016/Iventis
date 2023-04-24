@@ -129,7 +129,7 @@ extension SessionDeleteButton {
                     let subtitle:LocalizedStringKey = "If an entry has a corresponding Calendar Event, the Event will be removed from the Calendar App"
                     
                     Color.black.opacity(0.6).ignoresSafeArea()
-                    ThinMaterialLabel(title, subtitle) { content } action: { dismiss() }
+                    ThinMaterialLabel(title, subtitle) { content } action: { dismiss() } moreInfo: { }
                         .font(.system(size: 20))
                 }
             }

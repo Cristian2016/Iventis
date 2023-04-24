@@ -12,9 +12,10 @@ struct ThinMaterialLabel<Content:View>: View {
         let backgroundRadius = CGFloat(20)
     }
     
-    init(_ title:String? = nil, _ subtitle:LocalizedStringKey? = nil, @ViewBuilder _ content:() -> Content, action: @escaping () -> ()) {
+    init(_ title:String? = nil, _ subtitle:LocalizedStringKey? = nil, @ViewBuilder _ content:() -> Content, action: @escaping () -> (), moreInfo: @escaping () -> ()) {
         self.content = content()
         self.action = action
+        self.moreInfo = moreInfo
         self.title = title
         self.subtitle = subtitle
     }
@@ -24,6 +25,7 @@ struct ThinMaterialLabel<Content:View>: View {
     
     let content:Content
     private let action:() -> ()
+    private let moreInfo:() -> ()
     
     @State private var hide = false
     
@@ -40,19 +42,10 @@ struct ThinMaterialLabel<Content:View>: View {
                 Divider().frame(maxWidth: 300)
             }
             content
-            
             HStack {
                 dismissButton
-                Button {
-                    
-                } label: {
-                    Label("More", systemImage: "info.square.fill")
-                        .font(.system(size: 24, weight: .medium))
-                        .frame(maxWidth: .infinity)
-                }
-                .buttonStyle(.bordered)
+                moreInfoButton
             }
-            
         }
         .padding()
         .background { roundedBackground }
@@ -78,6 +71,15 @@ struct ThinMaterialLabel<Content:View>: View {
         .font(.system(size: 24, weight: .medium))
     }
     
+    private var moreInfoButton:some View {
+        Button { moreInfo() } label: {
+            Label("More", systemImage: "info.square.fill")
+                .font(.system(size: 24, weight: .medium))
+                .frame(maxWidth: .infinity)
+        }
+        .buttonStyle(.bordered)
+    }
+    
     private var roundedBackground:some View {
         RoundedRectangle(cornerRadius: metrics.backgroundRadius)
             .fill(.regularMaterial)
@@ -94,6 +96,6 @@ struct PaletteLabel_Previews: PreviewProvider {
         }
     }
     static var previews: some View {
-        ThinMaterialLabel { content } action: { }
+        ThinMaterialLabel { content } action: { } moreInfo: { }
     }
 }
