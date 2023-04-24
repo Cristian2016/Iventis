@@ -177,7 +177,7 @@ extension BubbleDeleteButton {
                     ThinMaterialLabel(title, subtitle) { content } action: { dismiss() } moreInfo: { moreInfo()
                         
                     }
-                        .font(.system(size: 20))
+                    .font(.system(size: 20))
                 }
             }
             .onReceive(Secretary.shared.$showBubbleDeleteInfo) { output in

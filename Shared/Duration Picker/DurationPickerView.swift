@@ -172,7 +172,7 @@ extension DurationPickerView {
                         .ignoresSafeArea()
                         .onTapGesture { dismiss() }
                     
-                    ThinMaterialLabel(title, subtitle) { InfoView() } action: { dismiss() } moreInfo: { }
+                    ThinMaterialLabel(title, subtitle) { InfoView() } action: { dismiss() } moreInfo: { moreInfo() }
                         .font(.system(size: 20))
                 }
             }
@@ -184,6 +184,8 @@ extension DurationPickerView {
         private func dismiss() {
             Secretary.shared.showDurationPickerInfo = false
         }
+        
+        private func moreInfo() { Secretary.shared.showInfoVH = true }
     }
 }
 
