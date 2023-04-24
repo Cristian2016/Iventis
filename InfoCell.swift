@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct InfoEntry: View {
+struct InfoCell: View {
     let input:Input
     var kind = Kind.regular
     
@@ -64,7 +64,7 @@ struct InfoEntry: View {
     }
 }
 
-extension InfoEntry {
+extension InfoCell {
     struct Input {
         var title:LocalizedStringKey?
         var subtitle:LocalizedStringKey?
@@ -84,8 +84,8 @@ extension InfoEntry {
     
 }
 
-struct InfoEntry_Previews: PreviewProvider {
+struct InfoCell_Previews: PreviewProvider {
     static var previews: some View {
-        InfoEntry(input: .activity)
+        InfoCell(input: .activity)
     }
 }

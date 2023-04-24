@@ -115,7 +115,7 @@
 		1FA834752850A57C003F4D61 /* Widgets.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 1FA834712850A57A003F4D61 /* Widgets.intentdefinition */; };
 		1FA834762850A57C003F4D61 /* Widgets.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 1FA834712850A57A003F4D61 /* Widgets.intentdefinition */; };
 		1FA834792850A57C003F4D61 /* WidgetsExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 1FA8346B2850A57A003F4D61 /* WidgetsExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		1FA8ECF129F3F70800B301AE /* InfoEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA8ECF029F3F70800B301AE /* InfoEntry.swift */; };
+		1FA8ECF129F3F70800B301AE /* InfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA8ECF029F3F70800B301AE /* InfoCell.swift */; };
 		1FA8F87E28367B7A00394B59 /* BubbleNote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA8F87D28367B7A00394B59 /* BubbleNote.swift */; };
 		1FAD1576298A5A6C001139C6 /* AddNoteButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FAD1575298A5A6C001139C6 /* AddNoteButton.swift */; };
 		1FAD1578298A8346001139C6 /* Secretary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FAD1577298A8345001139C6 /* Secretary.swift */; };
@@ -353,7 +353,7 @@
 		1FA834712850A57A003F4D61 /* Widgets.intentdefinition */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; path = Widgets.intentdefinition; sourceTree = "<group>"; };
 		1FA834722850A57C003F4D61 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1FA834742850A57C003F4D61 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		1FA8ECF029F3F70800B301AE /* InfoEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoEntry.swift; sourceTree = SOURCE_ROOT; };
+		1FA8ECF029F3F70800B301AE /* InfoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoCell.swift; sourceTree = SOURCE_ROOT; };
 		1FA8F87D28367B7A00394B59 /* BubbleNote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BubbleNote.swift; sourceTree = "<group>"; };
 		1FAD1575298A5A6C001139C6 /* AddNoteButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNoteButton.swift; sourceTree = "<group>"; };
 		1FAD1577298A8345001139C6 /* Secretary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Secretary.swift; sourceTree = "<group>"; };
@@ -574,7 +574,7 @@
 			isa = PBXGroup;
 			children = (
 				1FB2A84829F518D800E4861A /* InfoUnit.swift */,
-				1FA8ECF029F3F70800B301AE /* InfoEntry.swift */,
+				1FA8ECF029F3F70800B301AE /* InfoCell.swift */,
 				1FBC9A0129F2A3B300B324DA /* InfoLego.swift */,
 				1FBC99FF29F2842E00B324DA /* InfoViewHierarchy.swift */,
 				1FB8E84E29E2FBC50005909E /* AppDelegate.swift */,
@@ -1076,7 +1076,7 @@
 				1F99AB5F286CA40D00977C9A /* StickyNote.swift in Sources */,
 				1F3950BA29966DEA00DD9423 /* Coordinator.swift in Sources */,
 				1F5F4A752809409600AF3442 /* Bubble Properties.swift in Sources */,
-				1FA8ECF129F3F70800B301AE /* InfoEntry.swift in Sources */,
+				1FA8ECF129F3F70800B301AE /* InfoCell.swift in Sources */,
 				1FB7D57C2862F0300085C2BE /* PlusButton.swift in Sources */,
 				1F20807F2836111600FD35D6 /* BSavedNote Properties.swift in Sources */,
 				1F38C5A32986615F00057B8C /* FusedLabel.swift in Sources */,
