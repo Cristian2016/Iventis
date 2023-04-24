@@ -170,7 +170,6 @@ extension DurationPickerView {
                     Color.black
                         .opacity(0.6)
                         .ignoresSafeArea()
-                        .onTapGesture { dismiss() }
                     
                     ThinMaterialLabel(title, subtitle) { InfoView() } action: { dismiss() } moreInfo: { moreInfo() }
                         .font(.system(size: 20))
