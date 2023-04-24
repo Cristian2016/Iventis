@@ -15,14 +15,14 @@ struct SecondsLabel: View {
     @State private var sec = "e"
     
     var body: some View {
-        if bubble.coordinator != nil {
-            clearCircle
-                .overlay (secondsLabel)
-                .overlay (timerProgressView)
-                .onReceive(bubble.coordinator.$timeComponents) { sec = $0.sec }
-        } else {
-            Text("NIL")
+        ZStack {
+            if bubble.coordinator != nil {
+                clearCircle
+                    .overlay (secondsLabel)
+                    .overlay (timerProgressView)
+            }
         }
+        .onReceive(bubble.coordinator.$timeComponents) { sec = $0.sec }
     }
     
     // MARK: - Lego
