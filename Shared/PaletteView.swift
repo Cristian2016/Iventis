@@ -35,9 +35,11 @@ struct PaletteView: View {
                     colors
                     if showPaletteInfo {
                         let title = "Create Stopwatch/Timer"
-                        ThinMaterialLabel(title) { infoContent } action: { dismiss() } moreInfo: {
-                            
-                        }
+                        
+                        //info has content and two buttons (two actions)
+                        ThinMaterialLabel(title) { infoContent }
+                    action: { dismiss() } //dismiss action
+                    moreInfo: { moreInfo() } //more info action
                     }
                 }
                 .gesture(swipeGesture)
