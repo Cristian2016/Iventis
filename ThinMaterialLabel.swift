@@ -57,6 +57,7 @@ struct ThinMaterialLabel<Content:View>: View {
     private var subtitleView:some View {
         if let subtitle = subtitle {
             Text(subtitle)
+                .foregroundColor(.secondary)
                 .forceMultipleLines()
                 .italic()
         }
