@@ -65,6 +65,8 @@ public extension Image {
     static let reset = Image(systemName: "arrow.counterclockwise")
     static let xmark = Image(systemName: "xmark.square.fill")
     
+    static let stopwatch = Image(systemName: "stopwatch")
+    
     // MARK: - Info Assets
     static let dpv = Image("DurationPicker")
     static let moreOptionsView = Image("MoreOptions")

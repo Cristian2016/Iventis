@@ -35,10 +35,10 @@ struct PaletteView: View {
                     colors
                     if showPaletteInfo {
                         let title = "Create Bubble"
-                        let subtitle = "A bubble can be a stopwatch or a timer"
+                        let subtitle:LocalizedStringKey = "A bubble can be a \(Image.stopwatch) stopwatch or a \(Image.timer) timer"
                         
                         //info has content and two buttons (two actions)
-                        ThinMaterialLabel(title) { infoContent }
+                        ThinMaterialLabel(title, subtitle) { infoContent }
                     action: { dismiss() } //dismiss action
                     moreInfo: { moreInfo() } //more info action
                     }
