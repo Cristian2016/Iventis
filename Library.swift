@@ -60,7 +60,7 @@ public extension Image {
     static let info = Image(systemName: "info.circle.fill")
     static let alert = Image(systemName: "exclamationmark.triangle.fill")
     static let roundCheckmark = Image(systemName: "checkmark.circle.fill")
-    static let timer = Image(systemName: "timer.fill")
+    static let timer = Image(systemName: "timer.circle.fill")
     static let stopwatch = Image(systemName: "stopwatch.fill")
     static let more = Image(systemName: "ellipsis.circle.fill")
     static let reset = Image(systemName: "arrow.counterclockwise")
