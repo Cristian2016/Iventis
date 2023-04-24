@@ -30,7 +30,7 @@ struct PaletteView: View {
                 ZStack {
                     colors
                     if showPaletteInfo {
-                        let title = "Create Bubbles"
+                        let title = "Create Stopwatch/Timer"
                         ThinMaterialLabel(title) { infoContent } action: { dismiss() }
                     }
                 }
