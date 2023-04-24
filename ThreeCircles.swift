@@ -25,7 +25,7 @@ struct ThreeCircles: View {
     }
     
     var body: some View {
-        Rectangle().fill(.clear)
+        Color.clear
             .aspectRatio(metrics.ratio, contentMode: .fit)
             .overlay {
                 HStack {
@@ -39,13 +39,13 @@ struct ThreeCircles: View {
                         .onLongPressGesture { showNotesList() }
                     /* Sec */ SecondsCircle(bubble: bubble, color: color, scale: metrics.circleScale)
                 }
-                .scaleEffect(x: metrics.hstackScale, y: metrics.hstackScale)
-                .onReceive(bubble.coordinator.$timeComponentsOpacity) { output in
-                    minOpacity = output.min
-                    hrOpacity = output.hr
-                }
-                .onReceive(bubble.coordinator.color) { color = $0 }
             }
+            .scaleEffect(x: metrics.hstackScale, y: metrics.hstackScale)
+            .onReceive(bubble.coordinator.$timeComponentsOpacity) { output in
+                minOpacity = output.min
+                hrOpacity = output.hr
+            }
+            .onReceive(bubble.coordinator.color) { color = $0 }
     }
     
     // MARK: - User Intents
