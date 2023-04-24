@@ -40,7 +40,7 @@ extension InfoUnit {
         static let bubbleTap = Input(keyword: "Toggle", symbol: "hand.tap.fill", gesture: "Tap", footnote: "tap seconds to start or pause")
         static let bubbleFinish = Input(keyword: "End", symbol: "target", gesture: "Long Press", footnote: "long press to end an entry")
         
-        static let dpCreate = Input(keyword: "Create Timer", symbol: "hand.tap.fill", gesture: "Tap", footnote: "\(Image.roundCheckmark) if duration is valid")
+        static let dpCreate = Input(keyword: "Create Timer", symbol: "hand.tap.fill", gesture: "Tap", footnote: "if \(Image.roundCheckmark) shows (duration is valid)")
         
         static let dpClear = Input(keyword: "Clear", symbol: "arrow.backward.circle.fill", gesture: "Swipe", footnote: "any swipe direction works")
         
