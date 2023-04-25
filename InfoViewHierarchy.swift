@@ -20,7 +20,7 @@ struct InfoStore {
         Info(symbol: "calendar", name: "Enable Calendar"),
         Info(symbol: "timer", name: "Create Timer"),
         Info(symbol: "trash", name: "Delete Bubble/Activity"),
-        Info(symbol: "trash", name: "Delete Activity Entry"),
+        Info(symbol: "trash", name: "Delete an Entry"),
     ]
 }
 
