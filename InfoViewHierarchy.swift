@@ -10,10 +10,11 @@ import MyPackage
 
 struct InfoStore {
     struct Info:Identifiable, Hashable {
-        let id = UUID().uuidString
-        
         var symbol:String?
         let name:String
+        
+        
+        let id = UUID().uuidString
     }
     
     static let infos = [
