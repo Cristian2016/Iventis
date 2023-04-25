@@ -67,13 +67,14 @@ struct InfoCell: View {
                 }
             case .smallReversed:
                 VStack {
-                    if let imageName = input.image {
-                        Image(imageName)
-                            .resizable()
-                            .scaledToFit()
-                            .frame(height: 130)
-                    }
                     HStack(alignment: .bottom) {
+                        if let imageName = input.image {
+                            Image(imageName)
+                                .resizable()
+                                .scaledToFit()
+                                .frame(height: 130)
+                        }
+                        
                         if !input.units.isEmpty {
                             VStack(alignment: .leading) {
                                 if let overtitle = input.overtitle {
