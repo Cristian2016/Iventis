@@ -29,9 +29,9 @@ struct InfoCell: View {
                         Text(footnote)
                             .font(.caption2.italic())
                     }
-                    if let subtitle = input.subtitle {
-                        Text(subtitle)
-                            .font(.system(size: 18))
+                    if let overtitle = input.overtitle {
+                        Text(overtitle)
+                            .font(.system(size: 18).italic())
                             .foregroundColor(.secondary)
                     }
                     if let imageName = input.image {
@@ -45,6 +45,11 @@ struct InfoCell: View {
                     HStack(alignment: .bottom) {
                         if !input.units.isEmpty {
                             VStack(alignment: .leading) {
+                                if let overtitle = input.overtitle {
+                                    Text(overtitle)
+                                        .font(.system(size: 20).italic())
+                                        .foregroundColor(.secondary)
+                                }
                                 ForEach(input.units) { InfoUnit($0) }
                             }
                         }
@@ -52,7 +57,7 @@ struct InfoCell: View {
                             Image(imageName)
                                 .resizable()
                                 .scaledToFit()
-                                .frame(height: 110)
+                                .frame(height: 130)
                         }
                     }
                     if let footnote = input.footnote {
@@ -68,15 +73,16 @@ struct InfoCell: View {
 
 extension InfoCell {
     struct Input:Identifiable {
+        var overtitle:LocalizedStringKey?
         var units:[InfoUnit.Input]
-        var subtitle:LocalizedStringKey?
         var image:String?
         var footnote:LocalizedStringKey?
         let kind:Kind
         let id = UUID().uuidString
         
         static let inputs:[Self] = [
-            .init(units: [.bubbleStart, .bubbleFinish], image: "sec", kind: .small)
+            .init(units: [.bubbleStart, .bubbleFinish], image: "sec", kind: .small),
+            .init(overtitle: "Use Yellow Area to", units: [], image: "bubble", kind: .regular)
         ]
     }
     

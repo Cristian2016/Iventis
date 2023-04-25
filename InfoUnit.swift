@@ -23,7 +23,7 @@ struct InfoUnit: View {
             .font(.system(size: 22))
             if let footnote = input.footnote {
                 Text(footnote)
-                    .font(.system(size: 19).italic())
+                    .font(.system(size: 19))
                     .foregroundColor(.secondary)
             }
         }
