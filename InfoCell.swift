@@ -65,7 +65,32 @@ struct InfoCell: View {
                             .foregroundColor(.secondary)
                     }
                 }
-            case .smallReversed: EmptyView()
+            case .smallReversed:
+                VStack {
+                    if let imageName = input.image {
+                        Image(imageName)
+                            .resizable()
+                            .scaledToFit()
+                            .frame(height: 130)
+                    }
+                    HStack(alignment: .bottom) {
+                        if !input.units.isEmpty {
+                            VStack(alignment: .leading) {
+                                if let overtitle = input.overtitle {
+                                    Text(overtitle)
+                                        .font(.system(size: 20).italic())
+                                        .foregroundColor(.secondary)
+                                }
+                                ForEach(input.units) { InfoUnit($0) }
+                            }
+                        }
+                    }
+                    if let footnote = input.footnote {
+                        Text(footnote)
+                            .font(.footnote.italic())
+                            .foregroundColor(.secondary)
+                    }
+                }
         }
     }
 }
@@ -80,7 +105,7 @@ extension InfoCell {
         let id = UUID().uuidString
         
         static let inputs:[Self] = [
-            .init(units: [.bubbleStart, .bubbleFinish], image: "sec", kind: .small),
+            .init(units: [.bubbleStart, .bubbleFinish], image: "sec", kind: .smallReversed),
             .init(overtitle: "Use Yellow Area to", units: [.showActivity, .addNote], image: "bubble", kind: .regular)
         ]
     }
