@@ -37,6 +37,7 @@ struct InfoCell: View {
                         Image(imageName)
                             .resizable()
                             .scaledToFit()
+                            .frame(maxHeight: 200)
                     }
                 }
             case .small:
