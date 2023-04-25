@@ -37,11 +37,6 @@ struct InfoViewHierarchy: View {
                                 InfoCell(input: input)
                             }
                         }
-                        VStack(alignment: .leading) {
-                            InfoLego(input: .bubbleYellowArea, inverseColors: true)
-                            Divider()
-                        }
-                        .listRowSeparator(.hidden)
                         
                         ForEach(InfoStore.infos) { info in
                             NavigationLink(value: info) {
