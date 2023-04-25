@@ -1,0 +1,21 @@
+{
+  "images" : [
+    {
+      "filename" : "Simulator Screenshot - 14 pro max - 2023-04-25 at 20.39.18.png",
+      "idiom" : "universal",
+      "scale" : "1x"
+    },
+    {
+      "idiom" : "universal",
+      "scale" : "2x"
+    },
+    {
+      "idiom" : "universal",
+      "scale" : "3x"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}
