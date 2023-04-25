@@ -24,7 +24,6 @@ struct InfoUnit: View {
             if let footnote = input.footnote {
                 Text(footnote)
                     .font(.system(size: 19))
-                    .foregroundColor(.secondary)
             }
         }
     }

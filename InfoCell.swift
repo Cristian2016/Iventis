@@ -19,6 +19,11 @@ struct InfoCell: View {
         switch input.kind {
             case .regular:
                 VStack(alignment: .leading) {
+                    if let overtitle = input.overtitle {
+                        Text(overtitle)
+                            .font(.system(size: 20).italic())
+                            .foregroundColor(.secondary)
+                    }
                     if !input.units.isEmpty {
                         VStack(alignment: .leading) {
                             ForEach(input.units) { InfoUnit($0) }
@@ -27,11 +32,6 @@ struct InfoCell: View {
                     if let footnote = input.footnote {
                         Text(footnote)
                             .font(.caption2.italic())
-                    }
-                    if let overtitle = input.overtitle {
-                        Text(overtitle)
-                            .font(.system(size: 18).italic())
-                            .foregroundColor(.secondary)
                     }
                     if let imageName = input.image {
                         Image(imageName)
