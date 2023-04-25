@@ -106,7 +106,7 @@ extension InfoCell {
         let id = UUID().uuidString
         
         static let inputs:[Self] = [
-            .init(units: [.bubbleStart, .bubbleFinish], image: "sec", kind: .smallReversed),
+            .init(overtitle: "Use Seconds to", units: [.bubbleStart, .bubbleFinish], image: "sec", kind: .small),
             .init(overtitle: "Use Yellow Area to", units: [.showActivity, .addNote], image: "bubble", kind: .regular)
         ]
     }
