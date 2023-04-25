@@ -21,8 +21,7 @@ struct InfoCell: View {
                 VStack(alignment: .leading) {
                     if !input.units.isEmpty {
                         VStack(alignment: .leading) {
-                            ForEach(input.units) { item in
-                            }
+                            ForEach(input.units) { InfoUnit($0) }
                         }
                     }
                     if let footnote = input.footnote {
