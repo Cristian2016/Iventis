@@ -48,9 +48,7 @@ struct InfoViewHierarchy: View {
                         ForEach(InfoStore.infos) { info in
                             NavigationLink(value: info) {
                                 HStack {
-                                    if let symbol = info.symbol {
-                                        Image(systemName: symbol)
-                                    }
+                                    if let symbol = info.symbol { Image(systemName: symbol) }
                                     Text(info.name)
                                 }
                             }
@@ -61,7 +59,10 @@ struct InfoViewHierarchy: View {
                     .listStyle(.plain)
                     .scrollIndicators(.hidden)
                     .navigationDestination(for: InfoStore.Info.self) { info in
-                        BubbleDeleteButton.MoreInfo()
+                        Image(info.name)
+                            .resizable()
+                            .scaledToFit()
+                            .padding(3)
                             .toolbar { dismissButton }
                     }
                     .toolbar { dismissButton }
