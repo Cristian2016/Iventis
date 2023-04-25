@@ -17,7 +17,7 @@ struct InfoOutline: View {
                     .resizable()
                     .scaledToFit()
                     .frame(maxHeight: 200)
-                Text("*\(Image.alert) If asked, grant permission to Fused App to create events in Calendar App*")
+                Text("*\(Image.alert) If asked, grant permission to creating events in the Calendar App*")
                     .foregroundColor(.secondary)
                     .font(.system(size: 20))
                 Divider()
