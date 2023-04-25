@@ -33,6 +33,15 @@ struct InfoViewHierarchy: View {
             if show {
                 NavigationStack(path: $path) {
                     List {
+                        HStack {
+                            Spacer()
+                            Image("hms")
+                                .resizable()
+                                .scaledToFit()
+                                .frame(height: 180)
+                            Spacer()
+                        }
+                        
                         ForEach(InfoCell.Input.inputs) { InfoCell(input: $0) }
                         
                         ForEach(InfoStore.infos) { info in
