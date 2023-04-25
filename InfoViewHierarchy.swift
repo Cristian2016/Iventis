@@ -32,6 +32,11 @@ struct InfoViewHierarchy: View {
             if show {
                 NavigationStack(path: $path) {
                     List {
+                        Section {
+                            ForEach(InfoCell.Input.inputs) { input in
+                                InfoCell(input: input)
+                            }
+                        }
                         VStack(alignment: .leading) {
                             HInfoLego(input: .bubbleSecondsArea, inverseColors: true)
                             Divider()

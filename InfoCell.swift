@@ -9,7 +9,6 @@ import SwiftUI
 
 struct InfoCell: View {
     let input:Input
-    var kind = Kind.regular
     
     var body: some View {
         content
@@ -17,12 +16,14 @@ struct InfoCell: View {
     
     @ViewBuilder
     private var content:some View {
-        switch kind {
+        switch input.kind {
             case .regular:
                 VStack {
-                    if let title = input.title {
-                        Text(title)
-                            .font(.system(size: 20))
+                    if !input.units.isEmpty {
+                        VStack(alignment: .leading) {
+                            ForEach(input.units) { item in
+                            }
+                        }
                     }
                     if let footnote = input.footnote {
                         Text(footnote)
@@ -33,7 +34,7 @@ struct InfoCell: View {
                             .font(.system(size: 18))
                             .foregroundColor(.secondary)
                     }
-                    if let imageName = input.imageName {
+                    if let imageName = input.image {
                         Image(imageName)
                             .resizable()
                             .scaledToFit()
@@ -42,11 +43,12 @@ struct InfoCell: View {
             case .small:
                 VStack {
                     HStack(alignment: .bottom) {
-                        if let title = input.title {
-                            Text(title)
-                                .font(.system(size: 20))
+                        if !input.units.isEmpty {
+                            VStack(alignment: .leading) {
+                                ForEach(input.units) { InfoUnit($0) }
+                            }
                         }
-                        if let imageName = input.imageName {
+                        if let imageName = input.image {
                             Image(imageName)
                                 .resizable()
                                 .scaledToFit()
@@ -65,14 +67,17 @@ struct InfoCell: View {
 }
 
 extension InfoCell {
-    struct Input {
-        var title:LocalizedStringKey?
+    struct Input:Identifiable {
+        var units:[InfoUnit.Input]
         var subtitle:LocalizedStringKey?
-        var imageName:String?
+        var image:String?
         var footnote:LocalizedStringKey?
+        let kind:Kind
+        let id = UUID().uuidString
         
-        static let sec = Input(title: "**Start/Pause** \(Image.tap) Tap\n**Finish** \(Image.longPress) Long Press", imageName: "sec")
-        static let activity = Input(title: "A bubble's activity is made up of entries", imageName: "bubbleActivity", footnote: "Entries are similar to calendar events. An entry has a duration, start and end dates. An entry may have multiple sub-entries. Each start (\(Image.tap) Tap) followed by a pause (\(Image.tap)) creates a new sub-entry. Sub-entries are shown below their parent entry. To end an entry \(Image.longPress) long-press on seconds. Ending an entry creates a calendar event, but only if the bubble is \(Image.calendar) calendar-enabled")
+        static let inputs:[Self] = [
+            .init(units: [.bubbleStart, .bubbleFinish], image: "sec", kind: .small)
+        ]
     }
     
     enum Kind {
@@ -80,12 +85,10 @@ extension InfoCell {
         case small
         case smallReversed
     }
-    
-    
 }
 
-struct InfoCell_Previews: PreviewProvider {
-    static var previews: some View {
-        InfoCell(input: .activity)
-    }
-}
+//struct InfoCell_Previews: PreviewProvider {
+//    static var previews: some View {
+//        InfoCell(input: .sec, kind: .small)
+//    }
+//}

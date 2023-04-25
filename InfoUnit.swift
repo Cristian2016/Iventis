@@ -20,25 +20,26 @@ struct InfoUnit: View {
                 Image(systemName: input.symbol)
                 Text(input.gesture)
             }
-            .font(.system(size: 20))
+            .font(.system(size: 22))
             if let footnote = input.footnote {
                 Text(footnote)
                     .font(.system(size: 19).italic())
-//                    .foregroundColor(.secondary)
+                    .foregroundColor(.secondary)
             }
         }
     }
 }
 
 extension InfoUnit {
-    struct Input {
+    struct Input:Identifiable {
         let keyword:LocalizedStringKey
         let symbol:String
         let gesture:String
         var footnote:LocalizedStringKey?
+        let id = UUID().uuidString
         
-        static let bubbleTap = Input(keyword: "Toggle", symbol: "hand.tap.fill", gesture: "Tap", footnote: "tap seconds to start or pause")
-        static let bubbleFinish = Input(keyword: "End", symbol: "target", gesture: "Long Press", footnote: "long press to end an entry")
+        static let bubbleStart = Input(keyword: "Start/Pause", symbol: "hand.tap.fill", gesture: "Tap")
+        static let bubbleFinish = Input(keyword: "End", symbol: "target", gesture: "Long Press", footnote: "to end an entry")
         
         static let dpCreate = Input(keyword: "Create Timer", symbol: "hand.tap.fill", gesture: "Tap", footnote: "if \(Image.roundCheckmark) checkmark shows")
         
