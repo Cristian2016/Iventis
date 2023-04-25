@@ -12,14 +12,15 @@ struct InfoStore {
     struct Info:Identifiable, Hashable {
         let id = UUID().uuidString
         
+        var symbol:String?
         let name:String
     }
     
     static let infos = [
-        Info(name: "Enable Calendar"),
-        Info(name: "Create Timer"),
-        Info(name: "Delete Bubble/Activity"),
-        Info(name: "Delete Activity Item"),
+        Info(symbol: "calendar", name: "Enable Calendar"),
+        Info(symbol: "timer", name: "Create Timer"),
+        Info(symbol: "trash", name: "Delete Bubble/Activity"),
+        Info(symbol: "trash", name: "Delete Activity Entry"),
     ]
 }
 
@@ -36,7 +37,12 @@ struct InfoViewHierarchy: View {
                         
                         ForEach(InfoStore.infos) { info in
                             NavigationLink(value: info) {
-                                Text(info.name)
+                                HStack {
+                                    if let symbol = info.symbol {
+                                        Image(systemName: symbol)
+                                    }
+                                    Text(info.name)
+                                }
                             }
                         }
                         .navigationTitle("Info")
