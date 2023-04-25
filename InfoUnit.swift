@@ -41,6 +41,9 @@ extension InfoUnit {
         static let bubbleStart = Input(keyword: "Start/Pause", symbol: "hand.tap.fill", gesture: "Tap")
         static let bubbleFinish = Input(keyword: "End", symbol: "target", gesture: "Long Press", footnote: "to end an entry")
         
+        static let showActivity = Input(keyword: "Show Activity", symbol: "hand.tap.fill", gesture: "Tap")
+        static let addNote = Input(keyword: "Add Note", symbol: "target", gesture: "Long Press")
+        
         static let dpCreate = Input(keyword: "Create Timer", symbol: "hand.tap.fill", gesture: "Tap", footnote: "if \(Image.roundCheckmark) checkmark shows")
         
         static let dpClear = Input(keyword: "Clear", symbol: "arrow.backward.circle.fill", gesture: "Swipe", footnote: "any swipe direction works")

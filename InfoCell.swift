@@ -18,7 +18,7 @@ struct InfoCell: View {
     private var content:some View {
         switch input.kind {
             case .regular:
-                VStack {
+                VStack(alignment: .leading) {
                     if !input.units.isEmpty {
                         VStack(alignment: .leading) {
                             ForEach(input.units) { item in
@@ -82,7 +82,7 @@ extension InfoCell {
         
         static let inputs:[Self] = [
             .init(units: [.bubbleStart, .bubbleFinish], image: "sec", kind: .small),
-            .init(overtitle: "Use Yellow Area to", units: [], image: "bubble", kind: .regular)
+            .init(overtitle: "Use Yellow Area to", units: [.showActivity, .addNote], image: "bubble", kind: .regular)
         ]
     }
     
