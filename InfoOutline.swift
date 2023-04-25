@@ -11,7 +11,7 @@ struct InfoOutline: View {
     var body: some View {
         ScrollView {
             VStack(alignment: .leading) {
-                Text("\(Image.rightSwipe) Swipe right on a bubble and choose 'Cal ON'")
+                Text("***\(Image.rightSwipe) Swipe right*** on a bubble and choose 'Cal ON'")
                     .font(.system(size: 20))
                 Image("calOption")
                     .resizable()
@@ -28,7 +28,7 @@ struct InfoOutline: View {
                     .scaledToFit()
                     .frame(maxHeight: 200)
                 Divider()
-                Text("A calendar event will be created for each closed entry. To close an entry long-press on seconds")
+                Text("A calendar event will be created for each closed entry. To close an entry ***\(Image.longPress) long-press*** on seconds")
                     .font(.system(size: 20))
                 Image("event.entry")
                     .resizable()
