@@ -28,14 +28,14 @@ struct InfoOutline: View {
                     .scaledToFit()
                     .frame(maxHeight: 200)
                 Divider()
-                Text("A calendar event will be created for each entry, if the entry is closed. To close an entry long-press on seconds. A confirmation will appear")
+                Text("A calendar event will be created for each closed entry. To close an entry long-press on seconds")
                     .font(.system(size: 20))
                 Image("event.entry")
                     .resizable()
                     .scaledToFit()
                     .frame(maxHeight: 200)
             }
-            .padding(10)
+            .padding()
         }
     }
 }
