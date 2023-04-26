@@ -52,7 +52,7 @@ extension InfoOutlineUnit {
         static let enableCal2 = Input(horizontal: true, title: "Calendar symbol in red appears", image: "calSymbol")
         static let enableCal3 = Input(title: "A calendar event will be created for each closed entry. To close an entry *\(Image.longPress) long-press* on seconds", image: "event.entry")
         
-        static let aepActivity = Input(title: "The bubble's activity (activity log) represents its usage over time", image: "bubbleActivity", footnote: "To view a bubble's activity *\(Image.tap) Tap* either its minutes or hours area")
+        static let aepActivity = Input(title: "The bubble's activity (activity log) represents its usage over time", image: "bubbleActivity", footnote: "*\(Image.tap) Tap* a bubble's hours or minutes area to view its activity")
     }
 }
 
