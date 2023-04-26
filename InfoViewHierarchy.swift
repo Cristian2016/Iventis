@@ -13,7 +13,6 @@ struct InfoStore {
         var symbol:String?
         let name:String
         
-        
         let id = UUID().uuidString
     }
     
@@ -59,10 +58,7 @@ struct InfoViewHierarchy: View {
                     .listStyle(.plain)
                     .scrollIndicators(.hidden)
                     .navigationDestination(for: InfoStore.Info.self) { info in
-                        Image(info.name)
-                            .resizable()
-                            .scaledToFit()
-                            .padding(3)
+                        InfoOutlineView(info: info)
                             .toolbar { dismissButton }
                     }
                     .toolbar { dismissButton }

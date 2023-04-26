@@ -8,6 +8,15 @@
 import SwiftUI
 
 struct InfoOutlineView: View {
+        
+    init(info: InfoStore.Info) {
+        switch info.name {
+            case "Enable Calendar":
+                self.outlines = [.enableCal1, .enableCal2, .enableCal3]
+            default:
+                self.outlines = []
+        }
+    }
     
     let outlines:[InfoOutlineUnit.Input]
     
@@ -16,12 +25,13 @@ struct InfoOutlineView: View {
             ForEach(outlines) {
                 InfoOutlineUnit($0)
             }
+            .padding([.leading, .trailing], 8)
         }
     }
 }
 
 struct InfoOutlineView_Previews: PreviewProvider {
     static var previews: some View {
-        InfoOutlineView(outlines: [.enableCal1, .enableCal2, .enableCal3])
+        InfoOutlineView(info: .init(name: "Enable Calendar"))
     }
 }
