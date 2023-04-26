@@ -21,6 +21,7 @@ struct InfoStore {
         Info(symbol: "timer", name: "Create Timer"),
         Info(symbol: "trash", name: "Delete Bubble/Activity"),
         Info(symbol: "trash", name: "Delete Entry"),
+        Info(symbol: "questionmark.circle.fill", name: "What is activity, entry and pair")
     ]
 }
 
