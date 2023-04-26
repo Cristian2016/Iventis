@@ -8,15 +8,11 @@
 import SwiftUI
 
 struct InfoOutline: View {
-    
     let input:Input
-    
-    init(_ input: Input) {
-        self.input = input
-    }
     
     var body: some View {
         let layout = input.horizontal ? AnyLayout(HStackLayout(alignment: .bottom)) : AnyLayout(VStackLayout(alignment: .leading))
+        
         VStack(alignment: .leading) {
             layout {
                 Text(input.title).font(.system(size: 20))
@@ -36,6 +32,8 @@ struct InfoOutline: View {
             Divider()
         }
     }
+    
+    init(_ input: Input) { self.input = input }
 }
 
 extension InfoOutline {
