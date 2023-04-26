@@ -46,6 +46,7 @@ struct InfoViewHierarchy: View {
                         .navigationTitle("Info")
                         .navigationBarTitleDisplayMode(.inline)
                     }
+                    .listSectionSeparator(.hidden)
                     .listStyle(.plain)
                     .scrollIndicators(.hidden)
                     .navigationDestination(for: InfoStore.Info.self) {
