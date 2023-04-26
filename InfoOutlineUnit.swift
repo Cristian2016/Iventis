@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct InfoOutline: View {
+struct InfoOutlineUnit: View {
     let input:Input
     
     var body: some View {
@@ -38,12 +38,14 @@ struct InfoOutline: View {
     init(_ input: Input) { self.input = input }
 }
 
-extension InfoOutline {
-    struct Input {
+extension InfoOutlineUnit {
+    struct Input:Identifiable {
         var horizontal = false
         let title:LocalizedStringKey
         var image:String?
         var footnote:LocalizedStringKey?
+        
+        let id = UUID().uuidString
         
         static let enableCal1 = Input(horizontal: true, title: "***\(Image.rightSwipe) Swipe right*** on a bubble and choose 'Cal ON'", image: "calOption", footnote: "*\(Image.alert) If asked, grant permission to creating events in the Calendar App*")
         static let enableCal2 = Input(horizontal: true, title: "Calendar symbol in red appears", image: "calSymbol")
@@ -51,8 +53,8 @@ extension InfoOutline {
     }
 }
 
-struct InfoOutline_Previews: PreviewProvider {
+struct InfoOutlineUnit_Previews: PreviewProvider {
     static var previews: some View {
-        InfoOutline(.enableCal1)
+        InfoOutlineUnit(.enableCal1)
     }
 }
