@@ -24,7 +24,7 @@ struct InfoOutlineUnit: View {
                     Image(imageName)
                         .resizable()
                         .scaledToFit()
-                        .frame(maxHeight: 150)
+                        .frame(maxHeight: input.imageHeight)
                 }
             }
             if let footnote = input.footnote {
