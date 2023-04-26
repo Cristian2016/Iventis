@@ -51,6 +51,6 @@ extension InfoOutline {
 
 struct InfoOutline_Previews: PreviewProvider {
     static var previews: some View {
-        InfoOutline(.enableCal2)
+        InfoOutline(.enableCal3)
     }
 }
