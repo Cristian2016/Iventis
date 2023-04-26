@@ -34,6 +34,7 @@ struct InfoViewHierarchy: View {
                 NavigationStack(path: $path) {
                     List {
                         ForEach(InfoCell.Input.all) { InfoCell(input: $0) }
+                            .listSectionSeparator(.hidden)
                         
                         ForEach(InfoStore.infos) { info in
                             NavigationLink(value: info) {
@@ -46,7 +47,6 @@ struct InfoViewHierarchy: View {
                         .navigationTitle("Info")
                         .navigationBarTitleDisplayMode(.inline)
                     }
-                    .listSectionSeparator(.hidden)
                     .listStyle(.plain)
                     .scrollIndicators(.hidden)
                     .navigationDestination(for: InfoStore.Info.self) {
