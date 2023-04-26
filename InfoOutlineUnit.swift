@@ -52,7 +52,7 @@ extension InfoOutlineUnit {
         static let enableCal2 = Input(horizontal: true, title: "Calendar symbol in red appears", image: "calSymbol")
         static let enableCal3 = Input(title: "A calendar event will be created for each closed entry. To close an entry *\(Image.longPress) long-press* on seconds", image: "event.entry")
         
-        static let aepActivity = Input(title: "A bubble's activity (activity log) represents the usage of that bubble over time. The activity is made up of entries", image: "bubbleActivity", footnote: "To view a bubble's activity *\(Image.tap) Tap* its hours or minutes area")
+        static let aepActivity = Input(title: "A bubble's activity (activity log) represents the usage of that bubble over time. The activity is made up of entries", image: "bubbleActivity", footnote: "To view a bubble's activity *\(Image.tap) Tap* either its hours or minutes area")
         static let aepEntry = Input(title: "The very first entry is created when the user *\(Image.tap) taps* seconds for the first time. To close an entry the user must  *\(Image.longPress) long-press* on seconds", image: "entry")
         static let aepPair = Input(title: "A pair (start-pause pair) is a subunit of an entry. In other words each entry contains at least one pair. Each time the user starts and pauses a bubble, a new pair is created", image: "pair", footnote: "If an entry corresponds to a calendar event, the pairs of an entry are similar to the subevents of an event")
     }
