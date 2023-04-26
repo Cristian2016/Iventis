@@ -11,11 +11,6 @@ struct InfoCell: View {
     let input:Input
     
     var body: some View {
-        content
-    }
-    
-    @ViewBuilder
-    private var content:some View {
         switch input.kind {
             case .regular:
                 VStack(alignment: .leading) {
@@ -104,10 +99,11 @@ extension InfoCell {
         var units:[InfoUnit.Input]
         var image:String?
         var footnote:LocalizedStringKey?
-        let kind:Kind
+        var kind = Kind.regular
         let id = UUID().uuidString
         
         static let inputs:[Self] = [
+            .init(units:[], image: "bubble.labels.hms"),
             .init(units: [.bubbleStart, .bubbleFinish], image: "bubble.s", kind: .small),
             .init(overtitle: "Use Yellow Area to", units: [.showActivity, .addNote], image: "bubble", kind: .regular)
         ]
