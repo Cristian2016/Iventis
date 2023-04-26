@@ -54,6 +54,7 @@ extension InfoOutlineUnit {
         
         static let aepActivity = Input(title: "A bubble's activity (activity log) represents the usage of that bubble over time. The activity is made up of entries", image: "bubbleActivity", footnote: "*\(Image.tap) Tap* a bubble's hours or minutes area to view its activity")
         static let aepEntry = Input(title: "", image: "entry")
+        static let aepPair = Input(title: "", image: "pair")
     }
 }
 
