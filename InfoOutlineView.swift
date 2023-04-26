@@ -23,6 +23,7 @@ struct InfoOutlineView: View {
     var body: some View {
         List {
             ForEach(outlines) { InfoOutlineUnit($0) }
+                .listSectionSeparator(.hidden)
         }
         .scrollIndicators(.hidden)
         .listStyle(.plain)
