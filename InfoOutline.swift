@@ -17,6 +17,8 @@ struct InfoOutline: View {
             layout {
                 Text(input.title).font(.system(size: 24))
                 
+                if input.horizontal { Spacer() }
+                
                 if let imageName = input.image {
                     Image(imageName)
                         .resizable()
@@ -51,6 +53,6 @@ extension InfoOutline {
 
 struct InfoOutline_Previews: PreviewProvider {
     static var previews: some View {
-        InfoOutline(.enableCal3)
+        InfoOutline(.enableCal1)
     }
 }
