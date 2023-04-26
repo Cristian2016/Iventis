@@ -53,7 +53,7 @@ extension InfoOutlineUnit {
         static let enableCal3 = Input(title: "A calendar event will be created for each closed entry. To close an entry *\(Image.longPress) long-press* on seconds", image: "event.entry")
         
         static let aepActivity = Input(title: "A bubble's activity (activity log) represents the usage of that bubble over time. The activity is made up of entries", image: "bubbleActivity", footnote: "*\(Image.tap) Tap* a bubble's hours or minutes area to view its activity")
-        static let aepEntry = Input(title: "", image: "entry")
+        static let aepEntry = Input(title: "The very first entry is created when the user *\(Image.tap) taps* seconds for the first time. To close an entry the user must  *\(Image.longPress) long-press* on seconds", image: "entry")
         static let aepPair = Input(title: "", image: "pair")
     }
 }
