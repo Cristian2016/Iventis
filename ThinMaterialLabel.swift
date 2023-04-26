@@ -66,11 +66,11 @@ struct ThinMaterialLabel<Content:View>: View {
     private var dismissButton:some View {
         Button { action() } label: {
             Text("Dismiss")
+                .font(.system(size: 24, weight: .medium))
                 .frame(maxWidth: .infinity)
         }
         .tint(.red)
         .buttonStyle(.bordered)
-        .font(.system(size: 24, weight: .medium))
     }
     
     private var moreInfoButton:some View {
