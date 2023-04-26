@@ -105,7 +105,7 @@ extension InfoCell {
         static let all:[Self] = [
             .init(units:[], image: "bubble.labels.hms", footnote: "Hours, Minutes and Seconds Areas"),
             .init(units: [.bubbleStart, .bubbleFinish], image: "bubble.s", kind: .small),
-            .init(overtitle: "Use Yellow Area to", units: [.showActivity, .addNote], image: "bubble", kind: .regular)
+            .init(overtitle: "Use Yellow Area (Hours and Minutes areas) to", units: [.showActivity, .addNote], image: "bubble", kind: .regular)
         ]
     }
     
