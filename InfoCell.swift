@@ -102,7 +102,7 @@ extension InfoCell {
         var kind = Kind.regular
         let id = UUID().uuidString
         
-        static let inputs:[Self] = [
+        static let all:[Self] = [
             .init(units:[], image: "bubble.labels.hms"),
             .init(units: [.bubbleStart, .bubbleFinish], image: "bubble.s", kind: .small),
             .init(overtitle: "Use Yellow Area to", units: [.showActivity, .addNote], image: "bubble", kind: .regular)

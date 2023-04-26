@@ -33,7 +33,7 @@ struct InfoViewHierarchy: View {
             if show {
                 NavigationStack(path: $path) {
                     List {
-                        ForEach(InfoCell.Input.inputs) { InfoCell(input: $0) }
+                        ForEach(InfoCell.Input.all) { InfoCell(input: $0) }
                         
                         ForEach(InfoStore.infos) { info in
                             NavigationLink(value: info) {
