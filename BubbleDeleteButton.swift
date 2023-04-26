@@ -187,7 +187,7 @@ extension BubbleDeleteButton {
         
         // MARK: - Lego
         private var content:some View {
-            HStack {
+            HStack(alignment: .bottom) {
                 Image("BubbleDelete")
                     .thumbnail(140)
                 VStack(alignment: .leading) {
