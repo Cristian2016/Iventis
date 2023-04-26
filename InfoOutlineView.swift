@@ -8,8 +8,13 @@
 import SwiftUI
 
 struct InfoOutlineView: View {
+    
+    let navigationTitle:String
         
     init(info: InfoStore.Info) {
+        
+        self.navigationTitle = info.name
+        
         switch info.name {
             case "Enable Calendar":
                 self.outlines = [.enableCal1, .enableCal2, .enableCal3]
@@ -27,6 +32,7 @@ struct InfoOutlineView: View {
             }
             .listSectionSeparator(.hidden)
         }
+        .navigationTitle(Text(navigationTitle))
         .scrollIndicators(.hidden)
         .listStyle(.plain)
     }
