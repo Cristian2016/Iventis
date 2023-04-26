@@ -19,7 +19,7 @@ struct InfoStore {
     static let infos = [
         Info(symbol: "questionmark.circle.fill", name: "Activity | Entry | Pair"),
         Info(symbol: "calendar", name: "Enable Calendar"),
-        Info(symbol: "timer", name: "Create Timer"),
+        Info(symbol: "timer.circle.fill", name: "Create Timer"),
         Info(symbol: "trash", name: "Delete Bubble/Activity"),
         Info(symbol: "trash", name: "Delete Entry")
     ]
