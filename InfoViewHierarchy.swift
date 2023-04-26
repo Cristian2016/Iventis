@@ -16,7 +16,7 @@ struct InfoStore {
         let id = UUID().uuidString
     }
     
-    static let infos = [
+    static let all = [
         Info(symbol: "questionmark.circle.fill", name: "Activity | Entry | Pair"),
         Info(symbol: "calendar", name: "Enable Calendar"),
         Info(symbol: "timer.circle.fill", name: "Create Timer"),
@@ -37,7 +37,7 @@ struct InfoViewHierarchy: View {
                         ForEach(InfoCell.Input.all) { InfoCell(input: $0) }
                             .listSectionSeparator(.hidden)
                         
-                        ForEach(InfoStore.infos) { info in
+                        ForEach(InfoStore.all) { info in
                             NavigationLink(value: info) {
                                 HStack {
                                     if let symbol = info.symbol { Image(systemName: symbol) }
@@ -84,7 +84,7 @@ struct InfoViewHierarchy: View {
         switch Secretary.shared.topMostView {
             case .bubbleDeleteActionView:
                 delayExecution(.now() + 0.1) {
-                    path = [InfoStore.infos[2]]
+                    path = [InfoStore.all[2]]
                 }
             default:
                 break
