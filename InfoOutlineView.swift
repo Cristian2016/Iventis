@@ -21,12 +21,14 @@ struct InfoOutlineView: View {
     let outlines:[InfoOutlineUnit.Input]
     
     var body: some View {
-        ScrollView(showsIndicators: false) {
+        List {
             ForEach(outlines) {
                 InfoOutlineUnit($0)
             }
             .padding([.leading, .trailing], 8)
         }
+        .scrollIndicators(.hidden)
+        .listStyle(.plain)
     }
 }
 

@@ -31,8 +31,6 @@ struct InfoOutlineUnit: View {
                     .font(.system(size: 20))
                     .foregroundColor(.secondary)
             }
-            Divider()
-                .padding([.leading, .trailing], -20)
         }
     }
     
