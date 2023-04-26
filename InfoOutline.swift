@@ -11,6 +11,10 @@ struct InfoOutline: View {
     
     let input:Input
     
+    init(_ input: Input) {
+        self.input = input
+    }
+    
     var body: some View {
         let layout = input.horizontal ? AnyLayout(HStackLayout(alignment: .bottom)) : AnyLayout(VStackLayout(alignment: .leading))
         VStack(alignment: .leading) {
@@ -49,6 +53,6 @@ extension InfoOutline {
 
 struct InfoOutline_Previews: PreviewProvider {
     static var previews: some View {
-        InfoOutline(input: .enableCal2)
+        InfoOutline(.enableCal2)
     }
 }
