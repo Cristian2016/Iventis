@@ -103,7 +103,7 @@ extension InfoCell {
         let id = UUID().uuidString
         
         static let all:[Self] = [
-            .init(units:[], image: "bubble.labels.hms", footnote: "Hours, Minutes and Seconds Areas"),
+            .init(units:[], image: "bubble.labels.hms", footnote: "A Bubble's Hours, Minutes and Seconds Areas"),
             .init(units: [.bubbleStart, .bubbleFinish], image: "bubble.s", kind: .small),
             .init(overtitle: "Use Yellow Area (Hr and Min) to", units: [.showActivity, .addNote], image: "bubble", kind: .regular)
         ]
