@@ -140,20 +140,13 @@ extension SessionDeleteButton {
         
         // MARK: - Lego
         private var content:some View {
-            HStack {
+            HStack(alignment: .bottom) {
                 Image("SessionDelete")
                     .thumbnail(120)
                 VStack(alignment: .leading) {
                     Text("**Dismiss** \(Image.tap) Tap")
                     Text("*outside Gray Shape*")
                         .forceMultipleLines()
-                    Button {
-                        Secretary.shared.showInfoVH = true
-                    } label: {
-                        Label("*More Info*", systemImage: "info.square.fill")
-                    }
-                    .tint(.blue)
-                    .fontWeight(.medium)
                 }
             }
             .font(.system(size: 20))

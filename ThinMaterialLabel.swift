@@ -79,6 +79,7 @@ struct ThinMaterialLabel<Content:View>: View {
                 .font(.system(size: 24, weight: .medium))
                 .frame(maxWidth: .infinity)
         }
+        .tint(.blue)
         .buttonStyle(.bordered)
     }
     
