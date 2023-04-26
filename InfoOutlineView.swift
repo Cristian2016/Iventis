@@ -22,10 +22,7 @@ struct InfoOutlineView: View {
     
     var body: some View {
         List {
-            ForEach(outlines) {
-                InfoOutlineUnit($0)
-            }
-            .padding([.leading, .trailing], 8)
+            ForEach(outlines) { InfoOutlineUnit($0) }
         }
         .scrollIndicators(.hidden)
         .listStyle(.plain)
