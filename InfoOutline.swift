@@ -42,7 +42,7 @@ extension InfoOutline {
         var image:String?
         var footnote:LocalizedStringKey?
         
-        static let enableCal1 = Input(title: "***\(Image.rightSwipe) Swipe right*** on a bubble and choose 'Cal ON'", image: "calOption", footnote: "*\(Image.alert) If asked, grant permission to creating events in the Calendar App*")
+        static let enableCal1 = Input(horizontal: true, title: "***\(Image.rightSwipe) Swipe right*** on a bubble and choose 'Cal ON'", image: "calOption", footnote: "*\(Image.alert) If asked, grant permission to creating events in the Calendar App*")
         static let enableCal2 = Input(title: "\(Image.calendar) Calendar symbol in red appears", image: "calSymbol")
         static let enableCal3 = Input(title: "A calendar event will be created for each closed entry. To close an entry ***\(Image.longPress) long-press*** on seconds", image: "event.entry")
     }
