@@ -35,7 +35,7 @@ struct InfoViewHierarchy: View {
                     List {
                         HStack {
                             Spacer()
-                            Image("hms")
+                            Image("bubble.labels.hms")
                                 .resizable()
                                 .scaledToFit()
                                 .frame(height: 180)

@@ -53,6 +53,7 @@ struct InfoCell: View {
                                 ForEach(input.units) { InfoUnit($0) }
                             }
                         }
+                        Spacer()
                         if let imageName = input.image {
                             Image(imageName)
                                 .resizable()
@@ -107,7 +108,7 @@ extension InfoCell {
         let id = UUID().uuidString
         
         static let inputs:[Self] = [
-            .init(units: [.bubbleStart, .bubbleFinish], image: "sec", kind: .small),
+            .init(units: [.bubbleStart, .bubbleFinish], image: "bubble.s", kind: .small),
             .init(overtitle: "Use Yellow Area to", units: [.showActivity, .addNote], image: "bubble", kind: .regular)
         ]
     }
