@@ -15,7 +15,7 @@ struct InfoOutline: View {
         
         VStack(alignment: .leading) {
             layout {
-                Text(input.title).font(.system(size: 20))
+                Text(input.title).font(.system(size: 24))
                 
                 if let imageName = input.image {
                     Image(imageName)
@@ -26,7 +26,7 @@ struct InfoOutline: View {
             }
             if let footnote = input.footnote {
                 Text(footnote)
-                    .font(.system(size: 20))
+                    .font(.system(size: 21))
                     .foregroundColor(.secondary)
             }
             Divider()
