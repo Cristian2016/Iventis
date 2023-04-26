@@ -19,8 +19,8 @@ struct InfoOutline: View {
         let layout = input.horizontal ? AnyLayout(HStackLayout(alignment: .bottom)) : AnyLayout(VStackLayout(alignment: .leading))
         VStack(alignment: .leading) {
             layout {
-                Text(input.title)
-                    .font(.system(size: 20))
+                Text(input.title).font(.system(size: 20))
+                
                 if let imageName = input.image {
                     Image(imageName)
                         .resizable()
@@ -30,8 +30,8 @@ struct InfoOutline: View {
             }
             if let footnote = input.footnote {
                 Text(footnote)
-                    .foregroundColor(.secondary)
                     .font(.system(size: 20))
+                    .foregroundColor(.secondary)
             }
             Divider()
         }
