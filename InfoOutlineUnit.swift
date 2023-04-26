@@ -53,7 +53,7 @@ extension InfoOutlineUnit {
         static let enableCal2 = Input(horizontal: true, title: "Calendar symbol in red appears", image: "calSymbol")
         static let enableCal3 = Input(title: "A calendar event will be created for each closed entry. To close an entry *\(Image.longPress) long-press* on seconds", image: "event.entry")
         
-        static let aepActivity = Input(title: "Activity (activity log) represents the bubble's usage over time. Activity groups entries together and each entry contains at least one start-pause pair", image: "bubbleActivity", footnote: "To view a bubble's activity *\(Image.tap) Tap* either the hours or minutes area")
+        static let aepActivity = Input(title: "Activity (activity log) represents the bubble's usage over time. Activity is made up of entries, where each entry contains at least one start-pause pair", image: "bubbleActivity", footnote: "To view a bubble's activity *\(Image.tap) Tap* either the hours or minutes area")
         
         static let aepEntry = Input(title: "An entry groups pairs together. An entry (group of pairs) is similar to a calendar event. 'Calendar-enabled' bubbles have entries which correspond to calendar events. To separate entries from each other, the entries must be 'finished'. To finish an entry *\(Image.longPress) long-press* on seconds", image: "entry")
         
