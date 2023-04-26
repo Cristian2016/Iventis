@@ -13,16 +13,18 @@ struct InfoOutline: View {
     
     var body: some View {
         ScrollView {
+            let layout = input.horizontal ? AnyLayout(HStackLayout(alignment: .bottom)) : AnyLayout(VStackLayout(alignment: .leading))
             VStack(alignment: .leading) {
-                Text(input.title)
-                    .font(.system(size: 20))
-                if let imageName = input.image {
-                    Image(imageName)
-                        .resizable()
-                        .scaledToFit()
-                        .frame(maxHeight: 150)
+                layout {
+                    Text(input.title)
+                        .font(.system(size: 20))
+                    if let imageName = input.image {
+                        Image(imageName)
+                            .resizable()
+                            .scaledToFit()
+                            .frame(maxHeight: 150)
+                    }
                 }
-                
                 if let footnote = input.footnote {
                     Text(footnote)
                         .foregroundColor(.secondary)
@@ -35,6 +37,7 @@ struct InfoOutline: View {
 
 extension InfoOutline {
     struct Input {
+        var horizontal = false
         let title:LocalizedStringKey
         var image:String?
         var footnote:LocalizedStringKey?
@@ -47,6 +50,6 @@ extension InfoOutline {
 
 struct InfoOutline_Previews: PreviewProvider {
     static var previews: some View {
-        InfoOutline(input: .enableCal3)
+        InfoOutline(input: .enableCal1)
     }
 }
