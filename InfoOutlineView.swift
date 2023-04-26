@@ -18,6 +18,8 @@ struct InfoOutlineView: View {
         switch info.name {
             case "Enable Calendar":
                 self.outlines = [.enableCal1, .enableCal2, .enableCal3]
+            case "Activity | Entry | Pair":
+                self.outlines = [.aepActivity]
             default:
                 self.outlines = []
         }
