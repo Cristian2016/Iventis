@@ -65,7 +65,7 @@ public extension Image {
     static let more = Image(systemName: "ellipsis.circle.fill")
     static let reset = Image(systemName: "arrow.counterclockwise")
     static let xmark = Image(systemName: "xmark.square.fill")
-    
+    static let lightbulb = Image(systemName: "lightbulb.fill")
     
     // MARK: - Info Assets
     static let dpv = Image("DurationPicker")
