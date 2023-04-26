@@ -57,9 +57,8 @@ struct InfoViewHierarchy: View {
                     }
                     .listStyle(.plain)
                     .scrollIndicators(.hidden)
-                    .navigationDestination(for: InfoStore.Info.self) { info in
-                        InfoOutlineView(info: info)
-                            .toolbar { dismissButton }
+                    .navigationDestination(for: InfoStore.Info.self) {
+                        InfoOutlineView(info: $0).toolbar { dismissButton }
                     }
                     .toolbar { dismissButton }
                 }
