@@ -54,7 +54,7 @@ extension InfoOutlineUnit {
         
         static let aepActivity = Input(title: "A bubble's activity (activity log) represents the usage of that bubble over time. The activity is made up of entries", image: "bubbleActivity", footnote: "*\(Image.tap) Tap* a bubble's hours or minutes area to view its activity")
         static let aepEntry = Input(title: "The very first entry is created when the user *\(Image.tap) taps* seconds for the first time. To close an entry the user must  *\(Image.longPress) long-press* on seconds", image: "entry")
-        static let aepPair = Input(title: "A pair (start-pause pair) is a subunit of an entry. Each time the user starts and pauses a bubble, a new entry will be created", image: "pair")
+        static let aepPair = Input(title: "A pair (start-pause pair) is a subunit of an entry. In other words each entry contains at least one pair. Each time the user starts and pauses a bubble, a new entry will be created", image: "pair")
     }
 }
 
