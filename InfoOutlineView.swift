@@ -19,7 +19,7 @@ struct InfoOutlineView: View {
             case "Enable Calendar":
                 self.outlines = [.enableCal1, .enableCal2, .enableCal3]
             case "Activity | Entry | Pair":
-                self.outlines = [.aepActivityEntryPair, .aepActivity, .aepEntry, .aepPair]
+                self.outlines = [.aepActivityEntryPair, .aepActivity, .aepPair, .aepEntry]
             default:
                 self.outlines = []
         }
