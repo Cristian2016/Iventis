@@ -15,7 +15,8 @@ struct InfoOutlineUnit: View {
         
         VStack(alignment: .leading) {
             layout {
-                Text(input.title).font(.system(size: 22))
+                Text(input.title)
+                    .font(.system(size: 22))
                 
                 if input.horizontal { Spacer() }
                 
@@ -32,6 +33,7 @@ struct InfoOutlineUnit: View {
                     .foregroundColor(.secondary)
             }
         }
+        .forceMultipleLines()
     }
     
     init(_ input: Input) { self.input = input }
