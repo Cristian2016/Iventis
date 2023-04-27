@@ -50,7 +50,7 @@ struct Widgets: Widget {
             WidgetsEntryView(entry: entry)
         }
         .configurationDisplayName("Recent Bubble")
-        .description("Most recently used bubble")
+        .description("Observe the most recently used bubble")
         .supportedFamilies([.accessoryCircular, .accessoryInline])
     }
 }
