@@ -51,31 +51,35 @@ struct Widgets: Widget {
         }
         .configurationDisplayName("My Widget")
         .description("Track the most recently used bubble")
-        .supportedFamilies([.accessoryCircular, .accessoryInline, .accessoryRectangular])
+        .supportedFamilies([.accessoryCircular, .accessoryInline])
     }
 }
 
 //what shows onscreen
 struct WidgetsEntryView : View {
     var entry: Provider.Entry
-
+    
     var body: some View {
-        ZStack {
-            Circle().fill(.regularMaterial)
-            Text(entry.date, style: .time)
-        }
+        Circle().fill(.regularMaterial)
+            .overlay {
+                HStack {
+                    Text(Date(), style: .timer)
+                        .fontWeight(.bold)
+                        .multilineTextAlignment(.center)
+                }
+            }
     }
 }
 
 
 struct Widgets_Previews: PreviewProvider {
     static var previews: some View {
-//        WidgetsEntryView(entry: SimpleEntry(date: Date(), configuration: ConfigurationIntent()))
-//            .previewContext(WidgetPreviewContext(family: .accessoryInline))
-//            .previewDisplayName("Inline")
-//        WidgetsEntryView(entry: SimpleEntry(date: Date(), configuration: ConfigurationIntent()))
-//            .previewContext(WidgetPreviewContext(family: .accessoryRectangular))
-//            .previewDisplayName("Rectangular")
+        WidgetsEntryView(entry: Entry(date: Date(), configuration: ConfigurationIntent()))
+            .previewContext(WidgetPreviewContext(family: .accessoryInline))
+            .previewDisplayName("Inline")
+        WidgetsEntryView(entry: Entry(date: Date(), configuration: ConfigurationIntent()))
+            .previewContext(WidgetPreviewContext(family: .accessoryRectangular))
+            .previewDisplayName("Rectangular")
         WidgetsEntryView(entry: Entry(date: Date(), configuration: ConfigurationIntent()))
             .previewContext(WidgetPreviewContext(family: .accessoryCircular))
             .previewDisplayName("Circular")
