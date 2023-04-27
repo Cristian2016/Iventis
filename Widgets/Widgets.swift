@@ -49,8 +49,8 @@ struct Widgets: Widget {
         IntentConfiguration(kind: kind, intent: ConfigurationIntent.self, provider: Provider()) { entry in
             WidgetsEntryView(entry: entry)
         }
-        .configurationDisplayName("My Widget")
-        .description("Track most recently used bubble")
+        .configurationDisplayName("Recent Bubble")
+        .description("Most recently used bubble")
         .supportedFamilies([.accessoryCircular, .accessoryInline])
     }
 }
