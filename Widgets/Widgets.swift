@@ -64,7 +64,6 @@ struct WidgetsEntryView : View {
             .overlay {
                 HStack {
                     Text(Date(), style: .timer)
-                        .fontWeight(.medium)
                         .font(.largeTitle)
                         .multilineTextAlignment(.center)
                 }
