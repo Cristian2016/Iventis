@@ -49,7 +49,7 @@ struct Widgets: Widget {
         IntentConfiguration(kind: kind, intent: ConfigurationIntent.self, provider: Provider()) { entry in
             WidgetsEntryView(entry: entry)
         }
-        .configurationDisplayName("Recent Bubble")
+        .configurationDisplayName("Recent Activity")
         .description("Shows activity of most recently used bubble")
         .supportedFamilies([.accessoryCircular, .accessoryInline])
     }
