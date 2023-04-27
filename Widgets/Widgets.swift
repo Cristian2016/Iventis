@@ -66,6 +66,7 @@ struct WidgetsEntryView : View {
                 Rectangle()
                     .fill(.clear)
                     .aspectRatio(2.2, contentMode: .fit)
+                    .padding()
                     .overlay {
                         Text(Date(), style: .timer)
                             .font(.largeTitle)
