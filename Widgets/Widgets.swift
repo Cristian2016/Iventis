@@ -60,13 +60,18 @@ struct WidgetsEntryView : View {
     var entry: Provider.Entry
     
     var body: some View {
-        Circle().fill(.regularMaterial)
+        Circle()
+            .fill(.regularMaterial)
             .overlay {
-                HStack {
-                    Text(Date(), style: .timer)
-                        .font(.largeTitle)
-                        .multilineTextAlignment(.center)
-                }
+                Rectangle()
+                    .fill(.clear)
+                    .aspectRatio(2.2, contentMode: .fit)
+                    .overlay {
+                        Text(Date(), style: .timer)
+                            .font(.largeTitle)
+                            .multilineTextAlignment(.center)
+                            .minimumScaleFactor(0.01)
+                    }
             }
     }
 }
