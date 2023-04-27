@@ -55,6 +55,7 @@ struct Widgets: Widget {
     }
 }
 
+//what shows onscreen
 struct WidgetsEntryView : View {
     var entry: Provider.Entry
 
