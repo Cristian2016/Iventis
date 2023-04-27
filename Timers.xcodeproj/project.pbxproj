@@ -29,6 +29,7 @@
 		1F13EA0C29CD87C5007A0461 /* Notifications.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 1F13E9FE29CD87C5007A0461 /* Notifications.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		1F18B45C281FA9C90080ADA6 /* CalendarSticker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F18B45B281FA9C90080ADA6 /* CalendarSticker.swift */; };
 		1F18B460281FAABF0080ADA6 /* TopCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F18B45F281FAABF0080ADA6 /* TopCell.swift */; };
+		1F18EBBC29FA9E09003A642C /* WidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F18EBBB29FA9E09003A642C /* WidgetView.swift */; };
 		1F196093298856E500E6A7EA /* SmallAlertHintView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F196092298856E500E6A7EA /* SmallAlertHintView.swift */; };
 		1F1CF2F3286B5BD8007102F2 /* PairStickyNoteList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1CF2F2286B5BD8007102F2 /* PairStickyNoteList.swift */; };
 		1F1D17B329916D1A00DD7ECE /* MoreOptionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1D17B229916D1A00DD7ECE /* MoreOptionsView.swift */; };
@@ -277,6 +278,7 @@
 		1F13EA1029CD87D7007A0461 /* Notifications.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Notifications.entitlements; sourceTree = "<group>"; };
 		1F18B45B281FA9C90080ADA6 /* CalendarSticker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarSticker.swift; sourceTree = "<group>"; };
 		1F18B45F281FAABF0080ADA6 /* TopCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopCell.swift; sourceTree = "<group>"; };
+		1F18EBBB29FA9E09003A642C /* WidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetView.swift; sourceTree = "<group>"; };
 		1F196092298856E500E6A7EA /* SmallAlertHintView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallAlertHintView.swift; sourceTree = "<group>"; };
 		1F1CF2F2286B5BD8007102F2 /* PairStickyNoteList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PairStickyNoteList.swift; sourceTree = "<group>"; };
 		1F1D17B229916D1A00DD7ECE /* MoreOptionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreOptionsView.swift; sourceTree = "<group>"; };
@@ -698,6 +700,7 @@
 			isa = PBXGroup;
 			children = (
 				1FA8346F2850A57A003F4D61 /* Widgets.swift */,
+				1F18EBBB29FA9E09003A642C /* WidgetView.swift */,
 				1FA834712850A57A003F4D61 /* Widgets.intentdefinition */,
 				1FA834722850A57C003F4D61 /* Assets.xcassets */,
 				1FA834742850A57C003F4D61 /* Info.plist */,
@@ -1099,6 +1102,7 @@
 				1FA834752850A57C003F4D61 /* Widgets.intentdefinition in Sources */,
 				1FA834702850A57A003F4D61 /* Widgets.swift in Sources */,
 				1FAF39D9298575E9002D833C /* Library.swift in Sources */,
+				1F18EBBC29FA9E09003A642C /* WidgetView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

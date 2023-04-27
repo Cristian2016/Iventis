@@ -47,46 +47,23 @@ struct Widgets: Widget {
 
     var body: some WidgetConfiguration {
         IntentConfiguration(kind: kind, intent: ConfigurationIntent.self, provider: Provider()) { entry in
-            WidgetsEntryView(entry: entry)
+            WidgetView(entry: entry)
         }
         .configurationDisplayName("Recent Activity")
         .description("Shows activity of most recently used bubble")
-        .supportedFamilies([.accessoryCircular, .accessoryInline])
+        .supportedFamilies([.accessoryCircular, .accessoryInline, .systemSmall])
     }
 }
-
-//what shows onscreen
-struct WidgetsEntryView : View {
-    var entry: Provider.Entry
-    
-    var body: some View {
-        Circle()
-            .fill(.regularMaterial)
-            .overlay {
-                Rectangle()
-                    .fill(.clear)
-                    .aspectRatio(2.2, contentMode: .fit)
-                    .padding()
-                    .overlay {
-                        Text(Date(), style: .timer)
-                            .font(.largeTitle)
-                            .multilineTextAlignment(.center)
-                            .minimumScaleFactor(0.01)
-                    }
-            }
-    }
-}
-
 
 struct Widgets_Previews: PreviewProvider {
     static var previews: some View {
-        WidgetsEntryView(entry: Entry(date: Date(), configuration: ConfigurationIntent()))
+        WidgetView(entry: Entry(date: Date(), configuration: ConfigurationIntent()))
             .previewContext(WidgetPreviewContext(family: .accessoryInline))
             .previewDisplayName("Inline")
-        WidgetsEntryView(entry: Entry(date: Date(), configuration: ConfigurationIntent()))
+        WidgetView(entry: Entry(date: Date(), configuration: ConfigurationIntent()))
             .previewContext(WidgetPreviewContext(family: .accessoryRectangular))
             .previewDisplayName("Rectangular")
-        WidgetsEntryView(entry: Entry(date: Date(), configuration: ConfigurationIntent()))
+        WidgetView(entry: Entry(date: Date(), configuration: ConfigurationIntent()))
             .previewContext(WidgetPreviewContext(family: .accessoryCircular))
             .previewDisplayName("Circular")
     }
