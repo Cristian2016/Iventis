@@ -15,15 +15,19 @@ import WidgetKit
 class Secretary {
     static let shared = Secretary()
     
+    func widgetsCount(completion: @escaping (Int) -> Void) {
+        WidgetCenter.shared.getCurrentConfigurations { result in
+            if let infos = try? result.get() { completion(infos.count) }
+            else { completion(0) }
+        }
+    }
+    
     //used by the widget
     var mostRecentlyUsedBubble:NSManagedObjectID? {didSet{
-        WidgetCenter.shared.getCurrentConfigurations { result in
-            do {
-                let info = try result.get()
-                print("there are \(info.count) widgets")
-            } catch let error {
-                print("error \(error.localizedDescription)")
-            }
+        //write each time regardless if there is a widget or not [?]
+        if let objID = mostRecentlyUsedBubble {
+            let url = URL.objectIDFileURL
+            try? objID.description.write(to: url, atomically: true, encoding: .utf8)
         }
     }}
     
