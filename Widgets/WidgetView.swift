@@ -21,8 +21,8 @@ struct WidgetView : View {
                     .padding()
                     .overlay {
                         display
-                        .font(.title)
-                        .minimumScaleFactor(0.01)
+                            .font(.title3)
+                            .minimumScaleFactor(0.01)
                     }
             }
     }
