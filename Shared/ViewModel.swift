@@ -163,11 +163,10 @@ class ViewModel: ObservableObject {
         }
     }
     
+    //refresh widget when app resigns active
     private func observe_AppResignActive() {
         let name = UIApplication.willResignActiveNotification
         NotificationCenter.default.addObserver(forName: name, object: nil, queue: nil) { _ in
-            
-            print(#function)
             //refresh widget
             WidgetCenter.shared.reloadTimelines(ofKind: "Widgets")
         }

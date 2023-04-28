@@ -18,7 +18,7 @@ struct DataFetcher {
             let request = Bubble.fetchRequest()
             request.predicate = NSPredicate(format: "rank = %i", rank)
             guard let bubble = try? bContext.fetch(request).first else { fatalError() }
-            print("recently used is ? \(bubble.color)")
+            print("recently used is ? \(bubble.color!)")
         }
     }
 }
