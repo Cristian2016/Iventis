@@ -19,7 +19,11 @@ struct WidgetView : View {
                     .fill(.clear)
                     .aspectRatio(2.2, contentMode: .fit)
                     .padding()
-                    .overlay { display }
+                    .overlay {
+                        display
+                        .font(.title)
+                        .minimumScaleFactor(0.01)
+                    }
             }
     }
     
