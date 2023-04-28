@@ -20,7 +20,7 @@ struct WidgetView : View {
                     .aspectRatio(2.2, contentMode: .fit)
                     .overlay {
                         display
-                            .padding([.leading, .trailing], 2)
+                            .padding([.leading, .trailing], 4)
                             .font(.title3)
                             .minimumScaleFactor(0.01)
                             .multilineTextAlignment(.center)
