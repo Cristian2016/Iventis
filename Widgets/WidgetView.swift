@@ -20,10 +20,7 @@ struct WidgetView : View {
                     .aspectRatio(2.2, contentMode: .fit)
                     .padding()
                     .overlay {
-                        Text(Date(), style: .timer)
-                            .font(.largeTitle)
-                            .multilineTextAlignment(.center)
-                            .minimumScaleFactor(0.01)
+                        Text(entry.isRunning ? "Running" : "Paused")
                     }
             }
     }

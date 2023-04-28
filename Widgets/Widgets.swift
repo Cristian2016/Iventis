@@ -14,27 +14,31 @@ struct Provider: IntentTimelineProvider {
     private let dataFetcher = DataFetcher()
     
     func placeholder(in context: Context) -> Entry {
-        Entry(date: Date(), configuration: ConfigurationIntent())
+        Entry(date: Date(), configuration: ConfigurationIntent(), isRunning: false, currentClock: 400)
     }
 
     func getSnapshot(for configuration: ConfigurationIntent, in context: Context, completion: @escaping (Entry) -> ()) {
-        let entry = Entry(date: Date(), configuration: configuration)
+        let entry = Entry(date: Date(), configuration: ConfigurationIntent(), isRunning: false, currentClock: 400)
         completion(entry)
     }
 
     func getTimeline(for configuration: ConfigurationIntent, in context: Context, completion: @escaping (Timeline<Entry>) -> ()) {
-        var entries = [Entry]()
-                
-        dataFetcher.fetch()
-
-        let timeline = Timeline(entries: entries, policy: .never)
-        completion(timeline)
+        
+        dataFetcher.fetch { isRunning, currentClock in
+            let entry = Entry(date: Date(), configuration: ConfigurationIntent(), isRunning: isRunning, currentClock: currentClock)
+            
+            let timeline = Timeline(entries: [entry], policy: .never)
+            completion(timeline)
+        }
     }
 }
 
 struct Entry: TimelineEntry {
     let date: Date
     let configuration: ConfigurationIntent
+    
+    let isRunning:Bool
+    let currentClock:Float
 }
 
 @main
@@ -51,16 +55,16 @@ struct Widgets: Widget {
     }
 }
 
-struct Widgets_Previews: PreviewProvider {
-    static var previews: some View {
-        WidgetView(entry: Entry(date: Date(), configuration: ConfigurationIntent()))
-            .previewContext(WidgetPreviewContext(family: .accessoryInline))
-            .previewDisplayName("Inline")
-        WidgetView(entry: Entry(date: Date(), configuration: ConfigurationIntent()))
-            .previewContext(WidgetPreviewContext(family: .accessoryRectangular))
-            .previewDisplayName("Rectangular")
-        WidgetView(entry: Entry(date: Date(), configuration: ConfigurationIntent()))
-            .previewContext(WidgetPreviewContext(family: .accessoryCircular))
-            .previewDisplayName("Circular")
-    }
-}
+//struct Widgets_Previews: PreviewProvider {
+//    static var previews: some View {
+//        WidgetView(entry: let entry = Entry(date: Date(), configuration: ConfigurationIntent(), isRunning: false, currentClock: 400))
+//            .previewContext(WidgetPreviewContext(family: .accessoryInline))
+//            .previewDisplayName("Inline")
+//        WidgetView(entry: Entry(date: Date(), configuration: ConfigurationIntent()))
+//            .previewContext(WidgetPreviewContext(family: .accessoryRectangular))
+//            .previewDisplayName("Rectangular")
+//        WidgetView(entry: Entry(date: Date(), configuration: ConfigurationIntent()))
+//            .previewContext(WidgetPreviewContext(family: .accessoryCircular))
+//            .previewDisplayName("Circular")
+//    }
+//}

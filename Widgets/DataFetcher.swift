@@ -9,7 +9,7 @@ import Foundation
 import CoreData
 
 struct DataFetcher {
-    func fetch() {
+    func fetch(completion: @escaping (Bool, Float) -> Void) {
         let bContext = PersistenceController.shared.bContext
         bContext.perform {
             guard let bubbleRank = try? String(contentsOf: URL.objectIDFileURL) else { return }
@@ -19,6 +19,8 @@ struct DataFetcher {
             request.predicate = NSPredicate(format: "rank = %i", rank)
             guard let bubble = try? bContext.fetch(request).first else { fatalError() }
             print("recently used is ? \(bubble.color!)")
+            
+            completion(bubble.state == .running, bubble.currentClock)
         }
     }
 }
