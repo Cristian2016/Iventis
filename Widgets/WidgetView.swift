@@ -18,9 +18,9 @@ struct WidgetView : View {
                 Rectangle()
                     .fill(.clear)
                     .aspectRatio(2.2, contentMode: .fit)
-                    .padding()
                     .overlay {
                         display
+                            .padding(2)
                             .font(.title3)
                             .minimumScaleFactor(0.01)
                     }
