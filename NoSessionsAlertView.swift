@@ -13,7 +13,7 @@ struct NoSessionsAlertView: View {
             Text("Activity has no entries")
                 .font(.system(size: 28))
             Text("**Start** \(Image.tap) Tap Seconds")
-                .font(.system(size: 20))
+                .font(.system(size: 22))
                 .foregroundColor(.secondary)
         }
         .padding([.top])
