@@ -19,10 +19,17 @@ struct WidgetView : View {
                     .fill(.clear)
                     .aspectRatio(2.2, contentMode: .fit)
                     .padding()
-                    .overlay {
-                        Text(String(entry.currentClock))
-                    }
+                    .overlay { display }
             }
+    }
+    
+    @ViewBuilder
+    private var display:some View {
+        if entry.isRunning {
+            Text("rnning")
+        } else {
+            Text(String(entry.currentClock.timerTitle))
+        }
     }
 }
 
