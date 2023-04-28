@@ -17,6 +17,7 @@
 		1F04769629BB4C2400641CDC /* SDBPair.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F04769429BB4C2400641CDC /* SDBPair.swift */; };
 		1F04769729BB4C2400641CDC /* SDBPair Properties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F04769529BB4C2400641CDC /* SDBPair Properties.swift */; };
 		1F05B7C82989158E0022FD23 /* BorderlessLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F05B7C72989158E0022FD23 /* BorderlessLabel.swift */; };
+		1F0722DA29FB9C850016FE26 /* DataFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F0722D929FB9C850016FE26 /* DataFetcher.swift */; };
 		1F0B1C5729E052E2001F1E46 /* InfoOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F0B1C5629E052E2001F1E46 /* InfoOverlay.swift */; };
 		1F0FD40229A4CD090097FF7F /* ScrollToTopButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F0FD40129A4CD090097FF7F /* ScrollToTopButton.swift */; };
 		1F0FD40629A4D93D0097FF7F /* DetailViewInfoButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F0FD40529A4D93D0097FF7F /* DetailViewInfoButton.swift */; };
@@ -264,6 +265,7 @@
 		1F04769429BB4C2400641CDC /* SDBPair.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SDBPair.swift; sourceTree = SOURCE_ROOT; };
 		1F04769529BB4C2400641CDC /* SDBPair Properties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SDBPair Properties.swift"; sourceTree = SOURCE_ROOT; };
 		1F05B7C72989158E0022FD23 /* BorderlessLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BorderlessLabel.swift; sourceTree = "<group>"; };
+		1F0722D929FB9C850016FE26 /* DataFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataFetcher.swift; sourceTree = "<group>"; };
 		1F0B1C5629E052E2001F1E46 /* InfoOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoOverlay.swift; sourceTree = SOURCE_ROOT; };
 		1F0FD40129A4CD090097FF7F /* ScrollToTopButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollToTopButton.swift; sourceTree = SOURCE_ROOT; };
 		1F0FD40529A4D93D0097FF7F /* DetailViewInfoButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewInfoButton.swift; sourceTree = "<group>"; };
@@ -700,6 +702,7 @@
 			isa = PBXGroup;
 			children = (
 				1FA8346F2850A57A003F4D61 /* Widgets.swift */,
+				1F0722D929FB9C850016FE26 /* DataFetcher.swift */,
 				1F18EBBB29FA9E09003A642C /* WidgetView.swift */,
 				1FA834712850A57A003F4D61 /* Widgets.intentdefinition */,
 				1FA834722850A57C003F4D61 /* Assets.xcassets */,
@@ -1101,6 +1104,7 @@
 				1F3CBC9F29E5448F00350AC6 /* AppDelegate.swift in Sources */,
 				1FA834752850A57C003F4D61 /* Widgets.intentdefinition in Sources */,
 				1FA834702850A57A003F4D61 /* Widgets.swift in Sources */,
+				1F0722DA29FB9C850016FE26 /* DataFetcher.swift in Sources */,
 				1FAF39D9298575E9002D833C /* Library.swift in Sources */,
 				1F18EBBC29FA9E09003A642C /* WidgetView.swift in Sources */,
 			);

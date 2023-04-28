@@ -11,6 +11,8 @@ import Intents
 import MyPackage
 
 struct Provider: IntentTimelineProvider {
+    private let dataFetcher = DataFetcher()
+    
     func placeholder(in context: Context) -> Entry {
         Entry(date: Date(), configuration: ConfigurationIntent())
     }
@@ -22,14 +24,6 @@ struct Provider: IntentTimelineProvider {
 
     func getTimeline(for configuration: ConfigurationIntent, in context: Context, completion: @escaping (Timeline<Entry>) -> ()) {
         var entries = [Entry]()
-
-        // Generate a timeline consisting of five entries an hour apart, starting from the current date.
-        let currentDate = Date()
-        for hourOffset in 0 ..< 5 {
-            let entryDate = Calendar.current.date(byAdding: .hour, value: hourOffset, to: currentDate)!
-            let entry = Entry(date: entryDate, configuration: configuration)
-            entries.append(entry)
-        }
 
         let timeline = Timeline(entries: entries, policy: .never)
         completion(timeline)
