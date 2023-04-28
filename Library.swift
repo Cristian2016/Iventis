@@ -77,11 +77,17 @@ public extension Image {
 }
 
 public extension URL {
+    
+    ///it's the address of the shared container used by the app to write/ and by widget extension to read mostRecentlyUsedBubble (ObjectID)
     static var sharedContainerURL:URL = {
         guard let url = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: .appGroupName)
         else { fatalError() }
         return url
     }()
+    
+    
+    ///shared file for storing objectID of the mist recently used bubble
+    static let objectIDFileURL = URL.sharedContainerURL.appendingPathComponent("objectID")
 }
 
 public extension Color {

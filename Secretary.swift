@@ -9,9 +9,23 @@
 
 import SwiftUI
 import MyPackage
+import CoreData
+import WidgetKit
 
 class Secretary {
     static let shared = Secretary()
+    
+    //used by the widget
+    var mostRecentlyUsedBubble:NSManagedObjectID? {didSet{
+        WidgetCenter.shared.getCurrentConfigurations { result in
+            do {
+                let info = try result.get()
+                print("there are \(info.count) widgets")
+            } catch let error {
+                print("error \(error.localizedDescription)")
+            }
+        }
+    }}
     
     // MARK: - Show More Info
     @Published var bubbleDeleteButtonShowMore = false

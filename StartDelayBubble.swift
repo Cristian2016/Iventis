@@ -99,7 +99,7 @@ extension StartDelayBubble {
             //compute startCorrection
             //notify viewModel currentClock has reached zero, send startCorrection ->
             //-> viewModel removes SDButton
-            //-> viewModel starts bubble [toggleBubbleStart] with startCorrection
+            //-> viewModel starts bubble [toggleBubbleStart] with startCorrectionBubbleSavedNote
             
             guard let elapsedSinceFirstStart = elapsedSinceFirstStart else { return }
             

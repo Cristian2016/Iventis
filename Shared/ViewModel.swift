@@ -32,6 +32,7 @@ import SwiftUI
 import Combine
 import CoreData
 import MyPackage
+import WidgetKit
 
 class ViewModel: ObservableObject {
     let localNotificationsManager = ScheduledNotificationsManager.shared
@@ -162,6 +163,17 @@ class ViewModel: ObservableObject {
         }
     }
     
+    private func observe_AppResignActive() {
+        let name = UIApplication.willResignActiveNotification
+        NotificationCenter.default.addObserver(forName: name, object: nil, queue: nil) { _ in
+            
+            print(#function)
+            //refresh widget
+            WidgetCenter.shared.reloadTimelines(ofKind: "Widgets")
+        }
+    }
+    
+    
     private func handleEnterBackground() { bubbleTimer(.pause) } //3
     
     private func handleBecomeActive() { bubbleTimer(.start) } //3
@@ -251,6 +263,7 @@ class ViewModel: ObservableObject {
     init() {
         observe_ApplicationActive()
         observe_ApplicationBackground()
+        observe_AppResignActive()
         observe_KillSDB()
         observe_CreateTimer()
         observe_KillTimer()
@@ -354,6 +367,8 @@ extension ViewModel {
         switch bubble.state {
             case .brandNew: /* changes to .running */
                 
+                secretary.mostRecentlyUsedBubble = objID
+                
                 setupNotification(.start, for: bubble)
                 
                 bContext.perform {
@@ -392,6 +407,8 @@ extension ViewModel {
                 }
                 
             case .paused:  /* changes to running */
+                
+                secretary.mostRecentlyUsedBubble = objID
                 
                 setupNotification(.start, for: bubble)
                 
