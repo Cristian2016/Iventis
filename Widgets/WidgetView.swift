@@ -20,7 +20,7 @@ struct WidgetView : View {
                     .aspectRatio(2.2, contentMode: .fit)
                     .padding()
                     .overlay {
-                        Text(entry.isRunning ? "Running" : "Paused")
+                        Text(String(entry.currentClock))
                     }
             }
     }
