@@ -19,8 +19,8 @@ struct DataFetcher {
             request.predicate = NSPredicate(format: "rank = %i", rank)
             guard let bubble = try? bContext.fetch(request).first else { fatalError() }
             
-            let isBubbleRunning = bubble.state == .running
-            completion(isBubbleRunning, bubble.currentClock)
+            let isRunning = bubble.state == .running
+            completion(isRunning, bubble.currentClock)
         }
     }
 }
