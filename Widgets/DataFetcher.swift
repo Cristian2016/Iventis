@@ -12,15 +12,13 @@ struct DataFetcher {
     func fetch() {
         let bContext = PersistenceController.shared.bContext
         bContext.perform {
-            guard let objID = try? String(contentsOf: URL.objectIDFileURL) else { return }
-            print("got object ID \(objID)")
+            guard let bubbleRank = try? String(contentsOf: URL.objectIDFileURL) else { return }
+            let rank = Int64(bubbleRank)!
             
             let request = Bubble.fetchRequest()
-//            request.predicate = NSPredicate(format: <#T##String#>, <#T##args: CVarArg...##CVarArg#>)
+            request.predicate = NSPredicate(format: "rank = %i", rank)
             guard let bubbles = try? bContext.fetch(request) else { fatalError() }
-            
-            let colors = bubbles.compactMap { $0.color }
-            print("widget has fetched colors \(colors)")
+            print("recently used is ? \(bubbles.first!.color)")
         }
     }
 }

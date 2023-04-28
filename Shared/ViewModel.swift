@@ -173,7 +173,6 @@ class ViewModel: ObservableObject {
         }
     }
     
-    
     private func handleEnterBackground() { bubbleTimer(.pause) } //3
     
     private func handleBecomeActive() { bubbleTimer(.start) } //3
