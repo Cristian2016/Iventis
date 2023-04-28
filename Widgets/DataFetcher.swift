@@ -26,7 +26,7 @@ struct DataFetcher {
                 let elapsedSinceLastStart = Float(Date().timeIntervalSince(lastStart))
                 let value = bubble.isTimer ? bubble.currentClock - elapsedSinceLastStart : bubble.currentClock + elapsedSinceLastStart
                 
-                completion(isRunning, value)
+                completion(isRunning, bubble.isTimer ? value : -value)
             } else {
                 completion(isRunning, bubble.currentClock)
             }
