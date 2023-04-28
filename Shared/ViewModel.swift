@@ -367,7 +367,7 @@ extension ViewModel {
         switch bubble.state {
             case .brandNew: /* changes to .running */
                 
-                secretary.mostRecentlyUsedBubble = objID
+                secretary.mostRecentlyUsedBubble = bubble.rank
                 
                 setupNotification(.start, for: bubble)
                 
@@ -408,7 +408,7 @@ extension ViewModel {
                 
             case .paused:  /* changes to running */
                 
-                secretary.mostRecentlyUsedBubble = objID
+                secretary.mostRecentlyUsedBubble = bubble.rank
                 
                 setupNotification(.start, for: bubble)
                 

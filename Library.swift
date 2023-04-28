@@ -86,7 +86,7 @@ public extension URL {
     }()
     
     
-    ///shared file for storing objectID of the mist recently used bubble
+    ///shared file for storing objectID of the most recently used bubble
     static let objectIDFileURL = URL.sharedContainerURL.appendingPathComponent("objectID")
 }
 

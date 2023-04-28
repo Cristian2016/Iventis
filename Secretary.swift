@@ -23,11 +23,10 @@ class Secretary {
     }
     
     //used by the widget
-    var mostRecentlyUsedBubble:NSManagedObjectID? {didSet{
+    var mostRecentlyUsedBubble:Int64? {didSet{
         //write each time regardless if there is a widget or not [?]
-        if let objID = mostRecentlyUsedBubble {
-            let url = URL.objectIDFileURL
-            try? objID.description.write(to: url, atomically: true, encoding: .utf8)
+        if let rank = mostRecentlyUsedBubble {
+            try? String(rank).write(to: URL.objectIDFileURL, atomically: true, encoding: .utf8)
         }
     }}
     
