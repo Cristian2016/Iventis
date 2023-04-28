@@ -20,7 +20,16 @@ struct DataFetcher {
             guard let bubble = try? bContext.fetch(request).first else { fatalError() }
             
             let isRunning = bubble.state == .running
-            completion(isRunning, bubble.currentClock)
+            
+            if isRunning {
+                guard let lastStart = bubble.lastPair?.start else { return }
+                let elapsedSinceLastStart = Float(Date().timeIntervalSince(lastStart))
+                let value = bubble.isTimer ? bubble.currentClock - elapsedSinceLastStart : bubble.currentClock + elapsedSinceLastStart
+                
+                completion(isRunning, value)
+            } else {
+                completion(isRunning, bubble.currentClock)
+            }
         }
     }
 }

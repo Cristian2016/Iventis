@@ -26,7 +26,7 @@ struct WidgetView : View {
     @ViewBuilder
     private var display:some View {
         if entry.isRunning {
-            Text("rnning")
+            Text(Date().addingTimeInterval(TimeInterval(entry.currentClock)), style: .timer)
         } else {
             Text(String(entry.currentClock.timerTitle))
         }

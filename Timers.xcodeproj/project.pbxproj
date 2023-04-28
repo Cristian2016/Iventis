@@ -220,6 +220,7 @@
 		1FCF0C662816F3F600AA1FAA /* EmptyListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FCF0C652816F3F600AA1FAA /* EmptyListView.swift */; };
 		1FD2A3DD29C10C6C00EB7B10 /* DeleteConfirmationLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD2A3DC29C10C6C00EB7B10 /* DeleteConfirmationLabel.swift */; };
 		1FD2DD972869AB4900831978 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1F5F4A4D28093FAF00AF3442 /* Assets.xcassets */; };
+		1FDEEEC829FC450A0029E78D /* DeleteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FDEEEC729FC45090029E78D /* DeleteView.swift */; };
 		1FE163AE280EE6F40050C6F5 /* LeftStrip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FE163AD280EE6F40050C6F5 /* LeftStrip.swift */; };
 		1FE3B6F72983ECBF00B9C5D0 /* Explanations.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 1FE3B6F62983ECBF00B9C5D0 /* Explanations.rtf */; };
 		1FE68FAE29A135C600D05EE6 /* SecondsCircle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FE68FAD29A135C600D05EE6 /* SecondsCircle.swift */; };
@@ -424,6 +425,7 @@
 		1FC70BB029807BAB007CD1E6 /* LayoutViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutViewModel.swift; sourceTree = "<group>"; };
 		1FCF0C652816F3F600AA1FAA /* EmptyListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyListView.swift; sourceTree = "<group>"; };
 		1FD2A3DC29C10C6C00EB7B10 /* DeleteConfirmationLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteConfirmationLabel.swift; sourceTree = "<group>"; };
+		1FDEEEC729FC45090029E78D /* DeleteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteView.swift; sourceTree = "<group>"; };
 		1FE163AD280EE6F40050C6F5 /* LeftStrip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftStrip.swift; sourceTree = "<group>"; };
 		1FE3B6F62983ECBF00B9C5D0 /* Explanations.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = Explanations.rtf; sourceTree = "<group>"; };
 		1FE68FAD29A135C600D05EE6 /* SecondsCircle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondsCircle.swift; sourceTree = "<group>"; };
@@ -542,6 +544,7 @@
 		1F5F4A4228093FAC00AF3442 = {
 			isa = PBXGroup;
 			children = (
+				1FDEEEC729FC45090029E78D /* DeleteView.swift */,
 				1FB8E85B29E3517F0005909E /* Colors */,
 				1F5FFD9E29C2426E005FFB32 /* AdaptiveView.swift */,
 				1FD2A3DC29C10C6C00EB7B10 /* DeleteConfirmationLabel.swift */,
@@ -995,6 +998,7 @@
 				1F04769729BB4C2400641CDC /* SDBPair Properties.swift in Sources */,
 				1FE76DBA29C9F213003012F0 /* BlueInfoButton.swift in Sources */,
 				1FB5D8DA28E9BF0500DD522A /* GestureLabel.swift in Sources */,
+				1FDEEEC829FC450A0029E78D /* DeleteView.swift in Sources */,
 				1F76B51128DDE38800543660 /* AlertHintView.swift in Sources */,
 				1F22183029CF2B4D0006227E /* PermanentLabel.swift in Sources */,
 				1F36D56B29942C0B00D70727 /* CalendarEventCreatedConfirmation.swift in Sources */,
