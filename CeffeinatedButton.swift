@@ -2,7 +2,7 @@ import SwiftUI
 import MyPackage
 
 //button in toolbar
-struct AutoLockButton: View {
+struct CeffeinatedButton: View {
     let metrics = Metrics()
     
     private let secretary = Secretary.shared
@@ -61,6 +61,6 @@ struct AutoLockButton: View {
 
 struct DisplayAlwaysOnSymbol_Previews: PreviewProvider {
     static var previews: some View {
-        AutoLockButton()
+        CeffeinatedButton()
     }
 }

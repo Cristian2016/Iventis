@@ -10,23 +10,23 @@ import SwiftUI
 import Intents
 import MyPackage
 
-struct Provider: IntentTimelineProvider {
+struct Provider: TimelineProvider {
     private let dataFetcher = DataFetcher()
     
     func placeholder(in context: Context) -> Entry {
         let input = Entry.Input(isRunning: false, startValue: 400, isTimer: false)
-        return Entry(date: Date(), configuration: ConfigurationIntent(), input: input)
+        return Entry(date: Date(), input: input)
     }
 
-    func getSnapshot(for configuration: ConfigurationIntent, in context: Context, completion: @escaping (Entry) -> ()) {
+    func getSnapshot(in context: Context, completion: @escaping (Entry) -> ()) {
         
         let input = Entry.Input(isRunning: false, startValue: 400, isTimer: false)
-        let entry = Entry(date: Date(), configuration: ConfigurationIntent(), input: input)
+        let entry = Entry(date: Date(), input: input)
         completion(entry)
     }
 
     //called when manually refresh widgets
-    func getTimeline(for configuration: ConfigurationIntent, in context: Context, completion: @escaping (Timeline<Entry>) -> ()) {
+    func getTimeline(in context: Context, completion: @escaping (Timeline<Entry>) -> ()) {
         print(#function)
         
         dataFetcher.fetch { bubbleData in
@@ -35,7 +35,7 @@ struct Provider: IntentTimelineProvider {
             let currentClock = TimeInterval(bubbleData.isTimer ? bubbleData.value : -bubbleData.value)
             
             let input = Entry.Input(isRunning: bubbleData.isRunning, startValue: currentClock, isTimer: bubbleData.isTimer)
-            let entry = Entry(date: Date(), configuration: ConfigurationIntent(), input: input)
+            let entry = Entry(date: Date(), input: input)
             
             entries.append(entry)
             
@@ -43,7 +43,7 @@ struct Provider: IntentTimelineProvider {
                 let endDate = Date().addingTimeInterval(TimeInterval(bubbleData.value))
                 
                 let input = Entry.Input(isRunning: false, startValue: 0, isTimer: bubbleData.isTimer)
-               let finishedTimerEntry = Entry(date: endDate, configuration: ConfigurationIntent(), input: input)
+               let finishedTimerEntry = Entry(date: endDate, input: input)
                 entries.append(finishedTimerEntry)
             }
             
@@ -55,7 +55,6 @@ struct Provider: IntentTimelineProvider {
 
 struct Entry: TimelineEntry {
     let date: Date
-    let configuration: ConfigurationIntent
     let input:Input
     
     struct Input {
@@ -70,12 +69,12 @@ struct Widgets: Widget {
     let kind: String = "Widgets"
 
     var body: some WidgetConfiguration {
-        IntentConfiguration(kind: kind, intent: ConfigurationIntent.self, provider: Provider()) { entry in
+        StaticConfiguration(kind: kind, provider: Provider()) { entry in
             WidgetView(entry: entry)
         }
         .configurationDisplayName("Recent Activity")
         .description("Shows activity of most recently used bubble")
-        .supportedFamilies([.accessoryCircular /* .accessoryInline */])
+        .supportedFamilies([.accessoryCircular, .accessoryInline])
     }
 }
 

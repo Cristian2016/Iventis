@@ -72,7 +72,7 @@ struct BubbleList: View {
                     .toolbar {
                         ToolbarItemGroup {
                             AddNoteButton()
-                            AutoLockButton()
+                            CeffeinatedButton()
                             PlusButton()
                         }
                     }
