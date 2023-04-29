@@ -75,7 +75,7 @@ struct Widgets: Widget {
         }
         .configurationDisplayName("Recent Activity")
         .description("Shows activity of most recently used bubble")
-        .supportedFamilies([.accessoryCircular, .accessoryInline, .accessoryRectangular])
+        .supportedFamilies([.accessoryCircular /* .accessoryInline */])
     }
 }
 
