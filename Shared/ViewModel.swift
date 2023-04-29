@@ -166,9 +166,8 @@ class ViewModel: ObservableObject {
     //refresh widget when app resigns active
     private func observe_AppResignActive() {
         let name = UIApplication.willResignActiveNotification
-        NotificationCenter.default.addObserver(forName: name, object: nil, queue: nil) { _ in
-            //refresh widget
-            WidgetCenter.shared.reloadTimelines(ofKind: "Widgets")
+        NotificationCenter.default.addObserver(forName: name, object: nil, queue: nil) {[weak self] _ in
+            self?.refreshWidgets()
         }
     }
     
@@ -255,6 +254,10 @@ class ViewModel: ObservableObject {
                 bubbles.forEach { $0.coordinator.update(.showAll) }
             }
         }
+    }
+    
+    private func refreshWidgets() {
+        WidgetCenter.shared.reloadTimelines(ofKind: "Widgets")
     }
     
     // MARK: - Init
