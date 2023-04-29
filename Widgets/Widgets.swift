@@ -29,7 +29,9 @@ struct Provider: IntentTimelineProvider {
         dataFetcher.fetch { bubbleData in
             var entries = [Entry]()
             
-            let entry = Entry(date: Date(), configuration: ConfigurationIntent(), isRunning: bubbleData.isRunning, currentClock: bubbleData.value)
+            let currentClock = bubbleData.isTimer ? bubbleData.value : -bubbleData.value
+            let entry = Entry(date: Date(), configuration: ConfigurationIntent(), isRunning: bubbleData.isRunning, currentClock: currentClock)
+            
             entries.append(entry)
             
             if bubbleData.isTimer && bubbleData.isRunning {
