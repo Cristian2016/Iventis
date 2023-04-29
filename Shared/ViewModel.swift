@@ -203,7 +203,7 @@ class ViewModel: ObservableObject {
     
     ///Bubble.Coordinator.task() notifies if timer must finish
     private func observe_KillTimer() {
-        NotificationCenter.default.addObserver(forName: .killTimer, object: nil, queue: nil) {[weak self] in
+        center.addObserver(forName: .killTimer, object: nil, queue: nil) {[weak self] in
             let info = $0.userInfo
             
             let overspill = info!["overspill"] as! Float
@@ -473,10 +473,6 @@ extension ViewModel {
                 print("it's finished")
                 return
         }
-    }
-    
-    func finishTimer(_ bubble:Bubble) {
-        toggleBubbleStart(bubble)
     }
     
     ///delete history. delete all sessions and pairs and make it brandNew

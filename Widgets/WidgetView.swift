@@ -33,7 +33,11 @@ struct WidgetView : View {
         if entry.isRunning {
             Text(Date().addingTimeInterval(TimeInterval(entry.currentClock)), style: .timer)
         } else {
-            Text(String(entry.currentClock.timerTitle))
+            if entry.currentClock == 0 {
+                Text(Image.checkmark)
+            } else {
+                Text(String(entry.currentClock.timerTitle))
+            }
         }
     }
 }

@@ -22,13 +22,24 @@ struct Provider: IntentTimelineProvider {
         completion(entry)
     }
 
+    //called when manually refresh widgets
     func getTimeline(for configuration: ConfigurationIntent, in context: Context, completion: @escaping (Timeline<Entry>) -> ()) {
         print(#function)
         
-        dataFetcher.fetch { isRunning, currentClock in
-            let entry = Entry(date: Date(), configuration: ConfigurationIntent(), isRunning: isRunning, currentClock: currentClock)
+        dataFetcher.fetch { bubbleData in
+            var entries = [Entry]()
             
-            let timeline = Timeline(entries: [entry], policy: .never)
+            let entry = Entry(date: Date(), configuration: ConfigurationIntent(), isRunning: bubbleData.isRunning, currentClock: bubbleData.value)
+            entries.append(entry)
+            
+            if bubbleData.isTimer && bubbleData.isRunning {
+                let endDate = Date().addingTimeInterval(TimeInterval(bubbleData.value))
+                
+               let finishedTimerEntry = Entry(date: endDate, configuration: ConfigurationIntent(), isRunning: false, currentClock: 0)
+                entries.append(finishedTimerEntry)
+            }
+            
+            let timeline = Timeline(entries: entries, policy: .never)
             completion(timeline)
         }
     }

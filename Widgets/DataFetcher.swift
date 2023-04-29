@@ -9,7 +9,13 @@ import Foundation
 import CoreData
 
 struct DataFetcher {
-    func fetch(completion: @escaping (Bool, Float) -> Void) {
+    struct BubbleData {
+        let value:Float
+        let isTimer:Bool
+        let isRunning:Bool
+    }
+    
+    func fetch(completion: @escaping (BubbleData) -> Void) {
         let bContext = PersistenceController.shared.bContext
         bContext.perform {
             guard let bubbleRank = try? String(contentsOf: URL.objectIDFileURL) else { return }
@@ -26,9 +32,16 @@ struct DataFetcher {
                 let elapsedSinceLastStart = Float(Date().timeIntervalSince(lastStart))
                 let value = bubble.isTimer ? bubble.currentClock - elapsedSinceLastStart : bubble.currentClock + elapsedSinceLastStart
                 
-                completion(isRunning, bubble.isTimer ? value : -value)
+                let bubbleData = BubbleData(value: value,
+                                            isTimer: bubble.isTimer,
+                                            isRunning: isRunning)
+                
+                completion(bubbleData)
             } else {
-                completion(isRunning, bubble.currentClock)
+                let bubbleData = BubbleData(value: bubble.currentClock,
+                                            isTimer: bubble.isTimer,
+                                            isRunning: isRunning)
+                completion(bubbleData)
             }
         }
     }
