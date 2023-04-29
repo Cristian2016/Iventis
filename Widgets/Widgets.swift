@@ -28,7 +28,7 @@ struct Provider: IntentTimelineProvider {
         dataFetcher.fetch { isRunning, currentClock in
             let entry = Entry(date: Date(), configuration: ConfigurationIntent(), isRunning: isRunning, currentClock: currentClock)
             
-            let timeline = Timeline(entries: [entry], policy: .atEnd)
+            let timeline = Timeline(entries: [entry], policy: .never)
             completion(timeline)
         }
     }
