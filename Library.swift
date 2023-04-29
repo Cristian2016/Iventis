@@ -191,7 +191,7 @@ public extension Float {
         let components = self.timeComponentsAsStrings
         
         let hr = (components.hr != "0") ? components.hr + ":" : ""
-        let min = (components.min != "0") ? components.min + ":" : "0:"
+        let min = (components.min != "0") ? components.min + ":" : (hr > "0") ? "00" : "0:"
         let sec = components.sec != "0" ? components.sec : "00"
         var result = hr + min + sec
         result.trimWhiteSpaceAtTheBeginning()
