@@ -14,11 +14,14 @@ struct Provider: IntentTimelineProvider {
     private let dataFetcher = DataFetcher()
     
     func placeholder(in context: Context) -> Entry {
-        Entry(date: Date(), configuration: ConfigurationIntent(), isRunning: false, currentClock: 400)
+        let input = Entry.Input(isRunning: false, startValue: 400, isTimer: false)
+        return Entry(date: Date(), configuration: ConfigurationIntent(), input: input)
     }
 
     func getSnapshot(for configuration: ConfigurationIntent, in context: Context, completion: @escaping (Entry) -> ()) {
-        let entry = Entry(date: Date(), configuration: ConfigurationIntent(), isRunning: false, currentClock: 400)
+        
+        let input = Entry.Input(isRunning: false, startValue: 400, isTimer: false)
+        let entry = Entry(date: Date(), configuration: ConfigurationIntent(), input: input)
         completion(entry)
     }
 
@@ -29,15 +32,18 @@ struct Provider: IntentTimelineProvider {
         dataFetcher.fetch { bubbleData in
             var entries = [Entry]()
             
-            let currentClock = bubbleData.isTimer ? bubbleData.value : -bubbleData.value
-            let entry = Entry(date: Date(), configuration: ConfigurationIntent(), isRunning: bubbleData.isRunning, currentClock: currentClock)
+            let currentClock = TimeInterval(bubbleData.isTimer ? bubbleData.value : -bubbleData.value)
+            
+            let input = Entry.Input(isRunning: bubbleData.isRunning, startValue: currentClock, isTimer: bubbleData.isTimer)
+            let entry = Entry(date: Date(), configuration: ConfigurationIntent(), input: input)
             
             entries.append(entry)
             
             if bubbleData.isTimer && bubbleData.isRunning {
                 let endDate = Date().addingTimeInterval(TimeInterval(bubbleData.value))
                 
-               let finishedTimerEntry = Entry(date: endDate, configuration: ConfigurationIntent(), isRunning: false, currentClock: 0)
+                let input = Entry.Input(isRunning: false, startValue: 0, isTimer: bubbleData.isTimer)
+               let finishedTimerEntry = Entry(date: endDate, configuration: ConfigurationIntent(), input: input)
                 entries.append(finishedTimerEntry)
             }
             
@@ -50,9 +56,13 @@ struct Provider: IntentTimelineProvider {
 struct Entry: TimelineEntry {
     let date: Date
     let configuration: ConfigurationIntent
+    let input:Input
     
-    let isRunning:Bool
-    let currentClock:Float
+    struct Input {
+        let isRunning:Bool
+        let startValue:TimeInterval
+        let isTimer:Bool
+    }
 }
 
 @main

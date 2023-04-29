@@ -30,11 +30,11 @@ struct WidgetView : View {
     
     @ViewBuilder
     private var display:some View {
-        if entry.isRunning {
-            Text(Date().addingTimeInterval(TimeInterval(entry.currentClock)), style: .timer)
+        if entry.input.isRunning {
+            Text(Date().addingTimeInterval(entry.input.startValue), style: .timer)
         } else {
-            if entry.currentClock <= 0 { Text(Image.checkmark) }
-            else { Text(String(entry.currentClock.timerTitle)) }
+            if entry.input.startValue <= 0 && entry.input.isTimer { Text(Image.checkmark) }
+            else { Text(String(Float(entry.input.startValue).timerTitle)) }
         }
     }
 }
