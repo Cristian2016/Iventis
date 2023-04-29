@@ -23,11 +23,12 @@ struct Provider: IntentTimelineProvider {
     }
 
     func getTimeline(for configuration: ConfigurationIntent, in context: Context, completion: @escaping (Timeline<Entry>) -> ()) {
+        print(#function)
         
         dataFetcher.fetch { isRunning, currentClock in
             let entry = Entry(date: Date(), configuration: ConfigurationIntent(), isRunning: isRunning, currentClock: currentClock)
             
-            let timeline = Timeline(entries: [entry], policy: .never)
+            let timeline = Timeline(entries: [entry], policy: .atEnd)
             completion(timeline)
         }
     }
