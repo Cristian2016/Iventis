@@ -166,7 +166,7 @@ class ViewModel: ObservableObject {
     //refresh widget when app resigns active
     private func observe_AppResignActive() {
         let name = UIApplication.willResignActiveNotification
-        center.addObserver(forName: name, object: nil, queue: nil) {[weak self] _ in
+        center.addObserver(forName: name, object: nil, queue: nil) { [weak self] _ in
             self?.refreshWidgets()
         }
     }
