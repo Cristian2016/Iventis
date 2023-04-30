@@ -201,7 +201,7 @@ public extension Float {
         let components = self.timeComponents
         
         let hr = components.hr != 0 ? String(components.hr) + ":" : ""
-        let min = (components.min != 0) ? String(format: "%.2d", components.min)  + ":" : "0:"
+        let min = (components.min != 0) ? String(format: "%.2d", components.min)  + ":" : "00:"
         let sec = String(format: "%.2d", components.sec)
         return hr + min + sec
     }
