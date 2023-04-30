@@ -32,6 +32,12 @@ struct Provider: TimelineProvider {
         dataFetcher.fetch { bubbleData in
             var entries = [Entry]()
             
+            guard let bubbleData = bubbleData else {
+                let entry = Entry(date: Date(), input: nil)
+                completion(Timeline(entries: [entry], policy: .never))
+                return
+            }
+            
             let currentClock = TimeInterval(bubbleData.isTimer ? bubbleData.value : -bubbleData.value)
             
             let input = Entry.Input(isRunning: bubbleData.isRunning, startValue: currentClock, isTimer: bubbleData.isTimer)
@@ -55,7 +61,7 @@ struct Provider: TimelineProvider {
 
 struct Entry: TimelineEntry {
     let date: Date
-    let input:Input
+    var input:Input?
     
     struct Input {
         let isRunning:Bool

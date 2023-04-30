@@ -30,11 +30,15 @@ struct WidgetView : View {
     
     @ViewBuilder
     private var display:some View {
-        if entry.input.isRunning {
-            Text(Date().addingTimeInterval(entry.input.startValue), style: .timer)
+        if let input = entry.input {
+            if input.isRunning {
+                Text(Date().addingTimeInterval(input.startValue), style: .timer)
+            } else {
+                if input.startValue <= 0 && input.isTimer { Text(Image.checkmark) }
+                else { Text(String(Float(abs(input.startValue)).widget)) }
+            }
         } else {
-            if entry.input.startValue <= 0 && entry.input.isTimer { Text(Image.checkmark) }
-            else { Text(String(Float(abs(entry.input.startValue)).widget)) }
+            Image(systemName: "line.diagonal")
         }
     }
 }

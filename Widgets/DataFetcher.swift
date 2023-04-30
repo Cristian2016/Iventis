@@ -15,11 +15,14 @@ struct DataFetcher {
         let isRunning:Bool
     }
     
-    func fetch(completion: @escaping (BubbleData) -> Void) {
+    func fetch(completion: @escaping (BubbleData?) -> Void) {
         let bContext = PersistenceController.shared.bContext
         bContext.perform {
             guard let bubbleRank = try? String(contentsOf: URL.objectIDFileURL) else { return }
-            let rank = Int64(bubbleRank)!
+            guard let rank = Int64(bubbleRank) else {
+                completion(nil)
+                return
+            }
             
             let request = Bubble.fetchRequest()
             request.predicate = NSPredicate(format: "rank = %i", rank)

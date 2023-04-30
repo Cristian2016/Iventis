@@ -25,9 +25,9 @@ class Secretary {
     //used by the widget
     var mostRecentlyUsedBubble:Int64? {didSet{
         //write each time regardless if there is a widget or not [?]
-        if let rank = mostRecentlyUsedBubble {
-            try? String(rank).write(to: URL.objectIDFileURL, atomically: true, encoding: .utf8)
-        }
+        
+        let rank = mostRecentlyUsedBubble != nil ? String(mostRecentlyUsedBubble!) : "Deleted"
+        try? rank.write(to: URL.objectIDFileURL, atomically: true, encoding: .utf8)
     }}
     
     // MARK: - Show More Info

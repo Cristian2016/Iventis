@@ -325,6 +325,10 @@ extension ViewModel {
         
         setupNotification(.delete, for: bubble)
         
+        //write empty string to the shared file that stores the mostRecentlyUsedBubbleRank
+        let hasWidget = secretary.mostRecentlyUsedBubble == bubble.rank
+        if hasWidget { secretary.mostRecentlyUsedBubble = nil }
+        
         let bContext = controller.bContext
         let objID = bubble.objectID
         
