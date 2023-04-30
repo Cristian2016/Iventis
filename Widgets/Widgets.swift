@@ -27,8 +27,6 @@ struct Provider: TimelineProvider {
 
     //called when manually refresh widgets
     func getTimeline(in context: Context, completion: @escaping (Timeline<Entry>) -> ()) {
-        print(#function)
-        
         dataFetcher.fetch { bubbleData in
             var entries = [Entry]()
             
