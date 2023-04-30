@@ -35,7 +35,7 @@ struct WidgetView : View {
                 Text(Date().addingTimeInterval(input.startValue), style: .timer)
             } else {
                 if input.startValue <= 0 && input.isTimer { Text(Image.checkmark) }
-                else { Text(String(Float(abs(input.startValue)).widget)) }
+                else { Text(String(Float(abs(input.startValue)).widgetFormat)) }
             }
         } else {
             Image(systemName: "line.diagonal")

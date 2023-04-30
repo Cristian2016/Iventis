@@ -196,6 +196,16 @@ public extension Float {
         return hr + min + sec
     }
     
+    var widgetFormat:String {
+        //minutes 0 if no hours, 00 if there are hours
+        let components = self.timeComponents
+        
+        let hr = components.hr != 0 ? String(components.hr) + ":" : ""
+        let min = (components.min != 0) ? String(format: "%.2d", components.min)  + ":" : "0:"
+        let sec = String(format: "%.2d", components.sec)
+        return hr + min + sec
+    }
+    
     var timeComponentsAbreviatedString:String {
         let components = self.timeComponentsAsStrings
         
