@@ -25,6 +25,10 @@ struct BubbleCell: View {
     // MARK: - Body
     var body: some View {
         ZStack {
+            Push(.topRight) {
+                WidgetSymbol(rank: bubble.rank)
+                    .padding([.top], 10)
+            }
             ThreeCircles(bubble: bubble, metrics: metrics)
             ThreeLabels(metrics.timeComponentsFontSize, bubble)
         }

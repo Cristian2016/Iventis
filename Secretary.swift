@@ -23,7 +23,7 @@ class Secretary {
     }
     
     //used by the widget
-    var mostRecentlyUsedBubble:Int64? {didSet{
+    @Published var mostRecentlyUsedBubble:Int64? {didSet{
         //write each time regardless if there is a widget or not [?]
         
         let rank = mostRecentlyUsedBubble != nil ? String(mostRecentlyUsedBubble!) : "Deleted"

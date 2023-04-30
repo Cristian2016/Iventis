@@ -58,6 +58,7 @@
 		1F20807F2836111600FD35D6 /* BSavedNote Properties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F2080792836111600FD35D6 /* BSavedNote Properties.swift */; };
 		1F22183029CF2B4D0006227E /* PermanentLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F22182F29CF2B4D0006227E /* PermanentLabel.swift */; };
 		1F31C86229D01F26008349D2 /* ⚠️ Important.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 1F31C86129D01F26008349D2 /* ⚠️ Important.rtf */; };
+		1F34FB9A29FEB14D001C8B9F /* WidgetSymbol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F34FB9929FEB14D001C8B9F /* WidgetSymbol.swift */; };
 		1F36D56B29942C0B00D70727 /* CalendarEventCreatedConfirmation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F36D56A29942C0B00D70727 /* CalendarEventCreatedConfirmation.swift */; };
 		1F377E1F287EB2F000E43598 /* CaffeinatedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F377E1E287EB2F000E43598 /* CaffeinatedButton.swift */; };
 		1F387CEB2830082000F6B81D /* UpDownArrowsButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F387CEA2830082000F6B81D /* UpDownArrowsButton.swift */; };
@@ -309,6 +310,7 @@
 		1F2080792836111600FD35D6 /* BSavedNote Properties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BSavedNote Properties.swift"; sourceTree = "<group>"; };
 		1F22182F29CF2B4D0006227E /* PermanentLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermanentLabel.swift; sourceTree = SOURCE_ROOT; };
 		1F31C86129D01F26008349D2 /* ⚠️ Important.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = "⚠️ Important.rtf"; sourceTree = "<group>"; };
+		1F34FB9929FEB14D001C8B9F /* WidgetSymbol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetSymbol.swift; sourceTree = "<group>"; };
 		1F36D56A29942C0B00D70727 /* CalendarEventCreatedConfirmation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarEventCreatedConfirmation.swift; sourceTree = "<group>"; };
 		1F377E1E287EB2F000E43598 /* CaffeinatedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaffeinatedButton.swift; sourceTree = "<group>"; };
 		1F387CEA2830082000F6B81D /* UpDownArrowsButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpDownArrowsButton.swift; sourceTree = "<group>"; };
@@ -544,6 +546,7 @@
 		1F5F4A4228093FAC00AF3442 = {
 			isa = PBXGroup;
 			children = (
+				1F34FB9929FEB14D001C8B9F /* WidgetSymbol.swift */,
 				1FDEEEC729FC45090029E78D /* DeleteView.swift */,
 				1FB8E85B29E3517F0005909E /* Colors */,
 				1F5FFD9E29C2426E005FFB32 /* AdaptiveView.swift */,
@@ -1098,6 +1101,7 @@
 				1FA1F39E2981CFE6000A50F5 /* Persistence.swift in Sources */,
 				1F05B7C82989158E0022FD23 /* BorderlessLabel.swift in Sources */,
 				1FB5D8D628E8276D00DD522A /* StickyNoteListInfoView.swift in Sources */,
+				1F34FB9A29FEB14D001C8B9F /* WidgetSymbol.swift in Sources */,
 				1FF8254F29C750C40003E4A0 /* DPDigit.swift in Sources */,
 				1F53DD6C29BEFB8A00E33B77 /* PrecisionTimer.swift in Sources */,
 				1FF8254D29C72C2C0003E4A0 /* DPManager.swift in Sources */,
