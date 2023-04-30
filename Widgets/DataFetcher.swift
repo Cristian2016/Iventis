@@ -26,7 +26,7 @@ struct DataFetcher {
             
             let request = Bubble.fetchRequest()
             request.predicate = NSPredicate(format: "rank = %i", rank)
-            guard let bubble = try? bContext.fetch(request).first else { fatalError() }
+            guard let bubble = try? bContext.fetch(request).first else { return }
             
             let isRunning = bubble.state == .running
             
