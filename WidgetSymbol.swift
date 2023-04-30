@@ -16,7 +16,6 @@ struct WidgetSymbol: View {
             if show {
                 Image(systemName: "w.circle.fill")
                     .font(.system(size: 16))
-//                    .foregroundColor(.secondary)
             }
         }
         .onReceive(Secretary.shared.$mostRecentlyUsedBubble) { output in

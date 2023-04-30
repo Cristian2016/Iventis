@@ -10,17 +10,17 @@ import SwiftUI
 struct SecondsLabel: View {
     let bubble:Bubble
     @EnvironmentObject private var viewModel:ViewModel
-    @Environment(\.scenePhase) private var scenePhase
         
     @State private var sec = "e"
     
     var body: some View {
+        
         ZStack {
-            if bubble.coordinator != nil {
-                clearCircle
-                    .overlay (secondsLabel)
-                    .overlay (timerProgressView)
-            }
+            //        if bubble.coordinator != nil {
+            clearCircle
+                .overlay (secondsLabel)
+                .overlay (timerProgressView)
+            //        }
         }
         .onReceive(bubble.coordinator.$timeComponents) { sec = $0.sec }
     }
