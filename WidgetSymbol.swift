@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import WidgetKit
 
 struct WidgetSymbol: View {
     @State private var show = false
@@ -15,6 +16,7 @@ struct WidgetSymbol: View {
         ZStack {
             if show {
                 Image(systemName: "w.circle.fill")
+                    .foregroundColor(.background)
                     .font(.system(size: 16))
             }
         }
