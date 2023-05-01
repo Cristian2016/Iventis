@@ -23,12 +23,7 @@ class Secretary {
     }
     
     //used by the widget
-    @Published var mostRecentlyUsedBubble:Int64? {didSet{
-        //write each time regardless if there is a widget or not [?]
-        
-        let rank = mostRecentlyUsedBubble != nil ? String(mostRecentlyUsedBubble!) : "Deleted"
-        try? rank.write(to: URL.objectIDFileURL, atomically: true, encoding: .utf8)
-    }}
+    @Published var mostRecentlyUsedBubble:Int64? {didSet{ saveMostRecentlyUsedBubble() }}
     
     // MARK: - Show More Info
     @Published var bubbleDeleteButtonShowMore = false
@@ -238,7 +233,11 @@ class Secretary {
     }
     
     // MARK: - Init/Deinit
-    private init() {}
+    private init() {
+        if let string = try? String(contentsOf: URL.objectIDFileURL) {
+           mostRecentlyUsedBubble = Int64(string)
+        }
+    }
     
     // MARK: - DurationPicker
     @Published var durationPickerMode: Mode?
@@ -282,5 +281,15 @@ extension Secretary {
         case bubbleDeleteActionView
         case sessionDeleteActionView
         case bubble
+    }
+}
+
+extension Secretary {
+    // MARK: - Widgets
+    ///writes rank of the most recently used bubble to the shared databased, so that widgets can read it
+    private func saveMostRecentlyUsedBubble() {
+        //write each time regardless if there is a widget or not [?]
+        let rank = mostRecentlyUsedBubble != nil ? String(mostRecentlyUsedBubble!) : "Deleted"
+        try? rank.write(to: URL.objectIDFileURL, atomically: true, encoding: .utf8)
     }
 }
