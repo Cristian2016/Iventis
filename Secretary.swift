@@ -25,6 +25,7 @@ class Secretary {
     
     //used by the widget
     @Published var mostRecentlyUsedBubble:Int64? {didSet{ saveMostRecentlyUsedBubble() }}
+    private(set) var widgetsExist = false
     
     // MARK: - Show More Info
     @Published var bubbleDeleteButtonShowMore = false
@@ -228,8 +229,23 @@ class Secretary {
         }
     }
     
+    // MARK: - Observers
+    private func observe_ApplicationActive() {
+        NotificationCenter.default.addObserver(forName: .didBecomeActive, object: nil, queue: nil) { [weak self] _ in
+            
+            WidgetCenter.shared.getCurrentConfigurations { result in
+                guard let widgetsExist = try? !result.get().isEmpty else { return }
+                self?.widgetsExist = widgetsExist
+                print("widgetsExist \(widgetsExist)")
+            }
+        }
+    }
+    
     // MARK: - Init/Deinit
-    private init() { setMostRecentlyUsedBubble() }
+    private init() {
+        setMostRecentlyUsedBubble()
+        observe_ApplicationActive()
+    }
     
     // MARK: - DurationPicker
     @Published var durationPickerMode: Mode?

@@ -21,6 +21,10 @@ struct WidgetSymbol: View {
             }
         }
         .onReceive(Secretary.shared.$mostRecentlyUsedBubble) { output in
+            guard Secretary.shared.widgetsExist else {
+                show = false
+                return
+            }
             show = rank == output ? true : false
         }
     }
