@@ -257,7 +257,7 @@ class ViewModel: ObservableObject {
     }
     
     private func refreshWidgets() {
-        WidgetCenter.shared.reloadTimelines(ofKind: "Widgets")
+        WidgetCenter.shared.reloadTimelines(ofKind: "Fused")
     }
     
     // MARK: - Init

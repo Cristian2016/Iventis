@@ -20,12 +20,8 @@ struct WidgetSymbol: View {
                     .font(.system(size: 16))
             }
         }
-        .onReceive(Secretary.shared.$mostRecentlyUsedBubble) { output in
-            guard Secretary.shared.widgetsExist else {
-                show = false
-                return
-            }
-            show = rank == output ? true : false
+        .onReceive(Secretary.shared.$widgetsExist) { output in
+            show = output && Secretary.shared.mostRecentlyUsedBubble == rank ? true : false
         }
     }
 }

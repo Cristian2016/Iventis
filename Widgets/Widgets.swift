@@ -70,7 +70,7 @@ struct Entry: TimelineEntry {
 
 @main
 struct Widgets: Widget {
-    let kind: String = "Widgets"
+    let kind: String = "Fused"
 
     var body: some WidgetConfiguration {
         StaticConfiguration(kind: kind, provider: Provider()) { entry in
@@ -78,7 +78,7 @@ struct Widgets: Widget {
         }
         .configurationDisplayName("Recent Activity")
         .description("Shows activity of most recently used bubble")
-        .supportedFamilies([.accessoryCircular, .accessoryInline, .accessoryRectangular])
+        .supportedFamilies([.accessoryCircular])
     }
 }
 

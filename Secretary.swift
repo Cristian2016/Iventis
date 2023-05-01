@@ -24,8 +24,8 @@ class Secretary {
     }
     
     //used by the widget
-    @Published var mostRecentlyUsedBubble:Int64? {didSet{ saveMostRecentlyUsedBubble() }}
-    private(set) var widgetsExist = false
+    var mostRecentlyUsedBubble:Int64? {didSet{ saveMostRecentlyUsedBubble() }}
+    @Published private(set) var widgetsExist = false
     
     // MARK: - Show More Info
     @Published var bubbleDeleteButtonShowMore = false
@@ -233,10 +233,14 @@ class Secretary {
     private func observe_ApplicationActive() {
         NotificationCenter.default.addObserver(forName: .didBecomeActive, object: nil, queue: nil) { [weak self] _ in
             
-            WidgetCenter.shared.getCurrentConfigurations { result in
-                guard let widgetsExist = try? !result.get().isEmpty else { return }
-                self?.widgetsExist = widgetsExist
-                print("widgetsExist \(widgetsExist)")
+            WidgetCenter.shared.getCurrentConfigurations { [self] result in
+                guard let infos = try? result.get() else { return }
+                
+                let condition = infos.map({ $0.kind }).contains("Fused")
+                
+                DispatchQueue.main.async {
+                    self?.widgetsExist = condition ? true : false
+                }
             }
         }
     }
