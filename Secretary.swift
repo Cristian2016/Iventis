@@ -6,6 +6,7 @@
 // Secretary knows shit on anybody! For example it knows how many pinned bubbles exist at any given time. It collects varous data from various parts of the App
 //1 scrolls top top in DetailView when user pulls down on the table [PairCellList]
 //2 background timer, does not repeat, in 5 seconds it removes BlueInfoButton
+//3 used when user taps a notification. programmatically scoll in BubbleList to BubbleCell with id == scrollRank
 
 import SwiftUI
 import MyPackage
@@ -29,12 +30,7 @@ class Secretary {
     @Published var bubbleDeleteButtonShowMore = false
     
     // MARK: - Publishers
-    ///allow user to drag and drop tableView cells
-    ///.onMove view modifier will not be nil
-//    @Published var allowOnMove = false
-    
-    ///used when user taps a notification. programmatically scoll in BubbleList to BubbleCell with id == scrollRank
-    @Published var scrollRank:Int64?
+    @Published var scrollRank:Int64? //3
     
     private var fiveSecTimer = PrecisionTimer() //2
     
@@ -233,11 +229,7 @@ class Secretary {
     }
     
     // MARK: - Init/Deinit
-    private init() {
-        if let string = try? String(contentsOf: URL.objectIDFileURL) {
-           mostRecentlyUsedBubble = Int64(string)
-        }
-    }
+    private init() { setMostRecentlyUsedBubble() }
     
     // MARK: - DurationPicker
     @Published var durationPickerMode: Mode?
@@ -291,5 +283,11 @@ extension Secretary {
         //write each time regardless if there is a widget or not [?]
         let rank = mostRecentlyUsedBubble != nil ? String(mostRecentlyUsedBubble!) : "Deleted"
         try? rank.write(to: URL.objectIDFileURL, atomically: true, encoding: .utf8)
+    }
+    
+    private func setMostRecentlyUsedBubble() {
+        if let string = try? String(contentsOf: URL.objectIDFileURL) {
+           mostRecentlyUsedBubble = Int64(string)
+        }
     }
 }
