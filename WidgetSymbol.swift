@@ -16,7 +16,7 @@ struct WidgetSymbol: View {
         ZStack {
             if show {
                 Image(systemName: "w.circle.fill")
-                    .foregroundColor(.background)
+                    .foregroundColor(.pauseStickerColor)
                     .font(.system(size: 16))
             }
         }
