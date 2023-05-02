@@ -24,7 +24,7 @@ class Secretary {
     }
     
     //used by the widget
-    var mostRecentlyUsedBubble:Int64? {didSet{ saveMostRecentlyUsedBubble() }}
+    @Published var mostRecentlyUsedBubble:Int64? {didSet{ saveMostRecentlyUsedBubble() }}
     @Published private(set) var widgetsExist = false
     
     // MARK: - Show More Info

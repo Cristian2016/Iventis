@@ -21,7 +21,14 @@ struct WidgetSymbol: View {
             }
         }
         .onReceive(Secretary.shared.$widgetsExist) { output in
-            show = output && Secretary.shared.mostRecentlyUsedBubble == rank ? true : false
+            show = (output && Secretary.shared.mostRecentlyUsedBubble == rank) ? true : false
+        }
+        .onReceive(Secretary.shared.$mostRecentlyUsedBubble) { output in
+            if output == rank && Secretary.shared.widgetsExist {
+                show = true
+            } else {
+                show = false
+            }
         }
     }
 }
