@@ -24,11 +24,10 @@ struct WidgetSymbol: View {
             show = (output && Secretary.shared.mostRecentlyUsedBubble == rank) ? true : false
         }
         .onReceive(Secretary.shared.$mostRecentlyUsedBubble) { output in
-            if output == rank && Secretary.shared.widgetsExist {
-                show = true
-            } else {
-                show = false
-            }
+            //widget exists and it's meant for this widgetSymbol (with the rank)
+            let condition = output == rank && Secretary.shared.widgetsExist
+            
+            show = condition ? true : false
         }
     }
 }
