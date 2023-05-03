@@ -218,6 +218,7 @@
 		1FC0D9C129828D23004779E0 /* ConfirmView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FC0D9C029828D23004779E0 /* ConfirmView.swift */; };
 		1FC2335929CA488900FBE483 /* MoreOptionsInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FC2335829CA488900FBE483 /* MoreOptionsInfoView.swift */; };
 		1FC70BB129807BAB007CD1E6 /* LayoutViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FC70BB029807BAB007CD1E6 /* LayoutViewModel.swift */; };
+		1FCD84642A02AC350083F71B /* ActionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FCD84632A02AC350083F71B /* ActionsView.swift */; };
 		1FCF0C662816F3F600AA1FAA /* EmptyListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FCF0C652816F3F600AA1FAA /* EmptyListView.swift */; };
 		1FD2A3DD29C10C6C00EB7B10 /* DeleteConfirmationLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD2A3DC29C10C6C00EB7B10 /* DeleteConfirmationLabel.swift */; };
 		1FD2DD972869AB4900831978 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1F5F4A4D28093FAF00AF3442 /* Assets.xcassets */; };
@@ -425,6 +426,7 @@
 		1FC0D9C029828D23004779E0 /* ConfirmView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfirmView.swift; sourceTree = "<group>"; };
 		1FC2335829CA488900FBE483 /* MoreOptionsInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreOptionsInfoView.swift; sourceTree = SOURCE_ROOT; };
 		1FC70BB029807BAB007CD1E6 /* LayoutViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutViewModel.swift; sourceTree = "<group>"; };
+		1FCD84632A02AC350083F71B /* ActionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionsView.swift; sourceTree = "<group>"; };
 		1FCF0C652816F3F600AA1FAA /* EmptyListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyListView.swift; sourceTree = "<group>"; };
 		1FD2A3DC29C10C6C00EB7B10 /* DeleteConfirmationLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteConfirmationLabel.swift; sourceTree = "<group>"; };
 		1FDEEEC729FC45090029E78D /* DeleteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteView.swift; sourceTree = "<group>"; };
@@ -546,6 +548,7 @@
 		1F5F4A4228093FAC00AF3442 = {
 			isa = PBXGroup;
 			children = (
+				1FCD84632A02AC350083F71B /* ActionsView.swift */,
 				1F34FB9929FEB14D001C8B9F /* WidgetSymbol.swift */,
 				1FDEEEC729FC45090029E78D /* DeleteView.swift */,
 				1FB8E85B29E3517F0005909E /* Colors */,
@@ -1038,6 +1041,7 @@
 				1F97B7DD2809B311002FFCA3 /* Colors.swift in Sources */,
 				1F100CA72809493400A3A3C2 /* BubbleTimer.swift in Sources */,
 				1FA8F87E28367B7A00394B59 /* BubbleNote.swift in Sources */,
+				1FCD84642A02AC350083F71B /* ActionsView.swift in Sources */,
 				1F38A00429B9000D009AD543 /* yPositionTracker.swift in Sources */,
 				1FC2335929CA488900FBE483 /* MoreOptionsInfoView.swift in Sources */,
 				1F5A0F6C282641D00075E86B /* NoSessionsAlertView.swift in Sources */,
