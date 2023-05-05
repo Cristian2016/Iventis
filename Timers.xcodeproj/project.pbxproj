@@ -83,6 +83,7 @@
 		1F3CBCB429E68C0A00350AC6 /* magenta.png in Resources */ = {isa = PBXBuildFile; fileRef = 1F3CBCB229E68C0A00350AC6 /* magenta.png */; };
 		1F3CBCB529E68C0A00350AC6 /* magenta.png in Resources */ = {isa = PBXBuildFile; fileRef = 1F3CBCB229E68C0A00350AC6 /* magenta.png */; };
 		1F42B99D2973E34E0024DB5F /* Code Snippets.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 1F42B99C2973E34E0024DB5F /* Code Snippets.rtf */; };
+		1F45CC202A04D4A200B9548C /* Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F45CC1F2A04D4A200B9548C /* Cell.swift */; };
 		1F477CA928EAB21900B4F965 /* AddStickyNoteQuickButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F477CA828EAB21900B4F965 /* AddStickyNoteQuickButton.swift */; };
 		1F48F55A286AE5B30071386A /* EmptyNote_InfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F48F559286AE5B30071386A /* EmptyNote_InfoView.swift */; };
 		1F520C6D2987DFBC00B25029 /* PairCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F520C6C2987DFBC00B25029 /* PairCell.swift */; };
@@ -325,6 +326,7 @@
 		1F3CBCAE29E68BAE00350AC6 /* cayenne.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cayenne.png; sourceTree = "<group>"; };
 		1F3CBCB229E68C0A00350AC6 /* magenta.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = magenta.png; sourceTree = "<group>"; };
 		1F42B99C2973E34E0024DB5F /* Code Snippets.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = "Code Snippets.rtf"; sourceTree = "<group>"; };
+		1F45CC1F2A04D4A200B9548C /* Cell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cell.swift; sourceTree = "<group>"; };
 		1F477CA828EAB21900B4F965 /* AddStickyNoteQuickButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddStickyNoteQuickButton.swift; sourceTree = "<group>"; };
 		1F48F559286AE5B30071386A /* EmptyNote_InfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyNote_InfoView.swift; sourceTree = "<group>"; };
 		1F520C6C2987DFBC00B25029 /* PairCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PairCell.swift; sourceTree = "<group>"; };
@@ -548,6 +550,7 @@
 		1F5F4A4228093FAC00AF3442 = {
 			isa = PBXGroup;
 			children = (
+				1F45CC1F2A04D4A200B9548C /* Cell.swift */,
 				1FCD84632A02AC350083F71B /* ActionsView.swift */,
 				1F34FB9929FEB14D001C8B9F /* WidgetSymbol.swift */,
 				1FDEEEC729FC45090029E78D /* DeleteView.swift */,
@@ -1024,6 +1027,7 @@
 				1F04769629BB4C2400641CDC /* SDBPair.swift in Sources */,
 				1F64200A2820204400413E31 /* PairList.swift in Sources */,
 				1FA1B44A298321D20063B081 /* iPhoneViewHierarchy.swift in Sources */,
+				1F45CC202A04D4A200B9548C /* Cell.swift in Sources */,
 				1F20807C2836111600FD35D6 /* BSavedNote.swift in Sources */,
 				1F615B6329899E210006DB0B /* BackgroundTimer.swift in Sources */,
 				1FF8255429C7980A0003E4A0 /* DPCheckmark.swift in Sources */,
