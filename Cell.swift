@@ -38,8 +38,7 @@ struct Cell: View {
     }
     
     private var circle:some View {
-        Circle()
-            .scale(x: 0.98, y: 0.98)
+        Circle().scale(x: 0.98, y: 0.98)
     }
     
     //Leading Swipe actions
