@@ -38,11 +38,11 @@ struct UpnextLabel: View {
 
 extension UpnextLabel {
     struct Metrics {
-        let upnextFont = Font.system(size: 16).weight(.medium)
+        let upnextFont = Font.system(size: 14).weight(.medium)
         let titleFont = Font.system(size: 18).weight(.medium)
         let upnextPadding = EdgeInsets(top: 4, leading: 8, bottom: 4, trailing: 8)
         let titlePadding = EdgeInsets(top: 8, leading: 12, bottom: 8, trailing: 12)
-        let outerRadius = CGFloat(30)
+        let outerRadius = CGFloat(20)
         let upnextRadius = CGFloat(8)
     }
 }
