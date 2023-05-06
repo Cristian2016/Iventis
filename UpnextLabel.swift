@@ -8,26 +8,33 @@
 import SwiftUI
 
 struct UpnextLabel: View {
+    
+    let metrics = Metrics()
         
     var body: some View {
         HStack {
             Label("Up Next", systemImage: "arrowtriangle.right.fill")
                 .foregroundColor(.white)
-                .font(.system(size: 16).weight(.medium))
+                .font(metrics.upnextFont)
                 .padding(EdgeInsets(top: 4, leading: 8, bottom: 4, trailing: 8))
                 .background {
                     RoundedRectangle(cornerRadius: 8)
                         .fill(.secondary)
                 }
-                .labelStyle(.iconOnly)
             Label("Timer", systemImage: "timer")
-                .font(.system(size: 18).weight(.medium))
+                .font(metrics.titleFont)
         }
+//        .labelStyle(.iconOnly)
         .padding(EdgeInsets(top: 8, leading: 12, bottom: 8, trailing: 12))
         .background {
             RoundedRectangle(cornerRadius: 30)
                 .fill(.quaternary)
         }
+    }
+    
+    struct Metrics {
+        let upnextFont = Font.system(size: 16).weight(.medium)
+        let titleFont = Font.system(size: 18).weight(.medium)
     }
 }
 
