@@ -26,6 +26,7 @@ struct Cell: View {
                    circle
                 }
             }
+            .padding([.leading, .trailing], -14)
 //            .swipeActions(edge: .leading, allowsFullSwipe: true) {
 //                toggleFavoriteButton
 //                toggleCalendarButton
