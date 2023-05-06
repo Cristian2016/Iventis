@@ -34,7 +34,9 @@ struct UpnextLabel: View {
     private var outerRect:some View {
         RoundedRectangle(cornerRadius: metrics.outerRadius).fill(.quaternary)
     }
-    
+}
+
+extension UpnextLabel {
     struct Metrics {
         let upnextFont = Font.system(size: 16).weight(.medium)
         let titleFont = Font.system(size: 18).weight(.medium)
