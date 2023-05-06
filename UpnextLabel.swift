@@ -17,25 +17,31 @@ struct UpnextLabel: View {
             Label("Up Next", systemImage: "arrowtriangle.right.fill")
                 .foregroundColor(.white)
                 .font(metrics.upnextFont)
-                .padding(EdgeInsets(top: 4, leading: 8, bottom: 4, trailing: 8))
-                .background {
-                    RoundedRectangle(cornerRadius: 8)
-                        .fill(.secondary)
-                }
-            Label("Timer", systemImage: "timer")
-                .font(metrics.titleFont)
+                .padding(metrics.upnextPadding)
+                .background { innerRect }
+            Label("Timer", systemImage: "timer").font(metrics.titleFont)
         }
         .onTapGesture { showAll = !showAll }
-        .padding(EdgeInsets(top: 8, leading: 12, bottom: 8, trailing: 12))
-        .background {
-            RoundedRectangle(cornerRadius: 30)
-                .fill(.quaternary)
-        }
+        .padding(metrics.titlePadding)
+        .background { outerRect }
+    }
+    
+    private var innerRect:some View {
+        RoundedRectangle(cornerRadius: metrics.upnextRadius)
+            .fill(.secondary)
+    }
+    
+    private var outerRect:some View {
+        RoundedRectangle(cornerRadius: metrics.outerRadius).fill(.quaternary)
     }
     
     struct Metrics {
         let upnextFont = Font.system(size: 16).weight(.medium)
         let titleFont = Font.system(size: 18).weight(.medium)
+        let upnextPadding = EdgeInsets(top: 4, leading: 8, bottom: 4, trailing: 8)
+        let titlePadding = EdgeInsets(top: 8, leading: 12, bottom: 8, trailing: 12)
+        let outerRadius = CGFloat(30)
+        let upnextRadius = CGFloat(8)
     }
 }
 
