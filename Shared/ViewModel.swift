@@ -299,13 +299,14 @@ extension ViewModel {
         bContext.perform {
             let newBubble = Bubble(context: bContext)
             newBubble.created = Date()
-            newBubble.kind = kind
+            
             switch kind {
                 case .timer(let initialClock):
                     newBubble.initialClock = initialClock
                     newBubble.currentClock = initialClock
                 default:
                     newBubble.initialClock = 0
+                    newBubble.currentClock = 0
             } //
             
             newBubble.color = color

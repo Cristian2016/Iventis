@@ -70,7 +70,7 @@ struct PaletteView: View {
                             Circle()
                                 .fill(tricolor.sec)
                                 .scaleEffect(x: scale(tricolor) , y: scale(tricolor))
-                                .onTapGesture { createBubble(tricolor) }
+                                .onTapGesture { createStopwatch(tricolor) }
                                 .onLongPressGesture { showDurationPicker(tricolor) }
                         }
                     }
@@ -98,7 +98,7 @@ struct PaletteView: View {
         return 1.8
     }
                               
-    fileprivate func createBubble(_ tricolor:Color.Tricolor) {
+    fileprivate func createStopwatch(_ tricolor:Color.Tricolor) {
         UserFeedback.singleHaptic(.light)
         
         viewModel.createBubble(.stopwatch, tricolor.description)

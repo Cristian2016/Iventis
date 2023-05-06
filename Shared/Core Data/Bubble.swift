@@ -39,24 +39,10 @@ public class Bubble: NSManagedObject {
     
     enum Kind:Comparable {
         case stopwatch
-        case timer(_ initialClock:Float)
+        case timer(Float)
     }
     
-    var kind:Kind {
-        get {
-            switch initialClock {
-                case 0: return .stopwatch
-                default: return .timer(initialClock)
-            }
-        }
-        
-        set {
-            switch newValue {
-                case .stopwatch: self.initialClock = 0
-                case .timer(let initialClock): self.initialClock = initialClock
-            }
-        }
-    }
+    var kind:Kind { initialClock == 0 ? .stopwatch : .timer(initialClock) }
     
     var isTimer:Bool { kind != .stopwatch }
 }
