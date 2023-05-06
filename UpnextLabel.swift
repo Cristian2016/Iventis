@@ -10,6 +10,7 @@ import SwiftUI
 struct UpnextLabel: View {
     
     let metrics = Metrics()
+    @State private var showAll = true
         
     var body: some View {
         HStack {
@@ -24,7 +25,7 @@ struct UpnextLabel: View {
             Label("Timer", systemImage: "timer")
                 .font(metrics.titleFont)
         }
-//        .labelStyle(.iconOnly)
+        .onTapGesture { showAll = !showAll }
         .padding(EdgeInsets(top: 8, leading: 12, bottom: 8, trailing: 12))
         .background {
             RoundedRectangle(cornerRadius: 30)
