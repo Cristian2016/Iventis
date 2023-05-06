@@ -13,9 +13,7 @@ struct BubbleCell: View {
     ///padding with respect to the list edges so that it comes closer to the edges of the screen
     private let secretary = Secretary.shared
     
-    let metrics = Metrics()
-    @State private var pula = false
-    
+    let metrics = Metrics()    
     @ObservedObject private var bubble:Bubble
     
     @EnvironmentObject private var viewModel:ViewModel
