@@ -27,18 +27,18 @@ struct Cell: View {
                 }
             }
             .padding([.leading, .trailing], -14)
-//            .swipeActions(edge: .leading, allowsFullSwipe: true) {
-//                toggleFavoriteButton
-//                toggleCalendarButton
-//            }
-//            .swipeActions(edge: .trailing, allowsFullSwipe: true) {
-//                deleteActionButton
-//                moreOptionsButton
-//            }
+            .swipeActions(edge: .leading, allowsFullSwipe: true) {
+                toggleFavoriteButton
+                toggleCalendarButton
+            }
+            .swipeActions(edge: .trailing, allowsFullSwipe: true) {
+                deleteActionButton
+                moreOptionsButton
+            }
     }
     
     private var circle:some View {
-        Circle().scale(x: 0.98, y: 0.98)
+        Circle()
     }
     
     //Leading Swipe actions
