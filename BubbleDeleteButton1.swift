@@ -39,9 +39,7 @@ struct BubbleDeleteButton1: View {
                     if bubble.state == .running {
                         
                     } else {
-                        bubble.initialClock = 1200
-                        bubble.currentClock = 1200 //changes the interface
-                        PersistenceController.shared.save()
+                        viewModel.change(bubble, into: .timer(1200))
                     }
                 }
             }

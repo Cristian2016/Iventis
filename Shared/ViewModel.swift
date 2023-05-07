@@ -321,6 +321,31 @@ extension ViewModel {
         }
     } //8
     
+    func change(_ bubble:Bubble, into kind:Bubble.Kind) {
+        
+        let bContext = PersistenceController.shared.bContext
+        let objID = bubble.objectID
+                
+        bContext.perform {
+            let theBubble = PersistenceController.shared.grabObj(objID) as! Bubble
+            
+            switch kind {
+                case .timer(let value):
+                    theBubble.initialClock = value
+                    theBubble.currentClock = value //changes the interface
+                case .stopwatch:
+                    theBubble.initialClock = 0
+                    theBubble.currentClock = 0 //changes the interface
+            }
+            
+            PersistenceController.shared.save(bContext) {
+                DispatchQueue.main.async {
+                    bubble.coordinator = BubbleCellCoordinator(for: bubble)
+                }
+            }
+        }
+    }
+    
     func deleteBubble(_ bubble:Bubble) {
         if !path.isEmpty { withAnimation(.easeInOut) { path = [] }}
         
