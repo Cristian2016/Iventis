@@ -47,7 +47,6 @@ struct BubbleCell: View {
     }
     
     // MARK: - Legos
-    
     private var actionsButton:some View {
         Button {
             withAnimation {

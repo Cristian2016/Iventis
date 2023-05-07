@@ -17,6 +17,11 @@
 //11 notification received on mainQueue
 //12 refreshOnAppActive() no idea why didBecomeActive notification received twice when I pull dow notification center. This method ensures that all components will be updated when app returns from the background
 //13 elapsed beyond zero. timers only
+//14 ThreeLabels + HundredthsLabel (hr, min, sec, hundredths)
+//15 ThreeCircles opacity
+//16 ThreeCircles color
+//17 start delay button YOffset
+//18 start delay button delete triggered
 
 import SwiftUI
 import Combine
@@ -31,6 +36,17 @@ class BubbleCellCoordinator {
     private let isTimer:Bool
     
     private var precisionTimer = PrecisionTimer()
+    
+    // MARK: - Publishers
+    //1 BubbleCell
+    @Published var timeComponents = Components("-1", "-1", "-1", "-1") //14
+    @Published private(set) var timeComponentsOpacity = Opacity() //15
+    private(set) var color:Publisher<Color, Never> //16
+    @Published var timerProgress = "0.00" //8 Timers only
+    
+    //2 StartDelayBubble
+    @Published var sdbOffset = CGFloat(0) //17
+    @Published var sdbDeleteTriggered = false //18
     
     // MARK: - Public API
     func update(_ moment:Moment, refresh:Bool = false) { //main Thread ⚠️
@@ -129,17 +145,6 @@ class BubbleCellCoordinator {
             }
         }
     }
-    
-    // MARK: - Publishers
-    //1 BubbleCell
-    @Published var timeComponents = Components("-1", "-1", "-1", "-1") //ThreeLabels & HundredthsLabel
-    @Published private(set) var timeComponentsOpacity = Opacity() //ThreeCircles opacity
-    private(set) var color:Publisher<Color, Never> //ThreeCircles color
-    @Published var timerProgress = "0.00" //8 Timers only
-    
-    //2 StartDelayBubble
-    @Published var sdbOffset = CGFloat(0) //start delay button YOffset
-    @Published var sdbDeleteTriggered = false //start delay button delete triggered
     
     // MARK: -
     private func computeTimerProgress(for bubble:Bubble, and value:Float) -> Double {
@@ -244,7 +249,6 @@ class BubbleCellCoordinator {
     private func observeAppActive() {
         NotificationCenter.default.addObserver(forName: .didBecomeActive, object: nil, queue: nil) { [weak self] _ in
             if self?.refresh == false { self?.refresh = true }
-            print(#function, " \(self?.bubble?.color ?? "pula")")
         }
     } //12
     

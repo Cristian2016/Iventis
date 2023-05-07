@@ -21,7 +21,7 @@ struct BubbleDeleteButton1: View {
     var body: some View {
         ZStack {
             Rectangle()
-                .fill(.ultraThinMaterial)
+                .fill(.white.opacity(0.001))
                 .ignoresSafeArea()
                 .onTapGesture { dismiss() }
             VStack {
@@ -37,7 +37,7 @@ struct BubbleDeleteButton1: View {
                     if bubble.state == .running {
                         
                     } else {
-                        viewModel.change(bubble, into: .timer(1200))
+                        viewModel.change(bubble, into: .timer(1220))
                     }
                 }
             }
