@@ -26,20 +26,11 @@ struct BubbleDeleteButton1: View {
                 .onTapGesture { dismiss() }
             VStack {
                 deleteTitle
-                VStack(spacing: 2) {
+                HStack(spacing: 2) {
                     deleteBubbleButton
                     deleteActivityButton
                 }
                 .padding([.leading, .trailing], 4)
-                
-                Button("20 minutes") {
-                    
-                    if bubble.state == .running {
-                        
-                    } else {
-                        viewModel.change(bubble, into: .timer(3600))
-                    }
-                }
             }
             .padding([.top, .bottom])
             .background { roundedBackground}
@@ -54,7 +45,7 @@ struct BubbleDeleteButton1: View {
     }
     
     private var deleteBubbleButton:some View {
-        vRoundedRectangle(corners: [.topLeft, .topRight], radius: 30)
+        vRoundedRectangle(corners: [.bottomLeft], radius: 30)
             .fill(color)
             .frame(height: 70)
             .overlay {
@@ -62,14 +53,14 @@ struct BubbleDeleteButton1: View {
             label: {
                     Text("Bubble")
                         .frame(maxWidth: .infinity)
-                        .font(.system(size: 28, weight: .medium, design: .rounded))
+                        .font(.system(size: 32, weight: .medium, design: .rounded))
                 }
                 .tint(.white)
             }
     }
     
     private var deleteActivityButton:some View {
-        vRoundedRectangle(corners: [.bottomLeft, .bottomRight], radius: 30)
+        vRoundedRectangle(corners: [.bottomRight], radius: 30)
             .fill(color)
             .frame(height: 70)
             .overlay {
@@ -80,7 +71,7 @@ struct BubbleDeleteButton1: View {
             label: {
                 Text("Activity")
                     .frame(maxWidth: .infinity)
-                    .font(.system(size: 28, weight: .medium, design: .rounded))
+                    .font(.system(size: 32, weight: .medium, design: .rounded))
                 }
                 .tint(.white)
             }
