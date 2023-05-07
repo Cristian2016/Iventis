@@ -330,9 +330,9 @@ extension ViewModel {
             let theBubble = PersistenceController.shared.grabObj(objID) as! Bubble
             
             switch kind {
-                case .timer(let value):
-                    theBubble.initialClock = value
-                    theBubble.currentClock = value //changes the interface
+                case .timer(let initialClock):
+                    theBubble.initialClock = initialClock
+                    theBubble.currentClock = initialClock //changes the interface
                 case .stopwatch:
                     theBubble.initialClock = 0
                     theBubble.currentClock = 0 //changes the interface
@@ -340,7 +340,7 @@ extension ViewModel {
             
             PersistenceController.shared.save(bContext) {
                 DispatchQueue.main.async {
-                    bubble.coordinator = BubbleCellCoordinator(for: bubble)
+                    bubble.coordinator.timerProgress = "PULA"
                 }
             }
         }

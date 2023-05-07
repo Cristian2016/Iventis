@@ -83,8 +83,6 @@ class BubbleCellCoordinator {
                                     self.timerProgress = String(format: "%.2f", progress)
                             }
                         }
-                        
-                        print(self.timeComponents, self.timerProgress)
                     }
                     
                     if theBubble.state == .running {
