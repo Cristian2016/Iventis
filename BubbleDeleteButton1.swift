@@ -19,23 +19,31 @@ struct BubbleDeleteButton1: View {
     }
     
     var body: some View {
-        VStack {
-            deleteTitle
-            VStack(spacing: 2) {
-                deleteBubbleButton
-                deleteActivityButton
+        ZStack {
+            Rectangle()
+                .fill(.ultraThinMaterial)
+                .ignoresSafeArea()
+                .onTapGesture {
+                    dismiss()
+                }
+            VStack {
+                deleteTitle
+                VStack(spacing: 2) {
+                    deleteBubbleButton
+                    deleteActivityButton
+                }
+                .padding([.leading, .trailing], 4)
             }
+            .padding([.top, .bottom])
+            .background { roundedBackground}
             .padding([.leading, .trailing], 4)
         }
-        .padding([.top, .bottom])
-        .background { roundedBackground}
-        .padding([.leading, .trailing], 4)
     }
     
     private var deleteTitle:some View {
         Text("\(Image.trash) Delete")
             .foregroundColor(.red)
-            .font(.system(size: 18, weight: .medium))
+            .font(.system(size: 22, weight: .medium))
     }
     
     private var deleteBubbleButton:some View {
@@ -73,9 +81,17 @@ struct BubbleDeleteButton1: View {
     
     private var roundedBackground:some View {
         RoundedRectangle(cornerRadius: metrics.outerRadius)
-            .fill(.regularMaterial)
+            .fill(.ultraThickMaterial)
     }
     
+    // MARK: -
+    private func dismiss() {
+        withAnimation {
+            Secretary.shared.deleteAction_bRank = nil
+        }
+    }
+    
+    // MARK: -
     struct Metrics {
         let outerRadius = CGFloat(40)
     }
