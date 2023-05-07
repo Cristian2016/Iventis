@@ -33,6 +33,17 @@ struct BubbleDeleteButton1: View {
                     deleteActivityButton
                 }
                 .padding([.leading, .trailing], 4)
+                
+                Button("20 minutes") {
+                    
+                    if bubble.state == .running {
+                        
+                    } else {
+                        bubble.initialClock = 1200
+                        bubble.currentClock = 1200 //changes the interface
+                        PersistenceController.shared.save()
+                    }
+                }
             }
             .padding([.top, .bottom])
             .background { roundedBackground}

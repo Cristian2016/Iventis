@@ -10,7 +10,7 @@ import SwiftUI
 struct NoSessionsAlertView: View {
     var body: some View {
         VStack (alignment:.leading) {
-            Text("No Activity Entries")
+            Text("No Entries")
                 .font(.system(size: 28))
             Text("**Start** \(Image.tap) Tap Seconds")
                 .font(.system(size: 22))
