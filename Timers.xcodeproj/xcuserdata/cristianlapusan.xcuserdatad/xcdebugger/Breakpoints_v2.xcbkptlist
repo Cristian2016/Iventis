@@ -289,15 +289,15 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "D4C45465-E4F6-4EC5-9BCD-8CCEF870272B"
-            shouldBeEnabled = "Yes"
+            uuid = "92F0002D-77E1-48D6-85D4-51977C0F35FA"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "Yes"
             filePath = "Shared/Coordinator.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "88"
-            endingLineNumber = "88"
+            startingLineNumber = "69"
+            endingLineNumber = "69"
             landmarkName = "update(_:refresh:)"
             landmarkType = "7">
             <Actions>

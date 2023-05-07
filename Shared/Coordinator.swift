@@ -48,6 +48,10 @@ class BubbleCellCoordinator {
     @Published var sdbOffset = CGFloat(0) //17
     @Published var sdbDeleteTriggered = false //18
     
+    func updateForChanged() {
+        
+    }
+    
     // MARK: - Public API
     func update(_ moment:Moment, refresh:Bool = false) { //main Thread ⚠️
         guard let bubble = bubble else { return }
@@ -67,7 +71,7 @@ class BubbleCellCoordinator {
                     DispatchQueue.main.async {
                         self.timeComponents = Components(comp.hr, comp.min, comp.sec, comp.hundredths)
                         self.timeComponentsOpacity.updateOpacity(theInitialValue)
-                        
+                                                
                         //compute timer progress
                         if bubble.isTimer {
                             switch bubble.state {
@@ -79,6 +83,8 @@ class BubbleCellCoordinator {
                                     self.timerProgress = String(format: "%.2f", progress)
                             }
                         }
+                        
+                        print(self.timeComponents, self.timerProgress)
                     }
                     
                     if theBubble.state == .running {
