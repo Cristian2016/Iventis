@@ -36,12 +36,13 @@ struct BubbleDeleteButton1: View {
             .background { roundedBackground}
             .padding([.leading, .trailing], 4)
         }
+        .frame(maxWidth: 375)
     }
     
     private var deleteTitle:some View {
         Text("\(Image.trash) Delete")
             .foregroundColor(.red)
-            .font(.system(size: 22, weight: .medium))
+            .font(.system(size: 26, weight: .medium))
     }
     
     private var deleteBubbleButton:some View {
@@ -49,7 +50,10 @@ struct BubbleDeleteButton1: View {
             .fill(color)
             .frame(height: 70)
             .overlay {
-                Button { viewModel.deleteBubble(bubble) }
+                Button {
+                    viewModel.deleteBubble(bubble)
+                    dismiss()
+                }
             label: {
                     Text("Bubble")
                         .frame(maxWidth: .infinity)
@@ -79,7 +83,7 @@ struct BubbleDeleteButton1: View {
     
     private var roundedBackground:some View {
         RoundedRectangle(cornerRadius: metrics.outerRadius)
-            .fill(.ultraThickMaterial)
+            .fill(Color("deleteActionAlert1"))
     }
     
     // MARK: -
