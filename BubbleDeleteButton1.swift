@@ -24,7 +24,7 @@ struct BubbleDeleteButton1: View {
                 .fill(.white.opacity(0.001))
                 .ignoresSafeArea()
                 .onTapGesture { dismiss() }
-            VStack {
+            VStack(spacing: 8) {
                 deleteTitle
                 HStack(spacing: 2) {
                     deleteBubbleButton
@@ -73,7 +73,11 @@ struct BubbleDeleteButton1: View {
                     Secretary.shared.deleteAction_bRank = nil
                 }
             label: {
-                Text("Activity")
+                
+                let count = bubble.sessions_.count
+                let text:LocalizedStringKey = count > 0 ? "^[\(bubble.sessions_.count) Entry](inflect: true)" : "0 Entries"
+                
+                Text(text)
                     .frame(maxWidth: .infinity)
                     .font(.system(size: 32, weight: .medium, design: .rounded))
                 }
