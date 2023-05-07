@@ -33,7 +33,7 @@ extension BubbleCellCoordinator {
 
 class BubbleCellCoordinator {
     weak private(set) var bubble:Bubble?
-    private let isTimer:Bool
+    var isTimer:Bool
     
     private var precisionTimer = PrecisionTimer()
     

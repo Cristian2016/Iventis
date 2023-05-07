@@ -340,7 +340,14 @@ extension ViewModel {
             
             PersistenceController.shared.save(bContext) {
                 DispatchQueue.main.async {
-                    bubble.coordinator.timerProgress = "PULA"
+                    switch kind {
+                        case .timer(_):
+                            bubble.coordinator.update(.automatic, refresh: true)
+                            bubble.coordinator = BubbleCellCoordinator(for: bubble)
+                        case .stopwatch:
+                            break
+                    }
+                    
                 }
             }
         }

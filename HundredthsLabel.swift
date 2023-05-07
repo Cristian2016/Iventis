@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct HundredthsLabel: View {
-    let bubble:Bubble
+    @ObservedObject var bubble:Bubble
     @State private var hundredths:String
     let scale = CGFloat(0.35)
     

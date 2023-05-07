@@ -37,7 +37,7 @@ struct BubbleDeleteButton1: View {
                     if bubble.state == .running {
                         
                     } else {
-                        viewModel.change(bubble, into: .timer(1220))
+                        viewModel.change(bubble, into: .timer(3600))
                     }
                 }
             }

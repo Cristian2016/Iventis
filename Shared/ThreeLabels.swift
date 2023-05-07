@@ -11,14 +11,14 @@ import MyPackage
 //hr min sec cents (4 labels in total actually)
 struct ThreeLabels: View {
     let bubble:Bubble
-    let timeComponentsFontSize:CGFloat
-    let metrics = BubbleCell.Metrics()
-    
     @EnvironmentObject private var viewModel:ViewModel
     
     @State private var hr:String
     @State private var min:String
     @State private var hundredths:String
+    
+    let timeComponentsFontSize:CGFloat
+    let metrics = BubbleCell.Metrics()
     
     @GestureState var isDetectingLongPress = false
         
@@ -67,7 +67,8 @@ struct ThreeLabels: View {
                                 }
                         }
                         .opacity(minOpacity)
-                    SecondsLabel(bubble: bubble)
+                    
+                    SecondsLabel(bubble: bubble) //Sec
                         .overlay { SDButton(bubble) }
                 }
                 .scaleEffect(x: metrics.hstackScale, y: metrics.hstackScale)
@@ -75,9 +76,9 @@ struct ThreeLabels: View {
             .font(.system(size: timeComponentsFontSize))
             .fontDesign(.rounded)
             .foregroundColor(.white)
-            .onReceive(bubble.coordinator.$timeComponents) { components in
-                hr = components.hr
-                min = components.min
+            .onReceive(bubble.coordinator.$timeComponents) {
+                hr = $0.hr
+                min = $0.min
             }
     }
     

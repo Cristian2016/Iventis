@@ -8,19 +8,16 @@
 import SwiftUI
 
 struct SecondsLabel: View {
-    let bubble:Bubble
+    @ObservedObject var bubble:Bubble
     @EnvironmentObject private var viewModel:ViewModel
         
     @State private var sec = "e"
     
     var body: some View {
-        
         ZStack {
-            //        if bubble.coordinator != nil {
             clearCircle
                 .overlay (secondsLabel)
                 .overlay (timerProgressView)
-            //        }
         }
         .onReceive(bubble.coordinator.$timeComponents) { sec = $0.sec }
     }
@@ -81,10 +78,11 @@ extension SecondsLabel {
                         .minimumScaleFactor(0.1)
                         .padding([.leading, .trailing], 4)
                         .background(.thinMaterial, in: RoundedRectangle(cornerRadius: 4))
-                        .onReceive(bubble.coordinator.$timerProgress) { progress = $0 }
                         .environment(\.colorScheme, .light)
                 }
             }
+            .onReceive(bubble.coordinator.$timerProgress) { progress = $0 }
+            .onChange(of: progress) { _ in }
         }
         
         init(_ bubble: Bubble) { self.bubble = bubble }
