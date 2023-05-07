@@ -24,20 +24,35 @@ struct BubbleDeleteButton1: View {
                 .fill(.white.opacity(0.001))
                 .ignoresSafeArea()
                 .onTapGesture { dismiss() }
-            VStack(spacing: 8) {
-                deleteTitle
-                HStack(spacing: 2) {
-                    deleteBubbleButton
-                    deleteActivityButton
+            VStack {
+                VStack(spacing: 8) {
+                    deleteTitle
+                    HStack(spacing: 2) {
+                        deleteBubbleButton
+                        deleteActivityButton
+                    }
+                    .padding([.leading, .trailing], 4)
                 }
+                .frame(maxWidth: 375)
+                .padding([.top, .bottom])
+                .background { roundedBackground}
                 .padding([.leading, .trailing], 4)
+                
+                LazyVGrid(columns: columns) {
+                    ForEach(numbers, id: \.self) { number in
+                        Button(String(number)) {
+                            viewModel.change(bubble, into: .timer(Float(number)))
+                        }
+                    }
+                }
+                .font(.system(size: 26))
             }
-            .padding([.top, .bottom])
-            .background { roundedBackground}
-            .padding([.leading, .trailing], 4)
         }
-        .frame(maxWidth: 375)
     }
+    
+    private let numbers = [60, 120, 180, 240, 300, 600, 900, 1200, 1800, 2700, 3600, 7200]
+    
+    private let columns = Array(repeating: GridItem(.flexible()), count: 2)
     
     private var deleteTitle:some View {
         Text("\(Image.trash) Delete")
