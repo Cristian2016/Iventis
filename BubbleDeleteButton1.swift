@@ -14,7 +14,7 @@ struct BubbleDeleteButton1: View {
     private let deleteAction1:() -> ()
     private let deleteAction2:() -> ()
     
-    init(bubble: Bubble, bubbleDeleteAction: @escaping () -> (), activityDeleteAction: @escaping () -> ()) {
+    init(_ bubble: Bubble, _ bubbleDeleteAction: @escaping () -> (), _ activityDeleteAction: @escaping () -> ()) {
         self.bubble = bubble
         self.color = Color.bubbleColor(forName: bubble.color)
         self.deleteAction1 = bubbleDeleteAction
@@ -90,11 +90,6 @@ struct BubbleDeleteButton1_Previews: PreviewProvider {
     }()
     
     static var previews: some View {
-        BubbleDeleteButton1(bubble: Self.bubble) {
-            
-        } activityDeleteAction: {
-            
-        }
-
+        BubbleDeleteButton1(Self.bubble) { } _: { }
     }
 }
