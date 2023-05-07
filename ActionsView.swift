@@ -8,54 +8,73 @@
 import SwiftUI
 
 struct ActionsView: View {
-    let bubble:Bubble
+    private let bubble:Bubble
+    private let color:Color
+    private let metrics = Metrics()
+    
+    init(bubble: Bubble) {
+        self.bubble = bubble
+        self.color = Color.bubbleColor(forName: bubble.color)
+    }
     
     var body: some View {
         VStack {
-            let color = Color.bubbleColor(forName: bubble.color)
-            
-            Text("\(Image.trash) Delete")
-                .foregroundColor(.red)
-                .font(.system(.title3).weight(.medium))
-            
+            deleteTitle
             VStack(spacing: 2) {
-                vRoundedRectangle(corners: [.topLeft, .topRight], radius: 30)
-                    .fill(color)
-                    .frame(height: 70)
-                    .overlay {
-                        Button {
-                            
-                        } label: {
-                            Text("Bubble")
-                                .frame(maxWidth: .infinity)
-                                .font(.system(size: 28, weight: .medium, design: .rounded))
-                        }
-                        .tint(.white)
-                    }
-                
-                vRoundedRectangle(corners: [.bottomLeft, .bottomRight], radius: 30)
-                    .fill(color)
-                    .frame(height: 70)
-                    .overlay {
-                        Button {
-                            
-                        } label: {
-                            Text("Activity")
-                                .frame(maxWidth: .infinity)
-                                .font(.system(size: 28, weight: .medium, design: .rounded))
-                        }
-                        .tint(.white)
-                    }
+                deleteBubbleButton
+                deleteActivityButton
             }
             .padding([.leading, .trailing], 4)
         }
         .padding([.top, .bottom])
         .background {
-            RoundedRectangle(cornerRadius: 40)
+            RoundedRectangle(cornerRadius: metrics.outerRadius)
                 .fill(.regularMaterial)
         }
         
         .padding([.leading, .trailing], 4)
+    }
+    
+    private var deleteBubbleButton:some View {
+        vRoundedRectangle(corners: [.topLeft, .topRight], radius: 30)
+            .fill(color)
+            .frame(height: 70)
+            .overlay {
+                Button {
+                    
+                } label: {
+                    Text("Bubble")
+                        .frame(maxWidth: .infinity)
+                        .font(.system(size: 28, weight: .medium, design: .rounded))
+                }
+                .tint(.white)
+            }
+    }
+    
+    private var deleteActivityButton:some View {
+        vRoundedRectangle(corners: [.bottomLeft, .bottomRight], radius: 30)
+            .fill(color)
+            .frame(height: 70)
+            .overlay {
+                Button {
+                    
+                } label: {
+                    Text("Activity")
+                        .frame(maxWidth: .infinity)
+                        .font(.system(size: 28, weight: .medium, design: .rounded))
+                }
+                .tint(.white)
+            }
+    }
+    
+    private var deleteTitle:some View {
+        Text("\(Image.trash) Delete")
+            .foregroundColor(.red)
+            .font(.system(.title3).weight(.medium))
+    }
+    
+    struct Metrics {
+        let outerRadius = CGFloat(40)
     }
 }
 
