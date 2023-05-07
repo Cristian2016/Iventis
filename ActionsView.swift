@@ -11,10 +11,14 @@ struct ActionsView: View {
     private let bubble:Bubble
     private let color:Color
     private let metrics = Metrics()
+    private let deleteAction1:() -> ()
+    private let deleteAction2:() -> ()
     
-    init(bubble: Bubble) {
+    init(bubble: Bubble, bubbleDeleteAction: @escaping () -> (), activityDeleteAction: @escaping () -> ()) {
         self.bubble = bubble
         self.color = Color.bubbleColor(forName: bubble.color)
+        self.deleteAction1 = bubbleDeleteAction
+        self.deleteAction2 = activityDeleteAction
     }
     
     var body: some View {
@@ -42,9 +46,8 @@ struct ActionsView: View {
             .fill(color)
             .frame(height: 70)
             .overlay {
-                Button {
-                    
-                } label: {
+                Button { deleteAction1() }
+            label: {
                     Text("Bubble")
                         .frame(maxWidth: .infinity)
                         .font(.system(size: 28, weight: .medium, design: .rounded))
@@ -58,9 +61,8 @@ struct ActionsView: View {
             .fill(color)
             .frame(height: 70)
             .overlay {
-                Button {
-                    
-                } label: {
+                Button { deleteAction2() }
+            label: {
                     Text("Activity")
                         .frame(maxWidth: .infinity)
                         .font(.system(size: 28, weight: .medium, design: .rounded))
@@ -88,6 +90,11 @@ struct ActionsView_Previews: PreviewProvider {
     }()
     
     static var previews: some View {
-        ActionsView(bubble: Self.bubble)
+        ActionsView(bubble: Self.bubble) {
+            
+        } activityDeleteAction: {
+            
+        }
+
     }
 }
