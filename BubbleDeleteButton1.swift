@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ActionsView: View {
+struct BubbleDeleteButton1: View {
     private let bubble:Bubble
     private let color:Color
     private let metrics = Metrics()
@@ -81,7 +81,7 @@ struct ActionsView: View {
     }
 }
 
-struct ActionsView_Previews: PreviewProvider {
+struct BubbleDeleteButton1_Previews: PreviewProvider {
     static let bubble:Bubble = {
         let context = PersistenceController.preview.viewContext
         let bubble = Bubble(context: context)
@@ -90,7 +90,7 @@ struct ActionsView_Previews: PreviewProvider {
     }()
     
     static var previews: some View {
-        ActionsView(bubble: Self.bubble) {
+        BubbleDeleteButton1(bubble: Self.bubble) {
             
         } activityDeleteAction: {
             
