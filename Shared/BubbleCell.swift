@@ -40,12 +40,24 @@ struct BubbleCell: View {
             toggleCalendarButton
         }
         .swipeActions(edge: .trailing, allowsFullSwipe: true) {
-            deleteActionButton
+//            deleteActionButton
+            actionsButton
             moreOptionsButton
         }
     }
     
-    // MARK: - Legos    
+    // MARK: - Legos
+    
+    private var actionsButton:some View {
+        Button {
+            withAnimation {
+                secretary.deleteAction_bRank = bubble.rank
+            }
+        } label: {
+            Label("More", systemImage: "timer")
+        }
+    }
+    
     private var calEventRemovedConfirmation:some View {
         Push(.leading) {
             ConfirmView(content: .eventRemoved)
