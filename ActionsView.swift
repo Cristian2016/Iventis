@@ -27,12 +27,14 @@ struct ActionsView: View {
             .padding([.leading, .trailing], 4)
         }
         .padding([.top, .bottom])
-        .background {
-            RoundedRectangle(cornerRadius: metrics.outerRadius)
-                .fill(.regularMaterial)
-        }
-        
+        .background { roundedBackground}
         .padding([.leading, .trailing], 4)
+    }
+    
+    private var deleteTitle:some View {
+        Text("\(Image.trash) Delete")
+            .foregroundColor(.red)
+            .font(.system(.title3).weight(.medium))
     }
     
     private var deleteBubbleButton:some View {
@@ -67,10 +69,9 @@ struct ActionsView: View {
             }
     }
     
-    private var deleteTitle:some View {
-        Text("\(Image.trash) Delete")
-            .foregroundColor(.red)
-            .font(.system(.title3).weight(.medium))
+    private var roundedBackground:some View {
+        RoundedRectangle(cornerRadius: metrics.outerRadius)
+            .fill(.regularMaterial)
     }
     
     struct Metrics {
