@@ -11,14 +11,11 @@ struct BubbleDeleteButton1: View {
     private let bubble:Bubble
     private let color:Color
     private let metrics = Metrics()
-    private let deleteAction1:() -> ()
-    private let deleteAction2:() -> ()
+    @EnvironmentObject private var viewModel:ViewModel
     
-    init(_ bubble: Bubble, _ bubbleDeleteAction: @escaping () -> (), _ activityDeleteAction: @escaping () -> ()) {
+    init(_ bubble: Bubble) {
         self.bubble = bubble
         self.color = Color.bubbleColor(forName: bubble.color)
-        self.deleteAction1 = bubbleDeleteAction
-        self.deleteAction2 = activityDeleteAction
     }
     
     var body: some View {
@@ -38,7 +35,7 @@ struct BubbleDeleteButton1: View {
     private var deleteTitle:some View {
         Text("\(Image.trash) Delete")
             .foregroundColor(.red)
-            .font(.system(.title3).weight(.medium))
+            .font(.system(size: 18, weight: .medium))
     }
     
     private var deleteBubbleButton:some View {
@@ -46,7 +43,7 @@ struct BubbleDeleteButton1: View {
             .fill(color)
             .frame(height: 70)
             .overlay {
-                Button { deleteAction1() }
+                Button { viewModel.deleteBubble(bubble) }
             label: {
                     Text("Bubble")
                         .frame(maxWidth: .infinity)
@@ -61,11 +58,14 @@ struct BubbleDeleteButton1: View {
             .fill(color)
             .frame(height: 70)
             .overlay {
-                Button { deleteAction2() }
+                Button {
+                    viewModel.reset(bubble)
+                    Secretary.shared.deleteAction_bRank = nil
+                }
             label: {
-                    Text("Activity")
-                        .frame(maxWidth: .infinity)
-                        .font(.system(size: 28, weight: .medium, design: .rounded))
+                Text("Activity")
+                    .frame(maxWidth: .infinity)
+                    .font(.system(size: 28, weight: .medium, design: .rounded))
                 }
                 .tint(.white)
             }
@@ -90,6 +90,6 @@ struct BubbleDeleteButton1_Previews: PreviewProvider {
     }()
     
     static var previews: some View {
-        BubbleDeleteButton1(Self.bubble) { } _: { }
+        BubbleDeleteButton1(Self.bubble)
     }
 }

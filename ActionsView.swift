@@ -9,18 +9,21 @@ import SwiftUI
 
 struct ActionsView: View {
     let bubble:Bubble
-    let bDeleteAction:() -> ()
-    let aDeleteAction:() -> ()
+    @EnvironmentObject private var viewModel:ViewModel
     
-    init(bubble: Bubble, bDeleteAction: @escaping () -> Void, aDeleteAction: @escaping () -> Void) {
+    init(bubble: Bubble) {
         self.bubble = bubble
-        self.bDeleteAction = bDeleteAction
-        self.aDeleteAction = aDeleteAction
     }
+    @State private var show = false
     
     var body: some View {
-        VStack {
-            BubbleDeleteButton1(bubble, bDeleteAction, aDeleteAction)
+        ZStack {
+            VStack {
+                BubbleDeleteButton1(bubble)
+            }
+        }
+        .onReceive(Secretary.shared.$deleteAction_bRank) { output in
+            show = output == nil ? false : true
         }
     }
     
@@ -38,6 +41,6 @@ struct ActionsView_Previews: PreviewProvider {
     }()
     
     static var previews: some View {
-        ActionsView(bubble: Self.bubble) { } aDeleteAction: { }
+        ActionsView(bubble: Self.bubble)
     }
 }
