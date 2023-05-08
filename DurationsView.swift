@@ -40,15 +40,9 @@ struct DurationsView: View {
         vRoundedRectangle(corners: [.bottomLeft, .bottomRight], radius: 30)
     }
     
-    private var translucentBackground:some View {
-        Rectangle()
-            .fill(.thinMaterial)
-            .ignoresSafeArea()
-    }
-    
     private var vRectangle: some View {
         vRoundedRectangle(corners: [.bottomLeft, .bottomRight], radius: 40)
-            .fill(.thickMaterial)
+            .fill(.regularMaterial)
             .padding([.leading, .trailing])
             .padding([.bottom], 4) //2
     }
