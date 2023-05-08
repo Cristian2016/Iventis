@@ -13,7 +13,7 @@ struct DurationsView: View {
     @EnvironmentObject private var viewModel:ViewModel
     
     // MARK: - Mode [either 1. create a timerBubble with color or 2. edit a timerBubble]
-    @State private var bubble:Bubble?
+    let bubble:Bubble
         
     let gridSpacing = CGFloat(1)
     
@@ -54,8 +54,10 @@ struct DurationsView: View {
         Grid(horizontalSpacing: gridSpacing, verticalSpacing: gridSpacing) {
             ForEach(digits, id: \.self) { subarray in
                 GridRow {
-                    ForEach(subarray, id: \.self) {
-                        Digit(title: $0)
+                    ForEach(subarray, id: \.self) { value in
+                        Digit(title: value) {
+                            viewModel.change(bubble, into: .timer(Float(value)! * 60))
+                        }
                     }
                 }
             }
@@ -64,15 +66,21 @@ struct DurationsView: View {
     
     // MARK: -
     
-    init() {
+    init(_ bubble:Bubble) {
+        self.bubble = bubble
         ScheduledNotificationsManager.shared.requestAuthorization()
     }
 }
 
 extension DurationsView {
     struct Digit:View {
-        @State private var isTapped = false
         let title:String
+        let action:() -> ()
+        
+        init(title: String, _ action: @escaping () -> Void) {
+            self.title = title
+            self.action = action
+        }
         
         var body: some View {
             Color("deleteActionAlert1")
@@ -82,13 +90,13 @@ extension DurationsView {
                         .minimumScaleFactor(0.1)
                         .foregroundColor(.white)
                 }
-                .onTapGesture {  } //1
+                .onTapGesture { action() }
         }
     }
 }
 
-struct DurationsView_Previews: PreviewProvider {
-    static var previews: some View {
-        DurationsView()
-    }
-}
+//struct DurationsView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        DurationsView(<#Bubble#>)
+//    }
+//}

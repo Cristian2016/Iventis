@@ -25,26 +25,32 @@ struct BubbleDeleteButton1: View {
                 .ignoresSafeArea()
                 .onTapGesture { dismiss() }
             
-            VStack {
+            VStack(spacing: 6) {
                 VStack(spacing: 8) {
-                    deleteTitle
+//                    deleteTitle
                     HStack(spacing: 2) {
                         deleteBubbleButton
+                            .background(
+                                Rectangle()
+                                    .fill(.red)
+                                    .frame(height: 80)
+                            )
                         deleteActivityButton
                     }
-                    .padding([.leading, .trailing])
                 }
-                .padding()
+                .padding([.top, .bottom])
                 .background {
-                    vRoundedRectangle(corners: [.topLeft, .topRight], radius: 40)
+                    Rectangle()
                         .fill(Color("deleteActionAlert1"))
                         .standardShadow()
                 }
+                .clipShape(vRoundedRectangle(corners: [.topLeft, .topRight], radius: 30))
                 .padding([.leading, .trailing])
+                .standardShadow()
                 
-                DurationsView()
+                DurationsView(bubble)
             }
-            .frame(maxWidth: 370)
+            .frame(maxWidth: 320)
         }
     }
     
@@ -64,11 +70,11 @@ struct BubbleDeleteButton1: View {
             dismiss()
         }
     label: {
-        Text("Bubble")
+        Text("Delete")
             .frame(maxWidth: .infinity)
             .font(.system(size: 32, weight: .medium, design: .rounded))
+            .tint(.white)
     }
-    .tint(.white)
     }
     
     private var deleteActivityButton:some View {
@@ -81,7 +87,7 @@ struct BubbleDeleteButton1: View {
         let count = bubble.sessions_.count
         let text:LocalizedStringKey = count > 0 ? "^[\(bubble.sessions_.count) Entry](inflect: true)" : "0 Entries"
         
-        Text(text)
+        Text("Reset")
             .frame(maxWidth: .infinity)
             .font(.system(size: 32, weight: .medium, design: .rounded))
     }
@@ -110,7 +116,7 @@ struct BubbleDeleteButton1_Previews: PreviewProvider {
     static let bubble:Bubble = {
         let context = PersistenceController.preview.viewContext
         let bubble = Bubble(context: context)
-        bubble.color = "silver"
+        bubble.color = "orange"
         return bubble
     }()
     
