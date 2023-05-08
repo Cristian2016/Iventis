@@ -53,7 +53,8 @@ struct BubbleDeleteButton1: View {
         }
     }
     
-    private let durations = [60, 120, 180, 240, 300, 600, 900, 1200, 1800, 2700, 3600, 7200]
+//    private let durations = [60, 120, 180, 240, 300, 600, 900, 1200, 1800, 2700, 3600, 7200]
+    let durations1 = [1:60, 2:120, 3:180, 4:240, 5:300, 10:600, 15:900, 20:1200, 30:1800, 45:2700, 60:3600, 120:7200]
     
     private let columns = Array(repeating: GridItem(.flexible()), count: 4)
     

@@ -9,7 +9,8 @@ import SwiftUI
 import MyPackage
 
 struct DurationsView: View {
-    private let digits = [["1", "2", "3", "4"], ["5", "10", "15", "20"], ["30", "45", "60", "120"]]
+    private let digitsStopwatch = [["1", "2", "3", "4"], ["5", "10", "15", "20"], ["30", "45", "60", "120"]]
+    private let digitsTimer = [["stopwatch", "2", "3", "4"], ["5", "10", "15", "20"], ["30", "45", "60", "120"]]
     
     @EnvironmentObject private var viewModel:ViewModel
     
@@ -22,7 +23,7 @@ struct DurationsView: View {
     var body: some View {
         ZStack {
                 VStack(spacing: 0) {
-                    Text("\(Image.timer) Change Duration")
+                    Text("\(Image.timer) Choose Duration")
                         .padding(10)
                         .font(.system(size: 22))
                     digitsGrid.clipShape(clipShape)
@@ -55,11 +56,16 @@ struct DurationsView: View {
     
     private var digitsGrid:some View {
         Grid(horizontalSpacing: gridSpacing, verticalSpacing: gridSpacing) {
-            ForEach(digits, id: \.self) { subarray in
+            ForEach(bubble.isTimer ? digitsTimer : digitsStopwatch, id: \.self) { subarray in
                 GridRow {
                     ForEach(subarray, id: \.self) { value in
                         Digit(title: value, color) {
-                            viewModel.change(bubble, into: .timer(Float(value)! * 60))
+                            if value == "stopwatch" {
+                                viewModel.change(bubble, into: .stopwatch)
+                            } else {
+                                viewModel.change(bubble, into: .timer(Float(value)! * 60))
+                            }
+                            
                             UserFeedback.singleHaptic(.light)
                             dismiss()
                         }
@@ -100,12 +106,21 @@ extension DurationsView {
         var body: some View {
             color
                 .overlay {
-                    Text(title)
+                    symbol
                         .font(.system(size: 35, weight: .medium, design: .rounded))
                         .minimumScaleFactor(0.1)
                         .foregroundColor(.white)
                 }
                 .onTapGesture { action() }
+        }
+        
+        @ViewBuilder
+        private var symbol:some View {
+            if title == "stopwatch" {
+                Image.stopwatch
+            } else {
+                Text(title)
+            }
         }
     }
 }
