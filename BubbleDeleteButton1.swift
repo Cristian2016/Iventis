@@ -45,11 +45,18 @@ struct BubbleDeleteButton1: View {
                         }
                     }
                 }
-                .font(.system(size: 26))
+                .buttonStyle(.bordered)
+                .font(.system(size: 32))
+                .foregroundColor(.white)
             }
-            .padding()
-            .frame(maxWidth: 375)
-            .background(.thickMaterial, in: RoundedRectangle(cornerRadius: 60))
+            .padding([.leading, .trailing], 4)
+            .padding([.top, .bottom])
+            .frame(maxWidth: 370)
+            .background {
+                RoundedRectangle(cornerRadius: 50)
+                    .fill(Color.background3.gradient)
+                    .standardShadow()
+            }
         }
     }
     
