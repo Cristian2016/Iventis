@@ -46,6 +46,8 @@ struct BubbleDeleteButton1: View {
                 .padding([.leading, .trailing])
                 DurationsView(bubble)
             }
+            .compositingGroup()
+            .standardShadow()
             .frame(maxWidth: 320)
         }
     }
