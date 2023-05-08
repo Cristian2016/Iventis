@@ -97,7 +97,7 @@ extension DurationsView {
             Color("deleteActionAlert1")
                 .overlay {
                     Text(title)
-                        .font(.system(size: 35, design: .rounded))
+                        .font(.system(size: 35, weight: .medium, design: .rounded))
                         .minimumScaleFactor(0.1)
                         .foregroundColor(.white)
                 }
