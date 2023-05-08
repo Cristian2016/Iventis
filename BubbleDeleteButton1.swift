@@ -21,8 +21,7 @@ struct BubbleDeleteButton1: View {
     var body: some View {
         ZStack {
             Rectangle()
-                .fill(.black.opacity(0.7))
-                .ignoresSafeArea()
+                .fill(.black.opacity(0.6))
                 .onTapGesture { dismiss() }
             
             VStack(spacing: 0) {
@@ -44,16 +43,13 @@ struct BubbleDeleteButton1: View {
                 }
                 .clipShape(vRoundedRectangle(corners: [.topLeft, .topRight], radius: 30))
                 .padding([.leading, .trailing])
-                Rectangle()
-                    .fill(.thinMaterial)
-                    .frame(height: 4)
-                    .padding([.leading, .trailing])
                 DurationsView(bubble)
             }
             .compositingGroup()
             .standardShadow()
             .frame(maxWidth: 320)
         }
+        .ignoresSafeArea()
     }
     
     private let columns = Array(repeating: GridItem(.flexible()), count: 4)
