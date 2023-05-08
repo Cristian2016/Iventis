@@ -33,7 +33,7 @@ struct BubbleDeleteButton1: View {
                     }
                     .padding([.leading, .trailing], 4)
                 }
-                .frame(maxWidth: 375)
+                
                 .padding([.top, .bottom])
                 .background { roundedBackground}
                 .padding([.leading, .trailing], 4)
@@ -47,6 +47,9 @@ struct BubbleDeleteButton1: View {
                 }
                 .font(.system(size: 26))
             }
+            .padding()
+            .frame(maxWidth: 375)
+            .background(.thickMaterial, in: RoundedRectangle(cornerRadius: 60))
         }
     }
     
