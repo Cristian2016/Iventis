@@ -32,7 +32,7 @@ struct DurationsView: View {
                 .padding(6)
                 .background { vRectangle }
         }
-        .frame(height: 300)
+        .frame(height: 280)
     }
     
     // MARK: - Lego
