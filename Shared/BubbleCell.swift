@@ -49,9 +49,7 @@ struct BubbleCell: View {
     // MARK: - Legos
     private var actionsButton:some View {
         Button {
-            withAnimation {
-                secretary.deleteAction_bRank = bubble.rank
-            }
+            secretary.deleteAction_bRank = bubble.rank
         } label: {
             Label("More", systemImage: "timer")
         }

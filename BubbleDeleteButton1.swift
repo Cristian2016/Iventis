@@ -27,7 +27,6 @@ struct BubbleDeleteButton1: View {
             
             VStack(spacing: 4) {
                 VStack(spacing: 8) {
-//                    deleteTitle
                     HStack(spacing: 2) {
                         deleteBubbleButton
                             .background(
