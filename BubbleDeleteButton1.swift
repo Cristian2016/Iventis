@@ -39,8 +39,8 @@ struct BubbleDeleteButton1: View {
                 .padding([.leading, .trailing], 4)
                 
                 LazyVGrid(columns: columns) {
-                    ForEach(numbers, id: \.self) { number in
-                        Button(String(number)) {
+                    ForEach(durations, id: \.self) { number in
+                        Button(String(number/60)) {
                             viewModel.change(bubble, into: .timer(Float(number)))
                         }
                     }
@@ -50,9 +50,9 @@ struct BubbleDeleteButton1: View {
         }
     }
     
-    private let numbers = [60, 120, 180, 240, 300, 600, 900, 1200, 1800, 2700, 3600, 7200]
+    private let durations = [60, 120, 180, 240, 300, 600, 900, 1200, 1800, 2700, 3600, 7200]
     
-    private let columns = Array(repeating: GridItem(.flexible()), count: 2)
+    private let columns = Array(repeating: GridItem(.flexible()), count: 4)
     
     private var deleteTitle:some View {
         Text("\(Image.trash) Delete")
