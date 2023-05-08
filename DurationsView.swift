@@ -48,10 +48,9 @@ struct DurationsView: View {
     
     private var vRectangle: some View {
         vRoundedRectangle(corners: [.bottomLeft, .bottomRight], radius: 40)
-            .fill(.background)
+            .fill(.thickMaterial)
             .padding([.leading, .trailing])
             .padding([.bottom], 4) //2
-            .standardShadow()
     }
     
     private var digitsGrid:some View {

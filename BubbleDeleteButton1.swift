@@ -25,7 +25,7 @@ struct BubbleDeleteButton1: View {
                 .ignoresSafeArea()
                 .onTapGesture { dismiss() }
             
-            VStack(spacing: 4) {
+            VStack(spacing: 0) {
                 VStack(spacing: 8) {
                     HStack(spacing: 2) {
                         deleteBubbleButton
@@ -41,20 +41,14 @@ struct BubbleDeleteButton1: View {
                 .background {
                     Rectangle()
                         .fill(Color("deleteActionAlert1"))
-                        .standardShadow()
                 }
                 .clipShape(vRoundedRectangle(corners: [.topLeft, .topRight], radius: 30))
                 .padding([.leading, .trailing])
-                .standardShadow()
-                
                 DurationsView(bubble)
             }
             .frame(maxWidth: 320)
         }
     }
-    
-//    private let durations = [60, 120, 180, 240, 300, 600, 900, 1200, 1800, 2700, 3600, 7200]
-    let durations1 = [1:60, 2:120, 3:180, 4:240, 5:300, 10:600, 15:900, 20:1200, 30:1800, 45:2700, 60:3600, 120:7200]
     
     private let columns = Array(repeating: GridItem(.flexible()), count: 4)
     
