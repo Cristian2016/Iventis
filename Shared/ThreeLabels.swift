@@ -83,7 +83,6 @@ struct ThreeLabels: View {
     }
     
     // MARK: -
-    
     /* 1 */private func userTappedHundredths() {
         UserFeedback.singleHaptic(.heavy)
         viewModel.toggleBubbleStart(bubble)
