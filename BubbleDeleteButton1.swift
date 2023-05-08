@@ -33,30 +33,15 @@ struct BubbleDeleteButton1: View {
                     }
                     .padding([.leading, .trailing], 4)
                 }
-                
                 .padding([.top, .bottom])
                 .background { roundedBackground}
                 .padding([.leading, .trailing], 4)
                 
-                LazyVGrid(columns: columns) {
-                    ForEach(durations, id: \.self) { number in
-                        Button(String(number/60)) {
-                            viewModel.change(bubble, into: .timer(Float(number)))
-                        }
-                    }
-                }
-                .buttonStyle(.bordered)
-                .font(.system(size: 32))
-                .foregroundColor(.white)
+                DurationsView()
             }
             .padding([.leading, .trailing], 4)
             .padding([.top, .bottom])
             .frame(maxWidth: 370)
-            .background {
-                RoundedRectangle(cornerRadius: 50)
-                    .fill(Color.background3.gradient)
-                    .standardShadow()
-            }
         }
     }
     

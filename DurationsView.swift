@@ -19,8 +19,9 @@ struct DurationsView: View {
     
     var body: some View {
         ZStack {
-                translucentBackground
                 VStack(spacing: 0) {
+                    Text("Timer Duration in Minutes")
+                        .padding(10)
                     digitsGrid.clipShape(clipShape)
                 }
                 .padding([.leading, .trailing, .bottom])
