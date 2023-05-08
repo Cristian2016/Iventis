@@ -15,6 +15,7 @@ struct DurationsView: View {
     
     // MARK: - Mode [either 1. create a timerBubble with color or 2. edit a timerBubble]
     let bubble:Bubble
+    let color:Color
         
     let gridSpacing = CGFloat(1)
     
@@ -57,7 +58,7 @@ struct DurationsView: View {
             ForEach(digits, id: \.self) { subarray in
                 GridRow {
                     ForEach(subarray, id: \.self) { value in
-                        Digit(title: value) {
+                        Digit(title: value, color) {
                             viewModel.change(bubble, into: .timer(Float(value)! * 60))
                             UserFeedback.singleHaptic(.light)
                             dismiss()
@@ -72,6 +73,7 @@ struct DurationsView: View {
     
     init(_ bubble:Bubble) {
         self.bubble = bubble
+        self.color = Color.bubbleColor(forName: bubble.color)
         ScheduledNotificationsManager.shared.requestAuthorization()
     }
     
@@ -86,15 +88,17 @@ struct DurationsView: View {
 extension DurationsView {
     struct Digit:View {
         let title:String
+        let color:Color
         let action:() -> ()
         
-        init(title: String, _ action: @escaping () -> Void) {
+        init(title: String, _ color:Color, _ action: @escaping () -> Void) {
             self.title = title
+            self.color = color
             self.action = action
         }
         
         var body: some View {
-            Color("deleteActionAlert1")
+            color
                 .overlay {
                     Text(title)
                         .font(.system(size: 35, weight: .medium, design: .rounded))
