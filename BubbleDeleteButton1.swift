@@ -24,6 +24,7 @@ struct BubbleDeleteButton1: View {
                 .fill(.white.opacity(0.001))
                 .ignoresSafeArea()
                 .onTapGesture { dismiss() }
+            
             VStack {
                 VStack(spacing: 8) {
                     deleteTitle
@@ -31,16 +32,18 @@ struct BubbleDeleteButton1: View {
                         deleteBubbleButton
                         deleteActivityButton
                     }
-                    .padding([.leading, .trailing], 4)
+                    .padding([.leading, .trailing])
                 }
-                .padding([.top, .bottom])
-                .background { roundedBackground}
-                .padding([.leading, .trailing], 4)
+                .padding()
+                .background {
+                    vRoundedRectangle(corners: [.topLeft, .topRight], radius: 40)
+                        .fill(Color("deleteActionAlert1"))
+                        .standardShadow()
+                }
+                .padding([.leading, .trailing])
                 
                 DurationsView()
             }
-            .padding([.leading, .trailing], 4)
-            .padding([.top, .bottom])
             .frame(maxWidth: 370)
         }
     }
@@ -52,47 +55,37 @@ struct BubbleDeleteButton1: View {
     private var deleteTitle:some View {
         Text("\(Image.trash) Delete")
             .foregroundColor(.red)
-            .font(.system(size: 26, weight: .medium))
+            .font(.system(size: 22, weight: .medium))
     }
     
     private var deleteBubbleButton:some View {
-        vRoundedRectangle(corners: [.bottomLeft], radius: 30)
-            .fill(color)
-            .frame(height: 70)
-            .overlay {
-                Button {
-                    viewModel.deleteBubble(bubble)
-                    dismiss()
-                }
-            label: {
-                    Text("Bubble")
-                        .frame(maxWidth: .infinity)
-                        .font(.system(size: 32, weight: .medium, design: .rounded))
-                }
-                .tint(.white)
-            }
+        Button {
+            viewModel.deleteBubble(bubble)
+            dismiss()
+        }
+    label: {
+        Text("Bubble")
+            .frame(maxWidth: .infinity)
+            .font(.system(size: 32, weight: .medium, design: .rounded))
+    }
+    .tint(.white)
     }
     
     private var deleteActivityButton:some View {
-        vRoundedRectangle(corners: [.bottomRight], radius: 30)
-            .fill(color)
-            .frame(height: 70)
-            .overlay {
-                Button {
-                    viewModel.reset(bubble)
-                    Secretary.shared.deleteAction_bRank = nil
-                }
-            label: {
-                
-                let count = bubble.sessions_.count
-                let text:LocalizedStringKey = count > 0 ? "^[\(bubble.sessions_.count) Entry](inflect: true)" : "0 Entries"
-                
-                Text(text)
-                    .frame(maxWidth: .infinity)
-                    .font(.system(size: 32, weight: .medium, design: .rounded))
-                }
-                .tint(.white)
-            }
+        Button {
+            viewModel.reset(bubble)
+            Secretary.shared.deleteAction_bRank = nil
+        }
+    label: {
+        
+        let count = bubble.sessions_.count
+        let text:LocalizedStringKey = count > 0 ? "^[\(bubble.sessions_.count) Entry](inflect: true)" : "0 Entries"
+        
+        Text(text)
+            .frame(maxWidth: .infinity)
+            .font(.system(size: 32, weight: .medium, design: .rounded))
+    }
+    .tint(.white)
     }
     
     private var roundedBackground:some View {

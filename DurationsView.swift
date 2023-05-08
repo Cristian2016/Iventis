@@ -60,7 +60,6 @@ struct DurationsView: View {
                 }
             }
         }
-        .background()
     }
     
     // MARK: -
@@ -76,10 +75,10 @@ extension DurationsView {
         let title:String
         
         var body: some View {
-            Color.black
+            Color("deleteActionAlert1")
                 .overlay {
                     Text(title)
-                        .font(.system(size: 50, design: .rounded))
+                        .font(.system(size: 35, design: .rounded))
                         .minimumScaleFactor(0.1)
                         .foregroundColor(.white)
                 }
