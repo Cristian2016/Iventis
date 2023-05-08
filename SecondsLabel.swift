@@ -66,7 +66,7 @@ struct SecondsLabel: View {
 extension SecondsLabel {
     struct TimerProgressView:View {
         private let precision = "%.2f"
-        private let bubble:Bubble
+        @ObservedObject var bubble:Bubble
         @State private var progress = "0.0"
         
         var body: some View {
