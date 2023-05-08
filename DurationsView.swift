@@ -42,7 +42,7 @@ struct DurationsView: View {
     
     private var vRectangle: some View {
         vRoundedRectangle(corners: [.bottomLeft, .bottomRight], radius: 40)
-            .fill(.regularMaterial)
+            .fill(.thickMaterial)
             .padding([.leading, .trailing])
             .padding([.bottom], 4) //2
     }
@@ -100,7 +100,7 @@ extension DurationsView {
             color
                 .overlay {
                     symbol
-                        .font(.system(size: 35, weight: .medium, design: .rounded))
+                        .font(.system(size: 32, weight: .medium, design: .rounded))
                         .minimumScaleFactor(0.1)
                         .foregroundColor(.white)
                 }
