@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import MyPackage
 
 struct DurationsView: View {
     private let digits = [["1", "2", "3", "4"], ["5", "10", "15", "20"], ["30", "45", "60", "120"]]
@@ -57,6 +58,8 @@ struct DurationsView: View {
                     ForEach(subarray, id: \.self) { value in
                         Digit(title: value) {
                             viewModel.change(bubble, into: .timer(Float(value)! * 60))
+                            UserFeedback.singleHaptic(.light)
+                            dismiss()
                         }
                     }
                 }
@@ -69,6 +72,13 @@ struct DurationsView: View {
     init(_ bubble:Bubble) {
         self.bubble = bubble
         ScheduledNotificationsManager.shared.requestAuthorization()
+    }
+    
+    // MARK: -
+    private func dismiss() {
+        withAnimation {
+            Secretary.shared.deleteAction_bRank = nil
+        }
     }
 }
 

@@ -25,7 +25,7 @@ struct BubbleDeleteButton1: View {
                 .ignoresSafeArea()
                 .onTapGesture { dismiss() }
             
-            VStack(spacing: 6) {
+            VStack(spacing: 4) {
                 VStack(spacing: 8) {
 //                    deleteTitle
                     HStack(spacing: 2) {
