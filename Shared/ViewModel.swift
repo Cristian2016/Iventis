@@ -341,7 +341,9 @@ extension ViewModel {
             PersistenceController.shared.save(bContext) {
                 DispatchQueue.main.async {
                     bubble.coordinator.update(.automatic, refresh: true)
-                    bubble.coordinator = BubbleCellCoordinator(for: bubble)
+                    delayExecution(.now() + 0.01) {
+                        bubble.coordinator = BubbleCellCoordinator(for: bubble)
+                    }
                 }
             }
         }
