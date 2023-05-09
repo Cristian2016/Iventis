@@ -21,7 +21,7 @@ struct BubbleDeleteButton1: View {
     var body: some View {
         ZStack {
             Rectangle()
-                .fill(.black.opacity(0.6))
+                .fill(.black.opacity(0.5))
                 .onTapGesture { dismiss() }
             
             VStack(spacing: 0) {
