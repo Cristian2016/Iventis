@@ -10,7 +10,7 @@ import MyPackage
 
 //hr min sec cents (4 labels in total actually)
 struct ThreeLabels: View {
-    let bubble:Bubble
+    @ObservedObject var bubble:Bubble
     @EnvironmentObject private var viewModel:ViewModel
     
     @State private var hr:String

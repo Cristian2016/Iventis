@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct SecondsLabel: View {
-    let bubble:Bubble
+    @ObservedObject var bubble:Bubble
     @EnvironmentObject private var viewModel:ViewModel
         
     @State private var sec = "e"
