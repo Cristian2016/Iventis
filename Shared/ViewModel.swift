@@ -187,7 +187,7 @@ class ViewModel: ObservableObject {
                         
             self?.removeStartDelay(for: bubble)
             
-            self?.toggleBubbleStart(bubble, startDelayCompensation: startCorrection)
+            self?.startPause(bubble, startDelayCompensation: startCorrection)
         }
     } //18
     
@@ -383,7 +383,7 @@ extension ViewModel {
     } //9
     
     ///delta is always zero if user taps start. if user uses start delay, delta is not zero
-    func toggleBubbleStart(_ bubble:Bubble, startDelayCompensation:TimeInterval? = nil) {
+    func startPause(_ bubble:Bubble, startDelayCompensation:TimeInterval? = nil) {
         if bubble.currentClock <= 0 && bubble.kind != .stopwatch  {
             secretary.showAlert_closeSession = true
             delayExecution(.now() + 3) { self.secretary.showAlert_closeSession = false }

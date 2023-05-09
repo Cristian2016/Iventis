@@ -37,7 +37,7 @@ struct SecondsCircle: View {
     // MARK: -
     private func userTappedSeconds() {
         //user intent model
-        viewModel.toggleBubbleStart(bubble)
+        viewModel.startPause(bubble)
     }
     
     private func endSession() {
