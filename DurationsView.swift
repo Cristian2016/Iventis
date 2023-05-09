@@ -26,6 +26,7 @@ struct DurationsView: View {
                     Text("\(Image.timer) Choose Duration")
                         .padding(10)
                         .font(.system(size: 22))
+                        .foregroundColor(.black)
                     digitsGrid.clipShape(clipShape)
                 }
                 .padding([.leading, .trailing, .bottom])
