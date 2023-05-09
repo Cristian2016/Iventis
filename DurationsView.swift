@@ -23,10 +23,11 @@ struct DurationsView: View {
     var body: some View {
         ZStack {
                 VStack(spacing: 0) {
-                    Text("\(Image.timer) Change Duration")
+                    Text("*\(Image.timer) Change Duration*")
                         .padding(10)
                         .font(.system(size: 22))
                         .foregroundColor(.black)
+                    
                     digitsGrid.clipShape(clipShape)
                 }
                 .padding([.leading, .trailing, .bottom])
