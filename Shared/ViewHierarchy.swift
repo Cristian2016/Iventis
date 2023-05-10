@@ -30,7 +30,7 @@ struct ViewHierarchy: View {
             else { iPhoneViewHierarchy() }
             
             if showDeleteActionView {
-                if let bubble = viewModel.bubble(for: Int(secretary.deleteAction_bRank!)) {
+                if let rank = secretary.deleteAction_bRank, let bubble = viewModel.bubble(for: Int(rank)) {
 //                    BubbleDeleteButton(bubble)
 //                    BubbleDeleteButton.Info()
                     ActionsView(bubble: bubble)
