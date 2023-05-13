@@ -64,7 +64,7 @@ struct BubbleDeleteButton1: View {
     
     private var deleteBubbleButton:some View {
         Button {
-            UserFeedback.singleHaptic(.light)
+            hapticFeedback()
             viewModel.deleteBubble(bubble)
             dismiss()
         }
@@ -78,7 +78,7 @@ struct BubbleDeleteButton1: View {
     
     private var resetButton:some View {
         Button {
-            UserFeedback.singleHaptic(.light)
+            hapticFeedback()
             viewModel.reset(bubble)
             Secretary.shared.deleteAction_bRank = nil
         }
@@ -105,6 +105,8 @@ struct BubbleDeleteButton1: View {
             Secretary.shared.deleteAction_bRank = nil
         }
     }
+    
+    private func hapticFeedback() { UserFeedback.singleHaptic(.heavy) }
     
     // MARK: -
     struct Metrics {
