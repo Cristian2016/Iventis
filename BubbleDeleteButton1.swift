@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import MyPackage
 
 struct BubbleDeleteButton1: View {
     private let bubble:Bubble
@@ -63,6 +64,7 @@ struct BubbleDeleteButton1: View {
     
     private var deleteBubbleButton:some View {
         Button {
+            UserFeedback.singleHaptic(.light)
             viewModel.deleteBubble(bubble)
             dismiss()
         }
@@ -76,6 +78,7 @@ struct BubbleDeleteButton1: View {
     
     private var resetButton:some View {
         Button {
+            UserFeedback.singleHaptic(.light)
             viewModel.reset(bubble)
             Secretary.shared.deleteAction_bRank = nil
         }
