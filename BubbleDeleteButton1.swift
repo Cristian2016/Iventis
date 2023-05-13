@@ -34,7 +34,7 @@ struct BubbleDeleteButton1: View {
                                     .frame(height: 80)
                             )
                          
-                        if !bubble.sessions_.isEmpty { deleteActivityButton }
+                        if !bubble.sessions_.isEmpty { resetButton }
                     }
                 }
                 .padding([.top, .bottom])
@@ -74,7 +74,7 @@ struct BubbleDeleteButton1: View {
     }
     }
     
-    private var deleteActivityButton:some View {
+    private var resetButton:some View {
         Button {
             viewModel.reset(bubble)
             Secretary.shared.deleteAction_bRank = nil
