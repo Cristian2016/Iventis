@@ -24,7 +24,7 @@ struct BubbleDeleteButton1: View {
                 .fill(.black.opacity(0.5))
                 .onTapGesture { dismiss() }
             
-            VStack(spacing: 0) {
+            VStack(spacing: 6) {
                 VStack(spacing: 8) {
                     HStack(spacing: 2) {
                         deleteBubbleButton
@@ -33,7 +33,8 @@ struct BubbleDeleteButton1: View {
                                     .fill(.red)
                                     .frame(height: 80)
                             )
-                        deleteActivityButton
+                         
+                        if !bubble.sessions_.isEmpty { deleteActivityButton }
                     }
                 }
                 .padding([.top, .bottom])

@@ -90,7 +90,7 @@ class PairBubbleCellCoordinator {
             fatalError()
         }
         if bubble.state == .running {
-            let Δ = Date().timeIntervalSince(bubble.lastPair!.start!)
+            let Δ = Date().timeIntervalSince(bubble.lastPair!.start)
             let initialValue = Float(Δ)
             return initialValue
         } else {

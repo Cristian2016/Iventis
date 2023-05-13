@@ -17,7 +17,7 @@ extension Pair {
     }
 
     //1. creation
-    @NSManaged public var start: Date?
+    @NSManaged public var start: Date
     
     //2. pause
     @NSManaged public var pause: Date?
