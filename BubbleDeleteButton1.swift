@@ -55,13 +55,7 @@ struct BubbleDeleteButton1: View {
     }
     
     private let columns = Array(repeating: GridItem(.flexible()), count: 4)
-    
-    private var deleteTitle:some View {
-        Text("\(Image.trash) Delete")
-            .foregroundColor(.red)
-            .font(.system(size: 22, weight: .medium))
-    }
-    
+        
     private var deleteBubbleButton:some View {
         Button {
             hapticFeedback()
@@ -87,9 +81,17 @@ struct BubbleDeleteButton1: View {
         let count = bubble.sessions_.count
         let text:LocalizedStringKey = count > 0 ? "^[\(bubble.sessions_.count) Entry](inflect: true)" : "0 Entries"
         
-        Text("Reset")
-            .frame(maxWidth: .infinity)
-            .font(.system(size: 32, weight: .medium, design: .rounded))
+        ZStack(alignment: .bottom) {
+            Text("Reset")
+                .frame(maxWidth: .infinity)
+                .font(.system(size: 32, weight: .medium, design: .rounded))
+            Text(text)
+                .font(.system(size: 16, weight: .medium))
+                .foregroundColor(.lightGray)
+                .italic()
+                .offset(y: 14)
+        }
+        
     }
     .tint(.white)
     }

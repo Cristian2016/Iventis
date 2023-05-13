@@ -120,8 +120,9 @@ extension DurationsView {
     }
 }
 
-//struct DurationsView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        DurationsView(<#Bubble#>)
-//    }
-//}
+struct DurationsView_Previews: PreviewProvider {
+    
+    static var previews: some View {
+        DurationsView(BubbleDeleteButton1_Previews.bubble)
+    }
+}
