@@ -163,6 +163,8 @@ class BubbleCellCoordinator {
         
         let refresh = self.refresh
         let currentClock = bubble.currentClock
+        
+//        print("currentClock \(currentClock)")
                                 
         let elapsedSinceLastStart = Float(Date().timeIntervalSince(lastStart)) //2
         
@@ -178,11 +180,11 @@ class BubbleCellCoordinator {
             }
             
             //check if timer should finish
-            let totalDuration = bubble.lastSession!.totalDuration
-            let elapsedSinceFirstStart = totalDuration + elapsedSinceLastStart
+            let lastTrackerDuration = bubble.lastSession!.lastTrackerDuration
+            let elapsedSinceFirstStart = lastTrackerDuration + elapsedSinceLastStart
             let overspill = bubble.initialClock - elapsedSinceFirstStart //
             
-            if (Float(0)...1).contains(overspill) {
+            if (Float(0)...1).contains(overspill) {//app is already active
                 let deadline:DispatchTime = .now() + .milliseconds(Int(overspill * 1000))
                 
                 precisionTimer.executeAction(after: deadline) { [weak self] in
@@ -190,7 +192,7 @@ class BubbleCellCoordinator {
                     DispatchQueue.main.async { self?.timerProgress = "Done" }
                     self?.update(.finishTimer)
                 }
-            } else {
+            } else {//app becomes active
                 if overspill < 0 {
                     self.finishBubble(overspill)
                     DispatchQueue.main.async { self.timerProgress = "Done" }
