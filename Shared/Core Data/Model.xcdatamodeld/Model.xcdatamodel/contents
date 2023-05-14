@@ -57,6 +57,7 @@
         <attribute name="eventID" optional="YES" attributeType="String"/>
         <attribute name="isEnded" optional="YES" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
         <attribute name="isEventified" optional="YES" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
+        <attribute name="lastTrackerDuration" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="totalDuration" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="trackerIDCounter" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <relationship name="bubble" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Bubble" inverseName="sessions" inverseEntity="Bubble"/>

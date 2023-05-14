@@ -10,7 +10,7 @@ import Combine
 import MyPackage
 
 struct ThreeCircles: View {
-    let bubble:Bubble
+    @ObservedObject var bubble:Bubble
     let metrics:BubbleCell.Metrics
     @EnvironmentObject private var viewModel:ViewModel
     

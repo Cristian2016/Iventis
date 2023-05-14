@@ -22,6 +22,14 @@ public class Session: NSManagedObject {
         guard !pairs.isEmpty,
               let lastPairDuration = pairs.last?.duration else { fatalError() }
         totalDuration += lastPairDuration
+        
+        lastTrackerDuration += lastPairDuration
+        print("lastTrackerDuration \(lastTrackerDuration)")
+    }
+    
+    private func resetLastTrackerDuration()  {
+        print(#function)
+        lastTrackerDuration = 0
     }
     
     var isLastPairClosed:Bool { bubble?.lastPair?.pause != nil }
@@ -36,6 +44,7 @@ public class Session: NSManagedObject {
                 pair.trackerID = trackerIDCounter
                 print("pair trackerIDCounter \(pair.trackerID)")
             case .increment:
+                resetLastTrackerDuration()
                 trackerIDCounter += 1
                 print("trackerIDCounter \(trackerIDCounter)")
         }

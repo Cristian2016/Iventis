@@ -21,6 +21,7 @@ extension Session {
     
     ///sum of durations of all closed pairs. not-closed pair is not included
     @NSManaged public var totalDuration: Float
+    @NSManaged public var lastTrackerDuration: Float
     
     @NSManaged public var bubble: Bubble?
     @NSManaged public var pairs: NSOrderedSet?
