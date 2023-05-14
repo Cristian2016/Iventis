@@ -34,6 +34,7 @@ struct BubbleDeleteButton1: View {
                 .padding([.top, .bottom])
                 .background { darkRectangle }
                 .clipShape(vRoundedRectangle(corners: [.topLeft, .topRight], radius: 30))
+                
                 DurationsView(bubble)
             }
             .compositingGroup()
