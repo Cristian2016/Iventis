@@ -42,7 +42,7 @@ struct BubbleDeleteButton1: View {
             }
             .compositingGroup()
             .standardShadow()
-            .frame(maxWidth: 300)
+            .frame(maxWidth: 290)
         }
         .ignoresSafeArea()
     }
