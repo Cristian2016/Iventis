@@ -23,8 +23,7 @@ struct BubbleDeleteButton1: View {
     
     var body: some View {
         ZStack {
-            Rectangle()
-                .fill(Color.black.opacity(0.5))
+            screenBackground
                 .onTapGesture { dismiss() }
             
             VStack(spacing: 6) {
@@ -33,10 +32,7 @@ struct BubbleDeleteButton1: View {
                     resetButton
                 }
                 .padding([.top, .bottom])
-                .background {
-                    Rectangle()
-                        .fill(Color("deleteActionAlert1"))
-                }
+                .background { darkRectangle }
                 .clipShape(vRoundedRectangle(corners: [.topLeft, .topRight], radius: 30))
                 DurationsView(bubble)
             }
@@ -44,7 +40,6 @@ struct BubbleDeleteButton1: View {
             .standardShadow()
             .frame(maxWidth: 290)
         }
-        .ignoresSafeArea()
     }
     
     private let columns = Array(repeating: GridItem(.flexible()), count: 4)
@@ -74,6 +69,17 @@ struct BubbleDeleteButton1: View {
     private var deleteLabel:some View { Text("Delete").modifier(ButtonLook()) }
     
     private var resetLabel:some View { Text("Reset").modifier(ButtonLook()) }
+    
+    private var darkRectangle:some View {
+        Rectangle()
+            .fill(Color("deleteActionAlert1"))
+    }
+    
+    private var screenBackground:some View {
+        Color.black
+            .opacity(0.5)
+            .ignoresSafeArea()
+    }
     
     // MARK: - Methods
     private func dismiss() {
