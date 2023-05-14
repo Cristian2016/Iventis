@@ -28,17 +28,9 @@ struct BubbleDeleteButton1: View {
                 .onTapGesture { dismiss() }
             
             VStack(spacing: 6) {
-                VStack(spacing: 8) {
-                    HStack(spacing: 2) {
-                        deleteBubbleButton
-                            .background(
-                                Rectangle()
-                                    .fill(.red)
-                                    .frame(height: 80)
-                            )
-                         
-                        if !bubble.sessions_.isEmpty { resetButton }
-                    }
+                HStack {
+                    deleteBubbleButton
+                    resetButton
                 }
                 .padding([.top, .bottom])
                 .background {
@@ -46,12 +38,11 @@ struct BubbleDeleteButton1: View {
                         .fill(Color("deleteActionAlert1"))
                 }
                 .clipShape(vRoundedRectangle(corners: [.topLeft, .topRight], radius: 30))
-                .padding([.leading, .trailing])
                 DurationsView(bubble)
             }
             .compositingGroup()
             .standardShadow()
-            .frame(maxWidth: 320)
+            .frame(maxWidth: 310)
         }
         .ignoresSafeArea()
     }
@@ -59,13 +50,20 @@ struct BubbleDeleteButton1: View {
     private let columns = Array(repeating: GridItem(.flexible()), count: 4)
     
     // MARK: - Lego
-        
     private var deleteBubbleButton:some View {
         Button { deleteBubble() } label: { deleteLabel }
+            .background(
+                Rectangle()
+                    .fill(.red)
+                    .frame(height: 80)
+            )
     }
     
+    @ViewBuilder
     private var resetButton:some View {
-        Button { resetBubble() } label: { resetLabel }
+        if !bubble.sessions_.isEmpty {
+            Button { resetBubble() } label: { resetLabel }
+        }
     }
     
     private var roundedBackground:some View {

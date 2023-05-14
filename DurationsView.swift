@@ -30,7 +30,7 @@ struct DurationsView: View {
                     
                     digitsGrid.clipShape(clipShape)
                 }
-                .padding([.leading, .trailing, .bottom])
+                .padding([.bottom])
                 .padding(6)
                 .background { vRectangle }
         }
@@ -45,7 +45,6 @@ struct DurationsView: View {
     private var vRectangle: some View {
         vRoundedRectangle(corners: [.bottomLeft, .bottomRight], radius: 40)
             .fill(.white)
-            .padding([.leading, .trailing])
             .padding([.bottom], 4) //2
     }
     
