@@ -23,7 +23,7 @@ struct BubbleDeleteButton1: View {
     
     var body: some View {
         ZStack {
-            screenBackground
+            screenDarkBackground
                 .onTapGesture { dismiss() }
             
             VStack(spacing: 6) {
@@ -76,7 +76,7 @@ struct BubbleDeleteButton1: View {
             .fill(Color("deleteActionAlert1"))
     }
     
-    private var screenBackground:some View {
+    private var screenDarkBackground:some View {
         Color.black
             .opacity(0.5)
             .ignoresSafeArea()
