@@ -23,8 +23,7 @@ struct BubbleDeleteButton1: View {
     
     var body: some View {
         ZStack {
-            screenDarkBackground
-                .onTapGesture { dismiss() }
+            screenDarkBackground.onTapGesture { dismiss() }
             
             VStack {
                 HStack {//buttons stack
