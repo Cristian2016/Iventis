@@ -4,6 +4,8 @@
 //
 //  Created by Cristian Lapusan on 03.05.2023.
 //
+//        let count = bubble.sessions_.count
+//        let text:LocalizedStringKey = count > 0 ? "^[\(bubble.sessions_.count) Entry](inflect: true)" : "0 Entries"
 
 import SwiftUI
 import MyPackage
@@ -22,7 +24,7 @@ struct BubbleDeleteButton1: View {
     var body: some View {
         ZStack {
             Rectangle()
-                .fill(Color.background.opacity(0.5))
+                .fill(Color.black.opacity(0.5))
                 .onTapGesture { dismiss() }
             
             VStack(spacing: 6) {
@@ -55,45 +57,15 @@ struct BubbleDeleteButton1: View {
     }
     
     private let columns = Array(repeating: GridItem(.flexible()), count: 4)
+    
+    // MARK: - Lego
         
     private var deleteBubbleButton:some View {
-        Button {
-            hapticFeedback()
-            viewModel.deleteBubble(bubble)
-            dismiss()
-        }
-    label: {
-        Text("Delete")
-            .frame(maxWidth: .infinity)
-            .font(.system(size: 32, weight: .medium, design: .rounded))
-            .tint(.white)
-    }
+        Button { deleteBubble() } label: { deleteLabel }
     }
     
     private var resetButton:some View {
-        Button {
-            hapticFeedback()
-            viewModel.reset(bubble)
-            Secretary.shared.deleteAction_bRank = nil
-        }
-    label: {
-        
-        let count = bubble.sessions_.count
-        let text:LocalizedStringKey = count > 0 ? "^[\(bubble.sessions_.count) Entry](inflect: true)" : "0 Entries"
-        
-        ZStack(alignment: .bottom) {
-            Text("Reset")
-                .frame(maxWidth: .infinity)
-                .font(.system(size: 32, weight: .medium, design: .rounded))
-            Text(text)
-                .font(.system(size: 16, weight: .medium))
-                .foregroundColor(.lightGray)
-                .italic()
-                .offset(y: 14)
-        }
-        
-    }
-    .tint(.white)
+        Button { resetBubble() } label: { resetLabel }
     }
     
     private var roundedBackground:some View {
@@ -101,7 +73,11 @@ struct BubbleDeleteButton1: View {
             .fill(Color("deleteActionAlert1"))
     }
     
-    // MARK: -
+    private var deleteLabel:some View { Text("Delete").modifier(ButtonLook()) }
+    
+    private var resetLabel:some View { Text("Reset").modifier(ButtonLook()) }
+    
+    // MARK: - Methods
     private func dismiss() {
         withAnimation {
             Secretary.shared.deleteAction_bRank = nil
@@ -109,6 +85,27 @@ struct BubbleDeleteButton1: View {
     }
     
     private func hapticFeedback() { UserFeedback.singleHaptic(.heavy) }
+        
+    private func resetBubble() {
+        hapticFeedback()
+        viewModel.reset(bubble)
+        Secretary.shared.deleteAction_bRank = nil
+    }
+    
+    private func deleteBubble() {
+        hapticFeedback()
+        viewModel.deleteBubble(bubble)
+        dismiss()
+    }
+    
+    struct ButtonLook:ViewModifier {
+        func body(content: Content) -> some View {
+            content
+                .frame(maxWidth: .infinity)
+                .font(.system(size: 32, weight: .medium, design: .rounded))
+                .tint(.white)
+        }
+    }
     
     // MARK: -
     struct Metrics {
