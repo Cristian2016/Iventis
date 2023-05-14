@@ -26,8 +26,8 @@ struct BubbleDeleteButton1: View {
             screenDarkBackground
                 .onTapGesture { dismiss() }
             
-            VStack(spacing: 6) {
-                HStack {
+            VStack {
+                HStack {//buttons stack
                     deleteBubbleButton
                     resetButton
                 }
@@ -35,7 +35,7 @@ struct BubbleDeleteButton1: View {
                 .background { darkRectangle }
                 .clipShape(vRoundedRectangle(corners: [.topLeft, .topRight], radius: 30))
                 
-                DurationsView(bubble)
+                DurationsView(bubble) //digits stack
             }
             .compositingGroup()
             .standardShadow()
