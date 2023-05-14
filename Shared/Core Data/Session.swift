@@ -29,4 +29,20 @@ public class Session: NSManagedObject {
     var pairs_:[Pair] {
         pairs?.array as? [Pair] ?? []
     }
+    
+    func handleTrackerID(_ action:TrackerIDAction) {
+        switch action {
+            case .assign(let pair):
+                pair.trackerID = trackerIDCounter
+                print("pair trackerIDCounter \(pair.trackerID)")
+            case .increment:
+                trackerIDCounter += 1
+                print("trackerIDCounter \(trackerIDCounter)")
+        }
+    }
+    
+    enum TrackerIDAction {
+        case increment
+        case assign(Pair)
+    }
 }

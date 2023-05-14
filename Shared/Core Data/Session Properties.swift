@@ -4,7 +4,7 @@
 //
 //  Created by Cristian Lapusan on 23.04.2022.
 //
-//
+//1 increase trackerIDCounter each time user changes tracker. Counter keeps track of total number of trackers created for the session
 
 import Foundation
 import CoreData
@@ -30,6 +30,9 @@ extension Session {
     ///does the Session have a corresponding Calendar Event
     ///to avoid duplicating events
     @NSManaged public var isEventified: Bool
+    
+    @NSManaged public var trackerIDCounter: Int64 //1
+    
 }
 
 // MARK: Generated accessors for pairs

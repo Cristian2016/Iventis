@@ -31,6 +31,8 @@ extension Pair {
     //4. other
     @NSManaged public var session: Session?
     @NSManaged public var history: NSOrderedSet?
+    
+    @NSManaged public var trackerID: Int64
 }
 
 // MARK: Generated accessors for history

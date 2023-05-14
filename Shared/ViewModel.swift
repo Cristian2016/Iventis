@@ -329,6 +329,8 @@ extension ViewModel {
         bContext.perform {
             let theBubble = PersistenceController.shared.grabObj(objID) as! Bubble
             
+            theBubble.lastSession?.handleTrackerID(.increment)
+            
             switch kind {
                 case .timer(let initialClock):
                     theBubble.initialClock = initialClock
@@ -452,6 +454,9 @@ extension ViewModel {
                     //create new pair, add it to currentSession
                     let newPair = Pair(context: bContext)
                     newPair.start = Date().addingTimeInterval(-startDelayCompensation)
+                    
+                    thisBubble.lastSession?.handleTrackerID(.assign(newPair))
+                    
                     thisBubble.lastSession?.addToPairs(newPair)
                     
                     //this also makes changes visible to the viewContext as well
