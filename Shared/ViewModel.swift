@@ -325,6 +325,8 @@ extension ViewModel {
         
         let bContext = PersistenceController.shared.bContext
         let objID = bubble.objectID
+        
+        if bubble.state == .running { startPause(bubble) }
                 
         bContext.perform {
             let theBubble = PersistenceController.shared.grabObj(objID) as! Bubble
