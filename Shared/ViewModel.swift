@@ -326,6 +326,7 @@ extension ViewModel {
         let bContext = PersistenceController.shared.bContext
         let objID = bubble.objectID
         
+        //pause bubble first and then change tracker
         if bubble.state == .running { startPause(bubble) }
                 
         bContext.perform {
