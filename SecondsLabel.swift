@@ -19,10 +19,7 @@ struct SecondsLabel: View {
                 .overlay (secondsLabel)
                 .overlay (timerProgressView)
         }
-        .onReceive(bubble.coordinator.$timeComponents) {
-            sec = $0.sec
-            print("seconds received \($0.sec)")
-        }
+        .onReceive(bubble.coordinator.$timeComponents) { sec = $0.sec }
     }
     
     // MARK: - Lego

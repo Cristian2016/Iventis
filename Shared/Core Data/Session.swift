@@ -24,13 +24,9 @@ public class Session: NSManagedObject {
         totalDuration += lastPairDuration
         
         lastTrackerDuration += lastPairDuration
-        print("lastTrackerDuration \(lastTrackerDuration)")
     }
     
-    private func resetLastTrackerDuration()  {
-        print(#function)
-        lastTrackerDuration = 0
-    }
+    private func resetLastTrackerDuration()  { lastTrackerDuration = 0 }
     
     var isLastPairClosed:Bool { bubble?.lastPair?.pause != nil }
     

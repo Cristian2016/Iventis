@@ -40,9 +40,6 @@ class BubbleCellCoordinator {
     // MARK: - Publishers
     //1 BubbleCell
     @Published var timeComponents = Components("-1", "-1", "-1", "-1") //14
-    {didSet{
-        print("seconds sent \(timeComponents.sec)")
-    }}
     
     @Published private(set) var timeComponentsOpacity = Opacity() //15
     private(set) var color:Publisher<Color, Never> //16
