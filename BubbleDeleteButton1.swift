@@ -122,6 +122,8 @@ struct BubbleDeleteButton1_Previews: PreviewProvider {
         let context = PersistenceController.preview.viewContext
         let bubble = Bubble(context: context)
         bubble.color = "orange"
+        bubble.initialClock = 10
+//        bubble.currentClock = 10
         let session = Session(context: context)
         bubble.addToSessions(session)
         return bubble
