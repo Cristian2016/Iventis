@@ -52,7 +52,7 @@ class BubbleCellCoordinator {
     @Published var sdbOffset = CGFloat(0) //17
     @Published var sdbDeleteTriggered = false //18
     
-    func updateForChanged() {
+    func updateCoordinatorOnTrackerChange() {
         guard let bubble = bubble else { return }
         
         isTimer = bubble.isTimer
