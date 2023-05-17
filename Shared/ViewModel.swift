@@ -321,33 +321,36 @@ extension ViewModel {
         }
     } //8
     
-    func change(_ bubble:Bubble, into kind:Bubble.Kind) {
+    func change(_ bubble:Bubble, to kind:Bubble.Kind) {
         
         let bContext = PersistenceController.shared.bContext
         let objID = bubble.objectID
         
         //pause bubble first and then change tracker
         if bubble.state == .running { startPause(bubble) }
+        
+        delayExecution(.now() + 0.1) {
+            bContext.perform {
+                let theBubble = PersistenceController.shared.grabObj(objID) as! Bubble
                 
-        bContext.perform {
-            let theBubble = PersistenceController.shared.grabObj(objID) as! Bubble
-            
-            theBubble.lastSession?.handleTrackerID(.increment)
-            
-            switch kind {
-                case .timer(let initialClock):
-                    theBubble.initialClock = initialClock
-                    theBubble.currentClock = initialClock //changes the interface
-                case .stopwatch:
-                    theBubble.initialClock = 0
-                    theBubble.currentClock = 0 //changes the interface
-            }
-            
-            PersistenceController.shared.save(bContext) {
-                DispatchQueue.main.async {
-                    bubble.coordinator.update(.automatic, refresh: true)
-                    delayExecution(.now() + 0.01) {
-                        bubble.coordinator = BubbleCellCoordinator(for: bubble)
+                theBubble.lastSession?.handleTrackerID(.increment)
+                
+                switch kind {
+                    case .timer(let initialClock):
+                        theBubble.initialClock = initialClock
+                        theBubble.currentClock = initialClock //changes the interface
+                    case .stopwatch:
+                        theBubble.initialClock = 0
+                        theBubble.currentClock = 0 //changes the interface
+                }
+                
+                PersistenceController.shared.save(bContext) {
+                    DispatchQueue.main.async {
+//                        bubble.coordinator.update(.automatic, refresh: true)
+                        delayExecution(.now() + 0.01) {
+//                            bubble.coordinator = BubbleCellCoordinator(for: bubble)
+                            bubble.coordinator.updateForChanged()
+                        }
                     }
                 }
             }

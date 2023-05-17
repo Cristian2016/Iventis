@@ -40,6 +40,10 @@ class BubbleCellCoordinator {
     // MARK: - Publishers
     //1 BubbleCell
     @Published var timeComponents = Components("-1", "-1", "-1", "-1") //14
+    {didSet{
+        print("seconds sent \(timeComponents.sec)")
+    }}
+    
     @Published private(set) var timeComponentsOpacity = Opacity() //15
     private(set) var color:Publisher<Color, Never> //16
     @Published var timerProgress = "0.00" //8 Timers only
@@ -49,7 +53,10 @@ class BubbleCellCoordinator {
     @Published var sdbDeleteTriggered = false //18
     
     func updateForChanged() {
+        guard let bubble = bubble else { return }
         
+        isTimer = bubble.isTimer
+        update(.automatic, refresh: true)
     }
     
     // MARK: - Public API
@@ -188,13 +195,13 @@ class BubbleCellCoordinator {
                 let deadline:DispatchTime = .now() + .milliseconds(Int(overspill * 1000))
                 
                 precisionTimer.executeAction(after: deadline) { [weak self] in
-                    self?.finishBubble() //at exactly 0.0 overspill
+                    self?.notifyKillTimer() //at exactly 0.0 overspill
                     DispatchQueue.main.async { self?.timerProgress = "Done" }
                     self?.update(.finishTimer)
                 }
             } else {//app becomes active
                 if overspill < 0 {
-                    self.finishBubble(overspill)
+                    self.notifyKillTimer(overspill)
                     DispatchQueue.main.async { self.timerProgress = "Done" }
                     self.update(.finishTimer)
                 }
@@ -259,7 +266,7 @@ class BubbleCellCoordinator {
     } //12
     
     ///notifies ViewModel to finish bubble. refresh components when app active again
-    private func finishBubble(_ overspill:Float? = nil) {
+    private func notifyKillTimer(_ overspill:Float? = nil) {
         guard let bubble = bubble else { return }
         
         let info:[String : Any] = ["rank" : bubble.rank, "overspill" : overspill ?? 0.0]

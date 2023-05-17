@@ -55,9 +55,9 @@ struct DurationsView: View {
                     ForEach(subarray, id: \.self) { value in
                         Digit(title: value, color) {
                             if value == "stopwatch" {
-                                viewModel.change(bubble, into: .stopwatch)
+                                viewModel.change(bubble, to: .stopwatch)
                             } else {
-                                viewModel.change(bubble, into: .timer(Float(value)! * 60))
+                                viewModel.change(bubble, to: .timer(Float(value)! * 60))
                             }
                             
                             UserFeedback.singleHaptic(.light)

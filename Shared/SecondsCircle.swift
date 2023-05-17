@@ -10,7 +10,7 @@ import MyPackage
 
 struct SecondsCircle: View {
     @EnvironmentObject private var viewModel:ViewModel
-    let bubble:Bubble
+    @ObservedObject var bubble:Bubble
     let color:Color
     let scale:CGFloat
     
