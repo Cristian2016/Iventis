@@ -70,7 +70,7 @@ struct DurationsView: View {
                             Text(title)
                                 .font(.system(size: 22, weight: .medium))
                                 .foregroundColor(.black)
-                            Text(smallText)
+                            Text("*Minutes*")
                                 .foregroundColor(.secondary)
                                 .font(.system(size: 18))
                         }
