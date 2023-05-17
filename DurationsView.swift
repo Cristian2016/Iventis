@@ -73,7 +73,7 @@ struct DurationsView: View {
                             
                             if !bubble.isTimer {
                                 Text("*Minutes*")
-                                    .foregroundColor(.secondary)
+                                    .foregroundColor(.gray)
                                     .font(.system(size: 18))
                             }
                         }
