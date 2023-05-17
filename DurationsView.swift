@@ -53,6 +53,11 @@ struct DurationsView: View {
                                 .foregroundColor(.white)
                                 .font(.system(size: 32, weight: .medium))
                         }
+                        .onTapGesture {
+                            UserFeedback.singleHaptic(.light)
+                            viewModel.change(bubble, to: .stopwatch)
+                            dismiss()
+                        }
                 }
                 
                 Rectangle()
@@ -69,12 +74,7 @@ struct DurationsView: View {
                 GridRow {
                     ForEach(subarray, id: \.self) { value in
                         Digit(title: value, color) {
-                            if value == "stopwatch" {
-                                viewModel.change(bubble, to: .stopwatch)
-                            } else {
-                                viewModel.change(bubble, to: .timer(Float(value)! * 60))
-                            }
-                            
+                            viewModel.change(bubble, to: .timer(Float(value)! * 60))
                             UserFeedback.singleHaptic(.light)
                             dismiss()
                         }
