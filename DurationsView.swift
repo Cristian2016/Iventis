@@ -9,8 +9,7 @@ import SwiftUI
 import MyPackage
 
 struct DurationsView: View {
-    private let digitsStopwatch = [["1", "2", "3", "4"], ["5", "10", "15", "20"], ["30", "45", "60", "120"]]
-    private let digitsTimer = [["stopwatch", "2", "3", "4"], ["5", "10", "15", "20"], ["30", "45", "60", "120"]]
+    private let durations = [["1", "2", "3", "4"], ["5", "10", "15", "20"], ["30", "45", "60", "120"]]
     
     @EnvironmentObject private var viewModel:ViewModel
     
@@ -23,18 +22,13 @@ struct DurationsView: View {
     var body: some View {
         ZStack {
                 VStack(spacing: 0) {
-                    Text("*\(Image.timer) Choose Minutes*")
-                        .padding(10)
-                        .font(.system(size: 22))
-                        .foregroundColor(.black)
-                    
                     digitsGrid.clipShape(clipShape)
                 }
                 .padding([.bottom])
                 .padding(6)
                 .background { vRectangle }
         }
-        .frame(height: 280)
+        .frame(height: 290)
     }
     
     // MARK: - Lego
@@ -50,7 +44,28 @@ struct DurationsView: View {
     
     private var digitsGrid:some View {
         Grid(horizontalSpacing: gridSpacing, verticalSpacing: gridSpacing) {
-            ForEach(bubble.isTimer ? digitsTimer : digitsStopwatch, id: \.self) { subarray in
+            GridRow {
+                if bubble.isTimer {
+                    Rectangle()
+                        .fill(color)
+                        .overlay {
+                            Image.stopwatch
+                                .foregroundColor(.white)
+                                .font(.system(size: 32, weight: .medium))
+                        }
+                }
+                
+                Rectangle()
+                    .fill(.clear)
+                    .gridCellColumns(bubble.isTimer ? 3 : 4)
+                    .overlay {
+                        Text("*\(Image.timer) Choose Minutes*")
+                            .padding(10)
+                            .font(.system(size: 22))
+                            .foregroundColor(.black)
+                    }
+            }
+            ForEach(durations, id: \.self) { subarray in
                 GridRow {
                     ForEach(subarray, id: \.self) { value in
                         Digit(title: value, color) {
