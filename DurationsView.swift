@@ -64,15 +64,16 @@ struct DurationsView: View {
                     .fill(.clear)
                     .gridCellColumns(bubble.isTimer ? 3 : 4)
                     .overlay {
-                        let title:LocalizedStringKey = bubble.isTimer ? "\(Image.timer) Choose Minutes" : "*\(Image.timer) Convert to Timer*"
+                        let title:LocalizedStringKey = bubble.isTimer ? "\(Image.timer) Choose Minutes" : "*\(Image.timer) Timer Duration*"
                         
-                        VStack(spacing: 0) {
+                        VStack(spacing: 4) {
                             Text(title)
                                 .font(.system(size: 22, weight: .medium))
                                 .foregroundColor(.black)
                             
                             if !bubble.isTimer {
-                                Text("*Choose Minutes*")
+                                Divider()
+                                Text("*Minutes*")
                                     .foregroundColor(.gray)
                                     .font(.system(size: 18))
                             }
