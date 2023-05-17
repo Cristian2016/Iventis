@@ -76,7 +76,6 @@ struct DurationsView: View {
                                     .foregroundColor(.secondary)
                                     .font(.system(size: 18))
                             }
-                           
                         }
                     }
             }
