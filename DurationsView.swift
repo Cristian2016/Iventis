@@ -9,7 +9,7 @@ import SwiftUI
 import MyPackage
 
 struct DurationsView: View {
-    private let durations = [["1", "2", "3", "4"], ["5", "10", "15", "20"], ["30", "45", "60", "120"]]
+    private let durations = [["1", "2", "3", "4"], ["5", "10", "15", "20"], ["25", "30", "45", "60"]]
     
     @EnvironmentObject private var viewModel:ViewModel
     
