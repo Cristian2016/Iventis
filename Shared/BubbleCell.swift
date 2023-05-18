@@ -40,7 +40,6 @@ struct BubbleCell: View {
             toggleCalendarButton
         }
         .swipeActions(edge: .trailing, allowsFullSwipe: true) {
-//            deleteActionButton
             actionsButton
             moreOptionsButton
         }
@@ -77,10 +76,6 @@ struct BubbleCell: View {
     }
     
     //trailing Swipe actions
-    private var deleteActionButton:some View {
-        Button { secretary.deleteAction_bRank = bubble.rank }
-        label: { Label { Text("Delete") } icon: { Image.trash } }.tint(.red) }
-    
     private var moreOptionsButton:some View {
         Button { viewModel.showMoreOptions(for: bubble) }
     label: { Label { Text("More") } icon: { Image.more } }.tint(.lightGray)
