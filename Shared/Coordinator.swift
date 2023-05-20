@@ -57,7 +57,7 @@ class BubbleCellCoordinator {
         update(.automatic, refresh: true)
         
         delayExecution(.now() + 0.01) {
-            self.timerProgress = "OK"
+            if self.timerProgress != "OK" { self.timerProgress = "OK" }
         }
     }
     
