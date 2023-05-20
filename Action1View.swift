@@ -107,7 +107,7 @@ struct Action1View: View {
 
 extension Action1View {
     struct Metrics {
-        let size = CGSize(width: 290, height: 350)
+        let size = CGSize(width: 290, height: 360)
         let buttonHeight = CGFloat(80)
         let padding = CGFloat(6)
     }
@@ -167,14 +167,14 @@ extension Action1View {
                         .padding([.top], 6)
                         .disabled(bubble.isTimer ? false : true)
                     
-                    HStack(alignment: .firstTextBaseline) {
-                        Text("*\(Image.timer) Choose Timer*")
+//                    HStack(alignment: .firstTextBaseline) {
+                        Text("*\(Image.timer) Timer Minutes*")
                             .font(.system(size: 20, weight: .medium))
                             .padding([.top, .bottom], 6)
-                        Text("*Minutes*")
-                            .font(.system(size: 18))
-                            .foregroundColor(.gray)
-                    }
+//                        Text("*Minutes*")
+//                            .font(.system(size: 18))
+//                            .foregroundColor(.gray)
+//                    }
                     .gridCellColumns(3)
                 }
                 
