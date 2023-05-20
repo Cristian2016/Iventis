@@ -24,6 +24,8 @@ struct Action1View: View {
                     deleteButton
                     resetButton
                 }
+                .labelStyle(.titleOnly) //looks for labels inside HStack
+                
                 vRoundedRectangle(corners: [.bottomLeft, .bottomRight], radius: 40)
                     .fill(.white)
                     .overlay {
@@ -76,7 +78,6 @@ struct Action1View: View {
             Label("Delete", systemImage: "trash")
                 .padding()
                 .frame(maxWidth: .infinity)
-                .labelStyle(.titleOnly)
         }
         .buttonStyle(BStyle(position: .left(.red)))
         .foregroundColor(.white)
@@ -86,7 +87,7 @@ struct Action1View: View {
         Button {
             resetBubble()
         } label: {
-            Label("Reset", systemImage: "reset")
+            Label("Reset", systemImage: "arrow.counterclockwise.circle")
                 .padding()
                 .frame(maxWidth: .infinity)
         }
@@ -121,7 +122,7 @@ struct Action1View: View {
 
 extension Action1View {
     struct Metrics {
-        let size = CGSize(width: 310, height: 375)
+        let size = CGSize(width: 310, height: 430)
         let buttonHeight = CGFloat(80)
     }
 }
