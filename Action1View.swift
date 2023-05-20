@@ -31,12 +31,12 @@ struct Action1View: View {
                     .overlay {
                         TabView {
                             Grid(horizontalSpacing: 2, verticalSpacing: 2) {
-                                HStack {
+                                HStack(alignment: .firstTextBaseline) {
                                     Text("*\(Image.timer) Choose Timer*")
                                         .font(.system(size: 20 ))
                                         .padding([.top, .bottom], 6)
                                     Text("*Minutes*")
-                                        .font(.system(size: 18))
+                                        .font(.system(size: 18, weight: .medium))
                                         .foregroundColor(.gray)
                                 }
                                 .font(.system(size: 20))
