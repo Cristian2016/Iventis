@@ -34,7 +34,7 @@ struct Action1View: View {
                             Grid(horizontalSpacing: 2, verticalSpacing: 2) {
                                 Text("*\(Image.timer) Durations*")
                                     .font(.system(size: 20))
-                                    .padding([.top, .bottom], 6)
+                                    .padding([.top, .bottom], metrics.padding)
                                 ForEach(0..<4) { number in
                                     GridRow {
                                         ForEach(0..<2) { item in
@@ -107,8 +107,9 @@ struct Action1View: View {
 
 extension Action1View {
     struct Metrics {
-        let size = CGSize(width: 310, height: 350)
+        let size = CGSize(width: 290, height: 350)
         let buttonHeight = CGFloat(80)
+        let padding = CGFloat(6)
     }
 }
 
@@ -154,15 +155,18 @@ extension Action1View {
             let color = Color.bubbleColor(forName: bubble.color)
             
             Grid(horizontalSpacing: 2, verticalSpacing: 2) {
-                HStack(alignment: .firstTextBaseline) {
-                    Text("*\(Image.timer) Choose Timer*")
-                        .font(.system(size: 20, weight: .medium))
-                        .padding([.top, .bottom], 6)
-                    Text("*Minutes*")
-                        .font(.system(size: 18))
-                        .foregroundColor(.gray)
+//                HStack(alignment: .firstTextBaseline) {
+//                    Text("*\(Image.timer) Choose Timer*")
+//                        .font(.system(size: 20, weight: .medium))
+//                        .padding([.top, .bottom], 6)
+//                    Text("*Minutes*")
+//                        .font(.system(size: 18))
+//                        .foregroundColor(.gray)
+//                }
+                GridRow {
+                    color
+                        .padding([.top], 6)
                 }
-                
                 ForEach(minutes, id: \.self) { row in
                     GridRow {
                         ForEach(row, id: \.self) { digit in
