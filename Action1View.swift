@@ -30,25 +30,7 @@ struct Action1View: View {
                     .fill(.white)
                     .overlay {
                         TabView {
-                            Grid(horizontalSpacing: 2, verticalSpacing: 2) {
-                                HStack(alignment: .firstTextBaseline) {
-                                    Text("*\(Image.timer) Choose Timer*")
-                                        .font(.system(size: 20, weight: .medium))
-                                        .padding([.top, .bottom], 6)
-                                    Text("*Minutes*")
-                                        .font(.system(size: 18))
-                                        .foregroundColor(.gray)
-                                }
-                                .font(.system(size: 20))
-                                
-                                ForEach(0..<3) { number in
-                                    GridRow {
-                                        ForEach(0..<4) { item in
-                                            Color.red
-                                        }
-                                    }
-                                }
-                            }
+                            MinutesGrid(bubble: bubble)
                             Grid(horizontalSpacing: 2, verticalSpacing: 2) {
                                 Text("*\(Image.timer) Durations*")
                                     .font(.system(size: 20))
@@ -159,6 +141,48 @@ extension Action1View {
             case left(Color)
             case right(Color)
         }
+    }
+}
+
+extension Action1View {
+    struct MinutesGrid:View {
+        let bubble:Bubble
+        @EnvironmentObject private var viewModel:ViewModel
+        let minutes = [[1, 2, 3, 4], [5, 10, 15, 20], [25, 30, 45, 60]]
+        
+        var body: some View {
+            let color = Color.bubbleColor(forName: bubble.color)
+            
+            Grid(horizontalSpacing: 2, verticalSpacing: 2) {
+                HStack(alignment: .firstTextBaseline) {
+                    Text("*\(Image.timer) Choose Timer*")
+                        .font(.system(size: 20, weight: .medium))
+                        .padding([.top, .bottom], 6)
+                    Text("*Minutes*")
+                        .font(.system(size: 18))
+                        .foregroundColor(.gray)
+                }
+                
+                ForEach(minutes, id: \.self) { row in
+                    GridRow {
+                        ForEach(row, id: \.self) { digit in
+                            color
+                                .overlay {
+                                    Button(String(digit)) {
+                                        viewModel.change(bubble, to: .timer(Float(digit) * 60))
+                                        UserFeedback.singleHaptic(.heavy)
+                                        dismiss()
+                                    }
+                                }
+                        }
+                    }
+                }
+            }
+            .accentColor(.white)
+            .font(.system(size: 30, weight: .medium, design: .rounded))
+        }
+        
+        private func dismiss() { Secretary.shared.deleteAction_bRank = nil }
     }
 }
 
