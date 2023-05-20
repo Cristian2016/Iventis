@@ -40,7 +40,6 @@ struct Action1View: View {
                                     }
                                 }
                             }
-                            
                             Grid(horizontalSpacing: 2, verticalSpacing: 2) {
                                 HStack {
                                     Text("\(Image.timer) Change to Timer")
@@ -58,9 +57,10 @@ struct Action1View: View {
                                 }
                             }
                         }
-                        .padding([.leading, .trailing], 6)
-                        .tabViewStyle(.page)
                         .clipShape(vRoundedRectangle(corners: [.bottomLeft, .bottomRight], radius: 30))
+                        .padding([.leading, .trailing], 4)
+                        .padding([.bottom])
+                        .tabViewStyle(.page)
                     }
             }
             .compositingGroup()
