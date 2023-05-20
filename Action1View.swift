@@ -25,6 +25,7 @@ struct Action1View: View {
                     if bubble.state != .brandNew { resetButton }
                 }
                 .labelStyle(.titleOnly) //looks for labels inside HStack
+                .clipShape(vRoundedRectangle(corners: [.topLeft, .topRight], radius: 20))
                 
                 vRoundedRectangle(corners: [.bottomLeft, .bottomRight], radius: 40)
                     .fill(.white)
@@ -127,11 +128,9 @@ extension Action1View {
                 .background {
                     switch position {
                         case .left(let color):
-                            vRoundedRectangle(corners: [.topLeft], radius: 20)
-                                .fill(color)
+                                color
                         case .right(let color):
-                            vRoundedRectangle(corners: [.topRight], radius: 20)
-                                .fill(color)
+                                color
                     }
                 }
                 .opacity(configuration.isPressed ? 0.5 : 1.0)
@@ -156,21 +155,23 @@ extension Action1View {
             
             Grid(horizontalSpacing: 2, verticalSpacing: 2) {
                 GridRow {
-                    color
-                        .overlay {
-                            Button("\(Image.stopwatch)") {
-                                viewModel.change(bubble, to:.stopwatch)
-                                UserFeedback.singleHaptic(.heavy)
-                                dismiss()
+                    if bubble.isTimer {
+                        color
+                            .overlay {
+                                Button("\(Image.stopwatch)") {
+                                    viewModel.change(bubble, to:.stopwatch)
+                                    UserFeedback.singleHaptic(.heavy)
+                                    dismiss()
+                                }
                             }
-                        }
-                        .padding([.top], 6)
-                        .disabled(bubble.isTimer ? false : true)
+                            .padding([.top], 6)
+                            .disabled(bubble.isTimer ? false : true)
+                    }
                     
                     Text("*\(Image.timer) Timer Minutes*")
                         .font(.system(size: 20))
                         .padding([.top, .bottom], 6)
-                        .gridCellColumns(3)
+                        .gridCellColumns(bubble.isTimer ? 3 : 4)
                 }
                 
                 ForEach(minutes, id: \.self) { row in
