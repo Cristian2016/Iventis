@@ -32,7 +32,7 @@ struct Action1View: View {
                         TabView {
                             MinutesGrid(bubble: bubble)
                             Grid(horizontalSpacing: 2, verticalSpacing: 2) {
-                                Text("*\(Image.timer) Durations*")
+                                Text("*\(Image.timer) Recently Used*")
                                     .font(.system(size: 20))
                                     .padding([.top, .bottom], metrics.padding)
                                 ForEach(0..<4) { number in
@@ -155,18 +155,29 @@ extension Action1View {
             let color = Color.bubbleColor(forName: bubble.color)
             
             Grid(horizontalSpacing: 2, verticalSpacing: 2) {
-//                HStack(alignment: .firstTextBaseline) {
-//                    Text("*\(Image.timer) Choose Timer*")
-//                        .font(.system(size: 20, weight: .medium))
-//                        .padding([.top, .bottom], 6)
-//                    Text("*Minutes*")
-//                        .font(.system(size: 18))
-//                        .foregroundColor(.gray)
-//                }
                 GridRow {
                     color
+                        .overlay {
+                            Button("\(Image.stopwatch)") {
+                                viewModel.change(bubble, to:.stopwatch)
+                                UserFeedback.singleHaptic(.heavy)
+                                dismiss()
+                            }
+                        }
                         .padding([.top], 6)
+                        .disabled(bubble.isTimer ? false : true)
+                    
+                    HStack(alignment: .firstTextBaseline) {
+                        Text("*\(Image.timer) Choose Timer*")
+                            .font(.system(size: 20, weight: .medium))
+                            .padding([.top, .bottom], 6)
+                        Text("*Minutes*")
+                            .font(.system(size: 18))
+                            .foregroundColor(.gray)
+                    }
+                    .gridCellColumns(3)
                 }
+                
                 ForEach(minutes, id: \.self) { row in
                     GridRow {
                         ForEach(row, id: \.self) { digit in
