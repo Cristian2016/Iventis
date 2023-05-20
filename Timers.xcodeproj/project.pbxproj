@@ -236,6 +236,7 @@
 		1FEB508629DED01F000C242E /* BubbleDeleteActionAlert1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FEB508529DED01F000C242E /* BubbleDeleteActionAlert1.swift */; };
 		1FEE84CB29F8408400DFF336 /* InfoOutlineUnit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FEE84CA29F8408400DFF336 /* InfoOutlineUnit.swift */; };
 		1FF0A2FD2810448100B1DB77 /* TopDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF0A2FC2810448100B1DB77 /* TopDetailView.swift */; };
+		1FF0E4052A17C10200FDCA29 /* DurationsTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF0E4042A17C10200FDCA29 /* DurationsTabView.swift */; };
 		1FF37CAE298BC7DF00AF0EC8 /* SmallTextHint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF37CAD298BC7DF00AF0EC8 /* SmallTextHint.swift */; };
 		1FF5AC3A29A9EDC4000DD0E2 /* NeedlePositionKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF5AC3929A9EDC4000DD0E2 /* NeedlePositionKey.swift */; };
 		1FF8254D29C72C2C0003E4A0 /* DPManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF8254C29C72C2C0003E4A0 /* DPManager.swift */; };
@@ -447,6 +448,7 @@
 		1FEB508529DED01F000C242E /* BubbleDeleteActionAlert1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BubbleDeleteActionAlert1.swift; sourceTree = SOURCE_ROOT; };
 		1FEE84CA29F8408400DFF336 /* InfoOutlineUnit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoOutlineUnit.swift; sourceTree = SOURCE_ROOT; };
 		1FF0A2FC2810448100B1DB77 /* TopDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopDetailView.swift; sourceTree = "<group>"; };
+		1FF0E4042A17C10200FDCA29 /* DurationsTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DurationsTabView.swift; sourceTree = SOURCE_ROOT; };
 		1FF37CAD298BC7DF00AF0EC8 /* SmallTextHint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallTextHint.swift; sourceTree = "<group>"; };
 		1FF5AC3929A9EDC4000DD0E2 /* NeedlePositionKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeedlePositionKey.swift; sourceTree = "<group>"; };
 		1FF8254C29C72C2C0003E4A0 /* DPManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DPManager.swift; sourceTree = "<group>"; };
@@ -617,6 +619,7 @@
 		1F5F4A4728093FAD00AF3442 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				1FF0E4042A17C10200FDCA29 /* DurationsTabView.swift */,
 				1FA87BD42A08CFFF00116B00 /* DurationsView.swift */,
 				1FEB16242A0777EC00CC7D7F /* ActionsView.swift */,
 				1F9F97502A063DCB0084ADE6 /* UpnextLabel.swift */,
@@ -1021,6 +1024,7 @@
 				1F22183029CF2B4D0006227E /* PermanentLabel.swift in Sources */,
 				1F36D56B29942C0B00D70727 /* CalendarEventCreatedConfirmation.swift in Sources */,
 				1FB4D4E02977F86500F26D9C /* iPadViewHierarchy.swift in Sources */,
+				1FF0E4052A17C10200FDCA29 /* DurationsTabView.swift in Sources */,
 				1FAE715D298D1CA200E19959 /* DualTextView.swift in Sources */,
 				1FE722A128E58200005ADA8E /* ColorConfirmationView.swift in Sources */,
 				1F8B6965283790CF006540CB /* BubbleStickyNoteList.swift in Sources */,

@@ -22,7 +22,7 @@ struct DurationsView: View {
     var body: some View {
         ZStack {
                 VStack(spacing: 0) {
-                    digitsGrid.clipShape(clipShape)
+                    digitsGrid.clipShape(vRoundedRect)
                 }
                 .padding([.bottom])
                 .padding(6)
@@ -32,7 +32,7 @@ struct DurationsView: View {
     }
     
     // MARK: - Lego
-    private var clipShape:some Shape {
+    private var vRoundedRect:some Shape {
         vRoundedRectangle(corners: [.bottomLeft, .bottomRight], radius: 30)
     }
     
@@ -64,7 +64,7 @@ struct DurationsView: View {
                     .fill(.clear)
                     .gridCellColumns(bubble.isTimer ? 3 : 4)
                     .overlay {
-                        let title:LocalizedStringKey = bubble.isTimer ? "\(Image.timer) Choose Minutes" : "*\(Image.timer) Timer Duration*"
+                        let title:LocalizedStringKey = bubble.isTimer ? "Choose Minutes" : "*\(Image.timer) Timer Duration*"
                         
                         VStack(spacing: 4) {
                             Text(title)
