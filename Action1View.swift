@@ -35,7 +35,9 @@ struct Action1View: View {
                                     Text("*\(Image.timer) Choose Timer*")
                                         .font(.system(size: 20 ))
                                         .padding([.top, .bottom], 6)
-                                    FusedLabel(content: .init(title: "Minutes", size: .small, isFilled: false))
+                                    Text("*Minutes*")
+                                        .font(.system(size: 18))
+                                        .foregroundColor(.gray)
                                 }
                                 .font(.system(size: 20))
                                 
