@@ -32,9 +32,10 @@ struct Action1View: View {
                         TabView {
                             Grid(horizontalSpacing: 2, verticalSpacing: 2) {
                                 HStack {
-                                    Text("*\(Image.timer) Change to Timer*")
+                                    Text("*\(Image.timer) Choose Timer*")
                                         .font(.system(size: 20 ))
                                         .padding([.top, .bottom], 6)
+                                    FusedLabel(content: .init(title: "Minutes", size: .small, isFilled: false))
                                 }
                                 .font(.system(size: 20))
                                 
@@ -60,7 +61,7 @@ struct Action1View: View {
                             }
                         }
                         .clipShape(vRoundedRectangle(corners: [.bottomLeft, .bottomRight], radius: 30))
-                        .padding([.leading, .trailing], 4)
+                        .padding([.leading, .trailing], 6)
                         .padding([.bottom])
                         .tabViewStyle(.page(indexDisplayMode: .never))
                     }
