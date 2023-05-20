@@ -29,20 +29,28 @@ struct Action1View: View {
                     .overlay {
                         TabView {
                             Grid(horizontalSpacing: 2, verticalSpacing: 2) {
-                                Text("\(Image.timer) Change to Timer")
-                                ForEach(0..<3) { number in
+                                Text("\(Image.timer) Durations")
+                                    .font(.system(size: 20))
+                                    .padding([.top, .bottom], 6)
+                                ForEach(0..<4) { number in
                                     GridRow {
-                                        ForEach(0..<3) { item in
+                                        ForEach(0..<2) { item in
                                             Rectangle()
                                         }
                                     }
                                 }
                             }
                             Grid(horizontalSpacing: 2, verticalSpacing: 2) {
-                                Text("ok")
+                                HStack {
+                                    Text("\(Image.timer) Change to Timer")
+                                        .font(.system(size: 20))
+                                        .padding([.top, .bottom], 6)
+                                }
+                                .font(.system(size: 20))
+                                
                                 ForEach(0..<3) { number in
                                     GridRow {
-                                        ForEach(0..<2) { item in
+                                        ForEach(0..<3) { item in
                                             Rectangle()
                                         }
                                     }
@@ -111,7 +119,7 @@ struct Action1View: View {
 
 extension Action1View {
     struct Metrics {
-        let size = CGSize(width: 310, height: 340)
+        let size = CGSize(width: 310, height: 375)
         let buttonHeight = CGFloat(80)
     }
 }
