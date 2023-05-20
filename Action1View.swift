@@ -60,7 +60,7 @@ struct Action1View: View {
                         .clipShape(vRoundedRectangle(corners: [.bottomLeft, .bottomRight], radius: 30))
                         .padding([.leading, .trailing], 4)
                         .padding([.bottom])
-                        .tabViewStyle(.page)
+                        .tabViewStyle(.page(indexDisplayMode: .never))
                     }
             }
             .compositingGroup()
