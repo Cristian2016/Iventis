@@ -40,10 +40,11 @@ struct Action1View: View {
                                     }
                                 }
                             }
+                            
                             Grid(horizontalSpacing: 2, verticalSpacing: 2) {
                                 HStack {
                                     Text("\(Image.timer) Change to Timer")
-                                        .font(.system(size: 20))
+                                        .font(.system(size: 20 ))
                                         .padding([.top, .bottom], 6)
                                 }
                                 .font(.system(size: 20))
@@ -57,6 +58,7 @@ struct Action1View: View {
                                 }
                             }
                         }
+                        .padding([.leading, .trailing], 6)
                         .tabViewStyle(.page)
                         .clipShape(vRoundedRectangle(corners: [.bottomLeft, .bottomRight], radius: 30))
                     }
