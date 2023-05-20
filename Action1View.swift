@@ -168,7 +168,7 @@ extension Action1View {
                             .disabled(bubble.isTimer ? false : true)
                     }
                     
-                    Text("*\(Image.timer) Timer Minutes*")
+                    Text("*\(Image.timer) Choose Minutes*")
                         .font(.system(size: 20))
                         .padding([.top, .bottom], 6)
                         .gridCellColumns(bubble.isTimer ? 3 : 4)
