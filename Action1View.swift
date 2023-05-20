@@ -31,20 +31,8 @@ struct Action1View: View {
                     .overlay {
                         TabView {
                             Grid(horizontalSpacing: 2, verticalSpacing: 2) {
-                                Text("\(Image.timer) Durations")
-                                    .font(.system(size: 20))
-                                    .padding([.top, .bottom], 6)
-                                ForEach(0..<4) { number in
-                                    GridRow {
-                                        ForEach(0..<2) { item in
-                                            Rectangle()
-                                        }
-                                    }
-                                }
-                            }
-                            Grid(horizontalSpacing: 2, verticalSpacing: 2) {
                                 HStack {
-                                    Text("\(Image.timer) Change to Timer")
+                                    Text("*\(Image.timer) Change to Timer*")
                                         .font(.system(size: 20 ))
                                         .padding([.top, .bottom], 6)
                                 }
@@ -53,6 +41,18 @@ struct Action1View: View {
                                 ForEach(0..<3) { number in
                                     GridRow {
                                         ForEach(0..<3) { item in
+                                            Rectangle()
+                                        }
+                                    }
+                                }
+                            }
+                            Grid(horizontalSpacing: 2, verticalSpacing: 2) {
+                                Text("*\(Image.timer) Durations*")
+                                    .font(.system(size: 20))
+                                    .padding([.top, .bottom], 6)
+                                ForEach(0..<4) { number in
+                                    GridRow {
+                                        ForEach(0..<2) { item in
                                             Rectangle()
                                         }
                                     }
@@ -122,7 +122,7 @@ struct Action1View: View {
 
 extension Action1View {
     struct Metrics {
-        let size = CGSize(width: 310, height: 430)
+        let size = CGSize(width: 310, height: 400)
         let buttonHeight = CGFloat(80)
     }
 }
