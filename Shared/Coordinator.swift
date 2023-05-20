@@ -53,7 +53,14 @@ class BubbleCellCoordinator {
         guard let bubble = bubble else { return }
         
         isTimer = bubble.isTimer
+        print("timer progress \(timerProgress)")
         update(.automatic, refresh: true)
+        
+        if timerProgress != "OK" {
+            delayExecution(.now() + 0.01) {
+                self.timerProgress = "OK"
+            }
+        }
     }
     
     // MARK: - Public API
