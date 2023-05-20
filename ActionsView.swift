@@ -19,7 +19,7 @@ struct ActionsView: View {
     var body: some View {
         ZStack {
             VStack {
-                BubbleDeleteButton1(bubble)
+                Action1View(bubble: bubble)
             }
         }
         .onReceive(Secretary.shared.$deleteAction_bRank) { output in

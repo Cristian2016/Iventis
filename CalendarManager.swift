@@ -111,11 +111,13 @@ extension CalendarManager {
         let notes = createEventNotes(from: pairs)
         
         let title = eventTitle(for: session)
+        
+        guard let start = firstPair.start, let pause = firstPair.pause else { return }
         newEvent(with: title,
                  bubbleNote:session.bubble?.note,
                  eventNotes: notes,
-                 start: firstPair.start,
-                 end: lastPair.pause!,
+                 start: start,
+                 end: pause,
                  session
         )
         
@@ -259,11 +261,11 @@ class CalendarManager: NSObject {
             bucket += "\(index + 1) ▪︎ \(pairDuration) \(pairNote)\n"
             
             //date interval
-            bucket += dateInterval(start: pair.start, end: pair.pause!)
+            bucket += dateInterval(start: pair.start ?? Date(), end: pair.pause!)
             bucket += "\n"
             
             //time interval
-            bucket += timeInterval(start: pair.start, end: pair.pause!)
+            bucket += timeInterval(start: pair.start ?? Date(), end: pair.pause!)
             bucket += "\n\n"
         }
         

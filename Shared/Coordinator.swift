@@ -246,7 +246,7 @@ class BubbleCellCoordinator {
         let currentClock = bBubble.currentClock
         
         if bBubble.state == .running {
-            let Δ = Date().timeIntervalSince(bBubble.lastPair!.start)
+            let Δ = Date().timeIntervalSince(bBubble.lastPair!.start ?? Date())
             let initialValue = isTimer ?  currentClock - Float(Δ) : currentClock + Float(Δ)
             return initialValue
         }

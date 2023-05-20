@@ -34,9 +34,9 @@ public class Pair: NSManagedObject {
         let duration:Float
         switch durationComputed {
             case .atPause:
-                duration = Float(pause.timeIntervalSince(start))
+                duration = Float(pause.timeIntervalSince(start ?? Date()))
             case .atEndSession:
-                duration = Float(pause.timeIntervalSince(start) - Global.longPressLatency)
+                duration = Float(pause.timeIntervalSince(start ?? Date()) - Global.longPressLatency)
         }
         
         //convert duration.timeComponentsAsStrings to Data using JSONEncoder

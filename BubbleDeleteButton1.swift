@@ -11,10 +11,13 @@ import SwiftUI
 import MyPackage
 
 struct BubbleDeleteButton1: View {
+    // MARK: - Dependency
     private let bubble:Bubble
+    @EnvironmentObject private var viewModel:ViewModel
+    
+    // MARK: - 
     private let color:Color
     private let metrics = Metrics()
-    @EnvironmentObject private var viewModel:ViewModel
     
     init(_ bubble: Bubble) {
         self.bubble = bubble

@@ -156,10 +156,10 @@ struct PairCell: View {
     private var pairStartView: some View {
         HStack(alignment: .firstTextBaseline) {
             //time
-            Text(DateFormatter.time.string(from: pair.start))
+            Text(DateFormatter.time.string(from: pair.start ?? Date()))
                 .font(.monospaced(.system(size: 22))())
             //date
-            Text(DateFormatter.date.string(from: pair.start))
+            Text(DateFormatter.date.string(from: pair.start ?? Date()))
                 .foregroundColor(.secondary)
                 .font(.system(size: 22))
         }
@@ -169,7 +169,7 @@ struct PairCell: View {
     @ViewBuilder
     private var pairPauseView: some View {
         if let pause = pair.pause {
-            let startAndPauseOnSameDay = DateFormatter.shortDate.string(from: pair.start) == DateFormatter.shortDate.string(from: pause)
+            let startAndPauseOnSameDay = DateFormatter.shortDate.string(from: pair.start ?? Date()) == DateFormatter.shortDate.string(from: pause)
             
                 HStack(alignment: .firstTextBaseline) {
                     Text(DateFormatter.time.string(from: pause))

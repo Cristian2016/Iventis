@@ -22,7 +22,8 @@ struct DurationsView: View {
     var body: some View {
         ZStack {
                 VStack(spacing: 0) {
-                    digitsGrid.clipShape(vRoundedRect)
+                    digitsGrid
+                        .clipShape(vRoundedRect)
                 }
                 .padding([.bottom])
                 .padding(6)
@@ -39,7 +40,7 @@ struct DurationsView: View {
     private var vRectangle: some View {
         vRoundedRectangle(corners: [.bottomLeft, .bottomRight], radius: 40)
             .fill(.white)
-            .padding([.bottom], 4) //2
+            .padding([.bottom], 4)
     }
     
     private var digitsGrid:some View {
