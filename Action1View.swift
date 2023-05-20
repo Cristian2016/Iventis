@@ -167,15 +167,10 @@ extension Action1View {
                         .padding([.top], 6)
                         .disabled(bubble.isTimer ? false : true)
                     
-//                    HStack(alignment: .firstTextBaseline) {
-                        Text("*\(Image.timer) Timer Minutes*")
-                            .font(.system(size: 20, weight: .medium))
-                            .padding([.top, .bottom], 6)
-//                        Text("*Minutes*")
-//                            .font(.system(size: 18))
-//                            .foregroundColor(.gray)
-//                    }
-                    .gridCellColumns(3)
+                    Text("*\(Image.timer) Timer Minutes*")
+                        .font(.system(size: 20))
+                        .padding([.top, .bottom], 6)
+                        .gridCellColumns(3)
                 }
                 
                 ForEach(minutes, id: \.self) { row in
