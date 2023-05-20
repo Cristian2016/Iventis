@@ -168,9 +168,12 @@ extension Action1View {
                             .disabled(bubble.isTimer ? false : true)
                     }
                     
-                    Text("*\(Image.timer) Choose Minutes*")
-                        .font(.system(size: 20))
-                        .padding([.top, .bottom], 6)
+                    Color.clear
+                        .overlay {
+                            Text("*\(Image.timer) Choose Minutes*")
+                                .font(.system(size: 20))
+                                .foregroundColor(.black)
+                        }
                         .gridCellColumns(bubble.isTimer ? 3 : 4)
                 }
                 
