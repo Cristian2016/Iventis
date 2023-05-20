@@ -33,10 +33,10 @@ struct Action1View: View {
                             Grid(horizontalSpacing: 2, verticalSpacing: 2) {
                                 HStack(alignment: .firstTextBaseline) {
                                     Text("*\(Image.timer) Choose Timer*")
-                                        .font(.system(size: 20 ))
+                                        .font(.system(size: 20, weight: .medium))
                                         .padding([.top, .bottom], 6)
                                     Text("*Minutes*")
-                                        .font(.system(size: 18, weight: .medium))
+                                        .font(.system(size: 18))
                                         .foregroundColor(.gray)
                                 }
                                 .font(.system(size: 20))
