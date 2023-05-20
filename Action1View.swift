@@ -22,7 +22,7 @@ struct Action1View: View {
             VStack {
                 HStack(spacing: 6) {
                     deleteButton
-                    resetButton
+                    if bubble.state != .brandNew { resetButton }
                 }
                 .labelStyle(.titleOnly) //looks for labels inside HStack
                 
