@@ -40,8 +40,8 @@ struct Action1View: View {
                                 
                                 ForEach(0..<3) { number in
                                     GridRow {
-                                        ForEach(0..<3) { item in
-                                            Rectangle()
+                                        ForEach(0..<4) { item in
+                                            Color.red
                                         }
                                     }
                                 }
@@ -91,7 +91,7 @@ struct Action1View: View {
                 .padding()
                 .frame(maxWidth: .infinity)
         }
-        .buttonStyle(BStyle(position: .right(.background3)))
+        .buttonStyle(BStyle(position: .right(Color("deleteActionAlert1"))))
     }
     
     private var screenDarkBackground:some View {
@@ -122,7 +122,7 @@ struct Action1View: View {
 
 extension Action1View {
     struct Metrics {
-        let size = CGSize(width: 310, height: 400)
+        let size = CGSize(width: 310, height: 350)
         let buttonHeight = CGFloat(80)
     }
 }
