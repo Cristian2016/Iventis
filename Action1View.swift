@@ -101,9 +101,7 @@ struct Action1View: View {
         
         let bContext = PersistenceController.shared.bContext
         let objID = bubble.objectID
-        
-        print("on dismiss selected tab is \(selectedTab ?? "pula")")
-        
+                
         bContext.perform {
             let theBubble = PersistenceController.shared.grabObj(objID) as? Bubble
             theBubble?.selectedTab = selectedTab
