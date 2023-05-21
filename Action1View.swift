@@ -198,7 +198,7 @@ extension Action1View {
         var body: some View {
             Grid(horizontalSpacing: 2, verticalSpacing: 2) {
                 Text("*\(Image.timer) Recently Used*")
-                    .font(.system(size: 20))
+                    .font(.system(size: 22))
                     .padding([.top, .bottom], 10)
                 ForEach(0..<4) { number in
                     GridRow {
