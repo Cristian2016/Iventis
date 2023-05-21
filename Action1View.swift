@@ -230,7 +230,7 @@ extension Action1View {
         private let bubble:Bubble
         @EnvironmentObject private var viewModel:ViewModel
         @Binding private var selectedTab:String
-        @FetchRequest(entity: TimerDuration.entity(), sortDescriptors: [])
+        @FetchRequest(entity: TimerDuration.entity(), sortDescriptors: [NSSortDescriptor(key: "date", ascending: false)])
         private  var durations:FetchedResults<TimerDuration>
         
         private let columns = Array(repeating: GridItem(), count: 2)
@@ -259,6 +259,8 @@ extension Action1View {
                     }
                     .foregroundColor(.white)
                     .font(.system(size: 28, weight: .medium))
+                    .minimumScaleFactor(0.01)
+                    .lineLimit(1)
                 }
             }
             .padding([.leading], 1)
