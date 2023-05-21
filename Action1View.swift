@@ -252,9 +252,7 @@ extension Action1View {
                                         viewModel.change(bubble, to: .timer(duration.duration))
                                         dismiss()
                                     }
-                                    .onLongPressGesture {
-                                        print("delete duration")
-                                    }
+                                    .onLongPressGesture { viewModel.delete(duration) }
                                     .padding(EdgeInsets(top: 5, leading: 0, bottom: 5, trailing: 0))
                                     .frame(maxWidth: .infinity)
                                     .background(color)

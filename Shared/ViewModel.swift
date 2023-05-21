@@ -939,6 +939,17 @@ extension ViewModel {
             }
         }
     }
+    
+    func delete(_ timerDuration:TimerDuration) {
+        let bContext = PersistenceController.shared.bContext
+        let objID = timerDuration.objectID
+        
+        bContext.perform {
+            let obj = PersistenceController.shared.grabObj(objID) as! TimerDuration
+            bContext.delete(obj)
+            PersistenceController.shared.save(bContext)
+        }
+    }
         
     enum SDBMode {
         case start
