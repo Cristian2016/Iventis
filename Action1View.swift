@@ -35,11 +35,12 @@ struct Action1View: View {
                             HistoryGrid(bubble: bubble)
                         }
                         .clipShape(vRoundedRect)
-                        .padding([.leading, .trailing], 6)
+                        .padding([.leading, .trailing, .bottom], 4)
                         .padding([.bottom])
-                        .tabViewStyle(.page)
+                        .tabViewStyle(.page(indexDisplayMode: .never))
                     }
             }
+            .padding([.top])
             .compositingGroup()
             .standardShadow()
             .frame(width: metrics.size.width, height: metrics.size.height)
@@ -101,7 +102,7 @@ struct Action1View: View {
 
 extension Action1View {
     struct Metrics {
-        let size = CGSize(width: 290, height: 360)
+        let size = CGSize(width: 290, height: 370)
         let buttonHeight = CGFloat(80)
         let padding = CGFloat(6)
     }
@@ -157,7 +158,7 @@ extension Action1View {
                                     dismiss()
                                 }
                             }
-                            .padding([.top], 6)
+                            .padding([.top], 4)
                             .disabled(bubble.isTimer ? false : true)
                     }
                     
