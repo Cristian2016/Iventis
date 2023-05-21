@@ -259,6 +259,7 @@ extension Action1View {
                 }
                 Spacer()
             }
+            .padding([.leading], 1)
         }
         
         private func dismiss() {
