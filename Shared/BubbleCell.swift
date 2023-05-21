@@ -40,13 +40,13 @@ struct BubbleCell: View {
             toggleCalendarButton
         }
         .swipeActions(edge: .trailing, allowsFullSwipe: true) {
-            actionsButton
+            editButton
             moreOptionsButton
         }
     }
     
     // MARK: - Legos
-    private var actionsButton:some View {
+    private var editButton:some View {
         Button {
             secretary.deleteAction_bRank = bubble.rank
         } label: {

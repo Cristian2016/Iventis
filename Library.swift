@@ -213,7 +213,9 @@ public extension Float {
         let min = (components.min != "0") ? components.min + "m" : ""
         let hundredths = components.hundredths
         let sec = components.sec + "." + hundredths + "s"
-        var result = hr + " " + min + " " + sec
+        let secResult = sec == "0.00s" ?  "" : sec
+        
+        var result = hr + " " + min + " " + secResult
         result.trimWhiteSpaceAtTheBeginning()
         return result
     }

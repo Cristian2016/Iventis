@@ -230,6 +230,10 @@ extension Action1View {
         private let bubble:Bubble
         @EnvironmentObject private var viewModel:ViewModel
         @Binding private var selectedTab:String
+        @FetchRequest(entity: TimerDuration.entity(), sortDescriptors: [])
+        private  var durations:FetchedResults<TimerDuration>
+        
+        private let columns = Array(repeating: GridItem(), count: 2)
         
         var body: some View {
             Grid(horizontalSpacing: 2, verticalSpacing: 2) {
@@ -237,13 +241,26 @@ extension Action1View {
                     .font(.system(size: 22))
                     .padding([.top, .bottom], 10)
                     .foregroundColor(.black)
-                ForEach(0..<4) { number in
-                    GridRow {
-                        ForEach(0..<2) { item in
-                            Rectangle()
+                ForEach(durations) { duration in
+                    LazyVGrid(columns: columns) {
+                        Button(duration.duration.timeComponentsAbreviatedString) {
+                            viewModel.change(bubble, to: .timer(duration.duration))
+                            dismiss()
                         }
                     }
                 }
+            }
+        }
+        
+        private func dismiss() {
+            Secretary.shared.deleteAction_bRank = nil
+            
+            let bContext = PersistenceController.shared.bContext
+            let bubbleID = bubble.objectID
+            bContext.perform {
+               let theBubble = PersistenceController.shared.grabObj(bubbleID) as? Bubble
+                theBubble?.selectedTab = selectedTab
+                PersistenceController.shared.save(bContext)
             }
         }
         
