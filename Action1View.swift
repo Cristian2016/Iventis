@@ -200,6 +200,7 @@ extension Action1View {
                 Text("*\(Image.timer) Recently Used*")
                     .font(.system(size: 22))
                     .padding([.top, .bottom], 10)
+                    .foregroundColor(.black)
                 ForEach(0..<4) { number in
                     GridRow {
                         ForEach(0..<2) { item in
