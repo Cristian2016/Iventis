@@ -40,7 +40,6 @@ struct Action1View: View {
                         .tabViewStyle(.page(indexDisplayMode: .never))
                     }
             }
-            .padding([.top])
             .compositingGroup()
             .standardShadow()
             .frame(width: metrics.size.width, height: metrics.size.height)
