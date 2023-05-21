@@ -233,7 +233,7 @@ extension Action1View {
         @FetchRequest(entity: TimerDuration.entity(), sortDescriptors: [NSSortDescriptor(key: "date", ascending: false)])
         private  var durations:FetchedResults<TimerDuration>
         
-        private let columns = Array(repeating: GridItem(), count: 2)
+        private let columns = Array(repeating: GridItem(spacing: 2), count: 2)
         
         var body: some View {
             VStack {
