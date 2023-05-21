@@ -244,12 +244,15 @@ extension Action1View {
                         .padding([.top, .bottom], 10)
                         .foregroundColor(.black)
                     
-                    LazyVGrid(columns: [GridItem(), GridItem()]) {
+                    LazyVGrid(columns: [GridItem(), GridItem()], spacing: 4) {
                         ForEach(durations) { duration in
-                            Text(duration.duration.timeComponentsAbreviatedString)
-                                .padding(4)
-                                .background(color)
-                                .frame(maxWidth: .infinity)
+                            Button(duration.duration.timeComponentsAbreviatedString) {
+                                viewModel.change(bubble, to: .timer(duration.duration))
+                                dismiss()
+                            }
+                            .padding(4)
+                            .frame(maxWidth: .infinity)
+                            .background(color)
                         }
                     }
                     .foregroundColor(.white)
@@ -259,6 +262,7 @@ extension Action1View {
         }
         
         private func dismiss() {
+            UserFeedback.singleHaptic(.heavy)
             Secretary.shared.deleteAction_bRank = nil
             
             let bContext = PersistenceController.shared.bContext
