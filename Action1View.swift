@@ -185,7 +185,7 @@ extension Action1View {
                 }
             }
             .accentColor(.white)
-            .font(.system(size: 30, weight: .medium, design: .rounded))
+            .font(.system(size: 32, weight: .medium, design: .rounded))
         }
         
         private func dismiss() { Secretary.shared.deleteAction_bRank = nil }
