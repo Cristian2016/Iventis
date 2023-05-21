@@ -313,12 +313,7 @@ extension ViewModel {
             newBubble.rank = Int64(UserDefaults.generateRank())
             
             if newBubble.isTimer {
-                let historyRequest = TimerHistory.fetchRequest()
-                let history = try? bContext.fetch(historyRequest).first
-                let newTimerDuration = TimerDuration(context: bContext)
-                newTimerDuration.date = Date()
-                newTimerDuration.duration = newBubble.initialClock
-                history?.addToTimerDurations(newTimerDuration)
+                self.addTimerDuration(newBubble.initialClock, bContext)
             }
             
             if let note = note {
@@ -949,6 +944,15 @@ extension ViewModel {
             bContext.delete(obj)
             PersistenceController.shared.save(bContext)
         }
+    }
+    
+    func addTimerDuration(_ duration:Float, _ bContext:NSManagedObjectContext) {
+        let historyRequest = TimerHistory.fetchRequest()
+        let history = try? bContext.fetch(historyRequest).first
+        let newTimerDuration = TimerDuration(context: bContext)
+        newTimerDuration.date = Date()
+        newTimerDuration.duration = duration
+        history?.addToTimerDurations(newTimerDuration)
     }
         
     enum SDBMode {
