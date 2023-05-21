@@ -948,11 +948,19 @@ extension ViewModel {
     
     func addTimerDuration(_ duration:Float, _ bContext:NSManagedObjectContext) {
         let historyRequest = TimerHistory.fetchRequest()
-        let history = try? bContext.fetch(historyRequest).first
-        let newTimerDuration = TimerDuration(context: bContext)
-        newTimerDuration.date = Date()
-        newTimerDuration.duration = duration
-        history?.addToTimerDurations(newTimerDuration)
+        guard let history = try? bContext.fetch(historyRequest).first else { return }
+        
+        let duplicates = history.timerDurations_.filter{ timerDuration in
+            timerDuration.duration == duration
+        }
+        if !duplicates.isEmpty {
+            duplicates.first?.date = Date()
+        } else {
+            let newTimerDuration = TimerDuration(context: bContext)
+            newTimerDuration.date = Date()
+            newTimerDuration.duration = duration
+            history.addToTimerDurations(newTimerDuration)
+        }
     }
         
     enum SDBMode {
