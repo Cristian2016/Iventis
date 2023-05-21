@@ -244,15 +244,17 @@ extension Action1View {
                         .padding([.top, .bottom], 10)
                         .foregroundColor(.black)
                     
-                    LazyVGrid(columns: columns, spacing: 2) {
-                        ForEach(durations) { duration in
-                            Button(duration.duration.timeComponentsAbreviatedString) {
-                                viewModel.change(bubble, to: .timer(duration.duration))
-                                dismiss()
+                    ScrollView {
+                        LazyVGrid(columns: columns, spacing: 2) {
+                            ForEach(durations) { duration in
+                                Button(duration.duration.timeComponentsAbreviatedString) {
+                                    viewModel.change(bubble, to: .timer(duration.duration))
+                                    dismiss()
+                                }
+                                .padding(EdgeInsets(top: 6, leading: 0, bottom: 6, trailing: 0))
+                                .frame(maxWidth: .infinity)
+                                .background(color)
                             }
-                            .padding(4)
-                            .frame(maxWidth: .infinity)
-                            .background(color)
                         }
                     }
                     .foregroundColor(.white)
