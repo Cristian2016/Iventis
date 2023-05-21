@@ -248,7 +248,7 @@ extension Action1View {
                         LazyVGrid(columns: columns, spacing: 2) {
                             ForEach(durations) { duration in
                                 color
-                                    .frame(idealHeight: 52)
+                                    .frame(idealHeight: 50)
                                     .overlay {
                                         Text(duration.duration.timeComponentsAbreviatedString)
                                     }
