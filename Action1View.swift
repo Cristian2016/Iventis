@@ -11,6 +11,7 @@ import MyPackage
 struct Action1View: View {
     let bubble:Bubble
     @EnvironmentObject private var viewModel:ViewModel
+    @State private var selectedTab:String
     
     let metrics = Metrics()
     
@@ -30,9 +31,11 @@ struct Action1View: View {
                 vRoundedRectangle(corners: [.bottomLeft, .bottomRight], radius: 40)
                     .fill(.white)
                     .overlay {
-                        TabView {
-                            MinutesGrid(bubble: bubble)
-                            HistoryGrid(bubble: bubble)
+                        TabView(selection: $selectedTab) {
+                            MinutesGrid(bubble, $selectedTab)
+                                .tag("MinutesGrid")
+                            HistoryGrid(bubble, $selectedTab)
+                                .tag("HistoryGrid")
                         }
                         .clipShape(vRoundedRect)
                         .padding(EdgeInsets(top: 0, leading: 5, bottom: 4, trailing: 5))
@@ -93,10 +96,29 @@ struct Action1View: View {
         dismiss()
     }
     
-    private func dismiss() { Secretary.shared.deleteAction_bRank = nil }
+    private func dismiss() {
+        Secretary.shared.deleteAction_bRank = nil
+        
+        let bContext = PersistenceController.shared.bContext
+        let objID = bubble.objectID
+        
+        print("on dismiss selected tab is \(selectedTab ?? "pula")")
+        
+        bContext.perform {
+            let theBubble = PersistenceController.shared.grabObj(objID) as? Bubble
+            theBubble?.selectedTab = selectedTab
+            PersistenceController.shared.save(bContext)
+        }
+    }
     
     // MARK: -
     private func hapticFeedback() { UserFeedback.singleHaptic(.heavy) }
+    
+    // MARK: - Init
+    init(_ bubble: Bubble) {
+        self.bubble = bubble
+        self.selectedTab = bubble.selectedTab ?? "Pula"
+    }
 }
 
 extension Action1View {
@@ -139,7 +161,8 @@ extension Action1View {
 
 extension Action1View {
     struct MinutesGrid:View {
-        let bubble:Bubble
+        private let bubble:Bubble
+        @Binding var selectedTab:String
         @EnvironmentObject private var viewModel:ViewModel
         let minutes = [[1, 2, 3, 4], [5, 10, 15, 20], [25, 30, 45, 60]]
         
@@ -187,12 +210,28 @@ extension Action1View {
             .font(.system(size: 32, weight: .medium, design: .rounded))
         }
         
-        private func dismiss() { Secretary.shared.deleteAction_bRank = nil }
+        private func dismiss() {
+            Secretary.shared.deleteAction_bRank = nil
+            
+            let bContext = PersistenceController.shared.bContext
+            let bubbleID = bubble.objectID
+            bContext.perform {
+               let theBubble = PersistenceController.shared.grabObj(bubbleID) as? Bubble
+                theBubble?.selectedTab = selectedTab
+                PersistenceController.shared.save(bContext)
+            }
+        }
+        
+        init(_ bubble: Bubble, _ selectedTab:Binding<String>) {
+            self.bubble = bubble
+            _selectedTab = selectedTab
+        }
     }
     
     struct HistoryGrid:View {
-        let bubble:Bubble
+        private let bubble:Bubble
         @EnvironmentObject private var viewModel:ViewModel
+        @Binding private var selectedTab:String
         
         var body: some View {
             Grid(horizontalSpacing: 2, verticalSpacing: 2) {
@@ -208,6 +247,11 @@ extension Action1View {
                     }
                 }
             }
+        }
+        
+        init(_ bubble: Bubble, _ selectedTab:Binding<String>) {
+            self.bubble = bubble
+            _selectedTab = selectedTab
         }
     }
 }
@@ -225,6 +269,6 @@ struct Action1View_Previews: PreviewProvider {
     }()
     
     static var previews: some View {
-        Action1View(bubble: Self.bubble)
+        Action1View(Self.bubble)
     }
 }

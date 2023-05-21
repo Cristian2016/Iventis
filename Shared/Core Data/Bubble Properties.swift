@@ -20,6 +20,8 @@ extension Bubble {
     @NSManaged public var created: Date?
     @NSManaged public var color: String?
     
+    @NSManaged public var selectedTab: String?
+    
     @NSManaged public var initialClock: Float
     @NSManaged public var currentClock: Float
     

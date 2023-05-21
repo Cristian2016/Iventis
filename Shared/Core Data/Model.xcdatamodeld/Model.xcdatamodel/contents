@@ -11,6 +11,7 @@
         <attribute name="isPinned" optional="YES" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
         <attribute name="note" optional="YES" attributeType="String" defaultValueString=""/>
         <attribute name="rank" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="selectedTab" optional="YES" attributeType="String"/>
         <relationship name="history" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="BubbleSavedNote" inverseName="bubble" inverseEntity="BubbleSavedNote"/>
         <relationship name="sessions" optional="YES" toMany="YES" deletionRule="Cascade" ordered="YES" destinationEntity="Session" inverseName="bubble" inverseEntity="Session"/>
         <relationship name="startDelayBubble" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="StartDelayBubble" inverseName="bubble" inverseEntity="StartDelayBubble"/>

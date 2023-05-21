@@ -17,11 +17,7 @@ struct ActionsView: View {
     @State private var show = false
     
     var body: some View {
-        ZStack {
-            VStack {
-                Action1View(bubble: bubble)
-            }
-        }
+        ZStack { Action1View(bubble) }
         .onReceive(Secretary.shared.$deleteAction_bRank) { output in
             show = output == nil ? false : true
         }
