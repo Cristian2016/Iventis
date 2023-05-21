@@ -258,6 +258,7 @@ extension Action1View {
                         }
                     }
                     .foregroundColor(.white)
+                    .font(.system(size: 28))
                 }
             }
             .padding([.leading], 1)
