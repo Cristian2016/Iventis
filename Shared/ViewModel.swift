@@ -951,7 +951,7 @@ extension ViewModel {
         guard let history = try? bContext.fetch(historyRequest).first else { return }
         
         let duplicates = history.timerDurations_.filter{ timerDuration in
-            timerDuration.duration == duration
+            timerDuration.value == duration
         }
         
         if !duplicates.isEmpty {
@@ -959,7 +959,7 @@ extension ViewModel {
         } else {
             let newTimerDuration = TimerDuration(context: bContext)
             newTimerDuration.date = Date()
-            newTimerDuration.duration = duration
+            newTimerDuration.value = duration
             history.addToTimerDurations(newTimerDuration)
         }
     }

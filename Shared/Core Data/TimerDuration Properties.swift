@@ -16,10 +16,9 @@ extension TimerDuration {
         return NSFetchRequest<TimerDuration>(entityName: "TimerDuration")
     }
 
-    @NSManaged public var duration: Float
+    @NSManaged public var value: Float
     @NSManaged public var date: Date?
     @NSManaged public var history: TimerHistory?
-
 }
 
 extension TimerDuration : Identifiable {
