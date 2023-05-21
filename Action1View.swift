@@ -35,7 +35,7 @@ struct Action1View: View {
                             HistoryGrid(bubble: bubble)
                         }
                         .clipShape(vRoundedRect)
-                        .padding([.leading, .trailing, .bottom], 4)
+                        .padding(EdgeInsets(top: 0, leading: 5, bottom: 4, trailing: 5))
                         .padding([.bottom])
                         .tabViewStyle(.page(indexDisplayMode: .never))
                     }
@@ -158,7 +158,7 @@ extension Action1View {
                                     dismiss()
                                 }
                             }
-                            .padding([.top], 4)
+                            .padding([.top], 5)
                             .disabled(bubble.isTimer ? false : true)
                     }
                     
