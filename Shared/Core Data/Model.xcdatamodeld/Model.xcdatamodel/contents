@@ -25,6 +25,9 @@
             </uniquenessConstraint>
         </uniquenessConstraints>
     </entity>
+    <entity name="History" representedClassName=".TimerHistory" syncable="YES">
+        <relationship name="timerDurations" optional="YES" toMany="YES" deletionRule="Cascade" ordered="YES" destinationEntity="TimerDuration" inverseName="history" inverseEntity="TimerDuration"/>
+    </entity>
     <entity name="Pair" representedClassName=".Pair" syncable="YES">
         <attribute name="duration" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="durationAsStrings" optional="YES" attributeType="Binary"/>
@@ -45,9 +48,6 @@
                 <constraint value="note"/>
             </uniquenessConstraint>
         </uniquenessConstraints>
-    </entity>
-    <entity name="RecentDurations" representedClassName="RecentDurations" syncable="YES" codeGenerationType="class">
-        <attribute name="attribute" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
     </entity>
     <entity name="SDBPair" representedClassName=".SDBPair" syncable="YES">
         <attribute name="duration" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES"/>
@@ -73,5 +73,10 @@
         <attribute name="totalDuration" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES"/>
         <relationship name="bubble" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Bubble" inverseName="startDelayBubble" inverseEntity="Bubble"/>
         <relationship name="pairs" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="SDBPair" inverseName="sdBubble" inverseEntity="SDBPair"/>
+    </entity>
+    <entity name="TimerDuration" representedClassName=".TimerDuration" syncable="YES">
+        <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="duration" optional="YES" attributeType="Float" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="history" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="History" inverseName="timerDurations" inverseEntity="History"/>
     </entity>
 </model>

@@ -217,6 +217,14 @@
 		1FB8E8B229E3517F0005909E /* slateBlue.png in Resources */ = {isa = PBXBuildFile; fileRef = 1FB8E87129E3517F0005909E /* slateBlue.png */; };
 		1FB8E8B329E3517F0005909E /* slateBlue.png in Resources */ = {isa = PBXBuildFile; fileRef = 1FB8E87129E3517F0005909E /* slateBlue.png */; };
 		1FBC9A0029F2842E00B324DA /* InfoViewHierarchy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FBC99FF29F2842E00B324DA /* InfoViewHierarchy.swift */; };
+		1FBDFCC52A19615E00B81BCA /* TimerHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FBDFCC12A19615E00B81BCA /* TimerHistory.swift */; };
+		1FBDFCC62A19615E00B81BCA /* TimerHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FBDFCC12A19615E00B81BCA /* TimerHistory.swift */; };
+		1FBDFCC72A19615E00B81BCA /* TimerHistory Properties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FBDFCC22A19615E00B81BCA /* TimerHistory Properties.swift */; };
+		1FBDFCC82A19615E00B81BCA /* TimerHistory Properties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FBDFCC22A19615E00B81BCA /* TimerHistory Properties.swift */; };
+		1FBDFCC92A19615E00B81BCA /* TimerDuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FBDFCC32A19615E00B81BCA /* TimerDuration.swift */; };
+		1FBDFCCA2A19615E00B81BCA /* TimerDuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FBDFCC32A19615E00B81BCA /* TimerDuration.swift */; };
+		1FBDFCCB2A19615E00B81BCA /* TimerDuration Properties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FBDFCC42A19615E00B81BCA /* TimerDuration Properties.swift */; };
+		1FBDFCCC2A19615E00B81BCA /* TimerDuration Properties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FBDFCC42A19615E00B81BCA /* TimerDuration Properties.swift */; };
 		1FBE775629A248F5005968EC /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FBE775529A248F5005968EC /* GradientView.swift */; };
 		1FC08DC929A35B6500E25D79 /* PairBubbleCellCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FC08DC829A35B6500E25D79 /* PairBubbleCellCoordinator.swift */; };
 		1FC0D9C129828D23004779E0 /* ConfirmView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FC0D9C029828D23004779E0 /* ConfirmView.swift */; };
@@ -431,6 +439,10 @@
 		1FB8E87029E3517F0005909E /* purple.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = purple.png; sourceTree = "<group>"; };
 		1FB8E87129E3517F0005909E /* slateBlue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = slateBlue.png; sourceTree = "<group>"; };
 		1FBC99FF29F2842E00B324DA /* InfoViewHierarchy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewHierarchy.swift; sourceTree = SOURCE_ROOT; };
+		1FBDFCC12A19615E00B81BCA /* TimerHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerHistory.swift; sourceTree = "<group>"; };
+		1FBDFCC22A19615E00B81BCA /* TimerHistory Properties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TimerHistory Properties.swift"; sourceTree = "<group>"; };
+		1FBDFCC32A19615E00B81BCA /* TimerDuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerDuration.swift; sourceTree = "<group>"; };
+		1FBDFCC42A19615E00B81BCA /* TimerDuration Properties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TimerDuration Properties.swift"; sourceTree = "<group>"; };
 		1FBE775529A248F5005968EC /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = SOURCE_ROOT; };
 		1FC08DC829A35B6500E25D79 /* PairBubbleCellCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PairBubbleCellCoordinator.swift; sourceTree = SOURCE_ROOT; };
 		1FC0D9C029828D23004779E0 /* ConfirmView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfirmView.swift; sourceTree = "<group>"; };
@@ -720,6 +732,10 @@
 				1F5987A4286B5F8900CDB54C /* PairSavedNote Properties.swift */,
 				1F2080782836111600FD35D6 /* BSavedNote.swift */,
 				1F2080792836111600FD35D6 /* BSavedNote Properties.swift */,
+				1FBDFCC12A19615E00B81BCA /* TimerHistory.swift */,
+				1FBDFCC22A19615E00B81BCA /* TimerHistory Properties.swift */,
+				1FBDFCC32A19615E00B81BCA /* TimerDuration.swift */,
+				1FBDFCC42A19615E00B81BCA /* TimerDuration Properties.swift */,
 			);
 			path = "Core Data";
 			sourceTree = "<group>";
@@ -1020,6 +1036,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1F04769729BB4C2400641CDC /* SDBPair Properties.swift in Sources */,
+				1FBDFCCB2A19615E00B81BCA /* TimerDuration Properties.swift in Sources */,
 				1FE76DBA29C9F213003012F0 /* BlueInfoButton.swift in Sources */,
 				1FB5D8DA28E9BF0500DD522A /* GestureLabel.swift in Sources */,
 				1FDEEEC829FC450A0029E78D /* DeleteView.swift in Sources */,
@@ -1115,6 +1132,7 @@
 				1F9F97512A063DCB0084ADE6 /* UpnextLabel.swift in Sources */,
 				1FCF0C662816F3F600AA1FAA /* EmptyListView.swift in Sources */,
 				1FF0A2FD2810448100B1DB77 /* TopDetailView.swift in Sources */,
+				1FBDFCC52A19615E00B81BCA /* TimerHistory.swift in Sources */,
 				1FA834762850A57C003F4D61 /* Widgets.intentdefinition in Sources */,
 				1FC0D9C129828D23004779E0 /* ConfirmView.swift in Sources */,
 				1F1D17B329916D1A00DD7ECE /* MoreOptionsView.swift in Sources */,
@@ -1136,6 +1154,7 @@
 				1FAD1578298A8346001139C6 /* Secretary.swift in Sources */,
 				1F387CEB2830082000F6B81D /* UpDownArrowsButton.swift in Sources */,
 				1FC08DC929A35B6500E25D79 /* PairBubbleCellCoordinator.swift in Sources */,
+				1FBDFCC72A19615E00B81BCA /* TimerHistory Properties.swift in Sources */,
 				1FB3178F286ACB48006BBE82 /* Note_InfoView.swift in Sources */,
 				1FAD157C298AAFDB001139C6 /* BubbleDeleteButton.swift in Sources */,
 				1F99AB5F286CA40D00977C9A /* StickyNote.swift in Sources */,
@@ -1144,6 +1163,7 @@
 				1F5F4A752809409600AF3442 /* Bubble Properties.swift in Sources */,
 				1FA8ECF129F3F70800B301AE /* InfoCell.swift in Sources */,
 				1FB7D57C2862F0300085C2BE /* PlusButton.swift in Sources */,
+				1FBDFCC92A19615E00B81BCA /* TimerDuration.swift in Sources */,
 				1F20807F2836111600FD35D6 /* BSavedNote Properties.swift in Sources */,
 				1F38C5A32986615F00057B8C /* FusedLabel.swift in Sources */,
 				1F6FA29C2993E4E300D7EF90 /* ShowAllBubblesButton.swift in Sources */,
@@ -1158,11 +1178,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				1F0722DF29FB9D6A0016FE26 /* Session Properties.swift in Sources */,
+				1FBDFCCC2A19615E00B81BCA /* TimerDuration Properties.swift in Sources */,
 				1F0722DE29FB9D680016FE26 /* Session.swift in Sources */,
 				1F0722EB29FB9E1A0016FE26 /* SDBPair.swift in Sources */,
 				1F3CBC9F29E5448F00350AC6 /* AppDelegate.swift in Sources */,
 				1FA834752850A57C003F4D61 /* Widgets.intentdefinition in Sources */,
 				1F0722EA29FB9E0F0016FE26 /* StartDelayBubble Properties.swift in Sources */,
+				1FBDFCC82A19615E00B81BCA /* TimerHistory Properties.swift in Sources */,
 				1F0722ED29FB9E580016FE26 /* Colors.swift in Sources */,
 				1FA834702850A57A003F4D61 /* Widgets.swift in Sources */,
 				1F0722E029FB9D6D0016FE26 /* Pair.swift in Sources */,
@@ -1178,8 +1200,10 @@
 				1F0722E529FB9D7C0016FE26 /* BSavedNote Properties.swift in Sources */,
 				1F0722E929FB9DCA0016FE26 /* PrecisionTimer.swift in Sources */,
 				1F0722DD29FB9D650016FE26 /* Bubble Properties.swift in Sources */,
+				1FBDFCC62A19615E00B81BCA /* TimerHistory.swift in Sources */,
 				1F0722DA29FB9C850016FE26 /* DataFetcher.swift in Sources */,
 				1FAF39D9298575E9002D833C /* Library.swift in Sources */,
+				1FBDFCCA2A19615E00B81BCA /* TimerDuration.swift in Sources */,
 				1F0722E229FB9D720016FE26 /* PairSavedNote.swift in Sources */,
 				1F0722E129FB9D700016FE26 /* Pair Properties.swift in Sources */,
 				1F18EBBC29FA9E09003A642C /* WidgetView.swift in Sources */,

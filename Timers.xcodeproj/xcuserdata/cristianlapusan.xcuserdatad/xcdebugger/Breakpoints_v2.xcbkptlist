@@ -30,8 +30,8 @@
             filePath = "Shared/ViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "469"
-            endingLineNumber = "469"
+            startingLineNumber = "479"
+            endingLineNumber = "479"
             landmarkName = "startPause(_:startDelayCompensation:)"
             landmarkType = "7">
             <Locations>

@@ -312,6 +312,16 @@ extension ViewModel {
             newBubble.color = color
             newBubble.rank = Int64(UserDefaults.generateRank())
             
+            if newBubble.isTimer {
+                let historyRequest = TimerHistory.fetchRequest()
+                let history = try? bContext.fetch(historyRequest).first
+                let newTimerDuration = TimerDuration(context: bContext)
+                newTimerDuration.date = Date()
+                newTimerDuration.duration = newBubble.initialClock
+                history?.addToTimerDurations(newTimerDuration)
+                print(history?.timerDurations_.count, newTimerDuration)
+            }
+            
             if let note = note {
                 newBubble.note_ = note
                 newBubble.isNoteHidden = false
