@@ -239,7 +239,7 @@ extension Action1View {
             VStack {
                 Grid(horizontalSpacing: 2, verticalSpacing: 2) {
                     let color = Color.bubbleColor(forName: bubble.color)
-                    Text("*\(Image.timer) Recently Used*")
+                    Text("*\(Image.timer) Recent Durations*")
                         .font(.system(size: 22))
                         .padding([.top, .bottom], 10)
                         .foregroundColor(.black)
