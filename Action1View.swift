@@ -78,7 +78,7 @@ struct Action1View: View {
     
     private var screenDarkBackground:some View {
         Color.black
-            .opacity(0.5)
+            .opacity(0.6)
             .ignoresSafeArea()
     }
     
