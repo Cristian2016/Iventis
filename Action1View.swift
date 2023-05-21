@@ -244,7 +244,7 @@ extension Action1View {
                         .padding([.top, .bottom], 10)
                         .foregroundColor(.black)
                     
-                    LazyVGrid(columns: columns, spacing: 1) {
+                    LazyVGrid(columns: columns, spacing: 2) {
                         ForEach(durations) { duration in
                             Button(duration.duration.timeComponentsAbreviatedString) {
                                 viewModel.change(bubble, to: .timer(duration.duration))
