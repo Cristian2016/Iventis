@@ -50,8 +50,9 @@ struct BubbleCell: View {
         Button {
             secretary.deleteAction_bRank = bubble.rank
         } label: {
-            Label("", image: "actionsView")
+            Label("Edit", systemImage: "slider.vertical.3")
         }
+        .tint(.red)
     }
     
     private var calEventRemovedConfirmation:some View {
