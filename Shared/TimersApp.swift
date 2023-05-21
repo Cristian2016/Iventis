@@ -10,6 +10,7 @@
 //6 used by iPad to show either iPhoneViewHierarchy [compact size] or iPadViewHierarchy [regular size]
 //7 detect app launch to set bubble.timeComponents to bubble.currentClock
 //8 on very first app launch TimerHistory CoreData object must be created. History will store timer durations. Timer Durations are added to History each time user creates a new timer
+//9 timer history (History) CoreData object stores timer durations. User can choose with ease a timer duration that has already been created
 
 import SwiftUI
 import MyPackage
@@ -23,18 +24,21 @@ struct TimersApp: App {
     var body: some Scene {
         WindowGroup {
             ViewHierarchy()
-                .task {
-                    if !timerHistoryExists {
-                        let bContext = PersistenceController.shared.bContext
-                        bContext.perform {
-                            let _ = TimerHistory(context: bContext)
-                            PersistenceController.shared.save(bContext)
-                            self.timerHistoryExists = true
-                        }
-                    }
-                }
+                .task { createTimerHistory() }
         }
     }
+    
+    private func createTimerHistory() {
+        if !timerHistoryExists {
+            let bContext = PersistenceController.shared.bContext
+            
+            bContext.perform {
+                let _ = TimerHistory(context: bContext)
+                PersistenceController.shared.save(bContext)
+                self.timerHistoryExists = true
+            }
+        }
+    } //1
     
     init() {
         let center = NotificationCenter.default
