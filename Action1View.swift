@@ -251,7 +251,7 @@ extension Action1View {
                                     viewModel.change(bubble, to: .timer(duration.duration))
                                     dismiss()
                                 }
-                                .padding(EdgeInsets(top: 6, leading: 0, bottom: 6, trailing: 0))
+                                .padding(EdgeInsets(top: 5, leading: 0, bottom: 5, trailing: 0))
                                 .frame(maxWidth: .infinity)
                                 .background(color)
                             }
@@ -259,7 +259,6 @@ extension Action1View {
                     }
                     .foregroundColor(.white)
                 }
-                Spacer()
             }
             .padding([.leading], 1)
         }
