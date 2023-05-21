@@ -162,16 +162,11 @@ extension Action1View {
                             .disabled(bubble.isTimer ? false : true)
                     }
                     
-                    HStack(alignment: .firstTextBaseline) {
-                        Text("*\(Image.timer) Change to Timer*")
-                            .font(.system(size: 22))
-                            .padding([.top, .bottom], 10)
-                            .foregroundColor(.black)
-                        Text("*Minutes*")
-                            .font(.system(size: 16))
-                            .foregroundColor(.gray)
-                    }
-                    .gridCellColumns(bubble.isTimer ? 3 : 4)
+                    Text("*\(Image.timer) Choose Minutes*")
+                        .font(.system(size: 22))
+                        .padding([.top, .bottom], 10)
+                        .foregroundColor(.black)
+                        .gridCellColumns(bubble.isTimer ? 3 : 4)
                 }
                 
                 ForEach(minutes, id: \.self) { row in
