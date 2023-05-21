@@ -29,7 +29,6 @@ struct yPositionTracker: View {
                                     Self.initial = originY
                                 }
                                 let offset = originY - Self.initial
-                                print("yOffset ", offset)
                                 
                                 if stop && offset < 1 && offset > 0 {
                                         stop = false
@@ -49,7 +48,6 @@ struct yPositionTracker: View {
         }
         .listRowSeparator(.hidden)
         .onReceive(secretary.$isBubblesReportReady) {
-            print("report ready")
             if $0 { trackYPosition = secretary.bubblesReport.pinned == 0 ? false : true } //1
         }
     }

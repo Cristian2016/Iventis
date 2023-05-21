@@ -219,9 +219,7 @@ class Secretary {
                         let index = bubblesReport
                             .colors.firstIndex (where: { $0.id == bubble.rank })
                     else { fatalError() }
-                    
-                    print(index)
-                    
+                                        
                     bubblesReport.colors[index] = idColor(id: bubble.rank, color: Color.bubbleColor(forName: bubble.color))
                     
                     DispatchQueue.main.async { self.isBubblesReportReady = true }

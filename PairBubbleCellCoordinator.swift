@@ -146,7 +146,6 @@ class PairBubbleCellCoordinator {
     }
     
     deinit {
-//        print("PairBubbleCellCoordinator deinit")
         NotificationCenter.default.removeObserver(self)
     }
 }

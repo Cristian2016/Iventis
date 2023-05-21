@@ -171,9 +171,7 @@ class BubbleCellCoordinator {
         
         let refresh = self.refresh
         let currentClock = bubble.currentClock
-        
-//        print("currentClock \(currentClock)")
-                                
+                                        
         let elapsedSinceLastStart = Float(Date().timeIntervalSince(lastStart)) //2
         
         var value = isTimer ? currentClock - elapsedSinceLastStart : currentClock + elapsedSinceLastStart //ex: 2345.87648

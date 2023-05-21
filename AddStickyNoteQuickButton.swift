@@ -25,7 +25,6 @@ struct AddStickyNoteQuickButton: View {
     // MARK: -
     init(_ action: @escaping () -> ()) {
         self.action = action
-        print("AddStickyNoteQuickButton init")
     }
 }
 

@@ -38,11 +38,9 @@ public class Session: NSManagedObject {
         switch action {
             case .assign(let pair):
                 pair.trackerID = trackerIDCounter
-                print("pair trackerIDCounter \(pair.trackerID)")
             case .increment:
                 resetLastTrackerDuration()
                 trackerIDCounter += 1
-                print("trackerIDCounter \(trackerIDCounter)")
         }
     }
     

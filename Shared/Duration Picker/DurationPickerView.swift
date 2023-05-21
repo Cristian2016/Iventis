@@ -62,20 +62,7 @@ struct DurationPickerView: View {
         .onReceive(Secretary.shared.$durationPickerMode) { handle(mode: $0) }
         .onChange(of: tricolor) { handle(tricolor: $0) }
     }
-    
-    private var swipe: some Gesture {
-        DragGesture(minimumDistance: 5)
-            .onEnded {
-                let xTranslation = $0.translation.width
-                
-                if xTranslation > 0 {
-                    print("advance right")
-                } else {
-                    print("advance left")
-                }
-            }
-    }
-    
+
     // MARK: - Lego
     private var translucentBackground:some View {
         Rectangle()

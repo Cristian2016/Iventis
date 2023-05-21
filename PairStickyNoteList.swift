@@ -99,7 +99,6 @@ struct PairStickyNoteList: View {
     
     ///when user selects an existing note instead of typing in a new note
     private func selectExitingNote(_ note:String) {
-        print(#function)
         DispatchQueue.global().async {
             var trimmedNote = note
             trimmedNote.removeWhiteSpaceAtBothEnds()

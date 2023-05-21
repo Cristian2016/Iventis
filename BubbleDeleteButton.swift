@@ -203,7 +203,6 @@ extension BubbleDeleteButton {
         
         private func moreInfo() {
             Secretary.shared.showInfoVH = true
-            print(#function)
         }
     }
     

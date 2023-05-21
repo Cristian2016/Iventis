@@ -44,10 +44,7 @@ class PrecisionTimer {
         timer.resume()
     }
     
-    deinit {
-        perform(.kill)
-        print("PrecisionTimer deinit")
-    }
+    deinit { perform(.kill) }
 }
 
 extension PrecisionTimer {

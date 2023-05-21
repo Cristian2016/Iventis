@@ -30,7 +30,6 @@ struct TimersApp: App {
                             let _ = TimerHistory(context: bContext)
                             PersistenceController.shared.save(bContext)
                             self.timerHistoryExists = true
-                            print("create history")
                         }
                     }
                 }

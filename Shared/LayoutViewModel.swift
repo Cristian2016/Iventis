@@ -12,7 +12,6 @@ import MyPackage
 
 class LayoutViewModel: ObservableObject {
     var bubbleCellFrame:CGRect? {didSet{
-        print(bubbleCellFrame!)
 //        set_deleteActionViewOffset(for: bubbleCellFrame)
     }} //1
     
@@ -40,8 +39,6 @@ class LayoutViewModel: ObservableObject {
         
         //prefered position of deleteActionView is under the bubbleCell, but only if it has enough room
         let deleteActionViewFitsUnderneath = verticalSpace - (frame.origin.y + frame.height) > deleteActionViewHeight
-        
-        print("deleteActionViewFitsUnderneath \(deleteActionViewFitsUnderneath)")
     }
     
     private func observeOrientationChanges() {
@@ -63,6 +60,5 @@ struct SizePreferenceKey:PreferenceKey {
     static func reduce(value: inout CGSize, nextValue: () -> CGSize) {
         let nextValue = nextValue()
         value = nextValue
-        print("size is \(nextValue) ")
     }
 }

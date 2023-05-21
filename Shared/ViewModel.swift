@@ -319,7 +319,6 @@ extension ViewModel {
                 newTimerDuration.date = Date()
                 newTimerDuration.duration = newBubble.initialClock
                 history?.addToTimerDurations(newTimerDuration)
-                print(history?.timerDurations_.count, newTimerDuration)
             }
             
             if let note = note {
@@ -520,7 +519,6 @@ extension ViewModel {
                 }
                 
             case .finished:
-                print("it's finished")
                 return
         }
     }
@@ -860,7 +858,6 @@ extension ViewModel {
     
     func setStartDelay(_ delay:Float, for bubble:Bubble?) {
         guard let bubble = bubble, bubble.state != .running else {
-            print("show alert could not set start delay since the bubble was already running")
             return
         }
         
