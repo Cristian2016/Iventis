@@ -247,13 +247,17 @@ extension Action1View {
                     ScrollView {
                         LazyVGrid(columns: columns, spacing: 2) {
                             ForEach(durations) { duration in
-                                Button(duration.duration.timeComponentsAbreviatedString) {
-                                    viewModel.change(bubble, to: .timer(duration.duration))
-                                    dismiss()
-                                }
-                                .padding(EdgeInsets(top: 5, leading: 0, bottom: 5, trailing: 0))
-                                .frame(maxWidth: .infinity)
-                                .background(color)
+                                Text(duration.duration.timeComponentsAbreviatedString)
+                                    .onTapGesture {
+                                        viewModel.change(bubble, to: .timer(duration.duration))
+                                        dismiss()
+                                    }
+                                    .onLongPressGesture {
+                                        print("delete duration")
+                                    }
+                                    .padding(EdgeInsets(top: 5, leading: 0, bottom: 5, trailing: 0))
+                                    .frame(maxWidth: .infinity)
+                                    .background(color)
                             }
                         }
                     }
