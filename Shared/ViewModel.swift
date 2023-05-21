@@ -953,6 +953,7 @@ extension ViewModel {
         let duplicates = history.timerDurations_.filter{ timerDuration in
             timerDuration.duration == duration
         }
+        
         if !duplicates.isEmpty {
             duplicates.first?.date = Date()
         } else {
