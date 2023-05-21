@@ -16,7 +16,7 @@ struct Action1View: View {
     
     var body: some View {
         ZStack {
-            Color.black
+            Color.black.opacity(0.5)
                 .onTapGesture { dismiss() }
             
             VStack {
@@ -41,7 +41,7 @@ struct Action1View: View {
                     }
             }
             .compositingGroup()
-//            .standardShadow()
+            .standardShadow()
             .frame(width: metrics.size.width, height: metrics.size.height)
         }
     }
