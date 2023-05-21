@@ -236,19 +236,25 @@ extension Action1View {
         private let columns = Array(repeating: GridItem(), count: 2)
         
         var body: some View {
-            Grid(horizontalSpacing: 2, verticalSpacing: 2) {
-                Text("*\(Image.timer) Recently Used*")
-                    .font(.system(size: 22))
-                    .padding([.top, .bottom], 10)
-                    .foregroundColor(.black)
-                ForEach(durations) { duration in
-                    LazyVGrid(columns: columns) {
-                        Button(duration.duration.timeComponentsAbreviatedString) {
-                            viewModel.change(bubble, to: .timer(duration.duration))
-                            dismiss()
+            VStack {
+                Grid(horizontalSpacing: 2, verticalSpacing: 2) {
+                    let color = Color.bubbleColor(forName: bubble.color)
+                    Text("*\(Image.timer) Recently Used*")
+                        .font(.system(size: 22))
+                        .padding([.top, .bottom], 10)
+                        .foregroundColor(.black)
+                    
+                    LazyVGrid(columns: [GridItem(), GridItem()]) {
+                        ForEach(durations) { duration in
+                            Text(duration.duration.timeComponentsAbreviatedString)
+                                .padding(4)
+                                .background(color)
+                                .frame(maxWidth: .infinity)
                         }
                     }
+                    .foregroundColor(.white)
                 }
+                Spacer()
             }
         }
         
