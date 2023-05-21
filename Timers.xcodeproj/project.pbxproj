@@ -230,11 +230,9 @@
 		1FC0D9C129828D23004779E0 /* ConfirmView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FC0D9C029828D23004779E0 /* ConfirmView.swift */; };
 		1FC2335929CA488900FBE483 /* MoreOptionsInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FC2335829CA488900FBE483 /* MoreOptionsInfoView.swift */; };
 		1FC70BB129807BAB007CD1E6 /* LayoutViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FC70BB029807BAB007CD1E6 /* LayoutViewModel.swift */; };
-		1FCD84642A02AC350083F71B /* BubbleDeleteButton1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FCD84632A02AC350083F71B /* BubbleDeleteButton1.swift */; };
 		1FCF0C662816F3F600AA1FAA /* EmptyListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FCF0C652816F3F600AA1FAA /* EmptyListView.swift */; };
 		1FD2A3DD29C10C6C00EB7B10 /* DeleteConfirmationLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD2A3DC29C10C6C00EB7B10 /* DeleteConfirmationLabel.swift */; };
 		1FD2DD972869AB4900831978 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1F5F4A4D28093FAF00AF3442 /* Assets.xcassets */; };
-		1FDEEEC829FC450A0029E78D /* DeleteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FDEEEC729FC45090029E78D /* DeleteView.swift */; };
 		1FE163AE280EE6F40050C6F5 /* LeftStrip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FE163AD280EE6F40050C6F5 /* LeftStrip.swift */; };
 		1FE3B6F72983ECBF00B9C5D0 /* Explanations.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 1FE3B6F62983ECBF00B9C5D0 /* Explanations.rtf */; };
 		1FE68FAE29A135C600D05EE6 /* SecondsCircle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FE68FAD29A135C600D05EE6 /* SecondsCircle.swift */; };
@@ -448,10 +446,8 @@
 		1FC0D9C029828D23004779E0 /* ConfirmView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfirmView.swift; sourceTree = "<group>"; };
 		1FC2335829CA488900FBE483 /* MoreOptionsInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreOptionsInfoView.swift; sourceTree = SOURCE_ROOT; };
 		1FC70BB029807BAB007CD1E6 /* LayoutViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutViewModel.swift; sourceTree = "<group>"; };
-		1FCD84632A02AC350083F71B /* BubbleDeleteButton1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BubbleDeleteButton1.swift; sourceTree = "<group>"; };
 		1FCF0C652816F3F600AA1FAA /* EmptyListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyListView.swift; sourceTree = "<group>"; };
 		1FD2A3DC29C10C6C00EB7B10 /* DeleteConfirmationLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteConfirmationLabel.swift; sourceTree = "<group>"; };
-		1FDEEEC729FC45090029E78D /* DeleteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteView.swift; sourceTree = "<group>"; };
 		1FE163AD280EE6F40050C6F5 /* LeftStrip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftStrip.swift; sourceTree = "<group>"; };
 		1FE3B6F62983ECBF00B9C5D0 /* Explanations.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = Explanations.rtf; sourceTree = "<group>"; };
 		1FE68FAD29A135C600D05EE6 /* SecondsCircle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondsCircle.swift; sourceTree = "<group>"; };
@@ -573,9 +569,7 @@
 			isa = PBXGroup;
 			children = (
 				1F45CC1F2A04D4A200B9548C /* Cell.swift */,
-				1FCD84632A02AC350083F71B /* BubbleDeleteButton1.swift */,
 				1F34FB9929FEB14D001C8B9F /* WidgetSymbol.swift */,
-				1FDEEEC729FC45090029E78D /* DeleteView.swift */,
 				1FB8E85B29E3517F0005909E /* Colors */,
 				1F5FFD9E29C2426E005FFB32 /* AdaptiveView.swift */,
 				1FD2A3DC29C10C6C00EB7B10 /* DeleteConfirmationLabel.swift */,
@@ -1039,7 +1033,6 @@
 				1FBDFCCB2A19615E00B81BCA /* TimerDuration Properties.swift in Sources */,
 				1FE76DBA29C9F213003012F0 /* BlueInfoButton.swift in Sources */,
 				1FB5D8DA28E9BF0500DD522A /* GestureLabel.swift in Sources */,
-				1FDEEEC829FC450A0029E78D /* DeleteView.swift in Sources */,
 				1F76B51128DDE38800543660 /* AlertHintView.swift in Sources */,
 				1F22183029CF2B4D0006227E /* PermanentLabel.swift in Sources */,
 				1F36D56B29942C0B00D70727 /* CalendarEventCreatedConfirmation.swift in Sources */,
@@ -1079,7 +1072,6 @@
 				1F97B7DD2809B311002FFCA3 /* Colors.swift in Sources */,
 				1F100CA72809493400A3A3C2 /* BubbleTimer.swift in Sources */,
 				1FA8F87E28367B7A00394B59 /* BubbleNote.swift in Sources */,
-				1FCD84642A02AC350083F71B /* BubbleDeleteButton1.swift in Sources */,
 				1F38A00429B9000D009AD543 /* yPositionTracker.swift in Sources */,
 				1FC2335929CA488900FBE483 /* MoreOptionsInfoView.swift in Sources */,
 				1F5A0F6C282641D00075E86B /* NoSessionsAlertView.swift in Sources */,

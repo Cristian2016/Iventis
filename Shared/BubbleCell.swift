@@ -50,7 +50,7 @@ struct BubbleCell: View {
         Button {
             secretary.deleteAction_bRank = bubble.rank
         } label: {
-            Label("More", systemImage: "timer")
+            Label("", image: "actionsView")
         }
     }
     

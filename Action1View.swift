@@ -16,7 +16,7 @@ struct Action1View: View {
     
     var body: some View {
         ZStack {
-            screenDarkBackground
+            Color.black
                 .onTapGesture { dismiss() }
             
             VStack {
@@ -41,7 +41,7 @@ struct Action1View: View {
                     }
             }
             .compositingGroup()
-            .standardShadow()
+//            .standardShadow()
             .frame(width: metrics.size.width, height: metrics.size.height)
         }
     }
@@ -213,7 +213,18 @@ extension Action1View {
 }
 
 struct Action1View_Previews: PreviewProvider {
+    static let bubble:Bubble = {
+        let context = PersistenceController.preview.viewContext
+        let bubble = Bubble(context: context)
+        bubble.color = "orange"
+        bubble.initialClock = 0
+//        bubble.currentClock = 10
+        let session = Session(context: context)
+        bubble.addToSessions(session)
+        return bubble
+    }()
+    
     static var previews: some View {
-        Action1View(bubble: BubbleDeleteButton1_Previews.bubble)
+        Action1View(bubble: Self.bubble)
     }
 }
