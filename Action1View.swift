@@ -32,29 +32,22 @@ struct Action1View: View {
                     .overlay {
                         TabView {
                             MinutesGrid(bubble: bubble)
-                            Grid(horizontalSpacing: 2, verticalSpacing: 2) {
-                                Text("*\(Image.timer) Recently Used*")
-                                    .font(.system(size: 20))
-                                    .padding([.top, .bottom], metrics.padding)
-                                ForEach(0..<4) { number in
-                                    GridRow {
-                                        ForEach(0..<2) { item in
-                                            Rectangle()
-                                        }
-                                    }
-                                }
-                            }
+                            HistoryGrid(bubble: bubble)
                         }
-                        .clipShape(vRoundedRectangle(corners: [.bottomLeft, .bottomRight], radius: 30))
+                        .clipShape(vRoundedRect)
                         .padding([.leading, .trailing], 6)
                         .padding([.bottom])
-                        .tabViewStyle(.page(indexDisplayMode: .never))
+                        .tabViewStyle(.page)
                     }
             }
             .compositingGroup()
             .standardShadow()
             .frame(width: metrics.size.width, height: metrics.size.height)
         }
+    }
+    
+    private var vRoundedRect:some Shape {
+        vRoundedRectangle(corners: [.bottomLeft, .bottomRight], radius: 30)
     }
     
     private var deleteButton:some View {
@@ -197,6 +190,26 @@ extension Action1View {
         }
         
         private func dismiss() { Secretary.shared.deleteAction_bRank = nil }
+    }
+    
+    struct HistoryGrid:View {
+        let bubble:Bubble
+        @EnvironmentObject private var viewModel:ViewModel
+        
+        var body: some View {
+            Grid(horizontalSpacing: 2, verticalSpacing: 2) {
+                Text("*\(Image.timer) Recently Used*")
+                    .font(.system(size: 20))
+                    .padding([.top, .bottom], 6)
+                ForEach(0..<4) { number in
+                    GridRow {
+                        ForEach(0..<2) { item in
+                            Rectangle()
+                        }
+                    }
+                }
+            }
+        }
     }
 }
 
