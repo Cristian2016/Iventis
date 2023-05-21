@@ -162,11 +162,16 @@ extension Action1View {
                             .disabled(bubble.isTimer ? false : true)
                     }
                     
-                    Text("*\(Image.timer) Choose Minutes*")
-                        .font(.system(size: 20))
-                        .padding([.top, .bottom], 6)
-                        .foregroundColor(.black)
-                        .gridCellColumns(bubble.isTimer ? 3 : 4)
+                    HStack(alignment: .firstTextBaseline) {
+                        Text("*\(Image.timer) Change to Timer*")
+                            .font(.system(size: 22))
+                            .padding([.top, .bottom], 10)
+                            .foregroundColor(.black)
+                        Text("*Minutes*")
+                            .font(.system(size: 16))
+                            .foregroundColor(.gray)
+                    }
+                    .gridCellColumns(bubble.isTimer ? 3 : 4)
                 }
                 
                 ForEach(minutes, id: \.self) { row in
@@ -199,7 +204,7 @@ extension Action1View {
             Grid(horizontalSpacing: 2, verticalSpacing: 2) {
                 Text("*\(Image.timer) Recently Used*")
                     .font(.system(size: 20))
-                    .padding([.top, .bottom], 6)
+                    .padding([.top, .bottom], 10)
                 ForEach(0..<4) { number in
                     GridRow {
                         ForEach(0..<2) { item in
