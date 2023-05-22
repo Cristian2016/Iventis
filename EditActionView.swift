@@ -21,7 +21,7 @@ struct EditActionView: View {
             screenDarkBackground
                 .onTapGesture { dismiss() }
             
-            VStack(spacing: 6) {
+            VStack {
                 HStack(spacing: 0) {
                     deleteButton
                     if !bubble.sessions_.isEmpty { resetButton }
