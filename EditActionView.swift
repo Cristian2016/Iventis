@@ -11,6 +11,7 @@ import MyPackage
 struct EditActionView: View {
     let bubble:Bubble
     @EnvironmentObject private var viewModel:ViewModel
+    
     @State private var selectedTab:String
     
     let metrics = Metrics()

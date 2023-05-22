@@ -202,9 +202,10 @@ struct PairCell: View {
                 }
                 
                 //sec
-                if duration.sec != "0" && duration.hundredths != "00" {
+                let sec = duration.sec + "." + duration.hundredths
+                if sec != "0.00" {
                     HStack (alignment:.firstTextBaseline ,spacing: 0) {
-                        Text(duration.sec + "." + duration.hundredths).font(metrics.durationFont)
+                        Text(sec).font(metrics.durationFont)
                         Text("s").font(metrics.durationComponentsFont)
                     }
                 }
