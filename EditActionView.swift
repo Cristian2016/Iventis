@@ -239,7 +239,7 @@ extension EditActionView {
             VStack {
                 Grid(horizontalSpacing: 1, verticalSpacing: 1) {
                     let color = Color.bubbleColor(forName: bubble.color)
-                    Text("*\(Image.timer) Recent Durations*")
+                    Text("*\(Image.timer) Recent Timers*")
                         .font(.system(size: 22))
                         .padding([.top, .bottom], 10)
                         .foregroundColor(.black)
