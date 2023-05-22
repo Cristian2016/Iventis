@@ -21,16 +21,13 @@ struct EditActionView: View {
             screenDarkBackground
                 .onTapGesture { dismiss() }
             
-            VStack(spacing: 0) {
+            VStack(spacing: 6) {
                 HStack(spacing: 0) {
                     deleteButton
                     if !bubble.sessions_.isEmpty { resetButton }
                 }
                 .labelStyle(.titleOnly) //looks for labels inside HStack
                 .clipShape(vRoundedRectangle(corners: [.topLeft, .topRight], radius: 20))
-                
-                Rectangle().fill(.ultraThinMaterial)
-                    .frame(height: 6)
                 
                 vRoundedRectangle(corners: [.bottomLeft, .bottomRight], radius: 40)
                     .fill(.white)
