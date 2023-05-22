@@ -22,7 +22,7 @@ struct EditActionView: View {
                 .onTapGesture { dismiss() }
             
             VStack {
-                HStack(spacing: 7) {
+                HStack(spacing: 0) {
                     deleteButton
                     if !bubble.sessions_.isEmpty { resetButton }
                 }
