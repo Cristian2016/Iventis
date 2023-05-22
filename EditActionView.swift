@@ -21,7 +21,7 @@ struct EditActionView: View {
             screenDarkBackground
                 .onTapGesture { dismiss() }
             
-            VStack {
+            VStack(spacing: 0) {
                 HStack(spacing: 0) {
                     deleteButton
                     if !bubble.sessions_.isEmpty { resetButton }
@@ -48,11 +48,11 @@ struct EditActionView: View {
             .standardShadow()
             .frame(width: metrics.size.width, height: metrics.size.height)
             
-            EditActionTitle(bubble)
-                .padding()
-                .padding([.leading, .trailing])
-                .background(.black.opacity(0.6), in: RoundedRectangle(cornerRadius: 10))
-                .offset(y: -300)
+//            EditActionTitle(bubble)
+//                .padding()
+//                .frame(maxWidth: .infinity)
+//                .background(.white.opacity(0.8), in: RoundedRectangle(cornerRadius: 0))
+//                .offset(y: -300)
         }
     }
     
@@ -128,7 +128,7 @@ struct EditActionView: View {
 
 extension EditActionView {
     struct Metrics {
-        let size = CGSize(width: 290, height: 370)
+        let size = CGSize(width: 290, height: 360)
         let buttonHeight = CGFloat(80)
         let padding = CGFloat(6)
     }

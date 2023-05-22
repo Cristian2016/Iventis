@@ -26,7 +26,7 @@ struct EditActionTitle: View {
                 Text("Activity \(bubble.sessions_.count)")
             }
             .font(.system(size: 20))
-            .foregroundColor(.white)
+            .foregroundColor(.black)
         }
     }
     
