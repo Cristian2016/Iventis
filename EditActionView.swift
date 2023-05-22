@@ -33,8 +33,10 @@ struct EditActionView: View {
                     .fill(.white)
                     .overlay {
                         TabView(selection: $selectedTab) {
-                            MinutesGrid(bubble, $selectedTab).tag("MinutesGrid") //1
-                            HistoryGrid(bubble, $selectedTab).tag("HistoryGrid")
+                            MinutesGrid(bubble, $selectedTab)
+                                .tag("MinutesGrid") //1
+                            HistoryGrid(bubble, $selectedTab)
+                                .tag("HistoryGrid") //1
                         }
                         .clipShape(vRoundedRect)
                         .padding(EdgeInsets(top: 0, leading: 5, bottom: 4, trailing: 5))
