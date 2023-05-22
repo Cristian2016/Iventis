@@ -950,12 +950,10 @@ extension ViewModel {
         let historyRequest = TimerHistory.fetchRequest()
         guard let history = try? bContext.fetch(historyRequest).first else { return }
         
-        let duplicates = history.timerDurations_.filter{ timerDuration in
-            timerDuration.value == duration
-        }
+        let timerDurationDuplicates = history.timerDurations_.filter { $0.value == duration }
         
-        if !duplicates.isEmpty {
-            duplicates.first?.date = Date()
+        if !timerDurationDuplicates.isEmpty {
+            timerDurationDuplicates.first?.date = Date()
         } else {
             let newTimerDuration = TimerDuration(context: bContext)
             newTimerDuration.date = Date()
