@@ -47,12 +47,6 @@ struct EditActionView: View {
             .compositingGroup()
             .standardShadow()
             .frame(width: metrics.size.width, height: metrics.size.height)
-            
-//            EditActionTitle(bubble)
-//                .padding()
-//                .frame(maxWidth: .infinity)
-//                .background(.white.opacity(0.8), in: RoundedRectangle(cornerRadius: 0))
-//                .offset(y: -300)
         }
     }
     
@@ -187,7 +181,7 @@ extension EditActionView {
                             .disabled(bubble.isTimer ? false : true)
                     }
                     
-                    Text("*\(Image.timer) Choose Minutes*")
+                    Text("*\(Image.timer) Timer Minutes*")
                         .font(.system(size: 22))
                         .padding([.top, .bottom], 10)
                         .foregroundColor(.black)
