@@ -78,7 +78,7 @@ struct EditActionView: View {
     }
     
     private var screenDarkBackground:some View {
-        Color.black
+        Color.background
             .opacity(0.6)
             .ignoresSafeArea()
     }
