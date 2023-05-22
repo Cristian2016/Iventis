@@ -962,7 +962,7 @@ extension ViewModel {
         }
     }
     
-    private func updateTimerDurationsOrder(for value:Float, _ history:TimerHistory) {
+    func updateTimerDurationsOrder(for value:Float, _ history:TimerHistory) {
         let durations = history.timerDurations_
         
         //no reason to change order if it's the first one
