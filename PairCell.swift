@@ -11,15 +11,23 @@ import SwiftUI
 import MyPackage
 
 struct PairCell: View {
+    // MARK: - Dependencies
     @EnvironmentObject var viewModel:ViewModel
     @StateObject var pair:Pair //1
+    
+    // MARK: -
+    @State private var shouldShowPairBubbleCell = false
+    
+    // MARK: -
     let pairNumber:Int
     let duration:Float.TimeComponentsAsStrings?
-    @State private var shouldShowPairBubbleCell = false
+    
+    private let metrics = Metrics()
     
     private let textPadding = EdgeInsets(top: 4, leading: 6, bottom: 4, trailing: 8)
     private let collapsedNoteWidth = CGFloat(50)
     
+    // MARK: -
     var body:some View {
         ZStack(alignment: .leading) {
             Push(.topRight) {
@@ -60,15 +68,6 @@ struct PairCell: View {
     // MARK: - Little Things
     
     private var gestureArea: some Shape { Rectangle().offset(x: 30) }
-    
-    private let metrics = Metrics()
-    
-    struct Metrics {
-        //these two combined
-        let durationFont = Font.system(size: 24, weight: .medium) //15 59 3
-        let durationComponentsFont = Font.system(size: 22, weight: .medium) //h m s
-        let pairNumberFont = Font.system(size: 18).weight(.medium)
-    }
     
     @State private var noteDeleted:Bool = false
     @State private var offsetX:CGFloat = 0.0
@@ -237,5 +236,14 @@ struct PairCell: View {
             thisPair.isNoteHidden.toggle()
             PersistenceController.shared.save(bContext)
         }
+    }
+}
+
+extension PairCell {
+    struct Metrics {
+        //these two combined
+        let durationFont = Font.system(size: 24, weight: .medium) //15 59 3
+        let durationComponentsFont = Font.system(size: 22, weight: .medium) //h m s
+        let pairNumberFont = Font.system(size: 18).weight(.medium)
     }
 }
