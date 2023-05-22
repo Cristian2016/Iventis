@@ -202,9 +202,11 @@ struct PairCell: View {
                 }
                 
                 //sec
-                HStack (alignment:.firstTextBaseline ,spacing: 0) {
-                    Text(duration.sec + "." + duration.hundredths).font(metrics.durationFont)
-                    Text("s").font(metrics.durationComponentsFont)
+                if duration.sec != "0" && duration.hundredths != "00" {
+                    HStack (alignment:.firstTextBaseline ,spacing: 0) {
+                        Text(duration.sec + "." + duration.hundredths).font(metrics.durationFont)
+                        Text("s").font(metrics.durationComponentsFont)
+                    }
                 }
             }
         }
