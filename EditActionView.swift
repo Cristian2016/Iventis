@@ -3,7 +3,7 @@
 //  Timers (iOS)
 //
 //  Created by Cristian Lapusan on 20.05.2023.
-//
+//1 tag is used by TabView and selectedTab changes automatically as the user swipe from one tab to another
 
 import SwiftUI
 import MyPackage
@@ -33,10 +33,8 @@ struct EditActionView: View {
                     .fill(.white)
                     .overlay {
                         TabView(selection: $selectedTab) {
-                            MinutesGrid(bubble, $selectedTab)
-                                .tag("MinutesGrid")
-                            HistoryGrid(bubble, $selectedTab)
-                                .tag("HistoryGrid")
+                            MinutesGrid(bubble, $selectedTab).tag("MinutesGrid") //1
+                            HistoryGrid(bubble, $selectedTab).tag("HistoryGrid")
                         }
                         .clipShape(vRoundedRect)
                         .padding(EdgeInsets(top: 0, leading: 5, bottom: 4, trailing: 5))
