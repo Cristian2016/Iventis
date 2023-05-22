@@ -205,6 +205,7 @@ extension EditActionView {
             }
             .accentColor(.white)
             .font(.system(size: 32, weight: .medium, design: .rounded))
+            .padding([.leading, .trailing], 1)
         }
         
         private func dismiss() {
@@ -265,7 +266,7 @@ extension EditActionView {
                     .lineLimit(1)
                 }
             }
-            .padding([.leading], 1)
+            .padding([.leading, .trailing], 1)
         }
         
         private func dismiss() {
