@@ -167,7 +167,7 @@ extension Action1View {
         var body: some View {
             let color = Color.bubbleColor(forName: bubble.color)
             
-            Grid(horizontalSpacing: 2, verticalSpacing: 2) {
+            Grid(horizontalSpacing: 1, verticalSpacing: 1) {
                 GridRow {
                     if bubble.isTimer {
                         color
@@ -237,7 +237,7 @@ extension Action1View {
         
         var body: some View {
             VStack {
-                Grid(horizontalSpacing: 2, verticalSpacing: 2) {
+                Grid(horizontalSpacing: 1, verticalSpacing: 1) {
                     let color = Color.bubbleColor(forName: bubble.color)
                     Text("*\(Image.timer) Recent Durations*")
                         .font(.system(size: 22))
@@ -245,7 +245,7 @@ extension Action1View {
                         .foregroundColor(.black)
                     
                     ScrollView {
-                        LazyVGrid(columns: columns, spacing: 2) {
+                        LazyVGrid(columns: columns, spacing: 1) {
                             ForEach(durations) { timerDuration in
                                 color
                                     .frame(idealHeight: 51)
