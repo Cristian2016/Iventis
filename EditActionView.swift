@@ -248,7 +248,7 @@ extension EditActionView {
                         LazyVGrid(columns: columns, spacing: 1) {
                             ForEach(durations) { timerDuration in
                                 color
-                                    .frame(idealHeight: 51)
+                                    .frame(idealHeight: 52)
                                     .overlay {
                                         Text(timerDuration.value.timeComponentsAbreviatedString)
                                     }
