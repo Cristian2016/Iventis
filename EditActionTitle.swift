@@ -8,22 +8,33 @@
 import SwiftUI
 
 struct EditActionTitle: View {
+    private let bubble:Bubble
+    
     var body: some View {
         VStack {
+            let color = Color.bubbleColor(forName: bubble.color)
+            
             Text("\(Image.stopwatch) Orange")
                 .font(.title)
+                .foregroundColor(color)
             HStack {
-                Text("Workout")
-                Divider()
-                    .frame(height: 20)
-                Text("14 Entries")
+                if !bubble.note_.isEmpty {
+                    Text(bubble.note_)
+                    Divider()
+                        .frame(height: 20)
+                }
+                Text("Activity \(bubble.sessions_.count)")
             }
         }
+    }
+    
+    init(_ bubble: Bubble) {
+        self.bubble = bubble
     }
 }
 
 struct EditActionTitle_Previews: PreviewProvider {
     static var previews: some View {
-        EditActionTitle()
+        EditActionTitle(EditActionView_Previews.bubble)
     }
 }
