@@ -961,6 +961,19 @@ extension ViewModel {
             history.addToTimerDurations(newTimerDuration)
         }
     }
+    
+    private func updateTimerDurations(for value:Float, _ history:TimerHistory) {
+        let durations = history.timerDurations_
+        
+        //no reason to change order if it's the first one
+        if durations.first?.value == value { return }
+        
+        let timerDurationDuplicates = durations.filter { $0.value == value }
+        
+        if !timerDurationDuplicates.isEmpty {
+            timerDurationDuplicates.first?.date = Date()
+        }
+    }
         
     enum SDBMode {
         case start
