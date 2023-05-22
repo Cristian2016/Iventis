@@ -47,6 +47,12 @@ struct EditActionView: View {
             .compositingGroup()
             .standardShadow()
             .frame(width: metrics.size.width, height: metrics.size.height)
+            
+            EditActionTitle(bubble)
+                .padding()
+                .padding([.leading, .trailing])
+                .background(.black.opacity(0.6), in: RoundedRectangle(cornerRadius: 10))
+                .offset(y: -300)
         }
     }
     
