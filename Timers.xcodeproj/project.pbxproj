@@ -229,6 +229,7 @@
 		1FC08DC929A35B6500E25D79 /* PairBubbleCellCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FC08DC829A35B6500E25D79 /* PairBubbleCellCoordinator.swift */; };
 		1FC0D9C129828D23004779E0 /* ConfirmView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FC0D9C029828D23004779E0 /* ConfirmView.swift */; };
 		1FC2335929CA488900FBE483 /* MoreOptionsInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FC2335829CA488900FBE483 /* MoreOptionsInfoView.swift */; };
+		1FC364342A1BAD090099B3B6 /* EditActionTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FC364332A1BAD090099B3B6 /* EditActionTitle.swift */; };
 		1FC70BB129807BAB007CD1E6 /* LayoutViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FC70BB029807BAB007CD1E6 /* LayoutViewModel.swift */; };
 		1FCF0C662816F3F600AA1FAA /* EmptyListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FCF0C652816F3F600AA1FAA /* EmptyListView.swift */; };
 		1FD2A3DD29C10C6C00EB7B10 /* DeleteConfirmationLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD2A3DC29C10C6C00EB7B10 /* DeleteConfirmationLabel.swift */; };
@@ -445,6 +446,7 @@
 		1FC08DC829A35B6500E25D79 /* PairBubbleCellCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PairBubbleCellCoordinator.swift; sourceTree = SOURCE_ROOT; };
 		1FC0D9C029828D23004779E0 /* ConfirmView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfirmView.swift; sourceTree = "<group>"; };
 		1FC2335829CA488900FBE483 /* MoreOptionsInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreOptionsInfoView.swift; sourceTree = SOURCE_ROOT; };
+		1FC364332A1BAD090099B3B6 /* EditActionTitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditActionTitle.swift; sourceTree = SOURCE_ROOT; };
 		1FC70BB029807BAB007CD1E6 /* LayoutViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutViewModel.swift; sourceTree = "<group>"; };
 		1FCF0C652816F3F600AA1FAA /* EmptyListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyListView.swift; sourceTree = "<group>"; };
 		1FD2A3DC29C10C6C00EB7B10 /* DeleteConfirmationLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteConfirmationLabel.swift; sourceTree = "<group>"; };
@@ -627,6 +629,7 @@
 		1F5F4A4728093FAD00AF3442 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				1FC364332A1BAD090099B3B6 /* EditActionTitle.swift */,
 				1FA9456A2A18E8EE0023A999 /* EditActionView.swift */,
 				1FF0E4042A17C10200FDCA29 /* DurationsTabView.swift */,
 				1FA87BD42A08CFFF00116B00 /* DurationsView.swift */,
@@ -1113,6 +1116,7 @@
 				1FE68FB029A13BF700D05EE6 /* HundredthsLabel.swift in Sources */,
 				1F5987A2286B5DFC00CDB54C /* PairSavedNote.swift in Sources */,
 				1F0FD40629A4D93D0097FF7F /* DetailViewInfoButton.swift in Sources */,
+				1FC364342A1BAD090099B3B6 /* EditActionTitle.swift in Sources */,
 				1FB8E85229E2FC870005909E /* ScheduledNotificationsManager.swift in Sources */,
 				1F8CA6B029F8FF0D0010F3DB /* InfoOutlineView.swift in Sources */,
 				1F5F4A9D280945C700AF3442 /* BubbleCell.swift in Sources */,
