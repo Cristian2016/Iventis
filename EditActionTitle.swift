@@ -11,11 +11,11 @@ struct EditActionTitle: View {
     private let bubble:Bubble
     
     var body: some View {
-        VStack {
+        VStack(spacing: 10) {
             let color = Color.bubbleColor(forName: bubble.color)
             
-            Text("\(Image.stopwatch) Orange")
-                .font(.title)
+            Text("\(bubble.isTimer ? Image.timer : Image.stopwatch) \(Color.userFriendlyBubbleColorName(for: bubble.color))")
+                .font(.system(size: 30, weight: .medium))
                 .foregroundColor(color)
             HStack {
                 if !bubble.note_.isEmpty {
@@ -25,6 +25,7 @@ struct EditActionTitle: View {
                 }
                 Text("Activity \(bubble.sessions_.count)")
             }
+            .font(.system(size: 20))
         }
     }
     
