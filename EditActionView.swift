@@ -29,7 +29,7 @@ struct EditActionView: View {
                 .labelStyle(.titleOnly) //looks for labels inside HStack
                 .clipShape(vRoundedRectangle(corners: [.topLeft, .topRight], radius: 20))
                 
-                Rectangle().fill(.thinMaterial)
+                Rectangle().fill(.ultraThinMaterial)
                     .frame(height: 6)
                 
                 vRoundedRectangle(corners: [.bottomLeft, .bottomRight], radius: 40)
