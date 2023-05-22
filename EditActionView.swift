@@ -18,12 +18,7 @@ struct EditActionView: View {
     
     var body: some View {
         ZStack {
-            
-            ZStack(alignment: .top) {
-                screenDarkBackground
-                EditActionTitle(bubble)
-            }
-           
+            screenDarkBackground
                 .onTapGesture { dismiss() }
             
             VStack {
