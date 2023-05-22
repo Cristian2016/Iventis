@@ -141,10 +141,8 @@ extension EditActionView {
                 .font(.system(size: 30, weight: .medium, design: .rounded))
                 .background {
                     switch position {
-                        case .left(let color):
-                                color
-                        case .right(let color):
-                                color
+                        case .left(let color): color
+                        case .right(let color): color
                     }
                 }
                 .opacity(configuration.isPressed ? 0.5 : 1.0)
