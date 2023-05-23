@@ -182,7 +182,7 @@ extension EditActionView {
                     }
                     
                     Button {
-                        viewModel.change(bubble, to:.stopwatch)
+                        Secretary.shared.durationPickerMode = .edit(bubble)
                         UserFeedback.singleHaptic(.heavy)
                         dismiss()
                     } label: {
