@@ -99,10 +99,11 @@ struct DurationPickerView: View {
             case .edit(let bubble):
                 if bubble.isTimer {
                     //timer.duration is changed
-                    
                 } else {
                     //stopwatch changes to timer
-                    viewModel.change(bubble, to: .timer(20))
+                    print(manager.digits, " change stopwatch to timer")
+                    let initialClock = zip(manager.digits, manager.matrix).reduce(0) { $0 + $1.0 * $1.1 }
+                    viewModel.change(bubble, to: .timer(Float(initialClock)))
                 }
             case .none: break
         }
@@ -112,7 +113,6 @@ struct DurationPickerView: View {
     }
     
     private func handle(mode: Secretary.Mode?) {
-        print(#function, " DPView")
         guard let mode = mode else {
             if self.tricolor != nil { self.tricolor = nil }
             return
@@ -125,7 +125,11 @@ struct DurationPickerView: View {
             case .edit(let bubble):
                 self.bubble = bubble
                 self.tricolor = Color.tricolor(forName: bubble.color)
-                self.manager.digits = [0, 1, 3, 0, 2, 5]
+                
+                if bubble.isTimer { self.manager.digits = [] }
+                else {
+                    
+                }
         }
     } //5
     
