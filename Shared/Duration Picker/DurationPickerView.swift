@@ -22,10 +22,6 @@ struct DurationPickerView: View {
     @State private var tricolor:Color.Tricolor? //1
     @State private var bubble:Bubble?
     
-    @State private var hr:String?
-    @State private var min:String?
-    @State private var sec:String?
-    
     private let digits = [["7", "8", "9"], ["4", "5", "6"], ["1", "2", "3"], ["*", "0", "✕"]]
     
     let gridSpacing = CGFloat(1)
@@ -66,26 +62,6 @@ struct DurationPickerView: View {
             .standardShadow()
             .onTapGesture { dismiss() }
             .gesture(swipeToClearDisplay)
-    }
-    
-    private func componentView(_ value:String, _ keyPath:KeyPath<DurationPickerView, String>) -> some View {
-        
-        var abbreviation:String = "ok"
-        switch keyPath {
-            case \.hr: abbreviation = "h"
-            case \.min: abbreviation = "m"
-            case \.sec: abbreviation = "s"
-            default: abbreviation = ""
-        }
-        
-        return HStack(alignment: .firstTextBaseline, spacing: 2) {
-            Text(value)
-                .font(.system(size: 80, design: .rounded))
-                .minimumScaleFactor(0.1)
-            Text(abbreviation)
-                .font(.system(size: 20, design: .rounded))
-                .fontWeight(.medium)
-        }
     }
     
     private var digitsGrid:some View {
@@ -135,6 +111,7 @@ struct DurationPickerView: View {
             case .edit(let bubble):
                 self.bubble = bubble
                 self.tricolor = Color.tricolor(forName: bubble.color)
+                self.manager.digits = [0, 1, 3, 0, 2, 5]
         }
     } //5
     
