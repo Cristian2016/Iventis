@@ -83,7 +83,6 @@ struct EditActionView: View {
             .ignoresSafeArea()
     }
     
-    
     // MARK: - Methods
     private func resetBubble() {
         hapticFeedback()
@@ -177,7 +176,7 @@ extension EditActionView {
                                     dismiss()
                                 }
                             }
-                            .padding([.top], 5)
+                            .padding([.top], 6)
                             .disabled(bubble.isTimer ? false : true)
                     }
                     
@@ -294,7 +293,7 @@ struct EditActionView_Previews: PreviewProvider {
         let context = PersistenceController.preview.viewContext
         let bubble = Bubble(context: context)
         bubble.color = "orange"
-        bubble.initialClock = 0
+        bubble.initialClock = 10
 //        bubble.currentClock = 10
         let session = Session(context: context)
         bubble.addToSessions(session)
