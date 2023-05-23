@@ -47,9 +47,6 @@ struct EditActionView: View {
             .compositingGroup()
             .standardShadow()
             .frame(width: metrics.size.width, height: metrics.size.height)
-            .onChange(of: selectedTab) { newValue in
-                print("selected tab \(selectedTab)")
-            }
         }
     }
     
@@ -201,7 +198,7 @@ extension EditActionView {
                         .padding([.top, .bottom], 10)
                         .foregroundColor(.black)
                 }
-                .frame(height: 50)
+                .frame(height: 60)
                 
                 ForEach(minutes, id: \.self) { row in
                     GridRow {
