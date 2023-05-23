@@ -198,7 +198,7 @@ extension EditActionView {
                         .padding([.top, .bottom], 10)
                         .foregroundColor(.black)
                 }
-                .frame(height: 60)
+                .frame(height: 61)
                 
                 ForEach(minutes, id: \.self) { row in
                     GridRow {
