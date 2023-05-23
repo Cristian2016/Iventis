@@ -92,7 +92,21 @@ struct DurationPickerView: View {
     }
     
     private func dismiss() {
-        manager.shouldComputeInitialClock(color: tricolor!.description)
+        let mode = Secretary.shared.durationPickerMode
+        switch mode {
+            case .create(let tricolor):
+                manager.shouldComputeInitialClock(color: tricolor.description)
+            case .edit(let bubble):
+                if bubble.isTimer {
+                    //timer.duration is changed
+                    
+                } else {
+                    //stopwatch changes to timer
+                    viewModel.change(bubble, to: .timer(20))
+                }
+            case .none: break
+        }
+        
         self.tricolor = nil //dismiss Self
         manager.removeAllDigits()
     }

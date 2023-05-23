@@ -168,37 +168,15 @@ extension EditActionView {
             Grid(horizontalSpacing: 1, verticalSpacing: 1) {
                 HStack {
                     if bubble.isTimer {
-                        Button {
-                            viewModel.change(bubble, to:.stopwatch)
-                            UserFeedback.singleHaptic(.heavy)
-                            dismiss()
-                        } label: {
-                            Label("Stopwatch", systemImage: "stopwatch")
-                                .labelStyle(.iconOnly)
-                        }
-                        .accentColor(color)
-                        
-                        Divider().frame(height: 30)
+                        stopwatchButton
+                        divider
                     }
-                    
-                    Button {
-                        Secretary.shared.durationPickerMode = .edit(bubble)
-                        UserFeedback.singleHaptic(.heavy)
-                        dismiss()
-                    } label: {
-                        Label("Enter Timer Duration", systemImage: "timer")
-                            .labelStyle(.iconOnly)
-                    }
-                    .accentColor(color)
-                    
-                    Divider().frame(height: 30)
-                    
-                    Text("*Choose Minutes*")
-                        .font(.system(size: 22))
-                        .padding([.top, .bottom], 10)
-                        .foregroundColor(.black)
+                    timerButton
+                    divider
+                    text
                 }
                 .frame(height: 61)
+                .accentColor(color)
                 
                 ForEach(minutes, id: \.self) { row in
                     GridRow {
@@ -220,6 +198,33 @@ extension EditActionView {
             .padding([.leading, .trailing], 1)
         }
         
+        // MARK: - LEGO
+        private var stopwatchButton:some View {
+            Button {
+                viewModel.change(bubble, to:.stopwatch)
+                UserFeedback.singleHaptic(.heavy)
+                dismiss()
+            } label: { Label("Stopwatch", systemImage: "stopwatch").labelStyle(.iconOnly) }
+        }
+        
+        private var timerButton:some View {
+            Button {
+                Secretary.shared.durationPickerMode = .edit(bubble)
+                UserFeedback.singleHaptic(.heavy)
+                dismiss()
+            } label: { Label("Enter Timer Duration", systemImage: "timer").labelStyle(.iconOnly) }
+        }
+        
+        private var text:some View {
+            Text("*Choose Minutes*")
+                .font(.system(size: 22))
+                .padding([.top, .bottom], 10)
+                .foregroundColor(.black)
+        }
+        
+        private var divider:some View { Divider().frame(height: 30) }
+        
+        // MARK: -
         private func dismiss() {
             Secretary.shared.deleteAction_bRank = nil
             
