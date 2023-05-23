@@ -47,6 +47,9 @@ struct EditActionView: View {
             .compositingGroup()
             .standardShadow()
             .frame(width: metrics.size.width, height: metrics.size.height)
+            .onChange(of: selectedTab) { newValue in
+                print("selected tab \(selectedTab)")
+            }
         }
     }
     
@@ -166,26 +169,39 @@ extension EditActionView {
             let color = Color.bubbleColor(forName: bubble.color)
             
             Grid(horizontalSpacing: 1, verticalSpacing: 1) {
-                GridRow {
+                HStack {
                     if bubble.isTimer {
-                        color
-                            .overlay {
-                                Button("\(Image.stopwatch)") {
-                                    viewModel.change(bubble, to:.stopwatch)
-                                    UserFeedback.singleHaptic(.heavy)
-                                    dismiss()
-                                }
-                            }
-                            .padding([.top], 6)
-                            .disabled(bubble.isTimer ? false : true)
+                        Button {
+                            viewModel.change(bubble, to:.stopwatch)
+                            UserFeedback.singleHaptic(.heavy)
+                            dismiss()
+                        } label: {
+                            Label("Stopwatch", systemImage: "stopwatch")
+                                .labelStyle(.iconOnly)
+                        }
+                        .accentColor(color)
+                        
+                        Divider().frame(height: 30)
                     }
                     
-                    Text("*\(Image.timer) Timer Minutes*")
+                    Button {
+                        viewModel.change(bubble, to:.stopwatch)
+                        UserFeedback.singleHaptic(.heavy)
+                        dismiss()
+                    } label: {
+                        Label("Enter Timer Duration", systemImage: "timer")
+                            .labelStyle(.iconOnly)
+                    }
+                    .accentColor(color)
+                    
+                    Divider().frame(height: 30)
+                    
+                    Text("*Choose Minutes*")
                         .font(.system(size: 22))
                         .padding([.top, .bottom], 10)
                         .foregroundColor(.black)
-                        .gridCellColumns(bubble.isTimer ? 3 : 4)
                 }
+                .frame(height: 50)
                 
                 ForEach(minutes, id: \.self) { row in
                     GridRow {

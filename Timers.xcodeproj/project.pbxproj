@@ -216,6 +216,7 @@
 		1FB8E8B129E3517F0005909E /* slateBlue.png in Resources */ = {isa = PBXBuildFile; fileRef = 1FB8E87129E3517F0005909E /* slateBlue.png */; };
 		1FB8E8B229E3517F0005909E /* slateBlue.png in Resources */ = {isa = PBXBuildFile; fileRef = 1FB8E87129E3517F0005909E /* slateBlue.png */; };
 		1FB8E8B329E3517F0005909E /* slateBlue.png in Resources */ = {isa = PBXBuildFile; fileRef = 1FB8E87129E3517F0005909E /* slateBlue.png */; };
+		1FBB6FC22A1CA8E40080B182 /* EditOrChooseDurationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FBB6FC12A1CA8E40080B182 /* EditOrChooseDurationView.swift */; };
 		1FBC9A0029F2842E00B324DA /* InfoViewHierarchy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FBC99FF29F2842E00B324DA /* InfoViewHierarchy.swift */; };
 		1FBDFCC52A19615E00B81BCA /* TimerHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FBDFCC12A19615E00B81BCA /* TimerHistory.swift */; };
 		1FBDFCC62A19615E00B81BCA /* TimerHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FBDFCC12A19615E00B81BCA /* TimerHistory.swift */; };
@@ -437,6 +438,7 @@
 		1FB8E86F29E3517F0005909E /* red.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = red.png; sourceTree = "<group>"; };
 		1FB8E87029E3517F0005909E /* purple.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = purple.png; sourceTree = "<group>"; };
 		1FB8E87129E3517F0005909E /* slateBlue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = slateBlue.png; sourceTree = "<group>"; };
+		1FBB6FC12A1CA8E40080B182 /* EditOrChooseDurationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditOrChooseDurationView.swift; sourceTree = SOURCE_ROOT; };
 		1FBC99FF29F2842E00B324DA /* InfoViewHierarchy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewHierarchy.swift; sourceTree = SOURCE_ROOT; };
 		1FBDFCC12A19615E00B81BCA /* TimerHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerHistory.swift; sourceTree = "<group>"; };
 		1FBDFCC22A19615E00B81BCA /* TimerHistory Properties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TimerHistory Properties.swift"; sourceTree = "<group>"; };
@@ -629,6 +631,7 @@
 		1F5F4A4728093FAD00AF3442 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				1FBB6FC12A1CA8E40080B182 /* EditOrChooseDurationView.swift */,
 				1FC364332A1BAD090099B3B6 /* EditActionTitle.swift */,
 				1FA9456A2A18E8EE0023A999 /* EditActionView.swift */,
 				1FF0E4042A17C10200FDCA29 /* DurationsTabView.swift */,
@@ -1095,6 +1098,7 @@
 				1FEE84CB29F8408400DFF336 /* InfoOutlineUnit.swift in Sources */,
 				1F74878B286EB64E0092674F /* BubbleCell_Info.swift in Sources */,
 				1F5F4A992809456E00AF3442 /* BubbleList.swift in Sources */,
+				1FBB6FC22A1CA8E40080B182 /* EditOrChooseDurationView.swift in Sources */,
 				1F0B1C5729E052E2001F1E46 /* InfoOverlay.swift in Sources */,
 				1F5A0F6F282647A80075E86B /* DetailView.swift in Sources */,
 				1FFC8BB928142F040059EF2E /* Pair Properties.swift in Sources */,
