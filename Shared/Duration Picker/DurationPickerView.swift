@@ -15,8 +15,6 @@ import SwiftUI
 import MyPackage
 
 struct DurationPickerView: View {
-    private let digits = [["7", "8", "9"], ["4", "5", "6"], ["1", "2", "3"], ["*", "0", "✕"]]
-    
     @EnvironmentObject private var viewModel:ViewModel
     let manager = Manager.shared
     
@@ -28,19 +26,9 @@ struct DurationPickerView: View {
     @State private var min:String?
     @State private var sec:String?
     
+    private let digits = [["7", "8", "9"], ["4", "5", "6"], ["1", "2", "3"], ["*", "0", "✕"]]
+    
     let gridSpacing = CGFloat(1)
-    
-    private var swipeToClearDisplay:some Gesture {
-        DragGesture(minimumDistance: 4)
-            .onEnded { _ in clearDisplay() }
-    }
-    
-    private func clearDisplay() {
-        if !manager.digits.isEmpty {
-            UserFeedback.singleHaptic(.heavy)
-            manager.removeAllDigits()
-        }
-    }
     
     var body: some View {
         ZStack {
@@ -113,7 +101,20 @@ struct DurationPickerView: View {
         .background()
     }
     
+    // MARK: - Gesture
+    private var swipeToClearDisplay:some Gesture {
+        DragGesture(minimumDistance: 4)
+            .onEnded { _ in clearDisplay() }
+    }
+    
     // MARK: -
+    private func clearDisplay() {
+        if !manager.digits.isEmpty {
+            UserFeedback.singleHaptic(.heavy)
+            manager.removeAllDigits()
+        }
+    }
+    
     private func dismiss() {
         manager.shouldComputeInitialClock(color: tricolor!.description)
         self.tricolor = nil //dismiss Self
@@ -121,6 +122,7 @@ struct DurationPickerView: View {
     }
     
     private func handle(mode: Secretary.Mode?) {
+        print(#function, " DPView")
         guard let mode = mode else {
             if self.tricolor != nil { self.tricolor = nil }
             return
@@ -129,8 +131,10 @@ struct DurationPickerView: View {
         switch mode {
             case .create(let tricolor):
                 self.tricolor = tricolor
+                
             case .edit(let bubble):
                 self.bubble = bubble
+                self.tricolor = Color.tricolor(forName: bubble.color)
         }
     } //5
     
@@ -196,11 +200,11 @@ extension DurationPickerView {
 
 extension UIViewController {
     open override func motionBegan(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
-            if motion == .motionShake {
-                if !Secretary.shared.showBlueInfoButton {
-                    UserFeedback.singleHaptic(.heavy)
-                    Secretary.shared.showBlueInfoButton = true
-                }
+        if motion == .motionShake {
+            if !Secretary.shared.showBlueInfoButton {
+                UserFeedback.singleHaptic(.heavy)
+                Secretary.shared.showBlueInfoButton = true
             }
         }
     }
+}
