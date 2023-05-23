@@ -96,6 +96,7 @@ struct DurationPickerView: View {
         switch mode {
             case .create(let tricolor):
                 manager.shouldComputeInitialClock(color: tricolor.description)
+                
             case .edit(let bubble):
                 let initialClock = zip(manager.digits, manager.matrix).reduce(0) { $0 + $1.0 * $1.1 }
                 
