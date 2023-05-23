@@ -99,6 +99,7 @@ struct DurationPickerView: View {
             case .edit(let bubble):
                 if bubble.isTimer {
                     //timer.duration is changed
+                    viewModel.change(bubble, to: <#T##Bubble.Kind#>)
                 } else {
                     //stopwatch changes to timer
                     print(manager.digits, " change stopwatch to timer")
