@@ -121,7 +121,7 @@ struct EditActionView: View {
 
 extension EditActionView {
     struct Metrics {
-        let size = CGSize(width: 290, height: 360)
+        let size = CGSize(width: 290, height: 374)
         let buttonHeight = CGFloat(80)
         let padding = CGFloat(6)
     }
@@ -160,23 +160,41 @@ extension EditActionView {
         private let bubble:Bubble
         @Binding var selectedTab:String
         @EnvironmentObject private var viewModel:ViewModel
+        
+        private let color:Color
         let minutes = [[1, 2, 3, 4], [5, 10, 15, 20], [25, 30, 45, 60]]
         
         var body: some View {
-            let color = Color.bubbleColor(forName: bubble.color)
+            let timerTitle = bubble.isTimer ? "Edit Timer" : "Change to Timer"
             
             Grid(horizontalSpacing: 1, verticalSpacing: 1) {
-                HStack {
+                GridRow {
                     if bubble.isTimer {
-                        stopwatchButton
-                        divider
+                        Rectangle()
+                            .overlay {
+                                VStack {
+                                    Label("", systemImage: "stopwatch")
+                                    Text("Stopwatch")
+                                        .font(.system(size: 14, weight: .medium))
+                                }
+                                .foregroundColor(color)
+                            }
+                            .gridCellColumns(2)
                     }
-                    timerButton
-                    divider
-                    text
+                    Rectangle()
+                        .fill(color)
+                        .overlay {
+                            VStack {
+                                Label("Timer", systemImage: "timer")
+                                    .labelStyle(.iconOnly)
+                                Text(timerTitle)
+                                    .font(.system(size: 14, weight: .medium))
+                            }
+                        }
+                        .gridCellColumns(bubble.isTimer ? 2 : 4)
                 }
-                .frame(height: 61)
-                .accentColor(color)
+                .padding([.top], 6)
+                .foregroundColor(.white)
                 
                 ForEach(minutes, id: \.self) { row in
                     GridRow {
@@ -212,11 +230,16 @@ extension EditActionView {
                 Secretary.shared.durationPickerMode = .edit(bubble)
                 UserFeedback.singleHaptic(.heavy)
                 dismiss()
-            } label: { Label("Enter Timer Duration", systemImage: "timer").labelStyle(.iconOnly) }
+            } label: {
+                Label("*Edit*", systemImage: "timer")
+//                    .labelStyle(.titleOnly)
+            }
+            .font(.system(size: 22, weight: .medium))
+            .accentColor(color)
         }
         
         private var text:some View {
-            Text("*Choose Minutes*")
+            Text("*/ Choose Minutes*")
                 .font(.system(size: 22))
                 .padding([.top, .bottom], 10)
                 .foregroundColor(.black)
@@ -240,6 +263,7 @@ extension EditActionView {
         init(_ bubble: Bubble, _ selectedTab:Binding<String>) {
             self.bubble = bubble
             _selectedTab = selectedTab
+            self.color = Color.bubbleColor(forName: bubble.color)
         }
     }
     
