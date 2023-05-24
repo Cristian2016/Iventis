@@ -171,14 +171,7 @@ extension EditActionView {
                 GridRow {
                     if bubble.isTimer {
                         Rectangle()
-                            .overlay {
-                                VStack {
-                                    Label("", systemImage: "stopwatch")
-                                    Text("Stopwatch")
-                                        .font(.system(size: 18, weight: .medium))
-                                }
-                                .foregroundColor(color)
-                            }
+                            .overlay { stopwatchButton }
                             .gridCellColumns(2)
                     }
                     Rectangle()
@@ -226,11 +219,17 @@ extension EditActionView {
         
         // MARK: - LEGO
         private var stopwatchButton:some View {
-            Button {
-                viewModel.change(bubble, to:.stopwatch)
-                UserFeedback.singleHaptic(.heavy)
-                dismiss()
-            } label: { Label("Stopwatch", systemImage: "stopwatch").labelStyle(.iconOnly) }
+            VStack {
+                Button {
+                    viewModel.change(bubble, to:.stopwatch)
+                    UserFeedback.singleHaptic(.heavy)
+                    dismiss()
+                } label: { Label("Stopwatch", systemImage: "stopwatch").labelStyle(.iconOnly) }
+                
+                Text("Stopwatch")
+                    .font(.system(size: 18, weight: .medium))
+            }
+            .foregroundColor(color)
         }
         
         private var timerButton:some View {
