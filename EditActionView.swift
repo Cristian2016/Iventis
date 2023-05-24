@@ -177,11 +177,9 @@ extension EditActionView {
                     Rectangle()
                         .fill(color)
                         .overlay {
-//                            VStack {
-                                timerButton
-//                                Text(timerTitle)
-//                                    .font(.system(size: 18, weight: .medium))
-//                            }
+                            timerButton
+                            //                                Text(timerTitle)
+                            //                                    .font(.system(size: 18, weight: .medium))
                         }
                         .gridCellColumns(bubble.isTimer ? 2 : 4)
                         .onTapGesture {
