@@ -178,8 +178,7 @@ extension EditActionView {
                         .fill(color)
                         .overlay {
                             VStack {
-                                Label("Timer", systemImage: "timer")
-                                    .labelStyle(.iconOnly)
+                                timerButton
 //                                Text(timerTitle)
 //                                    .font(.system(size: 18, weight: .medium))
                             }
@@ -224,9 +223,13 @@ extension EditActionView {
                     viewModel.change(bubble, to:.stopwatch)
                     UserFeedback.singleHaptic(.heavy)
                     dismiss()
-                } label: { Label("Stopwatch", systemImage: "stopwatch").labelStyle(.iconOnly) }
+                } label: {
+                    Label("Stopwatch", systemImage: "stopwatch")
+                        .labelStyle(.iconOnly)
+                }
                 
-                Text("Stopwatch").font(.system(size: 18, weight: .medium))
+                Text("Stopwatch")
+                    .font(.system(size: 18, weight: .medium))
             }
             .foregroundColor(color)
         }
@@ -238,9 +241,9 @@ extension EditActionView {
                 dismiss()
             } label: {
                 Label("*Edit*", systemImage: "timer")
-                    .labelStyle(.titleOnly)
+                    .labelStyle(.iconOnly)
             }
-            .font(.system(size: 22, weight: .medium))
+            .font(.system(size: 32, weight: .medium))
             .accentColor(color)
         }
         
