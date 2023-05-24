@@ -180,8 +180,8 @@ extension EditActionView {
                             VStack {
                                 Label("Timer", systemImage: "timer")
                                     .labelStyle(.iconOnly)
-                                Text(timerTitle)
-                                    .font(.system(size: 18, weight: .medium))
+//                                Text(timerTitle)
+//                                    .font(.system(size: 18, weight: .medium))
                             }
                         }
                         .gridCellColumns(bubble.isTimer ? 2 : 4)
@@ -202,10 +202,10 @@ extension EditActionView {
                                 }
                                 .overlay {
                                     if digit == 1 {
-                                        Text("Minute")
-                                            .font(.system(size: 14, weight: .medium))
-                                            .foregroundColor(.white)
-                                            .offset(y: 23)
+//                                        Text("Minute")
+//                                            .font(.system(size: 14, weight: .medium))
+//                                            .foregroundColor(.white)
+//                                            .offset(y: 23)
                                     }
                                 }
                         }
@@ -239,7 +239,7 @@ extension EditActionView {
                 dismiss()
             } label: {
                 Label("*Edit*", systemImage: "timer")
-//                    .labelStyle(.titleOnly)
+                    .labelStyle(.titleOnly)
             }
             .font(.system(size: 22, weight: .medium))
             .accentColor(color)
