@@ -102,10 +102,10 @@ struct DurationPickerView: View {
                 
                 if bubble.isTimer {
                     //change timer duration
-                    viewModel.change(bubble, to: .timer(Float(initialClock)))
+//                    viewModel.change(bubble, to: .timer(Float(initialClock)))
                 } else {
                     //change stopwatch into a timer
-                    viewModel.change(bubble, to: .timer(Float(initialClock)))
+//                    viewModel.change(bubble, to: .timer(Float(initialClock)))
                 }
             case .none: break
         }

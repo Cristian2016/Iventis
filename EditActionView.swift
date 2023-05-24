@@ -177,13 +177,18 @@ extension EditActionView {
                     Rectangle()
                         .fill(color)
                         .overlay {
-                            VStack {
+//                            VStack {
                                 timerButton
 //                                Text(timerTitle)
 //                                    .font(.system(size: 18, weight: .medium))
-                            }
+//                            }
                         }
                         .gridCellColumns(bubble.isTimer ? 2 : 4)
+                        .onTapGesture {
+                            Secretary.shared.durationPickerMode = .edit(bubble)
+                            UserFeedback.singleHaptic(.heavy)
+                            dismiss()
+                        }
                 }
                 .padding([.top], 6)
                 .foregroundColor(.white)
@@ -235,16 +240,10 @@ extension EditActionView {
         }
         
         private var timerButton:some View {
-            Button {
-                Secretary.shared.durationPickerMode = .edit(bubble)
-                UserFeedback.singleHaptic(.heavy)
-                dismiss()
-            } label: {
-                Label("*Edit*", systemImage: "timer")
-                    .labelStyle(.iconOnly)
-            }
-            .font(.system(size: 32, weight: .medium))
-            .accentColor(color)
+            Label("*Edit*", systemImage: "timer")
+                .labelStyle(.iconOnly)
+                .font(.system(size: 32, weight: .medium))
+                .accentColor(color)
         }
         
         private var text:some View {
