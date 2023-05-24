@@ -175,7 +175,7 @@ extension EditActionView {
                                 VStack {
                                     Label("", systemImage: "stopwatch")
                                     Text("Stopwatch")
-                                        .font(.system(size: 14, weight: .medium))
+                                        .font(.system(size: 18, weight: .medium))
                                 }
                                 .foregroundColor(color)
                             }
@@ -188,7 +188,7 @@ extension EditActionView {
                                 Label("Timer", systemImage: "timer")
                                     .labelStyle(.iconOnly)
                                 Text(timerTitle)
-                                    .font(.system(size: 14, weight: .medium))
+                                    .font(.system(size: 18, weight: .medium))
                             }
                         }
                         .gridCellColumns(bubble.isTimer ? 2 : 4)
@@ -205,6 +205,14 @@ extension EditActionView {
                                         viewModel.change(bubble, to: .timer(Float(digit) * 60))
                                         UserFeedback.singleHaptic(.heavy)
                                         dismiss()
+                                    }
+                                }
+                                .overlay {
+                                    if digit == 1 {
+                                        Text("Minute")
+                                            .font(.system(size: 14, weight: .medium))
+                                            .foregroundColor(.white)
+                                            .offset(y: 23)
                                     }
                                 }
                         }
