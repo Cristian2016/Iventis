@@ -226,8 +226,7 @@ extension EditActionView {
                     dismiss()
                 } label: { Label("Stopwatch", systemImage: "stopwatch").labelStyle(.iconOnly) }
                 
-                Text("Stopwatch")
-                    .font(.system(size: 18, weight: .medium))
+                Text("Stopwatch").font(.system(size: 18, weight: .medium))
             }
             .foregroundColor(color)
         }
