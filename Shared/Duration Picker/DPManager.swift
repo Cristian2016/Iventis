@@ -94,9 +94,9 @@ extension DurationPickerView {
             DispatchQueue.global().async {
                 //make sure the entered digits are valid
                 let sum = digitsCopy.reduce(0) { $0 + $1 }
-                let condition = digitsCopy.count%2 == 0 && sum != 0
+                let validDuration = digitsCopy.count%2 == 0 && sum != 0
                 
-                guard condition else { //digits are not valid
+                guard validDuration else { //digits are not valid
                     Secretary.shared.topMostView = .palette
                     return
                 }
@@ -116,6 +116,24 @@ extension DurationPickerView {
                         Secretary.shared.showPaletteView = false
                     }
                 }
+            }
+        }
+        
+        func shouldEditDuration() {
+            let digitsCopy = digits
+            
+            DispatchQueue.global().async {
+                //make sure the entered digits are valid
+                let sum = digitsCopy.reduce(0) { $0 + $1 }
+                let validDuration = digitsCopy.count%2 == 0 && sum != 0
+                
+                guard validDuration else { //digits are not valid
+                    print("duration is not valid")
+                    return
+                }
+                
+                let initialClock = zip(self.digits, self.matrix).reduce(0) { $0 + $1.0 * $1.1 }
+                print("duration is valid. initialClock \(initialClock)")
             }
         }
         

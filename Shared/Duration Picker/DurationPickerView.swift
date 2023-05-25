@@ -105,7 +105,7 @@ struct DurationPickerView: View {
 //                    viewModel.change(bubble, to: .timer(Float(initialClock)))
                 } else {
                     //change stopwatch into a timer
-//                    viewModel.change(bubble, to: .timer(Float(initialClock)))
+                    manager.shouldEditDuration()
                 }
             case .none: break
         }
