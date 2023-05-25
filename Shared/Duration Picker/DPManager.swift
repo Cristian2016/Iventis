@@ -130,10 +130,9 @@ extension DurationPickerView {
                 guard validDuration else { return }
                 
                 //compute duration
-                let initialClock = zip(self.digits, self.matrix).reduce(0) { $0 + $1.0 * $1.1 }
+                let initialClock = zip(digitsCopy, self.matrix).reduce(0) { $0 + $1.0 * $1.1 }
                 
                 DispatchQueue.main.async {
-                    print("edit duration \(initialClock)")
                     self.askViewModelToEditDuration(for: bubble, initialClock)
                 }
             }
