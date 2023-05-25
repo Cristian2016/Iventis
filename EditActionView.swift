@@ -176,11 +176,7 @@ extension EditActionView {
                     }
                     Rectangle()
                         .fill(color)
-                        .overlay {
-                            timerButton
-                            //                                Text(timerTitle)
-                            //                                    .font(.system(size: 18, weight: .medium))
-                        }
+                        .overlay { timerButton }
                         .gridCellColumns(bubble.isTimer ? 2 : 4)
                         .onTapGesture {
                             Secretary.shared.durationPickerMode = .edit(bubble)
