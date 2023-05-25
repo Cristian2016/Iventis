@@ -287,13 +287,13 @@ extension EditActionView {
                         .font(.system(size: 22))
                         .padding([.top, .bottom], 10)
                         .foregroundColor(.black)
-                        .frame(height: 50)
+                        .frame(height: 40)
                     
                     ScrollView {
                         LazyVGrid(columns: columns, spacing: 1) {
                             ForEach(durations) { timerDuration in
                                 color
-                                    .frame(idealHeight: 52)
+                                    .frame(idealHeight: 57)
                                     .overlay {
                                         Text(timerDuration.value.timeComponentsAbreviatedString)
                                     }
