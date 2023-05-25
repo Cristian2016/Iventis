@@ -203,6 +203,7 @@ class ViewModel: ObservableObject {
     
     private func observe_EditTimerDuration() {
         center.addObserver(forName: .editTimerDuration, object: nil, queue: nil) { [weak self] in
+            //⚠️ mainThread! should be background operation, no?
             guard
                 let rank = $0.userInfo!["rank"] as? Int64,
                 let bubble = self?.bubble(for: Int(rank)),
@@ -210,7 +211,13 @@ class ViewModel: ObservableObject {
             
             UserFeedback.singleHaptic(.heavy)
             self?.change(bubble, to: .timer(Float(initialClock)))
+               
+            let objID = bubble.objectID
+            let bContext = PersistenceController.shared.bContext
             
+            bContext.perform {
+                self?.addTimerDuration(Float(initialClock), bContext)
+            }
         }
     } //20
     
