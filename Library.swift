@@ -36,6 +36,7 @@ extension Notification.Name {
     ///kill StartSelayBubble  since sdb.state is now .finished
     static let killSDB = Notification.Name("killSDB")
     
+    static let editTimerDuration = Notification.Name("editTimerDuration")
     static let createTimer = Notification.Name("createTimer")
     static let killTimer = Notification.Name("killTimer")
     

@@ -98,16 +98,10 @@ struct DurationPickerView: View {
                 manager.shouldComputeInitialClock(color: tricolor.description)
                 
             case .edit(let bubble):
-                let initialClock = zip(manager.digits, manager.matrix).reduce(0) { $0 + $1.0 * $1.1 }
+                manager.shouldEditDuration(bubble)
                 
-                if bubble.isTimer {
-                    //change timer duration
-//                    viewModel.change(bubble, to: .timer(Float(initialClock)))
-                } else {
-                    //change stopwatch into a timer
-                    manager.shouldEditDuration()
-                }
-            case .none: break
+            case .none:
+                break
         }
         
         self.tricolor = nil //dismiss Self

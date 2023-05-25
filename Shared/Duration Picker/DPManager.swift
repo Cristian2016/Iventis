@@ -119,21 +119,21 @@ extension DurationPickerView {
             }
         }
         
-        func shouldEditDuration() {
+        func shouldEditDuration(_ bubble:Bubble) {
             let digitsCopy = digits
             
             DispatchQueue.global().async {
-                //make sure the entered digits are valid
                 let sum = digitsCopy.reduce(0) { $0 + $1 }
                 let validDuration = digitsCopy.count%2 == 0 && sum != 0
                 
-                guard validDuration else { //digits are not valid
-                    print("duration is not valid")
-                    return
-                }
+                //make sure entered duration is valid
+                guard validDuration else { return }
                 
+                //compute duration
                 let initialClock = zip(self.digits, self.matrix).reduce(0) { $0 + $1.0 * $1.1 }
-                print("duration is valid. initialClock \(initialClock)")
+                
+                let info : [String : Any] = ["rank" : bubble.rank, "initialClock" : initialClock]
+                NotificationCenter.default.post(name: .editTimerDuration, object: self, userInfo: info)
             }
         }
         
@@ -142,6 +142,10 @@ extension DurationPickerView {
             let info : [String : Any] = ["color" : color, "initialClock" : initialClock]
             NotificationCenter.default.post(name: .createTimer, object: nil, userInfo: info)
         } //
+        
+        private func askViewModelToEditDuration(for bubble:Bubble) {
+            
+        }
         
         public func charactersToDisable() {
             if digits == [4,8] {
