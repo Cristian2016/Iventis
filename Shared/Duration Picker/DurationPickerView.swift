@@ -161,9 +161,7 @@ extension DurationPickerView {
             }
         }
         
-        private func dismiss() {
-            Secretary.shared.showDurationPickerInfo = false
-        }
+        private func dismiss() { Secretary.shared.showDurationPickerInfo = false }
         
         private func moreInfo() { Secretary.shared.showInfoVH = true }
     }
