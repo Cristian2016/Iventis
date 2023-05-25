@@ -132,8 +132,10 @@ extension DurationPickerView {
                 //compute duration
                 let initialClock = zip(self.digits, self.matrix).reduce(0) { $0 + $1.0 * $1.1 }
                 
-                let info : [String : Any] = ["rank" : bubble.rank, "initialClock" : initialClock]
-                NotificationCenter.default.post(name: .editTimerDuration, object: self, userInfo: info)
+                DispatchQueue.main.async {
+                    print("edit duration \(initialClock)")
+                    self.askViewModelToEditDuration(for: bubble, initialClock)
+                }
             }
         }
         
@@ -143,8 +145,9 @@ extension DurationPickerView {
             NotificationCenter.default.post(name: .createTimer, object: nil, userInfo: info)
         } //
         
-        private func askViewModelToEditDuration(for bubble:Bubble) {
-            
+        private func askViewModelToEditDuration(for bubble:Bubble, _ initialClock:Int) {
+            let info : [String : Any] = ["rank" : bubble.rank, "initialClock" : initialClock]
+            NotificationCenter.default.post(name: .editTimerDuration, object: self, userInfo: info)
         }
         
         public func charactersToDisable() {

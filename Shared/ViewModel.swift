@@ -209,6 +209,7 @@ class ViewModel: ObservableObject {
                 let initialClock = $0.userInfo!["initialClock"] as? Int else { return }
             
             UserFeedback.singleHaptic(.heavy)
+            print("change to timer \(initialClock)")
             self?.change(bubble, to: .timer(Float(initialClock)))
         }
     } //20
