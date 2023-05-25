@@ -201,6 +201,17 @@ class ViewModel: ObservableObject {
         }
     } //20
     
+    private func observe_EditTimerDuration() {
+        center.addObserver(forName: .editTimerDuration, object: nil, queue: nil) { [weak self] in
+            guard
+                let rank = $0.userInfo!["rank"] as? Int64,
+                let bubble = self?.bubble(for: Int(rank)),
+                let initialClock = $0.userInfo!["initialClock"] as? Int else { return }
+            
+            self?.change(bubble, to: .timer(Float(initialClock)))
+        }
+    } //20
+    
     ///Bubble.Coordinator.task() notifies if timer must finish
     private func observe_KillTimer() {
         center.addObserver(forName: .killTimer, object: nil, queue: nil) {[weak self] in
@@ -265,8 +276,12 @@ class ViewModel: ObservableObject {
         observe_ApplicationActive()
         observe_ApplicationBackground()
         observe_AppResignActive()
+        
         observe_KillSDB()
+        
         observe_CreateTimer()
+        observe_EditTimerDuration()
+        
         observe_KillTimer()
         
         secretary.updateBubblesReport(.appLaunch)

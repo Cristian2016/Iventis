@@ -38,6 +38,7 @@ extension Notification.Name {
     
     static let editTimerDuration = Notification.Name("editTimerDuration")
     static let createTimer = Notification.Name("createTimer")
+    
     static let killTimer = Notification.Name("killTimer")
     
     static let scrollToTimer = Notification.Name("scrollToTimer")
