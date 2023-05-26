@@ -10,7 +10,6 @@ import SwiftUI
 import MyPackage
 
 struct BubbleCell: View {
-    ///padding with respect to the list edges so that it comes closer to the edges of the screen
     private let secretary = Secretary.shared
     
     let metrics = Metrics()    
@@ -50,7 +49,7 @@ struct BubbleCell: View {
         Button {
             secretary.deleteAction_bRank = bubble.rank
         } label: {
-            Label("Control", systemImage: "gauge.high")
+            Label("Control", systemImage: "slider.vertical.3")
         }
         .tint(.red)
 //        .tint(Color.bubbleColor(forName: bubble.color))
