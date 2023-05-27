@@ -60,10 +60,9 @@ extension DurationPickerView {
                let welcomeText = setWelcomeText()
                 
                 FlipText()
-                Text("48 hours max")
+                Text("**Dismiss** \(Image.tap) Tap")
                     .font(.footnote)
                     .foregroundColor(.secondary)
-                    .fontDesign(.monospaced)
             }
             .minimumScaleFactor(0.1)
         }

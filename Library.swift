@@ -53,10 +53,10 @@ extension UserDefaults {
 }
 
 public extension Image {
-    static let tap = Image(systemName:"hand.tap.fill")
+    static let tap = Image(systemName:"hand.tap")
     static let longPress = Image(systemName:"target")
-    static let leftSwipe = Image(systemName:"arrow.left.circle.fill")
-    static let rightSwipe = Image(systemName:"arrow.right.circle.fill")
+    static let leftSwipe = Image(systemName:"arrow.left.circle")
+    static let rightSwipe = Image(systemName:"arrow.right.circle")
     static let scrollToTop = Image(systemName: "arrow.up.to.line.compact")
     static let greaterThan = Image(systemName: "greaterthan.circle.fill")
     static let info = Image(systemName: "info.circle.fill")
