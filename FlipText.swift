@@ -21,7 +21,7 @@ struct FlipText: View {
                     .fontWeight(.semibold)
                     .zIndex(lines.firstIndex(of: line)! == index ? 1 : 0)
                     .offset(y: lines.firstIndex(of: line)! == index ? 0 : -40)
-                    .animation(.spring(response: 0.8, dampingFraction: 0.5), value: index)
+                    .animation(.spring(response: 0.8, dampingFraction: 0.4), value: index)
                     .opacity(lines.firstIndex(of: line)! == index ? 1 : 0)
             }
         }
