@@ -3,7 +3,7 @@
 //  Timers (iOS)
 //
 //  Created by Cristian Lapusan on 26.05.2023.
-//
+//1 two properties that will be animated. anything before .animation will be animated. opacity will not be animated
 
 import SwiftUI
 import MyPackage
@@ -19,9 +19,9 @@ struct FlipText: View {
                 Text(line)
                     .font(.largeTitle)
                     .fontWeight(.semibold)
-                    .zIndex(lines.firstIndex(of: line)! == index ? 1 : 0)
-                    .offset(y: lines.firstIndex(of: line)! == index ? 0 : -40)
-                    .animation(.spring(response: 0.8, dampingFraction: 0.5), value: index)
+                    .zIndex(lines.firstIndex(of: line)! == index ? 1 : 0) //1
+                    .offset(y: lines.firstIndex(of: line)! == index ? 0 : -40) //1
+                    .animation(.spring(response: 0.8, dampingFraction: 0.5), value: index) //1
                     .opacity(lines.firstIndex(of: line)! == index ? 1 : 0)
             }
         }
