@@ -20,7 +20,7 @@ struct FlipText: View {
                     .font(.largeTitle)
                     .fontWeight(.semibold)
                     .zIndex(lines.firstIndex(of: line)! == index ? 1 : 0)
-                    .offset(y: lines.firstIndex(of: line)! == index ? 0 : -50)
+                    .offset(y: lines.firstIndex(of: line)! == index ? 0 : -40)
                     .animation(.spring(response: 0.8, dampingFraction: 0.5), value: index)
                     .opacity(lines.firstIndex(of: line)! == index ? 1 : 0)
             }
