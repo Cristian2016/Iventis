@@ -250,11 +250,33 @@ class Secretary {
     }
     
     // MARK: - DurationPicker
-    @Published var durationPickerMode: Mode?
+//    @Published var durationPickerMode: Mode?
+//
+//    enum Mode {
+//        case create(Color.Tricolor) //timer
+//        case edit(Bubble) //existing timer
+//    }
     
-    enum Mode {
-        case create(Color.Tricolor) //timer
-        case edit(Bubble) //existing timer
+    @Published var durationPickerReason = DurationPickerReason.none
+    
+    enum DurationPickerReason : Hashable {
+        case createTimer(Color.Tricolor) //create timer in PaletteView
+        case editExistingTimer(Bubble) //edit an existing timer
+        case changeToTimer(Bubble) //change stopwatch to timer
+        case none //not set. DPV not visible
+        
+        var description:String {
+            switch self {
+                case .changeToTimer(let bubble):
+                    return "reason change to \(bubble.color ?? "pula") timer"
+                case .createTimer(let tricolor):
+                    return "reason create \(tricolor.description) timer"
+                case .editExistingTimer(let bubble):
+                    return "reason edit existing timer \(bubble.color ?? "pula")"
+                case .none:
+                    return "reason none"
+            }
+        }
     }
 }
 

@@ -52,7 +52,6 @@ struct BubbleCell: View {
             Label("Control", systemImage: "slider.vertical.3")
         }
         .tint(.red)
-//        .tint(Color.bubbleColor(forName: bubble.color))
     }
     
     private var calEventRemovedConfirmation:some View {

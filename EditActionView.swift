@@ -179,7 +179,8 @@ extension EditActionView {
                         .overlay { timerButton }
                         .gridCellColumns(bubble.isTimer ? 2 : 4)
                         .onTapGesture {
-                            Secretary.shared.durationPickerMode = .edit(bubble)
+                            Secretary.shared.durationPickerReason = .editExistingTimer(bubble)
+                            Secretary.shared.durationPickerReason = bubble.isTimer ? .editExistingTimer(bubble) : .changeToTimer(bubble)
                             UserFeedback.singleHaptic(.heavy)
                             dismiss()
                         }

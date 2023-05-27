@@ -21,6 +21,7 @@ struct DurationPickerView: View {
     // MARK: - Mode [either 1. create a timerBubble with color or 2. edit a timerBubble]
     @State private var tricolor:Color.Tricolor? //1
     @State private var bubble:Bubble?
+    @State private var reason:Secretary.DurationPickerReason = .none
     
     private let digits = [["7", "8", "9"], ["4", "5", "6"], ["1", "2", "3"], ["*", "0", "✕"]]
     
@@ -33,7 +34,7 @@ struct DurationPickerView: View {
                     .gesture(swipeToClearDisplay)
                     .onTapGesture { dismiss() }
                 VStack(spacing: 0) {
-                    Display { dismiss() }
+                    Display(reason) { dismiss() }
                     digitsGrid
                         .overlay { DPOKCircle { dismiss() } }
                 }
@@ -43,8 +44,20 @@ struct DurationPickerView: View {
                 .overlay { Info() }
             }
         }
-        .onReceive(Secretary.shared.$durationPickerMode) { handle(mode: $0) }
         .onChange(of: tricolor) { handle(tricolor: $0) }
+        .onReceive(Secretary.shared.$durationPickerReason) { reason = $0 }
+        .onChange(of: reason) { newReason in
+            print("newReason \(newReason.description)")
+            switch newReason {
+                case .editExistingTimer(let bubble):
+                    print("initiaClock \(bubble.initialClock)")
+                    manager.digits = [1, 2, 3, 4, 5, 6]
+                case .createTimer(let tricolor):
+                    self.tricolor = tricolor
+                default:
+                    break
+            }
+        }
     }
 
     // MARK: - Lego
@@ -92,42 +105,45 @@ struct DurationPickerView: View {
     }
     
     private func dismiss() {
-        let mode = Secretary.shared.durationPickerMode
-        switch mode {
-            case .create(let tricolor):
+        let reason = Secretary.shared.durationPickerReason
+        
+        switch reason {
+//            case .edit(let bubble):
+//                manager.shouldEditDuration(bubble)
+//
+//            case .none:
+//                break
+                
+            case .createTimer(let tricolor):
                 manager.shouldComputeInitialClock(color: tricolor.description)
-                
-            case .edit(let bubble):
-                manager.shouldEditDuration(bubble)
-                
-            case .none:
-                break
+            default: break
         }
         
         self.tricolor = nil //dismiss Self
         manager.removeAllDigits()
+        Secretary.shared.durationPickerReason = .none
     }
     
-    private func handle(mode: Secretary.Mode?) {
-        guard let mode = mode else {
-            if self.tricolor != nil { self.tricolor = nil }
-            return
-        }
-        
-        switch mode {
-            case .create(let tricolor):
-                self.tricolor = tricolor
-                
-            case .edit(let bubble):
-                self.bubble = bubble
-                self.tricolor = Color.tricolor(forName: bubble.color)
-                
-                if bubble.isTimer { self.manager.digits = [] }
-                else {
-                    
-                }
-        }
-    } //5
+//    private func handle(mode: Secretary.Mode?) {
+//        guard let mode = mode else {
+//            if self.tricolor != nil { self.tricolor = nil }
+//            return
+//        }
+//
+//        switch mode {
+//            case .create(let tricolor):
+//                self.tricolor = tricolor
+//
+//            case .edit(let bubble):
+//                self.bubble = bubble
+//                self.tricolor = Color.tricolor(forName: bubble.color)
+//
+//                if bubble.isTimer { self.manager.digits = [] }
+//                else {
+//
+//                }
+//        }
+//    } //5
     
     private func handle(tricolor:Color.Tricolor?) {
         guard tricolor != nil else { return }

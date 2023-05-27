@@ -10,15 +10,21 @@ import MyPackage
 
 extension DurationPickerView {
     struct Display: View {
+        let reason:Secretary.DurationPickerReason
+        let dismiss: () -> ()
+        
+        @State private var showSaveAction = false
+        
+        init(_ reason:Secretary.DurationPickerReason, dismiss: @escaping() -> ()) {
+            self.reason = reason
+            self.dismiss = dismiss
+        }
+        
         let manager = DurationPickerView.Manager.shared
         
         @State private var hr = String()
         @State private var min = String()
         @State private var sec = String()
-        
-        @State private var showSaveAction = false
-        
-        let dismiss: () -> ()
             
         var body: some View {
             ZStack {
@@ -32,20 +38,33 @@ extension DurationPickerView {
             .onReceive(manager.$isDurationValid) { showSaveAction = $0 ? true : false }
         }
         
+        func setWelcomeText() -> String {
+            let welcomeText:String
+            
+            switch reason {
+                case .createTimer(_):
+                    welcomeText = "Enter Duration"
+                case .editExistingTimer(_):
+                    welcomeText = "New Duration"
+                case .changeToTimer(_):
+                    welcomeText = "Enter Duration"
+                case .none:
+                    welcomeText = ""
+            }
+            return welcomeText
+        }
+        
         // MARK: - Lego
         private var welcomeText:some View {
             VStack {
-                Text("Enter Duration")
-                    .font(.largeTitle)
-                    .fontWeight(.semibold)
-                    .layoutPriority(1)
+               let welcomeText = setWelcomeText()
                 
+                FlipText()
                 Text("48 hours max")
                     .font(.footnote)
                     .foregroundColor(.secondary)
                     .fontDesign(.monospaced)
             }
-//            .padding([.leading, .trailing], 4)
             .minimumScaleFactor(0.1)
         }
         

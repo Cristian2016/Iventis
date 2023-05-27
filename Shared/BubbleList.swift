@@ -90,7 +90,8 @@ struct BubbleList: View {
         
         /* first remove all views that might obscure the finished timer. if finished timer is in the ordinary list and ordinary list is hidden [pinned only shows], show all bubbles. scroll to the finished timer */
         
-        secretary.durationPickerMode = nil //remove durationpicker
+        secretary.durationPickerReason = .none //hide durationpicker
+        secretary.durationPickerReason = .none
         secretary.showPaletteView = false //remove palette
         
         if secretary.showFavoritesOnly && secretary.bubblesReport.ordinaryRanks.contains(Int(rank)!) {
