@@ -18,7 +18,7 @@ struct FlipText: View {
             let lines = input.lines
             let transition = AnyTransition
                 .move(edge: .bottom)
-                .combined(with: .opacity.combined(with: .scale(scale: 0.2)))
+                .combined(with: .opacity.combined(with: .scale(scale: 0.4)))
             
             ForEach(lines, id: \.self) { line in
                 let currentIndex = lines.firstIndex(of: line)!
