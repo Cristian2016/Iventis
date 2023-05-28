@@ -28,11 +28,17 @@ extension DurationPickerView {
         
         var body: some View {
             ZStack {
-                VStack {
-                    if hr.isEmpty { welcomeText }
-                    else { durationComponentsStack }
-                    
-                    infoText
+                if hr.isEmpty {
+                    VStack {
+                        welcomeText
+                        infoText
+                    }
+                }
+                else {
+                    HStack(alignment: .firstTextBaseline) {
+                        durationComponentsStack
+                        infoText
+                    }
                 }
             }
             .frame(height: 100)
