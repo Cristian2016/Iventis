@@ -24,6 +24,10 @@ extension Font {
     static let minSize = CGFloat(18)
 }
 
+extension CGFloat {
+    static let minFontSize = CGFloat(18)
+}
+
 extension CharacterSet {
     static let allDigits = CharacterSet(charactersIn: "0123456789*")
 }

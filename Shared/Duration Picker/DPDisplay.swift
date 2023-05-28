@@ -61,7 +61,7 @@ extension DurationPickerView {
                 
                 FlipText(input: .createTimer)
                 Text("**Dismiss** \(Image.tap) Tap")
-                    .font(.system(size: Font.minSize))
+                    .font(.system(size: .minFontSize))
                     .foregroundColor(.secondary)
             }
             .minimumScaleFactor(0.1)
