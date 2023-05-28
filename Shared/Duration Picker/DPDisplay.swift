@@ -60,25 +60,22 @@ extension DurationPickerView {
         
         // MARK: - Lego
         private var welcomeText:some View {
-            let welcomeText = setWelcomeText()
             return FlipText(input: .createTimer)
         }
         
         private var infoText:some View {
+            let input:FlipText1.Input
             
-            let title:LocalizedStringKey
             switch manager.digits.count {
                 case 0 :
-                    title = "**Dismiss** \(Image.tap) Tap"
+                    input = .noInput
                 case manager.digits.count where manager.digits.count%2 == 0:
-                    title = "**Save** \(Image.tap) | **Clear** \(Image.swipeLeft)"
+                    input = .save
                 default:
-                    title = "**Dismiss** \(Image.tap) | **Clear** \(Image.swipeLeft)"
+                    input = .dismiss
             }
             
-            return Text(title)
-                .font(.system(size: .minFontSize))
-                .foregroundColor(.secondary)
+            return FlipText1(input: input)
         }
         
         private var durationComponentsStack:some View {
