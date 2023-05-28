@@ -63,19 +63,13 @@ extension DurationPickerView {
             return FlipText(input: .createTimer)
         }
         
+        @ViewBuilder
         private var infoText:some View {
-            let input:FlipText1.Input
-            
-            switch manager.digits.count {
-                case 0 :
-                    input = .noInput
-                case manager.digits.count where manager.digits.count%2 == 0:
-                    input = .save
-                default:
-                    input = .dismiss
+            if manager.digits.isEmpty {
+                FlipText1(input: .noInput)
+            } else {
+                FlipText1(input: manager.digits.count%2 == 0 ? .save : .dismiss)
             }
-            
-            return FlipText1(input: input)
         }
         
         private var durationComponentsStack:some View {
