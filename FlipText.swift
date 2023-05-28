@@ -25,8 +25,7 @@ struct FlipText: View {
                 
                 if currentIndex == viewToShowIndex {
                     Text(line)
-                        .font(.largeTitle)
-                        .fontWeight(.medium)
+                        .font(.system(size: 40, weight: .medium))
                         .transition(.asymmetric(insertion: .move(edge: .top), removal: transition))
                 }
             }
