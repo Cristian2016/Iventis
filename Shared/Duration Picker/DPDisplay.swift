@@ -25,11 +25,15 @@ extension DurationPickerView {
         @State private var hr = String()
         @State private var min = String()
         @State private var sec = String()
-            
+        
         var body: some View {
             ZStack {
-                if hr.isEmpty { welcomeText }
-                else { durationComponentsStack }
+                VStack {
+                    if hr.isEmpty { welcomeText }
+                    else { durationComponentsStack }
+                    
+                    infoText
+                }
             }
             .frame(height: 100)
             .allowsHitTesting(false)
@@ -56,15 +60,25 @@ extension DurationPickerView {
         
         // MARK: - Lego
         private var welcomeText:some View {
-            VStack {
-               let welcomeText = setWelcomeText()
-                
-                FlipText(input: .createTimer)
-                Text("**Dismiss** \(Image.tap) Tap")
-                    .font(.system(size: .minFontSize))
-                    .foregroundColor(.secondary)
+            let welcomeText = setWelcomeText()
+            return FlipText(input: .createTimer)
+        }
+        
+        private var infoText:some View {
+            
+            let title:LocalizedStringKey
+            switch manager.digits.count {
+                case 0 :
+                    title = "**Dismiss** \(Image.tap) Tap"
+                case manager.digits.count where manager.digits.count%2 == 0:
+                    title = "**Save** \(Image.tap) | **Clear** \(Image.swipeLeft)"
+                default:
+                    title = "**Dismiss** \(Image.tap) | **Clear** \(Image.swipeLeft)"
             }
-            .minimumScaleFactor(0.1)
+            
+            return Text(title)
+                .font(.system(size: .minFontSize))
+                .foregroundColor(.secondary)
         }
         
         private var durationComponentsStack:some View {
