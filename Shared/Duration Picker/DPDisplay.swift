@@ -59,7 +59,7 @@ extension DurationPickerView {
             VStack {
                let welcomeText = setWelcomeText()
                 
-                FlipText()
+                FlipText(input: .createTimer)
                 Text("**Dismiss** \(Image.tap) Tap")
                     .font(.footnote)
                     .foregroundColor(.secondary)

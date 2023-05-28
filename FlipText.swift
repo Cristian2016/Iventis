@@ -10,11 +10,13 @@ import MyPackage
 
 struct FlipText: View {
     @State private var isAllowedToFlip = true
-    let lines = ["Create Timer", "Enter Duration"]
+    let input:Input
     @State private var index = 0
     
     var body: some View {
         ZStack {
+            let lines = input.lines
+            
             ForEach(lines, id: \.self) { line in
                 Text(line)
                     .font(.largeTitle)
@@ -28,7 +30,7 @@ struct FlipText: View {
         .onAppear {
             delayExecution(.now() + 3) {
                 Timer.scheduledTimer(withTimeInterval: 5, repeats: true) { _ in
-                    let newIndex = (index + 1)%lines.count
+                    let newIndex = (index + 1)%input.lines.count
                     index = newIndex
                 }
                 .fire()
@@ -37,8 +39,16 @@ struct FlipText: View {
     }
 }
 
+extension FlipText {
+    struct Input {
+        let lines:[String]
+        
+        static let createTimer = Input(lines: ["Create Timer", "Enter Duration"])
+    }
+}
+
 struct FlipText_Previews: PreviewProvider {
     static var previews: some View {
-        FlipText()
+        FlipText(input: .createTimer)
     }
 }
