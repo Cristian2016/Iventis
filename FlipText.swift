@@ -16,24 +16,29 @@ struct FlipText: View {
     var body: some View {
         ZStack {
             let lines = input.lines
+            let transition = AnyTransition
+                .move(edge: .bottom)
+                .combined(with: .opacity.combined(with: .scale(scale: 0.2)))
             
             ForEach(lines, id: \.self) { line in
                 let currentIndex = lines.firstIndex(of: line)!
                 
-                Text(line)
-                    .font(.largeTitle)
-                    .fontWeight(.semibold)
-                    .zIndex(currentIndex == index ? 1 : 0) //1
-                    .offset(y: currentIndex == index ? 0 : -40) //1
-                    .animation(.spring(response: 0.8, dampingFraction: 0.5), value: index) //1
-                    .opacity(currentIndex == index ? 1 : 0)
+                if currentIndex == index {
+                    Text(line)
+                        .font(.largeTitle)
+                        .fontWeight(.semibold)
+                        .transition(.asymmetric(insertion: .move(edge: .top), removal: transition))
+                }
             }
         }
         .onAppear {
             delayExecution(.now() + 3) {
                 Timer.scheduledTimer(withTimeInterval: 5, repeats: true) { _ in
                     let newIndex = (index + 1)%input.lines.count
-                    index = newIndex
+                    
+                    withAnimation(.spring(response: 0.8, dampingFraction: 0.5)) {
+                        index = newIndex
+                    }
                 }
                 .fire()
             }
