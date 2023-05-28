@@ -33,7 +33,7 @@ struct FlipText: View {
             }
         }
         .onAppear {
-            var repeatCount = 5
+            var repeatCount = 3
             
             Timer.scheduledTimer(withTimeInterval: 5, repeats: true) {
                 let newIndex = (viewToShowIndex + 1)%input.lines.count
