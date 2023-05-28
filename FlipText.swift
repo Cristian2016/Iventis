@@ -16,7 +16,7 @@ struct FlipText: View {
     var body: some View {
         ZStack {
             let lines = input.lines
-            let transition = AnyTransition
+            let removal = AnyTransition
                 .move(edge: .bottom)
                 .combined(with: .opacity.combined(with: .scale(scale: 0.4)))
             
@@ -26,7 +26,7 @@ struct FlipText: View {
                 if currentIndex == viewToShowIndex {
                     Text(line)
                         .font(.system(size: .largeTitle, weight: .medium))
-                        .transition(.asymmetric(insertion: .move(edge: .top), removal: transition))
+                        .transition(.asymmetric(insertion: .move(edge: .top), removal: removal))
                 }
             }
         }
