@@ -12,6 +12,7 @@ struct FlipText: View {
     @State private var isAllowedToFlip = true
     let input:Input
     @State private var index = 0
+    static var repeatCount = 5
     
     var body: some View {
         ZStack {
@@ -26,19 +27,22 @@ struct FlipText: View {
                 if currentIndex == index {
                     Text(line)
                         .font(.largeTitle)
-                        .fontWeight(.semibold)
+                        .fontWeight(.medium)
                         .transition(.asymmetric(insertion: .move(edge: .top), removal: transition))
                 }
             }
         }
         .onAppear {
             delayExecution(.now() + 3) {
-                Timer.scheduledTimer(withTimeInterval: 5, repeats: true) { _ in
+                Timer.scheduledTimer(withTimeInterval: 5, repeats: true) { timer in
                     let newIndex = (index + 1)%input.lines.count
-                    
+                                        
                     withAnimation(.spring(response: 0.8, dampingFraction: 0.5)) {
                         index = newIndex
                     }
+                    
+                    Self.repeatCount -= 1
+                    if Self.repeatCount == 0 { timer.invalidate() }
                 }
                 .fire()
             }
