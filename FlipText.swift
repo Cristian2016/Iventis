@@ -12,7 +12,6 @@ struct FlipText: View {
     @State private var isAllowedToFlip = true
     let input:Input
     @State private var index = 0
-    static var repeatCount = 5
     
     var body: some View {
         ZStack {
@@ -33,6 +32,8 @@ struct FlipText: View {
             }
         }
         .onAppear {
+            var repeatCount = 5
+            
             delayExecution(.now() + 3) {
                 Timer.scheduledTimer(withTimeInterval: 5, repeats: true) { timer in
                     let newIndex = (index + 1)%input.lines.count
@@ -41,8 +42,8 @@ struct FlipText: View {
                         index = newIndex
                     }
                     
-                    Self.repeatCount -= 1
-                    if Self.repeatCount == 0 { timer.invalidate() }
+                    repeatCount -= 1
+                    if repeatCount == 0 { timer.invalidate() }
                 }
                 .fire()
             }
