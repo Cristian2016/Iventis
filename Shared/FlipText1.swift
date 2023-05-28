@@ -34,12 +34,12 @@ struct FlipText1: View {
             }
         }
         .onAppear {
-//            if input.lines.count > 1 {
+            if input.lines.count > 1 {
                 Timer.scheduledTimer(withTimeInterval: 5, repeats: true) { _ in
                     let newIndex = (viewToShowIndex + 1)%input.lines.count
                     withAnimation { viewToShowIndex = newIndex }
                 }
-//            }
+            }
         }
     }
 }
