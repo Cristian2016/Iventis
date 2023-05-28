@@ -34,18 +34,13 @@ struct FlipText: View {
         .onAppear {
             var repeatCount = 5
             
-            delayExecution(.now() + 3) {
-                Timer.scheduledTimer(withTimeInterval: 5, repeats: true) { timer in
-                    let newIndex = (index + 1)%input.lines.count
-                                        
-                    withAnimation(.spring(response: 0.8, dampingFraction: 0.5)) {
-                        index = newIndex
-                    }
-                    
-                    repeatCount -= 1
-                    if repeatCount == 0 { timer.invalidate() }
-                }
-                .fire()
+            Timer.scheduledTimer(withTimeInterval: 5, repeats: true) {
+                let newIndex = (index + 1)%input.lines.count
+                
+                withAnimation(.spring(response: 0.8, dampingFraction: 0.5)) { index = newIndex }
+                
+                repeatCount -= 1
+                if repeatCount == 0 { $0.invalidate() }
             }
         }
     }
