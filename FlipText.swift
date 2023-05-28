@@ -50,7 +50,7 @@ extension FlipText {
     struct Input {
         let lines:[String]
         
-        static let createTimer = Input(lines: ["Create Timer", "Enter Duration"])
+        static let createTimer = Input(lines: ["Create Timer", "Choose Duration"])
     }
 }
 
