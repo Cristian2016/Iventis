@@ -22,6 +22,7 @@ struct vRoundedRectangle: Shape {
 
 extension CGFloat {
     static let minFontSize = CGFloat(18)
+    static let largeTitle = CGFloat(40)
 }
 
 extension CharacterSet {
