@@ -13,12 +13,14 @@ struct FlipText: View {
     let input:Input
     @State private var viewToShowIndex = 0
     
+    let removal:AnyTransition = {
+        let trans = AnyTransition.move(edge: .bottom)
+        return trans.combined(with: .opacity.combined(with: .scale(scale: 0.4)))
+    }()
+    
     var body: some View {
         ZStack {
             let lines = input.lines
-            let removal = AnyTransition
-                .move(edge: .bottom)
-                .combined(with: .opacity.combined(with: .scale(scale: 0.4)))
             
             ForEach(lines, id: \.self) { line in
                 let currentIndex = lines.firstIndex(of: line)!
