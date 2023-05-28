@@ -18,13 +18,15 @@ struct FlipText: View {
             let lines = input.lines
             
             ForEach(lines, id: \.self) { line in
+                let currentIndex = lines.firstIndex(of: line)!
+                
                 Text(line)
                     .font(.largeTitle)
                     .fontWeight(.semibold)
-                    .zIndex(lines.firstIndex(of: line)! == index ? 1 : 0) //1
-                    .offset(y: lines.firstIndex(of: line)! == index ? 0 : -40) //1
+                    .zIndex(currentIndex == index ? 1 : 0) //1
+                    .offset(y: currentIndex == index ? 0 : -40) //1
                     .animation(.spring(response: 0.8, dampingFraction: 0.5), value: index) //1
-                    .opacity(lines.firstIndex(of: line)! == index ? 1 : 0)
+                    .opacity(currentIndex == index ? 1 : 0)
             }
         }
         .onAppear {
