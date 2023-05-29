@@ -35,7 +35,7 @@ extension DurationPickerView {
                             if hr.isEmpty { welcomeText }
                             else { durationComponentsStack }
                         }
-                    Color.clear
+                    Color.ultraLightGray1
                         .frame(height: 30)
                         .overlay {
                             HStack {
