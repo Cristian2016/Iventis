@@ -40,6 +40,7 @@ extension DurationPickerView {
                         .overlay {
                             HStack {
                                 explainView
+                                Divider().frame(height: 14)
                                 infoText
                             }
                         }
@@ -56,6 +57,13 @@ extension DurationPickerView {
             if manager.digits.isEmpty {
                 Text("48 hours max")
                     .font(.system(size: 20, weight: .medium))
+            } else {
+                if manager.digits.count%2 == 0 {
+                    Text(manager.userFriendlyDuration)
+                        .font(.system(size: 20, weight: .medium))
+                } else {
+                    
+                }
             }
         }
         
