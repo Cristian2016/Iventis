@@ -21,7 +21,7 @@ extension DurationPickerView {
         
         var body: some View {
             shape
-                .frame(minHeight: 50)
+                .frame(minHeight: 52)
                 .overlay {
                     Text(title == "*" ? "00" : title)
                         .font(.system(size: 50, design: .rounded))

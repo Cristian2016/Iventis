@@ -59,7 +59,7 @@ extension DurationPickerView {
         private var explainView:some View {
             if manager.digits.isEmpty {
                 HStack {
-                    Text("48 hours max")
+                    Text("48 hr max")
                         .font(.system(size: 20, weight: .medium))
                     Divider().frame(height: 14)
                 }
