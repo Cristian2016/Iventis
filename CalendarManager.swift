@@ -108,17 +108,17 @@ extension CalendarManager {
         let firstPair = pairs.first!
         let lastPair = pairs.last!
         
-        let notes = eventNotes(from: pairs)
+        let eventNotes = eventNotes(from: pairs)
         
         let title = eventTitle(for: session)
         
-        guard let start = firstPair.start, let pause = firstPair.pause else { return }
+        guard let start = firstPair.start, let end = lastPair.pause else { return }
         
-        newEvent(with: title,
-                 bubbleNote:session.bubble?.note,
-                 eventNotes: notes,
+        createNewEvent(with: title,
+                 bubbleNote: session.bubble?.note,
+                 eventNotes: eventNotes,
                  start: start,
-                 end: pause,
+                 end: end,
                  session
         )
         
@@ -275,7 +275,7 @@ class CalendarManager: NSObject {
     } //1
     
     ///return an eventIdentifier
-    private func newEvent(with title:String?, bubbleNote:String?, eventNotes:String?, start:Date, end:Date, _ session:Session) {
+    private func createNewEvent(with title:String?, bubbleNote:String?, eventNotes:String?, start:Date, end:Date, _ session:Session) {
         
         let event = EKEvent(eventStore: store)
         
