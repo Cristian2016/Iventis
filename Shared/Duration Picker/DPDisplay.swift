@@ -41,12 +41,7 @@ extension DurationPickerView {
                     
                     Color.clear
                         .frame(height: 30)
-                        .overlay {
-                            HStack {
-                                explainView
-                                infoText
-                            }
-                        }
+                        .overlay { infoView }
                 }
             }
             .allowsHitTesting(false)
@@ -56,7 +51,7 @@ extension DurationPickerView {
         }
         
         @ViewBuilder
-        private var explainView:some View {
+        private var infoView:some View {
             if manager.digits.isEmpty {
                 HStack {
                     Text("48 hr max")
