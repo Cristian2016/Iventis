@@ -47,7 +47,6 @@ struct DurationPickerView: View {
         .onChange(of: tricolor) { handle(tricolor: $0) }
         .onReceive(Secretary.shared.$durationPickerReason) { reason = $0 }
         .onChange(of: reason) { newReason in
-            print("newReason \(newReason.description)")
             switch newReason {
                 case .editExistingTimer(let bubble):
                     print("initiaClock \(bubble.initialClock)")
