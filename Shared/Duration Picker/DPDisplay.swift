@@ -35,6 +35,7 @@ extension DurationPickerView {
                             if hr.isEmpty { welcomeText }
                             else { durationComponentsStack }
                         }
+                    
                     Color.ultraLightGray1
                         .frame(width: 200, height: 1)
                     
