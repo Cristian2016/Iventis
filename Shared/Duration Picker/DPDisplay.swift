@@ -37,7 +37,7 @@ extension DurationPickerView {
                         }
                     Color.clear
                         .frame(height: 30)
-                        .overlay { infoText.offset(y: -10) }
+                        .overlay { infoText.offset(y: -6) }
                 }
             }
             .allowsHitTesting(false)
