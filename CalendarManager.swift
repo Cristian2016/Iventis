@@ -115,11 +115,11 @@ extension CalendarManager {
         guard let start = firstPair.start, let end = lastPair.pause else { return }
         
         createNewEvent(with: title,
-                 bubbleNote: session.bubble?.note,
-                 eventNotes: eventNotes,
-                 start: start,
-                 end: end,
-                 session
+                       bubbleNote: session.bubble?.note,
+                       eventNotes: eventNotes,
+                       start: start,
+                       end: end,
+                       session
         )
         
         //since this method is called on bThread, make sure to save CoreData on mThread
