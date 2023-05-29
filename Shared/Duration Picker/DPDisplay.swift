@@ -56,7 +56,7 @@ extension DurationPickerView {
         @ViewBuilder
         private var explainView:some View {
             if manager.digits.isEmpty {
-                Text("48 hr max")
+                Text("48 hr max |")
                     .font(.system(size: 20, weight: .medium))
             }
         }
