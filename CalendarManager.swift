@@ -117,8 +117,7 @@ extension CalendarManager {
         createNewEvent(with: title,
                        bubbleNote: session.bubble?.note,
                        eventNotes: eventNotes,
-                       start: start,
-                       end: end,
+                       start: start, end: end,
                        session
         )
         
