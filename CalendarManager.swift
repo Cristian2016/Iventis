@@ -6,7 +6,7 @@
 //1 runs on background Thread
 
 import EventKit
-import EventKitUI
+//import EventKitUI
 import CoreLocation
 import SwiftUI
 

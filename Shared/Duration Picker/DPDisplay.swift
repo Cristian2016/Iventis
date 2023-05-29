@@ -28,14 +28,18 @@ extension DurationPickerView {
         
         var body: some View {
             ZStack {
-                VStack {
-                    if hr.isEmpty { welcomeText }
-                    else { durationComponentsStack }
-                    
-                    infoText
+                VStack(spacing: 0) {
+                    Color.clear
+                        .frame(height: 100)
+                        .overlay {
+                            if hr.isEmpty { welcomeText }
+                            else { durationComponentsStack }
+                        }
+                    Color.clear
+                        .frame(height: 30)
+                        .overlay { infoText }
                 }
             }
-            .frame(height: 100)
             .allowsHitTesting(false)
             .onReceive(manager.$component) { received(component: $0) }
             .onReceive(manager.$displayIsEmpty) { if $0 { clearDisplay() }}
