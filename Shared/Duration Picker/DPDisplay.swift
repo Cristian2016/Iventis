@@ -30,14 +30,14 @@ extension DurationPickerView {
             ZStack {
                 VStack(spacing: 0) {
                     Color.clear
-                        .frame(height: 100)
+                        .frame(height: 80)
                         .overlay {
                             if hr.isEmpty { welcomeText }
                             else { durationComponentsStack }
                         }
                     Color.clear
                         .frame(height: 30)
-                        .overlay { infoText }
+                        .overlay { infoText.offset(y: -10) }
                 }
             }
             .allowsHitTesting(false)
@@ -63,9 +63,7 @@ extension DurationPickerView {
         }
         
         // MARK: - Lego
-        private var welcomeText:some View {
-            return FlipText(input: .createTimer)
-        }
+        private var welcomeText:some View { FlipText(input: .createTimer) }
         
         @ViewBuilder
         private var infoText:some View {
