@@ -37,13 +37,26 @@ extension DurationPickerView {
                         }
                     Color.clear
                         .frame(height: 30)
-                        .overlay { infoText.offset(y: -6) }
+                        .overlay {
+                            HStack {
+                                explainView
+                                infoText
+                            }
+                        }
                 }
             }
             .allowsHitTesting(false)
             .onReceive(manager.$component) { received(component: $0) }
             .onReceive(manager.$displayIsEmpty) { if $0 { clearDisplay() }}
             .onReceive(manager.$isDurationValid) { showSaveAction = $0 ? true : false }
+        }
+        
+        @ViewBuilder
+        private var explainView:some View {
+            if manager.digits.isEmpty {
+                Text("48 hours max")
+                    .font(.system(size: 20, weight: .medium))
+            }
         }
         
         func setWelcomeText() -> String {
