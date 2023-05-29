@@ -108,11 +108,12 @@ extension CalendarManager {
         let firstPair = pairs.first!
         let lastPair = pairs.last!
         
-        let notes = createEventNotes(from: pairs)
+        let notes = eventNotes(from: pairs)
         
         let title = eventTitle(for: session)
         
         guard let start = firstPair.start, let pause = firstPair.pause else { return }
+        
         newEvent(with: title,
                  bubbleNote:session.bubble?.note,
                  eventNotes: notes,
@@ -140,7 +141,7 @@ extension CalendarManager {
             
             if let previousNotes = event.notes {
                 let notesAddedInCalendarByTheUser = previousNotes.components(separatedBy: eventNotesSeparator).last!
-                let notesAddedInTheApp = createEventNotes(from: session.pairs_)
+                let notesAddedInTheApp = eventNotes(from: session.pairs_)
                 let updatedNotes = notesAddedInTheApp + notesAddedInCalendarByTheUser
                 
                 // FIXME: find a better implementation
@@ -247,7 +248,7 @@ class CalendarManager: NSObject {
         return startTimeString + " - " + endTimeString
     }
     
-    private func createEventNotes(from pairs:[Pair]) -> String {
+    private func eventNotes(from pairs:[Pair]) -> String {
         let eventDuration = pairs.first?.session?.totalDuration
         let totalDuration = eventDuration?.timeComponentsAbreviatedString ?? ""
         let string = String("Total \(totalDuration)\n-------------------\n")
