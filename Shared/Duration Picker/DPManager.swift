@@ -121,7 +121,7 @@ extension DurationPickerView {
         
         var userFriendlyDuration:String {
             let result = zip(digits, self.matrix).reduce(0) { $0 + $1.0 * $1.1 }
-            return Float(result).timeComponentsAbreviatedString
+            return Float(result).timerTitle
         }
         
         func shouldEditDuration(_ bubble:Bubble) {
