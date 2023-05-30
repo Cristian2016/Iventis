@@ -72,9 +72,9 @@ extension DurationPickerView {
         @ViewBuilder
         private var infoText:some View {
             if manager.digits.isEmpty {
-                FlipText1(input: .noInput)
+                TheFlipText(.noInput, flipCount: 5, .small)
             } else {
-                FlipText1(input: manager.digits.count%2 == 0 ? .save : .dismiss)
+                TheFlipText( manager.digits.count%2 == 0 ? .save : .dismiss, flipCount: 5, .small)
             }
         }
         

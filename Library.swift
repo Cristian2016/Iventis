@@ -33,6 +33,8 @@ extension Notification.Name {
     static let frameNotification = Notification.Name("frameNotification")
     static let didBecomeActive = UIApplication.didBecomeActiveNotification
     
+    static let flipTextSignal = Notification.Name("flipTextSignal")
+    
     ///kill StartSelayBubble  since sdb.state is now .finished
     static let killSDB = Notification.Name("killSDB")
     
@@ -45,7 +47,8 @@ extension Notification.Name {
 } //1 ViewModel
 
 extension Notification {
-    static let doNotLetNeedleJump = Notification.init(name: .doNotLetNeedleJump)
+    static let doNotLetNeedleJump = Notification(name: .doNotLetNeedleJump)
+    static let flipTextSignal = Notification(name: .flipTextSignal)
 }
 
 extension UserDefaults {
