@@ -9,11 +9,13 @@ import SwiftUI
 import MyPackage
 
 struct TheFlipText: View {
+    private let  viewModel = ViewModel(delay: .now() + 3, timerRepeatFrequency: 5, repeatCount: 10)
+    
+    @State private var viewToShowIndex = 0
+    
     let input:Input //lines to display
     let flipCount:Int
     let textStyle:TextStyle
-    private let  viewModel = ViewModel(delay: .now() + 3, timerRepeatFrequency: 5, repeatCount: 10)
-    @State private var viewToShowIndex = 0
     
     var body: some View {
         let center = NotificationCenter.Publisher(center: .default, name: .flipTextSignal)
@@ -75,7 +77,6 @@ extension TheFlipText {
             bTimer.eventHandler = {
                 DispatchQueue.main.async {
                     NotificationCenter.default.post(.flipTextSignal)
-                    print("flipTextSignal")
                 }
             }
             bTimer.perform(.start)
