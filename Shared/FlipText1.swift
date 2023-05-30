@@ -55,7 +55,7 @@ extension FlipText1 {
         let lines:[LocalizedStringKey]
         
         static let noInput = Input(lines: ["**Dismiss** \(Image.tap) Tap"])
-        static let save = Input(lines: ["**Save** \(Image.tap) Tap", "**Clear** \(Image.swipeLeft) Swipe"])
+        static let save = Input(lines: ["**Create** \(Image.tap) Tap", "**Clear** \(Image.swipeLeft) Swipe"])
         static let dismiss = Input(lines: ["**Dismiss** \(Image.tap) Tap", "**Clear** \(Image.swipeLeft) Swipe"])
     }
 }
