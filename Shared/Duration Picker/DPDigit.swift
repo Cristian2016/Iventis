@@ -16,14 +16,19 @@ extension DurationPickerView {
         @State private var disabled = false
         @State private var hidden = false
         
-        let title:String
+        let digit:String
         let tricolor:Color.Tricolor
+        
+        init(_ digit: String, _ tricolor: Color.Tricolor) {
+            self.digit = digit
+            self.tricolor = tricolor
+        }
         
         var body: some View {
             shape
                 .frame(minHeight: 52)
                 .overlay {
-                    Text(title == "*" ? "00" : title)
+                    Text(digit == "*" ? "00" : digit)
                         .font(.system(size: 50, design: .rounded))
                         .minimumScaleFactor(0.1)
                         .foregroundColor(.white)
@@ -34,20 +39,20 @@ extension DurationPickerView {
                 .opacity(isTapped || hidden ? 0 : 1.0)
                 .disabled(disabled ? true : false)
                 .onReceive(manager.$notAllowedCharacters) {
-                    if $0 == .allDigits && title != "✕" {
+                    if $0 == .allDigits && digit != "✕" {
                         hidden = true
                         return
                     } else {
                         hidden = false
                     }
-                    disabled = $0.contains(title.unicodeScalars.first!) ? true : false
+                    disabled = $0.contains(digit.unicodeScalars.first!) ? true : false
                 }
         }
         
         // MARK: - Lego
         @ViewBuilder
         private var shape:some View {
-            switch title {
+            switch digit {
                 case "✕":
                     vRoundedRectangle(corners: .bottomRight, radius: 32)
                         .fill(disabled ? Color.Bubble.clearButtonRed.hr : Color.Bubble.clearButtonRed.sec)
@@ -67,15 +72,15 @@ extension DurationPickerView {
             withAnimation(.easeIn(duration: 0.05)) { isTapped = true }
             delayExecution(.now() + 0.05) { isTapped = false }
             
-            switch title {
+            switch digit {
                 case "✕" : manager.removelastDigit()
                 case "*" : manager.addDoubleZero()
-                default : manager.addToDigits(Int(title)!)
+                default : manager.addToDigits(Int(digit)!)
             }
         }
         
         private func clearDisplay() {
-            if title == "✕" {
+            if digit == "✕" {
                 UserFeedback.singleHaptic(.heavy)
                 manager.removeAllDigits()
             }

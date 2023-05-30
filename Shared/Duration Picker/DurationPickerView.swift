@@ -23,7 +23,7 @@ struct DurationPickerView: View {
     @State private var bubble:Bubble?
     @State private var reason:Secretary.DurationPickerReason = .none
     
-    private let digits = [["7", "8", "9"], ["4", "5", "6"], ["1", "2", "3"], ["*", "0", "✕"]]
+    private let twoDDigits = [["7", "8", "9"], ["4", "5", "6"], ["1", "2", "3"], ["*", "0", "✕"]]
     
     let gridSpacing = CGFloat(1)
     
@@ -78,12 +78,8 @@ struct DurationPickerView: View {
     
     private var digitsGrid:some View {
         Grid(horizontalSpacing: gridSpacing, verticalSpacing: gridSpacing) {
-            ForEach(digits, id: \.self) { subarray in
-                GridRow {
-                    ForEach(subarray, id: \.self) { title in
-                        Digit(title: title, tricolor: self.tricolor!)
-                    }
-                }
+            ForEach(twoDDigits, id: \.self) { digits in
+                GridRow { ForEach(digits, id: \.self) { Digit($0, tricolor!) }}
             }
         }
         .background()
