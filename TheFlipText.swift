@@ -26,8 +26,8 @@ struct TheFlipText: View {
                 if currentIndex == viewToShowIndex {
                     Text(line)
                         .font(.system(size: .minFontSize))
-                        .transition(.scale.combined(with: .opacity))
                         .foregroundColor(.secondary)
+                        .transition(.scale.combined(with: .opacity))
                 }
             }
         }
@@ -38,6 +38,14 @@ struct TheFlipText: View {
         self.input = input
         self.flipCount = flipCount
         self.textStyle = textStyle
+    }
+    
+    private func assignTextStyle() -> any ViewModifier {
+        switch textStyle {
+            case .small: return SmallStyle()
+            case .medium: return MediumStyle()
+            case .big: return SmallStyle()
+        }
     }
     
     private func handleSignal() {
@@ -81,6 +89,22 @@ extension TheFlipText {
         }
         
         private let bTimer:bTimer
+    }
+    
+    struct SmallStyle:ViewModifier {
+        func body(content: Content) -> some View {
+            content
+                .font(.system(size: .minFontSize))
+                .foregroundColor(.secondary)
+        }
+    }
+    
+    struct MediumStyle:ViewModifier {
+        func body(content: Content) -> some View {
+            content
+                .font(.system(size: 30))
+                .foregroundColor(.secondary)
+        }
     }
 }
 

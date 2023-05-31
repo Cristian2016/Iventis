@@ -84,8 +84,10 @@ class bTimer {
         switch action {
             case .start:
                 if state == .suspended { resume() } else { return }
-            case .pause: suspend()
-            case .kill: killTimer()
+            case .pause:
+                suspend()
+            case .kill:
+                killTimer()
         }
     }
 }

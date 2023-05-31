@@ -19,7 +19,7 @@ struct PlusButton: View {
     
     private var button: some View {
         Button { secretary.togglePaletteView() }
-    label: { Label("Plus", systemImage: "plus") }
+    label: { Label("Create Bubble", systemImage: "plus") }
             .font(metrics.font)
             .tint(metrics.symbolColor)
     }
