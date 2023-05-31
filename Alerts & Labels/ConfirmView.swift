@@ -93,6 +93,6 @@ extension ConfirmView {
 
 struct ConfirmationView1_Previews: PreviewProvider {
     static var previews: some View {
-        ConfirmView(content: .appCaffeinated)
+        ConfirmView(content: .eventCreated)
     }
 }

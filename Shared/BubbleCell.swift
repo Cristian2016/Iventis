@@ -31,8 +31,6 @@ struct BubbleCell: View {
         }
         .overlay { if bubble.hasCalendar && noNote { calendarSymbol }}
         .overlay { stickyNote }
-        .overlay { CalendarEventCreatedConfirmation(rank: bubble.rank) } //1
-        .overlay { CalendarEventRemovedConfirmation(rank: bubble.rank) } //1
         .listRowSeparator(.hidden)
         .swipeActions(edge: .leading, allowsFullSwipe: true) {
             toggleFavoriteButton
@@ -52,12 +50,6 @@ struct BubbleCell: View {
             Label("Control", systemImage: "slider.vertical.3")
         }
         .tint(.red)
-    }
-    
-    private var calEventRemovedConfirmation:some View {
-        Push(.leading) {
-            ConfirmView(content: .eventRemoved)
-        }
     }
     
     //Leading Swipe actions

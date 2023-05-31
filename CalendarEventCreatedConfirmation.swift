@@ -9,16 +9,13 @@ import SwiftUI
 import MyPackage
 
 struct CalendarEventCreatedConfirmation: View {
-    let rank:Int64
     private let secretary = Secretary.shared
     @State private var confirm_CalEventCreated:Int64?
     
     var body: some View {
         ZStack {
-            if confirm_CalEventCreated == rank {
-                Push(.leading) {
-                    ConfirmView(content: .eventCreated)
-                }
+            if confirm_CalEventCreated != nil {
+                ConfirmView(content: .eventCreated)
             }
         }
         .onReceive(secretary.$confirm_CalEventCreated) {
@@ -28,16 +25,13 @@ struct CalendarEventCreatedConfirmation: View {
 }
 
 struct CalendarEventRemovedConfirmation: View {
-    let rank:Int64
     private let secretary = Secretary.shared
     @State private var confirm_CalEventRemoved:Int64?
     
     var body: some View {
         ZStack {
-            if confirm_CalEventRemoved == rank {
-                Push(.leading) {
-                    ConfirmView(content: .eventRemoved)
-                }
+            if confirm_CalEventRemoved != nil {
+                ConfirmView(content: .eventRemoved)
             }
         }
         .onReceive(secretary.$confirm_CalEventRemoved) {
