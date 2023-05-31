@@ -25,6 +25,7 @@ struct ConfirmView: View {
         VStack {
             Image(systemName: systemImage)
                 .font(metrics.symbolFont)
+                .foregroundColor(fillColor)
             VStack {
                 Text(content.title)
                 Text(name)
@@ -65,7 +66,7 @@ struct ConfirmView: View {
         switch content.kind {
             case .removed, .off: return .red
             case .created, .on: return .vibrantGreen
-            case .caffeinated, .sleepy: return .white
+            case .caffeinated, .sleepy: return .label
         }
     }
 }
