@@ -35,12 +35,7 @@ struct ConfirmView: View {
         .foregroundColor(.secondary)
         .padding()
         .padding([.top, .bottom])
-        .background(
-            ZStack {
-                RoundedRectangle(cornerRadius: metrics.cornerRadius)
-                    .fill(.thickMaterial)
-            }
-        )
+        .background(.regularMaterial, in: RoundedRectangle(cornerRadius: metrics.cornerRadius))
         .allowsHitTesting(false)
     }
     
