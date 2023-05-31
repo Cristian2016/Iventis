@@ -10,6 +10,7 @@ import MyPackage
 
 extension DurationPickerView {
     struct Display: View {
+        private let  viewModel = TheFlipText.ViewModel(delay: .now() + 3, timerRepeatFrequency: 5, repeatCount: 10)
         let reason:Secretary.DurationPickerReason
         let dismiss: () -> ()
         

@@ -9,8 +9,6 @@ import SwiftUI
 import MyPackage
 
 struct TheFlipText: View {
-    private let  viewModel = ViewModel(delay: .now() + 3, timerRepeatFrequency: 5, repeatCount: 10)
-    
     @State private var viewToShowIndex = 0
     
     let input:Input //lines to display
@@ -63,7 +61,7 @@ extension TheFlipText {
         case big
     }
     
-    class ViewModel {
+    class ViewModel:ObservableObject {
         let delay:DispatchTime
         let timerRepeatFrequency:Double
         let repeatCount:Int
