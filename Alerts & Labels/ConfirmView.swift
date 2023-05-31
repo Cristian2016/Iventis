@@ -35,7 +35,11 @@ struct ConfirmView: View {
         .foregroundColor(.secondaryDark)
         .padding()
         .padding([.top, .bottom])
-        .background(.regularMaterial, in: RoundedRectangle(cornerRadius: metrics.cornerRadius))
+        .background {
+            RoundedRectangle(cornerRadius: metrics.cornerRadius)
+                .fill(.regularMaterial)
+                .standardShadow()
+        }
         .allowsHitTesting(false)
     }
     
