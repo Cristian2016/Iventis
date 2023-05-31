@@ -52,7 +52,8 @@ struct FusedLabel: View {
             case large
         }
         
-        static let autoLockOff = Content(title: "Caffeinated")
+//        static let alwaysON = Content(title: "Always-ON", symbol: "sun.max")
+        static let alwaysON = Content(title: "Always-ON", symbol: "sun.max", color: .label)
         static let detailON = Content(title: "Detail is ON")
         static let scrollToTop = Content(title: "Scroll to Top")
     }
@@ -60,6 +61,6 @@ struct FusedLabel: View {
 
 struct FusedLabel_Previews: PreviewProvider {
     static var previews: some View {
-        FusedLabel(content: .autoLockOff)
+        FusedLabel(content: .alwaysON)
     }
 }

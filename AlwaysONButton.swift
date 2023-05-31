@@ -2,7 +2,7 @@ import SwiftUI
 import MyPackage
 
 //button in toolbar
-struct CaffeinatedButton: View {
+struct AlwaysONButton: View {
     let metrics = Metrics()
     
     private let secretary = Secretary.shared
@@ -18,22 +18,13 @@ struct CaffeinatedButton: View {
     @ViewBuilder
     private var label:some View {
         if isDisplayAlwaysON {
-            HStack {
-                if addNoteButton_bRank == nil { FusedLabel(content: .autoLockOff) }
-                exitSymbol
-            }
+            if addNoteButton_bRank == nil { FusedLabel(content: .alwaysON) }
         }
         else { enterSymbol }
     }
     
-    private var exitSymbol:some View {
-        Image(systemName: "cup.and.saucer.fill")
-            .foregroundColor(metrics.symbolColor)
-            .font(metrics.font)
-    }
-    
     private var enterSymbol:some View {
-        Image(systemName: "cup.and.saucer")
+        Label("Display Sleep OFF", systemImage: "sun.max")
             .foregroundColor(metrics.symbolColor)
             .font(metrics.font)
     }
@@ -61,6 +52,6 @@ struct CaffeinatedButton: View {
 
 struct DisplayAlwaysOnSymbol_Previews: PreviewProvider {
     static var previews: some View {
-        CaffeinatedButton()
+        AlwaysONButton()
     }
 }
