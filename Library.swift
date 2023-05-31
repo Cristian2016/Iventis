@@ -106,6 +106,7 @@ public extension Color {
     static let topDetailViewBackground1 = Color("topDetailViewBackground1")
     static let infoButtonColor = Color("infoButtonColor")
     static let ultraLightGray1 = Color("ultraLightGray1")
+    static let secondaryDark = Color("secondaryDark")
 }
 
 public extension UIColor {

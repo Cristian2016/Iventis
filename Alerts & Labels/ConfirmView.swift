@@ -32,7 +32,7 @@ struct ConfirmView: View {
                     .font(metrics.contentFont.weight(.medium))
             }
         }
-        .foregroundColor(.secondary)
+        .foregroundColor(.secondaryDark)
         .padding()
         .padding([.top, .bottom])
         .background(.regularMaterial, in: RoundedRectangle(cornerRadius: metrics.cornerRadius))
