@@ -24,7 +24,7 @@ struct AlwaysONButton: View {
     }
     
     private var enterSymbol:some View {
-        Label("Display Sleep OFF", systemImage: "sun.max")
+        Label("Display Sleep is OFF", systemImage: "sun.max")
             .foregroundColor(metrics.symbolColor)
             .font(metrics.font)
     }
