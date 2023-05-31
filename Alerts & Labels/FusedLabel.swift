@@ -52,7 +52,7 @@ struct FusedLabel: View {
             case large
         }
         
-        static let alwaysON = Content(title: "Always-ON", symbol: "sun.max.fill", size: .small, color: .label)
+        static let alwaysON = Content(title: "Always-ON", symbol: "sun.max.fill", color: .label)
         static let detailON = Content(title: "Detail is ON")
         static let scrollToTop = Content(title: "Scroll to Top")
     }
