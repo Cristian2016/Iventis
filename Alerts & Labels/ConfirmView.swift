@@ -25,7 +25,6 @@ struct ConfirmView: View {
         HStack {
             Image(systemName: systemImage)
                 .font(metrics.symbolFont)
-                .foregroundColor(fillColor)
             VStack(alignment: .leading) {
                 Text(content.title)
                     .font(metrics.contentFont)
@@ -33,14 +32,12 @@ struct ConfirmView: View {
                     .font(metrics.contentFont.weight(.medium))
             }
         }
-        .foregroundColor(metrics.contentColor)
         .padding()
         .padding([.top, .bottom])
         .background(
             ZStack {
                 RoundedRectangle(cornerRadius: metrics.cornerRadius)
-                    .fill(metrics.backgroundColor)
-                    .standardShadow()
+                    .fill(.thickMaterial)
             }
         )
         .allowsHitTesting(false)
