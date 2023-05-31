@@ -34,7 +34,7 @@ struct PaletteView: View {
                 ZStack {
                     colors
                     if showPaletteInfo {
-                        let title = "Create Bubble"
+                        let title = "Create New Bubble"
                         let subtitle:LocalizedStringKey = "\(Image.stopwatch) stopwatch or \(Image.timer) timer"
                         
                         //info has content and two buttons (two actions)
