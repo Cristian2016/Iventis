@@ -44,7 +44,7 @@ struct ConfirmView: View {
         switch content.kind {
             case .removed, .off: return "xmark"
             case .created, .on: return "checkmark"
-            case .caffeinated: return "sun.max"
+            case .caffeinated: return "sun.max.fill"
             case .sleepy: return "moon.zzz.fill"
         }
     }
