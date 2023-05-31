@@ -51,7 +51,7 @@ struct ConfirmView: View {
         switch content.kind {
             case .removed, .off: return "xmark"
             case .created, .on: return "checkmark"
-            case .caffeinated: return "cup.and.saucer.fill"
+            case .caffeinated: return "sun.max"
             case .sleepy: return "moon.zzz.fill"
         }
     }
@@ -91,8 +91,8 @@ extension ConfirmView {
         
         static let eventCreated = Content(title: "Calendar Event", kind: .created)
         static let eventRemoved = Content(title: "Calendar Event", kind: .removed)
-        static let appCaffeinated = Content(title: "App Caffeinated", kind: .caffeinated)
-        static let appCanSleep = Content(title: "App Can Sleep", kind: .sleepy)
+        static let appCaffeinated = Content(title: "Screen Always-ON", kind: .caffeinated)
+        static let appCanSleep = Content(title: "Screen Can Sleep", kind: .sleepy)
         static let startDelayCreated = Content(title: "Start Delay", kind: .created)
         static let startDelayRemoved = Content(title: "Start Delay", kind: .removed)
     }
