@@ -12,8 +12,8 @@ struct ConfirmView: View {
     struct Metrics {
         let cornerRadius = CGFloat(16)
         let backgroundColor = Color.deleteActionViewBackground
-        let symbolFont = Font.system(size: 45).weight(.medium)
-        let contentFont = Font.system(size: 24)
+        let symbolFont = Font.system(size: 45)
+        let contentFont = Font.system(size: 30)
         let contentColor = Color.white
     } //1
     
@@ -22,7 +22,7 @@ struct ConfirmView: View {
     var dismissAction:(() -> Void)? = nil
     
     var body: some View {
-        HStack {
+        VStack {
             Image(systemName: systemImage)
                 .font(metrics.symbolFont)
             VStack(alignment: .leading) {
@@ -32,6 +32,7 @@ struct ConfirmView: View {
                     .font(metrics.contentFont.weight(.medium))
             }
         }
+        .foregroundColor(.secondary)
         .padding()
         .padding([.top, .bottom])
         .background(
