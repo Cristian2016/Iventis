@@ -51,6 +51,7 @@ struct ConfirmView: View {
             case .sleepy: return "moon.zzz.fill"
         }
     }
+    
     private var name:String {
         switch content.kind {
             case .removed: return "Removed"
