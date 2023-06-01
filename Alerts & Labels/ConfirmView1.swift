@@ -44,13 +44,12 @@ struct ConfirmView1: View {
             Text(content.title)
                 .font(metrics.contentFont)
             Divider()
-                .frame(width: 200)ok
+                .frame(width: 200)
             Label(name, systemImage: systemImage)
                 .foregroundColor(fillColor)
                 .font(.system(size: 26))
         }
         .foregroundColor(.secondaryDark)
-        .padding()
         .padding()
         .background {
             RoundedRectangle(cornerRadius: metrics.cornerRadius)
