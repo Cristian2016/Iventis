@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		1F0373BE28DEDB00005CE8D3 /* AlwaysOnDisplayAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F0373BD28DEDB00005CE8D3 /* AlwaysOnDisplayAlertView.swift */; };
-		1F0373C028DEDD97005CE8D3 /* ConfirmationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F0373BF28DEDD97005CE8D3 /* ConfirmationView.swift */; };
 		1F0373C228DEE6F7005CE8D3 /* AlwaysOnDisplayConfirmationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F0373C128DEE6F7005CE8D3 /* AlwaysOnDisplayConfirmationView.swift */; };
 		1F0373C628DF516F005CE8D3 /* OnLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F0373C528DF516F005CE8D3 /* OnLabel.swift */; };
 		1F04768D29BB073000641CDC /* SecondsLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F04768C29BB073000641CDC /* SecondsLabel.swift */; };
@@ -152,6 +151,7 @@
 		1FAD157C298AAFDB001139C6 /* BubbleDeleteButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FAD157B298AAFDB001139C6 /* BubbleDeleteButton.swift */; };
 		1FAD9B4229961FC000F49670 /* ThreeCircles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FAD9B4129961FC000F49670 /* ThreeCircles.swift */; };
 		1FAE715D298D1CA200E19959 /* DualTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FAE715C298D1CA200E19959 /* DualTextView.swift */; };
+		1FAECA732A28A9CF00BA3C91 /* ConfirmView1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FAECA722A28A9CF00BA3C91 /* ConfirmView1.swift */; };
 		1FAF39D9298575E9002D833C /* Library.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA377E72972FE75005ACD41 /* Library.swift */; };
 		1FB2A84929F518D800E4861A /* InfoUnit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB2A84829F518D800E4861A /* InfoUnit.swift */; };
 		1FB2EA772997BD2F00752595 /* ThreeLabels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB2EA762997BD2F00752595 /* ThreeLabels.swift */; };
@@ -295,7 +295,6 @@
 
 /* Begin PBXFileReference section */
 		1F0373BD28DEDB00005CE8D3 /* AlwaysOnDisplayAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlwaysOnDisplayAlertView.swift; sourceTree = "<group>"; };
-		1F0373BF28DEDD97005CE8D3 /* ConfirmationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmationView.swift; sourceTree = SOURCE_ROOT; };
 		1F0373C128DEE6F7005CE8D3 /* AlwaysOnDisplayConfirmationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlwaysOnDisplayConfirmationView.swift; sourceTree = "<group>"; };
 		1F0373C528DF516F005CE8D3 /* OnLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnLabel.swift; sourceTree = "<group>"; };
 		1F04768C29BB073000641CDC /* SecondsLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondsLabel.swift; sourceTree = "<group>"; };
@@ -412,6 +411,7 @@
 		1FAD157B298AAFDB001139C6 /* BubbleDeleteButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BubbleDeleteButton.swift; sourceTree = "<group>"; };
 		1FAD9B4129961FC000F49670 /* ThreeCircles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreeCircles.swift; sourceTree = SOURCE_ROOT; };
 		1FAE715C298D1CA200E19959 /* DualTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DualTextView.swift; sourceTree = "<group>"; };
+		1FAECA722A28A9CF00BA3C91 /* ConfirmView1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ConfirmView1.swift; path = "Alerts & Labels/ConfirmView1.swift"; sourceTree = SOURCE_ROOT; };
 		1FB2A84829F518D800E4861A /* InfoUnit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoUnit.swift; sourceTree = SOURCE_ROOT; };
 		1FB2EA762997BD2F00752595 /* ThreeLabels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreeLabels.swift; sourceTree = "<group>"; };
 		1FB3178E286ACB48006BBE82 /* Note_InfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Note_InfoView.swift; sourceTree = "<group>"; };
@@ -557,7 +557,6 @@
 				1F38C5A22986615F00057B8C /* FusedLabel.swift */,
 				1FE722A028E58200005ADA8E /* ColorConfirmationView.swift */,
 				1F0373C528DF516F005CE8D3 /* OnLabel.swift */,
-				1F0373BF28DEDD97005CE8D3 /* ConfirmationView.swift */,
 				1FC0D9C029828D23004779E0 /* ConfirmView.swift */,
 				1F0373C128DEE6F7005CE8D3 /* AlwaysOnDisplayConfirmationView.swift */,
 				1F76B51028DDE38800543660 /* AlertHintView.swift */,
@@ -635,6 +634,7 @@
 		1F5F4A4728093FAD00AF3442 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				1FAECA722A28A9CF00BA3C91 /* ConfirmView1.swift */,
 				1F46F8FE2A2644DF00AA7F9C /* bTimer.swift */,
 				1F46F8FA2A263E3D00AA7F9C /* TheFlipText.swift */,
 				1F7E8D1B2A20FBF200B35916 /* FlipText.swift */,
@@ -1095,7 +1095,6 @@
 				1F74878D286ED1B10092674F /* StartInfoView.swift in Sources */,
 				1F98D78A286AF8A300C0A973 /* DeleteRow_InfoView.swift in Sources */,
 				1FA03CAB29893E6200AF7395 /* SessionDeleteButton.swift in Sources */,
-				1F0373C028DEDD97005CE8D3 /* ConfirmationView.swift in Sources */,
 				1FE163AE280EE6F40050C6F5 /* LeftStrip.swift in Sources */,
 				1F641FFE281FF70100413E31 /* BottomDetailView.swift in Sources */,
 				1FF5AC3A29A9EDC4000DD0E2 /* NeedlePositionKey.swift in Sources */,
@@ -1148,6 +1147,7 @@
 				1FFC8BB628142F040059EF2E /* Pair.swift in Sources */,
 				1FA25B002986F51E007759EB /* ViewHierarchy.swift in Sources */,
 				1F477CA928EAB21900B4F965 /* AddStickyNoteQuickButton.swift in Sources */,
+				1FAECA732A28A9CF00BA3C91 /* ConfirmView1.swift in Sources */,
 				1F5987A5286B5F8900CDB54C /* PairSavedNote Properties.swift in Sources */,
 				1FF8255129C750F40003E4A0 /* DPDisplay.swift in Sources */,
 				1FBE775629A248F5005968EC /* GradientView.swift in Sources */,
