@@ -16,10 +16,13 @@ struct CalendarEventCreatedConfirmation: View {
         ZStack {
             if confirm_CalEventCreated != nil {
                 ConfirmView1(content: .eventCreated)
+                    .transition(.asymmetric(insertion: .scale(scale: 0.4), removal: .opacity))
             }
         }
-        .onReceive(secretary.$confirm_CalEventCreated) {
-            confirm_CalEventCreated = $0
+        .onReceive(secretary.$confirm_CalEventCreated) { value in
+            withAnimation(.spring(response: 0.6, dampingFraction: 0.4)) {
+                confirm_CalEventCreated = value
+            }
         }
     }
 }
@@ -32,10 +35,13 @@ struct CalendarEventRemovedConfirmation: View {
         ZStack {
             if confirm_CalEventRemoved != nil {
                 ConfirmView1(content: .eventRemoved)
+                    .transition(.asymmetric(insertion: .scale(scale: 0.4), removal: .opacity))
             }
         }
-        .onReceive(secretary.$confirm_CalEventRemoved) {
-            confirm_CalEventRemoved = $0
+        .onReceive(secretary.$confirm_CalEventRemoved) { value in
+            withAnimation(.spring(response: 0.6, dampingFraction: 0.4)) {
+                confirm_CalEventRemoved = value
+            }
         }
     }
 }
