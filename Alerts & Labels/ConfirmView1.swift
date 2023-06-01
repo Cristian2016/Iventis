@@ -8,14 +8,6 @@
 import SwiftUI
 
 struct ConfirmView1: View {
-    struct Metrics {
-        let cornerRadius = CGFloat(16)
-        let backgroundColor = Color.deleteActionViewBackground
-        let symbolFont = Font.system(size: 45)
-        let contentFont = Font.system(size: 30)
-        let contentColor = Color.white
-    } //1
-    
     private let metrics = Metrics() //1
     let content:Content
     var dismissAction:(() -> Void)? = nil
@@ -71,6 +63,14 @@ struct ConfirmView1: View {
 }
 
 extension ConfirmView1 {
+    struct Metrics {
+        let cornerRadius = CGFloat(16)
+        let backgroundColor = Color.deleteActionViewBackground
+        let symbolFont = Font.system(size: 45)
+        let contentFont = Font.system(size: 30)
+        let contentColor = Color.white
+    } //1
+    
     struct Content {
         let title:LocalizedStringKey
         let kind:Kind
