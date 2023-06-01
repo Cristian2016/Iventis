@@ -41,9 +41,7 @@ struct CloseSessionAlert: View {
     
     var body: some View {
         ZStack {
-            if show {
-                ConfirmView(content: .eventRemoved)
-            }
+            if show { ConfirmView(content: .eventRemoved) }
         }
         .onReceive(secretary.$showAlert_closeSession) { show = $0 }
     }
