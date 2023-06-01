@@ -7,25 +7,6 @@
 
 import SwiftUI
 
-extension ConfirmView1 {
-    struct Content {
-        let title:LocalizedStringKey
-        let kind:Kind
-        
-        enum Kind {
-            case created
-            case removed
-            case on
-            case off
-            case caffeinated
-            case sleepy
-        }
-        
-        static let eventCreated = Content(title: "Calendar Event", kind: .created)
-        static let eventRemoved = Content(title: "Calendar Event", kind: .removed)
-    }
-}
-
 struct ConfirmView1: View {
     struct Metrics {
         let cornerRadius = CGFloat(16)
@@ -57,6 +38,7 @@ struct ConfirmView1: View {
                 .standardShadow()
         }
         .allowsHitTesting(false)
+        .environment(\.colorScheme, .dark)
     }
     
     // MARK: -
@@ -86,6 +68,25 @@ struct ConfirmView1: View {
             case .created, .on: return .vibrantGreen
             case .caffeinated, .sleepy: return .label
         }
+    }
+}
+
+extension ConfirmView1 {
+    struct Content {
+        let title:LocalizedStringKey
+        let kind:Kind
+        
+        enum Kind {
+            case created
+            case removed
+            case on
+            case off
+            case caffeinated
+            case sleepy
+        }
+        
+        static let eventCreated = Content(title: "Calendar Event", kind: .created)
+        static let eventRemoved = Content(title: "Calendar Event", kind: .removed)
     }
 }
 
