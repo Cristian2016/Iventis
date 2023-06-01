@@ -43,12 +43,14 @@ struct ConfirmView1: View {
         VStack {
             Text(content.title)
                 .font(metrics.contentFont)
-            
+            Divider()
+                .frame(width: 200)ok
             Label(name, systemImage: systemImage)
                 .foregroundColor(fillColor)
                 .font(.system(size: 26))
         }
         .foregroundColor(.secondaryDark)
+        .padding()
         .padding()
         .background {
             RoundedRectangle(cornerRadius: metrics.cornerRadius)
