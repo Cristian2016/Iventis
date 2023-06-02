@@ -23,6 +23,7 @@ struct ConfirmView1: View {
         }
         .foregroundColor(.secondaryDark)
         .padding()
+        .padding(8)
         .background {
             RoundedRectangle(cornerRadius: metrics.cornerRadius)
                 .fill(.regularMaterial)
