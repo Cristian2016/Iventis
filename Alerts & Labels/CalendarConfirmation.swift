@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ConfirmView1: View {
+struct CalendarConfirmation: View {
     private let metrics = Metrics() //1
     let content:Content
     var dismissAction:(() -> Void)? = nil
@@ -21,7 +21,6 @@ struct ConfirmView1: View {
                 .foregroundColor(fillColor)
                 .font(.system(size: 26))
         }
-        .foregroundColor(.secondaryDark)
         .padding()
         .padding(8)
         .allowsHitTesting(false)
@@ -59,7 +58,7 @@ struct ConfirmView1: View {
     }
 }
 
-extension ConfirmView1 {
+extension CalendarConfirmation {
     struct Metrics {
         let cornerRadius = CGFloat(16)
         let backgroundColor = Color.deleteActionViewBackground
@@ -86,8 +85,8 @@ extension ConfirmView1 {
     }
 }
 
-struct ConfirmView1_Previews: PreviewProvider {
+struct CalendarConfirmation_Previews: PreviewProvider {
     static var previews: some View {
-        ConfirmView1(content: .eventRemoved)
+        CalendarConfirmation(content: .eventRemoved)
     }
 }

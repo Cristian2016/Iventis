@@ -151,7 +151,7 @@
 		1FAD157C298AAFDB001139C6 /* BubbleDeleteButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FAD157B298AAFDB001139C6 /* BubbleDeleteButton.swift */; };
 		1FAD9B4229961FC000F49670 /* ThreeCircles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FAD9B4129961FC000F49670 /* ThreeCircles.swift */; };
 		1FAE715D298D1CA200E19959 /* DualTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FAE715C298D1CA200E19959 /* DualTextView.swift */; };
-		1FAECA732A28A9CF00BA3C91 /* ConfirmView1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FAECA722A28A9CF00BA3C91 /* ConfirmView1.swift */; };
+		1FAECA732A28A9CF00BA3C91 /* CalendarConfirmation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FAECA722A28A9CF00BA3C91 /* CalendarConfirmation.swift */; };
 		1FAF39D9298575E9002D833C /* Library.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA377E72972FE75005ACD41 /* Library.swift */; };
 		1FB2A84929F518D800E4861A /* InfoUnit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB2A84829F518D800E4861A /* InfoUnit.swift */; };
 		1FB2EA772997BD2F00752595 /* ThreeLabels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB2EA762997BD2F00752595 /* ThreeLabels.swift */; };
@@ -411,7 +411,7 @@
 		1FAD157B298AAFDB001139C6 /* BubbleDeleteButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BubbleDeleteButton.swift; sourceTree = "<group>"; };
 		1FAD9B4129961FC000F49670 /* ThreeCircles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreeCircles.swift; sourceTree = SOURCE_ROOT; };
 		1FAE715C298D1CA200E19959 /* DualTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DualTextView.swift; sourceTree = "<group>"; };
-		1FAECA722A28A9CF00BA3C91 /* ConfirmView1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ConfirmView1.swift; path = "Alerts & Labels/ConfirmView1.swift"; sourceTree = SOURCE_ROOT; };
+		1FAECA722A28A9CF00BA3C91 /* CalendarConfirmation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CalendarConfirmation.swift; path = "Alerts & Labels/CalendarConfirmation.swift"; sourceTree = SOURCE_ROOT; };
 		1FB2A84829F518D800E4861A /* InfoUnit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoUnit.swift; sourceTree = SOURCE_ROOT; };
 		1FB2EA762997BD2F00752595 /* ThreeLabels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreeLabels.swift; sourceTree = "<group>"; };
 		1FB3178E286ACB48006BBE82 /* Note_InfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Note_InfoView.swift; sourceTree = "<group>"; };
@@ -634,7 +634,7 @@
 		1F5F4A4728093FAD00AF3442 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
-				1FAECA722A28A9CF00BA3C91 /* ConfirmView1.swift */,
+				1FAECA722A28A9CF00BA3C91 /* CalendarConfirmation.swift */,
 				1F46F8FE2A2644DF00AA7F9C /* bTimer.swift */,
 				1F46F8FA2A263E3D00AA7F9C /* TheFlipText.swift */,
 				1F7E8D1B2A20FBF200B35916 /* FlipText.swift */,
@@ -1147,7 +1147,7 @@
 				1FFC8BB628142F040059EF2E /* Pair.swift in Sources */,
 				1FA25B002986F51E007759EB /* ViewHierarchy.swift in Sources */,
 				1F477CA928EAB21900B4F965 /* AddStickyNoteQuickButton.swift in Sources */,
-				1FAECA732A28A9CF00BA3C91 /* ConfirmView1.swift in Sources */,
+				1FAECA732A28A9CF00BA3C91 /* CalendarConfirmation.swift in Sources */,
 				1F5987A5286B5F8900CDB54C /* PairSavedNote Properties.swift in Sources */,
 				1FF8255129C750F40003E4A0 /* DPDisplay.swift in Sources */,
 				1FBE775629A248F5005968EC /* GradientView.swift in Sources */,

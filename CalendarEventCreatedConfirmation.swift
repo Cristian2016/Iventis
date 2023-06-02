@@ -15,7 +15,7 @@ struct CalendarEventCreatedConfirmation: View {
     var body: some View {
         ZStack {
             let show = confirm_CalEventCreated != nil
-            if show { ConfirmView1(content: .eventCreated) }
+            if show { CalendarConfirmation(content: .eventCreated) }
         }
         .onReceive(secretary.$confirm_CalEventCreated) { confirm_CalEventCreated = $0 }
     }
@@ -28,7 +28,7 @@ struct CalendarEventRemovedConfirmation: View {
     var body: some View {
         ZStack {
             let show = confirm_CalEventRemoved != nil
-            if show { ConfirmView1(content: .eventRemoved) }
+            if show { CalendarConfirmation(content: .eventRemoved) }
         }
         .onReceive(secretary.$confirm_CalEventRemoved) { confirm_CalEventRemoved = $0 }
     }
