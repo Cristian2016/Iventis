@@ -24,7 +24,7 @@ struct CalendarConfirmation: View {
         .padding()
         .padding(8)
         .allowsHitTesting(false)
-        .background(.regularMaterial, in: RoundedRectangle(cornerRadius: metrics.cornerRadius))
+        .background(.thinMaterial, in: RoundedRectangle(cornerRadius: metrics.cornerRadius))
         .environment(\.colorScheme, .dark)
     }
     
