@@ -32,11 +32,11 @@ struct ConfirmView: View {
             }
             .font(metrics.contentFont)
         }
-        .foregroundColor(.secondaryDark)
         .padding()
         .padding(8)
         .background(.thickMaterial, in: RoundedRectangle(cornerRadius: metrics.cornerRadius))
         .allowsHitTesting(false)
+        .environment(\.colorScheme, .dark)
     }
     
     // MARK: -
