@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct AlwaysOnDisplayConfirmationView: View {
+struct ScreenAlwaysOnConfirmation: View {
     private let secretary = Secretary.shared
     @State var confirm_AlwaysOnDisplay = false
     
@@ -25,6 +25,6 @@ struct AlwaysOnDisplayConfirmationView: View {
 
 struct AlwaysOnDisplayConfirmationView_Previews: PreviewProvider {
     static var previews: some View {
-        AlwaysOnDisplayConfirmationView()
+        ScreenAlwaysOnConfirmation()
     }
 }
