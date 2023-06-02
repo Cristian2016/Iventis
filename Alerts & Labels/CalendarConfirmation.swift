@@ -23,8 +23,8 @@ struct CalendarConfirmation: View {
         }
         .padding()
         .padding(8)
-        .allowsHitTesting(false)
         .background(.regularMaterial, in: RoundedRectangle(cornerRadius: metrics.cornerRadius))
+        .allowsHitTesting(false)
         .environment(\.colorScheme, .dark)
     }
     
