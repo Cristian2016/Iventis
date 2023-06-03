@@ -30,7 +30,6 @@ struct WarningLabel: View {
                     Image("calToggle")
                         .resizable()
                         .aspectRatio(contentMode: .fit)
-                        .frame(width: 300)
                 }
                 .padding()
                 .frame(width: 360)
