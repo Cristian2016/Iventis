@@ -33,6 +33,8 @@ class Secretary {
     // MARK: - Publishers
     @Published var scrollRank:Int64? //3
     
+    @Published var showCalendarAccessDeniedWarning = false
+    
     private var fiveSecTimer = PrecisionTimer() //2
     
     @Published var showBlueInfoButton = false {didSet{
