@@ -860,8 +860,10 @@ extension ViewModel {
         let objID = bubble.objectID
         
         bContext.perform {
-            let thisBubble = self.controller.grabObj(objID) as! Bubble
-            guard let startDelayBubble = thisBubble.startDelayBubble else { return }
+            guard
+                let thisBubble = self.controller.grabObj(objID) as? Bubble,
+                let startDelayBubble = thisBubble.startDelayBubble
+            else { return }
             
             bContext.delete(startDelayBubble) //sdb removed from database
             
