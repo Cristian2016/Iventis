@@ -860,18 +860,25 @@ extension ViewModel {
         let objID = bubble.objectID
         
         bContext.perform {
+            //grab background context Bubble object
+            //make sure its startDelay is set
+            //set bBubble.sdb to nil
+            //ask background context to delete the bubble
+            //back on mainQueue do visual updates
+            //save changes on bContext
+            
             guard
                 let thisBubble = self.controller.grabObj(objID) as? Bubble,
                 let startDelayBubble = thisBubble.startDelayBubble
             else { return }
             
+            thisBubble.startDelayBubble = nil //sdb removed from memory
             bContext.delete(startDelayBubble) //sdb removed from database
             
             DispatchQueue.main.async {
                 bubble.startDelayBubble?.coordinator.update(.user(.pause))
                 bubble.startDelayBubble?.coordinator = nil
             }
-            thisBubble.startDelayBubble = nil //sdb removed from memory
             self.controller.save(bContext)
         }
     }
