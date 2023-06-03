@@ -20,7 +20,7 @@ struct WarningLabel: View {
             Divider()
             Text("Settings App > Fused > Calendars")
                 .font(.system(size: 22))
-            Text("*Open Settings App on your device. Scroll down to 'Fused' and tap it. **Calendars Toggle must be ON***")
+            Text("*Open Settings App on your device. Scroll down to 'Fused' and tap it. **Make sure Calendars Toggle is ON***")
                 .font(.system(size: 17))
                 .foregroundColor(.secondary)
             Image("calToggle")
