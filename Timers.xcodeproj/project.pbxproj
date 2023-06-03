@@ -235,6 +235,7 @@
 		1FC364342A1BAD090099B3B6 /* EditActionTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FC364332A1BAD090099B3B6 /* EditActionTitle.swift */; };
 		1FC70BB129807BAB007CD1E6 /* LayoutViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FC70BB029807BAB007CD1E6 /* LayoutViewModel.swift */; };
 		1FCF0C662816F3F600AA1FAA /* EmptyListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FCF0C652816F3F600AA1FAA /* EmptyListView.swift */; };
+		1FD122992A2B94DE002D6E1F /* WarningLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD122982A2B94DE002D6E1F /* WarningLabel.swift */; };
 		1FD2A3DD29C10C6C00EB7B10 /* DeleteConfirmationLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD2A3DC29C10C6C00EB7B10 /* DeleteConfirmationLabel.swift */; };
 		1FD2DD972869AB4900831978 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1F5F4A4D28093FAF00AF3442 /* Assets.xcassets */; };
 		1FE163AE280EE6F40050C6F5 /* LeftStrip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FE163AD280EE6F40050C6F5 /* LeftStrip.swift */; };
@@ -455,6 +456,7 @@
 		1FC364332A1BAD090099B3B6 /* EditActionTitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditActionTitle.swift; sourceTree = SOURCE_ROOT; };
 		1FC70BB029807BAB007CD1E6 /* LayoutViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutViewModel.swift; sourceTree = "<group>"; };
 		1FCF0C652816F3F600AA1FAA /* EmptyListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyListView.swift; sourceTree = "<group>"; };
+		1FD122982A2B94DE002D6E1F /* WarningLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WarningLabel.swift; sourceTree = SOURCE_ROOT; };
 		1FD2A3DC29C10C6C00EB7B10 /* DeleteConfirmationLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteConfirmationLabel.swift; sourceTree = "<group>"; };
 		1FE163AD280EE6F40050C6F5 /* LeftStrip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftStrip.swift; sourceTree = "<group>"; };
 		1FE3B6F62983ECBF00B9C5D0 /* Explanations.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = Explanations.rtf; sourceTree = "<group>"; };
@@ -634,6 +636,7 @@
 		1F5F4A4728093FAD00AF3442 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				1FD122982A2B94DE002D6E1F /* WarningLabel.swift */,
 				1FAECA722A28A9CF00BA3C91 /* CalendarConfirmation.swift */,
 				1F46F8FE2A2644DF00AA7F9C /* bTimer.swift */,
 				1F46F8FA2A263E3D00AA7F9C /* TheFlipText.swift */,
@@ -1146,6 +1149,7 @@
 				1FFC8BAA28142F040059EF2E /* Session.swift in Sources */,
 				1FFC8BB628142F040059EF2E /* Pair.swift in Sources */,
 				1FA25B002986F51E007759EB /* ViewHierarchy.swift in Sources */,
+				1FD122992A2B94DE002D6E1F /* WarningLabel.swift in Sources */,
 				1F477CA928EAB21900B4F965 /* AddStickyNoteQuickButton.swift in Sources */,
 				1FAECA732A28A9CF00BA3C91 /* CalendarConfirmation.swift in Sources */,
 				1F5987A5286B5F8900CDB54C /* PairSavedNote Properties.swift in Sources */,

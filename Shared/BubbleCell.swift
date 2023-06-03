@@ -110,6 +110,7 @@ struct BubbleCell: View {
     
     // MARK: -
     var confirm_CalEventCreated:Bool { secretary.confirm_CalEventCreated == bubble.rank }
+    
     var confirm_CalEventRemoved:Bool { secretary.confirm_CalEventRemoved == bubble.rank }
     
     ///show bubbleCell.frame if it's the same rank and the frame is not set and detailView does not show. In the Detailview there is no need to compute deleteActionView.yOffset
@@ -121,9 +122,17 @@ struct BubbleCell: View {
 // MARK: - Little Helpers
 extension BubbleCell {
     // MARK: - Helpers
-    private var calendarActionName:String { bubble.hasCalendar ? "Cal OFF" : "Cal ON" }
+    private var calendarActionName:String {
+        guard CalendarManager.shared.accessToCalendarGranted else { return "Access Denied!"
+        }
+        return bubble.hasCalendar ? "Cal OFF" : "Cal ON"
+    }
     
-    private var calendarActionImageName:String { bubble.hasCalendar ? "calendar" : "calendar" }
+    private var calendarActionImageName:String {
+        guard CalendarManager.shared.accessToCalendarGranted else { return "calendar.badge.exclamationmark"
+        }
+        return bubble.hasCalendar ? "calendar" : "calendar"
+    }
     
     private var calendarActionColor:Color { bubble.hasCalendar ? Color.calendarOff : .calendar }
 }
