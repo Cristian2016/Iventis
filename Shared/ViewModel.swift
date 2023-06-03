@@ -854,10 +854,7 @@ extension ViewModel {
     
     // MARK: - StartDelayBubble
     func removeStartDelay(for bubble:Bubble?)  {
-        guard
-            let bubble = bubble,
-            bubble.startDelayBubble != nil
-        else { return }
+        guard let bubble = bubble else { return }
         
         let bContext = controller.bContext
         let objID = bubble.objectID
