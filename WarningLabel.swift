@@ -13,13 +13,14 @@ struct WarningLabel: View {
         VStack {
             Image(systemName: "calendar.badge.exclamationmark")
                 .symbolRenderingMode(.palette)
-                .foregroundStyle(.red, .black)
+                .foregroundStyle(.red, Color.label)
                 .font(.system(size: 40))
             Text("Calendar Access Denied")
                 .font(.system(size: 30))
+            Divider()
             Text("Settings App > Fused > Calendars")
                 .font(.system(size: 22))
-            Text("Open Settings App on your device. Scroll down to 'Fused' and tap it. Toggle must be ON")
+            Text("*Open Settings App on your device. Scroll down to 'Fused' and tap it. **Calendars Toggle must be ON***")
                 .font(.system(size: 17))
                 .foregroundColor(.secondary)
             Image("calToggle")
@@ -27,6 +28,9 @@ struct WarningLabel: View {
                 .aspectRatio(contentMode: .fit)
                 .frame(width: 300)
         }
+        .padding()
+        .frame(width: 370)
+        .background(.regularMaterial, in: RoundedRectangle(cornerRadius: 20))
     }
 }
 
