@@ -45,7 +45,8 @@ struct ViewHierarchy: View {
             BlueInfoButton()
 //            InfoViewHierarchy()
             CalendarEventCreatedConfirmation()
-            CalendarEventRemovedConfirmation()
+//            CalendarEventRemovedConfirmation()
+            WarningLabel()
         }
         .onAppear { createBubblesOnFirstAppLaunch() } //1
         .environment(\.managedObjectContext, viewContext)

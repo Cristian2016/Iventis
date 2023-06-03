@@ -591,7 +591,10 @@ extension ViewModel {
     
     func toggleCalendar(_ bubble:Bubble) {
         
-        guard CalendarManager.shared.accessToCalendarGranted else { return }
+        guard CalendarManager.shared.accessToCalendarGranted else {
+            secretary.showCalendarAccessDeniedWarning = true
+            return
+        }
         
         let objID = bubble.objectID
         let bContext = self.controller.bContext

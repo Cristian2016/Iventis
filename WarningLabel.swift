@@ -13,7 +13,7 @@ struct WarningLabel: View {
     
     var body: some View {
         ZStack {
-            if true {
+            if show {
                 VStack(spacing: 8) {
                     Image(systemName: "calendar.badge.exclamationmark")
                         .symbolRenderingMode(.palette)
