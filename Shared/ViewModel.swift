@@ -864,7 +864,9 @@ extension ViewModel {
         
         bContext.perform {
             let thisBubble = self.controller.grabObj(objID) as! Bubble
-            bContext.delete(thisBubble.startDelayBubble!) //sdb removed from database
+            guard let startDelayBubble = thisBubble.startDelayBubble else { return }
+            
+            bContext.delete(startDelayBubble) //sdb removed from database
             
             DispatchQueue.main.async {
                 bubble.startDelayBubble?.coordinator.update(.user(.pause))
