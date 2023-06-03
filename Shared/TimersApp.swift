@@ -25,6 +25,10 @@ struct TimersApp: App {
         WindowGroup {
             ViewHierarchy()
                 .task { createTimerHistory() }
+                .task {
+                    print("CalendarManager.shared.calAccessAuthorized \(CalendarManager.shared.accessToCalendarGranted)")
+                    CalendarManager.shared.accessToCalendarGranted
+                }
         }
     }
     

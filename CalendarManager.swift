@@ -16,15 +16,17 @@ extension CalendarManager {
 
 // MARK: - essential methods
 extension CalendarManager {
+    var accessToCalendarGranted:Bool {
+        let status = EKEventStore.authorizationStatus(for: .event)
+        return status == .authorized
+    }
+    
     // MARK: - Main
     ///if authorization granted, create default calendar to add events to it
     func requestCalendarAccess(_ completion: @escaping () -> Void) {
-        if !calendarAccessGranted { //1. request access
+        if !accessToCalendarGranted { //1. request access
             store.requestAccess(to: .event) { [weak self] userGrantedAccess, _ in
-                if userGrantedAccess {
-                    self?.calendarAccessGranted = true
-                    completion()
-                }
+                if userGrantedAccess { completion() }
             }
         } else { //2. access granted already
             completion()
@@ -102,6 +104,10 @@ extension CalendarManager {
     
     ///creates a new event when the user ends a session
     func createNewEvent(for session: Session?) {
+        guard accessToCalendarGranted else {
+            print("⚠️ access to calendar is not granted!!!")
+            return
+        }
         guard let session = session, session.isEnded, !session.isEventified else { return }
         
         let pairs = session.pairs_
@@ -176,21 +182,9 @@ class CalendarManager: NSObject {
     }
     
     // MARK: -
-    private var calendarAccessGranted: Bool {
-        get {
-            let key = UserDefaults.Key.calendarAccessGranted
-            return UserDefaults.standard.value(forKey: key) != nil
-        }
-        
-        set {
-            let key = UserDefaults.Key.calendarAccessGranted
-            UserDefaults.standard.set(newValue, forKey: key)
-        }
-    }
-    
     ///"Eventify" made up word :)). the bubble for which create events
     var bubbleToEventify:Bubble? {didSet{
-        if !calendarAccessGranted { //access not granted yet
+        if !accessToCalendarGranted { //access not granted yet
             requestCalendarAccess { [weak self] in //mThread closure
                 self?.createDefaultCalendarIfNeeded {
                     self?.createCalEventsForExistingSessions(of: self?.bubbleToEventify)
