@@ -33,7 +33,7 @@ struct WarningLabel: View {
                         .frame(width: 300)
                 }
                 .padding()
-                .frame(width: 370)
+                .frame(width: 360)
                 .background(.regularMaterial, in: RoundedRectangle(cornerRadius: 20))
             }
         }
