@@ -123,12 +123,12 @@ struct BubbleCell: View {
 extension BubbleCell {
     // MARK: - Helpers
     private var calendarActionName:String {
-        guard CalendarManager.shared.accessToCalendarGranted else { return "No Access" }
+        guard CalendarManager.shared.calendarAccessStatus != .revoked else { return "No Access" }
         return bubble.hasCalendar ? "Cal OFF" : "Cal ON"
     }
     
     private var calendarActionImageName:String {
-        guard CalendarManager.shared.accessToCalendarGranted else { return "calendar.badge.exclamationmark"
+        guard CalendarManager.shared.calendarAccessStatus != .revoked else { return "calendar.badge.exclamationmark"
         }
         return bubble.hasCalendar ? "calendar" : "calendar"
     }

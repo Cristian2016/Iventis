@@ -16,15 +16,26 @@ extension CalendarManager {
 
 // MARK: - essential methods
 extension CalendarManager {
-    var accessToCalendarGranted:Bool {
+    enum AccessStatus {
+        case notRequested
+        case granted
+        case revoked
+    }
+    
+    var calendarAccessStatus:AccessStatus {
         let status = EKEventStore.authorizationStatus(for: .event)
-        return status == .authorized
+        switch status {
+            case .authorized: return .granted
+            case .denied: return .revoked
+            case .notDetermined, .restricted: return .notRequested
+            @unknown default: return .notRequested
+        }
     }
     
     // MARK: - Main
     ///if authorization granted, create default calendar to add events to it
     func requestCalendarAccess(_ completion: @escaping () -> Void) {
-        if !accessToCalendarGranted { //1. request access
+        if calendarAccessStatus == .notRequested { //1. request access
             store.requestAccess(to: .event) { [weak self] userGrantedAccess, _ in
                 if userGrantedAccess { completion() }
             }
@@ -104,8 +115,8 @@ extension CalendarManager {
     
     ///creates a new event when the user ends a session
     func createNewEvent(for session: Session?) {
-        guard accessToCalendarGranted else {
-            print("⚠️ access to calendar is not granted!!!")
+        guard calendarAccessStatus != .revoked else {
+            print("⚠️ access to calendar is revoked!!!")
             return
         }
         guard let session = session, session.isEnded, !session.isEventified else { return }
@@ -184,7 +195,7 @@ class CalendarManager: NSObject {
     // MARK: -
     ///"Eventify" made up word :)). the bubble for which create events
     var bubbleToEventify:Bubble? {didSet{
-        if !accessToCalendarGranted { //access not granted yet
+        if calendarAccessStatus == .notRequested { //access not granted yet
             requestCalendarAccess { [weak self] in //mThread closure
                 self?.createDefaultCalendarIfNeeded {
                     self?.createCalEventsForExistingSessions(of: self?.bubbleToEventify)

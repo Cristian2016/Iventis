@@ -590,8 +590,7 @@ extension ViewModel {
     }
     
     func toggleCalendar(_ bubble:Bubble) {
-        
-        guard CalendarManager.shared.accessToCalendarGranted else {
+        guard CalendarManager.shared.calendarAccessStatus != .revoked else {
             secretary.showCalendarAccessDeniedWarning = true
             return
         }
