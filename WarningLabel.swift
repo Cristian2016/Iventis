@@ -10,7 +10,7 @@ import MyPackage
 
 struct WarningLabel: View {
     var body: some View {
-        VStack {
+        VStack(spacing: 8) {
             Image(systemName: "calendar.badge.exclamationmark")
                 .symbolRenderingMode(.palette)
                 .foregroundStyle(.red, Color.label)
