@@ -130,6 +130,7 @@ extension CalendarManager {
         
         let bubbleNote = session.bubble?.note
         
+        //create a new calendar event
         createNewEvent(with: title,
                        bubbleNote: bubbleNote,
                        eventNotes: eventNotes,
