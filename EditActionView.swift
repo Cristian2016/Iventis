@@ -272,11 +272,11 @@ extension EditActionView {
         var body: some View {
             VStack {
                 Grid(horizontalSpacing: 1, verticalSpacing: 1) {
-                    let color = Color.bubbleColor(forName: bubble.color)
-                    
                     TheFlipText(.recentTimers)
                     
                     ScrollView {
+                        let color = Color.bubbleColor(forName: bubble.color)
+                        
                         LazyVGrid(columns: columns, spacing: 1) {
                             ForEach(durations) { timerDuration in
                                 color
