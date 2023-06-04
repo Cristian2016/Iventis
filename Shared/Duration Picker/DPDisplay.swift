@@ -72,11 +72,8 @@ extension DurationPickerView {
         
         @ViewBuilder
         private var infoText:some View {
-            if manager.digits.isEmpty {
-                TheFlipText(.noInput, flipCount: 5, .small)
-            } else {
-                TheFlipText( manager.digits.count%2 == 0 ? .save : .dismiss, flipCount: 5, .small)
-            }
+            if manager.digits.isEmpty { TheFlipText(.noInput) }
+            else { TheFlipText( manager.digits.count%2 == 0 ? .save : .dismiss) }
         }
         
         private var durationComponentsStack:some View {

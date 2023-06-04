@@ -229,7 +229,6 @@
 		1FBDFCCC2A19615E00B81BCA /* TimerDuration Properties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FBDFCC42A19615E00B81BCA /* TimerDuration Properties.swift */; };
 		1FBE775629A248F5005968EC /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FBE775529A248F5005968EC /* GradientView.swift */; };
 		1FC08DC929A35B6500E25D79 /* PairBubbleCellCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FC08DC829A35B6500E25D79 /* PairBubbleCellCoordinator.swift */; };
-		1FC0A5B22A238E6E00908093 /* FlipText1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FC0A5B12A238E6E00908093 /* FlipText1.swift */; };
 		1FC0D9C129828D23004779E0 /* ConfirmView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FC0D9C029828D23004779E0 /* ConfirmView.swift */; };
 		1FC2335929CA488900FBE483 /* MoreOptionsInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FC2335829CA488900FBE483 /* MoreOptionsInfoView.swift */; };
 		1FC364342A1BAD090099B3B6 /* EditActionTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FC364332A1BAD090099B3B6 /* EditActionTitle.swift */; };
@@ -450,7 +449,6 @@
 		1FBDFCC42A19615E00B81BCA /* TimerDuration Properties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TimerDuration Properties.swift"; sourceTree = "<group>"; };
 		1FBE775529A248F5005968EC /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = SOURCE_ROOT; };
 		1FC08DC829A35B6500E25D79 /* PairBubbleCellCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PairBubbleCellCoordinator.swift; sourceTree = SOURCE_ROOT; };
-		1FC0A5B12A238E6E00908093 /* FlipText1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlipText1.swift; sourceTree = "<group>"; };
 		1FC0D9C029828D23004779E0 /* ConfirmView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfirmView.swift; sourceTree = "<group>"; };
 		1FC2335829CA488900FBE483 /* MoreOptionsInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreOptionsInfoView.swift; sourceTree = SOURCE_ROOT; };
 		1FC364332A1BAD090099B3B6 /* EditActionTitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditActionTitle.swift; sourceTree = SOURCE_ROOT; };
@@ -641,7 +639,6 @@
 				1F46F8FE2A2644DF00AA7F9C /* bTimer.swift */,
 				1F46F8FA2A263E3D00AA7F9C /* TheFlipText.swift */,
 				1F7E8D1B2A20FBF200B35916 /* FlipText.swift */,
-				1FC0A5B12A238E6E00908093 /* FlipText1.swift */,
 				1FC364332A1BAD090099B3B6 /* EditActionTitle.swift */,
 				1FA9456A2A18E8EE0023A999 /* EditActionView.swift */,
 				1FF0E4042A17C10200FDCA29 /* DurationsTabView.swift */,
@@ -1142,7 +1139,6 @@
 				1FCF0C662816F3F600AA1FAA /* EmptyListView.swift in Sources */,
 				1FF0A2FD2810448100B1DB77 /* TopDetailView.swift in Sources */,
 				1FBDFCC52A19615E00B81BCA /* TimerHistory.swift in Sources */,
-				1FC0A5B22A238E6E00908093 /* FlipText1.swift in Sources */,
 				1FA834762850A57C003F4D61 /* Widgets.intentdefinition in Sources */,
 				1FC0D9C129828D23004779E0 /* ConfirmView.swift in Sources */,
 				1F1D17B329916D1A00DD7ECE /* MoreOptionsView.swift in Sources */,

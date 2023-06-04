@@ -284,11 +284,7 @@ extension EditActionView {
                 Grid(horizontalSpacing: 1, verticalSpacing: 1) {
                     let color = Color.bubbleColor(forName: bubble.color)
                     
-                    Text("*\(Image.timer) Recent Timers*")
-                        .font(.system(size: 22))
-                        .padding([.top, .bottom], 10)
-                        .foregroundColor(.black)
-                        .frame(height: 40)
+                    TheFlipText(.recentTimers, flipCount: 5, .big)
                     
                     ScrollView {
                         LazyVGrid(columns: columns, spacing: 1) {
@@ -299,7 +295,7 @@ extension EditActionView {
                                         Text(timerDuration.value.timeComponentsAbreviatedString)
                                     }
                                     .onTapGesture {
-                                        viewModel.change(bubble, to: .timer(timerDuration.value))
+                                        viewModel.change(bubble, to:  .timer(timerDuration.value))
                                         dismiss()
                                     }
                                     .onLongPressGesture { viewModel.delete(timerDuration) }

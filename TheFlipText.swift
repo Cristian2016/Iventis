@@ -49,8 +49,15 @@ struct TheFlipText: View {
     }
     
     private func handleSignal() {
+        print(#function)
         let newIndex = (viewToShowIndex + 1)%input.lines.count
         withAnimation { viewToShowIndex = newIndex }
+    }
+}
+
+extension LocalizedStringKey:Hashable {
+    public func hash(into hasher: inout Hasher) {
+        hasher.combine("")
     }
 }
 
@@ -61,6 +68,8 @@ extension TheFlipText {
         static let noInput = Input(lines: ["**Dismiss** \(Image.tap) Tap"])
         static let save = Input(lines: ["**Create** \(Image.tap) Tap", "**Clear** \(Image.swipeLeft) Swipe"])
         static let dismiss = Input(lines: ["**Dismiss** \(Image.tap) Tap", "**Clear** \(Image.swipeLeft) Swipe"])
+        
+        static let recentTimers = Input(lines: ["\(Image.timer) Recent Timers", "**Delete** \(Image.longPress) Long Press"])
     }
     
     enum TextStyle {
