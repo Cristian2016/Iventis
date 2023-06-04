@@ -61,7 +61,7 @@ extension TheFlipText {
         static let save = Input(lines: ["**Create** \(Image.tap) Tap", "**Clear** \(Image.swipeLeft) Swipe"])
         static let dismiss = Input(lines: ["**Dismiss** \(Image.tap) Tap", "**Clear** \(Image.swipeLeft) Swipe"])
         
-        static let recentTimers = Input(lines: ["\(Image.timer) Recent Timers", "**Delete** \(Image.longPress) Long Press"])
+        static let recentTimers = Input(lines: ["\(Image.timer) Recent Timers", "**Delete** \(Image.longPress) Long-Press"])
     }
     
     enum TextStyle {

@@ -38,10 +38,10 @@ extension InfoUnit {
         let id = UUID().uuidString
         
         static let bubbleStart = Input(keyword: "Start/Pause", symbol: "hand.tap.fill", gesture: "Tap")
-        static let bubbleFinish = Input(keyword: "End", symbol: "target", gesture: "Long Press", footnote: "to end an entry")
+        static let bubbleFinish = Input(keyword: "End", symbol: "target", gesture: "Long-Press", footnote: "to end an entry")
         
         static let showActivity = Input(keyword: "Show Activity", symbol: "hand.tap.fill", gesture: "Tap")
-        static let addNote = Input(keyword: "Add Note", symbol: "target", gesture: "Long Press")
+        static let addNote = Input(keyword: "Add Note", symbol: "target", gesture: "Long-Press")
         
         static let dpCreate = Input(keyword: "Create Timer", symbol: "hand.tap.fill", gesture: "Tap", footnote: "if \(Image.roundCheckmark) checkmark shows")
         
@@ -50,7 +50,7 @@ extension InfoUnit {
         static let dpDismiss = Input(keyword: "Dismiss", symbol: "hand.tap.fill", gesture: "Tap", footnote: "if duration is not valid yet")
         
         static let paletteStopwatch = Input(keyword: "Stopwatch", symbol: "hand.tap.fill", gesture: "Tap any color")
-        static let paletteTimer = Input(keyword: "Timer", symbol: "target", gesture: "Long Press")
+        static let paletteTimer = Input(keyword: "Timer", symbol: "target", gesture: "Long-Press")
         static let paletteDismiss = Input(keyword: "Dismiss", symbol: "arrow.backward.circle.fill", gesture: "Swipe Left")
     }
 }
