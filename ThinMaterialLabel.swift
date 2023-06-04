@@ -32,24 +32,27 @@ struct ThinMaterialLabel<Content:View>: View {
     private let metrics = Metrics()
     
     var body: some View {
-        VStack {
-            if let title = title {
-                Text(title)
-                    .padding(.bottom, 1)
-                    .font(.system(size: 28, weight: .medium))
-                    .minimumScaleFactor(0.1)
-                subtitleView
-                Divider().frame(maxWidth: 300)
-            }
-            content
-            HStack {
-                dismissButton
+        ZStack {
+            Color.black.opacity(0.5)
+                .ignoresSafeArea()
+                .onTapGesture { action() }
+            
+            VStack {
+                if let title = title {
+                    Text(title)
+                        .padding(.bottom, 1)
+                        .font(.system(size: 28, weight: .medium))
+                        .minimumScaleFactor(0.1)
+                    subtitleView
+                    Divider().frame(maxWidth: 300)
+                }
+                content
                 moreInfoButton
             }
+            .padding()
+            .background { roundedBackground }
+            .frame(maxWidth: 364)
         }
-        .padding()
-        .background { roundedBackground }
-        .frame(maxWidth: 364)
     }
     
     // MARK: - Legos
@@ -63,23 +66,12 @@ struct ThinMaterialLabel<Content:View>: View {
         }
     }
     
-    private var dismissButton:some View {
-        Button { action() } label: {
-            Text("Dismiss")
-                .font(.system(size: 24, weight: .medium))
-                .frame(maxWidth: .infinity)
-        }
-        .tint(.red)
-        .buttonStyle(.bordered)
-    }
-    
     private var moreInfoButton:some View {
         Button { moreInfo() } label: {
-            Label("More", systemImage: "info.square.fill")
+            Label("More Info", systemImage: "info.square.fill")
                 .font(.system(size: 24, weight: .medium))
                 .frame(maxWidth: .infinity)
         }
-        .tint(.blue)
         .buttonStyle(.bordered)
     }
     
