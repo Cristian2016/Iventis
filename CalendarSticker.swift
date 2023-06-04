@@ -12,7 +12,8 @@ struct CalendarSticker: View {
     
     var body: some View {
         ZStack {
-            Image(systemName: "calendar")
+            let name =  CalendarManager.shared.calendarAccessStatus == .granted ? "calendar" : "calendar.badge.exclamationmark"
+            Image(systemName: name)
                 .foregroundColor(.calendar)
                 .font(.system(size: 43))
         }
