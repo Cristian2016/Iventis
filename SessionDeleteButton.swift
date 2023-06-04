@@ -54,8 +54,11 @@ struct SessionDeleteButton: View {
     }
     
     private var deleteButton:some View {
-        Button { deleteSession() }
-    label: {
+        Button { deleteSession() } label: { deleteButtonLabel }
+            .buttonStyle(BubbleDeleteButton.DeleteButtonStyle())
+    }
+    
+    private var deleteButtonLabel:some View {
         RoundedRectangle(cornerRadius: metrics!.buttonRadius)
             .fill(metrics!.bubbleColor)
             .frame(width: 208, height: 90)
@@ -64,8 +67,6 @@ struct SessionDeleteButton: View {
                     .font(.system(size: 32, weight: .medium, design: .rounded))
                     .foregroundColor(.white)
             }
-    }
-    .buttonStyle(BubbleDeleteButton.DeleteButtonStyle())
     }
     
     // MARK: -
