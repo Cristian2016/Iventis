@@ -128,10 +128,13 @@ extension CalendarManager {
         
         guard let start = firstPair.start, let end = lastPair.pause else { return }
         
+        let bubbleNote = session.bubble?.note
+        
         createNewEvent(with: title,
-                       bubbleNote: session.bubble?.note,
+                       bubbleNote: bubbleNote,
                        eventNotes: eventNotes,
-                       start: start, end: end,
+                       start: start,
+                       end: end,
                        session
         )
         
