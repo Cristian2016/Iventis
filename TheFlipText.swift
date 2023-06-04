@@ -13,6 +13,7 @@ struct TheFlipText: View {
     
     let input:Input //lines to display
     let flipCount:Int
+    let textColor:Color
     
     var body: some View {
         let center = NotificationCenter.Publisher(center: .default, name: .flipTextSignal)
@@ -25,7 +26,7 @@ struct TheFlipText: View {
                 if currentIndex == viewToShowIndex {
                     Text(line)
                         .font(.system(size: .minFontSize))
-                        .foregroundColor(.secondary)
+                        .foregroundColor(textColor)
                         .transition(.scale.combined(with: .opacity))
                 }
             }
@@ -33,9 +34,10 @@ struct TheFlipText: View {
         .onReceive(center) { _ in handleSignal() }
     }
     
-    init(_ input: Input, flipCount: Int = 2) {
+    init(_ input: Input, flipCount: Int = 2, _ textColor:Color = .secondary) {
         self.input = input
         self.flipCount = flipCount
+        self.textColor = textColor
     }
     
     private func handleSignal() {

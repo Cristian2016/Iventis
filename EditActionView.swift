@@ -273,7 +273,7 @@ extension EditActionView {
         var body: some View {
             VStack {
                 Grid(horizontalSpacing: 1, verticalSpacing: 1) {
-                    TheFlipText(.recentTimers).padding(6)
+                    TheFlipText(.recentTimers, .black).padding(6)
                     
                     ScrollView {
                         let color = Color.bubbleColor(forName: bubble.color)
