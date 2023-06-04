@@ -13,7 +13,7 @@ struct EmptyListView: View {
             VStack(alignment: .leading, spacing: 12) {
                 VStack(alignment: .leading) {
                     Text("**Create Bubbles** \(Image.rightSwipe) Swipe")
-                    Text("*from left edge (yellow area)*")
+                    Text("*from yellow line*")
                         .foregroundColor(.secondary)
                 }
                 
