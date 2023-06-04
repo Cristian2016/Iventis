@@ -37,6 +37,7 @@ import WidgetKit
 class ViewModel: ObservableObject {
     let localNotificationsManager = ScheduledNotificationsManager.shared
     let center = NotificationCenter.default
+    private let calManager = CalendarManager.shared
     
     private let delay:DispatchTime = .now() + 0.01
     
@@ -129,8 +130,11 @@ class ViewModel: ObservableObject {
     
     ///createds calendar events only if that bubble has calendar, otherwise it only saves to coredata
     private func createCalEventAndSave(for bubble:Bubble) {
-        if !bubble.sessions_.isEmpty && bubble.hasCalendar {
-            CalendarManager.shared.createNewEvent(for: bubble.lastSession)
+        let calendarAccessNotRevoked = calManager.calendarAccessStatus != .revoked
+        let bubbleHasSessions = !bubble.sessions_.isEmpty
+        
+        if bubbleHasSessions && bubble.hasCalendar && calendarAccessNotRevoked {
+            calManager.createNewEvent(for: bubble.lastSession)
             
             //display Cal Event Added to Calendar App confirmation to the user
             DispatchQueue.main.async {
