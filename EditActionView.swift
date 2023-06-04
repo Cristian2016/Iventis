@@ -165,8 +165,6 @@ extension EditActionView {
         let minutes = [[1, 2, 3, 4], [5, 10, 15, 20], [25, 30, 45, 60]]
         
         var body: some View {
-            let timerTitle = bubble.isTimer ? "Edit Timer" : "Change to Timer"
-            
             Grid(horizontalSpacing: 1, verticalSpacing: 1) {
                 GridRow {
                     if bubble.isTimer {
@@ -197,14 +195,6 @@ extension EditActionView {
                                         viewModel.change(bubble, to: .timer(Float(digit) * 60))
                                         UserFeedback.singleHaptic(.heavy)
                                         dismiss()
-                                    }
-                                }
-                                .overlay {
-                                    if digit == 1 {
-//                                        Text("Minute")
-//                                            .font(.system(size: 14, weight: .medium))
-//                                            .foregroundColor(.white)
-//                                            .offset(y: 23)
                                     }
                                 }
                         }
@@ -284,7 +274,7 @@ extension EditActionView {
                 Grid(horizontalSpacing: 1, verticalSpacing: 1) {
                     let color = Color.bubbleColor(forName: bubble.color)
                     
-                    TheFlipText(.recentTimers, flipCount: 5, .big)
+                    TheFlipText(.recentTimers)
                     
                     ScrollView {
                         LazyVGrid(columns: columns, spacing: 1) {

@@ -119,6 +119,6 @@ extension TheFlipText {
 
 struct TheFlipText_Previews: PreviewProvider {
     static var previews: some View {
-        TheFlipText(.dismiss, flipCount: 2)
+        TheFlipText(.recentTimers)
     }
 }
