@@ -43,11 +43,11 @@ struct ViewHierarchy: View {
             ScreenAlwaysOnConfirmation() //shown each time user toggles the button in toolbar
             if bubbleNotesShowing { BubbleStickyNoteList(notesForBubble!) }
             BlueInfoButton()
-//            InfoViewHierarchy()
             CalendarEventCreatedConfirmation()
             CalendarEventRemovedConfirmation()
-//            WarningLabel()
         }
+        .overlay { InfoViewHierarchy() }
+        .overlay { WarningLabel() }
         .onAppear { createBubblesOnFirstAppLaunch() } //1
         .environment(\.managedObjectContext, viewContext)
         .environmentObject(viewModel) //2

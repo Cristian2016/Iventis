@@ -115,10 +115,7 @@ extension CalendarManager {
     
     ///creates a new event when the user ends a session
     func createNewEvent(for session: Session?) {
-        guard calendarAccessStatus != .revoked else {
-            print("⚠️ access to calendar is revoked!!!")
-            return
-        }
+        guard calendarAccessStatus != .revoked else { return }
         guard let session = session, session.isEnded, !session.isEventified else { return }
         
         let pairs = session.pairs_
