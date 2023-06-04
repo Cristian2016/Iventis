@@ -52,37 +52,20 @@ struct SessionDeleteButton: View {
         .standardShadow()
         .onTapGesture { secretary.showSessionDeleteInfo = true }
     }
-        
+    
     private var deleteButton:some View {
-        Button {
-            withAnimation {
-                //show confirmation only if deleted session corresponds to a calendar event
-                if input!.session.eventID != nil {
-                    secretary.confirm_CalEventRemoved = input!.session.bubble?.rank
-                    delayExecution(.now() + 3) { self.secretary.confirm_CalEventRemoved = nil }
-                }
-                
-                //⚠️ delete event from calendar first and then delete session from CoreData and Fused App
-                CalendarManager.shared.deleteEvent(with: input!.session.eventID)
-                
-                //make SessionDAAlert go away after 0.3 seconds, so that user sees button tapped animation
-                delayExecution(.now() + 0.25) {
-                    viewModel.deleteSession(input!.session)
-                    secretary.sessionToDelete = nil
-                }
+        Button { deleteSession() }
+    label: {
+        RoundedRectangle(cornerRadius: metrics!.buttonRadius)
+            .fill(metrics!.bubbleColor)
+            .frame(width: 208, height: 90)
+            .overlay {
+                Text("Entry \(input!.sessionRank)")
+                    .font(.system(size: 32, weight: .medium, design: .rounded))
+                    .foregroundColor(.white)
             }
-            if secretary.addNoteButton_bRank != nil { secretary.addNoteButton_bRank = nil } //ViewModel 1
-        } label: {
-            RoundedRectangle(cornerRadius: metrics!.buttonRadius)
-                .fill(metrics!.bubbleColor)
-                .frame(width: 208, height: 90)
-                .overlay {
-                    Text("Entry \(input!.sessionRank)")
-                        .font(.system(size: 32, weight: .medium, design: .rounded))
-                        .foregroundColor(.white)
-                }
-        }
-        .buttonStyle(BubbleDeleteButton.DeleteButtonStyle())
+    }
+    .buttonStyle(BubbleDeleteButton.DeleteButtonStyle())
     }
     
     // MARK: -
@@ -95,6 +78,27 @@ struct SessionDeleteButton: View {
         let isSameBubble = secretary.addNoteButton_bRank == Int(bubbleRank)
         let isLastSession = input!.session == input!.session.bubble?.lastSession
         if isLastSession, isSameBubble { secretary.addNoteButton_bRank = nil }
+    }
+    
+    // MARK: -
+    private func deleteSession() {
+        withAnimation {
+            //show confirmation only if deleted session corresponds to a calendar event
+            if input!.session.eventID != nil {
+                secretary.confirm_CalEventRemoved = input!.session.bubble?.rank
+                delayExecution(.now() + 3) { self.secretary.confirm_CalEventRemoved = nil }
+            }
+            
+            //⚠️ delete event from calendar first and then delete session from CoreData and Fused App
+            CalendarManager.shared.deleteEvent(with: input!.session.eventID)
+            
+            //make SessionDAAlert go away after 0.3 seconds, so that user sees button tapped animation
+            delayExecution(.now() + 0.25) {
+                viewModel.deleteSession(input!.session)
+                secretary.sessionToDelete = nil
+            }
+        }
+        if secretary.addNoteButton_bRank != nil { secretary.addNoteButton_bRank = nil } //ViewModel 1
     }
 }
 
