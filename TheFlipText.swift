@@ -13,7 +13,6 @@ struct TheFlipText: View {
     
     let input:Input //lines to display
     let flipCount:Int
-    let textStyle:TextStyle
     
     var body: some View {
         let center = NotificationCenter.Publisher(center: .default, name: .flipTextSignal)
@@ -34,18 +33,9 @@ struct TheFlipText: View {
         .onReceive(center) { _ in handleSignal() }
     }
     
-    init(_ input: Input, flipCount: Int = 2, _ textStyle:TextStyle = .small) {
+    init(_ input: Input, flipCount: Int = 2) {
         self.input = input
         self.flipCount = flipCount
-        self.textStyle = textStyle
-    }
-    
-    private func assignTextStyle() -> any ViewModifier {
-        switch textStyle {
-            case .small: return SmallStyle()
-            case .medium: return MediumStyle()
-            case .big: return SmallStyle()
-        }
     }
     
     private func handleSignal() {

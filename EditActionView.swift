@@ -268,11 +268,12 @@ extension EditActionView {
         private  var durations:FetchedResults<TimerDuration>
         
         private let columns = Array(repeating: GridItem(spacing: 4), count: 2)
+        private let  vm = TheFlipText.ViewModel(delay: .now() + 3, timerRepeatFrequency: 5, repeatCount: 2)
         
         var body: some View {
             VStack {
                 Grid(horizontalSpacing: 1, verticalSpacing: 1) {
-                    TheFlipText(.recentTimers)
+                    TheFlipText(.recentTimers).padding(6)
                     
                     ScrollView {
                         let color = Color.bubbleColor(forName: bubble.color)
