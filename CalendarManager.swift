@@ -36,7 +36,7 @@ extension CalendarManager {
     ///if authorization granted, create default calendar to add events to it
     func requestCalendarAccess(_ completion: @escaping () -> Void) {
         if calendarAccessStatus == .notRequested { //1. request access
-            store.requestAccess(to: .event) { [weak self] userGrantedAccess, _ in
+            store.requestAccess(to: .event) { userGrantedAccess, _ in
                 if userGrantedAccess { completion() }
             }
         } else { //2. access granted already
