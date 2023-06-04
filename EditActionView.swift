@@ -289,7 +289,10 @@ extension EditActionView {
                                         viewModel.change(bubble, to:  .timer(timerDuration.value))
                                         dismiss()
                                     }
-                                    .onLongPressGesture { viewModel.delete(timerDuration) }
+                                    .onLongPressGesture {
+                                        UserFeedback.singleHaptic(.light)
+                                        viewModel.delete(timerDuration)
+                                    }
                             }
                         }
                     }
