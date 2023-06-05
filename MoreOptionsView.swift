@@ -220,7 +220,7 @@ extension MoreOptionsView {
                 let subtitle:LocalizedStringKey = "Start after a number of seconds"
                 
                 if show {
-                    Color.black.opacity(0.6).ignoresSafeArea()
+                    Color.black.opacity(0.5).ignoresSafeArea()
                     
                     ThinMaterialLabel(title, subtitle) { MoreOptionsInfoView() } action: { showInfo() } moreInfo: { }
                     .font(metrics.infoFont)
