@@ -39,10 +39,7 @@ extension CalendarManager {
             store.requestAccess(to: .event) { userGrantedAccess, _ in
                 if userGrantedAccess { completion() }
                 
-                DispatchQueue.main.async {
-                    Secretary.shared.userGrantedAccessToCalendar = true
-                    print(self.calendarAccessStatus)
-                }
+                DispatchQueue.main.async { Secretary.shared.userGrantedAccessToCalendar = true }
             }
         } else { //2. access granted already
             completion()
