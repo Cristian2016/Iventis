@@ -50,7 +50,7 @@ struct ThinMaterialLabel<Content:View>: View {
                 moreInfoButton
             }
             .padding()
-            .background { roundedBackground }
+            .background { materialBackground }
             .frame(maxWidth: 364)
         }
     }
@@ -75,10 +75,8 @@ struct ThinMaterialLabel<Content:View>: View {
         .buttonStyle(.bordered)
     }
     
-    private var roundedBackground:some View {
-        RoundedRectangle(cornerRadius: metrics.backgroundRadius)
-            .fill(.regularMaterial)
-//            .standardShadow()
+    private var materialBackground:some View {
+        RoundedRectangle(cornerRadius: metrics.backgroundRadius).fill(.thickMaterial)
     }
     
     // MARK: -
