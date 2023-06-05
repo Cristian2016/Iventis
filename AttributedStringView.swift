@@ -8,8 +8,21 @@
 import SwiftUI
 
 struct AttributedStringView: View {
+    var attrString:AttributedString = {
+        var attrString = AttributedString("Pula")
+        attrString.font = .largeTitle.bold()
+        attrString.strokeColor = .red
+        attrString.backgroundColor = .yellow
+        attrString.foregroundColor = .red
+        attrString.underlineStyle = Text.LineStyle(pattern: .dashDotDot, color: .green)
+        attrString.link = URL(string: "https://www.hackingwithswift.com")
+        let interval = attrString.startIndex..<attrString.index(attrString.startIndex, offsetByCharacters: 1)
+        attrString[interval].foregroundColor = .green
+        return attrString
+    }()
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        Text(attrString)
     }
 }
 
