@@ -44,9 +44,9 @@ struct ThinMaterialLabel<Content:View>: View {
                         .font(.system(size: 28, weight: .medium))
                         .minimumScaleFactor(0.1)
                     subtitleView
-                    Divider().frame(maxWidth: 300)
                 }
                 content
+                Divider().frame(maxWidth: 300)
                 HStack {
                     Label("*Shake for Info*", systemImage: "iphone.radiowaves.left.and.right")
                         .font(.system(size: .minFontSize))
