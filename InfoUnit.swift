@@ -47,7 +47,7 @@ extension InfoUnit {
         
         static let dpClear = Input(keyword: "Clear", symbol: "arrow.backward.circle.fill", gesture: "Swipe", footnote: "any swipe direction works")
         
-        static let dpDismiss = Input(keyword: "Dismiss", symbol: "hand.tap.fill", gesture: "Tap", footnote: "if duration is not valid yet")
+        static let dpDismiss = Input(keyword: "Dismiss", symbol: "hand.tap.fill", gesture: "Tap", footnote: "if \(Image.roundCheckmark) checkmark is hidden")
         
         static let paletteStopwatch = Input(keyword: "Stopwatch", symbol: "hand.tap.fill", gesture: "Tap any color")
         static let paletteTimer = Input(keyword: "Timer", symbol: "target", gesture: "Long-Press")
