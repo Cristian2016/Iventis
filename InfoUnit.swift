@@ -45,7 +45,7 @@ extension InfoUnit {
         
         static let dpCreate = Input(keyword: "Create Timer", symbol: "hand.tap.fill", gesture: "Tap", footnote: "if \(Image.roundCheckmark) checkmark shows")
         
-        static let dpClear = Input(keyword: "Clear", symbol: "arrow.backward.circle.fill", gesture: "Swipe", footnote: "any swipe direction works")
+        static let dpClear = Input(keyword: "Clear", symbol: "arrow.backward.circle.fill", gesture: "Swipe", footnote: "in any direction")
         
         static let dpDismiss = Input(keyword: "Dismiss", symbol: "hand.tap.fill", gesture: "Tap", footnote: "if \(Image.roundCheckmark) checkmark is hidden")
         
