@@ -23,6 +23,8 @@ class Secretary {
         }
     }
     
+    @Published var userGrantedAccessToCalendar = CalendarManager.shared.calendarAccessStatus == .granted
+    
     //used by the widget
     @Published var mostRecentlyUsedBubble:Int64? {didSet{ saveMostRecentlyUsedBubble() }}
     @Published private(set) var widgetsExist = false

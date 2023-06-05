@@ -38,6 +38,11 @@ extension CalendarManager {
         if calendarAccessStatus == .notRequested { //1. request access
             store.requestAccess(to: .event) { userGrantedAccess, _ in
                 if userGrantedAccess { completion() }
+                
+                DispatchQueue.main.async {
+                    Secretary.shared.userGrantedAccessToCalendar = true
+                    print(self.calendarAccessStatus)
+                }
             }
         } else { //2. access granted already
             completion()
