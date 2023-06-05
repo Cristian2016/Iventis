@@ -7,6 +7,7 @@
 //1 scrolls top top in DetailView when user pulls down on the table [PairCellList]
 //2 background timer, does not repeat, in 5 seconds it removes BlueInfoButton
 //3 used when user taps a notification. programmatically scoll in BubbleList to BubbleCell with id == scrollRank
+//4 CalendarSticker needs to redraw (for ex.) right when user is asked to grant access to Calendar App for the first time. Since I coulnd't find a way to get easy EKCalendar/Store notifications, I have to use Secretary.publisher: calendarAccessGranted publisher
 
 import SwiftUI
 import MyPackage
@@ -23,7 +24,7 @@ class Secretary {
         }
     }
     
-    @Published var calendarAccessGranted = CalendarManager.shared.calendarAccessStatus == .granted
+    @Published var calendarAccessGranted = CalendarManager.shared.calendarAccessStatus == .granted //4
     
     //used by the widget
     @Published var mostRecentlyUsedBubble:Int64? {didSet{ saveMostRecentlyUsedBubble() }}
