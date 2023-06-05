@@ -73,7 +73,7 @@ struct ThinMaterialLabel<Content:View>: View {
     
     private var moreInfoButton:some View {
         Button { moreInfo() } label: {
-            Label("More", systemImage: "info.square.fill")
+            Label("More Info", systemImage: "info.square.fill")
                 .font(.system(size: 20))
         }
     }
