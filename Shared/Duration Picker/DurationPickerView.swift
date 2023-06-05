@@ -154,7 +154,7 @@ extension DurationPickerView {
     struct Info:View {
         @State private var show = false
         private let title = "Timer Duration"
-        private let subtitle:LocalizedStringKey = "\(Image(systemName: "checkmark.circle.fill")) checkmark means timer's duration is valid"
+        private let subtitle:LocalizedStringKey = "\(Image(systemName: "checkmark.circle.fill")) visible checkmark means timer's duration is valid"
         
         var body: some View {
             ZStack {
