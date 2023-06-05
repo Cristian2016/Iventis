@@ -43,11 +43,11 @@ extension InfoUnit {
         static let showActivity = Input(keyword: "Show Activity", symbol: "hand.tap.fill", gesture: "Tap")
         static let addNote = Input(keyword: "Add Note", symbol: "target", gesture: "Long-Press")
         
-        static let dpCreate = Input(keyword: "Create Timer", symbol: "hand.tap.fill", gesture: "Tap", footnote: "\(Image.roundCheckmark) checkmark is visible")
+        static let dpCreate = Input(keyword: "Create Timer", symbol: "hand.tap.fill", gesture: "Tap", footnote: "checkmark must be visible")
         
         static let dpClear = Input(keyword: "Clear", symbol: "arrow.backward.circle.fill", gesture: "Swipe", footnote: "in any direction")
         
-        static let dpDismiss = Input(keyword: "Dismiss", symbol: "hand.tap.fill", gesture: "Tap", footnote: "\(Image.roundCheckmark) checkmark is hidden")
+        static let dpDismiss = Input(keyword: "Dismiss", symbol: "hand.tap.fill", gesture: "Tap", footnote: "checkmark is hidden")
         
         static let paletteStopwatch = Input(keyword: "Stopwatch", symbol: "hand.tap.fill", gesture: "Tap any color")
         static let paletteTimer = Input(keyword: "Timer", symbol: "target", gesture: "Long-Press")
