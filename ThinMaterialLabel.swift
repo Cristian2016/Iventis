@@ -50,7 +50,6 @@ struct ThinMaterialLabel<Content:View>: View {
                 HStack {
                     Label("*Shake for Info*", systemImage: "iphone.radiowaves.left.and.right")
                         .font(.system(size: .minFontSize))
-                    Divider().frame(height: 20)
                     moreInfoButton
                 }
             }
