@@ -19,7 +19,7 @@ struct CalendarSticker: View {
         Image(systemName: imageName)
             .foregroundColor(.calendar)
             .font(.system(size: 43))
-            .onReceive(Secretary.shared.$userGrantedAccessToCalendar) { redraw = $0 }
+            .onReceive(Secretary.shared.$calendarAccessGranted) { redraw = $0 }
     }
 }
 
