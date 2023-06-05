@@ -3,6 +3,7 @@
 //  Timers
 //
 //  Created by Cristian Lapusan on 01.05.2022.
+// CalendarSticker must redraw if user grants access to Calendar
 //
 
 import SwiftUI

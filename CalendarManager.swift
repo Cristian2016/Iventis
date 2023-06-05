@@ -37,9 +37,10 @@ extension CalendarManager {
     func requestCalendarAccess(_ completion: @escaping () -> Void) {
         if calendarAccessStatus == .notRequested { //1. request access
             store.requestAccess(to: .event) { userGrantedAccess, _ in
-                if userGrantedAccess { completion() }
-                
-                DispatchQueue.main.async { Secretary.shared.userGrantedAccessToCalendar = true }
+                if userGrantedAccess {
+                    DispatchQueue.main.async { Secretary.shared.userGrantedAccessToCalendar = true }
+                    completion()
+                }
             }
         } else { //2. access granted already
             completion()
