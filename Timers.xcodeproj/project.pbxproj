@@ -233,6 +233,7 @@
 		1FC2335929CA488900FBE483 /* MoreOptionsInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FC2335829CA488900FBE483 /* MoreOptionsInfoView.swift */; };
 		1FC364342A1BAD090099B3B6 /* EditActionTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FC364332A1BAD090099B3B6 /* EditActionTitle.swift */; };
 		1FC70BB129807BAB007CD1E6 /* LayoutViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FC70BB029807BAB007CD1E6 /* LayoutViewModel.swift */; };
+		1FCE20A62A2E71F70029F088 /* AttributedStringView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FCE20A52A2E71F70029F088 /* AttributedStringView.swift */; };
 		1FCF0C662816F3F600AA1FAA /* EmptyListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FCF0C652816F3F600AA1FAA /* EmptyListView.swift */; };
 		1FD122992A2B94DE002D6E1F /* WarningLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD122982A2B94DE002D6E1F /* WarningLabel.swift */; };
 		1FD2A3DD29C10C6C00EB7B10 /* DeleteConfirmationLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD2A3DC29C10C6C00EB7B10 /* DeleteConfirmationLabel.swift */; };
@@ -453,6 +454,7 @@
 		1FC2335829CA488900FBE483 /* MoreOptionsInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreOptionsInfoView.swift; sourceTree = SOURCE_ROOT; };
 		1FC364332A1BAD090099B3B6 /* EditActionTitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditActionTitle.swift; sourceTree = SOURCE_ROOT; };
 		1FC70BB029807BAB007CD1E6 /* LayoutViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutViewModel.swift; sourceTree = "<group>"; };
+		1FCE20A52A2E71F70029F088 /* AttributedStringView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttributedStringView.swift; sourceTree = "<group>"; };
 		1FCF0C652816F3F600AA1FAA /* EmptyListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyListView.swift; sourceTree = "<group>"; };
 		1FD122982A2B94DE002D6E1F /* WarningLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WarningLabel.swift; sourceTree = SOURCE_ROOT; };
 		1FD2A3DC29C10C6C00EB7B10 /* DeleteConfirmationLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteConfirmationLabel.swift; sourceTree = "<group>"; };
@@ -575,6 +577,7 @@
 		1F5F4A4228093FAC00AF3442 = {
 			isa = PBXGroup;
 			children = (
+				1FCE20A52A2E71F70029F088 /* AttributedStringView.swift */,
 				1F45CC1F2A04D4A200B9548C /* Cell.swift */,
 				1F34FB9929FEB14D001C8B9F /* WidgetSymbol.swift */,
 				1FB8E85B29E3517F0005909E /* Colors */,
@@ -1128,6 +1131,7 @@
 				1F0FD40629A4D93D0097FF7F /* DetailViewInfoButton.swift in Sources */,
 				1FC364342A1BAD090099B3B6 /* EditActionTitle.swift in Sources */,
 				1FB8E85229E2FC870005909E /* ScheduledNotificationsManager.swift in Sources */,
+				1FCE20A62A2E71F70029F088 /* AttributedStringView.swift in Sources */,
 				1F8CA6B029F8FF0D0010F3DB /* InfoOutlineView.swift in Sources */,
 				1F5F4A9D280945C700AF3442 /* BubbleCell.swift in Sources */,
 				1F18B460281FAABF0080ADA6 /* TopCell.swift in Sources */,
