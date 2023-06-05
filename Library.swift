@@ -63,6 +63,7 @@ public extension Image {
     static let scrollToTop = Image(systemName: "arrow.up.to.line.compact")
     static let greaterThan = Image(systemName: "greaterthan.circle.fill")
     static let info = Image(systemName: "info.circle.fill")
+    static let infoSquare =  Image(systemName: "info.square.fill")
     static let alert = Image(systemName: "exclamationmark.triangle.fill")
     static let roundCheckmark = Image(systemName: "checkmark.circle.fill")
     static let timer = Image(systemName: "timer")
@@ -71,6 +72,8 @@ public extension Image {
     static let reset = Image(systemName: "arrow.counterclockwise")
     static let xmark = Image(systemName: "xmark.square.fill")
     static let lightbulb = Image(systemName: "lightbulb.fill")
+    
+    static let device = Image(systemName: "iphone.radiowaves.left.and.right")
     
     // MARK: - Info Assets
     static let dpv = Image("DurationPicker")

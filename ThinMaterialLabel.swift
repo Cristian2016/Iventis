@@ -47,7 +47,12 @@ struct ThinMaterialLabel<Content:View>: View {
                     Divider().frame(maxWidth: 300)
                 }
                 content
-                moreInfoButton
+                HStack {
+                    Text("\(Image.device) Shake for Help")
+                        .font(.system(size: .minFontSize))
+                    Divider().frame(height: 20)
+                    moreInfoButton
+                }
             }
             .padding()
             .background { materialBackground }
@@ -68,11 +73,9 @@ struct ThinMaterialLabel<Content:View>: View {
     
     private var moreInfoButton:some View {
         Button { moreInfo() } label: {
-            Label("More Info", systemImage: "info.square.fill")
-                .font(.system(size: 24, weight: .medium))
-                .frame(maxWidth: .infinity)
+            Label("More", systemImage: "info.square.fill")
+                .font(.system(size: 20))
         }
-        .buttonStyle(.bordered)
     }
     
     private var materialBackground:some View {
