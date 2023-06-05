@@ -189,8 +189,8 @@ extension DurationPickerView {
                         .foregroundColor(.secondary)
                     Divider()
                     InfoUnit(.dpCreate)
-                    InfoUnit(.dpClear)
                     InfoUnit(.dpDismiss)
+                    InfoUnit(.dpClear)
                 }
             }
             .font(.system(size: 22))
