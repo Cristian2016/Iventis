@@ -76,7 +76,6 @@ struct ThinMaterialLabel<Content:View>: View {
             Label("More Info", systemImage: "info.square.fill")
                 .font(.system(size: 20))
         }
-        .buttonStyle(.bordered)
     }
     
     private var materialBackground:some View {
