@@ -172,7 +172,7 @@ extension BubbleDeleteButton {
         var body: some View {
             ZStack {
                 if show {
-                    Color.black.opacity(0.5).ignoresSafeArea()
+                    Color.black.opacity(.darkBackground).ignoresSafeArea()
                     
                     ThinMaterialLabel(title, subtitle) { content } action: { dismiss() } moreInfo: { moreInfo()
                         

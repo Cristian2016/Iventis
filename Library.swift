@@ -24,6 +24,10 @@ extension CharacterSet {
     static let allDigits = CharacterSet(charactersIn: "0123456789*")
 }
 
+extension Double {
+    static let darkBackground = CGFloat(0.5)
+}
+
 extension Notification.Name {
     static let fiveSecondsSignal = Notification.Name("fiveSecondsSignal")
     static let detailViewVisible = Notification.Name("detailViewVisible")

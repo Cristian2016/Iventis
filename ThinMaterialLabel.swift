@@ -33,7 +33,7 @@ struct ThinMaterialLabel<Content:View>: View {
     
     var body: some View {
         ZStack {
-            Color.black.opacity(0.5)
+            Color.black.opacity(.darkBackground)
                 .ignoresSafeArea()
                 .onTapGesture { action() }
             

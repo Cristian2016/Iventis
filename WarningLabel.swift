@@ -15,7 +15,7 @@ struct WarningLabel: View {
         ZStack {
             if show {
                 ZStack {
-                    Color.black.opacity(0.5)
+                    Color.black.opacity(.darkBackground)
                         .ignoresSafeArea()
                         .onTapGesture {
                             Secretary.shared.showCalendarAccessDeniedWarning = false
