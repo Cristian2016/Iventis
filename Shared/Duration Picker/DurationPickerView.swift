@@ -49,7 +49,6 @@ struct DurationPickerView: View {
         .onChange(of: reason) { newReason in
             switch newReason {
                 case .editExistingTimer(let bubble):
-                    print("initiaClock \(bubble.initialClock)")
                     manager.digits = [1, 2, 3, 4, 5, 6]
                 case .createTimer(let tricolor):
                     self.tricolor = tricolor

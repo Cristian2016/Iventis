@@ -79,7 +79,7 @@ struct ControlActionView: View {
     
     private var screenDarkBackground:some View {
         Color.black
-            .opacity(0.6)
+            .opacity(.darkBackground)
             .ignoresSafeArea()
     }
     
