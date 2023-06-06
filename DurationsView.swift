@@ -148,6 +148,6 @@ extension DurationsView {
 struct DurationsView_Previews: PreviewProvider {
     
     static var previews: some View {
-        DurationsView(EditActionView_Previews.bubble)
+        DurationsView(ControlActionView_Previews.bubble)
     }
 }
