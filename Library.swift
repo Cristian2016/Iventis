@@ -25,7 +25,7 @@ extension CharacterSet {
 }
 
 extension Double {
-    static let darkBackground = CGFloat(0.3)
+    static let darkBackground = CGFloat(0.4)
 }
 
 extension Notification.Name {
