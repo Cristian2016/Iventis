@@ -3,7 +3,7 @@
 //  Timers (iOS)
 //
 //  Created by Cristian Lapusan on 04.02.2023.
-//
+//1 prevents to grow too much in landscape mode
 
 import SwiftUI
 
@@ -54,7 +54,7 @@ struct ThinMaterialLabel<Content:View>: View {
             }
             .padding()
             .background { materialBackground }
-            .frame(maxWidth: 364)
+            .frame(maxWidth: 364) //1
         }
     }
     
@@ -76,7 +76,7 @@ struct ThinMaterialLabel<Content:View>: View {
     
     private var moreInfoButton:some View {
         Button { moreInfo() } label: {
-            Label("*More...*", systemImage: "info.square.fill")
+            Label("*More*", systemImage: "info.square.fill")
                 .font(.system(size: 20))
         }
     }
