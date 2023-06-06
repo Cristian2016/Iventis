@@ -296,8 +296,8 @@
             filePath = "ControlActionView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "254"
-            endingLineNumber = "254"
+            startingLineNumber = "252"
+            endingLineNumber = "252"
             landmarkName = "handleTimerButtonTapped()"
             landmarkType = "7">
          </BreakpointContent>
