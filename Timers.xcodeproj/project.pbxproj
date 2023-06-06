@@ -145,7 +145,7 @@
 		1FA87BD52A08CFFF00116B00 /* DurationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA87BD42A08CFFF00116B00 /* DurationsView.swift */; };
 		1FA8ECF129F3F70800B301AE /* InfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA8ECF029F3F70800B301AE /* InfoCell.swift */; };
 		1FA8F87E28367B7A00394B59 /* BubbleNote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA8F87D28367B7A00394B59 /* BubbleNote.swift */; };
-		1FA9456B2A18E8EE0023A999 /* EditActionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA9456A2A18E8EE0023A999 /* EditActionView.swift */; };
+		1FA9456B2A18E8EE0023A999 /* ControlActionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA9456A2A18E8EE0023A999 /* ControlActionView.swift */; };
 		1FAD1576298A5A6C001139C6 /* AddNoteButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FAD1575298A5A6C001139C6 /* AddNoteButton.swift */; };
 		1FAD1578298A8346001139C6 /* Secretary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FAD1577298A8345001139C6 /* Secretary.swift */; };
 		1FAD157C298AAFDB001139C6 /* BubbleDeleteButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FAD157B298AAFDB001139C6 /* BubbleDeleteButton.swift */; };
@@ -406,7 +406,7 @@
 		1FA87BD42A08CFFF00116B00 /* DurationsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DurationsView.swift; sourceTree = SOURCE_ROOT; };
 		1FA8ECF029F3F70800B301AE /* InfoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoCell.swift; sourceTree = SOURCE_ROOT; };
 		1FA8F87D28367B7A00394B59 /* BubbleNote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BubbleNote.swift; sourceTree = "<group>"; };
-		1FA9456A2A18E8EE0023A999 /* EditActionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditActionView.swift; sourceTree = SOURCE_ROOT; };
+		1FA9456A2A18E8EE0023A999 /* ControlActionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlActionView.swift; sourceTree = SOURCE_ROOT; };
 		1FAD1575298A5A6C001139C6 /* AddNoteButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNoteButton.swift; sourceTree = "<group>"; };
 		1FAD1577298A8345001139C6 /* Secretary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Secretary.swift; sourceTree = "<group>"; };
 		1FAD157B298AAFDB001139C6 /* BubbleDeleteButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BubbleDeleteButton.swift; sourceTree = "<group>"; };
@@ -643,7 +643,7 @@
 				1F46F8FA2A263E3D00AA7F9C /* TheFlipText.swift */,
 				1F7E8D1B2A20FBF200B35916 /* FlipText.swift */,
 				1FC364332A1BAD090099B3B6 /* EditActionTitle.swift */,
-				1FA9456A2A18E8EE0023A999 /* EditActionView.swift */,
+				1FA9456A2A18E8EE0023A999 /* ControlActionView.swift */,
 				1FF0E4042A17C10200FDCA29 /* DurationsTabView.swift */,
 				1FA87BD42A08CFFF00116B00 /* DurationsView.swift */,
 				1FEB16242A0777EC00CC7D7F /* ActionsView.swift */,
@@ -1071,7 +1071,7 @@
 				1FA1B44A298321D20063B081 /* iPhoneViewHierarchy.swift in Sources */,
 				1F45CC202A04D4A200B9548C /* Cell.swift in Sources */,
 				1F20807C2836111600FD35D6 /* BSavedNote.swift in Sources */,
-				1FA9456B2A18E8EE0023A999 /* EditActionView.swift in Sources */,
+				1FA9456B2A18E8EE0023A999 /* ControlActionView.swift in Sources */,
 				1F615B6329899E210006DB0B /* BackgroundTimer.swift in Sources */,
 				1FF8255429C7980A0003E4A0 /* DPCheckmark.swift in Sources */,
 				1FAD9B4229961FC000F49670 /* ThreeCircles.swift in Sources */,

@@ -8,7 +8,7 @@
 import SwiftUI
 import MyPackage
 
-struct EditActionView: View {
+struct ControlActionView: View {
     let bubble:Bubble
     @EnvironmentObject private var viewModel:ViewModel
     
@@ -119,7 +119,7 @@ struct EditActionView: View {
     }
 }
 
-extension EditActionView {
+extension ControlActionView {
     struct Metrics {
         let size = CGSize(width: 290, height: 374)
         let buttonHeight = CGFloat(80)
@@ -127,7 +127,7 @@ extension EditActionView {
     }
 }
 
-extension EditActionView {
+extension ControlActionView {
     struct BStyle:ButtonStyle {
         
         let position:Position
@@ -155,7 +155,7 @@ extension EditActionView {
     }
 }
 
-extension EditActionView {
+extension ControlActionView {
     struct MinutesGrid:View {
         private let bubble:Bubble
         @Binding var selectedTab:String
@@ -325,7 +325,7 @@ extension EditActionView {
     }
 }
 
-struct EditActionView_Previews: PreviewProvider {
+struct ControlActionView_Previews: PreviewProvider {
     static let bubble:Bubble = {
         let context = PersistenceController.preview.viewContext
         let bubble = Bubble(context: context)
@@ -338,6 +338,6 @@ struct EditActionView_Previews: PreviewProvider {
     }()
     
     static var previews: some View {
-        EditActionView(Self.bubble)
+        ControlActionView(Self.bubble)
     }
 }
