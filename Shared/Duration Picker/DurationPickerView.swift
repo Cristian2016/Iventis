@@ -42,14 +42,15 @@ struct DurationPickerView: View {
                 .padding(6)
                 .background { vRectangle }
                 .overlay { Info() }
+                .onChange(of: tricolor) { handle(tricolor: $0) }
             }
         }
-        .onChange(of: tricolor) { handle(tricolor: $0) }
         .onReceive(Secretary.shared.$durationPickerReason) { reason = $0 }
         .onChange(of: reason) { newReason in
             switch newReason {
                 case .editExistingTimer(let bubble):
-                    manager.digits = [1, 2, 3, 4, 5, 6]
+                    self.tricolor = Color.tricolor(forName: bubble.color)
+                    manager.digits = [1, 2, 3, 4]
                 case .createTimer(let tricolor):
                     self.tricolor = tricolor
                 default:
