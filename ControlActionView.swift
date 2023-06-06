@@ -177,10 +177,7 @@ extension ControlActionView {
                         .overlay { timerButton }
                         .gridCellColumns(bubble.isTimer ? 2 : 4)
                         .onTapGesture {
-                            Secretary.shared.durationPickerReason = .editExistingTimer(bubble)
-                            Secretary.shared.durationPickerReason = bubble.isTimer ? .editExistingTimer(bubble) : .changeToTimer(bubble)
-                            UserFeedback.singleHaptic(.heavy)
-                            dismiss()
+                            handleTimerButtonTapped()
                         }
                 }
                 .padding([.top], 6)
@@ -251,6 +248,12 @@ extension ControlActionView {
                 theBubble?.selectedTab = selectedTab
                 PersistenceController.shared.save(bContext)
             }
+        }
+        
+        private func handleTimerButtonTapped() {
+            Secretary.shared.durationPickerReason = bubble.isTimer ? .editExistingTimer(bubble) : .changeToTimer(bubble)
+            UserFeedback.singleHaptic(.heavy)
+            dismiss()
         }
         
         init(_ bubble: Bubble, _ selectedTab:Binding<String>) {
