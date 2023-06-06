@@ -35,8 +35,7 @@ struct DurationPickerView: View {
                     .onTapGesture { dismiss() }
                 VStack(spacing: 0) {
                     Display(reason) { dismiss() }
-                    digitsGrid
-                        .overlay { DPOKCircle { dismiss() } }
+                    digitsGrid.overlay { DPOKCircle { dismiss() } }
                 }
                 .padding([.leading, .trailing, .bottom])
                 .padding(6)
@@ -46,16 +45,20 @@ struct DurationPickerView: View {
             }
         }
         .onReceive(Secretary.shared.$durationPickerReason) { reason = $0 }
-        .onChange(of: reason) { newReason in
-            switch newReason {
-                case .editExistingTimer(let bubble):
-                    self.tricolor = Color.tricolor(forName: bubble.color)
-                    manager.digits = [1, 2, 3, 4]
-                case .createTimer(let tricolor):
-                    self.tricolor = tricolor
-                default:
-                    break
-            }
+        .onChange(of: reason) { handle($0) }
+    }
+    
+    private func handle(_ newReason:Secretary.DurationPickerReason) {
+        switch newReason {
+            case .createTimer(let tricolor):
+                self.tricolor = tricolor
+                
+            case .editExistingTimer(let bubble):
+                self.tricolor = Color.tricolor(forName: bubble.color)
+                manager.digits = [1, 2, 3, 4]
+                
+            default:
+                break
         }
     }
 
