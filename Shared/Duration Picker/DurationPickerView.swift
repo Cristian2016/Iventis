@@ -47,20 +47,6 @@ struct DurationPickerView: View {
         .onReceive(Secretary.shared.$durationPickerReason) { reason = $0 }
         .onChange(of: reason) { handle($0) }
     }
-    
-    private func handle(_ newReason:Secretary.DurationPickerReason) {
-        switch newReason {
-            case .createTimer(let tricolor):
-                self.tricolor = tricolor
-                
-            case .editExistingTimer(let bubble):
-                self.tricolor = Color.tricolor(forName: bubble.color)
-                manager.digits = [1, 2, 3, 4]
-                
-            default:
-                break
-        }
-    }
 
     // MARK: - Lego
     private var translucentBackground:some View {
@@ -122,26 +108,19 @@ struct DurationPickerView: View {
         Secretary.shared.durationPickerReason = .none
     }
     
-//    private func handle(mode: Secretary.Mode?) {
-//        guard let mode = mode else {
-//            if self.tricolor != nil { self.tricolor = nil }
-//            return
-//        }
-//
-//        switch mode {
-//            case .create(let tricolor):
-//                self.tricolor = tricolor
-//
-//            case .edit(let bubble):
-//                self.bubble = bubble
-//                self.tricolor = Color.tricolor(forName: bubble.color)
-//
-//                if bubble.isTimer { self.manager.digits = [] }
-//                else {
-//
-//                }
-//        }
-//    } //5
+    private func handle(_ newReason:Secretary.DurationPickerReason) {
+        switch newReason {
+            case .createTimer(let tricolor):
+                self.tricolor = tricolor
+                
+            case .editExistingTimer(let bubble):
+                self.tricolor = Color.tricolor(forName: bubble.color)
+                manager.digits = [1, 2, 3, 4]
+                
+            default:
+                break
+        }
+    }
     
     private func handle(tricolor:Color.Tricolor?) {
         guard tricolor != nil else { return }
