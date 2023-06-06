@@ -37,6 +37,6 @@ struct EditActionTitle: View {
 
 struct EditActionTitle_Previews: PreviewProvider {
     static var previews: some View {
-        EditActionTitle(EditActionView_Previews.bubble)
+        EditActionTitle(ControlActionView_Previews.bubble)
     }
 }
