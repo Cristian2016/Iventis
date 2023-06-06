@@ -48,8 +48,7 @@ struct ThinMaterialLabel<Content:View>: View {
                 content
                 Divider()
                 HStack {
-                    Label("*Shake for Info*", systemImage: "iphone.radiowaves.left.and.right")
-                        .font(.system(size: .minFontSize))
+                    shakeForInfo
                     moreInfoButton
                 }
             }
@@ -60,6 +59,11 @@ struct ThinMaterialLabel<Content:View>: View {
     }
     
     // MARK: - Legos
+    private var shakeForInfo:some View {
+        Label("*Shake for Info*", systemImage: "iphone.radiowaves.left.and.right")
+            .font(.system(size: .minFontSize))
+    }
+    
     @ViewBuilder
     private var subtitleView:some View {
         if let subtitle = subtitle {
