@@ -28,8 +28,11 @@ struct DurationPickerView: View {
     let gridSpacing = CGFloat(1)
     
     var body: some View {
+        let show = tricolor != nil
+        let reasonPublisher = Secretary.shared.$durationPickerReason
+        
         ZStack {
-            if tricolor != nil {
+            if show {
                 translucentBackground
                     .gesture(swipeToClearDisplay)
                     .onTapGesture { dismiss() }
@@ -44,8 +47,8 @@ struct DurationPickerView: View {
                 .onChange(of: tricolor) { handle(tricolor: $0) }
             }
         }
-        .onReceive(Secretary.shared.$durationPickerReason) { reason = $0 }
-        .onChange(of: reason) { handle($0) }
+        .onReceive(reasonPublisher) { reason = $0 }
+        .onChange(of: reason) { handleChange($0) }
     }
 
     // MARK: - Lego
@@ -108,7 +111,7 @@ struct DurationPickerView: View {
         Secretary.shared.durationPickerReason = .none
     }
     
-    private func handle(_ newReason:Secretary.DurationPickerReason) {
+    private func handleChange(_ newReason:Secretary.DurationPickerReason) {
         switch newReason {
             case .createTimer(let tricolor):
                 self.tricolor = tricolor
