@@ -43,13 +43,13 @@ struct DurationPickerView: View {
                 .padding([.leading, .trailing, .bottom])
                 .padding(6)
                 .background { vRectangle }
-                .overlay { Info() }
                 .onChange(of: tricolor) { handle(tricolor: $0) }
                 .frame(maxHeight: 700)
             }
         }
         .onReceive(reasonPublisher) { reason = $0 }
         .onChange(of: reason) { handleChange($0) }
+        .overlay { Info() }
     }
 
     // MARK: - Lego
