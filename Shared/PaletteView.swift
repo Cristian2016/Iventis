@@ -119,9 +119,7 @@ struct PaletteView: View {
     // MARK: -
     private var swipeGesture:some Gesture {
         DragGesture(minimumDistance: 1)
-            .onEnded { if $0.translation.width < 0 {
-                secretary.togglePaletteView()
-            }}
+            .onEnded { if $0.translation.width < 0 { secretary.togglePaletteView() }}
     }
 }
 
