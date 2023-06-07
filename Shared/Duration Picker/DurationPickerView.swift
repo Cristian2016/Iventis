@@ -45,6 +45,7 @@ struct DurationPickerView: View {
                 .background { vRectangle }
                 .overlay { Info() }
                 .onChange(of: tricolor) { handle(tricolor: $0) }
+                .frame(maxHeight: 700)
             }
         }
         .onReceive(reasonPublisher) { reason = $0 }
