@@ -110,6 +110,7 @@ struct PaletteView: View {
         withAnimation(.easeInOut(duration: 0.1)) { longPressedCircle = tricolor.description }
         
         delayExecution(.now() + 0.2) {
+            secretary.topMostView = .durationPicker
             secretary.durationPickerReason = .createTimer(tricolor)
             longPressedCircle = nil
         }
