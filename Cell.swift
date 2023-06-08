@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct Cell: View {
-    
     @ObservedObject var bubble:Bubble
     @EnvironmentObject private var viewModel:ViewModel
     private let secretary = Secretary.shared
