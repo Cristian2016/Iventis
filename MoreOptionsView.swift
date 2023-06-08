@@ -117,6 +117,7 @@ struct MoreOptionsView: View {
                 }
             }
             .frame(maxWidth: .infinity)
+            .background()
             .onTapGesture { saveDelay() }
             .gesture(swipe) //remove delay
         }
