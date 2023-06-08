@@ -134,7 +134,7 @@ struct MoreOptionsView: View {
     }
     
     private func digitLabel(_ delay: Int) -> some View {
-        RoundedRectangle(cornerRadius: 4).fill(input!.initialBubbleColor)
+        input!.initialBubbleColor
             .aspectRatio(1, contentMode: .fit)
             .overlay {
                 Text(String(delay))
