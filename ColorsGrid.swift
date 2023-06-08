@@ -3,7 +3,7 @@
 //  Timers (iOS)
 //
 //  Created by Cristian Lapusan on 07.02.2023.
-//1 if newColor is not the same as currentColor
+//1 if tappedColor [chosen color] is not the same as currentColor [curent bubble color, before changing the color]
 
 import SwiftUI
 
