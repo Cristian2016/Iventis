@@ -23,11 +23,15 @@ extension DurationPickerView {
         
         let manager = DurationPickerView.Manager.shared
         
+        //// MARK: - Components
         @State private var hr = String()
         @State private var min = String()
         @State private var sec = String()
         
+        // MARK: - Body
         var body: some View {
+            let componentsPublisher = manager.$timerDurationComponents
+            
             ZStack {
                 VStack(spacing: 0) {
                     Color.clear
@@ -46,9 +50,20 @@ extension DurationPickerView {
                 }
             }
             .allowsHitTesting(false)
-            .onReceive(manager.$component) { received(component: $0) }
+            .onReceive(componentsPublisher) { handleReceivedComponents($0) }
             .onReceive(manager.$displayIsEmpty) { if $0 { clearDisplay() }}
             .onReceive(manager.$isDurationValid) { showSaveAction = $0 ? true : false }
+        }
+        
+        // MARK: -
+        private func handleReceivedComponents(_ receivedValue:Manager.TimerDurationComponents?) {
+            guard let receivedValue = receivedValue else { return }
+            
+            switch receivedValue {
+                case .hr(let hr): self.hr = hr
+                case .min(let min): self.min = min
+                case .sec(let sec): self.sec = sec
+            }
         }
         
         func setWelcomeText() -> String {
@@ -114,16 +129,6 @@ extension DurationPickerView {
             hr = ""
             min = ""
             sec = ""
-        }
-        
-        private func received(component:Manager.Component?) {
-            guard let component = component else { return }
-            
-            switch component {
-                case .hr(let hr): self.hr = hr
-                case .min(let min): self.min = min
-                case .sec(let sec): self.sec = sec
-            }
         }
     }
 }

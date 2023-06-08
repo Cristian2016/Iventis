@@ -15,7 +15,7 @@ extension DurationPickerView {
         
         @Published var digits = [Int]() {didSet{ updateUI() }}
         @Published var notAllowedCharacters = Characters(charactersIn: "56789✕")
-        @Published var component:Component?
+        @Published var timerDurationComponents:TimerDurationComponents?
         @Published var displayIsEmpty = false //when true display will be cleared
         @Published var isDurationValid = false
         
@@ -38,28 +38,28 @@ extension DurationPickerView {
                         DispatchQueue.main.async { self.displayIsEmpty = true }
                     case 1:
                         let result = String(digits.first!) + "⎽"
-                        DispatchQueue.main.async { self.component = .hr(result) }
+                        DispatchQueue.main.async { self.timerDurationComponents = .hr(result) }
                     case 2:
                         let result = digits.reduce("") { String($0) + String($1) }
                         DispatchQueue.main.async {
-                            self.component = .hr(result)
-                            self.component = .min("")
+                            self.timerDurationComponents = .hr(result)
+                            self.timerDurationComponents = .min("")
                         }
                     case 3:
                         let result = String(digits.last!) + "⎽"
-                        DispatchQueue.main.async { self.component = .min(result) }
+                        DispatchQueue.main.async { self.timerDurationComponents = .min(result) }
                     case 4:
                         let result = digits.dropFirst(2).reduce("") { String($0) + String($1) }
                         DispatchQueue.main.async {
-                            self.component = .min(result)
-                            self.component = .sec("")
+                            self.timerDurationComponents = .min(result)
+                            self.timerDurationComponents = .sec("")
                         }
                     case 5:
                         let result = String(digits.last!) + "⎽"
-                        DispatchQueue.main.async { self.component = .sec(result)}
+                        DispatchQueue.main.async { self.timerDurationComponents = .sec(result)}
                     case 6:
                         let result = String(digits[4]) + String(digits[5])
-                        DispatchQueue.main.async { self.component = .sec(result) }
+                        DispatchQueue.main.async { self.timerDurationComponents = .sec(result) }
                     default:
                         break
                 }
@@ -189,7 +189,7 @@ extension DurationPickerView {
         }
         
         // MARK: -
-        enum Component {
+        enum TimerDurationComponents {
             case hr(String)
             case min(String)
             case sec(String)
