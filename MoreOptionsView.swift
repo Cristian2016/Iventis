@@ -148,7 +148,7 @@ struct MoreOptionsView: View {
         let radius = CGFloat(10)
         
         let minWidth = CGFloat(300)
-        let digitSpacing = CGFloat(4)
+        let digitSpacing = CGFloat(1)
         let colorsSpacing = CGFloat(4)
         
         let delayFont = Font.system(size: 80, design: .rounded)
