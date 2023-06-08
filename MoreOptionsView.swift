@@ -52,10 +52,7 @@ struct MoreOptionsView: View {
                                 Divider()
                             }
                             
-                            Color.clear
-                                .overlay {
-                                    ColorsGrid(emptyStruct.bubble) { saveDelay() }
-                                }
+                            ColorsGrid(emptyStruct.bubble) { saveDelay() }
                         }
                         .padding(10)
                         .background {
