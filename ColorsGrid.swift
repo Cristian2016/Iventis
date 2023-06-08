@@ -19,11 +19,11 @@ struct ColorsGrid: View {
             ForEach(Color.paletteTriColors, id: \.self) { tricolors in                                                GridRow {
                 
                 ForEach(tricolors) { tricolor in
-                    let currentColor = tricolor.description == bubble.color
+                    let sameColor = tricolor.description == bubble.color
                     
                     tricolor.sec
                         .onTapGesture {
-                            if !currentColor { //1
+                            if !sameColor { //1
                                 viewModel.changeColor(of: bubble, to: tricolor.description)
                                 dismissAction()
                             }
@@ -32,7 +32,6 @@ struct ColorsGrid: View {
             }
             }
         }
-        .background()
     }
     
     // MARK: - Lego
