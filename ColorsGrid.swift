@@ -16,17 +16,18 @@ struct ColorsGrid: View {
     
     var body: some View {
         Grid(horizontalSpacing: 1, verticalSpacing: 1) {
-            ForEach(Color.paletteTriColors, id: \.self) { tricolors in                           GridRow {
+            ForEach(Color.paletteTriColors, id:\.self) { tricolors in
+                GridRow {
                     ForEach(tricolors) { tricolor in
-                    let sameColor = tricolor.description == bubble.color
-                    
-                    tricolor.sec
-                        .onTapGesture {
-                            if !sameColor { //1
-                                viewModel.changeColor(of: bubble, to: tricolor.description)
-                                dismissAction()
+                        let sameColor = tricolor.description == bubble.color
+                        
+                        tricolor.sec
+                            .onTapGesture {
+                                if !sameColor { //1
+                                    viewModel.changeColor(of: bubble, to: tricolor.description)
+                                    dismissAction()
+                                }
                             }
-                        }
                     }
                 }
             }
