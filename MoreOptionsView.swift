@@ -116,9 +116,7 @@ struct MoreOptionsView: View {
                         .font(.callout)
                 }
             }
-            .foregroundColor(.black)
             .frame(maxWidth: .infinity)
-            .background(.white) //
             .onTapGesture { saveDelay() }
             .gesture(swipe) //remove delay
         }
