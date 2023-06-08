@@ -54,12 +54,12 @@ struct MoreOptionsView: View {
                             
                             Color.clear
                                 .overlay {
-                                    ColorsGrid(emptyStruct.bubble, spacing: metrics.colorsSpacing) { saveDelay() }
+                                    ColorsGrid(emptyStruct.bubble) { saveDelay() }
                                 }
                         }
                         .padding(10)
                         .background {
-                            Color.white
+                            Color.background
                                 .cornerRadius(10)
                                 .standardShadow()
                         }

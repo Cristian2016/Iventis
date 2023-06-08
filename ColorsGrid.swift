@@ -10,39 +10,29 @@ import SwiftUI
 struct ColorsGrid: View {
     @EnvironmentObject private var viewModel:ViewModel
     private let columns:[GridItem]
-    private let metrics:Metrics
+    private let metrics = Metrics()
     private let dismissAction:() -> ()
     private let bubble:Bubble
     
     var body: some View {
-        GeometryReader { geo in
-            ScrollView {
-                LazyVGrid(columns: columns, spacing: metrics.spacing) {
-                    let height = itemHeight(geo)
+        Grid(horizontalSpacing: 1, verticalSpacing: 1) {
+            ForEach(Color.paletteTriColors, id: \.self) { tricolors in                                                GridRow {
+                
+                ForEach(tricolors) { tricolor in
+                    let currentColor = tricolor.description == bubble.color
                     
-                    ForEach(Color.triColors) { tricolor in
-                        let currentColor = tricolor.description == bubble.color
-                        
-                        tricolor.sec
-                            .frame(height: height)
-                            .overlay { if currentColor { checkmark }}
-                            .onTapGesture {
-                                if !currentColor { //1
-                                    viewModel.changeColor(of: bubble, to: tricolor.description)
-                                    dismissAction()
-                                }
+                    tricolor.sec
+                        .onTapGesture {
+                            if !currentColor { //1
+                                viewModel.changeColor(of: bubble, to: tricolor.description)
+                                dismissAction()
                             }
-                    }
+                        }
                 }
-                .background(.white)
             }
-            .background {
-                VStack {
-                    colorNameView
-                    Spacer()
-                }
             }
         }
+        .background()
     }
     
     // MARK: - Lego
@@ -61,23 +51,14 @@ struct ColorsGrid: View {
     }
     
     // MARK: -
-    init(_ bubble:Bubble, spacing: CGFloat, _ dismissAction: @escaping () -> Void) {
+    init(_ bubble:Bubble, _ dismissAction: @escaping () -> Void) {
         self.dismissAction = dismissAction
-        self.columns = Array(repeating: GridItem(spacing: spacing), count: 3)
-        self.metrics = Metrics(spacing: spacing)
+        self.columns = Array(repeating: GridItem(spacing: 1), count: 3)
         self.bubble = bubble
     }
     
     // MARK: -
-    func itemHeight(_ geo:GeometryProxy) -> CGFloat {
-        let itemCount = Color.triColors.count
-        let totalSpacingToSubstract = itemCount/columns.count - 1
-        
-        return (geo.size.height - metrics.spacing * CGFloat(totalSpacingToSubstract)) / CGFloat(itemCount / columns.count)
-    }
-    
     struct Metrics {
-        let spacing:CGFloat
         let checkmarkFont = Font.system(size: 30, weight: .semibold)
     }
 }
