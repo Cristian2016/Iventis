@@ -9,10 +9,10 @@ import SwiftUI
 
 struct ColorsGrid: View {
     @EnvironmentObject private var viewModel:ViewModel
-    private let columns:[GridItem]
-    private let metrics = Metrics()
-    private let dismissAction:() -> ()
     private let bubble:Bubble
+    
+    private let dismissAction:() -> ()
+    private let metrics = Metrics()
     
     var body: some View {
         Grid(horizontalSpacing: 1, verticalSpacing: 1) {
@@ -51,9 +51,8 @@ struct ColorsGrid: View {
     
     // MARK: -
     init(_ bubble:Bubble, _ dismissAction: @escaping () -> Void) {
-        self.dismissAction = dismissAction
-        self.columns = Array(repeating: GridItem(spacing: 1), count: 3)
         self.bubble = bubble
+        self.dismissAction = dismissAction
     }
     
     // MARK: -
