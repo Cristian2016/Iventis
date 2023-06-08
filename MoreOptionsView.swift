@@ -213,7 +213,7 @@ extension MoreOptionsView {
         var body: some View {
             ZStack {
                 let title = "Start Delay"
-                let subtitle:LocalizedStringKey = "Start after a number of seconds"
+                let subtitle:LocalizedStringKey = "Start automatically after a number of seconds"
                 
                 if show {
                     Color.black.opacity(.darkBackground).ignoresSafeArea()
