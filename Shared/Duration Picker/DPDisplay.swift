@@ -41,8 +41,7 @@ extension DurationPickerView {
                             else { durationComponentsStack }
                         }
                     
-                    Color.ultraLightGray1
-                        .frame(width: 200, height: 1)
+                    Divider().padding([.leading, .trailing])
                     
                     Color.clear
                         .frame(height: 30)
