@@ -31,6 +31,8 @@ extension DurationPickerView {
         // MARK: - Body
         var body: some View {
             let componentsPublisher = manager.$timerDurationComponents
+            let emptyDisplayPublisher = manager.$displayIsEmpty
+            let validDurationPublisher = manager.$isDurationValid
             
             ZStack {
                 VStack(spacing: 0) {
@@ -50,8 +52,8 @@ extension DurationPickerView {
             }
             .allowsHitTesting(false)
             .onReceive(componentsPublisher) { handleReceivedComponents($0) }
-            .onReceive(manager.$displayIsEmpty) { if $0 { clearDisplay() }}
-            .onReceive(manager.$isDurationValid) { showSaveAction = $0 ? true : false }
+            .onReceive(emptyDisplayPublisher) { if $0 { clearDisplay() }}
+            .onReceive(validDurationPublisher) { showSaveAction = $0 ? true : false }
         }
         
         // MARK: -

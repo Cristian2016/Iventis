@@ -13,11 +13,13 @@ extension DurationPickerView {
         typealias Characters = CharacterSet
         let matrix = [36_000, 3600, 600, 60, 10, 1]
         
-        @Published var digits = [Int]() {didSet{ updateUI() }}
-        @Published var notAllowedCharacters = Characters(charactersIn: "56789✕")
         @Published var timerDurationComponents:TimerDurationComponents?
         @Published var displayIsEmpty = false //when true display will be cleared
         @Published var isDurationValid = false
+        
+        @Published var digits = [Int]() {didSet{ updateUI() }}
+        
+        @Published var notAllowedCharacters = Characters(charactersIn: "56789✕")
         
         ///updates both display and digitsGrid
         private func updateUI() {
