@@ -16,7 +16,7 @@ struct SmallGestureInfo: View {
             Label(input.text1, systemImage: input.symbol1)
                 .labelStyle(MyLabelStyle(alignedRight: false, color: .red, showText: showText))
             Label(input.text2, systemImage: input.symbol2)
-                .labelStyle(MyLabelStyle(showText: showText))
+                .labelStyle(MyLabelStyle(color: .secondary, showText: showText))
         }
         .onTapGesture { withAnimation { showText = !showText }}
     }
