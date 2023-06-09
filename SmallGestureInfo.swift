@@ -44,7 +44,7 @@ extension SmallGestureInfo {
             self.color = color
         }
         
-        static let clear = Input("delete.left.fill", "Clear Display",  "arrow.backward.circle.fill", "Swipe", .red)
+        static let clear = Input("delete.left.fill", "to Clear Display",  "arrow.backward.circle.fill", "Swipe", .red)
         static let save = Input("square.and.arrow.down", "to Save Delay", "hand.tap", "Tap")
         static let dismiss = Input("xmark.circle.fill", "Close", "hand.tap", "Tap")
     }
@@ -58,17 +58,18 @@ struct MyLabelStyle:LabelStyle {
     func makeBody(configuration: Configuration) -> some View {
         VStack {
             configuration.icon
+                .foregroundColor(color)
             if showText {
                 configuration.title
                     .font(.system(size: 10))
+                    .foregroundColor(.secondary)
             }
         }
-        .foregroundColor(color)
     }
 }
 
 struct SmallGestureInfo_Previews: PreviewProvider {
     static var previews: some View {
-        SmallGestureInfo(input: .save)
+        SmallGestureInfo(input: .clear)
     }
 }
