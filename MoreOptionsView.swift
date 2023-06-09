@@ -44,7 +44,7 @@ struct MoreOptionsView: View {
                             if emptyStruct.bubble.state != .running {
                                 VStack(alignment: .trailing, spacing: 14) {
                                     VStack(alignment: .trailing, spacing: 4) {
-                                        startDelayDisplay
+                                        display
                                         digits
                                     }
                                 }
@@ -94,7 +94,7 @@ struct MoreOptionsView: View {
     }
     
     // MARK: - Lego
-    private var startDelayDisplay:some View {
+    private var display:some View {
         ZStack(alignment: .topLeading) {
             HStack(alignment: .firstTextBaseline) {
                 Spacer()
