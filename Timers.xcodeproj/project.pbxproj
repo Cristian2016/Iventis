@@ -87,6 +87,7 @@
 		1F46F8FB2A263E3D00AA7F9C /* TheFlipText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F46F8FA2A263E3D00AA7F9C /* TheFlipText.swift */; };
 		1F46F8FF2A2644DF00AA7F9C /* bTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F46F8FE2A2644DF00AA7F9C /* bTimer.swift */; };
 		1F477CA928EAB21900B4F965 /* AddStickyNoteQuickButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F477CA828EAB21900B4F965 /* AddStickyNoteQuickButton.swift */; };
+		1F47C64C2A337B160072908A /* SmallGestureInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F47C64B2A337B160072908A /* SmallGestureInfo.swift */; };
 		1F48F55A286AE5B30071386A /* EmptyNote_InfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F48F559286AE5B30071386A /* EmptyNote_InfoView.swift */; };
 		1F520C6D2987DFBC00B25029 /* PairCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F520C6C2987DFBC00B25029 /* PairCell.swift */; };
 		1F52B8C8299233AF0093810C /* ColorsGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F52B8C7299233AF0093810C /* ColorsGrid.swift */; };
@@ -344,6 +345,7 @@
 		1F46F8FA2A263E3D00AA7F9C /* TheFlipText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TheFlipText.swift; sourceTree = SOURCE_ROOT; };
 		1F46F8FE2A2644DF00AA7F9C /* bTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = bTimer.swift; sourceTree = SOURCE_ROOT; };
 		1F477CA828EAB21900B4F965 /* AddStickyNoteQuickButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddStickyNoteQuickButton.swift; sourceTree = "<group>"; };
+		1F47C64B2A337B160072908A /* SmallGestureInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallGestureInfo.swift; sourceTree = "<group>"; };
 		1F48F559286AE5B30071386A /* EmptyNote_InfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyNote_InfoView.swift; sourceTree = "<group>"; };
 		1F520C6C2987DFBC00B25029 /* PairCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PairCell.swift; sourceTree = "<group>"; };
 		1F52B8C7299233AF0093810C /* ColorsGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorsGrid.swift; sourceTree = "<group>"; };
@@ -573,6 +575,7 @@
 		1F5F4A4228093FAC00AF3442 = {
 			isa = PBXGroup;
 			children = (
+				1F47C64B2A337B160072908A /* SmallGestureInfo.swift */,
 				1F45CC1F2A04D4A200B9548C /* Cell.swift */,
 				1F34FB9929FEB14D001C8B9F /* WidgetSymbol.swift */,
 				1FB8E85B29E3517F0005909E /* Colors */,
@@ -1091,6 +1094,7 @@
 				1F542F92286D757000403F13 /* StickyNoteList.swift in Sources */,
 				1F695087287D737600CC9FF4 /* SDButton.swift in Sources */,
 				1F74878D286ED1B10092674F /* StartInfoView.swift in Sources */,
+				1F47C64C2A337B160072908A /* SmallGestureInfo.swift in Sources */,
 				1F98D78A286AF8A300C0A973 /* DeleteRow_InfoView.swift in Sources */,
 				1FA03CAB29893E6200AF7395 /* SessionDeleteButton.swift in Sources */,
 				1FE163AE280EE6F40050C6F5 /* LeftStrip.swift in Sources */,
