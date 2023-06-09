@@ -54,7 +54,7 @@ struct MoreOptionsView: View {
                             
                             ColorsGrid(emptyStruct.bubble) { saveDelay() }
                         }
-                        .frame(maxWidth: 370, maxHeight: 700)
+                        .frame(maxHeight: 700)
                         .padding(10)
                         .background {
                             vRoundedRectangle(corners: [.bottomLeft, .bottomRight], radius: 10)
