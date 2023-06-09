@@ -24,7 +24,7 @@ struct ColorsGrid: View {
                             let sameColor = (tricolor.description == bubble.color)
                             
                             tricolor.sec
-                                .aspectRatio(1.8, contentMode: .fill)
+                                .aspectRatio(1.6, contentMode: .fill)
                                 .overlay { if sameColor { checkmark }}
                                 .onTapGesture {
                                     if !sameColor { //1
