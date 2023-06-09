@@ -12,11 +12,11 @@ struct SmallGestureInfo: View {
     let input:Input
     
     var body: some View {
-        HStack(alignment: .bottom) {
-            Label(input.text2, systemImage: input.symbol2)
-                .labelStyle(MyLabelStyle(alignedRight: true, color: .secondary, showText: showText))
+        HStack(alignment: .bottom, spacing: 4) {
             Label(input.text1, systemImage: input.symbol1)
                 .labelStyle(MyLabelStyle(color: input.color, showText: showText))
+            Label(input.text2, systemImage: input.symbol2)
+                .labelStyle(MyLabelStyle(alignedRight: true, color: .secondary, showText: showText))
         }
         .onTapGesture { withAnimation { showText = !showText }}
     }
@@ -44,9 +44,9 @@ extension SmallGestureInfo {
             self.color = color
         }
         
-        static let clear = Input("delete.left.fill", "to Clear Display",  "arrow.backward.circle.fill", "Swipe", .red)
-        static let save = Input("square.and.arrow.down", "to Save Delay", "hand.tap", "Tap")
-        static let dismiss = Input("xmark.circle.fill", "Close", "hand.tap", "Tap")
+        static let clear = Input("delete.left.fill", "Clear Display",  "arrow.backward.circle.fill", "Swipe", .red)
+        static let save = Input("square.and.arrow.down", "Save Delay", "hand.tap", "Tap")
+        static let dismiss = Input("xmark.circle.fill", "Dismiss", "hand.tap", "Tap")
     }
 }
 
@@ -70,6 +70,6 @@ struct MyLabelStyle:LabelStyle {
 
 struct SmallGestureInfo_Previews: PreviewProvider {
     static var previews: some View {
-        SmallGestureInfo(input: .clear)
+        SmallGestureInfo(input: .dismiss)
     }
 }
