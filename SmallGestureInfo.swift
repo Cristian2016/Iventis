@@ -37,12 +37,11 @@ extension SmallGestureInfo {
              _ text2: String,
              _ color:Color = .secondary) {
             
-            self.color = color
             self.symbol1 = symbol1
             self.text1 = text1
-            
             self.symbol2 = symbol2
             self.text2 = text2
+            self.color = color
         }
         
         static let clear = Input("xmark.square.fill", "Clear",  "arrow.backward.circle.fill", "Swipe", .red)
