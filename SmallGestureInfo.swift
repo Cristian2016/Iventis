@@ -17,6 +17,11 @@ struct SmallGestureInfo: View {
             Label("Swipe", systemImage: "arrow.backward.circle.fill")
                 .labelStyle(MyLabelStyle(showText: showText))
         }
+        .onTapGesture {
+            withAnimation {
+                showText = !showText
+            }
+        }
     }
 }
 
@@ -34,8 +39,10 @@ struct MyLabelStyle:LabelStyle {
     func makeBody(configuration: Configuration) -> some View {
         VStack(alignment: alignedRight ? .leading : .trailing) {
             configuration.icon
-            configuration.title
-                .font(.system(size: 10))
+            if showText {
+                configuration.title
+                    .font(.system(size: 10))
+            }
         }
         .foregroundColor(color)
     }
