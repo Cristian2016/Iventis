@@ -31,7 +31,12 @@ extension SmallGestureInfo {
         let symbol2:String
         let text2:String
         
-        init(_ symbol1: String, _ text1: String, _ symbol2: String, _ text2: String, _ color:Color = .secondary) {
+        init(_ symbol1: String,
+             _ text1: String,
+             _ symbol2: String,
+             _ text2: String,
+             _ color:Color = .secondary) {
+            
             self.color = color
             self.symbol1 = symbol1
             self.text1 = text1
