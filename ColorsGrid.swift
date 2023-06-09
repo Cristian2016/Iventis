@@ -25,9 +25,7 @@ struct ColorsGrid: View {
                             
                             tricolor.sec
                                 .aspectRatio(1.8, contentMode: .fill)
-                                .overlay {
-                                    if sameColor { checkmark }
-                                }
+                                .overlay { if sameColor { checkmark }}
                                 .onTapGesture {
                                     if !sameColor { //1
                                         viewModel.changeColor(of: bubble, to: tricolor.description)
@@ -50,11 +48,9 @@ struct ColorsGrid: View {
     }
     
     private var colorNameView:some View {
-        Text(Color.userFriendlyBubbleColorName(for: bubble.color))
-            .padding([.leading, .trailing])
-            .background(Color.bubbleColor(forName: bubble.color), in: RoundedRectangle(cornerRadius: 4))
-            .foregroundColor(.white)
-            .font(metrics.checkmarkFont)
+        let title = Color.userFriendlyBubbleColorName(for: bubble.color)
+        let color = Color.bubbleColor(forName: bubble.color)
+        return FusedLabel(content: .init(title: title, symbol: "paintpalette.fill", size: .small, color: color, isFilled: true))
     }
     
     // MARK: -
