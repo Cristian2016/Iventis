@@ -14,7 +14,7 @@ struct SmallGestureInfo: View {
     var body: some View {
         HStack(alignment: .bottom) {
             Label(input.text1, systemImage: input.symbol1)
-                .labelStyle(MyLabelStyle(alignedRight: false, color: .red, showText: showText))
+                .labelStyle(MyLabelStyle(alignedRight: false, color: input.color, showText: showText))
             Label(input.text2, systemImage: input.symbol2)
                 .labelStyle(MyLabelStyle(color: .secondary, showText: showText))
         }
@@ -24,26 +24,24 @@ struct SmallGestureInfo: View {
 
 extension SmallGestureInfo {
     struct Input {
+        let color:Color
         let symbol1:String
         let text1:String
         
         let symbol2:String
         let text2:String
         
-        init(_ symbol1: String, _ text1: String, _ symbol2: String, _ text2: String) {
+        init(_ symbol1: String, _ text1: String, _ symbol2: String, _ text2: String, _ color:Color = .secondary) {
+            self.color = color
             self.symbol1 = symbol1
             self.text1 = text1
+            
             self.symbol2 = symbol2
             self.text2 = text2
         }
         
-        static let clear = Input("xmark.square.fill", "Clear", "arrow.backward.circle.fill", "Swipe")
-    }
-}
-
-struct SmallGestureInfo_Previews: PreviewProvider {
-    static var previews: some View {
-        SmallGestureInfo(input: .clear)
+        static let clear = Input("xmark.square.fill", "Clear",  "arrow.backward.circle.fill", "Swipe", .red)
+        static let save = Input("square.and.arrow.down", "Save", "hand.tap", "Tap")
     }
 }
 
@@ -61,5 +59,11 @@ struct MyLabelStyle:LabelStyle {
             }
         }
         .foregroundColor(color)
+    }
+}
+
+struct SmallGestureInfo_Previews: PreviewProvider {
+    static var previews: some View {
+        SmallGestureInfo(input: .clear)
     }
 }
