@@ -8,12 +8,14 @@
 import SwiftUI
 
 struct SmallGestureInfo: View {
+    @State private var showText = true
+    
     var body: some View {
         HStack(alignment: .bottom) {
             Label("Clear", systemImage: "xmark.square.fill")
-                .labelStyle(MyLabelStyle(alignedRight: false, color: .red))
+                .labelStyle(MyLabelStyle(alignedRight: false, color: .red, showText: showText))
             Label("Swipe", systemImage: "arrow.backward.circle.fill")
-                .labelStyle(MyLabelStyle())
+                .labelStyle(MyLabelStyle(showText: showText))
         }
     }
 }
@@ -27,6 +29,7 @@ struct SmallGestureInfo_Previews: PreviewProvider {
 struct MyLabelStyle:LabelStyle {
     var alignedRight = true
     var color = Color.label
+    var showText = true
     
     func makeBody(configuration: Configuration) -> some View {
         VStack(alignment: alignedRight ? .leading : .trailing) {
