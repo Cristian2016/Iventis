@@ -17,11 +17,7 @@ struct SmallGestureInfo: View {
             Label("Swipe", systemImage: "arrow.backward.circle.fill")
                 .labelStyle(MyLabelStyle(showText: showText))
         }
-        .onTapGesture {
-            withAnimation {
-                showText = !showText
-            }
-        }
+        .onTapGesture { withAnimation { showText = !showText }}
     }
 }
 
