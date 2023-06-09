@@ -70,6 +70,6 @@ struct MyLabelStyle:LabelStyle {
 
 struct SmallGestureInfo_Previews: PreviewProvider {
     static var previews: some View {
-        SmallGestureInfo(input: .dismiss)
+        SmallGestureInfo(input: .clear)
     }
 }

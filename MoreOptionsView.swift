@@ -49,7 +49,7 @@ struct MoreOptionsView: View {
                                     }
                                 }
                                 
-                                Divider()
+                                Divider().padding([.leading, .trailing])
                             }
                             
                             ColorsGrid(emptyStruct.bubble) { saveDelay() }
