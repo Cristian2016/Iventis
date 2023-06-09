@@ -23,15 +23,18 @@ struct ColorsGrid: View {
                         
                         tricolor.sec
                             .overlay { if sameColor { checkmark }}
-                            .onTapGesture {
-                                if !sameColor { //1
-                                    viewModel.changeColor(of: bubble, to: tricolor.description)
-                                    dismissAction()
-                                }
-                            }
+                            .onTapGesture { handleColorChange(sameColor, tricolor) }
                     }
                 }
             }
+        }
+    }
+    
+    // MARK: -
+    private func handleColorChange(_ sameColor:Bool, _ tricolor:Color.Tricolor) {
+        if !sameColor { //1
+            viewModel.changeColor(of: bubble, to: tricolor.description)
+            dismissAction()
         }
     }
     
