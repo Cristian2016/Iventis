@@ -58,7 +58,7 @@ struct MoreOptionsView: View {
                         .padding(10)
                         .background {
                             vRoundedRectangle(corners: [.bottomLeft, .bottomRight], radius: 10)
-                                .fill(Color.background)
+                                .fill(.thinMaterial)
                                 .standardShadow()
                         }
                         .padding(isPortrait ? 28 : 20)
@@ -115,7 +115,6 @@ struct MoreOptionsView: View {
                 }
             }
             .frame(maxWidth: .infinity)
-            .background()
             .onTapGesture { saveDelay() }
             .gesture(swipe) //remove delay
         }
