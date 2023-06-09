@@ -44,7 +44,7 @@ extension SmallGestureInfo {
             self.color = color
         }
         
-        static let clear = Input("delete.left.fill", "to Clear",  "arrow.backward.circle.fill", "Swipe", .red)
+        static let clear = Input("delete.left.fill", "to clear",  "arrow.backward.circle.fill", "Swipe", .red)
         static let save = Input("square.and.arrow.down", "to Save", "hand.tap", "Tap")
         static let dismiss = Input("xmark.circle.fill", "to Dismiss", "hand.tap", "Tap")
     }
