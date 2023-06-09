@@ -26,16 +26,16 @@ struct AlertHintView: View {
     
     var body: some View {
         ZStack {
-            ThinMaterialLabel("Caffeinated", "App will not sleep!") {
+            ThinMaterialLabel("Always-ON", "App will not sleep!") {
                 ScrollView {
                     VStack(alignment: .leading, spacing: 8) {
                         VStack(alignment: .leading) {
-                            Text("***Caffeinated*** overrides Auto-Lock")
+                            Text("***Always-ON*** overrides Auto-Lock")
                             Text("*Settings App > Display & Brightness > Auto-Lock*")
                                 .foregroundColor(.secondary)
                         }
                         VStack(alignment: .leading) {
-                            Text("Regardless of the device settings, Auto-Lock for this app is set to 'Never'. This means the display stays on, unless ***Caffeinated*** is switched off again")
+                            Text("Regardless of the device settings, Auto-Lock for this app is set to 'Never'. This means the display stays on, unless ***Always-ON*** is switched off again")
                         }
                     }
                 }
