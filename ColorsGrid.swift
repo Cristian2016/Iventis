@@ -20,9 +20,9 @@ struct ColorsGrid: View {
                 ForEach(Color.paletteTriColors, id:\.self) { tricolors in
                     GridRow {
                         ForEach(tricolors) { tricolor in
-                            let sameColor = tricolor.description == bubble.color
+                            let sameColor = (tricolor.description == bubble.color)
                             
-                            Rectangle().fill(tricolor.sec)
+                            tricolor.sec
                                 .aspectRatio(1.8, contentMode: .fill)
                                 .onTapGesture {
                                     if !sameColor { //1
