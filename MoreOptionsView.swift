@@ -56,8 +56,8 @@ struct MoreOptionsView: View {
                         }
                         .padding(10)
                         .background {
-                            Color.background
-                                .cornerRadius(10)
+                            vRoundedRectangle(corners: [.bottomLeft, .bottomRight], radius: 10)
+                                .fill(Color.background)
                                 .standardShadow()
                         }
                         .padding(isPortrait ? 28 : 20)
