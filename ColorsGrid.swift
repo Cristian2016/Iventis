@@ -15,29 +15,24 @@ struct ColorsGrid: View {
     private let metrics = Metrics()
     
     var body: some View {
-        ScrollView {
-//            colorNameView
-            Grid(horizontalSpacing: 1, verticalSpacing: 1) {
-                ForEach(Color.paletteTriColors, id:\.self) { tricolors in
-                    GridRow {
-                        ForEach(tricolors) { tricolor in
-                            let sameColor = (tricolor.description == bubble.color)
-                            
-                            tricolor.sec
-                                .aspectRatio(1.8, contentMode: .fill)
-                                .overlay { if sameColor { checkmark }}
-                                .onTapGesture {
-                                    if !sameColor { //1
-                                        viewModel.changeColor(of: bubble, to: tricolor.description)
-                                        dismissAction()
-                                    }
+        Grid(horizontalSpacing: 1, verticalSpacing: 1) {
+            ForEach(Color.paletteTriColors, id:\.self) { tricolors in
+                GridRow {
+                    ForEach(tricolors) { tricolor in
+                        let sameColor = (tricolor.description == bubble.color)
+                        
+                        tricolor.sec
+                            .overlay { if sameColor { checkmark }}
+                            .onTapGesture {
+                                if !sameColor { //1
+                                    viewModel.changeColor(of: bubble, to: tricolor.description)
+                                    dismissAction()
                                 }
-                        }
+                            }
                     }
                 }
             }
         }
-        .scrollIndicators(.hidden)
     }
     
     // MARK: - Lego
