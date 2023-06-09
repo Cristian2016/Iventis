@@ -56,13 +56,13 @@ struct DurationPickerView: View {
     // MARK: - Lego
     private var translucentBackground:some View {
         Rectangle()
-            .fill(.thinMaterial)
+            .fill(.ultraThinMaterial)
             .ignoresSafeArea()
     }
     
     private var vRectangle: some View {
         vRoundedRectangle(corners: [.bottomLeft, .bottomRight], radius: 40)
-            .fill(.background)
+            .fill(.thickMaterial)
             .padding([.leading, .trailing])
             .padding([.bottom], 4) //2
             .standardShadow()
@@ -76,7 +76,6 @@ struct DurationPickerView: View {
                 GridRow { ForEach(digits, id: \.self) { Digit($0, tricolor!) }}
             }
         }
-        .background()
     }
     
     // MARK: - Gesture

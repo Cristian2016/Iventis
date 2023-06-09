@@ -35,7 +35,7 @@ struct MoreOptionsView: View {
                     AnyLayout(VStackLayout()) : .init(HStackLayout(alignment: .top))
                     
                     ZStack {
-                        BlurryBackground(material: .thinMaterial)
+                        BlurryBackground(material: .ultraThinMaterial)
                             .onTapGesture { saveDelay() }
                             .highPriorityGesture(swipeLeft)
                             .ignoresSafeArea()
@@ -58,7 +58,7 @@ struct MoreOptionsView: View {
                         .padding(10)
                         .background {
                             vRoundedRectangle(corners: [.bottomLeft, .bottomRight], radius: 10)
-                                .fill(.background)
+                                .fill(.thickMaterial)
                                 .standardShadow()
                         }
                         .padding(isPortrait ? 28 : 20)
