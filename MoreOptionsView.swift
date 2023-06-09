@@ -115,6 +115,7 @@ struct MoreOptionsView: View {
                 }
             }
             .frame(maxWidth: .infinity)
+            .contentShape(Rectangle())
             .onTapGesture { saveDelay() }
             .gesture(swipe) //remove delay
         }
