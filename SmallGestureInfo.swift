@@ -13,10 +13,10 @@ struct SmallGestureInfo: View {
     
     var body: some View {
         HStack(alignment: .bottom, spacing: 4) {
+            Label(input.text2, systemImage: input.symbol2)
+                .labelStyle(MyLabelStyle(alignedRight: false, color: .secondary, showText: showText))
             Label(input.text1, systemImage: input.symbol1)
                 .labelStyle(MyLabelStyle(color: input.color, showText: showText))
-            Label(input.text2, systemImage: input.symbol2)
-                .labelStyle(MyLabelStyle(alignedRight: true, color: .secondary, showText: showText))
         }
         .onTapGesture { withAnimation { showText = !showText }}
     }
@@ -44,9 +44,9 @@ extension SmallGestureInfo {
             self.color = color
         }
         
-        static let clear = Input("delete.left.fill", "Clear Display",  "arrow.backward.circle.fill", "Swipe", .red)
-        static let save = Input("square.and.arrow.down", "Save Delay", "hand.tap", "Tap")
-        static let dismiss = Input("xmark.circle.fill", "Dismiss", "hand.tap", "Tap")
+        static let clear = Input("delete.left.fill", "to Clear",  "arrow.backward.circle.fill", "Swipe", .red)
+        static let save = Input("square.and.arrow.down", "to Save", "hand.tap", "Tap")
+        static let dismiss = Input("xmark.circle.fill", "to Dismiss", "hand.tap", "Tap")
     }
 }
 
@@ -56,7 +56,7 @@ struct MyLabelStyle:LabelStyle {
     var showText = true
     
     func makeBody(configuration: Configuration) -> some View {
-        VStack {
+        VStack(alignment: alignedRight ? .leading :.trailing) {
             configuration.icon
                 .foregroundColor(color)
             if showText {
@@ -70,6 +70,6 @@ struct MyLabelStyle:LabelStyle {
 
 struct SmallGestureInfo_Previews: PreviewProvider {
     static var previews: some View {
-        SmallGestureInfo(input: .dismiss)
+        SmallGestureInfo(input: .clear)
     }
 }
