@@ -16,6 +16,7 @@ struct ColorsGrid: View {
     
     var body: some View {
         ScrollView {
+            colorNameView
             Grid(horizontalSpacing: 1, verticalSpacing: 1) {
                 ForEach(Color.paletteTriColors, id:\.self) { tricolors in
                     GridRow {
@@ -24,6 +25,9 @@ struct ColorsGrid: View {
                             
                             tricolor.sec
                                 .aspectRatio(1.8, contentMode: .fill)
+                                .overlay {
+                                    if sameColor { checkmark }
+                                }
                                 .onTapGesture {
                                     if !sameColor { //1
                                         viewModel.changeColor(of: bubble, to: tricolor.description)
