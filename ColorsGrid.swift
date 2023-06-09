@@ -16,7 +16,7 @@ struct ColorsGrid: View {
     
     var body: some View {
         ScrollView {
-            colorNameView
+//            colorNameView
             Grid(horizontalSpacing: 1, verticalSpacing: 1) {
                 ForEach(Color.paletteTriColors, id:\.self) { tricolors in
                     GridRow {
@@ -47,11 +47,11 @@ struct ColorsGrid: View {
             .font(metrics.checkmarkFont)
     }
     
-    private var colorNameView:some View {
-        let title = Color.userFriendlyBubbleColorName(for: bubble.color)
-        let color = Color.bubbleColor(forName: bubble.color)
-        return FusedLabel(content: .init(title: title, symbol: "paintpalette.fill", size: .small, color: color, isFilled: true))
-    }
+//    private var colorNameView:some View {
+//        let title = Color.userFriendlyBubbleColorName(for: bubble.color)
+//        let color = Color.bubbleColor(forName: bubble.color)
+//        return FusedLabel(content: .init(title: title, symbol: "paintpalette.fill", size: .small, color: color, isFilled: true))
+//    }
     
     // MARK: -
     init(_ bubble:Bubble, _ dismissAction: @escaping () -> Void) {

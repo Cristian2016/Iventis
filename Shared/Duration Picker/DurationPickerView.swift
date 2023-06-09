@@ -36,6 +36,7 @@ struct DurationPickerView: View {
                 translucentBackground
                     .gesture(swipeToClearDisplay)
                     .onTapGesture { dismiss() }
+                
                 VStack(spacing: 0) {
                     Display(reason) { dismiss() }
                     digitsGrid.overlay { DPOKCircle { dismiss() } }
