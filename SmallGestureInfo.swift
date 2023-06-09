@@ -45,8 +45,8 @@ extension SmallGestureInfo {
         }
         
         static let clear = Input("delete.left.fill", "to clear",  "arrow.backward.circle.fill", "Swipe", .red)
-        static let save = Input("square.and.arrow.down", "to Save", "hand.tap", "Tap")
-        static let dismiss = Input("xmark.circle.fill", "to Dismiss", "hand.tap", "Tap")
+        static let save = Input("square.and.arrow.down", "to save", "hand.tap", "Tap")
+        static let dismiss = Input("xmark.circle.fill", "to close", "hand.tap", "Tap")
     }
 }
 
@@ -70,6 +70,6 @@ struct MyLabelStyle:LabelStyle {
 
 struct SmallGestureInfo_Previews: PreviewProvider {
     static var previews: some View {
-        SmallGestureInfo(input: .clear)
+        SmallGestureInfo(input: .dismiss)
     }
 }
