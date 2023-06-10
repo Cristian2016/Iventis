@@ -11,9 +11,12 @@ import MyPackage
 
 struct PaletteView: View {
     @EnvironmentObject private var viewModel:ViewModel
+    
     @State private var tappedCircle:String?
     @State private var longPressedCircle:String?
+    
     @AppStorage("showPaletteHint", store: .shared) var showPaletteInfo = true
+    
     private let secretary = Secretary.shared
     @State private var show = false
     
