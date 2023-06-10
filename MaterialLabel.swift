@@ -54,6 +54,7 @@ struct MaterialLabel<Content:View>: View {
                     .font(.system(size: 20))
                 
                 Divider()
+                
                 HStack {
                     shakeForInfo
                     moreInfoButton
