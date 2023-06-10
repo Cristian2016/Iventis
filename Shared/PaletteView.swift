@@ -22,7 +22,7 @@ struct PaletteView: View {
     
     private let colums = Array(repeating: GridItem(), count: 3)
     
-    private func dismiss() {
+    private func dismissInfo() {
         withAnimation { showPaletteInfo = false }
         secretary.showPaletteInfo = false
     }
@@ -39,7 +39,7 @@ struct PaletteView: View {
                     
                     colors
                     if showPaletteInfo {
-                        MaterialLabel(title) { infoContent } _: { dismiss() } _: { moreInfo() }
+                        MaterialLabel(title) { infoContent } _: { dismissInfo() } _: { moreInfo() }
                     }
                 }
                 .gesture(swipeGesture)

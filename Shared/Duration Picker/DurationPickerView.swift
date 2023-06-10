@@ -23,6 +23,8 @@ struct DurationPickerView: View {
     @State private var bubble:Bubble?
     @State private var reason:Secretary.DurationPickerReason = .none
     
+    @AppStorage("showDPVHint", store: .shared) var showDPInfo = true
+    
     private let twoDDigits = [["7", "8", "9"], ["4", "5", "6"], ["1", "2", "3"], ["*", "0", "✕"]]
     
     let gridSpacing = CGFloat(1)
@@ -132,22 +134,25 @@ struct DurationPickerView: View {
 
 extension DurationPickerView {
     struct Info:View {
-        @State private var show = false
+        @AppStorage("showDPVHint", store: .shared) var showDPInfo = true
         
         var body: some View {
             let publisher = Secretary.shared.$showDurationPickerInfo
             
             ZStack {
-                if show {
+                if showDPInfo {
                     Background(.dark())
                     MaterialLabel(title, subtitle) { InfoView() } _: { dismiss() } _: { moreInfo() }
                 }
             }
-            .onReceive(publisher) { output in withAnimation { show = output }}
+            .onReceive(publisher) { output in withAnimation { showDPInfo = output }}
         }
         
         // MARK: -
-        private func dismiss() { Secretary.shared.showDurationPickerInfo = false }
+        private func dismiss() {
+            showDPInfo = false
+            Secretary.shared.showDurationPickerInfo = false
+        }
         private func moreInfo() { Secretary.shared.showInfoVH = true }
         
         // MARK: -
