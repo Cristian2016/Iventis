@@ -137,16 +137,15 @@ extension DurationPickerView {
         private let subtitle:LocalizedStringKey = "\(Image(systemName: "checkmark.circle.fill")) checkmark means duration is valid"
         
         var body: some View {
+            let publisher = Secretary.shared.$showDurationPickerInfo
+            
             ZStack {
                 if show {
                     Background(.dark())
-                    
                     MaterialLabel(title, subtitle) { InfoView() } _: { dismiss() } _: { moreInfo() }
                 }
             }
-            .onReceive(Secretary.shared.$showDurationPickerInfo) { output in
-                withAnimation { show = output }
-            }
+            .onReceive(publisher) { output in withAnimation { show = output }}
         }
         
         private func dismiss() { Secretary.shared.showDurationPickerInfo = false }
