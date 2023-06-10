@@ -133,8 +133,6 @@ struct DurationPickerView: View {
 extension DurationPickerView {
     struct Info:View {
         @State private var show = false
-        private let title = "Timer Duration"
-        private let subtitle:LocalizedStringKey = "\(Image(systemName: "checkmark.circle.fill")) checkmark means duration is valid"
         
         var body: some View {
             let publisher = Secretary.shared.$showDurationPickerInfo
@@ -151,6 +149,10 @@ extension DurationPickerView {
         private func dismiss() { Secretary.shared.showDurationPickerInfo = false }
         
         private func moreInfo() { Secretary.shared.showInfoVH = true }
+        
+        // MARK: -
+        private let title = "Timer Duration"
+        private let subtitle:LocalizedStringKey = "\(Image(systemName: "checkmark.circle.fill")) checkmark means duration is valid"
     }
 }
 
