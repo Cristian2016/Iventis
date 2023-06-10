@@ -146,8 +146,8 @@ extension DurationPickerView {
             .onReceive(publisher) { output in withAnimation { show = output }}
         }
         
+        // MARK: -
         private func dismiss() { Secretary.shared.showDurationPickerInfo = false }
-        
         private func moreInfo() { Secretary.shared.showInfoVH = true }
         
         // MARK: -
