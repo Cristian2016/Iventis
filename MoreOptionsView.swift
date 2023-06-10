@@ -219,7 +219,6 @@ extension MoreOptionsView {
                     Background(.dark()).ignoresSafeArea()
                     
                     MaterialLabel(title, subtitle) { MoreOptionsInfoView() } _: { showInfo() } _: { }
-                    .font(metrics.infoFont)
                 }
             }
             .onReceive(Secretary.shared.$showMoreOptionsInfo) { output in

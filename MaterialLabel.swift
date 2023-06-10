@@ -13,7 +13,12 @@ struct MaterialLabel<Content:View>: View {
         let backgroundRadius = CGFloat(20)
     }
     
-    init(_ title:String? = nil, _ subtitle:LocalizedStringKey? = nil, @ViewBuilder _ content:() -> Content, _ action: @escaping () -> (), _ moreInfo: @escaping () -> ()) {
+    init(_ title:String? = nil,
+         _ subtitle:LocalizedStringKey? = nil,
+         @ViewBuilder _ content:() -> Content,
+         _ action: @escaping () -> (),
+         _ moreInfo: @escaping () -> ()) {
+        
         self.content = content()
         self.action = action
         self.moreInfo = moreInfo

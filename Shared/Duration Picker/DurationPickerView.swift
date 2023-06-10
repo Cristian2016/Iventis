@@ -142,7 +142,6 @@ extension DurationPickerView {
                     Background(.dark())
                     
                     MaterialLabel(title, subtitle) { InfoView() } _: { dismiss() } _: { moreInfo() }
-                        .font(.system(size: 20))
                 }
             }
             .onReceive(Secretary.shared.$showDurationPickerInfo) { output in
