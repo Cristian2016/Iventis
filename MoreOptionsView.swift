@@ -38,7 +38,6 @@ struct MoreOptionsView: View {
                         BlurryBackground(material: .ultraThinMaterial)
                             .onTapGesture { saveDelay() }
                             .highPriorityGesture(swipeLeft)
-                            .ignoresSafeArea()
                         
                         layout {
                             if emptyStruct.bubble.state != .running {
