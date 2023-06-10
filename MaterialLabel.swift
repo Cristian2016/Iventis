@@ -43,13 +43,9 @@ struct MaterialLabel<Content:View>: View {
                 .onTapGesture { action() }
             
             VStack {
-                if let title = title {
-                    Text(title)
-                        .padding(.bottom, 1)
-                        .font(.system(size: 28, weight: .medium))
-                        .minimumScaleFactor(0.1)
-                    subtitleView
-                }
+                titleView
+                subtitleView
+                
                 content
                     .font(.system(size: 20))
                 
@@ -70,6 +66,16 @@ struct MaterialLabel<Content:View>: View {
     private var shakeForInfo:some View {
         Label("*Shake for Info*", systemImage: "iphone.radiowaves.left.and.right")
             .font(.system(size: .minFontSize))
+    }
+    
+    @ViewBuilder
+    private var titleView:some View {
+        if let title = title {
+            Text(title)
+                .padding(.bottom, 1)
+                .font(.system(size: 28, weight: .medium))
+                .minimumScaleFactor(0.1)
+        }
     }
     
     @ViewBuilder
