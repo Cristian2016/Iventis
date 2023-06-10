@@ -10,8 +10,9 @@ import MyPackage
 
 struct FlipText: View {
     @State private var isAllowedToFlip = true
-    let input:Input
     @State private var viewToShowIndex = 0
+    
+    let input:Input
     
     let removal:AnyTransition = {
         let trans = AnyTransition.move(edge: .bottom)
@@ -49,9 +50,9 @@ struct FlipText: View {
 
 extension FlipText {
     struct Input {
-        let lines:[String]
+        let lines:[LocalizedStringKey]
         
-        static let createTimer = Input(lines: ["Create Timer", "Enter Duration"])
+        static let createTimer = Input(lines: ["Create \(Image.timer) Timer", "Enter Duration"])
     }
 }
 
