@@ -53,6 +53,8 @@ extension FlipText {
         let lines:[LocalizedStringKey]
         
         static let createTimer = Input(lines: ["Create \(Image.timer) Timer", "Enter Duration"])
+        static let editTimer = Input(lines: ["Edit Timer Duration"])
+        static let changeToTimer = Input(lines: ["Change to \(Image.timer) Timer", "Enter Duration"])
     }
 }
 
