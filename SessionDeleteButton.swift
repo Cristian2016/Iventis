@@ -20,7 +20,9 @@ struct SessionDeleteButton: View {
     var body: some View {
         ZStack {
             if input != nil {
-                Color.white.opacity(0.01).onTapGesture { cancelDeleteAction() }
+                Background(.clear)
+                    .onTapGesture { cancelDeleteAction() }
+                
                 VStack (spacing:8) {
                     Text("\(Image.info) **Delete**")
                         .font(.system(size: 23))
