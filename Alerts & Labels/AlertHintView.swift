@@ -26,7 +26,7 @@ struct AlertHintView: View {
     
     var body: some View {
         ZStack {
-            ThinMaterialLabel("Always-ON", "App will not sleep!") {
+            MaterialLabel("Always-ON", "App will not sleep!") {
                 ScrollView {
                     VStack(alignment: .leading, spacing: 8) {
                         VStack(alignment: .leading) {
@@ -41,9 +41,7 @@ struct AlertHintView: View {
                 }
                 .frame(maxHeight: 180)
                 .forceMultipleLines()
-            } action: {
-                buttonAction()
-            } moreInfo: { }
+            } _: { buttonAction() } _: { }
         }
         .onTapGesture { dismissAction() }
     }

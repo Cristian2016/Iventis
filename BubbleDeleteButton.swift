@@ -170,20 +170,15 @@ extension BubbleDeleteButton {
         let subtitle:LocalizedStringKey = "Calendar Events are safe! Deleting either a bubble or its activity will not remove events from the Calendar App"
         
         var body: some View {
+            let publisher = Secretary.shared.$showBubbleDeleteInfo
+            
             ZStack {
                 if show {
                     Background(.dark())
-                        .ignoresSafeArea()
-                    
-                    ThinMaterialLabel(title, subtitle) { content } action: { dismiss() } moreInfo: { moreInfo()
-                        
-                    }
-                    .font(.system(size: 20))
+                    MaterialLabel(title, subtitle) { content } _: { dismiss() } _: { moreInfo() }
                 }
             }
-            .onReceive(Secretary.shared.$showBubbleDeleteInfo) { output in
-                withAnimation { show = output }
-            }
+            .onReceive(publisher) { output in withAnimation { show = output }}
         }
         
         // MARK: - Lego

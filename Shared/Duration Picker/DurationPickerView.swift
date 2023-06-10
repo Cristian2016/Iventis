@@ -141,7 +141,7 @@ extension DurationPickerView {
                 if show {
                     Background(.dark())
                     
-                    ThinMaterialLabel(title, subtitle) { InfoView() } action: { dismiss() } moreInfo: { moreInfo() }
+                    MaterialLabel(title, subtitle) { InfoView() } _: { dismiss() } _: { moreInfo() }
                         .font(.system(size: 20))
                 }
             }

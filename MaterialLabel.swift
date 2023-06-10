@@ -8,12 +8,12 @@
 import SwiftUI
 import MyPackage
 
-struct ThinMaterialLabel<Content:View>: View {
+struct MaterialLabel<Content:View>: View {
     struct Metrics {
         let backgroundRadius = CGFloat(20)
     }
     
-    init(_ title:String? = nil, _ subtitle:LocalizedStringKey? = nil, @ViewBuilder _ content:() -> Content, action: @escaping () -> (), moreInfo: @escaping () -> ()) {
+    init(_ title:String? = nil, _ subtitle:LocalizedStringKey? = nil, @ViewBuilder _ content:() -> Content, _ action: @escaping () -> (), _ moreInfo: @escaping () -> ()) {
         self.content = content()
         self.action = action
         self.moreInfo = moreInfo
@@ -46,6 +46,8 @@ struct ThinMaterialLabel<Content:View>: View {
                     subtitleView
                 }
                 content
+                    .font(.system(size: 20))
+                
                 Divider()
                 HStack {
                     shakeForInfo
@@ -95,6 +97,6 @@ struct PaletteLabel_Previews: PreviewProvider {
         }
     }
     static var previews: some View {
-        ThinMaterialLabel { content } action: { } moreInfo: { }
+        MaterialLabel { content } _: { } _: { }
     }
 }

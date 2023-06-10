@@ -218,7 +218,7 @@ extension MoreOptionsView {
                 if show {
                     Background(.dark()).ignoresSafeArea()
                     
-                    ThinMaterialLabel(title, subtitle) { MoreOptionsInfoView() } action: { showInfo() } moreInfo: { }
+                    MaterialLabel(title, subtitle) { MoreOptionsInfoView() } _: { showInfo() } _: { }
                     .font(metrics.infoFont)
                 }
             }
