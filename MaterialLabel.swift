@@ -11,6 +11,7 @@ import MyPackage
 struct MaterialLabel<Content:View>: View {
     struct Metrics {
         let backgroundRadius = CGFloat(20)
+        let mediumFont = Font.system(size: 20)
     }
     
     init(_ title:String? = nil,
@@ -46,8 +47,7 @@ struct MaterialLabel<Content:View>: View {
                 titleView
                 subtitleView
                 
-                content
-                    .font(.system(size: 20))
+                content.font(metrics.mediumFont)
                 
                 Divider()
                 
