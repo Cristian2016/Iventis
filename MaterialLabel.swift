@@ -63,11 +63,6 @@ struct MaterialLabel<Content:View>: View {
     }
     
     // MARK: - Legos
-    private var shakeForInfo:some View {
-        Label("*Shake for Info*", systemImage: "iphone.radiowaves.left.and.right")
-            .font(.system(size: .minFontSize))
-    }
-    
     @ViewBuilder
     private var titleView:some View {
         if let title = title {
@@ -87,6 +82,11 @@ struct MaterialLabel<Content:View>: View {
                 .forceMultipleLines()
                 .italic()
         }
+    }
+    
+    private var shakeForInfo:some View {
+        Label("*Shake for Info*", systemImage: "iphone.radiowaves.left.and.right")
+            .font(.system(size: .minFontSize))
     }
     
     private var moreInfoButton:some View {
