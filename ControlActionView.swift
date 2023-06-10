@@ -18,7 +18,7 @@ struct ControlActionView: View {
     
     var body: some View {
         ZStack {
-            screenDarkBackground
+            Background(.dark())
                 .onTapGesture { dismiss() }
             
             VStack {
@@ -73,12 +73,6 @@ struct ControlActionView: View {
                 .frame(maxWidth: .infinity)
         }
         .buttonStyle(BStyle(position: .right(Color("deleteActionAlert1"))))
-    }
-    
-    private var screenDarkBackground:some View {
-        Color.black
-            .opacity(.darkBackground)
-            .ignoresSafeArea()
     }
     
     // MARK: - Methods
