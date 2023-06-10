@@ -6,6 +6,7 @@
 //1 prevents to grow too much in landscape mode
 
 import SwiftUI
+import MyPackage
 
 struct ThinMaterialLabel<Content:View>: View {
     struct Metrics {
@@ -33,8 +34,7 @@ struct ThinMaterialLabel<Content:View>: View {
     
     var body: some View {
         ZStack {
-            Color.black.opacity(.darkBackground)
-                .ignoresSafeArea()
+            Background(.dark())
                 .onTapGesture { action() }
             
             VStack {
