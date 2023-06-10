@@ -55,7 +55,7 @@ struct DurationPickerView: View {
 
     // MARK: - Lego
     private var translucentBackground:some View {
-        BlurryBackground(material: .ultraThinMaterial)
+        BlurryBackground()
     }
     
     private var vRectangle: some View {
