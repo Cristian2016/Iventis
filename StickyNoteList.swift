@@ -67,10 +67,11 @@ struct StickyNoteList: View {
     // MARK: - Body
     var body: some View {
         ZStack {
-            BlurryBackground()
+            Background()
                 .onTapGesture { saveNoteAndDismiss() }
                 .onLongPressGesture { deleteTextFieldText() }
                 .gesture( /* deleteTextFieldText with a */dragGesture)
+            
             VStack {
                 darkRoundedBackground
                     .overlay {

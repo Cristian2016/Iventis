@@ -33,7 +33,7 @@ struct DurationPickerView: View {
         
         ZStack {
             if show {
-                translucentBackground
+                Background()
                     .gesture(swipeToClearDisplay)
                     .onTapGesture { dismiss() }
                 
@@ -54,10 +54,6 @@ struct DurationPickerView: View {
     }
 
     // MARK: - Lego
-    private var translucentBackground:some View {
-        BlurryBackground()
-    }
-    
     private var vRectangle: some View {
         vRoundedRectangle(corners: [.bottomLeft, .bottomRight], radius: 40)
             .fill(.thickMaterial)

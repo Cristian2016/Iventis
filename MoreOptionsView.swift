@@ -35,7 +35,7 @@ struct MoreOptionsView: View {
                     AnyLayout(VStackLayout()) : .init(HStackLayout(alignment: .top))
                     
                     ZStack {
-                        BlurryBackground()
+                        Background()
                             .onTapGesture { saveDelay() }
                             .highPriorityGesture(swipeLeft)
                         
