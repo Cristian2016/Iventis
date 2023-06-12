@@ -21,11 +21,14 @@ struct FusedLabel: View {
         .font(font)
         .background {
             if content.isFilled {
-                RoundedRectangle(cornerRadius: 8).fill(content.color)
+                RoundedRectangle(cornerRadius: 8)
+                    .fill(content.color)
             } else {
-                RoundedRectangle(cornerRadius: 8).stroke(content.color)
+                RoundedRectangle(cornerRadius: 8)
+                    .stroke(content.color)
             }
         }
+        .contentShape(Rectangle())
     }
     
     private var condition:Bool { content.symbol != nil }

@@ -21,20 +21,20 @@ struct AddNoteButton: View {
                 
                 let color = newColor ?? Color.bubbleColor(forName: bubble.color)
                 
-                Button {
-                    UserFeedback.singleHaptic(.light)
-                    viewModel.notesForPair.send(bubble.lastPair)
-                } label: {
-                    FusedLabel(content: .init(title: "Add Note",
-                                              symbol: "text.alignleft",
-                                              size: .small,
-                                              color: color,
-                                              isFilled: true)
-                    )
-                }
-//                .transition(.asymmetric(insertion: .scale, removal: .identity))
+                FusedLabel(content: .init(title: "Add Note",
+                                          symbol: "text.alignleft",
+                                          size: .small,
+                                          color: color,
+                                          isFilled: true)
+                )
+                .onTapGesture { tapped(bubble) }
             }
         }
         .onReceive(secretary.$addNoteButton_bRank) { addNoteButton_bRank = $0 }
+    }
+    
+    private func tapped(_ bubble:Bubble) {
+        UserFeedback.singleHaptic(.light)
+        viewModel.notesForPair.send(bubble.lastPair)
     }
 }

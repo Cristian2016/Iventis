@@ -61,7 +61,6 @@ struct ViewHierarchy: View {
     // MARK: - Methods
             
     private func createBubblesOnFirstAppLaunch() {
-        return
         if isFirstAppLaunch {
             viewModel.createBubble(.stopwatch, "charcoal", "☕️ Break")
             viewModel.createBubble(.stopwatch, "green", "🌳 Outdoors")

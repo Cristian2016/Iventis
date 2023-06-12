@@ -51,7 +51,7 @@ struct DurationPickerView: View {
             }
         }
         .onReceive(reasonPublisher) { reason = $0 }
-        .onChange(of: reason) { handleChange($0) }
+        .onChange(of: reason) { reasonChanged($0) }
         .overlay { Info() }
     }
 
@@ -108,7 +108,7 @@ struct DurationPickerView: View {
         Secretary.shared.durationPickerReason = .none
     }
     
-    private func handleChange(_ newReason:Secretary.DurationPickerReason) {
+    private func reasonChanged(_ newReason:Secretary.DurationPickerReason) {
         switch newReason {
             case .createTimer(let tricolor):
                 self.tricolor = tricolor

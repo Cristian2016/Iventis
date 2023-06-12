@@ -38,7 +38,7 @@ class LayoutViewModel: ObservableObject {
         let deleteActionViewHeight = CGFloat(250)
         
         //prefered position of deleteActionView is under the bubbleCell, but only if it has enough room
-        let deleteActionViewFitsUnderneath = verticalSpace - (frame.origin.y + frame.height) > deleteActionViewHeight
+        _ = verticalSpace - (frame.origin.y + frame.height) > deleteActionViewHeight
     }
     
     private func observeOrientationChanges() {

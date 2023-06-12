@@ -10,7 +10,8 @@ struct AlwaysONButton: View {
     @State private var isDisplayAlwaysON = false
     
     var body: some View {
-        Button { buttonAction() } label: { label }
+        label
+            .onTapGesture { buttonAction() }
             .onReceive(secretary.$addNoteButton_bRank) { addNoteButton_bRank = $0 }
     }
     
