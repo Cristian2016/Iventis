@@ -4,7 +4,6 @@
 //
 //  Created by Cristian Lapusan on 06.02.2023.
 //  to avoid @Published property View body evaluate over and over again for Observableobject, I found an approach that seems to work just great. I use onReceive to get publisher.output and use it to sort of instantiate MoreOptionsView struct. It's already instantiated technically, but it's invisible in the ViewHierarchy. using received publisher output I set the @State input struct and that triggers a view redraw and it will show up ob the screen
-//1 I ne
 
 import SwiftUI
 import MyPackage
