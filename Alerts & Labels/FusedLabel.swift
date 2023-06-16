@@ -19,16 +19,20 @@ struct FusedLabel: View {
         .padding([.leading, .trailing])
         .padding([.top, .bottom], 4)
         .font(font)
-        .background {
-            if content.isFilled {
-                RoundedRectangle(cornerRadius: 8)
+        .background { roundedRect }
+        .contentShape(Rectangle())
+    }
+    
+    @ViewBuilder
+    private var roundedRect:some View {
+        switch content.isFilled {
+            case true: RoundedRectangle(cornerRadius: 8)
                     .fill(content.color)
-            } else {
+            case false:
                 RoundedRectangle(cornerRadius: 8)
                     .stroke(content.color)
-            }
         }
-        .contentShape(Rectangle())
+        
     }
     
     private var condition:Bool { content.symbol != nil }

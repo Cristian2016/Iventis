@@ -219,6 +219,7 @@
 		1FB8E8B129E3517F0005909E /* slateBlue.png in Resources */ = {isa = PBXBuildFile; fileRef = 1FB8E87129E3517F0005909E /* slateBlue.png */; };
 		1FB8E8B229E3517F0005909E /* slateBlue.png in Resources */ = {isa = PBXBuildFile; fileRef = 1FB8E87129E3517F0005909E /* slateBlue.png */; };
 		1FB8E8B329E3517F0005909E /* slateBlue.png in Resources */ = {isa = PBXBuildFile; fileRef = 1FB8E87129E3517F0005909E /* slateBlue.png */; };
+		1FBB35C52A3CC0D000BD9F00 /* Coordinator1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FBB35C42A3CC0D000BD9F00 /* Coordinator1.swift */; };
 		1FBC9A0029F2842E00B324DA /* InfoViewHierarchy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FBC99FF29F2842E00B324DA /* InfoViewHierarchy.swift */; };
 		1FBDFCC52A19615E00B81BCA /* TimerHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FBDFCC12A19615E00B81BCA /* TimerHistory.swift */; };
 		1FBDFCC62A19615E00B81BCA /* TimerHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FBDFCC12A19615E00B81BCA /* TimerHistory.swift */; };
@@ -443,6 +444,7 @@
 		1FB8E86F29E3517F0005909E /* red.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = red.png; sourceTree = "<group>"; };
 		1FB8E87029E3517F0005909E /* purple.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = purple.png; sourceTree = "<group>"; };
 		1FB8E87129E3517F0005909E /* slateBlue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = slateBlue.png; sourceTree = "<group>"; };
+		1FBB35C42A3CC0D000BD9F00 /* Coordinator1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator1.swift; sourceTree = "<group>"; };
 		1FBC99FF29F2842E00B324DA /* InfoViewHierarchy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewHierarchy.swift; sourceTree = SOURCE_ROOT; };
 		1FBDFCC12A19615E00B81BCA /* TimerHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerHistory.swift; sourceTree = "<group>"; };
 		1FBDFCC22A19615E00B81BCA /* TimerHistory Properties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TimerHistory Properties.swift"; sourceTree = "<group>"; };
@@ -636,6 +638,7 @@
 			isa = PBXGroup;
 			children = (
 				1FD122982A2B94DE002D6E1F /* WarningLabel.swift */,
+				1FBB35C42A3CC0D000BD9F00 /* Coordinator1.swift */,
 				1FAECA722A28A9CF00BA3C91 /* CalendarConfirmation.swift */,
 				1F46F8FE2A2644DF00AA7F9C /* bTimer.swift */,
 				1F46F8FA2A263E3D00AA7F9C /* TheFlipText.swift */,
@@ -1063,6 +1066,7 @@
 				1F0373C228DEE6F7005CE8D3 /* ScreenAlwaysOnConfirmation.swift in Sources */,
 				1FB2A84929F518D800E4861A /* InfoUnit.swift in Sources */,
 				1FFC8BAD28142F040059EF2E /* Session Properties.swift in Sources */,
+				1FBB35C52A3CC0D000BD9F00 /* Coordinator1.swift in Sources */,
 				1F04769629BB4C2400641CDC /* SDBPair.swift in Sources */,
 				1F64200A2820204400413E31 /* PairList.swift in Sources */,
 				1FA1B44A298321D20063B081 /* iPhoneViewHierarchy.swift in Sources */,
@@ -1257,7 +1261,7 @@
 				INFOPLIST_FILE = Notifications/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Notifications;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1286,7 +1290,7 @@
 				INFOPLIST_FILE = Notifications/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Notifications;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1435,7 +1439,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1470,7 +1474,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1499,7 +1503,7 @@
 				INFOPLIST_FILE = Widgets/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Widgets;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1529,7 +1533,7 @@
 				INFOPLIST_FILE = Widgets/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Widgets;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
