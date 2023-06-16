@@ -43,8 +43,8 @@ struct WidgetView : View {
     }
 }
 
-//struct WidgetsEntryView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        WidgetsEntryView(entry: .init(date: Date(), configuration: .init()))
-//    }
-//}
+struct WidgetsEntryView_Previews: PreviewProvider {
+    static var previews: some View {
+        WidgetView(entry: Provider.Entry(date: Date(), input: nil))
+    }
+}

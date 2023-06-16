@@ -121,7 +121,6 @@
 		1F7E8D1C2A20FBF200B35916 /* FlipText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F7E8D1B2A20FBF200B35916 /* FlipText.swift */; };
 		1F7F1AE429A10D9C0061EB40 /* View Modifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F7F1AE329A10D9C0061EB40 /* View Modifiers.swift */; };
 		1F83A44F29A965D90058E6E2 /* DigitsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F83A44E29A965D90058E6E2 /* DigitsView.swift */; };
-		1F85EDF52A39A92900070D8A /* SwiftUIView1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F85EDF42A39A92900070D8A /* SwiftUIView1.swift */; };
 		1F8AAFA329927B2900328AC7 /* FramePortrait.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8AAFA229927B2900328AC7 /* FramePortrait.swift */; };
 		1F8B6965283790CF006540CB /* BubbleStickyNoteList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8B6964283790CF006540CB /* BubbleStickyNoteList.swift */; };
 		1F8CA6B029F8FF0D0010F3DB /* InfoOutlineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8CA6AF29F8FF0D0010F3DB /* InfoOutlineView.swift */; };
@@ -383,7 +382,6 @@
 		1F7F1AE329A10D9C0061EB40 /* View Modifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View Modifiers.swift"; sourceTree = "<group>"; };
 		1F83A44E29A965D90058E6E2 /* DigitsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DigitsView.swift; sourceTree = SOURCE_ROOT; };
 		1F845FAD286EF8730053EAE6 /* WidgetsExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = WidgetsExtension.entitlements; sourceTree = "<group>"; };
-		1F85EDF42A39A92900070D8A /* SwiftUIView1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUIView1.swift; sourceTree = "<group>"; };
 		1F8AAFA229927B2900328AC7 /* FramePortrait.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FramePortrait.swift; sourceTree = "<group>"; };
 		1F8B6964283790CF006540CB /* BubbleStickyNoteList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BubbleStickyNoteList.swift; sourceTree = "<group>"; };
 		1F8CA6AF29F8FF0D0010F3DB /* InfoOutlineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoOutlineView.swift; sourceTree = SOURCE_ROOT; };
@@ -693,7 +691,6 @@
 				1F74878C286ED1B10092674F /* StartInfoView.swift */,
 				1FB7D57B2862F0300085C2BE /* PlusButton.swift */,
 				1F100CA62809493400A3A3C2 /* BubbleTimer.swift */,
-				1F85EDF42A39A92900070D8A /* SwiftUIView1.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -1076,7 +1073,6 @@
 				1FF8255429C7980A0003E4A0 /* DPCheckmark.swift in Sources */,
 				1FAD9B4229961FC000F49670 /* ThreeCircles.swift in Sources */,
 				1F8AAFA329927B2900328AC7 /* FramePortrait.swift in Sources */,
-				1F85EDF52A39A92900070D8A /* SwiftUIView1.swift in Sources */,
 				1F559BCA298E0BA700F07F5F /* MaterialLabel.swift in Sources */,
 				1FE68FAE29A135C600D05EE6 /* SecondsCircle.swift in Sources */,
 				1FEB508629DED01F000C242E /* BubbleDeleteActionAlert1.swift in Sources */,
