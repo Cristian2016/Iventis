@@ -21,10 +21,10 @@ struct AlwaysONButton: View {
         if isDisplayAlwaysON {
             if addNoteButton_bRank == nil { FusedLabel(content: .alwaysON) }
         }
-        else { enterSymbol }
+        else { sunSymbol }
     }
     
-    private var enterSymbol:some View {
+    private var sunSymbol:some View {
         Label("Prevent Display Sleep", systemImage: "sun.max")
             .foregroundColor(metrics.symbolColor)
             .font(metrics.font)

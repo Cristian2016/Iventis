@@ -26,13 +26,9 @@ struct FusedLabel: View {
     @ViewBuilder
     private var roundedRect:some View {
         switch content.isFilled {
-            case true: RoundedRectangle(cornerRadius: 8)
-                    .fill(content.color)
-            case false:
-                RoundedRectangle(cornerRadius: 8)
-                    .stroke(content.color)
+            case true: RoundedRectangle(cornerRadius: 8).fill(content.color)
+            case false: RoundedRectangle(cornerRadius: 8).stroke(content.color)
         }
-        
     }
     
     private var condition:Bool { content.symbol != nil }
@@ -63,7 +59,7 @@ struct FusedLabel: View {
         static let detailON = Content(title: "Detail is ON")
         static let scrollToTop = Content(title: "Scroll to Top")
         static func addNote(_ color:Color) -> Content {
-            .init(title: "Add Note", symbol: "text.alignleft", color: color, isFilled: true)
+            .init(title: "Add Note", symbol: "text.alignleft", size: .medium, color: color, isFilled: true)
         }
     }
 }
