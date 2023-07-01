@@ -18,16 +18,10 @@ struct AddNoteButton: View {
         ZStack {
             if let rank = addNoteButton_bRank,
                let bubble = viewModel.bubble(for: Int(rank)) {
-                
                 let color = newColor ?? Color.bubbleColor(forName: bubble.color)
                 
-                FusedLabel(content: .init(title: "Add Note",
-                                          symbol: "text.alignleft",
-                                          size: .small,
-                                          color: color,
-                                          isFilled: true)
-                )
-                .onTapGesture { tapped(bubble) }
+                FusedLabel(content: .addNote(color))
+                    .onTapGesture { tapped(bubble) }
             }
         }
         .onReceive(secretary.$addNoteButton_bRank) { addNoteButton_bRank = $0 }

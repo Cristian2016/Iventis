@@ -11,16 +11,16 @@ struct FusedLabel: View {
     let content:Content
     
     var body: some View {
-        Text(condition ?
-             LocalizedStringKey("\(Image(systemName: content.symbol!)) \(content.title)")
-             : LocalizedStringKey(content.title)
-        )//1
+        let text = condition ?
+        LocalizedStringKey("\(Image(systemName: content.symbol!)) \(content.title)")
+        : LocalizedStringKey(content.title)
+        
+        Text(text)//1
         .foregroundColor(content.isFilled ? .white : content.color)
         .padding([.leading, .trailing])
         .padding([.top, .bottom], 4)
         .font(font)
         .background { roundedRect }
-        .contentShape(Rectangle())
     }
     
     @ViewBuilder
@@ -62,6 +62,9 @@ struct FusedLabel: View {
         static let alwaysON = Content(title: "Always-ON", symbol: "sun.max.fill")
         static let detailON = Content(title: "Detail is ON")
         static let scrollToTop = Content(title: "Scroll to Top")
+        static func addNote(_ color:Color) -> Content {
+            .init(title: "Add Note", symbol: "text.alignleft", color: color, isFilled: true)
+        }
     }
 }
 
