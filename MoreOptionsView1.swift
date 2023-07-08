@@ -12,29 +12,42 @@ struct MoreOptionsView1: View {
     //set within .onReceive closure. all the information MoreOptionView needs :)
     @State private var input:Input?
     private let secretary = Secretary.shared
-    
+    private var model = MoreOptionsViewModel()
+        
     var body: some View {
         ZStack {
-            if let emptyStruct = input {
-                ViewThatFits {
-                    PortraitView()
-                    LandscapeView()
+            if let bubble = model.bubble {
+                ZStack {
+                    Rectangle()
+                        .background(.ultraThinMaterial)
+                        .ignoresSafeArea()
+                        .onTapGesture {
+                            dismiss()
+                        }
+                    
+                    ViewThatFits {
+                        PortraitView()
+                        LandscapeView()
+                    }
                 }
             }
         }
-        .onReceive(secretary.$moreOptionsBuble) {
-            if let bubble = $0 {
-                let color = Color.bubbleColor(forName: bubble.color)
-                let initialStartDelay = Int(bubble.startDelayBubble?.initialClock ?? 0)
-                                                
-                input = Input(bubble: bubble,
-                              initialBubbleColor: color,
-                              initialStartDelay: initialStartDelay,
-                              userEditedDelay: initialStartDelay)
-                
-            } else { input = nil }
-        }
     }
+    
+    private var swipe:some Gesture {
+        DragGesture(minimumDistance: 10)
+            .onEnded { _ in
+                UserFeedback.doubleHaptic(.heavy)
+                model.removeStartDelay()
+            }
+    }
+    
+    private func saveStartDelay() {
+        model.setStartDelay()
+        dismiss()
+    }
+    
+    private func dismiss() { secretary.moreOptionsBuble = nil }
 }
 
 extension MoreOptionsView1 {
@@ -45,17 +58,41 @@ extension MoreOptionsView1 {
         var userEditedDelay:Int
     }
     
+    struct Metrics {
+        let radius = CGFloat(10)
+        
+        let minWidth = CGFloat(300)
+        let digitSpacing = CGFloat(1)
+        let colorsSpacing = CGFloat(4)
+        
+        let delayFont = Font.system(size: 80, design: .rounded)
+        let font = Font.system(size: 30, weight: .medium)
+        let digitFont = Font.system(size: 38, weight: .medium, design: .rounded)
+        let infoFont = Font.system(size: 20)
+        
+        let portraitColorRatio = CGFloat(1.9)
+        let landscapeColorRatio = CGFloat(2.54)
+                
+        let vStackSpacing = CGFloat(8)
+        
+        var columns:[GridItem] { Array(repeating: GridItem(spacing: 0), count: 3) }
+    }
+    
+    struct DisplayView1: View {
+        var body: some View {
+            Text("Pula mea")
+        }
+    }
+    
     struct PortraitView:View {
         var body: some View {
             ZStack {
-                Rectangle()
-                    .background(.ultraThinMaterial)
-                    .ignoresSafeArea()
-                
                 VStack {
-                    Rectangle()
-                        .fill(.white)
+                    Color.background
                         .frame(height: 200)
+                        .overlay {
+                            
+                        }
                     
                     UnevenRoundedRectangle(bottomLeadingRadius: 10, bottomTrailingRadius: 10)
                         .fill(.white)

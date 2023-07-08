@@ -39,6 +39,7 @@ struct ViewHierarchy: View {
             
             if let pair = notesForPair { PairStickyNoteList(pair) }
             MoreOptionsView()
+//            MoreOptionsView1()
             AlwaysOnDisplayAlertView() //shown until user removes it forever
             ScreenAlwaysOnConfirmation() //shown each time user toggles the button in toolbar
             if bubbleNotesShowing { BubbleStickyNoteList(notesForBubble!) }

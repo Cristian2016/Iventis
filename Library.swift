@@ -48,6 +48,8 @@ extension Notification.Name {
     static let killTimer = Notification.Name("killTimer")
     
     static let scrollToTimer = Notification.Name("scrollToTimer")
+    
+    static let showMoreOptionsView = Notification.Name("showMoreOptionsView")
 } //1 ViewModel
 
 extension Notification {

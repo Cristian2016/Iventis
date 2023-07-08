@@ -9,13 +9,6 @@ import SwiftUI
 import MyPackage
 
 struct MoreOptionsView: View {
-    struct Input {
-        var bubble:Bubble
-        var initialBubbleColor:Color
-        var initialStartDelay:Int
-        var userEditedDelay:Int
-    }
-    
     //set within .onReceive closure. all the information MoreOptionView needs :)
     @State private var input:Input?
         
@@ -195,6 +188,13 @@ struct MoreOptionsView: View {
 }
 
 extension MoreOptionsView {
+    struct Input {
+        var bubble:Bubble
+        var initialBubbleColor:Color
+        var initialStartDelay:Int
+        var userEditedDelay:Int
+    }
+    
     struct Info: View {
         private let input:Input
         @State private var show = false

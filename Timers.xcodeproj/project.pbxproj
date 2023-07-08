@@ -256,6 +256,7 @@
 		1FF8254F29C750C40003E4A0 /* DPDigit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF8254E29C750C40003E4A0 /* DPDigit.swift */; };
 		1FF8255129C750F40003E4A0 /* DPDisplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF8255029C750F40003E4A0 /* DPDisplay.swift */; };
 		1FF8255429C7980A0003E4A0 /* DPCheckmark.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF8255329C7980A0003E4A0 /* DPCheckmark.swift */; };
+		1FFAA88C2A59701900321EB0 /* MoreOptionsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FFAA88B2A59701900321EB0 /* MoreOptionsViewModel.swift */; };
 		1FFC8BAA28142F040059EF2E /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FFC8BA428142F040059EF2E /* Session.swift */; };
 		1FFC8BAD28142F040059EF2E /* Session Properties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FFC8BA528142F040059EF2E /* Session Properties.swift */; };
 		1FFC8BB628142F040059EF2E /* Pair.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FFC8BA828142F040059EF2E /* Pair.swift */; };
@@ -477,6 +478,7 @@
 		1FF8254E29C750C40003E4A0 /* DPDigit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DPDigit.swift; sourceTree = "<group>"; };
 		1FF8255029C750F40003E4A0 /* DPDisplay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DPDisplay.swift; sourceTree = "<group>"; };
 		1FF8255329C7980A0003E4A0 /* DPCheckmark.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DPCheckmark.swift; sourceTree = SOURCE_ROOT; };
+		1FFAA88B2A59701900321EB0 /* MoreOptionsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreOptionsViewModel.swift; sourceTree = "<group>"; };
 		1FFC8BA428142F040059EF2E /* Session.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
 		1FFC8BA528142F040059EF2E /* Session Properties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Session Properties.swift"; sourceTree = "<group>"; };
 		1FFC8BA828142F040059EF2E /* Pair.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pair.swift; sourceTree = "<group>"; };
@@ -579,6 +581,7 @@
 		1F5F4A4228093FAC00AF3442 = {
 			isa = PBXGroup;
 			children = (
+				1FFAA88B2A59701900321EB0 /* MoreOptionsViewModel.swift */,
 				1FE82DF12A5149D000AE3864 /* MoreOptionsView1.swift */,
 				1F47C64B2A337B160072908A /* SmallGestureInfo.swift */,
 				1F45CC1F2A04D4A200B9548C /* Cell.swift */,
@@ -1163,6 +1166,7 @@
 				1FA1F39E2981CFE6000A50F5 /* Persistence.swift in Sources */,
 				1F05B7C82989158E0022FD23 /* BorderlessLabel.swift in Sources */,
 				1FB5D8D628E8276D00DD522A /* StickyNoteListInfoView.swift in Sources */,
+				1FFAA88C2A59701900321EB0 /* MoreOptionsViewModel.swift in Sources */,
 				1F34FB9A29FEB14D001C8B9F /* WidgetSymbol.swift in Sources */,
 				1FF8254F29C750C40003E4A0 /* DPDigit.swift in Sources */,
 				1F53DD6C29BEFB8A00E33B77 /* PrecisionTimer.swift in Sources */,
