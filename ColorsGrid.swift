@@ -15,7 +15,7 @@ struct ColorsGrid: View {
     private let metrics = Metrics()
     
     var body: some View {
-        Grid(horizontalSpacing: 1, verticalSpacing: 1) {
+        Grid(horizontalSpacing: 2, verticalSpacing: 2) {
             ForEach(Color.paletteTriColors, id:\.self) { tricolors in
                 GridRow {
                     ForEach(tricolors) { tricolor in
@@ -28,6 +28,7 @@ struct ColorsGrid: View {
                 }
             }
         }
+        .padding(8)
     }
     
     // MARK: -

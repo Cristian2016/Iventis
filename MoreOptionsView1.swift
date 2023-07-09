@@ -90,31 +90,26 @@ extension MoreOptionsView1 {
         @Environment(NewViewModel.self) private var model
         
         var body: some View {
-            ZStack {
-                VStack {
-                    Color.background
-                        .frame(height: 200)
-                        .overlay {
-                            
-                        }
-                    
-                    UnevenRoundedRectangle(bottomLeadingRadius: 10, bottomTrailingRadius: 10)
-                        .fill(.white)
-                        .overlay {
-                            Grid(horizontalSpacing: 1, verticalSpacing: 1) {
-                                ForEach(Color.paletteTriColors, id: \.self) { tricolors in
-                                    GridRow {
-                                        ForEach(tricolors) { tricolor in
-                                            tricolor.sec
-                                        }
-                                    }
+            if let bubble = model.moreOptionsBubble {
+                ZStack {
+                    VStack {
+                        Color.background
+                            .frame(height: 200)
+                            .overlay {
+                                
+                            }
+                        
+                        UnevenRoundedRectangle(bottomLeadingRadius: 10, bottomTrailingRadius: 10)
+                            .fill(.white)
+                            .overlay {
+                                ColorsGrid(bubble) {
+                                    
                                 }
                             }
-                            .padding(8)
-                        }
-                        .frame(minHeight: 400)
+                            .frame(minHeight: 400)
+                    }
+                    .padding()
                 }
-                .padding()
             }
         }
     }
