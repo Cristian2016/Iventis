@@ -15,19 +15,23 @@ struct ColorsGrid: View {
     private let metrics = Metrics()
     
     var body: some View {
-        Grid(horizontalSpacing: 2, verticalSpacing: 2) {
-            ForEach(Color.paletteTriColors, id:\.self) { tricolors in
-                GridRow {
-                    ForEach(tricolors) { tricolor in
-                        let sameColor = (tricolor.description == bubble.color)
-                        
-                        tricolor.sec
-                            .overlay { if sameColor { checkmark }}
-                            .onTapGesture { handleColorChange(sameColor, tricolor) }
+        ScrollView {
+            Grid(horizontalSpacing: 2, verticalSpacing: 2) {
+                ForEach(Color.paletteTriColors, id:\.self) { tricolors in
+                    GridRow {
+                        ForEach(tricolors) { tricolor in
+                            let sameColor = (tricolor.description == bubble.color)
+                            
+                            tricolor.sec
+                                .frame(minHeight: 60)
+                                .overlay { if sameColor { checkmark }}
+                                .onTapGesture { handleColorChange(sameColor, tricolor) }
+                        }
                     }
                 }
             }
         }
+        .scrollIndicators(.hidden)
         .padding(8)
     }
     

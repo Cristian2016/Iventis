@@ -100,11 +100,9 @@ extension MoreOptionsView1 {
                             }
                         
                         UnevenRoundedRectangle(bottomLeadingRadius: 10, bottomTrailingRadius: 10)
-                            .fill(.white)
+                            .fill(.background)
                             .overlay {
-                                ColorsGrid(bubble) {
-                                    
-                                }
+                                ColorsGrid(bubble) { model.moreOptionsBubble = nil }
                             }
                             .frame(minHeight: 400)
                     }
