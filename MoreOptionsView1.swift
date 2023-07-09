@@ -22,15 +22,13 @@ struct MoreOptionsView1: View {
                     Rectangle()
                         .background(.ultraThinMaterial)
                         .ignoresSafeArea()
-                        .onTapGesture {
-                            dismiss()
-                        }
+                        .onTapGesture { dismiss() }
                     
                     ViewThatFits {
                         PortraitView()
                         LandscapeView()
                     }
-                    .onTapGesture { model.moreOptionsBubble = nil }
+                    .onTapGesture { dismiss() }
                 }
             }
         }

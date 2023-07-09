@@ -581,6 +581,7 @@
 		1F5F4A4228093FAC00AF3442 = {
 			isa = PBXGroup;
 			children = (
+				1F31C86129D01F26008349D2 /* ⚠️ Important.rtf */,
 				1FFAA88B2A59701900321EB0 /* NewViewModel.swift */,
 				1FE82DF12A5149D000AE3864 /* MoreOptionsView1.swift */,
 				1F47C64B2A337B160072908A /* SmallGestureInfo.swift */,
@@ -611,7 +612,6 @@
 				1FA377E72972FE75005ACD41 /* Library.swift */,
 				1F42B99C2973E34E0024DB5F /* Code Snippets.rtf */,
 				1FE3B6F62983ECBF00B9C5D0 /* Explanations.rtf */,
-				1F31C86129D01F26008349D2 /* ⚠️ Important.rtf */,
 				1FB5D8D928E9BF0500DD522A /* GestureLabel.swift */,
 				1FB5D8D728E96CBD00DD522A /* StartDelayInfoView.swift */,
 				1F477CA828EAB21900B4F965 /* AddStickyNoteQuickButton.swift */,
