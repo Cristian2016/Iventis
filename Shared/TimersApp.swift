@@ -24,11 +24,11 @@ struct TimersApp: App {
     var body: some Scene {
         WindowGroup {
             ViewHierarchy()
-                .task { createTimerHistory() }
+                .task { createTimerDurationsHistory() }
         }
     }
     
-    private func createTimerHistory() {
+    private func createTimerDurationsHistory() {
         if !timerHistoryExists {
             let bContext = PersistenceController.shared.bContext
             

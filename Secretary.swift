@@ -81,7 +81,6 @@ class Secretary {
     
     @Published var moreOptionsBuble:Bubble? {didSet{
         topMostView = moreOptionsBuble != nil ? .moreOptionsView : .bubble
-        NotificationCenter.default.post(name: .showMoreOptionsView, object: moreOptionsBuble)
     }}
     
     @Published var showDetail_bRank:Int64?

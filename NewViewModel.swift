@@ -18,12 +18,12 @@ import Observation
 ///The new vieModel that will eventually replace old ViewModel
 @Observable
 class NewViewModel {
-    var bubble:Bubble? = nil
+    var moreOptionsBubble:Bubble? = nil
     var userEnteredStartDelay = Float(0)
     
     // MARK: - Methods
     func removeStartDelay() {
-        guard let bubble = bubble else { return }
+        guard let bubble = moreOptionsBubble else { return }
         
         var controller = PersistenceController.shared
         
@@ -51,7 +51,7 @@ class NewViewModel {
     }
     
     func setStartDelay() {
-        guard let bubble = bubble else { return }
+        guard let bubble = moreOptionsBubble else { return }
         
         let initialStartDelay = bubble.startDelayBubble?.initialClock ?? 0
         guard userEnteredStartDelay != 0 && userEnteredStartDelay != initialStartDelay else { return }
@@ -92,20 +92,5 @@ class NewViewModel {
                 coordinator?.valueToDisplay = self.userEnteredStartDelay
             }
         }
-    }
-    
-    private func observeShowMoreOptionsView() {
-        NotificationCenter.default.addObserver(forName: .showMoreOptionsView, object: nil, queue: nil) { [weak self] notification in
-            if let bubble = notification.object as? Bubble {
-                print(bubble.color ?? "pula color")
-                self?.bubble = bubble
-            } else {
-                self?.bubble = nil
-            }
-        }
-    }
-    
-    init() {
-        observeShowMoreOptionsView()
     }
 }

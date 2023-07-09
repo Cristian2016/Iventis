@@ -13,6 +13,7 @@ struct ViewHierarchy: View {
     private var isFirstAppLaunch = true //1
     
     @StateObject private var layoutViewModel = LayoutViewModel() //2
+    
     @StateObject private var viewModel = ViewModel() //2
         
     private let secretary = Secretary.shared
@@ -38,8 +39,8 @@ struct ViewHierarchy: View {
             }
             
             if let pair = notesForPair { PairStickyNoteList(pair) }
-            MoreOptionsView()
-//            MoreOptionsView1()
+//            MoreOptionsView()
+            MoreOptionsView1()
             AlwaysOnDisplayAlertView() //shown until user removes it forever
             ScreenAlwaysOnConfirmation() //shown each time user toggles the button in toolbar
             if bubbleNotesShowing { BubbleStickyNoteList(notesForBubble!) }
@@ -53,6 +54,7 @@ struct ViewHierarchy: View {
         .environment(\.managedObjectContext, viewContext)
         .environmentObject(viewModel) //2
         .environmentObject(layoutViewModel) //2
+        .environment(NewViewModel())
         .onReceive(secretary.$deleteAction_bRank) { deleteActionBubbleRank = $0 }
         .onReceive(viewModel.notesForPair) { notesForPair = ($0 != nil) ? $0! : nil }
         .onReceive(viewModel.notesForBubble) { notesForBubble = ($0 != nil) ? $0! : nil }

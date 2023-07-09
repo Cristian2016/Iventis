@@ -16,6 +16,8 @@ struct BubbleCell: View {
     @ObservedObject private var bubble:Bubble
     
     @EnvironmentObject private var viewModel:ViewModel
+    @Environment(NewViewModel.self) private var newViewModel
+    
     @EnvironmentObject private var layoutViewModel:LayoutViewModel
     @Environment(\.scenePhase) private var phase
         
@@ -69,7 +71,9 @@ struct BubbleCell: View {
     
     //trailing Swipe actions
     private var moreOptionsButton:some View {
-        Button { viewModel.showMoreOptions(for: bubble) }
+        Button {
+            newViewModel.moreOptionsBubble = bubble
+        }
     label: { Label { Text("More") } icon: { Image.more } }.tint(.lightGray)
     }
     

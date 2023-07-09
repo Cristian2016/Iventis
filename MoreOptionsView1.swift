@@ -12,11 +12,12 @@ struct MoreOptionsView1: View {
     //set within .onReceive closure. all the information MoreOptionView needs :)
     @State private var input:Input?
     private let secretary = Secretary.shared
-    private var model = MoreOptionsViewModel()
+    
+    @Environment(NewViewModel.self) private var model
         
     var body: some View {
         ZStack {
-            if let bubble = model.bubble {
+            if let bubble = model.moreOptionsBubble {
                 ZStack {
                     Rectangle()
                         .background(.ultraThinMaterial)
@@ -47,7 +48,9 @@ struct MoreOptionsView1: View {
         dismiss()
     }
     
-    private func dismiss() { secretary.moreOptionsBuble = nil }
+    private func dismiss() {
+        model.moreOptionsBubble = nil
+    }
 }
 
 extension MoreOptionsView1 {
