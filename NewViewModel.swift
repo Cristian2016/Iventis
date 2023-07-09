@@ -15,9 +15,9 @@
 import Foundation
 import Observation
 
-
+///The new vieModel that will eventually replace old ViewModel
 @Observable
-class MoreOptionsViewModel {
+class NewViewModel {
     var bubble:Bubble? = nil
     var userEnteredStartDelay = Float(0)
     
