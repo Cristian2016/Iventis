@@ -30,6 +30,7 @@ struct MoreOptionsView1: View {
                         PortraitView()
                         LandscapeView()
                     }
+                    .onTapGesture { model.moreOptionsBubble = nil }
                 }
             }
         }
@@ -88,6 +89,8 @@ extension MoreOptionsView1 {
     }
     
     struct PortraitView:View {
+        @Environment(NewViewModel.self) private var model
+        
         var body: some View {
             ZStack {
                 VStack {
