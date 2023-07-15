@@ -27,7 +27,7 @@ struct MoreOptionsView: View {
                     AnyLayout(VStackLayout()) : .init(HStackLayout(alignment: .top))
                     
                     ZStack {
-                        Background()
+                        Background(.material(.ultraThick))
                             .onTapGesture { saveDelay() }
                             .highPriorityGesture(swipeLeft)
                         
@@ -45,13 +45,12 @@ struct MoreOptionsView: View {
                             
                             ColorsGrid(input.bubble) { saveDelay() }
                         }
-                        .frame(maxHeight: 700)
-                        .padding(10)
-                        .background {
-                            vRoundedRectangle(corners: [.bottomLeft, .bottomRight], radius: 10)
-                                .fill(.thickMaterial)
-                                .standardShadow()
-                        }
+//                        .frame(maxHeight: 700)
+//                        .background {
+//                            vRoundedRectangle(corners: [.bottomLeft, .bottomRight], radius: 10)
+//                                .fill(.thickMaterial)
+//                                .standardShadow()
+//                        }
                         .padding(isPortrait ? 28 : 20)
                     }
                 }
@@ -138,7 +137,7 @@ struct MoreOptionsView: View {
         let radius = CGFloat(10)
         
         let minWidth = CGFloat(300)
-        let digitSpacing = CGFloat(1)
+        let digitSpacing = CGFloat(2)
         let colorsSpacing = CGFloat(4)
         
         let delayFont = Font.system(size: 80, design: .rounded)

@@ -15,26 +15,17 @@ struct ColorsGrid: View {
     private let metrics = Metrics()
     
     var body: some View {
-        VStack {
-//            let colorName = Color.userFriendlyBubbleColorName(for: bubble.color)
-//            let fontColor = Color.tricolor(forName: bubble.color).sec
-//            
-//            Label(colorName, systemImage: "paintbrush")
-//                .font(.system(size: 24, weight: .regular))
-//                .foregroundColor(fontColor)
-            
-            ScrollView {
-                Grid(horizontalSpacing: 2, verticalSpacing: 2) {
-                    ForEach(Color.paletteTriColors, id:\.self) { tricolors in
-                        GridRow {
-                            ForEach(tricolors) { tricolor in
-                                let sameColor = (tricolor.description == bubble.color)
-                                
-                                tricolor.sec
-                                    .frame(minHeight: 60)
-                                    .overlay { if sameColor { checkmark }}
-                                    .onTapGesture { handleColorChange(sameColor, tricolor) }
-                            }
+        ScrollView {
+            Grid(horizontalSpacing: 2, verticalSpacing: 2) {
+                ForEach(Color.paletteTriColors, id:\.self) { tricolors in
+                    GridRow {
+                        ForEach(tricolors) { tricolor in
+                            let sameColor = (tricolor.description == bubble.color)
+                            
+                            tricolor.sec
+                                .frame(minHeight: 60)
+                                .overlay { if sameColor { checkmark }}
+                                .onTapGesture { handleColorChange(sameColor, tricolor) }
                         }
                     }
                 }
