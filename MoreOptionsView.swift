@@ -11,15 +11,15 @@ import MyPackage
 struct MoreOptionsView: View {
     //set within .onReceive closure. all the information MoreOptionView needs :)
     @State private var input:Input?
+    @Environment(NewViewModel.self) private var newViewModel
         
-    @EnvironmentObject var viewModel:ViewModel
     private let secretary = Secretary.shared
             
     private let metrics = Metrics()
     
     var body: some View {
         ZStack {
-            if let emptyStruct = input {
+            if let input = input {
                 GeometryReader { geo in
                     let isPortrait = geo.size.height > geo.size.width
                     
@@ -32,7 +32,7 @@ struct MoreOptionsView: View {
                             .highPriorityGesture(swipeLeft)
                         
                         layout {
-                            if emptyStruct.bubble.state != .running {
+                            if input.bubble.state != .running {
                                 VStack(alignment: .trailing, spacing: 14) {
                                     VStack(alignment: .trailing, spacing: 4) {
                                         display
@@ -40,10 +40,10 @@ struct MoreOptionsView: View {
                                     }
                                 }
                                 
-                                Divider().padding([.leading, .trailing])
+                                Divider()
                             }
                             
-                            ColorsGrid(emptyStruct.bubble) { saveDelay() }
+                            ColorsGrid(input.bubble) { saveDelay() }
                         }
                         .frame(maxHeight: 700)
                         .padding(10)
@@ -58,8 +58,8 @@ struct MoreOptionsView: View {
             }
             Info(input)
         }
-        .onReceive(secretary.$moreOptionsBuble) {
-            if let bubble = $0 {
+        .onChange(of: newViewModel.moreOptionsBubble) { _, newValue in
+            if let bubble = newValue {
                 let color = Color.bubbleColor(forName: bubble.color)
                 let initialStartDelay = Int(bubble.startDelayBubble?.initialClock ?? 0)
                                                 
@@ -79,7 +79,7 @@ struct MoreOptionsView: View {
                 if input!.userEditedDelay != 0 {
                     UserFeedback.doubleHaptic(.heavy)
                     input!.userEditedDelay = 0
-                    viewModel.removeStartDelay(for: input?.bubble)
+//                    viewModel.removeStartDelay(for: input?.bubble)
                 }
             }
     }
@@ -161,28 +161,28 @@ struct MoreOptionsView: View {
                 if input!.userEditedDelay != 0 {
                     UserFeedback.doubleHaptic(.heavy)
                     input!.userEditedDelay = 0
-                    viewModel.removeStartDelay(for: input?.bubble)
+//                    viewModel.removeStartDelay(for: input?.bubble)
                 }
             }
     }
     
     // MARK: -
-    private func dismiss() { secretary.moreOptionsBuble = nil }
+    private func dismiss() { newViewModel.moreOptionsBubble = nil }
     
     private func saveDelay() {
         /*
          if user sets a new start delay
          save delay
-         save CoreData context*/
+         save CoreData context */
         if input!.initialStartDelay != input!.userEditedDelay && input!.userEditedDelay != 0 {
             UserFeedback.singleHaptic(.medium)
-            viewModel.setStartDelay(Float(input!.userEditedDelay), for: input?.bubble)
+//            viewModel.setStartDelay(Float(input!.userEditedDelay), for: input?.bubble)
         }
         dismiss()
     }
     
     private func saveColor(to colorName: String) {
-        viewModel.changeColor(of: input!.bubble, to: colorName)
+//        viewModel.changeColor(of: input!.bubble, to: colorName)
         //dimiss will be called separately
     }
 }

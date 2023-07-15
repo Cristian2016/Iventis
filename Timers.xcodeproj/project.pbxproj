@@ -83,7 +83,6 @@
 		1F3CBCB429E68C0A00350AC6 /* magenta.png in Resources */ = {isa = PBXBuildFile; fileRef = 1F3CBCB229E68C0A00350AC6 /* magenta.png */; };
 		1F3CBCB529E68C0A00350AC6 /* magenta.png in Resources */ = {isa = PBXBuildFile; fileRef = 1F3CBCB229E68C0A00350AC6 /* magenta.png */; };
 		1F42B99D2973E34E0024DB5F /* Code Snippets.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 1F42B99C2973E34E0024DB5F /* Code Snippets.rtf */; };
-		1F45CC202A04D4A200B9548C /* Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F45CC1F2A04D4A200B9548C /* Cell.swift */; };
 		1F46F8FB2A263E3D00AA7F9C /* TheFlipText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F46F8FA2A263E3D00AA7F9C /* TheFlipText.swift */; };
 		1F46F8FF2A2644DF00AA7F9C /* bTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F46F8FE2A2644DF00AA7F9C /* bTimer.swift */; };
 		1F477CA928EAB21900B4F965 /* AddStickyNoteQuickButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F477CA828EAB21900B4F965 /* AddStickyNoteQuickButton.swift */; };
@@ -244,7 +243,6 @@
 		1FE68FB029A13BF700D05EE6 /* HundredthsLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FE68FAF29A13BF700D05EE6 /* HundredthsLabel.swift */; };
 		1FE722A128E58200005ADA8E /* ColorConfirmationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FE722A028E58200005ADA8E /* ColorConfirmationView.swift */; };
 		1FE76DBA29C9F213003012F0 /* BlueInfoButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FE76DB929C9F213003012F0 /* BlueInfoButton.swift */; };
-		1FE82DF22A5149D000AE3864 /* MoreOptionsView1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FE82DF12A5149D000AE3864 /* MoreOptionsView1.swift */; };
 		1FEB16252A0777EC00CC7D7F /* ActionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FEB16242A0777EC00CC7D7F /* ActionsView.swift */; };
 		1FEB508629DED01F000C242E /* BubbleDeleteActionAlert1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FEB508529DED01F000C242E /* BubbleDeleteActionAlert1.swift */; };
 		1FEE84CB29F8408400DFF336 /* InfoOutlineUnit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FEE84CA29F8408400DFF336 /* InfoOutlineUnit.swift */; };
@@ -344,7 +342,6 @@
 		1F3CBCAE29E68BAE00350AC6 /* cayenne.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cayenne.png; sourceTree = "<group>"; };
 		1F3CBCB229E68C0A00350AC6 /* magenta.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = magenta.png; sourceTree = "<group>"; };
 		1F42B99C2973E34E0024DB5F /* Code Snippets.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = "Code Snippets.rtf"; sourceTree = "<group>"; };
-		1F45CC1F2A04D4A200B9548C /* Cell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cell.swift; sourceTree = "<group>"; };
 		1F46F8FA2A263E3D00AA7F9C /* TheFlipText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TheFlipText.swift; sourceTree = SOURCE_ROOT; };
 		1F46F8FE2A2644DF00AA7F9C /* bTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = bTimer.swift; sourceTree = SOURCE_ROOT; };
 		1F477CA828EAB21900B4F965 /* AddStickyNoteQuickButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddStickyNoteQuickButton.swift; sourceTree = "<group>"; };
@@ -466,7 +463,6 @@
 		1FE68FAF29A13BF700D05EE6 /* HundredthsLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HundredthsLabel.swift; sourceTree = "<group>"; };
 		1FE722A028E58200005ADA8E /* ColorConfirmationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorConfirmationView.swift; sourceTree = "<group>"; };
 		1FE76DB929C9F213003012F0 /* BlueInfoButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlueInfoButton.swift; sourceTree = SOURCE_ROOT; };
-		1FE82DF12A5149D000AE3864 /* MoreOptionsView1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreOptionsView1.swift; sourceTree = "<group>"; };
 		1FEB16242A0777EC00CC7D7F /* ActionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionsView.swift; sourceTree = SOURCE_ROOT; };
 		1FEB508529DED01F000C242E /* BubbleDeleteActionAlert1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BubbleDeleteActionAlert1.swift; sourceTree = SOURCE_ROOT; };
 		1FEE84CA29F8408400DFF336 /* InfoOutlineUnit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoOutlineUnit.swift; sourceTree = SOURCE_ROOT; };
@@ -583,9 +579,7 @@
 			children = (
 				1F31C86129D01F26008349D2 /* ⚠️ Important.rtf */,
 				1FFAA88B2A59701900321EB0 /* NewViewModel.swift */,
-				1FE82DF12A5149D000AE3864 /* MoreOptionsView1.swift */,
 				1F47C64B2A337B160072908A /* SmallGestureInfo.swift */,
-				1F45CC1F2A04D4A200B9548C /* Cell.swift */,
 				1F34FB9929FEB14D001C8B9F /* WidgetSymbol.swift */,
 				1FB8E85B29E3517F0005909E /* Colors */,
 				1F5FFD9E29C2426E005FFB32 /* AdaptiveView.swift */,
@@ -1055,7 +1049,6 @@
 				1F7E8D1C2A20FBF200B35916 /* FlipText.swift in Sources */,
 				1FE76DBA29C9F213003012F0 /* BlueInfoButton.swift in Sources */,
 				1FB5D8DA28E9BF0500DD522A /* GestureLabel.swift in Sources */,
-				1FE82DF22A5149D000AE3864 /* MoreOptionsView1.swift in Sources */,
 				1F76B51128DDE38800543660 /* AlertHintView.swift in Sources */,
 				1F22183029CF2B4D0006227E /* PermanentLabel.swift in Sources */,
 				1F36D56B29942C0B00D70727 /* CalendarEventCreatedConfirmation.swift in Sources */,
@@ -1077,7 +1070,6 @@
 				1F04769629BB4C2400641CDC /* SDBPair.swift in Sources */,
 				1F64200A2820204400413E31 /* PairList.swift in Sources */,
 				1FA1B44A298321D20063B081 /* iPhoneViewHierarchy.swift in Sources */,
-				1F45CC202A04D4A200B9548C /* Cell.swift in Sources */,
 				1F20807C2836111600FD35D6 /* BSavedNote.swift in Sources */,
 				1FA9456B2A18E8EE0023A999 /* ControlActionView.swift in Sources */,
 				1F615B6329899E210006DB0B /* BackgroundTimer.swift in Sources */,

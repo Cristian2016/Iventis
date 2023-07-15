@@ -87,10 +87,6 @@ class ViewModel: ObservableObject {
         }
     }
     
-    func showMoreOptions(for bubble:Bubble) {
-        secretary.moreOptionsBuble = bubble
-    }
-    
     // MARK: -
     //⚠️ super hard to get it right
     func reorderRanks(_ sourceRank:Int64, _ destRank:Int64, _ moveBottom:Bool = false) {

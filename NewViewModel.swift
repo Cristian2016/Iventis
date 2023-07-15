@@ -11,6 +11,7 @@
 //ask background context to delete the bubble
 //back on mainQueue do visual updates
 //save changes on bContext
+//1 example user taps More Button and that sets 1 to whatever bubble (bubbleCell.bubble)
 
 import Foundation
 import Observation
@@ -18,7 +19,11 @@ import Observation
 ///The new vieModel that will eventually replace old ViewModel
 @Observable
 class NewViewModel {
-    var moreOptionsBubble:Bubble? = nil
+    var moreOptionsBubble:Bubble? = nil {didSet{
+        Secretary.shared.topMostView = moreOptionsBubble != nil ? .moreOptionsView : .bubble
+}} //1
+    
+    
     var userEnteredStartDelay = Float(0)
     
     // MARK: - Methods

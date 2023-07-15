@@ -71,9 +71,7 @@ struct BubbleCell: View {
     
     //trailing Swipe actions
     private var moreOptionsButton:some View {
-        Button {
-            newViewModel.moreOptionsBubble = bubble
-        }
+        Button { newViewModel.moreOptionsBubble = bubble }
     label: { Label { Text("More") } icon: { Image.more } }.tint(.lightGray)
     }
     

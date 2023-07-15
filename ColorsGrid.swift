@@ -16,12 +16,12 @@ struct ColorsGrid: View {
     
     var body: some View {
         VStack {
-            let colorName = Color.userFriendlyBubbleColorName(for: bubble.color)
-            let fontColor = Color.tricolor(forName: bubble.color).sec
-            
-            Label(colorName, systemImage: "paintbrush")
-                .font(.system(size: 24, weight: .regular))
-                .foregroundColor(fontColor)
+//            let colorName = Color.userFriendlyBubbleColorName(for: bubble.color)
+//            let fontColor = Color.tricolor(forName: bubble.color).sec
+//            
+//            Label(colorName, systemImage: "paintbrush")
+//                .font(.system(size: 24, weight: .regular))
+//                .foregroundColor(fontColor)
             
             ScrollView {
                 Grid(horizontalSpacing: 2, verticalSpacing: 2) {
@@ -41,7 +41,6 @@ struct ColorsGrid: View {
             }
         }
         .scrollIndicators(.hidden)
-        .padding(8)
     }
     
     // MARK: -

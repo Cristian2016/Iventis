@@ -79,10 +79,6 @@ class Secretary {
     
     @Published var confirm_CalEventRemoved: Int64?
     
-    @Published var moreOptionsBuble:Bubble? {didSet{
-        topMostView = moreOptionsBuble != nil ? .moreOptionsView : .bubble
-    }}
-    
     @Published var showDetail_bRank:Int64?
     
     @Published var showAlert_closeSession = false
