@@ -12,9 +12,9 @@ import MyPackage
 
 struct PairCell: View {
     // MARK: - Dependencies
-    @EnvironmentObject var viewModel:ViewModel
+    @Environment(ViewModel.self) private var viewModel
     @StateObject var pair:Pair //1
-    
+        
     // MARK: -
     @State private var shouldShowPairBubbleCell = false
     
@@ -29,47 +29,29 @@ struct PairCell: View {
     
     // MARK: -
     var body:some View {
-        ZStack(alignment: .leading) {
-            Push(.topRight) {
-                VStack(alignment: .trailing, spacing: 0) {
-                    separatorLine
-                    pairNumberView
-                }
+        let isPairClosed = pair.pause != nil
+        HStack {
+            VStack (alignment: .leading, spacing: 6) {
+                pairStartLabel
+                pairPauseLabel
+                if isPairClosed { pairDurationLabel }
+                else { PairBubbleCell(bubble: pair.session?.bubble) }
             }
-            .padding([.top], -4)
-            .padding([.trailing], -16)
-            
-            VStack (alignment: .leading, spacing: 4) {
-                Rectangle()
-                    .fill(.clear)
-                    .frame(height: 10)
-                
-                pairStartView  //first line
-                pairPauseView //second line
-                if pair.pause == nil {
-                    Push(.middle) {
-                        PairBubbleCell(bubble: pair.session?.bubble)
-                    }
-                    .padding([.top, .bottom])
-                }
-                else { durationView } //third line
-                
-                if !pair.note_.isEmpty { Spacer() }
-            }
-            
-            Push(.bottomRight) { stickyNote }
-                .padding([.trailing], -12)
+            Spacer()
         }
+        .padding(.init(top: 14, leading: 10, bottom: 14, trailing: 0))
+        .frame(maxWidth: .infinity)
+        .overlay(alignment: .topTrailing) { pairNumberView }
+        .overlay(alignment: .bottomTrailing) { stickyNote }
         .contentShape(gestureArea) //define gesture area
         .onTapGesture {  /* ⚠️ Idiotic! I need to put this shit here or else I can't scroll */ }
-        .onLongPressGesture { userWantsNotesList() }
+        .onLongPressGesture { showPairNotes() }
     }
     
     // MARK: - Little Things
     
     private var gestureArea: some Shape { Rectangle().offset(x: 30) }
     
-    @State private var noteDeleted:Bool = false
     @State private var offsetX:CGFloat = 0.0
     private let offsetDeleteTriggerLimit = CGFloat(180)
     private var triggerDeleteAction:Bool { abs(offsetX) >= offsetDeleteTriggerLimit }
@@ -78,41 +60,11 @@ struct PairCell: View {
     //⚠️ not the best idea though...
     func deleteStickyNote() { viewModel.deleteStickyNote(for: pair) }
     
-    var dragToDelete : some Gesture {
-        DragGesture()
-            .onChanged { value in
-                withAnimation {
-                    if !triggerDeleteAction {
-                        offsetX = value.translation.width
-                    } else {
-                        if !noteDeleted {
-                            deleteStickyNote()
-                            noteDeleted = true //block drag gesture.. any other better ideas??
-                            UserFeedback.singleHaptic(.light)
-                        }
-                    }
-                }
-            }
-            .onEnded { value in
-                withAnimation {
-                    if value.translation.width < offsetDeleteTriggerLimit {
-                        offsetX = 0
-                    } else {
-                        deleteStickyNote()
-                        noteDeleted = true
-                        UserFeedback.singleHaptic(.light)
-                    }
-                }
-            }
-    }
-    
     // MARK: - Lego
     private var stickyNote:some View {
-        Push(.bottomRight) {//PairCell StickyNote
-            StickyNote { stickyNoteContent }
-            dragAction : { deleteStickyNote() }
-            tapAction : { toggleStickyNoteVisibility() }
-        }
+        StickyNote { stickyNoteContent }
+        dragAction : { deleteStickyNote() }
+        tapAction : { toggleStickyNoteVisibility() }
     }
     
     private var stickyNoteContent:some View {
@@ -140,49 +92,46 @@ struct PairCell: View {
         }
     }
     
-    private var separatorLine:some View {
-        Rectangle()
-            .fill(Color.lightGray)
-            .frame(width: 20, height: 1)
-    }
-    
     private var pairNumberView:some View {
-        Text(String(pairNumber))
-            .pairCountModifier()
+        VStack(alignment: .trailing, spacing: 0) {
+            Rectangle()
+                .fill(Color.lightGray)
+                .frame(width: 20, height: 1)
+            Text(String(pairNumber))
+                .pairCountModifier()
+        }
     }
     
     //start time and date
-    private var pairStartView: some View {
+    private var pairStartLabel: some View {
         HStack(alignment: .firstTextBaseline) {
             //time
             Text(DateFormatter.time.string(from: pair.start ?? Date()))
-                .font(.monospaced(.system(size: 22))())
             //date
             Text(DateFormatter.date.string(from: pair.start ?? Date()))
-                .foregroundColor(.secondary)
-                .font(.system(size: 22))
         }
+        .font(.system(size: 22))
+        .foregroundStyle(.secondary)
     }
     
     //pause time and date
     @ViewBuilder
-    private var pairPauseView: some View {
+    private var pairPauseLabel: some View {
         if let pause = pair.pause {
             let startAndPauseOnSameDay = DateFormatter.shortDate.string(from: pair.start ?? Date()) == DateFormatter.shortDate.string(from: pause)
             
-                HStack(alignment: .firstTextBaseline) {
-                    Text(DateFormatter.time.string(from: pause))
-                        .font(.monospaced(.system(size: 22))())
-                    if !startAndPauseOnSameDay {
-                        Text(DateFormatter.date.string(from: pause))
-                            .foregroundColor(.secondary)
-                            .font(.system(size: 22))
-                    }
+            HStack(alignment: .firstTextBaseline) {
+                Text(DateFormatter.time.string(from: pause))
+                if !startAndPauseOnSameDay {
+                    Text(DateFormatter.date.string(from: pause))
                 }
+            }
+            .font(.system(size: 22))
+            .foregroundStyle(.secondary)
         }
     }
     
-    private var durationView:some View {
+    private var pairDurationLabel:some View {
         HStack (spacing: 8) {
             if let duration = duration {
                 //hr
@@ -223,9 +172,10 @@ struct PairCell: View {
     }
     
     // MARK: - Intents
-    private func userWantsNotesList() {
+    private func showPairNotes() {
+        HelpOverlay.Model.shared.topmostView(.lapNotes)
         UserFeedback.singleHaptic(.light)
-        viewModel.notesForPair.send(pair)
+        viewModel.notes_Pair = pair
     }
     
     ///show/hide Pair.note
@@ -245,8 +195,8 @@ struct PairCell: View {
 extension PairCell {
     struct Metrics {
         //these two combined
-        let durationFont = Font.system(size: 24, weight: .medium) //15 59 3
-        let durationComponentsFont = Font.system(size: 22, weight: .medium) //h m s
+        let durationFont = Font.system(size: 22, weight: .medium) //15 59 3
+        let durationComponentsFont = Font.system(size: 20, weight: .medium) //h m s
         let pairNumberFont = Font.system(size: 18).weight(.medium)
     }
 }

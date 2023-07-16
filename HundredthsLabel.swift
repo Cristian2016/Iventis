@@ -8,15 +8,18 @@
 import SwiftUI
 
 struct HundredthsLabel: View {
-    @ObservedObject var bubble:Bubble
-    @State private var hundredths:String
+    var bubble:Bubble
     let scale = CGFloat(0.35)
     
     var body: some View {
         Circle()
             .fill(Color.pauseStickerColor)
-            .adaptiveText(hundredths, true)
-            .foregroundColor(.background)
+            .overlay {
+                Rectangle().fill(.clear)
+                    .aspectRatio(2.0, contentMode: .fit) //smaller ratio is bigger font
+                    .overlay { label }
+            }
+            .foregroundStyle(.background)
             .allowsHitTesting(false)
         //properties that will be animated
             .opacity(isBubbleRunning ? 0 : 1)
@@ -24,19 +27,25 @@ struct HundredthsLabel: View {
             .scaleEffect(isBubbleRunning ? 0.7 : scale, anchor: .bottomTrailing )
             .zIndex(isBubbleRunning ? -1 : 0)
             .animation(.spring(response: 0.3, dampingFraction: 0.2), value: isBubbleRunning)
-        //publisher
-            .onReceive(bubble.coordinator.$timeComponents) {
-                hundredths = bubble.state == .finished ? "✖︎" : $0.hundredths
-            }
-    }
-    
-    init?(bubble: Bubble) {
-        self.bubble = bubble
-        guard let coordinator = bubble.coordinator else { return nil }
-        
-        let components = coordinator.timeComponents
-        self.hundredths = components.hundredths
     }
     
     private var isBubbleRunning:Bool { bubble.state == .running }
+    
+    private var label:some View {
+        let hundredths = bubble.coordinator.timeComponents.hundredths
+        let text = bubble.state != .finished ? hundredths : "✖︎"
+        
+        return Text(text).modifier(HundredthsStyle())
+    }
+    
+    struct HundredthsStyle:ViewModifier {
+        func body(content: Content) -> some View {
+            content
+                .font(.system(size: 200))
+                .fontWeight(.semibold)
+                .fontDesign(.rounded)
+                .lineLimit(1)
+                .minimumScaleFactor(0.1)
+        }
+    }
 }

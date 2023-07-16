@@ -8,8 +8,23 @@
 import CoreData
 
 struct PersistenceController {
+    static let testBubble: Bubble = {
+        let bubble = Bubble(context: PersistenceController.shared.viewContext)
+        bubble.color = "red"
+        bubble.created = Date()
+        bubble.currentClock = 0
+        bubble.initialClock = 0
+        bubble.rank = 903290492
+        bubble.coordinator = .init(for: bubble)
+        
+        let session = Session(context: PersistenceController.shared.viewContext)
+        session.created = Date()
+        bubble.sessions = [session]
+        return bubble
+    }()
+    
     private static let colors = [
-        "red", "ultramarine", "orange", "sky", "magenta", "silver", "lemon", "charcoal"
+        "red", "ultramarine", "orange", "sky", "magenta", "gray", "lemon", "charcoal"
     ]
     
     static var shared = PersistenceController()

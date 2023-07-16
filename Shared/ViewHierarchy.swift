@@ -8,78 +8,34 @@
 
 import SwiftUI
 
+typealias Device = UIDevice
+
 struct ViewHierarchy: View {
-    @AppStorage(UserDefaults.Key.isFirstAppLaunch, store: .shared)
-    private var isFirstAppLaunch = true //1
-    
-    @StateObject private var layoutViewModel = LayoutViewModel() //2
-    
-    @StateObject private var viewModel = ViewModel() //2
+    @Environment(Secretary.self) private var secretary
+    @Environment(ViewModel.self) private var viewModel
         
-    private let secretary = Secretary.shared
-    @State private var deleteActionBubbleRank:Int64?
-    @State private var sessionToDelete:(session:Session, sessionRank:Int)?
-    
-    @State private var notesForPair:Pair?
-    @State private var notesForBubble:Bubble?
-    
-    private let viewContext = PersistenceController.shared.container.viewContext
-    
     var body: some View {
         ZStack {
-            if UIDevice.isIPad { iPadViewHierarchy() }
+            if Device.isIPad { iPadViewHierarchy() }
             else { iPhoneViewHierarchy() }
             
-            if showDeleteActionView {
-                if let rank = secretary.deleteAction_bRank, let bubble = viewModel.bubble(for: Int(rank)) {
-//                    BubbleDeleteButton(bubble)
-//                    BubbleDeleteButton.Info()
-                    ActionsView(bubble: bubble)
-                }
+            if let rank = secretary.controlActionBubble {
+                ControlOverlay(viewModel.bubble(for: Int(rank)))
             }
             
-            if let pair = notesForPair { PairStickyNoteList(pair) }
-            MoreOptionsView()
             AlwaysOnDisplayAlertView() //shown until user removes it forever
             ScreenAlwaysOnConfirmation() //shown each time user toggles the button in toolbar
-            if bubbleNotesShowing { BubbleStickyNoteList(notesForBubble!) }
-            BlueInfoButton()
             CalendarEventCreatedConfirmation()
             CalendarEventRemovedConfirmation()
         }
-        .overlay { InfoViewHierarchy() }
         .overlay { WarningLabel() }
-        .onAppear { createBubblesOnFirstAppLaunch() } //1
-        .environment(\.managedObjectContext, viewContext)
-        .environmentObject(viewModel) //2
-        .environmentObject(layoutViewModel) //2
-        .environment(NewViewModel())
-        .onReceive(secretary.$deleteAction_bRank) { deleteActionBubbleRank = $0 }
-        .onReceive(viewModel.notesForPair) { notesForPair = ($0 != nil) ? $0! : nil }
-        .onReceive(viewModel.notesForBubble) { notesForBubble = ($0 != nil) ? $0! : nil }
-        .onReceive(secretary.$sessionToDelete) { sessionToDelete = $0 }
-    }
-    
-    // MARK: - Methods
-            
-    private func createBubblesOnFirstAppLaunch() {
-        if isFirstAppLaunch {
-            viewModel.createBubble(.stopwatch, "charcoal", "☕️ Break")
-            viewModel.createBubble(.stopwatch, "green", "🌳 Outdoors")
-            isFirstAppLaunch = false
-        }
-    } //1
-    
-    // MARK: -
-    private var showDeleteActionView:Bool {
-        deleteActionBubbleRank != nil
-    } //4
-    
-    fileprivate var bubbleNotesShowing:Bool { notesForBubble != nil }
-}
-
-struct UnitedViewHierarchy_Previews: PreviewProvider {
-    static var previews: some View {
-        ViewHierarchy()
+        .overlay { BubbleNotesOverlay(viewModel.notes_Bubble) }
+        .overlay { PairNotesOverlay(viewModel.notes_Pair) }
+        .overlay { MoreOptionsOverlay(viewModel.moreOptionsSheetBubble) }
+        .overlay { PaletteView() }
+        .overlay { DurationPickerOverlay(reason: viewModel.durationPicker.reason) }
+        .overlay(alignment: .topLeading) { HelpOverlay.HelpButton() }
+        .overlay { HelpOverlay() }
+        .overlay { HelpViewHierarchy() }
     }
 }

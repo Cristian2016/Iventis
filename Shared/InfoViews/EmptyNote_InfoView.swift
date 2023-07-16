@@ -18,7 +18,7 @@ struct EmptyNote_InfoView: View {
         VStack (alignment: .leading) {
             Divider().frame(maxWidth: .infinity)
             Text("\(Image(systemName: "note")) Empty Notes")
-            Text("Are Not Allowed").foregroundColor(.lightGray)
+            Text("Are Not Allowed").foregroundStyle(Color.lightGray)
         }
         .fixedSize(horizontal: true, vertical: false)
     }

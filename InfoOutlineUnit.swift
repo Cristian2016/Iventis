@@ -29,7 +29,7 @@ struct InfoOutlineUnit: View {
             if let footnote = input.footnote {
                 Text(footnote)
                     .font(.system(size: 20))
-                    .foregroundColor(.secondary)
+                    .foregroundStyle(.secondary)
             }
         }
         .forceMultipleLines()

@@ -35,7 +35,7 @@ struct AdaptiveText: ViewModifier {
 struct PairCountModifier: ViewModifier {
     func body(content: Content) -> some View {
         content
-            .foregroundColor(.gray)
+            .foregroundStyle(.gray)
             .font(.system(size: 16))
             .fontWeight(.medium)
     }
@@ -67,7 +67,7 @@ extension View {
     }
     
     func restrictDynamicFontSize() -> some View {
-        self.dynamicTypeSize(...DynamicTypeSize.accessibility2)
+        self.dynamicTypeSize(...DynamicTypeSize.accessibility1)
     }
 }
 

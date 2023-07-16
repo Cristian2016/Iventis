@@ -11,7 +11,7 @@ struct yPositionTracker: View {
     private static var initial:CGFloat!
     
     private let threshHold = CGFloat(50)
-    private let secretary = Secretary.shared
+    @Environment(Secretary.self) private var secretary
     @State private var trackYPosition = false
     @State private var stop = false
     
@@ -47,8 +47,8 @@ struct yPositionTracker: View {
             }
         }
         .listRowSeparator(.hidden)
-        .onReceive(secretary.$isBubblesReportReady) {
-            if $0 { trackYPosition = secretary.bubblesReport.pinned == 0 ? false : true } //1
+        .onChange(of: secretary.isBubblesReportReady) {
+            if $1 { trackYPosition = secretary.bubblesReport.pinned == 0 ? false : true } //1
         }
     }
 }

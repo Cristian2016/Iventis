@@ -43,7 +43,7 @@ struct MaterialLabel<Content:View>: View {
             Background(.dark())
                 .onTapGesture { action() }
             
-            VStack {
+            VStack(spacing: 4) {
                 titleView
                 subtitleView
                 
@@ -67,8 +67,7 @@ struct MaterialLabel<Content:View>: View {
     private var titleView:some View {
         if let title = title {
             Text(title)
-                .padding(.bottom, 1)
-                .font(.system(size: 28, weight: .medium))
+                .font(.system(size: 24, weight: .medium))
                 .minimumScaleFactor(0.1)
         }
     }
@@ -78,9 +77,9 @@ struct MaterialLabel<Content:View>: View {
         if let subtitle = subtitle {
             Text(subtitle)
                 .font(.system(size: 20))
-                .foregroundColor(.secondary)
+                .foregroundStyle(.secondary)
                 .forceMultipleLines()
-                .italic()
+                .multilineTextAlignment(.center)
         }
     }
     

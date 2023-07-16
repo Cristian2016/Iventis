@@ -8,26 +8,32 @@
 import SwiftUI
 
 struct EmptyListView: View {
+    @Environment(Secretary.self) private var secretary
+    
     var body: some View {
-        PermanentLabel(title: "Quick Start") {
-            VStack(alignment: .leading, spacing: 12) {
-                VStack(alignment: .leading) {
-                    Text("**Create Bubbles** \(Image.rightSwipe) Swipe")
-                    Text("*from yellow line*")
-                        .foregroundColor(.secondary)
-                }
-                
-                VStack(alignment: .leading) {
-                    Text("\(Image.infoSquare) **Info** \(Image.device) Shake Device")
-                    Text("*for guidance. At any time!*")
-                        .foregroundColor(.secondary)
-                }
-                
-                Text("*[Watch Short Tutorials](https://example.com)*")
-                    .tint(.blue)
-            }
-            .restrictDynamicFontSize()
-            .forceMultipleLines()
+        HStack(spacing: 0) {
+            Color.clear
+                .frame(width: 40)
+            content
+        }
+        
+    }
+    
+    private var content:some View {
+        ContentUnavailableView {
+            Label("\(Text("\(Image(systemName: "questionmark.circle.fill")) Help").foregroundStyle(.blue))", systemImage: "iphone.radiowaves.left.and.right")
+                .symbolRenderingMode(.monochrome)
+                .fontWeight(.light)
+        } description: {
+            Text("Shake device for help.\nSwipe from left edge to start")
+        } actions: {
+            HelpOverlay.ButtonStack()
+        }
+    }
+    
+    private func openYouTubeTutorial() {
+        if let url = URL(string: "https://www.youtube.com/shorts/SBSt06RrlLk") {
+            UIApplication.shared.open(url, options: [:], completionHandler: nil)
         }
     }
 }
@@ -35,5 +41,6 @@ struct EmptyListView: View {
 struct EmptyBubbleListView_Previews: PreviewProvider {
     static var previews: some View {
         EmptyListView()
+            .environment(Secretary())
     }
 }

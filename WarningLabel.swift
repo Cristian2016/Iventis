@@ -9,16 +9,14 @@ import SwiftUI
 import MyPackage
 
 struct WarningLabel: View {
-    @State private var show = false
+    @Environment(Secretary.self) private var secretary
     
     var body: some View {
         ZStack {
-            if show {
+            if secretary.showCalendarAccessDeniedWarning {
                 ZStack {
                     Background(.dark())
-                        .onTapGesture {
-                            Secretary.shared.showCalendarAccessDeniedWarning = false
-                        }
+                        .onTapGesture { secretary.showCalendarAccessDeniedWarning = false }
                     
                     VStack(spacing: 8) {
                         Image(systemName: "calendar.badge.exclamationmark")
@@ -32,7 +30,7 @@ struct WarningLabel: View {
                             .font(.system(size: 22))
                         Text("*Open 'Settings App' on your device > Scroll down to 'Fused' and tap it > Make sure 'Calendars' Toggle is ON*")
                             .font(.system(size: 18))
-                            .foregroundColor(.secondary)
+                            .foregroundStyle(.secondary)
                         Image("calToggle")
                             .resizable()
                             .aspectRatio(contentMode: .fit)
@@ -43,7 +41,6 @@ struct WarningLabel: View {
                 }
             }
         }
-        .onReceive(Secretary.shared.$showCalendarAccessDeniedWarning) { show = $0 }
     }
 }
 

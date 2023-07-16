@@ -12,6 +12,8 @@ import MyPackage
 struct PairList: View {
     @FetchRequest var pairs:FetchedResults<Pair>
     
+    @Environment(Secretary.self) private var secretary
+    
     ///how far from the trailing edge should the count label be
     let pairCountPadding = EdgeInsets(top: 4, leading: 0, bottom: 5, trailing: -6)
     
@@ -25,18 +27,20 @@ struct PairList: View {
     }
     
     var body: some View {
-        List {
-            ForEach(pairs) { pair in
-                let pairNumber = pairs.count - pairs.firstIndex(of: pair)!
-                PairCell(pair, pairNumber)
+        ScrollView {
+            LazyVStack {
+                ForEach(pairs) { pair in
+                    if let pairIndex = pairs.firstIndex(of: pair) {
+                        let pairNumber = pairs.count - pairIndex
+                        PairCell(pair, pairNumber)
+                    }
+                }
             }
-            .listRowSeparator(.hidden)
             Spacer(minLength: 350)
-                .listRowSeparator(.hidden)
         }
         .refreshable {
-            Secretary.shared.showDetailViewInfoButton.toggle()
-            Secretary.shared.scrollToTop()
+            secretary.showDetailViewInfoButton.toggle()
+            secretary.scrollToTop()
         }
     }
 }

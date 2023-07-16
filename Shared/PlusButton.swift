@@ -9,25 +9,23 @@ import SwiftUI
 
 ///tap PlusButton to show Palette [on iPad]
 struct PlusButton: View {
-    @EnvironmentObject var viewModel:ViewModel
+    @Environment(ViewModel.self) var viewModel
+    @Environment(Secretary.self) private var secretary
+    
     private let metrics = Metrics()
-    private let secretary = Secretary.shared
     
     var body: some View {
         button
     }
     
     private var button: some View {
-        Button { secretary.togglePaletteView() }
+        Button { secretary.palette(.show) }
     label: { Label("Create New Bubble", systemImage: "plus") }
             .font(metrics.font)
-            .tint(metrics.symbolColor)
     }
     
     struct Metrics {
         let font = Font.system(size: 18)
-        let symbolColor = Color.label
-        let diagonalLineColor = Color.red
     }
 }
 

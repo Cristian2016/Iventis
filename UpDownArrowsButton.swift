@@ -31,7 +31,7 @@ struct UpDownArrowsButton: View {
     icon: {
         Image(systemName: "arrow.up.arrow.down")
             .font(.system(size: fontSize).weight(.regular))
-            .foregroundColor(editMode?.wrappedValue == .active ? .pink : .blue)
+            .foregroundStyle(editMode?.wrappedValue == .active ? .pink : .blue)
     }
     }
     .tint(editMode?.wrappedValue == .active ? .pink : .blue)

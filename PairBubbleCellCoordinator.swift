@@ -12,7 +12,7 @@ import Combine
 import Foundation
 import UIKit
 
-class PairBubbleCellCoordinator {
+@Observable class PairBubbleCellCoordinator {
     weak private var bubble:Bubble? //2
     
     // MARK: - Public API
@@ -49,7 +49,7 @@ class PairBubbleCellCoordinator {
         }
     }
     
-    @Published private(set) var components = Components("0", "0", "0")
+    private(set) var components = Components("0", "0", "0")
     
     // MARK: -
     private func task() {
@@ -131,7 +131,7 @@ class PairBubbleCellCoordinator {
         }
     } //5
     
-    private lazy var publisher =
+    private var publisher =
     NotificationCenter.Publisher(center: .default, name: .bubbleTimerSignal)
     
     private var cancellable = Set<AnyCancellable>() //1
@@ -165,7 +165,7 @@ extension PairBubbleCellCoordinator {
         case deleteBubble
     }
     
-    struct Components {
+    struct Components:Equatable {
         var hr:String
         var min:String
         var sec:String

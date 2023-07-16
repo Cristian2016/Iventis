@@ -11,24 +11,23 @@ import MyPackage
 struct TopCell: View {
     @Environment (\.needlePosition) private var needlePosition
     @Environment (\.colorScheme) private var colorScheme
+    @Environment(Secretary.self) private var secretary
     
-    private let secretary = Secretary.shared
     private let session:Session
     private let myRank:Int
-            
+    
     @State private var duration: Float.TimeComponentsAsStrings?
     
     private let metrics = Metrics()
     
     // MARK: -
     var body: some View {
-        //            let _ = print("Topcell body")
         HStack {
             ZStack {
                 sessionRankView
                 Push(.bottomLeft) {
                     VStack (alignment:.leading, spacing: metrics.dateDurationViewsSpacing) {
-                        dateView
+                        dateLabel
                         TopCellDurationView(metrics, session, myRank).padding(2)
                     }
                     .padding(metrics.edgeInset)
@@ -52,7 +51,7 @@ struct TopCell: View {
     }
     
     @ViewBuilder
-    private var dateView: some View {
+    private var dateLabel: some View {
         if let sessionCreated = session.created {
             HStack {
                 //start Date
@@ -70,9 +69,8 @@ struct TopCell: View {
                 }
             }
             .font(.system(size: 24))
-            .fontWeight(.medium)
-            .background(DateViewBackgroundColor(session: session))
-            .foregroundColor(.white)
+            .foregroundStyle(.secondary)
+            .background(Color.ultraLightGray1)
         } else { EmptyView() }
     }
     
@@ -85,7 +83,7 @@ struct TopCell: View {
     // MARK: -
     private func handleTopCellLongPressed() {
         UserFeedback.singleHaptic(.heavy)
-        secretary.sessionToDelete = (session, myRank)
+        secretary.sessionToDelete = Secretary.SessionToDelete(session: session, sessionRank: myRank)
     }
     
     private func handleTopCellTapped() {
@@ -93,12 +91,6 @@ struct TopCell: View {
         
         //user feedback: visual and taptic
         UserFeedback.singleHaptic(.medium)
-        
-        delayExecution(.now() + 0.3) {
-            if pairBubbleCellShows {
-                Secretary.shared.pairBubbleCellNeedsDisplay.toggle()
-            }
-        } //1
         
         let latestSessionRank = session.bubble!.sessions_.count == myRank
         withAnimation { needlePosition.wrappedValue = latestSessionRank ? -1 : myRank }
@@ -118,7 +110,7 @@ struct TopCell: View {
     init?(_ session:Session?, _ sessionRank:Int) {
         guard let session = session else { return nil }
         self.session = session
-//        _session = StateObject(wrappedValue: session)
+        //        _session = StateObject(wrappedValue: session)
         self.myRank = sessionRank
     }
     
@@ -136,8 +128,8 @@ extension TopCell {
         let edgeInset = EdgeInsets(top: 0, leading: 13, bottom: 10, trailing: 6)
         let dateDurationViewsSpacing = CGFloat(6)
         let spacingBetweenCells = CGFloat(-2)
-        let durationFont = Font.system(size: 24, weight: .semibold)
-        let durationComponentsFont = Font.system(size: 20, weight: .semibold)
+        let durationFont = Font.system(size: 24, weight: .medium)
+        let durationComponentsFont = Font.system(size: 20, weight: .medium)
     }
 }
 
@@ -151,9 +143,6 @@ struct DateViewBackgroundColor: View {
     }
     
     var body: some View {
-        color
-            .onReceive(session.bubble?.coordinator.color ?? .init(.clear)) {
-                self.color = $0
-            }
+        session.bubble?.coordinator.color
     }
 }

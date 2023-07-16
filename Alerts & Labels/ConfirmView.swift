@@ -10,7 +10,7 @@ import MyPackage
 
 struct ConfirmView: View {
     struct Metrics {
-        let cornerRadius = CGFloat(16)
+        let cornerRadius = CGFloat(4)
         let backgroundColor = Color.deleteActionViewBackground
         let symbolFont = Font.system(size: 45)
         let contentFont = Font.system(size: 30)
@@ -22,19 +22,16 @@ struct ConfirmView: View {
     var dismissAction:(() -> Void)? = nil
     
     var body: some View {
-        VStack {
-            Image(systemName: systemImage)
-                .font(metrics.symbolFont)
-                .foregroundColor(fillColor)
-            VStack {
-                Text(content.title)
-                Text(name)
-            }
-            .font(metrics.contentFont)
+        HStack {
+            
+            Label(name, systemImage: systemImage)
+                .labelStyle(.iconOnly)
+                .font(.callout)
+                .foregroundStyle(fillColor)
+            Text(content.title)
         }
-        .padding()
-        .padding(8)
-        .background(.thinMaterial, in: RoundedRectangle(cornerRadius: metrics.cornerRadius))
+        .padding(12)
+        .background(.regularMaterial, in: RoundedRectangle(cornerRadius: metrics.cornerRadius))
         .allowsHitTesting(false)
         .environment(\.colorScheme, .dark)
     }
@@ -63,7 +60,7 @@ struct ConfirmView: View {
     private var fillColor:Color {
         switch content.kind {
             case .removed, .off: return .red
-            case .created, .on: return .vibrantGreen
+            case .created, .on: return .green
             case .caffeinated, .sleepy: return .label
         }
     }
@@ -83,8 +80,8 @@ extension ConfirmView {
             case sleepy
         }
         
-        static let eventCreated = Content(title: "Calendar Event", kind: .created)
-        static let eventRemoved = Content(title: "Calendar Event", kind: .removed)
+        static let eventCreated = Content(title: "Event Created", kind: .created)
+        static let eventRemoved = Content(title: "Event Removed", kind: .removed)
         static let appCaffeinated = Content(title: "Screen Always-ON", kind: .caffeinated)
         static let appCanSleep = Content(title: "Screen Can Sleep", kind: .sleepy)
         static let startDelayCreated = Content(title: "Start Delay", kind: .created)
@@ -94,6 +91,6 @@ extension ConfirmView {
 
 struct ConfirmationView1_Previews: PreviewProvider {
     static var previews: some View {
-        ConfirmView(content: .eventCreated)
+        ConfirmView(content: .eventRemoved)
     }
 }

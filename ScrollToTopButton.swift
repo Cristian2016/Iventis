@@ -9,19 +9,20 @@ import SwiftUI
 
 struct ScrollToTopButton: View {
     @State private var show = false
+    @Environment(Secretary.self) private var secretary
     
     var body: some View {
         ZStack {
             if show {
-                Button { Secretary.shared.scrollToTop() } label: {
+                Button { secretary.scrollToTop() } label: {
                     Image.scrollToTop
-                        .background(.white.opacity(0.001))
+                        .background(.white.opacity(.Opacity.basicallyTransparent))
                 }
                 .transition(.scale)
-                .tint(.infoButtonColor)
+                .tint(.infoColor)
             }
         }
-        .onReceive(Secretary.shared.$showScrollToTopButton) { output in
+        .onChange(of: secretary.showScrollToTopButton) {_, output in
             withAnimation { show = output }
         }
     }

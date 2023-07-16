@@ -28,6 +28,7 @@ struct InfoStore {
 struct InfoViewHierarchy: View {
     @State private var path = [InfoStore.Info]()
     @State private var show = false
+    @Environment(Secretary.self) private var secretary
     
     var body: some View {
         ZStack {
@@ -57,15 +58,6 @@ struct InfoViewHierarchy: View {
                 }
             }
         }
-        .onReceive(Secretary.shared.$showInfoVH) { output in
-            if !output {
-                withAnimation {
-                    show = false
-                }
-            } else {
-                handleOnReceive()
-            }
-        }
     }
     
     // MARK: - Lego
@@ -76,20 +68,7 @@ struct InfoViewHierarchy: View {
     
     // MARK: - Methods
     private func dismiss() {
-        Secretary.shared.showInfoVH = false
         path = [] //empty navigation stack
-    }
-    
-    private func handleOnReceive() {
-        switch Secretary.shared.topMostView {
-            case .bubbleDeleteActionView:
-                delayExecution(.now() + 0.1) {
-                    path = [InfoStore.all[2]]
-                }
-            default:
-                break
-        }
-        show = true
     }
 }
 
@@ -97,8 +76,8 @@ extension InfoViewHierarchy {
     
 }
 
-struct InfoViewHierarchy_Previews: PreviewProvider {
-    static var previews: some View {
-        InfoViewHierarchy()
-    }
-}
+//struct InfoViewHierarchy_Previews: PreviewProvider {
+//    static var previews: some View {
+//        InfoViewHierarchy()
+//    }
+//}

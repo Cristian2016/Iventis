@@ -19,7 +19,7 @@ struct BorderlessLabel: View {
         
         Text(title)
             .font(.footnote)
-            .foregroundColor(color)
+            .foregroundStyle(color ?? .white)
     }
 }
 

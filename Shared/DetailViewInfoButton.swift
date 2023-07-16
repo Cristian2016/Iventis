@@ -10,22 +10,21 @@ import MyPackage
 
 struct DetailViewInfoButton: View {
     @State private var show = false
+    @Environment(Secretary.self) private var secretary
     
     var body: some View {
         ZStack {
             if show {
                 Button {
-                    if !Secretary.shared.showDetailViewInfo {
-                        Secretary.shared.showDetailViewInfo = true
-                    }
+                    if !secretary.showDetailViewInfo { secretary.showDetailViewInfo = true }
                 } label: {
                     Image.info
                 }
-                .tint(.infoButtonColor)
+                .tint(.infoColor)
                 .transition(.scale)
             }
         }
-        .onReceive(Secretary.shared.$showDetailViewInfoButton) { output in
+        .onChange(of: secretary.showDetailViewInfoButton) {_, output in
             withAnimation { show = output }
         }
     }

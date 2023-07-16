@@ -9,39 +9,52 @@ import SwiftUI
 
 ///User pulls down on bubbleList and RefresherView shows up
 struct RefresherView: View {
-    private let secretary = Secretary.shared
-    @State private var showFavoritesOnly = false
-    @State private var show = false
+    @Environment(Secretary.self) private var secretary
+    private var show:Bool {
+        if secretary.isBubblesReportReady {
+            return secretary.bubblesReport.pinned == 0 ? false : true
+        }
+        
+        return false
+    }
     
     var body:some View {
         ZStack {
             if show {
                 VStack(spacing: 4) {
-                    let title = showFavoritesOnly ? "Show All" : "Show Pinned Only"
-                    let symbol = showFavoritesOnly ? nil : "pin"
-                    let color = showFavoritesOnly ? .secondary : Color.orange
+                    let title = secretary.showFavoritesOnly ? "Show All" : "Show Pinned Only"
+                    let symbol = secretary.showFavoritesOnly ? nil : "pin"
+                    let color = secretary.showFavoritesOnly ? .secondary : Color.orange
                     
                     BorderlessLabel(title: title, symbol: symbol,color: color)
                     Image(systemName: "chevron.compact.down")
-                        .foregroundColor(color)
+                        .foregroundStyle(color)
                     Spacer()
                 }
                 .padding([.top], 4)
             }
         }
-        .onReceive(secretary.$showFavoritesOnly) { showFavoritesOnly = $0 }
-        .onReceive(secretary.$isBubblesReportReady) {
-            if $0 { show = secretary.bubblesReport.pinned == 0 ? false : true } //1
-        }
     }
 }
 
 struct ShowAllBubblesButton: View {
-    @EnvironmentObject private var viewModel:ViewModel
-    private let secretary = Secretary.shared
-    @State private var showFavoritesOnly = false
-    @State private var count = 0
-    @State private var colors = [Secretary.idColor]()
+    @Environment(ViewModel.self) var viewModel
+    @Environment(Secretary.self) private var secretary
+    
+    private var showFavoritesOnly:Bool { secretary.showFavoritesOnly }
+    private var count:Int {
+        if secretary.isBubblesReportReady {
+           return secretary.bubblesReport.ordinary
+        }
+        return 0
+    }
+    private var colors:[Secretary.idColor] {
+        if secretary.isBubblesReportReady {
+           return secretary.bubblesReport.colors
+        }
+        
+        return []
+    }
     
     var body: some View {
         ZStack {
@@ -52,7 +65,7 @@ struct ShowAllBubblesButton: View {
                         HStack(spacing: 0) {
                             ForEach(colors.reversed()) { color in
                                 Image(systemName: "circle.fill")
-                                    .foregroundColor(color.color)
+                                    .foregroundStyle(color.color)
                                     .font(.caption2)
                             }
                         }
@@ -62,13 +75,6 @@ struct ShowAllBubblesButton: View {
                 }
             }
         }
-        .onReceive(secretary.$showFavoritesOnly) { showFavoritesOnly = $0 }
-        .onReceive(secretary.$isBubblesReportReady) {
-            if $0 {
-                count = secretary.bubblesReport.ordinary
-                colors = secretary.bubblesReport.colors
-            }
-        }
     }
     
     // MARK: - Lego
@@ -76,7 +82,7 @@ struct ShowAllBubblesButton: View {
         Text("Show \(count)")
             .listRowSeparator(.hidden)
             .font(.caption)
-            .foregroundColor(.secondary)
+            .foregroundStyle(.secondary)
     }
     
     // MARK: -

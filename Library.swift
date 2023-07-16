@@ -7,6 +7,12 @@
 
 import SwiftUI
 
+extension LocalizedStringKey:Hashable {
+    public func hash(into hasher: inout Hasher) {
+        hasher.combine("")
+    }
+}
+
 struct vRoundedRectangle: Shape {
     let corners: UIRectCorner
     let radius: CGFloat
@@ -48,6 +54,10 @@ extension Notification.Name {
     static let killTimer = Notification.Name("killTimer")
     
     static let scrollToTimer = Notification.Name("scrollToTimer")
+    
+    static let startStopwatch = Notification.Name("startStopwatch")
+    
+    static let hidePalette = Notification.Name("hidePalette")
 } //1 ViewModel
 
 extension Notification {
@@ -104,16 +114,25 @@ public extension URL {
 
 public extension Color {
     static let deleteActionViewBackground = Color("deleteActionViewBackground")
-    static let vibrantGreen = Color("vibrantGreen")
+    static let deleteActionViewBackground1 = Color("deleteActionViewBackground1")
     ///secondary light mode, white dark mode
     static let secondaryWhite = Color("secondaryWhite")
     static let pauseStickerColor = Color("pauseStickerColor")
     static let pauseStickerFontColor = Color("pauseStickerFontColor")
     static let topDetailViewBackground = Color("topDetailViewBackground")
     static let topDetailViewBackground1 = Color("topDetailViewBackground1")
-    static let infoButtonColor = Color("infoButtonColor")
+    static let infoColor = Color("infoColor")
     static let ultraLightGray1 = Color("ultraLightGray1")
     static let secondaryDark = Color("secondaryDark")
+    static let ultraLightGrayOne = Color("ultraLightGrayOne")
+    static let disabledDigitBackground = Color("disabledDigitBackground")
+    static let disabledDigit = Color("disabledDigit")
+    static let historyDigitBackground = Color("historyDigitBackground")
+    
+    static let newBackground = Color("background4")
+    static let digitBackground = Color("digitBackground") //DurationPicker digits
+    static let digitBackground1 = Color("digitBackground 1")
+    
 }
 
 public extension UIColor {
@@ -129,18 +148,18 @@ extension UserDefaults {
         //get rank
         //increase rank by one
         //save rank
-        let ud = UserDefaults(suiteName: .appGroupName)!
-        var rank = ud.integer(forKey: UserDefaults.Key.rank)
+        let userDefaults = UserDefaults(suiteName: .appGroupName)!
+        var rank = userDefaults.integer(forKey: UserDefaults.Key.rank)
         defer {
             rank += 1
-            ud.set(rank, forKey: UserDefaults.Key.rank)
+            userDefaults.set(rank, forKey: UserDefaults.Key.rank)
         }
         return rank
     }
     
-    static func resetRankGenerator(_ value:Int) {
-        let ud = UserDefaults(suiteName: String.appGroupName)!
-        ud.set(value, forKey: UserDefaults.Key.rank)
+    static func resetRankGenerator(to value:Int) {
+        let userDefaults = UserDefaults(suiteName: String.appGroupName)!
+        userDefaults.set(value, forKey: UserDefaults.Key.rank)
     }
 }
 

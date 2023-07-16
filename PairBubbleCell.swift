@@ -11,58 +11,26 @@ import MyPackage
 
 ///it's the small bubble cell in the PairCell of BottomDetaiulView that only shows up when bubble is running and detailMode is active
 struct PairBubbleCell: View {
-    @Environment(\.colorScheme) private var colorScheme
     let bubble:Bubble
-    let metrics = BubbleCell.Metrics()
-    
-    @ViewBuilder
-    private var roundedRectangle:some View {
-        if colorScheme == .light {
-            RoundedRectangle(cornerRadius: 35)
-                .fill(.thinMaterial)
-        } else {
-            RoundedRectangle(cornerRadius: 35)
-                .fill(gradientBackground)
-        }
-    }
-    
-    private var gradientBackground:LinearGradient {
-        let stops:[Gradient.Stop] = [
-            .init(color: .topDetailViewBackground1, location: 0.05),
-            .init(color: .topDetailViewBackground, location: 1)
-        ]
-        return LinearGradient(stops: stops, startPoint: .bottom, endPoint: .top)
-    }
     
     var body: some View {
         ZStack {
-            Rectangle().fill(.clear)
-                .aspectRatio(metrics.ratio, contentMode: .fit)
-                .background {
-                    roundedRectangle
-                        .scaleEffect(x: 1.12, y: 1.17)
-                        .allowsHitTesting(false)
-                }
-                .overlay {
-                    HStack {
-                        circle
-                        circle
-                        circle
-                    }
-                    .compositingGroup()
-                    .shadow(color: .black.opacity(0.13), radius: 4, x: 1, y: 2)
-                    .scaleEffect(x: metrics.hstackScale, y: metrics.hstackScale)
-                }
-            PairBubbleCell.ThreeLabels(metrics.timeComponentsFontSize, bubble)
+            circle //Sec
+                .frame(maxWidth: .infinity, alignment: .trailing)
+                .aspectRatio(2.1, contentMode: .fit)
+                .background { circle }
+                .overlay(alignment: .leading){ circle }
+                .compositingGroup()
+                .shadow(color: .black.opacity(0.13), radius: 4, x: 1, y: 2)
+                .padding(8)
+                .background(.thinMaterial, in: RoundedRectangle(cornerRadius: 35))
+            PairBubbleCell.ThreeLabels(bubble: bubble)
         }
-        .padding(10)
     }
     
     // MARK: - Lego
     private var circle:some View {
-        Circle()
-            .fill(.white)
-            .scaleEffect(x: metrics.circleScale, y: metrics.circleScale)
+        Circle().fill(.white)
     }
     
     init?(bubble: Bubble?) {
@@ -72,92 +40,51 @@ struct PairBubbleCell: View {
 }
 
 extension PairBubbleCell {
+    private var isBubbleRunning:Bool { bubble.state == .running }
+}
+
+extension PairBubbleCell {
     struct ThreeLabels : View {
         var bubble:Bubble?
-        let timeComponentsFontSize:CGFloat
-        let metrics = BubbleCell.Metrics()
-        
-        @State private var hr:String
-        @State private var min:String
-        @State private var sec:String
         
         var body: some View {
-            if let pairCoordinator = bubble?.pairBubbleCellCoordinator {
-                Rectangle().fill(.clear)
-                    .aspectRatio(metrics.ratio, contentMode: .fit)
+            if let coordinator = bubble?.pairBubbleCellCoordinator {
+                Color.clear //frame
+                    .frame(maxWidth: .infinity, alignment: .trailing)
+                    .aspectRatio(2.1, contentMode: .fit)
+                    .overlay(alignment: .leading){
+                        Circle().fill(.clear)
+                            .overlay {
+                                Text(coordinator.components.hr)
+                                    .modifier(LabelModifier())
+                            }
+                    } //Hr
                     .overlay {
-                        HStack {
-                            clearCircle
-                                .overlay {
-                                    clearRectangle
-                                        .overlay { Text(hr).componentsTextStyle() }
-                                }
-                            clearCircle
-                                .overlay {
-                                    clearRectangle
-                                        .overlay { Text(min).componentsTextStyle() }
-                                }
-                            clearCircle
-                                .overlay {
-                                    clearRectangle
-                                        .overlay {  Text(sec).componentsTextStyle() }
-                                }
+                        Circle().fill(.clear)
+                            .overlay {
+                                Text(coordinator.components.min)
+                                    .modifier(LabelModifier())
+                            }
+                    } //Min
+                    .overlay(alignment: .trailing) {
+                        Circle().fill(.clear).overlay {
+                            Text(coordinator.components.sec)
+                                .modifier(LabelModifier())
                         }
-                        .scaleEffect(x: metrics.hstackScale, y: metrics.hstackScale)
-                        .onReceive(pairCoordinator.$components) {
-                            hr = $0.hr
-                            min = $0.min
-                            sec = $0.sec
-                        }
-                        .task { } //⚠️
-                    }
+                    } //Sec
             }
         }
-        
-        // MARK: - Lego
-        private var clearCircle:some View {
-            Circle()
-                .fill(.clear)
-                .scaleEffect(x: metrics.circleScale, y: metrics.circleScale)
-        }
-        
-        private var clearRectangle:some View {
-            Color.clear
-                .aspectRatio(1.2, contentMode: .fit)
-        }
-        
-        // MARK: -
-        init?(_ timeComponentsFontSize:CGFloat,
-             _ bubble:Bubble?) {
-            
-            guard let bubble = bubble else { return nil }
-            
-            self.timeComponentsFontSize = timeComponentsFontSize
-                                
-            let components = bubble.pairBubbleCellCoordinator.components
-            hr = components.hr
-            min = components.min
-            sec = components.sec
-            
-            self.bubble = bubble
-        }
     }
-}
-
-struct ComponentsTextStyle: ViewModifier {
-    func body(content: Content) -> some View {
-        content
-            .allowsHitTesting(false)
-                .font(.system(size: 400))
-                .fontDesign(.rounded)
+    
+    struct LabelModifier: ViewModifier {
+        func body(content: Content) -> some View {
+            content
+                .allowsHitTesting(false)
+                .font(.system(size: 400, design: .rounded))
                 .lineLimit(1)
                 .minimumScaleFactor(0.1)
-                .foregroundColor(.black)
-    }
-}
-
-extension View {
-    func componentsTextStyle() -> some View {
-        modifier(ComponentsTextStyle())
+                .foregroundStyle(.black)
+                .aspectRatio(2.3, contentMode: .fit)
+        }
     }
 }

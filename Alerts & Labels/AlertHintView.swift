@@ -18,7 +18,7 @@ struct AlertHint {
 }
 
 struct AlertHintView: View {
-    @EnvironmentObject var viewModel:ViewModel
+    @Environment(ViewModel.self) var viewModel
     
     let alertContent:AlertHintContent
     let dismissAction:() -> ()
@@ -32,7 +32,7 @@ struct AlertHintView: View {
                         VStack(alignment: .leading) {
                             Text("***Always-ON*** overrides Auto-Lock")
                             Text("*Settings App > Display & Brightness > Auto-Lock*")
-                                .foregroundColor(.secondary)
+                                .foregroundStyle(.secondary)
                         }
                         VStack(alignment: .leading) {
                             Text("Regardless of the device settings, Auto-Lock for this app is set to 'Never'. This means the display stays on, unless ***Always-ON*** is switched off again")

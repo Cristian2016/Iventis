@@ -58,11 +58,11 @@ struct MyLabelStyle:LabelStyle {
     func makeBody(configuration: Configuration) -> some View {
         VStack(alignment: alignedRight ? .leading :.trailing) {
             configuration.icon
-                .foregroundColor(color)
+                .foregroundStyle(color)
             if showText {
                 configuration.title
                     .font(.system(size: 10))
-                    .foregroundColor(.secondary)
+                    .foregroundStyle(.secondary)
             }
         }
     }

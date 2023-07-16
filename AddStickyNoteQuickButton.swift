@@ -9,7 +9,7 @@ import SwiftUI
 
 ///temporary button that shows up in the BubbleList, for 5 seconds
 struct AddStickyNoteQuickButton: View {
-    @EnvironmentObject var viewModel:ViewModel
+    @Environment(ViewModel.self) var viewModel
     
     // MARK: - Body
     var body: some View {

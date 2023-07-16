@@ -1,104 +1,94 @@
 //
-//  Secretary.swift
+//  Secretary1.swift
 //  Timers (iOS)
 //
-//  Created by Cristian Lapusan on 01.02.2023.
-// Secretary knows shit on anybody! For example it knows how many pinned bubbles exist at any given time. It collects varous data from various parts of the App
-//1 scrolls top top in DetailView when user pulls down on the table [PairCellList]
-//2 background timer, does not repeat, in 5 seconds it removes BlueInfoButton
-//3 used when user taps a notification. programmatically scoll in BubbleList to BubbleCell with id == scrollRank
-//4 CalendarSticker needs to redraw (for ex.) right when user is asked to grant access to Calendar App for the first time. Since I coulnd't find a way to get easy EKCalendar/Store notifications, I have to use Secretary.publisher: calendarAccessGranted publisher
+//  Created by Cristian Lapusan on 01.12.2023.
+//
 
+import Foundation
 import SwiftUI
-import MyPackage
-import CoreData
 import WidgetKit
+import MyPackage
 
+@Observable
 class Secretary {
-    static let shared = Secretary()
+    //MARK: - Publishers
+    private(set) var controlActionBubble:Int64?
     
-    func widgetsCount(completion: @escaping (Int) -> Void) {
-        WidgetCenter.shared.getCurrentConfigurations { result in
-            if let infos = try? result.get() { completion(infos.count) }
-            else { completion(0) }
-        }
-    }
+    private(set) var showPaletteView = false
     
-    @Published var calendarAccessGranted = CalendarManager.shared.calendarAccessStatus == .granted //4
+    private(set) var showHelpViewHierarchy = false
     
-    //used by the widget
-    @Published var mostRecentlyUsedBubble:Int64? {didSet{ saveMostRecentlyUsedBubble() }}
-    @Published private(set) var widgetsExist = false
-    
-    // MARK: - Show More Info
-    @Published var bubbleDeleteButtonShowMore = false
-    
-    // MARK: - Publishers
-    @Published var scrollRank:Int64? //3
-    
-    @Published var showCalendarAccessDeniedWarning = false
-    
-    private var fiveSecTimer = PrecisionTimer() //2
-    
-    @Published var showBlueInfoButton = false {didSet{
-        if !oldValue {
-            let fiveSeconds = DispatchTime.now() + 5
-            
-            //main
-            fiveSecTimer.executeAction(after: fiveSeconds) { [weak self] in
-                DispatchQueue.main.async { self?.showBlueInfoButton = false }
+    func controlBubble(_ kind:Kind) {
+        DispatchQueue.main.async {
+            switch kind {
+                case .show(let rank) : self.controlActionBubble = rank
+                case .hide: self.controlActionBubble = nil
             }
         }
-    }}
-    
-    var topMostView:TopMostView = .bubble
-    
-    @Published var showInfoVH = false
-    
-    @Published var showBubbleInfo = false
-    
-    @Published var showBubbleDeleteInfo = false
-    
-    @Published var showPaletteInfo = false
-    
-    @Published var showDurationPickerInfo = false
-    
-    @Published var showMoreOptionsInfo = false
-    
-    @Published var pairBubbleCellNeedsDisplay = false
-    
-    @Published var sessionToDelete:(session:Session, sessionRank:Int)? {didSet{
-        topMostView = sessionToDelete?.sessionRank != nil ? .sessionDeleteActionView :.bubble
-    }}
-    
-    @Published var showAlert_AlwaysOnDisplay = false
-            
-    @Published var displayAutoLockConfirmation = false
-    
-    @Published var confirm_CalEventCreated: Int64?
-    
-    @Published var confirm_CalEventRemoved: Int64?
-    
-    @Published var showDetail_bRank:Int64?
-    
-    @Published var showAlert_closeSession = false
-    
-    func toggleDetail(_ rank:Int64?) {
-        showDetail_bRank = showDetail_bRank == nil ? rank : nil
     }
+    
+    func palette(_ state:PaletteState) {
+        withAnimation(.easeOut(duration: 0.23)) {
+            switch state {
+                case .show:
+                    showPaletteView = true
+                    HelpOverlay.Model.shared.topmostView(.palette)
+                case .hide:
+                    showPaletteView = false
+                    HelpOverlay.Model.shared.topmostView(.bubbleList)
+            }
+        }
+    }
+    
+    func helpViewHiewHierarchy(_ state:BoolState) {
+        withAnimation {
+            switch state {
+                case .show: showHelpViewHierarchy = true
+                case .hide: showHelpViewHierarchy = false
+            }
+        }
+    }
+    
+    enum Kind {
+        case show(Int64)
+        case hide
+    }
+    
+    enum BoolState {
+        case show
+        case hide
+    }
+    
+    //MARK: -
+    init() {
+        setMostRecentlyUsedBubble()
+        observe_ApplicationActive()
+    }
+    
+    private(set) var widgetsExist = false
+    
+    var mostRecentlyUsedBubble:Int64? {didSet{ saveMostRecentlyUsedBubble() }}
+    
+    var calendarAccessGranted = CalendarManager.shared.calendarAccessStatus == .granted //4
+    
+    var showCalendarAccessDeniedWarning = false
         
-    ///bubbleCell rank and frame. Frame will not be set if DetailView shows
-    @Published var deleteAction_bRank:Int64? {didSet{
-        topMostView = deleteAction_bRank == nil ? .bubble : .bubbleDeleteActionView
+    var sessionToDelete: SessionToDelete? { didSet {
+        let sessionDeleteButtonShows = sessionToDelete?.sessionRank != nil
+        HelpOverlay.Model.shared.topmostView(sessionDeleteButtonShows ? .sessionDelete :.detail)
     }}
     
-    @Published var addNoteButton_bRank:Int? {didSet { handleAddNoteButton_bRank() }}
+    enum PaletteState {
+        case show
+        case hide
+    }
     
-    @Published var showPaletteView = false {didSet{
-        Secretary.shared.topMostView = showPaletteView ? .palette : .bubble
-    }}
+    var showAlert_AlwaysOnDisplay = false
     
-    func togglePaletteView() { withAnimation { showPaletteView.toggle() }}
+    var displayAutoLockConfirmation = false
+    
+    var addNoteButton_bRank:Int? {didSet { handleAddNoteButton_bRank() }}
     
     private var timer:Timer?
     
@@ -122,32 +112,38 @@ class Secretary {
         if addNoteButton_bRank != nil { addNoteButton_bRank = nil }
     }
     
-    @Published var showScrollToTopButton = false
+    var confirm_CalEventCreated: Int64?
     
-    @Published var shouldScrollToTop = false
+    var confirm_CalEventRemoved: Int64?
     
-    @Published var showDetailViewInfoButton = false {didSet{
+    var showAlert_closeSession = false
+    
+    //DetailView
+    var showDetail_bRank:Int64?
+    func toggleDetail(_ rank:Int64?) {
+        showDetail_bRank = showDetail_bRank == nil ? rank : nil
+    }
+    var showDetailViewInfoButton = false {didSet{
         if showDetailViewInfoButton {
             delayExecution(.now() + 5.0) { [weak self] in
                 self?.showDetailViewInfoButton.toggle()
             }
         }
     }}
+    var showDetailViewInfo = false
     
-    @Published var showDetailViewInfo = false
+    //
+    var showFavoritesOnly = false
     
-    @Published var showSessionDeleteInfo = false
+    var showScrollToTopButton = false
+    
+    var shouldScrollToTop = false
     
     func scrollToTop() {
         if !shouldScrollToTop { shouldScrollToTop = true }
     } //1
     
-    // MARK: - Toggle Favorites [Pinned versus Ordinary bubbles]
-    @Published var showFavoritesOnly = false
-    
-    @Published var isBubblesReportReady = false
-    
-    private(set) var bubblesReport = BubblesReport()
+    var isBubblesReportReady = false
     
     func updateBubblesReport(_ updateKind: UpdateKind) {
         switch updateKind {
@@ -184,7 +180,7 @@ class Secretary {
                 bubblesReport.ordinaryRanks.append(Int(bubble.rank))
                 
                 DispatchQueue.main.async { self.isBubblesReportReady = true }
-            
+                
             case .delete(let bubble):
                 if bubble.isPinned {
                     bubblesReport.pinned -= 1
@@ -195,7 +191,7 @@ class Secretary {
                 }
                 
                 DispatchQueue.main.async { self.isBubblesReportReady = true }
-            
+                
             case .pin(let bubble):
                 if bubble.isPinned {
                     bubblesReport.pinned += 1
@@ -220,7 +216,7 @@ class Secretary {
                         let index = bubblesReport
                             .colors.firstIndex (where: { $0.id == bubble.rank })
                     else { fatalError() }
-                                        
+                    
                     bubblesReport.colors[index] = idColor(id: bubble.rank, color: Color.bubbleColor(forName: bubble.color))
                     
                     DispatchQueue.main.async { self.isBubblesReportReady = true }
@@ -228,7 +224,48 @@ class Secretary {
         }
     }
     
-    // MARK: - Observers
+    func widgetsCount(completion: @escaping (Int) -> Void) {
+        WidgetCenter.shared.getCurrentConfigurations { result in
+            if let infos = try? result.get() { completion(infos.count) }
+            else { completion(0) }
+        }
+    }
+    
+    private(set) var bubblesReport = BubblesReport()
+}
+
+extension Secretary {
+    enum TopMostView {
+        case palette
+        case durationPicker
+        case moreOptions
+        case control
+        case sessionDelete
+        case bubble
+        case bubbleDetail
+    }
+    
+    struct SessionToDelete : Equatable {
+        var session:Session
+        var sessionRank:Int
+    }
+}
+
+extension Secretary {
+    // MARK: - Widgets
+    ///writes rank of the most recently used bubble to the shared databased, so that widgets can read it
+    private func saveMostRecentlyUsedBubble() {
+        //write each time regardless if there is a widget or not [?]
+        let rank = mostRecentlyUsedBubble != nil ? String(mostRecentlyUsedBubble!) : "Deleted"
+        try? rank.write(to: URL.objectIDFileURL, atomically: true, encoding: .utf8)
+    }
+    
+    private func setMostRecentlyUsedBubble() {
+        if let string = try? String(contentsOf: URL.objectIDFileURL) {
+            mostRecentlyUsedBubble = Int64(string)
+        }
+    }
+    
     private func observe_ApplicationActive() {
         NotificationCenter.default.addObserver(forName: .didBecomeActive, object: nil, queue: nil) { [weak self] _ in
             
@@ -240,42 +277,6 @@ class Secretary {
                 DispatchQueue.main.async {
                     self?.widgetsExist = condition ? true : false
                 }
-            }
-        }
-    }
-    
-    // MARK: - Init/Deinit
-    private init() {
-        setMostRecentlyUsedBubble()
-        observe_ApplicationActive()
-    }
-    
-    // MARK: - DurationPicker
-//    @Published var durationPickerMode: Mode?
-//
-//    enum Mode {
-//        case create(Color.Tricolor) //timer
-//        case edit(Bubble) //existing timer
-//    }
-    
-    @Published var durationPickerReason = DurationPickerReason.none
-    
-    enum DurationPickerReason : Hashable {
-        case createTimer(Color.Tricolor) //create timer in PaletteView
-        case editExistingTimer(Bubble) //edit an existing timer
-        case changeToTimer(Bubble) //change stopwatch to timer
-        case none //not set. DPV not visible
-        
-        var description:String {
-            switch self {
-                case .changeToTimer(let bubble):
-                    return "reason change to \(bubble.color ?? "pula") timer"
-                case .createTimer(let tricolor):
-                    return "reason create \(tricolor.description) timer"
-                case .editExistingTimer(let bubble):
-                    return "reason edit existing timer \(bubble.color ?? "pula")"
-                case .none:
-                    return "reason none"
             }
         }
     }
@@ -303,32 +304,5 @@ extension Secretary {
         case create(Bubble) //bubble
         case pin(Bubble) //pin/unpin bubble
         case colorChange(Bubble) //change bubble color [MoreOptionsView]
-    }
-}
-
-extension Secretary {
-    enum TopMostView {
-        case palette
-        case durationPicker
-        case moreOptionsView
-        case bubbleDeleteActionView
-        case sessionDeleteActionView
-        case bubble
-    }
-}
-
-extension Secretary {
-    // MARK: - Widgets
-    ///writes rank of the most recently used bubble to the shared databased, so that widgets can read it
-    private func saveMostRecentlyUsedBubble() {
-        //write each time regardless if there is a widget or not [?]
-        let rank = mostRecentlyUsedBubble != nil ? String(mostRecentlyUsedBubble!) : "Deleted"
-        try? rank.write(to: URL.objectIDFileURL, atomically: true, encoding: .utf8)
-    }
-    
-    private func setMostRecentlyUsedBubble() {
-        if let string = try? String(contentsOf: URL.objectIDFileURL) {
-           mostRecentlyUsedBubble = Int64(string)
-        }
     }
 }

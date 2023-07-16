@@ -8,10 +8,9 @@
 import SwiftUI
 
 struct AlwaysOnDisplayAlertView: View {
-    @EnvironmentObject var viewModel:ViewModel
     @AppStorage("showAlwaysOnDisplayAlert") var showAlwaysOnDisplayAlert = true
     
-    let secretary = Secretary.shared
+    @Environment(Secretary.self) private var secretary
     @State private var showAlert_AlwaysOnDisplay = false
     
     var body: some View {
@@ -22,8 +21,8 @@ struct AlwaysOnDisplayAlertView: View {
                 } buttonAction: { showAlwaysOnDisplayAlert = false }
             }
         }
-        .onReceive(secretary.$showAlert_AlwaysOnDisplay) {
-            showAlert_AlwaysOnDisplay = $0
+        .onChange(of: secretary.showAlert_AlwaysOnDisplay) {
+            showAlert_AlwaysOnDisplay = $1
         }
     }
 }

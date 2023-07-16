@@ -8,75 +8,61 @@
 import SwiftUI
 import MyPackage
 
-extension DurationPickerView {
-    class Manager {
+extension DurationPickerOverlay {
+    @Observable class Manager {
         typealias Characters = CharacterSet
         let matrix = [36_000, 3600, 600, 60, 10, 1]
         
-        @Published var timerDurationComponents:TimerDurationComponents?
-        @Published var displayIsEmpty = false //when true display will be cleared
-        @Published var isDurationValid = false
+        // MARK: - Observed properties (7)
+        var hr = ""
+        var min = ""
+        var sec = ""
         
-        @Published var digits = [Int]() {didSet{ updateUI() }}
+        var isDisplayEmpty:Bool { digits.isEmpty }
+        var isDurationValid = false
+        var digits = [Int]() {didSet{ if !digits.isEmpty { updateUI() }}}
+        var notAllowedCharacters = Characters(charactersIn: "56789✕")
         
-        @Published var notAllowedCharacters = Characters(charactersIn: "56789✕")
-        
+        // MARK: -
         ///updates both display and digitsGrid
         private func updateUI() {
-            let count = digits.count
             let digits = self.digits
             
             self.charactersToDisable() //update digitsGrid
             
             DispatchQueue.global().async {
-               let isDurationValid = count%2 == 0 && digits.reduce(0) { $0 + $1 } != 0
+                let isDurationValid = digits.count%2 == 0 && digits.reduce(0) { $0 + $1 } != 0
                 
-                DispatchQueue.main.async {
-                    self.isDurationValid = isDurationValid
-                }
+                self.isDurationValid = isDurationValid
                 
-                switch count {
-                    case 0:
-                        DispatchQueue.main.async { self.displayIsEmpty = true }
+                switch digits.count {
                     case 1:
                         let result = String(digits.first!) + "⎽"
-                        DispatchQueue.main.async { self.timerDurationComponents = .hr(result) }
+                        self.hr = result
                     case 2:
                         let result = digits.reduce("") { String($0) + String($1) }
-                        DispatchQueue.main.async {
-                            self.timerDurationComponents = .hr(result)
-                            self.timerDurationComponents = .min("")
-                        }
+                        self.hr = result
+                        self.min = ""
                     case 3:
                         let result = String(digits.last!) + "⎽"
-                        DispatchQueue.main.async { self.timerDurationComponents = .min(result) }
+                        self.min = result
                     case 4:
                         let result = digits.dropFirst(2).reduce("") { String($0) + String($1) }
-                        DispatchQueue.main.async {
-                            self.timerDurationComponents = .min(result)
-                            self.timerDurationComponents = .sec("")
-                        }
+                        self.min = result
+                        self.sec = ""
                     case 5:
                         let result = String(digits.last!) + "⎽"
-                        DispatchQueue.main.async { self.timerDurationComponents = .sec(result)}
+                        self.sec = result
                     case 6:
                         let result = String(digits[4]) + String(digits[5])
-                        DispatchQueue.main.async { self.timerDurationComponents = .sec(result) }
+                        self.sec = result
                     default:
                         break
                 }
             }
         }
         
-        struct DisplayComponents {
-            let hr:String
-            let min:String
-            let sec:String
-        }
-        
         // MARK: - Public API
-        static let shared = Manager()
-        
         func addToDigits(_ value:Int) {
             digits.append(value)
         }
@@ -85,12 +71,20 @@ extension DurationPickerView {
             digits.append(contentsOf: [0,0])
         }
         
-        func removelastDigit() { digits.removeLast() }
+        func removelastDigit() { if !digits.isEmpty { digits.removeLast() }}
         
-        func removeAllDigits() { digits = [] }
+        func reset() {
+            digits = []
+            hr = ""
+            min = ""
+            sec = ""
+            isDurationValid = false
+            notAllowedCharacters = Characters(charactersIn: "56789✕")
+        }
         
         ///if duration is valid, a timer will be created and then DPV dismissed. If duration not valid, silently dismiss DPV
         func shouldComputeInitialClock(color:String) {
+            guard !digits.isEmpty else { return }
             let digitsCopy = digits
             
             DispatchQueue.global().async {
@@ -98,10 +92,8 @@ extension DurationPickerView {
                 let sum = digitsCopy.reduce(0) { $0 + $1 }
                 let validDuration = digitsCopy.count%2 == 0 && sum != 0
                 
-                guard validDuration else { //digits are not valid
-                    Secretary.shared.topMostView = .palette
-                    return
-                }
+                //make sure digits are valid
+                guard validDuration else { return }
                 
                 //digits are valid
                 UserFeedback.singleHaptic(.medium)
@@ -111,19 +103,7 @@ extension DurationPickerView {
                 
                 //ask viewModel to create timer of color and initialClock
                 self.askViewModelToCreateTimer(with:color, and:initialClock)
-                
-                //dismiss palette also
-                DispatchQueue.main.async {
-                    withAnimation {
-                        Secretary.shared.showPaletteView = false
-                    }
-                }
             }
-        }
-        
-        var userFriendlyDuration:String {
-            let result = zip(digits, self.matrix).reduce(0) { $0 + $1.0 * $1.1 }
-            return Float(result).timerTitle
         }
         
         func shouldEditDuration(_ bubble:Bubble) {
@@ -143,6 +123,11 @@ extension DurationPickerView {
                     self.askViewModelToEditDuration(for: bubble, initialClock)
                 }
             }
+        }
+        
+        var userFriendlyDuration:String {
+            let result = zip(digits, self.matrix).reduce(0) { $0 + $1.0 * $1.1 }
+            return Float(result).timerTitle
         }
         
         // MARK: -
@@ -186,15 +171,12 @@ extension DurationPickerView {
         }
         
         // MARK: -
-        private init() {
+        init() {
             print(#function, "DPManager")
         }
         
-        // MARK: -
-        enum TimerDurationComponents {
-            case hr(String)
-            case min(String)
-            case sec(String)
+        deinit {
+            print("DPManager deinit")
         }
     }
 }

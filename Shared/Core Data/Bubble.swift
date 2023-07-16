@@ -15,12 +15,10 @@ import MyPackage
 @objc(Bubble)
 public class Bubble: NSManagedObject {
     
-    lazy var coordinator:BubbleCellCoordinator! = BubbleCellCoordinator(for: self)
-    lazy var pairBubbleCellCoordinator:PairBubbleCellCoordinator! = PairBubbleCellCoordinator(bubble: self)
-
-    ///4 start delay values
-    static let delays = [5, 10, 20, 45]
+    lazy var coordinator:BubbleCellCoordinator! = .init(for: self)
         
+    lazy var pairBubbleCellCoordinator:PairBubbleCellCoordinator! = .init(bubble: self)
+
     // MARK: - Convenience
     var sessions_:[Session] {
         get { sessions?.array as? [Session] ?? [] }
@@ -45,6 +43,8 @@ public class Bubble: NSManagedObject {
     var kind:Kind { initialClock == 0 ? .stopwatch : .timer(initialClock) }
     
     var isTimer:Bool { kind != .stopwatch }
+    
+    var isRunning:Bool { state == .running }
 }
 
 extension Bubble {
@@ -65,7 +65,7 @@ extension Bubble {
         else {
             if sessions_.isEmpty || lastSession.isEnded { return .brandNew }
             else {
-                if lastPair!.pause == nil { return .running }
+                if lastPair?.pause == nil { return .running }
                 else { return .paused }
             }
         }

@@ -4,6 +4,7 @@
 //
 //  Created by Cristian Lapusan on 08.05.2021.
 //1 runs on background Thread
+//https://developer.apple.com/videos/play/wwdc2023/10052/
 
 import EventKit
 //import EventKitUI
@@ -20,6 +21,8 @@ extension CalendarManager {
         case notRequested
         case granted
         case revoked
+        case fullAccess
+        case writeOnly
     }
     
     var calendarAccessStatus:AccessStatus {
@@ -28,6 +31,8 @@ extension CalendarManager {
             case .authorized: return .granted
             case .denied: return .revoked
             case .notDetermined, .restricted: return .notRequested
+            case .fullAccess: return .fullAccess
+            case .writeOnly: return .writeOnly
             @unknown default: return .notRequested
         }
     }
@@ -36,9 +41,9 @@ extension CalendarManager {
     ///if authorization granted, create default calendar to add events to it
     func requestCalendarAccess(_ completion: @escaping () -> Void) {
         if calendarAccessStatus == .notRequested { //1. request access
-            store.requestAccess(to: .event) { userGrantedAccess, _ in
+            store.requestFullAccessToEvents { userGrantedAccess, _ in
                 if userGrantedAccess {
-                    DispatchQueue.main.async { Secretary.shared.calendarAccessGranted = true }
+                    //DispatchQueue.main.async { Secretary.shared.calendarAccessGranted = true } ⚠️
                     completion()
                 }
             }
@@ -315,7 +320,7 @@ class CalendarManager: NSObject {
         //pCount pairsCount
         guard let bubble = session.bubble else { return "No Title" }
         
-        let friendlyBubbleColorName = Color.userFriendlyBubbleColorName(for: bubble.color)
+        let friendlyBubbleColorName = String.readableName(for: bubble.color)
         let emojiSquare = Color.emoji(for: bubble.color ?? "mint")
         let bNote = bubble.note_.isEmpty ? friendlyBubbleColorName : bubble.note_
         

@@ -17,7 +17,7 @@ struct InfoCell: View {
                     if let overtitle = input.overtitle {
                         Text(overtitle)
                             .font(.system(size: 20).italic())
-                            .foregroundColor(.secondary)
+                            .foregroundStyle(.secondary)
                     }
                     if !input.units.isEmpty {
                         VStack(alignment: .leading) {
@@ -43,7 +43,7 @@ struct InfoCell: View {
                                 if let overtitle = input.overtitle {
                                     Text(overtitle)
                                         .font(.system(size: 20).italic())
-                                        .foregroundColor(.secondary)
+                                        .foregroundStyle(.secondary)
                                 }
                                 ForEach(input.units) { InfoUnit($0) }
                             }
@@ -59,7 +59,7 @@ struct InfoCell: View {
                     if let footnote = input.footnote {
                         Text(footnote)
                             .font(.footnote.italic())
-                            .foregroundColor(.secondary)
+                            .foregroundStyle(.secondary)
                     }
                 }
             case .smallReversed:
@@ -77,7 +77,7 @@ struct InfoCell: View {
                                 if let overtitle = input.overtitle {
                                     Text(overtitle)
                                         .font(.system(size: 20).italic())
-                                        .foregroundColor(.secondary)
+                                        .foregroundStyle(.secondary)
                                 }
                                 ForEach(input.units) { InfoUnit($0) }
                             }
@@ -86,7 +86,7 @@ struct InfoCell: View {
                     if let footnote = input.footnote {
                         Text(footnote)
                             .font(.footnote.italic())
-                            .foregroundColor(.secondary)
+                            .foregroundStyle(.secondary)
                     }
                 }
         }

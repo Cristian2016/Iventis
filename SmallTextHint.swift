@@ -15,7 +15,7 @@ struct SmallTextHint:View {
     var body: some View {
         Text(content)
             .font(.caption)
-            .foregroundColor(.secondary)
+            .foregroundStyle(.secondary)
             .allowsHitTesting(allowTouches) //1
     }
     

@@ -18,7 +18,7 @@ struct CalendarConfirmation: View {
                 .font(metrics.contentFont)
             
             Label(name, systemImage: systemImage)
-                .foregroundColor(fillColor)
+                .foregroundStyle(fillColor)
                 .font(.system(size: 26))
         }
         .padding()
@@ -52,7 +52,7 @@ struct CalendarConfirmation: View {
     private var fillColor:Color {
         switch content.kind {
             case .removed, .off: return .red
-            case .created, .on: return .vibrantGreen
+            case .created, .on: return .green
             case .caffeinated, .sleepy: return .label
         }
     }

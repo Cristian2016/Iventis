@@ -29,9 +29,9 @@ struct BubbleCell_Info: View {
     private var hundredthsView:some View {
         Text("00")
             .background(Circle()
-                .foregroundColor(Color("pauseStickerColor"))
+                .foregroundStyle(Color("pauseStickerColor"))
                 .padding(-12))
-            .foregroundColor(Color("pauseStickerFontColor"))
+            .foregroundStyle(Color("pauseStickerFontColor"))
             .font(.system(size: 12, weight: .semibold, design: .default))
         //animations:scale, offset and opacity
             .frame(width: 50, height: 50)
@@ -58,7 +58,7 @@ struct BubbleCell_Info: View {
                 .overlay { Push(.bottomRight) { hundredthsView } }
         }
         .font(.system(size: 10))
-        .foregroundColor(.white)
+        .foregroundStyle(.white)
     }
     
     var background: some View {

@@ -238,7 +238,13 @@ class ScheduledNotificationsManager {
             return timer.note_ + " " + timerDone
         }
         
-        let timerColor = Color.userFriendlyBubbleColorName(for: timer.color!)
+        let timerColor = String.readableName(for: timer.color!)
         return timerColor + " " + timerDone
+    }
+}
+
+extension String {
+    static func readableName(for colorName:String?) -> String {
+        Color.friendlyBubbleColorName(for: colorName)
     }
 }

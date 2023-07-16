@@ -13,7 +13,7 @@ import CoreData
 extension BubbleSavedNote {
 
     @nonobjc public class func fetchRequest() -> NSFetchRequest<BubbleSavedNote> {
-        return NSFetchRequest<BubbleSavedNote>(entityName: "BubbleHistory")
+        return NSFetchRequest<BubbleSavedNote>(entityName: "BubbleSavedNote")
     }
 
     @NSManaged public var date: Date?

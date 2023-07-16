@@ -18,7 +18,7 @@ struct StartInfoView: View {
                         .font(.system(size: 22).monospaced())
                         .fontWeight(.medium)
                 }
-                .foregroundColor(.green)
+                .foregroundStyle(.green)
                 Image("cellTap")
                     .resizable()
                     .aspectRatio(contentMode: .fit)
@@ -32,7 +32,7 @@ struct StartInfoView: View {
                         .font(.system(size: 22).monospaced())
                         .fontWeight(.medium)
                 }
-                .foregroundColor(.green)
+                .foregroundStyle(.green)
                 Image("cellDoubleTap")
                     .resizable()
                     .aspectRatio(contentMode: .fit)
@@ -42,7 +42,7 @@ struct StartInfoView: View {
                 HStack (alignment: .lastTextBaseline) {
                     TapHold(fontSize: 30)
                     Text("Tap & Hold")
-                        .foregroundColor(.green)
+                        .foregroundStyle(.green)
                         .font(.system(size: 22).monospaced())
                         .fontWeight(.medium)
                 }

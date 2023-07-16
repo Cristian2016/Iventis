@@ -2,6 +2,27 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>INAlternativeAppNames</key>
+	<array>
+		<dict>
+			<key>INAlternativeAppNamePronunciationHint</key>
+			<string>Run</string>
+			<key>INAlternativeAppName</key>
+			<string>Run</string>
+		</dict>
+		<dict>
+			<key>INAlternativeAppNamePronunciationHint</key>
+			<string>Count</string>
+			<key>INAlternativeAppName</key>
+			<string>Count</string>
+		</dict>
+	</array>
+	<key>NSCalendarsFullAccessUsageDescription</key>
+	<string>Allow Fused App to create, edit or delete events in the Calendar App</string>
+	<key>NSUserActivityTypes</key>
+	<array>
+		<string>ConfigurationIntent</string>
+	</array>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>

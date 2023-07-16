@@ -31,14 +31,15 @@ extension BubbleList {
 struct BubbleList: View {
     @Environment(\.managedObjectContext) private var viewContext
     
-    @EnvironmentObject private var viewModel:ViewModel
-    @EnvironmentObject private var layoutViewModel:LayoutViewModel
+    @Environment(ViewModel.self) private var viewModel
     
+    private var secretary:Secretary
+        
     @SectionedFetchRequest var sections:SectionedFetchResults<Bool, Bubble>
     
+    @State private var showPairNotes = false
+    
     private static let publisher = NotificationCenter.Publisher(center: .default, name: .scrollToTimer)
-
-    private let secretary = Secretary.shared
                     
     // MARK: -
     var body: some View {
@@ -54,7 +55,6 @@ struct BubbleList: View {
                                     NavigationLink(value: bubble) { }.opacity(0)
                                     BubbleCell(bubble)
                                 }
-                                .offset(y: -6)
                                 .id(String(bubble.rank))
                             }
                         }
@@ -65,20 +65,20 @@ struct BubbleList: View {
                         
                         if !section.id { bottomOverscoll }
                     }
+                    .background { RefresherView() }
+                    .refreshable { refresh() }
                     .navigationDestination(for: Bubble.self) { DetailView($0) }
                     .scrollIndicators(.hidden)
                     .listStyle(.plain)
                     .toolbarBackground(.ultraThinMaterial)
                     .toolbar {
                         ToolbarItemGroup {
-                            AddNoteButton()
+                            AddPairNoteButton()
                             AlwaysONButton()
                             PlusButton()
                         }
                     }
-                    .background { RefresherView() }
-                    .refreshable { refresh() }
-                    .onReceive(Self.publisher) { handleScrollToFinishedTimerNotification($0, proxy) } //15
+//                    .onReceive(Self.publisher) { handleScrollToFinishedTimerNotification($0, proxy) } //15
                 }
             }
             LeftStrip(isListEmpty)
@@ -90,9 +90,8 @@ struct BubbleList: View {
         
         /* first remove all views that might obscure the finished timer. if finished timer is in the ordinary list and ordinary list is hidden [pinned only shows], show all bubbles. scroll to the finished timer */
         
-        secretary.durationPickerReason = .none //hide durationpicker
-        secretary.durationPickerReason = .none
-        secretary.showPaletteView = false //remove palette
+        viewModel.durationPicker.reason = nil //hide durationpicker
+        secretary.palette(.hide) //remove palette
         
         if secretary.showFavoritesOnly && secretary.bubblesReport.ordinaryRanks.contains(Int(rank)!) {
             secretary.showFavoritesOnly = false //show all bubbles
@@ -116,10 +115,10 @@ struct BubbleList: View {
     }
     
     // MARK: -
-    init(_ showFavoritesOnly: Bool, _ showDetail_bRank:Int64? = nil) {
+    init(_ secretary:Secretary) {
         var predicate:NSPredicate?
-        if showFavoritesOnly { predicate = NSPredicate(format: "isPinned == true")}
-        if let rank = showDetail_bRank { predicate = NSPredicate(format: "rank == %D", rank) }
+        if secretary.showFavoritesOnly { predicate = NSPredicate(format: "isPinned == true")}
+        if let rank = secretary.showDetail_bRank { predicate = NSPredicate(format: "rank == %D", rank) }
             
         _sections = SectionedFetchRequest<Bool, Bubble>(
             entity: Bubble.entity(),
@@ -128,6 +127,8 @@ struct BubbleList: View {
             predicate: predicate,
             animation: .default
         )
+        
+        self.secretary = secretary
     } //12
     
     // MARK: -
@@ -147,18 +148,18 @@ struct BubbleList: View {
             if sectionID == "false" {
                 HStack {
                     Text("Bubbles")
-                        .foregroundColor(.label)
+                        .foregroundStyle(Color.label)
                         .fontWeight(.medium)
                 }
                 
             }
             else { Text("\(Image(systemName: "pin.fill")) Pinned")
-                    .foregroundColor(.orange)
+                    .foregroundStyle(.orange)
                     .fontWeight(.medium)
             }
             
             //rectangle to allow collapse along the entire width
-            Rectangle().foregroundColor(.white.opacity(0.001))
+            Rectangle().foregroundStyle(.white.opacity(.Opacity.basicallyTransparent))
         }
         .font(.system(size: 26))
     }

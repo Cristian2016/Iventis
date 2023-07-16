@@ -13,7 +13,7 @@ struct MoreOptionsInfoView: View {
             Image.moreOptionsView.thumbnail()
             VStack(alignment: .leading, spacing: 8) {
                 Text("*Use Yellow Areas to*")
-                    .foregroundColor(.secondary)
+                    .foregroundStyle(.secondary)
                 Divider()
                 VStack(alignment: .leading) {
                     Text("**Save Delay** \(Image.tap) Tap")

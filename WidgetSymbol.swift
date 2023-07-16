@@ -9,25 +9,21 @@ import SwiftUI
 import WidgetKit
 
 struct WidgetSymbol: View {
-    @State private var show = false
+    private var show:Bool {
+        let thisBubbleHasWidget = secretary.mostRecentlyUsedBubble == rank
+        return secretary.widgetsExist && thisBubbleHasWidget ? true : false
+    }
     let rank:Int64
+    
+    @Environment(Secretary.self) private var secretary
     
     var body: some View {
         ZStack {
             if show {
                 Image(systemName: "w.circle.fill")
-                    .foregroundColor(.pauseStickerColor)
+                    .foregroundStyle(Color.pauseStickerColor)
                     .font(.system(size: 16))
             }
-        }
-        .onReceive(Secretary.shared.$widgetsExist) { output in
-            show = (output && Secretary.shared.mostRecentlyUsedBubble == rank) ? true : false
-        }
-        .onReceive(Secretary.shared.$mostRecentlyUsedBubble) { output in
-            //widget exists and it's meant for this widgetSymbol (with the rank)
-            let condition = output == rank && Secretary.shared.widgetsExist
-            
-            show = condition ? true : false
         }
     }
 }

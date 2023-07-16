@@ -3,7 +3,7 @@
 //  WidgetsExtension
 //
 //  Created by Cristian Lapusan on 27.04.2023.
-//
+//⚠️ 1 remove this and widget does not show up
 
 import SwiftUI
 
@@ -26,6 +26,7 @@ struct WidgetView : View {
                             .multilineTextAlignment(.center)
                     }
             }
+            .containerBackground(.clear, for: .widget) //⚠️ 1
     }
     
     @ViewBuilder

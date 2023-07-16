@@ -25,7 +25,7 @@ struct DigitsView: View {
                     .fontWeight(.medium)
                 }
                 .font(.system(size: 80, design: .rounded))
-                .foregroundColor(.black)
+                .foregroundStyle(.black)
             
             HStack(spacing: 2) {
                 vRoundedRectangle(corners: [.topLeft], radius: 0)
@@ -93,7 +93,7 @@ struct DigitsView: View {
                     .fill(.yellow)
             }
         }
-        .foregroundColor(.white)
+        .foregroundStyle(.white)
         .offset(x: 0, y: -24)
         .padding(4)
         .background {

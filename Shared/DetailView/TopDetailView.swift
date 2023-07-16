@@ -14,11 +14,8 @@ struct TopDetailView:View {
     @Binding var needlePosition:Int
     private var sessions: FetchedResults<Session>
     
-    @EnvironmentObject private var viewModel:ViewModel
     @Environment(\.colorScheme) var colorScheme
-    
-    private let secretary = Secretary.shared
-        
+            
     init?(_ needlePosition:Binding<Int>, _ sessions:FetchedResults<Session>) {
         _needlePosition = needlePosition
         self.sessions = sessions
@@ -28,7 +25,7 @@ struct TopDetailView:View {
     var body: some View {
         ZStack {
             if colorScheme == .light { shadowBackground }
-            if colorScheme == .dark { gradientBackground }
+//            if colorScheme == .dark { gradientBackground }
             
             ScrollViewReader { proxy in
                 ScrollView(.horizontal, showsIndicators: false) {
@@ -44,13 +41,13 @@ struct TopDetailView:View {
                         }
                     }
                 }
-                .onChange(of: needlePosition) { newPosition in
+                .onChange(of: needlePosition) {_, newPosition in
                     withAnimation {
                         proxy.scrollTo(newPosition == -1 ?
                                        sessions.count : newPosition, anchor: .center)
                     }
                 }
-                .onChange(of: sessions.count) { if $0 == 1 { needlePosition = -1 }} //1
+                .onChange(of: sessions.count) { if $1 == 1 { needlePosition = -1 }} //1
             }
         }
         .padding(.init(top: 0, leading: -17, bottom: 0, trailing: -17))
@@ -61,7 +58,7 @@ struct TopDetailView:View {
         VStack {
             ZStack {
                 Image(systemName: "arrowtriangle.down.fill")
-                    .foregroundColor(.red)
+                    .foregroundStyle(.red)
                     .font(.system(size: 20))
                 Divider()
                     .frame(width: 40)
@@ -76,13 +73,13 @@ struct TopDetailView:View {
             .padding([.leading, .trailing], -100)
     }
     
-    private var gradientBackground:some View {
-        let stops:[Gradient.Stop] = [
-            .init(color: .topDetailViewBackground, location: 0.6),
-            .init(color: .topDetailViewBackground1, location: 1)
-        ]
-        return LinearGradient(stops: stops, startPoint: .bottom, endPoint: .top)
-    }
+//    private var gradientBackground:some View {
+//        let stops:[Gradient.Stop] = [
+//            .init(color: .topDetailViewBackground, location: 0.6),
+//            .init(color: .topDetailViewBackground1, location: 1)
+//        ]
+//        return LinearGradient(stops: stops, startPoint: .bottom, endPoint: .top)
+//    }
     
     // MARK: -
     private func sessionRank(of session:Session) -> Int {

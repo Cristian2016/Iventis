@@ -9,7 +9,6 @@ import SwiftUI
 
 struct TopCellDurationView: View {
     private let metrics:TopCell.Metrics
-    //    private let coordinator:PairBubbleCellCoordinator
     
     @StateObject private var session:Session
     @State private var duration: Float.TimeComponentsAsStrings?
@@ -20,21 +19,18 @@ struct TopCellDurationView: View {
     var body: some View {
         ZStack {
             HStack(spacing: 0) {
-                //                if showGreaterThenSymbol {
-                //                    Image.greaterThan.font(.caption2)
-                //                }
                 durationView
                     .overlay {
                         if showGreaterThenSymbol {
                             Rectangle()
                                 .fill(.red)
-                                .frame(height: 1) }
+                            .frame(height: 1) }
                     }
             }
         }
         .onAppear { handleOnAppear() }
-        .onChange(of: session.totalDuration) { handleNewDuration($0) }
-        .onChange(of: session.pairs_.last?.pause) { handlePauseDate($0) }
+        .onChange(of: session.totalDuration) { handleNewDuration($1) }
+        .onChange(of: session.pairs_.last?.pause) { handlePauseDate($1) }
     }
     
     // MARK: - Legos

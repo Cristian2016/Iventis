@@ -8,65 +8,63 @@
 import SwiftUI
 import MyPackage
 
-extension DurationPickerView {
+extension DurationPickerOverlay {
     struct Digit:View {
-        let manager = Manager.shared
+        private let digit:String
+        private let tricolor:Color.Tricolor
         
         @State private var isTapped = false
-        @State private var disabled = false
-        @State private var hidden = false
         
-        let digit:String
-        let tricolor:Color.Tricolor
+        @Environment(\.verticalSizeClass) private var verticalSizeClass
         
-        init(_ digit: String, _ tricolor: Color.Tricolor) {
+        private var isHidden:Bool {
+            (manager.notAllowedCharacters == .allDigits && digit != "✕") ? true : false
+        }
+        
+        private var isDisabled:Bool {
+            manager.notAllowedCharacters.contains(digit.unicodeScalars.first!) ? true : false
+        }
+        
+        let manager:Manager
+        
+        init?(_ digit: String, _ tricolor: Color.Tricolor?, _ manager: Manager) {
+            guard let tricolor = tricolor else { return nil }
+            
             self.digit = digit
             self.tricolor = tricolor
+            self.manager = manager
+        }
+        
+        private var fillColor:Color {
+            if digit == "✕" {
+                return isDisabled ? .background.opacity(0.4) : .red
+            } else {
+                return isDisabled ? .background.opacity(0.4) : .background
+            }
         }
         
         var body: some View {
             shape
-                .frame(minHeight: 52)
+                .foregroundStyle(fillColor)
                 .overlay {
                     Text(digit == "*" ? "00" : digit)
-                        .font(.system(size: 50, design: .rounded))
-                        .minimumScaleFactor(0.1)
-                        .foregroundColor(.white)
-                        .opacity(disabled ? 0.5 : 1.0)
+                        .font(.digitFont)
+                        .minimumScaleFactor(0.01)
+                        .foregroundStyle(digitColor)
                 }
                 .onTapGesture { didTapDigit() } //1
                 .onLongPressGesture { clearDisplay() } //1
-                .opacity(isTapped || hidden ? 0 : 1.0)
-                .disabled(disabled ? true : false)
-                .onReceive(manager.$notAllowedCharacters) {
-                    if $0 == .allDigits && digit != "✕" {
-                        hidden = true
-                        return
-                    } else {
-                        hidden = false
-                    }
-                    disabled = $0.contains(digit.unicodeScalars.first!) ? true : false
-                }
+                .opacity(isTapped || isHidden ? .Opacity.basicallyTransparent : .Opacity.opaque)
         }
         
-        // MARK: - Lego
-        @ViewBuilder
-        private var shape:some View {
-            switch digit {
-                case "✕":
-                    vRoundedRectangle(corners: .bottomRight, radius: 32)
-                        .fill(disabled ? Color.Bubble.clearButtonRed.hr : Color.Bubble.clearButtonRed.sec)
-                case "*":
-                    vRoundedRectangle(corners: .bottomLeft, radius: 32)
-                        .fill(disabled ? tricolor.hr : tricolor.sec)
-                default:
-                    Rectangle()
-                        .fill(disabled ? tricolor.hr : tricolor.sec)
-            }
+        private var digitColor:Color {
+            isDisabled ? .disabledDigit : digit == "✕" ? .white : .label
         }
         
         // MARK: - Intents
         private func didTapDigit() {
+            if isDisabled { return }
+            
             //User Feedback
             UserFeedback.singleHaptic(.light)
             withAnimation(.easeIn(duration: 0.05)) { isTapped = true }
@@ -82,8 +80,13 @@ extension DurationPickerView {
         private func clearDisplay() {
             if digit == "✕" {
                 UserFeedback.singleHaptic(.heavy)
-                manager.removeAllDigits()
+                manager.reset()
             }
+        }
+        
+        @ViewBuilder
+        private var shape:some View {
+            Capsule()
         }
     }
 }

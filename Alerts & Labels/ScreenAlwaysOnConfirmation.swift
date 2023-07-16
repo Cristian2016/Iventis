@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ScreenAlwaysOnConfirmation: View {
-    private let secretary = Secretary.shared
+    @Environment(Secretary.self) private var secretary
     @State var confirm_AlwaysOnDisplay = false
     
     var body: some View {
@@ -17,8 +17,8 @@ struct ScreenAlwaysOnConfirmation: View {
                 ConfirmView(content: UIApplication.shared.isIdleTimerDisabled ? .appCaffeinated : .appCanSleep)
             }
         }
-        .onReceive(secretary.$displayAutoLockConfirmation) {
-            confirm_AlwaysOnDisplay = $0
+        .onChange(of: secretary.displayAutoLockConfirmation) {
+            confirm_AlwaysOnDisplay = $1
         }
     }
 }

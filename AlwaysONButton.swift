@@ -5,28 +5,25 @@ import MyPackage
 struct AlwaysONButton: View {
     let metrics = Metrics()
     
-    private let secretary = Secretary.shared
-    @State private var addNoteButton_bRank:Int?
+    @Environment(Secretary.self) private var secretary
     @State private var isDisplayAlwaysON = false
     
     var body: some View {
         label
             .onTapGesture { buttonAction() }
-            .onReceive(secretary.$addNoteButton_bRank) { addNoteButton_bRank = $0 }
     }
     
     // MARK: - Lego
     @ViewBuilder
     private var label:some View {
         if isDisplayAlwaysON {
-            if addNoteButton_bRank == nil { FusedLabel(content: .alwaysON) }
+            if secretary.addNoteButton_bRank == nil { FusedLabel(content: .alwaysON) }
         }
         else { sunSymbol }
     }
     
     private var sunSymbol:some View {
         Label("Prevent Display Sleep", systemImage: "sun.max")
-            .foregroundColor(metrics.symbolColor)
             .font(metrics.font)
     }
     
@@ -46,8 +43,6 @@ struct AlwaysONButton: View {
     // MARK: -
     struct Metrics {
         let font = Font.system(size: 18)
-        let symbolColor = Color.label
-        let diagonalLineColor = Color.red
     }
 }
 

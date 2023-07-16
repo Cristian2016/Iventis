@@ -13,16 +13,25 @@ import SwiftUI
 import Combine
 import MyPackage
 
-
 public class StartDelayBubble: NSManagedObject {
     lazy var coordinator:Coordinator! = Coordinator(self)
 }
 
 extension StartDelayBubble {
+    @Observable
     class Coordinator {
-        private weak var sdb: StartDelayBubble?
+        //MARK: - Publishers
+        var valueToDisplay:Float //1
+        var animate = false
         
-        private lazy var initialClock = sdb?.initialClock ?? 0
+        //2 StartDelayBubble
+        var offset = CGFloat(0) //17
+        var sdbDeleteTriggered = false //18
+        
+        //MARK: -
+        weak var sdb: StartDelayBubble?
+        
+        private var initialClock:Float { sdb?.initialClock ?? 0 }
         
         private func task(_ totalDuration:Float, _ lastStart:Date, _ currentClock:Float) { //bThread
                         
@@ -50,12 +59,16 @@ extension StartDelayBubble {
         
         func update(_ moment:Moment) { //main Thread
             
-            guard let lastStart = sdb?.pairs_.last?.start else { return }
-            let totalDuration = sdb!.totalDuration
-            let currentClock = sdb!.currentClock
-                        
+            guard
+                let lastStart = sdb?.pairs_.last?.start,
+                let totalDuration = sdb?.totalDuration,
+                let currentClock = sdb?.currentClock
+            else { return }
+            
+            
             switch moment {
                 case .automatic: //when app lanches
+                    animate = true
                     self.publisher
                         .sink { [weak self] _ in
                             self?.task(totalDuration, lastStart, currentClock)
@@ -65,6 +78,7 @@ extension StartDelayBubble {
                 case .user(let action) :
                     switch action {
                         case .start:
+                            animate = true
                             publisher
                                 .sink { [weak self] _ in
                                     self?.task(totalDuration, lastStart, currentClock)
@@ -73,26 +87,23 @@ extension StartDelayBubble {
                             
                         case .pause:
                             cancellable = []
-                            valueToDisplay = sdb!.currentClock
+                            valueToDisplay = sdb?.currentClock ?? -666
+                            animate = false
                             
                         case .reset: //sdb.currentClock has reached zero
                             cancellable = []
-                            animateSDButton = false
+                            animate = false
                             //remove all pairs
-                            
                     }
             }
         }
         
-        @Published var valueToDisplay:Float //1
-        @Published var animateSDButton = false
-        
-        private lazy var publisher =
+        private let publisher =
         NotificationCenter.Publisher(center: .default, name: .bubbleTimerSignal)
         
         private(set) var cancellable = Set<AnyCancellable>()
         
-        private lazy var precisionTimer = PrecisionTimer()
+        private let precisionTimer = PrecisionTimer()
         
         ///notifies ViewModel to start the bubble
         private func startBubble(_ elapsedSinceFirstStart: Float?) {
@@ -106,25 +117,31 @@ extension StartDelayBubble {
             let startCorrection = TimeInterval(elapsedSinceFirstStart - initialClock)
             
             DispatchQueue.main.async {
-                let info:[String : Any] = ["rank" : self.sdb!.bubble!.rank,
-                                           "startCorrection" : startCorrection]
-                
-                NotificationCenter.default.post(name: .killSDB, object: nil, userInfo: info)
-                
-                self.cancellable = []
-                self.sdb!.currentClock = 0 //only to set sdb.state to .finished
+                if let sdb = self.sdb {
+                    let info:[String : Any] = ["rank" : sdb.bubble?.rank ?? -1,
+                                               "startCorrection" : startCorrection]
+                    
+                    NotificationCenter.default.post(name: .killSDB, object: nil, userInfo: info)
+                    
+                    self.cancellable = []
+                    sdb.currentClock = 0 //only to set sdb.state to .finished
+                }
             }
         }
         
         // MARK: - Init Deinit
         init(_ sdb:StartDelayBubble) {
             self.sdb = sdb
-            self.valueToDisplay = sdb.currentClock
+            valueToDisplay = sdb.currentClock
             
-            if sdb.state == .running { update(.automatic) }
+            if sdb.state == .running {
+                update(.automatic)
+            }
         }
         
-        deinit { NotificationCenter.default.removeObserver(self) }
+        deinit {
+            NotificationCenter.default.removeObserver(self)
+        }
     }
     
     enum State {
@@ -138,8 +155,8 @@ extension StartDelayBubble {
         if pairs_.isEmpty { return .brandNew }
         else {
             if currentClock == 0 { return .finished }
-            let lastPair = pairs_.last!
-            return lastPair.pause != nil ? .paused : .running
+            let lastPair = pairs_.last
+            return lastPair?.pause != nil ? .paused : .running
         }
     }
     

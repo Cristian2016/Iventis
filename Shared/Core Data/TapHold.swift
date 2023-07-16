@@ -18,11 +18,11 @@ struct TapHold: View {
             VStack {
                 Image(systemName: "clock.fill")
                     .font(.system(size: fontSize))
-                    .foregroundColor(.white)
+                    .foregroundStyle(.white)
             }
         }
         .fixedSize(horizontal: false, vertical: true)
-        .foregroundColor(.green)
+        .foregroundStyle(.green)
     }
 }
 

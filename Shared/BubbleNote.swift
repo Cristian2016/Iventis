@@ -9,13 +9,13 @@ import SwiftUI
 
 struct BubbleNote: View {
     @EnvironmentObject var bubble:Bubble
-    @EnvironmentObject var viewModel:ViewModel
+    @Environment(ViewModel.self) var viewModel
             
-    private let stickyHeight = CGFloat(44)
+    private let stickyHeight = CGFloat(40)
     private let font = Font.system(size: 24)
     private let cornerRadius = CGFloat(2)
     private let textPadding = EdgeInsets(top: 4, leading: 6, bottom: 4, trailing: 8)
-    let collapsedNoteWidth = CGFloat(50)
+    let collapsedNoteWidth = CGFloat(40)
     
     // MARK: -
     var body: some View {
@@ -23,7 +23,7 @@ struct BubbleNote: View {
             calendarSymbol
             stickyNoteTextView
         }
-        .foregroundColor(.label)
+        .foregroundStyle(Color.label)
         .background(background)
         .cornerRadius(cornerRadius)
         .shadow(color: .black.opacity(0.1), radius: 2, y: 2)
@@ -57,9 +57,6 @@ struct BubbleNote: View {
     
     private var background: some View {
         ZStack {
-//            RoundedRectangle(cornerRadius: cornerRadius)
-//                .fill(Color.bubbleColor(forName: bubble.color!))
-//                .scaleEffect(0.4)
             RoundedRectangle(cornerRadius: cornerRadius)
                 .fill(Color.clear)
                 .background(Color.background1)

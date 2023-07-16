@@ -31,6 +31,18 @@ struct StickyNote<Content:View>: View {
     }
     
     // MARK: -
+    var body: some View {
+        ZStack (alignment: alignment) {
+            //"Delete"/"Done" Text
+            deleteConfirmationLabel  /* |🗑️ Delete| */
+            content
+                .offset(x: offsetX)
+                .gesture(dragGesture)
+                .onTapGesture { tapAction() }
+        }
+    }
+    
+    // MARK: -
     @State var offsetX = CGFloat.zero
     @State var deleteActionTriggered = false
     
@@ -60,28 +72,16 @@ struct StickyNote<Content:View>: View {
     }
     
     // MARK: -
-    var body: some View {
-        ZStack (alignment: alignment) {
-            //"Delete"/"Done" Text
-            deleteConfirmationLabel  /* |🗑️ Delete| */
-            content
-                .offset(x: offsetX)
-                //gestures
-                .gesture(dragGesture)
-                .onTapGesture { tapAction() }
-        }
-    }
-    
-    // MARK: -
     private var deleteConfirmationLabel:some View {
-        Text(deleteOffsetReached ? "\(Image.checkmark) Done" : "\(Image.trash) Delete")
+        Text(deleteOffsetReached ? "Done" : "Delete")
         .transaction { $0.animation = nil } //1
-        .foregroundColor(.white)
-        .font(.system(size: 24).weight(.medium))
+        .foregroundStyle(.white)
+        .font(.system(size: 24, weight: .medium))
         .padding()
+        .padding([.leading, .trailing])
         .background {
             RoundedRectangle(cornerRadius: 2)
-                .fill(deleteOffsetReached ? .green : .red)
+                .fill(deleteOffsetReached ? Color.green : .red)
                 .transaction { $0.animation = nil } //1
                 .frame(height: 44)
         }

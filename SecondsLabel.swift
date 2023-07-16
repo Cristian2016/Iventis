@@ -9,17 +9,14 @@ import SwiftUI
 
 struct SecondsLabel: View {
     let bubble:Bubble
-    @EnvironmentObject private var viewModel:ViewModel
-        
-    @State private var sec = "e"
-    
+    @Environment(ViewModel.self) var viewModel
+            
     var body: some View {
         ZStack {
             clearCircle
                 .overlay (secondsLabel)
                 .overlay (timerProgressView)
         }
-        .onReceive(bubble.coordinator.$timeComponents) { sec = $0.sec }
     }
     
     // MARK: - Lego
@@ -32,8 +29,8 @@ struct SecondsLabel: View {
     private var timerProgressView:some View {
         VStack {
             Color.clear
-                .aspectRatio(6, contentMode: .fit)
-                .overlay { TimerProgressView(bubble) }
+                .aspectRatio(5.8, contentMode: .fit)
+                .overlay { TimerProgressView(bubble: bubble) }
             Color.clear
             Color.clear
         }
@@ -49,7 +46,9 @@ struct SecondsLabel: View {
     }
     
     private var text:some View {
-        Text(sec).allowsHitTesting(false)
+        let sec = bubble.coordinator.timeComponents.sec
+        
+        return Text(sec).allowsHitTesting(false)
             .font(.system(size: 400))
             .lineLimit(1)
             .minimumScaleFactor(0.1)
@@ -59,32 +58,25 @@ struct SecondsLabel: View {
     init?(bubble: Bubble?) {
         guard let bubble = bubble else { return nil }
         self.bubble = bubble
-        self.sec = bubble.coordinator.timeComponents.sec
     }
 }
 
 extension SecondsLabel {
     struct TimerProgressView:View {
-        private let precision = "%.2f"
-        @ObservedObject var bubble:Bubble
-        @State private var progress = "0.0"
+        var bubble:Bubble
         
         var body: some View {
             ZStack {
-                if bubble.isTimer {
-                    Text(progress)
+                if bubble.coordinator.isTimer {
+                    Text(bubble.coordinator.timerProgress)
                         .font(.system(size: 30, weight: .semibold))
-                        .foregroundColor(.black)
+                        .foregroundStyle(.black)
                         .minimumScaleFactor(0.1)
                         .padding([.leading, .trailing], 4)
                         .background(.thinMaterial, in: RoundedRectangle(cornerRadius: 4))
                         .environment(\.colorScheme, .light)
                 }
             }
-            .onReceive(bubble.coordinator.$timerProgress) { progress = $0 }
-            .onChange(of: progress) { _ in }
         }
-        
-        init(_ bubble: Bubble) { self.bubble = bubble }
     }
 }

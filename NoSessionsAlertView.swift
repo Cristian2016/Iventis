@@ -10,14 +10,12 @@ import SwiftUI
 struct NoSessionsAlertView: View {
     var body: some View {
         VStack (alignment:.leading) {
-            Text("No Entries")
-                .font(.system(size: 32))
-            Text("**Start** \(Image.tap) Tap Seconds")
-                .font(.system(size: 22))
-                .foregroundColor(.secondary)
+            Text("\(Image(systemName: "text.book.closed")) Empty Logbook")
+                .font(.system(size: 24))
+            Text("Tap seconds to start")
+                .font(.system(size: 20))
         }
-        .padding([.top])
-        .padding([.top, .leading])
+        .foregroundStyle(.secondary)
         .padding([.top, .leading])
     }
 }

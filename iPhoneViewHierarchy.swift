@@ -8,24 +8,19 @@
 import SwiftUI
 
 struct iPhoneViewHierarchy: View {
-    @EnvironmentObject private var viewModel:ViewModel
-    
-    private let secretary = Secretary.shared
-    @State private var showFavoritesOnly = false
-    @State private var showDetail_bRank:Int64?
-    
+    @Environment(ViewModel.self) private var viewModel
+    @Environment(Secretary.self) private var secretary
+        
     var body: some View {
+        @Bindable var nvm = viewModel
+        
         ZStack {
-            NavigationStack(path: $viewModel.path) {
-                BubbleList(showFavoritesOnly, showDetail_bRank)
-                    .onReceive(secretary.$showFavoritesOnly) { showFavoritesOnly = $0 }
-                    .onReceive(secretary.$showDetail_bRank) { showDetail_bRank = $0 }
+            NavigationStack(path: $nvm.path) {
+                BubbleList(secretary)
                     .navigationTitle("") //1
                     .navigationBarTitleDisplayMode(.inline) //1
             }
             .tint(.label)
-            PaletteView()
-            DurationPickerView()
         }
     }
 }

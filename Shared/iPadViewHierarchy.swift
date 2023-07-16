@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct iPadViewHierarchy: View {
-    @EnvironmentObject private var viewModel:ViewModel
+    @Environment(ViewModel.self) var viewModel
     @Environment(\.horizontalSizeClass) private var horizontalSizeClass
     
     var body: some View {

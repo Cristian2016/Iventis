@@ -16,9 +16,9 @@ struct ColorConfirmationView: View {
             Color.background.opacity(0.9)
             Circle().fill(color)
                 .standardShadow()
-            Text(Color.userFriendlyBubbleColorName(for: colorName))
+            Text(String.readableName(for: colorName))
                 .font(.system(size: 40).weight(.medium))
-                .foregroundColor(.white)
+                .foregroundStyle(.white)
                 .padding()
         }
     }

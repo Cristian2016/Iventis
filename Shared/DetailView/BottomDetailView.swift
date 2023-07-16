@@ -11,11 +11,7 @@ import MyPackage
 struct BottomDetailView: View {
     @Binding var needlePosition:Int
     private var sessions: FetchedResults<Session>
-    
-    @State private var pairBubbleCellNeedsDisplay = false
-    
-    private let secretary = Secretary.shared
-    
+            
     var body: some View {
         TabView (selection: $needlePosition) {
             ForEach(sessions) {
@@ -24,9 +20,8 @@ struct BottomDetailView: View {
         }
         .padding(.init(top: 0, leading: -12, bottom: 0, trailing: -12))
         .tabViewStyle(.page)
-        .onReceive(secretary.$pairBubbleCellNeedsDisplay) { pairBubbleCellNeedsDisplay = $0 }
         .onChange(of: needlePosition) {
-            if $0 == sessions.count { withAnimation { needlePosition = -1 }}
+            if $1 == sessions.count { withAnimation { needlePosition = -1 }}
         } //1
     }
     

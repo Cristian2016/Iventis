@@ -14,7 +14,7 @@ struct SmallAlertHintView: View {
         ZStack {
             HStack(spacing: 10) {
                 Image(systemName: alertContent.symbol ?? "")
-                    .foregroundColor(.black)
+                    .foregroundStyle(.black)
                     .font(.system(size: 30))
                 VStack(alignment: .leading) {
                         Text(alertContent.title)
@@ -25,7 +25,7 @@ struct SmallAlertHintView: View {
                         .fontDesign(.monospaced)
                         .font(.caption) 
                 }
-                .foregroundColor(.black)
+                .foregroundStyle(.black)
             }
             .padding(6)
             .background(.yellow)

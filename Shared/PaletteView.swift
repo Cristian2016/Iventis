@@ -10,48 +10,35 @@ import SwiftUI
 import MyPackage
 
 struct PaletteView: View {
-    @EnvironmentObject private var viewModel:ViewModel
-    
+    @Environment(ViewModel.self) var viewModel
+    @Environment(Secretary.self) private var secretary
+        
     @State private var tappedCircle:String?
     @State private var longPressedCircle:String?
-    
-    @AppStorage("showPaletteHint", store: .shared) var showPaletteInfo = true
-    
-    private let secretary = Secretary.shared
-    @State private var show = false
-    
+        
     private let colums = Array(repeating: GridItem(), count: 3)
     
-    private func dismissInfo() {
-        withAnimation { showPaletteInfo = false }
-        secretary.showPaletteInfo = false
-    }
-    
-    private func moreInfo() {
-        secretary.showInfoVH = true
-    }
-    
     var body: some View {
-        ZStack {
-            if show {
-                ZStack {
-                    let title = "Create Bubbles"
-                    
-                    colors
-                    if showPaletteInfo {
-                        MaterialLabel(title) { infoContent } _: { dismissInfo() } _: { moreInfo() }
-                    }
+        if secretary.showPaletteView {
+            ZStack {
+                Rectangle()
+                    .fill(.regularMaterial)
+                    .ignoresSafeArea()
+                
+                colors
+                    .gesture(swipeGesture)
+                
+                if let longPressedCircleColor = longPressedCircle {
+                    Color.bubbleColor(forName: longPressedCircleColor)
+                        .aspectRatio(1.0, contentMode: .fit)
+                        .transition(.scale)
                 }
-                .gesture(swipeGesture)
-                .transition(.move(edge: .leading))
             }
-        }
-        .onReceive(secretary.$showPaletteView) { output in
-            withAnimation { show = output }
-        }
-        .onReceive(secretary.$showPaletteInfo) { output in
-            if output {
-                withAnimation { self.showPaletteInfo = true }
+            .transition(.move(edge: .leading))
+            .onChange(of: HelpOverlay.Model.shared.topmostView) { oldValue, newValue in
+                if newValue == .bubbleList {
+                    secretary.palette(.hide)
+                }
             }
         }
     }
@@ -59,25 +46,26 @@ struct PaletteView: View {
     // MARK: - Legos
     private var colors:some View {
         ScrollView {
-            Color
-                .clear
-                .frame(height: 30)
-            Grid {
+            Grid(horizontalSpacing: 1, verticalSpacing: 1) {
                 ForEach(Color.paletteTriColors, id: \.self) { subarray in
                     GridRow {
                         ForEach(subarray) { tricolor in
-                            Circle()
-                                .fill(tricolor.sec)
-                                .scaleEffect(x: scale(tricolor) , y: scale(tricolor))
-                                .onTapGesture { createStopwatch(tricolor) }
-                                .onLongPressGesture { showDurationPicker(tricolor) }
+                            VStack {
+                                tricolor.sec
+                                Text(String.readableName(for: tricolor.description))
+                            }
+                            .padding(2)
+                            .background()
+                            .onTapGesture { createStopwatch(tricolor) }
+                            .onLongPressGesture { showDurationPicker(tricolor) }
                         }
+                        .font(.system(size: 14, design: .rounded))
                     }
                 }
             }
+            .containerRelativeFrame(.vertical)
         }
         .scrollIndicators(.hidden)
-        .ignoresSafeArea()
     }
     
     private var infoContent:some View {
@@ -85,49 +73,38 @@ struct PaletteView: View {
             VStack(alignment: .leading) {
                 Text("**Stopwatch** \(Image.tap) Tap any color")
                 Text("**Timer** \(Image.longPress) Long-Press")
-                Text("**Dismiss** \(Image.swipeLeft) Swipe Left")
+                Text("**Dismiss** \(Image.leftSwipe) Swipe Left")
             }
         }
     }
-            
+    
     // MARK: - Methods
-    private func scale(_ tricolor:Color.Tricolor) -> CGFloat {
-        if tricolor.description == tappedCircle { return 2.8 }
-        if tricolor.description == longPressedCircle { return 4 }
-        return 1.8
-    }
-                              
     fileprivate func createStopwatch(_ tricolor:Color.Tricolor) {
         UserFeedback.singleHaptic(.light)
         
         viewModel.createBubble(.stopwatch, tricolor.description)
         withAnimation(.easeInOut(duration: 0.1)) { tappedCircle = tricolor.description }
-        secretary.togglePaletteView()
+        secretary.palette(.hide)
         tappedCircle = nil
     }
     
     fileprivate func showDurationPicker(_ tricolor:Color.Tricolor) {
         UserFeedback.singleHaptic(.medium)
         
-        withAnimation(.easeInOut(duration: 0.1)) { longPressedCircle = tricolor.description }
+        withAnimation(.easeInOut(duration: 0.2)) { longPressedCircle = tricolor.description }
         
-        delayExecution(.now() + 0.2) {
-            secretary.topMostView = .durationPicker
-            secretary.durationPickerReason = .createTimer(tricolor)
+        delayExecution(.now() + 0.25) {
+            HelpOverlay.Model.shared.topmostView(.durationPicker)
+            viewModel.durationPicker.reason = .createTimer(tricolor)
             longPressedCircle = nil
+            viewModel.durationPicker.reason = .createTimer(tricolor)
         }
     }
     
     // MARK: -
     private var swipeGesture:some Gesture {
         DragGesture(minimumDistance: 1)
-            .onEnded { if $0.translation.width < 0 { secretary.togglePaletteView() }}
-    }
-}
-
-struct PaletteView_Previews: PreviewProvider {
-    static var previews: some View {
-        PaletteView()
+            .onEnded { if $0.translation.width < 0 { secretary.palette(.hide) }}
     }
 }
 
@@ -145,7 +122,7 @@ struct ShadowModifier:ViewModifier {
 extension View {
     //https://www.hackingwithswift.com/plus/swiftui-special-effects/shadows-and-glows
     //https://www.youtube.com/watch?v=nGENKnaSWPM
-    func standardShadow(_ opacity:CGFloat = 0.3) -> some View {
+    func standardShadow(_ opacity:CGFloat = 0.12) -> some View {
         modifier(ShadowModifier(opacity: opacity))
     }
 }

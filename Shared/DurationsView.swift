@@ -11,7 +11,8 @@ import MyPackage
 struct DurationsView: View {
     private let durations = [["1", "2", "3", "4"], ["5", "10", "15", "20"], ["25", "30", "45", "60"]]
     
-    @EnvironmentObject private var viewModel:ViewModel
+    @Environment(ViewModel.self) var viewModel
+    @Environment(Secretary.self) private var secretary
     
     // MARK: - Mode [either 1. create a timerBubble with color or 2. edit a timerBubble]
     let bubble:Bubble
@@ -51,7 +52,7 @@ struct DurationsView: View {
                         .fill(color)
                         .overlay {
                             Image.stopwatch
-                                .foregroundColor(.white)
+                                .foregroundStyle(.white)
                                 .font(.system(size: 32, weight: .medium))
                         }
                         .onTapGesture {
@@ -70,12 +71,12 @@ struct DurationsView: View {
                         VStack(spacing: 4) {
                             Text(title)
                                 .font(.system(size: 22, weight: .medium))
-                                .foregroundColor(.black)
+                                .foregroundStyle(.black)
                             
                             if !bubble.isTimer {
                                 Divider()
                                 Text("*Minutes*")
-                                    .foregroundColor(.gray)
+                                    .foregroundStyle(.gray)
                                     .font(.system(size: 18))
                             }
                         }
@@ -104,11 +105,7 @@ struct DurationsView: View {
     }
     
     // MARK: -
-    private func dismiss() {
-        withAnimation {
-            Secretary.shared.deleteAction_bRank = nil
-        }
-    }
+    private func dismiss() { secretary.controlBubble(.hide) }
 }
 
 extension DurationsView {
@@ -129,7 +126,7 @@ extension DurationsView {
                     symbol
                         .font(.system(size: 32, weight: .medium, design: .rounded))
                         .minimumScaleFactor(0.1)
-                        .foregroundColor(.white)
+                        .foregroundStyle(.white)
                 }
                 .onTapGesture { action() }
         }
@@ -145,9 +142,9 @@ extension DurationsView {
     }
 }
 
-struct DurationsView_Previews: PreviewProvider {
-    
-    static var previews: some View {
-        DurationsView(ControlActionView_Previews.bubble)
-    }
-}
+//struct DurationsView_Previews: PreviewProvider {
+//    
+//    static var previews: some View {
+//        DurationsView(ControlActionView_Previews.bubble)
+//    }
+//}

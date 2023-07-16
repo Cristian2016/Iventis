@@ -9,40 +9,37 @@ import SwiftUI
 import MyPackage
 
 struct CalendarEventCreatedConfirmation: View {
-    private let secretary = Secretary.shared
-    @State private var confirm_CalEventCreated:Int64?
+    @Environment(Secretary.self) private var secretary
+    
+    private var show:Bool { secretary.confirm_CalEventCreated != nil }
     
     var body: some View {
-        ZStack {
-            let show = confirm_CalEventCreated != nil
-            if show { CalendarConfirmation(content: .eventCreated) }
-        }
-        .onReceive(secretary.$confirm_CalEventCreated) { confirm_CalEventCreated = $0 }
+        ZStack { if show { ConfirmView(content: .eventCreated) }}
     }
 }
 
 struct CalendarEventRemovedConfirmation: View {
-    private let secretary = Secretary.shared
-    @State private var confirm_CalEventRemoved:Int64?
+    @Environment(Secretary.self) private var secretary
     
     var body: some View {
         ZStack {
-            let show = confirm_CalEventRemoved != nil
-            if show { CalendarConfirmation(content: .eventRemoved) }
+            let show = secretary.confirm_CalEventRemoved != nil
+            if show {
+                ConfirmView(content: .eventRemoved)
+            }
         }
-        .onReceive(secretary.$confirm_CalEventRemoved) { confirm_CalEventRemoved = $0 }
     }
 }
 
 ///when user taps finished timer, this alert will show
 struct CloseSessionAlert: View {
-    private let secretary = Secretary.shared
+    @Environment(Secretary.self) private var secretary
     @State private var show = false
     
     var body: some View {
         ZStack {
             if show { ConfirmView(content: .eventRemoved) }
         }
-        .onReceive(secretary.$showAlert_closeSession) { show = $0 }
+        .onChange(of: secretary.showAlert_closeSession) { show = $1 }
     }
 }

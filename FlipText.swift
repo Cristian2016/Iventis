@@ -8,16 +8,17 @@
 import SwiftUI
 import MyPackage
 
-struct FlipText: View {
-    @State private var isAllowedToFlip = true
-    @State private var viewToShowIndex = 0
-    
-    let input:Input
-    
-    let removal:AnyTransition = {
+extension AnyTransition {
+    static let removal = {
         let trans = AnyTransition.move(edge: .bottom)
         return trans.combined(with: .opacity.combined(with: .scale(scale: 0.4)))
     }()
+}
+
+struct FlipText: View {
+    @State private var viewToShowIndex = 0
+    
+    let input:Input
     
     var body: some View {
         ZStack {
@@ -28,15 +29,14 @@ struct FlipText: View {
                 
                 if currentIndex == viewToShowIndex {
                     Text(line)
-                        .font(.system(size: .largeTitle, weight: .medium))
-                        .transition(.asymmetric(insertion: .move(edge: .top), removal: removal))
+                        .transition(.asymmetric(insertion: .move(edge: .top), removal: .removal))
                 }
             }
         }
         .onAppear {
             var repeatCount = 1
             
-            Timer.scheduledTimer(withTimeInterval: 5, repeats: true) {
+            Timer.scheduledTimer(withTimeInterval: 2, repeats: true) {
                 let newIndex = (viewToShowIndex + 1)%input.lines.count
                 
                 withAnimation(.spring(response: 0.8, dampingFraction: 0.5)) { viewToShowIndex = newIndex }
@@ -52,9 +52,10 @@ extension FlipText {
     struct Input {
         let lines:[LocalizedStringKey]
         
+        //DurationPicker
         static let createTimer = Input(lines: ["Create Timer", "Enter Duration"])
-        static let editTimer = Input(lines: ["Edit Timer Duration"])
-        static let changeToTimer = Input(lines: ["Change to Timer", "Enter Duration"])
+        static let editTimer = Input(lines: ["Edit Timer", "Enter Duration"])
+        static let changeToTimer = Input(lines: ["Switch to Timer", "Enter Duration"])
     }
 }
 
