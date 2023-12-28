@@ -33,19 +33,29 @@ class Secretary {
             switch state {
                 case .show:
                     showPaletteView = true
-                    HelpOverlay.Model.shared.topmostView(.palette)
+                    HintOverlay.Model.shared.topmostView(.palette)
                 case .hide:
                     showPaletteView = false
-                    HelpOverlay.Model.shared.topmostView(.bubbleList)
+                    HintOverlay.Model.shared.topmostView(.bubbleList)
             }
         }
     }
     
-    func helpViewHiewHierarchy(_ state:BoolState) {
-        withAnimation {
+    ///show/hide Help View Hierarchy
+    func helpVH(_ state:BoolState) {
+        var animation:Animation?
+        switch state {
+            case .show(animate: let animate):
+                animation = animate ? .default : nil
+            default:
+                animation = .default
+        }
+        withAnimation(animation) {
             switch state {
-                case .show: showHelpViewHierarchy = true
-                case .hide: showHelpViewHierarchy = false
+                case .show:
+                    showHelpViewHierarchy = true
+                case .hide:
+                    showHelpViewHierarchy = false
             }
         }
     }
@@ -56,7 +66,7 @@ class Secretary {
     }
     
     enum BoolState {
-        case show
+        case show(animate:Bool = true)
         case hide
     }
     
@@ -68,7 +78,14 @@ class Secretary {
     
     private(set) var widgetsExist = false
     
-    var mostRecentlyUsedBubble:Int64? {didSet{ saveMostRecentlyUsedBubble() }}
+    //ysed by the round w widget symbol
+    private(set) var mostRecentlyUsedBubble:Int64? {didSet { saveMostRecentlyUsedBubble() }}
+    
+    func setMostRecentlyUsedBubble(to rank:Int64?) {
+        DispatchQueue.main.async {
+            self.mostRecentlyUsedBubble = rank
+        }
+    }
     
     var calendarAccessGranted = CalendarManager.shared.calendarAccessStatus == .granted //4
     
@@ -76,7 +93,7 @@ class Secretary {
         
     var sessionToDelete: SessionToDelete? { didSet {
         let sessionDeleteButtonShows = sessionToDelete?.sessionRank != nil
-        HelpOverlay.Model.shared.topmostView(sessionDeleteButtonShows ? .sessionDelete :.detail)
+        HintOverlay.Model.shared.topmostView(sessionDeleteButtonShows ? .sessionDelete :.detail)
     }}
     
     enum PaletteState {
@@ -115,8 +132,6 @@ class Secretary {
     var confirm_CalEventCreated: Int64?
     
     var confirm_CalEventRemoved: Int64?
-    
-    var showAlert_closeSession = false
     
     //DetailView
     var showDetail_bRank:Int64?

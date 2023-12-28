@@ -14,7 +14,7 @@ struct MaterialLabel<Content:View>: View {
         let mediumFont = Font.system(size: 20)
     }
     
-    init(_ title:String? = nil,
+    init(_ title:LocalizedStringKey? = nil,
          _ subtitle:LocalizedStringKey? = nil,
          @ViewBuilder _ content:() -> Content,
          _ action: @escaping () -> (),
@@ -27,7 +27,7 @@ struct MaterialLabel<Content:View>: View {
         self.subtitle = subtitle
     }
     
-    private var title:String?
+    private var title:LocalizedStringKey?
     private var subtitle:LocalizedStringKey?
     
     let content:Content
@@ -51,10 +51,7 @@ struct MaterialLabel<Content:View>: View {
                 
                 Divider()
                 
-                HStack {
-                    shakeForInfo
-                    moreInfoButton
-                }
+                shakeForInfo
             }
             .padding()
             .background { materialBackground }
@@ -84,15 +81,8 @@ struct MaterialLabel<Content:View>: View {
     }
     
     private var shakeForInfo:some View {
-        Label("*Shake for Info*", systemImage: "iphone.radiowaves.left.and.right")
+        Label("*Shake for Help*", systemImage: "iphone.radiowaves.left.and.right")
             .font(.system(size: .minFontSize))
-    }
-    
-    private var moreInfoButton:some View {
-        Button { moreInfo() } label: {
-            Label("*More*", systemImage: "info.square.fill")
-                .font(.system(size: 20))
-        }
     }
     
     private var materialBackground:some View {

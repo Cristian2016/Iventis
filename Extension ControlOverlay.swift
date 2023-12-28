@@ -39,7 +39,7 @@ extension ControlOverlay {
         
         private func dismiss() {
             secretary.controlBubble(.hide)
-            HelpOverlay.Model.shared.topmostView(viewModel.path.isEmpty ? .bubbleList : .detail)
+            HintOverlay.Model.shared.topmostView(viewModel.path.isEmpty ? .bubbleList : .detail)
         }
         
         private func reset() {
@@ -153,7 +153,7 @@ extension ControlOverlay {
         
         private func dismiss() {
             secretary.controlBubble(.hide)
-            HelpOverlay.Model.shared.topmostView(viewModel.path.isEmpty ? .bubbleList : .detail)
+            HintOverlay.Model.shared.topmostView(viewModel.path.isEmpty ? .bubbleList : .detail)
         }
         
         private func handleTimerButtonTapped() {
@@ -166,12 +166,11 @@ extension ControlOverlay {
             switch digit {
                 case -1:
                     handleTimerButtonTapped()
-                    HelpOverlay.Model.shared.topmostView(.durationPicker)
+                    HintOverlay.Model.shared.topmostView(.durationPicker)
                 case -2:
-                    if !bubble.isTimer {
-                        //                        displayStopwatchInfo = true
-                        return
-                    }
+                    //allow stopwatches to reset currentClock, if currentClock > 0
+                    if !bubble.isTimer && !bubble.isRunning && bubble.currentClock == 0 { return }
+                    
                     viewModel.change(bubble, to:.stopwatch)
                     UserFeedback.singleHaptic(.heavy)
                     dismiss()
@@ -262,7 +261,7 @@ extension ControlOverlay {
         private func dismiss() {
             UserFeedback.singleHaptic(.heavy)
             secretary.controlBubble(.hide)
-            HelpOverlay.Model.shared.topmostView(viewModel.path.isEmpty ? .bubbleList : .detail)
+            HintOverlay.Model.shared.topmostView(viewModel.path.isEmpty ? .bubbleList : .detail)
             
             let bContext = PersistenceController.shared.bContext
             let bubbleID = bubble.objectID

@@ -30,6 +30,10 @@ public class Session: NSManagedObject {
     
     var isLastPairClosed:Bool { bubble?.lastPair?.pause != nil }
     
+    var isMostRecent:Bool {
+        return bubble?.sessions_.last == self
+    }
+    
     var pairs_:[Pair] {
         pairs?.array as? [Pair] ?? []
     }

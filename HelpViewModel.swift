@@ -16,13 +16,14 @@ struct CircleLabel:LabelStyle {
     }
 }
 
-struct HelpOverlay:View {
+struct HintOverlay:View {
     @Environment(\.verticalSizeClass) private var verticalSizeClass
     @State private var contentOffset = CGSize.zero
     @State private var accumulatedOffset = CGSize.zero
     @State private var containerOffset = initialContainerOffset
+    @Environment(Secretary.self) private var secretary
     
-    private var content = HelpOverlay.HintCell.Content.all[HelpOverlay.Model.shared.topmostView]
+    private var content = HintOverlay.HintCell.Content.all[HintOverlay.Model.shared.topmostView]
     
     static private let initialContainerOffset = CGSize(width: 0, height: 140)
     
@@ -36,7 +37,7 @@ struct HelpOverlay:View {
     }
     
     var body: some View {
-        if HelpOverlay.Model.shared.showHelpOverlay && verticalSizeClass == .regular {
+        if HintOverlay.Model.shared.showHelpOverlay && verticalSizeClass == .regular {
             Color.clear
                 .overlay(alignment: .bottom) {
                     RoundedRectangle(cornerRadius: 14)
@@ -46,7 +47,7 @@ struct HelpOverlay:View {
                         .standardShadow()
                         .overlay {
                             VStack {
-                                controls
+                                toolbar
                                 
                                 ScrollView {
                                     VStack {
@@ -72,25 +73,29 @@ struct HelpOverlay:View {
     }
     
     //MARK: - LEGO
-    private var controls:some View {
+    private var toolbar:some View {
         HStack {
-//            Image(systemName: "questionmark.circle")
-            Label("Dismiss Help", systemImage: symbol)
+            Label("Help", systemImage: "questionmark.circle")
+                .font(.system(size: 30))
+                .labelStyle(.iconOnly)
+                .onTapGesture { secretary.helpVH(.show()) }
+            Label("Move", systemImage: symbol)
                 .labelStyle(.iconOnly)
                 .onTapGesture { handleTap() }
                 
             Spacer()
+            
+            Label("Dismiss", systemImage: "xmark")
+                .labelStyle(.iconOnly)
+                .onTapGesture { HintOverlay.Model.shared.helpOverlay(.hide) }
+        }
+        .frame(height: 44) //minimum touch area
+        .font(.system(size: 26))
+        .overlay {
             Text(content?.title1 ?? "")
                 .font(.system(size: 24))
                 .allowsHitTesting(/*@START_MENU_TOKEN@*/false/*@END_MENU_TOKEN@*/)
-            Spacer()
-            Label("Dismiss Help", systemImage: "xmark")
-                .labelStyle(.iconOnly)
-                .onTapGesture { HelpOverlay.Model.shared.helpOverlay(.hide) }
         }
-        .frame(height: 44) //minimum touch area
-        .font(.system(size: 24))
-        .padding([.leading, .trailing], 4)
     }
     
     //MARK: -
@@ -127,36 +132,38 @@ struct HelpOverlay:View {
 }
 
 //MARK: -
-extension HelpOverlay {
+extension HintOverlay {
     struct ButtonStack:View {
         @Environment(Secretary.self) private var secretary
+        @Environment(\.openURL) private var openURL
         
         var body: some View {
-            HStack {
+//            HStack {
                 Button {
                     openYouTubeTutorial()
                 } label: {
-                    Label("Tutorial", systemImage: "globe")
+                    Label("Tutorial", systemImage: "safari")
                 }
-                Divider()
-                Button {
-                    secretary.helpViewHiewHierarchy(.show)
-                } label: {
-                    Label("Basics", systemImage: "book")
-                }
-            }
-            .labelStyle(.titleOnly)
+//                Divider()
+//                Button {
+//                    secretary.helpVH(.show())
+//                } label: {
+//                    Label("Help", systemImage: "questionmark.circle")
+//                }
+//            }
+//            .labelStyle(.titleOnly)
             .foregroundStyle(.blue)
         }
         
         private func openYouTubeTutorial() {
             if let url = URL(string: "https://www.youtube.com/shorts/SBSt06RrlLk") {
-                UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                openURL(url)
             }
         }
     }
     
     struct HintCell:View {
+        @Environment(Secretary.self) private var secretary
         let content:Content
         
         var body: some View {
@@ -164,15 +171,27 @@ extension HelpOverlay {
                 if let title2 = content.title2 { Text(title2).foregroundStyle(.secondary) }
                 
                 Text(content.description)
-                    .font(.system(size: 20))
+                    .font(.system(size: 22))
+                    .environment(\.openURL, OpenURLAction {
+                        let receivedStringURL = $0.absoluteString
+                        let content =
+                        HelpCellContent.all.filter { $0.title.description == receivedStringURL }.first
+                        
+                        if let content = content {
+                            secretary.helpVH(.show())
+                            delayExecution(.now() + 0.001) {
+                                HintOverlay.Model.shared.path = [content]
+                            }
+                        }
+                        
+                        return .handled
+                    })
                 
                 if let example = content.example {
                     Text(example)
-                        .font(.system(size: 20))
+                        .font(.system(size: 22))
                         .foregroundStyle(.secondary)
                 }
-                
-                ButtonStack()
             }
             .font(.system(size: 24))
         }
@@ -197,21 +216,21 @@ extension HelpOverlay {
             
             //a dictionary with all contents
             static let all:[Model.TopMostView : Content] = [
-                .palette : .init("\(Image(systemName: "swatchpalette")) Palette", "Create Stopwatch or Timer", description: "Tap a color for stopwatch. Touch and hold for timer. Swipe left to dismiss"),
-                .durationPicker : .init("\(Image(systemName: "hourglass")) Duration", "Choose Timer Duration", description: "Duration is valid if \(Text("\(Image.roundCheckmark)").foregroundStyle(.green)) checkmark shows.\n・Save duration: drag down to dismiss\n・Clear duration: swipe left or right\nMax duration is 48 hours", example: "ex: 02h means 2hr, 10h 05m means 10hr 5min, etc."),
-                .control : .init("\(Image(systemName: "slider.vertical.3")) Control", "Delete, Reset, Change", description: "Delete and reset \(Text("do not delete").foregroundStyle(.red)) existing calendar events! Reset keeps the bubble, but deletes its history.\n・Change to stopwatch: tap \(Image.stopwatch)\n・Change to timer: tap \(Image.timer), 5, 10, etc.\n・Show recent durations: \(Image.leftSwipe) swipe left"),
+                .palette : .init("\(Image(systemName: "swatchpalette")) Palette", "Create Stopwatch or Timer", description: "Tap a color for stopwatch. Touch and hold for timer. \(Image.swipeLeft) Swipe to dismiss"),
+                .durationPicker : .init("\(Image(systemName: "hourglass")) Duration", "Max 48 Hr", description: "Duration is valid if \(Text("\(Image.roundCheckmark)").foregroundStyle(.green)) symbol shows.\n・Save: drag down to dismiss\n・Clear duration: \(Image.swipeLeft) swipe", example: "ex: 02h = 2hr, 01h 05m = 1hr 5min, etc."),
+                .control : .init("\(Image(systemName: "slider.vertical.3")) Control", "Delete, Reset, Change", description: "Delete and reset \(Text("do not delete").foregroundStyle(.red)) calendar events! Reset keeps the bubble, but deletes its sessions.\n・Change to stopwatch: tap \(Image.stopwatch)\n・Change to timer: tap \(Image.timer), 5, 10, etc.\n・Show recent durations: \(Image.leftSwipe) swipe"),
                 .moreOptions : .init("\(Image.more) More Options", "Set Delay or Change Color", description: "Start delay is nice"),
                 .bubbleNotes : .init("\(Image(systemName: "text.alignleft")) Bubble Notes", description: "Tether bubble to calendar. Add note and create a calendar in Calendar App with identical names and events will be added automatically to the calendar with identical name", example: "Add calendar with name '☀️ Outdoor' and choose bubble note with same name"),
                 .lapNotes : .init("\(Image(systemName: "text.alignleft")) Lap Notes", description: "Maximum length 12 characters"),
                 .bubbleList : .init("\(Image(systemName: "list.bullet")) Bubbles", description: "Stopwatches and Timers"),
                 .sessionDelete : .init("\(Image.trash) Delete Session", description: "\(Text("If session has a corresponding calendar event, the event will also be removed").foregroundStyle(.red))"),
-                .detail : .init("\(Image(systemName: "magnifyingglass")) Detail",  description: "Sessions are made up of laps. A lap is the duration between a start and a pause.\n\(Text("Tap seconds to start and then tap again to pause. You've created a lap! 🥳").foregroundStyle(.secondary))\nIf a bubble is \(Text("[calendar-enabled](https://example.com)").foregroundStyle(.blue)), all its sessions are saved as events in the Calendar App")
+                .detail : .init("\(Image(systemName: "pencil.and.list.clipboard")) Activity", "...contains Sessions",  description: "Sessions are similar to calendar events. Easily [save activity](fused://saveActivity) to Calendar App! Touch and hold on a session to delete")
             ]
         }
     }
 }
 
-extension HelpOverlay {
+extension HintOverlay {
     @Observable
     class Model {
         //MARK: - Publishers
@@ -235,6 +254,8 @@ extension HelpOverlay {
                 }
             }
         }
+        
+        var path = [HelpCellContent]()
         
         func topmostView(_ value:TopMostView) {
             DispatchQueue.main.async {
@@ -285,11 +306,11 @@ extension HelpOverlay {
     
     struct HelpButton: View {
         var body: some View {
-            if HelpOverlay.Model.shared.showHelpButton {
+            if HintOverlay.Model.shared.showHelpButton {
                 Button {
                     UserFeedback.singleHaptic(.light)
-                    HelpOverlay.Model.shared.helpButton(.hide)
-                    HelpOverlay.Model.shared.helpOverlay(.show)
+                    HintOverlay.Model.shared.helpButton(.hide)
+                    HintOverlay.Model.shared.helpOverlay(.show)
                 } label: {
                     RoundedRectangle(cornerRadius: 15)
                         .stroke(Color.ultraLightGray1, lineWidth: 2)
@@ -302,7 +323,7 @@ extension HelpOverlay {
                                 .padding(4)
                                 .overlay {
                                     Image(systemName: "questionmark.circle.fill")
-                                        .font(.system(size: 64, weight: .light))
+                                        .font(.system(size: 64))
                                         .foregroundStyle(.blue)
                                 }
                         }
@@ -316,11 +337,14 @@ extension HelpOverlay {
 
 extension UIViewController {
     open override func motionBegan(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
-        if motion == .motionShake && !HelpOverlay.Model.shared.showHelpOverlay {
-            if !HelpOverlay.Model.shared.showHelpButton {
-                HelpOverlay.Model.shared.helpButton(.show)
+        if motion == .motionShake && !HintOverlay.Model.shared.showHelpOverlay {
+            if !HintOverlay.Model.shared.showHelpButton {
+                HintOverlay.Model.shared.helpButton(.show)
             }
         }
     }
 }
 
+#Preview(body: {
+    HelpCell(content: .init("Basics", "calendar.badge.plus", .saveActivity, "Save Activity", "First make sure bubble is [calendar-enabled](fused://enableCalendar). As soon as you end a session, it will be saved as an event in the Calendar App. Touch and hold on seconds to end a session", image: "", image2: "bubble.save.activity"))
+})

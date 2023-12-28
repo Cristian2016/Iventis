@@ -39,7 +39,7 @@ struct BubbleNotesOverlay: View {
         self.initialNote = bubble.note_ //2
                 
         let sorts = [
-            NSSortDescriptor(key: "bubble.rank", ascending: false),
+//            NSSortDescriptor(key: "bubble.rank", ascending: false),
             NSSortDescriptor(key: "date", ascending: false)
         ]
         
@@ -87,13 +87,32 @@ struct BubbleNotesOverlay: View {
     }
         
     // MARK: -
+    private func moveNoteAtTheBegginingOfTheList(for note:String) {
+        //don't move note if it's on top already
+        guard bubbleSavedNotes.first?.note != note else { return }
+        
+        //move selected note on top of the list
+        if let bubbleSavedNote = bubbleSavedNotes.filter({ $0.note == note }).first {
+            let objID = bubbleSavedNote.objectID
+            
+            PersistenceController.shared.bContext.perform {
+                let bBubbleSavedNote = PersistenceController.shared.grabObj(objID) as? BubbleSavedNote
+                bBubbleSavedNote?.date = Date()
+                //no need to save bContext, because selectExistingNote will save anyway :)
+            }
+        }
+    }
+    
     private func selectExitingNote(_ note:String) {
         DispatchQueue.global().async {
             var noteCopy = note
             noteCopy.removeWhiteSpaceAtBothEnds()
             
             if initialNote == noteCopy { return }
+            
             UserFeedback.singleHaptic(.heavy)
+            
+            self.moveNoteAtTheBegginingOfTheList(for: note)
             
             let bContext = PersistenceController.shared.bContext
             let objID = bubble.objectID

@@ -16,7 +16,9 @@ struct PairNotesOverlay: View {
     let pair:Pair
     @Environment(ViewModel.self) private var viewModel
     
-    @FetchRequest private var pairSavedNotes:FetchedResults<PairSavedNote>
+    @FetchRequest private var allPairSavedNotes:FetchedResults<PairSavedNote>
+    @FetchRequest private var thisPairNotes:FetchedResults<PairSavedNote>
+    
     @State private var textInput = "" //willSet and didSet do not work anymore
     @Environment(Secretary.self) private var secretary
     
@@ -31,16 +33,23 @@ struct PairNotesOverlay: View {
     
     // MARK: -
     init?(_ pair:Pair?) {
-        guard let pair = pair else { return nil }
+        guard let pair = pair, let bubble = pair.session?.bubble else { return nil }
         
         self.pair = pair
         self.initialNote = pair.note_
         
-        let sorts = [
-//            NSSortDescriptor(key: "bubble", ascending: false), //⚠️ crashes for some reason..
+        let predicate = NSPredicate(format: "bubble = %@", bubble)
+        let sortDescriptors = [
             NSSortDescriptor(key: "date", ascending: false)
         ]
-        _pairSavedNotes = FetchRequest(entity: PairSavedNote.entity(), sortDescriptors: sorts, predicate: nil, animation: .default)
+        _thisPairNotes = FetchRequest(sortDescriptors: sortDescriptors, predicate: predicate)
+        
+        let sorts = [
+            NSSortDescriptor(key: "date", ascending: false)
+        ]
+        
+        let predicate1 = NSPredicate(format: "bubble != %@", bubble)
+        _allPairSavedNotes = FetchRequest(entity: PairSavedNote.entity(), sortDescriptors: sorts, predicate: predicate1, animation: .default)
     }
     
     // MARK: -
@@ -56,17 +65,25 @@ struct PairNotesOverlay: View {
     
     // MARK: -
     var body: some View {
+        let allNotes = thisPairNotes.compactMap(\.note) + allPairSavedNotes.compactMap(\.note)
+        
         NotesOverlay(
-            stickyNotes: pairSavedNotes.compactMap { $0.note },
+            stickyNotes: allNotes,
             textInputLimit: textInputLimit,
             initialNote: initialNote,
             //actions
             bubble: pair.session?.bubble,
             deleteStickyNote: { text in
-                let note = pairSavedNotes.filter { $0.note == text }.first
-                viewModel.deletePairNote(note)
+                if let note = allPairSavedNotes.filter({ $0.note == text }).first {
+                    viewModel.deletePairNote(note)
+                } else {
+                    let result = thisPairNotes.filter { $0.note == text }.first
+                    viewModel.deletePairNote(result)
+                }
             },
-            selectExistingNote: { selectExitingNote($0)}, 
+            selectExistingNote: { note in
+                selectExitingNote(note)
+            },
             kind: .pair
         )
         .onDisappear {
@@ -83,13 +100,47 @@ struct PairNotesOverlay: View {
         }
     }
     
+    private func moveNoteAtTheBegginingOfTheList(for note:String) {
+        //don't move note if it's on top already
+        guard 
+            allPairSavedNotes.first?.note != note ||
+                thisPairNotes.first?.note != note
+        else { return }
+        
+        //move selected note on top of the list
+        if let pairSavedNote = allPairSavedNotes.filter({ $0.note == note }).first {
+            let objID = pairSavedNote.objectID
+            
+            PersistenceController.shared.bContext.perform {
+                let bPairSavedNote = PersistenceController.shared.grabObj(objID) as? PairSavedNote
+                bPairSavedNote?.date = Date()
+                //no need to save bContext, because selectExistingNote will save anyway :)
+            }
+            return
+        }
+        
+        if let pairSavedNote = thisPairNotes.filter({ $0.note == note }).first {
+            let objID = pairSavedNote.objectID
+            
+            PersistenceController.shared.bContext.perform {
+                let bPairSavedNote = PersistenceController.shared.grabObj(objID) as? PairSavedNote
+                bPairSavedNote?.date = Date()
+                //no need to save bContext, because selectExistingNote will save anyway :)
+            }
+        }
+    }
+    
     ///when user selects an existing note instead of typing in a new note
     private func selectExitingNote(_ note:String) {
         DispatchQueue.global().async {
             var trimmedNote = note
             trimmedNote.removeWhiteSpaceAtBothEnds()
+            
             if initialNote == trimmedNote { return }
+            
             UserFeedback.singleHaptic(.heavy)
+            
+            self.moveNoteAtTheBegginingOfTheList(for: note)
             
             let bContext = PersistenceController.shared.bContext
             let objID = pair.objectID
@@ -107,6 +158,10 @@ struct PairNotesOverlay: View {
         }
     }
     
+    private func selectExistingNote(_ pairSavedNote:PairSavedNote) {
+        
+    }
+    
     ///when user types in a new note instead of selecting an existing note
     private func saveNoteToCoreData(_ note:String, for pair: Pair) {
         let objID = pair.objectID
@@ -117,7 +172,7 @@ struct PairNotesOverlay: View {
             trimmedNote.removeWhiteSpaceAtBothEnds()
             
             //avoid duplicates
-            if pairSavedNotes
+            if allPairSavedNotes
                 .compactMap({ $0.note })
                 .contains(trimmedNote) {
                 

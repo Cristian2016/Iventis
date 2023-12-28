@@ -74,7 +74,7 @@ public extension Image {
     static let longPress = Image(systemName:"target")
     static let leftSwipe = Image(systemName:"arrow.left.circle")
     static let rightSwipe = Image(systemName:"arrow.right.circle")
-    static let scrollToTop = Image(systemName: "arrow.up.to.line.compact")
+    static let scrollToTop = Image(systemName: "arrow.up.and.down.text.horizontal")
     static let greaterThan = Image(systemName: "greaterthan.circle.fill")
     static let info = Image(systemName: "info.circle.fill")
     static let infoSquare =  Image(systemName: "info.square.fill")
@@ -87,20 +87,18 @@ public extension Image {
     static let xmark = Image(systemName: "xmark.square.fill")
     static let lightbulb = Image(systemName: "lightbulb.fill")
     
+    static let change = Image(systemName: "arrow.left.arrow.right.square")
+    
     static let device = Image(systemName: "iphone.radiowaves.left.and.right")
     
     // MARK: - Info Assets
     static let dpv = Image("DurationPicker")
     static let moreOptionsView = Image("MoreOptions")
-    
-    static let dic = [
-        "tap" : Image.tap, "longPress" : Image.longPress, "leftSwipe" : Image.leftSwipe, "rightSwipe" : Image.rightSwipe
-    ]
 }
 
 public extension URL {
     
-    ///it's the address of the shared container used by the app to write/ and by widget extension to read mostRecentlyUsedBubble (ObjectID)
+    ///it's the address of the shared container used by the app to write/ and by widget extension to read mostRecentlyUsedBubble (ObjectID). It's a folder, not a file!!! To store stuff you need to create file
     static var sharedContainerURL:URL = {
         guard let url = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: .appGroupName)
         else { fatalError() }

@@ -18,7 +18,6 @@ struct BubbleCell: View {
     
     //MARK: -
     var body: some View {
-        @Bindable var nvm = viewModel
         ZStack {
             //Three Circles
             circle //Sec
@@ -142,7 +141,7 @@ struct BubbleCell: View {
     private var controlButton:some View {
         Button {
             secretary.controlBubble(.show(bubble.rank))
-            HelpOverlay.Model.shared.topmostView(.control)
+            HintOverlay.Model.shared.topmostView(.control)
         } label: {
             Label("Control", systemImage: "slider.vertical.3")
         }
@@ -193,7 +192,7 @@ struct BubbleCell: View {
     
     private func showBubbleNotes() {
         UserFeedback.singleHaptic(.light)
-        HelpOverlay.Model.shared.topmostView(.bubbleNotes)
+        HintOverlay.Model.shared.topmostView(.bubbleNotes)
         viewModel.notes_Bubble = bubble
     }
 }

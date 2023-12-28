@@ -8,84 +8,116 @@
 import SwiftUI
 
 struct HelpViewHierarchy: View {
-    @State private var path = NavigationPath()
     @Environment(Secretary.self) private var secretary
     
     var body: some View {
-        if secretary.showHelpViewHierarchy {
-            NavigationStack(path: $path) {
-                ScrollViewReader { proxy in
-                    List {
-                        VStack {
-                            Text("Bubble Types")
-                                .foregroundStyle(.gray)
-                                .font(.footnote)
-                            HStack {
-                                VStack {
-                                    Text("\(Image.stopwatch) Stopwatch")
-                                    Image("bubble.stopwatch")
-                                        .resizable()
-                                        .scaledToFit()
-                                }
-                                Divider()
-                                VStack {
-                                    Text("\(Image.timer) Timer")
-                                    Image("bubble.timer")
-                                        .resizable()
-                                        .scaledToFit()
-                                }
-                            }
-                            .frame(height: 130)
-                        }
-                        
-                        VStack {
-                            Text("Touch Areas")
-                                .foregroundStyle(.gray)
-                                .font(.footnote)
-                            Text("Each bubble has 3 areas: hours, minutes, seconds. Seconds area is always visible")
-                            Image("bubble.areas")
-                                .resizable()
-                                .scaledToFit()
-                        }
-                        
-                        VStack {
-                            Text("Supported Gestures")
-                                .foregroundStyle(.gray)
-                                .font(.footnote)
-                            Text("Tap, touch and hold, swipe")
-                            Image("bubble.gestures")
-                                .resizable()
-                                .scaledToFit()
-                            Image("bubble.swipe")
-                                .resizable()
-                                .scaledToFit()
+        @Bindable var model = HintOverlay.Model.shared
+        
+        NavigationStack(path: $model.path) {
+            List {
+                Section {
+                    basicsSection
+                        .listRowSeparator(.hidden)
+                        .onOpenURL { handleOpen($0) }
+                } header: {
+                    Text("\(Image(systemName: "square.arrowtriangle.4.outward")) OVERVIEW")
+                        .backgroundStyle(.secondary)
+                }
+                .listSectionSeparator(.visible, edges: .top)
+                
+                Section {
+                    HintOverlay.ButtonStack()
+                    ForEach(HelpCellContent.all) { content in
+                        NavigationLink(value: content) {
+                            Label(content.title.rawValue, systemImage: content.symbol)
                         }
                     }
-                    .listStyle(.plain)
+                    .listRowSeparator(.hidden)
+                } header: {
+                    Text("\(Image("basics")) BASICS")
+                        .backgroundStyle(.secondary)
                 }
-                .navigationTitle("Help")
-                .navigationBarTitleDisplayMode(.inline)
-                .toolbarBackground(.ultraThinMaterial, for: .navigationBar)
-                .environment(\.colorScheme, .light)
-                .font(.caption)
-                .toolbar { dimissButton }
-                .gesture(dismissSwipe)
+                .listSectionSeparator(.visible, edges: .top)
             }
-            .transition(.move(edge: .leading))
+            .navigationDestination(for: HelpCellContent.self) {
+                HelpCell(content: $0)
+            }
+            .listStyle(.plain)
+            .navigationTitle("Help")
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbarBackground(.ultraThinMaterial, for: .navigationBar)
+            .environment(\.colorScheme, .light)
+            .font(.body)
+            .toolbar { DismissButton() }
+            .gesture(dismissSwipe)
         }
-    }
-    
-    private var dimissButton:some View {
-        Button {
-            dismiss()
-        } label: {
-            Label("Dismiss", systemImage: "xmark")
-        }
+        .transition(.move(edge: .leading))
         .tint(Color.label)
     }
     
+    private var basicsSection:some View {
+        VStack {
+            VStack {
+                Text("Bubbles")
+                    .font(.headline)
+                Text("..are colorful stopwatches and timers which [save activity](fused://saveActivity) as calendar events. Bubbles can easily [change](fused://changeBubble) from stopwatch to timer or viceversa")
+                    .foregroundStyle(.gray)
+                HStack {
+                    VStack {
+                        Text("\(Image.stopwatch) Stopwatch")
+                        Image("bubble.stopwatch")
+                            .resizable()
+                            .scaledToFit()
+                    }
+                    Divider()
+                    VStack {
+                        Text("\(Image.timer) Timer")
+                        Image("bubble.timer")
+                            .resizable()
+                            .scaledToFit()
+                    }
+                }
+                .frame(height: 130)
+            }
+            
+            VStack {
+                Text("Gesture Areas")
+                    .font(.headline)
+                Text("Seconds area is always visible. Gestures will always work, regardless if an area is visible or hidden")
+                    .foregroundStyle(.gray)
+                Image("bubble.areas")
+                    .resizable()
+                    .scaledToFit()
+            }
+            
+            VStack {
+                Text("Gestures")
+                    .font(.headline)
+                Text("\(Image(systemName: "circle.fill")) Tap, \(Image(systemName: "circle.circle.fill")) Touch and hold, \(Image.leftSwipe) Swipe")
+                    .foregroundStyle(.gray)
+                Image("bubble.gestures")
+                    .resizable()
+                    .scaledToFit()
+                Image("bubble.swipe")
+                    .resizable()
+                    .scaledToFit()
+            }
+        }
+        .tint(.blue)
+    }
+    
+    private func handleOpen(_ url:URL) {
+        let receivedStringURL = url.absoluteString
+        let content =
+        HelpCellContent.all.filter { $0.title.description == receivedStringURL }.first
+        
+        if let content = content {
+            HintOverlay.Model.shared.path.append(content)
+        }
+    }
+    
     private func dismiss() {
-        secretary.helpViewHiewHierarchy(.hide)
+        secretary.helpVH(.hide)
     }
     
     //swipe left to dismiss
@@ -96,6 +128,20 @@ struct HelpViewHierarchy: View {
                     dismiss()
                 }
             }
+    }
+}
+
+extension HelpViewHierarchy {
+    struct DismissButton:View {
+        @Environment(Secretary.self) private var secretary
+        
+        var body:some View {
+            Button {
+                secretary.helpVH(.hide)
+            } label: {
+                Label("Dismiss", systemImage: "xmark")
+            }
+        }
     }
 }
 

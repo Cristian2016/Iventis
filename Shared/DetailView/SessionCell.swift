@@ -8,7 +8,7 @@
 import SwiftUI
 import MyPackage
 
-struct TopCell: View {
+struct SessionCell: View {
     @Environment (\.needlePosition) private var needlePosition
     @Environment (\.colorScheme) private var colorScheme
     @Environment(Secretary.self) private var secretary
@@ -23,31 +23,27 @@ struct TopCell: View {
     // MARK: -
     var body: some View {
         HStack {
-            ZStack {
-                sessionRankView
-                Push(.bottomLeft) {
-                    VStack (alignment:.leading, spacing: metrics.dateDurationViewsSpacing) {
-                        dateLabel
-                        TopCellDurationView(metrics, session, myRank).padding(2)
-                    }
-                    .padding(metrics.edgeInset)
-                }
-                .frame(height: metrics.topCellHeight)
-                .background( backgroundView )
+            VStack(alignment: .leading, spacing: 6) {
+                Color.clear
+                    .frame(height: 60)
+                dateLabel
+                TopCellDurationView(metrics, session, myRank)
             }
-            Color.lightGray.frame(width:1, height: 100)
+            .frame(minWidth: 70)
+            
+            Divider()
         }
+        .background()
+        .overlay(alignment: .topTrailing) { sessionNumberLabel }
         .onTapGesture { handleTopCellTapped() }
         .onLongPressGesture { handleTopCellLongPressed() }
     }
     
     // MARK: - Legos
-    private var sessionRankView: some View {
-        Push(.topRight) {
-            Text(String(myRank))
-                .pairCountModifier()
-                .padding(EdgeInsets(top: 8, leading: 0, bottom: 0, trailing: 12))
-        }
+    private var sessionNumberLabel: some View {
+        Text(String(myRank))
+            .pairCountModifier()
+            .padding(EdgeInsets(top: 8, leading: 0, bottom: 0, trailing: 6))
     }
     
     @ViewBuilder
@@ -67,17 +63,13 @@ struct TopCell: View {
                         Text(DateFormatter.shortDate.string(from: start))
                     }
                 }
+                Spacer()
             }
+            .frame(maxWidth: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/)
             .font(.system(size: 24))
-            .foregroundStyle(.secondary)
-            .background(Color.ultraLightGray1)
-        } else { EmptyView() }
-    }
-    
-    private var backgroundView: some View {
-        RoundedRectangle(cornerRadius: metrics.roundedRectRadius).fill(Color.clear)
-            .padding([.trailing, .leading], 2)
-            .contentShape(Rectangle())
+            .foregroundStyle(.white)
+            .background(Color.gray)
+        }
     }
     
     // MARK: -
@@ -120,14 +112,8 @@ struct TopCell: View {
     private var needleNotSet:Bool { needlePosition.wrappedValue == -1 }
 }
 
-extension TopCell {
+extension SessionCell {
     struct Metrics {
-        let topCellHeight = CGFloat(130)
-        let roundedRectRadius = CGFloat(10)
-        let strokeWidth = CGFloat(4)
-        let edgeInset = EdgeInsets(top: 0, leading: 13, bottom: 10, trailing: 6)
-        let dateDurationViewsSpacing = CGFloat(6)
-        let spacingBetweenCells = CGFloat(-2)
         let durationFont = Font.system(size: 24, weight: .medium)
         let durationComponentsFont = Font.system(size: 20, weight: .medium)
     }
@@ -145,4 +131,10 @@ struct DateViewBackgroundColor: View {
     var body: some View {
         session.bubble?.coordinator.color
     }
+}
+
+#Preview {
+    SessionCell(PersistenceController.testSession, 10)
+        .environment(Secretary())
+        .frame(width: 130, height: 140, alignment: .center)
 }

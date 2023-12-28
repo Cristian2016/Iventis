@@ -2,18 +2,31 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string>com.example.fused</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>fused</string>
+			</array>
+		</dict>
+	</array>
 	<key>INAlternativeAppNames</key>
 	<array>
 		<dict>
-			<key>INAlternativeAppNamePronunciationHint</key>
-			<string>Run</string>
 			<key>INAlternativeAppName</key>
+			<string>Run</string>
+			<key>INAlternativeAppNamePronunciationHint</key>
 			<string>Run</string>
 		</dict>
 		<dict>
-			<key>INAlternativeAppNamePronunciationHint</key>
-			<string>Count</string>
 			<key>INAlternativeAppName</key>
+			<string>Count</string>
+			<key>INAlternativeAppNamePronunciationHint</key>
 			<string>Count</string>
 		</dict>
 	</array>

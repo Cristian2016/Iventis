@@ -96,7 +96,7 @@ extension FusedLabel {
         static let detailON = Content(title: "Detail is ON")
         static let scrollToTop = Content(title: "Scroll to Top")
         static func addNote(_ color:Color) -> Content {
-            .init(title: "Add Note", symbol: "text.alignleft", size: .medium, color: color, isFilled: true)
+            .init(title: "Lap Note", symbol: "text.alignleft", size: .medium, color: color, isFilled: true)
         }
     }
 }

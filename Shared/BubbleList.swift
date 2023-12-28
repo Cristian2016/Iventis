@@ -73,7 +73,7 @@ struct BubbleList: View {
                     .toolbarBackground(.ultraThinMaterial)
                     .toolbar {
                         ToolbarItemGroup {
-                            AddPairNoteButton()
+                            AddLapNoteButton()
                             AlwaysONButton()
                             PlusButton()
                         }

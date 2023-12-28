@@ -2,7 +2,7 @@
 //  PairSavedNote+CoreDataProperties.swift
 //  Timers (iOS)
 //
-//  Created by Cristian Lapusan on 28.06.2022.
+//  Created by Cristian Lapusan on 05.01.2024.
 //
 //
 
@@ -18,7 +18,7 @@ extension PairSavedNote {
 
     @NSManaged public var date: Date?
     @NSManaged public var note: String?
-    @NSManaged public var pair: Pair?
+    @NSManaged public var bubble: Bubble?
 
 }
 

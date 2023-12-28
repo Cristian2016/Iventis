@@ -27,13 +27,12 @@ struct DetailView: View {
                         .id(1)
                         .background { yPositionTrackerView }
                         .listRowSeparator(.hidden)
-                    if sessions.isEmpty {
-                        NoSessionsAlertView()
-                    }
+                    
+                    if sessions.isEmpty { NoSessionsAlertView() }
                     else {
-                        TopDetailView($needlePosition, sessions)
-                            .frame(height: topDetailHeight)
+                        SessionList($needlePosition, sessions)
                             .listRowSeparator(.hidden)
+                            .frame(height: 150)
                         BottomDetailView($needlePosition, sessions)
                             .frame(height: 600)
                             .listRowSeparator(.hidden)
@@ -54,17 +53,14 @@ struct DetailView: View {
                 ToolbarItemGroup {
                     DetailViewInfoButton()
                     ScrollToTopButton()
-                    AddPairNoteButton()
-                    
+                    AddLapNoteButton()
                 }
             }
             .overlay (SessionDeleteOverlay())
             .overlay (ShowDetailViewInfoView())
         }
     }
-        
-    let topDetailHeight = CGFloat(140)
-    
+            
     private var count:Int { sessions.count }
     
     // MARK: - Lego
@@ -109,7 +105,7 @@ struct DetailView: View {
 struct ShowDetailViewInfoView: View {
     @Environment(Secretary.self) private var secretary
     @State private var showDetailViewInfo = false
-    let title = "Scroll To Top"
+    let title:LocalizedStringKey = "\(Image.scrollToTop) Scroll to Top"
     
     var body: some View {
         MaterialLabel(title) { infoContent } _: { dismiss() } _: { }
@@ -120,10 +116,8 @@ struct ShowDetailViewInfoView: View {
     }
     
     private var infoContent:some View {
-        VStack(alignment: .leading) {
-            Text("\(Image(systemName: "digitalcrown.arrow.counterclockwise")) Scroll along any screen edge")
-            Text("or \(Image.tap) Tap \(Image.scrollToTop) Symbol, if visible")
-        }
+        Text("...along screen edges")
+            .forceMultipleLines()
     }
     
     // MARK: -

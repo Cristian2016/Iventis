@@ -21,9 +21,26 @@
 
 import SwiftUI
 import MyPackage
+import SwiftData
 
 @main
 struct TimersApp: App {
+    
+    var sharedModelContainer: ModelContainer = {
+        let schema = Schema([
+            sBubble.self,
+        ])
+        
+        let sharedDatabase = URL.sharedContainerURL.appendingPathComponent("sharedSwiftDataBase.sqlite")
+        let modelConfiguration = ModelConfiguration(schema: schema, url: sharedDatabase)
+        
+        do {
+            return try ModelContainer(for: schema, configurations: [modelConfiguration])
+        } catch {
+            fatalError("Could not create ModelContainer: \(error)")
+        }
+    }()
+    
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
     @AppStorage("historyCreated") private var timerHistoryExists = false //8
     private let viewContext = PersistenceController.shared.container.viewContext
@@ -33,24 +50,30 @@ struct TimersApp: App {
     
     var body: some Scene {
         WindowGroup {
-            ViewHierarchy()
-                .task { createTimerDurationsHistory() }
-                .environment(viewModel)
-                .environment(viewModel.secretary)
-                .environment(\.managedObjectContext, viewContext)
-                .onAppear {
-                    UIRefreshControl.appearance().tintColor = .clear //hide spinner
-                    viewModel.bubbleTimer(.start) //1a
-                }
-                .onChange(of: phase) { oldValue, newValue in
-                    let appEntersBackground = newValue == .background
-                    let appReturnsFromBackground = newValue == .inactive && oldValue == .background
-                    
-                    if appEntersBackground { viewModel.bubbleTimer(.pause) } //2a
-                    if appReturnsFromBackground { viewModel.bubbleTimer(.start) } //3a
-                }
-                .restrictDynamicFontSize()
+//            sBubbleList()
+            viewHierarchy
         }
+        .modelContainer(sharedModelContainer)
+    }
+    
+    private var viewHierarchy:some View {
+        ViewHierarchy()
+            .task { createTimerDurationsHistory() }
+            .environment(viewModel)
+            .environment(viewModel.secretary)
+            .environment(\.managedObjectContext, viewContext)
+            .onAppear {
+                UIRefreshControl.appearance().tintColor = .clear //hide spinner
+                viewModel.bubbleTimer(.start) //1a
+            }
+            .onChange(of: phase) { oldValue, newValue in
+                let appEntersBackground = newValue == .background
+                let appReturnsFromBackground = newValue == .inactive && oldValue == .background
+                
+                if appEntersBackground { viewModel.bubbleTimer(.pause) } //2a
+                if appReturnsFromBackground { viewModel.bubbleTimer(.start) } //3a
+            }
+            .restrictDynamicFontSize()
     }
     
     private func createTimerDurationsHistory() {

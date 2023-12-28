@@ -38,10 +38,10 @@ extension ViewModel {
     func bubbleTimer(_ action:BubbleTimer.Action) {
         switch action {
             case .start:
-//                print("start bTimer")
+                //                print("start bTimer")
                 bubbleTimer.perform(.start)
-            case .pause: 
-//                print("pause bTimer")
+            case .pause:
+                //                print("pause bTimer")
                 bubbleTimer.perform(.pause)
         }
     }
@@ -79,7 +79,7 @@ extension ViewModel {
             sourceBubble?.rank = destBubble!.rank + 1
         }
         
-       let sortedBubbles = bubbles.sorted { $0.rank > $1.rank }
+        let sortedBubbles = bubbles.sorted { $0.rank > $1.rank }
         
         for (index, bubble) in sortedBubbles.enumerated() {
             bubble.rank = Int64(sortedBubbles.count - 1 - index)
@@ -120,7 +120,7 @@ extension ViewModel {
     // MARK: Observers
     func observe_KillSDB() {
         center.addObserver(forName: .killSDB, object: nil, queue: nil) {[weak self] in
-                        
+            
             guard
                 let rank = $0.userInfo?["rank"] as? Int64,
                 let startCorrection = $0.userInfo?["startCorrection"] as? TimeInterval,
@@ -129,7 +129,7 @@ extension ViewModel {
                 print("fatal error 🤯💥")
                 return
             }
-                        
+            
             self?.removeStartDelay(for: bubble)
             
             self?.toggleStart(bubble, startDelayCompensation: startCorrection)
@@ -158,7 +158,7 @@ extension ViewModel {
             
             UserFeedback.singleHaptic(.heavy)
             self?.change(bubble, to: .timer(Float(initialClock)))
-               
+            
             let bContext = PersistenceController.shared.bContext
             
             bContext.perform {
@@ -183,7 +183,7 @@ extension ViewModel {
     ///overspill is the elapsed time after timer has reached zero. always overspill <= 0
     private func killTimer(_ bubble:Bubble?, _ overspill:Float) {
         guard let bubble = bubble else { return }
-                
+        
         let bContext = PersistenceController.shared.bContext
         let objID = bubble.objectID
         
@@ -232,7 +232,7 @@ extension ViewModel {
     func allBubbles(runningOnly:Bool = false) -> [Bubble] {
         let context = PersistenceController.shared.viewContext
         let request = Bubble.fetchRequest()
-                    
+        
         if let bubbles = try? context.fetch(request) {
             return runningOnly ? bubbles.filter { $0.state == .running } : bubbles
         } else {
@@ -318,7 +318,7 @@ extension ViewModel {
         
         //write empty string to the shared file that stores the mostRecentlyUsedBubbleRank
         let hasWidget = secretary.mostRecentlyUsedBubble == bubble.rank
-        if hasWidget { secretary.mostRecentlyUsedBubble = nil }
+        if hasWidget { secretary.setMostRecentlyUsedBubble(to: nil) }
         
         let bContext = PersistenceController.shared.bContext
         let objID = bubble.objectID
@@ -346,13 +346,107 @@ extension ViewModel {
         }
     } //9
     
+    //bBubble backgroundBubble to use on bContext
+    func toggleStart1(_ bBubble:Bubble, startDelayCompensation:TimeInterval? = nil) {
+        //cannot start finished timer
+        if bBubble.currentClock <= 0 && bBubble.kind != .stopwatch  { return }
+        
+        let startDelayCompensation = startDelayCompensation ?? 0
+        let bContext = PersistenceController.shared.bContext
+        
+        UserFeedback.singleHaptic(.heavy)
+        
+        switch bBubble.state {
+            case .brandNew: /* changes to .running */
+                secretary.setMostRecentlyUsedBubble(to: bBubble.rank) //mainQueue
+                
+                setupNotification(.start, for: bBubble)
+                
+                //create newPair, newSession and add them to the newBubble
+                let newPair = Pair(context: bContext)
+                newPair.start = Date().addingTimeInterval(-startDelayCompensation)
+                
+                let newSession = Session(context: bContext)
+                newSession.created = Date().addingTimeInterval(-startDelayCompensation)
+                newSession.addToPairs(newPair)
+                
+                //grab bubble and add session to it
+                bBubble.addToSessions(newSession)
+                //.....................................................
+                
+                //this also makes changes visible to the viewContext as well
+                PersistenceController.shared.save(bContext) { //⚠️ no need to save viewContext
+                    delayExecution(self.delay) { //UI stuff
+                        
+                        bBubble.coordinator.update(.user(.start))
+                        bBubble.pairBubbleCellCoordinator.update(.user(.start))
+                        
+                        //1 both
+                        self.secretary.addNoteButton_bRank = nil //clear first
+                        self.secretary.addNoteButton_bRank = Int(bBubble.rank)
+                    }
+                }
+                
+            case .paused:  /* changes to running */
+                secretary.setMostRecentlyUsedBubble(to: bBubble.rank)
+                
+                setupNotification(.start, for: bBubble)
+                
+                //create new pair, add it to currentSession
+                let newPair = Pair(context: bContext)
+                newPair.start = Date().addingTimeInterval(-startDelayCompensation)
+                
+                bBubble.lastSession?.handleTrackerID(.assign(newPair))
+                
+                bBubble.lastSession?.addToPairs(newPair)
+                
+                //this also makes changes visible to the viewContext as well
+                PersistenceController.shared.save(bContext) { //⚠️ no need to save vContext
+                    delayExecution(self.delay) { //UI stuff
+                        bBubble.coordinator.update(.user(.start))
+                        bBubble.pairBubbleCellCoordinator.update(.user(.start))
+                        
+                        //1 both
+                        self.secretary.addNoteButton_bRank = nil //clear first
+                        self.secretary.addNoteButton_bRank = Int(bBubble.rank)
+                    }
+                }
+                
+            case .running: /* changes to .paused */
+                setupNotification(.pause, for: bBubble)
+                
+                let currentPair = bBubble.lastPair
+                currentPair!.pause = Date()
+                
+                currentPair!.computeDuration(.atPause)
+                
+                let isTimer = bBubble.kind != .stopwatch
+                
+                if isTimer {
+                    bBubble.currentClock -= currentPair!.duration
+                } else {
+                    bBubble.currentClock += currentPair!.duration
+                }
+                
+                bBubble.lastSession!.computeDuration()
+                PersistenceController.shared.save(bContext) {
+                    delayExecution(self.delay) {
+                        bBubble.coordinator.update(.user(.pause))
+                        bBubble.pairBubbleCellCoordinator.update(.user(.pause))
+                        
+                        //remove only that
+                        if self.secretary.addNoteButton_bRank == Int(bBubble.rank) { self.secretary.addNoteButton_bRank = nil
+                        } //1
+                    }
+                }
+                
+            case .finished: return
+        }
+    }
+    
     ///delta is always zero if user taps start. if user uses start delay, delta is not zero
     func toggleStart(_ bubble:Bubble, startDelayCompensation:TimeInterval? = nil) {
-        if bubble.currentClock <= 0 && bubble.kind != .stopwatch  {
-            secretary.showAlert_closeSession = true
-            delayExecution(.now() + 3) { self.secretary.showAlert_closeSession = false }
-            return
-        }
+        if bubble.currentClock <= 0 && bubble.kind != .stopwatch  { return }
         
         let startDelayCompensation = startDelayCompensation ?? 0
         let bContext = PersistenceController.shared.bContext
@@ -362,7 +456,7 @@ extension ViewModel {
         
         switch bubble.state {
             case .brandNew: /* changes to .running */
-                secretary.mostRecentlyUsedBubble = bubble.rank
+                secretary.setMostRecentlyUsedBubble(to: bubble.rank)
                 
                 setupNotification(.start, for: bubble)
                 
@@ -398,8 +492,7 @@ extension ViewModel {
                 }
                 
             case .paused:  /* changes to running */
-                secretary.mostRecentlyUsedBubble = bubble.rank
-                
+                secretary.setMostRecentlyUsedBubble(to: bubble.rank)
                 setupNotification(.start, for: bubble)
                 
                 bContext.perform {
@@ -497,7 +590,7 @@ extension ViewModel {
                 else { fatalError() }
                 
                 let changes = [NSDeletedObjectsKey : ids]
-                                
+                
                 delayExecution(self.delay) {
                     NSManagedObjectContext.mergeChanges(
                         fromRemoteContextSave: changes, into: [PersistenceController.shared.viewContext]) //12
@@ -507,7 +600,7 @@ extension ViewModel {
             }
         }
     }
-        
+    
     //MoreOptionsView color change
     func changeColor(of bubble:Bubble, to newColor:String) {
         //don't do anything unless user changed color
@@ -659,7 +752,7 @@ extension ViewModel {
     ///save to CoreData either bubble.note or pair.note
     func save(_ userInput:String, forObject object:NSManagedObject) {
         var note = userInput
-                
+        
         switch object.entity.name {
             case "Bubble":
                 let bubble = object as! Bubble
@@ -687,7 +780,7 @@ extension ViewModel {
             case "Pair" :
                 let pair = object as! Pair
                 
-                    //it's bContext since pair is coming from PairStickyNoteLost.saveNoteToCoredata
+                //it's bContext since pair is coming from PairStickyNoteLost.saveNoteToCoredata
                 pair.managedObjectContext?.perform {
                     note.removeWhiteSpaceAtBothEnds()
                     
@@ -695,10 +788,11 @@ extension ViewModel {
                     pair.isNoteHidden = false
                     
                     //add new item to bubbleHistory
-                    let newHistoryItem = PairSavedNote(context: pair.managedObjectContext!)
-                    newHistoryItem.date = Date()
-                    newHistoryItem.note = note
-                    pair.addToHistory(newHistoryItem)
+                    let pairSavedNote = PairSavedNote(context: pair.managedObjectContext!)
+                    pairSavedNote.date = Date()
+                    pairSavedNote.note = note
+                    pairSavedNote.bubble = pair.session?.bubble
+                    pair.addToHistory(pairSavedNote)
                     
                     PersistenceController.shared.save(pair.managedObjectContext)
                     
@@ -820,7 +914,7 @@ extension ViewModel {
                     //update sdb.totalDuration
                     theSDB.totalDuration += lastPair.duration
                     theSDB.currentClock = theSDB.initialClock - theSDB.totalDuration
-                                                                                
+                    
                     PersistenceController.shared.save(bContext) {
                         DispatchQueue.main.async { sdb.coordinator.update(.user(.pause)) }
                     }
@@ -868,7 +962,7 @@ extension ViewModel {
             timerDurationDuplicates.first?.date = Date()
         }
     }
-        
+    
     enum SDBMode {
         case start
         case pause

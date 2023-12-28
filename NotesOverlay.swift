@@ -16,12 +16,17 @@ struct NotesOverlay: View {
     @State private var textFieldText = ""
     @FocusState private var isKeyboardVisible:Bool
     
+    //MARK: - Init Parameters
     var stickyNotes:[String]
-    
     let textInputLimit:Int
     let initialNote:String
     var bubble:Bubble?
+
+    var deleteStickyNote: (String) -> Void
+    var selectExistingNote: (String) -> Void
+    var kind: NotesOverlay.Underlabel.Kind
     
+    //MARK: -
     private var filteredStickyNotes:[String] {
         if textFieldText.isEmpty { return stickyNotes }
         let filtered = stickyNotes.filter { $0.lowercased().contains(textFieldText.lowercased()) }
@@ -62,7 +67,7 @@ struct NotesOverlay: View {
     }
     
     private func dismiss() {
-        HelpOverlay.Model.shared.topmostView(viewModel.path.isEmpty ? .bubbleList : .detail)
+        HintOverlay.Model.shared.topmostView(viewModel.path.isEmpty ? .bubbleList : .detail)
         
         withAnimation(.bouncy(duration: 0.15)) {
             viewModel.notes_Bubble = nil
@@ -95,22 +100,16 @@ struct NotesOverlay: View {
                             LazyVGrid(columns: columns, spacing: 1) {
                                 ForEach (filteredStickyNotes, id: \.self) { stickyNote in
                                     Color.background
-                                        .overlay(alignment: .leading) {
-                                            Text(stickyNote)
-                                                .background {
-                                                    let isSameAsInitialNote = stickyNote == initialNote
-                                                    if isSameAsInitialNote { Color.ultraLightGray }
-                                                }
-                                                .allowsHitTesting(false)
-                                                .padding(.leading, 4)
-                                        }
+                                        .overlay(alignment: .leading) { text(stickyNote) }
+                                        .overlay(alignment: .topTrailing) { checkmark(stickyNote) }
                                         .onTapGesture { select(stickyNote) }
                                         .onLongPressGesture { delete(stickyNote) }
                                 }
                                 .frame(height: 46)
                             }
                             .font(.system(size: 26))
-                        } else { 
+                            .minimumScaleFactor(0.4)
+                        } else {
                             InfoView2()
                         }
                     }
@@ -145,6 +144,26 @@ struct NotesOverlay: View {
     }
     
     // MARK: - Lego
+    @ViewBuilder
+    private func checkmark(_ stickyNote:String) -> some View {
+        let isSameAsInitialNote = stickyNote == initialNote
+        
+        if isSameAsInitialNote {
+            Label("Selected Note", systemImage: "checkmark.circle.fill")
+                .font(.system(size: 18))
+                .foregroundStyle(.green)
+                .labelStyle(.iconOnly)
+                .padding([.top, .trailing], 2)
+                .allowsHitTesting(false)
+        }
+    }
+    
+    private func text(_ stickyNote:String) -> some View {
+        Text(stickyNote)
+            .allowsHitTesting(false)
+            .padding(.leading, 4)
+    }
+    
     private var textField: some View {
         TextField(kind == .bubble ? "Enter Bubble Name" : "Enter Lap Note", text: $textFieldText)
             .foregroundStyle(.primary)
@@ -173,13 +192,6 @@ struct NotesOverlay: View {
                 .padding(.trailing)
         }
     }
-    
-    //External Actions
-    //each View using this view has different code
-    //implemented within closures
-    var deleteStickyNote: (String) -> Void
-    var selectExistingNote: (String) -> Void
-    var kind: NotesOverlay.Underlabel.Kind
 }
 
 extension NotesOverlay {

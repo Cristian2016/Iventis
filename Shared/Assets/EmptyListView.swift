@@ -27,7 +27,7 @@ struct EmptyListView: View {
         } description: {
             Text("Shake device for help.\nSwipe from left edge to start")
         } actions: {
-            HelpOverlay.ButtonStack()
+            HintOverlay.ButtonStack()
         }
     }
     

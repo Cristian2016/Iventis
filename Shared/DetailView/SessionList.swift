@@ -10,7 +10,7 @@
 import SwiftUI
 import MyPackage
 
-struct TopDetailView:View {
+struct SessionList:View {
     @Binding var needlePosition:Int
     private var sessions: FetchedResults<Session>
     
@@ -25,46 +25,53 @@ struct TopDetailView:View {
     var body: some View {
         ZStack {
             if colorScheme == .light { shadowBackground }
-//            if colorScheme == .dark { gradientBackground }
             
             ScrollViewReader { proxy in
                 ScrollView(.horizontal, showsIndicators: false) {
                     LazyHStack {
                         ForEach (sessions) { session in
                             let sessionRank = sessionRank(of: session)
-                            ZStack {
-                                if shouldShowNeedle(for: session) { selectionNeedle }
-                                TopCell(session, sessionRank)
-                                    .id(sessionRank)
-                                    .needlePosition($needlePosition)
-                            }
+                            SessionCell(session, sessionRank)
+                                .id(sessionRank)
+                                .needlePosition($needlePosition)
+                                .overlay(alignment: .top) {
+                                    if shouldShowNeedle(for: session) { selectionNeedle }
+                                }
+                                .overlay { lockLabel(session) }
                         }
                     }
                 }
-                .onChange(of: needlePosition) {_, newPosition in
-                    withAnimation {
-                        proxy.scrollTo(newPosition == -1 ?
-                                       sessions.count : newPosition, anchor: .center)
-                    }
-                }
+                .onChange(of: needlePosition) { handle(needlePosition: $1, proxy) }
                 .onChange(of: sessions.count) { if $1 == 1 { needlePosition = -1 }} //1
             }
+            .scrollClipDisabled()
         }
-        .padding(.init(top: 0, leading: -17, bottom: 0, trailing: -17))
+        .padding(.init(top: 0, leading: -4, bottom: 0, trailing: -17))
     }
     
     // MARK: - Lego
-    private var selectionNeedle: some View {
-        VStack {
-            ZStack {
-                Image(systemName: "arrowtriangle.down.fill")
-                    .foregroundStyle(.red)
-                    .font(.system(size: 20))
-                Divider()
-                    .frame(width: 40)
-            }
-            Spacer()
+    @ViewBuilder
+    private func lockLabel(_ session:Session) -> some View {
+        if session.isMostRecent {
+            Image(systemName: session.isEnded ? "lock.fill" : "lock.open.fill")
+                .foregroundStyle(session.isEnded ? .red : .green)
+                .contentTransition(.symbolEffect(.replace.downUp))
+                .font(.system(size: 20))
+                .padding(6)
+                .background(.white.shadow(.inner(color: .black.opacity(0.2), radius: 2, x: 1, y: 1)), in: Circle())
+                .offset(x: 0, y: -30)
         }
+    }
+    
+    private var selectionNeedle: some View {
+        ZStack {
+            Image(systemName: "arrowtriangle.down.fill")
+                .foregroundStyle(.red)
+                .font(.system(size: 20))
+            Divider()
+                .frame(width: 40)
+        }
+        .offset(y: -8)
     }
     
     private var shadowBackground:some View {
@@ -72,14 +79,6 @@ struct TopDetailView:View {
             .shadow(color: .black.opacity(0.08), radius: 2, x: 0, y: 3)
             .padding([.leading, .trailing], -100)
     }
-    
-//    private var gradientBackground:some View {
-//        let stops:[Gradient.Stop] = [
-//            .init(color: .topDetailViewBackground, location: 0.6),
-//            .init(color: .topDetailViewBackground1, location: 1)
-//        ]
-//        return LinearGradient(stops: stops, startPoint: .bottom, endPoint: .top)
-//    }
     
     // MARK: -
     private func sessionRank(of session:Session) -> Int {
@@ -93,6 +92,13 @@ struct TopDetailView:View {
             return true
         } else {
             return  sessionRank == needlePosition ? true : false
+        }
+    }
+    
+    private func handle(needlePosition newPosition:Int, _ proxy: ScrollViewProxy) {
+        withAnimation {
+            proxy.scrollTo(newPosition == -1 ?
+                           sessions.count : newPosition, anchor: .center)
         }
     }
     

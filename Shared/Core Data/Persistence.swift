@@ -22,6 +22,15 @@ struct PersistenceController {
         bubble.sessions = [session]
         return bubble
     }()
+    static let testSession: Session = {
+        let session = Session(context: PersistenceController.shared.viewContext)
+        session.created = Date()
+        session.isEnded = true
+        session.totalDuration = 320
+        session.lastTrackerDuration = 200
+       
+        return session
+    }()
     
     private static let colors = [
         "red", "ultramarine", "orange", "sky", "magenta", "gray", "lemon", "charcoal"

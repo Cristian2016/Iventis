@@ -35,7 +35,7 @@ struct PaletteView: View {
                 }
             }
             .transition(.move(edge: .leading))
-            .onChange(of: HelpOverlay.Model.shared.topmostView) { oldValue, newValue in
+            .onChange(of: HintOverlay.Model.shared.topmostView) { oldValue, newValue in
                 if newValue == .bubbleList {
                     secretary.palette(.hide)
                 }
@@ -94,7 +94,7 @@ struct PaletteView: View {
         withAnimation(.easeInOut(duration: 0.2)) { longPressedCircle = tricolor.description }
         
         delayExecution(.now() + 0.25) {
-            HelpOverlay.Model.shared.topmostView(.durationPicker)
+            HintOverlay.Model.shared.topmostView(.durationPicker)
             viewModel.durationPicker.reason = .createTimer(tricolor)
             longPressedCircle = nil
             viewModel.durationPicker.reason = .createTimer(tricolor)

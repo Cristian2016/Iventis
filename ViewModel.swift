@@ -26,7 +26,7 @@ class ViewModel {
     
     var path = [Bubble]() {
         didSet {
-            HelpOverlay.Model.shared.topmostView(oldValue.isEmpty ? .detail : .bubbleList)
+            HintOverlay.Model.shared.topmostView(oldValue.isEmpty ? .detail : .bubbleList)
             notifyPathChanged()
         }
     }
@@ -72,9 +72,9 @@ class ViewModel {
     
     var moreOptionsSheetBubble:Bubble? { didSet {
         if let bubble = moreOptionsSheetBubble {
-            HelpOverlay.Model.shared.topmostView(.moreOptions)
+            HintOverlay.Model.shared.topmostView(.moreOptions)
         } else {
-            HelpOverlay.Model.shared.topmostView(path.isEmpty ? .bubbleList : .detail)
+            HintOverlay.Model.shared.topmostView(path.isEmpty ? .bubbleList : .detail)
         }
     }}
     

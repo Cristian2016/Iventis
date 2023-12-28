@@ -69,6 +69,10 @@ extension BubbleCellCoordinator {
             let lastStart = bubble.lastPair?.start
         else { return }
         
+        if bubble.color == "blue" {
+            print("refresh blue")
+        }
+        
         let bContext = PersistenceController.shared.bContext
         let objID = bubble.objectID
         
@@ -218,13 +222,13 @@ extension BubbleCellCoordinator {
         updatedCurrentClock.round(.toNearestOrEven) //ex: 2346
         
         if isTimer {
-            //compute progress
+            //1. compute progress
             let progress = self.computeTimerProgress(for: bubble, and: updatedCurrentClock)
             DispatchQueue.main.async {
                 self.timerProgress = String(format: "%.2f", progress)
             }
             
-            //check if timer should finish
+            //2. check if timer should finish
             let lastTrackerDuration = bubble.lastSession!.lastTrackerDuration
             let elapsedSinceFirstStart = lastTrackerDuration + elapsedSinceLastStart
             let overspill = bubble.initialClock - elapsedSinceFirstStart //
@@ -251,7 +255,7 @@ extension BubbleCellCoordinator {
         
         let refreshForTimer = isTimer && secValue == 59
         
-        if secValue == 0 || refreshForTimer { //send minute and hour
+        if secValue == 0 || refreshForTimer { //send minutes and hours
             let giveMeAName = intValue/60%60
             let minValue = String(giveMeAName)
             
@@ -273,7 +277,7 @@ extension BubbleCellCoordinator {
         }
         
         DispatchQueue.main.async {
-            self.timeComponents.sec = String(secValue) //send second
+            self.timeComponents.sec = String(secValue) //send seconds
         }
     } //4
     
@@ -304,6 +308,21 @@ extension BubbleCellCoordinator {
         let info:[String : Any] = ["rank" : bubble.rank, "overspill" : overspill ?? 0.0]
         
         NotificationCenter.default.post(name: .killTimer, object: nil, userInfo: info)
+    }
+    
+    private func shouldKillTimer() {
+        
+    }
+    
+    private func updatedCurrentClock(for bubble:Bubble, _ lastStart:Date) -> Float {
+        let currentClock = bubble.currentClock
+        
+        let elapsedSinceLastStart = Float(Date().timeIntervalSince(lastStart)) //2
+        
+        var updatedCurrentClock = isTimer ? currentClock - elapsedSinceLastStart : currentClock + elapsedSinceLastStart //ex: 2345.87648
+        
+        updatedCurrentClock.round(.toNearestOrEven) //ex: 2346
+        return updatedCurrentClock
     }
     
     // MARK: - Init Deinit

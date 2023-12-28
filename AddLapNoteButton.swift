@@ -8,7 +8,7 @@ import SwiftUI
 import MyPackage
 
 ///button that triggers an action to add a PairCell note
-struct AddPairNoteButton: View {
+struct AddLapNoteButton: View {
     @Environment(Secretary.self) private var secretary
     @Environment(ViewModel.self) private var viewmodel
     
@@ -28,7 +28,7 @@ struct AddPairNoteButton: View {
     }
     
     private func handleTap(_ bubble:Bubble) {
-        HelpOverlay.Model.shared.topmostView(.lapNotes)
+        HintOverlay.Model.shared.topmostView(.lapNotes)
         UserFeedback.singleHaptic(.light)
         viewmodel.notes_Pair = bubble.lastPair
         delayExecution(.now() + 0.1) {

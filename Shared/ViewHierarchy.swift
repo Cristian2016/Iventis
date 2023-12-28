@@ -34,8 +34,8 @@ struct ViewHierarchy: View {
         .overlay { MoreOptionsOverlay(viewModel.moreOptionsSheetBubble) }
         .overlay { PaletteView() }
         .overlay { DurationPickerOverlay(reason: viewModel.durationPicker.reason) }
-        .overlay(alignment: .topLeading) { HelpOverlay.HelpButton() }
-        .overlay { HelpOverlay() }
-        .overlay { HelpViewHierarchy() }
+        .overlay(alignment: .topLeading) { HintOverlay.HelpButton() }
+        .overlay { HintOverlay() }
+        .overlay { if secretary.showHelpViewHierarchy { HelpViewHierarchy() } }
     }
 }

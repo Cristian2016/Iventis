@@ -10,7 +10,7 @@
 import SwiftUI
 import MyPackage
 
-struct PairCell: View {
+struct LapCell: View {
     // MARK: - Dependencies
     @Environment(ViewModel.self) private var viewModel
     @StateObject var pair:Pair //1
@@ -19,7 +19,7 @@ struct PairCell: View {
     @State private var shouldShowPairBubbleCell = false
     
     // MARK: -
-    let pairNumber:Int
+    let lapNumber:Int
     let duration:Float.TimeComponentsAsStrings?
     
     private let metrics = Metrics()
@@ -39,13 +39,14 @@ struct PairCell: View {
             }
             Spacer()
         }
-        .padding(.init(top: 14, leading: 10, bottom: 14, trailing: 0))
+        .padding([.leading, .top, .bottom], 10)
         .frame(maxWidth: .infinity)
-        .overlay(alignment: .topTrailing) { pairNumberView }
+        .overlay(alignment: .topTrailing) { lapNumberLabel }
         .overlay(alignment: .bottomTrailing) { stickyNote }
         .contentShape(gestureArea) //define gesture area
         .onTapGesture {  /* ⚠️ Idiotic! I need to put this shit here or else I can't scroll */ }
         .onLongPressGesture { showPairNotes() }
+        .background()
     }
     
     // MARK: - Little Things
@@ -69,7 +70,7 @@ struct PairCell: View {
     
     private var stickyNoteContent:some View {
         stickyNoteText
-            .font(.system(size: 26))
+            .font(metrics.stickynoteFont)
             .padding([.leading, .trailing], 10)
             .background {
                 RoundedRectangle(cornerRadius: 2)
@@ -85,19 +86,19 @@ struct PairCell: View {
         if pair.isNoteHidden {
             Text("\(Image(systemName: "text.alignleft"))")
                 .padding(textPadding)
-                .font(.system(size: 20))
+                .font(metrics.stickynoteFont)
                 .frame(width: collapsedNoteWidth)
         } else {
             Text(pair.note_.isEmpty ? "Something" : pair.note_)
         }
     }
     
-    private var pairNumberView:some View {
+    private var lapNumberLabel:some View {
         VStack(alignment: .trailing, spacing: 0) {
             Rectangle()
                 .fill(Color.lightGray)
                 .frame(width: 20, height: 1)
-            Text(String(pairNumber))
+            Text(String(lapNumber))
                 .pairCountModifier()
         }
     }
@@ -110,7 +111,7 @@ struct PairCell: View {
             //date
             Text(DateFormatter.date.string(from: pair.start ?? Date()))
         }
-        .font(.system(size: 22))
+        .font(metrics.durationFont)
         .foregroundStyle(.secondary)
     }
     
@@ -137,16 +138,18 @@ struct PairCell: View {
                 //hr
                 if duration.hr != "0" {
                     HStack (alignment:.firstTextBaseline ,spacing: 0) {
-                        Text(duration.hr).font(metrics.durationFont)
-                        Text("h").font(metrics.durationComponentsFont)
+                        Text(duration.hr)
+                        Text("h")
+                            .font(metrics.durationComponentsFont)
                     }
                 }
                 
                 //min
                 if duration.min != "0" {
                     HStack (alignment:.firstTextBaseline ,spacing: 0) {
-                        Text(duration.min).font(metrics.durationFont)
-                        Text("m").font(metrics.durationComponentsFont)
+                        Text(duration.min)
+                        Text("m")
+                            .font(metrics.durationComponentsFont)
                     }
                 }
                 
@@ -154,12 +157,14 @@ struct PairCell: View {
                 let sec = duration.sec + "." + duration.hundredths
                 if sec != "0.00" {
                     HStack (alignment:.firstTextBaseline ,spacing: 0) {
-                        Text(sec).font(metrics.durationFont)
-                        Text("s").font(metrics.durationComponentsFont)
+                        Text(sec)
+                        Text("s")
+                            .font(metrics.durationComponentsFont)
                     }
                 }
             }
         }
+        .font(metrics.durationFont).fontWeight(.medium)
     }
       
     // MARK: -
@@ -168,12 +173,12 @@ struct PairCell: View {
         let decoder = JSONDecoder()
         let result = try? decoder.decode(Float.TimeComponentsAsStrings.self, from: pair.durationAsStrings ?? Data())
         self.duration = result
-        self.pairNumber = pairNumber
+        self.lapNumber = pairNumber
     }
     
     // MARK: - Intents
     private func showPairNotes() {
-        HelpOverlay.Model.shared.topmostView(.lapNotes)
+        HintOverlay.Model.shared.topmostView(.lapNotes)
         UserFeedback.singleHaptic(.light)
         viewModel.notes_Pair = pair
     }
@@ -192,11 +197,12 @@ struct PairCell: View {
     }
 }
 
-extension PairCell {
+extension LapCell {
     struct Metrics {
         //these two combined
-        let durationFont = Font.system(size: 22, weight: .medium) //15 59 3
+        let durationFont = Font.system(size: 22) //15 59 3
         let durationComponentsFont = Font.system(size: 20, weight: .medium) //h m s
         let pairNumberFont = Font.system(size: 18).weight(.medium)
+        let stickynoteFont = Font.system(size: 26)
     }
 }

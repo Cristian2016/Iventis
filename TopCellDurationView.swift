@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct TopCellDurationView: View {
-    private let metrics:TopCell.Metrics
+    private let metrics:SessionCell.Metrics
     
     @StateObject private var session:Session
     @State private var duration: Float.TimeComponentsAsStrings?
@@ -17,16 +17,14 @@ struct TopCellDurationView: View {
     private let myRank:Int
     
     var body: some View {
-        ZStack {
-            HStack(spacing: 0) {
-                durationView
-                    .overlay {
-                        if showGreaterThenSymbol {
-                            Rectangle()
-                                .fill(.red)
-                            .frame(height: 1) }
-                    }
-            }
+        HStack {
+            durationView
+                .overlay {
+                    if showGreaterThenSymbol {
+                        Rectangle()
+                            .fill(.red)
+                        .frame(height: 1) }
+                }
         }
         .onAppear { handleOnAppear() }
         .onChange(of: session.totalDuration) { handleNewDuration($1) }
@@ -62,6 +60,10 @@ struct TopCellDurationView: View {
                     }
                 }
             }
+        } else {
+            Text("Open")
+                .font(metrics.durationFont)
+                .foregroundStyle(.green)
         }
     }
     
@@ -105,7 +107,7 @@ struct TopCellDurationView: View {
     }
     
     // MARK: - Init
-    init(_ metrics:TopCell.Metrics,
+    init(_ metrics:SessionCell.Metrics,
          _ session:Session,
          _ myRank:Int) {
         

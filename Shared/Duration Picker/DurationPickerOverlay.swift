@@ -24,7 +24,7 @@ extension DurationPickerOverlay {
 struct DurationPickerOverlay: View {
     @Environment(ViewModel.self) var viewModel
     @Environment(\.verticalSizeClass) private var verticalSizeClass
-    let model = HelpOverlay.Model.shared
+    let model = HintOverlay.Model.shared
     
     private var isPortrait:Bool { verticalSizeClass == .regular }
     

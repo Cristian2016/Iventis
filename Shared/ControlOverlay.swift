@@ -28,7 +28,7 @@ struct ControlOverlay: View {
     }
     
     private func dismiss() {
-        HelpOverlay.Model.shared.topmostView(viewModel.path.isEmpty ? .bubbleList : .detail)
+        HintOverlay.Model.shared.topmostView(viewModel.path.isEmpty ? .bubbleList : .detail)
         
         secretary.controlBubble(.hide)
         //save selectedTab to CoreData
