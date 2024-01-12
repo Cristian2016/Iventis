@@ -30,12 +30,12 @@ struct ViewHierarchy: View {
         }
         .overlay { WarningLabel() }
         .overlay { BubbleNotesOverlay(viewModel.notes_Bubble) }
-        .overlay { PairNotesOverlay(viewModel.notes_Pair) }
+        .overlay { LapNotesOverlay1(viewModel.pairNotes) }
         .overlay { MoreOptionsOverlay(viewModel.moreOptionsSheetBubble) }
         .overlay { PaletteView() }
         .overlay { DurationPickerOverlay(reason: viewModel.durationPicker.reason) }
+        .overlay { if secretary.showHelpViewHierarchy { HelpViewHierarchy() } }
         .overlay(alignment: .topLeading) { HintOverlay.HelpButton() }
         .overlay { HintOverlay() }
-        .overlay { if secretary.showHelpViewHierarchy { HelpViewHierarchy() } }
     }
 }

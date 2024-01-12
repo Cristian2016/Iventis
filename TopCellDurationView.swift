@@ -11,7 +11,7 @@ struct TopCellDurationView: View {
     private let metrics:SessionCell.Metrics
     
     @StateObject private var session:Session
-    @State private var duration: Float.TimeComponentsAsStrings?
+    @State private var duration: Float.ComponentsAsString?
     @State private var showGreaterThenSymbol = false
     
     private let myRank:Int
@@ -79,7 +79,7 @@ struct TopCellDurationView: View {
     private func handleOnAppear() {
         if duration == nil {
             DispatchQueue.global().async {
-                let components = session.totalDuration.timeComponentsAsStrings
+                let components = session.totalDuration.componentsAsString
                 if components != .zeroAll {
                     DispatchQueue.main.async { self.duration = components }
                 }
@@ -90,7 +90,7 @@ struct TopCellDurationView: View {
     private func handleNewDuration(_ newDuration:Float) {
         if myRank == session.bubble?.sessions_.count {
             DispatchQueue.global().async {
-                let components = newDuration.timeComponentsAsStrings
+                let components = newDuration.componentsAsString
                 DispatchQueue.main.async {
                     self.duration = components
                     self.showGreaterThenSymbol = false

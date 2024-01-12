@@ -40,7 +40,7 @@ public class Pair: NSManagedObject {
         }
         
         //convert duration.timeComponentsAsStrings to Data using JSONEncoder
-        let componentStrings = duration.timeComponentsAsStrings
+        let componentStrings = duration.componentsAsString
         let data = try? JSONEncoder().encode(componentStrings)
         
         self.duration = duration

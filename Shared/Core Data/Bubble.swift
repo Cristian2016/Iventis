@@ -71,15 +71,6 @@ extension Bubble {
         }
     }
     
-    func updateCurrentClock(runningOnly:Bool) {
-        if runningOnly {
-            guard state == .running else { return }
-            
-            let elapsedSinceStart = Float(Date().timeIntervalSince(lastPair?.start ?? Date()))
-            currentClock += elapsedSinceStart
-        }
-    } //1
-    
     var note_:String {
         get { note ?? "" }
         set { note = newValue }

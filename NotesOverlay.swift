@@ -71,7 +71,7 @@ struct NotesOverlay: View {
         
         withAnimation(.bouncy(duration: 0.15)) {
             viewModel.notes_Bubble = nil
-            viewModel.notes_Pair = nil
+//            viewModel.notesPair(.hide)
         }
     }
     
@@ -93,7 +93,7 @@ struct NotesOverlay: View {
                             if filteredStickyNotes.isEmpty { Separator() }
                         }
                     ScrollView {
-                        let columnsCount = verticalSizeClass == .compact ? 3 : 2
+                        let columnsCount = verticalSizeClass == .compact ? 4 : 2
                         let columns = Array(repeating: GridItem(spacing: 1), count: columnsCount)
                         
                         if !filteredStickyNotes.isEmpty {
@@ -108,7 +108,6 @@ struct NotesOverlay: View {
                                 .frame(height: 46)
                             }
                             .font(.system(size: 26))
-                            .minimumScaleFactor(0.4)
                         } else {
                             InfoView2()
                         }
@@ -119,7 +118,7 @@ struct NotesOverlay: View {
                 }
                 .gesture(dragGesture)
                 .background(.regularMaterial, in: RoundedRectangle(cornerRadius: 10))
-                .frame(maxWidth: isPortrait ? 360 : 520)
+                .frame(maxWidth: isPortrait ? 360 : 700)
                 .compositingGroup()
                 .standardShadow()
                 .onChange(of: textFieldText, initial: false) { viewModel.stickyNoteText = $1 }
@@ -165,7 +164,7 @@ struct NotesOverlay: View {
     }
     
     private var textField: some View {
-        TextField(kind == .bubble ? "Enter Bubble Name" : "Enter Lap Note", text: $textFieldText)
+        TextField(kind == .bubble ? "Enter Tracker Name" : "Enter Lap Note", text: $textFieldText)
             .foregroundStyle(.primary)
             .font(.system(size: 26))
             .multilineTextAlignment(.center)

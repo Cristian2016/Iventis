@@ -16,7 +16,7 @@ struct SessionCell: View {
     private let session:Session
     private let myRank:Int
     
-    @State private var duration: Float.TimeComponentsAsStrings?
+    @State private var duration: Float.ComponentsAsString?
     
     private let metrics = Metrics()
     
@@ -131,10 +131,4 @@ struct DateViewBackgroundColor: View {
     var body: some View {
         session.bubble?.coordinator.color
     }
-}
-
-#Preview {
-    SessionCell(PersistenceController.testSession, 10)
-        .environment(Secretary())
-        .frame(width: 130, height: 140, alignment: .center)
 }

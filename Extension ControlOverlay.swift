@@ -47,7 +47,7 @@ extension ControlOverlay {
             viewModel.reset(bubble)
             dismiss()
             if Int(bubble.rank) == secretary.addNoteButton_bRank {
-                secretary.addNoteButton_bRank = nil
+                secretary.setAddNoteButton_bRank(to: nil)
             }
         }
         
@@ -55,7 +55,7 @@ extension ControlOverlay {
             UserFeedback.singleHaptic(.heavy)
             viewModel.deleteBubble(bubble)
             if Int(bubble.rank) == secretary.addNoteButton_bRank {
-                secretary.addNoteButton_bRank = nil
+                secretary.setAddNoteButton_bRank(to: nil)
             }
             dismiss()
         }
@@ -71,6 +71,8 @@ extension ControlOverlay {
         
         @Environment(ViewModel.self) private var viewModel
         @Environment(Secretary.self) private var secretary
+        
+        @AppStorage("controlFirstTime") private var firstTime = true
         
         private let minutes = [[-2, -1, 5, 10], [15, 20, 25, 30], [35, 45, 50, 60]]
         
@@ -101,6 +103,7 @@ extension ControlOverlay {
                         }
                     }
                 }
+                underLabel
             }
             .font(.digitFont)
             .foregroundStyle(Color.label)
@@ -171,11 +174,12 @@ extension ControlOverlay {
                     //allow stopwatches to reset currentClock, if currentClock > 0
                     if !bubble.isTimer && !bubble.isRunning && bubble.currentClock == 0 { return }
                     
-                    viewModel.change(bubble, to:.stopwatch)
+                    viewModel.changeTracker(bubble, to:.stopwatch)
                     UserFeedback.singleHaptic(.heavy)
                     dismiss()
+                    
                 default:
-                    viewModel.change(bubble, to: .timer(Float(digit) * 60))
+                    viewModel.changeTracker(bubble, to: .timer(Float(digit) * 60))
                     UserFeedback.singleHaptic(.heavy)
                     dismiss()
             }
@@ -209,6 +213,16 @@ extension ControlOverlay {
                     .allowsHitTesting(false)
             }
         }
+        
+        @ViewBuilder
+        private var underLabel:some View {
+            if firstTime {
+                Text("Swipe \(Image.leftSwipe)")
+                    .font(.system(size: 18))
+                    .padding(.top, 4)
+                    .foregroundStyle(.secondary)
+            }
+        }
     }
     
     struct HistoryGrid:View {
@@ -224,24 +238,59 @@ extension ControlOverlay {
         
         private let columns = Array(repeating: GridItem(spacing: 1), count: 2)
         
+        private var contentUnavailable:some View {
+            ContentUnavailableView {
+                Text("Empty List")
+            } description: {
+                Text("Recent timer durations are shown here")
+                    .lineLimit(nil)
+            } actions: {
+                Button {
+                    handleTimerButtonTapped()
+                } label: {
+                    Label("Choose Duration", systemImage: "")
+                        .labelStyle(.titleOnly)
+                }
+            }
+            .font(.system(size: 20))
+        }
+        
+        private func handleTimerButtonTapped() {
+            viewModel.durationPicker.reason = bubble.isTimer ? .editExistingTimer(bubble) : .changeToTimer(bubble)
+            UserFeedback.singleHaptic(.heavy)
+            dismiss()
+        }
+        
+        private func handleTap(for duration:TimerDuration) {
+            moveToListStart(duration)
+            viewModel.changeTracker(bubble, to:  .timer(duration.value))
+        }
+        
+        private func handleLongPress(for duration:TimerDuration) {
+            UserFeedback.singleHaptic(.light)
+            viewModel.delete(duration)
+        }
+        
         var body: some View {
             ScrollView {
-                LazyVGrid(columns: columns, spacing: 1) {
-                    ForEach(timerDurations) { timerDuration in
-                        Color.background
-                            .frame(height: 44)
-                            .overlay {
-                                Text(timerDuration.value.timeComponentsAbreviatedString)
-                            }
-                            .onTapGesture {
-                                moveToListStart(timerDuration)
-                                viewModel.change(bubble, to:  .timer(timerDuration.value))
-                                dismiss()
-                            }
-                            .onLongPressGesture {
-                                UserFeedback.singleHaptic(.light)
-                                viewModel.delete(timerDuration)
-                            }
+                if timerDurations.isEmpty {
+                    contentUnavailable
+                } else {
+                    LazyVGrid(columns: columns, spacing: 1) {
+                        ForEach(timerDurations) { timerDuration in
+                            Color.background
+                                .frame(height: 44)
+                                .overlay {
+                                    Text(timerDuration.value.timerTitle)
+                                }
+                                .onTapGesture {
+                                    handleTap(for: timerDuration)
+                                    dismiss()
+                                }
+                                .onLongPressGesture {
+                                    handleLongPress(for: timerDuration)
+                                }
+                        }
                     }
                 }
             }
@@ -250,6 +299,13 @@ extension ControlOverlay {
             .font(.system(size: 29))
             .minimumScaleFactor(0.01)
             .lineLimit(1)
+            .overlay(alignment: .bottom) { underLabel }
+        }
+        
+        private var underLabel:some View {
+            Text("\(Image.clock) Recents")
+                .font(.system(size: 18))
+                .foregroundStyle(.secondary)
         }
         
         private func moveToListStart(_ timerDuration:TimerDuration) {

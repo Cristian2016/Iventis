@@ -16,7 +16,7 @@ extension Color {
                                 "yellow" : "Yellow",
                                 "red" : "Red",
                                 "blue" : "Blue",
-                                "bubbleGum" : "Bubble Gum",
+                                "bubbleGum" : "Bubblegum",
                                 "green" : "Green",
                                 "black" : "Black",
                                 "magenta" : "Magenta",

@@ -17,7 +17,7 @@ struct LeftStrip: View {
     // MARK: -
     var body: some View {
         HStack {
-            Color(isListEmpty ? .yellow : .clear)
+            Color.clear
                 .frame(width: 40)
                 .contentShape(Rectangle()) //use if color clear otherwise gesture will not work
             Spacer()

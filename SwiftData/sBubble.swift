@@ -1,6 +1,6 @@
 //
 //  Bubble.swift
-//  Fused1
+//  Eventify
 //
 //  Created by Cristian Lapusan on 31.12.2023.
 //

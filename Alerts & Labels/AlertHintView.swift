@@ -26,16 +26,16 @@ struct AlertHintView: View {
     
     var body: some View {
         ZStack {
-            MaterialLabel("Always-ON", "App will not sleep!") {
+            MaterialLabel("Always-ON") {
                 ScrollView {
-                    VStack(alignment: .leading, spacing: 8) {
-                        VStack(alignment: .leading) {
-                            Text("***Always-ON*** overrides Auto-Lock")
+                    VStack(spacing: 8) {
+                        VStack {
+                            Text("Sets Auto-Lock to 'Never'")
                             Text("*Settings App > Display & Brightness > Auto-Lock*")
                                 .foregroundStyle(.secondary)
                         }
-                        VStack(alignment: .leading) {
-                            Text("Regardless of the device settings, Auto-Lock for this app is set to 'Never'. This means the display stays on, unless ***Always-ON*** is switched off again")
+                        VStack {
+                            Text("Display will not sleep until ***Always-ON*** is switched off again")
                         }
                     }
                 }

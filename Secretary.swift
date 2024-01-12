@@ -79,7 +79,9 @@ class Secretary {
     private(set) var widgetsExist = false
     
     //ysed by the round w widget symbol
-    private(set) var mostRecentlyUsedBubble:Int64? {didSet { saveMostRecentlyUsedBubble() }}
+    private(set) var mostRecentlyUsedBubble:Int64? { didSet { 
+        saveMostRecentlyUsedBubble()
+    }}
     
     func setMostRecentlyUsedBubble(to rank:Int64?) {
         DispatchQueue.main.async {
@@ -105,7 +107,13 @@ class Secretary {
     
     var displayAutoLockConfirmation = false
     
-    var addNoteButton_bRank:Int? {didSet { handleAddNoteButton_bRank() }}
+    private(set) var addNoteButton_bRank:Int? {didSet { handleAddNoteButton_bRank() }}
+    
+    func setAddNoteButton_bRank(to rank:Int?) {
+        DispatchQueue.main.async {
+            self.addNoteButton_bRank = rank
+        }
+    }
     
     private var timer:Timer?
     

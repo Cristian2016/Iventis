@@ -30,7 +30,6 @@ extension BubbleList {
 
 struct BubbleList: View {
     @Environment(\.managedObjectContext) private var viewContext
-    
     @Environment(ViewModel.self) private var viewModel
     
     private var secretary:Secretary
@@ -44,7 +43,12 @@ struct BubbleList: View {
     // MARK: -
     var body: some View {
         ZStack {
-            if isListEmpty { EmptyListView() }
+            if isListEmpty {
+                EmptyListView()
+                    .toolbar {
+                        PlusButton()
+                    }
+            }
             else {
                 ScrollViewReader { proxy in
                     List (sections) { section in
@@ -71,14 +75,13 @@ struct BubbleList: View {
                     .scrollIndicators(.hidden)
                     .listStyle(.plain)
                     .toolbarBackground(.ultraThinMaterial)
-                    .toolbar {
-                        ToolbarItemGroup {
-                            AddLapNoteButton()
-                            AlwaysONButton()
-                            PlusButton()
-                        }
+                }
+                .toolbar {
+                    ToolbarItemGroup {
+                        AddLapNoteButton()
+                        AlwaysONButton()
+                        PlusButton()
                     }
-//                    .onReceive(Self.publisher) { handleScrollToFinishedTimerNotification($0, proxy) } //15
                 }
             }
             LeftStrip(isListEmpty)
@@ -181,15 +184,5 @@ struct BubbleList: View {
 
 // MARK: - Little Helpers
 extension BubbleList {
-        
     fileprivate var isListEmpty:Bool { sections.isEmpty }
-    
-    struct Widths {
-        var portrait:CGFloat?
-        var landscape:CGFloat?
-        
-        var isComputed:Bool {
-            portrait != nil && landscape != nil
-        }
-    }
 }

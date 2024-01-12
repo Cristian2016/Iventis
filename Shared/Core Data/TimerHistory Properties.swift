@@ -13,7 +13,7 @@ import CoreData
 extension TimerHistory {
 
     @nonobjc public class func fetchRequest() -> NSFetchRequest<TimerHistory> {
-        return NSFetchRequest<TimerHistory>(entityName: "History")
+        return NSFetchRequest<TimerHistory>(entityName: "TimerHistory")
     }
 
     @NSManaged public var timerDurations: NSOrderedSet?
@@ -42,7 +42,7 @@ extension TimerHistory {
     @NSManaged public func replaceTimerDurations(at indexes: NSIndexSet, with values: [TimerDuration])
 
     @objc(addTimerDurationsObject:)
-    @NSManaged public func addToTimerDurations(_ value: TimerDuration)
+    @NSManaged public func add(_ value: TimerDuration)
 
     @objc(removeTimerDurationsObject:)
     @NSManaged public func removeFromTimerDurations(_ value: TimerDuration)

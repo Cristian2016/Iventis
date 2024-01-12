@@ -57,7 +57,7 @@ struct DurationsView: View {
                         }
                         .onTapGesture {
                             UserFeedback.singleHaptic(.light)
-                            viewModel.change(bubble, to: .stopwatch)
+                            viewModel.changeTracker(bubble, to: .stopwatch)
                             dismiss()
                         }
                 }
@@ -86,7 +86,7 @@ struct DurationsView: View {
                 GridRow {
                     ForEach(subarray, id: \.self) { value in
                         Digit(title: value, color) {
-                            viewModel.change(bubble, to: .timer(Float(value)! * 60))
+                            viewModel.changeTracker(bubble, to: .timer(Float(value)! * 60))
                             UserFeedback.singleHaptic(.light)
                             dismiss()
                         }

@@ -11,7 +11,7 @@ import CoreData
 
 
 public class TimerHistory: NSManagedObject {
-    var timerDurations_:[TimerDuration] {
+    var allDurations:[TimerDuration] {
         timerDurations?.array as? [TimerDuration] ?? []
     }
 }

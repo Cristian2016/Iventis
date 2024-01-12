@@ -171,7 +171,8 @@ struct DurationPickerOverlay: View {
             case .changeToTimer(let bubble):
                 UserFeedback.singleHaptic(.medium)
                 let initialClock = zip(manager.digits, manager.matrix).reduce(0) { $0 + $1.0 * $1.1 }
-                viewModel.change(bubble, to: .timer(Float(initialClock)))
+                viewModel.changeTracker(bubble, to: .timer(Float(initialClock)))
+                viewModel.addToHistory(duration: Float(initialClock))
             case .none : break
         }
     }

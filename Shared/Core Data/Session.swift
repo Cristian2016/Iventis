@@ -20,7 +20,8 @@ public class Session: NSManagedObject {
     func computeDuration() {
         let pairs = self.pairs_
         guard !pairs.isEmpty,
-              let lastPairDuration = pairs.last?.duration else { fatalError() }
+              let lastPairDuration = pairs.last?.duration else { return }
+        
         totalDuration += lastPairDuration
         
         lastTrackerDuration += lastPairDuration
