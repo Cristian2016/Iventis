@@ -34,9 +34,3 @@ struct SmallAlertHintView: View {
         }
     }
 }
-
-struct SmallAlertHintView_Previews: PreviewProvider {
-    static var previews: some View {
-        SmallAlertHintView(alertContent: AlertHint.scrollToTop)
-    }
-}

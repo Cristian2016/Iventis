@@ -10,10 +10,6 @@
 //7 detect app launch to set bubble.timeComponents to bubble.currentClock
 //8 on very first app launch TimerHistory CoreData object must be created. History will store timer durations. Timer Durations are added to History each time user creates a new timer
 //9 timer history (History) CoreData object stores timer durations. User can choose with ease a timer duration that has already been created
-//                    if newPhase == .inactive && oldPhase == .background {
-//                        print("App is about to gain focus")
-//                    }
-//
 //app launched, overlay (ControlCenter, incoming call, Notification Center, a Notification appeared, etc), app moves from background back to foreground, app switcher
 // 1a app launched (it was killed)
 // 2a app left foreground and moves to background
@@ -42,40 +38,35 @@ struct EventifyApp: App {
     }()
     
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
-    @AppStorage("historyCreated") private var timerHistoryExists = false //8
+    @AppStorage(Storagekey.timerHistoryExists) private var timerHistoryExists = false //8
     private let viewContext = PersistenceController.shared.container.viewContext
-    let viewModel = ViewModel()
+    let viewModel:ViewModel
     
     @Environment(\.scenePhase) private var phase
     
     var body: some Scene {
         WindowGroup {
-//            sBubbleList()
-            viewHierarchy
+            ViewHierarchy()
+                .restrictDynamicFontSize()
+                .task { shouldCreateTimerDurationsHistory() }
+                .environment(viewModel)
+                .environment(viewModel.secretary)
+                .environment(\.managedObjectContext, viewContext)
+                .onChange(of: phase) { handle($0, $1) }
         }
         .modelContainer(sharedModelContainer)
     }
     
-    private var viewHierarchy:some View {
-        ViewHierarchy()
-            .task {
-                shouldCreateTimerDurationsHistory()
-            }
-            .environment(viewModel)
-            .environment(viewModel.secretary)
-            .environment(\.managedObjectContext, viewContext)
-            .onAppear {
-                UIRefreshControl.appearance().tintColor = .clear //hide spinner
-                viewModel.bubbleTimer(.start) //1a
-            }
-            .onChange(of: phase) { oldValue, newValue in
-                let appEntersBackground = newValue == .background
-                let appReturnsFromBackground = oldValue == .background
-                
-                if appEntersBackground { viewModel.bubbleTimer(.pause) } //2a
-                if appReturnsFromBackground { viewModel.bubbleTimer(.start) } //3a
-            }
-            .restrictDynamicFontSize()
+    private func handle(_ oldPhase:ScenePhase, _ newPhase:ScenePhase) {
+        let appEntersBackground = newPhase == .background
+        let appReturnsFromBackground = oldPhase == .background
+        
+        if appEntersBackground { viewModel.bubbleTimer(.pause) } //2a
+        if appReturnsFromBackground { viewModel.bubbleTimer(.start) } //3a
+        
+        if newPhase == .inactive && oldPhase == .active {
+            viewModel.refreshWidgets()
+        }
     }
     
     //exactly one TimerHistory obj will be created. TimerHistory stores all TimerDuration objs
@@ -94,7 +85,9 @@ struct EventifyApp: App {
     } //1
     
     init() {
-        let center = NotificationCenter.default
-        delayExecution(.now() + 0.001) { center.post(name: .appLaunched, object: nil) }
-    } //7
+        UIRefreshControl.appearance().tintColor = .clear //hide spinner
+        let viewModel = ViewModel()
+        viewModel.bubbleTimer(.start) //1a
+        self.viewModel = viewModel
+    }
 }

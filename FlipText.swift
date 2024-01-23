@@ -55,7 +55,7 @@ extension FlipText {
         //DurationPicker
         static let createTimer = Input(lines: ["Create Timer", "Enter Duration"])
         static let editTimer = Input(lines: ["Edit Timer", "Enter Duration"])
-        static let changeToTimer = Input(lines: ["Switch to Timer", "Enter Duration"])
+        static let changeToTimer = Input(lines: ["Change to Timer", "Enter Duration"])
     }
 }
 

@@ -36,41 +36,96 @@ import MyPackage
 import WidgetKit
 
 extension ViewModel {
-    func toggle(_ bubble:Bubble, startDelayCompensation:TimeInterval? = nil) {
+    func start(_ bubble:Bubble, _ delayCorrection:TimeInterval) {
         if bubble.state == .finished  { return }
         
-        UserFeedback.singleHaptic(.light)
+        let shouldKillTimer =
+        bubble.currentClock <= Float(delayCorrection)
         
-        let startDelayCompensation = startDelayCompensation ?? 0
+        UserFeedback.singleHaptic(.rigid)
+        
         let bContext = PersistenceController.shared.bContext
         let objID = bubble.objectID
         
         bContext.perform { [weak self] in
             guard let self = self else { return }
             
-            let bTracker = PersistenceController.shared.grabObj(objID) as! Bubble
+            let bBubble = PersistenceController.shared.grabObj(objID) as! Bubble
             
-            switch bTracker.state {
+            let rank = bBubble.rank
+            self.secretary.setAddNoteButton_bRank(to: Int(rank))
+            
+            if !shouldKillTimer {
+                self.setNotification(of: bBubble, for: .start)
+                self.secretary.setMostRecentlyUsedBubble(to: rank)
+            }
+            
+            let newPair = Pair(context: bContext)
+            newPair.start = Date().addingTimeInterval(-delayCorrection)
+            
+            if bBubble.state == .brandNew {
+                let newSession = Session(context: bContext)
+                newSession.created = Date().addingTimeInterval(-delayCorrection)
+                newSession.addToPairs(newPair)
+                bBubble.addToSessions(newSession)
+                
+            } else if bBubble.state == .paused {
+                bBubble.lastSession?.handleBubbleID(.assign(newPair))
+                bBubble.lastSession?.addToPairs(newPair)
+            }
+            
+            PersistenceController.shared.save(bContext) {
+                self.calManager.shouldEventify(bBubble)
+                self.calManager.updateEvent(.title(bBubble))
+                
+                DispatchQueue.main.async {
+                    bubble.coordinator.update(for: .start)
+                    bubble.pairBubbleCellCoordinator.update(.user(.start))
+                }
+            }
+        }
+    }
+    func toggle(_ bubble:Bubble) {
+        if bubble.state == .finished  { return }
+        
+        UserFeedback.singleHaptic(.rigid)
+        
+        let bContext = PersistenceController.shared.bContext
+        let objID = bubble.objectID
+        
+        bContext.perform { [weak self] in
+            guard let self = self else { return }
+            
+            let bBubble = PersistenceController.shared.grabObj(objID) as! Bubble
+            
+            switch bBubble.state {
                 case .brandNew, .paused:
-                    self.setTimerNotification(.start, for: bTracker) //timers only
-                    self.secretary.setAddNoteButton_bRank(to: Int(bTracker.rank))
-                    self.secretary.setMostRecentlyUsedBubble(to: bTracker.rank)
+                    self.setNotification(of: bBubble, for: .start)
+                    
+                    let rank = bBubble.rank
+                    self.secretary.setAddNoteButton_bRank(to: Int(rank))
+                    self.secretary.setMostRecentlyUsedBubble(to: rank)
                     
                     let newPair = Pair(context: bContext)
-                    newPair.start = Date().addingTimeInterval(-startDelayCompensation)
+                    newPair.start = Date()
                     
-                    if bTracker.state == .brandNew {
+                    if bBubble.state == .brandNew {
                         let newSession = Session(context: bContext)
-                        newSession.created = Date().addingTimeInterval(-startDelayCompensation)
+                        newSession.created = Date()
                         newSession.addToPairs(newPair)
-                        bTracker.addToSessions(newSession)
-                    } else if bTracker.state == .paused {
-                        bTracker.lastSession?.handleTrackerID(.assign(newPair))
-                        bTracker.lastSession?.addToPairs(newPair)
+                        bBubble.addToSessions(newSession)
+                        
+                    } else if bBubble.state == .paused {
+                        bBubble.lastSession?.handleBubbleID(.assign(newPair))
+                        bBubble.lastSession?.addToPairs(newPair)
                     }
                     
                     //this also makes changes visible to the viewContext as well
-                    PersistenceController.shared.save(bContext) { //bQueue
+                    PersistenceController.shared.save(bContext) {
+                        print("0/5 pair created \(newPair.start)")
+                        self.calManager.shouldEventify(bBubble)
+                        self.calManager.updateEvent(.title(bBubble))
+                        
                         DispatchQueue.main.async {
                             bubble.coordinator.update(for: .start)
                             bubble.pairBubbleCellCoordinator.update(.user(.start))
@@ -78,22 +133,23 @@ extension ViewModel {
                     }
                     
                 case .running: /* changes to .paused */
-                    setTimerNotification(.pause, for: bTracker)
-                    if self.secretary.addNoteButton_bRank == Int(bTracker.rank) { self.secretary.setAddNoteButton_bRank(to: nil)
+                    self.setNotification(of: bBubble, for: .pause)
+                    
+                    if self.secretary.addNoteButton_bRank == Int(bBubble.rank) { self.secretary.setAddNoteButton_bRank(to: nil)
                     }
                     
-                    let currentPair = bTracker.lastPair
-                    currentPair!.pause = Date()
+                    guard let currentPair = bBubble.lastPair else { return }
                     
-                    currentPair!.computeDuration(.atPause)
+                    currentPair.pause = Date()
+                    currentPair.computeDuration(.atPause)
                     
-                    if bTracker.isTimer {
-                        bTracker.currentClock -= currentPair!.duration
+                    if bBubble.isTimer {
+                        bBubble.currentClock -= currentPair.duration
                     } else {
-                        bTracker.currentClock += currentPair!.duration
+                        bBubble.currentClock += currentPair.duration
                     }
                     
-                    bTracker.lastSession!.computeDuration()
+                    bBubble.lastSession!.computeDuration()
                     
                     PersistenceController.shared.save(bContext) {
                         DispatchQueue.main.async {
@@ -119,14 +175,6 @@ extension ViewModel {
                     bubbleTimer.perform(.pause)
                     bubbleTimerIsRunning = false
                 }
-        }
-    }
-    
-    // MARK: - User Intents
-    //from PaletteView and...
-    func removeAddNoteButton(_ bubble:Bubble) {
-        if let bubbleRank = secretary.addNoteButton_bRank, bubbleRank == Int(bubble.rank) {
-            secretary.setAddNoteButton_bRank(to: nil)
         }
     }
     
@@ -169,17 +217,12 @@ extension ViewModel {
     
     ///createds calendar events only if that bubble has calendar, otherwise it only saves to coredata
     private func createCalEventAndSave(for bubble:Bubble) {
-        let calendarAccessNotRevoked = calManager.calendarAccessStatus != .revoked
-        let bubbleHasSessions = !bubble.sessions_.isEmpty
+        guard bubble.isCalendarEnabled else { return }
         
-        if bubbleHasSessions && bubble.hasCalendar && calendarAccessNotRevoked {
-            calManager.createNewEvent(for: bubble.lastSession)
-            
-            //display Cal Event Added to Calendar App confirmation to the user
-            DispatchQueue.main.async {
-                self.secretary.confirm_CalEventCreated = bubble.rank
-                delayExecution(.now() + 3) { self.secretary.confirm_CalEventCreated = nil }
-            }
+        calManager.eventify(bubble.lastSession)
+        
+        DispatchQueue.main.async {
+            self.secretary.showConfirmEventCreated(bubble.rank)
         }
     }
     
@@ -194,17 +237,18 @@ extension ViewModel {
     }
     
     // MARK: Observers
-    func observe_KillSDB() {
-        center.addObserver(forName: .killSDB, object: nil, queue: nil) {[weak self] in
+    func observe_KillDelayBubble() {
+        center.addObserver(forName: .killDelayBubble, object: nil, queue: nil) {[weak self] in
             guard
                 let rank = $0.userInfo?["rank"] as? Int64,
-                let startCorrection = $0.userInfo?["startCorrection"] as? TimeInterval,
-                let bubble = self?.bubble(for: Int(rank))
+                let delayCorrection = $0.userInfo?["startCorrection"] as? TimeInterval,
+                let timer = self?.bubble(for: Int(rank))
             else { return }
             
             //start bubble and remove start delay
-            self?.removeStartDelay(for: bubble)
-            self?.toggle(bubble, startDelayCompensation: startCorrection)
+            self?.removeDelay(for: timer)
+            
+            self?.start(timer, delayCorrection)
         }
     } //18
     
@@ -229,7 +273,7 @@ extension ViewModel {
                 let initialClock = $0.userInfo!["initialClock"] as? Int else { return }
             
             UserFeedback.singleHaptic(.heavy)
-            self?.changeTracker(bubble, to: .timer(Float(initialClock)))
+            self?.change(bubble, to: .timer(Float(initialClock)))
             self?.addToHistory(duration: Float(initialClock))
         }
     } //20
@@ -280,29 +324,36 @@ extension ViewModel {
     }
     
     // MARK: - Little Helpers
-    var fiveSecondsBubble:Bubble? { bubble(for: secretary.addNoteButton_bRank) }
-    
-    func refreshOrdinaryBubbles() {
-        let ranks = secretary.bubblesReport.colors.map { Int($0.id) }
-        
-        DispatchQueue.global().async {
-            if !self.secretary.showFavoritesOnly {
-                let bubbles = ranks.compactMap { self.bubble(for: $0) }
-                bubbles.forEach { $0.coordinator.update(.showAll) }
-            }
-        }
-    }
-    
     func refreshWidgets() {
         saveWidgetData {
             WidgetCenter.shared.reloadTimelines(ofKind: "Fused")
         }
     }
     
+    private func saveEmptyWidget() {
+        let bubbleData = BubbleData(value: -200,
+                                    isTimer: false,
+                                    isRunning: false,
+                                    color: nil)
+        let data = try? JSONEncoder().encode(bubbleData)
+        UserDefaults.shared.setValue(data, forKey: "bubbleData")
+    }
+    
     private func saveWidgetData(_ completion: @escaping () -> Void) {
         guard
             let rank = secretary.mostRecentlyUsedBubble,
-            let bubble = bubble(for: Int(rank)) else { return  }
+            let bubble = bubble(for: Int(rank)) else {
+            //empty widget infos means no widget installed
+            WidgetCenter.shared.getCurrentConfigurations { [weak self] result in
+                if let widgetInfos = try? result.get(), !widgetInfos.isEmpty {
+                    //at least one widget installed, but no bubble has widget
+                    
+                    self?.saveEmptyWidget()
+                    completion()
+                }
+            }
+            return
+        }
         
         let bubbleData:BubbleData
         
@@ -315,12 +366,14 @@ extension ViewModel {
             
             bubbleData = BubbleData(value: value,
                                     isTimer: bubble.isTimer,
-                                    isRunning: bubble.isRunning)
+                                    isRunning: bubble.isRunning,
+                                    color: bubble.color)
             
         } else {
             bubbleData = BubbleData(value: bubble.currentClock,
                                     isTimer: bubble.isTimer,
-                                    isRunning: bubble.isRunning)
+                                    isRunning: bubble.isRunning,
+                                    color: bubble.color)
         }
         
         let data = try? JSONEncoder().encode(bubbleData)
@@ -375,22 +428,21 @@ extension ViewModel {
                 newBubble.isNoteHidden = false
             }
             PersistenceController.shared.save(bContext)
-            self.secretary.updateBubblesReport(.create(newBubble))
         }
     } //8
     
-    func changeTracker(_ bubble:Bubble, to kind:Bubble.Kind) {
+    func change(_ bubble:Bubble, to kind:Bubble.Kind) {
         
         let bContext = PersistenceController.shared.bContext
         let objID = bubble.objectID
         
-        //pause bubble first and then change tracker
+        //pause bubble first and then change bubble
         if bubble.isRunning { toggle(bubble) }
         
         bContext.perform {
             let theBubble = PersistenceController.shared.grabObj(objID) as! Bubble
             
-            theBubble.lastSession?.handleTrackerID(.increment)
+            theBubble.lastSession?.handleBubbleID(.increment)
             
             switch kind {
                 case .timer(let initialClock):
@@ -405,7 +457,7 @@ extension ViewModel {
             PersistenceController.shared.save(bContext) {
                 DispatchQueue.main.async {
                     bubble.coordinator.isTimer = kind != .stopwatch
-                    bubble.coordinator.refresh(.trackerChanged)
+                    bubble.coordinator.refreshBubble(on: .change)
                 }
             }
         }
@@ -413,9 +465,9 @@ extension ViewModel {
     
     func deleteBubble(_ bubble:Bubble) {
         // FIXME: - ⚠️
-        if !path.isEmpty { withAnimation(.easeInOut) { path = [] }} //⚠️
+        if !path.isEmpty { path = [] } //⚠️
         
-        setTimerNotification(.delete, for: bubble)
+        self.setNotification(of: bubble, for: .delete)
         
         //write empty string to the shared file that stores the mostRecentlyUsedBubbleRank
         let hasWidget = secretary.mostRecentlyUsedBubble == bubble.rank
@@ -424,20 +476,17 @@ extension ViewModel {
         let bContext = PersistenceController.shared.bContext
         let objID = bubble.objectID
         
-        if self.secretary.showFavoritesOnly && self.secretary.bubblesReport.pinned == 1 {
-            self.secretary.showFavoritesOnly = false
-        } //17
-        
         bubble.managedObjectContext?.perform {
             bubble.coordinator.update(for: .bubbleDelete)
             bubble.pairBubbleCellCoordinator.update(.user(.deleteBubble))
         }
         
         bContext.perform {
-            let thisBubble = bContext.object(with: objID) as! Bubble
+            let bBubble = bContext.object(with: objID) as! Bubble
             
-            bContext.delete(thisBubble) //13
-            self.secretary.updateBubblesReport(.delete(thisBubble))
+            self.calManager.deleteEvent(with: bBubble.lastSession?.temporaryEventID)
+            
+            bContext.delete(bBubble) //13
             
             PersistenceController.shared.save(bContext) {
                 delayExecution(self.delay) {
@@ -450,13 +499,15 @@ extension ViewModel {
     ///delete history. delete all sessions and pairs and make it brandNew
     func reset(_ bubble:Bubble) {
         
-        setTimerNotification(.reset, for: bubble)
+        setNotification(of: bubble, for: .reset)
         
         let objID = bubble.objectID
         let bContext = PersistenceController.shared.bContext
         
         bContext.perform {
             let thisBubble = bContext.object(with: objID) as! Bubble
+            
+            self.calManager.deleteEvent(with: thisBubble.lastSession?.temporaryEventID)
             
             thisBubble.created = Date()
             thisBubble.currentClock = thisBubble.initialClock
@@ -481,13 +532,12 @@ extension ViewModel {
             
             let changes = [NSDeletedObjectsKey : ids]
             
-            delayExecution(self.delay) {
-                NSManagedObjectContext.mergeChanges(
-                    fromRemoteContextSave: changes, into: [PersistenceController.shared.viewContext, PersistenceController.shared.bContext]) //12
-                DispatchQueue.main.async {
-                    bubble.coordinator.update(for: .reset)
-                    bubble.pairBubbleCellCoordinator.update(.user(.reset))
-                }
+            NSManagedObjectContext.mergeChanges(
+                                fromRemoteContextSave: changes, into: [PersistenceController.shared.viewContext, PersistenceController.shared.bContext]) //12
+            
+            DispatchQueue.main.async {
+                bubble.coordinator.update(for: .reset)
+                bubble.pairBubbleCellCoordinator.update(.user(.reset))
             }
         }
     }
@@ -504,8 +554,6 @@ extension ViewModel {
             bContext.perform {
                 let thisBubble = PersistenceController.shared.grabObj(objID) as! Bubble
                 thisBubble.color = newColor
-                
-                self.secretary.updateBubblesReport(.colorChange(thisBubble))
                 
                 //save changes to CoreData using bContext and update UI
                 PersistenceController.shared.save(bContext) {
@@ -528,17 +576,20 @@ extension ViewModel {
         
         bContext.perform {
             let thisBubble = bContext.object(with: bubbleID) as! Bubble
-            let thisSession = bContext.object(with: sessionID) as! Session
-            
+            let bSession = bContext.object(with: sessionID) as! Session
+                        
             //1. set property here
-            let isCurrentSession = (thisBubble.lastSession == thisSession)
+            let isCurrentSession = (thisBubble.lastSession == bSession)
             
-            bContext.delete(thisSession) //2. wait until context saves
+            let sessionEnded = session.isEnded
+            self.calManager.deleteEvent(with: sessionEnded ? bSession.eventID : bSession.temporaryEventID)
+            
+            bContext.delete(bSession) //2. wait until context saves
             
             if isCurrentSession {
                 thisBubble.currentClock = thisBubble.initialClock
                 if thisBubble.isTimer{
-                    self.setTimerNotification(.endSession, for: bubble)
+                    self.setNotification(of: bubble, for: .closeSession)
                 }
             }
             
@@ -555,7 +606,7 @@ extension ViewModel {
         }
     }
     
-    func endSession(_ bubble:Bubble) {
+    func closeSession(_ bubble:Bubble) {
         if bubble.state == .brandNew {
             UserFeedback.singleHaptic(.soft)
             return
@@ -563,7 +614,7 @@ extension ViewModel {
         
         UserFeedback.singleHaptic(.heavy)
         
-        setTimerNotification(.endSession, for: bubble)
+        setNotification(of: bubble, for: .closeSession)
         
         secretary.setAddNoteButton_bRank(to: nil) //1
         
@@ -571,27 +622,30 @@ extension ViewModel {
         let bContext = PersistenceController.shared.bContext
         
         bContext.perform {
-            let thisBubble = PersistenceController.shared.grabObj(objID) as! Bubble
+            let bBubble = PersistenceController.shared.grabObj(objID) as! Bubble
+            
+            self.calManager.deleteEvent(with: bBubble.lastSession?.temporaryEventID)
             
             //reset bubble clock
-            thisBubble.currentClock = thisBubble.initialClock
-            thisBubble.lastSession!.isEnded = true
+            bBubble.currentClock = bBubble.initialClock
+            bBubble.lastSession!.isEnded = true
             
             //when user ended session, was bubble still running?
-            let bubbleIsRunning = (thisBubble.lastPair!.pause == nil)
+            let bubbleIsRunning = (bBubble.lastPair!.pause == nil)
             
             //1.close lastPair and then compute durations for 2.lastPair and 3.lastSession
             if bubbleIsRunning {
-                thisBubble.lastPair!.pause = Date() //1
-                thisBubble.lastPair?.computeDuration(.atEndSession) //2
-                thisBubble.lastSession?.computeDuration() //3
+                bBubble.lastPair!.pause = Date() //1
+                bBubble.lastPair?.computeDuration(.atCloseSession) //2
+                bBubble.lastSession?.computeDuration() //3
             }
             
             PersistenceController.shared.save(bContext) { //14
-                self.createCalEventAndSave(for: thisBubble)
-                delayExecution(self.delay) { //15
-                    bubble.coordinator.update(for: .endSession)
-                    bubble.pairBubbleCellCoordinator.update(.user(.endSession))
+                self.createCalEventAndSave(for: bBubble)
+                
+                DispatchQueue.main.async { //15
+                    bubble.coordinator.update(for: .closeSession)
+                    bubble.pairBubbleCellCoordinator.update(.user(.closeSession))
                 }
             }
         }
@@ -600,6 +654,8 @@ extension ViewModel {
     //delete BubbleSticky in List
     func deleteBubbleNote(_ savedNote:BubbleSavedNote?) {
         guard let savedNote = savedNote else { return }
+        
+        UserFeedback.singleHaptic(.soft)
         
         DispatchQueue.global().async {
             let bContext = PersistenceController.shared.bContext
@@ -631,7 +687,7 @@ extension ViewModel {
     
     // TODO: To verify it works
     //delete PairSticky
-    func deleteStickyNote(for pair:Pair) {
+    func deleteLapNote(of pair:Pair) {
         
         let objID = pair.objectID
         let bContext = PersistenceController.shared.bContext
@@ -641,10 +697,8 @@ extension ViewModel {
             thisPair.note = nil
             
             PersistenceController.shared.save(bContext) {
-                delayExecution(self.delay) {
-                    pair.managedObjectContext?.perform {
-                        CalendarManager.shared.updateExistingEvent(.notes(pair.session!))
-                    }
+                if let bubble = thisPair.session?.bubble {
+                    CalendarManager.shared.updateEvent(.title(bubble))
                 }
             }
         }
@@ -659,85 +713,65 @@ extension ViewModel {
                 let bubble = object as! Bubble
                 let objID = bubble.objectID
                 
-                bubble.managedObjectContext?.perform {
+                PersistenceController.shared.bContext.perform {
                     note.removeWhiteSpaceAtBothEnds()
-                    let theBubble = PersistenceController.shared.grabObj(objID) as! Bubble
-                    theBubble.note = note
-                    theBubble.isNoteHidden = false
+                    let bBubble = PersistenceController.shared.grabObj(objID) as! Bubble
+                    bBubble.name = note
+                    bBubble.isNoteHidden = false
                     
                     //add new item to bubbleHistory
-                    let newHistoryItem = BubbleSavedNote(context: theBubble.managedObjectContext!)
+                    let newHistoryItem = BubbleSavedNote(context: bBubble.managedObjectContext!)
                     newHistoryItem.date = Date()
                     newHistoryItem.note = note
-                    theBubble.addToHistory(newHistoryItem)
+                    bBubble.addToHistory(newHistoryItem)
                     
-                    PersistenceController.shared.save(bubble.managedObjectContext)
-                    
-                    delayExecution(self.delay) {
-                        CalendarManager.shared.updateExistingEvent(.title(bubble))
+                    PersistenceController.shared.save(bBubble.managedObjectContext) {
+                        self.calManager.updateEvent(.title(bBubble))
                     }
                 }
                 
             case "Pair" :
                 let pair = object as! Pair
                 
-                //it's bContext since pair is coming from PairStickyNoteLost.saveNoteToCoredata
-                pair.managedObjectContext?.perform {
-                    note.removeWhiteSpaceAtBothEnds()
-                    
-                    pair.note = note
-                    pair.isNoteHidden = false
-                    
-                    //add new item to bubbleHistory
-                    let pairSavedNote = PairSavedNote(context: pair.managedObjectContext!)
-                    pairSavedNote.date = Date()
-                    pairSavedNote.note = note
-                    pairSavedNote.bubble = pair.session?.bubble
-                    pair.addToHistory(pairSavedNote)
-                    
-                    PersistenceController.shared.save(pair.managedObjectContext)
-                    
-                    delayExecution(self.delay) {
-                        CalendarManager.shared.updateExistingEvent(.notes(pair.session!))
-                    }
-                }
+                pair.note = note
+                pair.isNoteHidden = false
+                
+                //add new item to bubbleHistory
+                let pairSavedNote = PairSavedNote(context: pair.managedObjectContext!)
+                pairSavedNote.date = Date()
+                pairSavedNote.note = note
+                pairSavedNote.bubble = pair.session?.bubble
+                pair.addToHistory(pairSavedNote)
                 
             default: return
         }
     }
     
     // MARK: - StartDelayBubble
-    func removeStartDelay(for bubble:Bubble?)  {
+    func removeDelay(for bubble:Bubble?)  {
         guard let bubble = bubble else { return }
         
         let bContext = PersistenceController.shared.bContext
         let objID = bubble.objectID
         
         bContext.perform {
-            //grab background context Bubble object
-            //make sure its startDelay is set
-            //set bBubble.sdb to nil
-            //ask background context to delete the bubble
-            //back on mainQueue do visual updates
-            //save changes on bContext
-            
             guard
                 let thisBubble = PersistenceController.shared.grabObj(objID) as? Bubble,
-                let startDelayBubble = thisBubble.startDelayBubble
+                let delayBubble = thisBubble.delayBubble
             else { return }
             
-            thisBubble.startDelayBubble = nil //sdb removed from memory
-            bContext.delete(startDelayBubble) //sdb removed from database
+            thisBubble.delayBubble = nil //sdb removed from memory
+            bContext.delete(delayBubble) //sdb removed from database
             
             DispatchQueue.main.async {
-                bubble.startDelayBubble?.coordinator.update(.user(.pause))
-                bubble.startDelayBubble?.coordinator = nil
+                bubble.delayBubble?.coordinator.update(.user(.pause))
+                bubble.delayBubble?.coordinator = nil
             }
             PersistenceController.shared.save(bContext)
         }
     }
     
-    func setStartDelay(_ delay:Float, for bubble:Bubble?) {
+    func setDelay(_ delay:Float, for bubble:Bubble?) {
         guard let bubble = bubble, bubble.state != .running else { return }
         
         let bContext = PersistenceController.shared.bContext
@@ -746,30 +780,30 @@ extension ViewModel {
         bContext.perform {
             let thisBubble = PersistenceController.shared.grabObj(objID) as! Bubble
             
-            if let sdb = thisBubble.startDelayBubble {
+            if let sdb = thisBubble.delayBubble {
                 //startDelay exists already
                 //remove existing startDelay
                 
                 DispatchQueue.main.async {
-                    bubble.startDelayBubble?.coordinator.update(.user(.reset))
+                    bubble.delayBubble?.coordinator.update(.user(.reset))
                 }
-                thisBubble.startDelayBubble = nil
+                thisBubble.delayBubble = nil
                 bContext.delete(sdb)
             } else {
                 
             }
             
             //create SDB
-            let sdb = StartDelayBubble(context: bContext)
+            let sdb = DelayBubble(context: bContext)
             sdb.created = Date()
-            sdb.initialClock = delay
-            sdb.currentClock = delay
-            thisBubble.startDelayBubble = sdb
+            sdb.initialDelay = delay
+            sdb.currentDelay = delay
+            thisBubble.delayBubble = sdb
             
             PersistenceController.shared.save(bContext)
             
             DispatchQueue.main.async {
-                let coordinator = bubble.startDelayBubble?.coordinator
+                let coordinator = bubble.delayBubble?.coordinator
                 if let cancellabble = coordinator?.cancellable, !cancellabble.isEmpty {
                     coordinator?.update(.user(.reset))
                 }
@@ -778,10 +812,10 @@ extension ViewModel {
         }
     } //19
     
-    func toggleSDBubble(_ bubble:Bubble?) {
+    func toggleDelay(_ bubble:Bubble?) {
         guard
             let bubble = bubble,
-            let sdb = bubble.startDelayBubble else { return }
+            let sdb = bubble.delayBubble else { return }
         
         let bContext = PersistenceController.shared.bContext
         let objID = sdb.objectID
@@ -789,7 +823,9 @@ extension ViewModel {
         UserFeedback.singleHaptic(.soft)
         
         bContext.perform {
-            let theSDB = PersistenceController.shared.grabObj(objID) as! StartDelayBubble
+            let theSDB = PersistenceController.shared.grabObj(objID) as! DelayBubble
+            let currentDelay = theSDB.currentDelay
+            let bubble = theSDB.bubble
             
             //figure out if it should start or pause
             switch theSDB.state {
@@ -797,9 +833,11 @@ extension ViewModel {
                     return
                     
                 case .brandNew, .paused: //changes to .running
-                    let pair = SDBPair(context: theSDB.managedObjectContext!)
+                    let pair = DelayBubblePair(context: theSDB.managedObjectContext!)
                     pair.start = Date()
                     theSDB.addToPairs(pair)
+                    
+                    self.setNotification(of: bubble, for: .delay(currentDelay))
                     
                     PersistenceController.shared.save(bContext) {
                         DispatchQueue.main.async { sdb.coordinator.update(.user(.start)) }
@@ -814,7 +852,7 @@ extension ViewModel {
                     
                     //update sdb.totalDuration
                     theSDB.totalDuration += lastPair.duration
-                    theSDB.currentClock = theSDB.initialClock - theSDB.totalDuration
+                    theSDB.currentDelay = theSDB.initialDelay - theSDB.totalDuration
                     
                     PersistenceController.shared.save(bContext) {
                         DispatchQueue.main.async { sdb.coordinator.update(.user(.pause)) }
@@ -876,11 +914,12 @@ extension ViewModel {
     }
 }
 
+//MARK: - USER ASSIST
 extension ViewModel {
     func addExampleLapNotes(_ pair:Pair) {
         let examples = [
-            "🚲 Bike Ride", "🍏 Groceries", "❤️ Run", "🌞 Walk", "🛍️ Shopping",
-            "🤓 Homework", "☕️ Break", "🍺 Night Out", "🥵 Work"
+            "🚲 Bike Ride", "🍏 Groceries", "❤️ Run",
+            "🤓 Homework", "☕️ Break", "🐶 Walk", "🎾 Tennis"
         ]
         let bContext = PersistenceController.shared.bContext
         
@@ -891,7 +930,58 @@ extension ViewModel {
                 newNote.date = Date()
             }
             
-            PersistenceController.shared.save(bContext) {
+            PersistenceController.shared.save(bContext)
+        }
+    }
+    
+    func addExampleBubbleNotes(_ bubble:Bubble) {
+        let examples = [
+            "🌤️ Out", "🥇 Workout", "🤓 Work",
+            "🏫 Learn", "🎤 Sing", "📚 Read", "🧘🏻 Meditate"
+        ]
+        let bContext = PersistenceController.shared.bContext
+        
+        bContext.perform {
+            examples.forEach {
+                let newNote = BubbleSavedNote(context: bContext)
+                newNote.note = $0
+                newNote.date = Date()
+            }
+            
+            PersistenceController.shared.save(bContext)
+        }
+    }
+    
+    func addExampleBubble() {
+        let bContext = PersistenceController.shared.bContext
+        
+        bContext.perform {
+            let newBubble = Bubble(context: bContext)
+            newBubble.created = Date()
+            
+            //stopwatch
+            newBubble.initialClock = 0
+            newBubble.currentClock = 0
+            
+            newBubble.color = "red1"
+            newBubble.rank = Int64(UserDefaults.generateRank())
+            
+            newBubble.note_ = Names.testBubbleName
+            newBubble.isNoteHidden = false
+            
+            PersistenceController.shared.save(bContext)
+        }
+    }
+    
+    func manageExample(_ bubble:Bubble) {
+        if bubble.name == Names.testBubbleName {
+            if path.isEmpty {
+                var transaction = Transaction()
+                transaction.disablesAnimations = true
+                
+                withTransaction(transaction) {
+                    path = [bubble]
+                }
             }
         }
     }

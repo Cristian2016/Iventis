@@ -26,7 +26,7 @@ struct Separator: View {
                         .offset(x: 8)
                 }
         }
-        .foregroundStyle(.primary)
+        .foregroundStyle(Color.label2)
         .padding([.leading, .trailing], 2)
     }
 }

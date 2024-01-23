@@ -8,27 +8,29 @@
 import SwiftUI
 
 extension Color {
-    static let friendlyNames = ["sourCherry":"Sour Cherry",
-                                "mint" : "Mint",
-                                "slateBlue" : "Slate Blue",
-                                "gray" : "Gray",
-                                "ultramarine" : "Ultramarine",
-                                "yellow" : "Yellow",
-                                "red" : "Red",
-                                "blue" : "Blue",
-                                "bubbleGum" : "Bubblegum",
-                                "green" : "Green",
-                                "black" : "Black",
-                                "magenta" : "Magenta",
-                                "purple" : "Purple",
-                                "orange" : "Orange",
-                                "aqua" : "Aqua",
-                                "byzantium" : "Byzantium",
-                                "pink" : "Pink",
-                                "aubergine" : "Aubergine",
-                                "cayenne" : "Cayenne",
-                                "mocha" : "Mocha",
-                                "darkGreen" : "Dark Green"
+    static let friendlyNames = [
+        "sourCherry":"Sour Cherry",
+        "mint1" : "Mint",
+        "slateBlue" : "Slate Blue",
+        "gray1" : "Gray",
+        "ultramarine" : "Ultramarine",
+        "yellow1" : "Yellow",
+        "red1" : "Red",
+        "blue1" : "Blue",
+        "bubbleGum" : "Bubblegum",
+        "green1" : "Green",
+        "black1" : "Black",
+        "magenta1" : "Magenta",
+        "purple1" : "Purple",
+        "orange1" : "Orange",
+        "aqua" : "Aqua",
+        "byzantium" : "Byzantium",
+        "pink1" : "Pink",
+        "aubergine" : "Aubergine",
+        "cayenne" : "Cayenne",
+        "mocha" : "Mocha",
+        "brown1" : "Brown",
+        "darkGreen" : "Dark Green"
     ]
     
     static func friendlyBubbleColorName(for bubbleColorName:String?) -> String {
@@ -40,19 +42,17 @@ extension Color {
         return colorName
     }
     
-    struct Tricolor:Hashable, Identifiable {
+    struct Bicolor:Hashable, Identifiable {
         let description:String
-        let hr:Color //light
-        let min:Color //medium
-        let sec:Color //intense
+        var color:Color { Color(description)}
         var id:String { description }
     }
     
     ///same order in Palette and MoreOptionsView. Both views are reading from this array
-    static let triColors = [
-        Bubble.red, Bubble.mocha, Bubble.yellow,
+    static let bicolors = [
+        Bubble.orange, Bubble.brown, Bubble.yellow,
         Bubble.green, Bubble.mint, Bubble.ultramarine,
-        Bubble.slateBlue, Bubble.sourCherry, Bubble.orange,
+        Bubble.slateBlue, Bubble.sourCherry, Bubble.red,
         Bubble.gray, Bubble.black,
         Bubble.blue, Bubble.bubbleGum, Bubble.cayenne,
         Bubble.byzantium,  Bubble.purple, Bubble.aqua,
@@ -60,105 +60,85 @@ extension Color {
     ]
     
     ///to use with Grid and GridRow
-    static let paletteTriColors = [
-        [Bubble.red, Bubble.mocha, Bubble.yellow, Bubble.green],
+    static let paletteBicolors = [
+        [Bubble.orange, Bubble.brown, Bubble.yellow, Bubble.green],
         [Bubble.mint, Bubble.ultramarine, Bubble.slateBlue, Bubble.sourCherry],
-        [Bubble.orange,Bubble.gray, Bubble.black, Bubble.blue],
+        [Bubble.red,Bubble.gray, Bubble.black, Bubble.blue],
         [Bubble.bubbleGum, Bubble.cayenne, Bubble.byzantium,  Bubble.purple],
         [Bubble.aqua, Bubble.pink, Bubble.aubergine, Bubble.magenta]
     ]
     
     ///⚠️ struct Color.Bubble vs CoreData class Bubble
     struct Bubble {
-        ///it will not show up in Color.tricolors
-        static let clearButtonRed = Tricolor(description: Name.clearButtonRed.rawValue,
-                                   hr:Color(#colorLiteral(red: 1, green: 0.6340145469, blue: 0.603394568, alpha: 1)), min: Color(#colorLiteral(red: 0.581685245, green: 0.06705204397, blue: 0.001516064513, alpha: 1)), sec: Color(#colorLiteral(red: 0.9907863736, green: 0.2364294529, blue: 0.187119931, alpha: 1)))
+        ///it will not show up in Color.bicolors
+        static let clearButtonRed = Bicolor(description: Name.clearButtonRed.rawValue)
         
         //row 1
-        static let cayenne = Tricolor(description: Name.cayenne.rawValue,
-                                   hr:Color(#colorLiteral(red: 0.8052194715, green: 0.5541458726, blue: 0.5246914029, alpha: 1)), min: Color(#colorLiteral(red: 0.581685245, green: 0.06705204397, blue: 0.001516064513, alpha: 1)), sec: Color(#colorLiteral(red: 0.581685245, green: 0.06705204397, blue: 0.001516064513, alpha: 1)))
-        static let aubergine = Tricolor(description: Name.aubergine.rawValue,
-                                     hr:Color(#colorLiteral(red: 0.6648913622, green: 0.5564103723, blue: 0.7883563638, alpha: 1)), min: Color(#colorLiteral(red: 0.3245052695, green: 0.1053605601, blue: 0.5749494433, alpha: 1)), sec: Color(#colorLiteral(red: 0.3245052695, green: 0.1053605601, blue: 0.5749494433, alpha: 1)))
+        static let cayenne = Bicolor(description: Name.cayenne.rawValue)
+        static let aubergine = Bicolor(description: Name.aubergine.rawValue)
         
-        static let mint = Tricolor(description: Name.mint.rawValue,
-                                hr:Color(#colorLiteral(red: 0.5574920483, green: 0.829237325, blue: 0.6811052085, alpha: 1)), min: Color(#colorLiteral(red: 0, green: 0.9633229375, blue: 0.7392000556, alpha: 1)), sec: Color(#colorLiteral(red: 0, green: 0.838650167, blue: 0.5155212283, alpha: 1)))
-        static let slateBlue = Tricolor(description: Name.slateBlue.rawValue,
-                                     hr: Color(#colorLiteral(red: 0.7082151771, green: 0.7418351769, blue: 0.996162951, alpha: 1)), min: Color(#colorLiteral(red: 0.4915649891, green: 0.5337389708, blue: 0.9743657708, alpha: 1)), sec: Color(#colorLiteral(red: 0.4223788977, green: 0.4790267348, blue: 0.9767156243, alpha: 1)))
-        static let sourCherry = Tricolor(description: Name.sourCherry.rawValue,
-                                      hr: Color(#colorLiteral(red: 0.8802435994, green: 0.5620880127, blue: 0.6864048243, alpha: 1)), min: Color(#colorLiteral(red: 0.8373516798, green: 0.06469952315, blue: 0.41300717, alpha: 1)), sec: Color(#colorLiteral(red: 0.7311170697, green: 0.05191928893, blue: 0.3622907996, alpha: 1)))
+        static let mint = Bicolor(description: Name.mint1.rawValue)
+        static let slateBlue = Bicolor(description: Name.slateBlue.rawValue)
+        static let sourCherry = Bicolor(description: Name.sourCherry.rawValue)
         
         //row 2
-        static let gray = Tricolor(description: Name.gray.rawValue,
-                                  hr: Color(#colorLiteral(red: 0.7647058964, green: 0.7647060156, blue: 0.7647058964, alpha: 1)), min: Color(#colorLiteral(red: 0.6000001431, green: 0.6000000834, blue: 0.6000000834, alpha: 1)), sec: Color(#colorLiteral(red: 0.5333333611, green: 0.5333333611, blue: 0.5333333611, alpha: 1)))
-        static let ultramarine = Tricolor(description: Name.ultramarine.rawValue,
-                                       hr: Color(#colorLiteral(red: 0.553342402, green: 0.6936868429, blue: 1, alpha: 1)), min: Color(#colorLiteral(red: 0.07215475291, green: 0.03721671551, blue: 0.5605530143, alpha: 1)), sec: Color("ultramarine"))
-        static let yellow = Tricolor(description: Name.yellow.rawValue,
-                                 hr: Color(#colorLiteral(red: 0.8093663801, green: 0.7200534332, blue: 0.4129550766, alpha: 1)), min: Color(#colorLiteral(red: 0.9715102315, green: 0.8551748395, blue: 0, alpha: 1)), sec: Color(#colorLiteral(red: 0.9762087464, green: 0.8017882705, blue: 0.01509543974, alpha: 1)))
+        static let gray = Bicolor(description: Name.gray1.rawValue)
+        static let ultramarine = Bicolor(description: Name.ultramarine.rawValue)
+        static let yellow = Bicolor(description: Name.yellow1.rawValue)
         
         //row 3
-        static let red = Tricolor(description: Name.red.rawValue,
-                               hr: Color(#colorLiteral(red: 0.9993676543, green: 0.515832901, blue: 0.4665791392, alpha: 1)), min: Color(#colorLiteral(red: 0.9752207398, green: 0.301009059, blue: 0.2363895774, alpha: 1)), sec: Color("red"))
-        static let blue = Tricolor(description: Name.blue.rawValue,
-                               hr: Color(#colorLiteral(red: 0.6118832231, green: 0.8855128884, blue: 1, alpha: 1)), min: Color(#colorLiteral(red: 0.01006806083, green: 0.6884089112, blue: 0.852398932, alpha: 1)), sec: Color(#colorLiteral(red: 0.01006806083, green: 0.6884089112, blue: 0.852398932, alpha: 1)))
-        static let bubbleGum = Tricolor(description: Name.bubbleGum.rawValue,
-                                     hr: Color(#colorLiteral(red: 1, green: 0.6671735644, blue: 0.813333869, alpha: 1)), min: Color(#colorLiteral(red: 1, green: 0.4408499599, blue: 0.6894205213, alpha: 1)), sec: Color(#colorLiteral(red: 0.996430099, green: 0.3117666543, blue: 0.6224691272, alpha: 1)))
+        static let red = Bicolor(description: Name.red1.rawValue)
+        static let blue = Bicolor(description: Name.blue1.rawValue)
+        static let bubbleGum = Bicolor(description: Name.bubbleGum.rawValue)
         
         //row 4
-        static let green = Tricolor(description: Name.green.rawValue,
-                                 hr: Color(#colorLiteral(red: 0.5665775537, green: 0.7303215861, blue: 0.5441692472, alpha: 1)), min: Color(#colorLiteral(red: 0.223775506, green: 0.6559311152, blue: 0.5607993007, alpha: 1)), sec: Color(#colorLiteral(red: 0.223775506, green: 0.6559311152, blue: 0.5607993007, alpha: 1)))
-        static let black = Tricolor(description: Name.black.rawValue,
-                                    hr: Color(#colorLiteral(red: 0.4745098948, green: 0.4745098948, blue: 0.4745098948, alpha: 1)), min: Color("black"), sec: Color("black"))
-        static let magenta = Tricolor(description: Name.magenta.rawValue,
-                                   hr: Color(#colorLiteral(red: 1, green: 0.6922855973, blue: 0.9857769608, alpha: 1)), min: Color(#colorLiteral(red: 0.9893129468, green: 0.4895346761, blue: 0.9776270986, alpha: 1)), sec: Color(#colorLiteral(red: 0.9892597795, green: 0.3731681108, blue: 0.9725615382, alpha: 1)))
+        static let green = Bicolor(description: Name.green1.rawValue)
+        static let black = Bicolor(description: Name.black1.rawValue)
+        static let magenta = Bicolor(description: Name.magenta1.rawValue)
         
         //row 5
-        static let purple = Tricolor(description: Name.purple.rawValue,
-                                  hr: Color(#colorLiteral(red: 0.8372673392, green: 0.5888972282, blue: 0.9974243045, alpha: 1)), min: Color(#colorLiteral(red: 0.72523278, green: 0.255584538, blue: 0.983091414, alpha: 1)), sec: Color(#colorLiteral(red: 0.6532509923, green: 0.1514221728, blue: 0.9810264707, alpha: 1)))
-        static let orange = Tricolor(description: Name.orange.rawValue,
-                                  hr: Color(#colorLiteral(red: 1, green: 0.6843567491, blue: 0.5630380511, alpha: 1)), min: Color(#colorLiteral(red: 0.9978527427, green: 0.4815151691, blue: 0.0934284851, alpha: 1)), sec: Color(#colorLiteral(red: 0.9940095544, green: 0.3513067961, blue: 0, alpha: 1)))
+        static let purple = Bicolor(description: Name.purple1.rawValue)
+        static let orange = Bicolor(description: Name.orange1.rawValue)
         
         //row 6
-        static let aqua = Tricolor(description: Name.aqua.rawValue,
-                                hr: Color(#colorLiteral(red: 0.5478085039, green: 0.8174562656, blue: 0.8288432138, alpha: 1)), min: Color(#colorLiteral(red: 0.003376292763, green: 0.9073271751, blue: 0.9472805858, alpha: 1)), sec: Color(#colorLiteral(red: 0, green: 0.855682075, blue: 0.8874734044, alpha: 1)))
-        static let byzantium = Tricolor(description: Name.byzantium.rawValue,
-                                     hr: Color(#colorLiteral(red: 0.7369340062, green: 0.5903325677, blue: 0.7177190185, alpha: 1)), min: Color(#colorLiteral(red: 0.5355527997, green: 0.2330842912, blue: 0.4949119091, alpha: 1)), sec: Color(#colorLiteral(red: 0.4615408778, green: 0.1781537533, blue: 0.4272875786, alpha: 1)))
-        static let pink = Tricolor(description: Name.pink.rawValue,
-                                hr: Color(#colorLiteral(red: 1, green: 0.6383054852, blue: 0.74250108, alpha: 1)), min: Color(#colorLiteral(red: 0.9777489305, green: 0.4076962173, blue: 0.5763365626, alpha: 1)), sec: Color(#colorLiteral(red: 0.9909614921, green: 0.2357916832, blue: 0.4794922471, alpha: 1)))
-        static let mocha = Tricolor(description: Name.mocha.rawValue,
-                                 hr: Color(#colorLiteral(red: 0.6546627879, green: 0.4379749894, blue: 0.2150397599, alpha: 1)), min: Color(#colorLiteral(red: 0.584002018, green: 0.3206113577, blue: 0, alpha: 1)),sec: Color(#colorLiteral(red: 0.584002018, green: 0.3206113577, blue: 0, alpha: 1)))
+        static let aqua = Bicolor(description: Name.aqua.rawValue)
+        static let byzantium = Bicolor(description: Name.byzantium.rawValue)
+        static let pink = Bicolor(description: Name.pink1.rawValue)
+        static let mocha = Bicolor(description: Name.mocha.rawValue)
+        static let brown = Bicolor(description: Name.brown1.rawValue)
         
         //clear
-        static let clear = Tricolor(description: Name.clear.rawValue,
-                                hr:Color(#colorLiteral(red: 0, green: 0.999099791, blue: 0.8100017905, alpha: 0)), min: Color(#colorLiteral(red: 0, green: 0.9633229375, blue: 0.7392000556, alpha: 0)), sec: Color(#colorLiteral(red: 0, green: 0.838650167, blue: 0.5155212283, alpha: 0)))
+        static let clear = Bicolor(description: Name.clear.rawValue)
     }
     
     enum Name:String {
-        case mint
+        case mint1
         case slateBlue
         case sourCherry
         
-        case gray
+        case gray1
         case ultramarine
-        case yellow
+        case yellow1
         
-        case red
-        case blue
+        case red1
+        case blue1
         case bubbleGum
         
-        case green
-        case black
-        case magenta
+        case green1
+        case black1
+        case magenta1
         
-        case purple
-        case orange
+        case purple1
+        case orange1
         
         case aqua
         case byzantium
-        case pink
+        case pink1
         
         case cayenne
         case aubergine
         case mocha
+        case brown1
         
         case clear
         
@@ -167,31 +147,23 @@ extension Color {
 }
 
 extension Color {
-    static let background = Color("background")
-    
-    ///PairStickyNote background
-    ///white text in light mode, black in dark mode
-    static let background2 = Color("background2")
-    
-    static let background3 = Color("background3")
-    
     static func bubbleColor(forName bubbleColorName:String?) -> Color {
-        (triColors.filter { $0.description == bubbleColorName }.first ?? Color.Bubble.clear).sec
+        return (bicolors.filter { $0.description == bubbleColorName }.first ?? Color.Bubble.clear).color
     }
     
-    static func tricolor(forName bubbleColorName:String?) -> Tricolor {
-        (triColors.filter { $0.description == bubbleColorName }.first ?? Color.Bubble.clear)
+    static func bicolor(forName bubbleColorName:String?) -> Bicolor {
+        (bicolors.filter { $0.description == bubbleColorName }.first ?? Color.Bubble.clear)
     }
     
-    static let emojis = ["yellow":"🟨",
-                              "red":"🟥",
-                              "ultramarine":"🟦",
-                              "green":"🟩",
-                              "orange":"🟧",
-                              "purple":"🟪",
-                              "black":"⬛️",
-                              "gray":"⬜️",
-                              "lightGray":"⬜️"]
+    static let emojis = ["yellow1":"🟨",
+                         "red1":"🟥",
+                         "ultramarine":"🟦",
+                         "green1":"🟩",
+                         "orange1":"🟧",
+                         "purple1":"🟪",
+                         "black1":"⬛️",
+                         "gray1":"⬜️"
+    ]
     
     static func emoji(for colorName:String?) -> String {
         guard let colorName = colorName else { return String() }

@@ -14,7 +14,7 @@ struct CalendarEventCreatedConfirmation: View {
     private var show:Bool { secretary.confirm_CalEventCreated != nil }
     
     var body: some View {
-        ZStack { if show { ConfirmView(content: .eventCreated) }}
+        ZStack { if show { ConfirmOverlay(content: .eventCreated) }}
     }
 }
 
@@ -25,7 +25,7 @@ struct CalendarEventRemovedConfirmation: View {
         ZStack {
             let show = secretary.confirm_CalEventRemoved != nil
             if show {
-                ConfirmView(content: .eventRemoved)
+                ConfirmOverlay(content: .eventRemoved)
             }
         }
     }

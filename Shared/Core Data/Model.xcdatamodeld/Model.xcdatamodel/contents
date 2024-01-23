@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="22522" systemVersion="23D5051b" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="22522" systemVersion="23E5180j" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Bubble" representedClassName=".Bubble" syncable="YES">
         <attribute name="color" optional="YES" attributeType="String" defaultValueString="Cyan"/>
         <attribute name="created" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="currentClock" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES"/>
-        <attribute name="hasCalendar" optional="YES" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
         <attribute name="hasWidget" optional="YES" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
         <attribute name="initialClock" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="isCalendarEnabled" optional="YES" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
         <attribute name="isNoteHidden" optional="YES" attributeType="Boolean" defaultValueString="YES" usesScalarValueType="YES"/>
         <attribute name="isPinned" optional="YES" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
-        <attribute name="note" optional="YES" attributeType="String" defaultValueString=""/>
+        <attribute name="name" optional="YES" attributeType="String"/>
         <attribute name="rank" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="selectedTab" optional="YES" attributeType="String"/>
+        <relationship name="delayBubble" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="DelayBubble" inverseName="bubble" inverseEntity="DelayBubble"/>
         <relationship name="history" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="BubbleSavedNote" inverseName="bubble" inverseEntity="BubbleSavedNote"/>
         <relationship name="sessions" optional="YES" toMany="YES" deletionRule="Cascade" ordered="YES" destinationEntity="Session" inverseName="bubble" inverseEntity="Session"/>
-        <relationship name="startDelayBubble" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="StartDelayBubble" inverseName="bubble" inverseEntity="StartDelayBubble"/>
     </entity>
     <entity name="BubbleSavedNote" representedClassName=".BubbleSavedNote" syncable="YES">
         <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
@@ -26,51 +26,52 @@
             </uniquenessConstraint>
         </uniquenessConstraints>
     </entity>
+    <entity name="DelayBubble" representedClassName=".DelayBubble" syncable="YES">
+        <attribute name="created" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="currentDelay" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="initialDelay" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="totalDuration" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <relationship name="bubble" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Bubble" inverseName="delayBubble" inverseEntity="Bubble"/>
+        <relationship name="pairs" optional="YES" toMany="YES" deletionRule="Cascade" ordered="YES" destinationEntity="DelayBubblePair" inverseName="sdBubble" inverseEntity="DelayBubblePair"/>
+    </entity>
+    <entity name="DelayBubblePair" representedClassName=".DelayBubblePair" syncable="YES">
+        <attribute name="duration" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="pause" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="start" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <relationship name="sdBubble" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="DelayBubble" inverseName="pairs" inverseEntity="DelayBubble"/>
+    </entity>
     <entity name="Pair" representedClassName=".Pair" syncable="YES">
+        <attribute name="bubbleID" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="duration" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="durationAsStrings" optional="YES" attributeType="Binary"/>
         <attribute name="isNoteHidden" optional="YES" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
         <attribute name="note" optional="YES" attributeType="String" defaultValueString=""/>
         <attribute name="pause" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="start" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
-        <attribute name="trackerID" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
-        <relationship name="history" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="PairSavedNote"/>
-        <relationship name="session" optional="YES" maxCount="1" deletionRule="Cascade" ordered="YES" destinationEntity="Session" inverseName="pairs" inverseEntity="Session"/>
+        <relationship name="history" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="PairSavedNote" inverseName="pair" inverseEntity="PairSavedNote"/>
+        <relationship name="session" optional="YES" maxCount="1" deletionRule="Nullify" ordered="YES" destinationEntity="Session" inverseName="pairs" inverseEntity="Session"/>
     </entity>
     <entity name="PairSavedNote" representedClassName=".PairSavedNote" syncable="YES">
         <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="note" optional="YES" attributeType="String"/>
         <relationship name="bubble" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Bubble"/>
+        <relationship name="pair" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Pair" inverseName="history" inverseEntity="Pair"/>
         <uniquenessConstraints>
             <uniquenessConstraint>
                 <constraint value="note"/>
             </uniquenessConstraint>
         </uniquenessConstraints>
     </entity>
-    <entity name="SDBPair" representedClassName=".SDBPair" syncable="YES">
-        <attribute name="duration" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES"/>
-        <attribute name="pause" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
-        <attribute name="start" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
-        <relationship name="sdBubble" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="StartDelayBubble" inverseName="pairs" inverseEntity="StartDelayBubble"/>
-    </entity>
     <entity name="Session" representedClassName=".Session" syncable="YES">
+        <attribute name="bubbleIDCounter" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="created" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="eventID" optional="YES" attributeType="String"/>
         <attribute name="isEnded" optional="YES" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
-        <attribute name="isEventified" optional="YES" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
-        <attribute name="lastTrackerDuration" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="lastBubbleDuration" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="temporaryEventID" optional="YES" attributeType="String"/>
         <attribute name="totalDuration" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES"/>
-        <attribute name="trackerIDCounter" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <relationship name="bubble" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Bubble" inverseName="sessions" inverseEntity="Bubble"/>
         <relationship name="pairs" optional="YES" toMany="YES" deletionRule="Cascade" ordered="YES" destinationEntity="Pair" inverseName="session" inverseEntity="Pair"/>
-    </entity>
-    <entity name="StartDelayBubble" representedClassName=".StartDelayBubble" syncable="YES">
-        <attribute name="created" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
-        <attribute name="currentClock" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES"/>
-        <attribute name="initialClock" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES"/>
-        <attribute name="totalDuration" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES"/>
-        <relationship name="bubble" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Bubble" inverseName="startDelayBubble" inverseEntity="Bubble"/>
-        <relationship name="pairs" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="SDBPair" inverseName="sdBubble" inverseEntity="SDBPair"/>
     </entity>
     <entity name="TimerDuration" representedClassName=".TimerDuration" syncable="YES">
         <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>

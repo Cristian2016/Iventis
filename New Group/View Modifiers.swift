@@ -45,9 +45,7 @@ struct DisableAnimation:ViewModifier { //1
     func body(content: Content) -> some View {
         content
             .transaction {
-                // FIXME: - not sure if it's first or seconds one
-                $0.disablesAnimations = true
-//                $0.animation = nil
+                $0.animation = nil
             }
     }
 }

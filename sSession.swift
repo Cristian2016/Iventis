@@ -23,10 +23,6 @@ final class sSession {
     init(_ bubble:sBubble) {
         self.bubble = bubble
     }
-    
-    deinit {
-        print("sSession deinit")
-    }
 }
 
 @Model
@@ -42,9 +38,5 @@ final class sLap {
     
     init(_ session:sSession) {
         self.session = session
-    }
-    
-    deinit {
-        print("sLap deinit")
     }
 }

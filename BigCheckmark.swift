@@ -16,10 +16,8 @@ extension DurationPickerOverlay {
         var body: some View {
             ZStack {
                 if show {
-                    Button("OK", systemImage: "checkmark.circle.fill") { action() }
-                        .labelStyle(.iconOnly)
-                        .font(.system(size: 120, weight: .ultraLight))
-                        .foregroundStyle(.green)
+                    ClearSaveHintView()
+                        .offset(y: -30)
                 }
             }
         }

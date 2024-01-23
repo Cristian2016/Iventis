@@ -5,8 +5,6 @@ struct BubbleCell: View {
     private let bubble:Bubble
     private let coordinator:BubbleCellCoordinator
     
-    @Environment(Secretary.self) private var secretary
-    
     init(_ bubble:Bubble) {
         self.bubble = bubble
         self.coordinator = bubble.coordinator
@@ -14,7 +12,9 @@ struct BubbleCell: View {
     
     //MARK: -
     @Environment(ViewModel.self) private var viewModel
+    @Environment(Secretary.self) private var secretary
     @Environment(\.scenePhase) private var phase
+    @AppStorage(Storagekey.userFavoritedOnce) private var userFavoritedOnce = false
     
     //MARK: -
     var body: some View {
@@ -52,10 +52,9 @@ struct BubbleCell: View {
                 CalendarSticker().environmentObject(bubble)
             }
             .onTapGesture {
-                viewModel.toggle(bubble) //new
-//                viewModel.toggleStart(bubble)
+                viewModel.toggle(bubble)
             }
-            .onLongPressGesture { viewModel.endSession(bubble) }
+            .onLongPressGesture { viewModel.closeSession(bubble) }
             .overlay(alignment: .topTrailing) { WidgetSymbol(rank: bubble.rank) }
             
             //Three Labels (Hr, Min, Sec)
@@ -78,19 +77,20 @@ struct BubbleCell: View {
                     Circle().fill(.clear)
                         .overlay { secondsLabel }
                         .overlay(alignment: .top) { TimerProgressLabel(bubble: bubble) }
-                        .overlay { StartDelayButton(bubble) }
+                        .overlay { DelayButton(bubble) }
                 }
         }
-        .padding(.init(top: -4, leading: -10, bottom: -4, trailing: -10))
-        .overlay(alignment: .topLeading) { stickyNote }
+        .padding(.init(top: 4, leading: 4, bottom: 4, trailing: 4))
+        .overlay(alignment: .topLeading) { nameLabel }
         .foregroundStyle(.white)
         .onAppear {
-            coordinator.refresh(.onAppear)
+            coordinator.refreshBubble(on: .appear) //super important
+            viewModel.manageExample(bubble)
         }
         .onChange(of: phase) { oldPhase, _ in
             //refresh before bubble enters active phase
             if oldPhase == .background  {
-                coordinator.refresh(.onPhaseChange)
+                coordinator.refreshBubble(on: .phaseChange)
             }
         }
     }
@@ -107,7 +107,14 @@ struct BubbleCell: View {
     }
     
     private var favoriteButton:some View {
-        Button { viewModel.togglePin(bubble) }
+        Button {
+            viewModel.togglePin(bubble)
+            
+            if !userFavoritedOnce {
+                secretary.showFavoritesOnly = true
+                userFavoritedOnce = true
+            }
+        }
     label: { Label { Text(bubble.isPinned ? "Unpin" : "Pin") }
         icon: { Image(systemName: bubble.isPinned ? "pin.slash.fill" : "pin.fill") } }
     .tint(bubble.isPinned ? .gray : .orange)
@@ -124,7 +131,7 @@ struct BubbleCell: View {
     private var controlButton:some View {
         Button {
             secretary.controlBubble(.show(bubble.rank))
-            HintOverlay.Model.shared.topmostView(.control)
+            SmallHelpOverlay.Model.shared.topmostView(.control)
         } label: {
             Label("Control", systemImage: "slider.vertical.3")
         }
@@ -133,16 +140,16 @@ struct BubbleCell: View {
     
     private var moreOptionsButton:some View {
         Button { viewModel.moreOptionsSheetBubble = bubble }
-    label: { Label { Text("More") } icon: { Image.more } }.tint(.lightGray)
+    label: { Label { Text("More") } icon: { Image.more } }.tint(.ultralightGray)
     }
     
     private var noteButtonContent:some View { BubbleNote().environmentObject(bubble) }
     
-    private var stickyNote:some View {
+    private var nameLabel:some View {
         StickyNote (alignment: .leading) { noteButtonContent }
-    dragAction: { viewModel.deleteStickyNote(for: bubble) }
+    dragAction: { viewModel.deleteName(of: bubble) }
         tapAction : { handleNoteTap() }
-            .offset(x: -10, y: -16)
+            .padding(.leading, 4)
     }
     
     private var hrLabel:some View {
@@ -162,9 +169,8 @@ struct BubbleCell: View {
         let objID = bubble.objectID
         
         bContext.perform {
-            UserFeedback.singleHaptic(.light)
-            let thisBubble = PersistenceController.shared.grabObj(objID) as! Bubble
-            thisBubble.isNoteHidden.toggle()
+            let thisBubble = PersistenceController.shared.grabObj(objID) as? Bubble
+            thisBubble?.isNoteHidden.toggle()
             PersistenceController.shared.save(bContext)
         }
     }
@@ -175,7 +181,7 @@ struct BubbleCell: View {
     
     private func showBubbleNotes() {
         UserFeedback.singleHaptic(.light)
-        HintOverlay.Model.shared.topmostView(.bubbleNotes)
+        SmallHelpOverlay.Model.shared.topmostView(.bubbleNotes)
         viewModel.notes_Bubble = bubble
     }
 }

@@ -103,9 +103,6 @@ struct SessionDeleteOverlay: View {
                 delayExecution(.now() + 3) { self.secretary.confirm_CalEventRemoved = nil }
             }
             
-            //⚠️ delete event from calendar first and then delete session from CoreData and Eventify App
-            CalendarManager.shared.deleteEvent(with: input!.session.eventID)
-            
             //make SessionDAAlert go away after 0.3 seconds, so that user sees button tapped animation
             delayExecution(.now() + 0.25) {
                 viewModel.deleteSession(input!.session)

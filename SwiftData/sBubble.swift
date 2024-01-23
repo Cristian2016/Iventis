@@ -42,11 +42,7 @@ final class sBubble {
                 self.currentClock = duration
         }
         
-        let session = sSession(self)
-    }
-    
-    deinit {
-        print("sBubble deinit")
+//        let session = sSession(self)
     }
 }
 

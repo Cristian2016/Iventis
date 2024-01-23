@@ -18,7 +18,7 @@ import Foundation
     var selectedTab:String?
     var note:String?
     var isNoteHidden = false
-    var hasCalendar = false
+    var isCalendarEnabled = false
     var hasWidget = false
     var isPinned = false
 
@@ -50,8 +50,6 @@ extension UserDefaults {
     public static let  /* bubble */ nBubbleRank =  /* bubble */ "nBubbleRank"
     
     static func generate_nBubbleRank() -> Int {
-        print(#function)
-        
         let userDefaults = UserDefaults(suiteName: .appGroupName)!
         var rank = userDefaults.integer(forKey: UserDefaults.nBubbleRank)
         defer {

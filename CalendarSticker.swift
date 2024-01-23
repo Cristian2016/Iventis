@@ -17,7 +17,7 @@ struct CalendarSticker: View {
     
     var body: some View {
         ZStack {
-            if bubble.hasCalendar && bubble.note_.isEmpty {
+            if bubble.isCalendarEnabled && bubble.note_.isEmpty {
                 let calAccessGranted = CalendarManager.shared.calendarAccessStatus == .granted || redraw
                 let imageName = calAccessGranted  ? "calendar" : "calendar.badge.exclamationmark"
                 
@@ -43,14 +43,14 @@ struct CalendarButton:View {
     
     private var calendarActionName:String {
         guard CalendarManager.shared.calendarAccessStatus != .revoked else { return "No Access" }
-        return bubble.hasCalendar ? "Cal OFF" : "Cal ON"
+        return bubble.isCalendarEnabled ? "Cal OFF" : "Cal ON"
     }
     
     private var calendarActionImageName:String {
         guard CalendarManager.shared.calendarAccessStatus != .revoked else { return "calendar.badge.exclamationmark"
         }
-        return bubble.hasCalendar ? "calendar" : "calendar"
+        return bubble.isCalendarEnabled ? "calendar" : "calendar"
     }
     
-    private var calendarActionColor:Color { bubble.hasCalendar ? Color.calendarOff : .calendar }
+    private var calendarActionColor:Color { bubble.isCalendarEnabled ? Color.calendarOff : .calendar }
 }

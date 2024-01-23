@@ -9,11 +9,11 @@ import Foundation
 
 enum HelpDeepLink:String {
     case enableCalendar = "Enable Calendar"
-    case saveActivity = "Save Activity"
-    case changeBubble = "Change Tracker"
-    case tetherBubbleCal = "Tether Tracker to Calendar"
+    case saveActivity = "Save to Calendar"
+    case changeBubble = "Change Bubble"
+    case tetherBubbleCal = "Tether Bubble to Calendar"
     case siriVoiceCommands = "Siri Voice Commands"
-    case widgets = "Lock Screen Widget"
+    case widgets = "Install Widgets"
     
     var description:String {
         switch self {

@@ -10,6 +10,6 @@ import Foundation
 import CoreData
 
 
-public class PairSavedNote: NSManagedObject {
+public class PairSavedNote: NSManagedObject, Note {
 
 }

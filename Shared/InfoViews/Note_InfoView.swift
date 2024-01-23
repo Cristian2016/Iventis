@@ -20,7 +20,7 @@ struct Note_InfoView: View {
                 VStack (alignment: .leading) {
                     Text("Tap Outside Table")
                 }
-                .foregroundStyle(Color.lightGray)
+                .foregroundStyle(Color.secondary)
             }
             
             Divider()
@@ -29,9 +29,9 @@ struct Note_InfoView: View {
             VStack (alignment: .leading) {
                 Text("\(Image(systemName: "trash")) Delete")
                 Text("\(Image(systemName: "arrow.left.circle")) Swipe From")
-                    .foregroundStyle(Color.lightGray)
+                    .foregroundStyle(Color.secondary)
                 Text("Screen Edge")
-                    .foregroundStyle(Color.lightGray)
+                    .foregroundStyle(Color.secondary)
             }
         }
         .fixedSize(horizontal: true, vertical: false)

@@ -8,10 +8,6 @@
 import SwiftUI
 import MyPackage
 
-struct Appearance {
-    static let bubbleListControlBackground = Color.background
-}
-
 ///Drag and Drop (Reaarange) bubbles
 struct UpDownArrowsButton: View {
     @Environment(\.editMode) var editMode

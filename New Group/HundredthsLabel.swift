@@ -21,7 +21,7 @@ struct HundredthsLabel: View {
                     .aspectRatio(2.0, contentMode: .fit) //smaller ratio is bigger font
                     .overlay { label }
             }
-            .foregroundStyle(.background)
+            .foregroundStyle(Color.background)
             .allowsHitTesting(false)
         //properties that will be animated
             .offset(x: show ? 0.0 : -20, y: show ? 0.0 : -20)

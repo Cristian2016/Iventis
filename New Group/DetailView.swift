@@ -12,23 +12,25 @@ import CoreData
 
 struct DetailView: View {
     @State private var needlePosition = -1
+    @AppStorage(Storagekey.assistUser) private var assistUser = true
     
     @StateObject var bubble:Bubble
     @FetchRequest private var sessions:FetchedResults<Session>
     
     @Environment(ViewModel.self) var viewModel
     @Environment(Secretary.self) private var secretary
-        
+            
     var body: some View {
         if bubble.color != nil {
             ScrollViewReader { proxy in
                 List {
                     BubbleCell(bubble)
                         .id(1)
-                        .background { yPositionTrackerView }
+                        .background { yPositionBubbleView }
                         .listRowSeparator(.hidden)
+                        .listRowInsets(EdgeInsets())
                     
-                    if sessions.isEmpty { NoSessionsAlertView() }
+                    if sessions.isEmpty { NoActivityAlertView() }
                     else {
                         SessionList($needlePosition, sessions)
                             .listRowSeparator(.hidden)
@@ -51,9 +53,13 @@ struct DetailView: View {
             .toolbarBackground(.ultraThinMaterial)
             .toolbar {
                 ToolbarItemGroup {
-                    DetailViewInfoButton()
-                    ScrollToTopButton()
-                    AddLapNoteButton()
+                    ZStack {
+                        HStack {
+                            DetailViewInfoButton()
+                            ScrollToTopButton()
+                        }
+                        LapNoteButton()
+                    }
                 }
             }
             .overlay (SessionDeleteOverlay())
@@ -64,7 +70,7 @@ struct DetailView: View {
     private var count:Int { sessions.count }
     
     // MARK: - Lego
-    private var yPositionTrackerView:some View {
+    private var yPositionBubbleView:some View {
         GeometryReader { geo -> Color in
             DispatchQueue.main.async {
                 let offsetY = geo.frame(in: .global).origin.y
@@ -98,7 +104,7 @@ struct DetailView: View {
         _sessions = FetchRequest(entity: Session.entity(),
                                  sortDescriptors: descriptors,
                                  predicate: predicate,
-                                 animation: .easeInOut)
+                                 animation: .default)
     }
 }
 
@@ -108,11 +114,11 @@ struct ShowDetailViewInfoView: View {
     let title:LocalizedStringKey = "Scroll to Top"
     
     var body: some View {
-        MaterialLabel(title) { infoContent } _: { dismiss() } _: { }
-        .opacity(showDetailViewInfo ? 1 : 0)
-        .onChange(of: secretary.showDetailViewInfo) {_, output in
-            withAnimation { showDetailViewInfo = output }
-        }
+        AlertOverlay(title) { infoContent } dismiss: { dismiss() }
+            .opacity(showDetailViewInfo ? 1 : 0)
+            .onChange(of: secretary.showDetailViewInfo) {_, output in
+                withAnimation { showDetailViewInfo = output }
+            }
     }
     
     private var infoContent:some View {

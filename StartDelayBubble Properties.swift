@@ -11,50 +11,49 @@ import Foundation
 import CoreData
 
 
-extension StartDelayBubble {
+extension DelayBubble {
 
-    @nonobjc public class func fetchRequest() -> NSFetchRequest<StartDelayBubble> {
-        return NSFetchRequest<StartDelayBubble>(entityName: "StartDelayBubble")
+    @nonobjc public class func fetchRequest() -> NSFetchRequest<DelayBubble> {
+        return NSFetchRequest<DelayBubble>(entityName: "StartDelayBubble")
     }
 
     @NSManaged public var created: Date?
-    @NSManaged public var initialClock: Float
+    
+    @NSManaged public var initialDelay: Float
+    @NSManaged public var currentDelay: Float
     
     @NSManaged public var totalDuration: Float //1
+    @NSManaged public var pairs: NSOrderedSet?
     
     @NSManaged public var bubble: Bubble?
-    
-    @NSManaged public var currentClock: Float
-    @NSManaged public var pairs: NSOrderedSet?
-
 }
 
 // MARK: Generated accessors for pairs
-extension StartDelayBubble {
+extension DelayBubble {
 
     @objc(insertObject:inPairsAtIndex:)
-    @NSManaged public func insertIntoPairs(_ value: SDBPair, at idx: Int)
+    @NSManaged public func insertIntoPairs(_ value: DelayBubblePair, at idx: Int)
 
     @objc(removeObjectFromPairsAtIndex:)
     @NSManaged public func removeFromPairs(at idx: Int)
 
     @objc(insertPairs:atIndexes:)
-    @NSManaged public func insertIntoPairs(_ values: [SDBPair], at indexes: NSIndexSet)
+    @NSManaged public func insertIntoPairs(_ values: [DelayBubblePair], at indexes: NSIndexSet)
 
     @objc(removePairsAtIndexes:)
     @NSManaged public func removeFromPairs(at indexes: NSIndexSet)
 
     @objc(replaceObjectInPairsAtIndex:withObject:)
-    @NSManaged public func replacePairs(at idx: Int, with value: SDBPair)
+    @NSManaged public func replacePairs(at idx: Int, with value: DelayBubblePair)
 
     @objc(replacePairsAtIndexes:withPairs:)
-    @NSManaged public func replacePairs(at indexes: NSIndexSet, with values: [SDBPair])
+    @NSManaged public func replacePairs(at indexes: NSIndexSet, with values: [DelayBubblePair])
 
     @objc(addPairsObject:)
-    @NSManaged public func addToPairs(_ value: SDBPair)
+    @NSManaged public func addToPairs(_ value: DelayBubblePair)
 
     @objc(removePairsObject:)
-    @NSManaged public func removeFromPairs(_ value: SDBPair)
+    @NSManaged public func removeFromPairs(_ value: DelayBubblePair)
 
     @objc(addPairs:)
     @NSManaged public func addToPairs(_ values: NSOrderedSet)
@@ -64,6 +63,6 @@ extension StartDelayBubble {
 
 }
 
-extension StartDelayBubble : Identifiable {
+extension DelayBubble : Identifiable {
 
 }

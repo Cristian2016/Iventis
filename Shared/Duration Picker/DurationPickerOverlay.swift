@@ -24,22 +24,22 @@ extension DurationPickerOverlay {
 struct DurationPickerOverlay: View {
     @Environment(ViewModel.self) var viewModel
     @Environment(\.verticalSizeClass) private var verticalSizeClass
-    let model = HintOverlay.Model.shared
+    let model = SmallHelpOverlay.Model.shared
     
     private var isPortrait:Bool { verticalSizeClass == .regular }
     
     private let manager = Manager()
     
     // MARK: - Mode [either 1. create a timerBubble with color or 2. edit a timerBubble]
-    @State private var tricolor:Color.Tricolor? //1
+    @State private var bicolor:Color.Bicolor? //1
     @State private var bubble:Bubble?
     
     private let kind:Kind
     
-    @AppStorage("showDPVHint", store: .shared) var showDPInfo = true
-    @AppStorage("showHint") var showHint = true
-    
-    private let twoDDigits = [["7", "8", "9"], ["4", "5", "6"], ["1", "2", "3"], ["*", "0", "✕"]]
+    private let twoDDigits = [
+        ["7", "8", "9"], ["4", "5", "6"],
+        ["1", "2", "3"], ["*", "0", "✕"]
+    ]
     
     // MARK: - Init and its variables
     private var reason:Reason!
@@ -50,18 +50,18 @@ struct DurationPickerOverlay: View {
         self.reason = reason
         
         switch reason {
-            case .createTimer(let tricolor):
-                _tricolor = .init(wrappedValue: tricolor)
-                self.kind = .noBubble(tricolor)
+            case .createTimer(let bicolor):
+                _bicolor = .init(wrappedValue: bicolor)
+                self.kind = .noBubble(bicolor)
                 
             case .changeToTimer(let bubble):
                 _bubble = .init(wrappedValue: bubble)
-                _tricolor = .init(wrappedValue: Color.tricolor(forName: bubble.color))
+                _bicolor = .init(wrappedValue: Color.bicolor(forName: bubble.color))
                 self.kind = .hasBubble(bubble)
                 
             case .editExistingTimer(let bubble):
                 _bubble = .init(wrappedValue: bubble)
-                _tricolor = .init(wrappedValue: Color.tricolor(forName: bubble.color))
+                _bicolor = .init(wrappedValue: Color.bicolor(forName: bubble.color))
                 self.kind = .hasBubble(bubble)
         }
         ScheduledNotificationsManager.shared.requestAuthorization()
@@ -87,9 +87,9 @@ struct DurationPickerOverlay: View {
                                 handleReason()
                                 dismiss()
                             }
-                            .overlay(alignment: .bottom) { if !isPortrait { Separator() }}
-                        
-//                        if !isPortrait { InfoView2(manager: manager) }
+                            .overlay(alignment: .bottom) {
+                                if !isPortrait || manager.digits == [4,8] || manager.digits.count == 6 { Separator() }
+                            }
                     }
                     
                     let edges = isPortrait ? [.leading, .trailing, .bottom] : Edge.Set.all
@@ -112,8 +112,8 @@ struct DurationPickerOverlay: View {
                 handleReason()
                 dismiss()
             }
-            .gesture(swipeToClearDisplay)
         }
+        .swipeToClear (clearDisplay)
     }
     
     // MARK: - Lego
@@ -122,7 +122,7 @@ struct DurationPickerOverlay: View {
             ForEach(twoDDigits, id: \.self) { digits in
                 GridRow {
                     ForEach(digits, id: \.self) { digit in
-                        Digit(digit, tricolor, manager)
+                        Digit(digit, bicolor, manager)
                     }
                 }
             }
@@ -130,16 +130,10 @@ struct DurationPickerOverlay: View {
         .scrollTargetBehavior(.paging)
     }
     
-    // MARK: - Gesture
-    private var swipeToClearDisplay:some Gesture {
-        DragGesture(minimumDistance: 4)
-            .onEnded { _ in clearDisplay() }
-    }
     
     // MARK: -
     private func clearDisplay() {
         if !manager.digits.isEmpty {
-            UserFeedback.singleHaptic(.medium)
             manager.reset()
         }
     }
@@ -162,8 +156,8 @@ struct DurationPickerOverlay: View {
         
         //duration is valid
         switch reason {
-            case .createTimer(let tricolor):
-                manager.shouldComputeInitialClock(color: tricolor.description)
+            case .createTimer(let bicolor):
+                manager.shouldComputeInitialClock(color: bicolor.description)
                 
             case .editExistingTimer(let bubble):
                 manager.shouldEditDuration(bubble)
@@ -171,7 +165,7 @@ struct DurationPickerOverlay: View {
             case .changeToTimer(let bubble):
                 UserFeedback.singleHaptic(.medium)
                 let initialClock = zip(manager.digits, manager.matrix).reduce(0) { $0 + $1.0 * $1.1 }
-                viewModel.changeTracker(bubble, to: .timer(Float(initialClock)))
+                viewModel.change(bubble, to: .timer(Float(initialClock)))
                 viewModel.addToHistory(duration: Float(initialClock))
             case .none : break
         }

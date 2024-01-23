@@ -9,12 +9,13 @@ import Foundation
 import CoreData
 
 struct DataFetcher {
+    //called per widget! e.g., if systemMedium and accesory circular widgets available, fetch is called twice
     func fetch(completion: @escaping (BubbleData?) -> Void) {
         guard
             let data = UserDefaults.shared.value(forKey: "bubbleData") as? Data,
             let bubbleData = try? JSONDecoder().decode(BubbleData.self, from: data)
         else { return }
-                        
+                                        
         completion(bubbleData)
     }
 }

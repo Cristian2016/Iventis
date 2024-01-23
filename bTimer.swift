@@ -20,7 +20,6 @@ class bTimer {
     // MARK: - Private
     deinit {
         killTimer()
-        print("bTimer deinit")
     }
     
     ///event handler called every second

@@ -16,5 +16,6 @@ struct Entry: TimelineEntry {
         let isRunning:Bool
         let startValue:TimeInterval
         let isTimer:Bool
+        var color:String?
     }
 }

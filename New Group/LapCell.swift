@@ -59,12 +59,12 @@ struct LapCell: View {
     
     ///without delay the animation does not have time to take place
     //⚠️ not the best idea though...
-    func deleteStickyNote() { viewModel.deleteStickyNote(for: pair) }
+    func deleteLapNote() { viewModel.deleteLapNote(of: pair) }
     
     // MARK: - Lego
     private var stickyNote:some View {
         StickyNote { stickyNoteContent }
-        dragAction : { deleteStickyNote() }
+        dragAction : { deleteLapNote() }
         tapAction : { toggleStickyNoteVisibility() }
     }
     
@@ -74,7 +74,7 @@ struct LapCell: View {
             .padding([.leading, .trailing], 10)
             .background {
                 RoundedRectangle(cornerRadius: 2)
-                    .fill(Color.background1)
+                    .fill(Color.item)
                     .frame(height: 44)
                     .shadow(color: .black.opacity(0.1), radius: 2, y: 2)
             }
@@ -96,7 +96,7 @@ struct LapCell: View {
     private var lapNumberLabel:some View {
         VStack(alignment: .trailing, spacing: 0) {
             Rectangle()
-                .fill(Color.lightGray)
+                .fill(Color.gray)
                 .frame(width: 20, height: 1)
             Text(String(lapNumber))
                 .pairCountModifier()
@@ -178,14 +178,13 @@ struct LapCell: View {
     
     // MARK: - Intents
     private func showPairNotes() {
-        HintOverlay.Model.shared.topmostView(.lapNotes)
+        SmallHelpOverlay.Model.shared.topmostView(.lapNotes)
         UserFeedback.singleHaptic(.light)
         viewModel.pairNotes(.show(pair))
     }
     
     ///show/hide Pair.note
     private func toggleStickyNoteVisibility() {
-        UserFeedback.singleHaptic(.light)
         let bContext = PersistenceController.shared.bContext
         let objID = pair.objectID
         

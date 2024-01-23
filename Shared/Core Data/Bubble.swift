@@ -27,13 +27,14 @@ public class Bubble: NSManagedObject {
         
     var history_:[BubbleSavedNote] { history?.array as? [BubbleSavedNote] ?? [] }
     
-    ///lastSession is not always currentSession
     var lastSession:Session? { sessions_.last }
     
-    ///lastPair of lastSession
-    var lastPair:Pair? { (lastSession?.pairs?.array as? [Pair])?.last }
+    var lastPair:Pair? { lastSession?.pairs_.last }
                 
-    deinit { NotificationCenter.default.removeObserver(self) } //1
+    deinit {
+        print("deinit bubble \(color ?? "No Color")")
+        NotificationCenter.default.removeObserver(self)
+    } //1
     
     enum Kind:Comparable {
         case stopwatch
@@ -72,7 +73,7 @@ extension Bubble {
     }
     
     var note_:String {
-        get { note ?? "" }
-        set { note = newValue }
+        get { name ?? "" }
+        set { name = newValue }
     }
 }

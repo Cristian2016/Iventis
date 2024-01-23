@@ -37,8 +37,9 @@ struct MoreOptionsOverlay: View {
             
             OverlayScrollView {
                 let layout = isRegular ? AnyLayout(VStackLayout()) : AnyLayout(HStackLayout(alignment: .top))
+                
                 layout {
-                    VStack(alignment: .trailing, spacing: 4) {
+                    VStack(spacing: 4) {
                         if !bubble.isRunning {
                             display
                             digits
@@ -47,7 +48,7 @@ struct MoreOptionsOverlay: View {
                     colorGrid
                 }
                 .onAppear { //⚠️ can be called multiple times, not just once
-                    self.displayedStartDelay = Int(bubble.startDelayBubble?.initialClock ?? 0)
+                    self.displayedStartDelay = Int(bubble.delayBubble?.initialDelay ?? 0)
                 }
                 .padding(.init(top: 8, leading: 8, bottom: 8, trailing: 8))
                 .background(.regularMaterial, in: RoundedRectangle(cornerRadius: 10))
@@ -58,8 +59,8 @@ struct MoreOptionsOverlay: View {
                 viewModel.saveStartDelay(bubble)
                 viewModel.reset()
             }
-            .gesture(swipe)
         }
+        .swipeToClear(removeDelay)
     }
     
     // MARK: - LEGO
@@ -86,7 +87,6 @@ struct MoreOptionsOverlay: View {
             viewModel.saveStartDelay(bubble)
             viewModel.reset()
         }
-//        .overlay(alignment: .bottom) { Separator() }
         .frame(height: .Overlay.displayHeight)
     }
     
@@ -94,9 +94,9 @@ struct MoreOptionsOverlay: View {
         HStack(spacing: metrics.digitSpacing) {
             ForEach(startDelays, id:\.self) { startDelay in
                 Button { userTappedDigit(startDelay) } label: { digitTitle(startDelay) }
-                    .foregroundStyle(Color.label)
             }
         }
+        .foregroundStyle(Color.label2)
     }
     
     private func userTappedDigit(_ delay:Int) {
@@ -130,21 +130,20 @@ struct MoreOptionsOverlay: View {
     
     private var colorGrid: some View {
         LazyVGrid(columns: metrics.columns, spacing: 0) {
-            ForEach(Color.triColors, id: \.self) { tricolor in
+            ForEach(Color.bicolors, id: \.self) { bicolor in
                 
-                let isCurrentColor = (tricolor.description == bubble.color)
+                let isCurrentColor = (bicolor.description == bubble.color)
                 
-                tricolor.sec
+                bicolor.color
                     .frame(height: 60)
                     .overlay { if isCurrentColor { checkmark }}
                     .onTapGesture {
-                        changeColor(isCurrentColor, tricolor)
+                        changeColor(isCurrentColor, bicolor)
                         viewModel.saveStartDelay(bubble)
                         viewModel.reset()
                     }
             }
         }
-        .gesture(swipe)
         .scrollIndicators(.hidden)
     }
     
@@ -155,8 +154,7 @@ struct MoreOptionsOverlay: View {
             Spacer()
             HStack {
                 CounterLabel(kind: bubble.isTimer ? .timer : .stopwatch)
-                Text(colorName)
-                    .font(.system(size: 30))
+                Text(colorName).font(.system(size: 30))
             }
         }
         .padding(.bottom)
@@ -164,30 +162,19 @@ struct MoreOptionsOverlay: View {
     
     // MARK: - Methods
     private func removeDelay() {
-        if bubble.startDelayBubble?.initialClock != 0 {
-            bubble.startDelayBubble?.initialClock = 0
+        if bubble.delayBubble?.initialDelay != 0 {
+            bubble.delayBubble?.initialDelay = 0
             viewModel.removeStartDelay()
             displayedStartDelay = 0
         }
     }
     
-    private func changeColor(_ sameColor:Bool, _ tricolor:Color.Tricolor) {
+    private func changeColor(_ sameColor:Bool, _ bicolor:Color.Bicolor) {
         if !sameColor { //1
-            viewModel.setColor(of: bubble, to: tricolor.description)
+            viewModel.setColor(of: bubble, to: bicolor.description)
             viewModel.saveStartDelay(bubble)
         }
     } //3
-    
-    // MARK: -
-    private var swipe:some Gesture {
-        DragGesture(minimumDistance: 10)
-            .onEnded { _ in removeDelay() }
-    }
-    
-    // MARK: -
-    var count: Int { verticalSizeClass == .compact ? 22 : 12 }
-    
-    var span:Int { verticalSizeClass == .compact ? 4 : 2 }
 }
 
 extension MoreOptionsOverlay {
@@ -203,54 +190,7 @@ extension MoreOptionsOverlay {
         
         let delayFont = Font.displayFont
         let checkmarkFont = Font.system(size: 30, weight: .medium)
-                        
+        
         var columns:[GridItem] { Array(repeating: GridItem(spacing: 0), count: 4) }
-    }
-    
-//    struct Info: View {
-//        @Environment(Secretary.self) private var secretary
-//        private let input:Input
-//        @State private var show = false
-//        let metrics = Metrics()
-//        
-//        private var delayAsString:String {
-//            input.userEditedDelay == 0 ? "" : String(input.userEditedDelay)
-//        }
-//        
-//        init?(_ input:Input?) {
-//            guard let input = input else { return nil }
-//            self.input = input
-//        }
-//        
-//        var body: some View {
-//            ZStack {
-//                let title = "Start Delay"
-//                let subtitle:LocalizedStringKey = "Start automatically after a number of seconds"
-//                
-//                if show {
-//                    Background(.dark()).ignoresSafeArea()
-//                    
-//                    MaterialLabel(title, subtitle) { MoreOptionsInfoView() } _: {  } _: { }
-//                }
-//            }
-//        }
-//        
-//        struct Metrics {
-//            let font = Font.system(size: 30, weight:.medium)
-//            let infoFont = Font.system(size: 20)
-//        }
-//    }
-}
-
-extension MoreOptionsOverlay {
-    struct InfoView2:View {
-        var body: some View {
-            HStack(alignment: .bottom) {
-                ClearText()
-                SaveText()
-            }
-            .padding()
-            .environment(\.colorScheme, .dark)
-        }
     }
 }

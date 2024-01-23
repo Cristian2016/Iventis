@@ -20,7 +20,7 @@ struct LapList: View {
         _laps = FetchRequest(entity: Pair.entity(),
                              sortDescriptors: [descriptor],
                              predicate: predicate,
-                             animation: .easeInOut)
+                             animation: .default)
     }
     
     var body: some View {

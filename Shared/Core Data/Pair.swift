@@ -11,14 +11,9 @@ import CoreData
 
 
 public class Pair: NSManagedObject {
-    
-    deinit {
-//        print("pair deinit")
-    }
-    
     enum DurationComputed {
         case atPause
-        case atEndSession
+        case atCloseSession
     }
     
     var note_:String {
@@ -26,7 +21,7 @@ public class Pair: NSManagedObject {
         set { note = newValue }
     }
     
-    ///runs on background thread. it computes at 1.pause or 2.endSession. endSession means substracting 0.5 seconds from the duration
+    ///runs on background thread. it computes at 1.pause or 2.closeSession. closeSession means substracting 0.5 seconds from the duration
     func computeDuration(_ durationComputed:DurationComputed) {
         guard let pause = pause else { fatalError() }
         
@@ -35,7 +30,7 @@ public class Pair: NSManagedObject {
         switch durationComputed {
             case .atPause:
                 duration = Float(pause.timeIntervalSince(start ?? Date()))
-            case .atEndSession:
+            case .atCloseSession:
                 duration = Float(pause.timeIntervalSince(start ?? Date()) - Global.longPressLatency)
         }
         

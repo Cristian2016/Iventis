@@ -18,8 +18,8 @@ struct BorderlessLabel: View {
         LocalizedStringKey(title)
         
         Text(title)
-            .font(.footnote)
             .foregroundStyle(color ?? .white)
+            .animationDisabled()
     }
 }
 

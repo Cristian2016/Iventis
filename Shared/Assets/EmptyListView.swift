@@ -29,17 +29,17 @@ struct EmptyListView: View {
             Text("Your Daily Activity Tracker")
             Text("Tap \(Image(systemName: "plus")) to start,\nor swipe right from left edge")
         }, actions: {
-            HintOverlay.ButtonStack()
+            SmallHelpOverlay.ButtonStack()
         })
     }
     
     private var content:some View {
         ContentUnavailableView {
-            Label("No Trackers", image: "iventisSymbol")
+            Label("No Bubbles", image: "iventisSymbol")
         } description: {
             Text("Tap \(Image(systemName: "plus")) or swipe from left edge")
         } actions: {
-            HintOverlay.ButtonStack()
+            SmallHelpOverlay.ButtonStack()
         }
     }
     

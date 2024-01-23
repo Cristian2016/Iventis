@@ -10,19 +10,19 @@ import Foundation
 import CoreData
 
 
-extension SDBPair {
+extension DelayBubblePair {
 
-    @nonobjc public class func fetchRequest() -> NSFetchRequest<SDBPair> {
-        return NSFetchRequest<SDBPair>(entityName: "SDBPair")
+    @nonobjc public class func fetchRequest() -> NSFetchRequest<DelayBubblePair> {
+        return NSFetchRequest<DelayBubblePair>(entityName: "SDBPair")
     }
 
     @NSManaged public var start: Date
     @NSManaged public var pause: Date?
     @NSManaged public var duration: Float
-    @NSManaged public var sdBubble: StartDelayBubble!
+    @NSManaged public var sdBubble: DelayBubble!
 
 }
 
-extension SDBPair : Identifiable {
+extension DelayBubblePair : Identifiable {
 
 }

@@ -53,7 +53,6 @@ struct FusedLabel: View {
             .foregroundStyle(color)
             .padding([.leading, .trailing])
             .padding([.top, .bottom], 6)
-            .font(font)
             .background { roundedRect }
     }
     
@@ -61,18 +60,8 @@ struct FusedLabel: View {
     @ViewBuilder
     private var roundedRect:some View {
         switch content.isFilled {
-            case true: RoundedRectangle(cornerRadius: 8).fill(content.color)
-            case false: RoundedRectangle(cornerRadius: 8).stroke(content.color)
-        }
-    }
-        
-    // MARK: - Convenience
-    private var font:Font {
-        switch content.size {
-            case .small: return .footnote
-            case .medium: return .callout
-            case .large: return .title
-            case .verySmall: return .system(size: 14)
+            case true: RoundedRectangle(cornerRadius: 4).fill(content.color)
+            case false: RoundedRectangle(cornerRadius: 4).stroke(content.color)
         }
     }
 }
@@ -81,7 +70,6 @@ extension FusedLabel {
     struct Content {
         let title:String
         var symbol:String? = nil
-        var size:Size = .small
         var color:Color = .secondary
         var isFilled:Bool = false
         
@@ -92,17 +80,17 @@ extension FusedLabel {
             case large
         }
         
-        static let alwaysON = Content(title: "Always-ON", symbol: "sun.max.fill")
+        static let caffeinated = Content(title: "Caffeinated", symbol: "sun.horizon.fill")
         static let detailON = Content(title: "Detail is ON")
         static let scrollToTop = Content(title: "Scroll to Top")
         static func addNote(_ color:Color) -> Content {
-            .init(title: "Lap Note", symbol: "text.alignleft", size: .medium, color: color, isFilled: true)
+            .init(title: "Lap Note", symbol: "text.alignleft", color: color, isFilled: true)
         }
     }
 }
 
-struct FusedLabel_Previews: PreviewProvider {
-    static var previews: some View {
-        FusedLabel(content: .alwaysON)
-    }
-}
+//struct FusedLabel_Previews: PreviewProvider {
+//    static var previews: some View {
+//        FusedLabel(content: .alwaysON)
+//    }
+//}

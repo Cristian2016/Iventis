@@ -7,22 +7,6 @@
 
 import SwiftUI
 
-struct SaveText: View {
-    @Environment(\.colorScheme) private var colorScheme
-    
-    var text:String = "Save"
-    
-    var body: some View {
-        let isLight = colorScheme == .light
-        VStack {
-            Text(text)
-            Image(isLight ? "saveText" : "saveTextDark")
-                .resizable()
-                .modifier(ImageModifier())
-        }
-    }
-}
-
 struct DeleteNoteInList:View {
     @Environment(\.colorScheme) private var colorScheme
     
@@ -42,38 +26,39 @@ struct ImageModifier:ViewModifier {
     func body(content: Content) -> some View {
         content
             .aspectRatio(contentMode: .fit)
-            .frame(height: 140)
+            .frame(height: 120)
     }
 }
 
-struct ClearText:View {
-    @Environment(\.colorScheme) private var colorScheme
-    
+struct ClearSaveHintView:View {
     var body: some View {
-        let isDark = colorScheme == .dark
-        
-        VStack(spacing: 6) {
-            Text("Clear")
-            Image(isDark ? "clearTextDark" : "clearText")
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-                .frame(height: 140)
+        HStack {
+            VStack(spacing: 4) {
+                Text("Clear")
+                Image.swipeBidirectional
+                    .font(.title2)
+                    .frame(height: 40)
+                Text("Swipe")
+                    .font(.system(size: 17))
+            }
+            
+            Divider().frame(maxHeight: 100)
+            
+            VStack(spacing: 4) {
+                Text("Save")
+                Image.dragDown
+                    .font(.title2)
+                    .frame(height: 40)
+                Text("Drag")
+                    .font(.system(size: 17))
+            }
         }
-    }
-}
-
-struct InfoView2:View {
-    var body: some View {
-        HStack(alignment: .bottom) {
-            ClearText()
-            SaveText()
-            DeleteNoteInList()
-        }
-        .font(.system(size: 14))
-//        .padding(.top)
+        .font(.system(size: 22))
+        .foregroundStyle(.secondary)
+        .fixedSize()
     }
 }
 
 #Preview {
-    InfoView2()
+    ClearSaveHintView()
 }

@@ -22,7 +22,7 @@ public extension Float {
         if self == 0 { return .zeroAll }
         
         let decimalValue = Int(self) //used to compute hr. min, sec
-//        let fractionalValue = Int((self - Float(decimalValue))*100)
+                                     //        let fractionalValue = Int((self - Float(decimalValue))*100)
         var fractionalValue = Int(((self - Float(decimalValue)) * 100).rounded(.toNearestOrEven))
         
         var addedToSec = 0
@@ -49,7 +49,7 @@ public extension Float {
         let components = self.components
         
         let hr = components.hr != 0 ? String(components.hr) + ":" : ""
-        let min = (components.min != 0) ? String(format: "%.2d", components.min)  + ":" : "00:"
+        let min = (components.min != 0) ? String(format: "%.2d", components.min)  + ":" : "0:"
         let sec = String(format: "%.2d", components.sec)
         return hr + min + sec
     }
@@ -57,50 +57,98 @@ public extension Float {
 
 struct Widgets: Widget {
     let kind: String = "Fused"
-
+    
     var body: some WidgetConfiguration {
         StaticConfiguration(kind: kind, provider: Provider()) { entry in
             WidgetView(entry: entry)
         }
         .configurationDisplayName("Recent Activity")
         .description("Shows activity of most recently used bubble")
-        .supportedFamilies([.accessoryCircular])
+        .supportedFamilies([.accessoryCircular, .systemMedium, .systemSmall])
     }
 }
 
 //what shows onscreen
 struct WidgetView : View {
-    var entry: Provider.Entry
+    let input: Provider.Entry.Input
+    
+    init?(entry: Provider.Entry) {
+        guard let input = entry.input else { return nil }
+        self.input = input
+    }
+    
+    @Environment(\.widgetFamily) var family
+    
+    @ViewBuilder
+    private func circle(_ color:Color) -> some View {
+        let isAccessory = family == .accessoryCircular
+        
+        if isAccessory {
+            Circle()
+                .fill(.thinMaterial)
+        } else {
+            Circle()
+                .fill(color)
+        }
+    }
     
     var body: some View {
-        Circle()
-            .fill(.regularMaterial)
+        
+        let isAccessory = family == .accessoryCircular
+        let color = Color(input.color ?? "clear")
+                
+        circle(color)
             .overlay {
                 Rectangle()
                     .fill(.clear)
                     .aspectRatio(2.2, contentMode: .fit)
                     .overlay {
                         display
-                            .padding([.leading, .trailing], 3)
-                            .font(.title3)
+                            .padding([.leading, .trailing], 4)
+                            .font(.largeTitle)
+                            .fontDesign(.rounded)
+                            .monospacedDigit() //prevents wobble effect
                             .minimumScaleFactor(0.01)
                             .multilineTextAlignment(.center)
+                            .foregroundStyle(input.color == nil ? Color.label2 : .white)
                     }
             }
+            .padding(isAccessory ? 0 : -10)
             .containerBackground(.clear, for: .widget) //⚠️ 1
     }
     
     @ViewBuilder
     private var display:some View {
-        if let input = entry.input {
-            if input.isRunning {
-                Text(Date().addingTimeInterval(input.startValue), style: .timer)
-            } else {
-                if input.startValue <= 0 && input.isTimer { Text(Image(systemName: "checkmark")) }
-                else { Text(String(Float(abs(input.startValue)).widgetFormat)) }
-            }
+        if input.isRunning {
+            Text(Date().addingTimeInterval(input.startValue), style: .timer)
         } else {
-            Image(systemName: "line.diagonal")
+            if input.startValue <= 0 && input.isTimer {
+                Text(Image(systemName: "checkmark"))
+            }
+            else {
+                if input.color != nil{
+                    ZStack {
+                        Text(String(Float(abs(input.startValue)).widgetFormat))
+                            .strikethrough(true, color: .white.opacity(0.6))
+                    }
+                } else {
+                    message
+                }
+            }
+        }
+    }
+    
+    @ViewBuilder
+    private var message:some View {
+        let small = family == .accessoryCircular
+        if small {
+            Text("Start bubble")
+                .font(.largeTitle)
+        } else {
+            Text("Tap bubble seconds to start")
+                .font(.system(size: 18, weight: .regular))
+                .foregroundStyle(.secondary)
         }
     }
 }
+

@@ -39,17 +39,18 @@ struct HelpCellContent:Identifiable, Hashable {
     }
     
     static let all = [
-        HelpCellContent("Tips", "calendar", .enableCalendar, "Swipe right on tracker > 'Cal ON'", "\(Image.calendar) symbol means the tracker is 'calendar-enabled'", image: "bubble.enable.calendar", image2: "bubble.calendar.enabled"),
-        .init("Tips", "link", .tetherBubbleCal, "You can :)", ""),
-        .init("Tips", "calendar.badge.plus", .saveActivity, "Make sure tracker is [calendar-enabled](eventify://enableCalendar)", "As soon as you end a session, it will be saved as calendar event. Touch and hold seconds to end a session", image: "", image2: "bubble.save.activity"),
-        .init("Tips", "arrow.left.arrow.right.square", .changeBubble, "Swipe left on tracker > 'Control'", "Change to stopwatch: Tap \(Image.stopwatch)\nChange to timer:\n・Tap \(Image.timer), 5min, 10, etc. or\n・Swipe to choose a recent duration", image: "bubble.change", image2: "bubble.control"),
-        .init("Tips", "text.bubble", .siriVoiceCommands, "", ""),
-        .init("Tips", "w.circle.fill", .widgets, "Open Iventis from Lock Screen", "Lock screen widget shows the most recently used tracker", image: "lockscreen", image2: "widgets"),
+        .init("Tips", "w.circle.fill", .widgets, "Open Iventis from Lock Screen", "Widgets show the most recently used bubble", image: "lockscreen", image2: "widgets"),
+        HelpCellContent("Tips", "calendar", .enableCalendar, "Swipe right on bubble > 'Cal ON'", "\(Image.calendar) symbol means bubble is 'calendar-enabled'", image: "bubble.enable.calendar", image2: "bubble.calendar.enabled"),
+        .init("Tips", "calendar.badge.plus", .saveActivity, "Make sure bubble is [calendar-enabled](eventify://enableCalendar)", "As soon as you end a session, it will be saved as calendar event. Touch and hold seconds to end a session", image: "", image2: "bubble.save.activity"),
+        .init("Tips", "link", .tetherBubbleCal, "Automatically add events to a calendar in Calendar App. Calendar App > 'Calendars' > '\(Image(systemName: "calendar.badge.plus")) Add Calendar' > Enter 'Calendar Name' > Tap 'Done'", ""),
+        .init("Tips", "arrow.left.arrow.right.square", .changeBubble, "Swipe left on bubble > 'Control'", "Change to stopwatch: Tap \(Image.stopwatch)\nChange to timer:\n・Tap \(Image.timer), 5min, 10, etc. or\n・Swipe to choose a recent duration", image: "bubble.change", image2: "bubble.control"),
+        .init("Tips", "bubble.left.and.text.bubble.right", .siriVoiceCommands, "", ""),
     ]
 }
 
 struct HelpCell:View {
     let content:HelpCellContent
+    
     @Environment(Secretary.self) private var secretary
     
     var body: some View {

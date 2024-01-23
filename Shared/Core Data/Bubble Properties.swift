@@ -25,17 +25,17 @@ extension Bubble {
     @NSManaged public var initialClock: Float
     @NSManaged public var currentClock: Float
     
-    @NSManaged public var note: String?
+    @NSManaged public var name: String?
     @NSManaged public var isNoteHidden: Bool
     
-    @NSManaged public var hasCalendar: Bool
+    @NSManaged public var isCalendarEnabled: Bool
     @NSManaged public var hasWidget: Bool
     
     @NSManaged public var isPinned: Bool
     
     @NSManaged public var sessions: NSOrderedSet?
     @NSManaged public var history: NSOrderedSet?
-    @NSManaged public var startDelayBubble: StartDelayBubble?
+    @NSManaged public var delayBubble: DelayBubble?
 }
 
 // MARK: Generated accessors for sessions

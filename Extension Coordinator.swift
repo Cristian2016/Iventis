@@ -42,7 +42,7 @@ extension BubbleCellCoordinator {
                         self.opacity.update(for: theInitialValue)
                     }
                     
-                case .endSession, .reset, .currentSessionDelete:
+                case .closeSession, .reset, .currentSessionDelete:
                     let components = bBubble.isTimer ? bBubble.initialClock.componentsAsString : .zeroAll
                     let currentClock = bBubble.isTimer ? self.updatedCurrentClock(bBubble) : 0.0
                     
@@ -65,7 +65,7 @@ extension BubbleCellCoordinator {
         case start
         case pause
         case reset
-        case endSession
+        case closeSession
         case bubbleDelete
         case currentSessionDelete
     }
@@ -92,8 +92,8 @@ extension BubbleCellCoordinator {
             }
             
             //2. check if timer should finish
-            let lastTrackerDuration = bubble.lastSession!.lastTrackerDuration
-            let elapsedSinceFirstStart = lastTrackerDuration + elapsedSinceLastStart
+            let lastBubbleDuration = bubble.lastSession!.lastBubbleDuration
+            let elapsedSinceFirstStart = lastBubbleDuration + elapsedSinceLastStart
             let overspill = bubble.initialClock - elapsedSinceFirstStart //
             
             if (Float(0)...1).contains(overspill) {//app is active
@@ -101,12 +101,12 @@ extension BubbleCellCoordinator {
                 
                 precisionTimer.executeAction(after: deadline) { [weak self] in
                     reportBlue(bubble, "coordinator.task. detected kill timer no overspill")
-                    self?.askViewModel_ToKillTimer() //at exactly 0.0 overspill
+                    self?.requestKillTimer() //at exactly 0.0 overspill
                 }
             } else {//app becomes active
                 if overspill < 0 {
                     reportBlue(bubble, "coordinator.task.detected kill timer with overspill")
-                    self.askViewModel_ToKillTimer(overspill)
+                    self.requestKillTimer(overspill)
                 }
             }
         }

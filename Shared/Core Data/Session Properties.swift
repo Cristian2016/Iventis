@@ -4,7 +4,7 @@
 //
 //  Created by Cristian Lapusan on 23.04.2022.
 //
-//1 increase trackerIDCounter each time user changes tracker. Counter keeps track of total number of trackers created for the session
+//1 increase bubbleIDCounter each time user changes bubble. Counter keeps track of total number of bubbles created for the session
 
 import Foundation
 import CoreData
@@ -21,19 +21,14 @@ extension Session {
     
     ///sum of durations of all closed pairs. not-closed pair is not included
     @NSManaged public var totalDuration: Float
-    @NSManaged public var lastTrackerDuration: Float
+    @NSManaged public var lastBubbleDuration: Float
     
     @NSManaged public var bubble: Bubble?
     @NSManaged public var pairs: NSOrderedSet?
 
+    @NSManaged public var temporaryEventID: String?
     @NSManaged public var eventID: String?
-    
-    ///does the Session have a corresponding Calendar Event
-    ///to avoid duplicating events
-    @NSManaged public var isEventified: Bool
-    
-    @NSManaged public var trackerIDCounter: Int64 //1
-    
+    @NSManaged public var bubbleIDCounter: Int64 //1
 }
 
 // MARK: Generated accessors for pairs

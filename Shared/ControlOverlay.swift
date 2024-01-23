@@ -12,7 +12,7 @@ struct ControlOverlay: View {
     @Environment(Secretary.self) private var secretary
     @Environment(ViewModel.self) private var viewModel
     
-    @AppStorage("controlFirstTime") private var firstTime = true
+    @AppStorage(Storagekey.controlFirstTime) private var firstTime = true
     
     //TabView
     @State private var selectedTab:String
@@ -63,7 +63,7 @@ struct ControlOverlay: View {
     }
     
     private func dismiss() {
-        HintOverlay.Model.shared.topmostView(viewModel.path.isEmpty ? .bubbleList : .detail)
+        SmallHelpOverlay.Model.shared.topmostView(viewModel.path.isEmpty ? .bubbleList : .detail)
         
         secretary.controlBubble(.hide)
         //save selectedTab to CoreData

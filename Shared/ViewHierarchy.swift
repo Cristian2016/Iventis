@@ -16,26 +16,37 @@ struct ViewHierarchy: View {
         
     var body: some View {
         ZStack {
-            if Device.isIPad { iPadViewHierarchy() }
-            else { iPhoneViewHierarchy() }
+            @Bindable var nvm = viewModel
             
-            if let rank = secretary.controlActionBubble {
-                ControlOverlay(viewModel.bubble(for: Int(rank)))
+            NavigationStack(path: $nvm.path) {
+                BubbleList()
+                    .navigationTitle("") //1
+                    .navigationBarTitleDisplayMode(.inline) //1
             }
+            .tint(.label2)
+            .overlay { CalAccessDeniedAlert() }
+            .overlay { BubbleNamesOverlay(viewModel.notes_Bubble) }
+            .overlay { LapNotesOverlay(viewModel.pairNotes) }
+            .overlay { MoreOptionsOverlay(viewModel.moreOptionsSheetBubble) }
+            .overlay { PaletteView() }
+            .overlay {
+                if let rank = secretary.controlActionBubble {
+                    ControlOverlay(viewModel.bubble(for: Int(rank)))
+                }
+            }
+            .overlay { DurationPickerOverlay(reason: viewModel.durationPicker.reason) }
+            .overlay { SmallHelpOverlay() }
+            .overlay(alignment: .topLeading) { SmallHelpOverlay.ShakeHelpButton() }
             
-            AlwaysOnDisplayAlertView() //shown until user removes it forever
-            ScreenAlwaysOnConfirmation() //shown each time user toggles the button in toolbar
+            CaffeinatedAlert()
+            CaffeinatedConfirmation()
+            
             CalendarEventCreatedConfirmation()
             CalendarEventRemovedConfirmation()
+            
+            AddNoteConfirmation()
+            
+            BigHelpOverlay(secretary.showBigHelpOverlay)
         }
-        .overlay { WarningLabel() }
-        .overlay { BubbleNotesOverlay(viewModel.notes_Bubble) }
-        .overlay { LapNotesOverlay1(viewModel.pairNotes) }
-        .overlay { MoreOptionsOverlay(viewModel.moreOptionsSheetBubble) }
-        .overlay { PaletteView() }
-        .overlay { DurationPickerOverlay(reason: viewModel.durationPicker.reason) }
-        .overlay { if secretary.showHelpViewHierarchy { HelpViewHierarchy() } }
-        .overlay(alignment: .topLeading) { HintOverlay.HelpButton() }
-        .overlay { HintOverlay() }
     }
 }

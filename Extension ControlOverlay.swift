@@ -39,7 +39,7 @@ extension ControlOverlay {
         
         private func dismiss() {
             secretary.controlBubble(.hide)
-            HintOverlay.Model.shared.topmostView(viewModel.path.isEmpty ? .bubbleList : .detail)
+            SmallHelpOverlay.Model.shared.topmostView(viewModel.path.isEmpty ? .bubbleList : .detail)
         }
         
         private func reset() {
@@ -72,9 +72,9 @@ extension ControlOverlay {
         @Environment(ViewModel.self) private var viewModel
         @Environment(Secretary.self) private var secretary
         
-        @AppStorage("controlFirstTime") private var firstTime = true
+        @AppStorage(Storagekey.controlFirstTime) private var firstTime = true
         
-        private let minutes = [[-2, -1, 5, 10], [15, 20, 25, 30], [35, 45, 50, 60]]
+        private let minutes = [[-2, -1, 5, 10], [15, 20, 25, 30], [35, 40, 45, 50]]
         
         var body: some View {
             Grid(horizontalSpacing: 2, verticalSpacing: 2) {
@@ -106,7 +106,7 @@ extension ControlOverlay {
                 underLabel
             }
             .font(.digitFont)
-            .foregroundStyle(Color.label)
+            .foregroundStyle(Color.label2)
         }
         
         private func showCheckmark(_ digit:Int) -> Bool {
@@ -122,32 +122,6 @@ extension ControlOverlay {
             }
         }
         
-        private func digitColor(_ digit:Int) -> Color {
-            guard digit < 0 else { return .label }
-            
-            switch digit {
-                case -1:
-                    return bubble.isTimer ? .white : .label
-                case -2:
-                    return !bubble.isTimer ? .white : .label
-                default :
-                    return .label
-            }
-        }
-        
-        private func fillColor(symbol:Int) -> Color {
-            guard symbol < 0 else { return .background }
-            
-            switch symbol {
-                case -2:
-                    return !bubble.isTimer ? color : .background
-                case -1:
-                    return bubble.isTimer ? color : .background
-                default:
-                    return .background
-            }
-        }
-        
         init(_ bubble: Bubble, _ color:Color, _ selectedTab:Binding<String> ) {
             self.bubble = bubble
             self.color = color
@@ -156,7 +130,7 @@ extension ControlOverlay {
         
         private func dismiss() {
             secretary.controlBubble(.hide)
-            HintOverlay.Model.shared.topmostView(viewModel.path.isEmpty ? .bubbleList : .detail)
+            SmallHelpOverlay.Model.shared.topmostView(viewModel.path.isEmpty ? .bubbleList : .detail)
         }
         
         private func handleTimerButtonTapped() {
@@ -169,17 +143,17 @@ extension ControlOverlay {
             switch digit {
                 case -1:
                     handleTimerButtonTapped()
-                    HintOverlay.Model.shared.topmostView(.durationPicker)
+                    SmallHelpOverlay.Model.shared.topmostView(.durationPicker)
                 case -2:
                     //allow stopwatches to reset currentClock, if currentClock > 0
                     if !bubble.isTimer && !bubble.isRunning && bubble.currentClock == 0 { return }
                     
-                    viewModel.changeTracker(bubble, to:.stopwatch)
+                    viewModel.change(bubble, to:.stopwatch)
                     UserFeedback.singleHaptic(.heavy)
                     dismiss()
                     
                 default:
-                    viewModel.changeTracker(bubble, to: .timer(Float(digit) * 60))
+                    viewModel.change(bubble, to: .timer(Float(digit) * 60))
                     UserFeedback.singleHaptic(.heavy)
                     dismiss()
             }
@@ -226,6 +200,7 @@ extension ControlOverlay {
     }
     
     struct HistoryGrid:View {
+        @AppStorage(Storagekey.hasUserDeletedRecent) private var hasUserDeletedRecent = false
         let historyDigit = Color("historyDigit")
         private let bubble:Bubble
         
@@ -233,7 +208,7 @@ extension ControlOverlay {
         @Environment(Secretary.self) private var secretary
         
         @Binding private var selectedTab:String
-        @FetchRequest(entity: TimerDuration.entity(), sortDescriptors: [NSSortDescriptor(key: "date", ascending: false)])
+        @FetchRequest(entity: TimerDuration.entity(), sortDescriptors: [NSSortDescriptor(key: "date", ascending: false)], animation: .default)
         private  var timerDurations:FetchedResults<TimerDuration>
         
         private let columns = Array(repeating: GridItem(spacing: 1), count: 2)
@@ -263,7 +238,7 @@ extension ControlOverlay {
         
         private func handleTap(for duration:TimerDuration) {
             moveToListStart(duration)
-            viewModel.changeTracker(bubble, to:  .timer(duration.value))
+            viewModel.change(bubble, to:  .timer(duration.value))
         }
         
         private func handleLongPress(for duration:TimerDuration) {
@@ -278,7 +253,7 @@ extension ControlOverlay {
                 } else {
                     LazyVGrid(columns: columns, spacing: 1) {
                         ForEach(timerDurations) { timerDuration in
-                            Color.background
+                            Color.item
                                 .frame(height: 44)
                                 .overlay {
                                     Text(timerDuration.value.timerTitle)
@@ -288,6 +263,9 @@ extension ControlOverlay {
                                     dismiss()
                                 }
                                 .onLongPressGesture {
+                                    if !hasUserDeletedRecent {
+                                        hasUserDeletedRecent = true
+                                    }
                                     handleLongPress(for: timerDuration)
                                 }
                         }
@@ -300,6 +278,18 @@ extension ControlOverlay {
             .minimumScaleFactor(0.01)
             .lineLimit(1)
             .overlay(alignment: .bottom) { underLabel }
+            .overlay(alignment: .bottom) { deleteNoteHint }
+        }
+        
+        @ViewBuilder
+        private var deleteNoteHint:some View {
+            if !hasUserDeletedRecent && (1...7).contains(timerDurations.count) {
+                Text("Touch and hold to delete")
+                    .font(.system(size: 20))
+                    .foregroundColor(.secondary)
+                    .padding(.bottom)
+                    .offset(y: -20)
+            }
         }
         
         private var underLabel:some View {
@@ -317,7 +307,7 @@ extension ControlOverlay {
         private func dismiss() {
             UserFeedback.singleHaptic(.heavy)
             secretary.controlBubble(.hide)
-            HintOverlay.Model.shared.topmostView(viewModel.path.isEmpty ? .bubbleList : .detail)
+            SmallHelpOverlay.Model.shared.topmostView(viewModel.path.isEmpty ? .bubbleList : .detail)
             
             let bContext = PersistenceController.shared.bContext
             let bubbleID = bubble.objectID
@@ -350,11 +340,11 @@ extension ControlOverlay {
                     self.bubble = bubble
                     self.color = Color.bubbleColor(forName: bubble.color)
                     
-                case .noBubble(let tricolor):
-                    guard let tricolor = tricolor else { return nil }
+                case .noBubble(let bicolor):
+                    guard let bicolor = bicolor else { return nil }
                     
-                    self.color = tricolor.sec
-                    self.colorName = tricolor.description
+                    self.color = bicolor.color
+                    self.colorName = bicolor.description
             }
         }
         
@@ -377,7 +367,7 @@ extension ControlOverlay {
                             if !bubble.sessions_.isEmpty { Text("\(bubble.sessions_.count)") }
                         }
                     }
-                    .foregroundStyle(.primary)
+                    .foregroundStyle(.label2)
                     .font(.system(size: 24))
                     .allowsHitTesting(false)
                     .padding(.init(top: 0, leading: 4, bottom: 0, trailing: 4))
@@ -390,7 +380,7 @@ extension ControlOverlay {
         
         enum Kind {
             case hasBubble(Bubble?)
-            case noBubble(Color.Tricolor?)
+            case noBubble(Color.Bicolor?)
         }
     }
     

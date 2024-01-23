@@ -21,6 +21,7 @@ struct PersistenceController {
     
     lazy var bContext:NSManagedObjectContext = {
        let bContext = container.newBackgroundContext()
+        bContext.name = "backgroundContext"
         
         //should conflicts arise, the in-memory version trumps store version
         bContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
@@ -40,7 +41,7 @@ struct PersistenceController {
                 try context.save()
                 completion?()
             } catch let error {
-                print("problemo with saving, dumb dumb!!! ", error.localizedDescription)
+                print("problemo with saving, dumb dumb!!!", error.localizedDescription)
             }
         }
     }
@@ -83,7 +84,7 @@ extension UserDefaults {
 
 public extension String {
     //group.com.Eventify.container
-    static let appGroupName = "group.com.Iventis"
+    static let appGroupName = "group.com.Eventify.container"
 }
 
 ///used for widgets only
@@ -91,4 +92,5 @@ struct BubbleData:Codable {
     let value:Float
     let isTimer:Bool
     let isRunning:Bool
+    var color:String?
 }

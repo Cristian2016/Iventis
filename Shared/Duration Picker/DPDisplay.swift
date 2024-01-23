@@ -30,6 +30,7 @@ extension DurationPickerOverlay {
                 }
                 .onChange(of: manager.isDisplayEmpty) { if $1 { clearDisplay() } }
                 .onChange(of: manager.isDurationValid) { showSaveAction = $1 ? true : false }
+                .minimumScaleFactor(0.4)
         }
         
         // MARK: - Lego

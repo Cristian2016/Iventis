@@ -52,7 +52,7 @@ extension SmallGestureInfo {
 
 struct MyLabelStyle:LabelStyle {
     var alignedRight = true
-    var color = Color.label
+    var color = Color.label2
     var showText = true
     
     func makeBody(configuration: Configuration) -> some View {

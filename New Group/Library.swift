@@ -18,10 +18,8 @@ func execute(after seconds:TimeInterval, mainQueue:Bool = true, code: @escaping 
 }
 
 func reportBlue(_ bubble:Bubble, _ text:String) {
-    if bubble.color == "blue" {
+    if bubble.color == "blue1" {
         print("blue report ", text)
-    } else {
-        print("no blue bubble found")
     }
 }
 
@@ -32,8 +30,30 @@ extension LocalizedStringKey:Hashable {
     }
 }
 
+struct Names {
+    static let testBubbleName = "Red"
+    
+    private init() {}
+}
+
+struct Storagekey {
+    static let timerHistoryExists = "timerHistoryExists"
+    static let controlFirstTime = "controlFirstTime"
+    static let showEachTimeCaffeinatedHint = "showEachTimeCaffeinatedHint"
+    static let assistUser = "assistUser"
+    static let showDismissHint = "showDismissHint"
+    static let hasUserDeletedBubbleNote = "hasUserDeletedBubbleNote"
+    static let hasUserDeletedLapNote = "hasUserDeletedLapNote"
+    static let hasUserDeletedRecent = "hasUserDeletedRecent"
+    static let showUserAssist = "hasUserDeletedLapNote"
+    static let showPinnedOnly = "showPinnedOnly"
+    static let userFavoritedOnce = "userFavoritedOnce"
+    
+    private init() {}
+}
+
 extension URL {
-    static let watchTutorial = URL(string: "https://www.example.com")
+    static let watchTutorial = URL(string: "https://youtube.com/shorts/6w0wyOZqB4Q?feature=share")
 }
 
 struct vRoundedRectangle: Shape {
@@ -69,7 +89,7 @@ extension Notification.Name {
     static let flipTextSignal = Notification.Name("flipTextSignal")
     
     ///kill StartSelayBubble  since sdb.state is now .finished
-    static let killSDB = Notification.Name("killSDB")
+    static let killDelayBubble = Notification.Name("killSDB")
     
     static let editTimerDuration = Notification.Name("editTimerDuration")
     static let createTimer = Notification.Name("createTimer")
@@ -91,12 +111,10 @@ extension Notification {
 public extension Image {
     static let tap = Image(systemName:"hand.tap")
     static let longPress = Image(systemName:"target")
-    static let leftSwipe = Image(systemName:"arrow.left.circle")
-    static let rightSwipe = Image(systemName:"arrow.right.circle")
+    static let leftSwipe = Image(systemName:"arrow.left")
+    static let rightSwipe = Image(systemName:"arrow.right")
     static let scrollToTop = Image(systemName: "arrow.up.and.down.text.horizontal")
-    static let greaterThan = Image(systemName: "greaterthan.circle.fill")
     static let info = Image(systemName: "info.circle.fill")
-    static let infoSquare =  Image(systemName: "info.square.fill")
     static let alert = Image(systemName: "exclamationmark.triangle.fill")
     static let roundCheckmark = Image(systemName: "checkmark.circle.fill")
     static let timer = Image(systemName: "timer")
@@ -113,40 +131,29 @@ public extension Image {
     
     static let one = Image(systemName: "1.circle.fill")
     static let two = Image(systemName: "2.circle.fill")
+    static let three = Image(systemName: "3.circle.fill")
     
     static let closed = Image(systemName: "lock.fill")
     static let opened = Image(systemName: "lock.open.fill")
     
+    static let swipe = Image(systemName: "arrow.left")
+    static let swipeBidirectional = Image(systemName: "arrow.left")
+    static let dragDown = Image(systemName: "arrow.down")
+    static let help = Image(systemName: "questionmark.circle")
+    
     // MARK: - Info Assetsok
     static let dpv = Image("DurationPicker")
     static let moreOptionsView = Image("MoreOptions")
+    
+    static let pin = Image(systemName: "pin")
 }
 
 public extension Color {
-    static let deleteActionViewBackground = Color("deleteActionViewBackground")
-    static let deleteActionViewBackground1 = Color("deleteActionViewBackground1")
     ///secondary light mode, white dark mode
-    static let secondaryWhite = Color("secondaryWhite")
     static let pauseStickerColor = Color("pauseStickerColor")
     static let pauseStickerFontColor = Color("pauseStickerFontColor")
-    static let topDetailViewBackground = Color("topDetailViewBackground")
-    static let topDetailViewBackground1 = Color("topDetailViewBackground1")
     static let infoColor = Color("infoColor")
-    static let ultraLightGray1 = Color("ultraLightGray1")
-    static let secondaryDark = Color("secondaryDark")
-    static let ultraLightGrayOne = Color("ultraLightGrayOne")
-    static let disabledDigitBackground = Color("disabledDigitBackground")
-    static let disabledDigit = Color("disabledDigit")
-    static let historyDigitBackground = Color("historyDigitBackground")
-    
-    static let newBackground = Color("background4")
-    static let digitBackground = Color("digitBackground") //DurationPicker digits
-    static let digitBackground1 = Color("digitBackground 1")
-    static let veryLightRed = Color("veryLightRed")
-}
-
-public extension UIColor {
-    static let intenseYellow = UIColor(red: 252, green: 204, blue: 0, alpha: 1)
+    static let item = Color("itemBackground")
 }
 
 extension UserDefaults {

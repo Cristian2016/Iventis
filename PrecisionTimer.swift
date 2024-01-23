@@ -46,7 +46,6 @@ class PrecisionTimer {
     
     deinit {
         perform(.kill)
-        print("precisionTimer deinit")
     }
 }
 

@@ -13,11 +13,24 @@ import MyPackage
 @Observable
 class Secretary {
     //MARK: - Publishers
+    var showFavoritesOnly:Bool {
+        get {
+           UserDefaults.shared.bool(forKey: "pula")
+        }
+        
+        set {
+            UserDefaults.shared.set(newValue, forKey: "pula") //⚠️ .standard not ok!!!
+            refresh.toggle()
+        }
+    }
+    
+    var refresh = false //⚠️ insane!!!!
+    
     private(set) var controlActionBubble:Int64?
     
     private(set) var showPaletteView = false
     
-    private(set) var showHelpViewHierarchy = false
+    private(set) var showBigHelpOverlay = false
     
     func controlBubble(_ kind:Kind) {
         DispatchQueue.main.async {
@@ -33,16 +46,16 @@ class Secretary {
             switch state {
                 case .show:
                     showPaletteView = true
-                    HintOverlay.Model.shared.topmostView(.palette)
+                    SmallHelpOverlay.Model.shared.topmostView(.palette)
                 case .hide:
                     showPaletteView = false
-                    HintOverlay.Model.shared.topmostView(.bubbleList)
+                    SmallHelpOverlay.Model.shared.topmostView(.bubbleList)
             }
         }
     }
     
     ///show/hide Help View Hierarchy
-    func helpVH(_ state:BoolState) {
+    func bigHelpOverlay(_ state:BoolState) {
         var animation:Animation?
         switch state {
             case .show(animate: let animate):
@@ -53,9 +66,9 @@ class Secretary {
         withAnimation(animation) {
             switch state {
                 case .show:
-                    showHelpViewHierarchy = true
+                    showBigHelpOverlay = true
                 case .hide:
-                    showHelpViewHierarchy = false
+                    showBigHelpOverlay = false
             }
         }
     }
@@ -79,7 +92,7 @@ class Secretary {
     private(set) var widgetsExist = false
     
     //ysed by the round w widget symbol
-    private(set) var mostRecentlyUsedBubble:Int64? { didSet { 
+    private(set) var mostRecentlyUsedBubble:Int64? { didSet {
         saveMostRecentlyUsedBubble()
     }}
     
@@ -92,10 +105,10 @@ class Secretary {
     var calendarAccessGranted = CalendarManager.shared.calendarAccessStatus == .granted //4
     
     var showCalendarAccessDeniedWarning = false
-        
+    
     var sessionToDelete: SessionToDelete? { didSet {
         let sessionDeleteButtonShows = sessionToDelete?.sessionRank != nil
-        HintOverlay.Model.shared.topmostView(sessionDeleteButtonShows ? .sessionDelete :.detail)
+        SmallHelpOverlay.Model.shared.topmostView(sessionDeleteButtonShows ? .sessionDelete :.detail)
     }}
     
     enum PaletteState {
@@ -103,11 +116,21 @@ class Secretary {
         case hide
     }
     
-    var showAlert_AlwaysOnDisplay = false
+    var showCaffeinatedHint = false
     
-    var displayAutoLockConfirmation = false
+    var confirmCaffeinated = false
     
-    private(set) var addNoteButton_bRank:Int? {didSet { handleAddNoteButton_bRank() }}
+    private(set) var confirmAddLapNote = false
+    func showConfirmAddLapNote() {
+        confirmAddLapNote = true
+        delayExecution(.now() + 1.0) {
+            self.confirmAddLapNote = false
+        }
+    }
+    
+    private(set) var addNoteButton_bRank:Int? { didSet {
+        handleAddNoteButton_bRank()
+    }}
     
     func setAddNoteButton_bRank(to rank:Int?) {
         DispatchQueue.main.async {
@@ -139,6 +162,13 @@ class Secretary {
     
     var confirm_CalEventCreated: Int64?
     
+    func showConfirmEventCreated(_ rank:Int64?) {
+        confirm_CalEventCreated = rank
+        delayExecution(.now() + 3) {
+            self.confirm_CalEventCreated = nil
+        }
+    }
+    
     var confirm_CalEventRemoved: Int64?
     
     //DetailView
@@ -155,106 +185,11 @@ class Secretary {
     }}
     var showDetailViewInfo = false
     
-    //
-    var showFavoritesOnly = false
-    
     var showScrollToTopButton = false
-    
     var shouldScrollToTop = false
-    
     func scrollToTop() {
         if !shouldScrollToTop { shouldScrollToTop = true }
     } //1
-    
-    var isBubblesReportReady = false
-    
-    func updateBubblesReport(_ updateKind: UpdateKind) {
-        switch updateKind {
-            case .appLaunch:
-                let bContext = PersistenceController.shared.bContext
-                
-                bContext.perform { //no need to use [weak self]
-                    let request = Bubble.fetchRequest()
-                    guard let bubbles = try? bContext.fetch(request) else { fatalError() }
-                    
-                    let bubblesCount = bubbles.count
-                    
-                    let ordinaryBubbles = bubbles
-                        .filter { !$0.isPinned } //filter out pinned bubbles
-                    
-                    let ordinaryBubbleColors = ordinaryBubbles
-                        .compactMap {
-                            idColor(id: $0.rank, color: Color.bubbleColor(forName: $0.color))
-                        } //get colors of ordinary bubbles
-                    
-                    let ordinaryBubbleRanks = ordinaryBubbles
-                        .map { Int($0.rank) }
-                    
-                    self.bubblesReport.ordinary = ordinaryBubbleColors.count
-                    self.bubblesReport.pinned = bubblesCount - self.bubblesReport.ordinary
-                    self.bubblesReport.colors = ordinaryBubbleColors
-                    self.bubblesReport.ordinaryRanks = ordinaryBubbleRanks
-                    
-                    self.isBubblesReportReady = true
-                }
-            case .create(let bubble):
-                bubblesReport.ordinary += 1
-                bubblesReport.colors.append(idColor(id: bubble.rank, color: Color.bubbleColor(forName: bubble.color)))
-                bubblesReport.ordinaryRanks.append(Int(bubble.rank))
-                
-                DispatchQueue.main.async { self.isBubblesReportReady = true }
-                
-            case .delete(let bubble):
-                if bubble.isPinned {
-                    bubblesReport.pinned -= 1
-                } else {
-                    bubblesReport.ordinary -= 1
-                    bubblesReport.colors.removeAll { $0.id == bubble.rank }
-                    bubblesReport.ordinaryRanks.removeAll { $0 == Int(bubble.rank) }
-                }
-                
-                DispatchQueue.main.async { self.isBubblesReportReady = true }
-                
-            case .pin(let bubble):
-                if bubble.isPinned {
-                    bubblesReport.pinned += 1
-                    
-                    bubblesReport.ordinary -= 1
-                    bubblesReport.ordinaryRanks.removeAll { $0 == Int(bubble.rank) }
-                    bubblesReport.colors.removeAll { $0.id == bubble.rank }
-                } else {
-                    bubblesReport.pinned -= 1
-                    bubblesReport.ordinary += 1
-                    bubblesReport.colors.append(idColor(id: bubble.rank, color: Color.bubbleColor(forName: bubble.color)))
-                    bubblesReport.ordinaryRanks.append(Int(bubble.rank))
-                }
-                
-                DispatchQueue.main.async { self.isBubblesReportReady = true }
-                
-            case .colorChange(let bubble):
-                if bubble.isPinned {
-                    
-                } else {
-                    guard
-                        let index = bubblesReport
-                            .colors.firstIndex (where: { $0.id == bubble.rank })
-                    else { fatalError() }
-                    
-                    bubblesReport.colors[index] = idColor(id: bubble.rank, color: Color.bubbleColor(forName: bubble.color))
-                    
-                    DispatchQueue.main.async { self.isBubblesReportReady = true }
-                }
-        }
-    }
-    
-    func widgetsCount(completion: @escaping (Int) -> Void) {
-        WidgetCenter.shared.getCurrentConfigurations { result in
-            if let infos = try? result.get() { completion(infos.count) }
-            else { completion(0) }
-        }
-    }
-    
-    private(set) var bubblesReport = BubblesReport()
 }
 
 extension Secretary {
@@ -310,15 +245,6 @@ extension Secretary {
     struct idColor:Identifiable {
         let id:Int64 //bubble rank
         let color:Color
-    }
-    
-    struct BubblesReport {
-        var colors = [idColor]() //ordinary colors
-        var ordinary = 0 //ordinary bubbles
-        var pinned = 0 //pinned bubbles
-        var ordinaryRanks = [Int]()
-        
-        var all:Int { pinned + ordinary }
     }
     
     enum UpdateKind {

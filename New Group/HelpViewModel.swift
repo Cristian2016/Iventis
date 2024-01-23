@@ -8,22 +8,45 @@
 import SwiftUI
 import MyPackage
 
+
+struct SwipeGestureModifier:ViewModifier {
+    var action: () -> ()
+    
+    func body(content: Content) -> some View {
+        content
+            .gesture(DragGesture()
+                .onEnded {
+                    if abs($0.translation.width) > 40 {
+                        UserFeedback.singleHaptic(.heavy)
+                        action()
+                    }
+                })
+    }
+}
+
+extension View {
+    func swipeToClear(_ action: @escaping () -> ()) -> some View {
+        self.modifier(SwipeGestureModifier(action: action))
+    }
+}
+
 struct CircleLabel:LabelStyle {
     func makeBody(configuration: Configuration) -> some View {
         configuration.icon
             .padding(12)
-            .background(Circle().fill(.background))
+            .background(Circle().fill(Color.background))
     }
 }
 
-struct HintOverlay:View {
+struct SmallHelpOverlay:View {
+    @Environment(Secretary.self) private var secretary
     @Environment(\.verticalSizeClass) private var verticalSizeClass
+    
     @State private var contentOffset = CGFloat(0)
     @State private var accumulatedOffset = CGFloat(0)
     @State private var containerOffset = initialContainerOffset
-    @Environment(Secretary.self) private var secretary
     
-    private var content = HintOverlay.HintCell.Content.all[HintOverlay.Model.shared.topmostView]
+    private var content = SmallHelpOverlay.HintCell.Content.all[SmallHelpOverlay.Model.shared.topmostView]
     
     static private let initialContainerOffset = CGFloat(128)
     
@@ -37,7 +60,7 @@ struct HintOverlay:View {
     }
     
     var body: some View {
-        if HintOverlay.Model.shared.helpOverlayShows && verticalSizeClass == .regular {
+        if SmallHelpOverlay.Model.shared.showSmallHelpOverlay && verticalSizeClass == .regular {
             Color.clear
                 .overlay(alignment: .bottom) {
                     RoundedRectangle(cornerRadius: 8)
@@ -78,7 +101,7 @@ struct HintOverlay:View {
             Label("Help", systemImage: "questionmark.circle")
                 .font(.system(size: 30))
                 .labelStyle(.iconOnly)
-                .onTapGesture { secretary.helpVH(.show()) }
+                .onTapGesture { secretary.bigHelpOverlay(.show()) }
             Label("Move", systemImage: symbol)
                 .labelStyle(.iconOnly)
                 .onTapGesture { handleTap() }
@@ -87,7 +110,7 @@ struct HintOverlay:View {
             
             Label("Dismiss", systemImage: "xmark")
                 .labelStyle(.iconOnly)
-                .onTapGesture { HintOverlay.Model.shared.helpOverlay(.hide) }
+                .onTapGesture { SmallHelpOverlay.Model.shared.helpOverlay(.hide) }
         }
         .frame(height: 44) //minimum touch area
         .font(.system(size: 26))
@@ -134,7 +157,7 @@ struct HintOverlay:View {
 }
 
 //MARK: -
-extension HintOverlay {
+extension SmallHelpOverlay {
     struct ButtonStack:View {
         @Environment(Secretary.self) private var secretary
         @Environment(\.openURL) private var openURL
@@ -148,7 +171,7 @@ extension HintOverlay {
                 }
                 Divider()
                 Button {
-                    secretary.helpVH(.show(animate: true))
+                    SmallHelpOverlay.Model.shared.helpOverlay(.show)
                 } label: {
                     Label("Help", systemImage: "questionmark.circle")
                 }
@@ -170,7 +193,7 @@ extension HintOverlay {
         let content:Content
         
         var body: some View {
-            VStack(spacing: 6) {
+            VStack(alignment: .leading, spacing: 6) {
                 if let title2 = content.title2 { Text(title2).foregroundStyle(.secondary) }
                 
                 Text(content.description)
@@ -181,9 +204,9 @@ extension HintOverlay {
                         HelpCellContent.all.filter { $0.title.description == receivedStringURL }.first
                         
                         if let content = content {
-                            secretary.helpVH(.show())
+                            secretary.bigHelpOverlay(.show())
                             delayExecution(.now() + 0.001) {
-                                HintOverlay.Model.shared.path = [content]
+                                SmallHelpOverlay.Model.shared.path = [content]
                             }
                         }
                         
@@ -200,7 +223,7 @@ extension HintOverlay {
                     Image(scheme == .dark ? image + ".dark" : image)
                         .resizable()
                         .scaledToFit()
-                        .frame(height: 120)
+                        .frame(maxHeight: 150)
                 }
             }
             .font(.system(size: 24))
@@ -228,27 +251,42 @@ extension HintOverlay {
             
             //a dictionary with all contents
             static let all:[Model.TopMostView : Content] = [
-                .palette : .init("Colors", "Create Tracker", description: "Touch and hold color for timer. Tap for stopwatch. \(Image.leftSwipe) Swipe left to dismiss", example: "e.g., Create yellow timer: tap and hold color, then choose desired duration"),
-                .durationPicker : .init("Duration", "48 Hr Max", description: "Timer duration is valid if \(Text("\(Image.roundCheckmark)").foregroundStyle(.green)) shows.\n・drag down to save duration\n・\(Image.leftSwipe) swipe to clear display", example: "e.g., 02h = 2hr, 01h 05m = 1hr 5min, etc."),
-                .control : .init("Control", "Delete, Reset, Change", description: "Control actions \(Text("do not remove").foregroundStyle(.red)) calendar events! Reset empties tracker activity.\nTap \(Image.stopwatch) to change to stopwatch.\nTap \(Image.timer), 5, 10, etc. to change to timer.\nSwipe to '\(Image.clock) Recents'"),
-                .moreOptions : .init("More Options", "Start Delay", description: "...counts down to zero, then tracker starts automatically. Only visible if tracker is not running. Drag start delay circle to remove", example: "Useful if hands are busy. E.g., at the gym, warming up before workout", image: "start.delay"),
-                .bubbleNotes : .init("Tracker Notes", description: "Tether tracker to calendar. Add note and create a calendar in Calendar App with identical names and events will be added automatically to the calendar with identical name", example: "Add calendar with name '☀️ Outdoor' and choose tracker note with same name"),
-                .lapNotes : .init("Lap Notes", description: "Maximum length 12 characters"),
-                .bubbleList : .init("Trackers", "...are stopwatches and timers", description: "Tracker areas: hr, min, sec. Areas react to touch-and-hold and tap gestures", example: "e.g., \(Image.one) Tap sec to start/pause. Touch and hold to \(Image.closed) close session. \(Image.two) Tap min to show activity. Touch and hold to add name"),
+                .palette : .init("Colors", "Create Bubble", description: "Touch and hold color for timer. Tap for stopwatch.\n\(Image.leftSwipe) Swipe left to dismiss"),
+                .durationPicker : .init("Duration", "48 Hr Max", description: "Timer duration is valid if \(Text("\(Image.roundCheckmark)").foregroundStyle(.green)) shows.\n・\(Image.dragDown) drag down to save duration\n・\(Image.swipeBidirectional) swipe to clear display", example: "e.g., 02h = 2hr, 01h 05m = 1hr 5min, etc."),
+                .control : .init("Control", "Delete, Reset, Change", description: "Control actions \(Text("do not remove").foregroundStyle(.red)) calendar events! Reset empties bubble activity.\nTap \(Image.stopwatch) to change to stopwatch.\nTap \(Image.timer), 5, 10, etc. to change to timer.\nSwipe to '\(Image.clock) Recents'"),
+                .moreOptions : .init("More Options", "Start Delay", description: "...counts down to zero, then bubble starts automatically. Only visible if bubble is not running. \(Image.swipeBidirectional) Swipe to clear display. Drag start delay circle to remove", example: "Useful if hands are busy. E.g., at the gym, warming up before workout", image: "start.delay"),
+                .bubbleNotes : .init("Names", description: "・\(Image.dragDown) drag down to save\n・\(Image.swipeBidirectional) swipe to clear display\n[Tether bubble](eventify://tetherBubbleCal) to calendar: Bubble automatically adds events to calendar with same name.", example: "e.g., In Calendar App add new calendar. Name both bubble and new calendar 'Outdoor'. From now on bubble creates events in 'Outdoor' calendar"),
+                .lapNotes : .init("Notes", description: "・\(Image.dragDown) drag down to save\n・\(Image.swipeBidirectional) swipe to clear display\n・touch and hold lap to add note"),
+                .bubbleList : .init("Bubbles", "...are colorful stopwatches and timers", description: "Hr, min and sec areas react to touch-and-hold and tap gestures", example: "e.g., \(Image.one) Tap sec to start/pause. Touch and hold to \(Image.closed) close session. \(Image.two) Tap min to show activity. Touch and hold to add name", image: "bubble.areas"),
                 .sessionDelete : .init("", "Delete Session", description: "\(Text("If session has a corresponding calendar event, the event will also be removed").foregroundStyle(.red))"),
-                .detail : .init("Activity", "...contains Sessions",  description: "Sessions are like calendar events. Touch and hold seconds to \(Image.closed) close session. [Save closed sessions](eventify://saveActivity) as events. Touch and hold session to delete")
+                .detail : .init("Activity", "...contains Sessions",  description: "Sessions are like calendar events. [Save sessions](eventify://saveActivity) as events. Touch and hold seconds to \(Image.closed) close session. Touch and hold session to delete. Touch and hold lap to add note"),
+                .assistUser : .init("\(Image.three) Steps", description:
+"""
+\(Image.one) Enable Calendar.
+Swipe right on stopwatch > Tap 'Cal ON' > Choose 'Allow Full Access'
+\(Text("'\(Names.testBubbleName)' is now allowed to create events").foregroundStyle(.secondary))
+
+\(Image.two) Open Session.
+Tap seconds. A new session \(Image.opened) opens, which creates an event in Calendar App. Tap seconds a couple of times...
+
+\(Image.three) Close Session.
+Touch and hold seconds. Session and event are now \(Image.closed) closed. Check out updated event in Calendar App
+
+...and one last thing.
+\(Image(systemName: "iphone.radiowaves.left.and.right")) Shake device for help. At any time!
+""")
             ]
         }
     }
 }
 
-extension HintOverlay {
+extension SmallHelpOverlay {
     @Observable
     class Model {
         //MARK: - Publishers
         private(set) var topmostView = TopMostView.bubbleList
         
-        private(set) var helpOverlayShows = false
+        private(set) var showSmallHelpOverlay = false
         
         private(set) var helpButtonShows = false {
             didSet {
@@ -266,6 +304,8 @@ extension HintOverlay {
         var path = [HelpCellContent]()
         
         func topmostView(_ value:TopMostView) {
+            if topmostView == .assistUser && value != .bubbleList { return }
+            
             DispatchQueue.main.async {
                 self.topmostView = value
             }
@@ -274,16 +314,14 @@ extension HintOverlay {
         func helpOverlay(_ state:BoolState) {
             DispatchQueue.main.async {
                 withAnimation {
-                    self.helpOverlayShows = state == .show ? true : false
+                    self.showSmallHelpOverlay = state == .show ? true : false
                 }
             }
         }
         
         func helpButton(_ state:BoolState) {
             DispatchQueue.main.async {
-                withAnimation {
-                    self.helpButtonShows = state == .show ? true : false
-                }
+                self.helpButtonShows = state == .show ? true : false
             }
         }
         
@@ -309,45 +347,52 @@ extension HintOverlay {
             case detail
             case bubbleNotes
             case lapNotes
+            case assistUser
         }
     }
     
-    struct HelpButton: View {
+    struct ShakeHelpButton: View {
+        @Environment(Secretary.self) private var secretary
+        
         var body: some View {
-            if HintOverlay.Model.shared.helpButtonShows {
+            if SmallHelpOverlay.Model.shared.helpButtonShows {
                 Button {
                     UserFeedback.singleHaptic(.light)
-                    HintOverlay.Model.shared.helpButton(.hide)
-                    HintOverlay.Model.shared.helpOverlay(.show)
+                    SmallHelpOverlay.Model.shared.helpButton(.hide)
+                    SmallHelpOverlay.Model.shared.helpOverlay(.show)
                 } label: {
-                    RoundedRectangle(cornerRadius: 15)
-                        .stroke(Color.ultraLightGray1, lineWidth: 2)
-                        .fill(.white)
-                        .frame(width: 90, height: 90)
-                        .standardShadow()
-                        .overlay {
-                            Circle()
-                                .fill(.white.shadow(.inner(color: .black.opacity(0.2), radius: 2.5, x: 1, y: 1)))
-                                .padding(4)
-                                .overlay {
-                                    Image(systemName: "questionmark.circle.fill")
-                                        .font(.system(size: 64))
-                                        .foregroundStyle(.blue)
-                                }
-                        }
+                    Image(systemName: "questionmark.circle")
                 }
+                .buttonStyle(HelpButtonStyle())
                 .padding(4)
-                .transition(.asymmetric(insertion: .slide, removal: .move(edge: .leading)))
+                .background {
+                    RoundedRectangle(cornerRadius: 10)
+                        .fill(Color("helpButtonBackground"))
+                        .strokeBorder(.tertiary, lineWidth: 1)
+                }
+                .padding(.leading, 10)
+                .compositingGroup()
+                .standardShadow()
             }
         }
     }
 }
 
+struct HelpButtonStyle : ButtonStyle {
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            .font(.system(size: 60))
+            .foregroundStyle(.blue)
+            .frame(width: 70, height: 70)
+            .background(Color("helpButtonBackground"))
+    }
+}
+
 extension UIViewController {
     open override func motionEnded(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
-        let model = HintOverlay.Model.shared
+        let model = SmallHelpOverlay.Model.shared
         
-        if motion == .motionShake && !model.helpOverlayShows {
+        if motion == .motionShake && !model.showSmallHelpOverlay {
             if !model.helpButtonShows {
                 model.helpButton(.show)
             }
@@ -355,6 +400,6 @@ extension UIViewController {
     }
 }
 
-#Preview(body: {
-    HelpCell(content: .init("Basics", "calendar.badge.plus", .saveActivity, "Save Activity", "First make sure tracker is [calendar-enabled](eventify://enableCalendar). As soon as you end a session, it will be saved as an event in the Calendar App. Touch and hold seconds to end a session", image: "", image2: "bubble.save.activity"))
-})
+#Preview {
+    SmallHelpOverlay.ShakeHelpButton()
+}

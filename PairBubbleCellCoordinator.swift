@@ -33,7 +33,7 @@ import UIKit
                             .sink { [weak self] _ in self?.task() }
                             .store(in: &cancellable)
                         
-                    case .pause, .deleteCurrentSession, .endSession:
+                    case .pause, .deleteCurrentSession, .closeSession:
                         cancellable = []
                         components = Components("0", "0", "0")
                         
@@ -160,7 +160,7 @@ extension PairBubbleCellCoordinator {
         case start
         case pause
         case reset
-        case endSession
+        case closeSession
         case deleteCurrentSession
         case deleteBubble
     }

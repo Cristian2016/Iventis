@@ -169,14 +169,5 @@ extension DurationPickerOverlay {
                     notAllowedCharacters = Characters(charactersIn: "✕")
             }
         }
-        
-        // MARK: -
-        init() {
-            print(#function, "DPManager")
-        }
-        
-        deinit {
-            print("DPManager deinit")
-        }
     }
 }

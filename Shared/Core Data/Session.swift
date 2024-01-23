@@ -12,10 +12,6 @@ import MyPackage
 
 
 public class Session: NSManagedObject {
-    deinit {
-//        print("session deinit")
-    }
-    
     //⚠️ will run on a backgroundthread. wait until pair computes its duration and then compute session.totalduration!
     func computeDuration() {
         let pairs = self.pairs_
@@ -24,10 +20,10 @@ public class Session: NSManagedObject {
         
         totalDuration += lastPairDuration
         
-        lastTrackerDuration += lastPairDuration
+        lastBubbleDuration += lastPairDuration
     }
     
-    private func resetLastTrackerDuration()  { lastTrackerDuration = 0 }
+    private func resetLastBubbleDuration()  { lastBubbleDuration = 0 }
     
     var isLastPairClosed:Bool { bubble?.lastPair?.pause != nil }
     
@@ -39,18 +35,25 @@ public class Session: NSManagedObject {
         pairs?.array as? [Pair] ?? []
     }
     
-    func handleTrackerID(_ action:TrackerIDAction) {
+    var lastPair:Pair? {
+        pairs_.last
+    }
+    
+    func handleBubbleID(_ action:BubbleIDAction) {
         switch action {
             case .assign(let pair):
-                pair.trackerID = trackerIDCounter
+                pair.bubbleID = bubbleIDCounter
             case .increment:
-                resetLastTrackerDuration()
-                trackerIDCounter += 1
+                resetLastBubbleDuration()
+                bubbleIDCounter += 1
         }
     }
     
-    enum TrackerIDAction {
+    enum BubbleIDAction {
         case increment
         case assign(Pair)
     }
+    
+    var hasFinalEvent:Bool { eventID != nil }
+    var hasAnyEvent:Bool { eventID != nil || temporaryEventID != nil }
 }

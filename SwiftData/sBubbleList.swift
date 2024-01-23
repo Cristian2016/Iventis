@@ -27,26 +27,6 @@ struct sBubbleList: View {
                     .frame(height: 20)
             }
         }
-        .onAppear {
-//            let newBubble = sBubble(.stopwatch, color: "slateBlue")
-//            modelContext.insert(newBubble)
-            print(bubbles.map(\.color))
-            
-//            var sessions = [sSession]()
-//            bubbles.forEach {
-//                let session = sSession($0)
-//                modelContext.insert(session)
-//            }
-//            bubbles.forEach { sBubble in
-//                modelContext.delete(sBubble)
-//            }
-            
-//            delayExecution(.now() + 4) {
-//                bubbles.forEach { sBubble in
-//                    modelContext.delete(sBubble)
-//                }
-//            }
-        }
         .task {
             delayExecution(.now() + 4) {
 //                createBubbles()

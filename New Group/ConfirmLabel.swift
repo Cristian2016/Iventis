@@ -11,7 +11,7 @@ struct ConfirmLabel: View {
     var body: some View {
         Label("Stopwatch", systemImage: "stopwatch")
             .padding(10)
-            .foregroundStyle(.primary)
+            .foregroundStyle(Color.label2)
             .background(.regularMaterial, in: RoundedRectangle(cornerRadius: 8))
     }
 }

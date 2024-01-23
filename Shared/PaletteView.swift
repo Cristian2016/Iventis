@@ -12,10 +12,10 @@ import MyPackage
 struct PaletteView: View {
     @Environment(ViewModel.self) var viewModel
     @Environment(Secretary.self) private var secretary
-        
+    
     @State private var tappedCircle:String?
     @State private var longPressedCircle:String?
-        
+    
     private let colums = Array(repeating: GridItem(), count: 3)
     
     var body: some View {
@@ -33,9 +33,11 @@ struct PaletteView: View {
                         .aspectRatio(1.0, contentMode: .fit)
                         .transition(.scale)
                 }
+                
+                UserAssistOverlay()
             }
             .transition(.move(edge: .leading))
-            .onChange(of: HintOverlay.Model.shared.topmostView) { oldValue, newValue in
+            .onChange(of: SmallHelpOverlay.Model.shared.topmostView) { oldValue, newValue in
                 if newValue == .bubbleList {
                     secretary.palette(.hide)
                 }
@@ -47,17 +49,17 @@ struct PaletteView: View {
     private var colors:some View {
         ScrollView {
             Grid(horizontalSpacing: 1, verticalSpacing: 1) {
-                ForEach(Color.paletteTriColors, id: \.self) { subarray in
+                ForEach(Color.paletteBicolors, id: \.self) { subarray in
                     GridRow {
-                        ForEach(subarray) { tricolor in
+                        ForEach(subarray) { bicolor in
                             VStack {
-                                tricolor.sec
-                                Text(String.readableName(for: tricolor.description))
+                                bicolor.color
+                                Text(String.readableName(for: bicolor.description))
                             }
                             .padding(2)
                             .background()
-                            .onTapGesture { createStopwatch(tricolor) }
-                            .onLongPressGesture { showDurationPicker(tricolor) }
+                            .onTapGesture { createStopwatch(bicolor) }
+                            .onLongPressGesture { showDurationPicker(bicolor) }
                         }
                         .font(.system(size: 14, design: .rounded))
                     }
@@ -79,32 +81,35 @@ struct PaletteView: View {
     }
     
     // MARK: - Methods
-    fileprivate func createStopwatch(_ tricolor:Color.Tricolor) {
+    fileprivate func createStopwatch(_ bicolor:Color.Bicolor) {
         UserFeedback.singleHaptic(.light)
         
-        viewModel.createBubble(.stopwatch, tricolor.description)
-        withAnimation(.easeInOut(duration: 0.1)) { tappedCircle = tricolor.description }
+        viewModel.createBubble(.stopwatch, bicolor.description)
+        withAnimation(.easeInOut(duration: 0.1)) { tappedCircle = bicolor.description }
         secretary.palette(.hide)
         tappedCircle = nil
     }
     
-    fileprivate func showDurationPicker(_ tricolor:Color.Tricolor) {
+    fileprivate func showDurationPicker(_ bicolor:Color.Bicolor) {
         UserFeedback.singleHaptic(.medium)
         
-        withAnimation(.easeInOut(duration: 0.2)) { longPressedCircle = tricolor.description }
+        withAnimation(.easeInOut(duration: 0.2)) { longPressedCircle = bicolor.description }
         
         delayExecution(.now() + 0.25) {
-            HintOverlay.Model.shared.topmostView(.durationPicker)
-            viewModel.durationPicker.reason = .createTimer(tricolor)
+            SmallHelpOverlay.Model.shared.topmostView(.durationPicker)
+            viewModel.durationPicker.reason = .createTimer(bicolor)
             longPressedCircle = nil
-            viewModel.durationPicker.reason = .createTimer(tricolor)
         }
     }
     
     // MARK: -
     private var swipeGesture:some Gesture {
         DragGesture(minimumDistance: 1)
-            .onEnded { if $0.translation.width < 0 { secretary.palette(.hide) }}
+            .onEnded {
+                if $0.translation.width < 40 {
+                    secretary.palette(.hide)
+                }
+            }
     }
 }
 

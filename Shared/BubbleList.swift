@@ -24,90 +24,87 @@ import CoreData
 import Combine
 import MyPackage
 
-extension BubbleList {
-    typealias Output = NotificationCenter.Publisher.Output
-}
-
 struct BubbleList: View {
     @Environment(\.managedObjectContext) private var viewContext
-    @Environment(ViewModel.self) private var viewModel
+    @Environment(Secretary.self) private var secretary
     
-    private var secretary:Secretary
-        
     @SectionedFetchRequest var sections:SectionedFetchResults<Bool, Bubble>
     
     @State private var showPairNotes = false
     
     private static let publisher = NotificationCenter.Publisher(center: .default, name: .scrollToTimer)
-                    
+    
     // MARK: -
     var body: some View {
-        ZStack {
+        let isListEmpty = sections.isEmpty
+        
+        ZStack(alignment: .leading) {
             if isListEmpty {
                 EmptyListView()
-                    .toolbar {
-                        PlusButton()
-                    }
             }
             else {
-                ScrollViewReader { proxy in
-                    List (sections) { section in
-                        let value = section.id.description == "true" //5
-                        Section {
-                            ForEach (section) { bubble in
-                                ZStack {
-                                    NavigationLink(value: bubble) { }.opacity(0)
-                                    BubbleCell(bubble)
-                                }
-                                .id(String(bubble.rank))
-                            }
+                List (sections) { bubbles in
+                    let pinnedSection = bubbles.id.description == "true" //5
+                    
+                    Section {
+                        if pinnedSection {
+                            PinnedSection(bubbles: bubbles)
+                        } else {
+                            UnpinnedSection(bubbles: bubbles)
                         }
-                        .listRowSeparator(.hidden)
-                        .listSectionSeparator(value ? .visible : .hidden, edges: [.bottom])
-                        
-                        showAllBubblesButton
-                        
-                        if !section.id { bottomOverscoll }
                     }
-                    .background { RefresherView() }
-                    .refreshable { refresh() }
-                    .navigationDestination(for: Bubble.self) { DetailView($0) }
-                    .scrollIndicators(.hidden)
-                    .listStyle(.plain)
-                    .toolbarBackground(.ultraThinMaterial)
+                    .listRowSeparator(.hidden)
+                    .listSectionSeparator(pinnedSection ? .visible : .hidden, edges: [.bottom])
+                    
+                    if !bubbles.id { bottomOverscoll }
                 }
-                .toolbar {
-                    ToolbarItemGroup {
-                        AddLapNoteButton()
-                        AlwaysONButton()
-                        PlusButton()
+                .background {
+                    let pinnedSectionExists = sections.count != 1
+                    
+                    if pinnedSectionExists {
+                        RefresherView()
                     }
                 }
+                .refreshable { refresh() }
+                .navigationDestination(for: Bubble.self) { DetailView($0) }
+                .scrollIndicators(.hidden)
+                .listStyle(.plain)
+                .toolbarBackground(.ultraThinMaterial)
             }
-            LeftStrip(isListEmpty)
+            
+            LeftStrip()
+        }
+        .toolbar {
+            ToolbarItemGroup {
+                if !isListEmpty {
+                    ZStack(alignment: .trailing) {
+                        CaffeinatedButton()
+                        LapNoteButton()
+                    }
+                }
+                PlusButton()
+            }
         }
     }
     
-    private func handleScrollToFinishedTimerNotification(_ output: Output, _ proxy:ScrollViewProxy) {
-        let rank = output.userInfo!["scrollRank"] as! String
+    // MARK: -
+    init() {
+        let descriptors = [
+            NSSortDescriptor(key: "isPinned", ascending: false),
+            NSSortDescriptor(key: "rank", ascending: false)
+        ]
         
-        /* first remove all views that might obscure the finished timer. if finished timer is in the ordinary list and ordinary list is hidden [pinned only shows], show all bubbles. scroll to the finished timer */
-        
-        viewModel.durationPicker.reason = nil //hide durationpicker
-        secretary.palette(.hide) //remove palette
-        
-        if secretary.showFavoritesOnly && secretary.bubblesReport.ordinaryRanks.contains(Int(rank)!) {
-            secretary.showFavoritesOnly = false //show all bubbles
-        }
-        
-        proxy.scrollTo(rank, anchor: .center) //scroll to timer
-    }
+        _sections = SectionedFetchRequest<Bool, Bubble>(
+            sectionIdentifier: \.isPinned,
+            sortDescriptors: descriptors,
+            animation: .default
+        )
+    } //12
     
-    // MARK: - Lego
-    @ViewBuilder
-    private var showAllBubblesButton:some View {
-        if secretary.showFavoritesOnly {
-            ShowAllBubblesButton().listRowSeparator(.hidden)
+    // MARK: -
+    private func refresh() {
+        withAnimation {
+            secretary.showFavoritesOnly.toggle()
         }
     }
     
@@ -116,73 +113,4 @@ struct BubbleList: View {
             .frame(height: 200)
             .listRowSeparator(.hidden)
     }
-    
-    // MARK: -
-    init(_ secretary:Secretary) {
-        var predicate:NSPredicate?
-        if secretary.showFavoritesOnly { predicate = NSPredicate(format: "isPinned == true")}
-        if let rank = secretary.showDetail_bRank { predicate = NSPredicate(format: "rank == %D", rank) }
-            
-        _sections = SectionedFetchRequest<Bool, Bubble>(
-            entity: Bubble.entity(),
-            sectionIdentifier: \.isPinned,
-            sortDescriptors: BubbleList.descriptors,
-            predicate: predicate,
-            animation: .default
-        )
-        
-        self.secretary = secretary
-    } //12
-    
-    // MARK: -
-    private static var formatter:DateFormatter = {
-        let formatter = DateFormatter()
-        formatter.locale = Locale.current
-        //        formatter.locale = Locale(identifier: "us")
-        formatter.dateStyle = .short
-        formatter.timeStyle = .short
-        return formatter
-    }()
-    
-    @ViewBuilder
-    private func headerTitle(for sectionID:String) -> some View {
-        HStack {
-            //text
-            if sectionID == "false" {
-                HStack {
-                    Text("Bubbles")
-                        .foregroundStyle(Color.label)
-                        .fontWeight(.medium)
-                }
-                
-            }
-            else { Text("\(Image(systemName: "pin.fill")) Pinned")
-                    .foregroundStyle(.orange)
-                    .fontWeight(.medium)
-            }
-            
-            //rectangle to allow collapse along the entire width
-            Rectangle().foregroundStyle(.white.opacity(.Opacity.basicallyTransparent))
-        }
-        .font(.system(size: 26))
-    }
-    
-    private static let descriptors = [
-        NSSortDescriptor(key: "isPinned", ascending: false),
-        NSSortDescriptor(key: "rank", ascending: false)
-    ]
-    
-    // MARK: -
-    private func refresh() {
-        //allow pull-down on table if at least one pinned bubble available
-        guard secretary.bubblesReport.pinned > 0 else { return }
-        
-        secretary.showFavoritesOnly.toggle()
-        viewModel.refreshOrdinaryBubbles()
-    }
-}
-
-// MARK: - Little Helpers
-extension BubbleList {
-    fileprivate var isListEmpty:Bool { sections.isEmpty }
 }

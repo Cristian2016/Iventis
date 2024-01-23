@@ -11,7 +11,7 @@ struct BubbleNote: View {
     @EnvironmentObject var bubble:Bubble
     @Environment(ViewModel.self) var viewModel
             
-    private let stickyHeight = CGFloat(40)
+    private let stickyHeight = CGFloat(44)
     private let font = Font.system(size: 24)
     private let cornerRadius = CGFloat(2)
     private let textPadding = EdgeInsets(top: 4, leading: 6, bottom: 4, trailing: 8)
@@ -23,7 +23,7 @@ struct BubbleNote: View {
             calendarSymbol
             stickyNoteTextView
         }
-        .foregroundStyle(Color.label)
+        .foregroundStyle(.label2)
         .background(background)
         .cornerRadius(cornerRadius)
         .shadow(color: .black.opacity(0.1), radius: 2, y: 2)
@@ -34,8 +34,8 @@ struct BubbleNote: View {
     private var calendarSymbol: some View {
         if !bubble.note_.isEmpty {
             Rectangle()
-                .fill(bubble.hasCalendar ? Color.calendar : .clear)
-                .frame(width: bubble.hasCalendar ? 10 : 0, height: stickyHeight)
+                .fill(bubble.isCalendarEnabled ? Color.calendar : .clear)
+                .frame(width: bubble.isCalendarEnabled ? 10 : 0, height: stickyHeight)
         }
     }
     

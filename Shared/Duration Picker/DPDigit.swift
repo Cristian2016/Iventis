@@ -11,7 +11,7 @@ import MyPackage
 extension DurationPickerOverlay {
     struct Digit:View {
         private let digit:String
-        private let tricolor:Color.Tricolor
+        private let bicolor:Color.Bicolor
         
         @State private var isTapped = false
         
@@ -27,11 +27,11 @@ extension DurationPickerOverlay {
         
         let manager:Manager
         
-        init?(_ digit: String, _ tricolor: Color.Tricolor?, _ manager: Manager) {
-            guard let tricolor = tricolor else { return nil }
+        init?(_ digit: String, _ bicolor: Color.Bicolor?, _ manager: Manager) {
+            guard let bicolor = bicolor else { return nil }
             
             self.digit = digit
-            self.tricolor = tricolor
+            self.bicolor = bicolor
             self.manager = manager
         }
         
@@ -58,7 +58,7 @@ extension DurationPickerOverlay {
         }
         
         private var digitColor:Color {
-            isDisabled ? .disabledDigit : digit == "✕" ? .white : .label
+            isDisabled ? .disabledDigit : digit == "✕" ? .white : .label2
         }
         
         // MARK: - Intents
